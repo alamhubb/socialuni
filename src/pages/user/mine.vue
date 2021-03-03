@@ -1,9 +1,6 @@
 <template>
   <view class="bg-default h100r flex-col">
-    <view class="flex-1 row-all-center">
-      <button @click="showAuthThreeAuth=true">展示授权</button>
-    </view>
-<!--    <view v-if="user">
+    <view v-if="user">
       <q-navbar class="q-solid-bottom">
         <view class="ml-xl text-bold text-lg flex-auto">
           个人资料
@@ -14,9 +11,9 @@
       </q-navbar>
       <user-info :user="user"></user-info>
 
-      &lt;!&ndash; #ifdef H5 &ndash;&gt;
+      <!-- #ifdef H5 -->
       <view class="h50px w100r"></view>
-      &lt;!&ndash; #endif &ndash;&gt;
+      <!-- #endif -->
 
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">
         <view class="w65vw flex-col py-xl mt-xl h100r">
@@ -25,14 +22,14 @@
               清池 app
             </view>
           </q-row>
-          &lt;!&ndash;<q-row-item>
+          <!--<q-row-item>
             <navigator :url="messageSettingUrl" class="row-col-center flex-auto">
               <view class="row-col-center flex-auto">
                 消息设置
               </view>
               <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
             </navigator>
-          </q-row-item>&ndash;&gt;
+          </q-row-item>-->
           <q-row-item>
             <navigator :url="suggestUrl" class="row-col-center flex-auto">
               <view class="row-col-center flex-auto">
@@ -97,7 +94,7 @@
       </msg-input>
     </view>
     <view v-else class="h100r col-all-center bg-white">
-      &lt;!&ndash;      title="欢迎登陆清池app"&ndash;&gt;
+      <!--      title="欢迎登陆清池app"-->
       <u-navbar :is-back="false" title-bold>
         <view class="flex-row w100vw flex-auto">
           <view class="ml-xl text-bold text-lg w100r">
@@ -105,46 +102,74 @@
           </view>
         </view>
       </u-navbar>
-      &lt;!&ndash;  #ifndef MP &ndash;&gt;
+      <!--  #ifndef MP -->
       <login></login>
-      &lt;!&ndash;  #endif &ndash;&gt;
-      &lt;!&ndash; 小程序平台&ndash;&gt;
-      &lt;!&ndash;  #ifdef MP &ndash;&gt;
-      &lt;!&ndash; 小程序平台&ndash;&gt;
+      <!--  #endif -->
+      <!-- 小程序平台-->
+      <!--  #ifdef MP -->
+      <!-- 小程序平台-->
       <view class="text-black text-xl">未登录，点击登录按钮，进行登录操作</view>
-      &lt;!&ndash;  #ifdef MP-TOUTIAO &ndash;&gt;
-      &lt;!&ndash;            头条平台和其他平台处理方式不同&ndash;&gt;
+      <!--  #ifdef MP-TOUTIAO -->
+      <!--            头条平台和其他平台处理方式不同-->
       <button :disabled="disabledLoginBtn" @click="login" type="primary"
               class="v-btn mt-20px w70vw bg-green">
         登录
         <q-icon size="32" icon="account_box"></q-icon>
       </button>
-      &lt;!&ndash;  #endif &ndash;&gt;
-      &lt;!&ndash;  #ifndef MP-TOUTIAO &ndash;&gt;
+      <!--  #endif -->
+      <!--  #ifndef MP-TOUTIAO -->
       <button v-if="!user" :disabled="disabledLoginBtn"
               open-type="getUserInfo" @getuserinfo="login"
               class="cu-btn bg-cyan mt-20px w70vw">
         登录
         <q-icon size="32" icon="account_box"></q-icon>
       </button>
-      &lt;!&ndash;  #endif &ndash;&gt;
-      &lt;!&ndash;  #endif &ndash;&gt;
-    </view>-->
+      <!--  #endif -->
+      <!--  #endif -->
+    </view>
 
     <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
-      <view class="h50vh pa">
-        <view class="flex-row">
+      <view v-if="user" class="pb-xl px-sm pt">
+        <q-row class="text-bold">
           <view class="mr">
             集美小世界丨女孩生活分享交友
           </view>
           <view>申请</view>
-        </view>
-        <view class="flex-row">
+        </q-row>
+
+        <q-row class="text-lg text-bold solid-bottom">
           获取您的昵称、头像、地区及性别
+        </q-row>
+        <view class="flex-row py-sm solid-bottom">
+          <view class="w100r card-title pb-10px">
+            <image
+              class="card-title-avatar"
+              mode="aspectFill"
+              :src="user.avatar"
+            />
+            <view class="row-between flex-auto">
+              <view>
+                <view class="h25px row-col-center">
+                  <text class="text-lgg">{{ user.nickname }}</text>
+                </view>
+                <view class="text-gray text-sm h25px row-col-center">
+                  清池个人信息
+                </view>
+              </view>
+              <!--                不为自己且未关注-->
+              <view class="col-center">
+                <u-icon name="checkmark" color="success"></u-icon>
+              </view>
+            </view>
+          </view>
         </view>
-        <view class="flex-row">
-          获取您的昵称、头像、地区及性别
-        </view>
+
+        <q-row class="py-xl">
+          <view class="row-center w100r pt-xl">
+            <u-button class="mr-xl w30vw">取消</u-button>
+            <u-button class="w30vw" type="success">允许</u-button>
+          </view>
+        </q-row>
       </view>
     </u-popup>
   </view>
@@ -163,15 +188,27 @@ import UniUtil from '@/utils/UniUtil'
 import UserStore from '@/plugins/store/UserStore'
 import CommonUtil from '@/utils/CommonUtil'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import {appModule, systemModule} from '@/plugins/store'
+import { appModule, systemModule } from '@/plugins/store'
 import Constants from '@/const/Constant'
 import QNavbar from '@/components/q-navbar/q-navbar.vue'
 import PagePath from '@/const/PagePath'
+import QRow from '@/components/q-row/q-row.vue'
+import QBar from '@/components/q-bar/q-bar.vue'
+import QRowItem from '@/components/q-row-item/q-row-item.vue'
 
 const userStore = namespace('user')
 
 @Component({
-  components: { QNavbar, UserInfo, UserEdit, TalkItem, TalkItemContent }
+  components: {
+    QRowItem,
+    QBar,
+    QRow,
+    QNavbar,
+    UserInfo,
+    UserEdit,
+    TalkItem,
+    TalkItemContent
+  }
 })
 export default class MineVue extends Vue {
   @userStore.State('user') user: UserVO

@@ -147,7 +147,7 @@ export default class TalkVue extends Vue {
 
   // life
   onReady () {
-    appModule.initGlobalDataReadyAPI()
+
     // 不这么写百度读不出来
     UniUtil.delayTime(100).then(() => {
       this.getTabBarTop()

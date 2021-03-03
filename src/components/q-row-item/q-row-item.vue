@@ -1,4 +1,5 @@
 <template>
+<!--  可点击的行-->
   <view class="q-row-item q-solid-bottom bg-active" @click="click">
     <slot></slot>
   </view>

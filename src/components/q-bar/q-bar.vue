@@ -1,4 +1,5 @@
 <template>
+  <!--  row-between-center -->
   <view class="q-bar" :class="{'btr-lg':round}" @click="click">
     <slot></slot>
   </view>

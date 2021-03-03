@@ -1,4 +1,5 @@
 <template>
+<!--  没有上下padding-->
   <view class="q-row-line" @click="click">
     <slot></slot>
   </view>
