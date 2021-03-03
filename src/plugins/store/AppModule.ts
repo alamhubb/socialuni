@@ -35,6 +35,8 @@ export default class AppModule extends VuexModule {
   appConfig: any = {}
   onlineUsersCount = 0
 
+  threeSecretKey = ''
+
   get unreadNotifies (): UnreadNotifyVO [] {
     return this.notifies.filter(item => !item.hasRead)
   }

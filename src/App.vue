@@ -1,13 +1,13 @@
 <script lang="ts">
 import Vue from 'vue'
-import { systemModule } from '@/plugins/store'
+import {appModule, systemModule} from '@/plugins/store'
 
 export default Vue.extend({
   mpType: 'app',
   onLaunch () {
     //页面启动，启动函数
     systemModule.appInit()
-    console.log(123)
+    appModule.threeSecretKey = '123123123'
   }
 })
 </script>

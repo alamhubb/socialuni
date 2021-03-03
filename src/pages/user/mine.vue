@@ -1,6 +1,9 @@
 <template>
-  <view class="bg-default h100r">
-    <view v-if="user">
+  <view class="bg-default h100r flex-col">
+    <view class="flex-1 row-all-center">
+      <button @click="showAuthThreeAuth=true">展示授权</button>
+    </view>
+<!--    <view v-if="user">
       <q-navbar class="q-solid-bottom">
         <view class="ml-xl text-bold text-lg flex-auto">
           个人资料
@@ -11,9 +14,9 @@
       </q-navbar>
       <user-info :user="user"></user-info>
 
-      <!-- #ifdef H5 -->
+      &lt;!&ndash; #ifdef H5 &ndash;&gt;
       <view class="h50px w100r"></view>
-      <!-- #endif -->
+      &lt;!&ndash; #endif &ndash;&gt;
 
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">
         <view class="w65vw flex-col py-xl mt-xl h100r">
@@ -22,14 +25,14 @@
               清池 app
             </view>
           </q-row>
-          <!--<q-row-item>
+          &lt;!&ndash;<q-row-item>
             <navigator :url="messageSettingUrl" class="row-col-center flex-auto">
               <view class="row-col-center flex-auto">
                 消息设置
               </view>
               <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
             </navigator>
-          </q-row-item>-->
+          </q-row-item>&ndash;&gt;
           <q-row-item>
             <navigator :url="suggestUrl" class="row-col-center flex-auto">
               <view class="row-col-center flex-auto">
@@ -94,7 +97,7 @@
       </msg-input>
     </view>
     <view v-else class="h100r col-all-center bg-white">
-      <!--      title="欢迎登陆清池app"-->
+      &lt;!&ndash;      title="欢迎登陆清池app"&ndash;&gt;
       <u-navbar :is-back="false" title-bold>
         <view class="flex-row w100vw flex-auto">
           <view class="ml-xl text-bold text-lg w100r">
@@ -102,31 +105,48 @@
           </view>
         </view>
       </u-navbar>
-      <!--  #ifndef MP -->
+      &lt;!&ndash;  #ifndef MP &ndash;&gt;
       <login></login>
-      <!--  #endif -->
-      <!-- 小程序平台-->
-      <!--  #ifdef MP -->
-      <!-- 小程序平台-->
+      &lt;!&ndash;  #endif &ndash;&gt;
+      &lt;!&ndash; 小程序平台&ndash;&gt;
+      &lt;!&ndash;  #ifdef MP &ndash;&gt;
+      &lt;!&ndash; 小程序平台&ndash;&gt;
       <view class="text-black text-xl">未登录，点击登录按钮，进行登录操作</view>
-      <!--  #ifdef MP-TOUTIAO -->
-      <!--            头条平台和其他平台处理方式不同-->
+      &lt;!&ndash;  #ifdef MP-TOUTIAO &ndash;&gt;
+      &lt;!&ndash;            头条平台和其他平台处理方式不同&ndash;&gt;
       <button :disabled="disabledLoginBtn" @click="login" type="primary"
               class="v-btn mt-20px w70vw bg-green">
         登录
         <q-icon size="32" icon="account_box"></q-icon>
       </button>
-      <!--  #endif -->
-      <!--  #ifndef MP-TOUTIAO -->
+      &lt;!&ndash;  #endif &ndash;&gt;
+      &lt;!&ndash;  #ifndef MP-TOUTIAO &ndash;&gt;
       <button v-if="!user" :disabled="disabledLoginBtn"
               open-type="getUserInfo" @getuserinfo="login"
               class="cu-btn bg-cyan mt-20px w70vw">
         登录
         <q-icon size="32" icon="account_box"></q-icon>
       </button>
-      <!--  #endif -->
-      <!--  #endif -->
-    </view>
+      &lt;!&ndash;  #endif &ndash;&gt;
+      &lt;!&ndash;  #endif &ndash;&gt;
+    </view>-->
+
+    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
+      <view class="h50vh pa">
+        <view class="flex-row">
+          <view class="mr">
+            集美小世界丨女孩生活分享交友
+          </view>
+          <view>申请</view>
+        </view>
+        <view class="flex-row">
+          获取您的昵称、头像、地区及性别
+        </view>
+        <view class="flex-row">
+          获取您的昵称、头像、地区及性别
+        </view>
+      </view>
+    </u-popup>
   </view>
 </template>
 
@@ -143,7 +163,7 @@ import UniUtil from '@/utils/UniUtil'
 import UserStore from '@/plugins/store/UserStore'
 import CommonUtil from '@/utils/CommonUtil'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import { systemModule } from '@/plugins/store'
+import {appModule, systemModule} from '@/plugins/store'
 import Constants from '@/const/Constant'
 import QNavbar from '@/components/q-navbar/q-navbar.vue'
 import PagePath from '@/const/PagePath'
@@ -159,9 +179,11 @@ export default class MineVue extends Vue {
   showMoreList = false
   // 登录
   disabledLoginBtn = false
+  showAuthThreeAuth = false
 
   onLoad () {
     CommonUtil.showShareMenu()
+    this.showAuthThreeAuth = !!appModule.threeSecretKey
   }
 
   onShow () {
