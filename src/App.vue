@@ -7,6 +7,7 @@ export default Vue.extend({
   onLaunch () {
     //页面启动，启动函数
     systemModule.appInit()
+    console.log(123)
   }
 })
 </script>
