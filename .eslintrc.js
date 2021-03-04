@@ -26,7 +26,8 @@ module.exports = {
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/no-inferrable-types': 0
+    '@typescript-eslint/no-inferrable-types': 0,
+    '@typescript-eslint/member-delimiter-style': 0
   },
   globals: {
     wx: true,

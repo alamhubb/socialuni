@@ -167,7 +167,7 @@
         <q-row class="py-xl">
           <view class="row-center w100r pt-xl">
             <u-button class="mr-xl w30vw">取消</u-button>
-            <u-button class="w30vw" type="success">允许</u-button>
+            <u-button class="w30vw" type="success" @click="toThreeAuthUserInfo">允许</u-button>
           </view>
         </q-row>
       </view>
@@ -195,6 +195,7 @@ import PagePath from '@/const/PagePath'
 import QRow from '@/components/q-row/q-row.vue'
 import QBar from '@/components/q-bar/q-bar.vue'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
+import OpenDataAPI from '@/api/OpenDataAPI'
 
 const userStore = namespace('user')
 
@@ -221,6 +222,16 @@ export default class MineVue extends Vue {
   onLoad () {
     CommonUtil.showShareMenu()
     this.showAuthThreeAuth = !!appModule.threeSecretKey
+  }
+
+  toThreeAuthUserInfo () {
+    OpenDataAPI.authUserInfoAPI().then(res => {
+      uni.navigateBackMiniProgram({
+        extraData: {
+          ...res.data
+        }
+      })
+    })
   }
 
   onShow () {
