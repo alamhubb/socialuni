@@ -1,13 +1,14 @@
-import Request, { requestConfig } from './request'
+import Request, {requestConfig} from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
-import { configModule } from '@/plugins/store'
+import {configModule} from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
   config.baseUrl = process.env.VUE_APP_BASE /* 根域名不同 */
+  config.timeout = 5 * 1000
   return config
 })
 http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
