@@ -33,6 +33,5 @@ export default class TokenUtil {
     } else {
       uni.removeStorageSync(this.token)
     }
-    UserStore.setMineUser(null)
   }
 }

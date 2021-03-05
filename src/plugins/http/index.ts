@@ -4,6 +4,7 @@ import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
 import {configModule} from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
+import UserStore from "@/plugins/store/UserStore";
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
@@ -42,7 +43,7 @@ http.interceptor.response(
         case ErrorCode.not_logged:
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
-          TokenUtil.remove()
+          UserStore.clearUser()
           if (result && result.errorMsg) {
             UniUtil.error(result.errorMsg)
           } else {
@@ -50,7 +51,7 @@ http.interceptor.response(
           }
           break
         case ErrorCode.banned:
-          TokenUtil.remove()
+          UserStore.clearUser()
           if (result && result.errorMsg) {
             UniUtil.error(result.errorMsg)
           } else {

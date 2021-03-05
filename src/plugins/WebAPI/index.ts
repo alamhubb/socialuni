@@ -4,6 +4,7 @@ import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
 import { configModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
+import UserStore from "@/plugins/store/UserStore";
 
 const WebAPI: Request = new Request()
 WebAPI.setConfig(config => { /* 设置全局配置 */
@@ -25,11 +26,11 @@ WebAPI.interceptor.response(
         case ErrorCode.not_logged:
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
-          TokenUtil.remove()
+          UserStore.clearUser()
           BalaBala.unLoginMessage()
           break
         case ErrorCode.banned:
-          TokenUtil.remove()
+          UserStore.clearUser()
           if (result) {
             UniUtil.error(result.errorMsg)
           } else {
