@@ -3,7 +3,7 @@
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white col-all-center">
 
-    <div v-if="goBackCountDown" class="text-bold font-lg">
+    <div v-if="goBackCountDown" class="font-bold font-lg">
       授权成功， {{ goBackCountDown }} 秒后返回...
     </div>
 
@@ -28,7 +28,7 @@
           <!--          如果没登录-->
 <!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
             <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
-            <view class="ml-smm text-bold">
+            <view class="ml-smm font-bold">
               欢迎使用社交联盟授权，建议使用微信或QQ登录
             </view>
           </view>-->
@@ -190,7 +190,7 @@
       </div>
 
       <div>
-        <view class="h175px col-row-center">
+        <view class="h150px col-row-center">
           <!--          已登录用户绑定手机号，
                     使用手机号登录，
                     直接登录，
@@ -261,7 +261,7 @@
           </view>
 
 
-          <view class="row-between-center w300px h40px mt-smm">
+          <view class="row-between-center w300px h40px mt-lg">
             <!--              <view v-if="isThreeAuth" class="row-col-center">-->
             <view class="row-col-center" @click="isThreeAuth=!isThreeAuth">
               <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>

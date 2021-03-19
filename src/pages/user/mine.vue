@@ -94,7 +94,7 @@
       </msg-input>
     </view>
     <!--      title="欢迎登录清池app"-->
-    <login v-else></login>
+    <login v-else class="h100p"></login>
 
 
 <!--    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
