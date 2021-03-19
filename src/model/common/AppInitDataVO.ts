@@ -1,12 +1,10 @@
 import UserVO from '@/model/user/UserVO'
 import DistrictVO from '@/model/DistrictVO'
-import ChatVO from '@/model/chat/ChatVO'
+// import ChatVO from "@/model/chat/ChatVO";
 import TagTypeVO from '@/model/tag/TagTypeVO'
 import HomeSwiperVO from '@/model/HomeSwiperVO'
 import TagVO from '@/model/tag/TagVO'
 import UnreadNotifyVO from '@/model/UnreadNotifyVO'
-import AppConfig from '@/const/AppConfig'
-import TalkTabVO from '@/model/talk/TalkTabVO'
 import TalkVO from '@/model/talk/TalkVO'
 
 export default class AppInitDataVO {
@@ -23,7 +21,7 @@ export default class AppInitDataVO {
   qq_reportResultTemplateId: string = ''
   qq_violationTemplateId: string = ''
 
-  chats: ChatVO[] = []
+  // chats: ChatVO[] = []
 
   appConfig: any = null
   tags: TagVO [] = []

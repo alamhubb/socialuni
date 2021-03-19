@@ -205,7 +205,7 @@ export default class UserEdit extends Vue {
       userCopy.wbAccount = this.wbAccount
       UserAPI.editUserAPI(userCopy).then((res: any) => {
         UserStore.setMineUser(res.data)
-        UniUtil.toast('已修改')
+        Toast.toast('已修改')
         this.closeUserEditPop()
       }).finally(() => {
         this.btnDisabled = false

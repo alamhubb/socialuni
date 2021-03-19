@@ -3,7 +3,7 @@ export default class LoginUtil {
     return new Promise<any>((resolve, reject) =>
       uni.checkSession({
         success () {
-          resolve()
+          resolve(null)
         },
         fail (err) {
           reject(err)

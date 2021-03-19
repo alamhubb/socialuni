@@ -16,6 +16,5 @@ export default class MPUtil {
         }
       })
     })
-    updateManager.onUpdateFailed()
   }
 }

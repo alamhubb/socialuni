@@ -11,7 +11,7 @@ export default class WxUtils {
         tmplIds: tmplIds,
         subscribe: true,
         success () {
-          resolve()
+          resolve(null)
         },
         fail (err) {
           reject(err)
@@ -40,7 +40,7 @@ export default class WxUtils {
           signType: 'MD5',
           paySign: payResult.paySign,
           success () {
-            resolve()
+            resolve(null)
           },
           fail (err) {
             reject(err)
@@ -62,7 +62,7 @@ export default class WxUtils {
           //@ts-ignore
           orderInfo: orderInfo,
           success () {
-            resolve()
+            resolve(null)
           },
           fail (err) {
             reject(err)

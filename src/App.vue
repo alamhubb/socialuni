@@ -10,7 +10,7 @@ export default Vue.extend({
   onLaunch (params) {
     //页面启动，启动函数
     systemModule.appLunchAction()
-    // UniUtil.toastLong('正确版本')
+    // Toast.toastLong('正确版本')
     //如果有跳转信息
     if (params.referrerInfo) {
       const info = params.referrerInfo

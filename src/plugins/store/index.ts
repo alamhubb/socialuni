@@ -7,6 +7,9 @@ import ConfigModule from '@/plugins/store/ConfigModule'
 import SystemModule from '@/plugins/store/SystemModule'
 import ChatModule from '@/plugins/store/ChatModule'
 import PlatformModule from '@/plugins/store/PlatformModule'
+import NotifyModule from '@/plugins/store/NotifyModule'
+import TagModule from '@/plugins/store/TagModule'
+import DistrictModule from '@/plugins/store/DistrictModule'
 
 Vue.use(Vuex)
 
@@ -19,5 +22,11 @@ export const configModule = new ConfigModule({ store, name: 'config' })
 export const systemModule = new SystemModule({ store, name: 'system' })
 export const chatModule = new ChatModule({ store, name: 'chat' })
 export const platformModule = new PlatformModule({ store, name: 'platform' })
+
+export const notifyModule = new NotifyModule({ store, name: 'notify' })
+export const tagModule = new TagModule({ store, name: 'tag' })
+export const districtModule = new DistrictModule({ store, name: 'district' })
+
+
 
 export default store

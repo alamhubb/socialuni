@@ -16,7 +16,7 @@ export default class JsonUtils {
     console.log(JSON.stringify(object))
   }
 
-  static toFormData(object: Object): FormData {
+  static toFormData (object: Record<string, any>): FormData {
     const formData = new FormData()
     Object.keys(object).forEach((key) => {
       formData.append(key, object[key])

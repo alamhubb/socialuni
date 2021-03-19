@@ -19,6 +19,7 @@ import TalkVueUtil from '@/utils/TalkVueUtil'
 import LoadMoreType from '@/const/LoadMoreType'
 import UniUtil from '@/utils/UniUtil'
 import ThreeAuthType from '@/const/ThreeAuthType'
+import ReportAPI from '@/api/ReportAPI'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -40,7 +41,7 @@ export default class AppModule extends VuexModule {
   threeSecretKey = ''
   threeUserId = ''
   threeProviderAppId = ''
-  threeAuthType = ThreeAuthType.user
+  threeAuthType = ''
   // threeProviderType = ''
 
   //是否为三方授权
@@ -60,6 +61,15 @@ export default class AppModule extends VuexModule {
   get unreadNotifies (): UnreadNotifyVO [] {
     return this.notifies.filter(item => !item.hasRead)
   }
+
+  // actions
+  @Action
+  getReportTypesAction () {
+    ReportAPI.queryReportTypesAPI().then(res => {
+      this.reportTypes = res.data
+    })
+  }
+
 
   @Action
   openPositionAction () {

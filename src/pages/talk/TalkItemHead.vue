@@ -117,7 +117,7 @@ export default class TalkItemHead extends Vue {
   }
 
   hintJusticeInfo () {
-    UniUtil.toastLong('正义值，正确举报会增加正义值')
+    Toast.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己

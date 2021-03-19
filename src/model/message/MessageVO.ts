@@ -1,8 +1,7 @@
 import UserVO from '@/model/user/UserVO'
 import CommonStatus from '@/const/CommonStatus'
-import MessageType from '@/const/MessageType'
-import MessageContentType from '@/const/MessageContentType'
-import UniUtil from '@/utils/UniUtil'
+import MessageType from '@/const/mesaage/MessageType'
+import MessageContentType from '@/const/mesaage/MessageContentType'
 
 export default class MessageVO {
   public id: number

@@ -3,6 +3,7 @@ import UniUtil from '@/utils/UniUtil'
 import AppUpdateType from '@/const/AppUpdateType'
 import { configModule } from '@/plugins/store'
 import AppConfig from '@/const/AppConfig'
+import Alert from './Alert'
 
 export default class APPUtil {
   static checkUpdate () {
@@ -14,16 +15,16 @@ export default class APPUtil {
         const updateHint = res.data.updateHint
         if (AppUpdateType.install === updateType) {
           const hint = updateHint || '应用有新版本需要安装，点击安装即可更新'
-          UniUtil.action(hint, '安装').then(() => {
+          Alert.confirm(hint, '安装').then(() => {
             plus.runtime.openURL(updateUrl)
           })
         } else if (AppUpdateType.hot === updateType) {
           UniUtil.install(updateUrl).then(() => {
-            UniUtil.action('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
+            Alert.confirm('新版本更新成功，是否现在重启清池app', '重启', '稍后').then(() => {
               plus.runtime.restart()
             })
           }).catch(() => {
-            UniUtil.hint('更新失败，' + configModule.contactService)
+            Alert.hint('更新失败，' + configModule.contactService)
           })
         }
       })

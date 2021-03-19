@@ -1,11 +1,12 @@
 /* eslint-disable */
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
 import CosAPI from '@/api/CosAPI'
 import COS from 'cos-wx-sdk-v5'
 import CosConst from '@/const/CosConst'
 import ImgFileVO from '@/model/ImgFileVO'
 import UniUtil from './UniUtil'
-import HintMsg from '@/const/HintMsg'
+import AppMsg from '@/const/AppMsg'
+import Alert from "./Alert";
 
 export default class CosUtil {
   static postObject (imgFile: ImgFileVO, cos = CosUtil.getAuthorizationCos()) {
@@ -20,7 +21,7 @@ export default class CosUtil {
           resolve(data)
         } else {
           UniUtil.hideLoading()
-          UniUtil.error(HintMsg.uploadFailMsg)
+          Alert.error(AppMsg.uploadFailMsg)
           reject(err)
         }
       })

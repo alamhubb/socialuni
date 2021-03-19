@@ -4,7 +4,7 @@ import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
 import { configModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
-import UserStore from "@/plugins/store/UserStore";
+import UserStore from '@/plugins/store/UserStore'
 
 const WebAPI: Request = new Request()
 WebAPI.setConfig(config => { /* 设置全局配置 */

@@ -1,10 +1,10 @@
-import Request, {requestConfig} from './request'
+import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
-import {configModule} from '@/plugins/store'
+import { configModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
-import UserStore from "@/plugins/store/UserStore";
+import UserStore from '@/plugins/store/UserStore'
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */

@@ -1,14 +1,19 @@
-import JsonUtils from '@/utils/JsonUtils'
+/**
+ * @Author qingchi
+ * @Date 2021-03-05 20:09
+ * @Version 1.0
+ */
+import JsonUtil from '@/utils/JsonUtil'
 
 export default class StorageUtil {
   static setObj (key: string, value: any) {
-    uni.setStorageSync(key, JsonUtils.toJson(value))
+    uni.setStorageSync(key, JsonUtil.toJson(value))
   }
 
   static getObj (key: string): any {
     const objStr: string = uni.getStorageSync(key)
     if (objStr) {
-      return JsonUtils.jsonParse(objStr)
+      return JsonUtil.jsonParse(objStr)
     }
     return null
   }

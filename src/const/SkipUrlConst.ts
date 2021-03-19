@@ -1,34 +1,34 @@
 import AppConfig from '@/const/AppConfig'
 import { configModule } from '@/plugins/store'
-import SkipUtil from '@/utils/SkipUtil'
+import RouterUtil from '@/utils/RouterUtil'
 
 export default class SkipUrlConst {
   static homeUrl (): string {
-    return SkipUtil.getWebUrl(configModule.homeUrl, AppConfig.title)
+    return RouterUtil.getWebUrl(configModule.homeUrl, AppConfig.title)
   }
 
   static suggestUrl (): string {
-    return SkipUtil.getWebUrl(configModule.suggestUrl, AppConfig.suggestTitle)
+    return RouterUtil.getWebUrl(configModule.suggestUrl, AppConfig.suggestTitle)
   }
 
   static contactUsUrl (): string {
-    return SkipUtil.getWebUrl(configModule.contactUsUrl, AppConfig.contactTitle)
+    return RouterUtil.getWebUrl(configModule.contactUsUrl, AppConfig.contactTitle)
   }
 
   static userAgreementUrl (): string {
-    return SkipUtil.getWebUrl(configModule.userAgreementUrl, AppConfig.userAgreementTitle)
+    return RouterUtil.getWebUrl(configModule.userAgreementUrl, AppConfig.userAgreementTitle)
   }
 
   static userPrivacyUrl (): string {
-    return SkipUtil.getWebUrl(configModule.userPrivacyUrl, AppConfig.userPrivacyTitle)
+    return RouterUtil.getWebUrl(configModule.userPrivacyUrl, AppConfig.userPrivacyTitle)
   }
 
   static childProtectUrl (): string {
-    return SkipUtil.getWebUrl(configModule.childProtectUrl, AppConfig.childProtectTitle)
+    return RouterUtil.getWebUrl(configModule.childProtectUrl, AppConfig.childProtectTitle)
   }
 
   static shellInfoUrl (): string {
-    return SkipUtil.getWebUrl(configModule.childProtectUrl, AppConfig.shellInfoTitle)
-    // return SkipUtil.getWebUrl(ConfigMap.shellInfoUrlDefault, AppConfig.shellInfoTitle)
+    return RouterUtil.getWebUrl(configModule.childProtectUrl, AppConfig.shellInfoTitle)
+    // return RouterUtil.getWebUrl(ConfigMap.shellInfoUrlDefault, AppConfig.shellInfoTitle)
   }
 }

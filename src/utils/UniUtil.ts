@@ -1,21 +1,16 @@
-import { v4 as uuidv4 } from 'uuid'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import GetProviderRes = UniApp.GetProviderRes
 import LoginRes = UniApp.LoginRes
 import { Provider } from '@/const/ProviderType'
 import GetUserInfoRes = UniApp.GetUserInfoRes
 import ImgFileVO from '@/model/ImgFileVO'
-import HintMsg from '@/const/HintMsg'
+import AppMsg from '@/const/AppMsg'
 import { systemModule } from '@/plugins/store'
+import Toast from '@/utils/Toast'
+import Alert from './Alert'
+import CommonUtil from '@/utils/CommonUtil'
 
 export default class UniUtil {
-  public static delayTime (millisecond: number): Promise<any> {
-    return new Promise<any>(resolve =>
-      setTimeout(() => {
-        resolve()
-      }, millisecond))
-  }
-
   public static textCopy (copyText: string, hint?: string) {
     return new Promise((resolve, reject) => {
       uni.setClipboardData({
@@ -23,9 +18,9 @@ export default class UniUtil {
         success () {
           if (hint) {
             uni.hideToast()
-            UniUtil.toast(hint)
+            Toast.toast(hint)
           }
-          resolve()
+          resolve(null)
         },
         fail (err) {
           reject(err)
@@ -50,16 +45,6 @@ export default class UniUtil {
 
   static copyLink (webUrl: string) {
     return UniUtil.textCopy(webUrl, '链接已复制，可在浏览器打开')
-  }
-
-  public static getUUID (): string {
-    const randoms: number[] = []
-    for (let i = 0; i < 16; i++) {
-      randoms.push(Math.round(Math.random() * 255))
-    }
-    return uuidv4({
-      random: randoms
-    }).replace(/-/g, '')
   }
 
   public static upxToPx (rpx: number): number {
@@ -109,124 +94,6 @@ export default class UniUtil {
     )
   }
 
-  //交互
-  public static toast (title: string, time?: number) {
-    return new Promise((resolve, reject) => {
-      uni.showToast({
-        icon: 'none',
-        title: title,
-        duration: time || 800,
-        success () {
-          resolve()
-        },
-        fail (err) {
-          reject(err)
-        }
-      })
-    })
-  }
-
-  public static toastLong (title: string) {
-    return new Promise((resolve, reject) => {
-      uni.showToast({
-        icon: 'none',
-        title: title,
-        duration: 1500,
-        success () {
-          resolve()
-        },
-        fail (err) {
-          reject(err)
-        }
-      })
-    })
-  }
-
-  public static action (msg: string, okLabel = '确定', cancel = '取消') {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        content: msg,
-        confirmText: okLabel,
-        cancelText: cancel,
-        success (res) {
-          if (res.confirm) {
-            resolve()
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
-    })
-  }
-
-  public static info (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: '提示',
-        content: msg,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve()
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
-    })
-  }
-
-  public static hint (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        content: msg,
-        showCancel: false,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve()
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
-    })
-  }
-
-  public static warning (msg: string, okLabel?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: '警告',
-        content: msg,
-        confirmText: okLabel || '确定',
-        success (res) {
-          if (res.confirm) {
-            resolve()
-          } else if (res.cancel) {
-            reject(new Error('点击了取消'))
-          }
-        }
-      })
-    })
-  }
-
-  public static error (msg: string, title?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: title || '错误',
-        content: msg,
-        showCancel: false,
-        success (res) {
-          if (res.confirm) {
-            resolve()
-          } else if (res.cancel) {
-            reject()
-          }
-        }
-      })
-    })
-  }
-
   public static showLoading (loadText: string) {
     uni.showLoading({ title: loadText || '' })
   }
@@ -264,8 +131,8 @@ export default class UniUtil {
             // 获取压缩比
             const imgSize: number = imgFile.size
             if (imgSize / 1024 / 1024 > 10) {
-              UniUtil.error(HintMsg.imgSizeNotGt10MBMsg)
-              reject(HintMsg.imgSizeNotGt10MBMsg)
+              Alert.error(AppMsg.imgSizeNotGt10MBMsg)
+              reject(AppMsg.imgSizeNotGt10MBMsg)
             }
             let ratio: number = 100
             //如果大于100k 按照100k标准压缩
@@ -316,15 +183,21 @@ export default class UniUtil {
     })
   }
 
-  public static install (filePath: string) {
+  public static install (filePath: '_www/' | '_doc/' | '_documents/' | '_downloads/') {
     return new Promise<any>((resolve, reject) => {
       plus.runtime.install(filePath, {
         force: false
       }, () => {
-        resolve()
+        resolve(null)
       }, (e) => {
         reject(e)
       })
     })
+  }
+
+  static showShareMenu () {
+    // #ifdef MP-QQ || MP-WEIXIN
+    uni.showShareMenu({})
+    // #endif
   }
 }

@@ -9,7 +9,7 @@ export default class QQUtils {
         tmplIds: tmplIds,
         subscribe: true,
         success () {
-          resolve()
+          resolve(null)
         },
         fail (err) {
           reject(err)
@@ -34,7 +34,7 @@ export default class QQUtils {
         package: payResult.package,
         bargainor_id: AppConfig.qq_bargainor_id,
         success () {
-          resolve()
+          resolve(null)
         },
         fail (err) {
           reject(err)

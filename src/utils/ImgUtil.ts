@@ -1,7 +1,8 @@
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
 import TokenUtil from '@/utils/TokenUtil'
-import ErrorCode from '@/const/ErrorCode'
+import ErrorConst from '@/const/ErrorConst'
 import UniUtil from './UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 
 export default class ImgUtil {
   static readonly imgUrl: string = process.env.VUE_APP_COS_URL
@@ -21,7 +22,7 @@ export default class ImgUtil {
           type: type// 自己系统中的用户id
         },
         success: res => {
-          if (res.statusCode === ErrorCode.success) {
+          if (res.statusCode === ErrorConst.success) {
             resolve(JsonUtils.jsonParse(res.data))
           } else {
             reject(JsonUtils.jsonParse(res.data))
@@ -47,7 +48,7 @@ export default class ImgUtil {
           type: type// 自己系统中的用户id
         },
         success: res => {
-          if (res.statusCode === ErrorCode.success) {
+          if (res.statusCode === ErrorConst.success) {
             resolve(JsonUtils.jsonParse(res.data))
           } else {
             reject(JsonUtils.jsonParse(res.data))
@@ -103,19 +104,19 @@ export default class ImgUtil {
   }
 
   static getTalkUploadFormat (userId: number, filePath: string): string {
-    return 'user/' + userId + '/talk/normal/' + UniUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+    return 'user/' + userId + '/talk/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
   static getUserAvatarUploadFormat (userId: number, filePath: string): string {
-    return 'user/' + userId + '/avatar/' + UniUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+    return 'user/' + userId + '/avatar/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
   static getUserImgUploadFormat (userId: number, filePath: string): string {
-    return 'user/' + userId + '/img/' + UniUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+    return 'user/' + userId + '/img/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
   static getUserIdentityUploadFormat (userId: number, filePath: string): string {
-    return 'user/' + userId + '/identity/' + UniUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
+    return 'user/' + userId + '/identity/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
   static getFileSuffixName (filePath: string): string {

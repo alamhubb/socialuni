@@ -1,8 +1,9 @@
-import { appModule, systemModule } from '@/plugins/store'
+import { districtModule, systemModule } from '@/plugins/store'
 import DistrictUtil from '@/utils/DistrictUtil'
 import DistrictVO from '@/model/DistrictVO'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
+import GenderType from '@/const/GenderType'
 
 export default class AppInitQueryVO {
   //上次退出时记录的adCode
@@ -18,20 +19,10 @@ export default class AppInitQueryVO {
   public standby: string
 
   constructor (tabObj: TalkTabVO, district: DistrictVO) {
-    //如果为初始才传ad
-    //如果用户开着定位
-    if (appModule.openPosition) {
-      this.openPosition = appModule.openPosition
-      DistrictUtil.getCurPositionBySDK().then((res: DistrictVO) => {
-        if (res) {
-          this.lon = res.lon
-          this.lat = res.lat
-        }
-      })
-    }
     this.adCode = district.adCode
     this.homeType = tabObj.type
-    this.gender = TalkFilterUtil.getGenderFilter()
+    //默认女生
+    this.gender = GenderType.girl
     this.minAge = TalkFilterUtil.getMinAgeFilter()
     this.maxAge = TalkFilterUtil.getMaxAgeFilter()
     this.platform = systemModule.platform

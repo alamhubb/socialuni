@@ -125,7 +125,7 @@ export default class ChatModule extends VuexModule {
   //来消息后，替换已有chat
   pushMsgReplaceChat (chatIndex, chat: ChatVO) {
     const oldChat = this.chats[chatIndex]
-    let messages: MessageVO[] = oldChat.messages
+    const messages: MessageVO[] = oldChat.messages
     //将新消息放到当前msg中
     messages.push(...chat.messages)
     chat.messages = messages
@@ -270,7 +270,7 @@ export default class ChatModule extends VuexModule {
     // chat.updateTime = new Date().getTime()
     // 不为自己的 且未读的
     const messages: MessageVO[] = chat.messages.filter(item => !item.isMine && !item.isRead)
-    let msgIds: number[] = messages.map(msg => msg.id)
+    const msgIds: number[] = messages.map(msg => msg.id)
     // if (messages.length > 0) {
     // msgIds =
     //如果登录了，才调用后台

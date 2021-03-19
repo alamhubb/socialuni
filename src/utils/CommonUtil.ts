@@ -1,3 +1,11 @@
+/**
+ * @Author qingchi
+ * @Date 2021-03-05 21:36
+ * @Version 1.0
+ */
+import { v4 as uuidv4 } from 'uuid'
+
+//各平台通用工具类
 export default class CommonUtil {
   //节流
   static throttle (f, wait) {
@@ -24,38 +32,20 @@ export default class CommonUtil {
     }
   }
 
-  static showShareMenu () {
-    // #ifdef MP-QQ || MP-WEIXIN
-    uni.showShareMenu()
-    // #endif
+  public static getUUID (): string {
+    const randoms: number[] = []
+    for (let i = 0; i < 16; i++) {
+      randoms.push(Math.round(Math.random() * 255))
+    }
+    return uuidv4({
+      random: randoms
+    }).replace(/-/g, '')
   }
 
-  static requestSubscribeMessage (tmplIds: string[]) {
-    return new Promise((resolve, reject) => {
-      uni.requestSubscribeMessage({
-        tmplIds: tmplIds,
-        success () {
-          resolve()
-        },
-        fail (err) {
-          reject(err)
-        }
-      })
-    })
-  }
-
-  static getLocation () {
-    return new Promise((resolve, reject) => {
-      uni.getLocation({
-        geocode: true,
-        type: 'gcj02',
-        success (res) {
-          resolve(res)
-        },
-        fail (err) {
-          reject(err)
-        }
-      })
-    })
+  public static delayTime (millisecond: number): Promise<any> {
+    return new Promise<any>(resolve =>
+      setTimeout(() => {
+        resolve(null)
+      }, millisecond))
   }
 }

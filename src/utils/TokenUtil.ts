@@ -1,4 +1,4 @@
-import UserStore from '@/plugins/store/UserStore'
+import StorageUtil from '@/utils/StorageUtil'
 
 export default class TokenUtil {
   // 开发生产区分token，避免混淆，不区分的话会冲突
@@ -7,19 +7,20 @@ export default class TokenUtil {
 
   static set (token: string) {
     if (process.env.NODE_ENV === 'development') {
-      uni.setStorageSync(this.dev_token, token)
+      StorageUtil.set(this.dev_token, token)
     } else {
-      uni.setStorageSync(this.token, token)
+      StorageUtil.set(this.token, token)
     }
   }
 
   static get (): string {
     // 开发环境方便测试
     if (process.env.NODE_ENV === 'development') {
-      return uni.getStorageSync(this.dev_token)
-      // return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNl81YWVkZTMwZDA3NDc0NTgwOThjZTAzYTVjMWY3MTc4OCJ9.XlQXd_4afra45_b_P6wsIgMxdi779xhfwM03oci8vOI'
+      // return StorageUtil.get(this.dev_token)
+      // return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzliNzExYWY3NTM5OTRjMTI5MTRlYWE5YzdhNzUyMTUxIn0.qNZQdtX_4kIHqCB4fHgAyE4hT9dIV9Jw8f92HzXIm4k'
+      return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzk1YTkwNjk2NzkxZDRjNGNhM2VkNTA0N2RlNzQ0OTY2In0.K_l3ZoeDp0-VaT-ok0d1am6hvi_5sHafU0lZJ7SWcDw'
     } else {
-      return uni.getStorageSync(this.token)
+      return StorageUtil.get(this.token)
     }
   }
 
@@ -29,9 +30,9 @@ export default class TokenUtil {
 
   static remove () {
     if (process.env.NODE_ENV === 'development') {
-      uni.removeStorageSync(this.dev_token)
+      StorageUtil.remove(this.dev_token)
     } else {
-      uni.removeStorageSync(this.token)
+      StorageUtil.remove(this.token)
     }
   }
 }

@@ -24,13 +24,9 @@ export default class LoginDataVO {
   authCode = ''
 
   //百度小程序使用
-  //微信绑定手机号使用
-  // cloudID: "43_dxlIzWzxNIvupKp3fdPzt_0"
-  // encryptedData: "CHQwL7tl8LXGJi27v6feKs69Yd+A0t2E+Sw=="
-  // errMsg: "getPhoneNumber:ok"
-  // iv: "a1U5blDAk"
   encryptedData = ''
   iv = ''
+  //微信绑定手机号使用
   sessionEnable = false
 
   //暂未使用

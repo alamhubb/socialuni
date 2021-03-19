@@ -241,7 +241,7 @@ export default class MatchVue extends Vue {
         // #ifndef MP-WEIXIN
         if (this.user.isSelfAuth) {
           // #endif
-          UniUtil.toast('不喜欢')
+          Toast.toast('不喜欢')
           // 还要减去高度，还有加高度
           MatchAPI.unlikeUserAPI(this.showUser.id)
           if (this.leftOrRight === Constants.leftKey) {
@@ -270,7 +270,7 @@ export default class MatchVue extends Vue {
         // #ifndef MP-WEIXIN
         if (this.user.isSelfAuth) {
           // #endif
-          UniUtil.toast('喜欢')
+          Toast.toast('喜欢')
           // 还要减去高度，还有加高度
           MatchAPI.likeUserAPI(this.showUser.id)
           if (this.leftOrRight === Constants.leftKey) {

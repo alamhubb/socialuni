@@ -132,7 +132,7 @@ export default class TalkItemComment extends Vue {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
-        UniUtil.toast('已抱过不能取消')
+        Toast.toast('已抱过不能取消')
         return
       }
       this.talk.hasHugged = true

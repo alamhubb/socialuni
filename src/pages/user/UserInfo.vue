@@ -442,7 +442,7 @@ export default class UserInfo extends Vue {
         })
       }
     } else {
-      UniUtil.toast('获取中，请稍等')
+      Toast.toast('获取中，请稍等')
     }
   }
 
@@ -606,7 +606,7 @@ export default class UserInfo extends Vue {
         this.getPhoneNumberByLogin(obj)
       })
     } else {
-      UniUtil.toast('您选择了不绑定')
+      Toast.toast('您选择了不绑定')
     }
   }
 
@@ -703,7 +703,7 @@ export default class UserInfo extends Vue {
   }
 
   hintJusticeInfo () {
-    UniUtil.toastLong('正义值，正确举报会增加正义值')
+    Toast.toastLong('正义值，正确举报会增加正义值')
   }
 
   hintBindTwice () {
@@ -773,7 +773,7 @@ export default class UserInfo extends Vue {
   refreshMine () {
     UniUtil.action('是否刷新用户信息').then(() => {
       UserStore.getMineUserAction().then(() => {
-        UniUtil.toast('刷新成功')
+        Toast.toast('刷新成功')
       })
     })
   }
@@ -800,7 +800,7 @@ export default class UserInfo extends Vue {
     }
     UniUtil.action(actionMsg).then(() => {
       UserAPI.switchUserContactAPI(openContact).then(() => {
-        UniUtil.toast(hintMsg)
+        Toast.toast(hintMsg)
       }).catch(() => {
         this.mineUser.openContact = !openContact
       })

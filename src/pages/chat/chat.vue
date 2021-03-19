@@ -132,7 +132,7 @@ export default class ChatVue extends Vue {
     UniUtil.action('是否确定关闭会话，对方将无法再给您发送消息').then(() => {
       ChatAPI.closeChatAPI(this.chatId).then(() => {
         chatModule.deleteChatAction(this.chatId)
-        UniUtil.toast('已关闭')
+        Toast.toast('已关闭')
       }).finally(() => {
         this.chatId = null
       })

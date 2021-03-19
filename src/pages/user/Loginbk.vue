@@ -288,10 +288,10 @@ export default class LoginVue extends Vue {
 
   sendCodeClick () {
     if (!this.phoneNumberRight) {
-      return UniUtil.toast('请输入正确的手机号')
+      return Toast.toast('请输入正确的手机号')
     }
     if (this.countDown) {
-      return UniUtil.toast('验证码发送频繁，请等待')
+      return Toast.toast('验证码发送频繁，请等待')
     }
 
     this.authCodeClear()
@@ -308,7 +308,7 @@ export default class LoginVue extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     UserAPI.sendAuthCodeAPI(this.phoneNum).then(() => {
       // 提示验证码发送成功
-      UniUtil.toast('验证码发送成功')
+      Toast.toast('验证码发送成功')
     })
   }
 
@@ -353,10 +353,10 @@ export default class LoginVue extends Vue {
   loginByPhoneNumAndBindPhoneNum () {
     //再次校验
     if (!this.phoneNumberRight) {
-      return UniUtil.toast('请输入正确的手机号')
+      return Toast.toast('请输入正确的手机号')
     }
     if (!this.authCodeRight) {
-      return UniUtil.toast('请输入正确的验证码')
+      return Toast.toast('请输入正确的验证码')
     }
     if (!this.contractChecked) {
       return UniUtil.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')

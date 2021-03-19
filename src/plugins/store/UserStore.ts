@@ -62,7 +62,7 @@ export default class UserStore {
   static loginOut () {
     return UniUtil.action('是否退出登录').then(() => {
       UserStore.clearUser()
-      UniUtil.toast('用户退出')
+      Toast.toast('用户退出')
     })
   }
 
@@ -79,7 +79,7 @@ export default class UserStore {
     return UniUtil.action('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
       UserAPI.destroyAccountAPI().then(() => {
         UserStore.clearUser()
-        UniUtil.toast('注销成功')
+        Toast.toast('注销成功')
       })
     })
   }

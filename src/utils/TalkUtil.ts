@@ -9,7 +9,7 @@ export default class TalkUtil {
 
   static getHugColor (hasHugged: boolean): string[] {
     if (hasHugged) {
-      return ['red', 'darken-1']
+      return ['color-red-dark1']
     } else {
       return []
     }

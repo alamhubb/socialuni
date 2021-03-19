@@ -364,17 +364,17 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
-import {namespace} from 'vuex-class'
+import { namespace } from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
 import UCheckbox from 'uview-ui/components/u-checkbox/u-checkbox.vue'
 import UButton from 'uview-ui/components/u-button/u-button.vue'
-import {systemModule} from '@/plugins/store'
-import ThreeAuthType from "@/const/ThreeAuthType";
-import ButtonOpenType from "@/const/ButtonOpenType";
-import Alert from "@/utils/Alert";
-import ThreeAuthUserInfoResultVO from "@/model/ThreeAuthUserInfoResultVO";
+import { systemModule } from '@/plugins/store'
+import ThreeAuthType from '@/const/ThreeAuthType'
+import ButtonOpenType from '@/const/ButtonOpenType'
+import Alert from '@/utils/Alert'
+import ThreeAuthUserInfoResultVO from '@/model/ThreeAuthUserInfoResultVO'
 
 const SkipUrlConst = {}
 
@@ -396,7 +396,7 @@ export default class LoginVue extends Vue {
   @systemStore.State('isMp') isMp: boolean
 
 
-  getBtnOpenType() {
+  getBtnOpenType () {
     if (!this.hasUser) {
       return ButtonOpenType.getUserInfo
     } else if (this.isAuthPhone && !this.hasPhoneNum) {
@@ -406,7 +406,7 @@ export default class LoginVue extends Vue {
     }
   }
 
-  platformLoginClick(loginResult) {
+  platformLoginClick (loginResult) {
     if (!this.hasUser) {
       this.mpWxLogin(loginResult)
       //登录完成之后，只有为授权用户信息跳转会小程序
@@ -422,7 +422,7 @@ export default class LoginVue extends Vue {
         UniUtil.hideLoading()
         const result = res.data
         this.goBackCountDown = 2
-        const threeResult:ThreeAuthUserInfoResultVO = new ThreeAuthUserInfoResultVO()
+        const threeResult: ThreeAuthUserInfoResultVO = new ThreeAuthUserInfoResultVO()
         threeResult.appUserId = this.threeUserId
         threeResult.authType = this.threeAuthType
         threeResult.tokenCode = result.tokenCode
@@ -449,7 +449,7 @@ export default class LoginVue extends Vue {
   }
 
   // 微信点击按钮，获取手机号用来绑定
-  getPhoneNumberByWx(obj: any) {
+  getPhoneNumberByWx (obj: any) {
     if (obj.detail.errMsg === 'getPhoneNumber:ok') {
       this.phoneBtnDisabled = true
       // 默认未过期
@@ -474,7 +474,7 @@ export default class LoginVue extends Vue {
     }
   }
 
-  mpWxLogin(loginResult) {
+  mpWxLogin (loginResult) {
     // #ifdef MP
     // #ifndef MP-TOUTIAO
     if (loginResult.detail.errMsg !== Constants.loginSuccess) {
@@ -544,66 +544,66 @@ export default class LoginVue extends Vue {
   //同时授权手机号返回
 
 
-  get phoneBtnNum() {
+  get phoneBtnNum () {
 
   }
 
-  get isAuthUser() {
+  get isAuthUser () {
     return this.threeAuth && this.threeAuthType === ThreeAuthType.user
   }
 
-  get isAuthPhone() {
+  get isAuthPhone () {
     return this.threeAuth && this.threeAuthType === ThreeAuthType.phone
   }
 
-  get homeUrl(): string {
+  get homeUrl (): string {
     // return SkipUrlConst.homeUrl()
   }
 
-  get userAgreementUrl(): string {
+  get userAgreementUrl (): string {
     // return SkipUrlConst.userAgreementUrl()
   }
 
-  get userPrivacyUrl(): string {
+  get userPrivacyUrl (): string {
     // return SkipUrlConst.userPrivacyUrl()
   }
 
-  get childProtectUrl(): string {
+  get childProtectUrl (): string {
     // return SkipUrlConst.childProtectUrl()
   }
 
-  get loginButtonDisabled() {
+  get loginButtonDisabled () {
     // return !this.contractChecked || !this.phoneNumberRight || !this.authCodeRight || this.bindBtnDisabled
     return !this.phoneNumberRight || !this.authCodeRight || this.bindBtnDisabled
   }
 
-  get sendAuthCodeBtnDisabled() {
+  get sendAuthCodeBtnDisabled () {
     return !this.phoneNumberRight || Boolean(this.countDown)
   }
 
-  get authCodeRight() {
+  get authCodeRight () {
     return this.authCode && this.authCode.length === 4 && NumberUtil.isAllNumber(this.authCode)
   }
 
-  get phoneNumberRight() {
+  get phoneNumberRight () {
     return this.phoneNum && this.phoneNum.length === 11 && NumberUtil.isAllNumber(this.phoneNum)
   }
 
-  created() {
+  created () {
     if (this.user) {
       this.showPhoneView = true
     }
   }
 
-  qqLogin() {
+  qqLogin () {
     this.providerLogin(ProviderType.qq)
   }
 
-  wxLogin() {
+  wxLogin () {
     this.providerLogin(ProviderType.wx)
   }
 
-  providerLogin(providerType: Provider) {
+  providerLogin (providerType: Provider) {
     if (this.platformLoginEnable) {
       this.platformLoginEnable = false
       LoginService.platformLogin(providerType).finally(() => {
@@ -618,30 +618,30 @@ export default class LoginVue extends Vue {
      return !this.showPhoneView || (!this.phoneNumFocus && !this.authCodeFocus)
    }
  */
-  phoneNumClear() {
+  phoneNumClear () {
     this.phoneNum = ''
     UniUtil.delayTime(100).then(() => {
       this.phoneNumInputFocus()
     })
   }
 
-  authCodeClear() {
+  authCodeClear () {
     this.authCode = ''
     UniUtil.delayTime(100).then(() => {
       this.authCodeInputFocus()
     })
   }
 
-  copyServiceNum() {
+  copyServiceNum () {
     UniUtil.textCopy('491369310', '客服联系方式已复制')
   }
 
-  sendCodeClick() {
+  sendCodeClick () {
     if (!this.phoneNumberRight) {
-      return UniUtil.toast('请输入正确的手机号')
+      return Toast.toast('请输入正确的手机号')
     }
     if (this.countDown) {
-      return UniUtil.toast('验证码发送频繁，请等待')
+      return Toast.toast('验证码发送频繁，请等待')
     }
 
     this.authCodeClear()
@@ -658,28 +658,28 @@ export default class LoginVue extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     UserAPI.sendAuthCodeAPI(this.phoneNum).then(() => {
       // 提示验证码发送成功
-      UniUtil.toast('验证码发送成功')
+      Toast.toast('验证码发送成功')
     })
   }
 
 
-  phoneNumInputFocus() {
+  phoneNumInputFocus () {
     this.phoneNumFocus = true
   }
 
-  phoneNumInputBlur() {
+  phoneNumInputBlur () {
     this.phoneNumFocus = false
   }
 
-  authCodeInputFocus() {
+  authCodeInputFocus () {
     this.authCodeFocus = true
   }
 
-  authCodeInputBlur() {
+  authCodeInputBlur () {
     this.authCodeFocus = false
   }
 
-  switchShowPhoneNum() {
+  switchShowPhoneNum () {
     if (this.showPhoneView) {
       this.phoneNumInputBlur()
       this.authCodeInputBlur()
@@ -691,19 +691,19 @@ export default class LoginVue extends Vue {
   }
 
 
-  cancelBind() {
+  cancelBind () {
     // 回上一页
     PageUtil.goBack()
   }
 
   //手机号登录和手机号绑定
-  loginByPhoneNumAndBindPhoneNum() {
+  loginByPhoneNumAndBindPhoneNum () {
     //再次校验
     if (!this.phoneNumberRight) {
-      return UniUtil.toast('请输入正确的手机号')
+      return Toast.toast('请输入正确的手机号')
     }
     if (!this.authCodeRight) {
-      return UniUtil.toast('请输入正确的验证码')
+      return Toast.toast('请输入正确的验证码')
     }
     if (!this.contractChecked) {
       return UniUtil.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')

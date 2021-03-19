@@ -20,7 +20,7 @@ export default class ChatVO {
   public receiveUserId: number = null
   public loadMore: string = null
 
- /* constructor (chat?: ChatVO) {
+  /* constructor (chat?: ChatVO) {
     if (chat) {
       this.id = chat.id
       this.nickname = chat.nickname

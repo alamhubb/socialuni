@@ -12,8 +12,16 @@ export default class TagAPI {
     return http.post('tag/queryTags')
   }
 
+  static queryHotTagsAPI () {
+    return http.post('tag/queryHotTags')
+  }
+
   static queryTagTypesAPI () {
     return http.post('tag/queryTagTypes')
+  }
+
+  static queryHotTagTypesAPI () {
+    return http.post('tag/queryHotTagTypes')
   }
 
   static queryUserRecentlyDistrictsAPI () {

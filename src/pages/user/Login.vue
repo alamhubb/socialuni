@@ -26,15 +26,15 @@
         <!--        35*4 = 140 +30+80 = 250高度-->
         <view v-if="showPhoneView" class="h150px">
           <!--          如果没登录-->
-<!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
-            <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
-            <view class="ml-smm font-bold">
-              欢迎使用社交联盟授权，建议使用微信或QQ登录
-            </view>
-          </view>-->
-<!--          <view class="h80px font-lg font-bold mb">
-            欢迎使用社交联盟授权<span v-if="!user">，建议使用微信或QQ登录</span>
-          </view>-->
+          <!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
+                      <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
+                      <view class="ml-smm font-bold">
+                        欢迎使用社交联盟授权，建议使用微信或QQ登录
+                      </view>
+                    </view>-->
+          <!--          <view class="h80px font-lg font-bold mb">
+                      欢迎使用社交联盟授权<span v-if="!user">，建议使用微信或QQ登录</span>
+                    </view>-->
 
           <view class="row-col-center">
             <view>手机号</view>
@@ -226,10 +226,10 @@
             <template v-else>
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-              <button :disabled="!qqLoginEnable"
+              <button :disabled="!openTypeBtnEnable"
                       :open-type="getBtnOpenType"
                       class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
-                      @click="platformLoginClick">
+                      @click="openTypeBtnClick">
                 <u-icon v-if="!user||(isAuthPhone&&!hasPhoneNum)" color="white" name="weixin-fill" size="42"
                         class="mr-xs"></u-icon>
                 <template v-if="!user">
@@ -369,17 +369,17 @@
     <!-- 小程序平台-->
     <!--  #ifdef MP -->
     <!-- 小程序平台-->
-<!--    <view class="text-black text-xl">未登录，点击登录按钮，进行登录操作</view>-->
+    <!--    <view class="text-black text-xl">未登录，点击登录按钮，进行登录操作</view>-->
     <!--  #ifdef MP-TOUTIAO -->
     <!--            头条平台和其他平台处理方式不同-->
-<!--    <button :disabled="disabledLoginBtn" @click="login" type="primary"-->
-<!--            class="v-btn mt-20px w70vw bg-green">-->
-<!--      登录-->
-<!--      <q-icon size="32" icon="account_box"></q-icon>-->
-<!--    </button>-->
+    <!--    <button :disabled="disabledLoginBtn" @click="login" type="primary"-->
+    <!--            class="v-btn mt-20px w70vw bg-green">-->
+    <!--      登录-->
+    <!--      <q-icon size="32" icon="account_box"></q-icon>-->
+    <!--    </button>-->
     <!--  #endif -->
     <!--  #ifndef MP-TOUTIAO -->
-<!--    <button v-if="!user" :disabled="disabledLoginBtn"-->
+    <!--    <button v-if="!user" :disabled="disabledLoginBtn"-->
     <!--            open-type="getUserInfo" @getuserinfo="login"-->
     <!--            class="cu-btn bg-cyan mt-20px w70vw">-->
     <!--      登录-->
@@ -409,6 +409,10 @@ import LoginService from '@/pages/user/LoginService'
 import LoginDataVO from '@/model/login/LoginDataVO'
 import { systemModule } from '@/plugins/store'
 import ButtonOpenType from '@/const/ButtonOpenType'
+import Alert from '@/utils/Alert'
+import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultVO'
+import OpenDataAPI from '@/api/OpenDataAPI'
+import Constants from '@/const/Constant'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -437,7 +441,7 @@ export default class LoginVue extends Vue {
   authCode = ''
   countDown = 0
   bindBtnDisabled = false
-  qqLoginEnable = true
+  openTypeBtnEnable = true
 
   showPhoneView = false
   goBackCountDown = 0
@@ -448,20 +452,66 @@ export default class LoginVue extends Vue {
     }
   }
 
-  qqLogin () {
-    this.providerLogin(ProviderType.qq)
-  }
-
-  wxLogin () {
-    this.providerLogin(ProviderType.wx)
-  }
-
-  providerLogin (providerType: Provider) {
-    if (this.qqLoginEnable) {
-      this.qqLoginEnable = false
-      LoginService.platformLogin(providerType).finally(() => {
-        this.qqLoginEnable = true
+  //平台登陆
+  providerLogin (result) {
+    if (!this.disabledLoginBtn) {
+      // #ifdef MP
+      // #ifndef MP-TOUTIAO
+      if (result.detail.errMsg !== Constants.loginSuccess) {
+        Toast.toast('您取消了登录')
+        return
+      }
+      // #endif
+      this.disabledLoginBtn = true
+      LoginService.platformLogin(systemModule.provider).finally(() => {
+        this.disabledLoginBtn = false
       })
+      // #endif
+    }
+  }
+
+  //登陆，授权，绑定手机号各大平台登陆结果，后者授权手机号结果
+  openTypeBtnClick (providerResult) {
+    if (this.openTypeBtnEnable) {
+      if (!this.hasUser) {
+        this.providerLogin(providerResult)
+        //登陆完成之后，只有为授权用户信息跳转会小程序
+      } else if (this.isAuthPhone && !this.hasPhoneNum) {
+        this.getPhoneNumberByWx(providerResult)
+        //只有为用户授权手机号，跳转回三方，否则停留
+      } else if (this.isAuthUser) {
+        //处理用户授权
+        Alert.confirm('是否确认授权用户信息').then(() => {
+          console.log('授权用户信息和token')
+          UniUtil.showLoading('授权中')
+          OpenDataAPI.authUserInfoAPI().then(res => {
+            UniUtil.hideLoading()
+            const result = res.data
+            this.goBackCountDown = 2
+            const threeResult: ThreeAuthUserInfoResultVO = new ThreeAuthUserInfoResultVO()
+            threeResult.appUserId = this.threeUserId
+            threeResult.authType = this.threeAuthType
+            threeResult.tokenCode = result.tokenCode
+            threeResult.user = result.user
+            const timer = setInterval(() => {
+              if (this.goBackCountDown) {
+                this.goBackCountDown--
+              } else {
+                clearInterval(timer)
+                uni.navigateBackMiniProgram({
+                  extraData: threeResult
+                })
+              }
+            }, 1000)
+          })
+        })
+      } else if (this.isAuthPhone) {
+        Alert.confirm('是否确认授权手机号').then(() => {
+          console.log('授权用户手机号')
+        })
+      } else {
+        console.error('错误的登陆逻辑分支')
+      }
     }
   }
 
@@ -508,10 +558,10 @@ export default class LoginVue extends Vue {
 
   sendCodeClick () {
     if (!this.phoneNumberRight) {
-      return UniUtil.toast('请输入正确的手机号')
+      return Toast.toast('请输入正确的手机号')
     }
     if (this.countDown) {
-      return UniUtil.toast('验证码发送频繁，请等待')
+      return Toast.toast('验证码发送频繁，请等待')
     }
 
     this.authCodeClear()
@@ -528,7 +578,7 @@ export default class LoginVue extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     UserAPI.sendAuthCodeAPI(this.phoneNum).then(() => {
       // 提示验证码发送成功
-      UniUtil.toast('验证码发送成功')
+      Toast.toast('验证码发送成功')
     })
   }
 
@@ -543,7 +593,7 @@ export default class LoginVue extends Vue {
   }
 
 
-  switchShowPhoneNum() {
+  switchShowPhoneNum () {
     if (this.showPhoneView) {
       this.phoneNumInputBlur()
       this.authCodeInputBlur()
@@ -595,10 +645,10 @@ export default class LoginVue extends Vue {
   loginByPhoneNumAndBindPhoneNum () {
     //再次校验
     if (!this.phoneNumberRight) {
-      return UniUtil.toast('请输入正确的手机号')
+      return Toast.toast('请输入正确的手机号')
     }
     if (!this.authCodeRight) {
-      return UniUtil.toast('请输入正确的验证码')
+      return Toast.toast('请输入正确的验证码')
     }
     if (!this.contractChecked) {
       return UniUtil.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')

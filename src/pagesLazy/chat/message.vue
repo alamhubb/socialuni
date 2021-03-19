@@ -332,7 +332,7 @@ export default class MessageVue extends Vue {
         BalaBala.unBindPhoneNum()
       }
     } else {
-      UniUtil.toast('不能发送空白内容')
+      Toast.toast('不能发送空白内容')
     }
   }
 
@@ -514,7 +514,7 @@ export default class MessageVue extends Vue {
         throw Error(e)
       }
     } else {
-      await UniUtil.toast('会话开启中，请稍等')
+      await Toast.toast('会话开启中，请稍等')
     }
     throw Error()
   }

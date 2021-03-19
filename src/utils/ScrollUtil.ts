@@ -1,5 +1,6 @@
 import UniUtil from '@/utils/UniUtil'
 import { Vue } from 'vue-property-decorator'
+import CommonUtil from '@/utils/CommonUtil'
 
 export default class ScrollUtil {
   static pageBottom = 3000000
@@ -20,7 +21,7 @@ export default class ScrollUtil {
         duration: 0
       })
     })*/
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       uni.pageScrollTo({
         scrollTop: scrollTop,
         duration: 0

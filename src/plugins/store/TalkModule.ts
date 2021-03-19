@@ -58,7 +58,7 @@ export default class TalkModule extends VuexModule {
       } else {
         this.talk.comments.splice(0, 1, res.data)
       }
-    }).catch(()=>{
+    }).catch(() => {
       if (this.comment) {
         this.comment.childComments.splice(0, 1)
       } else {

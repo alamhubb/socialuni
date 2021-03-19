@@ -5,4 +5,8 @@ export default class ReportAPI {
   static addReportAPI (reportAdd: ReportAddVO) {
     return http.post('report/addReport', reportAdd)
   }
+
+  static queryReportTypesAPI () {
+    return http.post<string[]>('report/queryReportTypes')
+  }
 }

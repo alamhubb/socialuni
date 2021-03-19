@@ -7,7 +7,7 @@ export default class SettingUtil {
       uni.getSetting({
         success (res) {
           if (res.authSetting[SettingUtil.userLocationKey]) {
-            resolve()
+            resolve(null)
           } else {
             reject(new Error('用户未授权'))
           }

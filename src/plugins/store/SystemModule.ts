@@ -1,45 +1,46 @@
-import {VuexModule, Module, Action} from 'vuex-class-modules'
+import { VuexModule, Module, Action } from 'vuex-class-modules'
 import WebsocketUtil from '@/utils/WebsocketUtil'
-import ProviderType, {Provider} from '@/const/ProviderType'
+import ProviderType, { Provider } from '@/const/ProviderType'
 import PlatformType from '@/const/PlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
-import AppStoreCom from "@/plugins/store/AppStoreCom";
-import UserStoreCom from "@/plugins/store/UserStoreCom";
+import AppStoreCom from '@/plugins/store/AppStoreCom'
+import UserStoreCom from '@/plugins/store/UserStoreCom'
+import TokenUtil from '@/utils/TokenUtil'
 
 //和终端相关的信息
-@Module({generateMutationSetters: true})
+@Module({ generateMutationSetters: true })
 export default class SystemModule extends VuexModule {
   //初始化以后第一步加载
   // 条件编译属性
   isApp = false
 
-  get isNApp() {
+  get isNApp () {
     return !this.isApp
   }
 
   isMp = false
 
-  get isNMp() {
+  get isNMp () {
     return !this.isMp
   }
 
   isH5 = false
 
-  get isNH5() {
+  get isNH5 () {
     return !this.isH5
   }
 
 
   isMpQQ = false
 
-  get isNMpQQ() {
+  get isNMpQQ () {
     return !this.isMpQQ
   }
 
   isMpWX = false
 
-  get isNMpWX() {
+  get isNMpWX () {
     return !this.isMpWX
   }
 
@@ -63,13 +64,13 @@ export default class SystemModule extends VuexModule {
   titleHeight = 0
   appVersion = 0
 
-  get isIosAndMpQQ() {
+  get isIosAndMpQQ () {
     return this.isIos && this.isMpQQ
   }
 
   //app启动的方法
   @Action
-  async appLunchAction() {
+  async appLunchAction () {
     // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
     this.getSystemInfo()
 
@@ -78,7 +79,9 @@ export default class SystemModule extends VuexModule {
 
     WebsocketUtil.websocketConnect(false)
     // appModule.initGlobalDataLoadAPI()
-    UserStoreCom.getMineUserInitDataAction()
+    if (TokenUtil.hasToken()) {
+      UserStoreCom.getMineUserInitDataAction()
+    }
     AppStoreCom.getHomeLoadAfterData()
     // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
     // appModule.initGlobalDataReadyAPI()
@@ -90,7 +93,7 @@ export default class SystemModule extends VuexModule {
 
   @Action
   // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
-  getSystemInfo() {
+  getSystemInfo () {
     // #ifdef APP-PLUS
     this.isApp = true
     this.platform = PlatformType.android

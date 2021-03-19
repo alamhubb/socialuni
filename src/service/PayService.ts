@@ -6,11 +6,11 @@ import MsgUtil from '@/utils/MsgUtil'
 import UserAPI from '@/api/UserAPI'
 
 export default class PayService {
-  static pay(){
+  static pay () {
 
   }
 
-  static vipPay(){
+  static vipPay () {
 
   }
 }

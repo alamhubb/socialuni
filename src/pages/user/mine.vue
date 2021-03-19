@@ -267,7 +267,7 @@ export default class MineVue extends Vue {
   initQuery () {
     if (this.user) {
       UserStore.getMineUserAction().then(() => {
-        UniUtil.toast('刷新成功')
+        Toast.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()
       })
@@ -282,7 +282,7 @@ export default class MineVue extends Vue {
     // #ifdef MP
     // #ifndef MP-TOUTIAO
     if (result.detail.errMsg !== Constants.loginSuccess) {
-      UniUtil.toast('您取消了登录')
+      Toast.toast('您取消了登录')
       return
     }
     // #endif

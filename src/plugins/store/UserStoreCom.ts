@@ -1,13 +1,13 @@
-import {notifyModule, platformModule, talkModule, userModule} from './index'
+import { notifyModule, platformModule, talkModule, userModule } from './index'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
-import AppInitDataVO from "@/model/common/AppInitDataVO";
-import ResultVO from "@/model/ResultVO";
-import TalkFilterUtil from "@/utils/TalkFilterUtil";
+import AppInitDataVO from '@/model/common/AppInitDataVO'
+import ResultVO from '@/model/ResultVO'
+import TalkFilterUtil from '@/utils/TalkFilterUtil'
 
 export default class UserStoreCom {
   //清空用户信息的组合操作
-  static clearUserInfoCom() {
+  static clearUserInfoCom () {
     TokenUtil.remove()
     userModule.setUser(null)
     WebsocketUtil.websocketClose()
@@ -18,21 +18,21 @@ export default class UserStoreCom {
   /**
    * 调用后台仅user和user初始化相关信息,通知列表，开启websocket连接
    */
-  static getMineUserInitDataActionByToken(token: string) {
+  static getMineUserInitDataActionByToken (token: string) {
     TokenUtil.set(token)
     //登陆之后重连websocket
     WebsocketUtil.websocketClose()
     return this.getMineUserInitDataAction()
   }
 
-  static getMineUserInitDataAction() {
+  static getMineUserInitDataAction () {
     return userModule.getMineUserAction().then(() => {
       //查询通知列表
       notifyModule.queryNotifiesAction()
     })
   }
 
-  static initUserStore(res: ResultVO<AppInitDataVO>) {
+  static initUserStore (res: ResultVO<AppInitDataVO>) {
     const user = res.data.user
     // 如果存在用户
     if (user) {
