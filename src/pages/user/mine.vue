@@ -97,7 +97,7 @@
     <login v-else></login>
 
 
-    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
+<!--    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
       <view v-if="user" class="pb-xl px-sm pt">
         <q-row class="text-bold">
           <view class="mr">
@@ -125,7 +125,7 @@
                   清池个人信息
                 </view>
               </view>
-              <!--                不为自己且未关注-->
+              &lt;!&ndash;                不为自己且未关注&ndash;&gt;
               <view class="col-center">
                 <u-icon name="checkmark" color="success"></u-icon>
               </view>
@@ -140,7 +140,7 @@
           </view>
         </q-row>
       </view>
-    </u-popup>
+    </u-popup>-->
   </view>
 </template>
 

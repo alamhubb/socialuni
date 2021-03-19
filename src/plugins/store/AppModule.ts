@@ -40,7 +40,7 @@ export default class AppModule extends VuexModule {
   threeSecretKey = ''
   threeUserId = ''
   threeProviderAppId = ''
-  threeAuthType = ''
+  threeAuthType = ThreeAuthType.user
   // threeProviderType = ''
 
   //是否为三方授权
@@ -48,11 +48,11 @@ export default class AppModule extends VuexModule {
     return !!this.threeSecretKey
   }
 
-  get isAuthUser() {
+  get isAuthUser () {
     return this.isThreeAuth && this.threeAuthType === ThreeAuthType.user
   }
 
-  get isAuthPhone() {
+  get isAuthPhone () {
     return this.isThreeAuth && this.threeAuthType === ThreeAuthType.phone
   }
 

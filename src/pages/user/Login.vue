@@ -15,16 +15,16 @@
       <!--      上半部，有用户，授权-->
       <!--      上半部，手机号登陆展示-->
 
-      <div class="flex-none col-row-center">
-        <div class="font-xl font-bold h40px">欢迎使用清池社交联盟授权</div>
-        <div v-if="!user" class="font-md u-type-warning">建议使用微信或QQ登陆</div>
+      <div class="flex-none col-row-center h80px">
+        <div class="font-xl font-bold">欢迎使用清池社交联盟授权</div>
+        <div v-if="showPhoneView" class="font-md u-type-warning mt-sm">建议使用微信或QQ登陆</div>
       </div>
 
       <view class="mt">
         <!--    如果是绑定手机号，或者手机号登陆，就展示手机号。-->
         <!--        手机号界面-->
         <!--        35*4 = 140 +30+80 = 250高度-->
-        <view v-if="showPhoneView" class="h200px">
+        <view v-if="showPhoneView" class="h150px">
           <!--          如果没登录-->
 <!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
             <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
@@ -102,7 +102,7 @@
         <!--      上半部，无用户，授权，显示三方应用申请信息+提示绑定手机号-->
         <!--      上半部，有用户，授权，无手机号，显示三方应用申请信息+提示绑定手机号-->
         <!--      上半部，有用户，授权-->
-        <view v-else class="h200px flex-col">
+        <view v-else class="h150px flex-col">
           <view v-if="isThreeAuth" class="flex-1">
             <!--            三方授权显示三方的信息-->
             <view class="row-col-center px-sm py-xs">
@@ -118,7 +118,7 @@
                   获取您的昵称、头像、地区、性别及动态
                 </view>
                 <!-- 如果为三方授权， 不为手机号授权， 如果有用户显示出来用的信息-->
-                <view v-if="user" class="flex-row pa-sm u-border-top-bottom">
+                <view v-if="user" class="flex-row pa-sm u-border-top-bottom h65px">
                   <u-avatar class="mr-sm" src="/static/logo.png" mode="square"></u-avatar>
                   <view class="col-around flex-1">
                     <view>不会魔法</view>
@@ -162,7 +162,7 @@
         </view>
       </view>
 
-      <div v-if="!hasPhoneNum && !isAuthUser" class="row-center">
+      <div v-if="!hasPhoneNum && !isAuthUser" class="row-center pt-sm pb-sm">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
@@ -403,9 +403,6 @@ import PageUtil from '@/utils/PageUtil'
 import UserStore from '@/plugins/store/UserStore'
 import LoginAPI from '@/api/LoginAPI'
 import ConfigMap from '@/const/ConfigMap'
-import UCheckbox from 'uview-ui/components/u-checkbox/u-checkbox.vue'
-import UButton from 'uview-ui/components/u-button/u-button.vue'
-import QIcon from '@/components/q-icon/q-icon.vue'
 import SkipUrlConst from '@/const/SkipUrlConst'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import LoginService from '@/pages/user/LoginService'
