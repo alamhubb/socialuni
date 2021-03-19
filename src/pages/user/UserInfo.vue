@@ -640,7 +640,7 @@ export default class UserInfo extends Vue {
 
   moreAction () {
     if (this.isMine) {
-      const menuList: string [] = ['刷新', '编辑', '退出登陆']
+      const menuList: string [] = ['刷新', '编辑', '退出登录']
       UniUtil.actionSheet(menuList).then((index: number) => {
         if (index === 0) {
           this.refreshMine()

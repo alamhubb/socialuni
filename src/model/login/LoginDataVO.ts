@@ -9,9 +9,9 @@ export default class LoginDataVO {
 
   openId = ''
   unionId = ''
-  //app三方登陆使用
+  //app三方登录使用
   accessToken = ''
-  //小程序三方登陆使用
+  //小程序三方登录使用
   code = ''
 
   nickName = ''

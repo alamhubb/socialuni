@@ -129,7 +129,7 @@ export default class AppModule extends VuexModule {
       }
     }).finally(() => {
       tabObj.loadMore = LoadMoreType.more
-      //延迟1秒。避免user watch重复查询，只要在这些时间内不登陆就没问题，只要在watch之后就没问题。在差的机子500毫秒也反应过来了吧。
+      //延迟1秒。避免user watch重复查询，只要在这些时间内不登录就没问题，只要在watch之后就没问题。在差的机子500毫秒也反应过来了吧。
       UniUtil.delayTime(500).then(() => {
         tabObj.firstLoad = false
       })

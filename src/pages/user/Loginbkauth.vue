@@ -1,6 +1,6 @@
 <template>
   <!--  全部字体加大一号，白色背景，垂直居中，子元素宽度占满-->
-  <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登陆-->
+  <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white col-all-center">
 
     <div v-if="goBackCountDown" class="text-bold text-lg">
@@ -13,9 +13,9 @@
       <!--      上半部，无用户，授权，显示三方应用申请信息+提示绑定手机号-->
       <!--      上半部，有用户，授权，无手机号，显示三方应用申请信息+提示绑定手机号-->
       <!--      上半部，有用户，授权-->
-      <!--      上半部，手机号登陆展示-->
+      <!--      上半部，手机号登录展示-->
       <view>
-        <!--    如果是绑定手机号，或者手机号登陆，就展示手机号。-->
+        <!--    如果是绑定手机号，或者手机号登录，就展示手机号。-->
         <!--        手机号界面-->
         <!--        35*4 = 140 +30+80 = 250高度-->
         <view v-if="showPhoneView" class="h250px">
@@ -23,8 +23,8 @@
           <view v-if="!hasUser" class="u-type-warning-light-bg row-col-center h80px px-sm">
             <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
             <view class="ml-smm text-bold">
-              <text class="u-type-primary">欢迎登陆清池，建议使用 微信 或 QQ 登陆</text>
-              ，无需输入，一键登陆更便捷
+              <text class="u-type-primary">欢迎登录清池，建议使用 微信 或 QQ 登录</text>
+              ，无需输入，一键登录更便捷
             </view>
           </view>
           <view v-else class="h80px"></view>
@@ -90,7 +90,7 @@
           </view>
         </view>
 
-        <!--        登陆界面，展示logo-->
+        <!--        登录界面，展示logo-->
         <!--      上半部，无用户，无授权，显示logo+提示绑定手机号-->
         <!--      上半部，无用户，授权，显示三方应用申请信息+提示绑定手机号-->
         <!--      上半部，有用户，授权，无手机号，显示三方应用申请信息+提示绑定手机号-->
@@ -136,10 +136,10 @@
                   <text v-if="hasPhoneNum">：186*****595</text>
                 </view>
               </template>
-              <!--  如果没有用户，展示提示请登陆-->
-              <!--  如果为三方授权，用户授权，没有登陆，则显示，上面这俩可以合并-->
+              <!--  如果没有用户，展示提示请登录-->
+              <!--  如果为三方授权，用户授权，没有登录，则显示，上面这俩可以合并-->
               <view v-if="!hasUser" class="pa-sm">
-                您未登录，点击登陆进行授权
+                您未登录，点击登录进行授权
               </view>
               <view v-else-if="isAuthPhone&&!hasPhoneNum" class="px-sm py-xs row-col-center">
                 <!--                请点击绑定手机号进行授权-->
@@ -153,7 +153,7 @@
           </view>
           <!--          只有不为三方授权才显示logo-->
           <div v-else class="flex-1 row-center pb-md">
-            <!--        登陆界面，展示logo-->
+            <!--        登录界面，展示logo-->
             <image class="radius flex-none h100p"
                    mode="aspectFit"
                    src="/static/img/logo.png"
@@ -175,7 +175,7 @@
       <div class="pt-sm h50px">
         <view v-if="!hasUser" class="row-center row-grid u-type-info">
           <text class="mb-nn">
-            登陆即代表同意
+            登录即代表同意
           </text>
           <navigator :url="userAgreementUrl" class="text-blue">
             《用户协议》
@@ -191,28 +191,28 @@
 
       <view class="h175px">
         <!--          已登录用户绑定手机号，
-                  使用手机号登陆，
-                  直接登陆，
-                  授权登陆
+                  使用手机号登录，
+                  直接登录，
+                  授权登录
                   授权绑定手机号，
                   跳转过来用户没绑定手机号，如果未登录，提示登录，如果已登录，提示授权，未绑定手机号提示绑定手机号，已绑定提示授权。
                   提供返回按钮，无论怎样，如果是第三方跳转过来的始终显示一个返回应用-->
 
-        <!--          未登录，使用手机号登陆-->
+        <!--          未登录，使用手机号登录-->
         <!--            如果有手机号，则直接授权，下面是不授权返回、-->
-        <!--            没手机号，则是微信的话显示 绑定微信手机号，下面是手机号授权。就不是手机号登陆，就是手机号绑定-->
+        <!--            没手机号，则是微信的话显示 绑定微信手机号，下面是手机号授权。就不是手机号登录，就是手机号绑定-->
 
         <!--            如果为第三方授权，如果为授权手机号-->
         <view class="col-row-center">
-          <!--            手机号登陆界面-->
+          <!--            手机号登录界面-->
           <template v-if="showPhoneView">
-            <!--            如果是输入手机号页面，未登录，提示登陆-->
+            <!--            如果是输入手机号页面，未登录，提示登录-->
             <button :disabled="loginButtonDisabled"
                     class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
             >
               <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
               <template v-if="!hasUser">
-                手机号登陆{{ isAuthPhone ? '并授权' : '' }}
+                手机号登录{{ isAuthPhone ? '并授权' : '' }}
               </template>
               <!--            如果是输入手机号页面，已登录，如果不为三方授权-->
               <template v-else-if="hasUser&&!hasPhoneNum">
@@ -224,7 +224,7 @@
           <!--            微信登录界面，非手机号登录界面-->
           <template v-else>
             <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
-            <!-- 只要不为QQ小程序平台都可以使用微信登陆-->
+            <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <button :disabled="!platformLoginEnable"
                     :open-type="getBtnOpenType"
                     class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
@@ -239,7 +239,7 @@
                 <!--              已登录，三方授权，授权用户信息-->
                 <!--                授权那用户信息无需关心手机号绑定状态-->
                 <template v-if="isAuthUser">
-                  <!-- 只要不为QQ小程序平台都可以使用微信登陆-->
+                  <!-- 只要不为QQ小程序平台都可以使用微信登录-->
                   <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
                   授权用户信息
                 </template>
@@ -265,11 +265,11 @@
           <view class="row-col-center w40p" @click="threeAuth=!threeAuth">
             <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
             <view class="text-gray u-border-bottom">
-              <!--            手机号登陆界面-->
+              <!--            手机号登录界面-->
               <template v-if="showPhoneView">
-                <!--            如果是输入手机号页面，未登录，提示手机号登陆-->
+                <!--            如果是输入手机号页面，未登录，提示手机号登录-->
                 <template v-if="!hasUser">
-                  {{ isAuthPhone ? '不授权' : '不登陆' }}返回
+                  {{ isAuthPhone ? '不授权' : '不登录' }}返回
                   <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                 </template>
                 <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
@@ -283,7 +283,7 @@
               <template v-else>
                 <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
                 <template v-if="!hasUser">
-                  <!-- 只要不为QQ小程序平台都可以使用微信登陆-->
+                  <!-- 只要不为QQ小程序平台都可以使用微信登录-->
                   {{ isAuthUser ? '不授权' : '不登录' }}返回
                   <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                 </template>
@@ -312,11 +312,11 @@
           </view>
           <view @click="switchShowPhoneNum" class="row-end-center w40p">
             <view class="text-gray">
-              <!--            手机号登陆界面-->
+              <!--            手机号登录界面-->
               <template v-if="showPhoneView">
-                <!--            如果是输入手机号页面，未登录，提示手机号登陆-->
+                <!--            如果是输入手机号页面，未登录，提示手机号登录-->
                 <template v-if="!hasUser">
-                  其他方式{{ isAuthPhone ? '授权' : '登陆' }}
+                  其他方式{{ isAuthPhone ? '授权' : '登录' }}
                 </template>
                 <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
                 <template v-else-if="hasUser&&!hasPhoneNum">
@@ -328,7 +328,7 @@
               <template v-else>
                 <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
                 <template v-if="!hasUser">
-                  <!-- 只要不为QQ小程序平台都可以使用微信登陆-->
+                  <!-- 只要不为QQ小程序平台都可以使用微信登录-->
                   手机号{{ isAuthUser ? '授权' : '登录' }}
                 </template>
                 <!--            如果已登录有用户-->
@@ -409,7 +409,7 @@ export default class LoginVue extends Vue {
   platformLoginClick(loginResult) {
     if (!this.hasUser) {
       this.mpWxLogin(loginResult)
-      //登陆完成之后，只有为授权用户信息跳转会小程序
+      //登录完成之后，只有为授权用户信息跳转会小程序
     } else if (this.isAuthPhone && !this.hasPhoneNum) {
       this.getPhoneNumberByWx(loginResult)
       //只有为用户授权手机号，跳转回三方，否则停留
@@ -444,7 +444,7 @@ export default class LoginVue extends Vue {
         console.log('授权用户手机号')
       })
     } else {
-      console.error('错误的登陆逻辑分支')
+      console.error('错误的登录逻辑分支')
     }
   }
 
@@ -539,7 +539,7 @@ export default class LoginVue extends Vue {
   //手机号登录 {{并授权}} 这种只返回用户信息，因为请求时用户授权的请求
   //手机号绑定 {{并授权}}
 
-  //如果三方登陆，且不为授权手机号，这种情况先可以不考虑
+  //如果三方登录，且不为授权手机号，这种情况先可以不考虑
   //仅授权用户信息返回
   //同时授权手机号返回
 
@@ -612,7 +612,7 @@ export default class LoginVue extends Vue {
     }
   }
 
-  /* //不显示登陆
+  /* //不显示登录
    get showMpLoginBtn() {
      //不为手机登录，或者都不为焦点
      return !this.showPhoneView || (!this.phoneNumFocus && !this.authCodeFocus)
@@ -696,7 +696,7 @@ export default class LoginVue extends Vue {
     PageUtil.goBack()
   }
 
-  //手机号登陆和手机号绑定
+  //手机号登录和手机号绑定
   loginByPhoneNumAndBindPhoneNum() {
     //再次校验
     if (!this.phoneNumberRight) {

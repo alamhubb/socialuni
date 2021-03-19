@@ -26,7 +26,7 @@ export default class SystemModule extends VuexModule {
   // 条件编译属性
   // ios android h5,默认安卓
   platform = PlatformType.android
-  // 登陆平台
+  // 登录平台
   provider: Provider = ProviderType.qq
   isIos = false
   systemInfo: GetSystemInfoResult = null
@@ -50,7 +50,7 @@ export default class SystemModule extends VuexModule {
     //校验更新
     PlatformUtils.checkUpdate()
     WebsocketUtil.websocketConnect(false)
-    // 初始化数据看一下这些请求是否可以合并 登陆之后也要链接websocket
+    // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
     appModule.initGlobalDataLoadAPI()
     appModule.initGlobalDataReadyAPI()
     // 测试时使用，生产时在talk也ready后查询

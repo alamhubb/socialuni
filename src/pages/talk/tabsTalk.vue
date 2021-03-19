@@ -92,7 +92,7 @@
                 您还没有关注其他人
               </view>
               <view v-else class="row-center h500px pt-100px text-bold text-gray text-lg" @click="toLoginVue">
-                您还没有登录，点击登陆
+                您还没有登录，点击登录
               </view>
             </view>
           </scroll-view>

@@ -9,7 +9,7 @@ export default class BalaBala {
     if (!user) {
       BalaBala.unLoginMessage()
     } else {
-      // 如果登陆了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
+      // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
       UniUtil.action('绑定手机号才能发布内容，是否跳转至绑定手机号页面')
         .then(() => {
           // #ifdef MP-WEIXIN

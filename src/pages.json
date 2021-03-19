@@ -43,7 +43,7 @@
     {
       "path": "pages/user/Login",
       "style": {
-        "navigationBarTitleText": "登陆"
+        "navigationBarTitleText": "登录"
       }
     }
   ],

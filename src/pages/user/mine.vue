@@ -65,7 +65,7 @@
           <q-row-item>
             <view class="row-col-center flex-auto" @click="logout">
               <view class="row-col-center flex-auto">
-                退出登陆
+                退出登录
               </view>
               <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
             </view>
@@ -93,7 +93,7 @@
       <msg-input v-if="showMsgInput">
       </msg-input>
     </view>
-    <!--      title="欢迎登陆清池app"-->
+    <!--      title="欢迎登录清池app"-->
     <login v-else></login>
 
 

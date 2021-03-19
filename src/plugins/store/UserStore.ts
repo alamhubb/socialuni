@@ -28,7 +28,7 @@ export default class UserStore {
     const user = res.data.user
     // 如果存在用户
     if (user) {
-      //首次登陆且用户有年龄,默认设置筛选上下5岁的用户
+      //首次登录且用户有年龄,默认设置筛选上下5岁的用户
       if (!TalkFilterUtil.getNotFirstSetAge() && user.age) {
         const minAge = user.age - 5
         const maxAge = user.age + 5
@@ -38,7 +38,7 @@ export default class UserStore {
       }
       appModule.notifies = res.data.notifies
       UserStore.setMineUser(res.data.user)
-      // 所有操作都是登陆后才可以操作的
+      // 所有操作都是登录后才可以操作的
       platformModule.qq_talkTemplateId = res.data.qq_talkTemplateId
       platformModule.qq_commentTemplateId = res.data.qq_commentTemplateId
       platformModule.qq_reportResultTemplateId = res.data.qq_reportResultTemplateId
@@ -76,7 +76,7 @@ export default class UserStore {
   }
 
   static destroyAccount () {
-    return UniUtil.action('是否注销账号，7天内不再登陆，账号将彻底清空无法使用').then(() => {
+    return UniUtil.action('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
       UserAPI.destroyAccountAPI().then(() => {
         UserStore.clearUser()
         UniUtil.toast('注销成功')

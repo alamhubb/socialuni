@@ -3,7 +3,7 @@
     <view class="px pt-10 pb-10px col-between h100r">
       <!--
       有用户时，百分百显示。绑定手机号时要显示
-      或者就是为app时,app没用户登陆时要显示
+      或者就是为app时,app没用户登录时要显示
       -->
       <view class="h460rpx row-center">
         <!--        手机号界面-->
@@ -12,8 +12,8 @@
           <view v-if="!user" class="u-type-warning-light-bg row-col-center mx px-sm py-xs mb-lg">
             <q-icon size="50" icon="volume-fill" class="u-type-warning"></q-icon>
             <view class="ml text-bold">
-              <text class="u-type-primary">建议使用 QQ 或 微信 登陆</text>
-              ，一键登陆，无需输入，登陆更便捷，账号不遗忘
+              <text class="u-type-primary">建议使用 QQ 或 微信 登录</text>
+              ，一键登录，无需输入，登录更便捷，账号不遗忘
             </view>
           </view>
           <view v-else class="mt-lg"></view>
@@ -93,7 +93,7 @@
           </view>
         </view>
 
-        <!--        登陆界面，展示logo-->
+        <!--        登录界面，展示logo-->
         <view v-else>
           <image class="radius flex-none size180"
                  src="/static/img/logo.png"
@@ -128,18 +128,18 @@
             </view>
           </view>
 
-          <!--          未登录，使用手机号登陆-->
+          <!--          未登录，使用手机号登录-->
           <view v-else>
             <view v-if="!phoneNumFocus && !authCodeFocus" class="mt-xs col-row-center">
-              <!-- 只要不为QQ小程序平台都可以使用微信登陆-->
+              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <button class="bg-gradual-wx text-white text-lgg bd-none  mt-sm bg-active round w80vw" @click="wxLogin">
                 <q-icon color="white" icon="weixin-fill" size="36" class="mr-sm"></q-icon>
-                微信登陆
+                微信登录
               </button>
 
               <button class="bg-gradual-qq text-white text-lgg bd-none mt bg-active round w80vw" @click="qqLogin">
                 <q-icon color="white" icon="qq-fill" size="34" class="mr-sm"></q-icon>
-                QQ登陆
+                QQ登录
               </button>
             </view>
             <view class="mt px">
@@ -349,7 +349,7 @@ export default class LoginVue extends Vue {
     PageUtil.goBack()
   }
 
-  //手机号登陆和手机号绑定
+  //手机号登录和手机号绑定
   loginByPhoneNumAndBindPhoneNum () {
     //再次校验
     if (!this.phoneNumberRight) {
