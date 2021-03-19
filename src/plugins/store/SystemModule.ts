@@ -1,24 +1,48 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
+import {VuexModule, Module, Action} from 'vuex-class-modules'
 import WebsocketUtil from '@/utils/WebsocketUtil'
-import { appModule } from '@/plugins/store/index'
-import ProviderType, { Provider } from '@/const/ProviderType'
+import ProviderType, {Provider} from '@/const/ProviderType'
 import PlatformType from '@/const/PlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
+import AppStoreCom from "@/plugins/store/AppStoreCom";
+import UserStoreCom from "@/plugins/store/UserStoreCom";
 
-@Module({ generateMutationSetters: true })
+//和终端相关的信息
+@Module({generateMutationSetters: true})
 export default class SystemModule extends VuexModule {
+  //初始化以后第一步加载
   // 条件编译属性
   isApp = false
-  isNApp = true
+
+  get isNApp() {
+    return !this.isApp
+  }
+
   isMp = false
-  isNMp = true
-  isMpQQ = false
-  isNMpQQ = true
-  isMpWX = false
-  isNMpWX = true
+
+  get isNMp() {
+    return !this.isMp
+  }
+
   isH5 = false
-  isNH5 = true
+
+  get isNH5() {
+    return !this.isH5
+  }
+
+
+  isMpQQ = false
+
+  get isNMpQQ() {
+    return !this.isMpQQ
+  }
+
+  isMpWX = false
+
+  get isNMpWX() {
+    return !this.isMpWX
+  }
+
 
   //推送使用，用于app端记录给谁推送，区分用户
   clientid = ''
@@ -39,31 +63,36 @@ export default class SystemModule extends VuexModule {
   titleHeight = 0
   appVersion = 0
 
-  get isIosAndMpQQ () {
+  get isIosAndMpQQ() {
     return this.isIos && this.isMpQQ
   }
 
+  //app启动的方法
   @Action
-  appInit () {
-    // 执行获取系统信息的函数
+  async appLunchAction() {
+    // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
     this.getSystemInfo()
+
     //校验更新
     PlatformUtils.checkUpdate()
+
     WebsocketUtil.websocketConnect(false)
+    // appModule.initGlobalDataLoadAPI()
+    UserStoreCom.getMineUserInitDataAction()
+    AppStoreCom.getHomeLoadAfterData()
     // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
-    appModule.initGlobalDataLoadAPI()
-    appModule.initGlobalDataReadyAPI()
+    // appModule.initGlobalDataReadyAPI()
     // 测试时使用，生产时在talk也ready后查询
     // appModule.initGlobalDataReadyAPI()
     // 不为app平台在这里设置platform否则在systemInfo中设置
   }
 
+
   @Action
   // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
-  getSystemInfo () {
+  getSystemInfo() {
     // #ifdef APP-PLUS
     this.isApp = true
-    this.isNApp = false
     this.platform = PlatformType.android
     //获取app版本号
     plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
@@ -74,24 +103,21 @@ export default class SystemModule extends VuexModule {
     // #endif
     // #ifdef MP
     this.isMp = true
-    this.isNMp = false
     this.platform = PlatformType.mp
     // #endif
     // #ifdef MP-WEIXIN
     this.isMpWX = true
-    this.isNMpWX = false
     this.provider = ProviderType.wx
     // #endif
     // #ifdef MP-QQ
     this.isMpQQ = true
-    this.isNMpQQ = false
     this.provider = ProviderType.qq
     // #endif
     // #ifdef H5
     this.isH5 = true
-    this.isNH5 = false
     this.platform = PlatformType.h5
     // #endif
+
     // 判断是否为ios平台
     const systemInfo: GetSystemInfoResult = uni.getSystemInfoSync()
     this.systemInfo = systemInfo
