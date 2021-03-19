@@ -13,7 +13,7 @@ import PageUtil from '@/utils/PageUtil'
 Vue.use(uView)
 
 Vue.component('MsgInput', MsgInput)
-Vue.component('Login', Login)
+// Vue.component('Login', Login)
 
 Vue.config.productionTip = false
 

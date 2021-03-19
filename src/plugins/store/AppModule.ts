@@ -18,6 +18,7 @@ import AppInitQueryVO from '@/model/common/AppInitQueryVO'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import LoadMoreType from '@/const/LoadMoreType'
 import UniUtil from '@/utils/UniUtil'
+import ThreeAuthType from '@/const/ThreeAuthType'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -35,10 +36,26 @@ export default class AppModule extends VuexModule {
   appConfig: any = {}
   onlineUsersCount = 0
 
+  //三方授权时携带的参数
   threeSecretKey = ''
   threeUserId = ''
   threeProviderAppId = ''
-  threeProviderType = ''
+  threeAuthType = ''
+  // threeProviderType = ''
+
+  //是否为三方授权
+  get isThreeAuth () {
+    return !!this.threeSecretKey
+  }
+
+  get isAuthUser() {
+    return this.isThreeAuth && this.threeAuthType === ThreeAuthType.user
+  }
+
+  get isAuthPhone() {
+    return this.isThreeAuth && this.threeAuthType === ThreeAuthType.phone
+  }
+
 
   get unreadNotifies (): UnreadNotifyVO [] {
     return this.notifies.filter(item => !item.hasRead)

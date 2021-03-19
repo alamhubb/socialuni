@@ -93,40 +93,9 @@
       <msg-input v-if="showMsgInput">
       </msg-input>
     </view>
-    <view v-else class="h100r col-all-center bg-white">
-      <!--      title="欢迎登陆清池app"-->
-      <u-navbar :is-back="false" title-bold>
-        <view class="flex-row w100vw flex-auto">
-          <view class="ml-xl text-bold text-lg w100r">
-            欢迎登陆清池app
-          </view>
-        </view>
-      </u-navbar>
-      <!--  #ifndef MP -->
-      <login></login>
-      <!--  #endif -->
-      <!-- 小程序平台-->
-      <!--  #ifdef MP -->
-      <!-- 小程序平台-->
-      <view class="text-black text-xl">未登录，点击登录按钮，进行登录操作</view>
-      <!--  #ifdef MP-TOUTIAO -->
-      <!--            头条平台和其他平台处理方式不同-->
-      <button :disabled="disabledLoginBtn" @click="login" type="primary"
-              class="v-btn mt-20px w70vw bg-green">
-        登录
-        <q-icon size="32" icon="account_box"></q-icon>
-      </button>
-      <!--  #endif -->
-      <!--  #ifndef MP-TOUTIAO -->
-      <button v-if="!user" :disabled="disabledLoginBtn"
-              open-type="getUserInfo" @getuserinfo="login"
-              class="cu-btn bg-cyan mt-20px w70vw">
-        登录
-        <q-icon size="32" icon="account_box"></q-icon>
-      </button>
-      <!--  #endif -->
-      <!--  #endif -->
-    </view>
+    <!--      title="欢迎登陆清池app"-->
+    <login v-else></login>
+
 
     <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
       <view v-if="user" class="pb-xl px-sm pt">
@@ -196,11 +165,13 @@ import QRow from '@/components/q-row/q-row.vue'
 import QBar from '@/components/q-bar/q-bar.vue'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import OpenDataAPI from '@/api/OpenDataAPI'
+import Login from '@/pages/user/Login.vue'
 
 const userStore = namespace('user')
 
 @Component({
   components: {
+    Login,
     QRowItem,
     QBar,
     QRow,

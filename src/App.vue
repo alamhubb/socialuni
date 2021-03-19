@@ -6,7 +6,7 @@ import UniUtil from '@/utils/UniUtil'
 export default Vue.extend({
   mpType: 'app',
   onLaunch (params) {
-    UniUtil.toastLong('正确版本')
+    // UniUtil.toastLong('正确版本')
     if (params.referrerInfo) {
       const info = params.referrerInfo
       appModule.threeProviderAppId = info.appId
