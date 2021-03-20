@@ -6,25 +6,18 @@
 }
 
 page {
-  height: 100vh;
-  background-color: #FAFAFA;
+  height: 100%;
+  //background-color: #FAFAFA;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
   color: #303133;
   font-size: 14px;
 }
 
+//隐藏scroll-view的滚动条
 ::-webkit-scrollbar {
   display: none;
 }
 
-view {
-  line-height: 1.8;
-}
-
-text {
-  line-height: 1.4;
-}
-
-/*
 view,
 scroll-view,
 swiper,
@@ -33,23 +26,11 @@ input,
 textarea,
 label,
 navigator,
-image {
-  line-height: 1.8;
-}
-
+image,
 text {
-  line-height: 1;
-}*/
+  line-height: 1.4;
+}
 
 ul {
   list-style: none;
-}
-
-.bg-primary {
-  background: $main-color;
-  color: #FFFFFF;
-}
-
-uni-page-body {
-  height: 100%
 }
