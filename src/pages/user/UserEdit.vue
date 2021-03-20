@@ -43,8 +43,8 @@
           <view class="title">
             所在地
           </view>
-          <input :cursor-spacing="20" v-model="location" maxlength="10" placeholder="所在地"/>
-          <view class="uni-icon uni-icon-clear" v-if="location" @click="clearLocation"></view>
+          <input :cursor-spacing="20" v-model="city" maxlength="10" placeholder="所在地"/>
+          <view class="uni-icon uni-icon-clear" v-if="city" @click="clearLocation"></view>
         </view>
 
         <!--        todo qq不支持联系方式，改为判断qq一件加好友-->
@@ -109,10 +109,10 @@ import UserAPI from '@/api/UserAPI'
 import { namespace } from 'vuex-class'
 import { parseDate } from '@/utils'
 import JsonUtils from '@/utils/JsonUtil'
-import Alert from "../../utils/Alert";
-import Toast from "@/utils/Toast";
-import {userModule} from "@/plugins/store";
-import UserVO from "@/model/user/UserVO";
+import Alert from '../../utils/Alert'
+import Toast from '@/utils/Toast'
+import { userModule } from '@/plugins/store'
+import UserVO from '@/model/user/UserVO'
 
 const userStore = namespace('user')
 
@@ -122,7 +122,7 @@ export default class UserEdit extends Vue {
   nickname = ''
   gender = '女'
   birthday = '1999-01-01'
-  location = ''
+  city = ''
   wxAccount = ''
   contactAccount = ''
   qqAccount = ''
@@ -140,7 +140,7 @@ export default class UserEdit extends Vue {
       this.nickname = this.user.nickname || ''
       this.gender = this.user.gender || '女'
       this.birthday = this.user.birthday || '1999-01-01'
-      this.location = this.user.location || ''
+      this.city = this.user.city || ''
       this.contactAccount = this.user.contactAccount || ''
       this.wxAccount = this.user.wxAccount || ''
       this.qqAccount = this.user.qqAccount || ''
@@ -164,7 +164,7 @@ export default class UserEdit extends Vue {
   }
 
   clearLocation () {
-    this.location = ''
+    this.city = ''
   }
 
   clearWxAccount () {
@@ -199,7 +199,7 @@ export default class UserEdit extends Vue {
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
       userCopy.birthday = this.birthday
-      userCopy.location = this.location
+      userCopy.location = this.city
       userCopy.contactAccount = this.contactAccount
       userCopy.wxAccount = this.wxAccount
       userCopy.qqAccount = this.qqAccount

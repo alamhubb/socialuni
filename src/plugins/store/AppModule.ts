@@ -8,7 +8,7 @@ import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import SocialAuthType from '@/const/SocialAuthType'
 import ReportAPI from '@/api/ReportAPI'
 import QingchiAPI from '@/api/QingchiAPI'
-import GenderType from "@/const/GenderType";
+import GenderType from '@/const/GenderType'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -32,12 +32,13 @@ export default class AppModule extends VuexModule {
   //三方授权时携带的参数
   threeSecretKey = ''
   threeUserId = ''
-  threeProviderAppId = ''
+  threeAppId = ''
   threeAuthType = ''
   // threeProviderType = ''
 
   //是否为三方授权
   get isThreeAuth () {
+    console.log(this.threeSecretKey)
     return !!this.threeSecretKey
   }
 

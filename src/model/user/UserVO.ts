@@ -3,7 +3,7 @@ import ImgFileVO from '@/model/ImgFileVO'
 import ChatVO from '@/model/chat/ChatVO'
 
 export default class UserVO {
-  id: number = null
+  id: string = null
   nickname: string = null
   gender: string = null
   avatar: string = null

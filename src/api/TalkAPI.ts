@@ -8,39 +8,38 @@ import DistrictVO from '@/model/DistrictVO'
 import TalkDeleteVO from '@/model/talk/TalkDeleteVO'
 import CommentDeleteVO from '@/model/comment/CommentDeleteVO'
 import ImgFileVO from '@/model/ImgFileVO'
-import JsonUtil from "@/utils/JsonUtil";
 
 export default class TalkAPI {
-  static addTalkAPI(content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[]) {
-    const data: TalkAddVO = new TalkAddVO(content, imgs, district, tagIds)
+  static addTalkAPI (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string) {
+    const data: TalkAddVO = new TalkAddVO(content, imgs, district, tagIds, visibleType)
     return http.post('talk/addTalk', data)
   }
 
-  static queryTalksAPI(talkIds: number[], tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
+  static queryTalksAPI (talkIds: number[], tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
     return http.post('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, homeType, gender, minAge, maxAge))
   }
 
-  static queryUserTalksAPI(userId: number, talkIds: number[]) {
+  static queryUserTalksAPI (userId: number, talkIds: number[]) {
     return http.post('talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
   }
 
-  static queryTalkDetailAPI(talkId: number) {
+  static queryTalkDetailAPI (talkId: number) {
     return http.post('talk/queryTalkDetail?talkId=' + talkId)
   }
 
-  static addCommentAPI(comment: CommentAddVO) {
+  static addCommentAPI (comment: CommentAddVO) {
     return http.post('comment/addComment', comment)
   }
 
-  static addHugAPI(hug: HugAddVO) {
+  static addHugAPI (hug: HugAddVO) {
     return http.post('hug/addHug', hug)
   }
 
-  static deleteTalkAPI(talkId: number) {
+  static deleteTalkAPI (talkId: number) {
     return http.post('talk/deleteTalk', new TalkDeleteVO(talkId))
   }
 
-  static deleteCommentAPI(commentId: number) {
+  static deleteCommentAPI (commentId: number) {
     return http.post('comment/deleteComment', new CommentDeleteVO(commentId))
   }
 }

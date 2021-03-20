@@ -1,6 +1,6 @@
-import UserVO from "@/model/user/UserVO"
+import UserVO from '@/model/user/UserVO'
 
-export interface AuthUserInfoResultVO {
+export default class AuthUserInfoResultVO {
   tokenCode: string
   user: UserVO
 }

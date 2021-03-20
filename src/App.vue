@@ -1,9 +1,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { appModule, systemModule } from '@/plugins/store'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
+import SocialAuthType from '@/const/SocialAuthType'
 
 export default Vue.extend({
   mpType: 'app',
@@ -11,12 +10,15 @@ export default Vue.extend({
   onLaunch (params) {
     //页面启动，启动函数
     systemModule.appLunchAction()
+    appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
+    appModule.threeUserId = '10081'
+    appModule.threeAuthType = SocialAuthType.user
     // Toast.toastLong('正确版本')
     //如果有跳转信息
     if (params.referrerInfo) {
       const info = params.referrerInfo
       //获取三方的appid
-      appModule.threeProviderAppId = info.appId
+      appModule.threeAppId = info.appId
       //如果有跳转信息
       if (info.extraData) {
         const extraData: SocialUniAuthVO = info.extraData

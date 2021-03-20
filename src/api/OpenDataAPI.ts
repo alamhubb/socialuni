@@ -3,18 +3,12 @@ import AppUpdateVO from '@/model/app/AppUpdateVO'
 import AppUpdateResultVO from '@/model/app/AppUpdateResultVO'
 import FrontErrorLogVO from '@/model/app/FrontErrorLogVO'
 import JsonUtil from '@/utils/JsonUtil'
-import { AuthUserInfoRequestVO } from '@/model/openData/AuthUserInfoRequestVO'
-import { systemModule } from '@/plugins/store'
-import { AuthUserInfoResultVO } from '@/model/openData/AuthUserInfoResultVO'
+import AuthUserInfoRequestVO from '@/model/openData/AuthUserInfoRequestVO'
+import AuthUserInfoResultVO from '@/model/openData/AuthUserInfoResultVO'
 
 export default class OpenDataAPI {
   static authUserInfoAPI () {
-    const requestVO: AuthUserInfoRequestVO = {
-      // threeSecretKey: appModule.threeSecretKey,
-      // threeUserId: appModule.threeUserId,
-      // providerAppId: appModule.threeProviderAppId,
-      providerType: systemModule.provider
-    }
+    const requestVO: AuthUserInfoRequestVO = new AuthUserInfoRequestVO()
     return http.post<AuthUserInfoResultVO>('user/authUserInfo', requestVO)
   }
 

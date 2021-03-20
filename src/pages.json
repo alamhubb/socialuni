@@ -8,6 +8,12 @@
   },
   "pages": [
     {
+      "path": "pages/user/Login",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/talk/talk",
       "style": {
         "navigationStyle": "custom"
@@ -17,12 +23,6 @@
       "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/user/Login",
-      "style": {
-        "navigationBarTitleText": "登录"
       }
     }
   ],
@@ -58,18 +58,6 @@
           "path": "user/userDetail",
           "style": {
             "navigationBarTitleText": "用户详情"
-          }
-        },
-        {
-          "path": "chat/message",
-          "style": {
-            "navigationBarTitleText": "聊天"
-          }
-        },
-        {
-          "path": "match/faceValueInfo",
-          "style": {
-            "navigationBarTitleText": "颜值评分"
           }
         },
         {

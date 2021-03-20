@@ -357,6 +357,7 @@ import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import LoginUtil from '@/utils/LoginUtil'
 import ErrorCode from '@/const/ErrorCode'
+import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 
 const userStore = namespace('user')
 const appStore = namespace('app')
@@ -555,7 +556,7 @@ export default class UserInfo extends Vue {
   }
 
   //跳转清池绑定手机号
-  getPhoneNumberAfterHandler (loginData: LoginDataVO) {
+  getPhoneNumberAfterHandler (loginData: ProviderUserVO) {
     /*return LoginAPI.bindPhoneNumAPI(loginData).then((res: any) => {
       userModule.setUser(res.data.user)
       AlertUtil.hint(res.data.hint)
@@ -564,7 +565,7 @@ export default class UserInfo extends Vue {
 
   //微信绑定手机号使用
   getPhoneNumberByLogin (obj: any) {
-    LoginService.getLoginData(systemModule.provider).then((loginData: LoginDataVO) => {
+    LoginService.getLoginData(systemModule.provider).then((loginData: ProviderUserVO) => {
       Object.assign(loginData, obj.detail)
       // 代表已过期
       loginData.sessionEnable = false
@@ -588,7 +589,7 @@ export default class UserInfo extends Vue {
       this.phoneBtnDisabled = true
       // 默认未过期
       LoginUtil.checkSession().then(() => {
-        const loginData: LoginDataVO = new LoginDataVO()
+        const loginData: ProviderUserVO = new ProviderUserVO()
         Object.assign(loginData, obj.detail)
         loginData.sessionEnable = true
         //前台获取为未过期，但也有可能已过期，尝试调用后台获取，确认是否未过期

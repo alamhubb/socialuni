@@ -119,9 +119,9 @@
                 </view>
                 <!-- 如果为三方授权， 不为手机号授权， 如果有用户显示出来用的信息-->
                 <view v-if="user" class="flex-row pa-sm u-border-top-bottom h65px">
-                  <u-avatar class="mr-sm" src="/static/logo.png" mode="square"></u-avatar>
+                  <u-avatar class="mr-sm" :src="user.avatar" mode="square"></u-avatar>
                   <view class="col-around flex-1">
-                    <view>不会魔法</view>
+                    <view>{{ user.nickname }}</view>
                     <view class="text-grey font-xs">微信个人信息</view>
                   </view>
                   <view class="col-center">
@@ -414,7 +414,7 @@ import PageUtil from '@/utils/PageUtil'
 import LoginAPI from '@/api/LoginAPI'
 import ConfigMap from '@/const/ConfigMap'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import ProviderType from '@/const/ProviderType'
+import ProviderType, { Provider } from '@/const/ProviderType'
 import LoginDataVO from '@/model/login/LoginDataVO'
 import { systemModule, userModule } from '@/plugins/store'
 import ButtonOpenType from '@/const/ButtonOpenType'
@@ -438,12 +438,15 @@ export default class LoginVue extends Vue {
   @configStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
   @configStore.Getter(ConfigMap.qqServiceKey) qqService: string
   @systemStore.State('isMp') isMp: boolean
+
   //三方授权相关
+  @appStore.State('threeUserId') threeUserId: string
+  @appStore.State('threeAuthType') threeAuthType: string
+  @appStore.State('threeAppId') threeAppId: string
+  //getter
   @appStore.Getter('isThreeAuth') isThreeAuth: boolean
   @appStore.Getter('isAuthUser') isAuthUser: boolean
   @appStore.Getter('isAuthPhone') isAuthPhone: boolean
-  @appStore.State('threeUserId') threeUserId: string
-  @appStore.State('threeAppId') threeAppId: string
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
@@ -457,20 +460,13 @@ export default class LoginVue extends Vue {
   showPhoneView = false
   goBackCountDown = 0
 
-  created () {
-    if (this.user) {
-      this.showPhoneView = true
-    }
-  }
-
   //平台登陆
-  providerLogin (result, provider: ProviderType) {
-    if (!this.disabledLoginBtn) {
+  providerLogin (result, provider: Provider) {
+    if (this.openTypeBtnEnable) {
       // #ifdef MP
       // #ifndef MP-TOUTIAO
       if (result.detail.errMsg !== Constants.loginSuccess) {
-        Toast.toast('您取消了登录')
-        return
+        return Toast.toast('您取消了登录')
       }
       // #endif
       this.openTypeBtnEnable = false
@@ -485,13 +481,12 @@ export default class LoginVue extends Vue {
 
   //登陆，授权，绑定手机号各大平台登陆结果，后者授权手机号结果
   openTypeBtnClick (providerResult) {
-    console.log(providerResult)
     if (this.openTypeBtnEnable) {
-      if (!this.hasUser) {
+      if (!this.user) {
         this.providerLogin(providerResult, systemModule.provider)
         //登陆完成之后，只有为授权用户信息跳转会小程序
       } else if (this.isAuthPhone && !this.hasPhoneNum) {
-        this.getPhoneNumberByWx(providerResult)
+        // this.getPhoneNumberByWx(providerResult)
         //只有为用户授权手机号，跳转回三方，否则停留
       } else if (this.isAuthUser) {
         //处理用户授权
@@ -656,7 +651,7 @@ export default class LoginVue extends Vue {
   }
 
   //手机号登录和手机号绑定
-  loginByPhoneNumAndBindPhoneNum () {
+  async loginByPhoneNumAndBindPhoneNum () {
     //再次校验
     if (!this.phoneNumberRight) {
       return Toast.toast('请输入正确的手机号')
@@ -665,7 +660,7 @@ export default class LoginVue extends Vue {
       return Toast.toast('请输入正确的验证码')
     }
     if (!this.contractChecked) {
-      return UniUtil.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
+      return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }
     if (!this.bindBtnDisabled) {
       this.bindBtnDisabled = true
@@ -679,9 +674,7 @@ export default class LoginVue extends Vue {
             msg += '，如遇无法弹出输入框，请重启应用'
           }
           // 提示验证码发送成功
-          UniUtil.hint(msg).finally(() => {
-            PageUtil.toMinePage()
-          })
+          Alert.hint(msg)
         }).finally(() => {
           this.bindBtnDisabled = false
         })
@@ -691,17 +684,8 @@ export default class LoginVue extends Vue {
         loginData.authCode = this.authCode
         loginData.provider = ProviderType.phone
         loginData.platform = systemModule.platform
-        LoginAPI.platformLoginAPI(loginData).then(() => {
-          // 提示验证码发送成功
-          let msg = '登录成功'
-          //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-          if (systemModule.isIosAndMpQQ) {
-            msg += '，如遇无法弹出输入框，请重启应用'
-          }
-          UniUtil.hint(msg)
-        }).finally(() => {
-          this.bindBtnDisabled = false
-        })
+        await SocialLoginService.providerLogin(loginData)
+        this.bindBtnDisabled = false
       }
     }
   }
