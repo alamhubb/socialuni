@@ -26,7 +26,7 @@ http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 *
     //如果未登录，只允许查询talk，其他全部提示要登录
     const configUrl: string = config.url
     if (configUrl.indexOf('queryTalks') < 0 && configUrl.indexOf('wxLogin') < 0) {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
       cancel('用户未登录请求了没有权限的接口', config)
     }
   } */

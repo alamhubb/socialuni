@@ -339,13 +339,13 @@ import ReportAddVO from '@/model/report/ReportAddVO'
 import ReportAPI from '@/api/ReportAPI'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import TalkVO from '@/model/talk/TalkVO'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
 import { systemModule, userModule } from '@/plugins/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
-import MsgUtil from '@/utils/MsgUtil'
+
 import PayType from '@/const/PayType'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import Alert from '../../utils/Alert'
@@ -450,7 +450,7 @@ export default class UserInfo extends Vue {
     if (this.userProp) {
       this.$refs.reportDialog.open()
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 
@@ -698,7 +698,7 @@ export default class UserInfo extends Vue {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 
@@ -737,7 +737,7 @@ export default class UserInfo extends Vue {
         }
       }
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 

@@ -5,7 +5,7 @@ import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtils from '@/utils/JsonUtil'
 import PlatformType from '@/const/PlatformType'
 import Constants from '@/const/Constant'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import Alert from '../../utils/Alert'
 
 export default class LoginService {

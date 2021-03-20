@@ -24,3 +24,4 @@ yarn-error.log*
 /src/manifest.json
 /.env.production
 /.env
+/.env

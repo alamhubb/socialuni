@@ -4,7 +4,7 @@ import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import { configModule, userModule } from '@/plugins/store'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import UserStoreCom from '@/plugins/store/UserStoreCom'
 import Alert from '@/utils/Alert'
 
@@ -30,7 +30,7 @@ WebAPI.interceptor.response(
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
           UserStoreCom.clearUserInfoCom()
-          BalaBala.unLoginMessage()
+          MsgUtil.unLoginMessage()
           break
         case ErrorCode.banned:
           UserStoreCom.clearUserInfoCom()
@@ -47,13 +47,13 @@ WebAPI.interceptor.response(
           if (result) {
             Alert.error(result.errorMsg)
           } else {
-            BalaBala.systemErrorMsg()
+            MsgUtil.systemErrorMsg()
           }
           break
       }
       return result // 返回接口返回的错误信息
     }
-    BalaBala.systemErrorMsg()
+    MsgUtil.systemErrorMsg()
     return error
   }
 )

@@ -4,12 +4,12 @@ import CommentAddVO from '@/model/comment/CommentAddVO'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkAPI from '@/api/TalkAPI'
 import TalkVO from '@/model/talk/TalkVO'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
-import MsgUtil from '@/utils/MsgUtil'
+
 
 @Module({ generateMutationSetters: true })
 export default class TalkModule extends VuexModule {
@@ -77,7 +77,7 @@ export default class TalkModule extends VuexModule {
       this.currentContent = talk.content
       this.inputContentFocusEvent()
     } else {
-      BalaBala.unBindPhoneNum()
+      MsgUtil.unBindPhoneNum()
     }
   }
 
@@ -90,7 +90,7 @@ export default class TalkModule extends VuexModule {
       this.currentContent = comment.content
       this.inputContentFocusEvent()
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 
@@ -103,7 +103,7 @@ export default class TalkModule extends VuexModule {
       this.currentContent = replyComment.content
       this.inputContentFocusEvent()
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 

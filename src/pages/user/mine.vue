@@ -160,7 +160,7 @@ import QRow from '@/components/q-row/q-row.vue'
 import QBar from '@/components/q-bar/q-bar.vue'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import OpenDataAPI from '@/api/OpenDataAPI'
-import Login from '@/pages/user/Login.vue'
+import Login from '@/pages/user/login.vue'
 import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')

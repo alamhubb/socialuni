@@ -10,7 +10,7 @@ import AppMsg from '@/const/AppMsg'
 import Constants from '@/const/Constant'
 import MsgUtil from '@/utils/MsgUtil'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
-import BalaBala from '@/utils/BalaBala'
+
 import MPUtil from '@/utils/MPUtil'
 import APPUtil from '@/utils/APPUtil'
 import AppInitAPI from '@/api/AppInitAPI'
@@ -82,7 +82,7 @@ export default class PlatformUtils {
   //所有只能直接调用这个
   static async pay (provider: string, payType: string, amount?: number) {
     if (!userModule.user) {
-      return BalaBala.unLoginMessage()
+      return MsgUtil.unLoginMessage()
     } else if (systemModule.isIos) {
       MsgUtil.iosDisablePay()
       throw ''

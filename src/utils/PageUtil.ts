@@ -20,7 +20,7 @@ export default class PageUtil {
       if (user) {
         RouterUtil.navigateTo(PagePath.userVip)
       } else {
-        BalaBala.unLoginMessage()
+        MsgUtil.unLoginMessage()
       }
     }*/
   }

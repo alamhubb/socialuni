@@ -3,4 +3,10 @@ export default class ResultVO<T> {
   errorMsg: string
   success: boolean
   data: T
+
+  constructor () {
+    this.errorCode = 0
+    this.errorMsg = ''
+    this.success = true
+  }
 }

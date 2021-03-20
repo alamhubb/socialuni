@@ -1,17 +1,15 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import { appModule, configModule } from '@/plugins/store'
 import Alert from '@/utils/Alert'
 import UserStoreCom from '@/plugins/store/UserStoreCom'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
-import GenderType from '@/const/GenderType'
 
 const socialHttp: Request = new Request()
 socialHttp.setConfig(config => { /* 设置全局配置 */
-  config.baseUrl = appModule.appSocialSecretKey /* 根域名不同 */
+  config.baseUrl = process.env.VUE_APP_SOCAIL_ROOT_URL /* 根域名不同 */
   config.timeout = 5 * 1000
   return config
 })
@@ -22,13 +20,13 @@ socialHttp.interceptor.request((config: requestConfig) => { /* 请求之前拦�
   } else {
     config.header.token = null
   }
-  config.header.secretKey = process.env.VUE_APP_SOCAIL_SECRETKEY
+  config.header.secretKey = appModule.appSocialSecretKey
 
   /* else {
     //如果未登录，只允许查询talk，其他全部提示要登录
     const configUrl: string = config.url
     if (configUrl.indexOf('queryTalks') < 0 && configUrl.indexOf('wxLogin') < 0) {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
       cancel('用户未登录请求了没有权限的接口', config)
     }
   } */

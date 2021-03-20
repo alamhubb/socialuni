@@ -422,6 +422,7 @@ import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
 import SocialLoginService from '@/plugins/social/service/SocailLoginService'
+import ResultVO from '@/model/ResultVO'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -495,18 +496,22 @@ export default class LoginVue extends Vue {
             UniUtil.hideLoading()
             const result = res.data
             this.goBackCountDown = 2
-            const threeResult: ThreeAuthUserInfoResultVO = new ThreeAuthUserInfoResultVO()
-            threeResult.appUserId = this.threeUserId
-            threeResult.authType = this.threeAuthType
-            threeResult.tokenCode = result.tokenCode
-            threeResult.user = result.user
+            const threeUserResult: ThreeAuthUserInfoResultVO = new ThreeAuthUserInfoResultVO()
+            threeUserResult.appUserId = this.threeUserId
+            threeUserResult.authType = this.threeAuthType
+            threeUserResult.tokenCode = result.tokenCode
+            threeUserResult.user = result.user
+
+            const threeResultVO: ResultVO<ThreeAuthUserInfoResultVO> = new ResultVO()
+            threeResultVO.data = threeUserResult
+
             const timer = setInterval(() => {
               if (this.goBackCountDown) {
                 this.goBackCountDown--
               } else {
                 clearInterval(timer)
                 uni.navigateBackMiniProgram({
-                  extraData: threeResult
+                  extraData: threeResultVO
                 })
               }
             }, 1000)

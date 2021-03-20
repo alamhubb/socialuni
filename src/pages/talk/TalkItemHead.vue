@@ -79,7 +79,7 @@ import JsonUtils from '@/utils/JsonUtil'
 import { namespace } from 'vuex-class'
 import FollowAPI from '@/api/FollowAPI'
 import PageUtil from '@/utils/PageUtil'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import TalkTabType from '@/const/TalkTabType'
 import RouterUtil from '@/utils/RouterUtil'
 import QIcon from '@/components/q-icon/q-icon.vue'
@@ -117,7 +117,7 @@ export default class TalkItemHead extends Vue {
     if (this.user) {
       PageUtil.toLoveValuePage()
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 
@@ -168,7 +168,7 @@ export default class TalkItemHead extends Vue {
         }
       }
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 

@@ -65,7 +65,7 @@ import ReportAPI from '@/api/ReportAPI'
 import TalkAPI from '@/api/TalkAPI'
 import { talkModule } from '@/plugins/store'
 import TalkVO from '@/model/talk/TalkVO'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UniUtil from '@/utils/UniUtil'
@@ -170,7 +170,7 @@ export default class TalkOperate extends Vue {
       talkModule.reportContentType = ReportContentType.comment
       talkModule.reportDialogShow = true
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 

@@ -39,7 +39,7 @@ import ReportAddVO from '@/model/report/ReportAddVO'
 import UniUtil from '@/utils/UniUtil'
 import ReportAPI from '@/api/ReportAPI'
 import UserVO from '@/model/user/UserVO'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import PlatformUtils from '@/utils/PlatformUtils'
 import Alert from '../utils/Alert'
 import { chatModule } from '@/plugins/store'
@@ -67,7 +67,7 @@ export default class ReportDialog extends Vue {
       if (this.user) {
         this.$refs.reportDialog.open()
       } else {
-        BalaBala.unLoginMessage()
+        MsgUtil.unLoginMessage()
       }
     }
 

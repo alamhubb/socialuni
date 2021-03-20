@@ -37,12 +37,11 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import UniUtil from '@/utils/UniUtil'
 import { talkModule } from '@/plugins/store'
-import BalaBala from '@/utils/BalaBala'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
 import Alert from '../utils/Alert'
+import MsgUtil from '@/utils/MsgUtil'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')
@@ -75,7 +74,7 @@ export default class MsgInput extends Vue {
         Alert.error('不能发表内容为空的评论')
       }
     } else {
-      BalaBala.unBindPhoneNum()
+      MsgUtil.unBindPhoneNum()
     }
   }
 

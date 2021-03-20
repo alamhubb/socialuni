@@ -73,17 +73,15 @@ import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import TalkAPI from '@/api/TalkAPI'
 import ReportContentType from '@/const/ReportContentType'
-import UniUtil from '@/utils/UniUtil'
 import HugAddVO from '@/model/HugAddVO'
 import ChildComment from '@/pages/talk/ChildComment.vue'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkUtil from '@/utils/TalkUtil'
-import PageUtil from '@/utils/PageUtil'
 import JsonUtils from '@/utils/JsonUtil'
 import { talkModule } from '@/plugins/store'
-import BalaBala from '@/utils/BalaBala'
+import MsgUtil from '@/utils/MsgUtil'
 import RouterUtil from '@/utils/RouterUtil'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import Toast from '@/utils/Toast'
@@ -123,7 +121,7 @@ export default class TalkItemComment extends Vue {
       talkModule.reportContentType = ReportContentType.talk
       talkModule.reportDialogShow = true
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 
@@ -143,7 +141,7 @@ export default class TalkItemComment extends Vue {
       const hugAdd: HugAddVO = new HugAddVO(this.talk.id)
       TalkAPI.addHugAPI(hugAdd)
     } else {
-      BalaBala.unLoginMessage()
+      MsgUtil.unLoginMessage()
     }
   }
 
