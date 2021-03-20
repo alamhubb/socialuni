@@ -9,6 +9,7 @@ export default class ChatAPI {
     return http.post<ChatVO>('chat/queryChat', user)
   }*/
 
+
   static getChatsAPI () {
     return http.post('chat/queryChats')
   }

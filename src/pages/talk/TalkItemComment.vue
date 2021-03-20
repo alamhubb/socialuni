@@ -17,7 +17,7 @@
             <text>
               抱抱
             </text>
-            <q-icon class="ml-5px mt-xs" size="24"
+            <q-icon class="ml-5px" size="24"
                     :icon="getHugIcon(talk.hasHugged)"
                     :class="[getHugColor(talk.hasHugged)]"
             ></q-icon>
@@ -76,7 +76,7 @@ import ReportContentType from '@/const/ReportContentType'
 import UniUtil from '@/utils/UniUtil'
 import HugAddVO from '@/model/HugAddVO'
 import ChildComment from '@/pages/talk/ChildComment.vue'
-import UserVO from "@/model/user/UserVO"
+import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkUtil from '@/utils/TalkUtil'
@@ -84,9 +84,9 @@ import PageUtil from '@/utils/PageUtil'
 import JsonUtils from '@/utils/JsonUtil'
 import { talkModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
-import RouterUtil from "@/utils/RouterUtil";
-import QIcon from "@/components/q-icon/q-icon.vue";
-import Toast from "@/utils/Toast";
+import RouterUtil from '@/utils/RouterUtil'
+import QIcon from '@/components/q-icon/q-icon.vue'
+import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')
 

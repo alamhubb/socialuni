@@ -1,6 +1,6 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p bg-white">
-<!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
+    <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <q-row-bar class="flex-none" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
@@ -23,7 +23,7 @@
       </view>-->
     </q-row-bar>
 
-    <city-picker v-model="showCityPopup" :district="district" @confirm="cityChange"></city-picker>
+    <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
@@ -34,7 +34,7 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <swiper class="flex-1 btr-lg px-sm bg-default" :current="swiperCurrent"
-      :style="{
+            :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
             }"
@@ -135,6 +135,7 @@ import NodesRef = UniApp.NodesRef
 import TalkTabType from '@/const/TalkTabType'
 import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
+
 const userStore = namespace('user')
 const appStore = namespace('app')
 const configStore = namespace('config')
@@ -226,9 +227,11 @@ export default class TabsTalkVue extends Vue {
     const nodeLeft: NodesRef = query.select('.' + this.tabsId)
     nodeLeft.boundingClientRect((res: any) => {
       if (res) {
+        //获取tab的高度
         this.tabsHeight = res.height
         // h5有头顶和下边导航栏都算了高度
         // #ifdef H5
+        //tab的高度加上导航栏的高度
         this.talksListHeightSub = 44 + this.tabsHeight
         // this.talksListPaddingBottom = UniUtil.upxToPx(100)
         // #endif
@@ -244,13 +247,6 @@ export default class TabsTalkVue extends Vue {
     }).exec()
   }
 
-  // scroll-view到底部加载更多
-  onreachBottom () {
-    // 只要不是没有了就还可以加载
-    if (this.talkTabObj.loadMore !== LoadMoreType.noMore) {
-      this.autoChooseUseLocationQueryTalks()
-    }
-  }
 
   @userStore.State('user') user: UserVO
   // 页面是否为首次查询
@@ -269,10 +265,19 @@ export default class TabsTalkVue extends Vue {
     })
   }
 
+  // scroll-view到底部加载更多
+  onreachBottom (e) {
+    // 只要不是没有了就还可以加载
+    if (this.talkTabObj.loadMore === LoadMoreType.more) {
+      this.autoChooseUseLocationQueryTalks(false)
+    }
+  }
+
   //如果用户开了定位，就获取经纬度去查询，如果用户没开启定位，就不使用经纬度，没必要每次都获取经纬度。
   autoChooseUseLocationQueryTalks (firstLoad?: boolean) {
     //只有不为加载中才可以加载
-    if (this.talkTabObj.loadMore !== LoadMoreType.loading) {
+    //手动刷新可以刷新，或者为
+    if (this.talkTabObj.loadMore === LoadMoreType.more) {
       // 执行正在加载动画
       this.talkTabObj.loadMore = LoadMoreType.loading
       this.queryTalks(firstLoad)
@@ -283,22 +288,6 @@ export default class TabsTalkVue extends Vue {
         this.queryTalks(firstLoad)
       }*/
     }
-  }
-
-  // 首次查询时获取详细定位,同城查询时，请求使用地理位置定位，切换至同城时，请求地理位置定位。还有点击同城，弹出选择框时，还有点击定为时
-  requestUseLocationQueryTalks (firstLoad?: boolean) {
-    // 如果有经纬度，如果附近，就只显示附近，不根据adcode，怎么排序？按这个应该可调，刚开始按天，每小时，每半小时，5分钟排序，然后按距离排序
-    // 如果没有经纬度，根据adcode，时间倒序，
-    // 用户注册，默认显示中国，点击筛选后，提示，是否切换到附近，点击之后，提示附近
-    // 只有用户点了附近，才能获取用户位置
-    LocationUtil.getCurLocationBySDK().then((res: DistrictVO) => {
-      if (res) {
-        locationModule.updateLocationLonAndLat(res.lon, res.lat)
-      }
-      this.queryTalks(firstLoad)
-    }).catch(() => {
-      this.queryTalks(firstLoad)
-    })
   }
 
   // 默认地理位置是北京，以后可以根据ip获取当前城市
@@ -319,12 +308,16 @@ export default class TabsTalkVue extends Vue {
           }
         }
         // 如果还有大于等于10个就还可以加载
-        if (res.data && res.data.length >= this.lazyLoadNum) {
-          this.talkTabObj.loadMore = LoadMoreType.more
-        } else {
-          // 否则没有了
-          this.talkTabObj.loadMore = LoadMoreType.noMore
-        }
+        //scroll-view的坑，如果不这么写，同步修改的话，会立马触发下次滚动到底部事件
+        CommonUtil.delayTime(100).then(() => {
+          // 如果还有大于等于10个就还可以加载
+          if (res.data && res.data.length >= this.lazyLoadNum) {
+            this.talkTabObj.loadMore = LoadMoreType.more
+          } else {
+            // 否则没有了
+            this.talkTabObj.loadMore = LoadMoreType.noMore
+          }
+        })
       }
     }).catch(() => {
       this.talkTabObj.loadMore = LoadMoreType.more
@@ -332,14 +325,16 @@ export default class TabsTalkVue extends Vue {
     this.talkTabObj.firstLoad = false
   }
 
-  queryEnd (firstLoad: boolean) {
+  queryEnd () {
+    //停止查询方法
     const talkTab = this.talkTabObj
     if (talkTab) {
+      //如果正在查询，则更改状态为加载更多
       const loadMoreState = talkTab.loadMore
       if (loadMoreState === LoadMoreType.loading) {
         talkTab.loadMore = LoadMoreType.more
       } else {
-        this.autoChooseUseLocationQueryTalks(firstLoad)
+        this.autoChooseUseLocationQueryTalks(true)
       }
     }
   }

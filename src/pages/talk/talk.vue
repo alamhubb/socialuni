@@ -121,7 +121,6 @@ import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')
-const appStore = namespace('app')
 const notifyStore = namespace('notify')
 const configStore = namespace('config')
 
@@ -139,18 +138,48 @@ export default class TalkVue extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
   }
+  @userStore.State('user') user: UserVO
+  // 轮播图
+  @talkStore.State('userMinAge') userMinAge: number
+  @talkStore.State('userMaxAge') userMaxAge: number
+  @talkStore.State('userGender') userGender: string
+  // 点击通知去通知页
+  @notifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
+  // 轮播图
+  @configStore.State('showSwipers') configShowSwipers: boolean
+
+  // tag 相关
+  showTagSearch = false
+  selectTag: TagVO = null
+  // 筛选相关
+  rangeMin: number = TalkFilterUtil.minAgeFilterDefault
+  rangMax: number = TalkFilterUtil.maxAgeFilterDefault
+  genders: string [] = ['全部', '男', '女']
+  // 组件内的值
+  genderValue: string = TalkFilterUtil.genderFilterDefault
+  rangeValue: number[] = [TalkFilterUtil.minAgeFilterDefault, TalkFilterUtil.maxAgeFilterDefault]
+  unreadNotifiesNum = 0
+  // 评论输入框
+  showMsgInput = false
+  // filter内容
+  showFilter = false
+  // 传入子组件，控制组件高度
+  talkTabsTop = 0
+  // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
+  scrollEnable = false
+
+  // 唯一id值
+  readonly uuid: string = 'u' + CommonUtil.getUUID()
+  readonly tabsId: string = this.uuid + '_tabs'
 
   onLoad (params: any) {
     /*if (params.load) {
       this.initQuery()
     }*/
-    // this.initQuery()
+    this.initQuery()
     UniUtil.showShareMenu()
   }
 
-  // 唯一id值
-  readonly uuid: string = 'u' + CommonUtil.getUUID()
-  readonly tabsId: string = this.uuid + '_tabs'
 
   // life
   onReady () {
@@ -164,8 +193,59 @@ export default class TalkVue extends Vue {
     this.rangeValue = [this.userMinAge, this.userMaxAge]
   }
 
-  // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
-  scrollEnable = false
+  // todo 有个1
+  onShow () {
+    this.showMsgInput = true
+  }
+
+  onHide () {
+    this.showMsgInput = false
+    this.$refs.tabsTalk.tabsTalkOnHide()
+  }
+
+  onPageScroll (e) {
+    console.log(this.talkTabsTop)
+    console.log(e.scrollTop + 1)
+    // 只有开启了轮播图，才需要控制下方滚动
+    if (this.configShowSwipers) {
+      // +5点余量以防万一
+      const scrollTop = e.scrollTop + 1
+      // 只有不可滚动时，且大于选项卡高度，才改为可用
+      if ((!this.scrollEnable) && scrollTop >= this.talkTabsTop) {
+        this.scrollEnable = true
+      } else if (this.scrollEnable && scrollTop < this.talkTabsTop) {
+        this.scrollEnable = false
+      }
+    } else {
+      // 如果不显示轮播图，则下方talks一定可以滚动
+      this.scrollEnable = true
+    }
+    console.log(this.scrollEnable)
+  }
+
+  // 必须这么写否则不生效
+  @Watch('unreadNotifies')
+  unreadNotifiesWatch () {
+    this.unreadNotifiesNum = this.unreadNotifies.length
+  }
+
+  @Watch('configShowSwipers')
+  configShowSwipersWatch () {
+    CommonUtil.delayTime(100).then(() => {
+      this.getTabBarTop()
+    })
+  }
+
+  // 去除页面初始化的，初始化查询
+  initQuery () {
+    // this.$refs.tabsTalk.initQuery()
+    this.$nextTick(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      // locationModule.appLunchInitDistrict().then(() => {
+      this.$refs.tabsTalk.initQuery()
+      // })
+    })
+  }
 
   getTabBarTop () {
     let query: SelectorQuery
@@ -198,51 +278,6 @@ export default class TalkVue extends Vue {
     }).exec()
   }
 
-  // todo 有个1
-  onShow () {
-    this.showMsgInput = true
-  }
-
-  onHide () {
-    this.showMsgInput = false
-    this.$refs.tabsTalk.tabsTalkOnHide()
-  }
-
-  // 传入子组件，控制组件高度
-  talkTabsTop = 0
-
-  onPageScroll (e) {
-    // 只有开启了轮播图，才需要控制下方滚动
-    if (this.configShowSwipers) {
-      // +5点余量以防万一
-      const scrollTop = e.scrollTop + 1
-      // 只有不可滚动时，且大于选项卡高度，才改为可用
-      if ((!this.scrollEnable) && scrollTop >= this.talkTabsTop) {
-        this.scrollEnable = true
-      } else if (this.scrollEnable && scrollTop < this.talkTabsTop) {
-        this.scrollEnable = false
-      }
-    } else {
-      // 如果不显示轮播图，则下方talks一定可以滚动
-      this.scrollEnable = true
-    }
-  }
-
-  // 去除页面初始化的，初始化查询
-  initQuery () {
-    // this.$refs.tabsTalk.initQuery()
-    this.$nextTick(() => {
-      //首次打开talk页面，获取用户位置用来查询
-      // locationModule.appLunchInitDistrict().then(() => {
-      this.$refs.tabsTalk.initQuery()
-      // })
-    })
-  }
-
-  // tag 相关
-  showTagSearch = false
-  selectTag: TagVO = null
-
   openTagSearchVue () {
     appModule.getTagTypes()
     this.showTagSearch = true
@@ -266,22 +301,6 @@ export default class TalkVue extends Vue {
       return []
     }
   }
-
-  // 筛选相关
-  rangeMin: number = TalkFilterUtil.minAgeFilterDefault
-  rangMax: number = TalkFilterUtil.maxAgeFilterDefault
-  genders: string [] = ['全部', '男', '女']
-  // 组件内的值
-  genderValue: string = TalkFilterUtil.genderFilterDefault
-  rangeValue: number[] = [TalkFilterUtil.minAgeFilterDefault, TalkFilterUtil.maxAgeFilterDefault]
-
-  // 轮播图
-  @talkStore.State('userMinAge') userMinAge: number
-  @talkStore.State('userMaxAge') userMaxAge: number
-  @talkStore.State('userGender') userGender: string
-
-  // filter内容
-  showFilter = false
 
   showFilterModel () {
     this.showFilter = true
@@ -324,39 +343,14 @@ export default class TalkVue extends Vue {
     this.initQuery()
   }
 
-  // 点击通知去通知页
-  @userStore.State('user') user: UserVO
-  @notifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
-  unreadNotifiesNum = 0
-
   toNotifyVue () {
     notifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
     RouterUtil.navigateTo(PagePath.notify)
-  }
-
-  // 必须这么写否则不生效
-  @Watch('unreadNotifies')
-  unreadNotifiesWatch () {
-    this.unreadNotifiesNum = this.unreadNotifies.length
   }
 
   // 点击加号去新增talk
   toTalkAdd () {
     PageUtil.toTalkAddPage()
   }
-
-  // 轮播图
-  @talkStore.State('showSwipers') showSwipers: boolean
-  @configStore.State('showSwipers') configShowSwipers: boolean
-
-  @Watch('configShowSwipers')
-  configShowSwipersWatch () {
-    CommonUtil.delayTime(100).then(() => {
-      this.getTabBarTop()
-    })
-  }
-
-  // 评论输入框
-  showMsgInput = false
 }
 </script>
