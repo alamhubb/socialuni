@@ -174,8 +174,6 @@ export default class TalkAddVue extends Vue {
   onLoad () {
     this.tags = JsonUtils.deepClone(this.storeTags)
     this.district = locationModule.location
-    console.log('赋值了')
-    console.log(this.district)
 
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的
@@ -185,7 +183,6 @@ export default class TalkAddVue extends Vue {
   }
 
   selectVisibleTypeChange (visibleTypes: EnumStrVO[]) {
-    console.log(visibleTypes[0])
     this.visibleType = visibleTypes[0]
   }
 
@@ -335,7 +332,6 @@ export default class TalkAddVue extends Vue {
 
 
   uploadImgList () {
-    console.log(this.showsImgSrcs)
     CosUtil.postObjectList(this.showsImgSrcs, this.user.id)
   }
 

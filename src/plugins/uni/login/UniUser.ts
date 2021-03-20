@@ -43,7 +43,6 @@ export default class UniUser {
         //获取用户城市
         user.city = userInfo.city || userInfo.province
       }
-      console.log(user)
       return user
     } catch (err) {
       Alert.error(err.message || err)

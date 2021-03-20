@@ -92,7 +92,6 @@ export default class CityPicker extends Vue {
   open () {
     this.showCityPopup = true
     this.bottomDistrict = this.district
-    console.log(this.bottomDistrict)
     this.getLocation()
     // 如果未加载过全部数据，数据不完整，则加载全部数据，如果第二个没有子节点且或者子节点为0
     if (!this.districts.length || !this.districts[1].childs || !this.districts[1].childs.length) {

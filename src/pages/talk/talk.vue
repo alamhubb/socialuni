@@ -179,7 +179,6 @@ export default class TalkVue extends Vue {
     /*if (params.load) {
       this.initQuery()
     }*/
-    this.initQuery()
     UniUtil.showShareMenu()
   }
 
@@ -188,6 +187,7 @@ export default class TalkVue extends Vue {
   onReady () {
     // 不这么写百度读不出来
     CommonUtil.delayTime(100).then(() => {
+      this.initQuery()
       this.getTabBarTop()
     })
     // 这里是不是有问题应该选择异性

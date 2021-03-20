@@ -84,7 +84,11 @@ export default class LocationUtil {
     //如果小程序，
     if (systemModule.isMp) {
       //获取用户是否授权过
-      hasAuth = await AppAuthUtil.getUserAuthLocation()
+      try {
+        hasAuth = await AppAuthUtil.getUserAuthLocation()
+      } catch (error) {
+        hasAuth = false
+      }
     } else {
       hasAuth = locationModule.openLocation
     }

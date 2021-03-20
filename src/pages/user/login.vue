@@ -272,14 +272,14 @@
 
           <view class="row-between-center w300px h40px mt-lg">
             <!--              <view v-if="isThreeAuth" class="row-col-center">-->
-            <view class="row-col-center" @click="isThreeAuth=!isThreeAuth">
+            <view class="row-col-center" @click="goBackPage">
               <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
               <view class="text-gray u-border-bottom">
                 <!--            手机号登录界面-->
                 <template v-if="showPhoneView">
                   <!--            如果是输入手机号页面，未登录，提示手机号登录-->
                   <template v-if="!user">
-                    {{ isAuthPhone ? '不授权' : '不登录' }}返回
+                    {{ isAuthUser ? '不授权' : '不登录' }}返回
                     <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                   </template>
                   <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
@@ -423,6 +423,8 @@ import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
 import SocialLoginService from '@/plugins/social/service/SocailLoginService'
 import ResultVO from '@/model/ResultVO'
+import ErrorCode from '@/const/ErrorCode'
+import PageUtil from '@/utils/PageUtil'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -470,7 +472,6 @@ export default class LoginVue extends Vue {
       // #endif
       this.openTypeBtnEnable = false
       SocialLoginService.providerLogin(provider).then((user) => {
-        console.log(user)
       }).finally(() => {
         this.openTypeBtnEnable = true
       })
@@ -490,7 +491,6 @@ export default class LoginVue extends Vue {
       } else if (this.isAuthUser) {
         //处理用户授权
         Alert.confirm('是否确认授权用户信息').then(() => {
-          console.log('授权用户信息和token')
           UniUtil.showLoading('授权中')
           OpenDataAPI.authUserInfoAPI().then(res => {
             UniUtil.hideLoading()
@@ -510,6 +510,7 @@ export default class LoginVue extends Vue {
                 this.goBackCountDown--
               } else {
                 clearInterval(timer)
+                UniUtil.showLoading('授权成功，返回中...')
                 uni.navigateBackMiniProgram({
                   extraData: threeResultVO
                 })
@@ -604,6 +605,18 @@ export default class LoginVue extends Vue {
     }
   }
 
+  goBackPage () {
+    if (this.isThreeAuth) {
+      const result: ResultVO<any> = new ResultVO<any>()
+      result.errorCode = ErrorCode.business
+      result.errorMsg = '用户未授权'
+      result.success = false
+      UniUtil.showLoading('不授权，返回中...')
+      uni.navigateBackMiniProgram({ extraData: result })
+    } else {
+      PageUtil.toMinePage()
+    }
+  }
 
   switchShowPhoneNum () {
     if (this.showPhoneView) {

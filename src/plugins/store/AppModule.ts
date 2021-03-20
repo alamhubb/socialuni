@@ -38,7 +38,6 @@ export default class AppModule extends VuexModule {
 
   //是否为三方授权
   get isThreeAuth () {
-    console.log(this.threeSecretKey)
     return !!this.threeSecretKey
   }
 
