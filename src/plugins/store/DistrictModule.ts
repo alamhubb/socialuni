@@ -1,6 +1,6 @@
 import {VuexModule, Module, Action} from 'vuex-class-modules'
 import DistrictVO from '@/model/DistrictVO'
-import DistrictUtil from '@/utils/DistrictUtil'
+import LocationUtil from "@/utils/LocationUtil'
 import DistrictAPI from '@/api/DistrictAPI'
 
 @Module({generateMutationSetters: true})
@@ -8,20 +8,20 @@ export default class DistrictModule extends VuexModule {
   // 系统加载时通过getDistrictAction赋值
   //有记录的花记录上一次的，没有记录的话初始全国的
   //记录用户是否授权过定位
-  openPosition: boolean = DistrictUtil.getOpenPosition()
-  district: DistrictVO = DistrictUtil.getDistrict()
+  openPosition: boolean = LocationUtil.getOpenPosition()
+  district: DistrictVO = LocationUtil.getDistrict()
   districts: DistrictVO [] = []
 
   @Action
   async appLunchInitDistrict() {
     //首次打开无论如何获取用户地理位置
-    const district: DistrictVO = await DistrictUtil.getPositionNotAuth()
+    const district: DistrictVO = await LocationUtil.getPositionNotAuth()
     if (district) {
       this.district.lat = district.lat
       this.district.lat = district.lat
     }
     //初始第一次查询才赋值，设置用户默认的位置信息
-    if (this.district.adCode === DistrictUtil.initAdCode) {
+    if (this.district.adCode === LocationUtil.initAdCode) {
       this.setDistrict(district)
     } else {
       //只有未开启定位时，才使用后台返回的经纬度
@@ -36,7 +36,7 @@ export default class DistrictModule extends VuexModule {
   @Action
   openPositionAction() {
     this.openPosition = true
-    DistrictUtil.openPosition()
+    LocationUtil.openPosition()
   }
 
   updateLonAndLat(lon, lat) {
@@ -51,9 +51,9 @@ export default class DistrictModule extends VuexModule {
     if (!district || !district.adCode) {
       // 远程获取，获取不到返回中国
       // storeAge存储
-      district = DistrictUtil.chinaDistrict
+      district = LocationUtil.chinaDistrict
     }
-    DistrictUtil.setDistrict(district)
+    LocationUtil.setDistrict(district)
     this.district = district
   }
 

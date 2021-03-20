@@ -200,7 +200,7 @@ export default class TabsTalkVue extends Vue {
 
   // 生命周期
   created () {
-    // DistrictUtil.getCityByIpWebAPI()
+    // LocationUtil.getCityByIpWebAPI()
     // 更新广告状态
     // 更新广告刷新时间
     this.updateShowAd()

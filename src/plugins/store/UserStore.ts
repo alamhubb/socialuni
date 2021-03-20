@@ -77,7 +77,7 @@ export default class UserStore {
     UserStore.setMineUser(null)
     chatModule.getChatsAction()
     //没必要重设地理位置吧
-    // DistrictUtil.重设地理位(DistrictUtil.initDistrict)
+    // LocationUtil.重设地理位(LocationUtil.initDistrict)
   }
 
   static destroyAccount () {

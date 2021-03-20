@@ -117,14 +117,13 @@ import UniUtil from '@/utils/UniUtil'
 import DistrictVO from '@/model/DistrictVO'
 import { namespace } from 'vuex-class'
 import JsonUtils from '@/utils/JsonUtil'
-import DistrictUtil from '@/utils/DistrictUtil'
 import TagVO from '@/model/tag/TagVO'
 import TagUtil from '@/utils/TagUtil'
 import PageUtil from '@/utils/PageUtil'
 import ImgUtil from '@/utils/ImgUtil'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
-import { districtModule, tagModule } from '@/plugins/store'
+import { locationModule, tagModule } from '@/plugins/store'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
@@ -133,10 +132,11 @@ import TalkAddTagSearch from '@/pagesLazy/talk/TalkAddTagSearch.vue'
 import TagAdd from '@/pages/tag/TagAdd.vue'
 import RouterUtil from '@/utils/RouterUtil'
 import Alert from '../../utils/Alert'
+import LocationUtil from '@/utils/LocationUtil'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
-const districtStore = namespace('district')
+const districtStore = namespace('location')
 @Component({
   components: { TagAdd, TalkAddTagSearch, CityPicker, QIcon }
 })
@@ -148,7 +148,7 @@ export default class TalkAddVue extends Vue {
   talkContent = ''
   buttonDisabled = false
 
-  district: DistrictVO = districtModule.district
+  district: DistrictVO = locationModule.district
   showsImgSrcs: ImgFileVO [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
@@ -162,7 +162,7 @@ export default class TalkAddVue extends Vue {
 
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的
-    DistrictUtil.getPositionNotAuth().then((district: DistrictVO) => {
+    LocationUtil.getPositionNotAuth().then((district: DistrictVO) => {
       this.district = district
     })
   }
@@ -263,7 +263,7 @@ export default class TalkAddVue extends Vue {
   openSearchVue () {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
-      districtModule.getDistrictsAction()
+      locationModule.getDistrictsAction()
     }
     this.showSearch = true
   }

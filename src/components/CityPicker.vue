@@ -66,10 +66,10 @@ import { appModule, locationModule } from '@/plugins/store'
 import LocationUtil from '@/utils/LocationUtil'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import Alert from "@/utils/Alert";
-import DistrictUtil from "@/utils/DistrictUtil";
+import Alert from '@/utils/Alert'
 
-const locationStore = namespace('district')
+
+const locationStore = namespace('location')
 @Component
 export default class CityPicker extends Vue {
   public $refs!: {
@@ -124,8 +124,8 @@ export default class CityPicker extends Vue {
   }
 
   // 如果当前定位是附近则发表后跳转到talk页要查询附近的，发表动态时修改store
-  getLocation() {
-    return DistrictUtil.getCurPositionCom().then((district: DistrictVO) => {
+  getLocation () {
+    return LocationUtil.getCurPositionCom().then((district: DistrictVO) => {
       this.bottomDistrict = district
       this.initPopupCity()
     }).catch(() => {
