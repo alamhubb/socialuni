@@ -1,5 +1,6 @@
 import DistrictVO from '@/model/DistrictVO'
 import ImgFileVO from '@/model/ImgFileVO'
+import LocationUtil from '@/utils/LocationUtil'
 
 export default class TalkAddVO {
   public content: string
@@ -14,9 +15,10 @@ export default class TalkAddVO {
   constructor (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[]) {
     this.content = content
     this.imgs = imgs
-    this.adCode = district.adCode
     this.tagIds = tagIds
+    this.adCode = LocationUtil.chinaAdCode
     if (district) {
+      this.adCode = district.adCode
       this.lon = district.lon
       this.lat = district.lat
     }

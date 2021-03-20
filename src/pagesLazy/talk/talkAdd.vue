@@ -1,5 +1,5 @@
 <template>
-  <view class="h100p">
+  <view class="h100p bg-white">
     <city-picker v-model="showSearch" :district="district" @confirm="cityChange"></city-picker>
 
     <view v-if="showTagSearch">
@@ -30,8 +30,8 @@
                 <block v-for="(image,index) in showImgUrls" :key="index">
                   <view class="uni-uploader__file position-relative">
                     <view
-                        class="close-view position-absolute z-index-button text-black size20 bg-gray bg-half-transparent row-all-center topRight bd-bl-radius"
-                        @click="deleteImg(index)">×
+                      class="close-view position-absolute z-index-button text-black size20 bg-gray bg-half-transparent row-all-center topRight bd-bl-radius"
+                      @click="deleteImg(index)">×
                     </view>
                     <image class="uni-uploader__img" mode="aspectFill" :src="image"
                            :data-src="image" @click="previewImage"/>
@@ -46,7 +46,7 @@
         </view>
       </view>
       <view class="px-smm pt-sm mt-xs row-between">
-        <view class="q-tag q-round bg-orange-plain" @click="openSearchVue">
+        <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
           <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
           <block v-if="district.adCode">
             {{ district.provinceName }}
@@ -96,11 +96,11 @@
         </view>
       </view>
 
-      <view class="row-end pa-sm">
+      <view class="row-end-center pa-sm">
         可见范围：
         <view class="text-gray pr-xs">
           <text class="text-lgg text-gray text-lgg">智能推荐</text>
-          <q-icon class="text-gray" icon="arrow-right"/>
+          <q-icon size="14" class="text-gray" icon="arrow-right"/>
         </view>
       </view>
       <view class="row-center pt">
@@ -119,7 +119,6 @@ import { namespace } from 'vuex-class'
 import JsonUtils from '@/utils/JsonUtil'
 import TagVO from '@/model/tag/TagVO'
 import TagUtil from '@/utils/TagUtil'
-import PageUtil from '@/utils/PageUtil'
 import ImgUtil from '@/utils/ImgUtil'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
@@ -136,19 +135,24 @@ import LocationUtil from '@/utils/LocationUtil'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
-const districtStore = namespace('location')
+const locationStore = namespace('location')
 @Component({
-  components: { TagAdd, TalkAddTagSearch, CityPicker, QIcon }
+  components: {
+    TagAdd,
+    TalkAddTagSearch,
+    CityPicker,
+    QIcon
+  }
 })
 export default class TalkAddVue extends Vue {
-  @districtStore.State('districts') readonly districts: DistrictVO[]
+  @locationStore.State('districts') readonly districts: DistrictVO[]
   @tagStore.State('tags') readonly storeTags: TagVO []
   @userStore.State('user') readonly user: UserVO
 
   talkContent = ''
   buttonDisabled = false
 
-  district: DistrictVO = locationModule.district
+  district: DistrictVO = locationModule.location
   showsImgSrcs: ImgFileVO [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
@@ -159,6 +163,9 @@ export default class TalkAddVue extends Vue {
   //进入talk页面，需要加载下当前地理位置，发布时携带
   onLoad () {
     this.tags = JsonUtils.deepClone(this.storeTags)
+    this.district = locationModule.location
+    console.log('赋值了')
+    console.log(this.district)
 
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的

@@ -6,7 +6,7 @@
           个人资料
         </view>
         <view class="mr">
-          <q-icon icon="setting" size="46" @click="showMoreListAction"></q-icon>
+          <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
         </view>
       </q-navbar>
       <user-info :user="user"></user-info>
