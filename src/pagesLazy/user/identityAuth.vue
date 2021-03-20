@@ -51,13 +51,18 @@ import CosUtil from '@/utils/CosUtil'
 import ImgUtil from '@/utils/ImgUtil'
 import PageUtil from '@/utils/PageUtil'
 import AppMsg from '@/const/AppMsg'
-import Alert from "../../utils/Alert";
-import {userModule} from "@/plugins/store";
+import Alert from '../../utils/Alert'
+import { userModule } from '@/plugins/store'
 
 const userStore = namespace('user')
 
 @Component({
-  components: { UserInfo, UserEdit, TalkItem, TalkItemContent }
+  components: {
+    UserInfo,
+    UserEdit,
+    TalkItem,
+    TalkItemContent
+  }
 })
 export default class IdentityAuthVue extends Vue {
   @userStore.State('user') user: UserVO
@@ -83,7 +88,7 @@ export default class IdentityAuthVue extends Vue {
     this.authBtnDisabled = true
     UniUtil.showLoading('认证中')
     // 校验用户必须上传了照片，
-    CosUtil.postObject(this.imgFile).then(() => {
+    CosUtil.postObject(this.imgFile, this.user.id).then(() => {
       this.user.authNum = this.user.authNum + 1
       UserAPI.identityAuthAPI(this.imgFile).then((res: any) => {
         userModule.setUser(res.data)

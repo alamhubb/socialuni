@@ -31,8 +31,8 @@ import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
 import PageUtil from '@/utils/PageUtil'
 import UserAPI from '@/api/UserAPI'
-import Alert from "../../utils/Alert";
-import {userModule} from "@/plugins/store";
+import Alert from '../../utils/Alert'
+import { userModule } from '@/plugins/store'
 
 const userStore = namespace('user')
 
@@ -106,7 +106,7 @@ export default class UserAvatarVue extends Vue {
       quality: ratio,
       success: res => {
         this.uploadImgFile.path = res.tempFilePath
-        CosUtil.postObject(this.uploadImgFile).then((data) => {
+        CosUtil.postObject(this.uploadImgFile, this.user.id).then((data) => {
           const newAvatar = data.Location
           const userCopy: UserVO = JsonUtils.deepClone(this.user)
           userCopy.avatar = 'https://' + newAvatar
