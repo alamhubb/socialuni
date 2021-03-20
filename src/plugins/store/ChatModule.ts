@@ -278,7 +278,7 @@ export default class ChatModule extends VuexModule {
     //如果登录了，才调用后台
     // 如果登录了
     //目前 官方群聊没记录已读状态，读取也不管用
-    if (UserStore.hasUser() && chat.type !== ChatType.system_group) {
+    if (userModule.hasUser && chat.type !== ChatType.system_group) {
       ChatAPI.readChatAPI(chat.id, msgIds)
     }
     for (const message of messages) {

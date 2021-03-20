@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-default h100r flex-col">
+  <view class="bg-default h100p flex-col">
     <view v-if="user">
       <q-navbar class="q-solid-bottom">
         <view class="ml-xl text-bold text-lg flex-auto">
@@ -71,7 +71,7 @@
             </view>
           </q-row-item>
           <q-row>
-            <view class="w100r row-grid">
+            <view class="w100p row-grid">
               <navigator :url="userAgreementUrl" class="text-blue">
                 《用户协议》
               </navigator>
@@ -157,7 +157,7 @@ import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import UserStore from '@/plugins/store/UserStore'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import { appModule, systemModule } from '@/plugins/store'
+import { appModule, systemModule, userModule } from '@/plugins/store'
 import Constants from '@/const/Constant'
 import QNavbar from '@/components/q-navbar/q-navbar.vue'
 import PagePath from '@/const/PagePath'
@@ -216,14 +216,14 @@ export default class MineVue extends Vue {
 
   destroyAccount () {
     this.hideMoreList()
-    UserStore.destroyAccount().catch(() => {
+    userModule.destroyAccount().catch(() => {
       this.showMoreListAction()
     })
   }
 
   logout () {
     this.hideMoreList()
-    UserStore.loginOut().catch(() => {
+    userModule.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }
@@ -267,7 +267,7 @@ export default class MineVue extends Vue {
   // 初始查询，会清空已有talk
   initQuery () {
     if (this.user) {
-      UserStore.getMineUserAction().then(() => {
+      userModule.getMineUserAction().then(() => {
         Toast.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()
@@ -278,31 +278,5 @@ export default class MineVue extends Vue {
   stopPullDownRefresh () {
     uni.stopPullDownRefresh()
   }
-
-  login (result) {
-    // #ifdef MP
-    // #ifndef MP-TOUTIAO
-    if (result.detail.errMsg !== Constants.loginSuccess) {
-      Toast.toast('您取消了登录')
-      return
-    }
-    // #endif
-    this.disabledLoginBtn = true
-    LoginService.platformLogin(systemModule.provider).finally(() => {
-      this.disabledLoginBtn = false
-    })
-    // #endif
-  }
 }
 </script>
-<style lang="scss" scoped>
-.user-setting {
-  right: 18px;
-  /*  #ifdef  MP  */
-  top: 70px;
-  /*  #endif  */
-  /*  #ifndef  MP  */
-  top: 10px;
-  /*  #endif  */
-}
-</style>

@@ -79,11 +79,11 @@
           <view v-if="!isMine" class="flex-row">
             <!--                不为自己且未关注-->
             <!--            不为ios，或者不为付费，则显示-->
-            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
+<!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
                     @click="toMessagePage">
               私信
-              <!-- <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>-->
-            </button>
+              &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>&ndash;&gt;
+            </button>-->
             <button class="cu-btn round bd-blue px-12px bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
@@ -343,20 +343,20 @@ import TalkVO from '@/model/talk/TalkVO'
 import BalaBala from '@/utils/BalaBala'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import {systemModule, userModule} from '@/plugins/store'
+import { systemModule, userModule } from '@/plugins/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
 import MsgUtil from '@/utils/MsgUtil'
 import PayType from '@/const/PayType'
 import ProviderType from '@/const/ProviderType'
-import Alert from "../../utils/Alert";
-import Toast from "@/utils/Toast";
-import RouterUtil from "@/utils/RouterUtil";
-import ErrorConst from "@/const/ErrorConst";
-import UserVO from "@/model/user/UserVO";
-import QIcon from "@/components/q-icon/q-icon.vue";
-import LoginUtil from "@/utils/LoginUtil";
-import ErrorCode from "@/const/ErrorCode";
+import Alert from '../../utils/Alert'
+import Toast from '@/utils/Toast'
+import RouterUtil from '@/utils/RouterUtil'
+import ErrorConst from '@/const/ErrorConst'
+import UserVO from '@/model/user/UserVO'
+import QIcon from '@/components/q-icon/q-icon.vue'
+import LoginUtil from '@/utils/LoginUtil'
+import ErrorCode from '@/const/ErrorCode'
 
 const userStore = namespace('user')
 const appStore = namespace('app')

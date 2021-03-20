@@ -3,9 +3,12 @@ import TokenUtil from '@/utils/TokenUtil'
 import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import { configModule } from '@/plugins/store'
+import { configModule, userModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
 import UserStore from '@/plugins/store/UserStore'
+import UserStoreCom from '@/plugins/store/UserStoreCom'
+import Alert from '@/utils/Alert'
+
 
 const WebAPI: Request = new Request()
 WebAPI.setConfig(config => { /* 设置全局配置 */
@@ -27,23 +30,23 @@ WebAPI.interceptor.response(
         case ErrorCode.not_logged:
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
-          UserStore.clearUser()
+          UserStoreCom.clearUserInfoCom()
           BalaBala.unLoginMessage()
           break
         case ErrorCode.banned:
-          UserStore.clearUser()
+          UserStoreCom.clearUserInfoCom()
           if (result) {
-            UniUtil.error(result.errorMsg)
+            Alert.error(result.errorMsg)
           } else {
             const msg: string = configModule.systemError605
-            UniUtil.error(msg)
+            Alert.error(msg)
           }
           break
         case ErrorCode.custom:
           break
         default:
           if (result) {
-            UniUtil.error(result.errorMsg)
+            Alert.error(result.errorMsg)
           } else {
             BalaBala.systemErrorMsg()
           }

@@ -206,8 +206,6 @@ export default class TalkVue extends Vue {
   }
 
   onPageScroll (e) {
-    console.log(this.talkTabsTop)
-    console.log(e.scrollTop + 1)
     // 只有开启了轮播图，才需要控制下方滚动
     if (this.configShowSwipers) {
       // +5点余量以防万一
@@ -222,7 +220,6 @@ export default class TalkVue extends Vue {
       // 如果不显示轮播图，则下方talks一定可以滚动
       this.scrollEnable = true
     }
-    console.log(this.scrollEnable)
   }
 
   // 必须这么写否则不生效

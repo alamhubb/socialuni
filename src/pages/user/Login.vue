@@ -419,7 +419,7 @@ import SkipUrlConst from '@/const/SkipUrlConst'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import LoginService from '@/pages/user/LoginService'
 import LoginDataVO from '@/model/login/LoginDataVO'
-import { systemModule } from '@/plugins/store'
+import { systemModule, userModule } from '@/plugins/store'
 import ButtonOpenType from '@/const/ButtonOpenType'
 import Alert from '@/utils/Alert'
 import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultVO'
@@ -676,7 +676,7 @@ export default class LoginVue extends Vue {
       if (this.user) {
         //手机号绑定
         UserAPI.bindPhoneNumAPI(this.phoneNum, this.authCode).then((res: any) => {
-          UserStore.setMineUser(res.data)
+          userModule.setUser(res.data)
           let msg = '绑定成功'
           //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
           if (systemModule.isIosAndMpQQ) {

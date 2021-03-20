@@ -1,7 +1,7 @@
 <template>
     <view v-if="comment.childComments" class="pl-15px">
         <block v-for="(childComment,index) in comment.childComments" :key="childComment.id">
-            <view v-if="index<childCommentShowNum" class="flex-row">
+            <view v-if="index<childCommentShowNum" class="flex-row py-mn">
                 <!--            {{childComment.no}}#-->
                 <text :class="comment.user.vipFlag?'text-red':'color-pink-accent'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
                 <view class="flex-sub row-col-center" @click="setReplyComment(talk,comment,childComment)">
@@ -40,11 +40,11 @@ import PagePath from '@/const/PagePath'
 import PageUtil from '@/utils/PageUtil'
 import { talkModule } from '@/plugins/store'
 import JsonUtils from '@/utils/JsonUtil'
-import RouterUtil from "@/utils/RouterUtil";
-import QIcon from "@/components/q-icon/q-icon.vue";
+import RouterUtil from '@/utils/RouterUtil'
+import QIcon from '@/components/q-icon/q-icon.vue'
 
   @Component({
-    components: {QIcon}
+    components: { QIcon }
   })
 export default class ChildComment extends Vue {
     @Prop() readonly talk: TalkVO

@@ -22,7 +22,7 @@ export default class UserModule extends VuexModule {
     UserStorageUtil.set(user)
   }
 
-  hasUser (): boolean {
+  get hasUser (): boolean {
     return !!this.user
   }
 

@@ -37,7 +37,7 @@
         <block v-for="(comment,index) in talk.comments" :key="comment.id">
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
-            <view class="flex-row" @click="toTalkDetailVue">
+            <view class="flex-row py-mn" @click="toTalkDetailVue">
               <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-pink-accent'"
                     @click.stop="toUserDetail(comment.user.id)">
                 {{comment.user.nickname}}
@@ -52,7 +52,7 @@
           </view>
         </block>
         <view v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
-          <view class="row-col-center color-orange" @click="toTalkDetailVue">
+          <view class="row-col-center color-orange pt-mn" @click="toTalkDetailVue">
             <view v-show="talk.commentNum>commentShowNum">
               查看其余{{talk.commentNum - commentShowNum}}条评论
             </view>
