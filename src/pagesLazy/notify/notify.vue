@@ -56,7 +56,7 @@ export default class NotifyVue extends Vue {
     @appStore.State('notifies') notifies: UnreadNotifyVO[]
 
     toTalkDetailVue (talkId: number) {
-      PageUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)
+      RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)
     }
 
     getTalkSmallImgUrl (userId: number, src: string) {

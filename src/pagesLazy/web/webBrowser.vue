@@ -67,7 +67,7 @@ export default class WebBrowserVue extends Vue {
   }
 
   showShare () {
-    PageUtil.navigateTo(PagePath.share, { url: this.webUrl })
+    RouterUtil.navigateTo(PagePath.share, { url: this.webUrl })
   }
 }
 </script>

@@ -70,7 +70,7 @@ export default class ChildComment extends Vue {
 
     toUserDetail (userId: number) {
       if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
-        PageUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+        RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
       }
     }
 

@@ -11,5 +11,6 @@ export default class AppStoreCom {
     tagModule.getHotTagTypesAction()
     locationModule.getHotDistrictsAction()
     appModule.getReportTypesAction()
+    appModule.getHomeSwipersAction()
   }
 }

@@ -74,6 +74,7 @@ import MatchType from '@/const/MatchType'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import BalaBala from '@/utils/BalaBala'
+import Toast from '@/utils/Toast'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

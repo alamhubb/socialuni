@@ -57,11 +57,11 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue px-12px bg-white"
+        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue color-blue px-12px bg-white"
                 @click.stop="addFollow">
           关注
         </button>
-        <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>
+        <button v-else class="cu-btn round bd-gray color-gray bg-white" @click.stop="addFollow">已关注</button>
       </view>
     </view>
   </view>
@@ -84,6 +84,7 @@ import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import BalaBala from '@/utils/BalaBala'
 import TalkTabType from '@/const/TalkTabType'
+import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')
 
@@ -129,7 +130,7 @@ export default class TalkItemHead extends Vue {
 
   toUserDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
-      PageUtil.navigateTo(PagePath.userDetail + '?userId=' + this.talk.user.id)
+      RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + this.talk.user.id)
     }
   }
 

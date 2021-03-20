@@ -3,7 +3,6 @@ import store, { systemModule, userModule } from '@/plugins/store'
 import MsgUtil from '@/utils/MsgUtil'
 import Alert from './Alert'
 import RouterUtil from '@/utils/RouterUtil'
-import PageUtil from '@/utils/PageUtil'
 import UserVO from '@/model/user/UserVO'
 
 export default class PageUtil {

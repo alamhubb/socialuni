@@ -200,6 +200,7 @@ import ProviderType, { Provider } from '@/const/ProviderType'
 import LoginService from '@/pages/user/LoginService'
 import LoginDataVO from '@/model/login/LoginDataVO'
 import { systemModule } from '@/plugins/store'
+import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')
 const configStore = namespace('config')

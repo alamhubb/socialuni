@@ -1,6 +1,6 @@
 <template>
   <view v-if="userProp" class="bg-default pb-100px">
-    <view class="bg-white mb-5px">
+    <view class="mb-5px">
       <view>
         <swiper v-if="imgUrls.length" class="square-dot sizeUserImg">
           <swiper-item v-for="(img,index) in imgUrls" :key="img">
@@ -80,12 +80,12 @@
           <view v-if="!isMine" class="flex-row">
             <!--                不为自己且未关注-->
             <!--            不为ios，或者不为付费，则显示-->
-            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
+            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray mr-sm"
                     @click="toMessagePage">
               私信
               <!-- <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>-->
             </button>
-            <button class="cu-btn round bd-blue px-12px bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button class="cu-btn round bd-blue color-blue bg-white px-12px" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>
@@ -693,7 +693,7 @@ export default class UserInfo extends Vue {
 
   toFollowVue () {
     if (this.isMine) {
-      PageUtil.navigateTo(PagePath.userFollow)
+      RouterUtil.navigateTo(PagePath.userFollow)
     }
   }
 

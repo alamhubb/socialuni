@@ -21,6 +21,7 @@ import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import ThreeAuthType from '@/const/ThreeAuthType'
 import ReportAPI from '@/api/ReportAPI'
+import QingchiAPI from '@/api/QingchiAPI'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -69,8 +70,8 @@ export default class AppModule extends VuexModule {
   // actions
   @Action
   getHomeSwipersAction () {
-    ReportAPI.queryReportTypesAPI().then(res => {
-      this.reportTypes = res.data
+    QingchiAPI.queryHomeSwipersAPI().then(res => {
+      this.homeSwipers = res.data
     })
   }
 }

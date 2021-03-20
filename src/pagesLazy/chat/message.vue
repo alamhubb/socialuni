@@ -374,7 +374,7 @@ export default class MessageVue extends Vue {
   }
 
   toUserDetailVue (userId: number) {
-    PageUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+    RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
   }
 
   toVipVue () {

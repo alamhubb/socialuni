@@ -105,7 +105,7 @@ export default class FollowItem extends Vue {
 
     toUserDetailVue () {
       if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
-        PageUtil.navigateTo(PagePath.userDetail + '?userId=' + this.user.id)
+        RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + this.user.id)
       }
     }
 }

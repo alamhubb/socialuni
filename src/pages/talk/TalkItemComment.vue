@@ -38,7 +38,7 @@
         <block v-for="(comment,index) in talk.comments" :key="comment.id">
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
-            <view class="flex-row" @click="toTalkDetailVue">
+            <view class="flex-row py-mn" @click="toTalkDetailVue">
               <view class="flex-none" :class="comment.user.vipFlag?'text-red':'font-blue-deep'"
                     @click.stop="toUserDetail(comment.user.id)">
                 {{comment.user.nickname}}
@@ -87,6 +87,7 @@ import PageUtil from '@/utils/PageUtil'
 import JsonUtils from '@/utils/JsonUtils'
 import { talkModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
+import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')
 
@@ -148,7 +149,7 @@ export default class TalkItemComment extends Vue {
 
   toUserDetail (userId: number) {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
-      PageUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+      RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
     }
   }
 
@@ -156,7 +157,7 @@ export default class TalkItemComment extends Vue {
 
   toTalkDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
-      PageUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
+      RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
 

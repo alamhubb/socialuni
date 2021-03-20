@@ -109,7 +109,7 @@ export default class ShellVue extends Vue {
   }
 
   toShellInfo () {
-    PageUtil.navigateTo(SkipUrlConst.shellInfoUrl())
+    RouterUtil.navigateTo(SkipUrlConst.shellInfoUrl())
   }
 
   userPay () {

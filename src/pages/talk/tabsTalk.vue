@@ -38,7 +38,7 @@
             }"
     >
       <swiper class="flex-none h100r bg-default" :current="swiperCurrent"
-              @change="TalkSwipersChange">
+              @change="talkSwiperChange">
         <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
           <!--
           使用view实现的问题，没有scroll事件小程序上
@@ -124,7 +124,7 @@ import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import TalkSwipers from '@/pages/talk/TalkSwipers.vue'
+import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import { appModule, locationModule, systemModule, talkModule } from '@/plugins/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '@/components/q-tab/q-tab.vue'
@@ -391,7 +391,7 @@ export default class TabsTalkVue extends Vue {
   }
 
   // talkSwipe
-  TalkSwipersChange (e) {
+  talkSwiperChange (e) {
     const current = e.detail.current
     this.swiperCurrent = current
     this.current = current

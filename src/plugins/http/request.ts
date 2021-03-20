@@ -161,8 +161,8 @@ export default class Request {
     })
   }
 
-  get (url: string, data: object = {}, options: handleOptions = {}) {
-    return this.request({
+  get<T> (url: string, data: object = {}, options: handleOptions = {}) {
+    return this.request<T>({
       url,
       data,
       method: 'GET',

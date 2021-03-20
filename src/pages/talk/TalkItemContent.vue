@@ -49,7 +49,7 @@ export default class TalkItemContent extends Vue {
 
   toTalkDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
-      PageUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
+      RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
 

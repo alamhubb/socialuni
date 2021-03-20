@@ -1,92 +1,92 @@
 <template>
   <view class="flex-col h100r bg-default">
-    <view v-show="showTagSearch" class="h100r">
-      <tag-search class="h100r" v-model="showTagSearch" @change="changeTag"
-      ></tag-search>
-    </view>
-    <view v-show="!showTagSearch" class="flex-col h100r">
-      <q-navbar>
-        <q-search class="flex-auto" @click.native="openTagSearchVue">
-          <q-icon class="mx-5px text-gray" size="30" icon="search"></q-icon>
-          <view v-if="selectTag" class="flex-row flex-auto">
-            <view class="cu-tag round bg-green-plain light row-all-center">
-              {{ selectTag.name }}
+        <view v-show="showTagSearch" class="h100r">
+          <tag-search class="h100r" v-model="showTagSearch" @change="changeTag"
+          ></tag-search>
+        </view>
+        <view v-show="!showTagSearch" class="flex-col h100r">
+          <q-navbar>
+            <q-search class="flex-auto" @click.native="openTagSearchVue">
+              <q-icon class="mx-5px text-gray" size="30" icon="search"></q-icon>
+              <view v-if="selectTag" class="flex-row flex-auto">
+                <view class="cu-tag round bg-green-plain light row-all-center">
+                  {{ selectTag.name }}
+                </view>
+              </view>
+              <input v-else :adjust-position="false" type="text"
+                     placeholder="选择话题" confirm-type="search"/>
+              <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" size="28" icon="close"
+                      @click.native.stop="deleteTag(selectTag)"
+              ></q-icon>
+            </q-search>
+            <view class="mr-sm" :class="{'text-blue':useFilters}">
+              <q-icon icon="mdi-filter-variant" size="56" @click="showFilterModel"></q-icon>
             </view>
-          </view>
-          <input v-else :adjust-position="false" type="text"
-                 placeholder="选择话题" confirm-type="search"/>
-          <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" size="28" icon="close"
-                  @click.native.stop="deleteTag(selectTag)"
-          ></q-icon>
-        </q-search>
-        <view class="mr-sm" :class="{'text-blue':useFilters}">
-          <q-icon icon="mdi-filter-variant" size="56" @click="showFilterModel"></q-icon>
-        </view>
-        <view v-if="user" class="position-relative mr-sm">
-          <q-icon icon="bell-fill" size="56" @click="toNotifyVue"></q-icon>
-          <u-badge :count="unreadNotifiesNum" size="mini"
-                   :offset="[0, 0]" @click="toNotifyVue"></u-badge>
-        </view>
-        <view class="mr-sm">
-          <q-icon icon="plus-circle" size="56" @click="toTalkAdd"></q-icon>
-        </view>
-      </q-navbar>
-
-      <q-popup v-model="showFilter" bottom>
-        <q-bar round class="solid-bottom">
-          <view class="text-black text-lgg text-bold">筛选</view>
-          <view class="flex-row">
-            <view class="text-blue text-bold mx-xs px" @click="hideFilter">取消</view>
-            <view class="text-green text-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
-          </view>
-        </q-bar>
-        <view class="mt-sm px-xl pb-xxl">
-          <view class="flex-row px-15px pt-lg">
-            <view class="w70px row-start">性别：</view>
-            <radio-group @change="genderChange">
-              <label v-for="report in genders" :key="report">
-                <radio :value="report" :checked="report===genderValue"></radio>
-                <text class="ml-xs mr-xl">{{ report }}</text>
-              </label>
-            </radio-group>
-          </view>
-          <view class="mt-20px pb-xl pt-sm">
-            <view class="row-between px-15px">
-              <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
+            <view v-if="user" class="position-relative mr-sm">
+              <q-icon icon="bell-fill" size="56" @click="toNotifyVue"></q-icon>
+              <u-badge :count="unreadNotifiesNum" size="mini"
+                       :offset="[0, 0]" @click="toNotifyVue"></u-badge>
             </view>
-            <view class="px-lg">
-              <q-slider
-                :value="rangeValue"
-                :min="rangeMin"
-                :max="rangMax"
-                :bar-height="3"
-                active-color="#FF6B00"
-                :format="format"
-                @change="handleRangeChange"
-              ></q-slider>
+            <view class="mr-sm">
+              <q-icon icon="plus-circle" size="56" @click="toTalkAdd"></q-icon>
             </view>
-          </view>
+          </q-navbar>
+
+          <q-popup v-model="showFilter" bottom>
+            <q-bar round class="solid-bottom">
+              <view class="text-black text-lgg text-bold">筛选</view>
+              <view class="flex-row">
+                <view class="text-blue text-bold mx-xs px" @click="hideFilter">取消</view>
+                <view class="text-green text-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
+              </view>
+            </q-bar>
+            <view class="mt-sm px-xs pb-xlg">
+              <view class="flex-row px-15px pt-lg">
+                <view class="w70px row-start">性别：</view>
+                <radio-group @change="genderChange">
+                  <label v-for="report in genders" :key="report">
+                    <radio :value="report" :checked="report===genderValue"></radio>
+                    <text class="ml-xs mr-xl">{{ report }}</text>
+                  </label>
+                </radio-group>
+              </view>
+              <view class="mt-20px pb-xl pt-sm">
+                <view class="row-between px-15px">
+                  <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
+                </view>
+                <view class="px-lg">
+                  <q-slider
+                    :value="rangeValue"
+                    :min="rangeMin"
+                    :max="rangMax"
+                    :bar-height="3"
+                    active-color="#FF6B00"
+                    :format="format"
+                    @change="handleRangeChange"
+                  ></q-slider>
+                </view>
+              </view>
+            </view>
+          </q-popup>
+
+          <!--  #ifdef APP-PLUS -->
+          <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
+          <!--  #endif -->
+
+          <talk-swipers v-if="configShowSwipers"></talk-swipers>
+
+          <tabs-talk class="flex-auto" ref="tabsTalk" :scrollEnable="scrollEnable"
+                     :selectTagIds="selectTagIds"
+                     :userGender="userGender"
+                     :userMinAge="userMinAge"
+                     :userMaxAge="userMaxAge"
+                     :tabs-id="tabsId"
+          ></tabs-talk>
         </view>
-      </q-popup>
 
-      <!--  #ifdef APP-PLUS -->
-      <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
-      <!--  #endif -->
-
-      <talk-swiper v-if="configShowSwipers"></talk-swiper>
-
-      <tabs-talk class="flex-auto" ref="tabsTalk" :scrollEnable="scrollEnable"
-                 :selectTagIds="selectTagIds"
-                 :userGender="userGender"
-                 :userMinAge="userMinAge"
-                 :userMaxAge="userMaxAge"
-                 :tabs-id="tabsId"
-      ></tabs-talk>
-    </view>
-
-    <!--            评论输入框按钮-->
-    <msg-input v-if="showMsgInput">
-    </msg-input>
+        <!--            评论输入框按钮-->
+        <msg-input v-if="showMsgInput">
+        </msg-input>
   </view>
 </template>
 
@@ -107,7 +107,7 @@ import PageUtil from '@/utils/PageUtil'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import TalkSwipers from '@/pages/talk/TalkSwipers.vue'
+import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import { appModule, locationModule, notifyModule, systemModule, talkModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
@@ -140,7 +140,7 @@ export default class TalkVue extends Vue {
     /*if (params.load) {
       this.initQuery()
     }*/
-    this.initQuery()
+    // this.initQuery()
     UniUtil.showShareMenu()
   }
 
@@ -326,7 +326,7 @@ export default class TalkVue extends Vue {
 
   toNotifyVue () {
     notifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
-    PageUtil.navigateTo(PagePath.notify)
+    RouterUtil.navigateTo(PagePath.notify)
   }
 
   // 必须这么写否则不生效
