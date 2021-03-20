@@ -45,7 +45,7 @@
           </view>
         </view>
       </view>
-      <view class="px-smm pt-sm mt-xs row-between">
+      <view class="px-sm pt-sm mt-xs row-between">
         <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
           <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
           <block v-if="district.adCode">
@@ -74,7 +74,7 @@
             <view class="q-tag q-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
               <q-icon v-if="tag.id" class="ml-5px" icon="close-circle-fill" size="16"
-                      @click.stop="deleteTag(tag)"/>
+                      @click.native.stop="deleteTag(tag)"/>
             </view>
           </view>
         </view>
@@ -96,12 +96,16 @@
         </view>
       </view>
 
-      <view class="row-end-center pa-sm">
-        可见范围：
-        <view class="text-gray pr-xs">
-          <text class="text-lgg text-gray text-lgg">智能推荐</text>
-          <q-icon size="14" class="text-gray" icon="arrow-right"/>
-        </view>
+      <view class="row-col-center pa-sm">
+        <div class="flex-row" @click="showVisibleRangeSelect=true">
+          可见范围：
+          <view class="text-gray pr-xs">
+            <text class="text-lgg text-gray text-lgg">{{ visibleType.label }}</text>
+            <q-icon size="14" class="text-gray" icon="arrow-right"/>
+          </view>
+          <u-select v-model="showVisibleRangeSelect" mode="single-column" :list="visibleTypes"
+                    @confirm="selectVisibleTypeChange"></u-select>
+        </div>
       </view>
       <view class="row-center pt">
         <button class="cu-btn lg bg-pink-light2 w300px" :disabled="buttonDisabled" @click="addTalk">发布</button>
@@ -132,6 +136,8 @@ import TagAdd from '@/pages/tag/TagAdd.vue'
 import RouterUtil from '@/utils/RouterUtil'
 import Alert from '../../utils/Alert'
 import LocationUtil from '@/utils/LocationUtil'
+import ContentVisibleType from '@/const/ContentVisibleType'
+import EnumStrVO from '@/const/EnumStrVO'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -149,8 +155,12 @@ export default class TalkAddVue extends Vue {
   @tagStore.State('tags') readonly storeTags: TagVO []
   @userStore.State('user') readonly user: UserVO
 
+  showVisibleRangeSelect = false
+  visibleType = ContentVisibleType.smartRecommend
   talkContent = ''
   buttonDisabled = false
+
+  visibleTypes = ContentVisibleType.Values
 
   district: DistrictVO = locationModule.location
   showsImgSrcs: ImgFileVO [] = []
@@ -172,6 +182,11 @@ export default class TalkAddVue extends Vue {
     LocationUtil.getLocationNotAuth().then((district: DistrictVO) => {
       this.district = district
     })
+  }
+
+  selectVisibleTypeChange (visibleTypes: EnumStrVO[]) {
+    console.log(visibleTypes[0])
+    this.visibleType = visibleTypes[0]
   }
 
   onReady () {
@@ -306,7 +321,7 @@ export default class TalkAddVue extends Vue {
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showsImgSrcs, this.district, this.selectTagIds)
+    TalkAPI.addTalkAPI(this.talkContent, this.showsImgSrcs, this.district, this.selectTagIds, this.visibleType.value)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
