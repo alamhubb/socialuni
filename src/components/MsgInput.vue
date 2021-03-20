@@ -41,8 +41,8 @@ import UniUtil from '@/utils/UniUtil'
 import { talkModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
 import PlatformUtils from '@/utils/PlatformUtils'
-import UserVO from "@/model/user/UserVO";
-import Alert from "../utils/Alert";
+import UserVO from '@/model/user/UserVO'
+import Alert from '../utils/Alert'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')

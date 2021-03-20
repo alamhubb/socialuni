@@ -1,5 +1,5 @@
 export default class ReportAddVO {
-  public receiveUserId: number
+  public receiveUserId: string
   public talkId: number
   public commentId: number
   public userImgId: number

@@ -68,9 +68,9 @@ import TalkVO from '@/model/talk/TalkVO'
 import BalaBala from '@/utils/BalaBala'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import UniUtil from "@/utils/UniUtil";
-import Alert from "../../utils/Alert";
-import UserVO from "@/model/user/UserVO";
+import UniUtil from '@/utils/UniUtil'
+import Alert from '../../utils/Alert'
+import UserVO from '@/model/user/UserVO'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

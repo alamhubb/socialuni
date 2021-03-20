@@ -68,12 +68,12 @@
 import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
 import { namespace } from 'vuex-class'
-import UserVO from "@/model/user/UserVO";
-import QIcon from "@/components/q-icon/q-icon.vue";
+import UserVO from '@/model/user/UserVO'
+import QIcon from '@/components/q-icon/q-icon.vue'
 
 const userModule = namespace('user')
 @Component({
-  components: {QIcon}
+  components: { QIcon }
 })
 export default class TalkAddTagSearch extends Vue {
     searchContent = ''

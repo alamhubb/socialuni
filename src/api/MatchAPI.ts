@@ -6,11 +6,11 @@ export default class MatchAPI {
     return http.post('match/queryMatchUsers', new MatchQueryVO(userIds, matchType))
   }
 
-  static likeUserAPI (userId: number) {
+  static likeUserAPI (userId: string) {
     return http.post('match/likeMatchUser?userId=' + userId)
   }
 
-  static unlikeUserAPI (userId: number) {
+  static unlikeUserAPI (userId: string) {
     return http.post('match/unlikeMatchUser?userId=' + userId)
   }
 }

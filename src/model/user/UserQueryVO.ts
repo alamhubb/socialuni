@@ -1,7 +1,7 @@
 export default class UserQueryVO {
-  public userId: number
+  public userId: string
 
-  constructor (userId: number) {
+  constructor (userId: string) {
     this.userId = userId
   }
 }

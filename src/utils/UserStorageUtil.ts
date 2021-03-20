@@ -1,5 +1,5 @@
-import StorageUtil from "@/utils/StorageUtil";
-import UserVO from "@/model/user/UserVO";
+import StorageUtil from '@/utils/StorageUtil'
+import UserVO from '@/model/user/UserVO'
 
 export default class UserStorageUtil {
   // 开发生产区分user，避免混淆，不区分的话会冲突

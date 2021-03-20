@@ -1,12 +1,12 @@
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import ProviderType, { Provider } from '@/plugins/uni/const/ProviderType'
+import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtil from '@/utils/JsonUtil'
 import PlatformType from '@/const/PlatformType'
 import { systemModule } from '@/plugins/store'
 import Alert from '@/utils/Alert'
-import LoginRes = UniApp.LoginRes;
-import GetUserInfoRes = UniApp.GetUserInfoRes;
+import LoginRes = UniApp.LoginRes
+import GetUserInfoRes = UniApp.GetUserInfoRes
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 
 export default class UniUser {
@@ -15,15 +15,15 @@ export default class UniUser {
    *
    * 以后需要考虑切换手机，登录同个账户的问题，也没准不用考虑，相同逻辑
    */
-  //这一层就封装了，loading，获取手机号时不能提示登陆中
-  static async getUserInfo (provider: Provider) {
+  //这一层就封装了，loading，获取手机号时不能提示登录中
+  static async getUserInfo (provider: any) {
     try {
       const user: ProviderUserVO = await UniUser.getLoginInfo(provider)
       const userInfoRes: GetUserInfoRes = await UniUtil.getUserInfo(provider)
       Object.assign(user, userInfoRes.userInfo)
       //如果小程序
       if (PlatformType.mp === user.platform) {
-        //合并登陆信息
+        //合并登录信息
         Object.assign(user, userInfoRes.userInfo)
         //如果是微信小程序，需要后台解密
         if (systemModule.isMpWX) {
@@ -36,7 +36,7 @@ export default class UniUser {
         if (provider === ProviderType.qq) {
           user.gender = userInfo.gender_type
         } else {
-          return Promise.reject(Error('错误的登陆方式'))
+          return Promise.reject(Error('错误的登录方式'))
         }
         //如果qq可以获取用户年龄
         user.birthday = userInfo.year
@@ -50,7 +50,7 @@ export default class UniUser {
     }
   }
 
-  static async getLoginInfo (provider: Provider) {
+  static async getLoginInfo (provider: any) {
     const loginRes: LoginRes = await UniUtil.login(provider)
     const loginData: ProviderUserVO = new ProviderUserVO()
     loginData.provider = provider

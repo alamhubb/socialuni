@@ -13,10 +13,10 @@ import UserVO from '@/model/user/UserVO'
 import UserAPI from '@/api/UserAPI'
 import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
-import MsgInput from "@/components/MsgInput.vue";
+import MsgInput from '@/components/MsgInput.vue'
 
 @Component({
-  components: {MsgInput, UserInfo, TalkItem, TalkItemContent }
+  components: { MsgInput, UserInfo, TalkItem, TalkItemContent }
 })
 export default class UserDetail extends Vue {
   user: UserVO = null

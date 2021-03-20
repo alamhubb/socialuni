@@ -147,7 +147,7 @@ export default class TalkItemComment extends Vue {
     }
   }
 
-  toUserDetail (userId: number) {
+  toUserDetail (userId: string) {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
       RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
     }

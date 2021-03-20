@@ -41,10 +41,10 @@ import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import ImgUtil from '@/utils/ImgUtil'
 import PageUtil from '@/utils/PageUtil'
-import RouterUtil from "@/utils/RouterUtil";
-import QIcon from "@/components/q-icon/q-icon.vue";
+import RouterUtil from '@/utils/RouterUtil'
+import QIcon from '@/components/q-icon/q-icon.vue'
 @Component({
-  components: {QIcon}
+  components: { QIcon }
 })
 export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
@@ -55,11 +55,11 @@ export default class TalkItemContent extends Vue {
     }
   }
 
-  getTalkLargeImgUrl (userId: number, src: string) {
+  getTalkLargeImgUrl (userId: string, src: string) {
     return ImgUtil.getTalkLargeImgUrl(userId, src)
   }
 
-  getTalkSmallImgUrl (userId: number, src: string) {
+  getTalkSmallImgUrl (userId: string, src: string) {
     return ImgUtil.getTalkSmallImgUrl(userId, src)
   }
 

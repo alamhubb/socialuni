@@ -4,61 +4,61 @@ import UserPhoneNumVO from '@/model/user/UserPhoneNumVO'
 import ImgFileVO from '@/model/ImgFileVO'
 import UserPayVO from '@/model/user/UserPayVO'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
-import UserEditVO from "@/model/user/UserEditVO";
+import UserEditVO from '@/model/user/UserEditVO'
 
 export default class UserAPI {
-  static getMineUserInfoAPI() {
+  static getMineUserInfoAPI () {
     return http.post('user/mine')
   }
 
-  static queryUserDetailAPI(userId: number) {
+  static queryUserDetailAPI (userId: string) {
     return http.post('user/queryUserDetail', new UserQueryVO(userId))
   }
 
-  static editUserAPI(user: UserEditVO) {
+  static editUserAPI (user: UserEditVO) {
     return http.post('user/edit', user)
   }
 
-  static sendAuthCodeAPI(phoneNum: string) {
+  static sendAuthCodeAPI (phoneNum: string) {
     return http.post('phone/sendAuthCode?phoneNum=' + phoneNum)
   }
 
-  static bindPhoneNumAPI(phoneNum: string, authCode: string) {
+  static bindPhoneNumAPI (phoneNum: string, authCode: string) {
     const phoneNumObj: UserPhoneNumVO = new UserPhoneNumVO(phoneNum, authCode, null)
     return http.post('phone/bindPhoneNum', phoneNumObj)
   }
 
-  static addUserImgAPI(userImg: ImgFileVO) {
+  static addUserImgAPI (userImg: ImgFileVO) {
     return http.post('user/addImg', userImg)
   }
 
-  static deleteUserImgAPI(userImg: ImgFileVO) {
+  static deleteUserImgAPI (userImg: ImgFileVO) {
     return http.post('user/deleteImg', userImg)
   }
 
-  static identityAuthAPI(userImg: ImgFileVO) {
+  static identityAuthAPI (userImg: ImgFileVO) {
     return http.post('identity/auth', userImg)
   }
 
-  static updateAvatarAPI(avatar: string) {
+  static updateAvatarAPI (avatar: string) {
     return http.post('user/updateAvatar?avatar=' + avatar)
   }
 
-  static getUserContactAPI(userId: number) {
+  static getUserContactAPI (userId: string) {
     const user = new UserQueryVO(userId)
     return http.post<string>('user/getUserContact', user)
   }
 
-  static switchUserContactAPI(openContact: boolean) {
+  static switchUserContactAPI (openContact: boolean) {
     return http.post<string>('user/switchUserContact?openContact=' + openContact)
   }
 
-  static userPayAPI(provider: string, payType: string, amount?: number) {
+  static userPayAPI (provider: string, payType: string, amount?: number) {
     const userPayVO = new UserPayVO(provider, payType, amount)
     return http.post<UserPayResultVO>('user/pay', userPayVO)
   }
 
-  static destroyAccountAPI() {
+  static destroyAccountAPI () {
     return http.post('user/destroyAccount')
   }
 }

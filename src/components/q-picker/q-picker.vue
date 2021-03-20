@@ -42,7 +42,7 @@ import UniUtil from '@/utils/UniUtil'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-import CommonUtil from "@/utils/CommonUtil";
+import CommonUtil from '@/utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩

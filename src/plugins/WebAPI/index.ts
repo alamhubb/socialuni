@@ -5,7 +5,6 @@ import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import { configModule, userModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
-import UserStore from '@/plugins/store/UserStore'
 import UserStoreCom from '@/plugins/store/UserStoreCom'
 import Alert from '@/utils/Alert'
 

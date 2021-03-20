@@ -1,6 +1,6 @@
-import LoginDataVO from '@/model/login/LoginDataVO'
-import socialHttp from '@/plugins/social/http'
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
+import socialHttp from '@/plugins/social/http'
+
 
 export default class LoginAPI {
   static providerLoginAPI (loginData: ProviderUserVO) {
@@ -8,7 +8,7 @@ export default class LoginAPI {
   }
 
   //微信绑定手机号使用
-  static bindPhoneNumAPI (loginData: LoginDataVO) {
+  static bindPhoneNumAPI (loginData: ProviderUserVO) {
     return socialHttp.post('user/bindPhoneNum', loginData)
   }
 }

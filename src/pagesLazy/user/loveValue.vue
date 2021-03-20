@@ -59,8 +59,8 @@ import QQUtils from '@/utils/QQUtils'
 import WxUtils from '@/utils/WxUtils'
 import APPUtil from '@/utils/APPUtil'
 import JsonUtils from '@/utils/JsonUtil'
-import {userModule} from "@/plugins/store";
-import Alert from "../../utils/Alert";
+import { userModule } from '@/plugins/store'
+import Alert from '../../utils/Alert'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

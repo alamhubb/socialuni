@@ -1,7 +1,7 @@
 export default class FollowAddVO {
-  public beUserId: number
+  public beUserId: string
 
-  constructor (beUserId: number) {
+  constructor (beUserId: string) {
     this.beUserId = beUserId
   }
 }

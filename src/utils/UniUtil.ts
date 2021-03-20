@@ -50,7 +50,7 @@ export default class UniUtil {
     return uni.upx2px(rpx)
   }
 
-  public static login (provider: Provider) {
+  public static login (provider: any) {
     return new Promise<LoginRes>(resolve => {
       uni.login({
         provider: provider,
@@ -61,7 +61,7 @@ export default class UniUtil {
     })
   }
 
-  public static getUserInfo (provider: Provider) {
+  public static getUserInfo (provider: any) {
     return new Promise<GetUserInfoRes>(resolve => {
       uni.getUserInfo({
         provider: provider,

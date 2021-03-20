@@ -3,7 +3,7 @@
  * @Date 2021-03-05 20:09
  * @Version 1.0
  */
-import JsonUtil from "@/utils/JsonUtil";
+import JsonUtil from '@/utils/JsonUtil'
 
 export default class StorageUtil {
   static setObj (key: string, value: any) {

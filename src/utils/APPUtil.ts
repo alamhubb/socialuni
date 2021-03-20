@@ -3,7 +3,7 @@ import UniUtil from '@/utils/UniUtil'
 import AppUpdateType from '@/const/AppUpdateType'
 import { configModule } from '@/plugins/store'
 import AppConfig from '@/const/AppConfig'
-import Alert from "./Alert";
+import Alert from './Alert'
 
 export default class APPUtil {
   static checkUpdate () {

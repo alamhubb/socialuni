@@ -41,8 +41,8 @@ import ReportAPI from '@/api/ReportAPI'
 import UserVO from '@/model/user/UserVO'
 import BalaBala from '@/utils/BalaBala'
 import PlatformUtils from '@/utils/PlatformUtils'
-import Alert from "../utils/Alert";
-import {chatModule} from "@/plugins/store";
+import Alert from '../utils/Alert'
+import { chatModule } from '@/plugins/store'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

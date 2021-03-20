@@ -81,15 +81,15 @@ import FollowAPI from '@/api/FollowAPI'
 import PageUtil from '@/utils/PageUtil'
 import BalaBala from '@/utils/BalaBala'
 import TalkTabType from '@/const/TalkTabType'
-import RouterUtil from "@/utils/RouterUtil";
-import QIcon from "@/components/q-icon/q-icon.vue";
-import UserVO from "@/model/user/UserVO";
-import Alert from "../../utils/Alert";
-import Toast from "@/utils/Toast";
+import RouterUtil from '@/utils/RouterUtil'
+import QIcon from '@/components/q-icon/q-icon.vue'
+import UserVO from '@/model/user/UserVO'
+import Alert from '../../utils/Alert'
+import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')
 @Component({
-  components: {QIcon}
+  components: { QIcon }
 })
 export default class TalkItemHead extends Vue {
   @Prop() talkProp!: TalkVO

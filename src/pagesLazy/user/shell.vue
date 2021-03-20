@@ -79,7 +79,7 @@ import UserAPI from '@/api/UserAPI'
 import PayType from '@/const/PayType'
 import ProviderType from '@/const/ProviderType'
 import { systemModule } from '@/plugins/store'
-import RouterUtil from "@/utils/RouterUtil";
+import RouterUtil from '@/utils/RouterUtil'
 
 const userStore = namespace('user')
 

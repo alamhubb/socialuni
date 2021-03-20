@@ -1,6 +1,6 @@
 import UniUtil from '@/utils/UniUtil'
 import { Vue } from 'vue-property-decorator'
-import CommonUtil from "@/utils/CommonUtil";
+import CommonUtil from '@/utils/CommonUtil'
 
 export default class ScrollUtil {
   static pageBottom = 3000000

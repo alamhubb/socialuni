@@ -1,8 +1,8 @@
 import { configModule, userModule } from '@/plugins/store'
 import PageUtil from '@/utils/PageUtil'
-import UserVO from "@/model/user/UserVO"
+import UserVO from '@/model/user/UserVO'
 import UniUtil from './UniUtil'
-import Alert from "./Alert";
+import Alert from './Alert'
 
 export default class BalaBala {
   static unBindPhoneNum () {

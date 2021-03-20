@@ -1,4 +1,4 @@
-import {appModule} from "@/plugins/store";
+import { appModule } from '@/plugins/store'
 
 export default class SocialUniAuthVO {
   authType: string
@@ -8,9 +8,9 @@ export default class SocialUniAuthVO {
 
 
   //用户id选填，不填将联盟生成并返回
-  constructor(authType: string, appUserId?: string) {
-    this.authType = authType;
-    this.appSecretKey = appModule.appSocialSecretKey;
-    this.appUserId = appUserId;
+  constructor (authType: string, appUserId?: string) {
+    this.authType = authType
+    this.appSecretKey = appModule.appSocialSecretKey
+    this.appUserId = appUserId
   }
 }

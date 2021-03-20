@@ -10,13 +10,13 @@ import UserStoreCom from '@/plugins/store/UserStoreCom'
 
 export default class SocialLoginService {
   /**
-   * 渠道登陆的同一方法
+   * 渠道登录的同一方法
    */
   static async providerLogin (provider: Provider, loginData?: ProviderUserVO) {
     UniUtil.showLoading('登录中')
     try {
       if (provider !== ProviderType.phone) {
-        loginData = await UniUser.getUserInfo(provider)
+        loginData = await UniUser.getUserInfo(provider as Provider)
       }
       if (systemModule.isApp) {
         loginData.clientid = systemModule.clientid

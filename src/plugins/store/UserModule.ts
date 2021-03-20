@@ -1,4 +1,4 @@
-import { VuexModule, Module, VuexModule, Module, Action } from 'vuex-class-modules'
+import { VuexModule, Module, Action } from 'vuex-class-modules'
 import UserVO from '@/model/user/UserVO'
 
 import UserAPI from '@/api/UserAPI'

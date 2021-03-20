@@ -33,7 +33,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
 import QQUtils from '@/utils/QQUtils'
-import Alert from "../../utils/Alert";
+import Alert from '../../utils/Alert'
 
   @Component
 export default class MorePage extends Vue {

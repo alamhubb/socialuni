@@ -42,7 +42,7 @@ import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import ImgUtil from '@/utils/ImgUtil'
 import PagePath from '@/const/PagePath'
 import PageUtil from '@/utils/PageUtil'
-import RouterUtil from "@/utils/RouterUtil";
+import RouterUtil from '@/utils/RouterUtil'
 
 const appStore = namespace('app')
 
@@ -59,7 +59,7 @@ export default class NotifyVue extends Vue {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)
     }
 
-    getTalkSmallImgUrl (userId: number, src: string) {
+    getTalkSmallImgUrl (userId: string, src: string) {
       return ImgUtil.getTalkSmallImgUrl(userId, src)
     }
 }

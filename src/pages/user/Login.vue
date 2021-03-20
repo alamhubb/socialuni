@@ -410,12 +410,10 @@ import CommonUtil from '@/utils/CommonUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import UserAPI from '@/api/UserAPI'
 import RouterUtil from '@/utils/RouterUtil'
-import PageUtil from '@/utils/PageUtil'
-import LoginAPI from '@/api/LoginAPI'
 import ConfigMap from '@/const/ConfigMap'
 import SkipUrlConst from '@/const/SkipUrlConst'
 import ProviderType, { Provider } from '@/const/ProviderType'
-import LoginDataVO from '@/model/login/LoginDataVO'
+import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import { systemModule, userModule } from '@/plugins/store'
 import ButtonOpenType from '@/const/ButtonOpenType'
 import Alert from '@/utils/Alert'
@@ -460,7 +458,7 @@ export default class LoginVue extends Vue {
   showPhoneView = false
   goBackCountDown = 0
 
-  //平台登陆
+  //平台登录
   providerLogin (result, provider: Provider) {
     if (this.openTypeBtnEnable) {
       // #ifdef MP
@@ -479,12 +477,12 @@ export default class LoginVue extends Vue {
     }
   }
 
-  //登陆，授权，绑定手机号各大平台登陆结果，后者授权手机号结果
+  //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   openTypeBtnClick (providerResult) {
     if (this.openTypeBtnEnable) {
       if (!this.user) {
         this.providerLogin(providerResult, systemModule.provider)
-        //登陆完成之后，只有为授权用户信息跳转会小程序
+        //登录完成之后，只有为授权用户信息跳转会小程序
       } else if (this.isAuthPhone && !this.hasPhoneNum) {
         // this.getPhoneNumberByWx(providerResult)
         //只有为用户授权手机号，跳转回三方，否则停留
@@ -519,7 +517,7 @@ export default class LoginVue extends Vue {
           console.log('授权用户手机号')
         })
       } else {
-        console.error('错误的登陆逻辑分支')
+        console.error('错误的登录逻辑分支')
       }
     }
   }
@@ -679,12 +677,12 @@ export default class LoginVue extends Vue {
           this.bindBtnDisabled = false
         })
       } else {
-        const loginData = new LoginDataVO()
+        const loginData = new ProviderUserVO()
         loginData.phoneNum = this.phoneNum
         loginData.authCode = this.authCode
         loginData.provider = ProviderType.phone
         loginData.platform = systemModule.platform
-        await SocialLoginService.providerLogin(loginData)
+        await SocialLoginService.providerLogin(ProviderType.phone, loginData)
         this.bindBtnDisabled = false
       }
     }

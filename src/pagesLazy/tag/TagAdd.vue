@@ -38,8 +38,8 @@ import { Vue, Component } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
 import TagAPI from '@/api/TagAPI'
 import ResultVO from '@/model/ResultVO'
-import ErrorConst from "@/const/ErrorConst";
-import Alert from "../../utils/Alert";
+import ErrorConst from '@/const/ErrorConst'
+import Alert from '../../utils/Alert'
 
 @Component
 export default class TagAddVue extends Vue {

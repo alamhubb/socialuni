@@ -37,7 +37,7 @@ import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
 import { systemModule } from '@/plugins/store'
 import PayType from '@/const/PayType'
-import Alert from "../../utils/Alert";
+import Alert from '../../utils/Alert'
 
 const userStore = namespace('user')
 const configStore = namespace('config')

@@ -51,8 +51,8 @@ import TalkItem from '@/pages/talk/TalkItem.vue'
 import PageUtil from '@/utils/PageUtil'
 import { namespace } from 'vuex-class'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
-import MsgInput from "@/components/MsgInput.vue";
-import RouterUtil from "@/utils/RouterUtil";
+import MsgInput from '@/components/MsgInput.vue'
+import RouterUtil from '@/utils/RouterUtil'
 
 const appStore = namespace('app')
 

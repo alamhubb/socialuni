@@ -1,4 +1,4 @@
-import LoginDataVO from '@/model/login/LoginDataVO'
+import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import UniUtil from '@/utils/UniUtil'
 import { systemModule } from '@/plugins/store'
 import ProviderType, { Provider } from '@/const/ProviderType'
@@ -11,7 +11,7 @@ import Alert from '../../utils/Alert'
 export default class LoginService {
   static getLoginData (provider: Provider) {
     return UniUtil.login(provider).then((loginRes) => {
-      const loginData: LoginDataVO = new LoginDataVO()
+      const loginData: ProviderUserVO = new ProviderUserVO()
       loginData.provider = provider
       loginData.platform = systemModule.platform
       if (PlatformType.mp === loginData.platform) {

@@ -97,50 +97,50 @@
     <login v-else class="h100p"></login>
 
 
-<!--    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
-      <view v-if="user" class="pb-xl px-sm pt">
-        <q-row class="text-bold">
-          <view class="mr">
-            集美小世界丨女孩生活分享交友
-          </view>
-          <view>申请</view>
-        </q-row>
-
-        <q-row class="text-lg text-bold solid-bottom">
-          获取您的昵称、头像、地区及性别
-        </q-row>
-        <view class="flex-row py-sm solid-bottom">
-          <view class="w100r card-title pb-10px">
-            <image
-              class="card-title-avatar"
-              mode="aspectFill"
-              :src="user.avatar"
-            />
-            <view class="row-between flex-auto">
-              <view>
-                <view class="h25px row-col-center">
-                  <text class="text-lgg">{{ user.nickname }}</text>
-                </view>
-                <view class="text-gray text-sm h25px row-col-center">
-                  清池个人信息
-                </view>
+    <!--    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
+          <view v-if="user" class="pb-xl px-sm pt">
+            <q-row class="text-bold">
+              <view class="mr">
+                集美小世界丨女孩生活分享交友
               </view>
-              &lt;!&ndash;                不为自己且未关注&ndash;&gt;
-              <view class="col-center">
-                <u-icon name="checkmark" color="success"></u-icon>
+              <view>申请</view>
+            </q-row>
+
+            <q-row class="text-lg text-bold solid-bottom">
+              获取您的昵称、头像、地区及性别
+            </q-row>
+            <view class="flex-row py-sm solid-bottom">
+              <view class="w100r card-title pb-10px">
+                <image
+                  class="card-title-avatar"
+                  mode="aspectFill"
+                  :src="user.avatar"
+                />
+                <view class="row-between flex-auto">
+                  <view>
+                    <view class="h25px row-col-center">
+                      <text class="text-lgg">{{ user.nickname }}</text>
+                    </view>
+                    <view class="text-gray text-sm h25px row-col-center">
+                      清池个人信息
+                    </view>
+                  </view>
+                  &lt;!&ndash;                不为自己且未关注&ndash;&gt;
+                  <view class="col-center">
+                    <u-icon name="checkmark" color="success"></u-icon>
+                  </view>
+                </view>
               </view>
             </view>
-          </view>
-        </view>
 
-        <q-row class="py-xl">
-          <view class="row-center w100r pt-xl">
-            <u-button class="mr-xl w30vw">取消</u-button>
-            <u-button class="w30vw" type="success" @click="toThreeAuthUserInfo">允许</u-button>
+            <q-row class="py-xl">
+              <view class="row-center w100r pt-xl">
+                <u-button class="mr-xl w30vw">取消</u-button>
+                <u-button class="w30vw" type="success" @click="toThreeAuthUserInfo">允许</u-button>
+              </view>
+            </q-row>
           </view>
-        </q-row>
-      </view>
-    </u-popup>-->
+        </u-popup>-->
   </view>
 </template>
 
@@ -152,15 +152,10 @@ import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
 import { namespace } from 'vuex-class'
 import UserEdit from '@/pages/user/UserEdit.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
-import LoginService from '@/pages/user/LoginService'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
-import UserStore from '@/plugins/store/UserStore'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import { appModule, systemModule, userModule } from '@/plugins/store'
-import Constants from '@/const/Constant'
+import { appModule, userModule } from '@/plugins/store'
 import QNavbar from '@/components/q-navbar/q-navbar.vue'
-import PagePath from '@/const/PagePath'
 import QRow from '@/components/q-row/q-row.vue'
 import QBar from '@/components/q-bar/q-bar.vue'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'

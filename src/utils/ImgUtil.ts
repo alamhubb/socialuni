@@ -60,7 +60,7 @@ export default class ImgUtil {
     })
   }
 
-  static getTalkLargeImgUrl (userId: number, src: string): string {
+  static getTalkLargeImgUrl (userId: string, src: string): string {
     // 如果包含'/'则代表是新逻辑
     let imgUrl = null
     if (src) {
@@ -77,7 +77,7 @@ export default class ImgUtil {
     return imgUrl
   }
 
-  static getTalkSmallImgUrl (userId: number, src: string): string {
+  static getTalkSmallImgUrl (userId: string, src: string): string {
     // 如果包含'/'则代表是新逻辑
     let imgUrl = null
     if (src) {
@@ -102,19 +102,19 @@ export default class ImgUtil {
     return src + '!normal'
   }
 
-  static getTalkUploadFormat (userId: number, filePath: string): string {
+  static getTalkUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/talk/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserAvatarUploadFormat (userId: number, filePath: string): string {
+  static getUserAvatarUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/avatar/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserImgUploadFormat (userId: number, filePath: string): string {
+  static getUserImgUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/img/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserIdentityUploadFormat (userId: number, filePath: string): string {
+  static getUserIdentityUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/identity/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
@@ -130,11 +130,11 @@ export default class ImgUtil {
     return fileSuffixName
   }
 
-  /* static getTalkLargeImgUrl(userId: number): string {
+  /* static getTalkLargeImgUrl(userId: string): string {
     return ImgUtil.imgUrl + 'talk/' + userId + '/normal/'
   }
 
-  static getTalkSmallImgUrl(userId: number): string {
+  static getTalkSmallImgUrl(userId: string): string {
     return ImgUtil.imgUrl + 'talk/' + userId + '/thumbnail/'
   } */
 }

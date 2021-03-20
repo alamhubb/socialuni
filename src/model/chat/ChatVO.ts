@@ -17,10 +17,10 @@ export default class ChatVO {
   public lastContent: string = null
   public vipFlag: boolean = null
   public needPayOpen: boolean = null
-  public receiveUserId: number = null
+  public receiveUserId: string = null
   public loadMore: string = null
 
- /* constructor (chat?: ChatVO) {
+  /* constructor (chat?: ChatVO) {
     if (chat) {
       this.id = chat.id
       this.nickname = chat.nickname

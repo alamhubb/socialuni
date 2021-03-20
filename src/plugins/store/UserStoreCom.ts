@@ -21,7 +21,7 @@ export default class UserStoreCom {
    */
   static getMineUserInitDataActionByToken (res: ResultVO<LoginResultVO>) {
     TokenUtil.set(res.data.tokenCode)
-    //登陆之后重连websocket
+    //登录之后重连websocket
     WebsocketUtil.websocketClose()
     userModule.setUser(res.data.user)
     return res.data.user

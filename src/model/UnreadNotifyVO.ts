@@ -1,6 +1,6 @@
 export default class UnreadNotifyVO {
   public talkId: number
-  public talkUserId: number
+  public talkUserId: string
   public avatar: string
   public nickname: string
   public content: string

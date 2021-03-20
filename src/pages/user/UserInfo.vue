@@ -327,7 +327,6 @@ import PagePath from '@/const/PagePath'
 import FollowAPI from '@/api/FollowAPI'
 import FollowStatus from '@/const/FollowStatus'
 import PageUtil from '@/utils/PageUtil'
-import LoginDataVO from '@/model/login/LoginDataVO'
 import LoginService from '@/pages/user/LoginService'
 import ImgFileVO from '@/model/ImgFileVO'
 import ImgUtil from '@/utils/ImgUtil'
@@ -348,16 +347,16 @@ import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
 import MsgUtil from '@/utils/MsgUtil'
 import PayType from '@/const/PayType'
-import ProviderType from '@/const/ProviderType'
+import ProviderType, { Provider } from '@/const/ProviderType'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import RouterUtil from '@/utils/RouterUtil'
-import ErrorConst from '@/const/ErrorConst'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import LoginUtil from '@/utils/LoginUtil'
 import ErrorCode from '@/const/ErrorCode'
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
+
 
 const userStore = namespace('user')
 const appStore = namespace('app')
@@ -556,7 +555,7 @@ export default class UserInfo extends Vue {
   }
 
   //跳转清池绑定手机号
-  getPhoneNumberAfterHandler (loginData: ProviderUserVO) {
+  async getPhoneNumberAfterHandler (loginData: ProviderUserVO) {
     /*return LoginAPI.bindPhoneNumAPI(loginData).then((res: any) => {
       userModule.setUser(res.data.user)
       AlertUtil.hint(res.data.hint)
@@ -565,7 +564,7 @@ export default class UserInfo extends Vue {
 
   //微信绑定手机号使用
   getPhoneNumberByLogin (obj: any) {
-    LoginService.getLoginData(systemModule.provider).then((loginData: ProviderUserVO) => {
+    LoginService.getLoginData(systemModule.provider as Provider).then((loginData: ProviderUserVO) => {
       Object.assign(loginData, obj.detail)
       // 代表已过期
       loginData.sessionEnable = false

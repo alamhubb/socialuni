@@ -1,4 +1,4 @@
-import UserVO from "@/model/user/UserVO";
+import UserVO from '@/model/user/UserVO'
 
 export default class CommentVO {
   public id: number = null

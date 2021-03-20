@@ -1,6 +1,6 @@
 import StorageUtil from '@/utils/StorageUtil'
 import GenderType from '@/const/GenderType'
-import {appModule} from "@/plugins/store";
+import { appModule } from '@/plugins/store'
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'

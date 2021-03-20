@@ -1,10 +1,10 @@
-import LoginDataVO from '@/model/login/LoginDataVO'
+import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import http from '@/plugins/http'
 import { systemModule } from '@/plugins/store'
 import UserStoreCom from '@/plugins/store/UserStoreCom'
 
 export default class LoginAPI {
-  static platformLoginAPI (loginData: LoginDataVO) {
+  static platformLoginAPI (loginData: ProviderUserVO) {
     if (systemModule.isApp) {
       loginData.clientid = systemModule.clientid
     }
@@ -15,7 +15,7 @@ export default class LoginAPI {
   }
 
   //微信绑定手机号使用
-  static bindPhoneNumAPI (loginData: LoginDataVO) {
+  static bindPhoneNumAPI (loginData: ProviderUserVO) {
     return http.post('user/bindPhoneNum', loginData)
   }
 }

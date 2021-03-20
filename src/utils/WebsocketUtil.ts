@@ -1,17 +1,17 @@
 import TokenUtil from '@/utils/TokenUtil'
 import NotifyVO from '@/model/NotifyVO'
 import JsonUtil from '@/utils/JsonUtil'
-import {notifyModule} from '@/plugins/store'
+import { notifyModule } from '@/plugins/store'
 import NotifyType from '@/const/NotifyType'
 import AppConfig from '@/const/AppConfig'
-import CommonUtil from "@/utils/CommonUtil";
+import CommonUtil from '@/utils/CommonUtil'
 
 export default class WebsocketUtil {
   //失败重连时间
   static failedReconnectTime = 2000
   static timer: number
 
-  static websocketConnect(reload: boolean) {
+  static websocketConnect (reload: boolean) {
     let token: string
 
     if (TokenUtil.hasToken()) {
@@ -87,7 +87,7 @@ export default class WebsocketUtil {
     })
   }
 
-  static websocketClose() {
+  static websocketClose () {
     uni.closeSocket({})
   }
 }
