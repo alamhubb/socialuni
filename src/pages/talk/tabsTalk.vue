@@ -22,7 +22,7 @@
       </view>-->
     </q-row-bar>
 
-    <city-picker v-model="showCityPopup" :district="district" @confirm="cityChange"></city-picker>
+    <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
@@ -117,14 +117,14 @@ import TalkItem from '@/pages/talk/TalkItem.vue'
 import { namespace } from 'vuex-class'
 import LoadMoreType from '@/const/LoadMoreType'
 import DistrictVO from '@/model/DistrictVO'
-import DistrictUtil from '@/utils/DistrictUtil'
+import LocationUtil from '@/utils/LocationUtil'
 import Constants from '@/const/Constant'
 import StorageUtil from '@/utils/StorageUtil'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
 import UniUtil from '@/utils/UniUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { appModule, districtModule, systemModule, talkModule } from '@/plugins/store'
+import { appModule, locationModule, systemModule, talkModule } from '@/plugins/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '@/components/q-tab/q-tab.vue'
 import QTabs from '@/components/q-tabs/q-tabs.vue'
@@ -140,6 +140,7 @@ const userStore = namespace('user')
 const appStore = namespace('app')
 const configStore = namespace('config')
 const talkStore = namespace('talk')
+const locationStore = namespace('location')
 
 // todo 后台可控制是否显示轮播图
 
@@ -170,7 +171,7 @@ export default class TabsTalkVue extends Vue {
     //必须有this.talkTabObj 且 不为首次加载才行
     if (this.talkTabObj && !this.talkTabObj.firstLoad) {
       //如果当前为关注，则重新查询,否则的话将关注列设置为首次查询
-      this.autoChooseUsePositionQueryTalks(true)
+      this.autoChooseUseLocationQueryTalks(true)
       //把非当前的设置为初始
       this.talkTabs.filter(item => item.type !== this.talkTabObj.type).forEach(item => (item.firstLoad = true))
     }
@@ -248,14 +249,14 @@ export default class TabsTalkVue extends Vue {
   onreachBottom () {
     // 只要不是没有了就还可以加载
     if (this.talkTabObj.loadMore !== LoadMoreType.noMore) {
-      this.autoChooseUsePositionQueryTalks()
+      this.autoChooseUseLocationQueryTalks()
     }
   }
 
   @userStore.State('user') user: UserVO
   // 页面是否为首次查询
 
-  @districtStore.State('district') district: DistrictVO
+  @locationStore.State('location') location: DistrictVO
   @Prop() readonly selectTagIds: number[]
   @Prop() readonly userGender: string
   @Prop() readonly userMinAge: number
@@ -264,21 +265,21 @@ export default class TabsTalkVue extends Vue {
   //供父组件使用，不可删除
   initQuery () {
     //首次打开talk页面，获取用户位置用来查询
-    districtModule.appLunchInitDistrict().then(() => {
-      this.autoChooseUsePositionQueryTalks(true)
+    locationModule.appLunchInitDistrict().then(() => {
+      this.autoChooseUseLocationQueryTalks(true)
     })
   }
 
   //如果用户开了定位，就获取经纬度去查询，如果用户没开启定位，就不使用经纬度，没必要每次都获取经纬度。
-  autoChooseUsePositionQueryTalks (firstLoad?: boolean) {
+  autoChooseUseLocationQueryTalks (firstLoad?: boolean) {
     //只有不为加载中才可以加载
     if (this.talkTabObj.loadMore !== LoadMoreType.loading) {
       // 执行正在加载动画
       this.talkTabObj.loadMore = LoadMoreType.loading
       this.queryTalks(firstLoad)
       //首次时加载地理位置就好了，之后就是点击定位的时候加载
-      /*if (districtModule.openPosition) {
-        this.requestUsePositionQueryTalks(firstLoad)
+      /*if (locationModule.openLocation) {
+        this.requestUseLocationQueryTalks(firstLoad)
       } else {
         this.queryTalks(firstLoad)
       }*/
@@ -286,14 +287,14 @@ export default class TabsTalkVue extends Vue {
   }
 
   // 首次查询时获取详细定位,同城查询时，请求使用地理位置定位，切换至同城时，请求地理位置定位。还有点击同城，弹出选择框时，还有点击定为时
-  requestUsePositionQueryTalks (firstLoad?: boolean) {
+  requestUseLocationQueryTalks (firstLoad?: boolean) {
     // 如果有经纬度，如果附近，就只显示附近，不根据adcode，怎么排序？按这个应该可调，刚开始按天，每小时，每半小时，5分钟排序，然后按距离排序
     // 如果没有经纬度，根据adcode，时间倒序，
     // 用户注册，默认显示中国，点击筛选后，提示，是否切换到附近，点击之后，提示附近
     // 只有用户点了附近，才能获取用户位置
-    DistrictUtil.getCurPositionBySDK().then((res: DistrictVO) => {
+    LocationUtil.getCurLocationBySDK().then((res: DistrictVO) => {
       if (res) {
-        districtModule.updateLonAndLat(res.lon, res.lat)
+        locationModule.updateLocationLonAndLat(res.lon, res.lat)
       }
       this.queryTalks(firstLoad)
     }).catch(() => {
@@ -339,7 +340,7 @@ export default class TabsTalkVue extends Vue {
       if (loadMoreState === LoadMoreType.loading) {
         talkTab.loadMore = LoadMoreType.more
       } else {
-        this.autoChooseUsePositionQueryTalks(firstLoad)
+        this.autoChooseUseLocationQueryTalks(firstLoad)
       }
     }
   }
@@ -405,7 +406,7 @@ export default class TabsTalkVue extends Vue {
     })
     //如果首次加载，则需要查询
     if (this.talkTabs[current].firstLoad) {
-      this.autoChooseUsePositionQueryTalks(true)
+      this.autoChooseUseLocationQueryTalks(true)
     }
   }
 
@@ -418,8 +419,8 @@ export default class TabsTalkVue extends Vue {
   }
 
   cityChange (district: DistrictVO) {
-    districtModule.setDistrict(district)
-    this.autoChooseUsePositionQueryTalks(true)
+    locationModule.setLocation(district)
+    this.autoChooseUseLocationQueryTalks(true)
   }
 
   @configStore.State('appConfig') readonly appConfig: object

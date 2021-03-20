@@ -2,17 +2,17 @@ import http from '@/plugins/http'
 import AppUpdateVO from '@/model/app/AppUpdateVO'
 import AppUpdateResultVO from '@/model/app/AppUpdateResultVO'
 import FrontErrorLogVO from '@/model/app/FrontErrorLogVO'
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtil from '@/utils/JsonUtil'
 import { AuthUserInfoRequestVO } from '@/model/openData/AuthUserInfoRequestVO'
-import { appModule, systemModule } from '@/plugins/store'
+import { systemModule } from '@/plugins/store'
 import { AuthUserInfoResultVO } from '@/model/openData/AuthUserInfoResultVO'
 
 export default class OpenDataAPI {
   static authUserInfoAPI () {
     const requestVO: AuthUserInfoRequestVO = {
-      threeSecretKey: appModule.threeSecretKey,
-      threeUserId: appModule.threeUserId,
-      providerAppId: appModule.threeProviderAppId,
+      // threeSecretKey: appModule.threeSecretKey,
+      // threeUserId: appModule.threeUserId,
+      // providerAppId: appModule.threeProviderAppId,
       providerType: systemModule.provider
     }
     return http.post<AuthUserInfoResultVO>('user/authUserInfo', requestVO)
@@ -28,6 +28,6 @@ export default class OpenDataAPI {
   }
 
   static sendErrorLog (uri: string, detail: string, params: any, errorMsg: any) {
-    return http.post('app/sendErrorLog', new FrontErrorLogVO(uri, detail, JsonUtils.toJson(params), JsonUtils.toJson(errorMsg)))
+    return http.post('app/sendErrorLog', new FrontErrorLogVO(uri, detail, JsonUtil.toJson(params), JsonUtil.toJson(errorMsg)))
   }
 }

@@ -9,7 +9,7 @@ import ChatModule from '@/plugins/store/ChatModule'
 import PlatformModule from '@/plugins/store/PlatformModule'
 import NotifyModule from '@/plugins/store/NotifyModule'
 import TagModule from '@/plugins/store/TagModule'
-import DistrictModule from '@/plugins/store/DistrictModule'
+import LocationModule from '@/plugins/store/LocationModule'
 
 Vue.use(Vuex)
 
@@ -25,7 +25,7 @@ export const platformModule = new PlatformModule({ store, name: 'platform' })
 
 export const notifyModule = new NotifyModule({ store, name: 'notify' })
 export const tagModule = new TagModule({ store, name: 'tag' })
-export const districtModule = new DistrictModule({ store, name: 'district' })
+export const locationModule = new LocationModule({ store, name: 'district' })
 
 
 

@@ -45,7 +45,7 @@
       </view>
       <view class="article-bro pt-sm mt-xs row-between">
         <view class="v-tag v-round bg-orange-plain" @click="openSearchVue">
-          <q-icon v-if="district.isPosition || !district.adCode" size="28" icon="map-fill"/>
+          <q-icon v-if="district.isLocation || !district.adCode" size="28" icon="map-fill"/>
           <block v-if="district.adCode">
             {{district.provinceName}}
             <text v-if="district.cityName">
@@ -107,7 +107,7 @@ import UniUtil from '@/utils/UniUtil'
 import DistrictVO from '@/model/DistrictVO'
 import { namespace } from 'vuex-class'
 import JsonUtils from '@/utils/JsonUtils'
-import DistrictUtil from '@/utils/DistrictUtil'
+import LocationUtil from '@/utils/LocationUtil'
 import TagVO from '@/model/tag/TagVO'
 import TagUtil from '@/utils/TagUtil'
 import PageUtil from '@/utils/PageUtil'
@@ -115,7 +115,7 @@ import ImgUtil from '@/utils/ImgUtil'
 import UserVO from '@/model/user/UserVO'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
-import { appModule } from '@/plugins/store'
+import { appModule, locationModule } from '@/plugins/store'
 import TalkAddTagSearch from '@/pagesLazy/talk/TalkAddTagSearch.vue'
 import CityPicker from '@/components/CityPicker.vue'
 import TagAdd from '@/pagesLazy/tag/TagAdd.vue'
@@ -143,7 +143,7 @@ export default class TalkAddVue extends Vue {
 
   onLoad () {
     this.tags = JsonUtils.deepClone(this.storeTags)
-    DistrictUtil.getCityByIpWebAPI().then((district: DistrictVO) => {
+    LocationUtil.getCityByIpWebAPI().then((district: DistrictVO) => {
       this.district = district
     }).catch(() => {
       this.district = appModule.district
@@ -242,7 +242,7 @@ export default class TalkAddVue extends Vue {
   openSearchVue () {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
-      appModule.getDistrictsAction()
+      locationModule.getDistrictsAction()
     }
     this.showSearch = true
   }

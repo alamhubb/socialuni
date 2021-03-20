@@ -107,7 +107,7 @@ import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/utils/UniUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import TabsTalk from '@/pages/talk/tabsTalk.vue'
-import { appModule, districtModule, systemModule, talkModule } from '@/plugins/store'
+import { appModule, locationModule, notifyModule, systemModule, talkModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import CommonUtil from '@/utils/CommonUtil'
@@ -227,7 +227,7 @@ export default class TalkVue extends Vue {
     // this.$refs.tabsTalk.initQuery()
     this.$nextTick(() => {
       //首次打开talk页面，获取用户位置用来查询
-      // districtModule.appLunchInitDistrict().then(() => {
+      // locationModule.appLunchInitDistrict().then(() => {
       this.$refs.tabsTalk.initQuery()
       // })
     })
@@ -323,7 +323,7 @@ export default class TalkVue extends Vue {
   unreadNotifiesNum = 0
 
   toNotifyVue () {
-    appModule.queryUnreadNotifiesAndUpdateHasReadAction()
+    notifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
     PageUtil.navigateTo(PagePath.notify)
   }
 

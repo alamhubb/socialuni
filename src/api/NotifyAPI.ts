@@ -1,15 +1,11 @@
 import http from '@/plugins/http'
 
 export default class NotifyAPI {
-  static queryNotifies () {
+  static queryNotifiesAPI () {
     return http.post('notify/queryNotifies')
   }
 
-  static queryUnreadNotifies () {
-    return http.post('notify/queryUnreadNotifies')
-  }
-
-  static queryUnreadNotifiesAndUpdateHasRead () {
+  static queryUnreadNotifiesAndUpdateHasReadAPI () {
     return http.post('notify/queryUnreadNotifiesAndUpdateHasRead')
   }
 }

@@ -23,9 +23,6 @@
       "path": "pages/talk/empty"
     },
     {
-      "path": "pages/talk/tempTest"
-    },
-    {
       "path": "pages/match/match",
       "style": {
         "navigationBarTitleText": "匹配",

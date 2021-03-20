@@ -139,7 +139,7 @@ export default class UserEdit extends Vue {
       this.nickname = this.user.nickname || ''
       this.gender = this.user.gender || '女'
       this.birthday = this.user.birthday || '1999-01-01'
-      this.location = this.user.location || ''
+      this.location = this.user.city || ''
       this.contactAccount = this.user.contactAccount || ''
       this.wxAccount = this.user.wxAccount || ''
       this.qqAccount = this.user.qqAccount || ''

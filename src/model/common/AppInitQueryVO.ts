@@ -1,9 +1,9 @@
-import {districtModule, systemModule} from '@/plugins/store'
-import DistrictUtil from '@/utils/DistrictUtil'
+import { locationModule, systemModule } from '@/plugins/store'
+import LocationUtil from '@/utils/LocationUtil'
 import DistrictVO from '@/model/DistrictVO'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
-import GenderType from "@/const/GenderType";
+import GenderType from '@/const/GenderType'
 
 export default class AppInitQueryVO {
   //上次退出时记录的adCode
@@ -14,7 +14,7 @@ export default class AppInitQueryVO {
   public maxAge: number
   public lon: number
   public lat: number
-  public openPosition: boolean
+  public openLocation: boolean
   public platform: string
   public standby: string
 

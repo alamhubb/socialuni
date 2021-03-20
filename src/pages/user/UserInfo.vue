@@ -122,7 +122,7 @@
 
         <view class="q-box-row q-solid-bottom">
           <q-icon class="text-gray mr-xs" size="50" icon="map-fill"/>
-          地区：{{ userProp.location }}
+          地区：{{ userProp.city }}
         </view>
 
         <view v-if="isMine" class="q-box-row q-solid-bottom">

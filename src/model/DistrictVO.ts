@@ -13,5 +13,5 @@ export default class DistrictVO {
   // 纬度,纬度范围-90~90
   public lat: number = null
   // 是否为定位，为定位的话会显示定位图标
-  public isPosition = false
+  public isLocation = false
 }

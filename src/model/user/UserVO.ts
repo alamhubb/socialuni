@@ -8,7 +8,7 @@ export default class UserVO {
   gender: string = null
   avatar: string = null
   age: number = null
-  location: string = null
+  city: string = null
   birthday: string = null
   imgs: ImgFileVO [] = null
   // 用来区分是否已经喜欢过

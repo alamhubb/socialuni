@@ -3,7 +3,7 @@
     <q-bar round class="solid-bottom">
       <view class="text-black text-lgg text-bold">城市筛选</view>
       <view class="flex-row">
-        <view class="text-orange text-bold mx-xs px bg-active" @click="getPosition">
+        <view class="text-orange text-bold mx-xs px bg-active" @click="getLocation">
           <q-icon size="30" icon="map-fill" class="mr-mn"></q-icon>
           定位
         </view>
@@ -17,7 +17,7 @@
         当前选择：
       </view>
       <view v-if="bottomDistrict" class="row-col-center">
-        <q-icon v-if="bottomDistrict.isPosition" size="30" class="mr-mn" icon="map-fill"/>
+        <q-icon v-if="bottomDistrict.isLocation" size="30" class="mr-mn" icon="map-fill"/>
         <view class="text-bold" v-if="bottomDistrict.provinceName">
           {{bottomDistrict.provinceName}}
         </view>
@@ -33,7 +33,7 @@
       </view>
       <!--  如果在选择里双击，就会取消选中，bottomDistrict就没值了，就会显示这里-->
       <view v-else-if="district" class="row-col-center">
-        <q-icon v-if="district.isPosition" size="30" class="mr-mn" icon="map-fill"/>
+        <q-icon v-if="district.isLocation" size="30" class="mr-mn" icon="map-fill"/>
         <view class="text-bold" v-if="district.provinceName">
           {{district.provinceName}}
         </view>
@@ -60,8 +60,8 @@
 import { Vue, Component, Emit, Model, Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import DistrictVO from '@/model/DistrictVO'
-import { appModule } from '@/plugins/store'
-import DistrictUtil from '@/utils/DistrictUtil'
+import { appModule, locationModule } from '@/plugins/store'
+import LocationUtil from '@/utils/LocationUtil'
 import UniUtil from '@/utils/UniUtil'
 
 const appStore = namespace('app')
@@ -74,7 +74,7 @@ export default class CityPicker extends Vue {
   // 页面初始化模块
   @appStore.State('districts') readonly districts: DistrictVO[]
   @Prop() readonly district: DistrictVO
-  bottomDistrict: DistrictVO = DistrictUtil.initDistrict
+  bottomDistrict: DistrictVO = LocationUtil.initDistrict
   showCityPopup = false
 
   @Model('input') readonly value!: any
@@ -89,10 +89,10 @@ export default class CityPicker extends Vue {
   open () {
     this.showCityPopup = true
     this.bottomDistrict = this.district
-    this.getPosition()
+    this.getLocation()
     // 如果未加载过全部数据，数据不完整，则加载全部数据，如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
-      appModule.getDistrictsAction()
+      locationModule.getDistrictsAction()
     }
   }
 
@@ -119,8 +119,8 @@ export default class CityPicker extends Vue {
   }
 
   // 如果当前定位是附近则发表后跳转到talk页要查询附近的，发表动态时修改store
-  getPosition () {
-    return DistrictUtil.getCurPositionBySDK().then((district: DistrictVO) => {
+  getLocation () {
+    return LocationUtil.getCurLocationBySDK().then((district: DistrictVO) => {
       this.bottomDistrict = district
       this.initPopupCity()
     }).catch(() => {

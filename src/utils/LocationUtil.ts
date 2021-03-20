@@ -1,7 +1,7 @@
 import DistrictVO from '@/model/DistrictVO'
 import StorageUtil from '@/utils/StorageUtil'
 import MapUtil from '@/utils/MapUtil'
-import { districtModule, systemModule } from '@/plugins/store'
+import { locationModule, systemModule } from '@/plugins/store'
 import AppAuthUtil from '@/utils/AppAuthUtil'
 
 const chinaAdCode = '100000'
@@ -17,33 +17,33 @@ const initDistrict = new DistrictVO()
 //只在第一次进入系统查询时，设置初始值使用，查询之后就会把默认值替换了
 initDistrict.adCode = initAdCode
 
-export default class DistrictUtil {
+export default class LocationUtil {
   static readonly chinaAdCode = chinaAdCode
 
   static readonly initAdCode = initAdCode
 
   static readonly nationwide = '全国'
 
-  static readonly districtKey = 'district'
-  static readonly openPositionKey = 'openPosition'
+  static readonly locationKey = 'location'
+  static readonly openLocationKey = 'openLocation'
 
   static readonly initDistrict: DistrictVO = initDistrict
   static readonly chinaDistrict: DistrictVO = chinaDistrict
 
-  static openPosition () {
-    StorageUtil.setObj(DistrictUtil.openPositionKey, '1')
+  static openLocation () {
+    StorageUtil.setObj(LocationUtil.openLocationKey, '1')
   }
 
-  static getOpenPosition () {
-    return !!StorageUtil.get(DistrictUtil.openPositionKey)
+  static getOpenLocation () {
+    return !!StorageUtil.get(LocationUtil.openLocationKey)
   }
 
-  static getDistrict (): DistrictVO {
-    return StorageUtil.getObj(DistrictUtil.districtKey) || DistrictUtil.initDistrict
+  static getLocation (): DistrictVO {
+    return StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.initDistrict
   }
 
-  static setDistrict (district: DistrictVO) {
-    StorageUtil.setObj(DistrictUtil.districtKey, district)
+  static setLocation (district: DistrictVO) {
+    StorageUtil.setObj(LocationUtil.locationKey, district)
   }
 
 
@@ -79,37 +79,37 @@ export default class DistrictUtil {
   //没授权就用web获取地理位置，授权了就用sdk，基础util 就返回位置信息，具体存哪里store决定
 
   //无需授权，根据组合方式获取地理位置，无论如何都会返回地理位置
-  static async getPositionNotAuth () {
+  static async getLocationNotAuth () {
     let hasAuth
     //如果小程序，
     if (systemModule.isMp) {
       //获取用户是否授权过
       hasAuth = await AppAuthUtil.getUserAuthLocation()
     } else {
-      hasAuth = districtModule.openPosition
+      hasAuth = locationModule.openLocation
     }
     //如果非小程序，获取用户是否授权过，授权过使用组合方式
     //如果用户已经授权过地理位置了
     if (hasAuth) {
-      return DistrictUtil.getCurPositionCom()
+      return LocationUtil.getCurLocationCom()
     }
     //没授权过使用web
-    return DistrictUtil.getCityByIpWebAPI()
+    return LocationUtil.getCityByIpWebAPI()
   }
 
   // 组合sdk和webapi
-  static getCurPositionCom () {
-    return DistrictUtil.getCurPositionBySDK().then((res: DistrictVO) => {
+  static getCurLocationCom () {
+    return LocationUtil.getCurLocationBySDK().then((res: DistrictVO) => {
       return res
     }).catch(() => {
-      return DistrictUtil.getCityByIpWebAPI().then((res: DistrictVO) => {
+      return LocationUtil.getCityByIpWebAPI().then((res: DistrictVO) => {
         return res
       })
     })
   }
 
   // 使用sdk精准定位
-  static getCurPositionBySDK (): Promise<DistrictVO> {
+  static getCurLocationBySDK (): Promise<DistrictVO> {
     return MapUtil.getLocationBySdk().then((res: any) => {
       const lonAndLat: number[] = res.streetNumber.location.split(',')
       const district: DistrictVO = new DistrictVO()
@@ -130,12 +130,12 @@ export default class DistrictUtil {
       district.adName = res.district
       district.lon = lonAndLat[0]
       district.lat = lonAndLat[1]
-      district.isPosition = true
+      district.isLocation = true
       //更新用户经纬度
-      districtModule.updateLonAndLat(district.lon, district.lat)
+      locationModule.updateLocationLonAndLat(district.lon, district.lat)
       //如果未开启定位的话开启定位
-      if (!districtModule.openPosition) {
-        districtModule.openPositionAction()
+      if (!locationModule.openLocation) {
+        locationModule.openLocationAction()
       }
       return district
     })
@@ -157,7 +157,7 @@ export default class DistrictUtil {
         district.adName = res.city
         district.lon = Number(lonAndLatAry[0])
         district.lat = Number(lonAndLatAry[1])
-        district.isPosition = true
+        district.isLocation = true
         return district
       } else {
         return null
