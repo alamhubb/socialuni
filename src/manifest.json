@@ -81,7 +81,7 @@
                 "maps" : {
                     "amap" : {
                         "appkey_ios" : "",
-                        "appkey_android" : "2adcf282768826e25f8ad61c94ae46fb"
+                        "appkey_android" : ""
                     }
                 },
                 "oauth" : {
@@ -90,7 +90,7 @@
                     },
                     "weixin" : {
                         "appid" : "wx682b729afd398217",
-                        "appsecret" : "99e7409f979259d8ae6453ee62151545",
+                        "appsecret" : "",
                         "UniversalLinks" : ""
                     }
                 },
