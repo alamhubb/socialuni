@@ -38,7 +38,7 @@
             }"
     >
       <swiper class="flex-none h100r bg-default" :current="swiperCurrent"
-              @change="talkSwiperChange">
+              @change="TalkSwipersChange">
         <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
           <!--
           使用view实现的问题，没有scroll事件小程序上
@@ -123,7 +123,8 @@ import StorageUtil from '@/utils/StorageUtil'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
 import UniUtil from '@/utils/UniUtil'
-import TalkSwipers from '@/pages/talk/talkSwipers.vue'
+import CommonUtil from '@/utils/CommonUtil'
+import TalkSwipers from '@/pages/talk/TalkSwipers.vue'
 import { appModule, locationModule, systemModule, talkModule } from '@/plugins/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '@/components/q-tab/q-tab.vue'
@@ -133,10 +134,8 @@ import CityPicker from '@/components/CityPicker.vue'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
 import TalkTabType from '@/const/TalkTabType'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
-import CommonUtil from '@/utils/CommonUtil'
-
+import PageUtil from '@/utils/PageUtil'
 const userStore = namespace('user')
 const appStore = namespace('app')
 const configStore = namespace('config')
@@ -392,7 +391,7 @@ export default class TabsTalkVue extends Vue {
   }
 
   // talkSwipe
-  talkSwiperChange (e) {
+  TalkSwipersChange (e) {
     const current = e.detail.current
     this.swiperCurrent = current
     this.current = current

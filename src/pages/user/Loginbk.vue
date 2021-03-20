@@ -184,10 +184,11 @@ import { Vue, Component } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import UserAPI from '@/api/UserAPI'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 import UserStore from '@/plugins/store/UserStore'
 import LoginAPI from '@/api/LoginAPI'
 import ConfigMap from '@/const/ConfigMap'
@@ -267,14 +268,14 @@ export default class LoginVue extends Vue {
 
   phoneNumClear () {
     this.phoneNum = ''
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.phoneNumInputFocus()
     })
   }
 
   authCodeClear () {
     this.authCode = ''
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.authCodeInputFocus()
     })
   }

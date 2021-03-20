@@ -40,6 +40,7 @@ import TagAPI from '@/api/TagAPI'
 import ResultVO from '@/model/ResultVO'
 import ErrorCode from '@/const/ErrorCode'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 
 @Component
 export default class TagAddVue extends Vue {

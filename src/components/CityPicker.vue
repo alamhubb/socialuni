@@ -63,6 +63,7 @@ import DistrictVO from '@/model/DistrictVO'
 import { appModule, locationModule } from '@/plugins/store'
 import LocationUtil from '@/utils/LocationUtil'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 
 const appStore = namespace('app')
 @Component

@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import { appModule, systemModule } from '@/plugins/store'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import ThreeAuthVO from '@/model/openData/ThreeAuthVO'
 
 export default Vue.extend({

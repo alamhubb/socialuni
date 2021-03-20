@@ -1,5 +1,6 @@
 import AppInitAPI from '@/api/AppInitAPI'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import AppUpdateType from '@/const/AppUpdateType'
 import { configModule } from '@/plugins/store'
 import AppConfig from '@/const/AppConfig'

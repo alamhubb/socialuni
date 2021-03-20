@@ -8,8 +8,8 @@ import Login from '@/pages/user/Login.vue'
 // main.js
 import uView from 'uview-ui'
 import UniUtil from './utils/UniUtil'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
 Vue.use(uView)
 

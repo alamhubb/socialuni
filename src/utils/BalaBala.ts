@@ -1,6 +1,6 @@
 import { configModule, userModule } from '@/plugins/store'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 import UserVO from '@/model/user/UserVO'
 import UniUtil from './UniUtil'
 import Alert from './Alert'

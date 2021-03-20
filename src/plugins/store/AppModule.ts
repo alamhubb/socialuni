@@ -18,6 +18,7 @@ import AppInitQueryVO from '@/model/common/AppInitQueryVO'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import LoadMoreType from '@/const/LoadMoreType'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import ThreeAuthType from '@/const/ThreeAuthType'
 import ReportAPI from '@/api/ReportAPI'
 
@@ -60,6 +61,14 @@ export default class AppModule extends VuexModule {
   // actions
   @Action
   getReportTypesAction () {
+    ReportAPI.queryReportTypesAPI().then(res => {
+      this.reportTypes = res.data
+    })
+  }
+
+  // actions
+  @Action
+  getHomeSwipersAction () {
     ReportAPI.queryReportTypesAPI().then(res => {
       this.reportTypes = res.data
     })

@@ -16,8 +16,8 @@ import { namespace } from 'vuex-class'
 
 import HomeSwiperVO from '@/model/HomeSwiperVO'
 import ConfigMap from '@/const/ConfigMap'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 import SkipType from '@/const/SkipType'
 import { systemModule } from '@/plugins/store'
 
@@ -41,16 +41,16 @@ export default class TalkSwipersVue extends Vue {
         if (systemModule.isMp) {
           RouterUtil.navigateToAll(homeSwiper.standType, homeSwiper.standUrl, homeSwiper.name)
         } else {
-          PageUtil.navigateToWeb(homeSwiper.skipUrl, homeSwiper.name)
+          RouterUtil.navigateToWeb(homeSwiper.skipUrl, homeSwiper.name)
         }
       } else if (homeSwiper.skipType === SkipType.mp) {
-        PageUtil.navigateToMp(homeSwiper.skipUrl, homeSwiper.name)
+        RouterUtil.navigateToMp(homeSwiper.skipUrl, homeSwiper.name)
       } else if (homeSwiper.skipType === SkipType.web) {
-        PageUtil.navigateToWeb(homeSwiper.skipUrl, homeSwiper.name)
+        RouterUtil.navigateToWeb(homeSwiper.skipUrl, homeSwiper.name)
       } else if (homeSwiper.skipType === SkipType.local) {
-        PageUtil.navigateTo(homeSwiper.skipUrl)
+        RouterUtil.navigateTo(homeSwiper.skipUrl)
       } else {
-        PageUtil.toWebHome()
+        RouterUtil.toWebHome()
       }
     }
   }

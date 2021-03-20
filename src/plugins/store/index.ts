@@ -25,7 +25,7 @@ export const platformModule = new PlatformModule({ store, name: 'platform' })
 
 export const notifyModule = new NotifyModule({ store, name: 'notify' })
 export const tagModule = new TagModule({ store, name: 'tag' })
-export const locationModule = new LocationModule({ store, name: 'district' })
+export const locationModule = new LocationModule({ store, name: 'location' })
 
 
 

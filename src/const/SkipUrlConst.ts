@@ -1,6 +1,7 @@
 import AppConfig from '@/const/AppConfig'
 import { configModule } from '@/plugins/store'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
 export default class SkipUrlConst {
   static homeUrl (): string {

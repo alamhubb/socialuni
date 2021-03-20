@@ -41,8 +41,8 @@ import { namespace } from 'vuex-class'
 import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import ImgUtil from '@/utils/ImgUtil'
 import PagePath from '@/const/PagePath'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
 const appStore = namespace('app')
 

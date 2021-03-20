@@ -6,6 +6,7 @@ import TalkAPI from '@/api/TalkAPI'
 import TalkVO from '@/model/talk/TalkVO'
 import BalaBala from '@/utils/BalaBala'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
@@ -111,7 +112,7 @@ export default class TalkModule extends VuexModule {
   inputContentFocusEvent () {
     MsgUtil.cantPopupPromptToast()
     // 需要有延迟，要不然无法成功切换
-    UniUtil.delayTime(200).then(() => {
+    CommonUtil.delayTime(200).then(() => {
       this.inputContentFocus = true
     })
   }
@@ -119,7 +120,7 @@ export default class TalkModule extends VuexModule {
   @Action
   inputContentBlur () {
     // 需要有延迟，要不然无法触发按钮事件
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.inputContentFocus = false
     })
   }

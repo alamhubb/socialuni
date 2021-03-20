@@ -45,8 +45,8 @@ import UserUtil from '@/utils/UserUtil'
 import FollowStatus from '@/const/FollowStatus'
 import FollowAddVO from '@/model/FollowAddVO'
 import PagePath from '@/const/PagePath'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
   @Component
 export default class FollowItem extends Vue {

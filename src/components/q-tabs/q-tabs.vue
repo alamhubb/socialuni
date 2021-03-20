@@ -24,6 +24,7 @@ import {
   Component, Prop, Model, Emit
 } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 
   @Component
 export default class QTabs extends Vue {
@@ -80,11 +81,11 @@ export default class QTabs extends Vue {
             this.tabItemLefts.push(item.left + item.width / 2 - UniUtil.upxToPx(Number(this.barWidth) / 2) - res[0].left)
           })
           //首次完成2秒后切换首次加载状态，因为首次加载不需要动画，首次加载后开启动画
-          UniUtil.delayTime(2000).then(() => {
+          CommonUtil.delayTime(2000).then(() => {
             this.firstLoadAfter = true
           })
         } else {
-          UniUtil.delayTime(100).then(() => {
+          CommonUtil.delayTime(100).then(() => {
             this.getTabRect()
           })
         }

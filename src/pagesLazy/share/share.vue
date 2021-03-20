@@ -26,8 +26,9 @@ import {
   Component
 } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
-import PageUtil from '@/utils/PageUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
 @Component
 export default class ShareVue extends Vue {

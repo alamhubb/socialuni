@@ -368,6 +368,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import UCheckbox from 'uview-ui/components/u-checkbox/u-checkbox.vue'
 import UButton from 'uview-ui/components/u-button/u-button.vue'
 import { systemModule } from '@/plugins/store'
@@ -620,14 +621,14 @@ export default class LoginVue extends Vue {
  */
   phoneNumClear () {
     this.phoneNum = ''
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.phoneNumInputFocus()
     })
   }
 
   authCodeClear () {
     this.authCode = ''
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.authCodeInputFocus()
     })
   }

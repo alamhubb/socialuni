@@ -39,8 +39,8 @@ import CommentVO from '@/model/comment/CommentVO'
 import PagePath from '@/const/PagePath'
 import { talkModule } from '@/plugins/store'
 import JsonUtils from '@/utils/JsonUtils'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
   @Component({
     components: {}

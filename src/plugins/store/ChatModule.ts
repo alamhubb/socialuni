@@ -5,10 +5,11 @@ import ChatVO from '@/model/chat/ChatVO'
 import MessageVO from '@/model/message/MessageVO'
 import ChatType from '@/const/ChatType'
 import ChatAPI from '@/api/ChatAPI'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 import MessageAPI from '@/api/MessageAPI'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import ScrollUtil from '@/utils/ScrollUtil'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
@@ -185,7 +186,7 @@ export default class ChatModule extends VuexModule {
 
 
   scrollToMessagePageBottom () {
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.scrollTop = this.messages.length * 500
       // this.scrollTop = -1000
     })

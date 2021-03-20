@@ -1,6 +1,7 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import { configModule } from '@/plugins/store'
 import Alert from '../../utils/Alert'
 import UserStoreCom from '@/plugins/store/UserStoreCom'

@@ -38,10 +38,10 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model, Watch } from 'vue-property-decorator'
 
-import UniUtil from '@/utils/UniUtil'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
+import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 
 /*
@@ -93,7 +93,7 @@ export default class QPicker extends Vue {
       if (res) {
         this.scrollBoxHeight = res.height
       } else {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.getComponentsHeight()
         })
       }
@@ -118,7 +118,7 @@ export default class QPicker extends Vue {
           this.oneTops.push(top)
         })
       } else {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.getOneNodeTops()
         })
       }
@@ -143,7 +143,7 @@ export default class QPicker extends Vue {
           this.twoTops.push(top)
         })
       } else {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.getTwoNodeTops()
         })
       }
@@ -168,7 +168,7 @@ export default class QPicker extends Vue {
           this.threeTops.push(top)
         })
       } else {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.getThreeNodeTops()
         })
       }

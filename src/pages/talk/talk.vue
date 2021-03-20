@@ -73,7 +73,7 @@
       <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
       <!--  #endif -->
 
-      <talk-swipers v-if="configShowSwipers"></talk-swipers>
+      <talk-swiper v-if="configShowSwipers"></talk-swiper>
 
       <tabs-talk class="flex-auto" ref="tabsTalk" :scrollEnable="scrollEnable"
                  :selectTagIds="selectTagIds"
@@ -102,22 +102,23 @@ import { namespace } from 'vuex-class'
 import PagePath from '@/const/PagePath'
 import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import TagVO from '@/model/tag/TagVO'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/utils/UniUtil'
-import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import TabsTalk from '@/pages/talk/tabsTalk.vue'
+import CommonUtil from '@/utils/CommonUtil'
+import TalkSwipers from '@/pages/talk/TalkSwipers.vue'
 import { appModule, locationModule, notifyModule, systemModule, talkModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
-import CommonUtil from '@/utils/CommonUtil'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
+import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')
 const appStore = namespace('app')
+const notifyStore = namespace('notify')
 const configStore = namespace('config')
 
 // todo 后台可控制是否显示轮播图
@@ -125,14 +126,14 @@ const configStore = namespace('config')
 @Component({
   components: {
     TagSearch,
-    TabsTalk,
+    TabsTalk: TabsTalkVue,
     TalkSwipers,
     TalkItem
   }
 })
 export default class TalkVue extends Vue {
   public $refs!: {
-    tabsTalk: TabsTalk;
+    tabsTalk: TabsTalkVue;
   }
 
   onLoad (params: any) {
@@ -150,7 +151,7 @@ export default class TalkVue extends Vue {
   // life
   onReady () {
     // 不这么写百度读不出来
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.getTabBarTop()
     })
     // 这里是不是有问题应该选择异性
@@ -186,7 +187,7 @@ export default class TalkVue extends Vue {
           this.scrollEnable = true
         }
       } else {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.getTabBarTop()
         })
       }
@@ -320,7 +321,7 @@ export default class TalkVue extends Vue {
 
   // 点击通知去通知页
   @userStore.State('user') user: UserVO
-  @appStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
+  @notifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
   unreadNotifiesNum = 0
 
   toNotifyVue () {
@@ -345,7 +346,7 @@ export default class TalkVue extends Vue {
 
   @Watch('configShowSwipers')
   configShowSwipersWatch () {
-    UniUtil.delayTime(100).then(() => {
+    CommonUtil.delayTime(100).then(() => {
       this.getTabBarTop()
     })
   }

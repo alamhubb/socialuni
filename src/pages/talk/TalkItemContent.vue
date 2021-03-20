@@ -40,8 +40,8 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import ImgUtil from '@/utils/ImgUtil'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 
 @Component
 export default class TalkItemContent extends Vue {

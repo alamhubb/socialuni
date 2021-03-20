@@ -32,6 +32,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import QQUtils from '@/utils/QQUtils'
 
   @Component

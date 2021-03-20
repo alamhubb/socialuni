@@ -1,5 +1,6 @@
 import LoginDataVO from '@/model/login/LoginDataVO'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import { systemModule } from '@/plugins/store'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtils from '@/utils/JsonUtil'

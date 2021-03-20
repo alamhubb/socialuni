@@ -22,7 +22,7 @@ import {
   Vue,
   Component
 } from 'vue-property-decorator'
-import TalkSwipers from '@/pages/talk/talkSwipers.vue'
+import TalkSwipers from '@/pages/talk/TalkSwipers.vue'
 
 
 @Component({

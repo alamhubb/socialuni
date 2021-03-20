@@ -23,9 +23,9 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-import CommonUtil from '@/utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -100,7 +100,7 @@ export default class AboutLinkage extends Vue {
       if (res) {
         this.componentHeight = res.height
       } else {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.initComponentsHeight()
         })
       }
@@ -114,7 +114,7 @@ export default class AboutLinkage extends Vue {
     const nodeLeft: NodesRef = query.selectAll('.' + this.uuid + '.sidebar-left-item')
     nodeLeft.boundingClientRect((res: any) => {
       if (!res.length) {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.initLeftBoxItemTops()
         })
       } else {
@@ -136,7 +136,7 @@ export default class AboutLinkage extends Vue {
     const node: NodesRef = query.selectAll('.' + this.uuid + '.sidebar-right-item')
     node.boundingClientRect((res: any) => {
       if (!res.length) {
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.initRightBoxItemTops()
         })
       } else {

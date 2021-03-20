@@ -185,12 +185,13 @@ import LoadMoreType from '@/const/LoadMoreType'
 import Constants from '@/const/Constant'
 import PagePath from '@/const/PagePath'
 import UniUtil from '@/utils/UniUtil'
+import CommonUtil from '@/utils/CommonUtil'
 import MessageAPI from '@/api/MessageAPI'
 import ReportContentType from '@/const/ReportContentType'
 import ReportDialog from '@/pagesLazy/ReportDialog.vue'
 import MessageType from '@/const/MessageType'
-import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
+import PageUtil from '@/utils/PageUtil'
 import BalaBala from '@/utils/BalaBala'
 import { chatModule, systemModule } from '@/plugins/store'
 import UserType from '@/const/UserType'
@@ -199,7 +200,6 @@ import CommonStatus from '@/const/CommonStatus'
 import ProviderType from '@/const/ProviderType'
 import PlatformUtils from '@/utils/PlatformUtils'
 import PayType from '@/const/PayType'
-import CommonUtil from '@/utils/CommonUtil'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import HintMsg from '@/const/HintMsg'
@@ -313,7 +313,7 @@ export default class MessageVue extends Vue {
     // #ifdef MP-QQ
     this.inputFocus = false
     // 严格测试150毫秒时间比较合适，不卡顿，且不出bug
-    UniUtil.delayTime(150).then(() => {
+    CommonUtil.delayTime(150).then(() => {
       this.inputFocus = true
     })
     // #endif
