@@ -41,13 +41,14 @@ import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import ImgUtil from '@/utils/ImgUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 
 @Component
 export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
   toTalkDetailVue () {
-    if (PageUtil.getCurrentPageURI() !== PagePath.talkDetail) {
+    if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
       PageUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }

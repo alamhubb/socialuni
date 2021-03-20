@@ -28,7 +28,7 @@ import UniUtil from '@/utils/UniUtil'
   @Component
 export default class QTabs extends Vue {
     //唯一id值
-    uuid: string = 'u' + UniUtil.getUUID()
+    uuid: string = 'u' + CommonUtil.getUUID()
 
     @Model('input') readonly value: number
     @Prop({ default: [] }) readonly tabs: any[]

@@ -9,6 +9,7 @@ import Login from '@/pages/user/Login.vue'
 import uView from 'uview-ui'
 import UniUtil from './utils/UniUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 
 Vue.use(uView)
 

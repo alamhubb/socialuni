@@ -5,6 +5,7 @@ import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
 import Toast from '@/utils/Toast'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import UserVO from '@/model/user/UserVO'
 
 export default class MsgUtil {

@@ -82,6 +82,7 @@ import { namespace } from 'vuex-class'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkUtil from '@/utils/TalkUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import JsonUtils from '@/utils/JsonUtils'
 import { talkModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
@@ -145,7 +146,7 @@ export default class TalkItemComment extends Vue {
   }
 
   toUserDetail (userId: number) {
-    if (PageUtil.getCurrentPageURI() !== PagePath.userDetail || PageUtil.getCurrentPage().options.userId !== String(userId)) {
+    if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
       PageUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
     }
   }
@@ -153,7 +154,7 @@ export default class TalkItemComment extends Vue {
   showOtherCommentClicked = false
 
   toTalkDetailVue () {
-    if (PageUtil.getCurrentPageURI() !== PagePath.talkDetail) {
+    if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
       PageUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }

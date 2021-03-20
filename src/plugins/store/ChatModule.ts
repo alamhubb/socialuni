@@ -6,6 +6,7 @@ import MessageVO from '@/model/message/MessageVO'
 import ChatType from '@/const/ChatType'
 import ChatAPI from '@/api/ChatAPI'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import MessageAPI from '@/api/MessageAPI'
 import UniUtil from '@/utils/UniUtil'
 import ScrollUtil from '@/utils/ScrollUtil'
@@ -201,7 +202,7 @@ export default class ChatModule extends VuexModule {
   pushChatAndMessagesAction (newChat: ChatVO) {
     // console.log('出发了pushchat')
     // 如果正在这个chat聊天
-    if (PageUtil.getCurrentPageURI() === PagePath.message && this.chatId === newChat.id) {
+    if (RouterUtil.getCurrentPageURI() === PagePath.message && this.chatId === newChat.id) {
       // if (this.chatId === newChat.id) {
       // 则直接往msg增加消息
       // 前台将消息改为已读,修改时间使用后台的就行

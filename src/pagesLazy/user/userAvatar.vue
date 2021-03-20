@@ -30,6 +30,7 @@ import JsonUtils from '@/utils/JsonUtils'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import UserStore from '@/plugins/store/UserStore'
 import UserAPI from '@/api/UserAPI'
 

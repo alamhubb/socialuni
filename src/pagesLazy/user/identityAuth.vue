@@ -51,6 +51,7 @@ import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
 import ImgUtil from '@/utils/ImgUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import HintMsg from '@/const/HintMsg'
 
 const userStore = namespace('user')

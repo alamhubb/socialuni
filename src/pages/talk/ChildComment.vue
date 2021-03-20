@@ -37,9 +37,10 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import CommentVO from '@/model/comment/CommentVO'
 import PagePath from '@/const/PagePath'
-import PageUtil from '@/utils/PageUtil'
 import { talkModule } from '@/plugins/store'
 import JsonUtils from '@/utils/JsonUtils'
+import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 
   @Component({
     components: {}
@@ -68,7 +69,7 @@ export default class ChildComment extends Vue {
     }
 
     toUserDetail (userId: number) {
-      if (PageUtil.getCurrentPageURI() !== PagePath.userDetail || PageUtil.getCurrentPage().options.userId !== String(userId)) {
+      if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
         PageUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
       }
     }

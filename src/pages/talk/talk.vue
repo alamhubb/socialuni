@@ -103,6 +103,7 @@ import PagePath from '@/const/PagePath'
 import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import TagVO from '@/model/tag/TagVO'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/utils/UniUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
@@ -143,7 +144,7 @@ export default class TalkVue extends Vue {
   }
 
   // 唯一id值
-  readonly uuid: string = 'u' + UniUtil.getUUID()
+  readonly uuid: string = 'u' + CommonUtil.getUUID()
   readonly tabsId: string = this.uuid + '_tabs'
 
   // life

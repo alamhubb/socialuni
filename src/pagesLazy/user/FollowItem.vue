@@ -46,6 +46,7 @@ import FollowStatus from '@/const/FollowStatus'
 import FollowAddVO from '@/model/FollowAddVO'
 import PagePath from '@/const/PagePath'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 
   @Component
 export default class FollowItem extends Vue {
@@ -103,7 +104,7 @@ export default class FollowItem extends Vue {
     }
 
     toUserDetailVue () {
-      if (PageUtil.getCurrentPageURI() !== PagePath.userDetail) {
+      if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
         PageUtil.navigateTo(PagePath.userDetail + '?userId=' + this.user.id)
       }
     }

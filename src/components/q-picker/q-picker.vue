@@ -42,6 +42,7 @@ import UniUtil from '@/utils/UniUtil'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
+import CommonUtil from '@/utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -57,7 +58,7 @@ import NodesRef = UniApp.NodesRef
   }
 })
 export default class QPicker extends Vue {
-  readonly uuid: string = 'u' + UniUtil.getUUID()
+  readonly uuid: string = 'u' + CommonUtil.getUUID()
   @Model('input') readonly value!: any
   @Prop() readonly dataList: any []
 

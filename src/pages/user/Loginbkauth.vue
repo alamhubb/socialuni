@@ -693,7 +693,7 @@ export default class LoginVue extends Vue {
 
   cancelBind () {
     // 回上一页
-    PageUtil.goBack()
+    RouterUtil.goBack()
   }
 
   //手机号登录和手机号绑定

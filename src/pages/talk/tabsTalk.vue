@@ -134,6 +134,7 @@ import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
 import TalkTabType from '@/const/TalkTabType'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import CommonUtil from '@/utils/CommonUtil'
 
 const userStore = namespace('user')

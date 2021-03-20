@@ -27,6 +27,7 @@ import {
 } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 
 @Component
 export default class ShareVue extends Vue {
@@ -43,7 +44,7 @@ export default class ShareVue extends Vue {
   }
 
   popupClose () {
-    PageUtil.goBack()
+    RouterUtil.goBack()
   }
 
   copyLink () {

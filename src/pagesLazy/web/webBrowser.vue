@@ -23,6 +23,7 @@ import {
   Component
 } from 'vue-property-decorator'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import PagePath from '@/const/PagePath'
 import { namespace } from 'vuex-class'
 import { systemModule } from '@/plugins/store'

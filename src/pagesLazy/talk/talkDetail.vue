@@ -49,6 +49,7 @@ import TalkVO from '@/model/talk/TalkVO'
 import TalkAPI from '@/api/TalkAPI'
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import { namespace } from 'vuex-class'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 
@@ -66,7 +67,7 @@ export default class TalkDetail extends Vue {
   @appStore.State('appConfig') readonly appConfig: object
 
   deleteTalk () {
-    PageUtil.goBack()
+    RouterUtil.goBack()
   }
 
   onLoad (params: any) {
@@ -82,7 +83,7 @@ export default class TalkDetail extends Vue {
   }
 
   goBack () {
-    PageUtil.goBack()
+    RouterUtil.goBack()
   }
 
   onShow () {

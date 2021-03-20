@@ -410,6 +410,7 @@ import UniUtil from '@/utils/UniUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import UserAPI from '@/api/UserAPI'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import UserStore from '@/plugins/store/UserStore'
 import LoginAPI from '@/api/LoginAPI'
 import ConfigMap from '@/const/ConfigMap'
@@ -654,7 +655,7 @@ export default class LoginVue extends Vue {
 
   cancelBind () {
     // 回上一页
-    PageUtil.goBack()
+    RouterUtil.goBack()
   }
 
   //手机号登录和手机号绑定

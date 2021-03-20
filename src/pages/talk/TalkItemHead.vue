@@ -80,6 +80,7 @@ import { namespace } from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
 import FollowAPI from '@/api/FollowAPI'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import BalaBala from '@/utils/BalaBala'
 import TalkTabType from '@/const/TalkTabType'
 
@@ -103,7 +104,7 @@ export default class TalkItemHead extends Vue {
   }
 
   created () {
-    if (PageUtil.getCurrentPageURI() === PagePath.userDetail) {
+    if (RouterUtil.getCurrentPageURI() === PagePath.userDetail) {
       this.isUserDetail = true
     }
   }
@@ -126,7 +127,7 @@ export default class TalkItemHead extends Vue {
   }
 
   toUserDetailVue () {
-    if (PageUtil.getCurrentPageURI() !== PagePath.userDetail) {
+    if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
       PageUtil.navigateTo(PagePath.userDetail + '?userId=' + this.talk.user.id)
     }
   }

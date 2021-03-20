@@ -190,6 +190,7 @@ import ReportContentType from '@/const/ReportContentType'
 import ReportDialog from '@/pagesLazy/ReportDialog.vue'
 import MessageType from '@/const/MessageType'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from '@/utils/RouterUtil'
 import BalaBala from '@/utils/BalaBala'
 import { chatModule, systemModule } from '@/plugins/store'
 import UserType from '@/const/UserType'
@@ -542,7 +543,7 @@ export default class MessageVue extends Vue {
   }
 
   goBack () {
-    PageUtil.goBack()
+    RouterUtil.goBack()
   }
 }
 </script>

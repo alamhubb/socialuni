@@ -25,6 +25,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
+import CommonUtil from '@/utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -34,7 +35,7 @@ export default class AboutLinkage extends Vue {
   /**
    * 避免组件重复，设置uuid
    */
-  readonly uuid: string = 'u' + UniUtil.getUUID()
+  readonly uuid: string = 'u' + CommonUtil.getUUID()
   /**
    * 展示的数据
    */
