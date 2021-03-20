@@ -1,4 +1,4 @@
-import UserVO from '@/model/user/UserVO'
+import UserVO from "@/model/user/UserVO"
 import CommentVO from '@/model/comment/CommentVO'
 import DistrictVO from '@/model/DistrictVO'
 import TagVO from '@/model/tag/TagVO'

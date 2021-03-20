@@ -15,12 +15,8 @@ export default class TalkAPI {
     return http.post('talk/addTalk', data)
   }
 
-  static queryOtherTabTalksAPI (talkIds: number[], district: DistrictVO, tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
-    return http.post('talk/queryOtherHomeTypeTalks', new TalkQueryVO(talkIds, district, tagIds, homeType, gender, minAge, maxAge))
-  }
-
-  static queryTalksAPI (talkIds: number[], district: DistrictVO, tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
-    return http.post('talk/queryTalks', new TalkQueryVO(talkIds, district, tagIds, homeType, gender, minAge, maxAge))
+  static queryTalksAPI (talkIds: number[], tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
+    return http.post('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, homeType, gender, minAge, maxAge))
   }
 
   static queryUserTalksAPI (userId: number, talkIds: number[]) {

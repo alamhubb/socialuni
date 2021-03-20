@@ -18,7 +18,8 @@ export default class TokenUtil {
     if (process.env.NODE_ENV === 'development') {
       // return StorageUtil.get(this.dev_token)
       // return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzliNzExYWY3NTM5OTRjMTI5MTRlYWE5YzdhNzUyMTUxIn0.qNZQdtX_4kIHqCB4fHgAyE4hT9dIV9Jw8f92HzXIm4k'
-      return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzk1YTkwNjk2NzkxZDRjNGNhM2VkNTA0N2RlNzQ0OTY2In0.K_l3ZoeDp0-VaT-ok0d1am6hvi_5sHafU0lZJ7SWcDw'
+      // return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzk1YTkwNjk2NzkxZDRjNGNhM2VkNTA0N2RlNzQ0OTY2In0.K_l3ZoeDp0-VaT-ok0d1am6hvi_5sHafU0lZJ7SWcDw'
+      return StorageUtil.get(this.dev_token)
     } else {
       return StorageUtil.get(this.token)
     }

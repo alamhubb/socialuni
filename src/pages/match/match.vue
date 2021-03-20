@@ -124,7 +124,7 @@ export default class MatchVue extends Vue {
 
   onLoad () {
     this.startPullDownRefresh()
-    CommonUtil.showShareMenu()
+    UniUtil.showShareMenu()
   }
 
   stopPullDownRefresh () {

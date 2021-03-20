@@ -32,7 +32,7 @@
 
     <!--        默认附近，可以切换城市，城市-->
     <view
-        :style="{
+      :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
             }"
@@ -53,9 +53,9 @@
             <view v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item
-                    :talk="talk"
-                    :talk-tab-type="talkTabObj.type"
-                    @deleteTalk="deleteTalk"
+                  :talk="talk"
+                  :talk-tab-type="talkTabObj.type"
+                  @deleteTalk="deleteTalk"
                 />
                 <!-- app端广告有问题-->
                 <!--  #ifdef APP-PLUS -->
@@ -124,7 +124,7 @@ import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
 import UniUtil from '@/utils/UniUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { appModule, systemModule, talkModule } from '@/plugins/store'
+import { appModule, districtModule, systemModule, talkModule } from '@/plugins/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '@/components/q-tab/q-tab.vue'
 import QTabs from '@/components/q-tabs/q-tabs.vue'
@@ -157,7 +157,11 @@ const talkStore = namespace('talk')
 export default class TabsTalkVue extends Vue {
   @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
-  loadMoreText = { contentdown: '点击显示更多', contentrefresh: '正在加载...', contentnomore: '没有更多数据了,点击刷新' }
+  loadMoreText = {
+    contentdown: '点击显示更多',
+    contentrefresh: '正在加载...',
+    contentnomore: '没有更多数据了,点击刷新'
+  }
 
   // 用户登录后重新查询
   @Watch('user')
@@ -226,14 +230,14 @@ export default class TabsTalkVue extends Vue {
         // h5有头顶和下边导航栏都算了高度
         // #ifdef H5
         this.talksListHeightSub = 44 + this.tabsHeight
-        this.talksListPaddingBottom = UniUtil.upxToPx(100)
+        // this.talksListPaddingBottom = UniUtil.upxToPx(100)
         // #endif
         // #ifndef H5
         this.talksListHeightSub = systemModule.statusBarHeight + 44 + this.tabsHeight
         // #endif
       } else {
         // 给5秒
-        UniUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(100).then(() => {
           this.getTabBarTop()
         })
       }
@@ -251,7 +255,7 @@ export default class TabsTalkVue extends Vue {
   @userStore.State('user') user: UserVO
   // 页面是否为首次查询
 
-  @appStore.State('district') district: DistrictVO
+  @districtStore.State('district') district: DistrictVO
   @Prop() readonly selectTagIds: number[]
   @Prop() readonly userGender: string
   @Prop() readonly userMinAge: number
@@ -259,15 +263,25 @@ export default class TabsTalkVue extends Vue {
 
   //供父组件使用，不可删除
   initQuery () {
-    this.autoChooseUsePositionQueryTalks(true)
+    //首次打开talk页面，获取用户位置用来查询
+    districtModule.appLunchInitDistrict().then(() => {
+      this.autoChooseUsePositionQueryTalks(true)
+    })
   }
 
   //如果用户开了定位，就获取经纬度去查询，如果用户没开启定位，就不使用经纬度，没必要每次都获取经纬度。
   autoChooseUsePositionQueryTalks (firstLoad?: boolean) {
-    if (appModule.openPosition) {
-      this.requestUsePositionQueryTalks(firstLoad)
-    } else {
+    //只有不为加载中才可以加载
+    if (this.talkTabObj.loadMore !== LoadMoreType.loading) {
+      // 执行正在加载动画
+      this.talkTabObj.loadMore = LoadMoreType.loading
       this.queryTalks(firstLoad)
+      //首次时加载地理位置就好了，之后就是点击定位的时候加载
+      /*if (districtModule.openPosition) {
+        this.requestUsePositionQueryTalks(firstLoad)
+      } else {
+        this.queryTalks(firstLoad)
+      }*/
     }
   }
 
@@ -279,8 +293,7 @@ export default class TabsTalkVue extends Vue {
     // 只有用户点了附近，才能获取用户位置
     DistrictUtil.getCurPositionBySDK().then((res: DistrictVO) => {
       if (res) {
-        appModule.district.lon = res.lon
-        appModule.district.lat = res.lat
+        districtModule.updateLonAndLat(res.lon, res.lat)
       }
       this.queryTalks(firstLoad)
     }).catch(() => {
@@ -291,37 +304,32 @@ export default class TabsTalkVue extends Vue {
   // 默认地理位置是北京，以后可以根据ip获取当前城市
   // 话题的话显示最热门的话题，且只查询包含话题的动态
   queryTalks (firstLoad?: boolean) {
-    //只有不为加载中才可以加载
-    if (this.talkTabObj.loadMore !== LoadMoreType.loading) {
-      // 执行正在加载动画
-      this.talkTabObj.loadMore = LoadMoreType.loading
-      //只有在传false时校验后面的
-      const fistLoad = firstLoad || this.talkTabObj.firstLoad
-      // query condition
-      const talkIds: number[] = (fistLoad ? [0] : this.talkIds)
-      TalkAPI.queryTalksAPI(talkIds, this.district, this.selectTagIds, this.talkTabObj.type, this.userGender, this.userMinAge, this.userMaxAge).then((res: any) => {
-        // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
-        if (this.talkTabObj.loadMore === LoadMoreType.loading) {
-          if (res.data && res.data.length) {
-            if (fistLoad) {
-              this.talkTabObj.talks = res.data
-            } else {
-              this.talkTabObj.talks.push(...res.data)
-            }
-          }
-          // 如果还有大于等于10个就还可以加载
-          if (res.data && res.data.length >= this.lazyLoadNum) {
-            this.talkTabObj.loadMore = LoadMoreType.more
+    //只有在传false时校验后面的
+    const fistLoad = firstLoad || this.talkTabObj.firstLoad
+    // query condition
+    const talkIds: number[] = (fistLoad ? [] : this.talkIds)
+    TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, this.userGender, this.userMinAge, this.userMaxAge).then((res: any) => {
+      // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
+      if (this.talkTabObj.loadMore === LoadMoreType.loading) {
+        if (res.data && res.data.length) {
+          if (fistLoad) {
+            this.talkTabObj.talks = res.data
           } else {
-            // 否则没有了
-            this.talkTabObj.loadMore = LoadMoreType.noMore
+            this.talkTabObj.talks.push(...res.data)
           }
         }
-      }).catch(() => {
-        this.talkTabObj.loadMore = LoadMoreType.more
-      })
-      this.talkTabObj.firstLoad = false
-    }
+        // 如果还有大于等于10个就还可以加载
+        if (res.data && res.data.length >= this.lazyLoadNum) {
+          this.talkTabObj.loadMore = LoadMoreType.more
+        } else {
+          // 否则没有了
+          this.talkTabObj.loadMore = LoadMoreType.noMore
+        }
+      }
+    }).catch(() => {
+      this.talkTabObj.loadMore = LoadMoreType.more
+    })
+    this.talkTabObj.firstLoad = false
   }
 
   queryEnd (firstLoad: boolean) {
@@ -341,7 +349,7 @@ export default class TabsTalkVue extends Vue {
     if (this.talks.length) {
       return this.talks.map(item => item.id)
     }
-    return [0]
+    return []
   }
 
   get talks (): TalkVO[] {
@@ -410,11 +418,11 @@ export default class TabsTalkVue extends Vue {
   }
 
   cityChange (district: DistrictVO) {
-    appModule.setDistrictAction(district)
+    districtModule.setDistrict(district)
     this.autoChooseUsePositionQueryTalks(true)
   }
 
-  @appStore.State('appConfig') readonly appConfig: object
+  @configStore.State('appConfig') readonly appConfig: object
 
   // 每次查询几条
   get lazyLoadNum (): number {
@@ -478,10 +486,10 @@ export default class TabsTalkVue extends Vue {
 
   scrollHandler () {
     //如果向下滚动超过50隐藏
-    if (this.curScrollTop > (this.lastScrollTop + 50)) {
+    if (this.curScrollTop > (this.lastScrollTop + 60)) {
       uni.hideTabBar()
       //如果向上滚动超过20显示
-    } else if (this.curScrollTop < (this.lastScrollTop - 20)) {
+    } else if (this.curScrollTop < (this.lastScrollTop - 30)) {
       uni.showTabBar()
       //如果小于100或等于0，显示
     } else if (this.curScrollTop < 100 || this.curScrollTop === 0) {

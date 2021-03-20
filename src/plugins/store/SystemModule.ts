@@ -64,6 +64,7 @@ export default class SystemModule extends VuexModule {
   titleHeight = 0
   appVersion = 0
 
+  //ios和qq小程序禁止虚拟支付，统一判断
   get isIosAndMpQQ () {
     return this.isIos && this.isMpQQ
   }

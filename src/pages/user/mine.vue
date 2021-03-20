@@ -191,7 +191,7 @@ export default class MineVue extends Vue {
   showAuthThreeAuth = false
 
   onLoad () {
-    CommonUtil.showShareMenu()
+    UniUtil.showShareMenu()
     this.showAuthThreeAuth = !!appModule.threeSecretKey
   }
 

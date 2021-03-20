@@ -224,19 +224,24 @@
             </template>
             <!--            微信登录界面，非手机号登录界面-->
             <template v-else>
+              {{ getBtnOpenType }}
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-              <button :disabled="!openTypeBtnEnable"
-                      :open-type="getBtnOpenType"
+              <button v-if="!user" :disabled="!openTypeBtnEnable"
+                      open-type="getUserInfo"
                       class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
-                      @click="openTypeBtnClick">
-                <u-icon v-if="!user||(isAuthPhone&&!hasPhoneNum)" color="white" name="weixin-fill" size="42"
+                      @getuserinfo="openTypeBtnClick">
+                <u-icon color="white" name="weixin-fill" size="42"
                         class="mr-xs"></u-icon>
-                <template v-if="!user">
-                  微信登录 {{ isAuthUser ? '并授权' : '' }}
-                </template>
-                <!--            如果已登录有用户-->
-                <template v-else>
+                微信登录 {{ isAuthUser ? '并授权' : '' }}
+              </button>
+              <template v-else>
+                <button v-if="isAuthUser || isAuthPhone&&hasPhoneNum" :disabled="!openTypeBtnEnable"
+                        :open-type="getBtnOpenType"
+                        class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
+                        @click="openTypeBtnClick">
+                  <!--            如果已登录有用户-->
+
                   <!--              已登录，三方授权，授权用户信息-->
                   <!--                授权那用户信息无需关心手机号绑定状态-->
                   <template v-if="isAuthUser">
@@ -249,14 +254,19 @@
                     <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
                     授权手机号
                   </template>
+                </button>
+                <button v-else-if="!hasPhoneNum" :disabled="!openTypeBtnEnable"
+                        open-type="getPhoneNumber"
+                        class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
+                        @getphonenumber="openTypeBtnClick">
+                  <u-icon color="white" name="weixin-fill" size="42"
+                          class="mr-xs"></u-icon>
                   <!--              已登录，不为三方授权，进来只能是绑定微信手机号-->
-                  <template v-else-if="!hasPhoneNum">
-                    <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
-                    绑定微信手机号{{ isAuthPhone ? '并授权' : '' }}
-                  </template>
-                  <!--                其他为错误的逻辑-->
-                </template>
-              </button>
+                  <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
+                  绑定微信手机号{{ isAuthPhone ? '并授权' : '' }}
+                </button>
+                <!--                其他为错误的逻辑-->
+              </template>
             </template>
           </view>
 
@@ -413,6 +423,9 @@ import Alert from '@/utils/Alert'
 import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultVO'
 import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
+import Toast from '@/utils/Toast'
+import UniUser from '@/plugins/uni/login/UniUser'
+import SocialLoginService from '@/plugins/social/service/SocailLoginService'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -453,7 +466,7 @@ export default class LoginVue extends Vue {
   }
 
   //平台登陆
-  providerLogin (result) {
+  providerLogin (result, provider: ProviderType) {
     if (!this.disabledLoginBtn) {
       // #ifdef MP
       // #ifndef MP-TOUTIAO
@@ -462,9 +475,11 @@ export default class LoginVue extends Vue {
         return
       }
       // #endif
-      this.disabledLoginBtn = true
-      LoginService.platformLogin(systemModule.provider).finally(() => {
-        this.disabledLoginBtn = false
+      this.openTypeBtnEnable = false
+      SocialLoginService.providerLogin(provider).then((user) => {
+        console.log(user)
+      }).finally(() => {
+        this.openTypeBtnEnable = true
       })
       // #endif
     }
@@ -472,9 +487,10 @@ export default class LoginVue extends Vue {
 
   //登陆，授权，绑定手机号各大平台登陆结果，后者授权手机号结果
   openTypeBtnClick (providerResult) {
+    console.log(providerResult)
     if (this.openTypeBtnEnable) {
       if (!this.hasUser) {
-        this.providerLogin(providerResult)
+        this.providerLogin(providerResult, systemModule.provider)
         //登陆完成之后，只有为授权用户信息跳转会小程序
       } else if (this.isAuthPhone && !this.hasPhoneNum) {
         this.getPhoneNumberByWx(providerResult)

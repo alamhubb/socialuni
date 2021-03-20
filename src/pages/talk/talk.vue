@@ -10,7 +10,7 @@
           <q-icon class="mx-5px text-gray" size="30" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
             <view class="cu-tag round bg-green-plain light row-all-center">
-              {{selectTag.name}}
+              {{ selectTag.name }}
             </view>
           </view>
           <input v-else :adjust-position="false" type="text"
@@ -46,23 +46,23 @@
             <radio-group @change="genderChange">
               <label v-for="report in genders" :key="report">
                 <radio :value="report" :checked="report===genderValue"></radio>
-                <text class="ml-xs mr-xl">{{report}}</text>
+                <text class="ml-xs mr-xl">{{ report }}</text>
               </label>
             </radio-group>
           </view>
           <view class="mt-20px pb-xl pt-sm">
             <view class="row-between px-15px">
-              <view>年龄：{{rangeValue[0]}} - {{rangeValue[1]}}</view>
+              <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
             </view>
             <view class="px-lg">
               <q-slider
-                  :value="rangeValue"
-                  :min="rangeMin"
-                  :max="rangMax"
-                  :bar-height="3"
-                  active-color="#FF6B00"
-                  :format="format"
-                  @change="handleRangeChange"
+                :value="rangeValue"
+                :min="rangeMin"
+                :max="rangMax"
+                :bar-height="3"
+                active-color="#FF6B00"
+                :format="format"
+                @change="handleRangeChange"
               ></q-slider>
             </view>
           </view>
@@ -107,7 +107,7 @@ import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/utils/UniUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import TabsTalk from '@/pages/talk/tabsTalk.vue'
-import { appModule, systemModule, talkModule } from '@/plugins/store'
+import { appModule, districtModule, systemModule, talkModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import CommonUtil from '@/utils/CommonUtil'
@@ -131,14 +131,15 @@ const configStore = namespace('config')
 })
 export default class TalkVue extends Vue {
   public $refs!: {
-    tabsTalk: any;
+    tabsTalk: TabsTalk;
   }
 
   onLoad (params: any) {
-    if (params.load) {
+    /*if (params.load) {
       this.initQuery()
-    }
-    CommonUtil.showShareMenu()
+    }*/
+    this.initQuery()
+    UniUtil.showShareMenu()
   }
 
   // 唯一id值
@@ -223,7 +224,13 @@ export default class TalkVue extends Vue {
 
   // 去除页面初始化的，初始化查询
   initQuery () {
-    this.$refs.tabsTalk.initQuery()
+    // this.$refs.tabsTalk.initQuery()
+    this.$nextTick(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      // districtModule.appLunchInitDistrict().then(() => {
+      this.$refs.tabsTalk.initQuery()
+      // })
+    })
   }
 
   // tag 相关

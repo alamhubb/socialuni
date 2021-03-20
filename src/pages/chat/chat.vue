@@ -97,7 +97,7 @@ export default class ChatVue extends Vue {
   }
 
   onLoad () {
-    CommonUtil.showShareMenu()
+    UniUtil.showShareMenu()
   }
 
   onPullDownRefresh () {

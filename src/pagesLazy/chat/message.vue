@@ -397,7 +397,7 @@ export default class MessageVue extends Vue {
         }
       })
     }
-    return [0]
+    return []
   }
 
   queryMessages () {

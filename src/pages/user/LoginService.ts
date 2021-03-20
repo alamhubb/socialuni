@@ -2,12 +2,11 @@ import LoginDataVO from '@/model/login/LoginDataVO'
 import UniUtil from '@/utils/UniUtil'
 import { systemModule } from '@/plugins/store'
 import ProviderType, { Provider } from '@/const/ProviderType'
-import JsonUtils from '@/utils/JsonUtils'
-import LoginAPI from '@/api/LoginAPI'
-import UserVO from '@/model/user/UserVO'
+import JsonUtils from '@/utils/JsonUtil'
 import PlatformType from '@/const/PlatformType'
 import Constants from '@/const/Constant'
 import BalaBala from '@/utils/BalaBala'
+import Alert from '../../utils/Alert'
 
 export default class LoginService {
   static getLoginData (provider: Provider) {
@@ -57,18 +56,18 @@ export default class LoginService {
             } else if (provider === ProviderType.wx) {
               loginData.gender = userInfo.gender
             } else {
-              UniUtil.error('错误的登录方式')
+              Alert.error('错误的登录方式')
             }
             loginData.birthday = userInfo.year
             loginData.city = userInfo.city || userInfo.province
           }
-          return LoginAPI.platformLoginAPI(loginData).then((user: UserVO) => {
+          /*return LoginAPI.platformLoginAPI(loginData).then((user: UserVO) => {
             let hintText = '登录成功'
             if (!user.phoneNum) {
               hintText += '，绑定手机号后才可发布内容'
             }
-            UniUtil.hint(hintText)
-          })
+            AlertUtil.hint(hintText)
+          })*/
         } else {
           throw new Error('获取信息失败，请重试')
         }

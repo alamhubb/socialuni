@@ -358,6 +358,7 @@ import ProviderType from '@/const/ProviderType'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import ChatVO from '@/model/chat/ChatVO'
 import ChatAPI from '@/api/ChatAPI'
+import UniUser from '@/plugins/uni/login/UniUser'
 
 const userStore = namespace('user')
 const appStore = namespace('app')
@@ -564,7 +565,7 @@ export default class UserInfo extends Vue {
 
   //微信绑定手机号使用
   getPhoneNumberByLogin (obj: any) {
-    LoginService.getLoginData(systemModule.provider).then((loginData: LoginDataVO) => {
+    UniUser.getLoginInfo(systemModule.provider).then((loginData: LoginDataVO) => {
       Object.assign(loginData, obj.detail)
       // 代表已过期
       loginData.sessionEnable = false
@@ -623,7 +624,7 @@ export default class UserInfo extends Vue {
     if (this.talks.length) {
       return this.talks.map(item => item.id)
     }
-    return [0]
+    return []
   }
 
   copyText (textCopy: string) {

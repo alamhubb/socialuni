@@ -1,5 +1,6 @@
 export default class Constants {
   static readonly loginSuccess = 'getUserInfo:ok'
+
   static readonly wxPayCancel = 'requestPayment:fail cancel'
   static readonly appWxPayCancel = 'requestPayment:fail canceled'
   static readonly qqPayCancel = 'requestPayment:fail 用户取消支付'

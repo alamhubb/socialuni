@@ -7,6 +7,8 @@ import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/utils/UniUtil'
 import AppInitDataVO from '@/model/common/AppInitDataVO'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
+import Toast from '@/utils/Toast'
+
 
 export default class UserStore {
   static hasUser (): boolean {
@@ -28,14 +30,14 @@ export default class UserStore {
     const user = res.data.user
     // 如果存在用户
     if (user) {
-      //首次登录且用户有年龄,默认设置筛选上下5岁的用户
-      if (!TalkFilterUtil.getNotFirstSetAge() && user.age) {
+      //首次登录且用户有年龄,默认设置筛选上下5岁的用户，暂时不默认设置筛选
+      /*if (!TalkFilterUtil.getNotFirstSetAge() && user.age) {
         const minAge = user.age - 5
         const maxAge = user.age + 5
         talkModule.userMinAge = minAge
         talkModule.userMaxAge = maxAge
         TalkFilterUtil.setFistSetUserAge(minAge, maxAge)
-      }
+      }*/
       appModule.notifies = res.data.notifies
       UserStore.setMineUser(res.data.user)
       // 所有操作都是登录后才可以操作的
@@ -55,7 +57,9 @@ export default class UserStore {
   static loginAfter (res: ResultVO<any>) {
     // 设置token
     TokenUtil.set(res.data.tokenCode)
+    //重连websocket
     WebsocketUtil.websocketClose()
+    //初始化用户信息
     UserStore.initUserStore(res)
   }
 

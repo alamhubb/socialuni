@@ -1,9 +1,9 @@
-import { districtModule, systemModule } from '@/plugins/store'
+import {districtModule, systemModule} from '@/plugins/store'
 import DistrictUtil from '@/utils/DistrictUtil'
 import DistrictVO from '@/model/DistrictVO'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
-import GenderType from '@/const/GenderType'
+import GenderType from "@/const/GenderType";
 
 export default class AppInitQueryVO {
   //上次退出时记录的adCode

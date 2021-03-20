@@ -1,4 +1,4 @@
-import UserVO from '@/model/user/UserVO'
+import UserVO from "@/model/user/UserVO"
 import DistrictVO from '@/model/DistrictVO'
 // import ChatVO from "@/model/chat/ChatVO";
 import TagTypeVO from '@/model/tag/TagTypeVO'
