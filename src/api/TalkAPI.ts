@@ -8,6 +8,7 @@ import DistrictVO from '@/model/DistrictVO'
 import TalkDeleteVO from '@/model/talk/TalkDeleteVO'
 import CommentDeleteVO from '@/model/comment/CommentDeleteVO'
 import ImgFileVO from '@/model/ImgFileVO'
+import TalkVO from '@/model/talk/TalkVO'
 
 export default class TalkAPI {
   static addTalkAPI (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string) {
@@ -16,7 +17,7 @@ export default class TalkAPI {
   }
 
   static queryTalksAPI (talkIds: number[], tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
-    return http.post('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, homeType, gender, minAge, maxAge))
+    return http.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, homeType, gender, minAge, maxAge))
   }
 
   static queryUserTalksAPI (userId: string, talkIds: number[]) {
