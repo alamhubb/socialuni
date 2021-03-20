@@ -40,18 +40,20 @@
             <view class="text-green text-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
           </view>
         </q-bar>
-        <view class="mt-sm px-xl pb-xxl">
-          <view class="flex-row px-15px pt-lg">
+        <view class="mt pb-sm">
+          <view class="row-center px-lg pt">
             <view class="w70px row-start">性别：</view>
-            <radio-group @change="genderChange">
-              <label v-for="report in genders" :key="report">
-                <radio :value="report" :checked="report===genderValue"></radio>
-                <text class="ml-xs mr-xl">{{ report }}</text>
-              </label>
-            </radio-group>
+            <view>
+              <radio-group @change="genderChange" class="flex-1">
+                <label v-for="report in genders" :key="report">
+                  <radio :value="report" :checked="report===genderValue"></radio>
+                  <text class="ml-sm mr">{{ report }}</text>
+                </label>
+              </radio-group>
+            </view>
           </view>
           <view class="mt-20px pb-xl pt-sm">
-            <view class="row-between px-15px">
+            <view class="row-between px-lg">
               <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
             </view>
             <view class="px-lg">
@@ -112,7 +114,7 @@ import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { appModule, locationModule, notifyModule, systemModule, talkModule } from '@/plugins/store'
+import { appModule, locationModule, notifyModule, systemModule, tagModule, talkModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import NodesRef = UniApp.NodesRef
@@ -279,7 +281,7 @@ export default class TalkVue extends Vue {
   }
 
   openTagSearchVue () {
-    appModule.getTagTypes()
+    tagModule.getTagTypesAction()
     this.showTagSearch = true
   }
 
