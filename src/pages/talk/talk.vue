@@ -158,8 +158,8 @@ export default class TalkVue extends Vue {
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
   genders: string [] = ['全部', '男', '女']
   // 组件内的值
-  genderValue: string = TalkFilterUtil.genderFilterDefault
-  genderDefault: string = TalkFilterUtil.genderFilterDefault
+  genderValue: string = appModule.appQueryGender
+  genderDefault: string = appModule.appQueryGender
   rangeValue: number[] = [TalkFilterUtil.minAgeFilterDefault, TalkFilterUtil.maxAgeFilterDefault]
   unreadNotifiesNum = 0
   // 评论输入框
@@ -317,7 +317,7 @@ export default class TalkVue extends Vue {
 
   get useFilters (): boolean {
     //todo 集美这里又区别，默认的筛选
-    return (TalkFilterUtil.genderFilterDefault === this.genders[0] && this.userGender !== TalkFilterUtil.genderFilterDefault) ||
+    return (appModule.appQueryGender === this.genders[0] && this.userGender !== appModule.appQueryGender) ||
       this.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
       this.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
   }

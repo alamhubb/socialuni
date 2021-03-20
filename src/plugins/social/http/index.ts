@@ -2,7 +2,7 @@ import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import { configModule } from '@/plugins/store'
+import {appModule, configModule} from '@/plugins/store'
 import Alert from '@/utils/Alert'
 import UserStoreCom from '@/plugins/store/UserStoreCom'
 import ErrorConst from '@/const/ErrorConst'
@@ -11,7 +11,7 @@ import GenderType from '@/const/GenderType'
 
 const socialHttp: Request = new Request()
 socialHttp.setConfig(config => { /* 设置全局配置 */
-  config.baseUrl = process.env.VUE_APP_BASE /* 根域名不同 */
+  config.baseUrl = appModule.appSocialSecretKey /* 根域名不同 */
   config.timeout = 5 * 1000
   return config
 })

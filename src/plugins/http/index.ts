@@ -1,7 +1,7 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/utils/UniUtil'
-import { configModule } from '@/plugins/store'
+import {appModule, configModule} from '@/plugins/store'
 import Alert from '@/utils/Alert'
 import UserStoreCom from '@/plugins/store/UserStoreCom'
 import ErrorConst from '@/const/ErrorConst'
@@ -20,7 +20,7 @@ http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 *
   } else {
     config.header.token = null
   }
-  config.header.secretKey = process.env.VUE_APP_SOCAIL_SECRETKEY
+  config.header.secretKey = appModule.appSocialSecretKey
 
   /* else {
     //如果未登录，只允许查询talk，其他全部提示要登录

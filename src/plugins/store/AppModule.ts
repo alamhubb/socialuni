@@ -5,9 +5,10 @@ import HomeSwiperVO from '@/model/HomeSwiperVO'
 import TagTypeVO from '@/model/tag/TagTypeVO'
 import LocationUtil from '@/utils/LocationUtil'
 import UnreadNotifyVO from '@/model/UnreadNotifyVO'
-import ThreeAuthType from '@/const/ThreeAuthType'
+import SocialAuthType from '@/const/SocialAuthType'
 import ReportAPI from '@/api/ReportAPI'
 import QingchiAPI from '@/api/QingchiAPI'
+import GenderType from "@/const/GenderType";
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -25,6 +26,9 @@ export default class AppModule extends VuexModule {
   appConfig: any = {}
   onlineUsersCount = 0
 
+  appSocialSecretKey = process.env.VUE_APP_SOCAIL_SECRETKEY
+  appQueryGender = GenderType.all
+
   //三方授权时携带的参数
   threeSecretKey = ''
   threeUserId = ''
@@ -38,11 +42,11 @@ export default class AppModule extends VuexModule {
   }
 
   get isAuthUser () {
-    return this.isThreeAuth && this.threeAuthType === ThreeAuthType.user
+    return this.isThreeAuth && this.threeAuthType === SocialAuthType.user
   }
 
   get isAuthPhone () {
-    return this.isThreeAuth && this.threeAuthType === ThreeAuthType.phone
+    return this.isThreeAuth && this.threeAuthType === SocialAuthType.phone
   }
 
   // actions

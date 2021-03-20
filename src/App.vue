@@ -3,7 +3,7 @@ import Vue from 'vue'
 import { appModule, systemModule } from '@/plugins/store'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
-import ThreeAuthVO from '@/model/openData/ThreeAuthVO'
+import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
 
 export default Vue.extend({
   mpType: 'app',
@@ -19,7 +19,7 @@ export default Vue.extend({
       appModule.threeProviderAppId = info.appId
       //如果有跳转信息
       if (info.extraData) {
-        const extraData: ThreeAuthVO = info.extraData
+        const extraData: SocialUniAuthVO = info.extraData
         appModule.threeSecretKey = extraData.appSecretKey
         appModule.threeUserId = extraData.appUserId
         appModule.threeAuthType = extraData.authType
