@@ -56,13 +56,13 @@
             </view>
             <view class="px-lg">
               <q-slider
-                  :value="rangeValue"
-                  :min="rangeMin"
-                  :max="rangMax"
-                  :bar-height="3"
-                  active-color="#FF6B00"
-                  :format="format"
-                  @change="handleRangeChange"
+                :value="rangeValue"
+                :min="rangeMin"
+                :max="rangMax"
+                :bar-height="3"
+                active-color="#FF6B00"
+                :format="format"
+                @change="handleRangeChange"
               ></q-slider>
             </view>
           </view>
@@ -73,9 +73,10 @@
       <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
       <!--  #endif -->
 
-      <!--      <talk-swipers v-if="configShowSwipers"></talk-swipers>-->
+      <talk-swipers v-if="configShowSwipers"></talk-swipers>
 
       <tabs-talk class="flex-1" ref="tabsTalk"
+                 :scroll-enable="scrollEnable"
                  :selectTagIds="selectTagIds"
                  :userGender="userGender"
                  :userMinAge="userMinAge"

@@ -1,5 +1,6 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">
+  <view v-if="talkTabs.length" class="flex-col h100p bg-white">
+<!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <q-row-bar class="flex-none" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
@@ -32,7 +33,11 @@
 
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
-    <swiper class="flex-1 btr-lg pa-sm bg-default" :current="swiperCurrent"
+    <swiper class="flex-1 btr-lg px-sm bg-default" :current="swiperCurrent"
+      :style="{
+              'height':'calc(100vh - '+talksListHeightSub+'px)',
+              'padding-bottom': talksListPaddingBottom+'px',
+            }"
             @change="talkSwiperChange">
       <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
         <!--
@@ -42,10 +47,10 @@
               @scroll.native="talksScrollEvent"
               @scroll="talksScrollEvent"
         >-->
-        <scroll-view class="h100p btr" :scroll-y="true" @scrolltolower="onreachBottom"
+        <scroll-view class="h100p btr" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                      :lower-threshold="800"
                      @scroll="talksScrollEvent">
-          <view v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+          <view class="pt-sm" v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
             <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
               <talk-item class="mb-sm"
                          :talk="talk"

@@ -1,5 +1,6 @@
 <template>
-  <view class="bg-primary px-smm pt-xs">
+  <view class="px-smm pt-xs">
+<!--  <view class="bg-primary px-smm pt-xs">-->
     <u-swiper :height="swiperHeight" :list="homeSwipers" name="imgUrl" @click="skipWebView"
               :interval="2500"
     ></u-swiper>

@@ -1,4 +1,4 @@
-import StorageUtil from "@/utils/StorageUtil";
+import StorageUtil from '@/utils/StorageUtil'
 
 export default class TokenUtil {
   // 开发生产区分token，避免混淆，不区分的话会冲突
@@ -16,8 +16,8 @@ export default class TokenUtil {
   static get (): string {
     // 开发环境方便测试
     if (process.env.NODE_ENV === 'development') {
-      // return StorageUtil.get(this.dev_token)
-      return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzliNzExYWY3NTM5OTRjMTI5MTRlYWE5YzdhNzUyMTUxIn0.qNZQdtX_4kIHqCB4fHgAyE4hT9dIV9Jw8f92HzXIm4k'
+      return StorageUtil.get(this.dev_token)
+      // return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxN18xMjEyMTIxMjIwXzliNzExYWY3NTM5OTRjMTI5MTRlYWE5YzdhNzUyMTUxIn0.qNZQdtX_4kIHqCB4fHgAyE4hT9dIV9Jw8f92HzXIm4k'
     } else {
       return StorageUtil.get(this.token)
     }
