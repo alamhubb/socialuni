@@ -36,7 +36,7 @@
       </button>
     </view>
     <q-row>
-      <view class="w100r flex-col">
+      <view class="w100p flex-col">
         <view class="text-xl text-bold">
           历史获得和消费记录：
         </view>
@@ -67,7 +67,6 @@ import { Vue, Component } from 'vue-property-decorator'
 import FollowItem from '@/pagesLazy/user/FollowItem.vue'
 import QRow from '@/components/q-row/q-row.vue'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import SkipUrlConst from '@/const/SkipUrlConst'
 import EnumVO from '@/const/EnumVO'
@@ -80,6 +79,7 @@ import UserAPI from '@/api/UserAPI'
 import PayType from '@/const/PayType'
 import ProviderType from '@/const/ProviderType'
 import { systemModule } from '@/plugins/store'
+import RouterUtil from "@/utils/RouterUtil";
 
 const userStore = namespace('user')
 
@@ -103,9 +103,9 @@ export default class ShellVue extends Vue {
   }
 
   onLoad () {
-    UserAPI.queryShellAPI().then(res => {
+    /*UserAPI.queryShellAPI().then(res => {
       this.shellOrders = res.data
-    })
+    })*/
   }
 
   toShellInfo () {

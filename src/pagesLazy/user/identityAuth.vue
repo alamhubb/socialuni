@@ -1,10 +1,10 @@
 <template>
   <view class="bg-white">
     <view v-if="user.isSelfAuth" class="article-row">
-      <view class="text-xxl text-red">您已认证通过，无需重复认证</view>
+      <view class="text-xxl color-red">您已认证通过，无需重复认证</view>
     </view>
     <view v-else-if="user.authNum>2" class="article-row">
-      <view class="text-xxl text-red">您已达到认证次数上限，请联系客服处理</view>
+      <view class="text-xxl color-red">您已达到认证次数上限，请联系客服处理</view>
     </view>
     <view v-else>
       <view class="article">
@@ -45,15 +45,14 @@ import { namespace } from 'vuex-class'
 import UserEdit from '@/pages/user/UserEdit.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
-import UserStore from '@/plugins/store/UserStore'
 import UserAPI from '@/api/UserAPI'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
 import ImgUtil from '@/utils/ImgUtil'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
-import HintMsg from '@/const/HintMsg'
+import AppMsg from '@/const/AppMsg'
+import Alert from "../../utils/Alert";
+import {userModule} from "@/plugins/store";
 
 const userStore = namespace('user')
 
@@ -87,8 +86,8 @@ export default class IdentityAuthVue extends Vue {
     CosUtil.postObject(this.imgFile).then(() => {
       this.user.authNum = this.user.authNum + 1
       UserAPI.identityAuthAPI(this.imgFile).then((res: any) => {
-        UserStore.setMineUser(res.data)
-        UniUtil.action(HintMsg.identityAuthSuccessMsg).then(() => {
+        userModule.setUser(res.data)
+        Alert.confirm(AppMsg.identityAuthSuccessMsg).then(() => {
           PageUtil.toMinePage()
         })
       }).finally(() => {

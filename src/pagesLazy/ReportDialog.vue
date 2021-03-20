@@ -20,9 +20,9 @@
         />
       </view>
       <view class="uni-tip-group-button">
-        <button class="uni-tip-button w40r" type="default" @click="closeDialogAndInitData" :plain="true">取消
+        <button class="uni-tip-button w40p" type="default" @click="closeDialogAndInitData" :plain="true">取消
         </button>
-        <button class="uni-tip-button w40r" type="primary" @click="addReport" :disabled="!reportType">确定
+        <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
         </button>
       </view>
     </view>
@@ -37,12 +37,12 @@ import ReportContentType from '@/const/ReportContentType'
 import MessageVO from '@/model/message/MessageVO'
 import ReportAddVO from '@/model/report/ReportAddVO'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import ReportAPI from '@/api/ReportAPI'
 import UserVO from '@/model/user/UserVO'
 import BalaBala from '@/utils/BalaBala'
-import { chatModule } from '@/plugins/store'
 import PlatformUtils from '@/utils/PlatformUtils'
+import Alert from "../utils/Alert";
+import {chatModule} from "@/plugins/store";
 
 const appStore = namespace('app')
 const userStore = namespace('user')
@@ -90,14 +90,14 @@ export default class ReportDialog extends Vue {
       const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
       reportAdd.messageId = this.reportInfo.id
       if (ReportType.other === this.reportType && !this.reportContent) {
-        UniUtil.hint('选择其他违规时，请您补充观点')
+        Alert.hint('选择其他违规时，请您补充观点')
       } else {
         ReportAPI.addReportAPI(reportAdd).then((res: any) => {
           chatModule.deleteMsgAction(reportAdd.messageId)
           // 调用删除内容
           // 关闭弹框病初始化数据
           this.closeDialogAndInitData()
-          UniUtil.hint(res.data)
+          Alert.hint(res.data)
           PlatformUtils.requestSubscribeReport()
         })
       }

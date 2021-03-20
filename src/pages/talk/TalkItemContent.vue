@@ -20,7 +20,7 @@
     </view>
     <view v-if="!talk.globalTop || talk.globalTop===1" class="card-text-row pt-10px" @click="toTalkDetailVue">
       <view class="cu-tag round bg-orange light">
-        <q-icon size="26" icon="map-fill"></q-icon>
+        <q-icon icon="map-fill" size="14"></q-icon>
         {{talk.district.provinceName}}
         <text v-if="talk.district.cityName">-{{talk.district.cityName}}</text>
         <text v-if="talk.district.districtName">-{{talk.district.districtName}}</text>
@@ -40,10 +40,12 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import ImgUtil from '@/utils/ImgUtil'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
-
-@Component
+import RouterUtil from "@/utils/RouterUtil";
+import QIcon from "@/components/q-icon/q-icon.vue";
+@Component({
+  components: {QIcon}
+})
 export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 

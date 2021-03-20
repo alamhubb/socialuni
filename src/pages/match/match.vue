@@ -1,7 +1,7 @@
 <template>
-  <view class="h100r bg-default">
-    <q-model v-if="showUser" class="bg-white h100r">
-      <scroll-view scroll-y class="h100r bg-gray">
+  <view class="h100p bg-default">
+    <q-model v-if="showUser" class="bg-white h100p">
+      <scroll-view scroll-y class="h100p bg-gray">
         <user-info v-if="showUser" :user.sync="showUser"></user-info>
         <!--            发表动态按钮-->
         <view v-if="showUser"
@@ -40,7 +40,7 @@
         匹配规则：在个人信息页面进行照片认证后才可使用匹配功能，互相喜欢后可开启聊天。
       </view>
       <view class="flex-none mr-sm">
-        <q-icon icon="close-circle-fill" size="36" @click="closeUploadImgHint"></q-icon>
+        <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
       </view>
     </view>
     <!--<view class="row-between">
@@ -74,7 +74,7 @@ import MatchType from '@/const/MatchType'
 import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import BalaBala from '@/utils/BalaBala'
-import Toast from '@/utils/Toast'
+import Toast from "@/utils/Toast";
 
 const appStore = namespace('app')
 const userStore = namespace('user')

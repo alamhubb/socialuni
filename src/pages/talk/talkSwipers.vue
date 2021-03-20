@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-white px pt-xs">
+  <view class="bg-primary px-ssm pt-xs">
     <u-swiper :height="swiperHeight" :list="homeSwipers" name="imgUrl" @click="skipWebView"
               :interval="2500"
     ></u-swiper>
@@ -16,10 +16,10 @@ import { namespace } from 'vuex-class'
 
 import HomeSwiperVO from '@/model/HomeSwiperVO'
 import ConfigMap from '@/const/ConfigMap'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import SkipType from '@/const/SkipType'
 import { systemModule } from '@/plugins/store'
+import RouterUtil from "@/utils/RouterUtil";
 
 const appStore = namespace('app')
 const configStore = namespace('config')

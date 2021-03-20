@@ -2,8 +2,8 @@
   <view>
     <view class="card-actions pt-10px row-between">
       <view class="row-end flex-auto">
-        <view class="flex-row button-icon" @click="setTalk" hover-class="uni-list-cell-hover">
-          <q-icon icon="mdi-comment-outline" size="42">
+        <view class="row-col-center button-icon" @click="setTalk" hover-class="uni-list-cell-hover">
+          <q-icon icon="mdi-comment-outline" size="24">
           </q-icon>
           <text v-if="talk.commentNum" class="ml-5px">
             {{talk.commentNum}}
@@ -13,12 +13,11 @@
       <view class="row-end flex-auto">
         <!--                hover-class="uni-list-cell-hover"-->
         <view class="row-all-center">
-          <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none bg-white">
-            <text class="text-df">
+          <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
+            <text>
               抱抱
             </text>
-            <q-icon class="ml-5px"
-                    size="42"
+            <q-icon class="ml-5px mt-xs" size="24"
                     :icon="getHugIcon(talk.hasHugged)"
                     :class="[getHugColor(talk.hasHugged)]"
             ></q-icon>
@@ -27,9 +26,9 @@
             </text>
           </view>
         </view>
-        <view class="ml-30px button-icon" @click="openReportDialog"
+        <view class="ml-30px button-icon row-col-center" @click="openReportDialog"
               hover-class="uni-list-cell-hover">
-          <q-icon icon="more-dot-fill" size="42"></q-icon>
+          <q-icon icon="more-dot-fill"></q-icon>
         </view>
       </view>
     </view>
@@ -38,8 +37,8 @@
         <block v-for="(comment,index) in talk.comments" :key="comment.id">
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
-            <view class="flex-row py-mn" @click="toTalkDetailVue">
-              <view class="flex-none" :class="comment.user.vipFlag?'text-red':'font-blue-deep'"
+            <view class="flex-row" @click="toTalkDetailVue">
+              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-pink-accent'"
                     @click.stop="toUserDetail(comment.user.id)">
                 {{comment.user.nickname}}
               </view>
@@ -53,13 +52,13 @@
           </view>
         </block>
         <view v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
-          <view class="row-col-center font-orange" @click="toTalkDetailVue">
+          <view class="row-col-center color-orange" @click="toTalkDetailVue">
             <view v-show="talk.commentNum>commentShowNum">
               查看其余{{talk.commentNum - commentShowNum}}条评论
             </view>
             <view v-show="false">
               收起评论
-              <q-icon icon="arrow-up" size="42"></q-icon>
+              <q-icon icon="arrow-up"></q-icon>
             </view>
           </view>
         </view>
@@ -75,31 +74,32 @@ import PagePath from '@/const/PagePath'
 import TalkAPI from '@/api/TalkAPI'
 import ReportContentType from '@/const/ReportContentType'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import HugAddVO from '@/model/HugAddVO'
 import ChildComment from '@/pages/talk/ChildComment.vue'
-import UserVO from '@/model/user/UserVO'
+import UserVO from "@/model/user/UserVO"
 import { namespace } from 'vuex-class'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkUtil from '@/utils/TalkUtil'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
 import { talkModule } from '@/plugins/store'
 import BalaBala from '@/utils/BalaBala'
-import Toast from '@/utils/Toast'
+import RouterUtil from "@/utils/RouterUtil";
+import QIcon from "@/components/q-icon/q-icon.vue";
+import Toast from "@/utils/Toast";
 
 const userStore = namespace('user')
 
 @Component({
   components: {
+    QIcon,
     ChildComment
   }
 })
 export default class TalkItemComment extends Vue {
   @userStore.State('user') user: UserVO
   // 因为无法直接修改，所以需要克隆一下
-  @Prop() readonly talkProp: TalkVO
+  @Prop() readonly talkProp!: TalkVO
   @Prop({ type: Boolean, default: false }) readonly showAllComment: boolean
 
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)

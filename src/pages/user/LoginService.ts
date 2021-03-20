@@ -1,13 +1,12 @@
 import LoginDataVO from '@/model/login/LoginDataVO'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import { systemModule } from '@/plugins/store'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtils from '@/utils/JsonUtil'
 import PlatformType from '@/const/PlatformType'
 import Constants from '@/const/Constant'
 import BalaBala from '@/utils/BalaBala'
-import Alert from '../../utils/Alert'
+import Alert from "../../utils/Alert";
 
 export default class LoginService {
   static getLoginData (provider: Provider) {

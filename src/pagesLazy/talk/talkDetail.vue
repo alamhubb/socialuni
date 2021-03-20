@@ -5,10 +5,10 @@
     <u-navbar :is-back="false">
       <view class="flex-row w100vw px flex-auto">
         <view class="col-center bg-active flex-none" @click="goBack">
-          <q-icon icon="arrow-left" size="42"></q-icon>
+          <q-icon icon="arrow-left"></q-icon>
         </view>
         <view class="col-center bg-active ml-lg flex-none" @click="goHome">
-          <q-icon icon="home" size="46"></q-icon>
+          <q-icon icon="home"></q-icon>
         </view>
         <view class="ml-lg text-bold text-lg flex-none">
           动态详情
@@ -48,15 +48,17 @@ import { Vue, Component } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import TalkAPI from '@/api/TalkAPI'
 import TalkItem from '@/pages/talk/TalkItem.vue'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import { namespace } from 'vuex-class'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
+import MsgInput from "@/components/MsgInput.vue";
+import RouterUtil from "@/utils/RouterUtil";
 
 const appStore = namespace('app')
 
 @Component({
   components: {
+    MsgInput,
     TalkItem,
     TalkOperate
   }

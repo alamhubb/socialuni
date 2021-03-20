@@ -1,6 +1,6 @@
 import Constants from '@/const/Constant'
 import GenderType from '@/const/GenderType'
-import UserVO from '@/model/user/UserVO'
+import UserVO from "@/model/user/UserVO"
 import FollowStatus from '@/const/FollowStatus'
 
 export default class UserUtil {

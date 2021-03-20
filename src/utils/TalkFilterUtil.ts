@@ -1,5 +1,5 @@
 import StorageUtil from '@/utils/StorageUtil'
-import GenderType from '@/const/GenderType'
+import GenderType from "@/const/GenderType";
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'

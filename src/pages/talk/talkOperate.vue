@@ -38,10 +38,10 @@
                     />
         </view>
         <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40r" type="default" @click="reportDialogClose" :plain="true">
+          <button class="uni-tip-button w40p" type="default" @click="reportDialogClose" :plain="true">
             取消
           </button>
-          <button class="uni-tip-button w40r" type="primary" @click="addReport" :disabled="!reportType">确定
+          <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
           </button>
         </view>
       </view>
@@ -63,14 +63,14 @@ import ReportAddVO from '@/model/report/ReportAddVO'
 import ReportContentType from '@/const/ReportContentType'
 import ReportAPI from '@/api/ReportAPI'
 import TalkAPI from '@/api/TalkAPI'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
-import UserVO from '@/model/user/UserVO'
 import { talkModule } from '@/plugins/store'
 import TalkVO from '@/model/talk/TalkVO'
 import BalaBala from '@/utils/BalaBala'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
+import UniUtil from "@/utils/UniUtil";
+import Alert from "../../utils/Alert";
+import UserVO from "@/model/user/UserVO";
 
 const appStore = namespace('app')
 const userStore = namespace('user')
@@ -108,7 +108,7 @@ export default class TalkOperate extends Vue {
       reportAdd.commentId = this.comment.id
     }
     if (ReportType.other === this.reportType && !this.reportContent) {
-      UniUtil.hint('选择其他违规时，请您补充观点')
+      Alert.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
@@ -124,7 +124,7 @@ export default class TalkOperate extends Vue {
         }
         // 必须最后清空因为前面还要使用做判断
         this.reportDialogClose()
-        UniUtil.hint(res.data)
+        Alert.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -159,7 +159,7 @@ export default class TalkOperate extends Vue {
   // 用户自己删除
   userDeleteComment () {
     this.commentActionClose()
-    UniUtil.action('是否确定删除此条评论，此操作无法恢复').then(() => {
+    Alert.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
       this.deleteComment()
     })
   }

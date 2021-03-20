@@ -7,7 +7,7 @@
 
                     </slot>
                 </view>
-                <view hover-class="uni-list-cell-hover">
+                <view hover-class="uni-list-cell-hover" class="col-center">
                     <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
                 </view>
             </view>
@@ -23,8 +23,8 @@ import {
   Vue,
   Component, Prop, Model, Emit
 } from 'vue-property-decorator'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
+import CommonUtil from "@/utils/CommonUtil";
+import UniUtil from "@/utils/UniUtil";
 
   @Component
 export default class QTabs extends Vue {

@@ -1,9 +1,9 @@
 .q-bar {
   @extend .row-between-center;
-  @extend .px;
-  @extend .py-sm;
+  @extend .px-ssm;
+  @extend .py-xs;
   @extend .bg-white;
-  min-height: 100rpx;
+  min-height: 50px;
 }
 
 .q-bar + .q-bar {

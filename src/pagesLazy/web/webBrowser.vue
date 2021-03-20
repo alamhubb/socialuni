@@ -2,7 +2,7 @@
   <view>
     <!--  #ifndef MP -->
     <u-navbar>
-      <view class="row-between w100r flex-auto">
+      <view class="row-between w100p flex-auto">
         <view class="ml-xl text-bold text-lg">
           {{ title }}
         </view>
@@ -22,11 +22,11 @@ import {
   Vue,
   Component
 } from 'vue-property-decorator'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import PagePath from '@/const/PagePath'
 import { namespace } from 'vuex-class'
 import { systemModule } from '@/plugins/store'
+import RouterUtil from "@/utils/RouterUtil";
 
 const systemStore = namespace('system')
 

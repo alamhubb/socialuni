@@ -105,14 +105,14 @@
 
 <script lang="ts">
 import { Vue, Component, Watch, Emit } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
 import UserAPI from '@/api/UserAPI'
 import { namespace } from 'vuex-class'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
-import UserStore from '@/plugins/store/UserStore'
 import { parseDate } from '@/utils'
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
+import Alert from "../../utils/Alert";
+import Toast from "@/utils/Toast";
+import {userModule} from "@/plugins/store";
+import UserVO from "@/model/user/UserVO";
 
 const userStore = namespace('user')
 
@@ -140,7 +140,7 @@ export default class UserEdit extends Vue {
       this.nickname = this.user.nickname || ''
       this.gender = this.user.gender || '女'
       this.birthday = this.user.birthday || '1999-01-01'
-      this.location = this.user.city || ''
+      this.location = this.user.location || ''
       this.contactAccount = this.user.contactAccount || ''
       this.wxAccount = this.user.wxAccount || ''
       this.qqAccount = this.user.qqAccount || ''
@@ -186,15 +186,15 @@ export default class UserEdit extends Vue {
   saveUser () {
     if (this.contactAccount) {
       if (this.contactAccount.length > 30) {
-        UniUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
+        Alert.hint('联系方式不能超过30个字符，例如：vx:491369310')
         return
       } else if (this.contactAccount.length < 5) {
-        UniUtil.hint('联系方式必须大于4个字符，例如：vx:491369310')
+        Alert.hint('联系方式必须大于4个字符，例如：vx:491369310')
         return
       }
     }
     this.btnDisabled = true
-    UniUtil.action('是否确定修改个人信息').then(() => {
+    Alert.confirm('是否确定修改个人信息').then(() => {
       const userCopy = JsonUtils.deepClone(this.user)
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
@@ -205,7 +205,7 @@ export default class UserEdit extends Vue {
       userCopy.qqAccount = this.qqAccount
       userCopy.wbAccount = this.wbAccount
       UserAPI.editUserAPI(userCopy).then((res: any) => {
-        UserStore.setMineUser(res.data)
+        userModule.setUser(res.data)
         Toast.toast('已修改')
         this.closeUserEditPop()
       }).finally(() => {

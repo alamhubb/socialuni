@@ -1,7 +1,7 @@
 .q-row-bar {
+  @extend .bg-primary;
   @extend .row-between;
   @extend .px;
   @extend .py-sm;
-  @extend .bg-white;
   @extend .flex-none;
 }

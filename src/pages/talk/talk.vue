@@ -1,92 +1,95 @@
 <template>
-  <view class="flex-col h100r bg-default">
-        <view v-show="showTagSearch" class="h100r">
-          <tag-search class="h100r" v-model="showTagSearch" @change="changeTag"
-          ></tag-search>
+  <view class="flex-col h100p">
+    <view v-show="showTagSearch" class="h100p">
+      <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
+      ></tag-search>
+    </view>
+    <view v-show="!showTagSearch" class="flex-col h100p">
+      <q-navbar class="flex-none">
+        <q-search class="flex-auto" @click.native="openTagSearchVue">
+          <q-icon class="mx-5px text-gray" size="16" icon="search"></q-icon>
+          <view v-if="selectTag" class="flex-row flex-auto">
+            <view class="cu-tag round bg-green-plain light row-all-center">
+              {{ selectTag.name }}
+            </view>
+          </view>
+          <input v-else :adjust-position="false" type="text"
+                 placeholder="选择话题" confirm-type="search"/>
+          <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" icon="close"
+                  @click.native.stop="deleteTag(selectTag)"
+          ></q-icon>
+        </q-search>
+        <view class="mr-sm" :class="{'text-blue':useFilters}">
+          <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
         </view>
-        <view v-show="!showTagSearch" class="flex-col h100r">
-          <q-navbar>
-            <q-search class="flex-auto" @click.native="openTagSearchVue">
-              <q-icon class="mx-5px text-gray" size="30" icon="search"></q-icon>
-              <view v-if="selectTag" class="flex-row flex-auto">
-                <view class="cu-tag round bg-green-plain light row-all-center">
-                  {{ selectTag.name }}
-                </view>
-              </view>
-              <input v-else :adjust-position="false" type="text"
-                     placeholder="选择话题" confirm-type="search"/>
-              <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" size="28" icon="close"
-                      @click.native.stop="deleteTag(selectTag)"
-              ></q-icon>
-            </q-search>
-            <view class="mr-sm" :class="{'text-blue':useFilters}">
-              <q-icon icon="mdi-filter-variant" size="56" @click="showFilterModel"></q-icon>
-            </view>
-            <view v-if="user" class="position-relative mr-sm">
-              <q-icon icon="bell-fill" size="56" @click="toNotifyVue"></q-icon>
-              <u-badge :count="unreadNotifiesNum" size="mini"
-                       :offset="[0, 0]" @click="toNotifyVue"></u-badge>
-            </view>
-            <view class="mr-sm">
-              <q-icon icon="plus-circle" size="56" @click="toTalkAdd"></q-icon>
-            </view>
-          </q-navbar>
-
-          <q-popup v-model="showFilter" bottom>
-            <q-bar round class="solid-bottom">
-              <view class="text-black text-lgg text-bold">筛选</view>
-              <view class="flex-row">
-                <view class="text-blue text-bold mx-xs px" @click="hideFilter">取消</view>
-                <view class="text-green text-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
-              </view>
-            </q-bar>
-            <view class="mt-sm px-xs pb-xlg">
-              <view class="flex-row px-15px pt-lg">
-                <view class="w70px row-start">性别：</view>
-                <radio-group @change="genderChange">
-                  <label v-for="report in genders" :key="report">
-                    <radio :value="report" :checked="report===genderValue"></radio>
-                    <text class="ml-xs mr-xl">{{ report }}</text>
-                  </label>
-                </radio-group>
-              </view>
-              <view class="mt-20px pb-xl pt-sm">
-                <view class="row-between px-15px">
-                  <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
-                </view>
-                <view class="px-lg">
-                  <q-slider
-                    :value="rangeValue"
-                    :min="rangeMin"
-                    :max="rangMax"
-                    :bar-height="3"
-                    active-color="#FF6B00"
-                    :format="format"
-                    @change="handleRangeChange"
-                  ></q-slider>
-                </view>
-              </view>
-            </view>
-          </q-popup>
-
-          <!--  #ifdef APP-PLUS -->
-          <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
-          <!--  #endif -->
-
-          <talk-swipers v-if="configShowSwipers"></talk-swipers>
-
-          <tabs-talk class="flex-auto" ref="tabsTalk" :scrollEnable="scrollEnable"
-                     :selectTagIds="selectTagIds"
-                     :userGender="userGender"
-                     :userMinAge="userMinAge"
-                     :userMaxAge="userMaxAge"
-                     :tabs-id="tabsId"
-          ></tabs-talk>
+        <view v-if="user" class="position-relative mr-sm">
+          <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
+          <u-badge :count="unreadNotifiesNum" size="mini"
+                   :offset="[0, 0]" @click="toNotifyVue"></u-badge>
         </view>
+        <view class="mr-sm">
+          <q-icon icon="plus-circle" size="28" @click="toTalkAdd"></q-icon>
+        </view>
+      </q-navbar>
 
-        <!--            评论输入框按钮-->
-        <msg-input v-if="showMsgInput">
-        </msg-input>
+      <q-popup v-model="showFilter" bottom>
+        <q-bar round class="solid-bottom">
+          <view class="text-black text-lgg text-bold">筛选</view>
+          <view class="flex-row">
+            <view class="text-blue text-bold mx-xs px" @click="hideFilter">取消</view>
+            <view class="text-green text-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
+          </view>
+        </q-bar>
+        <view class="mt-sm px-xl pb-xxl">
+          <view class="flex-row px-15px pt-lg">
+            <view class="w70px row-start">性别：</view>
+            <radio-group @change="genderChange">
+              <label v-for="report in genders" :key="report">
+                <radio :value="report" :checked="report===genderValue"></radio>
+                <text class="ml-xs mr-xl">{{ report }}</text>
+              </label>
+            </radio-group>
+          </view>
+          <view class="mt-20px pb-xl pt-sm">
+            <view class="row-between px-15px">
+              <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
+            </view>
+            <view class="px-lg">
+              <q-slider
+                  :value="rangeValue"
+                  :min="rangeMin"
+                  :max="rangMax"
+                  :bar-height="3"
+                  active-color="#FF6B00"
+                  :format="format"
+                  @change="handleRangeChange"
+              ></q-slider>
+            </view>
+          </view>
+        </view>
+      </q-popup>
+
+      <!--  #ifdef APP-PLUS -->
+      <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
+      <!--  #endif -->
+
+      <!--      <talk-swipers v-if="configShowSwipers"></talk-swipers>-->
+
+      <tabs-talk class="flex-1" ref="tabsTalk"
+                 :selectTagIds="selectTagIds"
+                 :userGender="userGender"
+                 :userMinAge="userMinAge"
+                 :userMaxAge="userMaxAge"
+                 :tabs-id="tabsId"
+      ></tabs-talk>
+    </view>
+
+    <!--            评论输入框按钮-->
+    <!--    <msg-input v-if="showMsgInput">
+        </msg-input>-->
+
+    <msg-input v-if="showMsgInput">
+    </msg-input>
   </view>
 </template>
 
@@ -293,6 +296,7 @@ export default class TalkVue extends Vue {
   }
 
   get useFilters (): boolean {
+    //todo 集美这里又区别，默认的筛选
     return this.userGender !== TalkFilterUtil.genderFilterDefault ||
       this.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
       this.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault

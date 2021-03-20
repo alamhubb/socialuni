@@ -4,12 +4,12 @@
             <view>
                 <view class="cu-form-group">
                     <view class="title">
-                        <text class="text-red">*</text>
+                        <text class="color-red">*</text>
                         标签：
                     </view>
                     <input :cursor-spacing="20" maxlength="4" v-model.trim="tagName" placeholder="必填"/>
                     <view class="uni-icon uni-icon-clear" v-if="tagName" @click="clearTagName"></view>
-                    <view class="text-red">最多四个字</view>
+                    <view class="color-red">最多四个字</view>
                 </view>
 
                 <view class="cu-form-group align-start">
@@ -38,9 +38,8 @@ import { Vue, Component } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
 import TagAPI from '@/api/TagAPI'
 import ResultVO from '@/model/ResultVO'
-import ErrorCode from '@/const/ErrorCode'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
+import ErrorConst from "@/const/ErrorConst";
+import Alert from "../../utils/Alert";
 
 @Component
 export default class TagAddVue extends Vue {
@@ -63,8 +62,8 @@ export default class TagAddVue extends Vue {
       TagAPI.addTagAPI(this.tagName, this.tagDescription).then((res: any) => {
         this.checkTag(res.data)
       }).catch((res: ResultVO<TagVO>) => {
-        if (res.errorCode === ErrorCode.custom) {
-          UniUtil.action(res.errorMsg, '使用').then(() => {
+        if (res.errorCode === ErrorConst.custom) {
+          Alert.confirm(res.errorMsg, '使用').then(() => {
             this.checkTag(res.data)
           })
         }

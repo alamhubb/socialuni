@@ -1,8 +1,8 @@
 <template>
   <view>
     <view v-if="user.vipFlag" class="article-row">
-      <view class="text-xxl text-red">您已开通VIP，VIP到期时间为：</view>
-      <view class="text-xxl text-red">{{user.vipEndDate | parseStrToTime}}</view>
+      <view class="text-xxl color-red">您已开通VIP，VIP到期时间为：</view>
+      <view class="text-xxl color-red">{{user.vipEndDate | parseStrToTime}}</view>
     </view>
 
     <view class="article">
@@ -33,11 +33,11 @@ import { namespace } from 'vuex-class'
 import UserEdit from '@/pages/user/UserEdit.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
 import { systemModule } from '@/plugins/store'
 import PayType from '@/const/PayType'
+import Alert from "../../utils/Alert";
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -51,7 +51,7 @@ export default class VipVue extends Vue {
 
   postPay () {
     if (this.user.vipFlag) {
-      UniUtil.hint('您已开通会员，无需重复开通')
+      Alert.hint('您已开通会员，无需重复开通')
     } else {
       PlatformUtils.userPay(systemModule.provider, PayType.vip)
     }

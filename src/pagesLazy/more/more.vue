@@ -14,10 +14,10 @@
     <ad class="bg-white mb-5px" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
     <ad class="bg-white" unit-id="b10fe0e7c39b9ca9e7ce19660f6d0761"></ad>
     <view class="article-row row-center">
-      <button class="w100r cu-btn bg-green radius lg" @click="openVideoAd">视频广告</button>
+      <button class="w100p cu-btn bg-green radius lg" @click="openVideoAd">视频广告</button>
     </view>
     <view class="article-row pt-0 pb-20px">
-      <button class="w100r cu-btn bg-red light radius lg" @click="openAd">其他广告</button>
+      <button class="w100p cu-btn bg-red light radius lg" @click="openAd">其他广告</button>
     </view>
     <!--  #endif -->
 
@@ -32,8 +32,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import QQUtils from '@/utils/QQUtils'
+import Alert from "../../utils/Alert";
 
   @Component
 export default class MorePage extends Vue {
@@ -50,10 +50,10 @@ export default class MorePage extends Vue {
       /* 建议放在onReady里执行，提前加载广告 */
       this.interstitialAd.onLoad()
       this.videoAd.onError((err) => {
-        UniUtil.hint(err.errMsg)
+        Alert.hint(err.errMsg)
       })
       this.interstitialAd.onError((err) => {
-        UniUtil.hint(err.errMsg)
+        Alert.hint(err.errMsg)
       })
       // #endif
     }
@@ -61,13 +61,13 @@ export default class MorePage extends Vue {
     openAd () {
       /* 建议放在需要展示插屏广告的时机执行 */
       this.interstitialAd.show().catch((err) => {
-        UniUtil.hint(err.errMsg)
+        Alert.hint(err.errMsg)
       })
     }
 
     openVideoAd () {
       this.videoAd.show().catch((err) => {
-        UniUtil.hint(err.errMsg)
+        Alert.hint(err.errMsg)
       })
     }
 }

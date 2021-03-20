@@ -1,10 +1,9 @@
 import QQUtils from '@/utils/QQUtils'
 import CommonUtil from '@/utils/CommonUtil'
-import { platformModule, systemModule, userModule } from '@/plugins/store'
+import {platformModule, systemModule, userModule} from '@/plugins/store'
 import WxUtils from '@/utils/WxUtils'
 import UniUtil from './UniUtil'
 import UserAPI from '@/api/UserAPI'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import PagePath from '@/const/PagePath'
 import AppMsg from '@/const/AppMsg'
@@ -15,12 +14,12 @@ import BalaBala from '@/utils/BalaBala'
 import MPUtil from '@/utils/MPUtil'
 import APPUtil from '@/utils/APPUtil'
 import AppInitAPI from '@/api/AppInitAPI'
-import Toast from '@/utils/Toast'
+import Toast from "@/utils/Toast";
 
 // 统一处理各平台的订阅
 export default class PlatformUtils {
   // talk相关订阅
-  static requestSubscribeTalk () {
+  static requestSubscribeTalk() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(platformModule.wx_talkTemplateIds)
     // #endif
@@ -30,7 +29,7 @@ export default class PlatformUtils {
   }
 
   // Comment相关订阅
-  static requestSubscribeComment () {
+  static requestSubscribeComment() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(platformModule.wx_commentTemplateIds)
     // #endif
@@ -40,7 +39,7 @@ export default class PlatformUtils {
   }
 
   // Chat Message 相关订阅
-  static requestSubscribeChat () {
+  static requestSubscribeChat() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(platformModule.wx_messageTemplateIds)
     // #endif
@@ -50,7 +49,7 @@ export default class PlatformUtils {
   }
 
   // Report相关订阅
-  static requestSubscribeReport () {
+  static requestSubscribeReport() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(platformModule.wx_reportTemplateIds)
     // #endif
@@ -60,7 +59,7 @@ export default class PlatformUtils {
   }
 
   // 统一处理各平台的订阅
-  static requestSubscribeMessage (tmplIds: string[]) {
+  static requestSubscribeMessage(tmplIds: string[]) {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(tmplIds)
     // #endif
@@ -70,7 +69,7 @@ export default class PlatformUtils {
   }
 
   // 统一处理各平台的支付
-  static userPay (provider: string, payType: string, amount?: number) {
+  static userPay(provider: string, payType: string, amount?: number) {
     MsgUtil.notPay()
     /*return PlatformUtils.pay(provider, payType, amount).then(() => {
       UserStore.getMineUserAction().then(() => {
@@ -81,7 +80,7 @@ export default class PlatformUtils {
   }
 
   //所有只能直接调用这个
-  static async pay (provider: string, payType: string, amount?: number) {
+  static async pay(provider: string, payType: string, amount?: number) {
     if (!userModule.user) {
       return BalaBala.unLoginMessage()
     } else if (systemModule.isIos) {
@@ -94,7 +93,7 @@ export default class PlatformUtils {
     })*/
   }
 
-  private static async cashPay (res: UserPayResultVO): Promise<any> {
+  private static async cashPay(res: UserPayResultVO): Promise<any> {
     return PlatformUtils.requestPayment(res)
       .catch((err) => {
         // qq的取消支付没有走着里
@@ -113,7 +112,7 @@ export default class PlatformUtils {
   //会员走userPay
   //会员走cashPay
   //底层requestPayment处理平台差异。
-  private static async requestPayment (payResult: UserPayResultVO) {
+  private static async requestPayment(payResult: UserPayResultVO) {
     if (systemModule.isMpQQ) {
       return QQUtils.requestPayment(payResult)
     } else if (systemModule.isMpWX || systemModule.isApp) {
@@ -123,7 +122,7 @@ export default class PlatformUtils {
     }
   }
 
-  static checkUpdate () {
+  static checkUpdate() {
     // #ifdef MP
     MPUtil.checkUpdate()
     // #endif

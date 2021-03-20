@@ -6,7 +6,7 @@
                     <image class="card-title-avatar flex-none" mode="aspectFill"
                            :src="notify.avatar"></image>
                     <view class="flex-auto">
-                        <view :class="notify.vipFlag?'text-red':'font-blue-deep'" class="row-col-center py-mn">
+                        <view :class="notify.vipFlag?'color-red':'color-blue-dark'" class="row-col-center py-mn">
                             <text>{{notify.nickname}}</text>
                             <view v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm text-bold">
                                 VIP
@@ -41,8 +41,8 @@ import { namespace } from 'vuex-class'
 import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import ImgUtil from '@/utils/ImgUtil'
 import PagePath from '@/const/PagePath'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from "@/utils/RouterUtil";
 
 const appStore = namespace('app')
 

@@ -1,8 +1,8 @@
 <template>
   <view>
     <view class="article-row">
-      <view class="text-xxl text-red">您当前的爱心值为：{{user.loveValue}}</view>
-      <view class="text-xxl text-red">今日已获得爱心值：{{todayLoveValue}}
+      <view class="text-xxl color-red">您当前的爱心值为：{{user.loveValue}}</view>
+      <view class="text-xxl color-red">今日已获得爱心值：{{todayLoveValue}}
         <text v-if="todayLoveValue>=rewardedAdLimitLoveValue">
           ，已达到今日观看视频可获得爱心值的上限，将不再获得爱心值奖励
         </text>
@@ -11,14 +11,14 @@
 
     <view class="article">
       <view class="text-xl">1.用户每次观看视频广告
-        <text class="text-red">15</text>
+        <text class="color-red">15</text>
         秒以上可获得
-        <text class="text-red">10</text>
+        <text class="color-red">10</text>
         点爱心值奖励 ，每天最多获得
-        <text class="text-red">{{rewardedAdLimitLoveValue}}</text>
+        <text class="color-red">{{rewardedAdLimitLoveValue}}</text>
         点爱心值奖励,
         即每天只能获得
-        <text class="text-red">{{rewardedAdLimit}}</text>
+        <text class="color-red">{{rewardedAdLimit}}</text>
         次奖励
       </view>
       <view class="text-xl">2.爱心值会展示在用户动态中</view>
@@ -55,13 +55,12 @@ import { Vue, Component } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import LoveValueAPI from '@/api/LoveValueAPI'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
-import UserStore from '@/plugins/store/UserStore'
 import QQUtils from '@/utils/QQUtils'
 import WxUtils from '@/utils/WxUtils'
 import APPUtil from '@/utils/APPUtil'
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
+import {userModule} from "@/plugins/store";
+import Alert from "../../utils/Alert";
 
 const appStore = namespace('app')
 const userStore = namespace('user')
@@ -97,13 +96,13 @@ export default class LoveValueVue extends Vue {
     // #endif
     this.videoAd.load()
     this.videoAd.onError(err => {
-      UniUtil.hint('广告加载失败，请稍候重试，' + JsonUtils.toJson(err))
+      Alert.hint('广告加载失败，请稍候重试，' + JsonUtils.toJson(err))
     })
     this.videoAd.onClose((res: any) => {
       LoveValueAPI.watchVideoAdsAPI(res.isEnded).then((res: any) => {
         if (res.data) {
           this.todayLoveValue = res.data.todayLoveValue
-          UserStore.setMineUser(res.data.user)
+          userModule.setUser(res.data.user)
         }
       })
       // 关闭广告，res=true，则为成功观看，调用后台添加积分，后台提示奖励10积分，或者今天已观看满次，不再获得爱心值奖励
@@ -112,7 +111,7 @@ export default class LoveValueVue extends Vue {
 
   openAd () {
     this.videoAd.show().catch((err) => {
-      UniUtil.hint(err.errMsg)
+      Alert.hint(err.errMsg)
     })
   }
 }

@@ -19,3 +19,4 @@ export default class QRowItem extends Vue {
   }
 }
 </script>
+

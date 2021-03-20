@@ -1,12 +1,12 @@
 <template>
-  <view class="h100r flex-col">
+  <view class="h100p flex-col">
     <q-navbar v-if="value">
-      <q-icon size="36" class="ml" icon="arrow-leftward" @click="input"></q-icon>
+      <q-icon class="ml" icon="arrow-leftward" @click="input"></q-icon>
       <q-search class="flex-auto">
-        <q-icon class="mx-5px text-gray" size="30" icon="search"></q-icon>
+        <q-icon class="mx-5px text-gray" icon="search" size="16"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
-        <q-icon v-if="searchContent" class="mr text-gray row-all-center" size="28" icon="close"
+        <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"
                 @click="clearSearchContent"
         ></q-icon>
       </q-search>
@@ -23,7 +23,7 @@
           #{{tag.name}}
         </text>
         <view v-if="tag.count" class="row-col-center">
-          <q-icon addClass="text-red" size="28" icon="mdi-fire"></q-icon>
+          <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
           {{tag.count}}
         </view>
       </view>
@@ -99,7 +99,7 @@ import QIcon from '@/components/q-icon/q-icon.vue'
 import { namespace } from 'vuex-class'
 import TagUtil from '@/utils/TagUtil'
 
-const appStore = namespace('app')
+const tagStore = namespace('tag')
 
 @Component({
   components: {
@@ -111,10 +111,10 @@ export default class TagSearchVue extends Vue {
   @Model('input') readonly value: boolean
 
   @Prop({ type: Boolean, default: false }) readonly isAdd: boolean
-  @appStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
+  @tagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   // 输入内容查询时显示的列表tag
   // 进入页面只查询前20个，点击了输入内容才查询所有
-  @appStore.State('tags') readonly tags: TagVO []
+  @tagStore.State('tags') readonly tags: TagVO []
 
   searchContent = ''
   showSearch = false

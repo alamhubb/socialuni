@@ -2,10 +2,10 @@
   <view>
     <view class="cu-bar bg-white search">
       <view class="search-form round">
-        <q-icon class="mx-5px text-gray" size="30" icon="search"></q-icon>
+        <q-icon class="mx-5px text-gray" icon="search"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView"
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
-        <q-icon v-if="searchContent" class="mr text-gray" size="26" icon="close"
+        <q-icon v-if="searchContent" class="mr text-gray" icon="close"
                 @click="clearSearchContent"
         ></q-icon>
       </view>
@@ -13,7 +13,6 @@
         <text>取消</text>
       </view>
     </view>
-
     <view v-if="searchContent || showSearch">
       <view v-if="searchContent&&isAdd" class="article-row row-col-center solid-bottom text-blue" @click="addTag">
         未找到相关标签，可点击
@@ -26,7 +25,7 @@
           #{{tag.name}}
         </text>
         <view v-if="tag.count" class="row-col-center">
-          <q-icon addClass="text-red" size="28" icon="mdi-fire"></q-icon>
+          <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
           {{tag.count}}
         </view>
       </view>
@@ -38,9 +37,9 @@
         </view>
         <view class="grid">
           <view v-for="tag in selectTags" :key="tag.id" class="row-center pb-10px px-mn">
-            <view class="v-tag v-round bg-green-plain">
+            <view class="q-tag q-round bg-pink-plain">
               #{{tag.name}}
-              <q-icon v-if="tag.id" class="ml-5px" size="30" icon="close-circle-fill"
+              <q-icon v-if="tag.id" class="ml-5px" icon="close-circle-fill" size="16"
                       @click="deleteTag(tag)"></q-icon>
             </view>
           </view>
@@ -50,11 +49,11 @@
         </view>
         <view class="grid">
           <view v-for="tag in showTags" :key="tag.id" class="row-center pb-10px px-mn">
-            <view class="v-tag v-round bg-green-plain"
+            <view class="q-tag q-round bg-pink-plain"
                   @click="checkTag(tag)">
               #{{tag.name}}
               <block v-if="tag.count">
-                <q-icon addClass="text-red" size="28" icon="mdi-fire"></q-icon>
+                <q-icon addClass="text-cyan" icon="mdi-fire"></q-icon>
                 {{tag.count}}
               </block>
             </view>
@@ -69,11 +68,13 @@
 import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
 import { namespace } from 'vuex-class'
-import UserVO from '@/model/user/UserVO'
+import UserVO from "@/model/user/UserVO";
+import QIcon from "@/components/q-icon/q-icon.vue";
 
 const userModule = namespace('user')
-
-  @Component
+@Component({
+  components: {QIcon}
+})
 export default class TalkAddTagSearch extends Vue {
     searchContent = ''
     showSearch = false

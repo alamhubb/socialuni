@@ -1,10 +1,10 @@
 import SkipType from '@/const/SkipType'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import PagePath from '@/const/PagePath'
-import { systemModule } from '@/plugins/store'
+import PagePath from "@/const/PagePath";
+import {systemModule} from "@/plugins/store";
 
 export default class RouterUtil {
-  static getWebUrl (webUrl: string, pageTitle = ''): string {
+  static getWebUrl(webUrl: string, pageTitle = ''): string {
     return PagePath.webBrowser + '?title=' + pageTitle + '&url=' + webUrl
   }
 
@@ -13,7 +13,7 @@ export default class RouterUtil {
    * @param pagePath
    * @param params
    */
-  static navigateTo (pagePath: string, params?: object): void {
+  static navigateTo(pagePath: string, params?: object): void {
     if (params) {
       const paramObj = new URLSearchParams()
       for (const key in params) {
@@ -21,10 +21,10 @@ export default class RouterUtil {
       }
       pagePath = pagePath + '?' + paramObj.toString()
     }
-    uni.navigateTo({ url: pagePath })
+    uni.navigateTo({url: pagePath})
   }
 
-  static navigateToAll (type: string, skipUrl: string, pageTitle: string) {
+  static navigateToAll(type: string, skipUrl: string, pageTitle: string) {
     if (type === SkipType.mp) {
       RouterUtil.navigateToMp(skipUrl, pageTitle)
     } else if (type === SkipType.web) {
@@ -36,16 +36,16 @@ export default class RouterUtil {
     }
   }
 
-  static toWebHome (): void {
+  static toWebHome(): void {
     RouterUtil.navigateTo(SkipUrlConst.homeUrl())
   }
 
 
-  static navigateToWeb (webUrl: string, pageTitle?: string): void {
+  static navigateToWeb(webUrl: string, pageTitle?: string): void {
     RouterUtil.navigateTo(RouterUtil.getWebUrl(webUrl, pageTitle))
   }
 
-  static navigateToMp (appId: string, path?: string): void {
+  static navigateToMp(appId: string, path?: string): void {
     uni.navigateToMiniProgram({
       appId: appId,
       path: path
@@ -56,41 +56,41 @@ export default class RouterUtil {
    * 关闭当前页面，跳转到应用内的某个页面，需要跳转的应用内非 tabBar 的页面的路径。
    * @param pagePath
    */
-  static redirectTo (pagePath: string): void {
-    uni.redirectTo({ url: pagePath })
+  static redirectTo(pagePath: string): void {
+    uni.redirectTo({url: pagePath})
   }
 
   /**
    * 关闭所有页面，打开到应用内的某个页面。，如果跳转的页面路径是 tabBar 页面则不能带参数
    * @param pagePath
    */
-  static reLaunch (pagePath: string): void {
-    uni.reLaunch({ url: pagePath })
+  static reLaunch(pagePath: string): void {
+    uni.reLaunch({url: pagePath})
   }
 
   /**
    * 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面，跳转到 tabBar 页面只能使用 switchTab 跳转。
    * @param pagePath
    */
-  static switchTab (pagePath: string): void {
+  static switchTab(pagePath: string): void {
     if (systemModule.isApp) {
       uni.showTabBar()
     }
-    uni.switchTab({ url: pagePath })
+    uni.switchTab({url: pagePath})
   }
 
   /**
    * 关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层。
    */
-  static goBack (): void {
+  static goBack(): void {
     uni.navigateBack({})
   }
 
-  static getCurrentPageURI (): string {
+  static getCurrentPageURI(): string {
     return '/' + getCurrentPages()[getCurrentPages().length - 1].route
   }
 
-  static getCurrentPage (): any {
+  static getCurrentPage(): any {
     return getCurrentPages()[getCurrentPages().length - 1]
   }
 }

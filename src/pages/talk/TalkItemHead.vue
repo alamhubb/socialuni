@@ -8,11 +8,12 @@
     <view class="row-between flex-auto">
       <view>
         <view class="h25px row-col-center">
-          <text class="text-lgg" :class="{'text-red':talk.user.vipFlag}">{{talk.user.nickname}}</text>
-          <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm"
+          <text class="text-lgg" :class="{'color-red':talk.user.vipFlag}">{{talk.user.nickname}}</text>
+          <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm row-col-center"
                 :class="[getGenderBgColor(talk.user)]">
             {{talk.user.age}}
-            <q-icon class="row-col-start" size="24"
+            <q-icon class="ml-nn"
+                    size="12"
                     :icon="getGenderIcon(talk.user)"/>
           </view>
           <view v-if="talk.user.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm text-bold"
@@ -24,7 +25,7 @@
                 class="ml-5px cu-capsule radius"
                 @click.stop="toLoveValuePage">
             <view class='cu-tag bg-red sm'>
-              <q-icon size="26" icon="heart"/>
+              <q-icon icon="heart"/>
             </view>
             <view class="cu-tag bg-white bd-red bd-r-radius sm">
               {{talk.user.loveValue}}
@@ -35,7 +36,7 @@
                 class="ml-5px cu-capsule radius"
                 @click.stop="hintJusticeInfo">
             <view class='cu-tag bg-green sm'>
-              <q-icon size="22" icon="mdi-sword-cross"/>
+              <q-icon icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius sm">
               {{talk.user.justiceValue}}
@@ -49,7 +50,7 @@
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
           <text v-if="isMine"
-                class="ml-5px font-blue-deep"
+                class="ml-5px color-blue-dark"
                 @click.stop="confirmDeleteTalk">
             删除
           </text>
@@ -57,11 +58,11 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue color-blue px-12px bg-white"
+        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue px-12px bg-white"
                 @click.stop="addFollow">
           关注
         </button>
-        <button v-else class="cu-btn round bd-gray color-gray bg-white" @click.stop="addFollow">已关注</button>
+        <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>
       </view>
     </view>
   </view>
@@ -74,23 +75,24 @@ import FollowAddVO from '@/model/FollowAddVO'
 import PagePath from '@/const/PagePath'
 import TalkAPI from '@/api/TalkAPI'
 import UserUtil from '@/utils/UserUtil'
-import UserVO from '@/model/user/UserVO'
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
 import { namespace } from 'vuex-class'
-import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import FollowAPI from '@/api/FollowAPI'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import BalaBala from '@/utils/BalaBala'
 import TalkTabType from '@/const/TalkTabType'
-import Toast from '@/utils/Toast'
+import RouterUtil from "@/utils/RouterUtil";
+import QIcon from "@/components/q-icon/q-icon.vue";
+import UserVO from "@/model/user/UserVO";
+import Alert from "../../utils/Alert";
+import Toast from "@/utils/Toast";
 
 const userStore = namespace('user')
-
-@Component
+@Component({
+  components: {QIcon}
+})
 export default class TalkItemHead extends Vue {
-  @Prop() talkProp: TalkVO
+  @Prop() talkProp!: TalkVO
   @Prop() talkTabType: string
 
   // 因为需要修改关注状态，所以需要克隆
@@ -135,7 +137,7 @@ export default class TalkItemHead extends Vue {
   }
 
   confirmDeleteTalk () {
-    UniUtil.action('是否确定删除此条动态，此操作无法恢复').then(() => {
+    Alert.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       TalkAPI.deleteTalkAPI(this.talk.id)
     })
@@ -150,7 +152,7 @@ export default class TalkItemHead extends Vue {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
         if (this.talk.hasFollowed) {
-          UniUtil.info('是否取消关注用户：' + this.talk.user.nickname).then(() => {
+          Alert.info('是否取消关注用户：' + this.talk.user.nickname).then(() => {
             this.followBtnDisabled = true
             this.talk.hasFollowed = false
             FollowAPI.cancelFollowAPI(followAdd).finally(() => {

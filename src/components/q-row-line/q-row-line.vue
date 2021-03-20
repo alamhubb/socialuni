@@ -1,5 +1,5 @@
 <template>
-<!--  没有上下padding-->
+<!--  没有上下padding 默认有个px-->
   <view class="q-row-line" @click="click">
     <slot></slot>
   </view>

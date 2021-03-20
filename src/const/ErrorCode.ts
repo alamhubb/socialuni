@@ -1,6 +1,6 @@
 export default class ErrorCode {
   // 成功
-  static readonly success: number = 200
+  static readonly success: number = 0
   // 错误码
   // 未登录错误
   static readonly not_logged: number = 601

@@ -25,15 +25,14 @@ import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import ImgUtil from '@/utils/ImgUtil'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 
-import JsonUtils from '@/utils/JsonUtils'
+import JsonUtils from '@/utils/JsonUtil'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
-import UserStore from '@/plugins/store/UserStore'
 import UserAPI from '@/api/UserAPI'
+import Alert from "../../utils/Alert";
+import {userModule} from "@/plugins/store";
 
 const userStore = namespace('user')
 
@@ -78,7 +77,7 @@ export default class UserAvatarVue extends Vue {
         // 获取压缩比
         const imgSize: number = imgFile.size
         if (imgSize / 1024 / 1024 > 10) {
-          UniUtil.error('图片大小不能超过10MB！')
+          Alert.error('图片大小不能超过10MB！')
           return
         }
         // 获取文件名
@@ -111,9 +110,9 @@ export default class UserAvatarVue extends Vue {
           const newAvatar = data.Location
           const userCopy: UserVO = JsonUtils.deepClone(this.user)
           userCopy.avatar = 'https://' + newAvatar
-          UserStore.setMineUser(userCopy)
+          userModule.setUser(userCopy)
           UserAPI.updateAvatarAPI(newAvatar)
-          UniUtil.action('保存完成，是否跳转至个人详情页', '跳转').then(() => {
+          Alert.confirm('保存完成，是否跳转至个人详情页', '跳转').then(() => {
             PageUtil.toMinePage()
           })
         }).finally(() => {

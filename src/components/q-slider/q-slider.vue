@@ -24,7 +24,7 @@
                         class="slider-bar-inner"
                         :style="{
             width: ((values[1] - values[0]) / (max - min)) * 100 + '%',
-            left: lowerHandleLocation + '%',
+            left: lowerHandlePosition + '%',
             backgroundColor: activeColor,
           }"
                 ></view>
@@ -38,7 +38,7 @@
           backgroundColor: blockColor,
           width: blockSize + 'px',
           height: blockSize + 'px',
-          left: lowerHandleLocation + '%',
+          left: lowerHandlePosition + '%',
         }"
                     @touchstart="_onTouchStart"
                     @touchmove="_onBlockTouchMove"
@@ -54,7 +54,7 @@
           backgroundColor: blockColor,
           width: blockSize + 'px',
           height: blockSize + 'px',
-          left: higherHandleLocation + '%',
+          left: higherHandlePosition + '%',
         }"
                     @touchstart="_onTouchStart"
                     @touchmove="_onBlockTouchMove"
@@ -151,24 +151,24 @@ export default {
   },
   computed: {
     // 较小点滑块的坐标
-    lowerHandleLocation () {
+    lowerHandlePosition () {
       return ((this.values[0] - this.min) / (this.max - this.min)) * 100
     },
     // 较大点滑块的坐标
-    higherHandleLocation () {
+    higherHandlePosition () {
       return ((this.values[1] - this.min) / (this.max - this.min)) * 100
     },
     lowerTipStyle () {
-      if (this.lowerHandleLocation < 90) {
-        return `left: ${this.lowerHandleLocation}%;`
+      if (this.lowerHandlePosition < 90) {
+        return `left: ${this.lowerHandlePosition}%;`
       }
-      return `right: ${100 - this.lowerHandleLocation}%;transform: translate(50%, -100%);`
+      return `right: ${100 - this.lowerHandlePosition}%;transform: translate(50%, -100%);`
     },
     higherTipStyle () {
-      if (this.higherHandleLocation < 90) {
-        return `left: ${this.higherHandleLocation}%;`
+      if (this.higherHandlePosition < 90) {
+        return `left: ${this.higherHandlePosition}%;`
       }
-      return `right: ${100 - this.higherHandleLocation}%;transform: translate(50%, -100%);`
+      return `right: ${100 - this.higherHandlePosition}%;transform: translate(50%, -100%);`
     }
   },
   watch: {

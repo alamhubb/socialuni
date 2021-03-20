@@ -14,7 +14,7 @@
 //因为h5端navbar和tabbar为998
 .q-popup {
   @extend .bg-white;
-  @extend .popup-width;
+  @extend .w90vw;
   @extend .position-absolute;
   @extend .popup-index;
   transition: all 0.3s linear;

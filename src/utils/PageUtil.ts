@@ -1,16 +1,17 @@
 import PagePath from '../const/PagePath'
-import store, { systemModule, userModule } from '@/plugins/store'
+import store, {systemModule, userModule} from '@/plugins/store'
 import MsgUtil from '@/utils/MsgUtil'
-import Alert from './Alert'
-import RouterUtil from '@/utils/RouterUtil'
-import UserVO from '@/model/user/UserVO'
+import Alert from "./Alert";
+import RouterUtil from "@/utils/RouterUtil";
+import UserVO from "@/model/user/UserVO";
 
 export default class PageUtil {
-  static goHome (): void {
+
+  static goHome(): void {
     PageUtil.toTalkPage()
   }
 
-  static toVipPage () {
+  static toVipPage() {
     /*const isIos: boolean = systemModule.isIos
     if (isIos) {
       // 由于相关规范，iOS功能暂不可用
@@ -25,7 +26,7 @@ export default class PageUtil {
     }*/
   }
 
-  static toShellPage () {
+  static toShellPage() {
     if (systemModule.isIos) {
       // 由于相关规范，iOS功能暂不可用
       MsgUtil.iosDisablePay()
@@ -38,15 +39,15 @@ export default class PageUtil {
     }
   }
 
-  static toLoveValuePage () {
+  static toLoveValuePage() {
     RouterUtil.navigateTo(PagePath.loveValue)
   }
 
-  static toMinePage () {
+  static toMinePage() {
     RouterUtil.switchTab(PagePath.userMine)
   }
 
-  static toTalkAddPage () {
+  static toTalkAddPage() {
     const user: UserVO = userModule.user
     if (user && user.phoneNum) {
       RouterUtil.navigateTo(PagePath.talkAdd)
@@ -55,34 +56,34 @@ export default class PageUtil {
     }
   }
 
-  static toPhonePage () {
+  static toPhonePage() {
     RouterUtil.navigateTo(PagePath.userPhone)
   }
 
-  static toTalkPage () {
+  static toTalkPage() {
     RouterUtil.switchTab(PagePath.talk)
   }
 
-  static toIdentityAuthPage () {
+  static toIdentityAuthPage() {
     RouterUtil.navigateTo(PagePath.identityAuth)
   }
 
-  static toUserMatchPage (user: UserVO) {
+  static toUserMatchPage(user: UserVO) {
     store.commit('match/setUser', user)
     // RouterUtil.navigateTo(PagePath.userMatch)
   }
 
-  static toMessagePage () {
+  static toMessagePage() {
     RouterUtil.navigateTo(PagePath.message)
   }
 
-  static toFaceValuePage () {
+  static toFaceValuePage() {
     Alert.confirm('是否查看颜值分介绍').then(() => {
       RouterUtil.navigateTo(PagePath.faceValueInfo)
     })
   }
 
-  static toUserContactInfoPage () {
+  static toUserContactInfoPage() {
     RouterUtil.navigateTo(PagePath.userContactInfo)
   }
 }

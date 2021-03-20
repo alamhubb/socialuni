@@ -1,10 +1,10 @@
 <template>
   <view v-if="userProp" class="bg-default pb-100px">
-    <view class="mb-5px">
+    <view class="bg-white mb-5px">
       <view>
-        <swiper v-if="imgUrls.length" class="square-dot sizeUserImg">
+        <swiper v-if="imgUrls.length" class="square-dot w100vw h230px">
           <swiper-item v-for="(img,index) in imgUrls" :key="img">
-            <image class="size100vw" @longpress="showBottomMenuClick(index)"
+            <image class="size100p" @longpress="showBottomMenuClick(index)"
                    :data-src="img"
                    @click="previewImage"
                    mode="aspectFill"
@@ -21,28 +21,27 @@
             单击图片预览，长按图片进行操作
           </view>
           <view class="flex-none mr-10px">
-            <q-icon icon="close-circle-fill" size="36" @click="closeUploadImgHint"></q-icon>
+            <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
           </view>
         </view>
       </view>
-
-      <view class="q-box">
-        <view class="q-box-row">
+      <view class="pa-sm">
+        <view class="row-col-center py-sm">
           <image
-            class="size65 bd-radius mr-sm"
-            mode="aspectFill"
-            :src="userProp.avatar"
+              class="size65px bd-radius mr-sm"
+              mode="aspectFill"
+              :src="userProp.avatar"
           />
           <view class="flex-auto row-between">
             <view class="flex-col flex-auto">
-              <view class="text-lg" :class="{'text-red':userProp.vipFlag}">
+              <view class="text-lg" :class="{'color-red':userProp.vipFlag}">
                 {{ userProp.nickname }}
               </view>
               <view>
                 <view class="cu-tag radius text-df"
                       :class="[getGenderBgColor(userProp)]">
                   {{ userProp.age }}
-                  <q-icon class="row-col-start ml-2px" size="24"
+                  <q-icon class="row-col-start ml-2px" size="14"
                           :icon="getGenderIcon(userProp)"/>
                 </view>
                 <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
@@ -51,7 +50,7 @@
             </view>
 
             <view class="row-col-center" v-if="isMine">
-              <q-icon size="40" icon="edit-pen" class="mr-xs" @click="moreAction"/>
+              <q-icon icon="edit-pen" size="24" class="mr-xs" @click="moreAction"/>
             </view>
             <view v-else-if="userProp.beFollow" class="row-col-center">
               <view class="bg-default text-sm px-xs text-gray">
@@ -60,7 +59,7 @@
             </view>
           </view>
         </view>
-        <view class="q-box-row row-between-center">
+        <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-auto" :class="{'row-around':isMine}">
             <view v-if="isMine" class="px-lg line-height-1" @click.stop="toFollowVue">
               <text class="text-xl text-bold text-black row-center">
@@ -80,12 +79,12 @@
           <view v-if="!isMine" class="flex-row">
             <!--                不为自己且未关注-->
             <!--            不为ios，或者不为付费，则显示-->
-            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray mr-sm"
+            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
                     @click="toMessagePage">
               私信
               <!-- <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>-->
             </button>
-            <button class="cu-btn round bd-blue color-blue bg-white px-12px" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button class="cu-btn round bd-blue px-12px bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>
@@ -93,10 +92,10 @@
           </view>
         </view>
 
-        <view class="q-box-row q-solid-bottom">
+        <view class="row-col-center py-sm q-solid-bottom">
           <view class="ml-5px cu-capsule radius" @click="hintJusticeInfo">
             <view class='cu-tag bg-green'>
-              <q-icon size="24" icon="mdi-sword-cross"/>
+              <q-icon size="18" icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius">
               {{ userProp.justiceValue }}
@@ -104,7 +103,7 @@
           </view>
           <view class="ml cu-capsule radius" @click="toLoveValuePage">
             <view class='cu-tag bg-red'>
-              <q-icon size="24" icon="heart-fill"/>
+              <q-icon size="18" icon="heart-fill"/>
             </view>
             <view class="cu-tag bg-white bd-red bd-r-radius">
               {{ userProp.loveValue }}
@@ -112,7 +111,7 @@
           </view>
           <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
             <view class='cu-tag bg-orange'>
-              <q-icon size="26" icon="mdi-face"/>
+              <q-icon size="18" icon="mdi-face"/>
             </view>
             <view class="cu-tag bg-white bd-orange bd-r-radius">
               {{ userProp.faceRatio }}
@@ -120,13 +119,13 @@
           </view>
         </view>
 
-        <view class="q-box-row q-solid-bottom">
-          <q-icon class="text-gray mr-xs" size="50" icon="map-fill"/>
-          地区：{{ userProp.city }}
+        <view class="row-col-center py-sm q-solid-bottom">
+          <q-icon class="text-gray mr-xs" icon="map-fill"/>
+          地区：{{ userProp.location }}
         </view>
 
-        <view v-if="isMine" class="q-box-row q-solid-bottom">
-          <q-icon class="text-gray mr-xs" size="50" icon="mdi-cellphone-android"/>
+        <view v-if="isMine" class="row-col-center py-sm q-solid-bottom">
+          <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
           手机号(仅自己可见)：
           <view v-if="userProp.phoneNum">
             {{ userProp.phoneNum }}
@@ -155,8 +154,8 @@
         </view>
 
         <!-- #ifndef MP-WEIXIN -->
-        <view class="q-box-row q-solid-bottom">
-          <q-icon class="text-gray mr-xs" size="50" icon="mdi-alpha-v-circle"/>
+        <view class="row-col-center py-sm q-solid-bottom">
+          <q-icon class="text-gray mr-xs" icon="mdi-alpha-v-circle"/>
           照片认证：
           <!-- 为自己且未绑定-->
           <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
@@ -175,7 +174,7 @@
           </view>
         </view>
         <!-- #endif -->
-        <!--<view v-if="userProp.wxAccount" class="q-box-row q-solid-bottom">
+        <!--<view v-if="userProp.wxAccount" class="row-col-center q-solid-bottom">
           微信：
           <text selectable>{{userProp.wxAccount}}</text>
           <button class="cu-btn radius sm bd-blue ml-10px bg-white"
@@ -183,58 +182,58 @@
             复制
           </button>
         </view>-->
-        <!--        <view v-if="isMine && !userProp.contactAccount" class="q-box-row row-between-center bg-active"
-                      @click="$pageUtil.toUserContactInfoPage">
-                  <view class="row-col-center">
-                    <text class="text-lgg text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
-                  </view>
-                  <view class="text-gray row-col-center pr-xs">
-                    <text class="text-lgg text-gray text-lgg">详情</text>
-                    <q-icon class="text-gray" size="32" icon="arrow-right"/>
-                  </view>
-                </view>-->
+<!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-active"
+              @click="$pageUtil.toUserContactInfoPage">
+          <view class="row-col-center">
+            <text class="text-lgg text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
+          </view>
+          <view class="text-gray row-col-center pr-xs">
+            <text class="text-lgg text-gray text-lgg">详情</text>
+            <q-icon class="text-gray" size="32" icon="arrow-right"/>
+          </view>
+        </view>-->
         <!-- 如果自己的话-->
         <!-- 左边格式不变，如果未填写则可以填写，填写之后可以选择开启或者关闭，填写后可选择隐藏展示。-->
         <!--        todo qq不支持联系方式，改为判断qq一件加好友-->
-        <!--        <view class="q-box-row row-between-center">
-                  <view class="row-col-center">
-                    <q-icon class="text-gray mr-xs" size="50" icon="account"/>
-                    联系方式：
-                    <text v-if="userProp.contactAccount">{{ userProp.contactAccount }}</text>
-                    <text v-else>
-                      未填写
-                    </text>
-                  </view>
-                  <view v-if="isMine" class="row-between-center">
-                    <view v-if="userProp.contactAccount" class="row-between-center">
-                      <text v-if="userProp.openContact" class="mr-xs text-green">展示中</text>
-                      <text v-else class="mr-xs text-gray">已隐藏</text>
-                      <u-switch v-model="mineUser.openContact" active-color="#00C853" @change="switchOpenContact"></u-switch>
-                    </view>
-                    <button v-else class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
-                            @click="openEditDialog">
-                      填写联系方式
-                    </button>
-                  </view>
-                  <view v-else-if="userProp.contactAccount">
-                    <view v-if="!userProp.openContact" class="mr-sm">
-                      对方隐藏了联系方式
-                    </view>
-                    <button v-else-if="userProp.showUserContact" class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
-                            @click="$util.textCopy(userProp.contactAccount)">
-                      复制
-                    </button>
-                    <button v-else :disabled="showUserContactBtnDisabled"
-                            class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-blue"
-                            @click="shellPayForUserContact">
-                      10 贝壳获取
-                    </button>
-                  </view>
-                </view>-->
-        <!--        todo 暂时注释掉支付功能，qq需要改用为米大师-->
-        <!--<view v-if="isMine" class="q-solid-top q-box-row row-between-center" @click="toUserShell">
+<!--        <view class="row-col-center row-between-center">
           <view class="row-col-center">
-            <q-icon class="text-green mr-xs" size="50" icon="mdi-bitcoin"/>
+            <q-icon class="text-gray mr-xs" icon="account"/>
+            联系方式：
+            <text v-if="userProp.contactAccount">{{ userProp.contactAccount }}</text>
+            <text v-else>
+              未填写
+            </text>
+          </view>
+          <view v-if="isMine" class="row-between-center">
+            <view v-if="userProp.contactAccount" class="row-between-center">
+              <text v-if="userProp.openContact" class="mr-xs text-green">展示中</text>
+              <text v-else class="mr-xs text-gray">已隐藏</text>
+              <u-switch v-model="mineUser.openContact" active-color="#00C853" @change="switchOpenContact"></u-switch>
+            </view>
+            <button v-else class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                    @click="openEditDialog">
+              填写联系方式
+            </button>
+          </view>
+          <view v-else-if="userProp.contactAccount">
+            <view v-if="!userProp.openContact" class="mr-sm">
+              对方隐藏了联系方式
+            </view>
+            <button v-else-if="userProp.showUserContact" class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                    @click="$util.textCopy(userProp.contactAccount)">
+              复制
+            </button>
+            <button v-else :disabled="showUserContactBtnDisabled"
+                    class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-blue"
+                    @click="shellPayForUserContact">
+              10 贝壳获取
+            </button>
+          </view>
+        </view>-->
+<!--        todo 暂时注释掉支付功能，qq需要改用为米大师-->
+        <!--<view v-if="isMine" class="q-solid-top row-col-center row-between-center" @click="toUserShell">
+          <view class="row-col-center">
+            <q-icon class="text-green mr-xs" icon="mdi-bitcoin"/>
             <text class="text-lgg">我的贝壳（{{ mineUser.shell }}）</text>
           </view>
           <view v-if="!isIos" class="text-gray row-col-center pr-xs">
@@ -269,11 +268,11 @@
             />
         </view>
         <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40r" type="default" @click="closeDialogAndInitData"
+          <button class="uni-tip-button w40p" type="default" @click="closeDialogAndInitData"
                   :plain="true">
             取消
           </button>
-          <button class="uni-tip-button w40r" type="primary" @click="addReport" :disabled="!reportType">确定
+          <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
           </button>
         </view>
       </view>
@@ -318,24 +317,18 @@
 import { Vue, Component, Watch, PropSync } from 'vue-property-decorator'
 import TalkAPI from '@/api/TalkAPI'
 import TalkItem from '@/pages/talk/TalkItem.vue'
-import UserVO from '@/model/user/UserVO'
 import UserUtil from '@/utils/UserUtil'
 import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
 import FollowAddVO from '@/model/FollowAddVO'
 import { namespace } from 'vuex-class'
 import UserEdit from '@/pages/user/UserEdit.vue'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import PagePath from '@/const/PagePath'
 import FollowAPI from '@/api/FollowAPI'
 import FollowStatus from '@/const/FollowStatus'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import LoginDataVO from '@/model/login/LoginDataVO'
 import LoginService from '@/pages/user/LoginService'
-import LoginAPI from '@/api/LoginAPI'
-import LoginUtil from '@/utils/LoginUtil'
-import ErrorCode from '@/const/ErrorCode'
 import ImgFileVO from '@/model/ImgFileVO'
 import ImgUtil from '@/utils/ImgUtil'
 import CosUtil from '@/utils/CosUtil'
@@ -345,22 +338,25 @@ import ReportContentType from '@/const/ReportContentType'
 import ReportType from '@/const/ReportType'
 import ReportAddVO from '@/model/report/ReportAddVO'
 import ReportAPI from '@/api/ReportAPI'
-import UserStore from '@/plugins/store/UserStore'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import TalkVO from '@/model/talk/TalkVO'
 import BalaBala from '@/utils/BalaBala'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { chatModule, systemModule } from '@/plugins/store'
+import {systemModule, userModule} from '@/plugins/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
 import MsgUtil from '@/utils/MsgUtil'
 import PayType from '@/const/PayType'
 import ProviderType from '@/const/ProviderType'
-import QIcon from '@/components/q-icon/q-icon.vue'
-import ChatVO from '@/model/chat/ChatVO'
-import ChatAPI from '@/api/ChatAPI'
-import UniUser from '@/plugins/uni/login/UniUser'
+import Alert from "../../utils/Alert";
+import Toast from "@/utils/Toast";
+import RouterUtil from "@/utils/RouterUtil";
+import ErrorConst from "@/const/ErrorConst";
+import UserVO from "@/model/user/UserVO";
+import QIcon from "@/components/q-icon/q-icon.vue";
+import LoginUtil from "@/utils/LoginUtil";
+import ErrorCode from "@/const/ErrorCode";
 
 const userStore = namespace('user')
 const appStore = namespace('app')
@@ -368,15 +364,7 @@ const configStore = namespace('config')
 const systemStore = namespace('system')
 
 @Component({
-  components: {
-    QIcon,
-    QRow,
-    QRowItem,
-    TalkOperate,
-    UserEdit,
-    TalkItem,
-    TalkItemContent
-  }
+  components: { QIcon, QRow, QRowItem, TalkOperate, UserEdit, TalkItem, TalkItemContent }
 })
 export default class UserInfo extends Vue {
   $refs!: {
@@ -408,7 +396,7 @@ export default class UserInfo extends Vue {
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
     //mock chat
-    chatModule.userDetailToMessagePage(this.userProp.chat)
+    // chatModule.userDetailToMessagePage(this.userProp.chat)
     //如果有chat读取，如果没有创建读取
     // chatModule.setChatAction(chat)
   }
@@ -418,7 +406,7 @@ export default class UserInfo extends Vue {
       this.showUserContactBtnDisabled = true
       const userShell = this.mineUser.shell
       if (userShell >= 10) {
-        UniUtil.action('是否消耗10个贝壳查看用户：' + this.userProp.nickname + ' 的联系方式').then(() => {
+        Alert.confirm('是否消耗10个贝壳查看用户：' + this.userProp.nickname + ' 的联系方式').then(() => {
           UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
             this.userProp.contactAccount = res.data
             this.userProp.showUserContact = true
@@ -428,14 +416,14 @@ export default class UserInfo extends Vue {
           this.showUserContactBtnDisabled = false
         })
       } else {
-        UniUtil.action('您没有贝壳了，是否直接使用现金支付').then(() => {
+        Alert.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
           const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
           PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
             UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
               this.userProp.contactAccount = res.data
               this.userProp.showUserContact = true
             }).catch((e) => {
-              UniUtil.error(e)
+              Alert.error(e)
             })
           }).catch(() => {
             MsgUtil.notPay()
@@ -471,7 +459,7 @@ export default class UserInfo extends Vue {
     const userImg: ImgFileVO = this.userProp.imgs[0]
     reportAdd.userImgId = userImg.id
     if (ReportType.other === this.reportType && !this.reportContent) {
-      UniUtil.hint('选择其他违规时，请您补充观点')
+      Alert.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         // todo  举报过后，是否大于系统阀值，大于系统阀值隐藏
@@ -480,7 +468,7 @@ export default class UserInfo extends Vue {
           this.frontDeleteUserImg()
         }
         this.closeDialogAndInitData()
-        UniUtil.hint(res.data)
+        Alert.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -528,20 +516,20 @@ export default class UserInfo extends Vue {
 
   deleteImg () {
     if (this.userProp.imgs.length > 1) {
-      UniUtil.warning('请确认是否删除照片？').then(() => {
+      Alert.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
         UserAPI.deleteUserImgAPI(imgs[0]).then((res: any) => {
-          UserStore.setMineUser(res.data)
+          userModule.setUser(res.data)
         })
       })
     } else {
-      UniUtil.error('请至少保留一张照片')
+      Alert.error('请至少保留一张照片')
     }
   }
 
   chooseImg () {
     if (this.mineUser.imgs.length > 2) {
-      UniUtil.error('最多上传3张照片，请删除后继续！')
+      Alert.error('最多上传3张照片，请删除后继续！')
       return
     }
     UniUtil.chooseImage(1).then(imgFiles => {
@@ -550,7 +538,7 @@ export default class UserInfo extends Vue {
       UniUtil.showLoading('上传中')
       CosUtil.postObject(imgFile).then(() => {
         UserAPI.addUserImgAPI(imgFile).then((res: any) => {
-          UserStore.setMineUser(res.data)
+          userModule.setUser(res.data)
         })
       }).finally(() => {
         UniUtil.hideLoading()
@@ -558,22 +546,23 @@ export default class UserInfo extends Vue {
     })
   }
 
+  //跳转清池绑定手机号
   getPhoneNumberAfterHandler (loginData: LoginDataVO) {
-    return LoginAPI.bindPhoneNumAPI(loginData).then((res: any) => {
-      UserStore.setMineUser(res.data.user)
-      UniUtil.hint(res.data.hint)
-    })
+    /*return LoginAPI.bindPhoneNumAPI(loginData).then((res: any) => {
+      userModule.setUser(res.data.user)
+      AlertUtil.hint(res.data.hint)
+    })*/
   }
 
   //微信绑定手机号使用
   getPhoneNumberByLogin (obj: any) {
-    UniUser.getLoginInfo(systemModule.provider).then((loginData: LoginDataVO) => {
+    LoginService.getLoginData(systemModule.provider).then((loginData: LoginDataVO) => {
       Object.assign(loginData, obj.detail)
       // 代表已过期
       loginData.sessionEnable = false
-      this.getPhoneNumberAfterHandler(loginData).finally(() => {
+      /*this.getPhoneNumberAfterHandler(loginData).finally(() => {
         this.phoneBtnDisabled = false
-      })
+      })*/
     })
   }
 
@@ -710,7 +699,7 @@ export default class UserInfo extends Vue {
   }
 
   hintBindTwice () {
-    UniUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
+    Alert.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
   addFollow () {
@@ -774,15 +763,15 @@ export default class UserInfo extends Vue {
   }
 
   refreshMine () {
-    UniUtil.action('是否刷新用户信息').then(() => {
-      UserStore.getMineUserAction().then(() => {
+    Alert.confirm('是否刷新用户信息').then(() => {
+      userModule.getMineUserAction().then(() => {
         Toast.toast('刷新成功')
       })
     })
   }
 
   loginOut () {
-    UserStore.loginOut()
+    userModule.loginOut()
   }
 
   //前往贝壳页面
@@ -801,7 +790,7 @@ export default class UserInfo extends Vue {
       actionMsg = '是否确定隐藏联系方式'
       hintMsg = '隐藏成功'
     }
-    UniUtil.action(actionMsg).then(() => {
+    Alert.confirm(actionMsg).then(() => {
       UserAPI.switchUserContactAPI(openContact).then(() => {
         Toast.toast(hintMsg)
       }).catch(() => {

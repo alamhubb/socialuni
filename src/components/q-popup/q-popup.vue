@@ -3,7 +3,7 @@
         <q-mask @click="input(false)">
             <!--        ios端不支持prevent需要用stop代替-->
         </q-mask>
-        <view class="h100r flex-row">
+        <view class="h100p flex-row">
             <view class="q-popup" :class="popupClass"
                   @touchmove.stop.prevent
                   @click.stop

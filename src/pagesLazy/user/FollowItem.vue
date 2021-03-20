@@ -9,7 +9,7 @@
             <view class="card-title-content">
                 <view class="row-col-center">
                     <view>
-                        <text :class="{'text-red':user.vipFlag}">{{user.nickname}}</text>
+                        <text :class="{'color-red':user.vipFlag}">{{user.nickname}}</text>
                         <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
                               @click.stop="openVip">
                             VIP
@@ -45,8 +45,8 @@ import UserUtil from '@/utils/UserUtil'
 import FollowStatus from '@/const/FollowStatus'
 import FollowAddVO from '@/model/FollowAddVO'
 import PagePath from '@/const/PagePath'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
+import RouterUtil from "@/utils/RouterUtil";
 
   @Component
 export default class FollowItem extends Vue {

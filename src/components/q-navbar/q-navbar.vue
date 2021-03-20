@@ -1,8 +1,8 @@
 <template>
-  <view class="w100r">
+  <view class="w100p">
     <view class="q-nav-bar">
       <!--            此处为状态栏-->
-      <view class="w100r" :style="{ height: statusBarHeight + 'px' }"></view>
+      <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
       <view class="row-col-center" :style="[navbarInnerStyle]">
         <slot></slot>

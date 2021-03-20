@@ -6,7 +6,7 @@
            @click="showUserChange(user)"></image>
     <view class="px-10px">
       <view class="row-between" @click="showUserChange(user)">
-        <view class="row-col-center" :class="{'text-red':user.vipFlag}">
+        <view class="row-col-center" :class="{'color-red':user.vipFlag}">
           {{user.nickname}}
         </view>
         <view class="row-col-center">
@@ -62,10 +62,10 @@
           />
         </view>
         <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40r" type="default" @click="closeDialogAndInitData" :plain="true">
+          <button class="uni-tip-button w40p" type="default" @click="closeDialogAndInitData" :plain="true">
             取消
           </button>
-          <button class="uni-tip-button w40r" type="primary" @click="addReport" :disabled="!reportType">
+          <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">
             确定
           </button>
         </view>
@@ -78,11 +78,9 @@
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import UserUtil from '@/utils/UserUtil'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import ReportContentType from '@/const/ReportContentType'
 import ReportType from '@/const/ReportType'
 import ReportAddVO from '@/model/report/ReportAddVO'
@@ -92,6 +90,7 @@ import ImgUtil from '@/utils/ImgUtil'
 import BalaBala from '@/utils/BalaBala'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
+import Alert from "../../utils/Alert";
 
 const appStore = namespace('app')
 const configStore = namespace('config')
@@ -157,7 +156,7 @@ export default class MatchItem extends Vue {
     const userImg: ImgFileVO = this.user.imgs[0]
     reportAdd.userImgId = userImg.id
     if (ReportType.other === this.reportType && !this.reportContent) {
-      UniUtil.hint('选择其他违规时，请您补充观点')
+      Alert.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         const reportNum: number = userImg.reportNum + 1
@@ -165,7 +164,7 @@ export default class MatchItem extends Vue {
           this.deleteMatchUser()
         }
         this.closeDialogAndInitData()
-        UniUtil.hint(res.data)
+        Alert.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }

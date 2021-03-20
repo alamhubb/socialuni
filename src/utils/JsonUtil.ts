@@ -16,7 +16,7 @@ export default class JsonUtil {
     console.log(JSON.stringify(object))
   }
 
-  static toFormData (object: Record<string, any>): FormData {
+  static toFormData(object: Object): FormData {
     const formData = new FormData()
     Object.keys(object).forEach((key) => {
       formData.append(key, object[key])
@@ -24,7 +24,7 @@ export default class JsonUtil {
     return formData
   }
 
-  static toParamData (object: Record<string, any>): string {
+  static toParamData(object: Object): string {
     const paramObj = new URLSearchParams()
     for (const key in object) {
       paramObj.append(key, object[key])

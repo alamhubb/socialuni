@@ -1,23 +1,23 @@
 <template>
-  <view class="pb-100rpx h100r bg-default">
+  <view class="pb-100rpx h100p bg-default">
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-auto card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
       </view>
       <view class="flex-none mr-10px">
-        <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
+        <q-icon icon="close-circle-fill" size="18" @click="closeShowMsgHint"></q-icon>
       </view>
     </view>
 
 
-    <scroll-view scroll-y="true" class="cu-chat h100r"
+    <scroll-view scroll-y="true" class="cu-chat h100p"
                  @scrolltoupper="upper"
                  :upper-threshold="upperThreshold"
                  :show-scrollbar="true"
                  :scroll-top="scrollTop"
     >
       <!--    <view class="cu-chat">-->
-      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100r h100r col-row-center">
+      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">
         <view class="uni-tip  mt-80px">
           <view class="uni-tip-content text-bold">
             <template v-if="chat.needPayOpen">
@@ -33,16 +33,16 @@
           </view>
 
           <!--<view v-if="chat.needPayOpen" class="uni-tip-group-button">
-            <button class="uni-tip-button w40r" type="default" :plain="true" @click="goBack">
+            <button class="uni-tip-button w40p" type="default" :plain="true" @click="goBack">
               返回
             </button>
-            <button class="uni-tip-button w40r" type="primary" @click="payOpenChat">
+            <button class="uni-tip-button w40p" type="primary" @click="payOpenChat">
               开启对话
             </button>
           </view>-->
         </view>
       </view>
-      <view v-else class="w100r row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
+      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
         <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
           会话已开启
         </view>
@@ -57,9 +57,9 @@
           </view>
         </block>
         <block v-else-if="msg.isMine">
-          <view class="flex-col w100r">
+          <view class="flex-col w100p">
             <view class="mr-30rpx h44rpx row-end-center">
-              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
@@ -86,9 +86,9 @@
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
-          <view class="flex-col w100r">
+          <view class="flex-col w100p">
             <view class="ml-40rpx h44rpx row-col-center">
-              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+              <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
@@ -147,9 +147,9 @@
           <switch class="ml-5px" @change="banChange"/>
         </view>
         <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40r" type="default" @click="closeDeleteDialog" :plain="true">取消
+          <button class="uni-tip-button w40p" type="default" @click="closeDeleteDialog" :plain="true">取消
           </button>
-          <button class="uni-tip-button w40r" type="primary" @click="confirmDeleteTalk"
+          <button class="uni-tip-button w40p" type="primary" @click="confirmDeleteTalk"
                   :disabled="!deleteReason">确定
           </button>
         </view>
@@ -185,12 +185,10 @@ import LoadMoreType from '@/const/LoadMoreType'
 import Constants from '@/const/Constant'
 import PagePath from '@/const/PagePath'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import MessageAPI from '@/api/MessageAPI'
 import ReportContentType from '@/const/ReportContentType'
 import ReportDialog from '@/pagesLazy/ReportDialog.vue'
 import MessageType from '@/const/MessageType'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import BalaBala from '@/utils/BalaBala'
 import { chatModule, systemModule } from '@/plugins/store'
@@ -200,9 +198,13 @@ import CommonStatus from '@/const/CommonStatus'
 import ProviderType from '@/const/ProviderType'
 import PlatformUtils from '@/utils/PlatformUtils'
 import PayType from '@/const/PayType'
+import CommonUtil from '@/utils/CommonUtil'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
-import HintMsg from '@/const/HintMsg'
+import AppMsg from '@/const/AppMsg'
+import RouterUtil from "@/utils/RouterUtil";
+import Alert from "../../utils/Alert";
+import Toast from "@/utils/Toast";
 
 const chatStore = namespace('chat')
 const userStore = namespace('user')
@@ -317,7 +319,7 @@ export default class MessageVue extends Vue {
       this.inputFocus = true
     })
     // #endif
-    const msgContent = this.msgContent || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
+    const msgContent = this.msgContent || (this.chat.needPayOpen ? AppMsg.payOpenDefaultMsg : '')
     if (msgContent) {
       // 点击发送后立即push
       if (this.user && this.user.phoneNum) {
@@ -347,7 +349,7 @@ export default class MessageVue extends Vue {
     if (this.user.userType === UserType.systemUser) {
       this.deleteMsgAction(this.curMsg)
     } else {
-      UniUtil.action('是否确定删除此条消息，此操作无法恢复').then(() => {
+      Alert.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
         this.deleteMsgAction(msg)
       })
     }
@@ -398,7 +400,7 @@ export default class MessageVue extends Vue {
         }
       })
     }
-    return []
+    return [0]
   }
 
   queryMessages () {
@@ -438,10 +440,7 @@ export default class MessageVue extends Vue {
               const nodeBox: NodesRef = query.select(preFirstMsgId)
               nodeBox.boundingClientRect((lastNodeRes) => {
                 if (res) {
-                  console.log(lastNodeRes)
-                  console.log(preTop)
                   chatModule.scrollTop = lastNodeRes.top - preTop
-                  console.log(chatModule.scrollTop)
                 }
               }).exec()
               // this.topId = lastFirstMsgId
@@ -495,7 +494,7 @@ export default class MessageVue extends Vue {
             await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
             //需要充值提示
           } else {
-            await UniUtil.action('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+            await Alert.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
             const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
             try {
               await PlatformUtils.pay(provider, PayType.shell, 1)
@@ -523,14 +522,14 @@ export default class MessageVue extends Vue {
   //只有待开启，需付费，才会触发此方法
   payOpenChat () {
     MsgUtil.notPay()
-    /*this.openChatPromise(this.msgContent || HintMsg.payOpenDefaultMsg).finally(() => {
+    /*this.openChatPromise(this.msgContent || MsgConst.payOpenDefaultMsg).finally(() => {
       this.isOpeningChatDisableBtn = false
     })*/
   }
 
   //校验已通过，最后一个确认， 是否确认开启
   openChatAndPrompt (hintMsg: string, content: string) {
-    return UniUtil.action(hintMsg).then(() => {
+    return Alert.confirm(hintMsg).then(() => {
       //校验了有用户后清空消息
       this.msgContent = ''
       return chatModule.openChatAction(content)

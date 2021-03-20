@@ -3,12 +3,12 @@
         <block v-for="(childComment,index) in comment.childComments" :key="childComment.id">
             <view v-if="index<childCommentShowNum" class="flex-row">
                 <!--            {{childComment.no}}#-->
-                <text :class="comment.user.vipFlag?'text-red':'font-blue-deep'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
+                <text :class="comment.user.vipFlag?'text-red':'color-pink-accent'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
                 <view class="flex-sub row-col-center" @click="setReplyComment(talk,comment,childComment)">
                     <text v-if="childComment.replyComment">
                         <text class="mx-5px">回复</text>
                         <!--                {{childComment.replyComment.no}}#-->
-                        <text class="blue800" @click.stop="toUserDetail(childComment.replyComment.user.id)">
+                        <text class="color-pink-accent" @click.stop="toUserDetail(childComment.replyComment.user.id)">
                             {{childComment.replyComment.user.nickname}}
                         </text>
                     </text>
@@ -21,11 +21,11 @@
             <view class="font-orange row-col-center" @click="toggleOtherComments">
                 <view v-show="comment.childCommentNum>childCommentShowNum">
                     查看其余{{comment.childCommentNum- childCommentShowNum}}条回复
-                    <q-icon icon="arrow-down" size="42"></q-icon>
+                    <q-icon icon="arrow-down"></q-icon>
                 </view>
                 <view v-show="showOtherCommentClicked">
                     收起回复
-                    <q-icon icon="arrow-up" size="42"></q-icon>
+                    <q-icon icon="arrow-up"></q-icon>
                 </view>
             </view>
         </view>
@@ -37,17 +37,18 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import CommentVO from '@/model/comment/CommentVO'
 import PagePath from '@/const/PagePath'
-import { talkModule } from '@/plugins/store'
-import JsonUtils from '@/utils/JsonUtils'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
+import { talkModule } from '@/plugins/store'
+import JsonUtils from '@/utils/JsonUtil'
+import RouterUtil from "@/utils/RouterUtil";
+import QIcon from "@/components/q-icon/q-icon.vue";
 
   @Component({
-    components: {}
+    components: {QIcon}
   })
 export default class ChildComment extends Vue {
     @Prop() readonly talk: TalkVO
-    @Prop() readonly commentProp: CommentVO
+    @Prop() readonly commentProp!: CommentVO
     comment: CommentVO = JsonUtils.deepClone(this.commentProp)
 
     @Watch('commentProp')

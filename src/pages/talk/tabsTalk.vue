@@ -1,6 +1,6 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100r bg-default">
-    <q-row-bar :class="tabsId">
+  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">
+    <q-row-bar class="flex-none" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
@@ -8,21 +8,21 @@
           </q-tab>
         </template>
         <template #icon="{tab}">
-          <q-icon class="px-xs" v-if="tab.type==='city'" icon="arrow-down"></q-icon>
+          <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
         </template>
       </q-tabs>
-      <view class="flex-row mr-60px" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
+      <view class="row-col-center mr-60px" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
         <view v-if="talkTabObj.loadMore===loading">
           <u-loading mode="circle"></u-loading>
         </view>
-        <q-icon v-else class="pt-mn" icon="reload" size="36"></q-icon>
+        <q-icon v-else size="18" icon="reload"></q-icon>
       </view>
       <!--<view class="px-sm">
         <view class="w24rpx"></view>
       </view>-->
     </q-row-bar>
 
-    <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
+    <city-picker v-model="showCityPopup" :district="district" @confirm="cityChange"></city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
@@ -31,74 +31,68 @@
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
 
     <!--        默认附近，可以切换城市，城市-->
-    <view
-      :style="{
-              'height':'calc(100vh - '+talksListHeightSub+'px)',
-              'padding-bottom': talksListPaddingBottom+'px',
-            }"
-    >
-      <swiper class="flex-none h100r bg-default" :current="swiperCurrent"
-              @change="talkSwiperChange">
-        <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-          <!--
-          使用view实现的问题，没有scroll事件小程序上
-          <view class="h100r bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                :lower-threshold="800"
-                @scroll.native="talksScrollEvent"
-                @scroll="talksScrollEvent"
-          >-->
-          <scroll-view class="h100r bg-default" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                       :lower-threshold="800"
-                       @scroll="talksScrollEvent">
-            <view v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
-              <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-                <talk-item
-                  :talk="talk"
-                  :talk-tab-type="talkTabObj.type"
-                  @deleteTalk="deleteTalk"
-                />
-                <!-- app端广告有问题-->
-                <!--  #ifdef APP-PLUS -->
-                <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5px">
-                  <ad class="bg-white" adpid="1890536227"></ad>
-                </view>-->
-                <!--  #endif -->
-                <!--wx平台显示的广告-->
-                <!--  #ifdef MP-WEIXIN -->
-                <ad v-if="showAd&&showAdIndexList.includes(index)"
-                    class="bg-white mb-5px" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
-                <!--  #endif -->
+    <!--    bg-default-->
+    <swiper class="flex-1 btr-lg pa-sm bg-default" :current="swiperCurrent"
+            @change="talkSwiperChange">
+      <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+        <!--
+        使用view实现的问题，没有scroll事件小程序上
+        <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+              :lower-threshold="800"
+              @scroll.native="talksScrollEvent"
+              @scroll="talksScrollEvent"
+        >-->
+        <scroll-view class="h100p btr" :scroll-y="true" @scrolltolower="onreachBottom"
+                     :lower-threshold="800"
+                     @scroll="talksScrollEvent">
+          <view v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+            <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+              <talk-item class="mb-sm"
+                         :talk="talk"
+                         :talk-tab-type="talkTabObj.type"
+                         @deleteTalk="deleteTalk"
+              />
+              <!-- app端广告有问题-->
+              <!--  #ifdef APP-PLUS -->
+              <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5px">
+                <ad class="bg-white" adpid="1890536227"></ad>
+              </view>-->
+              <!--  #endif -->
+              <!--wx平台显示的广告-->
+              <!--  #ifdef MP-WEIXIN -->
+              <ad v-if="showAd&&showAdIndexList.includes(index)"
+                  class="bg-white mb-5px" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+              <!--  #endif -->
 
-                <!--qq平台显示的广告-->
-                <!--  #ifdef MP-QQ -->
-                <ad v-if="showAd&&showAdIndexList.includes(index)"
-                    class="bg-white mb-5px" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-                <!--  #endif -->
+              <!--qq平台显示的广告-->
+              <!--  #ifdef MP-QQ -->
+              <ad v-if="showAd&&showAdIndexList.includes(index)"
+                  class="bg-white mb-5px" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+              <!--  #endif -->
 
-                <!--头条平台显示的广告-->
-                <!--  #ifdef MP-TOUTIAO -->
-                <ad v-if="showAd&&showAdIndexList.includes(index)"
-                    class="bg-white mb-5px" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
-                <!--  #endif -->
-              </view>
-              <!-- 下拉刷新组件 -->
-              <view class="mt-xs">
-                <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
-                               :contentText="loadMoreText"></uni-load-more>
-              </view>
+              <!--头条平台显示的广告-->
+              <!--  #ifdef MP-TOUTIAO -->
+              <ad v-if="showAd&&showAdIndexList.includes(index)"
+                  class="bg-white mb-5px" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+              <!--  #endif -->
             </view>
-            <view v-else>
-              <view v-if="user" class="row-center h500px pt-100px text-bold text-gray text-lg">
-                您还没有关注其他人
-              </view>
-              <view v-else class="row-center h500px pt-100px text-bold text-gray text-lg" @click="toLoginVue">
-                您还没有登录，点击登录
-              </view>
+            <!-- 下拉刷新组件 -->
+            <view class="mt-xs">
+              <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
+                             :contentText="loadMoreText"></uni-load-more>
             </view>
-          </scroll-view>
-        </swiper-item>
-      </swiper>
-    </view>
+          </view>
+          <view v-else>
+            <view v-if="user" class="row-center h500px pt-100px text-bold text-gray text-lg">
+              您还没有关注其他人
+            </view>
+            <view v-else class="row-center h500px pt-100px text-bold text-gray text-lg" @click="toLoginVue">
+              您还没有登录，点击登录
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
   </view>
 </template>
 

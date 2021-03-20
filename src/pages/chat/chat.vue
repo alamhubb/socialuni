@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-default h100r">
+  <view class="bg-default h100p">
     <!--<q-bar>
         <view>
             <q-icon icon="mdi-volume-high"></q-icon>
@@ -14,7 +14,7 @@
         长按聊天框可解除匹配
       </view>
       <view class="flex-none mr-10px">
-        <q-icon icon="close-circle-fill" size="36" @click="closeUploadImgHint"></q-icon>
+        <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
       </view>
     </view>
     <!--    <view v-show="false">
@@ -26,7 +26,7 @@
         <image class="cu-avatar radius lg" :src="chat.avatar"/>
         <view class="content h90rpx col-between">
           <view>
-            <view class="text-cut text-df" :class="{'text-red':chat.vipFlag}">{{ chat.nickname }}</view>
+            <view class="text-cut text-df" :class="{'color-red':chat.vipFlag}">{{ chat.nickname }}</view>
             <view v-if="systemChats.indexOf(chat.type)>-1"
                   class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
             </view>
@@ -69,7 +69,6 @@
 import { Vue, Component } from 'vue-property-decorator'
 import ChatVO from '@/model/chat/ChatVO'
 import { namespace } from 'vuex-class'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
 import ChatType from '@/const/ChatType'
 import ChatAPI from '@/api/ChatAPI'
@@ -78,7 +77,8 @@ import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import { chatModule } from '@/plugins/store'
 import CommonStatus from '@/const/CommonStatus'
-import Toast from '@/utils/Toast'
+import Alert from "../../utils/Alert";
+import Toast from "@/utils/Toast";
 
 const chatStore = namespace('chat')
 
@@ -131,7 +131,7 @@ export default class ChatVue extends Vue {
   }
 
   closeChat () {
-    UniUtil.action('是否确定关闭会话，对方将无法再给您发送消息').then(() => {
+    Alert.confirm('是否确定关闭会话，对方将无法再给您发送消息').then(() => {
       ChatAPI.closeChatAPI(this.chatId).then(() => {
         chatModule.deleteChatAction(this.chatId)
         Toast.toast('已关闭')
@@ -142,7 +142,7 @@ export default class ChatVue extends Vue {
   }
 
   frontDeleteChat () {
-    UniUtil.action('是否确定从列表中删除会话，可从私信处再次找回').then(() => {
+    Alert.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(() => {
       ChatAPI.frontDeleteChatAPI(this.chatId).then(() => {
         chatModule.deleteChatAction(this.chatId)
       }).finally(() => {

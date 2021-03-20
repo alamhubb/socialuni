@@ -1,12 +1,11 @@
-import { configModule, systemModule, userModule } from '@/plugins/store'
+import {configModule, systemModule, userModule} from '@/plugins/store'
 import UniUtil from './UniUtil'
 
 import AppMsg from '@/const/AppMsg'
-import Alert from './Alert'
-import Toast from '@/utils/Toast'
-import RouterUtil from '@/utils/RouterUtil'
-import PageUtil from '@/utils/PageUtil'
-import UserVO from '@/model/user/UserVO'
+import Alert from "./Alert";
+import Toast from "@/utils/Toast";
+import PageUtil from "@/utils/PageUtil";
+import UserVO from "@/model/user/UserVO";
 
 export default class MsgUtil {
   static unBindPhoneNum () {
