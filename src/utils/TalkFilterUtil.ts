@@ -1,5 +1,5 @@
 import StorageUtil from '@/utils/StorageUtil'
-import GenderType from "@/const/GenderType";
+import GenderType from '@/const/GenderType'
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'
@@ -9,7 +9,7 @@ export default class TalkFilterUtil {
   // 附近
   static readonly minAgeFilterDefault: number = 8
   static readonly maxAgeFilterDefault: number = 40
-  static readonly genderFilterDefault: string = GenderType.girl
+  static readonly genderFilterDefault: string = GenderType.all
 
   static getNotFirstSetAge (): boolean {
     return !!StorageUtil.getObj(TalkFilterUtil.notFirstSetAgeKey)

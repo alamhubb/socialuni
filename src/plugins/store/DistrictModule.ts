@@ -15,7 +15,7 @@ export default class DistrictModule extends VuexModule {
   @Action
   async appLunchInitDistrict() {
     //首次打开无论如何获取用户地理位置
-    const district: DistrictVO = await LocationUtil.getPositionNotAuth()
+    const district: DistrictVO = await LocationUtil.getLocationNotAuth()
     if (district) {
       this.district.lat = district.lat
       this.district.lat = district.lat

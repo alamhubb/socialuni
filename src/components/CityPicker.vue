@@ -125,7 +125,7 @@ export default class CityPicker extends Vue {
 
   // 如果当前定位是附近则发表后跳转到talk页要查询附近的，发表动态时修改store
   getLocation () {
-    return LocationUtil.getCurPositionCom().then((district: DistrictVO) => {
+    return LocationUtil.getCurLocationCom().then((district: DistrictVO) => {
       this.bottomDistrict = district
       this.initPopupCity()
     }).catch(() => {

@@ -41,7 +41,7 @@
           </view>
         </q-bar>
         <view class="mt pb-sm">
-          <view class="row-center px-lg pt">
+          <view class="row-center px-lg pt" v-if="genderDefault === '全部'">
             <view class="w70px row-start">性别：</view>
             <view>
               <radio-group @change="genderChange" class="flex-1">
@@ -52,7 +52,7 @@
               </radio-group>
             </view>
           </view>
-          <view class="mt-20px pb-xl pt-sm">
+          <view class="mt-20px pb-xl pt">
             <view class="row-between px-lg">
               <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
             </view>
@@ -159,6 +159,7 @@ export default class TalkVue extends Vue {
   genders: string [] = ['全部', '男', '女']
   // 组件内的值
   genderValue: string = TalkFilterUtil.genderFilterDefault
+  genderDefault: string = TalkFilterUtil.genderFilterDefault
   rangeValue: number[] = [TalkFilterUtil.minAgeFilterDefault, TalkFilterUtil.maxAgeFilterDefault]
   unreadNotifiesNum = 0
   // 评论输入框
@@ -316,7 +317,7 @@ export default class TalkVue extends Vue {
 
   get useFilters (): boolean {
     //todo 集美这里又区别，默认的筛选
-    return this.userGender !== TalkFilterUtil.genderFilterDefault ||
+    return (TalkFilterUtil.genderFilterDefault === this.genders[0] && this.userGender !== TalkFilterUtil.genderFilterDefault) ||
       this.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
       this.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
   }

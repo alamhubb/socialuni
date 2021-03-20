@@ -1,4 +1,6 @@
 export default class GenderType {
+  static readonly all: string = '全部'
+
   // 男生
   static readonly boy: string = '男'
   static readonly boyIcon: string = 'mdi-gender-male'

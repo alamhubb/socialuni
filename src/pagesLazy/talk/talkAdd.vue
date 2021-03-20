@@ -162,7 +162,7 @@ export default class TalkAddVue extends Vue {
 
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的
-    LocationUtil.getPositionNotAuth().then((district: DistrictVO) => {
+    LocationUtil.getLocationNotAuth().then((district: DistrictVO) => {
       this.district = district
     })
   }
