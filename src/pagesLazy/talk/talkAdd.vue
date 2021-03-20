@@ -335,7 +335,8 @@ export default class TalkAddVue extends Vue {
 
 
   uploadImgList () {
-    CosUtil.postObjectList(this.showsImgSrcs)
+    console.log(this.showsImgSrcs)
+    CosUtil.postObjectList(this.showsImgSrcs, this.user.id)
   }
 
   deleteImg (e) {

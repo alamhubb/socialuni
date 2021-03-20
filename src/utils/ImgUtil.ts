@@ -1,8 +1,7 @@
 import JsonUtils from '@/utils/JsonUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import ErrorConst from '@/const/ErrorConst'
-import UniUtil from './UniUtil'
-import CommonUtil from "@/utils/CommonUtil";
+import CommonUtil from '@/utils/CommonUtil'
 
 export default class ImgUtil {
   static readonly imgUrl: string = process.env.VUE_APP_COS_URL

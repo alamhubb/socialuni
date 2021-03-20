@@ -6,10 +6,10 @@ import CosConst from '@/const/CosConst'
 import ImgFileVO from '@/model/ImgFileVO'
 import UniUtil from './UniUtil'
 import AppMsg from '@/const/AppMsg'
-import Alert from "./Alert";
+import Alert from './Alert'
 
 export default class CosUtil {
-  static postObject (imgFile: ImgFileVO, cos = CosUtil.getAuthorizationCos()) {
+  static postObject (imgFile: ImgFileVO, userId: string, cos = CosUtil.getAuthorizationCos(userId)) {
     return new Promise<any>((resolve, reject) => {
       cos.postObject({
         Bucket: CosConst.bucketName,
@@ -28,17 +28,17 @@ export default class CosUtil {
     })
   }
 
-  static postObjectList (imgSrcs: ImgFileVO[]) {
-    const cos = CosUtil.getAuthorizationCos()
-    return Promise.all(imgSrcs.map(imgFile => CosUtil.postObject(imgFile, cos)))
+  static postObjectList (imgSrcs: ImgFileVO[], userId: string) {
+    const cos = CosUtil.getAuthorizationCos(userId)
+    return Promise.all(imgSrcs.map(imgFile => CosUtil.postObject(imgFile, userId, cos)))
   }
 
-  static getAuthorizationCos () {
+  static getAuthorizationCos (userId) {
     return new COS({
       // ForcePathStyle: true, // 如果使用了很多存储桶，可以通过打开后缀式，减少配置白名单域名数量，请求时会用地域域名
       getAuthorization (options, callback) {
         // 异步获取临时密钥
-        CosAPI.getCosAuthorizationAPI().then((res: any) => {
+        CosAPI.getCosAuthorizationAPI(userId).then((res: any) => {
           const data = JsonUtils.jsonParse(res.data)
           const credentials = data && data.credentials
           if (!data || !credentials) return console.error('credentials invalid')

@@ -28,9 +28,9 @@
       <view class="pa-sm">
         <view class="row-col-center py-sm">
           <image
-              class="size65px bd-radius mr-sm"
-              mode="aspectFill"
-              :src="userProp.avatar"
+            class="size65px bd-radius mr-sm"
+            mode="aspectFill"
+            :src="userProp.avatar"
           />
           <view class="flex-auto row-between">
             <view class="flex-col flex-auto">
@@ -79,11 +79,11 @@
           <view v-if="!isMine" class="flex-row">
             <!--                不为自己且未关注-->
             <!--            不为ios，或者不为付费，则显示-->
-<!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
-                    @click="toMessagePage">
-              私信
-              &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>&ndash;&gt;
-            </button>-->
+            <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
+                                @click="toMessagePage">
+                          私信
+                          &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>&ndash;&gt;
+                        </button>-->
             <button class="cu-btn round bd-blue px-12px bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
@@ -182,55 +182,55 @@
             复制
           </button>
         </view>-->
-<!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-active"
-              @click="$pageUtil.toUserContactInfoPage">
-          <view class="row-col-center">
-            <text class="text-lgg text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
-          </view>
-          <view class="text-gray row-col-center pr-xs">
-            <text class="text-lgg text-gray text-lgg">详情</text>
-            <q-icon class="text-gray" size="32" icon="arrow-right"/>
-          </view>
-        </view>-->
+        <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-active"
+                      @click="$pageUtil.toUserContactInfoPage">
+                  <view class="row-col-center">
+                    <text class="text-lgg text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
+                  </view>
+                  <view class="text-gray row-col-center pr-xs">
+                    <text class="text-lgg text-gray text-lgg">详情</text>
+                    <q-icon class="text-gray" size="32" icon="arrow-right"/>
+                  </view>
+                </view>-->
         <!-- 如果自己的话-->
         <!-- 左边格式不变，如果未填写则可以填写，填写之后可以选择开启或者关闭，填写后可选择隐藏展示。-->
         <!--        todo qq不支持联系方式，改为判断qq一件加好友-->
-<!--        <view class="row-col-center row-between-center">
-          <view class="row-col-center">
-            <q-icon class="text-gray mr-xs" icon="account"/>
-            联系方式：
-            <text v-if="userProp.contactAccount">{{ userProp.contactAccount }}</text>
-            <text v-else>
-              未填写
-            </text>
-          </view>
-          <view v-if="isMine" class="row-between-center">
-            <view v-if="userProp.contactAccount" class="row-between-center">
-              <text v-if="userProp.openContact" class="mr-xs text-green">展示中</text>
-              <text v-else class="mr-xs text-gray">已隐藏</text>
-              <u-switch v-model="mineUser.openContact" active-color="#00C853" @change="switchOpenContact"></u-switch>
-            </view>
-            <button v-else class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
-                    @click="openEditDialog">
-              填写联系方式
-            </button>
-          </view>
-          <view v-else-if="userProp.contactAccount">
-            <view v-if="!userProp.openContact" class="mr-sm">
-              对方隐藏了联系方式
-            </view>
-            <button v-else-if="userProp.showUserContact" class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
-                    @click="$util.textCopy(userProp.contactAccount)">
-              复制
-            </button>
-            <button v-else :disabled="showUserContactBtnDisabled"
-                    class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-blue"
-                    @click="shellPayForUserContact">
-              10 贝壳获取
-            </button>
-          </view>
-        </view>-->
-<!--        todo 暂时注释掉支付功能，qq需要改用为米大师-->
+        <!--        <view class="row-col-center row-between-center">
+                  <view class="row-col-center">
+                    <q-icon class="text-gray mr-xs" icon="account"/>
+                    联系方式：
+                    <text v-if="userProp.contactAccount">{{ userProp.contactAccount }}</text>
+                    <text v-else>
+                      未填写
+                    </text>
+                  </view>
+                  <view v-if="isMine" class="row-between-center">
+                    <view v-if="userProp.contactAccount" class="row-between-center">
+                      <text v-if="userProp.openContact" class="mr-xs text-green">展示中</text>
+                      <text v-else class="mr-xs text-gray">已隐藏</text>
+                      <u-switch v-model="mineUser.openContact" active-color="#00C853" @change="switchOpenContact"></u-switch>
+                    </view>
+                    <button v-else class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                            @click="openEditDialog">
+                      填写联系方式
+                    </button>
+                  </view>
+                  <view v-else-if="userProp.contactAccount">
+                    <view v-if="!userProp.openContact" class="mr-sm">
+                      对方隐藏了联系方式
+                    </view>
+                    <button v-else-if="userProp.showUserContact" class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                            @click="$util.textCopy(userProp.contactAccount)">
+                      复制
+                    </button>
+                    <button v-else :disabled="showUserContactBtnDisabled"
+                            class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-blue"
+                            @click="shellPayForUserContact">
+                      10 贝壳获取
+                    </button>
+                  </view>
+                </view>-->
+        <!--        todo 暂时注释掉支付功能，qq需要改用为米大师-->
         <!--<view v-if="isMine" class="q-solid-top row-col-center row-between-center" @click="toUserShell">
           <view class="row-col-center">
             <q-icon class="text-green mr-xs" icon="mdi-bitcoin"/>
@@ -364,7 +364,15 @@ const configStore = namespace('config')
 const systemStore = namespace('system')
 
 @Component({
-  components: { QIcon, QRow, QRowItem, TalkOperate, UserEdit, TalkItem, TalkItemContent }
+  components: {
+    QIcon,
+    QRow,
+    QRowItem,
+    TalkOperate,
+    UserEdit,
+    TalkItem,
+    TalkItemContent
+  }
 })
 export default class UserInfo extends Vue {
   $refs!: {
@@ -536,7 +544,7 @@ export default class UserInfo extends Vue {
       const imgFile: ImgFileVO = imgFiles[0]
       imgFile.src = ImgUtil.getUserImgUploadFormat(this.userProp.id, imgFile.path)
       UniUtil.showLoading('上传中')
-      CosUtil.postObject(imgFile).then(() => {
+      CosUtil.postObject(imgFile, this.mineUser.id).then(() => {
         UserAPI.addUserImgAPI(imgFile).then((res: any) => {
           userModule.setUser(res.data)
         })
