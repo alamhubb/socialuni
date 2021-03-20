@@ -1,72 +1,72 @@
 <template>
-    <view
-            class="slider-range"
-            :class="{ disabled: disabled }"
-            :style="{ paddingLeft: blockSize / 2 + 'px', paddingRight: blockSize / 2 + 'px' }"
-    >
-        <view class="slider-range-inner" :style="{ height: height + 'px' }">
-            <view
-                    class="slider-bar"
-                    :style="{
+  <view
+    class="slider-range"
+    :class="{ disabled: disabled }"
+    :style="{ paddingLeft: blockSize / 2 + 'px', paddingRight: blockSize / 2 + 'px' }"
+  >
+    <view class="slider-range-inner" :style="{ height: height + 'px' }">
+      <view
+        class="slider-bar"
+        :style="{
           height: barHeight + 'px',
         }"
-            >
-                <!-- 背景条 -->
-                <view
-                        class="slider-bar-bg"
-                        :style="{
+      >
+        <!-- 背景条 -->
+        <view
+          class="slider-bar-bg"
+          :style="{
             backgroundColor: backgroundColor,
           }"
-                ></view>
+        ></view>
 
-                <!-- 滑块实际区间 -->
-                <view
-                        class="slider-bar-inner"
-                        :style="{
+        <!-- 滑块实际区间 -->
+        <view
+          class="slider-bar-inner"
+          :style="{
             width: ((values[1] - values[0]) / (max - min)) * 100 + '%',
             left: lowerHandlePosition + '%',
             backgroundColor: activeColor,
           }"
-                ></view>
-            </view>
+        ></view>
+      </view>
 
-            <!-- 滑动块-左 -->
-            <view
-                    class="slider-handle-block"
-                    :class="{ decoration: decorationVisible }"
-                    :style="{
+      <!-- 滑动块-左 -->
+      <view
+        class="slider-handle-block"
+        :class="{ decoration: decorationVisible }"
+        :style="{
           backgroundColor: blockColor,
           width: blockSize + 'px',
           height: blockSize + 'px',
           left: lowerHandlePosition + '%',
         }"
-                    @touchstart="_onTouchStart"
-                    @touchmove="_onBlockTouchMove"
-                    @touchend="_onBlockTouchEnd"
-                    data-tag="lowerBlock"
-            ></view>
+        @touchstart="_onTouchStart"
+        @touchmove="_onBlockTouchMove"
+        @touchend="_onBlockTouchEnd"
+        data-tag="lowerBlock"
+      ></view>
 
-            <!-- 滑动块-右 -->
-            <view
-                    class="slider-handle-block"
-                    :class="{ decoration: decorationVisible }"
-                    :style="{
+      <!-- 滑动块-右 -->
+      <view
+        class="slider-handle-block"
+        :class="{ decoration: decorationVisible }"
+        :style="{
           backgroundColor: blockColor,
           width: blockSize + 'px',
           height: blockSize + 'px',
           left: higherHandlePosition + '%',
         }"
-                    @touchstart="_onTouchStart"
-                    @touchmove="_onBlockTouchMove"
-                    @touchend="_onBlockTouchEnd"
-                    data-tag="higherBlock"
-            ></view>
+        @touchstart="_onTouchStart"
+        @touchmove="_onBlockTouchMove"
+        @touchend="_onBlockTouchEnd"
+        data-tag="higherBlock"
+      ></view>
 
-            <!-- 滑块值提示 -->
-            <view v-if="tipVisible" class="range-tip" :style="lowerTipStyle">{{ format(values[0]) }}</view>
-            <view v-if="tipVisible" class="range-tip" :style="higherTipStyle">{{ format(values[1]) }}</view>
-        </view>
+      <!-- 滑块值提示 -->
+      <view v-if="tipVisible" class="range-tip" :style="lowerTipStyle">{{ format(values[0]) }}</view>
+      <view v-if="tipVisible" class="range-tip" :style="higherTipStyle">{{ format(values[1]) }}</view>
     </view>
+  </view>
 </template>
 
 <script>
@@ -290,87 +290,87 @@ export default {
 </script>
 
 <style scoped>
-    .slider-range {
-        position: relative;
-    }
+.slider-range {
+  position: relative;
+}
 
-    .slider-range-inner {
-        position: relative;
-        width: 100%;
-    }
+.slider-range-inner {
+  position: relative;
+  width: 100%;
+}
 
-    .slider-range.disabled .slider-bar-inner {
-        opacity: 0.35;
-    }
+.slider-range.disabled .slider-bar-inner {
+  opacity: 0.35;
+}
 
-    .slider-range.disabled .slider-handle-block {
-        cursor: not-allowed;
-    }
+.slider-range.disabled .slider-handle-block {
+  cursor: not-allowed;
+}
 
-    .slider-bar {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        transform: translateY(-50%);
-    }
+.slider-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
 
-    .slider-bar-bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 10000px;
-        z-index: 10;
-    }
+.slider-bar-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10000px;
+  z-index: 10;
+}
 
-    .slider-bar-inner {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 10000px;
-        z-index: 11;
-    }
+.slider-bar-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10000px;
+  z-index: 11;
+}
 
-    .slider-handle-block {
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        box-shadow: 0 0 3px 2px rgba(227, 229, 241, 0.5);
-        z-index: 12;
-    }
+.slider-handle-block {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 0 0 3px 2px rgba(227, 229, 241, 0.5);
+  z-index: 12;
+}
 
-    .slider-handle-block.decoration::before {
-        position: absolute;
-        content: '';
-        width: 6rpx;
-        height: 24rpx;
-        top: 50%;
-        left: 29%;
-        transform: translateY(-50%);
-        background: #eeedf2;
-        border-radius: 3rpx;
-        z-index: 13;
-    }
+.slider-handle-block.decoration::before {
+  position: absolute;
+  content: '';
+  width: 6rpx;
+  height: 24rpx;
+  top: 50%;
+  left: 29%;
+  transform: translateY(-50%);
+  background: #eeedf2;
+  border-radius: 3rpx;
+  z-index: 13;
+}
 
-    .slider-handle-block.decoration::after {
-        position: absolute;
-        content: '';
-        width: 6rpx;
-        height: 24rpx;
-        top: 50%;
-        right: 29%;
-        transform: translateY(-50%);
-        background: #eeedf2;
-        border-radius: 3rpx;
-        z-index: 13;
-    }
+.slider-handle-block.decoration::after {
+  position: absolute;
+  content: '';
+  width: 6rpx;
+  height: 24rpx;
+  top: 50%;
+  right: 29%;
+  transform: translateY(-50%);
+  background: #eeedf2;
+  border-radius: 3rpx;
+  z-index: 13;
+}
 
-    .range-tip {
-        position: absolute;
-        top: 0;
-        font-size: 24rpx;
-        color: #666;
-        transform: translate(-50%, -100%);
-    }
+.range-tip {
+  position: absolute;
+  top: 0;
+  font-size: 24rpx;
+  color: #666;
+  transform: translate(-50%, -100%);
+}
 </style>
