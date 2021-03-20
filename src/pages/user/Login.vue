@@ -224,7 +224,6 @@
             </template>
             <!--            微信登录界面，非手机号登录界面-->
             <template v-else>
-              {{ getBtnOpenType }}
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <button v-if="!user" :disabled="!openTypeBtnEnable"
@@ -412,12 +411,10 @@ import NumberUtil from '@/utils/NumberUtil'
 import UserAPI from '@/api/UserAPI'
 import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
-import UserStore from '@/plugins/store/UserStore'
 import LoginAPI from '@/api/LoginAPI'
 import ConfigMap from '@/const/ConfigMap'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import ProviderType, { Provider } from '@/const/ProviderType'
-import LoginService from '@/pages/user/LoginService'
+import ProviderType from '@/const/ProviderType'
 import LoginDataVO from '@/model/login/LoginDataVO'
 import { systemModule, userModule } from '@/plugins/store'
 import ButtonOpenType from '@/const/ButtonOpenType'
@@ -426,7 +423,6 @@ import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultV
 import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
-import UniUser from '@/plugins/uni/login/UniUser'
 import SocialLoginService from '@/plugins/social/service/SocailLoginService'
 
 const userStore = namespace('user')

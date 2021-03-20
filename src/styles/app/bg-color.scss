@@ -8,69 +8,33 @@
 }
 
 .bg-active:active {
-  background-color: #eee !important;
+  background-color: #eee;
 }
 
 .bg-opacity {
   opacity: 0;
-}
-
-.bg-white {
-  background-color: #FFFFFF;
-}
-
-.bg-deep-grey {
-  background-color: #333a40;
-}
-
-.bg-active:active {
-  background-color: #eee;
 }
 
 .bg-hover:hover {
   background-color: #f7f7f7;
 }
-.bg-opacity {
-  opacity: 0;
-}
 
-
-.bg-disabled {
-  background-color: rgba(245, 206, 231, 0.12);
-}
-
-.bg-shadow {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.bg-modal {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.bg-transparent {
-  background: rgba(0, 0, 0, 0);
-}
-
-.bg-half-transparent {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.bg-text-gradual-qq {
+.bg-gradual-qq {
   background-image: linear-gradient(135deg, #3dd0ff, #39a9ff);
   color: #ffffff;
 }
 
-.bg-text-gradual-wx {
+.bg-gradual-wx {
   background-image: linear-gradient(135deg, #69F0AE, #00C853);
   color: #ffffff;
 }
 
-.bg-text-gradual-phone {
+.bg-gradual-phone {
   background-image: linear-gradient(135deg, #FFCC80, #FFA726);
   color: #ffffff;
 }
 
-.bg-text-qq {
+.bg-qq {
   background: #0bbafd;
   color: #ffffff;
 }
