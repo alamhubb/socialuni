@@ -13,7 +13,7 @@
       <tag-add @change="addTagCheckTag" @close="closeTagAddVue"/>
     </view>
     <view v-show="!showSearch&&!showTagSearch&&!showTagAdd">
-      <view class="px-ssm py-sm">
+      <view class="px-smm py-sm">
         <textarea class="h140px w100p" :maxlength="200"
                   placeholder="这是专属女生的小世界，和集美们畅所欲言吧！"
                   v-model.trim="talkContent"
@@ -45,7 +45,7 @@
           </view>
         </view>
       </view>
-      <view class="px-ssm pt-sm mt-xs row-between">
+      <view class="px-smm pt-sm mt-xs row-between">
         <view class="q-tag q-round bg-orange-plain" @click="openSearchVue">
           <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
           <block v-if="district.adCode">
@@ -110,12 +110,12 @@
   </view>
 </template>
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from '@/api/TalkAPI'
 import PagePath from '@/const/PagePath'
 import UniUtil from '@/utils/UniUtil'
 import DistrictVO from '@/model/DistrictVO'
-import {namespace} from 'vuex-class'
+import { namespace } from 'vuex-class'
 import JsonUtils from '@/utils/JsonUtil'
 import DistrictUtil from '@/utils/DistrictUtil'
 import TagVO from '@/model/tag/TagVO'
@@ -124,21 +124,21 @@ import PageUtil from '@/utils/PageUtil'
 import ImgUtil from '@/utils/ImgUtil'
 import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
-import {districtModule, tagModule} from '@/plugins/store'
+import { districtModule, tagModule } from '@/plugins/store'
 import PlatformUtils from '@/utils/PlatformUtils'
-import UserVO from "@/model/user/UserVO";
-import QIcon from "@/components/q-icon/q-icon.vue";
-import CityPicker from "@/components/CityPicker.vue";
-import TalkAddTagSearch from "@/pagesLazy/talk/TalkAddTagSearch.vue";
-import TagAdd from "@/pages/tag/TagAdd.vue";
-import RouterUtil from "@/utils/RouterUtil";
-import Alert from "../../utils/Alert";
+import UserVO from '@/model/user/UserVO'
+import QIcon from '@/components/q-icon/q-icon.vue'
+import CityPicker from '@/components/CityPicker.vue'
+import TalkAddTagSearch from '@/pagesLazy/talk/TalkAddTagSearch.vue'
+import TagAdd from '@/pages/tag/TagAdd.vue'
+import RouterUtil from '@/utils/RouterUtil'
+import Alert from '../../utils/Alert'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
 const districtStore = namespace('district')
 @Component({
-  components: {TagAdd, TalkAddTagSearch, CityPicker, QIcon}
+  components: { TagAdd, TalkAddTagSearch, CityPicker, QIcon }
 })
 export default class TalkAddVue extends Vue {
   @districtStore.State('districts') readonly districts: DistrictVO[]
@@ -157,7 +157,7 @@ export default class TalkAddVue extends Vue {
   showTagAdd = false
 
   //进入talk页面，需要加载下当前地理位置，发布时携带
-  onLoad() {
+  onLoad () {
     this.tags = JsonUtils.deepClone(this.storeTags)
 
     //默认获取当前位置，可以修改
@@ -167,27 +167,27 @@ export default class TalkAddVue extends Vue {
     })
   }
 
-  onReady() {
+  onReady () {
     // this.showSearch = true
   }
 
-  onUnload() {
+  onUnload () {
     this.talkContent = ''
     this.showsImgSrcs = []
   }
 
-  get showImgUrls() {
+  get showImgUrls () {
     return this.showsImgSrcs.map((item: any) => item.path)
   }
 
-  openTagSearchVue(query: boolean) {
+  openTagSearchVue (query: boolean) {
     if (query || this.tags.length < 11) {
       tagModule.getTagsAction()
     }
     this.showTagSearch = true
   }
 
-  get selectTags(): TagVO[] {
+  get selectTags (): TagVO[] {
     const selectTags = this.tags.filter(item => item.selected)
     if (selectTags.length > 0) {
       return selectTags
@@ -197,7 +197,7 @@ export default class TalkAddVue extends Vue {
   }
 
   @Watch('storeTags')
-  watchStoreHotTagsChange() {
+  watchStoreHotTagsChange () {
     const tags = JsonUtils.deepClone(this.storeTags)
     this.selectTags.forEach(item => {
       const tag: TagVO = tags.find(tag => item.id === tag.id)
@@ -208,21 +208,21 @@ export default class TalkAddVue extends Vue {
     this.tags = tags
   }
 
-  get unSelectTags(): TagVO[] {
+  get unSelectTags (): TagVO[] {
     return this.tags.filter((item, index) => !item.selected && index < 7)
   }
 
-  addTagCheckTag(tag: TagVO) {
+  addTagCheckTag (tag: TagVO) {
     this.closeTagAddVue()
     this.checkTag(tag)
     this.openTagSearchVue(true)
   }
 
-  closeTagAddVue() {
+  closeTagAddVue () {
     this.showTagAdd = false
   }
 
-  checkTag(tag: TagVO) {
+  checkTag (tag: TagVO) {
     if (this.selectTags.length > 4) {
       // todo 后台还没有校验
       Alert.info('最多选择5个话题')
@@ -237,30 +237,30 @@ export default class TalkAddVue extends Vue {
     tagInTags.selected = true
   }
 
-  get selectTagIds() {
+  get selectTagIds () {
     return this.selectTags.map(item => item.id)
   }
 
-  changeTag(tag: TagVO) {
+  changeTag (tag: TagVO) {
     this.checkTag(tag)
     this.closeTagSearch()
   }
 
-  deleteTag(tag: TagVO) {
+  deleteTag (tag: TagVO) {
     const tagInTags: TagVO = this.selectTags.find(item => item.id === tag.id)
     tagInTags.selected = false
   }
 
-  closeTagSearch() {
+  closeTagSearch () {
     this.showTagSearch = false
   }
 
-  showAddTag() {
+  showAddTag () {
     this.closeTagSearch()
     this.showTagAdd = true
   }
 
-  openSearchVue() {
+  openSearchVue () {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
       districtModule.getDistrictsAction()
@@ -268,12 +268,12 @@ export default class TalkAddVue extends Vue {
     this.showSearch = true
   }
 
-  cityChange(district: DistrictVO) {
+  cityChange (district: DistrictVO) {
     // 如果没使用定位，则使用之前的定位
     this.district = district
   }
 
-  addTalk() {
+  addTalk () {
     this.buttonDisabled = true
     if (this.talkContent || this.showsImgSrcs.length) {
       if (this.talkContent && this.talkContent.length > 200) {
@@ -288,8 +288,8 @@ export default class TalkAddVue extends Vue {
     }
   }
 
-  addTalkHandler() {
-    uni.showLoading({title: '发布中'})
+  addTalkHandler () {
+    uni.showLoading({ title: '发布中' })
     if (this.showsImgSrcs.length === 0) {
       this.publishTalk()
     } else {
@@ -298,32 +298,32 @@ export default class TalkAddVue extends Vue {
     }
   }
 
-  publishTalk() {
+  publishTalk () {
     TalkAPI.addTalkAPI(this.talkContent, this.showsImgSrcs, this.district, this.selectTagIds)
-        .then(() => {
-          this.buttonDisabled = false
-          uni.hideLoading()
-          RouterUtil.reLaunch(PagePath.talk + '?load=true')
-        })
-        .catch(() => {
-          this.buttonDisabled = false
-          uni.hideLoading()
-        })
+      .then(() => {
+        this.buttonDisabled = false
+        uni.hideLoading()
+        RouterUtil.reLaunch(PagePath.talk + '?load=true')
+      })
+      .catch(() => {
+        this.buttonDisabled = false
+        uni.hideLoading()
+      })
   }
 
 
-  uploadImgList() {
+  uploadImgList () {
     CosUtil.postObjectList(this.showsImgSrcs)
   }
 
-  deleteImg(e) {
+  deleteImg (e) {
     this.showsImgSrcs.splice(e, 1)
   }
 
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */
-  async chooseImage() {
+  async chooseImage () {
     if (this.showsImgSrcs.length >= this.imgMaxSize) {
       const isContinue = await this.isFullImg()
       console.log('是否继续?', isContinue)
@@ -340,7 +340,7 @@ export default class TalkAddVue extends Vue {
     })
   }
 
-  isFullImg() {
+  isFullImg () {
     return new Promise((resolve) => {
       uni.showModal({
         content: '已经有' + this.imgMaxSize + '张图片了,是否清空现有图片？',
@@ -359,7 +359,7 @@ export default class TalkAddVue extends Vue {
     })
   }
 
-  previewImage(e) {
+  previewImage (e) {
     const current = e.target.dataset.src
     uni.previewImage({
       current: current,

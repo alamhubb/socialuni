@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-primary px-ssm pt-xs">
+  <view class="bg-primary px-smm pt-xs">
     <u-swiper :height="swiperHeight" :list="homeSwipers" name="imgUrl" @click="skipWebView"
               :interval="2500"
     ></u-swiper>
@@ -19,7 +19,7 @@ import ConfigMap from '@/const/ConfigMap'
 import PageUtil from '@/utils/PageUtil'
 import SkipType from '@/const/SkipType'
 import { systemModule } from '@/plugins/store'
-import RouterUtil from "@/utils/RouterUtil";
+import RouterUtil from '@/utils/RouterUtil'
 
 const appStore = namespace('app')
 const configStore = namespace('config')

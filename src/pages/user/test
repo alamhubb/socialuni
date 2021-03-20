@@ -1,0 +1,69 @@
+<template>
+  <view class="h100p col-all-center bg-white">
+    <u-navbar :is-back="false" title-bold border-bottom>
+      <view class="ml font-lg font-bold">欢迎登录 - 集美小世界</view>
+    </u-navbar>
+    <view v-if="user">
+      已登录：{{ user.nickname }}
+    </view>
+    <!-- 小程序平台-->
+    <view class="text-black text-xxl mb">
+      登录功能由清池数据提供
+    </view>
+    <view class="text-black text-xl mb">
+      未登录，请点击登录按钮执行登录操作
+    </view>
+    <!--    <button
+            :disabled="disabledLoginBtn"
+            class="bg-cyan w70vw"
+            @click="loginByQingchi"
+        >
+          使用清池登录
+        </button>-->
+    <button class="cu-btn lg bg-pink-accent w60vw"
+            :disabled="disabledLoginBtn"
+            @click="loginByQingchi">使用清池登录
+    </button>
+  </view>
+</template>
+
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+import {namespace} from 'vuex-class'
+import UserVO from "@/model/user/UserVO";
+
+const userStore = namespace('user')
+@Component
+export default class MinePage extends Vue {
+  @userStore.State('user') user: UserVO
+
+  // 登录
+  disabledLoginBtn = false
+
+  onLoad() {
+  }
+
+  loginByQingchi() {
+    // this.providerLogin(ProviderType.wx)
+    uni.navigateToMiniProgram({
+      // appId: 'wx0bf5fe9ceeab514c',
+      // appId: 'wx0bf5fe9ceeab514c',
+      appId: 'wx0bf5fe9ceeab514c',
+      path: 'pages/user/mine',
+      extraData: {
+        'userId': '123',
+        'secretKey': '075b7c28ea7246eeb91c19c304cc5eef'
+      },
+      // envVersion: 'develop',
+      envVersion: 'trial',
+      /*path: 'pages/index/index?id=123',
+      extraData: {
+        'data1': 'test'
+      },*/
+      success(res) {
+        // 打开成功
+      }
+    })
+  }
+}
+</script>

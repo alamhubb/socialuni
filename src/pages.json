@@ -20,9 +20,6 @@
       }
     },
     {
-      "path": "pages/talk/empty"
-    },
-    {
       "path": "pages/match/match",
       "style": {
         "navigationBarTitleText": "匹配",
