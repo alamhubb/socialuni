@@ -3,13 +3,19 @@ import AppUpdateVO from '@/model/app/AppUpdateVO'
 import AppUpdateResultVO from '@/model/app/AppUpdateResultVO'
 import FrontErrorLogVO from '@/model/app/FrontErrorLogVO'
 import JsonUtil from '@/utils/JsonUtil'
-import AuthUserInfoRequestVO from '@/model/openData/AuthUserInfoRequestVO'
-import AuthUserInfoResultVO from '@/model/openData/AuthUserInfoResultVO'
+import ThreeAuthRequestVO from '@/model/openData/ThreeAuthRequestVO'
+import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultVO'
+import ThreeAuthUserPhoneNumResultVO from '@/model/openData/ThreeAuthUserPhoneNumResultVO'
 
 export default class OpenDataAPI {
   static authUserInfoAPI () {
-    const requestVO: AuthUserInfoRequestVO = new AuthUserInfoRequestVO()
-    return http.post<AuthUserInfoResultVO>('user/authUserInfo', requestVO)
+    const requestVO: ThreeAuthRequestVO = new ThreeAuthRequestVO()
+    return http.post<ThreeAuthUserInfoResultVO>('user/authUserInfo', requestVO)
+  }
+
+  static authUserPhoneNumAPI () {
+    const requestVO: ThreeAuthRequestVO = new ThreeAuthRequestVO()
+    return http.post<ThreeAuthUserPhoneNumResultVO>('user/authUserPhoneNum', requestVO)
   }
 
   static queryAppInitDataReadyAPI () {

@@ -6,6 +6,7 @@ import Alert from '@/utils/Alert'
 import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
+import AppUtilAPI from '@/api/AppUtilAPI'
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
@@ -38,9 +39,11 @@ http.interceptor.response(
     return response.data
   },
   error => {
+    console.log(error)
     UniUtil.hideLoading()
     if (error.statusCode) {
       const result = error.data
+      let errorMsg = ''
       switch (error.statusCode) {
         case ErrorConst.not_logged:
         case ErrorConst.banned:
@@ -66,10 +69,12 @@ http.interceptor.response(
           break
         default:
           if (result && result.errorMsg) {
-            Alert.error(result.errorMsg)
+            errorMsg = result.errorMsg
+            Alert.error(errorMsg)
           } else {
             MsgUtil.systemErrorMsg()
           }
+          AppUtilAPI.sendErrorLogAPI(null, errorMsg)
           break
       }
       return result // 返回接口返回的错误信息

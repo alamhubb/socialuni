@@ -6,7 +6,7 @@ import FrontErrorLogVO from '@/model/app/FrontErrorLogVO'
 import JsonUtil from '@/utils/JsonUtil'
 import TalkQueryVO from '@/model/talk/TalkQueryVO'
 
-export default class AppInitAPI {
+export default class AppUtilAPI {
   static queryAppInitDataLoadAPI (initQueryVO: AppInitQueryVO) {
     return http.post('app/queryAppInitDataLoad', initQueryVO)
   }
@@ -20,7 +20,7 @@ export default class AppInitAPI {
     return http.post<AppUpdateResultVO>('app/checkUpdate', appUpdate)
   }
 
-  static sendErrorLog (uri: string, detail: string, params: any, errorMsg: any) {
+  static sendErrorLogAPI (uri: string, detail: string, params?: any, errorMsg?: any) {
     return http.post('app/sendErrorLog', new FrontErrorLogVO(uri, detail, JsonUtil.toJson(params), JsonUtil.toJson(errorMsg)))
   }
 }

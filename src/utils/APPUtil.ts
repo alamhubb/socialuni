@@ -1,4 +1,4 @@
-import AppInitAPI from '@/api/AppInitAPI'
+import AppUtilAPI from '@/api/AppUtilAPI'
 import UniUtil from '@/plugins/uni/UniUtil'
 import AppUpdateType from '@/const/AppUpdateType'
 import { configModule } from '@/plugins/store'
@@ -9,7 +9,7 @@ export default class APPUtil {
   static checkUpdate () {
     plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
       const version = widgetInfo.version.split('.').join('')
-      AppInitAPI.checkUpdateAPI(Number(version)).then((res) => {
+      AppUtilAPI.checkUpdateAPI(Number(version)).then((res) => {
         const updateType = res.data.updateType
         const updateUrl = res.data.updateUrl
         const updateHint = res.data.updateHint

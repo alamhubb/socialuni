@@ -13,7 +13,7 @@ import UserPayResultVO from '@/model/user/UserPayResultVO'
 
 import MPUtil from '@/utils/MPUtil'
 import APPUtil from '@/utils/APPUtil'
-import AppInitAPI from '@/api/AppInitAPI'
+import AppUtilAPI from '@/api/AppUtilAPI'
 import Toast from '@/utils/Toast'
 
 // 统一处理各平台的订阅
@@ -101,7 +101,7 @@ export default class PlatformUtils {
           Toast.toast(AppMsg.payCancelMsg)
           throw err
         } else {
-          AppInitAPI.sendErrorLog(null, '支付失败', res, err)
+          AppUtilAPI.sendErrorLogAPI(null, '支付失败', res, err)
           MsgUtil.payFailMsg()
           throw err
         }

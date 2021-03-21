@@ -4,9 +4,9 @@ export default class ResultVO<T> {
   success: boolean
   data: T
 
-  constructor () {
+  constructor (success = true) {
     this.errorCode = 0
     this.errorMsg = ''
-    this.success = true
+    this.success = success
   }
 }

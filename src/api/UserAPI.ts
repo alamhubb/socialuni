@@ -5,6 +5,7 @@ import ImgFileVO from '@/model/ImgFileVO'
 import UserPayVO from '@/model/user/UserPayVO'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 import UserEditVO from '@/model/user/UserEditVO'
+import UserVO from '@/model/user/UserVO'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {
@@ -25,7 +26,9 @@ export default class UserAPI {
 
   static bindPhoneNumAPI (phoneNum: string, authCode: string) {
     const phoneNumObj: UserPhoneNumVO = new UserPhoneNumVO(phoneNum, authCode, null)
-    return http.post('phone/bindPhoneNum', phoneNumObj)
+    return http.post<UserVO>('phone/bindPhoneNum', phoneNumObj).then(res => {
+      return res.data
+    })
   }
 
   static addUserImgAPI (userImg: ImgFileVO) {

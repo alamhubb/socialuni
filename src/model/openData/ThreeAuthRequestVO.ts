@@ -1,6 +1,6 @@
 import { appModule, systemModule } from '@/plugins/store'
 
-export default class AuthUserInfoRequestVO {
+export default class ThreeAuthRequestVO {
   threeSecretKey: string
   threeUserId?: string
   providerAppId: string
