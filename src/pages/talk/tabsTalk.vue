@@ -50,10 +50,9 @@
         <scroll-view class="h100p btr" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                      :lower-threshold="800"
                      @scroll="talksScrollEvent">
-          <view class="pt-sm" v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+          <view class="pt-xs bg-default" v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
             <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-              <talk-item class="mb-sm"
-                         :talk="talk"
+              <talk-item :talk="talk"
                          :talk-tab-type="talkTabObj.type"
                          @deleteTalk="deleteTalk"
               />
