@@ -5,7 +5,7 @@ import UserVO from '@/model/user/UserVO'
 
 export default class BindPhoneNumAPI {
   //微信绑定手机号使用
-  static bindPhoneNumAPI (loginData: ProviderUserVO) {
+  static bindPhoneNumByWxAPI (loginData: ProviderUserVO) {
     return socialHttp.post<UserVO>('user/bindPhoneNumByWx', loginData)
   }
 }

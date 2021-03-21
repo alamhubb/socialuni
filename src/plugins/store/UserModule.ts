@@ -58,9 +58,9 @@ export default class UserModule extends VuexModule {
   //跳转清池绑定手机号
   @Action
   bindPhoneNumAction (loginData: ProviderUserVO) {
-    return BindPhoneNumAPI.bindPhoneNumAPI(loginData).then((res) => {
+    return BindPhoneNumAPI.bindPhoneNumByWxAPI(loginData).then((res) => {
       userModule.setUser(res.data)
-      Alert.hint('绑定手机号成功')
+      Toast.toast('绑定手机号成功')
       return res.data
     })
   }

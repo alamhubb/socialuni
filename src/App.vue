@@ -13,9 +13,9 @@ export default Vue.extend({
   onLaunch (params) {
     //页面启动，启动函数
     systemModule.appLunchAction()
-    /*appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
+    appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
     appModule.threeUserId = '10081'
-    appModule.threeAuthType = SocialAuthType.user*/
+    appModule.threeAuthType = SocialAuthType.phone
     // Toast.toastLong('正确版本')
     //如果有跳转信息
     if (params.referrerInfo) {
@@ -37,6 +37,9 @@ export default Vue.extend({
           uni.navigateBackMiniProgram({ extraData: result })
         }
       }
+    }
+    if (appModule.threeSecretKey) {
+      appModule.getThreeDevUserAction()
     }
     //页面启动，启动函数
     // systemModule.appInit()

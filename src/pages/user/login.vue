@@ -656,7 +656,7 @@ export default class LoginVue extends Vue {
         await this.providerLogin(providerResult, systemModule.provider)
         //登录完成之后，只有为授权用户信息跳转会小程序
         //如果不为三方授权、且没有手机号，则只可能是来绑定手机号的
-      } else if (!this.isThreeAuth && !this.hasPhoneNum) {
+      } else if (!this.isAuthUser && !this.hasPhoneNum) {
         //如果微信绑定手机号
         await this.getPhoneNumberByWx(providerResult)
       }
@@ -717,6 +717,7 @@ export default class LoginVue extends Vue {
       if (this.goBackCountDown) {
         this.goBackCountDown--
       } else {
+        UniUtil.hideLoading()
         clearInterval(timer)
         uni.navigateBackMiniProgram({
           extraData: extraData
