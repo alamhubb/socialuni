@@ -156,7 +156,7 @@
             <!--        登录界面，展示logo-->
             <image class="radius flex-none h100p"
                    mode="aspectFit"
-                   src="/static/img/logo.png"
+                   src="/static/img/logo.jpg"
             />
           </div>
         </view>

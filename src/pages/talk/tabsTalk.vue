@@ -50,7 +50,8 @@
         <scroll-view class="h100p btr" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                      :lower-threshold="800"
                      @scroll="talksScrollEvent">
-          <view class="pt-xs bg-default" v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+          <view class="pt-xs bg-default"
+                v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
             <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
               <talk-item :talk="talk"
                          :talk-tab-type="talkTabObj.type"
@@ -279,7 +280,9 @@ export default class TabsTalkVue extends Vue {
     if (this.talkTabObj.loadMore === LoadMoreType.more) {
       // 执行正在加载动画
       this.talkTabObj.loadMore = LoadMoreType.loading
+      // if (firstLoad) {
       this.queryTalks(firstLoad)
+      // }
       //首次时加载地理位置就好了，之后就是点击定位的时候加载
       /*if (locationModule.openLocation) {
         this.requestUseLocationQueryTalks(firstLoad)
