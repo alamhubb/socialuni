@@ -7,6 +7,8 @@ import UserStorageUtil from '@/utils/UserStorageUtil'
 import Alert from '@/utils/Alert'
 import Toast from '@/utils/Toast'
 import UserService from '@/service/UserService'
+import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
+import BindPhoneNumAPI from '@/plugins/social/api/BindPhoneNumAPI'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
@@ -50,6 +52,16 @@ export default class UserModule extends VuexModule {
   getMineUserAction () {
     return UserAPI.getMineUserInfoAPI().then((res: any) => {
       userModule.setUser(res.data)
+    })
+  }
+
+  //跳转清池绑定手机号
+  @Action
+  bindPhoneNumAction (loginData: ProviderUserVO) {
+    return BindPhoneNumAPI.bindPhoneNumAPI(loginData).then((res) => {
+      userModule.setUser(res.data)
+      Alert.hint('绑定手机号成功')
+      return res.data
     })
   }
 }

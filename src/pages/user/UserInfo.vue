@@ -353,11 +353,9 @@ import Toast from '@/utils/Toast'
 import RouterUtil from '@/utils/RouterUtil'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
-import LoginUtil from '@/utils/LoginUtil'
 import ErrorCode from '@/const/ErrorCode'
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
-import LoginAPI from '@/plugins/social/api/LoginAPI'
-import BindPhoneNumAPI from '@/plugins/social/api/BindPhoneNumAPI'
+import UserService from '@/service/UserService'
 
 
 const userStore = namespace('user')
@@ -556,26 +554,6 @@ export default class UserInfo extends Vue {
     })
   }
 
-  //跳转清池绑定手机号
-  async getPhoneNumberAfterHandler (loginData: ProviderUserVO) {
-    return BindPhoneNumAPI.bindPhoneNumAPI(loginData).then((res: any) => {
-      userModule.setUser(res.data)
-      Alert.hint('绑定手机号成功')
-    })
-  }
-
-  //微信绑定手机号使用
-  getPhoneNumberByLogin (obj: any) {
-    LoginService.getLoginData(systemModule.provider as Provider).then((loginData: ProviderUserVO) => {
-      Object.assign(loginData, obj.detail)
-      // 代表已过期
-      loginData.sessionEnable = false
-      /*this.getPhoneNumberAfterHandler(loginData).finally(() => {
-        this.phoneBtnDisabled = false
-      })*/
-    })
-  }
-
   toPhonePage () {
     PageUtil.toPhonePage()
   }
@@ -585,31 +563,10 @@ export default class UserInfo extends Vue {
   }
 
   // 微信点击按钮，获取手机号用来绑定
-  getPhoneNumberByWx (obj: any) {
-    if (obj.detail.errMsg === 'getPhoneNumber:ok') {
-      this.phoneBtnDisabled = true
-      // 默认未过期
-      UniUtil.checkSession().then(() => {
-        const loginData: ProviderUserVO = new ProviderUserVO()
-        Object.assign(loginData, obj.detail)
-        loginData.sessionEnable = true
-        //前台获取为未过期，但也有可能已过期，尝试调用后台获取，确认是否未过期
-        this.getPhoneNumberAfterHandler(loginData).then(() => {
-          this.phoneBtnDisabled = false
-        }).catch((error) => {
-          //如果为自定义，则将过期标示改为已过期调用后台
-          if (error.errorCode === ErrorCode.custom) {
-            this.getPhoneNumberByLogin(obj)
-          } else {
-            this.phoneBtnDisabled = false
-          }
-        })
-      }).catch(() => {
-        this.getPhoneNumberByLogin(obj)
-      })
-    } else {
-      Toast.toast('您选择了不绑定')
-    }
+  async getPhoneNumberByWx (obj: any) {
+    this.phoneBtnDisabled = true
+    await UserService.getPhoneNumberByWx(obj)
+    this.phoneBtnDisabled = false
   }
 
   openVip () {
