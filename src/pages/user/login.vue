@@ -405,7 +405,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import UserAPI from '@/api/UserAPI'

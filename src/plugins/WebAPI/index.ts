@@ -1,7 +1,7 @@
 import Request from '@/plugins/http/request'
 import TokenUtil from '@/utils/TokenUtil'
 import ErrorCode from '@/const/ErrorCode'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import { configModule, userModule } from '@/plugins/store'
 import MsgUtil from '@/utils/MsgUtil'

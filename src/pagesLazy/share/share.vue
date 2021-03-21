@@ -25,7 +25,7 @@ import {
   Vue,
   Component
 } from 'vue-property-decorator'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
 

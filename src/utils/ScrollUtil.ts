@@ -1,4 +1,4 @@
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import { Vue } from 'vue-property-decorator'
 import CommonUtil from '@/utils/CommonUtil'
 

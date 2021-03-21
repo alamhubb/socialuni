@@ -1,13 +1,12 @@
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import GetProviderRes = UniApp.GetProviderRes
 import LoginRes = UniApp.LoginRes
-import { Provider } from '@/const/ProviderType'
 import GetUserInfoRes = UniApp.GetUserInfoRes
 import ImgFileVO from '@/model/ImgFileVO'
 import AppMsg from '@/const/AppMsg'
 import { systemModule } from '@/plugins/store'
 import Toast from '@/utils/Toast'
-import Alert from './Alert'
+import Alert from '../../utils/Alert'
 
 export default class UniUtil {
   public static textCopy (copyText: string, hint?: string) {

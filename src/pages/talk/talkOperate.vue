@@ -68,7 +68,7 @@ import TalkVO from '@/model/talk/TalkVO'
 import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import Alert from '../../utils/Alert'
 import UserVO from '@/model/user/UserVO'
 

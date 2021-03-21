@@ -1,4 +1,4 @@
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtil from '@/utils/JsonUtil'

@@ -4,7 +4,7 @@ import CosAPI from '@/api/CosAPI'
 import COS from 'cos-wx-sdk-v5'
 import CosConst from '@/const/CosConst'
 import ImgFileVO from '@/model/ImgFileVO'
-import UniUtil from './UniUtil'
+import UniUtil from '../plugins/uni/UniUtil'
 import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
 

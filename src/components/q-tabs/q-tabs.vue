@@ -24,7 +24,7 @@ import {
   Component, Prop, Model, Emit
 } from 'vue-property-decorator'
 import CommonUtil from '@/utils/CommonUtil'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 
   @Component
 export default class QTabs extends Vue {

@@ -3,7 +3,7 @@ import Vue from 'vue'
 import { appModule, systemModule } from '@/plugins/store'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
 import SocialAuthType from '@/const/SocialAuthType'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import ResultVO from '@/model/ResultVO'
 import ErrorCode from '@/const/ErrorCode'
 

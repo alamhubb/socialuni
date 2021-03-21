@@ -117,7 +117,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from '@/api/TalkAPI'
 import PagePath from '@/const/PagePath'
-import UniUtil from '@/utils/UniUtil'
+import UniUtil from '@/plugins/uni/UniUtil'
 import DistrictVO from '@/model/DistrictVO'
 import { namespace } from 'vuex-class'
 import JsonUtils from '@/utils/JsonUtil'

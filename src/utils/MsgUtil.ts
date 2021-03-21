@@ -1,5 +1,5 @@
 import { configModule, systemModule, userModule } from '@/plugins/store'
-import UniUtil from './UniUtil'
+import UniUtil from '../plugins/uni/UniUtil'
 
 import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
