@@ -107,9 +107,9 @@
         <view v-else class="h150px flex-col">
           <view v-if="isThreeAuth" class="flex-1">
             <!--            三方授权显示三方的信息-->
-            <view class="row-col-center px-sm py-xs">
-              <u-avatar class="mr-sm" src="/static/jimei1.png" mode="square" size="50"></u-avatar>
-              <text class="mr-sm font-bold">集美丨女生日常分享交友</text>
+            <view class="row-col-center px-sm py-xs" v-if="threeDevUser">
+              <u-avatar class="mr-sm" :src="threeDevUser.avatarUrl" mode="square" size="50"></u-avatar>
+              <text class="mr-sm font-bold">{{ threeDevUser.appName }}</text>
               申请
             </view>
 
@@ -410,15 +410,12 @@ import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import UserAPI from '@/api/UserAPI'
-import RouterUtil from '@/utils/RouterUtil'
 import ConfigMap from '@/const/ConfigMap'
 import SkipUrlConst from '@/const/SkipUrlConst'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import { systemModule, userModule } from '@/plugins/store'
-import ButtonOpenType from '@/const/ButtonOpenType'
 import Alert from '@/utils/Alert'
-import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultVO'
 import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
@@ -428,6 +425,7 @@ import ErrorCode from '@/const/ErrorCode'
 import PageUtil from '@/utils/PageUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
 import UserService from '@/service/UserService'
+import DevUserVO from '@/model/dev/DevUserVO'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -447,6 +445,7 @@ export default class LoginVue extends Vue {
   @appStore.State('threeUserId') threeUserId: string
   @appStore.State('threeAuthType') threeAuthType: string
   @appStore.State('threeAppId') threeAppId: string
+  @appStore.State('threeDevUser') threeDevUser: DevUserVO
   //getter
   @appStore.Getter('isThreeAuth') isThreeAuth: boolean
   @appStore.Getter('isAuthUser') isAuthUser: boolean

@@ -9,6 +9,8 @@ import SocialAuthType from '@/const/SocialAuthType'
 import ReportAPI from '@/api/ReportAPI'
 import QingchiAPI from '@/api/QingchiAPI'
 import GenderType from '@/const/GenderType'
+import DevUserVO from '@/model/dev/DevUserVO'
+import DevUserAPI from '@/api/DevUserAPI'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -35,6 +37,7 @@ export default class AppModule extends VuexModule {
   threeAppId = ''
   threeAuthType = ''
   // threeProviderType = ''
+  threeDevUser: DevUserVO = null
 
   //是否为三方授权
   get isThreeAuth () {
@@ -62,6 +65,13 @@ export default class AppModule extends VuexModule {
   getHomeSwipersAction () {
     QingchiAPI.queryHomeSwipersAPI().then(res => {
       this.homeSwipers = res.data
+    })
+  }
+
+  @Action
+  getThreeDevUserAction () {
+    DevUserAPI.queryDevUserDetailAPI().then(res => {
+      this.threeDevUser = res.data
     })
   }
 }
