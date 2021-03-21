@@ -3,12 +3,12 @@
         <block v-for="(childComment,index) in comment.childComments" :key="childComment.id">
             <view v-if="index<childCommentShowNum" class="flex-row py-mn">
                 <!--            {{childComment.no}}#-->
-                <text :class="comment.user.vipFlag?'text-red':'color-pink-accent'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
+                <text :class="comment.user.vipFlag?'text-red':'color-blue-dark'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
                 <view class="flex-sub row-col-center" @click="setReplyComment(talk,comment,childComment)">
                     <text v-if="childComment.replyComment">
                         <text class="mx-5px">回复</text>
                         <!--                {{childComment.replyComment.no}}#-->
-                        <text class="color-pink-accent" @click.stop="toUserDetail(childComment.replyComment.user.id)">
+                        <text class="color-blue-dark" @click.stop="toUserDetail(childComment.replyComment.user.id)">
                             {{childComment.replyComment.user.nickname}}
                         </text>
                     </text>
