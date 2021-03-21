@@ -495,7 +495,7 @@ export default class LoginVue extends Vue {
           OpenDataAPI.authUserInfoAPI().then(res => {
             UniUtil.hideLoading()
             const result = res.data
-            this.goBackCountDown = 2
+            this.goBackCountDown = 1
             const threeUserResult: ThreeAuthUserInfoResultVO = new ThreeAuthUserInfoResultVO()
             threeUserResult.appUserId = this.threeUserId
             threeUserResult.authType = this.threeAuthType
@@ -505,12 +505,12 @@ export default class LoginVue extends Vue {
             const threeResultVO: ResultVO<ThreeAuthUserInfoResultVO> = new ResultVO()
             threeResultVO.data = threeUserResult
 
+            UniUtil.showLoading('授权成功，返回中...')
             const timer = setInterval(() => {
               if (this.goBackCountDown) {
                 this.goBackCountDown--
               } else {
                 clearInterval(timer)
-                UniUtil.showLoading('授权成功，返回中...')
                 uni.navigateBackMiniProgram({
                   extraData: threeResultVO
                 })
