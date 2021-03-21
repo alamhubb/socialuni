@@ -68,10 +68,12 @@ export default class UserService {
         if (error.errorCode === ErrorCode.custom) {
           Toast.toast(error.data)
           UserService.getWxPhoneNumberByLogin(obj)
+          throw error
         }
       }
     } else {
       Toast.toast('您选择了不绑定')
+      throw Error('您选择了不绑定')
     }
   }
 }
