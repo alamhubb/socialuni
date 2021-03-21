@@ -4,8 +4,8 @@ import ProviderType, { Provider } from '@/const/ProviderType'
 import PlatformType from '@/const/PlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
-import AppStoreCom from '@/plugins/store/AppStoreCom'
-import UserStoreCom from '@/plugins/store/UserStoreCom'
+import AppService from '@/service/AppService'
+import UserService from '@/service/UserService'
 import TokenUtil from '@/utils/TokenUtil'
 
 //和终端相关的信息
@@ -81,9 +81,9 @@ export default class SystemModule extends VuexModule {
     WebsocketUtil.websocketConnect(false)
     // appModule.initGlobalDataLoadAPI()
     if (TokenUtil.hasToken()) {
-      UserStoreCom.getMineUserInitDataAction()
+      UserService.getMineUserInitDataAction()
     }
-    AppStoreCom.getHomeLoadAfterData()
+    AppService.getHomeLoadAfterData()
     // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
     // appModule.initGlobalDataReadyAPI()
     // 测试时使用，生产时在talk也ready后查询

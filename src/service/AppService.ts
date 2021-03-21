@@ -1,6 +1,6 @@
-import { appModule, locationModule, tagModule } from '@/plugins/store/index'
+import { appModule, locationModule, tagModule } from '@/plugins/store'
 
-export default class AppStoreCom {
+export default class AppService {
   //获取首页加载需要的数据
   static getHomeLoadData () {
   }

@@ -5,7 +5,7 @@ import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import { configModule, userModule } from '@/plugins/store'
 import MsgUtil from '@/utils/MsgUtil'
-import UserStoreCom from '@/plugins/store/UserStoreCom'
+import UserService from '@/service/UserService'
 import Alert from '@/utils/Alert'
 
 
@@ -29,11 +29,11 @@ WebAPI.interceptor.response(
         case ErrorCode.not_logged:
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
-          UserStoreCom.clearUserInfoCom()
+          UserService.clearUserInfoCom()
           MsgUtil.unLoginMessage()
           break
         case ErrorCode.banned:
-          UserStoreCom.clearUserInfoCom()
+          UserService.clearUserInfoCom()
           if (result) {
             Alert.error(result.errorMsg)
           } else {

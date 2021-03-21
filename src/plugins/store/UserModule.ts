@@ -6,7 +6,7 @@ import { userModule } from '@/plugins/store/index'
 import UserStorageUtil from '@/utils/UserStorageUtil'
 import Alert from '@/utils/Alert'
 import Toast from '@/utils/Toast'
-import UserStoreCom from '@/plugins/store/UserStoreCom'
+import UserService from '@/service/UserService'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
@@ -28,7 +28,7 @@ export default class UserModule extends VuexModule {
 
   loginOut () {
     return Alert.confirm('是否退出登录').then(() => {
-      UserStoreCom.clearUserInfoCom()
+      UserService.clearUserInfoCom()
       Toast.toast('用户退出')
     })
   }
@@ -37,7 +37,7 @@ export default class UserModule extends VuexModule {
   destroyAccount () {
     return Alert.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
       UserAPI.destroyAccountAPI().then(() => {
-        UserStoreCom.clearUserInfoCom()
+        UserService.clearUserInfoCom()
         Toast.toast('注销成功')
       })
     })

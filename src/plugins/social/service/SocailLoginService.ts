@@ -5,7 +5,7 @@ import Alert from '@/utils/Alert'
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import UniUser from '@/plugins/uni/login/UniUser'
 import LoginAPI from '@/plugins/social/api/LoginAPI'
-import UserStoreCom from '@/plugins/store/UserStoreCom'
+import UserService from '@/service/UserService'
 
 
 export default class SocialLoginService {
@@ -22,7 +22,7 @@ export default class SocialLoginService {
         loginData.clientid = systemModule.clientid
       }
       return LoginAPI.providerLoginAPI(loginData).then((res: any) => {
-        const user = UserStoreCom.getMineUserInitDataActionByToken(res)
+        const user = UserService.getMineUserInitDataActionByToken(res)
         let hintText = '登录成功'
         if (!user.phoneNum) {
           hintText += '，绑定手机号后才可发布内容'

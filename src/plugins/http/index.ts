@@ -3,7 +3,7 @@ import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/plugins/uni/UniUtil'
 import { appModule, configModule } from '@/plugins/store'
 import Alert from '@/utils/Alert'
-import UserStoreCom from '@/plugins/store/UserStoreCom'
+import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
 
@@ -46,7 +46,7 @@ http.interceptor.response(
         case ErrorConst.banned:
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
-          UserStoreCom.clearUserInfoCom()
+          UserService.clearUserInfoCom()
           if (result && result.errorMsg) {
             Alert.error(result.errorMsg)
           }

@@ -1,12 +1,10 @@
-import { notifyModule, platformModule, talkModule, userModule } from './index'
+import { notifyModule, userModule } from '../plugins/store'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
-import AppInitDataVO from '@/model/common/AppInitDataVO'
 import ResultVO from '@/model/ResultVO'
-import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import LoginResultVO from '@/model/common/LoginResultVO'
 
-export default class UserStoreCom {
+export default class UserService {
   //清空用户信息的组合操作
   static clearUserInfoCom () {
     TokenUtil.remove()

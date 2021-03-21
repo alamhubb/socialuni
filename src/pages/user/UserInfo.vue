@@ -356,6 +356,8 @@ import QIcon from '@/components/q-icon/q-icon.vue'
 import LoginUtil from '@/utils/LoginUtil'
 import ErrorCode from '@/const/ErrorCode'
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
+import LoginAPI from '@/plugins/social/api/LoginAPI'
+import BindPhoneNumAPI from '@/plugins/social/api/BindPhoneNumAPI'
 
 
 const userStore = namespace('user')
@@ -556,10 +558,10 @@ export default class UserInfo extends Vue {
 
   //跳转清池绑定手机号
   async getPhoneNumberAfterHandler (loginData: ProviderUserVO) {
-    /*return LoginAPI.bindPhoneNumAPI(loginData).then((res: any) => {
-      userModule.setUser(res.data.user)
-      AlertUtil.hint(res.data.hint)
-    })*/
+    return BindPhoneNumAPI.bindPhoneNumAPI(loginData).then((res: any) => {
+      userModule.setUser(res.data)
+      Alert.hint('绑定手机号成功')
+    })
   }
 
   //微信绑定手机号使用
@@ -587,7 +589,7 @@ export default class UserInfo extends Vue {
     if (obj.detail.errMsg === 'getPhoneNumber:ok') {
       this.phoneBtnDisabled = true
       // 默认未过期
-      LoginUtil.checkSession().then(() => {
+      UniUtil.checkSession().then(() => {
         const loginData: ProviderUserVO = new ProviderUserVO()
         Object.assign(loginData, obj.detail)
         loginData.sessionEnable = true

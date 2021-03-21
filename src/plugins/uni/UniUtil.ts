@@ -60,6 +60,19 @@ export default class UniUtil {
     })
   }
 
+  static checkSession (): Promise<any> {
+    return new Promise<any>((resolve, reject) =>
+      uni.checkSession({
+        success () {
+          resolve(null)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    )
+  }
+
   public static getUserInfo (provider: any) {
     return new Promise<GetUserInfoRes>(resolve => {
       uni.getUserInfo({
