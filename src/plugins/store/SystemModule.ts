@@ -7,6 +7,7 @@ import PlatformUtils from '@/utils/PlatformUtils'
 import AppService from '@/service/AppService'
 import UserService from '@/service/UserService'
 import TokenUtil from '@/utils/TokenUtil'
+import { notifyModule } from '@/plugins/store/index'
 
 //和终端相关的信息
 @Module({ generateMutationSetters: true })
@@ -72,18 +73,16 @@ export default class SystemModule extends VuexModule {
   //app启动的方法
   @Action
   async appLunchAction () {
-    // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
-    this.getSystemInfo()
-
     //校验更新
     PlatformUtils.checkUpdate()
-
     WebsocketUtil.websocketConnect(false)
     // appModule.initGlobalDataLoadAPI()
-    if (TokenUtil.hasToken()) {
-      UserService.getMineUserInitDataAction()
-    }
     AppService.getHomeLoadAfterData()
+    //如果有token获取
+    if (TokenUtil.hasToken()) {
+      //查询通知列表
+      notifyModule.queryNotifiesAction()
+    }
     // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
     // appModule.initGlobalDataReadyAPI()
     // 测试时使用，生产时在talk也ready后查询

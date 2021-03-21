@@ -651,23 +651,26 @@ export default class LoginVue extends Vue {
   async openTypeBtnClick (providerResult) {
     if (this.openTypeBtnEnable) {
       this.openTypeBtnEnable = false
-      //没用户，天王老子来了也只能先登录
-      if (!this.user) {
-        await this.providerLogin(providerResult, systemModule.provider)
-        //登录完成之后，只有为授权用户信息跳转会小程序
-        //如果不为三方授权、且没有手机号，则只可能是来绑定手机号的
-      } else if (!this.isAuthUser && !this.hasPhoneNum) {
-        //如果微信绑定手机号
-        await this.getPhoneNumberByWx(providerResult)
+      try {
+        //没用户，天王老子来了也只能先登录
+        if (!this.user) {
+          await this.providerLogin(providerResult, systemModule.provider)
+          //登录完成之后，只有为授权用户信息跳转会小程序
+          //如果不为三方授权、且没有手机号，则只可能是来绑定手机号的
+        } else if (!this.isAuthUser && !this.hasPhoneNum) {
+          //如果微信绑定手机号
+          await this.getPhoneNumberByWx(providerResult)
+        }
+        //只有为三方授权才调用
+        //如果授权用信息
+        //如果授权手机号
+        if (this.isThreeAuth) {
+          //如果点了按钮就会并授权，要不然也不会到这里
+          await this.authUserOrPhoneNum()
+        }
+      } finally {
+        this.openTypeBtnEnable = true
       }
-      //只有为三方授权才调用
-      //如果授权用信息
-      //如果授权手机号
-      if (this.isThreeAuth) {
-        //如果点了按钮就会并授权，要不然也不会到这里
-        await this.authUserOrPhoneNum()
-      }
-      this.openTypeBtnEnable = true
     }
   }
 

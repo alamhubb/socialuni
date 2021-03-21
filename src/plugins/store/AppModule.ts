@@ -11,6 +11,11 @@ import QingchiAPI from '@/api/QingchiAPI'
 import GenderType from '@/const/GenderType'
 import DevUserVO from '@/model/dev/DevUserVO'
 import DevUserAPI from '@/api/DevUserAPI'
+import { appModule } from '@/plugins/store/index'
+import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
+import ResultVO from '@/model/ResultVO'
+import ErrorCode from '@/const/ErrorCode'
+import UniUtil from '@/plugins/uni/UniUtil'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -51,6 +56,30 @@ export default class AppModule extends VuexModule {
   get isAuthPhone () {
     return this.isThreeAuth && this.threeAuthType === SocialAuthType.phone
   }
+
+  setThreeAuthInfo (params) {
+    if (params.referrerInfo) {
+      const info = params.referrerInfo
+      //获取三方的appid
+      appModule.threeAppId = info.appId
+      //如果有跳转信息
+      if (info.extraData) {
+        const extraData: SocialUniAuthVO = info.extraData
+        appModule.threeSecretKey = extraData.appSecretKey
+        appModule.threeUserId = extraData.appUserId
+        appModule.threeAuthType = extraData.authType
+        if (!appModule.threeSecretKey) {
+          const result: ResultVO<any> = new ResultVO<any>()
+          result.errorCode = ErrorCode.business
+          result.errorMsg = '社交联盟密钥错误'
+          result.success = false
+          UniUtil.showLoading('密钥错误，返回中...')
+          uni.navigateBackMiniProgram({ extraData: result })
+        }
+      }
+    }
+  }
+
 
   // actions
   @Action

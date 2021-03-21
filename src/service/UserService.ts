@@ -28,14 +28,14 @@ export default class UserService {
     //登录之后重连websocket
     WebsocketUtil.websocketClose()
     userModule.setUser(res.data.user)
+    notifyModule.queryNotifiesAction()
     return res.data.user
   }
 
   static getMineUserInitDataAction () {
-    return userModule.getMineUserAction().then(() => {
-      //查询通知列表
-      notifyModule.queryNotifiesAction()
-    })
+    if (TokenUtil.hasToken()) {
+      userModule.getMineUserAction()
+    }
   }
 
 
