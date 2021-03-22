@@ -1,10 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { appModule, systemModule } from '@/plugins/store'
-import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import UniUtil from '@/plugins/uni/UniUtil'
-import ResultVO from '@/model/ResultVO'
-import ErrorCode from '@/const/ErrorCode'
 import UserService from '@/service/UserService'
 
 export default Vue.extend({
@@ -32,6 +28,7 @@ export default Vue.extend({
     //页面启动，启动函数
     // systemModule.appInit()
   },
+  //@ts-ignore
   onShow (params) {
     appModule.setThreeAuthInfo(params)
   }

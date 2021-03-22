@@ -24,6 +24,8 @@ module.exports = {
     //reject可以不传递错误
     'prefer-promise-reject-errors': 0,
     '@typescript-eslint/camelcase': 0,
+    //可以使用ts-ignore
+    '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-inferrable-types': 0,

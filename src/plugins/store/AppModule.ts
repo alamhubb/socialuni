@@ -58,7 +58,7 @@ export default class AppModule extends VuexModule {
   }
 
   setThreeAuthInfo (params) {
-    if (params.referrerInfo) {
+    if (params && params.referrerInfo) {
       const info = params.referrerInfo
       //获取三方的appid
       appModule.threeAppId = info.appId
