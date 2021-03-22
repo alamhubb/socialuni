@@ -353,6 +353,7 @@ export default class TalkAddVue extends Vue {
     const count = this.imgMaxSize - this.showsImgSrcs.length
     UniUtil.chooseImage(count).then(imgFiles => {
       for (const imgFile of imgFiles) {
+        //前台记录用户上传的图片，点击发布的时候才保存到后台
         imgFile.src = ImgUtil.getTalkUploadFormat(this.user.id, imgFile.path)
         this.showsImgSrcs.push(imgFile)
       }

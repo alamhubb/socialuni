@@ -9,6 +9,7 @@ import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
 
 export default class CosUtil {
+  //向cos上传图片
   static postObject (imgFile: ImgFileVO, userId: string, cos = CosUtil.getAuthorizationCos(userId)) {
     return new Promise<any>((resolve, reject) => {
       cos.postObject({

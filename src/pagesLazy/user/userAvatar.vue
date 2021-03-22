@@ -64,6 +64,7 @@ export default class UserAvatarVue extends Vue {
     PageUtil.toMinePage()
   }
 
+  //点击上传按钮，上传图片，前端保存用户上传的图片
   chooseImg () {
     this.showBottomDialog = false
     uni.chooseImage({
@@ -82,6 +83,7 @@ export default class UserAvatarVue extends Vue {
         }
         // 获取文件名
         const filePath = imgFile.path
+        //生成图片的路径
         imgFile.src = ImgUtil.getUserAvatarUploadFormat(this.user.id, filePath)
         this.uploadImgFile = imgFile
         this.avatarUrl = imgFile.path

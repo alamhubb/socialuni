@@ -128,6 +128,7 @@ export default class UniUtil {
   }
 
 
+  //选择图片
   public static chooseImage (count = 1) {
     return new Promise<ImgFileVO[]>((resolve, reject) => {
       uni.chooseImage({
