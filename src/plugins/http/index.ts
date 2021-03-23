@@ -11,7 +11,7 @@ import AppUtilAPI from '@/api/AppUtilAPI'
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
   config.baseUrl = process.env.VUE_APP_BASE /* 根域名不同 */
-  config.timeout = 5 * 1000
+  config.timeout = 60 * 1000
   return config
 })
 http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
@@ -74,7 +74,7 @@ http.interceptor.response(
           } else {
             MsgUtil.systemErrorMsg()
           }
-          AppUtilAPI.sendErrorLogAPI(null, errorMsg)
+          AppUtilAPI.sendErrorLogAPI(error.config.url, errorMsg)
           break
       }
       return result // 返回接口返回的错误信息

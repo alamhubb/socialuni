@@ -6,11 +6,12 @@ import Alert from '@/utils/Alert'
 import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
+import AppUtilAPI from '@/api/AppUtilAPI'
 
 const socialHttp: Request = new Request()
 socialHttp.setConfig(config => { /* 设置全局配置 */
   config.baseUrl = process.env.VUE_APP_SOCAIL_ROOT_URL /* 根域名不同 */
-  config.timeout = 5 * 1000
+  config.timeout = 60 * 1000
   return config
 })
 socialHttp.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
@@ -41,6 +42,7 @@ socialHttp.interceptor.response(
     UniUtil.hideLoading()
     if (error.statusCode) {
       const result = error.data
+      let errorMsg = ''
       switch (error.statusCode) {
         case ErrorConst.not_logged:
         case ErrorConst.banned:
@@ -66,10 +68,12 @@ socialHttp.interceptor.response(
           break
         default:
           if (result && result.errorMsg) {
-            Alert.error(result.errorMsg)
+            errorMsg = result.errorMsg
+            Alert.error(errorMsg)
           } else {
             MsgUtil.systemErrorMsg()
           }
+          AppUtilAPI.sendErrorLogAPI(error.config.url, errorMsg)
           break
       }
       return result // 返回接口返回的错误信息
