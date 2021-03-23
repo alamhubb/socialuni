@@ -35,6 +35,7 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss">
+@import "./styles/color/index.css";
 @import "./styles/iconfont/index.css";
 @import "./styles/index.scss";
 </style>

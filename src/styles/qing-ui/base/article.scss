@@ -2,13 +2,13 @@
   @extend .bg-white;
   @extend .py-10px;
   @extend .px-15px;
-  @extend .text-lg;
+  @extend .font-md;
 }
 
 .article-bro {
   @extend .bg-white;
   @extend .px-15px;
-  @extend .text-lg;
+  @extend .font-md;
 }
 
 .article > view + view {
@@ -19,7 +19,7 @@
   @extend .bg-white;
   @extend .py-10px;
   @extend .px-15px;
-  @extend .text-lg;
+  @extend .font-md;
 }
 
 .article-row > view {

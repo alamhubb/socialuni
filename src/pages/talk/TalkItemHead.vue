@@ -8,7 +8,7 @@
     <view class="row-between flex-auto">
       <view>
         <view class="h25px row-col-center">
-          <text class="text-lgg" :class="{'color-red':talk.user.vipFlag}">{{talk.user.nickname}}</text>
+          <text class="font-mdg" :class="{'color-red':talk.user.vipFlag}">{{talk.user.nickname}}</text>
           <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm row-col-center"
                 :class="[getGenderBgColor(talk.user)]">
             {{talk.user.age}}

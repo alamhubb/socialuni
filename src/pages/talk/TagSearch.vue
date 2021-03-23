@@ -32,7 +32,7 @@
       <q-card class="solid-bottom">
         <q-card-row>
           <text class="cuIcon-title text-green"></text>
-          <text class="text-lg text-bold">历史话题</text>
+          <text class="font-md text-bold">历史话题</text>
         </q-card-row>
         <q-card-grid class="mt-sm">
           <view v-if="historyTags.length">
@@ -43,7 +43,7 @@
               {{tag.name}}
             </view>
           </view>
-          <view v-else class="pl-sm text-lg text-gray">
+          <view v-else class="pl-sm font-md text-gray">
             空
           </view>
         </q-card-grid>
@@ -79,7 +79,7 @@
                     </view>
                   </view>
                 </view>
-                <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+                <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
               </q-row-item>
             </view>
           </view>

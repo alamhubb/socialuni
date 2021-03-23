@@ -34,7 +34,7 @@
           />
           <view class="flex-auto row-between">
             <view class="flex-col flex-auto">
-              <view class="text-lg" :class="{'color-red':userProp.vipFlag}">
+              <view class="font-md" :class="{'color-red':userProp.vipFlag}">
                 {{ userProp.nickname }}
               </view>
               <view>
@@ -185,10 +185,10 @@
         <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-active"
                       @click="$pageUtil.toUserContactInfoPage">
                   <view class="row-col-center">
-                    <text class="text-lgg text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
+                    <text class="font-mdg text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
                   </view>
                   <view class="text-gray row-col-center pr-xs">
-                    <text class="text-lgg text-gray text-lgg">详情</text>
+                    <text class="font-mdg text-gray font-mdg">详情</text>
                     <q-icon class="text-gray" size="32" icon="arrow-right"/>
                   </view>
                 </view>-->
@@ -234,10 +234,10 @@
         <!--<view v-if="isMine" class="q-solid-top row-col-center row-between-center" @click="toUserShell">
           <view class="row-col-center">
             <q-icon class="text-green mr-xs" icon="mdi-bitcoin"/>
-            <text class="text-lgg">我的贝壳（{{ mineUser.shell }}）</text>
+            <text class="font-mdg">我的贝壳（{{ mineUser.shell }}）</text>
           </view>
           <view v-if="!isIos" class="text-gray row-col-center pr-xs">
-            <text class="text-lgg text-gray text-lgg">充值</text>
+            <text class="font-mdg text-gray font-mdg">充值</text>
             <q-icon class="text-gray" size="32" icon="arrow-right"/>
           </view>
         </view>-->

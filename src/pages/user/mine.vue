@@ -2,7 +2,7 @@
   <view class="bg-default h100p flex-col">
     <view v-if="user">
       <q-navbar class="q-solid-bottom">
-        <view class="ml-xl text-bold text-lg flex-auto">
+        <view class="ml-xl text-bold font-md flex-auto">
           个人资料
         </view>
         <view class="mr">
@@ -27,7 +27,7 @@
               <view class="row-col-center flex-auto">
                 消息设置
               </view>
-              <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>-->
           <q-row-item>
@@ -35,7 +35,7 @@
               <view class="row-col-center flex-auto">
                 意见反馈
               </view>
-              <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
@@ -43,7 +43,7 @@
               <view class="row-col-center flex-auto">
                 联系我们
               </view>
-              <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
@@ -51,7 +51,7 @@
               <view class="row-col-center flex-auto">
                 关于我们
               </view>
-              <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
@@ -59,7 +59,7 @@
               <view class="row-col-center flex-auto">
                 注销账号
               </view>
-              <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
           <q-row-item>
@@ -67,7 +67,7 @@
               <view class="row-col-center flex-auto">
                 退出登录
               </view>
-              <q-icon icon="arrow-right" class="text-lg margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
           <q-row>
@@ -106,7 +106,7 @@
               <view>申请</view>
             </q-row>
 
-            <q-row class="text-lg text-bold solid-bottom">
+            <q-row class="font-md text-bold solid-bottom">
               获取您的昵称、头像、地区及性别
             </q-row>
             <view class="flex-row py-sm solid-bottom">
@@ -119,7 +119,7 @@
                 <view class="row-between flex-auto">
                   <view>
                     <view class="h25px row-col-center">
-                      <text class="text-lgg">{{ user.nickname }}</text>
+                      <text class="font-mdg">{{ user.nickname }}</text>
                     </view>
                     <view class="text-gray text-sm h25px row-col-center">
                       清池个人信息
