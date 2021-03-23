@@ -38,7 +38,7 @@
                 {{ userProp.nickname }}
               </view>
               <view>
-                <view class="cu-tag radius text-df"
+                <view class="cu-tag radius font-df"
                       :class="[getGenderBgColor(userProp)]">
                   {{ userProp.age }}
                   <q-icon class="row-col-start ml-2px" size="14"
@@ -53,7 +53,7 @@
               <q-icon icon="edit-pen" size="24" class="mr-xs" @click="moreAction"/>
             </view>
             <view v-else-if="userProp.beFollow" class="row-col-center">
-              <view class="bg-default text-sm px-xs text-gray">
+              <view class="bg-default font-xs px-xs text-gray">
                 对方关注了您
               </view>
             </view>
@@ -62,17 +62,17 @@
         <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-auto" :class="{'row-around':isMine}">
             <view v-if="isMine" class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="text-xl text-bold text-black row-center">
+              <text class="font-lg font-bold text-black row-center">
                 {{ userProp.followNum }}
               </text>
-              <text class="text-sm text-gray">关注</text>
+              <text class="font-xs text-gray">关注</text>
             </view>
 
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="text-xl text-bold text-black row-center">
+              <text class="font-lg font-bold text-black row-center">
                 {{ userProp.fansNum }}
               </text>
-              <text class="text-sm text-gray">关注者</text>
+              <text class="font-xs text-gray">关注者</text>
             </view>
           </view>
 
@@ -160,7 +160,7 @@
           <!-- 为自己且未绑定-->
           <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
             未认证
-            <button class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+            <button class="mr-xs cu-btn sm bd-none font-xs bd-box-radius bg-orange"
                     @click="toIdentityAuth">认证
             </button>
           </view>
@@ -210,7 +210,7 @@
                       <text v-else class="mr-xs text-gray">已隐藏</text>
                       <u-switch v-model="mineUser.openContact" active-color="#00C853" @change="switchOpenContact"></u-switch>
                     </view>
-                    <button v-else class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                    <button v-else class="mr-xs cu-btn sm bd-none font-xs bd-box-radius bg-orange"
                             @click="openEditDialog">
                       填写联系方式
                     </button>
@@ -219,12 +219,12 @@
                     <view v-if="!userProp.openContact" class="mr-sm">
                       对方隐藏了联系方式
                     </view>
-                    <button v-else-if="userProp.showUserContact" class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                    <button v-else-if="userProp.showUserContact" class="mr-xs cu-btn sm bd-none font-xs bd-box-radius bg-orange"
                             @click="$util.textCopy(userProp.contactAccount)">
                       复制
                     </button>
                     <button v-else :disabled="showUserContactBtnDisabled"
-                            class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-blue"
+                            class="mr-xs cu-btn sm bd-none font-xs bd-box-radius bg-blue"
                             @click="shellPayForUserContact">
                       10 贝壳获取
                     </button>

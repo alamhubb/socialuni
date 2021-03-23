@@ -8,7 +8,7 @@
                     <view class="flex-auto">
                         <view :class="notify.vipFlag?'color-red':'color-blue-dark'" class="row-col-center py-mn">
                             <text>{{notify.nickname}}</text>
-                            <view v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm text-bold">
+                            <view v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm font-xs font-bold">
                                 VIP
                             </view>
                         </view>
@@ -25,8 +25,8 @@
                            :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)">
                     </image>
                 </view>
-                <view v-else class="size65 bg-gray text-df pl-4px row-all-center flex-none">
-                    <text class="text-df text-ellipsis-3">
+                <view v-else class="size65 bg-gray font-df pl-4px row-all-center flex-none">
+                    <text class="font-df text-ellipsis-3">
                         {{notify.replyContent}}
                     </text>
                 </view>

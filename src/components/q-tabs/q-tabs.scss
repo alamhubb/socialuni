@@ -1,6 +1,6 @@
 .active-line{
   background-color: #007aff;
-  height: 6rpx;
+  height: 3px;
   @extend .bd-radius;
 }
 
@@ -8,12 +8,12 @@
   color: #007aff;
 
   .q-tab {
-    @extend .text-xl;
-    @extend .text-bold;
+    @extend .font-lg;
+    @extend .font-bold;
 
     * {
-      @extend .text-xl;
-      @extend .text-bold;
+      @extend .font-lg;
+      @extend .font-bold;
     }
   }
 }

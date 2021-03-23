@@ -88,10 +88,10 @@
             </view>
           </view>
           <view v-else>
-            <view v-if="user" class="row-center h500px pt-100px text-bold text-gray font-md">
+            <view v-if="user" class="row-center h500px pt-100px font-bold text-gray font-md">
               您还没有关注其他人
             </view>
-            <view v-else class="row-center h500px pt-100px text-bold text-gray font-md" @click="toLoginVue">
+            <view v-else class="row-center h500px pt-100px font-bold text-gray font-md" @click="toLoginVue">
               您还没有登录，点击登录
             </view>
           </view>

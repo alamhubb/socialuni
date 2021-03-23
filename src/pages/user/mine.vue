@@ -2,7 +2,7 @@
   <view class="bg-default h100p flex-col">
     <view v-if="user">
       <q-navbar class="q-solid-bottom">
-        <view class="ml-xl text-bold font-md flex-auto">
+        <view class="ml-xl font-bold font-md flex-auto">
           个人资料
         </view>
         <view class="mr">
@@ -18,7 +18,7 @@
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">
         <view class="w65vw flex-col py-xl mt-xl h100r">
           <q-row>
-            <view class="row-center mt-xl text-bold text-xl w100r">
+            <view class="row-center mt-xl font-bold font-lg w100r">
               清池 app
             </view>
           </q-row>
@@ -84,7 +84,7 @@
             </view>
           </q-row>
           <q-row class="flex-auto col-end">
-            <view class="row-center text-bold pb-xl text-xl w100r">
+            <view class="row-center font-bold pb-xl font-lg w100r">
               <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>
             </view>
           </q-row>
@@ -99,14 +99,14 @@
 
     <!--    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
           <view v-if="user" class="pb-xl px-sm pt">
-            <q-row class="text-bold">
+            <q-row class="font-bold">
               <view class="mr">
                 集美小世界丨女孩生活分享交友
               </view>
               <view>申请</view>
             </q-row>
 
-            <q-row class="font-md text-bold solid-bottom">
+            <q-row class="font-md font-bold solid-bottom">
               获取您的昵称、头像、地区及性别
             </q-row>
             <view class="flex-row py-sm solid-bottom">
@@ -121,7 +121,7 @@
                     <view class="h25px row-col-center">
                       <text class="font-mdg">{{ user.nickname }}</text>
                     </view>
-                    <view class="text-gray text-sm h25px row-col-center">
+                    <view class="text-gray font-xs h25px row-col-center">
                       清池个人信息
                     </view>
                   </view>

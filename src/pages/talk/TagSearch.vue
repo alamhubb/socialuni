@@ -32,7 +32,7 @@
       <q-card class="solid-bottom">
         <q-card-row>
           <text class="cuIcon-title text-green"></text>
-          <text class="font-md text-bold">历史话题</text>
+          <text class="font-md font-bold">历史话题</text>
         </q-card-row>
         <q-card-grid class="mt-sm">
           <view v-if="historyTags.length">
@@ -61,7 +61,7 @@
           <view class="bg-white">
             <view class="q-row">
               <text class="cuIcon-title text-green margin-right-xs"></text>
-              <text class="text-bold">{{item.name}}</text>
+              <text class="font-bold">{{item.name}}</text>
             </view>
 
             <view if="item.childs">
@@ -74,7 +74,7 @@
                     <view>
                       {{tag.name}}
                     </view>
-                    <view class="text-gray text-xs text-ellipsis">
+                    <view class="text-gray font-mn text-ellipsis">
                       帖子：{{tag.talkCount}}
                     </view>
                   </view>

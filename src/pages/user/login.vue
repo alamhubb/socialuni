@@ -379,7 +379,7 @@
     <!-- 小程序平台-->
     <!--  #ifdef MP -->
     <!-- 小程序平台-->
-    <!--    <view class="text-black text-xl">未登录，点击登录按钮，进行登录操作</view>-->
+    <!--    <view class="text-black font-lg">未登录，点击登录按钮，进行登录操作</view>-->
     <!--  #ifdef MP-TOUTIAO -->
     <!--            头条平台和其他平台处理方式不同-->
     <!--    <button :disabled="disabledLoginBtn" @click="login" type="primary"-->
