@@ -36,7 +36,7 @@
           已选话题：
         </view>
         <view class="grid">
-          <view v-for="tag in selectTags" :key="tag.id" class="row-center pb-10px px-mn">
+          <view v-for="tag in selectTags" :key="tag.id" class="row-col-center pb-10px px-mn">
             <view class="q-tag q-round bg-pink-plain">
               #{{tag.name}}
               <q-icon v-if="tag.id" class="ml-5px" icon="close-circle-fill" size="16"

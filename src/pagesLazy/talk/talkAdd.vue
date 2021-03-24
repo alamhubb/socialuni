@@ -15,7 +15,7 @@
     <view v-show="!showSearch&&!showTagSearch&&!showTagAdd">
       <view class="px-smm py-sm">
         <textarea class="h140px w100p" :maxlength="200"
-                  placeholder="这是专属女生的小世界，和集美们畅所欲言吧！"
+                  placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
         />
@@ -69,8 +69,8 @@
         <view class="pb-sm">
           已选话题：
         </view>
-        <view class="grid">
-          <view v-for="tag in selectTags" :key="tag.id" class="row-center pb-10px px-mn">
+        <view class="row-grid">
+          <view v-for="tag in selectTags" :key="tag.id" class="pb-10px px-mn">
             <view class="q-tag q-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
               <q-icon v-if="tag.id" class="ml-5px" icon="close-circle-fill" size="16"
@@ -82,7 +82,7 @@
           热门话题：
         </view>
         <view class="row-wrap">
-          <view v-for="tag in unSelectTags" :key="tag.id" class="row-center pb-10px px-mn">
+          <view v-for="tag in unSelectTags" :key="tag.id" class="pb-10px px-mn">
             <view class="q-tag q-round bg-pink-plain" @click="checkTag(tag)">
               #{{ tag.name }}
             </view>

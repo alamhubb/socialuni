@@ -41,8 +41,8 @@
           </view>
         </q-bar>
         <view class="mt pb-sm">
-          <view class="row-center px-lg pt" v-if="genderDefault === '全部'">
-            <view class="w70px row-start">性别：</view>
+          <view class="row-center px pt" v-if="genderDefault === '全部'">
+            <view class="w50px row-start">性别：</view>
             <view>
               <radio-group @change="genderChange" class="flex-1">
                 <label v-for="report in genders" :key="report">
@@ -53,10 +53,10 @@
             </view>
           </view>
           <view class="mt-20px pb-xl pt">
-            <view class="row-between px-lg">
+            <view class="row-between px">
               <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
             </view>
-            <view class="px-lg">
+            <view class="px">
               <q-slider
                 :value="rangeValue"
                 :min="rangeMin"
