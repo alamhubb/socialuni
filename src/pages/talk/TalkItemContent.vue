@@ -5,7 +5,7 @@
     </text>
     <view v-if="talk.imgs.length" class="card-text-row mt-10px" @click="toTalkDetailVue">
       <image mode="aspectFill" class="card-text-img" v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
-             :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)+'rpx'}"
+             :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}"
              :src="getTalkSmallImgUrl(talk.user.id,img.src)"
              :show-menu-by-longpress="true"
              @click.stop="previewImage(index)"

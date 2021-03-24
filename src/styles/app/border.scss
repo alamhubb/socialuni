@@ -79,25 +79,25 @@
 }
 
 .bt-box-radius {
-  border-top-right-radius: 20rpx;
-  border-top-left-radius: 20rpx;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .btr {
-  border-top-right-radius: 30rpx;
-  border-top-left-radius: 30rpx;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
 }
 .btr-lg {
-  border-top-right-radius: 40rpx;
-  border-top-left-radius: 40rpx;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 .bd-box-radius {
-  border-radius: 20rpx;
+  border-radius: 10px;
 }
 
 .bg-top-radius{
-  border-top-left-radius: 40rpx;
-  border-top-right-radius: 40rpx;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 
@@ -106,31 +106,31 @@
 }
 
 .bd-green {
-  border: solid 1rpx #39b54a;
+  border: solid 1px #39b54a;
   color: #39b54a;
   @extend .bg-white;
 }
 
 
 .bd-orange {
-  border: solid 1rpx #f37b1d;
+  border: solid 1px #f37b1d;
   color: #f37b1d;
   @extend .bg-white;
 }
 
 .bd-red {
-  border: solid 1rpx #e54d42;
+  border: solid 1px #e54d42;
   color: #e54d42;
   @extend .bg-white;
 }
 .bd-gray {
-  border: solid 1rpx #aaaaaa;
+  border: solid 1px #aaaaaa;
   color: #aaaaaa;
   @extend .bg-white;
 }
 
 .bd-blue {
-  border: solid 1rpx #0081ff;
+  border: solid 1px #0081ff;
   color: #0081ff;
   @extend .bg-white;
 }
@@ -139,12 +139,12 @@
 }
 
 .bd-bl-radius {
-  border-bottom-left-radius: 10rpx;
+  border-bottom-left-radius: 5px;
 }
 
 .bd-r-radius {
-  border-top-right-radius: 10rpx;
-  border-bottom-right-radius: 10rpx;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 /*

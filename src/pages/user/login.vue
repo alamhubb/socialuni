@@ -3,7 +3,7 @@
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white col-all-center">
 
-    <div v-if="goBackCountDown" class="font-bold font-lg">
+    <div v-if="goBackCountDown" class="font-bold font-lgg">
       {{ authSuccess ? '授权成功' : '不授权' }}，
 
       {{ goBackCountDown }} 秒后返回...
@@ -18,8 +18,8 @@
       <!--      上半部，手机号登录展示-->
 
       <div class="flex-none col-row-center h80px">
-        <div class="font-xl font-bold">欢迎使用清池社交联盟授权</div>
-        <div v-if="showPhoneView" class="font-md u-type-warning mt-sm">建议使用微信 或 QQ一键登录</div>
+        <div class="font-xll font-bold">欢迎使用清池社交联盟授权</div>
+        <div v-if="showPhoneView" class="font-mdd u-type-warning mt-sm">建议使用微信 或 QQ一键登录</div>
       </div>
 
       <view class="mt">
@@ -116,7 +116,7 @@
             <template v-if="isThreeAuth">
               <!--    如果授权用户信息提示显示获取用户信息-->
               <template v-if="isAuthUser">
-                <view class="font-bold row-col-center pa-sm font-md">
+                <view class="font-bold row-col-center pa-sm font-mdd">
                   获取您的昵称、头像、地区、性别及动态
                 </view>
                 <!-- 如果为三方授权， 不为手机号授权， 如果有用户显示出来用的信息-->
@@ -124,7 +124,7 @@
                   <u-avatar class="mr-sm" :src="user.avatar" mode="square"></u-avatar>
                   <view class="col-around flex-1">
                     <view>{{ user.nickname }}</view>
-                    <view class="text-grey font-xs">微信个人信息</view>
+                    <view class="text-grey font-sm">微信个人信息</view>
                   </view>
                   <view class="col-center">
                     <u-icon name="checkmark" color="success" size="40"></u-icon>
@@ -133,7 +133,7 @@
               </template>
               <template v-else-if="isAuthPhone">
                 <!--            为授权手机号显示授权手机号-->
-                <view class="font-bold row-col-center pa-sm font-md">
+                <view class="font-bold row-col-center pa-sm font-mdd">
                   获取您清池绑定的手机号
                   <!--                如果有手机号显示-->
                   <!--                <text>：186*****595</text>-->

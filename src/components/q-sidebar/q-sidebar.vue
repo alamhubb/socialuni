@@ -1,7 +1,7 @@
 <template>
   <view :class="[uuid]" class="q-sidebar-box">
     <scroll-view class="flex-none h100p" :scroll-top="leftBoxScrollTop" scroll-y
-                 :style="{'width':leftBoxWidth+'rpx'}">
+                 :style="{'width':leftBoxWidth/2+'px'}">
       <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-left-item" :key="index"
             @click="leftMenuClick(index)"
       >

@@ -1,5 +1,5 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p bg-white">
+  <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <q-row-bar class="flex-none" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
@@ -33,7 +33,8 @@
 
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
-    <swiper class="flex-1 btr-lg px-sm bg-default" :current="swiperCurrent"
+    <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
+    <swiper class="flex-1" :current="swiperCurrent"
             :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
@@ -47,11 +48,12 @@
               @scroll.native="talksScrollEvent"
               @scroll="talksScrollEvent"
         >-->
-        <scroll-view class="h100p btr" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+        <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                      :lower-threshold="800"
                      @scroll="talksScrollEvent">
-          <view class="pt-xs bg-default"
-                v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+          <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+          <div class="pt-sm px-sm"
+               v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
             <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
               <talk-item :talk="talk"
                          :talk-tab-type="talkTabObj.type"
@@ -86,15 +88,15 @@
               <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
                              :contentText="loadMoreText"></uni-load-more>
             </view>
-          </view>
-          <view v-else>
-            <view v-if="user" class="row-center h500px pt-100px font-bold text-gray font-md">
+          </div>
+          <template v-else>
+            <view v-if="user" class="row-center h500px pt-100px font-bold text-gray font-mdd">
               您还没有关注其他人
             </view>
-            <view v-else class="row-center h500px pt-100px font-bold text-gray font-md" @click="toLoginVue">
+            <view v-else class="row-center h500px pt-100px font-bold text-gray font-mdd" @click="toLoginVue">
               您还没有登录，点击登录
             </view>
-          </view>
+          </template>
         </scroll-view>
       </swiper-item>
     </swiper>

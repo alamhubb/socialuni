@@ -343,33 +343,33 @@ export default {
 .slider-handle-block.decoration::before {
   position: absolute;
   content: '';
-  width: 6rpx;
-  height: 24rpx;
+  width: 3px;
+  height: 12px;
   top: 50%;
   left: 29%;
   transform: translateY(-50%);
   background: #eeedf2;
-  border-radius: 3rpx;
+  border-radius: 1px;
   z-index: 13;
 }
 
 .slider-handle-block.decoration::after {
   position: absolute;
   content: '';
-  width: 6rpx;
-  height: 24rpx;
+  width: 1px;
+  height: 12px;
   top: 50%;
   right: 29%;
   transform: translateY(-50%);
   background: #eeedf2;
-  border-radius: 3rpx;
+  border-radius: 1px;
   z-index: 13;
 }
 
 .range-tip {
   position: absolute;
   top: 0;
-  font-size: 24rpx;
+  font-size: 12px;
   color: #666;
   transform: translate(-50%, -100%);
 }

@@ -1,8 +1,8 @@
 <template>
   <view>
     <view class="article-row">
-      <view class="font-xl color-red">您当前的爱心值为：{{user.loveValue}}</view>
-      <view class="font-xl color-red">今日已获得爱心值：{{todayLoveValue}}
+      <view class="font-xll color-red">您当前的爱心值为：{{user.loveValue}}</view>
+      <view class="font-xll color-red">今日已获得爱心值：{{todayLoveValue}}
         <text v-if="todayLoveValue>=rewardedAdLimitLoveValue">
           ，已达到今日观看视频可获得爱心值的上限，将不再获得爱心值奖励
         </text>
@@ -10,7 +10,7 @@
     </view>
 
     <view class="article">
-      <view class="font-lg">1.用户每次观看视频广告
+      <view class="font-lgg">1.用户每次观看视频广告
         <text class="color-red">15</text>
         秒以上可获得
         <text class="color-red">10</text>
@@ -21,9 +21,9 @@
         <text class="color-red">{{rewardedAdLimit}}</text>
         次奖励
       </view>
-      <view class="font-lg">2.爱心值会展示在用户动态中</view>
-      <view class="font-lg">3.未来爱心值将支持更多使用方式</view>
-      <view class="font-lg">4.最终解释权归本公司所有</view>
+      <view class="font-lgg">2.爱心值会展示在用户动态中</view>
+      <view class="font-lgg">3.未来爱心值将支持更多使用方式</view>
+      <view class="font-lgg">4.最终解释权归本公司所有</view>
     </view>
     <view class="article-row">
       <button type="primary" @click="openAd">观看视频广告</button>
@@ -31,18 +31,18 @@
 
     <view class="article">
       <view class="row-center">--------------分割线--------其他说明--------------</view>
-      <view class="font-lg">为什么叫爱心值？</view>
+      <view class="font-lgg">为什么叫爱心值？</view>
       <view class="pt-0">
         用户每次观看15s获以上视频⼴告，我们都能收到一小笔微薄的广告商提供的广告费，观看广告可以算作用户对软件的支持，对本软件的发展献出的爱心，所以此功能称为爱心值。
       </view>
-      <view class="font-lg">本软件的理想</view>
+      <view class="font-lgg">本软件的理想</view>
       <view class="pt-0">
         本软件的理想是打造一个干净绿色年轻人热爱的交友社区，服务90%以上的年轻人，
         如果您觉得我们目前做的还可以，并期望我们能做的更好，欢迎点击观看广告按钮或者开通VIP功能，以表示您对我们的支持，献出您对我们的爱心，非常感谢您的支持与理解，比心
       </view>
-      <view class="font-lg">为什么要赚钱？</view>
+      <view class="font-lgg">为什么要赚钱？</view>
       <view class="pt-0">本软件目前尚未盈利，我们需要赚钱才能招聘设计人员，开发人员，购买服务器，完善软件和开发更好玩的功能，做出更好用的软件，更好的服务大家，追求理想</view>
-      <view class="font-lg">联系客服</view>
+      <view class="font-lgg">联系客服</view>
       <view class="pt-0">
         有任何问题与建议都可以联系客服微博：{{wbService}}，微信或qq:491369310
       </view>

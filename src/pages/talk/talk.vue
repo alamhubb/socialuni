@@ -75,7 +75,7 @@
       <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
       <!--  #endif -->
 
-      <talk-swipers v-if="configShowSwipers"></talk-swipers>
+      <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
       <tabs-talk class="flex-1" ref="tabsTalk"
                  :scroll-enable="scrollEnable"

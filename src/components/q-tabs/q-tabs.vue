@@ -47,7 +47,7 @@ export default class QTabs extends Vue {
         transform: 'translate(' + this.tabItemLefts[this.value] + 'px, -80%)',
         //首次不开启动画
         'transition-duration': this.firstLoadAfter ? '0.5s' : '0',
-        width: this.barWidth + 'rpx'
+        width: this.barWidth / 2 + 'px'
       }
     }
 
