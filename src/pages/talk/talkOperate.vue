@@ -32,7 +32,7 @@
             </label>
           </radio-group>
         </view>
-        <view class="uni-textarea bd-1 bd-radius">
+        <view class="uni-textarea bd-1 bd-radius-xs">
                     <textarea placeholder="其他违规必填，其他情况选填，可详细陈述观点" v-model.trim="reportContent"
                               :show-confirm-bar="false"
                     />

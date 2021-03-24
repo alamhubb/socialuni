@@ -1,7 +1,7 @@
 .card {
   @extend .bg-white;
   @extend .py-10px;
-  @extend .bd-radius;
+  @extend .bd-radius-sm;
 }
 
 .card-px {

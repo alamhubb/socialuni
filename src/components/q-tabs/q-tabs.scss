@@ -1,7 +1,7 @@
 .active-line{
   background-color: #007aff;
   height: 3px;
-  @extend .bd-radius;
+  @extend .bd-radius-xs;
 }
 
 .q-tab-item.active {
