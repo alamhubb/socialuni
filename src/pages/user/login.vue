@@ -137,7 +137,7 @@
                   获取您清池绑定的手机号
                   <!--                如果有手机号显示-->
                   <!--                <text>：186*****595</text>-->
-                  <text v-if="hasPhoneNum">：186*****595</text>
+                  <text v-if="hasPhoneNum">：{{user.phoneNum}}</text>
                 </view>
               </template>
               <!--  如果没有用户，展示提示请登录-->
