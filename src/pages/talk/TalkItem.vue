@@ -1,5 +1,5 @@
 <template>
-    <view v-if="talk" class="card mb-xss shadow" hover-class="uni-list-cell-hover">
+    <view v-if="talk" class="card mb-sm elevation-4" hover-class="uni-list-cell-hover">
         <talk-item-head :talk-prop="talk" :talk-tab-type="talkTabType" @deleteTalk="deleteTalk"/>
         <talk-item-content :talk="talk"/>
         <talk-item-comment v-if="!talk.globalTop || talk.globalTop===1" :talk-prop="talk"
