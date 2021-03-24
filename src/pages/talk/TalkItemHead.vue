@@ -58,7 +58,7 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue px-12px bg-white"
+        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue px-smm bg-white"
                 @click.stop="addFollow">
           关注
         </button>

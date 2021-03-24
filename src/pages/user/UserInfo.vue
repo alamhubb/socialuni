@@ -84,7 +84,7 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button class="cu-btn round bd-blue px-12px bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button class="cu-btn round bd-blue px-smm bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>
