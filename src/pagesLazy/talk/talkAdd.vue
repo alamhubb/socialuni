@@ -245,7 +245,7 @@ export default class TalkAddVue extends Vue {
   checkTag (tag: TagVO) {
     if (this.selectTags.length > 4) {
       // todo 后台还没有校验
-      Alert.info('最多选择5个话题')
+      Alert.hint('最多选择5个话题')
       return
     }
     let tagInTags: TagVO = this.tags.find(item => item.id === tag.id)
