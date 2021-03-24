@@ -1,7 +1,6 @@
 .q-nav-bar {
   @extend .w100p;
-  @extend .bg-white;
-  //@extend .bg-primary;
+  @extend .bg-main;
   @extend .position-fixed;
   @extend .nav-index;
 }

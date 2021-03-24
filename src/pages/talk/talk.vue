@@ -4,7 +4,7 @@
       <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
       ></tag-search>
     </view>
-    <view v-show="!showTagSearch" class="flex-col h100p">
+    <view v-show="!showTagSearch" class="flex-col h100p bg-main">
       <q-navbar class="flex-none">
         <q-search class="flex-auto" @click.native="openTagSearchVue">
           <q-icon class="mx-5px text-gray" size="16" icon="search"></q-icon>
