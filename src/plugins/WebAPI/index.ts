@@ -7,6 +7,9 @@ import { configModule, userModule } from '@/plugins/store'
 import MsgUtil from '@/utils/MsgUtil'
 import UserService from '@/service/UserService'
 import Alert from '@/utils/Alert'
+import ErrorConst from '@/const/ErrorConst'
+import Toast from '@/utils/Toast'
+import AppUtilAPI from '@/api/AppUtilAPI'
 
 
 const WebAPI: Request = new Request()
@@ -25,30 +28,37 @@ WebAPI.interceptor.response(
     UniUtil.hideLoading()
     if (error.statusCode) {
       const result = error.data
+      let errorMsg = ''
       switch (error.statusCode) {
-        case ErrorCode.not_logged:
+        case ErrorConst.not_logged:
+        case ErrorConst.banned:
           // 理论上不需要，因为token不会失效，也不会错误
           // 已知可能，切换环境导致token不同
           UserService.clearUserInfoCom()
-          MsgUtil.unLoginMessage()
-          break
-        case ErrorCode.banned:
-          UserService.clearUserInfoCom()
-          if (result) {
-            Alert.error(result.errorMsg)
+          if (result && result.errorMsg) {
+            Toast.toastLong(result.errorMsg)
+          }
+          if (result && result.errorMsg) {
+            Toast.toastLong(result.errorMsg)
           } else {
-            const msg: string = configModule.systemError605
-            Alert.error(msg)
+            if (ErrorConst.not_logged === error.statusCode) {
+              MsgUtil.unLoginMessage()
+            } else {
+              const msg: string = configModule.systemError605
+              Toast.toastLong(msg)
+            }
           }
           break
-        case ErrorCode.custom:
+        case ErrorConst.custom:
           break
         default:
-          if (result) {
-            Alert.error(result.errorMsg)
+          if (result && result.errorMsg) {
+            errorMsg = result.errorMsg
+            Toast.toastLong(errorMsg)
           } else {
             MsgUtil.systemErrorMsg()
           }
+          AppUtilAPI.sendErrorLogAPI(error.config.url, errorMsg)
           break
       }
       return result // 返回接口返回的错误信息

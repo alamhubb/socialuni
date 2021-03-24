@@ -143,7 +143,7 @@ export default class UniUtil {
             // 获取压缩比
             const imgSize: number = imgFile.size
             if (imgSize / 1024 / 1024 > 10) {
-              Alert.error(AppMsg.imgSizeNotGt10MBMsg)
+              Toast.toastLong(AppMsg.imgSizeNotGt10MBMsg)
               reject(AppMsg.imgSizeNotGt10MBMsg)
             }
             let ratio: number = 100

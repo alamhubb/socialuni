@@ -42,6 +42,7 @@ import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
 import Alert from '../utils/Alert'
 import MsgUtil from '@/utils/MsgUtil'
+import Toast from '@/utils/Toast'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')
@@ -71,7 +72,7 @@ export default class MsgInput extends Vue {
         // 申请订阅
         PlatformUtils.requestSubscribeComment()
       } else {
-        Alert.error('不能发表内容为空的评论')
+        Toast.toast('不能发表内容为空的评论')
       }
     } else {
       MsgUtil.unBindPhoneNum()

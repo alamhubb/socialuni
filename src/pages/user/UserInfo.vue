@@ -531,13 +531,13 @@ export default class UserInfo extends Vue {
         })
       })
     } else {
-      Alert.error('请至少保留一张照片')
+      Toast.toastLong('请至少保留一张照片')
     }
   }
 
   chooseImg () {
     if (this.mineUser.imgs.length > 2) {
-      Alert.error('最多上传3张照片，请删除后继续！')
+      Toast.toastLong('最多上传3张照片，请删除后继续！')
       return
     }
     UniUtil.chooseImage(1).then(imgFiles => {

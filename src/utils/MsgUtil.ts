@@ -35,7 +35,7 @@ export default class MsgUtil {
   }
 
   static systemErrorMsg () {
-    Alert.error(configModule.systemError604)
+    Toast.toastLong(configModule.systemError604)
   }
 
   static unUploadImg () {

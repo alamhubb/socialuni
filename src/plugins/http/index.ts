@@ -7,6 +7,7 @@ import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
+import Toast from '@/utils/Toast'
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
@@ -39,7 +40,6 @@ http.interceptor.response(
     return response.data
   },
   error => {
-    console.log(error)
     UniUtil.hideLoading()
     if (error.statusCode) {
       const result = error.data
@@ -51,17 +51,17 @@ http.interceptor.response(
           // 已知可能，切换环境导致token不同
           UserService.clearUserInfoCom()
           if (result && result.errorMsg) {
-            Alert.error(result.errorMsg)
+            Toast.toastLong(result.errorMsg)
           }
 
           if (result && result.errorMsg) {
-            Alert.error(result.errorMsg)
+            Toast.toastLong(result.errorMsg)
           } else {
             if (ErrorConst.not_logged === error.statusCode) {
               MsgUtil.unLoginMessage()
             } else {
               const msg: string = configModule.systemError605
-              Alert.error(msg)
+              Toast.toastLong(msg)
             }
           }
           break
@@ -70,7 +70,7 @@ http.interceptor.response(
         default:
           if (result && result.errorMsg) {
             errorMsg = result.errorMsg
-            Alert.error(errorMsg)
+            Toast.toastLong(errorMsg)
           } else {
             MsgUtil.systemErrorMsg()
           }

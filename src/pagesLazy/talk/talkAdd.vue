@@ -138,6 +138,7 @@ import Alert from '../../utils/Alert'
 import LocationUtil from '@/utils/LocationUtil'
 import ContentVisibleType from '@/const/ContentVisibleType'
 import EnumStrVO from '@/const/EnumStrVO'
+import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -302,7 +303,7 @@ export default class TalkAddVue extends Vue {
       // 申请订阅
       PlatformUtils.requestSubscribeTalk()
     } else {
-      Alert.error('不能发布文字和图片均为空的动态')
+      Toast.toastLong('不能发布文字和图片均为空的动态')
       this.buttonDisabled = false
     }
   }
