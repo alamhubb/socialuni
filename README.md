@@ -38,7 +38,7 @@ uniapp chat Community Dating Social app
     * 多款社交软件使用同一后台，抽象提取公共业务，分离自定义业务，通过配置方式，开发者自己选择是否支持某些功能，并且将后台业务与前台业务配合，方便使用者快速开发。
 3. 社交数据互通计划
     * 此处为最具争议的功能，关于实现策略和计划，讨论了两个问题，
-    ####  * 以下两点详细内容，请参考 [关于社交联盟app间数据互通交换的可行性讨论、计划 ](https://github.com/qingchiapp/qingchi-uni/issues/38)  
+    ####  * 以下两点详细内容，请参考 [关于社交联盟app间数据互通交换的可行性讨论、计划 ](https://gitee.com/social-uni/qingchi-uni/issues/38)  
     * 一、为什么联盟成员愿意分享数据，给成员带来了哪些好处？
     * 二、如何实现数据互通交换？
 4. 社交sdk计划
@@ -104,11 +104,11 @@ app已上架，应用宝、360、oppo、vivo、小米、阿里应用中心，大
 插件仅支持git方式下载，不支持zip方式，详细配置手册请参考 [详细配置手册](https://shejiao.qingchiapp.com/configGuide/)
 
 ### 前端源码地址
-[清池前端项目 git地址 qingchi-uni](https://github.com/qingchiapp/qingchi-uni.git)
+[清池前端项目 git地址 qingchi-uni](https://github.com/social-uni/qingchi-uni.git)
 
 ### 后端源码地址
-* [清池后端web项目 git地址 qingchi-web](https://github.com/qingchiapp/qingchi-web.git)
-* [清池后端基础服务项目 git地址 qingchi-base](https://github.com/qingchiapp/qingchi-base.git)
+* [清池后端web项目 git地址 qingchi-web](https://github.com/social-uni/qingchi-web.git)
+* [清池后端基础服务项目 git地址 qingchi-base](https://github.com/social-uni/qingchi-base.git)
 #### Project setup
 ```
 npm install
