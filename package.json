@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-typescript": "^7.10.1",
-    "@dcloudio/types": "*",
+    "@dcloudio/types": "^2.0.23",
     "@dcloudio/uni-automator": "^2.0.0-27920200618002",
     "@dcloudio/uni-cli-shared": "^2.0.0-27920200618002",
     "@dcloudio/uni-migration": "^2.0.0-27920200618002",
@@ -103,8 +103,8 @@
     "jest": "^25.4.0",
     "mini-types": "*",
     "miniprogram-api-typings": "*",
-    "qq-miniprogram-api-typings": "^1.0.3",
     "postcss-comment": "^2.0.0",
+    "qq-miniprogram-api-typings": "^1.0.3",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
     "vue-template-compiler": "^2.6.11"

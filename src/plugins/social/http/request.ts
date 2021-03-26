@@ -8,6 +8,7 @@
  * http://ext.dcloud.net.cn/plugin?id=392
  */
 import ResultVO from '@/model/ResultVO'
+import RequestOptions = UniApp.RequestOptions
 
 interface header { // header 接口
   'Content-Type'?: string;
@@ -157,7 +158,7 @@ export default class Request {
       }
       _config = { ...this.requestBeforeFun(_options, cancel) }
       if (!next) return
-      uni.request(_config)
+      uni.request(_config as RequestOptions)
     })
   }
 

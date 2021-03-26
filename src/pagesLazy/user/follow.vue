@@ -34,7 +34,7 @@ export default class FollowVue extends Vue {
     fansUsers: UserVO[] = []
 
     onLoad () {
-      uni.startPullDownRefresh()
+      uni.startPullDownRefresh(null)
     }
 
     queryUserFollows () {

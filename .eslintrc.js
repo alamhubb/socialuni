@@ -38,6 +38,7 @@ module.exports = {
     UniApp: true,
     plus: true,
     $util: true,
-    $pageUtil: true
+    $pageUtil: true,
+    uniCloud: true
   }
 }
