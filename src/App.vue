@@ -11,6 +11,12 @@ export default Vue.extend({
     // appModule.threeUserId = '10081'
     // appModule.threeAuthType = SocialAuthType.phone
     // Toast.toastLong('正确版本')
+    // promise方式
+    /*uniCloud.callFunction({
+      name: 'getUser',
+      data: { a: 1 }
+    })*/
+
     //如果有跳转信息
     appModule.setThreeAuthInfo(params)
     //无论如何都要获取当前用户信息
