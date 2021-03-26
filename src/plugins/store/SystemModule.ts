@@ -5,7 +5,6 @@ import PlatformType from '@/const/PlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
 import AppService from '@/service/AppService'
-import UserService from '@/service/UserService'
 import TokenUtil from '@/utils/TokenUtil'
 import { notifyModule } from '@/plugins/store/index'
 
