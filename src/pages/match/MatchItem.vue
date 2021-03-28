@@ -1,7 +1,7 @@
 <template>
   <view class="line-height-1 elevation-4 radius mb-8px pb-4px bg-white">
-    <image class="radius max-h300px"
-           mode="aspectFill" :style="{'height':user.imgs[0].height+'px'}"
+    <image class="radius w100p"
+           mode="aspectFill" :style="{'height':user.imgs[0].height+'rpx'}"
            :src="getSmallUserImg(user.imgs[0].src)"
            @click="showUserChange(user)"></image>
     <view class="px-10px">
@@ -15,7 +15,7 @@
           <span v-else class="text-gray ml-3px text-sm">{{ user.lastOnlineTime|formatTime }}</span>
         </view>
       </view>
-      <view class="row-between">
+      <view class="row-between pb-xs">
         <view>
           <!--                展示列表和你喜欢的-->
           <!--                颜值只用来规范你能不能喜欢人家，你可以看到所有人，简单点来，先只算颜值，啥也不按 就按时间排序，在线时间-->
@@ -23,17 +23,17 @@
           <view class="cu-tag sm radius text-sm"
                 :class="[getGenderBgColor(user)]">
             {{ user.age }}
-            <q-icon class="row-col-start ml-2px" size="24"
+            <q-icon class="row-col-start ml-2px" size="12"
                     :icon="getGenderIcon(user)"/>
           </view>
           <view v-if="user.vipFlag" class="cu-tag radius bg-red sm text-sm text-bold" @click="openVip">VIP
           </view>
-          <view class="cu-tag bg-orange radius sm text-sm" @click.stop="toFaceValuePage">
+<!--          <view class="cu-tag bg-orange radius sm text-sm" @click.stop="toFaceValuePage">
             颜值:{{ user.faceRatio }}
-          </view>
+          </view>-->
         </view>
         <view>
-          <q-icon addClass="mdi-rotate-90" size="24" icon="more-dot-fill" @click="openReportDialog"></q-icon>
+          <q-icon addClass="mdi-rotate-90" size="12" icon="more-dot-fill" @click="openReportDialog"></q-icon>
         </view>
       </view>
     </view>

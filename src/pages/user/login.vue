@@ -137,7 +137,7 @@
                   获取您清池绑定的手机号
                   <!--                如果有手机号显示-->
                   <!--                <text>：186*****595</text>-->
-                  <text v-if="hasPhoneNum">：{{user.phoneNum}}</text>
+                  <text v-if="hasPhoneNum">：{{ user.phoneNum }}</text>
                 </view>
               </template>
               <!--  如果没有用户，展示提示请登录-->
@@ -230,11 +230,12 @@
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <button v-if="!user" :disabled="!openTypeBtnEnable"
                       open-type="getUserInfo"
+                      :class="isMpWX?'bg-gradual-wx':'bg-gradual-qq'"
                       class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
                       @getuserinfo="openTypeBtnClick">
                 <u-icon color="white" name="weixin-fill" size="42"
                         class="mr-xs"></u-icon>
-                微信登录 {{ isAuthUser ? '并授权' : '' }}
+                {{ isMpWX ? '微信' : 'QQ' }}登录 {{ isAuthUser ? '并授权' : '' }}
               </button>
               <template v-else>
                 <button v-if="isAuthUser || isAuthPhone&&hasPhoneNum" :disabled="!openTypeBtnEnable"
@@ -255,7 +256,7 @@
                     授权手机号
                   </template>
                 </button>
-                <button v-else-if="!hasPhoneNum" :disabled="!openTypeBtnEnable"
+                <button v-else-if="isMpWX&&!hasPhoneNum" :disabled="!openTypeBtnEnable"
                         open-type="getPhoneNumber"
                         class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
                         @getphonenumber="openTypeBtnClick">
@@ -440,6 +441,8 @@ export default class LoginPage extends Vue {
   @configStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
   @configStore.Getter(ConfigMap.qqServiceKey) qqService: string
   @systemStore.State('isMp') isMp: boolean
+  // @systemStore.State('isMpQQ') isMpQQ: boolean
+  @systemStore.State('isMpWX') isMpWX: boolean
 
   //三方授权相关
   @appStore.State('threeUserId') threeUserId: string

@@ -7,6 +7,7 @@ import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
 import Toast from '@/utils/Toast'
+import Alert from '@/utils/Alert'
 
 const socialHttp: Request = new Request()
 socialHttp.setConfig(config => { /* 设置全局配置 */
@@ -50,17 +51,13 @@ socialHttp.interceptor.response(
           // 已知可能，切换环境导致token不同
           UserService.clearUserInfoCom()
           if (result && result.errorMsg) {
-            Toast.toastLong(result.errorMsg)
-          }
-
-          if (result && result.errorMsg) {
-            Toast.toastLong(result.errorMsg)
+            Alert.hint(result.errorMsg)
           } else {
             if (ErrorConst.not_logged === error.statusCode) {
               MsgUtil.unLoginMessage()
             } else {
               const msg: string = configModule.systemError605
-              Toast.toastLong(msg)
+              Alert.hint(msg)
             }
           }
           break
@@ -69,7 +66,7 @@ socialHttp.interceptor.response(
         default:
           if (result && result.errorMsg) {
             errorMsg = result.errorMsg
-            Toast.toastLong(errorMsg)
+            Alert.hint(errorMsg)
           } else {
             MsgUtil.systemErrorMsg()
           }

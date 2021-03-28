@@ -394,11 +394,11 @@ export default class MessagePage extends Vue {
         if (item && item.id) {
           return item.id
         } else {
-          return 0
+          return null
         }
       })
     }
-    return [0]
+    return []
   }
 
   queryMessages () {

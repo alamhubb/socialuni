@@ -66,7 +66,7 @@
 
             <view if="item.childs">
               <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
-                <view class="row-col-center" @click.stop>
+                <view class="row-col-center can-click" @click.stop="change(tag)">
                   <image class="cu-avatar radius lg flex-none"
                          :src="tag.avatar"
                   />

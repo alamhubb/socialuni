@@ -8,6 +8,14 @@
   },
   "pages": [
     {
+      "path": "pages/match/match",
+      "style": {
+        "navigationBarTitleText": "匹配",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 800
+      }
+    },
+    {
       "path": "pages/chat/chat",
       "style": {
         "navigationBarTitleText": "消息",
@@ -24,14 +32,6 @@
       "path": "pages/user/login",
       "style": {
         "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/match/match",
-      "style": {
-        "navigationBarTitleText": "匹配",
-        "enablePullDownRefresh": true,
-        "onReachBottomDistance": 800
       }
     },
     {
@@ -165,6 +165,12 @@
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "社区"
+      },
+      {
+        "pagePath": "pages/match/match",
+        "iconPath": "static/img/favorite-gray-36dp.png",
+        "selectedIconPath": "static/img/favorite-blue-36dp.png",
+        "text": "匹配"
       },
       {
         "pagePath": "pages/chat/chat",

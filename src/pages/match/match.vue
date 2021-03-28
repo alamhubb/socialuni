@@ -1,25 +1,25 @@
 <template>
-  <view class="h100p bg-default">
+  <view class="h100p bg-default flex-col">
     <q-model v-if="showUser" class="bg-white h100p">
       <scroll-view scroll-y class="h100p bg-gray">
         <user-info v-if="showUser" :user.sync="showUser"></user-info>
         <!--            发表动态按钮-->
         <view v-if="showUser"
-              class="position-fixed fixed-index b-30px row-around row-between-center w100vw px-20px">
+              class="position-fixed fixed-index b-30px row-around row-between-center w100p px-20px">
           <button class="cu-btn lg bg-blue cuIcon">
-            <q-icon size="42" icon="arrow-leftward" @click="hideShowUser"></q-icon>
+            <q-icon size="21" icon="arrow-leftward" @click="hideShowUser"></q-icon>
           </button>
           <button v-if="showLick" class="cu-btn lg bg-white bd-gray cuIcon" @click="unLickUser">
-            <q-icon size="48" icon="close" class="text-gray"></q-icon>
+            <q-icon size="24" icon="close" class="text-gray"></q-icon>
           </button>
           <button v-if="showLick" class="cu-btn lg bg-pink cuIcon" @click="likeUser">
-            <q-icon size="50" icon="heart"></q-icon>
+            <q-icon size="25" icon="heart"></q-icon>
           </button>
         </view>
       </scroll-view>
     </q-model>
 
-    <view class="w100vw cu-bar bg-white position-fixed fixed-index top-0">
+    <view class="w100p cu-bar bg-white position-fixed fixed-index top-0">
       <view class="bg-white nav">
         <view class="cu-item" :class="all===matchType?'text-blue cur':''"
               @tap="switchMatchType" :data-id="all">
@@ -35,7 +35,7 @@
         <text>在线：{{ onlineUsersCount }}人</text>
       </view>
     </view>
-    <view v-if="showMatchHintKey" class="mt-xl2 row-col-center bg-orange">
+    <view v-if="showMatchHintKey" class="mt-xl row-col-center bg-orange">
       <view class="flex-auto card-text-row">
         匹配规则：在个人信息页面进行照片认证后才可使用匹配功能，互相喜欢后可开启聊天。
       </view>
@@ -47,17 +47,19 @@
         <view>{{leftHeight}}</view>
         <view>{{rightHeight}}</view>
     </view>-->
-    <view class="flex-row w100vw">
-      <view class="w180px ma-4px">
-        <match-item v-for="user in leftAry" :user="user" :key="user.id" @deleteMatchUser="deleteLeftMatchUser"
-                    @showUser="showLeftUserChange"></match-item>
+    <div class="flex-col pb-50px">
+      <view class="flex-row w100p mb-sm flex-1">
+        <view class="w180px ma-4px">
+          <match-item v-for="user in leftAry" :user="user" :key="user.id" @deleteMatchUser="deleteLeftMatchUser"
+                      @showUser="showLeftUserChange"></match-item>
+        </view>
+        <view class="w180px ma-4px">
+          <match-item v-for="user in rightAry" :user="user" :key="user.id" @deleteMatchUser="deleteRightMatchUser"
+                      @showUser="showRightUserChange"></match-item>
+        </view>
       </view>
-      <view class="w180px ma-4px">
-        <match-item v-for="user in rightAry" :user="user" :key="user.id" @deleteMatchUser="deleteRightMatchUser"
-                    @showUser="showRightUserChange"></match-item>
-      </view>
-    </view>
-    <uni-load-more :status="loadMore"></uni-load-more>
+      <uni-load-more :status="loadMore"></uni-load-more>
+    </div>
   </view>
 </template>
 
@@ -133,7 +135,8 @@ export default class MatchPage extends Vue {
   }
 
   startPullDownRefresh () {
-    uni.startPullDownRefresh(null)
+    console.log(123)
+    uni.startPullDownRefresh({})
   }
 
   onPullDownRefresh () {
@@ -175,6 +178,7 @@ export default class MatchPage extends Vue {
         this.loadMore = LoadMoreType.noMore
       }
     }).catch(() => {
+      this.loadMore = LoadMoreType.more
       this.stopPullDownRefresh()
     })
   }
@@ -192,7 +196,7 @@ export default class MatchPage extends Vue {
     if (this.matchUsers.length) {
       return this.matchUsers.map(item => item.id)
     }
-    return [0]
+    return []
   }
 
   get isMine (): boolean {
