@@ -34,11 +34,11 @@
           />
           <view class="flex-auto row-between">
             <view class="flex-col flex-auto">
-              <view class="font-md" :class="{'color-red':userProp.vipFlag}">
+              <view class="text-md" :class="{'color-red':userProp.vipFlag}">
                 {{ userProp.nickname }}
               </view>
               <view>
-                <view class="cu-tag radius font-df"
+                <view class="cu-tag radius text-df"
                       :class="[getGenderBgColor(userProp)]">
                   {{ userProp.age }}
                   <q-icon class="row-col-start ml-2px" size="14"
@@ -53,7 +53,7 @@
               <q-icon icon="edit-pen" size="24" class="mr-xs" @click="moreAction"/>
             </view>
             <view v-else-if="userProp.beFollow" class="row-col-center">
-              <view class="bg-default font-sm px-xs text-gray">
+              <view class="bg-default text-sm px-xs text-gray">
                 对方关注了您
               </view>
             </view>
@@ -62,17 +62,17 @@
         <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-auto" :class="{'row-around':isMine}">
             <view v-if="isMine" class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="font-lg font-bold text-black row-center">
+              <text class="text-lg font-bold text-black row-center">
                 {{ userProp.followNum }}
               </text>
-              <text class="font-sm text-gray">关注</text>
+              <text class="text-sm text-gray">关注</text>
             </view>
 
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="font-lg font-bold text-black row-center">
+              <text class="text-lg font-bold text-black row-center">
                 {{ userProp.fansNum }}
               </text>
-              <text class="font-sm text-gray">关注者</text>
+              <text class="text-sm text-gray">关注者</text>
             </view>
           </view>
 
@@ -160,7 +160,7 @@
           <!-- 为自己且未绑定-->
           <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
             未认证
-            <button class="mr-xs cu-btn sm bd-none font-sm bd-box-radius bg-orange"
+            <button class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
                     @click="toIdentityAuth">认证
             </button>
           </view>

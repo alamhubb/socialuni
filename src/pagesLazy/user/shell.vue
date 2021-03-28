@@ -3,30 +3,30 @@
     <q-row v-if="user">
       <view class="row-col-center">
         <q-icon class="text-green" size="50" icon="mdi-bitcoin"/>
-        <text class="ml-xs font-md font-bold">
+        <text class="ml-xs text-md font-bold">
           贝壳余额：
         </text>
       </view>
-      <text class="row-col-center font-md font-bold">
+      <text class="row-col-center text-md font-bold">
         {{user.shell}}
       </text>
     </q-row>
     <q-row>
-      <text class="font-md font-bold">
+      <text class="text-md font-bold">
         充值：
       </text>
     </q-row>
     <view class="px">
       <u-subsection :list="payValues" :current="0" @change="switchAmount"></u-subsection>
       <view class="pt-sm">
-        <view class="font-md">
+        <view class="text-md">
           提示：1元 = 10贝壳，可用于获取他人联系方式，一但交易成功，不支持退款，请谨慎付款
           <!--，并赠送与贝壳数量同等的等级积分。详细介绍请点 -
           <q-icon class="text-gray" icon="arrow-right" size="32"></q-icon>
           <text class="font-bold">贝壳介绍</text>-->
         </view>
       </view>
-      <button class="bg-green-light text-white font-md bd-none mt bg-active round" @click="userPay">
+      <button class="bg-green-light text-white text-md bd-none mt bg-active round" @click="userPay">
         <!--  #ifdef MP -->
         充值
         <!--  #endif -->
@@ -37,7 +37,7 @@
     </view>
     <q-row>
       <view class="w100p flex-col">
-        <view class="font-lg font-bold">
+        <view class="text-lg font-bold">
           历史获得和消费记录：
         </view>
         <view class="pt-xs">
@@ -55,7 +55,7 @@
               </u-tr>
             </u-table>
           </view>
-          <view v-else class="font-md text-gray row-center">暂无</view>
+          <view v-else class="text-md text-gray row-center">暂无</view>
         </view>
       </view>
     </q-row>

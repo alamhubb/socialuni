@@ -9,14 +9,14 @@
       <view>
         <view class="h25px row-col-center">
           <text class="font-mdg" :class="{'color-red':talk.user.vipFlag}">{{talk.user.nickname}}</text>
-          <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius font-sm row-col-center"
+          <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm row-col-center"
                 :class="[getGenderBgColor(talk.user)]">
             {{talk.user.age}}
             <q-icon class="ml-nn"
                     size="12"
                     :icon="getGenderIcon(talk.user)"/>
           </view>
-          <view v-if="talk.user.vipFlag" class="ml-5px cu-tag bg-red radius sm font-sm font-bold"
+          <view v-if="talk.user.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm font-bold"
                 @click.stop="openVip">
             VIP
           </view>
@@ -43,7 +43,7 @@
             </view>
           </view>
         </view>
-        <view class="text-gray font-sm h25px row-col-center">
+        <view class="text-gray text-sm h25px row-col-center">
 <!--          最新回复：{{talk.updateTime| formatTime}}-->
           <view v-if="talk.globalTop" class="ml-5px sm cu-tag round bg-red light">
             官方

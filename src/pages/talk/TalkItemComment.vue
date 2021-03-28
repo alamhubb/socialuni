@@ -13,7 +13,7 @@
       <view class="row-end flex-auto">
         <!--                hover-class="uni-list-cell-hover"-->
         <view class="row-all-center">
-          <view @click="addHug" class="font-df line-height-1 row-all-center px-0 border-none">
+          <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
             <text>
               抱抱
             </text>
@@ -38,7 +38,7 @@
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
             <view class="flex-row py-mn" @click="toTalkDetailVue">
-              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue-light'"
+              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue-dark'"
                     @click.stop="toUserDetail(comment.user.id)">
                 {{comment.user.nickname}}
               </view>
