@@ -9,8 +9,7 @@
       </view>
     </view>
 
-
-    <scroll-view scroll-y="true" class="cu-chat h100p"
+    <scroll-view :scroll-y="true" class="cu-chat h100p"
                  @scrolltoupper="upper"
                  :upper-threshold="upperThreshold"
                  :show-scrollbar="true"
@@ -211,7 +210,7 @@ const userStore = namespace('user')
 @Component({
   components: { ReportDialog, TalkItem }
 })
-export default class MessageVue extends Vue {
+export default class MessagePage extends Vue {
   public $refs!: {
     reportDialog: any;
     messageMoreHandleDialog: any;

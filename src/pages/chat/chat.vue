@@ -20,7 +20,7 @@
     <!--    <view v-show="false">
           {{ chatsUnreadNumTotal }}
         </view>-->
-    <view class="cu-list menu-avatar">
+    <view class="cu-list menu-avatar pb-50px">
       <view v-for="chat in showChats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
         <image class="cu-avatar radius lg" :src="chat.avatar"/>
@@ -99,7 +99,6 @@ export default class ChatPage extends Vue {
   onLoad () {
     UniUtil.showShareMenu()
     //需要先清除，再跳转页面
-    chatModule.setChatIdToMessagePage(21)
   }
 
   onPullDownRefresh () {
