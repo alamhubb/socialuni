@@ -76,12 +76,14 @@ import MatchType from '@/const/MatchType'
 import Toast from '@/utils/Toast'
 import UniUtil from '@/plugins/uni/UniUtil'
 import MsgUtil from '@/utils/MsgUtil'
+import QModel from '@/components/q-model/q-model.vue'
 
 const appStore = namespace('app')
 const userStore = namespace('user')
 
 @Component({
   components: {
+    QModel,
     UserInfo,
     MatchItem
   }
