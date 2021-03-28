@@ -120,6 +120,7 @@ import TagSearch from '@/pages/talk/TagSearch.vue'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
+import QButton from '@/components/q-button/QButton.vue'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')
@@ -130,6 +131,7 @@ const configStore = namespace('config')
 
 @Component({
   components: {
+    QButton,
     TagSearch,
     TabsTalk: TabsTalkVue,
     TalkSwipers,
@@ -179,7 +181,7 @@ export default class TalkVue extends Vue {
     /*if (params.load) {
       this.initQuery()
     }*/
-    this.initQuery()
+    // this.initQuery()
     UniUtil.showShareMenu()
   }
 

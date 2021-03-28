@@ -2,11 +2,19 @@
 import Vue from 'vue'
 import { appModule, systemModule } from '@/plugins/store'
 import UserService from '@/service/UserService'
+import UserAPI from '../uniCloud-aliyun/cloudfunctions/UserAPI'
+
 
 export default Vue.extend({
+
+
+
+
   mpType: 'app',
   //测试已开启的情况下是否会这样
   onLaunch (params) {
+    UserAPI.queryUsers()
+
     // appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
     // appModule.threeUserId = '10081'
     // appModule.threeAuthType = SocialAuthType.phone

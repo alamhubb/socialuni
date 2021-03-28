@@ -8,26 +8,25 @@ import { v4 as uuidv4 } from 'uuid'
 //各平台通用工具类
 export default class CommonUtil {
   //节流
-  static throttle (f, wait) {
+  static throttle (func, wait) {
     let timer
     return (...args) => {
-      if (timer) {
-        return
+      if (!timer) {
+        timer = setTimeout(() => {
+          func(...args)
+          timer = null
+        }, wait)
       }
-      timer = setTimeout(() => {
-        f(...args)
-        timer = null
-      }, wait)
     }
   }
 
   //防抖
-  static debounce (f, wait) {
+  static debounce (func, wait) {
     let timer
     return (...args) => {
       clearTimeout(timer)
       timer = setTimeout(() => {
-        f(...args)
+        func(...args)
       }, wait)
     }
   }
