@@ -8,7 +8,7 @@
     <view class="row-between flex-auto">
       <view>
         <view class="h25px row-col-center">
-          <text class="font-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>
+          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>
           <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm row-col-center"
                 :class="[getGenderBgColor(talk.user)]">
             {{ talk.user.age }}
@@ -58,7 +58,7 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <button v-if="!talk.hasFollowed" class="cu-btn round bd-white px-smm bg-theme"
+        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue px-smm bg-theme"
                 @click.stop="addFollow">
           关注
         </button>
