@@ -20,6 +20,14 @@
       }
     },
     {
+      "path": "pages/match/match",
+      "style": {
+        "navigationBarTitleText": "匹配",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 800
+      }
+    },
+    {
       "path": "pages/chat/chat",
       "style": {
         "navigationBarTitleText": "消息",
@@ -65,6 +73,18 @@
           "path": "user/userDetail",
           "style": {
             "navigationBarTitleText": "用户详情"
+          }
+        },
+        {
+          "path": "chat/message",
+          "style": {
+            "navigationBarTitleText": "聊天"
+          }
+        },
+        {
+          "path": "match/faceValueInfo",
+          "style": {
+            "navigationBarTitleText": "颜值评分"
           }
         },
         {

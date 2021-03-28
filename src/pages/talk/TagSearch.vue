@@ -106,7 +106,7 @@ const tagStore = namespace('tag')
     QRowItem, QIcon
   }
 })
-export default class TagSearchVue extends Vue {
+export default class TagSearchPage extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 

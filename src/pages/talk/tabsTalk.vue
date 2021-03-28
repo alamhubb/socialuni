@@ -157,7 +157,7 @@ const locationStore = namespace('location')
     TalkItem
   }
 })
-export default class TabsTalkVue extends Vue {
+export default class TabsTalkPage extends Vue {
   @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
   loadMoreText = {

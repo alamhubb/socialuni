@@ -78,10 +78,10 @@ import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import UniUtil from '@/plugins/uni/UniUtil'
 
-const chatStore = namespace('chat')
+const chatStore = namespace('message.vue')
 
 @Component
-export default class ChatVue extends Vue {
+export default class ChatPage extends Vue {
   @chatStore.State('chats') readonly chats: ChatVO []
   // @chatStore.Getter('chatsUnreadNumTotal') readonly chatsUnreadNumTotal: number
 

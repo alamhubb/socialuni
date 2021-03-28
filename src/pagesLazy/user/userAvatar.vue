@@ -37,7 +37,7 @@ import { userModule } from '@/plugins/store'
 const userStore = namespace('user')
 
 @Component
-export default class UserAvatarVue extends Vue {
+export default class UserAvatarPage extends Vue {
   @userStore.State('user') user: UserVO
 
   saveDisabled = false

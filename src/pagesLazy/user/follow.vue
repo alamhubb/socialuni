@@ -26,7 +26,7 @@ import FollowAPI from '@/api/FollowAPI'
   @Component({
     components: { FollowItem }
   })
-export default class FollowVue extends Vue {
+export default class FollowPage extends Vue {
     followPageType: string = HomeType.follow
     follow: string = HomeType.follow
     fans: string = HomeType.fans

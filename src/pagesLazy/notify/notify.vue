@@ -52,7 +52,7 @@ const appStore = namespace('app')
    * 取消身份认证功能
    */
   @Component
-export default class NotifyVue extends Vue {
+export default class NotifyPage extends Vue {
     @appStore.State('notifies') notifies: UnreadNotifyVO[]
 
     toTalkDetailVue (talkId: number) {

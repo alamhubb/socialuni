@@ -26,7 +26,7 @@ const appStore = namespace('app')
 const configStore = namespace('config')
 // todo 后台可控制是否显示轮播图
 @Component
-export default class TalkSwipersVue extends Vue {
+export default class TalkSwipersPage extends Vue {
   @appStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
   @configStore.Getter(ConfigMap.homeUrlKey) homeUrl: string
   swiperHeight: number = ConfigMap.swiperHeightDefault

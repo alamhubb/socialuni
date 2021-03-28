@@ -151,7 +151,7 @@ const locationStore = namespace('location')
     QIcon
   }
 })
-export default class TalkAddVue extends Vue {
+export default class TalkAddPage extends Vue {
   @locationStore.State('districts') readonly districts: DistrictVO[]
   @tagStore.State('tags') readonly storeTags: TagVO []
   @userStore.State('user') readonly user: UserVO

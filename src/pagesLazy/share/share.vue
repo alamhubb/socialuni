@@ -30,7 +30,7 @@ import PageUtil from '@/utils/PageUtil'
 import RouterUtil from '@/utils/RouterUtil'
 
 @Component
-export default class ShareVue extends Vue {
+export default class SharePage extends Vue {
   webUrl = ''
 
   showMoreList = false

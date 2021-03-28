@@ -45,7 +45,7 @@ const configStore = namespace('config')
 @Component({
   components: { UserInfo, UserEdit, TalkItem, TalkItemContent }
 })
-export default class VipVue extends Vue {
+export default class VipPage extends Vue {
   @userStore.State('user') user: UserVO
   @configStore.Getter(ConfigMap.vipPriceKey) vipPrice: number
 

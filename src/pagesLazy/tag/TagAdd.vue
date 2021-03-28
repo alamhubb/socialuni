@@ -42,7 +42,7 @@ import ErrorConst from '@/const/ErrorConst'
 import Alert from '../../utils/Alert'
 
 @Component
-export default class TagAddVue extends Vue {
+export default class TagAddPage extends Vue {
     // tag名称
     tagName = ''
     // tag描述

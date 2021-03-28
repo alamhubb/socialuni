@@ -46,7 +46,7 @@ const configStore = namespace('config')
 @Component({
   components: { QCol, QRowItem, QRow, FollowItem }
 })
-export default class ContactInfoVue extends Vue {
+export default class ContactInfoPage extends Vue {
   @configStore.Getter(ConfigMap.contactExpenseShellKey) contactExpenseShell: number
   @configStore.Getter(ConfigMap.contactUserReceiveShellKey) contactUserReceiveShell: number
 }

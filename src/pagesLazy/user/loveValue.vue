@@ -67,7 +67,7 @@ const userStore = namespace('user')
 const configStore = namespace('config')
 
 @Component
-export default class LoveValueVue extends Vue {
+export default class LoveValuePage extends Vue {
   @userStore.State('user') user: UserVO
   @appStore.State('appConfig') readonly appConfig: object
   @configStore.Getter('rewardedAdLimit') readonly rewardedAdLimit: number

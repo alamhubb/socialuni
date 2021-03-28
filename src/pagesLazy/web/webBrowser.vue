@@ -31,7 +31,7 @@ import RouterUtil from '@/utils/RouterUtil'
 const systemStore = namespace('system')
 
 @Component
-export default class WebBrowserVue extends Vue {
+export default class WebBrowserPage extends Vue {
   @systemStore.State('titleHeight') titleHeight
 
   webUrl = ''

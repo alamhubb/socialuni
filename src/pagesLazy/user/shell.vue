@@ -86,7 +86,7 @@ const userStore = namespace('user')
 @Component({
   components: { QCol, QRowItem, QRow, FollowItem }
 })
-export default class ShellVue extends Vue {
+export default class ShellPage extends Vue {
   @userStore.State('user') user: UserVO
   payValues = [
     new EnumVO(1, '1元'),

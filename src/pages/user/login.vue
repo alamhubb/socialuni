@@ -433,7 +433,7 @@ const systemStore = namespace('system')
 const appStore = namespace('app')
 
 @Component
-export default class LoginVue extends Vue {
+export default class LoginPage extends Vue {
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 

@@ -64,7 +64,7 @@ const userStore = namespace('user')
     TalkItemContent
   }
 })
-export default class IdentityAuthVue extends Vue {
+export default class IdentityAuthPage extends Vue {
   @userStore.State('user') user: UserVO
   imgFile: ImgFileVO = null
   authBtnDisabled = false

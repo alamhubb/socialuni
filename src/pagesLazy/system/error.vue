@@ -15,7 +15,7 @@ import { namespace } from 'vuex-class'
  * 取消身份认证功能
  */
 @Component
-export default class ErrorVue extends Vue {
+export default class ErrorPage extends Vue {
 
 }
 </script>

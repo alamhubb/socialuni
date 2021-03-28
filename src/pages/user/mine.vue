@@ -178,7 +178,7 @@ const userStore = namespace('user')
     TalkItemContent
   }
 })
-export default class MineVue extends Vue {
+export default class MinePage extends Vue {
   @userStore.State('user') user: UserVO
   showMsgInput = false
   showMoreList = false

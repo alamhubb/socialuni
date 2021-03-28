@@ -138,7 +138,7 @@ const configStore = namespace('config')
     TalkItem
   }
 })
-export default class TalkVue extends Vue {
+export default class TalkPage extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
   }
