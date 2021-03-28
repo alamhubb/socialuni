@@ -231,7 +231,7 @@
               <button v-if="!user" :disabled="!openTypeBtnEnable"
                       open-type="getUserInfo"
                       :class="isMpWX?'bg-gradual-wx':'bg-gradual-qq'"
-                      class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
+                      class="h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
                       @getuserinfo="openTypeBtnClick">
                 <u-icon color="white" name="weixin-fill" size="42"
                         class="mr-xs"></u-icon>

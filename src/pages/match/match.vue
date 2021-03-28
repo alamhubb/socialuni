@@ -220,14 +220,14 @@ export default class MatchPage extends Vue {
     this.showUser = user
   }
 
-  deleteLeftMatchUser (userId: number) {
+  deleteLeftMatchUser (userId: string) {
     const userIndex: number = this.leftAry.findIndex(user => user.id === userId)
     const itemHeight = Math.min(this.leftAry[userIndex].imgs[0].height, 600) + 119
     this.leftAry.splice(userIndex, 1)
     this.leftHeight -= itemHeight
   }
 
-  deleteRightMatchUser (userId: number) {
+  deleteRightMatchUser (userId: string) {
     const userIndex: number = this.rightAry.findIndex(user => user.id === userId)
     const itemHeight = Math.min(this.rightAry[userIndex].imgs[0].height, 600) + 119
     this.rightAry.splice(userIndex, 1)

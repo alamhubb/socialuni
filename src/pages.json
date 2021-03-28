@@ -8,6 +8,12 @@
   },
   "pages": [
     {
+      "path": "pages/talk/talk",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/match/match",
       "style": {
         "navigationBarTitleText": "匹配",
@@ -20,12 +26,6 @@
       "style": {
         "navigationBarTitleText": "消息",
         "enablePullDownRefresh": true
-      }
-    },
-    {
-      "path": "pages/talk/talk",
-      "style": {
-        "navigationStyle": "custom"
       }
     },
     {
