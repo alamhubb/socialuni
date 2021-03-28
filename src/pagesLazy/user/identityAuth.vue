@@ -1,20 +1,20 @@
 <template>
   <view class="bg-white">
     <view v-if="user.isSelfAuth" class="article-row">
-      <view class="font-xll color-red">您已认证通过，无需重复认证</view>
+      <view class="font-xxl color-red">您已认证通过，无需重复认证</view>
     </view>
     <view v-else-if="user.authNum>2" class="article-row">
-      <view class="font-xll color-red">您已达到认证次数上限，请联系客服处理</view>
+      <view class="font-xxl color-red">您已达到认证次数上限，请联系客服处理</view>
     </view>
     <view v-else>
       <view class="article">
-        <view class="font-lgg">
+        <view class="font-lg">
           1.您在个人信息页面上传的照片必须为本人照片，才能通过身份认证，认证次数有限，请上传真实自拍认证
         </view>
-        <view class="font-lgg">
+        <view class="font-lg">
           2.点击开始自拍，拍摄本人照片后，点击认证，即可完成认证
         </view>
-        <view class="font-lgg">
+        <view class="font-lg">
           3.本次拍摄照片仅用于本人照片认证，不会向任何人展示
         </view>
       </view>

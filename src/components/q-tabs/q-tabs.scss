@@ -8,11 +8,11 @@
   color: #007aff;
 
   .q-tab {
-    @extend .font-lgg;
+    @extend .font-lg;
     @extend .font-bold;
 
     * {
-      @extend .font-lgg;
+      @extend .font-lg;
       @extend .font-bold;
     }
   }

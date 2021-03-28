@@ -1,32 +1,32 @@
 <template>
   <view class="bg-white px">
-    <view class="font-lgg font-bold mt-xl">
+    <view class="font-lg font-bold mt-xl">
       优点介绍:
     </view>
-    <view class="font-lgg font-bold mt-sm">
+    <view class="font-lg font-bold mt-sm">
       1.使用此功能处关系加好友，可提高交友质量，过滤低质量人员。
     </view>
-    <view class="font-lgg font-bold mt-sm">
+    <view class="font-lg font-bold mt-sm">
       2. 他人通过此功能获取您的联系方式时，需要支付{{contactExpenseShell}}个贝壳，您可获得{{contactUserReceiveShell}}个贝壳奖励
     </view>
-    <view class="font-lgg font-bold mt-sm">
+    <view class="font-lg font-bold mt-sm">
       2.他人只有具有真实想加您好友的意愿，才愿意支付10个贝壳，获取您的联系方式，此功能可帮您过滤掉其他低质量杂乱人员。
     </view>
-    <view class="font-lgg font-bold mt-sm">
+    <view class="font-lg font-bold mt-sm">
       4. 10个贝壳等于1元人民币，如果连10个贝壳都不愿意支付的人，很有可能是乱加好友，或者其他低质量好友。
     </view>
 
-    <view class="font-lgg text-orange font-bold mt-xl">
+    <view class="font-lg text-orange font-bold mt-xl">
       举例填写方式：vx:491369310
     </view>
-    <view class="font-lgg text-orange font-bold">
+    <view class="font-lg text-orange font-bold">
       填写后可通过展示/隐藏按钮，控制别人是否能获取您的联系方式
     </view>
 
-    <view class="font-lgg text-orange font-bold mt-lg">
+    <view class="font-lg text-orange font-bold mt-lg">
       了解了此功能的优点后，快去填写联系方式，更优质的处关系吧
     </view>
-    <view class="font-lgg text-orange font-bold mt-lg pb-lg">
+    <view class="font-lg text-orange font-bold mt-lg pb-lg">
       有任何疑问，客服qq或vx：491369310
     </view>
   </view>

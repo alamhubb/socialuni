@@ -3,7 +3,7 @@
     <!--  #ifndef MP -->
     <u-navbar>
       <view class="row-between w100p flex-auto">
-        <view class="ml-xl font-bold font-mdd">
+        <view class="ml-xl font-bold font-md">
           {{ title }}
         </view>
         <view class="pr pl-xl" @click="showShare">

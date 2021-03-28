@@ -1,6 +1,6 @@
 <template>
   <view v-if="user" class="cu-dialog flex-col">
-    <view class="bg-white row-all-center font-mdd pt-sm font-bold">编辑个人信息</view>
+    <view class="bg-white row-all-center font-md pt-sm font-bold">编辑个人信息</view>
     <view class="pt-0 bg-white solid-bottom flex-auto overflow-auto">
       <view>
         <view class="cu-form-group">

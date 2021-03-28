@@ -25,8 +25,8 @@
                            :src="getTalkSmallImgUrl(notify.talkUserId,notify.replyImg)">
                     </image>
                 </view>
-                <view v-else class="size65 bg-gray font-dff pl-4px row-all-center flex-none">
-                    <text class="font-dff text-ellipsis-3">
+                <view v-else class="size65 bg-gray font-df pl-4px row-all-center flex-none">
+                    <text class="font-df text-ellipsis-3">
                         {{notify.replyContent}}
                     </text>
                 </view>

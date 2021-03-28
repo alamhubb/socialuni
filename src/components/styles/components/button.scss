@@ -7,7 +7,7 @@
 
 @mixin button-size($size) {
   @include box-size($size);
-  font-size: map-get($text-map, text-#{$size});
+  font-size: map-get($text-map, $size);
 }
 
 @include b(button) {

@@ -2,7 +2,7 @@
   <view class="bg-default h100p flex-col">
     <view v-if="user">
       <q-navbar class="q-solid-bottom">
-        <view class="ml-xl font-bold font-mdd flex-auto">
+        <view class="ml-xl font-bold font-md flex-auto">
           个人资料
         </view>
         <view class="mr">
@@ -18,7 +18,7 @@
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">
         <view class="w65vw flex-col py-xl mt-xl h100r">
           <q-row>
-            <view class="row-center mt-xl font-bold font-lgg w100r">
+            <view class="row-center mt-xl font-bold font-lg w100r">
               清池 app
             </view>
           </q-row>
@@ -35,7 +35,7 @@
               <view class="row-col-center flex-auto">
                 意见反馈
               </view>
-              <q-icon icon="arrow-right" class="font-mdd margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
@@ -43,7 +43,7 @@
               <view class="row-col-center flex-auto">
                 联系我们
               </view>
-              <q-icon icon="arrow-right" class="font-mdd margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
@@ -51,7 +51,7 @@
               <view class="row-col-center flex-auto">
                 关于我们
               </view>
-              <q-icon icon="arrow-right" class="font-mdd margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
@@ -59,7 +59,7 @@
               <view class="row-col-center flex-auto">
                 注销账号
               </view>
-              <q-icon icon="arrow-right" class="font-mdd margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
           <q-row-item>
@@ -67,7 +67,7 @@
               <view class="row-col-center flex-auto">
                 退出登录
               </view>
-              <q-icon icon="arrow-right" class="font-mdd margin-right-sm"></q-icon>
+              <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
           <q-row>
@@ -84,7 +84,7 @@
             </view>
           </q-row>
           <q-row class="flex-auto col-end">
-            <view class="row-center font-bold pb-xl font-lgg w100r">
+            <view class="row-center font-bold pb-xl font-lg w100r">
               <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>
             </view>
           </q-row>

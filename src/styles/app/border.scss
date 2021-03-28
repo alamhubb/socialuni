@@ -134,13 +134,19 @@
 .bd-gray {
   border: solid 1px #aaaaaa;
   color: #aaaaaa;
-  @extend .bg-white;
+  @extend .bg-theme;
+}
+
+.bd-white {
+  border: solid 1px white;
+  color: white;
+  @extend .bg-theme;
 }
 
 .bd-blue {
   border: solid 1px #0081ff;
   color: #0081ff;
-  @extend .bg-white;
+  @extend .bg-theme;
 }
 
 .bd-1 {

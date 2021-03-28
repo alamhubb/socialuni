@@ -1,4 +1,5 @@
 //百分比
+$percent-3: 3%;
 $percent-10: 10%;
 $percent-20: 20%;
 $percent-30: 30%;
@@ -9,20 +10,29 @@ $percent-70: 70%;
 $percent-80: 80%;
 $percent-90: 90%;
 
+$color-white: #fff;
+//基础色
+$color-black: #000;
+
+//主题色
+//$color-theme: #7C4DFF;
+//$color-default: mix($color-black, $color-theme, $percent-10);
+$color-theme: $color-white;
+$color-default: mix($color-black, $color-theme, $percent-3);
+
 //点击变色比
 //$percent-active: $percent-10 !default;
 //light的样式
 $percent-light-bg: $percent-90 !default;
 $percent-light-border: $percent-60 !default;
 
-//基础色
-$color-black: #000;
-$color-white: #fff;
 $color-red: #ee0a24;
 $color-orange: #ff976a;
 $color-blue: #1989fa;
 $color-green: #07c160;
-$color-theme: $color-white;
+//$color-theme: #7C4DFF;
+//$color-theme: #651FFF;
+//$color-theme: #5E35B1;
 
 //灰色级别
 $color-grey: #ebebeb;
@@ -36,7 +46,7 @@ $color-grey8: #5c5c5c;
 $color-grey9: #333;
 $color-gray: #707070;
 
-//主题色
+//$color-default: #651FFF;
 $color-primary: $color-blue;
 $color-error: $color-red;
 $color-warn: $color-orange;
@@ -44,8 +54,8 @@ $color-success: $color-green;
 $color-info: $color-gray;
 
 //文本基础色
-$color-text-theme: #323233;
-$color-text-primary: #323233;
+$color-text-theme: #303133;
+$color-text-primary: $color-text-theme;
 $color-text-content: #606266;
 $color-text-sub: #909399;
 $color-text-hint: #C0C4CC;
@@ -92,6 +102,7 @@ $colors-theme: (
 
 $colors: (
         theme: $color-theme,
+        default: $color-default,
         primary: $color-primary,
         error: $color-error,
         warn: $color-warn,

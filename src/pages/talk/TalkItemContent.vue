@@ -1,6 +1,6 @@
 <template>
   <view>
-    <text class="card-text" @click="toTalkDetailVue" selectable>
+    <text class="card-text font-md" @click="toTalkDetailVue" selectable>
       {{talk.content}}
     </text>
     <view v-if="talk.imgs.length" class="card-text-row mt-10px" @click="toTalkDetailVue">

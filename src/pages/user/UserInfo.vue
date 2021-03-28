@@ -34,11 +34,11 @@
           />
           <view class="flex-auto row-between">
             <view class="flex-col flex-auto">
-              <view class="font-mdd" :class="{'color-red':userProp.vipFlag}">
+              <view class="font-md" :class="{'color-red':userProp.vipFlag}">
                 {{ userProp.nickname }}
               </view>
               <view>
-                <view class="cu-tag radius font-dff"
+                <view class="cu-tag radius font-df"
                       :class="[getGenderBgColor(userProp)]">
                   {{ userProp.age }}
                   <q-icon class="row-col-start ml-2px" size="14"
@@ -62,14 +62,14 @@
         <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-auto" :class="{'row-around':isMine}">
             <view v-if="isMine" class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="font-lgg font-bold text-black row-center">
+              <text class="font-lg font-bold text-black row-center">
                 {{ userProp.followNum }}
               </text>
               <text class="font-sm text-gray">关注</text>
             </view>
 
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="font-lgg font-bold text-black row-center">
+              <text class="font-lg font-bold text-black row-center">
                 {{ userProp.fansNum }}
               </text>
               <text class="font-sm text-gray">关注者</text>
@@ -84,7 +84,7 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button class="cu-btn round bd-blue px-smm bg-white" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button class="cu-btn round bd-blue px-smm bg-theme" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>

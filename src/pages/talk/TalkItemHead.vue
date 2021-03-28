@@ -44,7 +44,7 @@
           </view>
         </view>
         <view class="text-gray font-sm h25px row-col-center">
-          最新回复：{{talk.updateTime| formatTime}}
+<!--          最新回复：{{talk.updateTime| formatTime}}-->
           <view v-if="talk.globalTop" class="ml-5px sm cu-tag round bg-red light">
             官方
           </view>
@@ -58,7 +58,7 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <button v-if="!talk.hasFollowed" class="cu-btn round bd-blue px-smm bg-white"
+        <button v-if="!talk.hasFollowed" class="cu-btn round bd-white px-smm bg-theme"
                 @click.stop="addFollow">
           关注
         </button>

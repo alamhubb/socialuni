@@ -1,21 +1,21 @@
 <template>
   <view>
     <view v-if="user.vipFlag" class="article-row">
-      <view class="font-xll color-red">您已开通VIP，VIP到期时间为：</view>
-      <view class="font-xll color-red">{{user.vipEndDate | parseStrToTime}}</view>
+      <view class="font-xxl color-red">您已开通VIP，VIP到期时间为：</view>
+      <view class="font-xxl color-red">{{user.vipEndDate | parseStrToTime}}</view>
     </view>
 
     <view class="article">
-      <view class="font-lgg">1.vip功能：名字变红色，名字后加vip标识</view>
-      <view class="font-lgg">2.vip收费：{{vipPrice/100}}元一个月</view>
-      <view class="font-lgg">3.当前只支持开通当月vip，不支持续费</view>
-      <view class="font-lgg">4.每日远高于普通用户的匹配次数，普通用户5次，vip用户30次</view>
-      <view class="font-lgg">5.匹配功能特权，在基础颜值上额外增加10分</view>
-      <view class="font-lgg">6.普通用户每天只能发布5条动态，VIP用户每天可发布20条动态</view>
+      <view class="font-lg">1.vip功能：名字变红色，名字后加vip标识</view>
+      <view class="font-lg">2.vip收费：{{vipPrice/100}}元一个月</view>
+      <view class="font-lg">3.当前只支持开通当月vip，不支持续费</view>
+      <view class="font-lg">4.每日远高于普通用户的匹配次数，普通用户5次，vip用户30次</view>
+      <view class="font-lg">5.匹配功能特权，在基础颜值上额外增加10分</view>
+      <view class="font-lg">6.普通用户每天只能发布5条动态，VIP用户每天可发布20条动态</view>
     </view>
     <view class="article">
-      <view class="font-lgg">不支持退款，请大家谨慎付款</view>
-      <view class="font-lgg">最终解释权归本公司所有</view>
+      <view class="font-lg">不支持退款，请大家谨慎付款</view>
+      <view class="font-lg">最终解释权归本公司所有</view>
     </view>
 
     <view v-if="!user.vipFlag" class="article-row">

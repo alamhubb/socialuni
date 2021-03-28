@@ -10,7 +10,7 @@
         <view class="col-center bg-active ml-lg flex-none" @click="goHome">
           <q-icon icon="home"></q-icon>
         </view>
-        <view class="ml-lg font-bold font-mdd flex-none">
+        <view class="ml-lg font-bold font-md flex-none">
           动态详情
         </view>
       </view>
