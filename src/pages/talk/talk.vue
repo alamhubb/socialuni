@@ -181,7 +181,7 @@ export default class TalkVue extends Vue {
     /*if (params.load) {
       this.initQuery()
     }*/
-    // this.initQuery()
+    this.initQuery()
     UniUtil.showShareMenu()
   }
 
