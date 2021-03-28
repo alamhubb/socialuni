@@ -4,9 +4,8 @@ import ProviderType, { Provider } from '@/const/ProviderType'
 import PlatformType from '@/const/PlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
-import AppService from '@/service/AppService'
 import TokenUtil from '@/utils/TokenUtil'
-import { notifyModule } from '@/plugins/store/index'
+import { appModule, chatModule, locationModule, notifyModule, tagModule } from '@/plugins/store/index'
 
 //和终端相关的信息
 @Module({ generateMutationSetters: true })
@@ -76,7 +75,13 @@ export default class SystemModule extends VuexModule {
     PlatformUtils.checkUpdate()
     WebsocketUtil.websocketConnect(false)
     // appModule.initGlobalDataLoadAPI()
-    AppService.getHomeLoadAfterData()
+    // AppService.getHomeLoadAfterData()
+    tagModule.getHotTagsAction()
+    tagModule.getHotTagTypesAction()
+    locationModule.getHotDistrictsAction()
+    appModule.getReportTypesAction()
+    appModule.getHomeSwipersAction()
+    chatModule.getChatsAction()
     //如果有token获取
     if (TokenUtil.hasToken()) {
       //查询通知列表

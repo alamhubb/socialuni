@@ -1000,6 +1000,313 @@ button.cuIcon.lg {
 }
 
 /* ==================
+          列表
+ ==================== */
+.grayscale {
+    filter: grayscale(1);
+}
+
+.cu-list + .cu-list {
+    margin-top: 15px
+}
+
+.cu-list > .cu-item {
+    transition: all .6s ease-in-out 0s;
+    transform: translateX(0px)
+}
+
+.cu-list > .cu-item.move-cur {
+    transform: translateX(-260px)
+}
+
+.cu-list > .cu-item .move {
+    position: absolute;
+    right: 0;
+    display: flex;
+    width: 130px;
+    height: 100%;
+    transform: translateX(100%)
+}
+
+.cu-list > .cu-item .move view {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center
+}
+
+.cu-list.menu-avatar {
+    overflow: hidden;
+}
+
+.cu-list.menu-avatar > .cu-item {
+    position: relative;
+    display: flex;
+    padding-right: 5px;
+    height: 70px;
+    background-color: #ffffff;
+    justify-content: flex-end;
+    align-items: center
+}
+
+.cu-list.menu-avatar > .cu-item > .cu-avatar {
+    position: absolute;
+    left: 15px
+}
+
+.cu-list.menu-avatar > .cu-item .flex .text-cut {
+    max-width: 255px
+}
+
+.cu-list.menu-avatar > .cu-item .content {
+    position: absolute;
+    left: 75px;
+    width: calc(100% - 48px - 30px - 60px - 10px);
+    line-height: 1.6em;
+}
+
+.cu-list.menu-avatar > .cu-item .content.flex-sub {
+    width: calc(100% - 48px - 30px - 10px);
+}
+
+.cu-list.menu-avatar > .cu-item .content > view:first-child {
+    font-size: 15px;
+    display: flex;
+    align-items: center
+}
+
+.cu-list.menu-avatar > .cu-item .content .cu-tag.sm {
+    display: inline-block;
+    margin-left: 5px;
+    height: 14px;
+    font-size: 8px;
+    line-height: 16px
+}
+
+.cu-list.menu-avatar > .cu-item .action {
+    width: 50px;
+    text-align: center
+}
+
+.cu-list.menu-avatar > .cu-item .action view + view {
+    margin-top: 5px
+}
+
+.cu-list.menu-avatar.comment > .cu-item .content {
+    position: relative;
+    left: 0;
+    width: auto;
+    flex: 1;
+}
+
+.cu-list.menu-avatar.comment > .cu-item {
+    padding: 15px 15px 15px 60px;
+    height: auto
+}
+
+.cu-list.menu-avatar.comment .cu-avatar {
+    align-self: flex-start
+}
+
+.cu-list.menu > .cu-item {
+    position: relative;
+    display: flex;
+    padding: 0 15px;
+    min-height: 50px;
+    background-color: #ffffff;
+    justify-content: space-between;
+    align-items: center
+}
+
+.cu-list.menu > .cu-item:last-child:after {
+    border: none
+}
+
+.cu-list.menu-avatar > .cu-item:after,
+.cu-list.menu > .cu-item:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    border-bottom: 1px solid #ddd;
+    border-radius: inherit;
+    content: " ";
+    transform: scale(.5);
+    transform-origin: 0 0;
+    pointer-events: none
+}
+
+.cu-list.menu > .cu-item.grayscale {
+    background-color: #f5f5f5
+}
+
+.cu-list.menu > .cu-item.cur {
+    background-color: #fcf7e9
+}
+
+.cu-list.menu > .cu-item.arrow {
+    padding-right: 45px
+}
+
+.cu-list.menu > .cu-item.arrow:before {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    bottom: 0;
+    display: block;
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    color: #8799a3;
+    content: "\e6a3";
+    text-align: center;
+    font-size: 17px;
+    font-family: cuIcon;
+    line-height: 15px
+}
+
+.cu-list.menu > .cu-item button.content {
+    padding: 0;
+    background-color: transparent;
+    justify-content: flex-start
+}
+
+.cu-list.menu > .cu-item button.content:after {
+    display: none
+}
+
+.cu-list.menu > .cu-item .cu-avatar-group .cu-avatar {
+    border-color: #ffffff
+}
+
+.cu-list.menu > .cu-item .content > view:first-child {
+    display: flex;
+    align-items: center
+}
+
+.cu-list.menu > .cu-item .content > text[class*=cuIcon] {
+    display: inline-block;
+    margin-right: 5px;
+    width: 1.6em;
+    text-align: center
+}
+
+.cu-list.menu > .cu-item .content > image {
+    display: inline-block;
+    margin-right: 5px;
+    width: 1.6em;
+    height: 1.6em;
+    vertical-align: middle
+}
+
+.cu-list.menu > .cu-item .content {
+    font-size: 15px;
+    line-height: 1.6em;
+    flex: 1
+}
+
+.cu-list.menu > .cu-item .content .cu-tag.sm {
+    display: inline-block;
+    margin-left: 5px;
+    height: 14px;
+    font-size: 8px;
+    line-height: 16px
+}
+
+.cu-list.menu > .cu-item .action .cu-tag:empty {
+    right: 5px
+}
+
+.cu-list.menu {
+    display: block;
+    overflow: hidden
+}
+
+.cu-list.menu.sm-border > .cu-item:after {
+    left: 15px;
+    width: calc(200% - 60px)
+}
+
+.cu-list.grid > .cu-item {
+    position: relative;
+    display: flex;
+    padding: 10px 0 15px;
+    transition-duration: 0s;
+    flex-direction: column
+}
+
+.cu-list.grid > .cu-item:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    border-right: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-radius: inherit;
+    content: " ";
+    transform: scale(.5);
+    transform-origin: 0 0;
+    pointer-events: none
+}
+
+.cu-list.grid > .cu-item text {
+    display: block;
+    margin-top: 5px;
+    color: #888;
+    font-size: 13px;
+    line-height: 20px
+}
+
+.cu-list.grid > .cu-item [class*=cuIcon] {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 24px
+}
+
+.cu-list.grid > .cu-item .cu-tag {
+    right: auto;
+    left: 50%;
+    margin-left: 10px
+}
+
+.cu-list.grid {
+    background-color: #ffffff;
+    text-align: center
+}
+
+.cu-list.grid.no-border > .cu-item {
+    padding-top: 5px;
+    padding-bottom: 10px
+}
+
+.cu-list.grid.no-border > .cu-item:after {
+    border: none
+}
+
+.cu-list.grid.no-border {
+    padding: 10px 5px
+}
+
+.cu-list.grid.col-3 > .cu-item:nth-child(3n):after,
+.cu-list.grid.col-4 > .cu-item:nth-child(4n):after,
+.cu-list.grid.col-5 > .cu-item:nth-child(5n):after {
+    border-right-width: 0
+}
+
+.cu-list.card-menu {
+    overflow: hidden;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 10px
+}
+
+/* ==================
           背景
  ==================== */
 

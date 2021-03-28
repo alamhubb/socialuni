@@ -1,7 +1,7 @@
 import TokenUtil from '@/utils/TokenUtil'
 import NotifyVO from '@/model/NotifyVO'
 import JsonUtil from '@/utils/JsonUtil'
-import { notifyModule } from '@/plugins/store'
+import { chatModule, notifyModule } from '@/plugins/store'
 import NotifyType from '@/const/NotifyType'
 import AppConfig from '@/const/AppConfig'
 import CommonUtil from '@/utils/CommonUtil'
@@ -41,7 +41,7 @@ export default class WebsocketUtil {
 
       if (reload) {
         console.log('重新加载')
-        // chatModule.getChatsAction()
+        chatModule.getChatsAction()
       }
       //心跳保活
       WebsocketUtil.timer = setInterval(() => {
