@@ -1,5 +1,5 @@
 <template>
-  <view class="pb-100rpx h100p bg-default">
+  <view class="pb-50px h100p bg-default">
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-auto card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
@@ -9,6 +9,7 @@
       </view>
     </view>
 
+
     <scroll-view scroll-y="true" class="cu-chat h100p"
                  @scrolltoupper="upper"
                  :upper-threshold="upperThreshold"
@@ -16,14 +17,14 @@
                  :scroll-top="scrollTop"
     >
       <!--    <view class="cu-chat">-->
-      <view v-if="message.status === waitOpenStatus||message.status === closeStatus" class="w100p h100p col-row-center">
+      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">
         <view class="uni-tip  mt-80px">
           <view class="uni-tip-content text-bold">
-            <template v-if="message.needPayOpen">
+            <template v-if="chat.needPayOpen">
               会话未开启，为避免用户被频繁恶意骚扰，只能给关注您的和给您发过消息的用户直接发送消息
               <!--              ，给其他用户发送消息，需要支付10贝壳开启对话-->
             </template>
-            <view v-else-if="message.status === closeStatus" class="row-center">
+            <view v-else-if="chat.status === closeStatus" class="row-center">
               您已关闭会话，发送消息即可再次开启对话
             </view>
             <view v-else class="row-center">
@@ -42,10 +43,10 @@
         </view>
       </view>
       <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
-        <view v-if="message.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
+        <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
           会话已开启
         </view>
-        <uni-load-more v-else :status="message.loadMore"></uni-load-more>
+        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>
       </view>
 
       <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
@@ -57,12 +58,12 @@
         </block>
         <block v-else-if="msg.isMine">
           <view class="flex-col w100p">
-            <view class="mr-30rpx h44rpx row-end-center">
+            <view class="mr-15px h22px row-end-center">
               <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
-              <image v-if="msg.user.vipFlag" class="ml-6rpx mr-6rpx size30rpx mt-n10rpx"
+              <image v-if="msg.user.vipFlag" class="ml-3px mr-3px size15px mt-5px"
                      src="/static/img/crown.png"
                      @click="toVipVue"></image>
             </view>
@@ -86,12 +87,12 @@
                  @click="toUserDetailVue(msg.user.id)"
           />
           <view class="flex-col w100p">
-            <view class="ml-40rpx h44rpx row-col-center">
+            <view class="ml-20px h22px row-col-center">
               <text class="text-sm" :class="[msg.user.vipFlag?'color-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
-              <image v-if="msg.user.vipFlag" class="ml-6rpx size30rpx mt-n10rpx"
+              <image v-if="msg.user.vipFlag" class="ml-3px size15px mt-5px"
                      src="/static/img/crown.png"
                      @click="toVipVue"></image>
             </view>
@@ -204,13 +205,13 @@ import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import UniUtil from '@/plugins/uni/UniUtil'
 
-const chatStore = namespace('message.vue')
+const chatStore = namespace('chat')
 const userStore = namespace('user')
 
 @Component({
   components: { ReportDialog, TalkItem }
 })
-export default class MessagePage extends Vue {
+export default class MessageVue extends Vue {
   public $refs!: {
     reportDialog: any;
     messageMoreHandleDialog: any;
@@ -254,9 +255,9 @@ export default class MessagePage extends Vue {
 
   upper () {
     //只有为more才允许加载
-    if (this.message.loadMore === LoadMoreType.more) {
+    if (this.chat.loadMore === LoadMoreType.more) {
       // 执行正在加载动画
-      this.message.loadMore = LoadMoreType.loading
+      this.chat.loadMore = LoadMoreType.loading
       this.queryMessages()
     }
   }
@@ -317,12 +318,12 @@ export default class MessagePage extends Vue {
       this.inputFocus = true
     })
     // #endif
-    const msgContent = this.msgContent || (this.message.needPayOpen ? AppMsg.payOpenDefaultMsg : '')
+    const msgContent = this.msgContent || (this.chat.needPayOpen ? AppMsg.payOpenDefaultMsg : '')
     if (msgContent) {
       // 点击发送后立即push
       if (this.user && this.user.phoneNum) {
         //启用状态可以直接发送
-        if (this.message.status === CommonStatus.enable) {
+        if (this.chat.status === CommonStatus.enable) {
           this.sendMsg(msgContent)
         } /*else {
           this.openChatPromise(msgContent).finally(() => {
@@ -385,7 +386,7 @@ export default class MessagePage extends Vue {
     /**
      * 这里有坑，如果使用加载更多，则加载更多msg后滚动会出现问题，滚动不到之前的那条，待修复的问题
      */
-    return this.message.loadMore !== LoadMoreType.more
+    return this.chat.loadMore !== LoadMoreType.more
   }
 
   get msgIds () {
@@ -402,7 +403,7 @@ export default class MessagePage extends Vue {
   }
 
   queryMessages () {
-    MessageAPI.queryMessagesAPI(this.message.id, this.msgIds).then((res) => {
+    MessageAPI.queryMessagesAPI(this.chat.id, this.msgIds).then((res) => {
       const resMessages: MessageVO[] = res.data
       //获取拼接消息之前，顶部消息的位置
       const preFirstMsgId: string = '#m' + this.messages[0].id
@@ -414,10 +415,10 @@ export default class MessagePage extends Vue {
         // this.topId = lastFirstMsgId
         // 如果还有大于等于30个就还可以加载
         if (resMessages && resMessages.length >= this.lazyLoadNum) {
-          this.message.loadMore = LoadMoreType.more
+          this.chat.loadMore = LoadMoreType.more
         } else {
           // 否则没有了
-          this.message.loadMore = LoadMoreType.noMore
+          this.chat.loadMore = LoadMoreType.noMore
         }
         if (resMessages.length) {
           this.messages.unshift(...resMessages)
@@ -485,14 +486,14 @@ export default class MessagePage extends Vue {
       this.isOpeningChatDisableBtn = true
       try {
         //需要付费
-        if (this.message.needPayOpen) {
+        if (this.chat.needPayOpen) {
           const userShell = this.user.shell
           //不需要充值提示
           if (userShell >= 10) {
-            await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.message.nickname + ' 的对话，并给对方发送消息：' + content, content)
+            await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
             //需要充值提示
           } else {
-            await Alert.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.message.nickname + ' 的对话，并给对方发送消息：' + content, content)
+            await Alert.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
             const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
             try {
               await PlatformUtils.pay(provider, PayType.shell, 1)
@@ -505,7 +506,7 @@ export default class MessagePage extends Vue {
           }
           //不需要付费
         } else {
-          await this.openChatAndPrompt('是否确认开启与 ' + this.message.nickname + ' 的对话，并给对方发送消息：' + content, content)
+          await this.openChatAndPrompt('是否确认开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
         }
         return
       } catch (e) {

@@ -8,6 +8,13 @@
   },
   "pages": [
     {
+      "path": "pages/chat/chat",
+      "style": {
+        "navigationBarTitleText": "消息",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
       "path": "pages/talk/talk",
       "style": {
         "navigationStyle": "custom"
@@ -25,13 +32,6 @@
         "navigationBarTitleText": "匹配",
         "enablePullDownRefresh": true,
         "onReachBottomDistance": 800
-      }
-    },
-    {
-      "path": "pages/chat/chat",
-      "style": {
-        "navigationBarTitleText": "消息",
-        "enablePullDownRefresh": true
       }
     },
     {

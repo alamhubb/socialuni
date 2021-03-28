@@ -1,7 +1,7 @@
 <template>
   <view class="line-height-1 elevation-4 radius mb-8px pb-4px bg-white">
-    <image class="radius max-h600rpx"
-           mode="aspectFill" :style="{'height':user.imgs[0].height+'rpx'}"
+    <image class="radius max-h300px"
+           mode="aspectFill" :style="{'height':user.imgs[0].height+'px'}"
            :src="getSmallUserImg(user.imgs[0].src)"
            @click="showUserChange(user)"></image>
     <view class="px-10px">

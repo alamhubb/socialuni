@@ -78,7 +78,7 @@ import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import UniUtil from '@/plugins/uni/UniUtil'
 
-const chatStore = namespace('message.vue')
+const chatStore = namespace('chat')
 
 @Component
 export default class ChatPage extends Vue {
@@ -98,6 +98,8 @@ export default class ChatPage extends Vue {
 
   onLoad () {
     UniUtil.showShareMenu()
+    //需要先清除，再跳转页面
+    chatModule.setChatIdToMessagePage(21)
   }
 
   onPullDownRefresh () {

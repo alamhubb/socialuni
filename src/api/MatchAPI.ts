@@ -2,7 +2,7 @@ import http from '@/plugins/http'
 import MatchQueryVO from '@/model/match/MatchQueryVO'
 
 export default class MatchAPI {
-  static queryMatchUsersAPI (userIds: number[], matchType: string) {
+  static queryMatchUsersAPI (userIds: string[], matchType: string) {
     return http.post('match/queryMatchUsers', new MatchQueryVO(userIds, matchType))
   }
 

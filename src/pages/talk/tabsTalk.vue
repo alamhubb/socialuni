@@ -19,7 +19,7 @@
         <q-icon v-else size="18" icon="reload"></q-icon>
       </view>
       <!--<view class="px-sm">
-        <view class="w24rpx"></view>
+        <view class="w12px"></view>
       </view>-->
     </q-row-bar>
 

@@ -32,7 +32,7 @@
       </view>
       <view class="action">
         <text class="cuIcon-title text-green"></text>
-        <text>在线：{{onlineUsersCount}}人</text>
+        <text>在线：{{ onlineUsersCount }}人</text>
       </view>
     </view>
     <view v-if="showMatchHintKey" class="mt-xl2 row-col-center bg-orange">
@@ -48,11 +48,11 @@
         <view>{{rightHeight}}</view>
     </view>-->
     <view class="flex-row w100vw">
-      <view class="w360rpx ma-8rpx">
+      <view class="w180px ma-4px">
         <match-item v-for="user in leftAry" :user="user" :key="user.id" @deleteMatchUser="deleteLeftMatchUser"
                     @showUser="showLeftUserChange"></match-item>
       </view>
-      <view class="w360rpx ma-8rpx">
+      <view class="w180px ma-4px">
         <match-item v-for="user in rightAry" :user="user" :key="user.id" @deleteMatchUser="deleteRightMatchUser"
                     @showUser="showRightUserChange"></match-item>
       </view>
@@ -80,7 +80,8 @@ const userStore = namespace('user')
 
 @Component({
   components: {
-    UserInfo, MatchItem
+    UserInfo,
+    MatchItem
   }
 })
 export default class MatchPage extends Vue {
@@ -187,7 +188,7 @@ export default class MatchPage extends Vue {
     }
   }
 
-  get userIds () {
+  get userIds (): string[] {
     if (this.matchUsers.length) {
       return this.matchUsers.map(item => item.id)
     }
