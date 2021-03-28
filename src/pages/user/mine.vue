@@ -119,7 +119,7 @@
                 <view class="row-between flex-auto">
                   <view>
                     <view class="h25px row-col-center">
-                      <text class="font-mdg">{{ user.nickname }}</text>
+                      <text class="text-md">{{ user.nickname }}</text>
                     </view>
                     <view class="text-gray font-xs h25px row-col-center">
                       清池个人信息

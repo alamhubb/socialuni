@@ -1,17 +1,17 @@
 <template>
   <view class="card-title pb-10px" @click="toUserDetailVue">
     <image
-        class="card-title-avatar"
-        mode="aspectFill"
-        :src="talk.user.avatar"
+      class="card-title-avatar"
+      mode="aspectFill"
+      :src="talk.user.avatar"
     />
     <view class="row-between flex-auto">
       <view>
         <view class="h25px row-col-center">
-          <text class="font-mdg" :class="{'color-red':talk.user.vipFlag}">{{talk.user.nickname}}</text>
+          <text class="font-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>
           <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm row-col-center"
                 :class="[getGenderBgColor(talk.user)]">
-            {{talk.user.age}}
+            {{ talk.user.age }}
             <q-icon class="ml-nn"
                     size="12"
                     :icon="getGenderIcon(talk.user)"/>
@@ -28,7 +28,7 @@
               <q-icon icon="heart"/>
             </view>
             <view class="cu-tag bg-white bd-red bd-r-radius sm">
-              {{talk.user.loveValue}}
+              {{ talk.user.loveValue }}
             </view>
           </view>
           <!--    如果正义值不为0，且大于等于爱心值显示正义值-->
@@ -39,12 +39,12 @@
               <q-icon icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius sm">
-              {{talk.user.justiceValue}}
+              {{ talk.user.justiceValue }}
             </view>
           </view>
         </view>
         <view class="text-gray text-sm h25px row-col-center">
-<!--          最新回复：{{talk.updateTime| formatTime}}-->
+          最新回复：{{ talk.updateTime| formatTime }}
           <view v-if="talk.globalTop" class="ml-5px sm cu-tag round bg-red light">
             官方
           </view>

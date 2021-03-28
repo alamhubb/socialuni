@@ -100,7 +100,7 @@
         <div class="flex-row" @click="showVisibleRangeSelect=true">
           可见范围：
           <view class="text-gray pr-xs">
-            <text class="font-mdg text-gray font-mdg">{{ visibleType.label }}</text>
+            <text class="text-md text-gray text-md">{{ visibleType.label }}</text>
             <q-icon size="14" class="text-gray" icon="arrow-right"/>
           </view>
           <u-select v-model="showVisibleRangeSelect" mode="single-column" :list="visibleTypes"

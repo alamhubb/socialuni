@@ -2,7 +2,7 @@
   <view>
     <u-popup v-model="showMoreList" mode="bottom" :border-radius="20" @close="popupClose">
       <q-bar round class="solid-bottom">
-        <view class="text-black font-mdg font-bold">更多操作</view>
+        <view class="text-black text-md font-bold">更多操作</view>
       </q-bar>
       <view class="mt-sm h230px px">
         <u-grid :col="4" :border="false">

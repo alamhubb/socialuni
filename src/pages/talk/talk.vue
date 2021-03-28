@@ -34,7 +34,7 @@
 
       <q-popup v-model="showFilter" bottom>
         <q-bar round class="solid-bottom">
-          <view class="text-black font-mdg font-bold">筛选</view>
+          <view class="text-black text-md font-bold">筛选</view>
           <view class="flex-row">
             <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
             <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>

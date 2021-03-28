@@ -2,7 +2,7 @@
   <u-popup v-model="showCityPopup" mode="bottom" :border-radius="20" @close="close">
     <q-bar round class="solid-bottom">
       <view class="flex-row">
-        <view class="text-black font-mdg font-bold">城市筛选</view>
+        <view class="text-black text-md font-bold">城市筛选</view>
         <view class="text-orange font-bold px bg-active" @click="getLocation">
           <q-icon icon="map-fill" class="mr-nn" size="16"></q-icon>
           定位

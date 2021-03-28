@@ -25,3 +25,6 @@ yarn-error.log*
 /.env.production
 /.env
 /.env
+/src/.env.production
+/src/.env
+/src/.env.development
