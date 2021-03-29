@@ -107,6 +107,60 @@
                     @confirm="selectVisibleTypeChange"></u-select>
         </div>
       </view>
+<!--      <u-popup mode="bottom" v-model="showVisibleScopeDialog" border-radius="30" closeable>
+        <view class="content">
+          <scroll-view scroll-y="true" style="height: 150px;">
+            <view>
+              <view v-for="index in 20" :key="index">
+                第{{index}}个Item
+              </view>
+            </view>
+          </scroll-view>
+          <view class="confrim-btn">
+            <u-button @click="show = false;">确定</u-button>
+          </view>
+        </view>
+      </u-popup>-->
+
+<!--      <q-popup v-model="showVisibleScopeDialog" bottom>
+        <q-bar round class="solid-bottom">
+          <view class="text-black text-md font-bold">筛选</view>
+          <view class="flex-row">
+            <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
+            <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
+          </view>
+        </q-bar>
+        <view class="mt pb-sm">
+          <view class="row-center px pt" v-if="genderDefault === '全部'">
+            <view class="w50px row-start">性别：</view>
+            <view>
+              <radio-group @change="genderChange" class="flex-1">
+                <label v-for="report in genders" :key="report">
+                  <radio :value="report" :checked="report===genderValue"></radio>
+                  <text class="ml-sm mr">{{ report }}</text>
+                </label>
+              </radio-group>
+            </view>
+          </view>
+          <view class="mt-20px pb-xl pt">
+            <view class="row-between px">
+              <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
+            </view>
+            <view class="px">
+              <q-slider
+                :value="rangeValue"
+                :min="rangeMin"
+                :max="rangMax"
+                :bar-height="3"
+                active-color="#FF6B00"
+                :format="format"
+                @change="handleRangeChange"
+              ></q-slider>
+            </view>
+          </view>
+        </view>
+      </q-popup>-->
+
       <view class="row-center pt">
         <button class="cu-btn lg bg-pink-light2 w300px" :disabled="buttonDisabled" @click="addTalk">发布</button>
       </view>
@@ -170,6 +224,8 @@ export default class TalkAddPage extends Vue {
   showSearch = false
   showTagSearch = false
   showTagAdd = false
+
+  showVisibleScopeDialog = true
 
   //进入talk页面，需要加载下当前地理位置，发布时携带
   onLoad () {
