@@ -182,10 +182,10 @@ export default class TalkPage extends Vue {
     /*if (params.load) {
       this.initQuery()
     }*/
-    CommonUtil.delayTime(1000).then(() => {
+    /*CommonUtil.delayTime(1000).then(() => {
       this.toTalkAdd()
-    })
-    // this.initQuery()
+    })*/
+    this.initQuery()
     UniUtil.showShareMenu()
   }
 
