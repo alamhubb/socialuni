@@ -1,4 +1,5 @@
 export default class GenderType {
+  //现在没办法，只能是中文，以后可以连带后台一起改，因为目前就是用中文做的判断。
   static readonly all: string = '全部'
 
   // 男生

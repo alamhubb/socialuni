@@ -2,7 +2,7 @@ import AppUtilAPI from '@/api/AppUtilAPI'
 import UniUtil from '@/plugins/uni/UniUtil'
 import AppUpdateType from '@/const/AppUpdateType'
 import { configModule } from '@/plugins/store'
-import AppConfig from '@/const/AppConfig'
+import AppConfig from '@/config/AppConfig'
 import Alert from './Alert'
 
 export default class APPUtil {

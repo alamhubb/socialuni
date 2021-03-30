@@ -33,9 +33,6 @@ export default class AppModule extends VuexModule {
   appConfig: any = {}
   onlineUsersCount = 0
 
-  appSocialSecretKey = process.env.VUE_APP_SOCAIL_SECRETKEY
-  appQueryGender = GenderType.all
-
   //三方授权时携带的参数
   threeSecretKey = ''
   threeUserId = ''

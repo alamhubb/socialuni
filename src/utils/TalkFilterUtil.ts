@@ -1,6 +1,7 @@
 import StorageUtil from '@/utils/StorageUtil'
 import GenderType from '@/const/GenderType'
 import { appModule } from '@/plugins/store'
+import AppConfig from '@/config/AppConfig'
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'
@@ -25,7 +26,7 @@ export default class TalkFilterUtil {
   }
 
   static getGenderFilter (): string {
-    return StorageUtil.getObj(TalkFilterUtil.genderFilterKey) || appModule.appQueryGender
+    return StorageUtil.getObj(TalkFilterUtil.genderFilterKey) || AppConfig.appQueryGender
   }
 
   static setFilterData (genderFilter: string, minAge: number, maxAge: number) {

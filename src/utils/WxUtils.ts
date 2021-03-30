@@ -1,5 +1,5 @@
 import UniUtil from '../plugins/uni/UniUtil'
-import AppConfig from '@/const/AppConfig'
+import AppConfig from '@/config/AppConfig'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 import PlatformType from '@/const/PlatformType'
 import { systemModule } from '@/plugins/store'

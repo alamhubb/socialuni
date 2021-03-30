@@ -3,7 +3,7 @@ import NotifyVO from '@/model/NotifyVO'
 import JsonUtil from '@/utils/JsonUtil'
 import { chatModule, notifyModule } from '@/plugins/store'
 import NotifyType from '@/const/NotifyType'
-import AppConfig from '@/const/AppConfig'
+import AppConfig from '@/config/AppConfig'
 import CommonUtil from '@/utils/CommonUtil'
 
 export default class WebsocketUtil {

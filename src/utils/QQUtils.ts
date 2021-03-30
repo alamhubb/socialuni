@@ -1,5 +1,5 @@
 import UniUtil from '../plugins/uni/UniUtil'
-import AppConfig from '@/const/AppConfig'
+import AppConfig from '@/config/AppConfig'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 
 export default class QQUtils {

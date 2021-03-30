@@ -1,5 +1,5 @@
 import { AMapWX } from '@/plugins/amap'
-import AppConfig from '@/const/AppConfig'
+import AppConfig from '@/config/AppConfig'
 import WebAPI from '@/plugins/WebAPI'
 
 export default class MapUtil {

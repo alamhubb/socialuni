@@ -8,6 +8,8 @@ import MsgUtil from '@/utils/MsgUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
 import Toast from '@/utils/Toast'
 import Alert from '@/utils/Alert'
+import SocialConfig from '@/config/SocialConfig'
+import AppConfig from '@/config/AppConfig'
 
 const socialHttp: Request = new Request()
 socialHttp.setConfig(config => { /* 设置全局配置 */
@@ -22,7 +24,7 @@ socialHttp.interceptor.request((config: requestConfig) => { /* 请求之前拦�
   } else {
     config.header.token = null
   }
-  config.header.secretKey = appModule.appSocialSecretKey
+  config.header.secretKey = AppConfig.socialSecretKey
 
   /* else {
     //如果未登录，只允许查询talk，其他全部提示要登录

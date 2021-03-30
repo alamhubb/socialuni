@@ -1,4 +1,4 @@
-import AppConfig from '@/const/AppConfig'
+import AppConfig from '@/config/AppConfig'
 import { configModule } from '@/plugins/store'
 import RouterUtil from '@/utils/RouterUtil'
 

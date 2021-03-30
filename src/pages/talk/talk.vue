@@ -114,13 +114,14 @@ import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { appModule, locationModule, notifyModule, systemModule, tagModule, talkModule } from '@/plugins/store'
+import { notifyModule, systemModule, tagModule, talkModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
 import QButton from '@/components/q-button/QButton.vue'
+import AppConfig from '@/config/AppConfig'
 
 const talkStore = namespace('talk')
 const userStore = namespace('user')
@@ -160,8 +161,8 @@ export default class TalkPage extends Vue {
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
   genders: string [] = ['全部', '男', '女']
   // 组件内的值
-  genderValue: string = appModule.appQueryGender
-  genderDefault: string = appModule.appQueryGender
+  genderValue: string = AppConfig.appQueryGender
+  genderDefault: string = AppConfig.appQueryGender
   rangeValue: number[] = [TalkFilterUtil.minAgeFilterDefault, TalkFilterUtil.maxAgeFilterDefault]
   unreadNotifiesNum = 0
   // 评论输入框
@@ -322,7 +323,7 @@ export default class TalkPage extends Vue {
 
   get useFilters (): boolean {
     //todo 集美这里又区别，默认的筛选
-    return (appModule.appQueryGender === this.genders[0] && this.userGender !== appModule.appQueryGender) ||
+    return (AppConfig.appQueryGender === this.genders[0] && this.userGender !== AppConfig.appQueryGender) ||
       this.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
       this.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
   }
