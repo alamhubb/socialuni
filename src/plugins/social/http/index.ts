@@ -1,14 +1,12 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/plugins/uni/UniUtil'
-import { appModule, configModule } from '@/plugins/store'
+import { configModule } from '@/plugins/store'
 import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
-import Toast from '@/utils/Toast'
 import Alert from '@/utils/Alert'
-import SocialConfig from '@/config/SocialConfig'
 import AppConfig from '@/config/AppConfig'
 
 const socialHttp: Request = new Request()
