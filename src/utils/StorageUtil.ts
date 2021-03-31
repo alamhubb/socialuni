@@ -7,7 +7,9 @@ import JsonUtil from '@/utils/JsonUtil'
 
 export default class StorageUtil {
   static setObj (key: string, value: any) {
-    uni.setStorageSync(key, JsonUtil.toJson(value))
+    if (value) {
+      uni.setStorageSync(key, JsonUtil.toJson(value))
+    }
   }
 
   static getObj (key: string): any {

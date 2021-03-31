@@ -26,7 +26,8 @@
         <!--    如果是绑定手机号，或者手机号登录，就展示手机号。-->
         <!--        手机号界面-->
         <!--        35*4 = 140 +30+80 = 250高度-->
-        <view v-if="showPhoneView" class="h150px">
+        <!--        如果有用户且不为微信，则默认展示验证码绑定-->
+        <view v-if="(user&&!isMpWX) || showPhoneView" class="h150px">
           <!--          如果没登录-->
           <!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
                       <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
@@ -208,7 +209,7 @@
           <!--            如果为第三方授权，如果为授权手机号-->
           <view class="col-row-center w300px">
             <!--            手机号登录界面-->
-            <template v-if="showPhoneView">
+            <template v-if="(user&&!isMpWX) || showPhoneView">
               <!--            如果是输入手机号页面，未登录，提示登录-->
               <button :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
                       class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
@@ -266,6 +267,9 @@
                   <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
                   绑定微信手机号{{ isAuthPhone ? '并授权' : '' }}
                 </button>
+                <div class="h40px mt w100p row-center">
+                  <!--                  不支持其他的绑定方式-->
+                </div>
                 <!--                其他为错误的逻辑-->
               </template>
             </template>
@@ -285,7 +289,7 @@
                     <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                   </template>
                   <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
-                  <template v-else-if="user&&!hasPhoneNum">
+                  <template v-else>
                     {{ isAuthPhone ? '不授权' : '不绑定' }}返回
                     <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                   </template>
@@ -313,7 +317,7 @@
                       <!--                      集美-->
                     </template>
                     <!--              已登录，不为三方授权，进来只能是绑定微信手机号-->
-                    <template v-else-if="!hasPhoneNum">
+                    <template v-else>
                       {{ isAuthPhone ? '不授权' : '不绑定' }}返回
                       <!--                      {{ isAuthPhone ? '集美' : '' }}-->
                     </template>
@@ -325,13 +329,13 @@
             <view @click="switchShowPhoneNum" class="row-end-center">
               <view class="text-gray">
                 <!--            手机号登录界面-->
-                <template v-if="showPhoneView">
+                <template v-if="(user&&!isMpWX)||showPhoneView">
                   <!--            如果是输入手机号页面，未登录，提示手机号登录-->
                   <template v-if="!user">
                     其他方式{{ isAuthPhone ? '授权' : '登录' }}
                   </template>
                   <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
-                  <template v-else-if="user&&!hasPhoneNum">
+                  <template v-else-if="user&&!hasPhoneNum&&isMpWX">
                     其他方式{{ isAuthPhone ? '授权' : '绑定' }}
                   </template>
                   <!--              其他为错误的逻辑-->
@@ -353,7 +357,9 @@
                   </template>
                 </template>
               </view>
-              <u-icon v-if="showPhoneView||!user||(!hasPhoneNum&&!isAuthUser)" class="ml-xs text-gray"
+              <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
+              <u-icon v-if="(!user||isMpWX) && (showPhoneView||!user||(!hasPhoneNum&&!isAuthUser))"
+                      class="ml-xs text-gray"
                       name="arrow-right"></u-icon>
             </view>
           </view>
@@ -460,7 +466,6 @@ export default class LoginPage extends Vue {
   phoneNum = ''
   authCode = ''
   countDown = 0
-  bindBtnDisabled = false
   openTypeBtnEnable = true
 
   showPhoneView = false
@@ -607,19 +612,23 @@ export default class LoginPage extends Vue {
     if (!this.contractChecked) {
       return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
     }*/
-    if (!this.openTypeBtnEnable) {
+    if (this.openTypeBtnEnable) {
       this.openTypeBtnEnable = false
       if (this.user) {
-        //手机号绑定
-        const user = await UserAPI.bindPhoneNumAPI(this.phoneNum, this.authCode)
-        userModule.setUser(user)
-        let msg = '绑定成功'
-        //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-        if (systemModule.isIosAndMpQQ) {
-          msg += '，如遇无法弹出输入框，请重启应用'
+        if (!this.user.phoneNum) {
+          //手机号绑定
+          const user = await UserAPI.bindPhoneNumAPI(this.phoneNum, this.authCode)
+          userModule.setUser(user)
+          let msg = '绑定成功'
+          //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
+          if (systemModule.isIosAndMpQQ) {
+            msg += '，如遇无法弹出输入框，请重启应用'
+          }
+          // 提示验证码发送成功
+          Alert.hint(msg)
+        } else {
+          Alert.hint('您已绑定手机号')
         }
-        // 提示验证码发送成功
-        Alert.hint(msg)
       } else {
         const loginData = new ProviderUserVO()
         loginData.phoneNum = this.phoneNum
@@ -632,6 +641,8 @@ export default class LoginPage extends Vue {
       if (this.isThreeAuth) {
         //如果点了按钮就会并授权，要不然也不会到这里
         await this.authUserOrPhoneNum()
+      } else {
+        this.goBackPage()
       }
       this.openTypeBtnEnable = true
     }
