@@ -39,7 +39,7 @@
               <q-icon icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius sm">
-              {{ talk.user.justiceValue }}
+              {{ talk.user.justiceValue > 1000 ? Math.floor(talk.user.justiceValue / 1000)  + 'k': talk.user.justiceValue }}
             </view>
           </view>
         </view>
@@ -62,7 +62,7 @@
                 @click.stop="addFollow">
           关注
         </button>
-        <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>
+        <view v-else class="bg-grey box-xs" @click.stop="addFollow">已关注</view>
       </view>
     </view>
   </view>

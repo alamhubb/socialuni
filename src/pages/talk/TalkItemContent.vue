@@ -40,10 +40,9 @@
           </view>
         </template>
         <!-- 三方数据才显示数据来源-->
-        <view v-if="talk.threeContent" class="ml cu-tag round bg-orange light">
+        <view v-if="talk.threeContent" class="ml-sm cu-tag round bg-orange light" @click.stop="goToThreeAppClick(talk.threeAppId,talk.threeTalkPath)">
           {{ talk.threeAppName }}
-          <q-icon v-if="talk.threeTalkPath" icon="mdi-near-me" class="ml-xs" size="14"
-                  @click="goToThreeAppClick(talk.threeAppId,talk.threeTalkPath)"></q-icon>
+          <q-icon v-if="talk.threeTalkPath" icon="mdi-near-me" class="ml-xs" size="14"></q-icon>
         </view>
       </view>
     </view>

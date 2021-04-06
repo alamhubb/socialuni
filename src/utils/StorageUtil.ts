@@ -9,6 +9,8 @@ export default class StorageUtil {
   static setObj (key: string, value: any) {
     if (value) {
       uni.setStorageSync(key, JsonUtil.toJson(value))
+    } else {
+      StorageUtil.remove(key)
     }
   }
 
