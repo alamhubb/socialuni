@@ -42,7 +42,7 @@
         </q-bar>
         <view class="mt-sm pb-sm">
           <!--          只有当前应用类型为全部性别才显示性别筛选-->
-          <view class="row-center px pt" v-if="appGender === GenderType.all">
+          <view class="row-center px pt" v-if="appGender === GenderTypeAll">
             <view class="w50px flex-none">性别：</view>
             <radio-group @change="genderChange" class="flex-1">
               <div class="flex-row row-wrap">
@@ -159,7 +159,7 @@ export default class TalkPage extends Vue {
   // 组件内的值
   genderTypeValue: string = talkModule.userGender
   appGender: string = SocialConfig.appGenderType
-  GenderType = GenderType
+  GenderTypeAll = GenderType.all
   rangeValue: number[] = [talkModule.userMinAge, talkModule.userMaxAge]
   unreadNotifiesNum = 0
   // 评论输入框

@@ -12,7 +12,7 @@
         </view>
 
         <!-- 不为单性应用，且用户没修改过性别才可修改-->
-        <view class="cu-form-group" v-if="appGenderType === GenderType.all && !user.genderModified">
+        <view class="cu-form-group" v-if="appGenderType === GenderTypeAll && !user.genderModified">
           <view class="title">性别</view>
           <view>
             <radio-group @change="genderChange" class="flex-1">
@@ -128,7 +128,7 @@ export default class UserEdit extends Vue {
   btnDisabled = false
 
   appGenderType = SocialConfig.appGenderType
-  GenderType = GenderType
+  GenderTypeAll = GenderType.all
 
   genders: EnumStrVO [] = GenderType.userEditEnums
 

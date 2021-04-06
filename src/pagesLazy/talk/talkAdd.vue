@@ -115,8 +115,9 @@
                       :default-value="visibleTypeValueIndex"
                       @confirm="selectVisibleTypeChange"></u-select>
           </view>
+<!--          {{GenderType.all}}&#45;&#45;{{appGenderType}}&#45;&#45;{{GenderType.all === appGenderType}}-->
           <!--          只有不为单性app才显示-->
-          <template v-if="GenderType.all === appGenderType">
+          <template v-if="GenderTypeAll === appGenderType">
             <div>，</div>
             <view class="text-gray row-all-center bg-grey w100px mx-xs px-xs" @click="showVisibleGenderSelect=true">
               <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
@@ -190,7 +191,7 @@ export default class TalkAddPage extends Vue {
   //默认为软件的性别
   visibleGenderValue = SocialConfig.appGenderType
   appGenderType = SocialConfig.appGenderType
-  GenderType = GenderType
+  GenderTypeAll = GenderType.all
 
   talkContent = ''
   buttonDisabled = false

@@ -31,11 +31,11 @@
 
       <view class="row-col-center">
         <!--      只有非单性才需要这样显示-->
-        <template v-if="appGenderType === GenderType.all">
-          <view v-if="talk.visibleGender === GenderType.girl" class="cu-tag round bg-pink light">
+        <template v-if="appGenderType === GenderTypeAll">
+          <view v-if="talk.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
             女生可见
           </view>
-          <view v-else-if="talk.visibleGender === GenderType.boy" class="cu-tag round bg-blue light">
+          <view v-else-if="talk.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
             男生可见
           </view>
         </template>
@@ -74,7 +74,9 @@ import SocialConfig from '@/config/SocialConfig'
 export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
-  GenderType = GenderType
+  GenderTypeAll = GenderType.all
+  GenderTypeGirl = GenderType.girl
+  GenderTypeBoy = GenderType.boy
   appGenderType = SocialConfig.appGenderType
 
   toTalkDetailVue () {
