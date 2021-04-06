@@ -1,7 +1,7 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-row-bar class="flex-none" :class="tabsId">
+    <q-row-bar class="flex-none btr-smm mt-smm bg-theme-bg" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
@@ -9,10 +9,10 @@
           </q-tab>
         </template>
         <template #icon="{tab}">
-          <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
+          <q-icon class="px-xs text-theme" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
         </template>
       </q-tabs>
-      <view class="row-col-center mr-60px" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
+      <view class="row-col-center mr-60px text-theme" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
         <view v-if="talkTabObj.loadMore===loading">
           <u-loading mode="circle"></u-loading>
         </view>
@@ -34,7 +34,7 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-    <swiper class="flex-1 btr-dff bg-default" :current="swiperCurrent"
+    <swiper class="flex-1 bg-theme-bg" :current="swiperCurrent"
             :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
@@ -52,7 +52,7 @@
                      :lower-threshold="800"
                      @scroll="talksScrollEvent">
           <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-          <div class="pt-sm px-sm"
+          <div class="px-sm pb-60px"
                v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
             <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
               <talk-item :talk="talk"
@@ -255,9 +255,6 @@ export default class TabsTalkPage extends Vue {
 
   @locationStore.State('location') location: DistrictVO
   @Prop() readonly selectTagIds: number[]
-  @Prop() readonly userGender: string
-  @Prop() readonly userMinAge: number
-  @Prop() readonly userMaxAge: number
 
   //供父组件使用，不可删除
   initQuery () {
@@ -279,7 +276,7 @@ export default class TabsTalkPage extends Vue {
   autoChooseUseLocationQueryTalks (firstLoad?: boolean) {
     //只有不为加载中才可以加载
     //手动刷新可以刷新，或者为
-    if (this.talkTabObj.loadMore === LoadMoreType.more) {
+    if (this.talkTabObj.loadMore === LoadMoreType.more || firstLoad) {
       // 执行正在加载动画
       this.talkTabObj.loadMore = LoadMoreType.loading
       // if (firstLoad) {
@@ -301,7 +298,7 @@ export default class TabsTalkPage extends Vue {
     const fistLoad = firstLoad || this.talkTabObj.firstLoad
     // query condition
     const talkIds: number[] = (fistLoad ? [] : this.talkIds)
-    TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, this.userGender, this.userMinAge, this.userMaxAge).then((res: any) => {
+    TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, talkModule.userGender, talkModule.userMinAge, talkModule.userMaxAge).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {

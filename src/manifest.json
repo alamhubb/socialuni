@@ -159,7 +159,7 @@
         /* 小程序特有相关 */
         "usingComponents" : true,
         //        腾讯地图FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD
-        "appid" : "wx0bf5fe9ceeab514c",
+        "appid" : "wx4f23a7f2f202599f",
         "setting" : {
             "urlCheck" : true
         },
@@ -216,7 +216,7 @@
     },
     // 高速公路行驶持续后台定位
     "h5" : {
-        "title" : "清池恋爱交友app - 00后干净的恋爱交友社区",
+        "title" : "集美小世界 - 女生日常分享交友圈",
         "router" : {
             "mode" : "history"
         },

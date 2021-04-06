@@ -11,20 +11,14 @@
           <view class="uni-icon uni-icon-clear" v-if="nickname" @click="clearNickname"></view>
         </view>
 
-        <view class="cu-form-group">
+        <!-- 不为单性应用，且用户没修改过性别才可修改-->
+        <view class="cu-form-group" v-if="appGenderType === GenderType.all && !user.genderModified">
           <view class="title">性别</view>
           <view>
-            <radio-group @change="genderChange">
-              <label class="mr-sm">
-                <radio class='blue cuIcon-male' :class="gender=='男'?'checked':''"
-                       :checked="gender=='男'?true:false" value="男"></radio>
-                <text class="ml-5px">男</text>
-              </label>
-
-              <label>
-                <radio class='pink cuIcon-female' :class="gender=='女'?'checked':''"
-                       :checked="gender=='女'?true:false" value="女"></radio>
-                <text class="ml-5px">女</text>
+            <radio-group @change="genderChange" class="flex-1">
+              <label v-for="report in genders" :key="report.value">
+                <radio :value="report.value" :checked="report.value===gender"></radio>
+                <text class="mr-sm">{{ report.label }}</text>
               </label>
             </radio-group>
           </view>
@@ -113,6 +107,9 @@ import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import { userModule } from '@/plugins/store'
 import UserVO from '@/model/user/UserVO'
+import EnumStrVO from '@/const/EnumStrVO'
+import GenderType from '@/const/GenderType'
+import SocialConfig from '@/config/SocialConfig'
 
 const userStore = namespace('user')
 
@@ -120,7 +117,7 @@ const userStore = namespace('user')
 export default class UserEdit extends Vue {
   @userStore.State('user') user: UserVO
   nickname = ''
-  gender = '女'
+  gender = GenderType.girl
   birthday = '1999-01-01'
   city = ''
   wxAccount = ''
@@ -130,6 +127,11 @@ export default class UserEdit extends Vue {
   endDate = ''
   btnDisabled = false
 
+  appGenderType = SocialConfig.appGenderType
+  GenderType = GenderType
+
+  genders: EnumStrVO [] = GenderType.userEditEnums
+
   created () {
     this.endDate = parseDate(new Date())
     this.initData()
@@ -138,7 +140,7 @@ export default class UserEdit extends Vue {
   initData () {
     if (this.user) {
       this.nickname = this.user.nickname || ''
-      this.gender = this.user.gender || '女'
+      this.gender = this.user.gender || GenderType.girl
       this.birthday = this.user.birthday || '1999-01-01'
       this.city = this.user.city || ''
       this.contactAccount = this.user.contactAccount || ''
@@ -183,7 +185,7 @@ export default class UserEdit extends Vue {
     this.wbAccount = ''
   }
 
-  saveUser () {
+  async saveUser () {
     if (this.contactAccount) {
       if (this.contactAccount.length > 30) {
         Alert.hint('联系方式不能超过30个字符，例如：vx:491369310')
@@ -193,6 +195,15 @@ export default class UserEdit extends Vue {
         return
       }
     }
+
+    //修改了性别
+    if (this.user.gender !== this.gender) {
+      const confirm = await Alert.confirm('性别修改后不可再更改，请确认是否修改')
+      if (!confirm) {
+        return Toast.toastLong('您选择了不修改性别')
+      }
+    }
+
     this.btnDisabled = true
     Alert.confirm('是否确定修改个人信息').then(() => {
       const userCopy = JsonUtils.deepClone(this.user)

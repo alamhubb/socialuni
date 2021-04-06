@@ -208,7 +208,10 @@ const chatStore = namespace('chat')
 const userStore = namespace('user')
 
 @Component({
-  components: { ReportDialog, TalkItem }
+  components: {
+    ReportDialog,
+    TalkItem
+  }
 })
 export default class MessagePage extends Vue {
   public $refs!: {
@@ -492,7 +495,10 @@ export default class MessagePage extends Vue {
             await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
             //需要充值提示
           } else {
-            await Alert.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+            const confirm = await Alert.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
+            if (!confirm) {
+              return Toast.toastLong('您选择了不开启回话')
+            }
             const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
             try {
               await PlatformUtils.pay(provider, PayType.shell, 1)

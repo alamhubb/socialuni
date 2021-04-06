@@ -1,6 +1,6 @@
 <template>
   <view class="w100p">
-    <view class="q-nav-bar">
+    <view class="q-nav-bar" :class="customClass">
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes
 
@@ -31,6 +31,8 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 * */
 @Component
 export default class QNavBar extends Vue {
+  @Prop() customClass: string
+
   @systemStore.State('statusBarHeight') statusBarHeight
   @systemStore.State('navBarHeight') navBarHeight
   @systemStore.State('titleHeight') titleHeight

@@ -5,7 +5,7 @@
       ></tag-search>
     </view>
     <view v-show="!showTagSearch" class="flex-col h100p bg-theme">
-      <q-navbar class="flex-none">
+      <q-navbar class="flex-none" :custom-class="'bg-theme'">
         <q-search class="flex-auto" @click.native="openTagSearchVue">
           <q-icon class="mx-5px text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
@@ -19,7 +19,7 @@
                   @click.native.stop="deleteTag(selectTag)"
           ></q-icon>
         </q-search>
-        <view class="mr-sm" :class="{'text-blue':useFilters}">
+        <view class="mr-sm" :class="{'text-theme':useFilters}">
           <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
         </view>
         <view v-if="user" class="position-relative mr-sm">
@@ -34,27 +34,30 @@
 
       <q-popup v-model="showFilter" bottom>
         <q-bar round class="solid-bottom">
-          <view class="text-black text-md font-bold">筛选</view>
+          <view class="text-black text-md font-bold">动态筛选</view>
           <view class="flex-row">
             <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
             <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
           </view>
         </q-bar>
-        <view class="mt pb-sm">
-          <view class="row-center px pt" v-if="genderDefault === '全部'">
-            <view class="w50px row-start">性别：</view>
-            <view>
-              <radio-group @change="genderChange" class="flex-1">
-                <label v-for="report in genders" :key="report">
-                  <radio :value="report" :checked="report===genderValue"></radio>
-                  <text class="ml-sm mr">{{ report }}</text>
-                </label>
-              </radio-group>
-            </view>
+        <view class="mt-sm pb-sm">
+          <!--          只有当前应用类型为全部性别才显示性别筛选-->
+          <view class="row-center px pt" v-if="appGender === GenderType.all">
+            <view class="w50px flex-none">性别：</view>
+            <radio-group @change="genderChange" class="flex-1">
+              <div class="flex-row row-wrap">
+                <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
+                  <label>
+                    <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
+                    <text class="ml-sm mr">{{ report.label }}</text>
+                  </label>
+                </div>
+              </div>
+            </radio-group>
           </view>
-          <view class="mt-20px pb-xl pt">
+          <view class="mt-sm pb-xl pt">
             <view class="row-between px">
-              <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
+              <view>发布人年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
             </view>
             <view class="px">
               <q-slider
@@ -80,9 +83,6 @@
       <tabs-talk class="flex-1" ref="tabsTalk"
                  :scroll-enable="scrollEnable"
                  :selectTagIds="selectTagIds"
-                 :userGender="userGender"
-                 :userMinAge="userMinAge"
-                 :userMaxAge="userMaxAge"
                  :tabs-id="tabsId"
       ></tabs-talk>
     </view>
@@ -121,9 +121,9 @@ import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
 import QButton from '@/components/q-button/QButton.vue'
-import AppConfig from '@/config/AppConfig'
+import SocialConfig from '@/config/SocialConfig'
+import GenderType from '@/const/GenderType'
 
-const talkStore = namespace('talk')
 const userStore = namespace('user')
 const notifyStore = namespace('notify')
 const configStore = namespace('config')
@@ -145,9 +145,6 @@ export default class TalkPage extends Vue {
   }
   @userStore.State('user') user: UserVO
   // 轮播图
-  @talkStore.State('userMinAge') userMinAge: number
-  @talkStore.State('userMaxAge') userMaxAge: number
-  @talkStore.State('userGender') userGender: string
   // 点击通知去通知页
   @notifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
   // 轮播图
@@ -159,11 +156,11 @@ export default class TalkPage extends Vue {
   // 筛选相关
   rangeMin: number = TalkFilterUtil.minAgeFilterDefault
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
-  genders: string [] = ['全部', '男', '女']
   // 组件内的值
-  genderValue: string = AppConfig.appQueryGender
-  genderDefault: string = AppConfig.appQueryGender
-  rangeValue: number[] = [TalkFilterUtil.minAgeFilterDefault, TalkFilterUtil.maxAgeFilterDefault]
+  genderTypeValue: string = talkModule.userGender
+  appGender: string = SocialConfig.appGenderType
+  GenderType = GenderType
+  rangeValue: number[] = [talkModule.userMinAge, talkModule.userMaxAge]
   unreadNotifiesNum = 0
   // 评论输入框
   showMsgInput = false
@@ -178,14 +175,25 @@ export default class TalkPage extends Vue {
   readonly uuid: string = 'u' + CommonUtil.getUUID()
   readonly tabsId: string = this.uuid + '_tabs'
 
+  get visibleGenders () {
+    if (this.user) {
+      if (this.user.gender === GenderType.girl) {
+        return GenderType.talkQueryGirlEnums
+      } else {
+        return GenderType.talkQueryBoyEnums
+      }
+    }
+    return GenderType.talkQueryEnums
+  }
+
   onLoad (params: any) {
+    console.log(this.genderTypeValue)
     /*if (params.load) {
       this.initQuery()
     }*/
     /*CommonUtil.delayTime(1000).then(() => {
       this.toTalkAdd()
     })*/
-    this.initQuery()
     UniUtil.showShareMenu()
   }
 
@@ -198,8 +206,8 @@ export default class TalkPage extends Vue {
     })
     // 这里是不是有问题应该选择异性
     // 指的是用户选择的筛选性别
-    this.genderValue = this.userGender
-    this.rangeValue = [this.userMinAge, this.userMaxAge]
+    this.initFilterValue()
+    this.initQuery()
   }
 
   // todo 有个1
@@ -308,24 +316,26 @@ export default class TalkPage extends Vue {
     }
   }
 
+  //隐藏和展示都使用user中的默认值
   showFilterModel () {
     this.showFilter = true
     //修复打开filter时，当前值不对的问题
-    this.genderValue = this.userGender
-    this.rangeValue = [this.userMinAge, this.userMaxAge]
   }
 
   hideFilter () {
     this.showFilter = false
-    this.genderValue = this.userGender
-    this.rangeValue = [this.userMinAge, this.userMaxAge]
+    this.initFilterValue()
+  }
+
+  initFilterValue () {
+    this.genderTypeValue = talkModule.userGender
+    this.rangeValue = [talkModule.userMinAge, talkModule.userMaxAge]
   }
 
   get useFilters (): boolean {
-    //todo 集美这里又区别，默认的筛选
-    return (AppConfig.appQueryGender === this.genders[0] && this.userGender !== AppConfig.appQueryGender) ||
-      this.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
-      this.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
+    return talkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialConfig.appGenderType) ||
+      talkModule.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
+      talkModule.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
   }
 
   format () {
@@ -337,14 +347,11 @@ export default class TalkPage extends Vue {
   }
 
   genderChange ({ target }) {
-    this.genderValue = target.value
+    this.genderTypeValue = target.value
   }
 
   filterQuery () {
-    talkModule.userGender = this.genderValue
-    talkModule.userMinAge = this.rangeValue[0]
-    talkModule.userMaxAge = this.rangeValue[1]
-    TalkFilterUtil.setFilterData(talkModule.userGender, talkModule.userMinAge, talkModule.userMaxAge)
+    talkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
     this.hideFilter()
     this.initQuery()
   }

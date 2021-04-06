@@ -88,6 +88,17 @@
   border-top-left-radius: 10px;
 }
 
+.btr-sm {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.btr-smm {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+
 .btr {
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
@@ -134,19 +145,19 @@
 .bd-gray {
   border: solid 1px #aaaaaa;
   color: #aaaaaa;
-  @extend .bg-theme;
+  @extend .bg-white;
 }
 
 .bd-white {
   border: solid 1px white;
   color: white;
-  @extend .bg-theme;
+  @extend .bg-white;
 }
 
 .bd-blue {
   border: solid 1px #0081ff;
   color: #0081ff;
-  @extend .bg-theme;
+  @extend .bg-white;
 }
 
 .bd-1 {

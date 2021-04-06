@@ -3,9 +3,10 @@
   @extend .h30px;
   @extend .w40px;
   @extend .text-md;
-
+  @extend .text-theme;
   * {
     @extend .text-md;
+    @extend .text-theme;
   }
 }
 

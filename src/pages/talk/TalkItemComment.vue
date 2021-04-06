@@ -38,7 +38,7 @@
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
             <view class="flex-row py-mn" @click="toTalkDetailVue">
-              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue-dark'"
+              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'text-theme'"
                     @click.stop="toUserDetail(comment.user.id)">
                 {{comment.user.nickname}}
               </view>

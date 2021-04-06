@@ -1,5 +1,7 @@
 .q-row-bar {
-  @extend .bg-theme;
+  //@extend .bg-theme;
+  //@extend .bg-white;
+  @extend .text-black;
   @extend .row-between;
   @extend .px;
   @extend .py-sm;

@@ -14,21 +14,6 @@
       }
     },
     {
-      "path": "pages/match/match",
-      "style": {
-        "navigationBarTitleText": "匹配",
-        "enablePullDownRefresh": true,
-        "onReachBottomDistance": 800
-      }
-    },
-    {
-      "path": "pages/chat/chat",
-      "style": {
-        "navigationBarTitleText": "消息",
-        "enablePullDownRefresh": true
-      }
-    },
-    {
       "path": "pages/user/login",
       "style": {
         "navigationStyle": "custom"
@@ -66,7 +51,7 @@
         {
           "path": "talk/talkAdd",
           "style": {
-            "navigationBarTitleText": "发布动态"
+            "navigationStyle": "custom"
           }
         },
         {
@@ -165,18 +150,6 @@
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "社区"
-      },
-      {
-        "pagePath": "pages/match/match",
-        "iconPath": "static/img/favorite-gray-36dp.png",
-        "selectedIconPath": "static/img/favorite-blue-36dp.png",
-        "text": "匹配"
-      },
-      {
-        "pagePath": "pages/chat/chat",
-        "iconPath": "static/img/question_answer-gray-36dp.png",
-        "selectedIconPath": "static/img/question_answer-blue-36dp.png",
-        "text": "消息"
       },
       {
         "pagePath": "pages/user/mine",

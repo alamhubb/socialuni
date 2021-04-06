@@ -3,6 +3,7 @@ import StorageUtil from '@/utils/StorageUtil'
 
 const initTag = new TagVO()
 initTag.name = '未选择'
+initTag.id = 0
 
 export default class TagUtil {
   static readonly initTag: TagVO = initTag

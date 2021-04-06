@@ -1,15 +1,15 @@
 export default class Alert {
   public static confirm (msg: string, okLabel = '确定', cancel = '取消') {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       uni.showModal({
         content: msg,
         confirmText: okLabel,
         cancelText: cancel,
         success (res) {
           if (res.confirm) {
-            resolve(null)
+            resolve(true)
           } else if (res.cancel) {
-            reject(new Error('点击了取消'))
+            resolve(false)
           }
         }
       })

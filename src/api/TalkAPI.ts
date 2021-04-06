@@ -11,8 +11,8 @@ import ImgFileVO from '@/model/ImgFileVO'
 import TalkVO from '@/model/talk/TalkVO'
 
 export default class TalkAPI {
-  static addTalkAPI (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string) {
-    const data: TalkAddVO = new TalkAddVO(content, imgs, district, tagIds, visibleType)
+  static addTalkAPI (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
+    const data: TalkAddVO = new TalkAddVO(content, imgs, district, tagIds, visibleType, visibleGender)
     return http.post('talk/addTalk', data)
   }
 

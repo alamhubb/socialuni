@@ -1,13 +1,13 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/plugins/uni/UniUtil'
-import { configModule } from '@/plugins/store'
+import { configModule, systemModule } from '@/plugins/store'
 import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
 import Alert from '@/utils/Alert'
-import AppConfig from '@/config/AppConfig'
+import SocialConfig from '@/config/SocialConfig'
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
@@ -22,7 +22,9 @@ http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 *
   } else {
     config.header.token = null
   }
-  config.header.secretKey = AppConfig.socialSecretKey
+  config.header.secretKey = SocialConfig.socialSecretKey
+  config.header.provider = systemModule.provider
+  config.header.platform = systemModule.platform
 
   /* else {
     //如果未登录，只允许查询talk，其他全部提示要登录

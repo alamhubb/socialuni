@@ -1,4 +1,4 @@
-import { notifyModule, systemModule, userModule } from '../plugins/store'
+import { chatModule, notifyModule, systemModule, userModule } from '../plugins/store'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import ResultVO from '@/model/ResultVO'
@@ -9,6 +9,7 @@ import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import UniUtil from '@/plugins/uni/UniUtil'
 import ErrorCode from '@/const/ErrorCode'
 import Toast from '@/utils/Toast'
+import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
 
 export default class UserService {
   //清空用户信息的组合操作
@@ -23,12 +24,13 @@ export default class UserService {
   /**
    * 调用后台仅user和user初始化相关信息,通知列表，开启websocket连接
    */
-  static getMineUserInitDataActionByToken (res: ResultVO<LoginResultVO>) {
+  static getMineUserInitDataActionByToken (res: ResultVO<ThreeAuthResultVO>) {
     TokenUtil.set(res.data.tokenCode)
     //登录之后重连websocket
     WebsocketUtil.websocketClose()
     userModule.setUser(res.data.user)
     notifyModule.queryNotifiesAction()
+    chatModule.getChatsAction()
     return res.data.user
   }
 

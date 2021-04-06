@@ -6,6 +6,7 @@ export default class TalkAddVO {
   public content: string
   public adCode: string
   public visibleType: string
+  public visibleGender: string
   public imgs: ImgFileVO []
   public tagIds: number[]
   // 经度,经度范围-180~180
@@ -13,9 +14,10 @@ export default class TalkAddVO {
   // 纬度,纬度范围-90~90
   public lat: number = null
 
-  constructor (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string) {
+  constructor (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
     this.content = content
     this.visibleType = visibleType
+    this.visibleGender = visibleGender
     this.imgs = imgs
     this.tagIds = tagIds
     this.adCode = LocationUtil.chinaAdCode

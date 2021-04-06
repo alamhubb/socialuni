@@ -1,20 +1,18 @@
 <script lang="ts">
 import Vue from 'vue'
-import { appModule, systemModule } from '@/plugins/store'
+import { appModule, systemModule, userModule } from '@/plugins/store'
 import UserService from '@/service/UserService'
-import UserAPI from '../uniCloud-aliyun/cloudfunctions/UserAPI'
-
+import SocialConfig from '@/config/SocialConfig'
+import ThreeAuthType from '@/const/ThreeAuthType'
+import Toast from '@/utils/Toast'
+import ResultVO from '@/model/ResultVO'
+import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
+import PageUtil from '@/utils/PageUtil'
 
 export default Vue.extend({
-
-
-
-
   mpType: 'app',
   //测试已开启的情况下是否会这样
   onLaunch (params) {
-    UserAPI.queryUsers()
-
     // appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
     // appModule.threeUserId = '10081'
     // appModule.threeAuthType = SocialAuthType.phone
@@ -24,9 +22,10 @@ export default Vue.extend({
       name: 'getUser',
       data: { a: 1 }
     })*/
-
     //如果有跳转信息
-    appModule.setThreeAuthInfo(params)
+    if (SocialConfig.authApp) {
+      appModule.setThreeAuthInfo(params)
+    }
     //无论如何都要获取当前用户信息
     UserService.getMineUserInitDataAction()
     // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
@@ -44,7 +43,31 @@ export default Vue.extend({
   },
   //@ts-ignore
   onShow (params) {
-    appModule.setThreeAuthInfo(params)
+    //避免已打开情况，进入不为lunchan而是show
+    if (params && params.referrerInfo) {
+      if (SocialConfig.authApp) {
+        appModule.setThreeAuthInfo(params)
+      } else {
+        const info = params.referrerInfo
+        //这里可以返回回来的appId
+        // appModule.threeProviderAppId = info.appId
+        if (info.extraData) {
+          const extraData: ResultVO<ThreeAuthResultVO> = info.extraData
+          if (extraData.success) {
+            const authData: ThreeAuthResultVO = extraData.data
+            if (authData.authType === ThreeAuthType.user) {
+              Toast.toastLong('授权登录成功')
+              UserService.getMineUserInitDataActionByToken(extraData)
+            } else {
+              Toast.toastLong('手机号绑定成功')
+              userModule.user.phoneNum = authData.phoneNum
+              userModule.setUser(userModule.user)
+            }
+            PageUtil.toMinePage()
+          }
+        }
+      }
+    }
   }
 })
 </script>

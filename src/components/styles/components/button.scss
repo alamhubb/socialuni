@@ -1,7 +1,3 @@
-@import "../common/var";
-@import "../common/box";
-@import "../common/bg-color";
-@import "../common/click";
 @import "../mixins/mixins";
 @import "../mixins/utils";
 
@@ -39,7 +35,7 @@
   @include bg-color($color-theme);
 
   //遍历所有颜色样式类
-  @each $key, $val in $colors {
+  @each $key, $val in $bg-colors {
     &.bg-#{$key} {
       @include bg-color($val);
     }

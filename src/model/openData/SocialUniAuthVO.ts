@@ -1,4 +1,4 @@
-import AppConfig from '@/config/AppConfig'
+import SocialConfig from '@/config/SocialConfig'
 
 export default class SocialUniAuthVO {
   authType: string
@@ -10,7 +10,7 @@ export default class SocialUniAuthVO {
   //用户id选填，不填将联盟生成并返回
   constructor (authType: string, appUserId?: string) {
     this.authType = authType
-    this.appSecretKey = AppConfig.socialSecretKey
+    this.appSecretKey = SocialConfig.socialSecretKey
     this.appUserId = appUserId
   }
 }

@@ -1,5 +1,14 @@
 <template>
   <view class="h100p bg-white">
+    <q-navbar>
+      <div class="w100p row-col-center">
+        <q-icon class="ml" icon="arrow-left" @click="goBackPage"></q-icon>
+        <view class="ml-xl font-bold text-md flex-1">
+          发布动态
+        </view>
+        <q-button class="mr text-bold" sm :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
+      </div>
+    </q-navbar>
     <city-picker v-model="showSearch" :district="district" @confirm="cityChange"></city-picker>
 
     <view v-if="showTagSearch">
@@ -96,73 +105,29 @@
         </view>
       </view>
 
-      <view class="row-col-center pa-sm">
-        <div class="flex-row" @click="showVisibleRangeSelect=true">
+      <view class="row-col-center pd-sm">
+        <div class="flex-row text-md">
           可见范围：
-          <view class="text-gray pr-xs">
-            <text class="text-md text-gray text-md">{{ visibleType.label }}</text>
-            <q-icon size="14" class="text-gray" icon="arrow-right"/>
+          <view class="text-gray row-all-center bg-grey w100px mr-xs px-xs" @click="showVisibleTypeSelect=true">
+            <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
+            <q-icon size="14" class="text-gray" icon="arrow-down"/>
+            <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
+                      :default-value="visibleTypeValueIndex"
+                      @confirm="selectVisibleTypeChange"></u-select>
           </view>
-          <u-select v-model="showVisibleRangeSelect" mode="single-column" :list="visibleTypes"
-                    @confirm="selectVisibleTypeChange"></u-select>
+          <!--          只有不为单性app才显示-->
+          <template v-if="GenderType.all === appGenderType">
+            <div>，</div>
+            <view class="text-gray row-all-center bg-grey w100px mx-xs px-xs" @click="showVisibleGenderSelect=true">
+              <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
+              <q-icon size="14" class="text-gray" icon="arrow-down"/>
+              <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
+                        :default-value="visibleGenderValueIndex"
+                        @confirm="selectVisibleGenderChange"></u-select>
+            </view>
+          </template>
+          <div class="ml-xs">可见</div>
         </div>
-      </view>
-<!--      <u-popup mode="bottom" v-model="showVisibleScopeDialog" border-radius="30" closeable>
-        <view class="content">
-          <scroll-view scroll-y="true" style="height: 150px;">
-            <view>
-              <view v-for="index in 20" :key="index">
-                第{{index}}个Item
-              </view>
-            </view>
-          </scroll-view>
-          <view class="confrim-btn">
-            <u-button @click="show = false;">确定</u-button>
-          </view>
-        </view>
-      </u-popup>-->
-
-<!--      <q-popup v-model="showVisibleScopeDialog" bottom>
-        <q-bar round class="solid-bottom">
-          <view class="text-black text-md font-bold">筛选</view>
-          <view class="flex-row">
-            <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
-            <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
-          </view>
-        </q-bar>
-        <view class="mt pb-sm">
-          <view class="row-center px pt" v-if="genderDefault === '全部'">
-            <view class="w50px row-start">性别：</view>
-            <view>
-              <radio-group @change="genderChange" class="flex-1">
-                <label v-for="report in genders" :key="report">
-                  <radio :value="report" :checked="report===genderValue"></radio>
-                  <text class="ml-sm mr">{{ report }}</text>
-                </label>
-              </radio-group>
-            </view>
-          </view>
-          <view class="mt-20px pb-xl pt">
-            <view class="row-between px">
-              <view>年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
-            </view>
-            <view class="px">
-              <q-slider
-                :value="rangeValue"
-                :min="rangeMin"
-                :max="rangMax"
-                :bar-height="3"
-                active-color="#FF6B00"
-                :format="format"
-                @change="handleRangeChange"
-              ></q-slider>
-            </view>
-          </view>
-        </view>
-      </q-popup>-->
-
-      <view class="row-center pt">
-        <button class="cu-btn lg bg-pink-light2 w300px" :disabled="buttonDisabled" @click="addTalk">发布</button>
       </view>
     </view>
   </view>
@@ -190,15 +155,22 @@ import TagAdd from '@/pages/tag/TagAdd.vue'
 import RouterUtil from '@/utils/RouterUtil'
 import Alert from '../../utils/Alert'
 import LocationUtil from '@/utils/LocationUtil'
-import ContentVisibleType from '@/const/ContentVisibleType'
+import VisibleType from '@/const/VisibleType'
 import EnumStrVO from '@/const/EnumStrVO'
 import Toast from '@/utils/Toast'
+import QNavbar from '@/components/q-navbar/q-navbar.vue'
+import QButton from '@/components/q-button/QButton.vue'
+import PageUtil from '@/utils/PageUtil'
+import GenderType from '@/const/GenderType'
+import SocialConfig from '@/config/SocialConfig'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
 const locationStore = namespace('location')
 @Component({
   components: {
+    QButton,
+    QNavbar,
     TagAdd,
     TalkAddTagSearch,
     CityPicker,
@@ -210,12 +182,20 @@ export default class TalkAddPage extends Vue {
   @tagStore.State('tags') readonly storeTags: TagVO []
   @userStore.State('user') readonly user: UserVO
 
-  showVisibleRangeSelect = false
-  visibleType = ContentVisibleType.smartRecommend
+  showVisibleTypeSelect = false
+  showVisibleGenderSelect = false
+
+  //默认全网
+  visibleTypeValue = VisibleType.fullNetwork.value
+  //默认为软件的性别
+  visibleGenderValue = SocialConfig.appGenderType
+  appGenderType = SocialConfig.appGenderType
+  GenderType = GenderType
+
   talkContent = ''
   buttonDisabled = false
 
-  visibleTypes = ContentVisibleType.Values
+  visibleTypes = VisibleType.enums
 
   district: DistrictVO = locationModule.location
   showsImgSrcs: ImgFileVO [] = []
@@ -225,7 +205,30 @@ export default class TalkAddPage extends Vue {
   showTagSearch = false
   showTagAdd = false
 
-  showVisibleScopeDialog = true
+  //根据用户性别显示不同内容
+  get visibleGenders () {
+    //如果已登录
+    if (this.user && this.user.gender === GenderType.girl) {
+      return GenderType.talkAddGirlEnums
+    }
+    return GenderType.talkAddBoyEnums
+  }
+
+  get visibleType () {
+    return this.visibleTypes.find(item => item.value === this.visibleTypeValue)
+  }
+
+  get visibleGender () {
+    return this.visibleGenders.find(item => item.value === this.visibleGenderValue)
+  }
+
+  get visibleTypeValueIndex () {
+    return [this.visibleTypes.findIndex(item => item.value === this.visibleType.value)]
+  }
+
+  get visibleGenderValueIndex () {
+    return [this.visibleGenders.findIndex(item => item.value === this.visibleGender.value)]
+  }
 
   //进入talk页面，需要加载下当前地理位置，发布时携带
   onLoad () {
@@ -240,7 +243,11 @@ export default class TalkAddPage extends Vue {
   }
 
   selectVisibleTypeChange (visibleTypes: EnumStrVO[]) {
-    this.visibleType = visibleTypes[0]
+    this.visibleTypeValue = visibleTypes[0].value
+  }
+
+  selectVisibleGenderChange (visibleGenders: EnumStrVO[]) {
+    this.visibleGenderValue = visibleGenders[0].value
   }
 
   onReady () {
@@ -260,6 +267,7 @@ export default class TalkAddPage extends Vue {
     if (query || this.tags.length < 11) {
       tagModule.getTagsAction()
     }
+    this.closeTagAddVue()
     this.showTagSearch = true
   }
 
@@ -375,7 +383,7 @@ export default class TalkAddPage extends Vue {
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showsImgSrcs, this.district, this.selectTagIds, this.visibleType.value)
+    TalkAPI.addTalkAPI(this.talkContent, this.showsImgSrcs, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
@@ -442,6 +450,17 @@ export default class TalkAddPage extends Vue {
       current: current,
       urls: this.showImgUrls
     })
+  }
+
+  goBackPage () {
+    if (this.showTagSearch) {
+      this.closeTagSearch()
+    } else if (this.showTagAdd) {
+      this.closeTagAddVue()
+      this.openTagSearchVue(false)
+    } else {
+      PageUtil.toTalkPage()
+    }
   }
 }
 </script>

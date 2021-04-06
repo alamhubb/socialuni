@@ -1,11 +1,5 @@
-import GenderType from '@/const/GenderType'
-
 export default class AppConfig {
   static readonly websocketUrl: string = process.env.VUE_APP_Websocket
-
-  static readonly socialSecretKey = process.env.VUE_APP_SOCIAL_SECRET_KEY
-  //app的性别类型，全部性别，还是仅女生可用
-  static readonly appQueryGender = GenderType.all
 
   static readonly appName: string = '集美小世界app'
   static readonly title: string = '集美小世界 - 女生日常分享交友圈'

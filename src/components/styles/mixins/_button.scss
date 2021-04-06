@@ -1,4 +1,3 @@
-@import "../common/var";
 @mixin button-plain($color) {
   color: $color;
   background: mix($color-white, $color, 90%);

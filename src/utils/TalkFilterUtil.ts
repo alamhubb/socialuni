@@ -1,7 +1,6 @@
 import StorageUtil from '@/utils/StorageUtil'
+import SocialConfig from '@/config/SocialConfig'
 import GenderType from '@/const/GenderType'
-import { appModule } from '@/plugins/store'
-import AppConfig from '@/config/AppConfig'
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'
@@ -11,6 +10,7 @@ export default class TalkFilterUtil {
   // 附近
   static readonly minAgeFilterDefault: number = 8
   static readonly maxAgeFilterDefault: number = 40
+
   // static readonly genderFilterDefault: string = GenderType.all
 
   static getNotFirstSetAge (): boolean {
@@ -26,7 +26,14 @@ export default class TalkFilterUtil {
   }
 
   static getGenderFilter (): string {
-    return StorageUtil.getObj(TalkFilterUtil.genderFilterKey) || AppConfig.appQueryGender
+    //如果值不在列表中，返回默认值
+    const storeGender = StorageUtil.getObj(TalkFilterUtil.genderFilterKey)
+    const mapGender = GenderType.mapOld.get(storeGender)
+    //兼容处理，旧版本key转新版本
+    if (storeGender && mapGender) {
+      return mapGender
+    }
+    return GenderType.talkQueryFilterMap.get(SocialConfig.appGenderType)
   }
 
   static setFilterData (genderFilter: string, minAge: number, maxAge: number) {

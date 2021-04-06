@@ -1,5 +1,5 @@
 import { VuexModule, Module, Action } from 'vuex-class-modules'
-import { systemModule, userModule } from './index'
+import { userModule } from './index'
 import CommentAddVO from '@/model/comment/CommentAddVO'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkAPI from '@/api/TalkAPI'
@@ -122,5 +122,12 @@ export default class TalkModule extends VuexModule {
     CommonUtil.delayTime(100).then(() => {
       this.inputContentFocus = false
     })
+  }
+
+  setFilterData (genderFilter: string, minAge: number, maxAge: number) {
+    this.userGender = genderFilter
+    this.userMinAge = minAge
+    this.userMaxAge = maxAge
+    TalkFilterUtil.setFilterData(genderFilter, minAge, maxAge)
   }
 }

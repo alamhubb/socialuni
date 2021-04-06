@@ -1,6 +1,6 @@
 <template>
     <view class="article">
-        <view class="pa-sm pt-0 bg-white solid-bottom">
+        <view class="pd-sm pt-0 bg-white solid-bottom">
             <view>
                 <view class="cu-form-group">
                     <view class="title">

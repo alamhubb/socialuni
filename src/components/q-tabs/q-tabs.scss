@@ -1,11 +1,11 @@
-.active-line{
-  background-color: #007aff;
+.active-line {
+  @extend .bg-theme-text;
   height: 3px;
   @extend .bd-radius-xs;
 }
 
 .q-tab-item.active {
-  color: #007aff;
+  @extend .text-theme;
 
   .q-tab {
     @extend .text-lg;

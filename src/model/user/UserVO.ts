@@ -6,6 +6,7 @@ export default class UserVO {
   id: string = null
   nickname: string = null
   gender: string = null
+  genderModified: boolean = null
   avatar: string = null
   age: number = null
   city: string = null

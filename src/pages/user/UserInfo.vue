@@ -1,6 +1,6 @@
 <template>
-  <view v-if="userProp" class="bg-default pb-100px">
-    <view class="bg-white mb-5px">
+  <view v-if="userProp" class="bg-theme-bg pb-100px">
+    <view class="bg-white mb-sm">
       <view>
         <swiper v-if="imgUrls.length" class="square-dot w100vw h230px">
           <swiper-item v-for="(img,index) in imgUrls" :key="img">
@@ -25,7 +25,7 @@
           </view>
         </view>
       </view>
-      <view class="pa-sm">
+      <view class="pd-sm">
         <view class="row-col-center py-sm">
           <image
             class="size65px bd-radius-xs mr-sm"
@@ -134,22 +134,9 @@
             </view>
           </view>
           <view v-else>
-            <!-- #ifdef MP-WEIXIN -->
-            <button class="cu-btn radius sm bg-orange" :disabled="phoneBtnDisabled"
-                    open-type="getPhoneNumber"
-                    @getphonenumber="getPhoneNumberByWx">绑定
-            </button>
-            <q-icon class="ml-10px text-gray" size="26" icon="error-circle"
-                    @click="hintBindTwice"></q-icon>
-            <text class="text-gray" @click="hintBindTwice">
-              (老用户需操作两次)
-            </text>
-            <!-- #endif -->
-            <!-- #ifndef MP-WEIXIN -->
             <button class="cu-btn radius sm bg-orange"
                     @click="toPhonePage">绑定
             </button>
-            <!-- #endif -->
           </view>
         </view>
 
@@ -292,7 +279,7 @@
     <ad v-if="talks.length>0" class="bg-white mb-5px w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
 
-    <view v-for="talk in talks" :key="talk.id">
+    <view v-for="talk in talks" :key="talk.id" class="px-sm">
       <talk-item :talk="talk" @deleteTalk="deleteTalk"></talk-item>
     </view>
 

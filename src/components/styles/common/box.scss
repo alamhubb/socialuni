@@ -1,5 +1,0 @@
-@import "var";
-
-@mixin box-size($size) {
-  padding: map-get($box-map, #{$size});
-}

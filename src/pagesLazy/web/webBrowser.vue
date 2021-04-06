@@ -2,12 +2,12 @@
   <view>
     <!--  #ifndef MP -->
     <u-navbar>
-      <view class="row-between w100p flex-auto">
+      <view class="row-between-center w100p flex-auto">
         <view class="ml-xl font-bold text-md">
           {{ title }}
         </view>
         <view class="pr pl-xl" @click="showShare">
-          <q-icon icon="more-dot-fill" size="50"></q-icon>
+          <q-icon icon="more-dot-fill" size="25"></q-icon>
         </view>
       </view>
     </u-navbar>
