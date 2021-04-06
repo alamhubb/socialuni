@@ -44,8 +44,8 @@
                   <q-icon class="row-col-start ml-2px" size="14"
                           :icon="getGenderIcon(userProp)"/>
                 </view>
-                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>
+<!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
+                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
             </view>
 
@@ -101,7 +101,7 @@
               {{ userProp.justiceValue }}
             </view>
           </view>
-          <view class="ml cu-capsule radius" @click="toLoveValuePage">
+<!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
             <view class='cu-tag bg-red'>
               <q-icon size="18" icon="heart-fill"/>
             </view>
@@ -116,12 +116,12 @@
             <view class="cu-tag bg-white bd-orange bd-r-radius">
               {{ userProp.faceRatio }}
             </view>
-          </view>
+          </view>-->
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
-          地区：{{ userProp.location }}
+          地区：{{ userProp.city }}
         </view>
 
         <view v-if="isMine" class="row-col-center py-sm q-solid-bottom">

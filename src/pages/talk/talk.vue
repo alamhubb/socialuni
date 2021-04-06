@@ -187,7 +187,6 @@ export default class TalkPage extends Vue {
   }
 
   onLoad (params: any) {
-    console.log(this.genderTypeValue)
     /*if (params.load) {
       this.initQuery()
     }*/

@@ -14,7 +14,6 @@ import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
 export default class UserService {
   //清空用户信息的组合操作
   static clearUserInfoCom () {
-    console.log('chufale ')
     TokenUtil.remove()
     userModule.removeUser()
     WebsocketUtil.websocketClose()

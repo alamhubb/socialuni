@@ -39,7 +39,9 @@
               <q-icon icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius sm">
-              {{ talk.user.justiceValue > 1000 ? Math.floor(talk.user.justiceValue / 1000)  + 'k': talk.user.justiceValue }}
+              {{
+                talk.user.justiceValue > 1000 ? Math.floor(talk.user.justiceValue / 1000) + 'k' : talk.user.justiceValue
+              }}
             </view>
           </view>
         </view>
@@ -86,6 +88,7 @@ import QIcon from '@/components/q-icon/q-icon.vue'
 import UserVO from '@/model/user/UserVO'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
+import SocialConfig from '@/config/SocialConfig'
 
 const userStore = namespace('user')
 @Component({
@@ -115,7 +118,9 @@ export default class TalkItemHead extends Vue {
 
   toLoveValuePage () {
     if (this.user) {
-      PageUtil.toLoveValuePage()
+      if (SocialConfig.authApp) {
+        PageUtil.toLoveValuePage()
+      }
     } else {
       MsgUtil.unLoginMessage()
     }

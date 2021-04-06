@@ -60,19 +60,20 @@ export default class AppModule extends VuexModule {
       //获取三方的appid
       appModule.threeAppId = info.appId
       //如果有跳转信息
-      if (info.extraData) {
-        const extraData: SocialUniAuthVO = info.extraData
+      const extraData: SocialUniAuthVO = info.extraData
+      if (extraData) {
         appModule.threeSecretKey = extraData.appSecretKey
         appModule.threeUserId = extraData.appUserId
         appModule.threeAuthType = extraData.authType
-        if (!appModule.threeSecretKey) {
+        //支持非授权跳转
+        /*if (!appModule.threeSecretKey) {
           const result: ResultVO<any> = new ResultVO<any>()
           result.errorCode = ErrorCode.business
           result.errorMsg = '社交联盟密钥错误'
           result.success = false
           UniUtil.showLoading('密钥错误，返回中...')
           uni.navigateBackMiniProgram({ extraData: result })
-        }
+        }*/
       }
     }
   }

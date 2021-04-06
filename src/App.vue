@@ -51,8 +51,8 @@ export default Vue.extend({
         const info = params.referrerInfo
         //这里可以返回回来的appId
         // appModule.threeProviderAppId = info.appId
-        if (info.extraData) {
-          const extraData: ResultVO<ThreeAuthResultVO> = info.extraData
+        const extraData: ResultVO<ThreeAuthResultVO> = info.extraData
+        if (extraData) {
           if (extraData.success) {
             const authData: ThreeAuthResultVO = extraData.data
             if (authData.authType === ThreeAuthType.user) {

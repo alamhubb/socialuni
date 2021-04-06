@@ -137,7 +137,6 @@ export default class MatchPage extends Vue {
   }
 
   startPullDownRefresh () {
-    console.log(123)
     uni.startPullDownRefresh({})
   }
 
