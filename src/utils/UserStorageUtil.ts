@@ -25,9 +25,12 @@ export default class UserStorageUtil {
   }
 
   static remove () {
+    console.log('出发而')
     if (process.env.NODE_ENV === 'development') {
+      console.log('清除了')
       StorageUtil.remove(this.dev_user_key)
     } else {
+      console.log('清除了')
       StorageUtil.remove(this.user_key)
     }
   }

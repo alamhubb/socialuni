@@ -110,6 +110,7 @@ import UserVO from '@/model/user/UserVO'
 import EnumStrVO from '@/const/EnumStrVO'
 import GenderType from '@/const/GenderType'
 import SocialConfig from '@/config/SocialConfig'
+import UserEditVO from '@/model/user/UserEditVO'
 
 const userStore = namespace('user')
 
@@ -206,7 +207,7 @@ export default class UserEdit extends Vue {
 
     this.btnDisabled = true
     Alert.confirm('是否确定修改个人信息').then(() => {
-      const userCopy: UserEdit = JsonUtils.deepClone(this.user)
+      const userCopy: UserEditVO = JsonUtils.deepClone(this.user)
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
       userCopy.birthday = this.birthday

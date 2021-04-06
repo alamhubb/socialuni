@@ -19,6 +19,11 @@ export default class UserModule extends VuexModule {
     return this.user && this.user.phoneNum
   }
 
+  removeUser () {
+    this.user = null
+    UserStorageUtil.remove()
+  }
+
   setUser (user: UserVO) {
     this.user = user
     UserStorageUtil.set(user)

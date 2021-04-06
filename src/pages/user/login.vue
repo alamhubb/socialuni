@@ -636,9 +636,8 @@ export default class LoginPage extends Vue {
       if (this.isThreeAuth) {
         //如果点了按钮就会并授权，要不然也不会到这里
         await this.authUserOrPhoneNum()
-      } else {
-        this.goBackPage()
       }
+      this.goBackPage()
       this.openTypeBtnEnable = true
     }
   }
@@ -692,6 +691,7 @@ export default class LoginPage extends Vue {
       extraData: authVO
     })
   }
+
   socialUniAuthPhoneNum () {
     const authVO: SocialUniAuthVO = new SocialUniAuthVO('phone', this.user.id)
     uni.navigateToMiniProgram({
