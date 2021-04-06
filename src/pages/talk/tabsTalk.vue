@@ -9,10 +9,10 @@
           </q-tab>
         </template>
         <template #icon="{tab}">
-          <q-icon class="px-xs text-theme" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
+          <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
         </template>
       </q-tabs>
-      <view class="row-col-center mr-60px text-theme" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
+      <view class="row-col-center mr-60px" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
         <view v-if="talkTabObj.loadMore===loading">
           <u-loading mode="circle"></u-loading>
         </view>

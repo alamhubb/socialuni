@@ -26,7 +26,7 @@
         <image class="cu-avatar radius lg" :src="chat.avatar"/>
         <view class="content h45px col-between">
           <view>
-            <view class="text-cut text-df" :class="{'color-red':chat.vipFlag}">{{ chat.nickname }}</view>
+            <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{ chat.nickname }}</view>
             <view v-if="systemChats.indexOf(chat.type)>-1"
                   class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
             </view>
