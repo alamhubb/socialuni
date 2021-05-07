@@ -35,9 +35,12 @@ export default class UniUser {
         //如果没有用户信息报错
         if (provider === ProviderType.qq) {
           user.gender = userInfo.gender_type
-        } else {
-          return Promise.reject(Error('错误的登录方式'))
         }
+        /*
+        还有其他情况呢
+        else {
+          return Promise.reject(Error('错误的登录方式'))
+        }*/
         //如果qq可以获取用户年龄
         user.birthday = userInfo.year
         //获取用户城市
