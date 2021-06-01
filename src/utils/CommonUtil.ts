@@ -7,7 +7,19 @@ import { v4 as uuidv4 } from 'uuid'
 
 //各平台通用工具类
 export default class CommonUtil {
-  //节流
+  //节流,有立即执行和延迟执行
+  static throttleDelay (func, wait) {
+    let timer
+    return (...args) => {
+      if (!timer) {
+        timer = setTimeout(() => {
+          func(...args)
+          timer = null
+        }, wait)
+      }
+    }
+  }
+
   static throttle (func, wait) {
     let timer
     return (...args) => {
