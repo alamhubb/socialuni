@@ -12,8 +12,8 @@ export default class CommonUtil {
     let timer
     return (...args) => {
       if (!timer) {
+        func(...args)
         timer = setTimeout(() => {
-          func(...args)
           timer = null
         }, wait)
       }
