@@ -1,4 +1,4 @@
-import { chatModule, notifyModule, systemModule, userModule } from '../plugins/store'
+import { chatModule, notifyModule, systemModule, userModule } from '../store'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import ResultVO from '@/model/ResultVO'

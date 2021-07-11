@@ -32,7 +32,7 @@ import CosUtil from '@/utils/CosUtil'
 import PageUtil from '@/utils/PageUtil'
 import UserAPI from '@/api/UserAPI'
 import Alert from '../../utils/Alert'
-import { userModule } from '@/plugins/store'
+import { userModule } from '@/store'
 
 const userStore = namespace('user')
 

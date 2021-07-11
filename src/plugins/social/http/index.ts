@@ -1,7 +1,7 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '@/utils/TokenUtil'
 import UniUtil from '@/plugins/uni/UniUtil'
-import { configModule, systemModule } from '@/plugins/store'
+import { configModule, systemModule } from '@/store'
 import UserService from '@/service/UserService'
 import ErrorConst from '@/const/ErrorConst'
 import MsgUtil from '@/utils/MsgUtil'

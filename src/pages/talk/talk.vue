@@ -114,7 +114,7 @@ import TalkFilterUtil from '@/utils/TalkFilterUtil'
 import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { notifyModule, systemModule, tagModule, talkModule } from '@/plugins/store'
+import { notifyModule, systemModule, tagModule, talkModule } from '@/store'
 import UserVO from '@/model/user/UserVO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import NodesRef = UniApp.NodesRef
@@ -274,10 +274,10 @@ export default class TalkPage extends Vue {
       if (res) {
         // 44 为导航栏的高度
         // #ifdef H5
-        this.talkTabsTop = res.top - 44
+        this.talkTabsTop = res.top - 54
         // #endif
         // #ifndef H5
-        this.talkTabsTop = res.top - 44 - systemModule.statusBarHeight
+        this.talkTabsTop = res.top - 54 - systemModule.statusBarHeight
         // #endif
         // app平台0.000000x小数，所以写1余量
         if (this.talkTabsTop <= 1) {

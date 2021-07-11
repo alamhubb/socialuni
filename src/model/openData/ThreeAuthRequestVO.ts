@@ -1,4 +1,4 @@
-import { appModule, systemModule } from '@/plugins/store'
+import { appModule, systemModule } from '@/store'
 
 export default class ThreeAuthRequestVO {
   threeSecretKey: string

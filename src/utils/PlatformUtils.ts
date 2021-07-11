@@ -1,6 +1,6 @@
 import QQUtils from '@/utils/QQUtils'
 import CommonUtil from '@/utils/CommonUtil'
-import { platformModule, systemModule, userModule } from '@/plugins/store'
+import { platformModule, systemModule, userModule } from '@/store'
 import WxUtils from '@/utils/WxUtils'
 import UniUtil from '../plugins/uni/UniUtil'
 import UserAPI from '@/api/UserAPI'

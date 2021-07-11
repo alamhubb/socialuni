@@ -1,9 +1,10 @@
 import PagePath from '../const/PagePath'
-import store, { systemModule, userModule } from '@/plugins/store'
+import store, { systemModule, userModule } from '@/store'
 import MsgUtil from '@/utils/MsgUtil'
 import Alert from './Alert'
 import RouterUtil from '@/utils/RouterUtil'
 import UserVO from '@/model/user/UserVO'
+import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
 
 export default class PageUtil {
   static goHome (): void {
@@ -84,5 +85,18 @@ export default class PageUtil {
 
   static toUserContactInfoPage () {
     RouterUtil.navigateTo(PagePath.userContactInfo)
+  }
+
+  static toSocialUniAuth (authVO: SocialUniAuthVO) {
+    let appId = 'wx0bf5fe9ceeab514c'
+    if (systemModule.isMpQQ) {
+      appId = '1109985787'
+    }
+    uni.navigateToMiniProgram({
+      appId: appId,
+      // appId: '1109985787',
+      path: 'pages/user/login',
+      extraData: authVO
+    })
   }
 }

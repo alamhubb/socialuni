@@ -3,7 +3,7 @@ import CommonUtil from '@/utils/CommonUtil'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtil from '@/utils/JsonUtil'
 import PlatformType from '@/const/PlatformType'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import Alert from '@/utils/Alert'
 import LoginRes = UniApp.LoginRes
 import GetUserInfoRes = UniApp.GetUserInfoRes
@@ -32,6 +32,7 @@ export default class UniUser {
         }
       } else {
         const userInfo: any = userInfoRes.userInfo
+
         //如果没有用户信息报错
         if (provider === ProviderType.qq) {
           user.gender = userInfo.gender_type

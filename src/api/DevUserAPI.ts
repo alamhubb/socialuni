@@ -1,7 +1,7 @@
 import http from '@/plugins/http'
 import DevUserVO from '@/model/dev/DevUserVO'
 import DevUserDetailQueryVO from '@/model/dev/DevUserDetailQueryVO'
-import { appModule } from '@/plugins/store'
+import { appModule } from '@/store'
 
 export default class DevUserAPI {
   static queryDevUserDetailAPI () {

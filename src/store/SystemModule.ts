@@ -5,7 +5,7 @@ import PlatformType from '@/const/PlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
 import TokenUtil from '@/utils/TokenUtil'
-import { appModule, chatModule, locationModule, notifyModule, tagModule } from '@/plugins/store/index'
+import { appModule, chatModule, locationModule, notifyModule, tagModule } from '@/store/index'
 
 //和终端相关的信息
 @Module({ generateMutationSetters: true })
@@ -73,7 +73,7 @@ export default class SystemModule extends VuexModule {
   async appLunchAction () {
     //校验更新
     PlatformUtils.checkUpdate()
-    WebsocketUtil.websocketConnect(false)
+    // WebsocketUtil.websocketConnect(false)
     // appModule.initGlobalDataLoadAPI()
     // AppService.getHomeLoadAfterData()
     tagModule.getHotTagsAction()

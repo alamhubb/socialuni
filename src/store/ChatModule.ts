@@ -9,7 +9,7 @@ import PageUtil from '@/utils/PageUtil'
 import MessageAPI from '@/api/MessageAPI'
 import CommonUtil from '@/utils/CommonUtil'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { chatModule, userModule } from '@/plugins/store/index'
+import { chatModule, userModule } from '@/store/index'
 import PagePath from '@/const/PagePath'
 
 @Module({ generateMutationSetters: true })

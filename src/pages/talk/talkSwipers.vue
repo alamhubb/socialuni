@@ -18,7 +18,7 @@ import { namespace } from 'vuex-class'
 import HomeSwiperVO from '@/model/HomeSwiperVO'
 import ConfigMap from '@/const/ConfigMap'
 import SkipType from '@/const/SkipType'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import RouterUtil from '@/utils/RouterUtil'
 
 const appStore = namespace('app')

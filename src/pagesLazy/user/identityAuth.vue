@@ -52,7 +52,7 @@ import ImgUtil from '@/utils/ImgUtil'
 import PageUtil from '@/utils/PageUtil'
 import AppMsg from '@/const/AppMsg'
 import Alert from '../../utils/Alert'
-import { userModule } from '@/plugins/store'
+import { userModule } from '@/store'
 
 const userStore = namespace('user')
 

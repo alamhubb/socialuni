@@ -1,4 +1,4 @@
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import PlatformType from '@/const/PlatformType'
 
 export default class FrontErrorLogVO {

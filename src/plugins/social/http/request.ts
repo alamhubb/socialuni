@@ -30,7 +30,8 @@ interface interceptor { // init 拦截器接口
 }
 
 interface options { // request 方法配置参数（public）
-  url: string;
+  baseUrl?: string;
+  url?: string;
   dataType?: string;
   data?: object;
   header?: header;
@@ -129,7 +130,7 @@ export default class Request {
 
   request<T> (options: options) {
     const _options: newOptions = {
-      baseUrl: this.config.baseUrl,
+      baseUrl: options.baseUrl || this.config.baseUrl,
       dataType: options.dataType || this.config.dataType,
       responseType: options.responseType || this.config.responseType,
       url: Request.posUrl(options.url) ? options.url : (this.config.baseUrl + options.url),
@@ -162,8 +163,8 @@ export default class Request {
     })
   }
 
-  get (url: string, data: object = {}, options: handleOptions = {}) {
-    return this.request({
+  get<T> (url: string, data: object = {}, options: handleOptions = {}) {
+    return this.request<T>({
       url,
       data,
       method: 'GET',

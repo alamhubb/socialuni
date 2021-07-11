@@ -1,7 +1,7 @@
 import 'core-js'
 import Vue from 'vue'
 import App from './App.vue'
-import store from './plugins/store'
+import store from './store'
 import * as utils from '@/utils'
 import MsgInput from '@/components/MsgInput.vue'
 // main.js

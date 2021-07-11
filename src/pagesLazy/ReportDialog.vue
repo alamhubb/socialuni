@@ -42,7 +42,7 @@ import UserVO from '@/model/user/UserVO'
 import MsgUtil from '@/utils/MsgUtil'
 import PlatformUtils from '@/utils/PlatformUtils'
 import Alert from '../utils/Alert'
-import { chatModule } from '@/plugins/store'
+import { chatModule } from '@/store'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

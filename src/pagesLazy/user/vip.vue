@@ -35,7 +35,7 @@ import UserInfo from '@/pages/user/UserInfo.vue'
 import UniUtil from '@/plugins/uni/UniUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import PayType from '@/const/PayType'
 import Alert from '../../utils/Alert'
 

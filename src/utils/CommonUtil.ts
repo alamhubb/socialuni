@@ -11,7 +11,9 @@ export default class CommonUtil {
   static throttleDelay (func, wait) {
     let timer
     return (...args) => {
+      //如果没有正在执行的
       if (!timer) {
+        //则延迟后执行
         timer = setTimeout(() => {
           func(...args)
           timer = null
@@ -23,6 +25,7 @@ export default class CommonUtil {
   static throttle (func, wait) {
     let timer
     return (...args) => {
+      //没有在执行的，立即执行
       if (!timer) {
         func(...args)
         timer = setTimeout(() => {
@@ -36,6 +39,7 @@ export default class CommonUtil {
   static debounce (func, wait) {
     let timer
     return (...args) => {
+      //清空上一个，只执行最后一次
       clearTimeout(timer)
       timer = setTimeout(() => {
         func(...args)

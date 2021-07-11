@@ -1,4 +1,4 @@
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 
 export default class UserPayVO {
   platform: string

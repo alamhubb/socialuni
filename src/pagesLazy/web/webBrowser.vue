@@ -25,7 +25,7 @@ import {
 import PageUtil from '@/utils/PageUtil'
 import PagePath from '@/const/PagePath'
 import { namespace } from 'vuex-class'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import RouterUtil from '@/utils/RouterUtil'
 
 const systemStore = namespace('system')

@@ -37,7 +37,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import { talkModule } from '@/plugins/store'
+import { talkModule } from '@/store'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
 import Alert from '../utils/Alert'

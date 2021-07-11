@@ -1,4 +1,4 @@
-import { configModule, systemModule, userModule } from '@/plugins/store'
+import { configModule, systemModule, userModule } from '@/store'
 import UniUtil from '../plugins/uni/UniUtil'
 
 import AppMsg from '@/const/AppMsg'

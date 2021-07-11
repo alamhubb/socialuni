@@ -1,7 +1,7 @@
 import AppUtilAPI from '@/api/AppUtilAPI'
 import UniUtil from '@/plugins/uni/UniUtil'
 import AppUpdateType from '@/const/AppUpdateType'
-import { configModule } from '@/plugins/store'
+import { configModule } from '@/store'
 import AppConfig from '@/config/AppConfig'
 import Alert from './Alert'
 

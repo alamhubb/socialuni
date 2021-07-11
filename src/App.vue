@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
-import { appModule, systemModule, userModule } from '@/plugins/store'
+import { appModule, systemModule, userModule } from '@/store'
 import UserService from '@/service/UserService'
 import SocialConfig from '@/config/SocialConfig'
 import ThreeAuthType from '@/const/ThreeAuthType'

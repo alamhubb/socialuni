@@ -2,7 +2,7 @@ import { VuexModule, Module, Action } from 'vuex-class-modules'
 import UserVO from '@/model/user/UserVO'
 
 import UserAPI from '@/api/UserAPI'
-import { userModule } from '@/plugins/store/index'
+import { userModule } from '@/store/index'
 import UserStorageUtil from '@/utils/UserStorageUtil'
 import Alert from '@/utils/Alert'
 import Toast from '@/utils/Toast'

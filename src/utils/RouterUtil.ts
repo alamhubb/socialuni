@@ -1,7 +1,7 @@
 import SkipType from '@/const/SkipType'
 import SkipUrlConst from '@/const/SkipUrlConst'
 import PagePath from '@/const/PagePath'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 
 export default class RouterUtil {
   static getWebUrl (webUrl: string, pageTitle = ''): string {

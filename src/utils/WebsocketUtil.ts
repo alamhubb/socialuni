@@ -1,7 +1,7 @@
 import TokenUtil from '@/utils/TokenUtil'
 import NotifyVO from '@/model/NotifyVO'
 import JsonUtil from '@/utils/JsonUtil'
-import { chatModule, notifyModule } from '@/plugins/store'
+import { chatModule, notifyModule } from '@/store'
 import NotifyType from '@/const/NotifyType'
 import AppConfig from '@/config/AppConfig'
 import CommonUtil from '@/utils/CommonUtil'

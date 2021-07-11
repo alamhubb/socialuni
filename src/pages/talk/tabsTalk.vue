@@ -1,7 +1,7 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-row-bar class="flex-none btr-smm mt-smm bg-theme-bg" :class="tabsId">
+    <q-row-bar class="flex-none btr-smm mt-sm bg-theme-bg" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
@@ -126,7 +126,7 @@ import TalkTabVO from '@/model/talk/TalkTabVO'
 import UniUtil from '@/plugins/uni/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { appModule, locationModule, systemModule, talkModule } from '@/plugins/store'
+import { appModule, locationModule, systemModule, talkModule } from '@/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '@/components/q-tab/q-tab.vue'
 import QTabs from '@/components/q-tabs/q-tabs.vue'

@@ -2,7 +2,7 @@ import UniUtil from '../plugins/uni/UniUtil'
 import AppConfig from '@/config/AppConfig'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 import PlatformType from '@/const/PlatformType'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 
 export default class WxUtils {
   static subscribeAppMsg (tmplIds: string[]) {

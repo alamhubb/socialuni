@@ -1,5 +1,5 @@
 import DistrictVO from '@/model/DistrictVO'
-import { locationModule } from '@/plugins/store'
+import { locationModule } from '@/store'
 
 export default class TalkQueryVO {
   public talkIds: number[]

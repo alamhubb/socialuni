@@ -4,7 +4,7 @@ import LoginRes = UniApp.LoginRes
 import GetUserInfoRes = UniApp.GetUserInfoRes
 import ImgFileVO from '@/model/ImgFileVO'
 import AppMsg from '@/const/AppMsg'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import Toast from '@/utils/Toast'
 import Alert from '../../utils/Alert'
 

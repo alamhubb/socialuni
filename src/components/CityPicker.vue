@@ -62,7 +62,7 @@
 import { Vue, Component, Emit, Model, Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import DistrictVO from '@/model/DistrictVO'
-import { locationModule } from '@/plugins/store'
+import { locationModule } from '@/store'
 import LocationUtil from '@/utils/LocationUtil'
 import Alert from '@/utils/Alert'
 

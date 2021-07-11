@@ -329,7 +329,7 @@ import TalkVO from '@/model/talk/TalkVO'
 import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { systemModule, userModule } from '@/plugins/store'
+import { systemModule, userModule } from '@/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
 

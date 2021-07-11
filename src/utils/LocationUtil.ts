@@ -1,7 +1,7 @@
 import DistrictVO from '@/model/DistrictVO'
 import StorageUtil from '@/utils/StorageUtil'
 import MapUtil from '@/utils/MapUtil'
-import { locationModule, systemModule } from '@/plugins/store'
+import { locationModule, systemModule } from '@/store'
 import AppAuthUtil from '@/utils/AppAuthUtil'
 
 const chinaAdCode = '100000'

@@ -1,5 +1,5 @@
 import AppConfig from '@/config/AppConfig'
-import { configModule } from '@/plugins/store'
+import { configModule } from '@/store'
 import RouterUtil from '@/utils/RouterUtil'
 
 export default class SkipUrlConst {

@@ -1,6 +1,6 @@
 import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
 import UniUtil from '@/plugins/uni/UniUtil'
-import { systemModule } from '@/plugins/store'
+import { systemModule } from '@/store'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtils from '@/utils/JsonUtil'
 import PlatformType from '@/const/PlatformType'

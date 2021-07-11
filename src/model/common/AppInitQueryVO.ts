@@ -1,4 +1,4 @@
-import { locationModule, systemModule } from '@/plugins/store'
+import { locationModule, systemModule } from '@/store'
 import LocationUtil from '@/utils/LocationUtil'
 import DistrictVO from '@/model/DistrictVO'
 import TalkFilterUtil from '@/utils/TalkFilterUtil'
