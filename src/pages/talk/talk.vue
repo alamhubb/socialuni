@@ -4,6 +4,7 @@
       <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
       ></tag-search>
     </view>
+    <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view v-show="!showTagSearch" class="flex-col h100vh bg-theme">
       <q-navbar class="flex-none" :custom-class="'bg-theme'">
         <q-search class="flex-auto" @click.native="openTagSearchVue">
