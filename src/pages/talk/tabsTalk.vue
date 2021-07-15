@@ -34,7 +34,7 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-    <swiper class="flex-1 bg-theme-bg" :current="swiperCurrent"
+    <swiper class="bg-theme-bg" :current="swiperCurrent"
             :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
