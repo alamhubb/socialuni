@@ -22,7 +22,7 @@ export default class WebsocketUtil {
     uni.connectSocket({
       //因为app不支持header中传参
       // url: AppConfig.websocketUrl + 'imserver/' + token,
-      url: AppConfig.websocketUrl + 'webSocket/message?token=' + token,
+      // url: AppConfig.websocketUrl + 'webSocket/message?token=' + token,
       /* url: CommonUtil.websocketUrl + 'webSocket/message',
       header: {
         token: token
@@ -52,7 +52,7 @@ export default class WebsocketUtil {
           },
           fail: err => {
             console.log('连接失败重新连接....:' + err)
-            WebsocketUtil.websocketConnect(true)
+            // WebsocketUtil.websocketConnect(true)
           }
         })
       }, 30000)
@@ -62,7 +62,7 @@ export default class WebsocketUtil {
       console.log('触发了错误')
       // #ifndef MP
       CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
-        WebsocketUtil.websocketConnect(true)
+        // WebsocketUtil.websocketConnect(true)
       })
       // #endif
     })
@@ -70,7 +70,7 @@ export default class WebsocketUtil {
     uni.onSocketClose((e) => {
       console.log('触发了关闭:' + e)
       CommonUtil.delayTime(WebsocketUtil.failedReconnectTime).then(() => {
-        WebsocketUtil.websocketConnect(true)
+        // WebsocketUtil.websocketConnect(true)
       })
     })
 
