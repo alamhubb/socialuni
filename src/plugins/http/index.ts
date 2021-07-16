@@ -17,8 +17,10 @@ http.setConfig(config => { /* 设置全局配置 */
 })
 http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
   const token = TokenUtil.get()
+  console.log(token)
   if (token) {
     config.header.token = token
+    //下次尝试把这里删除
   } else {
     config.header.token = null
   }
