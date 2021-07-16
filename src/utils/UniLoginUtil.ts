@@ -1,6 +1,6 @@
 import LoginRes = UniApp.LoginRes;
-import UniPlatformType from '../constant/UniPlatformType'
-import { uniSystemModule } from '../index'
+import UniPlatformType from '../const/UniPlatformType'
+import { uniSystemModule } from '@/store'
 
 export default class UniLoginUtil {
   public static getLoginCode (provider?: any): Promise<string> {

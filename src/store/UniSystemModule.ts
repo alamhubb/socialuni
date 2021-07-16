@@ -1,7 +1,7 @@
 import { Module, RegisterOptions, VuexModule } from 'vuex-class-modules'
-import UniSystemType from '../constant/UniSystemType'
-import UniPlatformType from '../constant/UniPlatformType'
-import UniMpPlatformType from '../constant/UniMpPlatformType'
+import UniSystemType from '../const/UniSystemType'
+import UniPlatformType from '../const/UniPlatformType'
+import UniMpPlatformType from '../const/UniMpPlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 
 //用来存储当前用户的一些信息

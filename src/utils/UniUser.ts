@@ -1,4 +1,4 @@
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import JsonUtil from '@/utils/JsonUtil'
@@ -7,7 +7,7 @@ import { systemModule } from '@/store'
 import Alert from '@/utils/Alert'
 import LoginRes = UniApp.LoginRes
 import GetUserInfoRes = UniApp.GetUserInfoRes
-import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
+import ProviderUserVO from '@/model/ProviderUserVO'
 
 export default class UniUser {
   /**

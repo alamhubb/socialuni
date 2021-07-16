@@ -1,13 +1,13 @@
-import socialHttp from '@/plugins/social/http'
-import ComLoginRO from '@/plugins/social/model/ComLoginRO'
-import SocialUserRO from '@/plugins/social/model/SocialUserRO'
+import http from '@/plugins/http'
+import SocialLoginRO from '@/model/social/SocialLoginRO'
+import SocialUserRO from '@/model/social/SocialUserRO'
 
 export default class MockAPI {
   static mockOAuthUserInfoAPI () {
-    return socialHttp.post<ComLoginRO<SocialUserRO>>('mock/mockOAuthUserInfo')
+    return http.post<SocialLoginRO<SocialUserRO>>('mock/mockOAuthUserInfo')
   }
 
   static mockOAuthUserPhoneNumAPI () {
-    return socialHttp.post<ComLoginRO<SocialUserRO>>('mock/mockOAuthUserPhoneNum')
+    return http.post<SocialLoginRO<SocialUserRO>>('mock/mockOAuthUserPhoneNum')
   }
 }

@@ -23,11 +23,29 @@ export default class StorageUtil {
   }
 
   static set (key: string, value: any): any {
-    return uni.setStorageSync(key, value)
+    if (value || value === 0 || value === '') {
+      //string直接转换的话会加上""
+      if (value instanceof Object) {
+        uni.setStorageSync(key, JsonUtil.toJson(value))
+      } else {
+        uni.setStorageSync(key, value)
+      }
+    } else {
+      StorageUtil.remove(key)
+    }
   }
 
   static get (key: string): any {
-    return uni.getStorageSync(key) || null
+    const objStr: string = uni.getStorageSync(key)
+    console.log(typeof objStr)
+    if (objStr) {
+      try {
+        return JsonUtil.jsonParse(objStr)
+      } catch {
+        return objStr
+      }
+    }
+    return null
   }
 
   static remove (key: string) {

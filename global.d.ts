@@ -1,5 +1,5 @@
 //    在 types/vue.d.ts 里 Vue 有构造函数类型
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
 import PageUtil from '@/utils/PageUtil'
 
 declare module 'vue/types/vue' {

@@ -1,4 +1,4 @@
-import { uniSystemModule } from '../index'
+import { uniSystemModule } from '@/store'
 
 export default class UniProviderLoginQO {
   provider = ''

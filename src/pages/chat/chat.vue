@@ -76,7 +76,7 @@ import { chatModule } from '@/store'
 import CommonStatus from '@/const/CommonStatus'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
 
 const chatStore = namespace('chat')
 

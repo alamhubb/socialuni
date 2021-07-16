@@ -1,9 +1,9 @@
 import UniProviderLoginQO from '../model/UniProviderLoginQO'
-import UniLoginUtil from '../utils/UniLoginUtil'
+import UniLoginUtil from './UniLoginUtil'
 import UniUserInfoRO from '../model/UniUserInfoRO'
-import UniProviderType from '../constant/UniProviderType'
+import UniProviderType from '../const/UniProviderType'
 import GetUserInfoRes = UniApp.GetUserInfoRes
-import { uniSystemModule } from '@/plugins/uniapp-sdk'
+import { uniSystemModule } from '@/store'
 
 export default class UniUserUtil {
   public static getUniProviderLoginQO (provider?: any): Promise<UniProviderLoginQO> {

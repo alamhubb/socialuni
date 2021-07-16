@@ -202,7 +202,7 @@ import AppMsg from '@/const/AppMsg'
 import RouterUtil from '@/utils/RouterUtil'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
 
 const chatStore = namespace('chat')
 const userStore = namespace('user')

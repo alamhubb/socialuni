@@ -10,6 +10,8 @@ import PlatformModule from '@/store/PlatformModule'
 import NotifyModule from '@/store/NotifyModule'
 import TagModule from '@/store/TagModule'
 import LocationModule from '@/store/LocationModule'
+import { namespace } from 'vuex-class'
+import UniSystemModule from '@/store/UniSystemModule'
 
 Vue.use(Vuex)
 
@@ -26,7 +28,8 @@ export const platformModule = new PlatformModule({ store, name: 'platform' })
 export const notifyModule = new NotifyModule({ store, name: 'notify' })
 export const tagModule = new TagModule({ store, name: 'tag' })
 export const locationModule = new LocationModule({ store, name: 'location' })
+export const uniSystemModule = new UniSystemModule({ store, name: 'uniSystem' })
 
-
+export const uniSystemStore = namespace('uniSystem')
 
 export default store

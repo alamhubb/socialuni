@@ -15,7 +15,8 @@ import { appModule } from '@/store/index'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
 import ResultVO from '@/model/ResultVO'
 import ErrorCode from '@/const/ErrorCode'
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
+import DevModeType from '@/const/DevModeType'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -40,6 +41,7 @@ export default class AppModule extends VuexModule {
   threeAuthType = ''
   // threeProviderType = ''
   threeDevUser: DevUserVO = null
+  isDevMode: boolean = process.env.NODE_ENV === DevModeType.dev
 
   //是否为三方授权
   get isThreeAuth () {

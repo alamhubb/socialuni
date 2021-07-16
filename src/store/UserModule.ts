@@ -7,8 +7,10 @@ import UserStorageUtil from '@/utils/UserStorageUtil'
 import Alert from '@/utils/Alert'
 import Toast from '@/utils/Toast'
 import UserService from '@/service/UserService'
-import ProviderUserVO from '@/plugins/uni/model/login/ProviderUserVO'
-import BindPhoneNumAPI from '@/plugins/social/api/BindPhoneNumAPI'
+import ProviderUserVO from '@/model/ProviderUserVO'
+import BindPhoneNumAPI from '@/api/BindPhoneNumAPI'
+import TokenUtil from '@/utils/TokenUtil'
+import SocialLoginRO from '@/model/social/SocialLoginRO'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
@@ -38,6 +40,11 @@ export default class UserModule extends VuexModule {
       UserService.clearUserInfoCom()
       Toast.toast('用户退出')
     })
+  }
+
+  loginAfterSetUserAndToken (loginRO: SocialLoginRO<UserVO>) {
+    TokenUtil.set(loginRO.token)
+    this.setUser(loginRO.user)
   }
 
   @Action

@@ -24,7 +24,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import ImgUtil from '@/utils/ImgUtil'
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
 
 import JsonUtils from '@/utils/JsonUtil'
 import ImgFileVO from '@/model/ImgFileVO'

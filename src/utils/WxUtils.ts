@@ -1,4 +1,4 @@
-import UniUtil from '../plugins/uni/UniUtil'
+import UniUtil from './UniUtil'
 import AppConfig from '@/config/AppConfig'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 import PlatformType from '@/const/PlatformType'

@@ -1,4 +1,4 @@
-export default class ComLoginRO<T> {
+export default class SocialLoginRO<T> {
     token: string = null
     user: T = null
 }

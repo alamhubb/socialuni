@@ -74,7 +74,7 @@ import Constants from '@/const/Constant'
 import LoadMoreType from '@/const/LoadMoreType'
 import MatchType from '@/const/MatchType'
 import Toast from '@/utils/Toast'
-import UniUtil from '@/plugins/uni/UniUtil'
+import UniUtil from '@/utils/UniUtil'
 import MsgUtil from '@/utils/MsgUtil'
 import QModel from '@/components/q-model/q-model.vue'
 

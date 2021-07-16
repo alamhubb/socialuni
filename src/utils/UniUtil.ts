@@ -9,7 +9,6 @@ import LoginRes = UniApp.LoginRes
 import GetUserInfoRes = UniApp.GetUserInfoRes
 import AppMsg from '@/const/AppMsg'
 import Toast from '@/utils/Toast'
-import { uniSystemModule } from '@/plugins/uniapp-sdk'
 import DomFile from '@/model/DomFile'
 import UUIDUtil from '@/utils/UUIDUtil'
 import ImgUtil from '@/utils/ImgUtil'

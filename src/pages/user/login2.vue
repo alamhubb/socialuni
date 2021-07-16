@@ -18,7 +18,7 @@
       <!--      上半部，手机号登录展示-->
 
       <div class="flex-none col-row-center h80px">
-        <div class="text-xxl font-bold">欢迎使用清池社交联盟授权</div>
+        <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
         <div v-if="showPhoneView" class="text-md u-type-warning mt-sm">建议使用微信 或 QQ一键登录</div>
       </div>
 
@@ -225,6 +225,20 @@
               </button>
               <!--              其他为错误的逻辑-->
             </template>
+            <template v-else-if="authApp">
+              <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
+              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
+              <button v-if="!user"
+                      class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @click="socialUniAuthLogin">
+                跳转清池授权登录
+              </button>
+              <button v-else
+                      class="bg-gradual-phone h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @click="socialUniAuthPhoneNum">
+                跳转清池授权手机号
+              </button>
+            </template>
             <!--            微信登录界面，非手机号登录界面-->
             <template v-else>
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
@@ -379,34 +393,7 @@
         </view>
       </view>
     </div>
-
-
-    <!--  #ifndef MP -->
-    <!--  #endif -->
-    <!-- 小程序平台-->
-    <!--  #ifdef MP -->
-    <!-- 小程序平台-->
-    <!--    <view class="text-black font-lg">未登录，点击登录按钮，进行登录操作</view>-->
-    <!--  #ifdef MP-TOUTIAO -->
-    <!--            头条平台和其他平台处理方式不同-->
-    <!--    <button :disabled="disabledLoginBtn" @click="login" type="primary"-->
-    <!--            class="v-btn mt-20px w70vw bg-green">-->
-    <!--      登录-->
-    <!--      <q-icon size="32" icon="account_box"></q-icon>-->
-    <!--    </button>-->
-    <!--  #endif -->
-    <!--  #ifndef MP-TOUTIAO -->
-    <!--    <button v-if="!user" :disabled="disabledLoginBtn"-->
-    <!--            open-type="getUserInfo" @getuserinfo="login"-->
-    <!--            class="cu-btn bg-cyan mt-20px w70vw">-->
-    <!--      登录-->
-    <!--      <q-icon size="32" icon="account_box"></q-icon>-->
-    <!--    </button>-->
-    <!--  #endif -->
-    <!--  #endif -->
   </div>
-
-
 </template>
 
 <script lang="ts">
@@ -433,6 +420,8 @@ import PageUtil from '@/utils/PageUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
 import UserService from '@/service/UserService'
 import DevUserVO from '@/model/dev/DevUserVO'
+import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
+import SocialConfig from '@/config/SocialConfig'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -440,7 +429,7 @@ const systemStore = namespace('system')
 const appStore = namespace('app')
 
 @Component
-export default class LoginPage extends Vue {
+export default class Login extends Vue {
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
@@ -459,6 +448,8 @@ export default class LoginPage extends Vue {
   @appStore.Getter('isThreeAuth') isThreeAuth: boolean
   @appStore.Getter('isAuthUser') isAuthUser: boolean
   @appStore.Getter('isAuthPhone') isAuthPhone: boolean
+
+  authApp = !SocialConfig.authApp
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
@@ -551,7 +542,11 @@ export default class LoginPage extends Vue {
       UniUtil.showLoading('不授权，返回中...')
       uni.navigateBackMiniProgram({ extraData: result })
     } else {
-      PageUtil.toMinePage()
+      if (!this.user) {
+        PageUtil.goHome()
+      } else {
+        PageUtil.toMinePage()
+      }
     }
   }
 
@@ -641,9 +636,8 @@ export default class LoginPage extends Vue {
       if (this.isThreeAuth) {
         //如果点了按钮就会并授权，要不然也不会到这里
         await this.authUserOrPhoneNum()
-      } else {
-        this.goBackPage()
       }
+      this.goBackPage()
       this.openTypeBtnEnable = true
     }
   }
@@ -663,6 +657,7 @@ export default class LoginPage extends Vue {
 
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async openTypeBtnClick (providerResult) {
+    console.log(providerResult)
     if (this.openTypeBtnEnable) {
       this.openTypeBtnEnable = false
       try {
@@ -686,6 +681,26 @@ export default class LoginPage extends Vue {
         this.openTypeBtnEnable = true
       }
     }
+  }
+
+  socialUniAuthLogin () {
+    const authVO: SocialUniAuthVO = new SocialUniAuthVO('user', CommonUtil.getUUID())
+    uni.navigateToMiniProgram({
+      appId: 'wx0bf5fe9ceeab514c',
+      // appId: '1109985787',
+      path: 'pages/user/login',
+      extraData: authVO
+    })
+  }
+
+  socialUniAuthPhoneNum () {
+    const authVO: SocialUniAuthVO = new SocialUniAuthVO('phone', this.user.id)
+    uni.navigateToMiniProgram({
+      appId: 'wx0bf5fe9ceeab514c',
+      // appId: '1109985787',
+      path: 'pages/user/login',
+      extraData: authVO
+    })
   }
 
   async authUserOrPhoneNum () {
