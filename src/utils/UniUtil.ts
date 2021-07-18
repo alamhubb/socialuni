@@ -12,6 +12,7 @@ import Toast from '@/utils/Toast'
 import DomFile from '@/model/DomFile'
 import UUIDUtil from '@/utils/UUIDUtil'
 import ImgUtil from '@/utils/ImgUtil'
+import { uniSystemModule } from '@/store'
 
 export default class UniUtil {
   public static textCopy (copyText: string, hint?: string) {

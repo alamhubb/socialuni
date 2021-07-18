@@ -44,8 +44,8 @@
                   <q-icon class="row-col-start ml-2px" size="14"
                           :icon="getGenderIcon(userProp)"/>
                 </view>
-<!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
-                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
+                <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
+                                <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
             </view>
 
@@ -101,22 +101,22 @@
               {{ userProp.justiceValue }}
             </view>
           </view>
-<!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
-            <view class='cu-tag bg-red'>
-              <q-icon size="18" icon="heart-fill"/>
-            </view>
-            <view class="cu-tag bg-white bd-red bd-r-radius">
-              {{ userProp.loveValue }}
-            </view>
-          </view>
-          <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
-            <view class='cu-tag bg-orange'>
-              <q-icon size="18" icon="mdi-face"/>
-            </view>
-            <view class="cu-tag bg-white bd-orange bd-r-radius">
-              {{ userProp.faceRatio }}
-            </view>
-          </view>-->
+          <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
+                      <view class='cu-tag bg-red'>
+                        <q-icon size="18" icon="heart-fill"/>
+                      </view>
+                      <view class="cu-tag bg-white bd-red bd-r-radius">
+                        {{ userProp.loveValue }}
+                      </view>
+                    </view>
+                    <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
+                      <view class='cu-tag bg-orange'>
+                        <q-icon size="18" icon="mdi-face"/>
+                      </view>
+                      <view class="cu-tag bg-white bd-orange bd-r-radius">
+                        {{ userProp.faceRatio }}
+                      </view>
+                    </view>-->
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
@@ -134,9 +134,22 @@
             </view>
           </view>
           <view v-else>
+            <!-- #ifdef MP-WEIXIN -->
+            <button class="cu-btn radius sm bg-orange" :disabled="phoneBtnDisabled"
+                    open-type="getPhoneNumber"
+                    @getphonenumber="getPhoneNumberByWx">绑定
+            </button>
+            <q-icon class="ml-10px text-gray" size="26" icon="error-circle"
+                    @click="hintBindTwice"></q-icon>
+            <text class="text-gray" @click="hintBindTwice">
+              (老用户需操作两次)
+            </text>
+            <!-- #endif -->
+            <!-- #ifndef MP-WEIXIN -->
             <button class="cu-btn radius sm bg-orange"
                     @click="toPhonePage">绑定
             </button>
+            <!-- #endif -->
           </view>
         </view>
 
@@ -343,6 +356,7 @@ import QIcon from '@/components/q-icon/q-icon.vue'
 import ErrorCode from '@/const/ErrorCode'
 import ProviderUserVO from '@/model/ProviderUserVO'
 import UserService from '@/service/UserService'
+import DomFile from '@/model/DomFile'
 
 
 const userStore = namespace('user')
@@ -522,12 +536,13 @@ export default class UserInfo extends Vue {
     }
   }
 
-  chooseImg () {
+  async chooseImg () {
     if (this.mineUser.imgs.length > 2) {
       Toast.toastLong('最多上传3张照片，请删除后继续！')
       return
     }
-    UniUtil.chooseImage(1).then(imgFiles => {
+    try {
+      const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: ImgFileVO = imgFiles[0]
       imgFile.src = ImgUtil.getUserImgUploadFormat(this.userProp.id, imgFile.path)
       UniUtil.showLoading('上传中')
@@ -535,10 +550,18 @@ export default class UserInfo extends Vue {
         UserAPI.addUserImgAPI(imgFile).then((res: any) => {
           userModule.setUser(res.data)
         })
-      }).finally(() => {
-        UniUtil.hideLoading()
       })
-    })
+
+      UniUtil.chooseImage(count).then(imgFiles => {
+        for (const imgFile of imgFiles) {
+          //前台记录用户上传的图片，点击发布的时候才保存到后台
+          imgFile.src = ImgUtil.getTalkUploadFormat(this.user.id, imgFile.path)
+          this.showsImgSrcs.push(imgFile)
+        }
+      })
+    } finally {
+      UniUtil.hideLoading()
+    }
   }
 
   toPhonePage () {

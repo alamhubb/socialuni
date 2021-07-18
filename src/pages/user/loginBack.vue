@@ -429,7 +429,7 @@ const systemStore = namespace('system')
 const appStore = namespace('app')
 
 @Component
-export default class LoginBackPage extends Vue {
+export default class Login extends Vue {
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
@@ -657,6 +657,7 @@ export default class LoginBackPage extends Vue {
 
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async openTypeBtnClick (providerResult) {
+    console.log(providerResult)
     if (this.openTypeBtnEnable) {
       this.openTypeBtnEnable = false
       try {
