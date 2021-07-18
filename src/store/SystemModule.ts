@@ -1,11 +1,10 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
-import WebsocketUtil from '@/utils/WebsocketUtil'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import ProviderType, { Provider } from '@/const/ProviderType'
 import PlatformType from '@/const/PlatformType'
-import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import PlatformUtils from '@/utils/PlatformUtils'
 import TokenUtil from '@/utils/TokenUtil'
 import { appModule, chatModule, locationModule, notifyModule, tagModule } from '@/store/index'
+import GetSystemInfoResult = UniApp.GetSystemInfoResult
 
 //和终端相关的信息
 @Module({ generateMutationSetters: true })
@@ -80,8 +79,11 @@ export default class SystemModule extends VuexModule {
     tagModule.getHotTagTypesAction()
     locationModule.getHotDistrictsAction()
     appModule.getReportTypesAction()
+    appModule.getAppConfigAction()
     appModule.getHomeSwipersAction()
     chatModule.getChatsAction()
+
+
     //如果有token获取
     if (TokenUtil.hasToken()) {
       //查询通知列表

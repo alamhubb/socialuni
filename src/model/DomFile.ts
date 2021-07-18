@@ -1,12 +1,22 @@
 export default class DomFile {
-  public path: string
-  public size: number
-  public aspectRatio: number
-  public quality: number
+  //自己拼出来的
+  public src: string
+
+  //小程序只有path和size
+  path: string
+  size: number
+  //aspectRatio 自己计算出来的比例
+  aspectRatio: number
+  //quality 自己计算出来的压缩比
+  quality: number
+
+  //h5才有文件名称
+  name: string
+  //h5才有的属性
   lastModified: number
   lastModifiedDate: Date
-  name: string
-  src: string
+  //h5才有的
   type: string
+  //h5才有的
   webkitRelativePath: string
 }

@@ -7,12 +7,13 @@ import UserTalkQueryVO from '@/model/user/UserTalkQueryVO'
 import DistrictVO from '@/model/DistrictVO'
 import TalkDeleteVO from '@/model/talk/TalkDeleteVO'
 import CommentDeleteVO from '@/model/comment/CommentDeleteVO'
-import ImgFileVO from '@/model/ImgFileVO'
 import TalkVO from '@/model/talk/TalkVO'
+import DomFile from '@/model/DomFile'
+import ImgAddQO from '@/model/user/ImgAddQO'
 
 export default class TalkAPI {
-  static addTalkAPI (content: string, imgs: ImgFileVO[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
-    const data: TalkAddVO = new TalkAddVO(content, imgs, district, tagIds, visibleType, visibleGender)
+  static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
+    const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, tagIds, visibleType, visibleGender)
     return http.post('talk/addTalk', data)
   }
 

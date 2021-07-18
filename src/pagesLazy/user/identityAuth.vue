@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import UserVO from '@/model/user/UserVO'
 import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
@@ -53,6 +53,7 @@ import PageUtil from '@/utils/PageUtil'
 import AppMsg from '@/const/AppMsg'
 import Alert from '../../utils/Alert'
 import { userModule } from '@/store'
+import CosAPI from '@/api/CosAPI'
 
 const userStore = namespace('user')
 
@@ -84,11 +85,12 @@ export default class IdentityAuthPage extends Vue {
     })
   }
 
-  identityAuth () {
+  async identityAuth () {
     this.authBtnDisabled = true
     UniUtil.showLoading('认证中')
     // 校验用户必须上传了照片，
-    CosUtil.postObject(this.imgFile, this.user.id).then(() => {
+    const { data } = await CosAPI.getCosAuthorizationAPI()
+    CosUtil.postImg(this.imgFile, data).then(() => {
       this.user.authNum = this.user.authNum + 1
       UserAPI.identityAuthAPI(this.imgFile).then((res: any) => {
         userModule.setUser(res.data)

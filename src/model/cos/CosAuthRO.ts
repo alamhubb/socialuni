@@ -9,5 +9,4 @@ export default class CosAuthRO {
 
   bucket: string = null
   region: string = null
-  path: string = null
 }

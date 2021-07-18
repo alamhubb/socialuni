@@ -46,7 +46,7 @@
                            :data-src="image" @click="previewImage"/>
                   </view>
                 </block>
-                <view class="uni-uploader__input-box" v-show="showsImgSrcs.length < 3">
+                <view class="uni-uploader__input-box" v-show="showsImgFiles.length < 3">
                   <view class="uni-uploader__input" @click="chooseImage"/>
                 </view>
               </view>
@@ -71,7 +71,7 @@
           </text>
         </view>
         <view class="col-center">
-          图片数量：{{ showsImgSrcs.length }}/{{ imgMaxSize }}
+          图片数量：{{ showsImgFiles.length }}/{{ imgMaxSize }}
         </view>
       </view>
       <view class="px-sm pt-sm">
@@ -115,7 +115,7 @@
                       :default-value="visibleTypeValueIndex"
                       @confirm="selectVisibleTypeChange"></u-select>
           </view>
-<!--          {{GenderType.all}}&#45;&#45;{{appGenderType}}&#45;&#45;{{GenderType.all === appGenderType}}-->
+          <!--          {{GenderType.all}}&#45;&#45;{{appGenderType}}&#45;&#45;{{GenderType.all === appGenderType}}-->
           <!--          只有不为单性app才显示-->
           <template v-if="GenderTypeAll === appGenderType">
             <div>，</div>
@@ -143,10 +143,8 @@ import { namespace } from 'vuex-class'
 import JsonUtils from '@/utils/JsonUtil'
 import TagVO from '@/model/tag/TagVO'
 import TagUtil from '@/utils/TagUtil'
-import ImgUtil from '@/utils/ImgUtil'
-import ImgFileVO from '@/model/ImgFileVO'
 import CosUtil from '@/utils/CosUtil'
-import { locationModule, tagModule } from '@/store'
+import { appModule, locationModule, tagModule } from '@/store'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
@@ -164,6 +162,7 @@ import QButton from '@/components/q-button/QButton.vue'
 import PageUtil from '@/utils/PageUtil'
 import GenderType from '@/const/GenderType'
 import SocialConfig from '@/config/SocialConfig'
+import DomFile from '@/model/DomFile'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -199,7 +198,7 @@ export default class TalkAddPage extends Vue {
   visibleTypes = VisibleType.enums
 
   district: DistrictVO = locationModule.location
-  showsImgSrcs: ImgFileVO [] = []
+  showsImgFiles: DomFile [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
   showSearch = false
@@ -257,11 +256,11 @@ export default class TalkAddPage extends Vue {
 
   onUnload () {
     this.talkContent = ''
-    this.showsImgSrcs = []
+    this.showsImgFiles = []
   }
 
   get showImgUrls () {
-    return this.showsImgSrcs.map((item: any) => item.path)
+    return this.showsImgFiles.map((item: DomFile) => item.path)
   }
 
   openTagSearchVue (query: boolean) {
@@ -360,7 +359,7 @@ export default class TalkAddPage extends Vue {
 
   addTalk () {
     this.buttonDisabled = true
-    if (this.talkContent || this.showsImgSrcs.length) {
+    if (this.talkContent || this.showsImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
         return Alert.hint('动态最多支持200个字，请精简动态内容')
       }
@@ -375,7 +374,7 @@ export default class TalkAddPage extends Vue {
 
   addTalkHandler () {
     uni.showLoading({ title: '发布中' })
-    if (this.showsImgSrcs.length === 0) {
+    if (this.showsImgFiles.length === 0) {
       this.publishTalk()
     } else {
       this.uploadImgList()
@@ -384,7 +383,7 @@ export default class TalkAddPage extends Vue {
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showsImgSrcs, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
+    TalkAPI.addTalkAPI(this.talkContent, this.showsImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
@@ -396,34 +395,32 @@ export default class TalkAddPage extends Vue {
       })
   }
 
-
-  uploadImgList () {
-    CosUtil.postObjectList(this.showsImgSrcs, this.user.id)
+  async uploadImgList () {
+    //设置图片路径
+    this.showsImgFiles.forEach(item => {
+      item.src = appModule.imgPath + 'talk/' + item.src
+    })
+    CosUtil.postImgList(this.showsImgFiles)
   }
 
   deleteImg (e) {
-    this.showsImgSrcs.splice(e, 1)
+    this.showsImgFiles.splice(e, 1)
   }
 
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */
   async chooseImage () {
-    if (this.showsImgSrcs.length >= this.imgMaxSize) {
+    if (this.showsImgFiles.length >= this.imgMaxSize) {
       const isContinue = await this.isFullImg()
       console.log('是否继续?', isContinue)
       if (!isContinue) {
         return
       }
     }
-    const count = this.imgMaxSize - this.showsImgSrcs.length
-    UniUtil.chooseImage(count).then(imgFiles => {
-      for (const imgFile of imgFiles) {
-        //前台记录用户上传的图片，点击发布的时候才保存到后台
-        imgFile.src = ImgUtil.getTalkUploadFormat(this.user.id, imgFile.path)
-        this.showsImgSrcs.push(imgFile)
-      }
-    })
+    const count = this.imgMaxSize - this.showsImgFiles.length
+    const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
+    this.showsImgFiles.push(...imgFiles)
   }
 
   isFullImg () {
@@ -432,7 +429,7 @@ export default class TalkAddPage extends Vue {
         content: '已经有' + this.imgMaxSize + '张图片了,是否清空现有图片？',
         success: (e) => {
           if (e.confirm) {
-            this.showsImgSrcs = []
+            this.showsImgFiles = []
             resolve(true)
           } else {
             resolve(false)

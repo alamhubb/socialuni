@@ -1,4 +1,4 @@
-import { VuexModule, Module } from 'vuex-class-modules'
+import { Module, VuexModule } from 'vuex-class-modules'
 import ConfigMap from '@/const/ConfigMap'
 import Lodash from '@/utils/Lodash'
 

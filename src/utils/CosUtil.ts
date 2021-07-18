@@ -1,6 +1,5 @@
 /* eslint-disable */
 import COS from 'cos-wx-sdk-v5'
-import ImgFileVO from '@/model/ImgFileVO'
 import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
 import CosAuthRO from '@/model/cos/CosAuthRO'
@@ -10,17 +9,14 @@ import UniUtil from '@/utils/UniUtil'
 
 export default class CosUtil {
   //向cos上传图片
-  static async postObject (imgFile: ImgFileVO) {
+  static async postImg (imgFile: DomFile) {
     const { data } = await CosAPI.getCosAuthorizationAPI()
-    console.log(data)
     const cos = CosUtil.getAuthorizationCos(data)
-    return CosUtil.postObjectBase(imgFile, data, cos)
+    await CosUtil.postObjectBase(imgFile, data, cos)
   }
 
-  static postObjectBase (imgFile: DomFile, data: CosAuthRO, cos) {
+  private static postObjectBase (imgFile: DomFile, data: CosAuthRO, cos) {
     return new Promise<any>((resolve, reject) => {
-      imgFile.src =  data.path + imgFile.src
-      console.log(imgFile.src)
       cos.postObject({
         Bucket: data.bucket,
         Region: data.region,
@@ -38,11 +34,10 @@ export default class CosUtil {
     })
   }
 
-  static async postObjectList (imgSrcs: ImgFileVO[]) {
+  static async postImgList (imgSrcs: DomFile[]) {
     const { data } = await CosAPI.getCosAuthorizationAPI()
-    console.log(data)
     const cos = CosUtil.getAuthorizationCos(data)
-    return Promise.all(imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, data, cos)))
+    await Promise.all(imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, data, cos)))
   }
 
   static getAuthorizationCos (cosAuthRO: CosAuthRO): COS {
@@ -51,7 +46,6 @@ export default class CosUtil {
     const cosObj = new COS({
       // ForcePathStyle: true, // 如果使用了很多存储桶，可以通过打开后缀式，减少配置白名单域名数量，请求时会用地域域名
       getAuthorization (options, callback) {
-        console.log(options)
         // 异步获取临时密钥
         callback({
           TmpSecretId: cosAuthRO.credentials.tmpSecretId,

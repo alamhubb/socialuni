@@ -314,7 +314,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch, PropSync } from 'vue-property-decorator'
+import { Component, PropSync, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from '@/api/TalkAPI'
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import UserUtil from '@/utils/UserUtil'
@@ -327,7 +327,6 @@ import PagePath from '@/const/PagePath'
 import FollowAPI from '@/api/FollowAPI'
 import FollowStatus from '@/const/FollowStatus'
 import PageUtil from '@/utils/PageUtil'
-import LoginService from '@/pages/user/LoginService'
 import ImgFileVO from '@/model/ImgFileVO'
 import ImgUtil from '@/utils/ImgUtil'
 import CosUtil from '@/utils/CosUtil'
@@ -342,21 +341,20 @@ import TalkVO from '@/model/talk/TalkVO'
 import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { systemModule, userModule } from '@/store'
+import { appModule, systemModule, userModule } from '@/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
 
 import PayType from '@/const/PayType'
-import ProviderType, { Provider } from '@/const/ProviderType'
+import ProviderType from '@/const/ProviderType'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import RouterUtil from '@/utils/RouterUtil'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
-import ErrorCode from '@/const/ErrorCode'
-import ProviderUserVO from '@/model/ProviderUserVO'
 import UserService from '@/service/UserService'
 import DomFile from '@/model/DomFile'
+import ImgAddQO from '@/model/user/ImgAddQO'
 
 
 const userStore = namespace('user')
@@ -543,22 +541,16 @@ export default class UserInfo extends Vue {
     }
     try {
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
-      const imgFile: ImgFileVO = imgFiles[0]
-      imgFile.src = ImgUtil.getUserImgUploadFormat(this.userProp.id, imgFile.path)
-      UniUtil.showLoading('上传中')
-      CosUtil.postObject(imgFile, this.mineUser.id).then(() => {
-        UserAPI.addUserImgAPI(imgFile).then((res: any) => {
-          userModule.setUser(res.data)
-        })
-      })
-
-      UniUtil.chooseImage(count).then(imgFiles => {
-        for (const imgFile of imgFiles) {
-          //前台记录用户上传的图片，点击发布的时候才保存到后台
-          imgFile.src = ImgUtil.getTalkUploadFormat(this.user.id, imgFile.path)
-          this.showsImgSrcs.push(imgFile)
-        }
-      })
+      const imgFile: DomFile = imgFiles[0]
+      imgFile.src = appModule.imgPath + 'img/' + imgFile.src
+      // await CosUtil.postImg(imgFile, data)
+      // console.log(imgFile)
+      // const res = await UserAPI.addUserImgAPI(new ImgAddQO(imgFile))
+      console.log(imgFile)
+      const res = await Promise.all([CosUtil.postImg(imgFile), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      userModule.setUser(res[1].data)
+    } catch (e) {
+      console.error(e)
     } finally {
       UniUtil.hideLoading()
     }

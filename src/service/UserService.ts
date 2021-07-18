@@ -1,14 +1,12 @@
-import { chatModule, notifyModule, systemModule, userModule } from '../store'
+import { appModule, chatModule, notifyModule, systemModule, userModule } from '../store'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
-import ResultVO from '@/model/ResultVO'
 import LoginService from '@/pages/user/LoginService'
 import { Provider } from '@/const/ProviderType'
 import ProviderUserVO from '@/model/ProviderUserVO'
 import UniUtil from '@/utils/UniUtil'
 import ErrorCode from '@/const/ErrorCode'
 import Toast from '@/utils/Toast'
-import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
 import UserVO from '@/model/user/UserVO'
 
@@ -32,6 +30,7 @@ export default class UserService {
     userModule.setUser(loginRO.user)
     notifyModule.queryNotifiesAction()
     chatModule.getChatsAction()
+    appModule.getImgPathAction()
     return loginRO.user
   }
 

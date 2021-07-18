@@ -33,6 +33,7 @@ import PageUtil from '@/utils/PageUtil'
 import UserAPI from '@/api/UserAPI'
 import Alert from '../../utils/Alert'
 import { userModule } from '@/store'
+import CosAPI from '@/api/CosAPI'
 
 const userStore = namespace('user')
 
@@ -65,7 +66,7 @@ export default class UserAvatarPage extends Vue {
   }
 
   //点击上传按钮，上传图片，前端保存用户上传的图片
-  chooseImg () {
+  async chooseImg () {
     this.showBottomDialog = false
     uni.chooseImage({
       sourceType: ['album'],
@@ -91,7 +92,7 @@ export default class UserAvatarPage extends Vue {
     })
   }
 
-  saveAvatar () {
+  async saveAvatar () {
     this.saveDisabled = true
     UniUtil.showLoading('保存中')
     // 更新之后提示是否跳转信息页，更新手需要更新用户信息
@@ -103,12 +104,13 @@ export default class UserAvatarPage extends Vue {
       // 得出来100以下的压缩比
       ratio = Math.round(10000 / (imgSize / 1024))
     }
-    uni.compressImage({
+    /*uni.compressImage({
       src: this.uploadImgFile.path,
       quality: ratio,
       success: res => {
         this.uploadImgFile.path = res.tempFilePath
-        CosUtil.postObject(this.uploadImgFile, this.user.id).then((data) => {
+        const { data } = await CosAPI.getCosAuthorizationAPI()
+        CosUtil.postImg(this.uploadImgFile, this.user.id).then((data) => {
           const newAvatar = data.Location
           const userCopy: UserVO = JsonUtils.deepClone(this.user)
           userCopy.avatar = 'https://' + newAvatar
@@ -123,7 +125,7 @@ export default class UserAvatarPage extends Vue {
           UniUtil.hideLoading()
         })
       }
-    })
+    })*/
   }
 }
 </script>

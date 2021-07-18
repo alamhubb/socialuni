@@ -6,6 +6,8 @@ import UserPayVO from '@/model/user/UserPayVO'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 import UserEditVO from '@/model/user/UserEditVO'
 import UserVO from '@/model/user/UserVO'
+import DomFile from '@/model/DomFile'
+import ImgAddQO from '@/model/user/ImgAddQO'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {
@@ -31,8 +33,8 @@ export default class UserAPI {
     })
   }
 
-  static addUserImgAPI (userImg: ImgFileVO) {
-    return http.post('user/addImg', userImg)
+  static addUserImgAPI (userImg: ImgAddQO) {
+    return http.post<UserVO>('user/addImg', userImg)
   }
 
   static deleteUserImgAPI (userImg: ImgFileVO) {

@@ -1,4 +1,4 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import DistrictVO from '@/model/DistrictVO'
 import TagVO from '@/model/tag/TagVO'
 import HomeSwiperVO from '@/model/HomeSwiperVO'
@@ -8,15 +8,13 @@ import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import SocialAuthType from '@/const/SocialAuthType'
 import ReportAPI from '@/api/ReportAPI'
 import QingchiAPI from '@/api/QingchiAPI'
-import GenderType from '@/const/GenderType'
 import DevUserVO from '@/model/dev/DevUserVO'
 import DevUserAPI from '@/api/DevUserAPI'
-import { appModule } from '@/store/index'
+import { appModule, configModule } from '@/store/index'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import ResultVO from '@/model/ResultVO'
-import ErrorCode from '@/const/ErrorCode'
-import UniUtil from '@/utils/UniUtil'
 import DevModeType from '@/const/DevModeType'
+import AppConfigAPI from '@/api/AppConfigAPI'
+import AppInitDataRO from '@/model/common/AppInitDataRO'
 
 @Module({ generateMutationSetters: true })
 export default class AppModule extends VuexModule {
@@ -27,6 +25,7 @@ export default class AppModule extends VuexModule {
   districts: DistrictVO [] = []
   notifies: UnreadNotifyVO [] = []
   reportTypes: string[] = []
+  imgPath: string = ''
   tags: TagVO[] = []
   tagTypes: TagTypeVO[] = []
   homeSwipers: HomeSwiperVO[] = []
@@ -101,6 +100,24 @@ export default class AppModule extends VuexModule {
   getThreeDevUserAction () {
     DevUserAPI.queryDevUserDetailAPI().then(res => {
       this.threeDevUser = res.data
+    })
+  }
+
+  @Action
+  getAppConfigAction () {
+    AppConfigAPI.getAppConfigAPI().then(res => {
+      const appInitData: AppInitDataRO = res.data
+      configModule.appConfig = appInitData.appConfig
+      this.onlineUsersCount = appInitData.onlineUsersCount
+      this.reportTypes = appInitData.reportTypes
+      this.imgPath = appInitData.imgPath
+    })
+  }
+
+  @Action
+  getImgPathAction () {
+    AppConfigAPI.getImgPathAPI().then(res => {
+      this.imgPath = res.data
     })
   }
 }

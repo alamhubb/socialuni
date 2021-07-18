@@ -13,6 +13,7 @@ import DomFile from '@/model/DomFile'
 import UUIDUtil from '@/utils/UUIDUtil'
 import ImgUtil from '@/utils/ImgUtil'
 import { uniSystemModule } from '@/store'
+import JsonUtil from '@/utils/JsonUtil'
 
 export default class UniUtil {
   public static textCopy (copyText: string, hint?: string) {
@@ -149,7 +150,7 @@ export default class UniUtil {
         success (res) {
           const imgFiles: DomFile[] = res.tempFiles as DomFile[]
           for (const imgFile of imgFiles) {
-            console.log(imgFile)
+            JsonUtil.log(imgFile)
             // 不能大于10m大于10m就压缩不到100k
             // 获取压缩比
             const imgSize: number = imgFile.size
@@ -178,17 +179,17 @@ export default class UniUtil {
               src: imgFile.path,
               success: (image) => {
                 imgFile.aspectRatio = image.width / image.height
+                let fileName = null
+                if (uniSystemModule.isH5) {
+                  fileName = imgFile.name
+                } else {
+                  fileName = imgFile.path
+                }
+                imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
+                resolve(imgFiles)
               }
             })
-            let fileName = null
-            if (uniSystemModule.isH5) {
-              fileName = imgFile.name
-            } else {
-              fileName = imgFile.path
-            }
-            imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
           }
-          resolve(imgFiles)
         },
         fail (err) {
           reject(err)
