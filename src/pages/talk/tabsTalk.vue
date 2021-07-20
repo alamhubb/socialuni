@@ -1,7 +1,7 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-row-bar class="flex-none btr-smm mt-sm bg-theme-bg" :class="tabsId">
+    <q-row-bar class="flex-none btr-smm bg-theme-bg" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
