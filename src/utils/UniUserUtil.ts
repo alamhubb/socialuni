@@ -6,7 +6,7 @@ import GetUserInfoRes = UniApp.GetUserInfoRes
 import { uniSystemModule } from '@/store'
 
 export default class UniUserUtil {
-  public static getUniProviderLoginQO (provider?: any): Promise<UniProviderLoginQO> {
+  public static getUniProviderLoginQO (provider: string): Promise<UniProviderLoginQO> {
     return Promise.all([UniLoginUtil.getLoginCode(provider), UniUserUtil.getUserInfo(provider)]).then(res => {
       const userInfo: UniProviderLoginQO = new UniProviderLoginQO()
       userInfo.platform = uniSystemModule.platform
