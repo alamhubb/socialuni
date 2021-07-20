@@ -11,7 +11,7 @@ import SocialConfig from '@/config/SocialConfig'
 
 const http: Request = new Request()
 http.setConfig(config => { /* 设置全局配置 */
-  config.baseUrl = process.env.VUE_APP_BASE /* 根域名不同 */
+  config.baseUrl = process.env.VUE_APP_BASE_API /* 根域名不同 */
   config.timeout = 60 * 1000
   return config
 })

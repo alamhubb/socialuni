@@ -6,7 +6,7 @@ import CommonUtil from '@/utils/CommonUtil'
 export default class ImgUtil {
   static readonly imgUrl: string = process.env.VUE_APP_COS_URL
   // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'
-  static readonly uploadImgUrl: string = process.env.VUE_APP_BASE + 'upload/img/'
+  static readonly uploadImgUrl: string = process.env.VUE_APP_BASE_API + 'upload/img/'
 
   static uploadImgNewAPI (uploadImg: string, type: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
