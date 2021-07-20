@@ -273,7 +273,7 @@ import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
 import PageUtil from '@/utils/PageUtil'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import UniSystemStoreProp from '@/store/UniSystemStoreProp'
+import SystemStoreProp from '@/store/SystemStoreProp'
 import ProviderUserVO from '@/model/login/ProviderUserVO'
 import UniUserUtil from '@/utils/UniUserUtil'
 import UniProviderLoginQO from '@/model/UniProviderLoginQO'
@@ -290,8 +290,8 @@ const systemStore = namespace('system')
 
 @Component
 export default class LoginPage extends Vue {
-  @systemStore.State(UniSystemStoreProp.isMpWx) isWx: string
-  @systemStore.State(UniSystemStoreProp.isMpQQ) isQQ: string
+  @systemStore.State(SystemStoreProp.isMpWx) isWx: string
+  @systemStore.State(SystemStoreProp.isMpQQ) isQQ: string
 
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean

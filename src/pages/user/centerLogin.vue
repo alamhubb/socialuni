@@ -22,7 +22,7 @@
         <!--        手机号界面-->
         <!--        35*4 = 140 +30+80 = 250高度-->
         <!--        如果有用户且不为微信，则默认展示验证码绑定-->
-        <view v-if="(user&&!isMpWX) || showPhoneView" class="h150px">
+        <view v-if="showPhoneView" class="h150px">
           <!--          如果没登录-->
           <!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
                       <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
@@ -85,103 +85,42 @@
           <!--            没手机号，则是微信的话显示 绑定微信手机号，下面是手机号授权。就不是手机号登录，就是手机号绑定-->
 
           <!--            如果为第三方授权，如果为授权手机号-->
-          <view class="col-row-center w300px">
-            <template v-if=""></template>
-
-            <template v-if="authApp">
-              <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
-              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-              <button v-if="!user"
-                      class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                      @click="socialUniAuthLogin">
-                跳转清池授权登录
-              </button>
-              <button v-else
-                      class="bg-gradual-phone h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                      @click="socialUniAuthPhoneNum">
-                跳转清池授权手机号
-              </button>
-            </template>
-            <!--            手机号登录界面-->
-            <template v-else-if="showPhoneView">
-              <!--            如果是输入手机号页面，未登录，提示登录-->
-              <button :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
+          <view class="col-row-center w300px h120px">
+            <template v-if="!user">
+              <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
                       class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
               >
                 <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
                 <template v-if="!user">
-                  手机号登录{{ isThreeAuth ? '并授权' : '' }}
-                </template>
-                <!--            如果是输入手机号页面，已登录，如果不为三方授权-->
-                <template v-else>
-                  绑定手机号{{ isThreeAuth ? '并授权' : '' }}
+                  手机号登录{{ isAuthUser ? '并授权' : '' }}
                 </template>
               </button>
-              <!--              其他为错误的逻辑-->
+
+              <button v-else-if="isMpWX" :disabled="!openTypeBtnEnable"
+                      class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @click="providerLogin">
+                <u-icon color="white" name="weixin-fill" size="42"
+                        class="mr-xs"></u-icon>
+                微信登录{{ isAuthUser ? '并授权' : '' }}
+              </button>
+
+              <button v-else-if="isMpQQ" :disabled="!openTypeBtnEnable"
+                      open-type="getUserInfo"
+                      class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @getuserinfo="providerLogin">
+                <u-icon color="white" name="weixin-fill" size="42"
+                        class="mr-xs"></u-icon>
+                QQ登录{{ isAuthUser ? '并授权' : '' }}
+              </button>
             </template>
-            <!--            微信登录界面，非手机号登录界面-->
             <template v-else>
-              <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
-              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-              <template v-if="!user">
-                <button v-if="isMpWX" :disabled="!openTypeBtnEnable"
-                        class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @click="providerLogin">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  微信登录
-                </button>
-
-                <button v-if="isMpQQ" :disabled="!openTypeBtnEnable"
-                        open-type="getUserInfo"
-                        class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @getuserinfo="providerLogin">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  QQ登录
-                </button>
-
-                <button class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @click="mockSocialLogin">
-                  跳转清池授权登录
-                </button>
-              </template>
-
-
-              <template v-else>
-                <button v-if="isAuthUser || isAuthPhone&&hasPhoneNum" :disabled="!openTypeBtnEnable"
-                        class="h40px cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
-                        @click="openTypeBtnClick">
-                  <!--            如果已登录有用户-->
-
-                  <!--              已登录，三方授权，授权用户信息-->
-                  <!--                授权那用户信息无需关心手机号绑定状态-->
-                  <template v-if="isAuthUser">
-                    <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-                    <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
-                    授权用户信息
-                  </template>
-                  <!--              已登录，三方授权，授权手机号信息，绑定了手机号，提示授权手机号-->
-                  <template v-else-if="isAuthPhone&&hasPhoneNum">
-                    <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
-                    授权手机号
-                  </template>
-                </button>
-                <button v-else-if="isMpWX&&!hasPhoneNum" :disabled="!openTypeBtnEnable"
-                        open-type="getPhoneNumber"
-                        class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
-                        @getphonenumber="openTypeBtnClick">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  <!--              已登录，不为三方授权，进来只能是绑定微信手机号-->
-                  <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
-                  绑定微信手机号{{ isAuthPhone ? '并授权' : '' }}
-                </button>
-                <div class="h40px mt w100p row-center">
-                  <!--                  不支持其他的绑定方式-->
-                </div>
-                <!--                其他为错误的逻辑-->
-              </template>
+              <button :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
+                      class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
+              >
+                <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
+                <!--            如果是输入手机号页面，已登录，如果不为三方授权-->
+                绑定手机号
+              </button>
             </template>
           </view>
 

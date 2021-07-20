@@ -1,21 +1,14 @@
-export default class UniSystemStoreProp {
+export default class SystemStoreProp {
   static readonly systemInfo = 'systemInfo'
   static readonly system = 'system'
   static readonly platform = 'platform'
-  static readonly mp = 'mp'
+  static readonly mpPlatform = 'mpPlatform'
   static readonly isIos = 'isIos'
-  static readonly notIos = 'notIos'
   static readonly isAndroid = 'isAndroid'
-  static readonly notAndroid = 'notAndroid'
   static readonly isApp = 'isApp'
-  static readonly notApp = 'notApp'
   static readonly isMp = 'isMp'
-  static readonly notMp = 'notMp'
   static readonly isH5 = 'isH5'
-  static readonly notH5 = 'notH5'
   static readonly isMpQQ = 'isMpQQ'
-  static readonly notMpQQ = 'notMpQQ'
   static readonly isMpWx = 'isMpWx'
-  static readonly notMpWx = 'notMpWx'
 }
 

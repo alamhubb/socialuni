@@ -142,50 +142,40 @@
 
           <!--            如果为第三方授权，如果为授权手机号-->
           <view class="col-row-center w300px h120px">
-
-            <template v-if="showPhoneView">
-              <button :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
+            <template v-if="!user">
+              <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
                       class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
               >
                 <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
                 <template v-if="!user">
-                  手机号登录
+                  手机号登录{{ isAuthUser ? '并授权' : '' }}
                 </template>
-                <!--            如果是输入手机号页面，已登录，如果不为三方授权-->
-                <template v-else>
-                  绑定手机号
-                </template>
+              </button>
+
+              <button v-else-if="isWx" :disabled="!openTypeBtnEnable"
+                      class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @click="providerLoginClick">
+                <u-icon color="white" name="weixin-fill" size="42"
+                        class="mr-xs"></u-icon>
+                微信登录{{ isAuthUser ? '并授权' : '' }}
+              </button>
+
+              <button v-else-if="isQQ" :disabled="!openTypeBtnEnable"
+                      open-type="getUserInfo"
+                      class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @getuserinfo="providerLoginClick">
+                <u-icon color="white" name="weixin-fill" size="42"
+                        class="mr-xs"></u-icon>
+                QQ登录{{ isAuthUser ? '并授权' : '' }}
               </button>
             </template>
             <template v-else>
-              <template v-if="!user">
-
-                <button v-if="isWx" :disabled="!openTypeBtnEnable"
-                        class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @click="providerLoginClick">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  微信登录
-                </button>
-
-                <button v-if="isQQ" :disabled="!openTypeBtnEnable"
-                        open-type="getUserInfo"
-                        class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @getuserinfo="providerLoginClick">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  QQ登录
-                </button>
-
-                <button class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @click="mockSocialLogin">
-                  跳转清池授权登录
-                </button>
-              </template>
-              <button v-else
-                      class="bg-gradual-phone h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                      @click="socialUniAuthPhoneNum">
-                跳转清池授权手机号
+              <button :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
+                      class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
+              >
+                <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
+                <!--            如果是输入手机号页面，已登录，如果不为三方授权-->
+                绑定手机号
               </button>
             </template>
           </view>
@@ -273,18 +263,13 @@ import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
 import PageUtil from '@/utils/PageUtil'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import UniSystemStoreProp from '@/store/UniSystemStoreProp'
-import ProviderUserVO from '@/model/login/ProviderUserVO'
-import UniUserUtil from '@/utils/UniUserUtil'
+import SystemStoreProp from '@/store/SystemStoreProp'
 import UniProviderLoginQO from '@/model/UniProviderLoginQO'
-import SocialUserRO from '@/model/social/SocialUserRO'
 import UserAPI from '@/api/UserAPI'
 import LoginAPI from '@/api/LoginAPI'
 import UniUtil from '@/utils/UniUtil'
 import UserService from '@/service/UserService'
 import SocialLoginService from '@/service/SocailLoginService'
-import UniProviderType from '@/const/UniProviderType'
-import ProviderType from '@/const/ProviderType'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -293,8 +278,8 @@ const appStore = namespace('app')
 
 @Component
 export default class LoginPage extends Vue {
-  @uniSystemStore.State(UniSystemStoreProp.isMpWx) isWx: string
-  @uniSystemStore.State(UniSystemStoreProp.isMpQQ) isQQ: string
+  @uniSystemStore.State(SystemStoreProp.isMpWx) isWx: string
+  @uniSystemStore.State(SystemStoreProp.isMpQQ) isQQ: string
 
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
