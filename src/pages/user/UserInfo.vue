@@ -424,7 +424,7 @@ export default class UserInfo extends Vue {
         })
       } else {
         Alert.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
-          const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
+          const provider = systemModule.isApp ? ProviderType.wx : systemModule.mpPlatform
           PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
             UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
               this.userProp.contactAccount = res.data

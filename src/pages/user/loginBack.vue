@@ -663,7 +663,7 @@ export default class Login extends Vue {
       try {
         //没用户，天王老子来了也只能先登录
         if (!this.user) {
-          await this.providerLogin(providerResult, systemModule.provider)
+          await this.providerLogin(providerResult, systemModule.mpPlatform)
           //登录完成之后，只有为授权用户信息跳转会小程序
           //如果不为三方授权、且没有手机号，则只可能是来绑定手机号的
         } else if (!this.isAuthUser && !this.hasPhoneNum) {

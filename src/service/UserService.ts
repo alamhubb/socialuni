@@ -43,7 +43,7 @@ export default class UserService {
 
   //微信绑定手机号使用
   static getWxPhoneNumberByLogin (obj: any) {
-    LoginService.getLoginData(systemModule.provider as Provider).then((loginData: ProviderUserVO) => {
+    LoginService.getLoginData(systemModule.mpPlatform as Provider).then((loginData: ProviderUserVO) => {
       Object.assign(loginData, obj.detail)
       // 代表已过期
       loginData.sessionEnable = false

@@ -34,10 +34,11 @@ export default class AppModule extends VuexModule {
   onlineUsersCount = 0
 
   //三方授权时携带的参数
-  threeSecretKey = ''
-  threeUserId = ''
-  threeAppId = ''
-  threeAuthType = ''
+  threeSecretKey = 'asdfsdf'
+  threeUserId = '123'
+  threeAppId = '123'
+  threeAuthType = SocialAuthType.user
+  // threeAuthType = ''
   // threeProviderType = ''
   threeDevUser: DevUserVO = null
   isDevMode: boolean = process.env.NODE_ENV === DevModeType.dev

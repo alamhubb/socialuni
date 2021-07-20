@@ -25,7 +25,7 @@ http.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 *
     config.header.token = null
   }
   config.header.secretKey = SocialConfig.socialSecretKey
-  config.header.provider = systemModule.provider
+  config.header.provider = systemModule.mpPlatform
   config.header.platform = systemModule.platform
 
   /* else {

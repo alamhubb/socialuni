@@ -17,7 +17,7 @@ export default class FrontErrorLogVO {
     this.errorMsg = errorMsg
     this.platform = systemModule.platform
     if (this.platform === PlatformType.mp) {
-      this.provider = systemModule.provider
+      this.provider = systemModule.mpPlatform
     } else {
       this.appVersion = systemModule.appVersion
     }

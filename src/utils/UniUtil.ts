@@ -12,8 +12,8 @@ import Toast from '@/utils/Toast'
 import DomFile from '@/model/DomFile'
 import UUIDUtil from '@/utils/UUIDUtil'
 import ImgUtil from '@/utils/ImgUtil'
-import { uniSystemModule } from '@/store'
 import JsonUtil from '@/utils/JsonUtil'
+import { systemModule } from '@/store'
 
 export default class UniUtil {
   public static textCopy (copyText: string, hint?: string) {
@@ -35,7 +35,7 @@ export default class UniUtil {
   }
 
   public static createRewardedVideoAd (adUnitId: string) {
-    if (uniSystemModule.isMp) {
+    if (systemModule.isMp) {
       //eslint-disable-next-line
       //@ts-ignore
       return uni.createRewardedVideoAd({
@@ -167,7 +167,7 @@ export default class UniUtil {
               ratio = Math.round(10000 / (imgSize / 1024))
             }
             imgFile.quality = ratio
-            if (uniSystemModule.notH5) {
+            if (!systemModule.isH5) {
               UniUtil.compressImage(imgFile.path, ratio).then(res => {
                 imgFile.path = res
                 //计算压缩后的大小
@@ -180,7 +180,7 @@ export default class UniUtil {
               success: (image) => {
                 imgFile.aspectRatio = image.width / image.height
                 let fileName = null
-                if (uniSystemModule.isH5) {
+                if (systemModule.isH5) {
                   fileName = imgFile.name
                 } else {
                   fileName = imgFile.path

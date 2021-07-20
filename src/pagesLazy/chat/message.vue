@@ -499,7 +499,7 @@ export default class MessagePage extends Vue {
             if (!confirm) {
               return Toast.toastLong('您选择了不开启回话')
             }
-            const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
+            const provider = systemModule.isApp ? ProviderType.wx : systemModule.mpPlatform
             try {
               await PlatformUtils.pay(provider, PayType.shell, 1)
             } catch (e) {

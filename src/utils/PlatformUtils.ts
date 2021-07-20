@@ -115,7 +115,7 @@ export default class PlatformUtils {
   private static async requestPayment (payResult: UserPayResultVO) {
     if (systemModule.isMpQQ) {
       return QQUtils.requestPayment(payResult)
-    } else if (systemModule.isMpWX || systemModule.isApp) {
+    } else if (systemModule.isMpWx || systemModule.isApp) {
       return WxUtils.requestPayment(payResult)
     } else {
       throw '不存在的支付渠道'

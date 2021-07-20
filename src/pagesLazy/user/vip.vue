@@ -53,7 +53,7 @@ export default class VipPage extends Vue {
     if (this.user.vipFlag) {
       Alert.hint('您已开通会员，无需重复开通')
     } else {
-      PlatformUtils.userPay(systemModule.provider, PayType.vip)
+      PlatformUtils.userPay(systemModule.mpPlatform, PayType.vip)
     }
   }
 }

@@ -43,7 +43,7 @@ export default class SocialLoginService {
     try {
       const phoneBindQO = new BindPhoneQO(phoneNum, authCode)
 
-      const { data } = LoginAPI.phoneLoginAPI(phoneBindQO)
+      const { data } = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
       const user = UserService.getMineUserInitDataActionByToken(data)
 

@@ -1,11 +1,11 @@
 import LoginRes = UniApp.LoginRes;
 import UniPlatformType from '../const/UniPlatformType'
-import { uniSystemModule } from '@/store'
+import { systemModule } from '@/store'
 
 export default class UniLoginUtil {
   public static getLoginCode (provider?: any): Promise<string> {
     return UniLoginUtil.login(provider).then((loginRes: LoginRes) => {
-      if (UniPlatformType.mp === uniSystemModule.platform) {
+      if (UniPlatformType.mp === systemModule.platform) {
         //小程序平台获取code
         return loginRes.code
       } else {

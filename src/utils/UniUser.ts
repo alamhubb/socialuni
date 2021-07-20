@@ -26,7 +26,7 @@ export default class UniUser {
         //合并登录信息
         Object.assign(user, userInfoRes.userInfo)
         //如果是微信小程序，需要后台解密
-        if (systemModule.isMpWX) {
+        if (systemModule.isMpWx) {
           user.iv = userInfoRes.iv
           user.encryptedData = userInfoRes.encryptedData
         }

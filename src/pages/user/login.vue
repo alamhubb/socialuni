@@ -2,8 +2,15 @@
   <!--  全部字体加大一号，白色背景，垂直居中，子元素宽度占满-->
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white col-all-center">
+
+    <div v-if="goBackCountDown" class="font-bold text-lg">
+      {{ authSuccess ? '授权成功' : '不授权' }}，
+
+      {{ goBackCountDown }} 秒后返回...
+    </div>
+
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
-    <div class="pt-6vh pb-sm px w100p">
+    <div v-else class="pt-6vh pb-sm px w100p">
       <!--      上半部，无用户，无授权，显示logo+提示绑定手机号-->
       <!--      上半部，无用户，授权，显示三方应用申请信息+提示绑定手机号-->
       <!--      上半部，有用户，授权，无手机号，显示三方应用申请信息+提示绑定手机号-->
@@ -11,8 +18,8 @@
       <!--      上半部，手机号登录展示-->
 
       <div class="flex-none col-row-center h80px">
-        <div class="text-xxl font-bold">欢迎登录集美小世界</div>
-        <!--        <div v-if="showPhoneView" class="text-md u-type-warning mt-sm">建议使用微信 或 QQ一键登录</div>-->
+        <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
+        <div v-if="showPhoneView" class="text-md u-type-warning mt-sm">建议使用微信 或 QQ一键登录</div>
       </div>
 
       <view class="mt">
@@ -20,7 +27,18 @@
         <!--        手机号界面-->
         <!--        35*4 = 140 +30+80 = 250高度-->
         <!--        如果有用户且不为微信，则默认展示验证码绑定-->
-        <view v-if="showPhoneView" class="h150px">
+        <view v-if="(user&&!isMpWX) || showPhoneView" class="h150px">
+          <!--          如果没登录-->
+          <!--          <view v-if="!user" class="u-type-warning-light-bg row-col-center h80px px-sm">
+                      <u-icon name="volume-fill" class="u-type-warning" size="50"></u-icon>
+                      <view class="ml-smm font-bold">
+                        欢迎使用社交联盟授权，建议使用微信或QQ登录
+                      </view>
+                    </view>-->
+          <!--          <view class="h80px font-lg font-bold mb">
+                      欢迎使用社交联盟授权<span v-if="!user">，建议使用微信或QQ登录</span>
+                    </view>-->
+
           <view class="row-col-center">
             <view>手机号</view>
             <div class="flex-row flex-1 ml-smm solid-bottom">
@@ -88,18 +106,69 @@
         <!--      上半部，有用户，授权，无手机号，显示三方应用申请信息+提示绑定手机号-->
         <!--      上半部，有用户，授权-->
         <view v-else class="h150px flex-col">
+
+          <!--          头部-->
+          <view v-if="isThreeAuth" class="flex-1">
+            <!--            三方授权显示三方的信息-->
+            <view class="row-col-center px-sm py-xs" v-if="threeDevUser">
+              <u-avatar class="mr-sm" :src="threeDevUser.avatarUrl" mode="square" size="50"></u-avatar>
+              <text class="mr-sm font-bold">{{ threeDevUser.appName }}</text>
+              申请
+            </view>
+
+            <template v-if="isThreeAuth">
+              <!--    如果授权用户信息提示显示获取用户信息-->
+              <template v-if="isAuthUser">
+                <view class="font-bold row-col-center pd-sm text-md">
+                  获取您的昵称、头像、地区、性别及动态
+                </view>
+                <!-- 如果为三方授权， 不为手机号授权， 如果有用户显示出来用的信息-->
+                <view v-if="user" class="flex-row pd-sm u-border-top-bottom h65px">
+                  <u-avatar class="mr-sm" :src="user.avatar" mode="square"></u-avatar>
+                  <view class="col-around flex-1">
+                    <view>{{ user.nickname }}</view>
+                    <view class="text-grey text-sm">微信个人信息</view>
+                  </view>
+                  <view class="col-center">
+                    <u-icon name="checkmark" color="success" size="40"></u-icon>
+                  </view>
+                </view>
+              </template>
+              <template v-else-if="isAuthPhone">
+                <!--            为授权手机号显示授权手机号-->
+                <view class="font-bold row-col-center pd-sm text-md">
+                  获取您清池绑定的手机号
+                  <!--                如果有手机号显示-->
+                  <!--                <text>：186*****595</text>-->
+                  <text v-if="hasPhoneNum">：{{ user.phoneNum }}</text>
+                </view>
+              </template>
+              <!--  如果没有用户，展示提示请登录-->
+              <!--  如果为三方授权，用户授权，没有登录，则显示，上面这俩可以合并-->
+              <view v-if="!user" class="pd-sm">
+                您未登录，点击登录进行授权
+              </view>
+              <view v-else-if="isAuthPhone&&!hasPhoneNum" class="px-sm py-xs row-col-center">
+                <!--                请点击绑定手机号进行授权-->
+                您未在清池绑定手机号，点击绑定手机号授权
+              </view>
+            </template>
+            <!--  如果三方授权，手机号授权，没有用户，没有手机号，提示-->
+            <!--  请登录并绑定手机号后进行授权-->
+          </view>
           <!--          只有不为三方授权才显示logo-->
-          <div class="flex-1 row-center pb-md">
+          <div v-else class="flex-1 row-center pb-md">
             <!--        登录界面，展示logo-->
             <image class="radius flex-none h100p"
                    mode="aspectFit"
-                   src="/static/img/logo.png"
+                   src="/static/img/logo.jpg"
             />
           </div>
         </view>
       </view>
 
-      <div v-if="!hasPhoneNum" class="row-center pt-sm pb-sm">
+      <!--      绑定手机号可发布动态提示-->
+      <div v-if="!hasPhoneNum && !isAuthUser" class="row-center pt-sm pb-sm">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
@@ -126,8 +195,11 @@
         </view>
       </div>
 
+
+      <!--    底部按钮部分-->
+
       <div>
-        <view class="col-row-center">
+        <view class="h150px col-row-center">
           <!--          已登录用户绑定手机号，
                     使用手机号登录，
                     直接登录，
@@ -141,23 +213,52 @@
           <!--            没手机号，则是微信的话显示 绑定微信手机号，下面是手机号授权。就不是手机号登录，就是手机号绑定-->
 
           <!--            如果为第三方授权，如果为授权手机号-->
-          <view class="col-row-center w300px h120px">
-
-            <template v-if="showPhoneView">
+          <view class="col-row-center w300px">
+            <!--            手机号登录界面-->
+            <template v-if="(user&&!isMpWX) || showPhoneView">
+              <!--            如果是输入手机号页面，未登录，提示登录-->
               <button :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
                       class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
               >
                 <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
                 <template v-if="!user">
-                  手机号登录
+                  手机号登录{{ isAuthUser ? '并授权' : '' }}
                 </template>
                 <!--            如果是输入手机号页面，已登录，如果不为三方授权-->
-                <template v-else>
-                  绑定手机号
+                <template v-else-if="user&&!hasPhoneNum">
+                  绑定手机号{{ isAuthPhone ? '并授权' : '' }}
                 </template>
               </button>
+              <!--              其他为错误的逻辑-->
             </template>
+            <template v-else-if="authApp">
+              <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
+              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
+              <button v-if="!user"
+                      class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @click="socialUniAuthLogin">
+                跳转清池授权登录
+              </button>
+              <button v-else
+                      class="bg-gradual-phone h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @click="socialUniAuthPhoneNum">
+                跳转清池授权手机号
+              </button>
+            </template>
+            <!--            微信登录界面，非手机号登录界面-->
             <template v-else>
+              <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
+              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
+              <button v-if="!user" :disabled="!openTypeBtnEnable"
+                      open-type="getUserInfo"
+                      :class="isMpWX?'bg-gradual-wx':'bg-gradual-qq'"
+                      class="h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                      @getuserinfo="openTypeBtnClick">
+                <u-icon color="white" name="weixin-fill" size="42"
+                        class="mr-xs"></u-icon>
+                {{ isMpWX ? '微信' : 'QQ' }}登录 {{ isAuthUser ? '并授权' : '' }}
+              </button>
+
               <template v-if="!user">
 
                 <button v-if="isWx" :disabled="!openTypeBtnEnable"
@@ -171,7 +272,7 @@
                 <button v-if="isQQ" :disabled="!openTypeBtnEnable"
                         open-type="getUserInfo"
                         class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @getuserinfo="providerLoginClick">
+                        @getuserinfo="providerLoginClick('weixin')">
                   <u-icon color="white" name="weixin-fill" size="42"
                           class="mr-xs"></u-icon>
                   QQ登录
@@ -182,40 +283,62 @@
                   跳转清池授权登录
                 </button>
               </template>
-              <button v-else
-                      class="bg-gradual-phone h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                      @click="socialUniAuthPhoneNum">
-                跳转清池授权手机号
-              </button>
+
+
+              <template v-else>
+                <button v-if="isAuthUser || isAuthPhone&&hasPhoneNum" :disabled="!openTypeBtnEnable"
+                        class="h40px cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
+                        @click="openTypeBtnClick">
+                  <!--            如果已登录有用户-->
+
+                  <!--              已登录，三方授权，授权用户信息-->
+                  <!--                授权那用户信息无需关心手机号绑定状态-->
+                  <template v-if="isAuthUser">
+                    <!-- 只要不为QQ小程序平台都可以使用微信登录-->
+                    <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
+                    授权用户信息
+                  </template>
+                  <!--              已登录，三方授权，授权手机号信息，绑定了手机号，提示授权手机号-->
+                  <template v-else-if="isAuthPhone&&hasPhoneNum">
+                    <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
+                    授权手机号
+                  </template>
+                </button>
+                <button v-else-if="isMpWX&&!hasPhoneNum" :disabled="!openTypeBtnEnable"
+                        open-type="getPhoneNumber"
+                        class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
+                        @getphonenumber="openTypeBtnClick">
+                  <u-icon color="white" name="weixin-fill" size="42"
+                          class="mr-xs"></u-icon>
+                  <!--              已登录，不为三方授权，进来只能是绑定微信手机号-->
+                  <!--                    <u-icon color="white" name="weixin-fill" size="42" class="mr-xs"></u-icon>-->
+                  绑定微信手机号{{ isAuthPhone ? '并授权' : '' }}
+                </button>
+                <div class="h40px mt w100p row-center">
+                  <!--                  不支持其他的绑定方式-->
+                </div>
+                <!--                其他为错误的逻辑-->
+              </template>
             </template>
           </view>
 
 
-          <view class="row-between-center w300px h20px mt-md">
+          <view class="row-between-center w300px h40px mt-lg">
             <!--              <view v-if="isThreeAuth" class="row-col-center">-->
             <view class="row-col-center" @click="goBackPage">
               <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
               <view class="text-gray u-border-bottom">
                 <!--            手机号登录界面-->
-                <template v-if="user">
-                  不绑定返回
-                </template>
-                <template v-else>
-                  不登录返回
-                </template>
-              </view>
-            </view>
-            <view @click="switchShowPhoneNum" class="row-end-center">
-              <view class="text-gray">
-                <!--            手机号登录界面-->
                 <template v-if="showPhoneView">
                   <!--            如果是输入手机号页面，未登录，提示手机号登录-->
                   <template v-if="!user">
-                    其他方式登录
+                    {{ isAuthUser ? '不授权' : '不登录' }}返回
+                    <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                   </template>
                   <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
                   <template v-else>
-                    其他方式绑定
+                    {{ isAuthPhone ? '不授权' : '不绑定' }}返回
+                    <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                   </template>
                   <!--              其他为错误的逻辑-->
                 </template>
@@ -224,27 +347,76 @@
                   <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
                   <template v-if="!user">
                     <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-                    手机号登录
+                    {{ isAuthUser ? '不授权' : '不登录' }}返回
+                    <!--                    {{ isAuthPhone ? '集美' : '' }}-->
                   </template>
                   <!--            如果已登录有用户-->
                   <template v-else>
                     <!--              已登录，三方授权，授权用户信息-->
                     <!--                授权那用户信息无需关心手机号绑定状态-->
+                    <template v-if="isAuthUser">
+                      不授权返回
+                      <!--                      集美-->
+                    </template>
+                    <!--              已登录，三方授权，授权手机号信息，绑定了手机号，提示授权手机号-->
+                    <template v-else-if="isAuthPhone&&hasPhoneNum">
+                      不授权返回
+                      <!--                      集美-->
+                    </template>
                     <!--              已登录，不为三方授权，进来只能是绑定微信手机号-->
-                    验证码方式绑定
+                    <template v-else>
+                      {{ isAuthPhone ? '不授权' : '不绑定' }}返回
+                      <!--                      {{ isAuthPhone ? '集美' : '' }}-->
+                    </template>
+                    <!--                其他为错误的逻辑-->
+                  </template>
+                </template>
+              </view>
+            </view>
+            <view @click="switchShowPhoneNum" class="row-end-center">
+              <view class="text-gray">
+                <!--            手机号登录界面-->
+                <template v-if="(user&&!isMpWX)||showPhoneView">
+                  <!--            如果是输入手机号页面，未登录，提示手机号登录-->
+                  <template v-if="!user">
+                    其他方式{{ isAuthPhone ? '授权' : '登录' }}
+                  </template>
+                  <!--            如果是输入手机号页面，已登录，如果不为三方授权，提示绑定手机号-->
+                  <template v-else-if="user&&!hasPhoneNum&&isMpWX">
+                    其他方式{{ isAuthPhone ? '授权' : '绑定' }}
+                  </template>
+                  <!--              其他为错误的逻辑-->
+                </template>
+                <!--            微信登录界面，非手机号登录界面-->
+                <template v-else>
+                  <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
+                  <template v-if="!user">
+                    <!-- 只要不为QQ小程序平台都可以使用微信登录-->
+                    手机号{{ isAuthUser ? '授权' : '登录' }}
+                  </template>
+                  <!--            如果已登录有用户-->
+                  <template v-else-if="!hasPhoneNum&&!isAuthUser">
+                    <!--              已登录，三方授权，授权用户信息-->
+                    <!--                授权那用户信息无需关心手机号绑定状态-->
+                    <!--              已登录，不为三方授权，进来只能是绑定微信手机号-->
+                    验证码方式{{ isAuthPhone ? '授权' : '绑定' }}
                     <!--                其他为错误的逻辑-->
                   </template>
                 </template>
               </view>
               <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
-              <u-icon class="ml-xs text-gray"
+              <u-icon v-if="(!user||isMpWX) && (showPhoneView||!user||(!hasPhoneNum&&!isAuthUser))"
+                      class="ml-xs text-gray"
                       name="arrow-right"></u-icon>
             </view>
           </view>
+
         </view>
       </div>
 
-      <view class="row-between mt-lg">
+      <!--      底部客服信息-->
+
+      <view class="row-between mt-md">
         <navigator :url="homeUrl" class="u-type-info u-border-bottom">
           <u-icon name="home" size="30" class="mr-xs"></u-icon>
           查看官网
@@ -260,31 +432,31 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
+import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import NumberUtil from '@/utils/NumberUtil'
+import UserAPI from '@/api/UserAPI'
 import ConfigMap from '@/const/ConfigMap'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import { appModule, uniSystemModule, uniSystemStore, userModule } from '@/store'
+import ProviderType, { Provider } from '@/const/ProviderType'
+import ProviderUserVO from '@/model/ProviderUserVO'
+import { systemModule, userModule } from '@/store'
 import Alert from '@/utils/Alert'
+import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
-import PageUtil from '@/utils/PageUtil'
-import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import UniSystemStoreProp from '@/store/UniSystemStoreProp'
-import ProviderUserVO from '@/model/login/ProviderUserVO'
-import UniUserUtil from '@/utils/UniUserUtil'
-import UniProviderLoginQO from '@/model/UniProviderLoginQO'
-import SocialUserRO from '@/model/social/SocialUserRO'
-import UserAPI from '@/api/UserAPI'
-import LoginAPI from '@/api/LoginAPI'
-import UniUtil from '@/utils/UniUtil'
-import UserService from '@/service/UserService'
 import SocialLoginService from '@/service/SocailLoginService'
-import UniProviderType from '@/const/UniProviderType'
-import ProviderType from '@/const/ProviderType'
+import ResultVO from '@/model/ResultVO'
+import ErrorCode from '@/const/ErrorCode'
+import PageUtil from '@/utils/PageUtil'
+import AppUtilAPI from '@/api/AppUtilAPI'
+import UserService from '@/service/UserService'
+import DevUserVO from '@/model/dev/DevUserVO'
+import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
+import SocialConfig from '@/config/SocialConfig'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -292,15 +464,27 @@ const systemStore = namespace('system')
 const appStore = namespace('app')
 
 @Component
-export default class LoginPage extends Vue {
-  @uniSystemStore.State(UniSystemStoreProp.isWX) isWx: string
-  @uniSystemStore.State(UniSystemStoreProp.isQQ) isQQ: string
-
+export default class Login extends Vue {
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
   @configStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
   @configStore.Getter(ConfigMap.qqServiceKey) qqService: string
+  @systemStore.State('isMp') isMp: boolean
+  // @systemStore.State('isMpQQ') isMpQQ: boolean
+  @systemStore.State('isMpWX') isMpWX: boolean
+
+  //三方授权相关
+  @appStore.State('threeUserId') threeUserId: string
+  @appStore.State('threeAuthType') threeAuthType: string
+  @appStore.State('threeAppId') threeAppId: string
+  @appStore.State('threeDevUser') threeDevUser: DevUserVO
+  //getter
+  @appStore.Getter('isThreeAuth') isThreeAuth: boolean
+  @appStore.Getter('isAuthUser') isAuthUser: boolean
+  @appStore.Getter('isAuthPhone') isAuthPhone: boolean
+
+  authApp = !SocialConfig.authApp
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
@@ -311,6 +495,7 @@ export default class LoginPage extends Vue {
   openTypeBtnEnable = true
 
   showPhoneView = false
+  goBackCountDown = 0
 
   //是否授权成功
   authSuccess = false
@@ -384,10 +569,19 @@ export default class LoginPage extends Vue {
   }
 
   goBackPage () {
-    if (!this.user) {
-      PageUtil.goHome()
+    if (this.isThreeAuth) {
+      const result: ResultVO<any> = new ResultVO<any>()
+      result.errorCode = ErrorCode.business
+      result.errorMsg = '用户未授权'
+      result.success = false
+      UniUtil.showLoading('不授权，返回中...')
+      uni.navigateBackMiniProgram({ extraData: result })
     } else {
-      PageUtil.toMinePage()
+      if (!this.user) {
+        PageUtil.goHome()
+      } else {
+        PageUtil.toMinePage()
+      }
     }
   }
 
@@ -457,7 +651,7 @@ export default class LoginPage extends Vue {
           userModule.setUser(user)
           let msg = '绑定成功'
           //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-          if (uniSystemModule.isIos && uniSystemModule.isQQ) {
+          if (systemModule.isIosAndMpQQ) {
             msg += '，如遇无法弹出输入框，请重启应用'
           }
           // 提示验证码发送成功
@@ -466,7 +660,17 @@ export default class LoginPage extends Vue {
           Alert.hint('您已绑定手机号')
         }
       } else {
-        await SocialLoginService.phoneLogin(this.phoneNum, this.authCode)
+        const loginData = new ProviderUserVO()
+        loginData.phoneNum = this.phoneNum
+        loginData.authCode = this.authCode
+        loginData.provider = ProviderType.phone
+        loginData.platform = systemModule.platform
+        await SocialLoginService.providerLogin(ProviderType.phone, loginData)
+      }
+      //只有为三方授权才调用
+      if (this.isThreeAuth) {
+        //如果点了按钮就会并授权，要不然也不会到这里
+        await this.authUserOrPhoneNum()
       }
       this.goBackPage()
       this.openTypeBtnEnable = true
@@ -475,17 +679,16 @@ export default class LoginPage extends Vue {
 
 
   //平台登录
-  async providerLogin (result, provider: UniProviderLoginQO) {
+  async providerLogin (result, provider: Provider) {
     // #ifdef MP
     // #ifndef MP-TOUTIAO
     if (result.detail.errMsg !== Constants.loginSuccess) {
       return Toast.toast('您取消了登录')
     }
     // #endif
-    // await SocialLoginService.providerLogin(provider)
+    await SocialLoginService.providerLogin(provider)
     // #endif
   }
-
 
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async providerLoginClick (provide: string) {
@@ -496,65 +699,105 @@ export default class LoginPage extends Vue {
 
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async openTypeBtnClick (providerResult) {
-    /*  const res = await OAuthAPI.mockApplySocialOAuthAPI()
-      const SocialLoginRO = res.data
-      const loginQO = UniProviderLoginQOUtil.getQOBySocialLoginRO(SocialLoginRO)*/
-    // const loginQO = await UniUserUtil.getUniProviderLoginQO(uniSystemModule.loginProviderType)
-    // LoginAPI.providerLoginAPI(loginQO)
-
-    /*if (this.openTypeBtnEnable) {
+    console.log(providerResult)
+    if (this.openTypeBtnEnable) {
       this.openTypeBtnEnable = false
-      const loginData = await UniUserUtil.getProviderUserInfoRO(systemModule.loginProviderType)
-      /!*if (systemModule.isApp) {
-        loginData.clientid = systemModule.clientid
-      }*!/
-      return LoginAPI.providerLoginAPI(loginData).then((res: any) => {
-        const user = UserService.getMineUserInitDataActionByToken(res)
-        let hintText = '登录成功'
-        if (!user.phoneNum) {
-          hintText += '，绑定手机号后才可发布内容'
-        }
-        if (systemModule.isIosAndMpQQ) {
-          hintText += '，如遇无法弹出输入框，请重启应用'
-        }
-        Alert.hint(hintText)
-        return user
-      })*/
-
-    /*try {
+      try {
         //没用户，天王老子来了也只能先登录
-        await this.providerLogin(providerResult, systemModule.loginProviderType)
-        //登录完成之后，只有为授权用户信息跳转会小程序
-        //如果不为三方授权、且没有手机号，则只可能是来绑定手机号的
+        if (!this.user) {
+          await this.providerLogin(providerResult, systemModule.mpPlatform)
+          //登录完成之后，只有为授权用户信息跳转会小程序
+          //如果不为三方授权、且没有手机号，则只可能是来绑定手机号的
+        } else if (!this.isAuthUser && !this.hasPhoneNum) {
+          //如果微信绑定手机号
+          await this.getPhoneNumberByWx(providerResult)
+        }
+        //只有为三方授权才调用
+        //如果授权用信息
+        //如果授权手机号
+        if (this.isThreeAuth) {
+          //如果点了按钮就会并授权，要不然也不会到这里
+          await this.authUserOrPhoneNum()
+        }
       } finally {
         this.openTypeBtnEnable = true
-      }*/
-    // }
+      }
+    }
   }
 
   socialUniAuthLogin () {
-    //开发模式模拟授权
-    if (appModule.isDevMode) {
-      LoginAPI.mockLogin().then(res => {
-        UserService.getMineUserInitDataActionByToken(res as any)
-        PageUtil.toTalkPage()
-      })
-    } else {
-      const authVO: SocialUniAuthVO = new SocialUniAuthVO('user')
-      PageUtil.toSocialUniAuth(authVO)
-    }
+    const authVO: SocialUniAuthVO = new SocialUniAuthVO('user', CommonUtil.getUUID())
+    uni.navigateToMiniProgram({
+      appId: 'wx0bf5fe9ceeab514c',
+      // appId: '1109985787',
+      path: 'pages/user/login',
+      extraData: authVO
+    })
   }
 
   socialUniAuthPhoneNum () {
-    //开发模式模拟授权
-    if (appModule.isDevMode) {
-      LoginAPI.mockBindPhone().then(res => {
-        userModule.setUser(res.data)
-      })
+    const authVO: SocialUniAuthVO = new SocialUniAuthVO('phone', this.user.id)
+    uni.navigateToMiniProgram({
+      appId: 'wx0bf5fe9ceeab514c',
+      // appId: '1109985787',
+      path: 'pages/user/login',
+      extraData: authVO
+    })
+  }
+
+  async authUserOrPhoneNum () {
+    //有用户信息，并且伪授权用户信息
+    if (this.isAuthUser && this.user) {
+      //处理用户授权
+      await Alert.confirm('是否确认授权您的用户信息')
+      UniUtil.showLoading('授权中')
+      const threeAuthResultVO = await OpenDataAPI.authUserInfoAPI()
+      UniUtil.hideLoading()
+      threeAuthResultVO.data.appUserId = this.threeUserId
+      threeAuthResultVO.data.authType = this.threeAuthType
+      this.authSuccessGoBackThreeMp(threeAuthResultVO)
+      //为授权手机号，并且有手机号
+    } else if (this.isAuthPhone && this.hasPhoneNum) {
+      //处理用户授权
+      await Alert.confirm('是否确认授权您的手机号码')
+      UniUtil.showLoading('授权中')
+      const threeAuthResultVO = await OpenDataAPI.authUserPhoneNumAPI()
+      UniUtil.hideLoading()
+      threeAuthResultVO.data.appUserId = this.threeUserId
+      threeAuthResultVO.data.authType = this.threeAuthType
+      this.authSuccessGoBackThreeMp(threeAuthResultVO)
     } else {
-      const authVO: SocialUniAuthVO = new SocialUniAuthVO('phone')
-      PageUtil.toSocialUniAuth(authVO)
+      AppUtilAPI.sendErrorLogAPI(null, '错误的用户授权类型')
     }
+  }
+
+  // 微信点击按钮，获取手机号用来绑定
+  async getPhoneNumberByWx (obj: any) {
+    await UserService.getPhoneNumberByWx(obj)
+  }
+
+  //授权成功返回第三方小程序
+  authSuccessGoBackThreeMp (extraData: ResultVO<any>) {
+    this.goBackCountDown = 1
+    let hintText = ''
+    if (extraData.success) {
+      this.authSuccess = true
+      hintText = '授权成功，返回中...'
+    } else {
+      hintText = '不授权，返回中...'
+    }
+    UniUtil.showLoading(hintText)
+    const timer = setInterval(() => {
+      if (this.goBackCountDown) {
+        this.goBackCountDown--
+      } else {
+        UniUtil.hideLoading()
+        clearInterval(timer)
+        uni.navigateBackMiniProgram({
+          extraData: extraData
+        })
+      }
+    }, 1000)
   }
 }
 </script>

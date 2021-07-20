@@ -13,9 +13,9 @@ export default class UniSystemStoreProp {
   static readonly notMp = 'notMp'
   static readonly isH5 = 'isH5'
   static readonly notH5 = 'notH5'
-  static readonly isQQ = 'isQQ'
-  static readonly notQQ = 'notQQ'
-  static readonly isWX = 'isWX'
-  static readonly notWX = 'notWX'
+  static readonly isMpQQ = 'isMpQQ'
+  static readonly notMpQQ = 'notMpQQ'
+  static readonly isMpWx = 'isMpWx'
+  static readonly notMpWx = 'notMpWx'
 }
 

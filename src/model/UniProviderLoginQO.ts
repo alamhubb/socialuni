@@ -1,4 +1,4 @@
-import { uniSystemModule } from '@/store'
+import { systemModule } from '@/store'
 
 export default class UniProviderLoginQO {
   provider = ''
@@ -33,6 +33,6 @@ export default class UniProviderLoginQO {
   city = ''
 
   constructor () {
-    this.platform = uniSystemModule.platform
+    this.platform = systemModule.platform
   }
 }

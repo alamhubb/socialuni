@@ -11,7 +11,6 @@ import NotifyModule from '@/store/NotifyModule'
 import TagModule from '@/store/TagModule'
 import LocationModule from '@/store/LocationModule'
 import { namespace } from 'vuex-class'
-import UniSystemModule from '@/store/UniSystemModule'
 
 Vue.use(Vuex)
 
@@ -24,12 +23,19 @@ export const configModule = new ConfigModule({ store, name: 'config' })
 export const systemModule = new SystemModule({ store, name: 'system' })
 export const chatModule = new ChatModule({ store, name: 'chat' })
 export const platformModule = new PlatformModule({ store, name: 'platform' })
-
 export const notifyModule = new NotifyModule({ store, name: 'notify' })
 export const tagModule = new TagModule({ store, name: 'tag' })
 export const locationModule = new LocationModule({ store, name: 'location' })
-export const uniSystemModule = new UniSystemModule({ store, name: 'uniSystem' })
 
-export const uniSystemStore = namespace('uniSystem')
+export const appStore = namespace('app')
+export const talkStore = namespace('talk')
+export const userStore = namespace('user')
+export const configStore = namespace('config')
+export const systemStore = namespace('system')
+export const chatStore = namespace('chat')
+export const platformStore = namespace('platform')
+export const notifyStore = namespace('notify')
+export const tagStore = namespace('tag')
+export const locationStore = namespace('location')
 
 export default store

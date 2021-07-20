@@ -3,15 +3,15 @@ import UniLoginUtil from './UniLoginUtil'
 import UniUserInfoRO from '../model/UniUserInfoRO'
 import UniProviderType from '../const/UniProviderType'
 import GetUserInfoRes = UniApp.GetUserInfoRes
-import { uniSystemModule } from '@/store'
+import { systemModule } from '@/store'
 
 export default class UniUserUtil {
   public static getUniProviderLoginQO (provider: string): Promise<UniProviderLoginQO> {
     return Promise.all([UniLoginUtil.getLoginCode(provider), UniUserUtil.getUserInfo(provider)]).then(res => {
       const userInfo: UniProviderLoginQO = new UniProviderLoginQO()
-      userInfo.platform = uniSystemModule.platform
+      userInfo.platform = systemModule.platform
       //如果为小程序的话不传值，默认为小程序类型
-      userInfo.provider = provider || uniSystemModule.mpPlatform
+      userInfo.provider = provider || systemModule.mpPlatform
 
       userInfo.code = res[0] || ''
 
@@ -30,7 +30,7 @@ export default class UniUserUtil {
       userInfo.province = userInfoRO.province || ''
       userInfo.city = userInfoRO.city || ''
 
-      if (uniSystemModule.isApp) {
+      if (systemModule.isApp) {
         if (provider === UniProviderType.qq) {
           userInfo.gender = userInfoRO.gender_type || 0
         }
@@ -43,7 +43,7 @@ export default class UniUserUtil {
 
   public static getUserInfo (provider?: any) {
     return new Promise<GetUserInfoRes>((resolve, reject) => {
-      if (uniSystemModule.isWX) {
+      if (systemModule.isMpWx) {
         //只有为小程序，且为微信小程序时才
         uni.getUserProfile({
           provider: provider,

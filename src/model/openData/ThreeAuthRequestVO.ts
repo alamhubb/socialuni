@@ -10,6 +10,6 @@ export default class ThreeAuthRequestVO {
     this.threeSecretKey = appModule.threeSecretKey
     this.threeUserId = appModule.threeUserId
     this.providerAppId = appModule.threeAppId
-    this.providerType = systemModule.provider
+    this.providerType = systemModule.mpPlatform
   }
 }
