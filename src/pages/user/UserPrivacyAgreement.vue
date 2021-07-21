@@ -25,7 +25,7 @@ import UserVO from '@/model/user/UserVO'
 import { userStore } from '@/store'
 
 @Component
-export default class LoginFooterAppInfo extends Vue {
+export default class UserPrivacyAgreement extends Vue {
   @userStore.State('user') user: UserVO
 
   get userAgreementUrl (): string {

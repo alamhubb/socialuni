@@ -33,7 +33,7 @@ export default Vue.extend({
     systemModule.getSystemInfo()
     //为三方只授权不需要查询信息
     if (appModule.threeSecretKey) {
-      appModule.getThreeDevUserAction()
+      // appModule.getThreeDevUserAction()
     } else {
       //页面启动，启动函数
       systemModule.appLunchAction()
