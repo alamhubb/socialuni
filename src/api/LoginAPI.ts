@@ -3,7 +3,7 @@ import http from '@/plugins/http'
 import UserVO from '@/model/user/UserVO'
 import UniProviderLoginQO from '@/model/UniProviderLoginQO'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
-import BindPhoneQO from '@/model/login/BindPhoneQO'
+import PhoneFormData from '@/model/login/PhoneFormData'
 
 
 export default class LoginAPI {
@@ -11,7 +11,7 @@ export default class LoginAPI {
     return http.post<SocialLoginRO<UserVO>>('user/providerLogin', loginData)
   }
 
-  static phoneLoginAPI (loginData: BindPhoneQO) {
+  static phoneLoginAPI (loginData: PhoneFormData) {
     return http.post<SocialLoginRO<UserVO>>('user/phoneLogin', loginData)
   }
 

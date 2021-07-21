@@ -2,35 +2,30 @@
   <!--  全部字体加大一号，白色背景，垂直居中，子元素宽度占满-->
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white col-all-center">
-    <div v-if="goBackCountDown" class="font-bold text-lg">
-      {{ authSuccess ? '授权成功' : '不授权' }}，{{ goBackCountDown }} 秒后返回...
-    </div>
-
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
-    <div v-else class="pt-6vh pb-sm px w100p">
+    <div class="pt-6vh pb-sm px w100p">
       <div class="flex-none col-row-center h80px">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
         <div v-if="showPhoneView" class="text-md u-type-warning mt-sm">建议使用微信 或 QQ一键登录</div>
       </div>
 
-      <view class="mt">
-        <view class="h150px flex-col">
-          <third-apply-auth-info v-if="isThreeAuth"></third-apply-auth-info>
+      <view class="mt h150px">
+        <phone-login-form v-if="showPhoneView"></phone-login-form>
+
+        <view v-else class="h100p row-center pb-md">
           <!--          头部-->
 
           <!--          只有不为三方授权才显示logo-->
-          <div v-else class="flex-1 row-center pb-md">
-            <!--        登录界面，展示logo-->
-            <image class="radius flex-none h100p"
-                   mode="aspectFit"
-                   src="/static/img/logo.jpg"
-            />
-          </div>
+          <!--        登录界面，展示logo-->
+          <image class="radius flex-none h100p"
+                 mode="aspectFit"
+                 src="/static/img/logo.jpg"
+          />
         </view>
       </view>
 
       <!--      绑定手机号可发布动态提示-->
-      <div v-if="!hasPhoneNum && !isAuthUser" class="row-center pt-sm pb-sm">
+      <div class="row-center pt-sm pb-sm">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
@@ -56,7 +51,7 @@
                         class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
                 >
                   <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
-                  手机号登录{{ isThreeAuth ? '并授权' : '' }}
+                  手机号登录
                 </button>
                 <button v-else-if="isMpQQ" :disabled="!openTypeBtnEnable"
                         open-type="getUserInfo"
@@ -64,18 +59,19 @@
                         @getuserinfo="providerLogin">
                   <u-icon color="white" name="weixin-fill" size="42"
                           class="mr-xs"></u-icon>
-                  QQ登录{{ isThreeAuth ? '并授权' : '' }}
+                  QQ登录
                 </button>
+                <!--                app和h5也都可以用微信登录-->
                 <button v-else :disabled="!openTypeBtnEnable"
                         class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
                         @click="providerLogin">
                   <u-icon color="white" name="weixin-fill" size="42"
                           class="mr-xs"></u-icon>
-                  微信登录{{ isThreeAuth ? '并授权' : '' }}
+                  微信登录
                 </button>
               </template>
               <!--              有用户-->
-              <template v-else-if="!hasPhoneNum&&!isAuthUser">
+              <template v-else>
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
                         class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
                 >
@@ -92,73 +88,31 @@
                   绑定微信手机号{{ isAuthPhone ? '并授权' : '' }}
                 </button>
               </template>
-
-              <template v-else>
-
-                <!--                授权用户信息，-->
-                <button v-if="isAuthUser" :disabled="!openTypeBtnEnable"
-                        class="h40px cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
-                        @click="openTypeBtnClick">
-                  授权用户信息
-                </button>
-                <button v-else :disabled="!openTypeBtnEnable"
-                        class="h40px cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
-                        @click="openTypeBtnClick">
-                  <template>
-                    授权手机号
-                  </template>
-                </button>
-              </template>
             </template>
           </view>
 
 
           <view class="row-between-center w300px h40px mt-lg">
-            <template v-if="!user">
-              <view class="row-col-center" @click="goBackPage">
-                <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
-                <view class="text-gray u-border-bottom">
-                  不登录返回
-                </view>
+            <view class="row-col-center" @click="goBackPage">
+              <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
+              <view class="text-gray u-border-bottom">
+                {{ user ? '不绑定返回' : '不登录返回' }}
               </view>
-              <view @click="switchShowPhoneNum" class="row-end-center">
-                <view class="text-gray">
-                  <!--            手机号登录界面-->
-                  <!--            如果是输入手机号页面，未登录，提示手机号登录-->
-                  <template>
-                    {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
-                  </template>
-                </view>
-                <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
-                <u-icon class="ml-xs text-gray"
-                        name="arrow-right"></u-icon>
-              </view>
-            </template>
+            </view>
 
-            <template v-else-if="!hasPhoneNum&&!isAuthUser">
-              <view class="row-col-center" @click="goBackPage">
-                <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
-                <view class="text-gray u-border-bottom">
-                  不绑定返回
-                </view>
-              </view>
-              <view @click="switchShowPhoneNum" v-if="isMpWx" class="row-end-center">
-                <view class="text-gray">
+            <view v-if="!user || isMpWx" @click="switchShowPhoneNum" class="row-end-center">
+              <view class="text-gray">
+                <template v-if="!user">
                   {{ showPhoneView ? '其他方式绑定' : '验证码方式绑定' }}
-                </view>
-                <u-icon class="ml-xs text-gray"
-                        name="arrow-right"></u-icon>
+                </template>
+                <template v-else>
+                  {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
+                </template>
               </view>
-            </template>
-
-            <template v-else>
-              <view class="row-col-center" @click="goBackPage">
-                <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
-                <view class="text-gray u-border-bottom">
-                  不授权
-                </view>
-              </view>
-            </template>
+              <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
+              <u-icon class="ml-xs text-gray"
+                      name="arrow-right"></u-icon>
+            </view>
           </view>
         </view>
       </div>
@@ -170,16 +124,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
-import { namespace } from 'vuex-class'
+import {namespace} from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
-import CommonUtil from '@/utils/CommonUtil'
 import UserAPI from '@/api/UserAPI'
-import ConfigMap from '@/const/ConfigMap'
 import ProviderType from '@/const/ProviderType'
 import ProviderUserVO from '@/model/ProviderUserVO'
-import { systemModule, userModule } from '@/store'
+import {systemModule, userModule} from '@/store'
 import Alert from '@/utils/Alert'
 import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
@@ -190,13 +142,12 @@ import ErrorCode from '@/const/ErrorCode'
 import PageUtil from '@/utils/PageUtil'
 import AppUtilAPI from '@/api/AppUtilAPI'
 import UserService from '@/service/UserService'
-import DevUserVO from '@/model/dev/DevUserVO'
-import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import SocialConfig from '@/config/SocialConfig'
 import SystemStoreProp from '@/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
+import PhoneFormData from '@/model/login/PhoneFormData'
+import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -204,6 +155,7 @@ const systemStore = namespace('system')
 const appStore = namespace('app')
 @Component({
   components: {
+    PhoneLoginForm,
     UserPrivacyAgreement,
     ThirdApplyAuthInfo,
     LoginFooterAppInfo
@@ -213,46 +165,26 @@ export default class Login extends Vue {
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
-  @configStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
-  @configStore.Getter(ConfigMap.qqServiceKey) qqService: string
   @systemStore.State('isMp') isMp: boolean
   @systemStore.State(SystemStoreProp.isMpWx) isMpWx: boolean
   @systemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
 
-  //三方授权相关
-  @appStore.State('threeUserId') threeUserId: string
-  @appStore.State('threeAuthType') threeAuthType: string
-  @appStore.State('threeAppId') threeAppId: string
-  @appStore.State('threeDevUser') threeDevUser: DevUserVO
-  //getter
-  @appStore.Getter('isThreeAuth') isThreeAuth: boolean
-  @appStore.Getter('isAuthUser') isAuthUser: boolean
-  @appStore.Getter('isAuthPhone') isAuthPhone: boolean
-
-  authApp = !SocialConfig.authApp
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
 
-  phoneNum = ''
-  authCode = ''
-  countDown = 0
+  phoneFormData = new PhoneFormData()
+
   openTypeBtnEnable = true
 
   showPhoneView = false
-  goBackCountDown = 0
-
-  //是否授权成功
-  authSuccess = false
-
 
   //同意协议
   // contractChecked = true
 
-
   get loginButtonDisabled () {
     // !this.contractChecked ||
-    return !this.phoneNumberRight || !this.authCodeRight || !this.openTypeBtnEnable
+    return !this.phoneFormData.phoneNumberRight || !this.phoneFormData.authCodeRight || !this.openTypeBtnEnable
   }
 
 
@@ -275,12 +207,9 @@ export default class Login extends Vue {
 
   switchShowPhoneNum () {
     if (this.showPhoneView) {
-      // this.phoneNumInputBlur()
-      // this.authCodeInputBlur()
       this.showPhoneView = false
     } else {
       this.showPhoneView = true
-      // this.phoneNumInputFocus()
     }
   }
 
@@ -376,26 +305,6 @@ export default class Login extends Vue {
         this.openTypeBtnEnable = true
       }
     }
-  }
-
-  socialUniAuthLogin () {
-    const authVO: SocialUniAuthVO = new SocialUniAuthVO('user', CommonUtil.getUUID())
-    uni.navigateToMiniProgram({
-      appId: 'wx0bf5fe9ceeab514c',
-      // appId: '1109985787',
-      path: 'pages/user/login',
-      extraData: authVO
-    })
-  }
-
-  socialUniAuthPhoneNum () {
-    const authVO: SocialUniAuthVO = new SocialUniAuthVO('phone', this.user.id)
-    uni.navigateToMiniProgram({
-      appId: 'wx0bf5fe9ceeab514c',
-      // appId: '1109985787',
-      path: 'pages/user/login',
-      extraData: authVO
-    })
   }
 
   async authUserOrPhoneNum () {

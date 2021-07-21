@@ -1,14 +1,10 @@
 import UniUtil from '@/utils/UniUtil'
-import { systemModule, userModule } from '@/store'
-import ProviderType, { Provider } from '@/const/ProviderType'
+import { systemModule } from '@/store'
 import Alert from '@/utils/Alert'
-import ProviderUserVO from '@/model/ProviderUserVO'
-import UniUser from '@/utils/UniUser'
 import LoginAPI from '@/api/LoginAPI'
 import UserService from '@/service/UserService'
 import UniUserUtil from '@/utils/UniUserUtil'
-import UniProviderLoginQO from '@/model/UniProviderLoginQO'
-import BindPhoneQO from '@/model/login/BindPhoneQO'
+import PhoneFormData from '@/model/login/PhoneFormData'
 
 
 export default class SocialLoginService {
@@ -41,7 +37,7 @@ export default class SocialLoginService {
   static async phoneLogin (phoneNum: string, authCode: string) {
     UniUtil.showLoading('登录中')
     try {
-      const phoneBindQO = new BindPhoneQO(phoneNum, authCode)
+      const phoneBindQO = new PhoneFormData(phoneNum, authCode)
 
       const { data } = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
