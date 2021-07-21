@@ -47,9 +47,6 @@ export default class UserService {
       Object.assign(loginData, obj.detail)
       // 代表已过期
       loginData.sessionEnable = false
-      /*this.getPhoneNumberAfterHandler(loginData).finally(() => {
-        this.phoneBtnDisabled = false
-      })*/
     })
   }
 

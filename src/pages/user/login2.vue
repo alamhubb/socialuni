@@ -298,7 +298,7 @@ import Alert from '@/utils/Alert'
 import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
-import SocialLoginService from '@/service/SocailLoginService'
+import LoginService from '@/service/LoginService'
 import ResultVO from '@/model/ResultVO'
 import ErrorCode from '@/const/ErrorCode'
 import PageUtil from '@/utils/PageUtil'
@@ -433,7 +433,7 @@ export default class Login extends Vue {
         loginData.authCode = this.authCode
         loginData.provider = ProviderType.phone
         loginData.platform = systemModule.platform
-        await SocialLoginService.providerLogin(ProviderType.phone, loginData)
+        await LoginService.providerLogin(ProviderType.phone, loginData)
       }
       //只有为三方授权才调用
       if (this.isThreeAuth) {
@@ -456,7 +456,7 @@ export default class Login extends Vue {
         }
       }
       //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-      SocialLoginService.providerLogin(systemModule.mpPlatform)
+      LoginService.providerLogin(systemModule.mpPlatform)
     }
   }
 

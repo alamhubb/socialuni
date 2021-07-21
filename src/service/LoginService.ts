@@ -7,7 +7,7 @@ import UniUserUtil from '@/utils/UniUserUtil'
 import PhoneFormData from '@/model/login/PhoneFormData'
 
 
-export default class SocialLoginService {
+export default class LoginService {
   /**
    * 渠道登录的同一方法
    */

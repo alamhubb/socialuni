@@ -397,7 +397,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
@@ -413,7 +413,7 @@ import Alert from '@/utils/Alert'
 import OpenDataAPI from '@/api/OpenDataAPI'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
-import SocialLoginService from '@/service/SocailLoginService'
+import LoginService from '@/service/LoginService'
 import ResultVO from '@/model/ResultVO'
 import ErrorCode from '@/const/ErrorCode'
 import PageUtil from '@/utils/PageUtil'
@@ -630,7 +630,7 @@ export default class Login extends Vue {
         loginData.authCode = this.authCode
         loginData.provider = ProviderType.phone
         loginData.platform = systemModule.platform
-        await SocialLoginService.providerLogin(ProviderType.phone, loginData)
+        await LoginService.providerLogin(ProviderType.phone, loginData)
       }
       //只有为三方授权才调用
       if (this.isThreeAuth) {
@@ -651,7 +651,7 @@ export default class Login extends Vue {
       return Toast.toast('您取消了登录')
     }
     // #endif
-    await SocialLoginService.providerLogin(provider)
+    await LoginService.providerLogin(provider)
     // #endif
   }
 

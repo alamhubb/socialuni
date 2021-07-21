@@ -269,7 +269,7 @@ import UserAPI from '@/api/UserAPI'
 import LoginAPI from '@/api/LoginAPI'
 import UniUtil from '@/utils/UniUtil'
 import UserService from '@/service/UserService'
-import SocialLoginService from '@/service/SocailLoginService'
+import LoginService from '@/service/LoginService'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -451,7 +451,7 @@ export default class LoginPage extends Vue {
           Alert.hint('您已绑定手机号')
         }
       } else {
-        await SocialLoginService.phoneLogin(this.phoneNum, this.authCode)
+        await LoginService.phoneLogin(this.phoneNum, this.authCode)
       }
       this.goBackPage()
       this.openTypeBtnEnable = true
@@ -475,7 +475,7 @@ export default class LoginPage extends Vue {
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async providerLoginClick (provide: string) {
     //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-    SocialLoginService.providerLogin(provide)
+    LoginService.providerLogin(provide)
   }
 
 
