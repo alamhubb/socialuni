@@ -130,6 +130,8 @@
             <view class="row-col-center" @click="goBackPage">
               <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
               <view class="text-gray u-border-bottom">
+
+
                 <!--            手机号登录界面-->
                 <template v-if="showPhoneView">
                   <!--            如果是输入手机号页面，未登录，提示手机号登录-->
