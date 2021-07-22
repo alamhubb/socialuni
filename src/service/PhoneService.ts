@@ -1,9 +1,8 @@
-import UniUtil from '@/utils/UniUtil'
 import { userModule } from '@/store'
-import ErrorCode from '@/const/ErrorCode'
 import Toast from '@/utils/Toast'
 import PhoneAPI from '@/api/PhoneAPI'
-import BindWxPhoneNumQO from '@/model/phone/BindWxPhoneNumQO'
+import UniLoginUtil from '@/utils/UniLoginUtil'
+import ProviderType from '@/const/ProviderType'
 
 export default class PhoneService {
   static async bindPhoneNum (phoneNum: string, authCode: string) {
@@ -14,47 +13,23 @@ export default class PhoneService {
 
   static async bindWxPhoneNum (wxGetPhoneInfoResult: any) {
     if (wxGetPhoneInfoResult.detail.errMsg === 'getPhoneNumber:ok') {
-      // 默认未过期
-      try {
-        await UniUtil.checkSession()
-      } catch {
-        await PhoneService.getWxPhoneNumberByLogin(wxGetPhoneInfoResult)
-      }
-      const loginData: BindWxPhoneNumQO = new BindWxPhoneNumQO()
-      Object.assign(loginData, wxGetPhoneInfoResult.detail)
-      loginData.sessionEnable = true
-      //前台获取为未过期，但也有可能已过期，尝试调用后台获取，确认是否未过期
-      try {
-        return await PhoneService.bindPhoneNumAction(loginData)
-      } catch (error) {
-        //如果为自定义，则将过期标示改为已过期调用后台
-        if (error.errorCode === ErrorCode.custom) {
-          Toast.toast(error.data)
-          PhoneService.getWxPhoneNumberByLogin(wxGetPhoneInfoResult)
-          throw error
-        }
-      }
+      /**
+       * 在回调中调用 wx.login 登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，
+       * 导致解密失败。建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态
+       */
+      //先执行登录刷新sessionKey
+      const code = await UniLoginUtil.getLoginCode(ProviderType.wx)
+      await PhoneAPI.refreshWxSessionKeyAPI(code)
+      //再执行绑定手机号
+      // cloudID: ""
+      // encryptedData: ""
+      // errMsg: "getPhoneNumber:ok"
+      // iv: ""
+      const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
+      userModule.setUser(res.data)
     } else {
       Toast.toast('您选择了不绑定')
       throw Error('您选择了不绑定')
     }
-  }
-
-  //微信绑定手机号使用
-  static getWxPhoneNumberByLogin (wxGetPhoneInfoResult: any) {
-    /*LoginService.getLoginData(systemModule.mpPlatform as Provider).then((loginData: ProviderUserVO) => {
-      Object.assign(loginData, wxGetPhoneInfoResult.detail)
-      // 代表已过期
-      loginData.sessionEnable = false
-    })*/
-  }
-
-  //跳转清池绑定手机号
-  static async bindPhoneNumAction (loginData: BindWxPhoneNumQO) {
-    return PhoneAPI.bindWxPhoneNumAPI(loginData).then((res) => {
-      userModule.setUser(res.data)
-      Toast.toast('绑定手机号成功')
-      return res.data
-    })
   }
 }

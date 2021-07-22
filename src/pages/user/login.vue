@@ -152,7 +152,7 @@ const appStore = namespace('app')
     LoginFooterAppInfo
   }
 })
-export default class Login extends Vue {
+export default class LoginPage extends Vue {
   @userStore.State('user') user: UserVO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
@@ -172,6 +172,22 @@ export default class Login extends Vue {
 
   //同意协议
   // contractChecked = true
+
+  created () {
+    this.initData()
+  }
+
+  onLoad () {
+    this.initData()
+  }
+
+  initData () {
+    //不为微信则默认为验证码方式绑定
+    if (this.user && !this.isMpWx) {
+      this.showPhoneView = true
+    }
+  }
+
 
   get loginButtonDisabled () {
     // !this.contractChecked ||
@@ -218,28 +234,40 @@ export default class Login extends Vue {
 
   async phoneLogin () {
     if (this.openTypeBtnEnable) {
-      this.openTypeBtnEnable = false
-      await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-      this.loginAfterHint('登录成功')
-      this.openTypeBtnEnable = true
+      try {
+        this.openTypeBtnEnable = false
+        await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
+        this.loginAfterHint('登录成功')
+      } finally {
+        this.openTypeBtnEnable = true
+      }
     }
   }
-
 
   //手机号登录和手机号绑定
   async bindPhoneNum () {
     if (this.openTypeBtnEnable) {
-      this.openTypeBtnEnable = false
-      await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-      this.loginAfterHint('绑定成功')
-      this.goBackPage()
-      this.openTypeBtnEnable = true
+      try {
+        this.openTypeBtnEnable = false
+        await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
+        this.loginAfterHint('绑定成功')
+      } finally {
+        this.openTypeBtnEnable = true
+      }
     }
   }
 
   // 微信点击按钮，获取手机号用来绑定
   async bindWxPhoneNum (obj: any) {
-    await PhoneService.bindWxPhoneNum(obj)
+    if (this.openTypeBtnEnable) {
+      try {
+        this.openTypeBtnEnable = false
+        await PhoneService.bindWxPhoneNum(obj)
+        this.loginAfterHint('绑定成功')
+      } finally {
+        this.openTypeBtnEnable = true
+      }
+    }
   }
 
   loginAfterHint (msg: string) {
@@ -250,7 +278,9 @@ export default class Login extends Vue {
     if (systemModule.isIosAndMpQQ) {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
-    Alert.hint(msg)
+    Alert.hint(msg).finally(() => {
+      this.goBackPage()
+    })
   }
 
 

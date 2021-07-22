@@ -134,22 +134,9 @@
             </view>
           </view>
           <view v-else>
-            <!-- #ifdef MP-WEIXIN -->
-            <button class="cu-btn radius sm bg-orange" :disabled="phoneBtnDisabled"
-                    open-type="getPhoneNumber"
-                    @getphonenumber="getPhoneNumberByWx">绑定
-            </button>
-            <q-icon class="ml-10px text-gray" size="26" icon="error-circle"
-                    @click="hintBindTwice"></q-icon>
-            <text class="text-gray" @click="hintBindTwice">
-              (老用户需操作两次)
-            </text>
-            <!-- #endif -->
-            <!-- #ifndef MP-WEIXIN -->
             <button class="cu-btn radius sm bg-orange"
                     @click="toPhonePage">绑定
             </button>
-            <!-- #endif -->
           </view>
         </view>
 
