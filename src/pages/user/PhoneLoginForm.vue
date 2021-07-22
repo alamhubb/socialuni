@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import PhoneFormData from '@/model/login/PhoneFormData'
+import PhoneFormData from '@/model/phone/PhoneFormData'
 import CommonUtil from '@/utils/CommonUtil'
 import Toast from '@/utils/Toast'
 import UserAPI from '@/api/UserAPI'

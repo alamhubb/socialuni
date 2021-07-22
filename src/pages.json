@@ -8,6 +8,12 @@
   },
   "pages": [
     {
+      "path": "pages/user/login",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/user/thirdAuth",
       "style": {
         "navigationStyle": "custom"
@@ -32,12 +38,6 @@
       "style": {
         "navigationBarTitleText": "消息",
         "enablePullDownRefresh": true
-      }
-    },
-    {
-      "path": "pages/user/login",
-      "style": {
-        "navigationStyle": "custom"
       }
     },
     {

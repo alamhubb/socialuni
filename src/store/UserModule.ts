@@ -1,4 +1,4 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import UserVO from '@/model/user/UserVO'
 
 import UserAPI from '@/api/UserAPI'
@@ -7,8 +7,6 @@ import UserStorageUtil from '@/utils/UserStorageUtil'
 import Alert from '@/utils/Alert'
 import Toast from '@/utils/Toast'
 import UserService from '@/service/UserService'
-import ProviderUserVO from '@/model/ProviderUserVO'
-import BindPhoneNumAPI from '@/api/BindPhoneNumAPI'
 import TokenUtil from '@/utils/TokenUtil'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
 
@@ -67,13 +65,5 @@ export default class UserModule extends VuexModule {
     })
   }
 
-  //跳转清池绑定手机号
-  @Action
-  bindPhoneNumAction (loginData: ProviderUserVO) {
-    return BindPhoneNumAPI.bindPhoneNumByWxAPI(loginData).then((res) => {
-      userModule.setUser(res.data)
-      Toast.toast('绑定手机号成功')
-      return res.data
-    })
-  }
+
 }

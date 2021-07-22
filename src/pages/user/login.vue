@@ -47,7 +47,7 @@
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <template v-if="!user">
-                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
+                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
                         class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
                 >
                   <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
@@ -72,7 +72,7 @@
               </template>
               <!--              有用户-->
               <template v-else>
-                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="loginByPhoneNumAndBindPhoneNum"
+                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="bindPhoneNum"
                         class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
                 >
                   <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
@@ -82,7 +82,7 @@
                 <button v-else-if="isMpWx" :disabled="!openTypeBtnEnable"
                         open-type="getPhoneNumber"
                         class="h40px cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
-                        @getphonenumber="wxBindPhoneNum">
+                        @getphonenumber="bindWxPhoneNum">
                   <u-icon color="white" name="weixin-fill" size="42"
                           class="mr-xs"></u-icon>
                   绑定微信手机号
@@ -90,7 +90,6 @@
               </template>
             </template>
           </view>
-
 
           <view class="row-between-center w300px h40px mt-lg">
             <view class="row-col-center" @click="goBackPage">
@@ -127,22 +126,19 @@
 import { Component, Vue } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
-import UserAPI from '@/api/UserAPI'
-import ProviderType from '@/const/ProviderType'
-import ProviderUserVO from '@/model/ProviderUserVO'
-import { systemModule, userModule } from '@/store'
+import { systemModule } from '@/store'
 import Alert from '@/utils/Alert'
 import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
 import LoginService from '@/service/LoginService'
 import PageUtil from '@/utils/PageUtil'
-import UserService from '@/service/UserService'
 import SystemStoreProp from '@/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
-import PhoneFormData from '@/model/login/PhoneFormData'
+import PhoneFormData from '@/model/phone/PhoneFormData'
 import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
+import PhoneService from '@/service/PhoneService'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -198,41 +194,6 @@ export default class Login extends Vue {
     }
   }
 
-  async phoneLogin () {
-    const loginData = new ProviderUserVO()
-    loginData.phoneNum = this.phoneNum
-    loginData.authCode = this.authCode
-    loginData.provider = ProviderType.phone
-    loginData.platform = systemModule.platform
-     await LoginService.providerLogin(ProviderType.phone, loginData)
-  }
-
-
-  //手机号登录和手机号绑定
-  async BindPhoneNum () {
-    /*
-    默认选中
-    if (!this.contractChecked) {
-      return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
-    }*/
-    if (this.openTypeBtnEnable) {
-      this.openTypeBtnEnable = false
-      //手机号绑定
-      const user = await UserAPI.bindPhoneNumAPI(this.phoneNum, this.authCode)
-      userModule.setUser(user)
-      let msg = '绑定成功'
-      //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-      if (systemModule.isIosAndMpQQ) {
-        msg += '，如遇无法弹出输入框，请重启应用'
-      }
-      // 提示验证码发送成功
-      Alert.hint(msg)
-      this.goBackPage()
-      this.openTypeBtnEnable = true
-    }
-  }
-
-
   //平台登录
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async providerLogin (result) {
@@ -247,14 +208,53 @@ export default class Login extends Vue {
       }
       //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
       await LoginService.providerLogin(systemModule.mpPlatform)
+      this.loginAfterHint('登录成功')
+      this.openTypeBtnEnable = true
+    }
+  }
+
+  async phoneLogin () {
+    if (this.openTypeBtnEnable) {
+      this.openTypeBtnEnable = false
+      await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
+      this.loginAfterHint('登录成功')
       this.openTypeBtnEnable = true
     }
   }
 
 
-  // 微信点击按钮，获取手机号用来绑定
-  async wxBindPhoneNum (obj: any) {
-    await UserService.getPhoneNumberByWx(obj)
+  //手机号登录和手机号绑定
+  async bindPhoneNum () {
+    if (this.openTypeBtnEnable) {
+      this.openTypeBtnEnable = false
+      await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
+      this.loginAfterHint('绑定成功')
+      this.goBackPage()
+      this.openTypeBtnEnable = true
+    }
   }
+
+  // 微信点击按钮，获取手机号用来绑定
+  async bindWxPhoneNum (obj: any) {
+    await PhoneService.bindWxPhoneNum(obj)
+  }
+
+  loginAfterHint (msg: string) {
+    if (!this.user.phoneNum) {
+      msg += '，绑定手机号后才可发布内容'
+    }
+    //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
+    if (systemModule.isIosAndMpQQ) {
+      msg += '，如遇无法弹出输入框，请重启应用'
+    }
+    Alert.hint(msg)
+  }
+
+
+  /*
+    默认选中
+    if (!this.contractChecked) {
+      return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
+    }*/
 }
 </script>

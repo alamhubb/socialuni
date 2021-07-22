@@ -1,10 +1,8 @@
 import UniUtil from '@/utils/UniUtil'
-import { systemModule } from '@/store'
-import Alert from '@/utils/Alert'
 import LoginAPI from '@/api/LoginAPI'
 import UserService from '@/service/UserService'
 import UniUserUtil from '@/utils/UniUserUtil'
-import PhoneFormData from '@/model/login/PhoneFormData'
+import PhoneFormData from '@/model/phone/PhoneFormData'
 
 
 export default class LoginService {
@@ -19,16 +17,7 @@ export default class LoginService {
 
       const { data } = await LoginAPI.providerLoginAPI(loginQO)
 
-      const user = UserService.getMineUserInitDataActionByToken(data)
-
-      let hintText = '登录成功'
-      if (!user.phoneNum) {
-        hintText += '，绑定手机号后才可发布内容'
-      }
-      if (systemModule.isIosAndMpQQ) {
-        hintText += '，如遇无法弹出输入框，请重启应用'
-      }
-      Alert.hint(hintText)
+      UserService.getMineUserInitDataActionByToken(data)
     } finally {
       UniUtil.hideLoading()
     }
@@ -41,16 +30,7 @@ export default class LoginService {
 
       const { data } = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
-      const user = UserService.getMineUserInitDataActionByToken(data)
-
-      let hintText = '登录成功'
-      if (!user.phoneNum) {
-        hintText += '，绑定手机号后才可发布内容'
-      }
-      if (systemModule.isIosAndMpQQ) {
-        hintText += '，如遇无法弹出输入框，请重启应用'
-      }
-      Alert.hint(hintText)
+      UserService.getMineUserInitDataActionByToken(data)
     } finally {
       UniUtil.hideLoading()
     }

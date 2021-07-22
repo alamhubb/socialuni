@@ -1,12 +1,10 @@
 import http from '@/plugins/http'
 import UserQueryVO from '@/model/user/UserQueryVO'
-import UserPhoneNumVO from '@/model/user/UserPhoneNumVO'
 import ImgFileVO from '@/model/ImgFileVO'
 import UserPayVO from '@/model/user/UserPayVO'
 import UserPayResultVO from '@/model/user/UserPayResultVO'
 import UserEditVO from '@/model/user/UserEditVO'
 import UserVO from '@/model/user/UserVO'
-import DomFile from '@/model/DomFile'
 import ImgAddQO from '@/model/user/ImgAddQO'
 
 export default class UserAPI {
@@ -20,17 +18,6 @@ export default class UserAPI {
 
   static editUserAPI (user: UserEditVO) {
     return http.post('user/edit', user)
-  }
-
-  static sendAuthCodeAPI (phoneNum: string) {
-    return http.post('phone/sendAuthCode?phoneNum=' + phoneNum)
-  }
-
-  static bindPhoneNumAPI (phoneNum: string, authCode: string) {
-    const phoneNumObj: UserPhoneNumVO = new UserPhoneNumVO(phoneNum, authCode, null)
-    return http.post<UserVO>('phone/bindPhoneNum', phoneNumObj).then(res => {
-      return res.data
-    })
   }
 
   static addUserImgAPI (userImg: ImgAddQO) {

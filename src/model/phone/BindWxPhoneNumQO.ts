@@ -1,4 +1,4 @@
-export default class WxBindPhoneNumQO {
+export default class BindWxPhoneNumQO {
   loginType: string = null
   provider: string = null
   platform: string = null

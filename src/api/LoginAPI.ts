@@ -1,9 +1,9 @@
-import ProviderUserVO from '@/model/ProviderUserVO'
+import ProviderUserVO from '@/model/login/ProviderUserVO'
 import http from '@/plugins/http'
 import UserVO from '@/model/user/UserVO'
 import UniProviderLoginQO from '@/model/UniProviderLoginQO'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
-import PhoneFormData from '@/model/login/PhoneFormData'
+import PhoneFormData from '@/model/phone/PhoneFormData'
 
 
 export default class LoginAPI {
