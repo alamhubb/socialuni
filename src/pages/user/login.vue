@@ -198,18 +198,21 @@ export default class Login extends Vue {
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async providerLogin (result) {
     if (this.openTypeBtnEnable) {
-      this.openTypeBtnEnable = false
-      if (systemModule.isMp) {
-        if (systemModule.isMpQQ) {
-          if (result.detail.errMsg !== Constants.loginSuccess) {
-            return Toast.toast('您取消了登录')
+      try {
+        this.openTypeBtnEnable = false
+        if (systemModule.isMp) {
+          if (systemModule.isMpQQ) {
+            if (result.detail.errMsg !== Constants.loginSuccess) {
+              return Toast.toast('您取消了登录')
+            }
           }
         }
+        //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
+        await LoginService.providerLogin(systemModule.mpPlatform)
+        this.loginAfterHint('登录成功')
+      } finally {
+        this.openTypeBtnEnable = true
       }
-      //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-      await LoginService.providerLogin(systemModule.mpPlatform)
-      this.loginAfterHint('登录成功')
-      this.openTypeBtnEnable = true
     }
   }
 
