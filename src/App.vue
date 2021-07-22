@@ -8,6 +8,8 @@ import Toast from '@/utils/Toast'
 import ResultVO from '@/model/ResultVO'
 import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
 import PageUtil from '@/utils/PageUtil'
+import SocialLoginRO from '@/model/social/SocialLoginRO'
+import UserVO from '@/model/user/UserVO'
 
 export default Vue.extend({
   mpType: 'app',
@@ -55,9 +57,10 @@ export default Vue.extend({
         if (extraData) {
           if (extraData.success) {
             const authData: ThreeAuthResultVO = extraData.data
+            const socialLoginRO: SocialLoginRO<UserVO> = new SocialLoginRO(authData.token, authData.user)
             if (authData.authType === ThreeAuthType.user) {
               Toast.toastLong('授权登录成功')
-              UserService.getMineUserInitDataActionByToken(extraData)
+              UserService.getMineUserInitDataActionByToken(socialLoginRO)
             } else {
               Toast.toastLong('手机号绑定成功')
               userModule.user.phoneNum = authData.phoneNum

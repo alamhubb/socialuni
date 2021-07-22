@@ -35,12 +35,12 @@
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <button v-if="isAuthUser" :disabled="!openTypeBtnEnable"
                     class="h40px cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
-                    @click="openTypeBtnClick">
+                    @click="authUserInfo">
               授权用户信息
             </button>
             <button v-else :disabled="!openTypeBtnEnable"
                     class="h40px cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
-                    @click="openTypeBtnClick">
+                    @click="authPhoneNum">
               <template>
                 授权手机号
               </template>
@@ -141,9 +141,9 @@ export default class Login extends Vue {
     }
   }
 
-  async authUserOrPhoneNum () {
+  async authUserInfo () {
     //有用户信息，并且伪授权用户信息
-    if (this.isAuthUser && this.user) {
+    if (this.user) {
       //处理用户授权
       await Alert.confirm('是否确认授权您的用户信息')
       UniUtil.showLoading('授权中')
@@ -154,13 +154,14 @@ export default class Login extends Vue {
       this.authSuccessGoBackThreeMp(threeAuthResultVO)
       //为授权手机号，并且有手机号
     } else {
+      //提示未登录是否前往登录
       AppUtilAPI.sendErrorLogAPI(null, '错误的用户授权类型')
     }
   }
 
   async authPhoneNum () {
     //有用户信息，并且伪授权用户信息
-    if (this.isAuthPhone && this.hasPhoneNum) {
+    if (this.hasPhoneNum) {
       //处理用户授权
       await Alert.confirm('是否确认授权您的手机号码')
       UniUtil.showLoading('授权中')
@@ -170,6 +171,7 @@ export default class Login extends Vue {
       threeAuthResultVO.data.authType = this.threeAuthType
       this.authSuccessGoBackThreeMp(threeAuthResultVO)
     } else {
+      //提示未绑定手机号，是否前往绑定
       AppUtilAPI.sendErrorLogAPI(null, '错误的用户授权类型')
     }
   }

@@ -198,13 +198,13 @@ export default class Login extends Vue {
     }
   }
 
-  phoneLogin () {
+  async phoneLogin () {
     const loginData = new ProviderUserVO()
     loginData.phoneNum = this.phoneNum
     loginData.authCode = this.authCode
     loginData.provider = ProviderType.phone
     loginData.platform = systemModule.platform
-    await LoginService.providerLogin(ProviderType.phone, loginData)
+     await LoginService.providerLogin(ProviderType.phone, loginData)
   }
 
 
