@@ -2,7 +2,7 @@ import UniUtil from '@/utils/UniUtil'
 import LoginAPI from '@/api/LoginAPI'
 import UserService from '@/service/UserService'
 import UniUserUtil from '@/utils/UniUserUtil'
-import PhoneFormData from '@/model/phone/PhoneFormData'
+import PhoneNumQO from '@/model/phone/PhoneNumQO'
 
 
 export default class LoginService {
@@ -26,7 +26,7 @@ export default class LoginService {
   static async phoneLogin (phoneNum: string, authCode: string) {
     UniUtil.showLoading('登录中')
     try {
-      const phoneBindQO = new PhoneFormData(phoneNum, authCode)
+      const phoneBindQO = new PhoneNumQO(phoneNum, authCode)
 
       const { data } = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
