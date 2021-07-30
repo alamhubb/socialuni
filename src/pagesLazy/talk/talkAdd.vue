@@ -144,7 +144,7 @@ import JsonUtils from '@/utils/JsonUtil'
 import TagVO from '@/model/tag/TagVO'
 import TagUtil from '@/utils/TagUtil'
 import CosUtil from '@/utils/CosUtil'
-import { appModule, locationModule, tagModule } from '@/store'
+import { locationModule, tagModule } from '@/store'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
@@ -163,6 +163,9 @@ import PageUtil from '@/utils/PageUtil'
 import GenderType from '@/const/GenderType'
 import SocialConfig from '@/config/SocialConfig'
 import DomFile from '@/model/DomFile'
+import CosAuthRO from '@/model/cos/CosAuthRO'
+import CosAPI from '@/api/CosAPI'
+import AppUtilAPI from '@/api/AppUtilAPI'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -205,6 +208,8 @@ export default class TalkAddPage extends Vue {
   showTagSearch = false
   showTagAdd = false
 
+  cosAuthRO: CosAuthRO = null
+
   //根据用户性别显示不同内容
   get visibleGenders () {
     //如果已登录
@@ -234,6 +239,7 @@ export default class TalkAddPage extends Vue {
   onLoad () {
     this.tags = JsonUtils.deepClone(this.storeTags)
     this.district = locationModule.location
+
 
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的
@@ -377,8 +383,12 @@ export default class TalkAddPage extends Vue {
     if (this.showsImgFiles.length === 0) {
       this.publishTalk()
     } else {
-      this.uploadImgList()
-      this.publishTalk()
+      if (this.cosAuthRO) {
+        this.uploadImgList()
+        this.publishTalk()
+      } else {
+        AppUtilAPI.sendErrorLogAPI(null, '错误的用户授权类型')
+      }
     }
   }
 
@@ -398,9 +408,9 @@ export default class TalkAddPage extends Vue {
   async uploadImgList () {
     //设置图片路径
     this.showsImgFiles.forEach(item => {
-      item.src = appModule.imgPath + 'talk/' + item.src
+      item.src = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
     })
-    CosUtil.postImgList(this.showsImgFiles)
+    CosUtil.postImgList(this.showsImgFiles, this.cosAuthRO)
   }
 
   deleteImg (e) {
@@ -421,6 +431,14 @@ export default class TalkAddPage extends Vue {
     const count = this.imgMaxSize - this.showsImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
     this.showsImgFiles.push(...imgFiles)
+    //获取cos认证信息
+    this.getCosAuthRO()
+  }
+
+  getCosAuthRO () {
+    CosAPI.getCosAuthorizationAPI().then((res) => {
+      this.cosAuthRO = res.data
+    })
   }
 
   isFullImg () {

@@ -4,15 +4,13 @@ import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
 import CosAuthRO from '@/model/cos/CosAuthRO'
 import DomFile from '@/model/DomFile'
-import CosAPI from '@/api/CosAPI'
 import UniUtil from '@/utils/UniUtil'
 
 export default class CosUtil {
   //向cos上传图片
-  static async postImg (imgFile: DomFile) {
-    const { data } = await CosAPI.getCosAuthorizationAPI()
-    const cos = CosUtil.getAuthorizationCos(data)
-    await CosUtil.postObjectBase(imgFile, data, cos)
+  static async postImg (imgFile: DomFile, cosAuthRO: CosAuthRO) {
+    const cos = CosUtil.getAuthorizationCos(cosAuthRO)
+    await CosUtil.postObjectBase(imgFile, cosAuthRO, cos)
   }
 
   private static postObjectBase (imgFile: DomFile, data: CosAuthRO, cos) {
@@ -34,10 +32,11 @@ export default class CosUtil {
     })
   }
 
-  static async postImgList (imgSrcs: DomFile[]) {
-    const { data } = await CosAPI.getCosAuthorizationAPI()
-    const cos = CosUtil.getAuthorizationCos(data)
-    await Promise.all(imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, data, cos)))
+  static postImgList (imgSrcs: DomFile[], cosAuthRO: CosAuthRO) {
+    // const { data } = await CosAPI.getCosAuthorizationAPI()
+    const cos = CosUtil.getAuthorizationCos(cosAuthRO)
+    // await Promise.all(imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, data, cos)))
+    imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, cosAuthRO, cos))
   }
 
   static getAuthorizationCos (cosAuthRO: CosAuthRO): COS {

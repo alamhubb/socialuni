@@ -8,5 +8,6 @@ export default class CosAuthRO {
   expiredTime: number = null
 
   bucket: string = null
+  uploadImgPath: string = null
   region: string = null
 }
