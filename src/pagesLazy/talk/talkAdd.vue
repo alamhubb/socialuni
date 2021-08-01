@@ -438,6 +438,7 @@ export default class TalkAddPage extends Vue {
   getCosAuthRO () {
     CosAPI.getCosAuthorizationAPI().then((res) => {
       this.cosAuthRO = res.data
+      console.log(this.cosAuthRO)
     })
   }
 

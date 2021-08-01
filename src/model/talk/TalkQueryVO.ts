@@ -1,4 +1,3 @@
-import DistrictVO from '@/model/DistrictVO'
 import { locationModule } from '@/store'
 
 export default class TalkQueryVO {
@@ -7,12 +6,12 @@ export default class TalkQueryVO {
   public lon: number
   public lat: number
   public tagIds: number[]
-  public homeType: string
+  public tabType: string
   public gender: string
   public minAge: number
   public maxAge: number
 
-  constructor (talkIds: number[], tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
+  constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number) {
     this.talkIds = talkIds
     const district = locationModule.location
     if (district) {
@@ -21,7 +20,7 @@ export default class TalkQueryVO {
       this.lat = district.lat
     }
     this.tagIds = tagIds
-    this.homeType = homeType
+    this.tabType = tabType
     this.gender = gender
     this.minAge = minAge
     this.maxAge = maxAge

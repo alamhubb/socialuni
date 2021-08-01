@@ -14,11 +14,11 @@ import ImgAddQO from '@/model/user/ImgAddQO'
 export default class TalkAPI {
   static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
     const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, tagIds, visibleType, visibleGender)
-    return http.post('talk/addTalk', data)
+    return http.post('talk/postTalk', data)
   }
 
-  static queryTalksAPI (talkIds: number[], tagIds: number[], homeType: string, gender: string, minAge: number, maxAge: number) {
-    return http.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, homeType, gender, minAge, maxAge))
+  static queryTalksAPI (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number) {
+    return http.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge))
   }
 
   static queryUserTalksAPI (userId: string, talkIds: number[]) {
@@ -30,7 +30,7 @@ export default class TalkAPI {
   }
 
   static addCommentAPI (comment: CommentAddVO) {
-    return http.post('comment/addComment', comment)
+    return http.post('comment/postComment', comment)
   }
 
   static addHugAPI (hug: HugAddVO) {

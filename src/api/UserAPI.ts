@@ -9,7 +9,7 @@ import ImgAddQO from '@/model/user/ImgAddQO'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {
-    return http.post('user/mine')
+    return http.post('user/getMineUser')
   }
 
   static queryUserDetailAPI (userId: string) {
