@@ -111,7 +111,7 @@ export default class AppModule extends VuexModule {
       configModule.appConfig = appInitData.appConfig
       this.onlineUsersCount = appInitData.onlineUsersCount
       this.reportTypes = appInitData.reportTypes
-      this.imgPath = appInitData.imgPath
+      // this.imgPath = appInitData.imgPath
     })
   }
 

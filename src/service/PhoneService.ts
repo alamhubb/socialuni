@@ -18,13 +18,12 @@ export default class PhoneService {
        * 导致解密失败。建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态
        */
       //先执行登录刷新sessionKey
-      const code = await UniLoginUtil.getLoginCode(ProviderType.wx)
-      await PhoneAPI.refreshWxSessionKeyAPI(code)
       //再执行绑定手机号
       // cloudID: ""
       // encryptedData: ""
       // errMsg: "getPhoneNumber:ok"
       // iv: ""
+      wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(ProviderType.wx)
       const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
       userModule.setUser(res.data)
     } else {

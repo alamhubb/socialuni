@@ -136,7 +136,7 @@ import SystemStoreProp from '@/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
-import PhoneNumQO from '@/model/phone/PhoneNumQO'
+import PhoneNumFormData from '@/model/phone/PhoneNumFormData'
 import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
 import PhoneService from '@/service/PhoneService'
 
@@ -164,7 +164,7 @@ export default class QingchiLoginPage extends Vue {
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
 
-  phoneFormData = new PhoneNumQO()
+  phoneFormData = new PhoneNumFormData()
 
   openTypeBtnEnable = true
 

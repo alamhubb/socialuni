@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import PhoneNumQO from '@/model/phone/PhoneNumQO'
+import PhoneNumFormData from '@/model/phone/PhoneNumFormData'
 import CommonUtil from '@/utils/CommonUtil'
 import Toast from '@/utils/Toast'
 import UserAPI from '@/api/UserAPI'
@@ -87,7 +87,7 @@ export default class PhoneLoginForm extends Vue {
     }
   }
 
-  phoneFormData = new PhoneNumQO()
+  phoneFormData = new PhoneNumFormData()
   countDown = 0
 
   authCodeFocus = false

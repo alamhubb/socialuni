@@ -1,6 +1,6 @@
 import NumberUtil from '@/utils/NumberUtil'
 
-export default class PhoneNumQO {
+export default class PhoneNumFormData {
   phoneNum: string = null
   authCode: string = null
 

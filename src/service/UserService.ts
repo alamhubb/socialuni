@@ -1,4 +1,4 @@
-import { appModule, chatModule, notifyModule, userModule } from '../store'
+import { chatModule, notifyModule, userModule } from '../store'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
@@ -24,7 +24,7 @@ export default class UserService {
     userModule.setUser(loginRO.user)
     notifyModule.queryNotifiesAction()
     chatModule.getChatsAction()
-    appModule.getImgPathAction()
+    // appModule.getImgPathAction()
     return loginRO.user
   }
 
@@ -33,7 +33,4 @@ export default class UserService {
       userModule.getMineUserAction()
     }
   }
-
-
-
 }

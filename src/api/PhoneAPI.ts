@@ -3,6 +3,7 @@ import SocialUserRO from '@/model/social/SocialUserRO'
 import BindPhoneNumQO from '@/model/phone/BindPhoneNumQO'
 import UserVO from '@/model/user/UserVO'
 import RefreshWxSessionKeyQO from '@/model/phone/RefreshWxSessionKeyQO'
+import BindWxPhoneNumQO from '@/model/phone/BindWxPhoneNumQO'
 
 export default class PhoneAPI {
   static bindSocialPhoneNum () {
@@ -21,7 +22,7 @@ export default class PhoneAPI {
   }
 
   //微信绑定手机号使用
-  static bindWxPhoneNumAPI (bindWxPhoneNumQO) {
+  static bindWxPhoneNumAPI (bindWxPhoneNumQO: BindWxPhoneNumQO) {
     return http.post<UserVO>('phone/bindPhoneNumByWx', bindWxPhoneNumQO)
   }
 
