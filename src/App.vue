@@ -15,6 +15,7 @@ export default Vue.extend({
   mpType: 'app',
   //测试已开启的情况下是否会这样
   onLaunch (params) {
+    console.log(123)
     // appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
     // appModule.threeUserId = '10081'
     // appModule.threeAuthType = SocialAuthType.phone

@@ -37,7 +37,6 @@ export default class StorageUtil {
 
   static get (key: string): any {
     const objStr: string = uni.getStorageSync(key)
-    console.log(typeof objStr)
     if (objStr) {
       try {
         return JsonUtil.jsonParse(objStr)

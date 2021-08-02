@@ -3,7 +3,7 @@ import AppInitDataRO from '@/model/common/AppInitDataRO'
 
 export default class AppConfigAPI {
   static getAppConfigAPI () {
-    return http.post<AppInitDataRO>('app/getAppConfig')
+    return http.post<AppInitDataRO>('app/getAppLaunchData')
   }
 
   static getImgPathAPI () {
