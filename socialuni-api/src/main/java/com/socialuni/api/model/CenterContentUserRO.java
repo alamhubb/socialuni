@@ -1,5 +1,6 @@
 package com.socialuni.api.model;
 
+import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,11 +16,7 @@ public class CenterContentUserRO extends CenterListUserRO {
     private Boolean hasBeFollowed;
     private Boolean isMine;
 
-    public CenterContentUserRO(CenterListUserRO userRO) {
-        super(userRO);
-    }
-
-    public CenterContentUserRO(CenterContentUserRO userRO) {
+    public CenterContentUserRO(SocialContentUserRO userRO) {
         super(userRO);
         this.hasFollowed = userRO.getHasFollowed();
         this.hasBeFollowed = userRO.getHasBeFollowed();

@@ -13,7 +13,7 @@ public class CenterMineUserDetailRO extends CenterUserDetailRO {
     private String phoneNum;
     private String birthday;
 
-    public CenterMineUserDetailRO(CenterUserDetailRO userRO) {
+    public CenterMineUserDetailRO(soci userRO) {
         super(userRO);
     }
 

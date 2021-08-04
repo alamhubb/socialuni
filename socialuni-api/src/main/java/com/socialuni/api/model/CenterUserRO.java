@@ -1,5 +1,6 @@
 package com.socialuni.api.model;
 
+import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,7 @@ public class CenterUserRO {
     private String avatar;
     private String gender;
 
-    public CenterUserRO(CenterUserRO userRO) {
-        this.id = userRO.getId();
+    public CenterUserRO(SocialUserRO userRO) {
         this.nickname = userRO.getNickname();
         this.avatar = userRO.getAvatar();
         this.gender = userRO.getGender();

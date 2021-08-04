@@ -1,5 +1,6 @@
 package com.socialuni.api.model;
 
+import com.socialuni.social.model.model.RO.user.base.SocialListUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,11 +15,7 @@ public class CenterListUserRO extends CenterUserRO {
     private Integer age;
     private String city;
 
-    public CenterListUserRO(CenterUserRO userRO) {
-        super(userRO);
-    }
-
-    public CenterListUserRO(CenterListUserRO userRO) {
+    public CenterListUserRO(SocialListUserRO userRO) {
         super(userRO);
         this.age = userRO.getAge();
         this.city = userRO.getCity();

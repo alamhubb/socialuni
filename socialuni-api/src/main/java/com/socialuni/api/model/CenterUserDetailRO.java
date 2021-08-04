@@ -1,5 +1,6 @@
 package com.socialuni.api.model;
 
+import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,13 +15,8 @@ import java.util.List;
 public class CenterUserDetailRO extends CenterUserFollowDetailRO {
     private List<UserImgRO> imgs;
 
-    public CenterUserDetailRO(CenterUserFollowDetailRO userRO) {
+    public CenterUserDetailRO(SocialUserDetailRO userRO) {
         super(userRO);
-    }
-
-    public CenterUserDetailRO(CenterUserDetailRO userRO) {
-        super(userRO);
-
         this.imgs = userRO.getImgs();
     }
 }

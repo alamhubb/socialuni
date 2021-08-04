@@ -1,5 +1,6 @@
 package com.socialuni.api.model;
 
+import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,11 +15,7 @@ public class CenterUserFollowDetailRO extends CenterContentUserRO {
     // 保护用户隐私，仅为自己才可查看
     private Integer followNum;
 
-    public CenterUserFollowDetailRO(CenterContentUserRO userRO) {
-        super(userRO);
-    }
-
-    public CenterUserFollowDetailRO(CenterUserFollowDetailRO userRO) {
+    public CenterUserFollowDetailRO(SocialUserFollowDetailRO userRO) {
         super(userRO);
         this.fansNum = userRO.getFansNum();
         this.followNum = userRO.getFollowNum();
