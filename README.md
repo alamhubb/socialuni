@@ -107,7 +107,7 @@ app已上架，应用宝、360、oppo、vivo、小米、阿里应用中心，大
 [清池前端项目 git地址 qingchi-uni](https://github.com/socialuni/social-ui.git)
 
 ### 后端源码地址
-* [清池后端web项目 git地址 qingchi-web](https://github.com/socialuni/social-demo.git)
+* [社交联盟社交sdk，web项目 git地址 qingchi-web](https://gitee.com/socialuni/socialuni.git)
 #### Project setup
 ```
 npm install
