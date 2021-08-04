@@ -1,0 +1,19 @@
+package com.socialuni.social.model.model.RO;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class OAuthUserPhoneNumRO {
+    private String phoneNum;
+
+   /* public OAuthUserPhoneNumRO(String phoneNum, String devKey) {
+        if (StringUtils.isNotEmpty(devKey)) {
+            // 秘钥不为空才返回唯一手机号，因为非开放数据
+            this.phoneNum = phoneNum;
+        }
+    }*/
+}

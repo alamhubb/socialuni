@@ -1,0 +1,29 @@
+package com.socialuni.sdk.utils;
+
+import com.socialuni.sdk.model.DO.user.SocialUserAccountDO;
+import com.socialuni.sdk.repository.SocialUserAccountRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+
+@Slf4j
+@Component
+public class CommonUserAccountUtil {
+    private static SocialUserAccountRepository socialUserAccountRepository;
+
+    @Resource
+    public void setCommonUserAccountRepository(SocialUserAccountRepository socialUserAccountRepository) {
+        CommonUserAccountUtil.socialUserAccountRepository = socialUserAccountRepository;
+    }
+
+    public static SocialUserAccountDO getMineAccountByProvider(String provider) {
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, SocialUserUtil.getMineUserId());
+        return socialUserAccountDO;
+    }
+
+    public static SocialUserAccountDO getUserAccountByProvider(String provider, Integer userId) {
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, userId);
+        return socialUserAccountDO;
+    }
+}
