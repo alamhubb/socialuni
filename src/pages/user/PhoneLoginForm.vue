@@ -68,14 +68,15 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import PhoneNumFormData from '@/model/phone/PhoneNumFormData'
 import CommonUtil from '@/utils/CommonUtil'
 import Toast from '@/utils/Toast'
-import UserAPI from '@/api/UserAPI'
 import ConfigMap from '@/const/ConfigMap'
 import { configStore } from '@/store'
+import PhoneAPI from '@/api/PhoneAPI'
 
 @Component
 export default class PhoneLoginForm extends Vue {
   @configStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
   @Prop() showPhoneView: boolean
+  @Prop() phoneFormData: PhoneNumFormData
 
   @Watch('showPhoneView')
   showPhoneViewWatch () {
@@ -87,7 +88,6 @@ export default class PhoneLoginForm extends Vue {
     }
   }
 
-  phoneFormData = new PhoneNumFormData()
   countDown = 0
 
   authCodeFocus = false
@@ -147,7 +147,7 @@ export default class PhoneLoginForm extends Vue {
       this.countDown++
     }, 1000)
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
-    UserAPI.sendAuthCodeAPI(this.phoneFormData.phoneNum).then(() => {
+    PhoneAPI.sendAuthCodeAPI(this.phoneFormData.phoneNum).then(() => {
       // 提示验证码发送成功
       Toast.toast('验证码发送成功')
     })

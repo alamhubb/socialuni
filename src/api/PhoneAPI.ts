@@ -11,7 +11,7 @@ export default class PhoneAPI {
   }
 
   static sendAuthCodeAPI (phoneNum: string) {
-    return http.post('phone/sendAuthCode?phoneNum=' + phoneNum)
+    return http.post('phone/sendAuthCode', { phoneNum })
   }
 
   static bindPhoneNumAPI (phoneNum: string, authCode: string) {

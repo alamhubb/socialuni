@@ -10,7 +10,7 @@
       </div>
 
       <view class="mt h150px">
-        <phone-login-form v-if="showPhoneView"></phone-login-form>
+        <phone-login-form v-if="showPhoneView" :phone-form-data="phoneFormData"></phone-login-form>
 
         <view v-else class="h100p row-center pb-md">
           <!--          头部-->
@@ -99,13 +99,13 @@
               </view>
             </view>
 
-            <view v-if="!user || isMpWx" @click="switchShowPhoneNum" class="row-end-center">
+            <view @click="switchShowPhoneNum" class="row-end-center">
               <view class="text-gray">
                 <template v-if="!user">
-                  {{ showPhoneView ? '其他方式绑定' : '验证码方式绑定' }}
-                </template>
-                <template v-else>
                   {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
+                </template>
+                <template v-else-if="user && isMpWx">
+                  {{ showPhoneView ? '其他方式绑定' : '验证码方式绑定' }}
                 </template>
               </view>
               <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->

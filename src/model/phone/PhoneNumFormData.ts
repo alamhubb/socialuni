@@ -4,7 +4,7 @@ export default class PhoneNumFormData {
   phoneNum: string = null
   authCode: string = null
 
-  constructor (phoneNum: string = null, authCode: string = null) {
+  constructor (phoneNum: string = '18600409559', authCode: string = null) {
     this.phoneNum = phoneNum
     this.authCode = authCode
   }
