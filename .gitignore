@@ -28,3 +28,4 @@ yarn-error.log*
 /src/.env.production
 /src/.env
 /src/.env.development
+/.env.development
