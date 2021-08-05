@@ -15,8 +15,14 @@ public class CenterUserFollowDetailRO extends CenterContentUserRO {
     // 保护用户隐私，仅为自己才可查看
     private Integer followNum;
 
-    public CenterUserFollowDetailRO(SocialUserFollowDetailRO userRO) {
+    public CenterUserFollowDetailRO(CenterUserFollowDetailRO userRO) {
         super(userRO);
+        this.fansNum = userRO.getFansNum();
+        this.followNum = userRO.getFollowNum();
+    }
+
+    public CenterUserFollowDetailRO(CenterContentUserRO centerContentUserRO, SocialUserFollowDetailRO userRO) {
+        super(centerContentUserRO);
         this.fansNum = userRO.getFansNum();
         this.followNum = userRO.getFollowNum();
     }

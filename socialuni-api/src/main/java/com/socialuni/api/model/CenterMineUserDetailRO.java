@@ -1,5 +1,6 @@
 package com.socialuni.api.model;
 
+import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,12 +14,14 @@ public class CenterMineUserDetailRO extends CenterUserDetailRO {
     private String phoneNum;
     private String birthday;
 
-    public CenterMineUserDetailRO(soci userRO) {
-        super(userRO);
-    }
-
     public CenterMineUserDetailRO(CenterMineUserDetailRO userRO) {
         super(userRO);
+        this.phoneNum = userRO.getPhoneNum();
+        this.birthday = userRO.getBirthday();
+    }
+
+    public CenterMineUserDetailRO(CenterUserDetailRO centerUserDetailRO, SocialMineUserDetailRO userRO) {
+        super(centerUserDetailRO);
         this.phoneNum = userRO.getPhoneNum();
         this.birthday = userRO.getBirthday();
     }

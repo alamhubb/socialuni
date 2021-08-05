@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class UserImgROFactory {
     public static UserImgRO DOtoRO(UserImgDO userImg) {
         UserImgRO imgVO = new UserImgRO();
-        imgVO.setId(userImg.getId().toString());
+        imgVO.setId(userImg.getId());
         imgVO.setSrc(userImg.getSrc());
         imgVO.setAspectRatio(userImg.getAspectRatio());
         return imgVO;

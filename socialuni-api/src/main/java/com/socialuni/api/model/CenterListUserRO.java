@@ -15,9 +15,15 @@ public class CenterListUserRO extends CenterUserRO {
     private Integer age;
     private String city;
 
-    public CenterListUserRO(SocialListUserRO userRO) {
+    public CenterListUserRO(CenterListUserRO userRO) {
         super(userRO);
         this.age = userRO.getAge();
         this.city = userRO.getCity();
+    }
+
+    public CenterListUserRO(CenterUserRO userRO, SocialListUserRO socialListUserRO) {
+        super(userRO);
+        this.age = socialListUserRO.getAge();
+        this.city = socialListUserRO.getCity();
     }
 }

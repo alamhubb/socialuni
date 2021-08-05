@@ -17,6 +17,13 @@ public class CenterUserRO {
     private String avatar;
     private String gender;
 
+    public CenterUserRO(CenterUserRO centerUserRO) {
+        this.id = centerUserRO.getId();
+        this.nickname = centerUserRO.getNickname();
+        this.avatar = centerUserRO.getAvatar();
+        this.gender = centerUserRO.getGender();
+    }
+
     public CenterUserRO(SocialUserRO userRO) {
         this.nickname = userRO.getNickname();
         this.avatar = userRO.getAvatar();

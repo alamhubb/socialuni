@@ -16,8 +16,15 @@ public class CenterContentUserRO extends CenterListUserRO {
     private Boolean hasBeFollowed;
     private Boolean isMine;
 
-    public CenterContentUserRO(SocialContentUserRO userRO) {
-        super(userRO);
+    public CenterContentUserRO(CenterContentUserRO centerContentUserRO) {
+        super(centerContentUserRO);
+        this.hasFollowed = centerContentUserRO.getHasFollowed();
+        this.hasBeFollowed = centerContentUserRO.getHasBeFollowed();
+        this.isMine = centerContentUserRO.getIsMine();
+    }
+
+    public CenterContentUserRO(CenterListUserRO centerListUserRO, SocialContentUserRO userRO) {
+        super(centerListUserRO);
         this.hasFollowed = userRO.getHasFollowed();
         this.hasBeFollowed = userRO.getHasBeFollowed();
         this.isMine = userRO.getIsMine();
