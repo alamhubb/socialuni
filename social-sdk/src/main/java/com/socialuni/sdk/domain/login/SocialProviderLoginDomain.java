@@ -21,7 +21,7 @@ public class SocialProviderLoginDomain {
     TokenManage tokenManage;
 
     @Transactional
-    public SocialLoginRO providerLogin(SocialProviderLoginQO loginQO) {
+    public SocialLoginRO<SocialMineUserDetailRO> providerLogin(SocialProviderLoginQO loginQO) {
         //创建或返回
         UserDO mineUser = socialProviderLoginEntity.providerLogin(loginQO);
 
@@ -29,6 +29,6 @@ public class SocialProviderLoginDomain {
 
         TokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
 
-        return new SocialLoginRO(socialUserTokenDO.getToken(), userDetailRO);
+        return new SocialLoginRO<>(socialUserTokenDO.getToken(), userDetailRO);
     }
 }

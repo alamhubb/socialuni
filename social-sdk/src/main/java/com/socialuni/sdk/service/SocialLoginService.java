@@ -10,7 +10,6 @@ import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
 @Service
 public class SocialLoginService {
@@ -20,13 +19,13 @@ public class SocialLoginService {
     SocialPhoneLoginDomain socialPhoneLoginDomain;
 
 
-    public ResultRO<SocialLoginRO> providerLogin(SocialProviderLoginQO loginQO) {
-        SocialLoginRO socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
+    public ResultRO<SocialLoginRO<SocialMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
+        SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
         return new ResultRO<>(socialLoginRO);
     }
 
-    public ResultRO<SocialLoginRO> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        SocialLoginRO socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+        SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
         return new ResultRO<>(socialLoginRO);
     }
 }
