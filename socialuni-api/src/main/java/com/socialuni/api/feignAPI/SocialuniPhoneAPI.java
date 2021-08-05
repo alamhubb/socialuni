@@ -1,4 +1,4 @@
-package com.socialuni.api.feignAPI.user;
+package com.socialuni.api.feignAPI;
 
 
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;

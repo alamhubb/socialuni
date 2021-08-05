@@ -1,10 +1,10 @@
-package com.socialuni.api.feignAPI.user;
+package com.socialuni.api.feignAPI;
 
 
-import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
+import com.socialuni.api.model.CenterMineUserDetailRO;
+import com.socialuni.api.model.CenterUserDetailRO;
+import com.socialuni.api.model.CenterUserIdQO;
 import com.socialuni.social.model.model.RO.ResultRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +18,9 @@ import javax.validation.Valid;
 public interface SocialuniUserAPI {
 
     @PostMapping("getMineUser")
-    ResultRO<SocialMineUserDetailRO> getMineUser();
+    ResultRO<CenterMineUserDetailRO> getMineUser();
 
     @PostMapping("queryUserDetail")
-    ResultRO<SocialUserDetailRO> queryUserDetail(@RequestBody @Valid SocialUserIdQO socialUserIdQO);
+    ResultRO<CenterUserDetailRO> queryUserDetail(@RequestBody @Valid CenterUserIdQO centerUserIdQO);
 
 }

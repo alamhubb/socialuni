@@ -25,10 +25,12 @@ public class SocialUserService {
 
         UserDO mineUser = SocialUserUtil.getMineUser();
 
-        SocialUserDetailRO userDetailRO = SocialUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
+        SocialUserDetailRO userDetailRO;
 
-        if (userDetailRO.getIsMine()) {
-            userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(detailUserDO, userDetailRO);
+        if (mineUser != null && detailUserDO.getId().equals(mineUser.getId())) {
+            userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(detailUserDO);
+        } else {
+            userDetailRO = SocialUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
         }
 
         return new ResultRO<>(userDetailRO);

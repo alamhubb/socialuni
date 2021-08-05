@@ -37,33 +37,26 @@ public class SocialMineUserDetailROFactory {
         //user基础信息
         SocialUserDetailRO socialUserDetailRO = SocialUserDetailROFactory.getUserDetailRO(mineUser, mineUser);
 
-        SocialMineUserDetailRO mineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser, socialUserDetailRO);
-        return mineUserDetailRO;
-    }
-
-    public static SocialMineUserDetailRO getMineUserDetail(UserDO mineUser, SocialUserDetailRO socialUserDetailRO) {
-
         //user基础信息
-        SocialMineUserDetailRO userDetailVO = new SocialMineUserDetailRO(socialUserDetailRO);
+        SocialMineUserDetailRO mineUserDetailRO = new SocialMineUserDetailRO(socialUserDetailRO);
 
         //用户关注粉丝数
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByUserId(mineUser.getId());
 
-        boolean isMine = userDetailVO.getIsMine();
+        boolean isMine = mineUserDetailRO.getIsMine();
 
         //user详情信息
         if (isMine) {
             //为自己返回生日，方便修改，和手机号
-            userDetailVO.setBirthday(mineUser.getBirthday());
+            mineUserDetailRO.setBirthday(mineUser.getBirthday());
             if (socialUserPhoneDO != null) {
                 String realPhoneNum = socialUserPhoneDO.getPhoneNum();
                 if (StringUtils.isNotEmpty(realPhoneNum)) {
                     realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);
-                    userDetailVO.setPhoneNum(realPhoneNum);
+                    mineUserDetailRO.setPhoneNum(realPhoneNum);
                 }
             }
         }
-
-        return userDetailVO;
+        return mineUserDetailRO;
     }
 }

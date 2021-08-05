@@ -1,4 +1,4 @@
-package com.socialuni.api.feignAPI.community;
+package com.socialuni.api.feignAPI;
 
 import com.socialuni.social.model.model.QO.community.talk.*;
 import com.socialuni.social.model.model.RO.ResultRO;
