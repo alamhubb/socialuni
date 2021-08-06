@@ -3,7 +3,7 @@ package com.socialuni.sdk.domain.talk;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.factory.TalkROFactory;
+import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.model.DO.talk.TalkDO;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.model.RectangleVO;
@@ -56,7 +56,7 @@ public class SocialHomeTalkQueryDomain {
             talkDOS = socialHomeTalkQueryEntity.queryHomeTalks(queryQO, mineUser);
         }
         //转换为rolist
-        List<SocialTalkRO> socialTalkROs = TalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryQO);
+        List<SocialTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryQO);
         return socialTalkROs;
     }
 }

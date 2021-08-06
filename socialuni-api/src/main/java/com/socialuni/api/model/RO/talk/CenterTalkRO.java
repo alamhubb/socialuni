@@ -1,10 +1,10 @@
 package com.socialuni.api.model.RO.talk;
 
+import com.socialuni.api.model.RO.user.CenterContentUserRO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkImgRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkTagRO;
-import com.socialuni.social.model.model.RO.user.SocialTalkUserRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 public class CenterTalkRO {
     private String id;
-    private SocialTalkUserRO user;
+    private CenterContentUserRO user;
     private String content;
     private List<SocialTalkImgRO> imgs;
     //未来可以修改，但要有记录，修改过就显示已修改，显示修改记录

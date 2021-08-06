@@ -2,7 +2,6 @@ package com.socialuni.sdk.model;
 
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.social.model.model.RO.user.SocialCommentUserRO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.model.DO.user.UserDO;

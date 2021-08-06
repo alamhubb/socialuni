@@ -1,7 +1,6 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
-import com.socialuni.social.model.model.RO.user.SocialCommentUserRO;
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.dao.CommentDao;
 import com.socialuni.sdk.factory.user.SocialCommentUserROFactory;
@@ -21,18 +20,18 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-public class SocialTalkCommentROFactory {
+public class SocialCommentROFactory {
     private static CommentRepository commentRepository;
     private static CommentDao commentDao;
 
     @Resource
     public void setCommentDao(CommentDao commentDao) {
-        SocialTalkCommentROFactory.commentDao = commentDao;
+        SocialCommentROFactory.commentDao = commentDao;
     }
 
     @Resource
     public void setCommentRepository(CommentRepository commentRepository) {
-        SocialTalkCommentROFactory.commentRepository = commentRepository;
+        SocialCommentROFactory.commentRepository = commentRepository;
     }
 
     public static SocialCommentRO newTalkCommentRO(UserDO mineUser, CommentDO comment, boolean showAll) {
@@ -49,7 +48,7 @@ public class SocialTalkCommentROFactory {
         socialCommentRO.setCreateTime(comment.getCreateTime());
         socialCommentRO.setChildCommentNum(comment.getChildCommentNum());
 
-        List<SocialCommentRO> socialCommentROS = SocialTalkCommentROFactory.getCommentChildCommentROs(mineUser, comment.getId(), showAll);
+        List<SocialCommentRO> socialCommentROS = SocialCommentROFactory.getCommentChildCommentROs(mineUser, comment.getId(), showAll);
         socialCommentRO.setChildComments(socialCommentROS);
 
         log.debug("结束子评论：" + SystemUtil.getCurrentTimeSecond());
@@ -68,7 +67,7 @@ public class SocialTalkCommentROFactory {
         } else {
             commentDOS = commentDao.queryTalkComments(talkId);
         }
-        List<SocialCommentRO> commentVOS = SocialTalkCommentROFactory.newTalkCommentVOs(mineUser, commentDOS, showAllComment);
+        List<SocialCommentRO> commentVOS = SocialCommentROFactory.newTalkCommentVOs(mineUser, commentDOS, showAllComment);
         log.debug("开始查询comment完成" + new Date().getTime() / 1000);
         return commentVOS;
     }
@@ -82,7 +81,7 @@ public class SocialTalkCommentROFactory {
         } else {
             commentDOS = commentDao.queryCommentChildComments(commentId);
         }
-        List<SocialCommentRO> commentVOS = SocialTalkCommentROFactory.newTalkCommentVOs(mineUser, commentDOS, showAllComment);
+        List<SocialCommentRO> commentVOS = SocialCommentROFactory.newTalkCommentVOs(mineUser, commentDOS, showAllComment);
         log.debug("开始查询comment完成" + new Date().getTime() / 1000);
         return commentVOS;
     }
@@ -97,6 +96,6 @@ public class SocialTalkCommentROFactory {
                             //或者评论的状态不为预审核
                             || !ContentStatus.preAudit.equals(talkCommentDO.getStatus());
                 })
-                .map(talkCommentDO -> SocialTalkCommentROFactory.newTalkCommentRO(mineUser, talkCommentDO, showAll)).collect(Collectors.toList());
+                .map(talkCommentDO -> SocialCommentROFactory.newTalkCommentRO(mineUser, talkCommentDO, showAll)).collect(Collectors.toList());
     }
 }

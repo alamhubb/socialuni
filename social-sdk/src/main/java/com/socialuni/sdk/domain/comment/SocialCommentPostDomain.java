@@ -6,7 +6,7 @@ import com.socialuni.sdk.domain.notify.NotifyDomain;
 import com.socialuni.sdk.domain.report.ReportDomain;
 import com.socialuni.sdk.entity.comment.SocialPostCommentEntity;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.factory.SocialTalkCommentROFactory;
+import com.socialuni.sdk.factory.SocialCommentROFactory;
 import com.socialuni.sdk.model.DO.NotifyDO;
 import com.socialuni.sdk.model.DO.comment.CommentDO;
 import com.socialuni.sdk.model.DO.talk.TalkDO;
@@ -71,7 +71,7 @@ public class SocialCommentPostDomain {
             notifyDomain.sendNotifies(notifyDOS, mineUser);
         }
         
-        return SocialTalkCommentROFactory.newTalkCommentRO(mineUser, commentDO, false);
+        return SocialCommentROFactory.newTalkCommentRO(mineUser, commentDO, false);
     }
 
 

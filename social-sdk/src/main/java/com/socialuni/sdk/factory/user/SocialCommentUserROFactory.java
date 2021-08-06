@@ -3,7 +3,6 @@ package com.socialuni.sdk.factory.user;
 import com.socialuni.sdk.factory.user.base.SocialUserROFactory;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.model.model.RO.user.SocialCommentUserRO;
 import org.springframework.stereotype.Component;
 
 @Component

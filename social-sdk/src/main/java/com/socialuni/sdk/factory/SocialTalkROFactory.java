@@ -1,12 +1,11 @@
 package com.socialuni.sdk.factory;
 
+import com.socialuni.sdk.factory.user.base.SocialContentUserROFactory;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.social.model.model.RO.user.SocialTalkUserRO;
 import com.socialuni.sdk.dao.CommentDao;
-import com.socialuni.sdk.factory.user.SocialTalkUserROFactory;
 import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.model.DO.talk.TalkDO;
 import com.socialuni.sdk.model.DO.user.UserDO;
@@ -15,6 +14,7 @@ import com.socialuni.sdk.repository.HugRepository;
 import com.socialuni.sdk.utils.TalkImgDOUtils;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,24 +31,24 @@ import java.util.stream.Collectors;
 @Data
 @Component
 @Slf4j
-public class TalkROFactory {
+public class SocialTalkROFactory {
     private static CommentRepository commentRepository;
     private static CommentDao commentDao;
     private static HugRepository hugRepository;
 
     @Resource
     public void setCommentDao(CommentDao commentDao) {
-        TalkROFactory.commentDao = commentDao;
+        SocialTalkROFactory.commentDao = commentDao;
     }
 
     @Resource
     public void setCommentRepository(CommentRepository commentRepository) {
-        TalkROFactory.commentRepository = commentRepository;
+        SocialTalkROFactory.commentRepository = commentRepository;
     }
 
     @Resource
     public void setHugRepository(HugRepository hugRepository) {
-        TalkROFactory.hugRepository = hugRepository;
+        SocialTalkROFactory.hugRepository = hugRepository;
     }
 
     /*
@@ -87,24 +87,24 @@ public class TalkROFactory {
     //用户详情
     public static SocialTalkRO newHomeTalkRO(UserDO mineUser, Integer talkId) {
         TalkDO talkDO = TalkUtils.get(talkId);
-        return TalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
+        return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
     public static SocialTalkRO newFollowUserTalkRO(UserDO mineUser, TalkDO talkDO) {
-        return TalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
+        return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
     public static SocialTalkRO getTalkDetailPageTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment) {
-        return TalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
+        return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
     public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, SocialHomeTalkQueryQO queryVO) {
-        return TalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
+        return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
     public static List<SocialTalkRO> newHomeTalkROs(UserDO mineUser, List<TalkDO> talkDOS, SocialHomeTalkQueryQO queryVO) {
-        return talkDOS.stream().map(talkDO -> TalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
+        return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
     //talk详情
@@ -126,7 +126,7 @@ public class TalkROFactory {
 
         socialTalkRO.setId(talkId);
         UserDO talkUser = SocialUserUtil.get(talkDO.getUserId());
-        SocialTalkUserRO socialTalkUserRO = SocialTalkUserROFactory.newTalkUserRO(talkUser, mineUser);
+        SocialContentUserRO socialTalkUserRO = SocialContentUserROFactory.newContentUserRO(talkUser, mineUser);
 //        socialTalkUserRO.setId(UnionIdDbUtil.createUserUid(socialTalkUserRO.getId(), user));
 
         socialTalkRO.setUser(socialTalkUserRO);
@@ -143,7 +143,7 @@ public class TalkROFactory {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
 
-        List<SocialCommentRO> socialCommentROS = SocialTalkCommentROFactory.getTalkCommentROs(mineUser, talkId, showAllComment);
+        List<SocialCommentRO> socialCommentROS = SocialCommentROFactory.getTalkCommentROs(mineUser, talkId, showAllComment);
         socialTalkRO.setComments(socialCommentROS);
 
         log.debug("结束查询comment" + new Date().getTime() / 1000);

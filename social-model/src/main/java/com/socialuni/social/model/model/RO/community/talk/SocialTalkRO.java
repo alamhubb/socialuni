@@ -1,7 +1,7 @@
 package com.socialuni.social.model.model.RO.community.talk;
 
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
-import com.socialuni.social.model.model.RO.user.SocialTalkUserRO;
+import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class SocialTalkRO {
     private Integer id;
-    private SocialTalkUserRO user;
+    private SocialContentUserRO user;
     private String content;
     private List<SocialTalkImgRO> imgs;
     //未来可以修改，但要有记录，修改过就显示已修改，显示修改记录

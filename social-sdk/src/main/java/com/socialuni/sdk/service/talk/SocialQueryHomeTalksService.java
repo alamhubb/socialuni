@@ -4,7 +4,7 @@ import com.socialuni.sdk.domain.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.factory.TalkROFactory;
+import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.model.DO.talk.TalkDO;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.TalkRepository;
@@ -69,7 +69,7 @@ public class SocialQueryHomeTalksService {
 
         stickTalks.addAll(talkDOS);
 
-        List<SocialTalkRO> socialTalkROFactories = TalkROFactory.newHomeTalkROs(user, talkDOS, queryQO);
+        List<SocialTalkRO> socialTalkROFactories = SocialTalkROFactory.newHomeTalkROs(user, talkDOS, queryQO);
         /*if (stickTalks.size() > 10) {
             stickTalks = stickTalks.subList(0, 10);
         }*/

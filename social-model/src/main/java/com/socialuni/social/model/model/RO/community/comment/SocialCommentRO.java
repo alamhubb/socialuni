@@ -1,7 +1,6 @@
 package com.socialuni.social.model.model.RO.community.comment;
 
 
-import com.socialuni.social.model.model.RO.user.SocialCommentUserRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -27,7 +26,7 @@ public class SocialCommentRO {
 
     private List<SocialCommentRO> childComments;
 
-    private ReplyCommentRO replyComment;
+    private SocialReplyCommentRO replyComment;
 
     /**
      * 评论数量，子评论数量
