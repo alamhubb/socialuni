@@ -1,6 +1,6 @@
 package com.socialuni.api.feignAPI;
 
-import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
+import com.socialuni.api.model.QO.CenterHugAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,5 +13,5 @@ import javax.validation.Valid;
 @FeignClient(name = "hug", url = "${socialuni.server-url:https://api.socialuni.com}")
 public interface SocialuniHugAPI {
     @PostMapping("addHug")
-    ResultRO<Void> addHug(@RequestBody @Valid SocialHugAddQO addVO);
+    ResultRO<Void> addHug(@RequestBody @Valid CenterHugAddQO addVO);
 }

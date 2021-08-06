@@ -1,6 +1,7 @@
 package com.socialuni.social.model.model.QO.community;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,8 +13,14 @@ import javax.validation.constraints.NotNull;
  * @since TODO[起始版本号]
  */
 @Data
+@NoArgsConstructor
 public class SocialHugAddQO {
     @NotNull
     private Integer talkId;
     private Integer commentId;
+
+    public SocialHugAddQO(Integer talkId, Integer commentId) {
+        this.talkId = talkId;
+        this.commentId = commentId;
+    }
 }
