@@ -2,6 +2,7 @@ package com.socialuni.sdk.model;
 
 //import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 
 /**
@@ -29,8 +30,8 @@ public class UserCommentBO {
         }
     }
 
-    public SocialCommentUserRO toVO() {
-        SocialCommentUserRO userCommentVO = new SocialCommentUserRO();
+    public SocialUserRO toVO() {
+        SocialUserRO userCommentVO = new SocialUserRO();
         userCommentVO.setId(this.id);
         userCommentVO.setNickname(this.nickname);
         userCommentVO.setAvatar(this.avatar);

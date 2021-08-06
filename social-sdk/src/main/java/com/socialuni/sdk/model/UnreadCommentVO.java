@@ -6,6 +6,7 @@ import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -40,7 +41,7 @@ public class UnreadCommentVO {
     private SocialTalkRO talk;
 
 
-    private SocialCommentUserRO user;
+    private SocialUserRO user;
 
     private List<UnreadCommentVO> childComments;
 
