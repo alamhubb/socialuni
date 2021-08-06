@@ -1,6 +1,6 @@
 package com.socialuni.sdk.store;
 
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.sdk.constant.CommonConst;
 import com.socialuni.sdk.constant.GenderType;
 import com.socialuni.sdk.constant.TalkTabType;
@@ -28,7 +28,7 @@ public class SocialHomeTalkQueryStore {
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<TalkDO> queryHomeTalks(SocialHomeTalkQueryQO queryQO, UserDO user) {
+    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryQO queryQO, UserDO user) {
         String userGender = queryQO.getUserGender();
         String talkGender = queryQO.getTalkVisibleGender();
         String tabType = queryQO.getTabType();

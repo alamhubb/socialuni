@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkDeleteQO;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class SocialTalkService {
     }
 
     //查询非关注tab的动态列表
-    public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTalkQueryQO queryVO) {
+    public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryVO) {
         return socialTalkQueryService.queryHomeTabTalks(queryVO);
     }
 

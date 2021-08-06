@@ -1,7 +1,7 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.factory.user.base.SocialContentUserROFactory;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
@@ -98,12 +98,12 @@ public class SocialTalkROFactory {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, SocialHomeTalkQueryQO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, SocialHomeTabTalkQueryQO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialTalkRO> newHomeTalkROs(UserDO mineUser, List<TalkDO> talkDOS, SocialHomeTalkQueryQO queryVO) {
+    public static List<SocialTalkRO> newHomeTalkROs(UserDO mineUser, List<TalkDO> talkDOS, SocialHomeTabTalkQueryQO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -117,7 +117,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTalkQueryQO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryQO queryVO) {
         SocialTalkRO socialTalkRO = new SocialTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);

@@ -1,14 +1,15 @@
 package com.socialuni.sdk.factory;
 
+import com.socialuni.sdk.factory.user.base.SocialUserROFactory;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.dao.CommentDao;
-import com.socialuni.sdk.factory.user.SocialCommentUserROFactory;
 import com.socialuni.sdk.model.DO.comment.CommentDO;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.common.SystemUtil;
+import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -40,7 +41,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setNo(comment.getNo());
 
         UserDO commentUser = SocialUserUtil.get(comment.getUserId());
-        SocialCommentUserRO commentUserRO = SocialCommentUserROFactory.newCommentUserRO(commentUser);
+        SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);
         socialCommentRO.setUser(commentUserRO);
 
         socialCommentRO.setContent(comment.getContent());

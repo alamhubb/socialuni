@@ -8,8 +8,7 @@ import com.socialuni.sdk.model.DO.talk.TalkDO;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.platform.AliAPI;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +24,8 @@ public class SocialHomeTalkQueryDomain {
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
 
     //查询非关注tab的动态列表
-    public ResultRO<List<SocialTalkRO>> queryHomeTalks(UserDO mineUser) {
-        SocialHomeTalkQueryQO queryQO = new SocialHomeTalkQueryQO();
+    public List<SocialTalkRO> queryHomeTalks(UserDO mineUser) {
+        SocialHomeTabTalkQueryQO queryQO = new SocialHomeTabTalkQueryQO();
         queryQO.setTalkIds(new ArrayList<>());
         queryQO.setTabType(TalkTabType.home_type);
         //如果经纬度为空
@@ -38,11 +37,11 @@ public class SocialHomeTalkQueryDomain {
         queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
         queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
         List<SocialTalkRO> talkRos = this.queryHomeTabTalks(queryQO, mineUser);
-        return new ResultRO<>(talkRos);
+        return talkRos;
     }
 
     //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTalkQueryQO queryQO, UserDO mineUser) {
+    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
         String tabType = queryQO.getTabType();
         if (!TalkTabType.values.contains(tabType)) {
             throw new SocialParamsException("错误的tab类型");

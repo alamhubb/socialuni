@@ -1,7 +1,7 @@
 package com.socialuni.sdk.service.talk;
 
 import com.socialuni.sdk.domain.talk.SocialFollowUserTalksQueryEntity;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
@@ -44,7 +44,7 @@ public class SocialQueryHomeTalksService {
     }*/
 
     //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTalks(SocialHomeTalkQueryQO queryQO, UserDO user) {
+    public List<SocialTalkRO> queryHomeTalks(SocialHomeTabTalkQueryQO queryQO, UserDO user) {
 //        log.info("queryNotFollowTalks开始1：" + new Date().getTime() / 1000);
         List<TalkDO> stickTalks = new ArrayList<>();
         /*if (talkIds.size() == 1 && talkIds.get(0).equals(0)) {

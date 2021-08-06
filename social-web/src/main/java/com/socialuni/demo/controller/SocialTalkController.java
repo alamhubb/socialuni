@@ -21,7 +21,7 @@ public class SocialTalkController implements SocialuniTalkUrl {
     }
 
     @Override
-    public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTalkQueryQO queryVO) {
+    public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryVO) {
         return socialTalkService.queryHomeTabTalks(queryVO);
     }
 
