@@ -1,9 +1,9 @@
 package com.socialuni.api.feignAPI;
 
 
-import com.socialuni.api.model.CenterMineUserDetailRO;
-import com.socialuni.api.model.CenterUserDetailRO;
-import com.socialuni.api.model.CenterUserIdQO;
+import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.api.model.RO.user.CenterUserDetailRO;
+import com.socialuni.api.model.RO.user.CenterUserIdQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

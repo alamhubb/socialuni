@@ -1,6 +1,6 @@
 package com.socialuni.api.feignAPI;
 
-import com.socialuni.api.model.CenterMineUserDetailRO;
+import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.ResultRO;

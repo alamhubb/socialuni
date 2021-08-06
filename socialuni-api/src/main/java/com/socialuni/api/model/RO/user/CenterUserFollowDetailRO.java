@@ -1,4 +1,4 @@
-package com.socialuni.api.model;
+package com.socialuni.api.model.RO.user;
 
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import lombok.Data;
