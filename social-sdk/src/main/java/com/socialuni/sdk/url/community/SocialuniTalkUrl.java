@@ -17,7 +17,7 @@ public interface SocialuniTalkUrl {
     ResultRO<List<SocialTalkRO>> queryHomeTalks();
 
     @PostMapping("queryTalks")
-    ResultRO<List<SocialTalkRO>> queryHomeTabTalks(@RequestBody @Valid SocialTalkHomeQueryQO queryVO);
+    ResultRO<List<SocialTalkRO>> queryHomeTabTalks(@RequestBody @Valid SocialHomeTalkQueryQO queryVO);
 
     @PostMapping("postTalk")
     ResultRO<Void> postTalk(@RequestBody @Valid SocialTalkPostQO talkVO);

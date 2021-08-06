@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2019-08-21 20:47
  */
 @Data
-public class SocialTalkHomeQueryQO {
+public class SocialHomeTalkQueryQO {
     private List<Integer> talkIds;
     private String tabType;
     private List<Integer> tagIds;

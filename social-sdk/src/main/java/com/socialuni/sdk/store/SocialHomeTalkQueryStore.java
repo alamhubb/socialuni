@@ -1,6 +1,6 @@
 package com.socialuni.sdk.store;
 
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkHomeQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTalkQueryQO;
 import com.socialuni.sdk.constant.CommonConst;
 import com.socialuni.sdk.constant.GenderType;
 import com.socialuni.sdk.constant.TalkTabType;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class SocialHomeTalksQueryStore {
+public class SocialHomeTalkQueryStore {
 
     @Resource
     private TalkRepository talkRepository;
@@ -28,10 +28,10 @@ public class SocialHomeTalksQueryStore {
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<TalkDO> queryHomeTalks(List<Integer> talkIds, SocialTalkHomeQueryQO queryVO, UserDO user) {
-        String userGender = queryVO.getUserGender();
-        String talkGender = queryVO.getTalkVisibleGender();
-        String tabType = queryVO.getTabType();
+    public List<TalkDO> queryHomeTalks(SocialHomeTalkQueryQO queryQO, UserDO user) {
+        String userGender = queryQO.getUserGender();
+        String talkGender = queryQO.getTalkVisibleGender();
+        String tabType = queryQO.getTabType();
 
         //        log.info("queryNotFollowTalks开始2：" + new Date().getTime() / 1000);
         //userId特殊处理
@@ -49,7 +49,7 @@ public class SocialHomeTalksQueryStore {
 
 
         log.debug("开始数据库查询3：" + new Date().getTime() / 1000);
-        String adCode = queryVO.getAdCode();
+        String adCode = queryQO.getAdCode();
         //添加用户使用地区的记录，记录用户最近访问的地区
         //下一版本不再记录用户使用位置，本地记录
 //            districtService.addDistrictRecord(user, adCode, TalkOperateType.talkQuery);
@@ -88,21 +88,21 @@ public class SocialHomeTalksQueryStore {
         //年龄
         //设置极限值
         Integer minAge = -500;
-        Integer frontMinAge = queryVO.getMinAge();
+        Integer frontMinAge = queryQO.getMinAge();
         //如果前台传过来的不为空则使用前台的
         if (frontMinAge > 8) {
-            minAge = queryVO.getMinAge();
+            minAge = queryQO.getMinAge();
         }
         //设置极限值
         Integer maxAge = 500;
-        Integer frontMaxAge = queryVO.getMaxAge();
+        Integer frontMaxAge = queryQO.getMaxAge();
         //如果前台传过来的不为空则使用前台的，40为前台最大值，如果选择40则等于没设置上线
         if (!ObjectUtils.isEmpty(frontMaxAge) && frontMaxAge < 40) {
             maxAge = frontMaxAge;
         }
 
         //tags为0的情况
-        List<Integer> tagIds = queryVO.getTagIds();
+        List<Integer> tagIds = queryQO.getTagIds();
 
         //没选择tag的情况
         if (CollectionUtils.isEmpty(tagIds)) {
@@ -110,7 +110,7 @@ public class SocialHomeTalksQueryStore {
         }
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(talkIds, userId, userGender,
+        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryQO.getTalkIds(), userId, userGender,
                 minAge, maxAge, adCode, tagIds, talkGender, sessionUserGender);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
