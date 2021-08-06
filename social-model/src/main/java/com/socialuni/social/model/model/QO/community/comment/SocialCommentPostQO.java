@@ -1,6 +1,7 @@
 package com.socialuni.social.model.model.QO.community.comment;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,10 +13,18 @@ import javax.validation.constraints.NotNull;
  * @since TODO[起始版本号]
  */
 @Data
+@NoArgsConstructor
 public class SocialCommentPostQO {
     private String content;
     @NotNull
     private Integer talkId;
     private Integer commentId;
     private Integer replyCommentId;
+
+    public SocialCommentPostQO(String content, Integer talkId, Integer commentId, Integer replyCommentId) {
+        this.content = content;
+        this.talkId = talkId;
+        this.commentId = commentId;
+        this.replyCommentId = replyCommentId;
+    }
 }

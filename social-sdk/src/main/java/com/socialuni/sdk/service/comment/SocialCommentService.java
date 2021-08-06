@@ -29,7 +29,7 @@ public class SocialCommentService {
     public ResultRO<SocialCommentRO> postComment(SocialCommentPostQO socialCommentPostQO) {
         UserDO mineUser = SocialUserUtil.getMineUser();
 
-        SocialCommentRO socialCommentRO = socialPostCommentDomain.postComment(socialCommentPostQO, mineUser);
+        SocialCommentRO socialCommentRO = socialPostCommentDomain.postComment(mineUser, socialCommentPostQO);
 
         return new ResultRO<>(socialCommentRO);
     }

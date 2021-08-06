@@ -46,11 +46,11 @@ public class SocialCommentPostDomain {
     private ModelContentCheck modelContentCheck;
 
 
-    public SocialCommentRO postComment(SocialCommentPostQO addQO, UserDO mineUser) {
+    public SocialCommentRO postComment(UserDO mineUser, SocialCommentPostQO addQO) {
         //校验comment
         CommentAddLineTransfer commentAddLineTransfer = this.checkCommentAddVO(
-                addQO,
-                mineUser
+                mineUser,
+                addQO
         );
 
         //校验结果
@@ -70,13 +70,13 @@ public class SocialCommentPostDomain {
             //推送消息
             notifyDomain.sendNotifies(notifyDOS, mineUser);
         }
-        
+
         return SocialCommentROFactory.newTalkCommentRO(mineUser, commentDO, false);
     }
 
 
     //校验添加新增comment的评论是否正确
-    private CommentAddLineTransfer checkCommentAddVO(SocialCommentPostQO addVO, UserDO requestUser) {
+    private CommentAddLineTransfer checkCommentAddVO(UserDO requestUser, SocialCommentPostQO addVO) {
         //校验内容是否违规
         modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
 
