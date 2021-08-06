@@ -1,8 +1,8 @@
 package com.socialuni.api.feignAPI;
 
 import com.socialuni.api.model.QO.talk.CenterHomeTabTalkQueryQO;
+import com.socialuni.api.model.QO.talk.CenterTalkDeleteQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkDeleteQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
@@ -29,7 +29,7 @@ public interface SocialuniTalkAPI {
     ResultRO<Void> postTalk(@RequestBody @Valid SocialTalkPostQO talkVO);
 
     @PostMapping("deleteTalk")
-    ResultRO<Void> deleteTalk(@RequestBody @Valid SocialTalkDeleteQO talkVO);
+    ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkDeleteQO talkDeleteQO);
 
     @PostMapping("queryTalkInfo")
     ResultRO<CenterTalkRO> queryTalkDetail(@RequestBody @Valid SocialTalkIdQO socialTalkIdQO);
