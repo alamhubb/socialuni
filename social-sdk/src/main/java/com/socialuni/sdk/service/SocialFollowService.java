@@ -2,13 +2,10 @@ package com.socialuni.sdk.service;
 
 
 import com.socialuni.sdk.domain.follow.SocialQueryUserFollowsDomain;
-import com.socialuni.sdk.domain.follow.UserFollowDomain;
+import com.socialuni.sdk.domain.follow.SocialUserFollowDomain;
 import com.socialuni.sdk.model.DO.user.UserDO;
-import com.socialuni.sdk.repository.FollowRepository;
-import com.socialuni.sdk.repository.SocialUserFansDetailRepository;
-import com.socialuni.sdk.repository.UserRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.model.model.QO.community.FollowAddVO;
+import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Service;
@@ -20,28 +17,21 @@ import java.util.Map;
 @Service
 public class SocialFollowService {
     @Resource
-    private FollowRepository followRepository;
-    @Resource
-    private UserRepository userRepository;
-    @Resource
-    SocialUserFansDetailRepository socialUserFansDetailRepository;
-
-    @Resource
     SocialQueryUserFollowsDomain socialQueryUserFollowsDomain;
     @Resource
-    private UserFollowDomain userFollowDomain;
+    private SocialUserFollowDomain socialUserFollowDomain;
 
-    public ResultRO<Void> addFlow(FollowAddVO addVO) {
+    public ResultRO<Void> addFlow(SocialFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialUserUtil.getMineUserId();
-        userFollowDomain.addFlow(mineUserId, addVO.getBeUserId());
+        socialUserFollowDomain.addFlow(mineUserId, addVO.getBeUserId());
         return new ResultRO<>();
     }
 
-    public ResultRO<Void> cancelFollow(FollowAddVO addVO) {
+    public ResultRO<Void> cancelFollow(SocialFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialUserUtil.getMineUserId();
-        userFollowDomain.cancelFollow(mineUserId, addVO.getBeUserId());
+        socialUserFollowDomain.cancelFollow(mineUserId, addVO.getBeUserId());
         return new ResultRO<>();
     }
 

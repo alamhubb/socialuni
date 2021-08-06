@@ -1,8 +1,9 @@
 package com.socialuni.api.feignAPI;
 
-import com.socialuni.social.model.model.QO.community.FollowAddVO;
+import com.socialuni.api.model.QO.follow.CenterFollowAddQO;
+import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
+import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,12 +18,12 @@ import java.util.Map;
 public interface SocialuniFollowAPI {
 
     @PostMapping("queryUserFollows")
-    ResultRO<Map<String, List<SocialUserFollowDetailRO>>> queryUserFollows();
+    ResultRO<Map<String, List<CenterUserFollowDetailRO>>> queryUserFollows();
 
     @PostMapping("addFollow")
-    ResultRO<Void> addFollow(@RequestBody @Valid FollowAddVO addVO);
+    ResultRO<Void> addFollow(@RequestBody @Valid CenterFollowAddQO addVO);
 
     @PostMapping("cancelFollow")
-    ResultRO<Void> cancelFollow(@RequestBody @Valid FollowAddVO addVO);
+    ResultRO<Void> cancelFollow(@RequestBody @Valid CenterFollowAddQO addVO);
 
 }

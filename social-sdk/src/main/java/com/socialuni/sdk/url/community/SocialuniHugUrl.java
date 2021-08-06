@@ -1,6 +1,6 @@
 package com.socialuni.sdk.url.community;
 
-import com.socialuni.social.model.model.QO.community.HugAddQO;
+import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,5 +11,5 @@ import javax.validation.Valid;
 @RequestMapping("hug")
 public interface SocialuniHugUrl {
     @PostMapping("addHug")
-    ResultRO<Void> addHug(@RequestBody @Valid HugAddQO addVO);
+    ResultRO<Void> addHug(@RequestBody @Valid SocialHugAddQO addVO);
 }

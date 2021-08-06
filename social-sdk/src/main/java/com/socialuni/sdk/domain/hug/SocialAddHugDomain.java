@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.HugRepository;
 import com.socialuni.sdk.utils.TalkStore;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.social.model.model.QO.community.HugAddQO;
+import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +21,10 @@ public class SocialAddHugDomain {
     @Resource
     private HugRepository hugRepository;
 
-    public ResultRO<Void> addHug(UserDO mineUser, HugAddQO hugAddQO) {
-        if (hugAddQO.getTalkId() != null) {
-            TalkDO talkDO = TalkUtils.get(hugAddQO.getTalkId());
-            HugDO hugDO = new HugDO(mineUser.getId(), hugAddQO.getTalkId(), hugAddQO.getCommentId());
+    public ResultRO<Void> addHug(UserDO mineUser, SocialHugAddQO socialHugAddQO) {
+        if (socialHugAddQO.getTalkId() != null) {
+            TalkDO talkDO = TalkUtils.get(socialHugAddQO.getTalkId());
+            HugDO hugDO = new HugDO(mineUser.getId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());
             hugRepository.save(hugDO);
             Integer hugNum = talkDO.getHugNum();
             if (hugNum == null) {

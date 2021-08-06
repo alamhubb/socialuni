@@ -1,7 +1,7 @@
 package com.socialuni.demo.controller;
 
 import com.socialuni.sdk.service.SocialHugService;
-import com.socialuni.social.model.model.QO.community.HugAddQO;
+import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.sdk.url.community.SocialuniHugUrl;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ public class SocialHugController implements SocialuniHugUrl {
     SocialHugService socialHugService;
 
     @Override
-    public ResultRO<Void> addHug(HugAddQO hugAddQO) {
-        return socialHugService.addHug(hugAddQO);
+    public ResultRO<Void> addHug(SocialHugAddQO socialHugAddQO) {
+        return socialHugService.addHug(socialHugAddQO);
     }
 }

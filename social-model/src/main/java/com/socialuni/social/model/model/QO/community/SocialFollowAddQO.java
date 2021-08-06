@@ -1,6 +1,7 @@
 package com.socialuni.social.model.model.QO.community;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,8 +13,10 @@ import javax.validation.constraints.NotNull;
  * @since TODO[起始版本号]
  */
 @Data
-public class HugAddQO {
-    @NotNull
-    private Integer talkId;
-    private Integer commentId;
+public class SocialFollowAddQO {
+    /**
+     * 被关注的用户id
+     */
+    @NotNull(message = "入参为空异常")
+    private Integer beUserId;
 }

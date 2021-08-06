@@ -1,14 +1,11 @@
 package com.socialuni.sdk.domain.follow;
 
 import com.socialuni.sdk.constant.CommonStatus;
-import com.socialuni.sdk.dao.FollowDao;
 import com.socialuni.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.manage.FollowManage;
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.model.DO.FollowDO;
 import com.socialuni.sdk.repository.FollowRepository;
-import com.socialuni.sdk.repository.SocialUserFansDetailRepository;
-import com.socialuni.sdk.repository.UserRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -16,19 +13,13 @@ import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 
 @Component
-public class UserFollowDomain {
+public class SocialUserFollowDomain {
     @Resource
     private FollowRepository followRepository;
-    @Resource
-    private UserRepository userRepository;
-    @Resource
-    SocialUserFansDetailRepository socialUserFansDetailRepository;
     @Resource
     private SocialUserFansDetailManage socialUserFansDetailManage;
     @Resource
     FollowManage followManage;
-    @Resource
-    FollowDao followDao;
 
     public void addFlow(@NotNull Integer mineUserId, @NotNull Integer beUserId) {
         if (beUserId.equals(mineUserId)) {

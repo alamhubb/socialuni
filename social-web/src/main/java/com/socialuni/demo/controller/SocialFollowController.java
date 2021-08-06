@@ -1,10 +1,10 @@
 package com.socialuni.demo.controller;
 
 import com.socialuni.sdk.service.SocialFollowService;
-import com.socialuni.social.model.model.QO.community.FollowAddVO;
+import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
-import com.socialuni.sdk.url.community.SocialuniFollowAPI;
+import com.socialuni.sdk.url.community.SocialuniFollowUrl;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class SocialFollowController implements SocialuniFollowAPI {
+public class SocialFollowController implements SocialuniFollowUrl {
     @Resource
     SocialFollowService socialFollowService;
 
@@ -22,12 +22,12 @@ public class SocialFollowController implements SocialuniFollowAPI {
     }
 
     @Override
-    public ResultRO<Void> addFollow(FollowAddVO addVO) {
+    public ResultRO<Void> addFollow(SocialFollowAddQO addVO) {
         return socialFollowService.addFlow(addVO);
     }
 
     @Override
-    public ResultRO<Void> cancelFollow(FollowAddVO addVO) {
+    public ResultRO<Void> cancelFollow(SocialFollowAddQO addVO) {
         return socialFollowService.addFlow(addVO);
     }
 }

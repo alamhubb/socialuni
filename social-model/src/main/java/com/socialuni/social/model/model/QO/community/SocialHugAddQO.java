@@ -12,10 +12,8 @@ import javax.validation.constraints.NotNull;
  * @since TODO[起始版本号]
  */
 @Data
-public class FollowAddVO {
-    /**
-     * 被关注的用户id
-     */
-    @NotNull(message = "入参为空异常")
-    private Integer beUserId;
+public class SocialHugAddQO {
+    @NotNull
+    private Integer talkId;
+    private Integer commentId;
 }
