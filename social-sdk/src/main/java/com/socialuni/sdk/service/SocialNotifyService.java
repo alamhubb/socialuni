@@ -5,14 +5,12 @@ import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@RestController
-@RequestMapping("socialuni/notify")
+@Service
 public class SocialNotifyService {
     @Resource
     private SocialQueryNotifyDomain socialQueryNotifyDomain;

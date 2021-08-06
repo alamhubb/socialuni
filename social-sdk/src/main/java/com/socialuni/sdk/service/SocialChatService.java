@@ -2,7 +2,7 @@ package com.socialuni.sdk.service;
 
 import com.socialuni.sdk.model.OpenChatVO;
 import com.socialuni.sdk.model.RO.UserIdVO;
-import com.socialuni.sdk.service.chat.ChatUserService;
+import com.socialuni.sdk.domain.chat.ChatQueryDomain;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
@@ -21,7 +21,7 @@ import java.util.List;
 public class SocialChatService {
 
     @Resource
-    ChatUserService chatUserService;
+    ChatQueryDomain chatQueryDomain;
 
 
     public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
@@ -34,7 +34,7 @@ public class SocialChatService {
 
 
     public ResultRO<List<ChatRO>> queryChatList() {
-        return new ResultRO<>(chatUserService.getChats());
+        return new ResultRO<>(chatQueryDomain.getChats());
     }
 
     public ResultRO<ChatRO> queryChat(UserIdVO receiveUserVO) {

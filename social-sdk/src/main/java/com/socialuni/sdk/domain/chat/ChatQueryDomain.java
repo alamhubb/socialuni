@@ -1,15 +1,15 @@
-package com.socialuni.sdk.service.chat;
+package com.socialuni.sdk.domain.chat;
 
+import com.socialuni.sdk.constant.ChatType;
+import com.socialuni.sdk.constant.status.ChatStatus;
 import com.socialuni.sdk.factory.SocialChatROFactory;
 import com.socialuni.sdk.model.DO.chat.ChatDO;
 import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.constant.ChatType;
-import com.socialuni.sdk.constant.status.ChatStatus;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.ChatRepository;
 import com.socialuni.sdk.repository.ChatUserRepository;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,8 +18,8 @@ import java.util.List;
  * @author qinkaiyuan
  * @date 2019-06-16 12:39
  */
-@Service
-public class ChatUserService {
+@Component
+public class ChatQueryDomain {
     @Resource
     ChatRepository chatRepository;
     @Resource
