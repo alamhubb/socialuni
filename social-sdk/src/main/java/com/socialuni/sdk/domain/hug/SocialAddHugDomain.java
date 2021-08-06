@@ -8,12 +8,12 @@ import com.socialuni.sdk.utils.TalkStore;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Date;
 
-@RestController
+@Component
 public class SocialAddHugDomain {
     @Resource
     private TalkStore talkStore;

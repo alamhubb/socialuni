@@ -10,6 +10,7 @@ import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.platform.AliAPI;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class SocialHomeTalkQueryDomain {
     @Resource
     private SocialHomeTalkQueryEntity socialHomeTalkQueryEntity;
