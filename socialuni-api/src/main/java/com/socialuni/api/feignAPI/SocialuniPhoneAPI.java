@@ -1,9 +1,8 @@
 package com.socialuni.api.feignAPI;
 
-
+import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.ResultRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,5 +16,5 @@ public interface SocialuniPhoneAPI {
     ResultRO<Void> sendAuthCode(@RequestBody @Valid SocialSendAuthCodeQO authCodeQO);
 
     @PostMapping("bindPhoneNum")
-    ResultRO<SocialMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO);
+    ResultRO<CenterMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO);
 }
