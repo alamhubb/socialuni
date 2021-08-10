@@ -13,7 +13,6 @@
 
     <modules>
         <module>socialuni-api</module>
-        <module>socialuni-model</module>
         <module>social-sdk</module>
         <module>social-model</module>
     </modules>
