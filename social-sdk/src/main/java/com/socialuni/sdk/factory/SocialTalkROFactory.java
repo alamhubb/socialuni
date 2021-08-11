@@ -1,19 +1,21 @@
 package com.socialuni.sdk.factory;
 
+import com.socialuni.sdk.dao.CommentDao;
 import com.socialuni.sdk.factory.user.base.SocialContentUserROFactory;
+import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.model.DO.talk.TalkDO;
+import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.sdk.model.RectangleVO;
+import com.socialuni.sdk.platform.AliAPI;
+import com.socialuni.sdk.repository.CommentRepository;
+import com.socialuni.sdk.repository.HugRepository;
+import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.TalkImgDOUtils;
+import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.sdk.dao.CommentDao;
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
-import com.socialuni.sdk.repository.CommentRepository;
-import com.socialuni.sdk.repository.HugRepository;
-import com.socialuni.sdk.utils.TalkImgDOUtils;
-import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -225,6 +227,13 @@ public class SocialTalkROFactory {
         //计算距离
         //如果查询条件有经纬度
         //耗时60毫秒
+
+        if (queryVO == null) {
+            RectangleVO rectangleVO = AliAPI.getRectangle();
+            queryVO = new SocialHomeTabTalkQueryQO();
+            queryVO.setLat(rectangleVO.getLat());
+            queryVO.setLon(rectangleVO.getLon());
+        }
 
         Double lon = queryVO.getLon();
         Double lat = queryVO.getLat();

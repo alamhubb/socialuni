@@ -11,9 +11,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.socialuni.sdk")
 @EntityScan("com.socialuni.sdk")
 @EnableConfigurationProperties({
-        SocialuniUserProperties.class,
+        SocialuniAliMapProperties.class,
+        SocialuniCloudTencentCosProperties.class,
+        SocialuniProperties.class,
         SocialuniProviderQQProperties.class,
-        SocialuniProviderWxProperties.class
+        SocialuniProviderWxProperties.class,
+        SocialuniUserProperties.class
 })
 public class SocialuniAutoConfiguration {
 }

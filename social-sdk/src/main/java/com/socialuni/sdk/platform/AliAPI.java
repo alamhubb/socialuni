@@ -8,16 +8,14 @@ import com.socialuni.sdk.utils.common.RestUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class AliAPI {
     private static String map_web_key;
 
-    @Value("${config.ali.map.secretKey}")
+    @Value("${socialuni.map.ali.secret-key}")
     public  void setMap_web_key(String map_web_key) {
         AliAPI.map_web_key = map_web_key;
     }
