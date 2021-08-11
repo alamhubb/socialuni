@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class CenterUserDetailRO extends com.socialuni.api.model.CenterUserDetailRO {
+public class CenterUserDetailRO extends SocialUserDetailRO {
 
-    public CenterUserDetailRO(com.socialuni.social.model.model.RO.user.SocialUserDetailRO userRO) {
+    public CenterUserDetailRO(SocialUserDetailRO userRO) {
         super(userRO);
     }
 
