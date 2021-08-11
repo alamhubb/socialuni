@@ -36,11 +36,6 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-url</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-model</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>

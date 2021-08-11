@@ -28,11 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni</groupId>
-            <artifactId>socialuni-url</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>socialuni-model</artifactId>
+            <artifactId>social-model</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
