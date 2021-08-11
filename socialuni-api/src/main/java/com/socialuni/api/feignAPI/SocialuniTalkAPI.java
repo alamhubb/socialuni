@@ -2,9 +2,9 @@ package com.socialuni.api.feignAPI;
 
 import com.socialuni.api.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.api.model.QO.talk.CenterTalkIdQO;
+import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,5 +34,5 @@ public interface SocialuniTalkAPI {
     ResultRO<CenterTalkRO> queryTalkDetail(@RequestBody @Valid CenterTalkIdQO talkIdQO);
 
     @PostMapping("queryUserTalks")
-    ResultRO<List<CenterTalkRO>> queryUserTalks(@RequestBody @Valid SocialUserTalkQueryQO queryQO);
+    ResultRO<List<CenterTalkRO>> queryUserTalks(@RequestBody @Valid CenterUserTalkQueryQO queryQO);
 }

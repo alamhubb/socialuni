@@ -59,7 +59,7 @@ public class SocialTalkService {
 
     public ResultRO<SocialTalkRO> queryTalkDetail(SocialTalkIdQO socialTalkIdQO) {
         UserDO mineUser = SocialUserUtil.getMineUser();
-        SocialTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(mineUser, socialTalkIdQO);
+        SocialTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(socialTalkIdQO, mineUser);
         return ResultRO.success(socialTalkRO);
     }
 
