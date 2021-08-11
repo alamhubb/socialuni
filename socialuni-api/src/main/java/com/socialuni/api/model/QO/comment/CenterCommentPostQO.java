@@ -18,5 +18,4 @@ public class CenterCommentPostQO {
     private String talkId;
     private String commentId;
     private String replyCommentId;
-    private String socialuniUid;
 }

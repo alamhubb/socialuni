@@ -20,6 +20,7 @@ public class SocialCommentPostQO {
     private Integer talkId;
     private Integer commentId;
     private Integer replyCommentId;
+    private String socialuniUid;
 
     public SocialCommentPostQO(String content, Integer talkId, Integer commentId, Integer replyCommentId) {
         this.content = content;

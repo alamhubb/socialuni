@@ -45,6 +45,7 @@ public class CommentFactory {
         comment.setParentCommentId(addVO.getCommentId());
         comment.setTalkId(addVO.getTalkId());
         comment.setUserId(requestUserId);
+        comment.setSocialuniUid(addVO.getSocialuniUid());
 //        comment.setDevId(DevAccountUtils.getDevId());
 //        comment.setThreeId(threeUnionId);
         return comment;

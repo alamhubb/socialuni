@@ -23,6 +23,7 @@ public class CommentDO extends CommonContentBaseDO implements BaseModelDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String socialuniUid;
 
     private Integer no;
 

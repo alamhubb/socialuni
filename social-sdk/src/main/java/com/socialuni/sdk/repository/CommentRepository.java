@@ -29,6 +29,8 @@ public interface CommentRepository extends JpaRepository<CommentDO, Integer> {
 
     CommentDO findOneById(Integer id);
 
+    CommentDO findOneBySocialuniUid(String id);
+
     @Caching(evict = {
             //用户的talks肯定变化了
             //新增一条数据肯定所有数据清空，数据的显示数据变了
