@@ -20,6 +20,8 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     @Cacheable(cacheNames = "talkById", key = "#id")
     TalkDO findOneById(Integer id);
 
+    TalkDO findOneBySocialuniUid(String uid);
+
     @Cacheable(cacheNames = "talkById", key = "#id")
     Optional<BaseModelDO> findTop1ById(Integer id);
 

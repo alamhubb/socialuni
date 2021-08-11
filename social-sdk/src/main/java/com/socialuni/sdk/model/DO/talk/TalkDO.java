@@ -16,6 +16,7 @@ import javax.persistence.*;
         @Index(columnList = "createTime"),
         @Index(columnList = "updateTime"),
         @Index(columnList = "userId"),
+        @Index(columnList = "socialuniUid"),
         @Index(columnList = "content"),
         @Index(columnList = "reportContentType"),
         @Index(columnList = "globalTop"),
