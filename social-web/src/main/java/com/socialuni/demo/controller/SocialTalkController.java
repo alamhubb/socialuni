@@ -37,11 +37,11 @@ public class SocialTalkController implements SocialuniTalkUrl {
 
     @Override
     public ResultRO<SocialTalkRO> queryTalkDetail(SocialTalkIdQO socialTalkIdQO) {
-        return null;
+        return socialTalkService.queryTalkDetail(socialTalkIdQO);
     }
 
     @Override
-    public ResultRO<List<SocialTalkRO>> queryUserTalks(SocialUserTalkQueryQO queryVO) {
-        return null;
+    public ResultRO<List<SocialTalkRO>> queryUserTalks(SocialUserTalkQueryQO queryQO) {
+        return socialTalkService.queryUserTalks(queryQO);
     }
 }

@@ -2,6 +2,8 @@ package com.socialuni.sdk.domain.talk;
 
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.TalkTabType;
+import com.socialuni.sdk.entity.talk.SocialFollowUserTalksQueryEntity;
+import com.socialuni.sdk.entity.talk.SocialHomeTalkQueryEntity;
 import com.socialuni.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.model.DO.talk.TalkDO;

@@ -6,6 +6,7 @@ import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.redis.RedisKeysConst;
 import com.socialuni.sdk.repository.TalkRepository;
 import com.socialuni.sdk.utils.TalkUtils;
+import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -43,7 +44,10 @@ public class TalkQueryStore {
         return this.queryTalksByIds(ids);
     }
 
-    public List<TalkDO> queryUserTalks(List<Integer> talkIds, Integer userId, UserDO mineUser) {
+    public List<TalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, UserDO mineUser) {
+        List<Integer> talkIds = queryQO.getTalkIds();
+        Integer userId = queryQO.getUserId();
+
         if (ObjectUtils.isEmpty(talkIds)) {
             talkIds = Collections.singletonList(0);
         }

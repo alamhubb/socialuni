@@ -90,7 +90,7 @@ public class SocialTalkROFactory {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialTalkRO getTalkRO(UserDO mineUser, TalkDO talkDO) {
+    public static SocialTalkRO getTalkRO(TalkDO talkDO, UserDO mineUser) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 

@@ -63,7 +63,7 @@ public class SocialTalkPostDomain {
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mienUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mienUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
-        SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(mienUser, talkDO);
+        SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mienUser);
         return socialTalkRO;
     }
 

@@ -118,4 +118,11 @@ public class SocialUserUtil {
         }
         return SocialUserUtil.get(socialUserAccountDO.getUserId());
     }
+
+    public static boolean isMine(UserDO mineUser, Integer userId) {
+        if (mineUser == null) {
+            return false;
+        }
+        return userId.equals(mineUser.getId());
+    }
 }

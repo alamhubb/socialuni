@@ -16,6 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class SocialUserTalkQueryQO {
     @NotNull(message = "入参为空异常")
-    private String userId;
+    private Integer userId;
     private List<Integer> talkIds;
 }

@@ -1,4 +1,4 @@
-package com.socialuni.sdk.domain.talk;
+package com.socialuni.sdk.entity.talk;
 
 import com.socialuni.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.model.DO.talk.TalkDO;

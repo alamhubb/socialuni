@@ -1,12 +1,9 @@
 package com.socialuni.sdk.service;
 
-import com.socialuni.sdk.domain.talk.SocialTalkDeleteDomain;
-import com.socialuni.sdk.domain.talk.SocialTalkPostDomain;
+import com.socialuni.sdk.domain.talk.*;
 import com.socialuni.sdk.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkDeleteQO;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.*;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
@@ -17,20 +14,33 @@ import java.util.List;
 @Service
 public class SocialTalkService {
     @Resource
-    private SocialTalkQueryService socialTalkQueryService;
-    @Resource
     SocialTalkPostDomain socialTalkPostDomain;
     @Resource
     SocialTalkDeleteDomain socialTalkDeleteDomain;
+    @Resource
+    SocialTalkDetailQueryDomain socialTalkDetailQueryDomain;
+    @Resource
+    SocialHomeTalkQueryDomain socialHomeTalkQueryDomain;
+    @Resource
+    SocialUserTalkQueryDomain socialUserTalkQueryDomain;
 
+    //查询非关注tab的动态列表
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<SocialTalkRO>> queryHomeTalks() {
-        return socialTalkQueryService.queryHomeTalks();
+        UserDO mineUser = SocialUserUtil.getMineUser();
+        //转换为rolist
+        List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTalks(mineUser);
+        return new ResultRO<>(socialTalkROs);
     }
 
     //查询非关注tab的动态列表
+    //查询非关注tab的动态列表
     public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryVO) {
-        return socialTalkQueryService.queryHomeTabTalks(queryVO);
+        //获取当前用户
+        UserDO mineUser = SocialUserUtil.getMineUser();
+        //转换为rolist
+        List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryVO, mineUser);
+        return new ResultRO<>(socialTalkROs);
     }
 
     public ResultRO<Void> postTalk(SocialTalkPostQO talkPostQO) {
@@ -47,5 +57,15 @@ public class SocialTalkService {
         return new ResultRO<>();
     }
 
+    public ResultRO<SocialTalkRO> queryTalkDetail(SocialTalkIdQO socialTalkIdQO) {
+        UserDO mineUser = SocialUserUtil.getMineUser();
+        SocialTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(mineUser, socialTalkIdQO);
+        return ResultRO.success(socialTalkRO);
+    }
 
+    public ResultRO<List<SocialTalkRO>> queryUserTalks(SocialUserTalkQueryQO queryQO) {
+        UserDO mineUser = SocialUserUtil.getMineUser();
+        List<SocialTalkRO> talkROS = socialUserTalkQueryDomain.queryUserTalks(queryQO, mineUser);
+        return ResultRO.success(talkROS);
+    }
 }
