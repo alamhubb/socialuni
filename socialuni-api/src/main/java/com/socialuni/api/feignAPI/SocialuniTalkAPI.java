@@ -1,9 +1,8 @@
 package com.socialuni.api.feignAPI;
 
 import com.socialuni.api.model.QO.talk.CenterHomeTabTalkQueryQO;
-import com.socialuni.api.model.QO.talk.CenterTalkDeleteQO;
+import com.socialuni.api.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.model.model.RO.ResultRO;
@@ -23,17 +22,17 @@ public interface SocialuniTalkAPI {
     ResultRO<List<CenterTalkRO>> queryHomeTalks();
 
     @PostMapping("queryTalks")
-    ResultRO<List<CenterTalkRO>> queryHomeTabTalks(@RequestBody @Valid CenterHomeTabTalkQueryQO queryVO);
+    ResultRO<List<CenterTalkRO>> queryHomeTabTalks(@RequestBody @Valid CenterHomeTabTalkQueryQO queryQO);
 
     @PostMapping("postTalk")
-    ResultRO<Void> postTalk(@RequestBody @Valid SocialTalkPostQO talkVO);
+    ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);
 
     @PostMapping("deleteTalk")
-    ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkDeleteQO talkDeleteQO);
+    ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkIdQO talkIdQO);
 
-    @PostMapping("queryTalkInfo")
-    ResultRO<CenterTalkRO> queryTalkDetail(@RequestBody @Valid SocialTalkIdQO socialTalkIdQO);
+    @PostMapping("queryTalkDetail")
+    ResultRO<CenterTalkRO> queryTalkDetail(@RequestBody @Valid CenterTalkIdQO talkIdQO);
 
     @PostMapping("queryUserTalks")
-    ResultRO<List<CenterTalkRO>> queryUserTalks(@RequestBody @Valid SocialUserTalkQueryQO queryVO);
+    ResultRO<List<CenterTalkRO>> queryUserTalks(@RequestBody @Valid SocialUserTalkQueryQO queryQO);
 }

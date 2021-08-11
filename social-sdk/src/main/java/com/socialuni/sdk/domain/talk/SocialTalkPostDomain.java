@@ -5,6 +5,7 @@ import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.domain.report.ReportDomain;
 import com.socialuni.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.exception.SocialParamsException;
+import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.factory.TalkImgDOFactory;
 import com.socialuni.sdk.manage.talk.SocialTalkCreateManage;
 import com.socialuni.sdk.model.DO.DistrictDO;
@@ -23,6 +24,7 @@ import com.socialuni.sdk.utils.DistrictStoreUtils;
 import com.socialuni.sdk.utils.TalkStore;
 import com.socialuni.sdk.utils.common.DateUtils;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -61,6 +63,7 @@ public class SocialTalkPostDomain {
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mienUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mienUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
+        SocialTalkRO socialTalkRO = SocialTalkROFactory.newHomeTalkRO(mienUser, talkDO);
     }
 
 
