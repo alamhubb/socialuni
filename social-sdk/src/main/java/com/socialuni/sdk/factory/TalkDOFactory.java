@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 public class TalkDOFactory {
     public static TalkDO newTalkDO(UserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
         TalkDO talkDO = new TalkDO(user.getId(), socialTalkPostQO.getContent());
+        //设置社交联盟唯一id
+        talkDO.setSocialuniUid(socialTalkPostQO.getSocialuniUid());
 
 //        socialTalkDO.setDevId(DevAccountUtils.getDevId());
 

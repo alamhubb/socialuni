@@ -26,6 +26,7 @@ public class TalkDO extends CommonContentBaseDO implements BaseModelDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String socialuniUid;
     //内容主体
     private String content;
 

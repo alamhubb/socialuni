@@ -58,12 +58,13 @@ public class SocialTalkPostDomain {
     @Resource
     SocialTalkCreateManage socialTalkCreateManage;
 
-    public void postTalk(UserDO mienUser, SocialTalkPostQO talkPostQO) {
+    public SocialTalkRO postTalk(UserDO mienUser, SocialTalkPostQO talkPostQO) {
         socialContentAddEntity.paramsValidate(mienUser, talkPostQO);
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mienUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mienUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
-        SocialTalkRO socialTalkRO = SocialTalkROFactory.newHomeTalkRO(mienUser, talkDO);
+        SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(mienUser, talkDO);
+        return socialTalkRO;
     }
 
 
