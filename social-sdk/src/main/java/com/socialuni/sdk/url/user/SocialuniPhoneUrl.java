@@ -1,7 +1,7 @@
 package com.socialuni.sdk.url.user;
 
 
-import com.socialuni.sdk.model.QO.phone.SocialBindWxPhoneNumQO;
+import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;

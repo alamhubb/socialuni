@@ -6,7 +6,7 @@ import com.socialuni.sdk.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.sdk.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.model.DO.user.UserDO;
-import com.socialuni.sdk.model.QO.phone.SocialBindWxPhoneNumQO;
+import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.ResultRO;
@@ -41,7 +41,7 @@ public class SocialPhoneService {
     public ResultRO<SocialMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO socialBindWxPhoneNumQO) {
         UserDO mineUser = SocialUserUtil.getMineUser();
         //微信绑定手机号方法
-        SocialMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(mineUser, socialBindWxPhoneNumQO);
+        SocialMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
 
         return new ResultRO<>(socialMineUserDetailRO);
     }

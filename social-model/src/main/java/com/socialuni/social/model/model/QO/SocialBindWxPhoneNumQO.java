@@ -1,4 +1,4 @@
-package com.socialuni.sdk.model.QO.phone;
+package com.socialuni.social.model.model.QO;
 
 import lombok.Data;
 

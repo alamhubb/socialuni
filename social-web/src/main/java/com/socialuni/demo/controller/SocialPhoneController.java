@@ -1,6 +1,6 @@
 package com.socialuni.demo.controller;
 
-import com.socialuni.sdk.model.QO.phone.SocialBindWxPhoneNumQO;
+import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.service.phone.SocialPhoneService;
 import com.socialuni.sdk.url.user.SocialuniPhoneUrl;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
