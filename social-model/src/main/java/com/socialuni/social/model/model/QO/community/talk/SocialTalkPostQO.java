@@ -12,6 +12,7 @@ public class SocialTalkPostQO implements ContentAddQO {
     private String visibleType;
     private String content;
     private String visibleGender;
+    private Integer devId;
     private String socialuniUid;
     private List<Integer> tagIds;
     /*

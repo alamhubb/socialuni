@@ -27,6 +27,10 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni</groupId>
+            <artifactId>social-entity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
             <artifactId>social-model</artifactId>
         </dependency>
 

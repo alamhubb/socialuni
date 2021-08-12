@@ -14,6 +14,7 @@
     <modules>
         <module>socialuni-api</module>
         <module>social-sdk</module>
+        <module>social-entity</module>
         <module>social-model</module>
     </modules>
 
@@ -35,22 +36,17 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-url</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-model</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
                 <artifactId>social-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-model</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-entity</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->

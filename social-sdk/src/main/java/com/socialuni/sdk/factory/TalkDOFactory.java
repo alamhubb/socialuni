@@ -14,6 +14,7 @@ public class TalkDOFactory {
         TalkDO talkDO = new TalkDO(user.getId(), socialTalkPostQO.getContent());
         //设置社交联盟唯一id
         talkDO.setSocialuniUid(socialTalkPostQO.getSocialuniUid());
+        talkDO.setDevId(socialTalkPostQO.getDevId());
 
 //        socialTalkDO.setDevId(DevAccountUtils.getDevId());
 
