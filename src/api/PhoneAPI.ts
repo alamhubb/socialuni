@@ -23,7 +23,7 @@ export default class PhoneAPI {
 
   //微信绑定手机号使用
   static bindWxPhoneNumAPI (bindWxPhoneNumQO: BindWxPhoneNumQO) {
-    return http.post<UserVO>('phone/bindPhoneNumByWx', bindWxPhoneNumQO)
+    return http.post<UserVO>('phone/bindWxPhoneNum', bindWxPhoneNumQO)
   }
 
   //微信绑定手机号使用
