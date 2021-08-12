@@ -1,7 +1,7 @@
 package com.socialuni.sdk.repository;
 
 
-import com.socialuni.sdk.model.DO.chat.UserContactDO;
+import com.socialuni.entity.model.DO.chat.UserContactDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

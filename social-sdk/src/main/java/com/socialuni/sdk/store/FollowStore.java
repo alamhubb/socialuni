@@ -1,6 +1,6 @@
 package com.socialuni.sdk.store;
 
-import com.socialuni.sdk.constant.CommonStatus;
+import com.socialuni.constant.CommonStatus;
 import com.socialuni.sdk.redis.RedisKeysConst;
 import com.socialuni.sdk.repository.FollowRepository;
 import org.springframework.cache.annotation.Cacheable;

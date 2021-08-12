@@ -1,6 +1,6 @@
 package com.socialuni.sdk.repository;
 
-import com.socialuni.sdk.model.DO.keywords.WhiteKeywordsDO;
+import com.socialuni.entity.model.DO.keywords.WhiteKeywordsDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

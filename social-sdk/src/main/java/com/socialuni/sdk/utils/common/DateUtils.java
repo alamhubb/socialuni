@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils.common;
 
 
-import com.socialuni.sdk.constant.DateTimeType;
+import com.socialuni.constant.DateTimeType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -2,7 +2,7 @@ package com.socialuni.sdk.factory.user.base;
 
 import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.sdk.dao.FollowDao;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 
 import javax.annotation.Resource;
 

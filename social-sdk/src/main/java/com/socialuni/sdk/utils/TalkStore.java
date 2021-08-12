@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
 import com.socialuni.sdk.redis.RedisKeysConst;
 import com.socialuni.sdk.redis.RedisUtil;
 import com.socialuni.sdk.repository.TalkRepository;

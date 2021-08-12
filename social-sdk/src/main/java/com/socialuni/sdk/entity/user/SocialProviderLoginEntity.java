@@ -2,7 +2,7 @@ package com.socialuni.sdk.entity.user;
 
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

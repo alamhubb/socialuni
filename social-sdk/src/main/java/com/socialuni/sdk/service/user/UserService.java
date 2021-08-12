@@ -385,8 +385,8 @@ public class UserService {
 
 package com.socialuni.common.user.sdk.service;
 
-import com.socialuni.sdk.model.DO.user.TokenDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.TokenDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.common.user.sdk.UserSdkException;
 import com.socialuni.common.user.sdk.manage.CommonUserAccountDOCreate;
 import com.socialuni.common.user.sdk.model.RO.SocialUserRO;

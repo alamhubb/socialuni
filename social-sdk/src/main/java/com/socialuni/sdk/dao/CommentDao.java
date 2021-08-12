@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao;
 
-import com.socialuni.sdk.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;

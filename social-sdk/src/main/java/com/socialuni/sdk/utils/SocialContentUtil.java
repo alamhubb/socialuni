@@ -1,7 +1,7 @@
 /*
 package com.socialuni.center.web.utils.model;
 
-import com.socialuni.sdk.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.content.SocialContentDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.sdk.repository.CommentRepository;

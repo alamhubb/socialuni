@@ -1,14 +1,14 @@
 package com.socialuni.sdk.domain.report;
 
 import com.socialuni.sdk.constant.AppConfigConst;
-import com.socialuni.sdk.constant.ContentType;
+import com.socialuni.constant.ContentType;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.base.BaseModelDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.service.content.ModelContentCheck;
 import com.socialuni.sdk.utils.SocialUserUtil;

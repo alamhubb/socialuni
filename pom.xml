@@ -16,6 +16,7 @@
         <module>social-sdk</module>
         <module>social-entity</module>
         <module>social-model</module>
+        <module>social-constant</module>
     </modules>
 
     <properties>
@@ -47,6 +48,11 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-entity</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-constant</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->

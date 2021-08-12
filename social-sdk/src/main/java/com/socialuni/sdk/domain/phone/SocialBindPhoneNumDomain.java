@@ -2,7 +2,7 @@ package com.socialuni.sdk.domain.phone;
 
 import com.socialuni.sdk.entity.user.SocialUserPhoneEntity;
 import com.socialuni.sdk.manage.phone.AuthenticationManage;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import org.springframework.stereotype.Component;
 

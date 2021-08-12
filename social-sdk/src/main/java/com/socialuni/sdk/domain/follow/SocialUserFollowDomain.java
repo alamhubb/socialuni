@@ -1,10 +1,10 @@
 package com.socialuni.sdk.domain.follow;
 
-import com.socialuni.sdk.constant.CommonStatus;
+import com.socialuni.constant.CommonStatus;
 import com.socialuni.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.manage.FollowManage;
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.sdk.model.DO.FollowDO;
+import com.socialuni.entity.model.DO.FollowDO;
 import com.socialuni.sdk.repository.FollowRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

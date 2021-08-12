@@ -1,8 +1,8 @@
 package com.socialuni.sdk.store;
 
 import com.socialuni.sdk.constant.status.ContentStatus;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.redis.RedisKeysConst;
 import com.socialuni.sdk.repository.TalkRepository;
 import com.socialuni.sdk.utils.TalkUtils;

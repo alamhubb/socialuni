@@ -2,7 +2,7 @@ package com.socialuni.sdk.service;
 
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.factory.user.base.SocialUserDetailROFactory;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.model.model.RO.ResultRO;

@@ -2,8 +2,8 @@
 package com.socialuni.sdk.entity;
 
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.sdk.model.DO.user.UserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserFansDetailDO;
+import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.SocialUserFansDetailDO;
 import com.socialuni.sdk.repository.SocialUserFansDetailRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

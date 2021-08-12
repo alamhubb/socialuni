@@ -1,10 +1,10 @@
 package com.socialuni.sdk.model;
 
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;

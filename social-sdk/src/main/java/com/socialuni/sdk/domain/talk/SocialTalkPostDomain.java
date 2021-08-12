@@ -1,5 +1,6 @@
 package com.socialuni.sdk.domain.talk;
 
+import com.socialuni.constant.DateTimeType;
 import com.socialuni.sdk.entity.content.SocialContentAddEntity;
 import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.domain.report.ReportDomain;
@@ -8,12 +9,12 @@ import com.socialuni.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.factory.TalkImgDOFactory;
 import com.socialuni.sdk.manage.talk.SocialTalkCreateManage;
-import com.socialuni.sdk.model.DO.DistrictDO;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkTagDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.DistrictDO;
+import com.socialuni.entity.model.DO.tag.TagDO;
+import com.socialuni.entity.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.entity.model.DO.talk.SocialTalkTagDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
 import com.socialuni.sdk.repository.TagRepository;
 import com.socialuni.sdk.repository.TalkImgRepository;

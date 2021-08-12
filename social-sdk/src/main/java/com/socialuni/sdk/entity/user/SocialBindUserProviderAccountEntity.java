@@ -1,7 +1,7 @@
 package com.socialuni.sdk.entity.user;
 
 import com.socialuni.sdk.manage.SocialUserAccountManage;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.model.UniUnionIdRO;
 import com.socialuni.sdk.utils.SocialUniProviderUtil;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;

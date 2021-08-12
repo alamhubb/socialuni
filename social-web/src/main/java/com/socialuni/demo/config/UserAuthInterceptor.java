@@ -5,7 +5,7 @@ import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.ErrorType;
 import com.socialuni.sdk.exception.SocialNotLoginException;
 import com.socialuni.sdk.exception.SocialSystemException;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.model.OperateLogDO;
 import com.socialuni.sdk.redis.RedisUtil;
 import com.socialuni.sdk.utils.IpUtil;

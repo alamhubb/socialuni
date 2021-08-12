@@ -1,8 +1,8 @@
 package com.socialuni.sdk.factory.user.base;
 
 import com.socialuni.sdk.factory.ListConvertUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserFansDetailDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.SocialUserFansDetailDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.SocialUserFansDetailRepository;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Component;

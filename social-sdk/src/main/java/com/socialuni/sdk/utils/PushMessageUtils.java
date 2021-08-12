@@ -1,9 +1,9 @@
 package com.socialuni.sdk.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.sdk.model.DO.NotifyDO;
+import com.socialuni.entity.model.DO.NotifyDO;
 import com.socialuni.sdk.platform.weixin.HttpResult;
-import com.socialuni.sdk.model.DO.notify.PushMessageDO;
+import com.socialuni.entity.model.DO.notify.PushMessageDO;
 import com.socialuni.sdk.model.PushMsgDTO;
 import com.socialuni.sdk.repository.PushMessageRepository;
 import com.socialuni.sdk.utils.common.JsonUtils;

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.store;
 
 import com.socialuni.sdk.factory.CommentFactory;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.service.comment.CommentAddLineTransfer;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;

@@ -3,7 +3,7 @@ package com.socialuni.sdk.domain.phone;
 import com.socialuni.sdk.constant.ProviderLoginType;
 import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.entity.user.SocialBindUserProviderAccountEntity;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;

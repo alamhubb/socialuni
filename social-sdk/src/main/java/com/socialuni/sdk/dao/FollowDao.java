@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao;
 
-import com.socialuni.sdk.constant.CommonStatus;
-import com.socialuni.sdk.model.DO.FollowDO;
+import com.socialuni.constant.CommonStatus;
+import com.socialuni.entity.model.DO.FollowDO;
 import com.socialuni.sdk.repository.FollowRepository;
 import org.springframework.stereotype.Component;
 

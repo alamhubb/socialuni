@@ -1,9 +1,9 @@
 package com.socialuni.sdk.service;
 
 import com.socialuni.sdk.constant.AppConfigConst;
-import com.socialuni.sdk.constant.CommonStatus;
+import com.socialuni.constant.CommonStatus;
 import com.socialuni.sdk.constant.ConfigValueType;
-import com.socialuni.sdk.model.DO.AppConfigDO;
+import com.socialuni.entity.model.DO.AppConfigDO;
 import com.socialuni.sdk.repository.AppConfigRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,10 @@
 package com.socialuni.sdk.domain.follow;
 
 
-import com.socialuni.sdk.constant.CommonStatus;
+import com.socialuni.constant.CommonStatus;
 import com.socialuni.sdk.factory.user.base.SocialUserFollowDetailROFactory;
-import com.socialuni.sdk.model.DO.FollowDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.FollowDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.FollowRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;

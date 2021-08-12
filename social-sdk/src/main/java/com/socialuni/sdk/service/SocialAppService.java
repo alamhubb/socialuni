@@ -2,10 +2,10 @@ package com.socialuni.sdk.service;
 
 
 import com.socialuni.sdk.constant.AppConfigConst;
-import com.socialuni.sdk.constant.StatusConst;
+import com.socialuni.constant.StatusConst;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.factory.SocialHomeSwiperROFactory;
-import com.socialuni.sdk.model.DO.HomeSwiperDO;
+import com.socialuni.entity.model.DO.HomeSwiperDO;
 import com.socialuni.sdk.repository.HomeSwiperRepository;
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.model.model.RO.ResultRO;

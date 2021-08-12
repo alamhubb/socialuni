@@ -2,7 +2,7 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.exception.SocialSystemException;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
 package com.socialuni.sdk.repository;
 
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.constant.CommonStatus;
+import com.socialuni.entity.model.DO.base.BaseModelDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.constant.CommonStatus;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

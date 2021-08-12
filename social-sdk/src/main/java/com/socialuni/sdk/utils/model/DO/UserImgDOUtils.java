@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils.model.DO;
 
-import com.socialuni.sdk.model.DO.user.UserImgDO;
+import com.socialuni.entity.model.DO.user.UserImgDO;
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.repository.UserImgRepository;
 import org.springframework.stereotype.Component;
