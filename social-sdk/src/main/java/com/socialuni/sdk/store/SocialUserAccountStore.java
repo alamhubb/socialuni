@@ -26,7 +26,7 @@ public class SocialUserAccountStore {
         if (socialUserAccountDO == null) {
             //通过openId查询试试
             String openId = uniUnionIdRO.getOpenid();
-            if (platform.equals(PlatformType.app)) {
+            if (PlatformType.app.equals(platform)) {
                 socialUserAccountDO = socialUserAccountRepository.findByProviderAndAppOpenId(provider, openId);
             } else {
                 socialUserAccountDO = socialUserAccountRepository.findByProviderAndMpOpenId(provider, openId);

@@ -16,8 +16,10 @@ public class SocialPhoneNumQO {
     @NotBlank
     @Length(min = 11, max = 11)
     private String phoneNum;
-//    private String phoneCountryCode;
+    //    private String phoneCountryCode;
     @NotBlank
     @Length(min = 4, max = 4)
     private String authCode;
+
+    private String platform;
 }

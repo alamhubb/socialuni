@@ -11,6 +11,7 @@ public class PlatformType {
     //系统
     public static final String h5 = "h5";
     public static final String app = "app";
+    @Deprecated
     public static final String android = "android";
     public static final String mp = "mp";
 
