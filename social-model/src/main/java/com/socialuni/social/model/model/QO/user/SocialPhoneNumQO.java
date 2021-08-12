@@ -20,6 +20,4 @@ public class SocialPhoneNumQO {
     @NotBlank
     @Length(min = 4, max = 4)
     private String authCode;
-
-    private String platform;
 }
