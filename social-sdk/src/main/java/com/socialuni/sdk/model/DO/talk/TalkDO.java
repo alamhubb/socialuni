@@ -13,6 +13,7 @@ import javax.persistence.*;
         @Index(columnList = "visibleType"),
         @Index(columnList = "adCode"),
         @Index(columnList = "status"),
+        @Index(columnList = "devId"),
         @Index(columnList = "createTime"),
         @Index(columnList = "updateTime"),
         @Index(columnList = "userId"),
