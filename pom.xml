@@ -12,11 +12,16 @@
     <description>qingchi_back project for Spring Boot</description>
 
     <modules>
-        <module>socialuni-api</module>
-        <module>social-sdk</module>
+        <module>social-constant</module>
         <module>social-entity</module>
         <module>social-model</module>
-        <module>social-constant</module>
+        <module>social-sdk</module>
+        <module>social-web</module>
+        <module>socialuni-api</module>
+        <module>socialuni-web</module>
+        <module>socialuni-admin-web</module>
+        <module>socialuni-utils</module>
+        <module>socialuni-entity</module>
     </modules>
 
     <properties>
@@ -32,17 +37,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-api</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>social-sdk</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>social-model</artifactId>
+                <artifactId>social-constant</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
@@ -52,7 +47,37 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>social-constant</artifactId>
+                <artifactId>social-model</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-api</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-entity</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-utils</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-web</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-admin-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
