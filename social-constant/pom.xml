@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>social-constant</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>social-constant</name>

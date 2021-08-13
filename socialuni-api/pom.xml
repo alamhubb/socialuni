@@ -5,7 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>socialuni-api</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>socialuni-api</name>
