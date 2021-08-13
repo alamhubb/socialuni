@@ -7,5 +7,3 @@
 #忽略所有.iml文件
 */*.iml
 application-local.yml
-/social-web/target/
-/socialuni-api/target/
