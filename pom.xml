@@ -37,7 +37,6 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
-        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -118,12 +117,6 @@
                 <groupId>com.github.qcloudsms</groupId>
                 <artifactId>qcloudsms</artifactId>
                 <version>${qcloudsms.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <scope>provided</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
             <dependency>
