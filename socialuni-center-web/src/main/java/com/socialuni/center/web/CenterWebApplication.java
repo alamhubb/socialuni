@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 //@EnableCaching
-@EntityScan({"com.socialuni.center"})
+@EntityScan({"com.socialuni.entity"})
 @EnableJpaRepositories({"com.socialuni.center"})
 @ComponentScan({"com.socialuni.center"})
 @EnableSocialSDK

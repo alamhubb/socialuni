@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@ComponentScan("com.socialuni.sdk")
-@EnableJpaRepositories("com.socialuni.sdk")
-@EntityScan("com.socialuni.sdk")
+@ComponentScan("com.socialuni.social.sdk")
+@EnableJpaRepositories("com.socialuni.social.sdk")
+@EntityScan("com.socialuni.social.entity")
 @EnableConfigurationProperties({
         SocialuniAliMapProperties.class,
         SocialuniCloudTencentCosProperties.class,
