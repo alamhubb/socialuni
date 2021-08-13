@@ -1,13 +1,14 @@
 package com.qingchi.social.web.controller;
 
-import com.qingchi.base.common.ResultVO;
-import com.qingchi.base.model.account.DevAccountDO;
-import com.qingchi.base.modelVO.DevUserAddVO;
-import com.qingchi.base.repository.openData.DevAccountRepository;
-import com.qingchi.base.utils.UUIDUtil;
+
+import com.socialuni.center.web.model.DO.DevAccountDO;
+import com.socialuni.center.web.repository.DevAccountRepository;
+import com.socialuni.sdk.utils.common.UUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 

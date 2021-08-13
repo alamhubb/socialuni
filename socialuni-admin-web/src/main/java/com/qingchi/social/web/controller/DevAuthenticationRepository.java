@@ -1,4 +1,4 @@
-package com.socialuni.center.web.admin;
+package com.qingchi.social.web.controller;
 
 import com.socialuni.center.web.model.DO.user.DevAuthenticationDO;
 import org.springframework.data.jpa.repository.JpaRepository;
