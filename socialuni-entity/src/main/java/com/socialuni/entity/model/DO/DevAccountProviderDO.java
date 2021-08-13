@@ -1,4 +1,4 @@
-package com.socialuni.center.web.model.DO;
+package com.socialuni.entity.model.DO;
 
 import com.socialuni.constant.ConstStatus;
 import lombok.Data;

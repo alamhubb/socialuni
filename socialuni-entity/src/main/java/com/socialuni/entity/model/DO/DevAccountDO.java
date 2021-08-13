@@ -1,8 +1,7 @@
-package com.socialuni.center.web.model.DO;
+package com.socialuni.entity.model.DO;
 
 import com.socialuni.social.sdk.constant.DevAccountType;
 import com.socialuni.social.sdk.constant.GenderType;
-import com.socialuni.constant.ConstStatus;
 import lombok.Data;
 
 import javax.persistence.*;
