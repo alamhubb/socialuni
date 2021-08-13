@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
-import com.qingchi.base.model.account.DevAccountDO;
-import com.squareup.okhttp.internal.framed.ErrorCode;
+import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.social.constant.ErrorCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -41,9 +41,9 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 //这里只查询没被封禁的
                 || user != null)
         ) {
-            if (user != null) {
-                req.setAttribute(AppConfigConst.appUserKey, user);
-            }
+//            if (user != null) {
+//                req.setAttribute(AppConfigConst.appUserKey, user);
+//            }
             return true;
         } else {
             String origin = req.getHeader("Origin");

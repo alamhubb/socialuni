@@ -5,7 +5,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.utils.common.RequestUtil;
-import com.socialuni.social.sdk.utils.common.UUIDUtil;
+import com.socialuni.social.utils.UUIDUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;

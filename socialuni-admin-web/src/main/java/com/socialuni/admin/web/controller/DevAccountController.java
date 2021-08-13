@@ -1,9 +1,9 @@
 package com.socialuni.admin.web.controller;
 
 
-import com.socialuni.center.web.model.DO.DevAccountDO;
-import com.socialuni.center.web.repository.DevAccountRepository;
-import com.socialuni.sdk.utils.common.UUIDUtil;
+import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.utils.UUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,20 +20,20 @@ public class DevAccountController {
     private DevAccountRepository devAccountRepository;
 
     @PostMapping("getUser")
-    public ResultVO<DevUserAddVO> getUser(DevAccountDO user) {
+    public ResultRO<DevUserAddVO> getUser(DevAccountDO user) {
         DevUserAddVO devUserAddVO = new DevUserAddVO(user);
         //则更新用户手机号
-        return new ResultVO<>(devUserAddVO);
+        return new ResultRO<>(devUserAddVO);
     }
 
     @PostMapping("resetSecretKey")
-    public ResultVO<String> resetSecretKey(DevAccountDO user) {
+    public ResultRO<String> resetSecretKey(DevAccountDO user) {
         String secretKey = UUIDUtil.getUUID();
         user.setSecretKey(secretKey);
         devAccountRepository.save(user);
-        ResultVO<String> resultVO = new ResultVO<>();
-        resultVO.setData(secretKey);
+        ResultRO<String> ResultRO = new ResultRO<>();
+        ResultRO.setData(secretKey);
         //则更新用户手机号
-        return resultVO;
+        return ResultRO;
     }
 }

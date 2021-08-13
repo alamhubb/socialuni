@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.platform.WxUrl;
 import com.socialuni.social.exception.UniSdkException;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.platform.WxDecode;
-import com.socialuni.social.sdk.utils.common.JsonUtils;
+import com.socialuni.social.utils.JsonUtils;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

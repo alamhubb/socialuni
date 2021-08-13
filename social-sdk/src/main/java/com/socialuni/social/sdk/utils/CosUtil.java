@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.utils.common.UUIDUtil;
+import com.socialuni.social.utils.UUIDUtil;
 
 /**
  * @author qinkaiyuan

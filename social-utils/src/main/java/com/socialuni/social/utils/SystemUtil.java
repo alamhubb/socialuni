@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.utils.common;
+package com.socialuni.social.utils;
 
 import java.util.Date;
 

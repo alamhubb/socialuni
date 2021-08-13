@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.WyCheckConst;
 import com.socialuni.entity.model.DO.AntispamDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.sdk.repository.AntispamRepository;
-import com.socialuni.social.sdk.utils.common.UUIDUtil;
+import com.socialuni.social.utils.UUIDUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Consts;
 import org.apache.http.client.HttpClient;

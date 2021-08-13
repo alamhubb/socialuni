@@ -12,7 +12,7 @@ import com.socialuni.sdk.repository.*;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.utils.ReportDetailUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.sdk.utils.common.DateUtils;
+import com.socialuni.social.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,4 +1,4 @@
-package com.socialuni.center.web.repository;
+package com.socialuni.admin.web.controller;
 
 import com.socialuni.entity.model.DevAccountDO;
 import org.springframework.cache.annotation.Cacheable;

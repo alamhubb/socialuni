@@ -41,6 +41,10 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>
+            <artifactId>socialuni-entity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
             <artifactId>socialuni-api</artifactId>
         </dependency>
         <dependency>

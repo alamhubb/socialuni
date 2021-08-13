@@ -98,6 +98,11 @@
                 <artifactId>socialuni-admin-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

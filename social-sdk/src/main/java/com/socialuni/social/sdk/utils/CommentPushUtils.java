@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
 import com.socialuni.social.sdk.platform.qq.QQConst;
 import com.socialuni.social.sdk.platform.weixin.WxConst;
-import com.socialuni.social.sdk.utils.common.DateUtils;
+import com.socialuni.social.utils.DateUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;

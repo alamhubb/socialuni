@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.platform.qq.QQPayResult;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.sdk.utils.common.RestUtil;
-import com.socialuni.social.sdk.utils.common.UUIDUtil;
+import com.socialuni.social.utils.UUIDUtil;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;

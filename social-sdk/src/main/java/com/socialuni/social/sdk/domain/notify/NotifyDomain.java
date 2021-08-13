@@ -18,7 +18,7 @@ import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.utils.*;
 import com.socialuni.social.sdk.repository.*;
-import com.socialuni.social.sdk.utils.common.JsonUtils;
+import com.socialuni.social.utils.JsonUtils;
 import com.socialuni.social.sdk.utils.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;

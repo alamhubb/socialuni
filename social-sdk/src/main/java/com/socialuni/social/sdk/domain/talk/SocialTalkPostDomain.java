@@ -23,7 +23,7 @@ import com.socialuni.social.sdk.repository.TalkTagRepository;
 import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.TalkStore;
-import com.socialuni.social.sdk.utils.common.DateUtils;
+import com.socialuni.social.utils.DateUtils;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.constant.CommonConst;
