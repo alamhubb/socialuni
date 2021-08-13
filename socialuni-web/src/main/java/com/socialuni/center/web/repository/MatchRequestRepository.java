@@ -1,7 +1,7 @@
 package com.socialuni.center.web.repository;
 
 import com.socialuni.center.web.model.DO.MatchRequestDO;
-import com.socialuni.sdk.redis.RedisKeysConst;
+import com.socialuni.social.sdk.redis.RedisKeysConst;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.jpa.repository.JpaRepository;
 

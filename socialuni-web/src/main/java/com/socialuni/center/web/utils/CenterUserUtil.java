@@ -4,9 +4,9 @@ import com.socialuni.center.web.exception.SocialUserBannedException;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.ThirdUserRepository;
-import com.socialuni.sdk.constant.status.UserStatus;
+import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.entity.model.DO.user.UserDO;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.sdk.utils.IntegerUtils;
+import com.socialuni.social.sdk.utils.IntegerUtils;
 
 /**
  * @author qinkaiyuan

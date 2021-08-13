@@ -1,8 +1,8 @@
 package com.socialuni.center.web.model.DO;
 
-import com.socialuni.sdk.utils.IpUtil;
+import com.socialuni.social.sdk.utils.IpUtil;
 import com.socialuni.entity.model.DO.user.UserDO;
-import com.socialuni.sdk.utils.RequestUtils;
+import com.socialuni.social.sdk.utils.RequestUtils;
 import lombok.Data;
 
 import javax.persistence.*;

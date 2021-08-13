@@ -1,9 +1,9 @@
 package com.socialuni.center.web.config;
 
-import com.socialuni.sdk.constant.ErrorCode;
-import com.socialuni.sdk.model.OperateLogDO;
-import com.socialuni.sdk.utils.RequestLogDOUtil;
-import com.socialuni.sdk.utils.RequestLogUtil;
+import com.socialuni.social.sdk.constant.ErrorCode;
+import com.socialuni.social.sdk.model.OperateLogDO;
+import com.socialuni.social.sdk.utils.RequestLogDOUtil;
+import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.model.model.RO.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;

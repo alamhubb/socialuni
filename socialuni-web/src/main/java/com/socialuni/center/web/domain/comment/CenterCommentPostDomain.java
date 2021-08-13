@@ -5,7 +5,7 @@ import com.socialuni.api.model.RO.talk.CenterCommentRO;
 import com.socialuni.center.web.factory.RO.talk.CenterCommentROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.sdk.domain.comment.SocialCommentPostDomain;
+import com.socialuni.social.sdk.domain.comment.SocialCommentPostDomain;
 import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;

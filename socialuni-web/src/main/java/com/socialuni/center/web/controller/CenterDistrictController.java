@@ -1,7 +1,7 @@
 package com.socialuni.center.web.controller;
 
 import com.socialuni.api.feignAPI.SocialuniDistrictAPI;
-import com.socialuni.sdk.constant.AppData;
+import com.socialuni.social.sdk.constant.AppData;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
 import org.springframework.web.bind.annotation.RestController;

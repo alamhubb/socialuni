@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.entity.model.DO.talk.TalkDO;
-import com.socialuni.sdk.utils.TalkUtils;
+import com.socialuni.social.sdk.utils.TalkUtils;
 import org.springframework.stereotype.Component;
 
 @Component

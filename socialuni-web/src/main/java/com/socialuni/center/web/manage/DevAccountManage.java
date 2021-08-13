@@ -6,7 +6,7 @@ import com.socialuni.center.web.model.DO.DevAccountProviderDO;
 import com.socialuni.center.web.repository.DevAccountProviderRepository;
 import com.socialuni.center.web.repository.DevAccountRepository;
 import com.socialuni.constant.CommonStatus;
-import com.socialuni.sdk.exception.SocialBusinessException;
+import com.socialuni.social.sdk.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,22 @@
+package com.socialuni.social.sdk.config;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@Configuration
+@ComponentScan("com.socialuni.sdk")
+@EnableJpaRepositories("com.socialuni.sdk")
+@EntityScan("com.socialuni.sdk")
+@EnableConfigurationProperties({
+        SocialuniAliMapProperties.class,
+        SocialuniCloudTencentCosProperties.class,
+        SocialuniProperties.class,
+        SocialuniProviderQQProperties.class,
+        SocialuniProviderWxProperties.class,
+        SocialuniUserProperties.class
+})
+public class SocialuniAutoConfiguration {
+}

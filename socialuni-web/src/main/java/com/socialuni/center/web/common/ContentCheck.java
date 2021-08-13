@@ -1,10 +1,10 @@
 package com.socialuni.center.web.common;
 
-import com.socialuni.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.platform.tencent.TencentCloud;
-import com.socialuni.sdk.platform.weixin.HttpResult;
-import com.socialuni.sdk.utils.WxUtil;
-import com.socialuni.sdk.service.comment.IllegalWordService;
+import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.sdk.platform.tencent.TencentCloud;
+import com.socialuni.social.sdk.platform.weixin.HttpResult;
+import com.socialuni.social.sdk.utils.WxUtil;
+import com.socialuni.social.sdk.service.comment.IllegalWordService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

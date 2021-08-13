@@ -1,10 +1,10 @@
 package com.socialuni.center.web.serive;
 
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.sdk.constant.GenderType;
-import com.socialuni.sdk.domain.tag.SoicialTagAddDomain;
+import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.sdk.domain.tag.SoicialTagAddDomain;
 import com.socialuni.entity.model.DO.user.UserDO;
-import com.socialuni.sdk.store.SocialTagStore;
+import com.socialuni.social.sdk.store.SocialTagStore;
 import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;

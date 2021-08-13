@@ -2,12 +2,12 @@ package com.socialuni.center.web.serive;
 
 
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.constant.StatusConst;
-import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.factory.SocialHomeSwiperROFactory;
+import com.socialuni.social.sdk.constant.ViolateType;
+import com.socialuni.social.sdk.factory.SocialHomeSwiperROFactory;
 import com.socialuni.entity.model.DO.HomeSwiperDO;
-import com.socialuni.sdk.repository.HomeSwiperRepository;
+import com.socialuni.social.sdk.repository.HomeSwiperRepository;
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;

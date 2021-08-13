@@ -1,7 +1,7 @@
 package com.socialuni.center.web.model.VO;
 
-import com.socialuni.sdk.constant.GenderType;
-import com.socialuni.sdk.constant.status.ContentStatus;
+import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.sdk.constant.status.ContentStatus;
 import com.socialuni.entity.model.DO.tag.TagDO;
 import com.socialuni.entity.model.DO.user.UserDO;
 import lombok.Data;

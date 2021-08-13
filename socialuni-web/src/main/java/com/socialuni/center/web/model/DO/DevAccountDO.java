@@ -1,7 +1,7 @@
 package com.socialuni.center.web.model.DO;
 
-import com.socialuni.sdk.constant.DevAccountType;
-import com.socialuni.sdk.constant.GenderType;
+import com.socialuni.social.sdk.constant.DevAccountType;
+import com.socialuni.social.sdk.constant.GenderType;
 import com.socialuni.constant.ConstStatus;
 import lombok.Data;
 

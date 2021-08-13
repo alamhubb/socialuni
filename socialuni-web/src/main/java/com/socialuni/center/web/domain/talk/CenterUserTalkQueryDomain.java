@@ -5,7 +5,7 @@ import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.sdk.domain.talk.SocialUserTalkQueryDomain;
+import com.socialuni.social.sdk.domain.talk.SocialUserTalkQueryDomain;
 import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;

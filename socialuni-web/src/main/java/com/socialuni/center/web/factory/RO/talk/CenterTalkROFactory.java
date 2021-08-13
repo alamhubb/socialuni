@@ -6,7 +6,7 @@ import com.socialuni.api.model.RO.talk.CenterCommentRO;
 import com.socialuni.api.model.RO.talk.CenterTalkImgRO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.sdk.factory.ListConvertUtil;
+import com.socialuni.social.sdk.factory.ListConvertUtil;
 import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import lombok.Data;

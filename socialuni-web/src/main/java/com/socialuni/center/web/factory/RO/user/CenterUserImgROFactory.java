@@ -3,7 +3,7 @@ package com.socialuni.center.web.factory.RO.user;
 
 import com.socialuni.api.model.RO.user.CenterUserImgRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.sdk.factory.ListConvertUtil;
+import com.socialuni.social.sdk.factory.ListConvertUtil;
 import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.UserImgRO;
 

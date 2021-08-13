@@ -1,6 +1,6 @@
 package com.socialuni.center.web;
 
-import com.socialuni.sdk.config.EnableSocialSDK;
+import com.socialuni.social.sdk.config.EnableSocialSDK;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

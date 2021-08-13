@@ -2,10 +2,10 @@ package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.ThirdUserTokenRepository;
-import com.socialuni.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.exception.SocialNullUserException;
-import com.socialuni.sdk.exception.SocialSystemException;
-import com.socialuni.sdk.utils.CommonTokenUtil;
+import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.sdk.exception.SocialNullUserException;
+import com.socialuni.social.sdk.exception.SocialSystemException;
+import com.socialuni.social.sdk.utils.CommonTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;

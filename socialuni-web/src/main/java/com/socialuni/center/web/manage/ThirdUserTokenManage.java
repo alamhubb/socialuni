@@ -2,7 +2,7 @@ package com.socialuni.center.web.manage;
 
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.ThirdUserTokenRepository;
-import com.socialuni.sdk.utils.CommonTokenUtil;
+import com.socialuni.social.sdk.utils.CommonTokenUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
