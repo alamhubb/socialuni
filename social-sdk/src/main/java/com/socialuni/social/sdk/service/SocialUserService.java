@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.factory.user.base.SocialUserDetailROFactory;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import lombok.extern.slf4j.Slf4j;

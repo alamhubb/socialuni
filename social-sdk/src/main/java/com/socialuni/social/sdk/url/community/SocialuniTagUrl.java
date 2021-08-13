@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.url.community;
 
 import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
 import com.socialuni.social.model.model.RO.community.tag.TagTypeRO;
 import org.springframework.web.bind.annotation.PostMapping;

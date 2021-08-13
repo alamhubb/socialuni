@@ -1,7 +1,8 @@
 package com.socialuni.entity.model;
 
-import com.socialuni.social.sdk.constant.DevAccountType;
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.ConstStatus;
+import com.socialuni.social.constant.DevAccountType;
+import com.socialuni.social.constant.GenderType;
 import lombok.Data;
 
 import javax.persistence.*;

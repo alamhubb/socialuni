@@ -6,7 +6,7 @@ import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.domain.talk.*;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

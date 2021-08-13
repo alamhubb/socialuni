@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.domain.report;
 import com.socialuni.social.sdk.constant.*;
 import com.socialuni.social.sdk.domain.BaseModelService;
 import com.socialuni.social.model.model.QO.ReportAddQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.sdk.constant.*;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.sdk.constant.status.ContentStatus;

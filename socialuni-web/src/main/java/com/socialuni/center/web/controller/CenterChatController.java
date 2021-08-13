@@ -2,7 +2,7 @@ package com.socialuni.center.web.controller;
 
 import com.socialuni.api.feignAPI.SocialuniChatAPI;
 import com.socialuni.social.sdk.service.SocialChatService;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;

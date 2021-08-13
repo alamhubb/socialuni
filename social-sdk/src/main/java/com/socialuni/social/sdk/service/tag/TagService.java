@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.service.tag;
 
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.constant.status.ContentStatus;
 import com.socialuni.social.sdk.exception.SocialParamsException;

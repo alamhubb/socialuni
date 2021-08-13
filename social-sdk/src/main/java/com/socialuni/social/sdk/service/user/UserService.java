@@ -22,7 +22,7 @@ import com.socialuni.web.utils.UserUtils;
 import com.socialuni.base.constants.GenderType;
 import com.qingchi.web.model.DO.user.UniUserDO;
 import com.socialuni.social.constant.CommonConst;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.repository.user.img.UserImgRepository;
 import com.socialuni.social.utils.DateUtils;
 import com.socialuni.social.utils.GenderUtil;

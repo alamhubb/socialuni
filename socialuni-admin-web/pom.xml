@@ -8,7 +8,6 @@
         <version>1.0.0</version>
         <relativePath/>
     </parent>
-    <groupId>com.socialuni</groupId>
     <artifactId>socialuni-admin-web</artifactId>
     <version>1.0.0</version>
     <name>socialuni-admin-web</name>
@@ -25,6 +24,14 @@
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>social-entity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>socialuni-entity</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

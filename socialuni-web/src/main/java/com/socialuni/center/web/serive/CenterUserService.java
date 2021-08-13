@@ -7,7 +7,7 @@ import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.factory.RO.user.CenterUserDetailROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

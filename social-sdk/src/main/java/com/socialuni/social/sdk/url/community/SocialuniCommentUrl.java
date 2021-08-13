@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.url.community;
 
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

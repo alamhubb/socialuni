@@ -13,8 +13,10 @@
 
     <modules>
         <module>social-constant</module>
+        <module>social-utils</module>
         <module>social-entity</module>
         <module>social-model</module>
+        <module>social-api-model</module>
         <module>social-sdk</module>
         <module>social-web</module>
         <module>socialuni-api</module>
@@ -38,6 +40,16 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-constant</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-api-model</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-utils</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

@@ -1,7 +1,7 @@
 package com.socialuni.api.feignAPI;
 
 import com.socialuni.social.model.model.HomeSwiperVO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

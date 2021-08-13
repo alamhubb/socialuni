@@ -7,7 +7,7 @@ import com.socialuni.entity.model.DO.AuthenticationDO;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import com.socialuni.social.sdk.utils.IntegerUtils;
+import com.socialuni.social.utils.IntegerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.store;
 
 import com.socialuni.social.sdk.constant.CommonConst;
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.status.ContentStatus;
 import com.socialuni.social.sdk.factory.SocialTagROFactory;
 import com.socialuni.social.sdk.factory.SocialTagTypeROFactory;

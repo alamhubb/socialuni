@@ -3,7 +3,7 @@ package com.socialuni.social.web.controller;
 import com.socialuni.social.sdk.service.comment.SocialCommentService;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.sdk.url.community.SocialuniCommentUrl;
 import org.springframework.web.bind.annotation.RestController;

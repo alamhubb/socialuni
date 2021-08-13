@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.exception.SocialParamsException;
 import org.apache.commons.lang.StringUtils;

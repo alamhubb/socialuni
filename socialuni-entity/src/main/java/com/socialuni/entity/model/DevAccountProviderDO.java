@@ -1,6 +1,6 @@
 package com.socialuni.entity.model;
 
-import com.socialuni.constant.ConstStatus;
+import com.socialuni.social.constant.ConstStatus;
 import lombok.Data;
 
 import javax.persistence.*;

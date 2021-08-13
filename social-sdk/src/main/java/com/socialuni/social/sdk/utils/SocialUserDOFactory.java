@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.CommonConst;
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.entity.model.DO.user.UserDO;

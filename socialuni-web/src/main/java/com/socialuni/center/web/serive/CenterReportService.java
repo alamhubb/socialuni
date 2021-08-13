@@ -4,7 +4,7 @@ import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.sdk.domain.report.SoicialReportAddDomain;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.ReportAddQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

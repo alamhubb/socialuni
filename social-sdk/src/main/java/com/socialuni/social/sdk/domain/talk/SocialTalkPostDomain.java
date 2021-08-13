@@ -27,7 +27,7 @@ import com.socialuni.social.sdk.utils.common.DateUtils;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.constant.CommonConst;
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.constant.UserType;
 import lombok.extern.slf4j.Slf4j;

@@ -3,7 +3,7 @@ package com.socialuni.sdk.manage;
 
 import com.socialuni.sdk.constant.GenderType;
 import com.socialuni.user.model.DO.UniUserDO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.qingchi.web.constant.CommonConst;
 import com.socialuni.sdk.utils.AgeUtils;
 import com.qingchi.web.constant.DateUtils;

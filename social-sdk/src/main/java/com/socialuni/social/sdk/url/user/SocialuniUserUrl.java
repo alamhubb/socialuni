@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.url.user;
 
 
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import org.springframework.web.bind.annotation.PostMapping;

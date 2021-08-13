@@ -1,6 +1,8 @@
 package com.socialuni.social.sdk.constant;
 
 
+import com.socialuni.social.constant.GenderType;
+
 /**
  * @author qinkaiyuan
  * @date 2019-09-28 10:06

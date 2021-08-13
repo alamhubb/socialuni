@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.repository.HugRepository;
 import com.socialuni.social.sdk.utils.TalkStore;
 import com.socialuni.social.sdk.utils.TalkUtils;
 import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -2,8 +2,7 @@ package com.socialuni.api.feignAPI;
 
 import com.socialuni.api.model.QO.follow.CenterFollowAddQO;
 import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
-import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

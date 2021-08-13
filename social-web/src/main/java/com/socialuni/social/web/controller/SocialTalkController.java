@@ -2,7 +2,7 @@ package com.socialuni.social.web.controller;
 
 import com.socialuni.social.sdk.service.SocialTalkService;
 import com.socialuni.social.model.model.QO.community.talk.*;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.url.community.SocialuniTalkUrl;
 import org.springframework.web.bind.annotation.RestController;

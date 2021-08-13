@@ -27,6 +27,14 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni</groupId>
+            <artifactId>social-constant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
             <artifactId>social-entity</artifactId>
         </dependency>
         <dependency>

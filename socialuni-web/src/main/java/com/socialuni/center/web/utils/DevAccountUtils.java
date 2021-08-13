@@ -5,7 +5,7 @@ import com.socialuni.center.web.model.DO.DevAccountDO;
 import com.socialuni.center.web.model.DO.DevAccountProviderDO;
 import com.socialuni.center.web.repository.DevAccountProviderRepository;
 import com.socialuni.center.web.repository.DevAccountRepository;
-import com.socialuni.social.sdk.constant.GenderType;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.constant.ConstStatus;
 import com.socialuni.social.sdk.exception.SocialBusinessException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;

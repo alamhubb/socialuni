@@ -7,7 +7,7 @@ import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.serive.CenterTalkService;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
