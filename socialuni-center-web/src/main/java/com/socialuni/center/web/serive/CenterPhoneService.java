@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class CenterSocialPhoneService {
-    @Resource
+public class CenterPhoneService {
+    /*@Resource
     private SocialBindPhoneNumDomain socialBindPhoneNumDomain;
     @Resource
     private SocailSendAuthCodeDomain socailSendAuthCodeDomain;
@@ -36,5 +36,5 @@ public class CenterSocialPhoneService {
         //生成一条对三方的手机号授权，并且返回手机号信息
         CenterMineUserDetailRO centerMineUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, AuthType.phone);
         return new ResultRO<>(centerMineUserDetailRO);
-    }
+    }*/
 }

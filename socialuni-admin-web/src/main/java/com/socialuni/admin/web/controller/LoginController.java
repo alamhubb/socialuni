@@ -1,19 +1,12 @@
-/*
 package com.socialuni.admin.web.controller;
 
-import com.qingchi.base.common.ResultRO;
-import com.qingchi.base.model.account.DevAccountDO;
-import com.qingchi.base.model.user.DevTokenDO;
-import com.qingchi.base.modelVO.DevUserAddVO;
-import com.qingchi.base.repository.openData.DevAccountRepository;
-import com.qingchi.base.repository.user.DevTokenRepository;
-import com.qingchi.base.repository.user.UserRepository;
-import com.qingchi.base.service.DevAuthCodeService;
-import com.qingchi.base.service.LoginService;
-import com.qingchi.base.service.UserService;
-import com.qingchi.base.service.create.DevAccountCreate;
-import com.qingchi.base.utils.IntegerUtils;
-import com.qingchi.base.utils.TokenUtils;
+import com.socialuni.admin.web.repository.UserRepository;
+import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.entity.model.DevTokenDO;
+import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.utils.IntegerUtils;
+import com.socialuni.social.utils.PhoneNumUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.Length;
 import org.slf4j.Logger;
@@ -28,8 +21,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("user")
+@Slf4j
 public class LoginController {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     private LoginService loginService;
     @Resource
@@ -46,7 +39,7 @@ public class LoginController {
     private DevTokenRepository devTokenRepository;
 
     @PostMapping("login")
-    public ResultRO<DevUserAddVO> userLogin(@RequestBody LoginUserVO loginVO, Long devId) {
+    public ResultRO<DevUserAddVO> phoneLogin(@RequestBody @Valid LoginUserVO loginVO, Long devId) {
         //所有平台，手机号登陆方式代码一致
         //登录的时候如果没有手机号，则手机号注册成功，自动注册一个user，用户名待填，自动生成一个昵称，密码待填，头像待上传
         //如果已经登录过，则返回那个已经注册的user，根据手机号获取user，返回登录成功
@@ -55,10 +48,7 @@ public class LoginController {
         String authCode = loginVO.getAuthCode();
         //如果存在非数字
         //1.为空 2. 包含非数字 3.不为11位 ，返回
-        if (StringUtils.isEmpty(phoneNum) || IntegerUtils.strHasNoNumber(phoneNum) || phoneNum.length() != 11) {
-            logger.error("有人跳过前端，直接访问后台，错误手机号");
-            return new ResultRO<>("请输入正确的手机号");
-        }
+        PhoneNumUtil.checkPhoneNum(phoneNum);
         //校验验证码，传null用户记录日志
         ResultRO ResultRO = devAuthCodeService.verifyAuthCode(phoneNum, authCode, null);
         if (ResultRO.hasError()) {
@@ -82,14 +72,13 @@ public class LoginController {
         return new ResultRO<>(devUserAddVO);
     }
 
-    */
-/**
+*
      * 腾讯云手机验证码相关，手机号登陆和绑定都使用这里发送验证码
      *
      * @param phoneNum
      * @return
      * @throws Exception
-     *//*
+
 
     @PostMapping("sendAuthCode")
     @ResponseBody
@@ -97,4 +86,3 @@ public class LoginController {
         return devAuthCodeService.sendAuthCodeHandle(phoneNum, null, request);
     }
 }
-*/

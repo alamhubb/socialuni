@@ -1,6 +1,6 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.utils;
 
-import org.springframework.util.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;

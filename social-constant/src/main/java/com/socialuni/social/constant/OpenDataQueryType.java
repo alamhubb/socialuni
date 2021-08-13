@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant;
+package com.socialuni.social.constant;
 
 import java.util.Arrays;
 import java.util.List;

@@ -25,5 +25,5 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDO, Intege
     Optional<DevAccountDO> findFirstByOrderByIdDesc();
 
 
-    Optional<DevAccountDO> findFirstByPhoneNumOrderByIdAsc(String phoneNum);
+    DevAccountDO findFirstByPhoneNumOrderByIdAsc(String phoneNum);
 }

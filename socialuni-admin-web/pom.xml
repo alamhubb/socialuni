@@ -20,7 +20,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-model</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>social-exception</artifactId>
@@ -58,8 +61,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

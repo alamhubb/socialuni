@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.platform;
 
 import com.socialuni.social.sdk.model.IpResult;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.utils.IpUtil;
+import com.socialuni.social.utils.IpUtil;
 import com.socialuni.social.sdk.utils.RequestUtils;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import org.springframework.beans.factory.annotation.Value;

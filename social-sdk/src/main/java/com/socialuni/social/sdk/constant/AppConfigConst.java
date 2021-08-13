@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.constant;
 
 
 import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.social.constant.OpenDataQueryType;
 import com.socialuni.social.entity.model.DO.keywords.IllegalWordDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import lombok.extern.slf4j.Slf4j;

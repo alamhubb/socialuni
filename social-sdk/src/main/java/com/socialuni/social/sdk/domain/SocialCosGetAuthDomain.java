@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 @Service
 public class SocialCosGetAuthDomain {
-    @Value("${socialuni.cloud.tencent.cos.secret-id}")
+   1
     private String secretId;
     @Value("${socialuni.cloud.tencent.cos.secret-key}")
     private String secretKey;

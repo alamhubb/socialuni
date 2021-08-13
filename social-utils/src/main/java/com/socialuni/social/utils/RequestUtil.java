@@ -1,7 +1,6 @@
-package com.socialuni.social.sdk.utils.common;
+package com.socialuni.social.utils;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -14,7 +13,6 @@ import java.util.Objects;
 /**
  * 当前线程的request工具类，从request中获取内容
  */
-@Component
 public class RequestUtil {
     //获取到当前线程绑定的请求对象
     public static HttpServletRequest getRequest() {

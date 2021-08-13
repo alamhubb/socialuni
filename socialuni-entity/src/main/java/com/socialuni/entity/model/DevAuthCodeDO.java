@@ -11,9 +11,9 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2019-02-14 22:03
  */@Entity
-@Table(name = "dev_authentication")
+@Table(name = "dev_auth_code")
 @Data
-public class DevAuthenticationDO {
+public class DevAuthCodeDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,10 +24,10 @@ public class DevAuthenticationDO {
     private Integer userId;
     private String status;
 
-    public DevAuthenticationDO() {
+    public DevAuthCodeDO() {
     }
 
-    public DevAuthenticationDO(UserDO user, String phoneNum, String authCode, String ip) {
+    public DevAuthCodeDO(UserDO user, String phoneNum, String authCode, String ip) {
         this.userId = user != null ? user.getId() : null;
         this.phoneNum = phoneNum;
         this.authCode = authCode;

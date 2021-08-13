@@ -1,12 +1,10 @@
 package com.socialuni.social.constant;
 
-import lombok.Data;
 
 /**
  * @author qinkaiyuan
  * @date 2019-02-14 22:10
  */
-@Data
 public class ErrorType {
     public static String success = "success";
     public static String info = "info";

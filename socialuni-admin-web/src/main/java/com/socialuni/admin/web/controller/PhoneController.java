@@ -1,4 +1,3 @@
-/*
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.repository.UserRepository;
@@ -25,19 +24,17 @@ public class PhoneController {
     @Resource
     private DevAuthCodeService devAuthCodeService;
 
-    */
-/**
+
+    /**
      * 腾讯云手机验证码相关，手机号登陆和绑定都使用这里发送验证码
      *
      * @param phoneNum
+     * @param request
      * @return
-     * @throws Exception
-     *//*
-
+     */
     @PostMapping("sendAuthCode")
     @ResponseBody
     public ResultRO<String> sendAuthCode(@Valid @NotBlank @Length(min = 11, max = 11) String phoneNum, HttpServletRequest request) {
         return devAuthCodeService.sendAuthCodeHandle(phoneNum, null, request);
     }
 }
-*/

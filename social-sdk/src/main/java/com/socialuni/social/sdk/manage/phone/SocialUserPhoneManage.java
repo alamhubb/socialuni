@@ -7,7 +7,7 @@ import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import com.socialuni.social.sdk.utils.PhoneNumUtil;
+import com.socialuni.social.utils.PhoneNumUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
 

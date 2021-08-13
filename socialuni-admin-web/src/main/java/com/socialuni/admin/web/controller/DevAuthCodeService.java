@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.repository.UserRepository;
-import com.socialuni.entity.model.DevAuthenticationDO;
+import com.socialuni.entity.model.DevAuthCodeDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
@@ -71,9 +71,9 @@ public class DevAuthCodeService {
 
     public ResultRO<String> verifyAuthCode(String phoneNum, String authCode, UserDO user) {
         if (!StringUtils.isEmpty(authCode) && !IntegerUtils.strHasNoNumber(authCode) && authCode.length() == 4) {
-            Optional<DevAuthenticationDO> authenticationDOOptional = this.devAuthenticationRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
+            Optional<DevAuthCodeDO> authenticationDOOptional = this.devAuthenticationRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
             if (authenticationDOOptional.isPresent()) {
-                DevAuthenticationDO authenticationDO = (DevAuthenticationDO)authenticationDOOptional.get();
+                DevAuthCodeDO authenticationDO = (DevAuthCodeDO)authenticationDOOptional.get();
                 if (!authCode.equals(authenticationDO.getAuthCode())) {
                     this.logger.debug("验证码错误");
                     throw new SocialBusinessException("验证码错误");
@@ -110,9 +110,9 @@ public class DevAuthCodeService {
             if (resultRO.hasError()) {
                 return resultRO;
             } else {
-                Optional<DevAuthenticationDO> authenticationDOOptional = this.devAuthenticationRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
+                Optional<DevAuthCodeDO> authenticationDOOptional = this.devAuthenticationRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
                 if (authenticationDOOptional.isPresent()) {
-                    DevAuthenticationDO authenticationDO = (DevAuthenticationDO)authenticationDOOptional.get();
+                    DevAuthCodeDO authenticationDO = (DevAuthCodeDO)authenticationDOOptional.get();
                     Date lastDate = authenticationDO.getCreateTime();
                     long canDate = lastDate.getTime() + 30L * (long)CommonConst.second;
                     long curDate = (new Date()).getTime();
@@ -129,7 +129,7 @@ public class DevAuthCodeService {
     private ResultRO<String> cosSendAuthCode(String phoneNum, UserDO user, String userIp) {
         String authCode = AuthCodeUtil.getAuthCode();
         System.out.println("发送验证码+：" + authCode);
-        DevAuthenticationDO authenticationDO = new DevAuthenticationDO(user, phoneNum, authCode, userIp);
+        DevAuthCodeDO authenticationDO = new DevAuthCodeDO(user, phoneNum, authCode, userIp);
         authenticationDO.setStatus("成功");
         this.devAuthenticationRepository.save(authenticationDO);
         return new ResultRO();

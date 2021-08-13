@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.utils;
 
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.utils.IntegerUtils;
