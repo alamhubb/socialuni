@@ -1,7 +1,7 @@
 #忽略所有.svn目录
-.svn/
+.svn
 #忽略所有target目录
-*/target
+target
 #忽略所有.idea目录
 .idea
 #忽略所有.iml文件
