@@ -1,13 +1,13 @@
 package com.socialuni.sdk.service.match;
 
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.constant.ChatType;
-import com.socialuni.sdk.constant.MessageType;
-import com.socialuni.sdk.constant.status.MatchType;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.message.MessageDO;
+import com.socialuni.entity.model.DO.message.MessageReceiveDO;
+import com.socialuni.entity.model.DO.chat.ChatDO;
+import com.socialuni.entity.model.DO.chat.ChatUserDO;
+import com.socialuni.constant.ChatType;
+import com.socialuni.constant.MessageType;
+import com.socialuni.constant.MatchType;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.ChatRepository;
 import com.socialuni.sdk.repository.ChatUserRepository;
 import com.socialuni.sdk.repository.MessageReceiveRepository;

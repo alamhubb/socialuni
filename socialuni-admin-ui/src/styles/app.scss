@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+}
+
+html {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  font-size: 14px;
+}
+
+#app {
+  height: 100%;
+}
+
+
+//不显示滚动条
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+//调整滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  top: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: rgba(144, 147, 153, .3);
+}
+
+a {
+  text-decoration: none
+}
+
+//focus不显示外边框
+:focus {
+  outline-width: 0;
+}
+
+//number不显示上下箭头
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

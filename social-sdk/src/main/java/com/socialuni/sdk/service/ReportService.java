@@ -2,12 +2,12 @@ package com.socialuni.sdk.service;
 
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ReportSourceType;
-import com.socialuni.sdk.constant.status.ReportStatus;
+import com.socialuni.constant.ReportStatus;
 import com.socialuni.sdk.factory.ReportFactory;
-import com.socialuni.sdk.model.DO.JusticeValueOrderDO;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.ReportDetailDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.JusticeValueOrderDO;
+import com.socialuni.entity.model.DO.ReportDO;
+import com.socialuni.entity.model.DO.ReportDetailDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.utils.ReportDetailUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;

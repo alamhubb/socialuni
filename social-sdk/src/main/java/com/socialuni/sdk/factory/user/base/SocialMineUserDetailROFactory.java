@@ -1,8 +1,8 @@
 package com.socialuni.sdk.factory.user.base;
 
 import com.socialuni.sdk.dao.FollowDao;
-import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.store.SocialUserPhoneStore;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;

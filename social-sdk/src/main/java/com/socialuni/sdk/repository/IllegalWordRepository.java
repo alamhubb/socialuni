@@ -1,6 +1,6 @@
 package com.socialuni.sdk.repository;
 
-import com.socialuni.sdk.model.DO.keywords.IllegalWordDO;
+import com.socialuni.entity.model.DO.keywords.IllegalWordDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

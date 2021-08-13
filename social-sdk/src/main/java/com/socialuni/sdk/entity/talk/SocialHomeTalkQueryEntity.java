@@ -1,8 +1,8 @@
 package com.socialuni.sdk.entity.talk;
 
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.store.SocialHomeTalkQueryStore;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import org.springframework.stereotype.Component;

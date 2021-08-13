@@ -3,7 +3,7 @@ package com.socialuni.sdk.service;
 
 import com.socialuni.sdk.domain.follow.SocialQueryUserFollowsDomain;
 import com.socialuni.sdk.domain.follow.SocialUserFollowDomain;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;

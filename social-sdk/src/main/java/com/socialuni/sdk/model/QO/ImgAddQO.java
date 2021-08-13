@@ -2,10 +2,10 @@ package com.socialuni.sdk.model.QO;
 
 
 import com.socialuni.sdk.constant.AppConfigConst;
-import com.socialuni.sdk.constant.ContentType;
+import com.socialuni.constant.ContentType;
 import com.socialuni.sdk.constant.status.ContentStatus;
-import com.socialuni.sdk.model.DO.user.UserDO;
-import com.socialuni.sdk.model.DO.user.UserImgDO;
+import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserImgDO;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

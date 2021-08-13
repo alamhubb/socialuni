@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.constant.ErrorCode;
 import com.socialuni.sdk.constant.ErrorType;
 import com.socialuni.sdk.exception.base.SocialException;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.model.OperateLogDO;
 import com.socialuni.sdk.utils.IpUtil;
 import com.socialuni.sdk.utils.RequestLogDOUtil;

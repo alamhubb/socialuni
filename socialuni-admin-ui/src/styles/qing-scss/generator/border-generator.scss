@@ -1,0 +1,97 @@
+//遍历颜色
+//遍历主题类，plain dark light
+//遍历size
+
+//border颜色  border-主题  默认1px
+
+//border-主题 bd bt bt br bl bx by b
+
+//生成padding
+.bd {
+  border: $border-width-base $border-style-base $color-border-default !important;
+}
+
+@each $colorKey, $color in $text-colors {
+  .bd-#{''+$colorKey+''} {
+    border: $border-width-base $border-style-base $color !important;
+  }
+}
+
+.bd-none {
+  border: none !important;
+}
+
+@each $directionKey, $directionValue in $direction-map {
+  .b#{$directionKey} {
+    border-#{$directionValue}: $border-width-base $border-style-base $color-border-default !important;
+  }
+
+  @each $colorKey, $color in $text-colors {
+    .b#{$directionKey}-#{''+$colorKey+''} {
+      border-#{$directionValue}: $border-width-base $border-style-base $color !important;
+    }
+
+    @each $widthKey,$width in $border-width-map {
+      .b#{$directionKey}-#{$widthKey} {
+        border-#{$directionValue}: $width $border-style-base $color-border-default !important;
+      }
+
+      .b#{$directionKey}-#{''+$colorKey+''}-#{$widthKey} {
+        border-#{$directionValue}: $width $border-style-base $color !important;
+      }
+    }
+  }
+
+  .b#{$directionKey}-none {
+    border-#{$directionValue}: none !important;
+  }
+}
+
+.bx {
+  border-left: $border-width-base $border-style-base $color-border-default !important;
+  border-right: $border-width-base $border-style-base $color-border-default !important;
+}
+
+@each $colorKey, $color in $text-colors {
+  .bx-#{''+$colorKey+''} {
+    border-left: $border-width-base $border-style-base $color !important;
+    border-right: $border-width-base $border-style-base $color !important;
+  }
+}
+
+.by {
+  border-top: $border-width-base $border-style-base $color-border-default !important;
+  border-bottom: $border-width-base $border-style-base $color-border-default !important;
+}
+
+@each $colorKey, $color in $text-colors {
+  .by-#{''+$colorKey+''} {
+    padding-top: $border-width-base $border-style-base $color !important;
+    padding-bottom: $border-width-base $border-style-base $color !important;
+  }
+}
+
+.bx-none {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.by-none {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+//为什么有横杠，因为存在sm、md这种值
+@for $index from 1 through 10 {
+  .bd-#{$index} {
+    border-width: #{$index}px !important;
+  }
+}
+
+.bd-radius{
+  border-radius: $border-radius-base;
+}
+
+.bd-dashed{
+  border-style: dashed !important;
+}

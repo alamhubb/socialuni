@@ -1,8 +1,8 @@
 package com.socialuni.sdk.entity.comment;
 
 import com.socialuni.sdk.manage.talk.TalkManage;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
 import com.socialuni.sdk.service.comment.CommentAddLineTransfer;
 import com.socialuni.sdk.store.CommentStore;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;

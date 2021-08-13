@@ -1,12 +1,12 @@
 package com.socialuni.sdk.service.chat;
 
 
-import com.socialuni.sdk.constant.ChatType;
-import com.socialuni.sdk.constant.status.ChatStatus;
+import com.socialuni.constant.ChatType;
+import com.socialuni.constant.ChatStatus;
 import com.socialuni.sdk.factory.SocialChatROFactory;
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.chat.ChatDO;
+import com.socialuni.entity.model.DO.chat.ChatUserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.ChatRepository;
 import com.socialuni.sdk.repository.ChatUserRepository;
 import com.socialuni.sdk.service.CreateSingleChatResult;

@@ -2,11 +2,11 @@ package com.socialuni.sdk.factory;
 
 import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.sdk.constant.NotifyType;
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.NotifyDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.repository.TalkImgRepository;
 import com.socialuni.sdk.repository.TalkRepository;

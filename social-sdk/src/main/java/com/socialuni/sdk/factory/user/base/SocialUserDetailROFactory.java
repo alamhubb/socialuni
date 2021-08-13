@@ -1,8 +1,8 @@
 package com.socialuni.sdk.factory.user.base;
 
 import com.socialuni.sdk.dao.FollowDao;
-import com.socialuni.sdk.model.DO.user.UserDO;
-import com.socialuni.sdk.model.DO.user.UserImgDO;
+import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserImgDO;
 import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.sdk.factory.UserImgROFactory;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;

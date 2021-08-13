@@ -1,12 +1,12 @@
 package com.socialuni.sdk.domain;
 
 import com.socialuni.sdk.exception.ResultException;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserImgDO;
+import com.socialuni.entity.model.DO.ReportDO;
+import com.socialuni.entity.model.DO.base.BaseModelDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.message.MessageDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserImgDO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.utils.TalkStore;
 import org.springframework.stereotype.Service;

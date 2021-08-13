@@ -1,6 +1,6 @@
 package com.socialuni.sdk.model;
 
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import lombok.Data;
 
 /**

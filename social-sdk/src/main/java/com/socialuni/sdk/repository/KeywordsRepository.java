@@ -1,6 +1,6 @@
 package com.socialuni.sdk.repository;
 
-import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
+import com.socialuni.entity.model.DO.keywords.KeywordsDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

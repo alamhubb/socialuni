@@ -1,19 +1,19 @@
 package com.socialuni.sdk.factory;
 
 
-import com.socialuni.sdk.constant.ChatType;
+import com.socialuni.constant.ChatType;
 import com.socialuni.sdk.constant.CommonConst;
 import com.socialuni.sdk.constant.LoadMoreType;
-import com.socialuni.sdk.constant.StatusConst;
-import com.socialuni.sdk.constant.status.ChatStatus;
-import com.socialuni.sdk.constant.status.ChatUserStatus;
-import com.socialuni.sdk.constant.status.MessageStatus;
-import com.socialuni.sdk.model.DO.FollowDO;
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.constant.StatusConst;
+import com.socialuni.constant.ChatStatus;
+import com.socialuni.constant.ChatUserStatus;
+import com.socialuni.constant.MessageStatus;
+import com.socialuni.entity.model.DO.FollowDO;
+import com.socialuni.entity.model.DO.chat.ChatDO;
+import com.socialuni.entity.model.DO.chat.ChatUserDO;
+import com.socialuni.entity.model.DO.message.MessageDO;
+import com.socialuni.entity.model.DO.message.MessageReceiveDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.ChatRepository;
 import com.socialuni.sdk.repository.FollowRepository;
 import com.socialuni.sdk.repository.MessageReceiveRepository;

@@ -2,9 +2,9 @@ package com.socialuni.sdk.domain.comment;
 
 import com.socialuni.sdk.constant.status.ContentStatus;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;

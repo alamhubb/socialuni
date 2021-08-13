@@ -1,9 +1,9 @@
 package com.socialuni.sdk.manage.phone;
 
 import com.socialuni.sdk.constant.AppConfigConst;
-import com.socialuni.sdk.constant.DateTimeType;
+import com.socialuni.constant.DateTimeType;
 import com.socialuni.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.model.DO.AuthenticationDO;
+import com.socialuni.entity.model.DO.AuthenticationDO;
 import com.socialuni.sdk.repository.AuthenticationRepository;
 import com.socialuni.sdk.repository.UserRepository;
 import com.socialuni.sdk.store.SocialUserPhoneStore;

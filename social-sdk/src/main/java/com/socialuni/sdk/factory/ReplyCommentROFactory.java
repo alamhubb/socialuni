@@ -1,8 +1,8 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.factory.user.base.SocialUserROFactory;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.community.comment.SocialReplyCommentRO;

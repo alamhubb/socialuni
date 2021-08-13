@@ -1,7 +1,7 @@
 package com.socialuni.sdk.repository;
 
 
-import com.socialuni.sdk.model.DO.HugDO;
+import com.socialuni.entity.model.DO.HugDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HugRepository extends JpaRepository<HugDO, Integer> {

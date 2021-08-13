@@ -1,7 +1,7 @@
 package com.socialuni.sdk.repository;
 
 
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.redis.RedisKeysConst;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

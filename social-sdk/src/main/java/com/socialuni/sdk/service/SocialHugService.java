@@ -2,7 +2,7 @@ package com.socialuni.sdk.service;
 
 
 import com.socialuni.sdk.domain.hug.SocialAddHugDomain;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;

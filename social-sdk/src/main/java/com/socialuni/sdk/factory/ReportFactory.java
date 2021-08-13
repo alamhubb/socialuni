@@ -1,9 +1,9 @@
 package com.socialuni.sdk.factory;
 
-import com.socialuni.sdk.constant.status.ReportStatus;
+import com.socialuni.constant.ReportStatus;
 import com.socialuni.sdk.constant.ReportSourceType;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.ReportDO;
+import com.socialuni.entity.model.DO.base.BaseModelDO;
+import com.socialuni.entity.model.DO.ReportDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.service.ReportService;
 import org.springframework.stereotype.Component;

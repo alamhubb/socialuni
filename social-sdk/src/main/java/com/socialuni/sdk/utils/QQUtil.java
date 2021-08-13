@@ -1,9 +1,9 @@
 package com.socialuni.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.sdk.constant.DateTimeType;
+import com.socialuni.constant.DateTimeType;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.DO.NotifyDO;
+import com.socialuni.entity.model.DO.NotifyDO;
 import com.socialuni.sdk.model.PushMsgDTO;
 import com.socialuni.sdk.platform.PushMsgErrCode;
 import com.socialuni.sdk.platform.WxErrCode;

@@ -6,7 +6,7 @@ import com.socialuni.sdk.entity.user.SocialUserPhoneEntity;
 import com.socialuni.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.manage.SocialUserAccountManage;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.model.UniUnionIdRO;
 import com.socialuni.sdk.platform.WxDecode;

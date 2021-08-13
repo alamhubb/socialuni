@@ -1,16 +1,16 @@
 package com.socialuni.sdk.service;
 
 
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.constant.ContentType;
+import com.socialuni.entity.model.DO.message.MessageDO;
+import com.socialuni.constant.ContentType;
 import com.socialuni.sdk.exception.ResultException;
 import com.socialuni.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.base.BaseModelParentDO;
-import com.socialuni.sdk.model.DO.comment.CommentDO;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserImgDO;
+import com.socialuni.entity.model.DO.ReportDO;
+import com.socialuni.entity.model.DO.base.BaseModelDO;
+import com.socialuni.entity.model.DO.base.BaseModelParentDO;
+import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserImgDO;
 import com.socialuni.sdk.repository.MessageRepository;
 import com.socialuni.sdk.repository.UserImgRepository;
 import com.socialuni.sdk.utils.CommentUtils;

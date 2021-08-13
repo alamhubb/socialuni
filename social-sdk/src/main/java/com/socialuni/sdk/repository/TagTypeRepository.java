@@ -1,7 +1,7 @@
 package com.socialuni.sdk.repository;
 
 
-import com.socialuni.sdk.model.DO.tag.TagTypeDO;
+import com.socialuni.entity.model.DO.tag.TagTypeDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

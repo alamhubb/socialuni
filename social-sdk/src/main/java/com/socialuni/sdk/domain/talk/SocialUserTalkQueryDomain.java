@@ -2,8 +2,8 @@ package com.socialuni.sdk.domain.talk;
 
 import com.socialuni.sdk.factory.ListConvertUtil;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
-import com.socialuni.sdk.model.DO.talk.TalkDO;
-import com.socialuni.sdk.model.DO.user.UserDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.user.UserDO;
 import com.socialuni.sdk.store.TalkQueryStore;
 import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;

@@ -2,8 +2,8 @@ package com.socialuni.sdk.platform.wangyi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.sdk.constant.WyCheckConst;
-import com.socialuni.sdk.model.DO.AntispamDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.entity.model.DO.AntispamDO;
+import com.socialuni.entity.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.repository.AntispamRepository;
 import com.socialuni.sdk.utils.common.UUIDUtil;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -78,7 +78,7 @@ public class WangYiUtil {
                         antispamDO.setActionName(WyCheckConst.actionMap.get(action));
 
                         //是否违规
-                        if (antispamDO.hasViolate()) {
+                        /*if (antispamDO.hasViolate()) {
                             List<String> labels = new ArrayList<>();
                             List<String> labelNames = new ArrayList<>();
                             List<String> hints = new ArrayList<>();
@@ -112,7 +112,7 @@ public class WangYiUtil {
 
                             List<String> causeList = Arrays.asList(antispamDO.getLabelNames(), antispamDO.getSubLabelNames(), antispamDO.getHints());
                             antispamDO.setCause(Arrays.toString(causeList.toArray()));
-                        }
+                        }*/
                     }
                 }
             }

@@ -1,8 +1,8 @@
 package com.socialuni.sdk.service;
 
-import com.socialuni.sdk.constant.status.ReportStatus;
-import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.constant.ReportStatus;
+import com.socialuni.entity.model.DO.keywords.KeywordsDO;
+import com.socialuni.entity.model.DO.keywords.KeywordsTriggerDetailDO;
 import org.springframework.stereotype.Service;
 
 /**

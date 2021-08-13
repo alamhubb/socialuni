@@ -1,6 +1,6 @@
 package com.socialuni.sdk.redis;
 
-import com.socialuni.sdk.model.DO.talk.TalkDO;
+import com.socialuni.entity.model.DO.talk.TalkDO;
 import com.socialuni.sdk.repository.TalkRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
