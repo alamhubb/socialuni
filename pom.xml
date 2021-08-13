@@ -41,7 +41,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-constant</artifactId>
@@ -79,27 +78,12 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>social-web</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-api</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-utils</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-admin-web</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-center-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
