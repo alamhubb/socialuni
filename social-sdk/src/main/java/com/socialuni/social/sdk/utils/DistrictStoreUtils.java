@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.entity.model.DO.DistrictDO;
+import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.sdk.redis.DistrictRedis;
 import org.springframework.stereotype.Component;
 

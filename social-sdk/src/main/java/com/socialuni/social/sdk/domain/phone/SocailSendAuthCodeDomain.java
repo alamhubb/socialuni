@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.exception.SocialBusinessException;
 import com.socialuni.social.sdk.exception.SocialParamsException;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.entity.model.DO.AuthenticationDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;

@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.manage;
 
 import com.socialuni.social.sdk.constant.GenderType;
 import com.socialuni.social.sdk.constant.status.ContentStatus;
-import com.socialuni.entity.model.DO.tag.TagDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.TagRepository;
 import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
 import org.springframework.stereotype.Component;

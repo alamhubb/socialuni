@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.manage;
 
-import com.socialuni.entity.model.DO.user.SocialUserFansDetailDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserFansDetailDO;
 import com.socialuni.social.sdk.repository.SocialUserFansDetailRepository;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 

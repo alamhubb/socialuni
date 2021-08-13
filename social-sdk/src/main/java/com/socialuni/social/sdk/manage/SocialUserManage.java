@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.manage;
 
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.utils.SocialUserDOFactory;
 import org.springframework.stereotype.Service;

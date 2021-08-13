@@ -6,7 +6,7 @@ import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.sdk.constant.ErrorCode;
 import com.socialuni.social.sdk.constant.ErrorType;
 import com.socialuni.social.sdk.exception.base.SocialException;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.OperateLogDO;
 import com.socialuni.social.sdk.utils.IpUtil;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;

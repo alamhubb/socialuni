@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.repository;
 
-import com.socialuni.entity.model.DO.AppConfigDO;
+import com.socialuni.social.entity.model.DO.AppConfigDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

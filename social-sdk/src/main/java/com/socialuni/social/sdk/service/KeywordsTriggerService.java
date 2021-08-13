@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.service;
 
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.socialuni.constant.CommonStatus;
+import com.socialuni.social.entity.model.DO.keywords.*;
 import com.socialuni.social.sdk.constant.CustomWordsRuleType;
-import com.socialuni.entity.model.DO.base.BaseModelDO;
-import com.socialuni.entity.model.DO.keywords.*;
+import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.sdk.repository.BlackKeywordsRepository;
 import com.socialuni.social.sdk.repository.CustomKeywordsRepository;
 import com.socialuni.social.sdk.repository.WhiteKeywordsRepository;

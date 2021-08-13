@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.repository;
 
-import com.socialuni.entity.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserPhoneRepository extends JpaRepository<SocialUserPhoneDO, Integer> {

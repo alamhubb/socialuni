@@ -4,7 +4,7 @@ import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserImgRO;
 import com.socialuni.social.sdk.factory.user.base.SocialUserDetailROFactory;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import com.socialuni.social.model.model.RO.user.UserImgRO;
 import org.springframework.stereotype.Component;

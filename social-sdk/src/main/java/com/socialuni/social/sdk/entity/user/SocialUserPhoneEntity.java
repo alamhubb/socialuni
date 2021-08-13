@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.entity.user;
 
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.UserRepository;
 import org.springframework.stereotype.Component;
 

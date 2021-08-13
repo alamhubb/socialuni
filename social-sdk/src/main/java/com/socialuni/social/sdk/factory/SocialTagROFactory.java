@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.factory;
 
-import com.socialuni.entity.model.DO.tag.TagDO;
+import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
 import org.apache.commons.lang.StringUtils;
 

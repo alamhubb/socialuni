@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.constant.ErrorType;
 import com.socialuni.social.sdk.exception.SocialNotLoginException;
 import com.socialuni.center.web.exception.SocialNullDevAccountException;
 import com.socialuni.social.sdk.exception.SocialSystemException;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.OperateLogDO;
 import com.socialuni.social.sdk.redis.RedisUtil;
 import com.socialuni.social.sdk.utils.IpUtil;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.repository;
 
 
-import com.socialuni.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserAccountRepository extends JpaRepository<SocialUserAccountDO, Integer> {

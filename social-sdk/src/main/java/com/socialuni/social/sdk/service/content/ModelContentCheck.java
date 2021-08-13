@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.exception.SocialBusinessException;
 import com.socialuni.social.sdk.exception.SocialParamsException;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.service.comment.IllegalWordService;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;

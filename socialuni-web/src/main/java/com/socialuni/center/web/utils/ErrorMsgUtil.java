@@ -2,7 +2,7 @@ package com.socialuni.center.web.utils;
 
 
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.common.DateUtils;
 
 import java.text.MessageFormat;

@@ -1,7 +1,7 @@
 package com.socialuni.center.web.model.DO.user;
 
 import com.socialuni.constant.StatusConst;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 
 import javax.persistence.*;

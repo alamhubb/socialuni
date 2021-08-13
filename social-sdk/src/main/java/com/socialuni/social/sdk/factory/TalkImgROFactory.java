@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.factory;
 
-import com.socialuni.entity.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkImgRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;

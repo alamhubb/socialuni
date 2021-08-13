@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
 import com.socialuni.social.sdk.exception.SocialSystemException;
 import com.socialuni.entity.model.DO.NotifyDO;
-import com.socialuni.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.platform.WxErrCode;
 import com.socialuni.social.sdk.platform.qq.QQPayResult;

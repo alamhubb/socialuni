@@ -2,7 +2,7 @@ package com.socialuni.center.web.model.VO;
 
 import com.socialuni.center.web.model.DO.config.FrontErrorLogDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 
 import java.util.Date;

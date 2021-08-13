@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.store;
 
 import com.socialuni.social.sdk.constant.ProviderLoginType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
-import com.socialuni.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;

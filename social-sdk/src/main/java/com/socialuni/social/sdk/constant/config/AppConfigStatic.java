@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.constant.config;
 
 
-import com.socialuni.entity.model.DO.keywords.IllegalWordDO;
-import com.socialuni.entity.model.DO.keywords.KeywordsDO;
+import com.socialuni.social.entity.model.DO.keywords.IllegalWordDO;
+import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.constant.GenderType;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 
 public class SocialUserDOFactory {

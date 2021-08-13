@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.domain.hug;
 
-import com.socialuni.entity.model.DO.HugDO;
-import com.socialuni.entity.model.DO.talk.TalkDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.HugDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.HugRepository;
 import com.socialuni.social.sdk.utils.TalkStore;
 import com.socialuni.social.sdk.utils.TalkUtils;

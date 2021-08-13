@@ -1,8 +1,8 @@
 package com.socialuni.center.web.model.RO.match;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.entity.model.DO.user.UserDO;
-import com.socialuni.entity.model.DO.user.UserImgDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserImgDO;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
 import com.socialuni.social.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.social.model.model.RO.app.SocialDistrictRO;

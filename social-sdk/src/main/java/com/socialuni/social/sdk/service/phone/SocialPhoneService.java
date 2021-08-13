@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;

@@ -7,7 +7,7 @@ import com.socialuni.api.model.RO.talk.CenterCommentRO;
 import com.socialuni.api.model.RO.talk.CenterReplyCommentRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.sdk.factory.ListConvertUtil;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

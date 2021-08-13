@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.factory;
 
 
-import com.socialuni.entity.model.DO.user.UserImgDO;
+import com.socialuni.social.entity.model.DO.user.UserImgDO;
 import com.socialuni.social.model.model.RO.user.UserImgRO;
 
 import java.util.List;

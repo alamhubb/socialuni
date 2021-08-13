@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.service;
 
 import com.socialuni.social.sdk.domain.report.SoicialReportAddDomain;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.ReportAddQO;
 import com.socialuni.social.model.model.RO.ResultRO;

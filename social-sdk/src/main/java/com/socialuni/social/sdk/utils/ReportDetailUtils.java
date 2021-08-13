@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.entity.model.DO.ReportDetailDO;
+import com.socialuni.social.entity.model.DO.ReportDetailDO;
 import com.socialuni.social.sdk.repository.ReportDetailRepository;
 import org.springframework.stereotype.Component;
 

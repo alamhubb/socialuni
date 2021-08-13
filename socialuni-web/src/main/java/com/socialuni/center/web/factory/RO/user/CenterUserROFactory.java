@@ -2,7 +2,7 @@ package com.socialuni.center.web.factory.RO.user;
 
 import com.socialuni.api.model.RO.user.CenterUserRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 
 public class CenterUserROFactory {

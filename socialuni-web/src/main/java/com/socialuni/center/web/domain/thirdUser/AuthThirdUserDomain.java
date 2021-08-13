@@ -5,7 +5,7 @@ import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

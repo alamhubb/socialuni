@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.repository;
 
-import com.socialuni.entity.model.DO.ReportDO;
+import com.socialuni.social.entity.model.DO.ReportDO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

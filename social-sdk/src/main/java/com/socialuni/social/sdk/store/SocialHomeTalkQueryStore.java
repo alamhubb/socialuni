@@ -4,8 +4,8 @@ import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQuery
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.constant.GenderType;
 import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.entity.model.DO.talk.TalkDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.utils.TalkStore;
 import lombok.extern.slf4j.Slf4j;

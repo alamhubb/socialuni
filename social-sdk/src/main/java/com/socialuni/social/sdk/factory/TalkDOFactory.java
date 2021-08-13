@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.factory;
 
-import com.socialuni.entity.model.DO.user.UserDO;
-import com.socialuni.entity.model.DO.DistrictDO;
-import com.socialuni.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.DistrictDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.platform.AliAPI;

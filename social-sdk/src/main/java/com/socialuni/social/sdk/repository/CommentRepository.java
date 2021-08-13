@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.repository;
 
-import com.socialuni.entity.model.DO.base.BaseModelDO;
-import com.socialuni.entity.model.DO.comment.CommentDO;
+import com.socialuni.social.entity.model.DO.base.BaseModelDO;
+import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.constant.CommonStatus;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

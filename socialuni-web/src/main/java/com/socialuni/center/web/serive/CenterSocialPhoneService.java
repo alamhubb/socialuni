@@ -7,7 +7,7 @@ import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindPhoneNumDomain;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.ResultRO;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;

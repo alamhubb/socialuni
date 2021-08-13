@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.factory;
 
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.sdk.factory.user.base.SocialContentUserROFactory;
-import com.socialuni.entity.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.entity.model.DO.talk.TalkDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.platform.AliAPI;
 import com.socialuni.social.sdk.repository.CommentRepository;

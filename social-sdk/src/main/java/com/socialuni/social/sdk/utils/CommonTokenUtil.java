@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.sdk.exception.SocialBusinessException;
 import com.socialuni.social.sdk.exception.SocialParamsException;
-import com.socialuni.entity.model.DO.user.TokenDO;
+import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.utils.common.RequestUtil;
 import com.socialuni.social.sdk.utils.common.UUIDUtil;

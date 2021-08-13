@@ -2,7 +2,7 @@ package com.socialuni.center.web.utils.model;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
 
 /**

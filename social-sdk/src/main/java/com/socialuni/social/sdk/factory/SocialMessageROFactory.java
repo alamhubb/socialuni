@@ -3,9 +3,9 @@ package com.socialuni.social.sdk.factory;
 
 import com.socialuni.constant.MessageStatus;
 import com.socialuni.social.sdk.factory.user.base.SocialUserROFactory;
-import com.socialuni.entity.model.DO.message.MessageDO;
-import com.socialuni.entity.model.DO.message.MessageReceiveDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.message.MessageDO;
+import com.socialuni.social.entity.model.DO.message.MessageReceiveDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.message.message.SocialMessageRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserRO;

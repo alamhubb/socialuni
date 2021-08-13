@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.service.comment;
 
 import com.socialuni.social.sdk.domain.comment.SocialCommentDeleteDomain;
 import com.socialuni.social.sdk.domain.comment.SocialCommentPostDomain;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;

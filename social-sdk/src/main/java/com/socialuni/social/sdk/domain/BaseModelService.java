@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.domain;
 
 import com.socialuni.social.sdk.exception.ResultException;
-import com.socialuni.entity.model.DO.ReportDO;
-import com.socialuni.entity.model.DO.base.BaseModelDO;
-import com.socialuni.entity.model.DO.comment.CommentDO;
-import com.socialuni.entity.model.DO.message.MessageDO;
-import com.socialuni.entity.model.DO.talk.TalkDO;
-import com.socialuni.entity.model.DO.user.UserImgDO;
+import com.socialuni.social.entity.model.DO.ReportDO;
+import com.socialuni.social.entity.model.DO.base.BaseModelDO;
+import com.socialuni.social.entity.model.DO.comment.CommentDO;
+import com.socialuni.social.entity.model.DO.message.MessageDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.entity.model.DO.user.UserImgDO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.utils.TalkStore;

@@ -4,7 +4,7 @@ import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.factory.SocialUnreadNotifyVOFactory;
 import com.socialuni.entity.model.DO.NotifyDO;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.NotifyRepository;
 import org.springframework.stereotype.Component;
 

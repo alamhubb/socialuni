@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.redis;
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.constant.CommonStatus;
 import com.socialuni.social.sdk.factory.SocialDistrictROFactory;
-import com.socialuni.entity.model.DO.DistrictDO;
+import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.sdk.repository.DistrictRepository;
 import org.apache.commons.lang.StringUtils;

@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.constant.ProviderLoginType;
 import com.socialuni.social.sdk.domain.login.SocialProviderLoginDomain;
 import com.socialuni.social.sdk.exception.SocialParamsException;
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;

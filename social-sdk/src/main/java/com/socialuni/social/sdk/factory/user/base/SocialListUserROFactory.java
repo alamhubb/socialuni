@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.factory.user.base;
 
-import com.socialuni.entity.model.DO.user.UserDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.base.SocialListUserRO;
 
 public class SocialListUserROFactory {
