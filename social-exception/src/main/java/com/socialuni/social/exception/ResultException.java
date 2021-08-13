@@ -1,6 +1,6 @@
-package com.socialuni.social.sdk.exception;
+package com.socialuni.social.exception;
 
-import com.socialuni.social.sdk.constant.ErrorCode;
+import com.socialuni.social.constant.ErrorCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

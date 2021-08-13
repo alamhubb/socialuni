@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.domain.talk;
 
 import com.socialuni.social.sdk.constant.status.ContentStatus;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.factory.SocialTalkROFactory;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;

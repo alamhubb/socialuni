@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.exception.base;
+package com.socialuni.social.exception.base;
 
 import lombok.Getter;
 

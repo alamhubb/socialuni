@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.constant.DateTimeType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
-import com.socialuni.social.sdk.exception.SocialSystemException;
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.model.PushMsgDTO;

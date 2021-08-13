@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.entity.talk;
 
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.store.SocialHomeTalkQueryStore;

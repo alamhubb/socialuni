@@ -1,6 +1,7 @@
-package com.socialuni.social.sdk.exception.base;
+package com.socialuni.social.exception.base;
 
-import com.socialuni.social.sdk.constant.ErrorType;
+
+import com.socialuni.social.constant.ErrorType;
 
 //告警的级别错误，知晓就行，无法解决，要警惕
 public abstract class SocialWarnException extends SocialException {

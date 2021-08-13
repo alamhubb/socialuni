@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import org.springframework.stereotype.Component;

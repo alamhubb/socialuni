@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.entity.user;
 
-import com.socialuni.social.sdk.exception.UniSdkException;
+import com.socialuni.social.exception.UniSdkException;
 import com.socialuni.social.sdk.manage.SocialUserAccountManage;
 import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.manage.SocialUserManage;

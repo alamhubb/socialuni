@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.sdk.constant.ProviderLoginType;
-import com.socialuni.social.sdk.exception.SocialNullUserException;
+import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;

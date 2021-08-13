@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.service.comment;
 
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
-import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.entity.model.DO.keywords.IllegalWordDO;
 import com.socialuni.social.sdk.repository.IllegalWordRepository;
 import org.apache.commons.lang.StringUtils;

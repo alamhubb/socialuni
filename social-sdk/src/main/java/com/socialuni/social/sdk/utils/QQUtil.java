@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.constant.DateTimeType;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.entity.model.DO.NotifyDO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.platform.PushMsgErrCode;

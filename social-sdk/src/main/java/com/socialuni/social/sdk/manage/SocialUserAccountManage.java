@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.manage;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
-import com.socialuni.social.sdk.exception.UniSdkException;
+import com.socialuni.social.exception.UniSdkException;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;

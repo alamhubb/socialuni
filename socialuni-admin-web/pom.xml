@@ -23,7 +23,15 @@
 
         <dependency>
             <groupId>com.socialuni</groupId>
+            <artifactId>social-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
             <artifactId>social-entity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-api-model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>

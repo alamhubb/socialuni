@@ -1,6 +1,7 @@
-package com.socialuni.social.sdk.exception.base;
+package com.socialuni.social.exception.base;
 
-import com.socialuni.social.sdk.constant.ErrorType;
+
+import com.socialuni.social.constant.ErrorType;
 
 //正常业务错误，可以预见的
 public abstract class SocialInfoException extends SocialException {

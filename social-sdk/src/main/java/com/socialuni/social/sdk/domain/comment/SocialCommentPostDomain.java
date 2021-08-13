@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.status.ContentStatus;
 import com.socialuni.social.sdk.domain.notify.NotifyDomain;
 import com.socialuni.social.sdk.domain.report.ReportDomain;
 import com.socialuni.social.sdk.entity.comment.SocialPostCommentEntity;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.factory.SocialCommentROFactory;
 import com.socialuni.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;

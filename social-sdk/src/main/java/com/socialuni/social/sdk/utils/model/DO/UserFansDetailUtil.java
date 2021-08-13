@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils.model.DO;
 
-import com.socialuni.social.sdk.exception.SocialNullUserException;
+import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.entity.model.DO.user.SocialUserFansDetailDO;
 import com.socialuni.social.sdk.repository.SocialUserFansDetailRepository;
 import org.springframework.stereotype.Component;

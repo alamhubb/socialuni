@@ -1,6 +1,6 @@
 package com.socialuni.center.web.common;
 
-import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.platform.tencent.TencentCloud;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.utils.WxUtil;

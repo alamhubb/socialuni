@@ -2,12 +2,12 @@ package com.socialuni.center.web.config;
 
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.social.sdk.constant.ErrorCode;
+import com.socialuni.social.constant.ErrorCode;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.constant.ErrorType;
-import com.socialuni.social.sdk.exception.SocialNotLoginException;
+import com.socialuni.social.constant.ErrorType;
+import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.center.web.exception.SocialNullDevAccountException;
-import com.socialuni.social.sdk.exception.SocialSystemException;
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.OperateLogDO;
 import com.socialuni.social.sdk.redis.RedisUtil;

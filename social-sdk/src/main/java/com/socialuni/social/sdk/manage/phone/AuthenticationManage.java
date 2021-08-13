@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.manage.phone;
 
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.constant.DateTimeType;
-import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.entity.model.DO.AuthenticationDO;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;

@@ -3,8 +3,8 @@ package com.socialuni.social.sdk.service;
 
 import com.socialuni.social.entity.model.DO.message.MessageDO;
 import com.socialuni.constant.ContentType;
-import com.socialuni.social.sdk.exception.ResultException;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.ResultException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.ReportDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelParentDO;

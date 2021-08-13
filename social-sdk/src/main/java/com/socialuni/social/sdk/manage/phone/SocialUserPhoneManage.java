@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.manage.phone;
 
 import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.sdk.exception.SocialBusinessException;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;

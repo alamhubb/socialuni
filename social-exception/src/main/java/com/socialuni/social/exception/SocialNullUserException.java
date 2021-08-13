@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.exception;
+package com.socialuni.social.exception;
 
 public class SocialNullUserException extends SocialParamsException {
     public SocialNullUserException() {

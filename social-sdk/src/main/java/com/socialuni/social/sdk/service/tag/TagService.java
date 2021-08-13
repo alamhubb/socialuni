@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.service.tag;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.constant.status.ContentStatus;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.tag.TagTypeDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;

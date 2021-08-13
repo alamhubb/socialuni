@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.sdk.entity.talk.SocialHomeTalkQueryEntity;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.factory.SocialTalkROFactory;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;

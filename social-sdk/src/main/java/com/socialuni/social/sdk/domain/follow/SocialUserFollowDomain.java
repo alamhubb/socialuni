@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.domain.follow;
 
 import com.socialuni.constant.CommonStatus;
-import com.socialuni.social.sdk.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.manage.FollowManage;
 import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.entity.model.DO.FollowDO;

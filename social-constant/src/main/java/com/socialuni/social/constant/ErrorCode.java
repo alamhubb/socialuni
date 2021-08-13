@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant;
+package com.socialuni.social.constant;
 
 
 public class ErrorCode {

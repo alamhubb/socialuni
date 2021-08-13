@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.domain.phone;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.sdk.manage.SocialUserAccountManage;
 import com.socialuni.social.entity.model.DO.user.UserDO;

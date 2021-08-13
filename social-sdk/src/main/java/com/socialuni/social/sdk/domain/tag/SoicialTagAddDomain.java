@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.domain.tag;
 
-import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.factory.SocialTagROFactory;
 import com.socialuni.social.sdk.manage.SocialTagManage;
 import com.socialuni.social.entity.model.DO.tag.TagDO;

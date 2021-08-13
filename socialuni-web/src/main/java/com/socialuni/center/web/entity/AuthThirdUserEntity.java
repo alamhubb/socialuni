@@ -10,7 +10,7 @@ import com.socialuni.center.web.model.DO.DevAccountDO;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;

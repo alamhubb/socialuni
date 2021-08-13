@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.exception;
+package com.socialuni.social.exception;
 
-import com.socialuni.social.sdk.constant.ErrorCode;
-import com.socialuni.social.sdk.exception.base.SocialWarnException;
+import com.socialuni.social.constant.ErrorCode;
+import com.socialuni.social.exception.base.SocialWarnException;
 
 //逻辑可能有问题，或者被突破，预见了但不应该
 public class SocialParamsException extends SocialWarnException {
