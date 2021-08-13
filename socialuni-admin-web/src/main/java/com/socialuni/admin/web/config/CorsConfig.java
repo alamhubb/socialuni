@@ -1,22 +1,13 @@
 package com.socialuni.admin.web.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
-    @Resource
-    private UserControllerArgumentResolver userControllerArgumentResolver;
-
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(userControllerArgumentResolver);
-    }
 
     @Resource
     private UserAuthInterceptor userAuthInterceptor;

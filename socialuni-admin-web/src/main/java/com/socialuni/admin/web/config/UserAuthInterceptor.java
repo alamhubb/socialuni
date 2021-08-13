@@ -31,7 +31,8 @@ public class UserAuthInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object o) {
-        DevAccountDO user = devaccount.getUserByToken();
+        DevAccountDO user = new DevAccountDO();
+//        DevAccountDO user = devaccount.getUserByToken();
 
         String uri = req.getRequestURI();
 
