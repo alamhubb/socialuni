@@ -1,7 +1,7 @@
 package com.socialuni.social.entity.model.DO.chat;
 
-import com.socialuni.constant.ChatType;
-import com.socialuni.constant.ChatUserStatus;
+import com.socialuni.social.constant.ChatType;
+import com.socialuni.social.constant.ChatUserStatus;
 import lombok.Data;
 
 import javax.persistence.*;

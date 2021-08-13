@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.store;
 
-import com.socialuni.constant.CommonStatus;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package com.socialuni.center.web.manage;
 import com.socialuni.center.web.model.DO.ThirdUserAuthDO;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
 import com.socialuni.center.web.repository.ThirdUserAuthRepository;
-import com.socialuni.constant.CommonStatus;
+import com.socialuni.social.constant.CommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

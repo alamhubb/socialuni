@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.manage;
 
-import com.socialuni.constant.DateTimeType;
+import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.utils.CommonTokenUtil;

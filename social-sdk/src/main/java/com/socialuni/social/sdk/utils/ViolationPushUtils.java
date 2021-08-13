@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
-import com.socialuni.entity.model.DO.NotifyDO;
+import com.socialuni.social.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.ReportDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.constant.ErrorMsg;
+import com.socialuni.social.sdk.constant.platform.ProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;

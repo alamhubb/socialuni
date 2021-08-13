@@ -1,7 +1,7 @@
 package com.socialuni.social.entity.model.DO.keywords;
 
 import com.github.promeg.pinyinhelper.Pinyin;
-import com.socialuni.constant.CommonStatus;
+import com.socialuni.social.constant.CommonStatus;
 import lombok.Data;
 
 import javax.persistence.*;

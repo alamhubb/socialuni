@@ -1,15 +1,15 @@
 package com.socialuni.social.sdk.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.sdk.factory.SocialChatROFactory;
-import com.socialuni.social.entity.model.DO.message.MessageDO;
-import com.socialuni.social.entity.model.DO.message.MessageReceiveDO;
+import com.socialuni.social.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.chat.ChatDO;
 import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
-import com.socialuni.entity.model.DO.NotifyDO;
-import com.socialuni.social.sdk.constant.NotifyType;
+import com.socialuni.social.entity.model.DO.message.MessageDO;
+import com.socialuni.social.entity.model.DO.message.MessageReceiveDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.message.chat.ChatRO;
+import com.socialuni.social.sdk.constant.NotifyType;
+import com.socialuni.social.sdk.factory.SocialChatROFactory;
 import com.socialuni.social.utils.JsonUtils;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;

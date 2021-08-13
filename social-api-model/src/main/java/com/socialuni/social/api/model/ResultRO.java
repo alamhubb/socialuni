@@ -1,6 +1,5 @@
 package com.socialuni.social.api.model;
 
-import com.socialuni.social.constant.ErrorCode;
 import lombok.Data;
 
 /**
@@ -9,10 +8,14 @@ import lombok.Data;
  */
 @Data
 public class ResultRO<T> {
+    //请求成功
+    public static final Integer successCode = 0;
+    public static final String successMsg = "请求成功";
+
     //0成功，1，系统异常，2业务错误，3自定义错误
-    private Integer errorCode = ErrorCode.success;
+    private Integer errorCode = ResultRO.successCode;
     private Boolean success = true;
-    private String errorMsg = ErrorCode.successMsg;
+    private String errorMsg = ResultRO.successMsg;
     private T data;
 
     public static <T> ResultRO<T> success() {

@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.domain.follow;
 
 
-import com.socialuni.constant.CommonStatus;
-import com.socialuni.social.sdk.factory.user.base.SocialUserFollowDetailROFactory;
-import com.socialuni.entity.model.DO.FollowDO;
+import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.entity.model.DO.FollowDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.social.sdk.factory.user.base.SocialUserFollowDetailROFactory;
 import com.socialuni.social.sdk.repository.FollowRepository;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package com.socialuni.social.entity.model.DO.message;
 
-import com.socialuni.constant.CommonStatus;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
 import lombok.Data;
 import lombok.ToString;

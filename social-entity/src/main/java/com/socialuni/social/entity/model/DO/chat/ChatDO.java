@@ -1,10 +1,10 @@
 package com.socialuni.social.entity.model.DO.chat;
 
 
-import com.socialuni.constant.ChatStatus;
-import com.socialuni.constant.ChatTopLevel;
-import com.socialuni.constant.ChatType;
-import com.socialuni.constant.MatchType;
+import com.socialuni.social.constant.ChatStatus;
+import com.socialuni.social.constant.ChatTopLevel;
+import com.socialuni.social.constant.ChatType;
+import com.socialuni.social.constant.MatchType;
 import lombok.Data;
 
 import javax.persistence.*;

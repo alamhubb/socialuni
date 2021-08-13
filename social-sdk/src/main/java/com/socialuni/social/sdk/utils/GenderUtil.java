@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.sdk.constant.GenderTypeVO;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -38,7 +39,7 @@ public class GenderUtil {
 
     //校验query的GenderType是否正确
     public static GenderTypeQueryVO checkQueryGenderType(String gender) {
-        GenderTypeQueryVO queryVO = GenderType.GenderTypeQueryMap.get(gender);
+        GenderTypeQueryVO queryVO = GenderTypeVO.GenderTypeQueryMap.get(gender);
         if (queryVO == null) {
             throw new SocialParamsException("错误的性别类型");
         }

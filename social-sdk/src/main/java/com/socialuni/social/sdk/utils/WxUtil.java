@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.constant.DateTimeType;
+import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.social.entity.model.DO.NotifyDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
-import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.entity.model.DO.NotifyDO;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.platform.WxErrCode;
 import com.socialuni.social.sdk.platform.qq.QQPayResult;

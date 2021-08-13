@@ -6,13 +6,13 @@ import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserAuthManage;
 import com.socialuni.center.web.manage.ThirdUserManage;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
-import com.socialuni.center.web.model.DO.DevAccountDO;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import org.springframework.stereotype.Service;
 

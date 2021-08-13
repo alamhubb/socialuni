@@ -1,6 +1,6 @@
 package com.socialuni.social.entity.model.DO.user.base;
 
-import com.socialuni.constant.DateTimeType;
+import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.repository;
 
-import com.socialuni.entity.model.DO.JusticeValueOrderDO;
+import com.socialuni.social.entity.model.DO.JusticeValueOrderDO;
 import com.socialuni.social.sdk.redis.RedisKeysConst;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.jpa.repository.JpaRepository;

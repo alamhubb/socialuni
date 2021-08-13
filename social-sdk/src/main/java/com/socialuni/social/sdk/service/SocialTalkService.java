@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.service;
 
-import com.socialuni.sdk.domain.talk.*;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.domain.talk.*;
 import com.socialuni.social.sdk.utils.SocialUserUtil;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.factory;
 
-import com.socialuni.entity.model.DO.HomeSwiperDO;
+import com.socialuni.social.entity.model.DO.HomeSwiperDO;
 import com.socialuni.social.model.model.HomeSwiperVO;
 
 import java.util.List;

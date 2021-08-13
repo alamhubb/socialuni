@@ -1,6 +1,5 @@
 package com.socialuni.social.entity.model.DO;
 
-import com.socialuni.social.model.model.HomeSwiperVO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -35,16 +34,4 @@ public class HomeSwiperDO  {
     private Boolean skip;
     @Column(columnDefinition = "varchar(255) default 'web'")
     private String skipType;
-
-    public HomeSwiperVO toVO() {
-        HomeSwiperVO homeSwiperVO = new HomeSwiperVO();
-        homeSwiperVO.setName(this.name);
-        homeSwiperVO.setSkipUrl(this.skipUrl);
-        homeSwiperVO.setImgUrl(this.imgUrl);
-        homeSwiperVO.setSkip(this.skip);
-        homeSwiperVO.setSkipType(this.skipType);
-        homeSwiperVO.setStandUrl(this.standUrl);
-        homeSwiperVO.setStandType(this.standType);
-        return homeSwiperVO;
-    }
 }

@@ -1,6 +1,6 @@
 package com.socialuni.social.entity.model.DO.talk;
 
-import com.socialuni.constant.ContentType;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;

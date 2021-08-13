@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.repository;
 
-import com.socialuni.entity.model.DO.FollowDO;
+import com.socialuni.social.entity.model.DO.FollowDO;
 import com.socialuni.social.sdk.redis.RedisKeysConst;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;

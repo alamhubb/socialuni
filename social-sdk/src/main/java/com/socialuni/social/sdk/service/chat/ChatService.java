@@ -1,16 +1,16 @@
 package com.socialuni.social.sdk.service.chat;
 
 
-import com.socialuni.constant.ChatType;
-import com.socialuni.constant.ChatStatus;
-import com.socialuni.social.sdk.factory.SocialChatROFactory;
+import com.socialuni.social.constant.ChatStatus;
+import com.socialuni.social.constant.ChatType;
 import com.socialuni.social.entity.model.DO.chat.ChatDO;
 import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.message.chat.ChatRO;
+import com.socialuni.social.sdk.factory.SocialChatROFactory;
 import com.socialuni.social.sdk.repository.ChatRepository;
 import com.socialuni.social.sdk.repository.ChatUserRepository;
 import com.socialuni.social.sdk.service.CreateSingleChatResult;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

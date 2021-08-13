@@ -1,15 +1,15 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.api.config.SocialFeignHeaderName;
-import com.socialuni.center.web.model.DO.DevAccountDO;
-import com.socialuni.center.web.model.DO.DevAccountProviderDO;
 import com.socialuni.center.web.repository.DevAccountProviderRepository;
 import com.socialuni.center.web.repository.DevAccountRepository;
+import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.entity.model.DevAccountProviderDO;
+import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.constant.ConstStatus;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.sdk.utils.RequestUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;

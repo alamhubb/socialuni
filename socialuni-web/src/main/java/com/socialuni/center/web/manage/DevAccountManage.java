@@ -1,11 +1,11 @@
 package com.socialuni.center.web.manage;
 
 
-import com.socialuni.center.web.model.DO.DevAccountDO;
-import com.socialuni.center.web.model.DO.DevAccountProviderDO;
 import com.socialuni.center.web.repository.DevAccountProviderRepository;
 import com.socialuni.center.web.repository.DevAccountRepository;
-import com.socialuni.constant.CommonStatus;
+import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.entity.model.DevAccountProviderDO;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;

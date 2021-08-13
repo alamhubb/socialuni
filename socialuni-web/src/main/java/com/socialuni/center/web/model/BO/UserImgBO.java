@@ -1,11 +1,11 @@
 package com.socialuni.center.web.model.BO;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.constant.ContentType;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
+import com.socialuni.social.sdk.constant.AppConfigConst;
+import com.socialuni.social.sdk.constant.status.ContentStatus;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
 import lombok.Data;
 import org.springframework.stereotype.Component;

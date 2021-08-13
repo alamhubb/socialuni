@@ -1,21 +1,20 @@
 package com.socialuni.social.sdk.domain.report;
 
+import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.ContentType;
+import com.socialuni.social.entity.model.DO.base.BaseModelDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.model.model.QO.ReportAddQO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.constant.ContentType;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.status.ContentStatus;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.sdk.repository.*;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.DateUtils;
-import com.socialuni.social.model.model.QO.ReportAddQO;
-import com.socialuni.social.api.model.ResultRO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 

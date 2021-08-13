@@ -1,26 +1,22 @@
 package com.socialuni.social.sdk.factory;
 
 
-import com.socialuni.constant.ChatType;
-import com.socialuni.social.sdk.constant.CommonConst;
-import com.socialuni.social.sdk.constant.LoadMoreType;
-import com.socialuni.constant.StatusConst;
-import com.socialuni.constant.ChatStatus;
-import com.socialuni.constant.ChatUserStatus;
-import com.socialuni.constant.MessageStatus;
-import com.socialuni.entity.model.DO.FollowDO;
+import com.socialuni.social.constant.*;
+import com.socialuni.social.entity.model.DO.FollowDO;
 import com.socialuni.social.entity.model.DO.chat.ChatDO;
 import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
 import com.socialuni.social.entity.model.DO.message.MessageDO;
 import com.socialuni.social.entity.model.DO.message.MessageReceiveDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.message.chat.ChatRO;
+import com.socialuni.social.model.model.RO.message.message.SocialMessageRO;
+import com.socialuni.social.sdk.constant.CommonConst;
+import com.socialuni.social.sdk.constant.LoadMoreType;
 import com.socialuni.social.sdk.repository.ChatRepository;
 import com.socialuni.social.sdk.repository.FollowRepository;
 import com.socialuni.social.sdk.repository.MessageReceiveRepository;
 import com.socialuni.social.sdk.repository.MessageRepository;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
-import com.socialuni.social.model.model.RO.message.message.SocialMessageRO;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

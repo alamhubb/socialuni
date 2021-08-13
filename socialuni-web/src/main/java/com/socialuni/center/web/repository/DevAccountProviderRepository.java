@@ -1,7 +1,7 @@
 package com.socialuni.center.web.repository;
 
 
-import com.socialuni.center.web.model.DO.DevAccountProviderDO;
+import com.socialuni.entity.model.DevAccountProviderDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.manage;
 
-import com.socialuni.entity.model.DO.FollowDO;
+import com.socialuni.social.entity.model.DO.FollowDO;
 import com.socialuni.social.sdk.repository.FollowRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

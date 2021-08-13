@@ -1,7 +1,7 @@
 package com.socialuni.social.entity.model.DO.keywords;
 
 
-import com.socialuni.constant.ReportStatus;
+import com.socialuni.social.constant.ReportStatus;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,19 +1,19 @@
 package com.socialuni.social.sdk.factory;
 
-import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
-import com.socialuni.social.sdk.constant.NotifyType;
-import com.socialuni.entity.model.DO.NotifyDO;
+import com.socialuni.social.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
+import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.repository.TalkImgRepository;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.utils.CommentUtils;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.TalkImgDOUtils;
 import com.socialuni.social.sdk.utils.TalkUtils;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

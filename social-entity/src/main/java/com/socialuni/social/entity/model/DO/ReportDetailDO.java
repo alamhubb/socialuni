@@ -1,7 +1,7 @@
 package com.socialuni.social.entity.model.DO;
 
 
-import com.socialuni.constant.ReportStatus;
+import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;
 

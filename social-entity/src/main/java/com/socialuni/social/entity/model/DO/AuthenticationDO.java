@@ -1,6 +1,6 @@
 package com.socialuni.social.entity.model.DO;
 
-import com.socialuni.constant.StatusConst;
+import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 
