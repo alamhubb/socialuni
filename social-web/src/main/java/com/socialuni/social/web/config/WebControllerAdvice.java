@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.JsonUtils;
 import com.socialuni.social.sdk.utils.common.RequestUtil;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;

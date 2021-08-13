@@ -2,7 +2,7 @@ package com.socialuni.social.web.controller;
 
 import com.socialuni.social.sdk.service.SocialUserService;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import com.socialuni.social.sdk.url.user.SocialuniUserUrl;

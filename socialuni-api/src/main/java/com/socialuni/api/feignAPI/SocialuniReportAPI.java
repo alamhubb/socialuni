@@ -1,7 +1,7 @@
 package com.socialuni.api.feignAPI;
 
 import com.socialuni.social.model.model.QO.ReportAddQO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

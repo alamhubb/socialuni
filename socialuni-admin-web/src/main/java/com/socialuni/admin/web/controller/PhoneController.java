@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.repository.UserRepository;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import org.hibernate.validator.constraints.Length;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

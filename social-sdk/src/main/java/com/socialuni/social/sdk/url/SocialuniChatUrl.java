@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.url;
 
 
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;

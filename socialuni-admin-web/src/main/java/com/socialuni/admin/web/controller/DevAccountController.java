@@ -2,7 +2,7 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.entity.model.DevAccountDO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.utils.UUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

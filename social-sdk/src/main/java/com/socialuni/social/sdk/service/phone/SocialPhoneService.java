@@ -9,7 +9,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
 import org.springframework.stereotype.Service;

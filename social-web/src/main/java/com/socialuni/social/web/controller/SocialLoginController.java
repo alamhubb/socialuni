@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.service.SocialLoginService;
 import com.socialuni.social.sdk.url.user.SocialuniLoginUrl;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import org.springframework.web.bind.annotation.RestController;

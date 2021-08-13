@@ -1,7 +1,6 @@
-package com.socialuni.social.api.model.model;
+package com.socialuni.social.api.model;
 
-import com.socialuni.social.api.model.constant.CommonErrorCode;
-import com.socialuni.social.api.model.constant.CommonErrorMsg;
+import com.socialuni.social.constant.ErrorCode;
 import lombok.Data;
 
 /**
@@ -11,9 +10,9 @@ import lombok.Data;
 @Data
 public class ResultRO<T> {
     //0成功，1，系统异常，2业务错误，3自定义错误
-    private Integer errorCode = CommonErrorCode.success;
+    private Integer errorCode = ErrorCode.success;
     private Boolean success = true;
-    private String errorMsg = CommonErrorMsg.successMsg;
+    private String errorMsg = ErrorCode.successMsg;
     private T data;
 
     public static <T> ResultRO<T> success() {

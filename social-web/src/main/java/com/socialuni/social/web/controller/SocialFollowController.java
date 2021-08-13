@@ -2,7 +2,7 @@ package com.socialuni.social.web.controller;
 
 import com.socialuni.social.sdk.service.SocialFollowService;
 import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import com.socialuni.social.sdk.url.community.SocialuniFollowUrl;
 import org.springframework.web.bind.annotation.RestController;

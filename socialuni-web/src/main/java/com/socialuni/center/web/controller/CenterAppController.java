@@ -3,7 +3,7 @@ package com.socialuni.center.web.controller;
 import com.socialuni.api.feignAPI.SocialiuniAppAPI;
 import com.socialuni.center.web.serive.CenterAppService;
 import com.socialuni.social.model.model.HomeSwiperVO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
 import org.springframework.web.bind.annotation.RestController;
 

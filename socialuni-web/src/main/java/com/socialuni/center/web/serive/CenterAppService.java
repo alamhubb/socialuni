@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.factory.SocialHomeSwiperROFactory;
 import com.socialuni.entity.model.DO.HomeSwiperDO;
 import com.socialuni.social.sdk.repository.HomeSwiperRepository;
 import com.socialuni.social.model.model.HomeSwiperVO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
 import org.springframework.stereotype.Service;
 

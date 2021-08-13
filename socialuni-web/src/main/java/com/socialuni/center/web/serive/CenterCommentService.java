@@ -6,7 +6,7 @@ import com.socialuni.api.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.api.model.RO.talk.CenterCommentRO;
 import com.socialuni.center.web.domain.comment.CenterCommentDeleteDomain;
 import com.socialuni.center.web.domain.comment.CenterCommentPostDomain;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

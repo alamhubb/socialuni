@@ -3,7 +3,7 @@ package com.socialuni.api.feignAPI;
 import com.socialuni.api.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.api.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.api.model.RO.talk.CenterCommentRO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

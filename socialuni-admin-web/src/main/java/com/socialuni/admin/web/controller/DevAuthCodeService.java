@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.repository.UserRepository;
 import com.socialuni.entity.model.DevAuthenticationDO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.utils.AuthCodeUtil;
 import com.socialuni.social.utils.IntegerUtils;

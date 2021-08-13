@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.utils.AuthCodeUtil;
 import com.socialuni.social.sdk.utils.IpUtil;
 import com.socialuni.social.sdk.utils.common.RequestUtil;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

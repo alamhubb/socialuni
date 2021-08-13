@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.DateUtils;
 import com.socialuni.social.model.model.QO.ReportAddQO;
-import com.socialuni.social.api.model.model.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 

@@ -4,6 +4,7 @@ package com.socialuni.social.constant;
 public class ErrorCode {
     //请求成功
     public static final Integer success = 0;
+    public static final String successMsg = "请求成功";
     //未登录
     public static final Integer NOT_LOGGED_ERROR = 601;
     //业务错误,一定会出现
