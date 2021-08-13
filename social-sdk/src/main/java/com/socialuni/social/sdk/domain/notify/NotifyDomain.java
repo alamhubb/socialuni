@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.utils.*;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.sdk.utils.common.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;

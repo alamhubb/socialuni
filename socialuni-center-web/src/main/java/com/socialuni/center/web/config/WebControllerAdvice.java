@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.model.OperateLogDO;
 import com.socialuni.social.utils.IpUtil;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.sdk.utils.common.JsonUtils;
 import com.socialuni.social.utils.RequestUtil;
 import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;

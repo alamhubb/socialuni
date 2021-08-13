@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.platform.WxDecode;
 import com.socialuni.social.sdk.platform.WxPhoneNumRO;
 import com.socialuni.social.sdk.utils.UniProviderUtil;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.sdk.utils.common.JsonUtils;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import lombok.extern.slf4j.Slf4j;

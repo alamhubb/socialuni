@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.platform.baidu;
 
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

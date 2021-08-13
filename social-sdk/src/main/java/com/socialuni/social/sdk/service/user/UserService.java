@@ -28,7 +28,7 @@ import com.socialuni.social.utils.DateUtils;
 import com.socialuni.social.utils.GenderUtil;
 import com.socialuni.social.utils.GenerateNicknameUtil;
 import com.socialuni.uniapp.model.SocialProviderLoginQO;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

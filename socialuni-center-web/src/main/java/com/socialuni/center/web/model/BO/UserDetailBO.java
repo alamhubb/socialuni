@@ -25,7 +25,7 @@ import com.socialuni.sdk.repository.ChatUserRepository;
 import com.socialuni.sdk.repository.FollowRepository;
 import com.socialuni.sdk.repository.UserImgRepository;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

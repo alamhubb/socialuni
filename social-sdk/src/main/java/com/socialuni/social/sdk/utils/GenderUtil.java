@@ -4,7 +4,7 @@ import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.GenderTypeVO;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author qinkaiyuan

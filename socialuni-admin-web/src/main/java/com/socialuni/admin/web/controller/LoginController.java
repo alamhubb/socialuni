@@ -7,7 +7,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.utils.IntegerUtils;
 import com.socialuni.social.utils.PhoneNumUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -9,7 +9,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.store.SocialUserAccountStore;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 

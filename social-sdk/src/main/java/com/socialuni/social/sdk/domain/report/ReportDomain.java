@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.KeywordsService;
 import com.socialuni.social.sdk.service.KeywordsTriggerService;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

@@ -1,8 +1,7 @@
 package com.socialuni.social.utils;
 
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.utils.IntegerUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author qinkaiyuan

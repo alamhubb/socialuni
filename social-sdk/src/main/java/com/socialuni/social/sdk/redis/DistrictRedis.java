@@ -6,7 +6,7 @@ import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.factory.SocialDistrictROFactory;
 import com.socialuni.social.sdk.repository.DistrictRepository;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;

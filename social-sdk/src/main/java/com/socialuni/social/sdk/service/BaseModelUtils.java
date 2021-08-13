@@ -9,7 +9,7 @@ import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.message.MessageDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
-import com.socialuni.social.exception.ResultException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.repository.MessageRepository;
 import com.socialuni.social.sdk.repository.UserImgRepository;
@@ -37,7 +37,7 @@ public class BaseModelUtils<T> {
     public static BaseModelDO getModelByReport(ReportDO reportDO) {
         String reportContentType = reportDO.getReportContentType();
         if (!ContentType.reportContentTypeTypes.contains(reportContentType)) {
-            throw new ResultException("不存在的内容类型");
+            throw new SocialBusinessException("不存在的内容类型");
         }
         BaseModelDO modelDO;
         if (reportContentType.equals(ContentType.talk)) {
@@ -49,7 +49,7 @@ public class BaseModelUtils<T> {
         }else if (reportContentType.equals(ContentType.user)) {
             modelDO = messageRepository.findById(reportDO.getMessageId()).get();
         } else {
-            throw new ResultException("不存在的内容类型");
+            throw new SocialBusinessException("不存在的内容类型");
         }
         //todo userImg未继承model的问题
          /*else if (reportContentType.equals(ContentType.userImg)) {
@@ -72,7 +72,7 @@ public class BaseModelUtils<T> {
             UserImgDO userImgDO = BaseModelUtils.getModelByClass(model);
             baseModelParentDO.setUserImgId(userImgDO.getId());
         } else {
-            throw new ResultException("错误的内容类型");
+            throw new SocialBusinessException("错误的内容类型");
         }
     }
 

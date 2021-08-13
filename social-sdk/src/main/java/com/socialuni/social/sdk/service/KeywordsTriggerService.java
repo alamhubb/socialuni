@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.repository.BlackKeywordsRepository;
 import com.socialuni.social.sdk.repository.CustomKeywordsRepository;
 import com.socialuni.social.sdk.repository.WhiteKeywordsRepository;
 import com.socialuni.social.sdk.utils.KeywordsUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

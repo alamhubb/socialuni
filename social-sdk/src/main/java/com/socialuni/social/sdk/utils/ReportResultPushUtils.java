@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.platform.weixin.WxConst;
 import com.socialuni.social.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.service.BaseModelUtils;
 import com.socialuni.social.utils.DateUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

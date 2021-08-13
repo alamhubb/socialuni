@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.service.comment.IllegalWordService;
 import com.socialuni.social.sdk.utils.WxUtil;
 import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

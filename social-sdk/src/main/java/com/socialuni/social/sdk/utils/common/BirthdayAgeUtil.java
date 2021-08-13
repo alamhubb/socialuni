@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils.common;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -7,7 +7,7 @@ import com.socialuni.center.web.serive.UserService;
 import com.socialuni.sdk.model.NotifyVO;
 import com.socialuni.sdk.redis.RedisUtil;
 import com.socialuni.sdk.utils.IntegerUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.listener.ChannelTopic;

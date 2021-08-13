@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.entity.model.DO.keywords.IllegalWordDO;
 import com.socialuni.social.sdk.repository.IllegalWordRepository;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

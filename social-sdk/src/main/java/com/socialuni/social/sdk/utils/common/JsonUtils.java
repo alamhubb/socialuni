@@ -1,4 +1,4 @@
-package com.socialuni.social.utils;
+package com.socialuni.social.sdk.utils.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

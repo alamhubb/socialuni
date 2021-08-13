@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.model.RO.UserImgVO;
 import com.socialuni.social.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;

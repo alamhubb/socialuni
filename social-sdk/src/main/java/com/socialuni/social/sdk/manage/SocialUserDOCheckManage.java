@@ -8,7 +8,7 @@ import com.qingchi.web.constant.CommonConst;
 import com.socialuni.sdk.utils.AgeUtils;
 import com.qingchi.web.constant.DateUtils;
 import com.socialuni.sdk.utils.GenderUtil;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;

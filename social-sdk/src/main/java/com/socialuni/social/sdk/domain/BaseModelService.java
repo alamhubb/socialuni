@@ -6,7 +6,7 @@ import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.message.MessageDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
-import com.socialuni.social.exception.ResultException;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.utils.TalkStore;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class BaseModelService {
             MessageDO messageDO = (MessageDO) model;
             return messageRepository.save(messageDO);
         } else {
-            throw new ResultException("错误的内容类型");
+            throw new SocialBusinessException("错误的内容类型");
         }
     }
 
@@ -58,7 +58,7 @@ public class BaseModelService {
             UserImgDO userImgDO = (UserImgDO) model;
             return reportRepository.findFirstOneByUserImgId(userImgDO.getId());
         } else {
-            throw new ResultException("错误的内容类型");
+            throw new SocialBusinessException("错误的内容类型");
         }
     }
 }
