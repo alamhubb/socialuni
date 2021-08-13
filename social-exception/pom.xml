@@ -30,5 +30,10 @@
             <groupId>com.socialuni</groupId>
             <artifactId>social-constant</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
