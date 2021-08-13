@@ -14,7 +14,6 @@ public class SocialTalkPostQO implements ContentAddQO {
     private String visibleGender;
     private Integer devId;
     private String socialuniUid;
-    private Integer devId;
     private List<Integer> tagIds;
     /*
      *  经度 Longitude 简写Lng
