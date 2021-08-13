@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cloud-service</artifactId>
-    <version>${socialuni.version}</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>cloud-service</name>

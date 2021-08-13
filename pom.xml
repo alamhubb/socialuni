@@ -83,6 +83,11 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-entity</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-utils</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
