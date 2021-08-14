@@ -2,14 +2,11 @@ package com.socialuni.social.sdk.platform;
 
 import com.socialuni.social.sdk.model.IpResult;
 import com.socialuni.social.sdk.model.RectangleVO;
-import social.web.sdk.utils.IpUtil;
-import com.socialuni.social.sdk.utils.SocialHeaderUtil;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
+import social.web.sdk.utils.IpUtil;
 
 @Component
 public class AliAPI {
@@ -21,8 +18,7 @@ public class AliAPI {
     }
 
     public static RectangleVO getRectangle() {
-        HttpServletRequest request = SocialHeaderUtil.getRequest();
-        String ip = IpUtil.getIpAddr(request);
+        String ip = IpUtil.getIpAddr();
 
         String os = System.getProperty("os.name");
         if (os.toLowerCase().startsWith("win")) {  //如果是WinDOws系统

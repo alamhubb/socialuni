@@ -1,9 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.utils.RequestUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import social.web.sdk.utils.RequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -15,15 +15,13 @@ import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import social.web.sdk.utils.IpUtil;
-import com.socialuni.social.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import social.web.sdk.utils.IpUtil;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -112,11 +110,10 @@ public class SocailSendAuthCodeDomain {
     }
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, UserDO mineUser) {
-        HttpServletRequest request = RequestUtil.getRequest();
         //要防的是同1个ip无线刷验证码
         //发送验证码时要记录ip，记录用户id，记录请求内容
         //限制手机号，同1手机号做多2条，
-        String userIp = IpUtil.getIpAddr(request);
+        String userIp = IpUtil.getIpAddr();
 
         String phoneNum = authCodeQO.getPhoneNum();
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);

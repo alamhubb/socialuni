@@ -4,13 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.center.web.repository.log.ErrorLogRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.ErrorLogUtils;
-import social.web.sdk.utils.IpUtil;
-import com.socialuni.social.sdk.utils.SocialHeaderUtil;
 import com.socialuni.social.sdk.utils.common.JsonUtils;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import social.web.sdk.utils.IpUtil;
+import social.web.sdk.utils.RequestUtil;
 
 import javax.annotation.Resource;
 import javax.persistence.*;
@@ -70,7 +70,7 @@ public class ErrorLogDO {
         this.type = "后台";
         this.level = "一般";
 
-        HttpServletRequest request = SocialHeaderUtil.getRequest();
+        HttpServletRequest request = RequestUtil.getRequest();
         this.uri = request.getRequestURI();
         this.userIp = IpUtil.getIpAddr(request);
 

@@ -12,8 +12,8 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.utils.RequestUtil;
 import org.springframework.stereotype.Component;
+import social.web.sdk.utils.RequestUtil;
 
 import javax.annotation.Resource;
 
