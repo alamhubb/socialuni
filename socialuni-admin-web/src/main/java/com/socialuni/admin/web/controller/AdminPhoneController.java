@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("phone")
-public class PhoneController {
+public class AdminPhoneController {
     @Resource
     AdminPhoneService adminPhoneService;
 

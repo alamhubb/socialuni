@@ -3,13 +3,9 @@ package com.socialuni.social.sdk.constant;
 
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.constant.OpenDataQueryType;
-import com.socialuni.social.entity.model.DO.keywords.IllegalWordDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -88,46 +84,4 @@ public class AppConfigConst {
         put(OpenDataQueryType.noUserId, (30L * DateTimeType.minute));
         put(OpenDataQueryType.hasUserId, (30L * DateTimeType.minute));
     }};
-
-    private static Integer[] boysFaceValues = new Integer[0];
-    private static Integer[] girlsFaceValues = new Integer[0];
-
-    public static void setBoysFaceValues(Integer[] boysFaceValues) {
-        AppConfigConst.boysFaceValues = boysFaceValues;
-    }
-
-    public static void setGirlsFaceValues(Integer[] girlsFaceValues) {
-        AppConfigConst.girlsFaceValues = girlsFaceValues;
-    }
-
-    public static Integer[] getBoysFaceValueList() {
-        return boysFaceValues;
-    }
-
-    public static Integer[] getGirlsFaceValueList() {
-        return girlsFaceValues;
-    }
-
-    //1171970219 用户要求此qq加入违禁词
-    private static List<IllegalWordDO> illegals = new ArrayList<>();
-
-    private static List<KeywordsDO> keywordDOs = new ArrayList<>();
-
-    public static void setKeywordDOs(List<KeywordsDO> keywordDOs) {
-        AppConfigConst.keywordDOs = keywordDOs;
-        log.info("更新违禁词，违禁词数量：" + AppConfigConst.keywordDOs.size());
-    }
-
-    public static List<KeywordsDO> getKeywordDOs() {
-        return AppConfigConst.keywordDOs;
-    }
-
-    public static void setIllegals(List<IllegalWordDO> illegals) {
-        AppConfigConst.illegals = illegals;
-        log.info("更新违禁词，违禁词数量：" + AppConfigConst.illegals.size() + "，违禁词列表：" + AppConfigConst.illegals);
-    }
-
-    public static List<IllegalWordDO> getIllegals() {
-        return AppConfigConst.illegals;
-    }
 }

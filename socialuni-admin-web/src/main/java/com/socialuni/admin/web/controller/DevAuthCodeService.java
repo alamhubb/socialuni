@@ -78,7 +78,7 @@ public class DevAuthCodeService {
                     this.logger.debug("验证码错误");
                     throw new SocialBusinessException("验证码错误");
                 } else {
-                    Integer authCodeValidMinute = (Integer) AppConfigConst.appConfigMap.get("验证码有效时间多少分");
+                    Integer authCodeValidMinute = (Integer) AdminAppConfigConst.appConfigMap.get("验证码有效时间多少分");
                     long canTime = authenticationDO.getCreateTime().getTime() + (long)authCodeValidMinute * (long) CommonConst.minute;
                     long curTime = (new Date()).getTime();
                     if (curTime > canTime) {

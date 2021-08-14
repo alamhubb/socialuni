@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.manage;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
-import com.socialuni.social.sdk.utils.CommonTokenUtil;
+import com.socialuni.social.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ public class TokenManage {
     CommonTokenRepository commonTokenRepository;
 
     public TokenDO create(Integer userId) {
-        String token = CommonTokenUtil.generateTokenByUserKey(userId.toString());
+        String token = SocialTokenUtil.generateTokenByUserKey(userId.toString());
         TokenDO commonUserTokenDO = this.create(userId, token);
         return commonUserTokenDO;
     }

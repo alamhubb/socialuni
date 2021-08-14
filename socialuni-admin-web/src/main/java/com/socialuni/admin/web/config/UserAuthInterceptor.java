@@ -43,7 +43,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 || user != null)
         ) {
 //            if (user != null) {
-//                req.setAttribute(AppConfigConst.appUserKey, user);
+//                req.setAttribute(AdminAppConfigConst.appUserKey, user);
 //            }
             return true;
         } else {

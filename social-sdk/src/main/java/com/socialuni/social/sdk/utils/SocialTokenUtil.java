@@ -20,7 +20,7 @@ import java.util.Date;
 
 @Component
 @Slf4j
-public class CommonTokenUtil {
+public class SocialTokenUtil {
     //key 这样可以保证每次请求生成的token一致，方便测试
     private static String tokenSecretKey;
 
@@ -28,32 +28,32 @@ public class CommonTokenUtil {
 
     @Resource
     public void setCommonTokenRepository(CommonTokenRepository commonTokenRepository) {
-        CommonTokenUtil.commonTokenRepository = commonTokenRepository;
+        SocialTokenUtil.commonTokenRepository = commonTokenRepository;
     }
 
     @Value("${socialuni.user.token-secret-key:tokenSecretKey}")
     public void setTokenKey(String tokenKey) {
-        CommonTokenUtil.tokenSecretKey = tokenKey;
+        SocialTokenUtil.tokenSecretKey = tokenKey;
     }
 
     private static String tokenName;
 
     @Value("${socialuni.user.token-name:token}")
     public void setTokenName(String tokenName) {
-        CommonTokenUtil.tokenName = tokenName;
+        SocialTokenUtil.tokenName = tokenName;
     }
 
     public static String getToken() {
         HttpServletRequest request = RequestUtil.getRequest();
         String token = request.getHeader(tokenName);
-        if (CommonTokenUtil.isSuccess(token)) {
+        if (SocialTokenUtil.isSuccess(token)) {
             return token;
         }
         return null;
     }
 
     public static Boolean hasToken() {
-        return CommonTokenUtil.isSuccess(CommonTokenUtil.getToken());
+        return SocialTokenUtil.isSuccess(SocialTokenUtil.getToken());
     }
 
     public static String generateTokenByUserKey(String userKey) {
@@ -67,9 +67,9 @@ public class CommonTokenUtil {
 
     //使用websocket时无法获取request必须传入token
     public static String getUserKeyByToken(String token) {
-        if (CommonTokenUtil.isSuccess(token)) {
+        if (SocialTokenUtil.isSuccess(token)) {
             try {
-                String tokenSubject = Jwts.parser().setSigningKey(CommonTokenUtil.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
+                String tokenSubject = Jwts.parser().setSigningKey(SocialTokenUtil.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
                 return tokenSubject.split("_")[0];
             } catch (MalformedJwtException e) {
                 log.info(e.getMessage());
@@ -80,17 +80,17 @@ public class CommonTokenUtil {
     }
 
     public static String getUserKeyByToken() {
-        String token = CommonTokenUtil.getToken();
-        return CommonTokenUtil.getUserKeyByToken(token);
+        String token = SocialTokenUtil.getToken();
+        return SocialTokenUtil.getUserKeyByToken(token);
     }
 
     public static TokenDO getCommonTokenDO() {
-        String token = CommonTokenUtil.getToken();
-        return CommonTokenUtil.getCommonTokenDO(token);
+        String token = SocialTokenUtil.getToken();
+        return SocialTokenUtil.getCommonTokenDO(token);
     }
 
     public static TokenDO getCommonTokenDO(String token) {
-        String userKey = CommonTokenUtil.getUserKeyByToken(token);
+        String userKey = SocialTokenUtil.getUserKeyByToken(token);
         if (userKey == null) {
             return null;
         }
@@ -116,7 +116,7 @@ public class CommonTokenUtil {
 
     //判断是否有效token
     public static boolean isSuccess(String token) {
-        return !CommonTokenUtil.isError(token);
+        return !SocialTokenUtil.isError(token);
     }
 
     public static Boolean isError(String token) {

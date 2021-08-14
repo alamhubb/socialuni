@@ -5,7 +5,7 @@ import com.socialuni.center.web.repository.ThirdUserTokenRepository;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.sdk.utils.CommonTokenUtil;
+import com.socialuni.social.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -24,13 +24,13 @@ public class CenterTokenUtil {
     }
 
     public static ThirdUserTokenDO getThirdUserTokenDO() {
-        String token = CommonTokenUtil.getToken();
+        String token = SocialTokenUtil.getToken();
         return CenterTokenUtil.getThirdUserTokenDO(token);
     }
 
     public static ThirdUserTokenDO getThirdUserTokenDO(String token) {
         //解析token
-        String userKey = CommonTokenUtil.getUserKeyByToken(token);
+        String userKey = SocialTokenUtil.getUserKeyByToken(token);
         if (StringUtils.isEmpty(userKey)) {
             return null;
         }

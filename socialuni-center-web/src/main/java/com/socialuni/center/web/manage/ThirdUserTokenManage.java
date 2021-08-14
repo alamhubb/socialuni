@@ -2,7 +2,7 @@ package com.socialuni.center.web.manage;
 
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.ThirdUserTokenRepository;
-import com.socialuni.social.sdk.utils.CommonTokenUtil;
+import com.socialuni.social.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +14,7 @@ public class ThirdUserTokenManage {
 
     public ThirdUserTokenDO create(Integer userId, Integer devId) {
         //本系统的，生成userToken，有个清池token对应集美token
-        String appToken = CommonTokenUtil.generateTokenByUserKey(userId.toString());
+        String appToken = SocialTokenUtil.generateTokenByUserKey(userId.toString());
         ThirdUserTokenDO thirdToken = new ThirdUserTokenDO(userId, appToken, devId);
         thirdToken = thirdUserTokenRepository.save(thirdToken);
         return thirdToken;

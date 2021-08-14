@@ -1,10 +1,9 @@
-package com.socialuni.social.sdk.manage.phone;
+package com.socialuni.admin.web.manage;
 
+import com.socialuni.admin.web.controller.DevAuthCodeRepository;
+import com.socialuni.entity.model.DevAuthCodeDO;
 import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.social.entity.model.DO.AuthenticationDO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.utils.IntegerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -19,10 +18,9 @@ import java.util.Date;
  */
 @Service
 @Slf4j
-public class AuthenticationManage {
+public class DevAuthCodeManage {
     @Resource
-    private AuthenticationRepository authRepository;
-
+    private DevAuthCodeRepository devAuthCodeRepository;
 
     public void checkAuthCode(String phoneNum, String authCode) {
         //1.为空 2. 包含非数字 3.不为4位 ，返回
@@ -31,14 +29,13 @@ public class AuthenticationManage {
             throw new SocialBusinessException("请输入正确的验证码");
         }
         //获取数据库的认证信息的验证码
-        AuthenticationDO authenticationDO = authRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
+        DevAuthCodeDO authenticationDO = devAuthCodeRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
         if (authenticationDO == null) {
             throw new SocialBusinessException("请先发送验证码");
         }
-
         //如果发送过验证码
         //校验验证码是否过期，如果当前时间晚于30分钟后则验证码失效
-        Integer authCodeValidMinute = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeValidMinuteKey);
+        Integer authCodeValidMinute = 30;
         long canTime = authenticationDO.getCreateTime().getTime() + authCodeValidMinute * DateTimeType.minute;
         long curTime = new Date().getTime();
         if (curTime > canTime) {

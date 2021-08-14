@@ -59,7 +59,7 @@ public class SocialUserUtil {
 
     public static UserDO getMineUser() {
         //解析token
-        TokenDO tokenDO = CommonTokenUtil.getCommonTokenDO();
+        TokenDO tokenDO = SocialTokenUtil.getCommonTokenDO();
         if (tokenDO == null) {
             return null;
         }
@@ -71,7 +71,7 @@ public class SocialUserUtil {
     //必须有，websocket无法从request中获取token只能传入
     public static UserDO getUserByWebsocketToken(String token) {
         //解析token
-        TokenDO tokenDO = CommonTokenUtil.getCommonTokenDO(token);
+        TokenDO tokenDO = SocialTokenUtil.getCommonTokenDO(token);
         if (tokenDO == null) {
             return null;
         }
