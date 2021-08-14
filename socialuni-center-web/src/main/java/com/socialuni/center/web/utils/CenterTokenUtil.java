@@ -5,7 +5,7 @@ import com.socialuni.center.web.repository.ThirdUserTokenRepository;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.sdk.utils.SocialTokenUtil;
+import social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

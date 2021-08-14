@@ -12,6 +12,7 @@ import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import social.web.sdk.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 
@@ -59,7 +60,7 @@ public class SocialUserUtil {
 
     public static UserDO getMineUser() {
         //解析token
-        TokenDO tokenDO = SocialTokenUtil.getCommonTokenDO();
+        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDO();
         if (tokenDO == null) {
             return null;
         }
@@ -71,7 +72,7 @@ public class SocialUserUtil {
     //必须有，websocket无法从request中获取token只能传入
     public static UserDO getUserByWebsocketToken(String token) {
         //解析token
-        TokenDO tokenDO = SocialTokenUtil.getCommonTokenDO(token);
+        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDO(token);
         if (tokenDO == null) {
             return null;
         }

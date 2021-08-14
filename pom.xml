@@ -20,13 +20,13 @@
         <module>social-exception</module>
         <module>social-sdk</module>
         <module>social-web</module>
+        <module>social-web-sdk</module>
         <module>socialuni-api</module>
         <module>socialuni-utils</module>
         <module>socialuni-entity</module>
         <module>socialuni-center-web</module>
         <module>socialuni-admin-web</module>
         <module>cloud-service</module>
-        <module>social-cloud</module>
     </modules>
 
     <properties>
@@ -76,6 +76,11 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-web-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
