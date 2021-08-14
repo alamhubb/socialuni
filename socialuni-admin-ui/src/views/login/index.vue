@@ -97,7 +97,7 @@ export default class LoginPage extends Vue {
     authCode: ElInput;
   }
 
-  loginUser: SocialPhoneNumQO = new SocialPhoneNumQO('18600409559', '4665')
+  loginUser: SocialPhoneNumQO = new SocialPhoneNumQO('', '')
 
   authCodeInterval = 30
 
