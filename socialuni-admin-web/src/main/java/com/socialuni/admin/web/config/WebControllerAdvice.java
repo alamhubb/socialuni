@@ -1,15 +1,10 @@
-package com.socialuni.social.web.config;
+package com.socialuni.admin.web.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ErrorCode;
 import com.socialuni.social.constant.ErrorType;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.base.SocialException;
-import com.socialuni.social.entity.model.DO.OperateLogDO;
-import com.socialuni.social.sdk.utils.RequestLogDOUtil;
-import com.socialuni.social.sdk.utils.RequestLogUtil;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -24,12 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import com.socialuni.social.sdk.web.utils.IpUtil;
-import com.socialuni.social.sdk.web.utils.RequestUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 @RestControllerAdvice
 @Slf4j
@@ -107,17 +98,19 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
-        OperateLogDO operateLogDO = RequestLogUtil.getAndRemove();
+        /*OperateLogDO operateLogDO = RequestLogUtil.getAndRemove();
         if (operateLogDO == null) {
             operateLogDO = new OperateLogDO();
             HttpServletRequest request = RequestUtil.getRequest();
-            UserDO user = SocialUserUtil.getMineUser();
+            UserDO user = CenterUserUtil.getMineUser();
             if (user != null) {
                 operateLogDO.setUserId(user.getId());
             }
+            Integer devId = DevAccountUtils.getDevId();
             String requestIp = IpUtil.getIpAddr(request);
             String uri = request.getRequestURI();
             String requestMethod = request.getMethod();
+            operateLogDO.setDevId(devId);
             operateLogDO.setIp(requestIp);
 //            operateLogDO.setCreateTime(startTime);
             operateLogDO.setRequestMethod(requestMethod);
@@ -134,7 +127,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         operateLogDO.setInnerMsgDetail(innerMsgDetail);
         operateLogDO.setEndTime(endDate);
         operateLogDO.setSpendTime(spendTime);
-        RequestLogDOUtil.saveAsync(operateLogDO);
+        RequestLogDOUtil.saveAsync(operateLogDO);*/
 
 //        log.info("[requestId:{},{}],[{}({})][spendTimes:{}]", operateLogDO.getId(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri(), spendTime);
     }

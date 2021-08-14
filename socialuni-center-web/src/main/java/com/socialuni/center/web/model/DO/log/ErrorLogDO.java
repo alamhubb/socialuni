@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.center.web.repository.log.ErrorLogRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.ErrorLogUtils;
-import com.socialuni.social.sdk.utils.common.JsonUtils;
+import com.socialuni.social.utils.JsonUtils;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -10,7 +10,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.factory.SocialChatROFactory;
-import com.socialuni.social.sdk.utils.common.JsonUtils;
+import com.socialuni.social.utils.JsonUtils;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;
 

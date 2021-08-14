@@ -11,7 +11,7 @@ import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.entity.model.DO.OperateLogDO;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
-import com.socialuni.social.sdk.utils.common.JsonUtils;
+import com.socialuni.social.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;

@@ -1,5 +1,6 @@
 package com.socialuni.admin.web.config;
 
+import com.socialuni.admin.web.utils.DevUserUtil;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.constant.ErrorCode;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object o) {
-        DevAccountDO user = new DevAccountDO();
+        DevAccountDO user = DevUserUtil.getDevAccount();
 //        DevAccountDO user = devaccount.getUserByToken();
 
         String uri = req.getRequestURI();

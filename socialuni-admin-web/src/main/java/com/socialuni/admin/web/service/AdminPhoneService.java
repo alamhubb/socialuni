@@ -1,6 +1,7 @@
 package com.socialuni.admin.web.service;
 
 
+import com.socialuni.admin.web.config.AppStaticData;
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
 import com.socialuni.cloud.tencent.TencentSmsServe;
 import com.socialuni.entity.model.DevAuthCodeDO;
@@ -24,16 +25,20 @@ public class AdminPhoneService {
 
     //发送验证码
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO socialSendAuthCodeQO) {
-        String phoneNum = socialSendAuthCodeQO.getPhoneNum();
-
         String userIp = IpUtil.getIpAddr();
-
         //h5登录也需要防止
         if (StringUtils.isEmpty(userIp)) {
             log.error("获取不到ip信息");
 //            UserLogStoreUtils.save(new UserLogDO("获取不到用户ip信息", user, phoneNum));
             throw new SocialParamsException("用户信息错误，无法发送验证码");
         }
+        Integer ipCount = AppStaticData.getIpCount(userIp);
+        //获取验证码超过10次，则联系客服
+        if (ipCount > 10) {
+            throw new SocialParamsException("访问频繁，请联系客服处理");
+        }
+        AppStaticData.ipCountPlus(userIp);
+        String phoneNum = socialSendAuthCodeQO.getPhoneNum();
         //校验用户是否已经绑定手机号，手机号是否已被绑定
         //user为null则是登录
         //校验手机号是否可用
