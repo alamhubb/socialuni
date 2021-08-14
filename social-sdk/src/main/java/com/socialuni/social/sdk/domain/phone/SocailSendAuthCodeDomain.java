@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.domain.phone;
 
-import com.github.qcloudsms.SmsSingleSender;
-import com.github.qcloudsms.SmsSingleSenderResult;
+import com.socialuni.cloud.tencent.TencentSmsServe;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.constant.StatusConst;
@@ -18,7 +17,6 @@ import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.utils.IpUtil;
 import com.socialuni.social.utils.RequestUtil;
-import com.socialuni.social.utils.AuthCodeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -123,35 +121,16 @@ public class SocailSendAuthCodeDomain {
         String phoneNum = authCodeQO.getPhoneNum();
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
 
-        String authCode = AuthCodeUtil.getAuthCode();
-        String authCodeValidTime = ((Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeValidMinuteKey)).toString();
-        //多少分钟内有效
-        String[] params = {authCode, authCodeValidTime};
-        SmsSingleSender ssender = new SmsSingleSender(appId, appKey);
-        // 签名
-        SmsSingleSenderResult result = null;  // 签名参数未提供或者为空时，会使用默认签名发送短信
-        try {
-            log.info("authCode:{}", authCode);
-            result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        AuthenticationDO authenticationDO = new AuthenticationDO(mineUser, phoneNum, null, userIp);
+        authenticationDO.setStatus(StatusConst.fail);
+        authRepository.save(authenticationDO);
 
-        AuthenticationDO authenticationDO = new AuthenticationDO(mineUser, phoneNum, authCode, userIp);
+        String authCode = TencentSmsServe.sendAuthCode(phoneNum);
+
+        authenticationDO.setAuthCode(authCode);
         authenticationDO.setStatus(StatusConst.success);
         authRepository.save(authenticationDO);
-        /*authenticationDO.setStatus(CommonStatus.success);
-        authRepository.save(authenticationDO);
-        return new ResultVO<>();*/
-        /*if (result != null && result.result == 0) {
-            authenticationDO.setStatus(StatusConst.success);
-            authRepository.save(authenticationDO);
-            return new ResultRO<>();
-        } else {
-            authenticationDO.setStatus(StatusConst.fail);
-            authRepository.save(authenticationDO);
-            throw new SocialBusinessException("验证码发送失败，请稍候重试，" + ErrorMsg.CONTACT_SERVICE);
-        }*/
+
         return new ResultRO<>();
     }
 }

@@ -2,7 +2,7 @@ package com.socialuni.center.web.model.DO;
 
 import com.socialuni.social.utils.IpUtil;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.utils.RequestUtils;
+import com.socialuni.social.sdk.utils.SocialHeaderUtil;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -37,7 +37,7 @@ public class UserLogDO {
         this.userId = user != null ? user.getId() : null;
         this.content = content;
         this.createTime = new Date();
-        this.ip = IpUtil.getIpAddr(RequestUtils.getRequest());
+        this.ip = IpUtil.getIpAddr(SocialHeaderUtil.getRequest());
     }
 
     public UserLogDO(String content, UserDO user, String phoneNum) {

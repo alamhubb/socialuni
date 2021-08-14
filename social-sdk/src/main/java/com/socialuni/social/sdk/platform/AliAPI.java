@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.platform;
 import com.socialuni.social.sdk.model.IpResult;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.utils.IpUtil;
-import com.socialuni.social.sdk.utils.RequestUtils;
+import com.socialuni.social.sdk.utils.SocialHeaderUtil;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class AliAPI {
     }
 
     public static RectangleVO getRectangle() {
-        HttpServletRequest request = RequestUtils.getRequest();
+        HttpServletRequest request = SocialHeaderUtil.getRequest();
         String ip = IpUtil.getIpAddr(request);
 
         String os = System.getProperty("os.name");

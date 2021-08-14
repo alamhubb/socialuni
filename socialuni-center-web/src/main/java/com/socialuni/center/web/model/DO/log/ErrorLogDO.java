@@ -5,7 +5,7 @@ import com.socialuni.center.web.repository.log.ErrorLogRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.ErrorLogUtils;
 import com.socialuni.social.utils.IpUtil;
-import com.socialuni.social.sdk.utils.RequestUtils;
+import com.socialuni.social.sdk.utils.SocialHeaderUtil;
 import com.socialuni.social.sdk.utils.common.JsonUtils;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -70,7 +70,7 @@ public class ErrorLogDO {
         this.type = "后台";
         this.level = "一般";
 
-        HttpServletRequest request = RequestUtils.getRequest();
+        HttpServletRequest request = SocialHeaderUtil.getRequest();
         this.uri = request.getRequestURI();
         this.userIp = IpUtil.getIpAddr(request);
 

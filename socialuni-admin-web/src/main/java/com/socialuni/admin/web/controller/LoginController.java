@@ -72,14 +72,7 @@ public class LoginController {
         return new ResultRO<>(devUserAddVO);
     }
 
-*
-     * 腾讯云手机验证码相关，手机号登陆和绑定都使用这里发送验证码
-     *
-     * @param phoneNum
-     * @return
-     * @throws Exception
-
-
+//腾讯云手机验证码相关，手机号登陆和绑定都使用这里发送验证码
     @PostMapping("sendAuthCode")
     @ResponseBody
     public ResultRO<String> sendAuthCode(@Valid @NotBlank @Length(min = 11, max = 11) String phoneNum, HttpServletRequest request) {

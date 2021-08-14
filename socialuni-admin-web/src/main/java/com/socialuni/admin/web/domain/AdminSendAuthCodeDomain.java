@@ -1,29 +1,17 @@
 package com.socialuni.admin.web.domain;
 
-import com.socialuni.admin.web.controller.DevAccountRepository;
 import com.socialuni.admin.web.controller.DevAuthCodeRepository;
-import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.cloud.tencent.TencentSmsServe;
 import com.socialuni.entity.model.DevAuthCodeDO;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.constant.StatusConst;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
-import com.socialuni.social.utils.AuthCodeUtil;
 import com.socialuni.social.utils.IpUtil;
 import com.socialuni.social.utils.PhoneNumUtil;
-import com.socialuni.social.utils.RequestUtil;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 /**
  * @author qinkaiyuan
@@ -34,29 +22,11 @@ import java.util.Date;
 public class AdminSendAuthCodeDomain {
     @Resource
     private DevAuthCodeRepository devAuthCodeRepository;
-    @Resource
-    private devuserre userRepository;
-    @Resource
-    private SocialUserPhoneStore socialUserPhoneStore;
-
-    @Resource
-    DevAccountRepository devAccountRepository;
-
-    @Value("${config.qq.sms.appId}")
-    private int appId;
-    @Value("${config.qq.sms.appKey}")
-    private String appKey;
-    @Value("${config.qq.sms.templateId}")
-    private int templateId;
-    @Value("${config.qq.sms.smsSign}")
-    private String smsSign;
-
-    @Resource
-    SocialUserPhoneManage socialUserPhoneManage;
-
 
     //发送验证码
-    private void sendAuthCodeCheck(String phoneNum, UserDO mineUser, String userIp) {
+    public void sendAuthCode(String phoneNum) {
+
+        String userIp = IpUtil.getIpAddr();
 
         //h5登录也需要防止
         if (StringUtils.isEmpty(userIp)) {
@@ -70,7 +40,17 @@ public class AdminSendAuthCodeDomain {
         //校验手机号格式
         PhoneNumUtil.checkPhoneNum(phoneNum);
         //校验手机号状态是否可用
-        DevAccountDO devAccountDO = devAccountRepository.findFirstByPhoneNumOrderByIdAsc(phoneNum);
+//        DevAccountDO devAccountDO = devAccountRepository.findFirstByPhoneNumOrderByIdAsc(phoneNum);
+
+        DevAuthCodeDO devAuthCodeDO = new DevAuthCodeDO(phoneNum, null, userIp);
+        devAuthCodeDO.setStatus(StatusConst.fail);
+        devAuthCodeRepository.save(devAuthCodeDO);
+
+        String authCode = TencentSmsServe.sendAuthCode(phoneNum);
+
+        devAuthCodeDO.setAuthCode(authCode);
+        devAuthCodeDO.setStatus(StatusConst.success);
+        devAuthCodeRepository.save(devAuthCodeDO);
 
         //然后查ip总次数，大于2也不行
         //然后查userId 大于2也不行
@@ -102,47 +82,5 @@ public class AdminSendAuthCodeDomain {
             return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);*//*
             throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
         }*/
-    }
-
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, UserDO mineUser) {
-        HttpServletRequest request = RequestUtil.getRequest();
-        //要防的是同1个ip无线刷验证码
-        //发送验证码时要记录ip，记录用户id，记录请求内容
-        //限制手机号，同1手机号做多2条，
-        String userIp = IpUtil.getIpAddr(request);
-
-        String phoneNum = authCodeQO.getPhoneNum();
-        this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
-
-        String authCode = AuthCodeUtil.getAuthCode();
-        String authCodeValidTime = ((Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeValidMinuteKey)).toString();
-        //多少分钟内有效
-        String[] params = {authCode, authCodeValidTime};
-        SmsSingleSender ssender = new SmsSingleSender(appId, appKey);
-        // 签名
-        SmsSingleSenderResult result = null;  // 签名参数未提供或者为空时，会使用默认签名发送短信
-        try {
-            log.info("authCode:{}", authCode);
-//            result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        DevAuthCodeDO devAuthCodeDO = new DevAuthCodeDO(mineUser, phoneNum, authCode, userIp);
-        devAuthCodeDO.setStatus(StatusConst.success);
-        devAuthCodeRepository.save(devAuthCodeDO);
-        authenticationDO.setStatus(CommonStatus.success);
-        authRepository.save(authenticationDO);
-        return new ResultVO<>();
-        if (result != null && result.result == 0) {
-            authenticationDO.setStatus(StatusConst.success);
-            authRepository.save(authenticationDO);
-            return new ResultRO<>();
-        } else {
-            authenticationDO.setStatus(StatusConst.fail);
-            authRepository.save(authenticationDO);
-            throw new SocialBusinessException("验证码发送失败，请稍候重试，" + ErrorMsg.CONTACT_SERVICE);
-        }
-        return new ResultRO<>();
     }
 }

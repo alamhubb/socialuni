@@ -11,8 +11,8 @@ import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import com.socialuni.social.sdk.utils.RequestUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.utils.RequestUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -98,7 +98,7 @@ public class DevAccountUtils {
 
     public static DevAccountDO getDevAccount() {
         //先从req中获取
-        String secretKey = RequestUtils.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
+        String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
         return devAccountRepository.findFirstBySecretKey(secretKey);
     }
 

@@ -7,6 +7,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class IpUtil {
+    public static String getIpAddr() {
+        HttpServletRequest request = RequestUtil.getRequest();
+        return IpUtil.getIpAddr(request);
+    }
+
     public static String getIpAddr(HttpServletRequest request) {
         String ipAddress;
         String os = System.getProperty("os.name");

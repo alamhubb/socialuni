@@ -1,7 +1,6 @@
 package com.socialuni.entity.model;
 
 import com.socialuni.social.constant.StatusConst;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,14 +20,13 @@ public class DevAuthCodeDO {
     private String authCode;
     private Date createTime;
     private String ip;
-    private Integer userId;
+//    private Integer userId;
     private String status;
 
     public DevAuthCodeDO() {
     }
 
-    public DevAuthCodeDO(UserDO user, String phoneNum, String authCode, String ip) {
-        this.userId = user != null ? user.getId() : null;
+    public DevAuthCodeDO(String phoneNum, String authCode, String ip) {
         this.phoneNum = phoneNum;
         this.authCode = authCode;
         this.ip = ip;

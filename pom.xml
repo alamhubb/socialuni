@@ -26,6 +26,7 @@
         <module>socialuni-center-web</module>
         <module>socialuni-admin-web</module>
         <module>cloud-service</module>
+        <module>social-cloud</module>
     </modules>
 
     <properties>
@@ -37,6 +38,7 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -94,7 +96,7 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>cloud-service</artifactId>
-                <version>${socialuni.viersion}</version>
+                <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
             <dependency>
@@ -106,6 +108,12 @@
                 <groupId>com.github.qcloudsms</groupId>
                 <artifactId>qcloudsms</artifactId>
                 <version>${qcloudsms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <scope>provided</scope>
+                <version>${lombok.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
             <dependency>
