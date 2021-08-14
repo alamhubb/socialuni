@@ -7,14 +7,14 @@ import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.admin.web.model.DO.DevTokenDO;
 import com.socialuni.admin.web.repository.DevTokenRepository;
-import com.socialuni.api.feignAPI.SocialuniAdminAPI;
+import com.socialuni.api.feignAPI.insystem.SocialuniAdminAPI;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.utils.PhoneNumUtil;
 import org.springframework.stereotype.Service;
-import socialuni.social.sdk.web.utils.SocialTokenUtil;
+import com.socialuni.social.sdk.web.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;

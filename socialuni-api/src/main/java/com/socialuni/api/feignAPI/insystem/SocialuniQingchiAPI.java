@@ -1,4 +1,4 @@
-package com.socialuni.api.feignAPI;
+package com.socialuni.api.feignAPI.insystem;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;

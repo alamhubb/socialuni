@@ -1,4 +1,4 @@
-package socialuni.social.sdk.web.utils;
+package com.socialuni.social.sdk.web.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;

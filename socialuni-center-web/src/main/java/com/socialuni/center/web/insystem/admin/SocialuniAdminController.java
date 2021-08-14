@@ -1,13 +1,13 @@
 package com.socialuni.center.web.insystem.admin;
 
-import com.socialuni.api.feignAPI.SocialuniAdminAPI;
+import com.socialuni.api.feignAPI.insystem.SocialuniAdminAPI;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
-import socialuni.social.sdk.web.constant.DevEnvType;
+import com.socialuni.social.sdk.web.constant.DevEnvType;
 
 import javax.annotation.Resource;
 
@@ -29,7 +29,7 @@ public class SocialuniAdminController implements SocialuniAdminAPI {
         if (!DevAccountUtils.getDevId().equals(1)) {
             throw new SocialParamsException("内部接口，不对外部提供服务");
         }
-        if (!envType.contains(DevEnvType.prod)) {
+        if (envType.contains(DevEnvType.prod)) {
             throw new SocialParamsException("此接口仅开发环境可用");
         }
         socialuniAdminService.syncProdDevAccountToDev(devAccount);

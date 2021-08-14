@@ -12,5 +12,5 @@ public class AdminUserType {
     //个人用户
     public static final String personal = "personal";
     //商业用户
-    public static final String company = "company";
+    public static final String company = "商业";
 }

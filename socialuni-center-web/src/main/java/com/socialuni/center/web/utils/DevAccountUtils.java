@@ -13,7 +13,7 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
-import socialuni.social.sdk.web.utils.RequestUtil;
+import com.socialuni.social.sdk.web.utils.RequestUtil;
 
 import javax.annotation.Resource;
 

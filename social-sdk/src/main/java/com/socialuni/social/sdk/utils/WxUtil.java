@@ -156,12 +156,12 @@ public class WxUtil {
     private static String wx_merchant_id;
     private static String wx_merchant_key;
 
-    @Value("${config.wx.merchant.wx_merchant_id}")
+    @Value("${socialuni.provider.wx.wx-merchant-id}")
     public void setWx_merchant_id(String wx_merchant_id) {
         WxUtil.wx_merchant_id = wx_merchant_id;
     }
 
-    @Value("${config.wx.merchant.wx_merchant_key}")
+    @Value("${socialuni.provider.wx.wx-merchant-key}")
     public void setWx_merchant_key(String wx_merchant_key) {
         WxUtil.wx_merchant_key = wx_merchant_key;
     }

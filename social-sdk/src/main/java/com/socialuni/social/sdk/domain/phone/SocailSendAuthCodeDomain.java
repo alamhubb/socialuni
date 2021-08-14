@@ -17,9 +17,8 @@ import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import socialuni.social.sdk.web.utils.IpUtil;
+import com.socialuni.social.sdk.web.utils.IpUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -37,16 +36,6 @@ public class SocailSendAuthCodeDomain {
     private UserRepository userRepository;
     @Resource
     private SocialUserPhoneStore socialUserPhoneStore;
-
-    @Value("${config.qq.sms.appId}")
-    private int appId;
-    @Value("${config.qq.sms.appKey}")
-    private String appKey;
-    @Value("${config.qq.sms.templateId}")
-    private int templateId;
-    @Value("${config.qq.sms.smsSign}")
-    private String smsSign;
-
     @Resource
     SocialUserPhoneManage socialUserPhoneManage;
 

@@ -1,7 +1,7 @@
 package com.socialuni.center.web.config;
 
 import com.socialuni.social.constant.ErrorCode;
-import com.socialuni.social.sdk.model.OperateLogDO;
+import com.socialuni.social.entity.model.DO.OperateLogDO;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.api.model.ResultRO;

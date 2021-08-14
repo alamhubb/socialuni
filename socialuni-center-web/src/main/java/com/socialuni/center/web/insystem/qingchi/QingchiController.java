@@ -1,6 +1,6 @@
 package com.socialuni.center.web.insystem.qingchi;
 
-import com.socialuni.api.feignAPI.SocialuniQingchiAPI;
+import com.socialuni.api.feignAPI.insystem.SocialuniQingchiAPI;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;

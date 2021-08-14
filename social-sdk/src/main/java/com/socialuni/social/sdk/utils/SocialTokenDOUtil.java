@@ -6,7 +6,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import socialuni.social.sdk.web.utils.SocialTokenUtil;
+import com.socialuni.social.sdk.web.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;

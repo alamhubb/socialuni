@@ -1,4 +1,4 @@
-package socialuni.social.sdk.web.config;
+package com.socialuni.social.sdk.web.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

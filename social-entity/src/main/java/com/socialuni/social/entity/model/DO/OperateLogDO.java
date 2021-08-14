@@ -1,9 +1,11 @@
-package com.socialuni.social.sdk.model;
+package com.socialuni.social.entity.model.DO;
 
-import com.socialuni.social.entity.model.DO.CommonBaseDO;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**

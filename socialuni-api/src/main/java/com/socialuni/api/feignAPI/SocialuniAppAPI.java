@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RequestMapping("app")
 @FeignClient(name = "app", url = "${socialuni.server-url:https://api.socialuni.com}")
-public interface SocialiuniAppAPI {
+public interface SocialuniAppAPI {
     @PostMapping("getAppLaunchData")
     ResultRO<SocialAppLaunchDataRO> getAppLaunchData();
 

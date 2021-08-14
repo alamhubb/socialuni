@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.model.OperateLogDO;
+import com.socialuni.social.entity.model.DO.OperateLogDO;
 import com.socialuni.social.sdk.store.OperateLogStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

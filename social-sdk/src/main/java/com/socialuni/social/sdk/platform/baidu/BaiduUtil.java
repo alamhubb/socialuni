@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.platform.baidu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.social.sdk.platform.TokenDTO;
 import com.socialuni.social.sdk.utils.common.RestUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,6 @@ public class BaiduUtil {
     private static ObjectMapper objectMapper;
     private static String tokenUrl;
 
-    @Value("${config.tokenUrl}")
     public void setTokenUrl(String tokenUrl) {
         BaiduUtil.tokenUrl = tokenUrl;
     }

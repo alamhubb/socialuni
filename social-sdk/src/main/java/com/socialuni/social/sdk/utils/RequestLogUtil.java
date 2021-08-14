@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 
-import com.socialuni.social.sdk.model.OperateLogDO;
+import com.socialuni.social.entity.model.DO.OperateLogDO;
 
 public class RequestLogUtil {
     private static final ThreadLocal<OperateLogDO> requestLog = new ThreadLocal<>();

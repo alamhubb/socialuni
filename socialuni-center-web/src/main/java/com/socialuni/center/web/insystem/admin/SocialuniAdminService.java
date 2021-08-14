@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -17,6 +18,7 @@ public class SocialuniAdminService {
     @Resource
     private TagRepository tagRepository;
 
+    @Transactional
     public void syncProdDevAccountToDev(DevAccountDO devAccount) {
         devAccount.setId(null);
         DevAccountDO devAccountDO = devAccountRepository.save(devAccount);

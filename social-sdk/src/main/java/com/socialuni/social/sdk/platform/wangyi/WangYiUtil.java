@@ -33,7 +33,6 @@ public class WangYiUtil {
     private static HttpClient httpClient = HttpClient4Utils.createHttpClient(100, 20, 2000, 2000, 2000);
 
 
-    @Value("${config.tokenUrl}")
     public void setTokenUrl(String tokenUrl) {
         WangYiUtil.tokenUrl = tokenUrl;
     }
@@ -125,17 +124,14 @@ public class WangYiUtil {
     private static String wy_security_secret;
     private static String wy_security_talk_business_id;
 
-    @Value("${config.wy.security.wy_security_id}")
     public void setWy_security_id(String wy_security_id) {
         WangYiUtil.wy_security_id = wy_security_id;
     }
 
-    @Value("${config.wy.security.wy_security_secret}")
     public void setWy_security_secret(String wy_security_secret) {
         WangYiUtil.wy_security_secret = wy_security_secret;
     }
 
-    @Value("${config.wy.security.wy_security_talk_business_id}")
     public void setWy_security_talk_business_id(String wy_security_talk_business_id) {
         WangYiUtil.wy_security_talk_business_id = wy_security_talk_business_id;
     }

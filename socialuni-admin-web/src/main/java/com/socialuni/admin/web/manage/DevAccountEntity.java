@@ -5,8 +5,10 @@ import com.socialuni.admin.web.constant.AdminUserType;
 import com.socialuni.admin.web.repository.DevAccountRepository;
 import com.socialuni.admin.web.repository.TagRepository;
 import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.social.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,7 +40,11 @@ public class DevAccountEntity {
         DevAccountDO devAccountDO = new DevAccountDO();
         Date curDate = new Date();
         devAccountDO.setPhoneNum(phoneNum);
+        devAccountDO.setSecretKey(UUIDUtil.getUUID());
+        devAccountDO.setAppGenderType(GenderType.all);
         devAccountDO.setDevNum(curDevNum);
+        devAccountDO.setRealName(phoneNum);
+        devAccountDO.setAppName(phoneNum);
         devAccountDO.setType(AdminUserType.company);
         devAccountDO.setStatus(StatusConst.enable);
         devAccountDO.setCreateTime(curDate);

@@ -28,21 +28,20 @@ public class TencentCloud {
     private static String secretKey;
     private static String region;
 
-    @Value("${config.qq.cos.secretId}")
+    @Value("${socialuni.cloud.tencent.cos.secret-id}")
     public void setSecretId(String secretId) {
         TencentCloud.secretId = secretId;
     }
 
-    @Value("${config.qq.cos.secretKey}")
+    @Value("${socialuni.cloud.tencent.cos.secret-key}")
     public void setSecretKey(String secretKey) {
         TencentCloud.secretKey = secretKey;
     }
 
-    @Value("${config.qq.cos.region}")
+    @Value("${socialuni.cloud.tencent.cos.region}")
     public void setRegion(String region) {
         TencentCloud.region = region;
     }
-
 
     public static Credential getCredential() {
         return new Credential(secretId, secretKey);

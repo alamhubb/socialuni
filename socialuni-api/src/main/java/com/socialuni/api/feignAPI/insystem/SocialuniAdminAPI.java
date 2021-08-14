@@ -1,4 +1,4 @@
-package com.socialuni.api.feignAPI;
+package com.socialuni.api.feignAPI.insystem;
 
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 前端初始化内容
  */
 @RequestMapping("admin")
-@FeignClient(name = "admin", url = "https://devapi.qingchiapp.com")
+@FeignClient(name = "admin", url = "${socialuni.dev-server-url:https://devapi.qingchiapp.com}")
 public interface SocialuniAdminAPI {
     //同步生产环境的开发者账号信息
     @PostMapping("syncProdDevAccount")

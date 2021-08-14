@@ -1,6 +1,6 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialiuniAppAPI;
+import com.socialuni.api.feignAPI.SocialuniAppAPI;
 import com.socialuni.center.web.serive.CenterAppService;
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.api.model.ResultRO;
@@ -16,7 +16,7 @@ import java.util.List;
  * 前端初始化内容
  */
 @RestController
-public class CenterAppController implements SocialiuniAppAPI {
+public class CenterAppController implements SocialuniAppAPI {
     @Resource
     CenterAppService centerAppService;
 

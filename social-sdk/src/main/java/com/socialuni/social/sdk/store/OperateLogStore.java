@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.store;
 
-import com.socialuni.social.sdk.model.OperateLogDO;
+import com.socialuni.social.entity.model.DO.OperateLogDO;
 import com.socialuni.social.sdk.repository.OperateLogRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
