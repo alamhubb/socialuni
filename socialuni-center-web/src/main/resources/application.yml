@@ -1,11 +1,9 @@
 spring:
   profiles:
-   active: local
-  main:
-   allow-bean-definition-overriding: true
+    active: local
   jpa:
     database: MYSQL
-#    show-sql: true
+    #    show-sql: true
     show-sql: false
     hibernate:
       ddl-auto: update
@@ -13,36 +11,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
         format_sql: true
-    open-in-view: true
-  servlet:
-    multipart:
-      max-file-size: 10000MB
-      max-request-size: 1000000MB
-      #出现错误时, 直接抛出异常
-  mvc:
-    throw-exception-if-no-handler-found: true
   #不要为我们工程中的资源文件建立映射
   resources:
     add-mappings: false
-server:
-  compression:
-    enabled: true
-    min-response-size: 2048
-    mime-types: application/json
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-  mapper-locations: classpath:mapper/*.xml
-logging:
-  level:
-    com.qky.qingchi.chat: DEBUG
-    com.qky.qingchi.talk: DEBUG
-  file: qingchi.log
+  mvc:
+    throw-exception-if-no-handler-found: true
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: 'loggers'
-socialuni:
-  server-url: "https://qkypc.qingchiapp.com:8091"

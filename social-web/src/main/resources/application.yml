@@ -16,5 +16,3 @@ spring:
   #不要为我们工程中的资源文件建立映射
   resources:
     add-mappings: false
-socialuni:
-  server-url: "https://localpc.qingchiapp.com:8092"
