@@ -1,4 +1,4 @@
-export default class BindPhoneNumQO {
+export default class SocialPhoneNumQO {
   phoneNum: string = null
   authCode: string = null
 

@@ -1,6 +1,6 @@
 import http from '@/plugins/http'
 import SocialUserRO from '@/model/social/SocialUserRO'
-import BindPhoneNumQO from '@/model/phone/BindPhoneNumQO'
+import SocialPhoneNumQO from '@/model/phone/SocialPhoneNumQO'
 import UserVO from '@/model/user/UserVO'
 import RefreshWxSessionKeyQO from '@/model/phone/RefreshWxSessionKeyQO'
 import BindWxPhoneNumQO from '@/model/phone/BindWxPhoneNumQO'
@@ -15,7 +15,7 @@ export default class PhoneAPI {
   }
 
   static bindPhoneNumAPI (phoneNum: string, authCode: string) {
-    const phoneNumObj: BindPhoneNumQO = new BindPhoneNumQO(phoneNum, authCode)
+    const phoneNumObj: SocialPhoneNumQO = new SocialPhoneNumQO(phoneNum, authCode)
     return http.post<UserVO>('phone/bindPhoneNum', phoneNumObj).then(res => {
       return res.data
     })
