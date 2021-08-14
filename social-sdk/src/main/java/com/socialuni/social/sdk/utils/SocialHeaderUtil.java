@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import org.springframework.stereotype.Component;
-import social.web.sdk.utils.RequestUtil;
+import socialuni.social.sdk.web.utils.RequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 

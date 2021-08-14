@@ -2,7 +2,7 @@ package com.socialuni.center.web.model.DO;
 
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
-import social.web.sdk.utils.IpUtil;
+import socialuni.social.sdk.web.utils.IpUtil;
 
 import javax.persistence.*;
 import java.util.Date;

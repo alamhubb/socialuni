@@ -2,7 +2,7 @@ package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.constant.AdminAppConfigConst;
 import com.socialuni.admin.web.constant.AdminUserType;
-import com.socialuni.admin.web.controller.DevAccountRepository;
+import com.socialuni.admin.web.repository.DevAccountRepository;
 import com.socialuni.admin.web.repository.TagRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.constant.StatusConst;

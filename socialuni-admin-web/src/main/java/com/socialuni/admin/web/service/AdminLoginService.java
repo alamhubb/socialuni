@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.service;
 
 
-import com.socialuni.admin.web.controller.DevAccountRepository;
+import com.socialuni.admin.web.repository.DevAccountRepository;
 import com.socialuni.admin.web.controller.DevUserRO;
 import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
@@ -14,7 +14,7 @@ import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.utils.PhoneNumUtil;
 import org.springframework.stereotype.Service;
-import social.web.sdk.utils.SocialTokenUtil;
+import socialuni.social.sdk.web.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;

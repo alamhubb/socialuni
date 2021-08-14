@@ -20,7 +20,7 @@
         <module>social-exception</module>
         <module>social-sdk</module>
         <module>social-web</module>
-        <module>social-web-sdk</module>
+        <module>social-sdk-web</module>
         <module>socialuni-api</module>
         <module>socialuni-utils</module>
         <module>socialuni-entity</module>
@@ -80,7 +80,7 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>social-web-sdk</artifactId>
+                <artifactId>social-sdk-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

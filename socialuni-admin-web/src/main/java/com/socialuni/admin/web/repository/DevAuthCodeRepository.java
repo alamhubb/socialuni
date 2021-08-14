@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.controller;
+package com.socialuni.admin.web.repository;
 
 
 import com.socialuni.entity.model.DevAuthCodeDO;

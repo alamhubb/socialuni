@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import social.web.sdk.utils.IpUtil;
-import social.web.sdk.utils.RequestUtil;
+import socialuni.social.sdk.web.utils.IpUtil;
+import socialuni.social.sdk.web.utils.RequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

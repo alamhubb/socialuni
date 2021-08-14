@@ -7,7 +7,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
-import social.web.sdk.constant.DevEnvType;
+import socialuni.social.sdk.web.constant.DevEnvType;
 
 import javax.annotation.Resource;
 

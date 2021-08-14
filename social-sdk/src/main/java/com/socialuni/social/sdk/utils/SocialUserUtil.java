@@ -12,7 +12,6 @@ import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import social.web.sdk.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 

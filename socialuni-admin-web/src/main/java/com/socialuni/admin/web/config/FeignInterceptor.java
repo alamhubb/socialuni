@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
-import social.web.sdk.utils.RequestUtil;
+import socialuni.social.sdk.web.utils.RequestUtil;
 
 @Slf4j
 @Component

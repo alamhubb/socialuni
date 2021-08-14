@@ -1,11 +1,11 @@
 package com.socialuni.admin.web.utils;
 
-import com.socialuni.admin.web.controller.DevAccountRepository;
+import com.socialuni.admin.web.repository.DevAccountRepository;
 import com.socialuni.admin.web.repository.DevTokenRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import social.web.sdk.utils.SocialTokenUtil;
+import socialuni.social.sdk.web.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 import java.util.Optional;

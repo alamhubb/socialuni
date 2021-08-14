@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>
-            <artifactId>social-web-sdk</artifactId>
+            <artifactId>social-sdk-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

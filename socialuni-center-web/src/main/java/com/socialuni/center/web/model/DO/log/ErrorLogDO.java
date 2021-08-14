@@ -9,8 +9,8 @@ import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import social.web.sdk.utils.IpUtil;
-import social.web.sdk.utils.RequestUtil;
+import socialuni.social.sdk.web.utils.IpUtil;
+import socialuni.social.sdk.web.utils.RequestUtil;
 
 import javax.annotation.Resource;
 import javax.persistence.*;

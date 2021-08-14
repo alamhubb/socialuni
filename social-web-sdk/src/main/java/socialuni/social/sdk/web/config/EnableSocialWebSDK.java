@@ -1,4 +1,4 @@
-package social.web.sdk.config;
+package socialuni.social.sdk.web.config;
 
 import org.springframework.context.annotation.Import;
 
@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(SocialWebAutoConfiguration.class)
+@Import(SocialWebSDKAutoConfiguration.class)
 public @interface EnableSocialWebSDK {
 }

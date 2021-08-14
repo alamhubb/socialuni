@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import social.web.sdk.utils.IpUtil;
+import socialuni.social.sdk.web.utils.IpUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;
