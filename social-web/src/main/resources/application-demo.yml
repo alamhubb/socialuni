@@ -19,55 +19,14 @@ socialuni:
         secret-key: ""
         region: ""
         bucket-name: ""
-config:
-  systemId: 1
-  tokenUrl:
-  initAvatar:
-  tokenKey:
-  qq:
-    mp:
-      qq_mp_id:
-      qq_mp_secret:
-    merchant:
-      qq_merchant_id:
-      qq_merchant_key:
-    cos:
-      secretId: 1
-      secretKey:
-      region:
-      bucketName:
-      imgUrl:
-    sms:
-      appId: 1
-      appKey:
-      templateId: 1
-      smsSign:
-  wx:
-    mp:
-      wx_mp_id:
-      wx_mp_secret:
-    app:
-      wx_app_id:
-    merchant:
-      wx_merchant_id:
-      wx_merchant_key:
-  tt:
-    mp:
-      tt_mp_id:
-      tt_mp_secret:
-  bd:
-    mp:
-      bd_mp_id:
-      bd_mp_client_id:
-      bd_mp_client_secret:
-  ali:
-    map:
-      secretKey:
-  wy:
-    security:
-      wy_security_id:
-      wy_security_secret:
-      wy_security_talk_business_id:
+      sms:
+        app-id: 1
+        app-key: ""
+        sms-sign: ""
+        template-id: 1
+  map:
+    ali:
+      secret-key: ""
 server:
   port: 8091
   ssl:
