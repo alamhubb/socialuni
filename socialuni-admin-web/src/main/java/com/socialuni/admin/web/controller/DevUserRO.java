@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Date;
 
 @Data
-public class DevUserAddVO {
+public class DevUserRO {
     private Long id;
     private String secretKey;
     private String token;
@@ -22,7 +22,7 @@ public class DevUserAddVO {
     private Date createTime;
     private Date updateTime;
 
-    public DevUserAddVO(DevAccountDO devAccountDO) {
+    public DevUserRO(DevAccountDO devAccountDO) {
         this.devNum = devAccountDO.getDevNum();
         String realPhoneNum = devAccountDO.getPhoneNum();
         if (StringUtils.isNotEmpty(realPhoneNum)) {

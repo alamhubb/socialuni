@@ -41,6 +41,10 @@ public class SocialTokenUtil {
         return SocialTokenUtil.isSuccess(SocialTokenUtil.getToken());
     }
 
+    public static String generateTokenByUserId(Integer userId) {
+        return SocialTokenUtil.generateTokenByUserKey(userId.toString());
+    }
+
     public static String generateTokenByUserKey(String userKey) {
         //生成的时候使用商户号，因为token中不存储敏感信息
         return Jwts.builder()//返回的字符串便是我们的jwt串了

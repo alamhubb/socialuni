@@ -20,10 +20,10 @@ public class DevAccountController {
     private DevAccountRepository devAccountRepository;
 
     @PostMapping("getUser")
-    public ResultRO<DevUserAddVO> getUser(DevAccountDO user) {
-        DevUserAddVO devUserAddVO = new DevUserAddVO(user);
+    public ResultRO<DevUserRO> getUser(DevAccountDO user) {
+        DevUserRO devUserRO = new DevUserRO(user);
         //则更新用户手机号
-        return new ResultRO<>(devUserAddVO);
+        return new ResultRO<>(devUserRO);
     }
 
     @PostMapping("resetSecretKey")

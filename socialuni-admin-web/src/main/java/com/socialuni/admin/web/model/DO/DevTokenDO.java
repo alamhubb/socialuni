@@ -1,4 +1,4 @@
-package com.socialuni.entity.model;
+package com.socialuni.admin.web.model.DO;
 
 import lombok.Data;
 

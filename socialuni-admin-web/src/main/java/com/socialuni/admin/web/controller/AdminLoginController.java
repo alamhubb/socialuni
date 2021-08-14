@@ -1,11 +1,9 @@
 package com.socialuni.admin.web.controller;
 
-import com.socialuni.admin.web.repository.UserRepository;
-import com.socialuni.entity.model.DevAccountDO;
-import com.socialuni.entity.model.DevTokenDO;
+import com.socialuni.admin.web.service.AdminLoginService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.utils.PhoneNumUtil;
+import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,18 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("user")
 @Slf4j
 public class AdminLoginController {
+    @Resource
+    AdminLoginService adminLoginService;
+
     @PostMapping("phoneLogin")
-    public ResultRO<LoginRO> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
-        ResultRO<LoginRO> resultRO = loginService.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<DevUserRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<DevUserRO>> resultRO = adminLoginService.phoneLogin(socialPhoneNumQO);
         return resultRO;
     }
-
-
-
 }

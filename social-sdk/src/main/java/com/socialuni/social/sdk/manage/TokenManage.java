@@ -15,7 +15,7 @@ public class TokenManage {
     CommonTokenRepository commonTokenRepository;
 
     public TokenDO create(Integer userId) {
-        String token = SocialTokenUtil.generateTokenByUserKey(userId.toString());
+        String token = SocialTokenUtil.generateTokenByUserId(userId);
         TokenDO commonUserTokenDO = this.create(userId, token);
         return commonUserTokenDO;
     }
