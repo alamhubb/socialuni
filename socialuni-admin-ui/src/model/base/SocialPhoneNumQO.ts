@@ -1,4 +1,4 @@
-export default class LoginUserVO {
+export default class SocialPhoneNumQO {
   phoneNum: string = null
   authCode: string = null
 

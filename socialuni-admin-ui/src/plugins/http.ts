@@ -1,7 +1,4 @@
 import Axios from 'axios'
-
-import router from '@/plugins/router/router'
-import { Message } from 'element-ui'
 import TokenUtil from '@/utils/TokenUtil'
 import ToastUtil from '@/utils/ToastUtil'
 import ErrorCode from '@/constants/ErrorCode'

@@ -18,7 +18,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import NavMenuItem from '@/components/layout/components/NavMenu/NavMenuItem.vue'
-import LoginUserVO from '@/model/base/LoginUserVO'
+import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 @Component({
   components: { NavMenuItem }
 })

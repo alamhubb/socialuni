@@ -1,6 +1,6 @@
 import http from '@/plugins/http'
 import JsonUtil from '@/utils/JsonUtil'
-import LoginUserVO from '@/model/base/LoginUserVO'
+import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import EncryptUtil from '@/utils/EncryptUtil'
 
 export default class UserAPI {

@@ -87,7 +87,7 @@ import {
   Component, Vue, Watch
 } from 'vue-property-decorator'
 import { userModule } from '@/store'
-import LoginUserVO from '@/model/base/LoginUserVO'
+import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import NumberUtil from '@/utils/NumberUtil'
 import { ElInput } from 'element-ui/types/input'
@@ -99,7 +99,7 @@ export default class LoginPage extends Vue {
     authCode: ElInput;
   }
 
-  loginUser: LoginUserVO = new LoginUserVO('18600409559', '4665')
+  loginUser: SocialPhoneNumQO = new SocialPhoneNumQO('18600409559', '4665')
 
   authCodeInterval = 30
 

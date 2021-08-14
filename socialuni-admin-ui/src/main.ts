@@ -3,13 +3,11 @@ import App from './App.vue'
 import store from './store'
 import router from './plugins/router/router'
 import '@/plugins/router/interceptor'
-import * as filters from '@/plugins/filters/index'
 import '@/styles/index.scss'
 import './plugins/element'
 import components from '@/components'
 import appConfig from '@/plugins/appConfig'
 import echarts from 'echarts'
-import ColorUtil from '@/utils/ColorUtil'
 
 import VueClipboard from 'vue-clipboard2'
 

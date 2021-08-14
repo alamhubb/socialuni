@@ -4,16 +4,16 @@ import StorageUtil from '@/utils/StorageUtil'
 import router from '@/plugins/router/router'
 import { Message } from 'element-ui'
 import AppConst from '@/constants/AppConst'
-import LoginUserVO from '@/model/base/LoginUserVO'
+import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import UserAPI from '@/api/UserAPI'
 
 @Module({ generateMutationSetters: true })
 export default class UserModule extends VuexModule {
-  user: LoginUserVO = StorageUtil.getObj(AppConst.loginUser) || null
+  user: SocialPhoneNumQO = StorageUtil.getObj(AppConst.loginUser) || null
 
-  setUser(user: LoginUserVO) {
+  setUser(user: SocialPhoneNumQO) {
     this.user = user
     if (user) {
       StorageUtil.setObj(AppConst.loginUser, user)
@@ -23,10 +23,10 @@ export default class UserModule extends VuexModule {
   }
 
   @Action
-  userLogin(user: LoginUserVO) {
-    return LoginAPI.loginAPI(user).then((res: any) => {
+  userLogin(user: SocialPhoneNumQO) {
+    return LoginAPI.loginAPI(user).then((res) => {
       TokenUtil.set(res.token)
-      this.setUser(res)
+      this.setUser(res.user)
       // this.addPermission()
       ToastUtil.success('登录成功')
     })

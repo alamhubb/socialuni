@@ -1,11 +1,10 @@
 import http from '@/plugins/http'
-import JsonUtil from '@/utils/JsonUtil'
-import LoginUserVO from '@/model/base/LoginUserVO'
-import EncryptUtil from '@/utils/EncryptUtil'
+import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
+import SocialLoginRO from '@/model/base/SocialLoginRO'
 
 export default class LoginAPI {
-  static loginAPI(user: LoginUserVO) {
-    return http.post('user/login', user).then((res: any) => {
+  static loginAPI(user: SocialPhoneNumQO) {
+    return http.post<SocialLoginRO>('user/phoneLogin', user).then(res => {
       return res.data
     })
   }
