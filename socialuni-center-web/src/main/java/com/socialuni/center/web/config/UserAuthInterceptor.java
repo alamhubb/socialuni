@@ -8,6 +8,7 @@ import com.socialuni.social.constant.ErrorCode;
 import com.socialuni.social.constant.ErrorType;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.entity.model.DO.OperateLogDO;
@@ -27,8 +28,8 @@ import java.util.Date;
 @Component
 @Slf4j
 public class UserAuthInterceptor implements HandlerInterceptor {
-    @Resource
-    private RedisUtil redisUtil;
+//    @Resource
+//    private RedisUtil redisUtil;
 
     /*
      * 进入controller层之前拦截请求
@@ -44,11 +45,11 @@ public class UserAuthInterceptor implements HandlerInterceptor {
             operateLogDO.setUserId(user.getId());
         }
         Integer devId = DevAccountUtils.getDevId();
-        String requestIp = IpUtil.getIpAddr(request);
+        String userIp = IpUtil.getIpAddr(request);
         String uri = request.getRequestURI();
         String requestMethod = request.getMethod();
         operateLogDO.setDevId(devId);
-        operateLogDO.setIp(requestIp);
+        operateLogDO.setIp(userIp);
         operateLogDO.setCreateTime(startTime);
         operateLogDO.setSuccess(true);
         operateLogDO.setErrorCode(ResultRO.successCode);
@@ -64,9 +65,16 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         log.info("[{}({})]", operateLogDO.getRequestMethod(), operateLogDO.getUri());
 //        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri());
 
-        String ipKey = "ipKey:" + requestIp;
+        String ipKey = "ipKey:" + userIp;
 
-        Object keyCountObj = redisUtil.get(ipKey);
+        Integer ipCount = AppStaticData.getIpCount(userIp);
+        //获取验证码超过10次，则联系客服
+        if (ipCount > 1000) {
+            throw new SocialParamsException("访问频繁，请联系客服处理");
+        }
+        AppStaticData.ipCountPlus(userIp);
+
+        /*Object keyCountObj = redisUtil.get(ipKey);
         //如果已经有了赋值
         if (keyCountObj != null) {
             int count = (Integer) keyCountObj;
@@ -82,7 +90,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
             redisUtil.set(ipKey, count, expireTime);
         } else {
             redisUtil.set(ipKey, 1, 60);
-        }
+        }*/
 
 
         if (
