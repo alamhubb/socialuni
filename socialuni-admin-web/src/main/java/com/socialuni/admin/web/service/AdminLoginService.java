@@ -13,8 +13,8 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.utils.PhoneNumUtil;
+import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;
-import com.socialuni.social.sdk.web.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
