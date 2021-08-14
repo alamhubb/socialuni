@@ -94,6 +94,8 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                         || uri.contains("report/queryReportTypes")
                         //查询首页轮播图
                         || uri.contains("qingchi/queryHomeSwipers")
+                        //同步生产环境数据到开发
+                        || uri.contains("admin/syncProdDevAccount")
                         || uri.contains("tag/queryTags")
                         || uri.contains("tag/queryHotTags")
                         || uri.contains("tag/queryTagTypes")

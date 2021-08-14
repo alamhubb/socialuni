@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("com.qingchi")
 @EnableJpaRepositories("com.qingchi")
 @ComponentScan(value="com.qingchi")
+@EnableSocialuni
 @EnableTransactionManagement
 @SpringBootApplication
 public class AdminWebApplication {

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao;
 
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

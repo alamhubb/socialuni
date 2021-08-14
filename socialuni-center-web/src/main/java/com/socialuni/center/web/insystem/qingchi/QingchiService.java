@@ -1,4 +1,4 @@
-package com.socialuni.center.web.qingchi;
+package com.socialuni.center.web.insystem.qingchi;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;

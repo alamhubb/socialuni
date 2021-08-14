@@ -1,4 +1,4 @@
-package com.socialuni.center.web.qingchi;
+package com.socialuni.center.web.insystem.qingchi;
 
 import com.socialuni.api.feignAPI.SocialuniQingchiAPI;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;

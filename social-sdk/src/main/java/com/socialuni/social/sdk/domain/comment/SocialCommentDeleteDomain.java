@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.domain.comment;
 
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;

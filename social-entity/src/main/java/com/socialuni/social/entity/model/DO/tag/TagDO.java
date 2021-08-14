@@ -1,6 +1,9 @@
 package com.socialuni.social.entity.model.DO.tag;
 
+import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.social.constant.GenderType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,7 +26,8 @@ import java.util.Date;
         }
 )
 @Data
-public class TagDO  {
+@NoArgsConstructor
+public class TagDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -63,4 +67,21 @@ public class TagDO  {
     //是否在前台展示，app产品，不在前台展示
     private Boolean showFront;
     private Integer devId;
+
+    public TagDO(Integer userId, String tagName, String tagDesc) {
+        this.setApplyUserId(userId);
+        //先默认为1，以后设置可以更改选择类型
+        this.setTagTypeId(1);
+        this.setName(tagName);
+        this.setAvatar("https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/static/qclogo.jpg!avatar");
+        this.setDescription(tagDesc);
+        this.setStatus(ContentStatus.enable);
+        this.setCount(0);
+        this.setTalkCount(0);
+        this.setShowFront(true);
+        Date curDate = new Date();
+        this.setCreateTime(curDate);
+        this.setUpdateTime(curDate);
+        this.setVisibleGender(GenderType.all);
+    }
 }

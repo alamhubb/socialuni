@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.domain.BaseModelService;
 import com.socialuni.social.model.model.QO.ReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.factory.ReportFactory;
 import com.socialuni.social.entity.model.DO.ReportDO;

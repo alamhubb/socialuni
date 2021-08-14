@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.factory;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.repository.CommentRepository;
 import org.springframework.stereotype.Component;
 

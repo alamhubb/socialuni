@@ -54,7 +54,7 @@ public class SoicialTagAddDomain {
                 throw new SocialBusinessException("标签描述包含违规内容，禁止发布，请修改后重试");
             }
         }
-        TagDO tagDO = socialTagManage.createTagDO(mineUser, tagAddVO);
+        TagDO tagDO = socialTagManage.createTagDO(mineUser.getId(), tagAddVO);
         TagRO tagRO = SocialTagROFactory.getTagRO(tagDO);
         return tagRO;
     }

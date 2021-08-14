@@ -49,5 +49,9 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>socialuni-entity</artifactId>
+        </dependency>
     </dependencies>
 </project>

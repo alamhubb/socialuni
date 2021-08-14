@@ -12,7 +12,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.repository.*;

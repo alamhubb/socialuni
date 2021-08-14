@@ -3,10 +3,11 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRepository;
 import com.socialuni.admin.web.controller.DevUserRO;
-import com.socialuni.admin.web.manage.DevAccountManage;
+import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.admin.web.model.DO.DevTokenDO;
 import com.socialuni.admin.web.repository.DevTokenRepository;
+import com.socialuni.api.feignAPI.SocialuniAdminAPI;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
@@ -25,9 +26,12 @@ public class AdminLoginService {
     @Resource
     DevAccountRepository devAccountRepository;
     @Resource
-    DevAccountManage devAccountManage;
+    DevAccountEntity devAccountEntity;
     @Resource
     DevTokenRepository devTokenRepository;
+
+    @Resource
+    SocialuniAdminAPI socialuniAdminAPI;
 
     @Transactional
     public ResultRO<SocialLoginRO<DevUserRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
@@ -46,7 +50,9 @@ public class AdminLoginService {
         DevAccountDO devAccountDO = devAccountRepository.findFirstByPhoneNumOrderByIdAsc(phoneNum);
 
         if (devAccountDO == null) {
-            devAccountDO = devAccountManage.createDevAccount(phoneNum);
+            devAccountDO = devAccountEntity.createDevAccount(phoneNum);
+            //同步生产环境数据到开发环境
+            socialuniAdminAPI.syncProdDevAccount(devAccountDO);
         }
 
         //有用户返回，没有创建

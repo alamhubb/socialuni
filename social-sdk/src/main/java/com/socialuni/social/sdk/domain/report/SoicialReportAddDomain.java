@@ -10,7 +10,7 @@ import com.socialuni.social.model.model.QO.ReportAddQO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.SocialUserUtil;

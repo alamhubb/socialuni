@@ -8,7 +8,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.constant.status.ContentStatus;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.domain.notify.NotifyDomain;
 import com.socialuni.social.sdk.domain.report.ReportDomain;
 import com.socialuni.social.sdk.entity.comment.SocialPostCommentEntity;
