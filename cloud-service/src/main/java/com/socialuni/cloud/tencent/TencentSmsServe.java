@@ -6,8 +6,10 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.utils.AuthCodeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class TencentSmsServe {
     private static int appId;
     private static String appKey;
@@ -48,10 +50,10 @@ public class TencentSmsServe {
         SmsSingleSenderResult result = null;
         try {
             log.info("发送验证码authCode:{}", authCode);
-            /*result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
+            result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
             if (result == null || result.result != 0) {
                 throw new SocialBusinessException("验证码发送失败，请稍候重试");
-            }*/
+            }
         } catch (Exception e) {
             throw new SocialBusinessException("验证码发送失败，请稍候重试");
         }

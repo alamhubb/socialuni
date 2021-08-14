@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: qingchi
+    active: local
   jpa:
     database: MYSQL
     #    show-sql: true

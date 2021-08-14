@@ -52,7 +52,7 @@ public class AdminLoginService {
         if (devAccountDO == null) {
             devAccountDO = devAccountEntity.createDevAccount(phoneNum);
             //同步生产环境数据到开发环境
-            socialuniAdminAPI.syncProdDevAccount(devAccountDO);
+//            socialuniAdminAPI.syncProdDevAccount(devAccountDO);
         }
 
         //有用户返回，没有创建
