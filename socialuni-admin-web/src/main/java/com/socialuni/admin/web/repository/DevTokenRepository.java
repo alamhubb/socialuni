@@ -3,6 +3,7 @@ package com.socialuni.admin.web.repository;
 import com.socialuni.admin.web.model.DO.DevTokenDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * @author qinkaiyuan
@@ -10,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface DevTokenRepository extends JpaRepository<DevTokenDO, Integer> {
     @Query(nativeQuery = true, value = "select t.token_code from dev_token t where t.user_id =:userId order by id desc limit 1")
-    String findFirstTokenCodeByUserId(Integer userId);
+    String findFirstTokenCodeByUserId(@Param("userId") Integer userId);
 }
 
 

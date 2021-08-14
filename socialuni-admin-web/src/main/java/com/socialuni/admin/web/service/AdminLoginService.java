@@ -63,6 +63,7 @@ public class AdminLoginService {
         userToken = devTokenRepository.save(new DevTokenDO(userToken, userId)).getTokenCode();
 
         DevUserRO devUserRO = new DevUserRO(devAccountDO);
+        devUserRO.setSecretKey(devAccountDO.getSecretKey());
 
         SocialLoginRO<DevUserRO> socialLoginRO = new SocialLoginRO<>(userToken, devUserRO);
 

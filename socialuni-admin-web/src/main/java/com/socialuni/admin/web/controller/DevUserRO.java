@@ -29,5 +29,6 @@ public class DevUserRO {
             this.phoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);
             this.username = this.phoneNum;
         }
+        this.secretKey = devAccountDO.getSecretKey().substring(0, 5) + "*****************";
     }
 }

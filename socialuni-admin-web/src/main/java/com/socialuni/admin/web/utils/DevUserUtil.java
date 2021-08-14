@@ -26,13 +26,13 @@ public class DevUserUtil {
         DevUserUtil.devAccountRepository = devAccountRepository;
     }
 
-    public static DevAccountDO getUserByToken() {
+    public static DevAccountDO getDevAccount() {
         String token = SocialTokenUtil.getToken();
-        return DevUserUtil.getUserByToken(token);
+        return DevUserUtil.getDevAccountByToken(token);
     }
 
     //得到用户信息
-    private static DevAccountDO getUserByToken(String token) {
+    private static DevAccountDO getDevAccountByToken(String token) {
         if (token != null) {
             if (SocialTokenUtil.isSuccess(token)) {
                 String userId = SocialTokenUtil.getUserKeyByToken(token);

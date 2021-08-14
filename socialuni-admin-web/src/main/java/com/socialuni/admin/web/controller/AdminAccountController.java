@@ -2,6 +2,7 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.repository.DevAccountRepository;
+import com.socialuni.admin.web.utils.DevUserUtil;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.utils.UUIDUtil;
@@ -21,14 +22,16 @@ public class AdminAccountController {
     private DevAccountRepository devAccountRepository;
 
     @PostMapping("getUser")
-    public ResultRO<DevUserRO> getUser(DevAccountDO user) {
+    public ResultRO<DevUserRO> getUser() {
+        DevAccountDO user = DevUserUtil.getDevAccount();
         DevUserRO devUserRO = new DevUserRO(user);
         //则更新用户手机号
         return new ResultRO<>(devUserRO);
     }
 
     @PostMapping("resetSecretKey")
-    public ResultRO<String> resetSecretKey(DevAccountDO user) {
+    public ResultRO<String> resetSecretKey() {
+        DevAccountDO user = DevUserUtil.getDevAccount();
         String secretKey = UUIDUtil.getUUID();
         user.setSecretKey(secretKey);
         devAccountRepository.save(user);
