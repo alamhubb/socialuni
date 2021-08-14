@@ -15,7 +15,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableConfigurationProperties({
         SocialuniAliMapProperties.class,
         SocialuniCloudTencentCosProperties.class,
-        SocialuniProperties.class,
         SocialuniProviderQQProperties.class,
         SocialuniProviderWxProperties.class,
         SocialuniUserProperties.class

@@ -1,11 +1,13 @@
 package com.socialuni.admin.web;
 
 import com.socialuni.api.config.EnableSocialuni;
+import com.socialuni.cloud.config.EnableSocialCloudServiceSDK;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableSocialuni
+@EnableSocialCloudServiceSDK
 @EnableTransactionManagement
 @SpringBootApplication
 public class AdminWebApplication {
