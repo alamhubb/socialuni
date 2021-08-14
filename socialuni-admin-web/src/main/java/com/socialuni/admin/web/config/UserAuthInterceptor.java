@@ -38,7 +38,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         String uri = req.getRequestURI();
 
         if ((req.getMethod().equals(RequestMethod.OPTIONS.name())
-                || uri.contains("user/login")
+                || uri.contains("user/phoneLogin")
                 || uri.contains("phone/sendAuthCode")
                 //这里只查询没被封禁的
                 || user != null)
