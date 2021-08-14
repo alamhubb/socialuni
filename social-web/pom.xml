@@ -13,7 +13,7 @@
         <groupId>com.socialuni</groupId>
         <artifactId>socialuni-parent</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
+
     </parent>
 
     <properties>
