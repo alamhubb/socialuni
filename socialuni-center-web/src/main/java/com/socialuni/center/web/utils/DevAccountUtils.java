@@ -8,7 +8,7 @@ import com.socialuni.entity.model.DevAccountProviderDO;
 import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import com.socialuni.social.sdk.web.utils.RequestUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

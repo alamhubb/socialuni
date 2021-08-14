@@ -5,9 +5,9 @@ import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.constant.DevEnvType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
-import com.socialuni.social.sdk.web.constant.DevEnvType;
 
 import javax.annotation.Resource;
 

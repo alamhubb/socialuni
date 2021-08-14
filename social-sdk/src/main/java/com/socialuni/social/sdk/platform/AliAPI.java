@@ -3,10 +3,10 @@ package com.socialuni.social.sdk.platform;
 import com.socialuni.social.sdk.model.IpResult;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.utils.common.RestUtil;
+import com.socialuni.social.web.sdk.utils.IpUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import com.socialuni.social.sdk.web.utils.IpUtil;
 
 @Component
 public class AliAPI {

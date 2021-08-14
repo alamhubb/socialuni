@@ -4,9 +4,9 @@ import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
+import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import com.socialuni.social.sdk.web.utils.SocialTokenUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;

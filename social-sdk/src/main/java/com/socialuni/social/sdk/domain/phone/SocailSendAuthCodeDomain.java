@@ -15,10 +15,10 @@ import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.web.sdk.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import com.socialuni.social.sdk.web.utils.IpUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;

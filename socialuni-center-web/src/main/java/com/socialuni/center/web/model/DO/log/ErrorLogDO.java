@@ -5,12 +5,12 @@ import com.socialuni.center.web.repository.log.ErrorLogRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.ErrorLogUtils;
 import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.web.sdk.utils.IpUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import com.socialuni.social.sdk.web.utils.IpUtil;
-import com.socialuni.social.sdk.web.utils.RequestUtil;
 
 import javax.annotation.Resource;
 import javax.persistence.*;
