@@ -1,4 +1,4 @@
-package com.socialuni.social.utils;
+package social.web.sdk.utils;
 
 import org.apache.commons.lang3.ObjectUtils;
 

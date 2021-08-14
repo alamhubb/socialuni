@@ -9,7 +9,7 @@ import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.model.OperateLogDO;
 import com.socialuni.social.sdk.redis.RedisUtil;
-import com.socialuni.social.utils.IpUtil;
+import social.web.sdk.utils.IpUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;

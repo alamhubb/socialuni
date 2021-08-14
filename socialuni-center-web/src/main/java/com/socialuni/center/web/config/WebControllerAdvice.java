@@ -8,7 +8,7 @@ import com.socialuni.social.constant.ErrorType;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.OperateLogDO;
-import com.socialuni.social.utils.IpUtil;
+import social.web.sdk.utils.IpUtil;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.sdk.utils.common.JsonUtils;

@@ -1,6 +1,6 @@
 package com.socialuni.center.web.model.DO;
 
-import com.socialuni.social.utils.IpUtil;
+import social.web.sdk.utils.IpUtil;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialHeaderUtil;
 import lombok.Data;

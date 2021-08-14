@@ -8,7 +8,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
-import com.socialuni.social.utils.IpUtil;
+import social.web.sdk.utils.IpUtil;
 import com.socialuni.social.utils.PhoneNumUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
