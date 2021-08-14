@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
 
-    <artifactId>social-sdk-web</artifactId>
+    <artifactId>social-web-sdk</artifactId>
     <packaging>jar</packaging>
-    <name>social-sdk-web</name>
+    <name>social-web-sdk</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

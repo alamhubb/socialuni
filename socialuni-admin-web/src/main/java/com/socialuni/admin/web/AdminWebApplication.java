@@ -4,12 +4,12 @@ import com.socialuni.api.config.EnableSocialuni;
 import com.socialuni.cloud.config.EnableSocialCloudServiceSDK;
 import com.socialuni.entity.config.EnableSocialuniEntitySDK;
 import com.socialuni.social.entity.config.EnableSocialEntitySDK;
+import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import com.socialuni.social.sdk.web.config.EnableSocialWebSDK;
 
 @EnableSocialuni
 @EnableSocialCloudServiceSDK

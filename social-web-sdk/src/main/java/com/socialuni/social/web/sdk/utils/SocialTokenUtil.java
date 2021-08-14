@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.web.utils;
+package com.socialuni.social.web.sdk.utils;
 
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.utils.UUIDUtil;
