@@ -4,14 +4,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import Toast from '@/utils/Toast'
+import ToastUtil from '@/utils/ToastUtil'
 
 @Component
 export default class YMarkdownCopy extends Vue {
   @Prop() private text: string
 
   onCopy() {
-    Toast.success('复制成功')
+    ToastUtil.success('复制成功')
   }
 }
 </script>

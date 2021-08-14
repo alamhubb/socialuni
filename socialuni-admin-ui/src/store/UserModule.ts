@@ -1,4 +1,4 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import LoginAPI from '@/api/LoginAPI'
 import StorageUtil from '@/utils/StorageUtil'
 import router from '@/plugins/router/router'
@@ -8,12 +8,13 @@ import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import UserAPI from '@/api/UserAPI'
+import UserVO from '@/model/base/UserVO'
 
 @Module({ generateMutationSetters: true })
 export default class UserModule extends VuexModule {
-  user: SocialPhoneNumQO = StorageUtil.getObj(AppConst.loginUser) || null
+  user: UserVO = StorageUtil.getObj(AppConst.loginUser) || null
 
-  setUser(user: SocialPhoneNumQO) {
+  setUser(user: UserVO) {
     this.user = user
     if (user) {
       StorageUtil.setObj(AppConst.loginUser, user)
