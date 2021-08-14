@@ -1,7 +1,9 @@
 package com.socialuni.social.sdk.entity.user;
 
-import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
+import com.socialuni.social.sdk.manage.SocialUserManage;
+import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,18 @@ public class SocialUserPhoneEntity {
     private SocialUserPhoneManage socialUserPhoneManage;
     @Resource
     private UserRepository userRepository;
+    @Resource
+    SocialUserManage socialUserManage;
+    @Resource
+    SocialUserFansDetailManage socialUserFansDetailManage;
+
+    public UserDO createUserPhoneEntity(String phoneNum) {
+        UserDO mineUser = socialUserManage.createUserByPhoneLogin();
+        //创建或返回
+        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
+        socialUserPhoneManage.createUserPhoneNum(mineUser, "86", phoneNum);
+        return mineUser;
+    }
 
     public UserDO checkPhoneNumAndBind(UserDO mineUser, String phoneCountryCode, String phoneNum) {
         //业务校验

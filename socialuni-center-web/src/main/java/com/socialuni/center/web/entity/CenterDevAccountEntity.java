@@ -1,0 +1,39 @@
+package com.socialuni.center.web.entity;
+
+import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
+import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+
+//授权用户信息
+@Component
+public class CenterDevAccountEntity {
+    @Resource
+    private SocialUserPhoneStore socialUserPhoneStore;
+    @Resource
+    private SocialUserPhoneEntity socialUserPhoneEntity;
+
+    public UserDO getOrCreateDevAccountUserDO() {
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+
+        String phoneNum = devAccountDO.getPhoneNum();
+
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByPhoneNum(phoneNum);
+
+        UserDO mineUser;
+        if (socialUserPhoneDO == null) {
+            //如果没注册账号，则直接注册
+            //            throw new SocialBusinessException("默认使用开发者账号绑定的手机号对应的清池账号进行测试，请登录清池注册后测试");
+            mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+        } else {
+            mineUser = SocialUserUtil.get(socialUserPhoneDO.getUserId());
+        }
+        return mineUser;
+    }
+}

@@ -65,8 +65,6 @@ public class AuthThirdUserEntity {
                 throw new SocialBusinessException("用户未绑定手机号，请先绑定手机号");
             }
             centerUserDetailRO.setPhoneNum(socialUserPhoneDO.getPhoneNum());
-        } else {
-            centerUserDetailRO.setPhoneNum(null);
         }
         return centerUserDetailRO;
     }

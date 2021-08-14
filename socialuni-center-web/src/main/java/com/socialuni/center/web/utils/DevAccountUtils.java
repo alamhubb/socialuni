@@ -7,13 +7,9 @@ import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.entity.model.DevAccountProviderDO;
 import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
-import org.springframework.stereotype.Component;
 import com.socialuni.social.sdk.web.utils.RequestUtil;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
@@ -80,20 +76,6 @@ public class DevAccountUtils {
         DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findByDevIdAndMpTypeAndStatus(devAccountDO.getId(), mpType, ConstStatus.enable);
 
         return devAccountProviderDO;
-    }
-
-    public static UserDO getDevAccountUserDO() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
-
-        String phoneNum = devAccountDO.getPhoneNum();
-
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByPhoneNum(phoneNum);
-
-        if (socialUserPhoneDO == null) {
-            throw new SocialBusinessException("默认使用开发者账号绑定的手机号对应的清池账号进行测试，请登录清池注册后测试");
-        }
-        UserDO userDO = SocialUserUtil.get(socialUserPhoneDO.getUserId());
-        return userDO;
     }
 
     public static DevAccountDO getDevAccount() {

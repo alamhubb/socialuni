@@ -1,18 +1,17 @@
 package com.socialuni.social.sdk.domain.login;
 
-import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.social.sdk.manage.SocialUserManage;
-import com.socialuni.social.sdk.manage.TokenManage;
-import com.socialuni.social.sdk.manage.phone.AuthenticationManage;
-import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
+import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
+import com.socialuni.social.sdk.manage.TokenManage;
+import com.socialuni.social.sdk.manage.phone.AuthenticationManage;
+import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,15 +20,13 @@ import javax.transaction.Transactional;
 @Service
 public class SocialPhoneLoginDomain {
     @Resource
-    SocialUserManage socialUserManage;
+    TokenManage tokenManage;
     @Resource
     SocialUserPhoneManage socialUserPhoneManage;
     @Resource
     AuthenticationManage authenticationManage;
     @Resource
-    TokenManage tokenManage;
-    @Resource
-    SocialUserFansDetailManage socialUserFansDetailManage;
+    SocialUserPhoneEntity socialUserPhoneEntity;
 
     @Transactional
     public SocialLoginRO<SocialMineUserDetailRO> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
@@ -48,10 +45,7 @@ public class SocialPhoneLoginDomain {
         if (phoneNumDO != null) {
             mineUser = SocialUserUtil.get(phoneNumDO.getUserId());
         } else {
-            mineUser = socialUserManage.createUserByPhoneLogin();
-            //创建或返回
-            socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-            socialUserPhoneManage.createUserPhoneNum(mineUser, "86", phoneNum);
+            mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         }
         SocialMineUserDetailRO userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
