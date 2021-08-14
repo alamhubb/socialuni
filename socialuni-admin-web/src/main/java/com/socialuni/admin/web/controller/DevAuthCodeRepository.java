@@ -4,8 +4,6 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.entity.model.DevAuthCodeDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
 public interface DevAuthCodeRepository extends JpaRepository<DevAuthCodeDO, Integer> {
     DevAuthCodeDO findFirstByPhoneNumOrderByCreateTimeDescIdAsc(String phoneNum);
 
@@ -13,5 +11,5 @@ public interface DevAuthCodeRepository extends JpaRepository<DevAuthCodeDO, Inte
 
     Integer countByIp(String ip);
 
-    Integer countByUserId(Integer userId);
+//    Integer countByUserId(Integer userId);
 }
