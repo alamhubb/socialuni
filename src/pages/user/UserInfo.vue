@@ -61,7 +61,7 @@
         </view>
         <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-auto" :class="{'row-around':isMine}">
-            <view v-if="isMine" class="px-lg line-height-1" @click.stop="toFollowVue">
+            <view class="px-lg line-height-1" @click.stop="toFollowVue">
               <text class="text-lg font-bold text-black row-center">
                 {{ userProp.followNum }}
               </text>
@@ -72,7 +72,7 @@
               <text class="text-lg font-bold text-black row-center">
                 {{ userProp.fansNum }}
               </text>
-              <text class="text-sm text-gray">关注者</text>
+              <text class="text-sm text-gray">被关注</text>
             </view>
           </view>
 
