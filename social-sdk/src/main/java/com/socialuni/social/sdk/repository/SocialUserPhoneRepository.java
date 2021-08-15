@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserPhoneRepository extends JpaRepository<SocialUserPhoneDO, Integer> {
     SocialUserPhoneDO findByPhoneNumAndStatus(String phoneNum, String status);
+    SocialUserPhoneDO findByPhoneNum(String phoneNum);
+    SocialUserPhoneDO findByUserId(Integer userId);
     SocialUserPhoneDO findByUserIdAndStatus(Integer userId, String status);
 }

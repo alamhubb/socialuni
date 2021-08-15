@@ -50,6 +50,7 @@ public class CenterAppService {
 
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
         UserDO mineUser = CenterUserUtil.getMineUser();
+        frontErrorLogVO.setDevId(DevAccountUtils.getDevId());
         return socialFrontLogDomain.sendErrorLog(frontErrorLogVO, mineUser);
     }
 }

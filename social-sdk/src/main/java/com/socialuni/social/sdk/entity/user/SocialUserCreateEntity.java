@@ -42,7 +42,7 @@ public class SocialUserCreateEntity {
         //如果已经注册过
         if (socialUserAccountDO != null) {
             mineUser = SocialUserUtil.get(socialUserAccountDO.getUserId());
-            socialUserAccountManage.updateSessionKey(uniUnionIdRO.getSession_key(), mineUser.getId());
+            socialUserAccountManage.updateSessionKey(loginQO.getProvider(), uniUnionIdRO.getSession_key(), mineUser.getId());
         } else {
             mineUser = socialUserManage.createUserByProviderLogin(loginQO);
             //创建或返回

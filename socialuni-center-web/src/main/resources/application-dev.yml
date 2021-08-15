@@ -27,7 +27,7 @@ socialuni:
     ali:
       secret-key: ""
 server:
-  port: 8092
+  port: 8091
   ssl:
     # 证书名称
     key-store: localpc.qingchiapp.com.jks

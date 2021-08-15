@@ -23,14 +23,13 @@ public class SocialUserAccountManage {
     @Resource
     SocialUserAccountStore socialUserAccountStore;
 
-    public SocialUserAccountDO updateSessionKey(String sessionKey, Integer mineUserId) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(ProviderType.wx, mineUserId);
+    public void updateSessionKey(String provider, String sessionKey, Integer mineUserId) {
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, mineUserId);
         //更新数据库的key
         socialUserAccountDO.setUpdateTime(new Date());
         //再次更新下sessionkey
         socialUserAccountDO.setSessionKey(sessionKey);
         socialUserAccountDO = socialUserAccountRepository.save(socialUserAccountDO);
-        return socialUserAccountDO;
     }
 
     @Async
