@@ -19,10 +19,10 @@ import java.util.List;
 @FeignClient(name = "talk", url = "${socialuni.server-url:https://api.socialuni.com}")
 public interface SocialuniTalkAPI {
     @GetMapping("queryTalks")
-    ResultRO<List<CenterTalkRO>> queryHomeTalks();
+    ResultRO<List<CenterTalkRO>> queryTalks();
 
     @PostMapping("queryTalks")
-    ResultRO<List<CenterTalkRO>> queryHomeTabTalks(@RequestBody @Valid CenterHomeTabTalkQueryQO queryQO);
+    ResultRO<List<CenterTalkRO>> queryTalks(@RequestBody @Valid CenterHomeTabTalkQueryQO queryQO);
 
     @PostMapping("postTalk")
     ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);

@@ -11,8 +11,10 @@ import java.util.List;
 @Data
 public class SocialHomeTabTalkQueryQO {
     private List<Integer> talkIds;
-    private String tabType;
+    private String homeTabType;
     private List<Integer> tagIds;
+    //新版本用genderType，旧版本用gender
+    private String gender;
 
     private String adCode;
     private Double lon;
@@ -20,14 +22,7 @@ public class SocialHomeTabTalkQueryQO {
 
     private Integer minAge;
     private Integer maxAge;
+
     private String userGender;
-    //新版本用genderType，旧版本用gender
     private String talkVisibleGender;
-    //新版本用genderType，旧版本用gender
-    private String genderType;
-    private Boolean openPosition;
-    //平台
-    private String platform;
-    //备用属性
-    private String standby;
 }

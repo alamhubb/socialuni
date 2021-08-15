@@ -5,11 +5,22 @@ import com.socialuni.api.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.domain.talk.*;
+import com.socialuni.center.web.utils.CenterUserUtil;
+import com.socialuni.social.constant.GenderType;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.sdk.config.SocialAppConfig;
+import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
+import com.socialuni.social.sdk.constant.TalkTabType;
+import com.socialuni.social.sdk.model.RectangleVO;
+import com.socialuni.social.sdk.platform.AliAPI;
+import com.socialuni.social.sdk.utils.GenderUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,13 +37,13 @@ public class CenterTalkService {
     CenterUserTalkQueryDomain centerUserTalkQueryDomain;
 
     //无参数get请求访问talks，主要为了方便用户体验。
-    public ResultRO<List<CenterTalkRO>> queryHomeTalks() {
+    public ResultRO<List<CenterTalkRO>> queryTalks() {
         List<CenterTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTalks();
         return new ResultRO<>(talkROS);
     }
 
     //查询非关注tab的动态列表
-    public ResultRO<List<CenterTalkRO>> queryHomeTabTalks(CenterHomeTabTalkQueryQO queryQO) {
+    public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
         List<CenterTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
         return new ResultRO<>(talkROS);
     }

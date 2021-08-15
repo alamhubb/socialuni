@@ -32,19 +32,19 @@ public class SocialHomeTalkQueryQOFactory {
         private String standby;*/
 
         socialHomeTabTalkQueryQO.setTalkIds(talkIds);
-        socialHomeTabTalkQueryQO.setTabType(queryQO.getTabType());
+        socialHomeTabTalkQueryQO.setHomeTabType(queryQO.getHomeTabType());
         socialHomeTabTalkQueryQO.setTagIds(queryQO.getTagIds());
+        socialHomeTabTalkQueryQO.setGender(queryQO.getGender());
         socialHomeTabTalkQueryQO.setAdCode(queryQO.getAdCode());
         socialHomeTabTalkQueryQO.setLat(queryQO.getLat());
         socialHomeTabTalkQueryQO.setLon(queryQO.getLon());
-        socialHomeTabTalkQueryQO.setGenderType(queryQO.getGenderType());
         socialHomeTabTalkQueryQO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryQO.setMaxAge(queryQO.getMaxAge());
-        socialHomeTabTalkQueryQO.setUserGender(queryQO.getUserGender());
-        socialHomeTabTalkQueryQO.setTalkVisibleGender(queryQO.getTalkVisibleGender());
-        socialHomeTabTalkQueryQO.setOpenPosition(queryQO.getOpenPosition());
-        socialHomeTabTalkQueryQO.setPlatform(queryQO.getPlatform());
-        socialHomeTabTalkQueryQO.setStandby(queryQO.getStandby());
+//        socialHomeTabTalkQueryQO.setUserGender(queryQO.getUserGender());
+//        socialHomeTabTalkQueryQO.setTalkVisibleGender(queryQO.getTalkVisibleGender());
+//        socialHomeTabTalkQueryQO.setOpenPosition(queryQO.getOpenPosition());
+//        socialHomeTabTalkQueryQO.setPlatform(queryQO.getPlatform());
+//        socialHomeTabTalkQueryQO.setStandby(queryQO.getStandby());
 
         return socialHomeTabTalkQueryQO;
     }

@@ -4,6 +4,7 @@ import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -23,6 +24,7 @@ import javax.persistence.*;
         @Index(columnList = "globalTop"),
 })
 @Data
+@NoArgsConstructor
 public class TalkDO extends CommonContentBaseDO implements BaseModelDO {
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
     @Id
@@ -85,21 +87,16 @@ public class TalkDO extends CommonContentBaseDO implements BaseModelDO {
     private Integer minAge;
     private Integer maxAge;
     //发表商户
-    @Column(columnDefinition = "int default 1")
     private Integer devId;
 
-    public TalkDO() {
+    //do 只有一个构造
+    public TalkDO(Integer userId, String content) {
+        this.userId = userId;
+        this.content = content;
         this.commentNum = 0;
         this.hugNum = 0;
         this.reportNum = 0;
         this.globalTop = 0;
         this.reportContentType = ContentType.talk;
-    }
-
-    //do 只有一个构造
-    public TalkDO(Integer userId, String content) {
-        this();
-        this.userId = userId;
-        this.content = content;
     }
 }

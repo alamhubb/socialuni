@@ -19,13 +19,13 @@ public class CenterTalkController implements SocialuniTalkAPI {
     private CenterTalkService centerTalkService;
 
     @Override
-    public ResultRO<List<CenterTalkRO>> queryHomeTalks() {
-        return centerTalkService.queryHomeTalks();
+    public ResultRO<List<CenterTalkRO>> queryTalks() {
+        return centerTalkService.queryTalks();
     }
 
     @Override
-    public ResultRO<List<CenterTalkRO>> queryHomeTabTalks(CenterHomeTabTalkQueryQO queryQO) {
-        return centerTalkService.queryHomeTabTalks(queryQO);
+    public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
+        return centerTalkService.queryTalks(queryQO);
     }
 
     @Override

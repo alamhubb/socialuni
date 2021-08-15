@@ -28,25 +28,8 @@ public class SocialHomeTalkQueryDomain {
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
 
     //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTalks(UserDO mineUser) {
-        SocialHomeTabTalkQueryQO queryQO = new SocialHomeTabTalkQueryQO();
-        queryQO.setTalkIds(new ArrayList<>());
-        queryQO.setTabType(TalkTabType.home_type);
-        //如果经纬度为空
-        RectangleVO rectangleVO = AliAPI.getRectangle();
-        if (rectangleVO != null) {
-            queryQO.setLon(rectangleVO.getLon());
-            queryQO.setLat(rectangleVO.getLat());
-        }
-        queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
-        queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
-        List<SocialTalkRO> talkRos = this.queryHomeTabTalks(queryQO, mineUser);
-        return talkRos;
-    }
-
-    //查询非关注tab的动态列表
     public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
-        String tabType = queryQO.getTabType();
+        String tabType = queryQO.getHomeTabType();
         if (!TalkTabType.values.contains(tabType)) {
             throw new SocialParamsException("错误的tab类型");
         }

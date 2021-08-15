@@ -31,7 +31,7 @@ public class SocialHomeTalkQueryStore {
     public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryQO queryQO, UserDO user) {
         String userGender = queryQO.getUserGender();
         String talkGender = queryQO.getTalkVisibleGender();
-        String tabType = queryQO.getTabType();
+        String tabType = queryQO.getHomeTabType();
 
         //        log.info("queryNotFollowTalks开始2：" + new Date().getTime() / 1000);
         //userId特殊处理
@@ -90,7 +90,7 @@ public class SocialHomeTalkQueryStore {
         Integer minAge = -500;
         Integer frontMinAge = queryQO.getMinAge();
         //如果前台传过来的不为空则使用前台的
-        if (frontMinAge > 8) {
+        if (!ObjectUtils.isEmpty(frontMinAge) && frontMinAge > 8) {
             minAge = queryQO.getMinAge();
         }
         //设置极限值

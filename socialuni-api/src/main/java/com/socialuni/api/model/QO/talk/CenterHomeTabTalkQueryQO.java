@@ -11,8 +11,9 @@ import java.util.List;
 @Data
 public class CenterHomeTabTalkQueryQO {
     private List<String> talkIds;
-    private String tabType;
+    private String homeTabType;
     private List<Integer> tagIds;
+    private String gender;
 
     private String adCode;
     private Double lon;
@@ -23,11 +24,4 @@ public class CenterHomeTabTalkQueryQO {
     private String userGender;
     //新版本用genderType，旧版本用gender
     private String talkVisibleGender;
-    //新版本用genderType，旧版本用gender
-    private String genderType;
-    private Boolean openPosition;
-    //平台
-    private String platform;
-    //备用属性
-    private String standby;
 }
