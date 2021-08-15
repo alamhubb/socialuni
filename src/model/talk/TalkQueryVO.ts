@@ -6,7 +6,7 @@ export default class TalkQueryVO {
   public lon: number
   public lat: number
   public tagIds: number[]
-  public tabType: string
+  public homeTabType: string
   public gender: string
   public minAge: number
   public maxAge: number
@@ -20,7 +20,7 @@ export default class TalkQueryVO {
       this.lat = district.lat
     }
     this.tagIds = tagIds
-    this.tabType = tabType
+    this.homeTabType = tabType
     this.gender = gender
     this.minAge = minAge
     this.maxAge = maxAge
