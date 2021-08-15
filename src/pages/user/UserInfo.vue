@@ -451,7 +451,7 @@ export default class UserInfo extends Vue {
   addReport () {
     const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
     const userImg: ImgFileVO = this.userProp.imgs[0]
-    reportAdd.userImgId = userImg.id
+    reportAdd.contentId = userImg.id
     if (ReportType.other === this.reportType && !this.reportContent) {
       Alert.hint('选择其他违规时，请您补充观点')
     } else {

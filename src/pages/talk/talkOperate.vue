@@ -50,10 +50,7 @@
 </template>
 
 <script lang="ts">
-import {
-  Vue,
-  Component
-} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 import { namespace } from 'vuex-class'
 
@@ -103,9 +100,9 @@ export default class TalkOperate extends Vue {
   addReport () {
     const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
     if (this.reportContentType === ReportContentType.talk) {
-      reportAdd.talkId = this.talk.id
+      reportAdd.contentId = this.talk.id
     } else {
-      reportAdd.commentId = this.comment.id
+      reportAdd.contentId = this.comment.id
     }
     if (ReportType.other === this.reportType && !this.reportContent) {
       Alert.hint('选择其他违规时，请您补充观点')

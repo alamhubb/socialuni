@@ -30,13 +30,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import ReportType from '@/const/ReportType'
 import ReportContentType from '@/const/ReportContentType'
 import MessageVO from '@/model/message/MessageVO'
 import ReportAddVO from '@/model/report/ReportAddVO'
-import UniUtil from '@/utils/UniUtil'
 import ReportAPI from '@/api/ReportAPI'
 import UserVO from '@/model/user/UserVO'
 import MsgUtil from '@/utils/MsgUtil'
@@ -88,12 +87,12 @@ export default class ReportDialog extends Vue {
 
     addReport () {
       const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
-      reportAdd.messageId = this.reportInfo.id
+      reportAdd.contentId = this.reportInfo.id
       if (ReportType.other === this.reportType && !this.reportContent) {
         Alert.hint('选择其他违规时，请您补充观点')
       } else {
         ReportAPI.addReportAPI(reportAdd).then((res: any) => {
-          chatModule.deleteMsgAction(reportAdd.messageId)
+          chatModule.deleteMsgAction(reportAdd.contentId)
           // 调用删除内容
           // 关闭弹框病初始化数据
           this.closeDialogAndInitData()

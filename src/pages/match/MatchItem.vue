@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import PageUtil from '@/utils/PageUtil'
@@ -153,7 +153,7 @@ export default class MatchItem extends Vue {
   addReport () {
     const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
     const userImg: ImgFileVO = this.user.imgs[0]
-    reportAdd.userImgId = userImg.id
+    reportAdd.contentId = userImg.id
     if (ReportType.other === this.reportType && !this.reportContent) {
       Alert.hint('选择其他违规时，请您补充观点')
     } else {
