@@ -133,6 +133,7 @@ public class TalkQueryStore {
 //        log.info("queryTalkIdsByTab开始：" + new Date().getTime() / 1000);
         List<Integer> tagTalkIds;
         if (tagIds == null) {
+            //talk性别相同或者user性别相同，能解决talk性别和user性别的问题，能查出来合集
             tagTalkIds = talkRepository.queryTalkIdsByTagVisibleGender(talkGender, sessionUserGender);
         } else {
             tagTalkIds = talkRepository.queryTalkIdsByTagIdsAndTagVisibleGender(tagIds, talkGender, sessionUserGender);

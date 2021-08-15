@@ -3,9 +3,11 @@ package com.socialuni.social.sdk.factory.user.base;
 import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.social.sdk.dao.FollowDao;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class SocialContentUserROFactory {
     static FollowDao followDao;
 

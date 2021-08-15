@@ -64,6 +64,7 @@ public class SocialTalkPostDomain {
 
     public SocialTalkRO postTalk(UserDO mienUser, SocialTalkPostQO talkPostQO) {
         socialContentAddEntity.paramsValidate(mienUser, talkPostQO);
+        //获取应用对应的话题
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mienUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mienUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
