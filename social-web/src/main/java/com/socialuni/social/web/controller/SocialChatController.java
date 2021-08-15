@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @RestController
-public class SocialuniChatController implements SocialuniChatUrl {
+public class SocialChatController implements SocialuniChatUrl {
     @Resource
     SocialChatService socialChatService;
 

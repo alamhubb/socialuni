@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.model;
+package com.socialuni.social.sdk.model.QO.user;
 
 import lombok.Data;
 
@@ -9,22 +9,13 @@ import javax.validation.constraints.NotBlank;
  * @date 2019-08-13 23:34
  */
 @Data
-public class UserEditVO {
-    private String id;
+public class SocialUserEditQO {
+    private Integer id;
     @NotBlank(message = "入参为空异常")
     private String nickname;
     @NotBlank(message = "入参为空异常")
     private String gender;
     @NotBlank(message = "入参为空异常")
     private String birthday;
-    private String location;
     private String city;
-    /**
-     * 微信账户，用户可以关联微信账户，方便添加好友
-     */
-    private String wxAccount;
-    private String qqAccount;
-    //微博
-    private String wbAccount;
-    private String contactAccount;
 }

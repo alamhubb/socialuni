@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class SocialuniNotifyController implements SocialuniNotifyUrl {
+public class SocialNotifyController implements SocialuniNotifyUrl {
     @Resource
     private SocialNotifyService socialNotifyService;
 
