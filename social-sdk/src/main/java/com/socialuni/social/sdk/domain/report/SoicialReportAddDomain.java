@@ -6,7 +6,7 @@ import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.model.model.QO.ReportAddQO;
+import com.socialuni.social.model.model.QO.SocialReportAddQO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
@@ -46,7 +46,7 @@ public class SoicialReportAddDomain {
     @Resource
     private ModelContentCheck modelContentCheck;
 
-    public ResultRO<Void> addReport(UserDO mineUser, ReportAddQO reportAddVO) {
+    public ResultRO<Void> addReport(UserDO mineUser, SocialReportAddQO reportAddVO) {
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.violateTypes.contains(reportType)) {
@@ -98,13 +98,13 @@ public class SoicialReportAddDomain {
         if (ContentType.talk.equals(reportContentType)) {
             //查询出 评论信息
             //只查询正常能看到的，违规，审核，删除的都提示
-            modelOptional = talkRepository.findTop1ById(reportAddVO.getTalkId());
+            modelOptional = talkRepository.findTop1ById(reportAddVO.getContentId());
         } else if (ContentType.comment.equals(reportContentType)) {
-            modelOptional = commentRepository.findOneByIdAndStatus(reportAddVO.getTalkId(), ContentStatus.enable);
+            modelOptional = commentRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.message.equals(reportContentType)) {
-            modelOptional = messageRepository.findOneByIdAndStatus(reportAddVO.getMessageId(), ContentStatus.enable);
+            modelOptional = messageRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.userImg.equals(reportContentType)) {
-            modelOptional = userImgRepository.findOneByIdAndStatus(reportAddVO.getUserImgId(), ContentStatus.enable);
+            modelOptional = userImgRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else {
             throw new SocialParamsException("错误的内容类型");
         }

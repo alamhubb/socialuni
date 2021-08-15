@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.domain.report;
 
 import com.socialuni.social.sdk.constant.*;
 import com.socialuni.social.sdk.domain.BaseModelService;
-import com.socialuni.social.model.model.QO.ReportAddQO;
+import com.socialuni.social.model.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.constant.ContentStatus;
@@ -117,7 +117,7 @@ public class ReportDomain {
 
 
     @Transactional
-    public ResultRO<Void> userReportContent(ReportAddQO reportAddQO, BaseModelDO modelDO, Integer requestUserId) {
+    public ResultRO<Void> userReportContent(SocialReportAddQO socialReportAddQO, BaseModelDO modelDO, Integer requestUserId) {
         //这里之后才能校验
 
         // 设置model
@@ -125,14 +125,14 @@ public class ReportDomain {
         //这里之后才能校验
         // 设置model
         //可以放到 report的 store 中
-        ReportDO reportDO = reportFactory.createReportDO(reportAddQO.getContent(), modelDO, ReportSourceType.userReport);
+        ReportDO reportDO = reportFactory.createReportDO(socialReportAddQO.getContent(), modelDO, ReportSourceType.userReport);
 
         //保存数据
         reportDO = reportRepository.save(reportDO);
 
         //生成举报详情
         ReportDetailDO reportDetailDO =
-                new ReportDetailDO(reportAddQO.getContent(), reportAddQO.getReportType(), reportDO, modelDO, requestUserId);
+                new ReportDetailDO(socialReportAddQO.getContent(), socialReportAddQO.getReportType(), reportDO, modelDO, requestUserId);
 
         reportDetailRepository.save(reportDetailDO);
 

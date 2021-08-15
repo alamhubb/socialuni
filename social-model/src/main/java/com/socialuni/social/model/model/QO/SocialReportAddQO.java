@@ -10,19 +10,8 @@ import java.util.List;
  * @date 2019-09-27 23:24
  */
 @Data
-public class ReportAddQO {
-    //加入一列作为外键
-    private Integer talkId;
-    //加入一列作为外键
-    private Integer commentId;
-    //加入一列作为外键
-    private Integer messageId;
+public class SocialReportAddQO {
     private Integer contentId;
-    /**
-     * 举报的用户照片id
-     */
-    private List<String> userImgIds;
-    private Integer userImgId;
     /**
      * 举报类型，政治敏感，暴露，暴力等
      */
@@ -34,13 +23,10 @@ public class ReportAddQO {
     @NotBlank(message = "入参为空异常")
     private String reportContentType;
     /**
-     * 被举报信息的版本号
-     */
-    private Integer infoVersionNo;
-    /**
      * 举报时的备注信息
      */
     private String content;
     //新版本用这个，不用上面那个了content
     private String cause;
+//    private Integer infoVersionNo;
 }

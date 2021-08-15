@@ -2,7 +2,7 @@ package com.socialuni.social.web.controller;
 
 import com.socialuni.social.sdk.service.SocialReportService;
 import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.model.model.QO.ReportAddQO;
+import com.socialuni.social.model.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.sdk.url.SocialuniReportUrl;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +16,8 @@ public class SocialReportController implements SocialuniReportUrl {
     SocialReportService socialReportService;
 
     @Override
-    public ResultRO<Void> addReport(ReportAddQO reportAddQO) {
-        return socialReportService.addReport(reportAddQO);
+    public ResultRO<Void> addReport(SocialReportAddQO socialReportAddQO) {
+        return socialReportService.addReport(socialReportAddQO);
     }
 
     @Override
