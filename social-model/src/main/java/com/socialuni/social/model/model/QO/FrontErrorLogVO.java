@@ -1,10 +1,7 @@
 package com.socialuni.social.model.model.QO;
 
-import com.socialuni.social.entity.model.DO.log.FrontErrorLogDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import lombok.Data;
 
-import java.util.Date;
+import lombok.Data;
 
 /**
  * @author qinkaiyuan
@@ -27,6 +24,4 @@ public class FrontErrorLogVO {
     private String platform;
     private String provider;
     private String appVersion;
-
-
 }
