@@ -18,12 +18,8 @@ public class CenterMineUserDetailROFactory {
     public static CenterMineUserDetailRO getMineUserDetail(UserDO mineUser) {
         //通过sdk获取当前用户详情
         SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
-        //为了复用代码，直接生成用户详情
-        CenterUserDetailRO centerUserDetailRO = CenterUserDetailROFactory.getUserDetailRO(socialMineUserDetailRO, mineUser);
         //通过父类直接生成子类
-        CenterMineUserDetailRO centerMineUserDetailRO = new CenterMineUserDetailRO(centerUserDetailRO, socialMineUserDetailRO);
-
-        return centerMineUserDetailRO;
+        return CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
     }
 
     public static CenterMineUserDetailRO getMineUserDetail(SocialMineUserDetailRO socialMineUserDetailRO, UserDO mineUser) {
