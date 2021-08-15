@@ -23,7 +23,7 @@ public class CenterFollowController implements SocialuniFollowAPI {
 
     @Override
     public ResultRO<Void> addFollow(CenterFollowAddQO addVO) {
-        return centerFollowService.addFlow(addVO);
+        return centerFollowService.addFollow(addVO);
     }
 
     @Override

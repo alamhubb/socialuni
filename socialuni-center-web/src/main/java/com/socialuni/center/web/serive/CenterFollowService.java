@@ -16,7 +16,7 @@ public class CenterFollowService {
     @Resource
     private CenterFollowUserDomain centerFollowUserDomain;
 
-    public ResultRO<Void> addFlow(CenterFollowAddQO addQO) {
+    public ResultRO<Void> addFollow(CenterFollowAddQO addQO) {
         //有问题，应该关注完刷新前台用户
         centerFollowUserDomain.addFlow(addQO);
         return new ResultRO<>();
