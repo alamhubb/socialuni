@@ -28,6 +28,6 @@ public class CenterFollowController implements SocialuniFollowAPI {
 
     @Override
     public ResultRO<Void> cancelFollow(CenterFollowAddQO addVO) {
-        return centerFollowService.addFlow(addVO);
+        return centerFollowService.cancelFollow(addVO);
     }
 }

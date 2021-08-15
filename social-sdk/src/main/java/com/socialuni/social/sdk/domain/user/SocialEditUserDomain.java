@@ -4,7 +4,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.social.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.sdk.platform.tencent.TencentCloud;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.repository.UserRepository;

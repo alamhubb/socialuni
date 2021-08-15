@@ -1,6 +1,6 @@
 package com.socialuni.social.web.controller;
 
-import com.socialuni.social.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.sdk.service.SocialUserService;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.api.model.ResultRO;

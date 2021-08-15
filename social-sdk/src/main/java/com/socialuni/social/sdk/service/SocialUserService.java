@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.sdk.factory.user.base.SocialUserDetailROFactory;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.api.model.ResultRO;

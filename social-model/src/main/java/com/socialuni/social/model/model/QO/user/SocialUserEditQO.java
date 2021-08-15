@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.model.QO.user;
+package com.socialuni.social.model.model.QO.user;
 
 import lombok.Data;
 
@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 public class SocialUserEditQO {
-    private Integer id;
     @NotBlank(message = "入参为空异常")
     private String nickname;
     @NotBlank(message = "入参为空异常")

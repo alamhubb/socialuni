@@ -5,7 +5,7 @@ import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
-import com.socialuni.social.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
