@@ -1,10 +1,11 @@
 package com.socialuni.social.web.controller;
 
+import com.socialuni.social.model.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.service.SocialAppService;
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.sdk.url.SocialiuniAppUrl;
+import com.socialuni.social.sdk.url.SocialuniAppUrl;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ import java.util.List;
  * 前端初始化内容
  */
 @RestController
-public class SocialAppController implements SocialiuniAppUrl {
+public class SocialAppController implements SocialuniAppUrl {
     @Resource
     SocialAppService socialAppService;
 
@@ -28,5 +29,10 @@ public class SocialAppController implements SocialiuniAppUrl {
     @Override
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         return socialAppService.queryHomeSwipers();
+    }
+
+    @Override
+    public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
+        return socialAppService.sendErrorLog(frontErrorLogVO);
     }
 }

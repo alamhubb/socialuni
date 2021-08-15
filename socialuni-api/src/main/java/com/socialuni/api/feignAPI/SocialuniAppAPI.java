@@ -2,11 +2,14 @@ package com.socialuni.api.feignAPI;
 
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.model.model.QO.FrontErrorLogVO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -22,4 +25,7 @@ public interface SocialuniAppAPI {
 
     @PostMapping("queryHomeSwipers")
     ResultRO<List<HomeSwiperVO>> queryHomeSwipers();
+
+    @PostMapping("sendErrorLog")
+    ResultRO<Void> sendErrorLog(@RequestBody @Valid FrontErrorLogVO frontErrorLogVO);
 }

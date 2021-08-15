@@ -1,4 +1,4 @@
-package com.socialuni.center.web.model.DO.config;
+package com.socialuni.social.entity.model.DO.log;
 
 import lombok.Data;
 
