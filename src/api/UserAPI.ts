@@ -17,7 +17,7 @@ export default class UserAPI {
   }
 
   static editUserAPI (user: UserEditVO) {
-    return http.post('user/edit', user)
+    return http.post('user/editUser', user)
   }
 
   static addUserImgAPI (userImg: ImgAddQO) {

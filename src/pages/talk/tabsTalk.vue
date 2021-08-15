@@ -104,12 +104,7 @@
 </template>
 
 <script lang="ts">
-import {
-  Vue,
-  Component,
-  Prop,
-  Watch
-} from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import TalkAPI from '@/api/TalkAPI'
 import UserVO from '@/model/user/UserVO'
@@ -118,25 +113,22 @@ import TalkItem from '@/pages/talk/TalkItem.vue'
 import { namespace } from 'vuex-class'
 import LoadMoreType from '@/const/LoadMoreType'
 import DistrictVO from '@/model/DistrictVO'
-import LocationUtil from '@/utils/LocationUtil'
 import Constants from '@/const/Constant'
 import StorageUtil from '@/utils/StorageUtil'
 import TalkVueUtil from '@/utils/TalkVueUtil'
 import TalkTabVO from '@/model/talk/TalkTabVO'
-import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { appModule, locationModule, systemModule, talkModule } from '@/store'
+import { locationModule, systemModule, talkModule } from '@/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '@/components/q-tab/q-tab.vue'
 import QTabs from '@/components/q-tabs/q-tabs.vue'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import CityPicker from '@/components/CityPicker.vue'
-import SelectorQuery = UniApp.SelectorQuery
-import NodesRef = UniApp.NodesRef
 import TalkTabType from '@/const/TalkTabType'
-import RouterUtil from '@/utils/RouterUtil'
 import PageUtil from '@/utils/PageUtil'
+import SelectorQuery = UniApp.SelectorQuery;
+import NodesRef = UniApp.NodesRef;
 
 const userStore = namespace('user')
 const appStore = namespace('app')
