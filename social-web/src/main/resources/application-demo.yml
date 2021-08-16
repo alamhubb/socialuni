@@ -1,5 +1,4 @@
 socialuni:
-  secret-key: "60a364c221b34c14becc2cfe5ef6ce0a"
   provider:
     qq:
       qq-mp-id: ""
