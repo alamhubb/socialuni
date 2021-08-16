@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("cos")
 @FeignClient(name = "cos", url = "${socialuni.server-url:https://api.socialuni.com}")
-public interface SocialuniCosUrl{
+public interface SocialuniCosAPI {
     @PostMapping("getCosAuth")
     ResultRO<SocialCosAuthRO> getCosAuth();
 }

@@ -4,6 +4,7 @@ import com.socialuni.center.web.exception.SocialUserBannedException;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.ThirdUserRepository;
+import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
@@ -28,6 +29,14 @@ public class CenterUserUtil {
             return null;
         }
         return user.getId();
+    }
+
+    public static String getMineUserStringId() {
+        Integer userId = CenterUserUtil.getMineUserId();
+        if (userId == null) {
+            throw new SocialNullUserException();
+        }
+        return userId.toString();
     }
 
     public static UserDO getMineUser() {
@@ -57,13 +66,21 @@ public class CenterUserUtil {
         return user;
     }
 
-
     public static ThirdUserDO getMineThirdUser() {
         Integer devId = DevAccountUtils.getDevId();
         Integer userId = CenterUserUtil.getMineUserId();
         ThirdUserDO thirdUserDO = thirdUserRepository.findByDevIdAndUserId(devId, userId);
         return thirdUserDO;
     }
+
+    public static String getMineThirdUserId() {
+        ThirdUserDO thirdUserDO = CenterUserUtil.getMineThirdUser();
+        if (thirdUserDO == null) {
+            throw new SocialNullUserException();
+        }
+        return thirdUserDO.getThirdUserId();
+    }
+
 
     public static String getMineUserPhoneNum() {
         UserDO userDO = CenterUserUtil.getMineUser();

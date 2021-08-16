@@ -7,6 +7,7 @@ import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.entity.model.DevAccountProviderDO;
 import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.GenderType;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.springframework.stereotype.Component;
@@ -78,10 +79,19 @@ public class DevAccountUtils {
         return devAccountProviderDO;
     }
 
-    public static DevAccountDO getDevAccount() {
+    public static DevAccountDO getDevAccountAllowNull() {
         //先从req中获取
         String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
         return devAccountRepository.findFirstBySecretKey(secretKey);
+    }
+
+    public static DevAccountDO getDevAccount() {
+        //先从req中获取
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
+        if (devAccountDO == null) {
+            throw new SocialBusinessException("开发者信息为空");
+        }
+        return devAccountDO;
     }
 
     public static DevAccountDO getDevAccount(Integer devId) {
