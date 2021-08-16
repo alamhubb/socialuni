@@ -28,9 +28,10 @@ public class SocialUserFollowDetailROFactory {
         SocialUserFollowDetailRO userRO = new SocialUserFollowDetailRO(SocialContentUserROFactory.newContentUserRO(user, mineUser));
         //用户关注粉丝数
         userRO.setFansNum(socialUserFansDetailDO.getFansNum());
-        if (mineUser != null && userRO.getIsMine()) {
+//        if (mineUser != null && userRO.getIsMine()) {
+        //非自己也显示关注数量
             userRO.setFollowNum(socialUserFansDetailDO.getFollowNum());
-        }
+//        }
         return userRO;
     }
 
