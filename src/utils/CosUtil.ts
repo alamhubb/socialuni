@@ -18,7 +18,7 @@ export default class CosUtil {
       cos.postObject({
         Bucket: data.bucket,
         Region: data.region,
-        Key: imgFile.src,
+        Key: imgFile.cosSrc,
         FilePath: imgFile.path
       }, (err, data) => {
         if (!err) {

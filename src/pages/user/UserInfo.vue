@@ -328,7 +328,7 @@ import TalkVO from '@/model/talk/TalkVO'
 import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { appModule, systemModule, userModule } from '@/store'
+import { systemModule, userModule } from '@/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
 
@@ -342,6 +342,7 @@ import QIcon from '@/components/q-icon/q-icon.vue'
 import UserService from '@/service/UserService'
 import DomFile from '@/model/DomFile'
 import ImgAddQO from '@/model/user/ImgAddQO'
+import CosAPI from '@/api/CosAPI'
 
 
 const userStore = namespace('user')
@@ -521,20 +522,22 @@ export default class UserInfo extends Vue {
     }
   }
 
+
   async chooseImg () {
     if (this.mineUser.imgs.length > 2) {
       Toast.toastLong('最多上传3张照片，请删除后继续！')
       return
     }
     try {
+      let cosAuthRO = null
+      CosAPI.getCosAuthorizationAPI().then(res => {
+        cosAuthRO = res.data
+      })
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: DomFile = imgFiles[0]
-      imgFile.src = appModule.imgPath + 'img/' + imgFile.src
-      // await CosUtil.postImg(imgFile, data)
-      // console.log(imgFile)
-      // const res = await UserAPI.addUserImgAPI(new ImgAddQO(imgFile))
-      console.log(imgFile)
-      const res = await Promise.all([CosUtil.postImg(imgFile), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      imgFile.cosSrc = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+      imgFile.src = ImgUtil.imgUrl + imgFile.cosSrc
+      const res = await Promise.all([CosUtil.postImg(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
       userModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)

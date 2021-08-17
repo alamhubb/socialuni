@@ -166,6 +166,7 @@ import DomFile from '@/model/DomFile'
 import CosAuthRO from '@/model/cos/CosAuthRO'
 import CosAPI from '@/api/CosAPI'
 import AppUtilAPI from '@/api/AppUtilAPI'
+import ImgUtil from '@/utils/ImgUtil'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -408,7 +409,8 @@ export default class TalkAddPage extends Vue {
   async uploadImgList () {
     //设置图片路径
     this.showsImgFiles.forEach(item => {
-      item.src = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
+      item.cosSrc = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
+      item.src = ImgUtil.imgUrl + item.cosSrc
     })
     CosUtil.postImgList(this.showsImgFiles, this.cosAuthRO)
   }
