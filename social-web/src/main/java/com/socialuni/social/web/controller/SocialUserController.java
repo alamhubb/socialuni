@@ -1,6 +1,8 @@
 package com.socialuni.social.web.controller;
 
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
+import com.socialuni.social.sdk.model.QO.user.SocialUserImgAddQO;
+import com.socialuni.social.sdk.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.social.sdk.service.SocialUserService;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.api.model.ResultRO;
@@ -29,5 +31,15 @@ public class SocialUserController implements SocialuniUserUrl {
     @Override
     public ResultRO<SocialMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
         return socialUserService.editUser(socialUserEditQO);
+    }
+
+    @Override
+    public ResultRO<SocialMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
+        return socialUserService.addUserImg(socialUserImgAddQO);
+    }
+
+    @Override
+    public ResultRO<SocialMineUserDetailRO> deleteUserImg(SocialUserImgDeleteQO socialUserImgDeleteQO) {
+        return socialUserService.deleteUserImg(socialUserImgDeleteQO);
     }
 }

@@ -1,10 +1,14 @@
 package com.socialuni.social.sdk.service;
 
+import com.socialuni.social.sdk.domain.user.SocialAddUserImgDomain;
+import com.socialuni.social.sdk.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.sdk.factory.user.base.SocialUserDetailROFactory;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
+import com.socialuni.social.sdk.model.QO.user.SocialUserImgAddQO;
+import com.socialuni.social.sdk.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.api.model.ResultRO;
@@ -20,6 +24,10 @@ import javax.annotation.Resource;
 public class SocialUserService {
     @Resource
     SocialEditUserDomain socialEditUserDomain;
+    @Resource
+    SocialAddUserImgDomain socialAddUserImgDomain;
+    @Resource
+    SocialDeleteUserImgDomain socialDeleteUserImgDomain;
 
 
     public ResultRO<SocialMineUserDetailRO> getMineUser() {
@@ -50,5 +58,23 @@ public class SocialUserService {
 
         return new ResultRO<>(socialMineUserDetailRO);
     }
+
+    public ResultRO<SocialMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
+        UserDO mineUser = SocialUserUtil.getMineUser();
+
+        SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
+
+        return new ResultRO<>(socialMineUserDetailRO);
+    }
+
+
+    public ResultRO<SocialMineUserDetailRO> deleteUserImg(SocialUserImgDeleteQO socialUserImgDeleteQO) {
+        UserDO mineUser = SocialUserUtil.getMineUser();
+
+        SocialMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(socialUserImgDeleteQO, mineUser);
+
+        return new ResultRO<>(socialMineUserDetailRO);
+    }
+
 
 }

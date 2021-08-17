@@ -22,6 +22,6 @@ public interface UserImgRepository extends JpaRepository<UserImgDO, Integer> {
 
     UserImgDO getUserImgByUserIdAndSrc(Integer userId, String src);
 
-    Optional<UserImgDO> getUserImgByUserIdAndId(Integer userId, Integer id);
+    UserImgDO getUserImgByUserIdAndId(Integer userId, Integer id);
 }
 
