@@ -21,11 +21,11 @@ export default class UserAPI {
   }
 
   static addUserImgAPI (userImg: ImgAddQO) {
-    return http.post<UserVO>('user/addImg', userImg)
+    return http.post<UserVO>('user/addUserImg', userImg)
   }
 
   static deleteUserImgAPI (userImg: ImgFileVO) {
-    return http.post('user/deleteImg', userImg)
+    return http.post('user/deleteUserImg', userImg)
   }
 
   static identityAuthAPI (userImg: ImgFileVO) {
