@@ -3,6 +3,7 @@ package com.socialuni.center.web.controller;
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
 import com.socialuni.api.model.QO.user.CenterUserEditQO;
 import com.socialuni.api.model.QO.user.CenterUserIdQO;
+import com.socialuni.api.model.QO.user.CenterUserImgDeleteQO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.center.web.serive.CenterUserService;
@@ -41,7 +42,7 @@ public class CenterUserController implements SocialuniUserAPI {
     }
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> deleteUserImg(SocialUserImgDeleteQO socialUserImgDeleteQO) {
-        return null;
+    public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
+        return centerUserService.deleteUserImg(centerUserImgDeleteQO);
     }
 }

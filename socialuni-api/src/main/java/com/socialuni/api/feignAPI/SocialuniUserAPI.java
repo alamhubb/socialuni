@@ -1,6 +1,7 @@
 package com.socialuni.api.feignAPI;
 
 import com.socialuni.api.model.QO.user.CenterUserIdQO;
+import com.socialuni.api.model.QO.user.CenterUserImgDeleteQO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.social.api.model.ResultRO;
@@ -32,5 +33,5 @@ public interface SocialuniUserAPI {
     ResultRO<CenterMineUserDetailRO> addUserImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
 
     @PostMapping("deleteUserImg")
-    ResultRO<CenterMineUserDetailRO> deleteUserImg(@RequestBody @Valid SocialUserImgDeleteQO socialUserImgDeleteQO);
+    ResultRO<CenterMineUserDetailRO> deleteUserImg(@RequestBody @Valid CenterUserImgDeleteQO centerUserImgDeleteQO);
 }
