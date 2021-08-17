@@ -30,7 +30,7 @@ public class CenterMockService {
         return applySocialUniOAuthRO;
     }
 
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> mockOAuthUserPhoneNum(String mpType) {
+    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> mockOAuthUserPhoneNum() {
 
         ResultRO<SocialLoginRO<CenterMineUserDetailRO>> applySocialUniOAuthRO = mockOAuthUserInfo(AuthType.phone);
 

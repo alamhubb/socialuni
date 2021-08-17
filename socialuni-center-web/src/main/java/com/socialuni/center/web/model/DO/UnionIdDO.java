@@ -9,7 +9,8 @@ import java.util.Date;
  * 登录相关，只有登录时才用得到的表
  * 自己表示字段，其他表示关联的表内字段
  */
-@Data@Entity
+@Data
+@Entity
 @Table(name = "union_id",
         indexes = {
                 @Index(columnList = "contentType"),
@@ -19,7 +20,8 @@ import java.util.Date;
                 @Index(columnList = "userId"),
         },
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"unionId"})
+                @UniqueConstraint(columnNames = {"unionId"}),
+                @UniqueConstraint(columnNames = {"contentId", "contentType", "devId", "userId", "status"})
         }
 )
 public class UnionIdDO {
