@@ -45,10 +45,8 @@ public class WebCorsConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 
-
-
     //首先，在springboot启动类中，或者配置类中进行配置
-    @Resource
+    /*@Resource
     RestTemplateBuilder restTemplateBuilder;
 
     @Bean
@@ -91,5 +89,5 @@ public class WebCorsConfig implements WebMvcConfigurer {
         restTemplate.setMessageConverters(messageConverters);
         //使用build()方法进行获取
         return restTemplate;
-    }
+    }*/
 }
