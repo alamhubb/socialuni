@@ -17,7 +17,7 @@ public class CenterCosService {
     @Resource
     private SocialCosGetAuthDomain socialCosGetAuthDomain;
 
-    public ResultRO<SocialCosAuthRO> getCosAuthorization() {
+    public ResultRO<SocialCosAuthRO> getCosAuth() {
         String userId = CenterUserUtil.getMineThirdUserId();
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
         String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();

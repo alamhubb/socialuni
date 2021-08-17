@@ -4,8 +4,6 @@ import com.socialuni.api.feignAPI.SocialuniCosAPI;
 import com.socialuni.center.web.serive.CenterCosService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialCosAuthRO;
-import com.socialuni.social.sdk.service.SocialCosService;
-import com.socialuni.social.sdk.url.SocialuniCosUrl;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,6 +15,6 @@ public class CenterCosController implements SocialuniCosAPI {
 
     @Override
     public ResultRO<SocialCosAuthRO> getCosAuth() {
-        return centerCosService.getCosAuthorization();
+        return centerCosService.getCosAuth();
     }
 }
