@@ -249,6 +249,12 @@ public class UnionIdDbUtil {
         return getResultByUnionId(ContentType.userImg, unionId, user);
     }
 
+    public static Integer getUserImgIdByUid(String unionId) {
+        UserDO mineUser = CenterUserUtil.getMineUser();
+        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
+        return getResultByUnionId(ContentType.userImg, unionId, mineUser);
+    }
+
     public static Integer getMessageIdByUid(String unionId, UserDO user) {
         Integer messageIdResult = getResultByUnionId(ContentType.message, unionId, user);
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
@@ -346,7 +352,7 @@ public class UnionIdDbUtil {
     }
 
     public static String createUserImgUid(String modeId) {
-                Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserId();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.userImg, modeId, mineId);
     }
