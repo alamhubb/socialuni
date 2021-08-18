@@ -29,7 +29,8 @@ public class SocialUserPhoneEntity {
         return mineUser;
     }
 
-    public UserDO checkPhoneNumAndBind(UserDO mineUser, String phoneCountryCode, String phoneNum) {
+    //绑定手机号
+    public UserDO checkPhoneNumAndCreateBind(UserDO mineUser, String phoneCountryCode, String phoneNum) {
         //业务校验
         //校验手机号是否已被使用
         socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser);

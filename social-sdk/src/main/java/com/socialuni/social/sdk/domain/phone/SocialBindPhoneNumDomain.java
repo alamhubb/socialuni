@@ -27,7 +27,7 @@ public class SocialBindPhoneNumDomain {
 
         authenticationManage.checkAuthCode(phoneNum, authCode);
 
-        mineUser = socialUserPhoneEntity.checkPhoneNumAndBind(mineUser, "86", phoneNum);
+        mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, "86", phoneNum);
         return mineUser;
     }
 }

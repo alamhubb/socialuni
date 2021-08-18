@@ -48,7 +48,7 @@ public class SocialBindWxPhoneNumDomain {
         } catch (Exception e) {
             throw new SocialBusinessException("再点击一次绑定按钮即可完成绑定");
         }
-        mineUser = socialUserPhoneEntity.checkPhoneNumAndBind(mineUser, phoneNumVO.getCountryCode(), phoneNumVO.getPurePhoneNumber());
+        mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, phoneNumVO.getCountryCode(), phoneNumVO.getPurePhoneNumber());
         //根据用户得到返回详情
         SocialMineUserDetailRO mineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
         //返回真实手机号

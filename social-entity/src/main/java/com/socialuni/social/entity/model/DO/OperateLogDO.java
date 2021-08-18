@@ -41,9 +41,9 @@ public class OperateLogDO extends CommonBaseDO {
     @Column(columnDefinition = "text")
     private String params;
     private String errorMsg;
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "longtext")
     private String innerMsg;
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "longtext")
     private String innerMsgDetail;
     private Date endTime;
 
