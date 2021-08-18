@@ -4,6 +4,7 @@ import com.socialuni.social.constant.ConstStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -15,7 +16,7 @@ import java.util.Date;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"appId", "platform", "mpType"})
         })
-public class DevAccountProviderDO {
+public class DevAccountProviderDO implements Serializable {
     //开发者id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

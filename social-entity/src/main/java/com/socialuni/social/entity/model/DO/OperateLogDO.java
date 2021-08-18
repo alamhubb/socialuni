@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -26,7 +27,7 @@ import java.util.Date;
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
 })
-public class OperateLogDO extends CommonBaseDO {
+public class OperateLogDO extends CommonBaseDO implements Serializable {
     //邀请你的用户
     private Integer devId;
     private Integer userId;

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * 登录相关，只有登录时才用得到的表
@@ -12,7 +13,7 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 @Data
-public class CommonUserAccountBaseDO extends CommonContentBaseDO {
+public class CommonUserAccountBaseDO extends CommonContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer userId;
     //使用哪个平台注册的

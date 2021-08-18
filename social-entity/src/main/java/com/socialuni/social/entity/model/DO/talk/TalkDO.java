@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "talk", indexes = {
@@ -25,7 +26,7 @@ import javax.persistence.*;
 })
 @Data
 @NoArgsConstructor
-public class TalkDO extends CommonContentBaseDO implements BaseModelDO {
+public class TalkDO extends CommonContentBaseDO implements BaseModelDO, Serializable {
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

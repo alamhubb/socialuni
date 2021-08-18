@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Date;
 })
 @ToString(exclude = "message")
 //发送出去的消息表，接收人是谁，基于哪个chatUser
-public class MessageReceiveDO {
+public class MessageReceiveDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

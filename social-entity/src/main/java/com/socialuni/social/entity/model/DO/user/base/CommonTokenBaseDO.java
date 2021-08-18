@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CommonTokenBaseDO extends CommonContentBaseDO {
+public class CommonTokenBaseDO extends CommonContentBaseDO implements Serializable {
 
     @Column(nullable = false, updatable = false)
     private Integer userId;

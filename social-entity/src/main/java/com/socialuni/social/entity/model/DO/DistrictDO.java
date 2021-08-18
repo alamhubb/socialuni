@@ -3,6 +3,7 @@ package com.socialuni.social.entity.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
         @Index(columnList = "parentAdCode")
 }
 )
-public class DistrictDO {
+public class DistrictDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -6,13 +6,14 @@ import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 举报信息
  */@Entity
 @Data@Table(name = "report_detail")
-public class ReportDetailDO {
+public class ReportDetailDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

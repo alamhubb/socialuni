@@ -27,7 +27,7 @@ public class SocialTagStore {
     private TagTypeRepository tagTypeRepository;
 
     //获取talk下的
-    @Cacheable(cacheNames = "tagIdsByTalkId", key = "#talkId")
+    @Cacheable(cacheNames = "tagIdsByTalkId", key = "#p0")
     public List<Integer> getTagIdsByTalkId(Integer talkId) {
         return tagRepository.findTagIdsByTalkIdAndStatusAndShowFront(talkId, ContentStatus.enable, true);
     }
@@ -37,7 +37,7 @@ public class SocialTagStore {
      *
      * @return
      */
-    @Cacheable(cacheNames = "tagsHot", key = "#appGenderType")
+    @Cacheable(cacheNames = "tagsHot", key = "#p0")
     public List<TagRO> getHotTagsRedis(String appGenderType) {
         List<TagDO> tagDOS;
         if (GenderType.all.equals(appGenderType)) {
@@ -53,7 +53,7 @@ public class SocialTagStore {
         return this.getHotTagsRedis(appGenderType);
     }
 
-    @Cacheable(cacheNames = "tagsAll", key = "#appGenderType")
+    @Cacheable(cacheNames = "tagsAll", key = "#p0")
     public List<TagRO> getAllTagsRedis(String appGenderType) {
         List<TagDO> tagDOS;
         if (appGenderType.equals(GenderType.all)) {
@@ -65,7 +65,7 @@ public class SocialTagStore {
     }
 
 
-    @Cacheable(cacheNames = "tagTypesHot", key = "#appGenderType")
+    @Cacheable(cacheNames = "tagTypesHot", key = "#p0")
     public List<TagTypeRO> getHotTagTypesRedis(String appGenderType) {
         List<TagTypeRO> initTagTypes = new ArrayList<>();
         //插入一个热门类别
@@ -90,7 +90,7 @@ public class SocialTagStore {
         return this.getAllTageTypesRedis(appGenderType);
     }
 
-    @Cacheable(cacheNames = "tagTypesAll", key = "#appGenderType")
+    @Cacheable(cacheNames = "tagTypesAll", key = "#p0")
     public List<TagTypeRO> getAllTageTypesRedis(String appGenderType) {
         List<TagTypeRO> initTagTypes = new ArrayList<>();
         //插入一个热门类别，根据性别获取一个

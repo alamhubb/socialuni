@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
  * @date 2018-10-17 21:59
  */
 public interface ThirdUserTokenRepository extends JpaRepository<ThirdUserTokenDO, Integer> {
-    @Cacheable(cacheNames = "getTokenCodeByUserId", key = "#userId")
+    @Cacheable(cacheNames = "getTokenCodeByUserId", key = "#p0")
     @Query(nativeQuery = true, value = "select t.token from third_user_token t where t.user_id =:userId order by id desc limit 1")
     String findFirstOneTokenByUserId(Integer userId);
 
@@ -19,7 +19,7 @@ public interface ThirdUserTokenRepository extends JpaRepository<ThirdUserTokenDO
     @CachePut(cacheNames = "getTokenByToken", key = "#tokenDO.token")
     ThirdUserTokenDO save(ThirdUserTokenDO tokenDO);
 
-    @Cacheable(cacheNames = "getTokenByToken", key = "#token")
+    @Cacheable(cacheNames = "getTokenByToken", key = "#p0")
     ThirdUserTokenDO findFirstByToken(String token);
 }
 

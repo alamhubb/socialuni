@@ -7,6 +7,7 @@ import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "message")
-public class MessageDO extends CommonContentBaseDO implements BaseModelDO {
+public class MessageDO extends CommonContentBaseDO implements BaseModelDO, Serializable {
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user",
@@ -20,5 +21,5 @@ import javax.persistence.Table;
         }
 )
 @Data
-public class UserDO extends CommonUserBaseDO {
+public class UserDO extends CommonUserBaseDO implements Serializable {
 }

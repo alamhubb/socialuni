@@ -5,6 +5,7 @@ import com.socialuni.social.constant.CommonStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Date;
 @Table(name = "keywords", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"text"})
 })
-public class KeywordsDO {
+public class KeywordsDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

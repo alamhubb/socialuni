@@ -5,6 +5,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  */@Entity
 @Table(name = "authentication")
 @Data
-public class AuthenticationDO {
+public class AuthenticationDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

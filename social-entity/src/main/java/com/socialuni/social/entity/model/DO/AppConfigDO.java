@@ -3,6 +3,7 @@ package com.socialuni.social.entity.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
  * 全局配置表
  */
 @Table(name = "app_config")
-public class AppConfigDO {
+public class AppConfigDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

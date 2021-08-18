@@ -5,6 +5,7 @@ import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "comment", indexes = {
@@ -18,7 +19,7 @@ import javax.persistence.*;
         @Index(columnList = "reportContentType"),
 })
 @Data
-public class CommentDO extends CommonContentBaseDO implements BaseModelDO {
+public class CommentDO extends CommonContentBaseDO implements BaseModelDO, Serializable {
     //如果这个评论 有parent，就代表已经是一个子评论，就不用把他设置为parent而是用它的parentId，他是否有parent
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

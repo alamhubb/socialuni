@@ -3,6 +3,7 @@ package com.socialuni.social.entity.model.DO.keywords;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Date;
 @Table(name = "black_keywords", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"word"})
 })
-public class BlackKeywordsDO {
+public class BlackKeywordsDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

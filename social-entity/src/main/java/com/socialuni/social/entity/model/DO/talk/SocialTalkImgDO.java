@@ -4,6 +4,7 @@ import com.socialuni.social.entity.model.DO.CommonBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "talk_img",
@@ -17,7 +18,7 @@ import javax.persistence.*;
 )
 @Data
 //
-public class SocialTalkImgDO extends CommonBaseDO {
+public class SocialTalkImgDO extends CommonBaseDO implements Serializable {
     //此类为talk子类，只能包含基础数据类型
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

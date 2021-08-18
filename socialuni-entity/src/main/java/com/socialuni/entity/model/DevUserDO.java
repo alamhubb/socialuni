@@ -3,17 +3,19 @@ package com.socialuni.entity.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 开发者账户
  */
-@Data@Entity
+@Data
+@Entity
 @Table(name = "dev_user")
 /*, uniqueConstraints = {
 @UniqueConstraint(columnNames = {"contentUnionType", "developerId", "userId"})
 }*/
-public class DevUserDO {
+public class DevUserDO implements Serializable {
     //开发者id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

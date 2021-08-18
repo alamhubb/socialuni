@@ -17,12 +17,12 @@ import java.util.Optional;
 public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     Optional<TalkDO> findOneByIdAndStatusIn(Integer id, List<String> status);
 
-    @Cacheable(cacheNames = "talkById", key = "#id")
+    @Cacheable(cacheNames = "talkById", key = "#p0")
     TalkDO findOneById(Integer id);
 
     TalkDO findOneBySocialuniUid(String uid);
 
-    @Cacheable(cacheNames = "talkById", key = "#id")
+    @Cacheable(cacheNames = "talkById", key = "#p0")
     Optional<BaseModelDO> findTop1ById(Integer id);
 
     TalkDO save(TalkDO talk);

@@ -4,15 +4,17 @@ import com.socialuni.social.constant.StatusConst;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author qinkaiyuan
  * @date 2019-02-14 22:03
- */@Entity
+ */
+@Entity
 @Table(name = "dev_auth_code")
 @Data
-public class DevAuthCodeDO {
+public class DevAuthCodeDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,7 +22,7 @@ public class DevAuthCodeDO {
     private String authCode;
     private Date createTime;
     private String ip;
-//    private Integer userId;
+    //    private Integer userId;
     private String status;
 
     public DevAuthCodeDO() {

@@ -34,12 +34,12 @@ public interface CommentRepository extends JpaRepository<CommentDO, Integer> {
     @Caching(evict = {
             //用户的talks肯定变化了
             //新增一条数据肯定所有数据清空，数据的显示数据变了
-            @CacheEvict(cacheNames = "talkById", key = "#comment.talkId"),
+            @CacheEvict(cacheNames = "talkById", key = "#p0.talkId"),
             //新增一条数据肯定所有数据清空，数据的显示数据变了
-            @CacheEvict(cacheNames = "talkComments5", key = "#comment.talkId"),
-            @CacheEvict(cacheNames = "talkComments50", key = "#comment.talkId"),
-            @CacheEvict(cacheNames = "commentComments3", key = "#comment.parentCommentId", condition = "#comment.parentCommentId!=null"),
-            @CacheEvict(cacheNames = "commentComments50", key = "#comment.parentCommentId", condition = "#comment.parentCommentId!=null")
+            @CacheEvict(cacheNames = "talkComments5", key = "#p0.talkId"),
+            @CacheEvict(cacheNames = "talkComments50", key = "#p0.talkId"),
+            @CacheEvict(cacheNames = "commentComments3", key = "#p0.parentCommentId", condition = "#p0.parentCommentId!=null"),
+            @CacheEvict(cacheNames = "commentComments50", key = "#p0.parentCommentId", condition = "#p0.parentCommentId!=null")
     })
     CommentDO save(CommentDO comment);
 

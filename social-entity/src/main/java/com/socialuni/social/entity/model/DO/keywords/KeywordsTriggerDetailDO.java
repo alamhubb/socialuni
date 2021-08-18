@@ -5,6 +5,7 @@ import com.socialuni.social.constant.ReportStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  */@Entity
 @Table(name = "keywords_trigger_detail")
 @Data
-public class KeywordsTriggerDetailDO {
+public class KeywordsTriggerDetailDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

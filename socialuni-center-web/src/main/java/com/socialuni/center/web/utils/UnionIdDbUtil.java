@@ -14,6 +14,7 @@ import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.utils.ObjectUtil;
 import com.socialuni.social.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -113,19 +114,26 @@ public class UnionIdDbUtil {
         Date curDate = new Date();
 //        log.info("创建uniond1：" + SystemUtil.getCurrentTimeSecond());
         //如果这两个都不为空则查找是否存在有效的
-        //如果有有效的，返回有效的，如果没有有效的，新建
+
+        //如果有有效的，返回有效的，如果没有有效的，新建.
         //查询可用的可以保证没缓存的情况下查询的也是可用的
-        Optional<UnionIdDO> contentUnionIdDOOptional = unionIdRepository.findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdOrderByIdDesc(contentType, contentId, CommonStatus.enable, devId, userId);
-//        log.info("创建uniond3：" + SystemUtil.getCurrentTimeSecond());
-        if (contentUnionIdDOOptional.isPresent()) {
-            UnionIdDO unionIdDO = contentUnionIdDOOptional.get();
-            if (ObjectUtil.isNotEmpty(userId, devId)) {
+        UnionIdDO unionIdDO;
+        if (ObjectUtils.allNotNull(userId, devId)) {
+            unionIdDO = unionIdRepository.findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdAndBeginTimeOrderByIdDesc(contentType, contentId, CommonStatus.enable, devId, userId, null);
+        } else {
+            unionIdDO = unionIdRepository.findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdAndBeginTimeOrderByIdDesc(contentType, contentId, CommonStatus.enable, devId, userId, curDate);
+        }
+        //如果不为null
+        if (unionIdDO != null) {
+            //如果都不为空
+            if (ObjectUtils.allNotNull(userId, devId)) {
                 return unionIdDO.getUnionId();
             }
             //失效时间大于当前事件，还未失效
             if (unionIdDO.getExpiredTime().getTime() > curDate.getTime()) {
                 return unionIdDO.getUnionId();
             } else {
+                //已失效，修改状态
                 unionIdDO.setStatus(CommonStatus.delete);
                 //更新状态
                 unionIdDO.setUpdateTime(curDate);
@@ -134,7 +142,7 @@ public class UnionIdDbUtil {
             }
         }
         //不存在已有的
-        UnionIdDO unionIdDO = new UnionIdDO();
+        unionIdDO = new UnionIdDO();
         //设置随机uuid
         unionIdDO.setStatus(CommonStatus.enable);
         unionIdDO.setUnionId(UUIDUtil.getUUID());
@@ -149,6 +157,7 @@ public class UnionIdDbUtil {
         //userId和devId有一个为空，则有过期时间
         if (ObjectUtil.hasEmpty(userId, devId)) {
             unionIdDO.setValidTime(DateTimeType.halfHour);
+            unionIdDO.setBeginTime(curDate);
             unionIdDO.setExpiredTime(new Date(curDate.getTime() + unionIdDO.getValidTime()));
         }
 //        log.info("创建uniond5：" + SystemUtil.getCurrentTimeSecond());

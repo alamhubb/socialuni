@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserDO, Integer> {
-    @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
+    @Cacheable(cacheNames = RedisKeysConst.userById, key = "#p0")
     UserDO findOneById(Integer id);
 
     @CachePut(cacheNames = RedisKeysConst.userById, key = "#user.id")
     UserDO save(UserDO user);
 
-    @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
+    @Cacheable(cacheNames = RedisKeysConst.userById, key = "#p0")
     Optional<UserDO> findById(Integer id);
 
     /*@Modifying

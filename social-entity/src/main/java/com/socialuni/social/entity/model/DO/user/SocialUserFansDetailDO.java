@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user_fans_detail",
@@ -13,7 +14,7 @@ import javax.persistence.*;
 )
 @Data
 @NoArgsConstructor
-public class SocialUserFansDetailDO {
+public class SocialUserFansDetailDO implements Serializable {
     //在talk里面展示的放在user里？
     //必有
     @Id

@@ -22,10 +22,10 @@ public interface TagRepository extends JpaRepository<TagDO, Integer> {
     )
     TagDO save(TagDO tag);
 
-    @Cacheable(cacheNames = "tagById", key = "#tagId")
+    @Cacheable(cacheNames = "tagById", key = "#p0")
     Optional<TagDO> findByIdAndStatus(Integer tagId, String status);
 
-    @Cacheable(cacheNames = "tagByName", key = "#name")
+    @Cacheable(cacheNames = "tagByName", key = "#p0")
     TagDO findFirstByName(String name);
 
     TagDO findFirstByDevId(Integer devId);

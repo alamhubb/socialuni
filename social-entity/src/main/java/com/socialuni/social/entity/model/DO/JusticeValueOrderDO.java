@@ -3,6 +3,7 @@ package com.socialuni.social.entity.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */@Entity
 @Table(name = "justice_value_order")
 @Data
-public class JusticeValueOrderDO {
+public class JusticeValueOrderDO implements Serializable {
     /**
      * 举报正确类别，奖励20，举报错误类别奖励10，举报失败扣50，
      * <p>

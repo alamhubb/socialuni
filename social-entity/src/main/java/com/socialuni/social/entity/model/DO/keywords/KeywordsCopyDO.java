@@ -4,6 +4,7 @@ import com.github.promeg.pinyinhelper.Pinyin;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author qinkaiyuan
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @Table(name = "keywords_copy", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"text"})
 })
-public class KeywordsCopyDO {
+public class KeywordsCopyDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

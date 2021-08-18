@@ -5,11 +5,12 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
 @Data
-public class CommonContentBaseDO extends CommonBaseDO {
+public class CommonContentBaseDO extends CommonBaseDO implements Serializable {
     @Column(nullable = false)
     private String status;
 

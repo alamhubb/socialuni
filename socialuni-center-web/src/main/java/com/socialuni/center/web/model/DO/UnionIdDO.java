@@ -3,6 +3,7 @@ package com.socialuni.center.web.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -21,10 +22,10 @@ import java.util.Date;
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"unionId"}),
-                @UniqueConstraint(columnNames = {"contentId", "contentType", "devId", "userId", "status"})
+                @UniqueConstraint(columnNames = {"contentId", "contentType", "devId", "userId", "status", "createTime"})
         }
 )
-public class UnionIdDO {
+public class UnionIdDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,6 +43,8 @@ public class UnionIdDO {
     private String status;
     //创建时间
     private Date createTime;
+    //用来判断是否没有失效时间，不使用expiredTime因为还需要计算，beginTime直接等于=new date
+    private Date beginTime;
     //创建时间
     private Date updateTime;
     //有效周期，单位毫秒

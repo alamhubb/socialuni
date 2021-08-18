@@ -4,6 +4,7 @@ package com.socialuni.center.web.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "match_request", uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "receiveUserId"}))
-public class MatchRequestDO {
+public class MatchRequestDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

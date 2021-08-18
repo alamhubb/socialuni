@@ -4,12 +4,13 @@ package com.socialuni.social.entity.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data@Entity
 
 @Table(name = "notify")
-public class NotifyDO {
+public class NotifyDO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ package com.socialuni.social.entity.model.DO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */@Entity
 @Table(name = "antispam")
 @Data
-public class AntispamDO {
+public class AntispamDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

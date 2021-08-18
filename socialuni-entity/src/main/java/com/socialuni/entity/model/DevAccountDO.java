@@ -6,6 +6,7 @@ import com.socialuni.social.constant.GenderType;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -28,7 +29,7 @@ import java.util.Date;
                 @UniqueConstraint(columnNames = {"phoneNum"}),
         }
 )
-public class DevAccountDO {
+public class DevAccountDO implements Serializable {
     //开发者id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -24,7 +24,7 @@ public class DistrictRedis {
     @Resource
     private DistrictRepository districtRepository;
 
-    @Cacheable(cacheNames = "districtByAdCode", key = "#adCode")
+    @Cacheable(cacheNames = "districtByAdCode", key = "#p0")
     public Optional<DistrictDO> findFirstOneByAdCode(String adCode) {
         return districtRepository.findFirstOneByAdCode(adCode);
     }

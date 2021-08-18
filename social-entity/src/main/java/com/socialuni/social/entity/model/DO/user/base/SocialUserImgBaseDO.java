@@ -5,10 +5,11 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 @Data
 @MappedSuperclass
-public class SocialUserImgBaseDO extends CommonContentBaseDO {
+public class SocialUserImgBaseDO extends CommonContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer userId;
 

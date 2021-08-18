@@ -1,6 +1,7 @@
 package com.socialuni.social.entity.model.DO.base;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 public interface BaseModelDO {

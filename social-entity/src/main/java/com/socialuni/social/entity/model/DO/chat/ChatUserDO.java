@@ -5,6 +5,7 @@ import com.socialuni.social.constant.ChatUserStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Date;
         @UniqueConstraint(columnNames = {"userId", "chat_id"}),
         @UniqueConstraint(columnNames = {"userId", "receiveUserId"})
 })
-public class ChatUserDO {
+public class ChatUserDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

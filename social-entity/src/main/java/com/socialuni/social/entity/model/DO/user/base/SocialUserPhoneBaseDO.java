@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 @Data
 @MappedSuperclass
 @NoArgsConstructor
-public class SocialUserPhoneBaseDO extends CommonContentBaseDO {
+public class SocialUserPhoneBaseDO extends CommonContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer userId;
     @Column(nullable = false)

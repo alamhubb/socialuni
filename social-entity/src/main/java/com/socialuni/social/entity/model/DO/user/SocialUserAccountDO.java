@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
 
 /**
  * 登录相关，只有登录时才用得到的表
@@ -29,6 +30,6 @@ import javax.persistence.UniqueConstraint;
                 @UniqueConstraint(columnNames = {"provider", "mpOpenId"}),
         }
 )
-public class SocialUserAccountDO extends CommonUserAccountBaseDO {
+public class SocialUserAccountDO extends CommonUserAccountBaseDO implements Serializable {
 
 }

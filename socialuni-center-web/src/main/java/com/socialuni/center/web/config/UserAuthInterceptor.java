@@ -28,8 +28,8 @@ import java.util.Date;
 @Component
 @Slf4j
 public class UserAuthInterceptor implements HandlerInterceptor {
-//    @Resource
-//    private RedisUtil redisUtil;
+    @Resource
+    private RedisUtil redisUtil;
 
     /*
      * 进入controller层之前拦截请求
@@ -37,6 +37,12 @@ public class UserAuthInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
+        String requestMethod = request.getMethod();
+
+        if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
+            return true;
+        }
+
         Date startTime = new Date();
 
         OperateLogDO operateLogDO = new OperateLogDO();
@@ -44,10 +50,10 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         if (user != null) {
             operateLogDO.setUserId(user.getId());
         }
-        Integer devId = DevAccountUtils.getDevId();
+        Integer devId = DevAccountUtils.getDevIdAllowNull();
         String userIp = IpUtil.getIpAddr(request);
         String uri = request.getRequestURI();
-        String requestMethod = request.getMethod();
+
         operateLogDO.setDevId(devId);
         operateLogDO.setIp(userIp);
         operateLogDO.setCreateTime(startTime);
@@ -67,14 +73,15 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         String ipKey = "ipKey:" + userIp;
 
-        Integer ipCount = AppStaticData.getIpCount(userIp);
+        /*Integer ipCount = AppStaticData.getIpCount(userIp);
+        也可以采用map处理，ip可以value时间戳列表
         //获取验证码超过10次，则联系客服
         if (ipCount > 1000) {
             throw new SocialParamsException("访问频繁，请联系客服处理");
         }
-        AppStaticData.ipCountPlus(userIp);
+        AppStaticData.ipCountPlus(userIp);*/
 
-        /*Object keyCountObj = redisUtil.get(ipKey);
+        Object keyCountObj = redisUtil.get(ipKey);
         //如果已经有了赋值
         if (keyCountObj != null) {
             int count = (Integer) keyCountObj;
@@ -90,8 +97,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
             redisUtil.set(ipKey, count, expireTime);
         } else {
             redisUtil.set(ipKey, 1, 60);
-        }*/
-
+        }
 
         if (
                 (requestMethod.equals(RequestMethod.OPTIONS.name())

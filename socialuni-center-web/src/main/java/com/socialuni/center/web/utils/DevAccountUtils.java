@@ -10,6 +10,7 @@ import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -64,12 +65,17 @@ public class DevAccountUtils {
         return null;
     }
 
-    public static Integer getDevId() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+    public static Integer getDevIdAllowNull() {
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
         if (devAccountDO != null) {
             return devAccountDO.getId();
         }
         return null;
+    }
+
+    public static Integer getDevId() {
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        return devAccountDO.getId();
     }
 
     public static DevAccountProviderDO getDevAccountProviderDO(String mpType) {
@@ -82,6 +88,9 @@ public class DevAccountUtils {
     public static DevAccountDO getDevAccountAllowNull() {
         //先从req中获取
         String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
+        if (StringUtils.isEmpty(secretKey)){
+            return null;
+        }
         return devAccountRepository.findFirstBySecretKey(secretKey);
     }
 

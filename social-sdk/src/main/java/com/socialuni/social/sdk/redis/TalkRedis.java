@@ -17,7 +17,7 @@ public class TalkRedis {
     private TalkRepository talkRepository;
 
 
-    @Cacheable(cacheNames = "talkById", key = "#id")
+    @Cacheable(cacheNames = "talkById", key = "#p0")
     public TalkDO findById(Integer id) {
         return talkRepository.findOneById(id);
     }

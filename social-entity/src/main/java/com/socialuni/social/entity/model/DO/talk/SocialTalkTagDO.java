@@ -3,6 +3,7 @@ package com.socialuni.social.entity.model.DO.talk;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author qinkaiyuan
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "talk_tag")
 @Data
-public class SocialTalkTagDO {
+public class SocialTalkTagDO implements Serializable {
     //此类为talk子类，只能包含基础数据类型
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

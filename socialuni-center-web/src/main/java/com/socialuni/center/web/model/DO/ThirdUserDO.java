@@ -4,6 +4,7 @@ import com.socialuni.center.web.utils.UnionIdDbUtil;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
                 @UniqueConstraint(columnNames = {"devId", "userId"})
         })
 @Entity
-public class ThirdUserDO {
+public class ThirdUserDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

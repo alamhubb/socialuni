@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 @Entity
@@ -18,6 +19,6 @@ import javax.persistence.Table;
         }
 )
 @Data
-public class UserImgDO extends SocialUserImgBaseDO {
+public class UserImgDO extends SocialUserImgBaseDO implements Serializable {
 
 }

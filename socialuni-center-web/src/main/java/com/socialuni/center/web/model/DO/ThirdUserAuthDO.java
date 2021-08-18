@@ -4,6 +4,7 @@ import com.socialuni.social.constant.ConstStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Date;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"devId", "userId", "authType"})
         })
-public class ThirdUserAuthDO {
+public class ThirdUserAuthDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
