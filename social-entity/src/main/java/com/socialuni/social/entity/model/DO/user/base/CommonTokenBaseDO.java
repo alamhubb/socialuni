@@ -23,7 +23,7 @@ public class CommonTokenBaseDO extends CommonContentBaseDO implements Serializab
     @Column(nullable = false, updatable = false)
     private String token;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     private Date expiredTime;
 
     public CommonTokenBaseDO(Integer userId, String token) {

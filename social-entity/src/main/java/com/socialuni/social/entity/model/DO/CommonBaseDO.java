@@ -14,7 +14,7 @@ public class CommonBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     private Date createTime;
 
     public CommonBaseDO() {

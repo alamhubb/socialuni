@@ -14,7 +14,7 @@ public class CommonContentBaseDO extends CommonBaseDO implements Serializable {
     @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")
     private Date updateTime;
 
     public CommonContentBaseDO() {

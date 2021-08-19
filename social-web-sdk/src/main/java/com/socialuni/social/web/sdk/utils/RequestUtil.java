@@ -64,6 +64,7 @@ public class RequestUtil {
         return StringUtils.isEmpty(token)
                 || "undefined".equals(token)
                 || "null".equals(token)
+                || "[object Undefined]".equals(token)
                 || "[object Null]".equals(token);
 //                && !"\"[object Null]\"".equals(token)
     }

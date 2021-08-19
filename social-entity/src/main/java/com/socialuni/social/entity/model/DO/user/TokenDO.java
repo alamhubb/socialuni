@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 //为什么使用s_token
 @Entity
-@Table(name = "s_token",
+@Table(name = "token",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空

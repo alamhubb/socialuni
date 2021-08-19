@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: localprod
   jpa:
     database: MYSQL
     show-sql: false
