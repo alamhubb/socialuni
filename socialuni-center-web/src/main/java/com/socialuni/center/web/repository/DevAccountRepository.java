@@ -12,13 +12,13 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public interface DevAccountRepository extends JpaRepository<DevAccountDO, Integer> {
-    @Cacheable(cacheNames = "getDevAccountById", key = "#p0")
+    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
     DevAccountDO findFirstById(Integer id);
 
-    @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#p0")
+    @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
     DevAccountDO findFirstBySecretKey(String secretKey);
 
-    @Cacheable(cacheNames = "getDevAccountByDevNum", key = "#p0")
+    @Cacheable(cacheNames = "getDevAccountByDevNum", key = "#devNum")
     Optional<DevAccountDO> findFirstByDevNum(Long devNum);
 
     //获取最新的开发者账户，用来id相加

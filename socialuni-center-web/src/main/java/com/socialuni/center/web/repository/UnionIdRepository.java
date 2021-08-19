@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.UniqueConstraint;
 import java.util.Date;
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ public interface UnionIdRepository extends JpaRepository<UnionIdDO, Long> {
     )
     UnionIdDO save(UnionIdDO unionIdDO);
 
-    @Cacheable(cacheNames = "getUnionId", key = "#p0")
+    @Cacheable(cacheNames = "getUnionId", key = "#unionId")
     Optional<UnionIdDO> findFirstByUnionIdOrderByIdDesc(String unionId);
 
     //查询这条动态，是否有可用的unionid

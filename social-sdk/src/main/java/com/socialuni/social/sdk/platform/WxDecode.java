@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.platform;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.utils.StringUtil;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -16,7 +17,10 @@ import java.security.AlgorithmParameters;
  */
 public class WxDecode {
     public static String decrypt(String key, String data, String iv) {
-        if (StringUtil.hasEmpty(key, data, iv)) {
+        if (StringUtils.isEmpty(key)) {
+            throw new SocialParamsException("三方平台授权问题，返回了空的sessionKey");
+        }
+        if (StringUtil.hasEmpty(data, iv)) {
             throw new SocialParamsException("解密数据包含空参数");
         }
         //被加密的数据
