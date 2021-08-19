@@ -1,4 +1,4 @@
-/*
+package com.socialuni.social.sdk.utils.model.DO;/*
 package com.socialuni.sdk.utils.model.DO;
 
 import com.socialuni.user.model.DO.UniUserTokenDO;

@@ -18,7 +18,7 @@ public class FollowStore {
     @Resource
     FollowRepository followRepository;
 
-    @Cacheable(cacheNames = RedisKeysConst.queryUserFollowUserIds, key = "#p0")
+    @Cacheable(cacheNames = RedisKeysConst.queryUserFollowUserIds, key = "#userId")
     public List<Integer> queryUserFollowUserIds(Integer userId) {
         return followRepository.queryUserFollowUserIds(userId, CommonStatus.enable);
     }

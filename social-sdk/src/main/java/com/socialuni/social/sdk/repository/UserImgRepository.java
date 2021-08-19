@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface UserImgRepository extends JpaRepository<UserImgDO, Integer> {
 
-    @Cacheable(cacheNames = "getUserImgByUserId", key = "#p0")
+    @Cacheable(cacheNames = "getUserImgByUserId", key = "#userId")
     List<UserImgDO> findTop3ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
 
     //需要注意不能使用 @cachePut 上面是数组

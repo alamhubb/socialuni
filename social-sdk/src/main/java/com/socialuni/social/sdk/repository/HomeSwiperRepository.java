@@ -9,6 +9,7 @@ import java.util.List;
 public interface HomeSwiperRepository extends JpaRepository<HomeSwiperDO, Integer> {
     @Cacheable(cacheNames = "homeSwipersByDevId")
     List<HomeSwiperDO> findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(String status, Integer devId);
+    @Cacheable(cacheNames = "homeSwipers",key = "#status")
     List<HomeSwiperDO> findAllByStatusOrderByTopLevelAscIdDesc(String status);
 }
 

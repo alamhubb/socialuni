@@ -1,4 +1,4 @@
-/*
+package com.socialuni.social.sdk.constant.status;/*
 package com.socialuni.sdk.constant.status;
 
 import java.util.Arrays;

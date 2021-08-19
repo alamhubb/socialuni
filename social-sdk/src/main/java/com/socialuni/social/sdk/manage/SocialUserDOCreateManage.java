@@ -1,4 +1,4 @@
-/*
+package com.socialuni.social.sdk.manage;/*
 package com.socialuni.sdk.manage;
 
 import com.socialuni.sdk.model.RO.SocialContentUserRO;

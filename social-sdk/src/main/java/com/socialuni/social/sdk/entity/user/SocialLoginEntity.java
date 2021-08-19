@@ -1,4 +1,4 @@
-/*
+package com.socialuni.social.sdk.entity.user;/*
 package com.socialuni.sdk.entity;
 
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;

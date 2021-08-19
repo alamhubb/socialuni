@@ -1,4 +1,4 @@
-/*
+package com.socialuni.social.sdk.utils;/*
 package com.socialuni.center.web.utils.model;
 
 import com.socialuni.entity.model.DO.comment.CommentDO;

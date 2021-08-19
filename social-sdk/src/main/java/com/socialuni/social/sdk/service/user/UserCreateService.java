@@ -1,4 +1,4 @@
-/*
+package com.socialuni.social.sdk.service.user;/*
 package com.socialuni.social.service;
 
 import com.socialuni.web.config.AppConfigStatic;

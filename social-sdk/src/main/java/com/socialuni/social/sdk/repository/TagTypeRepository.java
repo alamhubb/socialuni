@@ -19,10 +19,10 @@ public interface TagTypeRepository extends JpaRepository<TagTypeDO, Integer> {
     )
     TagTypeDO save(TagTypeDO tagTypeDO);
 
-    @Cacheable(cacheNames = "tagTypeByName", key = "#p0")
+    @Cacheable(cacheNames = "tagTypeByName", key = "#name")
     TagTypeDO findFirstByName(String name);
 
-    @Cacheable(cacheNames = "tagTypeById", key = "#p0")
+    @Cacheable(cacheNames = "tagTypeById", key = "#id")
     Optional<TagTypeDO> findById(Integer id);
 
     List<TagTypeDO> findByStatusAndTalkCountGreaterThanOrderByOrderLevelDescTalkCountDesc(String status, Integer zeroCount);
