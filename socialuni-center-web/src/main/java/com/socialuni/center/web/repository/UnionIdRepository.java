@@ -26,7 +26,7 @@ public interface UnionIdRepository extends JpaRepository<UnionIdDO, Long> {
     Optional<UnionIdDO> findFirstByUnionIdOrderByIdDesc(String unionId);
 
     //查询这条动态，是否有可用的unionid
-    @Cacheable(cacheNames = "getUnionIdByCom", key = "#contentType+'-'+#contentId+'-'+#status+'-'+#devId+'-'+#userId+'-'+#beginTime")
+    @Cacheable(cacheNames = "getUnionIdByCom", unless = "#result == null", key = "#contentType+'-'+#contentId+'-'+#status+'-'+#devId+'-'+#userId+'-'+#beginTime")
     UnionIdDO findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdAndBeginTimeOrderByIdDesc(String contentType, Integer contentId, String status, Integer devId, Integer userId, Date beginTime);
 
     //查询这条unionid是否还处于可用状态

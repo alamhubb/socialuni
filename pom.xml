@@ -3,6 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.socialuni</groupId>
     <artifactId>socialuni-parent</artifactId>
     <version>1.0.0</version>
@@ -34,7 +41,6 @@
         <socialuni.version>1.0.0</socialuni.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-boot.version>2.3.9.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
@@ -120,17 +126,6 @@
                 <scope>provided</scope>
                 <version>${lombok.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <!-- 所有依赖包的版本控制统一 -->
-                <type>pom</type>
-                <!--    仅支持type=pom，仅用来pom间互相引用，减少父pom体积-->
-                <scope>import</scope>
-            </dependency>
-
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
