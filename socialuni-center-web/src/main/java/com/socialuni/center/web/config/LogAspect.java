@@ -22,7 +22,7 @@ public class LogAspect {
     /**
      * 定义切入点，controller下面的所有类的所有公有方法，这里需要更改成自己项目的
      */
-    @Pointcut("@within(org.springframework.web.bind.annotation.RestController) ||@annotation(org.springframework.web.bind.annotation.PostMapping)||@annotation(org.springframework.web.bind.annotation.GetMapping)||@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
     public void requestLog() {
     }
     /*

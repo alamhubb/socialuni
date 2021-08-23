@@ -51,14 +51,14 @@ public class WxProviderUtil {
             return uniUnionIdRO;
         }
 
-        throw new UniSdkException(PlatformType.notSupportTypeErrorMsg);
+        throw new UniSdkException(PlatformType.notSupportTypeErrorMsg + ":" + platform);
     }
 
     private static String getUnionIdUrl(String platform, String code) {
         if (PlatformType.mp.equals(platform)) {
             return MessageFormat.format(WxUrl.wx_mp_unionId_url, wxMpId, wxMpSecret, code);
         }
-        throw new UniSdkException(PlatformType.notSupportTypeErrorMsg);
+        throw new UniSdkException(PlatformType.notSupportTypeErrorMsg + ":" + platform);
     }
 
     private static UniUnionIdRO decodeUnionId(SocialProviderLoginQO loginData, UniUnionIdRO uniUnionIdRO) {

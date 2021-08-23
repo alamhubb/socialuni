@@ -43,6 +43,6 @@ public class QQProviderUtil {
             //微信
             return MessageFormat.format(QQUrl.qq_app_unionId_url, code);
         }
-        throw new UniSdkException(PlatformType.notSupportTypeErrorMsg);
+        throw new UniSdkException(PlatformType.notSupportTypeErrorMsg + ":" + platform);
     }
 }

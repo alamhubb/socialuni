@@ -27,7 +27,7 @@ public class SocialUserAccountStore {
         SocialUserAccountDO socialUserAccountDO = null;
         //unionId不为null才查询
         if (StringUtils.isNotEmpty(unionId)) {
-            log.info("查询渠道账号provider:{}，unionId:{}", provider, unionId);
+            log.info("查询渠道账号platform:{}，provider:{}，unionId:{}", platform, provider, unionId);
             socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(provider, unionId);
         }
         //根据unionId找不到，代表没有开通开放平台或者没注册
@@ -42,7 +42,7 @@ public class SocialUserAccountStore {
             } else if (PlatformType.mp.equals(platform)) {
                 socialUserAccountDO = socialUserAccountRepository.findByProviderAndMpOpenId(provider, openId);
             } else {
-                throw new SocialParamsException(PlatformType.notSupportTypeErrorMsg);
+                throw new SocialParamsException(PlatformType.notSupportTypeErrorMsg + ":" + platform);
             }
         }
         return socialUserAccountDO;

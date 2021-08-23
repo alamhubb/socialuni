@@ -73,7 +73,7 @@ public class UnionIdDbUtil {
         List<Integer> ids = new ArrayList<>();
         if (ObjectUtil.isNotEmpty(contentUnionIds)) {
             for (String contentUnionId : contentUnionIds) {
-                log.info("查询单个id：" + System.currentTimeMillis());
+//                log.info("查询单个id：" + System.currentTimeMillis());
                 Integer id = UnionIdDbUtil.getResultByUnionId(contentType, contentUnionId, user);
                 ids.add(id);
             }
