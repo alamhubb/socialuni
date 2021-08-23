@@ -122,7 +122,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
             String requestMethod = request.getMethod();
             operateLogDO.setDevId(devId);
             operateLogDO.setIp(requestIp);
-//            operateLogDO.setCreateTime(startTime);
+            operateLogDO.setCreateTime(new Date());
             operateLogDO.setRequestMethod(requestMethod);
             operateLogDO.setUri(uri);
         }
@@ -139,7 +139,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         operateLogDO.setSpendTime(spendTime);
         RequestLogDOUtil.saveAsync(operateLogDO);
 
-        log.info("[requestId:{},{}],[{}({})][spendTimes:{}]", operateLogDO.getId(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri(), spendTime);
+        log.info("[{}],[{}({})][spendTimes:{}]", operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri(), spendTime);
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

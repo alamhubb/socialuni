@@ -9,6 +9,7 @@ public class RedisKeysConst {
     public static final String springKey = "::";
 
     public static final String userById = "userById";
+    public static final String tokenByToken = "tokenByToken";
     //系统
     public static final String shell = "shell";
 

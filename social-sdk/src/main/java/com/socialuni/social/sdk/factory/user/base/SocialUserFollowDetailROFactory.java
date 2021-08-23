@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.factory.user.base;
 
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.factory.ListConvertUtil;
 import com.socialuni.social.entity.model.DO.user.SocialUserFansDetailDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -21,6 +22,9 @@ public class SocialUserFollowDetailROFactory {
 
     public static SocialUserFollowDetailRO newSocialFollowUserRO(UserDO user, UserDO mineUser) {
         SocialUserFansDetailDO socialUserFansDetailDO = socialUserFansDetailRepository.findByUserId(user.getId());
+        if (socialUserFansDetailDO == null) {
+            throw new SocialSystemException("用户粉丝详情未创建");
+        }
         return SocialUserFollowDetailROFactory.newSocialFollowUserRO(user, mineUser, socialUserFansDetailDO);
     }
 
@@ -30,7 +34,7 @@ public class SocialUserFollowDetailROFactory {
         userRO.setFansNum(socialUserFansDetailDO.getFansNum());
 //        if (mineUser != null && userRO.getIsMine()) {
         //非自己也显示关注数量
-            userRO.setFollowNum(socialUserFansDetailDO.getFollowNum());
+        userRO.setFollowNum(socialUserFansDetailDO.getFollowNum());
 //        }
         return userRO;
     }

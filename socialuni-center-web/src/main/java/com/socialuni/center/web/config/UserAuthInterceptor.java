@@ -68,7 +68,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 //        RequestLogDOUtil.saveAsync(operateLogDO);
         RequestLogUtil.set(operateLogDO);
 
-        log.info("[{}({})]", operateLogDO.getRequestMethod(), operateLogDO.getUri());
+//        log.info("[{}({})]", operateLogDO.getRequestMethod(), operateLogDO.getUri());
 //        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri());
 
         String ipKey = "ipKey:" + userIp;

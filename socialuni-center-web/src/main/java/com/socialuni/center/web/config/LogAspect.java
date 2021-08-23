@@ -67,7 +67,7 @@ public class LogAspect {
                 operateLogDO.setInnerMsgDetail(result.toString());
             }
         }
-        log.info("[requestId:{},{}],[{}({})][spendTimes:{}]", operateLogDO.getId(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri(), spendTime);
+        log.info("[{}],[{}({})][spendTimes:{}]", operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri(), spendTime);
         RequestLogDOUtil.saveAsync(operateLogDO);
         return result;
     }
