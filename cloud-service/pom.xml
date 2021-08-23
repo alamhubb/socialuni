@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.socialuni</groupId>
         <artifactId>socialuni-parent</artifactId>
-        <version>1.0.0</version>
+        <version>0.1.0</version>
 
     </parent>
 
     <artifactId>cloud-service</artifactId>
-    <version>1.0.0</version>
+    <version>0.1.0</version>
     <name>cloud-service</name>
     <packaging>jar</packaging>
 

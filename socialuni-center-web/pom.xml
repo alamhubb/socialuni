@@ -12,8 +12,7 @@
     <parent>
         <groupId>com.socialuni</groupId>
         <artifactId>socialuni-parent</artifactId>
-        <version>1.0.0</version>
-
+        <version>0.1.0</version>
     </parent>
 
     <properties>
@@ -31,7 +30,7 @@
         <!--<dependency>
             <groupId>com.socialuni.center</groupId>
             <artifactId>socialuni-center-sdk</artifactId>
-            <version>1.0.0</version>
+            <version>0.1.0</version>
         </dependency>-->
 
         <dependency>
@@ -152,14 +151,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

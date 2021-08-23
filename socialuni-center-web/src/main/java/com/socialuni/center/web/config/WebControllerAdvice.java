@@ -116,7 +116,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
             if (user != null) {
                 operateLogDO.setUserId(user.getId());
             }
-            Integer devId = DevAccountUtils.getDevId();
+            Integer devId = DevAccountUtils.getDevIdAllowNull();
             String requestIp = IpUtil.getIpAddr(request);
             String uri = request.getRequestURI();
             String requestMethod = request.getMethod();

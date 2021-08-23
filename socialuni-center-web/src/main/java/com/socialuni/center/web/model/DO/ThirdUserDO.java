@@ -43,11 +43,15 @@ public class ThirdUserDO implements Serializable {
     }
 
     public ThirdUserDO(Integer devId, Integer userId) {
+        this(devId, userId, UnionIdDbUtil.createUserUid(userId, userId, devId));
+    }
+
+    public ThirdUserDO(Integer devId, Integer userId, String thirdUserId) {
         //三方商户id
         this.devId = devId;
         this.authDevId = 1;
         //为三方生成uuid，openid
-        this.thirdUserId = UnionIdDbUtil.createUserUid(userId, userId, devId);
+        this.thirdUserId = thirdUserId;
         //对此授权的devId
         this.userId = userId;
         Date curDate = new Date();

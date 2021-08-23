@@ -23,7 +23,7 @@ public class AuthThirdUserDomain {
     public SocialLoginRO<CenterMineUserDetailRO> authThirdUser(UserDO mineUser, String authType) {
         CenterMineUserDetailRO centerUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, authType);
 
-        ThirdUserTokenDO tokenDO = thirdUserTokenManage.create(mineUser.getId(), DevAccountUtils.getDevId());
+        ThirdUserTokenDO tokenDO = thirdUserTokenManage.create(centerUserDetailRO.getId(), DevAccountUtils.getDevId(), mineUser.getId());
 
         //生成返回对象
         SocialLoginRO<CenterMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();

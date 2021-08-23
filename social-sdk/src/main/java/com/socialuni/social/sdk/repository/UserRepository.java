@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserDO, Integer> {
+    @Query(value = "select u.id from UserDO u")
+    List<Integer> findAllUserIds();
+
     @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
     UserDO findOneById(Integer id);
 

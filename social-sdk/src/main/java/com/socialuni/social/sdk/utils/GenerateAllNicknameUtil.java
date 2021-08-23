@@ -1,5 +1,11 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.utils.UUIDUtil;
+import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+
 /**
  * @author qinkaiyuan
  * @date 2019-01-16 20:27
@@ -18,8 +24,16 @@ public class GenerateAllNicknameUtil {
 
 
     public static void main(String[] args) {
-        for (int i = 0; i < 20; i++) {
+        /*for (int i = 0; i < 20; i++) {
             System.out.println(GenerateAllNicknameUtil.getAllName());
+        }*/
+
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMDAzNTZiMzFmYTA0Y2NmODg4YzA1YTJhZDVhNTc0N19lOTY2MDg0Y2E0ZGE0MDIwOWY3Yjc1YzI2NGU3NDhlYyJ9.-2-0pAapiilxlX79JvB5fCZrF8yhEVhSFWrwOF8ux4Y";
+        try {
+            String tokenSubject = Jwts.parser().setSigningKey("da838b62ed0e412bb560254ebdc356c1").parseClaimsJws(token).getBody().getSubject();
+            System.out.println(tokenSubject.split("_")[0]);
+        } catch (MalformedJwtException e) {
+            throw new SocialSystemException("生成token异常");
         }
     }
 }

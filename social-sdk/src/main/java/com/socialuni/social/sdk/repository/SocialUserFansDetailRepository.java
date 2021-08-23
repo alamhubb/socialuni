@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserFansDetailRepository extends JpaRepository<SocialUserFansDetailDO, Integer> {
 
-    @Cacheable(cacheNames = "findUserFollowByUserId")
+    @Cacheable(cacheNames = "findUserFollowByUserId", unless = "#result == null")
     SocialUserFansDetailDO findByUserId(Integer userId);
 
     @CacheEvict(cacheNames = "findUserFollowByUserId", key = "#socialUserFansDetailDO.userId")

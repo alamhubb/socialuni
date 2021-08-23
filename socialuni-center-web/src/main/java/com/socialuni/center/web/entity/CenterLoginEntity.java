@@ -23,7 +23,7 @@ public class CenterLoginEntity {
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
-        ThirdUserTokenDO tokenDO = thirdUserTokenManage.create(socialMineUserDetailRO.getId(), DevAccountUtils.getDevId());
+        ThirdUserTokenDO tokenDO = thirdUserTokenManage.create(centerMineUserDetailRO.getId(), DevAccountUtils.getDevId(), socialMineUserDetailRO.getId());
 
         return new SocialLoginRO<>(tokenDO.getToken(), centerMineUserDetailRO);
     }

@@ -81,22 +81,24 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         }
         AppStaticData.ipCountPlus(userIp);*/
 
-        Object keyCountObj = redisUtil.get(ipKey);
-        //如果已经有了赋值
-        if (keyCountObj != null) {
-            int count = (Integer) keyCountObj;
-            //限制1分钟访问50次
-            if (count > 3000) {
-                //这里只提示未登录
-                res.setStatus(ErrorCode.IP_LIMIT_ERROR);
-                return false;
+        if (devId == null){
+            Object keyCountObj = redisUtil.get(ipKey);
+            //如果已经有了赋值
+            if (keyCountObj != null) {
+                int count = (Integer) keyCountObj;
+                //限制1分钟访问50次
+                if (count > 3000) {
+                    //这里只提示未登录
+                    res.setStatus(ErrorCode.IP_LIMIT_ERROR);
+                    return false;
+                }
+                long expireTime = redisUtil.getExpire(ipKey);
+                //否则访问次数加1
+                count = count + 1;
+                redisUtil.set(ipKey, count, expireTime);
+            } else {
+                redisUtil.set(ipKey, 1, 60);
             }
-            long expireTime = redisUtil.getExpire(ipKey);
-            //否则访问次数加1
-            count = count + 1;
-            redisUtil.set(ipKey, count, expireTime);
-        } else {
-            redisUtil.set(ipKey, 1, 60);
         }
 
         if (

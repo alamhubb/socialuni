@@ -20,12 +20,14 @@ import javax.persistence.Table;
 public class ThirdUserTokenDO extends CommonTokenBaseDO {
     @Column(nullable = false)
     private Integer devId;
+    private String thirdUserId;
 
     public ThirdUserTokenDO() {
     }
 
-    public ThirdUserTokenDO(Integer userId, String token, Integer devId) {
+    public ThirdUserTokenDO(Integer userId, String token, Integer devId,String thirdUserId) {
         super(userId, token);
         this.devId = devId;
+        this.thirdUserId = thirdUserId;
     }
 }

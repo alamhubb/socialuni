@@ -33,16 +33,17 @@ public class SocialUserAccountManage {
     }
 
     @Async
-    public void checkOrCreate(UserDO user, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+    public void checkOrCreate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         if (socialUserAccountDO == null) {
-            this.create(user, loginQO, uniUnionIdRO);
+            this.create(userId, loginQO, uniUnionIdRO);
         }
     }
 
-    public SocialUserAccountDO create(UserDO user, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+    //两个相似逻辑引用，但逻辑不相同，无法通用，所以两个地方调用
+    public SocialUserAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
-        socialUserAccountDO.setUserId(user.getId());
+        socialUserAccountDO.setUserId(userId);
         socialUserAccountDO.setPlatform(loginQO.getPlatform());
         socialUserAccountDO.setProvider(loginQO.getProvider());
         String openId = uniUnionIdRO.getOpenid();
@@ -52,14 +53,10 @@ public class SocialUserAccountManage {
         if (PlatformType.mp.equals(loginQO.getPlatform())) {
             //相同都为unionid
             socialUserAccountDO.setMpOpenId(openId);
-            socialUserAccountDO.setAppOpenId("");
         } else {
             socialUserAccountDO.setAppOpenId(openId);
-            socialUserAccountDO.setMpOpenId("");
         }
-        if (StringUtils.isEmpty(uniUnionIdRO.getUnionid())) {
-            socialUserAccountDO.setUnionId("");
-        } else {
+        if (!StringUtils.isEmpty(uniUnionIdRO.getUnionid())) {
             socialUserAccountDO.setUnionId(uniUnionIdRO.getUnionid());
         }
         socialUserAccountDO.setSessionKey(uniUnionIdRO.getSession_key());

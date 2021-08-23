@@ -30,12 +30,11 @@ public class CenterTokenUtil {
 
     public static ThirdUserTokenDO getThirdUserTokenDO(String token) {
         //解析token
-        String userKey = SocialTokenUtil.getUserKeyByToken(token);
-        if (StringUtils.isEmpty(userKey)) {
+        String userThirdId = SocialTokenUtil.getUserKeyByToken(token);
+        if (StringUtils.isEmpty(userThirdId)) {
             return null;
         }
         //解析token
-        Integer userId = Integer.valueOf(userKey);
         ThirdUserTokenDO tokenDO = thirdUserTokenRepository.findFirstByToken(token);
         Integer devId = DevAccountUtils.getDevId();
 
@@ -52,9 +51,9 @@ public class CenterTokenUtil {
             throw new SocialBusinessException("用户凭证过期，请重新登录");
         }
         //数据库的devId
-        Integer doUserId = tokenDO.getUserId();
-        if (!userId.equals(doUserId)) {
-            log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
+        String doUserThirdId = tokenDO.getThirdUserId();
+        if (!userThirdId.equals(doUserThirdId)) {
+            log.error("绕过验证，错误的userId:{},{}", doUserThirdId, userThirdId);
             throw new SocialSystemException("绕过了系统验证");
         }
         //返回user

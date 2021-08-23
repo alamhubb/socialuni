@@ -47,7 +47,7 @@ public class SocialUserCreateEntity {
             mineUser = socialUserManage.createUserByProviderLogin(loginQO);
             //创建或返回
             socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-            socialUserAccountManage.create(mineUser, loginQO, uniUnionIdRO);
+            socialUserAccountManage.create(mineUser.getId(), loginQO, uniUnionIdRO);
         }
         return mineUser;
     }

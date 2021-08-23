@@ -54,8 +54,7 @@ public class RedisConfig {
         RedisCacheConfiguration redisCacheConfiguration =
                 RedisCacheConfiguration.defaultCacheConfig()
                         .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
-                        .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
-                        .disableCachingNullValues();
+                        .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer));
 
         RedisCacheManager cacheManager = RedisCacheManager.builder(factory)
                 .cacheDefaults(redisCacheConfiguration)

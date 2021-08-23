@@ -231,8 +231,10 @@ public class SocialTalkROFactory {
         if (queryVO == null) {
             RectangleVO rectangleVO = AliAPI.getRectangle();
             queryVO = new SocialHomeTabTalkQueryQO();
-            queryVO.setLat(rectangleVO.getLat());
-            queryVO.setLon(rectangleVO.getLon());
+            if (rectangleVO != null) {
+                queryVO.setLat(rectangleVO.getLat());
+                queryVO.setLon(rectangleVO.getLon());
+            }
         }
 
         Double lon = queryVO.getLon();

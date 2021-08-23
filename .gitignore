@@ -12,4 +12,5 @@ node_modules
 application-local.yml
 #忽略生产文件
 application-prod.yml
+application-localprod.yml
 application-qingchi.yml

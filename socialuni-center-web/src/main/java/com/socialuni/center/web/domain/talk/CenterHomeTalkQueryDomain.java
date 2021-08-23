@@ -46,7 +46,7 @@ public class CenterHomeTalkQueryDomain {
         String postUserGender = genderTypeQueryVO.getUserGender();
 
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
-        GenderUtil.checkAppAndVisibleGender(appGender, talkVisibleGender, postUserGender, mineUser);
+        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
 
         queryQO.setUserGender(postUserGender);
         queryQO.setTalkVisibleGender(talkVisibleGender);

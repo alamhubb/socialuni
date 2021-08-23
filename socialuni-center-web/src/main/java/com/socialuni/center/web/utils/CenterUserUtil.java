@@ -66,15 +66,19 @@ public class CenterUserUtil {
         return user;
     }
 
-    public static ThirdUserDO getMineThirdUser() {
+    public static ThirdUserDO getMineThirdUser(Integer mineUserId) {
         Integer devId = DevAccountUtils.getDevId();
-        Integer userId = CenterUserUtil.getMineUserId();
-        ThirdUserDO thirdUserDO = thirdUserRepository.findByDevIdAndUserId(devId, userId);
+        ThirdUserDO thirdUserDO = thirdUserRepository.findByDevIdAndUserId(devId, mineUserId);
         return thirdUserDO;
     }
 
     public static String getMineThirdUserId() {
-        ThirdUserDO thirdUserDO = CenterUserUtil.getMineThirdUser();
+        UserDO mineUser = CenterUserUtil.getMineUser();
+        return CenterUserUtil.getMineThirdUserId(mineUser.getId());
+    }
+
+    public static String getMineThirdUserId(Integer mineUserId) {
+        ThirdUserDO thirdUserDO = CenterUserUtil.getMineThirdUser(mineUserId);
         if (thirdUserDO == null) {
             throw new SocialNullUserException();
         }

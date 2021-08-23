@@ -1,5 +1,6 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
 import com.socialuni.center.web.model.DO.UnionIdDO;
 import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
@@ -142,24 +143,8 @@ public class UnionIdDbUtil {
             }
         }
         //不存在已有的
-        unionIdDO = new UnionIdDO();
-        //设置随机uuid
-        unionIdDO.setStatus(CommonStatus.enable);
-        unionIdDO.setUnionId(UUIDUtil.getUUID());
-        unionIdDO.setContentType(contentType);
-        unionIdDO.setContentId(contentId);
-        unionIdDO.setDevId(devId);
-        unionIdDO.setUserId(userId);
+        unionIdDO = UnionIdDOFactory.createUnionDO(contentType, contentId, devId, curDate, userId);
 
-        unionIdDO.setCreateTime(curDate);
-        unionIdDO.setUpdateTime(curDate);
-
-        //userId和devId有一个为空，则有过期时间
-        if (ObjectUtil.hasEmpty(userId, devId)) {
-            unionIdDO.setValidTime(DateTimeType.halfHour);
-            unionIdDO.setBeginTime(curDate);
-            unionIdDO.setExpiredTime(new Date(curDate.getTime() + unionIdDO.getValidTime()));
-        }
 //        log.info("创建uniond5：" + SystemUtil.getCurrentTimeSecond());
 //        log.info("创建uniond：" + unionIdDO.getUnionId());
         unionIdStore.saveAsync(unionIdDO);
@@ -181,11 +166,10 @@ public class UnionIdDbUtil {
             throw new SocialParamsException("无效的内容标示1");
         }
         //todo 这里直接返回了
-        //存在数据库性能问题，使用真实id
-        /*if (UnionIdDbUtil.isInteger(unionId)) {
-            resultRO.setData(Integer.valueOf(unionId));
-            return resultRO;
-        }*/
+        //存在数据库性能问题，使用真实id，兼容旧版本
+        if (UnionIdDbUtil.isInteger(unionId)) {
+            return Integer.valueOf(unionId);
+        }
 
         //通用部分
         //判断uid有效

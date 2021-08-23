@@ -44,9 +44,11 @@ public class LogAspect {
         OperateLogDO operateLogDO = RequestLogUtil.getAndRemove();
         String params = Arrays.toString(joinPoint.getArgs());
         operateLogDO.setParams(params);
+        RequestLogUtil.set(operateLogDO);
 
         Object result = joinPoint.proceed();
 
+        operateLogDO = RequestLogUtil.getAndRemove();
         Date endDate = new Date();
         long spendTime = endDate.getTime() - operateLogDO.getCreateTime().getTime();
         operateLogDO.setEndTime(endDate);

@@ -12,10 +12,10 @@ public class ThirdUserTokenManage {
     @Resource
     ThirdUserTokenRepository thirdUserTokenRepository;
 
-    public ThirdUserTokenDO create(Integer userId, Integer devId) {
+    public ThirdUserTokenDO create(String thirdUserId, Integer devId, Integer mineUserId) {
         //本系统的，生成userToken，有个清池token对应集美token
-        String appToken = SocialTokenUtil.generateTokenByUserId(userId);
-        ThirdUserTokenDO thirdToken = new ThirdUserTokenDO(userId, appToken, devId);
+        String appToken = SocialTokenUtil.generateTokenByUserKey(thirdUserId);
+        ThirdUserTokenDO thirdToken = new ThirdUserTokenDO(mineUserId, appToken, devId, thirdUserId);
         thirdToken = thirdUserTokenRepository.save(thirdToken);
         return thirdToken;
     }
