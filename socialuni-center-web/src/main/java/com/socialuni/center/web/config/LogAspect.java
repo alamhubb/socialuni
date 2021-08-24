@@ -73,25 +73,28 @@ public class LogAspect {
         Object result = joinPoint.proceed();
 
         // 不为写入日志，才保存，写入日志为自己，如果保存会无限循环
-        if (!interfaceAndMethodName.contains("Log")) {
-            Date endDate = new Date();
-            long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
-            jpaSqlLogDO.setEndTime(endDate);
-            jpaSqlLogDO.setSpendTime(spendTime);
-
-            String params = Arrays.toString(joinPoint.getArgs());
-            jpaSqlLogDO.setParams(params);
-
-            jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
-
-            RequestLogDO requestLogDO = RequestLogUtil.get();
-            if (requestLogDO != null) {
-                jpaSqlLogDO.setRequestId(requestLogDO.getRequestId());
-            }
-            log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
-
-            JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
+        if (interfaceAndMethodName.contains("Log")
+                || interfaceAndMethodName.contains("UnionId")
+        ) {
+            return result;
         }
+        Date endDate = new Date();
+        long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
+        jpaSqlLogDO.setEndTime(endDate);
+        jpaSqlLogDO.setSpendTime(spendTime);
+
+        String params = Arrays.toString(joinPoint.getArgs());
+        jpaSqlLogDO.setParams(params);
+
+        jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
+
+        RequestLogDO requestLogDO = RequestLogUtil.get();
+        if (requestLogDO != null) {
+            jpaSqlLogDO.setRequestId(requestLogDO.getRequestId());
+        }
+        log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
+
+        JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
         return result;
     }
 

@@ -50,7 +50,7 @@ public class TestUnionIdService {
         List<ThirdUserTokenDO> thirdUserTokenDOS = new ArrayList<>();
         Date date = new Date();
         for (Integer userId : userIds) {
-            UnionIdDO unionIdDO = UnionIdDOFactory.createUnionDO(ContentType.user, userId, devId, date, userId);
+            UnionIdDO unionIdDO = UnionIdDOFactory.createUnionDO(ContentType.user, userId, devId, date, date, userId);
             unionIdDOS.add(unionIdDO);
 
             ThirdUserDO threeUserDO = new ThirdUserDO(devId, userId, unionIdDO.getUnionId());

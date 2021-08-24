@@ -72,6 +72,3 @@ spring:
         max-idle: 20
         # 连接池中的最小空闲连接
         min-idle: 10
-  cache:
-    redis:
-      time-to-live: 86400000

@@ -41,7 +41,7 @@ public class RequestLogDO extends CommonBaseDO implements Serializable {
     private Integer errorCode;
     private String errorType;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "longtext")
     private String params;
     private String errorMsg;
     @Column(columnDefinition = "longtext")

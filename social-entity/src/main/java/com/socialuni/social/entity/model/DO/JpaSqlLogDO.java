@@ -27,7 +27,7 @@ public class JpaSqlLogDO extends CommonBaseDO implements Serializable {
     private String interfaceMethod;
     private Long spendTime;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "longtext")
     private String params;
     private Date endTime;
 }

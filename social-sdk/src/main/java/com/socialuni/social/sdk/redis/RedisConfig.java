@@ -15,6 +15,8 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.time.Duration;
+
 @Configuration
 public class RedisConfig {
     @Bean
@@ -52,7 +54,7 @@ public class RedisConfig {
 
         // 配置序列化
         RedisCacheConfiguration redisCacheConfiguration =
-                RedisCacheConfiguration.defaultCacheConfig()
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(8))
                         .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
                         .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer));
 
