@@ -8,12 +8,12 @@ import lombok.Data;
  */
 @Data
 public class GenderTypeQueryVO {
+    public final String talkUserGender;
     //查询的时候选择的，可以选择仅女生，仅男生
-    public final String userGender;
     public final String talkVisibleGender;
 
-    public GenderTypeQueryVO(String userGender, String talkGender) {
-        this.userGender = userGender;
+    public GenderTypeQueryVO(String talkUserGender, String talkGender) {
+        this.talkUserGender = talkUserGender;
         this.talkVisibleGender = talkGender;
     }
 }

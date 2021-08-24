@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.factory;
 
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.sdk.factory.user.base.SocialContentUserROFactory;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
@@ -100,12 +101,12 @@ public class SocialTalkROFactory {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, SocialHomeTabTalkQueryQO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialTalkRO> newHomeTalkROs(UserDO mineUser, List<TalkDO> talkDOS, SocialHomeTabTalkQueryQO queryVO) {
+    public static List<SocialTalkRO> newHomeTalkROs(UserDO mineUser, List<TalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -119,7 +120,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryQO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialTalkRO socialTalkRO = new SocialTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
@@ -230,7 +231,7 @@ public class SocialTalkROFactory {
 
         if (queryVO == null) {
             RectangleVO rectangleVO = AliAPI.getRectangle();
-            queryVO = new SocialHomeTabTalkQueryQO();
+            queryVO = new SocialHomeTabTalkQueryBO();
             if (rectangleVO != null) {
                 queryVO.setLat(rectangleVO.getLat());
                 queryVO.setLon(rectangleVO.getLon());

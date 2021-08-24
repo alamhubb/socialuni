@@ -32,22 +32,6 @@ public class SocialTalkService {
     @Resource
     SocialUserTalkQueryDomain socialUserTalkQueryDomain;
 
-    public void queryParamsFormatAndCheck(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
-        String queryGenderType = queryQO.getGender();
-        //校验gender类型
-        GenderTypeQueryVO genderTypeQueryVO = GenderUtil.checkQueryGenderType(queryGenderType);
-
-        //获取genderType对应的userGender和talkGender
-        //无限制，所有人都可以查询，女生和男生发布的。
-        String talkVisibleGender = genderTypeQueryVO.getTalkVisibleGender();
-
-        //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
-        GenderUtil.checkTalkAndUserGender(talkVisibleGender, mineUser);
-
-        queryQO.setUserGender(genderTypeQueryVO.getUserGender());
-        queryQO.setTalkVisibleGender(talkVisibleGender);
-    }
-
     //查询非关注tab的动态列表
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<SocialTalkRO>> queryHomeTalks() {
@@ -65,7 +49,6 @@ public class SocialTalkService {
         queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
         queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
         queryQO.setGender(GenderType.all);
-        this.queryParamsFormatAndCheck(queryQO, mineUser);
 
         //转换为rolist
         List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
@@ -78,7 +61,6 @@ public class SocialTalkService {
         //获取当前用户
         UserDO mineUser = SocialUserUtil.getMineUser();
 
-        this.queryParamsFormatAndCheck(queryQO, mineUser);
         //转换为rolist
         List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
         return new ResultRO<>(socialTalkROs);

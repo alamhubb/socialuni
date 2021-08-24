@@ -7,7 +7,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.entity.model.DO.OperateLogDO;
+import com.socialuni.social.entity.model.DO.RequestLogDO;
 import com.socialuni.social.sdk.redis.RedisUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
@@ -36,29 +36,29 @@ public class UserAuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
         Date startTime = new Date();
 
-        OperateLogDO operateLogDO = new OperateLogDO();
+        RequestLogDO requestLogDO = new RequestLogDO();
         UserDO user = SocialUserUtil.getMineUser();
         if (user != null) {
-            operateLogDO.setUserId(user.getId());
+            requestLogDO.setUserId(user.getId());
         }
         String requestIp = IpUtil.getIpAddr(request);
         String uri = request.getRequestURI();
         String requestMethod = request.getMethod();
-        operateLogDO.setIp(requestIp);
-        operateLogDO.setCreateTime(startTime);
-        operateLogDO.setSuccess(true);
-        operateLogDO.setErrorCode(ResultRO.successCode);
-        operateLogDO.setErrorType(ErrorType.success);
-        operateLogDO.setErrorMsg(ErrorMsg.successMsg);
-        operateLogDO.setInnerMsg(ErrorMsg.successMsg);
-        operateLogDO.setRequestMethod(requestMethod);
-        operateLogDO.setUri(uri);
-//        operateLogDO = RequestLogDOUtil.saveAsync(operateLogDO);
-//        RequestLogDOUtil.saveAsync(operateLogDO);
-        RequestLogUtil.set(operateLogDO);
+        requestLogDO.setIp(requestIp);
+        requestLogDO.setCreateTime(startTime);
+        requestLogDO.setSuccess(true);
+        requestLogDO.setErrorCode(ResultRO.successCode);
+        requestLogDO.setErrorType(ErrorType.success);
+        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
+        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
+        requestLogDO.setRequestMethod(requestMethod);
+        requestLogDO.setUri(uri);
+//        requestLogDO = RequestLogDOUtil.saveAsync(requestLogDO);
+//        RequestLogDOUtil.saveAsync(requestLogDO);
+        RequestLogUtil.set(requestLogDO);
 
-        log.info("[{}({})]", operateLogDO.getRequestMethod(), operateLogDO.getUri());
-//        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri());
+//        log.info("[{}({})]", requestLogDO.getRequestMethod(), requestLogDO.getUri());
+//        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri());
 
         String ipKey = "ipKey:" + requestIp;
 

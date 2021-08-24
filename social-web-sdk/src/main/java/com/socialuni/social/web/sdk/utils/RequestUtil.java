@@ -60,12 +60,12 @@ public class RequestUtil {
     }
 
     //判断是否有效token
-    public static boolean headerIsEmpty(String token) {
-        return StringUtils.isEmpty(token)
-                || "undefined".equals(token)
-                || "null".equals(token)
-                || "[object Undefined]".equals(token)
-                || "[object Null]".equals(token);
+    public static boolean headerIsEmpty(String headerName) {
+        return StringUtils.isEmpty(headerName)
+                || "undefined".equals(headerName)
+                || "null".equals(headerName)
+                || "[object Undefined]".equals(headerName)
+                || "[object Null]".equals(headerName);
 //                && !"\"[object Null]\"".equals(token)
     }
 }

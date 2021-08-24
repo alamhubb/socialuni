@@ -6,9 +6,8 @@ import com.socialuni.center.web.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.exception.base.SocialException;
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.TalkTabType;
@@ -32,31 +31,9 @@ public class CenterHomeTalkQueryDomain {
     @Resource
     private SocialHomeTalkQueryDomain socialHomeTalkQueryDomain;
 
-
-    public void queryParamsFormatAndCheck(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
-        String queryGenderType = queryQO.getGender();
-        //校验gender类型
-        GenderTypeQueryVO genderTypeQueryVO = GenderUtil.checkQueryGenderType(queryGenderType);
-
-        String appGender = DevAccountUtils.getAppGenderType();
-
-        //获取genderType对应的userGender和talkGender
-        //无限制，所有人都可以查询，女生和男生发布的。
-        String talkVisibleGender = genderTypeQueryVO.getTalkVisibleGender();
-        String postUserGender = genderTypeQueryVO.getUserGender();
-
-        //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
-        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
-
-        queryQO.setUserGender(postUserGender);
-        queryQO.setTalkVisibleGender(talkVisibleGender);
-    }
-
     //查询非关注tab的动态列表
     public List<CenterTalkRO> queryHomeTalks() {
         //获取当前用户
-        UserDO mineUser = CenterUserUtil.getMineUser();
-
         CenterHomeTabTalkQueryQO queryQO = new CenterHomeTabTalkQueryQO();
         queryQO.setTalkIds(new ArrayList<>());
         queryQO.setHomeTabType(TalkTabType.home_type);
@@ -70,13 +47,7 @@ public class CenterHomeTalkQueryDomain {
         queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
         queryQO.setGender(DevAccountUtils.getAppGenderType());
 
-        SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
-
-        this.queryParamsFormatAndCheck(socialHomeTabTalkQueryQO, mineUser);
-
-        List<SocialTalkRO> talkRos = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser);
-        List<CenterTalkRO> talkROS = CenterTalkROFactory.getTalkROS(talkRos, mineUser);
-        return talkROS;
+        return this.queryHomeTabTalks(queryQO);
     }
 
     //查询非关注tab的动态列表
@@ -86,7 +57,20 @@ public class CenterHomeTalkQueryDomain {
 
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
 
-        this.queryParamsFormatAndCheck(socialHomeTabTalkQueryQO, mineUser);
+        //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
+//        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
+
+        //主要是校验appgender,只允许同性别用户使用，不同性别则要保证同性别
+        String appGender = DevAccountUtils.getAppGenderType();
+        if (mineUser != null) {
+            String mineUserGender = mineUser.getGender();
+            //app性别为女生，且用户不为女生提示错误
+            if (appGender.equals(GenderType.girl) && !mineUserGender.equals(GenderType.girl)) {
+                throw new SocialSystemException("此软件为女生专属应用");
+            } else if (appGender.equals(GenderType.boy) && !mineUserGender.equals(GenderType.boy)) {
+                throw new SocialSystemException("此软件为男生专属应用");
+            }
+        }
 
         //转换为rolist
         List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser);

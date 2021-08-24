@@ -16,9 +16,10 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "operate_log", indexes = {
+@Table(name = "request_log", indexes = {
         @Index(columnList = "devId"),
         @Index(columnList = "userId"),
+        @Index(columnList = "requestId"),
         @Index(columnList = "ip"),
         @Index(columnList = "requestMethod"),
         @Index(columnList = "uri"),
@@ -27,9 +28,10 @@ import java.util.Date;
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
 })
-public class OperateLogDO extends CommonBaseDO implements Serializable {
+public class RequestLogDO extends CommonBaseDO implements Serializable {
     //邀请你的用户
     private Integer devId;
+    private Integer requestId;
     private Integer userId;
     private String ip;
     private String uri;
@@ -49,7 +51,7 @@ public class OperateLogDO extends CommonBaseDO implements Serializable {
     private Date endTime;
 
 
-    public OperateLogDO() {
+    public RequestLogDO() {
     }
 
 

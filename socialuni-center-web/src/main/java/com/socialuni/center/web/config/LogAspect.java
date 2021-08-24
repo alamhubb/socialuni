@@ -1,7 +1,9 @@
 package com.socialuni.center.web.config;
 
 import com.socialuni.social.constant.ErrorCode;
-import com.socialuni.social.entity.model.DO.OperateLogDO;
+import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
+import com.socialuni.social.entity.model.DO.RequestLogDO;
+import com.socialuni.social.sdk.utils.JpaSqlLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.api.model.ResultRO;
@@ -10,8 +12,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -25,6 +29,11 @@ public class LogAspect {
     @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
     public void requestLog() {
     }
+
+    @Pointcut("within(org.springframework.data.jpa.repository.JpaRepository+)")
+    public void sqlRepositoryLog() {
+    }
+
     /*
      */
 
@@ -35,40 +44,85 @@ public class LogAspect {
      *//*
     @Before("requestLog()")
     public void requestBefore(JoinPoint joinPoint) {
-        OperateLogDO operateLogDO = RequestLogUtil.get();
+        RequestLogDO operateLogDO = RequestLogUtil.get();
         String params = Arrays.toString(joinPoint.getArgs());
         operateLogDO.setParams(params);
     }*/
-    @Around("requestLog()")
-    public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
-        OperateLogDO operateLogDO = RequestLogUtil.getAndRemove();
-        String params = Arrays.toString(joinPoint.getArgs());
-        operateLogDO.setParams(params);
-        RequestLogUtil.set(operateLogDO);
+
+    //获取方法类全名+方法名
+    private String getInterfaceAndMethodName(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
+        //获取目标类对象
+        Class<?> aClass = joinPoint.getTarget().getClass();
+        //获取方法签名信息,方法名和参数列表
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        //获取目标方法对象
+        Method method = aClass.getDeclaredMethod(signature.getName(), signature.getParameterTypes());
+        //获取接口名
+        String interfaceName = aClass.getInterfaces()[0].getSimpleName();
+        //获取方法名
+        String methodName = method.getName();
+        return new StringBuffer(interfaceName).append(".").append(methodName).toString();
+    }
+
+    @Around("sqlRepositoryLog()")
+    public Object sqlRepositoryLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
+        JpaSqlLogDO jpaSqlLogDO = new JpaSqlLogDO();
+
+        String interfaceAndMethodName = this.getInterfaceAndMethodName(joinPoint);
 
         Object result = joinPoint.proceed();
 
-        operateLogDO = RequestLogUtil.getAndRemove();
+        // 不为写入日志，才保存，写入日志为自己，如果保存会无限循环
+        if (!interfaceAndMethodName.contains("Log")) {
+            Date endDate = new Date();
+            long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
+            jpaSqlLogDO.setEndTime(endDate);
+            jpaSqlLogDO.setSpendTime(spendTime);
+
+            String params = Arrays.toString(joinPoint.getArgs());
+            jpaSqlLogDO.setParams(params);
+
+            jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
+
+            RequestLogDO requestLogDO = RequestLogUtil.get();
+            if (requestLogDO != null) {
+                jpaSqlLogDO.setRequestId(requestLogDO.getRequestId());
+            }
+            log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
+
+            JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
+        }
+        return result;
+    }
+
+    @Around("requestLog()")
+    public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
+        RequestLogDO requestLogDO = RequestLogUtil.get();
+        String params = Arrays.toString(joinPoint.getArgs());
+        requestLogDO.setParams(params);
+
+        Object result = joinPoint.proceed();
+
         Date endDate = new Date();
-        long spendTime = endDate.getTime() - operateLogDO.getCreateTime().getTime();
-        operateLogDO.setEndTime(endDate);
-        operateLogDO.setSpendTime(spendTime);
+        long spendTime = endDate.getTime() - requestLogDO.getCreateTime().getTime();
+        requestLogDO.setEndTime(endDate);
+        requestLogDO.setSpendTime(spendTime);
         if (result != null) {
             if (result instanceof ResultRO) {
                 ResultRO resultRO = (ResultRO) result;
-                operateLogDO.setErrorCode(resultRO.getErrorCode());
-                operateLogDO.setErrorMsg(resultRO.getErrorMsg());
-                operateLogDO.setSuccess(resultRO.getSuccess());
+                requestLogDO.setErrorCode(resultRO.getErrorCode());
+                requestLogDO.setErrorMsg(resultRO.getErrorMsg());
+                requestLogDO.setSuccess(resultRO.getSuccess());
             } else {
-                operateLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
-                operateLogDO.setErrorMsg("系统异常");
-                operateLogDO.setSuccess(false);
-                operateLogDO.setInnerMsg("系统异常");
-                operateLogDO.setInnerMsgDetail(result.toString());
+                requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
+                requestLogDO.setErrorMsg("系统异常");
+                requestLogDO.setSuccess(false);
+                requestLogDO.setInnerMsg("系统异常");
+                requestLogDO.setInnerMsgDetail(result.toString());
             }
         }
-        log.info("[{}],[{}({})][spendTimes:{}]", operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri(), spendTime);
-        RequestLogDOUtil.saveAsync(operateLogDO);
+        log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getRequestId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
+        RequestLogDOUtil.saveAsync(requestLogDO);
         return result;
     }
 }

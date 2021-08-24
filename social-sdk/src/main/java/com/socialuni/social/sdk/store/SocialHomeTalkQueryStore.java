@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.store;
 
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.constant.GenderType;
@@ -28,9 +29,9 @@ public class SocialHomeTalkQueryStore {
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryQO queryQO, UserDO user) {
-        String userGender = queryQO.getUserGender();
-        String talkGender = queryQO.getTalkVisibleGender();
+    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryQO, UserDO user) {
+        String talkUserGender = queryQO.getTalkUserGender();
+        String talkVisibleGender = queryQO.getTalkVisibleGender();
         String tabType = queryQO.getHomeTabType();
 
         //        log.info("queryNotFollowTalks开始2：" + new Date().getTime() / 1000);
@@ -43,8 +44,8 @@ public class SocialHomeTalkQueryStore {
         }
 
         //sql需要，为all改为null
-        if (GenderType.all.equals(userGender)) {
-            userGender = null;
+        if (GenderType.all.equals(talkUserGender)) {
+            talkUserGender = null;
         }
 
 
@@ -110,8 +111,8 @@ public class SocialHomeTalkQueryStore {
         }
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryQO.getTalkIds(), userId, userGender,
-                minAge, maxAge, adCode, tagIds, talkGender, sessionUserGender);
+        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryQO.getTalkIds(), userId, talkUserGender,
+                minAge, maxAge, adCode, tagIds, talkVisibleGender, sessionUserGender);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

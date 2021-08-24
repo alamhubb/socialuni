@@ -55,4 +55,5 @@ public class GenderType {
     }};
 
     public static final List<String> genders = Arrays.asList(girl, boy);
+    public static final List<String> onlyGenders = Arrays.asList(onlyBoy, onlyGirl);
 }

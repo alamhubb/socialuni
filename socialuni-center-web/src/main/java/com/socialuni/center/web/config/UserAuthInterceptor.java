@@ -8,13 +8,13 @@ import com.socialuni.social.constant.ErrorCode;
 import com.socialuni.social.constant.ErrorType;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.entity.model.DO.OperateLogDO;
+import com.socialuni.social.entity.model.DO.RequestLogDO;
 import com.socialuni.social.sdk.redis.RedisUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
+import com.socialuni.social.web.sdk.utils.RequestIdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,31 +45,32 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         Date startTime = new Date();
 
-        OperateLogDO operateLogDO = new OperateLogDO();
+        RequestLogDO requestLogDO = new RequestLogDO();
+        requestLogDO.setRequestId(RequestIdUtil.addId());
         UserDO user = CenterUserUtil.getMineUser();
         if (user != null) {
-            operateLogDO.setUserId(user.getId());
+            requestLogDO.setUserId(user.getId());
         }
         Integer devId = DevAccountUtils.getDevIdAllowNull();
         String userIp = IpUtil.getIpAddr(request);
         String uri = request.getRequestURI();
 
-        operateLogDO.setDevId(devId);
-        operateLogDO.setIp(userIp);
-        operateLogDO.setCreateTime(startTime);
-        operateLogDO.setSuccess(true);
-        operateLogDO.setErrorCode(ResultRO.successCode);
-        operateLogDO.setErrorType(ErrorType.success);
-        operateLogDO.setErrorMsg(ErrorMsg.successMsg);
-        operateLogDO.setInnerMsg(ErrorMsg.successMsg);
-        operateLogDO.setRequestMethod(requestMethod);
-        operateLogDO.setUri(uri);
-//        operateLogDO = RequestLogDOUtil.saveAsync(operateLogDO);
-//        RequestLogDOUtil.saveAsync(operateLogDO);
-        RequestLogUtil.set(operateLogDO);
+        requestLogDO.setDevId(devId);
+        requestLogDO.setIp(userIp);
+        requestLogDO.setCreateTime(startTime);
+        requestLogDO.setSuccess(true);
+        requestLogDO.setErrorCode(ResultRO.successCode);
+        requestLogDO.setErrorType(ErrorType.success);
+        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
+        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
+        requestLogDO.setRequestMethod(requestMethod);
+        requestLogDO.setUri(uri);
+//        requestLogDO = RequestLogDOUtil.saveAsync(requestLogDO);
+//        RequestLogDOUtil.saveAsync(requestLogDO);
+        RequestLogUtil.set(requestLogDO);
 
-//        log.info("[{}({})]", operateLogDO.getRequestMethod(), operateLogDO.getUri());
-//        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), operateLogDO.getErrorMsg(), operateLogDO.getRequestMethod(), operateLogDO.getUri());
+//        log.info("[{}({})]", requestLogDO.getRequestMethod(), requestLogDO.getUri());
+//        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri());
 
         String ipKey = "ipKey:" + userIp;
 
@@ -81,7 +82,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         }
         AppStaticData.ipCountPlus(userIp);*/
 
-        if (devId == null){
+        if (devId == null) {
             Object keyCountObj = redisUtil.get(ipKey);
             //如果已经有了赋值
             if (keyCountObj != null) {

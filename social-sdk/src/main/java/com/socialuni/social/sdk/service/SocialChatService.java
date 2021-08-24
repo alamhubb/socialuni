@@ -34,7 +34,8 @@ public class SocialChatService {
 
 
     public ResultRO<List<ChatRO>> queryChatList() {
-        return new ResultRO<>(chatQueryDomain.getChats());
+//        return new ResultRO<>(chatQueryDomain.getChats());
+        return new ResultRO<>();
     }
 
     public ResultRO<ChatRO> queryChat(UserIdVO receiveUserVO) {

@@ -28,7 +28,7 @@ public interface SocialuniChatAPI {
     ResultRO<List<ChatRO>> queryHomeChat();
 
     @PostMapping("queryChats")
-    ResultRO<List<ChatRO>> queryChatList();
+    ResultRO<List<ChatRO>> queryChats();
 
     /*@PostMapping("queryChat")
     ResultRO<ChatVO> queryChat(@RequestBody @Valid UserIdVO receiveUserVO);

@@ -32,7 +32,7 @@ public class CenterChatController implements SocialuniChatAPI {
     }
 
     @Override
-    public ResultRO<List<ChatRO>> queryChatList() {
+    public ResultRO<List<ChatRO>> queryChats() {
         return socialChatService.queryChatList();
     }
 

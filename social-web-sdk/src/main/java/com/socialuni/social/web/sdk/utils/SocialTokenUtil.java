@@ -80,9 +80,7 @@ public class SocialTokenUtil {
 
     public static Boolean isError(String token) {
         return StringUtils.isEmpty(token)
-                || "undefined".equals(token)
-                || "null".equals(token)
-                || "[object Null]".equals(token)
+                || RequestUtil.headerIsEmpty(token)
                 || token.length() == 32;
     }
 }

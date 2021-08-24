@@ -98,9 +98,9 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
-        /*OperateLogDO operateLogDO = RequestLogUtil.getAndRemove();
+        /*RequestLogDO operateLogDO = RequestLogUtil.getAndRemove();
         if (operateLogDO == null) {
-            operateLogDO = new OperateLogDO();
+            operateLogDO = new RequestLogDO();
             HttpServletRequest request = RequestUtil.getRequest();
             UserDO user = CenterUserUtil.getMineUser();
             if (user != null) {

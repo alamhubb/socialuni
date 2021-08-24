@@ -1,23 +1,27 @@
 package com.socialuni.social.sdk.utils;
 
 
-import com.socialuni.social.entity.model.DO.OperateLogDO;
+import com.socialuni.social.entity.model.DO.RequestLogDO;
 
 public class RequestLogUtil {
-    private static final ThreadLocal<OperateLogDO> requestLog = new ThreadLocal<>();
+    private static final ThreadLocal<RequestLogDO> requestLog = new ThreadLocal<>();
 
-    public static void set(OperateLogDO operateLogDO) {
-        requestLog.set(operateLogDO);
+    public static void set(RequestLogDO requestLogDO) {
+        requestLog.set(requestLogDO);
     }
 
-    public static OperateLogDO getAndRemove() {
-        OperateLogDO operateLogDO = requestLog.get();
+    /*public static RequestLogDO getAndRemove() {
+        RequestLogDO requestLogDO = requestLog.get();
         requestLog.remove();
-        return operateLogDO;
+        return requestLogDO;
+    }*/
+
+    public static RequestLogDO get() {
+        return requestLog.get();
     }
 
-    public static OperateLogDO get() {
-        return requestLog.get();
+    public static void remove() {
+        requestLog.remove();
     }
 
 //    public static void remove() {

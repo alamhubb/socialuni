@@ -50,7 +50,7 @@ public class DevAccountUtils {
 
 
     public static String getAppGenderType() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
         if (devAccountDO != null) {
             return devAccountDO.getAppGenderType();
         }
