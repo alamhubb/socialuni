@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.domain.report;
 
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -10,7 +11,6 @@ import com.socialuni.social.model.model.QO.SocialReportAddQO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * @author qinkaiyuan
@@ -92,28 +91,27 @@ public class SoicialReportAddDomain {
         //现在这个意思是，只能举报，正常显示的动态，待审核，不违规，预审核，删除的都举报不了
         //理论上来说这些状态应该都是不能被举报的，因为看不见，所以这个逻辑现在也没啥问题，没了不违规状态了
         //查询动态状态是否为正常
-        Optional<BaseModelDO> modelOptional;
+        BaseModelDO modelDO;
         // 举报了动态
         // 举报了动态
         if (ContentType.talk.equals(reportContentType)) {
             //查询出 评论信息
             //只查询正常能看到的，违规，审核，删除的都提示
-            modelOptional = talkRepository.findTop1ById(reportAddVO.getContentId());
+            modelDO = talkRepository.findOneById(reportAddVO.getContentId());
         } else if (ContentType.comment.equals(reportContentType)) {
-            modelOptional = commentRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
+            modelDO = commentRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.message.equals(reportContentType)) {
-            modelOptional = messageRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
+            modelDO = messageRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.userImg.equals(reportContentType)) {
-            modelOptional = userImgRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
+            modelDO = userImgRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else {
             throw new SocialParamsException("错误的内容类型");
         }
         //这里限制了内容只能被举报一次，只有第一次被举报时，修改用户状态和动态状态
         //之后，只有审核时，才修改动态，
-        if (!modelOptional.isPresent()) {
+        if (modelDO == null) {
             throw new SocialParamsException("内容已被举报，审核中");
         }
-        BaseModelDO modelDO = modelOptional.get();
         //不为正常则不该看到，提示已被举报，有点问题不影响业务的小问题，提示信息不对
         if (!ContentStatus.enable.equals(modelDO.getStatus())) {
             throw new SocialParamsException("内容已被举报，审核中");

@@ -1,19 +1,19 @@
 package com.socialuni.social.sdk.factory.user.base;
 
-import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
-import com.socialuni.social.sdk.dao.FollowDao;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
+import com.socialuni.social.sdk.manage.FollowManage;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 @Component
 public class SocialContentUserROFactory {
-    static FollowDao followDao;
+    static FollowManage followManage;
 
     @Resource
-    public void setFollowDao(FollowDao followDao) {
-        SocialContentUserROFactory.followDao = followDao;
+    public void setFollowManage(FollowManage followManage) {
+        SocialContentUserROFactory.followManage = followManage;
     }
 
     public static SocialContentUserRO newContentUserRO(UserDO user, UserDO mineUser) {
@@ -29,10 +29,10 @@ public class SocialContentUserROFactory {
         }
 
         if (mineUser != null && !userRO.getIsMine()) {
-            boolean hasFollowUser = followDao.userHasFollowBeUser(mineUser.getId(), user.getId());
+            boolean hasFollowUser = followManage.userHasFollowBeUser(mineUser.getId(), user.getId());
             userRO.setHasFollowed(hasFollowUser);
 
-            boolean hasBeFollowed = followDao.userHasFollowBeUser(user.getId(), mineUser.getId());
+            boolean hasBeFollowed = followManage.userHasFollowBeUser(user.getId(), mineUser.getId());
             userRO.setHasBeFollowed(hasBeFollowed);
         }
         return userRO;

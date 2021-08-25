@@ -25,4 +25,11 @@ public class RedisKeysConst {
     public static final String queryTalkIdsByGenderAndAgeAndAdCodeAndGender = "queryTalkIdsByGenderAndAgeAndAdCodeAndGender";
 
     public static final String queryUserFollowUserIds = "queryUserFollowUserIds";
+    //关注关系
+    public static final String queryUserAndBeUserFollow = "queryUserAndBeUserFollow";
+    //抱抱
+    public static final String findHugByTalkIdAndUserId = "findHugByTalkIdAndUserId";
+    public static final String findUserPhoneByUserId = "findUserPhoneByUserId";
+    public static final String findUserFansDetailByUserId = "findUserFansDetailByUserId";
+    public static final String talkById = "talkById";
 }

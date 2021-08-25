@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.domain.phone;
 
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 public class SocialBindSocialPhoneNumDomain {
 
     @Resource
-    SocialUserPhoneStore socialUserPhoneStore;
+    SocialUserPhoneRedis socialUserPhoneRedis;
     @Resource
     SocialUserPhoneRepository socialUserPhoneRepository;
     @Resource

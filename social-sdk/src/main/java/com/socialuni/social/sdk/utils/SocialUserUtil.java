@@ -9,7 +9,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 public class SocialUserUtil {
     private static CommonTokenRepository commonTokenRepository;
     private static UserRepository userRepository;
-    private static SocialUserPhoneStore socialUserPhoneStore;
+    private static SocialUserPhoneRedis socialUserPhoneRedis;
     private static SocialUserAccountRepository socialUserAccountRepository;
 
     @Resource
@@ -34,8 +34,8 @@ public class SocialUserUtil {
     }
 
     @Resource
-    public void setSocialUserPhoneStore(SocialUserPhoneStore socialUserPhoneStore) {
-        SocialUserUtil.socialUserPhoneStore = socialUserPhoneStore;
+    public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
+        SocialUserUtil.socialUserPhoneRedis = socialUserPhoneRedis;
     }
 
 
@@ -86,7 +86,7 @@ public class SocialUserUtil {
     }
 
     public static String getUserPhoneNum(Integer userId) {
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByUserId(userId);
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(userId);
         if (socialUserPhoneDO == null) {
             return null;
         }

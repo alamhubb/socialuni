@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.redis;
+package com.socialuni.social.sdk.config.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

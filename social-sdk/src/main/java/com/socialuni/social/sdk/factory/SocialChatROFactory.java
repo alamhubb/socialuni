@@ -1,8 +1,10 @@
 package com.socialuni.social.sdk.factory;
 
 
-import com.socialuni.social.constant.*;
-import com.socialuni.social.entity.model.DO.FollowDO;
+import com.socialuni.social.constant.ChatStatus;
+import com.socialuni.social.constant.ChatType;
+import com.socialuni.social.constant.ChatUserStatus;
+import com.socialuni.social.constant.MessageStatus;
 import com.socialuni.social.entity.model.DO.chat.ChatDO;
 import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
 import com.socialuni.social.entity.model.DO.message.MessageDO;
@@ -12,8 +14,8 @@ import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.model.model.RO.message.message.SocialMessageRO;
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.constant.LoadMoreType;
+import com.socialuni.social.sdk.manage.FollowManage;
 import com.socialuni.social.sdk.repository.ChatRepository;
-import com.socialuni.social.sdk.repository.FollowRepository;
 import com.socialuni.social.sdk.repository.MessageReceiveRepository;
 import com.socialuni.social.sdk.repository.MessageRepository;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
@@ -39,7 +41,12 @@ public class SocialChatROFactory {
 
     private static ChatRepository chatRepository;
 
-    private static FollowRepository followRepository;
+    private static FollowManage followManage;
+
+    @Resource
+    public void setFollowManage(FollowManage followManage) {
+        SocialChatROFactory.followManage = followManage;
+    }
 
     @Resource
     public void setMessageReceiveRepository(MessageReceiveRepository messageReceiveRepository) {
@@ -54,11 +61,6 @@ public class SocialChatROFactory {
     @Resource
     public void setChatRepository(ChatRepository chatRepository) {
         SocialChatROFactory.chatRepository = chatRepository;
-    }
-
-    @Resource
-    public void setFollowRepository(FollowRepository followRepository) {
-        SocialChatROFactory.followRepository = followRepository;
     }
 
     public SocialChatROFactory() {
@@ -148,9 +150,9 @@ public class SocialChatROFactory {
         if (chatRO.getStatus().equals(ChatUserStatus.waitOpen)) {
             chatRO.setLastContent("会话待开启");
             //查询对方是否关注了自己，只有未关注的情况，才能支付
-            FollowDO follow = followRepository.findFirstByUserIdAndBeUserIdAndStatus(chatRO.getReceiveUserId(), chatUserDO.getUserId(), StatusConst.enable);
+            boolean hasFollow = followManage.userHasFollowBeUser(chatRO.getReceiveUserId(), chatUserDO.getUserId());
             //只在这一个地方判断，只有私聊的时候，且只有私聊的这里才会触发
-            chatRO.setNeedPayOpen(follow == null);
+            chatRO.setNeedPayOpen(!hasFollow);
         }
         return chatRO;
     }

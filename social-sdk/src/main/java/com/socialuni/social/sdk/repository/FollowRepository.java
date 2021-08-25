@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface FollowRepository extends JpaRepository<FollowDO, Integer> {
@@ -19,7 +18,8 @@ public interface FollowRepository extends JpaRepository<FollowDO, Integer> {
             @CacheEvict(cacheNames = RedisKeysConst.userById, key = "#follow.userId"),
             //关注变化关注的人要变
             @CacheEvict(cacheNames = RedisKeysConst.queryUserFollowUserIds, key = "#follow.userId"),
-            @CacheEvict(cacheNames = RedisKeysConst.userById, key = "#follow.beUserId")
+            @CacheEvict(cacheNames = RedisKeysConst.userById, key = "#follow.beUserId"),
+            @CacheEvict(cacheNames = RedisKeysConst.queryUserAndBeUserFollow, key = "#follow.userId+'-'+#follow.beUserId")
     })
     FollowDO save(FollowDO follow);
 
@@ -29,16 +29,11 @@ public interface FollowRepository extends JpaRepository<FollowDO, Integer> {
             @Param("followStatus") String followStatus
     );
 
-    FollowDO findFirstByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status);
     FollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId);
-
-    Integer countByUserIdAndBeUserIdAndStatus(Integer userId, Integer beUserId, String status);
-
-    //查出来以后在外面判断的是否为生效
-    Optional<FollowDO> findFirstByUserIdAndBeUserIdOrderByIdDesc(Integer userId, Integer beUserId);
 
     //查询他的关注
     List<FollowDO> findTop30ByUserIdAndStatusOrderByUpdateTimeDesc(Integer userId, String status);
+
     //查询他的粉丝
     List<FollowDO> findTop30ByBeUserIdAndStatusOrderByUpdateTimeDesc(Integer beUserId, String status);
 

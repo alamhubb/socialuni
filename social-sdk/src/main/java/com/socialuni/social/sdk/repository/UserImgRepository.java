@@ -18,7 +18,7 @@ public interface UserImgRepository extends JpaRepository<UserImgDO, Integer> {
     @CacheEvict(cacheNames = "getUserImgByUserId", key = "#userImgDO.userId")
     UserImgDO save(UserImgDO userImgDO);
 
-    Optional<BaseModelDO> findOneByIdAndStatus(Integer id, String status);
+    BaseModelDO findOneByIdAndStatus(Integer id, String status);
 
     UserImgDO getUserImgByUserIdAndSrc(Integer userId, String src);
 

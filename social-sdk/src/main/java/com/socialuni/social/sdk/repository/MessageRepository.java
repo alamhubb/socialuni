@@ -17,7 +17,7 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface MessageRepository extends JpaRepository<MessageDO, Integer> {
-    Optional<BaseModelDO> findOneByIdAndStatus(Integer id, String status);
+    BaseModelDO findOneByIdAndStatus(Integer id, String status);
 
     List<MessageDO> findTop30ByChatIdAndStatusAndIdNotInOrderByIdDesc(Integer chatId, String msgStatus, List<Integer> ids);
 

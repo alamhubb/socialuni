@@ -6,7 +6,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.utils.PhoneNumUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
@@ -19,19 +19,19 @@ public class SocialUserPhoneManage {
     @Resource
     SocialUserPhoneRepository socialUserPhoneRepository;
     @Resource
-    SocialUserPhoneStore socialUserPhoneStore;
+    SocialUserPhoneRedis socialUserPhoneRedis;
 
     //校验用户是否已经绑定手机号，手机号是否已被绑定
     public void checkBindPhoneNum(String phoneNum, UserDO mineUser) {
         //校验手机号格式
         PhoneNumUtil.checkPhoneNum(phoneNum);
         //校验用户是否已经绑定手机号
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByUserId(mineUser.getId());
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
         if (socialUserPhoneDO != null) {
             throw new SocialParamsException("用户已绑定手机号");
         }
         //校验手机号状态是否可用
-        socialUserPhoneDO = socialUserPhoneStore.findByPhoneNum(phoneNum);
+        socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (socialUserPhoneDO != null) {
             //用户为空，则代表就是这个用户，用户不为空才校验手机号是否已被使用
             throw new SocialBusinessException("手机号已被绑定");
@@ -42,7 +42,7 @@ public class SocialUserPhoneManage {
         //校验手机号格式
         PhoneNumUtil.checkPhoneNum(phoneNum);
         //校验手机号状态是否可用
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByPhoneNum(phoneNum);
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (socialUserPhoneDO != null) {
             UserDO phoneUser = SocialUserUtil.get(socialUserPhoneDO.getUserId());
             //如果手机号违规，则返回手机号不可用

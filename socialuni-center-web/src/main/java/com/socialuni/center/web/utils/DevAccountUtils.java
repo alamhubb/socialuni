@@ -8,7 +8,7 @@ import com.socialuni.entity.model.DevAccountProviderDO;
 import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class DevAccountUtils {
 //    public static final String appGenderTypeKey = "appGenderType";
 
     private static DevAccountRepository devAccountRepository;
-    private static SocialUserPhoneStore socialUserPhoneStore;
+    private static SocialUserPhoneRedis socialUserPhoneRedis;
     private static DevAccountProviderRepository devAccountProviderRepository;
 
     @Resource
@@ -31,8 +31,8 @@ public class DevAccountUtils {
     }
 
     @Resource
-    public void setSocialUserPhoneStore(SocialUserPhoneStore socialUserPhoneStore) {
-        DevAccountUtils.socialUserPhoneStore = socialUserPhoneStore;
+    public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
+        DevAccountUtils.socialUserPhoneRedis = socialUserPhoneRedis;
     }
 
     @Resource

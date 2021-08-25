@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.store;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.redis.FollowRedis;
 import com.socialuni.social.sdk.redis.RedisKeysConst;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.utils.TalkUtils;
@@ -35,10 +36,10 @@ public class TalkQueryStore {
 
 
     @Resource
-    FollowStore followStore;
+    FollowRedis followRedis;
 
     public List<TalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
-        List<Integer> beUserIds = followStore.queryUserFollowUserIds(userId);
+        List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
         int page = talkIds.size() / 10;
         List<Integer> ids = this.queryUserFollowsTalkIds(userId, beUserIds, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);

@@ -1,12 +1,11 @@
 package com.socialuni.social.sdk.factory.user.base;
 
-import com.socialuni.social.sdk.dao.FollowDao;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +13,11 @@ import javax.annotation.Resource;
 
 @Component
 public class SocialMineUserDetailROFactory {
-    public static SocialUserPhoneStore socialUserPhoneStore;
-    static FollowDao followDao;
+    public static SocialUserPhoneRedis socialUserPhoneRedis;
 
     @Resource
-    public void setFollowDao(FollowDao followDao) {
-        SocialMineUserDetailROFactory.followDao = followDao;
-    }
-
-    @Resource
-    public void setSocialUserPhoneStore(SocialUserPhoneStore socialUserPhoneStore) {
-        SocialMineUserDetailROFactory.socialUserPhoneStore = socialUserPhoneStore;
+    public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
+        SocialMineUserDetailROFactory.socialUserPhoneRedis = socialUserPhoneRedis;
     }
 
     public static SocialMineUserDetailRO getMineUserDetail() {
@@ -41,7 +34,7 @@ public class SocialMineUserDetailROFactory {
         SocialMineUserDetailRO mineUserDetailRO = new SocialMineUserDetailRO(socialUserDetailRO);
 
         //用户关注粉丝数
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByUserId(mineUser.getId());
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
 
         boolean isMine = mineUserDetailRO.getIsMine();
 

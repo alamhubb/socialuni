@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.repository;
 
 
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.redis.RedisKeysConst;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,18 +11,14 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
-    Optional<TalkDO> findOneByIdAndStatusIn(Integer id, List<String> status);
-
-    @Cacheable(cacheNames = "talkById", key = "#id")
+    @Cacheable(cacheNames = RedisKeysConst.talkById, key = "#id")
     TalkDO findOneById(Integer id);
 
+    //清池使用的
     TalkDO findOneBySocialuniUid(String uid);
 
-    @Cacheable(cacheNames = "talkById", key = "#id")
-    Optional<BaseModelDO> findTop1ById(Integer id);
 
     TalkDO save(TalkDO talk);
 

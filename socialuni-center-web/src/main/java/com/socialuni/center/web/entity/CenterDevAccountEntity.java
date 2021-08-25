@@ -5,7 +5,7 @@ import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @Component
 public class CenterDevAccountEntity {
     @Resource
-    private SocialUserPhoneStore socialUserPhoneStore;
+    private SocialUserPhoneRedis socialUserPhoneRedis;
     @Resource
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
@@ -24,7 +24,7 @@ public class CenterDevAccountEntity {
 
         String phoneNum = devAccountDO.getPhoneNum();
 
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByPhoneNum(phoneNum);
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
 
         UserDO mineUser;
         if (socialUserPhoneDO == null) {

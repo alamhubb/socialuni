@@ -1,23 +1,23 @@
 package com.socialuni.social.sdk.factory;
 
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
-import com.socialuni.social.sdk.dao.CommentDao;
-import com.socialuni.social.sdk.factory.user.base.SocialContentUserROFactory;
+import com.socialuni.social.entity.model.DO.HugDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.platform.AliAPI;
-import com.socialuni.social.sdk.repository.CommentRepository;
-import com.socialuni.social.sdk.repository.HugRepository;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.sdk.utils.TalkImgDOUtils;
-import com.socialuni.social.sdk.utils.TalkUtils;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
+import com.socialuni.social.sdk.dao.CommentDao;
+import com.socialuni.social.sdk.factory.user.base.SocialContentUserROFactory;
+import com.socialuni.social.sdk.model.RectangleVO;
+import com.socialuni.social.sdk.platform.AliAPI;
+import com.socialuni.social.sdk.redis.HugRedis;
+import com.socialuni.social.sdk.repository.CommentRepository;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.sdk.utils.TalkImgDOUtils;
+import com.socialuni.social.sdk.utils.TalkUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class SocialTalkROFactory {
     private static CommentRepository commentRepository;
     private static CommentDao commentDao;
-    private static HugRepository hugRepository;
+    private static HugRedis hugRedis;
 
     @Resource
     public void setCommentDao(CommentDao commentDao) {
@@ -50,11 +50,11 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setHugRepository(HugRepository hugRepository) {
-        SocialTalkROFactory.hugRepository = hugRepository;
+    public void setHugRedis(HugRedis hugRedis) {
+        SocialTalkROFactory.hugRedis = hugRedis;
     }
 
-    /*
+   /*
     private static SocialUserFansDetailRepository userFollowDetailRepository;
     private static HugRepository hugRepository;
     private static TagRepository TagRepository;
@@ -201,16 +201,14 @@ public class SocialTalkROFactory {
             }
         }*/
 
+        socialTalkRO.setHasHugged(false);
         //40毫秒
         if (mineUser != null) {
             //20毫秒
-            Integer hugCount = hugRepository.countByTalkIdAndUserId(talkDO.getId(), mineUser.getId());
-            if (hugCount > 0) {
+            HugDO hugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getId(), mineUser.getId());
+            if (hugDO != null) {
                 socialTalkRO.setHasHugged(true);
             }
-        } else {
-            socialTalkRO.setHasHugged(false);
-//            socialTalkRO.setHasFollowed(false);
         }
         //60毫秒，可缓存
 

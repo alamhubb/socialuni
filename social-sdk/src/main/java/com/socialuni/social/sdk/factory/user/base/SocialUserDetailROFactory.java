@@ -1,28 +1,18 @@
 package com.socialuni.social.sdk.factory.user.base;
 
-import com.socialuni.social.sdk.dao.FollowDao;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
-import com.socialuni.social.sdk.utils.model.DO.UserImgDOUtils;
-import com.socialuni.social.sdk.factory.UserImgROFactory;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import com.socialuni.social.model.model.RO.user.UserImgRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.social.sdk.factory.UserImgROFactory;
+import com.socialuni.social.sdk.utils.model.DO.UserImgDOUtils;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Component
 public class SocialUserDetailROFactory {
-    static FollowDao followDao;
-
-    @Resource
-    public void setFollowDao(FollowDao followDao) {
-        SocialUserDetailROFactory.followDao = followDao;
-    }
-
-
     public static SocialUserDetailRO getUserDetailRO(UserDO userDO, UserDO mineUser) {
         //user基础信息
         SocialUserFollowDetailRO socialUserDetailFollowRO = SocialUserFollowDetailROFactory.newSocialFollowUserRO(userDO, mineUser);

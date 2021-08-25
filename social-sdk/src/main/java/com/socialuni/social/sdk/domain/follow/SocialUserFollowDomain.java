@@ -5,7 +5,7 @@ import com.socialuni.social.entity.model.DO.FollowDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.manage.FollowManage;
 import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.social.sdk.repository.FollowRepository;
+import com.socialuni.social.sdk.redis.FollowRedis;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Component
 public class SocialUserFollowDomain {
     @Resource
-    private FollowRepository followRepository;
+    private FollowRedis followRedis;
     @Resource
     private SocialUserFansDetailManage socialUserFansDetailManage;
     @Resource
@@ -25,17 +25,18 @@ public class SocialUserFollowDomain {
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己关注自己哦");
         }
-        FollowDO followDO = followRepository.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
-        if (followDO != null && CommonStatus.enable.equals(followDO.getStatus())) {
+        boolean hasFollow = followManage.userHasFollowBeUser(mineUserId, beUserId);
+        if (hasFollow) {
             throw new SocialParamsException("已经关注过此用户了");
         }
-        privateAddFlowAsync(mineUserId, beUserId, followDO);
+        privateAddFlowAsync(mineUserId, beUserId);
     }
 
     @Async
-    public void privateAddFlowAsync(Integer mineUserId, Integer beUserId, FollowDO followDO) {
+    public void privateAddFlowAsync(Integer mineUserId, Integer beUserId) {
         socialUserFansDetailManage.mineFollowNumAdd(mineUserId);
-        socialUserFansDetailManage.userFansNumAdd(mineUserId);
+        socialUserFansDetailManage.beUserFansNumAdd(beUserId);
+        FollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
         //未关注过
         if (followDO == null) {
             followManage.createFollow(mineUserId, beUserId);
@@ -49,17 +50,18 @@ public class SocialUserFollowDomain {
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己取消关注自己哦");
         }
-        FollowDO followDO = followRepository.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
-        if (followDO == null || !CommonStatus.enable.equals(followDO.getStatus())) {
+        boolean hasFollow = followManage.userHasFollowBeUser(mineUserId, beUserId);
+        if (!hasFollow) {
             throw new SocialParamsException("并没有关注此用户");
         }
-        privateCancelFollowAsync(mineUserId, followDO);
+        privateCancelFollowAsync(mineUserId, beUserId);
     }
 
     @Async
-    public void privateCancelFollowAsync(Integer mineUserId, FollowDO followDO) {
+    public void privateCancelFollowAsync(Integer mineUserId, Integer beUserId) {
         socialUserFansDetailManage.mineFollowNumSub(mineUserId);
-        socialUserFansDetailManage.userFansNumSub(mineUserId);
+        socialUserFansDetailManage.beUserFansNumSub(beUserId);
+        FollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
         followManage.updateFollow(followDO, CommonStatus.delete);
     }
 }

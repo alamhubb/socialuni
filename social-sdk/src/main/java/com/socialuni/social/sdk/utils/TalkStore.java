@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.redis.RedisKeysConst;
-import com.socialuni.social.sdk.redis.RedisUtil;
+import com.socialuni.social.sdk.config.redis.RedisUtil;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -26,7 +26,7 @@ public class TalkStore {
 //                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, allEntries = true),
                     @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, allEntries = true),
             },
-            put = {@CachePut(cacheNames = "talkById", key = "#talkDO.id")}
+            put = {@CachePut(cacheNames = RedisKeysConst.talkById, key = "#talkDO.id")}
     )
     public TalkDO save(TalkDO talkDO) {
         //清空用户的

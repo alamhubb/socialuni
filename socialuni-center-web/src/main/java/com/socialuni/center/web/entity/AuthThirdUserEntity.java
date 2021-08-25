@@ -7,14 +7,13 @@ import com.socialuni.center.web.manage.ThirdUserAuthManage;
 import com.socialuni.center.web.manage.ThirdUserManage;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
-import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,7 +28,7 @@ public class AuthThirdUserEntity {
     @Resource
     private ThirdUserAuthManage thirdUserAuthManage;
     @Resource
-    SocialUserPhoneStore socialUserPhoneStore;
+    SocialUserPhoneRedis socialUserPhoneRedis;
 
     /*public ThirdUserTokenDO authThirdUser(DevAccountDO threeDevDO, UserDO userDO, String oAuthType) {
         //只是记录一个授权记录
@@ -53,7 +52,7 @@ public class AuthThirdUserEntity {
         if (AuthType.phone.equals(authType)) {
             thirdUserAuthManage.getOrCreate(threeUserDO, AuthType.user);
             //只有为手机号授权时才返回手机号
-            SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByUserId(mineUser.getId());
+            SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
             if (socialUserPhoneDO == null) {
                 throw new SocialBusinessException("用户未绑定手机号，请先绑定手机号");
             }

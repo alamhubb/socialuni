@@ -25,7 +25,7 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface CommentRepository extends JpaRepository<CommentDO, Integer> {
-    Optional<BaseModelDO> findOneByIdAndStatus(Integer id, String status);
+    BaseModelDO findOneByIdAndStatus(Integer id, String status);
 
     CommentDO findOneById(Integer id);
 

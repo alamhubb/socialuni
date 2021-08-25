@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
-import com.socialuni.social.sdk.store.SocialUserPhoneStore;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +35,7 @@ public class SocailSendAuthCodeDomain {
     @Resource
     private UserRepository userRepository;
     @Resource
-    private SocialUserPhoneStore socialUserPhoneStore;
+    private SocialUserPhoneRedis socialUserPhoneRedis;
     @Resource
     SocialUserPhoneManage socialUserPhoneManage;
 

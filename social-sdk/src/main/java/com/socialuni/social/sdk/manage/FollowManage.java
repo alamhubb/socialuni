@@ -1,7 +1,9 @@
 package com.socialuni.social.sdk.manage;
 
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.FollowDO;
 import com.socialuni.social.sdk.repository.FollowRepository;
+import com.socialuni.social.sdk.redis.FollowRedis;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.util.Date;
 public class FollowManage {
     @Resource
     private FollowRepository followRepository;
+    @Resource
+    private FollowRedis followRedis;
 
     @Async
     public void createFollow(Integer mineUserId, Integer beUserId) {
@@ -27,5 +31,10 @@ public class FollowManage {
         followDO.setStatus(status);
         followDO.setUpdateTime(new Date());
         followDO = followRepository.save(followDO);
+    }
+
+    public boolean userHasFollowBeUser(Integer userId, Integer beUserId) {
+        FollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(userId, beUserId);
+        return followDO != null && CommonStatus.enable.equals(followDO.getStatus());
     }
 }
