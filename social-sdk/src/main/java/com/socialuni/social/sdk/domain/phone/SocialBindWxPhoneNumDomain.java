@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.platform.WxDecode;
 import com.socialuni.social.sdk.platform.WxPhoneNumRO;
 import com.socialuni.social.sdk.utils.UniProviderUtil;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +44,7 @@ public class SocialBindWxPhoneNumDomain {
         WxPhoneNumRO phoneNumVO;
         try {
             String phoneJson = WxDecode.decrypt(sessionKey, bindPhoneQO.getEncryptedData(), bindPhoneQO.getIv());
-            phoneNumVO = JsonUtils.objectMapper.readValue(phoneJson, WxPhoneNumRO.class);
+            phoneNumVO = JsonUtil.objectMapper.readValue(phoneJson, WxPhoneNumRO.class);
         } catch (Exception e) {
             throw new SocialBusinessException("再点击一次绑定按钮即可完成绑定");
         }

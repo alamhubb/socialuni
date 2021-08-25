@@ -12,6 +12,7 @@ import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.store.SocialUserPhoneStore;
 import org.springframework.stereotype.Service;
@@ -42,30 +43,24 @@ public class AuthThirdUserEntity {
         return tokenDO;
     }*/
 
-    public CenterMineUserDetailRO authThirdUser(UserDO mineUser, String authType) {
-        DevAccountDO threeDevDO = DevAccountUtils.getDevAccount();
+    //登录和 绑定手机号和微信手机号三个地方使用
+    public CenterMineUserDetailRO authThirdUser(UserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
+        CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //只是记录一个授权记录
-        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(threeDevDO.getId(), mineUser.getId());
+        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getId(), centerMineUserDetailRO.getId());
 
-        thirdUserAuthManage.getOrCreate(threeUserDO, authType);
-        //授权成功
-        //token有效期三个月
-        //生成userToken
-        CenterMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
-
-        //只是记录一个授权记录
-        //授权成功
-        //token有效期三个月
-        //生成userToken
-        //只有为手机号授权时才返回手机号
-        if (authType.equals(AuthType.phone)) {
+        if (AuthType.phone.equals(authType)) {
+            thirdUserAuthManage.getOrCreate(threeUserDO, AuthType.user);
+            //只有为手机号授权时才返回手机号
             SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneStore.findByUserId(mineUser.getId());
             if (socialUserPhoneDO == null) {
                 throw new SocialBusinessException("用户未绑定手机号，请先绑定手机号");
             }
-            centerUserDetailRO.setPhoneNum(socialUserPhoneDO.getPhoneNum());
+            centerMineUserDetailRO.setPhoneNum(socialUserPhoneDO.getPhoneNum());
         }
-        return centerUserDetailRO;
+        thirdUserAuthManage.getOrCreate(threeUserDO, authType);
+
+        return centerMineUserDetailRO;
     }
 }

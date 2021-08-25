@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("mock")
-@FeignClient(name = "mock", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "mock", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniMockOAuthAPI {
     @PostMapping("mockOAuthUserInfo")
     ResultRO<SocialLoginRO<CenterMineUserDetailRO>> mockOAuthUserInfo();

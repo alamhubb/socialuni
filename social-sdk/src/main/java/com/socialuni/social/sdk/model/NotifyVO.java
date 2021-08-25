@@ -10,7 +10,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.factory.SocialChatROFactory;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;
 
@@ -53,7 +53,7 @@ public class NotifyVO {
 
     public TextMessage toMessage() {
         try {
-            return new TextMessage(JsonUtils.objectMapper.writeValueAsString(this));
+            return new TextMessage(JsonUtil.objectMapper.writeValueAsString(this));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

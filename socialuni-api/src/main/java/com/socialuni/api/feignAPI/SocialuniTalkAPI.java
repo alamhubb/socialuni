@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("talk")
-@FeignClient(name = "talk", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "talk", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTalkAPI {
     @GetMapping("queryTalks")
     ResultRO<List<CenterTalkRO>> queryTalks();

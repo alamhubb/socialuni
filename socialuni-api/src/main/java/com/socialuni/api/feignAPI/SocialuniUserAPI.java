@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 
 @RequestMapping("user")
-@FeignClient(name = "user", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "user", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniUserAPI {
 
     @PostMapping("getMineUser")

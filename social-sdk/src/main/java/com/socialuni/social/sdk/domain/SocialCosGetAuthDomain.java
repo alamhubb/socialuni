@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.domain;
 
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.model.model.RO.app.SocialCosAuthRO;
 import com.tencent.cloud.CosStsClient;
 import org.json.JSONObject;
@@ -56,7 +56,7 @@ public class SocialCosGetAuthDomain {
         try {
             JSONObject credential = CosStsClient.getCredential(config);
             //成功返回临时密钥信息，如下打印密钥信息
-            SocialCosAuthRO cosRo = JsonUtils.objectMapper.readValue(credential.toString(), SocialCosAuthRO.class);
+            SocialCosAuthRO cosRo = JsonUtil.objectMapper.readValue(credential.toString(), SocialCosAuthRO.class);
             cosRo.setBucket(bucketName);
             cosRo.setRegion(region);
             cosRo.setUploadImgPath(uploadImgPath);

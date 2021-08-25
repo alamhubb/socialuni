@@ -32,9 +32,9 @@ public class SocialPhoneService {
 
     public ResultRO<SocialMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
         UserDO mineUser = SocialUserUtil.getMineUser();
-        mineUser = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
-        //根据用户得到返回详情
-        SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
+
+        SocialMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
+
         return new ResultRO<>(socialMineUserDetailRO);
     }
 

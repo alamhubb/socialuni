@@ -11,12 +11,12 @@ import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
  */
 
 public class UserOAuthROUtil {
-    public static SocialOAuthUserRO newUserOAuthROByThreeUser(UserDO userDO) {
+    /*public static SocialOAuthUserRO newUserOAuthROByThreeUser(UserDO userDO) {
         SocialOAuthUserRO user = new SocialOAuthUserRO();
-        /*if (StringUtils.isNotEmpty(devKey)) {
+        *//*if (StringUtils.isNotEmpty(devKey)) {
             // 秘钥不为空才返回唯一id，因为非开放数据
             user.setUnionId(threeUserDO.getThreeUserId());
-        }*/
+        }*//*
         //为什么不做限制了，因为生成的unionid，只有对应的商户才能用
         user.setId(UnionIdDbUtil.createUserUid(userDO.getId()));
         user.setNickname(userDO.getNickname());
@@ -26,5 +26,5 @@ public class UserOAuthROUtil {
         user.setCity(userDO.getCity());
 //        user.setBirthday(BirthdayAgeUtil.getYearBirthDateByAge(userDO.getAge()));
         return user;
-    }
+    }*/
 }

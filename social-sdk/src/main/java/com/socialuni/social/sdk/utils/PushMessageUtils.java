@@ -6,7 +6,7 @@ import com.socialuni.social.entity.model.DO.notify.PushMessageDO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.repository.PushMessageRepository;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +30,8 @@ public class PushMessageUtils {
         String pushMsgDTOString = null;
         String resultString = null;
         try {
-            pushMsgDTOString = JsonUtils.objectMapper.writeValueAsString(pushMsgDTO);
-            resultString = JsonUtils.objectMapper.writeValueAsString(result);
+            pushMsgDTOString = JsonUtil.objectMapper.writeValueAsString(pushMsgDTO);
+            resultString = JsonUtil.objectMapper.writeValueAsString(result);
         } catch (JsonProcessingException e) {
             log.error("发送消息，json格式化：{},{},{}", pushMsgDTO, result, e);
         }

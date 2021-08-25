@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @RequestMapping("district")
-@FeignClient(name = "district", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "district", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniDistrictAPI {
     @PostMapping("queryHotDistricts")
     ResultRO<List<SocialDistrictRO>> queryHotDistricts();

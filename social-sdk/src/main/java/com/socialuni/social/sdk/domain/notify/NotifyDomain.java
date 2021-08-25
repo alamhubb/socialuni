@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.utils.*;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -164,7 +164,7 @@ public class NotifyDomain {
                 //未登录的时候也查询群聊里面的所有内容
                 NotifyVO notifyVO = new NotifyVO(notify, requestUser, messageReceiveDO, chatUserDO, chatUserDO.getChat());
                 try {
-                    stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtils.objectMapper.writeValueAsString(notifyVO));
+                    stringRedisTemplate.convertAndSend(receiveUserId.toString(), JsonUtil.objectMapper.writeValueAsString(notifyVO));
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
@@ -204,7 +204,7 @@ public class NotifyDomain {
         /*//给前台发送消息
         String notifyString = null;
         try {
-            notifyString = JsonUtils.objectMapper.writeValueAsString(notifyVO);
+            notifyString = JsonUtil.objectMapper.writeValueAsString(notifyVO);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }*/

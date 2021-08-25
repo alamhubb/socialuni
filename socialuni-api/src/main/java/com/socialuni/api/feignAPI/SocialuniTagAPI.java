@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("tag")
-@FeignClient(name = "tag", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "tag", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTagAPI {
     @PostMapping("addTag")
     ResultRO<TagRO> addTag(@RequestBody @Valid TagAddQO tagAddVO);

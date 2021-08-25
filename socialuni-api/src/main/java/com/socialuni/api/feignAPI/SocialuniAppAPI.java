@@ -18,7 +18,7 @@ import java.util.List;
  * 前端初始化内容
  */
 @RequestMapping("app")
-@FeignClient(name = "app", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "app", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniAppAPI {
     @PostMapping("getAppLaunchData")
     ResultRO<SocialAppLaunchDataRO> getAppLaunchData();

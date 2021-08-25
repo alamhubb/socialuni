@@ -36,7 +36,6 @@ public class CenterReportAddQO {
         socialReportAddQO.setContent(this.content);
         socialReportAddQO.setReportType(this.reportType);
         socialReportAddQO.setReportContentType(this.reportContentType);
-        socialReportAddQO.setContent(this.content);
         socialReportAddQO.setCause(this.cause);
         return socialReportAddQO;
     }

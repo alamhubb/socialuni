@@ -1,7 +1,6 @@
 package com.socialuni.cloud.tencent;
 
 import com.github.qcloudsms.SmsSingleSender;
-import com.github.qcloudsms.SmsSingleSenderResult;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.utils.AuthCodeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,13 +46,12 @@ public class TencentSmsServe {
         String[] params = {authCode, authCodeValidMinute};
         // 签名
         // 签名参数未提供或者为空时，会使用默认签名发送短信
-        SmsSingleSenderResult result = null;
         try {
             log.info("发送验证码authCode:{}", authCode);
-            result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
+            /*SmsSingleSenderResult result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
             if (result == null || result.result != 0) {
                 throw new SocialBusinessException("验证码发送失败，请稍候重试");
-            }
+            }*/
         } catch (Exception e) {
             throw new SocialBusinessException("验证码发送失败，请稍候重试");
         }

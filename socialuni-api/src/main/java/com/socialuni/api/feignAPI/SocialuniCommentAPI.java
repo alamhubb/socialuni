@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @RequestMapping("comment")
-@FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniCommentAPI {
     @PostMapping("postComment")
     ResultRO<CenterCommentRO> postComment(@RequestBody @Valid CenterCommentPostQO commentVO);

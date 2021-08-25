@@ -42,10 +42,6 @@ public class ThirdUserDO implements Serializable {
     public ThirdUserDO() {
     }
 
-    public ThirdUserDO(Integer devId, Integer userId) {
-        this(devId, userId, UnionIdDbUtil.createUserUid(userId, userId, devId));
-    }
-
     public ThirdUserDO(Integer devId, Integer userId, String thirdUserId) {
         //三方商户id
         this.devId = devId;

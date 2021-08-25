@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.center.web.repository.log.ErrorLogRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.ErrorLogUtils;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.Data;
@@ -80,7 +80,7 @@ public class ErrorLogDO {
     public ErrorLogDO(Integer userId, String errorMsg, Object data) {
         this(userId, errorMsg);
         try {
-            this.params = JsonUtils.objectMapper.writeValueAsString(data);
+            this.params = JsonUtil.objectMapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {
             logger.error("记录错误日志，解析入参出错");
             ErrorLogUtils.save(new ErrorLogDO(userId, "记录错误日志，解析入参出错", errorMsg));

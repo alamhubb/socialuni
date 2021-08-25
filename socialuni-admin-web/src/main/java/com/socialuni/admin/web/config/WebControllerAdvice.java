@@ -5,7 +5,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ErrorCode;
 import com.socialuni.social.constant.ErrorType;
 import com.socialuni.social.exception.base.SocialException;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -70,7 +70,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         log.info(exception.toString());
         String errorStr;
         try {
-            errorStr = JsonUtils.objectMapper.writeValueAsString(exception);
+            errorStr = JsonUtil.objectMapper.writeValueAsString(exception);
         } catch (JsonProcessingException e) {
             errorStr = "解析异常出错";
             e.printStackTrace();

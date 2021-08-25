@@ -11,7 +11,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
-import com.socialuni.social.utils.JsonUtils;
+import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +80,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         log.info(exception.toString());
         String errorStr;
         try {
-            errorStr = JsonUtils.objectMapper.writeValueAsString(exception);
+            errorStr = JsonUtil.objectMapper.writeValueAsString(exception);
         } catch (JsonProcessingException e) {
             errorStr = "解析异常出错";
             e.printStackTrace();

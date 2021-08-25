@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @RequestMapping("notify")
-@FeignClient(name = "notify", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "notify", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniNotifyAPI {
     @PostMapping("queryNotifies")
     ResultRO<List<SocialUnreadNotifyVO>> queryNotifies();

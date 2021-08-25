@@ -1,29 +1,14 @@
 package com.socialuni.center.web.controller.upgrade0823;
 
-import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
-import com.socialuni.center.web.model.DO.ThirdUserAuthDO;
-import com.socialuni.center.web.model.DO.ThirdUserDO;
-import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.center.web.model.DO.UnionIdDO;
 import com.socialuni.center.web.repository.ThirdUserAuthRepository;
 import com.socialuni.center.web.repository.ThirdUserRepository;
 import com.socialuni.center.web.repository.ThirdUserTokenRepository;
 import com.socialuni.center.web.repository.UnionIdRepository;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
-import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.domain.phone.SocialBindUserSocialuniAccountDomain;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class TestUnionIdService {
@@ -40,7 +25,7 @@ public class TestUnionIdService {
     @Resource
     SocialBindUserSocialuniAccountDomain socialBindUserSocialuniAccountDomain;
 
-    @Async
+    /*@Async
     public void unionid() {
         final Integer devId = 1;
         List<Integer> userIds = userRepository.findAllUserIds();
@@ -71,5 +56,5 @@ public class TestUnionIdService {
         thirdUserRepository.saveAll(thirdUserDOS);
         thirdUserAuthRepository.saveAll(thirdUserAuthDOS);
         thirdUserTokenRepository.saveAll(thirdUserTokenDOS);
-    }
+    }*/
 }
