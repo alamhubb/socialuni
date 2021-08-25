@@ -6,13 +6,14 @@ import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.domain.talk.SocialTalkPostDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.social.sdk.constant.UserType;
+import com.socialuni.social.sdk.domain.talk.SocialTalkPostDomain;
+import com.socialuni.social.sdk.entity.content.SocialContentAddEntity;
 import com.socialuni.social.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.utils.DateUtils;
@@ -33,6 +34,8 @@ public class CenterTalkPostDomain {
     TagRepository tagRepository;
     @Resource
     TalkRepository talkRepository;
+    @Resource
+    SocialContentAddEntity socialContentAddEntity;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
         UserDO mineUser = CenterUserUtil.getMineUser();
@@ -81,6 +84,7 @@ public class CenterTalkPostDomain {
         TagDO devTagDO = tagRepository.findFirstByDevId(devId);
         talkPostQO.getTagIds().add(devTagDO.getId());
 
+        socialContentAddEntity.paramsValidate(mineUser, talkPostQO);
         SocialTalkRO socialTalkRO = socialTalkPostDomain.postTalk(mineUser, talkPostQO);
 
         CenterTalkRO centerTalkRO = CenterTalkROFactory.getTalkRO(socialTalkRO, mineUser);

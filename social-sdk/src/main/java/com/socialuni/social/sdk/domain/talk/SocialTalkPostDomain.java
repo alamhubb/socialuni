@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.domain.talk;
 
-import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
@@ -8,15 +7,12 @@ import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkTagDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.constant.TalkOperateType;
-import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.domain.report.ReportDomain;
-import com.socialuni.social.sdk.entity.content.SocialContentAddEntity;
 import com.socialuni.social.sdk.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.factory.TalkImgDOFactory;
 import com.socialuni.social.sdk.manage.talk.SocialTalkCreateManage;
@@ -28,15 +24,11 @@ import com.socialuni.social.sdk.repository.TalkTagRepository;
 import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.TalkStore;
-import com.socialuni.social.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -58,17 +50,14 @@ public class SocialTalkPostDomain {
     @Resource
     TalkImgRepository talkImgRepository;
     @Resource
-    SocialContentAddEntity socialContentAddEntity;
-    @Resource
     SocialTalkCreateManage socialTalkCreateManage;
 
-    public SocialTalkRO postTalk(UserDO mienUser, SocialTalkPostQO talkPostQO) {
-        socialContentAddEntity.paramsValidate(mienUser, talkPostQO);
+    public SocialTalkRO postTalk(UserDO mineUser, SocialTalkPostQO talkPostQO) {
         //获取应用对应的话题
-        TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mienUser, talkPostQO);
-        TalkDO talkDO = this.saveEntity(mienUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
+        TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
+        TalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
-        SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mienUser);
+        SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
     }
 
