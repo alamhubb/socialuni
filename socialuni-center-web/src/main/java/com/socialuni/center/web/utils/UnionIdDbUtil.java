@@ -6,14 +6,12 @@ import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.utils.ObjectUtil;
-import com.socialuni.social.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -146,6 +144,7 @@ public class UnionIdDbUtil {
             if (unionIdDO.getExpiredTime().getTime() > curDate.getTime()) {
                 return unionIdDO.getUnionId();
             } else {
+                //不存在这种逻辑，因为只能读10分钟内的，10分钟内不会超时，所以通过程序循环计时器删除
                 //已失效，修改状态
                 unionIdDO.setStatus(CommonStatus.delete);
                 //更新状态

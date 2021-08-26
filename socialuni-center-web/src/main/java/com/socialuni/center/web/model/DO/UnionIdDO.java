@@ -22,7 +22,7 @@ import java.util.Date;
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"unionId"}),
-                @UniqueConstraint(columnNames = {"contentId", "contentType", "devId", "userId", "status", "createTime"})
+                @UniqueConstraint(columnNames = {"contentId", "contentType", "devId", "userId", "status", "beginTime"})
         }
 )
 public class UnionIdDO implements Serializable {
