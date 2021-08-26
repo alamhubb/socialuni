@@ -12,6 +12,7 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.utils.ObjectUtil;
+import com.socialuni.social.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -114,26 +115,23 @@ public class UnionIdDbUtil {
 //        log.info("创建uniond1：" + SystemUtil.getCurrentTimeSecond());
         //如果这两个都不为空则查找是否存在有效的
         //每天0点到现在不能发布超过10条
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(curDate);
-        int minute = calendar.get(Calendar.MINUTE);
-        //获取前最近的10分钟整
-        int ageMinuteTen = (minute / 10) * 10;
-        calendar.set(Calendar.MINUTE, ageMinuteTen);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        Date lastTenMinutes = calendar.getTime();
+
+        //默认为初始时间
+        Date lastTenMinutes = new Date(0);
         //如果有有效的，返回有效的，如果没有有效的，新建.
         //查询可用的可以保证没缓存的情况下查询的也是可用的
-        UnionIdDO unionIdDO;
-        if (ObjectUtils.allNotNull(userId, devId)) {
-            unionIdDO = unionIdRepository.findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdAndBeginTimeOrderByIdDesc(contentType, contentId, CommonStatus.enable, devId, userId, null);
-        } else {
-            //逻辑有问题，带时间查询，查出来的肯定是没过期的
-            //获取10分钟内的时间
-            //创建的时候，用10分钟内的时间+30分钟,生成过期时间
-            unionIdDO = unionIdRepository.findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdAndBeginTimeOrderByIdDesc(contentType, contentId, CommonStatus.enable, devId, userId, lastTenMinutes);
+        if (!ObjectUtils.allNotNull(userId, devId)) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(curDate);
+            int minute = calendar.get(Calendar.MINUTE);
+            //获取前最近的10分钟整
+            int ageMinuteTen = (minute / 10) * 10;
+            calendar.set(Calendar.MINUTE, ageMinuteTen);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            lastTenMinutes = calendar.getTime();
         }
+        UnionIdDO unionIdDO = unionIdRepository.findFirstByContentTypeAndContentIdAndStatusAndDevIdAndUserIdAndBeginTimeOrderByIdDesc(contentType, contentId, CommonStatus.enable, devId, userId, lastTenMinutes);
         //如果不为null
         if (unionIdDO != null) {
             //如果都不为空
@@ -155,7 +153,9 @@ public class UnionIdDbUtil {
         }
         //得到最近的之前的10分钟，创建的时候，用10分钟内的时间+30分钟,生成过期时间
         //不存在已有的
-        unionIdDO = UnionIdDOFactory.createUnionDO(contentType, contentId, devId, curDate, lastTenMinutes, userId);
+        String uuid = UUIDUtil.getUUID();
+
+        unionIdDO = UnionIdDOFactory.createUnionDO(contentType, contentId, devId, curDate, lastTenMinutes, uuid, userId);
 
 //        log.info("创建uniond5：" + SystemUtil.getCurrentTimeSecond());
 //        log.info("创建uniond：" + unionIdDO.getUnionId());

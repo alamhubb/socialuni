@@ -1,16 +1,25 @@
 package com.socialuni.center.web.controller.upgrade0823;
 
+import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
+import com.socialuni.center.web.model.DO.UnionIdDO;
 import com.socialuni.center.web.repository.ThirdUserAuthRepository;
 import com.socialuni.center.web.repository.ThirdUserRepository;
 import com.socialuni.center.web.repository.ThirdUserTokenRepository;
 import com.socialuni.center.web.repository.UnionIdRepository;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.sdk.domain.phone.SocialBindUserSocialuniAccountDomain;
 import com.socialuni.social.sdk.repository.UserRepository;
+import com.socialuni.social.utils.UUIDUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
+@Slf4j
 public class TestUnionIdService {
     @Resource
     UserRepository userRepository;
@@ -24,6 +33,63 @@ public class TestUnionIdService {
     ThirdUserTokenRepository thirdUserTokenRepository;
     @Resource
     SocialBindUserSocialuniAccountDomain socialBindUserSocialuniAccountDomain;
+
+    public void unionid() {
+        final Integer devId = 1;
+
+        Date date = new Date();
+
+        List<UnionIdDO> unionIdDOS = new ArrayList<>();
+        for (int i = 0; i < 1; i++) {
+//            String uid = UUIDUtil.getUUID();
+            String uid = Integer.toString(i);
+            Date emptyDate = new Date(0);
+            UnionIdDO unionIdDO = UnionIdDOFactory.createUnionDO(ContentType.user, i, devId, date, emptyDate, uid, i);
+
+            unionIdRepository.save(unionIdDO);
+            Date endDate = new Date();
+            /*unionIdDOS.add(unionIdDO);
+            if (i % 100 == 0) {
+                log.info("100条耗时：{}秒", (endDate.getTime() - date.getTime()) / 100);
+                unionIdRepository.saveAll(unionIdDOS);
+                endDate = new Date();
+                unionIdDOS = new ArrayList<>();
+                log.info("完成：" + i);
+                log.info("100条耗时：{}秒", (endDate.getTime() - date.getTime()) / 100);
+            }*/
+            log.info("1条耗时：{}秒", (endDate.getTime() - date.getTime()) / 1000);
+        }
+
+        Date endDate = new Date();
+
+        log.info("1000条耗时：{}秒", (endDate.getTime() - date.getTime()) / 1000);
+    }
+
+    public void unionid1() {
+        final Integer devId = 1;
+
+        Date date = new Date();
+
+        List<UnionIdDO> unionIdDOS = new ArrayList<>();
+        for (int i = 10; i < 1000; i++) {
+            String uid = UUIDUtil.getUUID();
+            UnionIdDO unionIdDO = UnionIdDOFactory.createUnionDO(ContentType.user, i, devId, date, date, uid, i);
+            unionIdDOS.add(unionIdDO);
+            if (i % 100 == 0) {
+                Date endDate = new Date();
+                log.info("100条耗时：{}秒", (endDate.getTime() - date.getTime()) / 100);
+                unionIdRepository.saveAll(unionIdDOS);
+                endDate = new Date();
+                unionIdDOS = new ArrayList<>();
+                log.info("完成：" + i);
+                log.info("100条耗时：{}秒", (endDate.getTime() - date.getTime()) / 100);
+            }
+        }
+
+        Date endDate = new Date();
+
+        log.info("1000条耗时：{}秒", (endDate.getTime() - date.getTime()) / 100);
+    }
 
     /*@Async
     public void unionid() {
