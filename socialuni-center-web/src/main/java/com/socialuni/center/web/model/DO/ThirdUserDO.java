@@ -1,6 +1,5 @@
 package com.socialuni.center.web.model.DO;
 
-import com.socialuni.center.web.utils.UnionIdDbUtil;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,7 +13,8 @@ import java.util.Date;
 @Data
 @Table(name = "third_user",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"devId", "userId"})
+                @UniqueConstraint(columnNames = {"devId", "userId"}),
+                @UniqueConstraint(columnNames = "thirdUserId")
         })
 @Entity
 public class ThirdUserDO implements Serializable {
