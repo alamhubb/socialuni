@@ -14,7 +14,7 @@ public class SocialCosService {
     private SocialCosGetAuthDomain socialCosGetAuthDomain;
 
     public ResultRO<SocialCosAuthRO> getCosAuthorization() {
-        String userId = SocialUserUtil.getMineUserStringId();
+        Integer userId = SocialUserUtil.getMineUserIdNotNull();
         String uploadImgPath = "socialApp/user/" + userId + "/";
         SocialCosAuthRO socialCosAuthRO = socialCosGetAuthDomain.getCosAuthorization(uploadImgPath);
         return new ResultRO<>(socialCosAuthRO);

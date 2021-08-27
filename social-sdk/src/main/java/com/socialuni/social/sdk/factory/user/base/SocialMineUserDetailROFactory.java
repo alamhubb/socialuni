@@ -21,7 +21,7 @@ public class SocialMineUserDetailROFactory {
     }
 
     public static SocialMineUserDetailRO getMineUserDetail() {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         SocialMineUserDetailRO mineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
         return mineUserDetailRO;
     }

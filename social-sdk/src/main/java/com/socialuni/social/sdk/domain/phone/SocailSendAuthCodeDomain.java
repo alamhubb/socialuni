@@ -15,6 +15,7 @@ import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -72,8 +73,9 @@ public class SocailSendAuthCodeDomain {
                 throw new SocialBusinessException("获取验证码过于频繁，请稍候重试");
             }
         }
+        //都是默认30次
         final Integer userLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeCountKey);
-        final Integer ipLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeIpCountKey);
+//        final Integer ipLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeIpCountKey);
         final Integer phoneLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodePhoneCountKey);
         //首先查手机号总次数，如果大于1，则不行
         Integer phoneNumCount = authRepository.countByPhoneNum(phoneNum);
@@ -86,8 +88,9 @@ public class SocailSendAuthCodeDomain {
                 throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
             }
         }
-        Integer ipCount = authRepository.countByIp(userIp);
-        if (phoneNumCount >= phoneLimitCount || ipCount >= ipLimitCount) {
+//        Integer ipCount = authRepository.countByIp(userIp);
+        if (phoneNumCount >= phoneLimitCount) {
+//        if (phoneNumCount >= phoneLimitCount || ipCount >= ipLimitCount) {
             /*if (phoneNumCount >= phoneLimitCount) {
                 UserLogStoreUtils.save(new UserLogDO("手机号获取达到获取验证码次数上限", user, phoneNum));
             } else {
@@ -107,7 +110,7 @@ public class SocailSendAuthCodeDomain {
         String phoneNum = authCodeQO.getPhoneNum();
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
 
-        AuthenticationDO authenticationDO = new AuthenticationDO(mineUser, phoneNum, null, userIp);
+        AuthenticationDO authenticationDO = new AuthenticationDO(SocialUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp);
         authenticationDO.setStatus(StatusConst.fail);
         authRepository.save(authenticationDO);
 

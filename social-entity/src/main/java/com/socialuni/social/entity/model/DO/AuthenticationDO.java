@@ -11,8 +11,16 @@ import java.util.Date;
 /**
  * @author qinkaiyuan
  * @date 2019-02-14 22:03
- */@Entity
-@Table(name = "authentication")
+ */
+@Entity
+@Table(name = "authentication",
+        indexes = {
+                @Index(columnList = "phoneNum"),
+                @Index(columnList = "ip"),
+                @Index(columnList = "userId"),
+                @Index(columnList = "status")
+        }
+)
 @Data
 public class AuthenticationDO implements Serializable {
     @Id
@@ -28,8 +36,8 @@ public class AuthenticationDO implements Serializable {
     public AuthenticationDO() {
     }
 
-    public AuthenticationDO(UserDO user, String phoneNum, String authCode, String ip) {
-        this.userId = user != null ? user.getId() : null;
+    public AuthenticationDO(Integer userId, String phoneNum, String authCode, String ip) {
+        this.userId = userId;
         this.phoneNum = phoneNum;
         this.authCode = authCode;
         this.ip = ip;

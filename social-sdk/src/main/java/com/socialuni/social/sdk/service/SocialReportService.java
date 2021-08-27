@@ -15,7 +15,7 @@ public class SocialReportService {
     SoicialReportAddDomain soicialReportAddDomain;
 
     public ResultRO<Void> addReport(SocialReportAddQO socialReportAddQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         soicialReportAddDomain.addReport(mineUser, socialReportAddQO);
         return new ResultRO<>();
     }

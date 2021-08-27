@@ -38,34 +38,51 @@ public class SocialUserUtil {
         SocialUserUtil.socialUserPhoneRedis = socialUserPhoneRedis;
     }
 
-
-    public static Integer getMineUserId() {
-        UserDO user = SocialUserUtil.getMineUser();
+    public static Integer getMineUserIdAllowNull() {
+        UserDO user = SocialUserUtil.getMineUserAllowNull();
         if (user == null) {
-            throw new SocialNullUserException();
+            return null;
         }
         Integer userId = user.getId();
         return userId;
     }
 
-    public static String getMineUserStringId() {
-        UserDO user = SocialUserUtil.getMineUser();
-        if (user == null) {
-            throw new SocialNullUserException();
+    public static Integer getMineUserIdAllowNull(UserDO mineUser) {
+        //解析token
+        if (mineUser == null) {
+            return null;
         }
-        Integer userId = user.getId();
-        return userId.toString();
+        Integer userId = mineUser.getId();
+        return userId;
     }
 
-    public static UserDO getMineUser() {
+    public static Integer getMineUserIdNotNull() {
+        Integer userId = SocialUserUtil.getMineUserIdAllowNull();
+        if (userId == null) {
+            throw new SocialNullUserException();
+        }
+        return userId;
+    }
+
+    public static UserDO getMineUserNotNull() {
+        //解析token
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        if (mineUser == null) {
+            throw new SocialNullUserException();
+        }
+        //返回user
+        return mineUser;
+    }
+
+    public static UserDO getMineUserAllowNull() {
         //解析token
         TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDO();
         if (tokenDO == null) {
             return null;
         }
         //返回user
-        UserDO user = SocialUserUtil.get(tokenDO.getUserId());
-        return user;
+        UserDO mineUser = SocialUserUtil.get(tokenDO.getUserId());
+        return mineUser;
     }
 
     //必须有，websocket无法从request中获取token只能传入
@@ -81,7 +98,7 @@ public class SocialUserUtil {
     }
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = SocialUserUtil.getMineUser();
+        UserDO userDO = SocialUserUtil.getMineUserAllowNull();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 

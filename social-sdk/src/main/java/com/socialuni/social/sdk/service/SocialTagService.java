@@ -23,7 +23,7 @@ public class SocialTagService {
     SoicialTagAddDomain soicialTagAddDomain;
 
     public ResultRO<TagRO> addTag(TagAddQO tagAddQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
         return new ResultRO<>(tagRO);
     }
