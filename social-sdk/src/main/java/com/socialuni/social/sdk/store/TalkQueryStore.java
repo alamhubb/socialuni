@@ -80,6 +80,7 @@ public class TalkQueryStore {
         return talkRepository.queryTalkIdsByUser(userId, ContentStatus.otherCanSeeContentStatus, pageable);
     }
 
+    //用户发布动态后需要更新这个缓存
     @Cacheable(cacheNames = RedisKeysConst.queryMineTalkIds, key = "#userId+'-'+#pageable.pageSize+'-'+#pageable.pageNumber")
     public List<Integer> queryMineTalkIds(Integer userId, Pageable pageable) {
         return talkRepository.queryTalkIdsByUser(userId, ContentStatus.selfCanSeeContentStatus, pageable);
@@ -108,14 +109,14 @@ public class TalkQueryStore {
     }*/
 
 
-    public List<Integer> queryUserTalkIdsByTab(Integer userId, String userGender,
+    public List<Integer> queryUserTalkIdsByTab(Integer userId, String postTalkUserGender,
                                                Integer minAge, Integer maxAge, String adCode,
-                                               String talkGender,
-                                               String sessionUserGender, List<Integer> tagIds, Pageable pageable) {
+                                               String talkVisibleGender,
+                                               String mineUserGender, List<Integer> tagIds, Pageable pageable) {
 //        log.info("queryUserTalkIdsByTab开始：" + new Date().getTime() / 1000);
 
-        List<Integer> ids = this.queryTalkIdsByTab(userGender, minAge, maxAge, adCode,
-                talkGender, sessionUserGender, tagIds, pageable);
+        List<Integer> ids = this.queryTalkIdsByTab(postTalkUserGender, minAge, maxAge, adCode,
+                talkVisibleGender, mineUserGender, tagIds, pageable);
 
         List<Integer> mineTalkIds = this.queryMineTalkIds(userId, PageRequest.of(0, 100));
 
@@ -126,18 +127,26 @@ public class TalkQueryStore {
         return ids;
     }
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#userGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkGender+'-'+#sessionUserGender+'-'+#devId+'-'+#tagIds+'-'+#pageable.pageSize+'-'+#pageable.pageNumber")
+    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#userGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId+'-'+#tagIds+'-'+#pageable.pageSize+'-'+#pageable.pageNumber")
     public List<Integer> queryTalkIdsByTab(String userGender,
                                            Integer minAge, Integer maxAge, String adCode,
-                                           String talkGender,
-                                           String sessionUserGender, List<Integer> tagIds, Pageable pageable) {
+                                           String talkVisibleGender,
+                                           String mineUserGender, List<Integer> tagIds, Pageable pageable) {
 //        log.info("queryTalkIdsByTab开始：" + new Date().getTime() / 1000);
         List<Integer> tagTalkIds;
+        //    talkvisible	minegender	结果
+        //    any	        null	    all,girl,boy
+        //    all	        girl	    all,girl
+        //    all	        boy	        all,boy
+        //    girl	        girl	    girl
+        //    boy	        boy	        boy
+        //        新增talk时，这三个，查询talk的缓存都要清楚
         if (tagIds == null) {
-            //talk性别相同或者user性别相同，能解决talk性别和user性别的问题，能查出来合集
-            tagTalkIds = talkRepository.queryTalkIdsByTagVisibleGender(talkGender, sessionUserGender);
+            //talk性别相同或者user性别相同，能解决talk性别和user性别的问题，能查出来合集，如果为全部，则userGender为null
+            tagTalkIds = talkRepository.queryTalkIdsByTagVisibleGender(talkVisibleGender, mineUserGender);
         } else {
-            tagTalkIds = talkRepository.queryTalkIdsByTagIdsAndTagVisibleGender(tagIds, talkGender, sessionUserGender);
+            //不能自动自动添加应用tag，那样会导致应有所有tag的动态都查出来了
+            tagTalkIds = talkRepository.queryTalkIdsByTagIdsAndTagVisibleGender(tagIds, talkVisibleGender, mineUserGender);
         }
 //        log.info("queryTalkIdsByTagVisibleGender结束：" + new Date().getTime() / 1000);
 //        List<Integer> userIds = userRepository.queryUserIdsByGenderAndAge(userGender, minAge, maxAge);
@@ -149,7 +158,7 @@ public class TalkQueryStore {
                 talkGender, sessionUserGender, devId);*/
 
         List<Integer> talkIds = talkRepository.queryTalkIdsByGenderAndAgeAndAdCodeAndGender(userGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkGender, sessionUserGender, tagTalkIds, null);
+                talkVisibleGender, mineUserGender, tagTalkIds, null);
 //        log.info("queryTalkIdsByGenderAndAgeAndAdCodeAndGender结束：" + new Date().getTime() / 1000);
 
         talkIds = filterTalkIds(talkIds, tagTalkIds);
@@ -180,13 +189,13 @@ public class TalkQueryStore {
         return ids;
     }
 
-    public List<TalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String userGender,
+    public List<TalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String postTalkUserGender,
                                                                          Integer minAge, Integer maxAge, String adCode,
-                                                                         List<Integer> tagIds, String talkGender,
-                                                                         String sessionUserGender) {
+                                                                         List<Integer> tagIds, String talkVisibleGender,
+                                                                         String mineUserGender) {
         int page = talkIds.size() / 10;
-        List<Integer> ids = this.queryUserTalkIdsByTab(userId, userGender, minAge, maxAge, adCode,
-                talkGender, sessionUserGender, tagIds, PageRequest.of(page, 10));
+        List<Integer> ids = this.queryUserTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
+                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 

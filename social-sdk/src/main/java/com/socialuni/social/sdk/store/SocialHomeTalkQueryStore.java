@@ -1,12 +1,11 @@
 package com.socialuni.social.sdk.store;
 
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
-import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
+import com.socialuni.social.sdk.constant.CommonConst;
+import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.utils.TalkStore;
 import lombok.extern.slf4j.Slf4j;
@@ -30,22 +29,22 @@ public class SocialHomeTalkQueryStore {
     private TalkQueryStore talkQueryStore;
 
     public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryQO, UserDO user) {
-        String talkUserGender = queryQO.getTalkUserGender();
+        String postTalkUserGender = queryQO.getTalkUserGender();
         String talkVisibleGender = queryQO.getTalkVisibleGender();
         String tabType = queryQO.getHomeTabType();
 
         //        log.info("queryNotFollowTalks开始2：" + new Date().getTime() / 1000);
         //userId特殊处理
         Integer userId = null;
-        String sessionUserGender = null;
+        String mineUserGender = null;
         if (user != null) {
             userId = user.getId();
-            sessionUserGender = user.getGender();
+            mineUserGender = user.getGender();
         }
 
         //sql需要，为all改为null
-        if (GenderType.all.equals(talkUserGender)) {
-            talkUserGender = null;
+        if (GenderType.all.equals(postTalkUserGender)) {
+            postTalkUserGender = null;
         }
 
 
@@ -111,8 +110,8 @@ public class SocialHomeTalkQueryStore {
         }
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryQO.getTalkIds(), userId, talkUserGender,
-                minAge, maxAge, adCode, tagIds, talkVisibleGender, sessionUserGender);
+        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryQO.getTalkIds(), userId, postTalkUserGender,
+                minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

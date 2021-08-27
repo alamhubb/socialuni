@@ -50,19 +50,20 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             @Param("status") String status,
             Pageable pageable);
 
+
     //查询某性别的talkids
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagVisibleGender, key = "#talkGender+'-'+#mineUserGender")
-    @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND (tg.visible_gender=:talkGender or (:mineUserGender is null or tg.visible_gender = :mineUserGender))")
+    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender")
+    @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND (tg.visible_gender=:talkVisibleGender or (:mineUserGender is null or tg.visible_gender = :mineUserGender))")
     List<Integer> queryTalkIdsByTagVisibleGender(
-            @Param("talkGender") String talkGender,
+            @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender);
 
     //查询某性别和包含tags下的talkids
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagIdsAndTagVisibleGender, key = "#talkGender+'-'+#mineUserGender+'-'+#tagIds")
-    @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND (tg.visible_gender=:talkGender or (:mineUserGender is null or tg.visible_gender = :mineUserGender)) and tg.id in (:tagIds)")
+    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagIdsAndTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds")
+    @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND (tg.visible_gender=:talkVisibleGender or (:mineUserGender is null or tg.visible_gender = :mineUserGender)) and tg.id in (:tagIds)")
     List<Integer> queryTalkIdsByTagIdsAndTagVisibleGender(
             @Param("tagIds") List<Integer> tagIds,
-            @Param("talkGender") String talkGender,
+            @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender);
 
     //    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
@@ -71,12 +72,12 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             "and (t.status = :status)" +
             "and (:adCode is null or t.ad_code like concat(:adCode,'%')) " +
             "and (t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and t.dev_id = :devId)) " +
-            "and (:talkGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkGender) " +
+            "and (:talkVisibleGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkVisibleGender) " +
             "order by t.update_time desc limit 1000")
     List<Integer> queryTalkIdsByAdCodeAndGender(
             @Param("status") String status,
             @Param("adCode") String adCode,
-            @Param("talkGender") String talkGender,
+            @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
             @Param("devId") Integer devId);
 
@@ -101,25 +102,27 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             @Param("mineUserGender") String mineUserGender,
             @Param("devId") Integer devId);*/
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#userGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
+    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
     @Query(nativeQuery = true, value = "SELECT t.id FROM talk t,user u " +
             "where t.global_top = 0 " +
             "and t.user_id = u.id " +
-            "and (:userGender is null or u.gender = :userGender) " +
+            //筛选女生、男生发布的、不筛选值为null
+            "and (:talkUserGender is null or u.gender = :talkUserGender) " +
             "and u.age between :minAge and :maxAge " +
             "and (t.status = :status)" +
             "and (:adCode is null or t.ad_code like concat(:adCode,'%')) " +
-            "and (t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and t.dev_id = :devId)) " +
-            "and (:talkGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkGender) " +
+            "and (:devId is null or t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and t.dev_id = :devId)) " +
+            "and (:talkVisibleGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkVisibleGender) " +
+            "and ((t.visible_gender = 'all' and t.visible_gender = :talkVisibleGender) or (mineUserGender is null or t.visible_gender = :mineUserGender)) " +
             "and t.id in (:talkIds) " +
             "order by t.update_time desc limit 1000")
     List<Integer> queryTalkIdsByGenderAndAgeAndAdCodeAndGender(
-            @Param("userGender") String userGender,
+            @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge,
             @Param("status") String status,
             @Param("adCode") String adCode,
-            @Param("talkGender") String talkGender,
+            @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
             @Param("talkIds") List<Integer> talkIds,
             @Param("devId") Integer devId);
@@ -175,7 +178,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             "and (t.status = :status or (t.user_id =:userId and t.status =:onlyUserSeeStatus)) " +
             "and (:adCode is null or t.ad_code like concat(:adCode,'%')) " +
             "and (t.visible_type = 'fullNetwork' or (t.visible_type = 'selfSoft' and t.dev_id = :devId)) " +
-            "and (:talkGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkGender) " +
+            "and (:talkVisibleGender = 'all' or (:mineUserGender is null or t.visible_gender = 'all' or t.visible_gender = :mineUserGender) or t.visible_gender = :talkVisibleGender) " +
             "order by t.update_time desc limit 1000")
     List<Integer> queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
             @Param("userIds") List<Integer> userIds,
@@ -184,7 +187,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             @Param("status") String status,
             @Param("onlyUserSeeStatus") String onlyUserSeeStatus,
             @Param("adCode") String adCode,
-            @Param("talkGender") String talkGender,
+            @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
             @Param("devId") Integer devId);
 
