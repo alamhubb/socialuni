@@ -46,7 +46,7 @@ public class SocialAppService {
     }
 
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         return socialFrontLogDomain.sendErrorLog(frontErrorLogVO, mineUser);
     }
 }

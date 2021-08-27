@@ -18,7 +18,7 @@ public class CommonUserAccountUtil {
     }
 
     public static SocialUserAccountDO getMineAccountByProvider(String provider) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, SocialUserUtil.getMineUserId());
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, SocialUserUtil.getMineUserIdNotNull());
         return socialUserAccountDO;
     }
 

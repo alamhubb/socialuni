@@ -51,7 +51,7 @@ public class UnreadCommentVO {
     }
 
     public UnreadCommentVO(CommentDO commentDO) {
-        UserDO sessionUser = SocialUserUtil.getMineUser();
+        UserDO sessionUser = SocialUserUtil.getMineUserAllowNull();
 //        Integer devId = DevAccountUtils.getDevId();
 //
 //        this.id = UnionIdDbUtil.createCommentUid(socialCommentDO.getId(),  sessionUser);

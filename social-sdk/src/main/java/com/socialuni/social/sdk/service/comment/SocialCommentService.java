@@ -27,7 +27,7 @@ public class SocialCommentService {
     SocialCommentDeleteDomain socialCommentDeleteDomain;
 
     public ResultRO<SocialCommentRO> postComment(SocialCommentPostQO socialCommentPostQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialCommentRO socialCommentRO = socialPostCommentDomain.postComment(mineUser, socialCommentPostQO);
 
@@ -35,7 +35,7 @@ public class SocialCommentService {
     }
 
     public ResultRO<Void> deleteComment(SocialCommentDeleteQO commentDeleteQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         socialCommentDeleteDomain.deleteComment(mineUser, commentDeleteQO);
         return new ResultRO<>();
     }

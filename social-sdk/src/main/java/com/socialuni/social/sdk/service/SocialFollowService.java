@@ -23,20 +23,20 @@ public class SocialFollowService {
 
     public ResultRO<Void> addFlow(SocialFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = SocialUserUtil.getMineUserId();
+        Integer mineUserId = SocialUserUtil.getMineUserIdNotNull();
         socialUserFollowDomain.addFlow(mineUserId, addVO.getBeUserId());
         return new ResultRO<>();
     }
 
     public ResultRO<Void> cancelFollow(SocialFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = SocialUserUtil.getMineUserId();
+        Integer mineUserId = SocialUserUtil.getMineUserIdNotNull();
         socialUserFollowDomain.cancelFollow(mineUserId, addVO.getBeUserId());
         return new ResultRO<>();
     }
 
     public ResultRO<Map<String, List<SocialUserFollowDetailRO>>> queryUserFollows() {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         Map<String, List<SocialUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
         return new ResultRO<>(map);
     }

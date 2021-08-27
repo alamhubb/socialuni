@@ -16,7 +16,7 @@ public class SocialHugService {
     private SocialAddHugDomain socialAddHugDomain;
 
     public ResultRO<Void> addHug(SocialHugAddQO socialHugAddQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         socialAddHugDomain.addHug(mineUser, socialHugAddQO);
         return new ResultRO<>();
     }

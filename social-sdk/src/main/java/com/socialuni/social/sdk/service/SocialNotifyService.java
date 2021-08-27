@@ -16,19 +16,19 @@ public class SocialNotifyService {
     private SocialQueryNotifyDomain socialQueryNotifyDomain;
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryNotifies() {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifies() {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifiesAndUpdateHasRead() {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifiesAndUpdateHasRead(mineUser);
         return new ResultRO<>(list);
     }

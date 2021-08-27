@@ -4,7 +4,6 @@ package com.socialuni.social.sdk.service.phone;
 import com.socialuni.social.sdk.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindWxPhoneNumDomain;
-import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
@@ -26,12 +25,12 @@ public class SocialPhoneService {
     SocailSendAuthCodeDomain socailSendAuthCodeDomain;
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }
 
     public ResultRO<SocialMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
 
@@ -39,7 +38,7 @@ public class SocialPhoneService {
     }
 
     public ResultRO<SocialMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO socialBindWxPhoneNumQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         //微信绑定手机号方法
         SocialMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
 

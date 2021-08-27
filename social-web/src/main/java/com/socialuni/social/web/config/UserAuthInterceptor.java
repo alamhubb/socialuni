@@ -37,7 +37,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         Date startTime = new Date();
 
         RequestLogDO requestLogDO = new RequestLogDO();
-        UserDO user = SocialUserUtil.getMineUser();
+        UserDO user = SocialUserUtil.getMineUserAllowNull();
         if (user != null) {
             requestLogDO.setUserId(user.getId());
         }

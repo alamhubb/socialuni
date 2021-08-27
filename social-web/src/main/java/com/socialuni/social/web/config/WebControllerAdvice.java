@@ -111,7 +111,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         if (requestLogDO == null) {
             requestLogDO = new RequestLogDO();
             HttpServletRequest request = RequestUtil.getRequest();
-            UserDO user = SocialUserUtil.getMineUser();
+            UserDO user = SocialUserUtil.getMineUserAllowNull();
             if (user != null) {
                 requestLogDO.setUserId(user.getId());
             }
