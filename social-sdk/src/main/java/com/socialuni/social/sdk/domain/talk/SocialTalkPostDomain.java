@@ -86,15 +86,15 @@ public class SocialTalkPostDomain {
     }
 
     public TalkDO saveEntity(UserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags) {
-        String talkGender = socialTalkPostQO.getVisibleGender();
+        String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
-        if (!talkGender.equals(GenderType.all)) {
+        if (!talkVisibleGender.equals(GenderType.all)) {
             //添加默认标签，解决查询没tag查询不出来的问题
-            if (talkGender.equals(GenderType.girl)) {
+            if (talkVisibleGender.equals(GenderType.girl)) {
                 //这里一定有值，没值就是创建开发者的时候没创建tag，修复逻辑
                 TagDO genderTag = tagRepository.findFirstByName(GenderType.girlTagName);
                 tags.add(genderTag);
-            } else if (talkGender.equals(GenderType.boy)) {
+            } else if (talkVisibleGender.equals(GenderType.boy)) {
                 //这里一定有值，没值就是创建开发者的时候没创建tag，修复逻辑
                 TagDO genderTag = tagRepository.findFirstByName(GenderType.boyTagName);
                 tags.add(genderTag);

@@ -116,12 +116,13 @@ public class TalkQueryStore {
 //        log.info("queryUserTalkIdsByTab开始：" + new Date().getTime() / 1000);
 
         List<Integer> ids = this.queryTalkIdsByTab(postTalkUserGender, minAge, maxAge, adCode,
-                talkVisibleGender, mineUserGender, tagIds, pageable);
+                talkVisibleGender, mineUserGender, tagIds);
 
         List<Integer> mineTalkIds = this.queryMineTalkIds(userId, PageRequest.of(0, 100));
 
         ids.addAll(mineTalkIds);
 
+        //对id进行下排序，找到前10
         ids = talkRepository.queryTalkIdsByIds(ids, pageable);
 //        log.info("queryUserTalkIdsByTab结束：" + new Date().getTime() / 1000);
         return ids;
@@ -131,7 +132,7 @@ public class TalkQueryStore {
     public List<Integer> queryTalkIdsByTab(String userGender,
                                            Integer minAge, Integer maxAge, String adCode,
                                            String talkVisibleGender,
-                                           String mineUserGender, List<Integer> tagIds, Pageable pageable) {
+                                           String mineUserGender, List<Integer> tagIds) {
 //        log.info("queryTalkIdsByTab开始：" + new Date().getTime() / 1000);
         List<Integer> tagTalkIds;
         //    talkvisible	minegender	结果
@@ -141,13 +142,13 @@ public class TalkQueryStore {
         //    girl	        girl	    girl
         //    boy	        boy	        boy
         //        新增talk时，这三个，查询talk的缓存都要清楚
-        if (tagIds == null) {
+        /*if (tagIds == null) {
             //talk性别相同或者user性别相同，能解决talk性别和user性别的问题，能查出来合集，如果为全部，则userGender为null
             tagTalkIds = talkRepository.queryTalkIdsByTagVisibleGender(talkVisibleGender, mineUserGender);
         } else {
             //不能自动自动添加应用tag，那样会导致应有所有tag的动态都查出来了
             tagTalkIds = talkRepository.queryTalkIdsByTagIdsAndTagVisibleGender(tagIds, talkVisibleGender, mineUserGender);
-        }
+        }*/
 //        log.info("queryTalkIdsByTagVisibleGender结束：" + new Date().getTime() / 1000);
 //        List<Integer> userIds = userRepository.queryUserIdsByGenderAndAge(userGender, minAge, maxAge);
 
@@ -157,11 +158,11 @@ public class TalkQueryStore {
         /*List<Integer> talkIds = talkRepository.queryTalkIdsByGenderAndAgeAndAdCodeAndGender(userGender, minAge, maxAge, ContentStatus.enable, adCode,
                 talkGender, sessionUserGender, devId);*/
 
-        List<Integer> talkIds = talkRepository.queryTalkIdsByGenderAndAgeAndAdCodeAndGender(userGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkVisibleGender, mineUserGender, tagTalkIds, null);
+        List<Integer> talkIds = talkRepository.queryTalkIdsByCom(userGender, minAge, maxAge, ContentStatus.enable, adCode,
+                talkVisibleGender, mineUserGender, tagIds, null);
 //        log.info("queryTalkIdsByGenderAndAgeAndAdCodeAndGender结束：" + new Date().getTime() / 1000);
 
-        talkIds = filterTalkIds(talkIds, tagTalkIds);
+//        talkIds = filterTalkIds(talkIds, tagTalkIds);
 
         /*List<Integer> ids = talkRepository.queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
                 filterTalkIds, userIds);*/

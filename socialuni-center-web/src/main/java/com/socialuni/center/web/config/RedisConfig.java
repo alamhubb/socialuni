@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.config.redis;
+package com.socialuni.center.web.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -54,7 +54,9 @@ public class RedisConfig {
 
         // 配置序列化
         RedisCacheConfiguration redisCacheConfiguration =
-                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(8))
+                RedisCacheConfiguration
+                        .defaultCacheConfig()
+                        .entryTtl(Duration.ofHours(8))
                         .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
                         .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer));
 

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.config.redis;
+package com.socialuni.social.web.sdk.config.redis;
 
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
