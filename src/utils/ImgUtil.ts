@@ -4,11 +4,10 @@ import ErrorConst from '@/const/ErrorConst'
 import CommonUtil from '@/utils/CommonUtil'
 
 export default class ImgUtil {
-  static readonly imgUrl: string = process.env.VUE_APP_COS_URL
   // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'
   static readonly uploadImgUrl: string = process.env.VUE_APP_BASE_API + 'upload/img/'
 
-  static uploadImgNewAPI (uploadImg: string, type: string): Promise<any> {
+  static uploadImgNewAPI(uploadImg: string, type: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
@@ -34,7 +33,7 @@ export default class ImgUtil {
     })
   }
 
-  static uploadImgAPI (uploadImg: string, type: string): Promise<any> {
+  static uploadImgAPI(uploadImg: string, type: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
@@ -60,65 +59,41 @@ export default class ImgUtil {
     })
   }
 
-  static getTalkLargeImgUrl (userId: string, src: string): string {
+  static getTalkLargeImgUrl(userId: string, src: string): string {
     // 如果包含'/'则代表是新逻辑
-    let imgUrl = null
-    if (src) {
-      if (src.indexOf('https') > -1) {
-        imgUrl = src + '!normal'
-      } else {
-        if (src.split('/').length > 1) {
-          imgUrl = ImgUtil.imgUrl + src + '!normal'
-        } else {
-          imgUrl = ImgUtil.imgUrl + 'user/' + userId + '/talk/normal/' + src + '!normal'
-        }
-      }
-    }
-    return imgUrl
-  }
-
-  static getTalkSmallImgUrl (userId: string, src: string): string {
-    // 如果包含'/'则代表是新逻辑
-    let imgUrl = null
-    if (src) {
-      if (src.indexOf('https') > -1) {
-        imgUrl = src + '!thumbnail'
-      } else {
-        if (src.split('/').length > 1) {
-          imgUrl = ImgUtil.imgUrl + src + '!thumbnail'
-        } else {
-          imgUrl = ImgUtil.imgUrl + 'user/' + userId + '/talk/thumbnail/' + src
-        }
-      }
-    }
-    return imgUrl
-  }
-
-  static getUserSmallImgUrl (src: string): string {
-    return src + '!thumbnail'
-  }
-
-  static getUserLargeImgUrl (src: string): string {
     return src + '!normal'
   }
 
-  static getTalkUploadFormat (userId: string, filePath: string): string {
+  static getTalkSmallImgUrl(userId: string, src: string): string {
+    // 如果包含'/'则代表是新逻辑
+    return src + '!thumbnail'
+  }
+
+  static getUserSmallImgUrl(src: string): string {
+    return src + '!thumbnail'
+  }
+
+  static getUserLargeImgUrl(src: string): string {
+    return src + '!normal'
+  }
+
+  static getTalkUploadFormat(userId: string, filePath: string): string {
     return 'user/' + userId + '/talk/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserAvatarUploadFormat (userId: string, filePath: string): string {
+  static getUserAvatarUploadFormat(userId: string, filePath: string): string {
     return 'user/' + userId + '/avatar/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserImgUploadFormat (userId: string, filePath: string): string {
+  static getUserImgUploadFormat(userId: string, filePath: string): string {
     return 'user/' + userId + '/img/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserIdentityUploadFormat (userId: string, filePath: string): string {
+  static getUserIdentityUploadFormat(userId: string, filePath: string): string {
     return 'user/' + userId + '/identity/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getFileSuffixName (filePath: string): string {
+  static getFileSuffixName(filePath: string): string {
     let fileSuffixName = filePath.substr(filePath.lastIndexOf('/') + 1)
     fileSuffixName = fileSuffixName.substr(fileSuffixName.lastIndexOf('.') + 1)
     const fileSuffixNameAry: string[] = fileSuffixName.split('.')

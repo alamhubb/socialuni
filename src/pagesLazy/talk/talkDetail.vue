@@ -4,13 +4,13 @@
     </msg-input>
     <u-navbar :is-back="false">
       <view class="flex-row w100vw px flex-auto">
-        <view class="col-center bg-active flex-none" @click="goBack">
+        <view class="col-center bg-active color-default flex-none" @click="goBack">
           <q-icon icon="arrow-left"></q-icon>
         </view>
-        <view class="col-center bg-active ml-lg flex-none" @click="goHome">
+        <view class="col-center bg-active color-default ml-lg flex-none" @click="goHome">
           <q-icon icon="home"></q-icon>
         </view>
-        <view class="ml-lg font-bold text-md flex-none">
+        <view class="ml-lg font-bold text-md flex-none color-default">
           动态详情
         </view>
       </view>

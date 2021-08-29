@@ -8,6 +8,12 @@
   },
   "pages": [
     {
+      "path": "pages/talk/talk",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
@@ -21,12 +27,6 @@
     },
     {
       "path": "pages/user/thirdAuth",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/talk/talk",
       "style": {
         "navigationStyle": "custom"
       }
@@ -171,18 +171,6 @@
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "社区"
-      },
-      {
-        "pagePath": "pages/match/match",
-        "iconPath": "static/img/favorite-gray-36dp.png",
-        "selectedIconPath": "static/img/favorite-blue-36dp.png",
-        "text": "匹配"
-      },
-      {
-        "pagePath": "pages/chat/chat",
-        "iconPath": "static/img/question_answer-gray-36dp.png",
-        "selectedIconPath": "static/img/question_answer-blue-36dp.png",
-        "text": "消息"
       },
       {
         "pagePath": "pages/user/mine",
