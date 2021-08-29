@@ -43,6 +43,7 @@ public class CenterTalkROFactory {
         centerTalkRO.setVisibleGender(talkRO.getVisibleGender());
         centerTalkRO.setUpdateTime(talkRO.getUpdateTime());
         centerTalkRO.setCommentNum(talkRO.getCommentNum());
+        centerTalkRO.setReportNum(0);
         centerTalkRO.setHugNum(talkRO.getHugNum());
         centerTalkRO.setHasHugged(talkRO.getHasHugged());
         centerTalkRO.setHasFollowed(talkRO.getHasFollowed());

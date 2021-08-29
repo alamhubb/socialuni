@@ -25,6 +25,7 @@ public class CenterTalkRO {
      * 评论数量
      */
     private Integer commentNum;
+    private Integer reportNum;
     /**
      * 抱抱次数
      */
