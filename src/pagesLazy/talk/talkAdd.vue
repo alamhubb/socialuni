@@ -409,8 +409,8 @@ export default class TalkAddPage extends Vue {
   async uploadImgList () {
     //设置图片路径
     this.showsImgFiles.forEach(item => {
-      item.cosSrc = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
-      item.src = ImgUtil.imgUrl + item.cosSrc
+      item.src = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
+      // item.src = ImgUtil.imgUrl + item.cosSrc
     })
     CosUtil.postImgList(this.showsImgFiles, this.cosAuthRO)
   }

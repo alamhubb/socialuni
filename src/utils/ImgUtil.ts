@@ -82,7 +82,7 @@ export default class ImgUtil {
     let imgUrl = null
     if (src) {
       if (src.indexOf('https') > -1) {
-        imgUrl = src
+        imgUrl = src + '!thumbnail'
       } else {
         if (src.split('/').length > 1) {
           imgUrl = ImgUtil.imgUrl + src + '!thumbnail'

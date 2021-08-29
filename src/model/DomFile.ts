@@ -1,7 +1,7 @@
 export default class DomFile {
   //自己拼出来的
+  // public src: string
   public src: string
-  public cosSrc: string
 
   //小程序只有path和size
   path: string
