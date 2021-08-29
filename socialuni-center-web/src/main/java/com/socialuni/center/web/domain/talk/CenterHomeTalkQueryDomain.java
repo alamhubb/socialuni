@@ -9,7 +9,6 @@ import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.domain.talk.SocialHomeTalkQueryDomain;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -17,7 +16,6 @@ import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQuery
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.platform.AliAPI;
-import com.socialuni.social.sdk.utils.GenderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

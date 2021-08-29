@@ -1,7 +1,7 @@
 spring:
   profiles:
-    active: local
 #    active: localprod
+    active: local
 #    active: prod
   jpa:
     database: MYSQL
@@ -18,12 +18,10 @@ spring:
     add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
-logging:
-#  level:
-#    com.socialuni.social.sdk.mapper: DEBUG
-  file: socialuni.log
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:mapper/*.xml
-
+logging:
+  file:
+    name: socialuni.log

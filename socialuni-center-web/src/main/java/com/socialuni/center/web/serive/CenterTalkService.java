@@ -5,22 +5,11 @@ import com.socialuni.api.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.domain.talk.*;
-import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
-import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.platform.AliAPI;
-import com.socialuni.social.sdk.utils.GenderUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -1,4 +1,6 @@
 socialuni:
+  app:
+    static-resource-url: ""
   provider:
     qq:
       qq-mp-id: ""
@@ -50,7 +52,7 @@ spring:
       max-lifetime: 1800000
       login-timeout: 600
       #连接池中允许的最大连接数。缺省值：10；推荐的公式：((CPU内核数量 * 2) + 硬盘数量)
-      maximum-pool-size: 500
+      maximum-pool-size: 600
       minimum-idle: 30
   # REDIS (RedisProperties)
   # Redis数据库索引（默认为0）

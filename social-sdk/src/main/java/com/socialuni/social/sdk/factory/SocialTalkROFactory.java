@@ -139,7 +139,7 @@ public class SocialTalkROFactory {
         List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(talkDO.getId());
 //        List<TalkImgDO> imgDOS = talkDO.getImgs();
         if (imgDOS != null && imgDOS.size() > 0) {
-            socialTalkRO.setImgs(TalkImgROFactory.newTalkImgROS(imgDOS));
+            socialTalkRO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else {
             socialTalkRO.setImgs(new ArrayList<>());
         }
