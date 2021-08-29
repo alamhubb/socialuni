@@ -24,4 +24,5 @@ public class SocialHomeTabTalkQueryBO {
 
     private String talkUserGender;
     private String talkVisibleGender;
+    private Integer devId;
 }

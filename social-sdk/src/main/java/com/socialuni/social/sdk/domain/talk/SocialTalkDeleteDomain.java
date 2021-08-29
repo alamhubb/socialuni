@@ -4,7 +4,7 @@ import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.TalkRepository;
-import com.socialuni.social.sdk.utils.TalkStore;
+import com.socialuni.social.sdk.utils.TalkRedis;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkDeleteQO;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.procedure.ParameterMisuseException;
@@ -23,7 +23,7 @@ public class SocialTalkDeleteDomain {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private TalkStore talkStore;
+    private TalkRedis talkRedis;
 
     public void deleteTalk(UserDO mineUser, SocialTalkDeleteQO talkDeleteQO) {
 
@@ -46,6 +46,6 @@ public class SocialTalkDeleteDomain {
         talkDO.setUpdateTime(new Date());
         talkDO.setStatus(ContentStatus.delete);
         talkDO.setDeleteReason("用户自行删除");
-        talkStore.save(talkDO);
+        talkRedis.save(talkDO);
     }
 }

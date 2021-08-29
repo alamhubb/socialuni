@@ -5,9 +5,7 @@ import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.factory.TalkDOFactory;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.sdk.repository.TalkRepository;
-import com.socialuni.social.sdk.utils.TalkStore;
-import com.socialuni.social.sdk.utils.TalkUtils;
+import com.socialuni.social.sdk.utils.TalkRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +15,12 @@ import javax.annotation.Resource;
 @Slf4j
 public class SocialTalkCreateManage {
     @Resource
-    TalkStore talkStore;
+    TalkRedis talkRedis;
 
     public TalkDO createTalkDO(UserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
         TalkDO talkDO = TalkDOFactory.newTalkDO(user, socialTalkPostQO, district);
         //保存说说
-        talkDO = talkStore.save(talkDO);
+        talkDO = talkRedis.save(talkDO);
         return talkDO;
     }
 }

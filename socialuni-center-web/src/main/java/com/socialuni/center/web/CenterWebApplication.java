@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableCaching
 @EnableJpaRepositories({"com.socialuni.center"})
 @ComponentScan({"com.socialuni.center"})
 @EntityScan({"com.socialuni.center"})
 @EnableSocialuniEntitySDK
 @EnableSocialSDK
 @EnableAsync
+@EnableCaching
 public class CenterWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(CenterWebApplication.class, args);

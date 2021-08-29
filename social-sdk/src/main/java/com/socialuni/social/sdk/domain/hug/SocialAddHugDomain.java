@@ -6,7 +6,7 @@ import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.sdk.redis.HugRedis;
-import com.socialuni.social.sdk.utils.TalkStore;
+import com.socialuni.social.sdk.utils.TalkRedis;
 import com.socialuni.social.sdk.utils.TalkUtils;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.Date;
 @Component
 public class SocialAddHugDomain {
     @Resource
-    private TalkStore talkStore;
+    private TalkRedis talkRedis;
 
     @Resource
     private HugRedis hugRedis;
@@ -33,7 +33,7 @@ public class SocialAddHugDomain {
                 talkDO.setHugNum(++hugNum);
             }
             talkDO.setUpdateTime(new Date());
-            talkStore.save(talkDO);
+            talkRedis.save(talkDO);
         }/* else if (addVO.getCommentId() != null) {
             Optional<CommentDO> commentOptional = commentRepository.findById(addVO.getCommentId());
             if (!commentOptional.isPresent()) {

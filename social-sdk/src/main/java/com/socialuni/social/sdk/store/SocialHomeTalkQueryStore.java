@@ -7,7 +7,7 @@ import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQuery
 import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.repository.TalkRepository;
-import com.socialuni.social.sdk.utils.TalkStore;
+import com.socialuni.social.sdk.utils.TalkRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -24,7 +24,7 @@ public class SocialHomeTalkQueryStore {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private TalkStore talkStore;
+    private TalkRedis talkRedis;
     @Resource
     private TalkQueryStore talkQueryStore;
 
@@ -111,7 +111,7 @@ public class SocialHomeTalkQueryStore {
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
         List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryQO.getTalkIds(), userId, postTalkUserGender,
-                minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender);
+                minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryQO.getDevId());
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

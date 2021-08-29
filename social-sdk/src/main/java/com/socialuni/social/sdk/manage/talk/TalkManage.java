@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.manage.talk;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.store.TalkQueryStore;
-import com.socialuni.social.sdk.utils.TalkStore;
+import com.socialuni.social.sdk.utils.TalkRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class TalkManage {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private TalkStore talkStore;
+    private TalkRedis talkRedis;
     @Resource
     private TalkQueryStore talkQueryStore;
 
@@ -40,7 +40,7 @@ public class TalkManage {
         //更新talk更新时间
         talk.setUpdateTime(new Date());
 
-        talk = talkStore.save(talk);
+        talk = talkRedis.save(talk);
         return talk;
     }
 }

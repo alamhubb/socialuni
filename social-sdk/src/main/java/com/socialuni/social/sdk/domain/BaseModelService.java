@@ -8,7 +8,7 @@ import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.repository.*;
-import com.socialuni.social.sdk.utils.TalkStore;
+import com.socialuni.social.sdk.utils.TalkRedis;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,12 +27,12 @@ public class BaseModelService {
     @Resource
     private ReportRepository reportRepository;
     @Resource
-    private TalkStore talkStore;
+    private TalkRedis talkRedis;
 
     public BaseModelDO save(BaseModelDO model) {
         if (model instanceof TalkDO) {
             TalkDO talkDO = (TalkDO) model;
-            return talkStore.save(talkDO);
+            return talkRedis.save(talkDO);
         } else if (model instanceof CommentDO) {
             CommentDO commentDO = (CommentDO) model;
             return commentRepository.save(commentDO);

@@ -72,5 +72,3 @@ spring:
         max-idle: 100
         # 连接池中的最小空闲连接
         min-idle: 30
-  logging:
-    file: socialuni.log

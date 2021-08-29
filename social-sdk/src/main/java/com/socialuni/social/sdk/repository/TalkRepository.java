@@ -18,11 +18,6 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
 
     //清池使用的
     TalkDO findOneBySocialuniUid(String uid);
-
-
-    TalkDO save(TalkDO talk);
-
-
     /**
      * 查询可用的全局置顶的动态，为官方置顶的动态
      *
@@ -70,11 +65,9 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagIdsAndTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds")
     @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND ((:talkVisibleGender = 'all' and tg.visible_gender = 'all') or (:mineUserGender is null or tg.visible_gender = :mineUserGender)) and tg.id in (:tagIds)")
     List<Integer> queryTalkIdsByTagIdsAndTagVisibleGender(
-            @Param("tagIds") List<Integer> tagIds,
-            @Param("talkVisibleGender") String talkVisibleGender,
-            @Param("mineUserGender") String mineUserGender);
+            @Param("tagIds") List<Integer> tagIds);
 
-    //    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
+//    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
     @Query(nativeQuery = true, value = "SELECT t.id FROM talk t " +
             "where t.global_top = 0 " +
             "and (t.status = :status)" +
@@ -141,9 +134,9 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             @Param("devId") Integer devId);
 
 
-    @Query(nativeQuery = true, value = "SELECT DISTINCT t.id FROM talk t,tag tg,talk_tag ttg,user u WHERE t.id = ttg.talk_id AND ttg.tag_id = tg.id AND t.user_id = u.id " +
+    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t,tag tg,talk_tag ttg,user u WHERE t.id = ttg.talk_id AND ttg.tag_id = tg.id AND t.user_id = u.id " +
             "and t.global_top = 0 " +
-            "and (:tagIds is null or tg.id in (:tagIds)) " +
+            "and tg.id in (:tagIds) " +
             //筛选女生、男生发布的、不筛选值为null
             "and (:talkUserGender is null or u.gender = :talkUserGender) " +
             //规则1， 动态   and   talkdovi = 'all' 或者 动态dovi = talkusergender 这个校验，有了下面就不需要校验 用户性别了
@@ -156,6 +149,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             //如果为全部，则显示全部的，和性别一致的。 如果筛选专属，则不为all，走or，则筛选的是性别一致的，所以判断没问题
             //只有全部走前面逻辑，其他都走后面的逻辑，需要为这么写，只有为全部的时候才需要判断，这俩一致，都为全部，其他情况就是展示和用户性别一致的专属动态
             "and ((:talkVisibleGender = 'all' and t.visible_gender = 'all') or (:mineUserGender is null or t.visible_gender = :mineUserGender)) " +
+            "group by t.id " +
             "order by t.update_time desc limit 1000")
     List<Integer> queryTalkIdsByCom(
             @Param("talkUserGender") String talkUserGender,
