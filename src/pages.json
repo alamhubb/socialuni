@@ -30,21 +30,6 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },
-    {
-      "path": "pages/match/match",
-      "style": {
-        "navigationBarTitleText": "匹配",
-        "enablePullDownRefresh": true,
-        "onReachBottomDistance": 800
-      }
-    },
-    {
-      "path": "pages/chat/chat",
-      "style": {
-        "navigationBarTitleText": "消息",
-        "enablePullDownRefresh": true
-      }
     }
   ],
   "subPackages": [
@@ -55,18 +40,6 @@
           "path": "web/webBrowser",
           "style": {
             "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "share/share",
-          "style": {
-            "navigationStyle": "custom",
-            "app-plus": {
-              "animationType": "fade-in",
-              "background": "transparent",
-              "backgroundColor": "rgba(0,0,0,0)",
-              "popGesture": "none"
-            }
           }
         },
         {
@@ -82,12 +55,6 @@
           }
         },
         {
-          "path": "chat/message",
-          "style": {
-            "navigationBarTitleText": "聊天"
-          }
-        },
-        {
           "path": "match/faceValueInfo",
           "style": {
             "navigationBarTitleText": "颜值评分"
@@ -97,12 +64,6 @@
           "path": "user/userAvatar",
           "style": {
             "navigationBarTitleText": "更换头像"
-          }
-        },
-        {
-          "path": "more/more",
-          "style": {
-            "navigationBarTitleText": "广告"
           }
         },
         {
