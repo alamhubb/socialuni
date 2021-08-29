@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.factory;
 
 import com.socialuni.social.entity.model.DO.HugDO;
+import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -8,6 +9,7 @@ import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQuery
 import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.social.model.model.RO.community.talk.SocialTalkTagRO;
 import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.sdk.factory.user.base.SocialContentUserROFactory;
@@ -15,6 +17,7 @@ import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.platform.AliAPI;
 import com.socialuni.social.sdk.redis.HugRedis;
 import com.socialuni.social.sdk.repository.CommentRepository;
+import com.socialuni.social.sdk.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.TalkImgDOUtils;
 import com.socialuni.social.sdk.utils.TalkUtils;
@@ -36,8 +39,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SocialTalkROFactory {
     private static CommentRepository commentRepository;
+    private static SocialTagRedis socialTagRedis;
     private static CommentDao commentDao;
     private static HugRedis hugRedis;
+
+    @Resource
+    public void setSocialTagRedis(SocialTagRedis socialTagRedis) {
+        SocialTalkROFactory.socialTagRedis = socialTagRedis;
+    }
 
     @Resource
     public void setCommentDao(CommentDao commentDao) {
@@ -149,6 +158,11 @@ public class SocialTalkROFactory {
         List<SocialCommentRO> socialCommentROS = SocialCommentROFactory.getTalkCommentROs(mineUser, talkId, showAllComment);
         socialTalkRO.setComments(socialCommentROS);
 
+        //10 毫秒
+        List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getId());
+        List<SocialTalkTagRO> tagROs = tagDOS.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
+        //50毫秒
+        socialTalkRO.setTags(tagROs);
         log.debug("结束查询comment" + new Date().getTime() / 1000);
         socialTalkRO.setUpdateTime(talkDO.getUpdateTime());
         socialTalkRO.setCommentNum(talkDO.getCommentNum());
@@ -215,11 +229,6 @@ public class SocialTalkROFactory {
         SocialTalkDistrictRO district = new SocialTalkDistrictRO(talkDO.getAdCode(), talkDO.getProvinceName(), talkDO.getCityName(), talkDO.getDistrictName());
 
         socialTalkRO.setDistrict(district);
-        //10 毫秒
-//        List<TagDO> tagDOS = TagStoreUtils.getTagsByTalkId(talkDO.getId());
-
-        //50毫秒
-//        this.tags = TalkTagBO.toVOs(TalkTagBO.tagDOToVOS(tagDOS));
 
         //如果经纬度为空
 

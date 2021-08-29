@@ -1,15 +1,16 @@
 package com.socialuni.social.sdk.service.tag;
 
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.tag.TagTypeDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.repository.TagTypeRepository;
-import com.socialuni.social.sdk.utils.TagStoreUtils;
+import com.socialuni.social.sdk.store.SocialTagRedis;
+import com.socialuni.social.sdk.utils.SocialTagStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -30,9 +31,12 @@ public class TagService {
     @Resource
     private TagRepository tagRepository;
     @Resource
-    private TagStoreUtils tagQueryRepository;
+    private SocialTagStore tagQueryRepository;
     @Resource
     private TagTypeRepository tagTypeRepository;
+
+    @Resource
+    private SocialTagRedis socialTagRedis;
 
     public List<TagDO> checkAndUpdateTagCount(UserDO user, List<Integer> tagIds, String talkOperateType, String talkGender) {
         List<TagDO> tagDOList = new ArrayList<>();
@@ -53,10 +57,9 @@ public class TagService {
             for (Integer tagId : tagIdsSet) {
                 if (!ObjectUtils.isEmpty(tagId) && tagId != 0) {
                     //查询启用的话题
-                    Optional<TagDO> optionalTagDO = tagRepository.findByIdAndStatus(tagId, ContentStatus.enable);
+                    TagDO tagDO = socialTagRedis.findTagById(tagId);
                     //如果话题存在且可用
-                    if (optionalTagDO.isPresent()) {
-                        TagDO tagDO = optionalTagDO.get();
+                    if (tagDO != null) {
                         if (!ContentStatus.enable.equals(tagDO.getStatus())) {
                             throw new SocialParamsException("引用了不可使用的话题");
                         }

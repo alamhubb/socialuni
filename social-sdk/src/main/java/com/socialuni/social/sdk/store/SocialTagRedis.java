@@ -1,16 +1,19 @@
 package com.socialuni.social.sdk.store;
 
-import com.socialuni.social.sdk.constant.CommonConst;
-import com.socialuni.social.constant.GenderType;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.sdk.factory.SocialTagROFactory;
-import com.socialuni.social.sdk.factory.SocialTagTypeROFactory;
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.tag.TagTypeDO;
-import com.socialuni.social.sdk.repository.TagRepository;
-import com.socialuni.social.sdk.repository.TagTypeRepository;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
 import com.socialuni.social.model.model.RO.community.tag.TagTypeRO;
+import com.socialuni.social.sdk.constant.CommonConst;
+import com.socialuni.social.sdk.factory.SocialTagROFactory;
+import com.socialuni.social.sdk.factory.SocialTagTypeROFactory;
+import com.socialuni.social.sdk.redis.redisKey.TagRedisKey;
+import com.socialuni.social.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.repository.TagTypeRepository;
+import com.socialuni.social.sdk.utils.SocialTagStore;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -20,15 +23,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SocialTagStore {
+public class SocialTagRedis {
     @Resource
     private TagRepository tagRepository;
     @Resource
     private TagTypeRepository tagTypeRepository;
+    @Resource
+    private SocialTagStore socialTagStore;
+
+    @Cacheable(cacheNames = TagRedisKey.tagById, key = "#tagId")
+    public TagDO findTagById(Integer tagId) {
+        return tagRepository.findByIdAndStatus(tagId, CommonStatus.enable);
+    }
+
+    @Cacheable(cacheNames = TagRedisKey.talkTagsByTalkId, key = "#talkId")
+    public List<TagDO> getTagsByTalkId(Integer talkId) {
+        List<Integer> tagIds = this.getTagIdsByTalkId(talkId);
+        return socialTagStore.findTagsByIds(tagIds);
+    }
 
     //获取talk下的
-    @Cacheable(cacheNames = "tagIdsByTalkId", key = "#talkId")
-    public List<Integer> getTagIdsByTalkId(Integer talkId) {
+    private List<Integer> getTagIdsByTalkId(Integer talkId) {
         return tagRepository.findTagIdsByTalkIdAndStatusAndShowFront(talkId, ContentStatus.enable, true);
     }
 
@@ -46,11 +61,6 @@ public class SocialTagStore {
             tagDOS = tagRepository.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, appGenderType, PageRequest.of(0, 10));
         }
         return SocialTagROFactory.tagDOToROS(tagDOS);
-    }
-
-    public List<TagRO> getHotTags(String appGenderType) {
-        //为空，或者类型错误
-        return this.getHotTagsRedis(appGenderType);
     }
 
     @Cacheable(cacheNames = "tagsAll", key = "#appGenderType")
@@ -77,18 +87,6 @@ public class SocialTagStore {
         return initTagTypes;
     }
 
-    public List<TagTypeRO> getHotTagTypes() {
-//        String appGenderType = DevAccountUtils.getAppGenderType();
-        String appGenderType = "";
-        //为空，或者类型错误
-        return this.getHotTagTypesRedis(appGenderType);
-    }
-
-
-    public List<TagTypeRO> getAllTageTypes(String appGenderType) {
-        //为空，或者类型错误
-        return this.getAllTageTypesRedis(appGenderType);
-    }
 
     @Cacheable(cacheNames = "tagTypesAll", key = "#appGenderType")
     public List<TagTypeRO> getAllTageTypesRedis(String appGenderType) {
@@ -109,7 +107,7 @@ public class SocialTagStore {
         hotTagTypeRO.setId(9999);
         hotTagTypeRO.setName("热门");
 
-        hotTagTypeRO.setTags(getHotTags(appGenderType));
+        hotTagTypeRO.setTags(getHotTagsRedis(appGenderType));
         return hotTagTypeRO;
     }
 
@@ -144,7 +142,7 @@ public class SocialTagStore {
                     tagTypeROS.add(tagTypeRO);
                 }
             } else {
-                TagTypeRO tagTypeRO =  SocialTagTypeROFactory.getTagTypeRO(tagTypeDO);
+                TagTypeRO tagTypeRO = SocialTagTypeROFactory.getTagTypeRO(tagTypeDO);
                 tagTypeRO.setTags(getTagsByTagTypeId(tagTypeDO, appGenderType));
                 tagTypeROS.add(tagTypeRO);
             }

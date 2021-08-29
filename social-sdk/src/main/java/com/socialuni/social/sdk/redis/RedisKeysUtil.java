@@ -1,5 +1,7 @@
 package com.socialuni.social.sdk.redis;
 
+import com.socialuni.social.sdk.redis.redisKey.RedisKeysConst;
+
 /**
  * redisTemplate封装
  */

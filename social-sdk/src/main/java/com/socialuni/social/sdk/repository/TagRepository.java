@@ -1,33 +1,22 @@
 package com.socialuni.social.sdk.repository;
 
 import com.socialuni.social.entity.model.DO.tag.TagDO;
-import org.springframework.cache.annotation.CachePut;
+import com.socialuni.social.sdk.redis.redisKey.TagRedisKey;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface TagRepository extends JpaRepository<TagDO, Integer> {
+    TagDO findByIdAndStatus(Integer tagId, String status);
 
-    @Caching(
-            put = {
-                    @CachePut(cacheNames = "tagById", key = "#tag.id"),
-                    @CachePut(cacheNames = "tagByName", key = "#tag.name")
-            }
-    )
-    TagDO save(TagDO tag);
-
-    @Cacheable(cacheNames = "tagById", key = "#tagId")
-    Optional<TagDO> findByIdAndStatus(Integer tagId, String status);
-
-    @Cacheable(cacheNames = "tagByName", key = "#name")
+    @Cacheable(cacheNames = TagRedisKey.tagByName, key = "#name")
     TagDO findFirstByName(String name);
 
+    @Cacheable(cacheNames = TagRedisKey.tagByDevId, key = "#devId")
     TagDO findFirstByDevId(Integer devId);
 
     @Query("select t.id from TagDO t,SocialTalkTagDO tt where t.id = tt.tagId and tt.talkId =:talkId and t.status =:status and t.showFront = :showFront")

@@ -11,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since TODO[起始版本号]
  */
 public interface TalkTagRepository extends JpaRepository<SocialTalkTagDO, Integer> {
+
+
 }
