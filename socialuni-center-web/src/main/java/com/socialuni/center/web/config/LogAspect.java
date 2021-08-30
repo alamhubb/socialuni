@@ -2,7 +2,9 @@ package com.socialuni.center.web.config;
 
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ErrorCode;
+import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
 import com.socialuni.social.entity.model.DO.RequestLogDO;
+import com.socialuni.social.sdk.utils.JpaSqlLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -79,9 +81,10 @@ public class LogAspect {
         return new StringBuffer(interfaceName).append(".").append(methodName).toString();
     }
 
-    /*@Pointcut("within(org.springframework.data.jpa.repository.JpaRepository+)")
+    @Pointcut("within(org.springframework.data.jpa.repository.JpaRepository+)")
     public void sqlRepositoryLog() {
     }
+
     @Around("sqlRepositoryLog()")
     public Object sqlRepositoryLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
         JpaSqlLogDO jpaSqlLogDO = new JpaSqlLogDO();
@@ -91,28 +94,29 @@ public class LogAspect {
         Object result = joinPoint.proceed();
 
         // 不为写入日志，才保存，写入日志为自己，如果保存会无限循环
-        if (interfaceAndMethodName.contains("Log")
-                || interfaceAndMethodName.contains("UnionId")
-        ) {
+        if (interfaceAndMethodName.contains("Log")) {
             return result;
         }
         Date endDate = new Date();
         long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
-        jpaSqlLogDO.setEndTime(endDate);
-        jpaSqlLogDO.setSpendTime(spendTime);
+        //执行时间大于1秒的，才记录
+        if (spendTime > 1000) {
+            jpaSqlLogDO.setEndTime(endDate);
+            jpaSqlLogDO.setSpendTime(spendTime);
 
-        String params = Arrays.toString(joinPoint.getArgs());
-        jpaSqlLogDO.setParams(params);
+            String params = Arrays.toString(joinPoint.getArgs());
+            jpaSqlLogDO.setParams(params);
 
-        jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
+            jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
 
-        RequestLogDO requestLogDO = RequestLogUtil.get();
-        if (requestLogDO != null) {
-            jpaSqlLogDO.setRequestId(requestLogDO.getRequestId());
+            RequestLogDO requestLogDO = RequestLogUtil.get();
+            if (requestLogDO != null) {
+                jpaSqlLogDO.setRequestId(requestLogDO.getRequestId());
+            }
+            log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
+
+            JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
         }
-        log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
-
-        JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
         return result;
-    }*/
+    }
 }
