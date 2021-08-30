@@ -1,4 +1,4 @@
-package com.socialuni.center.web.websocket;
+package com.socialuni.social.sdk.config.websocket;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

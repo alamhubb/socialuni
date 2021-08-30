@@ -1,12 +1,9 @@
-/*
-package com.socialuni.center.web.websocket;
+package com.socialuni.social.sdk.config.websocket;
 
 
-import com.qingchi.web.manage.CenterUserDetailManage;
-import com.socialuni.center.web.serive.UserService;
-import com.socialuni.sdk.model.NotifyVO;
-import com.socialuni.sdk.redis.RedisUtil;
-import com.socialuni.sdk.utils.IntegerUtils;
+import com.socialuni.social.sdk.model.NotifyVO;
+import com.socialuni.social.utils.IntegerUtils;
+import com.socialuni.social.web.sdk.config.redis.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,19 +26,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebsocketServer extends TextWebSocketHandler {
     public static final Logger logger = LoggerFactory.getLogger(WebsocketServer.class);
 
-    */
-/**
+    /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
-     *//*
-
+     */
     public static final ConcurrentHashMap<String, WebSocketSession> onlineUsersSessionMap = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, ChannelTopic> onlineUsersChannelTopicMap = new ConcurrentHashMap<>();
     public static final String onlineUsersCountKey = "onlineUsersCount";
-
-    @Resource
-    private UserService userService;
-    @Resource
-    private CenterUserDetailManage centerUserDetailManage;
 
     @Resource
     private MessageListenerAdapter messageListener;
@@ -56,11 +46,9 @@ public class WebsocketServer extends TextWebSocketHandler {
         WebsocketServer.redisUtil = redisUtil;
     }
 
-    */
-/**
+    /**
      * 广播信息
-     *//*
-
+     */
     public static void sendMessageToAllUsers(NotifyVO notify) {
         String userId = notify.getUser().getId().toString();
         for (WebSocketSession userSession : onlineUsersSessionMap.values()) {
@@ -110,7 +98,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             onlineUsersSessionMap.put(userId, session);
             onlineUsersChannelTopicMap.put(userId, channelTopic);
             if (IntegerUtils.strIsAllNumber(userId)) {
-                centerUserDetailManage.updateUserOnlineFlag(userId, true);
+//                userService.setUserOnlineTrue(userId);
             }
             logger.debug("用户标识：{}，Session：{}，在线数量：{}", userId, session.toString(), onlineUsersChannelTopicMap.size());
         }
@@ -119,8 +107,7 @@ public class WebsocketServer extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         logger.debug("收到客户端消息：{}", message.getPayload());
-        */
-/*JSONObject msgJson = JSONObject.parseObject(message.getPayload());
+        /*JSONObject msgJson = JSONObject.parseObject(message.getPayload());
         String to = msgJson.getString("to");
         String msg = msgJson.getString("msg");
         WebSocketMessage<?> webSocketMessageServer = new TextMessage("server:" + message);
@@ -133,8 +120,7 @@ public class WebsocketServer extends TextWebSocketHandler {
             }
         } catch (IOException e) {
             logger.debug("handleTextMessage method error：{}", e);
-        }*//*
-
+        }*/
     }
 
     @Override
@@ -164,7 +150,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                     subOnlineCount();
                 }
                 if (IntegerUtils.strIsAllNumber(userId)) {
-                    centerUserDetailManage.updateUserOnlineFlag(userId, true);
+//                    userService.setUserOnlineFalse(userId);
                 }
             }
             session.close();
@@ -174,15 +160,12 @@ public class WebsocketServer extends TextWebSocketHandler {
     }
 
 
-    */
-/**
+    /**
      * 广播信息
-     *//*
-
+     */
     public boolean sendMessageToAllUsers(TextMessage message) {
         boolean allSendSuccess = true;
-        */
-/*Set<String> userIds = users.keySet();
+        /*Set<String> userIds = users.keySet();
         WebSocketSession session = null;
         for (String userId : userIds) {
             try {
@@ -196,8 +179,7 @@ public class WebsocketServer extends TextWebSocketHandler {
                 logger.debug("sendMessageToAllUsers method error：{}", e);
                 allSendSuccess = false;
             }
-        }*//*
-
+        }*/
 
         return allSendSuccess;
     }
@@ -225,4 +207,4 @@ public class WebsocketServer extends TextWebSocketHandler {
         int onlineUsersCount = getOnlineCount();
         redisUtil.set(WebsocketServer.onlineUsersCountKey, Math.max(onlineUsersCount - offlineNum, 0));
     }
-}*/
+}
