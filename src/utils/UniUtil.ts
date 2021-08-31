@@ -186,6 +186,7 @@ export default class UniUtil {
                   fileName = imgFile.path
                 }
                 imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
+                imgFile.fileName = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
                 resolve(imgFiles)
               }
             })
