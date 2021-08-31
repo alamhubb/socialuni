@@ -49,6 +49,7 @@ public class SocialCosGetAuthDomain {
         // 密钥的权限列表。简单上传、表单上传和分片上传需要以下的权限，其他权限列表请看 https://cloud.tencent.com/DOcument/product/436/31923
         String[] allowActions = new String[]{
                 // 表单上传、小程序上传
+                "name/cos:PutObject",
                 "name/cos:PostObject"
         };
         config.put("allowActions", allowActions);
