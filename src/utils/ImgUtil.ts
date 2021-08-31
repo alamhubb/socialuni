@@ -97,6 +97,7 @@ export default class ImgUtil {
     let fileSuffixName = filePath.substr(filePath.lastIndexOf('/') + 1)
     fileSuffixName = fileSuffixName.substr(fileSuffixName.lastIndexOf('.') + 1)
     const fileSuffixNameAry: string[] = fileSuffixName.split('.')
+    //如果还有东西后面的就是文件名后缀
     if (fileSuffixNameAry.length > 1) {
       fileSuffixName = '.' + fileSuffixNameAry[fileSuffixNameAry.length - 1]
     } else {

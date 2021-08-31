@@ -5,6 +5,7 @@ import Alert from './Alert'
 import CosAuthRO from '@/model/cos/CosAuthRO'
 import DomFile from '@/model/DomFile'
 import UniUtil from '@/utils/UniUtil'
+const uniFileSystemManager = uni.getFileSystemManager()
 
 export default class CosUtil {
   //向cos上传图片
@@ -13,22 +14,33 @@ export default class CosUtil {
     await CosUtil.postObjectBase(imgFile, cosAuthRO, cos)
   }
 
-  private static postObjectBase (imgFile: DomFile, data: CosAuthRO, cos) {
+  private static postObjectBase(imgFile: DomFile, data: CosAuthRO, cos) {
     return new Promise<any>((resolve, reject) => {
-      cos.postObject({
-        Bucket: data.bucket,
-        Region: data.region,
-        Key: imgFile.src,
-        FilePath: imgFile.path
-      }, (err, data) => {
-        if (!err) {
-          resolve(data)
-        } else {
-          UniUtil.hideLoading()
-          Alert.error(AppMsg.uploadFailMsg)
-          reject(err)
-        }
-      })
+      uniFileSystemManager.readFile({
+        filePath: imgFile.path,
+        success: function (res) {
+          cos.putObject({
+            Bucket: data.bucket,
+            Region: data.region,
+            Key: imgFile.src,
+            Body: res.data,
+            Headers: {
+              // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 200，宽度等比压缩
+              'Pic-Operations':
+                '{"is_pic_info": 1, "rules": [{"fileid": "desample_photo.jpg", "rule": "imageMogr2/thumbnail/200x/"}]}',
+            }
+          }, (err, data) => {
+            if (!err) {
+              resolve(data)
+            } else {
+              UniUtil.hideLoading()
+              Alert.error(AppMsg.uploadFailMsg)
+              reject(err)
+            }
+          })
+        },
+        fail: (err) => console.error(err),
+      });
     })
   }
 
