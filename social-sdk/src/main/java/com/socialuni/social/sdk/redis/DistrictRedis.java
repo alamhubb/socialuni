@@ -7,8 +7,6 @@ import com.socialuni.social.sdk.constant.CommonConst;
 import com.socialuni.social.sdk.factory.SocialDistrictROFactory;
 import com.socialuni.social.sdk.repository.DistrictRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +17,6 @@ import java.util.Optional;
 
 @Component
 public class DistrictRedis {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Resource
     private DistrictRepository districtRepository;
 
@@ -62,6 +58,21 @@ public class DistrictRedis {
         return list;
     }
 
+    private List<SocialDistrictRO> recurseSetChildOnce(List<DistrictDO> districts) {
+        List<SocialDistrictRO> socialDistrictROS = new ArrayList<>();
+        //遍历转vo设置子节点
+        for (DistrictDO district : districts) {
+            SocialDistrictRO socialDistrictRO = SocialDistrictROFactory.getDistrictRO(district);
+            //如果街道为空设置子节点
+            if (StringUtils.isEmpty(district.getDistrictName())) {
+                List<DistrictDO> districtDOS = getByParentAdCode(district.getAdCode());
+                socialDistrictRO.setChilds(SocialDistrictROFactory.districtDOToVOS(districtDOS));
+            }
+            socialDistrictROS.add(socialDistrictRO);
+        }
+        return socialDistrictROS;
+    }
+
 
     //递归设置child
     private List<SocialDistrictRO> recurseSetChild(List<DistrictDO> districts) {
@@ -92,7 +103,7 @@ public class DistrictRedis {
         hotDistrict.setAdCode("999999");
         List<DistrictDO> districtDOS = districtRepository.findTop20ByDistrictCodeAndStatusOrderByCountDesc("1", CommonStatus.enable);
 
-        hotDistrict.setChilds(recurseSetChild(districtDOS));
+        hotDistrict.setChilds(recurseSetChildOnce(districtDOS));
         return hotDistrict;
     }
 

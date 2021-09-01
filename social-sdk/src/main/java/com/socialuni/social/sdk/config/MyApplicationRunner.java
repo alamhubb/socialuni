@@ -32,8 +32,9 @@ public class MyApplicationRunner implements ApplicationRunner {
         configMapRefreshService.refreshConfigMap();
         violationKeywordsService.refreshKeywords();
         List<SocialDistrictRO> hotDistricts = districtRedis.getHotDistricts();
-        List<SocialDistrictRO> allDistricts = districtRedis.getHotDistricts();
         AppData.setHotDistricts(hotDistricts);
+
+        List<SocialDistrictRO> allDistricts = districtRedis.getAllDistricts();
         AppData.setAllDistricts(allDistricts);
         //获取省，不包含子节点
     }
