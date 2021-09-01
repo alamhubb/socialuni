@@ -6,6 +6,7 @@ import UserPayResultVO from '@/model/user/UserPayResultVO'
 import UserEditVO from '@/model/user/UserEditVO'
 import UserVO from '@/model/user/UserVO'
 import ImgAddQO from '@/model/user/ImgAddQO'
+import DomFile from '@/model/DomFile'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {
@@ -28,7 +29,7 @@ export default class UserAPI {
     return http.post('user/deleteUserImg', userImg)
   }
 
-  static identityAuthAPI (userImg: ImgFileVO) {
+  static identityAuthAPI (userImg: DomFile) {
     return http.post('identity/auth', userImg)
   }
 

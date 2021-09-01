@@ -54,6 +54,8 @@ import AppMsg from '@/const/AppMsg'
 import Alert from '../../utils/Alert'
 import { userModule } from '@/store'
 import CosAPI from '@/api/CosAPI'
+import DomFile from '@/model/DomFile'
+import ImgAddQO from '@/model/user/ImgAddQO'
 
 const userStore = namespace('user')
 
@@ -67,10 +69,21 @@ const userStore = namespace('user')
 })
 export default class IdentityAuthPage extends Vue {
   @userStore.State('user') user: UserVO
-  imgFile: ImgFileVO = null
+  imgFile: DomFile = null
   authBtnDisabled = false
 
   chooseImg () {
+    /*let cosAuthRO = null
+    CosAPI.getCosAuthorizationAPI().then(res => {
+      cosAuthRO = res.data
+    })
+    const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+    const imgFile: DomFile = imgFiles[0]
+    imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+    // imgFile.src = ImgUtil.imgUrl + imgFile.cosSrc
+    const res = await Promise.all([CosUtil.postImg(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+    userModule.setUser(res[1].data)
+
     // 校验用户必须上传了照片，
     uni.chooseImage({
       sourceType: ['camera'],
@@ -78,11 +91,11 @@ export default class IdentityAuthPage extends Vue {
       // sizeType: ['compressed'],
       count: 1,
       success: (res) => {
-        this.imgFile = new ImgFileVO(res.tempFiles[0])
+        this.imgFile = new DomFile(res.tempFiles[0])
         // user/id/talk/24324.img
         this.imgFile.src = ImgUtil.getUserIdentityUploadFormat(this.user.id, this.imgFile.path)
       }
-    })
+    })*/
   }
 
   async identityAuth () {

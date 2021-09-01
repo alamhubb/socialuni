@@ -19,20 +19,20 @@ export default class WebsocketUtil {
     } else {
       token = CommonUtil.getUUID()
     }
-    uni.connectSocket({
+    /*uni.connectSocket({
       //因为app不支持header中传参
       // url: AppConfig.websocketUrl + 'imserver/' + token,
       // url: AppConfig.websocketUrl + 'webSocket/message?token=' + token,
-      /* url: CommonUtil.websocketUrl + 'webSocket/message',
+      /!* url: CommonUtil.websocketUrl + 'webSocket/message',
       header: {
         token: token
-      }, */
+      }, *!/
       complete: () => {
         console.log('完成')
       }
-    })
+    })*/
 
-    uni.onSocketOpen(() => {
+    /* uni.onSocketOpen(() => {
       console.log('打开')
 
       if (reload || WebsocketUtil.timer) {
@@ -84,10 +84,10 @@ export default class WebsocketUtil {
         // 暂不支持圈子功能，推送的时候把所有未读都推送过来，还没做，匹配成功的话在talk和match页都显示匹配成功通知？，还有阅读消息后后台也要清0
         // chatModule.pushChatAndMessagesAction(notify.chat)
       }
-    })
+    })*/
   }
 
   static websocketClose () {
-    uni.closeSocket({})
+    // uni.closeSocket({})
   }
 }

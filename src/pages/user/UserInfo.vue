@@ -343,6 +343,7 @@ import UserService from '@/service/UserService'
 import DomFile from '@/model/DomFile'
 import ImgAddQO from '@/model/user/ImgAddQO'
 import CosAPI from '@/api/CosAPI'
+import PhoneService from '@/service/PhoneService'
 
 
 const userStore = namespace('user')
@@ -375,7 +376,6 @@ export default class UserInfo extends Vue {
   followBtnDisabled = false
   hasFollowed = false
   followStatus: string = FollowStatus.follow
-  phoneBtnDisabled = false
   imgIndex = 0
   showUploadImgHint: boolean = uni.getStorageSync(Constants.showUploadImgHintKey) !== 'false'
   readonly reportContentType: string = ReportContentType.userImg
@@ -554,13 +554,6 @@ export default class UserInfo extends Vue {
     PageUtil.toIdentityAuthPage()
   }
 
-  // 微信点击按钮，获取手机号用来绑定
-  async getPhoneNumberByWx (obj: any) {
-    this.phoneBtnDisabled = true
-    await UserService.getPhoneNumberByWx(obj)
-    this.phoneBtnDisabled = false
-  }
-
   openVip () {
     PageUtil.toVipPage()
   }
@@ -614,7 +607,6 @@ export default class UserInfo extends Vue {
 
   @Watch('user')
   watchUserChange (newUser: UserVO, oldUser: UserVO) {
-    this.phoneBtnDisabled = false
     // 如果以前是null才查询
     if (!oldUser) {
       this.queryMineTalks()

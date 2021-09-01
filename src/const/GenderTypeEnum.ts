@@ -29,8 +29,8 @@ export default class GenderTypeEnum {
 }
 
 GenderTypeEnum.enums.forEach((item) => {
-  GenderTypeEnum.enum_map.set(item.value, item.label)
-  GenderTypeEnum.enum_map_label.set(item.label, item.value)
+  GenderTypeEnum.enum_map.set(item.value, item.name)
+  GenderTypeEnum.enum_map_label.set(item.name, item.value)
 })
 
 
