@@ -141,10 +141,10 @@
         </view>
 
         <!-- #ifndef MP-WEIXIN -->
-        <view class="row-col-center py-sm q-solid-bottom">
+<!--        <view class="row-col-center py-sm q-solid-bottom">
           <q-icon class="text-gray mr-xs" icon="mdi-alpha-v-circle"/>
           照片认证：
-          <!-- 为自己且未绑定-->
+          &lt;!&ndash; 为自己且未绑定&ndash;&gt;
           <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
             未认证
             <button class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
@@ -159,7 +159,7 @@
               未认证
             </view>
           </view>
-        </view>
+        </view>-->
         <!-- #endif -->
         <!--<view v-if="userProp.wxAccount" class="row-col-center q-solid-bottom">
           微信：
