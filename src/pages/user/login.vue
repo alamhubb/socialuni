@@ -47,8 +47,6 @@
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <template v-if="!user">
-                {{ loginButtonDisabled }}
-                {{ phoneFormData.authCode }}
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
                         class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
                 >
@@ -170,7 +168,7 @@ export default class LoginPage extends Vue {
 
   openTypeBtnEnable = true
 
-  showPhoneView = true
+  showPhoneView = false
 
   //同意协议
   // contractChecked = true
