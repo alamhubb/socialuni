@@ -20,4 +20,9 @@ public class SocialPhoneNumQO {
     @NotBlank
     @Length(min = 4, max = 4)
     private String authCode;
+
+    public SocialPhoneNumQO(String phoneNum, String authCode) {
+        this.phoneNum = phoneNum;
+        this.authCode = authCode;
+    }
 }
