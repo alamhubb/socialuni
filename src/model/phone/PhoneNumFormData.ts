@@ -4,16 +4,11 @@ export default class PhoneNumFormData {
   phoneNum: string = null
   authCode: string = null
 
-  constructor (phoneNum: string = '18600409559', authCode: string = null) {
-    this.phoneNum = phoneNum
-    this.authCode = authCode
+  static phoneNumberError (phoneNum) {
+    return !phoneNum || phoneNum.length !== 11 || NumberUtil.containNoNumber(phoneNum)
   }
 
-  get authCodeRight () {
-    return this.authCode && this.authCode.length === 4 && NumberUtil.isAllNumber(this.authCode)
-  }
-
-  get phoneNumberRight () {
-    return this.phoneNum && this.phoneNum.length === 11 && NumberUtil.isAllNumber(this.phoneNum)
+  static authCodeError (authCode) {
+    return !authCode || authCode.length !== 4 || NumberUtil.containNoNumber(authCode)
   }
 }

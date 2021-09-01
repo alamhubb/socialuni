@@ -10,7 +10,7 @@
       </div>
 
       <view class="mt h150px">
-        <phone-login-form v-if="showPhoneView" :phone-form-data="phoneFormData"></phone-login-form>
+        <phone-login-form v-if="showPhoneView" v-model="phoneFormData"></phone-login-form>
 
         <view v-else class="h100p row-center pb-md">
           <!--          头部-->
@@ -47,6 +47,8 @@
               <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <template v-if="!user">
+                {{ loginButtonDisabled }}
+                {{ phoneFormData.authCode }}
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
                         class="h40px cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
                 >
@@ -168,7 +170,7 @@ export default class LoginPage extends Vue {
 
   openTypeBtnEnable = true
 
-  showPhoneView = false
+  showPhoneView = true
 
   //同意协议
   // contractChecked = true
@@ -182,16 +184,15 @@ export default class LoginPage extends Vue {
   }
 
   initData () {
+    this.phoneFormData = new PhoneNumFormData()
     //不为微信则默认为验证码方式绑定
     if (this.user && !this.isMpWx) {
       this.showPhoneView = true
     }
   }
 
-
   get loginButtonDisabled () {
-    // !this.contractChecked ||
-    return !this.phoneFormData.phoneNumberRight || !this.phoneFormData.authCodeRight || !this.openTypeBtnEnable
+    return this.phoneFormData && (PhoneNumFormData.phoneNumberError(this.phoneFormData.phoneNum) || PhoneNumFormData.authCodeError(this.phoneFormData.authCode) || !this.openTypeBtnEnable)
   }
 
   goBackPage () {

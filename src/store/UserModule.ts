@@ -64,6 +64,4 @@ export default class UserModule extends VuexModule {
       userModule.setUser(res.data)
     })
   }
-
-
 }
