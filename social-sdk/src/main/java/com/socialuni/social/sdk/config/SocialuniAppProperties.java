@@ -8,5 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SocialuniAppProperties {
 
     private String staticResourceUrl;
+    private Integer systemUserId;
 
 }

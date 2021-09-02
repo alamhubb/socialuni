@@ -8,6 +8,8 @@ import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.social.sdk.config.SocialAppConfig;
+import com.socialuni.social.sdk.factory.SocialTagDOFactory;
 import com.socialuni.social.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +53,10 @@ public class DevAccountEntity {
         devAccountDO.setUpdateTime(curDate);
         devAccountDO = devAccountRepository.save(devAccountDO);
 
+
         //创建话题，还要创建用户
-        TagDO tagDO = new TagDO(1, curDevNum.toString(), "开发者对应的话题");
+        TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.systemUserId);
+        tagDO = tagRepository.save(tagDO);
         tagDO.setTagTypeId(32);
         tagDO.setDevId(devAccountDO.getId());
         tagDO = tagRepository.save(tagDO);
