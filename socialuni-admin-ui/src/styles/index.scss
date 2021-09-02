@@ -1,6 +1,203 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+@import "./transition.scss";
+@import "./element-ui.scss";
+@import "./sidebar.scss";
+@import "./theme-black.scss";
+@import "./theme-white.scss";
+@import 'qing-scss/index';
 @import '~@mdi/font/css/materialdesignicons.min.css';
-@import './base/index.scss';
 @import './app.scss';
-@import './custom.scss';
-@import './qing-scss/index.scss';
+@import './base/index.scss';
 
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, Arial, sans-serif;
+}
+
+
+//调整滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  top: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: rgba(144, 147, 153, .3);
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+// main-container global css
+.app-main {
+  padding: 20px;
+}
+
+// // logo背景色
+// .sidebar-logo-container {
+//   background: #232a32;
+// }
+.app-body {
+  .app-content {
+    padding: 20px;
+  }
+
+  .table-inline-btn {
+    width: 28px;
+    padding: 7px;
+  }
+
+  .search-table {
+    .el-table__header {
+      thead {
+        tr {
+          th:last-child {
+            padding: 0px;
+
+            .cell {
+              padding: 0px;
+              line-height: 0px;
+
+              .el-input {
+                line-height: 34px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .title-div {
+    height: 32px;
+    line-height: 32px;
+    border-bottom: 1px solid #eeeeee;
+
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  .el-dialog__body {
+    padding-top: 0px;
+  }
+
+  .search-box {
+    margin-top: 10px;
+  }
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.btn-icon {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.component-box {
+  .job-title {
+    font-size: 12px;
+    ::v-deep.el-input__inner{
+      font-size: 12px;
+    }
+  }
+  .variable-label{
+    text-indent: 10px;
+  }
+}
+
+.pannel-box {
+  ::v-deep.el-tabs__item {
+    font-weight: normal;
+    font-size: 12px;
+  }
+
+  ::v-deep.el-collapse-item__header {
+    font-size: 12px;
+  }
+
+  ::v-deep.el-form-item__label {
+    font-size: 12px;
+    color: #303133;
+    font-weight: normal;
+  }
+
+  ::v-deep.split-title {
+    font-size: 12px;
+  }
+
+  ::v-deep.el-form-item__content {
+    font-size: 12px;
+  }
+}
+
+.text-ellipsis{
+  //对超出内容隐藏
+  overflow: hidden!important;
+  //显示省略符号来代表被修剪的文本
+  text-overflow: ellipsis!important;
+  //文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。
+  white-space: nowrap!important;
+}

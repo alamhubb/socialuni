@@ -1,4 +1,4 @@
-@each $colorKey, $color in $text-colors {
+@each $colorKey, $color in $colors-font {
   .color-#{''+$colorKey+''} {
     color: $color;
   }

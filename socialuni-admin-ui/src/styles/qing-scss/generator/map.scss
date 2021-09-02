@@ -20,28 +20,6 @@ $padding-map: (
   sxl: $space-sxl,
   ssl: $space-ssl
 );
-$text-map: (
-  none: $text-none,
-  nn: $text-nn,
-  mn: $text-mn,
-  mnn: $text-mnn,
-  xs: $text-xs,
-  xss: $text-xss,
-  sm: $text-sm,
-  ssm: $text-ssm,
-  smm: $text-smm,
-  df: $text-df,
-  dff: $text-dff,
-  md: $text-md,
-  mdd: $text-mdd,
-  lg: $text-lg,
-  lgg: $text-lgg,
-  xl: $text-xl,
-  xxl: $text-xxl,
-  sl: $text-sl,
-  sxl: $text-sxl,
-  ssl: $text-ssl
-);
 
 $size-map: (
   none: none,
@@ -72,11 +50,10 @@ $direction-map: (
   r:right,
 );
 
-$border-width-map: (
-  0:0,
-  1:1px,
-  2:2px,
-  3:3px,
-  4:4px,
-  5:5px
+$direction-com-map: (
+  tl:top-left,
+  tr:top-right,
+  bl:bottom-left,
+  br:bottom-right,
 );
+

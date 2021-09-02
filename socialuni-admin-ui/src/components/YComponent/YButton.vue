@@ -1,5 +1,5 @@
 <template>
-  <el-button v-bind="$attrs" v-on="$listeners" @click="btnClick" :disabled="btnDisabled">
+  <el-button v-bind="$attrs" v-on="$listeners" @click="btnClick" :disabled="btnDisabled" :loading="btnDisabled">
     <slot></slot>
   </el-button>
 </template>
@@ -23,7 +23,7 @@ export default class YButton extends Vue {
     return this.disabled || !this.btnEnable
   }
 
-  async btnClick(e) {
+  async btnClick() {
     if (this.btnEnable) {
       this.btnEnable = false
       try {
@@ -43,8 +43,8 @@ export default class YButton extends Vue {
           }
         }
         // 只有方法正常执行完毕才会触发click
-      } finally {
         this.clickAfter()
+      } finally {
         this.btnEnable = true
       }
     }

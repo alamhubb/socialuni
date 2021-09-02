@@ -8,16 +8,23 @@
     v-bind="$attrs"
   >
     <slot/>
-    <slot name="action">
-      <y-page-footer
-        class="px-none"
-        :hide-cancel="hideCancel"
-        :hide-confirm="hideConfirm"
-        @cancel="cancelBtnClick"
-        :confirm="confirm"
-        @confirm-after="close"
-      ></y-page-footer>
-    </slot>
+    <div>
+      <slot name="action">
+        <!--   不显示确定的时候，取消按钮改名为关闭-->
+        <y-page-footer
+          v-if="reloadPageFooterFlag"
+          class="pt"
+          :hide-cancel="hideCancel"
+          :hide-confirm="hideConfirm"
+          :confirm-title="confirmTitle"
+          :cancel-title="hideConfirm?'关闭' :cancelTitle"
+          @cancel="cancelBtnClick"
+          :confirm="confirm"
+          @confirm-after="close"
+        >
+        </y-page-footer>
+      </slot>
+    </div>
   </el-dialog>
 </template>
 
@@ -32,6 +39,8 @@ export default class YDialog extends Vue {
   @Prop({ default: '', type: String }) title
   @Prop({ default: false, type: Boolean }) hideConfirm
   @Prop({ default: false, type: Boolean }) hideCancel
+  @Prop() cancelTitle
+  @Prop() confirmTitle
   @Prop({
     default: () => {
       return
@@ -39,17 +48,29 @@ export default class YDialog extends Vue {
     type: Function
   }) confirm: () => Promise<void> | Array<() => Promise<void> | any>
 
+  reloadPageFooterFlag = true
+
   showDialog = false
 
   isCustomClose = false
 
   open() {
+    // 重置按钮状态
+    this.reloadPageFooterDiv()
     this.showDialog = true
   }
 
   close() {
     this.isCustomClose = true
     this.showDialog = false
+  }
+
+  // 刷新组件，清空之前的操作
+  reloadPageFooterDiv() {
+    this.reloadPageFooterFlag = false
+    this.$nextTick(() => {
+      this.reloadPageFooterFlag = true
+    })
   }
 
   // 关闭弹窗时触发， 需要判断你是不是自定义按钮的触发，还是右上角关闭的触发，右上角关闭触发则触发取消事件

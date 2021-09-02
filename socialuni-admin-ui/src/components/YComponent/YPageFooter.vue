@@ -1,26 +1,25 @@
 <template>
-  <div class="row-between-center pd bt-grey">
-    <div>
-      <slot name="left">
+  <div class="row-between-center">
+    <div class="flex-row">
+      <slot name="actionLeft">
 
       </slot>
     </div>
-    <div>
-      <slot name="right">
-        <div class="flex-row">
-          <el-button v-show="!hideCancel" @click="cancel">
-            {{ cancelTitle }}
-          </el-button>
-          <slot name="rightCenter"></slot>
-          <y-button
-            v-show="!hideConfirm"
-            :click="confirm"
-            type="danger"
-            :disabled="disabled"
-            @click-after="confirmAfter">
-            {{ confirmTitle }}
-          </y-button>
-        </div>
+    <div class="flex-row">
+      <slot name="actionRight">
+        <el-button v-show="!hideCancel" @click="cancel">
+          {{ cancelTitle }}
+        </el-button>
+        <slot name="actionRightCenter"></slot>
+        <y-button
+          v-show="!hideConfirm"
+          :click="confirm"
+          type="primary"
+          size="small"
+          :disabled="disabled"
+          @click-after="confirmAfter">
+          {{ confirmTitle }}
+        </y-button>
       </slot>
     </div>
   </div>
