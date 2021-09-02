@@ -1,5 +1,5 @@
 <template>
-  <div class="py-smm box-shadow row-between-center px-md">
+  <div class="py-15 box-shadow row-between-center px-30">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">
         <span class="position-relative ml">
@@ -21,11 +21,11 @@
     <div>
       <!--      为员工监控显示-->
       <template v-if="currentRoutes.find(item=>item.name === 'strengthMonitoring')">
-        <el-tag closable class="mr-sm">**工程局</el-tag>
-        <el-tag closable class="mr-sm">**工程局</el-tag>
+        <el-tag closable class="mr-10">**工程局</el-tag>
+        <el-tag closable class="mr-10">**工程局</el-tag>
         <el-tag closable>**工程局</el-tag>
-        <el-divider direction="vertical" class="mx-sm" />
-        <el-select value="1" class="w120 mr-sm" size="small">
+        <el-divider direction="vertical" class="mx-10" />
+        <el-select value="1" class="w120 mr-10" size="small">
           <el-option value="1" label="北京总部" />
         </el-select>
         <el-select value="1" class="w120px" size="small">

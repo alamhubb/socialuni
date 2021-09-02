@@ -2,20 +2,20 @@
   <div
     class="row-between box-shadow px"
   >
-    <div class="flex-none row-col-center mr-lg">
+    <div class="flex-none row-col-center mr-40">
       <img src="@/assets/img/logo.jpg" class="h40" alt="logo">
-      <div class="font-lgg ml-mn mb-mn font-bold color-social">社交软件联盟</div>
+      <div class="font-30 ml-3 mb-3 font-bold color-social">社交软件联盟</div>
     </div>
 
     <div class="flex-1 row-end">
       <nav-menu class="flex-none bb-0" />
       <div class="flex-none row-col-center pointer mr">
         <el-divider direction="vertical" class="mr" />
-        <i class="mdi mdi-github font-sl" />
+        <i class="mdi mdi-github font-70" />
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
-          <el-tag class="mr-sm" type="warning" effect="dark">内测账号</el-tag>
+          <el-tag class="mr-10" type="warning" effect="dark">内测账号</el-tag>
           <el-dropdown>
             <div>
               <el-avatar shape="square" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png" />

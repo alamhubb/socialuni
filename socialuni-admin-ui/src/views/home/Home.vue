@@ -20,11 +20,11 @@
                 v-clipboard:copy="user.secretKey"
                 :disabled="!user.secretKey"
                 type="text"
-                class="mr-sm"
+                class="mr-10"
                 @click="copySecretKey"
               >复制秘钥
               </el-button>
-              <el-button type="text" class="mr-sm" @click="getSecretKey">重置</el-button>
+              <el-button type="text" class="mr-10" @click="getSecretKey">重置</el-button>
 
               <el-tooltip content="出于安全考虑，开发者秘钥不被明文保存，忘记密钥请重置" placement="bottom" effect="light">
                 <i class="el-icon-question color-grey pointer" />
@@ -33,7 +33,7 @@
           </div>
 
         </el-form-item>
-        <!--<el-form-item label="开发者类型">
+        <el-form-item label="开发者类型">
           <el-radio-group v-model="user.type" :disabled="disabledEdit">
             <el-radio border :label="UserType.company">企业</el-radio>
             <el-radio border :label="UserType.person">个人</el-radio>
@@ -45,11 +45,11 @@
           </div>
         </el-form-item>
         <el-form-item :label="userTypeLabel">
-          <el-input v-model="user.realName" :readonly="disabledEdit"/>
+          <el-input v-model="user.realName" :readonly="disabledEdit" />
         </el-form-item>
         <el-form-item :label="userTypeLabel">
-          <el-input v-model="user.realName"/>
-        </el-form-item>-->
+          <el-input v-model="user.realName" />
+        </el-form-item>
 
       </el-form>
     </el-card>

@@ -50,12 +50,12 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-scroll mt-xs pr-sm">
-      <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-xs">
+    <div class="flex-1 overflow-scroll mt-5 pr-10">
+      <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-5">
         <div class="text-ellipsis">
           <template v-if="file.fileType===$const.UploadFileType.folder">
             <i class="el-icon-folder-opened" />
-            {{ file.name }} <span class="ml-sm">(文件数量：{{ file.files.length }})</span>
+            {{ file.name }} <span class="ml-10">(文件数量：{{ file.files.length }})</span>
           </template>
           <template v-else>
             <i class="el-icon-document" />

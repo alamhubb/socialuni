@@ -4,7 +4,7 @@
       <div class="row-center">
         <!-- <div class="system_title_2">数据创建像搭积木一样简单</div> -->
         <!--        <h6 class="system_desc">缩短了您与数据的距离,真正实现了数据的触手可及。同时也提供了命令行工具，方便您将算法嵌入到自己的工程中。</h6>-->
-        <div class="font-xl font-bold color-social">欢迎加入 - 社交软件联盟</div>
+        <div class="font-50 font-bold color-social">欢迎加入 - 社交软件联盟</div>
       </div>
       <div class="mt w300">
         <el-form
@@ -53,8 +53,8 @@
             </div>
           </el-form-item>
 
-          <div class="mt-md">
-            <el-checkbox v-model="contractChecked" class="mb-xs">
+          <div class="mt-30">
+            <el-checkbox v-model="contractChecked" class="mb-5">
               <span class="color-black">我已阅读并同意</span>
             </el-checkbox>
             <a href="https://www.qingchi1.com/agreement" class="color-blue">
