@@ -1,5 +1,5 @@
 <template>
-  <el-button size="mini" v-clipboard:copy="text" v-clipboard:success="onCopy">复制</el-button>
+  <el-button v-clipboard:copy="text" v-clipboard:success="onCopy" size="mini">复制</el-button>
 </template>
 
 <script lang="ts">

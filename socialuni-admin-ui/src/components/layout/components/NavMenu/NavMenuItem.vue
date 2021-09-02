@@ -15,16 +15,16 @@
         <el-menu-item
           :index="resolvePath(onlyShowRoute.path)"
         >
-<!--            <img v-if="onlyShowRoute.meta.icon" class="mr-sm" :src="require('@/assets/img/navMenu/router/'+onlyShowRoute.meta.icon+'.png')">-->
-            {{ onlyShowRoute.meta.title }}
+          <!--            <img v-if="onlyShowRoute.meta.icon" class="mr-sm" :src="require('@/assets/img/navMenu/router/'+onlyShowRoute.meta.icon+'.png')">-->
+          {{ onlyShowRoute.meta.title }}
         </el-menu-item>
       </app-link>
     </template>
     <el-submenu v-else ref="subMenu" :index="resolvePath(route.path)" popper-append-to-body>
       <template slot="title">
         <div class="row-col-center">
-<!--          <img v-if="route.meta.icon" class="mr-sm" :src="require('@/assets/img/navMenu/router/'+route.meta.icon+'.png')">-->
-<!--          <span class="pr-md">{{ route.meta.title }}</span>-->
+          <!--          <img v-if="route.meta.icon" class="mr-sm" :src="require('@/assets/img/navMenu/router/'+route.meta.icon+'.png')">-->
+          <!--          <span class="pr-md">{{ route.meta.title }}</span>-->
         </div>
       </template>
 

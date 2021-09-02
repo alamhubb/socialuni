@@ -1,9 +1,9 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100p flex-col">
-    <nav-bar></nav-bar>
+    <nav-bar />
     <div class="flex-row flex-1">
-      <app-main class="flex-1"></app-main>
+      <app-main class="flex-1" />
     </div>
   </div>
 </template>

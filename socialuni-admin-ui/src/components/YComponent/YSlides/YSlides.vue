@@ -1,12 +1,12 @@
 <template>
   <div ref="rightBox" class="overflow-auto" @scroll="rightBoxScroll">
     <div
-        v-for="(item,index) in data"
-        ref="slides"
-        :key="index"
-        :style="{'min-height': index === data.length - 1 ? rightLastHeightPx : ''}"
+      v-for="(item,index) in data"
+      ref="slides"
+      :key="index"
+      :style="{'min-height': index === data.length - 1 ? rightLastHeightPx : ''}"
     >
-      <slot name="default" :item="item"/>
+      <slot name="default" :item="item" />
     </div>
   </div>
 </template>

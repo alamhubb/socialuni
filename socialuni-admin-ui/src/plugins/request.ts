@@ -6,13 +6,13 @@ import MsgUtil from '@/utils/MsgUtil'
 import { userModule } from '@/store'
 
 // create an axios instance
-const http = Axios.create({
+const request = Axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 3000 // request timeout
 })
 // request interceptor
-http.interceptors.request.use(
+request.interceptors.request.use(
   config => {
     const token = TokenUtil.get()
     if (token) {
@@ -29,7 +29,7 @@ http.interceptors.request.use(
 )
 
 // response interceptor
-http.interceptors.response.use(
+request.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
@@ -124,4 +124,4 @@ http.interceptors.response.use(
   }
 )
 
-export default http
+export default request

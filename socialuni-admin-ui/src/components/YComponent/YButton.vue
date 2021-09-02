@@ -1,6 +1,6 @@
 <template>
-  <el-button v-bind="$attrs" v-on="$listeners" @click="btnClick" :disabled="btnDisabled" :loading="btnDisabled">
-    <slot></slot>
+  <el-button v-bind="$attrs" :disabled="btnDisabled" :loading="btnDisabled" v-on="$listeners" @click="btnClick">
+    <slot />
   </el-button>
 </template>
 

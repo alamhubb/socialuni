@@ -1,11 +1,11 @@
-import http from '@/plugins/http'
+import request from '@/plugins/request'
 
 export default class UserAPI {
   static getUserAPI() {
-    return http.post('user/getUser')
+    return request.post('user/getUser')
   }
 
   static resetSecretKeyAPI() {
-    return http.post('user/resetSecretKey')
+    return request.post('user/resetSecretKey')
   }
 }

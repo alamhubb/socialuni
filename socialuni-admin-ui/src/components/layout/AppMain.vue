@@ -2,7 +2,7 @@
   <!--  此层div必须要有，否则样式会加到页面上-->
   <div>
     <transition name="fade-transform" mode="out-in">
-      <router-view :key="$route.path"/>
+      <router-view :key="$route.path" />
     </transition>
   </div>
 </template>

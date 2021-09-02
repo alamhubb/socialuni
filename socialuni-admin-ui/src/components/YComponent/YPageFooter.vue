@@ -1,23 +1,22 @@
 <template>
   <div class="row-between-center">
     <div class="flex-row">
-      <slot name="actionLeft">
-
-      </slot>
+      <slot name="actionLeft" />
     </div>
     <div class="flex-row">
       <slot name="actionRight">
         <el-button v-show="!hideCancel" @click="cancel">
           {{ cancelTitle }}
         </el-button>
-        <slot name="actionRightCenter"></slot>
+        <slot name="actionRightCenter" />
         <y-button
           v-show="!hideConfirm"
           :click="confirm"
           type="primary"
           size="small"
           :disabled="disabled"
-          @click-after="confirmAfter">
+          @click-after="confirmAfter"
+        >
           {{ confirmTitle }}
         </y-button>
       </slot>

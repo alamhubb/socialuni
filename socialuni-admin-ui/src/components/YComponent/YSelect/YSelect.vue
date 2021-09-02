@@ -1,5 +1,5 @@
 <template>
-  <el-select ref="select" size="small" :value="model" :placeholder="hint" v-bind="$attrs" @change="change" filterable>
+  <el-select ref="select" size="small" :value="model" :placeholder="hint" v-bind="$attrs" filterable @change="change">
     <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
     <el-option
       v-for="item in optionsGet"

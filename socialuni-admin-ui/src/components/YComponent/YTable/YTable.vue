@@ -10,8 +10,8 @@
     @row-click="rowClick"
     @selection-change="tableSelectionChange"
   >
-    <el-table-column v-if="selection" type="selection"/>
-    <el-table-column v-if="index" type="index"/>
+    <el-table-column v-if="selection" type="selection" />
+    <el-table-column v-if="index" type="index" />
     <el-table-column v-if="checked" width="50">
       <!--      不加scope不起作用-->
       <template slot="header" slot-scope="scope">
@@ -30,7 +30,7 @@
         />
       </template>
     </el-table-column>
-    <slot/>
+    <slot />
   </el-table>
 </template>
 

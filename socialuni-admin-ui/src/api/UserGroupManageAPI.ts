@@ -1,13 +1,13 @@
-import http from '@/plugins/http'
+import request from '@/plugins/request'
 import { Message } from 'element-ui'
 
 export default class UserGroupManageAPI {
   static queryUserGroups() {
-    return http.get('GroupController/list')
+    return request.get('GroupController/list')
   }
 
   static setStaffGroupRoleAPI(groupId: number, roleId: number) {
-    return http.post('GroupController/setWeightRole?groupId=' + groupId +
+    return request.post('GroupController/setWeightRole?groupId=' + groupId +
         '&roleId=' + roleId
     ).then(() => {
       Message.success('设置成功')

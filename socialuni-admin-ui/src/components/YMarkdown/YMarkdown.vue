@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :id="htmlId"></div>
+    <div :id="htmlId" />
   </div>
 </template>
 
@@ -59,8 +59,8 @@ export default class YMarkdown extends Vue {
     const container = document.getElementById(this.htmlId)
 
     new Vue({
-      components: { YMarkdownCopy },
       el: container,
+      components: { YMarkdownCopy },
       template: htmlT
     })
   }

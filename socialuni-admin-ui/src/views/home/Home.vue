@@ -63,7 +63,6 @@ import { namespace } from 'vuex-class'
 import UserType from '@/constants/UserType'
 import { OperationType } from '@/constants/OperationType'
 import ToastUtil from '@/utils/ToastUtil'
-import { Alert } from 'element-ui'
 import AlertUtil from '@/utils/AlertUtil'
 import UserAPI from '@/api/UserAPI'
 

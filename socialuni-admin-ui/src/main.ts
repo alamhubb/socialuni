@@ -17,7 +17,7 @@ Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
 
-/*echarts.registerTheme('default', {
+/* echarts.registerTheme('default', {
     color: ColorUtil.echarts_colors
 })
 
@@ -27,11 +27,10 @@ echarts.registerTheme('troopRotation', {
 
 Vue.prototype.$echarts = echarts
 
-
 // register global utility filters.
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount('#app')

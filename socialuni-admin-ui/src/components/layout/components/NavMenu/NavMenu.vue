@@ -3,10 +3,10 @@
     <!--      mode="horizontal"-->
     <!--    如果router没有子节点，或者仅仅有一个展示的子节点，或者总是展示-->
     <nav-menu-item
-        v-for="route in routes"
-        :key="route.path"
-        :route="route"
-        :base-path="route.path"
+      v-for="route in routes"
+      :key="route.path"
+      :route="route"
+      :base-path="route.path"
     />
   </el-menu>
 </template>
