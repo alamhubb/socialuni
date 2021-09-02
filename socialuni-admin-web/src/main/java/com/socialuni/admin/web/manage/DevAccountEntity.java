@@ -55,7 +55,7 @@ public class DevAccountEntity {
 
 
         //创建话题，还要创建用户
-        TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.systemUserId);
+        TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
         tagDO = tagRepository.save(tagDO);
         tagDO.setTagTypeId(32);
         tagDO.setDevId(devAccountDO.getId());

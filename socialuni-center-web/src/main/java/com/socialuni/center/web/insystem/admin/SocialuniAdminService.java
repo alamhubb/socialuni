@@ -25,7 +25,7 @@ public class SocialuniAdminService {
         devAccount.setId(null);
         DevAccountDO devAccountDO = devAccountRepository.save(devAccount);
         //创建话题，还要创建用户
-        TagDO tagDO = SocialTagDOFactory.toTagDO(devAccountDO.getDevNum().toString(), "开发者对应的话题", SocialAppConfig.systemUserId);
+        TagDO tagDO = SocialTagDOFactory.toTagDO(devAccountDO.getDevNum().toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
         tagDO.setDevId(devAccountDO.getId());
         tagDO.setTagTypeId(32);
         tagDO = tagRepository.save(tagDO);

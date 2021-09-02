@@ -18,10 +18,10 @@ public class SocialTalkImgROFactory {
         SocialTalkImgRO socialTalkImgRO = new SocialTalkImgRO();
         socialTalkImgRO.setId(socialTalkImgDO.getId());
         //为空则异常
-        if (StringUtils.isEmpty(SocialAppConfig.staticResourceUrl)) {
+        if (StringUtils.isEmpty(SocialAppConfig.getStaticResourceUrl())) {
             throw new SocialParamsException("图片路径错误异常");
         }
-        socialTalkImgRO.setSrc(SocialAppConfig.staticResourceUrl + "/" + socialTalkImgDO.getSrc());
+        socialTalkImgRO.setSrc(SocialAppConfig.getStaticResourceUrl() + "/" + socialTalkImgDO.getSrc());
         socialTalkImgRO.setAspectRatio(socialTalkImgDO.getAspectRatio());
         return socialTalkImgRO;
     }

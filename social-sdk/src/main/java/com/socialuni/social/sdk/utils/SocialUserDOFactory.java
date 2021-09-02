@@ -25,7 +25,7 @@ public class SocialUserDOFactory {
     public static UserDO newUserByPhoneLogin() {
         UserDO user = new UserDO();
         user.setNickname("未命名");
-        user.setAvatar(SocialAppConfig.userDefaultAvatar);
+        user.setAvatar(SocialAppConfig.getUserDefaultAvatar());
         user.setGender(GenderType.girl);
         user.setAge(CommonConst.defaultAge);
         user.setBirthday(BirthdayAgeUtil.getYearBirthDateByAge(user.getAge()));

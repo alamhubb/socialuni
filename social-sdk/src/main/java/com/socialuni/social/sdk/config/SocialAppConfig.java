@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SocialAppConfig {
-    public static String userDefaultAvatar;
-    public static Integer systemUserId;
-    public static String staticResourceUrl;
+    private static String userDefaultAvatar;
+    private static Integer systemUserId;
+    private static String staticResourceUrl;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
 
@@ -27,7 +27,19 @@ public class SocialAppConfig {
     }
 
     @Value("${socialuni.app.system-user-id}")
-    public static void setSystemUserId(Integer systemUserId) {
+    public void setSystemUserId(Integer systemUserId) {
         SocialAppConfig.systemUserId = systemUserId;
+    }
+
+    public static String getUserDefaultAvatar() {
+        return userDefaultAvatar;
+    }
+
+    public static Integer getSystemUserId() {
+        return systemUserId;
+    }
+
+    public static String getStaticResourceUrl() {
+        return staticResourceUrl;
     }
 }
