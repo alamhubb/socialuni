@@ -2,8 +2,8 @@ package com.socialuni.admin.web.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ErrorCode;
-import com.socialuni.social.constant.ErrorType;
+import com.socialuni.social.exception.constant.ErrorCode;
+import com.socialuni.social.exception.constant.ErrorType;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.socialuni.center.web.exception;
 
-import com.socialuni.social.constant.ErrorCode;
+import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.base.SocialWarnException;
 
 public class SocialNullDevAccountException extends SocialWarnException {

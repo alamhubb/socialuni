@@ -48,8 +48,6 @@ public class DevAccountEntity {
         devAccountDO.setSecretKey(UUIDUtil.getUUID());
         devAccountDO.setAppGenderType(GenderType.all);
         devAccountDO.setDevNum(curDevNum);
-        devAccountDO.setRealName(phoneNum);
-        devAccountDO.setAppName(phoneNum);
         devAccountDO.setType(AdminUserType.company);
         devAccountDO.setStatus(StatusConst.enable);
         devAccountDO.setCreateTime(curDate);

@@ -4,7 +4,6 @@ import com.socialuni.center.sdk.constant.SocialuniSupportProviderType;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.entity.model.DevAccountProviderDO;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,20 +44,16 @@ public class DevUserRO {
         this.secretKey = devAccountDO.getSecretKey().substring(0, 5) + "*****************";
 
         for (String supportProviderType : SocialuniSupportProviderType.supportProviderTypes) {
-            if (SocialuniSupportProviderType.wx.equals(supportProviderType)){
-                DevAccountProviderDO wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDO(devAccountDO.getId(), supportProviderType);
-                if (wxDevAccountProviderDO != null) {
+            DevAccountProviderDO wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByDevAndMpType(devAccountDO.getId(), supportProviderType);
+            if (wxDevAccountProviderDO != null) {
+                if (SocialuniSupportProviderType.wx.equals(supportProviderType)) {
                     this.wxMpAppId = wxDevAccountProviderDO.getAppId();
                     this.wxMpAppName = wxDevAccountProviderDO.getAppName();
-                }
-            }else if (SocialuniSupportProviderType.qq.equals(supportProviderType)){
-                DevAccountProviderDO wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDO(devAccountDO.getId(), supportProviderType);
-                if (wxDevAccountProviderDO != null) {
+                } else if (SocialuniSupportProviderType.qq.equals(supportProviderType)) {
                     this.qqMpAppId = wxDevAccountProviderDO.getAppId();
                     this.qqMpAppName = wxDevAccountProviderDO.getAppName();
                 }
             }
-
         }
     }
 }

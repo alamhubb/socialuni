@@ -2,8 +2,8 @@ package com.socialuni.social.web.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ErrorCode;
-import com.socialuni.social.constant.ErrorType;
+import com.socialuni.social.exception.constant.ErrorCode;
+import com.socialuni.social.exception.constant.ErrorType;
 import com.socialuni.social.entity.model.DO.RequestLogDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.base.SocialException;

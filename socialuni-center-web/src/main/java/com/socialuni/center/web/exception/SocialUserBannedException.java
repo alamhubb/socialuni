@@ -1,7 +1,7 @@
 package com.socialuni.center.web.exception;
 
 import com.socialuni.center.web.utils.ErrorMsgUtil;
-import com.socialuni.social.constant.ErrorCode;
+import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.base.SocialInfoException;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 

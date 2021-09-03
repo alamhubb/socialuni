@@ -75,8 +75,13 @@ public class DevAccountUtils {
     }
 
     //mock登录时使用
-    public static DevAccountProviderDO getDevAccountProviderDO(Integer devId, String mpType) {
-        DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByDevIdAndMpTypeAndStatus(devId, mpType, ConstStatus.enable);
+    public static DevAccountProviderDO getDevAccountProviderDOByDevAndMpType(Integer devId, String mpType) {
+        DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByDevIdAndMpType(devId, mpType);
+        return devAccountProviderDO;
+    }
+
+    public static DevAccountProviderDO getDevAccountProviderDOByAppIdAndMpType(String appId, String mpType) {
+        DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByAppIdAndMpType(appId, mpType);
         return devAccountProviderDO;
     }
 

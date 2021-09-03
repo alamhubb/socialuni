@@ -1,4 +1,4 @@
-package com.socialuni.social.constant;
+package com.socialuni.social.exception.constant;
 
 
 /**

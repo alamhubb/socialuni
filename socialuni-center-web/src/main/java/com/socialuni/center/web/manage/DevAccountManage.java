@@ -5,13 +5,11 @@ import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.entity.model.DevAccountProviderDO;
-import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Optional;
 
 @Service
 public class DevAccountManage {
@@ -21,7 +19,7 @@ public class DevAccountManage {
     DevAccountRepository devAccountRepository;
 
     public DevAccountDO checkApplyAuthQO(OAuthUserInfoQO authVO) {
-        DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findFirstByAppIdAndMpType(authVO.getAppId(), authVO.getMpType());
+        DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByAppIdAndMpType(authVO.getAppId(), authVO.getMpType());
 //        Optional<DevAccountProviderDO> devAccountProviderDOOptional = devAccountProviderRepository.findFirstByAppIdAndMpTypeAndStatus(authVO.getAppId(), authVO.getMpType(), CommonStatus.enable);
         if (devAccountProviderDO == null) {
             throw new SocialBusinessException("应用未注册社交联盟开发者");

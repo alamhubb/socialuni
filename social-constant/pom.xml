@@ -13,8 +13,14 @@
         <groupId>com.socialuni</groupId>
         <artifactId>socialuni-parent</artifactId>
         <version>0.1.0</version>
-
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-exception</artifactId>
+        </dependency>
+    </dependencies>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

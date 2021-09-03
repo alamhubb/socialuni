@@ -1,6 +1,6 @@
 package com.socialuni.social.exception;
 
-import com.socialuni.social.constant.ErrorCode;
+import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.base.SocialWarnException;
 
 //逻辑可能有问题，或者被突破，预见了但不应该
