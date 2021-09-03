@@ -81,13 +81,13 @@ uniapp chat Community Dating Social app
   <tbody>
   <tr>
       <td align="center" valign="middle">
-        <img width="222px" src="https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/static/wxcode.png">
+        <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/wxcode.png">
       </td>
       <td align="center" valign="middle">
-        <img width="222px" src="https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/home/qingchiwxcode.jpg!thumbnail">
+        <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/qingchiwxcode.jpg!thumbnail">
       </td>
       <td align="center" valign="middle">
-         <img width="222px" src="https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/home/qingchiqqcode.png!thumbnail">
+         <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/qingchiqqcode.png!thumbnail">
       </td>
     </tr>
   <tr></tr>

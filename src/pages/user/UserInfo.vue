@@ -14,7 +14,7 @@
         </swiper>
         <image v-else class="sizeUserImg" @click="showBottomMenuClick(0)"
                mode="aspectFill"
-               src="https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/static/uploadimgmini.png"
+               src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"
         ></image>
         <view v-if="showUploadImgHint && imgUrls.length" class="row-col-center bg-orange">
           <view class="flex-auto flex-row px">
