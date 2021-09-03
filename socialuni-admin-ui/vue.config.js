@@ -7,7 +7,7 @@ module.exports = {
     disableHostCheck: true,
     // 防止控制台报错 localhost:8080无法连接
     host: '0.0.0.0',
-    port: 8032,
+    port: 8031,
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy

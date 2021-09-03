@@ -4,14 +4,14 @@
   >
     <div class="flex-none row-col-center mr-40">
       <img src="@/assets/img/logo.jpg" class="h40" alt="logo">
-      <div class="font-30 ml-3 mb-3 font-bold color-social">社交软件联盟</div>
+      <div class="font-19 ml-3 mb-1 font-bold color-social">社交软件联盟</div>
     </div>
 
     <div class="flex-1 row-end">
       <nav-menu class="flex-none bb-0" />
       <div class="flex-none row-col-center pointer mr">
         <el-divider direction="vertical" class="mr" />
-        <i class="mdi mdi-github font-70" />
+        <i class="mdi mdi-github font-30" />
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">

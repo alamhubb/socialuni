@@ -1,6 +1,6 @@
 <template>
   <div class="h50 box-shadow row-col-center">
-    <div class="text-40 text-bold w200 row-center">
+    <div class="text-18 text-bold w200 row-center">
       yoyo-ui
     </div>
     <el-breadcrumb separator-class="el-icon-arrow-right">

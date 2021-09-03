@@ -25,8 +25,17 @@
   border-bottom-width: 0 !important;
 }
 
+.bd-dashed {
+  border: $border-base;
+  border-style: dashed !important;
+}
+
 @each $directionKey, $directionValue in $direction-map {
   .b#{''+$directionKey+''}-none {
+    border-#{''+$directionValue+''}-width: 0 !important;
+  }
+
+  .b#{''+$directionKey+''}-0 {
     border-#{''+$directionValue+''}-width: 0 !important;
   }
 }
@@ -107,9 +116,4 @@
       border-#{''+$directionValue}radius: #{''+$index}px !important;
     }
   }
-}
-
-.bd-dashed {
-  border: $border-base;
-  border-style: dashed !important;
 }
