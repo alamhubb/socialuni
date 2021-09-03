@@ -32,6 +32,7 @@
         <module>socialuni-utils</module>
         <module>socialuni-entity</module>
         <module>socialuni-center-web</module>
+        <module>socialuni-center-sdk</module>
         <module>socialuni-admin-web</module>
         <module>cloud-service</module>
     </modules>
@@ -92,6 +93,11 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-api</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-center-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

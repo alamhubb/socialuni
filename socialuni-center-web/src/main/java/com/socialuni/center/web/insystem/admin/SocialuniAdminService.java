@@ -1,6 +1,6 @@
 package com.socialuni.center.web.insystem.admin;
 
-import com.socialuni.center.web.repository.DevAccountRepository;
+import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.sdk.config.SocialAppConfig;

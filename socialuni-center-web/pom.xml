@@ -27,12 +27,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
-        <!--<dependency>
-            <groupId>com.socialuni.center</groupId>
-            <artifactId>socialuni-center-sdk</artifactId>
-            <version>0.1.0</version>
-        </dependency>-->
-
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>social-sdk</artifactId>
@@ -45,6 +39,12 @@
             <groupId>com.socialuni</groupId>
             <artifactId>socialuni-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>socialuni-center-sdk</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

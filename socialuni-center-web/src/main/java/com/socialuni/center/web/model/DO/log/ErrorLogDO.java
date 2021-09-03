@@ -2,7 +2,7 @@ package com.socialuni.center.web.model.DO.log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.center.web.repository.log.ErrorLogRepository;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.ErrorLogUtils;
 import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;

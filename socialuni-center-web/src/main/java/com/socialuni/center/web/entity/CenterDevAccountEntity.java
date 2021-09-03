@@ -1,6 +1,6 @@
 package com.socialuni.center.web.entity;
 
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;

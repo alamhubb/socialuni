@@ -2,7 +2,7 @@ package com.socialuni.center.web.serive;
 
 
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.HomeSwiperDO;
@@ -15,7 +15,6 @@ import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.sdk.repository.HomeSwiperRepository;
 import com.socialuni.social.sdk.service.SocialFrontLogDomain;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

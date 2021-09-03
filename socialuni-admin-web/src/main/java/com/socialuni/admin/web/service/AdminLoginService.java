@@ -1,13 +1,13 @@
 package com.socialuni.admin.web.service;
 
 
-import com.socialuni.admin.web.repository.DevAccountRepository;
 import com.socialuni.admin.web.controller.DevUserRO;
 import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.admin.web.model.DO.DevTokenDO;
-import com.socialuni.admin.web.repository.DevTokenRepository;
+import com.socialuni.entity.model.DevTokenDO;
+import com.socialuni.center.sdk.repository.DevTokenRepository;
 import com.socialuni.api.feignAPI.insystem.SocialuniAdminAPI;
+import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;

@@ -22,6 +22,12 @@
             <groupId>com.socialuni</groupId>
             <artifactId>socialuni-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>socialuni-center-sdk</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>social-sdk</artifactId>

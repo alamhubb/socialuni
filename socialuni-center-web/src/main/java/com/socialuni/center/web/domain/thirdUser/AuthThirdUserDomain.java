@@ -2,16 +2,12 @@ package com.socialuni.center.web.domain.thirdUser;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
-import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
-import com.socialuni.center.web.factory.RO.user.CenterUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

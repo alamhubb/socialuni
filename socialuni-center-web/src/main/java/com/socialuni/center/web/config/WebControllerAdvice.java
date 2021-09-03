@@ -2,7 +2,7 @@ package com.socialuni.center.web.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ErrorCode;
 import com.socialuni.social.constant.ErrorType;

@@ -2,8 +2,9 @@ package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.constant.AdminAppConfigConst;
 import com.socialuni.admin.web.constant.AdminUserType;
-import com.socialuni.admin.web.repository.DevAccountRepository;
 import com.socialuni.admin.web.repository.TagRepository;
+import com.socialuni.center.sdk.redis.DevAccountRedis;
+import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;
@@ -25,6 +26,8 @@ import java.util.Optional;
 public class DevAccountEntity {
     @Resource
     private DevAccountRepository devAccountRepository;
+    @Resource
+    private DevAccountRedis devAccountRedis;
     @Resource
     private TagRepository tagRepository;
 
@@ -51,7 +54,7 @@ public class DevAccountEntity {
         devAccountDO.setStatus(StatusConst.enable);
         devAccountDO.setCreateTime(curDate);
         devAccountDO.setUpdateTime(curDate);
-        devAccountDO = devAccountRepository.save(devAccountDO);
+        devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
 
 
         //创建话题，还要创建用户

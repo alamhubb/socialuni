@@ -5,7 +5,7 @@ import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.config.SocialAppConfig;

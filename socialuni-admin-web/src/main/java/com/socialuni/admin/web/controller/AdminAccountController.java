@@ -1,8 +1,8 @@
 package com.socialuni.admin.web.controller;
 
 
-import com.socialuni.admin.web.repository.DevAccountRepository;
-import com.socialuni.admin.web.utils.DevUserUtil;
+import com.socialuni.center.sdk.redis.DevAccountRedis;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.utils.UUIDUtil;
@@ -17,13 +17,12 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("user")
 public class AdminAccountController {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountRedis devAccountRedis;
 
     @PostMapping("getUser")
     public ResultRO<DevUserRO> getUser() {
-        DevAccountDO user = DevUserUtil.getDevAccount();
+        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
         DevUserRO devUserRO = new DevUserRO(user);
         //则更新用户手机号
         return new ResultRO<>(devUserRO);
@@ -31,10 +30,10 @@ public class AdminAccountController {
 
     @PostMapping("resetSecretKey")
     public ResultRO<String> resetSecretKey() {
-        DevAccountDO user = DevUserUtil.getDevAccount();
+        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
         String secretKey = UUIDUtil.getUUID();
         user.setSecretKey(secretKey);
-        devAccountRepository.save(user);
+        devAccountRedis.saveDevAccount(user);
         ResultRO<String> ResultRO = new ResultRO<>();
         ResultRO.setData(secretKey);
         //则更新用户手机号

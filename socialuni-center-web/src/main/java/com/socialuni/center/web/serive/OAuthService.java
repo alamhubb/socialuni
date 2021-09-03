@@ -3,7 +3,7 @@ package com.socialuni.center.web.serive;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;

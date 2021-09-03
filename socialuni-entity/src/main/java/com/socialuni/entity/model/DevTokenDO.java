@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.model.DO;
+package com.socialuni.entity.model;
 
 import lombok.Data;
 
@@ -18,16 +18,16 @@ public class DevTokenDO {
 
     private String tokenCode;
 
-    private Integer userId;
+    private Integer devId;
 
     private Date createDate;
 
     public DevTokenDO() {
     }
 
-    public DevTokenDO(String tokenCode, Integer userId) {
+    public DevTokenDO(String tokenCode, Integer devId) {
         this.tokenCode = tokenCode;
-        this.userId = userId;
+        this.devId = devId;
         this.createDate = new Date();
     }
 }

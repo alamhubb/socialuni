@@ -1,7 +1,7 @@
 package com.socialuni.center.web.insystem.admin;
 
 import com.socialuni.api.feignAPI.insystem.SocialuniAdminAPI;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
