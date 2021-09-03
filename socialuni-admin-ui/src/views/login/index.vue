@@ -1,6 +1,6 @@
 <template>
   <div class="h100p row-all-center">
-    <div class="pb-10p">
+    <div class="pb-5p">
       <div class="row-center">
         <!-- <div class="system_title_2">数据创建像搭积木一样简单</div> -->
         <!--        <h6 class="system_desc">缩短了您与数据的距离,真正实现了数据的触手可及。同时也提供了命令行工具，方便您将算法嵌入到自己的工程中。</h6>-->

@@ -6,13 +6,13 @@ import '@/plugins/router/interceptor'
 import '@/styles/index.scss'
 import './plugins/element'
 import components from '@/components'
-import appConfig from '@/plugins/appConfig'
 import echarts from 'echarts'
-
 import VueClipboard from 'vue-clipboard2'
+import GlobalConst from '@/constants/GlobalConst'
+
+Vue.prototype.$const = GlobalConst
 
 Vue.use(components)
-Vue.use(appConfig)
 Vue.use(VueClipboard)
 
 Vue.config.productionTip = false

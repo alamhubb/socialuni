@@ -1,24 +1,34 @@
 <template>
   <div class="h100p row-all-center">
     <el-card class="w600">
-      <el-form label-position="right" label-width="100px">
+      <el-form label-position="right" label-width="120px">
         <el-form-item label="当前用户：">
           {{ user.phoneNum }}
-          <!--          <el-input :value="user.phoneNum"/>-->
         </el-form-item>
         <el-form-item label="开发者ID：">
-          <!--          <el-input :value="user.devId"/>-->
-          {{ user.devNum }}
+          <div class="row-between-center">
+            <div>
+              {{ user.devNum }}
+            </div>
+            <div>
+              <el-button
+                v-clipboard:copy="user.devNum"
+                type="text"
+                class="mr-10"
+                @click="copySecretKey"
+              >复制开发者ID
+              </el-button>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="开发者密钥：">
-          <div class="flex-row">
-            <div class="flex-1">
+          <div class="row-between-center">
+            <div>
               {{ user.secretKey || '不记录显示，忘记点重置' }}
             </div>
-            <div class="flex-none">
+            <div>
               <el-button
                 v-clipboard:copy="user.secretKey"
-                :disabled="!user.secretKey"
                 type="text"
                 class="mr-10"
                 @click="copySecretKey"
@@ -34,23 +44,30 @@
 
         </el-form-item>
         <el-form-item label="开发者类型">
-          <el-radio-group v-model="user.type" :disabled="disabledEdit">
-            <el-radio border :label="UserType.company">企业</el-radio>
-            <el-radio border :label="UserType.person">个人</el-radio>
-          </el-radio-group>
-          <el-button v-if="disabledEdit">编辑</el-button>
-          <div>
-            <el-button>取消</el-button>
-            <el-button>保存</el-button>
+          <div class="row-between-center">
+            <el-radio-group v-model="user.type">
+              <el-radio border :label="UserType.company">企业</el-radio>
+              <el-radio border :label="UserType.person">个人</el-radio>
+            </el-radio-group>
+
+            <el-button type="primary" plain @click="updateUser">更新</el-button>
           </div>
         </el-form-item>
-        <el-form-item :label="userTypeLabel">
-          <el-input v-model="user.realName" :readonly="disabledEdit" />
-        </el-form-item>
-        <el-form-item :label="userTypeLabel">
+        <el-form-item :label="userTypeLabel" required>
           <el-input v-model="user.realName" />
         </el-form-item>
-
+        <el-form-item label="微信小程序Id">
+          <el-input v-model="user.wxMpAppId" />
+        </el-form-item>
+        <el-form-item label="微信小程序名称">
+          <el-input v-model="user.wxMpAppName" />
+        </el-form-item>
+        <el-form-item label="qq小程序Id">
+          <el-input v-model="user.qqMpAppId" />
+        </el-form-item>
+        <el-form-item label="qq小程序名称">
+          <el-input v-model="user.qqMpAppName" />
+        </el-form-item>
       </el-form>
     </el-card>
   </div>
@@ -71,17 +88,17 @@ const userStore = namespace('user')
 export default class HomePage extends Vue {
   @userStore.State('user') user: UserVO
 
-  operateStatus = OperationType.detail
-  OperationType = OperationType
+  operateType = OperationType.detail
+  backUser: UserVO
 
   get disabledEdit() {
-    return this.operateStatus === OperationType.detail
+    return this.operateType === OperationType.detail
   }
 
   UserType = UserType
 
   get userTypeLabel() {
-    return this.user.type === UserType.person ? '个人姓名' : '机构全称'
+    return this.user.type === UserType.person ? '个人姓名' : '企业名称'
   }
 
   getSecretKey() {
@@ -96,6 +113,14 @@ export default class HomePage extends Vue {
 
   copySecretKey() {
     ToastUtil.success('复制成功')
+  }
+
+  updateUser() {
+    AlertUtil.confirm('是否确定要修改开发者信息').then(() => {
+      UserAPI.updateDevAccountAPI(this.user).then(res => {
+        this.user = res.data
+      })
+    })
   }
 }
 </script>
