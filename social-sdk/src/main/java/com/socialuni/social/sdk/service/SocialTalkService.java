@@ -49,8 +49,7 @@ public class SocialTalkService {
         queryQO.setGender(GenderType.all);
 
         //转换为rolist
-        List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
-        return new ResultRO<>(socialTalkROs);
+        return this.queryHomeTabTalks(queryQO);
     }
 
     //查询非关注tab的动态列表

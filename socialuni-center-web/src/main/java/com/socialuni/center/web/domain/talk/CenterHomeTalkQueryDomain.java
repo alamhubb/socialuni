@@ -71,7 +71,7 @@ public class CenterHomeTalkQueryDomain {
         }
 
         //转换为rolist
-        List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser);
+        List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser, DevAccountUtils.getDevId());
 
         List<CenterTalkRO> talkROS = CenterTalkROFactory.getTalkROS(socialTalkROFactories, mineUser);
         return talkROS;

@@ -26,7 +26,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
      * @return
      */
     //缓存
-//    @Cacheable(cacheNames = "stickTalks", key = "{#globalTop,#devId}")
+    @Cacheable(cacheNames = "stickTalks", key = "{#devId}")
     List<TalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     //查询自己talk和他人详情talk
