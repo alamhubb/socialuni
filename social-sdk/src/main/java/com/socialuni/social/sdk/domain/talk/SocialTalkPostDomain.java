@@ -58,7 +58,8 @@ public class SocialTalkPostDomain {
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
-        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
+        //不使用图片安全校验
+        //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
         SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
     }
