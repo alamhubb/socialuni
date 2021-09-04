@@ -1,6 +1,6 @@
 <template>
   <!--        隐私提示-->
-  <div class="pt-sm h50px">
+  <div class="h50px">
     <view v-if="!user" class="row-center row-grid u-type-info">
       <text class="mb-nn">
         登录即代表同意
