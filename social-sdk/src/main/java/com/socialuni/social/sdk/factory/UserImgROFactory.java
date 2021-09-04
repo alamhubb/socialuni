@@ -14,11 +14,7 @@ public class UserImgROFactory {
     public static UserImgRO DOtoRO(UserImgDO userImg) {
         UserImgRO imgVO = new UserImgRO();
         imgVO.setId(userImg.getId());
-        //为空则异常
-        if (StringUtils.isEmpty(SocialAppConfig.getStaticResourceUrl())) {
-            throw new SocialParamsException("图片路径错误异常");
-        }
-        imgVO.setSrc(SocialAppConfig.getStaticResourceUrl() + "/" + userImg.getSrc());
+        imgVO.setSrc(SocialAppConfig.getStaticResourceUrl() + userImg.getSrc());
         imgVO.setAspectRatio(userImg.getAspectRatio());
         return imgVO;
     }

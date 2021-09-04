@@ -24,6 +24,11 @@ public interface SocialuniTalkAPI {
     @PostMapping("queryTalks")
     ResultRO<List<CenterTalkRO>> queryTalks(@RequestBody @Valid CenterHomeTabTalkQueryQO queryQO);
 
+    /**
+     * 返回talk是因为三方需要Id
+     * @param talkPostQO
+     * @return
+     */
     @PostMapping("postTalk")
     ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);
 

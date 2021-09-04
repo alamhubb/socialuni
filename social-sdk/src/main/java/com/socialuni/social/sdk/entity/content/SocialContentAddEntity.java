@@ -71,7 +71,7 @@ public class SocialContentAddEntity {
                 throw new SocialBusinessException(errorMsg);
             }
 
-            HttpResult wxResult = WxUtil.checkContentWxSec(content);
+            HttpResult wxResult = WxUtil.checkTextWxSec(content);
             if (wxResult.hasError()) {
                 throw new SocialBusinessException(ErrorMsg.CHECK_VIOLATION_ERR_MSG);
             }

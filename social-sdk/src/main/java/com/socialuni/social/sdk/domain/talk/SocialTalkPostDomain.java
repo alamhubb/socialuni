@@ -24,6 +24,7 @@ import com.socialuni.social.sdk.repository.TalkTagRepository;
 import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.TalkRedis;
+import com.socialuni.social.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -57,6 +58,7 @@ public class SocialTalkPostDomain {
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags());
         reportDomain.checkKeywordsCreateReport(talkDO);
+        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
         SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
     }

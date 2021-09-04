@@ -1,5 +1,8 @@
 package com.socialuni.social.sdk.domain.report;
 
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.model.model.QO.community.talk.SocialTalkImgAddQO;
+import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.*;
 import com.socialuni.social.sdk.domain.BaseModelService;
 import com.socialuni.social.model.model.QO.SocialReportAddQO;
@@ -16,7 +19,9 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.KeywordsService;
 import com.socialuni.social.sdk.service.KeywordsTriggerService;
+import com.socialuni.social.sdk.utils.QQUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.sdk.utils.WxUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -56,6 +61,17 @@ public class ReportDomain {
     @Resource
     BaseModelService baseModelService;
 
+    @Transactional
+    public void checkImgCreateReport(TalkDO talkDO, List<SocialTalkImgAddQO> imgs) {
+        if (imgs.size() > 0) {
+            for (SocialTalkImgAddQO img : imgs) {
+                String imgFullUrl = SocialAppConfig.getStaticResourceUrl() + img.getSrc();
+                WxUtil.checkImgSecPost(imgFullUrl);
+                QQUtil.checkImgSecPost(imgFullUrl);
+            }
+        }
+    }
+
     //根据是否违规生成举报信息，只需要basedo基础信息就够
     @Transactional
     public BaseModelDO checkKeywordsCreateReport(BaseModelDO modelDO) {
@@ -67,6 +83,7 @@ public class ReportDomain {
             // 校验是否触发关键词
             List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerService
                     .checkContentTriggerKeywords(modelDO, modelDO.getReportContentType(), AppConfigStatic.getKeywordDOs(), false);
+
 
 //            if (!CollectionUtils.isEmpty(keywordsTriggers) || antispamDO.hasViolate()) {
             //如果触发了关键词

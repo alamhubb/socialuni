@@ -49,7 +49,7 @@ public class SoicialTagAddDomain {
 
         String description = tagAddVO.getDescription();
         if (StringUtils.isNotEmpty(description)) {
-            HttpResult wxDesResult = WxUtil.checkContentWxSec(description);
+            HttpResult wxDesResult = WxUtil.checkTextWxSec(description);
             if (wxDesResult.hasError()) {
                 throw new SocialBusinessException("标签描述包含违规内容，禁止发布，请修改后重试");
             }

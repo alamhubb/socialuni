@@ -40,7 +40,7 @@ public class SocialEditUserDomain {
             if (TencentCloud.textIsViolation(nickname)) {
                 throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
             }
-            HttpResult wxResult = WxUtil.checkContentWxSec(nickname);
+            HttpResult wxResult = WxUtil.checkTextWxSec(nickname);
             if (wxResult.hasError()) {
                 throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
             }
@@ -72,7 +72,7 @@ public class SocialEditUserDomain {
                 if (TencentCloud.textIsViolation(userCity)) {
                     throw new SocialBusinessException("地区名称违规");
                 }
-                HttpResult wxResult = WxUtil.checkContentWxSec(userCity);
+                HttpResult wxResult = WxUtil.checkTextWxSec(userCity);
                 if (wxResult.hasError()) {
                     throw new SocialBusinessException("地区名称违规");
                 }

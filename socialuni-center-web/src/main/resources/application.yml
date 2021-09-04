@@ -1,8 +1,8 @@
 spring:
   profiles:
-#    active: local
+    active: local
 #    active: prod
-    active: localprod
+#    active: localprod
   jpa:
     database: MYSQL
 #    show-sql: true
@@ -18,6 +18,8 @@ spring:
     add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

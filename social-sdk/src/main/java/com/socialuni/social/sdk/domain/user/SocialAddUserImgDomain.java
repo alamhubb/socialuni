@@ -41,11 +41,7 @@ public class SocialAddUserImgDomain {
         userImgDO.setReportContentType(ContentType.userImg);
         userImgDO.setReportNum(0);
         userImgDO.setIsSelfAuth(false);
-        //为空则异常
-        if (StringUtils.isEmpty(SocialAppConfig.getStaticResourceUrl())) {
-            throw new SocialParamsException("图片路径错误异常");
-        }
-        mineUser.setAvatar(SocialAppConfig.getStaticResourceUrl() + "/" + userImgDO.getSrc() + "!avatar");
+        mineUser.setAvatar(SocialAppConfig.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");
         userRepository.save(mineUser);
         userImgRepository.save(userImgDO);
 

@@ -19,7 +19,7 @@ public class SocialTagDOFactory implements Serializable {
         //先默认为1，以后设置可以更改选择类型
         tagDO.setTagTypeId(1);
         tagDO.setName(tagName);
-        tagDO.setAvatar(SocialAppConfig.getStaticResourceUrl() + "/qingchi/static/qclogo.jpg!avatar");
+        tagDO.setAvatar(SocialAppConfig.getStaticResourceUrl() + "qingchi/static/qclogo.jpg!avatar");
         tagDO.setDescription(tagDesc);
         tagDO.setStatus(ContentStatus.enable);
         tagDO.setCount(0);

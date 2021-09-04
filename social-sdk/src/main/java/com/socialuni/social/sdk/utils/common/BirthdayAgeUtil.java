@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class BirthdayAgeUtil {
     public static void main(String[] args) throws ParseException {
-        System.out.println(BirthdayAgeUtil.birthdayDateFormat.parse(""));
+        System.out.println(BirthdayAgeUtil.getYearBirthDateByAge(18));
     }
 
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");

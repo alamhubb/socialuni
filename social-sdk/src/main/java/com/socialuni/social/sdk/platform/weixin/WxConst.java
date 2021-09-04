@@ -22,6 +22,7 @@ public class WxConst {
 
     public static String wxLoginUrl = "https://api.weixin.qq.com/sns/jscode2session?";
     public static String wx_msg_sec_check_url = "https://api.weixin.qq.com/wxa/msg_sec_check?access_token=";
+    public static String wx_img_sec_check_url = "https://api.weixin.qq.com/wxa/img_sec_check?access_token=";
     public static String push_msg_url = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=";
 
     //talk被评论

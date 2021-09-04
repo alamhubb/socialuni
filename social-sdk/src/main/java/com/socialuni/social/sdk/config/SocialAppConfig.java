@@ -1,5 +1,7 @@
 package com.socialuni.social.sdk.config;
 
+import com.socialuni.social.exception.SocialParamsException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +42,10 @@ public class SocialAppConfig {
     }
 
     public static String getStaticResourceUrl() {
-        return staticResourceUrl;
+        //为空则异常
+        if (StringUtils.isEmpty(staticResourceUrl)) {
+            throw new SocialParamsException("图片路径错误异常");
+        }
+        return staticResourceUrl + "/";
     }
 }

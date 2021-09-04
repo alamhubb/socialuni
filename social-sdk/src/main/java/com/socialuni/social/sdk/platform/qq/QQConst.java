@@ -15,6 +15,7 @@ public class QQConst {
 
     public static final String qqLoginUrl = "https://api.q.qq.com/sns/jscode2session?";
     public static final String qq_msg_sec_check_url = "https://api.q.qq.com/api/json/security/MsgSecCheck?access_token=";
+    public static final String qq_img_sec_check_url = "https://api.q.qq.com/api/json/security/ImgSecCheck?access_token=";
 
     public static final String qq_app_unionId_url = "https://graph.qq.com/oauth2.0/me?access_token={0}&unionid=1&fmt=json";
 

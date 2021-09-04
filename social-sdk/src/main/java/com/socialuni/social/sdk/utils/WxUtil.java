@@ -4,11 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.ProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.platform.WxErrCode;
+import com.socialuni.social.sdk.platform.baidu.BaiduConst;
+import com.socialuni.social.sdk.platform.baidu.BaiduResult;
+import com.socialuni.social.sdk.platform.baidu.BaiduUtil;
 import com.socialuni.social.sdk.platform.qq.QQPayResult;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.platform.weixin.WxConst;
@@ -18,17 +23,29 @@ import com.socialuni.social.sdk.utils.common.RestUtil;
 import com.socialuni.social.utils.UUIDUtil;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -123,7 +140,7 @@ public class WxUtil {
      *
      * @param content
      */
-    public static HttpResult checkContentWxSec(String content) {
+    public static HttpResult checkTextWxSec(String content) {
         HttpResult result = checkContentWxSecPost(content);
         assert result != null;
         if (result.hasError()) {
@@ -140,6 +157,40 @@ public class WxUtil {
         postData.put("content", content);
         String url = WxConst.wx_msg_sec_check_url + WxUtil.getAccessToken();
         return RestUtil.restTemplate().postForEntity(url, postData, HttpResult.class).getBody();
+    }
+
+    public static void checkImgSecPost(String imgUrl) {
+        try {
+            //获取文件后缀名
+            String[] suffix = imgUrl.split("\\.");
+            //不包含.
+            String fileTypeName;
+            if (suffix.length < 2) {
+                fileTypeName = ".jpg";
+            } else {
+                fileTypeName = "." + suffix[suffix.length - 1];
+            }
+            File file = File.createTempFile("checkImgTemp", fileTypeName);
+
+            Thumbnails.of(new URL(imgUrl)).size(700, 1300).toFile(file);
+
+            FileSystemResource fileResource  = new FileSystemResource(file);
+
+            // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
+            MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("media", fileResource);
+
+            // 2、使用postForEntity请求接口
+            String imgCheckUrl = WxConst.wx_img_sec_check_url + WxUtil.getAccessToken();
+
+            HttpResult httpResult = RestUtil.getFileRestTemplate().postForEntity(imgCheckUrl, paramMap, HttpResult.class).getBody();
+            if (httpResult != null) {
+                log.info(httpResult.getErrmsg());
+                log.info(httpResult.getErrcode().toString());
+            }
+        } catch (Exception e) {
+            throw new SocialBusinessException("上传照片失败");
+        }
     }
 
 
