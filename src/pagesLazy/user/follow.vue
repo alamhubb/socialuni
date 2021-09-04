@@ -17,21 +17,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
+import { Component, Vue } from 'vue-property-decorator'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import HomeType from '@/const/HomeType'
 import FollowItem from '@/pagesLazy/user/FollowItem.vue'
 import FollowAPI from '@/api/FollowAPI'
 
-  @Component({
-    components: { FollowItem }
-  })
+@Component({
+  components: { FollowItem }
+})
 export default class FollowPage extends Vue {
     followPageType: string = HomeType.follow
     follow: string = HomeType.follow
     fans: string = HomeType.fans
-    followUsers: UserVO[] = []
-    fansUsers: UserVO[] = []
+    followUsers: CenterUserDetailRO[] = []
+    fansUsers: CenterUserDetailRO[] = []
 
     onLoad () {
       uni.startPullDownRefresh({})
@@ -46,7 +46,7 @@ export default class FollowPage extends Vue {
       })
     }
 
-    get showUsers (): UserVO[] {
+    get showUsers (): CenterUserDetailRO[] {
       if (this.followPageType === this.fans) {
         return this.fansUsers
       } else {

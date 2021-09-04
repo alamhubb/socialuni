@@ -35,12 +35,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { talkModule } from '@/store'
 import PlatformUtils from '@/utils/PlatformUtils'
-import UserVO from '@/model/user/UserVO'
-import Alert from '../utils/Alert'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import MsgUtil from '@/utils/MsgUtil'
 import Toast from '@/utils/Toast'
 
@@ -51,7 +50,7 @@ export default class MsgInput extends Vue {
   content = ''
   @talkStore.State('currentContent') currentContent: string
   @talkStore.State('inputContentFocus') inputContentFocus: boolean
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
 
   get msgInputPlaceholder () {
     if (this.currentContent) {

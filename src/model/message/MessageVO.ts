@@ -1,11 +1,11 @@
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../social/CenterUserDetailRO'
 import CommonStatus from '@/const/CommonStatus'
 import MessageType from '@/const/mesaage/MessageType'
 import MessageContentType from '@/const/mesaage/MessageContentType'
 
 export default class MessageVO {
   public id: number
-  public user: UserVO
+  public user: CenterUserDetailRO
   public readNum: number
   public content: string
   public createTime: number
@@ -15,7 +15,7 @@ export default class MessageVO {
   public isMine: boolean
   public isRead: boolean
 
-  constructor (user: UserVO, content: string) {
+  constructor (user: CenterUserDetailRO, content: string) {
     this.id = Math.random()
     this.user = user
     this.readNum = 0

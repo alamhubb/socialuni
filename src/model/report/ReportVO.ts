@@ -1,7 +1,7 @@
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../social/CenterUserDetailRO'
 
 export default class ReportVO {
-  public user: UserVO
+  public user: CenterUserDetailRO
   public status: string
   public types: string[]
   public reportContentType: string

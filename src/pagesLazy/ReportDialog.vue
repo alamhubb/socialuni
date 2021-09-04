@@ -37,7 +37,7 @@ import ReportContentType from '@/const/ReportContentType'
 import MessageVO from '@/model/message/MessageVO'
 import ReportAddVO from '@/model/report/ReportAddVO'
 import ReportAPI from '@/api/ReportAPI'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import MsgUtil from '@/utils/MsgUtil'
 import PlatformUtils from '@/utils/PlatformUtils'
 import Alert from '../utils/Alert'
@@ -56,7 +56,7 @@ export default class ReportDialog extends Vue {
     @appStore.State('appConfig') readonly appConfig: object
     @Prop() readonly reportInfo: MessageVO
     @Prop() readonly reportInfoType: string
-    @userStore.State('user') user: UserVO
+    @userStore.State('user') user: CenterUserDetailRO
     reportType: string = ReportType.pornInfo
     pornInfo: string = ReportType.pornInfo
     reportContent = ''

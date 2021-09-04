@@ -138,7 +138,7 @@ export default class LoginPage extends Vue {
     this.LoginBase(this.socialuniLoginBase)
   }
 
-  async LoginBase (loginFun: Function, result) {
+  async LoginBase (loginFun: Function, result?) {
     if (this.openTypeBtnEnable) {
       UniUtil.showLoading('登录中')
       this.openTypeBtnEnable = false

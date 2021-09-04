@@ -107,7 +107,7 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import TalkAPI from '@/api/TalkAPI'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import { namespace } from 'vuex-class'
@@ -242,7 +242,7 @@ export default class TabsTalkPage extends Vue {
   }
 
 
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   // 页面是否为首次查询
 
   @locationStore.State('location') location: DistrictVO

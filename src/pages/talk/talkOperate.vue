@@ -67,7 +67,7 @@ import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
 import UniUtil from '@/utils/UniUtil'
 import Alert from '../../utils/Alert'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 
 const appStore = namespace('app')
 const userStore = namespace('user')
@@ -78,7 +78,7 @@ const configStore = namespace('config')
 @Component
 export default class TalkOperate extends Vue {
   @appStore.State('appConfig') readonly appConfig: object
-  @userStore.State('user') readonly user: UserVO
+  @userStore.State('user') readonly user: CenterUserDetailRO
   @appStore.State('reportTypes') readonly reportTypes: string[]
   @talkStore.State('commentActionShow') readonly commentVisible: boolean
   @talkStore.State('reportDialogShow') readonly dialogVisible: boolean

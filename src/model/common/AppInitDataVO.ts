@@ -1,4 +1,4 @@
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../social/CenterUserDetailRO'
 import DistrictVO from '@/model/DistrictVO'
 // import ChatVO from "@/model/chat/ChatVO";
 import TagTypeVO from '@/model/tag/TagTypeVO'
@@ -8,7 +8,7 @@ import UnreadNotifyVO from '@/model/UnreadNotifyVO'
 import TalkVO from '@/model/talk/TalkVO'
 
 export default class AppInitDataVO {
-  user: UserVO = null
+  user: CenterUserDetailRO = null
   notifies: UnreadNotifyVO [] = []
 
   wx_talkTemplateId: string = ''

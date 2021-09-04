@@ -63,19 +63,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import FollowItem from '@/pagesLazy/user/FollowItem.vue'
 import QRow from '@/components/q-row/q-row.vue'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
-import PageUtil from '@/utils/PageUtil'
 import SkipUrlConst from '@/const/SkipUrlConst'
 import EnumVO from '@/const/EnumVO'
 import PlatformUtils from '@/utils/PlatformUtils'
 import QCol from '@/components/q-col/q-col.vue'
 import { namespace } from 'vuex-class'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import ShellOrderVO from '@/model/ShellOrderVO'
-import UserAPI from '@/api/UserAPI'
 import PayType from '@/const/PayType'
 import ProviderType from '@/const/ProviderType'
 import { systemModule } from '@/store'
@@ -87,7 +85,7 @@ const userStore = namespace('user')
   components: { QCol, QRowItem, QRow, FollowItem }
 })
 export default class ShellPage extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   payValues = [
     new EnumVO(1, '1元'),
     new EnumVO(5, '5元'),

@@ -68,14 +68,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import TalkAPI from '@/api/TalkAPI'
 import ReportContentType from '@/const/ReportContentType'
 import HugAddVO from '@/model/HugAddVO'
 import ChildComment from '@/pages/talk/ChildComment.vue'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 import CommentVO from '@/model/comment/CommentVO'
 import TalkUtil from '@/utils/TalkUtil'
@@ -95,7 +95,7 @@ const userStore = namespace('user')
   }
 })
 export default class TalkItemComment extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   // 因为无法直接修改，所以需要克隆一下
   @Prop() readonly talkProp!: TalkVO
   @Prop({ type: Boolean, default: false }) readonly showAllComment: boolean

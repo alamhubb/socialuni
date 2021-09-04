@@ -145,9 +145,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import TalkItem from '@/pages/talk/TalkItem.vue'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
 import { namespace } from 'vuex-class'
 import UserEdit from '@/pages/user/UserEdit.vue'
@@ -179,7 +179,7 @@ const userStore = namespace('user')
   }
 })
 export default class MinePage extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   showMsgInput = false
   showMoreList = false
   // 登录

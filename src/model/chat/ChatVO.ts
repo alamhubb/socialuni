@@ -1,7 +1,4 @@
 import MessageVO from '@/model/message/MessageVO'
-import UserVO from '@/model/user/UserVO'
-import ChatType from '@/const/ChatType'
-import CommonStatus from '@/const/CommonStatus'
 
 export default class ChatVO {
   public id: number = null

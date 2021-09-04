@@ -145,7 +145,7 @@ import TagUtil from '@/utils/TagUtil'
 import CosUtil from '@/utils/CosUtil'
 import { locationModule, tagModule } from '@/store'
 import PlatformUtils from '@/utils/PlatformUtils'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import CityPicker from '@/components/CityPicker.vue'
 import TalkAddTagSearch from '@/pagesLazy/talk/TalkAddTagSearch.vue'
@@ -183,7 +183,7 @@ const locationStore = namespace('location')
 export default class TalkAddPage extends Vue {
   @locationStore.State('districts') readonly districts: DistrictVO[]
   @tagStore.State('tags') readonly storeTags: TagVO []
-  @userStore.State('user') readonly user: UserVO
+  @userStore.State('user') readonly user: CenterUserDetailRO
 
   showVisibleTypeSelect = false
   showVisibleGenderSelect = false

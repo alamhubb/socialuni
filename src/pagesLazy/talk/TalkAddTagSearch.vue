@@ -65,10 +65,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
 import { namespace } from 'vuex-class'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '@/components/q-icon/q-icon.vue'
 
 const userModule = namespace('user')
@@ -78,7 +78,7 @@ const userModule = namespace('user')
 export default class TalkAddTagSearch extends Vue {
     searchContent = ''
     showSearch = false
-    @userModule.State('user') readonly user: UserVO
+    @userModule.State('user') readonly user: CenterUserDetailRO
     // 全部tag,因为需要与外部联动，所以使用外部传进来的tags
     @Prop() readonly tags: TagVO []
     @Prop({ type: Boolean, default: false }) readonly isAdd: boolean

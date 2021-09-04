@@ -51,8 +51,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
+import { Component, Vue } from 'vue-property-decorator'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 import LoveValueAPI from '@/api/LoveValueAPI'
 import QQUtils from '@/utils/QQUtils'
@@ -68,7 +68,7 @@ const configStore = namespace('config')
 
 @Component
 export default class LoveValuePage extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   @appStore.State('appConfig') readonly appConfig: object
   @configStore.Getter('rewardedAdLimit') readonly rewardedAdLimit: number
   @configStore.Getter('wbService') readonly wbService: string

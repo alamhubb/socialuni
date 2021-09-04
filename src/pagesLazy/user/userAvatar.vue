@@ -20,26 +20,20 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 import ImgUtil from '@/utils/ImgUtil'
 import UniUtil from '@/utils/UniUtil'
-
-import JsonUtils from '@/utils/JsonUtil'
 import ImgFileVO from '@/model/ImgFileVO'
-import CosUtil from '@/utils/CosUtil'
 import PageUtil from '@/utils/PageUtil'
-import UserAPI from '@/api/UserAPI'
 import Alert from '../../utils/Alert'
-import { userModule } from '@/store'
-import CosAPI from '@/api/CosAPI'
 
 const userStore = namespace('user')
 
 @Component
 export default class UserAvatarPage extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
 
   saveDisabled = false
   uploadImgFile: ImgFileVO = null

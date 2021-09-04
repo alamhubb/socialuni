@@ -68,7 +68,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 import UniUtil from '@/utils/UniUtil'
 import Alert from '@/utils/Alert'
@@ -95,7 +95,7 @@ const appStore = namespace('app')
   }
 })
 export default class Login extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
   @systemStore.State('isMp') isMp: boolean

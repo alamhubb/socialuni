@@ -1,10 +1,9 @@
-import Constants from '@/const/Constant'
 import GenderType from '@/const/GenderType'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import FollowStatus from '@/const/FollowStatus'
 
 export default class UserUtil {
-  static getGenderIcon (user: UserVO): string {
+  static getGenderIcon (user: CenterUserDetailRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlIcon
     } else {
@@ -12,7 +11,7 @@ export default class UserUtil {
     }
   }
 
-  static getGenderCuIcon (user: UserVO): string {
+  static getGenderCuIcon (user: CenterUserDetailRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlCuIcon
     } else {
@@ -20,7 +19,7 @@ export default class UserUtil {
     }
   }
 
-  static getGenderColor (user: UserVO): string {
+  static getGenderColor (user: CenterUserDetailRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlColor
     } else {
@@ -28,7 +27,7 @@ export default class UserUtil {
     }
   }
 
-  static getGenderBgColor (user: UserVO): string {
+  static getGenderBgColor (user: CenterUserDetailRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlBgColor
     } else {
@@ -55,7 +54,7 @@ export default class UserUtil {
     }
   }
 
-  static getOnlineColor (user: UserVO): string {
+  /*static getOnlineColor (user: CenterUserDetailRO): string {
     if (user.onlineFlag) {
       return Constants.onlineColor
     } else if (user.lastOnlineTime) {
@@ -66,5 +65,5 @@ export default class UserUtil {
       }
     }
     return Constants.offlineColor
-  }
+  }*/
 }

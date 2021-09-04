@@ -1,3 +1,5 @@
+import ImgFileVO from '@/model/ImgFileVO'
+
 export default class CenterUserDetailRO {
   id: string = null
   nickname: string = ''
@@ -7,10 +9,10 @@ export default class CenterUserDetailRO {
   city = ''
   birthday: string = null
   phoneNum: string = null
-  hasFollowed: string = null
-  hasBeFollowed: string = null
-  isMine: string = null
-  fansNum: string = null
-  followNum: string = null
-  imgs: string = null
+  hasFollowed: boolean = null
+  hasBeFollowed: boolean = null
+  isMine: boolean = null
+  fansNum: number = null
+  followNum: number = null
+  imgs: ImgFileVO [] = null
 }

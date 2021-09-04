@@ -21,12 +21,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import SkipUrlConst from '@/const/SkipUrlConst'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { userStore } from '@/store'
 
 @Component
 export default class UserPrivacyAgreement extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
 
   get userAgreementUrl (): string {
     return SkipUrlConst.userAgreementUrl()

@@ -9,7 +9,7 @@ import ResultVO from '@/model/ResultVO'
 import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
 import PageUtil from '@/utils/PageUtil'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
 
 export default Vue.extend({
   mpType: 'app',
@@ -58,7 +58,7 @@ export default Vue.extend({
         if (extraData) {
           if (extraData.success) {
             const authData: ThreeAuthResultVO = extraData.data
-            const socialLoginRO: SocialLoginRO<UserVO> = new SocialLoginRO(authData.token, authData.user)
+            const socialLoginRO: SocialLoginRO<CenterUserDetailRO> = new SocialLoginRO(authData.token, authData.user)
             if (authData.authType === ThreeAuthType.user) {
               Toast.toastLong('授权登录成功')
               UserService.getMineUserInitDataActionByToken(socialLoginRO)

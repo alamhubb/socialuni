@@ -1,4 +1,4 @@
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../social/CenterUserDetailRO'
 import CommentVO from '@/model/comment/CommentVO'
 import DistrictVO from '@/model/DistrictVO'
 import TagVO from '@/model/tag/TagVO'
@@ -8,7 +8,7 @@ export default class TalkVO {
   public id: number = null
   public content: string = null
   public imgs: ImgFileVO [] = null
-  public user: UserVO = null
+  public user: CenterUserDetailRO = null
   public createTime: Date = null
   public updateTime: Date = null
   public comments: CommentVO[] = null

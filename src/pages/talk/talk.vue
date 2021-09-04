@@ -98,11 +98,7 @@
 </template>
 
 <script lang="ts">
-import {
-  Vue,
-  Component,
-  Watch
-} from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import { namespace } from 'vuex-class'
@@ -116,14 +112,14 @@ import UniUtil from '@/utils/UniUtil'
 import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import { notifyModule, systemModule, tagModule, talkModule } from '@/store'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
-import NodesRef = UniApp.NodesRef
-import SelectorQuery = UniApp.SelectorQuery
 import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
 import QButton from '@/components/q-button/QButton.vue'
 import SocialConfig from '@/config/SocialConfig'
 import GenderType from '@/const/GenderType'
+import NodesRef = UniApp.NodesRef;
+import SelectorQuery = UniApp.SelectorQuery;
 
 const userStore = namespace('user')
 const notifyStore = namespace('notify')
@@ -144,7 +140,7 @@ export default class TalkPage extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
   }
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   // 轮播图
   // 点击通知去通知页
   @notifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]

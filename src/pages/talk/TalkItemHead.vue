@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import FollowAddVO from '@/model/FollowAddVO'
 import PagePath from '@/const/PagePath'
@@ -85,7 +85,7 @@ import MsgUtil from '@/utils/MsgUtil'
 import TalkTabType from '@/const/TalkTabType'
 import RouterUtil from '@/utils/RouterUtil'
 import QIcon from '@/components/q-icon/q-icon.vue'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import SocialConfig from '@/config/SocialConfig'
@@ -100,7 +100,7 @@ export default class TalkItemHead extends Vue {
 
   // 因为需要修改关注状态，所以需要克隆
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   followBtnDisabled = false
   isUserDetail = false
   followType: string = TalkTabType.follow_type
@@ -177,11 +177,11 @@ export default class TalkItemHead extends Vue {
     }
   }
 
-  getGenderIcon (user: UserVO) {
+  getGenderIcon (user: CenterUserDetailRO) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor (user: UserVO) {
+  getGenderBgColor (user: CenterUserDetailRO) {
     return UserUtil.getGenderBgColor(user)
   }
 }

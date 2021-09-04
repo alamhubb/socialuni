@@ -18,15 +18,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 
 const configStore = namespace('config')
 
 @Component
 export default class FaceValueInfoPage extends Vue {
-  @Prop() user: UserVO
+  @Prop() user: CenterUserDetailRO
   @configStore.Getter('wbService') readonly wbService: string
 }
 </script>

@@ -141,25 +141,25 @@
         </view>
 
         <!-- #ifndef MP-WEIXIN -->
-<!--        <view class="row-col-center py-sm q-solid-bottom">
-          <q-icon class="text-gray mr-xs" icon="mdi-alpha-v-circle"/>
-          照片认证：
-          &lt;!&ndash; 为自己且未绑定&ndash;&gt;
-          <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
-            未认证
-            <button class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
-                    @click="toIdentityAuth">认证
-            </button>
-          </view>
-          <view v-else>
-            <view class="ml-10px sm cu-tag bg-blue radius" v-if="userProp.isSelfAuth">
-              已认证
-            </view>
-            <view class="ml-10px sm cu-tag bg-white bd-gray radius" v-else>
-              未认证
-            </view>
-          </view>
-        </view>-->
+        <!--        <view class="row-col-center py-sm q-solid-bottom">
+                  <q-icon class="text-gray mr-xs" icon="mdi-alpha-v-circle"/>
+                  照片认证：
+                  &lt;!&ndash; 为自己且未绑定&ndash;&gt;
+                  <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
+                    未认证
+                    <button class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
+                            @click="toIdentityAuth">认证
+                    </button>
+                  </view>
+                  <view v-else>
+                    <view class="ml-10px sm cu-tag bg-blue radius" v-if="userProp.isSelfAuth">
+                      已认证
+                    </view>
+                    <view class="ml-10px sm cu-tag bg-white bd-gray radius" v-else>
+                      未认证
+                    </view>
+                  </view>
+                </view>-->
         <!-- #endif -->
         <!--<view v-if="userProp.wxAccount" class="row-col-center q-solid-bottom">
           微信：
@@ -328,16 +328,13 @@ import TalkVO from '@/model/talk/TalkVO'
 import MsgUtil from '@/utils/MsgUtil'
 import ConfigMap from '@/const/ConfigMap'
 import PlatformUtils from '@/utils/PlatformUtils'
-import { systemModule, userModule } from '@/store'
+import { userModule } from '@/store'
 import QRowItem from '@/components/q-row-item/q-row-item.vue'
 import QRow from '@/components/q-row/q-row.vue'
-
-import PayType from '@/const/PayType'
-import ProviderType from '@/const/ProviderType'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import RouterUtil from '@/utils/RouterUtil'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '@/components/q-icon/q-icon.vue'
 import DomFile from '@/model/DomFile'
 import ImgAddQO from '@/model/user/ImgAddQO'
@@ -366,11 +363,11 @@ export default class UserInfo extends Vue {
     editPopup: any;
   }
 
-  @userStore.State('user') mineUser: UserVO
+  @userStore.State('user') mineUser: CenterUserDetailRO
   @appStore.State('appConfig') readonly appConfig: object
   @appStore.State('reportTypes') reportTypes: string[]
   @systemStore.State('isIos') isIos: boolean
-  @PropSync('user') userProp: UserVO
+  @PropSync('user') userProp: CenterUserDetailRO
   followBtnDisabled = false
   hasFollowed = false
   followStatus: string = FollowStatus.follow
@@ -394,7 +391,7 @@ export default class UserInfo extends Vue {
     // chatModule.setChatAction(chat)
   }
 
-  shellPayForUserContact () {
+  /*shellPayForUserContact () {
     if (!this.showUserContactBtnDisabled) {
       this.showUserContactBtnDisabled = true
       const userShell = this.mineUser.shell
@@ -428,7 +425,7 @@ export default class UserInfo extends Vue {
     } else {
       Toast.toast('获取中，请稍等')
     }
-  }
+  }*/
 
 
   openReportDialog () {
@@ -605,7 +602,7 @@ export default class UserInfo extends Vue {
   }
 
   @Watch('user')
-  watchUserChange (newUser: UserVO, oldUser: UserVO) {
+  watchUserChange (newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {
       this.queryMineTalks()
@@ -614,7 +611,7 @@ export default class UserInfo extends Vue {
 
   queryMineTalks () {
     if (this.userProp) {
-      this.followStatus = this.userProp.followStatus
+      this.followStatus = FollowStatus.getFollowStatus(this.userProp)
       this.hasFollowed = this.userProp.hasFollowed
       TalkAPI.queryUserTalksAPI(this.userProp.id, this.talkIds).then((res: any) => {
         this.talks = res.data
@@ -622,11 +619,12 @@ export default class UserInfo extends Vue {
     }
   }
 
-  getGenderIcon (user: UserVO) {
+
+  getGenderIcon (user: CenterUserDetailRO) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor (user: UserVO) {
+  getGenderBgColor (user: CenterUserDetailRO) {
     return UserUtil.getGenderBgColor(user)
   }
 
@@ -660,7 +658,7 @@ export default class UserInfo extends Vue {
         // 如果已经关注
         if (this.followStatus === FollowStatus.follow) {
           this.hasFollowed = true
-          if (this.userProp.beFollow) {
+          if (this.userProp.hasBeFollowed) {
             // 进行关注操作
             this.followStatus = FollowStatus.eachFollow
           } else {
@@ -729,7 +727,7 @@ export default class UserInfo extends Vue {
     PageUtil.toShellPage()
   }
 
-  switchOpenContact (openContact) {
+  /*switchOpenContact (openContact) {
     let actionMsg
     let hintMsg
     //修改后状态
@@ -747,6 +745,6 @@ export default class UserInfo extends Vue {
         this.mineUser.openContact = !openContact
       })
     })
-  }
+  }*/
 }
 </script>

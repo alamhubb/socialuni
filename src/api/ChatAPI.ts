@@ -1,7 +1,6 @@
 import http from '@/plugins/http'
 import ChatReadVO from '@/model/chat/ChatReadVO'
 import ChatRemoveVO from '@/model/chat/ChatRemoveVO'
-import UserVO from '@/model/user/UserVO'
 import ChatVO from '@/model/chat/ChatVO'
 
 export default class ChatAPI {

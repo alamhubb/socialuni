@@ -3,9 +3,9 @@ import store, { systemModule, userModule } from '@/store'
 import MsgUtil from '@/utils/MsgUtil'
 import Alert from './Alert'
 import RouterUtil from '@/utils/RouterUtil'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import SocialUserRO from '@/model/social/SocialUserRO'
+
 
 export default class PageUtil {
   static goHome (): void {
@@ -49,7 +49,7 @@ export default class PageUtil {
   }
 
   static toTalkAddPage () {
-    const user: SocialUserRO = userModule.user
+    const user: CenterUserDetailRO = userModule.user
     if (user && user.phoneNum) {
       RouterUtil.navigateTo(PagePath.talkAdd)
     } else {
@@ -69,7 +69,7 @@ export default class PageUtil {
     RouterUtil.navigateTo(PagePath.identityAuth)
   }
 
-  static toUserMatchPage (user: UserVO) {
+  static toUserMatchPage (user: CenterUserDetailRO) {
     store.commit('match/setUser', user)
     // RouterUtil.navigateTo(PagePath.userMatch)
   }

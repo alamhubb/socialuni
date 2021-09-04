@@ -1,8 +1,8 @@
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../social/CenterUserDetailRO'
 
 export default class ThreeAuthUserInfoResultVO {
   authType: string
   appUserId: string
   tokenCode: string
-  user: UserVO
+  user: CenterUserDetailRO
 }

@@ -80,12 +80,6 @@
           }
         },
         {
-          "path": "user/vip",
-          "style": {
-            "navigationBarTitleText": "vip"
-          }
-        },
-        {
           "path": "talk/talkDetail",
           "style": {
             "navigationStyle": "custom"
@@ -95,12 +89,6 @@
           "path": "notify/notify",
           "style": {
             "navigationBarTitleText": "通知列表"
-          }
-        },
-        {
-          "path": "user/identityAuth",
-          "style": {
-            "navigationBarTitleText": "身份认证"
           }
         },
         {

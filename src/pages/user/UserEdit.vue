@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch, Emit } from 'vue-property-decorator'
+import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
 import UserAPI from '@/api/UserAPI'
 import { namespace } from 'vuex-class'
 import { parseDate } from '@/utils'
@@ -106,7 +106,7 @@ import JsonUtils from '@/utils/JsonUtil'
 import Alert from '../../utils/Alert'
 import Toast from '@/utils/Toast'
 import { userModule } from '@/store'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import EnumStrVO from '@/const/EnumStrVO'
 import GenderType from '@/const/GenderType'
 import SocialConfig from '@/config/SocialConfig'
@@ -116,7 +116,7 @@ const userStore = namespace('user')
 
 @Component
 export default class UserEdit extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   nickname = ''
   gender = GenderType.girl
   birthday = '1999-01-01'
@@ -144,10 +144,10 @@ export default class UserEdit extends Vue {
       this.gender = this.user.gender || GenderType.girl
       this.birthday = this.user.birthday || '1999-01-01'
       this.city = this.user.city || ''
-      this.contactAccount = this.user.contactAccount || ''
-      this.wxAccount = this.user.wxAccount || ''
-      this.qqAccount = this.user.qqAccount || ''
-      this.wbAccount = this.user.wbAccount || ''
+      // this.contactAccount = this.user.contactAccount || ''
+      // this.wxAccount = this.user.wxAccount || ''
+      // this.qqAccount = this.user.qqAccount || ''
+      // this.wbAccount = this.user.wbAccount || ''
       this.btnDisabled = false
     }
   }

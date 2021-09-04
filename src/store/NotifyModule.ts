@@ -1,7 +1,7 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import UnreadNotifyVO from '@/model/notify/UnreadNotifyVO'
 import NotifyAPI from '@/api/NotifyAPI'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
@@ -12,12 +12,12 @@ export default class NotifyModule extends VuexModule {
     return this.notifies.filter(item => !item.hasRead)
   }
 
-  addUnreadNotifies (user: UserVO) {
+  addUnreadNotifies (user: CenterUserDetailRO) {
     const notify: UnreadNotifyVO = new UnreadNotifyVO()
     notify.hasRead = false
     notify.avatar = user.avatar
     notify.nickname = user.nickname
-    notify.vipFlag = user.vipFlag
+    // notify.vipFlag = user.vipFlag
     // 从列表中加入这个
     this.notifies.unshift(notify)
   }

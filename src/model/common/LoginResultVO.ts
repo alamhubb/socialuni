@@ -1,6 +1,6 @@
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../social/CenterUserDetailRO'
 
 export default class LoginResultVO {
-  user: UserVO = null
+  user: CenterUserDetailRO = null
   tokenCode: string = null
 }

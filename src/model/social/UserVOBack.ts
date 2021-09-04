@@ -1,9 +1,8 @@
 import DistrictVO from '@/model/DistrictVO'
 import ImgFileVO from '@/model/ImgFileVO'
 import ChatVO from '@/model/chat/ChatVO'
-import SocialUserRO from '@/model/social/SocialUserRO'
 
-export default class UserVO extends SocialUserRO {
+export default class UserVOBack {
   id: string = null
   nickname: string = null
   gender: string = null
@@ -28,7 +27,7 @@ export default class UserVO extends SocialUserRO {
   // 邀请码，你分享给别人的邀请码
   inviteCode: string = null
   // 邀请人，谁邀请的你
-  registerInviteUser: UserVO = null
+  // registerInviteUser: UserVO = null
   // vip到期时间
   vipEndDate: Date = null
   // 用户拥有的清池币数量

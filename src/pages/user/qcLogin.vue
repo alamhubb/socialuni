@@ -122,12 +122,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
+import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 import { systemModule } from '@/store'
 import Alert from '@/utils/Alert'
-import Constants from '@/const/Constant'
-import Toast from '@/utils/Toast'
 import LoginService from '@/service/LoginService'
 import PageUtil from '@/utils/PageUtil'
 import SystemStoreProp from '@/store/SystemStoreProp'
@@ -151,7 +149,7 @@ const appStore = namespace('app')
   }
 })
 export default class LoginPage extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
   @systemStore.State('isMp') isMp: boolean
@@ -213,15 +211,8 @@ export default class LoginPage extends Vue {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
-        if (systemModule.isMp) {
-          if (systemModule.isMpQQ) {
-            if (result.detail.errMsg !== Constants.loginSuccess) {
-              return Toast.toast('您取消了登录')
-            }
-          }
-        }
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-        await LoginService.providerLogin(systemModule.mpPlatform)
+        await LoginService.providerLogin(systemModule.mpPlatform, result)
         this.loginAfterHint('登录成功')
       } finally {
         this.openTypeBtnEnable = true
