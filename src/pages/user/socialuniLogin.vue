@@ -1,15 +1,15 @@
 <template>
   <!--  全部字体加大一号，白色背景，垂直居中，子元素宽度占满-->
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
-  <div class="h100p bg-white col-all-center">
+  <div class="h100p bg-white px col-between-center">
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
-    <div class="px w100p">
+    <div class="w100p pt-1p col-center flex-1">
       <div class="flex-none col-row-center h70px">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
       </div>
 
-      <view class="mt h150px">
-        <view class="h100p row-center pb-md">
+      <view class="mt-xs h145px">
+        <view class="h120px row-center">
           <!--          头部-->
 
           <!--          只有不为三方授权才显示logo-->
@@ -22,7 +22,7 @@
       </view>
 
       <!--      绑定手机号可发布动态提示-->
-      <div class="row-center pt-sm pb-sm">
+      <div class="row-center pb">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
@@ -36,7 +36,7 @@
       <!--    返回和登录方式切换-->
       <!--      这个div是为了处理居中问题-->
       <div>
-        <view class="h150px col-row-center">
+        <view class="h120px col-row-center">
           <view class="col-row-center w300px">
             <!--            微信登录界面，非手机号登录界面-->
             <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
@@ -59,27 +59,27 @@
             </button>
             <!--                app和h5也都可以用微信登录-->
             <button :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt-sm w100p"
+                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @click="socialUniAuthLogin">
               跳转清池授权登录
             </button>
             <!--              有用户-->
           </view>
-
-          <view class="row-between-center w100p h40px">
-            <view class="row-col-center" @click="goBackPage">
-              <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
-              <view class="text-gray u-border-bottom">
-                {{ user ? '不绑定返回' : '不登录返回' }}
-              </view>
-            </view>
-          </view>
         </view>
       </div>
 
-      <!--      底部客服信息-->
-      <login-footer-app-info></login-footer-app-info>
+      <view class="row-between-center w100p mt-md">
+        <view class="row-col-center" @click="goBackPage">
+          <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
+          <view class="text-gray u-border-bottom">
+            {{ user ? '不绑定返回' : '不登录返回' }}
+          </view>
+        </view>
+      </view>
     </div>
+
+    <!--      底部客服信息-->
+    <login-footer-app-info class="w100p mb-sm"></login-footer-app-info>
   </div>
 </template>
 

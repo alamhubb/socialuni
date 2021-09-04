@@ -37,7 +37,7 @@
       <!--    返回和登录方式切换-->
       <!--      这个div是为了处理居中问题-->
       <div>
-        <view class="h120px col-row-center">
+        <view class="h150px col-row-center">
           <view class="col-row-center w300px">
             <!--            微信登录界面，非手机号登录界面-->
             <template>
@@ -90,7 +90,7 @@
         </view>
       </div>
 
-      <view class="row-between-center w100p mt">
+      <view class="row-between-center w100p">
         <view class="row-col-center" @click="goBackPage">
           <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
           <view class="text-gray u-border-bottom">
