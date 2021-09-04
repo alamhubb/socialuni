@@ -114,7 +114,7 @@ export default class ChatModule extends VuexModule {
       chatModule.replaceChat(this.chatIndex, res.data)
       chatModule.scrollToMessagePageBottom()
       if (needPayOpen) {
-        userModule.user.shell -= 10
+        // userModule.user.shell -= 10
       }
     })
   }
