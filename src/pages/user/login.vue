@@ -43,7 +43,7 @@
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <button v-if="isMpQQ" :disabled="!openTypeBtnEnable"
                     open-type="getUserInfo"
-                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt-sm w100p"
+                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @getuserinfo="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>
@@ -51,7 +51,7 @@
             </button>
             <!--                app和h5也都可以用微信登录-->
             <button v-else :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt-sm w100p"
+                    class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @click="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>
@@ -66,7 +66,7 @@
             <!--              有用户-->
           </view>
 
-          <view class="row-between-center w300px h40px">
+          <view class="row-between-center w100p h40px">
             <view class="row-col-center" @click="goBackPage">
               <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
               <view class="text-gray u-border-bottom">
@@ -78,7 +78,7 @@
       </div>
 
       <!--      底部客服信息-->
-      <login-footer-app-info class="w300px"></login-footer-app-info>
+      <login-footer-app-info></login-footer-app-info>
     </div>
   </div>
 </template>
