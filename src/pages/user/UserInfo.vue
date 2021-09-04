@@ -532,7 +532,6 @@ export default class UserInfo extends Vue {
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      // imgFile.src = ImgUtil.imgUrl + imgFile.cosSrc
       const res = await Promise.all([CosUtil.postImg(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
       userModule.setUser(res[1].data)
     } catch (e) {
