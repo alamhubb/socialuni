@@ -8,7 +8,6 @@ import Constants from '@/const/Constant'
 import Toast from '@/utils/Toast'
 import UniProviderType from '@/const/UniProviderType'
 
-
 export default class LoginService {
   /**
    * 渠道登录的同一方法
