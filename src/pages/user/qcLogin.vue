@@ -3,7 +3,7 @@
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
   <div class="h100p bg-white px col-between-center">
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
-    <div class="w100p pt-6p col-center flex-1">
+    <div class="w100p pt-1p col-center flex-1">
       <div class="flex-none col-row-center h70px">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
         <div v-if="showPhoneView" class="text-md u-type-warning mt-xs">建议使用微信 或 QQ一键登录</div>
