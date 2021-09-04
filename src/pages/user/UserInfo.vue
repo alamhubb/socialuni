@@ -339,11 +339,9 @@ import Toast from '@/utils/Toast'
 import RouterUtil from '@/utils/RouterUtil'
 import UserVO from '@/model/user/UserVO'
 import QIcon from '@/components/q-icon/q-icon.vue'
-import UserService from '@/service/UserService'
 import DomFile from '@/model/DomFile'
 import ImgAddQO from '@/model/user/ImgAddQO'
 import CosAPI from '@/api/CosAPI'
-import PhoneService from '@/service/PhoneService'
 
 
 const userStore = namespace('user')
@@ -529,6 +527,7 @@ export default class UserInfo extends Vue {
       return
     }
     try {
+      UniUtil.showLoading('上传中')
       let cosAuthRO = null
       CosAPI.getCosAuthorizationAPI().then(res => {
         cosAuthRO = res.data

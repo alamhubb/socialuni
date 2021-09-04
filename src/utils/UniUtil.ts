@@ -3,10 +3,10 @@
  * @Date 2021-06-26 20:48
  * @Version 1.0
  */
-import GetSystemInfoResult = UniApp.GetSystemInfoResult
-import GetProviderRes = UniApp.GetProviderRes
-import LoginRes = UniApp.LoginRes
-import GetUserInfoRes = UniApp.GetUserInfoRes
+import GetSystemInfoResult = UniApp.GetSystemInfoResult;
+import GetProviderRes = UniApp.GetProviderRes;
+import LoginRes = UniApp.LoginRes;
+import GetUserInfoRes = UniApp.GetUserInfoRes;
 import AppMsg from '@/const/AppMsg'
 import Toast from '@/utils/Toast'
 import DomFile from '@/model/DomFile'
@@ -138,6 +138,23 @@ export default class UniUtil {
     })
   }
 
+  public static async getFile (imgFile: DomFile) {
+    return new Promise<DomFile>((resolve, reject) => {
+      if (systemModule.isMp) {
+        uni.getFileSystemManager().readFile({
+          filePath: imgFile.path,
+          success: res => {
+            resolve(res.data as any)
+          },
+          fail: err => {
+            reject(err)
+          }
+        })
+      } else {
+        resolve(imgFile)
+      }
+    })
+  }
 
   //选择图片
   public static chooseImage (count = 1) {

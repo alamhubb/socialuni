@@ -136,7 +136,6 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from '@/api/TalkAPI'
-import PagePath from '@/const/PagePath'
 import UniUtil from '@/utils/UniUtil'
 import DistrictVO from '@/model/DistrictVO'
 import { namespace } from 'vuex-class'
@@ -151,7 +150,6 @@ import QIcon from '@/components/q-icon/q-icon.vue'
 import CityPicker from '@/components/CityPicker.vue'
 import TalkAddTagSearch from '@/pagesLazy/talk/TalkAddTagSearch.vue'
 import TagAdd from '@/pages/tag/TagAdd.vue'
-import RouterUtil from '@/utils/RouterUtil'
 import Alert from '../../utils/Alert'
 import LocationUtil from '@/utils/LocationUtil'
 import VisibleType from '@/const/VisibleType'
@@ -166,7 +164,6 @@ import DomFile from '@/model/DomFile'
 import CosAuthRO from '@/model/cos/CosAuthRO'
 import CosAPI from '@/api/CosAPI'
 import AppUtilAPI from '@/api/AppUtilAPI'
-import ImgUtil from '@/utils/ImgUtil'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -398,7 +395,7 @@ export default class TalkAddPage extends Vue {
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
-        RouterUtil.reLaunch(PagePath.talk + '?load=true')
+        // RouterUtil.reLaunch(PagePath.talk + '?load=true')
       })
       .catch(() => {
         this.buttonDisabled = false
