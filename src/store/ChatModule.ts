@@ -1,4 +1,4 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import ResultVO from '@/model/ResultVO'
 import ChatVO from '@/model/chat/ChatVO'
 import MessageVO from '@/model/message/MessageVO'
@@ -161,7 +161,7 @@ export default class ChatModule extends VuexModule {
   @Action
   computedChatsUnreadNumTotalAction () {
     // 应该在这里计算是否显示红点
-    this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
+    /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
       total = total + chat.unreadNum
       return total
     }, 0)
@@ -176,7 +176,7 @@ export default class ChatModule extends VuexModule {
       uni.hideTabBarRedDot({
         index: 2
       })
-    }
+    }*/
   }
 
 
