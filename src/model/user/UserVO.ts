@@ -1,8 +1,9 @@
 import DistrictVO from '@/model/DistrictVO'
 import ImgFileVO from '@/model/ImgFileVO'
 import ChatVO from '@/model/chat/ChatVO'
+import SocialUserRO from '@/model/social/SocialUserRO'
 
-export default class UserVO {
+export default class UserVO extends SocialUserRO {
   id: string = null
   nickname: string = null
   gender: string = null

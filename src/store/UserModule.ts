@@ -9,11 +9,12 @@ import Toast from '@/utils/Toast'
 import UserService from '@/service/UserService'
 import TokenUtil from '@/utils/TokenUtil'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
+import SocialUserRO from '@/model/social/SocialUserRO'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
 export default class UserModule extends VuexModule {
-  user: UserVO = UserStorageUtil.get() || null
+  user: SocialUserRO = UserStorageUtil.get() || null
 
   get hasPhoneNum () {
     return this.user && this.user.phoneNum
@@ -24,7 +25,7 @@ export default class UserModule extends VuexModule {
     UserStorageUtil.remove()
   }
 
-  setUser (user: UserVO) {
+  setUser (user: SocialUserRO) {
     this.user = user
     UserStorageUtil.set(user)
   }

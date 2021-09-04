@@ -1,39 +1,45 @@
-import UniUtil from '@/utils/UniUtil'
 import LoginAPI from '@/api/LoginAPI'
 import UserService from '@/service/UserService'
 import UniUserUtil from '@/utils/UniUserUtil'
-import PhoneNumFormData from '@/model/phone/PhoneNumFormData'
 import SocialPhoneNumLoginQO from '@/model/phone/SocialPhoneNumLoginQO'
+import MockAPI from '@/api/MockAPI'
+import { systemModule } from '@/store'
+import Constants from '@/const/Constant'
+import Toast from '@/utils/Toast'
+import UniProviderType from '@/const/UniProviderType'
 
 
 export default class LoginService {
   /**
    * 渠道登录的同一方法
    */
-  static async providerLogin (provider: string) {
-    UniUtil.showLoading('登录中')
-    try {
-      //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-      const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
-
-      const { data } = await LoginAPI.providerLoginAPI(loginQO)
-
-      UserService.getMineUserInitDataActionByToken(data)
-    } finally {
-      UniUtil.hideLoading()
+  static async providerLogin (provider: string, result: any) {
+    if (systemModule.isMp && systemModule.isMpQQ && provider === UniProviderType.wx) {
+      if (systemModule.isMpQQ) {
+        if (result.detail.errMsg !== Constants.loginSuccess) {
+          return Toast.toast('您取消了登录')
+        }
+      }
     }
+    //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
+    const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
+
+    const { data } = await LoginAPI.providerLoginAPI(loginQO)
+
+    UserService.getMineUserInitDataActionByToken(data)
   }
 
   static async phoneLogin (phoneNum: string, authCode: string) {
-    UniUtil.showLoading('登录中')
-    try {
-      const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
+    const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
 
-      const { data } = await LoginAPI.phoneLoginAPI(phoneBindQO)
+    const { data } = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
-      UserService.getMineUserInitDataActionByToken(data)
-    } finally {
-      UniUtil.hideLoading()
-    }
+    UserService.getMineUserInitDataActionByToken(data)
+  }
+
+  static async socialuniMockLogin () {
+    const { data } = await MockAPI.mockOAuthUserInfoAPI()
+
+    UserService.getMineUserInitDataActionByToken(data)
   }
 }

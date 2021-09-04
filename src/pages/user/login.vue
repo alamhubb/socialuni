@@ -60,7 +60,7 @@
             <!--                app和h5也都可以用微信登录-->
             <button :disabled="!openTypeBtnEnable"
                     class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                    @click="socialUniAuthLogin">
+                    @click="socialuniLogin">
               跳转清池授权登录
             </button>
             <!--              有用户-->
@@ -95,12 +95,8 @@ import SystemStoreProp from '@/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
-import PhoneNumFormData from '@/model/phone/PhoneNumFormData'
-import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
-import PhoneService from '@/service/PhoneService'
-import UserService from '@/service/UserService'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import MockAPI from '@/api/MockAPI'
+import UniUtil from '@/utils/UniUtil'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -108,7 +104,6 @@ const systemStore = namespace('system')
 const appStore = namespace('app')
 @Component({
   components: {
-    PhoneLoginForm,
     UserPrivacyAgreement,
     ThirdApplyAuthInfo,
     LoginFooterAppInfo
@@ -125,36 +120,7 @@ export default class LoginPage extends Vue {
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
-
-  phoneFormData = new PhoneNumFormData()
-
   openTypeBtnEnable = true
-
-  showPhoneView = false
-
-  //同意协议
-  // contractChecked = true
-
-  created () {
-    this.initData()
-  }
-
-  onLoad () {
-    this.initData()
-  }
-
-  initData () {
-    //不为微信则默认为验证码方式绑定
-    if (this.user && !this.isMpWx) {
-      this.showPhoneView = true
-    }
-  }
-
-
-  get loginButtonDisabled () {
-    // !this.contractChecked ||
-    return !this.phoneFormData.phoneNumberRight || !this.phoneFormData.authCodeRight || !this.openTypeBtnEnable
-  }
 
   goBackPage () {
     if (!this.user) {
@@ -164,85 +130,42 @@ export default class LoginPage extends Vue {
     }
   }
 
-  switchShowPhoneNum () {
-    if (this.showPhoneView) {
-      this.showPhoneView = false
-    } else {
-      this.showPhoneView = true
-    }
+  providerLogin (result) {
+    this.LoginBase(this.providerLoginBase, result)
   }
 
-  socialUniAuthLogin () {
+  socialuniLogin () {
+    this.LoginBase(this.socialuniLoginBase)
+  }
+
+  async LoginBase (loginFun: Function, result) {
     if (this.openTypeBtnEnable) {
+      UniUtil.showLoading('登录中')
+      this.openTypeBtnEnable = false
       try {
-        this.openTypeBtnEnable = false
-        //开发模式模拟授权
-        if (appModule.isDevMode) {
-          MockAPI.mockOAuthUserInfoAPI().then(res => {
-            UserService.getMineUserInitDataActionByToken(res.data)
-            PageUtil.toTalkPage()
-            this.loginAfterHint('登录成功')
-          })
-        } else {
-          const authVO: SocialUniAuthVO = new SocialUniAuthVO('user')
-          PageUtil.toSocialUniAuth(authVO)
-        }
+        await loginFun(result)
       } finally {
         this.openTypeBtnEnable = true
+        UniUtil.hideLoading()
+        this.loginAfterHint('登录成功')
       }
     }
   }
 
   //平台登录
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
-  async providerLogin (result) {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-        await LoginService.providerLogin(systemModule.mpPlatform)
-        this.loginAfterHint('登录成功')
-      } finally {
-        this.openTypeBtnEnable = true
-      }
-    }
+  async providerLoginBase (result) {
+    //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
+    await LoginService.providerLogin(systemModule.mpPlatform, result)
   }
 
-  async phoneLogin () {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-        this.loginAfterHint('登录成功')
-      } finally {
-        this.openTypeBtnEnable = true
-      }
-    }
-  }
-
-  //手机号登录和手机号绑定
-  async bindPhoneNum () {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-        this.loginAfterHint('绑定成功')
-      } finally {
-        this.openTypeBtnEnable = true
-      }
-    }
-  }
-
-  // 微信点击按钮，获取手机号用来绑定
-  async bindWxPhoneNum (obj: any) {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        await PhoneService.bindWxPhoneNum(obj)
-        this.loginAfterHint('绑定成功')
-      } finally {
-        this.openTypeBtnEnable = true
-      }
+  async socialuniLoginBase () {
+    //开发模式模拟授权
+    if (appModule.isDevMode) {
+      await LoginService.socialuniMockLogin()
+    } else {
+      const authVO: SocialUniAuthVO = new SocialUniAuthVO('user')
+      PageUtil.toSocialUniAuth(authVO)
     }
   }
 
@@ -258,12 +181,5 @@ export default class LoginPage extends Vue {
       this.goBackPage()
     })
   }
-
-
-  /*
-    默认选中
-    if (!this.contractChecked) {
-      return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
-    }*/
 }
 </script>

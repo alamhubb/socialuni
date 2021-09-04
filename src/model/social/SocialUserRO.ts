@@ -3,7 +3,7 @@ export default class SocialUserRO {
     nickname: string = ''
     avatar: string = ''
     age: number = null
-    gender: number = null
+    genderType: number = null
     phoneNum: string = null
     city = ''
 }
