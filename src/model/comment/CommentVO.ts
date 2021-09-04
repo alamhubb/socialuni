@@ -1,4 +1,4 @@
-import UserVO from '@/model/user/UserVO'
+import SocialUserRO from '@/model/social/SocialUserRO'
 
 export default class CommentVO {
   public id: number = null
@@ -6,7 +6,7 @@ export default class CommentVO {
   public hugNum: number = null
   public childCommentNum: number = null
   public content: string = null
-  public user: UserVO = null
+  public user: SocialUserRO = null
   public createTime: Date = null
   public childComments: CommentVO[] = []
   public replyComment: CommentVO = null

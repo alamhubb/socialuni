@@ -2,8 +2,7 @@ import { chatModule, notifyModule, userModule } from '../store'
 import WebsocketUtil from '@/utils/WebsocketUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
-import UserVO from '@/model/user/UserVO'
-import SocialUserRO from '@/model/social/SocialUserRO'
+import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
 
 export default class UserService {
   //清空用户信息的组合操作
@@ -18,7 +17,7 @@ export default class UserService {
   /**
    * 调用后台仅user和user初始化相关信息,通知列表，开启websocket连接
    */
-  static getMineUserInitDataActionByToken (loginRO: SocialLoginRO<SocialUserRO>) {
+  static getMineUserInitDataActionByToken (loginRO: SocialLoginRO<CenterUserDetailRO>) {
     TokenUtil.set(loginRO.token)
     //登录之后重连websocket
     WebsocketUtil.websocketClose()

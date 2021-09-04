@@ -94,14 +94,15 @@ export default class ImgUtil {
   }
 
   static getFileSuffixName (filePath: string): string {
-    let fileSuffixName = filePath.substr(filePath.lastIndexOf('/') + 1)
-    fileSuffixName = fileSuffixName.substr(fileSuffixName.lastIndexOf('.') + 1)
-    const fileSuffixNameAry: string[] = fileSuffixName.split('.')
-    //如果还有东西后面的就是文件名后缀
-    if (fileSuffixNameAry.length > 1) {
-      fileSuffixName = '.' + fileSuffixNameAry[fileSuffixNameAry.length - 1]
-    } else {
-      fileSuffixName = '.jpg'
+    //有可能存在asfasdf.fasdfasd.123123123dsfasdffasdf3213这种乱格式
+    //如果不包含.则默认jpg
+    if (filePath.indexOf('.') < 0) {
+      return '.jpg'
+    }
+    //如果后缀长度大于6则默认jpg，因为图片都是最长4个，富裕1个，6个
+    const fileSuffixName = filePath.substr(filePath.lastIndexOf('.'))
+    if (fileSuffixName.length > 6) {
+      return '.jpg'
     }
     return fileSuffixName
   }

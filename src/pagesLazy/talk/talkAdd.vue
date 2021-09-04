@@ -164,6 +164,8 @@ import DomFile from '@/model/DomFile'
 import CosAuthRO from '@/model/cos/CosAuthRO'
 import CosAPI from '@/api/CosAPI'
 import AppUtilAPI from '@/api/AppUtilAPI'
+import RouterUtil from '@/utils/RouterUtil'
+import PagePath from '@/const/PagePath'
 
 const userStore = namespace('user')
 const tagStore = namespace('tag')
@@ -395,7 +397,7 @@ export default class TalkAddPage extends Vue {
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
-        // RouterUtil.reLaunch(PagePath.talk + '?load=true')
+        RouterUtil.reLaunch(PagePath.talk + '?load=true')
       })
       .catch(() => {
         this.buttonDisabled = false
@@ -429,6 +431,7 @@ export default class TalkAddPage extends Vue {
     }
     const count = this.imgMaxSize - this.showsImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
+    console.log(imgFiles)
     this.showsImgFiles.push(...imgFiles)
     //获取cos认证信息
     this.getCosAuthRO()

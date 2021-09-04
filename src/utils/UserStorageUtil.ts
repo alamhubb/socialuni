@@ -1,12 +1,12 @@
 import StorageUtil from '@/utils/StorageUtil'
-import SocialUserRO from '@/model/social/SocialUserRO'
+import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
 
 export default class UserStorageUtil {
   // 开发生产区分user，避免混淆，不区分的话会冲突
   private static readonly user_key: string = 'user_key'
   private static readonly dev_user_key: string = 'dev_user_key'
 
-  static set (user: SocialUserRO) {
+  static set (user: CenterUserDetailRO) {
     if (process.env.NODE_ENV === 'development') {
       StorageUtil.setObj(this.dev_user_key, user)
     } else {
@@ -14,7 +14,7 @@ export default class UserStorageUtil {
     }
   }
 
-  static get (): SocialUserRO {
+  static get (): CenterUserDetailRO {
     // 开发环境方便测试
     if (process.env.NODE_ENV === 'development') {
       return StorageUtil.getObj(this.dev_user_key)

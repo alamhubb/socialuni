@@ -85,7 +85,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import UserVO from '@/model/user/UserVO'
 import { namespace } from 'vuex-class'
 import { appModule, systemModule } from '@/store'
 import Alert from '@/utils/Alert'
@@ -97,6 +96,7 @@ import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
 import UniUtil from '@/utils/UniUtil'
+import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
 
 const userStore = namespace('user')
 const configStore = namespace('config')
@@ -110,7 +110,7 @@ const appStore = namespace('app')
   }
 })
 export default class LoginPage extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: CenterUserDetailRO
   @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
   @systemStore.State('isMp') isMp: boolean

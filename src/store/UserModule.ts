@@ -1,5 +1,4 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
-import UserVO from '@/model/user/UserVO'
 
 import UserAPI from '@/api/UserAPI'
 import { userModule } from '@/store/index'
@@ -9,12 +8,12 @@ import Toast from '@/utils/Toast'
 import UserService from '@/service/UserService'
 import TokenUtil from '@/utils/TokenUtil'
 import SocialLoginRO from '@/model/social/SocialLoginRO'
-import SocialUserRO from '@/model/social/SocialUserRO'
+import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
 export default class UserModule extends VuexModule {
-  user: SocialUserRO = UserStorageUtil.get() || null
+  user: CenterUserDetailRO = UserStorageUtil.get() || null
 
   get hasPhoneNum () {
     return this.user && this.user.phoneNum
@@ -25,7 +24,7 @@ export default class UserModule extends VuexModule {
     UserStorageUtil.remove()
   }
 
-  setUser (user: SocialUserRO) {
+  setUser (user: CenterUserDetailRO) {
     this.user = user
     UserStorageUtil.set(user)
   }
@@ -41,7 +40,7 @@ export default class UserModule extends VuexModule {
     })
   }
 
-  loginAfterSetUserAndToken (loginRO: SocialLoginRO<UserVO>) {
+  loginAfterSetUserAndToken (loginRO: SocialLoginRO<CenterUserDetailRO>) {
     TokenUtil.set(loginRO.token)
     this.setUser(loginRO.user)
   }

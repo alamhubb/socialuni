@@ -5,6 +5,7 @@ import Alert from './Alert'
 import RouterUtil from '@/utils/RouterUtil'
 import UserVO from '@/model/user/UserVO'
 import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
+import SocialUserRO from '@/model/social/SocialUserRO'
 
 export default class PageUtil {
   static goHome (): void {
@@ -48,7 +49,7 @@ export default class PageUtil {
   }
 
   static toTalkAddPage () {
-    const user: UserVO = userModule.user
+    const user: SocialUserRO = userModule.user
     if (user && user.phoneNum) {
       RouterUtil.navigateTo(PagePath.talkAdd)
     } else {

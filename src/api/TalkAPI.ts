@@ -25,8 +25,8 @@ export default class TalkAPI {
     return http.post('talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
   }
 
-  static queryTalkDetailAPI (talkId: number) {
-    return http.post('talk/queryTalkDetail?talkId=' + talkId)
+  static queryTalkDetailAPI (talkId: string) {
+    return http.post('talk/queryTalkDetail', { talkId })
   }
 
   static addCommentAPI (comment: CommentAddVO) {

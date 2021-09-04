@@ -1,15 +1,14 @@
 import { configModule, systemModule, userModule } from '@/store'
-import UniUtil from './UniUtil'
 
 import AppMsg from '@/const/AppMsg'
 import Alert from './Alert'
 import Toast from '@/utils/Toast'
 import PageUtil from '@/utils/PageUtil'
-import UserVO from '@/model/user/UserVO'
+import SocialUserRO from '@/model/social/SocialUserRO'
 
 export default class MsgUtil {
   static unBindPhoneNum () {
-    const user: UserVO = userModule.user
+    const user: SocialUserRO = userModule.user
     if (!user) {
       MsgUtil.unLoginMessage()
     } else {
