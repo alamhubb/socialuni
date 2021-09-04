@@ -1,18 +1,16 @@
 <template>
   <!--  全部字体加大一号，白色背景，垂直居中，子元素宽度占满-->
   <!--  过来的授权及时手机号授权，也会提示先登录，可以自己选择手机号登录-->
-  <div class="h100p bg-white col-all-center">
+  <div class="h100p bg-white px col-between-center">
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
-    <div class="px w100p">
+    <div class="w100p pt-6p col-center flex-1">
       <div class="flex-none col-row-center h70px">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
         <div v-if="showPhoneView" class="text-md u-type-warning mt-xs">建议使用微信 或 QQ一键登录</div>
       </div>
 
-      <view class="mt h150px">
-        <phone-login-form v-if="showPhoneView" v-model="phoneFormData"></phone-login-form>
-
-        <view v-else class="h100p row-center pb-md">
+      <view class="mt-xs h145px">
+        <view class="h120px row-center">
           <!--          头部-->
 
           <!--          只有不为三方授权才显示logo-->
@@ -25,7 +23,7 @@
       </view>
 
       <!--      绑定手机号可发布动态提示-->
-      <div class="row-center pt-sm pb-sm">
+      <div class="row-center pb">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
@@ -36,11 +34,10 @@
       <!--        隐私提示-->
       <user-privacy-agreement></user-privacy-agreement>
 
-
       <!--    返回和登录方式切换-->
       <!--      这个div是为了处理居中问题-->
       <div>
-        <view class="h150px col-row-center">
+        <view class="h120px col-row-center">
           <view class="col-row-center w300px">
             <!--            微信登录界面，非手机号登录界面-->
             <template>
@@ -90,37 +87,38 @@
               </template>
             </template>
           </view>
-
-          <view class="row-between-center w300px h40px mt-lg">
-            <view class="row-col-center" @click="goBackPage">
-              <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
-              <view class="text-gray u-border-bottom">
-                {{ user ? '不绑定返回' : '不登录返回' }}
-              </view>
-            </view>
-
-            <view @click="switchShowPhoneNum" class="row-end-center">
-              <view class="text-gray">
-                <template v-if="!user">
-                  {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
-                </template>
-                <template v-else-if="user && isMpWx">
-                  {{ showPhoneView ? '其他方式绑定' : '验证码方式绑定' }}
-                </template>
-              </view>
-              <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
-              <u-icon class="ml-xs text-gray"
-                      name="arrow-right"></u-icon>
-            </view>
-          </view>
         </view>
       </div>
 
-      <!--      底部客服信息-->
-      <login-footer-app-info></login-footer-app-info>
+      <view class="row-between-center w100p mt">
+        <view class="row-col-center" @click="goBackPage">
+          <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
+          <view class="text-gray u-border-bottom">
+            {{ user ? '不绑定返回' : '不登录返回' }}
+          </view>
+        </view>
+
+        <view @click="switchShowPhoneNum" class="row-end-center">
+          <view class="text-gray">
+            <template v-if="!user">
+              {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
+            </template>
+            <template v-else-if="user && isMpWx">
+              {{ showPhoneView ? '其他方式绑定' : '验证码方式绑定' }}
+            </template>
+          </view>
+          <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
+          <u-icon class="ml-xs text-gray"
+                  name="arrow-right"></u-icon>
+        </view>
+      </view>
     </div>
+
+    <!--      底部客服信息-->
+    <login-footer-app-info class="w100p mb-sm"></login-footer-app-info>
   </div>
 </template>
+
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
