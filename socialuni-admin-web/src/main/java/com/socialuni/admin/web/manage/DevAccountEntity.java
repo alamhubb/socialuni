@@ -1,17 +1,13 @@
 package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.constant.AdminAppConfigConst;
-import com.socialuni.admin.web.constant.AdminUserType;
-import com.socialuni.admin.web.repository.TagRepository;
 import com.socialuni.center.sdk.redis.DevAccountRedis;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;
-import com.socialuni.social.entity.model.DO.tag.TagDO;
-import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.factory.SocialTagDOFactory;
-import com.socialuni.social.utils.UUIDUtil;
+import com.socialuni.social.sdk.repository.TagRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,22 +41,21 @@ public class DevAccountEntity {
         DevAccountDO devAccountDO = new DevAccountDO();
         Date curDate = new Date();
         devAccountDO.setPhoneNum(phoneNum);
-        devAccountDO.setSecretKey(UUIDUtil.getUUID());
+//        devAccountDO.setSecretKey(UUIDUtil.getUUID());
         devAccountDO.setAppGenderType(GenderType.all);
         devAccountDO.setDevNum(curDevNum);
-        devAccountDO.setType(AdminUserType.company);
+        devAccountDO.setType(DevAccountType.personal);
         devAccountDO.setStatus(StatusConst.enable);
         devAccountDO.setCreateTime(curDate);
         devAccountDO.setUpdateTime(curDate);
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
 
-
         //创建话题，还要创建用户
-        TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
+       /* TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
         tagDO = tagRepository.save(tagDO);
         tagDO.setTagTypeId(32);
         tagDO.setDevId(devAccountDO.getId());
-        tagDO = tagRepository.save(tagDO);
+        tagDO = tagRepository.save(tagDO);*/
         return devAccountDO;
     }
 }

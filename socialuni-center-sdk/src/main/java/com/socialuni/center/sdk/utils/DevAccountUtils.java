@@ -6,7 +6,6 @@ import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.repository.DevTokenRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.entity.model.DevAccountProviderDO;
-import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
@@ -43,7 +42,7 @@ public class DevAccountUtils {
     }
 
     public static String getDevSocialSecretKey() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         return devAccountDO.getSecretKey();
     }
 
@@ -57,7 +56,7 @@ public class DevAccountUtils {
     }
 
     public static Long getDevNum() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         return devAccountDO.getDevNum();
     }
 
@@ -70,7 +69,7 @@ public class DevAccountUtils {
     }
 
     public static Integer getDevId() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         return devAccountDO.getId();
     }
 
@@ -91,10 +90,10 @@ public class DevAccountUtils {
         if (StringUtils.isEmpty(secretKey)) {
             return null;
         }
-        return devAccountRepository.findFirstBySecretKey(secretKey);
+        return devAccountRepository.findOneBySecretKey(secretKey);
     }
 
-    public static DevAccountDO getDevAccount() {
+    public static DevAccountDO getDevAccountNotNull() {
         //先从req中获取
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
         if (devAccountDO == null) {
@@ -121,7 +120,7 @@ public class DevAccountUtils {
         if (!token.equals(tokenCode)) {
             return null;
         }
-        DevAccountDO devAccountDO = devAccountRepository.findFirstById(userIdInt);
+        DevAccountDO devAccountDO = devAccountRepository.findOneById(userIdInt);
         if (devAccountDO == null) {
             throw new SocialParamsException("token被破解");
         }

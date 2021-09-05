@@ -1,16 +1,20 @@
 package com.socialuni.center.web.insystem.admin;
 
+import com.socialuni.center.sdk.mode.SyncProdDevAccountQO;
+import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.entity.model.DevAccountProviderDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
-import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.factory.SocialTagDOFactory;
+import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.sdk.manage.SocialTagManage;
 import com.socialuni.social.sdk.repository.TagRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -19,15 +23,43 @@ public class SocialuniAdminService {
     private DevAccountRepository devAccountRepository;
     @Resource
     private TagRepository tagRepository;
+    @Resource
+    private SocialTagManage socialTagManage;
+    @Resource
+    private DevAccountProviderRepository devAccountProviderRepository;
 
     @Transactional
-    public void syncProdDevAccountToDev(DevAccountDO devAccount) {
-        devAccount.setId(null);
-        DevAccountDO devAccountDO = devAccountRepository.save(devAccount);
-        //创建话题，还要创建用户
-        TagDO tagDO = SocialTagDOFactory.toTagDO(devAccountDO.getDevNum().toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
-        tagDO.setDevId(devAccountDO.getId());
-        tagDO.setTagTypeId(32);
-        tagDO = tagRepository.save(tagDO);
+    public void syncProdDevAccountToDev(SyncProdDevAccountQO syncProdDevAccountQO) {
+        //判断此开发者是否已经创建，没创建则创建，创建则修改
+        DevAccountDO prodDevAccount = syncProdDevAccountQO.getDevAccountDO();
+        DevAccountDO devAccountDO = devAccountRepository.findOneById(prodDevAccount.getId());
+        List<DevAccountProviderDO> devAccountProviders = syncProdDevAccountQO.getDevAccountProviders();
+        //如果为空，则代表新建，则创建
+        if (devAccountDO == null) {
+            //新建dev，tag，providers
+            //设置为null，因为id自动生成
+//            prodDevAccount.setId(null);
+            devAccountDO = devAccountRepository.save(prodDevAccount);
+            socialTagManage.createDevAccountTagDO(devAccountDO);
+            if (devAccountProviders.size() < 1) {
+                throw new SocialParamsException("必须存在开发者渠道信息");
+            }
+        } else {
+            //更新dev
+            devAccountDO = devAccountRepository.save(prodDevAccount);
+            //名称不一致才修改name
+            if (!devAccountDO.getAppName().equals(prodDevAccount.getAppName())) {
+                TagDO devTag = tagRepository.findFirstByDevId(devAccountDO.getId());
+                devTag.setName(prodDevAccount.getAppName());
+            }
+            //判断name有没有修改，有修改则修改tag
+            //判断长度有没有大于1，有的话对应修改
+        }
+        //同步渠道信息
+        for (DevAccountProviderDO devAccountProvider : devAccountProviders) {
+            //设置为null，自动生成
+//                devAccountProvider.setId(null);
+            devAccountProviderRepository.save(devAccountProvider);
+        }
     }
 }

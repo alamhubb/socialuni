@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.config.websocket;
 
 import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.utils.IntegerUtils;
-import com.socialuni.social.web.sdk.config.redis.RedisUtil;
+import com.socialuni.social.sdk.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

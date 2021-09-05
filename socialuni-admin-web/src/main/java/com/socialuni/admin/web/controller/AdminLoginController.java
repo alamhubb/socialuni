@@ -21,8 +21,8 @@ public class AdminLoginController {
     AdminLoginService adminLoginService;
 
     @PostMapping("phoneLogin")
-    public ResultRO<SocialLoginRO<DevUserRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
-        ResultRO<SocialLoginRO<DevUserRO>> resultRO = adminLoginService.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<DevAccountRO>> resultRO = adminLoginService.phoneLogin(socialPhoneNumQO);
         return resultRO;
     }
 }

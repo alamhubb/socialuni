@@ -1,12 +1,12 @@
 package com.socialuni.admin.web.service;
 
 
-import com.socialuni.admin.web.controller.DevUserRO;
+import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.entity.model.DevTokenDO;
 import com.socialuni.center.sdk.repository.DevTokenRepository;
-import com.socialuni.api.feignAPI.insystem.SocialuniAdminAPI;
+import com.socialuni.center.sdk.feignAPI.SocialuniAdminAPI;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
@@ -34,7 +34,7 @@ public class AdminLoginService {
     SocialuniAdminAPI socialuniAdminAPI;
 
     @Transactional
-    public ResultRO<SocialLoginRO<DevUserRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         //所有平台，手机号登陆方式代码一致
         //登录的时候如果没有手机号，则手机号注册成功，自动注册一个user，用户名待填，自动生成一个昵称，密码待填，头像待上传
         //如果已经登录过，则返回那个已经注册的user，根据手机号获取user，返回登录成功
@@ -47,12 +47,10 @@ public class AdminLoginService {
         devAuthCodeManage.checkAuthCode(phoneNum, authCode);
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
-        DevAccountDO devAccountDO = devAccountRepository.findFirstByPhoneNumOrderByIdAsc(phoneNum);
+        DevAccountDO devAccountDO = devAccountRepository.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
         if (devAccountDO == null) {
             devAccountDO = devAccountEntity.createDevAccount(phoneNum);
-            //同步生产环境数据到开发环境
-//            socialuniAdminAPI.syncProdDevAccount(devAccountDO);
         }
 
         //有用户返回，没有创建
@@ -62,10 +60,10 @@ public class AdminLoginService {
         String userToken = SocialTokenUtil.generateTokenByUserId(userId);
         userToken = devTokenRepository.save(new DevTokenDO(userToken, userId)).getTokenCode();
 
-        DevUserRO devUserRO = new DevUserRO(devAccountDO);
-        devUserRO.setSecretKey(devAccountDO.getSecretKey());
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+//        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
 
-        SocialLoginRO<DevUserRO> socialLoginRO = new SocialLoginRO<>(userToken, devUserRO);
+        SocialLoginRO<DevAccountRO> socialLoginRO = new SocialLoginRO<>(userToken, devAccountRO);
 
         return ResultRO.success(socialLoginRO);
     }

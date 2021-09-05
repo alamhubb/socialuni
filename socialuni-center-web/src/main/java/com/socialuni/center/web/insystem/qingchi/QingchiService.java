@@ -48,7 +48,7 @@ public class QingchiService {
     private SocialProviderLoginDomain socialProviderLoginDomain;
 
     private DevAccountDO checkIsQingchiApp() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         // 只有清池支持渠道登录
         if (!devAccountDO.getId().equals(1)) {
             // 其他的只支持社交联盟登陆

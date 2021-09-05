@@ -1,15 +1,12 @@
 package com.socialuni.entity.model;
 
-import com.socialuni.social.constant.ConstStatus;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.entity.model.DO.CommonBaseDO;
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 开发者账户
@@ -37,6 +34,7 @@ public class DevAccountDO extends CommonContentBaseDO implements Serializable {
     private String identityNum;
     @Column(nullable = false, columnDefinition = "varchar(255) default '" + GenderType.all + "'")
     private String appGenderType;
+    private String appName;
     //手机号
     @Column(nullable = false)
     private String phoneNum;

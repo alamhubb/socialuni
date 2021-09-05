@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableSocialCloudServiceSDK
@@ -16,7 +18,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @MapperScan("com.socialuni.social.sdk.mapper")
 @EnableSocialEntitySDK
 @EnableSocialWebSDK
+@EnableTransactionManagement
+@EnableAsync
 @EnableConfigurationProperties({
+        SocialuniAppProperties.class,
         SocialuniAliMapProperties.class,
         SocialuniCloudTencentCosProperties.class,
         SocialuniProviderQQProperties.class,

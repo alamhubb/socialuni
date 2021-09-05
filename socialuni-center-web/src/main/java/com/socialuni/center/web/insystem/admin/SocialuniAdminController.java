@@ -1,11 +1,12 @@
 package com.socialuni.center.web.insystem.admin;
 
-import com.socialuni.api.feignAPI.insystem.SocialuniAdminAPI;
+import com.socialuni.center.sdk.feignAPI.SocialuniAdminAPI;
+import com.socialuni.center.sdk.mode.SyncProdDevAccountQO;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.web.sdk.constant.DevEnvType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,14 +26,21 @@ public class SocialuniAdminController implements SocialuniAdminAPI {
     private String envType;
 
     @Override
-    public ResultRO<Void> syncProdDevAccount(DevAccountDO devAccount) {
+    public ResultRO<Void> syncProdDevAccount(SyncProdDevAccountQO syncProdDevAccountQO) {
         if (!DevAccountUtils.getDevId().equals(1)) {
             throw new SocialParamsException("内部接口，不对外部提供服务");
         }
-        if (envType.contains(DevEnvType.prod)) {
-            throw new SocialParamsException("此接口仅开发环境可用");
+        //生产环境不支持
+        if (!SocialAppEnv.getIsDemoEnv()) {
+            throw new SocialParamsException("此接口仅支持演示环境");
         }
-        socialuniAdminService.syncProdDevAccountToDev(devAccount);
+        //同步生产环境开发者账号信息
+        socialuniAdminService.syncProdDevAccountToDev(syncProdDevAccountQO);
         return ResultRO.success();
+    }
+
+    @Override
+    public ResultRO<Void> syncUpdateProdDevAccountTagName(DevAccountDO devAccountDO) {
+        return null;
     }
 }

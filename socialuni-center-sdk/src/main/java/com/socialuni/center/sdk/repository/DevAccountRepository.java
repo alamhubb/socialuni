@@ -13,11 +13,13 @@ import java.util.Optional;
  */
 public interface DevAccountRepository extends JpaRepository<DevAccountDO, Integer> {
     @Cacheable(cacheNames = "getDevAccountById", key = "#id")
-    DevAccountDO findFirstById(Integer id);
+    DevAccountDO findOneById(Integer id);
 
     //直接携带秘钥访问
     @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
-    DevAccountDO findFirstBySecretKey(String secretKey);
+    DevAccountDO findOneBySecretKey(String secretKey);
+
+    DevAccountDO findOneByAppName(String appName);
 
 //    @Cacheable(cacheNames = "getDevAccountByDevNum", key = "#p0")
 //    Optional<DevAccountDO> findFirstByDevNum(Long devNum);
@@ -26,5 +28,5 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDO, Intege
     Optional<DevAccountDO> findFirstByOrderByIdDesc();
 
     //不需要缓存，低频, admin登录使用
-    DevAccountDO findFirstByPhoneNumOrderByIdAsc(String phoneNum);
+    DevAccountDO findOneByPhoneNumOrderByIdAsc(String phoneNum);
 }

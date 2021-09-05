@@ -20,7 +20,7 @@ public class CenterDevAccountEntity {
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
     public UserDO getOrCreateDevAccountUserDO() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
 
         String phoneNum = devAccountDO.getPhoneNum();
 

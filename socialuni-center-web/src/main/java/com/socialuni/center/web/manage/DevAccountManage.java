@@ -25,7 +25,7 @@ public class DevAccountManage {
             throw new SocialBusinessException("应用未注册社交联盟开发者");
         }
         //开发者账号正确
-        DevAccountDO threeDevDO = devAccountRepository.findFirstById(devAccountProviderDO.getDevId());
+        DevAccountDO threeDevDO = devAccountRepository.findOneById(devAccountProviderDO.getDevId());
         //还能知道密钥是否被盗用
         //校验密钥是否正确
         /*String threeSecretKey = authVO.getThreeSecretKey();

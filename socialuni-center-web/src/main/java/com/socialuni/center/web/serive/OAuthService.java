@@ -42,7 +42,7 @@ public class OAuthService {
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> oAuthUserInfo(OAuthUserInfoQO authVO, UserDO mineUser, String authType) {
         //获取开发者对应的账号
         SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         SocialLoginRO<CenterMineUserDetailRO> loginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.user, devAccountDO, socialMineUserDetailRO);
 
         return ResultRO.success(loginRO);

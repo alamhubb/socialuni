@@ -1,6 +1,5 @@
 package com.socialuni.center.web.serive;
 
-import com.github.promeg.pinyinhelper.Pinyin;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.entity.model.DevAccountDO;
@@ -18,7 +17,7 @@ public class CenterCosService {
 
     public ResultRO<SocialCosAuthRO> getCosAuth() {
         String userId = CenterUserUtil.getMineThirdUserId();
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
 //        String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();
 //        String uploadImgPath = devAppName + "/user/" + userId + "/";
         String uploadImgPath = "user/" + userId + "/";

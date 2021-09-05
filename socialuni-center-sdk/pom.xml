@@ -24,6 +24,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>socialuni-entity</artifactId>
