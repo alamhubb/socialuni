@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.manage;
 
-import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
@@ -21,11 +20,12 @@ public class SocialTagManage {
         return tagDO;
     }
 
-    public TagDO createDevAccountTagDO(DevAccountDO devAccountDO) {
-        TagDO tagDO = SocialTagDOFactory.toTagDO(devAccountDO.getAppName(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
+    public TagDO createDevAccountTagDO(Integer devId, String appName) {
+        TagDO tagDO = SocialTagDOFactory.toTagDO(appName, "开发者对应的话题", SocialAppConfig.getSystemUserId());
 
         tagDO.setTagTypeId(32);
-        tagDO.setDevId(devAccountDO.getId());
+        tagDO.setDevId(devId);
+        tagDO.setShowFront(false);
 
         tagDO = tagRepository.save(tagDO);
         return tagDO;

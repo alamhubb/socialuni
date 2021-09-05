@@ -7,7 +7,7 @@ import com.socialuni.center.web.manage.ThirdUserAuthManage;
 import com.socialuni.center.web.manage.ThirdUserManage;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
-import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;

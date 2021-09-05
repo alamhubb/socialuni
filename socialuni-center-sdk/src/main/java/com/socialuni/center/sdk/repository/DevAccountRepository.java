@@ -1,6 +1,6 @@
 package com.socialuni.center.sdk.repository;
 
-import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -21,8 +21,7 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDO, Intege
 
     DevAccountDO findOneByAppName(String appName);
 
-//    @Cacheable(cacheNames = "getDevAccountByDevNum", key = "#p0")
-//    Optional<DevAccountDO> findFirstByDevNum(Long devNum);
+    DevAccountDO findOneByDevNum(Long devNum);
 
     //获取最新的开发者账户，用来id相加，不缓存，低频，创建时才是用
     Optional<DevAccountDO> findFirstByOrderByIdDesc();

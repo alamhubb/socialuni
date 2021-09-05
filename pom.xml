@@ -31,7 +31,6 @@
         <module>socialuni-api</module>
         <module>socialuni-demo</module>
         <module>socialuni-utils</module>
-        <module>socialuni-entity</module>
         <module>socialuni-center-web</module>
         <module>socialuni-center-sdk</module>
         <module>socialuni-admin-web</module>
@@ -99,11 +98,6 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-center-sdk</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-entity</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

@@ -1,4 +1,4 @@
-package com.socialuni.entity.model;
+package com.socialuni.center.sdk.mode;
 
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
 import lombok.Data;

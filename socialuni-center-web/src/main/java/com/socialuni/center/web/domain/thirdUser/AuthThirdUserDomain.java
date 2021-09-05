@@ -4,7 +4,7 @@ import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;

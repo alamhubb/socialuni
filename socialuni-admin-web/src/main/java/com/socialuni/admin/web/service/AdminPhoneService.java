@@ -4,7 +4,7 @@ package com.socialuni.admin.web.service;
 import com.socialuni.admin.web.config.AppStaticData;
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
 import com.socialuni.cloud.tencent.TencentSmsServe;
-import com.socialuni.entity.model.DevAuthCodeDO;
+import com.socialuni.center.sdk.mode.DevAuthCodeDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.exception.SocialParamsException;

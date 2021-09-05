@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
 import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.social.exception.constant.ErrorCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,7 +1,5 @@
 package com.socialuni.center.sdk.mode;
 
-import com.socialuni.entity.model.DevAccountDO;
-import com.socialuni.entity.model.DevAccountProviderDO;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

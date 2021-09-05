@@ -9,8 +9,8 @@ import com.socialuni.center.sdk.redis.DevAccountRedis;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.entity.model.DevAccountDO;
-import com.socialuni.entity.model.DevAccountProviderDO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.mode.DevAccountProviderDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
@@ -87,7 +87,7 @@ public class AdminAccountService {
                 throw new SocialParamsException("微信小程序Id不可为空");
             }
             if (StringUtils.isEmpty(wxMpAppName)) {
-                throw new SocialParamsException("微信小程序名称不可为空");
+                wxMpAppName = appName;
             }
             //只有新旧内容不一致
             //两个都不为空
@@ -124,7 +124,7 @@ public class AdminAccountService {
                 throw new SocialParamsException("qq小程序Id不可为空");
             }
             if (StringUtils.isEmpty(qqMpAppName)) {
-                throw new SocialParamsException("qq小程序名称不可为空");
+                qqMpAppName = appName;
             }
             //两个都不为空
             //根据绑定小程序查找，是否已被使用
@@ -173,7 +173,7 @@ public class AdminAccountService {
                 devAccountDO.setSecretKey(UUIDUtil.getUUID());
                 //初始化时需要让开发环境同步增加tag
                 //设置对应的开发者app名称
-                socialTagManage.createDevAccountTagDO(devAccountDO);
+                socialTagManage.createDevAccountTagDO(devAccountDO.getId(), appName);
             } else {
                 devAccountDO.setAppName(appName);
                 //改名，更新tag名称
@@ -183,12 +183,9 @@ public class AdminAccountService {
         }
 
         //新建和修改，数量必然大于0，代表需要向开发环境同步
-        if (createDevProviders.size() > 0) {
-            SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountDO, createDevProviders);
-
-            //调用api的时候，要区分出来是更新还是新增，尽早区分
-            socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
-        }
+        SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountDO, createDevProviders);
+        //调用api的时候，要区分出来是更新还是新增，尽早区分
+        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
 
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
         DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);

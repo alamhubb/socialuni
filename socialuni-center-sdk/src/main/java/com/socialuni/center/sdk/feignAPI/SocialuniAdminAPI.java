@@ -15,7 +15,7 @@ import javax.validation.Valid;
  * 前端初始化内容
  */
 @RequestMapping("admin")
-@FeignClient(name = "admin", url = "${socialuni.dev-server-url:https://devapi.qingchiapp.com}")
+@FeignClient(name = "admin", url = "${socialuni.admin.dev-server-url:https://devapi.qingchiapp.com}")
 public interface SocialuniAdminAPI {
     //同步创建生产环境的开发者账号
     @PostMapping("syncProdDevAccount")

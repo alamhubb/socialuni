@@ -5,7 +5,7 @@ import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.entity.model.DevAccountDO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.domain.login.SocialPhoneLoginDomain;
