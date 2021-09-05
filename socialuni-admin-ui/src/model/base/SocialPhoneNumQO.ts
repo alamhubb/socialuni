@@ -1,5 +1,5 @@
 export default class SocialPhoneNumQO {
-  phoneNum = '15910779659'
+  phoneNum: string = null
   authCode: string = null
   password: string = null
 }

@@ -8,7 +8,7 @@ export default class UserAPI {
   }
 
   static resetSecretKeyAPI() {
-    return request.post<DevAccountRO>('user/resetSecretKey')
+    return request.post<string>('user/resetSecretKey')
   }
 
   static updateDevAccountAPI(user: DevAccountRO) {
