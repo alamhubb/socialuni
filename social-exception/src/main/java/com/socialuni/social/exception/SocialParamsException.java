@@ -7,6 +7,6 @@ import com.socialuni.social.exception.base.SocialWarnException;
 public class SocialParamsException extends SocialWarnException {
     //用户未登录访问了需要登录的接口
     public SocialParamsException(String errorMsg) {
-        super(errorMsg, ErrorCode.PARAMS_ERROR, "异常访问");
+        super(errorMsg, ErrorCode.PARAMS_ERROR, errorMsg);
     }
 }

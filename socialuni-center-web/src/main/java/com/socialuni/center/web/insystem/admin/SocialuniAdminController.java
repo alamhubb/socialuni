@@ -31,7 +31,7 @@ public class SocialuniAdminController implements SocialuniAdminAPI {
             throw new SocialParamsException("内部接口，不对外部提供服务");
         }
         //生产环境不支持
-        if (!SocialAppEnv.getIsDemoEnv()) {
+        if (!SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialParamsException("此接口仅支持演示环境");
         }
         //同步生产环境开发者账号信息

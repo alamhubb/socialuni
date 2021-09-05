@@ -32,7 +32,7 @@ public class SoicialTagAddDomain {
     private SocialTagManage socialTagManage;
 
     public TagRO addTag(UserDO mineUser, TagAddQO tagAddVO) {
-        if (SocialAppEnv.getIsDemoEnv()) {
+        if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
         }
 

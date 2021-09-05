@@ -10,6 +10,7 @@ public abstract class SocialException extends RuntimeException {
     private final String innerMsg;
 
     public SocialException(String errorMsg, Integer errorCode, String errorType, String innerMsg) {
+        super(innerMsg);
         this.errorMsg = errorMsg;
         this.errorType = errorType;
         this.errorCode = errorCode;
