@@ -2,6 +2,7 @@ spring:
   profiles:
 #    active: local
     active: localprod
+#    active: prod
   jpa:
     database: MYSQL
     #    show-sql: true
@@ -19,3 +20,6 @@ spring:
     throw-exception-if-no-handler-found: true
   main:
     allow-bean-definition-overriding: true
+logging:
+  file:
+    name: admin.log
