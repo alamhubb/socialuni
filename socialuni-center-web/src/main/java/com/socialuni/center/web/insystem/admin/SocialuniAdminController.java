@@ -4,10 +4,8 @@ import com.socialuni.center.sdk.feignAPI.SocialuniAdminAPI;
 import com.socialuni.center.sdk.mode.SyncProdDevAccountQO;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.cloud.config.SocialAppEnv;
-import com.socialuni.entity.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -22,8 +20,6 @@ public class SocialuniAdminController implements SocialuniAdminAPI {
     //绑定手机号，绑定微信手机号，发送验证码，手机号登录都是清池专属
     @Resource
     private SocialuniAdminService socialuniAdminService;
-    @Value("${spring.profiles.active}")
-    private String envType;
 
     @Override
     public ResultRO<Void> syncProdDevAccount(SyncProdDevAccountQO syncProdDevAccountQO) {
@@ -37,10 +33,5 @@ public class SocialuniAdminController implements SocialuniAdminAPI {
         //同步生产环境开发者账号信息
         socialuniAdminService.syncProdDevAccountToDev(syncProdDevAccountQO);
         return ResultRO.success();
-    }
-
-    @Override
-    public ResultRO<Void> syncUpdateProdDevAccountTagName(DevAccountDO devAccountDO) {
-        return null;
     }
 }

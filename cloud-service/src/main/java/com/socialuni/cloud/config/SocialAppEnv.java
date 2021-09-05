@@ -23,8 +23,8 @@ public class SocialAppEnv {
         return activeEnv.equals(DevEnvType.prod);
     }
 
-    //判断是否为demo环境，只有不为demo环境才能创建tag，开发和生产可以创建
-    public static Boolean getIsDemoEnv() {
-        return activeEnv.equals(DevEnvType.demo);
+    //判断是否为开发生产环境，只有不为开发生产环境才能创建tag，开发和生产可以创建
+    public static Boolean getIsDevProdEnv() {
+        return activeEnv.contains(DevEnvType.devprod);
     }
 }
