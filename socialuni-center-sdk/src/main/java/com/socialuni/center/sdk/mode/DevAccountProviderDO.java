@@ -11,7 +11,11 @@ import java.io.Serializable;
 @Entity
 @Table(name = "dev_account_provider",
         indexes = {
-                @Index(columnList = "status")
+                @Index(columnList = "status"),
+                @Index(columnList = "devId"),
+                @Index(columnList = "appId"),
+                @Index(columnList = "platform"),
+                @Index(columnList = "mpType")
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"appId", "platform", "mpType"})
