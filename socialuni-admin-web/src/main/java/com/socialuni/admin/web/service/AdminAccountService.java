@@ -161,12 +161,14 @@ public class AdminAccountService {
         //更新开发者信息
         devAccountDO.setUpdateTime(new Date());
 
+        boolean isCreateDevAccount = false;
         //如果app名称是空，则代表首次设置，则生成tag名称
         //如果新旧不一样，则肯定要同步，就是要区分是更新，还是新建的问题
         //如果名称不一致，则代表修改了app名称
         if (!appName.equals(devAccountDO.getAppName())) {
             //如果之前为空，则代表初始化
             if (StringUtils.isEmpty(devAccountDO.getAppName())) {
+                isCreateDevAccount = true;
                 //不能拿到外层，因为有判断
                 devAccountDO.setAppName(appName);
                 //初始化时生成uuid
@@ -189,6 +191,10 @@ public class AdminAccountService {
 
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
         DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+        //如果为创建，首次则返回秘钥
+        if (isCreateDevAccount) {
+            devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+        }
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);
     }
