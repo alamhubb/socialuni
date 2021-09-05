@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-
-Vue.use(VueRouter)
-
+import VueRouter from 'vue-router'
 /* Layout */
 import Layout from '@/components/layout/Layout.vue'
+
+Vue.use(VueRouter)
 
 export const constantRoutes = [
   {
@@ -22,7 +21,7 @@ export const constantRoutes = [
       {
         path: '',
         name: 'strengthMonitoring',
-        component: () => import('@/views/login/index.vue'),
+        component: () => import('@/views/login/Login.vue'),
         meta: { title: '登陆', icon: 'strengthMonitoring' }
       }]
   },

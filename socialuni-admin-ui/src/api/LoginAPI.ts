@@ -1,11 +1,11 @@
 import request from '@/plugins/request'
 import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import SocialLoginRO from '@/model/base/SocialLoginRO'
-import UserVO from '@/model/base/UserVO'
+import DevAccountRO from '@/model/base/DevAccountRO'
 
 export default class LoginAPI {
   static loginAPI(user: SocialPhoneNumQO) {
-    return request.post<SocialLoginRO<UserVO>>('user/phoneLogin', user).then(res => {
+    return request.post<SocialLoginRO<DevAccountRO>>('user/phoneLogin', user).then(res => {
       return res.data
     })
   }

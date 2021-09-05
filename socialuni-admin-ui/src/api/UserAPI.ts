@@ -1,5 +1,5 @@
 import request from '@/plugins/request'
-import UserVO from '@/model/base/UserVO'
+import DevAccountRO from '@/model/base/DevAccountRO'
 import ToastUtil from '@/utils/ToastUtil'
 
 export default class UserAPI {
@@ -8,11 +8,11 @@ export default class UserAPI {
   }
 
   static resetSecretKeyAPI() {
-    return request.post('user/resetSecretKey')
+    return request.post<DevAccountRO>('user/resetSecretKey')
   }
 
-  static updateDevAccountAPI(user: UserVO) {
-    return request.post('user/updateUser', user).then(res => {
+  static updateDevAccountAPI(user: DevAccountRO) {
+    return request.post<DevAccountRO>('user/updateDevAccount', user).then(res => {
       ToastUtil.success('修改成功')
       return res
     })

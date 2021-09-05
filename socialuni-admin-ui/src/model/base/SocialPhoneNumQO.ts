@@ -1,9 +1,5 @@
 export default class SocialPhoneNumQO {
-  phoneNum: string = null
+  phoneNum = '15910779659'
   authCode: string = null
-
-  constructor(phoneNum: string, authCode?: string) {
-    this.phoneNum = phoneNum
-    this.authCode = authCode
-  }
+  password: string = null
 }

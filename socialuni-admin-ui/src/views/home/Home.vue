@@ -1,11 +1,8 @@
 <template>
   <div class="h100p row-all-center">
     <el-card class="w600">
-      <el-form label-position="right" label-width="120px">
-        <el-form-item label="当前用户：">
-          {{ user.phoneNum }}
-        </el-form-item>
-        <el-form-item label="开发者ID：">
+      <el-form ref="devForm" :model="user" :rules="formRule" label-position="right" label-width="130px">
+        <el-form-item label="开发者Id：">
           <div class="row-between-center">
             <div>
               {{ user.devNum }}
@@ -23,10 +20,10 @@
         </el-form-item>
         <el-form-item label="开发者密钥：">
           <div class="row-between-center">
-            <div>
-              {{ user.secretKey || '不记录显示，忘记点重置' }}
+            <div class="color-content">
+              {{ user.secretKey || '填写app简称后生成秘钥' }}
             </div>
-            <div>
+            <div v-if="userHasSecretKey">
               <el-button
                 v-clipboard:copy="user.secretKey"
                 type="text"
@@ -41,32 +38,48 @@
               </el-tooltip>
             </div>
           </div>
-
         </el-form-item>
-        <el-form-item label="开发者类型">
+        <!--        <el-form-item label="开发者类型：">
           <div class="row-between-center">
             <el-radio-group v-model="user.type">
-              <el-radio border :label="UserType.company">企业</el-radio>
-              <el-radio border :label="UserType.person">个人</el-radio>
+              <el-radio border :label="$const.DevAccountType.company">企业</el-radio>
+              <el-radio border :label="$const.DevAccountType.personal">个人</el-radio>
             </el-radio-group>
-
-            <el-button type="primary" plain @click="updateUser">更新</el-button>
+            <el-button type="primary" plain @click="updateUser">
+              {{ userSecretKey ? '更新' : '生成秘钥' }}
+            </el-button>
+          </div>
+        </el-form-item>-->
+        <el-form-item label="app简称：" prop="appName">
+          <div class="row-between-center">
+            <div>
+              <el-input
+                v-model="user.appName"
+                placeholder="请输入app简称后生成秘钥"
+                type="text"
+                :maxlength="6"
+                clearable
+              />
+            </div>
+            <el-button type="primary" plain :disabled="!user.appName" @click="updateUser">
+              {{ userHasSecretKey ? '更新' : '生成秘钥' }}
+            </el-button>
           </div>
         </el-form-item>
-        <el-form-item :label="userTypeLabel" required>
+        <!--        <el-form-item :label="userTypeLabel+'：'" required>
           <el-input v-model="user.realName" />
+        </el-form-item>-->
+        <el-form-item label="微信 appId：" prop="wxMpAppId">
+          <el-input v-model="user.wxMpAppId" placeholder="微信和qq appId至少填写一个" clearable @input="clearValidate" />
         </el-form-item>
-        <el-form-item label="微信小程序Id">
-          <el-input v-model="user.wxMpAppId" />
+        <el-form-item label="微信小程序名称：">
+          <el-input v-model="user.wxMpAppName" placeholder="不填写默认app简称" clearable @input="clearValidate" />
         </el-form-item>
-        <el-form-item label="微信小程序名称">
-          <el-input v-model="user.wxMpAppName" />
+        <el-form-item label="qq appId：" prop="qqMpAppId">
+          <el-input v-model="user.qqMpAppId" placeholder="微信和qq appId至少填写一个" clearable />
         </el-form-item>
-        <el-form-item label="qq小程序Id">
-          <el-input v-model="user.qqMpAppId" />
-        </el-form-item>
-        <el-form-item label="qq小程序名称">
-          <el-input v-model="user.qqMpAppName" />
+        <el-form-item label="qq小程序名称：">
+          <el-input v-model="user.qqMpAppName" placeholder="不填写默认app简称" clearable />
         </el-form-item>
       </el-form>
     </el-card>
@@ -75,30 +88,61 @@
 
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
-import UserVO from '@/model/base/UserVO'
+import DevAccountRO from '@/model/base/DevAccountRO'
 import { namespace } from 'vuex-class'
-import UserType from '@/constants/UserType'
+import DevAccountType from '@/constants/DevAccountType'
 import { OperationType } from '@/constants/OperationType'
 import ToastUtil from '@/utils/ToastUtil'
 import AlertUtil from '@/utils/AlertUtil'
 import UserAPI from '@/api/UserAPI'
+import { ElForm } from 'element-ui/types/form'
+import { userModule } from '@/store'
 
 const userStore = namespace('user')
 @Component
 export default class HomePage extends Vue {
-  @userStore.State('user') user: UserVO
+  $refs: {
+    devForm: ElForm
+  }
+
+  @userStore.State('user') user: DevAccountRO
 
   operateType = OperationType.detail
-  backUser: UserVO
+  backUser: DevAccountRO
+
+  formRule = {
+    appName: [
+      { required: true, trigger: 'blur', message: '请输入app中文简称' }, {
+        required: true,
+        trigger: 'blur',
+        message: '请输入2-6个字符长度的app简称', min: 2, max: 6
+      }],
+    wxMpAppId: [{ validator: this.checkWxAndQQAppIdNotNull, trigger: 'blur' }],
+    qqMpAppId: [{ validator: this.checkWxAndQQAppIdNotNull, trigger: 'blur' }]
+  }
+
+  clearValidate() {
+    if (this.user.wxMpAppId || this.user.qqMpAppId) {
+      this.$refs.devForm.clearValidate()
+      this.$refs.devForm.validate()
+    }
+  }
+
+  checkWxAndQQAppIdNotNull(rule, value: string, callback: Function) {
+    if (this.user.wxMpAppId || this.user.qqMpAppId) {
+      callback()
+      return
+    }
+    callback(new Error('微信和qq appId至少填写一个'))
+    return
+  }
 
   get disabledEdit() {
     return this.operateType === OperationType.detail
   }
 
-  UserType = UserType
-
   get userTypeLabel() {
-    return this.user.type === UserType.person ? '个人姓名' : '企业名称'
+    return this.user.type === DevAccountType.personal ? '个人姓名' : '企业名称'
   }
 
   getSecretKey() {
@@ -115,12 +159,17 @@ export default class HomePage extends Vue {
     ToastUtil.success('复制成功')
   }
 
-  updateUser() {
+  async updateUser() {
+    await this.$refs.devForm.validate()
     AlertUtil.confirm('是否确定要修改开发者信息').then(() => {
       UserAPI.updateDevAccountAPI(this.user).then(res => {
-        this.user = res.data
+        userModule.user = res.data
       })
     })
+  }
+
+  get userHasSecretKey() {
+    return !!this.user.secretKey
   }
 }
 </script>

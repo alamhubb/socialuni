@@ -12,10 +12,10 @@
           :model="loginUser"
           :rules="loginRules"
           auto-complete="on"
-          label-position="left"
+          label-position="top"
         >
-          <el-form-item label="手机号" prop="phoneNum">
-            <br>
+
+          <el-form-item label="手机号" prop="phoneNum" label-width="70px">
             <div class="flex-row">
               <el-input
                 v-model="loginUser.phoneNum"
@@ -28,8 +28,18 @@
               </el-input>
             </div>
           </el-form-item>
-          <el-form-item label="验证码" prop="authCode">
-            <br>
+          <!--          <el-form-item label="密码" prop="phoneNum" label-width="70px">
+            <div class="flex-row">
+              <el-input
+                v-model="loginUser.phoneNum"
+                placeholder="请输入密码"
+                type="text"
+                :maxlength="11"
+                clearable
+              />
+            </div>
+          </el-form-item>-->
+          <el-form-item label="验证码" prop="authCode" label-width="70px">
             <div class="flex-row">
               <el-input
                 ref="authCode"
@@ -97,7 +107,7 @@ export default class LoginPage extends Vue {
     authCode: ElInput;
   }
 
-  loginUser: SocialPhoneNumQO = new SocialPhoneNumQO('', '')
+  loginUser: SocialPhoneNumQO = new SocialPhoneNumQO()
 
   authCodeInterval = 30
 

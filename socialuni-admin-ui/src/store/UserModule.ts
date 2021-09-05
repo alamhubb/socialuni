@@ -8,13 +8,13 @@ import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import TokenUtil from '@/utils/TokenUtil'
 import UserAPI from '@/api/UserAPI'
-import UserVO from '@/model/base/UserVO'
+import DevAccountRO from '@/model/base/DevAccountRO'
 
 @Module({ generateMutationSetters: true })
 export default class UserModule extends VuexModule {
-  user: UserVO = StorageUtil.getObj(AppConst.loginUser) || null
+  user: DevAccountRO = StorageUtil.getObj(AppConst.loginUser) || null
 
-  setUser(user: UserVO) {
+  setUser(user: DevAccountRO) {
     this.user = user
     if (user) {
       StorageUtil.setObj(AppConst.loginUser, user)

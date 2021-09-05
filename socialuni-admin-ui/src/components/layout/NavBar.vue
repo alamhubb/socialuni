@@ -15,7 +15,7 @@
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
-          <el-tag class="mr-10" type="warning" effect="dark">内测账号</el-tag>
+          <el-tag class="mr-10" type="warning" effect="dark">{{ user.phoneNum }}</el-tag>
           <el-dropdown>
             <div>
               <el-avatar shape="square" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png" />
@@ -50,7 +50,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import NavMenu from '@/components/layout/NavMenu.vue'
 import NavBreadcrumb from '@/components/layout/NavBreadcrumb.vue'
-import UserVO from '@/model/base/UserVO'
+import DevAccountRO from '@/model/base/DevAccountRO'
 
 import { namespace } from 'vuex-class'
 import { userModule } from '@/store'
@@ -61,7 +61,7 @@ const userStore = namespace('user')
   components: { NavBreadcrumb, NavMenu }
 })
 export default class NavBar extends Vue {
-  @userStore.State('user') user: UserVO
+  @userStore.State('user') user: DevAccountRO
 
   longinOut() {
     userModule.userLoginOut()
