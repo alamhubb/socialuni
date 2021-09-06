@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.Objects;
@@ -36,8 +38,18 @@ public class WxProviderUtil {
         String platform = unionIdData.getPlatform();
         String code = unionIdData.getCode();
 
+
         if (PlatformType.mp.equals(platform)) {
-            String url = WxProviderUtil.getUnionIdUrl(platform, code);
+            String wxMpId = unionIdData.getAppId();
+            String wxMpSecret = unionIdData.getSecret();
+            if (StringUtils.isEmpty(wxMpId)) {
+                wxMpId = WxProviderUtil.wxMpId;
+            }
+            if (StringUtils.isEmpty(wxMpSecret)) {
+                wxMpSecret = WxProviderUtil.wxMpSecret;
+            }
+
+            String url = WxProviderUtil.getUnionIdUrl(platform, code, wxMpId, wxMpSecret);
             ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.restTemplate().getForEntity(url, UniUnionIdRO.class);
             UniUnionIdRO uniUnionIdRO = Objects.requireNonNull(responseEntity.getBody());
             // 微信需要单独解析
@@ -54,7 +66,7 @@ public class WxProviderUtil {
         throw new UniSdkException(PlatformType.notSupportTypeErrorMsg + ":" + platform);
     }
 
-    private static String getUnionIdUrl(String platform, String code) {
+    private static String getUnionIdUrl(String platform, @Valid @NotBlank String code, @Valid @NotBlank String wxMpId, @Valid @NotBlank String wxMpSecret) {
         if (PlatformType.mp.equals(platform)) {
             return MessageFormat.format(WxUrl.wx_mp_unionId_url, wxMpId, wxMpSecret, code);
         }
