@@ -1,7 +1,7 @@
 package com.socialuni.center.sdk.constant;
 
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.List;
  * @date 2019-09-28 10:06
  */
 public class SocialuniSupportProviderType {
-    public static final String wx = ProviderType.wx;
-    public static final String qq = ProviderType.qq;
+    public static final String wx = UniappProviderType.wx;
+    public static final String qq = UniappProviderType.qq;
 
     public final static List<String> supportProviderTypes = Arrays.asList(wx, qq);
 

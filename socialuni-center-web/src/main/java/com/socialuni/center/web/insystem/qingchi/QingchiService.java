@@ -61,6 +61,7 @@ public class QingchiService {
     @Transactional
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
+        loginQO.setDevId(devAccountDO.getId());
         SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
 
         UserDO mineUser = SocialUserUtil.get(socialLoginRO.getUser().getId());

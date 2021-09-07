@@ -4,7 +4,7 @@ import com.socialuni.social.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.ReportDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
@@ -61,7 +61,7 @@ public class ReportResultPushUtils {
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;
-        if (provider.equals(ProviderType.qq)) {
+        if (provider.equals(UniappProviderType.qq)) {
             //举报内容
             data.put("keyword5", notifyVO.getBeContent());
             //被举报人
@@ -76,7 +76,7 @@ public class ReportResultPushUtils {
             data.put("keyword2", notifyVO.getRemark());
 
             pushMsgDTO = new PushMsgDTO(QQConst.report_result_template_id, data, "keyword4.DATA");
-        } else if (provider.equals(ProviderType.wx)) {
+        } else if (provider.equals(UniappProviderType.wx)) {
             //审核内容
             data.put("thing5", notifyVO.getBeContent());
             //审核结果

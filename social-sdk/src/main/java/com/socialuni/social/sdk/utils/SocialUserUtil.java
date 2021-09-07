@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.ProviderLoginType;
+import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
@@ -129,7 +129,7 @@ public class SocialUserUtil {
     }
 
     public static UserDO getByUid(String uid) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(ProviderLoginType.socialuni, uid);
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(SocialuniProviderLoginType.socialuni, uid);
         if (socialUserAccountDO == null) {
             throw new SocialNullUserException();
         }

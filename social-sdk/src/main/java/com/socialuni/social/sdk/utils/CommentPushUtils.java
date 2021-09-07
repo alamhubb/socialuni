@@ -5,7 +5,7 @@ import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
@@ -44,7 +44,7 @@ public class CommentPushUtils {
         PushMsgDTO pushMsgDTO = null;
 //        String page = AppConfigConst.notify_skip_page + UnionIdDbUtil.createTalkUid(talk.getId(), notify.getReceiveUserId());
         String page = AppConfigConst.notify_skip_page;
-        if (platform.equals(ProviderType.qq)) {
+        if (platform.equals(UniappProviderType.qq)) {
             //评论内容
             data.put("keyword5", pushNotifyVO.getContent());
             //评论用户
@@ -57,7 +57,7 @@ public class CommentPushUtils {
             data.put("keyword2", pushNotifyVO.getBeNickname());
 
             pushMsgDTO = new PushMsgDTO(QQConst.comment_template_id, page, data, "keyword5.DATA");
-        } else if (platform.equals(ProviderType.wx)) {
+        } else if (platform.equals(UniappProviderType.wx)) {
             //评论内容
             data.put("thing2", pushNotifyVO.getContent());
             //评论用户

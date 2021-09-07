@@ -12,7 +12,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.constant.ProviderLoginType;
+import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.entity.user.SocialProviderLoginEntity;
 import com.socialuni.social.sdk.manage.TokenManage;
@@ -44,7 +44,7 @@ public class ProviderLoginEntity {
 
         SocialProviderLoginQO customLoginQO = new SocialProviderLoginQO();
 
-        customLoginQO.setProvider(ProviderLoginType.socialuni);
+        customLoginQO.setProvider(SocialuniProviderLoginType.socialuni);
         customLoginQO.setPlatform(PlatformType.mp);
         customLoginQO.setOpenId(centerMineUserDetailRO.getId());
         customLoginQO.setUnionId(centerMineUserDetailRO.getId());

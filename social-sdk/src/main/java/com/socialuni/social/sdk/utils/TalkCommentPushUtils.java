@@ -6,7 +6,7 @@ import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
@@ -38,7 +38,7 @@ public class TalkCommentPushUtils {
         PushMsgDTO pushMsgDTO = null;
 //        String page = AppConfigConst.notify_skip_page + UnionIdDbUtil.createTalkUid(talk.getId(), notify.getReceiveUserId());
         String page = AppConfigConst.notify_skip_page;
-        if (provider.equals(ProviderType.qq)) {
+        if (provider.equals(UniappProviderType.qq)) {
             //评论内容
             data.put("keyword3", pushNotifyVO.getContent());
             //评论用户
@@ -48,7 +48,7 @@ public class TalkCommentPushUtils {
             //帖子内容
             data.put("keyword2", pushNotifyVO.getBeContent());
             pushMsgDTO = new PushMsgDTO(QQConst.talk_template_id, page, data, "keyword3.DATA");
-        } else if (provider.equals(ProviderType.wx)) {
+        } else if (provider.equals(UniappProviderType.wx)) {
             //评论内容
             data.put("thing2", pushNotifyVO.getContent());
             //评论用户

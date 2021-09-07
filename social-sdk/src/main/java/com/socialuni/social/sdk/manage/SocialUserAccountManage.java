@@ -2,10 +2,8 @@ package com.socialuni.social.sdk.manage;
 
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
 import com.socialuni.social.exception.UniSdkException;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.store.SocialUserAccountStore;
@@ -44,6 +42,7 @@ public class SocialUserAccountManage {
     public SocialUserAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
         socialUserAccountDO.setUserId(userId);
+        socialUserAccountDO.setDevId(loginQO.getDevId());
         socialUserAccountDO.setPlatform(loginQO.getPlatform());
         socialUserAccountDO.setProvider(loginQO.getProvider());
         String openId = uniUnionIdRO.getOpenid();

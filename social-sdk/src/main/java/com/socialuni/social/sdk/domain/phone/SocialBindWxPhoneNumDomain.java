@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.domain.phone;
 
 import com.socialuni.social.sdk.constant.platform.PlatformType;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
@@ -33,14 +33,14 @@ public class SocialBindWxPhoneNumDomain {
     public SocialMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, UserDO mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-        socialProviderLoginQO.setProvider(ProviderType.wx);
+        socialProviderLoginQO.setProvider(UniappProviderType.wx);
         socialProviderLoginQO.setPlatform(PlatformType.mp);
         socialProviderLoginQO.setCode(bindPhoneQO.getCode());
 
         UniUnionIdRO loginResult = UniProviderUtil.getUnionIdRO(socialProviderLoginQO);
         String sessionKey = loginResult.getSession_key();
 
-        socialUserAccountManage.updateSessionKey(ProviderType.wx, loginResult.getSession_key(), mineUser.getId());
+        socialUserAccountManage.updateSessionKey(UniappProviderType.wx, loginResult.getSession_key(), mineUser.getId());
         WxPhoneNumRO phoneNumVO;
         try {
             String phoneJson = WxDecode.decrypt(sessionKey, bindPhoneQO.getEncryptedData(), bindPhoneQO.getIv());

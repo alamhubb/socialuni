@@ -6,14 +6,10 @@ import com.socialuni.social.entity.model.DO.NotifyDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.platform.WxErrCode;
-import com.socialuni.social.sdk.platform.baidu.BaiduConst;
-import com.socialuni.social.sdk.platform.baidu.BaiduResult;
-import com.socialuni.social.sdk.platform.baidu.BaiduUtil;
 import com.socialuni.social.sdk.platform.qq.QQPayResult;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.platform.weixin.WxConst;
@@ -35,16 +31,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
@@ -219,7 +209,7 @@ public class WxUtil {
 
     //发起支付
     public static String postPayUrl(String platform, String deviceIp, String orderNo, String total_feeStr, Integer userId) throws IOException {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(ProviderType.wx, userId);
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(UniappProviderType.wx, userId);
 
         String trade_type = WxConst.mp_pay_trade_type;
         String appId = wx_mp_id;

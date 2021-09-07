@@ -8,6 +8,7 @@ import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.platform.WxDecode;
 import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.sdk.utils.common.RestUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Component
+@Slf4j
 public class WxProviderUtil {
     private static String wxMpId;
     private static String wxMpSecret;
@@ -37,7 +39,6 @@ public class WxProviderUtil {
     public static UniUnionIdRO getWxUnionIdRO(SocialProviderLoginQO unionIdData) {
         String platform = unionIdData.getPlatform();
         String code = unionIdData.getCode();
-
 
         if (PlatformType.mp.equals(platform)) {
             String wxMpId = unionIdData.getAppId();
@@ -76,10 +77,15 @@ public class WxProviderUtil {
     private static UniUnionIdRO decodeUnionId(SocialProviderLoginQO loginData, UniUnionIdRO uniUnionIdRO) {
         //只有unionid为空才解析，什么时候会为空，需要确认
         if (StringUtils.isEmpty(uniUnionIdRO.getUnionid())) {
+            String sessionKey = uniUnionIdRO.getSession_key();
+            if (StringUtils.isEmpty(sessionKey)) {
+                log.info("sessionKey为空，不解析unionId");
+                return uniUnionIdRO;
+            }
             String enData = loginData.getEncryptedData();
             String enIv = loginData.getIv();
             //都不为空才解析unionid
-            String userInfoJson = WxDecode.decrypt(uniUnionIdRO.getSession_key(), enData, enIv);
+            String userInfoJson = WxDecode.decrypt(sessionKey, enData, enIv);
             //不为空
             if (StringUtils.isNotEmpty(userInfoJson)) {
                 try {

@@ -49,4 +49,5 @@ public class SocialProviderLoginQO {
     //无后台，借用联盟后台实现渠道登录时使用
     private String appId;
     private String secret;
+    private Integer devId;
 }

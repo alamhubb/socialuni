@@ -1,13 +1,10 @@
 package com.socialuni.social.sdk.domain.phone;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.social.sdk.constant.ProviderLoginType;
+import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.entity.user.SocialBindUserProviderAccountEntity;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -22,8 +19,9 @@ public class SocialBindUserSocialuniAccountDomain {
 
     public void bindUserSocialAccount(Integer mineUserId, SocialLoginRO<CenterMineUserDetailRO> socialLoginRO) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
-        loginQO.setProvider(ProviderLoginType.socialuni);
+        loginQO.setProvider(SocialuniProviderLoginType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
+        loginQO.setDevId(11111);
         loginQO.setCode(socialLoginRO.getToken());
 
         CenterMineUserDetailRO centerUserDetailRO = socialLoginRO.getUser();
@@ -37,8 +35,9 @@ public class SocialBindUserSocialuniAccountDomain {
     @Async
     public void bindUserSocialAccount(Integer mineUserId, String token, String userUid) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
-        loginQO.setProvider(ProviderLoginType.socialuni);
+        loginQO.setProvider(SocialuniProviderLoginType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
+        loginQO.setDevId(11111);
         loginQO.setCode(token);
 
         loginQO.setUnionId(userUid);

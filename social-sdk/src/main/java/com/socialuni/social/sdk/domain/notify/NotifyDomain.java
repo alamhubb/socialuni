@@ -11,7 +11,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.sdk.constant.NotifyType;
-import com.socialuni.social.sdk.constant.platform.ProviderType;
+import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
@@ -189,9 +189,9 @@ public class NotifyDomain {
 
                 }
                 assert pushMsgDTO != null;
-                if (provider.equals(ProviderType.qq)) {
+                if (provider.equals(UniappProviderType.qq)) {
                     QQUtil.qqPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
-                } else if (provider.equals(ProviderType.wx)) {
+                } else if (provider.equals(UniappProviderType.wx)) {
                     WxUtil.wxPushMsgCommon(receiveAccount.getMpOpenId(), provider, pushMsgDTO, notify);
                 }
             }
