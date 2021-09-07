@@ -1,5 +1,5 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import TagAddVO from '@/model/tag/TagAddVO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import TagAddVO from '/socialuni/model/tag/TagAddVO'
 
 export default class TagAPI {
   static addTagAPI (tagName: string, description: string) {

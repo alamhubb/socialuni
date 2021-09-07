@@ -34,13 +34,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import TalkVO from '@/model/talk/TalkVO'
-import CommentVO from '@/model/comment/CommentVO'
-import PagePath from '@/const/PagePath'
-import PageUtil from '@/utils/PageUtil'
-import { talkModule } from '@/store'
-import JsonUtils from '@/utils/JsonUtil'
-import RouterUtil from '@/utils/RouterUtil'
+import TalkVO from '/socialuni/model/talk/TalkVO'
+import CommentVO from '/socialuni/model/comment/CommentVO'
+import PagePath from '/socialuni/const/PagePath'
+import PageUtil from '/socialuni/utils/PageUtil'
+import { talkModule } from '/socialuni/store'
+import JsonUtils from '/socialuni/utils/JsonUtil'
+import RouterUtil from '/socialuni/utils/RouterUtil'
 import QIcon from '/socialuni/components/q-icon/q-icon.vue'
 
   @Component({

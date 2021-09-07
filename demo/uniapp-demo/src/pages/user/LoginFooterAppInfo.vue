@@ -15,10 +15,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import UniUtil from '@/utils/UniUtil'
-import ConfigMap from '@/const/ConfigMap'
-import SkipUrlConst from '@/const/SkipUrlConst'
-import { configStore } from '@/store'
+import UniUtil from '/socialuni/utils/UniUtil'
+import ConfigMap from '/socialuni/const/ConfigMap'
+import SkipUrlConst from '/socialuni/const/SkipUrlConst'
+import { configStore } from '/socialuni/store'
 
 @Component
 export default class LoginFooterAppInfo extends Vue {

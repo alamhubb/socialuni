@@ -61,10 +61,10 @@
 <script lang="ts">
 import { Vue, Component, Emit, Model, Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import DistrictVO from '@/model/DistrictVO'
-import { locationModule } from '@/store'
-import LocationUtil from '@/utils/LocationUtil'
-import Alert from '@/utils/Alert'
+import DistrictVO from '/socialuni/model/DistrictVO'
+import { locationModule } from '/socialuni/store'
+import LocationUtil from '/socialuni/utils/LocationUtil'
+import Alert from '/socialuni/utils/Alert'
 
 
 const locationStore = namespace('location')

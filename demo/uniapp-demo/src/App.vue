@@ -1,15 +1,15 @@
 <script lang="ts">
 import Vue from 'vue'
-import { appModule, socialSystemModule, userModule } from '@/store'
-import UserService from '@/service/UserService'
-import ThreeAuthType from '@/const/ThreeAuthType'
-import Toast from '@/utils/Toast'
-import ResultVO from '@/model/ResultVO'
-import ThreeAuthResultVO from '@/model/openData/ThreeAuthResultVO'
-import PageUtil from '@/utils/PageUtil'
-import SocialLoginRO from '@/model/social/SocialLoginRO'
-import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
-import SocialConfig from '@/socialuni/SocialConfig'
+import { appModule, socialSystemModule, userModule } from '/socialuni/store'
+import UserService from '/socialuni/service/UserService'
+import ThreeAuthType from '/socialuni/const/ThreeAuthType'
+import Toast from '/socialuni/utils/Toast'
+import ResultVO from '/socialuni/model/ResultVO'
+import ThreeAuthResultVO from '/socialuni/model/openData/ThreeAuthResultVO'
+import PageUtil from '/socialuni/utils/PageUtil'
+import SocialLoginRO from '/socialuni/model/social/SocialLoginRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import SocialConfig from '/socialuni/model/SocialConfig'
 
 export default Vue.extend({
   mpType: 'app',
@@ -76,7 +76,7 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss">
-@import "./styles/color/index.css";
-@import "./styles/iconfont/index.css";
-@import "./styles/index.scss";
+@import "/socialuni/styles/color/index.css";
+@import "/socialuni/styles/iconfont/index.css";
+@import "/socialuni/styles/index.scss";
 </style>

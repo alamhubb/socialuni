@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import TalkItem from '@/pages/talk/TalkItem.vue'
-import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 import UserAPI from '/socialuni/api/UserAPI'
 import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'

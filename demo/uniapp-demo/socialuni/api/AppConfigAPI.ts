@@ -1,5 +1,5 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import AppInitDataRO from '@/model/common/AppInitDataRO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import AppInitDataRO from '/socialuni/model/common/AppInitDataRO'
 
 export default class AppConfigAPI {
   static getAppConfigAPI () {

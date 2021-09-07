@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 
 const configStore = namespace('config')

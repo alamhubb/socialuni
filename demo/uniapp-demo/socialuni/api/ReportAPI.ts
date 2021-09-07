@@ -1,5 +1,5 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import ReportAddVO from '@/model/report/ReportAddVO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import ReportAddVO from '/socialuni/model/report/ReportAddVO'
 
 export default class ReportAPI {
   static addReportAPI (reportAdd: ReportAddVO) {

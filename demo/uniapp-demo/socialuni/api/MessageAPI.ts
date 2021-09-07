@@ -1,8 +1,8 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import MessageAddVO from '@/model/message/MessageAddVO'
-import MessageQueryVO from '@/model/message/MessageQueryVO'
-import MsgDelete from '@/model/message/MsgDeleteVO'
-import MessageVO from '@/model/message/MessageVO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import MessageAddVO from '/socialuni/model/message/MessageAddVO'
+import MessageQueryVO from '/socialuni/model/message/MessageQueryVO'
+import MsgDelete from '/socialuni/model/message/MsgDeleteVO'
+import MessageVO from '/socialuni/model/message/MessageVO'
 
 export default class MessageAPI {
   static sendMsgAPI<T> (chatId: number, content: string) {

@@ -12,11 +12,11 @@ import { Component, Vue } from 'vue-property-decorator'
 
 import { namespace } from 'vuex-class'
 
-import HomeSwiperVO from '@/model/HomeSwiperVO'
-import ConfigMap from '@/const/ConfigMap'
-import SkipType from '@/const/SkipType'
-import { socialSystemModule } from '@/store'
-import RouterUtil from '@/utils/RouterUtil'
+import HomeSwiperVO from '/socialuni/model/HomeSwiperVO'
+import ConfigMap from '/socialuni/const/ConfigMap'
+import SkipType from '/socialuni/const/SkipType'
+import { socialSystemModule } from '/socialuni/store'
+import RouterUtil from '/socialuni/utils/RouterUtil'
 
 const appStore = namespace('app')
 const configStore = namespace('config')

@@ -1,12 +1,12 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import UserQueryVO from '@/model/user/UserQueryVO'
-import ImgFileVO from '@/model/ImgFileVO'
-import UserPayVO from '@/model/user/UserPayVO'
-import UserPayResultVO from '@/model/user/UserPayResultVO'
-import UserEditVO from '@/model/user/UserEditVO'
-import ImgAddQO from '@/model/user/ImgAddQO'
-import DomFile from '@/model/DomFile'
-import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import UserQueryVO from '/socialuni/model/user/UserQueryVO'
+import ImgFileVO from '/socialuni/model/ImgFileVO'
+import UserPayVO from '/socialuni/model/user/UserPayVO'
+import UserPayResultVO from '/socialuni/model/user/UserPayResultVO'
+import UserEditVO from '/socialuni/model/user/UserEditVO'
+import ImgAddQO from '/socialuni/model/user/ImgAddQO'
+import DomFile from '/socialuni/model/DomFile'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {

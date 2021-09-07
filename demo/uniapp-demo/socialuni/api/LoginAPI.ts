@@ -1,9 +1,9 @@
-import ProviderUserVO from '@/model/login/ProviderUserVO'
-import socialHttp from '@/socialuni/http/socialHttp'
-import UniProviderLoginQO from '@/model/UniProviderLoginQO'
-import SocialLoginRO from '@/model/social/SocialLoginRO'
-import SocialPhoneNumLoginQO from '@/model/phone/SocialPhoneNumLoginQO'
-import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
+import ProviderUserVO from '/socialuni/model/login/ProviderUserVO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import UniProviderLoginQO from '/socialuni/model/UniProviderLoginQO'
+import SocialLoginRO from '/socialuni/model/social/SocialLoginRO'
+import SocialPhoneNumLoginQO from '/socialuni/model/phone/SocialPhoneNumLoginQO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 
 
 export default class LoginAPI {

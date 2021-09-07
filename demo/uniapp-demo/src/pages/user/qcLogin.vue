@@ -122,19 +122,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
-import { socialSystemModule } from '@/store'
-import Alert from '@/utils/Alert'
-import LoginService from '@/service/LoginService'
-import PageUtil from '@/utils/PageUtil'
-import SystemStoreProp from '@/store/SystemStoreProp'
+import { socialSystemModule } from '/socialuni/store'
+import Alert from '/socialuni/utils/Alert'
+import LoginService from '/socialuni/service/LoginService'
+import PageUtil from '/socialuni/utils/PageUtil'
+import SystemStoreProp from '/socialuni/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
-import PhoneNumFormData from '@/model/phone/PhoneNumFormData'
+import PhoneNumFormData from '/socialuni/model/phone/PhoneNumFormData'
 import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
-import PhoneService from '@/service/PhoneService'
+import PhoneService from '/socialuni/service/PhoneService'
 
 const userStore = namespace('user')
 const configStore = namespace('config')

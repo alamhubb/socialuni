@@ -39,14 +39,14 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
-import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 import FollowAPI from '/socialuni/api/FollowAPI'
-import UserUtil from '@/utils/UserUtil'
-import FollowStatus from '@/const/FollowStatus'
-import FollowAddVO from '@/model/FollowAddVO'
-import PagePath from '@/const/PagePath'
-import PageUtil from '@/utils/PageUtil'
-import RouterUtil from '@/utils/RouterUtil'
+import UserUtil from '/socialuni/utils/UserUtil'
+import FollowStatus from '/socialuni/const/FollowStatus'
+import FollowAddVO from '/socialuni/model/FollowAddVO'
+import PagePath from '/socialuni/const/PagePath'
+import PageUtil from '/socialuni/utils/PageUtil'
+import RouterUtil from '/socialuni/utils/RouterUtil'
 
 @Component
 export default class FollowItem extends Vue {

@@ -24,7 +24,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-import CommonUtil from '@/utils/CommonUtil'
+import CommonUtil from '/socialuni/utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩

@@ -52,15 +52,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
 import LoveValueAPI from '/socialuni/api/LoveValueAPI'
-import QQUtils from '@/utils/QQUtils'
-import WxUtils from '@/utils/WxUtils'
-import APPUtil from '@/utils/APPUtil'
-import JsonUtils from '@/utils/JsonUtil'
-import { userModule } from '@/store'
-import Alert from '../../utils/Alert'
+import QQUtils from '/socialuni/utils/QQUtils'
+import WxUtils from '/socialuni/utils/WxUtils'
+import APPUtil from '/socialuni/utils/APPUtil'
+import JsonUtils from '/socialuni/utils/JsonUtil'
+import { userModule } from '/socialuni/store'
+import Alert from '/socialuni/utils/Alert'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

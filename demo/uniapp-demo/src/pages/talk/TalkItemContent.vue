@@ -59,13 +59,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import TalkVO from '@/model/talk/TalkVO'
-import PagePath from '@/const/PagePath'
-import ImgUtil from '@/utils/ImgUtil'
-import RouterUtil from '@/utils/RouterUtil'
+import TalkVO from '/socialuni/model/talk/TalkVO'
+import PagePath from '/socialuni/const/PagePath'
+import ImgUtil from '/socialuni/utils/ImgUtil'
+import RouterUtil from '/socialuni/utils/RouterUtil'
 import QIcon from '/socialuni/components/q-icon/q-icon.vue'
-import GenderType from '@/const/GenderType'
-import SocialConfig from '@/socialuni/SocialConfig'
+import GenderType from '/socialuni/const/GenderType'
+import SocialConfig from '/socialuni/model/SocialConfig'
 
 @Component({
   components: { QIcon }

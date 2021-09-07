@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import SocialConfig from '@/socialuni/SocialConfig'
-import socialuni from '@/socialuni'
+import SocialConfig from '/socialuni/model/SocialConfig'
+import socialuni from '../../../socialuni'
 
 const socialConfig: SocialConfig = {
   secretKey: '5b366df0c95e4061a3a8de91c0d863fd',

@@ -105,31 +105,31 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import TalkVO from '@/model/talk/TalkVO'
+import TalkVO from '/socialuni/model/talk/TalkVO'
 import TalkAPI from '/socialuni/api/TalkAPI'
-import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import { namespace } from 'vuex-class'
-import LoadMoreType from '@/const/LoadMoreType'
-import DistrictVO from '@/model/DistrictVO'
-import Constants from '@/const/Constant'
-import StorageUtil from '@/utils/StorageUtil'
-import TalkVueUtil from '@/utils/TalkVueUtil'
-import TalkTabVO from '@/model/talk/TalkTabVO'
-import CommonUtil from '@/utils/CommonUtil'
+import LoadMoreType from '/socialuni/const/LoadMoreType'
+import DistrictVO from '/socialuni/model/DistrictVO'
+import Constants from '/socialuni/const/Constant'
+import StorageUtil from '/socialuni/utils/StorageUtil'
+import TalkVueUtil from '/socialuni/utils/TalkVueUtil'
+import TalkTabVO from '/socialuni/model/talk/TalkTabVO'
+import CommonUtil from '/socialuni/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { locationModule, socialSystemModule, talkModule } from '@/store'
+import { locationModule, socialSystemModule, talkModule } from '/socialuni/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from '/socialuni/components/q-tab/q-tab.vue'
 import QTabs from '/socialuni/components/q-tabs/q-tabs.vue'
 import QIcon from '/socialuni/components/q-icon/q-icon.vue'
 import CityPicker from '/socialuni/components/CityPicker.vue'
-import TalkTabType from '@/const/TalkTabType'
-import PageUtil from '@/utils/PageUtil'
+import TalkTabType from '/socialuni/const/TalkTabType'
+import PageUtil from '/socialuni/utils/PageUtil'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
-import QRowBar from "../../../socialuni/components/q-row-bar/q-row-bar.vue";
+import QRowBar from "/socialuni/components/q-row-bar/q-row-bar.vue";
 
 const userStore = namespace('user')
 const appStore = namespace('app')

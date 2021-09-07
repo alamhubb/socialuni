@@ -32,16 +32,16 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import ReportType from '@/const/ReportType'
-import ReportContentType from '@/const/ReportContentType'
-import MessageVO from '@/model/message/MessageVO'
-import ReportAddVO from '@/model/report/ReportAddVO'
+import ReportType from '/socialuni/const/ReportType'
+import ReportContentType from '/socialuni/const/ReportContentType'
+import MessageVO from '/socialuni/model/message/MessageVO'
+import ReportAddVO from '/socialuni/model/report/ReportAddVO'
 import ReportAPI from '/socialuni/api/ReportAPI'
-import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import MsgUtil from '@/utils/MsgUtil'
-import PlatformUtils from '@/utils/PlatformUtils'
-import Alert from '../utils/Alert'
-import { chatModule } from '@/store'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import MsgUtil from '/socialuni/utils/MsgUtil'
+import PlatformUtils from '/socialuni/utils/PlatformUtils'
+import Alert from '/socialuni/utils/Alert'
+import { chatModule } from '/socialuni/store'
 
 const appStore = namespace('app')
 const userStore = namespace('user')

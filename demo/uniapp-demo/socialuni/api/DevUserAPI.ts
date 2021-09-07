@@ -1,7 +1,7 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import DevUserVO from '@/model/dev/DevUserVO'
-import DevUserDetailQueryVO from '@/model/dev/DevUserDetailQueryVO'
-import { appModule } from '@/store'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import DevUserVO from '/socialuni/model/dev/DevUserVO'
+import DevUserDetailQueryVO from '/socialuni/model/dev/DevUserDetailQueryVO'
+import { appModule } from '/socialuni/store'
 
 export default class DevUserAPI {
   static queryDevUserDetailAPI () {

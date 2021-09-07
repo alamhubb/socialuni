@@ -1,11 +1,11 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import AppUpdateVO from '@/model/app/AppUpdateVO'
-import AppUpdateResultVO from '@/model/app/AppUpdateResultVO'
-import FrontErrorLogVO from '@/model/app/FrontErrorLogVO'
-import JsonUtil from '@/utils/JsonUtil'
-import ThreeAuthRequestVO from '@/model/openData/ThreeAuthRequestVO'
-import ThreeAuthUserInfoResultVO from '@/model/openData/ThreeAuthUserInfoResultVO'
-import ThreeAuthUserPhoneNumResultVO from '@/model/openData/ThreeAuthUserPhoneNumResultVO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import AppUpdateVO from '/socialuni/model/app/AppUpdateVO'
+import AppUpdateResultVO from '/socialuni/model/app/AppUpdateResultVO'
+import FrontErrorLogVO from '/socialuni/model/app/FrontErrorLogVO'
+import JsonUtil from '/socialuni/utils/JsonUtil'
+import ThreeAuthRequestVO from '/socialuni/model/openData/ThreeAuthRequestVO'
+import ThreeAuthUserInfoResultVO from '/socialuni/model/openData/ThreeAuthUserInfoResultVO'
+import ThreeAuthUserPhoneNumResultVO from '/socialuni/model/openData/ThreeAuthUserPhoneNumResultVO'
 
 export default class OpenDataAPI {
   static authUserInfoAPI () {

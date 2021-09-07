@@ -1,10 +1,10 @@
-import socialHttp from '@/socialuni/http/socialHttp'
-import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
-import SocialPhoneNumLoginQO from '@/model/phone/SocialPhoneNumLoginQO'
+import socialHttp from '/socialuni/plugins/http/socialHttp'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import SocialPhoneNumLoginQO from '/socialuni/model/phone/SocialPhoneNumLoginQO'
 
-import RefreshWxSessionKeyQO from '@/model/phone/RefreshWxSessionKeyQO'
-import BindWxPhoneNumQO from '@/model/phone/BindWxPhoneNumQO'
-import SocialSendAuthCodeQO from '@/model/phone/SocialSendAuthCodeQO'
+import RefreshWxSessionKeyQO from '/socialuni/model/phone/RefreshWxSessionKeyQO'
+import BindWxPhoneNumQO from '/socialuni/model/phone/BindWxPhoneNumQO'
+import SocialSendAuthCodeQO from '/socialuni/model/phone/SocialSendAuthCodeQO'
 
 export default class PhoneAPI {
   static bindSocialPhoneNum () {

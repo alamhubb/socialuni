@@ -86,17 +86,17 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import { appModule, socialSystemModule } from '@/store'
-import Alert from '@/utils/Alert'
-import LoginService from '@/service/LoginService'
-import PageUtil from '@/utils/PageUtil'
-import SystemStoreProp from '@/store/SystemStoreProp'
+import { appModule, socialSystemModule } from '/socialuni/store'
+import Alert from '/socialuni/utils/Alert'
+import LoginService from '/socialuni/service/LoginService'
+import PageUtil from '/socialuni/utils/PageUtil'
+import SystemStoreProp from '/socialuni/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
-import SocialUniAuthVO from '@/model/openData/SocialUniAuthVO'
-import UniUtil from '@/utils/UniUtil'
-import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
+import SocialUniAuthVO from '/socialuni/model/openData/SocialUniAuthVO'
+import UniUtil from '/socialuni/utils/UniUtil'
+import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
 
 const userStore = namespace('user')
 const configStore = namespace('config')

@@ -2,10 +2,10 @@ import 'core-js'
 
 import Vue from 'vue'
 import App from './App.vue'
-import '@/plugins/socialuni'
+import './plugins/socialuni'
 
-import store from './store'
-import * as utils from '@/utils'
+import store from '/socialuni/store'
+import * as utils from '/socialuni/utils'
 // main.js
 import uView from 'uview-ui'
 

@@ -1,0 +1,34 @@
+import AppConfig from '../config/AppConfig'
+import { configModule } from '/socialuni/store'
+import RouterUtil from '/socialuni/utils/RouterUtil'
+
+export default class SkipUrlConst {
+  static homeUrl (): string {
+    return RouterUtil.getWebUrl(configModule.homeUrl, AppConfig.title)
+  }
+
+  static suggestUrl (): string {
+    return RouterUtil.getWebUrl(configModule.suggestUrl, AppConfig.suggestTitle)
+  }
+
+  static contactUsUrl (): string {
+    return RouterUtil.getWebUrl(configModule.contactUsUrl, AppConfig.contactTitle)
+  }
+
+  static userAgreementUrl (): string {
+    return RouterUtil.getWebUrl(configModule.userAgreementUrl, AppConfig.userAgreementTitle)
+  }
+
+  static userPrivacyUrl (): string {
+    return RouterUtil.getWebUrl(configModule.userPrivacyUrl, AppConfig.userPrivacyTitle)
+  }
+
+  static childProtectUrl (): string {
+    return RouterUtil.getWebUrl(configModule.childProtectUrl, AppConfig.childProtectTitle)
+  }
+
+  static shellInfoUrl (): string {
+    return RouterUtil.getWebUrl(configModule.childProtectUrl, AppConfig.shellInfoTitle)
+    // return RouterUtil.getWebUrl(ConfigMap.shellInfoUrlDefault, AppConfig.shellInfoTitle)
+  }
+}
