@@ -1,6 +1,6 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
 import UnreadNotifyVO from '@/model/notify/UnreadNotifyVO'
-import NotifyAPI from '@/api/NotifyAPI'
+import NotifyAPI from '/socialuni/api/NotifyAPI'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 //用来存储当前用户的一些信息

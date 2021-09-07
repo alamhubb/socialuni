@@ -54,7 +54,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
-import LoveValueAPI from '@/api/LoveValueAPI'
+import LoveValueAPI from '/socialuni/api/LoveValueAPI'
 import QQUtils from '@/utils/QQUtils'
 import WxUtils from '@/utils/WxUtils'
 import APPUtil from '@/utils/APPUtil'

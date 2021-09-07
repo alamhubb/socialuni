@@ -5,7 +5,7 @@ export default class SocialConfig {
   //app的性别类型，全部性别，还是仅女生可用
   static readonly appGenderType = GenderType.all
   static readonly authApp = true
-  // static readonly socialuniHttpBaseUrl = 'https://api.qingchiapp.com'
+  static readonly socialuniHttpBaseUrl = 'https://api.qingchiapp.com'
   // static readonly devSocialuniHttpBaseUrl = 'https://devapi.qingchiapp.com'
   static readonly devSocialuniHttpBaseUrl = 'https://localpc.qingchiapp.com:8091'
 

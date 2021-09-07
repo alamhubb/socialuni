@@ -63,7 +63,7 @@ import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
 import ImgUtil from '@/utils/ImgUtil'
 import RouterUtil from '@/utils/RouterUtil'
-import QIcon from '@/components/q-icon/q-icon.vue'
+import QIcon from '/socialuni/components/q-icon/q-icon.vue'
 import GenderType from '@/const/GenderType'
 import SocialConfig from '@/socialuni/SocialConfig'
 

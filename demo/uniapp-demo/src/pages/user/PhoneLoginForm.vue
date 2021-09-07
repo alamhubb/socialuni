@@ -72,7 +72,7 @@ import CommonUtil from '@/utils/CommonUtil'
 import Toast from '@/utils/Toast'
 import ConfigMap from '@/const/ConfigMap'
 import { configStore } from '@/store'
-import PhoneAPI from '@/api/PhoneAPI'
+import PhoneAPI from '/socialuni/api/PhoneAPI'
 
 @Component
 export default class PhoneLoginForm extends Vue {

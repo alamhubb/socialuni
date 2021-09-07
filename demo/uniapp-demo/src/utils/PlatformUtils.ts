@@ -8,7 +8,7 @@ import UserPayResultVO from '@/model/user/UserPayResultVO'
 
 import MPUtil from '@/utils/MPUtil'
 import APPUtil from '@/utils/APPUtil'
-import AppUtilAPI from '@/api/AppUtilAPI'
+import AppUtilAPI from '/socialuni/api/AppUtilAPI'
 import Toast from '@/utils/Toast'
 
 // 统一处理各平台的订阅

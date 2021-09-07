@@ -46,12 +46,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
-import TalkAPI from '@/api/TalkAPI'
+import TalkAPI from '/socialuni/api/TalkAPI'
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import PageUtil from '@/utils/PageUtil'
 import { namespace } from 'vuex-class'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
-import MsgInput from '@/components/MsgInput.vue'
+import MsgInput from '/socialuni/components/MsgInput.vue'
 import RouterUtil from '@/utils/RouterUtil'
 
 const appStore = namespace('app')

@@ -1,6 +1,6 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
 
-import UserAPI from '@/api/UserAPI'
+import UserAPI from '/socialuni/api/UserAPI'
 import { userModule } from '@/store/index'
 import UserStorageUtil from '@/utils/UserStorageUtil'
 import Alert from '@/utils/Alert'

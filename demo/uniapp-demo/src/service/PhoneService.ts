@@ -1,6 +1,6 @@
 import { userModule } from '@/store'
 import Toast from '@/utils/Toast'
-import PhoneAPI from '@/api/PhoneAPI'
+import PhoneAPI from '/socialuni/api/PhoneAPI'
 import UniLoginUtil from '@/utils/UniLoginUtil'
 import ProviderType from '@/const/ProviderType'
 

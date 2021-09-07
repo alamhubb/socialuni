@@ -36,7 +36,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
-import TagAPI from '@/api/TagAPI'
+import TagAPI from '/socialuni/api/TagAPI'
 import ResultVO from '@/model/ResultVO'
 import ErrorConst from '@/const/ErrorConst'
 import Alert from '../../utils/Alert'

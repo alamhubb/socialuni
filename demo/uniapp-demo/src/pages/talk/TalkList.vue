@@ -110,12 +110,18 @@ import { notifyModule, socialSystemModule, tagModule, talkModule } from '@/store
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
-import QButton from '@/components/q-button/QButton.vue'
+import QButton from '/socialuni/components/q-button/QButton.vue'
 import GenderType from '@/const/GenderType'
 import SocialConfig from '@/socialuni/SocialConfig'
-import MsgInput from '@/components/MsgInput.vue'
+import MsgInput from '/socialuni/components/MsgInput.vue'
 import NodesRef = UniApp.NodesRef;
 import SelectorQuery = UniApp.SelectorQuery;
+import QNavbar from "/socialuni/components/q-navbar/q-navbar.vue";
+import QSearch from "/socialuni/components/q-search/q-search.vue";
+import QIcon from "/socialuni/components/q-icon/q-icon.vue";
+import QPopup from "/socialuni/components/q-popup/q-popup.vue";
+import QBar from "/socialuni/components/q-bar/q-bar.vue";
+import QSlider from "/socialuni/components/q-slider/q-slider.vue";
 
 const userStore = namespace('user')
 const notifyStore = namespace('notify')
@@ -125,6 +131,12 @@ const configStore = namespace('config')
 
 @Component({
   components: {
+    QSlider,
+    QBar,
+    QPopup,
+    QIcon,
+    QSearch,
+    QNavbar,
     MsgInput,
     QButton,
     TagSearch,

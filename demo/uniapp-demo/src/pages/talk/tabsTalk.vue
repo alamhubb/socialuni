@@ -106,7 +106,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
-import TalkAPI from '@/api/TalkAPI'
+import TalkAPI from '/socialuni/api/TalkAPI'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 
 import TalkItem from '@/pages/talk/TalkItem.vue'
@@ -121,14 +121,15 @@ import CommonUtil from '@/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import { locationModule, socialSystemModule, talkModule } from '@/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
-import QTab from '@/components/q-tab/q-tab.vue'
-import QTabs from '@/components/q-tabs/q-tabs.vue'
-import QIcon from '@/components/q-icon/q-icon.vue'
-import CityPicker from '@/components/CityPicker.vue'
+import QTab from '/socialuni/components/q-tab/q-tab.vue'
+import QTabs from '/socialuni/components/q-tabs/q-tabs.vue'
+import QIcon from '/socialuni/components/q-icon/q-icon.vue'
+import CityPicker from '/socialuni/components/CityPicker.vue'
 import TalkTabType from '@/const/TalkTabType'
 import PageUtil from '@/utils/PageUtil'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
+import QRowBar from "../../../socialuni/components/q-row-bar/q-row-bar.vue";
 
 const userStore = namespace('user')
 const appStore = namespace('app')
@@ -140,6 +141,7 @@ const locationStore = namespace('location')
 
 @Component({
   components: {
+    QRowBar,
     CityPicker,
     QIcon,
     QTabs,

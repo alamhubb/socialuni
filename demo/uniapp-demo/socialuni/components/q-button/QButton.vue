@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
-import ComUtil from '@/components/utils/ComUtil'
+import ComUtil from '../utils/ComUtil'
 
 @Component
 export default class QButton extends Vue {

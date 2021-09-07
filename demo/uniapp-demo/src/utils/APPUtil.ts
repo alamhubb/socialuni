@@ -1,4 +1,4 @@
-import AppUtilAPI from '@/api/AppUtilAPI'
+import AppUtilAPI from '/socialuni/api/AppUtilAPI'
 import UniUtil from '@/utils/UniUtil'
 import AppUpdateType from '@/const/AppUpdateType'
 import { configModule } from '@/store'

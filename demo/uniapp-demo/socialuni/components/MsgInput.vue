@@ -39,7 +39,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { talkModule } from '@/store'
 import PlatformUtils from '@/utils/PlatformUtils'
-import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '@/model/social/CenterUserDetailRO'
 import MsgUtil from '@/utils/MsgUtil'
 import Toast from '@/utils/Toast'
 

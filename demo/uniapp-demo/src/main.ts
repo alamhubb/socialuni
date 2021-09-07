@@ -1,11 +1,8 @@
 import 'core-js'
 
-console.log('zhixingle')
 import Vue from 'vue'
 import App from './App.vue'
 import '@/plugins/socialuni'
-
-console.log('zhixingle')
 
 import store from './store'
 import * as utils from '@/utils'

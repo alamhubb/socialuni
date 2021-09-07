@@ -94,15 +94,27 @@ import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator
 
 import TagVO from '@/model/tag/TagVO'
 import TagTypeVO from '@/model/tag/TagTypeVO'
-import QRowItem from '@/components/q-row-item/q-row-item.vue'
-import QIcon from '@/components/q-icon/q-icon.vue'
+import QRowItem from '/socialuni/components/q-row-item/q-row-item.vue'
+import QIcon from '/socialuni/components/q-icon/q-icon.vue'
 import { namespace } from 'vuex-class'
 import TagUtil from '@/utils/TagUtil'
+import QNavbar from "/socialuni/components/q-navbar/q-navbar.vue";
+import QSearch from "/socialuni/components/q-search/q-search.vue";
+import QCard from "/socialuni/components/q-card/q-card.vue";
+import QCardRow from "/socialuni/components/q-card-row/q-card-row.vue";
+import QCardGrid from "/socialuni/components/q-card-grid/q-card-grid.vue";
+import QSidebar from "/socialuni/components/q-sidebar/q-sidebar.vue";
 
 const tagStore = namespace('tag')
 
 @Component({
   components: {
+    QSidebar,
+    QCardGrid,
+    QCardRow,
+    QCard,
+    QSearch,
+    QNavbar,
     QRowItem, QIcon
   }
 })

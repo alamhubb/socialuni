@@ -71,7 +71,7 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '@/model/talk/TalkVO'
 import PagePath from '@/const/PagePath'
-import TalkAPI from '@/api/TalkAPI'
+import TalkAPI from '/socialuni/api/TalkAPI'
 import ReportContentType from '@/const/ReportContentType'
 import HugAddVO from '@/model/HugAddVO'
 import ChildComment from '@/pages/talk/ChildComment.vue'
@@ -83,7 +83,7 @@ import JsonUtils from '@/utils/JsonUtil'
 import { talkModule } from '@/store'
 import MsgUtil from '@/utils/MsgUtil'
 import RouterUtil from '@/utils/RouterUtil'
-import QIcon from '@/components/q-icon/q-icon.vue'
+import QIcon from '/socialuni/components/q-icon/q-icon.vue'
 import Toast from '@/utils/Toast'
 
 const userStore = namespace('user')

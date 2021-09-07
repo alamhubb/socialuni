@@ -100,7 +100,7 @@
 
 <script lang="ts">
 import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
-import UserAPI from '@/api/UserAPI'
+import UserAPI from '/socialuni/api/UserAPI'
 import { namespace } from 'vuex-class'
 import { parseDate } from '@/utils'
 import JsonUtils from '@/utils/JsonUtil'

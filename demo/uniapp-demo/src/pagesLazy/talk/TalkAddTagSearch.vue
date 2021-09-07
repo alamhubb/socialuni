@@ -69,7 +69,7 @@ import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator'
 import TagVO from '@/model/tag/TagVO'
 import { namespace } from 'vuex-class'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import QIcon from '@/components/q-icon/q-icon.vue'
+import QIcon from '/socialuni/components/q-icon/q-icon.vue'
 
 const userModule = namespace('user')
 @Component({

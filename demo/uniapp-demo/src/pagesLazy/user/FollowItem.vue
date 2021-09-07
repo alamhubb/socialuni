@@ -40,7 +40,7 @@
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import FollowAPI from '@/api/FollowAPI'
+import FollowAPI from '/socialuni/api/FollowAPI'
 import UserUtil from '@/utils/UserUtil'
 import FollowStatus from '@/const/FollowStatus'
 import FollowAddVO from '@/model/FollowAddVO'

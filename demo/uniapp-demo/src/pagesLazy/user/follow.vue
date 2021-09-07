@@ -21,7 +21,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import HomeType from '@/const/HomeType'
 import FollowItem from '@/pagesLazy/user/FollowItem.vue'
-import FollowAPI from '@/api/FollowAPI'
+import FollowAPI from '/socialuni/api/FollowAPI'
 
 @Component({
   components: { FollowItem }

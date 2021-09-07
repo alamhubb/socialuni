@@ -9,7 +9,7 @@ import UserService from '@/service/UserService'
 import Alert from '@/utils/Alert'
 import ErrorConst from '@/const/ErrorConst'
 import Toast from '@/utils/Toast'
-import AppUtilAPI from '@/api/AppUtilAPI'
+import AppUtilAPI from '/socialuni/api/AppUtilAPI'
 
 
 const WebAPI: Request = new Request()

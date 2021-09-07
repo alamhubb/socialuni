@@ -10,10 +10,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import TalkItem from '@/pages/talk/TalkItem.vue'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import UserAPI from '@/api/UserAPI'
+import UserAPI from '/socialuni/api/UserAPI'
 import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
-import MsgInput from '@/components/MsgInput.vue'
+import MsgInput from '/socialuni/components/MsgInput.vue'
 
 @Component({
   components: { MsgInput, UserInfo, TalkItem, TalkItemContent }
