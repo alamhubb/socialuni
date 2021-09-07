@@ -2,8 +2,6 @@ socialuni:
   app:
     static-resource-url: ""
     system-user-id: 1
-  user:
-    token-secret-key: ""
   provider:
     qq:
       qq-mp-id: ""
