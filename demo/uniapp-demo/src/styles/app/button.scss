@@ -1,0 +1,28 @@
+.fixed-button {
+  @extend .button;
+  @extend .position-fixed;
+  @extend .z-index-button;
+}
+
+.button-icon {
+  @extend .button;
+  line-height: 1 !important;
+  @extend .pd-4px;
+  @extend .bd-radius-xs;
+}
+
+.button {
+  @extend .row-all-center;
+}
+
+.button-small {
+  @extend .size30;
+}
+
+.button-larger {
+  @extend .size40;
+}
+
+.button-large {
+  @extend .size46;
+}

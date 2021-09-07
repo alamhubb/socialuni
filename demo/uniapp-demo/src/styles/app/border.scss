@@ -1,0 +1,274 @@
+.border-none {
+  border: none;
+}
+
+.border-blue {
+  border: 1px solid #b3d8ff;
+}
+
+.border-right {
+  border-right: 1px solid #e9eaf2;
+}
+
+.border-dashed {
+  border: 1px dashed black;
+}
+
+.border-blue-dark {
+  border-color: #1f63db;
+}
+
+.border-orange-dark {
+  border-color: #f5a339;
+}
+
+.border-green-dark {
+  border-color: #3eb753;
+}
+
+.border-bottom-grey {
+  border-bottom: 1px solid #e9eaf2;
+}
+
+.bb-grey {
+  border-bottom: 1px solid #e9eaf2;
+}
+
+.border-grey {
+  border: 1px solid #e9eaf2;
+}
+
+.bt-blue {
+  border-top: 3px solid #409EFF;
+}
+
+.box-shadow {
+  /*box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);*/
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+
+.radius-left-6px {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.radius-right-6px {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.bd-round {
+  border-radius: 2500px;
+}
+
+.bt-radius {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.bb-radius {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.bd-radius-xs {
+  border-radius: 5px;
+}
+
+.bd-radius-sm {
+  border-radius: 10px;
+}
+
+.bd-radius {
+  border-radius: 20px;
+}
+
+.bt-box-radius {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.btr-sm {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.btr-smm {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+
+.btr {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.btr-dff {
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+.bd-box-radius {
+  border-radius: 10px;
+}
+
+.bg-top-radius {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+
+.bd-circle {
+  border-radius: 50%;
+}
+
+.bd-green {
+  border: solid 1px #39b54a;
+  color: #39b54a;
+  @extend .bg-white;
+}
+
+
+.bd-orange {
+  border: solid 1px #f37b1d;
+  color: #f37b1d;
+  @extend .bg-white;
+}
+
+.bd-red {
+  border: solid 1px #e54d42;
+  color: #e54d42;
+  @extend .bg-white;
+}
+
+.bd-gray {
+  border: solid 1px #aaaaaa;
+  color: #aaaaaa;
+  @extend .bg-white;
+}
+
+.bd-white {
+  border: solid 1px white;
+  color: white;
+  @extend .bg-white;
+}
+
+.bd-blue {
+  border: solid 1px #0081ff;
+  color: #0081ff;
+  @extend .bg-white;
+}
+
+.bd-1 {
+  border: solid 0.5px #333;
+}
+
+.bd-bl-radius {
+  border-bottom-left-radius: 5px;
+}
+
+.bd-r-radius {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/*
+.border-none:after {
+  border: none;
+}*/
+
+/* ==================
+          边框
+ ==================== */
+
+/* -- 实线 -- */
+.q-solid {
+  border: 1 upx solid rgba(0, 0, 0, 0.1);
+}
+
+.q-solid-top {
+  border-top: 1 upx solid rgba(0, 0, 0, 0.1);
+}
+
+.q-solid-right {
+  border-right: 1 upx solid rgba(0, 0, 0, 0.1);
+}
+
+.q-solid-bottom {
+  border-bottom: 1 upx solid rgba(0, 0, 0, 0.1);
+}
+
+.q-solids-bottom {
+  border-bottom: 1px solid gainsboro;
+}
+
+.q-solid-left {
+  border-left: 1 upx solid rgba(0, 0, 0, 0.1);
+}
+
+.solids {
+  border: 8 upx solid #eee;
+}
+
+.solids-top {
+  border-top: 8 upx solid #eee;
+}
+
+.solids-right {
+  border-right: 8 upx solid #eee;
+}
+
+.solids-bottom {
+  border-bottom: 8 upx solid #eee;
+}
+
+.solids-left {
+  border-left: 8 upx solid #eee;
+}
+
+/* -- 虚线 -- */
+
+.dashed {
+  border: 1 upx dashed #ddd;
+}
+
+.dashed-top {
+  border-top: 1 upx dashed #ddd;
+}
+
+.dashed-right {
+  border-right: 1 upx dashed #ddd;
+}
+
+.dashed-bottom {
+  border-bottom: 1 upx dashed #ddd;
+}
+
+.dashed-left {
+  border-left: 1 upx dashed #ddd;
+}
+
+/* -- 阴影 -- */
+
+.shadow[class*='white'] {
+  --ShadowSize: 0 1 upx 6 upx;
+}
+
+.shadow-lg {
+  --ShadowSize: 0 upx 40 upx 100 upx 0 upx;
+}
+
+.shadow-warp {
+  position: relative;
+  box-shadow: 0 0 10 upx rgba(0, 0, 0, 0.1);
+}
+
+.shadow-warp:before,
+.shadow-warp:after {
+  position: absolute;
+  content: "";
+  top: 20 upx;
+  bottom: 30 upx;
+  left: 20 upx;
+}

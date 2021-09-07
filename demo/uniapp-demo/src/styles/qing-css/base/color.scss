@@ -1,0 +1,1590 @@
+.color-black {
+    color: #000000;
+}
+
+.color-white {
+    color: #FFFFFF;
+}
+
+.color-default {
+    color: #303133;
+}
+
+.color-disabled {
+    color: rgba(245, 206, 231, 0.12);
+}
+
+
+.color-transparent {
+    color: transparent;
+}
+
+
+.color-half-transparent {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+.color-shadow {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+
+.color-modal {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+
+.color-red {
+    color: #e54d42;
+}
+
+
+.color-red-light5 {
+    color: #FFEBEE;
+}
+
+
+.color-red-light4 {
+    color: #FFCDD2;
+}
+
+
+.color-red-light3 {
+    color: #EF9A9A;
+}
+
+
+.color-red-light2 {
+    color: #E57373;
+}
+
+
+.color-red-light {
+    color: #EF5350;
+}
+
+
+.color-red-light1 {
+    color: #EF5350;
+}
+
+
+.color-red-dark {
+    color: #E53935;
+}
+
+
+.color-red-dark1 {
+    color: #E53935;
+}
+
+
+.color-red-dark2 {
+    color: #D32F2F;
+}
+
+
+.color-red-dark3 {
+    color: #C62828;
+}
+
+
+.color-red-dark4 {
+    color: #B71C1C;
+}
+
+
+.color-red-accent {
+    color: #FF8A80;
+}
+
+
+.color-red-accent1 {
+    color: #FF8A80;
+}
+
+
+.color-red-accent2 {
+    color: #FF5252;
+}
+
+
+.color-red-accent3 {
+    color: #FF1744;
+}
+
+
+.color-red-accent4 {
+    color: #D50000;
+}
+
+
+.color-pink {
+    color: #e03997;
+}
+
+
+.color-pink-light5 {
+    color: #FCE4EC;
+}
+
+
+.color-pink-light4 {
+    color: #F8BBD0;
+}
+
+
+.color-pink-light3 {
+    color: #F48FB1;
+}
+
+
+.color-pink-light2 {
+    color: #F06292;
+}
+
+
+.color-pink-light {
+    color: #EC407A;
+}
+
+
+.color-pink-light1 {
+    color: #EC407A;
+}
+
+
+.color-pink-dark {
+    color: #D81B60;
+}
+
+
+.color-pink-dark1 {
+    color: #D81B60;
+}
+
+
+.color-pink-dark2 {
+    color: #C2185B;
+}
+
+
+.color-pink-dark3 {
+    color: #AD1457;
+}
+
+
+.color-pink-dark4 {
+    color: #880E4F;
+}
+
+
+.color-pink-accent {
+    color: #FF80AB;
+}
+
+
+.color-pink-accent1 {
+    color: #FF80AB;
+}
+
+
+.color-pink-accent2 {
+    color: #FF4081;
+}
+
+
+.color-pink-accent3 {
+    color: #F50057;
+}
+
+
+.color-pink-accent4 {
+    color: #C51162;
+}
+
+
+.color-mauve {
+    color: #9c26b0;
+}
+
+
+.color-purple {
+    color: #6739b6;
+}
+
+
+.color-purple-light5 {
+    color: #F3E5F5;
+}
+
+
+.color-purple-light4 {
+    color: #E1BEE7;
+}
+
+
+.color-purple-light3 {
+    color: #CE93D8;
+}
+
+
+.color-purple-light2 {
+    color: #BA68C8;
+}
+
+
+.color-purple-light {
+    color: #AB47BC;
+}
+
+
+.color-purple-light1 {
+    color: #AB47BC;
+}
+
+
+.color-purple-dark {
+    color: #8E24AA;
+}
+
+
+.color-purple-dark1 {
+    color: #8E24AA;
+}
+
+
+.color-purple-dark2 {
+    color: #7B1FA2;
+}
+
+
+.color-purple-dark3 {
+    color: #6A1B9A;
+}
+
+
+.color-purple-dark4 {
+    color: #4A148C;
+}
+
+
+.color-purple-accent {
+    color: #EA80FC;
+}
+
+
+.color-purple-accent1 {
+    color: #EA80FC;
+}
+
+
+.color-purple-accent2 {
+    color: #E040FB;
+}
+
+
+.color-purple-accent3 {
+    color: #D500F9;
+}
+
+
+.color-purple-accent4 {
+    color: #AA00FF;
+}
+
+
+.color-deep-purple {
+    color: #673AB7;
+}
+
+
+.color-deep-purple-light5 {
+    color: #EDE7F6;
+}
+
+
+.color-deep-purple-light4 {
+    color: #D1C4E9;
+}
+
+
+.color-deep-purple-light3 {
+    color: #B39DDB;
+}
+
+
+.color-deep-purple-light2 {
+    color: #9575CD;
+}
+
+
+.color-deep-purple-light {
+    color: #7E57C2;
+}
+
+
+.color-deep-purple-light1 {
+    color: #7E57C2;
+}
+
+.color-deep-purple-dark2 {
+    color: #5E35B1;
+}
+
+
+.color-deep-purple-dark1 {
+    color: #5E35B1;
+}
+
+
+.color-deep-purple-dark2 {
+    color: #512DA8;
+}
+
+
+.color-deep-purple-dark3 {
+    color: #4527A0;
+}
+
+
+.color-deep-purple-dark4 {
+    color: #311B92;
+}
+
+
+.color-deep-purple-accent {
+    color: #B388FF;
+}
+
+
+.color-deep-purple-accent1 {
+    color: #B388FF;
+}
+
+
+.color-deep-purple-accent2 {
+    color: #7C4DFF;
+}
+
+
+.color-deep-purple-accent3 {
+    color: #651FFF;
+}
+
+
+.color-deep-purple-accent4 {
+    color: #6200EA;
+}
+
+
+.color-indigo {
+    color: #3F51B5;
+}
+
+
+.color-indigo-light5 {
+    color: #E8EAF6;
+}
+
+
+.color-indigo-light4 {
+    color: #C5CAE9;
+}
+
+
+.color-indigo-light3 {
+    color: #9FA8DA;
+}
+
+
+.color-indigo-light2 {
+    color: #7986CB;
+}
+
+
+.color-indigo-light {
+    color: #5C6BC0;
+}
+
+
+.color-indigo-light1 {
+    color: #5C6BC0;
+}
+
+
+.color-indigo-dark {
+    color: #3949AB;
+}
+
+
+.color-indigo-dark1 {
+    color: #3949AB;
+}
+
+
+.color-indigo-dark2 {
+    color: #303F9F;
+}
+
+
+.color-indigo-dark3 {
+    color: #283593;
+}
+
+
+.color-indigo-dark4 {
+    color: #1A237E;
+}
+
+
+.color-indigo-accent {
+    color: #8C9EFF;
+}
+
+
+.color-indigo-accent1 {
+    color: #8C9EFF;
+}
+
+
+.color-indigo-accent2 {
+    color: #536DFE;
+}
+
+
+.color-indigo-accent3 {
+    color: #3D5AFE;
+}
+
+
+.color-indigo-accent4 {
+    color: #304FFE;
+}
+
+
+.color-blue {
+    color: #0081ff;
+}
+
+
+.color-blue-light5 {
+    color: #E3F2FD;
+}
+
+
+.color-blue-light4 {
+    color: #BBDEFB;
+}
+
+
+.color-blue-light3 {
+    color: #90CAF9;
+}
+
+
+.color-blue-light2 {
+    color: #64B5F6;
+}
+
+
+.color-blue-light {
+    color: #42A5F5;
+}
+
+
+.color-blue-light1 {
+    color: #42A5F5;
+}
+
+
+.color-blue-dark {
+    color: #1E88E5;
+}
+
+
+.color-blue-dark1 {
+    color: #1E88E5;
+}
+
+
+.color-blue-dark2 {
+    color: #1976D2;
+}
+
+
+.color-blue-dark3 {
+    color: #1565C0;
+}
+
+
+.color-blue-dark4 {
+    color: #0D47A1;
+}
+
+
+.color-blue-accent {
+    color: #82B1FF;
+}
+
+
+.color-blue-accent1 {
+    color: #82B1FF;
+}
+
+
+.color-blue-accent2 {
+    color: #448AFF;
+}
+
+
+.color-blue-accent3 {
+    color: #2979FF;
+}
+
+
+.color-blue-accent4 {
+    color: #2962FF;
+}
+
+
+.color-lightblue {
+    color: #03A9F4;
+}
+
+
+.color-lightblue-light5 {
+    color: #E1F5FE;
+}
+
+
+.color-lightblue-light4 {
+    color: #B3E5FC;
+}
+
+
+.color-lightblue-light3 {
+    color: #81D4FA;
+}
+
+
+.color-lightblue-light2 {
+    color: #4FC3F7;
+}
+
+
+.color-lightblue-light {
+    color: #29B6F6;
+}
+
+
+.color-lightblue-light1 {
+    color: #29B6F6;
+}
+
+
+.color-lightblue-dark {
+    color: #039BE5;
+}
+
+
+.color-lightblue-dark1 {
+    color: #039BE5;
+}
+
+
+.color-lightblue-dark2 {
+    color: #0288D1;
+}
+
+
+.color-lightblue-dark3 {
+    color: #0277BD;
+}
+
+
+.color-lightblue-dark4 {
+    color: #01579B;
+}
+
+
+.color-lightblue-accent {
+    color: #80D8FF;
+}
+
+
+.color-lightblue-accent1 {
+    color: #80D8FF;
+}
+
+
+.color-lightblue-accent2 {
+    color: #40C4FF;
+}
+
+
+.color-lightblue-accent3 {
+    color: #00B0FF;
+}
+
+
+.color-lightblue-accent4 {
+    color: #0091EA;
+}
+
+
+.color-cyan {
+    color: #1cbbb4;
+}
+
+
+.color-cyan-light5 {
+    color: #E0F7FA;
+}
+
+
+.color-cyan-light4 {
+    color: #B2EBF2;
+}
+
+
+.color-cyan-light3 {
+    color: #80DEEA;
+}
+
+
+.color-cyan-light2 {
+    color: #4DD0E1;
+}
+
+
+.color-cyan-light {
+    color: #26C6DA;
+}
+
+
+.color-cyan-light1 {
+    color: #26C6DA;
+}
+
+
+.color-cyan-dark {
+    color: #00ACC1;
+}
+
+
+.color-cyan-dark1 {
+    color: #00ACC1;
+}
+
+
+.color-cyan-dark2 {
+    color: #0097A7;
+}
+
+
+.color-cyan-dark3 {
+    color: #00838F;
+}
+
+
+.color-cyan-dark4 {
+    color: #006064;
+}
+
+
+.color-cyan-accent {
+    color: #84FFFF;
+}
+
+
+.color-cyan-accent1 {
+    color: #84FFFF;
+}
+
+
+.color-cyan-accent2 {
+    color: #18FFFF;
+}
+
+
+.color-cyan-accent3 {
+    color: #00E5FF;
+}
+
+
+.color-cyan-accent4 {
+    color: #00B8D4;
+}
+
+
+.color-teal {
+    color: #009688;
+}
+
+
+.color-teal-light5 {
+    color: #E0F2F1;
+}
+
+
+.color-teal-light4 {
+    color: #B2DFDB;
+}
+
+
+.color-teal-light3 {
+    color: #80CBC4;
+}
+
+
+.color-teal-light2 {
+    color: #4DB6AC;
+}
+
+
+.color-teal-light {
+    color: #26A69A;
+}
+
+
+.color-teal-light1 {
+    color: #26A69A;
+}
+
+
+.color-teal-dark {
+    color: #00897B;
+}
+
+
+.color-teal-dark1 {
+    color: #00897B;
+}
+
+
+.color-teal-dark2 {
+    color: #00796B;
+}
+
+
+.color-teal-dark3 {
+    color: #00695C;
+}
+
+
+.color-teal-dark4 {
+    color: #004D40;
+}
+
+
+.color-teal-accent {
+    color: #A7FFEB;
+}
+
+
+.color-teal-accent1 {
+    color: #A7FFEB;
+}
+
+
+.color-teal-accent2 {
+    color: #64FFDA;
+}
+
+
+.color-teal-accent3 {
+    color: #1DE9B6;
+}
+
+
+.color-teal-accent4 {
+    color: #00BFA5;
+}
+
+
+.color-olive {
+    color: #8dc63f;
+}
+
+
+.color-green {
+    color: #39b54a;
+}
+
+
+.color-green-light5 {
+    color: #E8F5E9;
+}
+
+
+.color-green-light4 {
+    color: #C8E6C9;
+}
+
+
+.color-green-light3 {
+    color: #A5D6A7;
+}
+
+
+.color-green-light2 {
+    color: #81C784;
+}
+
+
+.color-green-light {
+    color: #66BB6A;
+}
+
+
+.color-green-light1 {
+    color: #66BB6A;
+}
+
+
+.color-green-dark {
+    color: #43A047;
+}
+
+
+.color-green-dark1 {
+    color: #43A047;
+}
+
+
+.color-green-dark2 {
+    color: #388E3C;
+}
+
+
+.color-green-dark3 {
+    color: #2E7D32;
+}
+
+
+.color-green-dark4 {
+    color: #1B5E20;
+}
+
+
+.color-green-accent {
+    color: #B9F6CA;
+}
+
+
+.color-green-accent1 {
+    color: #B9F6CA;
+}
+
+
+.color-green-accent2 {
+    color: #69F0AE;
+}
+
+
+.color-green-accent3 {
+    color: #00E676;
+}
+
+
+.color-green-accent4 {
+    color: #00C853;
+}
+
+
+.color-lightgreen {
+    color: #8BC34A;
+}
+
+
+.color-lightgreen-light5 {
+    color: #F1F8E9;
+}
+
+
+.color-lightgreen-light4 {
+    color: #DCEDC8;
+}
+
+
+.color-lightgreen-light3 {
+    color: #C5E1A5;
+}
+
+
+.color-lightgreen-light2 {
+    color: #AED581;
+}
+
+
+.color-lightgreen-light {
+    color: #9CCC65;
+}
+
+
+.color-lightgreen-light1 {
+    color: #9CCC65;
+}
+
+
+.color-lightgreen-dark {
+    color: #7CB342;
+}
+
+
+.color-lightgreen-dark1 {
+    color: #7CB342;
+}
+
+
+.color-lightgreen-dark2 {
+    color: #689F38;
+}
+
+
+.color-lightgreen-dark3 {
+    color: #558B2F;
+}
+
+
+.color-lightgreen-dark4 {
+    color: #33691E;
+}
+
+
+.color-lightgreen-accent {
+    color: #CCFF90;
+}
+
+
+.color-lightgreen-accent1 {
+    color: #CCFF90;
+}
+
+
+.color-lightgreen-accent2 {
+    color: #B2FF59;
+}
+
+
+.color-lightgreen-accent3 {
+    color: #76FF03;
+}
+
+
+.color-lightgreen-accent4 {
+    color: #64DD17;
+}
+
+
+.color-lime {
+    color: #CDDC39;
+}
+
+
+.color-lime-light5 {
+    color: #F9FBE7;
+}
+
+
+.color-lime-light4 {
+    color: #F0F4C3;
+}
+
+
+.color-lime-light3 {
+    color: #E6EE9C;
+}
+
+
+.color-lime-light2 {
+    color: #DCE775;
+}
+
+
+.color-lime-light {
+    color: #D4E157;
+}
+
+
+.color-lime-light1 {
+    color: #D4E157;
+}
+
+
+.color-lime-dark {
+    color: #C0CA33;
+}
+
+
+.color-lime-dark1 {
+    color: #C0CA33;
+}
+
+
+.color-lime-dark2 {
+    color: #AFB42B;
+}
+
+
+.color-lime-dark3 {
+    color: #9E9D24;
+}
+
+
+.color-lime-dark4 {
+    color: #827717;
+}
+
+
+.color-lime-accent {
+    color: #F4FF81;
+}
+
+
+.color-lime-accent1 {
+    color: #F4FF81;
+}
+
+
+.color-lime-accent2 {
+    color: #EEFF41;
+}
+
+
+.color-lime-accent3 {
+    color: #C6FF00;
+}
+
+
+.color-lime-accent4 {
+    color: #AEEA00;
+}
+
+
+.color-yellow {
+    color: #fbbd08;
+}
+
+
+.color-yellow-light5 {
+    color: #FFFDE7;
+}
+
+
+.color-yellow-light4 {
+    color: #FFF9C4;
+}
+
+
+.color-yellow-light3 {
+    color: #FFF59D;
+}
+
+
+.color-yellow-light2 {
+    color: #FFF176;
+}
+
+
+.color-yellow-light {
+    color: #FFEE58;
+}
+
+
+.color-yellow-light1 {
+    color: #FFEE58;
+}
+
+
+.color-yellow-dark {
+    color: #FDD835;
+}
+
+
+.color-yellow-dark1 {
+    color: #FDD835;
+}
+
+
+.color-yellow-dark2 {
+    color: #FBC02D;
+}
+
+
+.color-yellow-dark3 {
+    color: #F9A825;
+}
+
+
+.color-yellow-dark4 {
+    color: #F57F17;
+}
+
+
+.color-yellow-accent {
+    color: #FFFF8D;
+}
+
+
+.color-yellow-accent1 {
+    color: #FFFF8D;
+}
+
+
+.color-yellow-accent2 {
+    color: #FFFF00;
+}
+
+
+.color-yellow-accent3 {
+    color: #FFEA00;
+}
+
+
+.color-yellow-accent4 {
+    color: #FFD600;
+}
+
+
+.color-amber {
+    color: #FFC107;
+}
+
+
+.color-amber-light5 {
+    color: #FFF8E1;
+}
+
+
+.color-amber-light4 {
+    color: #FFECB3;
+}
+
+
+.color-amber-light3 {
+    color: #FFE082;
+}
+
+
+.color-amber-light2 {
+    color: #FFD54F;
+}
+
+
+.color-amber-light {
+    color: #FFCA28;
+}
+
+
+.color-amber-light1 {
+    color: #FFCA28;
+}
+
+
+.color-amber-dark {
+    color: #FFB300;
+}
+
+
+.color-amber-dark1 {
+    color: #FFB300;
+}
+
+
+.color-amber-dark2 {
+    color: #FFA000;
+}
+
+
+.color-amber-dark3 {
+    color: #FF8F00;
+}
+
+
+.color-amber-dark4 {
+    color: #FF6F00;
+}
+
+
+.color-amber-accent {
+    color: #FFE57F;
+}
+
+
+.color-amber-accent1 {
+    color: #FFE57F;
+}
+
+
+.color-amber-accent2 {
+    color: #FFD740;
+}
+
+
+.color-amber-accent3 {
+    color: #FFC400;
+}
+
+
+.color-amber-accent4 {
+    color: #FFAB00;
+}
+
+
+.color-orange {
+    color: #f37b1d;
+}
+
+
+.color-orange-light5 {
+    color: #FFF3E0;
+}
+
+
+.color-orange-light4 {
+    color: #FFE0B2;
+}
+
+
+.color-orange-light3 {
+    color: #FFCC80;
+}
+
+
+.color-orange-light2 {
+    color: #FFB74D;
+}
+
+
+.color-orange-light {
+    color: #FFA726;
+}
+
+
+.color-orange-light1 {
+    color: #FFA726;
+}
+
+
+.color-orange-dark {
+    color: #FB8C00;
+}
+
+
+.color-orange-dark1 {
+    color: #FB8C00;
+}
+
+
+.color-orange-dark2 {
+    color: #F57C00;
+}
+
+
+.color-orange-dark3 {
+    color: #EF6C00;
+}
+
+
+.color-orange-dark4 {
+    color: #E65100;
+}
+
+
+.color-orange-accent {
+    color: #FFD180;
+}
+
+
+.color-orange-accent1 {
+    color: #FFD180;
+}
+
+
+.color-orange-accent2 {
+    color: #FFAB40;
+}
+
+
+.color-orange-accent3 {
+    color: #FF9100;
+}
+
+
+.color-orange-accent4 {
+    color: #FF6D00;
+}
+
+
+.color-deep-orange {
+    color: #FF5722;
+}
+
+
+.color-deep-orange-light5 {
+    color: #FBE9E7;
+}
+
+
+.color-deep-orange-light4 {
+    color: #FFCCBC;
+}
+
+
+.color-deep-orange-light3 {
+    color: #FFAB91;
+}
+
+
+.color-deep-orange-light2 {
+    color: #FF8A65;
+}
+
+
+.color-deep-orange-light {
+    color: #FF7043;
+}
+
+
+.color-deep-orange-light1 {
+    color: #FF7043;
+}
+
+
+.color-deep-orange-dark {
+    color: #F4511E;
+}
+
+
+.color-deep-orange-dark1 {
+    color: #F4511E;
+}
+
+
+.color-deep-orange-dark2 {
+    color: #E64A19;
+}
+
+
+.color-deep-orange-dark3 {
+    color: #D84315;
+}
+
+
+.color-deep-orange-dark4 {
+    color: #BF360C;
+}
+
+
+.color-deep-orange-accent {
+    color: #FF9E80;
+}
+
+
+.color-deep-orange-accent1 {
+    color: #FF9E80;
+}
+
+
+.color-deep-orange-accent2 {
+    color: #FF6E40;
+}
+
+
+.color-deep-orange-accent3 {
+    color: #FF3D00;
+}
+
+
+.color-deep-orange-accent2 {
+    color: #DD2C00;
+}
+
+
+.color-brown {
+    color: #a5673f;
+}
+
+
+.color-brown-light5 {
+    color: #EFEBE9;
+}
+
+
+.color-brown-light4 {
+    color: #D7CCC8;
+}
+
+
+.color-brown-light3 {
+    color: #BCAAA4;
+}
+
+
+.color-brown-light2 {
+    color: #A1887F;
+}
+
+
+.color-brown-light {
+    color: #8D6E63;
+}
+
+
+.color-brown-light1 {
+    color: #8D6E63;
+}
+
+
+.color-brown-dark {
+    color: #6D4C41;
+}
+
+
+.color-brown-dark1 {
+    color: #6D4C41;
+}
+
+
+.color-brown-dark2 {
+    color: #5D4037;
+}
+
+
+.color-brown-dark3 {
+    color: #4E342E;
+}
+
+
+.color-brown-dark4 {
+    color: #3E2723;
+}
+
+
+.color-blue-grey {
+    color: #F4F4F5;
+}
+
+
+.color-blue-grey-light5 {
+    color: #ECEFF1;
+}
+
+
+.color-blue-grey-light4 {
+    color: #CFD8DC;
+}
+
+
+.color-blue-grey-light3 {
+    color: #B0BEC5;
+}
+
+
+.color-blue-grey-light2 {
+    color: #90A4AE;
+}
+
+
+.color-blue-grey-light {
+    color: #78909C;
+}
+
+
+.color-blue-grey-light1 {
+    color: #78909C;
+}
+
+
+.color-blue-grey-dark {
+    color: #546E7A;
+}
+
+
+.color-blue-grey-dark1 {
+    color: #546E7A;
+}
+
+
+.color-blue-grey-dark2 {
+    color: #455A64;
+}
+
+
+.color-blue-grey-dark3 {
+    color: #37474F;
+}
+
+
+.color-blue-grey-dark4 {
+    color: #263238;
+}
+
+
+.color-grey {
+    color: #F4F4F5;
+}
+
+
+.color-gray {
+    color: #aaaaaa;
+}
+
+
+.color-grey-light5 {
+    color: #FAFAFA;
+}
+
+
+.color-grey-light4 {
+    color: #F5F5F5;
+}
+
+
+.color-grey-light3 {
+    color: #EEEEEE;
+}
+
+
+.color-grey-light2 {
+    color: #E0E0E0;
+}
+
+
+.color-grey-light {
+    color: #BDBDBD;
+}
+
+
+.color-grey-light1 {
+    color: #BDBDBD;
+}
+
+
+.color-grey-dark {
+    color: #757575;
+}
+
+
+.color-grey-dark1 {
+    color: #757575;
+}
+
+
+.color-grey-dark2 {
+    color: #616161;
+}
+
+
+.color-grey-dark3 {
+    color: #424242;
+}
+
+
+.color-grey-dark4 {
+    color: #212121;
+}
+
