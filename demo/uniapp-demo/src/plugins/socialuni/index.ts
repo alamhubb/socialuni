@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import SocialConfig from 'socialuni/model/SocialConfig'
-import socialuni from '../../../socialuni'
+import socialuni from 'socialuni'
 import store from '@/store'
 
 const socialConfig: SocialConfig = {

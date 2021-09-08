@@ -1,5 +1,5 @@
 import PagePath from '../const/PagePath'
-import store, { socialSystemModule, socialUserModule } from '../store'
+import { socialSystemModule, socialUserModule } from '../store'
 import MsgUtil from './MsgUtil'
 import Alert from './Alert'
 import RouterUtil from './RouterUtil'
@@ -70,7 +70,7 @@ export default class PageUtil {
   }
 
   static toUserMatchPage (user: CenterUserDetailRO) {
-    store.commit('match/setUser', user)
+    // store.commit('match/setUser', user)
     // RouterUtil.navigateTo(PagePath.userMatch)
   }
 

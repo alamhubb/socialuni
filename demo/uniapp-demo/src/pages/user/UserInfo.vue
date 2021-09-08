@@ -328,7 +328,13 @@ import TalkVO from 'socialuni/model/talk/TalkVO'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import ConfigMap from 'socialuni/const/ConfigMap'
 import PlatformUtils from 'socialuni/utils/PlatformUtils'
-import { socialAppStore, socialSystemStore, socialUserModule, socialUserStore } from 'socialuni/store'
+import {
+  socialAppStore,
+  socialConfigStore,
+  socialSystemStore,
+  socialUserModule,
+  socialUserStore
+} from 'socialuni/store'
 import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
 import QRow from 'socialuni/components/q-row/q-row.vue'
 import Alert from 'socialuni/utils/Alert'
@@ -374,7 +380,7 @@ export default class UserInfo extends Vue {
   pornInfo: string = ReportType.pornInfo
   reportContent = ''
   talks: TalkVO[] = []
-  @configStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
+  @socialConfigStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
 
   showUserContactBtnDisabled = false
 
