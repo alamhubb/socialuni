@@ -76,7 +76,5 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss">
-@import "/socialuni/styles/color/index.css";
-@import "/socialuni/styles/iconfont/index.css";
-@import "/socialuni/styles/index.scss";
+@import "socialuni/styles/index.scss";
 </style>
