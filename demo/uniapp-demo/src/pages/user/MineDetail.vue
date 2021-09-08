@@ -163,11 +163,13 @@ import OpenDataAPI from 'socialuni/api/OpenDataAPI'
 import Login from '@/pages/user/login.vue'
 import Toast from 'socialuni/utils/Toast'
 import MsgInput from 'socialuni/components/MsgInput.vue'
+import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 
 const userStore = namespace('user')
 
 @Component({
   components: {
+    QIcon,
     MsgInput,
     Login,
     QRowItem,
