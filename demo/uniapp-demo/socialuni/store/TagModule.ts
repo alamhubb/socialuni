@@ -1,7 +1,7 @@
 import { VuexModule, Module, Action } from 'vuex-class-modules'
-import TagVO from '/socialuni/model/tag/TagVO'
-import TagTypeVO from '/socialuni/model/tag/TagTypeVO'
-import TagAPI from '/socialuni/api/TagAPI'
+import TagVO from '../model/tag/TagVO'
+import TagTypeVO from '../model/tag/TagTypeVO'
+import TagAPI from '../api/TagAPI'
 
 @Module({ generateMutationSetters: true })
 export default class TagModule extends VuexModule {

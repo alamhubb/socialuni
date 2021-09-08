@@ -1,4 +1,4 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
+import socialHttp from '../plugins/http/socialHttp'
 
 export default class DistrictAPI {
   //初始化时获取，选择全部街道时获取

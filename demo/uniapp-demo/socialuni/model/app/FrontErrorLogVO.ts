@@ -1,4 +1,4 @@
-import { socialSystemModule } from '/socialuni/store'
+import { socialSystemModule } from '../../store'
 import PlatformType from '../../const/PlatformType'
 
 export default class FrontErrorLogVO {

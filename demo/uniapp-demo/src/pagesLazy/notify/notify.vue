@@ -38,11 +38,11 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import UnreadNotifyVO from '/socialuni/model/UnreadNotifyVO'
-import ImgUtil from '/socialuni/utils/ImgUtil'
-import PagePath from '/socialuni/const/PagePath'
-import PageUtil from '/socialuni/utils/PageUtil'
-import RouterUtil from '/socialuni/utils/RouterUtil'
+import UnreadNotifyVO from 'socialuni/model/UnreadNotifyVO'
+import ImgUtil from 'socialuni/utils/ImgUtil'
+import PagePath from 'socialuni/const/PagePath'
+import PageUtil from 'socialuni/utils/PageUtil'
+import RouterUtil from 'socialuni/utils/RouterUtil'
 
 const appStore = namespace('app')
 

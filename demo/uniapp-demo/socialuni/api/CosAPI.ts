@@ -1,5 +1,5 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
-import CosAuthRO from '/socialuni/model/cos/CosAuthRO'
+import socialHttp from '../plugins/http/socialHttp'
+import CosAuthRO from '../model/cos/CosAuthRO'
 
 export default class CosAPI {
   static getCosAuthorizationAPI () {

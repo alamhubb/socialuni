@@ -1,4 +1,4 @@
-import { locationModule } from '/socialuni/store'
+import { locationModule } from '../../store'
 
 export default class TalkQueryVO {
   public talkIds: number[]

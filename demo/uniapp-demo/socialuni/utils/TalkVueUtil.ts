@@ -1,6 +1,6 @@
 import StorageUtil from './StorageUtil'
-import TalkTabVO from '/socialuni/model/talk/TalkTabVO'
-import TalkTabType from '/socialuni/const/TalkTabType'
+import TalkTabVO from '../model/talk/TalkTabVO'
+import TalkTabType from '../const/TalkTabType'
 
 const talkTabFollowDefault = new TalkTabVO()
 talkTabFollowDefault.name = TalkTabType.follow_name

@@ -1,14 +1,14 @@
 import QQUtils from './QQUtils'
-import { platformModule, socialSystemModule, userModule } from '/socialuni/store'
+import { platformModule, socialSystemModule, userModule } from '../store'
 import WxUtils from './WxUtils'
-import AppMsg from '/socialuni/const/AppMsg'
-import Constants from '/socialuni/const/Constant'
+import AppMsg from '../const/AppMsg'
+import Constants from '../const/Constant'
 import MsgUtil from './MsgUtil'
-import UserPayResultVO from '/socialuni/model/user/UserPayResultVO'
+import UserPayResultVO from '../model/user/UserPayResultVO'
 
 import MPUtil from './MPUtil'
 import APPUtil from './APPUtil'
-import AppUtilAPI from '/socialuni/api/AppUtilAPI'
+import AppUtilAPI from '../api/AppUtilAPI'
 import Toast from './Toast'
 
 // 统一处理各平台的订阅

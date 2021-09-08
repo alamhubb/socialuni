@@ -31,9 +31,9 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import UniUtil from '/socialuni/utils/UniUtil'
-import QQUtils from '/socialuni/utils/QQUtils'
-import Alert from '/socialuni/utils/Alert'
+import UniUtil from 'socialuni/utils/UniUtil'
+import QQUtils from 'socialuni/utils/QQUtils'
+import Alert from 'socialuni/utils/Alert'
 
   @Component
 export default class MorePage extends Vue {

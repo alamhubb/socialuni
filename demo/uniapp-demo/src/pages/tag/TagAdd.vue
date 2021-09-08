@@ -35,12 +35,12 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import TagVO from '/socialuni/model/tag/TagVO'
-import TagAPI from '/socialuni/api/TagAPI'
-import ResultVO from '/socialuni/model/ResultVO'
-import UniUtil from '/socialuni/utils/UniUtil'
-import ErrorConst from '/socialuni/const/ErrorConst'
-import Alert from '/socialuni/utils/Alert'
+import TagVO from 'socialuni/model/tag/TagVO'
+import TagAPI from 'socialuni/api/TagAPI'
+import ResultVO from 'socialuni/model/ResultVO'
+import UniUtil from 'socialuni/utils/UniUtil'
+import ErrorConst from 'socialuni/const/ErrorConst'
+import Alert from 'socialuni/utils/Alert'
 
 @Component
 export default class TagAddPage extends Vue {

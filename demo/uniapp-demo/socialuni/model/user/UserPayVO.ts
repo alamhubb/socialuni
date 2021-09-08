@@ -1,4 +1,4 @@
-import { socialSystemModule } from '/socialuni/store'
+import { socialSystemModule } from '../../store'
 
 export default class UserPayVO {
   platform: string

@@ -1,4 +1,4 @@
-import { appModule, socialSystemModule } from '/socialuni/store'
+import { appModule, socialSystemModule } from '../../store'
 
 export default class ThreeAuthRequestVO {
   threeSecretKey: string

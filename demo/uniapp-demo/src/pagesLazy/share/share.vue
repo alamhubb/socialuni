@@ -25,9 +25,9 @@ import {
   Vue,
   Component
 } from 'vue-property-decorator'
-import UniUtil from '/socialuni/utils/UniUtil'
-import PageUtil from '/socialuni/utils/PageUtil'
-import RouterUtil from '/socialuni/utils/RouterUtil'
+import UniUtil from 'socialuni/utils/UniUtil'
+import PageUtil from 'socialuni/utils/PageUtil'
+import RouterUtil from 'socialuni/utils/RouterUtil'
 
 @Component
 export default class SharePage extends Vue {

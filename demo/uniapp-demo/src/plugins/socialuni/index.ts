@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import SocialConfig from '/socialuni/model/SocialConfig'
+import SocialConfig from 'socialuni/model/SocialConfig'
 import socialuni from '../../../socialuni'
 
 const socialConfig: SocialConfig = {

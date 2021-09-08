@@ -67,12 +67,12 @@
 
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
-import PhoneNumFormData from '/socialuni/model/phone/PhoneNumFormData'
-import CommonUtil from '/socialuni/utils/CommonUtil'
-import Toast from '/socialuni/utils/Toast'
-import ConfigMap from '/socialuni/const/ConfigMap'
-import { configStore } from '/socialuni/store'
-import PhoneAPI from '/socialuni/api/PhoneAPI'
+import PhoneNumFormData from 'socialuni/model/phone/PhoneNumFormData'
+import CommonUtil from 'socialuni/utils/CommonUtil'
+import Toast from 'socialuni/utils/Toast'
+import ConfigMap from 'socialuni/const/ConfigMap'
+import { configStore } from 'socialuni/store'
+import PhoneAPI from 'socialuni/api/PhoneAPI'
 
 @Component
 export default class PhoneLoginForm extends Vue {

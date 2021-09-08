@@ -66,10 +66,10 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator'
-import TagVO from '/socialuni/model/tag/TagVO'
+import TagVO from 'socialuni/model/tag/TagVO'
 import { namespace } from 'vuex-class'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
-import QIcon from '/socialuni/components/q-icon/q-icon.vue'
+import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
+import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 
 const userModule = namespace('user')
 @Component({

@@ -1,4 +1,4 @@
-import NumberUtil from '/socialuni/utils/NumberUtil'
+import NumberUtil from '../../utils/NumberUtil'
 
 export default class PhoneNumFormData {
   phoneNum: string = null

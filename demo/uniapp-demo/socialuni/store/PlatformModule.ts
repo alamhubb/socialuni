@@ -1,5 +1,5 @@
 import { VuexModule, Module } from 'vuex-class-modules'
-import AppConfig from '/socialuni/config/AppConfig'
+import AppConfig from '../config/AppConfig'
 
 @Module({ generateMutationSetters: true })
 export default class PlatformModule extends VuexModule {

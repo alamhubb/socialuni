@@ -1,11 +1,11 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
-import ProviderType from '/socialuni/const/ProviderType'
-import PlatformType from '/socialuni/const/PlatformType'
-import PlatformUtils from '/socialuni/utils/PlatformUtils'
-import TokenUtil from '/socialuni/utils/TokenUtil'
+import ProviderType from '../const/ProviderType'
+import PlatformType from '../const/PlatformType'
+import PlatformUtils from '../utils/PlatformUtils'
+import TokenUtil from '../utils/TokenUtil'
 import { appModule, chatModule, locationModule, notifyModule, tagModule } from './index'
-import UniSystemType from '/socialuni/const/UniSystemType'
-import UniPlatformType from '/socialuni/const/UniPlatformType'
+import UniSystemType from '../const/UniSystemType'
+import UniPlatformType from '../const/UniPlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult;
 
 //和终端相关的信息

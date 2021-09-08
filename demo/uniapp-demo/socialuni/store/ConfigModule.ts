@@ -1,6 +1,6 @@
 import { Module, VuexModule } from 'vuex-class-modules'
-import ConfigMap from '/socialuni/const/ConfigMap'
-import Lodash from '/socialuni/utils/Lodash'
+import ConfigMap from '../const/ConfigMap'
+import Lodash from '../utils/Lodash'
 
 @Module({ generateMutationSetters: true })
 export default class ConfigModule extends VuexModule {

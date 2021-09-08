@@ -92,12 +92,12 @@
 <script lang="ts">
 import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator'
 
-import TagVO from '/socialuni/model/tag/TagVO'
-import TagTypeVO from '/socialuni/model/tag/TagTypeVO'
-import QRowItem from '/socialuni/components/q-row-item/q-row-item.vue'
-import QIcon from '/socialuni/components/q-icon/q-icon.vue'
+import TagVO from 'socialuni/model/tag/TagVO'
+import TagTypeVO from 'socialuni/model/tag/TagTypeVO'
+import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
+import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 import { namespace } from 'vuex-class'
-import TagUtil from '/socialuni/utils/TagUtil'
+import TagUtil from 'socialuni/utils/TagUtil'
 import QNavbar from "/socialuni/components/q-navbar/q-navbar.vue";
 import QSearch from "/socialuni/components/q-search/q-search.vue";
 import QCard from "/socialuni/components/q-card/q-card.vue";

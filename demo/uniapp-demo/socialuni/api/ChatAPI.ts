@@ -1,7 +1,7 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
-import ChatReadVO from '/socialuni/model/chat/ChatReadVO'
-import ChatRemoveVO from '/socialuni/model/chat/ChatRemoveVO'
-import ChatVO from '/socialuni/model/chat/ChatVO'
+import socialHttp from '../plugins/http/socialHttp'
+import ChatReadVO from '../model/chat/ChatReadVO'
+import ChatRemoveVO from '../model/chat/ChatRemoveVO'
+import ChatVO from '../model/chat/ChatVO'
 
 export default class ChatAPI {
   /*static getChatAPI (user: UserVO) {

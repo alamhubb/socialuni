@@ -7,13 +7,13 @@ import GetSystemInfoResult = UniApp.GetSystemInfoResult;
 import GetProviderRes = UniApp.GetProviderRes;
 import LoginRes = UniApp.LoginRes;
 import GetUserInfoRes = UniApp.GetUserInfoRes;
-import AppMsg from '/socialuni/const/AppMsg'
+import AppMsg from '../const/AppMsg'
 import Toast from './Toast'
-import DomFile from '/socialuni/model/DomFile'
+import DomFile from '../model/DomFile'
 import UUIDUtil from './UUIDUtil'
 import ImgUtil from './ImgUtil'
 import JsonUtil from './JsonUtil'
-import { socialSystemModule } from '/socialuni/store'
+import { socialSystemModule } from '../store'
 
 export default class UniUtil {
   public static textCopy (copyText: string, hint?: string) {

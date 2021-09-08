@@ -1,8 +1,8 @@
-import AppUtilAPI from '/socialuni/api/AppUtilAPI'
+import AppUtilAPI from '../api/AppUtilAPI'
 import UniUtil from './UniUtil'
-import AppUpdateType from '/socialuni/const/AppUpdateType'
-import { configModule } from '/socialuni/store'
-import AppConfig from '/socialuni/config/AppConfig'
+import AppUpdateType from '../const/AppUpdateType'
+import { configModule } from '../store'
+import AppConfig from '../config/AppConfig'
 import Alert from './Alert'
 
 export default class APPUtil {

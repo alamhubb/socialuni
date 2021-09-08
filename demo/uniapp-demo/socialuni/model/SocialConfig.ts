@@ -1,5 +1,5 @@
 import { SocialMpConfig } from './SocialMpConfig'
-import GenderType from '/socialuni/const/GenderType'
+import GenderType from '../const/GenderType'
 
 export default class SocialConfig {
   //app的性别类型，全部性别，还是仅女生可用

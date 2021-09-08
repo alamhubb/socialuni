@@ -1,12 +1,12 @@
-import LoginAPI from '/socialuni/api/LoginAPI'
+import LoginAPI from '../api/LoginAPI'
 import UserService from './UserService'
-import UniUserUtil from '/socialuni/utils/UniUserUtil'
-import SocialPhoneNumLoginQO from '/socialuni/model/phone/SocialPhoneNumLoginQO'
-import MockAPI from '/socialuni/api/MockAPI'
-import { socialSystemModule } from '/socialuni/store'
-import Constants from '/socialuni/const/Constant'
-import Toast from '/socialuni/utils/Toast'
-import UniProviderType from '/socialuni/const/UniProviderType'
+import UniUserUtil from '../utils/UniUserUtil'
+import SocialPhoneNumLoginQO from '../model/phone/SocialPhoneNumLoginQO'
+import MockAPI from '../api/MockAPI'
+import { socialSystemModule } from '../store'
+import Constants from '../const/Constant'
+import Toast from '../utils/Toast'
+import UniProviderType from '../const/UniProviderType'
 
 export default class LoginService {
   /**

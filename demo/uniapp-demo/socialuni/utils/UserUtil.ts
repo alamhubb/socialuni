@@ -1,6 +1,6 @@
-import GenderType from '/socialuni/const/GenderType'
+import GenderType from '../const/GenderType'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import FollowStatus from '/socialuni/const/FollowStatus'
+import FollowStatus from '../const/FollowStatus'
 
 export default class UserUtil {
   static getGenderIcon (user: CenterUserDetailRO): string {

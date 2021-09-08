@@ -1,10 +1,10 @@
 import PagePath from '../const/PagePath'
-import store, { socialSystemModule, userModule } from '/socialuni/store'
+import store, { socialSystemModule, userModule } from '../store'
 import MsgUtil from './MsgUtil'
 import Alert from './Alert'
 import RouterUtil from './RouterUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import SocialUniAuthVO from '/socialuni/model/openData/SocialUniAuthVO'
+import SocialUniAuthVO from '../model/openData/SocialUniAuthVO'
 
 
 export default class PageUtil {

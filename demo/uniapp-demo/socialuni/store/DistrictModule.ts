@@ -1,7 +1,7 @@
 import { VuexModule, Module, Action } from 'vuex-class-modules'
-import DistrictVO from '/socialuni/model/DistrictVO'
-import DistrictAPI from '/socialuni/api/DistrictAPI'
-import LocationUtil from '/socialuni/utils/LocationUtil'
+import DistrictVO from '../model/DistrictVO'
+import DistrictAPI from '../api/DistrictAPI'
+import LocationUtil from '../utils/LocationUtil'
 
 @Module({ generateMutationSetters: true })
 export default class DistrictModule extends VuexModule {

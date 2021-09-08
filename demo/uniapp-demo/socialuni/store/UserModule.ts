@@ -1,14 +1,14 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
 
-import UserAPI from '/socialuni/api/UserAPI'
+import UserAPI from '../api/UserAPI'
 import { userModule } from './index'
-import UserStorageUtil from '/socialuni/utils/UserStorageUtil'
-import Alert from '/socialuni/utils/Alert'
-import Toast from '/socialuni/utils/Toast'
-import UserService from '/socialuni/service/UserService'
-import TokenUtil from '/socialuni/utils/TokenUtil'
-import SocialLoginRO from '/socialuni/model/social/SocialLoginRO'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import UserStorageUtil from '../utils/UserStorageUtil'
+import Alert from '../utils/Alert'
+import Toast from '../utils/Toast'
+import UserService from '../service/UserService'
+import TokenUtil from '../utils/TokenUtil'
+import SocialLoginRO from '../model/social/SocialLoginRO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })

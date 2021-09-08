@@ -7,7 +7,7 @@
  * @Date 2019-08-20
  * http://ext.dcloud.net.cn/plugin?id=392
  */
-import ResultVO from '/socialuni/model/ResultVO'
+import ResultVO from '../../model/ResultVO'
 import RequestOptions = UniApp.RequestOptions
 
 interface header { // header 接口

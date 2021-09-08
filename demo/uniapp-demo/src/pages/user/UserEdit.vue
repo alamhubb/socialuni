@@ -100,18 +100,18 @@
 
 <script lang="ts">
 import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
-import UserAPI from '/socialuni/api/UserAPI'
+import UserAPI from 'socialuni/api/UserAPI'
 import { namespace } from 'vuex-class'
-import { parseDate } from '/socialuni/utils'
-import JsonUtils from '/socialuni/utils/JsonUtil'
-import Alert from '/socialuni/utils/Alert'
-import Toast from '/socialuni/utils/Toast'
-import { userModule } from '/socialuni/store'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
-import EnumStrVO from '/socialuni/const/EnumStrVO'
-import GenderType from '/socialuni/const/GenderType'
-import SocialConfig from '/socialuni/model/SocialConfig'
-import UserEditVO from '/socialuni/model/user/UserEditVO'
+import { parseDate } from 'socialuni/utils'
+import JsonUtils from 'socialuni/utils/JsonUtil'
+import Alert from 'socialuni/utils/Alert'
+import Toast from 'socialuni/utils/Toast'
+import { userModule } from 'socialuni/store'
+import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
+import EnumStrVO from 'socialuni/const/EnumStrVO'
+import GenderType from 'socialuni/const/GenderType'
+import SocialConfig from 'socialuni/model/SocialConfig'
+import UserEditVO from 'socialuni/model/user/UserEditVO'
 
 const userStore = namespace('user')
 

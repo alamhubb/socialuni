@@ -1,5 +1,5 @@
 import DistrictVO from '../DistrictVO'
-import LocationUtil from '/socialuni/utils/LocationUtil'
+import LocationUtil from '../../utils/LocationUtil'
 import DomFile from '../DomFile'
 import ImgAddQO from '../user/ImgAddQO'
 

@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SkipUrlConst from '/socialuni/const/SkipUrlConst'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
-import { userStore } from '/socialuni/store'
+import SkipUrlConst from 'socialuni/const/SkipUrlConst'
+import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
+import { userStore } from 'socialuni/store'
 
 @Component
 export default class UserPrivacyAgreement extends Vue {

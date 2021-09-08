@@ -26,10 +26,8 @@
         <module>social-api-model</module>
         <module>social-exception</module>
         <module>social-sdk</module>
-        <module>social-demo</module>
         <module>social-web-sdk</module>
         <module>socialuni-api</module>
-        <module>socialuni-demo</module>
         <module>socialuni-utils</module>
         <module>socialuni-center-web</module>
         <module>socialuni-center-sdk</module>

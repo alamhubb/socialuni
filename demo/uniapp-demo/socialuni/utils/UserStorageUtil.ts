@@ -1,5 +1,5 @@
 import StorageUtil from './StorageUtil'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 export default class UserStorageUtil {
   // 开发生产区分user，避免混淆，不区分的话会冲突

@@ -1,4 +1,4 @@
-import Constants from '/socialuni/const/Constant'
+import Constants from '../const/Constant'
 
 /**
  * Parse the time to string

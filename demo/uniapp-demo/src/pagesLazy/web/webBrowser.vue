@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import PagePath from '/socialuni/const/PagePath'
+import PagePath from 'socialuni/const/PagePath'
 import { namespace } from 'vuex-class'
-import { socialSystemModule } from '/socialuni/store'
-import RouterUtil from '/socialuni/utils/RouterUtil'
+import { socialSystemModule } from 'socialuni/store'
+import RouterUtil from 'socialuni/utils/RouterUtil'
 
 const systemStore = namespace('system')
 

@@ -7,10 +7,10 @@ import COS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
 // #endif
-import AppMsg from '/socialuni/const/AppMsg'
+import AppMsg from '../const/AppMsg'
 import Alert from './Alert'
-import CosAuthRO from '/socialuni/model/cos/CosAuthRO'
-import DomFile from '/socialuni/model/DomFile'
+import CosAuthRO from '../model/cos/CosAuthRO'
+import DomFile from '../model/DomFile'
 import UniUtil from './UniUtil'
 
 export default class CosUtil {

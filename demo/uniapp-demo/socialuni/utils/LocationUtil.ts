@@ -1,7 +1,7 @@
-import DistrictVO from '/socialuni/model/DistrictVO'
+import DistrictVO from '../model/DistrictVO'
 import StorageUtil from './StorageUtil'
 import MapUtil from './MapUtil'
-import { locationModule, socialSystemModule } from '/socialuni/store'
+import { locationModule, socialSystemModule } from '../store'
 import AppAuthUtil from './AppAuthUtil'
 
 const chinaAdCode = '100000'

@@ -1,6 +1,6 @@
 import JsonUtils from './JsonUtil'
 import TokenUtil from './TokenUtil'
-import ErrorConst from '/socialuni/const/ErrorConst'
+import ErrorConst from '../const/ErrorConst'
 import CommonUtil from './CommonUtil'
 
 export default class ImgUtil {

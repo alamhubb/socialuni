@@ -1,7 +1,7 @@
-import SkipType from '/socialuni/const/SkipType'
-import SkipUrlConst from '/socialuni/const/SkipUrlConst'
-import PagePath from '/socialuni/const/PagePath'
-import { socialSystemModule } from '/socialuni/store'
+import SkipType from '../const/SkipType'
+import SkipUrlConst from '../const/SkipUrlConst'
+import PagePath from '../const/PagePath'
+import { socialSystemModule } from '../store'
 
 export default class RouterUtil {
   static getWebUrl (webUrl: string, pageTitle = ''): string {

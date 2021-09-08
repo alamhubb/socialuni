@@ -1,4 +1,4 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
+import socialHttp from '../plugins/http/socialHttp'
 
 export default class LoveValueAPI {
   static watchVideoAdsAPI (success: boolean) {

@@ -1,9 +1,9 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
-import AppInitQueryVO from '/socialuni/model/common/AppInitQueryVO'
-import AppUpdateVO from '/socialuni/model/app/AppUpdateVO'
-import AppUpdateResultVO from '/socialuni/model/app/AppUpdateResultVO'
-import FrontErrorLogVO from '/socialuni/model/app/FrontErrorLogVO'
-import JsonUtil from '/socialuni/utils/JsonUtil'
+import socialHttp from '../plugins/http/socialHttp'
+import AppInitQueryVO from '../model/common/AppInitQueryVO'
+import AppUpdateVO from '../model/app/AppUpdateVO'
+import AppUpdateResultVO from '../model/app/AppUpdateResultVO'
+import FrontErrorLogVO from '../model/app/FrontErrorLogVO'
+import JsonUtil from '../utils/JsonUtil'
 
 export default class AppUtilAPI {
   static queryAppInitDataLoadAPI (initQueryVO: AppInitQueryVO) {

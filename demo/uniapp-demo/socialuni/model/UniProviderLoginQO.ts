@@ -1,4 +1,4 @@
-import { socialSystemModule } from '/socialuni/store'
+import { socialSystemModule } from '../store'
 import { socialConfig } from '../index'
 import UniUserInfoRO from './UniUserInfoRO'
 import UniProviderType from '../const/UniProviderType'

@@ -1,6 +1,6 @@
 import AppConfig from '../config/AppConfig'
-import { configModule } from '/socialuni/store'
-import RouterUtil from '/socialuni/utils/RouterUtil'
+import { configModule } from '../store'
+import RouterUtil from '../utils/RouterUtil'
 
 export default class SkipUrlConst {
   static homeUrl (): string {

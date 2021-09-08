@@ -1,4 +1,4 @@
-import TagVO from '/socialuni/model/tag/TagVO'
+import TagVO from '../model/tag/TagVO'
 import StorageUtil from './StorageUtil'
 
 const initTag = new TagVO()

@@ -1,8 +1,8 @@
 import UniUtil from './UniUtil'
-import AppConfig from '/socialuni/config/AppConfig'
-import UserPayResultVO from '/socialuni/model/user/UserPayResultVO'
-import PlatformType from '/socialuni/const/PlatformType'
-import { socialSystemModule } from '/socialuni/store'
+import AppConfig from '../config/AppConfig'
+import UserPayResultVO from '../model/user/UserPayResultVO'
+import PlatformType from '../const/PlatformType'
+import { socialSystemModule } from '../store'
 
 export default class WxUtils {
   static subscribeAppMsg (tmplIds: string[]) {

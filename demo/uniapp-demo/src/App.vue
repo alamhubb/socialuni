@@ -1,15 +1,15 @@
 <script lang="ts">
 import Vue from 'vue'
-import { appModule, socialSystemModule, userModule } from '/socialuni/store'
-import UserService from '/socialuni/service/UserService'
-import ThreeAuthType from '/socialuni/const/ThreeAuthType'
-import Toast from '/socialuni/utils/Toast'
-import ResultVO from '/socialuni/model/ResultVO'
-import ThreeAuthResultVO from '/socialuni/model/openData/ThreeAuthResultVO'
-import PageUtil from '/socialuni/utils/PageUtil'
-import SocialLoginRO from '/socialuni/model/social/SocialLoginRO'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
-import SocialConfig from '/socialuni/model/SocialConfig'
+import { appModule, socialSystemModule, userModule } from 'socialuni/store'
+import UserService from 'socialuni/service/UserService'
+import ThreeAuthType from 'socialuni/const/ThreeAuthType'
+import Toast from 'socialuni/utils/Toast'
+import ResultVO from 'socialuni/model/ResultVO'
+import ThreeAuthResultVO from 'socialuni/model/openData/ThreeAuthResultVO'
+import PageUtil from 'socialuni/utils/PageUtil'
+import SocialLoginRO from 'socialuni/model/social/SocialLoginRO'
+import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
+import SocialConfig from 'socialuni/model/SocialConfig'
 
 export default Vue.extend({
   mpType: 'app',

@@ -1,14 +1,14 @@
 import { VuexModule, Module, Action } from 'vuex-class-modules'
 import { userModule } from './index'
-import CommentAddVO from '/socialuni/model/comment/CommentAddVO'
-import CommentVO from '/socialuni/model/comment/CommentVO'
-import TalkAPI from '/socialuni/api/TalkAPI'
-import TalkVO from '/socialuni/model/talk/TalkVO'
-import MsgUtil from '/socialuni/utils/MsgUtil'
-import CommonUtil from '/socialuni/utils/CommonUtil'
-import TalkTabVO from '/socialuni/model/talk/TalkTabVO'
-import TalkVueUtil from '/socialuni/utils/TalkVueUtil'
-import TalkFilterUtil from '/socialuni/utils/TalkFilterUtil'
+import CommentAddVO from '../model/comment/CommentAddVO'
+import CommentVO from '../model/comment/CommentVO'
+import TalkAPI from '../api/TalkAPI'
+import TalkVO from '../model/talk/TalkVO'
+import MsgUtil from '../utils/MsgUtil'
+import CommonUtil from '../utils/CommonUtil'
+import TalkTabVO from '../model/talk/TalkTabVO'
+import TalkVueUtil from '../utils/TalkVueUtil'
+import TalkFilterUtil from '../utils/TalkFilterUtil'
 
 
 @Module({ generateMutationSetters: true })

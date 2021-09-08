@@ -1,8 +1,8 @@
-import { userModule } from '/socialuni/store'
-import Toast from '/socialuni/utils/Toast'
-import PhoneAPI from '/socialuni/api/PhoneAPI'
-import UniLoginUtil from '/socialuni/utils/UniLoginUtil'
-import ProviderType from '/socialuni/const/ProviderType'
+import { userModule } from '../store'
+import Toast from '../utils/Toast'
+import PhoneAPI from '../api/PhoneAPI'
+import UniLoginUtil from '../utils/UniLoginUtil'
+import ProviderType from '../const/ProviderType'
 
 export default class PhoneService {
   static async bindPhoneNum (phoneNum: string, authCode: string) {

@@ -1,6 +1,6 @@
-import { socialSystemModule } from '/socialuni/store'
+import { socialSystemModule } from '../../store'
 import DistrictVO from '../DistrictVO'
-import TalkFilterUtil from '/socialuni/utils/TalkFilterUtil'
+import TalkFilterUtil from '../../utils/TalkFilterUtil'
 import TalkTabVO from '../talk/TalkTabVO'
 import GenderType from '../../const/GenderType'
 

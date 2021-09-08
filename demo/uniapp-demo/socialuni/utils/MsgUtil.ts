@@ -1,10 +1,10 @@
-import { configModule, socialSystemModule, userModule } from '/socialuni/store'
+import { configModule, socialSystemModule, userModule } from '../store'
 
-import AppMsg from '/socialuni/const/AppMsg'
+import AppMsg from '../const/AppMsg'
 import Alert from './Alert'
 import Toast from './Toast'
 import PageUtil from './PageUtil'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 export default class MsgUtil {
   static unBindPhoneNum () {

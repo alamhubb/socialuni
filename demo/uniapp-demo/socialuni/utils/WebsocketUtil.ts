@@ -1,9 +1,9 @@
 import TokenUtil from './TokenUtil'
-import NotifyVO from '/socialuni/model/NotifyVO'
+import NotifyVO from '../model/NotifyVO'
 import JsonUtil from './JsonUtil'
-import { chatModule, notifyModule } from '/socialuni/store'
-import NotifyType from '/socialuni/const/NotifyType'
-import AppConfig from '/socialuni/config/AppConfig'
+import { chatModule, notifyModule } from '../store'
+import NotifyType from '../const/NotifyType'
+import AppConfig from '../config/AppConfig'
 import CommonUtil from './CommonUtil'
 
 export default class WebsocketUtil {

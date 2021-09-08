@@ -1,5 +1,5 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
-import MatchQueryVO from '/socialuni/model/match/MatchQueryVO'
+import socialHttp from '../plugins/http/socialHttp'
+import MatchQueryVO from '../model/match/MatchQueryVO'
 
 export default class MatchAPI {
   static queryMatchUsersAPI (userIds: string[], matchType: string) {

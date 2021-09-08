@@ -21,13 +21,13 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import CenterUserDetailRO from '/socialuni/model/social/CenterUserDetailRO'
+import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
-import ImgUtil from '/socialuni/utils/ImgUtil'
-import UniUtil from '/socialuni/utils/UniUtil'
-import ImgFileVO from '/socialuni/model/ImgFileVO'
-import PageUtil from '/socialuni/utils/PageUtil'
-import Alert from '/socialuni/utils/Alert'
+import ImgUtil from 'socialuni/utils/ImgUtil'
+import UniUtil from 'socialuni/utils/UniUtil'
+import ImgFileVO from 'socialuni/model/ImgFileVO'
+import PageUtil from 'socialuni/utils/PageUtil'
+import Alert from 'socialuni/utils/Alert'
 
 const userStore = namespace('user')
 

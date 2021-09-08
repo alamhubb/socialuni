@@ -1,5 +1,5 @@
-import socialHttp from '/socialuni/plugins/http/socialHttp'
-import FollowAddVO from '/socialuni/model/FollowAddVO'
+import socialHttp from '../plugins/http/socialHttp'
+import FollowAddVO from '../model/FollowAddVO'
 
 export default class FollowAPI {
   static addFollowAPI (followAdd: FollowAddVO) {
