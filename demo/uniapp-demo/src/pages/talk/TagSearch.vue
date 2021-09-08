@@ -104,8 +104,8 @@ import QCard from "/socialuni/components/q-card/q-card.vue";
 import QCardRow from "/socialuni/components/q-card-row/q-card-row.vue";
 import QCardGrid from "/socialuni/components/q-card-grid/q-card-grid.vue";
 import QSidebar from "/socialuni/components/q-sidebar/q-sidebar.vue";
+import { socialTagStore } from 'socialuni/store'
 
-const tagStore = namespace('tag')
 
 @Component({
   components: {
@@ -123,10 +123,10 @@ export default class TagSearchPage extends Vue {
   @Model('input') readonly value: boolean
 
   @Prop({ type: Boolean, default: false }) readonly isAdd: boolean
-  @tagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
+  @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   // 输入内容查询时显示的列表tag
   // 进入页面只查询前20个，点击了输入内容才查询所有
-  @tagStore.State('tags') readonly tags: TagVO []
+  @socialTagStore.State('tags') readonly tags: TagVO []
 
   searchContent = ''
   showSearch = false

@@ -1,4 +1,4 @@
-import { chatModule, notifyModule, userModule } from '../store'
+import { socialChatModule, socialNotifyModule, socialUserModule } from '../store'
 import WebsocketUtil from '../utils/WebsocketUtil'
 import TokenUtil from '../utils/TokenUtil'
 import SocialLoginRO from '../model/social/SocialLoginRO'
@@ -8,7 +8,7 @@ export default class UserService {
   //清空用户信息的组合操作
   static clearUserInfoCom () {
     TokenUtil.remove()
-    userModule.removeUser()
+    socialUserModule.removeUser()
     WebsocketUtil.websocketClose()
   }
 
@@ -21,16 +21,16 @@ export default class UserService {
     TokenUtil.set(loginRO.token)
     //登录之后重连websocket
     WebsocketUtil.websocketClose()
-    userModule.setUser(loginRO.user)
-    notifyModule.queryNotifiesAction()
-    chatModule.getChatsAction()
+    socialUserModule.setUser(loginRO.user)
+    socialNotifyModule.queryNotifiesAction()
+    socialChatModule.getChatsAction()
     // appModule.getImgPathAction()
     return loginRO.user
   }
 
   static getMineUserInitDataAction () {
     if (TokenUtil.hasToken()) {
-      userModule.getMineUserAction()
+      socialUserModule.getMineUserAction()
     }
   }
 }

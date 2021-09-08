@@ -28,12 +28,13 @@ import UniUtil from 'socialuni/utils/UniUtil'
 import ImgFileVO from 'socialuni/model/ImgFileVO'
 import PageUtil from 'socialuni/utils/PageUtil'
 import Alert from 'socialuni/utils/Alert'
+import { socialUserStore } from 'socialuni/store'
 
 const userStore = namespace('user')
 
 @Component
 export default class UserAvatarPage extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
 
   saveDisabled = false
   uploadImgFile: ImgFileVO = null

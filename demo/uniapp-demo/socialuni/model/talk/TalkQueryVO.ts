@@ -1,4 +1,4 @@
-import { locationModule } from '../../store'
+import { socialLocationModule } from '../../store'
 
 export default class TalkQueryVO {
   public talkIds: number[]
@@ -13,7 +13,7 @@ export default class TalkQueryVO {
 
   constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number) {
     this.talkIds = talkIds
-    const district = locationModule.location
+    const district = socialLocationModule.location
     if (district) {
       this.adCode = district.adCode
       this.lon = district.lon

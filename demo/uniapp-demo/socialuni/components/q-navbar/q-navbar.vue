@@ -19,8 +19,8 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes
+import { socialSystemStore } from '../../store'
 
-const systemStore = namespace('system')
 
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
 // #ifdef MP
@@ -33,9 +33,9 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 export default class QNavBar extends Vue {
   @Prop() customClass: string
 
-  @systemStore.State('statusBarHeight') statusBarHeight
-  @systemStore.State('navBarHeight') navBarHeight
-  @systemStore.State('titleHeight') titleHeight
+  @socialSystemStore.State('statusBarHeight') statusBarHeight
+  @socialSystemStore.State('navBarHeight') navBarHeight
+  @socialSystemStore.State('titleHeight') titleHeight
 
   get navbarInnerStyle () {
     const style: any = {}

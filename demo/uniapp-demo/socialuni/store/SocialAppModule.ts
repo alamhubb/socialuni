@@ -10,14 +10,14 @@ import ReportAPI from '../api/ReportAPI'
 import QingchiAPI from '../api/QingchiAPI'
 import DevUserVO from '../model/dev/DevUserVO'
 import DevUserAPI from '../api/DevUserAPI'
-import { appModule, configModule } from './index'
+import { socialAppModule, socialConfigModule } from './index'
 import SocialUniAuthVO from '../model/openData/SocialUniAuthVO'
 import DevModeType from '../const/DevModeType'
 import AppConfigAPI from '../api/AppConfigAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
 
 @Module({ generateMutationSetters: true })
-export default class AppModule extends VuexModule {
+export default class SocialAppModule extends VuexModule {
   // 系统加载时通过getDistrictAction赋值
   //有记录的花记录上一次的，没有记录的话初始全国的
   openLocation: boolean = LocationUtil.getOpenLocation()
@@ -60,13 +60,13 @@ export default class AppModule extends VuexModule {
     if (params && params.referrerInfo) {
       const info = params.referrerInfo
       //获取三方的appid
-      appModule.threeAppId = info.appId
+      socialAppModule.threeAppId = info.appId
       //如果有跳转信息
       const extraData: SocialUniAuthVO = info.extraData
       if (extraData) {
-        appModule.threeSecretKey = extraData.appSecretKey
-        appModule.threeUserId = extraData.appUserId
-        appModule.threeAuthType = extraData.authType
+        socialAppModule.threeSecretKey = extraData.appSecretKey
+        socialAppModule.threeUserId = extraData.appUserId
+        socialAppModule.threeAuthType = extraData.authType
         //支持非授权跳转
         /*if (!appModule.threeSecretKey) {
           const result: ResultVO<any> = new ResultVO<any>()
@@ -108,7 +108,7 @@ export default class AppModule extends VuexModule {
   getAppConfigAction () {
     AppConfigAPI.getAppConfigAPI().then(res => {
       const appInitData: AppInitDataRO = res.data
-      configModule.appConfig = appInitData.appConfig
+      socialConfigModule.appConfig = appInitData.appConfig
       this.onlineUsersCount = appInitData.onlineUsersCount
       this.reportTypes = appInitData.reportTypes
       // this.imgPath = appInitData.imgPath

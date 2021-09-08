@@ -3,7 +3,7 @@ import TokenUtil from 'socialuni/utils/TokenUtil'
 import ErrorCode from 'socialuni/const/ErrorCode'
 import UniUtil from 'socialuni/utils/UniUtil'
 import CommonUtil from 'socialuni/utils/CommonUtil'
-import { configModule, userModule } from 'socialuni/store'
+import { socialConfigModule, socialUserModule } from 'socialuni/store'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import UserService from 'socialuni/service/UserService'
 import Alert from 'socialuni/utils/Alert'
@@ -41,7 +41,7 @@ WebAPI.interceptor.response(
             if (ErrorConst.not_logged === error.statusCode) {
               MsgUtil.unLoginMessage()
             } else {
-              const msg: string = configModule.systemError605
+              const msg: string = socialConfigModule.systemError605
               Alert.hint(msg)
             }
           }

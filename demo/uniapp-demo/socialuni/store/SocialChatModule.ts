@@ -9,11 +9,12 @@ import PageUtil from '../utils/PageUtil'
 import MessageAPI from '../api/MessageAPI'
 import CommonUtil from '../utils/CommonUtil'
 import PlatformUtils from '../utils/PlatformUtils'
-import { chatModule, userModule } from './index'
+import { socialChatModule, socialUserModule } from './index'
 import PagePath from '../const/PagePath'
+import SocialAppModule from './SocialAppModule'
 
 @Module({ generateMutationSetters: true })
-export default class ChatModule extends VuexModule {
+export default class SocialChatModule extends VuexModule {
   chatId: number = null
   chats: ChatVO[] = []
   scrollTop: number = 0
@@ -111,8 +112,8 @@ export default class ChatModule extends VuexModule {
   openChatAction (content) {
     const needPayOpen = this.chat.needPayOpen
     return ChatAPI.openChatAPI(this.chat.id, this.chat.needPayOpen, content).then((res) => {
-      chatModule.replaceChat(this.chatIndex, res.data)
-      chatModule.scrollToMessagePageBottom()
+      socialChatModule.replaceChat(this.chatIndex, res.data)
+      socialChatModule.scrollToMessagePageBottom()
       if (needPayOpen) {
         // userModule.user.shell -= 10
       }
@@ -273,7 +274,7 @@ export default class ChatModule extends VuexModule {
     //如果登录了，才调用后台
     // 如果登录了
     //目前 官方群聊没记录已读状态，读取也不管用
-    if (userModule.hasUser && chat.type !== ChatType.system_group) {
+    if (socialUserModule.hasUser && chat.type !== ChatType.system_group) {
       ChatAPI.readChatAPI(chat.id, msgIds)
     }
     for (const message of messages) {

@@ -89,8 +89,8 @@ import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import Alert from 'socialuni/utils/Alert'
 import Toast from 'socialuni/utils/Toast'
 import SocialConfig from 'socialuni/model/SocialConfig'
+import { socialUserStore } from 'socialuni/store'
 
-const userStore = namespace('user')
 @Component({
   components: { QIcon }
 })
@@ -100,7 +100,7 @@ export default class TalkItemHead extends Vue {
 
   // 因为需要修改关注状态，所以需要克隆
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   followBtnDisabled = false
   isUserDetail = false
   followType: string = TalkTabType.follow_type

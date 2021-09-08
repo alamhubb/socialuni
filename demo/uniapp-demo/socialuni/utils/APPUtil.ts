@@ -1,7 +1,7 @@
 import AppUtilAPI from '../api/AppUtilAPI'
 import UniUtil from './UniUtil'
 import AppUpdateType from '../const/AppUpdateType'
-import { configModule } from '../store'
+import { socialConfigModule } from '../store'
 import AppConfig from '../config/AppConfig'
 import Alert from './Alert'
 
@@ -24,7 +24,7 @@ export default class APPUtil {
               plus.runtime.restart()
             })
           }).catch(() => {
-            Alert.hint('更新失败，' + configModule.contactService)
+            Alert.hint('更新失败，' + socialConfigModule.contactService)
           })
         }
       })

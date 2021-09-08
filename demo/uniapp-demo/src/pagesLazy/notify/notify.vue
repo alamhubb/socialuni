@@ -43,8 +43,8 @@ import ImgUtil from 'socialuni/utils/ImgUtil'
 import PagePath from 'socialuni/const/PagePath'
 import PageUtil from 'socialuni/utils/PageUtil'
 import RouterUtil from 'socialuni/utils/RouterUtil'
+import { socialAppStore } from 'socialuni/store'
 
-const appStore = namespace('app')
 
   /**
    * todo 需要支持发表情,数据库字段，img字段img改为了src, 所有被封禁的用户允许登录查看，但是不允许操作，提示账号已被封禁
@@ -53,7 +53,7 @@ const appStore = namespace('app')
    */
   @Component
 export default class NotifyPage extends Vue {
-    @appStore.State('notifies') notifies: UnreadNotifyVO[]
+    @socialAppStore.State('notifies') notifies: UnreadNotifyVO[]
 
     toTalkDetailVue (talkId: number) {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)

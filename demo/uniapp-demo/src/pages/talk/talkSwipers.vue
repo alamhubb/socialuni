@@ -15,16 +15,14 @@ import { namespace } from 'vuex-class'
 import HomeSwiperVO from 'socialuni/model/HomeSwiperVO'
 import ConfigMap from 'socialuni/const/ConfigMap'
 import SkipType from 'socialuni/const/SkipType'
-import { socialSystemModule } from 'socialuni/store'
+import { socialAppStore, socialConfigStore, socialSystemModule } from 'socialuni/store'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 
-const appStore = namespace('app')
-const configStore = namespace('config')
 // todo 后台可控制是否显示轮播图
 @Component
 export default class TalkSwipersPage extends Vue {
-  @appStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
-  @configStore.Getter(ConfigMap.homeUrlKey) homeUrl: string
+  @socialAppStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
+  @socialConfigStore.Getter(ConfigMap.homeUrlKey) homeUrl: string
   swiperHeight: number = ConfigMap.swiperHeightDefault
 
   get showSwipers () {

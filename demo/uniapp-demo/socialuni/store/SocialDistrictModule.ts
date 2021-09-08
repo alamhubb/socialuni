@@ -2,9 +2,10 @@ import { VuexModule, Module, Action } from 'vuex-class-modules'
 import DistrictVO from '../model/DistrictVO'
 import DistrictAPI from '../api/DistrictAPI'
 import LocationUtil from '../utils/LocationUtil'
+import SocialAppModule from './SocialAppModule'
 
 @Module({ generateMutationSetters: true })
-export default class DistrictModule extends VuexModule {
+export default class SocialDistrictModule extends VuexModule {
   // 系统加载时通过getDistrictAction赋值
   //有记录的花记录上一次的，没有记录的话初始全国的
   //记录用户是否授权过定位

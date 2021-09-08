@@ -76,7 +76,7 @@ import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import ShellOrderVO from 'socialuni/model/ShellOrderVO'
 import PayType from 'socialuni/const/PayType'
 import ProviderType from 'socialuni/const/ProviderType'
-import { socialSystemModule } from 'socialuni/store'
+import { socialSystemModule, socialUserStore } from 'socialuni/store'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 
 const userStore = namespace('user')
@@ -85,7 +85,7 @@ const userStore = namespace('user')
   components: { QCol, QRowItem, QRow, FollowItem }
 })
 export default class ShellPage extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   payValues = [
     new EnumVO(1, '1元'),
     new EnumVO(5, '5元'),

@@ -38,7 +38,7 @@ import TalkVO from 'socialuni/model/talk/TalkVO'
 import CommentVO from 'socialuni/model/comment/CommentVO'
 import PagePath from 'socialuni/const/PagePath'
 import PageUtil from 'socialuni/utils/PageUtil'
-import { talkModule } from 'socialuni/store'
+import { socialTalkModule } from 'socialuni/store'
 import JsonUtils from 'socialuni/utils/JsonUtil'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
@@ -80,7 +80,7 @@ export default class ChildComment extends Vue {
     }
 
     setReplyComment (talk, comment, replyComment) {
-      talkModule.setReplyComment({ talk, comment, replyComment })
+      socialTalkModule.setReplyComment({ talk, comment, replyComment })
     }
 
     promptDeleteContent () {

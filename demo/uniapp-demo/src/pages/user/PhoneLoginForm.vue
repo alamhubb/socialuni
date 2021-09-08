@@ -71,12 +71,12 @@ import PhoneNumFormData from 'socialuni/model/phone/PhoneNumFormData'
 import CommonUtil from 'socialuni/utils/CommonUtil'
 import Toast from 'socialuni/utils/Toast'
 import ConfigMap from 'socialuni/const/ConfigMap'
-import { configStore } from 'socialuni/store'
+import { socialConfigStore } from 'socialuni/store'
 import PhoneAPI from 'socialuni/api/PhoneAPI'
 
 @Component
 export default class PhoneLoginForm extends Vue {
-  @configStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
+  @socialConfigStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
   @Prop() showPhoneView: boolean
   @Model('input') readonly value!: PhoneNumFormData
 

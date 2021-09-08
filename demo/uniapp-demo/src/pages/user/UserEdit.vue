@@ -106,7 +106,7 @@ import { parseDate } from 'socialuni/utils'
 import JsonUtils from 'socialuni/utils/JsonUtil'
 import Alert from 'socialuni/utils/Alert'
 import Toast from 'socialuni/utils/Toast'
-import { userModule } from 'socialuni/store'
+import { socialUserModule, socialUserStore } from 'socialuni/store'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import EnumStrVO from 'socialuni/const/EnumStrVO'
 import GenderType from 'socialuni/const/GenderType'
@@ -117,7 +117,7 @@ const userStore = namespace('user')
 
 @Component
 export default class UserEdit extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   nickname = ''
   gender = GenderType.girl
   birthday = '1999-01-01'
@@ -218,7 +218,7 @@ export default class UserEdit extends Vue {
       userCopy.qqAccount = this.qqAccount
       userCopy.wbAccount = this.wbAccount
       UserAPI.editUserAPI(userCopy).then((res: any) => {
-        userModule.setUser(res.data)
+        socialUserModule.setUser(res.data)
         Toast.toast('已修改')
         this.closeUserEditPop()
       }).finally(() => {

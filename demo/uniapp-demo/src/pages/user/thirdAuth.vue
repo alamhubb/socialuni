@@ -82,11 +82,8 @@ import SystemStoreProp from 'socialuni/store/SystemStoreProp'
 import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
 import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
 import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
+import { socialAppStore, socialSystemStore, socialUserStore } from 'socialuni/store'
 
-const userStore = namespace('user')
-const configStore = namespace('config')
-const systemStore = namespace('system')
-const appStore = namespace('app')
 @Component({
   components: {
     UserPrivacyAgreement,
@@ -95,22 +92,22 @@ const appStore = namespace('app')
   }
 })
 export default class Login extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
-  @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
+  @socialUserStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
-  @systemStore.State('isMp') isMp: boolean
-  @systemStore.State(SystemStoreProp.isMpWx) isMpWx: boolean
-  @systemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
+  @socialSystemStore.State('isMp') isMp: boolean
+  @socialSystemStore.State(SystemStoreProp.isMpWx) isMpWx: boolean
+  @socialSystemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
 
   //三方授权相关
-  @appStore.State('threeUserId') threeUserId: string
-  @appStore.State('threeAuthType') threeAuthType: string
-  @appStore.State('threeAppId') threeAppId: string
-  @appStore.State('threeDevUser') threeDevUser: DevUserVO
+  @socialAppStore.State('threeUserId') threeUserId: string
+  @socialAppStore.State('threeAuthType') threeAuthType: string
+  @socialAppStore.State('threeAppId') threeAppId: string
+  @socialAppStore.State('threeDevUser') threeDevUser: DevUserVO
   //getter
-  @appStore.Getter('isThreeAuth') isThreeAuth: boolean
-  @appStore.Getter('isAuthUser') isAuthUser: boolean
-  @appStore.Getter('isAuthPhone') isAuthPhone: boolean
+  @socialAppStore.Getter('isThreeAuth') isThreeAuth: boolean
+  @socialAppStore.Getter('isAuthUser') isAuthUser: boolean
+  @socialAppStore.Getter('isAuthPhone') isAuthPhone: boolean
 
 
   phoneNum = ''

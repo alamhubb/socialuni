@@ -80,13 +80,11 @@ import { namespace } from 'vuex-class'
 import CommentVO from 'socialuni/model/comment/CommentVO'
 import TalkUtil from 'socialuni/utils/TalkUtil'
 import JsonUtils from 'socialuni/utils/JsonUtil'
-import { talkModule } from 'socialuni/store'
+import { socialTalkModule, socialUserStore } from 'socialuni/store'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 import Toast from 'socialuni/utils/Toast'
-
-const userStore = namespace('user')
 
 @Component({
   components: {
@@ -95,7 +93,7 @@ const userStore = namespace('user')
   }
 })
 export default class TalkItemComment extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   // 因为无法直接修改，所以需要克隆一下
   @Prop() readonly talkProp!: TalkVO
   @Prop({ type: Boolean, default: false }) readonly showAllComment: boolean
@@ -109,24 +107,24 @@ export default class TalkItemComment extends Vue {
 
   // 打开更多操作评论弹框，复制删除，举报
   openCommentActionDialog (comment: CommentVO) {
-    talkModule.talk = this.talk
-    talkModule.comment = comment
-    talkModule.commentActionShow = true
+    socialTalkModule.talk = this.talk
+    socialTalkModule.comment = comment
+    socialTalkModule.commentActionShow = true
   }
 
   // 打开举报talk弹框
   openReportDialog () {
     if (this.user) {
-      talkModule.talk = this.talk
-      talkModule.reportContentType = ReportContentType.talk
-      talkModule.reportDialogShow = true
+      socialTalkModule.talk = this.talk
+      socialTalkModule.reportContentType = ReportContentType.talk
+      socialTalkModule.reportDialogShow = true
     } else {
       MsgUtil.unLoginMessage()
     }
   }
 
   setTalk () {
-    talkModule.setTalk(this.talk)
+    socialTalkModule.setTalk(this.talk)
   }
 
   addHug () {
@@ -172,7 +170,7 @@ export default class TalkItemComment extends Vue {
   }
 
   setComment (talk, comment) {
-    talkModule.setComment({ talk, comment })
+    socialTalkModule.setComment({ talk, comment })
   }
 
   getHugIcon (hasHugged) {

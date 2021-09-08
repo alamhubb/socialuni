@@ -110,7 +110,6 @@ import TalkAPI from 'socialuni/api/TalkAPI'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 
 import TalkItem from '@/pages/talk/TalkItem.vue'
-import { namespace } from 'vuex-class'
 import LoadMoreType from 'socialuni/const/LoadMoreType'
 import DistrictVO from 'socialuni/model/DistrictVO'
 import Constants from 'socialuni/const/Constant'
@@ -119,7 +118,13 @@ import TalkVueUtil from 'socialuni/utils/TalkVueUtil'
 import TalkTabVO from 'socialuni/model/talk/TalkTabVO'
 import CommonUtil from 'socialuni/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { locationModule, socialSystemModule, talkModule } from 'socialuni/store'
+import {
+  socialConfigStore,
+  socialLocationModule, socialLocationStore,
+  socialSystemModule,
+  socialTalkModule,
+  socialTalkStore, socialUserStore
+} from 'socialuni/store'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import QTab from 'socialuni/components/q-tab/q-tab.vue'
 import QTabs from 'socialuni/components/q-tabs/q-tabs.vue'
@@ -131,11 +136,6 @@ import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;
 import QRowBar from "/socialuni/components/q-row-bar/q-row-bar.vue";
 
-const userStore = namespace('user')
-const appStore = namespace('app')
-const configStore = namespace('config')
-const talkStore = namespace('talk')
-const locationStore = namespace('location')
 
 // todo 后台可控制是否显示轮播图
 
@@ -152,7 +152,7 @@ const locationStore = namespace('location')
   }
 })
 export default class TabsTalkPage extends Vue {
-  @talkStore.State('inputContentFocus') inputContentFocus: boolean
+  @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
 
   @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
@@ -175,11 +175,11 @@ export default class TabsTalkPage extends Vue {
     }
   }
 
-  @talkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
+  @socialTalkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
 
-  @configStore.Getter('talkCacheNum') readonly talkCacheNum: number
+  @socialConfigStore.Getter('talkCacheNum') readonly talkCacheNum: number
 
   // 供父组件调用，每次隐藏把数据缓存进storage
   tabsTalkOnHide () {
@@ -246,16 +246,16 @@ export default class TabsTalkPage extends Vue {
   }
 
 
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   // 页面是否为首次查询
 
-  @locationStore.State('location') location: DistrictVO
+  @socialLocationStore.State('location') location: DistrictVO
   @Prop() readonly selectTagIds: number[]
 
   //供父组件使用，不可删除
   initQuery () {
     //首次打开talk页面，获取用户位置用来查询
-    locationModule.appLunchInitDistrict().then(() => {
+    socialLocationModule.appLunchInitDistrict().then(() => {
       this.autoChooseUseLocationQueryTalks(true)
     })
   }
@@ -294,7 +294,7 @@ export default class TabsTalkPage extends Vue {
     const fistLoad = firstLoad || this.talkTabObj.firstLoad
     // query condition
     const talkIds: number[] = (fistLoad ? [] : this.talkIds)
-    TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, talkModule.userGender, talkModule.userMinAge, talkModule.userMaxAge).then((res: any) => {
+    TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
@@ -410,11 +410,11 @@ export default class TabsTalkPage extends Vue {
   }
 
   cityChange (district: DistrictVO) {
-    locationModule.setLocation(district)
+    socialLocationModule.setLocation(district)
     this.autoChooseUseLocationQueryTalks(true)
   }
 
-  @configStore.State('appConfig') readonly appConfig: object
+  @socialConfigStore.State('appConfig') readonly appConfig: object
 
   // 每次查询几条
   get lazyLoadNum (): number {
@@ -463,8 +463,8 @@ export default class TabsTalkPage extends Vue {
   // app端兼容问题，滚动页面评论input不会失去焦点，需要手动控制
   talksScrollEvent ({ detail }) {
     // 如果处于获取焦点状态，则失去焦点
-    if (talkModule.inputContentFocus) {
-      talkModule.inputContentBlur()
+    if (socialTalkModule.inputContentFocus) {
+      socialTalkModule.inputContentBlur()
     }
     //只有app端处理滚动隐藏显示tabbar逻辑，小程序平台一卡一卡的
     if (!socialSystemModule.isMp) {

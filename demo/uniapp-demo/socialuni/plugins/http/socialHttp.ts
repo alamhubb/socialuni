@@ -1,7 +1,7 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
-import { appModule, configModule, socialSystemModule } from '../../store'
+import { socialAppModule, socialConfigModule, socialSystemModule } from '../../store'
 import UserService from '../../service/UserService'
 import ErrorConst from '../../const/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
@@ -73,7 +73,7 @@ socialHttp.interceptor.response(
             if (ErrorConst.not_logged === error.statusCode) {
               MsgUtil.unLoginMessage()
             } else {
-              const msg: string = configModule.systemError605
+              const msg: string = socialConfigModule.systemError605
               Alert.hint(msg)
             }
           }

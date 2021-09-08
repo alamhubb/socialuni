@@ -328,7 +328,7 @@ import TalkVO from 'socialuni/model/talk/TalkVO'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import ConfigMap from 'socialuni/const/ConfigMap'
 import PlatformUtils from 'socialuni/utils/PlatformUtils'
-import { userModule } from 'socialuni/store'
+import { socialAppStore, socialSystemStore, socialUserModule, socialUserStore } from 'socialuni/store'
 import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
 import QRow from 'socialuni/components/q-row/q-row.vue'
 import Alert from 'socialuni/utils/Alert'
@@ -341,10 +341,6 @@ import ImgAddQO from 'socialuni/model/user/ImgAddQO'
 import CosAPI from 'socialuni/api/CosAPI'
 
 
-const userStore = namespace('user')
-const appStore = namespace('app')
-const configStore = namespace('config')
-const systemStore = namespace('system')
 
 @Component({
   components: {
@@ -363,10 +359,10 @@ export default class UserInfo extends Vue {
     editPopup: any;
   }
 
-  @userStore.State('user') mineUser: CenterUserDetailRO
-  @appStore.State('appConfig') readonly appConfig: object
-  @appStore.State('reportTypes') reportTypes: string[]
-  @systemStore.State('isIos') isIos: boolean
+  @socialUserStore.State('user') mineUser: CenterUserDetailRO
+  @socialAppStore.State('appConfig') readonly appConfig: object
+  @socialAppStore.State('reportTypes') reportTypes: string[]
+  @socialSystemStore.State('isIos') isIos: boolean
   @PropSync('user') userProp: CenterUserDetailRO
   followBtnDisabled = false
   hasFollowed = false
@@ -509,7 +505,7 @@ export default class UserInfo extends Vue {
       Alert.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
         UserAPI.deleteUserImgAPI(imgs[0]).then((res: any) => {
-          userModule.setUser(res.data)
+          socialUserModule.setUser(res.data)
         })
       })
     } else {
@@ -533,7 +529,7 @@ export default class UserInfo extends Vue {
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
       const res = await Promise.all([CosUtil.postImg(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
-      userModule.setUser(res[1].data)
+      socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)
     } finally {
@@ -711,14 +707,14 @@ export default class UserInfo extends Vue {
 
   refreshMine () {
     Alert.confirm('是否刷新用户信息').then(() => {
-      userModule.getMineUserAction().then(() => {
+      socialUserModule.getMineUserAction().then(() => {
         Toast.toast('刷新成功')
       })
     })
   }
 
   loginOut () {
-    userModule.loginOut()
+    socialUserModule.loginOut()
   }
 
   //前往贝壳页面

@@ -1,8 +1,9 @@
 import { VuexModule, Module } from 'vuex-class-modules'
 import AppConfig from '../config/AppConfig'
+import SocialAppModule from './SocialAppModule'
 
 @Module({ generateMutationSetters: true })
-export default class PlatformModule extends VuexModule {
+export default class SocialPlatformModule extends VuexModule {
   qq_talkTemplateId: string = AppConfig.qq_talkTemplateId
   qq_commentTemplateId: string = AppConfig.qq_commentTemplateId
   qq_reportResultTemplateId: string = AppConfig.qq_reportResultTemplateId

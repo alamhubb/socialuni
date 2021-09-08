@@ -55,11 +55,11 @@ import { Component, Vue } from 'vue-property-decorator'
 import UniUtil from 'socialuni/utils/UniUtil'
 import ConfigMap from 'socialuni/const/ConfigMap'
 import SkipUrlConst from 'socialuni/const/SkipUrlConst'
-import { configStore } from 'socialuni/store'
+import { socialConfigStore } from 'socialuni/store'
 
 @Component
 export default class ThirdApplyAuthInfo extends Vue {
-  @configStore.Getter(ConfigMap.qqServiceKey) qqService: string
+  @socialConfigStore.Getter(ConfigMap.qqServiceKey) qqService: string
 
   get homeUrl (): string {
     return SkipUrlConst.homeUrl()

@@ -59,19 +59,15 @@ import QQUtils from 'socialuni/utils/QQUtils'
 import WxUtils from 'socialuni/utils/WxUtils'
 import APPUtil from 'socialuni/utils/APPUtil'
 import JsonUtils from 'socialuni/utils/JsonUtil'
-import { userModule } from 'socialuni/store'
+import { socialAppStore, socialConfigStore, socialUserModule, socialUserStore } from 'socialuni/store'
 import Alert from 'socialuni/utils/Alert'
-
-const appStore = namespace('app')
-const userStore = namespace('user')
-const configStore = namespace('config')
 
 @Component
 export default class LoveValuePage extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
-  @appStore.State('appConfig') readonly appConfig: object
-  @configStore.Getter('rewardedAdLimit') readonly rewardedAdLimit: number
-  @configStore.Getter('wbService') readonly wbService: string
+  @socialUserStore.State('user') user: CenterUserDetailRO
+  @socialAppStore.State('appConfig') readonly appConfig: object
+  @socialConfigStore.Getter('rewardedAdLimit') readonly rewardedAdLimit: number
+  @socialConfigStore.Getter('wbService') readonly wbService: string
 
   videoAd: any = null
   todayLoveValue = 0
@@ -102,7 +98,7 @@ export default class LoveValuePage extends Vue {
       LoveValueAPI.watchVideoAdsAPI(res.isEnded).then((res: any) => {
         if (res.data) {
           this.todayLoveValue = res.data.todayLoveValue
-          userModule.setUser(res.data.user)
+          socialUserModule.setUser(res.data.user)
         }
       })
       // 关闭广告，res=true，则为成功观看，调用后台添加积分，后台提示奖励10积分，或者今天已观看满次，不再获得爱心值奖励

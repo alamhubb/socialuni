@@ -1,4 +1,4 @@
-import { configModule, socialSystemModule, userModule } from '../store'
+import { socialConfigModule, socialSystemModule, socialUserModule } from '../store'
 
 import AppMsg from '../const/AppMsg'
 import Alert from './Alert'
@@ -8,7 +8,7 @@ import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 export default class MsgUtil {
   static unBindPhoneNum () {
-    const user: CenterUserDetailRO = userModule.user
+    const user: CenterUserDetailRO = socialUserModule.user
     if (!user) {
       MsgUtil.unLoginMessage()
     } else {
@@ -26,7 +26,7 @@ export default class MsgUtil {
   }
 
   static unLoginMessage () {
-    Alert.info(configModule.systemError601)
+    Alert.info(socialConfigModule.systemError601)
       .then(() => {
         // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
         PageUtil.toMinePage()
@@ -34,7 +34,7 @@ export default class MsgUtil {
   }
 
   static systemErrorMsg () {
-    Alert.hint(configModule.systemError604)
+    Alert.hint(socialConfigModule.systemError604)
   }
 
   static unUploadImg () {
@@ -66,7 +66,7 @@ export default class MsgUtil {
   }
 
   static sysErrMsg () {
-    return Alert.hint(configModule.systemError604)
+    return Alert.hint(socialConfigModule.systemError604)
   }
 
   static cantPopupPromptToast () {

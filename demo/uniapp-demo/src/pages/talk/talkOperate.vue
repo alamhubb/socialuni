@@ -60,7 +60,7 @@ import ReportAddVO from 'socialuni/model/report/ReportAddVO'
 import ReportContentType from 'socialuni/const/ReportContentType'
 import ReportAPI from 'socialuni/api/ReportAPI'
 import TalkAPI from 'socialuni/api/TalkAPI'
-import { talkModule } from 'socialuni/store'
+import { socialAppStore, socialConfigStore, socialTalkModule, socialTalkStore, socialUserStore } from 'socialuni/store'
 import TalkVO from 'socialuni/model/talk/TalkVO'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import ConfigMap from 'socialuni/const/ConfigMap'
@@ -70,10 +70,6 @@ import Alert from 'socialuni/utils/Alert'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import UPopup from 'uview-ui/components/u-popup/u-popup'
 
-const appStore = namespace('app')
-const userStore = namespace('user')
-const talkStore = namespace('talk')
-const configStore = namespace('config')
 // todo 后台可控制是否显示轮播图
 
 @Component({
@@ -82,23 +78,23 @@ const configStore = namespace('config')
   }
 })
 export default class TalkOperate extends Vue {
-  @appStore.State('appConfig') readonly appConfig: object
-  @userStore.State('user') readonly user: CenterUserDetailRO
-  @appStore.State('reportTypes') readonly reportTypes: string[]
-  @talkStore.State('commentActionShow') readonly commentVisible: boolean
-  @talkStore.State('reportDialogShow') readonly dialogVisible: boolean
-  @talkStore.State('comment') readonly comment: CommentVO
-  @talkStore.State('reportContentType') readonly reportContentType: string
-  @talkStore.State('talk') readonly talk: TalkVO
+  @socialAppStore.State('appConfig') readonly appConfig: object
+  @socialAppStore.State('reportTypes') readonly reportTypes: string[]
+  @socialUserStore.State('user') readonly user: CenterUserDetailRO
+  @socialTalkStore.State('commentActionShow') readonly commentVisible: boolean
+  @socialTalkStore.State('reportDialogShow') readonly dialogVisible: boolean
+  @socialTalkStore.State('comment') readonly comment: CommentVO
+  @socialTalkStore.State('reportContentType') readonly reportContentType: string
+  @socialTalkStore.State('talk') readonly talk: TalkVO
 
   pornInfo: string = ReportType.pornInfo
   reportType: string = ReportType.pornInfo
   reportContent = ''
   // 被举报次数大于多少，则隐藏
-  @configStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
+  @socialConfigStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
 
   reportDialogClose () {
-    talkModule.reportDialogShow = false
+    socialTalkModule.reportDialogShow = false
     this.initData()
   }
 
@@ -150,7 +146,7 @@ export default class TalkOperate extends Vue {
   }
 
   commentActionClose () {
-    talkModule.commentActionShow = false
+    socialTalkModule.commentActionShow = false
   }
 
   // 前端删除comment
@@ -169,8 +165,8 @@ export default class TalkOperate extends Vue {
   openReportDialog () {
     if (this.user) {
       this.commentActionClose()
-      talkModule.reportContentType = ReportContentType.comment
-      talkModule.reportDialogShow = true
+      socialTalkModule.reportContentType = ReportContentType.comment
+      socialTalkModule.reportDialogShow = true
     } else {
       MsgUtil.unLoginMessage()
     }
@@ -181,9 +177,9 @@ export default class TalkOperate extends Vue {
   }
 
   initData () {
-    talkModule.talk = null
-    talkModule.comment = null
-    talkModule.reportContentType = ''
+    socialTalkModule.talk = null
+    socialTalkModule.comment = null
+    socialTalkModule.reportContentType = ''
     this.$nextTick(() => {
       this.reportContent = ''
       this.reportType = ReportType.pornInfo

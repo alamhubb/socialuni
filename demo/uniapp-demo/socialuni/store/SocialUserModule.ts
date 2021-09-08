@@ -1,7 +1,7 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
 
 import UserAPI from '../api/UserAPI'
-import { userModule } from './index'
+import { socialUserModule } from './index'
 import UserStorageUtil from '../utils/UserStorageUtil'
 import Alert from '../utils/Alert'
 import Toast from '../utils/Toast'
@@ -9,10 +9,11 @@ import UserService from '../service/UserService'
 import TokenUtil from '../utils/TokenUtil'
 import SocialLoginRO from '../model/social/SocialLoginRO'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
+import SocialAppModule from './SocialAppModule'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
-export default class UserModule extends VuexModule {
+export default class SocialUserModule extends VuexModule {
   user: CenterUserDetailRO = UserStorageUtil.get() || null
 
   get hasPhoneNum () {
@@ -61,7 +62,7 @@ export default class UserModule extends VuexModule {
   @Action
   getMineUserAction () {
     return UserAPI.getMineUserInfoAPI().then((res: any) => {
-      userModule.setUser(res.data)
+      socialUserModule.setUser(res.data)
     })
   }
 }

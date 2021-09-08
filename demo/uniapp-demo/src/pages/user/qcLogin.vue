@@ -124,7 +124,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import { namespace } from 'vuex-class'
-import { socialSystemModule } from 'socialuni/store'
+import { socialSystemModule, socialSystemStore, socialUserStore } from 'socialuni/store'
 import Alert from 'socialuni/utils/Alert'
 import LoginService from 'socialuni/service/LoginService'
 import PageUtil from 'socialuni/utils/PageUtil'
@@ -136,10 +136,6 @@ import PhoneNumFormData from 'socialuni/model/phone/PhoneNumFormData'
 import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
 import PhoneService from 'socialuni/service/PhoneService'
 
-const userStore = namespace('user')
-const configStore = namespace('config')
-const systemStore = namespace('system')
-const appStore = namespace('app')
 @Component({
   components: {
     PhoneLoginForm,
@@ -149,12 +145,12 @@ const appStore = namespace('app')
   }
 })
 export default class LoginPage extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
-  @userStore.Getter('hasPhoneNum') hasPhoneNum: boolean
+  @socialUserStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
-  @systemStore.State('isMp') isMp: boolean
-  @systemStore.State(SystemStoreProp.isMpWx) isMpWx: boolean
-  @systemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
+  @socialSystemStore.State('isMp') isMp: boolean
+  @socialSystemStore.State(SystemStoreProp.isMpWx) isMpWx: boolean
+  @socialSystemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
 
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。

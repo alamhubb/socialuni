@@ -154,7 +154,7 @@ import UserEdit from '@/pages/user/UserEdit.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
 import UniUtil from 'socialuni/utils/UniUtil'
 import SkipUrlConst from 'socialuni/const/SkipUrlConst'
-import { appModule, userModule } from 'socialuni/store'
+import { socialAppModule, socialUserModule, socialUserStore } from 'socialuni/store'
 import QNavbar from 'socialuni/components/q-navbar/q-navbar.vue'
 import QRow from 'socialuni/components/q-row/q-row.vue'
 import QBar from 'socialuni/components/q-bar/q-bar.vue'
@@ -183,7 +183,7 @@ const userStore = namespace('user')
   }
 })
 export default class MineDetail extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   showMsgInput = false
   showMoreList = false
   // 登录
@@ -192,7 +192,7 @@ export default class MineDetail extends Vue {
 
   created () {
     UniUtil.showShareMenu()
-    this.showAuthThreeAuth = !!appModule.threeSecretKey
+    this.showAuthThreeAuth = !!socialAppModule.threeSecretKey
   }
 
   toThreeAuthUserInfo () {
@@ -215,14 +215,14 @@ export default class MineDetail extends Vue {
 
   destroyAccount () {
     this.hideMoreList()
-    userModule.destroyAccount().catch(() => {
+    socialUserModule.destroyAccount().catch(() => {
       this.showMoreListAction()
     })
   }
 
   logout () {
     this.hideMoreList()
-    userModule.loginOut().catch(() => {
+    socialUserModule.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }
@@ -266,7 +266,7 @@ export default class MineDetail extends Vue {
   // 初始查询，会清空已有talk
   initQuery () {
     if (this.user) {
-      userModule.getMineUserAction().then(() => {
+      socialUserModule.getMineUserAction().then(() => {
         Toast.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()

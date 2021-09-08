@@ -143,7 +143,13 @@ import JsonUtils from 'socialuni/utils/JsonUtil'
 import TagVO from 'socialuni/model/tag/TagVO'
 import TagUtil from 'socialuni/utils/TagUtil'
 import CosUtil from 'socialuni/utils/CosUtil'
-import { locationModule, tagModule } from 'socialuni/store'
+import {
+  socialLocationModule,
+  socialLocationStore,
+  socialTagModule,
+  socialTagStore,
+  socialUserStore
+} from 'socialuni/store'
 import PlatformUtils from 'socialuni/utils/PlatformUtils'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
@@ -167,9 +173,6 @@ import AppUtilAPI from 'socialuni/api/AppUtilAPI'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 import PagePath from 'socialuni/const/PagePath'
 
-const userStore = namespace('user')
-const tagStore = namespace('tag')
-const locationStore = namespace('location')
 @Component({
   components: {
     QButton,
@@ -181,9 +184,9 @@ const locationStore = namespace('location')
   }
 })
 export default class TalkAddPage extends Vue {
-  @locationStore.State('districts') readonly districts: DistrictVO[]
-  @tagStore.State('tags') readonly storeTags: TagVO []
-  @userStore.State('user') readonly user: CenterUserDetailRO
+  @socialLocationStore.State('districts') readonly districts: DistrictVO[]
+  @socialTagStore.State('tags') readonly storeTags: TagVO []
+  @socialUserStore.State('user') readonly user: CenterUserDetailRO
 
   showVisibleTypeSelect = false
   showVisibleGenderSelect = false
@@ -200,7 +203,7 @@ export default class TalkAddPage extends Vue {
 
   visibleTypes = VisibleType.enums
 
-  district: DistrictVO = locationModule.location
+  district: DistrictVO = socialLocationModule.location
   showsImgFiles: DomFile [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
@@ -238,7 +241,7 @@ export default class TalkAddPage extends Vue {
   //进入talk页面，需要加载下当前地理位置，发布时携带
   onLoad () {
     this.tags = JsonUtils.deepClone(this.storeTags)
-    this.district = locationModule.location
+    this.district = socialLocationModule.location
 
 
     //默认获取当前位置，可以修改
@@ -271,7 +274,7 @@ export default class TalkAddPage extends Vue {
 
   openTagSearchVue (query: boolean) {
     if (query || this.tags.length < 11) {
-      tagModule.getTagsAction()
+      socialTagModule.getTagsAction()
     }
     this.closeTagAddVue()
     this.showTagSearch = true
@@ -353,7 +356,7 @@ export default class TalkAddPage extends Vue {
   openSearchVue () {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
-      locationModule.getDistrictsAction()
+      socialLocationModule.getDistrictsAction()
     }
     this.showSearch = true
   }

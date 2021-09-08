@@ -53,8 +53,7 @@ import { namespace } from 'vuex-class'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import MsgInput from 'socialuni/components/MsgInput.vue'
 import RouterUtil from 'socialuni/utils/RouterUtil'
-
-const appStore = namespace('app')
+import { socialAppStore } from 'socialuni/store'
 
 @Component({
   components: {
@@ -66,7 +65,7 @@ const appStore = namespace('app')
 export default class TalkDetail extends Vue {
   talk: TalkVO = null
   showMsgInput = false
-  @appStore.State('appConfig') readonly appConfig: object
+  @socialAppStore.State('appConfig') readonly appConfig: object
 
   deleteTalk () {
     RouterUtil.goBack()

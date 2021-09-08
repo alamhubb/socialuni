@@ -1,5 +1,5 @@
 import { VuexModule, Module, Action } from 'vuex-class-modules'
-import { userModule } from './index'
+import { socialUserModule } from './index'
 import CommentAddVO from '../model/comment/CommentAddVO'
 import CommentVO from '../model/comment/CommentVO'
 import TalkAPI from '../api/TalkAPI'
@@ -9,10 +9,11 @@ import CommonUtil from '../utils/CommonUtil'
 import TalkTabVO from '../model/talk/TalkTabVO'
 import TalkVueUtil from '../utils/TalkVueUtil'
 import TalkFilterUtil from '../utils/TalkFilterUtil'
+import SocialAppModule from './SocialAppModule'
 
 
 @Module({ generateMutationSetters: true })
-export default class TalkModule extends VuexModule {
+export default class SocialTalkModule extends VuexModule {
   // filter内容
   userMinAge: number = TalkFilterUtil.getMinAgeFilter()
   userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
@@ -37,7 +38,7 @@ export default class TalkModule extends VuexModule {
     // 使输入框失去焦点，隐藏
     const commentAdd: CommentAddVO = new CommentAddVO(content, this.talk.id)
     const tempComment: CommentVO = commentAdd.toComment()
-    tempComment.user = userModule.user
+    tempComment.user = socialUserModule.user
     if (this.comment) {
       commentAdd.commentId = this.comment.id
       if (this.replyComment) {
@@ -69,7 +70,7 @@ export default class TalkModule extends VuexModule {
 
   @Action
   setTalk (talk) {
-    const user = userModule.user
+    const user = socialUserModule.user
     if (user && user.phoneNum) {
       this.talk = talk
       this.comment = null
@@ -83,7 +84,7 @@ export default class TalkModule extends VuexModule {
 
   @Action
   setComment ({ talk, comment }) {
-    if (userModule.user) {
+    if (socialUserModule.user) {
       this.talk = talk
       this.comment = comment
       this.replyComment = null
@@ -96,7 +97,7 @@ export default class TalkModule extends VuexModule {
 
   @Action
   setReplyComment ({ talk, comment, replyComment }) {
-    if (userModule.user) {
+    if (socialUserModule.user) {
       this.talk = talk
       this.comment = comment
       this.replyComment = replyComment

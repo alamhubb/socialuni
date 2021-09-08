@@ -62,12 +62,11 @@
 import { Vue, Component, Emit, Model, Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import DistrictVO from '../model/DistrictVO'
-import { locationModule } from '../store'
+import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
 import Alert from '../utils/Alert'
 
 
-const locationStore = namespace('location')
 @Component
 export default class CityPicker extends Vue {
   public $refs!: {
@@ -75,7 +74,7 @@ export default class CityPicker extends Vue {
   }
 
   // 页面初始化模块
-  @locationStore.State('districts') readonly districts: DistrictVO[]
+  @socialLocationStore.State('districts') readonly districts: DistrictVO[]
   @Prop() readonly district: DistrictVO
   bottomDistrict: DistrictVO = LocationUtil.initDistrict
   showCityPopup = false
@@ -95,7 +94,7 @@ export default class CityPicker extends Vue {
     this.getLocation()
     // 如果未加载过全部数据，数据不完整，则加载全部数据，如果第二个没有子节点且或者子节点为0
     if (!this.districts.length || !this.districts[1].childs || !this.districts[1].childs.length) {
-      locationModule.getDistrictsAction()
+      socialLocationModule.getDistrictsAction()
     }
   }
 

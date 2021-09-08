@@ -22,11 +22,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import SkipUrlConst from 'socialuni/const/SkipUrlConst'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
-import { userStore } from 'socialuni/store'
+import { socialUserStore } from 'socialuni/store'
 
 @Component
 export default class UserPrivacyAgreement extends Vue {
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
 
   get userAgreementUrl (): string {
     return SkipUrlConst.userAgreementUrl()

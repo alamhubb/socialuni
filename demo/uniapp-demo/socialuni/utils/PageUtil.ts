@@ -1,5 +1,5 @@
 import PagePath from '../const/PagePath'
-import store, { socialSystemModule, userModule } from '../store'
+import store, { socialSystemModule, socialUserModule } from '../store'
 import MsgUtil from './MsgUtil'
 import Alert from './Alert'
 import RouterUtil from './RouterUtil'
@@ -32,7 +32,7 @@ export default class PageUtil {
       // 由于相关规范，iOS功能暂不可用
       MsgUtil.iosDisablePay()
     } else {
-      if (userModule.user) {
+      if (socialUserModule.user) {
         RouterUtil.navigateTo(PagePath.userShell)
       } else {
         MsgUtil.unLoginMessage()
@@ -49,7 +49,7 @@ export default class PageUtil {
   }
 
   static toTalkAddPage () {
-    const user: CenterUserDetailRO = userModule.user
+    const user: CenterUserDetailRO = socialUserModule.user
     if (user && user.phoneNum) {
       RouterUtil.navigateTo(PagePath.talkAdd)
     } else {

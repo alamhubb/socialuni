@@ -41,10 +41,7 @@ import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import PlatformUtils from 'socialuni/utils/PlatformUtils'
 import Alert from 'socialuni/utils/Alert'
-import { chatModule } from 'socialuni/store'
-
-const appStore = namespace('app')
-const userStore = namespace('user')
+import { socialAppStore, socialChatModule, socialUserStore } from 'socialuni/store'
 
   @Component
 export default class ReportDialog extends Vue {
@@ -52,11 +49,11 @@ export default class ReportDialog extends Vue {
       reportDialog: any;
     }
 
-    @appStore.State('reportTypes') reportTypes: string[]
-    @appStore.State('appConfig') readonly appConfig: object
+    @socialAppStore.State('reportTypes') reportTypes: string[]
+    @socialAppStore.State('appConfig') readonly appConfig: object
     @Prop() readonly reportInfo: MessageVO
     @Prop() readonly reportInfoType: string
-    @userStore.State('user') user: CenterUserDetailRO
+    @socialUserStore.State('user') user: CenterUserDetailRO
     reportType: string = ReportType.pornInfo
     pornInfo: string = ReportType.pornInfo
     reportContent = ''
@@ -92,7 +89,7 @@ export default class ReportDialog extends Vue {
         Alert.hint('选择其他违规时，请您补充观点')
       } else {
         ReportAPI.addReportAPI(reportAdd).then((res: any) => {
-          chatModule.deleteMsgAction(reportAdd.contentId)
+          socialChatModule.deleteMsgAction(reportAdd.contentId)
           // 调用删除内容
           // 关闭弹框病初始化数据
           this.closeDialogAndInitData()

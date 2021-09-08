@@ -1,9 +1,10 @@
 import { Module, VuexModule } from 'vuex-class-modules'
 import ConfigMap from '../const/ConfigMap'
 import Lodash from '../utils/Lodash'
+import SocialAppModule from './SocialAppModule'
 
 @Module({ generateMutationSetters: true })
-export default class ConfigModule extends VuexModule {
+export default class SocialConfigModule extends VuexModule {
   // 后台控制是否展示talk页的轮播图
   showSwipers = true
   // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置

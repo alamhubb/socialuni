@@ -37,20 +37,18 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import { talkModule } from '../store'
+import { socialTalkModule, socialTalkStore, socialUserStore } from '../store'
 import PlatformUtils from '../utils/PlatformUtils'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import MsgUtil from '../utils/MsgUtil'
 import Toast from '../utils/Toast'
 
-const talkStore = namespace('talk')
-const userStore = namespace('user')
 @Component
 export default class MsgInput extends Vue {
   content = ''
-  @talkStore.State('currentContent') currentContent: string
-  @talkStore.State('inputContentFocus') inputContentFocus: boolean
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialTalkStore.State('currentContent') currentContent: string
+  @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
+  @socialUserStore.State('user') user: CenterUserDetailRO
   inputContentFocusInput = false
 
   @Watch('inputContentFocus')
@@ -75,7 +73,7 @@ export default class MsgInput extends Vue {
     if (this.user && this.user.phoneNum) {
       // 如果有值
       if (this.content) {
-        talkModule.addComment({ content: this.content })
+        socialTalkModule.addComment({ content: this.content })
         this.content = ''
         // 申请订阅
         PlatformUtils.requestSubscribeComment()
@@ -88,7 +86,7 @@ export default class MsgInput extends Vue {
   }
 
   inputContentBlur () {
-    talkModule.inputContentBlur()
+    socialTalkModule.inputContentBlur()
   }
 }
 </script>

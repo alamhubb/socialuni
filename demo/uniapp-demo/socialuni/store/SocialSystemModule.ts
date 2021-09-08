@@ -3,7 +3,7 @@ import ProviderType from '../const/ProviderType'
 import PlatformType from '../const/PlatformType'
 import PlatformUtils from '../utils/PlatformUtils'
 import TokenUtil from '../utils/TokenUtil'
-import { appModule, chatModule, locationModule, notifyModule, tagModule } from './index'
+import { socialAppModule, socialChatModule, socialLocationModule, socialNotifyModule, socialTagModule } from './index'
 import UniSystemType from '../const/UniSystemType'
 import UniPlatformType from '../const/UniPlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult;
@@ -62,19 +62,19 @@ export default class SocialSystemModule extends VuexModule {
     // WebsocketUtil.websocketConnect(false)
     // appModule.initGlobalDataLoadAPI()
     // AppService.getHomeLoadAfterData()
-    tagModule.getHotTagsAction()
-    tagModule.getHotTagTypesAction()
-    locationModule.getHotDistrictsAction()
-    appModule.getReportTypesAction()
-    appModule.getAppConfigAction()
-    appModule.getHomeSwipersAction()
-    chatModule.getChatsAction()
+    socialTagModule.getHotTagsAction()
+    socialTagModule.getHotTagTypesAction()
+    socialLocationModule.getHotDistrictsAction()
+    socialAppModule.getReportTypesAction()
+    socialAppModule.getAppConfigAction()
+    socialAppModule.getHomeSwipersAction()
+    socialChatModule.getChatsAction()
 
 
     //如果有token获取
     if (TokenUtil.hasToken()) {
       //查询通知列表
-      notifyModule.queryNotifiesAction()
+      socialNotifyModule.queryNotifiesAction()
     }
     // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
     // appModule.initGlobalDataReadyAPI()

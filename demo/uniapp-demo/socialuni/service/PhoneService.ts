@@ -1,4 +1,4 @@
-import { userModule } from '../store'
+import { socialUserModule } from '../store'
 import Toast from '../utils/Toast'
 import PhoneAPI from '../api/PhoneAPI'
 import UniLoginUtil from '../utils/UniLoginUtil'
@@ -8,7 +8,7 @@ export default class PhoneService {
   static async bindPhoneNum (phoneNum: string, authCode: string) {
     //手机号绑定
     const user = await PhoneAPI.bindPhoneNumAPI(phoneNum, authCode)
-    userModule.setUser(user)
+    socialUserModule.setUser(user)
   }
 
   static async bindWxPhoneNum (wxGetPhoneInfoResult: any) {
@@ -25,7 +25,7 @@ export default class PhoneService {
       // iv: ""
       wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(ProviderType.wx)
       const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
-      userModule.setUser(res.data)
+      socialUserModule.setUser(res.data)
     } else {
       Toast.toast('您选择了不绑定')
       throw Error('您选择了不绑定')

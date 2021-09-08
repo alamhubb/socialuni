@@ -1,7 +1,7 @@
 import DistrictVO from '../model/DistrictVO'
 import StorageUtil from './StorageUtil'
 import MapUtil from './MapUtil'
-import { locationModule, socialSystemModule } from '../store'
+import { socialLocationModule, socialSystemModule } from '../store'
 import AppAuthUtil from './AppAuthUtil'
 
 const chinaAdCode = '100000'
@@ -90,7 +90,7 @@ export default class LocationUtil {
         hasAuth = false
       }
     } else {
-      hasAuth = locationModule.openLocation
+      hasAuth = socialLocationModule.openLocation
     }
     //如果非小程序，获取用户是否授权过，授权过使用组合方式
     //如果用户已经授权过地理位置了
@@ -136,10 +136,10 @@ export default class LocationUtil {
       district.lat = lonAndLat[1]
       district.isLocation = true
       //更新用户经纬度
-      locationModule.updateLocationLonAndLat(district.lon, district.lat)
+      socialLocationModule.updateLocationLonAndLat(district.lon, district.lat)
       //如果未开启定位的话开启定位
-      if (!locationModule.openLocation) {
-        locationModule.openLocationAction()
+      if (!socialLocationModule.openLocation) {
+        socialLocationModule.openLocationAction()
       }
       return district
     })

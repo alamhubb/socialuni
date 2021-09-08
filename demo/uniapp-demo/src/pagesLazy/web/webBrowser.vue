@@ -21,14 +21,13 @@
 import { Component, Vue } from 'vue-property-decorator'
 import PagePath from 'socialuni/const/PagePath'
 import { namespace } from 'vuex-class'
-import { socialSystemModule } from 'socialuni/store'
+import { socialSystemModule, socialSystemStore } from 'socialuni/store'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 
-const systemStore = namespace('system')
 
 @Component
 export default class WebBrowserPage extends Vue {
-  @systemStore.State('titleHeight') titleHeight
+  @socialSystemStore.State('titleHeight') titleHeight
 
   webUrl = ''
   title = '网页'

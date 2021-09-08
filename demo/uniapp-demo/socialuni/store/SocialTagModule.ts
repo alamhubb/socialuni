@@ -2,9 +2,10 @@ import { VuexModule, Module, Action } from 'vuex-class-modules'
 import TagVO from '../model/tag/TagVO'
 import TagTypeVO from '../model/tag/TagTypeVO'
 import TagAPI from '../api/TagAPI'
+import SocialAppModule from './SocialAppModule'
 
 @Module({ generateMutationSetters: true })
-export default class TagModule extends VuexModule {
+export default class SocialTagModule extends VuexModule {
   tags: TagVO[] = []
   tagTypes: TagTypeVO[] = []
 

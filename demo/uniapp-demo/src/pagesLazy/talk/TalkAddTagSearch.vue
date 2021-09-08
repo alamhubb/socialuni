@@ -67,18 +67,17 @@
 <script lang="ts">
 import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator'
 import TagVO from 'socialuni/model/tag/TagVO'
-import { namespace } from 'vuex-class'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
+import { socialUserStore } from 'socialuni/store'
 
-const userModule = namespace('user')
 @Component({
   components: { QIcon }
 })
 export default class TalkAddTagSearch extends Vue {
     searchContent = ''
     showSearch = false
-    @userModule.State('user') readonly user: CenterUserDetailRO
+    @socialUserStore.State('user') readonly user: CenterUserDetailRO
     // 全部tag,因为需要与外部联动，所以使用外部传进来的tags
     @Prop() readonly tags: TagVO []
     @Prop({ type: Boolean, default: false }) readonly isAdd: boolean

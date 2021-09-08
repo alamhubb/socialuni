@@ -106,7 +106,13 @@ import TalkFilterUtil from 'socialuni/utils/TalkFilterUtil'
 import UniUtil from 'socialuni/utils/UniUtil'
 import CommonUtil from 'socialuni/utils/CommonUtil'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
-import { notifyModule, socialSystemModule, tagModule, talkModule } from 'socialuni/store'
+import {
+  socialAppModule, socialConfigStore,
+  socialNotifyModule, socialNotifyStore,
+  socialSystemModule,
+  socialTagModule,
+  socialTalkModule, socialUserStore
+} from 'socialuni/store'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
@@ -122,10 +128,7 @@ import QIcon from "/socialuni/components/q-icon/q-icon.vue";
 import QPopup from "/socialuni/components/q-popup/q-popup.vue";
 import QBar from "/socialuni/components/q-bar/q-bar.vue";
 import QSlider from "/socialuni/components/q-slider/q-slider.vue";
-
-const userStore = namespace('user')
-const notifyStore = namespace('notify')
-const configStore = namespace('config')
+import UserService from 'socialuni/service/UserService'
 
 // todo 后台可控制是否显示轮播图
 
@@ -149,12 +152,12 @@ export default class TalkList extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
   }
-  @userStore.State('user') user: CenterUserDetailRO
+  @socialUserStore.State('user') user: CenterUserDetailRO
   // 轮播图
   // 点击通知去通知页
-  @notifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
+  @socialNotifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
   // 轮播图
-  @configStore.State('showSwipers') configShowSwipers: boolean
+  @socialConfigStore.State('showSwipers') configShowSwipers: boolean
 
   // tag 相关
   showTagSearch = false
@@ -163,10 +166,10 @@ export default class TalkList extends Vue {
   rangeMin: number = TalkFilterUtil.minAgeFilterDefault
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
   // 组件内的值
-  genderTypeValue: string = talkModule.userGender
+  genderTypeValue: string = socialTalkModule.userGender
   appGender: string = SocialConfig.appGenderType
   GenderTypeAll = GenderType.all
-  rangeValue: number[] = [talkModule.userMinAge, talkModule.userMaxAge]
+  rangeValue: number[] = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   unreadNotifiesNum = 0
   // 评论输入框
   showMsgInput = false
@@ -193,6 +196,34 @@ export default class TalkList extends Vue {
   }
 
   created () {
+    console.log(123)
+    // appModule.threeSecretKey = '075b7c28ea7246eeb91c19c304cc5eef'
+    // appModule.threeUserId = '10081'
+    // appModule.threeAuthType = SocialAuthType.phone
+    // Toast.toastLong('正确版本')
+    // promise方式
+    /*uniCloud.callFunction({
+      name: 'getUser',
+      data: { a: 1 }
+    })*/
+    //如果有跳转信息
+    /*if (SocialConfig.authApp) {
+      socialAppModule.setThreeAuthInfo(params)
+    }*/
+    //无论如何都要获取当前用户信息
+    UserService.getMineUserInitDataAction()
+    // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
+    // 获取用户需要使用需要限制性
+    socialSystemModule.getSystemInfo()
+    //为三方只授权不需要查询信息
+    if (socialAppModule.threeSecretKey) {
+      // appModule.getThreeDevUserAction()
+    } else {
+      //页面启动，启动函数
+      socialSystemModule.appLunchAction()
+    }
+    //页面启动，启动函数
+    // systemModule.appInit()
     UniUtil.showShareMenu()
   }
 
@@ -306,7 +337,7 @@ export default class TalkList extends Vue {
   }
 
   openTagSearchVue () {
-    tagModule.getTagTypesAction()
+    socialTagModule.getTagTypesAction()
     this.showTagSearch = true
   }
 
@@ -341,14 +372,14 @@ export default class TalkList extends Vue {
   }
 
   initFilterValue () {
-    this.genderTypeValue = talkModule.userGender
-    this.rangeValue = [talkModule.userMinAge, talkModule.userMaxAge]
+    this.genderTypeValue = socialTalkModule.userGender
+    this.rangeValue = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   }
 
   get useFilters (): boolean {
-    return talkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialConfig.appGenderType) ||
-      talkModule.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
-      talkModule.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
+    return socialTalkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialConfig.appGenderType) ||
+      socialTalkModule.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
+      socialTalkModule.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
   }
 
   format () {
@@ -364,13 +395,13 @@ export default class TalkList extends Vue {
   }
 
   filterQuery () {
-    talkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
+    socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
     this.hideFilter()
     this.initQuery()
   }
 
   toNotifyVue () {
-    notifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
+    socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
     RouterUtil.navigateTo(PagePath.notify)
   }
 

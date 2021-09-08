@@ -1,41 +1,79 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import AppModule from './AppModule'
-import TalkModule from './TalkModule'
-import UserModule from './UserModule'
-import ConfigModule from './ConfigModule'
+import SocialAppModule from './SocialAppModule'
+import SocialTalkModule from './SocialTalkModule'
+import SocialUserModule from './SocialUserModule'
+import SocialConfigModule from './SocialConfigModule'
 import SocialSystemModule from './SocialSystemModule'
-import ChatModule from './ChatModule'
-import PlatformModule from './PlatformModule'
-import NotifyModule from './NotifyModule'
-import TagModule from './TagModule'
-import LocationModule from './LocationModule'
+import SocialChatModule from './SocialChatModule'
+import SocialPlatformModule from './SocialPlatformModule'
+import SocialNotifyModule from './SocialNotifyModule'
+import SocialTagModule from './SocialTagModule'
+import SocialLocationModule from './SocialLocationModule'
 import { namespace } from 'vuex-class'
+import SocialModuleName from './SocialModuleName'
+import { Store } from 'vuex'
 
-Vue.use(Vuex)
+export let socialAppModule
+export let socialTalkModule
+export let socialUserModule
+export let socialConfigModule
+export let socialSystemModule
+export let socialChatModule
+export let socialPlatformModule
+export let socialNotifyModule
+export let socialTagModule
+export let socialLocationModule
 
-const store = new Vuex.Store({})
+export function registerSocialStore (store: Store<any>) {
+  socialAppModule = new SocialAppModule({
+    store,
+    name: SocialModuleName.socialAppModule
+  })
+  socialTalkModule = new SocialTalkModule({
+    store,
+    name: SocialModuleName.socialTalkModule
+  })
+  socialUserModule = new SocialUserModule({
+    store,
+    name: SocialModuleName.socialUserModule
+  })
+  socialConfigModule = new SocialConfigModule({
+    store,
+    name: SocialModuleName.socialConfigModule
+  })
+  socialSystemModule = new SocialSystemModule({
+    store,
+    name: SocialModuleName.socialSystemModule
+  })
+  socialChatModule = new SocialChatModule({
+    store,
+    name: SocialModuleName.socialChatModule
+  })
+  socialPlatformModule = new SocialPlatformModule({
+    store,
+    name: SocialModuleName.socialPlatformModule
+  })
+  socialNotifyModule = new SocialNotifyModule({
+    store,
+    name: SocialModuleName.socialNotifyModule
+  })
+  socialTagModule = new SocialTagModule({
+    store,
+    name: SocialModuleName.socialTagModule
+  })
+  socialLocationModule = new SocialLocationModule({
+    store,
+    name: SocialModuleName.socialLocationModule
+  })
+}
 
-export const appModule = new AppModule({ store, name: 'app' })
-export const talkModule = new TalkModule({ store, name: 'talk' })
-export const userModule = new UserModule({ store, name: 'user' })
-export const configModule = new ConfigModule({ store, name: 'config' })
-export const socialSystemModule = new SocialSystemModule({ store, name: 'system' })
-export const chatModule = new ChatModule({ store, name: 'chat' })
-export const platformModule = new PlatformModule({ store, name: 'platform' })
-export const notifyModule = new NotifyModule({ store, name: 'notify' })
-export const tagModule = new TagModule({ store, name: 'tag' })
-export const locationModule = new LocationModule({ store, name: 'location' })
+export const socialAppStore = namespace(SocialModuleName.socialAppModule)
+export const socialTalkStore = namespace(SocialModuleName.socialTalkModule)
+export const socialUserStore = namespace(SocialModuleName.socialUserModule)
+export const socialConfigStore = namespace(SocialModuleName.socialConfigModule)
+export const socialSystemStore = namespace(SocialModuleName.socialSystemModule)
+export const socialChatStore = namespace(SocialModuleName.socialChatModule)
+export const socialPlatformStore = namespace(SocialModuleName.socialPlatformModule)
+export const socialNotifyStore = namespace(SocialModuleName.socialNotifyModule)
+export const socialTagStore = namespace(SocialModuleName.socialTagModule)
+export const socialLocationStore = namespace(SocialModuleName.socialLocationModule)
 
-export const appStore = namespace('app')
-export const talkStore = namespace('talk')
-export const userStore = namespace('user')
-export const configStore = namespace('config')
-export const systemStore = namespace('system')
-export const chatStore = namespace('chat')
-export const platformStore = namespace('platform')
-export const notifyStore = namespace('notify')
-export const tagStore = namespace('tag')
-export const locationStore = namespace('location')
-
-export default store
