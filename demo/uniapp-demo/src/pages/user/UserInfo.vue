@@ -303,11 +303,10 @@
 <script lang="ts">
 import { Component, PropSync, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from 'socialuni/api/TalkAPI'
-import TalkItem from '@/pages/talk/TalkItem.vue'
+import TalkItem from 'socialuni/components/SocialTalk/TalkItem.vue'
 import UserUtil from 'socialuni/utils/UserUtil'
-import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
+import TalkItemContent from 'socialuni/components/SocialTalk/TalkItemContent.vue'
 import FollowAddVO from 'socialuni/model/FollowAddVO'
-import { namespace } from 'vuex-class'
 import UserEdit from '@/pages/user/UserEdit.vue'
 import UniUtil from 'socialuni/utils/UniUtil'
 import PagePath from 'socialuni/const/PagePath'
@@ -323,7 +322,7 @@ import ReportContentType from 'socialuni/const/ReportContentType'
 import ReportType from 'socialuni/const/ReportType'
 import ReportAddVO from 'socialuni/model/report/ReportAddVO'
 import ReportAPI from 'socialuni/api/ReportAPI'
-import TalkOperate from '@/pages/talk/talkOperate.vue'
+import TalkOperate from 'socialuni/components/SocialTalk/talkOperate.vue'
 import TalkVO from 'socialuni/model/talk/TalkVO'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import ConfigMap from 'socialuni/const/ConfigMap'
@@ -345,7 +344,6 @@ import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 import DomFile from 'socialuni/model/DomFile'
 import ImgAddQO from 'socialuni/model/user/ImgAddQO'
 import CosAPI from 'socialuni/api/CosAPI'
-
 
 
 @Component({

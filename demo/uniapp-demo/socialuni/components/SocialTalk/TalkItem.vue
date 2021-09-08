@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import TalkVO from 'socialuni/model/talk/TalkVO'
-import TalkItemHead from '@/pages/talk/TalkItemHead.vue'
-import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
-import TalkItemComment from '@/pages/talk/TalkItemComment.vue'
+import TalkItemHead from './TalkItemHead.vue'
+import TalkItemContent from './TalkItemContent.vue'
+import TalkItemComment from './TalkItemComment.vue'
 
-  @Component({
+@Component({
     components: {
       TalkItemComment,
       TalkItemContent,

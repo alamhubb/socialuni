@@ -8,10 +8,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import TalkItem from '@/pages/talk/TalkItem.vue'
+import TalkItem from 'socialuni/components/SocialTalk/TalkItem.vue'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import UserAPI from 'socialuni/api/UserAPI'
-import TalkItemContent from '@/pages/talk/TalkItemContent.vue'
+import TalkItemContent from 'socialuni/components/SocialTalk/TalkItemContent.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
 import MsgInput from 'socialuni/components/MsgInput.vue'
 

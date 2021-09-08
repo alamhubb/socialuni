@@ -98,12 +98,12 @@ import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 import { namespace } from 'vuex-class'
 import TagUtil from 'socialuni/utils/TagUtil'
-import QNavbar from "/socialuni/components/q-navbar/q-navbar.vue";
-import QSearch from "/socialuni/components/q-search/q-search.vue";
-import QCard from "/socialuni/components/q-card/q-card.vue";
-import QCardRow from "/socialuni/components/q-card-row/q-card-row.vue";
-import QCardGrid from "/socialuni/components/q-card-grid/q-card-grid.vue";
-import QSidebar from "/socialuni/components/q-sidebar/q-sidebar.vue";
+import QNavbar from "socialuni/components/q-navbar/q-navbar.vue";
+import QSearch from "socialuni/components/q-search/q-search.vue";
+import QCard from "socialuni/components/q-card/q-card.vue";
+import QCardRow from "socialuni/components/q-card-row/q-card-row.vue";
+import QCardGrid from "socialuni/components/q-card-grid/q-card-grid.vue";
+import QSidebar from "socialuni/components/q-sidebar/q-sidebar.vue";
 import { socialTagStore } from 'socialuni/store'
 
 

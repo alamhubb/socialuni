@@ -95,8 +95,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
-import TalkItem from '@/pages/talk/TalkItem.vue'
-import { namespace } from 'vuex-class'
+import TalkItem from '../../SocialTalk/TalkItem.vue'
 import PagePath from 'socialuni/const/PagePath'
 import UnreadNotifyVO from 'socialuni/model/UnreadNotifyVO'
 import TagVO from 'socialuni/model/tag/TagVO'
@@ -105,30 +104,33 @@ import PageUtil from 'socialuni/utils/PageUtil'
 import TalkFilterUtil from 'socialuni/utils/TalkFilterUtil'
 import UniUtil from 'socialuni/utils/UniUtil'
 import CommonUtil from 'socialuni/utils/CommonUtil'
-import TalkSwipers from '@/pages/talk/talkSwipers.vue'
+import TalkSwipers from '../../SocialTalk/talkSwipers.vue'
 import {
-  socialAppModule, socialConfigStore,
-  socialNotifyModule, socialNotifyStore,
+  socialAppModule,
+  socialConfigStore,
+  socialNotifyModule,
+  socialNotifyStore,
   socialSystemModule,
   socialTagModule,
-  socialTalkModule, socialUserStore
+  socialTalkModule,
+  socialUserStore
 } from 'socialuni/store'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
-import TagSearch from '@/pages/talk/TagSearch.vue'
-import TabsTalkVue from '@/pages/talk/tabsTalk.vue'
+import TagSearch from '../../SocialTalk/TagSearch.vue'
+import TabsTalkVue from '../../SocialTalk/tabsTalk.vue'
 import QButton from 'socialuni/components/q-button/QButton.vue'
 import GenderType from 'socialuni/const/GenderType'
 import SocialConfig from 'socialuni/model/SocialConfig'
 import MsgInput from 'socialuni/components/MsgInput.vue'
-import NodesRef = UniApp.NodesRef;
-import SelectorQuery = UniApp.SelectorQuery;
-import QNavbar from "/socialuni/components/q-navbar/q-navbar.vue";
-import QSearch from "/socialuni/components/q-search/q-search.vue";
-import QIcon from "/socialuni/components/q-icon/q-icon.vue";
-import QPopup from "/socialuni/components/q-popup/q-popup.vue";
-import QBar from "/socialuni/components/q-bar/q-bar.vue";
-import QSlider from "/socialuni/components/q-slider/q-slider.vue";
+import QNavbar from 'socialuni/components/q-navbar/q-navbar.vue'
+import QSearch from 'socialuni/components/q-search/q-search.vue'
+import QIcon from 'socialuni/components/q-icon/q-icon.vue'
+import QPopup from 'socialuni/components/q-popup/q-popup.vue'
+import QBar from 'socialuni/components/q-bar/q-bar.vue'
+import QSlider from 'socialuni/components/q-slider/q-slider.vue'
 import UserService from 'socialuni/service/UserService'
+import NodesRef = UniApp.NodesRef
+import SelectorQuery = UniApp.SelectorQuery
 
 // todo 后台可控制是否显示轮播图
 
@@ -148,7 +150,7 @@ import UserService from 'socialuni/service/UserService'
     TalkItem
   }
 })
-export default class TalkList extends Vue {
+export default class SocialTalkPage extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
   }

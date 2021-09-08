@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import TalkList from '@/pages/talk/TalkList.vue'
+import TalkList from 'socialuni/components/SocialTalk/TalkList.vue'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
