@@ -150,8 +150,8 @@ import TalkItem from 'socialuni/components/SocialTalk/TalkItem.vue'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import TalkItemContent from 'socialuni/components/SocialTalk/TalkItemContent.vue'
 import { namespace } from 'vuex-class'
-import UserEdit from '@/pages/user/UserEdit.vue'
-import UserInfo from '@/pages/user/UserInfo.vue'
+import UserEdit from './UserEdit.vue'
+import UserInfo from './UserInfo.vue'
 import UniUtil from 'socialuni/utils/UniUtil'
 import SkipUrlConst from 'socialuni/const/SkipUrlConst'
 import { socialAppModule, socialUserModule, socialUserStore } from 'socialuni/store'
@@ -160,7 +160,7 @@ import QRow from 'socialuni/components/q-row/q-row.vue'
 import QBar from 'socialuni/components/q-bar/q-bar.vue'
 import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
 import OpenDataAPI from 'socialuni/api/OpenDataAPI'
-import Login from '@/pages/user/login.vue'
+import Login from '../SocialPages/SocialLoginPage.vue'
 import Toast from 'socialuni/utils/Toast'
 import MsgInput from 'socialuni/components/MsgInput.vue'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
@@ -182,7 +182,7 @@ const userStore = namespace('user')
     TalkItemContent
   }
 })
-export default class MineDetail extends Vue {
+export default class SocialMineDetail extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   showMsgInput = false
   showMoreList = false

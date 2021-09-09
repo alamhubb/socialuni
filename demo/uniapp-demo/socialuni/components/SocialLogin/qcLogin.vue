@@ -123,17 +123,16 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
-import { namespace } from 'vuex-class'
 import { socialSystemModule, socialSystemStore, socialUserStore } from 'socialuni/store'
 import Alert from 'socialuni/utils/Alert'
 import LoginService from 'socialuni/service/LoginService'
 import PageUtil from 'socialuni/utils/PageUtil'
 import SystemStoreProp from 'socialuni/store/SystemStoreProp'
-import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
-import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
-import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
+import LoginFooterAppInfo from './LoginFooterAppInfo.vue'
+import ThirdApplyAuthInfo from './ThirdApplyAuthInfo.vue'
+import UserPrivacyAgreement from './UserPrivacyAgreement.vue'
 import PhoneNumFormData from 'socialuni/model/phone/PhoneNumFormData'
-import PhoneLoginForm from '@/pages/user/PhoneLoginForm.vue'
+import PhoneLoginForm from './PhoneLoginForm.vue'
 import PhoneService from 'socialuni/service/PhoneService'
 
 @Component({

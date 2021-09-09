@@ -307,7 +307,7 @@ import TalkItem from 'socialuni/components/SocialTalk/TalkItem.vue'
 import UserUtil from 'socialuni/utils/UserUtil'
 import TalkItemContent from 'socialuni/components/SocialTalk/TalkItemContent.vue'
 import FollowAddVO from 'socialuni/model/FollowAddVO'
-import UserEdit from '@/pages/user/UserEdit.vue'
+import UserEdit from './UserEdit.vue'
 import UniUtil from 'socialuni/utils/UniUtil'
 import PagePath from 'socialuni/const/PagePath'
 import FollowAPI from 'socialuni/api/FollowAPI'
@@ -327,13 +327,7 @@ import TalkVO from 'socialuni/model/talk/TalkVO'
 import MsgUtil from 'socialuni/utils/MsgUtil'
 import ConfigMap from 'socialuni/const/ConfigMap'
 import PlatformUtils from 'socialuni/utils/PlatformUtils'
-import {
-  socialAppStore,
-  socialConfigStore,
-  socialSystemStore,
-  socialUserModule,
-  socialUserStore
-} from 'socialuni/store'
+import { socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore } from 'socialuni/store'
 import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
 import QRow from 'socialuni/components/q-row/q-row.vue'
 import Alert from 'socialuni/utils/Alert'

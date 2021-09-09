@@ -69,7 +69,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
-import { namespace } from 'vuex-class'
 import UniUtil from 'socialuni/utils/UniUtil'
 import Alert from 'socialuni/utils/Alert'
 import OpenDataAPI from 'socialuni/api/OpenDataAPI'
@@ -79,9 +78,9 @@ import PageUtil from 'socialuni/utils/PageUtil'
 import AppUtilAPI from 'socialuni/api/AppUtilAPI'
 import DevUserVO from 'socialuni/model/dev/DevUserVO'
 import SystemStoreProp from 'socialuni/store/SystemStoreProp'
-import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
-import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
-import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
+import LoginFooterAppInfo from './LoginFooterAppInfo.vue'
+import ThirdApplyAuthInfo from './ThirdApplyAuthInfo.vue'
+import UserPrivacyAgreement from './UserPrivacyAgreement.vue'
 import { socialAppStore, socialSystemStore, socialUserStore } from 'socialuni/store'
 
 @Component({

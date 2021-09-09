@@ -85,15 +85,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
 import { socialAppModule, socialSystemModule, socialSystemStore, socialUserStore } from 'socialuni/store'
 import Alert from 'socialuni/utils/Alert'
 import LoginService from 'socialuni/service/LoginService'
 import PageUtil from 'socialuni/utils/PageUtil'
 import SystemStoreProp from 'socialuni/store/SystemStoreProp'
-import LoginFooterAppInfo from '@/pages/user/LoginFooterAppInfo.vue'
-import ThirdApplyAuthInfo from '@/pages/user/ThirdApplyAuthInfo.vue'
-import UserPrivacyAgreement from '@/pages/user/UserPrivacyAgreement.vue'
+import LoginFooterAppInfo from '../SocialLogin/LoginFooterAppInfo.vue'
+import ThirdApplyAuthInfo from '../SocialLogin/ThirdApplyAuthInfo.vue'
+import UserPrivacyAgreement from '../SocialLogin/UserPrivacyAgreement.vue'
 import SocialUniAuthVO from 'socialuni/model/openData/SocialUniAuthVO'
 import UniUtil from 'socialuni/utils/UniUtil'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
@@ -105,7 +104,7 @@ import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
     LoginFooterAppInfo
   }
 })
-export default class LoginPage extends Vue {
+export default class SocialLoginPage extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   @socialUserStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
@@ -126,12 +125,12 @@ export default class LoginPage extends Vue {
     }
   }
 
-  providerLogin (result) {
-    this.LoginBase(this.providerLoginBase, result)
+  async providerLogin (result) {
+    await this.LoginBase(this.providerLoginBase, result)
   }
 
-  socialuniLogin () {
-    this.LoginBase(this.socialuniLoginBase)
+  async socialuniLogin () {
+    await this.LoginBase(this.socialuniLoginBase)
   }
 
   async LoginBase (loginFun: Function, result?) {
@@ -139,11 +138,13 @@ export default class LoginPage extends Vue {
       UniUtil.showLoading('登录中')
       this.openTypeBtnEnable = false
       try {
+        console.log('等待执行')
         await loginFun(result)
+        console.log('执行完毕')
+        this.loginAfterHint('登录成功')
       } finally {
         this.openTypeBtnEnable = true
         UniUtil.hideLoading()
-        this.loginAfterHint('登录成功')
       }
     }
   }
