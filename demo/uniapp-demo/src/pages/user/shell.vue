@@ -64,7 +64,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import FollowItem from '@/pagesLazy/user/FollowItem.vue'
+import FollowItem from '@/pages/user/FollowItem.vue'
 import QRow from 'socialuni/components/q-row/q-row.vue'
 import QRowItem from 'socialuni/components/q-row-item/q-row-item.vue'
 import SkipUrlConst from 'socialuni/const/SkipUrlConst'

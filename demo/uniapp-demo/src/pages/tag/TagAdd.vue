@@ -1,13 +1,13 @@
 <template>
-   <social-tag-add></social-tag-add>
+  <social-tag-add-page></social-tag-add-page>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SocialTagAdd from 'socialuni/components/SocialTagAdd/SocialTagAdd.vue'
+import SocialTagAddPage from 'socialuni/components/SocialTagAdd/SocialTagAddPage.vue'
 
 @Component({
-  components: { SocialTagAdd }
+  components: { SocialTagAddPage }
 })
 export default class TagAddPage extends Vue {
 

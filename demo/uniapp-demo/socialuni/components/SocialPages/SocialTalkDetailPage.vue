@@ -61,7 +61,7 @@ import { socialAppStore } from 'socialuni/store'
     TalkOperate
   }
 })
-export default class TalkDetail extends Vue {
+export default class SocialTalkDetailPage extends Vue {
   talk: TalkVO = null
   showMsgInput = false
   @socialAppStore.State('appConfig') readonly appConfig: object

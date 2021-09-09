@@ -30,80 +30,74 @@
       "style": {
         "navigationStyle": "custom"
       }
-    }
-  ],
-  "subPackages": [
+    },
+
     {
-      "root": "pagesLazy",
-      "pages": [
-        {
-          "path": "web/webBrowser",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "talk/talkAdd",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "user/userDetail",
-          "style": {
-            "navigationBarTitleText": "用户详情"
-          }
-        },
-        {
-          "path": "match/faceValueInfo",
-          "style": {
-            "navigationBarTitleText": "颜值评分"
-          }
-        },
-        {
-          "path": "user/userAvatar",
-          "style": {
-            "navigationBarTitleText": "更换头像"
-          }
-        },
-        {
-          "path": "user/follow",
-          "style": {
-            "navigationBarTitleText": "关注和粉丝",
-            "enablePullDownRefresh": true
-          }
-        },
-        {
-          "path": "user/loveValue",
-          "style": {
-            "navigationBarTitleText": "爱心值"
-          }
-        },
-        {
-          "path": "talk/talkDetail",
-          "style": {
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "notify/notify",
-          "style": {
-            "navigationBarTitleText": "通知列表"
-          }
-        },
-        {
-          "path": "user/shell",
-          "style": {
-            "navigationBarTitleText": "贝壳充值"
-          }
-        },
-        {
-          "path": "user/contactInfo",
-          "style": {
-            "navigationBarTitleText": "功能介绍"
-          }
-        }
-      ]
+      "path": "pages/web/webBrowser",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/talk/talkAdd",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/userDetail",
+      "style": {
+        "navigationBarTitleText": "用户详情"
+      }
+    },
+    {
+      "path": "pages/match/faceValueInfo",
+      "style": {
+        "navigationBarTitleText": "颜值评分"
+      }
+    },
+    {
+      "path": "pages/user/userAvatar",
+      "style": {
+        "navigationBarTitleText": "更换头像"
+      }
+    },
+    {
+      "path": "pages/user/follow",
+      "style": {
+        "navigationBarTitleText": "关注和粉丝",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/user/loveValue",
+      "style": {
+        "navigationBarTitleText": "爱心值"
+      }
+    },
+    {
+      "path": "pages/talk/talkDetail",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/notify/notify",
+      "style": {
+        "navigationBarTitleText": "通知列表"
+      }
+    },
+    {
+      "path": "pages/user/shell",
+      "style": {
+        "navigationBarTitleText": "贝壳充值"
+      }
+    },
+    {
+      "path": "pages/user/contactInfo",
+      "style": {
+        "navigationBarTitleText": "功能介绍"
+      }
     }
   ],
   "tabBar": {

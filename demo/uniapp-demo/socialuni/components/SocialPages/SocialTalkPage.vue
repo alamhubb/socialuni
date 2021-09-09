@@ -95,7 +95,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
-import TalkItem from '../../SocialTalk/TalkItem.vue'
+import TalkItem from '../SocialTalk/TalkItem.vue'
 import PagePath from 'socialuni/const/PagePath'
 import UnreadNotifyVO from 'socialuni/model/UnreadNotifyVO'
 import TagVO from 'socialuni/model/tag/TagVO'
@@ -104,7 +104,7 @@ import PageUtil from 'socialuni/utils/PageUtil'
 import TalkFilterUtil from 'socialuni/utils/TalkFilterUtil'
 import UniUtil from 'socialuni/utils/UniUtil'
 import CommonUtil from 'socialuni/utils/CommonUtil'
-import TalkSwipers from '../../SocialTalk/talkSwipers.vue'
+import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
   socialAppModule,
   socialConfigStore,
@@ -116,8 +116,8 @@ import {
   socialUserStore
 } from 'socialuni/store'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
-import TagSearch from '../../SocialTalk/TagSearch.vue'
-import TabsTalkVue from '../../SocialTalk/tabsTalk.vue'
+import TagSearch from '../SocialTalk/TagSearch.vue'
+import TabsTalkVue from '../SocialTalk/tabsTalk.vue'
 import QButton from 'socialuni/components/q-button/QButton.vue'
 import GenderType from 'socialuni/const/GenderType'
 import SocialConfig from 'socialuni/model/SocialConfig'

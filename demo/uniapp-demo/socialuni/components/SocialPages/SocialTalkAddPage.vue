@@ -138,7 +138,6 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from 'socialuni/api/TalkAPI'
 import UniUtil from 'socialuni/utils/UniUtil'
 import DistrictVO from 'socialuni/model/DistrictVO'
-import { namespace } from 'vuex-class'
 import JsonUtils from 'socialuni/utils/JsonUtil'
 import TagVO from 'socialuni/model/tag/TagVO'
 import TagUtil from 'socialuni/utils/TagUtil'
@@ -154,7 +153,7 @@ import PlatformUtils from 'socialuni/utils/PlatformUtils'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 import CityPicker from 'socialuni/components/CityPicker.vue'
-import TalkAddTagSearch from '@/pagesLazy/talk/TalkAddTagSearch.vue'
+import TalkAddTagSearch from 'socialuni/components/SocialTagAdd/TalkAddTagSearch.vue'
 import TagAdd from '@/pages/tag/TagAdd.vue'
 import Alert from 'socialuni/utils/Alert'
 import LocationUtil from 'socialuni/utils/LocationUtil'
@@ -183,7 +182,7 @@ import PagePath from 'socialuni/const/PagePath'
     QIcon
   }
 })
-export default class TalkAddPage extends Vue {
+export default class SocialTalkAddPage extends Vue {
   @socialLocationStore.State('districts') readonly districts: DistrictVO[]
   @socialTagStore.State('tags') readonly storeTags: TagVO []
   @socialUserStore.State('user') readonly user: CenterUserDetailRO

@@ -20,7 +20,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import HomeType from 'socialuni/const/HomeType'
-import FollowItem from '@/pagesLazy/user/FollowItem.vue'
+import FollowItem from '@/pages/user/FollowItem.vue'
 import FollowAPI from 'socialuni/api/FollowAPI'
 
 @Component({
