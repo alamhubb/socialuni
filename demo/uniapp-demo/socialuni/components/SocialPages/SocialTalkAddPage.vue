@@ -19,7 +19,7 @@
     </view>
 
     <view v-if="showTagAdd">
-      <tag-add @change="addTagCheckTag" @close="closeTagAddVue"/>
+      <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
     </view>
     <view v-show="!showSearch&&!showTagSearch&&!showTagAdd">
       <view class="px-smm py-sm">
@@ -154,7 +154,6 @@ import CenterUserDetailRO from 'socialuni/model/social/CenterUserDetailRO'
 import QIcon from 'socialuni/components/q-icon/q-icon.vue'
 import CityPicker from 'socialuni/components/CityPicker.vue'
 import TalkAddTagSearch from 'socialuni/components/SocialTagAdd/TalkAddTagSearch.vue'
-import TagAdd from '@/pages/tag/TagAdd.vue'
 import Alert from 'socialuni/utils/Alert'
 import LocationUtil from 'socialuni/utils/LocationUtil'
 import VisibleType from 'socialuni/const/VisibleType'
@@ -171,12 +170,13 @@ import CosAPI from 'socialuni/api/CosAPI'
 import AppUtilAPI from 'socialuni/api/AppUtilAPI'
 import RouterUtil from 'socialuni/utils/RouterUtil'
 import PagePath from 'socialuni/const/PagePath'
+import SocialTagAdd from '../SocialTagAdd/SocialTagAdd.vue'
 
 @Component({
   components: {
+    SocialTagAdd,
     QButton,
     QNavbar,
-    TagAdd,
     TalkAddTagSearch,
     CityPicker,
     QIcon

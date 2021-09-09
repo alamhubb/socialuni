@@ -42,7 +42,7 @@ import ErrorConst from 'socialuni/const/ErrorConst'
 import Alert from 'socialuni/utils/Alert'
 
 @Component
-export default class SocialTagAddPage extends Vue {
+export default class SocialTagAdd extends Vue {
     // tag名称
     tagName = ''
     // tag描述
