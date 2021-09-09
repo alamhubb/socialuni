@@ -7,8 +7,8 @@ export default class SocialConfig {
   static readonly appGenderType = GenderType.all
   static readonly authApp = true
   static readonly socialuniHttpBaseUrl = 'https://api.qingchiapp.com'
-  // static readonly devSocialuniHttpBaseUrl = 'https://devapi.qingchiapp.com'
-  static readonly devSocialuniHttpBaseUrl = 'https://localpc.qingchiapp.com:8091'
+  static readonly devSocialuniHttpBaseUrl = 'https://devapi.qingchiapp.com'
+  // static readonly devSocialuniHttpBaseUrl = 'https://localpc.qingchiapp.com:8091'
   store: Store<any>
   //无后台项目，需要在前台此处配置秘钥，访问社交联盟使用。
   //授权登录时可选填，不填则使用后台绑定的appId进行判断，如未在开发者后台绑定appId，则需要填写秘钥
