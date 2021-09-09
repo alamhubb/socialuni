@@ -26,13 +26,13 @@ export default class ConfigMap {
   static readonly childProtectUrlKey: string = 'childProtectUrl'
 
   // 最后必须有/
-  static readonly homeUrlDefault: string = 'https://www.qingchi1.com/'
-  static readonly suggestUrlDefault: string = 'https://www.qingchi1.com/suggest'
-  static readonly contactUsUrlDefault: string = 'https://www.qingchi1.com/contact'
-  static readonly userAgreementUrlDefault: string = 'https://www.qingchi1.com/agreement'
-  static readonly userPrivacyUrlDefault: string = 'https://www.qingchi1.com/privacy'
-  static readonly childProtectUrlDefault: string = 'https://www.qingchi1.com/childProtect'
-  static readonly shellInfoUrlDefault: string = 'https://www.qingchi1.com/shellInfo'
+  static readonly homeUrlDefault: string = 'https://www.qingchiapp.com/'
+  static readonly suggestUrlDefault: string = 'https://www.qingchiapp.com/suggest'
+  static readonly contactUsUrlDefault: string = 'https://www.qingchiapp.com/contact'
+  static readonly userAgreementUrlDefault: string = 'https://www.qingchiapp.com/agreement'
+  static readonly userPrivacyUrlDefault: string = 'https://www.qingchiapp.com/privacy'
+  static readonly childProtectUrlDefault: string = 'https://www.qingchiapp.com/childProtect'
+  static readonly shellInfoUrlDefault: string = 'https://www.qingchiapp.com/shellInfo'
 
   // 验证码间隔多少秒
   static readonly authCodeIntervalKey: string = 'authCodeInterval'

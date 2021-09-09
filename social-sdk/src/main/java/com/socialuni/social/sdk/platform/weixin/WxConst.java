@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.platform.weixin.token.WxTokenResult;
 //什么算是公共常量，就是放到任何项目都可以用的
 public class WxConst {
     public static final String wx_pay_url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-    public static final String wx_pay_result_notify_url = "https://api.qingchi1.com/user/wxPayNotify";
+    public static final String wx_pay_result_notify_url = "https://api.qingchiapp.com/user/wxPayNotify";
 
     public static final String mp_pay_trade_type = "JSAPI";
     public static final String app_pay_trade_type = "APP";

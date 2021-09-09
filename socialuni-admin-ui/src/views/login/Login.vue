@@ -67,13 +67,13 @@
             <el-checkbox v-model="contractChecked" class="mb-5">
               <span class="color-black">我已阅读并同意</span>
             </el-checkbox>
-            <a href="https://www.qingchi1.com/agreement" class="color-blue">
+            <a href="https://www.qingchiapp.com/agreement" class="color-blue">
               《用户协议》
             </a>
-            <a href="https://www.qingchi1.com/privacy" class="color-blue">
+            <a href="https://www.qingchiapp.com/privacy" class="color-blue">
               《隐私政策》
             </a>
-            <a href="https://www.qingchi1.com/childProtect" class="color-blue">
+            <a href="https://www.qingchiapp.com/childProtect" class="color-blue">
               《儿童个人信息保护规则及监护人须知》
             </a>
           </div>
