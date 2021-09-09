@@ -7,7 +7,6 @@ import GetUserInfoRes = UniApp.GetUserInfoRes
 
 export default class UniUserUtil {
   public static async getUniProviderLoginQO (provider: string): Promise<UniProviderLoginQO> {
-    console.log(3333)
     //顺序不能改变，必须先获取用户信息，再获取code，要不然会报错因为获取code会重置事件
     const userInfo: GetUserInfoRes = await UniUserUtil.getUserInfo(provider)
     const providerCode = await UniLoginUtil.getLoginCode(provider)

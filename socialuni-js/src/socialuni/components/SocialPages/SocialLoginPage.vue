@@ -152,7 +152,6 @@ export default class SocialLoginPage extends Vue {
   //平台登录
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async providerLoginBase (result) {
-    console.log(111)
     //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
     await LoginService.providerLogin(socialSystemModule.mpPlatform, result)
   }

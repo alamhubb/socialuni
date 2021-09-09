@@ -13,7 +13,6 @@ export default class LoginService {
    * 渠道登录的同一方法
    */
   static async providerLogin (provider: string, result: any) {
-
     if (socialSystemModule.isMp && socialSystemModule.isMpQQ && provider === UniProviderType.wx) {
       if (socialSystemModule.isMpQQ) {
         if (result.detail.errMsg !== Constants.loginSuccess) {
@@ -21,7 +20,6 @@ export default class LoginService {
         }
       }
     }
-    console.log(2222)
     //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
     const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
 
