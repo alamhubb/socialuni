@@ -10,8 +10,5 @@ import SocialMineDetailPage from 'socialuni/components/SocialPages/SocialMineDet
   components: { SocialMineDetailPage }
 })
 export default class MinePage extends Vue {
-  created () {
-    console.log(this)
-  }
 }
 </script>
