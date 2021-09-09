@@ -1,18 +1,12 @@
 import 'core-js'
 
-console.log('zhixingle')
 import Vue from 'vue'
 import App from './App.vue'
-import '@/plugins/socialuni'
+import './plugins/socialuni'
 
-console.log('zhixingle')
-
-import store from './store'
-import * as utils from '@/utils'
+import * as utils from 'socialuni/utils'
 // main.js
-import uView from 'uview-ui'
-
-Vue.use(uView)
+import store from '@/store'
 
 Vue.config.productionTip = false
 

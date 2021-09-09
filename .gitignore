@@ -16,3 +16,7 @@ application-devprod.yml
 application-localdevprod.yml
 application-localprod.yml
 application-qingchi.yml
+manifest.json
+.env
+.env.development
+.env.production
