@@ -1,6 +1,6 @@
-import { AMapWX } from '@/plugins/amap'
+import { AMapWX } from '../plugins/aliMap/amap'
 import AppConfig from '../config/AppConfig'
-import WebAPI from '@/plugins/WebAPI'
+import WebAPI from '../plugins/WebAPI'
 
 export default class MapUtil {
   static readonly map: AMapWX = new AMapWX({ key: AppConfig.ali_mp_map_key })

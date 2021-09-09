@@ -6,11 +6,13 @@
 import { PluginObject } from 'vue'
 import SocialConfig from './model/SocialConfig'
 import { registerSocialStore } from './store'
+import uView from 'uview-ui'
 
 export let socialConfig: SocialConfig
 
 const socialuni: PluginObject<SocialConfig> = {
   install (Vue, options?: SocialConfig) {
+    Vue.use(uView)
     socialConfig = new SocialConfig(options)
     registerSocialStore(options.store)
     // 全局混入social必要内容
