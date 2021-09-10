@@ -1,5 +1,5 @@
 <template>
-  <social-talk-page class="flex-1"></social-talk-page>
+  <social-talk-page></social-talk-page>
 </template>
 
 <script lang="ts">
