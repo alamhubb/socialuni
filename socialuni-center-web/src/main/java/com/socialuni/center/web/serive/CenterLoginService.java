@@ -1,3 +1,4 @@
+/*
 package com.socialuni.center.web.serive;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
@@ -48,3 +49,4 @@ public class CenterLoginService {
         return ResultRO.success(centerLoginRO);
     }
 }
+*/
