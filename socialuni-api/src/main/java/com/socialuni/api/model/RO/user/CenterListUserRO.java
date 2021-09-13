@@ -26,4 +26,10 @@ public class CenterListUserRO extends CenterUserRO {
         this.age = socialListUserRO.getAge();
         this.city = socialListUserRO.getCity();
     }
+
+    public CenterListUserRO(SocialListUserRO socialListUserRO) {
+        super(socialListUserRO);
+        this.age = socialListUserRO.getAge();
+        this.city = socialListUserRO.getCity();
+    }
 }

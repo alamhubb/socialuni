@@ -30,6 +30,4 @@ public class CenterMineUserDetailROFactory {
 
         return centerMineUserDetailRO;
     }
-
-
 }

@@ -25,4 +25,10 @@ public class CenterMineUserDetailRO extends CenterUserDetailRO {
         this.phoneNum = userRO.getPhoneNum();
         this.birthday = userRO.getBirthday();
     }
+
+    public CenterMineUserDetailRO(SocialMineUserDetailRO userRO) {
+        super(userRO);
+        this.phoneNum = userRO.getPhoneNum();
+        this.birthday = userRO.getBirthday();
+    }
 }

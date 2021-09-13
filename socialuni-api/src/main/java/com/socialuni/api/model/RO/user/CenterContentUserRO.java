@@ -29,4 +29,11 @@ public class CenterContentUserRO extends CenterListUserRO {
         this.hasBeFollowed = userRO.getHasBeFollowed();
         this.isMine = userRO.getIsMine();
     }
+
+    public CenterContentUserRO(SocialContentUserRO userRO) {
+        super(userRO);
+        this.hasFollowed = userRO.getHasFollowed();
+        this.hasBeFollowed = userRO.getHasBeFollowed();
+        this.isMine = userRO.getIsMine();
+    }
 }

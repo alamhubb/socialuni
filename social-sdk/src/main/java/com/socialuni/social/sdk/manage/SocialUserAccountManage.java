@@ -42,7 +42,7 @@ public class SocialUserAccountManage {
     public SocialUserAccountDO create(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
         socialUserAccountDO.setUserId(userId);
-        socialUserAccountDO.setDevId(loginQO.getDevId());
+//        socialUserAccountDO.setDevId(loginQO.getDevId());
         socialUserAccountDO.setPlatform(loginQO.getPlatform());
         socialUserAccountDO.setProvider(loginQO.getProvider());
         String openId = uniUnionIdRO.getOpenid();

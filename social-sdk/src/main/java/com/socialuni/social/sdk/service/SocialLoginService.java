@@ -18,7 +18,6 @@ public class SocialLoginService {
     @Resource
     SocialPhoneLoginDomain socialPhoneLoginDomain;
 
-
     public ResultRO<SocialLoginRO<SocialMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
         SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
         return new ResultRO<>(socialLoginRO);

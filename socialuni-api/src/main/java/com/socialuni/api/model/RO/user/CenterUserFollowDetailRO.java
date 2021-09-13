@@ -1,5 +1,6 @@
 package com.socialuni.api.model.RO.user;
 
+import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,12 @@ public class CenterUserFollowDetailRO extends CenterContentUserRO {
 
     public CenterUserFollowDetailRO(CenterContentUserRO centerContentUserRO, SocialUserFollowDetailRO userRO) {
         super(centerContentUserRO);
+        this.fansNum = userRO.getFansNum();
+        this.followNum = userRO.getFollowNum();
+    }
+
+    public CenterUserFollowDetailRO(SocialUserFollowDetailRO userRO) {
+        super(userRO);
         this.fansNum = userRO.getFansNum();
         this.followNum = userRO.getFollowNum();
     }
