@@ -124,21 +124,45 @@
           地区：{{ userProp.city }}
         </view>
 
-        <view v-if="isMine" class="row-col-center py-sm q-solid-bottom">
-          <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
-          手机号(仅自己可见)：
-          <view v-if="userProp.phoneNum">
-            {{ userProp.phoneNum }}
-            <view class="ml-10px sm cu-tag bg-white bd-gray radius">
-              已绑定
+        <view v-if="isMine" class="py-sm q-solid-bottom">
+          <div class="row-col-center">
+            <image class="size20px mr-xs"
+                   mode="aspectFit"
+                   :src="require('socialuni/static/img/socialuni_logo.jpg')"
+            />
+            社交联盟：
+            <view v-if="userProp.phoneNum">
+              {{ userProp.phoneNum }}
+              <view class="ml-10px sm cu-tag bg-white bd-gray radius">
+                已绑定
+              </view>
             </view>
-          </view>
-          <view v-else>
-            <button class="cu-btn radius sm bg-orange"
-                    @click="toPhonePage">绑定
-            </button>
-          </view>
+            <view v-else>
+              绑定后可发布动态
+              <button class="cu-btn radius sm bg-orange ml-xs"
+                      @click="toPhonePage">绑定
+              </button>
+            </view>
+          </div>
         </view>
+        <view v-if="isMine" class="py-sm q-solid-bottom">
+          <div class="row-col-center">
+            <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
+            手机号(仅自己可见)：
+            <view v-if="userProp.phoneNum">
+              {{ userProp.phoneNum }}
+              <view class="ml-10px sm cu-tag bg-white bd-gray radius">
+                已绑定
+              </view>
+            </view>
+            <view v-else>
+              <button class="cu-btn radius sm bg-orange"
+                      @click="toPhonePage">绑定
+              </button>
+            </view>
+          </div>
+        </view>
+
 
         <!-- #ifndef MP-WEIXIN -->
         <!--        <view class="row-col-center py-sm q-solid-bottom">

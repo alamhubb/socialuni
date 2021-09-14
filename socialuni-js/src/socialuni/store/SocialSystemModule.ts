@@ -6,7 +6,7 @@ import TokenUtil from '../utils/TokenUtil'
 import { socialAppModule, socialChatModule, socialLocationModule, socialNotifyModule, socialTagModule } from './index'
 import UniSystemType from '../const/UniSystemType'
 import UniPlatformType from '../const/UniPlatformType'
-import GetSystemInfoResult = UniApp.GetSystemInfoResult;
+import GetSystemInfoResult = UniApp.GetSystemInfoResult
 
 //和终端相关的信息
 @Module({ generateMutationSetters: true })
@@ -84,8 +84,7 @@ export default class SocialSystemModule extends VuexModule {
   }
 
   // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
-  constructor (options: RegisterOptions) {
-    super(options)
+  getSystemInfo () {
     //设置平台
     // #ifdef APP-PLUS
     this.isApp = true

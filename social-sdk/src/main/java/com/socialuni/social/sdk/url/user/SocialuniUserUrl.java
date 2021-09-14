@@ -30,7 +30,6 @@ public interface SocialuniUserUrl {
     @PostMapping("addUserImg")
     ResultRO<SocialMineUserDetailRO> addUserImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
 
-
     @PostMapping("deleteUserImg")
     ResultRO<SocialMineUserDetailRO> deleteUserImg(@RequestBody @Valid SocialUserImgDeleteQO socialUserImgDeleteQO);
 }
