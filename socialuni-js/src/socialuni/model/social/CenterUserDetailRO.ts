@@ -9,6 +9,8 @@ export default class CenterUserDetailRO {
   city = ''
   birthday: string = null
   phoneNum: string = null
+  bindSocialuni: boolean = null
+  socialuniNickname: string = null
   hasFollowed: boolean = null
   hasBeFollowed: boolean = null
   isMine: boolean = null

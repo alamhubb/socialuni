@@ -8,6 +8,7 @@ import lombok.Data;
 public class MineUserDetailRO extends CenterMineUserDetailRO {
     //是否已绑定社交联盟账号
     boolean bindSocialuni;
+    String socialuniNickname;
 
     public MineUserDetailRO(CenterMineUserDetailRO centerMineUserDetailRO) {
         super(centerMineUserDetailRO);

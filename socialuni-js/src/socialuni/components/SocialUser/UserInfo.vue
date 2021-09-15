@@ -131,8 +131,8 @@
                    :src="require('socialuni/static/img/socialuni_logo.jpg')"
             />
             社交联盟：
-            <view v-if="userProp.phoneNum">
-              {{ userProp.phoneNum }}
+            <view v-if="userProp.bindSocialuni">
+              {{ userProp.socialuniNickname }}
               <view class="ml-10px sm cu-tag bg-white bd-gray radius">
                 已绑定
               </view>

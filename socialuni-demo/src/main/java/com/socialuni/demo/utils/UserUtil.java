@@ -32,18 +32,23 @@ public class UserUtil {
     public static MineUserDetailRO getMineUser(UserDO mineUser) {
         Integer mineUserId = mineUser.getId();
         SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getUserSocialAccount(mineUserId);
+
+        SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
+        CenterMineUserDetailRO centerMineUserDetailRO = new CenterMineUserDetailRO(socialMineUserDetailRO);
+        MineUserDetailRO mineUserDetailRO = new MineUserDetailRO(centerMineUserDetailRO);
         if (socialUserAccountDO != null) {
             //如果不为null，则从联盟获取用户信息
             ResultRO<CenterMineUserDetailRO> centerMineUserDetailROResultRO = socialuniUserAPI.getMineUser();
-            MineUserDetailRO mineUserDetailRO = new MineUserDetailRO(centerMineUserDetailROResultRO.getData());
+            CenterMineUserDetailRO socialuniMineUserDetailRO = centerMineUserDetailROResultRO.getData();
+            //主要是设置联盟的Id
+            mineUserDetailRO.setId(socialuniMineUserDetailRO.getId());
+            //设置联盟的昵称
+            mineUserDetailRO.setSocialuniNickname(socialuniMineUserDetailRO.getNickname());
             mineUserDetailRO.setBindSocialuni(true);
-            return mineUserDetailRO;
+        } else {
+            mineUserDetailRO.setId(mineUserId.toString());
+            mineUserDetailRO.setBindSocialuni(false);
         }
-        SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
-        CenterMineUserDetailRO centerMineUserDetailRO = new CenterMineUserDetailRO(socialMineUserDetailRO);
-        centerMineUserDetailRO.setId(mineUserId.toString());
-        MineUserDetailRO mineUserDetailRO = new MineUserDetailRO(centerMineUserDetailRO);
-        mineUserDetailRO.setBindSocialuni(false);
         return mineUserDetailRO;
     }
 }
