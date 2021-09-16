@@ -1,5 +1,5 @@
 import { Action, Module, RegisterOptions, VuexModule } from 'vuex-class-modules'
-import ProviderType from '../const/ProviderType'
+import LoginProvider from '../const/LoginProvider'
 import PlatformType from '../const/PlatformType'
 import PlatformUtils from '../utils/PlatformUtils'
 import TokenUtil from '../utils/TokenUtil'
@@ -102,11 +102,11 @@ export default class SocialSystemModule extends VuexModule {
     this.platform = UniPlatformType.mp
     // #ifdef MP-WEIXIN
     this.isMpWx = true
-    this.mpPlatform = ProviderType.wx
+    this.mpPlatform = LoginProvider.wx
     // #endif
     // #ifdef MP-QQ
     this.isMpQQ = true
-    this.mpPlatform = ProviderType.qq
+    this.mpPlatform = LoginProvider.qq
     // #endif
     // #endif
 

@@ -6,14 +6,15 @@ import MockAPI from '../api/MockAPI'
 import { socialSystemModule } from '../store'
 import Constants from '../const/Constant'
 import Toast from '../utils/Toast'
-import UniProviderType from '../const/UniProviderType'
+import UniProviderLoginQO from '@/socialuni/model/UniProviderLoginQO'
+import LoginProvider from '@/socialuni/const/LoginProvider'
 
 export default class LoginService {
   /**
    * 渠道登录的同一方法
    */
   static async providerLogin (provider: string, result: any) {
-    if (socialSystemModule.isMp && socialSystemModule.isMpQQ && provider === UniProviderType.wx) {
+    if (socialSystemModule.isMp && socialSystemModule.isMpQQ && provider === LoginProvider.wx) {
       if (socialSystemModule.isMpQQ) {
         if (result.detail.errMsg !== Constants.loginSuccess) {
           return Toast.toast('您取消了登录')
@@ -36,8 +37,11 @@ export default class LoginService {
     UserService.getMineUserInitDataActionByToken(data)
   }
 
-  static async socialuniMockLogin () {
-    const { data } = await MockAPI.mockOAuthUserInfoAPI()
+  static async mockSocialuniLogin () {
+    const mockRes = await MockAPI.mockOAuthUserInfoAPI()
+    const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(mockRes.data.token, null, mockRes.data.user, LoginProvider.socialuni)
+
+    const { data } = await LoginAPI.providerLoginAPI(providerLoginQO)
 
     UserService.getMineUserInitDataActionByToken(data)
   }

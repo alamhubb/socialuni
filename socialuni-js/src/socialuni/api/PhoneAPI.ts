@@ -7,8 +7,8 @@ import BindWxPhoneNumQO from '../model/phone/BindWxPhoneNumQO'
 import SocialSendAuthCodeQO from '../model/phone/SocialSendAuthCodeQO'
 
 export default class PhoneAPI {
-  static bindSocialPhoneNum () {
-    return socialHttp.post<CenterUserDetailRO>('phone/bindSocialPhoneNum')
+  static bindSocialuniPhoneNum () {
+    return socialHttp.post<CenterUserDetailRO>('phone/bindSocialuniPhoneNum')
   }
 
   static sendAuthCodeAPI (phoneNum: string) {

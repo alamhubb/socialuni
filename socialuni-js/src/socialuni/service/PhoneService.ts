@@ -2,7 +2,7 @@ import { socialUserModule } from '../store'
 import Toast from '../utils/Toast'
 import PhoneAPI from '../api/PhoneAPI'
 import UniLoginUtil from '../utils/UniLoginUtil'
-import ProviderType from '../const/ProviderType'
+import LoginProvider from '../const/LoginProvider'
 
 export default class PhoneService {
   static async bindPhoneNum (phoneNum: string, authCode: string) {
@@ -23,7 +23,7 @@ export default class PhoneService {
       // encryptedData: ""
       // errMsg: "getPhoneNumber:ok"
       // iv: ""
-      wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(ProviderType.wx)
+      wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(LoginProvider.wx)
       const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
       socialUserModule.setUser(res.data)
     } else {

@@ -25,6 +25,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = {"provider", "userId"}),
                 @UniqueConstraint(columnNames = {"provider", "appOpenId"}),
                 @UniqueConstraint(columnNames = {"provider", "mpOpenId"}),
+                @UniqueConstraint(columnNames = {"provider", "h5OpenId"}),
         }
 )
 public class SocialUserAccountDO extends CommonUserAccountBaseDO implements Serializable {

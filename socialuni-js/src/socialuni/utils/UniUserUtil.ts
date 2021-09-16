@@ -1,7 +1,7 @@
 import UniProviderLoginQO from '../model/UniProviderLoginQO'
 import UniLoginUtil from './UniLoginUtil'
 import UniUserInfoRO from '../model/UniUserInfoRO'
-import UniProviderType from '../const/UniProviderType'
+import LoginProvider from '../const/LoginProvider'
 import { socialSystemModule } from '../store'
 import GetUserInfoRes = UniApp.GetUserInfoRes
 
@@ -10,7 +10,7 @@ export default class UniUserUtil {
     //顺序不能改变，必须先获取用户信息，再获取code，要不然会报错因为获取code会重置事件
     const userInfo: GetUserInfoRes = await UniUserUtil.getUserInfo(provider)
     const providerCode = await UniLoginUtil.getLoginCode(provider)
-    const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(providerCode, userInfo, provider)
+    const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(providerCode, userInfo, userInfo.userInfo as any, provider)
     return providerLoginQO
   }
 

@@ -21,6 +21,7 @@ public class CommonUserAccountBaseDO extends CommonContentBaseDO implements Seri
     private String provider;
     private String appOpenId;
     private String mpOpenId;
+    private String h5OpenId;
     private String unionId;
     //对应三方的token
     private String sessionKey;

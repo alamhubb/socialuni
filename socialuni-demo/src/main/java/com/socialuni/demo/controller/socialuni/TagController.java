@@ -1,4 +1,4 @@
-package com.socialuni.demo.socialuni;
+package com.socialuni.demo.controller.socialuni;
 
 import com.socialuni.api.feignAPI.SocialuniTagAPI;
 import com.socialuni.social.api.model.ResultRO;

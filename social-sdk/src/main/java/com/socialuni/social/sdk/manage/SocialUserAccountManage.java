@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.manage;
 
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.exception.UniSdkException;
@@ -47,13 +48,17 @@ public class SocialUserAccountManage {
         socialUserAccountDO.setProvider(loginQO.getProvider());
         String openId = uniUnionIdRO.getOpenid();
         if (StringUtils.isEmpty(openId)) {
-            throw new UniSdkException("openId为空");
+            throw new SocialParamsException("openId为空");
         }
         if (PlatformType.mp.equals(loginQO.getPlatform())) {
             //相同都为unionid
             socialUserAccountDO.setMpOpenId(openId);
-        } else {
+        } else if (PlatformType.app.equals(loginQO.getPlatform())) {
             socialUserAccountDO.setAppOpenId(openId);
+        } else if (PlatformType.h5.equals(loginQO.getPlatform())) {
+            socialUserAccountDO.setH5OpenId(openId);
+        } else {
+            throw new SocialParamsException("不支持的渠道类型：" + loginQO.getPlatform());
         }
         if (!StringUtils.isEmpty(uniUnionIdRO.getUnionid())) {
             socialUserAccountDO.setUnionId(uniUnionIdRO.getUnionid());

@@ -7,6 +7,7 @@ import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,8 @@ public class FeignInterceptor implements RequestInterceptor {
 //        String socialSecret = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
 //        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialSecret);
         requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialDevSecretKey);
+
+        //如果有token，或者社交登录时，不携带token，手动设置token
         if (SocialTokenUtil.hasToken()) {
             //走了这里一定是绑定了社交联盟账号，获取社交联盟账户
             SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getMineSocialAccount();
@@ -33,6 +36,8 @@ public class FeignInterceptor implements RequestInterceptor {
                 requestTemplate.header(SocialFeignHeaderName.socialTokenHeaderName, uniToken);
             }
         }
+
+
 //        requestTemplate.header("sign", md5);
         //一些接口的调用需要实现幂等，比如消息发送，如果使用requestId就可以方便服务方实现幂等
 //        requestTemplate.header("requestId", UUID.randomUUID().toString().replaceAll("-", ""));

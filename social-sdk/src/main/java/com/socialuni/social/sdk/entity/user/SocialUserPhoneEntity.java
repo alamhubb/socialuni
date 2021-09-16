@@ -21,6 +21,7 @@ public class SocialUserPhoneEntity {
     @Resource
     SocialUserFansDetailManage socialUserFansDetailManage;
 
+    //外层已经校验过了
     public UserDO createUserPhoneEntity(String phoneNum) {
         UserDO mineUser = socialUserManage.createUserByPhoneLogin();
         //创建或返回

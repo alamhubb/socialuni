@@ -19,9 +19,7 @@ public class CenterDevAccountEntity {
     @Resource
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public UserDO getOrCreateDevAccountUserDO() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-
+    public UserDO getOrCreateDevAccountUserDO(DevAccountDO devAccountDO) {
         String phoneNum = devAccountDO.getPhoneNum();
 
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);

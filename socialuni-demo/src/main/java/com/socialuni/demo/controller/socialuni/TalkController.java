@@ -1,4 +1,4 @@
-package com.socialuni.demo.socialuni;
+package com.socialuni.demo.controller.socialuni;
 
 
 import com.socialuni.api.feignAPI.SocialuniTalkAPI;
@@ -8,13 +8,10 @@ import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

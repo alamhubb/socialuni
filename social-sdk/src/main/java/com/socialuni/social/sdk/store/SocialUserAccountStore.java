@@ -40,6 +40,8 @@ public class SocialUserAccountStore {
                 socialUserAccountDO = socialUserAccountRepository.findByProviderAndAppOpenId(provider, openId);
             } else if (PlatformType.mp.equals(platform)) {
                 socialUserAccountDO = socialUserAccountRepository.findByProviderAndMpOpenId(provider, openId);
+            } else if (PlatformType.h5.equals(platform)) {
+                socialUserAccountDO = socialUserAccountRepository.findByProviderAndH5OpenId(provider, openId);
             } else {
                 throw new SocialParamsException(PlatformType.notSupportTypeErrorMsg + ":" + platform);
             }

@@ -10,6 +10,7 @@ public interface SocialUserAccountRepository extends JpaRepository<SocialUserAcc
     SocialUserAccountDO findByProviderAndUnionId(String provider, String unionId);
     SocialUserAccountDO findByProviderAndAppOpenId(String provider, String appOpenId);
     SocialUserAccountDO findByProviderAndMpOpenId(String provider, String mpOpenId);
+    SocialUserAccountDO findByProviderAndH5OpenId(String provider, String h5OpenId);
 
     //根据渠道和用户id查询用户账户信息
     SocialUserAccountDO findByProviderAndUserId(String provider, Integer userId);

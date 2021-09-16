@@ -8,11 +8,12 @@ import lombok.Data;
  */
 @Data
 public class SocialOAuthUserRO {
-    private String id;
-    private String nickname;
-    private String avatar;
+    private String openId;
+    private String unionId;
+    private String avatarUrl;
+    private String nickName;
     private Integer gender;
-    private Integer age;
+    private String year;
     private String city;
     private String phoneNum;
 }

@@ -140,7 +140,7 @@
             <view v-else>
               绑定后可发布动态
               <button class="cu-btn radius sm bg-orange ml-xs"
-                      @click="toPhonePage">绑定
+                      @click="toBindSocialuni">绑定
               </button>
             </view>
           </div>
@@ -351,7 +351,14 @@ import TalkVO from '../../model/talk/TalkVO'
 import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../const/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
-import { socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore } from '../../store'
+import {
+  socialAppModule,
+  socialAppStore,
+  socialConfigStore,
+  socialSystemStore,
+  socialUserModule,
+  socialUserStore
+} from '../../store'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import QRow from '../q-row/q-row.vue'
 import Alert from '../../utils/Alert'
@@ -362,6 +369,11 @@ import QIcon from '../q-icon/q-icon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
+import MockAPI from '@/socialuni/api/MockAPI'
+import LoginService from '@/socialuni/service/LoginService'
+import SocialUniAuthVO from '@/socialuni/model/openData/SocialUniAuthVO'
+import SocialAuthType from '@/socialuni/const/SocialAuthType'
+import MockService from '@/socialuni/service/MockService'
 
 
 @Component({
@@ -559,8 +571,18 @@ export default class UserInfo extends Vue {
     }
   }
 
-  toPhonePage () {
-    PageUtil.toPhonePage()
+  toBindSocialuni () {
+    MockAPI.mockOAuthUserInfoAPI()
+  }
+
+  async toPhonePage () {
+    //开发模式模拟授权
+    if (socialAppModule.isDevMode) {
+      await MockService.mockBindSocialuniPhone()
+    } else {
+      const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.phone)
+      PageUtil.toSocialUniAuth(authVO)
+    }
   }
 
   toIdentityAuth () {

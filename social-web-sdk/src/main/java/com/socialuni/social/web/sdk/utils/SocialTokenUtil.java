@@ -34,8 +34,23 @@ public class SocialTokenUtil {
         if (SocialTokenUtil.isSuccess(token)) {
             return token;
         }
+        return SocialTokenUtil.getAttrToken();
+    }
+
+    private static String getAttrToken() {
+        HttpServletRequest request = RequestUtil.getRequest();
+        String token = (String) request.getAttribute(tokenName);
+        if (SocialTokenUtil.isSuccess(token)) {
+            return token;
+        }
         return null;
     }
+
+    public static void setToken(String token) {
+        HttpServletRequest request = RequestUtil.getRequest();
+        request.setAttribute(tokenName, token);
+    }
+
 
     public static Boolean hasToken() {
         return SocialTokenUtil.isSuccess(SocialTokenUtil.getToken());

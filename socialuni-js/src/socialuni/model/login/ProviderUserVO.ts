@@ -1,8 +1,8 @@
 //三方平台登录返回的用户信息结构
-import ProviderType, { Provider } from '../../const/ProviderType'
+import LoginProvider from '../../const/LoginProvider'
 
 export default class ProviderUserVO {
-  provider: Provider = ProviderType.qq
+  provider: string = LoginProvider.qq
   platform = ''
 
   //设备id

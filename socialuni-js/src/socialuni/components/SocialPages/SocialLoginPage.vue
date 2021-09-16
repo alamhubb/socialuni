@@ -96,6 +96,7 @@ import UserPrivacyAgreement from '../SocialLogin/UserPrivacyAgreement.vue'
 import SocialUniAuthVO from '../../model/openData/SocialUniAuthVO'
 import UniUtil from '../../utils/UniUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
+import MockService from '@/socialuni/service/MockService'
 
 @Component({
   components: {
@@ -159,7 +160,7 @@ export default class SocialLoginPage extends Vue {
   async socialuniLoginBase () {
     //开发模式模拟授权
     if (socialAppModule.isDevMode) {
-      await LoginService.socialuniMockLogin()
+      await MockService.mockSocialuniLogin()
     } else {
       const authVO: SocialUniAuthVO = new SocialUniAuthVO('user')
       PageUtil.toSocialUniAuth(authVO)

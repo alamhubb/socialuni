@@ -1,14 +1,11 @@
-package com.socialuni.demo.socialuni;
+package com.socialuni.demo.controller;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.demo.model.MineUserDetailRO;
 import com.socialuni.demo.service.LoginService;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
-import com.socialuni.social.sdk.service.SocialLoginService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +22,8 @@ public class LoginController {
 
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @PostMapping("providerLogin")
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
-        ResultRO<SocialLoginRO<CenterMineUserDetailRO>> resultRO = loginService.providerLogin(loginData);
+    public ResultRO<SocialLoginRO<MineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
+        ResultRO<SocialLoginRO<MineUserDetailRO>> resultRO = loginService.providerLogin(loginData);
         return resultRO;
     }
 }

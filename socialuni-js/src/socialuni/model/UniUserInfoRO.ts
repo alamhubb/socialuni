@@ -19,4 +19,5 @@ export default class UniUserInfoRO {
   province = ''
   //微信有Chaoyang
   city = ''
+  phoneNum: string = null
 }

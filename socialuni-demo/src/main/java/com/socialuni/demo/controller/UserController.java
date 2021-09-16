@@ -1,18 +1,14 @@
-package com.socialuni.demo.socialuni;
+package com.socialuni.demo.controller;
 
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
 import com.socialuni.api.model.QO.user.CenterUserIdQO;
 import com.socialuni.api.model.QO.user.CenterUserImgDeleteQO;
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.demo.model.MineUserDetailRO;
 import com.socialuni.demo.utils.UserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
-import com.socialuni.social.model.model.QO.user.SocialUserIdQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
-import com.socialuni.social.model.model.QO.user.SocialUserImgDeleteQO;
-import com.socialuni.social.sdk.url.user.SocialuniUserUrl;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
