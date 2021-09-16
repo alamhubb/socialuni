@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import { socialAppModule, socialSystemModule, socialUserModule } from 'socialuni/store'
 import UserService from 'socialuni/service/UserService'
-import ThreeAuthType from 'socialuni/const/ThreeAuthType'
+import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import Toast from 'socialuni/utils/Toast'
 import ResultVO from 'socialuni/model/ResultVO'
 import ThreeAuthResultVO from 'socialuni/model/openData/ThreeAuthResultVO'

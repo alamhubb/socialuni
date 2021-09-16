@@ -571,8 +571,14 @@ export default class UserInfo extends Vue {
     }
   }
 
-  toBindSocialuni () {
-    MockAPI.mockOAuthUserInfoAPI()
+  async toBindSocialuni () {
+    //开发模式模拟授权
+    if (socialAppModule.isDevMode) {
+      await MockService.mockSocialuniLogin()
+    } else {
+      const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.user)
+      PageUtil.toSocialUniAuth(authVO)
+    }
   }
 
   async toPhonePage () {

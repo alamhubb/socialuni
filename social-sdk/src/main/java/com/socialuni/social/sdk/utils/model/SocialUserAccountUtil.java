@@ -19,6 +19,10 @@ public class SocialUserAccountUtil {
         SocialUserAccountUtil.socialUserAccountRepository = socialUserAccountRepository;
     }
 
+    public static boolean mineBindSocialuniAccount() {
+        return SocialUserAccountUtil.getMineAccountByProvider(SocialuniProviderLoginType.socialuni) != null;
+    }
+
     public static SocialUserAccountDO getMineSocialAccount() {
         return SocialUserAccountUtil.getMineAccountByProvider(SocialuniProviderLoginType.socialuni);
     }
