@@ -37,4 +37,7 @@ public interface SocialuniQingchiAPI {
 
     @PostMapping("phoneLogin")
     ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
+
+    @PostMapping("queryDevAccount")
+    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> queryDevAccount(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
 }
