@@ -1,15 +1,13 @@
 package com.socialuni.social.sdk.manage;
 
+import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
-import com.socialuni.social.exception.UniSdkException;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.store.SocialUserAccountStore;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -31,7 +29,6 @@ public class SocialUserAccountManage {
         socialUserAccountDO = socialUserAccountRepository.save(socialUserAccountDO);
     }
 
-    @Async
     public void checkOrCreate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         if (socialUserAccountDO == null) {

@@ -127,6 +127,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 || uri.contains("test")
                 //初始化
                 || uri.contains("mockOAuthUserInfo")
+                || uri.contains("mockOAuthUserPhoneNum")
                 || uri.contains("getAppLaunchData")
                 //初始化的请求
                 || uri.contains("report/queryReportTypes")

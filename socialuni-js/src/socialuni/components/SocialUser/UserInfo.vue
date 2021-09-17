@@ -124,7 +124,7 @@
           地区：{{ userProp.city }}
         </view>
 
-        <view v-if="isMine" class="py-sm q-solid-bottom">
+<!--        <view v-if="isMine" class="py-sm q-solid-bottom">
           <div class="row-col-center">
             <image class="size20px mr-xs"
                    mode="aspectFit"
@@ -144,7 +144,7 @@
               </button>
             </view>
           </div>
-        </view>
+        </view>-->
         <view v-if="isMine" class="py-sm q-solid-bottom">
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
@@ -155,9 +155,10 @@
                 已绑定
               </view>
             </view>
-            <view v-else>
-              <button class="cu-btn radius sm bg-orange"
-                      @click="toPhonePage">绑定
+            <view v-else class="row-col-center">
+              未绑定
+              <button class="ml-xs cu-btn radius sm bg-orange"
+                      @click="toPhonePage">绑定社交联盟手机号
               </button>
             </view>
           </div>

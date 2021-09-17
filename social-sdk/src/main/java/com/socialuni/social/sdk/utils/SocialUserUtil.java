@@ -64,7 +64,7 @@ public class SocialUserUtil {
         return userId;
     }
 
-    public static UserDO getMineUserNotNull() {
+    public static UserDO getMineUser() {
         //解析token
         UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         if (mineUser == null) {

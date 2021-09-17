@@ -41,15 +41,14 @@ public class WxProviderUtil {
         String code = unionIdData.getCode();
 
         if (PlatformType.mp.equals(platform)) {
-            String wxMpId = unionIdData.getAppId();
+            /*String wxMpId = unionIdData.getAppId();
             String wxMpSecret = unionIdData.getSecret();
             if (StringUtils.isEmpty(wxMpId)) {
                 wxMpId = WxProviderUtil.wxMpId;
             }
             if (StringUtils.isEmpty(wxMpSecret)) {
                 wxMpSecret = WxProviderUtil.wxMpSecret;
-            }
-
+            }*/
             String url = WxProviderUtil.getUnionIdUrl(platform, code, wxMpId, wxMpSecret);
             ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.restTemplate().getForEntity(url, UniUnionIdRO.class);
             UniUnionIdRO uniUnionIdRO = Objects.requireNonNull(responseEntity.getBody());

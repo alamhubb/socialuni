@@ -21,7 +21,6 @@ public class SocialBindUserSocialuniAccountDomain {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniProviderLoginType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
-        loginQO.setDevId(11111);
         loginQO.setCode(socialLoginRO.getToken());
 
         CenterMineUserDetailRO centerUserDetailRO = socialLoginRO.getUser();
@@ -37,7 +36,6 @@ public class SocialBindUserSocialuniAccountDomain {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniProviderLoginType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
-        loginQO.setDevId(11111);
         loginQO.setCode(token);
 
         loginQO.setUnionId(userUid);

@@ -15,5 +15,6 @@ public class SocialOAuthUserRO {
     private Integer gender;
     private String year;
     private String city;
-    private String phoneNum;
+    //这里不存手机号，因为没有意义，不能使用前台的手机号发给后台
+    //    private String phoneNum;
 }

@@ -7,7 +7,6 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.model.SocialUserAccountUtil;
@@ -25,7 +24,7 @@ public class UserUtil {
     }
 
     public static MineUserDetailRO getMineUser() {
-        UserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        UserDO mineUser = SocialUserUtil.getMineUser();
         return UserUtil.getMineUser(mineUser);
     }
 
@@ -44,10 +43,10 @@ public class UserUtil {
             mineUserDetailRO.setId(socialuniMineUserDetailRO.getId());
             //设置联盟的昵称
             mineUserDetailRO.setSocialuniNickname(socialuniMineUserDetailRO.getNickname());
-            mineUserDetailRO.setBindSocialuni(true);
+            mineUserDetailRO.setBindedSocialuni(true);
         } else {
             mineUserDetailRO.setId(mineUserId.toString());
-            mineUserDetailRO.setBindSocialuni(false);
+            mineUserDetailRO.setBindedSocialuni(false);
         }
         return mineUserDetailRO;
     }

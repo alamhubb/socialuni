@@ -117,6 +117,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                         || uri.contains("admin/syncProdDevAccount")
                         //mock授权登录
                         || uri.contains("mockOAuthUserInfo")
+                        || uri.contains("mockOAuthUserPhoneNum")
                         || uri.contains("tag/queryTags")
                         || uri.contains("tag/queryHotTags")
                         || uri.contains("tag/queryTagTypes")

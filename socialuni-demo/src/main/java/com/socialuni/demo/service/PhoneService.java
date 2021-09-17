@@ -6,15 +6,10 @@ import com.socialuni.demo.model.MineUserDetailRO;
 import com.socialuni.demo.utils.UserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.RO.OAuthUserPhoneNumRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.service.SocialLoginService;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,9 +29,14 @@ public class PhoneService {
     public ResultRO<MineUserDetailRO> bindSocialuniPhoneNum() {
         ResultRO<OAuthUserPhoneNumRO> resultRO = socialuniOAuthAPI.getOAuthUserPhoneNum();
 
-        UserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        OAuthUserPhoneNumRO oAuthUserPhoneNumRO = resultRO.getData();
+        if (oAuthUserPhoneNumRO == null) {
+            throw new SocialBusinessException("用户未授权");
+        }
 
-        mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, "86", resultRO.getData().getPhoneNum());
+        UserDO mineUser = SocialUserUtil.getMineUser();
+
+        mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, "86", oAuthUserPhoneNumRO.getPhoneNum());
 
         return ResultRO.success(UserUtil.getMineUser(mineUser));
     }
