@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 
 //授权用户信息
 @Service
-public class OAuthService {
+public class CenterOAuthService {
     @Resource
     private AuthThirdUserDomain authThirdUserDomain;
     @Resource
@@ -40,7 +40,7 @@ public class OAuthService {
         Integer devId = DevAccountUtils.getDevId();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
-            return ResultRO.success();
+            return new ResultRO<>();
         }
         String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
         return ResultRO.success(new OAuthUserPhoneNumRO(phoneNum));

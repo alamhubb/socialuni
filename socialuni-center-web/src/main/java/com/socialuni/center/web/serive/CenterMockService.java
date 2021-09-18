@@ -1,6 +1,5 @@
 package com.socialuni.center.web.serive;
 
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.entity.CenterDevAccountEntity;
@@ -18,7 +17,7 @@ import javax.annotation.Resource;
 @Service
 public class CenterMockService {
     @Resource
-    OAuthService oAuthService;
+    CenterOAuthService centerOAuthService;
     @Resource
     CenterDevAccountEntity centerDevAccountEntity;
     @Resource
@@ -45,7 +44,7 @@ public class CenterMockService {
 //        OAuthUserInfoQO authVO = new OAuthUserInfoQO(devAccountProviderDO.getAppId(), devAccountProviderDO.getMpType());
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         UserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
-        return oAuthService.oAuthUserInfo(devAccountDO, userDO, authType);
+        return centerOAuthService.oAuthUserInfo(devAccountDO, userDO, authType);
     }
 
 }

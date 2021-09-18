@@ -32,6 +32,6 @@ public class SocialuniAdminController implements SocialuniAdminAPI {
         }
         //同步生产环境开发者账号信息
         socialuniAdminService.syncProdDevAccountToDev(syncProdDevAccountQO);
-        return ResultRO.success();
+        return new ResultRO<>();
     }
 }

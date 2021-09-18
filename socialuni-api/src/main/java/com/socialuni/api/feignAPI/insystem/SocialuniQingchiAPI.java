@@ -1,7 +1,9 @@
 package com.socialuni.api.feignAPI.insystem;
 
+import com.socialuni.api.model.RO.devAccount.DevAccountRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
+import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
@@ -39,5 +41,5 @@ public interface SocialuniQingchiAPI {
     ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
 
     @PostMapping("queryDevAccount")
-    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> queryDevAccount(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
+    ResultRO<DevAccountRO> queryDevAccount(@RequestBody @Valid OAuthUserInfoQO devAccountQueryQO);
 }

@@ -31,6 +31,6 @@ public class SocialFrontLogDomain {
         front.setAppVersion(frontErrorLogVO.getAppVersion());
         front.setDevId(frontErrorLogVO.getDevId());
         socialFrontErrorLogRepository.save(front);
-        return ResultRO.success();
+        return new ResultRO<>();
     }
 }

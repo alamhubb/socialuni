@@ -32,6 +32,6 @@ public class Center0823Controller {
     @GetMapping("unionid")
     public ResultRO<Void> unionid() {
 //        testUnionIdService.unionid();
-        return ResultRO.success();
+        return new ResultRO<>();
     }
 }

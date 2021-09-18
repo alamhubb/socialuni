@@ -1,8 +1,10 @@
 package com.socialuni.center.web.insystem.qingchi;
 
 import com.socialuni.api.feignAPI.insystem.SocialuniQingchiAPI;
+import com.socialuni.api.model.RO.devAccount.DevAccountRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
+import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
@@ -28,19 +30,28 @@ public class QingchiController implements SocialuniQingchiAPI {
         return qingchiService.providerLogin(loginQO);
     }
 
+    @Override
     public ResultRO<CenterMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO bindWxPhoneNumQO) {
         return qingchiService.bindWxPhoneNum(bindWxPhoneNumQO);
     }
 
+    @Override
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
         return qingchiService.sendAuthCode(authCodeQO);
     }
 
+    @Override
     public ResultRO<CenterMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO phoneNumQO) {
         return qingchiService.bindPhoneNum(phoneNumQO);
     }
 
+    @Override
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO){
         return qingchiService.phoneLogin(socialPhoneNumQO);
+    }
+
+    @Override
+    public ResultRO<DevAccountRO> queryDevAccount(OAuthUserInfoQO devAccountQueryQO) {
+        return qingchiService.queryDevAccount(devAccountQueryQO);
     }
 }

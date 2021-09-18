@@ -1,11 +1,16 @@
 package com.socialuni.center.web.insystem.qingchi;
 
+import com.socialuni.api.model.RO.devAccount.DevAccountRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.sdk.mode.DevAccountProviderDO;
+import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
+import com.socialuni.center.web.manage.DevAccountManage;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.domain.login.SocialPhoneLoginDomain;
@@ -24,6 +29,7 @@ import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -46,6 +52,10 @@ public class QingchiService {
     private AuthThirdUserDomain authThirdUserDomain;
     @Resource
     private SocialProviderLoginDomain socialProviderLoginDomain;
+    @Resource
+    private DevAccountManage devAccountManage;
+    @Resource
+    private DevAccountProviderRepository devAccountProviderRepository;
 
     private DevAccountDO checkIsQingchiApp() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
@@ -119,4 +129,11 @@ public class QingchiService {
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }
 
+
+    public ResultRO<DevAccountRO> queryDevAccount(OAuthUserInfoQO devAccountQueryQO) {
+        this.checkIsQingchiApp();
+        DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByAppIdAndMpType(devAccountQueryQO.getAppId(), devAccountQueryQO.getMpType());
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountProviderDO.getAppName());
+        return ResultRO.success(devAccountRO);
+    }
 }

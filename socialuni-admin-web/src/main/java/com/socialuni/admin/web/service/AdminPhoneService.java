@@ -87,6 +87,6 @@ public class AdminPhoneService {
             return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);*//*
             throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
         }*/
-        return ResultRO.success();
+        return new ResultRO<>();
     }
 }
