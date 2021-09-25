@@ -8,7 +8,7 @@ import { socialUserModule } from '@/socialuni/store'
 import AccountAPI from '@/socialuni/api/AccountAPI'
 
 export default class MockService {
-  static async mockSocialuniLogin () {
+  static async mockOAuthUserPhoneNumLogin () {
     // const mockRes = await MockAPI.mockOAuthUserInfoAPI()
     //统一使用授权手机号登录
     const mockRes = await MockAPI.mockOAuthUserPhoneNumAPI()

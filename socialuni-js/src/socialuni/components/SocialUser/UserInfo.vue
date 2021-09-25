@@ -370,8 +370,6 @@ import QIcon from '../q-icon/q-icon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
-import MockAPI from '@/socialuni/api/MockAPI'
-import LoginService from '@/socialuni/service/LoginService'
 import SocialUniAuthVO from '@/socialuni/model/openData/SocialUniAuthVO'
 import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import MockService from '@/socialuni/service/MockService'
@@ -575,7 +573,7 @@ export default class UserInfo extends Vue {
   async toBindSocialuni () {
     //开发模式模拟授权
     if (socialAppModule.isDevMode) {
-      await MockService.mockSocialuniLogin()
+      await MockService.mockOAuthUserPhoneNumLogin()
     } else {
       const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.user)
       PageUtil.toSocialUniAuth(authVO)
