@@ -94,8 +94,7 @@
       </msg-input>
     </view>
     <!--      title="欢迎登录清池app"-->
-    <login v-else class="h100p"></login>
-
+    <social-login-page v-else class="h100p"></social-login-page>
 
     <!--    <u-popup v-model="showAuthThreeAuth" mode="bottom" :border-radius="30">
           <view v-if="user" class="pb-xl px-sm pt">
@@ -160,18 +159,18 @@ import QRow from '../q-row/q-row.vue'
 import QBar from '../q-bar/q-bar.vue'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import OpenDataAPI from '../../api/OpenDataAPI'
-import Login from '../SocialPages/SocialLoginPage.vue'
 import Toast from '../../utils/Toast'
 import MsgInput from '../MsgInput.vue'
 import QIcon from '../q-icon/q-icon.vue'
+import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.vue'
 
 const userStore = namespace('user')
 
 @Component({
   components: {
+    SocialLoginPage,
     QIcon,
     MsgInput,
-    Login,
     QRowItem,
     QBar,
     QRow,
