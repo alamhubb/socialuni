@@ -50,4 +50,27 @@ public class UserUtil {
         }
         return mineUserDetailRO;
     }
+
+
+    public static MineUserDetailRO getMineUser(SocialMineUserDetailRO socialMineUserDetailRO) {
+        Integer mineUserId = socialMineUserDetailRO.getId();
+        SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getUserSocialAccount(mineUserId);
+
+        CenterMineUserDetailRO centerMineUserDetailRO = new CenterMineUserDetailRO(socialMineUserDetailRO);
+        MineUserDetailRO mineUserDetailRO = new MineUserDetailRO(centerMineUserDetailRO);
+        if (socialUserAccountDO != null) {
+            //如果不为null，则从联盟获取用户信息
+            ResultRO<CenterMineUserDetailRO> centerMineUserDetailROResultRO = socialuniUserAPI.getMineUser();
+            CenterMineUserDetailRO socialuniMineUserDetailRO = centerMineUserDetailROResultRO.getData();
+            //主要是设置联盟的Id
+            mineUserDetailRO.setId(socialuniMineUserDetailRO.getId());
+            //设置联盟的昵称
+            mineUserDetailRO.setSocialuniNickname(socialuniMineUserDetailRO.getNickname());
+            mineUserDetailRO.setBindedSocialuni(true);
+        } else {
+            mineUserDetailRO.setId(mineUserId.toString());
+            mineUserDetailRO.setBindedSocialuni(false);
+        }
+        return mineUserDetailRO;
+    }
 }

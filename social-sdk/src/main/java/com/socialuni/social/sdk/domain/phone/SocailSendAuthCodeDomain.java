@@ -56,7 +56,7 @@ public class SocailSendAuthCodeDomain {
             socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
         } else {
             //校验手机号是否可用
-            socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser);
+            socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getId());
         }
 
         //然后查ip总次数，大于2也不行

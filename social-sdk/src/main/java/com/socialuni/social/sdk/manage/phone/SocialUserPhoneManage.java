@@ -22,11 +22,11 @@ public class SocialUserPhoneManage {
     SocialUserPhoneRedis socialUserPhoneRedis;
 
     //校验用户是否已经绑定手机号，手机号是否已被绑定
-    public void checkBindPhoneNum(String phoneNum, UserDO mineUser) {
+    public void checkBindPhoneNum(String phoneNum, Integer mineUserId) {
         //校验手机号格式
         PhoneNumUtil.checkPhoneNum(phoneNum);
         //校验用户是否已经绑定手机号
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUserId);
         if (socialUserPhoneDO != null) {
             throw new SocialParamsException("用户已绑定手机号");
         }
@@ -54,8 +54,8 @@ public class SocialUserPhoneManage {
     }
 
     //创建手机号信息
-    public void createUserPhoneNum(UserDO mineUser, String phoneCountryCode, String phoneNum) {
-        SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUser.getId(), phoneCountryCode, phoneNum);
+    public void createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum) {
+        SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUserId, phoneCountryCode, phoneNum);
         socialUserPhoneRepository.save(socialUserPhoneDO);
     }
 }

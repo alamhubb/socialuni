@@ -22,6 +22,7 @@ public class SocialTokenUtil {
     }
 
     private static String tokenName;
+    public final static String socialuniTokenName = "socialuniToken";
 
     @Value("${socialuni.user.token-name:token}")
     public void setTokenName(String tokenName) {
@@ -34,21 +35,21 @@ public class SocialTokenUtil {
         if (SocialTokenUtil.isSuccess(token)) {
             return token;
         }
-        return SocialTokenUtil.getAttrToken();
+        return null;
     }
 
-    private static String getAttrToken() {
+    public static String getSocialuniToken() {
         HttpServletRequest request = RequestUtil.getRequest();
-        String token = (String) request.getAttribute(tokenName);
+        String token = (String) request.getAttribute(socialuniTokenName);
         if (SocialTokenUtil.isSuccess(token)) {
             return token;
         }
         return null;
     }
 
-    public static void setToken(String token) {
+    public static void setSocialuniToken(String token) {
         HttpServletRequest request = RequestUtil.getRequest();
-        request.setAttribute(tokenName, token);
+        request.setAttribute(socialuniTokenName, token);
     }
 
 

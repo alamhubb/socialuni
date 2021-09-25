@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.entity.user;
 
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.manage.SocialUserManage;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
@@ -26,7 +27,16 @@ public class SocialUserPhoneEntity {
         UserDO mineUser = socialUserManage.createUserByPhoneLogin();
         //创建或返回
         socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-        socialUserPhoneManage.createUserPhoneNum(mineUser, "86", phoneNum);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", phoneNum);
+        return mineUser;
+    }
+
+    //外层已经校验过了
+    public UserDO createUserPhoneEntity(String phoneNum, SocialProviderLoginQO loginQO) {
+        UserDO mineUser = socialUserManage.createUserByProviderLogin(loginQO);
+        //创建或返回
+        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", phoneNum);
         return mineUser;
     }
 
@@ -34,9 +44,9 @@ public class SocialUserPhoneEntity {
     public UserDO checkPhoneNumAndCreateBind(UserDO mineUser, String phoneCountryCode, String phoneNum) {
         //业务校验
         //校验手机号是否已被使用
-        socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser);
+        socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getId());
 
-        socialUserPhoneManage.createUserPhoneNum(mineUser, phoneCountryCode, phoneNum);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), phoneCountryCode, phoneNum);
 
         mineUser.setUpdateTime(new Date());
         mineUser = userRepository.save(mineUser);

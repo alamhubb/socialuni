@@ -11,6 +11,10 @@ export default class LoginAPI {
     return socialHttp.post<SocialLoginRO<CenterUserDetailRO>>('login/providerLogin', loginData)
   }
 
+  static socialuniPhoneLoginAPI (loginData: UniProviderLoginQO) {
+    return socialHttp.post<SocialLoginRO<CenterUserDetailRO>>('login/socialuniPhoneLogin', loginData)
+  }
+
   static phoneLoginAPI (loginData: SocialPhoneNumLoginQO) {
     return socialHttp.post<SocialLoginRO<CenterUserDetailRO>>('login/phoneLogin', loginData)
   }

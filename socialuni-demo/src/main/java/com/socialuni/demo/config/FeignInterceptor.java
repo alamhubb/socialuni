@@ -7,7 +7,6 @@ import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
@@ -34,6 +33,11 @@ public class FeignInterceptor implements RequestInterceptor {
             if (socialUserAccountDO != null) {
                 String uniToken = socialUserAccountDO.getSessionKey();
                 requestTemplate.header(SocialFeignHeaderName.socialTokenHeaderName, uniToken);
+            }
+        }else {
+            String socialuniToken = SocialTokenUtil.getSocialuniToken();
+            if (socialuniToken!=null){
+                requestTemplate.header(SocialFeignHeaderName.socialTokenHeaderName, socialuniToken);
             }
         }
 

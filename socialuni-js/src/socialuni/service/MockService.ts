@@ -9,19 +9,12 @@ import AccountAPI from '@/socialuni/api/AccountAPI'
 
 export default class MockService {
   static async mockSocialuniLogin () {
-    const mockRes = await MockAPI.mockOAuthUserInfoAPI()
-    const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(mockRes.data.token, null, mockRes.data.user, LoginProvider.socialuni)
-
-    const { data } = await LoginAPI.providerLoginAPI(providerLoginQO)
-
-    UserService.getMineUserInitDataActionByToken(data)
-  }
-
-  static async mockSocialuniLoginAndAuthPhoneNum () {
+    // const mockRes = await MockAPI.mockOAuthUserInfoAPI()
+    //统一使用授权手机号登录
     const mockRes = await MockAPI.mockOAuthUserPhoneNumAPI()
     const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(mockRes.data.token, null, mockRes.data.user, LoginProvider.socialuni)
 
-    const { data } = await LoginAPI.providerLoginAPI(providerLoginQO)
+    const { data } = await LoginAPI.socialuniPhoneLoginAPI(providerLoginQO)
 
     UserService.getMineUserInitDataActionByToken(data)
   }

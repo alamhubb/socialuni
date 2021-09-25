@@ -50,18 +50,18 @@
               QQ登录
             </button>
             <!--                app和h5也都可以用微信登录-->
-            <button v-else :disabled="!openTypeBtnEnable"
+            <button :disabled="!openTypeBtnEnable"
+                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    @click="socialuniLogin">
+              清池手机号授权登录
+            </button>
+            <!--                app和h5也都可以用微信登录-->
+            <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
                     class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @click="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>
               微信登录
-            </button>
-            <!--                app和h5也都可以用微信登录-->
-            <button :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                    @click="socialuniLogin">
-              跳转清池授权登录
             </button>
             <!--              有用户-->
           </view>
