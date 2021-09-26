@@ -7,8 +7,8 @@
  * @Date 2019-08-20
  * http://ext.dcloud.net.cn/plugin?id=392
  */
-import ResultVO from '../../model/ResultVO'
 import RequestOptions = UniApp.RequestOptions
+import ResultRO from '@/socialuni/model/social/ResultRO'
 
 interface header { // header 接口
   'Content-Type'?: string;
@@ -137,7 +137,7 @@ export default class Request {
       header: options.header || this.config.header,
       method: options.method || this.config.method
     }
-    return new Promise<ResultVO<T>>((resolve: Function, reject: Function) => {
+    return new Promise<ResultRO<T>>((resolve: Function, reject: Function) => {
       let next = true
       let _config: object = {}
       _options.complete = (response: response) => {

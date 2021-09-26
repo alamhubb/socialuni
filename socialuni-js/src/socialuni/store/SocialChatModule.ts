@@ -1,5 +1,4 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
-import ResultVO from '../model/ResultVO'
 import ChatVO from '../model/chat/ChatVO'
 import MessageVO from '../model/message/MessageVO'
 import ChatType from '../const/ChatType'
@@ -12,6 +11,7 @@ import PlatformUtils from '../utils/PlatformUtils'
 import { socialChatModule, socialUserModule } from './index'
 import PagePath from '../const/PagePath'
 import SocialAppModule from './SocialAppModule'
+import ResultRO from '@/socialuni/model/social/ResultRO'
 
 @Module({ generateMutationSetters: true })
 export default class SocialChatModule extends VuexModule {
@@ -289,7 +289,7 @@ export default class SocialChatModule extends VuexModule {
   //获取chats
   @Action
   getChatsAction () {
-    return ChatAPI.getChatsAPI().then((res: ResultVO<ChatVO[]>) => {
+    return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
       this.setChats(res.data)
     })
   }

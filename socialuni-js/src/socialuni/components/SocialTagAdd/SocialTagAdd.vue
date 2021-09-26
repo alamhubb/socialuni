@@ -37,9 +37,9 @@
 import { Component, Vue } from 'vue-property-decorator'
 import TagVO from '../../model/tag/TagVO'
 import TagAPI from '../../api/TagAPI'
-import ResultVO from '../../model/ResultVO'
 import ErrorConst from '../../const/ErrorConst'
 import Alert from '../../utils/Alert'
+import ResultRO from '@/socialuni/model/social/ResultRO'
 
 @Component
 export default class SocialTagAdd extends Vue {
@@ -61,7 +61,7 @@ export default class SocialTagAdd extends Vue {
     addTagClick () {
       TagAPI.addTagAPI(this.tagName, this.tagDescription).then((res: any) => {
         this.checkTag(res.data)
-      }).catch((res: ResultVO<TagVO>) => {
+      }).catch((res: ResultRO<TagVO>) => {
         if (res.errorCode === ErrorConst.custom) {
           Alert.confirm(res.errorMsg, '使用').then(() => {
             this.checkTag(res.data)
