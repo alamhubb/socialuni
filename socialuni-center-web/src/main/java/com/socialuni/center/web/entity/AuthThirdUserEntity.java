@@ -2,12 +2,13 @@ package com.socialuni.center.web.entity;
 
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserAuthManage;
 import com.socialuni.center.web.manage.ThirdUserManage;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.ThirdUserDO;
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
@@ -45,6 +46,8 @@ public class AuthThirdUserEntity {
     //登录和 绑定手机号和微信手机号三个地方使用
     public CenterMineUserDetailRO authThirdUser(UserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
+        String uid = UnionIdDbUtil.createUserUid(mineUser.getId(), mineUser, devAccountDO);
+        centerMineUserDetailRO.setId(uid);
 
         //只是记录一个授权记录
         ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getId(), centerMineUserDetailRO.getId());

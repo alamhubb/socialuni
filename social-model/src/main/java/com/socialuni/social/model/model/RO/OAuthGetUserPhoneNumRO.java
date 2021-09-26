@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OAuthUserPhoneNumRO {
+public class OAuthGetUserPhoneNumRO {
     private String phoneNum;
 
    /* public OAuthUserPhoneNumRO(String phoneNum, String devKey) {

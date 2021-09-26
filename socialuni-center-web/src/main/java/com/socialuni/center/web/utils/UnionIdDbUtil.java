@@ -1,5 +1,6 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
 import com.socialuni.center.web.model.DO.UnionIdDO;
@@ -324,6 +325,12 @@ public class UnionIdDbUtil {
     public static String createUserUid(Integer modeId, UserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.user, modeId, user);
+    }
+
+    public static String createUserUid(Integer modeId, UserDO user, DevAccountDO devAccountDO) {
+        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
+        //如果这两个都不为空则查找是否存在有效的
+        return UnionIdDbUtil.addUnionIdDO(ContentType.user, modeId, user.getId(), devAccountDO.getId());
     }
 
     public static String addUnionIdDO(String contentType, String contentId, Integer userId) {

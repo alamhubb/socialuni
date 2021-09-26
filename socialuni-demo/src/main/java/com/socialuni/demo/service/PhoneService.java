@@ -7,7 +7,7 @@ import com.socialuni.demo.utils.UserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.model.model.RO.OAuthUserPhoneNumRO;
+import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
@@ -27,16 +27,16 @@ public class PhoneService {
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
     public ResultRO<MineUserDetailRO> bindSocialuniPhoneNum() {
-        ResultRO<OAuthUserPhoneNumRO> resultRO = socialuniOAuthAPI.getOAuthUserPhoneNum();
+        ResultRO<OAuthGetUserPhoneNumRO> resultRO = socialuniOAuthAPI.oAuthGetUserPhoneNum();
 
-        OAuthUserPhoneNumRO oAuthUserPhoneNumRO = resultRO.getData();
-        if (oAuthUserPhoneNumRO == null) {
+        OAuthGetUserPhoneNumRO OAuthGetUserPhoneNumRO = resultRO.getData();
+        if (OAuthGetUserPhoneNumRO == null) {
             throw new SocialBusinessException("用户未授权");
         }
 
         UserDO mineUser = SocialUserUtil.getMineUser();
 
-        mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, "86", oAuthUserPhoneNumRO.getPhoneNum());
+        mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, "86", OAuthGetUserPhoneNumRO.getPhoneNum());
 
         return ResultRO.success(UserUtil.getMineUser(mineUser));
     }

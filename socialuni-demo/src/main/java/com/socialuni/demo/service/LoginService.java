@@ -9,7 +9,7 @@ import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.OAuthUserPhoneNumRO;
+import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
@@ -39,7 +39,7 @@ public class LoginService {
     @Resource
     private SocialUserPhoneManage socialUserPhoneManage;
     @Resource
-    TokenManage tokenManage;
+    private TokenManage tokenManage;
 
     public ResultRO<SocialLoginRO<MineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
         //如果为社区联盟登陆则需要模拟设置token
@@ -47,11 +47,11 @@ public class LoginService {
         //账号绑定成功
 
         //查询用户是否授权了手机号，授权的话直接绑定手机号
-        ResultRO<OAuthUserPhoneNumRO> phoneNumROResultRO = socialuniOAuthAPI.getOAuthUserPhoneNum();
+        ResultRO<OAuthGetUserPhoneNumRO> phoneNumROResultRO = socialuniOAuthAPI.oAuthGetUserPhoneNum();
 
-        OAuthUserPhoneNumRO oAuthUserPhoneNumRO = phoneNumROResultRO.getData();
+        OAuthGetUserPhoneNumRO OAuthGetUserPhoneNumRO = phoneNumROResultRO.getData();
 
-        String phoneNum = oAuthUserPhoneNumRO.getPhoneNum();
+        String phoneNum = OAuthGetUserPhoneNumRO.getPhoneNum();
 
         //校验手机号格式
         SocialUserPhoneDO phoneNumDO = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);

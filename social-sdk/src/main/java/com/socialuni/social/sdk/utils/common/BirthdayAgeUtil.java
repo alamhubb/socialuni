@@ -14,6 +14,7 @@ import java.util.Date;
 public class BirthdayAgeUtil {
     public static void main(String[] args) throws ParseException {
         System.out.println(BirthdayAgeUtil.getYearBirthDateByAge(18));
+        System.out.println(BirthdayAgeUtil.getYearStrByAge(18));
     }
 
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");
@@ -51,6 +52,23 @@ public class BirthdayAgeUtil {
         }
         return age;
     }
+
+    public static String getYearStrByAge(Integer age) {
+        Calendar cal = Calendar.getInstance();
+        //获取当前年
+        int yearNow = cal.getWeekYear();
+        int birthYear = yearNow - age;
+        if (birthYear < 1) {
+            return BirthdayAgeUtil.birthdayYearFormat.format(cal.getTime());
+        }
+        try {
+            return BirthdayAgeUtil.birthdayYearFormat.format(BirthdayAgeUtil.birthdayYearFormat.parse(String.valueOf(birthYear)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public static String getYearBirthDateByAge(Integer age) {
         Calendar cal = Calendar.getInstance();

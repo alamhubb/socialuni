@@ -1,16 +1,25 @@
 package com.socialuni.api.feignAPI;
 
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.OAuthUserPhoneNumRO;
+import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
+import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
+import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
+import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @RequestMapping("oAuth")
 @FeignClient(name = "oAuth", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniOAuthAPI {
-    @PostMapping("getUserPhoneNum")
-    ResultRO<OAuthUserPhoneNumRO> getOAuthUserPhoneNum();
+    @PostMapping("oAuthGetUserPhoneNum")
+    ResultRO<OAuthGetUserPhoneNumRO> oAuthGetUserPhoneNum();
+
+    @PostMapping("oAuthUserInfoAndPhoneNum")
+    ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfoAndPhoneNum(@RequestBody @Valid OAuthUserInfoQO authVO);
 
 
 /*    @PostMapping("oAuthUserInfo")

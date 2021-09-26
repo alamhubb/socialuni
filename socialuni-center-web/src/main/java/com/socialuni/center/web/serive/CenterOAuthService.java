@@ -13,7 +13,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
-import com.socialuni.social.model.model.RO.OAuthUserPhoneNumRO;
+import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
@@ -35,7 +35,7 @@ public class CenterOAuthService {
     @Resource
     private ThirdUserAuthRepository thirdUserAuthRepository;
 
-    public ResultRO<OAuthUserPhoneNumRO> getOAuthUserPhoneNum() {
+    public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
         UserDO mineUser = CenterUserUtil.getMineUser();
         Integer devId = DevAccountUtils.getDevId();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getId(), AuthType.phone, CommonStatus.enable);
@@ -43,14 +43,16 @@ public class CenterOAuthService {
             return new ResultRO<>();
         }
         String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
-        return ResultRO.success(new OAuthUserPhoneNumRO(phoneNum));
+        return ResultRO.success(new OAuthGetUserPhoneNumRO(phoneNum));
     }
 
+/*
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(OAuthUserInfoQO authVO) {
         return this.oAuthUserInfo(authVO, AuthType.user);
     }
+*/
 
-    public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserPhoneNum(OAuthUserInfoQO authVO) {
+    public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfoAndPhoneNum(OAuthUserInfoQO authVO) {
         return this.oAuthUserInfo(authVO, AuthType.phone);
     }
 

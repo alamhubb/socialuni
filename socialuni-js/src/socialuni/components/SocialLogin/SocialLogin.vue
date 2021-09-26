@@ -104,7 +104,7 @@ import SocialAuthType from '@/socialuni/const/SocialAuthType'
     LoginFooterAppInfo
   }
 })
-export default class SocialLoginPage extends Vue {
+export default class SocialLogin extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   @socialUserStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
