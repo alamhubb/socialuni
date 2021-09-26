@@ -1,6 +1,6 @@
 import StorageUtil from './StorageUtil'
 import GenderType from '../const/GenderType'
-import SocialConfig from '../model/SocialConfig'
+import SocialuniConfig from '../model/SocialuniConfig'
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'
@@ -33,7 +33,7 @@ export default class TalkFilterUtil {
     if (storeGender && mapGender) {
       return mapGender
     }
-    return GenderType.talkQueryFilterMap.get(SocialConfig.appGenderType)
+    return GenderType.talkQueryFilterMap.get(SocialuniConfig.appGenderType)
   }
 
   static setFilterData (genderFilter: string, minAge: number, maxAge: number) {

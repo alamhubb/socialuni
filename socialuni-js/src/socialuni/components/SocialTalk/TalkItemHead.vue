@@ -78,7 +78,6 @@ import PagePath from '../../const/PagePath'
 import TalkAPI from '../../api/TalkAPI'
 import UserUtil from '../../utils/UserUtil'
 import JsonUtils from '../../utils/JsonUtil'
-import { namespace } from 'vuex-class'
 import FollowAPI from '../../api/FollowAPI'
 import PageUtil from '../../utils/PageUtil'
 import MsgUtil from '../../utils/MsgUtil'
@@ -88,7 +87,7 @@ import QIcon from '../q-icon/q-icon.vue'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import Alert from '../../utils/Alert'
 import Toast from '../../utils/Toast'
-import SocialConfig from '../../model/SocialConfig'
+import SocialuniConfig from '../../model/SocialuniConfig'
 import { socialUserStore } from '../../store'
 
 @Component({
@@ -118,7 +117,7 @@ export default class TalkItemHead extends Vue {
 
   toLoveValuePage () {
     if (this.user) {
-      if (SocialConfig.authApp) {
+      if (SocialuniConfig.authApp) {
         PageUtil.toLoveValuePage()
       }
     } else {

@@ -1,14 +1,14 @@
 import Request, { requestConfig } from './request'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
-import { socialAppModule, socialConfigModule, socialSystemModule } from '../../store'
+import { socialConfigModule, socialSystemModule } from '../../store'
 import UserService from '../../service/UserService'
 import ErrorConst from '../../const/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import Alert from '../../utils/Alert'
 import { socialConfig } from '../../index'
-import SocialConfig from '../../model/SocialConfig'
+import SocialuniConfig from '../../model/SocialuniConfig'
 import SocialSystemInfo from '../../const/SocialSystemInfo'
 
 const socialHttp: Request = new Request()
@@ -18,9 +18,9 @@ console.log(socialHttp)
 let socialHttpBaseUrl = process.env.VUE_APP_SOCIALUNI_BASE_URL
 if (!socialHttpBaseUrl) {
   if (SocialSystemInfo.isDevMode) {
-    socialHttpBaseUrl = SocialConfig.devSocialuniHttpBaseUrl
+    socialHttpBaseUrl = SocialuniConfig.devSocialuniHttpBaseUrl
   } else {
-    socialHttpBaseUrl = SocialConfig.socialuniHttpBaseUrl
+    socialHttpBaseUrl = SocialuniConfig.socialuniHttpBaseUrl
   }
 }
 

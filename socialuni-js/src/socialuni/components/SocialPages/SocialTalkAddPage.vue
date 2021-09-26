@@ -163,7 +163,7 @@ import QNavbar from '../q-navbar/q-navbar.vue'
 import QButton from '../q-button/QButton.vue'
 import PageUtil from '../../utils/PageUtil'
 import GenderType from '../../const/GenderType'
-import SocialConfig from '../../model/SocialConfig'
+import SocialuniConfig from '../../model/SocialuniConfig'
 import DomFile from '../../model/DomFile'
 import CosAuthRO from '../../model/cos/CosAuthRO'
 import CosAPI from '../../api/CosAPI'
@@ -193,8 +193,8 @@ export default class SocialTalkAddPage extends Vue {
   //默认全网
   visibleTypeValue = VisibleType.fullNetwork.value
   //默认为软件的性别
-  visibleGenderValue = SocialConfig.appGenderType
-  appGenderType = SocialConfig.appGenderType
+  visibleGenderValue = SocialuniConfig.appGenderType
+  appGenderType = SocialuniConfig.appGenderType
   GenderTypeAll = GenderType.all
 
   talkContent = ''

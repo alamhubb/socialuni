@@ -65,7 +65,7 @@ import ImgUtil from '../../utils/ImgUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../q-icon/q-icon.vue'
 import GenderType from '../../const/GenderType'
-import SocialConfig from '../../model/SocialConfig'
+import SocialuniConfig from '../../model/SocialuniConfig'
 
 @Component({
   components: { QIcon }
@@ -76,7 +76,7 @@ export default class TalkItemContent extends Vue {
   GenderTypeAll = GenderType.all
   GenderTypeGirl = GenderType.girl
   GenderTypeBoy = GenderType.boy
-  appGenderType = SocialConfig.appGenderType
+  appGenderType = SocialuniConfig.appGenderType
 
   toTalkDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {

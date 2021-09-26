@@ -106,7 +106,6 @@ import UniUtil from '../../utils/UniUtil'
 import CommonUtil from '../../utils/CommonUtil'
 import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
-  socialAppModule,
   socialConfigStore,
   socialNotifyModule,
   socialNotifyStore,
@@ -120,7 +119,7 @@ import TagSearch from '../SocialTalk/TagSearch.vue'
 import TabsTalkVue from '../SocialTalk/tabsTalk.vue'
 import QButton from '../q-button/QButton.vue'
 import GenderType from '../../const/GenderType'
-import SocialConfig from '../../model/SocialConfig'
+import SocialuniConfig from '../../model/SocialuniConfig'
 import MsgInput from '../MsgInput.vue'
 import QNavbar from '../q-navbar/q-navbar.vue'
 import QSearch from '../q-search/q-search.vue'
@@ -128,7 +127,6 @@ import QIcon from '../q-icon/q-icon.vue'
 import QPopup from '../q-popup/q-popup.vue'
 import QBar from '../q-bar/q-bar.vue'
 import QSlider from '../q-slider/q-slider.vue'
-import UserService from '../../service/UserService'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 
@@ -169,7 +167,7 @@ export default class SocialTalkPage extends Vue {
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
   // 组件内的值
   genderTypeValue: string = socialTalkModule.userGender
-  appGender: string = SocialConfig.appGenderType
+  appGender: string = SocialuniConfig.appGenderType
   GenderTypeAll = GenderType.all
   rangeValue: number[] = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   unreadNotifiesNum = 0
@@ -350,7 +348,7 @@ export default class SocialTalkPage extends Vue {
   }
 
   get useFilters (): boolean {
-    return socialTalkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialConfig.appGenderType) ||
+    return socialTalkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialuniConfig.appGenderType) ||
       socialTalkModule.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
       socialTalkModule.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
   }

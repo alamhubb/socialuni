@@ -110,7 +110,7 @@ import { socialUserModule, socialUserStore } from '../../store'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import EnumStrVO from '../../const/EnumStrVO'
 import GenderType from '../../const/GenderType'
-import SocialConfig from '../../model/SocialConfig'
+import SocialuniConfig from '../../model/SocialuniConfig'
 import UserEditVO from '../../model/user/UserEditVO'
 
 const userStore = namespace('user')
@@ -129,7 +129,7 @@ export default class UserEdit extends Vue {
   endDate = ''
   btnDisabled = false
 
-  appGenderType = SocialConfig.appGenderType
+  appGenderType = SocialuniConfig.appGenderType
   GenderTypeAll = GenderType.all
 
   genders: EnumStrVO [] = GenderType.userEditEnums

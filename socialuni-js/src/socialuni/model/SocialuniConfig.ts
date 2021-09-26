@@ -2,7 +2,7 @@ import { SocialMpConfig } from './SocialMpConfig'
 import GenderType from '../const/GenderType'
 import { Store } from 'vuex'
 
-export default class SocialConfig {
+export default class SocialuniConfig {
   //app的性别类型，全部性别，还是仅女生可用
   static readonly appGenderType = GenderType.all
   static readonly authApp = true
@@ -18,7 +18,7 @@ export default class SocialConfig {
   //无后台项目，借用社交联盟实现渠道登录时使用
   qq?: SocialMpConfig = null
 
-  constructor (socialConfig?: SocialConfig) {
+  constructor (socialConfig?: SocialuniConfig) {
     if (socialConfig) {
       this.secretKey = socialConfig.secretKey || null
       this.weixin = socialConfig.weixin || null
