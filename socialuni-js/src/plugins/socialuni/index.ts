@@ -4,8 +4,7 @@ import socialuni from 'socialuni'
 import store from '@/store'
 
 const socialConfig: SocialuniConfig = {
-  store: store,
-  secretKey: '5b366df0c95e4061a3a8de91c0d863fd'
+  store: store
 }
 
 Vue.use(socialuni, socialConfig)

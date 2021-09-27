@@ -92,7 +92,7 @@ import PageUtil from '../../utils/PageUtil'
 import SystemStoreProp from '../../store/SystemStoreProp'
 import LoginFooterAppInfo from '../SocialLogin/LoginFooterAppInfo.vue'
 import UserPrivacyAgreement from '../SocialLogin/UserPrivacyAgreement.vue'
-import SocialUniAuthVO from '../../model/openData/SocialUniAuthVO'
+import SocialUniAuthQO from '../../model/openData/SocialUniAuthQO'
 import UniUtil from '../../utils/UniUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MockService from '@/socialuni/service/MockService'
@@ -158,14 +158,12 @@ export default class SocialLogin extends Vue {
 
   async socialuniLoginBase () {
     //开发模式模拟授权
-    /*if (socialAppModule.isDevMode) {
+    if (socialAppModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
-      const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.phone)
+      const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
-    }*/
-    const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.phone)
-    PageUtil.toSocialUniAuth(authVO)
+    }
   }
 
   loginAfterHint (msg: string) {

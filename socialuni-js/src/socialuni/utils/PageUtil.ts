@@ -4,7 +4,7 @@ import MsgUtil from './MsgUtil'
 import Alert from './Alert'
 import RouterUtil from './RouterUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import SocialUniAuthVO from '../model/openData/SocialUniAuthVO'
+import SocialUniAuthQO from '../model/openData/SocialUniAuthQO'
 
 
 export default class PageUtil {
@@ -88,7 +88,7 @@ export default class PageUtil {
     RouterUtil.navigateTo(PagePath.userContactInfo)
   }
 
-  static toSocialUniAuth (authVO: SocialUniAuthVO) {
+  static toSocialUniAuth (authVO: SocialUniAuthQO) {
     let appId = 'wx0bf5fe9ceeab514c'
     if (socialSystemModule.isMpQQ) {
       appId = '1109985787'
@@ -97,7 +97,8 @@ export default class PageUtil {
       appId: appId,
       // appId: '1109985787',
       path: 'pages/user/login',
-      extraData: authVO
+      extraData: authVO,
+      envVersion: 'trial'
     })
   }
 }
