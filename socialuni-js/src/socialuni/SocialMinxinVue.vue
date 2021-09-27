@@ -3,7 +3,6 @@ import { Component, Vue } from 'vue-property-decorator'
 import { socialSystemModule } from '@/socialuni/store'
 import UserService from '@/socialuni/service/UserService'
 import UniUtil from '@/socialuni/utils/UniUtil'
-import ThreeAuthResultVO from '@/socialuni/model/openData/ThreeAuthResultVO'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
 import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
 import OAuthService from '@/socialuni/service/OAuthService'
@@ -45,7 +44,7 @@ export default class SocialMinxinVue extends Vue {
       const info = params.referrerInfo
       //这里可以返回回来的appId
       // appModule.threeProviderAppId = info.appId
-      const extraData: ResultRO<ThreeAuthResultVO> = info.extraData
+      const extraData: ResultRO<SocialLoginRO<UniUserInfoRO>> = info.extraData
       if (extraData) {
         if (extraData.success) {
           const authData: SocialLoginRO<UniUserInfoRO> = extraData.data
