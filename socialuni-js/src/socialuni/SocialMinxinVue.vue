@@ -9,6 +9,7 @@ import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
 import OAuthService from '@/socialuni/service/OAuthService'
 import Toast from '@/socialuni/utils/Toast'
 import PageUtil from '@/socialuni/utils/PageUtil'
+import ResultRO from '@/socialuni/model/social/ResultRO'
 
 @Component
 export default class SocialMinxinVue extends Vue {
@@ -34,23 +35,28 @@ export default class SocialMinxinVue extends Vue {
   onShow (params) {
     if (this.isAppPage) {
       //避免已打开情况，进入不为lunchan而是show
-      if (params && params.referrerInfo) {
-        const info = params.referrerInfo
-        //这里可以返回回来的appId
-        // appModule.threeProviderAppId = info.appId
-        const extraData: ResultVO<ThreeAuthResultVO> = info.extraData
-        if (extraData) {
-          if (extraData.success) {
-            const authData: SocialLoginRO<UniUserInfoRO> = extraData.data
-            await OAuthService.oAuthUserPhoneNumLogin(authData)
-            Toast.toastLong('授权成功')
-            PageUtil.toMinePage()
-          }
-        }
-      }
+      this.oAuthUserInfo(params)
     }
     // this.socialPageProvide.msgInputShow = true
   }
+
+  async oAuthUserInfo (params) {
+    if (params && params.referrerInfo) {
+      const info = params.referrerInfo
+      //这里可以返回回来的appId
+      // appModule.threeProviderAppId = info.appId
+      const extraData: ResultRO<ThreeAuthResultVO> = info.extraData
+      if (extraData) {
+        if (extraData.success) {
+          const authData: SocialLoginRO<UniUserInfoRO> = extraData.data
+          await OAuthService.oAuthUserPhoneNumLogin(authData)
+          Toast.toastLong('授权成功')
+          PageUtil.toMinePage()
+        }
+      }
+    }
+  }
+
 
   onHide () {
     // console.log(this.socialPageProvide.msgInputShow)

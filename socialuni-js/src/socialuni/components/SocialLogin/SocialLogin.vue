@@ -158,12 +158,14 @@ export default class SocialLogin extends Vue {
 
   async socialuniLoginBase () {
     //开发模式模拟授权
-    if (socialAppModule.isDevMode) {
+    /*if (socialAppModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
       const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
-    }
+    }*/
+    const authVO: SocialUniAuthVO = new SocialUniAuthVO(SocialAuthType.phone)
+    PageUtil.toSocialUniAuth(authVO)
   }
 
   loginAfterHint (msg: string) {
