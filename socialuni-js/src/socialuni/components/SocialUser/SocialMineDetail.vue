@@ -164,8 +164,6 @@ import MsgInput from '../MsgInput.vue'
 import QIcon from '../q-icon/q-icon.vue'
 import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.vue'
 
-const userStore = namespace('user')
-
 @Component({
   components: {
     SocialLoginPage,

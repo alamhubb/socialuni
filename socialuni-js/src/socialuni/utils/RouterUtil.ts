@@ -2,6 +2,7 @@ import SkipType from '../const/SkipType'
 import SkipUrlConst from '../const/SkipUrlConst'
 import PagePath from '../const/PagePath'
 import { socialSystemModule } from '../store'
+import PageUtil from '@/socialuni/utils/PageUtil'
 
 export default class RouterUtil {
   static getWebUrl (webUrl: string, pageTitle = ''): string {
@@ -82,8 +83,20 @@ export default class RouterUtil {
   /**
    * 关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层。
    */
+  static goBackOrHome (): void {
+    const pages = getCurrentPages()
+    if (pages.length === 1) {
+      PageUtil.goHome()
+    } else {
+      uni.navigateBack({
+        delta: 1
+      })
+    }
+    // uni.navigateBack({ delta: 1 })
+  }
+
   static goBack (): void {
-    uni.navigateBack({})
+    uni.navigateBack({ delta: 1 })
   }
 
   static getCurrentPageURI (): string {

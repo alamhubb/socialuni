@@ -101,7 +101,6 @@
 <script lang="ts">
 import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
 import UserAPI from '../../api/UserAPI'
-import { namespace } from 'vuex-class'
 import { parseDate } from '../../utils'
 import JsonUtils from '../../utils/JsonUtil'
 import Alert from '../../utils/Alert'
@@ -112,8 +111,6 @@ import EnumStrVO from '../../const/EnumStrVO'
 import GenderType from '../../const/GenderType'
 import SocialuniConfig from '../../model/SocialuniConfig'
 import UserEditVO from '../../model/user/UserEditVO'
-
-const userStore = namespace('user')
 
 @Component
 export default class UserEdit extends Vue {

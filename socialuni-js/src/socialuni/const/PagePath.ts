@@ -1,7 +1,9 @@
 export default class PagePath {
   static readonly talk: string = '/pages/talk/talk'
   static readonly userMine: string = '/pages/user/mine'
-  static readonly userPhone: string = '/pages/user/login'
+  static readonly userPhone: string = '/pages/login/login'
+
+  static readonly oAuth: string = '/pages/oAuth/oAuth'
 
   static readonly talkAdd: string = '/pages/talk/talkAdd'
   static readonly talkDetail: string = '/pages/talk/talkDetail'

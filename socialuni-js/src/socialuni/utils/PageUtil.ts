@@ -12,6 +12,10 @@ export default class PageUtil {
     PageUtil.toTalkPage()
   }
 
+  static toOAuthPage () {
+    RouterUtil.navigateTo(PagePath.oAuth)
+  }
+
   static toVipPage () {
     /*const isIos: boolean = systemModule.isIos
     if (isIos) {
@@ -96,7 +100,7 @@ export default class PageUtil {
     uni.navigateToMiniProgram({
       appId: appId,
       // appId: '1109985787',
-      path: 'pages/user/login',
+      path: 'pages/oAuth/oAuth',
       extraData: authVO,
       envVersion: 'trial'
     })
