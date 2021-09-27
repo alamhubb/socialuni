@@ -67,7 +67,7 @@ export default class SocialTalkDetailPage extends Vue {
   @socialAppStore.State('appConfig') readonly appConfig: object
 
   deleteTalk () {
-    RouterUtil.goBack()
+    RouterUtil.goBackOrHome()
   }
 
   onLoad (params: any) {
@@ -83,7 +83,7 @@ export default class SocialTalkDetailPage extends Vue {
   }
 
   goBack () {
-    RouterUtil.goBack()
+    RouterUtil.goBackOrHome()
   }
 }
 </script>
