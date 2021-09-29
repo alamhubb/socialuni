@@ -25,8 +25,12 @@ export default class TalkAPI {
     return socialHttp.post('talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
   }
 
+  static queryTalkInfoAPI (talkId: string) {
+    return socialHttp.post('talk/queryTalkInfo', { talkId })
+  }
+
   static queryTalkDetailAPI (talkId: string) {
-``    return socialHttp.post('talk/queryTalkInfo', { talkId })
+    return socialHttp.post('talk/queryTalkDetail', { talkId })
   }
 
   static addCommentAPI (comment: CommentAddVO) {

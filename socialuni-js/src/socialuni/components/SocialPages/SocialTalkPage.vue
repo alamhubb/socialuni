@@ -127,8 +127,8 @@ import QIcon from '../q-icon/q-icon.vue'
 import QPopup from '../q-popup/q-popup.vue'
 import QBar from '../q-bar/q-bar.vue'
 import QSlider from '../q-slider/q-slider.vue'
-import NodesRef = UniApp.NodesRef
-import SelectorQuery = UniApp.SelectorQuery
+import NodesRef = UniApp.NodesRef;
+import SelectorQuery = UniApp.SelectorQuery;
 
 // todo 后台可控制是否显示轮播图
 
@@ -235,7 +235,7 @@ export default class SocialTalkPage extends Vue {
     this.$refs.tabsTalk.tabsTalkOnHide()
   }
 
-  onPageScroll (e) {
+  socialTalkScroll (e) {
     // 只有开启了轮播图，才需要控制下方滚动
     if (this.configShowSwipers) {
       // +5点余量以防万一

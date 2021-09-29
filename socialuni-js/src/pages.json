@@ -8,13 +8,13 @@
   },
   "pages": [
     {
-      "path": "pages/user/mine",
+      "path": "pages/talk/talk",
       "style": {
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/talk/talk",
+      "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
       }
@@ -24,24 +24,31 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },
+    }
+  ],
+  "subPackages": [
     {
-      "path": "pages/talk/talkAdd",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/user/userDetail",
-      "style": {
-        "navigationBarTitleText": "用户详情"
-      }
-    },
-    {
-      "path": "pages/talk/talkDetail",
-      "style": {
-        "navigationStyle": "custom"
-      }
+      "root": "pagesLazy",
+      "pages": [
+        {
+          "path": "talk/talkAdd",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "talk/talkDetail",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "user/userDetail",
+          "style": {
+            "navigationBarTitleText": "用户详情"
+          }
+        }
+      ]
     }
   ],
   "tabBar": {

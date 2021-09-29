@@ -1,5 +1,5 @@
 export default class AppConfig {
-  static readonly websocketUrl: string = process.env.VUE_APP_WEBSOCKET
+  static readonly websocketUrl: string = process.env.VUE_APP_WEBSOCKET_URL
 
   static readonly appName: string = '集美小世界app'
   static readonly title: string = '集美小世界 - 女生日常分享交友圈'

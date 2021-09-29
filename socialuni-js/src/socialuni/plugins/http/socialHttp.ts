@@ -15,17 +15,17 @@ const socialHttp: Request = new Request()
 console.log(socialConfig)
 console.log(socialHttp)
 
-let socialHttpBaseUrl = process.env.VUE_APP_SOCIALUNI_BASE_URL
-if (!socialHttpBaseUrl) {
+let socialHttpUrl = process.env.VUE_APP_SOCIALUNI_URL
+if (!socialHttpUrl) {
   if (SocialSystemInfo.isDevMode) {
-    socialHttpBaseUrl = SocialuniConfig.devSocialuniHttpBaseUrl
+    socialHttpUrl = SocialuniConfig.devSocialuniHttpBaseUrl
   } else {
-    socialHttpBaseUrl = SocialuniConfig.socialuniHttpBaseUrl
+    socialHttpUrl = SocialuniConfig.socialuniHttpBaseUrl
   }
 }
 
 socialHttp.setConfig(config => { /* 设置全局配置 */
-  config.baseUrl = socialHttpBaseUrl + '/'/* 根域名不同 */
+  config.baseUrl = socialHttpUrl + '/'/* 根域名不同 */
   config.timeout = 60 * 1000
   return config
 })

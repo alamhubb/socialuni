@@ -56,13 +56,13 @@
               清池手机号授权登录
             </button>
             <!--                app和h5也都可以用微信登录-->
-            <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
+<!--            <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
                     class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @click="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>
               微信登录
-            </button>
+            </button>-->
             <!--              有用户-->
           </view>
         </view>
