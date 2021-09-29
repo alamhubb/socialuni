@@ -101,8 +101,7 @@ export default class PageUtil {
       appId: appId,
       // appId: '1109985787',
       path: 'pages/oAuth/oAuth',
-      extraData: authVO,
-      envVersion: 'trial'
+      extraData: authVO
     })
   }
 }
