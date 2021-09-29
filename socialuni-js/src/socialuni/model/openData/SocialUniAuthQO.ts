@@ -1,4 +1,4 @@
-export default class SocialuniAuthQO {
+export default class SocialUniAuthQO {
   authType: string
   // appSecretKey: string
   // appUserId: string

@@ -11,7 +11,7 @@ import QingchiAPI from '../api/QingchiAPI'
 import DevUserVO from '../model/dev/DevUserVO'
 import DevUserAPI from '../api/DevUserAPI'
 import { socialAppModule, socialConfigModule } from './index'
-import SocialuniAuthQO from '../model/openData/SocialuniAuthQO'
+import SocialUniAuthQO from '../model/openData/SocialUniAuthQO'
 import DevModeType from '../const/DevModeType'
 import AppConfigAPI from '../api/AppConfigAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
@@ -62,7 +62,7 @@ export default class SocialAppModule extends VuexModule {
       //获取三方的appid
       socialAppModule.threeAppId = info.appId
       //如果有跳转信息
-      const extraData: SocialuniAuthQO = info.extraData
+      const extraData: SocialUniAuthQO = info.extraData
       if (extraData) {
         // socialAppModule.threeSecretKey = extraData.appSecretKey
         // socialAppModule.threeUserId = extraData.appUserId

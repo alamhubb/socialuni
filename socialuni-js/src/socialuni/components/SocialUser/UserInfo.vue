@@ -370,7 +370,7 @@ import QIcon from '../q-icon/q-icon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
-import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
+import SocialUniAuthQO from '@/socialuni/model/openData/SocialUniAuthQO'
 import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import MockService from '@/socialuni/service/MockService'
 
@@ -575,7 +575,7 @@ export default class UserInfo extends Vue {
     if (socialAppModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
-      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.user)
+      const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.user)
       PageUtil.toSocialUniAuth(authVO)
     }
   }
@@ -585,7 +585,7 @@ export default class UserInfo extends Vue {
     if (socialAppModule.isDevMode) {
       await MockService.mockBindSocialuniPhone()
     } else {
-      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+      const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
     }
   }
