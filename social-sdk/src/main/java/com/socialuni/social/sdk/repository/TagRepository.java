@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.repository;
 
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.sdk.redis.redisKey.TagRedisKey;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -19,7 +20,6 @@ public interface TagRepository extends JpaRepository<TagDO, Integer> {
     @Caching(
             put = {
                     @CachePut(cacheNames = TagRedisKey.tagByName, key = "#tagDO.name"),
-                    @CachePut(cacheNames = TagRedisKey.tagByDevId, key = "#tagDO.devId")
             }
     )
     TagDO save(TagDO tagDO);
