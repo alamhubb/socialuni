@@ -12,7 +12,7 @@
       <user-info :user="user"></user-info>
 
       <!-- #ifdef H5 -->
-      <view class="h50px w100r"></view>
+      <view class="h50 w100r"></view>
       <!-- #endif -->
 
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">

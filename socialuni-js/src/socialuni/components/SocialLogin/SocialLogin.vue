@@ -4,12 +4,12 @@
   <div class="h100p bg-white px col-between-center">
     <!--    上padding 7vh，兼容各平台，底部10px，左右20px-->
     <div class="w100p pt-1p col-center flex-1">
-      <div class="flex-none col-row-center h70px">
+      <div class="flex-none col-row-center h70">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
       </div>
 
       <view class="mt-xs h145px">
-        <view class="h120px row-center">
+        <view class="h120 row-center">
           <!--          头部-->
 
           <!--          只有不为三方授权才显示logo-->
@@ -36,14 +36,14 @@
       <!--    返回和登录方式切换-->
       <!--      这个div是为了处理居中问题-->
       <div>
-        <view class="h150px col-row-center">
-          <view class="col-row-center w300px">
+        <view class="h150 col-row-center">
+          <view class="col-row-center w300">
             <!--            微信登录界面，非手机号登录界面-->
             <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <button v-if="isMpQQ" :disabled="!openTypeBtnEnable"
                     open-type="getUserInfo"
-                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @getuserinfo="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>
@@ -51,13 +51,13 @@
             </button>
             <!--                app和h5也都可以用微信登录-->
             <button :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-qq h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @click="socialuniLogin">
               清池手机号授权登录
             </button>
             <!--                app和h5也都可以用微信登录-->
             <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-wx h40px cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
                     @click="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>
@@ -92,7 +92,7 @@ import PageUtil from '../../utils/PageUtil'
 import SystemStoreProp from '../../store/SystemStoreProp'
 import LoginFooterAppInfo from '../SocialLogin/LoginFooterAppInfo.vue'
 import UserPrivacyAgreement from '../SocialLogin/UserPrivacyAgreement.vue'
-import SocialUniAuthQO from '../../model/openData/SocialUniAuthQO'
+import SocialuniAuthQO from '../../model/openData/SocialuniAuthQO'
 import UniUtil from '../../utils/UniUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MockService from '@/socialuni/service/MockService'
@@ -161,7 +161,7 @@ export default class SocialLogin extends Vue {
     if (socialAppModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
-      const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.phone)
+      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
     }
   }

@@ -23,7 +23,7 @@
     </view>
     <view v-show="!showSearch&&!showTagSearch&&!showTagAdd">
       <view class="px-smm py-sm">
-        <textarea class="h140px w100p" :maxlength="200"
+        <textarea class="h140 w100p" :maxlength="200"
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
@@ -108,7 +108,7 @@
       <view class="row-col-center pd-sm">
         <div class="flex-row text-md">
           可见范围：
-          <view class="text-gray row-all-center bg-grey w100px mr-xs px-xs" @click="showVisibleTypeSelect=true">
+          <view class="text-gray row-all-center bg-grey w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
             <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
             <q-icon size="14" class="text-gray" icon="arrow-down"/>
             <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
@@ -119,7 +119,7 @@
           <!--          只有不为单性app才显示-->
           <template v-if="GenderTypeAll === appGenderType">
             <div>，</div>
-            <view class="text-gray row-all-center bg-grey w100px mx-xs px-xs" @click="showVisibleGenderSelect=true">
+            <view class="text-gray row-all-center bg-grey w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
               <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
               <q-icon size="14" class="text-gray" icon="arrow-down"/>
               <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"

@@ -4,8 +4,8 @@
 }
 
 @each $directionKey, $directionValue in $direction-map {
-  .p#{$directionKey} {
-    padding-#{$directionValue}: map-get($padding-map, df) !important;
+  .p#{''+$directionKey+''} {
+    padding-#{''+$directionValue}: map-get($padding-map, df) !important;
   }
 }
 
@@ -25,8 +25,8 @@
 }
 
 @each $directionKey, $directionValue in $direction-map {
-  .m#{$directionKey} {
-    margin-#{$directionValue}: map-get($padding-map, df) !important;
+  .m#{''+$directionKey+''} {
+    margin-#{''+$directionValue}: map-get($padding-map, df) !important;
   }
 }
 
@@ -42,38 +42,38 @@
 
 //生成字体大小和padding和margin
 @each $sizeKey, $sizeValue in $size-map {
-  .pd-#{$sizeKey} {
+  .pd-#{''+$sizeKey+''} {
     padding: map-get($padding-map, $sizeKey) !important;
   }
   @each $directionKey, $directionValue in $direction-map {
-    .p#{$directionKey}-#{$sizeKey} {
-      padding-#{$directionValue}: map-get($padding-map, $sizeKey) !important;
+    .p#{''+$directionKey+''}-#{''+$sizeKey+''} {
+      padding-#{''+$directionValue}: map-get($padding-map, $sizeKey) !important;
     }
   }
-  .px-#{$sizeKey} {
+  .px-#{''+$sizeKey+''} {
     padding-left: map-get($padding-map, $sizeKey) !important;
     padding-right: map-get($padding-map, $sizeKey) !important;
   }
-  .py-#{$sizeKey} {
+  .py-#{''+$sizeKey+''} {
     padding-top: map-get($padding-map, $sizeKey) !important;
     padding-bottom: map-get($padding-map, $sizeKey) !important;
   }
 
-  .mg-#{$sizeKey} {
-    padding: map-get($padding-map, $sizeKey) !important;
+  .mg-#{''+$sizeKey+''} {
+    margin: map-get($padding-map, $sizeKey) !important;
   }
 
   @each $directionKey, $directionValue in $direction-map {
-    .m#{$directionKey}-#{$sizeKey} {
-      margin-#{$directionValue}: map-get($padding-map, $sizeKey) !important;
+    .m#{''+$directionKey+''}-#{''+$sizeKey+''} {
+      margin-#{''+$directionValue}: map-get($padding-map, $sizeKey) !important;
     }
   }
 
-  .mx-#{$sizeKey} {
+  .mx-#{''+$sizeKey+''} {
     margin-left: map-get($padding-map, $sizeKey) !important;
     margin-right: map-get($padding-map, $sizeKey) !important;
   }
-  .my-#{$sizeKey} {
+  .my-#{''+$sizeKey+''} {
     margin-top: map-get($padding-map, $sizeKey) !important;
     margin-bottom: map-get($padding-map, $sizeKey) !important;
   }

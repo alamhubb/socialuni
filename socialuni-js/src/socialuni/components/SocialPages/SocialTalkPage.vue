@@ -44,7 +44,7 @@
         <view class="mt-sm pb-sm">
           <!--          只有当前应用类型为全部性别才显示性别筛选-->
           <view class="row-center px pt" v-if="appGender === GenderTypeAll">
-            <view class="w50px flex-none">性别：</view>
+            <view class="w50 flex-none">性别：</view>
             <radio-group @change="genderChange" class="flex-1">
               <div class="flex-row row-wrap">
                 <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">

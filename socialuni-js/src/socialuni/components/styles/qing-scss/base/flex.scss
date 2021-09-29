@@ -107,6 +107,20 @@
   justify-content: space-around;
 }
 
+.row-around-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.row-around-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
 .row-around-center {
   display: flex;
   flex-direction: row;
@@ -133,6 +147,27 @@
   justify-content: flex-end;
 }
 
+.row-end-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.row-all-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.row-all-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .row-end-center {
   display: flex;
   flex-direction: row;
@@ -143,6 +178,14 @@
 .row-y-start {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+}
+
+
+.row-center-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: flex-start;
 }
 
@@ -195,6 +238,20 @@
   justify-content: flex-end;
 }
 
+.col-end-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.col-end-end {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .col-x-center {
   display: flex;
   flex-direction: column;
@@ -207,10 +264,36 @@
   align-items: center;
 }
 
+.col-row-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.col-row-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .row-between {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.row-between-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.row-between-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .col-between {

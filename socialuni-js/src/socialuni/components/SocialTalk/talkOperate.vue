@@ -2,8 +2,8 @@
   <view>
     <u-popup :value="commentVisible" border-radius="20" mode="center"
              @close="commentActionClose">
-      <view class="uni-tip w180px">
-        <uni-list class="w100px">
+      <view class="uni-tip w180">
+        <uni-list class="w100">
           <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
           <uni-list-item v-if="user&&comment&&(user.id === comment.user.id||user.id ===talk.user.id)"
                          :show-arrow="true" title="删除" @click="userDeleteComment"/>
@@ -51,8 +51,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
-import { namespace } from 'vuex-class'
 
 import CommentVO from '../../model/comment/CommentVO'
 import ReportType from '../../const/ReportType'

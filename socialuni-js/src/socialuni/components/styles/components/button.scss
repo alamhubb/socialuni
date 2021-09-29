@@ -35,7 +35,7 @@
   @include bg-color($color-theme);
 
   //遍历所有颜色样式类
-  @each $key, $val in $bg-colors {
+  @each $key, $val in $colors-bg {
     &.bg-#{$key} {
       @include bg-color($val);
     }

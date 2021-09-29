@@ -16,7 +16,7 @@
                     <view class="title">
                         描述：
                     </view>
-                    <textarea class="h150px" maxlength="300" v-model.trim="tagDescription" placeholder="非必填"
+                    <textarea class="h150" maxlength="300" v-model.trim="tagDescription" placeholder="非必填"
                               :show-confirm-bar="false"
                     ></textarea>
                 </view>

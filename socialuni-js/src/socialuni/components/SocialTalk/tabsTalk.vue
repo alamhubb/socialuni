@@ -1,7 +1,7 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-row-bar class="flex-none btr-smm bg-theme-bg" :class="tabsId">
+    <q-row-bar class="flex-none btr-smm bg-theme-dark" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
@@ -34,7 +34,7 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-    <swiper class="bg-theme-bg" :current="swiperCurrent"
+    <swiper class="bg-theme-dark" :current="swiperCurrent"
             :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
@@ -90,10 +90,10 @@
             </view>
           </div>
           <template v-else>
-            <view v-if="user" class="row-center h500px pt-100px font-bold text-gray text-md">
+            <view v-if="user" class="row-center h500 pt-100px font-bold text-gray text-md">
               您还没有关注其他人
             </view>
-            <view v-else class="row-center h500px pt-100px font-bold text-gray text-md" @click="toLoginVue">
+            <view v-else class="row-center h500 pt-100px font-bold text-gray text-md" @click="toLoginVue">
               您还没有登录，点击登录
             </view>
           </template>

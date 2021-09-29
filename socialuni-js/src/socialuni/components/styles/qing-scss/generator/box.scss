@@ -1,5 +1,5 @@
 @each $boxKey, $boxValue in $box-map {
-  .box-#{$boxKey} {
+  .box-#{''+$boxKey+''} {
     @include box-size($boxKey);
   }
 }

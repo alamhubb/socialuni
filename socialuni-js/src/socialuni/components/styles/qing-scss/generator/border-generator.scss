@@ -8,61 +8,108 @@
 
 //生成padding
 .bd {
-  border: $border-width-base $border-style-base $color-border-default !important;
-}
-
-@each $colorKey, $color in $text-colors {
-  .bd-#{$colorKey} {
-    border: $border-width-base $border-style-base $color !important;
-  }
+  border: $border-base;
 }
 
 .bd-none {
-  border: none !important;
-}
-
-@each $directionKey, $directionValue in $direction-map {
-  @each $colorKey, $color in $text-colors {
-    .b#{$directionKey}-#{$colorKey} {
-      border-#{$directionValue}: $border-width-base $border-style-base $color !important;
-    }
-  }
-
-  .b#{$directionKey}-none {
-    border-#{$directionValue}: none !important;
-  }
-}
-
-.bx {
-  border-left: $border-width-base $border-style-base $color-border-default !important;
-  border-right: $border-width-base $border-style-base $color-border-default !important;
-}
-
-@each $colorKey, $color in $text-colors {
-  .bx-#{$colorKey} {
-    border-left: $border-width-base $border-style-base $color !important;
-    border-right: $border-width-base $border-style-base $color !important;
-  }
-}
-
-.by {
-  border-top:  $border-width-base $border-style-base $color-border-default !important;
-  border-bottom: $border-width-base $border-style-base $color-border-default !important;
-}
-
-@each $colorKey, $color in $text-colors {
-  .by-#{$colorKey} {
-    padding-top: $border-width-base $border-style-base $color !important;
-    padding-bottom: $border-width-base $border-style-base $color !important;
-  }
+  border-width: 0 !important;
 }
 
 .bx-none {
-  border-left: none !important;
-  border-right: none !important;
+  border-left-width: 0 !important;
+  border-right-width: 0 !important;
 }
 
 .by-none {
-  border-top: none !important;
-  border-bottom: none !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important;
+}
+
+@each $directionKey, $directionValue in $direction-map {
+  .b#{''+$directionKey+''}-none {
+    border-#{''+$directionValue+''}-width: 0 !important;
+  }
+}
+
+//单设置宽度
+//为什么有横杠，因为存在l1这种值
+@for $index from 1 through 10 {
+  .bd-#{''+$index+''} {
+    border: $border-base;
+    border-width: #{''+$index}px !important;
+  }
+  .bx-#{''+$index+''} {
+    border-left: $border-base;
+    border-right: $border-base;
+    border-left-width: #{''+$index}px !important;
+    border-right-width: #{''+$index}px !important;
+  }
+  .by-#{''+$index+''} {
+    border-top: $border-base;
+    border-bottom: $border-base;
+    border-top-width: #{''+$index}px !important;
+    border-bottom-width: #{''+$index}px !important;
+  }
+  @each $directionKey, $directionValue in $direction-map {
+    .b#{''+$directionKey+''}-#{''+$index+''} {
+      border-#{''+$directionValue}: $border-base;
+      border-#{''+$directionValue+''}-width: #{''+$index}px !important;
+    }
+  }
+}
+
+//单设置颜色
+@each $colorKey, $color in $colors-border {
+  .bd-#{''+$colorKey+''} {
+    border: $border-base;
+    border-color: $color !important;
+  }
+  .bx-#{''+$colorKey+''} {
+    border-left: $border-base;
+    border-right: $border-base;
+    border-left-color: $color !important;
+    border-right-color: $color !important;
+  }
+  .by-#{''+$colorKey+''} {
+    border-top: $border-base;
+    border-bottom: $border-base;
+    border-top-color: $color !important;
+    border-bottom-color: $color !important;
+  }
+  @each $directionKey, $directionValue in $direction-map {
+    .b#{''+$directionKey+''}-#{''+$colorKey+''} {
+      border-#{''+$directionValue}: $border-base;
+      border-#{''+$directionValue+''}-color: $color !important;
+    }
+  }
+}
+
+.bd-radius {
+  border-radius: $border-radius-base !important;
+}
+
+@each $directionKey, $directionValue in $direction-com-map {
+  .b#{''+$directionKey+''}-radius {
+    border: $border-base;
+    border-#{''+$directionValue+''}-radius: $border-radius-base !important;
+  }
+}
+
+@for $index from 1 through 50 {
+  .bd-radius-#{''+$index} {
+    border: $border-base;
+    border-radius: #{''+$index}px !important;
+  }
+
+  @each $directionKey, $directionValue in $direction-com-map {
+    .b#{''+$directionKey+''}-radius-#{''+$index} {
+      border: $border-base;
+      border-#{''+$directionValue}radius: #{''+$index}px !important;
+    }
+  }
+}
+
+.bd-dashed {
+  border: $border-base;
+  border-style: dashed !important;
 }

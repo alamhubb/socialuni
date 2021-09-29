@@ -51,7 +51,7 @@
       </view>
     </q-row-line>
 
-    <view class="mt-sm h360px" v-if="districts && districts.length">
+    <view class="mt-sm h360" v-if="districts && districts.length">
       <q-picker ref="citySelect" class="bg-white" v-model="bottomDistrict"
                 :dataList="districts"></q-picker>
     </view>
@@ -59,8 +59,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Emit, Model, Watch, Prop } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'

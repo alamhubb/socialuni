@@ -31,3 +31,13 @@
     }
   }
 }
+
+.bg-click:hover {
+  background: mix($color-black, $color-white, $percent-3);
+}
+.bg-click:focus {
+  background: mix($color-black, $color-white, $percent-3);
+}
+.bg-click:active {
+  background: mix($color-black, $color-white, $percent-5);
+}
