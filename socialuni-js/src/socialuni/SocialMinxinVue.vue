@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { socialSystemModule } from '@/socialuni/store'
+import { socialRouterModule, socialSystemModule } from '@/socialuni/store'
 import UserService from '@/socialuni/service/UserService'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
@@ -30,6 +30,11 @@ export default class SocialMinxinVue extends Vue {
     UniUtil.showShareMenu()
   }
 
+  onLoad (params) {
+    if (!this.isAppPage) {
+      socialRouterModule.params = params
+    }
+  }
 
   onShow (params) {
     if (this.isAppPage) {

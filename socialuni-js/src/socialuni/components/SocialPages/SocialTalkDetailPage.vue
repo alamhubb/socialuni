@@ -52,10 +52,12 @@ import PageUtil from '../../utils/PageUtil'
 import TalkOperate from '../SocialTalk/talkOperate.vue'
 import MsgInput from '../MsgInput.vue'
 import RouterUtil from '../../utils/RouterUtil'
-import { socialAppStore } from '../../store'
+import { socialAppStore, socialRouterModule } from '../../store'
+import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
 
 @Component({
   components: {
+    QIcon,
     MsgInput,
     TalkItem,
     TalkOperate
@@ -70,8 +72,8 @@ export default class SocialTalkDetailPage extends Vue {
     RouterUtil.goBackOrHome()
   }
 
-  onLoad (params: any) {
-    const talkId = params.talkId
+  created () {
+    const talkId = socialRouterModule.params.talkId
     TalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
       this.talk = res.data
       // this.$store.commit('talk/setTalk', this.talk)

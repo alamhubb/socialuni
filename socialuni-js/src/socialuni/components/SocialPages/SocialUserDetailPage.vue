@@ -14,6 +14,7 @@ import UserAPI from '../../api/UserAPI'
 import TalkItemContent from '../SocialTalk/TalkItemContent.vue'
 import MsgInput from '../MsgInput.vue'
 import UserInfo from '../SocialUser/UserInfo.vue'
+import { socialRouterModule } from '@/socialuni/store'
 
 @Component({
   components: { MsgInput, UserInfo, TalkItem, TalkItemContent }
@@ -21,9 +22,9 @@ import UserInfo from '../SocialUser/UserInfo.vue'
 export default class UserDetail extends Vue {
   user: CenterUserDetailRO = null
 
-  onLoad (params: any) {
+  created () {
     // 这里有问题，有时候直接进入页面没有userId
-    UserAPI.queryUserDetailAPI(params.userId).then((res: any) => {
+    UserAPI.queryUserDetailAPI(socialRouterModule.params.userId).then((res: any) => {
       this.user = res.data
     })
   }

@@ -28,7 +28,7 @@
       <view class="pd-sm">
         <view class="row-col-center py-sm">
           <image
-            class="size65px bd-radius-xs mr-sm"
+            class="size65 bd-radius-xs mr-sm"
             mode="aspectFill"
             :src="userProp.avatar"
           />

@@ -142,13 +142,7 @@ import JsonUtils from '../../utils/JsonUtil'
 import TagVO from '../../model/tag/TagVO'
 import TagUtil from '../../utils/TagUtil'
 import CosUtil from '../../utils/CosUtil'
-import {
-  socialLocationModule,
-  socialLocationStore,
-  socialTagModule,
-  socialTagStore,
-  socialUserStore
-} from '../../store'
+import { socialLocationModule, socialLocationStore, socialTagModule, socialTagStore, socialUserStore } from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../q-icon/q-icon.vue'
@@ -238,7 +232,7 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   //进入talk页面，需要加载下当前地理位置，发布时携带
-  onLoad () {
+  created () {
     this.tags = JsonUtils.deepClone(this.storeTags)
     this.district = socialLocationModule.location
 

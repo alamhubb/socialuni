@@ -5,13 +5,13 @@ export default class PagePath {
 
   static readonly oAuth: string = '/pages/oAuth/oAuth'
 
-  static readonly talkAdd: string = '/pages/talk/talkAdd'
-  static readonly talkDetail: string = '/pages/talk/talkDetail'
+  static readonly talkAdd: string = '/pagesLazy/talk/talkAdd'
+  static readonly talkDetail: string = '/pagesLazy/talk/talkDetail'
   static readonly notify: string = '/pages/notify/notify'
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'
   static readonly message: string = '/pages/chat/message'
 
-  static readonly userDetail: string = '/pages/user/userDetail'
+  static readonly userDetail: string = '/pagesLazy/user/userDetail'
   static readonly userVip: string = '/pages/user/vip'
   static readonly userContactInfo: string = '/pages/user/contactInfo'
   // 不明白这个页面干嘛的 static readonly messageSetting: string = '/pages/user/messageSetting'

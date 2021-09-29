@@ -9,4 +9,5 @@ export default class SocialModuleName {
   static readonly socialNotifyModule = 'socialNotify'
   static readonly socialTagModule = 'socialTag'
   static readonly socialLocationModule = 'socialLocation'
+  static readonly socialRouterModule = 'socialRouter'
 }

@@ -163,6 +163,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 || uri.contains("/myHandler")
                 || uri.contains("/queryUserTalks")
                 || uri.contains("/queryTalkDetail")
+                || uri.contains("/queryTalkInfo")
                 || uri.contains("/queryUserDetail")
                 || uri.contains("/queryAppInitData")
                 || uri.contains("/queryAppInitDataLoad")
