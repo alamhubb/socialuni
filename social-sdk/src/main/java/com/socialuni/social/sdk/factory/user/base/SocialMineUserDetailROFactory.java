@@ -27,14 +27,19 @@ public class SocialMineUserDetailROFactory {
     }
 
     public static SocialMineUserDetailRO getMineUserDetail(UserDO mineUser) {
+        //用户关注粉丝数
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
+
+        return SocialMineUserDetailROFactory.getMineUserDetail(mineUser, socialUserPhoneDO);
+    }
+
+
+    public static SocialMineUserDetailRO getMineUserDetail(UserDO mineUser, SocialUserPhoneDO socialUserPhoneDO) {
         //user基础信息
         SocialUserDetailRO socialUserDetailRO = SocialUserDetailROFactory.getUserDetailRO(mineUser, mineUser);
 
         //user基础信息
         SocialMineUserDetailRO mineUserDetailRO = new SocialMineUserDetailRO(socialUserDetailRO);
-
-        //用户关注粉丝数
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
 
         boolean isMine = mineUserDetailRO.getIsMine();
 

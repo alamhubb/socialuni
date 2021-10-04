@@ -21,10 +21,10 @@ public class MockController implements SocialuniMockOAuthAPI {
     @Resource
     SocialuniMockOAuthAPI socialuniMockOAuthAPI;
 
-    @Override
+    /*@Override
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> mockOAuthUserInfo() {
         return socialuniMockOAuthAPI.mockOAuthUserInfo();
-    }
+    }*/
 
     @Override
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> mockOAuthUserPhoneNum() {

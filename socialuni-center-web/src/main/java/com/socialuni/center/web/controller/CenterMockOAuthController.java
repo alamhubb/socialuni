@@ -17,11 +17,11 @@ public class CenterMockOAuthController implements SocialuniMockOAuthAPI {
     @Resource
     CenterMockService centerMockService;
 
-    @Override
+    /*@Override
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> mockOAuthUserInfo() {
         ResultRO<SocialLoginRO<SocialOAuthUserRO>> resultRO = centerMockService.mockOAuthUserInfo();
         return resultRO;
-    }
+    }*/
 
     @Override
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> mockOAuthUserPhoneNum() {

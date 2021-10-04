@@ -1,10 +1,10 @@
 spring:
   profiles:
-#    active: local
 #    active: devprod
 #    active: localdevprod
-    active: prod
-#    active: localprod
+#    active: local
+#    active: prod
+    active: localprod
   jpa:
     database: MYSQL
 #    show-sql: true

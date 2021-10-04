@@ -103,12 +103,18 @@ public class SocialUserUtil {
     }
 
     public static String getUserPhoneNum(Integer userId) {
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(userId);
+        SocialUserPhoneDO socialUserPhoneDO = SocialUserUtil.getUserPhoneDO(userId);
         if (socialUserPhoneDO == null) {
             return null;
         }
         return socialUserPhoneDO.getPhoneNum();
     }
+
+    public static SocialUserPhoneDO getUserPhoneDO(Integer userId) {
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(userId);
+        return socialUserPhoneDO;
+    }
+
 
     /*public static UserDO get(String userId) {
         if (StringUtils.isEmpty(userId)) {

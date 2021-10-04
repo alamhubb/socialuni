@@ -54,8 +54,9 @@ public class SocialUserPhoneManage {
     }
 
     //创建手机号信息
-    public void createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum) {
+    public SocialUserPhoneDO createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum) {
         SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUserId, phoneCountryCode, phoneNum);
-        socialUserPhoneRepository.save(socialUserPhoneDO);
+        socialUserPhoneDO = socialUserPhoneRepository.save(socialUserPhoneDO);
+        return socialUserPhoneDO;
     }
 }

@@ -37,12 +37,12 @@ export default class LoginService {
     UserService.getMineUserInitDataActionByToken(data)
   }
 
-  static async mockSocialuniLogin () {
+  /*static async mockSocialuniLogin () {
     const mockRes = await MockAPI.mockOAuthUserInfoAPI()
     const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(mockRes.data.token, null, mockRes.data.user, LoginProvider.socialuni)
 
     const { data } = await LoginAPI.providerLoginAPI(providerLoginQO)
 
     UserService.getMineUserInitDataActionByToken(data)
-  }
+  }*/
 }
