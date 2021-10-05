@@ -53,8 +53,7 @@ public class LoginService {
         SocialUserPhoneDO socialUserPhoneDO = SocialUserUtil.getUserPhoneDO(mineUserId);
         //如果用户手机号为空
         if (socialUserPhoneDO == null) {
-            //如果为社区联盟登陆则需要模拟设置token
-            SocialTokenUtil.setSocialuniToken(loginData.getCode());
+
             //查询用户是否授权了手机号，授权的话直接绑定手机号
             ResultRO<OAuthGetUserPhoneNumRO> phoneNumROResultRO = socialuniOAuthAPI.oAuthGetUserPhoneNum();
             OAuthGetUserPhoneNumRO OAuthGetUserPhoneNumRO = phoneNumROResultRO.getData();
@@ -66,6 +65,9 @@ public class LoginService {
                 socialUserPhoneDO = socialUserPhoneManage.createUserPhoneNum(mineUserId, "86", phoneNum);
             }
         }
+        //如果为社区联盟登陆则需要模拟设置token
+        SocialTokenUtil.setSocialuniToken(loginData.getCode());
+
         //创建或返回
         SocialMineUserDetailRO userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser, socialUserPhoneDO);
 
