@@ -25,7 +25,11 @@ public class BirthdayAgeUtil {
         Date birthDay = new Date();
         try {
             if (StringUtils.isNotEmpty(birthDayStr)) {
-                birthDay = BirthdayAgeUtil.birthdayDateFormat.parse(birthDayStr);
+                if (birthDayStr.length() < 6) {
+                    birthDay = BirthdayAgeUtil.birthdayYearFormat.parse(birthDayStr);
+                } else {
+                    birthDay = BirthdayAgeUtil.birthdayDateFormat.parse(birthDayStr);
+                }
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -69,7 +73,6 @@ public class BirthdayAgeUtil {
         return null;
     }
 
-
     public static String getYearBirthDateByAge(Integer age) {
         Calendar cal = Calendar.getInstance();
         //获取当前年
@@ -85,16 +88,6 @@ public class BirthdayAgeUtil {
     public static String getYearBirthDateByDateStr(String dateStr) {
         try {
             return BirthdayAgeUtil.birthdayDateFormat.format(BirthdayAgeUtil.birthdayYearFormat.parse(dateStr));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //把不合规的日期形势转为规范的日期形势1999转为1999-01-01
-    public static String getBirthDateByDateStr(String dateStr) {
-        try {
-            return BirthdayAgeUtil.birthdayDateFormat.format(BirthdayAgeUtil.birthdayDateFormat.parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
