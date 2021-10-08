@@ -19,11 +19,11 @@ $color-white: #fff;
 $color-black: #000;
 
 //主题色
-$color-bg-theme: #FBBF24;
+$color-bg-theme: #FCD34D;
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
 $color-theme: $color-default;
 //主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
-$color-bg-theme-dark: #FDE68A;
+$color-bg-theme-light: #FEF3C7;
 
 $color-primary: $color-blue;
 $color-error: $color-red;
@@ -115,7 +115,7 @@ $colors-font: map-merge($colors-base, $colors-custom-font);
 $colors-custom-bg: (
   //主题色，可自定义，默认和白色一样
         theme: $color-bg-theme,
-        theme-dark: $color-bg-theme-dark,
+        theme-light: $color-bg-theme-light,
         default: $color-bg-default,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,

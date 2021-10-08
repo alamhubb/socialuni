@@ -1,5 +1,5 @@
 <template>
-  <view v-if="userProp" class="bg-theme-dark pb-100px">
+  <view v-if="userProp" class="bg-theme-light pb-100px">
     <view class="bg-white mb-sm">
       <view>
         <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
