@@ -15,10 +15,8 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -66,10 +64,9 @@ public class CenterOAuthService {
 
     //授权获取用户信息，根据appId知道授权给哪个商户的
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(DevAccountDO devAccountDO, UserDO mineUser, String authType) {
-        //获取开发者对应的账号
-        SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        SocialLoginRO<CenterMineUserDetailRO> loginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, authType, devAccountDO, socialMineUserDetailRO);
+
+        SocialLoginRO<CenterMineUserDetailRO> loginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, authType, devAccountDO);
 
         SocialOAuthUserRO socialOAuthUserRO = SocialOAuthUserROFactory.getSocialOAuthUserRO(loginRO.getUser());
 

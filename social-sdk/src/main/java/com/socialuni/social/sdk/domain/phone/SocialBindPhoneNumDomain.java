@@ -34,6 +34,9 @@ public class SocialBindPhoneNumDomain {
         //根据用户得到返回详情
         SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
+        //返回真实手机号
+        socialMineUserDetailRO.setPhoneNum(phoneNum);
+
         return socialMineUserDetailRO;
     }
 }

@@ -2,34 +2,33 @@ package com.socialuni.center.web.insystem.qingchi;
 
 import com.socialuni.api.model.RO.devAccount.DevAccountRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.sdk.mode.DevAccountDO;
 import com.socialuni.center.sdk.mode.DevAccountProviderDO;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.manage.DevAccountManage;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
+import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.social.sdk.domain.login.SocialProviderLoginDomain;
 import com.socialuni.social.sdk.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.domain.phone.SocialBindWxPhoneNumDomain;
-import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.social.sdk.entity.user.SocialProviderLoginEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -47,7 +46,7 @@ public class QingchiService {
     @Resource
     private SocailSendAuthCodeDomain socailSendAuthCodeDomain;
     @Resource
-    SocialPhoneLoginDomain socialPhoneLoginDomain;
+    private SocialPhoneLoginEntity socialPhoneLoginEntity;
     @Resource
     private AuthThirdUserDomain authThirdUserDomain;
     @Resource
@@ -56,6 +55,8 @@ public class QingchiService {
     private DevAccountManage devAccountManage;
     @Resource
     private DevAccountProviderRepository devAccountProviderRepository;
+    @Resource
+    SocialProviderLoginEntity socialProviderLoginEntity;
 
     private DevAccountDO checkIsQingchiApp() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
@@ -72,12 +73,12 @@ public class QingchiService {
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
 //        loginQO.setDevId(devAccountDO.getId());
-        SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
 
-        UserDO mineUser = SocialUserUtil.get(socialLoginRO.getUser().getId());
+        //创建或返回
+        UserDO mineUser = socialProviderLoginEntity.providerLogin(loginQO);
 
         //中心授权
-        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.user, devAccountDO, socialLoginRO.getUser());
+        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.user, devAccountDO);
         return ResultRO.success(centerLoginRO);
     }
 
@@ -86,10 +87,9 @@ public class QingchiService {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
-        SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
-        UserDO mineUser = SocialUserUtil.get(socialLoginRO.getUser().getId());
+        UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
         //中心授权
-        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO, socialLoginRO.getUser());
+        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
         return ResultRO.success(centerLoginRO);
     }
 
