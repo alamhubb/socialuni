@@ -18,6 +18,26 @@ module.exports = {
     require('autoprefixer')({
       remove: process.env.UNI_PLATFORM !== 'h5'
     }),
-    require('@dcloudio/vue-cli-plugin-uni/packages/postcss')
+    require('@dcloudio/vue-cli-plugin-uni/packages/postcss'),
+    require('@fullhuman/postcss-purgecss')({
+      content: ['./public/**/*.html', './src/**/*.vue'],
+      defaultExtractor (content) {
+        const contentWithoutStyleBlocks = content.replace(
+          /<style[^]+?<\/style>/gi,
+          ''
+        )
+        return (
+          contentWithoutStyleBlocks.match(
+            /[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g
+          ) || []
+        )
+      },
+      safelist: [
+        /-(leave|enter|appear)(|-(to|from|active))$/,
+        /^(?!(|.*?:)cursor-move).+-move$/,
+        /^router-link(|-exact)-active$/,
+        /data-v-.*/
+      ]
+    })
   ]
 }
