@@ -92,7 +92,7 @@ import PageUtil from '../../utils/PageUtil'
 import SystemStoreProp from '../../store/SystemStoreProp'
 import LoginFooterAppInfo from '../SocialLogin/LoginFooterAppInfo.vue'
 import UserPrivacyAgreement from '../SocialLogin/UserPrivacyAgreement.vue'
-import SocialUniAuthQO from '../../model/openData/SocialUniAuthQO'
+import SocialuniAuthQO from '../../model/openData/SocialuniAuthQO'
 import UniUtil from '../../utils/UniUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MockService from '@/socialuni/service/MockService'
@@ -161,7 +161,7 @@ export default class SocialLogin extends Vue {
     if (socialAppModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
-      const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.phone)
+      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
     }
   }
