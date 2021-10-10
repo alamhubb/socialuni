@@ -8,7 +8,7 @@
     <view v-show="!showTagSearch" class="flex-col h100vh bg-theme">
       <q-navbar class="flex-none" :custom-class="'bg-theme'">
         <q-search class="flex-auto" @click.native="openTagSearchVue">
-          <q-icon class="mx-5px text-gray" size="16" icon="search"></q-icon>
+          <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
             <view class="cu-tag round bg-green-plain light row-all-center">
               {{ selectTag.name }}
@@ -76,7 +76,7 @@
       </q-popup>
 
       <!--  #ifdef APP-PLUS -->
-      <!-- <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>-->
+      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
       <!--  #endif -->
 
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>

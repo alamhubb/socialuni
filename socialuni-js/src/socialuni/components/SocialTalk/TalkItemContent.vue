@@ -3,7 +3,7 @@
     <text class="card-text text-dff" @click="toTalkDetailVue" selectable>
       {{ talk.content }}
     </text>
-    <view v-if="talk.imgs.length" class="card-text-row mt-10px" @click="toTalkDetailVue">
+    <view v-if="talk.imgs.length" class="card-text-row mt-10" @click="toTalkDetailVue">
       <image mode="aspectFill" class="card-text-img" v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
              :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}"
              :src="getTalkSmallImgUrl(talk.user.id,img.src)"
@@ -11,7 +11,7 @@
              @click.stop="previewImage(index)"
       ></image>
     </view>
-    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center px-smm pt-10px"
+    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center px-smm pt-10"
           @click="toTalkDetailVue">
       <view class="flex-row">
         <view class="cu-tag round bg-orange light">
@@ -50,7 +50,7 @@
     <view v-if="talk.tags&&talk.tags.length && !talk.globalTop || talk.globalTop===1" class="card-text-row grid"
           @click="toTalkDetailVue">
       <view v-for="tag in talk.tags" :key="tag.id"
-            class="cu-tag round bg-pink light mt-10px">
+            class="cu-tag round bg-pink light mt-10">
         #{{ tag.name }}
       </view>
     </view>

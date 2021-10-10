@@ -109,7 +109,7 @@
               获取您的昵称、头像、地区及性别
             </q-row>
             <view class="flex-row py-sm solid-bottom">
-              <view class="w100r card-title pb-10px">
+              <view class="w100r card-title pb-10">
                 <image
                   class="card-title-avatar"
                   mode="aspectFill"
@@ -117,10 +117,10 @@
                 />
                 <view class="row-between flex-auto">
                   <view>
-                    <view class="h25px row-col-center">
+                    <view class="h25 row-col-center">
                       <text class="text-md">{{ user.nickname }}</text>
                     </view>
-                    <view class="text-gray font-xs h25px row-col-center">
+                    <view class="text-gray font-xs h25 row-col-center">
                       清池个人信息
                     </view>
                   </view>

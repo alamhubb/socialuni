@@ -1,5 +1,5 @@
 <template>
-  <view class="card-title pb-10px" @click="toUserDetailVue">
+  <view class="card-title pb-10" @click="toUserDetailVue">
     <image
       class="card-title-avatar"
       mode="aspectFill"
@@ -7,22 +7,22 @@
     />
     <view class="row-between flex-auto">
       <view>
-        <view class="h25px row-col-center">
+        <view class="h25 row-col-center">
           <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>
-          <view v-if="!talk.globalTop" class="ml-5px cu-tag sm radius text-sm row-col-center"
+          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
                 :class="[getGenderBgColor(talk.user)]">
             {{ talk.user.age }}
             <q-icon class="ml-nn"
                     size="12"
                     :icon="getGenderIcon(talk.user)"/>
           </view>
-          <view v-if="talk.user.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm font-bold"
+          <view v-if="talk.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
                 @click.stop="openVip">
             VIP
           </view>
           <!--    如果爱心值不为0，且大于正义值显示爱心值-->
           <view v-else-if="talk.user.loveValue&& talk.user.loveValue>talk.user.justiceValue"
-                class="ml-5px cu-capsule radius"
+                class="ml-5 cu-capsule radius"
                 @click.stop="toLoveValuePage">
             <view class='cu-tag bg-red sm'>
               <q-icon icon="heart"/>
@@ -33,7 +33,7 @@
           </view>
           <!--    如果正义值不为0，且大于等于爱心值显示正义值-->
           <view v-else-if="talk.user.justiceValue&& talk.user.justiceValue >= talk.user.loveValue"
-                class="ml-5px cu-capsule radius"
+                class="ml-5 cu-capsule radius"
                 @click.stop="hintJusticeInfo">
             <view class='cu-tag bg-green sm'>
               <q-icon icon="mdi-sword-cross"/>
@@ -45,14 +45,14 @@
             </view>
           </view>
         </view>
-        <view class="text-gray text-sm h25px row-col-center">
+        <view class="text-gray text-sm h25 row-col-center">
           最新回复：{{ talk.updateTime| formatTime }}
-          <view v-if="talk.globalTop" class="ml-5px sm cu-tag round bg-red light">
+          <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
             官方
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
           <text v-if="isMine"
-                class="ml-5px color-blue-dark"
+                class="ml-5 color-blue-dark"
                 @click.stop="confirmDeleteTalk">
             删除
           </text>

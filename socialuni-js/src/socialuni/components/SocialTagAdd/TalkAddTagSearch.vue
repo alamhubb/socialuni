@@ -2,7 +2,7 @@
   <view>
     <view class="cu-bar bg-white search">
       <view class="search-form round">
-        <q-icon class="mx-5px text-gray" icon="search"></q-icon>
+        <q-icon class="mx-5 text-gray" icon="search"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView"
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
         <q-icon v-if="searchContent" class="mr text-gray" icon="close"
@@ -36,10 +36,10 @@
           已选话题：
         </view>
         <view class="grid">
-          <view v-for="tag in selectTags" :key="tag.id" class="row-col-center pb-10px px-mn">
+          <view v-for="tag in selectTags" :key="tag.id" class="row-col-center pb-10 px-mn">
             <view class="q-tag q-round bg-pink-plain">
               #{{tag.name}}
-              <q-icon v-if="tag.id" class="ml-5px" icon="close-circle-fill" size="16"
+              <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
                       @click="deleteTag(tag)"></q-icon>
             </view>
           </view>
@@ -48,7 +48,7 @@
           热门话题：
         </view>
         <view class="grid">
-          <view v-for="tag in showTags" :key="tag.id" class="row-center pb-10px px-mn">
+          <view v-for="tag in showTags" :key="tag.id" class="row-center pb-10 px-mn">
             <view class="q-tag q-round bg-pink-plain"
                   @click="checkTag(tag)">
               #{{tag.name}}

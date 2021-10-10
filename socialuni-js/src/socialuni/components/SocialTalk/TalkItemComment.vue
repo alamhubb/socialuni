@@ -1,11 +1,11 @@
 <template>
   <view>
-    <view class="card-actions pt-10px row-between">
+    <view class="card-actions pt-10 row-between">
       <view class="row-end flex-auto">
         <view class="row-col-center button-icon" @click="setTalk" hover-class="uni-list-cell-hover">
           <q-icon icon="mdi-comment-outline" size="24">
           </q-icon>
-          <text v-if="talk.commentNum" class="ml-5px">
+          <text v-if="talk.commentNum" class="ml-5">
             {{talk.commentNum}}
           </text>
         </view>
@@ -17,16 +17,16 @@
             <text>
               抱抱
             </text>
-            <q-icon class="ml-5px" size="24"
+            <q-icon class="ml-5" size="24"
                     :icon="getHugIcon(talk.hasHugged)"
                     :class="[getHugColor(talk.hasHugged)]"
             ></q-icon>
-            <text v-if="talk.hugNum" class="ml-5px">
+            <text v-if="talk.hugNum" class="ml-5">
               {{talk.hugNum}}
             </text>
           </view>
         </view>
-        <view class="ml-30px button-icon row-col-center" @click="openReportDialog"
+        <view class="ml-30 button-icon row-col-center" @click="openReportDialog"
               hover-class="uni-list-cell-hover">
           <q-icon icon="more-dot-fill"></q-icon>
         </view>

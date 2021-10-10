@@ -79,10 +79,10 @@
           已选话题：
         </view>
         <view class="row-grid">
-          <view v-for="tag in selectTags" :key="tag.id" class="pb-10px px-mn">
+          <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
             <view class="q-tag q-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
-              <q-icon v-if="tag.id" class="ml-5px" icon="close-circle-fill" size="16"
+              <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
                       @click.native.stop="deleteTag(tag)"/>
             </view>
           </view>
@@ -91,15 +91,15 @@
           热门话题：
         </view>
         <view class="row-wrap">
-          <view v-for="tag in unSelectTags" :key="tag.id" class="pb-10px px-mn">
+          <view v-for="tag in unSelectTags" :key="tag.id" class="pb-10 px-mn">
             <view class="q-tag q-round bg-pink-plain" @click="checkTag(tag)">
               #{{ tag.name }}
             </view>
           </view>
-          <view class="row-all-center pb-10px px-mn">
+          <view class="row-all-center pb-10 px-mn">
             <view class="q-tag q-round bg-orange-plain" @click="openTagSearchVue(false)">
               更多
-              <q-icon icon="arrow-right" class="ml-5px"/>
+              <q-icon icon="arrow-right" class="ml-5"/>
             </view>
           </view>
         </view>

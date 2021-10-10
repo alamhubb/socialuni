@@ -1,5 +1,5 @@
 <template>
-  <view v-if="userProp" class="bg-theme-light pb-100px">
+  <view v-if="userProp" class="bg-theme-light pb-100">
     <view class="bg-white mb-sm">
       <view>
         <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
@@ -20,7 +20,7 @@
           <view class="flex-auto flex-row px">
             单击图片预览，长按图片进行操作
           </view>
-          <view class="flex-none mr-10px">
+          <view class="flex-none mr-10">
             <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
           </view>
         </view>
@@ -41,7 +41,7 @@
                 <view class="cu-tag radius text-df"
                       :class="[getGenderBgColor(userProp)]">
                   {{ userProp.age }}
-                  <q-icon class="row-col-start ml-2px" size="14"
+                  <q-icon class="row-col-start ml-2" size="14"
                           :icon="getGenderIcon(userProp)"/>
                 </view>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
@@ -82,7 +82,7 @@
             <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
                                 @click="toMessagePage">
                           私信
-                          &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2px">(10B)</text>&ndash;&gt;
+                          &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
                         </button>-->
             <button class="cu-btn round bd-blue px-smm bg-theme" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
@@ -93,7 +93,7 @@
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
-          <view class="ml-5px cu-capsule radius" @click="hintJusticeInfo">
+          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
             <view class='cu-tag bg-green'>
               <q-icon size="18" icon="mdi-sword-cross"/>
             </view>
@@ -133,7 +133,7 @@
             社交联盟：
             <view v-if="userProp.bindSocialuni">
               {{ userProp.socialuniNickname }}
-              <view class="ml-10px sm cu-tag bg-white bd-gray radius">
+              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
                 已绑定
               </view>
             </view>
@@ -151,7 +151,7 @@
             手机号(仅自己可见)：
             <view v-if="userProp.phoneNum">
               {{ userProp.phoneNum }}
-              <view class="ml-10px sm cu-tag bg-white bd-gray radius">
+              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
                 已绑定
               </view>
             </view>
@@ -177,10 +177,10 @@
                     </button>
                   </view>
                   <view v-else>
-                    <view class="ml-10px sm cu-tag bg-blue radius" v-if="userProp.isSelfAuth">
+                    <view class="ml-10 sm cu-tag bg-blue radius" v-if="userProp.isSelfAuth">
                       已认证
                     </view>
-                    <view class="ml-10px sm cu-tag bg-white bd-gray radius" v-else>
+                    <view class="ml-10 sm cu-tag bg-white bd-gray radius" v-else>
                       未认证
                     </view>
                   </view>
@@ -189,7 +189,7 @@
         <!--<view v-if="userProp.wxAccount" class="row-col-center q-solid-bottom">
           微信：
           <text selectable>{{userProp.wxAccount}}</text>
-          <button class="cu-btn radius sm bd-blue ml-10px bg-white"
+          <button class="cu-btn radius sm bd-blue ml-10 bg-white"
                   @click="copyText(userProp.wxAccount)">
             复制
           </button>
@@ -267,7 +267,7 @@
                 <radio :id="report" :value="report" :checked="report===pornInfo"></radio>
               </view>
               <view>
-                <label class="ml-10px" :for="report">
+                <label class="ml-10" :for="report">
                   <text>{{ report }}</text>
                 </label>
               </view>
@@ -292,16 +292,16 @@
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
     <!--  #ifdef MP-WEIXIN -->
-    <ad v-if="talks.length>1" class="bg-white mb-5px w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
+    <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
         ad-theme="white"></ad>
     <!--  #endif -->
     <!--qq平台显示的广告-->
     <!--  #ifdef MP-QQ -->
-    <ad v-if="talks.length>0" class="bg-white mb-5px w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
+    <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
         type="feeds" ad-height="160"></ad>
     <!--  #endif -->
     <!--  #ifdef APP-PLUS -->
-    <ad v-if="talks.length>0" class="bg-white mb-5px w100vw" adpid="1890536227"></ad>
+    <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
 
     <view v-for="talk in talks" :key="talk.id" class="px-sm">
@@ -310,14 +310,14 @@
 
     <!--wx平台显示的广告-->
     <!--  #ifdef MP-WEIXIN -->
-    <ad class="bg-white mt-10px w100vw" unit-id="adunit-ffa7bc1c73c7d46a"></ad>
+    <ad class="bg-white mt-10 w100vw" unit-id="adunit-ffa7bc1c73c7d46a"></ad>
     <!--  #endif -->
     <!--qq平台显示的广告-->
     <!--  #ifdef MP-QQ -->
-    <ad class="bg-white mt-10px w100vw" unit-id="b10fe0e7c39b9ca9e7ce19660f6d0761" test-banner-type="one"></ad>
+    <ad class="bg-white mt-10 w100vw" unit-id="b10fe0e7c39b9ca9e7ce19660f6d0761" test-banner-type="one"></ad>
     <!--  #endif -->
     <!--  #ifdef APP-PLUS -->
-    <ad class="bg-white mt-10px w100vw" adpid="1890536227"></ad>
+    <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
     <uni-popup ref="editPopup" type="center">
       <user-edit @close="closeUserEditPop"></user-edit>

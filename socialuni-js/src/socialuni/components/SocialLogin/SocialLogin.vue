@@ -8,7 +8,7 @@
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
       </div>
 
-      <view class="mt-xs h145px">
+      <view class="mt-xs h145">
         <view class="h120 row-center">
           <!--          头部-->
 

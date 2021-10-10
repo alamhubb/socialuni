@@ -91,7 +91,7 @@
         -->
       </view>
     </view>
-    <view class="cu-bar btn-group bg-white flex-none pt-5px pb-sm">
+    <view class="cu-bar btn-group bg-white flex-none pt-5 pb-sm">
       <button class="cu-btn bd-gray radius bg-white" @click="closeUserEditPop">取消</button>
       <button class="cu-btn bg-green radius" @click="saveUser" :disabled="btnDisabled">保存</button>
     </view>

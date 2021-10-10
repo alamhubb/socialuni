@@ -25,7 +25,7 @@
                 <radio :id="report" :value="report" :checked="report===pornInfo"></radio>
               </view>
               <view>
-                <label class="ml-10px" :for="report">
+                <label class="ml-10" :for="report">
                   <text>{{ report }}</text>
                 </label>
               </view>

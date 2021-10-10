@@ -3,7 +3,7 @@
     <q-navbar v-if="value">
       <q-icon class="ml" icon="arrow-leftward" @click="input"></q-icon>
       <q-search class="flex-auto">
-        <q-icon class="mx-5px text-gray" icon="search" size="16"></q-icon>
+        <q-icon class="mx-5 text-gray" icon="search" size="16"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
         <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"

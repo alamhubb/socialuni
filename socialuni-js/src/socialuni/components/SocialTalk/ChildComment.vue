@@ -1,12 +1,12 @@
 <template>
-    <view v-if="comment.childComments" class="pl-15px">
+    <view v-if="comment.childComments" class="pl-15">
         <block v-for="(childComment,index) in comment.childComments" :key="childComment.id">
             <view v-if="index<childCommentShowNum" class="flex-row py-mn">
                 <!--            {{childComment.no}}#-->
                 <text :class="comment.user.vipFlag?'text-red':'color-blue-dark'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
                 <view class="flex-sub row-col-center" @click="setReplyComment(talk,comment,childComment)">
                     <text v-if="childComment.replyComment">
-                        <text class="mx-5px">回复</text>
+                        <text class="mx-5">回复</text>
                         <!--                {{childComment.replyComment.no}}#-->
                         <text class="color-blue-dark" @click.stop="toUserDetail(childComment.replyComment.user.id)">
                             {{childComment.replyComment.user.nickname}}
@@ -17,7 +17,7 @@
                 </view>
             </view>
         </block>
-        <view v-show="comment.childCommentNum>childCommentShowNum || showOtherCommentClicked" class="pt-2px">
+        <view v-show="comment.childCommentNum>childCommentShowNum || showOtherCommentClicked" class="pt-2">
             <view class="font-orange row-col-center" @click="toggleOtherComments">
                 <view v-show="comment.childCommentNum>childCommentShowNum">
                     查看其余{{comment.childCommentNum- childCommentShowNum}}条回复

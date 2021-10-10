@@ -12,14 +12,14 @@
           <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
         </template>
       </q-tabs>
-      <view class="row-col-center mr-60px" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
+      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
         <view v-if="talkTabObj.loadMore===loading">
           <u-loading mode="circle"></u-loading>
         </view>
         <q-icon v-else size="18" icon="reload"></q-icon>
       </view>
       <!--<view class="px-sm">
-        <view class="w12px"></view>
+        <view class="w12"></view>
       </view>-->
     </q-row-bar>
 
@@ -52,7 +52,7 @@
                      :lower-threshold="800"
                      @scroll="talksScrollEvent">
           <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-          <div class="px-sm pb-60px"
+          <div class="px-sm pb-60"
                v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
             <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
               <talk-item :talk="talk"
@@ -61,26 +61,26 @@
               />
               <!-- app端广告有问题-->
               <!--  #ifdef APP-PLUS -->
-              <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5px">
+              <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
                 <ad class="bg-white" adpid="1890536227"></ad>
               </view>-->
               <!--  #endif -->
               <!--wx平台显示的广告-->
               <!--  #ifdef MP-WEIXIN -->
               <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5px" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+                  class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
               <!--  #endif -->
 
               <!--qq平台显示的广告-->
               <!--  #ifdef MP-QQ -->
               <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5px" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+                  class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
               <!--  #endif -->
 
               <!--头条平台显示的广告-->
               <!--  #ifdef MP-TOUTIAO -->
               <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5px" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+                  class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
               <!--  #endif -->
             </view>
             <!-- 下拉刷新组件 -->
@@ -90,10 +90,10 @@
             </view>
           </div>
           <template v-else>
-            <view v-if="user" class="row-center h500 pt-100px font-bold text-gray text-md">
+            <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
               您还没有关注其他人
             </view>
-            <view v-else class="row-center h500 pt-100px font-bold text-gray text-md" @click="toLoginVue">
+            <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
               您还没有登录，点击登录
             </view>
           </template>
