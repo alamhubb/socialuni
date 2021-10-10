@@ -30,12 +30,6 @@ export default class SocialMinxinVue extends Vue {
     UniUtil.showShareMenu()
   }
 
-  onLoad (params) {
-    if (!this.isAppPage) {
-      socialRouterModule.params = params
-    }
-  }
-
   onShow (params) {
     if (this.isAppPage) {
       //避免已打开情况，进入不为lunchan而是show
