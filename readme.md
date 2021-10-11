@@ -1,5 +1,7 @@
 ## 社交联盟项目模板(包含前后端代码)
 
+项目地址 https://gitee.com/socialuni/socialuni/blob/master/readme.md
+
 前端代码使用 socialuni-js项目
 后端代码使用 socialuni-demo项目
 
