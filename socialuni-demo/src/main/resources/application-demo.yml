@@ -43,9 +43,9 @@ server:
     key-store-type: JKS
 spring:
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:mysql://bj-cynosdbmysql-grp-8819v0ae.sql.tencentcdb.com:25014/social_demo?characterEncoding=utf-8&useSSL=false
+    username: social_demo996
+    password: social_demo996
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       read-only: false
