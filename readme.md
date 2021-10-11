@@ -74,7 +74,7 @@ uniapp chat Community Dating Social app
 * 提供社交领域的前后端基础业务组件和用户授权开放的用户数据
 
 ### 功能详细介绍
-- [ ] <font color=red>***重点*** ，提供用户授权开放数据的免费互通功能，(类似于可支撑，探探和soul之间的用户互相聊天发送消息，评论动态的功能)，未支持</font>
+- [x] <font color=red>***重点*** ，提供用户授权开放数据的免费互通功能，(类似于可支撑，探探和soul之间的用户互相聊天发送消息，评论动态的功能)，已支持</font>
 - [x] <font color=blue>清池app已运营的生产环境前端源码已开源(vue + uni-app)</font>，已支持
 - [x] <font color=blue>清池app已运营的生产环境后端源码已开源(java)</font>，已支持
 - [x] <font color=blue>支持社区、私聊、群聊、颜值匹配功能</font>，已支持
