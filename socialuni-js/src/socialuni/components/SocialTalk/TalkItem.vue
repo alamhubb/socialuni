@@ -15,12 +15,12 @@ import TalkItemContent from './TalkItemContent.vue'
 import TalkItemComment from './TalkItemComment.vue'
 
 @Component({
-    components: {
-      TalkItemComment,
-      TalkItemContent,
-      TalkItemHead
-    }
-  })
+  components: {
+    TalkItemComment,
+    TalkItemContent,
+    TalkItemHead
+  }
+})
 export default class TalkItem extends Vue {
     @Prop() talk: TalkVO
     @Prop() talkTabType: string

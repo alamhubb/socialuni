@@ -19,11 +19,11 @@ $color-white: #fff;
 $color-black: #000;
 
 //主题色
-$color-bg-theme: #FCD34D;
+$color-bg-theme: $color-white;
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
 $color-theme: $color-default;
 //主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
-$color-bg-theme-light: #FEF3C7;
+$color-bg-theme-light: $color-bg-default;
 
 $color-primary: $color-blue;
 $color-error: $color-red;

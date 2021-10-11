@@ -98,12 +98,12 @@ import QRowItem from '../q-row-item/q-row-item.vue'
 import QIcon from '../q-icon/q-icon.vue'
 import { namespace } from 'vuex-class'
 import TagUtil from '../../utils/TagUtil'
-import QNavbar from "../q-navbar/q-navbar.vue";
-import QSearch from "../q-search/q-search.vue";
-import QCard from "../q-card/q-card.vue";
-import QCardRow from "../q-card-row/q-card-row.vue";
-import QCardGrid from "../q-card-grid/q-card-grid.vue";
-import QSidebar from "../q-sidebar/q-sidebar.vue";
+import QNavbar from '../q-navbar/q-navbar.vue'
+import QSearch from '../q-search/q-search.vue'
+import QCard from '../q-card/q-card.vue'
+import QCardRow from '../q-card-row/q-card-row.vue'
+import QCardGrid from '../q-card-grid/q-card-grid.vue'
+import QSidebar from '../q-sidebar/q-sidebar.vue'
 import { socialTagStore } from '../../store'
 
 
@@ -115,7 +115,8 @@ import { socialTagStore } from '../../store'
     QCard,
     QSearch,
     QNavbar,
-    QRowItem, QIcon
+    QRowItem,
+    QIcon
   }
 })
 export default class TagSearchPage extends Vue {

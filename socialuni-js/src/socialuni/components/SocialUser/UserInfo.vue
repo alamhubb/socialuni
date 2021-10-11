@@ -158,7 +158,7 @@
             <view v-else class="row-col-center">
               未绑定
               <button class="ml-xs cu-btn radius sm bg-orange"
-                      @click="toPhonePage">绑定社交联盟手机号
+                      @click="toPhonePage">绑定手机号
               </button>
             </view>
           </div>
@@ -582,12 +582,13 @@ export default class UserInfo extends Vue {
 
   async toPhonePage () {
     //开发模式模拟授权
-    if (socialAppModule.isDevMode) {
+    /*if (socialAppModule.isDevMode) {
       await MockService.mockBindSocialuniPhone()
     } else {
       const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
-    }
+    }*/
+    PageUtil.toPhonePage()
   }
 
   toIdentityAuth () {

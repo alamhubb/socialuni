@@ -20,7 +20,7 @@
       }
     },
     {
-      "path": "pages/login/login",
+      "path": "pages/phone/phone",
       "style": {
         "navigationStyle": "custom"
       }
