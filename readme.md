@@ -2,8 +2,8 @@
 
 项目地址 https://gitee.com/socialuni/socialuni
 
-前端代码使用 socialuni-js项目
-后端代码使用 socialuni-demo项目
+前端代码使用 socialuni-js项目 https://gitee.com/socialuni/socialuni/tree/master/socialuni-js
+后端代码使用 socialuni-demo项目 https://gitee.com/socialuni/socialuni/tree/master/socialuni-demo
 
 ##### 目前仅支持接入社交联盟的使用方式
 
