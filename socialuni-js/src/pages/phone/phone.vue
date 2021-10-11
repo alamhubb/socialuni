@@ -9,7 +9,7 @@
       </div>
 
       <view class="mt-xs h145px">
-        <view v-else class="h120 row-center">
+        <view class="h120 row-center">
           <!--          头部-->
 
           <!--          只有不为三方授权才显示logo-->
@@ -121,7 +121,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import PhoneLoginForm from '@/pages/login/PhoneLoginForm.vue'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
 import { socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
@@ -135,7 +134,6 @@ import PageUtil from '@/socialuni/utils/PageUtil'
 
 @Component({
   components: {
-    PhoneLoginForm,
     UserPrivacyAgreement,
     LoginFooterAppInfo
   }

@@ -59,8 +59,8 @@ public class CenterHomeTalkQueryDomain {
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
 
         //主要是校验appgender,只允许同性别用户使用，不同性别则要保证同性别
-        String appGender = DevAccountUtils.getAppGenderType();
         if (mineUser != null) {
+            String appGender = DevAccountUtils.getAppGenderType();
             String mineUserGender = mineUser.getGender();
             //app性别为女生，且用户不为女生提示错误
             if (appGender.equals(GenderType.girl) && !mineUserGender.equals(GenderType.girl)) {
