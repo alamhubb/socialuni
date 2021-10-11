@@ -39,7 +39,8 @@ module.exports = {
         /data-v-.*/,
         /uicon-.*/,
         /u-.*/,
-        /uni-.*/
+        /uni-.*/,
+        /page/
       ]
     })
   ]

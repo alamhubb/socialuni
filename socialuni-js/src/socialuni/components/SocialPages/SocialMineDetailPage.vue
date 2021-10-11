@@ -1,5 +1,5 @@
 <template>
-  <social-mine-detail></social-mine-detail>
+  <social-mine-detail class="h100p"></social-mine-detail>
 </template>
 
 <script lang="ts">

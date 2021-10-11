@@ -1,5 +1,5 @@
 <template>
-  <social-login-page></social-login-page>
+  <social-login-page class="h100p"></social-login-page>
 </template>
 
 <script lang="ts">
