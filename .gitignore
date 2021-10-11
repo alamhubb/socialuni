@@ -17,6 +17,4 @@ application-localdevprod.yml
 application-localprod.yml
 application-qingchi.yml
 application-qkypc.yml
-.env.development
-.env.production
 /socialuni-demo/src/main/resources/application-qkypc.yml
