@@ -12,6 +12,6 @@
 后端修改内容
 3. 修改后端项目内容，修改socialuni-demo项目src下的application-demo中的
 socialuni:
-    secret-key: ""，设置为自己的设计联盟秘钥
+    secret-key: ""，设置为自己的社交联盟秘钥
    
 然后分别启动后端和前端你项目，即可体验
