@@ -8,11 +8,13 @@ import lombok.Data;
  */
 @Data
 public class SocialOAuthUserRO {
-    private String id;
-    private String nickname;
-    private String avatar;
+    private String openId;
+    private String unionId;
+    private String avatarUrl;
+    private String nickName;
     private Integer gender;
-    private Integer age;
+    private String year;
     private String city;
-    private String phoneNum;
+    //这里不存手机号，因为没有意义，不能使用前台的手机号发给后台
+    //    private String phoneNum;
 }

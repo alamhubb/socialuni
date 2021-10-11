@@ -1,6 +1,7 @@
 package com.socialuni.social.model.model.RO.community.talk;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author qinkaiyuan
@@ -8,7 +9,13 @@ import lombok.Data;
  */
 
 @Data
+@NoArgsConstructor
 public class SocialTalkTagRO {
     public Integer id;
     public String name;
+
+    public SocialTalkTagRO(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

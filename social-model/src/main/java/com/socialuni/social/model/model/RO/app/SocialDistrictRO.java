@@ -2,6 +2,7 @@ package com.socialuni.social.model.model.RO.app;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @date 2019-10-30 14:08
  */
 @Data
-public class SocialDistrictRO {
+public class SocialDistrictRO implements Serializable {
     private Integer id;
     //省
     private String provinceName;

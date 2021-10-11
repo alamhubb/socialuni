@@ -2,6 +2,7 @@ package com.socialuni.social.model.model.QO.community.tag;
 
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class TagAddQO {
     @NotBlank
+    @Length(min = 2, max = 6)
     public String tagName;
     public String description;
 }

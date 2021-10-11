@@ -1,0 +1,14 @@
+//为什么有横杠，因为存在sm、md这种值
+@for $index from 1 through 100 {
+  .font-#{''+$index+''} {
+    font-size: #{''+$index}px;
+  }
+}
+
+.font-normal {
+  font-weight: normal;
+}
+
+.font-bold {
+  font-weight: bold;
+}

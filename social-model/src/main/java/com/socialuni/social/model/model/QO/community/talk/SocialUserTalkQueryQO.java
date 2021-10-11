@@ -1,6 +1,5 @@
 package com.socialuni.social.model.model.QO.community.talk;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,9 +12,13 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class SocialUserTalkQueryQO {
     @NotNull(message = "入参为空异常")
-    private String userId;
+    private Integer userId;
     private List<Integer> talkIds;
+
+    public SocialUserTalkQueryQO(Integer userId, List<Integer> talkIds) {
+        this.userId = userId;
+        this.talkIds = talkIds;
+    }
 }

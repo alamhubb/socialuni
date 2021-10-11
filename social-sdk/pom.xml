@@ -5,7 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>social-sdk</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>social-sdk</name>
     <description>Demo project for Spring Boot</description>
@@ -13,7 +12,8 @@
     <parent>
         <groupId>com.socialuni</groupId>
         <artifactId>socialuni-parent</artifactId>
-        <version>1.0.0</version>
+        <version>0.2.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -27,6 +27,34 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni</groupId>
+            <artifactId>cloud-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>socialuni-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-web-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-constant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-entity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
             <artifactId>social-model</artifactId>
         </dependency>
 
@@ -38,11 +66,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <!--审核内容时使用-->
@@ -110,17 +133,9 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -129,9 +144,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
         </dependency>
     </dependencies>
 </project>

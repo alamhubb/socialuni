@@ -1,7 +1,7 @@
 package com.socialuni.social.model.model.RO.community.comment;
 
 
-import com.socialuni.social.model.model.RO.user.SocialCommentUserRO;
+import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,11 +23,11 @@ public class SocialCommentRO {
      */
     private Date createTime;
 
-    private SocialCommentUserRO user;
+    private SocialUserRO user;
 
     private List<SocialCommentRO> childComments;
 
-    private ReplyCommentRO replyComment;
+    private SocialReplyCommentRO replyComment;
 
     /**
      * 评论数量，子评论数量

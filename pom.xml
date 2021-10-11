@@ -3,40 +3,81 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.9.RELEASE</version>
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.socialuni</groupId>
     <artifactId>socialuni-parent</artifactId>
-    <version>1.0.0</version>
+    <version>0.2.0</version>
     <packaging>pom</packaging>
 
     <name>socialuni-parent</name>
     <description>qingchi_back project for Spring Boot</description>
 
     <modules>
-        <module>socialuni-api</module>
-        <module>socialuni-model</module>
-        <module>social-sdk</module>
+        <module>social-constant</module>
+        <module>social-utils</module>
+        <module>social-entity</module>
         <module>social-model</module>
+        <module>social-api-model</module>
+        <module>social-exception</module>
+        <module>social-sdk</module>
+        <module>social-web-sdk</module>
+        <module>social-demo</module>
+        <module>socialuni-demo</module>
+        <module>socialuni-api</module>
+        <module>socialuni-utils</module>
+        <module>socialuni-center-web</module>
+        <module>socialuni-center-sdk</module>
+        <module>socialuni-admin-web</module>
+        <module>cloud-service</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
-        <socialuni.version>1.0.0</socialuni.version>
+        <socialuni.version>0.2.0</socialuni.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-boot.version>2.3.9.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <qcloudsms.version>1.0.6</qcloudsms.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-api</artifactId>
+                <artifactId>social-constant</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-model</artifactId>
+                <artifactId>social-utils</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-entity</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-model</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-api-model</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>social-exception</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
@@ -46,20 +87,46 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>social-model</artifactId>
+                <artifactId>social-web-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <!-- 所有依赖包的版本控制统一 -->
-                <type>pom</type>
-                <!--    仅支持type=pom，仅用来pom间互相引用，减少父pom体积-->
-                <scope>import</scope>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-api</artifactId>
+                <version>${socialuni.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-center-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-utils</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>cloud-service</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.qcloudsms</groupId>
+                <artifactId>qcloudsms</artifactId>
+                <version>${qcloudsms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <scope>provided</scope>
+                <version>${lombok.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

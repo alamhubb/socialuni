@@ -1,0 +1,124 @@
+//生成样式类
+//白色不区分 主题类，始终同一配色，白色样式特殊单独写
+.bg-white {
+  color: $color-default;
+  background-color: $color-white;
+  border-color: $color-border-default;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.bg-disabled {
+  background-color: rgba(245, 206, 231, 0.12);
+}
+
+.bg-active:active {
+  opacity: 0.5;
+}
+
+.bg-hover:hover {
+  background-color: #f7f7f7;
+}
+
+.bg-opacity {
+  opacity: 0;
+}
+
+.bg-shadow {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.bg-modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.bg-transparent {
+  background: rgba(0, 0, 0, 0);
+}
+
+.bg-half-transparent {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+//遍历颜色
+//遍历主题类，plain dark light
+//遍历size
+//默认dark
+@mixin bg-dark($color) {
+  //如果为白色
+  @if $color == $color-white {
+    @extend .bg-white;
+  } @else {
+    //深色主题，字体白色，其他主题色
+    background-color: $color;
+    border-color: $color;
+  }
+}
+
+//朴素盒子
+@mixin bg-plain($color) {
+  //如果为白色
+  @if $color == $color-white {
+    @extend .bg-white;
+  } @else {
+    //朴素主题，背景白色，其他主题色
+    background-color: $color-white;
+    border-color: $color;
+  }
+}
+
+//亮色盒子
+@mixin bg-light($color) {
+  //如果为白色
+  @if $color == $color-white {
+    @extend .bg-white;
+  } @else {
+    //亮色主题，色彩主题，其他根据色彩百分比设置
+    background: mix($color-white, $color, $percent-light-bg);
+    border-color: mix($color-white, $color, $percent-light-border);
+  }
+}
+
+
+@mixin bg-color-type($color,$type) {
+  @if $color == $color-white {
+    @extend .bg-white;
+  } @else {
+    @if ($type == dark) {
+      //深色主题
+      @include bg-dark($color)
+    } @else if ($type == light) {
+      //浅色主题
+      @include bg-light($color)
+    } @else if ($type == plain) {
+      //朴素主题
+      @include bg-plain($color)
+    }
+  }
+}
+
+@mixin bg-color($color) {
+  //默认dark类
+  @include bg-color-type($color, dark);
+  //遍历颜色类型，深浅朴素
+  @each $key, $val in $color-types {
+    &.#{''+$key+''} {
+      @include bg-color-type($color, $key);
+    }
+  }
+}
+
+@each $key, $val in $colors-bg {
+  .bg-#{''+$key+''} {
+    @include bg-color($val);
+  }
+
+  @each $typeKey, $type in $color-types {
+    .bg-#{''+$key+''}-#{''+$typeKey+''} {
+      @include bg-color-type($val, $type);
+    }
+  }
+}
+

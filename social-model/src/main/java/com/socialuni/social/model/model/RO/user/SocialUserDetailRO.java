@@ -21,7 +21,6 @@ public class SocialUserDetailRO extends SocialUserFollowDetailRO {
 
     public SocialUserDetailRO(SocialUserDetailRO userRO) {
         super(userRO);
-
         this.imgs = userRO.getImgs();
     }
 }

@@ -45,4 +45,9 @@ public class SocialProviderLoginQO {
 
     //暂未使用
     private String inviteCode;
+
+    //无后台，借用联盟后台实现渠道登录时使用,逻辑太复杂，暂不支持，需要维持多个开发者账号的关系
+//    private String appId;
+//    private String secret;
+//    private Integer devId;
 }

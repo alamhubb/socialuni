@@ -1,6 +1,6 @@
 package com.socialuni.api.feignAPI;
 
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @RequestMapping("district")
-@FeignClient(name = "district", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "district", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniDistrictAPI {
     @PostMapping("queryHotDistricts")
     ResultRO<List<SocialDistrictRO>> queryHotDistricts();

@@ -1,6 +1,6 @@
 package com.socialuni.api.feignAPI;
 
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @RequestMapping("notify")
-@FeignClient(name = "notify", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "notify", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniNotifyAPI {
     @PostMapping("queryNotifies")
     ResultRO<List<SocialUnreadNotifyVO>> queryNotifies();

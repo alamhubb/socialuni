@@ -1,9 +1,9 @@
 package com.socialuni.api.feignAPI;
 
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
-import com.socialuni.social.model.model.RO.ResultRO;
-import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
+import com.socialuni.api.model.QO.comment.CenterCommentDeleteQO;
+import com.socialuni.api.model.QO.comment.CenterCommentPostQO;
+import com.socialuni.api.model.RO.talk.CenterCommentRO;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @RequestMapping("comment")
-@FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniCommentAPI {
     @PostMapping("postComment")
-    ResultRO<SocialCommentRO> postComment(@RequestBody @Valid SocialCommentPostQO commentVO);
+    ResultRO<CenterCommentRO> postComment(@RequestBody @Valid CenterCommentPostQO commentVO);
 
     @PostMapping("deleteComment")
-    ResultRO<Void> deleteComment(@RequestBody @Valid SocialCommentDeleteQO commentVO);
+    ResultRO<Void> deleteComment(@RequestBody @Valid CenterCommentDeleteQO commentVO);
 }

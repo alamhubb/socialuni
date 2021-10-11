@@ -1,7 +1,7 @@
 package com.socialuni.api.feignAPI;
 
 
-import com.socialuni.social.model.model.RO.ResultRO;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @RequestMapping("chat")
-@FeignClient(name = "chat", url = "${socialuni.server-url:https://api.socialuni.com}")
+@FeignClient(name = "chat", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniChatAPI {
     @PostMapping("readChat")
     ResultRO<?> readChatMessages(@RequestBody @Valid ChatReadVO chatVO);
@@ -28,7 +28,7 @@ public interface SocialuniChatAPI {
     ResultRO<List<ChatRO>> queryHomeChat();
 
     @PostMapping("queryChats")
-    ResultRO<List<ChatRO>> queryChatList();
+    ResultRO<List<ChatRO>> queryChats();
 
     /*@PostMapping("queryChat")
     ResultRO<ChatVO> queryChat(@RequestBody @Valid UserIdVO receiveUserVO);

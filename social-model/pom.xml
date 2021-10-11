@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>social-model</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>social-model</name>
@@ -13,8 +12,8 @@
     <parent>
         <groupId>com.socialuni</groupId>
         <artifactId>socialuni-parent</artifactId>
-        <version>1.0.0</version>
-        <relativePath/>
+        <version>0.2.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -26,6 +25,15 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-api-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
