@@ -1,8 +1,8 @@
 spring:
   profiles:
-    active: devprod
+#    active: devprod
 #    active: localdevprod
-#    active: local
+    active: local
 #    active: prod
 #    active: localprod
   jpa:
