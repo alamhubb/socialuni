@@ -1,0 +1,2 @@
+提供给socialuni-api使用。
+可以避免socialuni-api引入social-sdk

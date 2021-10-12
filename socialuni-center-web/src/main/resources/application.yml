@@ -1,0 +1,31 @@
+spring:
+  profiles:
+#    active: devprod
+#    active: localdevprod
+    active: local
+#    active: prod
+#    active: localprod
+  jpa:
+    database: MYSQL
+#    show-sql: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+  #不要为我们工程中的资源文件建立映射
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:mapper/*.xml
+logging:
+  file:
+    name: socialuni.log

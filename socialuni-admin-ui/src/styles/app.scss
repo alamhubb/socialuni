@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+  color: #303133;
+  font-size: 14px;
+  line-height: 1.4;
+  //background-color: #FAFAFA;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+.y-piece {
+  width: 2px;
+  height: 12px;
+  background-color: #409EFF;
+}
+
+.y-piece-xs {
+  width: 3px;
+  height: 16px;
+  background-color: #409EFF;
+}
+
+.y-piece-md {
+  width: 4px;
+  height: 18px;
+  background-color: #409EFF;
+}
+
+.y-piece-lg {
+  width: 6px;
+  height: 22px;
+  background-color: #409EFF;
+}
+
+.y-piece-xl {
+  width: 8px;
+  height: 32px;
+  background-color: #409EFF;
+}
+
+//不显示滚动条
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+//调整滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  top: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: rgba(144, 147, 153, .3);
+}
+
+a {
+  text-decoration: none
+}
+
+:focus {
+  outline-width: 0;
+}
+
+.img-size100p {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.fade-in-out {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  /*初始状态 透明度为0*/
+  100% {
+    opacity: 1;
+  }
+  /*结束状态 透明度为1*/
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  /*初始状态 透明度为0*/
+  100% {
+    opacity: 0;
+  }
+  /*结束状态 透明度为1*/
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}
+
+/*.x6-node .el-table__body td {
+  z-index: 1;
+}*/

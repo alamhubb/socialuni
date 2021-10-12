@@ -1,0 +1,8 @@
+.q-tag {
+  @extend .py-nn;
+  @extend .px-sm;
+}
+
+.q-tag.q-round {
+  @extend .bd-round;
+}

@@ -1,0 +1,59 @@
+$padding-map: (
+  none: $space-none,
+  nn: $space-nn,
+  mn: $space-mn,
+  mnn: $space-mnn,
+  xs: $space-xs,
+  xss: $space-xss,
+  sm: $space-sm,
+  ssm: $space-ssm,
+  smm: $space-smm,
+  df: $space-df,
+  dff: $space-dff,
+  md: $space-md,
+  mdd: $space-mdd,
+  lg: $space-lg,
+  lgg: $space-lgg,
+  xl: $space-xl,
+  xxl: $space-xxl,
+  sl: $space-sl,
+  sxl: $space-sxl,
+  ssl: $space-ssl
+);
+
+$size-map: (
+  none: none,
+  nn: nn,
+  mn: mn,
+  mnn: mnn,
+  xs: xs,
+  xss: xss,
+  sm: sm,
+  ssm: ssm,
+  smm: smm,
+  df: df,
+  dff: dff,
+  md: md,
+  mdd: mdd,
+  lg: lg,
+  lgg: lgg,
+  xl: xl,
+  xxl: xxl,
+  sl: sl,
+  sxl: sxl,
+  ssl: ssl
+);
+$direction-map: (
+  t:top,
+  b:bottom,
+  l:left,
+  r:right,
+);
+
+$direction-com-map: (
+  tl:top-left,
+  tr:top-right,
+  bl:bottom-left,
+  br:bottom-right,
+);
+
