@@ -34,6 +34,12 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
+<!--    <div @touchstart="pageTouchstart"
+         @touchmove="pageTouchmove"
+         @touchend="pageTouchend"
+       class="pt-50">
+
+    </div>-->
     <swiper class="bg-theme-light" :current="swiperCurrent"
             :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
@@ -162,6 +168,17 @@ export default class TabsTalkPage extends Vue {
     contentdown: '点击显示更多',
     contentrefresh: '正在加载...',
     contentnomore: '没有更多数据了,点击刷新'
+  }
+
+  pageTouchstart (e) {
+    console.log(e.touches[0].pageY)
+  }
+  pageTouchmove (e) {
+    console.log(e.touches[0].pageY)
+  }
+
+  pageTouchend () {
+
   }
 
   // 用户登录后重新查询

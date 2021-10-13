@@ -1,3 +1,5 @@
+const IN_PRODUCTION = process.env.NODE_ENV === 'production'
+
 /* eslint-disable */
 const path = require('path')
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
       remove: process.env.UNI_PLATFORM !== 'h5'
     }),
     require('@dcloudio/vue-cli-plugin-uni/packages/postcss'),
-    require('@fullhuman/postcss-purgecss')({
+    IN_PRODUCTION && require('@fullhuman/postcss-purgecss')({
       content: ['./public/**/*.html', './src/**/*.vue'],
       defaultExtractor (content) {
         const contentWithoutStyleBlocks = content.replace(

@@ -33,7 +33,7 @@ export default Vue.extend({
     }
     //页面启动，启动函数
     // systemModule.appInit()*/
-  },
+  }
   //@ts-ignore
   /*onShow (params) {
     //避免已打开情况，进入不为lunchan而是show

@@ -43,7 +43,7 @@
 </template>
 
 <script>
-let startY, moveY, windowHeight = 500, platform
+let startY; let moveY; let windowHeight = 500; let platform
 let timeDiff = 0
 let touchending
 export default {
@@ -53,14 +53,14 @@ export default {
       //距离顶部距离，单位upx
       type: Number,
       default: 0
-    },
+    }
   },
   data () {
     return {
       pageDeviation: 0, //下偏移量
       pageTransition: 0, //回弹过渡时间
       refreshReady: false, //进入刷新准备状态
-      refreshing: false, // 进入刷新状态
+      refreshing: false // 进入刷新状态
     }
   },
   computed: {
@@ -135,7 +135,7 @@ export default {
       this.refreshing = false
       this.pageDeviation = uni.upx2px(0)
       //this.$emit('setEnableScroll', true);
-    },
+    }
   }
 }
 </script>
