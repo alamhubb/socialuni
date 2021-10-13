@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.manage;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
@@ -43,6 +44,11 @@ public class SocialUserAccountManage {
 //        socialUserAccountDO.setDevId(loginQO.getDevId());
         socialUserAccountDO.setPlatform(loginQO.getPlatform());
         socialUserAccountDO.setProvider(loginQO.getProvider());
+
+        socialUserAccountDO.setNickname(loginQO.getNickName());
+        socialUserAccountDO.setAvatar(loginQO.getAvatarUrl());
+        socialUserAccountDO.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
+
         String openId = uniUnionIdRO.getOpenid();
         if (StringUtils.isEmpty(openId)) {
             throw new SocialParamsException("openId为空");

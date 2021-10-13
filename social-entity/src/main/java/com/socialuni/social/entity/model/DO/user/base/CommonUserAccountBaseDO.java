@@ -25,4 +25,8 @@ public class CommonUserAccountBaseDO extends CommonContentBaseDO implements Seri
     private String unionId;
     //对应三方的token
     private String sessionKey;
+
+    private String nickname;
+    private String avatar;
+    private String gender;
 }
