@@ -99,7 +99,7 @@ export default class PageUtil {
     }
     uni.navigateToMiniProgram({
       appId: appId,
-      // envVersion: 'trial',
+      envVersion: 'trial',
       // appId: '1109985787',
       path: 'pages/oAuth/oAuth',
       extraData: authVO

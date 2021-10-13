@@ -198,7 +198,7 @@
     },
     "mp-qq" : {
         "usingComponents" : true,
-        "appid" : "1109985787",
+        "appid" : "1111176209",
         "optimization" : {
             "subPackages" : true
         },
