@@ -131,6 +131,7 @@ import PhoneService from '@/socialuni/service/PhoneService'
 import Alert from '@/socialuni/utils/Alert'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
+import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 
 @Component({
   components: {
