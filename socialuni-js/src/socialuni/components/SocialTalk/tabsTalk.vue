@@ -34,78 +34,78 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-<!--    <div @touchstart="pageTouchstart"
+    <div @touchstart="pageTouchstart"
          @touchmove="pageTouchmove"
          @touchend="pageTouchend"
-       class="pt-50">
-
-    </div>-->
-    <swiper class="bg-theme-light" :current="swiperCurrent"
-            :style="{
+         :style="{'padding-top': moveNum+'px'}">
+      <swiper
+        class="bg-theme-light" :current="swiperCurrent"
+        :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
             }"
-            @change="talkSwiperChange">
-      <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-        <!--
-        使用view实现的问题，没有scroll事件小程序上
-        <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-              :lower-threshold="800"
-              @scroll.native="talksScrollEvent"
-              @scroll="talksScrollEvent"
-        >-->
-        <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                     :lower-threshold="800"
-                     @scroll="talksScrollEvent">
-          <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-          <div class="px-sm pb-60"
-               v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
-            <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-              <talk-item :talk="talk"
-                         :talk-tab-type="talkTabObj.type"
-                         @deleteTalk="deleteTalk"
-              />
-              <!-- app端广告有问题-->
-              <!--  #ifdef APP-PLUS -->
-              <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
-                <ad class="bg-white" adpid="1890536227"></ad>
-              </view>-->
-              <!--  #endif -->
-              <!--wx平台显示的广告-->
-              <!--  #ifdef MP-WEIXIN -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
-              <!--  #endif -->
+        @change="talkSwiperChange">
+        <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+          <!--
+          使用view实现的问题，没有scroll事件小程序上
+          <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                :lower-threshold="800"
+                @scroll.native="talksScrollEvent"
+                @scroll="talksScrollEvent"
+          >-->
+          <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                       :lower-threshold="800"
+                       @scroll="talksScrollEvent">
+            <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+            <div class="px-sm pb-60"
+                 v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+              <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                <talk-item :talk="talk"
+                           :talk-tab-type="talkTabObj.type"
+                           @deleteTalk="deleteTalk"
+                />
+                <!-- app端广告有问题-->
+                <!--  #ifdef APP-PLUS -->
+                <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                  <ad class="bg-white" adpid="1890536227"></ad>
+                </view>-->
+                <!--  #endif -->
+                <!--wx平台显示的广告-->
+                <!--  #ifdef MP-WEIXIN -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+                <!--  #endif -->
 
-              <!--qq平台显示的广告-->
-              <!--  #ifdef MP-QQ -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-              <!--  #endif -->
+                <!--qq平台显示的广告-->
+                <!--  #ifdef MP-QQ -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+                <!--  #endif -->
 
-              <!--头条平台显示的广告-->
-              <!--  #ifdef MP-TOUTIAO -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
-              <!--  #endif -->
-            </view>
-            <!-- 下拉刷新组件 -->
-            <view class="mt-xs">
-              <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
-                             :contentText="loadMoreText"></uni-load-more>
-            </view>
-          </div>
-          <template v-else>
-            <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
-              您还没有关注其他人
-            </view>
-            <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
-              您还没有登录，点击登录
-            </view>
-          </template>
-        </scroll-view>
-      </swiper-item>
-    </swiper>
+                <!--头条平台显示的广告-->
+                <!--  #ifdef MP-TOUTIAO -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+                <!--  #endif -->
+              </view>
+              <!-- 下拉刷新组件 -->
+              <view class="mt-xs">
+                <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
+                               :contentText="loadMoreText"></uni-load-more>
+              </view>
+            </div>
+            <template v-else>
+              <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                您还没有关注其他人
+              </view>
+              <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
+                您还没有登录，点击登录
+              </view>
+            </template>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </div>
   </view>
 </template>
 
@@ -170,11 +170,20 @@ export default class TabsTalkPage extends Vue {
     contentnomore: '没有更多数据了,点击刷新'
   }
 
+  startNum = 0
+  curNum = 0
+  moveNum = 0
+
   pageTouchstart (e) {
-    console.log(e.touches[0].pageY)
+    const startNum = e.touches[0].pageY
+    this.startNum = startNum
   }
+
   pageTouchmove (e) {
-    console.log(e.touches[0].pageY)
+    const curNum = e.touches[0].pageY
+    this.curNum = curNum
+    const moveNum = Math.max(this.curNum - this.startNum, 0)
+    this.moveNum = moveNum
   }
 
   pageTouchend () {
