@@ -37,7 +37,8 @@
     <div @touchstart="pageTouchstart"
          @touchmove="pageTouchmove"
          @touchend="pageTouchend"
-         :style="{'padding-top': moveNum+'px'}">
+         class="bg-theme-light"
+         :style="{transform: 'translateY('+ moveNum +'px)'}">
       <swiper
         class="bg-theme-light" :current="swiperCurrent"
         :style="{
