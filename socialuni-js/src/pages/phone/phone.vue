@@ -8,7 +8,7 @@
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
       </div>
 
-      <view class="mt-xs h145px">
+      <view class="mt-xs h145">
         <view class="h120 row-center">
           <!--          头部-->
 
@@ -38,53 +38,12 @@
       <div>
         <view class="h150 col-row-center">
           <view class="col-row-center w300">
-            <!--            微信登录界面，非手机号登录界面-->
-            <template>
-              <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
-              <!-- 只要不为QQ小程序平台都可以使用微信登录-->
-              <template v-if="!user">
-                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
-                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
-                >
-                  <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
-                  手机号登录
-                </button>
-                <button v-else-if="isMpQQ" :disabled="!openTypeBtnEnable"
-                        open-type="getUserInfo"
-                        class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @getuserinfo="providerLogin">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  QQ登录
-                </button>
-                <!--                app和h5也都可以用微信登录-->
-                <button v-else :disabled="!openTypeBtnEnable"
-                        class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                        @click="providerLogin">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  微信登录
-                </button>
-              </template>
-              <!--              有用户-->
-              <template v-else>
-                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="bindPhoneNum"
-                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none bg-active round mt w100p"
-                >
-                  <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
-                  绑定手机号
-                </button>
-
-                <button v-else-if="isMpWx" :disabled="!openTypeBtnEnable"
-                        open-type="getPhoneNumber"
-                        class="h40 cu-btn lg bg-gradual-wx row-all-center bd-none bg-active round mt w100p"
-                        @getphonenumber="bindWxPhoneNum">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
-                  绑定微信手机号
-                </button>
-              </template>
-            </template>
+            <!--                app和h5也都可以用微信登录-->
+            <button :disabled="!openTypeBtnEnable"
+                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    @click="socialuniLogin">
+              前往清池授权手机号
+            </button>
           </view>
         </view>
       </div>
@@ -96,20 +55,6 @@
             {{ user ? '不绑定返回' : '不登录返回' }}
           </view>
         </view>
-
-        <view @click="switchShowPhoneNum" class="row-end-center">
-          <view class="text-gray">
-            <template v-if="!user">
-              {{ showPhoneView ? '其他方式登录' : '手机号登录' }}
-            </template>
-            <template v-else-if="user && isMpWx">
-              {{ showPhoneView ? '其他方式绑定' : '验证码方式绑定' }}
-            </template>
-          </view>
-          <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
-          <u-icon class="ml-xs text-gray"
-                  name="arrow-right"></u-icon>
-        </view>
       </view>
     </div>
 
@@ -118,20 +63,19 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import MockService from '@/socialuni/service/MockService'
+import SocialAuthType from '@/socialuni/const/SocialAuthType'
+import UniUtil from '@/socialuni/utils/UniUtil'
+import PageUtil from '@/socialuni/utils/PageUtil'
+import { socialAppModule, socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
+import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
+import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
-import { socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
-import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
-import PhoneNumFormData from '@/socialuni/model/phone/PhoneNumFormData'
-import LoginService from '@/socialuni/service/LoginService'
-import PhoneService from '@/socialuni/service/PhoneService'
 import Alert from '@/socialuni/utils/Alert'
-import RouterUtil from '@/socialuni/utils/RouterUtil'
-import PageUtil from '@/socialuni/utils/PageUtil'
-import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
+import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
 
 @Component({
   components: {
@@ -139,7 +83,7 @@ import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
     LoginFooterAppInfo
   }
 })
-export default class QcLogin extends Vue {
+export default class PhonePage extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   @socialUserStore.Getter('hasPhoneNum') hasPhoneNum: boolean
 
@@ -150,115 +94,46 @@ export default class QcLogin extends Vue {
 
   //首先需要携带threeAppId和密钥去后台查询，三方信息，如果不对提示错误。然后也无法向后台授权。
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
-
-  phoneFormData = new PhoneNumFormData()
-
   openTypeBtnEnable = true
 
-  showPhoneView = false
-
-  //同意协议
-  // contractChecked = true
-
-  created () {
-    this.initData()
-  }
-
-  onLoad () {
-    this.initData()
-  }
-
-  initData () {
-    this.phoneFormData = new PhoneNumFormData()
-    //不为微信则默认为验证码方式绑定
-    if (this.user && !this.isMpWx) {
-      this.showPhoneView = true
-    }
-  }
-
-  get loginButtonDisabled () {
-    return this.phoneFormData && (PhoneNumFormData.phoneNumberError(this.phoneFormData.phoneNum) || PhoneNumFormData.authCodeError(this.phoneFormData.authCode) || !this.openTypeBtnEnable)
-  }
-
   goBackPage () {
-    if (oAuthModule.isThreeAuth) {
-      PageUtil.toOAuthPage()
+    if (!this.user) {
+      PageUtil.goHome()
     } else {
-      RouterUtil.goBack()
+      PageUtil.toMinePage()
     }
   }
 
-  switchShowPhoneNum () {
-    if (this.showPhoneView) {
-      this.showPhoneView = false
-    } else {
-      this.showPhoneView = true
-    }
+  async socialuniLogin () {
+    await this.LoginBase(this.socialuniLoginBase)
   }
 
-  //平台登录
-  //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
-  async providerLogin (result) {
+  async LoginBase (loginFun: Function, result?) {
     if (this.openTypeBtnEnable) {
+      UniUtil.showLoading('跳转中')
+      this.openTypeBtnEnable = false
       try {
-        this.openTypeBtnEnable = false
-        //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-        await LoginService.providerLogin(socialSystemModule.mpPlatform, result)
+        console.log('等待执行')
+        await loginFun(result)
+        console.log('执行完毕')
         this.loginAfterHint('登录成功')
       } finally {
-        this.goToOAuthPage()
         this.openTypeBtnEnable = true
+        UniUtil.hideLoading()
       }
     }
   }
 
-  async phoneLogin () {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        await LoginService.phoneLogin(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-        this.loginAfterHint('登录成功')
-      } finally {
-        this.goToOAuthPage()
-        this.openTypeBtnEnable = true
-      }
+  async socialuniLoginBase () {
+    //开发模式模拟授权
+    if (socialAppModule.isDevMode) {
+      await MockService.mockOAuthUserPhoneNumLogin()
+    } else {
+      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+      PageUtil.toSocialUniAuth(authVO)
     }
-  }
-
-  goToOAuthPage () {
-    if (oAuthModule.isThreeAuth) {
-      if (this.hasPhoneNum) {
-        PageUtil.toOAuthPage()
-      }
-    }
-  }
-
-  //手机号登录和手机号绑定
-  async bindPhoneNum () {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        await PhoneService.bindPhoneNum(this.phoneFormData.phoneNum, this.phoneFormData.authCode)
-        this.loginAfterHint('绑定成功')
-      } finally {
-        this.goToOAuthPage()
-        this.openTypeBtnEnable = true
-      }
-    }
-  }
-
-  // 微信点击按钮，获取手机号用来绑定
-  async bindWxPhoneNum (obj: any) {
-    if (this.openTypeBtnEnable) {
-      try {
-        this.openTypeBtnEnable = false
-        await PhoneService.bindWxPhoneNum(obj)
-        this.loginAfterHint('绑定成功')
-      } finally {
-        this.goToOAuthPage()
-        this.openTypeBtnEnable = true
-      }
-    }
+    // const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+    // PageUtil.toSocialUniAuth(authVO)
   }
 
   loginAfterHint (msg: string) {
@@ -270,18 +145,8 @@ export default class QcLogin extends Vue {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
     Alert.hint(msg).finally(() => {
-      //有手机号才直接返回，没手机号继续提示绑定手机号
-      if (this.hasPhoneNum) {
-        this.goBackPage()
-      }
+      this.goBackPage()
     })
   }
-
-
-  /*
-    默认选中
-    if (!this.contractChecked) {
-      return Alert.hint('请仔细阅读用户协议、隐私政策等内容后勾选同意')
-    }*/
 }
 </script>
