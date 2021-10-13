@@ -64,7 +64,6 @@
     "cos-wx-sdk-v5": "^0.7.11",
     "flyio": "^0.6.2",
     "lodash": "^4.17.21",
-    "mescroll-uni": "^1.3.7",
     "regenerator-runtime": "^0.12.1",
     "sass": "^1.39.2",
     "sass-loader": "^8.0.2",
