@@ -34,72 +34,80 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-    <swiper class="bg-theme-light" :current="swiperCurrent"
-            :style="{
+    <mescroll-uni ref="mescrollRef" @init="mescrollInit" top="365" @down="downCallback" :up="upOption" @up="upCallback"
+                  @emptyclick="emptyClick">
+      <!-- 大海报 -->
+      <image id="anchorPoint" src="https://www.mescroll.com/img/taobao/taobao3.jpg" mode="widthFix"
+             style="width: 100%"/>
+
+      <!-- 数据列表 -->
+      <swiper class="bg-theme-light" :current="swiperCurrent"
+              :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
               'padding-bottom': talksListPaddingBottom+'px',
             }"
-            @change="talkSwiperChange">
-      <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-        <!--
-        使用view实现的问题，没有scroll事件小程序上
-        <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-              :lower-threshold="800"
-              @scroll.native="talksScrollEvent"
-              @scroll="talksScrollEvent"
-        >-->
-        <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                     :lower-threshold="800"
-                     @scroll="talksScrollEvent">
-          <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-          <div class="px-sm pb-60"
-               v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
-            <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-              <talk-item :talk="talk"
-                         :talk-tab-type="talkTabObj.type"
-                         @deleteTalk="deleteTalk"
-              />
-              <!-- app端广告有问题-->
-              <!--  #ifdef APP-PLUS -->
-              <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
-                <ad class="bg-white" adpid="1890536227"></ad>
-              </view>-->
-              <!--  #endif -->
-              <!--wx平台显示的广告-->
-              <!--  #ifdef MP-WEIXIN -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
-              <!--  #endif -->
+              @change="talkSwiperChange">
+        <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+          <!--
+          使用view实现的问题，没有scroll事件小程序上
+          <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                :lower-threshold="800"
+                @scroll.native="talksScrollEvent"
+                @scroll="talksScrollEvent"
+          >-->
+          <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                       :lower-threshold="800"
+                       @scroll="talksScrollEvent">
+            <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+            <div class="px-sm pb-60"
+                 v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+              <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                <talk-item :talk="talk"
+                           :talk-tab-type="talkTabObj.type"
+                           @deleteTalk="deleteTalk"
+                />
+                <!-- app端广告有问题-->
+                <!--  #ifdef APP-PLUS -->
+                <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                  <ad class="bg-white" adpid="1890536227"></ad>
+                </view>-->
+                <!--  #endif -->
+                <!--wx平台显示的广告-->
+                <!--  #ifdef MP-WEIXIN -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+                <!--  #endif -->
 
-              <!--qq平台显示的广告-->
-              <!--  #ifdef MP-QQ -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-              <!--  #endif -->
+                <!--qq平台显示的广告-->
+                <!--  #ifdef MP-QQ -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+                <!--  #endif -->
 
-              <!--头条平台显示的广告-->
-              <!--  #ifdef MP-TOUTIAO -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
-              <!--  #endif -->
-            </view>
-            <!-- 下拉刷新组件 -->
-            <view class="mt-xs">
-              <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
-                             :contentText="loadMoreText"></uni-load-more>
-            </view>
-          </div>
-          <template v-else>
-            <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
-              您还没有关注其他人
-            </view>
-            <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
-              您还没有登录，点击登录
-            </view>
-          </template>
-        </scroll-view>
-      </swiper-item>
-    </swiper>
+                <!--头条平台显示的广告-->
+                <!--  #ifdef MP-TOUTIAO -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+                <!--  #endif -->
+              </view>
+              <!-- 下拉刷新组件 -->
+              <view class="mt-xs">
+                <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
+                               :contentText="loadMoreText"></uni-load-more>
+              </view>
+            </div>
+            <template v-else>
+              <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                您还没有关注其他人
+              </view>
+              <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
+                您还没有登录，点击登录
+              </view>
+            </template>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </mescroll-uni>
   </view>
 </template>
 
@@ -118,6 +126,7 @@ import TalkVueUtil from '../../utils/TalkVueUtil'
 import TalkTabVO from '../../model/talk/TalkTabVO'
 import CommonUtil from '../../utils/CommonUtil'
 import TalkSwipers from './talkSwipers.vue'
+import MescrollUni from 'mescroll-uni/mescroll-uni'
 import {
   socialConfigStore,
   socialLocationModule,
@@ -135,9 +144,9 @@ import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QRowBar from '../q-row-bar/q-row-bar.vue'
+import MescrollMixin from 'mescroll-uni/mescroll-mixins.js'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-
 
 // todo 后台可控制是否显示轮播图
 
@@ -150,8 +159,10 @@ import NodesRef = UniApp.NodesRef
     QTab,
     TalkOperate,
     TalkSwipers,
-    TalkItem
-  }
+    TalkItem,
+    MescrollUni
+  },
+  mixins: [MescrollMixin]
 })
 export default class TabsTalkPage extends Vue {
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
@@ -163,6 +174,29 @@ export default class TabsTalkPage extends Vue {
     contentrefresh: '正在加载...',
     contentnomore: '没有更多数据了,点击刷新'
   }
+
+  upOption = {
+    // page: {
+    // 	size: 10 // 每页数据的数量
+    // },
+    noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+    empty: {
+      tip: '~ 搜索无数据 ~', // 提示
+      btnText: '去看看'
+    }
+  }
+
+  emptyClick () {
+    uni.showToast({
+      title: '点击了按钮,具体逻辑自行实现'
+    })
+  }
+
+  /*上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
+  upCallback (page) {
+    this.queryEnd()
+  }
+
 
   // 用户登录后重新查询
   @Watch('user')
