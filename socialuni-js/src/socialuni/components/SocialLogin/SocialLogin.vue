@@ -164,6 +164,8 @@ export default class SocialLogin extends Vue {
       const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
       PageUtil.toSocialUniAuth(authVO)
     }
+    // const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+    // PageUtil.toSocialUniAuth(authVO)
   }
 
   loginAfterHint (msg: string) {

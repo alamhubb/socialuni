@@ -1,8 +1,8 @@
 spring:
   profiles:
-#    active: qkypc
+    active: qkypc
 #    active: local
-    active: demo
+#    active: demo
   jpa:
     database: MYSQL
     show-sql: false
