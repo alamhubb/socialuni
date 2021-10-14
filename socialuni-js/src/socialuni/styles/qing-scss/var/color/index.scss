@@ -135,6 +135,7 @@ $colors-custom-border: (
         form: $color-border-form,
         divider: $color-border-divider,
         table: $color-border-table,
+        tab: $color-tab,
 );
 
 $colors-border: map-merge($colors-base, $colors-custom-border);

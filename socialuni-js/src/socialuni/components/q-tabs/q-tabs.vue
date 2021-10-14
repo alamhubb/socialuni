@@ -1,30 +1,22 @@
 <template>
-  <view class="flex-col pl-xs">
-    <view class="row-col-center">
-      <view class="flex-row q-tab-box" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
-        <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">
-          <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
+  <view class="row-col-center position-relative overflow-x-auto">
+    <view class="row-nowrap mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
+      <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">
+        <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
-          </slot>
-        </view>
-        <view hover-class="uni-list-cell-hover" class="col-center">
-          <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
-        </view>
+        </slot>
+      </view>
+      <view hover-class="uni-list-cell-hover" class="col-center">
+        <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
       </view>
     </view>
-    <view>
-      <view class="active-line" :style="[tabSlideStyle]"></view>
-    </view>
+    <view class="active-line position-absolute" :style="[tabSlideStyle]"></view>
   </view>
 </template>
 
 <script lang="ts">
-import {
-  Vue,
-  Component, Prop, Model, Emit
-} from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 import CommonUtil from '../../utils/CommonUtil'
-import UniUtil from '../../utils/UniUtil'
 
 @Component
 export default class QTabs extends Vue {
@@ -45,7 +37,8 @@ export default class QTabs extends Vue {
   get tabSlideStyle () {
     const barWidth = Number(this.barWidth) / 2
     return {
-      transform: 'translate(' + this.tabItemLefts[this.value] + 'px, -80%)',
+      bottom: '0',
+      transform: 'translate(' + this.tabItemLefts[this.value] + 'px)',
       //首次不开启动画
       'transition-duration': this.firstLoadAfter ? '0.5s' : '0',
       width: barWidth + 'px'
@@ -79,7 +72,7 @@ export default class QTabs extends Vue {
       if (res && res.length) {
         res.forEach(item => {
           //设置每个tab滑块对应的位置
-          this.tabItemLefts.push(item.left + item.width / 2 - UniUtil.upxToPx(Number(this.barWidth) / 2) - res[0].left)
+          this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.barWidth) / 2) / 2 - res[0].left)
         })
         //首次完成2秒后切换首次加载状态，因为首次加载不需要动画，首次加载后开启动画
         CommonUtil.delayTime(2000).then(() => {
