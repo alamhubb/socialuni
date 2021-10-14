@@ -31,6 +31,7 @@ export default class SocialMinxinVue extends Vue {
   }
 
   onShow (params) {
+    //@ts-ignore
     if (this.isAppPage) {
       //避免已打开情况，进入不为lunchan而是show
       this.oAuthUserInfo(params)
