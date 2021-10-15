@@ -5,10 +5,11 @@ import SocialPhoneNumLoginQO from '../model/phone/SocialPhoneNumLoginQO'
 import RefreshWxSessionKeyQO from '../model/phone/RefreshWxSessionKeyQO'
 import BindWxPhoneNumQO from '../model/phone/BindWxPhoneNumQO'
 import SocialSendAuthCodeQO from '../model/phone/SocialSendAuthCodeQO'
+import UniProviderLoginQO from '@/socialuni/model/UniProviderLoginQO'
 
 export default class PhoneAPI {
-  static bindSocialuniPhoneNum () {
-    return socialHttp.post<CenterUserDetailRO>('phone/bindSocialuniPhoneNum')
+  static bindSocialuniPhoneNum (loginData: UniProviderLoginQO) {
+    return socialHttp.post<CenterUserDetailRO>('phone/bindSocialuniPhoneNum', loginData)
   }
 
   static sendAuthCodeAPI (phoneNum: string) {

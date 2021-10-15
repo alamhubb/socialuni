@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { socialRouterModule, socialSystemModule } from '@/socialuni/store'
+import { socialSystemModule, socialUserModule } from '@/socialuni/store'
 import UserService from '@/socialuni/service/UserService'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
@@ -48,7 +48,12 @@ export default class SocialMinxinVue extends Vue {
       if (extraData) {
         if (extraData.success) {
           const authData: SocialLoginRO<UniUserInfoRO> = extraData.data
-          await OAuthService.oAuthUserPhoneNumLogin(authData)
+
+          if (socialUserModule.hasUser) {
+            await OAuthService.oAuthUserPhoneNumLogin(authData)
+          } else {
+            await OAuthService.oAuthUserPhoneNumLogin(authData)
+          }
           Toast.toastLong('授权成功')
           PageUtil.toMinePage()
         }
