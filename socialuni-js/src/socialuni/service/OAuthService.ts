@@ -18,7 +18,6 @@ export default class OAuthService {
 
   //绑定清池手机号，需要已绑定清池手机号
   static async oAuthBindSocialuniPhone (oAuthRO: SocialLoginRO<UniUserInfoRO>) {
-
     const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(oAuthRO.token, null, oAuthRO.user, LoginProvider.socialuni)
 
     const { data } = await PhoneAPI.bindSocialuniPhoneNum(providerLoginQO)

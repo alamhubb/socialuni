@@ -50,7 +50,7 @@ export default class SocialMinxinVue extends Vue {
           const authData: SocialLoginRO<UniUserInfoRO> = extraData.data
 
           if (socialUserModule.hasUser) {
-            await OAuthService.oAuthUserPhoneNumLogin(authData)
+            await OAuthService.oAuthBindSocialuniPhone(authData)
           } else {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
           }
