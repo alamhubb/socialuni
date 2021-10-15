@@ -33,10 +33,15 @@ public class FeignInterceptor implements RequestInterceptor {
             if (socialUserAccountDO != null) {
                 String uniToken = socialUserAccountDO.getSessionKey();
                 requestTemplate.header(SocialFeignHeaderName.socialTokenHeaderName, uniToken);
+            } else {
+                String socialuniToken = SocialTokenUtil.getSocialuniToken();
+                if (socialuniToken != null) {
+                    requestTemplate.header(SocialFeignHeaderName.socialTokenHeaderName, socialuniToken);
+                }
             }
-        }else {
+        } else {
             String socialuniToken = SocialTokenUtil.getSocialuniToken();
-            if (socialuniToken!=null){
+            if (socialuniToken != null) {
                 requestTemplate.header(SocialFeignHeaderName.socialTokenHeaderName, socialuniToken);
             }
         }

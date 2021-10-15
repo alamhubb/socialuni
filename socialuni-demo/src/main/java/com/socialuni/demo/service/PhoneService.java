@@ -12,6 +12,7 @@ import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.sdk.entity.user.SocialBindUserProviderAccountEntity;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,6 +32,9 @@ public class PhoneService {
     private SocialBindUserProviderAccountEntity socialBindUserProviderAccountEntity;
 
     public ResultRO<MineUserDetailRO> bindSocialuniPhoneNum(SocialProviderLoginQO socialBindQO) {
+        //如果为社区联盟登陆则需要模拟设置token
+        SocialTokenUtil.setSocialuniToken(socialBindQO.getCode());
+
         ResultRO<OAuthGetUserPhoneNumRO> resultRO = socialuniOAuthAPI.oAuthGetUserPhoneNum();
 
         OAuthGetUserPhoneNumRO OAuthGetUserPhoneNumRO = resultRO.getData();
