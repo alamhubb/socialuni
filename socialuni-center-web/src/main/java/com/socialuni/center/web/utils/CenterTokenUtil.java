@@ -3,7 +3,6 @@ package com.socialuni.center.web.utils;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.ThirdUserTokenRepository;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -49,7 +48,7 @@ public class CenterTokenUtil {
         Date date = new Date();
         //如果当前时间大于时效时间，则时效了
         if (date.getTime() > tokenDO.getExpiredTime().getTime()) {
-            throw new SocialBusinessException("用户凭证过期，请重新登录");
+            throw new SocialNullUserException();
         }
         //数据库的devId
         String doUserThirdId = tokenDO.getThirdUserId();
