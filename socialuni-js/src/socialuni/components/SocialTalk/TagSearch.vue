@@ -59,7 +59,7 @@
         </template>
         <template #rightRow="{item}">
           <view class="bg-white">
-            <view class="q-row">
+            <view class="q-box-row">
               <text class="cuIcon-title text-green margin-right-xs"></text>
               <text class="font-bold">{{item.name}}</text>
             </view>
