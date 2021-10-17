@@ -64,7 +64,7 @@
                 @click.stop="addFollow">
           关注
         </button>
-        <view v-else class="bg-grey box-xs" @click.stop="addFollow">已关注</view>
+        <view v-else class="bg-gray box-xs" @click.stop="addFollow">已关注</view>
       </view>
     </view>
   </view>

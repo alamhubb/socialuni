@@ -108,7 +108,7 @@
       <view class="row-col-center pd-sm">
         <div class="flex-row text-md">
           可见范围：
-          <view class="text-gray row-all-center bg-grey w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
+          <view class="text-gray row-all-center bg-gray w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
             <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
             <q-icon size="14" class="text-gray" icon="arrow-down"/>
             <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
@@ -119,7 +119,7 @@
           <!--          只有不为单性app才显示-->
           <template v-if="GenderTypeAll === appGenderType">
             <div>，</div>
-            <view class="text-gray row-all-center bg-grey w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
+            <view class="text-gray row-all-center bg-gray w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
               <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
               <q-icon size="14" class="text-gray" icon="arrow-down"/>
               <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
