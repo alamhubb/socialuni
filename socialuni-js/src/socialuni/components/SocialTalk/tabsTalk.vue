@@ -1,7 +1,7 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-row-bar class="px-smm flex-none btr-smm bg-theme-light" :class="tabsId">
+    <div class="q-box-row bt-radius-15 bg-theme-light" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
@@ -22,7 +22,7 @@
       <!--<view class="px-sm">
         <view class="w12"></view>
       </view>-->
-    </q-row-bar>
+    </div>
 
     <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
 
