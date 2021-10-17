@@ -21,8 +21,8 @@ module.exports = {
       remove: process.env.UNI_PLATFORM !== 'h5'
     }),
     require('@dcloudio/vue-cli-plugin-uni/packages/postcss'),
-    // IN_PRODUCTION && require('@fullhuman/postcss-purgecss')({
-    require('@fullhuman/postcss-purgecss')({
+    IN_PRODUCTION && require('@fullhuman/postcss-purgecss')({
+    // require('@fullhuman/postcss-purgecss')({
       content: ['./public/**/*.html', './src/**/*.vue'],
       defaultExtractor (content) {
         const contentWithoutStyleBlocks = content.replace(
@@ -41,6 +41,7 @@ module.exports = {
         /^router-link(|-exact)-active$/,
         /data-v-.*/,
         /uicon-.*/,
+        /q-.*/,
         /u-.*/,
         /uni-.*/,
         /page/
