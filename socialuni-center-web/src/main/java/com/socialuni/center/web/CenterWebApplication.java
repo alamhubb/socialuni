@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableSocialuniCenterSDK
 @EnableSocialSDK
 @EnableAsync
-//@EnableCaching
+@EnableCaching
 public class CenterWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(CenterWebApplication.class, args);

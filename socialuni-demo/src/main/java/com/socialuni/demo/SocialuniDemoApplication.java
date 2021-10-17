@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableSocialSDK
 @EnableSocialuni
-//@EnableCaching
+@EnableCaching
 public class SocialuniDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(SocialuniDemoApplication.class, args);
