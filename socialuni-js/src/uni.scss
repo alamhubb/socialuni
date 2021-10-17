@@ -77,19 +77,9 @@ $uni-font-size-paragraph:30upx;
 
 /* uni.scss */
 @import 'uview-ui/theme.scss';
+@import 'socialuni/styles/qing-scss/theme.scss';
 
-//app主色
-$main-color: #ffffff;
-//app默认字体颜色
-$main-font-color: #FFB6C1;
-//辅助色
-$vice-color: #FFB6C1;
-//默认背景色
-$default-color: #FFB6C1;
-//点晴色
-$point-color: #FFB6C1;
-
-
-//主题色，可自定义，默认和白色一样
-$theme: #FECACA
-
+//主题色
+$color-bg-theme: #FCD34D;
+$color-bg-theme-light: #FEF3C7;
+$color-tab: #B45309;

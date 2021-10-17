@@ -1,6 +1,6 @@
 <template>
   <u-popup v-model="showCityPopup" mode="bottom" :border-radius="20" @close="close">
-    <q-bar round class="solid-bottom">
+    <q-bar round class="bb-1">
       <view class="flex-row">
         <view class="text-black text-md font-bold">城市筛选</view>
         <view class="text-orange font-bold px bg-active" @click="getLocation">

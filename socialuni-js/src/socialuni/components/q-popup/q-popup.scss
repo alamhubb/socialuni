@@ -23,7 +23,7 @@
 .q-popup.bottom {
   @extend .w100vw;
   @extend .self-end;
-  @extend .btr;
+  //@extend .bt-radius;
 }
 
 .q-popup.top {

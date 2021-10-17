@@ -34,7 +34,7 @@
       </q-navbar>
 
       <q-popup v-model="showFilter" bottom>
-        <q-bar round class="solid-bottom">
+        <q-bar round class="bb-1">
           <view class="text-black text-md font-bold">动态筛选</view>
           <view class="flex-row">
             <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>

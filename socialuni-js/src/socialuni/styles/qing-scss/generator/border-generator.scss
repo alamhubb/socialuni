@@ -109,7 +109,26 @@
   }
 }
 
+@each $sizeKey, $sizeValue in $size-map {
+  .bd-radius-#{''+$sizeKey} {
+    border: $border-base;
+    border-radius: #{''+$sizeValue}px !important;
+  }
+
+  @each $directionKey, $directionValue in $direction-com-map {
+    .b#{''+$directionKey+''}-radius-#{''+$sizeKey} {
+      border: $border-base;
+      border-#{''+$directionValue}radius: #{''+$sizeValue}px !important;
+    }
+  }
+}
+
 .bd-dashed {
   border: $border-base;
   border-style: dashed !important;
+}
+
+.bd-round {
+  border: $border-base;
+  border-radius: 2500px !important;
 }
