@@ -25,7 +25,8 @@ export default class SocialConfigModule extends VuexModule {
     if (Lodash.isEmpty(this.appConfig)) {
       return ConfigMap.swiperHeightDefault
     } else {
-      return this.appConfig[ConfigMap.swiperHeightKey]
+      return ConfigMap.swiperHeightDefault
+      // return this.appConfig[ConfigMap.swiperHeightKey]
     }
   }
 

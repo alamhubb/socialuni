@@ -1,13 +1,8 @@
 .q-tab {
   @extend .row-all-center;
   @extend .h30;
-  @extend .w40;
   @extend .text-md;
   * {
     @extend .text-md;
   }
-}
-
-.q-tab-box {
-  @extend .pr;
 }

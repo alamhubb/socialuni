@@ -15,11 +15,14 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator'
+import QMask from '@/socialuni/components/q-mask/q-mask.vue'
 
   /*
   显示出来已经选了的城市，给她画上钩
   * */
-  @Component
+@Component({
+  components: { QMask }
+})
 export default class QPopup extends Vue {
     //如果是头顶或者底部则不为width100
     @Prop({ default: '' }) readonly position: string

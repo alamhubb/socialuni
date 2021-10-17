@@ -34,13 +34,13 @@
       </q-navbar>
 
       <q-popup v-model="showFilter" bottom>
-        <q-bar round class="solid-bottom">
+        <div class="row-between-center q-box bb-1">
           <view class="text-black text-md font-bold">动态筛选</view>
           <view class="flex-row">
             <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
             <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
           </view>
-        </q-bar>
+        </div>
         <view class="mt-sm pb-sm">
           <!--          只有当前应用类型为全部性别才显示性别筛选-->
           <view class="row-center px pt" v-if="appGender === GenderTypeAll">
@@ -84,7 +84,6 @@
       <tabs-talk class="flex-1" ref="tabsTalk"
                  :scroll-enable="scrollEnable"
                  :selectTagIds="selectTagIds"
-                 :tabs-id="tabsId"
       ></tabs-talk>
     </view>
     <msg-input>
@@ -125,17 +124,16 @@ import QNavbar from '../q-navbar/q-navbar.vue'
 import QSearch from '../q-search/q-search.vue'
 import QIcon from '../q-icon/q-icon.vue'
 import QPopup from '../q-popup/q-popup.vue'
-import QBar from '../q-bar/q-bar.vue'
 import QSlider from '../q-slider/q-slider.vue'
-import NodesRef = UniApp.NodesRef;
-import SelectorQuery = UniApp.SelectorQuery;
+import NodesRef = UniApp.NodesRef
+import SelectorQuery = UniApp.SelectorQuery
+import ConfigMap from '@/socialuni/const/ConfigMap'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
     QSlider,
-    QBar,
     QPopup,
     QIcon,
     QSearch,
@@ -158,6 +156,7 @@ export default class SocialTalkPage extends Vue {
   @socialNotifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
   // 轮播图
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
+  @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
 
   // tag 相关
   showTagSearch = false
@@ -171,18 +170,17 @@ export default class SocialTalkPage extends Vue {
   GenderTypeAll = GenderType.all
   rangeValue: number[] = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   unreadNotifiesNum = 0
-  // 评论输入框
-  showMsgInput = false
   // filter内容
   showFilter = false
-  // 传入子组件，控制组件高度
-  talkTabsTop = 0
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
 
-  // 唯一id值
-  readonly uuid: string = 'u' + CommonUtil.getUUID()
-  readonly tabsId: string = this.uuid + '_tabs'
+  get talkTabsTop () {
+    if (this.configShowSwipers) {
+      return this.swiperHeight + 10
+    }
+    return 0
+  }
 
   get visibleGenders () {
     if (this.user) {
@@ -195,43 +193,20 @@ export default class SocialTalkPage extends Vue {
     return GenderType.talkQueryEnums
   }
 
-  created () {
-  }
-
-  onLoad (params: any) {
-    /*if (params.load) {
-      this.initQuery()
-    }*/
-    /*CommonUtil.delayTime(1000).then(() => {
-      this.toTalkAdd()
-    })*/
-    UniUtil.showShareMenu()
-  }
-
-
   // life
   mounted () {
     this.pageMounted()
   }
 
   pageMounted () {
-    // 不这么写百度读不出来
-    CommonUtil.delayTime(100).then(() => {
-      this.getTabBarTop()
-    })
+    UniUtil.showShareMenu()
     // 这里是不是有问题应该选择异性
     // 指的是用户选择的筛选性别
     this.initFilterValue()
     this.initQuery()
   }
 
-  // todo 有个1
-  onShow () {
-    this.showMsgInput = true
-  }
-
-  onHide () {
-    this.showMsgInput = false
+  tabsTalkOnHide () {
     this.$refs.tabsTalk.tabsTalkOnHide()
   }
 
@@ -240,6 +215,8 @@ export default class SocialTalkPage extends Vue {
     if (this.configShowSwipers) {
       // +5点余量以防万一
       const scrollTop = e.scrollTop + 1
+      console.log(scrollTop)
+      console.log(this.talkTabsTop)
       // 只有不可滚动时，且大于选项卡高度，才改为可用
       if ((!this.scrollEnable) && scrollTop >= this.talkTabsTop) {
         this.scrollEnable = true
@@ -250,19 +227,13 @@ export default class SocialTalkPage extends Vue {
       // 如果不显示轮播图，则下方talks一定可以滚动
       this.scrollEnable = true
     }
+    console.log(this.scrollEnable)
   }
 
   // 必须这么写否则不生效
   @Watch('unreadNotifies')
   unreadNotifiesWatch () {
     this.unreadNotifiesNum = this.unreadNotifies.length
-  }
-
-  @Watch('configShowSwipers')
-  configShowSwipersWatch () {
-    CommonUtil.delayTime(100).then(() => {
-      this.getTabBarTop()
-    })
   }
 
   // 去除页面初始化的，初始化查询
@@ -274,37 +245,6 @@ export default class SocialTalkPage extends Vue {
       this.$refs.tabsTalk.initQuery()
       // })
     })
-  }
-
-  getTabBarTop () {
-    let query: SelectorQuery
-    // #ifdef H5
-    query = uni.createSelectorQuery().in(this)
-    // #endif
-    // #ifndef H5
-    query = uni.createSelectorQuery().in(this.$refs.tabsTalk)
-    // #endif
-    // 获取tabs到top的点
-    const nodeLeft: NodesRef = query.select('.' + this.tabsId)
-    nodeLeft.boundingClientRect((res: any) => {
-      if (res) {
-        // 44 为导航栏的高度
-        // #ifdef H5
-        this.talkTabsTop = res.top - 54
-        // #endif
-        // #ifndef H5
-        this.talkTabsTop = res.top - 54 - socialSystemModule.statusBarHeight
-        // #endif
-        // app平台0.000000x小数，所以写1余量
-        if (this.talkTabsTop <= 1) {
-          this.scrollEnable = true
-        }
-      } else {
-        CommonUtil.delayTime(100).then(() => {
-          this.getTabBarTop()
-        })
-      }
-    }).exec()
   }
 
   openTagSearchVue () {

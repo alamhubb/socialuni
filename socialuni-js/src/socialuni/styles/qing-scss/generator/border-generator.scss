@@ -50,7 +50,12 @@
     border-top-width: #{''+$index}px !important;
     border-bottom-width: #{''+$index}px !important;
   }
+
   @each $directionKey, $directionValue in $direction-map {
+    .b#{''+$directionKey+''} {
+      border-#{''+$directionValue}: $border-base;
+    }
+
     .b#{''+$directionKey+''}-#{''+$index+''} {
       border-#{''+$directionValue}: $border-base;
       border-#{''+$directionValue+''}-width: #{''+$index}px !important;
@@ -88,23 +93,72 @@
   border-radius: $border-radius-base !important;
 }
 
+.bt-radius {
+  border-top-left-radius: $border-radius-base !important;
+  border-top-right-radius: $border-radius-base !important;
+}
+
+.bb-radius {
+  border-bottom-left-radius: $border-radius-base !important;
+  border-bottom-right-radius: $border-radius-base !important;
+}
+
+.bl-radius {
+  border-top-left-radius: $border-radius-base !important;
+  border-bottom-left-radius: $border-radius-base !important;
+}
+
+.br-radius {
+  border-top-right-radius: $border-radius-base !important;
+  border-bottom-right-radius: $border-radius-base !important;
+}
+
 @each $directionKey, $directionValue in $direction-com-map {
   .b#{''+$directionKey+''}-radius {
-    border: $border-base;
     border-#{''+$directionValue+''}-radius: $border-radius-base !important;
   }
 }
 
 @for $index from 1 through 50 {
   .bd-radius-#{''+$index} {
-    border: $border-base;
     border-radius: #{''+$index}px !important;
   }
 
   @each $directionKey, $directionValue in $direction-com-map {
     .b#{''+$directionKey+''}-radius-#{''+$index} {
-      border: $border-base;
       border-#{''+$directionValue}radius: #{''+$index}px !important;
+    }
+
+    .bt-radius-#{''+$index} {
+      border-top-left-radius: #{''+$index}px !important;
+      border-top-right-radius: #{''+$index}px !important;
+    }
+
+    .bb-radius-#{''+$index} {
+      border-bottom-left-radius: #{''+$index}px !important;
+      border-bottom-right-radius: #{''+$index}px !important;
+    }
+
+    .bl-radius-#{''+$index} {
+      border-top-left-radius: #{''+$index}px !important;
+      border-bottom-left-radius: #{''+$index}px !important;
+    }
+
+    .br-radius-#{''+$index} {
+      border-top-right-radius: #{''+$index}px !important;
+      border-bottom-right-radius: #{''+$index}px !important;
+    }
+  }
+}
+
+@each $sizeKey, $sizeValue in $size-map {
+  .bd-radius-#{''+$sizeKey} {
+    border-radius: #{''+$sizeValue}px !important;
+  }
+
+  @each $directionKey, $directionValue in $direction-com-map {
+    .b#{''+$directionKey+''}-radius-#{''+$sizeKey} {
+      border-#{''+$directionValue}radius: #{''+$sizeValue}px !important;
     }
   }
 }
@@ -112,4 +166,9 @@
 .bd-dashed {
   border: $border-base;
   border-style: dashed !important;
+}
+
+.bd-round {
+  border: $border-base;
+  border-radius: 2500px !important;
 }

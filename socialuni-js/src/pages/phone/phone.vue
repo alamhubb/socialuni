@@ -41,7 +41,7 @@
             <!--                app和h5也都可以用微信登录-->
             <button :disabled="!openTypeBtnEnable"
                     class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
-                    @click="socialuniLogin">
+                    @click="bindSocialuniPhone">
               前往清池授权手机号
             </button>
           </view>
@@ -65,16 +65,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import MockService from '@/socialuni/service/MockService'
 import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
-import { socialAppModule, socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
+import { socialSystemStore, socialUserStore } from '@/socialuni/store'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
-import Alert from '@/socialuni/utils/Alert'
 import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
 
 @Component({
@@ -104,49 +102,28 @@ export default class PhonePage extends Vue {
     }
   }
 
-  async socialuniLogin () {
-    await this.LoginBase(this.socialuniLoginBase)
-  }
-
-  async LoginBase (loginFun: Function, result?) {
+  async bindSocialuniPhone () {
     if (this.openTypeBtnEnable) {
       UniUtil.showLoading('跳转中')
       this.openTypeBtnEnable = false
       try {
         console.log('等待执行')
-        await loginFun(result)
+        //开发模式模拟授权
+        /*if (socialAppModule.isDevMode) {
+          await MockService.mockBindSocialuniPhone()
+        } else {
+          const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+          PageUtil.toSocialUniAuth(authVO)
+        }*/
+        console.log('chufa')
+        const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+        PageUtil.toSocialUniAuth(authVO)
         console.log('执行完毕')
-        this.loginAfterHint('登录成功')
       } finally {
         this.openTypeBtnEnable = true
         UniUtil.hideLoading()
       }
     }
-  }
-
-  async socialuniLoginBase () {
-    //开发模式模拟授权
-    if (socialAppModule.isDevMode) {
-      await MockService.mockOAuthUserPhoneNumLogin()
-    } else {
-      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
-      PageUtil.toSocialUniAuth(authVO)
-    }
-    // const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
-    // PageUtil.toSocialUniAuth(authVO)
-  }
-
-  loginAfterHint (msg: string) {
-    if (!this.user.phoneNum) {
-      msg += '，绑定手机号后才可发布内容'
-    }
-    //qq小程序下ios系统存在输入框冲突问题，使用了一个输入框，另一个就无法出现
-    if (socialSystemModule.isIosAndMpQQ) {
-      msg += '，如遇无法弹出输入框，请重启应用'
-    }
-    Alert.hint(msg).finally(() => {
-      this.goBackPage()
-    })
   }
 }
 </script>

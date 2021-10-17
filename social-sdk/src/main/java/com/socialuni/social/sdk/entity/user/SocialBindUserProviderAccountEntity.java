@@ -14,7 +14,6 @@ public class SocialBindUserProviderAccountEntity {
     @Resource
     SocialUserAccountManage socialUserAccountManage;
 
-
     public void bindProviderAccount(Integer mineUserId, SocialProviderLoginQO loginQO) {
         UniUnionIdRO uniUnionIdRO = SocialUniProviderUtil.getUnionIdRO(loginQO);
         socialUserAccountManage.checkOrCreate(mineUserId, loginQO, uniUnionIdRO);

@@ -1,7 +1,5 @@
 .q-row-item {
-  @extend .row-between-center;
-  @extend .w100p;
-  @extend .px;
-  @extend .py-sm;
-  @extend .bg-white;
+  @extend .q-box-between;
+  @extend .bg-active;
+  @extend .bb;
 }

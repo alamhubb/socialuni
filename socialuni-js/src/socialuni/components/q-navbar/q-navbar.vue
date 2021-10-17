@@ -1,6 +1,6 @@
 <template>
   <view class="w100p">
-    <view class="q-nav-bar" :class="customClass">
+    <view class="w100p position-fixed nav-index" :class="customClass">
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->

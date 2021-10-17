@@ -10,7 +10,7 @@ export default class MockService {
 
   //绑定清池手机号，需要已绑定清池手机号
   static async mockBindSocialuniPhone () {
-    await MockAPI.mockOAuthUserPhoneNumAPI()
-    await OAuthService.oAuthBindSocialuniPhone()
+    const mockRes = await MockAPI.mockOAuthUserPhoneNumAPI()
+    await OAuthService.oAuthBindSocialuniPhone(mockRes.data)
   }
 }

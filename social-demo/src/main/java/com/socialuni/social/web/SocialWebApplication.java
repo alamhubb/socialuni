@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableSocialSDK
-//@EnableCaching
+@EnableCaching
 public class SocialWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(SocialWebApplication.class, args);

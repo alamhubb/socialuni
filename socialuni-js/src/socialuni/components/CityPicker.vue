@@ -1,6 +1,6 @@
 <template>
   <u-popup v-model="showCityPopup" mode="bottom" :border-radius="20" @close="close">
-    <q-bar round class="solid-bottom">
+    <div class="row-between-center q-box bb-1">
       <view class="flex-row">
         <view class="text-black text-md font-bold">城市筛选</view>
         <view class="text-orange font-bold px bg-active" @click="getLocation">
@@ -12,7 +12,7 @@
         <view class="text-blue font-bold mx-sm px-sm bg-active" @click="close">取消</view>
         <view class="text-green font-bold mx-sm px-sm bg-active" @click="confirm">确定</view>
       </view>
-    </q-bar>
+    </div>
 
     <q-row-line class="mt-sm">
       <view class="font-bold">

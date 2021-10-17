@@ -16,7 +16,7 @@ export default class ConfigMap {
   static readonly vipPriceDefault: number = 1000
 
   static readonly swiperHeightKey: string = 'swiperHeight'
-  static readonly swiperHeightDefault: number = 260
+  static readonly swiperHeightDefault: number = 130
 
   static readonly homeUrlKey: string = 'homeUrl'
   static readonly suggestUrlKey: string = 'suggestUrl'

@@ -1,9 +1,16 @@
 <template>
-  <view class="px-smm pt-xs pb-sm" v-if="showSwipers">
+  <view class="px-smm pb-sm" v-if="showSwipers">
     <!--  <view class="bg-primary px-smm pt-xs">-->
-    <u-swiper :height="swiperHeight" :list="homeSwipers" name="imgUrl" @click="skipWebView"
-              :interval="2500"
-    ></u-swiper>
+    <swiper :indicator-dots="true" :autoplay="true" :interval="2500" :style="{'height':swiperHeight+'px'}">
+      <swiper-item class="bd-radius" v-for="item in homeSwipers" @click="skipWebView">
+        <!--        class="radius flex-none h100p"-->
+        <image
+          class="h100p bd-radius w100p"
+          mode="aspectFill"
+          :src="item.imgUrl"
+        />
+      </swiper-item>
+    </swiper>
   </view>
 </template>
 
@@ -23,7 +30,7 @@ import RouterUtil from '../../utils/RouterUtil'
 export default class TalkSwipersPage extends Vue {
   @socialAppStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
   @socialConfigStore.Getter(ConfigMap.homeUrlKey) homeUrl: string
-  swiperHeight: number = ConfigMap.swiperHeightDefault
+  @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
 
   get showSwipers () {
     return this.homeSwipers.length

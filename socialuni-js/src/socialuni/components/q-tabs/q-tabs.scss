@@ -1,7 +1,8 @@
 .active-line {
   @extend .bg-tab;
   height: 3px;
-  @extend .bd-radius-xs;
+  bottom: 8px;
+  border-radius: 20px;
 }
 
 .q-tab-item.active {

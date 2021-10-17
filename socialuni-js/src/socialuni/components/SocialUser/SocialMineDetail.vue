@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom" custom-class="bg-grey">
+      <q-navbar class="q-solid-bottom" custom-class="bg-gray">
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>
@@ -16,12 +16,10 @@
       <!-- #endif -->
 
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">
-        <view class="w65vw flex-col py-xl mt-xl h100r">
-          <q-row>
-            <view class="row-center mt-xl font-bold text-lg w100r">
-              清池 app
-            </view>
-          </q-row>
+        <view class="w65vw flex-col py-xl mt-xl h100p">
+          <view class="q-box-row mt-xl font-bold text-lg">
+            清池 app
+          </view>
           <!--<q-row-item>
             <navigator :url="messageSettingUrl" class="row-col-center flex-auto">
               <view class="row-col-center flex-auto">
@@ -70,24 +68,22 @@
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
-          <q-row>
-            <view class="w100p row-grid">
-              <navigator :url="userAgreementUrl" class="text-blue">
-                《用户协议》
-              </navigator>
-              <navigator :url="userPrivacyUrl" class="text-blue">
-                《隐私政策》
-              </navigator>
-              <navigator :url="childProtectUrl" class="text-blue">
-                《儿童个人信息保护规则及监护人须知》
-              </navigator>
-            </view>
-          </q-row>
-          <q-row class="flex-auto col-end">
+          <view class="q-box w100p row-grid">
+            <navigator :url="userAgreementUrl" class="text-blue">
+              《用户协议》
+            </navigator>
+            <navigator :url="userPrivacyUrl" class="text-blue">
+              《隐私政策》
+            </navigator>
+            <navigator :url="childProtectUrl" class="text-blue">
+              《儿童个人信息保护规则及监护人须知》
+            </navigator>
+          </view>
+          <view class="flex-auto col-end">
             <view class="row-center font-bold pb-xl text-lg w100r">
               <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>
             </view>
-          </q-row>
+          </view>
         </view>
       </u-popup>
       <msg-input>
@@ -154,8 +150,6 @@ import UniUtil from '../../utils/UniUtil'
 import SkipUrlConst from '../../const/SkipUrlConst'
 import { socialAppModule, socialUserModule, socialUserStore } from '../../store'
 import QNavbar from '../q-navbar/q-navbar.vue'
-import QRow from '../q-row/q-row.vue'
-import QBar from '../q-bar/q-bar.vue'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import OpenDataAPI from '../../api/OpenDataAPI'
 import Toast from '../../utils/Toast'
@@ -169,8 +163,6 @@ import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.
     QIcon,
     MsgInput,
     QRowItem,
-    QBar,
-    QRow,
     QNavbar,
     UserInfo,
     UserEdit,
