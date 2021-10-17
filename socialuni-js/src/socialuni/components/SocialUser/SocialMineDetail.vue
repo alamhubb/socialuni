@@ -155,7 +155,6 @@ import SkipUrlConst from '../../const/SkipUrlConst'
 import { socialAppModule, socialUserModule, socialUserStore } from '../../store'
 import QNavbar from '../q-navbar/q-navbar.vue'
 import QRow from '../q-row/q-row.vue'
-import QBar from '../q-bar/q-bar.vue'
 import QRowItem from '../q-row-item/q-row-item.vue'
 import OpenDataAPI from '../../api/OpenDataAPI'
 import Toast from '../../utils/Toast'
@@ -169,7 +168,6 @@ import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.
     QIcon,
     MsgInput,
     QRowItem,
-    QBar,
     QRow,
     QNavbar,
     UserInfo,

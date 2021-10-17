@@ -85,7 +85,31 @@
 }
 
 .bd-radius {
+  border: $border-base;
   border-radius: $border-radius-base !important;
+}
+
+.bt-radius {
+  border: $border-base;
+  border-top-left-radius: $border-radius-base !important;
+  border-top-right-radius: $border-radius-base !important;
+}
+
+.bb-radius {
+  border: $border-base;
+  border-bottom-left-radius: $border-radius-base !important;
+  border-bottom-right-radius: $border-radius-base !important;
+}
+
+.bl-radius {
+  border: $border-base;
+  border-top-left-radius: $border-radius-base !important;
+  border-bottom-left-radius: $border-radius-base !important;
+}
+
+.br-radius {
+  border-top-right-radius: $border-radius-base !important;
+  border-bottom-right-radius: $border-radius-base !important;
 }
 
 @each $directionKey, $directionValue in $direction-com-map {
@@ -105,6 +129,30 @@
     .b#{''+$directionKey+''}-radius-#{''+$index} {
       border: $border-base;
       border-#{''+$directionValue}radius: #{''+$index}px !important;
+    }
+
+    .bt-radius-#{''+$index} {
+      border: $border-base;
+      border-top-left-radius: #{''+$index}px !important;
+      border-top-right-radius: #{''+$index}px !important;
+    }
+
+    .bb-radius-#{''+$index} {
+      border: $border-base;
+      border-bottom-left-radius: #{''+$index}px !important;
+      border-bottom-right-radius: #{''+$index}px !important;
+    }
+
+    .bl-radius-#{''+$index} {
+      border: $border-base;
+      border-top-left-radius: #{''+$index}px !important;
+      border-bottom-left-radius: #{''+$index}px !important;
+    }
+
+    .br-radius-#{''+$index} {
+      border: $border-base;
+      border-top-right-radius: #{''+$index}px !important;
+      border-bottom-right-radius: #{''+$index}px !important;
     }
   }
 }

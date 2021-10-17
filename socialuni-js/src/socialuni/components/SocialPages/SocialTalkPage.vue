@@ -34,13 +34,13 @@
       </q-navbar>
 
       <q-popup v-model="showFilter" bottom>
-        <q-bar round class="bb-1">
+        <div class="row-between-center q-box bb-1">
           <view class="text-black text-md font-bold">动态筛选</view>
           <view class="flex-row">
             <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
             <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
           </view>
-        </q-bar>
+        </div>
         <view class="mt-sm pb-sm">
           <!--          只有当前应用类型为全部性别才显示性别筛选-->
           <view class="row-center px pt" v-if="appGender === GenderTypeAll">
@@ -125,7 +125,6 @@ import QNavbar from '../q-navbar/q-navbar.vue'
 import QSearch from '../q-search/q-search.vue'
 import QIcon from '../q-icon/q-icon.vue'
 import QPopup from '../q-popup/q-popup.vue'
-import QBar from '../q-bar/q-bar.vue'
 import QSlider from '../q-slider/q-slider.vue'
 import NodesRef = UniApp.NodesRef;
 import SelectorQuery = UniApp.SelectorQuery;
@@ -135,7 +134,6 @@ import SelectorQuery = UniApp.SelectorQuery;
 @Component({
   components: {
     QSlider,
-    QBar,
     QPopup,
     QIcon,
     QSearch,
