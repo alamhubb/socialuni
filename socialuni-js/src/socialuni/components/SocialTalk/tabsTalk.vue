@@ -26,7 +26,7 @@
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
-    <q-pull-refresh class="bg-theme-light" :refresh="queryEnd">
+    <q-pull-refresh ref="pullRefresh" class="bg-theme-light" @refresh="queryEnd">
       <swiper :current="swiperCurrent"
               :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
@@ -98,15 +98,6 @@
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
 
     <!--        默认附近，可以切换城市，城市-->
-    <!--    bg-default-->
-    <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-    <!--    <div @touchstart="pageTouchstart"
-             @touchmove="pageTouchmove"
-             @touchend="pageTouchend"
-             class="bg-theme-light"
-             :style="{transform: 'translateY('+ moveNum +'px)'}">
-
-        </div>-->
   </view>
 </template>
 
@@ -161,6 +152,9 @@ import NodesRef = UniApp.NodesRef
   }
 })
 export default class TabsTalkPage extends Vue {
+  $refs: {
+    pullRefresh: QPullRefresh
+  }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
 
   @Prop() readonly scrollEnable: boolean
@@ -169,30 +163,6 @@ export default class TabsTalkPage extends Vue {
     contentdown: '点击显示更多',
     contentrefresh: '正在加载...',
     contentnomore: '没有更多数据了,点击刷新'
-  }
-
-  startNum = 0
-  curNum = 0
-  moveNum = 0
-
-  pageTouchstart (e) {
-    const startNum = e.touches[0].pageY
-    this.startNum = startNum
-  }
-
-  pageTouchmove (e) {
-    const curNum = e.touches[0].pageY
-    this.curNum = curNum
-    const moveNum = Math.max(this.curNum - this.startNum, 0)
-    this.moveNum = moveNum
-  }
-
-  pageTouchend () {
-
-  }
-
-  refresh () {
-    this.queryEnd()
   }
 
   // 用户登录后重新查询
@@ -246,7 +216,6 @@ export default class TabsTalkPage extends Vue {
     this.getTabBarTop()
   }
 
-  @Prop() readonly tabsId: string
   tabsHeight = 0
   // 去除的高度,单位px
   talksListHeightSub = 0
@@ -352,6 +321,7 @@ export default class TabsTalkPage extends Vue {
         talkTab.loadMore = LoadMoreType.more
       } else {
         await this.autoChooseUseLocationQueryTalks(true)
+        this.$refs.pullRefresh.endPulldownRefresh()
       }
     }
   }
