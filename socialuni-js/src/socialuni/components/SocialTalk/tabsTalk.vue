@@ -1,23 +1,24 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-row-bar class="black row-between px py-sm flex-none flex-none btr-smm bg-theme-light" :class="tabsId">
+    <q-row-bar class="px-smm flex-none btr-smm bg-theme-light" :class="tabsId">
       <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
         <template #default="{tab}">
           <q-tab>
             {{ tab.name }}
+<!--            费劲啊实力哈哈-->
           </q-tab>
         </template>
         <template #icon="{tab}">
           <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
         </template>
       </q-tabs>
-      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
+<!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
         <view v-if="talkTabObj.loadMore===loading">
           <u-loading mode="circle"></u-loading>
         </view>
         <q-icon v-else size="18" icon="reload"></q-icon>
-      </view>
+      </view>-->
       <!--<view class="px-sm">
         <view class="w12"></view>
       </view>-->
@@ -27,6 +28,74 @@
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
+    <q-pull-refresh class="bg-theme-light" :refresh="queryEnd">
+      <swiper
+        class="bg-theme-light" :current="swiperCurrent"
+        :style="{
+              'height':'calc(100vh - '+talksListHeightSub+'px)',
+            }"
+        @change="talkSwiperChange">
+        <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+          <!--
+          使用view实现的问题，没有scroll事件小程序上
+          <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                :lower-threshold="800"
+                @scroll.native="talksScrollEvent"
+                @scroll="talksScrollEvent"
+          >-->
+          <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                       :lower-threshold="800"
+                       @scroll="talksScrollEvent">
+            <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+            <div class="px-sm pb-60"
+                 v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+              <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                <talk-item :talk="talk"
+                           :talk-tab-type="talkTabObj.type"
+                           @deleteTalk="deleteTalk"
+                />
+                <!-- app端广告有问题-->
+                <!--  #ifdef APP-PLUS -->
+                <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                  <ad class="bg-white" adpid="1890536227"></ad>
+                </view>-->
+                <!--  #endif -->
+                <!--wx平台显示的广告-->
+                <!--  #ifdef MP-WEIXIN -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+                <!--  #endif -->
+
+                <!--qq平台显示的广告-->
+                <!--  #ifdef MP-QQ -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+                <!--  #endif -->
+
+                <!--头条平台显示的广告-->
+                <!--  #ifdef MP-TOUTIAO -->
+                <ad v-if="showAd&&showAdIndexList.includes(index)"
+                    class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+                <!--  #endif -->
+              </view>
+              <!-- 下拉刷新组件 -->
+              <view class="mt-xs">
+                <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
+                               :contentText="loadMoreText"></uni-load-more>
+              </view>
+            </div>
+            <template v-else>
+              <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                您还没有关注其他人
+              </view>
+              <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
+                您还没有登录，点击登录
+              </view>
+            </template>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </q-pull-refresh>
     <!--            从附近哪里选择城市-->
     <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
@@ -34,78 +103,13 @@
     <!--        默认附近，可以切换城市，城市-->
     <!--    bg-default-->
     <!--    动态计算主要是要加上轮播图的高度，然后滚动过轮播图开启滚动这个逻辑-->
-<!--    <div @touchstart="pageTouchstart"
-         @touchmove="pageTouchmove"
-         @touchend="pageTouchend"
-       class="pt-50">
+    <!--    <div @touchstart="pageTouchstart"
+             @touchmove="pageTouchmove"
+             @touchend="pageTouchend"
+             class="bg-theme-light"
+             :style="{transform: 'translateY('+ moveNum +'px)'}">
 
-    </div>-->
-    <swiper class="bg-theme-light" :current="swiperCurrent"
-            :style="{
-              'height':'calc(100vh - '+talksListHeightSub+'px)',
-              'padding-bottom': talksListPaddingBottom+'px',
-            }"
-            @change="talkSwiperChange">
-      <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-        <!--
-        使用view实现的问题，没有scroll事件小程序上
-        <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-              :lower-threshold="800"
-              @scroll.native="talksScrollEvent"
-              @scroll="talksScrollEvent"
-        >-->
-        <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
-                     :lower-threshold="800"
-                     @scroll="talksScrollEvent">
-          <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-          <div class="px-sm pb-60"
-               v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
-            <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
-              <talk-item :talk="talk"
-                         :talk-tab-type="talkTabObj.type"
-                         @deleteTalk="deleteTalk"
-              />
-              <!-- app端广告有问题-->
-              <!--  #ifdef APP-PLUS -->
-              <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
-                <ad class="bg-white" adpid="1890536227"></ad>
-              </view>-->
-              <!--  #endif -->
-              <!--wx平台显示的广告-->
-              <!--  #ifdef MP-WEIXIN -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
-              <!--  #endif -->
-
-              <!--qq平台显示的广告-->
-              <!--  #ifdef MP-QQ -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-              <!--  #endif -->
-
-              <!--头条平台显示的广告-->
-              <!--  #ifdef MP-TOUTIAO -->
-              <ad v-if="showAd&&showAdIndexList.includes(index)"
-                  class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
-              <!--  #endif -->
-            </view>
-            <!-- 下拉刷新组件 -->
-            <view class="mt-xs">
-              <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
-                             :contentText="loadMoreText"></uni-load-more>
-            </view>
-          </div>
-          <template v-else>
-            <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
-              您还没有关注其他人
-            </view>
-            <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
-              您还没有登录，点击登录
-            </view>
-          </template>
-        </scroll-view>
-      </swiper-item>
-    </swiper>
+        </div>-->
   </view>
 </template>
 
@@ -141,6 +145,7 @@ import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QRowBar from '../q-row-bar/q-row-bar.vue'
+import QPullRefresh from '@/socialuni/components/q-pull-refresh/QPullRefresh.vue'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
 
@@ -149,6 +154,7 @@ import NodesRef = UniApp.NodesRef
 
 @Component({
   components: {
+    QPullRefresh,
     QRowBar,
     CityPicker,
     QIcon,
@@ -170,15 +176,28 @@ export default class TabsTalkPage extends Vue {
     contentnomore: '没有更多数据了,点击刷新'
   }
 
+  startNum = 0
+  curNum = 0
+  moveNum = 0
+
   pageTouchstart (e) {
-    console.log(e.touches[0].pageY)
+    const startNum = e.touches[0].pageY
+    this.startNum = startNum
   }
+
   pageTouchmove (e) {
-    console.log(e.touches[0].pageY)
+    const curNum = e.touches[0].pageY
+    this.curNum = curNum
+    const moveNum = Math.max(this.curNum - this.startNum, 0)
+    this.moveNum = moveNum
   }
 
   pageTouchend () {
 
+  }
+
+  refresh () {
+    this.queryEnd()
   }
 
   // 用户登录后重新查询
@@ -236,7 +255,6 @@ export default class TabsTalkPage extends Vue {
   tabsHeight = 0
   // 去除的高度,单位px
   talksListHeightSub = 0
-  talksListPaddingBottom = 0
 
   getTabBarTop () {
     const query: SelectorQuery = uni.createSelectorQuery().in(this)
@@ -246,11 +264,11 @@ export default class TabsTalkPage extends Vue {
       if (res) {
         //获取tab的高度
         this.tabsHeight = res.height
+        console.log(this.tabsHeight)
         // h5有头顶和下边导航栏都算了高度
         // #ifdef H5
         //tab的高度加上导航栏的高度
         this.talksListHeightSub = 44 + this.tabsHeight
-        // this.talksListPaddingBottom = UniUtil.upxToPx(100)
         // #endif
         // #ifndef H5
         this.talksListHeightSub = socialSystemModule.statusBarHeight + 44 + this.tabsHeight
@@ -288,14 +306,14 @@ export default class TabsTalkPage extends Vue {
   }
 
   //如果用户开了定位，就获取经纬度去查询，如果用户没开启定位，就不使用经纬度，没必要每次都获取经纬度。
-  autoChooseUseLocationQueryTalks (firstLoad?: boolean) {
+  async autoChooseUseLocationQueryTalks (firstLoad?: boolean) {
     //只有不为加载中才可以加载
     //手动刷新可以刷新，或者为
     if (this.talkTabObj.loadMore === LoadMoreType.more || firstLoad) {
       // 执行正在加载动画
       this.talkTabObj.loadMore = LoadMoreType.loading
       // if (firstLoad) {
-      this.queryTalks(firstLoad)
+      await this.queryTalks(firstLoad)
       // }
       //首次时加载地理位置就好了，之后就是点击定位的时候加载
       /*if (locationModule.openLocation) {
@@ -308,12 +326,15 @@ export default class TabsTalkPage extends Vue {
 
   // 默认地理位置是北京，以后可以根据ip获取当前城市
   // 话题的话显示最热门的话题，且只查询包含话题的动态
-  queryTalks (firstLoad?: boolean) {
+  async queryTalks (firstLoad?: boolean) {
     //只有在传false时校验后面的
     const fistLoad = firstLoad || this.talkTabObj.firstLoad
     // query condition
     const talkIds: number[] = (fistLoad ? [] : this.talkIds)
-    TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge).then((res: any) => {
+    CommonUtil.delayTime(0).then(() => {
+      this.talkTabObj.firstLoad = false
+    })
+    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
@@ -338,10 +359,9 @@ export default class TabsTalkPage extends Vue {
     }).catch(() => {
       this.talkTabObj.loadMore = LoadMoreType.more
     })
-    this.talkTabObj.firstLoad = false
   }
 
-  queryEnd () {
+  async queryEnd () {
     //停止查询方法
     const talkTab = this.talkTabObj
     if (talkTab) {
@@ -350,7 +370,7 @@ export default class TabsTalkPage extends Vue {
       if (loadMoreState === LoadMoreType.loading) {
         talkTab.loadMore = LoadMoreType.more
       } else {
-        this.autoChooseUseLocationQueryTalks(true)
+        await this.autoChooseUseLocationQueryTalks(true)
       }
     }
   }
