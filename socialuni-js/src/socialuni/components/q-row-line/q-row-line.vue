@@ -11,7 +11,7 @@ import { Vue, Component, Emit } from 'vue-property-decorator'
 显示出来已经选了的城市，给她画上钩
 * */
 @Component
-export default class QRowItem extends Vue {
+export default class QRowLine extends Vue {
   @Emit()
   click () {
     return ''
