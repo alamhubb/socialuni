@@ -144,7 +144,6 @@ import QIcon from '../q-icon/q-icon.vue'
 import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
-import QRowBar from '../q-row-bar/q-row-bar.vue'
 import QPullRefresh from '@/socialuni/components/q-pull-refresh/QPullRefresh.vue'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
@@ -155,7 +154,6 @@ import NodesRef = UniApp.NodesRef
 @Component({
   components: {
     QPullRefresh,
-    QRowBar,
     CityPicker,
     QIcon,
     QTabs,
