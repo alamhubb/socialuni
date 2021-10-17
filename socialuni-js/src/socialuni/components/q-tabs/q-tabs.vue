@@ -1,5 +1,5 @@
 <template>
-  <view class="row-col-center position-relative overflow-x-auto">
+  <view class="q-box row-col-center position-relative overflow-x-auto">
     <view class="row-nowrap mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
       <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">
         <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
@@ -26,7 +26,6 @@ export default class QTabs extends Vue {
   @Model('input') readonly value: number
   @Prop({ default: [] }) readonly tabs: any[]
   @Prop({ default: '50' }) readonly barWidth: string
-  scrollBarLeft: number = 0
   activeClass: string[] = ['active', 'tab-line']
 
   tabItemLefts: number[] = [0]
@@ -37,7 +36,6 @@ export default class QTabs extends Vue {
   get tabSlideStyle () {
     const barWidth = Number(this.barWidth) / 2
     return {
-      bottom: '0',
       transform: 'translate(' + this.tabItemLefts[this.value] + 'px)',
       //首次不开启动画
       'transition-duration': this.firstLoadAfter ? '0.5s' : '0',

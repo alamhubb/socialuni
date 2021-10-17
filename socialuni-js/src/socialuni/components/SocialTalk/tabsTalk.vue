@@ -1,40 +1,37 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p">
+  <view v-if="talkTabs.length" class="flex-col h100p bg-theme-light bt-radius-15">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <div class="q-box-row bt-radius-15 bg-theme-light" :class="tabsId">
-      <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
-        <template #default="{tab}">
-          <q-tab>
-            {{ tab.name }}
-<!--            费劲啊实力哈哈-->
-          </q-tab>
-        </template>
-        <template #icon="{tab}">
-          <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
-        </template>
-      </q-tabs>
-<!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
-        <view v-if="talkTabObj.loadMore===loading">
-          <u-loading mode="circle"></u-loading>
-        </view>
-        <q-icon v-else size="18" icon="reload"></q-icon>
-      </view>-->
-      <!--<view class="px-sm">
-        <view class="w12"></view>
-      </view>-->
-    </div>
+    <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
+      <template #default="{tab}">
+        <q-tab>
+          {{ tab.name }}
+          <!--            费劲啊实力哈哈-->
+        </q-tab>
+      </template>
+      <template #icon="{tab}">
+        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
+      </template>
+    </q-tabs>
+    <!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
+            <view v-if="talkTabObj.loadMore===loading">
+              <u-loading mode="circle"></u-loading>
+            </view>
+            <q-icon v-else size="18" icon="reload"></q-icon>
+          </view>-->
+    <!--<view class="px-sm">
+      <view class="w12"></view>
+    </view>-->
 
     <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
     <q-pull-refresh class="bg-theme-light" :refresh="queryEnd">
-      <swiper
-        class="bg-theme-light" :current="swiperCurrent"
-        :style="{
+      <swiper :current="swiperCurrent"
+              :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
             }"
-        @change="talkSwiperChange">
+              @change="talkSwiperChange">
         <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
           <!--
           使用view实现的问题，没有scroll事件小程序上
@@ -43,11 +40,11 @@
                 @scroll.native="talksScrollEvent"
                 @scroll="talksScrollEvent"
           >-->
-          <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p bg-theme-light" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-            <div class="px-sm pb-60"
+            <div class="px-sm pb-60 bg-theme-light"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
@@ -255,29 +252,15 @@ export default class TabsTalkPage extends Vue {
   talksListHeightSub = 0
 
   getTabBarTop () {
-    const query: SelectorQuery = uni.createSelectorQuery().in(this)
-    // 获取tabs到top的点
-    const nodeLeft: NodesRef = query.select('.' + this.tabsId)
-    nodeLeft.boundingClientRect((res: any) => {
-      if (res) {
-        //获取tab的高度
-        this.tabsHeight = res.height
-        console.log(this.tabsHeight)
-        // h5有头顶和下边导航栏都算了高度
-        // #ifdef H5
-        //tab的高度加上导航栏的高度
-        this.talksListHeightSub = 44 + this.tabsHeight
-        // #endif
-        // #ifndef H5
-        this.talksListHeightSub = socialSystemModule.statusBarHeight + 44 + this.tabsHeight
-        // #endif
-      } else {
-        // 给5秒
-        CommonUtil.delayTime(100).then(() => {
-          this.getTabBarTop()
-        })
-      }
-    }).exec()
+    this.tabsHeight = 50
+    // h5有头顶和下边导航栏都算了高度
+    // #ifdef H5
+    //tab的高度加上导航栏的高度
+    this.talksListHeightSub = 44 + this.tabsHeight
+    // #endif
+    // #ifndef H5
+    this.talksListHeightSub = socialSystemModule.statusBarHeight + 44 + this.tabsHeight
+    // #endif
   }
 
 
