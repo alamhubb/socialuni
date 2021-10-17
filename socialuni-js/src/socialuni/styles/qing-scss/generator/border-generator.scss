@@ -50,7 +50,12 @@
     border-top-width: #{''+$index}px !important;
     border-bottom-width: #{''+$index}px !important;
   }
+
   @each $directionKey, $directionValue in $direction-map {
+    .b#{''+$directionKey+''} {
+      border-#{''+$directionValue}: $border-base;
+    }
+
     .b#{''+$directionKey+''}-#{''+$index+''} {
       border-#{''+$directionValue}: $border-base;
       border-#{''+$directionValue+''}-width: #{''+$index}px !important;

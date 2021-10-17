@@ -378,7 +378,6 @@ import MockService from '@/socialuni/service/MockService'
 @Component({
   components: {
     QIcon,
-    QRow,
     QRowItem,
     TalkOperate,
     UserEdit,
