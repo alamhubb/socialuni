@@ -68,12 +68,13 @@ import { Component, Vue } from 'vue-property-decorator'
 import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
-import { socialSystemStore, socialUserStore } from '@/socialuni/store'
+import { socialAppModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
 import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
+import MockService from '@/socialuni/service/MockService'
 
 @Component({
   components: {
@@ -107,18 +108,15 @@ export default class PhonePage extends Vue {
       UniUtil.showLoading('跳转中')
       this.openTypeBtnEnable = false
       try {
-        console.log('等待执行')
         //开发模式模拟授权
-        /*if (socialAppModule.isDevMode) {
+        if (socialAppModule.isDevMode) {
           await MockService.mockBindSocialuniPhone()
         } else {
           const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
           PageUtil.toSocialUniAuth(authVO)
-        }*/
-        console.log('chufa')
-        const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
-        PageUtil.toSocialUniAuth(authVO)
-        console.log('执行完毕')
+        }
+        // const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+        // PageUtil.toSocialUniAuth(authVO)
       } finally {
         this.openTypeBtnEnable = true
         UniUtil.hideLoading()

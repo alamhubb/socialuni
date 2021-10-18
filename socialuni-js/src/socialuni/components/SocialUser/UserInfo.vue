@@ -361,7 +361,6 @@ import {
   socialUserStore
 } from '../../store'
 import QRowItem from '../q-row-item/q-row-item.vue'
-import QRow from '../q-row/q-row.vue'
 import Alert from '../../utils/Alert'
 import Toast from '../../utils/Toast'
 import RouterUtil from '../../utils/RouterUtil'
@@ -580,13 +579,6 @@ export default class UserInfo extends Vue {
   }
 
   async toPhonePage () {
-    //开发模式模拟授权
-    /*if (socialAppModule.isDevMode) {
-      await MockService.mockBindSocialuniPhone()
-    } else {
-      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
-      PageUtil.toSocialUniAuth(authVO)
-    }*/
     PageUtil.toPhonePage()
   }
 
