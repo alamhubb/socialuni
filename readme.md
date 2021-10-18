@@ -1,4 +1,33 @@
+## 产品体验，已上线两款产品，清池和小星星
+### 开发者基于此项目，三分钟就可以开发一款与展示项目相同的小程序
+* 有自己项目，或者想自己做个项目的朋友欢迎入群交流，大家一起讨论变现，接广告，如何做好产品相关问题
+
+<table>
+  <thead>
+  <tr>
+    <th>我的微信，进社交软件app交流群可以加我，互相学习，讨论问题</th>
+    <th>清池</th>
+    <th>小星星</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td align="center" valign="middle">
+        <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/wxcode.png">
+      </td>
+      <td align="center" valign="middle">
+        <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/qingchiwxcode.jpg!thumbnail">
+      </td>
+      <td align="center" valign="middle">
+         <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/socialuni/ministar/ministarwxmpcode.jpg!thumbnail">
+      </td>
+    </tr>
+  <tr></tr>
+  </tbody>
+</table>
+
 ## 社交联盟项目，提供中心化的用户动态数据，提供社交项目前后端模板，帮助开发者快速开发一个满足运营需求，有真实用户和流量的社交软件
+
 
 ## 社交联盟项目模板(包含前后端代码)
 
@@ -10,7 +39,7 @@
 
 数据存两份，开发者数据库一份，联盟一份，未来会拆开这个逻辑，支持不接入联盟的方式
 
-### 使用方式:
+### 项目文档，使用方式:
 
 1. 首先前往社交联盟注册成为开发者，https://admin.qingchiapp.com/
 2. 修改前端项目内容，修改socialuni-js项目src下的manifest.json中的mp-weixin，app-id改为自己的小程序appId
@@ -21,6 +50,8 @@ socialuni:
    
 然后分别启动后端和前端你项目，即可体验
 
+### 项目配置
+1. 主题颜色配置，在uni.scss中可配置$color-bg-theme(主背景色),$color-bg-theme-light(浅背景色),$color-tab的颜色
 
 # 社交联盟
 ### 关键词
@@ -90,33 +121,6 @@ uniapp chat Community Dating Social app
 ### 技术架构
 * 前端 uniapp + vue + ts
 * 后端 java + springboot + mysql
-
-### 产品直接下载体验
-* 有自己项目，或者想自己做个项目的朋友欢迎入群交流，大家一起讨论变现，接广告，如何做好产品相关问题
-
-<table>
-  <thead>
-  <tr>
-    <th>我微信，可进社交软件app交流群，互相学习，讨论问题</th>
-    <th>微信扫码体验（不支持ios）</th>
-    <th>QQ扫码体验（支持ios）</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-      <td align="center" valign="middle">
-        <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/wxcode.png">
-      </td>
-      <td align="center" valign="middle">
-        <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/qingchiwxcode.jpg!thumbnail">
-      </td>
-      <td align="center" valign="middle">
-         <img width="222px" src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/qingchiqqcode.png!thumbnail">
-      </td>
-    </tr>
-  <tr></tr>
-  </tbody>
-</table>
 
 app已上架，应用宝、360、oppo、vivo、小米、阿里应用中心，大家可搜索 清池 自行下载。
 
