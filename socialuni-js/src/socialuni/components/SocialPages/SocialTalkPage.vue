@@ -41,26 +41,32 @@
 
 
       <div class="flex-1 flex-col bg-theme-light bt-radius-15">
-<!--        <div class="flex-row px-smm pt-sm">
-          <div class="size100">
-            <img class="bd-round size100" :src="tags[0].avatar"/>
-            <div>{{tags[0].name}}</div>
+        <div class="flex-row px-smm pt-sm">
+          <div class="flex-col">
+            <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
+            <div class="flex-1 col-center">
+              <img class="bd-round size80" :src="tags[0].avatar"/>
+            </div>
           </div>
           <div>
-            <div class="h50 row-col-center ml-sm">简介,撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯顿发是的分阿斯蒂芬</div>
-            <div class="flex-row">
-              <div v-for="(item,index) in tags" v-if="index<4" class="px-sm">
-                {{ item.name }}
+            <div class="row-col-center ml-smm overflow-hidden">简介,撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯顿</div>
+            <div class="flex-row mt-xs pl-xs">
+              <div v-for="(item,index) in tags" v-if="index<4">
+                <div class="cu-tag round bg-pink light ml-sm">
+                  {{ item.name }}
+                </div>
               </div>
             </div>
-            <div class="row-wrap">
-              <div v-for="(item,index) in tags" v-if="index<4" class="px-sm">
-                <img class="bd-round size40" :src="item.avatar"/>
-                <div>{{ item.name }}</div>
+            <div class="flex-row mt-sm pl-xs">
+              <div v-for="(item,index) in tags" v-if="index<4" class="ml-sm">
+                <div class="col-all-center">
+                  <img class="bd-round size40" :src="item.avatar"/>
+                  <div>{{ item.name }}</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>-->
+        </div>
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"
                    :selectTagIds="selectTagIds"
