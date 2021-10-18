@@ -41,7 +41,7 @@
 
 
       <div class="flex-1 flex-col bg-theme-light bt-radius-15">
-        <div class="flex-row px-smm pt-sm">
+<!--        <div class="flex-row px-smm pt-sm">
           <div class="size100">
             <img class="bd-round size100" :src="tags[0].avatar"/>
             <div>{{tags[0].name}}</div>
@@ -60,8 +60,7 @@
               </div>
             </div>
           </div>
-        </div>
-
+        </div>-->
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"
                    :selectTagIds="selectTagIds"

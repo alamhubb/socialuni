@@ -82,5 +82,6 @@
     "app-plus": {
       "softinputNavBar": "none"
     }
-  }
+  },
+  "navigateToMiniProgramAppIdList": ["1109985787"]
 }
