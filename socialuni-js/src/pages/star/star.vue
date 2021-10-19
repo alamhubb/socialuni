@@ -19,13 +19,13 @@
       <div class="bg-red line-h1 box-mn">你哈奥</div>
     </div>
     <div class="flex-row">
-      <div class="bg-green-light line-h1 box-sm font-12">你哈奥</div>
+      <div class="bg-green line-h1 box-sm">你哈奥</div>
     </div>
     <div class="flex-row">
-      <div class="bg-blue line-h1 box-df font-14">你哈奥</div>
+      <div class="bg-blue line-h1 box-df">你哈奥</div>
     </div>
     <div class="flex-row">
-      <div class="bg-red line-h1 px box-md font-16">你哈奥</div>
+      <div class="bg-red line-h1 px box-md">你哈奥</div>
     </div>
   </div>
 </template>
