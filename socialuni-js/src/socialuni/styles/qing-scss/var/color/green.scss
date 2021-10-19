@@ -6,13 +6,15 @@ $color-green4: #B7EB8F;
 $color-green5: #C2E7B0;
 $color-green6: #F0F9EB;
 
+$color-green-light: $color-green6;
 
 $colors-green: (
-  green:$color-green,
-  green1:$color-green1,
-  green2:$color-green2,
-  green3:$color-green3,
-  green4:$color-green4,
-  green5:$color-green5,
-  green6:$color-green6,
+        green:$color-green,
+        green1:$color-green1,
+        green2:$color-green2,
+        green3:$color-green3,
+        green4:$color-green4,
+        green5:$color-green5,
+        green6:$color-green6,
+        green-light:$color-green-light,
 );

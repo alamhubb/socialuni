@@ -8,14 +8,17 @@ $color-blue6: #69C0FF;
 $color-blue7: #B3D8FF;
 $color-blue8: #EDF5FF;
 
+$color-blue-light: $color-blue8;
+
 $colors-blue: (
-  blue:$color-blue,
-  blue1:$color-blue1,
-  blue2:$color-blue2,
-  blue3:$color-blue3,
-  blue4:$color-blue4,
-  blue5:$color-blue5,
-  blue6:$color-blue6,
-  blue7:$color-blue7,
-  blue8:$color-blue8,
+        blue:$color-blue,
+        blue1:$color-blue1,
+        blue2:$color-blue2,
+        blue3:$color-blue3,
+        blue4:$color-blue4,
+        blue5:$color-blue5,
+        blue6:$color-blue6,
+        blue7:$color-blue7,
+        blue8:$color-blue8,
+        blue-light:$color-blue-light,
 );

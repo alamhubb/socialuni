@@ -15,17 +15,10 @@
     >
     </u-field>
 
+
     <div class="flex-row">
-      <div class="bg-red line-h1 box-mn">你哈奥</div>
-    </div>
-    <div class="flex-row">
-      <div class="bg-green line-h1 box-sm">你哈奥</div>
-    </div>
-    <div class="flex-row">
-      <div class="bg-blue line-h1 box-df">你哈奥</div>
-    </div>
-    <div class="flex-row">
-      <div class="bg-red line-h1 px box-md">你哈奥</div>
+      <u-button size="medium">取消</u-button>
+      <u-button type="primary" size="medium">创建</u-button>
     </div>
   </div>
 </template>
