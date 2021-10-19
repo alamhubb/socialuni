@@ -6,42 +6,6 @@
   border-color: $color-border-default;
 }
 
-.bg-no-repeat {
-  background-repeat: no-repeat;
-}
-
-.bg-disabled {
-  background-color: rgba(245, 206, 231, 0.12);
-}
-
-.bg-active:active {
-  opacity: 0.5;
-}
-
-.bg-hover:hover {
-  background-color: #f7f7f7;
-}
-
-.bg-opacity {
-  opacity: 0;
-}
-
-.bg-shadow {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.bg-modal {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.bg-transparent {
-  background: rgba(0, 0, 0, 0);
-}
-
-.bg-half-transparent {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 //遍历颜色
 //遍历主题类，plain dark light
 //遍历size

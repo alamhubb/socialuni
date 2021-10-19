@@ -1,36 +1,33 @@
 <template>
-  <view>
-    <view class="pd-sm pt-0 bg-white solid-bottom">
-      <view>
-        <view class="cu-form-group">
-          <view class="title">
-            <text class="color-red">*</text>
-            标签：
-          </view>
-          <input :cursor-spacing="20" maxlength="4" v-model.trim="tagName" placeholder="必填"/>
-          <view class="uni-icon uni-icon-clear" v-if="tagName" @click="clearTagName"></view>
-          <view class="color-red">最多四个字</view>
-        </view>
+  <div>
+    <u-field
+      label="星名称"
+      placeholder="请填写星名称"
+      required
+    >
+    </u-field>
 
-        <view class="cu-form-group align-start">
-          <view class="title">
-            描述：
-          </view>
-          <textarea class="h150" maxlength="300" v-model.trim="tagDescription" placeholder="非必填"
-                    :show-confirm-bar="false"
-          ></textarea>
-        </view>
-      </view>
-    </view>
-    <view class="cu-bar bg-white">
-      <view class="action ma-0 flex-sub">
-        <view class="action ma-0 flex-sub" @click="closePopup">取消</view>
-        <view class="action ma-0 flex-sub text-green solid-left" :disabled="tagName" @click="addTagClick">
-          创建
-        </view>
-      </view>
-    </view>
-  </view>
+    <u-field
+      type="textarea"
+      label="星描述"
+      required
+      placeholder="请填写星名称"
+    >
+    </u-field>
+
+    <div class="flex-row">
+      <div class="bg-red line-h1 px-xs py-mn font-12">你哈奥</div>
+    </div>
+    <div class="flex-row">
+      <div class="bg-green line-h1 px-sm py-xs font-12">你哈奥</div>
+    </div>
+    <div class="flex-row">
+      <div class="bg-blue line-h1 px-smm py-sm font-14">你哈奥</div>
+    </div>
+    <div class="flex-row">
+      <div class="bg-red line-h1 px py-smm font-16">你哈奥</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -39,8 +36,11 @@ import ResultRO from '@/socialuni/model/social/ResultRO'
 import TagAPI from '@/socialuni/api/TagAPI'
 import Alert from '@/socialuni/utils/Alert'
 import ErrorConst from '@/socialuni/const/ErrorConst'
+import QButton from '@/socialuni/components/q-button/QButton.vue'
 
-@Component
+@Component({
+  components: { QButton }
+})
 export default class StarPage extends Vue {
   // tag名称
   tagName = ''
@@ -49,6 +49,11 @@ export default class StarPage extends Vue {
 
   closePopup () {
     this.$emit('close')
+  }
+
+
+  test () {
+    console.log(123)
   }
 
   checkTag (tag: TagVO) {

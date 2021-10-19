@@ -1,8 +1,7 @@
 <template>
   <button
-    class="q-button" :class="buttonClass"
+    class="px-smm py-sm bg-click font-14" style="line-height: 1" :class="buttonClass"
     @click.stop="clickHandler"
-
     :disabled="disabled"
     :loading="loading"
     :form-type="formType"
@@ -30,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import ComUtil from '../utils/ComUtil'
 
 @Component
@@ -196,7 +195,7 @@ export default class QButton extends Vue {
   get buttonClass () {
     return [
       //颜色
-      'bg-' + (this.theme ? 'theme' : this.primary ? 'primary' : this.error ? 'error' : this.warn ? 'warn' : this.success ? 'success' : this.info ? 'info' : this.color || 'theme'),
+      'bg-' + (this.theme ? 'theme' : this.primary ? 'primary' : this.error ? 'error' : this.warn ? 'warn' : this.success ? 'success' : this.info ? 'info' : this.color || 'white'),
       //类型
       this.dark ? 'dark' : this.light ? 'light' : this.plain ? 'plain' : this.colorType || 'dark',
       //大小
