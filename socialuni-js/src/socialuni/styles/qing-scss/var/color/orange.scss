@@ -8,8 +8,6 @@ $color-orange6: #FFF6E6;
 $color-orange7: #F5DAB1;
 $color-orange8: #FDF6EC;
 
-$color-orange-light: $color-orange8;
-
 $colors-orange: (
   orange:$color-orange,
   orange1:$color-orange1,
@@ -20,5 +18,4 @@ $colors-orange: (
   orange6:$color-orange6,
   orange7:$color-orange7,
   orange8:$color-orange8,
-  orange-light:$color-orange-light,
 );

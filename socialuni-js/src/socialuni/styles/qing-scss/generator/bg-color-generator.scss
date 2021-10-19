@@ -18,6 +18,7 @@
     //深色主题，字体白色，其他主题色
     background-color: $color;
     border-color: $color;
+    color: $color-white;
   }
 }
 
@@ -30,6 +31,7 @@
     //朴素主题，背景白色，其他主题色
     background-color: $color-white;
     border-color: $color;
+    color: $color;
   }
 }
 
@@ -37,14 +39,13 @@
 @mixin bg-light($color) {
   //如果为白色
   @if $color == $color-white {
-    @extend .bg-white;
   } @else {
     //亮色主题，色彩主题，其他根据色彩百分比设置
     background: mix($color-white, $color, $percent-light-bg);
     border-color: mix($color-white, $color, $percent-light-border);
+    color: $color;
   }
 }
-
 
 @mixin bg-color-type($color,$type) {
   @if $color == $color-white {
@@ -63,26 +64,18 @@
   }
 }
 
-@mixin bg-color($color) {
-  //默认dark类
-  @include bg-color-type($color, dark);
-  //遍历颜色类型，深浅朴素
-  @each $key, $val in $color-types {
-    &.#{''+$key+''} {
-      @include bg-color-type($color, $key);
-    }
-  }
-}
-
 @each $key, $val in $colors-bg {
   .bg-#{''+$key+''} {
-    @include bg-color($val);
+    @include bg-color-type($val, dark)
   }
-
-  @each $typeKey, $type in $color-types {
-    .bg-#{''+$key+''}-#{''+$typeKey+''} {
-      @include bg-color-type($val, $type);
-    }
+  .bg-#{''+$key+''}-light {
+    @include bg-color-type($val, light)
+  }
+  .bg-#{''+$key+''}-dark {
+    @include bg-color-type($val, dark)
+  }
+  .bg-#{''+$key+''}-plain {
+    @include bg-color-type($val, plain)
   }
 }
 

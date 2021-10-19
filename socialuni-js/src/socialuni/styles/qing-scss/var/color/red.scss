@@ -8,8 +8,6 @@ $color-red6: #FFA39E;
 $color-red7: #FBC4C4;
 $color-red8: #FEF0F0;
 
-$color-red-light: $color-red8;
-
 $colors-red: (
   red:$color-red,
   red1:$color-red1,
@@ -20,5 +18,4 @@ $colors-red: (
   red6:$color-red6,
   red7:$color-red7,
   red8:$color-red8,
-  red-light:$color-red-light,
 );
