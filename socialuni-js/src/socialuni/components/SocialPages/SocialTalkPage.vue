@@ -49,7 +49,8 @@
             </div>
           </div>
           <div>
-            <div class="row-col-center ml-smm overflow-hidden">简介,撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯顿</div>
+            <!--            简介最多30个字符-->
+            <div class="row-col-center ml-smm overflow-hidden">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
             <div class="flex-row mt-xs pl-xs">
               <div v-for="(item,index) in tags" v-if="index<4">
                 <div class="cu-tag round bg-pink light ml-sm">
