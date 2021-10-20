@@ -1,11 +1,11 @@
 package com.socialuni.social.entity.model.DO.circle;
 
+import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author qinkaiyuan
@@ -26,16 +26,11 @@ import java.util.Date;
 )
 @Data
 @NoArgsConstructor
-public class TagDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private Integer circleTypeId;
+public class CircleDO extends CommonContentBaseDO implements Serializable {
+    private Integer tagTypeId;
 
     private String name;
 
-    private String status;
     private String avatar;
 
     //访问+发帖次数
@@ -47,10 +42,6 @@ public class TagDO implements Serializable {
      * 申请人
      */
     private Integer applyUserId;
-
-    private Date createTime;
-
-    private Date updateTime;
 
     private String description;
 
