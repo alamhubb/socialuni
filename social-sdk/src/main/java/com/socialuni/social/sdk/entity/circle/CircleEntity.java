@@ -11,6 +11,6 @@ public class CircleEntity {
     public void createCircle(UserDO mineUser, CircleCreateQO circleCreateQO) {
 
         CircleDO circleDO = new CircleDO();
-        circleDO.setName(ci);
+//        circleDO.setName(ci);
     }
 }
