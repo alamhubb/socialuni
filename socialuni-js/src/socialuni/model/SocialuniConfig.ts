@@ -20,7 +20,7 @@ export default class SocialuniConfig {
 
   constructor (socialConfig?: SocialuniConfig) {
     if (socialConfig) {
-      this.secretKey = socialConfig.secretKey || null
+      this.secretKey = socialConfig.secretKey || process.env.VUE_APP_SOCIALUNI_SECRETKEY || null
       this.weixin = socialConfig.weixin || null
       this.qq = socialConfig.qq || null
     }

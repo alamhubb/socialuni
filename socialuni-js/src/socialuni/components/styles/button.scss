@@ -1,5 +1,5 @@
-@import "../mixins/mixins";
-@import "../mixins/utils";
+@import "mixins/mixins";
+@import "mixins/utils";
 
 @mixin button-size($size) {
   @include box-size($size);
@@ -20,8 +20,6 @@
   outline: none;
   transition: 0.2s;;
   @include utils-user-select(none);
-
-  @extend .can-click;
 
   & + & {
     margin-left: 10px;

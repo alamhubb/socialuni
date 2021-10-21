@@ -1,5 +1,5 @@
 <template>
-  <view :class="[uuid]" class="q-picker-box">
+  <view :class="[uuid]" class="flex-row h100p">
     <scroll-view scroll-y :scroll-top="oneScrollTop">
       <view v-for="(item,index) in dataList"
             :key="index" @click="oneLevelChange(index)"
@@ -36,13 +36,11 @@
   </view>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Emit, Model, Watch } from 'vue-property-decorator'
-
-import UniUtil from '../../utils/UniUtil'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import QRowItem from '../q-row-item/q-row-item.vue'
+import CommonUtil from '../../utils/CommonUtil'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-import CommonUtil from '../../utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩

@@ -33,6 +33,47 @@
         </view>
       </q-navbar>
 
+      <!--  #ifdef APP-PLUS -->
+      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
+      <!--  #endif -->
+
+      <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
+
+
+      <div class="flex-1 flex-col bg-theme-light bt-radius-15">
+        <div class="flex-row px-smm pt-sm">
+          <div class="flex-col">
+            <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
+            <div class="flex-1 col-center">
+              <img class="bd-round size80" :src="tags[0].avatar"/>
+            </div>
+          </div>
+          <div>
+            <!--            简介最多30个字符-->
+            <div class="row-col-center ml-smm overflow-hidden">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
+            <div class="flex-row mt-xs pl-xs">
+              <div v-for="(item,index) in tags" v-if="index<4">
+                <div class="cu-tag round bg-pink light ml-sm">
+                  {{ item.name }}
+                </div>
+              </div>
+            </div>
+            <div class="flex-row mt-sm pl-xs">
+              <div v-for="(item,index) in tags" v-if="index<4" class="ml-sm">
+                <div class="col-all-center">
+                  <img class="bd-round size40" :src="item.avatar"/>
+                  <div>{{ item.name }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <tabs-talk class="flex-1" ref="tabsTalk"
+                   :scroll-enable="scrollEnable"
+                   :selectTagIds="selectTagIds"
+        ></tabs-talk>
+      </div>
+
       <q-popup v-model="showFilter" bottom>
         <div class="row-between-center q-box bb-1">
           <view class="text-black text-md font-bold">动态筛选</view>
@@ -74,17 +115,6 @@
           </view>
         </view>
       </q-popup>
-
-      <!--  #ifdef APP-PLUS -->
-      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
-      <!--  #endif -->
-
-      <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
-
-      <tabs-talk class="flex-1" ref="tabsTalk"
-                 :scroll-enable="scrollEnable"
-                 :selectTagIds="selectTagIds"
-      ></tabs-talk>
     </view>
     <msg-input>
     </msg-input>
@@ -102,14 +132,13 @@ import RouterUtil from '../../utils/RouterUtil'
 import PageUtil from '../../utils/PageUtil'
 import TalkFilterUtil from '../../utils/TalkFilterUtil'
 import UniUtil from '../../utils/UniUtil'
-import CommonUtil from '../../utils/CommonUtil'
 import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
   socialConfigStore,
   socialNotifyModule,
   socialNotifyStore,
-  socialSystemModule,
   socialTagModule,
+  socialTagStore,
   socialTalkModule,
   socialUserStore
 } from '../../store'
@@ -125,8 +154,6 @@ import QSearch from '../q-search/q-search.vue'
 import QIcon from '../q-icon/q-icon.vue'
 import QPopup from '../q-popup/q-popup.vue'
 import QSlider from '../q-slider/q-slider.vue'
-import NodesRef = UniApp.NodesRef
-import SelectorQuery = UniApp.SelectorQuery
 import ConfigMap from '@/socialuni/const/ConfigMap'
 
 // todo 后台可控制是否显示轮播图
@@ -150,6 +177,7 @@ export default class SocialTalkPage extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
   }
+  @socialTagStore.State('tags') readonly tags: TagVO []
   @socialUserStore.State('user') user: CenterUserDetailRO
   // 轮播图
   // 点击通知去通知页
