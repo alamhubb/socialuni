@@ -81,7 +81,7 @@
           </view>
           <view class="flex-auto col-end">
             <view class="row-center font-bold pb-xl text-lg w100r">
-              <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>
+              <u-button size="medium" class="w30vw" @click="showMoreList = false">关闭</u-button>
             </view>
           </view>
         </view>
