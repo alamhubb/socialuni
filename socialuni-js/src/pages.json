@@ -66,12 +66,12 @@
     "iconWidth": "30px",
     "height": "52px",
     "list": [
-      {
+      /*{
         "pagePath": "pages/star/star",
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "星海"
-      },
+      },*/
       {
         "pagePath": "pages/talk/talk",
         "iconPath": "static/img/deck-gray-36dp.png",
