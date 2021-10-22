@@ -9,7 +9,7 @@ node_modules
 #忽略所有.iml文件
 *.iml
 #忽略本地文件
-application-local.yml
+application-qkylocal.yml
 #忽略生产文件
 application-prod.yml
 application-devprod.yml
@@ -17,6 +17,3 @@ application-localdevprod.yml
 application-localprod.yml
 application-qingchi.yml
 application-qkypc.yml
-/socialuni-demo/src/main/resources/application-qkypc.yml
-/socialuni-demo/src/main/resources/application-qkylocal.yml
-/socialuni-center-web/src/main/resources/application-qkylocal.yml
