@@ -3,7 +3,9 @@ spring:
 #    active: devprod
 #    active: localdevprod
 #    active: local
-    active: prod
+#    active: prod
+#    active: demo
+    active: local
 #    active: localprod
   jpa:
     database: MYSQL

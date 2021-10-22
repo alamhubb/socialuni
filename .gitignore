@@ -19,3 +19,4 @@ application-qingchi.yml
 application-qkypc.yml
 /socialuni-demo/src/main/resources/application-qkypc.yml
 /socialuni-demo/src/main/resources/application-qkylocal.yml
+/socialuni-center-web/src/main/resources/application-qkylocal.yml
