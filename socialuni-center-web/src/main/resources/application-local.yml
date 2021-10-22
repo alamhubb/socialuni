@@ -24,10 +24,10 @@ socialuni:
         region: ""
         bucket-name: ""
       sms:
-        app-id:
+        app-id: 1
         app-key: ""
         sms-sign: ""
-        template-id:
+        template-id: 1
   map:
     ali:
       secret-key: ""
