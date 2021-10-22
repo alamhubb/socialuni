@@ -1,5 +1,6 @@
 package com.socialuni.demo.controller;
 
+import com.socialuni.api.feignAPI.SocialuniLoginAPI;
 import com.socialuni.demo.model.MineUserDetailRO;
 import com.socialuni.demo.service.LoginService;
 import com.socialuni.social.api.model.ResultRO;
@@ -14,20 +15,19 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("login")
-public class LoginController {
+public class LoginController implements SocialuniLoginAPI<MineUserDetailRO> {
     @Resource
     private LoginService loginService;
 
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
-    @PostMapping("providerLogin")
+    @Override
     public ResultRO<SocialLoginRO<MineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
         ResultRO<SocialLoginRO<MineUserDetailRO>> resultRO = loginService.providerLogin(loginData);
         return resultRO;
     }
 
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
-    @PostMapping("socialuniPhoneLogin")
+    @Override
     public ResultRO<SocialLoginRO<MineUserDetailRO>> socialuniPhoneLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
         ResultRO<SocialLoginRO<MineUserDetailRO>> resultRO = loginService.socialuniPhoneLogin(loginData);
         return resultRO;

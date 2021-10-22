@@ -41,7 +41,7 @@
 
 
       <div class="flex-1 flex-col bg-theme-light bt-radius-15">
-        <div class="flex-row px-smm pt-sm">
+<!--        <div class="flex-row px-smm pt-sm">
           <div class="flex-col">
             <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
             <div class="flex-1 col-center">
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div>
-            <!--            简介最多30个字符-->
+            &lt;!&ndash;            简介最多30个字符&ndash;&gt;
             <div class="row-col-center ml-smm overflow-hidden">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
             <div class="flex-row mt-xs pl-xs">
               <div v-for="(item,index) in tags" v-if="index<4">
@@ -67,7 +67,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"
                    :selectTagIds="selectTagIds"

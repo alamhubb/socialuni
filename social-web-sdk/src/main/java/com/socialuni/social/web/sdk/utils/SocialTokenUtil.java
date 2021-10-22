@@ -35,6 +35,7 @@ public class SocialTokenUtil {
         if (SocialTokenUtil.isSuccess(token)) {
             return token;
         }
+//        return SocialTokenUtil.getSocialuniToken();
         return null;
     }
 
