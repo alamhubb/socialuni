@@ -18,3 +18,4 @@ application-localprod.yml
 application-qingchi.yml
 application-qkypc.yml
 /socialuni-demo/src/main/resources/application-qkypc.yml
+/socialuni-demo/src/main/resources/application-qkylocal.yml
