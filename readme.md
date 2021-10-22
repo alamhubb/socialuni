@@ -45,14 +45,24 @@
 
 数据存两份，开发者数据库一份，联盟一份，未来会拆开这个逻辑，支持不接入联盟的方式
 
-### 项目文档，使用方式:
+### 社交联盟接入文档，使用方式:
+1. 登录社交联盟开发者网，注册成为开发者获取开发者秘钥，[社交联盟开发者网](admin.qingchiapp.com)
 
-1. 首先前往社交联盟注册成为开发者，https://admin.qingchiapp.com/
-2. 修改前端项目内容，修改socialuni-js项目src下的manifest.json中的mp-weixin，app-id改为自己的小程序appId
-后端修改内容
-3. 修改后端项目内容，修改socialuni-demo项目src下的application-demo中的
-socialuni:
-    secret-key: ""，设置为自己的社交联盟秘钥
+2. clone社交联盟master分支的项目，[社交联盟项目](https://gitee.com/socialuni/socialuni)
+
+3. 只启动前端，在socialuni/socialuni-js前端项目中找到.env.development文件，将服务端地址配置为
+   https://devapi.qingchiapp.com 社交联盟开发环境地址，配置秘钥改为自己的开发者秘钥
+
+4. 执行 `npm install` `npm run serve` 启动项目，即可体验
+
+5. 启动后台，在socialuni/socialuni-demo项目中找到application-local.yml文件，配置
+    * socialuni.secret-key为自己的秘钥
+    * provider.qq和wx为自己的qq小程序id和秘钥，使用qq和微信登录需要，不使用可不填，可使用清池授权登录
+    * 数据库配置可使用自己的，也可使用联盟提供的演示数据库
+6. 启动后台项目
+7. 修改前端项目配置，把服务器地址改为https://localpc.qingchiapp.com:8093，前端可不再配制秘钥
+8. 启动前端项目，即可体验
+
    
 然后分别启动后端和前端你项目，即可体验
 
