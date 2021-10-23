@@ -134,6 +134,7 @@ import TalkFilterUtil from '../../utils/TalkFilterUtil'
 import UniUtil from '../../utils/UniUtil'
 import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
+  socialAppStore,
   socialConfigStore,
   socialNotifyModule,
   socialNotifyStore,
@@ -155,6 +156,7 @@ import QIcon from '../q-icon/q-icon.vue'
 import QPopup from '../q-popup/q-popup.vue'
 import QSlider from '../q-slider/q-slider.vue'
 import ConfigMap from '@/socialuni/const/ConfigMap'
+import HomeSwiperVO from '@/socialuni/model/HomeSwiperVO'
 
 // todo 后台可控制是否显示轮播图
 
@@ -184,6 +186,7 @@ export default class SocialTalkPage extends Vue {
   @socialNotifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
   // 轮播图
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
+  @socialAppStore.State('homeSwipers') homeSwipers: HomeSwiperVO[]
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
 
   // tag 相关
@@ -232,15 +235,21 @@ export default class SocialTalkPage extends Vue {
     // 指的是用户选择的筛选性别
     this.initFilterValue()
     this.initQuery()
+    this.socialTalkScroll({ scrollTop: 0 })
   }
 
   tabsTalkOnHide () {
     this.$refs.tabsTalk.tabsTalkOnHide()
   }
 
+  @Watch('homeSwipers')
+  homeSwipersWatch () {
+    this.socialTalkScroll({ scrollTop: 0 })
+  }
+
   socialTalkScroll (e) {
     // 只有开启了轮播图，才需要控制下方滚动
-    if (this.configShowSwipers) {
+    if (this.configShowSwipers && this.homeSwipers.length) {
       // +5点余量以防万一
       const scrollTop = e.scrollTop + 1
       console.log(scrollTop)
