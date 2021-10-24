@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -39,8 +40,8 @@ public class SocialTokenDOUtil {
         Date date = new Date();
         //如果当前时间大于时效时间，则时效了
         if (date.getTime() > tokenDO.getExpiredTime().getTime()) {
-            //"用户凭证过期，请重新登录"
-            throw new SocialNullUserException();
+            //"用户凭证过期，请重新登录",必须用这个
+            throw new SocialNotLoginException();
         }
         Integer doUserId = tokenDO.getUserId();
         if (!userId.equals(doUserId)) {

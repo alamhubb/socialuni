@@ -1,4 +1,4 @@
-package com.socialuni.center.sdk.mode;
+package com.socialuni.center.sdk.model;
 
 import lombok.Data;
 

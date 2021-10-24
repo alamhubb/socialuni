@@ -80,9 +80,10 @@ public class SocialTokenUtil {
             try {
                 String tokenSubject = Jwts.parser().setSigningKey(SocialTokenUtil.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
                 return tokenSubject.split("_")[0];
-            } catch (MalformedJwtException e) {
+            } catch (Exception e) {
                 log.error("生成token异常");
-                throw new SocialNullUserException();
+                //必须这么写，不能返回异常，返回异常会记录，会记录用户，会走这里，会循环报错
+                return null;
             }
         }
 //        throw new SocialException("不存在的用户");

@@ -1,11 +1,15 @@
 package com.socialuni.center.sdk.utils;
 
 import com.socialuni.api.config.SocialFeignHeaderName;
+import com.socialuni.center.sdk.feignAPI.SocialuniDevAccountAPI;
+import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.repository.DevTokenRepository;
-import com.socialuni.center.sdk.mode.DevAccountDO;
-import com.socialuni.center.sdk.mode.DevAccountProviderDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountProviderDO;
+import com.socialuni.cloud.config.SocialAppEnv;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
@@ -25,6 +29,7 @@ public class DevAccountUtils {
     private static DevAccountRepository devAccountRepository;
     private static DevAccountProviderRepository devAccountProviderRepository;
     private static DevTokenRepository devTokenRepository;
+    private static SocialuniDevAccountAPI socialuniDevAccountAPI;
 
     @Resource
     public void setDevTokenRepository(DevTokenRepository devTokenRepository) {
@@ -39,6 +44,11 @@ public class DevAccountUtils {
     @Resource
     public void setDevAccountProviderRepository(DevAccountProviderRepository devAccountProviderRepository) {
         DevAccountUtils.devAccountProviderRepository = devAccountProviderRepository;
+    }
+
+    @Resource
+    public void setSocialuniDevAccountAPI(SocialuniDevAccountAPI socialuniDevAccountAPI) {
+        DevAccountUtils.socialuniDevAccountAPI = socialuniDevAccountAPI;
     }
 
     public static String getDevSocialSecretKey() {
@@ -90,7 +100,14 @@ public class DevAccountUtils {
         if (StringUtils.isEmpty(secretKey)) {
             return null;
         }
-        return devAccountRepository.findOneBySecretKey(secretKey);
+        DevAccountDO devAccountDO;
+        if (SocialAppEnv.getIsProdEnv()) {
+            devAccountDO = devAccountRepository.findOneBySecretKey(secretKey);
+        } else {
+            ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(secretKey));
+            devAccountDO = resultRO.getData();
+        }
+        return devAccountDO;
     }
 
     public static DevAccountDO getDevAccountNotNull() {

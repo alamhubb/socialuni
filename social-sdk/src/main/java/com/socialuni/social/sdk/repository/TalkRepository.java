@@ -283,6 +283,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     //查询user指定时间内发帖数量的，限制发帖数量的
     Integer countByUserIdAndCreateTimeBetween(Integer userId, Date startDate, Date endDate);
 
+    List<TalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
 /*
 
     //供后台统计使用**************************************************************************************
@@ -293,7 +294,6 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             "GROUP BY DATE_FORMAT(t.create_time,'%Y-%m-%d')")
     List<Object> countAndCreateTimeByCreateTimeBetween();
 
-//    List<TalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
 
     //查询关键词触发次数时使用
     Page<TalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);

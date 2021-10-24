@@ -1,7 +1,4 @@
 socialuni:
-  secret-key: ""
-  admin:
-    dev-server-url: "https://localpc.qingchiapp.com:8090"
   app:
     static-resource-url: "https://devcdxapp-1257733245.file.myqcloud.com"
     system-user-id: 1

@@ -1,7 +1,7 @@
 package com.socialuni.center.web.serive;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.factory.RO.user.SocialOAuthUserROFactory;

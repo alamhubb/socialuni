@@ -4,11 +4,10 @@ package com.socialuni.admin.web.service;
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.center.sdk.mode.DevTokenDO;
+import com.socialuni.center.sdk.model.DevTokenDO;
 import com.socialuni.center.sdk.repository.DevTokenRepository;
-import com.socialuni.center.sdk.feignAPI.SocialuniAdminAPI;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
@@ -29,9 +28,6 @@ public class AdminLoginService {
     DevAccountEntity devAccountEntity;
     @Resource
     DevTokenRepository devTokenRepository;
-
-    @Resource
-    SocialuniAdminAPI socialuniAdminAPI;
 
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
