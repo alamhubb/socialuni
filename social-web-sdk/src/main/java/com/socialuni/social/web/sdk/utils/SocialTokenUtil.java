@@ -1,10 +1,12 @@
 package com.socialuni.social.web.sdk.utils;
 
+import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.utils.UUIDUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
+@Slf4j
 public class SocialTokenUtil {
     //key 这样可以保证每次请求生成的token一致，方便测试
     private static String tokenSecretKey;
@@ -78,7 +81,8 @@ public class SocialTokenUtil {
                 String tokenSubject = Jwts.parser().setSigningKey(SocialTokenUtil.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
                 return tokenSubject.split("_")[0];
             } catch (MalformedJwtException e) {
-                throw new SocialSystemException("生成token异常");
+                log.error("生成token异常");
+                throw new SocialNullUserException();
             }
         }
 //        throw new SocialException("不存在的用户");
