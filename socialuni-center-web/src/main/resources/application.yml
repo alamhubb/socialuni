@@ -1,9 +1,9 @@
 spring:
   profiles:
-#    active: devprod
+    active: devprod
 #    active: localdevprod
 #    active: local
-    active: qkylocal
+#    active: qkylocal
 #    active: prod
 #    active: demo
 #    active: localprod
