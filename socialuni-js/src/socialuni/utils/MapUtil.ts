@@ -11,7 +11,8 @@ export default class MapUtil {
       uni.getLocation({
         type: 'gcj02 ',
         success (res) {
-          if (socialSystemModule.isMp) {
+          //小程序，且注册了qq的地图key
+          if (socialSystemModule.isMp && AppConfig.qq_mp_map_key) {
             //小程序平台可直接调用
             socialHttp.get('https://apis.map.qq.com/ws/geocoder/v1/?key=' + AppConfig.qq_mp_map_key + '&location=' + res.latitude + ',' + res.longitude).then((res: any) => {
               resolve(res.result.ad_info)
@@ -35,7 +36,8 @@ export default class MapUtil {
 
   static getLocationByWeb (): Promise<QQMapResult> {
     return new Promise((resolve, reject) => {
-      if (socialSystemModule.isMp) {
+      //小程序，且注册了qq的地图key
+      if (socialSystemModule.isMp && AppConfig.qq_mp_map_key) {
         //小程序平台可直接调用
         socialHttp.get('https://apis.map.qq.com/ws/location/v1/ip?key=' + AppConfig.qq_mp_map_key).then((res: any) => {
           const result: QQMapResult = res.result.ad_info
