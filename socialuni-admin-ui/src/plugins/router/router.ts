@@ -33,6 +33,20 @@ export const constantRoutes = [
         children: [
             {
                 path: '',
+                name: RouterName.devAccount,
+                // redirect: '/review',
+                component: () => import('@/views/dev/devAccount.vue'),
+                // children: showRouterList,
+                meta: {title: '开发者信息', icon: 'strengthMonitoring'}
+            }]
+    },
+    {
+        path: '/',
+        component: Layout,
+        redirect: '/',
+        children: [
+            {
+                path: '/' + RouterName.contentAudit,
                 name: RouterName.contentAudit,
                 // redirect: '/review',
                 component: () => import('@/views/audit/contentAudit.vue'),
