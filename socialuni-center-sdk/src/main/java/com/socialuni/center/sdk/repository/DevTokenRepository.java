@@ -12,6 +12,8 @@ import org.springframework.data.repository.query.Param;
 public interface DevTokenRepository extends JpaRepository<DevTokenDO, Integer> {
     @Query(nativeQuery = true, value = "select t.token_code from dev_token t where t.dev_id =:devId order by id desc limit 1")
     String findFirstTokenCodeByUserId(@Param("devId") Integer devId);
+
+    DevTokenDO findFirstByTokenCode(String token);
 }
 
 

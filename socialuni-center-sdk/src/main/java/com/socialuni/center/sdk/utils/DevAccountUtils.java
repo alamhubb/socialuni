@@ -2,12 +2,13 @@ package com.socialuni.center.sdk.utils;
 
 import com.socialuni.api.config.SocialFeignHeaderName;
 import com.socialuni.center.sdk.feignAPI.SocialuniDevAccountAPI;
+import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountProviderDO;
+import com.socialuni.center.sdk.model.DevTokenDO;
 import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.repository.DevTokenRepository;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.model.DevAccountProviderDO;
 import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
@@ -127,18 +128,19 @@ public class DevAccountUtils {
     //得到用户信息
     private static DevAccountDO getDevAccountByToken(String token) {
         //校验解析token
-        String userId = SocialTokenUtil.getUserKeyByToken(token);
-        if (StringUtils.isEmpty(userId)) {
+        String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
+        if (StringUtils.isEmpty(devSecretKey)) {
             return null;
         }
-        Integer userIdInt = Integer.parseInt(userId);
+        ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(devSecretKey));
+
+        DevAccountDO devAccountDO = resultRO.getData();
+        DevTokenDO devTokenDO = devTokenRepository.findFirstByTokenCode(token);
+        if (devAccountDO == null || devTokenDO == null) {
+            return null;
+        }
         //todo 这里需要校验有效期吧
-        String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(userIdInt);
-        if (!token.equals(tokenCode)) {
-            return null;
-        }
-        DevAccountDO devAccountDO = devAccountRepository.findOneById(userIdInt);
-        if (devAccountDO == null) {
+        if (!devTokenDO.getDevId().equals(devAccountDO.getId())) {
             throw new SocialParamsException("token被破解");
         }
         return devAccountDO;
