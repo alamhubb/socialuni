@@ -104,7 +104,6 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         if (
                 (requestMethod.equals(RequestMethod.OPTIONS.name())
-                        || requestMethod.equals(RequestMethod.GET.name())
                         || uri.equals("/")
                         || uri.contains("test")
                         //初始化
@@ -172,6 +171,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                         || uri.contains("sendAuthCode")
                         || uri.contains("login")
                         || uri.contains("Login")
+                        || uri.contains("location")
                         || uri.contains("oauth"))
                         && devId != null)
                 )

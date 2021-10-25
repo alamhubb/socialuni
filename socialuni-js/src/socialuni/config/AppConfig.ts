@@ -40,6 +40,7 @@ export default class AppConfig {
   static readonly ali_web_map_key: string = process.env.VUE_APP_ALI_WEB_MAP_KEY
   // 高德地图 webapi key
   static readonly ali_mp_map_key: string = process.env.VUE_APP_ALI_MP_MAP_KEY
+  static readonly qq_mp_map_key: string = process.env.VUE_APP_QQ_MP_MAP_KEY
 
   // 意见反馈
   static readonly suggestTitle: string = '建议与反馈'

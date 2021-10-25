@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAsync
 @EnableConfigurationProperties({
         SocialuniAppProperties.class,
+        SocialuniQQMapProperties.class,
         SocialuniAliMapProperties.class,
         SocialuniCloudTencentCosProperties.class,
         SocialuniProviderQQProperties.class,
