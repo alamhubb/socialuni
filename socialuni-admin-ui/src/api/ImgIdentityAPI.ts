@@ -6,13 +6,13 @@ import Identity from '@/model/user/Identity'
 
 export default class ImgIdentityAPI {
   public static queryIdentities() {
-    return http.post('user/getIdentities')
+    return request.post('user/getIdentities')
   }
 
   public static getIdentityPage(
     page: number, gender?: string
   ) {
-    return http.post('user/getIdentityPage', {
+    return request.post('user/getIdentityPage', {
       page, gender
     })
   }

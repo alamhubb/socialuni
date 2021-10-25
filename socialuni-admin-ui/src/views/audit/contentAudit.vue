@@ -282,6 +282,7 @@ export default class PreAuditPage extends Vue {
   }
 
   created() {
+    console.log(123)
     ReportAPI.queryReportTypesAPI().then((res) => {
       this.reportTypes = res.data
     })

@@ -6,20 +6,20 @@ import ObjectUtils from "@/utils/ObjectUtils";
 
 export default class KeywordsManageAPI {
   public static addKeywordsAPI(content: string, cause: string) {
-    return http.post('keywords/addKeywords?content=' + content + '&cause=' + cause)
+    return request.post('keywords/addKeywords?content=' + content + '&cause=' + cause)
   }
 
   public static testKeywordsAPI() {
-    return http.post('keywords/test')
+    return request.post('keywords/test')
   }
 
   public static openPinyinOrTextAPI(id: number, type: string, cause: string) {
-    return http.post('keywords/openPinyinOrText', ObjectUtils.toFormData({
+    return request.post('keywords/openPinyinOrText', ObjectUtils.toFormData({
       id, type, cause
     }))
   }
 
   public static closeKeywordsAPI(id: number, closeCause: string) {
-    return http.post('keywords/closeKeywords?id=' + id + '&closeCause=' + closeCause)
+    return request.post('keywords/closeKeywords?id=' + id + '&closeCause=' + closeCause)
   }
 }
