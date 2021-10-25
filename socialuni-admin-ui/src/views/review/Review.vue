@@ -52,7 +52,7 @@
             <div v-for="(img,index) in row.imgs">
               <div class="h225 mr-10" @click="img.checked=!img.checked">
                 <el-image class="w150"
-                          :src="$imgUrl+img.img"
+                          :src="img.img"
                           @click="preImg(index+1,row)"
                           :preview-src-list="previewImgs"
                 >
@@ -81,7 +81,7 @@
                 @change="row.checked = !row.checked"
             ></el-checkbox>
             <el-image class="w300 h200"
-                      :src="$imgUrl+row.idCard"
+                      :src="row.idCard"
                       @click="preImg(0,row)"
                       :preview-src-list="previewImgs"
             >
