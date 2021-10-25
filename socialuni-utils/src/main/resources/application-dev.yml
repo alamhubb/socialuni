@@ -39,7 +39,7 @@ config:
       bd_mp_id:
       bd_mp_client_id:
       bd_mp_client_secret:
-  ali:
+  qq:
     map:
       secretKey:
   wy:

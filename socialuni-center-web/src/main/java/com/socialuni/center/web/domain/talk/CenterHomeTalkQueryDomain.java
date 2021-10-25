@@ -15,7 +15,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.platform.AliAPI;
+import com.socialuni.social.sdk.platform.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +36,7 @@ public class CenterHomeTalkQueryDomain {
         queryQO.setTalkIds(new ArrayList<>());
         queryQO.setHomeTabType(TalkTabType.home_type);
         //如果经纬度为空
-        RectangleVO rectangleVO = AliAPI.getRectangle();
+        RectangleVO rectangleVO = MapUtil.getRectangle();
         if (rectangleVO != null) {
             queryQO.setLon(rectangleVO.getLon());
             queryQO.setLat(rectangleVO.getLat());

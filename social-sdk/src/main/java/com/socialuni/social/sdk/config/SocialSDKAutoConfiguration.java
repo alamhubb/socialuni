@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableConfigurationProperties({
         SocialuniAppProperties.class,
         SocialuniQQMapProperties.class,
-        SocialuniAliMapProperties.class,
         SocialuniCloudTencentCosProperties.class,
         SocialuniProviderQQProperties.class,
         SocialuniProviderWxProperties.class,

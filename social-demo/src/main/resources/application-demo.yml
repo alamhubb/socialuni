@@ -24,7 +24,7 @@ socialuni:
         sms-sign: ""
         template-id: 1
   map:
-    ali:
+    qq:
       secret-key: ""
 server:
   port: 8091

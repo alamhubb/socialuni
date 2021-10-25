@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.domain.talk.*;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.platform.AliAPI;
+import com.socialuni.social.sdk.platform.MapUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.model.model.QO.community.talk.*;
 import com.socialuni.social.api.model.ResultRO;
@@ -39,7 +39,7 @@ public class SocialTalkService {
         queryQO.setTalkIds(new ArrayList<>());
         queryQO.setHomeTabType(TalkTabType.home_type);
         //如果经纬度为空
-        RectangleVO rectangleVO = AliAPI.getRectangle();
+        RectangleVO rectangleVO = MapUtil.getRectangle();
         if (rectangleVO != null) {
             queryQO.setLon(rectangleVO.getLon());
             queryQO.setLat(rectangleVO.getLat());
