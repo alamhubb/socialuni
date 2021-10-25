@@ -1,9 +1,10 @@
 socialuni:
+  server-url: "https://api.qingchiapp.com"
   app:
     static-resource-url: "https://devcdxapp-1257733245.file.myqcloud.com"
     system-user-id: 1
   user:
-    token-secret-key: ""
+    token-secret-key: "tokenSecretKey"
   provider:
     qq:
       qq-mp-id: ""

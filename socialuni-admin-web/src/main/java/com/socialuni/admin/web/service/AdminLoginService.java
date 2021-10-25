@@ -4,11 +4,14 @@ package com.socialuni.admin.web.service;
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.manage.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.center.sdk.model.DevTokenDO;
-import com.socialuni.center.sdk.repository.DevTokenRepository;
-import com.socialuni.center.sdk.repository.DevAccountRepository;
+import com.socialuni.center.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.model.DevTokenDO;
+import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
+import com.socialuni.center.sdk.repository.DevAccountRepository;
+import com.socialuni.center.sdk.repository.DevTokenRepository;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.utils.PhoneNumUtil;
@@ -28,6 +31,32 @@ public class AdminLoginService {
     DevAccountEntity devAccountEntity;
     @Resource
     DevTokenRepository devTokenRepository;
+    @Resource
+    SocialuniDevAccountAPI socialuniDevAccountAPI;
+
+    //秘钥登录
+    @Transactional
+    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountQueryQO devAccountQueryQO) {
+        ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(devAccountQueryQO);
+        DevAccountDO devAccountDO = resultRO.getData();
+        if (devAccountDO == null) {
+            throw new SocialBusinessException("秘钥错误");
+        }
+        //有用户返回，没有创建
+//        String platform = loginVO.getPlatform();
+        Integer userId = devAccountDO.getId();
+        //生成userToken
+        String userToken = SocialTokenUtil.generateTokenByUserId(userId);
+        userToken = devTokenRepository.save(new DevTokenDO(userToken, userId)).getTokenCode();
+
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+//        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+
+        SocialLoginRO<DevAccountRO> socialLoginRO = new SocialLoginRO<>(userToken, devAccountRO);
+
+        return ResultRO.success(socialLoginRO);
+    }
+
 
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {

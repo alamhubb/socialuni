@@ -1,7 +1,8 @@
 spring:
   profiles:
 #    active: qkypc
-    active: local
+#    active: local
+    active: qkylocal
 #    active: localprod
 #    active: prod
 #    active: demo
