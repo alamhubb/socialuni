@@ -10,6 +10,7 @@ import com.socialuni.center.sdk.model.DevTokenDO;
 import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.repository.DevTokenRepository;
+import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
@@ -60,6 +61,9 @@ public class AdminLoginService {
 
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+        if (!SocialAppEnv.getIsProdEnv()) {
+            throw new SocialBusinessException("开发环境请使用秘钥登录");
+        }
         //所有平台，手机号登陆方式代码一致
         //登录的时候如果没有手机号，则手机号注册成功，自动注册一个user，用户名待填，自动生成一个昵称，密码待填，头像待上传
         //如果已经登录过，则返回那个已经注册的user，根据手机号获取user，返回登录成功
