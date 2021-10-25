@@ -8,10 +8,8 @@
     size="small"
     v-on="$listeners"
     @row-click="rowClick"
-    @selection-change="tableSelectionChange"
   >
-    <el-table-column v-if="selection" type="selection" />
-    <el-table-column v-if="index" type="index" />
+    <el-table-column v-if="index" type="index"/>
     <el-table-column v-if="checked" width="50">
       <!--      不加scope不起作用-->
       <template slot="header" slot-scope="scope">
@@ -25,17 +23,17 @@
       <template #default="{row}">
         <el-checkbox
           v-model="row.checked"
-          @change="updateCheckedAllStatus"
+          @change="selectionChange"
           @click.native.stop
         />
       </template>
     </el-table-column>
-    <slot />
+    <slot/>
   </el-table>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import { ElTable } from 'element-ui/types/table'
 
@@ -49,11 +47,11 @@ import { ElTable } from 'element-ui/types/table'
   components: { YTableColumn }
 })
 export default class YTable extends Vue {
+  @Model('change') model!: any
   @Prop() readonly data: any[]
   // 是否单选
   // @Prop({ default: false, type: Boolean }) readonly radio: any[]
   // 是否多选
-  @Prop({ default: false, type: Boolean }) readonly selection: boolean
   // 是否有索引
   @Prop({ default: false, type: Boolean }) readonly index: boolean
   @Prop({ default: false, type: Boolean }) readonly checked: boolean
@@ -74,7 +72,15 @@ export default class YTable extends Vue {
     this.updateCheckedAllStatus()
   }
 
-  updateCheckedAllStatus() {
+  private checkedAllClick() {
+    const checkedAll = !this.checkedAll
+    for (const datum of this.data) {
+      datum.checked = checkedAll
+    }
+    this.selectionChange()
+  }
+
+  private updateCheckedAllStatus() {
     this.checkedAll = this.data.length && this.data.every(item => item.checked)
   }
 
@@ -86,21 +92,13 @@ export default class YTable extends Vue {
     return this.data.every(item => item.checked)
   }*/
 
-  tableSelectionChange(checkedData) {
-    if (this.selection) {
-      this.checkedData = checkedData
-    }
-  }
-
   // 单行点击取消和选中
   rowClick(row) {
     // 不为对比时才生效
     // row.checked = !row.checked
-    if (this.selection) {
-      this.$refs.table.toggleRowSelection(row)
-    } else if (this.checked) {
+    if (this.checked) {
       row.checked = !row.checked
-      this.updateCheckedAllStatus()
+      this.selectionChange()
     } else {
       const lastRow = this.checkedData[0]
       if (row !== lastRow) {
@@ -113,31 +111,28 @@ export default class YTable extends Vue {
     }
   }
 
-  // 设置高两行
+  @Emit()
+  change(currentRow) {
+    return currentRow
+  }
+
+  // 设置高亮行
   setCurrentRow(row) {
+    this.change(row)
     this.$nextTick(() => {
       this.$refs.table.setCurrentRow(row)
     })
   }
 
-  checkAllSelection() {
-    this.$refs.table.clearSelection()
-    this.$nextTick(() => {
-      this.$refs.table.toggleAllSelection()
-    })
-  }
-
   toggleRowSelection(row) {
-    this.$nextTick(() => {
-      this.$refs.table.toggleRowSelection(row)
-    })
+    row.checked = !row.checked
+    this.selectionChange()
   }
 
-  checkedAllClick() {
-    this.checkedAll = !this.checkedAll
-    for (const datum of this.data) {
-      datum.checked = this.checkedAll
-    }
+  @Emit()
+  selectionChange() {
+    this.updateCheckedAllStatus()
+    return this.data.filter(item => item.checked)
   }
 }
 </script>

@@ -9,9 +9,8 @@
       >
         <slot :tab="tab" :index="index">
           <div
-            class="col-row-center py-10 px font-16"
-            :class="[(value?tab[value]:index)===model?('color-blue '+activeClass):'color-gray']"
-          > {{ tab[label] }}
+class="col-row-center py-sm px font-16"
+               :class="[(value?tab[value]:index)===model?('color-blue '+activeClass):'color-gray']"> {{ tab[label]}}
           </div>
         </slot>
       </div>

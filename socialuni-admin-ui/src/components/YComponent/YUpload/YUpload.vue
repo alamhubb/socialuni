@@ -5,13 +5,13 @@
         <el-dropdown
           v-if="folder"
           size="small"
+          @command="dropdownCommand"
           :show-timeout="100"
           :hide-timeout="250"
-          @command="dropdownCommand"
         >
           <!--        @click="uploadFileLabelClick"-->
           <el-button type="primary" size="mini" :disabled="!canOperateByProgress">
-            <i class="el-icon-upload2" />
+            <i class="el-icon-upload2"></i>
             上传
           </el-button>
           <el-dropdown-menu slot="dropdown">
@@ -20,95 +20,83 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-button v-else type="primary" size="mini" :disabled="!canOperateByProgress" @click="uploadFileLabelClick">
+        <el-button v-else type="primary" size="mini" @click="uploadFileLabelClick" :disabled="!canOperateByProgress">
           上传<i
-            class="el-icon-upload el-icon--right"
-          /></el-button>
+          class="el-icon-upload el-icon--right"></i></el-button>
 
         <div v-if="files" class="ml">文件总数：{{ files.length }}</div>
       </div>
 
-      <el-button
-        v-show="fileList.length && canOperateByProgress"
-        size="mini"
-        class="ml"
-        type="text"
-        icon="el-icon-circle-close"
-        @click="clearFies"
-      >清空
+      <el-button v-show="fileList.length && canOperateByProgress" size="mini" class="ml"
+                 type="text"
+                 icon="el-icon-circle-close"
+                 @click="clearFies">清空
       </el-button>
     </div>
 
     <div class="h20">
       <div v-if="uploadPercent.uploadPercent!==null" class="row-col-center">
         <div class="w70p">
-          <el-progress :percentage="uploadPercent.uploadPercent" :format="uploadProgressFormat" />
+          <el-progress :percentage="uploadPercent.uploadPercent" :format="uploadProgressFormat"></el-progress>
         </div>
         <div>
-          <i v-show="uploadPercent.uploadPercent!==100" class="size14 el-icon-loading" />
+          <i v-show="uploadPercent.uploadPercent!==100" class="size14 el-icon-loading"></i>
         </div>
       </div>
     </div>
 
-    <div class="flex-1 overflow-scroll mt-5 pr-10">
-      <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-5">
+    <div class="flex-1 overflow-scroll mt-xs pr-sm">
+      <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-xs">
         <div class="text-ellipsis">
           <template v-if="file.fileType===$const.UploadFileType.folder">
-            <i class="el-icon-folder-opened" />
-            {{ file.name }} <span class="ml-10">(文件数量：{{ file.files.length }})</span>
+            <i class="el-icon-folder-opened"></i>
+            {{ file.name }} <span class="ml-sm">(文件数量：{{ file.files.length }})</span>
           </template>
           <template v-else>
-            <i class="el-icon-document" />
+            <i class="el-icon-document"></i>
             {{ file.name }}
           </template>
         </div>
-        <el-button
-          v-show="canOperateByProgress"
-          type="text"
-          icon="el-icon-circle-close"
-          @click="deleteFile(file)"
-        />
+        <el-button v-show="canOperateByProgress" type="text" icon="el-icon-circle-close"
+                   @click="deleteFile(file)"></el-button>
       </div>
     </div>
 
-    <label ref="uploadFileLabel" class="bg-opacity position-absolute size0" for="fileUpload">
+    <label class="bg-opacity position-absolute size0" ref="uploadFileLabel" for="fileUpload">
       <input
-        id="fileUpload"
         ref="fileInput"
         class="bg-opacity position-absolute size0"
         type="file"
+        id="fileUpload"
         multiple="multiple"
-        @change="uploadChange"
-      >
+        @change="uploadChange"/>
     </label>
 
-    <label ref="uploadFolderLabel" class="bg-opacity position-absolute size0" for="folderUpload">
+    <label class="bg-opacity position-absolute size0" ref="uploadFolderLabel" for="folderUpload">
       <input
-        id="folderUpload"
-        ref="folderInput"
         class="bg-opacity position-absolute size0"
         type="file"
+        ref="folderInput"
+        id="folderUpload"
         webkitdirectory
         multiple="multiple"
-        @change="uploadChange"
-      >
+        @change="uploadChange"/>
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import YDialog from '@/components/YComponent/YDialog/YDialog.vue'
 import YUploadFileType from '@/components/YComponent/YUpload/YUploadFileType'
-import UploadFileVO from '@/model/common/UploadFileVO'
 import DomFile from '@/model/base/DomFile'
 import Arrays from '@/utils/Arrays'
 import AlertUtil from '@/utils/AlertUtil'
-import request from '@/plugins/request'
-import { Message } from 'element-ui'
-import UploadPercentageVO from '@/components/YComponent/YUpload/UploadPercentageVO'
-import FileUploadVO from '@/components/YComponent/YUpload/FileUploadVO'
+import request from '@/utils/request'
 import JsonUtil from '@/utils/JsonUtil'
+import {Message} from 'element-ui'
+import UploadPercentageVO from '@/components/YComponent/YUpload/UploadPercentageVO'
+import UploadFileVO from "@/components/YComponent/YUpload/UploadFileVO";
 
 @Component({
   components: { YDialog }
@@ -123,7 +111,7 @@ export default class YUpload extends Vue {
 
   @Model('change') readonly files!: DomFile[]
   @Prop({ default: false, type: Boolean }) folder: boolean
-  // 上传进度
+  //上传进度
   uploadPercent: UploadPercentageVO = new UploadPercentageVO()
 
   fileList: UploadFileVO[] = []
@@ -161,7 +149,7 @@ export default class YUpload extends Vue {
     return files
   }
 
-  // 为null或100可操作，否则代表上传中不可操作
+  //为null或100可操作，否则代表上传中不可操作
   get canOperateByProgress() {
     return this.uploadPercent.uploadPercent === null || this.uploadPercent.uploadPercent === 100
   }
@@ -191,7 +179,7 @@ export default class YUpload extends Vue {
     })
   }
 
-  async upload(uploadUrl: string, formData: FileUploadVO) {
+  async upload(uploadUrl: string, formData: any) {
     // 只记录当前的上传进度，考虑清空情况，清空以后uploadPercent就变了，这个改值界面上也不会变化，则正确
     const uploadPercent = this.uploadPercent
     return request.post(uploadUrl, JsonUtil.toFormData(formData), {
@@ -243,7 +231,7 @@ export default class YUpload extends Vue {
         }
       }
     }
-    // 获取到文件之后就可以清楚input框里面的文件里
+    //获取到文件之后就可以清楚input框里面的文件里
     this.$refs.fileInput.value = null
     this.$refs.folderInput.value = null
     this.change()

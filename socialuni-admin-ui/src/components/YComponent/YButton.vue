@@ -1,6 +1,11 @@
 <template>
-  <el-button v-bind="$attrs" :disabled="btnDisabled" :loading="btnDisabled" v-on="$listeners" @click="btnClick">
-    <slot />
+  <el-button
+    v-bind="$attrs"
+    v-on="$listeners"
+    @click="btnClick"
+    :disabled="btnDisabled"
+    :loading="!btnEnable && showLoading && btnDisabled">
+    <slot></slot>
   </el-button>
 </template>
 
@@ -10,6 +15,7 @@ import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class YButton extends Vue {
   @Prop({ default: false, type: Boolean }) disabled: boolean
+  @Prop({ default: true, type: Boolean }) showLoading: boolean
   @Prop({
     default: () => {
       return

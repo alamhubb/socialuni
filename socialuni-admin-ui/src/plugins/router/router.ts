@@ -15,14 +15,14 @@ export const constantRoutes = [
     {
         path: '/login',
         component: Layout,
-        hidden: false,
+        hidden: true,
         showFirstChild: true,
         redirect: '/login',
         children: [
             {
                 path: '',
                 name: 'strengthMonitoring',
-                component: () => import('@/views/login/Login.vue'),
+                component: () => import('@/views/login/login.vue'),
                 meta: {title: '登陆', icon: 'strengthMonitoring'}
             }]
     },
@@ -31,35 +31,49 @@ export const constantRoutes = [
         component: Layout,
         redirect: '/',
         children: [
-            /*{
-                path: '',
-                name: 'strengthMonitoring',
-                component: () => import('@/views/home/Home.vue'),
-                meta: {title: '首页', icon: 'strengthMonitoring'}
-            },*/
             {
                 path: '',
                 name: RouterName.contentAudit,
                 // redirect: '/review',
                 component: () => import('@/views/audit/contentAudit.vue'),
                 // children: showRouterList,
-            },
+                meta: {title: '内容审核', icon: 'strengthMonitoring'}
+            }]
+    },
+    {
+        path: '/',
+        component: Layout,
+        redirect: '/',
+        children: [
             {
                 path: '/' + RouterName.auditHistory,
                 name: RouterName.auditHistory,
                 // redirect: '/review',
                 component: () => import('@/views/audit/auditHistory.vue'),
                 // children: showRouterList,
-            },
+                meta: {title: '审核历史', icon: 'strengthMonitoring'}
+            },]
+    }, {
+        path: '/',
+        component: Layout,
+        redirect: '/',
+        children: [
             {
                 path: '/keywordsManage',
                 name: RouterName.keywordsManage,
-                component: () => import('@/views/keywordsManage/keywordsManage.vue')
-            },
+                component: () => import('@/views/keywordsManage/keywordsManage.vue'),
+                meta: {title: '关键词管理', icon: 'strengthMonitoring'}
+            },]
+    }, {
+        path: '/',
+        component: Layout,
+        redirect: '/',
+        children: [
             {
                 path: '/test',
                 name: '测试',
-                component: () => import('@/views/testTemp/testTemp.vue')
+                component: () => import('@/views/testTemp/testTemp.vue'),
+                meta: {title: '测试', icon: 'strengthMonitoring'}
             }]
     },
     {

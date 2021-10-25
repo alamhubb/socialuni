@@ -4,10 +4,10 @@
     :visible.sync="showDialog"
     :close-on-click-modal="false"
     :title="title"
-    v-bind="$attrs"
     @close="dialogCloseClick"
+    v-bind="$attrs"
   >
-    <slot />
+    <slot/>
     <div>
       <slot name="action">
         <!--   不显示确定的时候，取消按钮改名为关闭-->
@@ -18,10 +18,11 @@
           :hide-confirm="hideConfirm"
           :confirm-title="confirmTitle"
           :cancel-title="hideConfirm?'关闭' :cancelTitle"
-          :confirm="confirm"
           @cancel="cancelBtnClick"
+          :confirm="confirm"
           @confirm-after="close"
-        />
+        >
+        </y-page-footer>
       </slot>
     </div>
   </el-dialog>

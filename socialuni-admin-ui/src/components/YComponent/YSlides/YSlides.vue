@@ -6,7 +6,7 @@
       :key="index"
       :style="{'min-height': index === data.length - 1 ? rightLastHeightPx : ''}"
     >
-      <slot name="default" :item="item" />
+      <slot name="default" :item="item"/>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default class YSlides extends Vue {
     return this.componentHeight + 'px'
   }
 
-  flagValue = null
+  innerValue = null
 
   @Emit()
   private change(value) {
@@ -52,52 +52,76 @@ export default class YSlides extends Vue {
 
   @Watch('data')
   private dataWatch() {
-    this.$refs.rightBox.scrollTo({ top: 0 })
-    this.initBoxItemTops()
+    this.$nextTick(() => {
+      this.initBoxItemTops()
+      this.rightScrollToValue()
+    })
   }
 
   @Watch('model')
   private modelWatch(value, old) {
-    if (value === this.flagValue) {
+    if (value === this.innerValue) {
       return
     }
-    this.flagValue = value
+    this.updateInnerValue(value)
     // 滚动的时候会切换值
-    this.valueChange(value)
+    this.rightScrollToValue()
   }
 
   // 渲染完毕后计算高度
   private mounted() {
-    // 同步
-    this.flagValue = this.model
-    // this.init()
+    // 判断外部是否有给model设置
+    if (!this.model && this.model !== this.getValue(0)) {
+      // 滚动的时候会切换值
+      this.updateInnerValueAndOutModel(this.getValue(0))
+    } else {
+      this.updateInnerValue(this.model)
+      // 滚动的时候会切换值
+    }
     this.initBoxItemTops()
+    this.rightScrollToValue()
   }
 
-  private leftScrollToIndex(index: number) {
+  private getValue(index) {
     let value
     if (this.value) {
       value = this.data[index][this.value]
     } else {
       value = index
     }
+    return value
+  }
+
+  private updateInnerValue(value) {
+    this.innerValue = value
+  }
+
+  private updateInnerValueAndOutModel(value) {
     if (value === this.model) return
     // 记录是本组件修改的
-    this.flagValue = value
+    this.updateInnerValue(value)
     // 设置当前
     this.change(value)
   }
 
-  valueChange(value) {
+  //按照值滚动右侧到指定位置
+  rightScrollToValue() {
     let scrollIndex
     if (this.value) {
-      scrollIndex = this.data.find(item => item[this.value] === value)
+      scrollIndex = this.data.find(item => item[this.value] === this.innerValue)
     } else {
-      scrollIndex = value
+      scrollIndex = this.innerValue
     }
-    const top = this.slideItemTops[scrollIndex]
-    // 滚到到指定位置
-    this.$refs.rightBox.scrollTo({ top: !top ? top : top + this.preShow })
+    if (this.slideItemTops.length) {
+      const top = this.slideItemTops[scrollIndex]
+      const scrollTop = !top ? top : top + this.preShow
+      // 滚到到指定位置
+      this.$refs.rightBox.scrollTo({ top: scrollTop })
+      //修复bug如果不这么写初始化非0时滚动位置有点偏差
+      this.$nextTick(() => {
+        this.$refs.rightBox.scrollTo({ top: scrollTop })
+      })
+    }
   }
 
   // 计算高度
@@ -118,39 +142,35 @@ export default class YSlides extends Vue {
 
   // 计算组建高度
   private initComponentsHeight() {
-    this.$nextTick(() => {
-      this.componentHeight = this.$refs.rightBox.clientHeight
-    })
+    this.componentHeight = this.$refs.rightBox.clientHeight
   }
 
   // 计算右侧菜单元素滚动高度
   private initRightBoxItemTops() {
-    this.$nextTick(() => {
-      this.slideItemTops = []
-      const res = this.$refs.slides
-      if (res && res.length) {
-        const firstTop = res[0].offsetTop
-        res.forEach((item, index) => {
-          // 需要减去头一个元素到顶部的距离，因为高度是从顶部0算的
-          let top = item.offsetTop - firstTop
-          // 如果不是第一个，可以设置提前量
-          // 因为需要和滚动条位置对比，所以不能出现负数
-          // 如果不为0
-          if (index) {
-            // 获取上一个元素高度, 增加一个逻辑就是多展示一点以后才切换tab
-            const lastItemHeight = res[index - 1].clientHeight
-            // 如果提前量大于上一个高度
-            if (this.preShow > lastItemHeight) {
-              // 则提前量为上一个的一半
-              top = top - lastItemHeight / 2
-            } else {
-              top = top - this.preShow
-            }
+    this.slideItemTops = []
+    const res = this.$refs.slides
+    if (res && res.length) {
+      const firstTop = res[0].offsetTop
+      res.forEach((item, index) => {
+        // 需要减去头一个元素到顶部的距离，因为高度是从顶部0算的
+        let top = item.offsetTop - firstTop
+        // 如果不是第一个，可以设置提前量
+        // 因为需要和滚动条位置对比，所以不能出现负数
+        // 如果不为0
+        if (index) {
+          // 获取上一个元素高度, 增加一个逻辑就是多展示一点以后才切换tab
+          const lastItemHeight = res[index - 1].clientHeight
+          // 如果提前量大于上一个高度
+          if (this.preShow > lastItemHeight) {
+            // 则提前量为上一个的一半
+            top = top - lastItemHeight / 2
+          } else {
+            top = top - this.preShow
           }
-          this.slideItemTops.push(top)
-        })
-      }
-    })
+        }
+        this.slideItemTops.push(top)
+      })
+    }
   }
 
   private rightBoxScroll(e) {
@@ -161,7 +181,8 @@ export default class YSlides extends Vue {
       // 这里使用大于等于 是要考虑到第一个为0的情况
       return index === this.slideItemTops.length - 1 || (scrollTop >= height1 && scrollTop < height2)
     })
-    this.leftScrollToIndex(scrollIndex)
+    const value = this.getValue(scrollIndex)
+    this.updateInnerValueAndOutModel(value)
   }
 }
 </script>
