@@ -1,7 +1,8 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.social.exception.SocialNullUserException;
+import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
+import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
@@ -76,7 +77,7 @@ public class SocialUserUtil {
 
     public static UserDO getMineUserAllowNull() {
         //解析token
-        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDO();
+        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
         if (tokenDO == null) {
             return null;
         }
@@ -88,7 +89,7 @@ public class SocialUserUtil {
     //必须有，websocket无法从request中获取token只能传入
     public static UserDO getUserByWebsocketToken(String token) {
         //解析token
-        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDO(token);
+        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
         if (tokenDO == null) {
             return null;
         }
