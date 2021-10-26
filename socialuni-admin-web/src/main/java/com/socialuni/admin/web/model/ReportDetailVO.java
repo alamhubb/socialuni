@@ -1,21 +1,12 @@
-/*
 package com.socialuni.admin.web.model;
 
-import com.qingchi.base.model.report.ReportDetailDO;
+import com.socialuni.social.entity.model.DO.ReportDetailDO;
 import lombok.Data;
-
-*/
-/**
- * @author qinkaiyuan
- * @date 2020-03-15 22:07
- *//*
 
 @Data
 public class ReportDetailVO {
-    */
-/**
-     * 举报时的备注信息
-     *//*
+// 举报时的备注信息
+
 
     private String content;
     private String reportType;
@@ -28,4 +19,3 @@ public class ReportDetailVO {
         this.reportType = reportDetailDO.getReportType();
     }
 }
-*/

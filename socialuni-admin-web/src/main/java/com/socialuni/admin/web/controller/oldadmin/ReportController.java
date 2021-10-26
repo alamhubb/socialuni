@@ -1,15 +1,9 @@
-/*
 package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.model.ReportVO;
-import com.socialuni.admin.web.service.AdminReportService;
-import com.socialuni.admin.web.service.ViolationService;
-import com.socialuni.admin.web.utils.VioKeywordsUtil;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.KeywordsRepository;
 import com.socialuni.social.sdk.repository.NotifyRepository;
@@ -17,34 +11,25 @@ import com.socialuni.social.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.service.KeywordsService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-*/
-/**
- * @author qinkaiyuan
- * @date 2020-03-15 22:05
- *//*
 
 @RestController
 @RequestMapping("report")
 public class ReportController {
     @Resource
     private ReportRepository reportRepository;
-    @Resource
-    private ViolationService violationService;
+//    @Resource
+//    private ViolationService violationService;
     @Resource
     private NotifyRepository notifyRepository;
-    @Resource
-    private NotifyService notifyService;
+//    @Resource
+//    private NotifyService notifyService;
 
     @Resource
     private TalkRepository talkRepository;
@@ -53,8 +38,7 @@ public class ReportController {
     @Resource
     private KeywordsService keywordsService;
 
-    @Resource
-    private AdminReportService adminReportService;
+/*
 
     @RequestMapping("getViolation")
     public ResultRO<Object> getViolation() {
@@ -62,6 +46,7 @@ public class ReportController {
         VioKeywordsUtil.gatherKeywords(talkDOS);
         return new ResultRO<>();
     }
+*/
 
     @RequestMapping("queryReportTypes")
     public ResultRO<List<String>> queryReportTypes() {
@@ -77,7 +62,7 @@ public class ReportController {
         return new ResultRO<>(reportVOS);
     }
 
-    @PostMapping("queryUserReports")
+    /*@PostMapping("queryUserReports")
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {
         SocialUserDO user = new SocialUserDO();
         user.setId(userId);
@@ -90,32 +75,6 @@ public class ReportController {
         return new ResultRO<>(reportVOS);
     }
 
-
-    */
-/**
-     * 举报成功
-     * * 举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
-     * *
-     * * 审核过后，发放奖励
-     * 这点应该在新增举报那个页面能控制，下面这俩
-     * //正义值小于0，则每天只能举报2个，举报提示
-     * //正义值小于300不能再举报
-     * //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
-     * /**
-     * * 举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
-     * *
-     * * 审核过后，发放奖励
-     * *
-     * * 如果已经被举报多少次不能再举报，举报超过多少先删除，talk状态要加一个审核中，2个人举报就被删，进入审核中，查询在审核中的和正常的
-     * *
-     * * 2个人举报就被删，进入审核中，查询在审核中的和正常的
-     * * 举报审核通过的要加一个不违规标识
-     * * 审核完就变成正常和违规，发放奖励
-     * *
-     * * 每个人每天只能举报10个，分值低于0的，每天只能举报两个，分值低于-200，不能再进行举报
-     *
-     * @return
-     *//*
 
     @PostMapping("reportAudit")
     public ResultRO<String> reportAudit(@RequestBody @Valid @NotNull ReportVO auditVO) {
@@ -144,8 +103,28 @@ public class ReportController {
 
 
 
-    */
-/*public void modelIsViolation(ReportAuditVO auditVO) {
+
+*//* 举报成功
+  举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
+ 
+  审核过后，发放奖励
+ 这点应该在新增举报那个页面能控制，下面这俩
+ //正义值小于0，则每天只能举报2个，举报提示
+ //正义值小于300不能再举报
+ //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
+  举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
+ 
+  审核过后，发放奖励
+ 
+  如果已经被举报多少次不能再举报，举报超过多少先删除，talk状态要加一个审核中，2个人举报就被删，进入审核中，查询在审核中的和正常的
+ 
+  2个人举报就被删，进入审核中，查询在审核中的和正常的
+  举报审核通过的要加一个不违规标识
+  审核完就变成正常和违规，发放奖励
+ 
+  每个人每天只能举报10个，分值低于0的，每天只能举报两个，分值低于-200，不能再进行举报*//*
+
+    public void modelIsViolation(ReportAuditVO auditVO) {
         String auditType = auditVO.getAuditType();
         if (StringUtils.isEmpty(auditType)) {
             return new ResultVO<>("审核违规，必须选择审核类型");
@@ -276,7 +255,6 @@ public class ReportController {
         notifyRepository.saveAll(notifyDOS);
         reportRepository.save(reportDO);
         notifyService.sendNotifies(notifyDOS);
-    }*//*
+    }*/
 
 }
-*/
