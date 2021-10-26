@@ -1,23 +1,27 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100p flex-col">
-    <nav-bar/>
-    <div class="flex-row flex-1">
-      <nav-menu class="w200"></nav-menu>
-      <app-main class="flex-1"/>
+    <nav-bar />
+    <div class="flex-row flex-1 overflow-hidden">
+      <nav-menu class="w200" />
+      <div class="flex-1 overflow-auto">
+        <transition name="fade-transform" mode="out-in">
+          <router-view :key="$route.path" />
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import AppMain from '@/components/layout/AppMain.vue'
 import NavMenu from '@/components/layout/components/NavMenu/NavMenu.vue'
 import NavBreadcrumb from '@/components/layout/components/NavBreadcrumb.vue'
 import NavBar from '@/components/layout/NavBar.vue'
 
 @Component({
-  components: {NavBar, NavBreadcrumb, NavMenu, AppMain}
+  components: { NavBar, NavBreadcrumb, NavMenu, AppMain }
 })
 export default class Layout extends Vue {
   // 是x(横向,水平)轴布局
