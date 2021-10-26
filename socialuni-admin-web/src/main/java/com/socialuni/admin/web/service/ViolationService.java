@@ -28,12 +28,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-*/
-/**
- * @author qinkaiyuan
- * @date 2020-03-19 17:45
- *//*
-
 @Service
 @Slf4j
 public class ViolationService {
@@ -229,12 +223,10 @@ public class ViolationService {
         //不删除之前的内容
         //更改时间时，需要判断目前的 违规截止时间，如果大于当前日期，则加日期，否则已现在开始日期计算。
 
-        */
-/*//*
-/删除此用户的所有动态
+//删除此用户的所有动态
         talkRepository.updateUserTalkStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);
         //删除此用户的所有评论
-        commentRepository.updateUserCommentStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);*//*
+        commentRepository.updateUserCommentStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);
 
     }
 }

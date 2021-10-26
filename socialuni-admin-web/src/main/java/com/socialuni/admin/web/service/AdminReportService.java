@@ -11,12 +11,16 @@ import com.socialuni.social.entity.model.DO.ReportDetailDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.BaseModelUtils;
 import com.socialuni.social.sdk.service.KeywordsService;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,7 +51,9 @@ public class AdminReportService {
 
 
     */
-/**
+/*
+
+     *
      * 举报成功
      * * 举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
      * *
@@ -56,7 +62,6 @@ public class AdminReportService {
      * //正义值小于0，则每天只能举报2个，举报提示
      * //正义值小于300不能再举报
      * //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
-     * /**
      * * 举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
      * *
      * * 审核过后，发放奖励
@@ -80,7 +85,7 @@ public class AdminReportService {
         //判断是否违规
         if (reportDOOptional.isPresent()) {
             List<NotifyDO> notifyDOS = new ArrayList<>();
-            SocialUserDO systemUser = UserUtils.getSystemUser();
+            Integer systemUserId = SocialAppConfig.getSystemUserId();
             ReportDO reportDO = reportDOOptional.get();
             //为待审核才继续处理
             if (ReportStatus.auditStatus.contains(reportDO.getStatus())) {
@@ -106,7 +111,6 @@ public class AdminReportService {
                         return new ResultRO<>("审核违规，必须选择违规类型");
                     }
                     if (!ViolateType.adminFrontShowReportTypes.contains(violateType)) {
-                        QingLogger.logger.error("错误的违规类型");
                         return new ResultRO<>("错误的违规类型");
                     }
                     violationService.violateService(modelDO, violateType, auditNote, reportDO);
@@ -146,5 +150,7 @@ public class AdminReportService {
         }
         return null;
     }
+
+
 }
 */

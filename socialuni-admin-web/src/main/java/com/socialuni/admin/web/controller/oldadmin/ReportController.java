@@ -11,10 +11,12 @@ import com.socialuni.social.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.service.KeywordsService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +64,20 @@ public class ReportController {
         return new ResultRO<>(reportVOS);
     }
 
+    /*@PostMapping("reportAuditList")
+    public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ReportVO> auditVOS) {
+        ResultRO<String> resultRO = new ResultRO<>();
+        for (ReportVO auditVO : auditVOS) {
+            //首先校验 reportid是否存在
+            ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
+            if (methodResult != null) {
+                return methodResult;
+            }
+        }
+        resultRO.setData("审核成功");
+        return resultRO;
+    }*/
+
     /*@PostMapping("queryUserReports")
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {
         SocialUserDO user = new SocialUserDO();
@@ -87,19 +103,6 @@ public class ReportController {
     }
 
 
-    @PostMapping("reportAuditList")
-    public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ReportVO> auditVOS) {
-        ResultRO<String> resultRO = new ResultRO<>();
-        for (ReportVO auditVO : auditVOS) {
-            //首先校验 reportid是否存在
-            ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
-            if (methodResult != null) {
-                return methodResult;
-            }
-        }
-        resultRO.setData("审核成功");
-        return resultRO;
-    }
 
 
 
