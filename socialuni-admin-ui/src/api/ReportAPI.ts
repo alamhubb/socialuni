@@ -2,8 +2,7 @@
  * 举报内容的api
  */
 import request from '@/plugins/request'
-import ReportAudit from '@/model/report/ReportAudit'
-import ReportVO from "@/model/report/ReportVO";
+import ReportVO from '@/model/report/ReportVO'
 
 export default class ReportAPI {
   public static queryReportTypesAPI() {
@@ -37,7 +36,6 @@ export default class ReportAPI {
   public static reportAuditListAPI(reports: ReportVO []) {
     return request.post('report/reportAuditList', reports)
   }
-
 
   public static getViolationAPI() {
     return request.post('report/getViolation')
