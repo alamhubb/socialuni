@@ -41,17 +41,17 @@ export const constantRoutes = [
             }]
     },
     {
-        path: '/',
+        path: '/contentAudit',
         component: Layout,
         redirect: '/',
         children: [
             {
-                path: '/' + RouterName.contentAudit,
+                path: '',
                 name: RouterName.contentAudit,
                 // redirect: '/review',
                 component: () => import('@/views/audit/contentAudit.vue'),
                 // children: showRouterList,
-                meta: {title: '内容审核', icon: 'strengthMonitoring'}
+                meta: {title: RouterName.contentAudit, icon: 'strengthMonitoring'}
             }]
     },
     {
