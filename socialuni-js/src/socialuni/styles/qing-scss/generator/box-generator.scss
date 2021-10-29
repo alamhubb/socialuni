@@ -4,3 +4,8 @@
     font-size: map-get($text-map, $boxKey);
   }
 }
+
+.box {
+  padding: $box-y-df $box-x-df;;
+  font-size: $text-df;
+}
