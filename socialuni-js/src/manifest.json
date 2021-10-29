@@ -1,5 +1,5 @@
 {
-    "name" : "清池",
+    "name" : "速配cp",
     "appid" : "__UNI__9863127",
     "description" : "干净的00后恋爱交友app",
     "versionName" : "1.8.0",
@@ -158,8 +158,7 @@
     "mp-weixin" : {
         /* 小程序特有相关 */
         "usingComponents" : true,
-        //        腾讯地图FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD
-        "appid" : "wxc2315506fd81f7b4",
+        "appid" : "wxd12c2793159c91d8",
         "setting" : {
             "urlCheck" : true
         },
@@ -224,12 +223,12 @@
         "uniStatistics" : {
             "enable" : true
         },
-        "sdkConfigs": {
+        "sdkConfigs" : {
             // 使用地图或位置相关功能必须填写其一
-            "maps": {
-                "qqmap": {
+            "maps" : {
+                "qqmap" : {
                     // 腾讯地图秘钥 https://lbs.qq.com/dev/console/key/manage
-                    "key": "FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD"
+                    "key" : "FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD"
                 }
             }
         }
