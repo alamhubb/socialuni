@@ -1,16 +1,13 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.entity.model.DO.user.*;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
-import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
-import com.socialuni.social.sdk.repository.CommonTokenRepository;
-import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.repository.CommonTokenRepository;
+import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.sdk.repository.SocialUserViolationRepository;
+import com.socialuni.social.sdk.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +20,7 @@ public class SocialUserUtil {
     private static UserRepository userRepository;
     private static SocialUserPhoneRedis socialUserPhoneRedis;
     private static SocialUserAccountRepository socialUserAccountRepository;
+    private static SocialUserViolationRepository socialUserViolationRepository;
 
     @Resource
     public void setCommonUserRepository(UserRepository userRepository) {
@@ -37,6 +35,11 @@ public class SocialUserUtil {
     @Resource
     public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
         SocialUserUtil.socialUserPhoneRedis = socialUserPhoneRedis;
+    }
+
+    @Resource
+    public void setSocialUserViolationRepository(SocialUserViolationRepository socialUserViolationRepository) {
+        SocialUserUtil.socialUserViolationRepository = socialUserViolationRepository;
     }
 
     public static Integer getMineUserIdAllowNull() {
@@ -116,6 +119,10 @@ public class SocialUserUtil {
         return socialUserPhoneDO;
     }
 
+    public static SocialUserViolationDO getUserViolationDO(Integer userId) {
+        SocialUserViolationDO socialUserViolationDO = socialUserViolationRepository.findOneByUserId(userId);
+        return socialUserViolationDO;
+    }
 
     /*public static UserDO get(String userId) {
         if (StringUtils.isEmpty(userId)) {

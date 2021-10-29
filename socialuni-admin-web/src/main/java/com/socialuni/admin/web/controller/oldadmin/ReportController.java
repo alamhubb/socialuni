@@ -1,6 +1,7 @@
 package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.model.ReportVO;
+import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.social.entity.model.DO.ReportDO;
@@ -26,10 +27,12 @@ import java.util.stream.Collectors;
 public class ReportController {
     @Resource
     private ReportRepository reportRepository;
-//    @Resource
+    //    @Resource
 //    private ViolationService violationService;
     @Resource
     private NotifyRepository notifyRepository;
+    @Resource
+    private AdminReportService adminReportService;
 //    @Resource
 //    private NotifyService notifyService;
 
@@ -64,7 +67,7 @@ public class ReportController {
         return new ResultRO<>(reportVOS);
     }
 
-    /*@PostMapping("reportAuditList")
+    @PostMapping("reportAuditList")
     public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ReportVO> auditVOS) {
         ResultRO<String> resultRO = new ResultRO<>();
         for (ReportVO auditVO : auditVOS) {
@@ -76,7 +79,7 @@ public class ReportController {
         }
         resultRO.setData("审核成功");
         return resultRO;
-    }*/
+    }
 
     /*@PostMapping("queryUserReports")
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {

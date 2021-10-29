@@ -1,4 +1,3 @@
-/*
 package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.model.ReportVO;
@@ -11,15 +10,12 @@ import com.socialuni.social.entity.model.DO.ReportDetailDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.BaseModelUtils;
 import com.socialuni.social.sdk.service.KeywordsService;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +36,8 @@ public class AdminReportService {
     private NotifyRepository notifyRepository;
     @Resource
     private KeywordsService keywordsService;
-    @Resource
-    private NotifyService notifyService;
+//    @Resource
+//    private NotifyService notifyService;
     @Resource
     private ReportDetailRepository reportDetailRepository;
     @Resource
@@ -50,10 +46,8 @@ public class AdminReportService {
     private KeywordsRepository keywordsRepository;
 
 
-    */
-/*
 
-     *
+    /* *
      * 举报成功
      * * 举报正确类别，奖励10，举报错误类别奖励5，举报失败扣20，
      * *
@@ -74,8 +68,8 @@ public class AdminReportService {
      * *
      * * 每个人每天只能举报10个，分值低于0的，每天只能举报两个，分值低于-200，不能再进行举报
      *
-     * @return
-     *//*
+     * @return*/
+
 
     @Transactional
     public ResultRO<String> getStringResultVO(ReportVO auditVO) {
@@ -115,8 +109,8 @@ public class AdminReportService {
                     }
                     violationService.violateService(modelDO, violateType, auditNote, reportDO);
                     //给用户发送被封通知,推送消息
-                    NotifyDO notifyDO = notifyRepository.save(new NotifyDO(systemUser.getId(), modelDO.getUserId(), reportDO.getId(), NotifyType.violation));
-                    notifyDOS.add(notifyDO);
+//                    NotifyDO notifyDO = notifyRepository.save(new NotifyDO(systemUser.getId(), modelDO.getUserId(), reportDO.getId(), NotifyType.violation));
+//                    notifyDOS.add(notifyDO);
                 } else {
                     violationService.noViolateService(modelDO, auditNote, reportDO);
                 }
@@ -127,8 +121,8 @@ public class AdminReportService {
                     List<ReportDetailDO> reportDetailDOS = reportDetailRepository.findAllByReportId(reportDO.getId());
 
                     for (ReportDetailDO reportDetailDO : reportDetailDOS) {
-                        NotifyDO notifyDO = new NotifyDO(systemUser.getId(), reportDetailDO.getUserId(), reportDO.getId(), NotifyType.report_result);
-                        notifyDOS.add(notifyDO);
+//                        NotifyDO notifyDO = new NotifyDO(systemUser.getId(), reportDetailDO.getUserId(), reportDO.getId(), NotifyType.report_result);
+//                        notifyDOS.add(notifyDO);
                     }
                 }
 
@@ -145,7 +139,7 @@ public class AdminReportService {
                 }
 
                 notifyRepository.saveAll(notifyDOS);
-                notifyService.sendNotifies(notifyDOS, systemUser);
+//                notifyService.sendNotifies(notifyDOS, systemUser);
             }
         }
         return null;
@@ -153,4 +147,3 @@ public class AdminReportService {
 
 
 }
-*/

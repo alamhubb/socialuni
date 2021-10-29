@@ -1,11 +1,10 @@
-/*
 package com.socialuni.admin.web.service;
 
-import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.social.entity.model.DO.ReportDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserViolationDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateLevel;
@@ -18,8 +17,6 @@ import com.socialuni.social.sdk.service.KeywordsService;
 import com.socialuni.social.sdk.service.ReportService;
 import com.socialuni.social.sdk.store.ReportStore;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -164,11 +161,12 @@ public class ViolationService {
         }
 
         int violationDay = 0;
+        SocialUserViolationDO socialUserViolationDO = SocialUserUtil.getUserViolationDO(violationUser.getId());
         //轻微违规只删除内容
         if (ViolateLevel.slight.equals(vioLevel)) {
             vioReason += "删除违规内容";
         } else {
-            Integer vioCount = violationUser.getViolationCount();
+            Integer vioCount = socialUserViolationDO.getViolationCount();
             //一般违规
             if (ViolateLevel.general.equals(vioLevel)) {
                 //第一次不封禁,轻微违规
@@ -201,7 +199,7 @@ public class ViolationService {
             //区分轻微、一般违规，和严重违规，一般和严重才增加次数
         }
         //所有违规通用
-        violationUser.setViolationReason(vioReason);
+        socialUserViolationDO.setViolationReason(vioReason);
         violationUser.setUpdateTime(curDate);
 
         //用户状态不为已封禁，才修改用户状态
@@ -212,22 +210,19 @@ public class ViolationService {
                 violationUser.setStatus(UserStatus.violation);
                 //封禁日期不叠加，按最后得算
                 //封禁截止日期
-                violationUser.setViolationStartTime(new Date());
+                socialUserViolationDO.setViolationStartTime(new Date());
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE, violationDay);
-                violationUser.setViolationEndTime(calendar.getTime());
+                socialUserViolationDO.setViolationEndTime(calendar.getTime());
             } else {
                 violationUser.setStatus(UserStatus.enable);
             }
         }
         //不删除之前的内容
         //更改时间时，需要判断目前的 违规截止时间，如果大于当前日期，则加日期，否则已现在开始日期计算。
-
-//删除此用户的所有动态
-        talkRepository.updateUserTalkStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);
+        //删除此用户的所有动态
+//        talkRepository.updateUserTalkStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);
         //删除此用户的所有评论
-        commentRepository.updateUserCommentStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);
-
+//        commentRepository.updateUserCommentStatusIn(violationUser.getId(), CommonStatus.contentEnableStatus);
     }
 }
-*/
