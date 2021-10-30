@@ -6,7 +6,6 @@ export default class RouterName {
   public static readonly keywordsManage: string = '关键词管理'
   public static readonly neutralWordManage: string = '中性词管理'
 
-
   public static readonly login: string = 'login'
   public static readonly layout: string = 'layout'
   public static readonly review: string = 'review'

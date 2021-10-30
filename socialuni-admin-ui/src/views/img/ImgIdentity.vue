@@ -23,35 +23,33 @@
             <div>
               <el-avatar>
                 <img
-                    :src="identity.user.avatar"
-                    alt="John"
+                  :src="identity.user.avatar"
+                  alt="John"
                 >
               </el-avatar>
-              {{identity.user.nickname}}
+              {{ identity.user.nickname }}
             </div>
           </el-col>
           <el-col cols="2">
-            {{identity.status}}
+            {{ identity.status }}
           </el-col>
           <el-col cols="2">
             <el-img
-                :src="getImgUrl(identity.src,identity.user.id)"
-                aspect-ratio="1"
-            >
-            </el-img>
+              :src="getImgUrl(identity.src,identity.user.id)"
+              aspect-ratio="1"
+            />
           </el-col>
           <el-col cols="6">
             <el-row v-if="identity.user.imgs">
               <el-col
-                  v-for="img in identity.user.imgs"
-                  :key="img.id"
-                  cols="4"
+                v-for="img in identity.user.imgs"
+                :key="img.id"
+                cols="4"
               >
                 <el-img
-                    :src="getImgUrl(img.src,identity.user.id)"
-                    aspect-ratio="1"
-                >
-                </el-img>
+                  :src="getImgUrl(img.src,identity.user.id)"
+                  aspect-ratio="1"
+                />
               </el-col>
             </el-row>
           </el-col>
@@ -62,22 +60,22 @@
 </template>
 
 <script lang="ts">
-  import {Vue, Component, Prop} from 'vue-property-decorator'
-  import ReportAPI from '@/api/ReportAPI'
-  import Talk from '@/model/talk/Talk'
-  import ReportVO from '@/model/report/ReportVO'
-  import ViolateType from '../audit/ViolateType'
-  import TalkAPI from '@/api/TalkAPI'
-  import Identity from '@/model/user/Identity'
-  import ImgIdentityAPI from '@/api/ImgIdentityAPI'
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import ReportAPI from '@/api/ReportAPI'
+import Talk from '@/model/talk/Talk'
+import ReportVO from '@/model/report/ReportVO'
+import ViolateType from '../audit/ViolateType'
+import TalkAPI from '@/api/TalkAPI'
+import Identity from '@/model/user/Identity'
+import ImgIdentityAPI from '@/api/ImgIdentityAPI'
 
   @Component
-  export default class ImgIdentity extends Vue {
+export default class ImgIdentity extends Vue {
     reports: ReportVO[] = []
     imgUrl: string = process.env.VUE_APP_COS_URL
     reportType: string = ViolateType.pornInfo
     reportTypes: string[] = []
-    auditNote: string = '未发现违规内容'
+    auditNote = '未发现违规内容'
     talkId: number = null
     userId: number = null
     talk: Talk = null
@@ -98,7 +96,7 @@
 
     getImgUrl(src: string, userId: number): string {
       console.log(src)
-      //如果包含'/'则代表是新逻辑
+      // 如果包含'/'则代表是新逻辑
       let imgUrl
       if (src.indexOf('https') > -1) {
         imgUrl = src
@@ -111,8 +109,7 @@
       }
       return imgUrl
     }
-
-  }
+}
 </script>
 
 <style scoped>

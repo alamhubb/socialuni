@@ -1,5 +1,5 @@
 <template>
-  <el-select ref="select" size="small" :value="model" :placeholder="hint" v-bind="$attrs" @change="change" filterable>
+  <el-select ref="select" size="small" :value="model" :placeholder="hint" v-bind="$attrs" filterable @change="change">
     <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
     <el-option
       v-for="item in optionsGet"
@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue} from 'vue-property-decorator'
-import {ElSelect} from 'element-ui/types/select'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import { ElSelect } from 'element-ui/types/select'
 
 /**
  * @author 秦开远
@@ -28,7 +28,7 @@ export default class YSelect extends Vue {
 
   @Model('change') readonly model!: any
 
-  @Prop({default: '请选择'}) readonly hint: string
+  @Prop({ default: '请选择' }) readonly hint: string
 
   // 区分两种使用模式
   // 第一种使用方式
@@ -36,7 +36,7 @@ export default class YSelect extends Vue {
   // 第二种使用方式
   @Prop() readonly options: []
   @Prop() readonly label: string
-  @Prop({default: 'value'}) readonly value: string
+  @Prop({ default: 'value' }) readonly value: string
 
   @Emit()
   change(value) {

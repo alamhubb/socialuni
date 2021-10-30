@@ -6,7 +6,7 @@
       :key="index"
       :style="{'min-height': index === data.length - 1 ? rightLastHeightPx : ''}"
     >
-      <slot name="default" :item="item"/>
+      <slot name="default" :item="item" />
     </div>
   </div>
 </template>
@@ -104,7 +104,7 @@ export default class YSlides extends Vue {
     this.change(value)
   }
 
-  //按照值滚动右侧到指定位置
+  // 按照值滚动右侧到指定位置
   rightScrollToValue() {
     let scrollIndex
     if (this.value) {
@@ -117,7 +117,7 @@ export default class YSlides extends Vue {
       const scrollTop = !top ? top : top + this.preShow
       // 滚到到指定位置
       this.$refs.rightBox.scrollTo({ top: scrollTop })
-      //修复bug如果不这么写初始化非0时滚动位置有点偏差
+      // 修复bug如果不这么写初始化非0时滚动位置有点偏差
       this.$nextTick(() => {
         this.$refs.rightBox.scrollTo({ top: scrollTop })
       })

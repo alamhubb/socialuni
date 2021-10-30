@@ -1,5 +1,5 @@
-import Message from "@/model/Message"
-import keywordsTriggerDetailVO from "@/model/violateWord/KeywordsTriggerDetailVO";
+import Message from '@/model/Message'
+import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
 export default class keywordsVO {
   id: number

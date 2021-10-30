@@ -6,14 +6,14 @@
     2.如果没有子节点，或者不展示子节点也走这个
     3.如果仅有一个展示的子节点，或者没有子节点也走这个-->
     <template
-        v-if="isOnlyOneChildShow(route)"
+      v-if="isOnlyOneChildShow(route)"
     >
       <div v-show="false">
         {{ onlyShowRoute = getOnlyShowRoute(route) }}
       </div>
       <app-link v-if="onlyShowRoute.meta" :to="resolvePath(onlyShowRoute.path)">
         <el-menu-item
-            :index="resolvePath(onlyShowRoute.path)"
+          :index="resolvePath(onlyShowRoute.path)"
         >
           <!--            <img v-if="onlyShowRoute.meta.icon" class="mr-sm" :src="require('@/assets/img/navMenu/router/'+onlyShowRoute.meta.icon+'.png')">-->
           {{ onlyShowRoute.meta.title }}
@@ -29,26 +29,26 @@
       </template>
 
       <nav-menu-item
-          v-for="child in route.children"
-          :key="child.path"
-          :is-nest="true"
-          :route="child"
-          :base-path="resolvePath(route.path)"
-          class="nest-menu"
+        v-for="child in route.children"
+        :key="child.path"
+        :is-nest="true"
+        :route="child"
+        :base-path="resolvePath(route.path)"
+        class="nest-menu"
       />
     </el-submenu>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import AppLink from '@/components/layout/components/HorizontalSidebar/Link.vue'
 import MenuItem from '@/components/layout/components/HorizontalSidebar/Item.vue'
 // @ts-ignore
 import path from 'path'
 
 @Component({
-  components: {MenuItem, AppLink}
+  components: { MenuItem, AppLink }
 })
 export default class NavMenuItem extends Vue {
   @Prop() route

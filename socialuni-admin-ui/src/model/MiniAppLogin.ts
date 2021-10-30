@@ -1,7 +1,7 @@
 export default class miniAppLogin {
-  public code: string = ''
-  public nickName: string = ''
+  public code = ''
+  public nickName = ''
   public gender: number = null
-  public avatarUrl: string = ''
-  public loginType: string = ''
+  public avatarUrl = ''
+  public loginType = ''
 }

@@ -3,10 +3,10 @@
     <div>
       <el-form label-position="top" label-width="80px">
         <el-form-item label="员工编号">
-          <el-input v-model="employeeID"></el-input>
+          <el-input v-model="employeeID" />
         </el-form-item>
         <el-form-item label="员工姓名">
-          <el-input v-model="name"></el-input>
+          <el-input v-model="name" />
         </el-form-item>
       </el-form>
     </div>
@@ -18,19 +18,19 @@
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-  import UserIdCard from '@/model/UserIdCard'
-  import Img from '@/model/Img'
-  import UserImg from '@/model/UserImg'
+import { Component, Vue } from 'vue-property-decorator'
+import UserIdCard from '@/model/UserIdCard'
+import Img from '@/model/Img'
+import UserImg from '@/model/UserImg'
 
   @Component
-  export default class Review extends Vue {
-    name: string = ''
-    employeeID: string = ''
+export default class Review extends Vue {
+    name = ''
+    employeeID = ''
 
     addAdminUser() {
       if (this.name && this.employeeID) {
-        /*this.$post('adminUser/add', {
+        /* this.$post('adminUser/add', {
           name: this.name,
           employeeID: this.employeeID
         }).then(res => {
@@ -38,5 +38,5 @@
         })*/
       }
     }
-  }
+}
 </script>

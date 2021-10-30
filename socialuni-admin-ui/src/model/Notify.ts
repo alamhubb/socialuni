@@ -1,5 +1,5 @@
-import User from "@/model/User"
-import Chat from "@/model/Chat"
+import User from '@/model/User'
+import Chat from '@/model/Chat'
 
 export default class Notify {
     public id: number

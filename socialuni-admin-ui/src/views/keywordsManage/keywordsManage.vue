@@ -4,7 +4,7 @@
     <div class="flex-none row-all-center pa">
       关键词：
       <div class="w200">
-        <el-input v-model.trim="inputKeyword" @keydown.native.enter="queryKeyword(inputKeyword)"></el-input>
+        <el-input v-model.trim="inputKeyword" @keydown.native.enter="queryKeyword(inputKeyword)" />
       </div>
 
       <div class="ml">
@@ -15,10 +15,10 @@
                 <el-button type="primary" @click="scanMessageKeywords">扫描message</el-button>-->
         <!--        <el-button type="primary" @click="testKeywords">测试</el-button>-->
         <!--        只看某一种？ 看全部情况，还有时候想单独看一下为什么拼音的低，单看拼音的误触发情况 -->
-        <el-radio-group class="ml" v-model="matchType">
-          <el-radio-button label="全部"></el-radio-button>
-          <el-radio-button label="拼音"></el-radio-button>
-          <el-radio-button label="文字"></el-radio-button>
+        <el-radio-group v-model="matchType" class="ml">
+          <el-radio-button label="全部" />
+          <el-radio-button label="拼音" />
+          <el-radio-button label="文字" />
         </el-radio-group>
       </div>
     </div>
@@ -27,59 +27,72 @@
     <!--    关键词及时信息-->
     <!--    违规记录-->
     <!--    不违规记录-->
-    <keywords-detail-table class="flex-auto" v-if="keywords.length" :keywords="keywords"
-    ></keywords-detail-table>
-    <keywords-detail-table class="h150" :keywords="tempKeywords" :is-temp="true"
-                           @query="queryKeyword"
-    ></keywords-detail-table>
+    <keywords-detail-table
+      v-if="keywords.length"
+      class="flex-auto"
+      :keywords="keywords"
+    />
+    <keywords-detail-table
+      class="h150"
+      :keywords="tempKeywords"
+      :is-temp="true"
+      @query="queryKeyword"
+    />
 
-    <trigger-detail-table class="flex-1" v-if="triggerDetails.length" :trigger-details="triggerDetails"
-                          :audit-status="'不违规'"></trigger-detail-table>
-    <trigger-detail-table class="flex-1" v-if="vioTriggerDetails.length" :trigger-details="vioTriggerDetails"
-                          :audit-status="'违规'"></trigger-detail-table>
+    <trigger-detail-table
+      v-if="triggerDetails.length"
+      class="flex-1"
+      :trigger-details="triggerDetails"
+      :audit-status="'不违规'"
+    />
+    <trigger-detail-table
+      v-if="vioTriggerDetails.length"
+      class="flex-1"
+      :trigger-details="vioTriggerDetails"
+      :audit-status="'违规'"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import ReportVO from '@/model/report/ReportVO'
-import KeywordsQueryAPI from "@/api/KeywordsQueryAPI";
-import keywordsVO from "@/model/violateWord/KeywordsVO";
-import keywordsTriggerVO from "@/model/violateWord/KeywordsTriggerVO";
-import el from "element-ui/src/locale/lang/el";
-import KeywordsManageAPI from "@/api/KeywordsManageAPI";
-import keywordsTriggerDetailVO from "@/model/violateWord/KeywordsTriggerDetailVO";
-import KeywordsDetailTable from "@/views/keywordsManage/KeywordsDetailTable.vue";
-import TriggerDetailTable from "@/views/keywordsManage/TriggerDetailTable.vue";
-import KeywordsDetailVO from "@/model/violateWord/KeywordsDetailVO";
-//违规率高不高
-//违规次数、文本次数、拼音次数
+import KeywordsQueryAPI from '@/api/KeywordsQueryAPI'
+import keywordsVO from '@/model/violateWord/KeywordsVO'
+import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'
+import el from 'element-ui/src/locale/lang/el'
+import KeywordsManageAPI from '@/api/KeywordsManageAPI'
+import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
+import KeywordsDetailTable from '@/views/keywordsManage/KeywordsDetailTable.vue'
+import TriggerDetailTable from '@/views/keywordsManage/TriggerDetailTable.vue'
+import KeywordsDetailVO from '@/model/violateWord/KeywordsDetailVO'
+// 违规率高不高
+// 违规次数、文本次数、拼音次数
 
-//违规率、文本违规率、拼音违规率
+// 违规率、文本违规率、拼音违规率
 
-//不违规率、文本不违规率、拼音不违规率
-//违规率高不高
-//违规次数、文本次数、拼音次数
+// 不违规率、文本不违规率、拼音不违规率
+// 违规率高不高
+// 违规次数、文本次数、拼音次数
 
-//违规率、文本违规率、拼音违规率
+// 违规率、文本违规率、拼音违规率
 
-//不违规率、文本不违规率、拼音不违规率
+// 不违规率、文本不违规率、拼音不违规率
 @Component({
-  components: {TriggerDetailTable, KeywordsDetailTable}
+  components: { TriggerDetailTable, KeywordsDetailTable }
 })
 export default class ViolationHistoryPage extends Vue {
   tempKeywords: keywordsVO[] = []
   keywords: keywordsVO[] = []
 
-  inputKeyword: string = ''
-
+  inputKeyword = ''
 
   triggers: keywordsTriggerVO[] = []
 
-  //db的keywords
+  // db的keywords
   tempKeyword: keywordsVO = null
-  //实时计算的keywords
+  // 实时计算的keywords
   keyword: keywordsVO = null
 
   triggerDetails: keywordsTriggerDetailVO[] = []
@@ -87,11 +100,11 @@ export default class ViolationHistoryPage extends Vue {
 
   matchType = '全部'
 
-  //查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
-  //然后根据违规的内容生成关键词
+  // 查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
+  // 然后根据违规的内容生成关键词
   //
 
-  //预，预审核，不更改用户状态。
+  // 预，预审核，不更改用户状态。
   // 将动态设置为仅自己可见哪种状态
 
   created() {
@@ -131,14 +144,13 @@ export default class ViolationHistoryPage extends Vue {
         this.vioTriggerDetails = keywordsDetail.vioTriggerDetails
 
         this.inputKeyword = ''
-        /*this.keywords = [this.keyword]
+        /* this.keywords = [this.keyword]
         console.log(this.keyword)*/
       })
     } else {
       this.queryKeywords()
     }
   }
-
 
   queryKeywords() {
     KeywordsQueryAPI.queryKeywordsAPI().then(res => {
@@ -149,7 +161,6 @@ export default class ViolationHistoryPage extends Vue {
   testKeywords() {
     KeywordsManageAPI.testKeywordsAPI()
   }
-
 }
 </script>
 

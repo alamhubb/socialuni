@@ -34,16 +34,15 @@
     <div v-if="talk" class="flex-auto overflow-scroll">
       {{ talk.content }}
       <div
-          v-for="img in talk.imgs"
-          :key="img.id"
+        v-for="img in talk.imgs"
+        :key="img.id"
       >
         <el-image
-            style="width: 200px; height: 200px"
-            fit="contain"
-            :src="getImgUrl(img.src,talk.userId)"
-            aspect-ratio="1"
-        >
-        </el-image>
+          style="width: 200px; height: 200px"
+          fit="contain"
+          :src="getImgUrl(img.src,talk.userId)"
+          aspect-ratio="1"
+        />
       </div>
       <div v-for="comment in talk.comments">
         {{ comment.content }}
@@ -53,15 +52,14 @@
       <div v-for="report in userReports">
         {{ report.talk.id }} --- {{ report.talk.content }}
         <div
-            v-for="img in report.talk.imgs"
-            :key="img.id"
+          v-for="img in report.talk.imgs"
+          :key="img.id"
         >
           <el-image
-              style="width: 200px; height: 200px"
-              :src="getImgUrl(img.src,report.talk.userId)"
-              aspect-ratio="1"
-          >
-          </el-image>
+            style="width: 200px; height: 200px"
+            :src="getImgUrl(img.src,report.talk.userId)"
+            aspect-ratio="1"
+          />
         </div>
         <div v-for="comment in report.talk.comments">
           {{ comment.content }}
@@ -69,51 +67,58 @@
       </div>
     </div>
 
-    <el-table v-else class="flex-auto" height="100"
-              :data="reports"
-              style="width: 100%"
-              stripe
-              border>
-<!--              @row-click="tableRowClick"-->
+    <el-table
+      v-else
+      class="flex-auto"
+      height="100"
+      :data="reports"
+      style="width: 100%"
+      stripe
+      border
+    >
+      <!--              @row-click="tableRowClick"-->
       <el-table-column
-          label="序号"
-          type="index">
-      </el-table-column>
+        label="序号"
+        type="index"
+      />
       <el-table-column
-          :render-header="colHeaderRender"
-          label="全选">
+        :render-header="colHeaderRender"
+        label="全选"
+      >
         <template #default="{row}">
           <div>
             <el-checkbox
-                v-model="row.checked"
-                @click.native.stop
+              v-model="row.checked"
+              @click.native.stop
             />
           </div>
         </template>
       </el-table-column>
       <el-table-column
-          label="图片"
-          width="200">
+        label="图片"
+        width="200"
+      >
         <template #default="{row}">
           <div class="flex-row">
-            <el-image v-for="(img,index) in row.talk.imgs"
-                      style="width: 100px; height: 200px"
-                      fit="contain"
-                      :key="img.id"
-                      :src="getImgUrl(img.src,row.talk.userId)"
-                      :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
-                      :z-index="index"
-            >
-            </el-image>
+            <el-image
+              v-for="(img,index) in row.talk.imgs"
+              :key="img.id"
+              style="width: 100px; height: 200px"
+              fit="contain"
+              :src="getImgUrl(img.src,row.talk.userId)"
+              :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
+              :z-index="index"
+            />
           </div>
         </template>
       </el-table-column>
       <el-table-column
-          label="用户"
-          width="180">
+        label="用户"
+        width="180"
+      >
         <template #default="{row}">
           <div class="flex-row">
-            <el-avatar shape="square" :src="row.user.avatar"></el-avatar>
+            <el-avatar shape="square" :src="row.user.avatar" />
             --
             <div>
               <div>
@@ -127,15 +132,17 @@
         </template>
       </el-table-column>
       <el-table-column
-          label="动态"
-          width="300">
+        label="动态"
+        width="300"
+      >
         <template #default="{row}">
           {{ row.talk.id }} --- {{ row.talk.content }}
         </template>
       </el-table-column>
       <el-table-column
-          label="评论"
-          width="140">
+        label="评论"
+        width="140"
+      >
         <template #default="{row}">
           <div v-for="comment in row.talk.comments">
             {{ comment.content }}
@@ -146,12 +153,15 @@
         </template>
       </el-table-column>
       <el-table-column
-          label="包含"
-          width="60">
+        label="包含"
+        width="60"
+      >
         <template #default="{row}">
-          <div v-if="row.triggerKeywords.length" class="w30 h20"
-               :class="{'bg-red':row.triggerKeywords.length<2,'bg-green':row.triggerKeywords.length>1}">
-          </div>
+          <div
+            v-if="row.triggerKeywords.length"
+            class="w30 h20"
+            :class="{'bg-red':row.triggerKeywords.length<2,'bg-green':row.triggerKeywords.length>1}"
+          />
         </template>
       </el-table-column>
       <el-table-column label="违规关键词">
@@ -165,16 +175,17 @@
         </template>
       </el-table-column>
       <el-table-column
-          label="违规原因"
-          width="160">
+        label="违规原因"
+        width="160"
+      >
         <template #default="{row}">
           <el-radio-group v-model="row.violateType">
             <div v-for="reportType in reportTypes">
               <el-radio
-                  :key="reportType"
-                  :label="reportType"
-                  :value="reportType"
-              ></el-radio>
+                :key="reportType"
+                :label="reportType"
+                :value="reportType"
+              />
             </div>
           </el-radio-group>
         </template>
@@ -197,51 +208,54 @@
             </el-table-column>-->
 
       <el-table-column
-          label="操作"
-          width="300">
+        label="操作"
+        width="300"
+      >
         <template #default="{row}">
-          <div class="w100r h100 row-all-center font-bigger"
-               :class="row.violateType === violateType.noViolation?'bg-green':'bg-red'">
+          <div
+            class="w100r h100 row-all-center font-bigger"
+            :class="row.violateType === violateType.noViolation?'bg-green':'bg-red'"
+          >
             {{ row.violateType }}
           </div>
         </template>
       </el-table-column>
       <el-table-column
-          label="违规原因"
-          width="120">
+        label="违规原因"
+        width="120"
+      >
         <template #default="{row}">
           <el-input
-              type="textarea"
-              placeholder="请输入内容"
-              v-model="auditNote"
-          >
-          </el-input>
+            v-model="auditNote"
+            type="textarea"
+            placeholder="请输入内容"
+          />
         </template>
       </el-table-column>
       <el-table-column
-          label="操作"
-          width="200">
+        label="操作"
+        width="200"
+      >
         <template #default="{row}">
           <el-button type="danger" @click="rowViolateClick(row)">违规</el-button>
-          <el-button type="success" @click="rowNoViolateClick(row)" :disabled="!auditNote">不违规
+          <el-button type="success" :disabled="!auditNote" @click="rowNoViolateClick(row)">不违规
           </el-button>
         </template>
       </el-table-column>
     </el-table>
   </div>
 
-
 </template>
 
 <script lang="tsx">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
 import ViolateType from './ViolateType'
 import TalkAPI from '@/api/TalkAPI'
-import el from "element-ui/src/locale/lang/el"
-import {Message} from "element-ui";
+import el from 'element-ui/src/locale/lang/el'
+import { Message } from 'element-ui'
 
 @Component
 export default class PreAuditPage extends Vue {
@@ -250,7 +264,7 @@ export default class PreAuditPage extends Vue {
   violateType: typeof ViolateType = ViolateType
   reportType: string = ViolateType.pornInfo
   reportTypes: string[] = []
-  auditNote: string = '未发现违规内容'
+  auditNote = '未发现违规内容'
   talkId: number = null
   userId: number = null
   talk: Talk = null
@@ -312,28 +326,28 @@ export default class PreAuditPage extends Vue {
   reportPass(row: ReportVO) {
     ReportAPI.reportAuditAPI(row).then((res: any) => {
       Message.success(
-          {
-            showClose: true,
-            message: res.data || res.errorMsg,
-            duration: 1500
-          })
+        {
+          showClose: true,
+          message: res.data || res.errorMsg,
+          duration: 1500
+        })
       this.reports.splice(this.reports.findIndex(item => item.id === row.id), 1)
       this.initData()
     })
   }
 
   reportPassList() {
-    //如果没有选中的，则选中全部
-    /*if (this.reports.every(item => !item.checked)) {
+    // 如果没有选中的，则选中全部
+    /* if (this.reports.every(item => !item.checked)) {
       this.checkedAllChange()
     }*/
     ReportAPI.reportAuditListAPI(this.reports.filter(item => item.checked)).then((res: any) => {
       Message.success(
-          {
-            showClose: true,
-            message: res.data || res.errorMsg,
-            duration: 1500
-          })
+        {
+          showClose: true,
+          message: res.data || res.errorMsg,
+          duration: 1500
+        })
       this.queryReports()
       this.initData()
     })
@@ -347,7 +361,7 @@ export default class PreAuditPage extends Vue {
   }
 
   getImgUrl(src: string, userId?: number): string {
-    //如果包含'/'则代表是新逻辑
+    // 如果包含'/'则代表是新逻辑
     let imgUrl
     if (src.indexOf('https') > -1) {
       imgUrl = src
@@ -361,7 +375,7 @@ export default class PreAuditPage extends Vue {
     return imgUrl
   }
 
-  /*getViolation() {
+  /* getViolation() {
     ReportAPI.getViolationAPI()
   }*/
 
@@ -390,11 +404,11 @@ export default class PreAuditPage extends Vue {
     }
   }
 
-  colHeaderRender({column, $index}) {
+  colHeaderRender({ column, $index }) {
     return (
-        <el-checkbox value={!this.hasNoChecked} onChange={this.checkedAllChange}
-        >全选
-        </el-checkbox>
+      <el-checkbox value={!this.hasNoChecked} onChange={this.checkedAllChange}
+      >全选
+      </el-checkbox>
     )
   }
 }

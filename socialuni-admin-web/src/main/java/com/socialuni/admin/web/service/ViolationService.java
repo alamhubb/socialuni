@@ -11,6 +11,7 @@ import com.socialuni.social.sdk.constant.ViolateLevel;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.domain.BaseModelService;
+import com.socialuni.social.sdk.entity.user.SocialUserViolationEntity;
 import com.socialuni.social.sdk.repository.*;
 import com.socialuni.social.sdk.service.BaseModelUtils;
 import com.socialuni.social.sdk.service.KeywordsService;
@@ -48,6 +49,8 @@ public class ViolationService {
     private BaseModelService baseModelService;
     @Resource
     private ReportStore reportStore;
+    @Resource
+    private SocialUserViolationEntity socialUserViolationEntity;
 
     public void noViolateService(BaseModelDO modelDO, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
@@ -161,7 +164,7 @@ public class ViolationService {
         }
 
         int violationDay = 0;
-        SocialUserViolationDO socialUserViolationDO = SocialUserUtil.getUserViolationDO(violationUser.getId());
+        SocialUserViolationDO socialUserViolationDO = socialUserViolationEntity.getOrCreateViolationDO(violationUser.getId());
         //轻微违规只删除内容
         if (ViolateLevel.slight.equals(vioLevel)) {
             vioReason += "删除违规内容";

@@ -3,11 +3,15 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.entity.model.DO.user.*;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
-import com.socialuni.social.sdk.repository.SocialUserViolationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserViolationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

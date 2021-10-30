@@ -4,8 +4,8 @@ export default class MessageAdd {
     public content: string
 
     constructor(chatId: number, receiveUserId: number, content: string) {
-        this.chatId = chatId
-        this.receiveUserId = receiveUserId
-        this.content = content
+      this.chatId = chatId
+      this.receiveUserId = receiveUserId
+      this.content = content
     }
 }

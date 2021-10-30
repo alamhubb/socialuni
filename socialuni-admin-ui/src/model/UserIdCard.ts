@@ -25,7 +25,7 @@ export default class UserIdCard {
     }
   }
 
-  //后台返回的只有属性，不能使用类的方法，但并不是class类，需要转为UserClass类
+  // 后台返回的只有属性，不能使用类的方法，但并不是class类，需要转为UserClass类
   public static getUsersByVOs(users: UserIdCard[]): UserIdCard[] {
     return users.map(user => new UserIdCard(user))
   }

@@ -1,4 +1,4 @@
-import District from "@/model/District"
+import District from '@/model/District'
 
 export default class TalkQuery {
   public talkIds: number[]

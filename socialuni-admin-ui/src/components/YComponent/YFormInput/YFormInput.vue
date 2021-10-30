@@ -4,16 +4,16 @@
       :value="model"
       :readonly="readonly"
       size="small"
+      v-bind="$attrs"
       @click.native.stop
       v-on="$listeners"
       @input="change"
-      v-bind="$attrs"
     />
   </el-form-item>
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue} from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**

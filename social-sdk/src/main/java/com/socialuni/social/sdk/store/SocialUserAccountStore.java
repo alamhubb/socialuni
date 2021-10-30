@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

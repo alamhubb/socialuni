@@ -8,28 +8,27 @@
       </div>
       <div class="mt w300">
         <el-form
-            ref="loginForm"
-            :model="loginUser"
-            :rules="loginRules"
-            auto-complete="on"
-            label-position="top"
+          ref="loginForm"
+          :model="loginUser"
+          :rules="loginRules"
+          auto-complete="on"
+          label-position="top"
         >
 
           <el-form-item label="秘钥登录" label-width="70px">
             <el-input
-                v-model="secretKey"
-                placeholder="请输入秘钥登录"
-                type="text"
-                clearable
-            >
-            </el-input>
+              v-model="secretKey"
+              placeholder="请输入秘钥登录"
+              type="text"
+              clearable
+            />
           </el-form-item>
           <el-form-item>
             <el-button
-                class="flex-none w100p"
-                type="primary"
-                :disabled="bindBtnDisabled"
-                @click="secretKeyLogin"
+              class="flex-none w100p"
+              type="primary"
+              :disabled="bindBtnDisabled"
+              @click="secretKeyLogin"
             >
               秘钥登录
             </el-button>
@@ -37,11 +36,11 @@
           <el-form-item label="手机号" prop="phoneNum" label-width="70px">
             <div class="flex-row">
               <el-input
-                  v-model="loginUser.phoneNum"
-                  placeholder="请输入手机号"
-                  type="text"
-                  :maxlength="11"
-                  clearable
+                v-model="loginUser.phoneNum"
+                placeholder="请输入手机号"
+                type="text"
+                :maxlength="11"
+                clearable
               >
                 <template slot="prepend">+86</template>
               </el-input>
@@ -61,21 +60,21 @@
           <el-form-item label="验证码" prop="authCode" label-width="70px">
             <div class="flex-row">
               <el-input
-                  ref="authCode"
-                  v-model="loginUser.authCode"
-                  class="flex-1"
-                  type="text"
-                  placeholder="请输入验证码"
-                  :maxlength="4"
-                  clearable
-                  @keyup.enter.native="handleLogin"
+                ref="authCode"
+                v-model="loginUser.authCode"
+                class="flex-1"
+                type="text"
+                placeholder="请输入验证码"
+                :maxlength="4"
+                clearable
+                @keyup.enter.native="handleLogin"
               />
               <el-button
-                  class="flex-none ml w130"
-                  plain
-                  type="primary"
-                  :disabled="sendAuthCodeBtnDisabled"
-                  @click="sendCodeClick"
+                class="flex-none ml w130"
+                plain
+                type="primary"
+                :disabled="sendAuthCodeBtnDisabled"
+                @click="sendCodeClick"
               >
                 {{ countDown ? (authCodeInterval + 1 - countDown) + '秒后可重试' : '发送验证码' }}
               </el-button>
@@ -98,10 +97,10 @@
           </div>
 
           <el-button
-              :disabled="bindBtnDisabled"
-              type="primary"
-              class="w100p mt"
-              @click.native.prevent="handleLogin"
+            :disabled="bindBtnDisabled"
+            type="primary"
+            class="w100p mt"
+            @click.native.prevent="handleLogin"
           >{{ bindBtnDisabled ? '登陆中' : '注 册 并 登 录' }}
           </el-button>
         </el-form>
@@ -111,12 +110,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
-import {userModule} from '@/store'
+import { Component, Vue } from 'vue-property-decorator'
+import { userModule } from '@/store'
 import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import NumberUtil from '@/utils/NumberUtil'
-import {ElInput} from 'element-ui/types/input'
+import { ElInput } from 'element-ui/types/input'
 import PhoneAPI from '@/api/PhoneAPI'
 
 @Component
@@ -135,8 +134,8 @@ export default class LoginPage extends Vue {
   contractChecked = true
 
   loginRules = {
-    phoneNum: [{required: true, trigger: 'blur', message: '请输入正确的手机号', min: 11, max: 11}],
-    authCode: [{required: true, trigger: 'blur', message: '请输入正确的验证码', min: 4, max: 4}]
+    phoneNum: [{ required: true, trigger: 'blur', message: '请输入正确的手机号', min: 11, max: 11 }],
+    authCode: [{ required: true, trigger: 'blur', message: '请输入正确的验证码', min: 4, max: 4 }]
   }
 
   countDown = 0
@@ -172,7 +171,7 @@ export default class LoginPage extends Vue {
     }
     this.bindBtnDisabled = true
     userModule.userLogin(this.loginUser).then(() => {
-      this.$router.push({path: '/'})
+      this.$router.push({ path: '/' })
     }).finally(() => {
       this.bindBtnDisabled = false
     })
@@ -184,7 +183,7 @@ export default class LoginPage extends Vue {
     }
     this.bindBtnDisabled = true
     userModule.userSecretKeyLogin(this.secretKey).then(() => {
-      this.$router.push({path: '/'})
+      this.$router.push({ path: '/' })
     }).finally(() => {
       this.bindBtnDisabled = false
     })

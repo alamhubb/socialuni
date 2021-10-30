@@ -1,4 +1,4 @@
-import Comment from "@/model/comment/Comment"
+import Comment from '@/model/comment/Comment'
 
 export default class CommentAdd {
   public content: string
@@ -7,7 +7,7 @@ export default class CommentAdd {
   public formId: string
   public replyCommentId: number
 
-  constructor(content: string, talkId: number,formId:string) {
+  constructor(content: string, talkId: number, formId:string) {
     this.content = content
     this.talkId = talkId
     this.formId = formId

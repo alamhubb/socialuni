@@ -1,32 +1,36 @@
 <template>
   <div class="h100r">
-    <el-table height="100%"
-              :data="reports"
-              style="width: 100%"
-              border>
+    <el-table
+      height="100%"
+      :data="reports"
+      style="width: 100%"
+      border
+    >
       <el-table-column
-          label="图片"
-          width="200">
+        label="图片"
+        width="200"
+      >
         <template #default="{row}">
           <div class="flex-row">
-            <el-image v-for="(img,index) in row.talk.imgs"
-                      style="width: 100px; height: 200px"
-                      fit="contain"
-                      :key="img.id"
-                      :src="getImgUrl(img.src,row.talk.userId)"
-                      :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
-                      :z-index="index"
-            >
-            </el-image>
+            <el-image
+              v-for="(img,index) in row.talk.imgs"
+              :key="img.id"
+              style="width: 100px; height: 200px"
+              fit="contain"
+              :src="getImgUrl(img.src,row.talk.userId)"
+              :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
+              :z-index="index"
+            />
           </div>
         </template>
       </el-table-column>
       <el-table-column
-          label="用户"
-          width="180">
+        label="用户"
+        width="180"
+      >
         <template #default="{row}">
           <div class="flex-row">
-            <el-avatar shape="square" :src="row.user.avatar"></el-avatar>
+            <el-avatar shape="square" :src="row.user.avatar" />
             --
             <div>
               <div>
@@ -41,23 +45,28 @@
         </template>
       </el-table-column>
       <el-table-column
-          label="动态"
-          width="400">
+        label="动态"
+        width="400"
+      >
         <template #default="{row}">
           {{ row.talk.id }} --- {{ row.talk.content }}
         </template>
       </el-table-column>
       <el-table-column
-          label="包含"
-          width="60">
+        label="包含"
+        width="60"
+      >
         <template #default="{row}">
-          <div v-if="row.hasKeyword" class="w30 h20"
-               :class="{'bg-red':row.triggerKeywords.length<2,'bg-green':row.triggerKeywords.length>1}">
-          </div>
+          <div
+            v-if="row.hasKeyword"
+            class="w30 h20"
+            :class="{'bg-red':row.triggerKeywords.length<2,'bg-green':row.triggerKeywords.length>1}"
+          />
         </template>
       </el-table-column>
       <el-table-column
-          label="违规关键词">
+        label="违规关键词"
+      >
         <template #default="{row}">
           <div v-for="word in row.triggerKeywords">
             {{ word.keywordsText }} --- {{ word.matchText }}
@@ -68,14 +77,16 @@
         </template>
       </el-table-column>
       <el-table-column
-          label="审核结果">
+        label="审核结果"
+      >
         <template #default="{row}">
           {{ row.status }}
         </template>
       </el-table-column>
       <el-table-column
-          label="操作"
-          width="200">
+        label="操作"
+        width="200"
+      >
         <template #default="{row}">
           <el-button type="primary" @click="reviewReportClick(row)">通过</el-button>
           <el-button type="primary" @click="reviewReportAllClick">全部通过</el-button>
@@ -126,7 +137,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import ReportVO from '@/model/report/ReportVO'
 
@@ -134,11 +145,11 @@ import ReportVO from '@/model/report/ReportVO'
 export default class ViolationHistoryPage extends Vue {
   reports: ReportVO[] = []
 
-  //查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
-  //然后根据违规的内容生成关键词
+  // 查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
+  // 然后根据违规的内容生成关键词
   //
 
-  //预，预审核，不更改用户状态。
+  // 预，预审核，不更改用户状态。
   // 将动态设置为仅自己可见哪种状态
 
   created() {
@@ -158,7 +169,7 @@ export default class ViolationHistoryPage extends Vue {
   imgUrl: string = process.env.VUE_APP_COS_URL
 
   getImgUrl(src: string, userId?: number): string {
-    //如果包含'/'则代表是新逻辑
+    // 如果包含'/'则代表是新逻辑
     let imgUrl
     if (src.indexOf('https') > -1) {
       imgUrl = src
@@ -171,7 +182,6 @@ export default class ViolationHistoryPage extends Vue {
     }
     return imgUrl
   }
-
 
   reviewReportClick(report: ReportVO) {
     ReportAPI.reviewReportsAPI([report]).then(() => {
@@ -192,16 +202,16 @@ export default class ViolationHistoryPage extends Vue {
     return this.reports.every(item => item.hasKeyword)
   }
 
-  //用户本来 被举报了两个，一个违规，一个不违规，则以违规的为准，如果用户当前状态为违规， 判断违规时候，不管用户当前状态是什么，都修改为违规，如果用户状态为违规，则不修改，否则，
+  // 用户本来 被举报了两个，一个违规，一个不违规，则以违规的为准，如果用户当前状态为违规， 判断违规时候，不管用户当前状态是什么，都修改为违规，如果用户状态为违规，则不修改，否则，
   // 无论用户为正常还是审核中都修改为违规
 
-  //这页面要查询历史，要查出来所有不为审核中的。查看举报状态和动态状态是否相符
+  // 这页面要查询历史，要查出来所有不为审核中的。查看举报状态和动态状态是否相符
 
-  //todo 有个问题，为什么还存在审核中的举报。
+  // todo 有个问题，为什么还存在审核中的举报。
 
-  //用户状态，动态状态，report状态，
+  // 用户状态，动态状态，report状态，
 
-  //发帖时间控制
+  // 发帖时间控制
 }
 </script>
 

@@ -2,12 +2,12 @@ import BaseImg from '@/model/BaseImg'
 import User from '@/model/user/User'
 import Talk from '@/model/talk/Talk'
 import ReportDetail from '@/model/report/ReportDetail'
-import KeywordsTriggerDetailVO from "@/model/report/KeywordsTriggerDetailVO";
+import KeywordsTriggerDetailVO from '@/model/report/KeywordsTriggerDetailVO'
 
 export default class ReportVO {
   public id: number
   public talk: Talk
-  public checked: boolean = false
+  public checked = false
   public user: User
   public status: string
   public types: string[]

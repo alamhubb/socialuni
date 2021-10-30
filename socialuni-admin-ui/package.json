@@ -19,7 +19,7 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^4.0.0",
+    "@fullhuman/postcss-purgecss": "^3.0.0",
     "@fullhuman/vue-cli-plugin-purgecss": "~4.0.3",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
@@ -40,6 +40,8 @@
     "vue-property-decorator": "^9.1.2",
     "vue-template-compiler": "^2.6.14",
     "vuex-class": "^0.3.2",
-    "vuex-class-modules": "^1.3.0"
+    "vuex-class-modules": "^1.3.0",
+    "postcss": "^7.0.35",
+    "postcss-comment": "^2.0.0"
   }
 }

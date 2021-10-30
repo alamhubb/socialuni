@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.repository;
+package com.socialuni.social.sdk.repository.user;
 
 
 import com.socialuni.social.entity.model.DO.user.SocialUserFansDetailDO;

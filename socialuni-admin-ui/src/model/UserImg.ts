@@ -12,7 +12,7 @@ export default class UserImg {
     this.checked = false
   }
 
-  //后台返回的只有属性，不能使用类的方法，但并不是class类，需要转为UserClass类
+  // 后台返回的只有属性，不能使用类的方法，但并不是class类，需要转为UserClass类
   public static getUserImgsByVOs(userImgs: UserImg[]): UserImg[] {
     return userImgs.map(userImg => new UserImg(userImg))
   }

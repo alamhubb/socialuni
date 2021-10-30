@@ -1,4 +1,4 @@
-import Message from "@/model/Message"
+import Message from '@/model/Message'
 
 export default class Chat {
     public id: number

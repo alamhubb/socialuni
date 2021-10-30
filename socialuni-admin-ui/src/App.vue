@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
-import {userModule} from '@/store'
-import {RouteConfig} from "vue-router";
+import { Component, Vue } from 'vue-property-decorator'
+import { userModule } from '@/store'
+import { RouteConfig } from 'vue-router'
 
 @Component
 export default class AppPage extends Vue {
@@ -17,10 +17,9 @@ export default class AppPage extends Vue {
     userModule.getUserAction()
   }
 
-
   toImgIdentity(router) {
     console.log(router)
-    this.$router.push({name: router.name})
+    this.$router.push({ name: router.name })
   }
 }
 </script>

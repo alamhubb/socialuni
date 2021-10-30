@@ -1,22 +1,23 @@
 <template>
   <div>
     <el-table
-        :data="reports"
-        style="width: 100%">
+      :data="reports"
+      style="width: 100%"
+    >
       <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
-      </el-table-column>
+        prop="date"
+        label="日期"
+        width="180"
+      />
       <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
-      </el-table-column>
+        prop="name"
+        label="姓名"
+        width="180"
+      />
       <el-table-column
-          prop="address"
-          label="地址">
-      </el-table-column>
+        prop="address"
+        label="地址"
+      />
     </el-table>
   </div>
   <!--<el-container fluid class="h100vh">
@@ -89,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import ReportVO from '@/model/report/ReportVO'
 
@@ -97,11 +98,11 @@ import ReportVO from '@/model/report/ReportVO'
 export default class ViolationHistoryPage extends Vue {
   reports: ReportVO[] = []
 
-  //查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
-  //然后根据违规的内容生成关键词
+  // 查询 违规的历史，然后是否被关键词匹配，被关键词匹配了哪个，然后看正常的会不会被匹配
+  // 然后根据违规的内容生成关键词
   //
 
-  //预，预审核，不更改用户状态。
+  // 预，预审核，不更改用户状态。
   // 将动态设置为仅自己可见哪种状态
 
   created() {
@@ -117,7 +118,7 @@ export default class ViolationHistoryPage extends Vue {
   imgUrl: string = process.env.VUE_APP_COS_URL
 
   getImgUrl(src: string, userId: number): string {
-    //如果包含'/'则代表是新逻辑
+    // 如果包含'/'则代表是新逻辑
     let imgUrl
     if (src.indexOf('https') > -1) {
       imgUrl = src
@@ -131,17 +132,16 @@ export default class ViolationHistoryPage extends Vue {
     return imgUrl
   }
 
-
-  //用户本来 被举报了两个，一个违规，一个不违规，则以违规的为准，如果用户当前状态为违规， 判断违规时候，不管用户当前状态是什么，都修改为违规，如果用户状态为违规，则不修改，否则，
+  // 用户本来 被举报了两个，一个违规，一个不违规，则以违规的为准，如果用户当前状态为违规， 判断违规时候，不管用户当前状态是什么，都修改为违规，如果用户状态为违规，则不修改，否则，
   // 无论用户为正常还是审核中都修改为违规
 
-  //这页面要查询历史，要查出来所有不为审核中的。查看举报状态和动态状态是否相符
+  // 这页面要查询历史，要查出来所有不为审核中的。查看举报状态和动态状态是否相符
 
-  //todo 有个问题，为什么还存在审核中的举报。
+  // todo 有个问题，为什么还存在审核中的举报。
 
-  //用户状态，动态状态，report状态，
+  // 用户状态，动态状态，report状态，
 
-  //发帖时间控制
+  // 发帖时间控制
 }
 </script>
 

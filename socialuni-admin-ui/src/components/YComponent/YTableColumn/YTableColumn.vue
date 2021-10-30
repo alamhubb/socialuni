@@ -40,7 +40,7 @@
           <el-tooltip v-if="tipProp && row[tipProp] && showMsg(row)" effect="dark" :content="row[tipProp]" placement="top-start">
             <div>
               <span :class="labelClass">{{ propFun ? propFun(row[prop], row) : row[prop] }}</span>
-              <i class="el-icon-question ml-xs"></i>
+              <i class="el-icon-question ml-xs" />
             </div>
           </el-tooltip>
           <span v-else :class="labelClass">{{ propFun ? propFun(row[prop], row) : row[prop] }}</span>
@@ -48,8 +48,13 @@
         <!--        <slot name="default" :row="row">{{  row[prop] }}</slot>-->
       </template>
 
-      <el-button v-else-if="type===$const.DataTableColumnTypeEnum.delete" @click="deleteEvent($index)" size="small"
-                 type="danger" plain>
+      <el-button
+        v-else-if="type===$const.DataTableColumnTypeEnum.delete"
+        size="small"
+        type="danger"
+        plain
+        @click="deleteEvent($index)"
+      >
         {{
           deleteTitle
         }}
@@ -59,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**

@@ -15,7 +15,7 @@ export default class User {
     this.imgs = user.imgs
   }
 
-  //后台返回的只有属性，但并不是class类，需要转为UserClass类
+  // 后台返回的只有属性，但并不是class类，需要转为UserClass类
   public static getUsersByVOs(users: User[]): User[] {
     return users.map(user => new User(user))
   }

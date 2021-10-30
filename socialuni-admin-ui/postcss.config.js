@@ -1,4 +1,6 @@
 const IN_PRODUCTION = process.env.NODE_ENV === 'production'
+/* eslint-disable */
+const path = require('path')
 
 module.exports = {
   plugins: [

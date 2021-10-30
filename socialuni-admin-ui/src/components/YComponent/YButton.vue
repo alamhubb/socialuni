@@ -1,11 +1,12 @@
 <template>
   <el-button
     v-bind="$attrs"
+    :disabled="btnDisabled"
+    :loading="!btnEnable && showLoading && btnDisabled"
     v-on="$listeners"
     @click="btnClick"
-    :disabled="btnDisabled"
-    :loading="!btnEnable && showLoading && btnDisabled">
-    <slot></slot>
+  >
+    <slot />
   </el-button>
 </template>
 

@@ -1,66 +1,68 @@
 <template>
   <div v-if="yoyoNode" class="h100p flex-row">
-        <div class="w300 pd mr flex-col overflow-hidden">
-          <!--        隐藏展示收起 icon-->
-          <!-- 搜索框-->
-          <el-input
-            v-model="inputTreeFilterText"
-            size="small"
-            class="flex-none"
-            placeholder="输入关键字进行过滤"
-            prefix-icon="el-icon-search"/>
-          <el-tree
-            ref="leftTree"
-            class="flex-1 overflow-auto mt"
-            :data="leftTree"
-            default-expand-all
-            :filter-node-method="filterNode"
-            @node-click="nodeClick"
-          >
-            <template #default="{data}">
-              <div class="my-sm w100p">
-                <div :class="[data.checked?'color-blue':'']">
-                  {{ data.label }}
-                  <i v-show="data.checked" class="el-icon-check"></i>
-                </div>
-              </div>
-            </template>
-          </el-tree>
-        </div>
-        <div class="row-all-center w200">
-          <div class="flex-row">
-            <el-button icon="el-icon-arrow-left" @click="rightToLeft"></el-button>
-            <el-button icon="el-icon-arrow-right" @click="leftToRight"></el-button>
+    <div class="w300 pd mr flex-col overflow-hidden">
+      <!--        隐藏展示收起 icon-->
+      <!-- 搜索框-->
+      <el-input
+        v-model="inputTreeFilterText"
+        size="small"
+        class="flex-none"
+        placeholder="输入关键字进行过滤"
+        prefix-icon="el-icon-search"
+      />
+      <el-tree
+        ref="leftTree"
+        class="flex-1 overflow-auto mt"
+        :data="leftTree"
+        default-expand-all
+        :filter-node-method="filterNode"
+        @node-click="nodeClick"
+      >
+        <template #default="{data}">
+          <div class="my-sm w100p">
+            <div :class="[data.checked?'color-blue':'']">
+              {{ data.label }}
+              <i v-show="data.checked" class="el-icon-check" />
+            </div>
           </div>
-        </div>
-        <div class="w300 pd mr flex-col">
-          <!--        隐藏展示收起 icon-->
-          <!-- 搜索框-->
-          <el-input
-            v-model="inputTreeFilterText"
-            size="small"
-            placeholder="输入关键字进行过滤"
-            prefix-icon="el-icon-search"/>
-          <el-tree
-            ref="leftTree"
-            class="flex-1 overflow-auto mt"
-            :data="rightTree"
-            default-expand-all
-            :filter-node-method="filterNode"
-            @node-click="nodeClick"
-          >
-            <template #default="{data}">
-              <div class="my-sm w100p">
-                <div :class="[data.checked?'color-blue':'']">
-                  {{ data.label }}
-                  <i v-show="data.checked" class="el-icon-check"></i>
-                </div>
-              </div>
-            </template>
-          </el-tree>
-        </div>
+        </template>
+      </el-tree>
+    </div>
+    <div class="row-all-center w200">
+      <div class="flex-row">
+        <el-button icon="el-icon-arrow-left" @click="rightToLeft" />
+        <el-button icon="el-icon-arrow-right" @click="leftToRight" />
+      </div>
+    </div>
+    <div class="w300 pd mr flex-col">
+      <!--        隐藏展示收起 icon-->
+      <!-- 搜索框-->
+      <el-input
+        v-model="inputTreeFilterText"
+        size="small"
+        placeholder="输入关键字进行过滤"
+        prefix-icon="el-icon-search"
+      />
+      <el-tree
+        ref="leftTree"
+        class="flex-1 overflow-auto mt"
+        :data="rightTree"
+        default-expand-all
+        :filter-node-method="filterNode"
+        @node-click="nodeClick"
+      >
+        <template #default="{data}">
+          <div class="my-sm w100p">
+            <div :class="[data.checked?'color-blue':'']">
+              {{ data.label }}
+              <i v-show="data.checked" class="el-icon-check" />
+            </div>
+          </div>
+        </template>
+      </el-tree>
+    </div>
 
-<!--    <el-tree-transfer
+    <!--    <el-tree-transfer
       ref="treeTransfer"
       :title="['待选', '已选']"
       :from_data="leftTree"

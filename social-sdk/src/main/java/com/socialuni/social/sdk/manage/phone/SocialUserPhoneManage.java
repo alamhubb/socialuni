@@ -5,7 +5,7 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserPhoneRepository;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.utils.PhoneNumUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;

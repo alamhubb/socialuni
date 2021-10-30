@@ -4,46 +4,44 @@
       <div>查询条件：
         <el-select v-model="value" placeholder="请选择">
           <el-option
-              v-for="item in options"
-              :key="item"
-              :label="item"
-              :value="item">
-          </el-option>
+            v-for="item in options"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
         </el-select>
       </div>
     </query>
 
     <el-table
-        height="100" class="flex-auto mt-10px"
-        :data="userIdCards"
-        border
-        style="width: 100%"
-        :row-class-name="tableRowClassName"
+      height="100"
+      class="flex-auto mt-10px"
+      :data="userIdCards"
+      border
+      style="width: 100%"
+      :row-class-name="tableRowClassName"
     >
       <el-table-column
-          prop="userId"
-          label="用户id"
-          width="60"
-      >
-      </el-table-column>
+        prop="userId"
+        label="用户id"
+        width="60"
+      />
       <el-table-column
-          prop="nickname"
-          label="昵称"
-          width="100"
-      >
-      </el-table-column>
+        prop="nickname"
+        label="昵称"
+        width="100"
+      />
       <el-table-column
-          prop="gender"
-          label="性别"
-          width="60"
-      >
-      </el-table-column>
+        prop="gender"
+        label="性别"
+        width="60"
+      />
       <el-table-column
-          label="时间"
-          width="200"
+        label="时间"
+        width="200"
       >
         <template #default="{row}">
-          {{row.createDate.toLocaleString()}}
+          {{ row.createDate.toLocaleString() }}
         </template>
       </el-table-column>
       <el-table-column label="照片" width="830">
@@ -51,16 +49,21 @@
           <div class="flex-row">
             <div v-for="(img,index) in row.imgs">
               <div class="h225 mr-10" @click="img.checked=!img.checked">
-                <el-image class="w150"
-                          :src="img.img"
-                          @click="preImg(index+1,row)"
-                          :preview-src-list="previewImgs"
-                >
-                </el-image>
+                <el-image
+                  class="w150"
+                  :src="img.img"
+                  :preview-src-list="previewImgs"
+                  @click="preImg(index+1,row)"
+                />
               </div>
               <div class="row-center pt-20" @click="img.checked=!img.checked">
-                <el-checkbox class="bg-danger" :value="img.checked" @change="img.checked=!img.checked" size="medium"
-                             border></el-checkbox>
+                <el-checkbox
+                  class="bg-danger"
+                  :value="img.checked"
+                  size="medium"
+                  border
+                  @change="img.checked=!img.checked"
+                />
               </div>
             </div>
           </div>
@@ -68,24 +71,24 @@
       </el-table-column>
 
       <el-table-column
-          label="身份证"
-          width="320"
+        label="身份证"
+        width="320"
       >
         <template #default="{row}">
           <div>
             <el-checkbox
-                class="bg-warning"
-                size="medium"
-                border
-                :value="getRowChecked(row)"
-                @change="row.checked = !row.checked"
-            ></el-checkbox>
-            <el-image class="w300 h200"
-                      :src="row.idCard"
-                      @click="preImg(0,row)"
-                      :preview-src-list="previewImgs"
-            >
-            </el-image>
+              class="bg-warning"
+              size="medium"
+              border
+              :value="getRowChecked(row)"
+              @change="row.checked = !row.checked"
+            />
+            <el-image
+              class="w300 h200"
+              :src="row.idCard"
+              :preview-src-list="previewImgs"
+              @click="preImg(0,row)"
+            />
           </div>
         </template>
       </el-table-column>
@@ -110,14 +113,12 @@
       </el-table-column>
 
       <el-table-column label="选中" width="300">
-        <template #default="{row}">
-
-        </template>
+        <template #default="{row}" />
       </el-table-column>
     </el-table>
     <bottom class="pb-50">
       <div class="col-center mr-10">
-        已选{{checkedIdCards.length}}/共{{userIdCards.length}}
+        已选{{ checkedIdCards.length }}/共{{ userIdCards.length }}
       </div>
       <el-button type="danger" @click="auditRejectIdCards">拒绝</el-button>
       <el-button type="success" @click="auditPassIdCards">通过</el-button>
@@ -126,18 +127,18 @@
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
-  import UserIdCard from '@/model/UserIdCard'
-  import Img from '@/model/Img'
-  import UserImg from '@/model/UserImg'
-  import CommonStatus from '@/constants/CommonStatus'
-  import ObjectUtils from '@/utils/ObjectUtils'
+import { Component, Vue } from 'vue-property-decorator'
+import UserIdCard from '@/model/UserIdCard'
+import Img from '@/model/Img'
+import UserImg from '@/model/UserImg'
+import CommonStatus from '@/constants/CommonStatus'
+import ObjectUtils from '@/utils/ObjectUtils'
 
   @Component
-  export default class Review extends Vue {
+export default class Review extends Vue {
     data: number [] = [1, 2, 3, 4, 5]
     options: number [] = [1, 2, 3, 4, 5]
-    value: number = 1
+    value = 1
     previewImgs: string [] = []
 
     userIdCards: UserIdCard [] = []
@@ -148,26 +149,26 @@
       })
     }
 
-    tableRowClassName({row}) {
+    tableRowClassName({ row }) {
       if (this.getRowChecked(row)) {
         return 'bg-success'
       }
     }
 
-    //单行全部通过
+    // 单行全部通过
     rowAllImgPass(row: UserIdCard) {
       this.checkAllImg(row)
       this.auditPassIdCards(row)
     }
 
-    //查看本行是否选中
+    // 查看本行是否选中
     getRowChecked(row: UserIdCard) {
       return row.imgs.some(item => item.checked) || row.checked
     }
 
-    //选中本行全部图片
+    // 选中本行全部图片
     checkAllImg(row: UserIdCard) {
-      //如果有没选中的全选，否则反选
+      // 如果有没选中的全选，否则反选
       if (row.imgs.some(item => !item.checked)) {
         row.imgs.forEach(item => item.checked = true)
       } else {
@@ -175,7 +176,7 @@
       }
     }
 
-    //拒绝本行
+    // 拒绝本行
     auditRejectIdCards(row?: UserIdCard) {
       if (row) {
         row.checked = true
@@ -183,7 +184,7 @@
       this.auditIdCards(CommonStatus.notCertified)
     }
 
-    //通过本行
+    // 通过本行
     auditPassIdCards(row?: UserIdCard) {
       if (row) {
         row.checked = true
@@ -197,7 +198,7 @@
 
     auditIdCards(auditType: string) {
       if (this.checkedIdCards.length) {
-        //获取勾选的内容
+        // 获取勾选的内容
         const idCards: UserIdCard[] = ObjectUtils.deepClone(this.checkedIdCards)
         for (const idCard of idCards) {
           idCard.imgs = idCard.imgs.filter(item => item.checked)
@@ -213,14 +214,14 @@
       }
     }
 
-    //根据当前点击的图片进行展示
+    // 根据当前点击的图片进行展示
     preImg(index: number, user: UserIdCard) {
       const previewImgs = user.previewImgs
-      //得到当前索引之后的数组
+      // 得到当前索引之后的数组
       const nextAry: string [] = previewImgs.slice(index)
-      //得到当前索引之前的数组
+      // 得到当前索引之前的数组
       const preAry: string [] = previewImgs.slice(0, index + 1)
       this.previewImgs = nextAry.concat(preAry)
     }
-  }
+}
 </script>

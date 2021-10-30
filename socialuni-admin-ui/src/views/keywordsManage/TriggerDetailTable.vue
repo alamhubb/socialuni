@@ -1,15 +1,20 @@
 <template>
   <div class="flex-col">
-    <el-table class="flex-auto w100r" height="100" :data="triggerDetails"
-              border>
+    <el-table
+      class="flex-auto w100r"
+      height="100"
+      :data="triggerDetails"
+      border
+    >
       <el-table-column
-          label="序号"
-          type="index">
-      </el-table-column>
+        label="序号"
+        type="index"
+      />
 
       <el-table-column
-          label="审核结果"
-          width="120">
+        label="审核结果"
+        width="120"
+      >
         <template #default="{row}">
           <div>
             {{ auditStatus ? auditStatus : row.auditStatus }}
@@ -17,7 +22,7 @@
         </template>
       </el-table-column>
 
-<!--      <el-table-column
+      <!--      <el-table-column
           label="关键词"
           width="120">
         <template #default="{row}">
@@ -28,8 +33,9 @@
       </el-table-column>-->
 
       <el-table-column
-          label="类型"
-          width="120">
+        label="类型"
+        width="120"
+      >
         <template #default="{row}">
           <div>
             {{ row.usePinyin ? '拼音':'文本' }}
@@ -38,20 +44,20 @@
       </el-table-column>
 
       <el-table-column
-          label="匹配内容"
-          prop="matchText"
-          width="120">
-      </el-table-column>
+        label="匹配内容"
+        prop="matchText"
+        width="120"
+      />
 
       <el-table-column
-          label="内容"
-          prop="content">
-      </el-table-column>
+        label="内容"
+        prop="content"
+      />
       <el-table-column
-          label="动态类型"
-          prop="contentType"
-          width="120">
-      </el-table-column>
+        label="动态类型"
+        prop="contentType"
+        width="120"
+      />
       <!--      <el-table-column
                 label="违规类型"
                 prop="keywordsTrigger.violateType"
@@ -62,8 +68,8 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator'
-import keywordsTriggerDetailVO from "@/model/violateWord/KeywordsTriggerDetailVO";
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
 @Component
 export default class KeywordsDetailTable extends Vue {

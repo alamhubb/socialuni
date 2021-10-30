@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.controller.oldadmin;
+package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.AdminReportService;
