@@ -41,7 +41,7 @@ public class BaseModelUtils<T> {
         }
         BaseModelDO modelDO;
         if (reportContentType.equals(ContentType.talk)) {
-            modelDO = TalkUtils.get(reportDO.getTalkId());
+            modelDO = TalkUtils.get(reportDO.getContentId());
         } else if (reportContentType.equals(ContentType.comment)) {
             modelDO = CommentUtils.get(reportDO.getCommentId());
         } else if (reportContentType.equals(ContentType.message)) {
