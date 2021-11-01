@@ -15,8 +15,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("com.socialuni.center")
 //复用feignBean不注册问题
 @EnableSocialuni
-@EnableConfigurationProperties({
-        SocialuniAdminProperties.class,
-})
 public class SocialuniCenterAutoConfiguration {
 }

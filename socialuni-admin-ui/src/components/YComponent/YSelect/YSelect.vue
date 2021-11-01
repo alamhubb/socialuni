@@ -3,9 +3,9 @@
     <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
     <el-option
       v-for="item in optionsGet"
-      :key="item[value]"
-      :label="item[label || value]"
-      :value="item[value]"
+      :key="item[value]!==undefined?item[value]:item"
+      :label="item[label || value]!==undefined?item[label || value]:item"
+      :value="item[value]!==undefined?item[value]:item"
     />
   </el-select>
 </template>

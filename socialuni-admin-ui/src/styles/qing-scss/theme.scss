@@ -1,0 +1,21 @@
+//系统默认色
+//系统默认字体色
+$color-default: #333333;
+
+//系统默认背景色
+$color-bg-default: #f7f7fa;
+
+//系统默认边框色
+$color-border-default: #dedede;
+
+//基础色
+$color-white: #fff;
+$color-black: #000;
+
+//主题色
+$color-bg-theme: $color-white !default;
+//主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
+$color-theme: $color-default !default;
+//主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
+$color-bg-theme-light: $color-bg-default !default;
+$color-tab: #007aff !default;

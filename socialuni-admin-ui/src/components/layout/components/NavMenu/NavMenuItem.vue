@@ -24,7 +24,7 @@
       <template slot="title">
         <div class="row-col-center">
           <!--          <img v-if="route.meta.icon" class="mr-sm" :src="require('@/assets/img/navMenu/router/'+route.meta.icon+'.png')">-->
-          <!--          <span class="pr-md">{{ route.meta.title }}</span>-->
+          <span class="pr-md">{{ route.meta.title }}</span>
         </div>
       </template>
 

@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.platform.qq.QQPayResult;
 import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.platform.weixin.WxConst;
 import com.socialuni.social.sdk.platform.weixin.token.WxTokenResult;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import com.socialuni.social.utils.UUIDUtil;
 import com.thoughtworks.xstream.XStream;

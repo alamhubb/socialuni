@@ -1,5 +1,5 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p bg-theme-light bt-radius-15">
+  <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
       <template #default="{tab}">
@@ -133,8 +133,6 @@ import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QPullRefresh from '@/socialuni/components/q-pull-refresh/QPullRefresh.vue'
-import SelectorQuery = UniApp.SelectorQuery
-import NodesRef = UniApp.NodesRef
 
 
 // todo 后台可控制是否显示轮播图

@@ -1,7 +1,7 @@
 package com.socialuni.center.sdk.repository;
 
 
-import com.socialuni.center.sdk.mode.DevAccountProviderDO;
+import com.socialuni.center.sdk.model.DevAccountProviderDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

@@ -24,6 +24,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/star/star",
+      "style": {
+        "navigationBarTitleText": "星星"
+      }
     }
   ],
   "subPackages": [
@@ -60,6 +66,12 @@
     "iconWidth": "30px",
     "height": "52px",
     "list": [
+      /*{
+        "pagePath": "pages/star/star",
+        "iconPath": "static/img/deck-gray-36dp.png",
+        "selectedIconPath": "static/img/deck-blue-36dp.png",
+        "text": "星海"
+      },*/
       {
         "pagePath": "pages/talk/talk",
         "iconPath": "static/img/deck-gray-36dp.png",
@@ -82,5 +94,6 @@
     "app-plus": {
       "softinputNavBar": "none"
     }
-  }
+  },
+  "navigateToMiniProgramAppIdList": ["1109985787"]
 }

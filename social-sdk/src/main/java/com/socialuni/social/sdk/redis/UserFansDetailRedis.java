@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.redis;
 
 import com.socialuni.social.entity.model.DO.user.SocialUserFansDetailDO;
 import com.socialuni.social.sdk.redis.redisKey.RedisKeysConst;
-import com.socialuni.social.sdk.repository.SocialUserFansDetailRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserFansDetailRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

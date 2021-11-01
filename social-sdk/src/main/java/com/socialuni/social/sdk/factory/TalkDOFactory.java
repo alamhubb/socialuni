@@ -5,7 +5,7 @@ import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.platform.AliAPI;
+import com.socialuni.social.sdk.platform.MapUtil;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,7 +22,7 @@ public class TalkDOFactory {
         //如果经纬度为空
         if (socialTalkPostQO.getLon() == null || socialTalkPostQO.getLat() == null) {
             //如果经纬度为空
-            RectangleVO rectangleVO = AliAPI.getRectangle();
+            RectangleVO rectangleVO = MapUtil.getRectangle();
             if (rectangleVO != null) {
                 socialTalkPostQO.setLon(rectangleVO.getLon());
                 socialTalkPostQO.setLat(rectangleVO.getLat());

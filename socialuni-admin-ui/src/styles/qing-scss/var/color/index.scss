@@ -1,29 +1,9 @@
-@import "./blue";
-@import "./green";
-@import "./grey";
-@import "./orange";
-@import "./red";
-
-//系统默认色
-//系统默认字体色
-$color-default: #666666;
-
-//系统默认背景色
-$color-bg-default: #F2F3F5;
-
-//系统默认边框色
-$color-border-default: #dedede;
-
-//基础色
-$color-white: #fff;
-$color-black: #000;
-
-//主题色
-$color-theme: $color-red;
-//主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
-$color-theme: $color-theme;
-//主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
-$color-bg-theme: $color-theme;
+@import "blue";
+@import "green";
+@import "grey";
+@import "orange";
+@import "red";
+@import "../../theme";
 
 $color-primary: $color-blue;
 $color-error: $color-red;
@@ -32,13 +12,13 @@ $color-success: $color-green;
 $color-info: $color-grey;
 
 $colors-theme: (
-  white:$color-white,
-  black:$color-black,
-  primary:$color-primary,
-  error:$color-error,
-  warn:$color-warn,
-  success:$color-success,
-  info:$color-info,
+        white:$color-white,
+        black:$color-black,
+        primary:$color-primary,
+        error:$color-error,
+        warn:$color-warn,
+        success:$color-success,
+        info:$color-info,
 );
 //基础颜色
 $mergeMap1: map-merge($colors-theme, $colors-blue);
@@ -94,17 +74,18 @@ $color-border-button: #C0C6CC;
 //基础颜色直接循环拼就行
 $colors-custom-font: (
   //主题色，可自定义，默认和白色一样
-  theme: $color-theme,
-  default: $color-default,
-  special: $color-special,
-  main: $color-main,
-  content: $color-content,
-  sub: $color-sub,
-  tip: $color-tip,
-  link: $color-link,
-  focus: $color-focus,
-  hover: $color-hover,
-  active: $color-active
+        theme: $color-theme,
+        default: $color-default,
+        special: $color-special,
+        main: $color-main,
+        content: $color-content,
+        sub: $color-sub,
+        tip: $color-tip,
+        link: $color-link,
+        focus: $color-focus,
+        hover: $color-hover,
+        tab: $color-tab,
+        active: $color-active
 );
 
 $colors-font: map-merge($colors-base, $colors-custom-font);
@@ -112,25 +93,28 @@ $colors-font: map-merge($colors-base, $colors-custom-font);
 //基础颜色直接循环拼就行
 $colors-custom-bg: (
   //主题色，可自定义，默认和白色一样
-  theme: $color-bg-theme,
-  default: $color-bg-default,
-  header-menu: $color-bg-header-menu,
-  header-menu-hover: $color-bg-header-menu-hover,
-  menu-hover: $color-bg-menu-hover,
-  filter-active: $color-bg-filter-active,
-  table-header: $color-bg-table-header,
-  table-header-hover: $color-bg-table-header-hover,
+        theme: $color-bg-theme,
+        theme-light: $color-bg-theme-light,
+        default: $color-bg-default,
+        header-menu: $color-bg-header-menu,
+        header-menu-hover: $color-bg-header-menu-hover,
+        menu-hover: $color-bg-menu-hover,
+        filter-active: $color-bg-filter-active,
+        table-header: $color-bg-table-header,
+        table-header-hover: $color-bg-table-header-hover,
+        tab: $color-tab,
 );
 
 $colors-bg: map-merge($colors-base, $colors-custom-bg);
 
 $colors-custom-border: (
-  theme: $color-border-default,
-  gray1: $color-border-gray1,
-  gray2: $color-border-gray2,
-  form: $color-border-form,
-  divider: $color-border-divider,
-  table: $color-border-table,
+        theme: $color-border-default,
+        gray1: $color-border-gray1,
+        gray2: $color-border-gray2,
+        form: $color-border-form,
+        divider: $color-border-divider,
+        table: $color-border-table,
+        tab: $color-tab,
 );
 
 $colors-border: map-merge($colors-base, $colors-custom-border);
@@ -154,12 +138,6 @@ $percent-90: 90%;
 //light的样式
 $percent-light-bg: $percent-90 !default;
 $percent-light-border: $percent-60 !default;
-
-$color-types: (
-  dark: dark,
-  light: light,
-  plain: plain,
-);
 
 /* Border
 -------------------------- */

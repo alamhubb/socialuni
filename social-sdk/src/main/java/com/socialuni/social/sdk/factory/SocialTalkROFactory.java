@@ -14,7 +14,7 @@ import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.sdk.factory.user.base.SocialContentUserROFactory;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.platform.AliAPI;
+import com.socialuni.social.sdk.platform.MapUtil;
 import com.socialuni.social.sdk.redis.HugRedis;
 import com.socialuni.social.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.store.SocialTagRedis;
@@ -237,7 +237,7 @@ public class SocialTalkROFactory {
         //耗时60毫秒
 
         if (queryVO == null) {
-            RectangleVO rectangleVO = AliAPI.getRectangle();
+            RectangleVO rectangleVO = MapUtil.getRectangle();
             queryVO = new SocialHomeTabTalkQueryBO();
             if (rectangleVO != null) {
                 queryVO.setLat(rectangleVO.getLat());

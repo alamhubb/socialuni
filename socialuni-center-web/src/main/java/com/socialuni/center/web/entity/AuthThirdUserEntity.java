@@ -2,7 +2,7 @@ package com.socialuni.center.web.entity;
 
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserAuthManage;
 import com.socialuni.center.web.manage.ThirdUserManage;

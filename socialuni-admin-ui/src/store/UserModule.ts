@@ -34,6 +34,16 @@ export default class UserModule extends VuexModule {
   }
 
   @Action
+  userSecretKeyLogin(secretKey: string) {
+    return LoginAPI.secretKeyLoginAPI(secretKey).then((res) => {
+      TokenUtil.set(res.token)
+      this.setUser(res.user)
+      // this.addPermission()
+      ToastUtil.success('登录成功')
+    })
+  }
+
+  @Action
   getUserAction() {
     const token = TokenUtil.get()
     if (token) {

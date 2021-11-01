@@ -1,6 +1,6 @@
 package com.socialuni.center.web.serive;
 
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.entity.CenterDevAccountEntity;
 import com.socialuni.social.api.model.ResultRO;

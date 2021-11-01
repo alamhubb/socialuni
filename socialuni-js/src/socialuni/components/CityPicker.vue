@@ -64,9 +64,12 @@ import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
 import Alert from '../utils/Alert'
-
-
-@Component
+import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
+import QRowLine from '@/socialuni/components/q-row-line/q-row-line.vue'
+import QPicker from '@/socialuni/components/q-picker/q-picker.vue'
+@Component({
+  components: { QPicker, QRowLine, QIcon }
+})
 export default class CityPicker extends Vue {
   public $refs!: {
     citySelect: any;
