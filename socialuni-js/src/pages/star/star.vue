@@ -14,7 +14,6 @@
       placeholder="请填写星名称"
     >
     </u-field>
-    <u-picker mode="multiSelector" :default-selector='[0, 1, 3]'></u-picker>
 
 <!--    可以让用户选择，需要关联的话题的话题
     <div></div>
