@@ -1,7 +1,10 @@
 package com.socialuni.social.model.model.QO.community.circle;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class CircleCreateQO {
     //圈子数据共享，那么自身核心竞争力是什么，利益是什么，没想明白。
     private String circleName;
@@ -12,7 +15,7 @@ public class CircleCreateQO {
     //娱乐，学习等等，暂不支持类型
 //    private String circleClassify;
     //展示哪些话题的内容, 先不支持白名单，黑名单
-    private List<String> tagNames;
+//    private List<String> tagNames;
     //不展示的话题
-    private List<String> blackTagNames;
+//    private List<String> blackTagNames;
 }

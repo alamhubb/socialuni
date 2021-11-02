@@ -30,7 +30,7 @@ public interface TagRepository extends JpaRepository<TagDO, Integer> {
     @Cacheable(cacheNames = TagRedisKey.tagByDevId, key = "#devId")
     TagDO findFirstByDevId(Integer devId);
 
-    @Query("select t.id from CircleDO t,SocialTalkTagDO tt where t.id = tt.tagId and tt.talkId =:talkId and t.status =:status and t.showFront = :showFront")
+    @Query("select t.id from TagDO t,SocialTalkTagDO tt where t.id = tt.tagId and tt.talkId =:talkId and t.status =:status and t.showFront = :showFront")
     List<Integer> findTagIdsByTalkIdAndStatusAndShowFront(Integer talkId, String status, Boolean showFront);
 
     List<TagDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);

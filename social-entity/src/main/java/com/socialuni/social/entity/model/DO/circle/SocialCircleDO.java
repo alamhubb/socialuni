@@ -1,6 +1,8 @@
 package com.socialuni.social.entity.model.DO.circle;
 
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +28,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class CircleDO extends CommonContentBaseDO implements Serializable {
+public class SocialCircleDO extends CommonContentBaseDO implements Serializable {
     private Integer tagTypeId;
 
     private String name;
@@ -57,4 +59,15 @@ public class CircleDO extends CommonContentBaseDO implements Serializable {
     //是否在前台展示，app产品，不在前台展示
     private Boolean showFront;
     private Integer devId;
+
+    public SocialCircleDO(String name, String description, Integer devId, UserDO createUser) {
+        this.name = name;
+        this.description = description;
+        this.applyUserId = createUser.getId();
+        this.devId = devId;
+        this.tagTypeId = 1;
+        this.count = 0;
+        this.talkCount = 0;
+        this.visibleGender = GenderType.all;
+    }
 }
