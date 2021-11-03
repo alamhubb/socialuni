@@ -26,7 +26,7 @@
       }
     },
     {
-      "path": "pages/star/star",
+      "path": "pages/circle/circle",
       "style": {
         "navigationBarTitleText": "星星"
       }
@@ -67,7 +67,7 @@
     "height": "52px",
     "list": [
       {
-        "pagePath": "pages/star/star",
+        "pagePath": "pages/circle/circle",
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "星海"

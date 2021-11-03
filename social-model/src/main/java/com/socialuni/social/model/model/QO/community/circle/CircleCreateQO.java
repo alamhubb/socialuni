@@ -2,11 +2,13 @@ package com.socialuni.social.model.model.QO.community.circle;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Data
 public class CircleCreateQO {
     //圈子数据共享，那么自身核心竞争力是什么，利益是什么，没想明白。
+    @NotBlank
     private String circleName;
     private String circleDesc;
     //圈子的头像，先不支持
