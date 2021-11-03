@@ -28,7 +28,7 @@
     {
       "path": "pages/circle/circle",
       "style": {
-        "navigationBarTitleText": "星星"
+        "navigationBarTitleText": "圈子"
       }
     }
   ],
@@ -70,7 +70,7 @@
         "pagePath": "pages/circle/circle",
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
-        "text": "星海"
+        "text": "圈子"
       },
       {
         "pagePath": "pages/talk/talk",
