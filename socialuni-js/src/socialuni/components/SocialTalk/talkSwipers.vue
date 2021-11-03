@@ -1,7 +1,7 @@
 <template>
   <view class="px-smm pb-sm" v-if="showSwipers">
     <!--  <view class="bg-primary px-smm pt-xs">-->
-    <swiper :indicator-dots="true" :autoplay="true" :interval="2500" :style="{'height':swiperHeight+'px'}">
+    <swiper :indicator-dots="true" :autoplay="true" circular :interval="2500" :style="{'height':swiperHeight+'px'}">
       <swiper-item class="bd-radius" v-for="item in homeSwipers" @click="skipWebView">
         <!--        class="radius flex-none h100p"-->
         <image

@@ -41,39 +41,81 @@
 
 
       <div class="flex-1 flex-col bg-theme-light bt-radius-15">
-        <div class="flex-row px-smm pt-sm">
-          <div class="flex-col">
-            <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
-            <div class="flex-1 col-center">
-              <img class="bd-round size80" :src="tags[0].avatar"/>
-            </div>
-          </div>
-          <div class="col-between overflow-hidden">
-            <!--            简介最多30个字符-->
-            <div class="row-col-center ml-smm overflow-hidden mt-xs">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
-            <!--            <div class="flex-row mt-xs pl-xs">
-                          <div v-for="(item,index) in tags" v-if="index<4">
-                            <div class="cu-tag round bg-pink light ml-sm">
-                              {{ item.name }}
-                            </div>
-                          </div>
-                        </div>-->
-            <div class="flex-row mt-sm pl-xs">
-              <div class="flex-row overflow-scroll flex-1">
-                <div v-for="(item,index) in tags" v-if="index<10" class="ml-sm col-row-center flex-none">
-                  <img class="bd-round size40" :src="item.avatar"/>
-                  <div class="mt-xs">{{ item.name }}</div>
-                </div>
-              </div>
-              <div class="w15 ml-smm flex-none col-end-center bg-click">
-                <div>更</div>
-                <div>多</div>
-<!--                <q-icon icon="mdi-apps"></q-icon>-->
-                <q-icon icon="mdi-chevron-right"></q-icon>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
+<!--        三种情况-->
+<!--        一。没收起来的时候
+        1.展示高度
+          内部展示不同
+        2. 收起来
+          选了圈子
+
+          没选圈子-->
+
+       <div>
+         <div class="row-between-center px pt-sm">
+           <div class="row-col-center">热门圈子
+<!--             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能-->
+           </div>
+           <div class="row-col-center">更多圈子<q-icon icon="mdi-chevron-right"></q-icon></div>
+         </div>
+
+
+
+         <swiper indicator-dots indicator-color="rgba(0, 0, 0, .2)" indicator-active-color="rgba(0, 0, 0, .6)" circular>
+           <swiper-item class="bd-radius" v-for="item in 3">
+<!--             如果有选中的圈子-->
+
+             <div v-if="item === 1">
+               <!--        class="radius flex-none h100p"-->
+               <div class="flex-row px-smm pt-sm">
+                 <div class="flex-col">
+                   <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
+                   <div class="flex-1 col-center">
+                     <img class="bd-round size80" :src="tags[0].avatar"/>
+                   </div>
+                 </div>
+                 <div class="col-between overflow-hidden">
+                   <!--            简介最多30个字符-->
+                   <div class="row-col-center ml-smm overflow-hidden mt-xs">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
+                   <!--            <div class="flex-row mt-xs pl-xs">
+                                 <div v-for="(item,index) in tags" v-if="index<4">
+                                   <div class="cu-tag round bg-pink light ml-sm">
+                                     {{ item.name }}
+                                   </div>
+                                 </div>
+                               </div>-->
+                   <div class="flex-row mt-sm pl-xs">
+                     <div class="flex-row overflow-scroll flex-1">
+                       <div v-for="(item,index) in tags" v-if="index<10" class="ml-sm col-row-center flex-none">
+                         <img class="bd-round size40" :src="item.avatar"/>
+                         <div class="mt-xs">{{ item.name }}</div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div v-else>
+               <!--        class="radius flex-none h100p"-->
+               <div class="flex-row px-smm overflow-hidden">
+                 <div v-for="(item,index) in tags" v-if="index<5" class="col-row-center mt-xs flex-1">
+                   <img class="bd-round size50" :src="item.avatar"/>
+                   <div>{{ item.name }}</div>
+                 </div>
+               </div>
+               <div class="flex-row px-smm overflow-hidden">
+                 <div v-for="(item,index) in tags" v-if="index<5" class="col-row-center mt-xs flex-1">
+                   <img class="bd-round size50" :src="item.avatar"/>
+                   <div>{{ item.name }}</div>
+                 </div>
+               </div>
+             </div>
+           </swiper-item>
+         </swiper>
+       </div>
+
+
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"
                    :selectTagIds="selectTagIds"
@@ -211,6 +253,8 @@ export default class SocialTalkPage extends Vue {
   showFilter = false
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
+
+  checkedCircle = '哈哈哈'
 
   get talkTabsTop () {
     if (this.configShowSwipers) {
