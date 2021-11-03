@@ -62,10 +62,15 @@
               <div class="flex-row overflow-scroll flex-1">
                 <div v-for="(item,index) in tags" v-if="index<10" class="ml-sm col-row-center flex-none">
                   <img class="bd-round size40" :src="item.avatar"/>
-                  <div>{{ item.name }}</div>
+                  <div class="mt-xs">{{ item.name }}</div>
                 </div>
               </div>
-              <div class="w20 ml-smm flex-none">更多</div>
+              <div class="w15 ml-smm flex-none col-end-center bg-click">
+                <div>更</div>
+                <div>多</div>
+<!--                <q-icon icon="mdi-apps"></q-icon>-->
+                <q-icon icon="mdi-chevron-right"></q-icon>
+              </div>
             </div>
           </div>
         </div>

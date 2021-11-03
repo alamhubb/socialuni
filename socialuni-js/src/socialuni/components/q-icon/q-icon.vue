@@ -1,5 +1,5 @@
 <template>
-  <text class="q-icon" :class="[
+  <text class="bg-click" :class="[
       prefixClass?prefixClass:'u-iconfont',
       prefixClass?icon:'uicon-' + icon,
       addClass
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Emit, Prop } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class QIcon extends Vue {
