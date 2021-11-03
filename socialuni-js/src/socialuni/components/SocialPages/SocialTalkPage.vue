@@ -41,33 +41,34 @@
 
 
       <div class="flex-1 flex-col bg-theme-light bt-radius-15">
-<!--        <div class="flex-row px-smm pt-sm">
+        <div class="flex-row px-smm pt-sm">
           <div class="flex-col">
             <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
             <div class="flex-1 col-center">
               <img class="bd-round size80" :src="tags[0].avatar"/>
             </div>
           </div>
-          <div>
-            &lt;!&ndash;            简介最多30个字符&ndash;&gt;
-            <div class="row-col-center ml-smm overflow-hidden">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
-            <div class="flex-row mt-xs pl-xs">
-              <div v-for="(item,index) in tags" v-if="index<4">
-                <div class="cu-tag round bg-pink light ml-sm">
-                  {{ item.name }}
-                </div>
-              </div>
-            </div>
+          <div class="col-between overflow-hidden">
+            <!--            简介最多30个字符-->
+            <div class="row-col-center ml-smm overflow-hidden mt-xs">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
+            <!--            <div class="flex-row mt-xs pl-xs">
+                          <div v-for="(item,index) in tags" v-if="index<4">
+                            <div class="cu-tag round bg-pink light ml-sm">
+                              {{ item.name }}
+                            </div>
+                          </div>
+                        </div>-->
             <div class="flex-row mt-sm pl-xs">
-              <div v-for="(item,index) in tags" v-if="index<4" class="ml-sm">
-                <div class="col-all-center">
+              <div class="flex-row overflow-scroll flex-1">
+                <div v-for="(item,index) in tags" v-if="index<10" class="ml-sm col-row-center flex-none">
                   <img class="bd-round size40" :src="item.avatar"/>
                   <div>{{ item.name }}</div>
                 </div>
               </div>
+              <div class="w20 ml-smm flex-none">更多</div>
             </div>
           </div>
-        </div>-->
+        </div>
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"
                    :selectTagIds="selectTagIds"
