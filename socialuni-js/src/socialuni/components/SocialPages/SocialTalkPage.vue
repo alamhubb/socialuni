@@ -7,7 +7,7 @@
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view v-show="!showTagSearch" class="flex-col h100vh">
       <q-navbar class="flex-none" custom-class="bg-default">
-        <div class="flex-1 bd bd-round mx-sm row-col-center h30" @click.native="openTagSearchVue">
+        <q-search class="flex-1 mx-sm" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
             <view class="cu-tag round bg-green-plain light row-all-center">
@@ -19,7 +19,7 @@
           <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" icon="close"
                   @click.native.stop="deleteTag(selectTag)"
           ></q-icon>
-        </div>
+        </q-search>
         <view class="mr-sm" :class="{'text-theme':useFilters}">
           <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
         </view>
