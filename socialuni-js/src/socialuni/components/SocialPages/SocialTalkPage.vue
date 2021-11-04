@@ -54,6 +54,12 @@
 
         <div class="bg-theme bd-radius mx-sm pd-sm">
           <div class="row-between-center bt-radius">
+            <div class="row-col-center ml-xs">
+              当前圈子
+            </div>
+            <div class="row-col-center ml-xs">
+              我的圈子
+            </div>
             <div class="row-col-center ml-xs">热门圈子
               <!--             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能-->
             </div>
