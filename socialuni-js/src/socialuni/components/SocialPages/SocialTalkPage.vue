@@ -52,9 +52,9 @@
 
                   没选圈子-->
 
-        <div class="bg-theme bd-radius mx-sm">
-          <div class="row-between-center px-sm pt-sm">
-            <div class="row-col-center">热门圈子
+        <div class="bg-theme bd-radius mx-sm pd-sm">
+          <div class="row-between-center bt-radius">
+            <div class="row-col-center ml-xs">热门圈子
               <!--             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能-->
             </div>
             <div class="row-col-center bg-click">更多圈子
@@ -63,37 +63,39 @@
           </div>
 
 
-          <scroll-view scroll-x class="h150">
+          <scroll-view scroll-x class="h170 mt-sm">
             <div class="flex-row h100p">
               <!--             如果有选中的圈子-->
 
               <!--        class="radius flex-none h100p"-->
-              <div class="flex-row w70p bg-green flex-none">
-                <div class="flex-col flex-none">
-                  <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
-                  <div class="flex-1 col-center">
-                    <img class="bd-round size80" :src="tags[0].avatar"/>
+              <div class="h100p flex-col w75p bg-green flex-none bg-default bd-radius mr-sm pd-sm">
+                <div class="flex-row flex-none">
+                  <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
+                  <div class="flex-1 ml mt-sm font-bold font-18">
+                    {{ tags[0].name }}
                   </div>
                 </div>
                 <!--            简介最多30个字符-->
-                <div class="ml-smm mt-xs flex-1 overflow-hidden">
+                <div class="mt-sm font3-cut">
                   简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
                 </div>
               </div>
-              <div class="flex-col w75p flex-none">
-                <!--        class="radius flex-none h100p"-->
-                <!--                <div class="flex-row px-smm overflow-hidden">
-                                  <div v-for="(item,index) in tags" v-if="index<4" class="col-row-center mt-xs flex-1">
-                                    <img class="bd-round size50" :src="item.avatar"/>
-                                    <div>{{ item.name }}</div>
-                                  </div>
-                                </div>
-                                <div class="flex-row px-smm overflow-hidden">
-                                  <div v-for="(item,index) in tags" v-if="index<4" class="col-row-center mt-xs flex-1">
-                                    <img class="bd-round size50" :src="item.avatar"/>
-                                    <div>{{ item.name }}</div>
-                                  </div>
-                                </div>-->
+              <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
+                <!--                        class="radius flex-none h100p"-->
+                <div class="flex-row">
+                  <div v-for="(item,index) in tags" v-if="index<4"
+                       class="col-row-center mx-xs overflow-hidden h70 w55">
+                    <img class="bd-round size50" :src="item.avatar"/>
+                    <div class="font-cut">{{ item.name }}</div>
+                  </div>
+                </div>
+                <div class="flex-row mt-sm">
+                  <div v-for="(item,index) in tags" v-if="index<4"
+                       class="col-row-center mx-xs overflow-hidden h70 w55">
+                    <img class="bd-round size50" :src="item.avatar"/>
+                    <div class="font-cut">{{ item.name }}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </scroll-view>
