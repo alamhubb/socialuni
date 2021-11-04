@@ -1,4 +1,4 @@
-import { Action, Module, RegisterOptions, VuexModule } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import LoginProvider from '../const/LoginProvider'
 import PlatformType from '../const/PlatformType'
 import PlatformUtils from '../utils/PlatformUtils'
@@ -45,7 +45,7 @@ export default class SocialSystemModule extends VuexModule {
   //减去状态栏和导航栏的高度
   contentHeight = 0
   statusBarHeight = 0
-  navBarHeight = 44
+  navBarHeight = 50
   titleHeight = 0
   appVersion = 0
 

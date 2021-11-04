@@ -223,10 +223,10 @@ export default class TabsTalkPage extends Vue {
     // h5有头顶和下边导航栏都算了高度
     // #ifdef H5
     //tab的高度加上导航栏的高度
-    this.talksListHeightSub = 44 + this.tabsHeight
+    this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
     // #ifndef H5
-    this.talksListHeightSub = socialSystemModule.statusBarHeight + 44 + this.tabsHeight
+    this.talksListHeightSub = socialSystemModule.statusBarHeight + socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
   }
 

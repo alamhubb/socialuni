@@ -5,9 +5,9 @@
       ></tag-search>
     </view>
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
-    <view v-show="!showTagSearch" class="flex-col h100vh bg-theme">
-      <q-navbar class="flex-none" :custom-class="'bg-theme'">
-        <q-search class="flex-auto" @click.native="openTagSearchVue">
+    <view v-show="!showTagSearch" class="flex-col h100vh">
+      <q-navbar class="flex-none" custom-class="bg-default">
+        <div class="flex-1 bd bd-round mx-sm row-col-center h30" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
             <view class="cu-tag round bg-green-plain light row-all-center">
@@ -19,7 +19,7 @@
           <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" icon="close"
                   @click.native.stop="deleteTag(selectTag)"
           ></q-icon>
-        </q-search>
+        </div>
         <view class="mr-sm" :class="{'text-theme':useFilters}">
           <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
         </view>
@@ -43,77 +43,61 @@
       <div class="flex-1 flex-col bg-theme-light bt-radius-15">
 
 
-<!--        三种情况-->
-<!--        一。没收起来的时候
-        1.展示高度
-          内部展示不同
-        2. 收起来
-          选了圈子
+        <!--        三种情况-->
+        <!--        一。没收起来的时候
+                1.展示高度
+                  内部展示不同
+                2. 收起来
+                  选了圈子
 
-          没选圈子-->
+                  没选圈子-->
 
-       <div>
-         <div class="row-between-center px pt-sm">
-           <div class="row-col-center">热门圈子
-<!--             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能-->
-           </div>
-           <div class="row-col-center">更多圈子<q-icon icon="mdi-chevron-right"></q-icon></div>
-         </div>
+        <div class="bg-theme bd-radius mx-sm">
+          <div class="row-between-center px-sm pt-sm">
+            <div class="row-col-center">热门圈子
+              <!--             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能-->
+            </div>
+            <div class="row-col-center bg-click">更多圈子
+              <q-icon icon="mdi-chevron-right"></q-icon>
+            </div>
+          </div>
 
 
+          <scroll-view scroll-x class="h150">
+            <div class="flex-row h100p">
+              <!--             如果有选中的圈子-->
 
-         <swiper indicator-dots indicator-color="rgba(0, 0, 0, .2)" indicator-active-color="rgba(0, 0, 0, .6)" circular>
-           <swiper-item class="bd-radius" v-for="item in 3">
-<!--             如果有选中的圈子-->
-
-             <div v-if="item === 1">
-               <!--        class="radius flex-none h100p"-->
-               <div class="flex-row px-smm pt-sm">
-                 <div class="flex-col">
-                   <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
-                   <div class="flex-1 col-center">
-                     <img class="bd-round size80" :src="tags[0].avatar"/>
-                   </div>
-                 </div>
-                 <div class="col-between overflow-hidden">
-                   <!--            简介最多30个字符-->
-                   <div class="row-col-center ml-smm overflow-hidden mt-xs">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
-                   <!--            <div class="flex-row mt-xs pl-xs">
-                                 <div v-for="(item,index) in tags" v-if="index<4">
-                                   <div class="cu-tag round bg-pink light ml-sm">
-                                     {{ item.name }}
-                                   </div>
-                                 </div>
-                               </div>-->
-                   <div class="flex-row mt-sm pl-xs">
-                     <div class="flex-row overflow-scroll flex-1">
-                       <div v-for="(item,index) in tags" v-if="index<10" class="ml-sm col-row-center flex-none">
-                         <img class="bd-round size40" :src="item.avatar"/>
-                         <div class="mt-xs">{{ item.name }}</div>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-             <div v-else>
-               <!--        class="radius flex-none h100p"-->
-               <div class="flex-row px-smm overflow-hidden">
-                 <div v-for="(item,index) in tags" v-if="index<5" class="col-row-center mt-xs flex-1">
-                   <img class="bd-round size50" :src="item.avatar"/>
-                   <div>{{ item.name }}</div>
-                 </div>
-               </div>
-               <div class="flex-row px-smm overflow-hidden">
-                 <div v-for="(item,index) in tags" v-if="index<5" class="col-row-center mt-xs flex-1">
-                   <img class="bd-round size50" :src="item.avatar"/>
-                   <div>{{ item.name }}</div>
-                 </div>
-               </div>
-             </div>
-           </swiper-item>
-         </swiper>
-       </div>
+              <!--        class="radius flex-none h100p"-->
+              <div class="flex-row w70p bg-green flex-none">
+                <div class="flex-col flex-none">
+                  <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
+                  <div class="flex-1 col-center">
+                    <img class="bd-round size80" :src="tags[0].avatar"/>
+                  </div>
+                </div>
+                <!--            简介最多30个字符-->
+                <div class="ml-smm mt-xs flex-1 overflow-hidden">
+                  简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
+                </div>
+              </div>
+              <div class="flex-col w75p flex-none">
+                <!--        class="radius flex-none h100p"-->
+                <!--                <div class="flex-row px-smm overflow-hidden">
+                                  <div v-for="(item,index) in tags" v-if="index<4" class="col-row-center mt-xs flex-1">
+                                    <img class="bd-round size50" :src="item.avatar"/>
+                                    <div>{{ item.name }}</div>
+                                  </div>
+                                </div>
+                                <div class="flex-row px-smm overflow-hidden">
+                                  <div v-for="(item,index) in tags" v-if="index<4" class="col-row-center mt-xs flex-1">
+                                    <img class="bd-round size50" :src="item.avatar"/>
+                                    <div>{{ item.name }}</div>
+                                  </div>
+                                </div>-->
+              </div>
+            </div>
+          </scroll-view>
+        </div>
 
 
         <tabs-talk class="flex-1" ref="tabsTalk"

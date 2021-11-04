@@ -1,5 +1,5 @@
 <template>
-  <view class="px-smm pb-sm" v-if="showSwipers">
+  <view class="px-sm pb-sm" v-if="showSwipers">
     <!--  <view class="bg-primary px-smm pt-xs">-->
     <swiper :indicator-dots="true" :autoplay="true" circular :interval="2500" :style="{'height':swiperHeight+'px'}">
       <swiper-item class="bd-radius" v-for="item in homeSwipers" @click="skipWebView">
@@ -16,8 +16,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
-import { namespace } from 'vuex-class'
 
 import HomeSwiperVO from '../../model/HomeSwiperVO'
 import ConfigMap from '../../const/ConfigMap'

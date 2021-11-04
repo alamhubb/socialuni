@@ -16,10 +16,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
-import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import { socialSystemStore } from '../../store'
+import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes
 
 
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
