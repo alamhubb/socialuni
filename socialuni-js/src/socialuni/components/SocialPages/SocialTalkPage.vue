@@ -54,27 +54,24 @@
 
         <div class="bg-theme bd-radius mx-sm pd-sm">
           <div class="row-between-center bt-radius">
-            <div class="row-col-center ml-xs">
+            <u-subsection class="flex-1 color-white" inactive-color="#fff" bg-color="#A2D2FF" :list="['处对象圈','我的圈子','热门圈子']" :current="1"></u-subsection>
+<!--            <div class="row-col-center ml-xs">
               当前圈子
             </div>
             <div class="row-col-center ml-xs">
               我的圈子
             </div>
             <div class="row-col-center ml-xs">热门圈子
-              <!--             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能-->
-            </div>
-            <div class="row-col-center bg-click">更多圈子
+              &lt;!&ndash;             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能&ndash;&gt;
+            </div>-->
+<!--            <div class="row-col-center bg-click ml-sm">更多
               <q-icon icon="mdi-chevron-right"></q-icon>
-            </div>
+            </div>-->
           </div>
 
-
-          <scroll-view scroll-x class="h170 mt-sm">
-            <div class="flex-row h100p">
-              <!--             如果有选中的圈子-->
-
-              <!--        class="radius flex-none h100p"-->
-              <div class="h100p flex-col w75p bg-green flex-none bg-default bd-radius mr-sm pd-sm">
+          <swiper circular class="h170 mt-sm">
+            <swiper-item class="bd-radius">
+              <div class="h100p flex-col w100p flex-none bg-default bd-radius mr-sm pd-sm">
                 <div class="flex-row flex-none">
                   <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
                   <div class="flex-1 ml mt-sm font-bold font-18">
@@ -86,6 +83,9 @@
                   简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
                 </div>
               </div>
+
+            </swiper-item>
+            <swiper-item class="bd-radius">
               <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
                 <!--                        class="radius flex-none h100p"-->
                 <div class="flex-row">
@@ -103,10 +103,49 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </scroll-view>
-        </div>
+            </swiper-item>
+          </swiper>
 
+<!--          <scroll-view scroll-x class="h170 mt-sm">
+            <div class="flex-row h100p">
+
+
+
+              &lt;!&ndash;             如果有选中的圈子&ndash;&gt;
+
+              &lt;!&ndash;        class="radius flex-none h100p"&ndash;&gt;
+              <div class="h100p flex-col w75p bg-green flex-none bg-default bd-radius mr-sm pd-sm">
+                <div class="flex-row flex-none">
+                  <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
+                  <div class="flex-1 ml mt-sm font-bold font-18">
+                    {{ tags[0].name }}
+                  </div>
+                </div>
+                &lt;!&ndash;            简介最多30个字符&ndash;&gt;
+                <div class="mt-sm font3-cut">
+                  简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
+                </div>
+              </div>
+              <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
+                &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
+                <div class="flex-row">
+                  <div v-for="(item,index) in tags" v-if="index<4"
+                       class="col-row-center mx-xs overflow-hidden h70 w55">
+                    <img class="bd-round size50" :src="item.avatar"/>
+                    <div class="font-cut">{{ item.name }}</div>
+                  </div>
+                </div>
+                <div class="flex-row mt-sm">
+                  <div v-for="(item,index) in tags" v-if="index<4"
+                       class="col-row-center mx-xs overflow-hidden h70 w55">
+                    <img class="bd-round size50" :src="item.avatar"/>
+                    <div class="font-cut">{{ item.name }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </scroll-view>-->
+        </div>
 
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"
