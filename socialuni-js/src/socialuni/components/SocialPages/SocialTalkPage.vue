@@ -40,7 +40,7 @@
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
 
-      <div class="flex-1 flex-col bg-theme-light bt-radius-15">
+      <div class="flex-1 flex-col bg-theme-base-light bt-radius-15">
 
 
         <!--        三种情况-->
@@ -52,36 +52,34 @@
 
                   没选圈子-->
 
-        <div class="bg-theme bd-radius mx-sm pd-sm">
-          <div class="row-between-center bt-radius">
-<!--            <u-subsection class="flex-1 color-white" inactive-color="#fff" bg-color="#98ACF8"-->
-            <u-subsection class="flex-1 color-white" inactive-color="#fff" bg-color="#98ACF8"
-                          :list="['处对象圈','我的圈子','热门圈子']" :current="1"></u-subsection>
-            <!--            <div class="row-col-center ml-xs">
-                          当前圈子
-                        </div>
-                        <div class="row-col-center ml-xs">
-                          我的圈子
-                        </div>
-                        <div class="row-col-center ml-xs">热门圈子
-                          &lt;!&ndash;             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能&ndash;&gt;
-                        </div>-->
-            <!--            <div class="row-col-center bg-click ml-sm">更多
-                          <q-icon icon="mdi-chevron-right"></q-icon>
-                        </div>-->
-          </div>
+          <!--            <u-subsection class="flex-1 color-white" inactive-color="#fff" bg-color="#98ACF8"-->
+          <u-subsection class="flex-none color-white mx-sm mb-sm" inactive-color="#fff" bg-color="#98ACF8"
+                        :list="['处对象圈','我的圈子','热门圈子']" :current="1"></u-subsection>
+          <!--            <div class="row-col-center ml-xs">
+                        当前圈子
+                      </div>
+                      <div class="row-col-center ml-xs">
+                        我的圈子
+                      </div>
+                      <div class="row-col-center ml-xs">热门圈子
+                        &lt;!&ndash;             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能&ndash;&gt;
+                      </div>-->
+          <!--            <div class="row-col-center bg-click ml-sm">更多
+                        <q-icon icon="mdi-chevron-right"></q-icon>
+                      </div>-->
 
-          <swiper circular class="h85 mt-sm">
+<!--        <div class="bg-theme-base bd-radius mx-sm pd-sm">
+          <swiper circular class="h85">
             <swiper-item class="bd-radius">
               <div class="h100p flex-col w100p flex-none bg-default bd-radius mr-sm pd-sm">
                 <div class="flex-row flex-none">
                   <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
-                  <!--                  <div class="flex-1 ml mt-sm font-bold font-18">
+                  &lt;!&ndash;                  <div class="flex-1 ml mt-sm font-bold font-18">
                                       {{ tags[0].name }}
-                                    </div>-->
+                                    </div>&ndash;&gt;
                   <div>
-                    <div class="mt-sm font3-cut">
-                      <!--            简介最多30个字符-->
+                    <div class="font3-cut">
+                      &lt;!&ndash;            简介最多30个字符&ndash;&gt;
                       简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
                     </div>
                   </div>
@@ -92,7 +90,7 @@
             </swiper-item>
             <swiper-item class="bd-radius">
               <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-                <!--                        class="radius flex-none h100p"-->
+                &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
                 <div class="flex-row">
                   <div v-for="(item,index) in tags" v-if="index<4"
                        class="col-row-center mx-xs overflow-hidden h70 w55">
@@ -100,18 +98,18 @@
                     <div class="font-cut">{{ item.name }}</div>
                   </div>
                 </div>
-<!--                <div class="flex-row mt-sm">
+&lt;!&ndash;                <div class="flex-row mt-sm">
                   <div v-for="(item,index) in tags" v-if="index<4"
                        class="col-row-center mx-xs overflow-hidden h70 w55">
                     <img class="bd-round size50" :src="item.avatar"/>
                     <div class="font-cut">{{ item.name }}</div>
                   </div>
-                </div>-->
+                </div>&ndash;&gt;
               </div>
             </swiper-item>
           </swiper>
 
-          <!--          <scroll-view scroll-x class="h170 mt-sm">
+          &lt;!&ndash;          <scroll-view scroll-x class="h170 mt-sm">
                       <div class="flex-row h100p">
 
 
@@ -149,8 +147,8 @@
                           </div>
                         </div>
                       </div>
-                    </scroll-view>-->
-        </div>
+                    </scroll-view>&ndash;&gt;
+        </div>-->
 
         <tabs-talk class="flex-1" ref="tabsTalk"
                    :scroll-enable="scrollEnable"

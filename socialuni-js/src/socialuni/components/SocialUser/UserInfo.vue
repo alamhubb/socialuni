@@ -1,5 +1,5 @@
 <template>
-  <view v-if="userProp" class="bg-theme-light pb-100">
+  <view v-if="userProp" class="bg-theme-base-light pb-100">
     <view class="bg-white mb-sm">
       <view>
         <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
@@ -84,7 +84,7 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button class="cu-btn round bd-blue px-smm bg-theme" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button class="cu-btn round bd-blue px-smm bg-theme-base" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>

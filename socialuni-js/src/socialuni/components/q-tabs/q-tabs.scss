@@ -1,20 +1,6 @@
 .active-line {
-  @extend .bg-tab;
+  @extend .bg-theme;
   height: 3px;
   bottom: 8px;
   border-radius: 20px;
-}
-
-.q-tab-item.active {
-  @extend .color-tab;
-
-  .q-tab {
-    @extend .text-lg;
-    @extend .font-bold;
-
-    * {
-      @extend .text-lg;
-      @extend .font-bold;
-    }
-  }
 }

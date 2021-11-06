@@ -1,12 +1,12 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
+    <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange" class="mg-sm bd-radius">
       <template #default="{tab}">
-        <q-tab>
+        <div class="w100p row-all-center h30">
           {{ tab.name }}
           <!--            费劲啊实力哈哈-->
-        </q-tab>
+        </div>
       </template>
       <template #icon="{tab}">
         <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
@@ -26,7 +26,7 @@
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
-    <q-pull-refresh ref="pullRefresh" class="bg-theme-light" @refresh="queryEnd">
+    <q-pull-refresh ref="pullRefresh" class="bg-theme-base-light" @refresh="queryEnd">
       <swiper :current="swiperCurrent"
               :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
@@ -40,11 +40,11 @@
                 @scroll.native="talksScrollEvent"
                 @scroll="talksScrollEvent"
           >-->
-          <scroll-view class="h100p bg-theme-light" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p bg-theme-base-light" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-            <div class="px-sm pb-60 bg-theme-light"
+            <div class="px-sm pb-60 bg-theme-base-light"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"

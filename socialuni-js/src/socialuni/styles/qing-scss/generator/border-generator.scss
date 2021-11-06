@@ -151,14 +151,35 @@
   }
 }
 
-@each $sizeKey, $sizeValue in $size-map {
+
+@each $sizeKey, $sizeValue in $padding-map {
   .bd-radius-#{''+$sizeKey} {
-    border-radius: #{''+$sizeValue}px !important;
+    border-radius: #{''+$sizeValue} !important;
   }
 
   @each $directionKey, $directionValue in $direction-com-map {
     .b#{''+$directionKey+''}-radius-#{''+$sizeKey} {
-      border-#{''+$directionValue}radius: #{''+$sizeValue}px !important;
+      border-#{''+$directionValue}radius: #{''+$sizeValue} !important;
+    }
+
+    .bt-radius-#{''+$sizeKey} {
+      border-top-left-radius: #{''+$sizeValue} !important;
+      border-top-right-radius: #{''+$sizeValue} !important;
+    }
+
+    .bb-radius-#{''+$sizeKey} {
+      border-bottom-left-radius: #{''+$sizeValue} !important;
+      border-bottom-right-radius: #{''+$sizeValue} !important;
+    }
+
+    .bl-radius-#{''+$sizeKey} {
+      border-top-left-radius: #{''+$sizeValue} !important;
+      border-bottom-left-radius: #{''+$sizeValue} !important;
+    }
+
+    .br-radius-#{''+$sizeKey} {
+      border-top-right-radius: #{''+$sizeValue} !important;
+      border-bottom-right-radius: #{''+$sizeValue} !important;
     }
   }
 }

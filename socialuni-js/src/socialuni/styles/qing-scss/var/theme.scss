@@ -1,9 +1,12 @@
-@import "blue";
-@import "green";
-@import "grey";
-@import "orange";
-@import "red";
-@import "../../theme";
+@import "color/blue";
+@import "color/green";
+@import "color/grey";
+@import "color/orange";
+@import "color/red";
+
+//基础色
+$color-white: #fff;
+$color-black: #000;
 
 $color-primary: $color-blue;
 $color-error: $color-red;
@@ -30,16 +33,40 @@ $colors-base: map-merge($mergeMap4, $colors-red);
 //自定义颜色
 
 //字体颜色
-$color-special: #1F2329;
-$color-main: #333333;
-$color-content: #666666;
-$color-sub: #909399;
-$color-tip: #C0C4CC;
-$color-link: #409EFF;
-$color-focus: #66b1ff;
-$color-hover: #66b1ff;
-$color-active: #337ab7;
-$color-menu: #1F2329;
+$color-special: #1F2329!default;
+//默认字体色
+$color-main: #333333!default;
+$color-content: #666666!default;
+$color-sub: #909399!default;
+$color-tip: #C0C4CC!default;
+$color-link: #409EFF!default;
+$color-focus: #66b1ff!default;
+$color-hover: #66b1ff!default;
+$color-active: #337ab7!default;
+$color-menu: #1F2329!default;
+
+//系统默认色
+//系统默认字体色
+//默认背景色
+//主题默认背景色
+//主题背景色
+//主题辅助背景色
+
+//默认背景
+$color-bg-default: #f7f7fa;
+$color-border-default: #dedede;
+//主题色
+$color-bg-base: $color-white;
+//主题色
+$color-theme-base: $color-white !default;
+//主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
+$color-theme-base-light: $color-bg-default !default;
+//主题色
+//主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
+$color-theme: #3383f6 !default;
+//主题亮色
+$color-theme-light:#A2D2FF !default;
+
 
 //背景
 //头部菜单
@@ -75,7 +102,7 @@ $color-border-button: #C0C6CC;
 $colors-custom-font: (
   //主题色，可自定义，默认和白色一样
         theme: $color-theme,
-        default: $color-default,
+        default: $color-main,
         special: $color-special,
         main: $color-main,
         content: $color-content,
@@ -84,7 +111,6 @@ $colors-custom-font: (
         link: $color-link,
         focus: $color-focus,
         hover: $color-hover,
-        tab: $color-tab,
         active: $color-active
 );
 
@@ -93,16 +119,18 @@ $colors-font: map-merge($colors-base, $colors-custom-font);
 //基础颜色直接循环拼就行
 $colors-custom-bg: (
   //主题色，可自定义，默认和白色一样
-        theme: $color-bg-theme,
-        theme-light: $color-bg-theme-light,
         default: $color-bg-default,
+        base: $color-bg-base,
+        theme-base: $color-theme-base,
+        theme-base-light: $color-theme-base-light,
+        theme: $color-theme,
+        theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,
         menu-hover: $color-bg-menu-hover,
         filter-active: $color-bg-filter-active,
         table-header: $color-bg-table-header,
         table-header-hover: $color-bg-table-header-hover,
-        tab: $color-tab,
 );
 
 $colors-bg: map-merge($colors-base, $colors-custom-bg);
@@ -114,7 +142,6 @@ $colors-custom-border: (
         form: $color-border-form,
         divider: $color-border-divider,
         table: $color-border-table,
-        tab: $color-tab,
 );
 
 $colors-border: map-merge($colors-base, $colors-custom-border);
@@ -145,7 +172,7 @@ $border-width-base: 1px !default;
 $border-style-base: solid !default;
 $border-base: $border-width-base $border-style-base $color-border-default !default;
 /// borderRadius|1|Radius|0
-$border-radius-base: 4px !default;
+$border-radius-base: 5px !default;
 /// borderRadius|1|Radius|0
 $border-radius-small: 2px !default;
 /// borderRadius|1|Radius|0

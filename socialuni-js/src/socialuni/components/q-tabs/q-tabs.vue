@@ -1,16 +1,29 @@
 <template>
-  <view class="q-box row-col-center position-relative overflow-x-auto">
-    <view class="row-nowrap mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
-      <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">
-        <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
+  <view class="py-xs px-xs flex-row position-relative overflow-x-auto bg-theme-light">
+    <div class="flex-1 index-1000" :class="[uuid]" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
+      <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
-        </slot>
-      </view>
-      <view hover-class="uni-list-cell-hover" class="col-center">
-        <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
-      </view>
-    </view>
-    <view class="active-line position-absolute" :style="[tabSlideStyle]"></view>
+      </slot>
+    </div>
+    <div class="position-absolute" :style="[tabSlideStyle]">
+      <slot name="active">
+        <div class="position-absolute h30 bg-white bd-radius" :style="{width:tabWidth+'px'}">
+
+        </div>
+      </slot>
+    </div>
+    <!--    <view class="row-nowrap flex-1 mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
+          <view class="index-1000 w100p" :class="[uuid]">
+            <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
+
+            </slot>
+          </view>
+          <view hover-class="uni-list-cell-hover" class="col-center">
+            <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
+          </view>
+        </view>
+    &lt;!&ndash;     :style="[tabSlideStyle]"&ndash;&gt;
+       -->
   </view>
 </template>
 
@@ -29,12 +42,18 @@ export default class QTabs extends Vue {
   activeClass: string[] = ['active', 'tab-line']
 
   tabItemLefts: number[] = [0]
+  tabWidth: number = 0
+
+  get tabBarWidth () {
+    return this.tabWidth - 10
+  }
+
   //判断是否已加载过
   firstLoadAfter: boolean = false
 
   //滑块样式
   get tabSlideStyle () {
-    const barWidth = Number(this.barWidth) / 2
+    const barWidth = Number(this.tabWidth) / 2
     return {
       transform: 'translate(' + this.tabItemLefts[this.value] + 'px)',
       //首次不开启动画
@@ -64,13 +83,15 @@ export default class QTabs extends Vue {
     const query = uni.createSelectorQuery().in(this)
     // 历遍所有tab，这里是执行了查询，最终使用exec()会一次性返回查询的数组结果
     // 只要size和rect两个参数
-    query.selectAll(`.${this.uuid}.q-tab-item`).boundingClientRect((res: any) => {
+    query.selectAll(`.${this.uuid}`).boundingClientRect((res: any) => {
       this.tabItemLefts = []
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
         res.forEach(item => {
+          this.tabWidth = item.width
           //设置每个tab滑块对应的位置
-          this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.barWidth) / 2) / 2 - res[0].left)
+          this.tabItemLefts.push(item.left - res[0].left)
+          // this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.barWidth) / 2) / 2 - res[0].left)
         })
         //首次完成2秒后切换首次加载状态，因为首次加载不需要动画，首次加载后开启动画
         CommonUtil.delayTime(2000).then(() => {
