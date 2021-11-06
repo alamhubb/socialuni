@@ -8,7 +8,8 @@
     </div>
     <div class="position-absolute" :style="[tabSlideStyle]">
       <slot name="active">
-        <div class="position-absolute h30 bg-white bd-radius" :style="{width:tabWidth+'px'}">
+        <div class="position-absolute bg-white bd-radius"
+             :style="{width:tabWidth+'px',height:tabHeight+'px'}"  :class="[isBar?'':'t25']">
 
         </div>
       </slot>
@@ -58,6 +59,7 @@ export default class QTabs extends Vue {
 
   tabItemLefts: number[] = [0]
   tabWidth: number = 0
+  tabHeight: number = 0
 
   //判断是否已加载过
   firstLoadAfter: boolean = false
@@ -105,7 +107,13 @@ export default class QTabs extends Vue {
       this.tabItemLefts = []
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
-        this.tabWidth = res[0].width
+        if (this.isBar) {
+          this.tabWidth = res[0].width
+          this.tabHeight = res[0].height
+        } else {
+          this.tabWidth = 20
+          this.tabHeight = 3
+        }
         res.forEach(item => {
           //设置每个tab滑块对应的位置
           if (this.isBar) {
