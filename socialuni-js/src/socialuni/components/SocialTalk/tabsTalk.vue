@@ -1,9 +1,10 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange" class="mg-sm bd-radius">
+    <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
+            class="mg-sm bd-radius bg-theme-light pd-mn">
       <template #default="{tab}">
-        <div class="w100p row-all-center h30">
+        <div class="w100p row-all-center h30 w50">
           {{ tab.name }}
           <!--            费劲啊实力哈哈-->
         </div>
