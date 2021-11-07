@@ -1,0 +1,26 @@
+.q-tag {
+  @extend .box-mn;
+  @extend .font-sm;
+  @extend .bd-radius;
+  @extend .mr-sm;
+  @extend .mt-10;
+  @extend .row-col-center;
+  //深色主题，字体白色，其他主题色
+  color: $color-main;
+  background: mix($color-white, $color-main, 90%);
+  border-color: mix($color-white, $color-main, 60%);
+}
+
+@each $key, $color in $colors-theme {
+  .q-tag-#{''+$key+''} {
+    @extend .box-mn;
+    @extend .font-sm;
+    @extend .bd-radius;
+    @extend .mr-sm;
+    @extend .mt-10;
+    @extend .row-col-center;
+    color: $color;
+    background: mix($color-white, $color, 90%);
+    //border: 1px solid mix($color-white, $color, 60%);
+  }
+}

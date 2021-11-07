@@ -8,30 +8,7 @@
 $color-white: #fff;
 $color-black: #000;
 
-$color-primary: $color-blue;
-$color-error: $color-red;
-$color-warn: $color-orange;
-$color-success: $color-green;
-$color-info: $color-grey;
-
-$colors-theme: (
-        white:$color-white,
-        black:$color-black,
-        primary:$color-primary,
-        error:$color-error,
-        warn:$color-warn,
-        success:$color-success,
-        info:$color-info,
-);
-//基础颜色
-$mergeMap1: map-merge($colors-theme, $colors-blue);
-$mergeMap2: map-merge($mergeMap1, $colors-green);
-$mergeMap3: map-merge($mergeMap2, $colors-grey);
-$mergeMap4: map-merge($mergeMap3, $colors-orange);
-$colors-base: map-merge($mergeMap4, $colors-red);
-
 //自定义颜色
-
 //字体颜色
 $color-special: #1F2329!default;
 //默认字体色
@@ -44,6 +21,12 @@ $color-focus: #66b1ff!default;
 $color-hover: #66b1ff!default;
 $color-active: #337ab7!default;
 $color-menu: #1F2329!default;
+
+$color-primary: $color-blue;
+$color-error: $color-red;
+$color-warn: $color-orange;
+$color-success: $color-green;
+$color-info: $color-main;
 
 //系统默认色
 //系统默认字体色
@@ -65,8 +48,25 @@ $color-theme-base-light: $color-bg-default !default;
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
 $color-theme: #3383f6 !default;
 //主题亮色
-$color-theme-light:#A2D2FF !default;
+$color-theme2:#A2D2FF !default;
+$color-theme-light:#ecf5ff !default;
 
+$colors-theme: (
+        white:$color-white,
+        black:$color-black,
+        theme:$color-theme,
+        primary:$color-primary,
+        error:$color-error,
+        warn:$color-warn,
+        success:$color-success,
+        info:$color-info,
+);
+//基础颜色
+$mergeMap1: map-merge($colors-theme, $colors-blue);
+$mergeMap2: map-merge($mergeMap1, $colors-green);
+$mergeMap3: map-merge($mergeMap2, $colors-grey);
+$mergeMap4: map-merge($mergeMap3, $colors-orange);
+$colors-base: map-merge($mergeMap4, $colors-red);
 
 //背景
 //头部菜单
@@ -124,6 +124,7 @@ $colors-custom-bg: (
         theme-base: $color-theme-base,
         theme-base-light: $color-theme-base-light,
         theme: $color-theme,
+        theme2: $color-theme2,
         theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,

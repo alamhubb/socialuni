@@ -1,6 +1,6 @@
 <template>
-  <view class="row-nowrap position-relative overflow-x-auto font-lg" :class="isBar?'bg-theme-light':''">
-    <div class="index-1000 row-all-center" :class="[barUuid,isBar?'flex-1':'flex-none']"
+  <view class="row-nowrap position-relative overflow-x-auto" :class="isBar?'bg-theme2 font-md':'font-lg'">
+    <div class="fixed-index row-all-center" :class="[barUuid,isBar?'flex-1':'flex-none']"
          v-for="(tab,index) in tabs" @click="input(index)"
          :key="index">
       <div :class="[uuid,index===value?activeClass:unActiveClass]">

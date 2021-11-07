@@ -41,34 +41,15 @@
 
 
       <div class="flex-1 flex-col bg-theme-base-light bt-radius-15">
-
-
-        <!--        三种情况-->
-        <!--        一。没收起来的时候
-                1.展示高度
-                  内部展示不同
-                2. 收起来
-                  选了圈子
-
-                  没选圈子-->
-
-          <!--            <u-subsection class="flex-1 color-white" inactive-color="#fff" bg-color="#98ACF8"-->
-          <u-subsection class="flex-none color-white mx-sm mb-sm" inactive-color="#fff" bg-color="#98ACF8"
-                        :list="['处对象圈','我的圈子','热门圈子']" :current="1"></u-subsection>
-        <!--
-                <div class="row-col-center ml-xs">
-                  当前圈子
-                </div>
-                <div class="row-col-center ml-xs">
-                  我的圈子
-                </div>
-                <div class="row-col-center ml-xs">热门圈子
-                  &lt;!&ndash;             <q-icon icon="mdi-chevron-down"></q-icon>以后可以加个折叠功能&ndash;&gt;
-                </div>
-                <div class="row-col-center bg-click ml-sm">更多
-                  <q-icon icon="mdi-chevron-right"></q-icon>
-                </div>
-        -->
+        <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
+                class="mx-sm mb-sm bd-radius pd-mn">
+          <template #default="{tab}">
+            <div class="h30 px-xs row-all-center">
+              {{ tab }}
+              <!--            费劲啊实力哈哈-->
+            </div>
+          </template>
+        </q-tabs>
 
         <div class="bg-theme-base bd-radius mx-sm pd-sm">
           <swiper circular class="h85">
@@ -241,11 +222,13 @@ import QPopup from '../q-popup/q-popup.vue'
 import QSlider from '../q-slider/q-slider.vue'
 import ConfigMap from '@/socialuni/const/ConfigMap'
 import HomeSwiperVO from '@/socialuni/model/HomeSwiperVO'
+import QTabs from '@/socialuni/components/q-tabs/q-tabs.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QTabs,
     QSlider,
     QPopup,
     QIcon,
@@ -272,7 +255,7 @@ export default class SocialTalkPage extends Vue {
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
   @socialAppStore.State('homeSwipers') homeSwipers: HomeSwiperVO[]
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
-
+  current = 0
   // tag 相关
   showTagSearch = false
   selectTag: TagVO = null
