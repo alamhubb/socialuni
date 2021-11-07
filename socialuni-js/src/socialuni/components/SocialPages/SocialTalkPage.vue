@@ -1,12 +1,12 @@
 <template>
-  <view class="flex-col h100p">
+  <view class="flex-col h100p bg-white">
     <view v-show="showTagSearch" class="h100p">
       <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
       ></tag-search>
     </view>
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view v-show="!showTagSearch" class="flex-col h100vh">
-      <q-navbar class="flex-none" custom-class="bg-default">
+      <q-navbar class="flex-none" custom-class="bg-white">
         <q-search class="flex-1 mx-sm" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
@@ -39,105 +39,57 @@
 
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
+      <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
+              class="mx-sm mb-sm bd-radius pd-mn flex-none">
+        <template #default="{tab}">
+          <div class="h30 px-xs row-all-center">
+            {{ tab }}
+            <!--            费劲啊实力哈哈-->
+          </div>
+        </template>
+      </q-tabs>
 
-      <div class="flex-1 flex-col bg-theme-base-light bt-radius-15">
-        <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
-                class="mx-sm mb-sm bd-radius pd-mn">
-          <template #default="{tab}">
-            <div class="h30 px-xs row-all-center">
-              {{ tab }}
-              <!--            费劲啊实力哈哈-->
+      <div class="bd-radius mx-sm mb-sm">
+        <swiper circular class="h85">
+          <swiper-item class="bd-radius">
+            <div class="h100p flex-col w100p flex-none bg-default bd-radius mr-sm pd-sm">
+              <div class="flex-row flex-none">
+                <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
+                <!--                  <div class="flex-1 ml mt-sm font-bold font-18">
+                                    {{ tags[0].name }}
+                                  </div>-->
+                <div>
+                  <div class="font3-cut">
+                    <!--            简介最多30个字符-->
+                    简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
+                  </div>
+                </div>
+              </div>
+
             </div>
-          </template>
-        </q-tabs>
 
-        <div class="bg-theme-base bd-radius mx-sm pd-sm">
-          <swiper circular class="h85">
-            <swiper-item class="bd-radius">
-              <div class="h100p flex-col w100p flex-none bg-default bd-radius mr-sm pd-sm">
-                <div class="flex-row flex-none">
-                  <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
-                  <!--                  <div class="flex-1 ml mt-sm font-bold font-18">
-                                      {{ tags[0].name }}
-                                    </div>-->
-                  <div>
-                    <div class="font3-cut">
-                      <!--            简介最多30个字符-->
-                      简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
-                    </div>
-                  </div>
+          </swiper-item>
+          <swiper-item class="bd-radius">
+            <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
+              <!--                        class="radius flex-none h100p"-->
+              <div class="flex-row">
+                <div v-for="(item,index) in tags" v-if="index<5"
+                     class="col-row-center mx-xs overflow-hidden h70 w55">
+                  <img class="bd-round size50" :src="item.avatar"/>
+                  <div class="font-cut">{{ item.name }}</div>
                 </div>
-
               </div>
+            </div>
+          </swiper-item>
+        </swiper>
 
-            </swiper-item>
-            <swiper-item class="bd-radius">
-              <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-                <!--                        class="radius flex-none h100p"-->
-                <div class="flex-row">
-                  <div v-for="(item,index) in tags" v-if="index<4"
-                       class="col-row-center mx-xs overflow-hidden h70 w55">
-                    <img class="bd-round size50" :src="item.avatar"/>
-                    <div class="font-cut">{{ item.name }}</div>
-                  </div>
-                </div>
-                <!--                <div class="flex-row mt-sm">
-                                  <div v-for="(item,index) in tags" v-if="index<4"
-                                       class="col-row-center mx-xs overflow-hidden h70 w55">
-                                    <img class="bd-round size50" :src="item.avatar"/>
-                                    <div class="font-cut">{{ item.name }}</div>
-                                  </div>
-                                </div>-->
-              </div>
-            </swiper-item>
-          </swiper>
-
-          <!--          <scroll-view scroll-x class="h170 mt-sm">
-                      <div class="flex-row h100p">
-
-
-
-                        &lt;!&ndash;             如果有选中的圈子&ndash;&gt;
-
-                        &lt;!&ndash;        class="radius flex-none h100p"&ndash;&gt;
-                        <div class="h100p flex-col w75p bg-green flex-none bg-default bd-radius mr-sm pd-sm">
-                          <div class="flex-row flex-none">
-                            <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
-                            <div class="flex-1 ml mt-sm font-bold font-18">
-                              {{ tags[0].name }}
-                            </div>
-                          </div>
-                          &lt;!&ndash;            简介最多30个字符&ndash;&gt;
-                          <div class="mt-sm font3-cut">
-                            简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
-                          </div>
-                        </div>
-                        <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-                          &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
-                          <div class="flex-row">
-                            <div v-for="(item,index) in tags" v-if="index<4"
-                                 class="col-row-center mx-xs overflow-hidden h70 w55">
-                              <img class="bd-round size50" :src="item.avatar"/>
-                              <div class="font-cut">{{ item.name }}</div>
-                            </div>
-                          </div>
-                          <div class="flex-row mt-sm">
-                            <div v-for="(item,index) in tags" v-if="index<4"
-                                 class="col-row-center mx-xs overflow-hidden h70 w55">
-                              <img class="bd-round size50" :src="item.avatar"/>
-                              <div class="font-cut">{{ item.name }}</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </scroll-view>-->
-        </div>
-
-        <tabs-talk class="flex-1" ref="tabsTalk"
-                   :scroll-enable="scrollEnable"
-                   :selectTagIds="selectTagIds"
-        ></tabs-talk>
       </div>
+
+
+      <tabs-talk class="flex-1 bt-radius-15" ref="tabsTalk"
+                 :scroll-enable="scrollEnable"
+                 :selectTagIds="selectTagIds"
+      ></tabs-talk>
 
       <q-popup v-model="showFilter" bottom>
         <div class="row-between-center q-box bb-1">

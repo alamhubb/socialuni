@@ -1,5 +1,5 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p">
+  <view v-if="talkTabs.length" class="flex-col h100p bg-theme-base-light">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
 <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
     <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
