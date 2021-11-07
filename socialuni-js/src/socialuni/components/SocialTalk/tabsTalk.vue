@@ -7,7 +7,7 @@
     <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
             class="mg-sm bd-radius pd-mn">
       <template #default="{tab}">
-        <div class="w100p row-all-center h30 px-xs">
+        <div class="h30 px-xs row-all-center">
           {{ tab.name }}
           <!--            费劲啊实力哈哈-->
         </div>

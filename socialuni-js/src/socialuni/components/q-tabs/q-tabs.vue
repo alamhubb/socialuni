@@ -1,29 +1,17 @@
 <template>
   <view class="row-nowrap position-relative overflow-x-auto font-lg" :class="isBar?'bg-theme-light':''">
-    <div class="index-1000 flex-row" :class="[uuid,isBar?'flex-1':'flex-none',index===value?activeClass:unActiveClass]"
-      <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">
+    <div class="index-1000 row-all-center" :class="[barUuid,isBar?'flex-1':'flex-none']"
+         v-for="(tab,index) in tabs" @click="input(index)"
+         :key="index">
+      <div :class="[uuid,index===value?activeClass:unActiveClass]">
         <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
         </slot>
-      </view>
-      <view hover-class="uni-list-cell-hover" class="col-center">
+      </div>
+      <div hover-class="uni-list-cell-hover" class="col-center"  :class="[index===value?activeClass:unActiveClass]"">
         <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
-      </view>
-    </view>
-    <div class="index-1000 flex-row" :class="[uuid,isBar?'flex-1':'flex-none',index===value?activeClass:unActiveClass]"
-         v-for="(tab,index) in tabs" @click="input(index)"
-         :key="index">
-      <!--      <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">-->
-      <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
-
-      </slot>
-      <view hover-class="uni-list-cell-hover" class="col-center">
-        <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
-      </view>
+      </div>
     </div>
-
-
-
     <div class="position-absolute" :style="[tabSlideStyle]">
       <div class="position-absolute bd-radius"
            :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'bg-white':'bg-theme t28']">
@@ -64,6 +52,7 @@ export default class QTabs extends Vue {
   }
 
   //唯一id值
+  barUuid: string = CommonUtil.getClassUUID()
   uuid: string = CommonUtil.getClassUUID()
 
   @Model('input') readonly value: number
@@ -124,7 +113,14 @@ export default class QTabs extends Vue {
     const query = uni.createSelectorQuery().in(this)
     // 历遍所有tab，这里是执行了查询，最终使用exec()会一次性返回查询的数组结果
     // 只要size和rect两个参数
-    query.selectAll(`.${this.uuid}`).boundingClientRect((res: any) => {
+    let uuid
+    if (this.isBar) {
+      uuid = this.barUuid
+    } else {
+      uuid = this.uuid
+    }
+
+    query.selectAll(`.${uuid}`).boundingClientRect((res: any) => {
       this.tabItemLefts = []
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
