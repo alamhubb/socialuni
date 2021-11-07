@@ -8,7 +8,7 @@
 
         </slot>
       </div>
-      <div hover-class="uni-list-cell-hover" class="col-center"  :class="[index===value?activeClass:unActiveClass]"">
+      <div hover-class="uni-list-cell-hover" class="col-center" :class="[index===value?activeClass:unActiveClass]">
         <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
       </div>
     </div>
