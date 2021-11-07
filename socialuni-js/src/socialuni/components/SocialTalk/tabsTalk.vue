@@ -1,10 +1,13 @@
 <template>
   <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
+<!--    <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"-->
+<!--    bg-theme-light-->
+<!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
     <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
-            class="mg-sm bd-radius bg-theme-light pd-mn">
+            class="mg-sm bd-radius pd-mn">
       <template #default="{tab}">
-        <div class="w100p row-all-center h30 w50">
+        <div class="w100p row-all-center h30 px-xs">
           {{ tab.name }}
           <!--            费劲啊实力哈哈-->
         </div>

@@ -1,18 +1,34 @@
 <template>
-  <view class="flex-row position-relative overflow-x-auto">
-    <div class="index-1000" :class="[uuid,isBar?'flex-1':'flex-none']" v-for="(tab,index) in tabs" @click="input(index)"
+  <view class="row-nowrap position-relative overflow-x-auto font-lg" :class="isBar?'bg-theme-light':''">
+    <div class="index-1000 flex-row" :class="[uuid,isBar?'flex-1':'flex-none',index===value?activeClass:unActiveClass]"
+      <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">
+        <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
+
+        </slot>
+      </view>
+      <view hover-class="uni-list-cell-hover" class="col-center">
+        <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
+      </view>
+    </view>
+    <div class="index-1000 flex-row" :class="[uuid,isBar?'flex-1':'flex-none',index===value?activeClass:unActiveClass]"
+         v-for="(tab,index) in tabs" @click="input(index)"
          :key="index">
+      <!--      <view class="q-tab-item" :class="[uuid,index===value?activeClass:'']">-->
       <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
       </slot>
+      <view hover-class="uni-list-cell-hover" class="col-center">
+        <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
+      </view>
     </div>
-    <div class="position-absolute" :style="[tabSlideStyle]">
-      <slot name="active">
-        <div class="position-absolute bg-white bd-radius"
-             :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'':'t27']">
 
-        </div>
-      </slot>
+
+
+    <div class="position-absolute" :style="[tabSlideStyle]">
+      <div class="position-absolute bd-radius"
+           :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'bg-white':'bg-theme t28']">
+
+      </div>
     </div>
     <!--    <view class="row-nowrap flex-1 mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
           <view class="index-1000 w100p" :class="[uuid]">
@@ -20,9 +36,7 @@
 
             </slot>
           </view>
-          <view hover-class="uni-list-cell-hover" class="col-center">
-            <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
-          </view>
+
         </view>
     &lt;!&ndash;     :style="[tabSlideStyle]"&ndash;&gt;
        -->
@@ -54,8 +68,23 @@ export default class QTabs extends Vue {
 
   @Model('input') readonly value: number
   @Prop({ default: [] }) readonly tabs: any[]
+
   // @Prop({ default: '50' }) readonly barWidth: string
-  activeClass: string[] = ['active', 'tab-line']
+  get activeClass () {
+    if (this.isBar) {
+      return ['color-main', 'font-bold']
+    } else {
+      return ['color-theme', 'font-bold']
+    }
+  }
+
+  get unActiveClass () {
+    if (this.isBar) {
+      return ['color-white']
+    } else {
+      return ['color-main']
+    }
+  }
 
   tabItemLefts: number[] = [0]
   barWidth: number = 0
