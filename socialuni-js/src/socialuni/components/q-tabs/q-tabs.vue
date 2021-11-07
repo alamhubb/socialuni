@@ -9,7 +9,7 @@
     <div class="position-absolute" :style="[tabSlideStyle]">
       <slot name="active">
         <div class="position-absolute bg-white bd-radius"
-             :style="{width:tabWidth+'px',height:tabHeight+'px'}"  :class="[isBar?'':'t25']">
+             :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'':'t27']">
 
         </div>
       </slot>
@@ -54,30 +54,22 @@ export default class QTabs extends Vue {
 
   @Model('input') readonly value: number
   @Prop({ default: [] }) readonly tabs: any[]
-  @Prop({ default: '50' }) readonly barWidth: string
+  // @Prop({ default: '50' }) readonly barWidth: string
   activeClass: string[] = ['active', 'tab-line']
 
   tabItemLefts: number[] = [0]
-  tabWidth: number = 0
-  tabHeight: number = 0
+  barWidth: number = 0
+  barHeight: number = 0
 
   //判断是否已加载过
   firstLoadAfter: boolean = false
 
   //滑块样式
   get tabSlideStyle () {
-    let barWidth
-    if (this.isBar) {
-      barWidth = Number(this.tabWidth) / 2
-    } else {
-      barWidth = Number(this.tabWidth) / 2
-      // barWidth = Number(this.barWidth) / 2
-    }
     return {
       transform: 'translate(' + this.tabItemLefts[this.value] + 'px)',
       //首次不开启动画
-      'transition-duration': this.firstLoadAfter ? '0.5s' : '0',
-      width: barWidth + 'px'
+      'transition-duration': this.firstLoadAfter ? '0.5s' : '0'
     }
   }
 
@@ -108,11 +100,11 @@ export default class QTabs extends Vue {
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
         if (this.isBar) {
-          this.tabWidth = res[0].width
-          this.tabHeight = res[0].height
+          this.barWidth = res[0].width
+          this.barHeight = res[0].height
         } else {
-          this.tabWidth = 20
-          this.tabHeight = 3
+          this.barWidth = 25
+          this.barHeight = 3
         }
         res.forEach(item => {
           //设置每个tab滑块对应的位置
@@ -120,7 +112,7 @@ export default class QTabs extends Vue {
             this.tabItemLefts.push(item.left - res[0].left)
           } else {
             //自己宽度一般，
-            this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.tabWidth) / 2) - res[0].left)
+            this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.barWidth) / 2) - res[0].left)
             // this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.tabWidth) / 2) / 2 - res[0].left)
           }
         })
