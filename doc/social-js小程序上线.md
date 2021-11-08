@@ -44,9 +44,10 @@ https://api.qingchi1.com;https://api.qingchiapp.com;https://cdxapp-1257733245.co
 
 
 
+- 微信登录，秘钥生成。。
+  ![image-20211029171456415](social-js小程序上线.assets/image-20211029171456415.png)
 
-
-
+![image-20211029171408441](social-js小程序上线.assets/image-20211029171408441.png)
 
 - UGC申明: 
 
