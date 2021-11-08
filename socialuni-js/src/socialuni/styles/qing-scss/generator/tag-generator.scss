@@ -3,7 +3,6 @@
   @extend .font-sm;
   @extend .bd-radius;
   @extend .mr-sm;
-  @extend .mt-10;
   @extend .row-col-center;
   //深色主题，字体白色，其他主题色
   color: $color-main;
@@ -17,7 +16,6 @@
     @extend .font-sm;
     @extend .bd-radius;
     @extend .mr-sm;
-    @extend .mt-10;
     @extend .row-col-center;
     color: $color;
     background: mix($color-white, $color, 90%);

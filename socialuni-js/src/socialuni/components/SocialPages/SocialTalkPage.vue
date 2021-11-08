@@ -43,7 +43,7 @@
         <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
                 class="bd-radius pd-mn flex-1">
           <template #default="{tab}">
-            <div class="h30 px-xs row-all-center">
+            <div class="h30 px-xs row-all-center font-md">
               {{ tab }}
               <!--            费劲啊实力哈哈-->
             </div>

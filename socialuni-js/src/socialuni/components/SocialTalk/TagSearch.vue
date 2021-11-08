@@ -1,6 +1,7 @@
 <template>
   <view class="h100p flex-col">
     <q-navbar v-if="value">
+      <q-icon class="ml-smm" icon="arrow-leftward" @click="input"></q-icon>
       <q-search class="flex-1 mx-sm bg-default">
         <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
@@ -9,7 +10,6 @@
                 @click="clearSearchContent"
         ></q-icon>
       </q-search>
-      <div @click="input" class="flex-none mr-sm">取消</div>
     </q-navbar>
     <view v-if="searchContent">
       <view v-if="searchContent&&isAdd" class="article-row solid-bottom text-blue" @click="addTag">
@@ -20,11 +20,11 @@
       <view v-for="tag in showTags" :key="tag.id" @click="change(tag)"
             class="article-row row-between solid-bottom">
         <text>
-          #{{tag.name}}
+          #{{ tag.name }}
         </text>
         <view v-if="tag.count" class="row-col-center">
           <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
-          {{tag.count}}
+          {{ tag.count }}
         </view>
       </view>
     </view>
@@ -40,7 +40,7 @@
                   class="ml-xs mt-sm q-tag-theme lg round"
                   :key="tag.id"
                   @click="change(tag)">
-              #{{tag.name}}
+              #{{ tag.name }}
             </view>
           </template>
           <view v-else class="pl-sm mt-sm text-md text-gray">
@@ -53,7 +53,7 @@
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
             <view class="row-all-center flex-auto">
-              <text class="uni-ellipsis">{{item.name}}</text>
+              <text class="uni-ellipsis">{{ item.name }}</text>
             </view>
           </view>
         </template>
@@ -61,7 +61,7 @@
           <view class="bg-white">
             <view class="q-box-row">
               <text class="cuIcon-title text-green margin-right-xs"></text>
-              <text class="font-bold">{{item.name}}</text>
+              <text class="font-bold">{{ item.name }}</text>
             </view>
 
             <view if="item.childs">
@@ -72,10 +72,10 @@
                   />
                   <view class="ml-sm overflow-hidden">
                     <view>
-                      {{tag.name}}
+                      {{ tag.name }}
                     </view>
                     <view class="text-gray text-sm text-ellipsis">
-                      帖子：{{tag.talkCount}}
+                      帖子：{{ tag.talkCount }}
                     </view>
                   </view>
                 </view>
@@ -123,7 +123,10 @@ export default class TagSearchPage extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 
-  @Prop({ type: Boolean, default: false }) readonly isAdd: boolean
+  @Prop({
+    type: Boolean,
+    default: false
+  }) readonly isAdd: boolean
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   // 输入内容查询时显示的列表tag
   // 进入页面只查询前20个，点击了输入内容才查询所有
