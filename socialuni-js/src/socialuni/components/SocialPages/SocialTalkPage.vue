@@ -41,7 +41,7 @@
 
       <div class="row-col-center mb-sm mx-sm">
         <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
-                class="bd-radius pd-mn flex-1">
+                class="bd-radius pd-mn flex-1 bg-theme2">
           <template #default="{tab}">
             <div class="h30 px-xs row-all-center font-md">
               {{ tab }}

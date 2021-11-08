@@ -1,5 +1,5 @@
 <template>
-  <view class="row-nowrap position-relative overflow-x-auto" :class="isBar?'bg-theme2':''">
+  <view class="row-nowrap position-relative overflow-x-auto">
     <div class="fixed-index row-all-center" :class="[barUuid,isBar?'flex-1':'flex-none']"
          v-for="(tab,index) in tabs" @click="input(index)"
          :key="index">

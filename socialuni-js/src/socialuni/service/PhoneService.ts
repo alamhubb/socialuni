@@ -12,6 +12,7 @@ export default class PhoneService {
   }
 
   static async bindWxPhoneNum (wxGetPhoneInfoResult: any) {
+    console.log(wxGetPhoneInfoResult)
     if (wxGetPhoneInfoResult.detail.errMsg === 'getPhoneNumber:ok') {
       /**
        * 在回调中调用 wx.login 登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，
