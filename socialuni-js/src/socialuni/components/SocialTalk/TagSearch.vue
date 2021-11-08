@@ -1,15 +1,15 @@
 <template>
   <view class="h100p flex-col">
     <q-navbar v-if="value">
-      <q-icon class="ml" icon="arrow-leftward" @click="input"></q-icon>
-      <q-search class="flex-auto">
-        <q-icon class="mx-5 text-gray" icon="search" size="16"></q-icon>
+      <q-search class="flex-1 mx-sm bg-default">
+        <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
         <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"
                 @click="clearSearchContent"
         ></q-icon>
       </q-search>
+      <div @click="input" class="flex-none mr-sm">取消</div>
     </q-navbar>
     <view v-if="searchContent">
       <view v-if="searchContent&&isAdd" class="article-row solid-bottom text-blue" @click="addTag">
@@ -34,16 +34,16 @@
           <text class="cuIcon-title text-green"></text>
           <text class="text-md font-bold">历史话题</text>
         </q-card-row>
-        <q-card-grid class="mt-sm">
-          <view v-if="historyTags.length">
+        <q-card-grid>
+          <template v-if="historyTags.length">
             <view v-for="tag in historyTags"
-                  class="ml-xs margin-right-xs cu-tag lg round bg-green-plain margin-bottom-sm"
+                  class="ml-xs mt-sm q-tag-theme lg round"
                   :key="tag.id"
                   @click="change(tag)">
-              {{tag.name}}
+              #{{tag.name}}
             </view>
-          </view>
-          <view v-else class="pl-sm text-md text-gray">
+          </template>
+          <view v-else class="pl-sm mt-sm text-md text-gray">
             空
           </view>
         </q-card-grid>

@@ -1,5 +1,5 @@
 <template>
-    <view class="q-card-grid">
+    <view class="row-grid">
         <slot></slot>
     </view>
 </template>

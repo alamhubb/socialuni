@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @date 2019-11-07 15:20
  */
 @Entity
-@Table(name = "circle",
+@Table(name = "s_circle",
         indexes = {
                 @Index(columnList = "status"),
                 @Index(columnList = "showFront"),

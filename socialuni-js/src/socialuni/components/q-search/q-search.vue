@@ -1,5 +1,5 @@
 <template>
-    <view class="bd bd-round row-col-center h30 font-sm">
+    <view class="row-col-center bd bd-round h30 font-sm">
         <slot></slot>
     </view>
 </template>
