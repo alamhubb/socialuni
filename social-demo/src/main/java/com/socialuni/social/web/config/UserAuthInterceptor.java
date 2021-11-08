@@ -87,6 +87,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 //初始化的请求
                 || uri.contains("report/queryReportTypes")
                 //查询首页轮播图
+                || uri.contains("queryLocation")
                 || uri.contains("queryHomeSwipers")
                 || uri.contains("getAppLaunchData")
                 || uri.contains("tag/queryTags")

@@ -43,7 +43,7 @@
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <button v-if="isMpQQ" :disabled="!openTypeBtnEnable"
                     open-type="getUserInfo"
-                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @getuserinfo="providerLogin">
               <u-icon color="white" name="qq-fill" size="38"
                       class="mr-xs"></u-icon>
@@ -51,13 +51,13 @@
             </button>
             <!--                app和h5也都可以用微信登录-->
             <button :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @click="socialuniLogin">
               清池手机号授权登录
             </button>
             <!--                app和h5也都可以用微信登录-->
             <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @click="providerLogin">
               <u-icon color="white" name="weixin-fill" size="42"
                       class="mr-xs"></u-icon>

@@ -3,14 +3,14 @@
     <div class="row-between-center q-box bb-1">
       <view class="flex-row">
         <view class="text-black text-md font-bold">城市筛选</view>
-        <view class="text-orange font-bold px bg-active" @click="getLocation">
+        <view class="text-orange font-bold px bg-click" @click="getLocation">
           <q-icon icon="map-fill" class="mr-nn" size="16"></q-icon>
           定位
         </view>
       </view>
       <view class="flex-row">
-        <view class="text-blue font-bold mx-sm px-sm bg-active" @click="close">取消</view>
-        <view class="text-green font-bold mx-sm px-sm bg-active" @click="confirm">确定</view>
+        <view class="text-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
+        <view class="text-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
       </view>
     </div>
 

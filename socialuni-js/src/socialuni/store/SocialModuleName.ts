@@ -1,4 +1,5 @@
 export default class SocialModuleName {
+  static readonly socialOAuthModule = 'socialOAuth'
   static readonly socialAppModule = 'socialApp'
   static readonly socialTalkModule = 'socialTalk'
   static readonly socialUserModule = 'socialUser'

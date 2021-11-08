@@ -194,7 +194,7 @@
             复制
           </button>
         </view>-->
-        <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-active"
+        <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-click"
                       @click="$pageUtil.toUserContactInfoPage">
                   <view class="row-col-center">
                     <text class="text-md text-orange">他人获取您的联系方式时，您就能获得贝壳</text>

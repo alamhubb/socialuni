@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: qkylocal
   mvc:
     throw-exception-if-no-handler-found: true
   jpa:
@@ -16,3 +16,10 @@ spring:
   #不要为我们工程中的资源文件建立映射
   resources:
     add-mappings: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:mapper/*.xml
+logging:
+  file:
+    name: socialuni.log
