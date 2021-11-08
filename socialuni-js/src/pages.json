@@ -28,7 +28,7 @@
     {
       "path": "pages/circle/circle",
       "style": {
-        "navigationBarTitleText": "圈子"
+        "navigationStyle": "custom"
       }
     }
   ],
