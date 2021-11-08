@@ -39,25 +39,29 @@
 
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
-      <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
-              class="mx-sm mb-sm bd-radius pd-mn flex-none">
-        <template #default="{tab}">
-          <div class="h30 px-xs row-all-center">
-            {{ tab }}
-            <!--            费劲啊实力哈哈-->
-          </div>
-        </template>
-      </q-tabs>
+      <div class="row-col-center mb-sm mx-sm">
+        <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
+                class="bd-radius pd-mn flex-1">
+          <template #default="{tab}">
+            <div class="h30 px-xs row-all-center">
+              {{ tab }}
+              <!--            费劲啊实力哈哈-->
+            </div>
+          </template>
+        </q-tabs>
+        <div class="row-col-center bg-click flex-none ml-sm font-md">更多
+          <q-icon icon="mdi-chevron-right"></q-icon>
+        </div>
+      </div>
 
-      <div class="bd-radius mx-sm mb-sm">
-        <swiper circular class="h85">
+
+      <div>
+        <swiper circular class="h85 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
           <swiper-item class="bd-radius">
-            <div class="h100p flex-col w100p flex-none bg-default bd-radius mr-sm pd-sm">
-              <div class="flex-row flex-none">
-                <img class="bd-round size80 flex-none" :src="tags[0].avatar"/>
-                <!--                  <div class="flex-1 ml mt-sm font-bold font-18">
-                                    {{ tags[0].name }}
-                                  </div>-->
+            <div class="h100p w100p flex-col flex-none bg-default bd-radius pd-sm">
+              <div class="row-col-center flex-none">
+                <img class="bd-round size70 flex-none mr-sm" :src="tags[0].avatar"/>
+
                 <div>
                   <div class="font3-cut">
                     <!--            简介最多30个字符-->
@@ -72,9 +76,21 @@
           <swiper-item class="bd-radius">
             <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
               <!--                        class="radius flex-none h100p"-->
-              <div class="flex-row">
+              <div class="row-nowrap overflow-hidden">
                 <div v-for="(item,index) in tags" v-if="index<5"
-                     class="col-row-center mx-xs overflow-hidden h70 w55">
+                     class="col-row-center mx-xs overflow-hidden h70 flex-1">
+                  <img class="bd-round size50" :src="item.avatar"/>
+                  <div class="font-cut">{{ item.name }}</div>
+                </div>
+              </div>
+            </div>
+          </swiper-item>
+          <swiper-item class="bd-radius">
+            <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
+              <!--                        class="radius flex-none h100p"-->
+              <div class="row-nowrap overflow-hidden">
+                <div v-for="(item,index) in tags" v-if="index<5"
+                     class="col-row-center mx-xs overflow-hidden h70 flex-1">
                   <img class="bd-round size50" :src="item.avatar"/>
                   <div class="font-cut">{{ item.name }}</div>
                 </div>
@@ -82,7 +98,6 @@
             </div>
           </swiper-item>
         </swiper>
-
       </div>
 
 
@@ -226,6 +241,14 @@ export default class SocialTalkPage extends Vue {
   scrollEnable = false
 
   checkedCircle = '哈哈哈'
+
+  switchCircleTabValue (event: { detail: any }) {
+    const detail: {
+      current: number,
+      source: number
+    } = event.detail
+    this.current = detail.current
+  }
 
   get talkTabsTop () {
     if (this.configShowSwipers) {
