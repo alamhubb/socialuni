@@ -51,7 +51,7 @@
           @click="toTalkDetailVue">
       <view v-for="tag in talk.tags" :key="tag.id"
             class="q-tag-theme mt-sm">
-          #{{ tag.name }}
+        #{{ tag.name }}
       </view>
     </view>
   </view>

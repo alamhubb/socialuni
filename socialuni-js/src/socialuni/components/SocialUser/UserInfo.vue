@@ -124,27 +124,27 @@
           地区：{{ userProp.city }}
         </view>
 
-<!--        <view v-if="isMine" class="py-sm q-solid-bottom">
-          <div class="row-col-center">
-            <image class="size20px mr-xs"
-                   mode="aspectFit"
-                   :src="require('socialuni/static/img/socialuni_logo.jpg')"
-            />
-            社交联盟：
-            <view v-if="userProp.bindSocialuni">
-              {{ userProp.socialuniNickname }}
-              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
-                已绑定
-              </view>
-            </view>
-            <view v-else>
-              绑定后可发布动态
-              <button class="cu-btn radius sm bg-orange ml-xs"
-                      @click="toBindSocialuni">绑定
-              </button>
-            </view>
-          </div>
-        </view>-->
+        <!--        <view v-if="isMine" class="py-sm q-solid-bottom">
+                  <div class="row-col-center">
+                    <image class="size20px mr-xs"
+                           mode="aspectFit"
+                           :src="require('socialuni/static/img/socialuni_logo.jpg')"
+                    />
+                    社交联盟：
+                    <view v-if="userProp.bindSocialuni">
+                      {{ userProp.socialuniNickname }}
+                      <view class="ml-10 sm cu-tag bg-white bd-gray radius">
+                        已绑定
+                      </view>
+                    </view>
+                    <view v-else>
+                      绑定后可发布动态
+                      <button class="cu-btn radius sm bg-orange ml-xs"
+                              @click="toBindSocialuni">绑定
+                      </button>
+                    </view>
+                  </div>
+                </view>-->
         <view v-if="isMine" class="py-sm q-solid-bottom">
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
