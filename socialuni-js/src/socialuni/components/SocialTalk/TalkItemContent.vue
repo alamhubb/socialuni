@@ -50,7 +50,7 @@
     <view v-if="talk.tags&&talk.tags.length && !talk.globalTop || talk.globalTop===1" class="card-text-row grid"
           @click="toTalkDetailVue">
       <view v-for="tag in talk.tags" :key="tag.id"
-            class="q-tag-theme">
+            class="q-tag-theme mt-sm">
           #{{ tag.name }}
       </view>
     </view>
