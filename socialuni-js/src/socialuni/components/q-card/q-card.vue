@@ -1,5 +1,5 @@
 <template>
-    <view class="q-card">
+    <view class="flex-col box bg-default">
         <slot></slot>
     </view>
 </template>

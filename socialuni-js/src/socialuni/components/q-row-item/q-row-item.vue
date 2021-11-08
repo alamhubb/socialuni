@@ -1,6 +1,6 @@
 <template>
 <!--  可点击的行-->
-  <view class="q-box-between bb bg-active" @click="click">
+  <view class="q-box-between bb bg-click" @click="click">
     <slot></slot>
   </view>
 </template>

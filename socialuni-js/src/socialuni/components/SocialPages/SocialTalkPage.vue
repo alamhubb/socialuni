@@ -56,7 +56,7 @@
 
 
       <div>
-        <swiper circular class="h85 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
+        <swiper circular class="h90 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
           <swiper-item class="bd-radius">
             <div class="h100p w100p flex-col flex-none bg-default bd-radius pd-sm">
               <div class="row-col-center flex-none">
@@ -69,9 +69,7 @@
                   </div>
                 </div>
               </div>
-
             </div>
-
           </swiper-item>
           <swiper-item class="bd-radius">
             <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
