@@ -1,7 +1,10 @@
 <template>
   <picker mode="selector" class="w100p" :value="pickerItemIndex" :range="list" :range-key="labelName" @change="change">
     <div class="row-col-center w100p">
-      <div class="flex-1">{{ pickerItemLabel }}</div>
+      <div class="flex-1">
+        <span v-if="pickerItemLabel===null" class="color-tip">请选择</span>
+        <span v-else>{{ pickerItemLabel }}</span>
+      </div>
       <q-icon class="mr-sm text-gray row-all-center flex-none color-sub" icon="mdi-chevron-down"
               size="24"></q-icon>
     </div>
