@@ -5,10 +5,10 @@
         <span v-if="pickerItemLabel===null" class="color-tip">请选择</span>
         <span v-else>{{ pickerItemLabel }}</span>
       </div>
-      <q-icon v-if="pickerItemLabel!==null" class="mr-sm text-gray row-all-center flex-none color-sub"
+      <q-icon v-if="pickerItemLabel!==null" class="mr-sm row-all-center flex-none color-sub"
               icon="mdi-close-circle-outline"
               size="18" @click.native.stop="clearValue"></q-icon>
-      <q-icon class="mr-sm text-gray row-all-center flex-none color-sub" icon="mdi-chevron-down"
+      <q-icon class="mr-sm row-all-center flex-none color-sub" icon="mdi-chevron-down"
               size="24"></q-icon>
     </div>
   </picker>
