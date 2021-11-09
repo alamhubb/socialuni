@@ -15,7 +15,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator'
-import QMask from '@/socialuni/components/q-mask/q-mask.vue'
+import QMask from '@/socialuni/components/QMask/QMask.vue'
 
   /*
   显示出来已经选了的城市，给她画上钩

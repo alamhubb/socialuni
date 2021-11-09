@@ -13,8 +13,7 @@
         <view class="text-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
       </view>
     </div>
-
-    <q-row-line class="mt-sm">
+    <div class="row-col-center px bg-white mt-sm">
       <view class="font-bold">
         当前选择：
       </view>
@@ -49,7 +48,7 @@
           - {{ district.districtName }}
         </view>
       </view>
-    </q-row-line>
+    </div>
 
     <view class="mt-sm h360" v-if="districts && districts.length">
       <q-picker ref="citySelect" class="bg-white" v-model="bottomDistrict"
@@ -64,9 +63,8 @@ import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
 import Alert from '../utils/Alert'
-import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
-import QRowLine from '@/socialuni/components/q-row-line/q-row-line.vue'
-import QPicker from '@/socialuni/components/q-picker/q-picker.vue'
+import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
+import QPicker from '@/socialuni/components/QPicker/QPicker.vue'
 @Component({
   components: { QPicker, QRowLine, QIcon }
 })

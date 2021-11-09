@@ -29,12 +29,12 @@
       </view>
     </view>
     <view v-else class="flex-col flex-1 overflow-hidden">
-      <q-card class="solid-bottom">
-        <q-card-row>
+      <div class="box solid-bottom">
+        <div class="flex-row">
           <text class="cuIcon-title text-green"></text>
           <text class="text-md font-bold">历史话题</text>
-        </q-card-row>
-        <q-card-grid>
+        </div>
+        <div class="row-grid">
           <template v-if="historyTags.length">
             <view v-for="tag in historyTags"
                   class="ml-xs mt-sm q-tag-theme lg round"
@@ -46,8 +46,8 @@
           <view v-else class="pl-sm mt-sm text-md text-gray">
             空
           </view>
-        </q-card-grid>
-      </q-card>
+        </div>
+      </div>
 
       <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
         <template #leftRow="{item,index,current}">
@@ -94,25 +94,19 @@ import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator
 
 import TagVO from '../../model/tag/TagVO'
 import TagTypeVO from '../../model/tag/TagTypeVO'
-import QRowItem from '../q-row-item/q-row-item.vue'
-import QIcon from '../q-icon/q-icon.vue'
+import QRowItem from '../QRowItem/QRowItem.vue'
+import QIcon from '../QIcon/QIcon.vue'
 import { namespace } from 'vuex-class'
 import TagUtil from '../../utils/TagUtil'
-import QNavbar from '../q-navbar/q-navbar.vue'
-import QSearch from '../q-search/q-search.vue'
-import QCard from '../q-card/q-card.vue'
-import QCardRow from '../q-card-row/q-card-row.vue'
-import QCardGrid from '../q-card-grid/q-card-grid.vue'
-import QSidebar from '../q-sidebar/q-sidebar.vue'
+import QNavbar from '../QNavbar/QNavbar.vue'
+import QSearch from '../QSearch/QSearch.vue'
+import QSidebar from '../QSidebar/QSidebar.vue'
 import { socialTagStore } from '../../store'
 
 
 @Component({
   components: {
     QSidebar,
-    QCardGrid,
-    QCardRow,
-    QCard,
     QSearch,
     QNavbar,
     QRowItem,

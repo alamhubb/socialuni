@@ -360,12 +360,12 @@ import {
   socialUserModule,
   socialUserStore
 } from '../../store'
-import QRowItem from '../q-row-item/q-row-item.vue'
+import QRowItem from '../QRowItem/QRowItem.vue'
 import Alert from '../../utils/Alert'
 import Toast from '../../utils/Toast'
 import RouterUtil from '../../utils/RouterUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'

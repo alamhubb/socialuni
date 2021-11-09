@@ -128,13 +128,13 @@ import {
   socialUserStore
 } from '../../store'
 import TalkOperate from './talkOperate.vue'
-import QTab from '../q-tab/q-tab.vue'
-import QTabs from '../q-tabs/q-tabs.vue'
-import QIcon from '../q-icon/q-icon.vue'
+import QTab from '../QTab/QTab.vue'
+import QTabs from '../QTabs/QTabs.vue'
+import QIcon from '../QIcon/QIcon.vue'
 import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
-import QPullRefresh from '@/socialuni/components/q-pull-refresh/QPullRefresh.vue'
+import QPullRefresh from '@/socialuni/components/QPullRefresh/QPullRefresh.vue'
 
 
 // todo 后台可控制是否显示轮播图

@@ -82,7 +82,7 @@ import JsonUtils from '../../utils/JsonUtil'
 import { socialTalkModule, socialUserStore } from '../../store'
 import MsgUtil from '../../utils/MsgUtil'
 import RouterUtil from '../../utils/RouterUtil'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../QIcon/QIcon.vue'
 import Toast from '../../utils/Toast'
 
 @Component({

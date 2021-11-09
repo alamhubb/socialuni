@@ -10,6 +10,8 @@ public class CircleCreateQO {
     @NotBlank
     private String circleName;
     private String circleDesc;
+    @NotBlank
+    private Integer tagTypeId;
     //圈子的头像，先不支持
 //    private String circleAvatar;
 

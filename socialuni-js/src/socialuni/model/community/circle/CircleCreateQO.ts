@@ -1,4 +1,5 @@
 export default class CircleCreateQO {
-  circleName: string
-  circleDesc: string
+  circleName: string = null
+  circleDesc: string = null
+  tagTypeId: number = null
 }

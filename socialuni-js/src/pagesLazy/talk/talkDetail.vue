@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
+import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import TalkItem from '@/socialuni/components/SocialTalk/TalkItem.vue'
 import TalkOperate from '@/socialuni/components/SocialTalk/talkOperate.vue'

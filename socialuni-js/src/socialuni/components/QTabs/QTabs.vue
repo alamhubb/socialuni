@@ -13,8 +13,8 @@
       </div>
     </div>
     <div class="position-absolute" :style="[tabSlideStyle]">
-      <div class="position-absolute bd-radius"
-           :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'bg-white':'bg-theme t28']">
+      <div class="position-absolute"
+           :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'bg-white bd-radius':'bg-theme t28 bd-radius-20']">
 
       </div>
     </div>

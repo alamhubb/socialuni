@@ -37,7 +37,7 @@
 </template>
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
-import QRowItem from '../q-row-item/q-row-item.vue'
+import QRowItem from '../QRowItem/QRowItem.vue'
 import CommonUtil from '../../utils/CommonUtil'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef

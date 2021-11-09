@@ -34,7 +34,7 @@
           <text class="cuIcon-title"></text>
           <text class="font-md font-bold">历史话题</text>
         </div>
-        <q-card-grid>
+        <div class="row-grid">
           <template v-if="historyTags.length">
             <view v-for="tag in historyTags"
                   class="q-tag-theme"
@@ -46,7 +46,7 @@
           <view v-else class="pl-sm text-md text-gray">
             空
           </view>
-        </q-card-grid>
+        </div>
       </q-card>
 
       <div class="box-sm">
@@ -177,16 +177,13 @@ import { socialTagStore } from '@/socialuni/store'
 import TagVO from '@/socialuni/model/tag/TagVO'
 import TagTypeVO from '@/socialuni/model/tag/TagTypeVO'
 import TagUtil from '@/socialuni/utils/TagUtil'
-import QNavbar from '@/socialuni/components/q-navbar/q-navbar.vue'
-import QSearch from '@/socialuni/components/q-search/q-search.vue'
-import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
-import QCard from '@/socialuni/components/q-card/q-card.vue'
-import QCardRow from '@/socialuni/components/q-card-row/q-card-row.vue'
-import QCardGrid from '@/socialuni/components/q-card-grid/q-card-grid.vue'
-import QSlider from '@/socialuni/components/q-slider/q-slider.vue'
-import QSidebar from '@/socialuni/components/q-sidebar/q-sidebar.vue'
-import QRowItem from '@/socialuni/components/q-row-item/q-row-item.vue'
-import QTabs from '@/socialuni/components/q-tabs/q-tabs.vue'
+import QNavbar from '@/socialuni/components/QNavbar/QNavbar.vue'
+import QSearch from '@/socialuni/components/QSearch/QSearch.vue'
+import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
+import QSlider from '@/socialuni/components/QSlider/QSlider.vue'
+import QSidebar from '@/socialuni/components/QSidebar/QSidebar.vue'
+import QRowItem from '@/socialuni/components/QRowItem/QRowItem.vue'
+import QTabs from '@/socialuni/components/QTabs/QTabs.vue'
 
 
 @Component({
@@ -195,9 +192,6 @@ import QTabs from '@/socialuni/components/q-tabs/q-tabs.vue'
     QRowItem,
     QSidebar,
     QSlider,
-    QCardGrid,
-    QCardRow,
-    QCard,
     QIcon,
     QSearch,
     QNavbar

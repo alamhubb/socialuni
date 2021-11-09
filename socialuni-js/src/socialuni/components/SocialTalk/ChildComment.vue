@@ -41,7 +41,7 @@ import PageUtil from '../../utils/PageUtil'
 import { socialTalkModule } from '../../store'
 import JsonUtils from '../../utils/JsonUtil'
 import RouterUtil from '../../utils/RouterUtil'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../QIcon/QIcon.vue'
 
   @Component({
     components: { QIcon }
