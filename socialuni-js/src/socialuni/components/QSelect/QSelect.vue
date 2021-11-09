@@ -5,6 +5,9 @@
         <span v-if="pickerItemLabel===null" class="color-tip">请选择</span>
         <span v-else>{{ pickerItemLabel }}</span>
       </div>
+      <q-icon v-if="pickerItemLabel!==null" class="mr-sm text-gray row-all-center flex-none color-sub"
+              icon="mdi-close-circle-outline"
+              size="18" @click.native.stop="clearValue"></q-icon>
       <q-icon class="mr-sm text-gray row-all-center flex-none color-sub" icon="mdi-chevron-down"
               size="24"></q-icon>
     </div>
@@ -39,9 +42,17 @@ export default class QSelect extends Vue {
     return null
   }
 
+  clearValue () {
+    this.change({ detail: { value: null } })
+  }
+
   @Emit()
   change ({ detail }: { detail: { value: number } }) {
-    return this.list[detail.value][this.valueName]
+    const index = detail.value
+    if (index === null) {
+      return null
+    }
+    return this.list[index][this.valueName]
   }
 }
 </script>

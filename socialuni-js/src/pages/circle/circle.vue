@@ -7,7 +7,7 @@
       <u-form-item label="圈子描述：">
         <u-input type="textarea" height="140" v-model="circleForm.circleDesc"/>
       </u-form-item>
-      <u-form-item label="圈子分类：">
+      <u-form-item label="圈子分类："  prop="tagTypeId">
         <q-select v-model="circleForm.tagTypeId" :list="selectTagTypes" label-name="name" value-name="id"></q-select>
 
         <!--        <u-input type="select" :select-open="selectShow" :value="circleForm.tagTypeId"
@@ -80,6 +80,13 @@ export default class CirclePage extends Vue {
       {
         required: true,
         message: '请输入圈子名称',
+        trigger: 'blur'
+      }
+    ],
+    tagTypeId: [
+      {
+        required: true,
+        message: '请选择圈子分类',
         trigger: 'blur'
       }
     ]
