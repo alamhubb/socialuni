@@ -1,14 +1,17 @@
 <template>
-  <social-mine-detail-page class="h100p"></social-mine-detail-page>
+  <mine-detail></mine-detail>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SocialMineDetailPage from 'socialuni/components/SocialPages/SocialMineDetailPage.vue'
+import MineDetail from '@/pages/user/MineDetail.vue'
 
 @Component({
-  components: { SocialMineDetailPage }
+  components: { MineDetail }
 })
 export default class MinePage extends Vue {
+  created () {
+    console.log(this)
+  }
 }
 </script>
