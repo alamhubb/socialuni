@@ -10,8 +10,8 @@ spring:
 #    active: localprod
   jpa:
     database: MYSQL
-#    show-sql: true
     show-sql: false
+#    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
