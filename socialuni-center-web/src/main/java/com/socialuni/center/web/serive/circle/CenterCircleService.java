@@ -12,6 +12,7 @@ import com.socialuni.social.model.model.RO.community.tag.TagRO;
 import com.socialuni.social.sdk.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.repository.community.SocialCircleRepository;
+import com.socialuni.social.sdk.store.SocialCircleRedis;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ import java.util.List;
 public class CenterCircleService {
     @Resource
     private SocialCircleRepository socialCircleRepository;
+    @Resource
+    private SocialCircleRedis SocialCircleRedis;
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
@@ -32,10 +35,7 @@ public class CenterCircleService {
 
 
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
-        List<SocialCircleDO> circles = socialCircleRepository.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
-
-        List<SocialCircleRO> circleROS = SocialCircleROFactory.circleDOToROS(circles);
-        return ResultRO.success(circleROS);
+        return ResultRO.success(SocialCircleRedis.getHotCirclesRedis(GenderType.all));
     }
 
 }

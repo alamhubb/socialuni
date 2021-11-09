@@ -18,4 +18,9 @@ public interface SocialCircleRepository extends JpaRepository<SocialCircleDO, In
     //查询热门前10tag
     List<SocialCircleDO> findByStatusOrderByCountDesc(String status, Pageable pageable);
 
+    List<SocialCircleDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
+
+    //获取tagTYpe所有子tag
+    List<SocialCircleDO> findByTagTypeIdAndStatusOrderByCountDesc(Integer tagTypeId, String status);
+    List<SocialCircleDO> findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(Integer tagTypeId, String status, String gender);
 }

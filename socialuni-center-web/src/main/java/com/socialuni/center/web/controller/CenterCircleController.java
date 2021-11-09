@@ -34,6 +34,6 @@ public class CenterCircleController implements SocialuniCircleAPI {
 
     @Override
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
-        return null;
+        return centerCircleService.queryHotCircles();
     }
 }

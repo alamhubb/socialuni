@@ -13,6 +13,7 @@ import SocialModuleName from './SocialModuleName'
 import { Store } from 'vuex'
 import SocialRouterModule from '@/socialuni/store/SocialRouterModule'
 import SocialOAuthModule from '@/socialuni/store/SocialOAuthModule'
+import SocialCircleModule from '@/socialuni/store/SocialCircleModule'
 
 export let socialAppModule: SocialAppModule
 export let socialTalkModule: SocialTalkModule
@@ -26,6 +27,7 @@ export let socialTagModule: SocialTagModule
 export let socialLocationModule: SocialLocationModule
 export let socialRouterModule: SocialRouterModule
 export let socialOAuthModule: SocialOAuthModule
+export let socialCircleModule: SocialCircleModule
 
 export function registerSocialStore (store: Store<any>) {
   socialAppModule = new SocialAppModule({
@@ -76,9 +78,14 @@ export function registerSocialStore (store: Store<any>) {
     store,
     name: SocialModuleName.socialOAuthModule
   })
+  socialCircleModule = new SocialCircleModule({
+    store,
+    name: SocialModuleName.socialCircleModule
+  })
 }
 
-export const socialOAuthStore = namespace(SocialModuleName.socialOAuthModule)
+export const socialCircleStore = namespace(SocialModuleName.socialOAuthModule)
+export const socialOAuthStore = namespace(SocialModuleName.socialCircleModule)
 export const socialAppStore = namespace(SocialModuleName.socialAppModule)
 export const socialTalkStore = namespace(SocialModuleName.socialTalkModule)
 export const socialUserStore = namespace(SocialModuleName.socialUserModule)

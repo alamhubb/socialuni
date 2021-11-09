@@ -1,21 +1,23 @@
 <template>
-  <view class="row-nowrap position-relative overflow-x-auto">
-    <div class="fixed-index row-all-center" :class="[barUuid,isBar?'flex-1':'flex-none']"
-         v-for="(tab,index) in tabs" @click="input(index)"
-         :key="index">
-      <div :class="[uuid,index===value?activeClass:unActiveClass]">
-        <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
+  <scroll-view :scroll-x="true" class="tabUuid overflow-hidden" :class="[uuid]" :scroll-left="leftBoxScrollLeft">
+    <div class="row-nowrap position-relative">
+      <div class="barUuid fixed-index row-all-center" :class="[uuid,isBar?'flex-1':'flex-none']"
+           v-for="(tab,index) in tabs" @click="input(index)"
+           :key="index">
+        <div class="lineUuid" :class="[uuid,index===value?activeClass:unActiveClass]">
+          <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
-        </slot>
+          </slot>
+        </div>
+        <div hover-class="uni-list-cell-hover" class="col-center" :class="[index===value?activeClass:unActiveClass]">
+          <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
+        </div>
       </div>
-      <div hover-class="uni-list-cell-hover" class="col-center" :class="[index===value?activeClass:unActiveClass]">
-        <slot name="icon" v-bind:tab="tab" v-bind:index="index" v-bind:value="value"></slot>
-      </div>
-    </div>
-    <div class="position-absolute" :style="[tabSlideStyle]">
-      <div class="position-absolute"
-           :style="{width:barWidth+'px',height:barHeight+'px'}" :class="[isBar?'bg-white bd-radius':'bg-theme t28 bd-radius-20']">
-
+      <div class="position-absolute" :style="[tabSlideStyle]">
+        <div class="position-absolute"
+             :style="{width:barWidth+'px',height:barHeight+'px'}"
+             :class="[isBar?'bg-white bd-radius':'bg-theme t28 bd-radius-20']">
+        </div>
       </div>
     </div>
     <!--    <view class="row-nowrap flex-1 mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
@@ -28,12 +30,14 @@
         </view>
     &lt;!&ndash;     :style="[tabSlideStyle]"&ndash;&gt;
        -->
-  </view>
+  </scroll-view>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import CommonUtil from '../../utils/CommonUtil'
+import NodesRef = UniApp.NodesRef
+import SelectorQuery = UniApp.SelectorQuery
 
 @Component
 export default class QTabs extends Vue {
@@ -47,16 +51,25 @@ export default class QTabs extends Vue {
     return this.type === 'bar'
   }
 
+  componentWeight = 0
+  leftBoxScrollLeft = 0
+
   get isLine () {
     return this.type === 'line'
   }
 
   //唯一id值
-  barUuid: string = CommonUtil.getClassUUID()
   uuid: string = CommonUtil.getClassUUID()
 
   @Model('input') readonly value: number
   @Prop({ default: [] }) readonly tabs: any[]
+
+  @Watch('value')
+  valueWatch (val, oldVal) {
+    if (val !== oldVal) {
+      this.leftBoxScrollLeft = this.tabScrollLefts[val]
+    }
+  }
 
   // @Prop({ default: '50' }) readonly barWidth: string
   get activeClass () {
@@ -75,7 +88,8 @@ export default class QTabs extends Vue {
     }
   }
 
-  tabItemLefts: number[] = [0]
+  tabItemLefts: number[] = []
+  tabScrollLefts: number[] = []
   barWidth: number = 0
   barHeight: number = 0
 
@@ -103,7 +117,24 @@ export default class QTabs extends Vue {
   // 设置一个init方法，方便多处调用
   init () {
     //等待元素渲染
+    this.initComponentsWeight()
     this.getTabRect()
+  }
+
+  //计算组建高度
+  initComponentsWeight () {
+    //获取整个组件的高度
+    const query: SelectorQuery = uni.createSelectorQuery().in(this)
+    const nodeBox: NodesRef = query.select('.' + this.uuid + '.tabUuid')
+    nodeBox.boundingClientRect((res) => {
+      if (res) {
+        this.componentWeight = res.width
+      } else {
+        CommonUtil.delayTime(100).then(() => {
+          this.initComponentsWeight()
+        })
+      }
+    }).exec()
   }
 
   // 查询tab的布局信息
@@ -115,12 +146,12 @@ export default class QTabs extends Vue {
     // 只要size和rect两个参数
     let uuid
     if (this.isBar) {
-      uuid = this.barUuid
+      uuid = '.barUuid'
     } else {
-      uuid = this.uuid
+      uuid = '.lineUuid'
     }
 
-    query.selectAll(`.${uuid}`).boundingClientRect((res: any) => {
+    query.selectAll(`.${this.uuid}${uuid}`).boundingClientRect((res: any) => {
       this.tabItemLefts = []
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
@@ -138,6 +169,8 @@ export default class QTabs extends Vue {
           } else {
             //自己宽度一般，
             this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.barWidth) / 2) - res[0].left)
+            const left = item.left + item.width / 2 - this.componentWeight / 2 - res[0].left
+            this.tabScrollLefts.push(left)
             // this.tabItemLefts.push(item.left + item.width / 2 - (Number(this.tabWidth) / 2) / 2 - res[0].left)
           }
         })
