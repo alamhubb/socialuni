@@ -17,11 +17,11 @@
 
       <u-popup v-model="showMoreList" mode="right" :border-radius="15">
         <view class="w65vw flex-col py-xl mt-xl h100r">
-          <q-row>
+          <div class="flex-row">
             <view class="row-center mt-xl font-bold text-lg w100r">
               清池 app
             </view>
-          </q-row>
+          </div>
           <!--<q-row-item>
             <navigator :url="messageSettingUrl" class="row-col-center flex-auto">
               <view class="row-col-center flex-auto">
@@ -70,7 +70,7 @@
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
-          <q-row>
+          <div class="flex-row">
             <view class="w100p row-grid">
               <navigator :url="userAgreementUrl" class="text-blue">
                 《用户协议》
@@ -82,12 +82,12 @@
                 《儿童个人信息保护规则及监护人须知》
               </navigator>
             </view>
-          </q-row>
-          <q-row class="flex-auto col-end">
+          </div>
+          <div class="flex-row flex-auto col-end">
             <view class="row-center font-bold pb-xl text-lg w100r">
               <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>
             </view>
-          </q-row>
+          </div>
         </view>
       </u-popup>
       <msg-input>
@@ -109,19 +109,17 @@ import UniUtil from '@/socialuni/utils/UniUtil'
 import { oAuthModule } from '@/store'
 import OpenDataAPI from '@/socialuni/api/OpenDataAPI'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import QNavbar from '@/socialuni/components/q-navbar/q-navbar.vue'
-import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
 import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
-import QRow from '@/socialuni/components/q-row/q-row.vue'
-import QRowItem from '@/socialuni/components/q-row-item/q-row-item.vue'
+import QRowItem from '@/socialuni/components/QRowItem/QRowItem.vue'
+import QNavbar from '@/socialuni/components/QNavbar/QNavbar.vue'
+import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
 
 @Component({
   components: {
-    QRowItem,
-    QRow,
-    UserInfo,
     QIcon,
     QNavbar,
+    QRowItem,
+    UserInfo,
     QcLogin,
     MsgInput
   }
