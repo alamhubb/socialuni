@@ -6,6 +6,7 @@ import com.socialuni.center.web.serive.circle.CenterCircleService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
 import com.socialuni.social.model.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.social.model.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
@@ -27,7 +28,12 @@ public class CenterCircleController implements SocialuniCircleAPI {
     CenterCircleService centerCircleService;
 
     @Override
-    public ResultRO<SocialCircleDO> createCircle(CircleCreateQO circleCreateQO) {
+    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
         return centerCircleService.createCircle(circleCreateQO);
+    }
+
+    @Override
+    public ResultRO<List<SocialCircleRO>> queryHotCircles() {
+        return null;
     }
 }

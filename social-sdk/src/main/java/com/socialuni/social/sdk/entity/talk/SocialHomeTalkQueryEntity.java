@@ -6,7 +6,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.constant.CommonConst;
-import com.socialuni.social.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.store.SocialHomeTalkQueryStore;
 import org.springframework.stereotype.Component;
 

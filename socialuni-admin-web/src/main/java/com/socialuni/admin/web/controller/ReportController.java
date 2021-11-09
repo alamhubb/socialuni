@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.KeywordsRepository;
 import com.socialuni.social.sdk.repository.NotifyRepository;
 import com.socialuni.social.sdk.repository.ReportRepository;
-import com.socialuni.social.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.service.KeywordsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

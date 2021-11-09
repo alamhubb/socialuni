@@ -3,8 +3,8 @@ package com.socialuni.social.sdk.manage;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.factory.SocialTagDOFactory;
-import com.socialuni.social.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.factory.community.SocialTagDOFactory;
+import com.socialuni.social.sdk.repository.community.TagRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

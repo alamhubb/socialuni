@@ -18,7 +18,7 @@
         当前选择：
       </view>
       <view v-if="bottomDistrict" class="row-col-center">
-        <q-icon v-if="bottomDistrict.isLocation" class="mr-mn" icon="map-fill" size="16" />
+        <q-icon v-if="bottomDistrict.isLocation" class="mr-mn" icon="map-fill" size="16"/>
         <view class="font-bold" v-if="bottomDistrict.provinceName">
           {{ bottomDistrict.provinceName }}
         </view>
@@ -65,8 +65,12 @@ import LocationUtil from '../utils/LocationUtil'
 import Alert from '../utils/Alert'
 import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
 import QPicker from '@/socialuni/components/QPicker/QPicker.vue'
+
 @Component({
-  components: { QPicker, QRowLine, QIcon }
+  components: {
+    QPicker,
+    QIcon
+  }
 })
 export default class CityPicker extends Vue {
   public $refs!: {

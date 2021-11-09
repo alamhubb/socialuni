@@ -1,7 +1,8 @@
-package com.socialuni.social.sdk.factory;
+package com.socialuni.social.sdk.factory.community;
 
 import com.socialuni.social.entity.model.DO.tag.TagTypeDO;
 import com.socialuni.social.model.model.RO.community.tag.TagTypeRO;
+import com.socialuni.social.sdk.factory.ListConvertUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

@@ -17,14 +17,13 @@ import com.socialuni.social.sdk.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.factory.TalkImgDOFactory;
 import com.socialuni.social.sdk.manage.talk.SocialTalkCreateManage;
 import com.socialuni.social.sdk.model.TalkAddValidateRO;
-import com.socialuni.social.sdk.repository.TagRepository;
-import com.socialuni.social.sdk.repository.TalkImgRepository;
-import com.socialuni.social.sdk.repository.TalkRepository;
-import com.socialuni.social.sdk.repository.TalkTagRepository;
+import com.socialuni.social.sdk.repository.community.TagRepository;
+import com.socialuni.social.sdk.repository.community.TalkImgRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkTagRepository;
 import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.TalkRedis;
-import com.socialuni.social.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -8,6 +8,7 @@ import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.utils.TalkRedis;
 import org.springframework.stereotype.Service;
 

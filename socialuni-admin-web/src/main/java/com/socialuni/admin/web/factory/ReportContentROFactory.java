@@ -8,7 +8,7 @@ import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
-import com.socialuni.social.sdk.factory.SocialTagROFactory;
+import com.socialuni.social.sdk.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.factory.SocialTalkImgROFactory;
 import com.socialuni.social.sdk.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.CommentUtils;

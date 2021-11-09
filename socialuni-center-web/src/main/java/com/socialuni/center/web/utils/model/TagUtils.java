@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils.model;
 
 import com.socialuni.social.entity.model.DO.tag.TagDO;
-import com.socialuni.social.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.repository.community.TagRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

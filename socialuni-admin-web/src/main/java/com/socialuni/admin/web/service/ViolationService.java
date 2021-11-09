@@ -13,6 +13,7 @@ import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.domain.BaseModelService;
 import com.socialuni.social.sdk.entity.user.SocialUserViolationEntity;
 import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.service.BaseModelUtils;
 import com.socialuni.social.sdk.service.KeywordsService;
 import com.socialuni.social.sdk.service.ReportService;

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.repository;
+package com.socialuni.social.sdk.repository.community;
 
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import org.springframework.cache.annotation.Cacheable;

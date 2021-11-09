@@ -5,7 +5,7 @@ import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.mapper.TalkMapper;
 import com.socialuni.social.sdk.redis.redisKey.RedisKeysConst;
 import com.socialuni.social.sdk.redis.RedisKeysUtil;
-import com.socialuni.social.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

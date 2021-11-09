@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.repository;
+package com.socialuni.social.sdk.repository.community;
 
 import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
@@ -14,5 +14,8 @@ import java.util.List;
 
 
 public interface SocialCircleRepository extends JpaRepository<SocialCircleDO, Integer> {
+
+    //查询热门前10tag
+    List<SocialCircleDO> findByStatusOrderByCountDesc(String status, Pageable pageable);
 
 }

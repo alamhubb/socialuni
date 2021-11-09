@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.factory;
+package com.socialuni.social.sdk.factory.community;
 
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.GenderType;

@@ -4,7 +4,7 @@ import com.socialuni.center.web.CenterWebApplication;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.sdk.mapper.TalkMapper;
 import com.socialuni.social.sdk.mapper.TalkTagMapper;
-import com.socialuni.social.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.store.TalkQueryStore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

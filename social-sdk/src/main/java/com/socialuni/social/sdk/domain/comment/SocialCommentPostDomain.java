@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.domain.report.ReportDomain;
 import com.socialuni.social.sdk.entity.comment.SocialPostCommentEntity;
 import com.socialuni.social.sdk.factory.SocialCommentROFactory;
 import com.socialuni.social.sdk.repository.CommentRepository;
-import com.socialuni.social.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.service.comment.CommentAddLineTransfer;
 import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import lombok.extern.slf4j.Slf4j;
