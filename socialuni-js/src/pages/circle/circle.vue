@@ -30,7 +30,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import CircleCreateQO from '@/socialuni/model/community/circle/CircleCreateQO'
 import CircleAPI from '@/socialuni/api/CircleAPI'
 import { socialTagStore } from '@/socialuni/store'
-import TagTypeVO from '@/socialuni/model/tag/TagTypeVO'
+import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
 import QSelect from '@/socialuni/components/QSelect/QSelect.vue'
 

@@ -31,13 +31,11 @@ public class CenterCircleService {
     }
 
 
-    /*public ResultRO<List<SocialCircleRO>> queryHotCircles(); {
+    public ResultRO<List<SocialCircleRO>> queryHotCircles() {
         List<SocialCircleDO> circles = socialCircleRepository.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
 
-        List<SocialCircleRO> circleROS =  SocialCircleROFactory.circleDOToROS(circles);
-        SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevId(), CenterUserUtil.getMineUser());
-        circleDO = socialCircleRepository.save(circleDO);
-        return new ResultRO<>(circleDO);
-    }*/
+        List<SocialCircleRO> circleROS = SocialCircleROFactory.circleDOToROS(circles);
+        return ResultRO.success(circleROS);
+    }
 
 }

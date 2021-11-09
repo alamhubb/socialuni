@@ -92,8 +92,8 @@
 <script lang="ts">
 import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator'
 
-import TagVO from '../../model/tag/TagVO'
-import TagTypeVO from '../../model/tag/TagTypeVO'
+import TagVO from '../../model/community/tag/TagVO'
+import TagTypeVO from '../../model/community/tag/TagTypeVO'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import QIcon from '../QIcon/QIcon.vue'
 import { namespace } from 'vuex-class'

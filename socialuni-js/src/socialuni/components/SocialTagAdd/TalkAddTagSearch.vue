@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator'
-import TagVO from '../../model/tag/TagVO'
+import TagVO from '../../model/community/tag/TagVO'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../QIcon/QIcon.vue'
 import { socialUserStore } from '../../store'

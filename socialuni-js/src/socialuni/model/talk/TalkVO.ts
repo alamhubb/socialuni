@@ -1,7 +1,7 @@
 import CenterUserDetailRO from '../social/CenterUserDetailRO'
 import CommentVO from '../comment/CommentVO'
 import DistrictVO from '../DistrictVO'
-import TagVO from '../tag/TagVO'
+import TagVO from '../community/tag/TagVO'
 import ImgFileVO from '../ImgFileVO'
 
 export default class TalkVO {

@@ -1,6 +1,6 @@
 import { VuexModule, Module, Action } from 'vuex-class-modules'
-import TagVO from '../model/tag/TagVO'
-import TagTypeVO from '../model/tag/TagTypeVO'
+import TagVO from '../model/community/tag/TagVO'
+import TagTypeVO from '../model/community/tag/TagTypeVO'
 import TagAPI from '../api/TagAPI'
 import SocialAppModule from './SocialAppModule'
 

@@ -174,8 +174,8 @@ import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator
 
 
 import { socialTagStore } from '@/socialuni/store'
-import TagVO from '@/socialuni/model/tag/TagVO'
-import TagTypeVO from '@/socialuni/model/tag/TagTypeVO'
+import TagVO from '@/socialuni/model/community/tag/TagVO'
+import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import TagUtil from '@/socialuni/utils/TagUtil'
 import QNavbar from '@/socialuni/components/QNavbar/QNavbar.vue'
 import QSearch from '@/socialuni/components/QSearch/QSearch.vue'
