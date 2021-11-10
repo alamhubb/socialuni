@@ -10,6 +10,7 @@ export default class UserService {
     TokenUtil.remove()
     socialUserModule.removeUser()
     WebsocketUtil.websocketClose()
+    chatModule.getChatsAction()
   }
 
   //获取通知列表
