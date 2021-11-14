@@ -56,11 +56,11 @@
         </div>
         <div>
           <div class="row-col-center mb-sm">
-            <q-tabs v-model="current" :tabs="['游戏','漫画','情感']"
+            <q-tabs v-model="circleCurrent" :tabs="circleTypes"
                     class="bd-radius pd-mn flex-1">
               <template #default="{tab}">
                 <div class="h30 px-xs row-all-center font-md">
-                  {{ tab }}
+                  {{ tab.name }}
                   <!--            费劲啊实力哈哈-->
                 </div>
               </template>
@@ -71,15 +71,15 @@
           </div>
 
           <div>
-            <swiper circular class="h90 bd-radius mb-sm" :current="current" @change="switchCircleTabValue">
-              <swiper-item class="bd-radius bg-white" v-for="item in 3">
+            <swiper circular class="h90 bd-radius mb-sm" :current="tagCurrent" @change="switchCircleTabValue">
+              <swiper-item class="bd-radius bg-white" v-for="circleType in circleTypes">
                 <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
                   <!--                        class="radius flex-none h100p"-->
                   <div class="row-nowrap overflow-hidden">
-                    <div v-for="(item,index) in tags" v-if="index<5"
+                    <div v-for="(circle,index) in circleType.circles" v-if="index<5"
                          class="col-row-center mx-xs overflow-hidden h70 flex-1">
-                      <img class="bd-round size50" :src="item.avatar"/>
-                      <div class="font-cut">{{ item.name }}</div>
+                      <img class="bd-round size50" :src="circle.avatar"/>
+                      <div class="font-cut">{{ circle.name }}</div>
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@
         </div>
         <div>
           <div class="row-col-center mb-sm">
-            <q-tabs v-model="current" :tabs="tagTypes"
+            <q-tabs v-model="tagCurrent" :tabs="tagTypes"
                     class="bd-radius pd-mn flex-1">
               <template #default="{tab}">
                 <div class="h30 px-xs row-all-center font-md">
@@ -111,7 +111,7 @@
           </div>
 
           <div>
-            <swiper circular class="h80 bd-radius mb-sm" :current="current" @change="switchCircleTabValue">
+            <swiper circular class="h80 bd-radius mb-sm" :current="tagCurrent" @change="switchCircleTabValue">
               <swiper-item class="bd-radius bg-white" v-for="tagType in tagTypes">
                 <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
                   <!--                        class="radius flex-none h100p"-->
@@ -170,10 +170,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 
 
-import { socialTagModule, socialTagStore } from '@/socialuni/store'
+import { socialCircleModule, socialCircleStore, socialTagStore } from '@/socialuni/store'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import TagUtil from '@/socialuni/utils/TagUtil'
@@ -184,6 +184,7 @@ import QSlider from '@/socialuni/components/QSlider/QSlider.vue'
 import QSidebar from '@/socialuni/components/QSidebar/QSidebar.vue'
 import QRowItem from '@/socialuni/components/QRowItem/QRowItem.vue'
 import QTabs from '@/socialuni/components/QTabs/QTabs.vue'
+import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 
 
 @Component({
@@ -206,18 +207,20 @@ export default class TagSearchPage extends Vue {
     default: false
   }) readonly isAdd: boolean
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
+  @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO[]
   // 输入内容查询时显示的列表tag
   // 进入页面只查询前20个，点击了输入内容才查询所有
   @socialTagStore.State('tags') readonly tags: TagVO []
 
-  current = 0
+  circleCurrent = 0
+  tagCurrent = 0
 
   searchContent = ''
   showSearch = false
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
   onLoad(){
-    socialTagModule.getTagTypesAction()
+    socialCircleModule.getCircleTypesAction()
   }
 
   get showTags (): TagVO[] {
@@ -259,7 +262,15 @@ export default class TagSearchPage extends Vue {
       current: number,
       source: number
     } = event.detail
-    this.current = detail.current
+    this.tagCurrent = detail.current
+  }
+
+  switchTagTabValue (event: { detail: any }) {
+    const detail: {
+      current: number,
+      source: number
+    } = event.detail
+    this.tagCurrent = detail.current
   }
 
   showSearchView () {

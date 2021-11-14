@@ -7,6 +7,7 @@ import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
 import com.socialuni.social.model.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.social.model.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.model.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
 import com.socialuni.social.sdk.factory.community.SocialCircleROFactory;
@@ -37,5 +38,10 @@ public class CenterCircleService {
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
         return ResultRO.success(SocialCircleRedis.getHotCirclesRedis(GenderType.all));
     }
+
+    public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
+        return ResultRO.success(SocialCircleRedis.getAllCircleTypesRedis(GenderType.all));
+    }
+
 
 }

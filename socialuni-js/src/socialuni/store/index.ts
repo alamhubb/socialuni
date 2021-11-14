@@ -84,8 +84,8 @@ export function registerSocialStore (store: Store<any>) {
   })
 }
 
-export const socialCircleStore = namespace(SocialModuleName.socialOAuthModule)
-export const socialOAuthStore = namespace(SocialModuleName.socialCircleModule)
+export const socialCircleStore = namespace(SocialModuleName.socialCircleModule)
+export const socialOAuthStore = namespace(SocialModuleName.socialOAuthModule)
 export const socialAppStore = namespace(SocialModuleName.socialAppModule)
 export const socialTalkStore = namespace(SocialModuleName.socialTalkModule)
 export const socialUserStore = namespace(SocialModuleName.socialUserModule)

@@ -3,6 +3,7 @@ package com.socialuni.api.feignAPI;
 
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.social.model.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.model.model.RO.community.circle.SocialCircleRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,5 +26,8 @@ public interface SocialuniCircleAPI {
 
     @PostMapping("queryHotCircles")
     ResultRO<List<SocialCircleRO>> queryHotCircles();
+
+    @PostMapping("queryCircleTypes")
+    public ResultRO<List<CircleTypeRO>> queryCircleTypes();
 }
 

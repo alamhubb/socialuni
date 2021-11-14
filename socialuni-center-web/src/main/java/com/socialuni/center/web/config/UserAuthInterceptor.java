@@ -114,6 +114,8 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                         || uri.contains("queryHomeSwipers")
                         //同步生产环境数据到开发
                         || uri.contains("queryDevAccount")
+                        || uri.contains("queryHotCircles")
+                        || uri.contains("queryCircleTypes")
                         || uri.contains("admin/syncProdDevAccount")
                         //mock授权登录
                         || uri.contains("mockOAuthUserInfo")

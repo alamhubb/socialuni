@@ -2,6 +2,7 @@ import socialHttp from '../plugins/http/socialHttp'
 import CircleCreateQO from '@/socialuni/model/community/circle/CircleCreateQO'
 import Toast from '@/socialuni/utils/Toast'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
+import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 
 
 export default class CircleAPI {
@@ -14,5 +15,9 @@ export default class CircleAPI {
 
   static queryHotCirclesAPI () {
     return socialHttp.post<SocialCircleRO []>('circle/queryHotCircles')
+  }
+
+  static queryCircleTypesAPI () {
+    return socialHttp.post<CircleTypeRO []>('circle/queryCircleTypes')
   }
 }
