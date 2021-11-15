@@ -71,7 +71,7 @@
           </div>
 
           <div>
-            <swiper circular class="h90 bd-radius mb-sm" :current="tagCurrent" @change="switchCircleTabValue">
+            <swiper circular class="h90 bd-radius mb-sm" :current="circleCurrent" @change="switchCircleTabValue">
               <swiper-item class="bd-radius bg-white" v-for="circleType in circleTypes">
                 <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
                   <!--                        class="radius flex-none h100p"-->
@@ -111,7 +111,7 @@
           </div>
 
           <div>
-            <swiper circular class="h80 bd-radius mb-sm" :current="tagCurrent" @change="switchCircleTabValue">
+            <swiper circular class="h80 bd-radius mb-sm" :current="tagCurrent" @change="switchTagTabValue">
               <swiper-item class="bd-radius bg-white" v-for="tagType in tagTypes">
                 <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
                   <!--                        class="radius flex-none h100p"-->
@@ -262,7 +262,7 @@ export default class TagSearchPage extends Vue {
       current: number,
       source: number
     } = event.detail
-    this.tagCurrent = detail.current
+    this.circleCurrent = detail.current
   }
 
   switchTagTabValue (event: { detail: any }) {
