@@ -77,7 +77,7 @@
                   <!--                        class="radius flex-none h100p"-->
                   <div class="row-nowrap overflow-hidden">
                     <div v-for="(circle,index) in circleType.circles" v-if="index<5"
-                         class="col-row-center mx-xs overflow-hidden h70 flex-1">
+                         class="col-row-center mx-xs overflow-hidden h70">
                       <img class="bd-round size50" :src="circle.avatar"/>
                       <div class="font-cut">{{ circle.name }}</div>
                     </div>
