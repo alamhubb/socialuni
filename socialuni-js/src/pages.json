@@ -14,7 +14,7 @@
       }
     },
     {
-      "path": "pages/user/QcMine",
+      "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
       }
@@ -79,7 +79,7 @@
         "text": "社区"
       },
       {
-        "pagePath": "pages/user/QcMine",
+        "pagePath": "pages/user/mine",
         "iconPath": "static/img/account_box-gray-36dp.png",
         "selectedIconPath": "static/img/account_box-blue-36dp.png",
         "text": "我的"

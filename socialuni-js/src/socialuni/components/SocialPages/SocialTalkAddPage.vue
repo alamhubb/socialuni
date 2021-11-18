@@ -39,7 +39,7 @@
                 <block v-for="(image,index) in showImgUrls" :key="index">
                   <view class="uni-uploader__file position-relative">
                     <view
-                      class="close-view position-absolute z-index-button text-black size20 bg-grey5 bg-half-transparent row-all-center topRight bd-bl-radius"
+                      class="close-view position-absolute z-index-button color-content size20 bg-grey8 bg-half-transparent row-all-center topRight bd-bl-radius"
                       @click="deleteImg(index)">×
                     </view>
                     <image class="uni-uploader__img" mode="aspectFill" :src="image"
@@ -108,7 +108,7 @@
       <view class="row-col-center pd-sm">
         <div class="flex-row text-md">
           可见范围：
-          <view class="text-gray row-all-center bg-grey5 w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
+          <view class="text-gray row-all-center bg-grey10 w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
             <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
             <q-icon size="14" class="text-gray" icon="arrow-down"/>
             <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
@@ -119,7 +119,7 @@
           <!--          只有不为单性app才显示-->
           <template v-if="GenderTypeAll === appGenderType">
             <div>，</div>
-            <view class="text-gray row-all-center bg-grey5 w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
+            <view class="text-gray row-all-center bg-grey10 w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
               <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
               <q-icon size="14" class="text-gray" icon="arrow-down"/>
               <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
@@ -142,7 +142,13 @@ import JsonUtils from '../../utils/JsonUtil'
 import TagVO from '../../model/community/tag/TagVO'
 import TagUtil from '../../utils/TagUtil'
 import CosUtil from '../../utils/CosUtil'
-import { socialLocationModule, socialLocationStore, socialTagModule, socialTagStore, socialUserStore } from '../../store'
+import {
+  socialLocationModule,
+  socialLocationStore,
+  socialTagModule,
+  socialTagStore,
+  socialUserStore
+} from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../QIcon/QIcon.vue'

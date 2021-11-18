@@ -41,15 +41,15 @@ $color-border-default: #dedede;
 //主题色
 $color-bg-base: $color-white;
 //主题色
-$color-theme-base: $color-white !default;
+//$color-theme-base: $color-white !default;
 //主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
-$color-theme-base-light: $color-bg-default !default;
+//$color-theme-base-light: $color-bg-default !default;
 //主题色
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
 $color-theme: #3383f6 !default;
 //主题亮色
 $color-theme2:#A2D2FF !default;
-$color-theme-light:#ecf5ff !default;
+//$color-theme-light:#ecf5ff !default;
 
 $colors-theme: (
         white:$color-white,
@@ -121,11 +121,9 @@ $colors-custom-bg: (
   //主题色，可自定义，默认和白色一样
         default: $color-bg-default,
         base: $color-bg-base,
-        theme-base: $color-theme-base,
-        theme-base-light: $color-theme-base-light,
         theme: $color-theme,
         theme2: $color-theme2,
-        theme-light: $color-theme-light,
+        //theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,
         menu-hover: $color-bg-menu-hover,
