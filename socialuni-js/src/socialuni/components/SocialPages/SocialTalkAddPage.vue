@@ -54,6 +54,28 @@
           </view>
         </view>
       </view>
+
+<!--      <div class="bb box-sm">
+        请选择圈子
+
+        <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
+          <view class="row-col-center can-click" @click.stop="change(tag)">
+            <image class="cu-avatar radius lg flex-none"
+                   :src="tag.avatar"
+            />
+            <view class="ml-sm overflow-hidden">
+              <view>
+                {{ tag.name }}
+              </view>
+              <view class="text-gray text-sm text-ellipsis">
+                帖子：{{ tag.talkCount }}
+              </view>
+            </view>
+          </view>
+          <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+        </q-row-item>
+      </div>-->
+
       <view class="px-sm pt-sm mt-xs row-between">
         <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
           <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
