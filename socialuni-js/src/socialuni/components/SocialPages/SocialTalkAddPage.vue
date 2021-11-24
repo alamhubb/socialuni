@@ -157,8 +157,38 @@
 
       <q-popup v-model="showCircleSearch" bottom :modal="false">
         <div class="h90vh py-sm px">
-          <div>搜索框</div>
-          <div>siderbar</div>
+          <div>
+            <q-input v-model="circleSearchText"></q-input>
+          </div>
+          <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
+            <template #leftRow="{item,index,current}">
+              <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
+                <view class="row-all-center flex-auto">
+                  <text class="uni-ellipsis">{{ item.name }}</text>
+                </view>
+              </view>
+            </template>
+            <template #rightRow="{item}">
+              <view class="bg-white">
+                <view class="q-box-row">
+                  <text class="cuIcon-title text-green margin-right-xs"></text>
+                  <text class="font-bold">{{ item.name }}</text>
+                </view>
+
+                <view if="item.childs">
+
+                  <div class="row-wrap overflow-hidden">
+                    <div v-for="(circle,index) in item.tags"
+                         class="col-all-center mx-xs overflow-hidden">
+                      <img class="bd-round size50" :src="circle.avatar"/>
+                      <div class="font-cut">{{ circle.name }}</div>
+                      <div class="font-cut">{{ circle.talkCount }}</div>
+                    </div>
+                  </div>
+                </view>
+              </view>
+            </template>
+          </q-sidebar>
         </div>
       </q-popup>
     </view>
@@ -203,9 +233,14 @@ import RouterUtil from '../../utils/RouterUtil'
 import PagePath from '../../const/PagePath'
 import SocialTagAdd from '../SocialTagAdd/SocialTagAdd.vue'
 import QPopup from '@/socialuni/components/QPopup/QPopup.vue'
+import QSidebar from '@/socialuni/components/QSidebar/QSidebar.vue'
+import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
+import QInput from '@/socialuni/components/QInput/QInput.vue'
 
 @Component({
   components: {
+    QInput,
+    QSidebar,
     QPopup,
     SocialTagAdd,
     QButton,
@@ -219,8 +254,11 @@ export default class SocialTalkAddPage extends Vue {
   @socialLocationStore.State('districts') readonly districts: DistrictVO[]
   @socialTagStore.State('tags') readonly storeTags: TagVO []
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
+  @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
 
   showCircleSearch = true
+
+  circleSearchText = ''
 
   showVisibleTypeSelect = false
   showVisibleGenderSelect = false
@@ -277,6 +315,7 @@ export default class SocialTalkAddPage extends Vue {
     this.tags = JsonUtils.deepClone(this.storeTags)
     this.district = socialLocationModule.location
 
+    socialTagModule.getTagTypesAction()
 
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的
