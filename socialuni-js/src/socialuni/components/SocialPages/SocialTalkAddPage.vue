@@ -55,26 +55,28 @@
         </view>
       </view>
 
-<!--      <div class="bb box-sm">
-        请选择圈子
-
-        <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
-          <view class="row-col-center can-click" @click.stop="change(tag)">
-            <image class="cu-avatar radius lg flex-none"
-                   :src="tag.avatar"
-            />
-            <view class="ml-sm overflow-hidden">
-              <view>
-                {{ tag.name }}
-              </view>
-              <view class="text-gray text-sm text-ellipsis">
-                帖子：{{ tag.talkCount }}
-              </view>
-            </view>
-          </view>
+      <div class="bb box-sm">
+        <div class="row-between-center bg-click" @click="showCircleSearch = true">
+          <div>请选择圈子</div>
           <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-        </q-row-item>
-      </div>-->
+        </div>
+        <!--        <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
+                  <view class="row-col-center can-click" @click.stop="change(tag)">
+                    <image class="cu-avatar radius lg flex-none"
+                           :src="tag.avatar"
+                    />
+                    <view class="ml-sm overflow-hidden">
+                      <view>
+                        {{ tag.name }}
+                      </view>
+                      <view class="text-gray text-sm text-ellipsis">
+                        帖子：{{ tag.talkCount }}
+                      </view>
+                    </view>
+                  </view>
+                  <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                </q-row-item>-->
+      </div>
 
       <view class="px-sm pt-sm mt-xs row-between">
         <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
@@ -152,6 +154,13 @@
           <div class="ml-xs">可见</div>
         </div>
       </view>
+
+      <q-popup v-model="showCircleSearch" bottom :modal="false">
+        <div class="h90vh py-sm px">
+          <div>搜索框</div>
+          <div>siderbar</div>
+        </div>
+      </q-popup>
     </view>
   </view>
 </template>
@@ -193,9 +202,11 @@ import AppUtilAPI from '../../api/AppUtilAPI'
 import RouterUtil from '../../utils/RouterUtil'
 import PagePath from '../../const/PagePath'
 import SocialTagAdd from '../SocialTagAdd/SocialTagAdd.vue'
+import QPopup from '@/socialuni/components/QPopup/QPopup.vue'
 
 @Component({
   components: {
+    QPopup,
     SocialTagAdd,
     QButton,
     QNavbar,
@@ -208,6 +219,8 @@ export default class SocialTalkAddPage extends Vue {
   @socialLocationStore.State('districts') readonly districts: DistrictVO[]
   @socialTagStore.State('tags') readonly storeTags: TagVO []
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
+
+  showCircleSearch = true
 
   showVisibleTypeSelect = false
   showVisibleGenderSelect = false

@@ -1,8 +1,8 @@
 <template>
     <view v-if="value" class="q-popup-box">
-        <q-mask @click="input(false)">
+        <q-model @click="input(false)" v-if="modal">
             <!--        ios端不支持prevent需要用stop代替-->
-        </q-mask>
+        </q-model>
         <view class="h100p flex-row">
             <view class="q-popup" :class="popupClass"
                   @touchmove.stop.prevent
@@ -14,21 +14,25 @@
     </view>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator'
-import QMask from '@/socialuni/components/QMask/QMask.vue'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import QModel from '@/socialuni/components/QModel/QModel.vue'
 
-  /*
-  显示出来已经选了的城市，给她画上钩
-  * */
+/*
+显示出来已经选了的城市，给她画上钩
+* */
 @Component({
-  components: { QMask }
+  components: { QModel }
 })
 export default class QPopup extends Vue {
     //如果是头顶或者底部则不为width100
     @Prop({ default: '' }) readonly position: string
     @Prop({ default: false }) readonly bottom: boolean
     @Prop({ default: false }) readonly top: boolean
+    @Prop({ default: true }) readonly modal: boolean
     @Model('input') readonly value: boolean
+
+
+
 
     @Emit()
     input (value: boolean) {
