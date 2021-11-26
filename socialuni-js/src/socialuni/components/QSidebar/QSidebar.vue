@@ -8,7 +8,7 @@
         <slot name="leftRow" v-bind:item="item" v-bind:index="index" v-bind:current="chooseIndex"></slot>
       </view>
     </scroll-view>
-    <scroll-view class="flex-auto h100p bg-white" :scroll-into-view="rightBoxScrollIntoId" scroll-y
+    <scroll-view class="flex-auto h100p bg-default" :scroll-into-view="rightBoxScrollIntoId" scroll-y
                  @scroll="rightBoxScroll">
       <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-right-item"
             :id="'sidebar-right-'+index"
@@ -21,10 +21,10 @@
   </view>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import CommonUtil from '../../utils/CommonUtil'
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-import CommonUtil from '../../utils/CommonUtil'
 
 /*
 显示出来已经选了的城市，给她画上钩

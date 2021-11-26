@@ -156,8 +156,8 @@
       </view>
 
       <q-popup v-model="showCircleSearch" bottom :modal="false">
-        <div class="h90vh py-sm px">
-          <div>
+        <div class="h92vh py-sm">
+          <div class="px mb-sm">
             <q-input v-model="circleSearchText"></q-input>
           </div>
           <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
@@ -169,17 +169,16 @@
               </view>
             </template>
             <template #rightRow="{item}">
-              <view class="bg-white">
-                <view class="q-box-row">
+              <view class="mx-sm mt-sm bg-white">
+                <view class="q-box-row mb-xs">
                   <text class="cuIcon-title text-green margin-right-xs"></text>
-                  <text class="font-bold">{{ item.name }}</text>
+                  <text class="font-bold font-md">{{ item.name }}</text>
                 </view>
 
-                <view if="item.childs">
-
+                <view v-if="item.tags">
                   <div class="row-wrap overflow-hidden">
                     <div v-for="(circle,index) in item.tags"
-                         class="col-all-center mx-xs overflow-hidden">
+                         class="col-all-center ml-sm overflow-hidden mb-sm">
                       <img class="bd-round size50" :src="circle.avatar"/>
                       <div class="font-cut">{{ circle.name }}</div>
                       <div class="font-cut">{{ circle.talkCount }}</div>

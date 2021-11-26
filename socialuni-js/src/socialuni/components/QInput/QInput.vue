@@ -10,14 +10,11 @@ export default class QInput extends Vue {
   @Model('input') readonly value: string
 
   inputEvent ({ detail }) {
-    console.log(detail)
     this.input(detail.value)
   }
 
   @Emit()
   input (value) {
-    console.log(this.value)
-    console.log(value)
     return value
   }
 }
