@@ -11,22 +11,7 @@
       </q-search>
       <div @click="input" class="flex-none mr-sm">取消</div>
     </q-navbar>
-    <view v-if="searchContent">
-      <view v-if="searchContent&&isAdd" class="article-row solid-bottom text-blue" @click="addTag">
-        未找到相关标签，可点击
-        <q-icon icon="arrow_right_alt"></q-icon>
-        此处去创建
-      </view>
-      <view v-for="tag in showTags" :key="tag.id" @click="change(tag)"
-            class="article-row row-between solid-bottom">
-        <text>
-          #{{ tag.name }}
-        </text>
-        <view v-if="tag.count" class="row-col-center">
-          <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
-          {{ tag.count }}
-        </view>
-      </view>
+<!--    <view v-if="searchContent">
     </view>
     <view v-else class="flex-col flex-1 overflow-hidden">
       <div class="box-sm">
@@ -61,7 +46,7 @@
               <template #default="{tab}">
                 <div class="h30 px-xs row-all-center font-md">
                   {{ tab.name }}
-                  <!--            费劲啊实力哈哈-->
+                  &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
                 </div>
               </template>
             </q-tabs>
@@ -74,7 +59,7 @@
             <swiper circular class="h90 bd-radius mb-sm" :current="circleCurrent" @change="switchCircleTabValue">
               <swiper-item class="bd-radius bg-white" v-for="circleType in circleTypes">
                 <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
-                  <!--                        class="radius flex-none h100p"-->
+                  &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
                   <div class="row-nowrap overflow-hidden">
                     <div v-for="(circle,index) in circleType.circles" v-if="index<5"
                          class="col-row-center mx-xs overflow-hidden h70">
@@ -101,7 +86,7 @@
               <template #default="{tab}">
                 <div class="h30 px-xs row-all-center font-md">
                   {{ tab.name }}
-                  <!--            费劲啊实力哈哈-->
+                  &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
                 </div>
               </template>
             </q-tabs>
@@ -114,7 +99,7 @@
             <swiper circular class="h80 bd-radius mb-sm" :current="tagCurrent" @change="switchTagTabValue">
               <swiper-item class="bd-radius bg-white" v-for="tagType in tagTypes">
                 <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
-                  <!--                        class="radius flex-none h100p"-->
+                  &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
                   <div class="row-grid overflow-hidden">
                     <div v-for="(tag,index) in tagType.tags"
                          class="col-row-center overflow-hidden flex-none mb-sm">
@@ -128,7 +113,7 @@
         </div>
       </div>
 
-      <!--      <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
+      &lt;!&ndash;      <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
               <template #leftRow="{item,index,current}">
                 <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
                   <view class="row-all-center flex-auto">
@@ -164,8 +149,8 @@
                   </view>
                 </view>
               </template>
-            </q-sidebar>-->
-    </view>
+            </q-sidebar>&ndash;&gt;
+    </view>-->
   </view>
 </template>
 
