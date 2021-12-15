@@ -1,157 +1,138 @@
 <template>
-  <view class="h100p flex-col">
-    <q-navbar>
-      <q-search class="flex-1 mx-sm bg-default">
-        <q-icon class="mx-xs text-gray flex-none" icon="search" size="16"></q-icon>
-        <input class="flex-1" v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
-               placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
-        <q-icon v-if="searchContent" class="mr-sm text-gray row-all-center flex-none" icon="close" size="16"
-                @click="clearSearchContent"
-        ></q-icon>
-      </q-search>
-      <div @click="input" class="flex-none mr-sm">取消</div>
-    </q-navbar>
-<!--    <view v-if="searchContent">
-    </view>
-    <view v-else class="flex-col flex-1 overflow-hidden">
-      <div class="box-sm">
-        <div class="mb-sm">
-          <text class="cuIcon-title"></text>
-          <text class="font-md font-bold">历史话题</text>
+  <div class="h100p">
+    <div v-if="pageType === TalkSearchPageType.talkSearch" class="h100p flex-col">
+      <q-navbar>
+        <q-search class="flex-1 mx-sm bg-default">
+          <q-icon class="mx-xs text-gray flex-none" icon="search" size="16"></q-icon>
+          <input class="flex-1" v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView"
+                 focus
+                 placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
+          <q-icon v-if="searchContent" class="mr-sm text-gray row-all-center flex-none" icon="close" size="16"
+                  @click="clearSearchContent"
+          ></q-icon>
+        </q-search>
+        <div @click="input" class="flex-none mr-sm">取消</div>
+      </q-navbar>
+
+      <div v-if="searchContent">
+        <div>
+          <div>圈子</div>
+          <div></div>
         </div>
-        <div class="row-grid">
-          <template v-if="historyTags.length">
-            <view v-for="tag in historyTags"
-                  class="q-tag-theme"
-                  :key="tag.id"
-                  @click="change(tag)">
-              {{ tag.name }}
+        <div>
+          <div>话题</div>
+          <div></div>
+        </div>
+      </div>
+      <!--    搜索的时候就是一个 圈子，一个话题-->
+
+      <div v-else class="flex-col flex-1 overflow-hidden">
+        <div class="box-sm">
+          <div class="mb-sm">
+            <text class="cuIcon-title"></text>
+            <text class="font-md font-bold">历史话题</text>
+          </div>
+          <div class="row-grid">
+            <template v-if="historyTags.length">
+              <view v-for="tag in historyTags"
+                    class="q-tag-theme"
+                    :key="tag.id"
+                    @click="change(tag)">
+                {{ tag.name }}
+              </view>
+            </template>
+            <view v-else class="pl-sm text-md text-gray">
+              空
             </view>
-          </template>
-          <view v-else class="pl-sm text-md text-gray">
-            空
-          </view>
-        </div>
-      </div>
-
-      <div class="box-sm">
-        <div>
-          <text class="cuIcon-title"></text>
-          <text class="font-md font-bold">圈子</text>
-        </div>
-        <div>
-          <div class="row-col-center mb-sm">
-            <q-tabs v-model="circleCurrent" :tabs="circleTypes"
-                    class="bd-radius pd-mn flex-1">
-              <template #default="{tab}">
-                <div class="h30 px-xs row-all-center font-md">
-                  {{ tab.name }}
-                  &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
-                </div>
-              </template>
-            </q-tabs>
-            <div class="row-col-center bg-click flex-none ml-sm font-md">更多
-              <q-icon icon="mdi-chevron-right"></q-icon>
-            </div>
           </div>
+        </div>
 
+        <div class="box-sm">
           <div>
-            <swiper circular class="h90 bd-radius mb-sm" :current="circleCurrent" @change="switchCircleTabValue">
-              <swiper-item class="bd-radius bg-white" v-for="circleType in circleTypes">
-                <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
-                  &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
-                  <div class="row-nowrap overflow-hidden">
-                    <div v-for="(circle,index) in circleType.circles" v-if="index<5"
-                         class="col-row-center mx-xs overflow-hidden h70">
-                      <img class="bd-round size50" :src="circle.avatar"/>
-                      <div class="font-cut">{{ circle.name }}</div>
+            <text class="cuIcon-title"></text>
+            <text class="font-md font-bold">圈子</text>
+          </div>
+          <div>
+            <div class="row-col-center mb-sm">
+              <q-tabs v-model="circleCurrent" :tabs="circleTypes"
+                      class="bd-radius pd-mn flex-1">
+                <template #default="{tab}">
+                  <div class="h30 px-xs row-all-center font-md">
+                    {{ tab.name }}
+                    <!--            费劲啊实力哈哈-->
+                  </div>
+                </template>
+              </q-tabs>
+              <div class="row-col-center bg-click flex-none ml-sm font-md" @click="pageTypeToCircleSearch">更多
+                <q-icon icon="mdi-chevron-right"></q-icon>
+              </div>
+            </div>
+
+            <div>
+              <swiper circular class="h90 bd-radius mb-sm" :current="circleCurrent" @change="switchCircleTabValue">
+                <swiper-item class="bd-radius bg-white" v-for="circleType in circleTypes">
+                  <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
+                    <!--                        class="radius flex-none h100p"-->
+                    <div class="row-nowrap overflow-hidden">
+                      <div v-for="(circle,index) in circleType.circles" v-if="index<5"
+                           class="col-row-center mx-xs overflow-hidden h70">
+                        <img class="bd-round size50" :src="circle.avatar"/>
+                        <div class="font-cut">{{ circle.name }}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </swiper-item>
-            </swiper>
-          </div>
-        </div>
-      </div>
-
-      <div class="box-sm">
-        <div>
-          <text class="cuIcon-title"></text>
-          <text class="font-md font-bold">话题</text>
-        </div>
-        <div>
-          <div class="row-col-center mb-sm">
-            <q-tabs v-model="tagCurrent" :tabs="tagTypes"
-                    class="bd-radius pd-mn flex-1">
-              <template #default="{tab}">
-                <div class="h30 px-xs row-all-center font-md">
-                  {{ tab.name }}
-                  &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
-                </div>
-              </template>
-            </q-tabs>
-            <div class="row-col-center bg-click flex-none ml-sm font-md">更多
-              <q-icon icon="mdi-chevron-right"></q-icon>
+                </swiper-item>
+              </swiper>
             </div>
           </div>
+        </div>
 
+        <div class="box-sm">
           <div>
-            <swiper circular class="h80 bd-radius mb-sm" :current="tagCurrent" @change="switchTagTabValue">
-              <swiper-item class="bd-radius bg-white" v-for="tagType in tagTypes">
-                <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
-                  &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
-                  <div class="row-grid overflow-hidden">
-                    <div v-for="(tag,index) in tagType.tags"
-                         class="col-row-center overflow-hidden flex-none mb-sm">
-                      <div class="q-tag-theme" @click="change(tag)">{{ tag.name }}</div>
+            <text class="cuIcon-title"></text>
+            <text class="font-md font-bold">话题</text>
+          </div>
+          <div>
+            <div class="row-col-center mb-sm">
+              <q-tabs v-model="tagCurrent" :tabs="tagTypes"
+                      class="bd-radius pd-mn flex-1">
+                <template #default="{tab}">
+                  <div class="h30 px-xs row-all-center font-md">
+                    {{ tab.name }}
+                    <!--            费劲啊实力哈哈-->
+                  </div>
+                </template>
+              </q-tabs>
+              <div class="row-col-center bg-click flex-none ml-sm font-md">更多
+                <q-icon icon="mdi-chevron-right"></q-icon>
+              </div>
+            </div>
+
+            <div>
+              <swiper circular class="h80 bd-radius mb-sm" :current="tagCurrent" @change="switchTagTabValue">
+                <swiper-item class="bd-radius bg-white" v-for="tagType in tagTypes">
+                  <div class="h100p flex-col flex-none bd-radius py-sm px-xs overflow-hidden">
+                    <!--                        class="radius flex-none h100p"-->
+                    <div class="row-grid overflow-hidden">
+                      <div v-for="(tag,index) in tagType.tags"
+                           class="col-row-center overflow-hidden flex-none mb-sm">
+                        <div class="q-tag-theme" @click="change(tag)">{{ tag.name }}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </swiper-item>
-            </swiper>
+                </swiper-item>
+              </swiper>
+            </div>
           </div>
         </div>
       </div>
-
-      &lt;!&ndash;      <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
-              <template #leftRow="{item,index,current}">
-                <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
-                  <view class="row-all-center flex-auto">
-                    <text class="uni-ellipsis">{{item.name}}</text>
-                  </view>
-                </view>
-              </template>
-              <template #rightRow="{item}">
-                <view class="bg-white">
-                  <view class="q-box-row">
-                    <text class="cuIcon-title text-green margin-right-xs"></text>
-                    <text class="font-bold">{{item.name}}</text>
-                  </view>
+    </div>
 
 
-                  <view if="item.childs">
-                    <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
-                      <view class="row-col-center can-click" @click.stop="change(tag)">
-                        <image class="cu-avatar radius lg flex-none"
-                               :src="tag.avatar"
-                        />
-                        <view class="ml-sm overflow-hidden">
-                          <view>
-                            {{tag.name}}
-                          </view>
-                          <view class="text-gray text-sm text-ellipsis">
-                            帖子：{{tag.talkCount}}
-                          </view>
-                        </view>
-                      </view>
-                      <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                    </q-row-item>
-                  </view>
-                </view>
-              </template>
-            </q-sidebar>&ndash;&gt;
-    </view>-->
-  </view>
+    <circle-search v-else-if="pageType === TalkSearchPageType.circleSearch"
+                   @input="pageTypeToTalkSearch">
+    </circle-search>
+  </div>
 </template>
 
 <script lang="ts">
@@ -170,10 +151,15 @@ import QSidebar from '@/socialuni/components/QSidebar/QSidebar.vue'
 import QRowItem from '@/socialuni/components/QRowItem/QRowItem.vue'
 import QTabs from '@/socialuni/components/QTabs/QTabs.vue'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
+import QTab from '@/socialuni/components/QTab/QTab.vue'
+import TalkSearchPageType from '@/socialuni/const/TalkSearchPageType'
+import CircleSearch from '@/pages/circle/CircleSearch.vue'
 
 
 @Component({
   components: {
+    CircleSearch,
+    QTab,
     QTabs,
     QRowItem,
     QSidebar,
@@ -183,7 +169,7 @@ import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
     QNavbar
   }
 })
-export default class TagSearchPage extends Vue {
+export default class CirclePage extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 
@@ -197,15 +183,31 @@ export default class TagSearchPage extends Vue {
   // 进入页面只查询前20个，点击了输入内容才查询所有
   @socialTagStore.State('tags') readonly tags: TagVO []
 
+
   circleCurrent = 0
   tagCurrent = 0
 
   searchContent = ''
-  showSearch = false
+
+  TalkSearchPageType = TalkSearchPageType
+  pageType = TalkSearchPageType.talkSearch
+
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
-  onLoad(){
+  onLoad () {
     socialCircleModule.getCircleTypesAction()
+    console.log(this.circleTypes)
+  }
+
+  pageTypeToCircleSearch () {
+    console.log('触发了')
+    console.log(this.pageType)
+    this.pageType = TalkSearchPageType.circleSearch
+    console.log(this.pageType)
+  }
+
+  pageTypeToTalkSearch () {
+    this.pageType = TalkSearchPageType.talkSearch
   }
 
   get showTags (): TagVO[] {

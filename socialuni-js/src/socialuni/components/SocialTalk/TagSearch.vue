@@ -64,7 +64,7 @@
               <text class="font-bold">{{ item.name }}</text>
             </view>
 
-            <view if="item.childs">
+            <view>
               <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
                 <view class="row-col-center can-click" @click.stop="change(tag)">
                   <image class="cu-avatar radius lg flex-none"
@@ -90,13 +90,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 
 import TagVO from '../../model/community/tag/TagVO'
 import TagTypeVO from '../../model/community/tag/TagTypeVO'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import QIcon from '../QIcon/QIcon.vue'
-import { namespace } from 'vuex-class'
 import TagUtil from '../../utils/TagUtil'
 import QNavbar from '../QNavbar/QNavbar.vue'
 import QSearch from '../QSearch/QSearch.vue'
