@@ -113,6 +113,7 @@ export default class TalkItemComment extends Vue {
 
   // 打开举报talk弹框
   openReportDialog () {
+    console.log(123123)
     if (this.user) {
       socialTalkModule.talk = this.talk
       socialTalkModule.reportContentType = ReportContentType.talk

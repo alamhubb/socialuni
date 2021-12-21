@@ -1,7 +1,6 @@
 <template>
   <view>
-    <u-popup :value="commentVisible" border-radius="20" mode="center"
-             @close="commentActionClose">
+    <q-popup :value="commentVisible" @input="commentActionClose">
       <view class="uni-tip w180">
         <uni-list class="w100">
           <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
@@ -11,10 +10,13 @@
                          @click="openReportDialog"/>
         </uni-list>
       </view>
-    </u-popup>
+    </q-popup>
+<!--    <u-popup :show="commentVisible" border-radius="20" mode="center"
+             @close="commentActionClose">
 
-    <u-popup :value="dialogVisible" border-radius="20" mode="center"
-             :mask-close-able="false">
+    </u-popup>-->
+
+    <q-popup :value="dialogVisible" @input="commentActionClose">
       <view class="uni-tip">
         <view class="uni-tip-title">举报</view>
         <view class="uni-tip-content">
@@ -45,7 +47,11 @@
           </button>
         </view>
       </view>
-    </u-popup>
+    </q-popup>
+<!--    <u-popup :show="dialogVisible" border-radius="20" mode="center"
+             :mask-close-able="false">
+
+    </u-popup>-->
   </view>
 </template>
 
@@ -67,11 +73,13 @@ import UniUtil from '../../utils/UniUtil'
 import Alert from '../../utils/Alert'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import UPopup from 'uview-ui/components/u-popup/u-popup'
+import QPopup from '@/socialuni/components/QPopup/QPopup.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QPopup,
     UPopup
   }
 })

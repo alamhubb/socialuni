@@ -135,9 +135,9 @@
           <view class="text-gray row-all-center bg-grey10 w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
             <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
             <q-icon size="14" class="text-gray" icon="arrow-down"/>
-            <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
+<!--            <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
                       :default-value="visibleTypeValueIndex"
-                      @confirm="selectVisibleTypeChange"></u-select>
+                      @confirm="selectVisibleTypeChange"></u-select>-->
           </view>
           <!--          {{GenderType.all}}&#45;&#45;{{appGenderType}}&#45;&#45;{{GenderType.all === appGenderType}}-->
           <!--          只有不为单性app才显示-->
@@ -146,9 +146,11 @@
             <view class="text-gray row-all-center bg-grey10 w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
               <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
               <q-icon size="14" class="text-gray" icon="arrow-down"/>
-              <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
+<!--              <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
                         :default-value="visibleGenderValueIndex"
                         @confirm="selectVisibleGenderChange"></u-select>
+
+              <u-picker :show="show" :columns="visibleGenders"></u-picker>-->
             </view>
           </template>
           <div class="ml-xs">可见</div>
@@ -255,7 +257,7 @@ export default class SocialTalkAddPage extends Vue {
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
 
-  showCircleSearch = true
+  showCircleSearch = false
 
   circleSearchText = ''
 
