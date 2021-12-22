@@ -11,12 +11,13 @@
         </uni-list>
       </view>
     </q-popup>
-<!--    <u-popup :show="commentVisible" border-radius="20" mode="center"
+    <u-popup :show="commentVisible" border-radius="20" mode="center"
              @close="commentActionClose">
 
-    </u-popup>-->
+    </u-popup>
 
-    <q-popup :value="dialogVisible" @input="commentActionClose">
+    <u-popup :show="dialogVisible" border-radius="20" mode="center"
+             :mask-close-able="false">
       <view class="uni-tip">
         <view class="uni-tip-title">举报</view>
         <view class="uni-tip-content">
@@ -47,11 +48,7 @@
           </button>
         </view>
       </view>
-    </q-popup>
-<!--    <u-popup :show="dialogVisible" border-radius="20" mode="center"
-             :mask-close-able="false">
-
-    </u-popup>-->
+    </u-popup>
   </view>
 </template>
 

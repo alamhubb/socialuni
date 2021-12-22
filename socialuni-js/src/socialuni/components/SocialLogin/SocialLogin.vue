@@ -27,7 +27,7 @@
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
         </view>
-        <u-icon class="ml-xs text-gray" name="arrow-right"></u-icon>
+        <q-icon class="ml-xs text-gray" icon="arrow-right"></q-icon>
       </div>
 
       <!--        隐私提示-->
@@ -45,8 +45,8 @@
                     open-type="getUserInfo"
                     class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @getuserinfo="providerLogin">
-              <u-icon color="white" name="qq-fill" size="38"
-                      class="mr-xs"></u-icon>
+              <q-icon color="white" name="qq-fill" size="19"
+                      class="mr-xs"></q-icon>
               QQ登录
             </button>
             <!--                app和h5也都可以用微信登录-->
@@ -59,8 +59,8 @@
             <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
                     class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @click="providerLogin">
-              <u-icon color="white" name="weixin-fill" size="42"
-                      class="mr-xs"></u-icon>
+              <q-icon color="white" name="weixin-fill" size="21"
+                      class="mr-xs"></q-icon>
               微信登录
             </button>
             <!--              有用户-->
@@ -70,7 +70,7 @@
 
       <view class="row-between-center w100p">
         <view class="row-col-center" @click="goBackPage">
-          <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
+          <q-icon class="mr-xs text-gray" icon="arrow-left"></q-icon>
           <view class="text-gray u-border-bottom">
             {{ user ? '不绑定返回' : '不登录返回' }}
           </view>
@@ -97,9 +97,11 @@ import UniUtil from '../../utils/UniUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MockService from '@/socialuni/service/MockService'
 import SocialAuthType from '@/socialuni/const/SocialAuthType'
+import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
 
 @Component({
   components: {
+    QIcon,
     UserPrivacyAgreement,
     LoginFooterAppInfo
   }

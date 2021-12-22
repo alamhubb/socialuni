@@ -5,5 +5,5 @@ module.exports = {
     port: 8023,
     disableHostCheck: true
   },
-  transpileDependencies: ['@dcloudio/uni-ui']
+  transpileDependencies: ['@dcloudio/uni-ui', 'uview-ui']
 }

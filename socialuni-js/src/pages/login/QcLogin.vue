@@ -30,7 +30,7 @@
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
         </view>
-        <u-icon class="ml-xs text-gray" name="arrow-right"></u-icon>
+        <q-icon class="ml-xs text-gray" icon="arrow-right"></q-icon>
       </div>
 
       <!--        隐私提示-->
@@ -49,23 +49,23 @@
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
                         class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none bg-click round mt w100p"
                 >
-                  <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
+                  <q-icon custom-prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
                   手机号登录
                 </button>
                 <button v-else-if="isMpQQ" :disabled="!openTypeBtnEnable"
                         open-type="getUserInfo"
                         class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                         @getuserinfo="providerLogin">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
+                  <q-icon color="white" icon="weixin-fill" size="21"
+                          class="mr-xs"></q-icon>
                   QQ登录
                 </button>
                 <!--                app和h5也都可以用微信登录-->
                 <button v-else :disabled="!openTypeBtnEnable"
                         class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                         @click="providerLogin">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
+                  <q-icon color="white" icon="weixin-fill" size="21"
+                          class="mr-xs"></q-icon>
                   微信登录
                 </button>
               </template>
@@ -74,7 +74,7 @@
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="bindPhoneNum"
                         class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none bg-click round mt w100p"
                 >
-                  <u-icon custom-prefix="mdi" color="white" name="cellphone-android" size="42" class="mr-xs"></u-icon>
+                  <q-icon custom-prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
                   绑定手机号
                 </button>
 
@@ -82,8 +82,8 @@
                         open-type="getPhoneNumber"
                         class="h40 cu-btn lg bg-gradual-wx row-all-center bd-none bg-click round mt w100p"
                         @getphonenumber="bindWxPhoneNum">
-                  <u-icon color="white" name="weixin-fill" size="42"
-                          class="mr-xs"></u-icon>
+                  <q-icon color="white" icon="weixin-fill" size="21"
+                          class="mr-xs"></q-icon>
                   绑定微信手机号
                 </button>
               </template>
@@ -94,7 +94,7 @@
 
       <view class="row-between-center w100p">
         <view class="row-col-center" @click="goBackPage">
-          <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
+          <q-icon class="mr-xs text-gray" icon="arrow-left"></q-icon>
           <view class="text-gray u-border-bottom">
             {{ user ? '不绑定返回' : '不登录返回' }}
           </view>
@@ -110,8 +110,8 @@
             </template>
           </view>
           <!--              验证码登录、或者没用户、或者没手机号且不为授权用户、-->
-          <u-icon v-if="!user || (user && isMpWx)" class="ml-xs text-gray"
-                  name="arrow-right"></u-icon>
+          <q-icon v-if="!user || (user && isMpWx)" class="ml-xs text-gray"
+                  icon="arrow-right"></q-icon>
         </view>
       </view>
     </div>

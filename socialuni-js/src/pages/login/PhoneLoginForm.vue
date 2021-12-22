@@ -13,8 +13,8 @@
                :confirm-hold="true"
                placeholder="请填写手机号"
         />
-        <u-icon v-if="value.phoneNum" class="text-gray" name="close-circle" size="40"
-                @touchend.native.prevent="phoneNumClear"></u-icon>
+        <q-icon v-if="value.phoneNum" class="text-gray" icon="close-circle" size="20"
+                @touchend.native.prevent="phoneNumClear"></q-icon>
       </div>
 
       <view class="ml-smm cu-capsule radius">
@@ -44,8 +44,8 @@
                @input="input"
                placeholder="请填写验证码"
         />
-        <u-icon v-if="value.authCode" class="text-gray" name="close-circle" size="40"
-                @touchend.native.prevent="authCodeClear"></u-icon>
+        <q-icon v-if="value.authCode" class="text-gray" icon="close-circle" size="40"
+                @touchend.native.prevent="authCodeClear"></q-icon>
 
         <!--                <u-icon v-if="phoneNum" class="text-gray mr-lg" name="close-circle" size="40"
                                 @touchend.native.prevent="phoneNumClear"></u-icon>-->
@@ -73,8 +73,11 @@ import Toast from '@/socialuni/utils/Toast'
 import PhoneAPI from '@/socialuni/api/PhoneAPI'
 import { socialConfigStore } from '@/socialuni/store'
 import ConfigMap from '@/socialuni/const/ConfigMap'
+import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
 
-@Component
+@Component({
+  components: { QIcon }
+})
 export default class PhoneLoginForm extends Vue {
   @socialConfigStore.Getter(ConfigMap.authCodeIntervalKey) authCodeInterval: number
   @Prop() showPhoneView: boolean
