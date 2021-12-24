@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,6 +82,16 @@ public class ReportController {
         return resultRO;
     }
 
+    @PostMapping("reportAudit")
+    public ResultRO<String> reportAudit(@RequestBody @Valid @NotNull ReportVO auditVO) {
+        //首先校验 reportid是否存在
+        ResultRO<String> resultRO = new ResultRO<>();
+        ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
+        if (methodResult != null) return methodResult;
+        resultRO.setData("审核成功");
+        return resultRO;
+    }
+
     /*@PostMapping("queryUserReports")
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {
         SocialUserDO user = new SocialUserDO();
@@ -95,15 +106,7 @@ public class ReportController {
     }
 
 
-    @PostMapping("reportAudit")
-    public ResultRO<String> reportAudit(@RequestBody @Valid @NotNull ReportVO auditVO) {
-        //首先校验 reportid是否存在
-        ResultRO<String> resultRO = new ResultRO<>();
-        ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
-        if (methodResult != null) return methodResult;
-        resultRO.setData("审核成功");
-        return resultRO;
-    }
+
 
 
 
