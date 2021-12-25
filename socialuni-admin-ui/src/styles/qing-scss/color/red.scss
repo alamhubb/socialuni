@@ -1,0 +1,24 @@
+$color-red: #C50F1A;
+$color-red1: #CF1322;
+$color-red2: #D4353F;
+$color-red3: #F5222D;
+$color-red4: #FF4D4F;
+$color-red5: #FF7875;
+$color-red6: #FFA39E;
+$color-red7: #FBC4C4;
+$color-red8: #FEF0F0;
+
+$color-red-light: $color-red8;
+
+$colors-red: (
+        red:$color-red,
+        red1:$color-red1,
+        red2:$color-red2,
+        red3:$color-red3,
+        red4:$color-red4,
+        red5:$color-red5,
+        red6:$color-red6,
+        red7:$color-red7,
+        red8:$color-red8,
+        red-light:$color-red-light,
+);

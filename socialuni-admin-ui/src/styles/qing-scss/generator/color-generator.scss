@@ -1,0 +1,17 @@
+@each $colorKey, $color in $colors-font {
+  .color-#{''+$colorKey+''} {
+    color: $color;
+  }
+}
+
+.color-link:hover {
+  @extend .color-hover
+}
+
+.color-link:focus {
+  @extend .color-focus
+}
+
+.color-link:active {
+  @extend .color-active
+}
