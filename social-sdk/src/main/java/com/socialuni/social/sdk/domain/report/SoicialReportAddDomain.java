@@ -132,7 +132,7 @@ public class SoicialReportAddDomain {
         return reportDomain.userReportContent(
                 reportAddVO,
                 modelDO,
-                mineUser.getId()
+                mineUser.getId(), modelDO.getDevId()
         );
     }
 

@@ -47,8 +47,8 @@
         <q-icon v-if="value.authCode" class="text-gray" icon="close-circle" size="40"
                 @touchend.native.prevent="authCodeClear"></q-icon>
 
-        <!--                <u-icon v-if="phoneNum" class="text-gray mr-lg" name="close-circle" size="40"
-                                @touchend.native.prevent="phoneNumClear"></u-icon>-->
+        <!--                <q-icon v-if="phoneNum" class="text-gray mr-lg" name="close-circle" size="40"
+                                @touchend.native.prevent="phoneNumClear"></q-icon>-->
       </div>
 
       <view @click="sendCodeClick" class="ml-smm">

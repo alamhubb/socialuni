@@ -122,7 +122,7 @@
                   </view>
                   &lt;!&ndash;                不为自己且未关注&ndash;&gt;
                   <view class="col-center">
-                    <u-icon name="checkmark" color="success"></u-icon>
+                    <q-icon name="checkmark" color="success"></q-icon>
                   </view>
                 </view>
               </view>

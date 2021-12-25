@@ -50,7 +50,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         RequestLogDO requestLogDO = new RequestLogDO();
         requestLogDO.setRequestId(RequestIdUtil.addId());
-        UserDO user = CenterUserUtil.getMineUser();
+        UserDO user = CenterUserUtil.getMineUserInterceptor();
         if (user != null) {
             requestLogDO.setUserId(user.getId());
         }

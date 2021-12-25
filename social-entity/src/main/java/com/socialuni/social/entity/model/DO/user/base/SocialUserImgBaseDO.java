@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class SocialUserImgBaseDO extends CommonContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer userId;
+    private Integer devId;
 
     @Column(nullable = false, updatable = false)
     private String src;

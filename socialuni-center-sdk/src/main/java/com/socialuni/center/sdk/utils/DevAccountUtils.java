@@ -13,6 +13,8 @@ import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -121,6 +123,14 @@ public class DevAccountUtils {
     }
 
     public static DevAccountDO getAdminDevAccountNotNull() {
+        DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
+        if (user == null) {
+            throw new SocialNotLoginException();
+        }
+        return user;
+    }
+
+    public static DevAccountDO getAdminDevAccountAllowNull() {
         String token = SocialTokenUtil.getToken();
         return DevAccountUtils.getDevAccountByToken(token);
     }

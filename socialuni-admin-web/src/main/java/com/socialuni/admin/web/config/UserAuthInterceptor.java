@@ -32,7 +32,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object o) {
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
 //        DevAccountDO user = devaccount.getUserByToken();
 
         String uri = req.getRequestURI();

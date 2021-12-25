@@ -102,6 +102,7 @@ public class ReportDO implements Serializable {
     //举报来源类型，用户举报还是系统自动审核
     private String reportSourceType;
     private Integer antispamId;
+    private Integer devId;
 
     public ReportDO() {
     }

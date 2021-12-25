@@ -2,9 +2,12 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.AdminReportService;
+import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.social.entity.model.DO.ReportDO;
+import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.KeywordsRepository;
 import com.socialuni.social.sdk.repository.NotifyRepository;
@@ -62,9 +65,15 @@ public class ReportController {
     @PostMapping("queryReports")
     public ResultRO<List<ReportVO>> queryReports() {
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
-        List<ReportDO> reportDOS = reportRepository.findTop10ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
+        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
+        List<ReportDO> reportDOS;
+        //清池可以查询所有，否则只能查询自己的
+        if (user.getId().equals(AppConfigConst.qingchiDevId)) {
+            reportDOS = reportRepository.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
+        } else {
+            reportDOS = reportRepository.findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(ReportStatus.auditStatus, user.getId());
+        }
         List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
-
         return new ResultRO<>(reportVOS);
     }
 

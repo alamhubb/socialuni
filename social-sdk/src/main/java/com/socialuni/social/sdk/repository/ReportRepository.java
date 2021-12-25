@@ -26,7 +26,9 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
 //    List<ReportDO> findTop5ByStatusAndTalkStatusInOrStatusAndUserImgStatusInOrStatusAndCommentStatusInOrStatusAndMessageStatusInOrderByCreateTimeAsc(String status, List<String> talkStatus, String status1, List<String> userImgStatus, String status2, List<String> commentStatus, String status3, List<String> messageStatus);
 
     List<ReportDO> findTop10ByStatusInOrderByCreateTimeAsc(List<String> status);
+
     List<ReportDO> findTop20ByStatusInOrderByCreateTimeAsc(List<String> status);
+    List<ReportDO> findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(List<String> status, Integer devId);
 
 //    List<ReportDO> findTop20ByStatusAndTalkStatusInOrStatusAndUserImgStatusInOrStatusAndCommentStatusInOrStatusAndMessageStatusInOrderByCreateTimeAsc(String status, List<String> talkStatus, String status1, List<String> userImgStatus, String status2, List<String> commentStatus, String status3, List<String> messageStatus);
 
@@ -43,6 +45,6 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
     Page<ReportDO> findByStatusOrderByIdDesc(Pageable pageable, String status);
 
     //查询用户其他为审核中的状态
-    List<ReportDO> findByReceiveUserIdAndStatusIn(Integer userId,List<String> status);
+    List<ReportDO> findByReceiveUserIdAndStatusIn(Integer userId, List<String> status);
 
 }

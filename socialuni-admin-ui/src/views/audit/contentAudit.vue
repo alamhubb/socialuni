@@ -57,6 +57,7 @@
           :key="img.id"
         >
           <el-image
+            class="index-sm"
             style="width: 200px; height: 200px"
             :src="getImgUrl(img.src,report.talk.userId)"
             aspect-ratio="1"
@@ -100,13 +101,13 @@
         <template #default="{row}">
           <div class="flex-row">
             <el-image
-              v-for="(img,index) in row.talk.imgs"
+              v-for="(img) in row.talk.imgs"
               :key="img.id"
               style="width: 100px; height: 200px"
               fit="contain"
               :src="getImgUrl(img.src,row.talk.userId)"
               :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
-              :z-index="index"
+              :z-index="999"
             />
           </div>
         </template>

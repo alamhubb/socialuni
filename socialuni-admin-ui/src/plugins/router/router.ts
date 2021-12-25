@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 /* Layout */
-import Layout from '@/components/layout/Layout.vue'
+import Layout from '@/layout/Layout.vue'
 import RouterName from '@/constants/RouterName'
 
 Vue.use(VueRouter)
@@ -54,7 +54,7 @@ export const constantRoutes = [
         meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
       }]
   },
-  {
+  /* {
     path: '/',
     component: Layout,
     redirect: '/',
@@ -89,7 +89,7 @@ export const constantRoutes = [
         component: () => import('@/views/testTemp/testTemp.vue'),
         meta: { title: '测试', icon: 'strengthMonitoring' }
       }]
-  },
+  },*/
   {
     path: 'https://shejiao.qingchiapp.com/',
     meta: { title: '文档' }

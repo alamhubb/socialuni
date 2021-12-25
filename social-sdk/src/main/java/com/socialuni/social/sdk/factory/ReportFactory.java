@@ -22,7 +22,7 @@ public class ReportFactory {
     public ReportDO createReportDO(
             String cause,
             BaseModelDO model,
-            String reportSourceType
+            String reportSourceType, Integer devId
     ) {
         // 设置model
         ReportDO reportDO = new ReportDO();
@@ -41,6 +41,7 @@ public class ReportFactory {
         Date curDate = new Date();
         reportDO.setCreateTime(curDate);
         reportDO.setUpdateTime(curDate);
+        reportDO.setDevId(devId);
         //内容来源
         reportDO.setReportContentType(model.getReportContentType());
         //举报来源
@@ -51,7 +52,7 @@ public class ReportFactory {
         return reportDO;
     }
 
-    public ReportDO createReportDO(
+    /*public ReportDO createReportDO(
             String cause,
             BaseModelDO model,
             String reportSourceType,
@@ -61,5 +62,5 @@ public class ReportFactory {
         ReportDO reportDO = this.createReportDO(cause, model, reportSourceType);
         reportDO.setAntispamId(antispamId);
         return reportDO;
-    }
+    }*/
 }

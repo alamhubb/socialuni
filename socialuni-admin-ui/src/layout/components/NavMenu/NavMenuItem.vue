@@ -42,8 +42,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import AppLink from '@/components/layout/components/HorizontalSidebar/Link.vue'
-import MenuItem from '@/components/layout/components/HorizontalSidebar/Item.vue'
+import AppLink from '@/layout/components/HorizontalSidebar/Link.vue'
+import MenuItem from '@/layout/components/HorizontalSidebar/Item.vue'
 // @ts-ignore
 import path from 'path'
 
@@ -82,10 +82,15 @@ export default class NavMenuItem extends Vue {
     /* if (isExternal(routePath)) {
       return routePath
     }
-    if (isExternal(this.basePath)) {
+    */
+    if (this.isExternal(this.basePath)) {
       return this.basePath
-    }*/
+    }
     return path.resolve(this.basePath, routePath)
+  }
+
+  isExternal(path) {
+    return /^(https?:|mailto:|tel:)/.test(path)
   }
 }
 </script>

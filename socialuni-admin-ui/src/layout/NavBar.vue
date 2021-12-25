@@ -11,7 +11,7 @@
       <nav-menu class="flex-none bb-0" />
       <div class="flex-none row-col-center pointer mr">
         <el-divider direction="vertical" class="mr" />
-        <i class="mdi mdi-github font-30" />
+        <i class="mdi mdi-github font-30" @click="toGitee" />
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
@@ -48,8 +48,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import NavMenu from '@/components/layout/NavMenu.vue'
-import NavBreadcrumb from '@/components/layout/NavBreadcrumb.vue'
+import NavMenu from '@/layout/NavMenu.vue'
+import NavBreadcrumb from '@/layout/NavBreadcrumb.vue'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
 import { namespace } from 'vuex-class'
@@ -65,6 +65,10 @@ export default class NavBar extends Vue {
 
   longinOut() {
     userModule.userLoginOut()
+  }
+
+  toGitee() {
+    window.open('https://gitee.com/socialuni/socialuni')
   }
 }
 </script>

@@ -15,10 +15,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import AppMain from '@/components/layout/AppMain.vue'
-import NavMenu from '@/components/layout/components/NavMenu/NavMenu.vue'
-import NavBreadcrumb from '@/components/layout/components/NavBreadcrumb.vue'
-import NavBar from '@/components/layout/NavBar.vue'
+import AppMain from '@/layout/AppMain.vue'
+import NavMenu from '@/layout/components/NavMenu/NavMenu.vue'
+import NavBreadcrumb from '@/layout/components/NavBreadcrumb.vue'
+import NavBar from '@/layout/NavBar.vue'
 
 @Component({
   components: { NavBar, NavBreadcrumb, NavMenu, AppMain }

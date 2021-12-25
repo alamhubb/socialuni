@@ -23,6 +23,8 @@ public class MessageDO extends CommonContentBaseDO implements BaseModelDO, Seria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer devId;
+
     private String content;
 
     private Integer chatId;

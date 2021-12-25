@@ -6,7 +6,7 @@
       查看官网
     </navigator>
 
-    <view @click="copyServiceNum" class="u-type-info u-border-bottom">
+    <view @click="copyServiceNum" class="flex-row u-type-info u-border-bottom">
       客服微信、QQ：{{ qqService }}
       <q-icon icon="attach" size="15" class="ml-xs"></q-icon>
     </view>
