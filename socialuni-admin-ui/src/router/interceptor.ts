@@ -1,4 +1,4 @@
-import router from '@/plugins/router/router'
+import router from '@/router/router'
 import { userModule } from '@/store'
 import TokenUtil from '@/utils/TokenUtil'
 

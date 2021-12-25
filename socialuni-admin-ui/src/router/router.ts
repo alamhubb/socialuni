@@ -49,7 +49,7 @@ export const constantRoutes = [
         path: '',
         name: RouterName.contentAudit,
         // redirect: '/review',
-        component: () => import('@/views/audit/contentAudit.vue'),
+        component: () => import('@/views/contentAudit/contentAudit.vue'),
         // children: showRouterList,
         meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
       }]
@@ -90,10 +90,10 @@ export const constantRoutes = [
         meta: { title: '测试', icon: 'strengthMonitoring' }
       }]
   },*/
-  {
+  /* {
     path: 'https://shejiao.qingchiapp.com/',
     meta: { title: '文档' }
-  },
+  },*/
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

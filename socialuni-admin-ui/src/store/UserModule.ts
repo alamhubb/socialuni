@@ -1,7 +1,7 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
 import LoginAPI from '@/api/LoginAPI'
 import StorageUtil from '@/utils/StorageUtil'
-import router from '@/plugins/router/router'
+import router from '@/router/router'
 import { Message } from 'element-ui'
 import AppConst from '@/constants/AppConst'
 import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'

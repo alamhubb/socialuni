@@ -8,8 +8,8 @@
     </div>
 
     <div class="flex-1 row-end">
-      <nav-menu class="flex-none bb-0" />
-      <div class="flex-none row-col-center pointer mr">
+      <div class="flex-none row-col-center mr">
+        <div class="bg-click mx-sm font-16" @click="toDoc">文档</div>
         <el-divider direction="vertical" class="mr" />
         <i class="mdi mdi-github font-30 bg-click" @click="toGitee" />
       </div>
@@ -65,6 +65,10 @@ export default class NavBar extends Vue {
 
   longinOut() {
     userModule.userLoginOut()
+  }
+
+  toDoc() {
+    window.open('https://shejiao.qingchiapp.com')
   }
 
   toGitee() {
