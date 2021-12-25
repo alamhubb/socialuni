@@ -128,10 +128,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
-import KeywordsManageAPI from '@/api/KeywordsManageAPI'
-import { MessageBox } from 'element-ui'
 
 @Component
 export default class KeywordsDetailTable extends Vue {
@@ -149,7 +147,7 @@ export default class KeywordsDetailTable extends Vue {
   }
 
   addKeywords(keyword: keywordsVO) {
-    this.$prompt('请输入新增原因', '提示', {
+    /* this.$prompt('请输入新增原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then(({ value }) => {
@@ -157,20 +155,20 @@ export default class KeywordsDetailTable extends Vue {
         this.$message.success({ message: '新增,新增原因：' + value, duration: 500 })
         this.query(keyword)
       })
-    })
+    })*/
   }
 
   openPinyinOrText(keyword: keywordsVO, type: string) {
-    MessageBox.confirm('是否确认开启/关闭').then(() => {
+    /* MessageBox.confirm('是否确认开启/关闭').then(() => {
       KeywordsManageAPI.openPinyinOrTextAPI(keyword.id, type).then(res => {
         this.$message.success('成功了')
         this.query(keyword)
       })
-    })
+    })*/
   }
 
   closeKeywords(keyword: keywordsVO) {
-    this.$prompt('请输入关闭原因', '提示', {
+    /* this.$prompt('请输入关闭原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then(({ value }) => {
@@ -183,7 +181,7 @@ export default class KeywordsDetailTable extends Vue {
         type: 'info',
         message: '取消输入'
       })
-    })
+    })*/
   }
 }
 </script>

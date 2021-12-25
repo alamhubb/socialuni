@@ -28,13 +28,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
+import { Component, Vue } from 'vue-property-decorator'
 import Talk from '@/model/talk/Talk'
-import ReportVO from '@/model/report/ReportVO'
-import ViolateType from '../audit/ViolateType'
-import TalkAPI from '@/api/TalkAPI'
-import TestAPI from '@/api/TestAPI'
 
 @Component
 export default class TestFlex extends Vue {

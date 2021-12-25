@@ -20,16 +20,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
-import Talk from '@/model/talk/Talk'
-import ReportVO from '@/model/report/ReportVO'
-import ViolateType from '../audit/ViolateType'
+import { Component, Vue } from 'vue-property-decorator'
 import TalkAPI from '@/api/TalkAPI'
-import Identity from '@/model/user/Identity'
-import ImgIdentityAPI from '@/api/ImgIdentityAPI'
 
-  @Component
+@Component
 export default class StatisticsVue extends Vue {
     talks: any[] = []
     num = 30

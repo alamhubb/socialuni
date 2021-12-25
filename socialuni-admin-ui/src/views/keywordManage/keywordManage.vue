@@ -1,7 +1,7 @@
 <template>
   <div class="h100r flex-col overflow-auto">
     <!--    头部行，查询条件和操作-->
-    <div class="flex-none row-all-center pa">
+    <div class="flex-none row-all-center pd">
       关键词：
       <div class="w200">
         <el-input v-model.trim="inputKeyword" @keydown.native.enter="queryKeyword(inputKeyword)" />
@@ -55,17 +55,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
-import ReportVO from '@/model/report/ReportVO'
+import { Component, Vue } from 'vue-property-decorator'
 import KeywordsQueryAPI from '@/api/KeywordsQueryAPI'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'
-import el from 'element-ui/src/locale/lang/el'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
-import KeywordsDetailTable from '@/views/keywordsManage/KeywordsDetailTable.vue'
-import TriggerDetailTable from '@/views/keywordsManage/TriggerDetailTable.vue'
+import KeywordsDetailTable from '@/views/keywordManage/KeywordsDetailTable.vue'
+import TriggerDetailTable from '@/views/keywordManage/TriggerDetailTable.vue'
 import KeywordsDetailVO from '@/model/violateWord/KeywordsDetailVO'
 // 违规率高不高
 // 违规次数、文本次数、拼音次数
@@ -82,7 +79,7 @@ import KeywordsDetailVO from '@/model/violateWord/KeywordsDetailVO'
 @Component({
   components: { TriggerDetailTable, KeywordsDetailTable }
 })
-export default class ViolationHistoryPage extends Vue {
+export default class KeywordManagePage extends Vue {
   tempKeywords: keywordsVO[] = []
   keywords: keywordsVO[] = []
 

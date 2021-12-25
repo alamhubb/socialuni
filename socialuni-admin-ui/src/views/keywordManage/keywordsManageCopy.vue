@@ -208,13 +208,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
-import ReportVO from '@/model/report/ReportVO'
+import { Component, Vue } from 'vue-property-decorator'
 import KeywordsQueryAPI from '@/api/KeywordsQueryAPI'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'
-import el from 'element-ui/src/locale/lang/el'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
@@ -263,8 +260,8 @@ export default class ViolationHistoryPage extends Vue {
   queryKeyword() {
     this.keyword = null
     this.keywords = []
-    if (this.inputKeyword) {
-      KeywordsQueryAPI.queryKeywordAPI(this.inputKeyword).then(res => {
+    /* if (this.inputKeyword) {
+      /!*KeywordsQueryAPI.queryKeywordAPI(this.inputKeyword).then(res => {
         const keywordsDetail = res.data
 
         this.keyword = keywordsDetail.keywords
@@ -272,16 +269,16 @@ export default class ViolationHistoryPage extends Vue {
         this.triggerDetails = keywordsDetail.triggerDetails
         this.vioTriggerDetails = keywordsDetail.vioTriggerDetails
 
-        /* this.keywords = [this.keyword]
-        console.log(this.keyword)*/
-      })
+        /!* this.keywords = [this.keyword]
+        console.log(this.keyword)*!/
+      })*!/
     } else {
       this.queryKeywords()
-    }
+    }*/
   }
 
   addKeywords() {
-    this.$prompt('请输入新增原因', '提示', {
+    /* this.$prompt('请输入新增原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then(({ value }) => {
@@ -294,7 +291,7 @@ export default class ViolationHistoryPage extends Vue {
         type: 'info',
         message: '取消输入'
       })
-    })
+    })*/
   }
 
   queryKeywords() {
@@ -320,14 +317,14 @@ export default class ViolationHistoryPage extends Vue {
   }
 
   openPinyinOrText(id: number, type: string) {
-    KeywordsManageAPI.openPinyinOrTextAPI(id, type).then(res => {
+    /* KeywordsManageAPI.openPinyinOrTextAPI(id, type).then(res => {
       this.$message.success('成功了')
       this.queryKeywords()
-    })
+    })*/
   }
 
   closeKeywords(id: number) {
-    this.$prompt('请输入关闭原因', '提示', {
+    /* this.$prompt('请输入关闭原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then(({ value }) => {
@@ -340,7 +337,7 @@ export default class ViolationHistoryPage extends Vue {
         type: 'info',
         message: '取消输入'
       })
-    })
+    })*/
   }
 }
 </script>

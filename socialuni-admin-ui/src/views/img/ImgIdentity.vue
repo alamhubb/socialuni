@@ -60,16 +60,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
+import { Component, Vue } from 'vue-property-decorator'
 import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
-import ViolateType from '../audit/ViolateType'
-import TalkAPI from '@/api/TalkAPI'
 import Identity from '@/model/user/Identity'
 import ImgIdentityAPI from '@/api/ImgIdentityAPI'
+import ViolateType from '@/constants/ViolateType'
 
-  @Component
+@Component
 export default class ImgIdentity extends Vue {
     reports: ReportVO[] = []
     imgUrl: string = process.env.VUE_APP_COS_URL

@@ -19,6 +19,12 @@ export const menuRoutes = [
     component: () => import('@/views/contentAudit/contentAudit.vue'),
     // children: showRouterList,
     meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
+  },
+  {
+    path: '/keywordManage',
+    name: RouterName.keywordsManage,
+    component: () => import('@/views/keywordManage/keywordManage.vue'),
+    meta: { title: RouterName.keywordsManage, icon: 'strengthMonitoring' }
   }
 ]
 
@@ -52,18 +58,7 @@ export const constantRoutes = [
         // children: showRouterList,
         meta: { title: '审核历史', icon: 'strengthMonitoring' }
       }]
-  }, {
-    path: '/',
-    component: Layout,
-    redirect: '/',
-    children: [
-      {
-        path: '/keywordsManage',
-        name: RouterName.keywordsManage,
-        component: () => import('@/views/keywordsManage/keywordsManage.vue'),
-        meta: { title: '关键词管理', icon: 'strengthMonitoring' }
-      }]
-  }, {
+  },{
     path: '/',
     component: Layout,
     redirect: '/',

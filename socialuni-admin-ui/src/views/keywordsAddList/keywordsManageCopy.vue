@@ -208,13 +208,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
-import ReportVO from '@/model/report/ReportVO'
+import { Component, Vue } from 'vue-property-decorator'
 import KeywordsQueryAPI from '@/api/KeywordsQueryAPI'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'
-import el from 'element-ui/src/locale/lang/el'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
 
@@ -268,7 +265,7 @@ export default class ViolationHistoryPage extends Vue {
         const keywordsDetail = res.data
 
         this.keyword = keywordsDetail.keywords
-        this.dbKeyword = keywordsDetail.dbKeywords
+        // this.dbKeyword = keywordsDetail.dbKeywords
         this.triggerDetails = keywordsDetail.triggerDetails
         this.vioTriggerDetails = keywordsDetail.vioTriggerDetails
 
@@ -281,7 +278,7 @@ export default class ViolationHistoryPage extends Vue {
   }
 
   addKeywords() {
-    this.$prompt('请输入新增原因', '提示', {
+    /* this.$prompt('请输入新增原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then(({ value }) => {
@@ -294,7 +291,7 @@ export default class ViolationHistoryPage extends Vue {
         type: 'info',
         message: '取消输入'
       })
-    })
+    })*/
   }
 
   queryKeywords() {
@@ -320,14 +317,14 @@ export default class ViolationHistoryPage extends Vue {
   }
 
   openPinyinOrText(id: number, type: string) {
-    KeywordsManageAPI.openPinyinOrTextAPI(id, type).then(res => {
-      this.$message.success('成功了')
+    /* KeywordsManageAPI.openPinyinOrTextAPI(id, type).then(res => {
+      ToastUtil.success('成功了')
       this.queryKeywords()
-    })
+    })*/
   }
 
   closeKeywords(id: number) {
-    this.$prompt('请输入关闭原因', '提示', {
+    /* this.$prompt('请输入关闭原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then(({ value }) => {
@@ -340,7 +337,7 @@ export default class ViolationHistoryPage extends Vue {
         type: 'info',
         message: '取消输入'
       })
-    })
+    })*/
   }
 }
 </script>

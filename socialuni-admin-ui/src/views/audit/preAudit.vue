@@ -248,14 +248,13 @@
 </template>
 
 <script lang="tsx">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
-import ViolateType from './ViolateType'
 import TalkAPI from '@/api/TalkAPI'
-import el from 'element-ui/src/locale/lang/el'
 import { Message } from 'element-ui'
+import ViolateType from '@/constants/ViolateType'
 
 @Component
 export default class PreAuditPage extends Vue {

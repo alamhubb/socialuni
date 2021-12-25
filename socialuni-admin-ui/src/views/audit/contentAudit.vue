@@ -250,9 +250,9 @@ import { Component, Vue } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
-import ViolateType from './ViolateType'
 import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
+import ViolateType from '@/constants/ViolateType'
 
 @Component
 export default class PreAuditPage extends Vue {
