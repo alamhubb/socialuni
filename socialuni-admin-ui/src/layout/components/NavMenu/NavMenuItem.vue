@@ -83,10 +83,11 @@ export default class NavMenuItem extends Vue {
       return routePath
     }
     */
-    if (this.isExternal(this.basePath)) {
-      return this.basePath
+    if (this.isExternal(routePath)) {
+      return routePath
     }
-    return path.resolve(this.basePath, routePath)
+    return path.resolve(routePath)
+    // return routePath
   }
 
   isExternal(path) {

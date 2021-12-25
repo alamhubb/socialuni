@@ -14,6 +14,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
+import { menuRoutes } from '@/router/router'
 
 @Component({
   components: { NavMenuItem }
@@ -34,7 +35,7 @@ export default class NavMenu extends Vue {
   }
 
   get routes() {
-    return this.$router.options.routes
+    return menuRoutes
   }
 
   get activeMenu() {

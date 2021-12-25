@@ -100,7 +100,7 @@ import { userModule } from '@/store'
 
 const userStore = namespace('user')
 @Component
-export default class HomePage extends Vue {
+export default class DevInfoPage extends Vue {
   $refs: {
     devForm: ElForm
   }

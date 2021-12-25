@@ -6,6 +6,22 @@ import RouterName from '@/constants/RouterName'
 
 Vue.use(VueRouter)
 
+export const menuRoutes = [
+  {
+    path: '',
+    name: RouterName.devAccount,
+    component: () => import('@/views/devInfo/devInfo.vue'),
+    meta: { title: '开发者信息', icon: 'strengthMonitoring' }
+  },
+  {
+    path: 'contentAudit',
+    name: RouterName.contentAudit,
+    component: () => import('@/views/contentAudit/contentAudit.vue'),
+    // children: showRouterList,
+    meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
+  }
+]
+
 export const constantRoutes = [
   {
     path: '/404',
@@ -14,45 +30,14 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: Layout,
-    hidden: true,
-    showFirstChild: true,
-    redirect: '/login',
-    children: [
-      {
-        path: '',
-        name: 'strengthMonitoring',
-        component: () => import('@/views/login/login.vue'),
-        meta: { title: '登陆', icon: 'strengthMonitoring' }
-      }]
+    component: () => import('@/views/login/login.vue'),
+    hidden: true
   },
   {
     path: '/',
     component: Layout,
     redirect: '/',
-    children: [
-      {
-        path: '',
-        name: RouterName.devAccount,
-        // redirect: '/review',
-        component: () => import('@/views/dev/devAccount.vue'),
-        // children: showRouterList,
-        meta: { title: '开发者信息', icon: 'strengthMonitoring' }
-      }]
-  },
-  {
-    path: '/contentAudit',
-    component: Layout,
-    redirect: '/',
-    children: [
-      {
-        path: '',
-        name: RouterName.contentAudit,
-        // redirect: '/review',
-        component: () => import('@/views/contentAudit/contentAudit.vue'),
-        // children: showRouterList,
-        meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
-      }]
+    children: menuRoutes
   },
   /* {
     path: '/',
