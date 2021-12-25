@@ -11,7 +11,7 @@
       <nav-menu class="flex-none bb-0" />
       <div class="flex-none row-col-center pointer mr">
         <el-divider direction="vertical" class="mr" />
-        <i class="mdi mdi-github font-30" @click="toGitee" />
+        <i class="mdi mdi-github font-30 bg-click" @click="toGitee" />
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
