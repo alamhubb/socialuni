@@ -9,7 +9,7 @@ import { userModule } from '@/store'
 const request = Axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 3000 // request timeout
+  timeout: 30000 // request timeout
 })
 // request interceptor
 request.interceptors.request.use(

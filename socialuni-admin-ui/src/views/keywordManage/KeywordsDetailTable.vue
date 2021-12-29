@@ -151,6 +151,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
+import { Message, MessageBox } from 'element-ui'
+import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 
 @Component
 export default class KeywordsDetailTable extends Vue {
@@ -168,15 +170,15 @@ export default class KeywordsDetailTable extends Vue {
   }
 
   addKeywords(keyword: keywordsVO) {
-    /* this.$prompt('请输入新增原因', '提示', {
+    MessageBox.prompt('请输入新增原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
-    }).then(({ value }) => {
-      KeywordsManageAPI.addKeywordsAPI(keyword.text, value || '').then(res => {
-        this.$message.success({ message: '新增,新增原因：' + value, duration: 500 })
+    }).then((messageBoxData: any) => {
+      KeywordsManageAPI.addKeywordsAPI(keyword.text, messageBoxData.value || '').then(res => {
+        Message.success({ message: '新增,新增原因：' + messageBoxData.value, duration: 500 })
         this.query(keyword)
       })
-    })*/
+    })
   }
 
   openPinyinOrText(keyword: keywordsVO, type: string) {
