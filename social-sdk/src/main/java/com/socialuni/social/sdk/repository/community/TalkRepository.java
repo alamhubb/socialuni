@@ -4,6 +4,7 @@ package com.socialuni.social.sdk.repository.community;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.sdk.redis.redisKey.RedisKeysConst;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -284,6 +285,9 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     Integer countByUserIdAndCreateTimeBetween(Integer userId, Date startDate, Date endDate);
 
     List<TalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
+
+    //查询关键词触发次数时使用
+    Page<TalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
 /*
 
     //供后台统计使用**************************************************************************************
@@ -295,8 +299,6 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     List<Object> countAndCreateTimeByCreateTimeBetween();
 
 
-    //查询关键词触发次数时使用
-    Page<TalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
 
     Page<TalkDO> findByStatusNotInAndContentLikeOrderByIdDesc(Pageable pageable, List<String> status, String content);
 
