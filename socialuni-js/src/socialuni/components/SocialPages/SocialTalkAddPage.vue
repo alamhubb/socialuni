@@ -55,29 +55,6 @@
         </view>
       </view>
 
-      <div class="bb box-sm">
-        <div class="row-between-center bg-click" @click="showCircleSearch = true">
-          <div>请选择圈子</div>
-          <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-        </div>
-        <!--        <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
-                  <view class="row-col-center can-click" @click.stop="change(tag)">
-                    <image class="cu-avatar radius lg flex-none"
-                           :src="tag.avatar"
-                    />
-                    <view class="ml-sm overflow-hidden">
-                      <view>
-                        {{ tag.name }}
-                      </view>
-                      <view class="text-gray text-sm text-ellipsis">
-                        帖子：{{ tag.talkCount }}
-                      </view>
-                    </view>
-                  </view>
-                  <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                </q-row-item>-->
-      </div>
-
       <view class="px-sm pt-sm mt-xs row-between">
         <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
           <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
@@ -94,14 +71,12 @@
             {{ district.adName }}
           </text>
         </view>
-        <view class="col-center">
-          图片数量：{{ showsImgFiles.length }}/{{ imgMaxSize }}
-        </view>
+        <div class="row-between-center bg-click" @click="showCircleSearch = true">
+          <div>选择圈子</div>
+          <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+        </div>
       </view>
       <view class="px-sm pt-sm">
-        <view class="pb-sm">
-          已选话题：
-        </view>
         <view class="row-grid">
           <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
             <view class="q-tag q-round bg-pink-plain">
@@ -135,9 +110,9 @@
           <view class="text-gray row-all-center bg-grey10 w100 mr-xs px-xs" @click="showVisibleTypeSelect=true">
             <text class="text-md text-gray mr-xs">{{ visibleType.label }}</text>
             <q-icon size="14" class="text-gray" icon="arrow-down"/>
-<!--            <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
-                      :default-value="visibleTypeValueIndex"
-                      @confirm="selectVisibleTypeChange"></u-select>-->
+            <!--            <u-select v-model="showVisibleTypeSelect" mode="single-column" :list="visibleTypes"
+                                  :default-value="visibleTypeValueIndex"
+                                  @confirm="selectVisibleTypeChange"></u-select>-->
           </view>
           <!--          {{GenderType.all}}&#45;&#45;{{appGenderType}}&#45;&#45;{{GenderType.all === appGenderType}}-->
           <!--          只有不为单性app才显示-->
@@ -146,52 +121,16 @@
             <view class="text-gray row-all-center bg-grey10 w100 mx-xs px-xs" @click="showVisibleGenderSelect=true">
               <text class="text-md text-gray mr-xs">{{ visibleGender.label }}</text>
               <q-icon size="14" class="text-gray" icon="arrow-down"/>
-<!--              <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
-                        :default-value="visibleGenderValueIndex"
-                        @confirm="selectVisibleGenderChange"></u-select>
+              <!--              <u-select v-model="showVisibleGenderSelect" mode="single-column" :list="visibleGenders"
+                                      :default-value="visibleGenderValueIndex"
+                                      @confirm="selectVisibleGenderChange"></u-select>
 
-              <u-picker :show="show" :columns="visibleGenders"></u-picker>-->
+                            <u-picker :show="show" :columns="visibleGenders"></u-picker>-->
             </view>
           </template>
           <div class="ml-xs">可见</div>
         </div>
       </view>
-
-      <q-popup v-model="showCircleSearch" bottom :modal="false">
-        <div class="h92vh py-sm">
-          <div class="px mb-sm">
-            <q-input v-model="circleSearchText"></q-input>
-          </div>
-          <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
-            <template #leftRow="{item,index,current}">
-              <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
-                <view class="row-all-center flex-auto">
-                  <text class="uni-ellipsis">{{ item.name }}</text>
-                </view>
-              </view>
-            </template>
-            <template #rightRow="{item}">
-              <view class="mx-sm mt-sm bg-white">
-                <view class="q-box-row mb-xs">
-                  <text class="cuIcon-title text-green margin-right-xs"></text>
-                  <text class="font-bold font-md">{{ item.name }}</text>
-                </view>
-
-                <view v-if="item.tags">
-                  <div class="row-wrap overflow-hidden">
-                    <div v-for="(circle,index) in item.tags"
-                         class="col-all-center ml-sm overflow-hidden mb-sm">
-                      <img class="bd-round size50" :src="circle.avatar"/>
-                      <div class="font-cut">{{ circle.name }}</div>
-                      <div class="font-cut">{{ circle.talkCount }}</div>
-                    </div>
-                  </div>
-                </view>
-              </view>
-            </template>
-          </q-sidebar>
-        </div>
-      </q-popup>
     </view>
   </view>
 </template>

@@ -39,4 +39,5 @@ export default class Constants {
 
   static readonly leftKey: string = 'left'
   static readonly rightKey: string = 'right'
+  static readonly initTagName: string = '添加话题'
 }
