@@ -10,8 +10,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import UserAPI from '@/socialuni/api/UserAPI'
-import MsgInput from '@/socialuni/components/social-ui/MsgInput.vue'
-import UserInfo from '@/socialuni/components/social-ui/SocialUser/UserInfo.vue'
+import MsgInput from '@/socialuni/components/MsgInput.vue'
+import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
 
 @Component({
   components: { MsgInput, UserInfo }

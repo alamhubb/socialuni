@@ -73,7 +73,7 @@ import Toast from '@/socialuni/utils/Toast'
 import PhoneAPI from '@/socialuni/api/PhoneAPI'
 import { socialConfigStore } from '@/socialuni/store'
 import ConfigMap from '@/socialuni/const/ConfigMap'
-import QIcon from '@/socialuni/components/qing-ui/components/QIcon/QIcon.vue'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
   components: { QIcon }

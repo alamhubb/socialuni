@@ -139,21 +139,21 @@
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 
 
-import { socialCircleModule, socialCircleStore, socialTagStore } from '@/socialuni/store'
+import { socialCircleStore, socialTagStore } from '@/socialuni/store'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import TagUtil from '@/socialuni/utils/TagUtil'
-import QNavbar from '@/socialuni/components/qing-ui/components/QNavbar/QNavbar.vue'
-import QSearch from '@/socialuni/components/qing-ui/components/QSearch/QSearch.vue'
-import QIcon from '@/socialuni/components/qing-ui/components/QIcon/QIcon.vue'
-import QSlider from '@/socialuni/components/qing-ui/components/QSlider/QSlider.vue'
-import QSidebar from '@/socialuni/components/qing-ui/components/QSidebar/QSidebar.vue'
-import QRowItem from '@/socialuni/components/qing-ui/components/QRowItem/QRowItem.vue'
-import QTabs from '@/socialuni/components/qing-ui/components/QTabs/QTabs.vue'
+import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
+import QSearch from '@/qing-ui/components/QSearch/QSearch.vue'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
+import QSlider from '@/qing-ui/components/QSlider/QSlider.vue'
+import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
+import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
+import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
-import QTab from '@/socialuni/components/qing-ui/components/QTab/QTab.vue'
+import QTab from '@/qing-ui/components/QTab/QTab.vue'
 import TalkSearchPageType from '@/socialuni/const/TalkSearchPageType'
-import CircleSearch from '@/socialuni/components/social-ui/SCircleSearch.vue'
+import CircleSearch from '@/socialuni/components/SCircleSearch.vue'
 
 
 @Component({
@@ -195,7 +195,7 @@ export default class CirclePage extends Vue {
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
   onLoad () {
-    socialCircleModule.getCircleTypesAction()
+
     console.log(this.circleTypes)
   }
 
