@@ -125,8 +125,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import PhoneLoginForm from '@/pages/login/PhoneLoginForm.vue'
-import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
-import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
+import UserPrivacyAgreement from '@/socialuni/components/social-ui/SocialLogin/UserPrivacyAgreement.vue'
+import LoginFooterAppInfo from '@/socialuni/components/social-ui/SocialLogin/LoginFooterAppInfo.vue'
 import { socialOAuthModule, socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import PhoneNumFormData from '@/socialuni/model/phone/PhoneNumFormData'

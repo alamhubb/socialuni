@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SocialTalkAddPage from 'socialuni/components/SocialPages/SocialTalkAddPage.vue'
+import SocialTalkAddPage from 'socialuni/components/social-ui/SocialPages/SocialTalkAddPage.vue'
 
 @Component({
   components: {

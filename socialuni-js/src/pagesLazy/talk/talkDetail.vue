@@ -45,10 +45,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
-import MsgInput from '@/socialuni/components/MsgInput.vue'
-import TalkItem from '@/socialuni/components/SocialTalk/TalkItem.vue'
-import TalkOperate from '@/socialuni/components/SocialTalk/talkOperate.vue'
+import QIcon from '@/socialuni/components/qing-ui/components/QIcon/QIcon.vue'
+import MsgInput from '@/socialuni/components/social-ui/MsgInput.vue'
+import TalkItem from '@/socialuni/components/social-ui/SocialTalk/TalkItem.vue'
+import TalkOperate from '@/socialuni/components/social-ui/SocialTalk/talkOperate.vue'
 import TalkVO from '@/socialuni/model/talk/TalkVO'
 import { socialAppStore } from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'

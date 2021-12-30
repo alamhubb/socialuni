@@ -43,6 +43,7 @@ public class CenterTokenUtil {
         }
 
         if (!tokenDO.getDevId().equals(devId)) {
+            log.error("开发者信息错误，请清空token");
             throw new SocialNullUserException();
         }
         Date date = new Date();

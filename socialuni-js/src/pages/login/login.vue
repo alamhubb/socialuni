@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SocialLoginPage from 'socialuni/components/SocialPages/SocialLoginPage.vue'
+import SocialLoginPage from 'socialuni/components/social-ui/SocialPages/SocialLoginPage.vue'
 
 @Component({
   components: { SocialLoginPage }

@@ -170,20 +170,20 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 
 
 import { socialTagStore } from '@/socialuni/store'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import TagUtil from '@/socialuni/utils/TagUtil'
-import QNavbar from '@/socialuni/components/QNavbar/QNavbar.vue'
-import QSearch from '@/socialuni/components/QSearch/QSearch.vue'
-import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
-import QSlider from '@/socialuni/components/QSlider/QSlider.vue'
-import QSidebar from '@/socialuni/components/QSidebar/QSidebar.vue'
-import QRowItem from '@/socialuni/components/QRowItem/QRowItem.vue'
-import QTabs from '@/socialuni/components/QTabs/QTabs.vue'
+import QNavbar from '@/socialuni/components/qing-ui/components/QNavbar/QNavbar.vue'
+import QSearch from '@/socialuni/components/qing-ui/components/QSearch/QSearch.vue'
+import QIcon from '@/socialuni/components/qing-ui/components/QIcon/QIcon.vue'
+import QSlider from '@/socialuni/components/qing-ui/components/QSlider/QSlider.vue'
+import QSidebar from '@/socialuni/components/qing-ui/components/QSidebar/QSidebar.vue'
+import QRowItem from '@/socialuni/components/qing-ui/components/QRowItem/QRowItem.vue'
+import QTabs from '@/socialuni/components/qing-ui/components/QTabs/QTabs.vue'
 
 
 @Component({

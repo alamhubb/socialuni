@@ -31,8 +31,8 @@ import CircleCreateQO from '@/socialuni/model/community/circle/CircleCreateQO'
 import CircleAPI from '@/socialuni/api/CircleAPI'
 import { socialTagStore } from '@/socialuni/store'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
-import QIcon from '@/socialuni/components/QIcon/QIcon.vue'
-import QSelect from '@/socialuni/components/QSelect/QSelect.vue'
+import QIcon from '@/socialuni/components/qing-ui/components/QIcon/QIcon.vue'
+import QSelect from '@/socialuni/components/qing-ui/components/QSelect/QSelect.vue'
 
 @Component({
   components: { QSelect, QIcon }
