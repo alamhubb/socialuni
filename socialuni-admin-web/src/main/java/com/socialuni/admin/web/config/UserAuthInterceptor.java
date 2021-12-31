@@ -38,6 +38,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         String uri = req.getRequestURI();
 
         if ((req.getMethod().equals(RequestMethod.OPTIONS.name())
+                || uri.contains("openService")
                 || uri.contains("user/phoneLogin")
                 || uri.contains("user/secretKeyLogin")
                 || uri.contains("phone/sendAuthCode")

@@ -415,7 +415,7 @@ export default class SocialTalkAddPage extends Vue {
         this.uploadImgList()
         this.publishTalk()
       } else {
-        AppUtilAPI.sendErrorLogAPI(null, '错误的用户授权类型')
+        AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       }
     }
   }
