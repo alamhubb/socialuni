@@ -1,16 +1,18 @@
-import TreeVO from '@/model/base/TreeVO'
-
-export default class JsonUtil {
+export default class ObjectUtil {
   // 改成any类型
-  static deepClone(object: any): any {
-    return JSON.parse(JSON.stringify(object))
+  static deepClone<T>(object: T): T {
+    if (object) {
+      return JSON.parse(JSON.stringify(object))
+    }
+    return null
   }
 
   static toJson(object: any): string {
+    // return JSON.stringify(object)
     return JSON.stringify(object)
   }
 
-  static jsonParse(objJson: string): any {
+  static toParse(objJson: string): any {
     return JSON.parse(objJson)
   }
 
@@ -21,13 +23,22 @@ export default class JsonUtil {
   static toFormData(object: Record<string, any>): FormData {
     const formData = new FormData()
     Object.keys(object).forEach((key) => {
-      formData.append(key, object[key])
+      const data = object[key]
+      if (data instanceof Array) {
+        data.forEach((item) => {
+          formData.append(key, item)
+        })
+      } else {
+        if (data !== null) {
+          formData.append(key, data)
+        }
+      }
     })
     return formData
   }
 
   // 需要将叶子节点的 children 设置为 null
-  static recursionSetChildrenNull(tree: TreeVO) {
+  /* static recursionSetChildrenNull(tree: TreeVO) {
     if (tree.leaf) {
       tree.children = null
     } else {
@@ -35,7 +46,7 @@ export default class JsonUtil {
         this.recursionSetChildrenNull(child)
       }
     }
-  }
+  }*/
 
   // 递归清空子节点
   static treeRecursion(data: any[]) {
@@ -47,5 +58,14 @@ export default class JsonUtil {
       }
     }
     return data
+  }
+
+  private static isUndefined(obj) {
+    return obj === undefined
+  }
+
+  // 如果undefined返回null
+  static getValue<T>(obj: T): T {
+    return this.isUndefined(obj) ? null : obj
   }
 }

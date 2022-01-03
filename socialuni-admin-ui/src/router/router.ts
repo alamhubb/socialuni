@@ -16,7 +16,7 @@ export const menuRoutes = [
   {
     path: 'contentAudit',
     name: RouterName.contentAudit,
-    component: () => import('@/views/contentAudit/contentAudit.vue'),
+    component: () => import('@/views/audit/contentAudit.vue'),
     // children: showRouterList,
     meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
   },
@@ -25,6 +25,12 @@ export const menuRoutes = [
     name: RouterName.keywordsManage,
     component: () => import('@/views/keywordManage/keywordManage.vue'),
     meta: { title: RouterName.keywordsManage, icon: 'strengthMonitoring' }
+  },
+  {
+    path: '/imgAuditHistory',
+    name: RouterName.imgAuditHistory,
+    component: () => import('@/views/audit/imgAuditHistory.vue'),
+    meta: { title: RouterName.imgAuditHistory, icon: 'strengthMonitoring' }
   }
 ]
 

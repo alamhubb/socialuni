@@ -1,8 +1,7 @@
 <template>
   <div class="h100p flex-col">
     <div class="flex-none">
-      <el-button class="w60p h50" type="primary" @click="reportPassList">审核全部</el-button>
-      <el-button @click="testRequet">test测试</el-button>
+      <el-button class="w80p" type="primary" @click="reportPassList">审核全部</el-button>
     </div>
     <!--    <div class="flex-none flex-row pa-20">
           <div class="row-col-center w50r">
@@ -254,7 +253,6 @@ import ReportVO from '@/model/report/ReportVO'
 import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
 import ViolateType from '@/constants/ViolateType'
-import request from '@/plugins/request'
 
 @Component
 export default class PreAuditPage extends Vue {
@@ -333,28 +331,6 @@ export default class PreAuditPage extends Vue {
         })
       this.reports.splice(this.reports.findIndex(item => item.id === row.id), 1)
       this.initData()
-    })
-  }
-
-  testRequet() {
-    request.post('openService/tencent/cos/contentAuditCallback', {
-      'code': 0,
-      'data': {
-        'forbidden_status': 0,
-        'event': 'ReviewImage',
-        'porn_info': {
-          'hit_flag': 0,
-          'label': '',
-          'score': 9
-        },
-        'result': 0,
-        'trace_id': 'test_trace_id',
-        'url': 'test_image',
-        'cos_headers': {
-          'x-cos-meta-xx': 'xx'
-        }
-      },
-      'message': 'Test request when setting callback url'
     })
   }
 

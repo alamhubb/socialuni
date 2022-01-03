@@ -11,7 +11,8 @@
     "@mdi/font": "^5.9.55",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
-    "element-ui": "^2.14.1",
+    "element-ui": "^2.15.6",
+    "pinyin-match": "^1.2.2",
     "uuid": "^8.3.2",
     "vue": "^2.6.14",
     "vue-axios": "^2.1.5",
@@ -32,6 +33,8 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "postcss": "^7.0.35",
+    "postcss-comment": "^2.0.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "typescript": "^4.2.4",
@@ -40,8 +43,6 @@
     "vue-property-decorator": "^9.1.2",
     "vue-template-compiler": "^2.6.14",
     "vuex-class": "^0.3.2",
-    "vuex-class-modules": "^1.3.0",
-    "postcss": "^7.0.35",
-    "postcss-comment": "^2.0.0"
+    "vuex-class-modules": "^1.3.0"
   }
 }
