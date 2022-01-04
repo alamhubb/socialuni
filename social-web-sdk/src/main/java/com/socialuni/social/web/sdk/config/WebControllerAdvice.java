@@ -7,7 +7,7 @@ import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
 import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.web.sdk.utils.ErrorRequestLogUtil;
+import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -116,7 +116,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         requestLogDO.setSpendTime(spendTime);
 
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
-        ErrorRequestLogUtil.saveAsync(requestLogDO);
+        ErrorLogUtil.saveAsync(requestLogDO);
 
         log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
     }

@@ -2,8 +2,9 @@ package com.socialuni.social.web.sdk.config;
 
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.constant.ErrorCode;
+import com.socialuni.social.exception.constant.ErrorType;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.web.sdk.utils.ErrorRequestLogUtil;
+import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -51,13 +52,15 @@ public class SocialWebLogAspect {
                 requestLogDO.setSuccess(resultRO.getSuccess());
             } else {
                 requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
+                requestLogDO.setErrorType(ErrorType.error);
                 requestLogDO.setErrorMsg("系统异常");
                 requestLogDO.setSuccess(false);
                 requestLogDO.setInnerMsg("系统异常");
                 requestLogDO.setInnerMsgDetail(result.toString());
-                ErrorRequestLogUtil.saveAsync(requestLogDO);
+                ErrorLogUtil.saveAsync(requestLogDO);
             }
         }
+        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
         return result;
     }

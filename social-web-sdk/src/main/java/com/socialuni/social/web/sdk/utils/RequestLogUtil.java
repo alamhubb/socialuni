@@ -18,6 +18,7 @@ public class RequestLogUtil {
 
     public static RequestLogDO save(RequestLogDO operateLogDO) {
         return requestLogStore.save(operateLogDO);
+//        return operateLogDO;
     }
 
     public static void saveAsync(RequestLogDO requestLogDO) {

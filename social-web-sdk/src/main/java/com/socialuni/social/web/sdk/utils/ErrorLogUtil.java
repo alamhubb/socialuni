@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class ErrorRequestLogUtil {
+public class ErrorLogUtil {
     private static ErrorRequestLogStore errorRequestLogStore;
 
     @Resource
     public void setErrorRequestLogStore(ErrorRequestLogStore errorRequestLogStore) {
-        ErrorRequestLogUtil.errorRequestLogStore = errorRequestLogStore;
+        ErrorLogUtil.errorRequestLogStore = errorRequestLogStore;
     }
 
     public static void saveAsync(RequestLogDO requestLogDO) {
