@@ -28,7 +28,7 @@ import java.util.Date;
 
 @RestControllerAdvice
 @Slf4j
-public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
+public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object result, MethodParameter methodParameter,
                                   MediaType mediaType, Class clas, ServerHttpRequest serverHttpRequest,
