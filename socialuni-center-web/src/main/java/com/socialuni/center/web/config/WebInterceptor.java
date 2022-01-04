@@ -10,9 +10,11 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
+import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.sdk.utils.RedisUtil;
-import com.socialuni.social.sdk.utils.RequestLogUtil;
+import com.socialuni.social.web.sdk.utils.RequestLogDOUtil;
+import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestIdUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +29,7 @@ import java.util.Date;
 
 @Component
 @Slf4j
-public class UserAuthInterceptor implements HandlerInterceptor {
+public class WebInterceptor extends SocialWebRequestLogInterceptor {
     @Resource
     private RedisUtil redisUtil;
 
@@ -37,40 +39,22 @@ public class UserAuthInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
+        super.preHandle(request, res, o);
         String requestMethod = request.getMethod();
 
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
             return true;
         }
-
-        Date startTime = new Date();
-
-        String uri = request.getRequestURI();
-        String userIp = IpUtil.getIpAddr(request);
-
-        RequestLogDO requestLogDO = new RequestLogDO();
-        requestLogDO.setRequestId(RequestIdUtil.addId());
+        RequestLogDO requestLogDO = RequestLogUtil.get();
         UserDO user = CenterUserUtil.getMineUserInterceptor();
-        if (user != null) {
-            requestLogDO.setUserId(user.getId());
-        }
+        Integer userId = CenterUserUtil.getMineUserIdInterceptor();
+
+        requestLogDO.setUserId(userId);
         Integer devId = DevAccountUtils.getDevIdAllowNull();
-
         requestLogDO.setDevId(devId);
-        requestLogDO.setIp(userIp);
-        requestLogDO.setCreateTime(startTime);
-        requestLogDO.setSuccess(true);
-        requestLogDO.setErrorCode(ResultRO.successCode);
-        requestLogDO.setErrorType(ErrorType.success);
-        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
-        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
-        requestLogDO.setRequestMethod(requestMethod);
-        requestLogDO.setUri(uri);
-//        requestLogDO = RequestLogDOUtil.saveAsync(requestLogDO);
-//        RequestLogDOUtil.saveAsync(requestLogDO);
-        RequestLogUtil.set(requestLogDO);
-
-//        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri());
+        RequestLogDOUtil.saveAsync(requestLogDO);
+        String userIp = requestLogDO.getIp();
+        String uri = requestLogDO.getUri();
 
         String ipKey = "ipKey:" + userIp;
 

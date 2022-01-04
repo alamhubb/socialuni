@@ -19,14 +19,14 @@ import java.util.List;
 
 @Configuration
 public class WebCorsConfig implements WebMvcConfigurer {
-    @Resource
-    private UserAuthInterceptor userAuthInterceptor;
+    /*@Resource
+    private WebInterceptor webInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(userAuthInterceptor).addPathPatterns("/**");
-    }
+        registry.addInterceptor(webInterceptor).addPathPatterns("/**");
+    }*/
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

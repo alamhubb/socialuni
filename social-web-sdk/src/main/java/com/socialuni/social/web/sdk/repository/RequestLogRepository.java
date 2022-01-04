@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.repository;
+package com.socialuni.social.web.sdk.repository;
 
 
 import com.socialuni.social.web.sdk.model.RequestLogDO;

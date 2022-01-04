@@ -25,7 +25,7 @@ import java.util.Date;
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
 })
-public class RequestLogDO implements Serializable {
+public class RequestLogDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

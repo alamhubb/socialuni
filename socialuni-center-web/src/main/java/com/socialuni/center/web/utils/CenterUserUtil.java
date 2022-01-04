@@ -55,6 +55,19 @@ public class CenterUserUtil {
         return getMineUser(tokenDO);
     }
 
+    public static Integer getMineUserIdInterceptor() {
+        ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
+        if (tokenDO == null) {
+            return null;
+        }
+        UserDO user = SocialUserUtil.get(tokenDO.getUserId());
+        if (user.getStatus().equals(UserStatus.violation)) {
+            return null;
+        }
+        //返回user
+        return user.getId();
+    }
+
     public static UserDO getMineUserInterceptor() {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
         if (tokenDO == null) {

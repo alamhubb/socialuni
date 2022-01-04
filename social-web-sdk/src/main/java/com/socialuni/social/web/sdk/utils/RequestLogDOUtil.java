@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.web.sdk.utils;
 
 import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.sdk.store.RequestLogStore;
+import com.socialuni.social.web.sdk.store.RequestLogStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +18,11 @@ public class RequestLogDOUtil {
         RequestLogDOUtil.requestLogStore = requestLogStore;
     }
 
-    /*public static RequestLogDO save(RequestLogDO operateLogDO) {
-        return operateLogStore.save(operateLogDO);
-    }*/
+    public static RequestLogDO save(RequestLogDO operateLogDO) {
+        return requestLogStore.save(operateLogDO);
+    }
 
     public static void saveAsync(RequestLogDO requestLogDO) {
-        RequestLogUtil.remove();
         requestLogStore.saveAsync(requestLogDO);
     }
 }
