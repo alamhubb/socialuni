@@ -12,14 +12,11 @@ import javax.annotation.Resource;
 @Configuration
 public class WebCorsConfig implements WebMvcConfigurer {
     @Resource
-    private UserAuthInterceptor userAuthInterceptor;
-    @Resource
     private ProxyInterceptor proxyInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(userAuthInterceptor).addPathPatterns("/**");
         registry.addInterceptor(proxyInterceptor).addPathPatterns("/**");
     }
 

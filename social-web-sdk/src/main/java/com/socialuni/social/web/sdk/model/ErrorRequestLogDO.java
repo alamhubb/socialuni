@@ -1,6 +1,7 @@
 package com.socialuni.social.web.sdk.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,9 +13,10 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "request_log", indexes = {
+@Table(name = "error_request_log", indexes = {
         @Index(columnList = "devId"),
         @Index(columnList = "userId"),
+        @Index(columnList = "requestId"),
         @Index(columnList = "ip"),
         @Index(columnList = "requestMethod"),
         @Index(columnList = "uri"),
@@ -23,10 +25,12 @@ import java.util.Date;
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
 })
-public class RequestLogDO {
+@NoArgsConstructor
+public class ErrorRequestLogDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long requestId;
     //邀请你的用户
     private Integer devId;
     private Integer userId;
@@ -47,4 +51,23 @@ public class RequestLogDO {
     private String innerMsgDetail;
     private Date endTime;
     private Date createTime;
+
+    public ErrorRequestLogDO(RequestLogDO requestLogDO) {
+        this.requestId = requestLogDO.getId();
+        this.devId = requestLogDO.getDevId();
+        this.userId = requestLogDO.getUserId();
+        this.ip = requestLogDO.getIp();
+        this.uri = requestLogDO.getUri();
+        this.spendTime = requestLogDO.getSpendTime();
+        this.requestMethod = requestLogDO.getRequestMethod();
+        this.success = requestLogDO.getSuccess();
+        this.errorCode = requestLogDO.getErrorCode();
+        this.errorType = requestLogDO.getErrorType();
+        this.params = requestLogDO.getParams();
+        this.errorMsg = requestLogDO.getErrorMsg();
+        this.innerMsg = requestLogDO.getInnerMsg();
+        this.innerMsgDetail = requestLogDO.getInnerMsg();
+        this.endTime = requestLogDO.getEndTime();
+        this.createTime = requestLogDO.getCreateTime();
+    }
 }

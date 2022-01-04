@@ -3,13 +3,10 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.entity.model.DO.user.*;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.constant.status.UserStatus;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.repository.user.SocialUserViolationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -91,6 +88,27 @@ public class SocialUserUtil {
         //返回user
         UserDO mineUser = SocialUserUtil.get(tokenDO.getUserId());
         return mineUser;
+    }
+
+    public static Integer getMineUserIdInterceptor() {
+        UserDO user = SocialUserUtil.getMineUserInterceptor();
+        if (user == null) {
+            return null;
+        }
+        //返回user
+        return user.getId();
+    }
+
+    public static UserDO getMineUserInterceptor() {
+        UserDO user = SocialUserUtil.getMineUserAllowNull();
+        if (user == null) {
+            return null;
+        }
+        if (user.getStatus().equals(UserStatus.violation)) {
+            return null;
+        }
+        //返回user
+        return user;
     }
 
     //必须有，websocket无法从request中获取token只能传入

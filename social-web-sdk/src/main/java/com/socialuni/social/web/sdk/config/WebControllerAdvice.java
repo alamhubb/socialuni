@@ -1,18 +1,14 @@
-package com.socialuni.demo.config;
+package com.socialuni.social.web.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.web.sdk.utils.RequestLogUtil;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.JsonUtil;
-import com.socialuni.social.web.sdk.utils.IpUtil;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
-import feign.FeignException;
+import com.socialuni.social.web.sdk.model.RequestLogDO;
+import com.socialuni.social.web.sdk.utils.ErrorRequestLogUtil;
+import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -27,11 +23,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.ByteBuffer;
 import java.util.Date;
-import java.util.Optional;
 
 @RestControllerAdvice
 @Slf4j
@@ -67,46 +60,6 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         return true;
     }
 
-    @ExceptionHandler(value = SocialException.class)
-    public ResultRO<Void> socialExceptionHandler(SocialException exception) {
-        this.saveOperateLogDO(exception.getErrorMsg(), exception.getErrorCode(), exception.getErrorType(), exception.getInnerMsg(), null);
-        exception.printStackTrace();
-        ResultRO<Void> resultRO = new ResultRO<>(exception.getErrorCode(), exception.getErrorMsg());
-        return resultRO;
-    }
-
-    @ExceptionHandler(value = FeignException.class)
-    public ResultRO<Void> feignExceptionHandler(FeignException feignException) {
-        Optional<ByteBuffer> responseOpt = feignException.responseBody();
-        feignException.printStackTrace();
-        if (responseOpt.isPresent()) {
-            ByteBuffer byteBuffer = responseOpt.get();
-            ResultRO<Void> resultRO = JsonUtil.parse(byteBuffer, new ResultRO<>());
-            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, resultRO.getErrorMsg(), feignException.toString());
-            return resultRO;
-        } else {
-            String errorStr;
-            try {
-                errorStr = JsonUtil.objectMapper.writeValueAsString(feignException);
-            } catch (JsonProcessingException e) {
-                errorStr = "解析异常出错";
-                e.printStackTrace();
-            }
-            ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
-            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, feignException.toString(), errorStr);
-            return resultRO;
-        }
-    }
-
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResultRO<Void> BindExceptionHandler(MethodArgumentNotValidException exception) {
-        String msg = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-        ResultRO<Void> resultRO = new ResultRO<>(ErrorCode.PARAMS_ERROR, msg);
-        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, msg, exception.getMessage());
-        exception.printStackTrace();
-        return resultRO;
-    }
-
 
     /**
      * 全局异常捕捉处理
@@ -117,6 +70,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
         ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
+        log.info(exception.getClass().getName());
         log.info(exception.toString());
         String errorStr;
         try {
@@ -130,28 +84,25 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         return resultRO;
     }
 
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResultRO<Void> BindExceptionHandler(MethodArgumentNotValidException exception) {
+        String msg = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        ResultRO<Void> resultRO = new ResultRO<>(ErrorCode.PARAMS_ERROR, msg);
+        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, msg, exception.getMessage());
+        exception.printStackTrace();
+        return resultRO;
+    }
+
+    @ExceptionHandler(value = SocialException.class)
+    public ResultRO<Void> socialExceptionHandler(SocialException exception) {
+        this.saveOperateLogDO(exception.getErrorMsg(), exception.getErrorCode(), exception.getErrorType(), exception.getInnerMsg(), null);
+        exception.printStackTrace();
+        ResultRO<Void> resultRO = new ResultRO<>(exception.getErrorCode(), exception.getErrorMsg());
+        return resultRO;
+    }
+
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
         RequestLogDO requestLogDO = RequestLogUtil.get();
-
-//        Thread thread = Thread.currentThread();
-//        HttpServletRequest httpServletRequest = RequestUtil.getRequest();
-//        log.info("uri:{},thread:{},为null:{}", httpServletRequest.getRequestURI(), thread.getName(), requestLogDO == null);
-
-        if (requestLogDO == null) {
-            requestLogDO = new RequestLogDO();
-            HttpServletRequest request = RequestUtil.getRequest();
-            UserDO user = SocialUserUtil.getMineUserAllowNull();
-            if (user != null) {
-                requestLogDO.setUserId(user.getId());
-            }
-            String requestIp = IpUtil.getIpAddr(request);
-            String uri = request.getRequestURI();
-            String requestMethod = request.getMethod();
-            requestLogDO.setIp(requestIp);
-            requestLogDO.setCreateTime(new Date());
-            requestLogDO.setRequestMethod(requestMethod);
-            requestLogDO.setUri(uri);
-        }
 
         Date endDate = new Date();
         long spendTime = endDate.getTime() - requestLogDO.getCreateTime().getTime();
@@ -163,9 +114,11 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         requestLogDO.setInnerMsgDetail(innerMsgDetail);
         requestLogDO.setEndTime(endDate);
         requestLogDO.setSpendTime(spendTime);
-        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
 
-        log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getRequestId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
+        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
+        ErrorRequestLogUtil.saveAsync(requestLogDO);
+
+        log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

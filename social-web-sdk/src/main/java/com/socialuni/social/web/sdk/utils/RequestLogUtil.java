@@ -3,14 +3,16 @@ package com.socialuni.social.web.sdk.utils;
 
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.store.RequestLogStore;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class RequestLogUtil {
     private static RequestLogStore requestLogStore;
 
     @Resource
-    public void setOperateLogStore(RequestLogStore requestLogStore) {
+    public void setRequestLogStore(RequestLogStore requestLogStore) {
         RequestLogUtil.requestLogStore = requestLogStore;
     }
 

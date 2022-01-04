@@ -36,8 +36,7 @@ public class SocialWebRequestLogInterceptor implements HandlerInterceptor {
         String userIp = IpUtil.getIpAddr(request);
 
         RequestLogDO requestLogDO = new RequestLogDO();
-        requestLogDO.setRequestId(RequestIdUtil.addId());
-
+//        requestLogDO.setRequestId(RequestIdUtil.addId());
         requestLogDO.setIp(userIp);
         requestLogDO.setCreateTime(startTime);
         requestLogDO.setSuccess(true);

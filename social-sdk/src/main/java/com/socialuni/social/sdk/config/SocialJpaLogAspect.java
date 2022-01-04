@@ -1,10 +1,8 @@
-package com.socialuni.center.web.config;
+package com.socialuni.social.sdk.config;
 
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
-import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.sdk.utils.JpaSqlLogDOUtil;
+import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -21,50 +19,7 @@ import java.util.Date;
 @Aspect
 @Component
 @Slf4j
-public class LogAspect {
-    /**
-     * 定义切入点，controller下面的所有类的所有公有方法，这里需要更改成自己项目的
-     */
-    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
-    public void requestLog() {
-    }
-
-    /**
-     * 方法之前执行，日志打印请求信息
-     *
-     * @param joinPoint joinPoint
-     */
-    @Around("requestLog()")
-    public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
-        RequestLogDO requestLogDO = RequestLogUtil.get();
-        String params = Arrays.toString(joinPoint.getArgs());
-        requestLogDO.setParams(params);
-
-        Object result = joinPoint.proceed();
-
-        Date endDate = new Date();
-        long spendTime = endDate.getTime() - requestLogDO.getCreateTime().getTime();
-        requestLogDO.setEndTime(endDate);
-        requestLogDO.setSpendTime(spendTime);
-        if (result != null) {
-            if (result instanceof ResultRO) {
-                ResultRO resultRO = (ResultRO) result;
-                requestLogDO.setErrorCode(resultRO.getErrorCode());
-                requestLogDO.setErrorMsg(resultRO.getErrorMsg());
-                requestLogDO.setSuccess(resultRO.getSuccess());
-            } else {
-                requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
-                requestLogDO.setErrorMsg("系统异常");
-                requestLogDO.setSuccess(false);
-                requestLogDO.setInnerMsg("系统异常");
-                requestLogDO.setInnerMsgDetail(result.toString());
-            }
-        }
-        log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getRequestId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
-        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
-        return result;
-    }
-
+public class SocialJpaLogAspect {
     //获取方法类全名+方法名
     private String getInterfaceAndMethodName(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
         //获取目标类对象
@@ -110,7 +65,7 @@ public class LogAspect {
 
             RequestLogDO requestLogDO = RequestLogUtil.get();
             if (requestLogDO != null) {
-                jpaSqlLogDO.setRequestId(requestLogDO.getRequestId());
+                jpaSqlLogDO.setRequestId(requestLogDO.getId());
             }
             log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
 
