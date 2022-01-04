@@ -14,6 +14,29 @@ import java.util.Objects;
  * 当前线程的request工具类，从request中获取内容
  */
 public class RequestUtil {
+
+    private static final ThreadLocal<RequestLogDO> requestLog = new ThreadLocal<>();
+
+    public static void set(RequestLogDO requestLogDO) {
+        requestLog.set(requestLogDO);
+    }
+
+    /*public static RequestLogDO getAndRemove() {
+        RequestLogDO requestLogDO = requestLog.get();
+        requestLog.remove();
+        return requestLogDO;
+    }*/
+
+    public static RequestLogDO get() {
+        return requestLog.get();
+    }
+
+    public static void remove() {
+        requestLog.remove();
+    }
+
+
+
     //获取到当前线程绑定的请求对象
     public static HttpServletRequest getRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();

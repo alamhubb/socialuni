@@ -1,11 +1,8 @@
-package com.socialuni.social.entity.model.DO;
+package com.socialuni.social.web.sdk.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -28,7 +25,10 @@ import java.util.Date;
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
 })
-public class RequestLogDO extends CommonBaseDO implements Serializable {
+public class RequestLogDO implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     //邀请你的用户
     private Integer devId;
     private Integer requestId;
@@ -49,10 +49,5 @@ public class RequestLogDO extends CommonBaseDO implements Serializable {
     @Column(columnDefinition = "longtext")
     private String innerMsgDetail;
     private Date endTime;
-
-
-    public RequestLogDO() {
-    }
-
-
+    private Date createTime;
 }

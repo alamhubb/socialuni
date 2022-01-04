@@ -38,4 +38,13 @@ public class TencentCosAuditRecordDO extends CommonContentBaseDO {
     private String url;
     private Integer code;
     private String message;
+
+    //根据内容类型
+    private String contentType;
+    private String imgThumbType;
+    private String imgKey;
+    //key获取
+    private Integer contentImgId;
+    private Integer userId;
+    private Integer contentId;
 }

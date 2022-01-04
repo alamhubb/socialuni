@@ -1,9 +1,7 @@
 package com.socialuni.social.sdk.store;
 
 import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
-import com.socialuni.social.entity.model.DO.RequestLogDO;
 import com.socialuni.social.sdk.repository.JpaSqlLogRepository;
-import com.socialuni.social.sdk.repository.RequestLogRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 

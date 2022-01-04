@@ -45,17 +45,7 @@ public class AdminLoginService {
         }
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        String devSecretKey = devAccountDO.getSecretKey();
-        //生成userToken
-        String userToken = SocialTokenUtil.generateTokenByUserKey(devSecretKey);
-        userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountDO.getId())).getTokenCode();
-
-        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
-//        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
-
-        SocialLoginRO<DevAccountRO> socialLoginRO = new SocialLoginRO<>(userToken, devAccountRO);
-
-        return ResultRO.success(socialLoginRO);
+        return getSocialLoginROResultRO(devAccountDO);
     }
 
 
@@ -81,13 +71,17 @@ public class AdminLoginService {
         if (devAccountDO == null) {
             devAccountDO = devAccountEntity.createDevAccount(phoneNum);
         }
+        return getSocialLoginROResultRO(devAccountDO);
 
+    }
+
+    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountDO devAccountDO) {
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        Integer userId = devAccountDO.getId();
+        String devSecretKey = devAccountDO.getSecretKey();
         //生成userToken
-        String userToken = SocialTokenUtil.generateTokenByUserId(userId);
-        userToken = devTokenRepository.save(new DevTokenDO(userToken, userId)).getTokenCode();
+        String userToken = SocialTokenUtil.generateTokenByUserKey(devSecretKey);
+        userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountDO.getId())).getTokenCode();
 
         DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
 //        devAccountRO.setSecretKey(devAccountDO.getSecretKey());

@@ -1,20 +1,9 @@
 package com.socialuni.demo.config;
 
 import com.socialuni.api.config.SocialFeignHeaderName;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.entity.model.DO.RequestLogDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.utils.RedisUtil;
-import com.socialuni.social.sdk.utils.RequestLogUtil;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.model.SocialUserAccountUtil;
-import com.socialuni.social.web.sdk.utils.IpUtil;
-import com.socialuni.social.web.sdk.utils.RequestIdUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -24,18 +13,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 
 @Component
 @Slf4j

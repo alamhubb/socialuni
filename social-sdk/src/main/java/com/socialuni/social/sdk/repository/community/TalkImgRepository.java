@@ -10,6 +10,9 @@ public interface TalkImgRepository extends JpaRepository<SocialTalkImgDO, Intege
     @Cacheable(cacheNames = "talkImgsTalkId", key = "#talkId")
     List<SocialTalkImgDO> findTop3ByTalkId(Integer talkId);
 
+    //获取talkImg
+    SocialTalkImgDO findFirstBySrc(String imgUlr);
+
 //    @CachePut(cacheNames = "talkImgsTalkId", key = "#imgs[0].talkId")
 //    List<TalkImgDO> saveAll(List<TalkImgDO> imgs);
 }

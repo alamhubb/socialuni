@@ -2,7 +2,7 @@ package com.socialuni.demo.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.entity.model.DO.RequestLogDO;
+import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.exception.constant.ErrorCode;

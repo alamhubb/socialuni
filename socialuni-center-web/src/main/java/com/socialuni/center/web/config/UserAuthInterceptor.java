@@ -10,7 +10,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.entity.model.DO.RequestLogDO;
+import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.sdk.utils.RequestLogUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
