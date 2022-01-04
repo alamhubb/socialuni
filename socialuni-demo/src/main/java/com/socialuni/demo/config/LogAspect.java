@@ -3,7 +3,6 @@ package com.socialuni.demo.config;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.exception.constant.ErrorCode;
-import com.socialuni.social.web.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -73,7 +72,7 @@ public class LogAspect {
         }
         log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getRequestId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
 
-        RequestLogDOUtil.saveAsync(requestLogDO);
+        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         return result;
     }
 }

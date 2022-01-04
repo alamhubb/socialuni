@@ -7,7 +7,6 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.web.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.JsonUtil;
@@ -164,7 +163,7 @@ public class WebControllerAdvice implements ResponseBodyAdvice<Object> {
         requestLogDO.setInnerMsgDetail(innerMsgDetail);
         requestLogDO.setEndTime(endDate);
         requestLogDO.setSpendTime(spendTime);
-        RequestLogDOUtil.saveAsync(requestLogDO);
+        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
 
         log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getRequestId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
     }

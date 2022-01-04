@@ -50,7 +50,7 @@ public class SocialWebRequestLogInterceptor implements HandlerInterceptor {
 //        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
 //        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
 
-        requestLogDO = RequestLogDOUtil.save(requestLogDO);
+        requestLogDO = RequestLogUtil.save(requestLogDO);
         RequestLogUtil.set(requestLogDO);
         return true;
     }

@@ -13,7 +13,6 @@ import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.sdk.utils.RedisUtil;
-import com.socialuni.social.web.sdk.utils.RequestLogDOUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestIdUtil;
@@ -52,7 +51,7 @@ public class WebInterceptor extends SocialWebRequestLogInterceptor {
         requestLogDO.setUserId(userId);
         Integer devId = DevAccountUtils.getDevIdAllowNull();
         requestLogDO.setDevId(devId);
-        RequestLogDOUtil.saveAsync(requestLogDO);
+        RequestLogUtil.saveAsync(requestLogDO);
         String userIp = requestLogDO.getIp();
         String uri = requestLogDO.getUri();
 
