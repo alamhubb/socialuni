@@ -83,7 +83,7 @@ import { socialTalkModule, socialUserStore } from '../../store'
 import MsgUtil from '../../utils/MsgUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import Toast from '../../utils/Toast'
+import ToastUtil from '../../utils/ToastUtil'
 
 @Component({
   components: {
@@ -131,7 +131,7 @@ export default class TalkItemComment extends Vue {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
-        Toast.toast('已抱过不能取消')
+        ToastUtil.toast('已抱过不能取消')
         return
       }
       this.talk.hasHugged = true

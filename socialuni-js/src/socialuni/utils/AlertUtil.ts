@@ -1,4 +1,4 @@
-export default class Alert {
+export default class AlertUtil {
   public static confirm (msg: string, okLabel = '确定', cancel = '取消') {
     return new Promise((resolve, reject) => {
       uni.showModal({

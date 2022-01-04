@@ -132,7 +132,7 @@ import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import PhoneNumFormData from '@/socialuni/model/phone/PhoneNumFormData'
 import LoginService from '@/socialuni/service/LoginService'
 import PhoneService from '@/socialuni/service/PhoneService'
-import Alert from '@/socialuni/utils/Alert'
+import AlertUtil from '@/socialuni/utils/AlertUtil'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
@@ -277,7 +277,7 @@ export default class QcLogin extends Vue {
     if (socialSystemModule.isIosAndMpQQ) {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
-    Alert.hint(msg).finally(() => {
+    AlertUtil.hint(msg).finally(() => {
       if (socialOAuthModule.isThreeAuth) {
         if (this.hasPhoneNum) {
           PageUtil.toOAuthPage()

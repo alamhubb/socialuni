@@ -69,7 +69,7 @@
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import PhoneNumFormData from '@/socialuni/model/phone/PhoneNumFormData'
 import CommonUtil from '@/socialuni/utils/CommonUtil'
-import Toast from '@/socialuni/utils/Toast'
+import ToastUtil from '@/socialuni/utils/ToastUtil'
 import PhoneAPI from '@/socialuni/api/PhoneAPI'
 import { socialConfigStore } from '@/socialuni/store'
 import ConfigMap from '@/socialuni/const/ConfigMap'
@@ -152,10 +152,10 @@ export default class PhoneLoginForm extends Vue {
 
   sendCodeClick () {
     if (PhoneNumFormData.phoneNumberError(this.value.phoneNum)) {
-      return Toast.toast('请输入正确的手机号')
+      return ToastUtil.toast('请输入正确的手机号')
     }
     if (this.countDown) {
-      return Toast.toast('验证码发送频繁，请等待')
+      return ToastUtil.toast('验证码发送频繁，请等待')
     }
 
     this.authCodeInputFocus()
@@ -172,7 +172,7 @@ export default class PhoneLoginForm extends Vue {
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
     PhoneAPI.sendAuthCodeAPI(this.value.phoneNum).then(() => {
       // 提示验证码发送成功
-      Toast.toast('验证码发送成功')
+      ToastUtil.toast('验证码发送成功')
     })
   }
 }

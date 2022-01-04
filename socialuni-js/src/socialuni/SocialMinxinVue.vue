@@ -6,7 +6,7 @@ import UniUtil from '@/socialuni/utils/UniUtil'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
 import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
 import OAuthService from '@/socialuni/service/OAuthService'
-import Toast from '@/socialuni/utils/Toast'
+import ToastUtil from '@/socialuni/utils/ToastUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import ResultRO from '@/socialuni/model/social/ResultRO'
 
@@ -54,7 +54,7 @@ export default class SocialMinxinVue extends Vue {
           } else {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
           }
-          Toast.toastLong('授权成功')
+          ToastUtil.toastLong('授权成功')
           PageUtil.toMinePage()
         }
       }

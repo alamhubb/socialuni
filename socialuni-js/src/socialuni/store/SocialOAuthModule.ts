@@ -2,7 +2,7 @@ import { Action, Module, VuexModule } from 'vuex-class-modules'
 import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import DevAccountAPI from '@/socialuni/api/DevAccountAPI'
 import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'
-import Alert from '@/socialuni/utils/Alert'
+import AlertUtil from '@/socialuni/utils/AlertUtil'
 import LoginProvider from '@/socialuni/const/LoginProvider'
 import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
 import { socialOAuthModule } from '@/socialuni/store/index'
@@ -58,7 +58,7 @@ export default class SocialOAuthModule extends VuexModule {
              result.errorCode = ErrorCode.business
              result.errorMsg = '社交联盟密钥错误'
              result.success = false*/
-            Alert.hint('授权类型错误')
+            AlertUtil.hint('授权类型错误')
             // uni.navigateBackMiniProgram({ extraData: result })
           }
           //支持非授权跳转

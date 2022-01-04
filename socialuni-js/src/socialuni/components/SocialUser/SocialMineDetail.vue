@@ -152,7 +152,7 @@ import { socialAppModule, socialUserModule, socialUserStore } from '../../store'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
 import OpenDataAPI from '../../api/OpenDataAPI'
-import Toast from '../../utils/Toast'
+import ToastUtil from '../../utils/ToastUtil'
 import MsgInput from '../MsgInput.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.vue'
@@ -255,7 +255,7 @@ export default class SocialMineDetail extends Vue {
   initQuery () {
     if (this.user) {
       socialUserModule.getMineUserAction().then(() => {
-        Toast.toast('刷新成功')
+        ToastUtil.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()
       })

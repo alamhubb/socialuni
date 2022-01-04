@@ -40,7 +40,7 @@ import { socialTalkModule, socialTalkStore, socialUserStore } from '../store'
 import PlatformUtils from '../utils/PlatformUtils'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import MsgUtil from '../utils/MsgUtil'
-import Toast from '../utils/Toast'
+import ToastUtil from '../utils/ToastUtil'
 
 @Component
 export default class MsgInput extends Vue {
@@ -77,7 +77,7 @@ export default class MsgInput extends Vue {
         // 申请订阅
         PlatformUtils.requestSubscribeComment()
       } else {
-        Toast.toast('不能发表内容为空的评论')
+        ToastUtil.toast('不能发表内容为空的评论')
       }
     } else {
       MsgUtil.unBindPhoneNum()

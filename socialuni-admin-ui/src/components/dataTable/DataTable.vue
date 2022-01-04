@@ -16,11 +16,11 @@
                 <div class="row-col-center">
                   <div class="flex-none">{{ searchTitle }}：</div>
                   <el-input
-                    v-model="searchForm.searchText"
-                    size="small"
-                    placeholder="请输入要搜索的内容"
-                    class="w200"
-                    @input.native="filterTextInput"
+                      v-model="searchForm.searchText"
+                      size="small"
+                      placeholder="请输入要搜索的内容"
+                      class="w200"
+                      @input.native="filterTextInput"
                   />
                   <slot name="headerLeftAppend"></slot>
                 </div>
@@ -38,13 +38,13 @@
     </slot>
 
     <y-table
-      ref="table"
-      class="flex-1"
-      :data="filterTableList"
-      v-bind="$attrs"
-      :checked="checked"
-      @current-change="currentRowChange"
-      @selection-change="selectionChange"
+        ref="table"
+        class="flex-1"
+        :data="filterTableList"
+        v-bind="$attrs"
+        :checked="checked"
+        @current-change="currentRowChange"
+        @selection-change="selectionChange"
     >
       <slot/>
     </y-table>
@@ -58,10 +58,10 @@
         </slot>
         <div v-if="showPage" class="flex-1 row-end">
           <y-pagination
-            @change="filterTableData"
-            v-model="pageable"
-            layout="total,sizes,prev,pager,next"
-            :page-sizes="[10, 20, 50, 100]"
+              @change="filterTableData"
+              v-model="pageable"
+              layout="total,sizes,prev,pager,next"
+              :page-sizes="[10, 20, 50, 100]"
           />
         </div>
       </div>

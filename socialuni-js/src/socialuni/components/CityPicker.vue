@@ -62,7 +62,7 @@ import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator
 import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
-import Alert from '../utils/Alert'
+import AlertUtil from '../utils/AlertUtil'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import QPicker from '@/qing-ui/components/QPicker/QPicker.vue'
 
@@ -130,7 +130,7 @@ export default class CityPicker extends Vue {
       this.bottomDistrict = district
       this.initPopupCity()
     }).catch(() => {
-      Alert.hint('定位功能已关闭，请手动开启')
+      AlertUtil.hint('定位功能已关闭，请手动开启')
       throw Error()
     })
   }

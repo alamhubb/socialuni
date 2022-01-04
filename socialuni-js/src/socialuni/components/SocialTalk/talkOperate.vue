@@ -67,7 +67,7 @@ import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../const/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
 import UniUtil from '../../utils/UniUtil'
-import Alert from '../../utils/Alert'
+import AlertUtil from '../../utils/AlertUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import UPopup from 'uview-ui/components/u-popup/u-popup'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
@@ -109,7 +109,7 @@ export default class TalkOperate extends Vue {
       reportAdd.contentId = this.comment.id
     }
     if (ReportType.other === this.reportType && !this.reportContent) {
-      Alert.hint('选择其他违规时，请您补充观点')
+      AlertUtil.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
@@ -125,7 +125,7 @@ export default class TalkOperate extends Vue {
         }
         // 必须最后清空因为前面还要使用做判断
         this.reportDialogClose()
-        Alert.hint(res.data)
+        AlertUtil.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -160,7 +160,7 @@ export default class TalkOperate extends Vue {
   // 用户自己删除
   userDeleteComment () {
     this.commentActionClose()
-    Alert.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
+    AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
       this.deleteComment()
     })
   }

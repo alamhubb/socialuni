@@ -1,4 +1,4 @@
-export default class Toast {
+export default class ToastUtil {
   //交互
   public static toast (title: string, time?: number) {
     return new Promise((resolve, reject) => {

@@ -103,7 +103,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import QcLogin from '@/pages/login/QcLogin.vue'
 import { socialUserModule, socialUserStore } from '@/socialuni/store'
-import Toast from '@/socialuni/utils/Toast'
+import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/const/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import { oAuthModule } from '@/store'
@@ -209,7 +209,7 @@ export default class MineDetail extends Vue {
   initQuery () {
     if (this.user) {
       socialUserModule.getMineUserAction().then(() => {
-        Toast.toast('刷新成功')
+        ToastUtil.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()
       })

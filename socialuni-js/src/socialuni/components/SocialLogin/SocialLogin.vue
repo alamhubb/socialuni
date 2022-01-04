@@ -86,7 +86,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { socialAppModule, socialSystemModule, socialSystemStore, socialUserStore } from '../../store'
-import Alert from '../../utils/Alert'
+import AlertUtil from '../../utils/AlertUtil'
 import LoginService from '../../service/LoginService'
 import PageUtil from '../../utils/PageUtil'
 import SystemStoreProp from '../../store/SystemStoreProp'
@@ -178,7 +178,7 @@ export default class SocialLogin extends Vue {
     if (socialSystemModule.isIosAndMpQQ) {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
-    Alert.hint(msg).finally(() => {
+    AlertUtil.hint(msg).finally(() => {
       this.goBackPage()
     })
   }

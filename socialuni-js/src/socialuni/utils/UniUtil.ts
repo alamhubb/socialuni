@@ -3,12 +3,12 @@
  * @Date 2021-06-26 20:48
  * @Version 1.0
  */
-import GetSystemInfoResult = UniApp.GetSystemInfoResult;
-import GetProviderRes = UniApp.GetProviderRes;
-import LoginRes = UniApp.LoginRes;
-import GetUserInfoRes = UniApp.GetUserInfoRes;
+import GetSystemInfoResult = UniApp.GetSystemInfoResult
+import GetProviderRes = UniApp.GetProviderRes
+import LoginRes = UniApp.LoginRes
+import GetUserInfoRes = UniApp.GetUserInfoRes
 import AppMsg from '../const/AppMsg'
-import Toast from './Toast'
+import ToastUtil from './ToastUtil'
 import DomFile from '../model/DomFile'
 import UUIDUtil from './UUIDUtil'
 import ImgUtil from './ImgUtil'
@@ -23,7 +23,7 @@ export default class UniUtil {
         success () {
           if (hint) {
             uni.hideToast()
-            Toast.toast(hint)
+            ToastUtil.toast(hint)
           }
           resolve(null)
         },
@@ -172,7 +172,7 @@ export default class UniUtil {
             // 获取压缩比
             const imgSize: number = imgFile.size
             if (imgSize / 1024 / 1024 > 10) {
-              Toast.toastLong(AppMsg.imgSizeNotGt10MBMsg)
+              ToastUtil.toastLong(AppMsg.imgSizeNotGt10MBMsg)
               reject(AppMsg.imgSizeNotGt10MBMsg)
             }
             let ratio: number = 100

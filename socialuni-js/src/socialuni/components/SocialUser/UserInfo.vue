@@ -361,8 +361,8 @@ import {
   socialUserStore
 } from '../../store'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
-import Alert from '../../utils/Alert'
-import Toast from '../../utils/Toast'
+import AlertUtil from '../../utils/AlertUtil'
+import ToastUtil from '../../utils/ToastUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
@@ -476,7 +476,7 @@ export default class UserInfo extends Vue {
     const userImg: ImgFileVO = this.userProp.imgs[0]
     reportAdd.contentId = userImg.id
     if (ReportType.other === this.reportType && !this.reportContent) {
-      Alert.hint('选择其他违规时，请您补充观点')
+      AlertUtil.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         // todo  举报过后，是否大于系统阀值，大于系统阀值隐藏
@@ -485,7 +485,7 @@ export default class UserInfo extends Vue {
           this.frontDeleteUserImg()
         }
         this.closeDialogAndInitData()
-        Alert.hint(res.data)
+        AlertUtil.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -533,21 +533,21 @@ export default class UserInfo extends Vue {
 
   deleteImg () {
     if (this.userProp.imgs.length > 1) {
-      Alert.warning('请确认是否删除照片？').then(() => {
+      AlertUtil.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
         UserAPI.deleteUserImgAPI(imgs[0]).then((res: any) => {
           socialUserModule.setUser(res.data)
         })
       })
     } else {
-      Toast.toastLong('请至少保留一张照片')
+      ToastUtil.toastLong('请至少保留一张照片')
     }
   }
 
 
   async chooseImg () {
     if (this.mineUser.imgs.length > 2) {
-      Toast.toastLong('最多上传3张照片，请删除后继续！')
+      ToastUtil.toastLong('最多上传3张照片，请删除后继续！')
       return
     }
     try {
@@ -679,11 +679,11 @@ export default class UserInfo extends Vue {
   }
 
   hintJusticeInfo () {
-    Toast.toastLong('正义值，正确举报会增加正义值')
+    ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   hintBindTwice () {
-    Alert.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
+    AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
   addFollow () {
@@ -747,9 +747,9 @@ export default class UserInfo extends Vue {
   }
 
   refreshMine () {
-    Alert.confirm('是否刷新用户信息').then(() => {
+    AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
-        Toast.toast('刷新成功')
+        ToastUtil.toast('刷新成功')
       })
     })
   }

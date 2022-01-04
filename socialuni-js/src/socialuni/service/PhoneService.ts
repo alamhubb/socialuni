@@ -1,5 +1,5 @@
 import { socialUserModule } from '../store'
-import Toast from '../utils/Toast'
+import ToastUtil from '../utils/ToastUtil'
 import PhoneAPI from '../api/PhoneAPI'
 import UniLoginUtil from '../utils/UniLoginUtil'
 import LoginProvider from '../const/LoginProvider'
@@ -28,7 +28,7 @@ export default class PhoneService {
       const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
       socialUserModule.setUser(res.data)
     } else {
-      Toast.toast('您选择了不绑定')
+      ToastUtil.toast('您选择了不绑定')
       throw Error('您选择了不绑定')
     }
   }

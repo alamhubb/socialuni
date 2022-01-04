@@ -29,14 +29,14 @@ public class TencentCloudCosController {
         recordDO.setMessage(result.getMessage());
 
         //设置data内容
-        recordDO.setTrace_id(callbackDataRO.getTrace_id());
-        recordDO.setForbidden_status(callbackDataRO.getForbidden_status());
+        recordDO.setTraceId(callbackDataRO.getTrace_id());
+        recordDO.setForbiddenStatus(callbackDataRO.getForbidden_status());
         recordDO.setEvent(callbackDataRO.getEvent());
         recordDO.setResult(callbackDataRO.getResult());
         recordDO.setUrl(callbackDataRO.getUrl());
         //pornInfo
         TencentCosCallbackDataPornInfo pornInfo = callbackDataRO.getPorn_info();
-        recordDO.setHit_flag(pornInfo.getHit_flag());
+        recordDO.setHitFlag(pornInfo.getHit_flag());
         recordDO.setScore(pornInfo.getScore());
         recordDO.setLabel(pornInfo.getLabel());
 

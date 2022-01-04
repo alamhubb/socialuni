@@ -46,7 +46,7 @@
                            :data-src="image" @click="previewImage"/>
                   </view>
                 </block>
-                <view class="uni-uploader__input-box" v-show="showsImgFiles.length < 3">
+                <view class="uni-uploader__input-box" v-show="showImgFiles.length < 3">
                   <view class="uni-uploader__input" @click="chooseImage"/>
                 </view>
               </view>
@@ -157,11 +157,11 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import CityPicker from '../CityPicker.vue'
 import TalkAddTagSearch from '../SocialTagAdd/TalkAddTagSearch.vue'
-import Alert from '../../utils/Alert'
+import AlertUtil from '../../utils/AlertUtil'
 import LocationUtil from '../../utils/LocationUtil'
 import VisibleType from '../../const/VisibleType'
 import EnumStrVO from '../../const/EnumStrVO'
-import Toast from '../../utils/Toast'
+import ToastUtil from '../../utils/ToastUtil'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
 import QButton from '../../../qing-ui/components/QButton/QButton.vue'
 import PageUtil from '../../utils/PageUtil'
@@ -179,6 +179,7 @@ import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import SCircleSearch from '@/socialuni/components/SCircleSearch.vue'
+import AppMsg from '@/socialuni/const/AppMsg'
 
 @Component({
   components: {
@@ -224,7 +225,7 @@ export default class SocialTalkAddPage extends Vue {
   visibleTypes = VisibleType.enums
 
   district: DistrictVO = socialLocationModule.location
-  showsImgFiles: DomFile [] = []
+  showImgFiles: DomFile [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
   showSearch = false
@@ -264,6 +265,8 @@ export default class SocialTalkAddPage extends Vue {
 
   //进入talk页面，需要加载下当前地理位置，发布时携带
   created () {
+    this.cosAuthRO = null
+    this.showImgFiles = []
     this.tags = JsonUtils.deepClone(this.storeTags)
     this.district = socialLocationModule.location
 
@@ -290,11 +293,11 @@ export default class SocialTalkAddPage extends Vue {
 
   onUnload () {
     this.talkContent = ''
-    this.showsImgFiles = []
+    this.showImgFiles = []
   }
 
   get showImgUrls () {
-    return this.showsImgFiles.map((item: DomFile) => item.path)
+    return this.showImgFiles.map((item: DomFile) => item.path)
   }
 
   openTagSearchVue (query: boolean) {
@@ -343,7 +346,7 @@ export default class SocialTalkAddPage extends Vue {
   checkTag (tag: TagVO) {
     if (this.selectTags.length > 4) {
       // todo 后台还没有校验
-      Alert.hint('最多选择5个话题')
+      AlertUtil.hint('最多选择5个话题')
       return
     }
     let tagInTags: TagVO = this.tags.find(item => item.id === tag.id)
@@ -393,35 +396,37 @@ export default class SocialTalkAddPage extends Vue {
 
   addTalk () {
     this.buttonDisabled = true
-    if (this.talkContent || this.showsImgFiles.length) {
+    if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
-        return Alert.hint('动态最多支持200个字，请精简动态内容')
+        return AlertUtil.hint('动态最多支持200个字，请精简动态内容')
       }
       this.addTalkHandler()
       // 申请订阅
       PlatformUtils.requestSubscribeTalk()
     } else {
-      Toast.toastLong('不能发布文字和图片均为空的动态')
+      ToastUtil.toastLong('不能发布文字和图片均为空的动态')
       this.buttonDisabled = false
     }
   }
 
   addTalkHandler () {
     uni.showLoading({ title: '发布中' })
-    if (this.showsImgFiles.length === 0) {
+    if (this.showImgFiles.length === 0) {
       this.publishTalk()
     } else {
       if (this.cosAuthRO) {
         this.uploadImgList()
         this.publishTalk()
       } else {
+        uni.hideLoading()
+        AlertUtil.error('上传图片失败' + AppMsg.contactServiceMsg)
         AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       }
     }
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showsImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
+    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
@@ -434,42 +439,46 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   async uploadImgList () {
-    //设置图片路径
-    this.showsImgFiles.forEach(item => {
-      item.src = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
+    //设置图片路径，必须在这里设置，如果放到获取的地方，可能多次上传，就不行了
+    this.showImgFiles.forEach(item => {
+      //只有不包含，才赋值src，有值代表已经赋值过了
+      if (item.src.indexOf('https') < 0) {
+        item.src = this.cosAuthRO.uploadImgPath + 'talk/' + item.src
+      }
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
-    CosUtil.postImgList(this.showsImgFiles, this.cosAuthRO)
+    CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
   }
 
   deleteImg (e) {
-    this.showsImgFiles.splice(e, 1)
+    this.showImgFiles.splice(e, 1)
   }
 
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */
   async chooseImage () {
-    if (this.showsImgFiles.length >= this.imgMaxSize) {
+    if (this.showImgFiles.length >= this.imgMaxSize) {
       const isContinue = await this.isFullImg()
       console.log('是否继续?', isContinue)
       if (!isContinue) {
         return
       }
     }
-    const count = this.imgMaxSize - this.showsImgFiles.length
+    const count = this.imgMaxSize - this.showImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
     console.log(imgFiles)
-    this.showsImgFiles.push(...imgFiles)
+    this.showImgFiles.push(...imgFiles)
     //获取cos认证信息
     this.getCosAuthRO()
   }
 
   getCosAuthRO () {
-    CosAPI.getCosAuthorizationAPI().then((res) => {
-      this.cosAuthRO = res.data
-      console.log(this.cosAuthRO)
-    })
+    if (!this.cosAuthRO) {
+      CosAPI.getCosAuthorizationAPI().then((res) => {
+        this.cosAuthRO = res.data
+      })
+    }
   }
 
   isFullImg () {
@@ -478,7 +487,7 @@ export default class SocialTalkAddPage extends Vue {
         content: '已经有' + this.imgMaxSize + '张图片了,是否清空现有图片？',
         success: (e) => {
           if (e.confirm) {
-            this.showsImgFiles = []
+            this.showImgFiles = []
             resolve(true)
           } else {
             resolve(false)

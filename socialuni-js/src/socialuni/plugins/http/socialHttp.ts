@@ -6,7 +6,7 @@ import UserService from '../../service/UserService'
 import ErrorConst from '../../const/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
-import Alert from '../../utils/Alert'
+import AlertUtil from '../../utils/AlertUtil'
 import { socialConfig } from '../../index'
 import SocialuniConfig from '../../model/SocialuniConfig'
 import SocialSystemInfo from '../../const/SocialSystemInfo'
@@ -68,13 +68,13 @@ socialHttp.interceptor.response(
           // 已知可能，切换环境导致token不同
           UserService.clearUserInfoCom()
           if (result && result.errorMsg) {
-            Alert.hint(result.errorMsg)
+            AlertUtil.hint(result.errorMsg)
           } else {
             if (ErrorConst.not_logged === error.statusCode) {
               MsgUtil.unLoginMessage()
             } else {
               const msg: string = socialConfigModule.systemError605
-              Alert.hint(msg)
+              AlertUtil.hint(msg)
             }
           }
           break
@@ -83,7 +83,7 @@ socialHttp.interceptor.response(
         default:
           if (result && result.errorMsg) {
             errorMsg = result.errorMsg
-            Alert.hint(errorMsg)
+            AlertUtil.hint(errorMsg)
           } else {
             MsgUtil.systemErrorMsg()
           }

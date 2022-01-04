@@ -85,8 +85,8 @@ import TalkTabType from '../../const/TalkTabType'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import Alert from '../../utils/Alert'
-import Toast from '../../utils/Toast'
+import AlertUtil from '../../utils/AlertUtil'
+import ToastUtil from '../../utils/ToastUtil'
 import SocialuniConfig from '../../model/SocialuniConfig'
 import { socialUserStore } from '../../store'
 
@@ -126,7 +126,7 @@ export default class TalkItemHead extends Vue {
   }
 
   hintJusticeInfo () {
-    Toast.toastLong('正义值，正确举报会增加正义值')
+    ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己
@@ -141,7 +141,7 @@ export default class TalkItemHead extends Vue {
   }
 
   confirmDeleteTalk () {
-    Alert.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
+    AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       TalkAPI.deleteTalkAPI(this.talk.id)
     })
@@ -156,7 +156,7 @@ export default class TalkItemHead extends Vue {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
         if (this.talk.hasFollowed) {
-          Alert.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
+          AlertUtil.confirm('是否取消关注用户：' + this.talk.user.nickname).then(() => {
             this.followBtnDisabled = true
             this.talk.hasFollowed = false
             FollowAPI.cancelFollowAPI(followAdd).finally(() => {
