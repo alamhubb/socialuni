@@ -40,6 +40,7 @@ socialHttp.interceptor.request((config: requestConfig) => { /* 请求之前拦�
   config.header.secretKey = socialConfig.secretKey
   config.header.provider = socialSystemModule.mpPlatform
   config.header.platform = socialSystemModule.platform
+  config.header.system = socialSystemModule.system
 
   /* else {
     //如果未登录，只允许查询talk，其他全部提示要登录
