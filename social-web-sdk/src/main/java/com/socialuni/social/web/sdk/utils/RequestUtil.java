@@ -1,6 +1,6 @@
 package com.socialuni.social.web.sdk.utils;
 
-import com.socialuni.social.web.sdk.model.RequestLogDO;
+import com.socialuni.social.web.sdk.constant.SocialWebHeaderName;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -42,6 +42,18 @@ public class RequestUtil {
             return null;
         }
         return value;
+    }
+
+    public static String getSystem() {
+        return RequestUtil.getHeader(SocialWebHeaderName.systemHeaderName);
+    }
+
+    public static String getProvider() {
+        return RequestUtil.getHeader(SocialWebHeaderName.providerHeaderName);
+    }
+
+    public static String getPlatform() {
+        return RequestUtil.getHeader(SocialWebHeaderName.platformHeaderName);
     }
 
     //根据cookie名获取cookie值

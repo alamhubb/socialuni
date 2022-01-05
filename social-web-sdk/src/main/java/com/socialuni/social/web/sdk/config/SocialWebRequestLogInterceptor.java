@@ -5,6 +5,7 @@ import com.socialuni.social.exception.constant.ErrorType;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,11 @@ public class SocialWebRequestLogInterceptor implements HandlerInterceptor {
         requestLogDO.setSuccess(true);
         requestLogDO.setErrorType(ErrorType.success);
         requestLogDO.setRequestMethod(requestMethod);
+
+        requestLogDO.setSystem(RequestUtil.getSystem());
+        requestLogDO.setProvider(RequestUtil.getProvider());
+        requestLogDO.setPlatform(RequestUtil.getPlatform());
+
         requestLogDO.setUri(uri);
 
 

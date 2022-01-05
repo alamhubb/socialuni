@@ -37,6 +37,9 @@ public class RequestLogDO {
     private Boolean success;
     private Integer errorCode;
     private String errorType;
+    private String provider;
+    private String platform;
+    private String system;
 
     @Column(columnDefinition = "longtext")
     private String params;

@@ -24,6 +24,10 @@ import java.util.Date;
         @Index(columnList = "success"),
         @Index(columnList = "errorCode"),
         @Index(columnList = "errorType"),
+        @Index(columnList = "errorPlatform"),
+        @Index(columnList = "provider"),
+        @Index(columnList = "platform"),
+        @Index(columnList = "system"),
 })
 @NoArgsConstructor
 public class ErrorRequestLogDO {
@@ -41,6 +45,11 @@ public class ErrorRequestLogDO {
     private Boolean success;
     private Integer errorCode;
     private String errorType;
+    //前台还是后台错误，ErrorPlatformType
+    private String errorPlatform;
+    private String provider;
+    private String platform;
+    private String system;
 
     @Column(columnDefinition = "longtext")
     private String params;
