@@ -16,4 +16,8 @@ public class ErrorRequestLogStore {
     public void saveAsync(ErrorRequestLogDO requestLogDO) {
         errorRequestLogRepository.save(requestLogDO);
     }
+
+    public ErrorRequestLogDO save(ErrorRequestLogDO requestLogDO) {
+        return errorRequestLogRepository.save(requestLogDO);
+    }
 }

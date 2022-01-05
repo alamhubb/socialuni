@@ -1,5 +1,6 @@
 package com.socialuni.social.web.sdk.model;
 
+import com.socialuni.social.web.sdk.constant.ErrorPlatformType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -78,5 +79,9 @@ public class ErrorRequestLogDO {
         this.innerMsgDetail = requestLogDO.getInnerMsg();
         this.endTime = requestLogDO.getEndTime();
         this.createTime = requestLogDO.getCreateTime();
+        this.system = requestLogDO.getSystem();
+        this.provider = requestLogDO.getProvider();
+        this.platform = requestLogDO.getPlatform();
+        this.errorPlatform = ErrorPlatformType.serverError;
     }
 }

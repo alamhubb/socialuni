@@ -24,5 +24,4 @@ public class FrontErrorLogVO {
     private String platform;
     private String provider;
     private String appVersion;
-    private Integer devId;
 }
