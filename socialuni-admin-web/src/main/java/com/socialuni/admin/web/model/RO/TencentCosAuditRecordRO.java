@@ -1,7 +1,13 @@
 package com.socialuni.admin.web.model.RO;
 
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.constant.ViolateType;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.sdk.utils.TalkUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,9 +34,15 @@ public class TencentCosAuditRecordRO extends CommonContentBaseDO {
     private Integer result;
     //被审核图片的完整 URL 链接
     private String url;
+    //talk的内容
+    private String content;
+    //用户昵称
+    private String nickname;
+    private String avatar;
+    private String violateType;
 
     public TencentCosAuditRecordRO(TencentCosAuditRecordDO recordDO) {
-        this.checked = false;
+        this.checked = true;
         this.id = recordDO.getId();
         this.traceId = recordDO.getTraceId();
         this.forbiddenStatus = recordDO.getForbiddenStatus();
@@ -38,5 +50,15 @@ public class TencentCosAuditRecordRO extends CommonContentBaseDO {
         this.score = recordDO.getScore();
         this.result = recordDO.getResult();
         this.url = recordDO.getUrl();
+        this.violateType = ViolateType.slightViolation;
+        if (recordDO.getContentType().equals(ContentType.talk)) {
+            TalkDO talkDO = TalkUtils.get(recordDO.getContentId());
+            this.setContent(talkDO.getContent());
+        }
+        UserDO userDO = SocialUserUtil.getAllowNull(recordDO.getUserId());
+        if (userDO != null) {
+            this.setAvatar(userDO.getAvatar());
+            this.setNickname(userDO.getNickname());
+        }
     }
 }

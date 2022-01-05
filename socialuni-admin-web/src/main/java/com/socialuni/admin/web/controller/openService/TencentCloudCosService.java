@@ -3,6 +3,7 @@ package com.socialuni.admin.web.controller.openService;
 import com.socialuni.admin.web.constant.ImgThumbnailType;
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.user.UserImgDO;
@@ -35,9 +36,10 @@ public class TencentCloudCosService {
         } else {
             contentType = ContentType.user;
         }
+        recordDO.setStatus(CommonStatus.enable);
         recordDO.setContentType(contentType);
         //thumbType
-        String[] imgThumbTypes = imgUrl.split("!");
+        String[] imgThumbTypes = imgUrl.split("%21");
         if (imgThumbTypes.length > 1) {
             recordDO.setImgThumbType(imgThumbTypes[1]);
         } else {
@@ -46,7 +48,7 @@ public class TencentCloudCosService {
         String cosRootUrl = SocialAppConfig.getStaticResourceUrl();
         Integer cosRootLength = cosRootUrl.length();
         //imgKey,截取掉前边的域名
-        String imgKey = imgThumbTypes[0].substring(cosRootLength);
+        String imgKey = imgThumbTypes[0].substring(54);
         recordDO.setImgKey(imgKey);
 
         if (contentType.equals(ContentType.talk)) {
@@ -56,7 +58,8 @@ public class TencentCloudCosService {
                 recordDO.setContentId(talkImgDO.getTalkId());
                 recordDO.setUserId(talkImgDO.getUserId());
             } else {
-                ErrorLogUtil.error("错误的imgKey");
+                //不存在的talk，talk未发布成功
+                return;
             }
         } else {
             UserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);

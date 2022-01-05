@@ -164,6 +164,13 @@ public class SocialUserUtil {
         return commonUserDOOptional;
     }
 
+    public static UserDO getAllowNull(Integer userId) {
+        if (userId == null) {
+            return null;
+        }
+        return userRepository.findOneById(userId);
+    }
+
     public static UserDO getByUid(String uid) {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(SocialuniProviderLoginType.socialuni, uid);
         if (socialUserAccountDO == null) {

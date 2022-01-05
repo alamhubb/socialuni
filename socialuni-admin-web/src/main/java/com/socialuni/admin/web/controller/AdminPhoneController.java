@@ -19,7 +19,6 @@ public class AdminPhoneController {
      *
      */
     @PostMapping("sendAuthCode")
-    @ResponseBody
     public ResultRO<Void> sendAuthCode(@RequestBody @Valid SocialSendAuthCodeQO socialSendAuthCodeQO) {
         return adminPhoneService.sendAuthCode(socialSendAuthCodeQO);
     }

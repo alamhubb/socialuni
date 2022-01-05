@@ -4,6 +4,7 @@ import ToastUtil from '@/utils/ToastUtil'
 import ErrorCode from '@/constants/ErrorCode'
 import MsgUtil from '@/utils/MsgUtil'
 import { userModule } from '@/store'
+import PageUtil from '@/utils/PageUtil'
 
 // create an axios instance
 const request = Axios.create({
@@ -105,6 +106,7 @@ request.interceptors.response.use(
           } else {
             MsgUtil.unLoginMessage()
           }
+          PageUtil.toHome()
           break
         case ErrorCode.custom:
           break

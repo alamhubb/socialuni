@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TencentCosAuditRecordRepository extends JpaRepository<TencentCosAuditRecordDO, Integer> {
-    List<TencentCosAuditRecordDO> findAllByStatusNotAndForbiddenStatusOrderByIdDesc(String status,Integer forbidStatus);
+    List<TencentCosAuditRecordDO> findTop200ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullOrderByIdDesc(String status,Integer score,  Integer forbidStatus, String imgThumbType);
 }

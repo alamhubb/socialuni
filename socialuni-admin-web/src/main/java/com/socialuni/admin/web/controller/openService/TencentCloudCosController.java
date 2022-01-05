@@ -34,10 +34,17 @@ public class TencentCloudCosController {
         recordDO.setUrl(callbackDataRO.getUrl());
         //pornInfo
         TencentCosCallbackDataPornInfo pornInfo = callbackDataRO.getPorn_info();
-        recordDO.setHitFlag(pornInfo.getHit_flag());
-        recordDO.setScore(pornInfo.getScore());
-        recordDO.setLabel(pornInfo.getLabel());
-
+        TencentCosCallbackDataPornInfo adsInfo = callbackDataRO.getAds_info();
+        if (pornInfo != null) {
+            recordDO.setHitFlag(pornInfo.getHit_flag());
+            recordDO.setScore(pornInfo.getScore());
+            recordDO.setLabel(pornInfo.getLabel());
+            //ads_info
+        } else if (adsInfo != null) {
+            recordDO.setHitFlag(adsInfo.getHit_flag());
+            recordDO.setScore(adsInfo.getScore());
+            recordDO.setLabel(adsInfo.getLabel());
+        }
         tencentCloudCosService.setCosImgSocialInfo(recordDO);
         return ResultRO.success();
     }

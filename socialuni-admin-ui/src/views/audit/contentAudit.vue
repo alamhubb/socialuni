@@ -337,25 +337,7 @@ export default class PreAuditPage extends Vue {
   }
 
   testRequet() {
-    request.post('openService/tencent/cos/contentAuditCallback', {
-      'code': 0,
-      'data': {
-        'forbidden_status': 0,
-        'event': 'ReviewImage',
-        'porn_info': {
-          'hit_flag': 0,
-          'label': '',
-          'score': 9
-        },
-        'result': 0,
-        'trace_id': 'test_trace_id',
-        'url': 'test_image',
-        'cos_headers': {
-          'x-cos-meta-xx': 'xx'
-        }
-      },
-      'message': 'Test request when setting callback url'
-    })
+    request.post('audit/test')
   }
 
   reportPassList() {

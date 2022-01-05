@@ -42,6 +42,7 @@ public class TencentCosAuditRecordDO extends CommonContentBaseDO {
     //根据内容类型
     private String contentType;
     private String imgThumbType;
+    @Column(columnDefinition = "text")
     private String imgKey;
     //key获取
     private Integer contentImgId;
