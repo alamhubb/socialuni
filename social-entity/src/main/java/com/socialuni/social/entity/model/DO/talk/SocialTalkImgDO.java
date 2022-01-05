@@ -25,6 +25,7 @@ public class SocialTalkImgDO extends CommonBaseDO implements Serializable {
     private Integer id;
 
     private Integer talkId;
+    private Integer userId;
 
     private String src;
 

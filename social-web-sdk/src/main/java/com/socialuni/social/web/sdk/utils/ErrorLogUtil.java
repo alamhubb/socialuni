@@ -36,7 +36,7 @@ public class ErrorLogUtil {
     }
 
     //后端直接生成的
-    public static void saveAsync(String errorMsg) {
+    public static void error(String errorMsg) {
         RequestLogDO requestLogDO = RequestLogUtil.get();
         ErrorRequestLogDO errorRequestLogDO= new ErrorRequestLogDO(requestLogDO);
 

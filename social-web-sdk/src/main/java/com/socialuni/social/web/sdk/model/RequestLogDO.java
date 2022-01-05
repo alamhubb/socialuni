@@ -39,7 +39,7 @@ public class RequestLogDO {
     private String errorType;
     private String provider;
     private String platform;
-    private String system;
+    private String systemInfo;
 
     @Column(columnDefinition = "longtext")
     private String params;

@@ -28,7 +28,7 @@ import java.util.Date;
         @Index(columnList = "errorPlatform"),
         @Index(columnList = "provider"),
         @Index(columnList = "platform"),
-        @Index(columnList = "system"),
+        @Index(columnList = "systemInfo"),
 })
 @NoArgsConstructor
 public class ErrorRequestLogDO {
@@ -50,7 +50,7 @@ public class ErrorRequestLogDO {
     private String errorPlatform;
     private String provider;
     private String platform;
-    private String system;
+    private String systemInfo;
 
     @Column(columnDefinition = "longtext")
     private String params;
@@ -79,7 +79,7 @@ public class ErrorRequestLogDO {
         this.innerMsgDetail = requestLogDO.getInnerMsg();
         this.endTime = requestLogDO.getEndTime();
         this.createTime = requestLogDO.getCreateTime();
-        this.system = requestLogDO.getSystem();
+        this.systemInfo = requestLogDO.getSystemInfo();
         this.provider = requestLogDO.getProvider();
         this.platform = requestLogDO.getPlatform();
         this.errorPlatform = ErrorPlatformType.serverError;

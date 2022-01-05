@@ -46,7 +46,7 @@ public class SocialWebRequestLogInterceptor implements HandlerInterceptor {
         requestLogDO.setErrorType(ErrorType.success);
         requestLogDO.setRequestMethod(requestMethod);
 
-        requestLogDO.setSystem(RequestUtil.getSystem());
+        requestLogDO.setSystemInfo(RequestUtil.getSystem());
         requestLogDO.setProvider(RequestUtil.getProvider());
         requestLogDO.setPlatform(RequestUtil.getPlatform());
 

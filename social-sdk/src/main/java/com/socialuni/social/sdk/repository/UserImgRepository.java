@@ -7,7 +7,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserImgRepository extends JpaRepository<UserImgDO, Integer> {
 
@@ -23,5 +22,8 @@ public interface UserImgRepository extends JpaRepository<UserImgDO, Integer> {
     UserImgDO getUserImgByUserIdAndSrc(Integer userId, String src);
 
     UserImgDO getUserImgByUserIdAndId(Integer userId, Integer id);
+
+    //获取talkImg
+    UserImgDO findFirstBySrc(String imgUlr);
 }
 
