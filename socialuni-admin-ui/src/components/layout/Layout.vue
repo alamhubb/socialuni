@@ -2,8 +2,13 @@
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100p flex-col">
     <nav-bar />
-    <div class="flex-row flex-1">
-      <app-main class="flex-1" />
+    <div class="flex-row flex-1 overflow-hidden">
+      <nav-menu class="w200" />
+      <div class="flex-1 overflow-auto">
+        <transition name="fade-transform" mode="out-in">
+          <router-view :key="$route.path" />
+        </transition>
+      </div>
     </div>
   </div>
 </template>

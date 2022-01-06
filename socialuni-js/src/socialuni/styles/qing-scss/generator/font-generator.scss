@@ -10,6 +10,9 @@
   .text-#{$sizeKey} {
     font-size: map-get($text-map, $sizeKey);
   }
+  .font-#{$sizeKey} {
+    font-size: map-get($text-map, $sizeKey);
+  }
 }
 
 .font-normal {

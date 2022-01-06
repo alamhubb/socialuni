@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
-import com.socialuni.center.sdk.mode.DevAuthCodeDO;
+import com.socialuni.center.sdk.model.DevAuthCodeDO;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.utils.IntegerUtils;

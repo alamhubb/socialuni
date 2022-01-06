@@ -1,4 +1,3 @@
-/*
 package com.socialuni.center.web.controller;
 
 import com.socialuni.api.feignAPI.SocialuniLoginAPI;
@@ -11,21 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-*/
 /**
- * @author qinkaiyuan
  * 目前认为用不到这个类,社交联盟不提供登录功能，只提供授权功能
- * @date 2019-02-17 14:14
- *//*
-
+ */
 @RestController
-public class CenterLoginController implements SocialuniLoginAPI {
+public class CenterLoginController implements SocialuniLoginAPI<CenterMineUserDetailRO> {
     @Resource
     private CenterLoginService centerLoginService;
 
     @Override
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginData) {
-        return centerLoginService.providerLogin(loginData);
+        return null;
+    }
+
+    @Override
+    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
+        return centerLoginService.socialuniPhoneLogin(loginData);
     }
 }
-*/

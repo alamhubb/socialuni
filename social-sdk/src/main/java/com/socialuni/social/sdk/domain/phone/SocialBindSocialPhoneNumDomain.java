@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.domain.phone;
 
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.sdk.repository.SocialUserPhoneRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserPhoneRepository;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import org.springframework.stereotype.Service;
 

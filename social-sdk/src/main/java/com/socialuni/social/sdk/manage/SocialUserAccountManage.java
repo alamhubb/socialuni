@@ -6,7 +6,7 @@ import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.store.SocialUserAccountStore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 socialuni:
   secret-key: ""
-  server-url: "https://api.qingchiapp.com:8091"
+  server-url: "https://api.qingchiapp.com"
   app:
     static-resource-url: "https://cdxapp-1257733245.file.myqcloud.com"
     system-user-id: 1
@@ -31,7 +31,7 @@ socialuni:
         sms-sign: ""
         template-id: 1
   map:
-    ali:
+    qq:
       secret-key: ""
 server:
   port: 8093

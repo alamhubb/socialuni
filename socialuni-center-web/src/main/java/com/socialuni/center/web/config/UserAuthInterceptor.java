@@ -45,6 +45,9 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         Date startTime = new Date();
 
+        String uri = request.getRequestURI();
+        String userIp = IpUtil.getIpAddr(request);
+
         RequestLogDO requestLogDO = new RequestLogDO();
         requestLogDO.setRequestId(RequestIdUtil.addId());
         UserDO user = CenterUserUtil.getMineUser();
@@ -52,8 +55,6 @@ public class UserAuthInterceptor implements HandlerInterceptor {
             requestLogDO.setUserId(user.getId());
         }
         Integer devId = DevAccountUtils.getDevIdAllowNull();
-        String userIp = IpUtil.getIpAddr(request);
-        String uri = request.getRequestURI();
 
         requestLogDO.setDevId(devId);
         requestLogDO.setIp(userIp);
@@ -69,7 +70,6 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 //        RequestLogDOUtil.saveAsync(requestLogDO);
         RequestLogUtil.set(requestLogDO);
 
-//        log.info("[{}({})]", requestLogDO.getRequestMethod(), requestLogDO.getUri());
 //        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri());
 
         String ipKey = "ipKey:" + userIp;
@@ -104,17 +104,16 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         if (
                 (requestMethod.equals(RequestMethod.OPTIONS.name())
-                        || requestMethod.equals(RequestMethod.GET.name())
                         || uri.equals("/")
                         || uri.contains("test")
                         //初始化
                         || uri.contains("getAppLaunchData")
-                        || uri.contains("queryDevAccount")
                         //初始化的请求
                         || uri.contains("report/queryReportTypes")
                         //查询首页轮播图
                         || uri.contains("queryHomeSwipers")
                         //同步生产环境数据到开发
+                        || uri.contains("queryDevAccount")
                         || uri.contains("admin/syncProdDevAccount")
                         //mock授权登录
                         || uri.contains("mockOAuthUserInfo")
@@ -172,6 +171,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                         || uri.contains("sendAuthCode")
                         || uri.contains("login")
                         || uri.contains("Login")
+                        || uri.contains("location")
                         || uri.contains("oauth"))
                         && devId != null)
                 )
@@ -191,10 +191,13 @@ public class UserAuthInterceptor implements HandlerInterceptor {
             return false;
         }*/
         if (devId == null) {
+            log.info("开发者为空");
             throw new SocialNullDevAccountException();
         } else if (user == null) {
+            log.info("用户未登录");
             throw new SocialNotLoginException();
         } else {
+            log.info("拦截器无法预见异常");
             throw new SocialSystemException("拦截器无法预见异常");
         }
     }

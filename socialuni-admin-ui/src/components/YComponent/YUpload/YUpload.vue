@@ -50,12 +50,12 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-scroll mt-5 pr-10">
-      <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-5">
+    <div class="flex-1 overflow-scroll mt-xs pr-sm">
+      <div v-for="file in fileList" :key="file.name" class="bg-click text-ellipsis row-between-center px-xs">
         <div class="text-ellipsis">
           <template v-if="file.fileType===$const.UploadFileType.folder">
             <i class="el-icon-folder-opened" />
-            {{ file.name }} <span class="ml-10">(文件数量：{{ file.files.length }})</span>
+            {{ file.name }} <span class="ml-sm">(文件数量：{{ file.files.length }})</span>
           </template>
           <template v-else>
             <i class="el-icon-document" />
@@ -100,15 +100,14 @@
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import YDialog from '@/components/YComponent/YDialog/YDialog.vue'
 import YUploadFileType from '@/components/YComponent/YUpload/YUploadFileType'
-import UploadFileVO from '@/model/common/UploadFileVO'
 import DomFile from '@/model/base/DomFile'
 import Arrays from '@/utils/Arrays'
 import AlertUtil from '@/utils/AlertUtil'
-import request from '@/plugins/request'
+import request from '@/utils/request'
+import JsonUtil from '@/utils/JsonUtil'
 import { Message } from 'element-ui'
 import UploadPercentageVO from '@/components/YComponent/YUpload/UploadPercentageVO'
-import FileUploadVO from '@/components/YComponent/YUpload/FileUploadVO'
-import JsonUtil from '@/utils/JsonUtil'
+import UploadFileVO from '@/components/YComponent/YUpload/UploadFileVO'
 
 @Component({
   components: { YDialog }
@@ -191,7 +190,7 @@ export default class YUpload extends Vue {
     })
   }
 
-  async upload(uploadUrl: string, formData: FileUploadVO) {
+  async upload(uploadUrl: string, formData: any) {
     // 只记录当前的上传进度，考虑清空情况，清空以后uploadPercent就变了，这个改值界面上也不会变化，则正确
     const uploadPercent = this.uploadPercent
     return request.post(uploadUrl, JsonUtil.toFormData(formData), {

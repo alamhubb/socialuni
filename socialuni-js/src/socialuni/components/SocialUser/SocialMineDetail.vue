@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom" custom-class="bg-gray">
+      <q-navbar class="q-solid-bottom" custom-class="bg-grey5">
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>
@@ -81,7 +81,7 @@
           </view>
           <view class="flex-auto col-end">
             <view class="row-center font-bold pb-xl text-lg w100r">
-              <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>
+              <u-button size="medium" class="w30vw" @click="showMoreList = false">关闭</u-button>
             </view>
           </view>
         </view>

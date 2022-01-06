@@ -10,6 +10,12 @@ export default class LoginAPI {
     })
   }
 
+  static secretKeyLoginAPI(secretKey: string) {
+    return request.post<SocialLoginRO<DevAccountRO>>('user/secretKeyLogin', { secretKey }).then(res => {
+      return res.data
+    })
+  }
+
   static logoutAPI() {
     return request.post('user/logout').then((res: any) => {
       return res.data

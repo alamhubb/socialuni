@@ -1,6 +1,6 @@
 export default class Alert {
   public static confirm (msg: string, okLabel = '确定', cancel = '取消') {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       uni.showModal({
         content: msg,
         confirmText: okLabel,
@@ -9,7 +9,7 @@ export default class Alert {
           if (res.confirm) {
             resolve(true)
           } else if (res.cancel) {
-            resolve(false)
+            reject(false)
           }
         }
       })

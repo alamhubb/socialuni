@@ -1,6 +1,6 @@
 package com.socialuni.center.sdk.repository;
 
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

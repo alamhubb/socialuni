@@ -16,6 +16,7 @@ import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.utils.*;
 import com.socialuni.social.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;

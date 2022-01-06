@@ -3,6 +3,7 @@ import StorageUtil from './StorageUtil'
 import MapUtil from './MapUtil'
 import { socialLocationModule, socialSystemModule } from '../store'
 import AppAuthUtil from './AppAuthUtil'
+import { QQMapResult } from '@/socialuni/model/location/QQMapResult'
 
 const chinaAdCode = '100000'
 const initAdCode = '100001'
@@ -114,26 +115,19 @@ export default class LocationUtil {
 
   // 使用sdk精准定位
   static getCurLocationBySDK (): Promise<DistrictVO> {
-    return MapUtil.getLocationBySdk().then((res: any) => {
-      const lonAndLat: number[] = res.streetNumber.location.split(',')
+    return MapUtil.getLocationBySdk().then((res: QQMapResult) => {
       const district: DistrictVO = new DistrictVO()
       district.adCode = res.adcode
       district.provinceName = res.province
       district.districtName = res.district
       if (res.province !== res.city) {
         if (res.city) {
-          if (Array.isArray(res.city)) {
-            if (res.city.length) {
-              district.cityName = res.city[0]
-            }
-          } else {
-            district.cityName = res.city
-          }
+          district.cityName = res.city
         }
       }
       district.adName = res.district
-      district.lon = lonAndLat[0]
-      district.lat = lonAndLat[1]
+      district.lon = res.location.lng
+      district.lat = res.location.lat
       district.isLocation = true
       //更新用户经纬度
       socialLocationModule.updateLocationLonAndLat(district.lon, district.lat)
@@ -147,30 +141,18 @@ export default class LocationUtil {
 
   // 使用webapi粗略定位
   static async getCityByIpWebAPI () {
-    return MapUtil.getLocationByWeb().then((res: any) => {
-      if (res.info === 'OK') {
-        const rectangle: string = res.rectangle
-        const rectangleAry: string[] = rectangle.split(';')
-        const lonAndLatAry: string[] = rectangleAry[0].split(',')
-        const district: DistrictVO = new DistrictVO()
-        district.adCode = res.adcode
-        district.provinceName = res.province
-        if (res.province !== res.city) {
-          district.cityName = res.city
-        }
-        district.adName = res.city
-        district.lon = Number(lonAndLatAry[0])
-        district.lat = Number(lonAndLatAry[1])
-        district.isLocation = true
-        return district
-      } else {
-        return null
+    return MapUtil.getLocationByWeb().then((res: QQMapResult) => {
+      const district: DistrictVO = new DistrictVO()
+      district.adCode = res.adcode
+      district.provinceName = res.province
+      if (res.province !== res.city) {
+        district.cityName = res.city
       }
+      district.adName = res.city
+      district.lon = res.location.lng
+      district.lat = res.location.lat
+      district.isLocation = true
+      return district
     })
   }
-
-  /* static getCityByLatLonAPI (rectangle: string) {
-    WebAPI.get(' https://restapi.amap.com/v3/geocode/regeo?key=a64bc4ccb330776939d57e229ca1e63b&location=' + rectangle).then(() => {
-    })
-  } */
 }

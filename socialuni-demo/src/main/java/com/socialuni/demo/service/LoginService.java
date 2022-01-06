@@ -44,7 +44,7 @@ public class LoginService {
     @Resource
     private TokenManage tokenManage;
     @Resource
-    SocialProviderLoginEntity socialProviderLoginEntity;
+    private SocialProviderLoginEntity socialProviderLoginEntity;
 
     public ResultRO<SocialLoginRO<MineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
         UserDO mineUser = socialProviderLoginEntity.providerLogin(loginData);

@@ -1,10 +1,10 @@
 package com.socialuni.center.web.insystem.admin;
 
-import com.socialuni.center.sdk.mode.SyncProdDevAccountQO;
+import com.socialuni.center.sdk.model.SyncProdDevAccountQO;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
-import com.socialuni.center.sdk.mode.DevAccountDO;
-import com.socialuni.center.sdk.mode.DevAccountProviderDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountProviderDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.manage.SocialTagManage;

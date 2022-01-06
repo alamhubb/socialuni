@@ -2,9 +2,8 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.service.AdminAccountService;
-import com.socialuni.center.sdk.feignAPI.SocialuniAdminAPI;
-import com.socialuni.center.sdk.mode.DevAccountDO;
-import com.socialuni.center.sdk.mode.SyncProdDevAccountQO;
+import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.model.SyncProdDevAccountQO;
 import com.socialuni.center.sdk.redis.DevAccountRedis;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
@@ -34,8 +33,6 @@ public class AdminAccountController {
     private TagRepository tagRepository;
     @Resource
     private AdminAccountService adminAccountService;
-    @Resource
-    SocialuniAdminAPI socialuniAdminAPI;
 
     @PostMapping("getUser")
     public ResultRO<DevAccountRO> getUser() {
@@ -54,7 +51,7 @@ public class AdminAccountController {
         //新建和修改，数量必然大于0，代表需要向开发环境同步
         SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccount, new ArrayList<>());
         //调用api的时候，要区分出来是更新还是新增，尽早区分
-        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
+//        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
 
         devAccountRedis.saveDevAccount(devAccount);
         ResultRO<String> ResultRO = new ResultRO<>();

@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
 import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.center.sdk.mode.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.social.exception.constant.ErrorCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +39,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
 
         if ((req.getMethod().equals(RequestMethod.OPTIONS.name())
                 || uri.contains("user/phoneLogin")
+                || uri.contains("user/secretKeyLogin")
                 || uri.contains("phone/sendAuthCode")
                 //这里只查询没被封禁的
                 || user != null)

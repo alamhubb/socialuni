@@ -3,14 +3,13 @@ package com.socialuni.admin.web.service;
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.controller.DevAccountUpdateQO;
 import com.socialuni.center.sdk.constant.SocialuniSupportProviderType;
-import com.socialuni.center.sdk.feignAPI.SocialuniAdminAPI;
-import com.socialuni.center.sdk.mode.SyncProdDevAccountQO;
+import com.socialuni.center.sdk.model.SyncProdDevAccountQO;
 import com.socialuni.center.sdk.redis.DevAccountRedis;
 import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.center.sdk.mode.DevAccountDO;
-import com.socialuni.center.sdk.mode.DevAccountProviderDO;
+import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.center.sdk.model.DevAccountProviderDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
@@ -40,8 +39,6 @@ public class AdminAccountService {
     private DevAccountProviderRepository devAccountProviderRepository;
     @Resource
     private TagRepository tagRepository;
-    @Resource
-    private SocialuniAdminAPI socialuniAdminAPI;
     @Resource
     private SocialTagManage socialTagManage;
 
@@ -187,7 +184,7 @@ public class AdminAccountService {
         //新建和修改，数量必然大于0，代表需要向开发环境同步
         SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountDO, createDevProviders);
         //调用api的时候，要区分出来是更新还是新增，尽早区分
-        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
+//        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
 
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
         DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);

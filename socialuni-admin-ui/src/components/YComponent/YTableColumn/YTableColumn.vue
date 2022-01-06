@@ -25,16 +25,6 @@
         v-on="$listeners"
         @change.native.stop
       />
-      <y-select
-        v-if="type === $const.DataTableColumnTypeEnum.select"
-        v-model="row[prop]"
-        :readonly="readonly"
-        :options="options"
-        :label="optionLabel"
-        :value="optionValue"
-        v-on="$listeners"
-        @change.native.stop
-      />
       <!--      ? option.label : optionValue-->
       <el-input
         v-else-if="type === $const.DataTableColumnTypeEnum.input"
@@ -47,10 +37,10 @@
       />
       <template v-else-if="type===$const.DataTableColumnTypeEnum.label">
         <slot name="default" :row="row">
-          <el-tooltip v-if="tipProp && row[tipProp]" effect="dark" :content="row[tipProp]" placement="top-start">
+          <el-tooltip v-if="tipProp && row[tipProp] && showMsg(row)" effect="dark" :content="row[tipProp]" placement="top-start">
             <div>
               <span :class="labelClass">{{ propFun ? propFun(row[prop], row) : row[prop] }}</span>
-              <i class="el-icon-question ml-5" />
+              <i class="el-icon-question ml-xs" />
             </div>
           </el-tooltip>
           <span v-else :class="labelClass">{{ propFun ? propFun(row[prop], row) : row[prop] }}</span>
@@ -102,6 +92,11 @@ export default class YTableColumn extends Vue {
   @Prop() readonly readonly: boolean
   @Prop() readonly optionValue: string
   @Prop({ default: '删除' }) readonly deleteTitle: string
+  @Prop({
+    default(row: any) {
+      return true
+    }, type: Function
+  }) readonly showMsg: Function
 
   @Emit()
   deleteEvent(index) {
