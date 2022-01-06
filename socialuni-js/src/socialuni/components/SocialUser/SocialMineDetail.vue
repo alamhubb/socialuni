@@ -14,8 +14,7 @@
       <!-- #ifdef H5 -->
       <view class="h50 w100r"></view>
       <!-- #endif -->
-
-      <u-popup v-model="showMoreList" mode="right" :border-radius="15">
+      <q-popup v-model="showMoreList" bottom>
         <view class="w65vw flex-col py-xl mt-xl h100p">
           <view class="q-box-row mt-xl font-bold text-lg">
             清池 app
@@ -85,7 +84,7 @@
             </view>
           </view>
         </view>
-      </u-popup>
+      </q-popup>
       <msg-input>
       </msg-input>
     </view>
@@ -156,6 +155,8 @@ import ToastUtil from '../../utils/ToastUtil'
 import MsgInput from '../MsgInput.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.vue'
+import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
+import RouterUtil from '@/socialuni/utils/RouterUtil'
 
 @Component({
   components: {
@@ -163,6 +164,7 @@ import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.
     QIcon,
     MsgInput,
     QRowItem,
+    QPopup,
     QNavbar,
     UserInfo,
     UserEdit,
@@ -221,6 +223,12 @@ export default class SocialMineDetail extends Vue {
 
   hideMoreList () {
     this.showMoreList = false
+  }
+
+  toPage(webUrl){
+    console.log('123123')
+    console.log(webUrl)
+    RouterUtil.navigateTo(webUrl)
   }
 
   onPullDownRefresh () {

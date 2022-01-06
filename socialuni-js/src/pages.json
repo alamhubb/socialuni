@@ -24,6 +24,12 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/web/webBrowser",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
     /*,
     {

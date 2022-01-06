@@ -71,10 +71,10 @@
             {{ district.adName }}
           </text>
         </view>
-        <div class="row-between-center bg-click" @click="openCircleSearchDialog">
-          <div>选择圈子</div>
-          <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-        </div>
+        <!--        <div class="row-between-center bg-click" @click="openCircleSearchDialog">
+                  <div>选择圈子</div>
+                  <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+                </div>-->
       </view>
       <view class="px-sm pt-sm">
         <view class="row-grid">
@@ -98,7 +98,7 @@
           <view class="row-all-center pb-10 px-mn">
             <view class="q-tag q-round bg-orange-plain" @click="openTagSearchVue(false)">
               更多
-              <q-icon icon="arrow-right" class="ml-5"/>
+              <q-icon icon="arrow-right" size="12" class="ml-5"/>
             </view>
           </view>
         </view>

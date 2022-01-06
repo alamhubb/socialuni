@@ -14,8 +14,7 @@
       <!-- #ifdef H5 -->
       <view class="h50 w100r"></view>
       <!-- #endif -->
-
-      <u-popup v-model="showMoreList" mode="right" :border-radius="15">
+      <q-popup v-model="showMoreList" bottom>
         <view class="w65vw flex-col py-xl mt-xl h100r">
           <div class="flex-row">
             <view class="row-center mt-xl font-bold text-lg w100r">
@@ -89,7 +88,7 @@
             </view>
           </div>
         </view>
-      </u-popup>
+      </q-popup>
       <msg-input>
       </msg-input>
     </view>
@@ -113,9 +112,11 @@ import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
 import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
+import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 
 @Component({
   components: {
+    QPopup,
     QIcon,
     QNavbar,
     QRowItem,

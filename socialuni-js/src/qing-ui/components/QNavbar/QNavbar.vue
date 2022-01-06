@@ -5,6 +5,9 @@
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
       <view class="row-col-center" :style="[navbarInnerStyle]">
+        <view v-if="showBack" class="col-center bg-click color-default flex-none" @click="goBack">
+          <q-icon icon="arrow-left"></q-icon>
+        </view>
         <slot></slot>
       </view>
     </view>
@@ -18,6 +21,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { socialSystemStore } from '../../../socialuni/store'
+import RouterUtil from '@/socialuni/utils/RouterUtil'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes
 
 
@@ -28,9 +33,15 @@ const menuButtonInfo: GetMenuButtonBoundingClientRectRes = uni.getMenuButtonBoun
 /*
 显示出来已经选了的城市，给她画上钩
 * */
-@Component
+@Component({
+  components: { QIcon }
+})
 export default class QNavBar extends Vue {
   @Prop() customClass: string
+  @Prop({
+    type: Boolean,
+    default: false
+  }) showBack: boolean
 
   @socialSystemStore.State('statusBarHeight') statusBarHeight
   @socialSystemStore.State('navBarHeight') navBarHeight
@@ -51,6 +62,10 @@ export default class QNavBar extends Vue {
     style.marginRight = rightButtonWidth + 'px'
     // #endif
     return style
+  }
+
+  goBack () {
+    RouterUtil.goBackOrHome()
   }
 }
 </script>

@@ -155,7 +155,7 @@
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
             手机号(仅自己可见)：
-            <view v-if="userProp.phoneNum">
+            <view v-if="userProp.phoneNum" class="row-col-center">
               {{ userProp.phoneNum }}
               <view class="ml-10 sm cu-tag bg-white bd-gray radius">
                 已绑定

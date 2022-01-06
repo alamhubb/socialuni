@@ -2,7 +2,7 @@
   <view class="px-sm pb-sm" v-if="showSwipers">
     <!--  <view class="bg-primary px-smm pt-xs">-->
     <swiper :indicator-dots="true" :autoplay="true" circular :interval="2500" :style="{'height':swiperHeight+'px'}">
-      <swiper-item class="bd-radius" v-for="item in homeSwipers" @click="skipWebView">
+      <swiper-item class="bd-radius" v-for="(item,index) in homeSwipers" @click="skipWebView(index)">
         <!--        class="radius flex-none h100p"-->
         <image
           class="h100p bd-radius w100p"
@@ -39,6 +39,9 @@ export default class TalkSwipersPage extends Vue {
     //区分跳转类型，跳转web，local，小程序，app
     //特殊处理小程序无法跳转app
     const homeSwiper = this.homeSwipers[current]
+    console.log(current)
+    console.log(this.homeSwipers)
+    console.log(homeSwiper)
     //需要跳转
     if (homeSwiper.skip) {
       if (homeSwiper.skipType === SkipType.app) {

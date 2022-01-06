@@ -396,7 +396,6 @@ export default class TabsTalkPage extends Vue {
   showCityPopup = false
 
   openCityPicker () {
-    console.log('kaiiqi')
     this.showCityPopup = true
   }
 
