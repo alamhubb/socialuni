@@ -9,6 +9,7 @@ import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.model.model.QO.SocialIntIdQO;
 import com.socialuni.social.model.model.QO.SocialIntQO;
@@ -41,7 +42,7 @@ public class TencentImgAuditRecordController {
      */
     @PostMapping("queryImgAuditHistory")
     public ResultRO<List<TencentCosAuditRecordRO>> queryImgAuditHistory(@RequestBody SocialIntQO intQO) {
-        List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop200ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullOrderByIdDesc(CommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail);
+        List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop20ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullAndContentTypeOrderByIdDesc(CommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail, ContentType.talk);
         List<TencentCosAuditRecordRO> listRo = ListConvertUtil.toList(TencentCosAuditRecordRO::new, list);
         return ResultRO.success(listRo);
     }

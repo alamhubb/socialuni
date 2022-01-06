@@ -1,4 +1,5 @@
 export default class TencentCosAuditHistoryRO {
+  checked: boolean = null
   id: string = null
   createTime: Date = null
   traceId: string = null
@@ -7,6 +8,7 @@ export default class TencentCosAuditHistoryRO {
   hitFlag: number = null
   score: number = null
   label: string = null
+  talk: any = null
   result: number = null
   url: string = null
   code: number = null
