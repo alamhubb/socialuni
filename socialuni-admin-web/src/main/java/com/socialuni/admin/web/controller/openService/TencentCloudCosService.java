@@ -47,8 +47,12 @@ public class TencentCloudCosService {
         }
         String cosRootUrl = SocialAppConfig.getStaticResourceUrl();
         Integer cosRootLength = cosRootUrl.length();
+        int subStrLength = 54;
+        if (!(imgThumbTypes[0].length() > subStrLength)) {
+            return;
+        }
         //imgKey,截取掉前边的域名
-        String imgKey = imgThumbTypes[0].substring(54);
+        String imgKey = imgThumbTypes[0].substring(subStrLength);
         recordDO.setImgKey(imgKey);
 
         if (contentType.equals(ContentType.talk)) {

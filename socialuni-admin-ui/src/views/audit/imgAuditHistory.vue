@@ -2,10 +2,10 @@
   <div class="h100p flex-col">
     <div class="row-all-center flex-none">
       <div>
-        <el-input v-model="imgScore" />
+        <el-input v-model="imgScore"/>
       </div>
       <el-button type="primary" class="w200 h50 mb ml" @click="query">查询</el-button>
-      <el-button type="primary" class="w200 h50 mb">审核</el-button>
+      <el-button type="primary" class="w200 h50 mb" @click="testRequet">审核</el-button>
     </div>
 
     <!--    <div class="row-wrap">
@@ -24,21 +24,21 @@
       <el-table-column>
         <template #default="{row}">
           <el-image
-            style="width: 150px; height: 200px"
-            fit="contain"
-            :src="row.url"
-            :preview-src-list="[row.url]"
-            :z-index="999"
+              style="width: 150px; height: 200px"
+              fit="contain"
+              :src="row.url"
+              :preview-src-list="[row.url]"
+              :z-index="999"
           />
         </template>
       </el-table-column>
       <el-table-column
-        label="用户"
-        width="100"
+          label="用户"
+          width="100"
       >
         <template #default="{row}">
           <div>
-            <el-avatar shape="square" :src="row.avatar" />
+            <el-avatar shape="square" :src="row.avatar"/>
             --
             <div>
               {{ row.nickname }}
@@ -46,25 +46,25 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="content" label="动态" />
+      <el-table-column prop="content" label="动态"/>
       <el-table-column
-        label="违规原因"
-        width="160"
+          label="违规原因"
+          width="160"
       >
         <template #default="{row}">
           <el-radio-group v-model="row.violateType">
             <div v-for="reportType in reportTypes">
               <el-radio
-                :key="reportType"
-                class="py-xs"
-                :label="reportType"
-                :value="reportType"
+                  :key="reportType"
+                  class="py-xs"
+                  :label="reportType"
+                  :value="reportType"
               />
             </div>
           </el-radio-group>
         </template>
       </el-table-column>
-      <el-table-column prop="score" label="审核分数" />
+      <el-table-column prop="score" label="审核分数"/>
       <!--      <el-table-column label="审核结果">
         <template #default="{row}">
           {{ $const.CosImgResultType.getTypeName(row.result) }}
@@ -86,15 +86,16 @@
 </template>
 
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import DataTable from '@/components/dataTable/DataTable.vue'
 import TencentCosAuditHistoryRO from '@/model/audit/TencentCosAuditHistoryRO'
 import AuditAPI from '@/api/AuditAPI'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import ReportAPI from '@/api/ReportAPI'
+import request from "@/plugins/request";
 
 @Component({
-  components: { YTableColumn, DataTable }
+  components: {YTableColumn, DataTable}
 })
 export default class ImgAuditHistoryPage extends Vue {
   imgAuditList: TencentCosAuditHistoryRO[] = []
@@ -107,11 +108,29 @@ export default class ImgAuditHistoryPage extends Vue {
   }
 
   query() {
-    AuditAPI.queryImgAuditHistoryAPI({ number: this.imgScore }).then(res => {
+    AuditAPI.queryImgAuditHistoryAPI({number: this.imgScore}).then(res => {
       this.imgAuditList = res.data
     })
     ReportAPI.queryReportTypesAPI().then((res) => {
       this.reportTypes = res.data
+    })
+  }
+
+  testRequet() {
+    request.post('openService/tencent/cos/contentAuditCallback', {
+      "code": 0,
+      "data": {
+        "forbidden_status": 0,
+        "porn_info": {
+          "hit_flag": 0,
+          "label": "",
+          "score": 9
+        },
+        "result": 0,
+        "trace_id": "test_trace_id",
+        "url": "test_image"
+      },
+      "message": "Test request when setting callback url"
     })
   }
 }
