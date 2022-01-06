@@ -20,8 +20,8 @@
           </div>
         </div>-->
 
-    <data-table checked class="flex-1" height="100" :table-data="imgAuditList" border show-page>
-      <el-table-column>
+    <data-table checked class="flex-1" height="100" :table-data="imgAuditList" border show-page :page-sizes="[20,50]">
+<!--      <el-table-column>
         <template #default="{row}">
           <el-image
               style="width: 150px; height: 200px"
@@ -31,21 +31,21 @@
               :z-index="999"
           />
         </template>
-      </el-table-column>
-      <el-table-column
+      </el-table-column>-->
+<!--      <el-table-column
           label="用户"
           width="100"
       >
         <template #default="{row}">
           <div>
             <el-avatar shape="square" :src="row.avatar"/>
-            --
+            &#45;&#45;
             <div>
               {{ row.nickname }}
             </div>
           </div>
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column prop="content" label="动态"/>
       <el-table-column
           label="违规原因"
@@ -92,7 +92,6 @@ import TencentCosAuditHistoryRO from '@/model/audit/TencentCosAuditHistoryRO'
 import AuditAPI from '@/api/AuditAPI'
 import YTableColumn from '@/components/YComponent/YTableColumn/YTableColumn.vue'
 import ReportAPI from '@/api/ReportAPI'
-import request from "@/plugins/request";
 
 @Component({
   components: {YTableColumn, DataTable}
@@ -117,21 +116,7 @@ export default class ImgAuditHistoryPage extends Vue {
   }
 
   testRequet() {
-    request.post('openService/tencent/cos/contentAuditCallback', {
-      "code": 0,
-      "data": {
-        "forbidden_status": 0,
-        "porn_info": {
-          "hit_flag": 0,
-          "label": "",
-          "score": 9
-        },
-        "result": 0,
-        "trace_id": "test_trace_id",
-        "url": "test_image"
-      },
-      "message": "Test request when setting callback url"
-    })
+    AuditAPI.auditImgListAPI(this.imgAuditList)
   }
 }
 </script>

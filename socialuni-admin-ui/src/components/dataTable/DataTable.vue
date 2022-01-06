@@ -53,15 +53,16 @@
       <div v-if="showPage || checked" class="flex-none row-between-center pt-smm">
         <slot name="footerLeft">
           <div v-if="checked" class="ml-sm">
-            已选 {{checkedData.length}} 条
+            已选 {{ checkedData.length }} 条
           </div>
         </slot>
         <div v-if="showPage" class="flex-1 row-end">
+          {{ pageSizes }}--{{ pageable }}
           <y-pagination
               @change="filterTableData"
               v-model="pageable"
               layout="total,sizes,prev,pager,next"
-              :page-sizes="[10, 20, 50, 100]"
+              :page-sizes="pageSizes"
           />
         </div>
       </div>
@@ -70,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'
@@ -101,6 +102,7 @@ export default class DataTable extends Vue {
   @Prop({ default: false, type: Boolean }) readonly showPage: boolean
   @Prop({ default: false, type: Boolean }) readonly showHeader: boolean
   @Prop({ default: '', type: [Array, String] }) readonly searchField: boolean
+  @Prop({ default: [10, 20, 50, 100], type: Array }) readonly pageSizes: number[]
   @Prop({
     default: () => {
       return {
@@ -146,9 +148,9 @@ export default class DataTable extends Vue {
     }, type: Function
   }) readonly tableDataFilterAppend: Function
 
-  pageable: Pageable = new Pageable(1, 10)
+  pageable: Pageable = null
 
-  get checkedData(){
+  get checkedData() {
     return this.tableData.filter(item => item.checked)
   }
 
@@ -164,11 +166,12 @@ export default class DataTable extends Vue {
     if (this.tableData) {
       this.filterTableList = [...this.tableData]
     }
+    this.pageable = new Pageable(1, this.pageSizes[0])
   }
 
   @Watch('searchForm', { deep: true })
   searchFormWatch() {
-    this.pageable = new Pageable(1, 10)
+    this.pageable = new Pageable(1, this.pageSizes[0])
     this.filterTableData()
   }
 
@@ -180,7 +183,7 @@ export default class DataTable extends Vue {
   @Watch('tableData')
   tableDataWatch() {
     //table替换需要重置
-    this.pageable = new Pageable(1, 10)
+    this.pageable = new Pageable(1, this.pageSizes[0])
     this.filterTableData()
   }
 
