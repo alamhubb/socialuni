@@ -37,13 +37,19 @@
               <view class="text-md" :class="{'color-red':userProp.vipFlag}">
                 {{ userProp.nickname }}
               </view>
-              <view>
-                <view class="cu-tag radius text-df"
-                      :class="[getGenderBgColor(userProp)]">
+              <view class="flex-row">
+                <div v-if="userProp.gender==='girl'" class="box-nn q-tag-error mt-xs">
                   {{ userProp.age }}
-                  <q-icon class="row-col-start ml-2" size="14"
+                  <q-icon class="ml-nn"
+                          size="12"
                           :icon="getGenderIcon(userProp)"/>
-                </view>
+                </div>
+                <div v-else class="box-nn q-tag-theme mt-xs">
+                  {{ userProp.age }}
+                  <q-icon class="ml-nn"
+                          size="12"
+                          :icon="getGenderIcon(userProp)"/>
+                </div>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
@@ -93,14 +99,14 @@
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
-          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+<!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
             <view class='cu-tag bg-green'>
               <q-icon size="18" icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius">
               {{ userProp.justiceValue }}
             </view>
-          </view>
+          </view>-->
           <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
                       <view class='cu-tag bg-red'>
                         <q-icon size="18" icon="heart-fill"/>

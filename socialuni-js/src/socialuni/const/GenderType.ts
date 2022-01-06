@@ -12,8 +12,8 @@ export default class GenderType {
   static readonly userGirlStr: string = '女'
   static readonly girlIcon: string = 'mdi-gender-female'
   static readonly girlCuIcon: string = 'female'
-  static readonly girlColor: string = 'font-pink'
-  static readonly girlBgColor: string = 'bg-pink'
+  static readonly girlColor: string = 'color-red6'
+  static readonly girlBgColor: string = 'bg-red6'
 
   static readonly onlyGirl: string = 'onlyGirl'
   // 男生
@@ -22,7 +22,7 @@ export default class GenderType {
   static readonly userBoyStr: string = '男'
   static readonly boyIcon: string = 'mdi-gender-male'
   static readonly boyCuIcon: string = 'male'
-  static readonly boyColor: string = 'font-blue'
+  static readonly boyColor: string = 'color-blue'
   static readonly boyBgColor: string = 'bg-blue'
 
   static readonly onlyBoy: string = 'onlyBoy'

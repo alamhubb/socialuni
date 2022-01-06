@@ -8,42 +8,58 @@
     <view class="row-between flex-auto">
       <view>
         <view class="h25 row-col-center">
-          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>
-          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
-                :class="[getGenderBgColor(talk.user)]">
-            {{ talk.user.age }}
-            <q-icon class="ml-nn"
-                    size="12"
-                    :icon="getGenderIcon(talk.user)"/>
-          </view>
-          <view v-if="talk.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
-                @click.stop="openVip">
-            VIP
-          </view>
+          <text class="text-md">{{ talk.user.nickname }}</text>
+          <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
+          <template v-if="!talk.globalTop">
+            <div v-if="talk.user.gender==='girl'" class="box-nn q-tag-error ml-sm">
+              {{ talk.user.age }}
+              <q-icon class="ml-nn"
+                      size="12"
+                      :icon="getGenderIcon(talk.user)"/>
+            </div>
+            <div v-else class="box-nn q-tag-theme ml-sm">
+              {{ talk.user.age }}
+              <q-icon class="ml-nn"
+                      size="12"
+                      :icon="getGenderIcon(talk.user)"/>
+            </div>
+          </template>
+
+          <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
+                          :class="[getGenderBgColor(talk.user)]">
+                      {{ talk.user.age }}
+                      <q-icon class="ml-nn"
+                              size="12"
+                              :icon="getGenderIcon(talk.user)"/>
+                    </view>-->
+          <!--          <view v-if="talk.user.vipFlag" class="ml-5 cu-tag bg-red radius sm text-sm font-bold"
+                          @click.stop="openVip">
+                      VIP
+                    </view>-->
           <!--    如果爱心值不为0，且大于正义值显示爱心值-->
-          <view v-else-if="talk.user.loveValue&& talk.user.loveValue>talk.user.justiceValue"
-                class="ml-5 cu-capsule radius"
-                @click.stop="toLoveValuePage">
-            <view class='cu-tag bg-red sm'>
-              <q-icon icon="heart"/>
-            </view>
-            <view class="cu-tag bg-white bd-red bd-r-radius sm">
-              {{ talk.user.loveValue }}
-            </view>
-          </view>
+          <!--          <view v-else-if="talk.user.loveValue&& talk.user.loveValue>talk.user.justiceValue"
+                          class="ml-5 cu-capsule radius"
+                          @click.stop="toLoveValuePage">
+                      <view class='cu-tag bg-red sm'>
+                        <q-icon icon="heart"/>
+                      </view>
+                      <view class="cu-tag bg-white bd-red bd-r-radius sm">
+                        {{ talk.user.loveValue }}
+                      </view>
+                    </view>-->
           <!--    如果正义值不为0，且大于等于爱心值显示正义值-->
-          <view v-else-if="talk.user.justiceValue&& talk.user.justiceValue >= talk.user.loveValue"
-                class="ml-5 cu-capsule radius"
-                @click.stop="hintJusticeInfo">
-            <view class='cu-tag bg-green sm'>
-              <q-icon icon="mdi-sword-cross"/>
-            </view>
-            <view class="cu-tag bg-white bd-green bd-r-radius sm">
-              {{
-                talk.user.justiceValue > 1000 ? Math.floor(talk.user.justiceValue / 1000) + 'k' : talk.user.justiceValue
-              }}
-            </view>
-          </view>
+          <!--          <view v-else-if="talk.user.justiceValue&& talk.user.justiceValue >= talk.user.loveValue"
+                          class="ml-5 cu-capsule radius"
+                          @click.stop="hintJusticeInfo">
+                      <view class='cu-tag bg-green sm'>
+                        <q-icon icon="mdi-sword-cross"/>
+                      </view>
+                      <view class="cu-tag bg-white bd-green bd-r-radius sm">
+                        {{
+                          talk.user.justiceValue > 1000 ? Math.floor(talk.user.justiceValue / 1000) + 'k' : talk.user.justiceValue
+                        }}
+                      </view>
+                    </view>-->
         </view>
         <view class="text-gray text-sm h25 row-col-center">
           最新回复：{{ talk.updateTime| formatTime }}
@@ -52,7 +68,7 @@
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
           <text v-if="isMine"
-                class="ml-5 color-blue-dark"
+                class="ml-5 color-blue1 bg-click"
                 @click.stop="confirmDeleteTalk">
             删除
           </text>

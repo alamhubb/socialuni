@@ -1,5 +1,5 @@
 .q-tag {
-  @extend .box-mn;
+  padding: $box-mn;
   @extend .font-sm;
   @extend .bd-radius;
   @extend .mr-sm;
@@ -12,7 +12,7 @@
 
 @each $key, $color in $colors-theme {
   .q-tag-#{''+$key+''} {
-    @extend .box-mn;
+    padding: $box-mn;
     @extend .font-sm;
     @extend .bd-radius;
     @extend .mr-sm;

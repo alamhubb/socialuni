@@ -24,7 +24,7 @@
       <view class="w12"></view>
     </view>-->
 
-    <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
+    <city-picker ref="cityPicker" v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
@@ -154,6 +154,7 @@ import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 export default class TabsTalkPage extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
+    citiPicker: CityPicker
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
 
@@ -392,10 +393,10 @@ export default class TabsTalkPage extends Vue {
   }
 
   // 城市选择
-
   showCityPopup = false
 
   openCityPicker () {
+    console.log('kaiiqi')
     this.showCityPopup = true
   }
 

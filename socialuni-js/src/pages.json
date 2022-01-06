@@ -24,13 +24,14 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },
+    }
+    /*,
     {
       "path": "pages/circle/circle",
       "style": {
         "navigationStyle": "custom"
       }
-    }
+    }*/
   ],
   "subPackages": [
     {
@@ -66,12 +67,12 @@
     "iconWidth": "30px",
     "height": "52px",
     "list": [
-      {
+      /*{
         "pagePath": "pages/circle/circle",
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
         "text": "圈子"
-      },
+      },*/
       {
         "pagePath": "pages/talk/talk",
         "iconPath": "static/img/deck-gray-36dp.png",

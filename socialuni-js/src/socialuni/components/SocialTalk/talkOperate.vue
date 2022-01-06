@@ -3,21 +3,17 @@
     <q-popup :value="commentVisible" @input="commentActionClose">
       <view class="uni-tip w180">
         <uni-list class="w100">
-          <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
+          <uni-list-item :show-arrow="true" title="复制" @click.native="copyText"/>
           <uni-list-item v-if="user&&comment&&(user.id === comment.user.id||user.id ===talk.user.id)"
-                         :show-arrow="true" title="删除" @click="userDeleteComment"/>
+                         :show-arrow="true" title="删除" @click.native="userDeleteComment"/>
           <uni-list-item v-if="user" :show-arrow="true" title="举报"
-                         @click="openReportDialog"/>
+                         @click.native="openReportDialog"/>
         </uni-list>
       </view>
     </q-popup>
-    <u-popup :show="commentVisible" border-radius="20" mode="center"
-             @close="commentActionClose">
 
-    </u-popup>
 
-    <u-popup :show="dialogVisible" border-radius="20" mode="center"
-             :mask-close-able="false">
+    <q-popup :value="dialogVisible">
       <view class="uni-tip">
         <view class="uni-tip-title">举报</view>
         <view class="uni-tip-content">
@@ -40,15 +36,15 @@
                               :show-confirm-bar="false"
                     />
         </view>
-        <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40p" type="default" @click="reportDialogClose" :plain="true">
+        <view class="uni-tip-group-button row-center">
+          <button class="uni-tip-button w40p mr" type="default" @click="reportDialogClose" :plain="true">
             取消
           </button>
           <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
           </button>
         </view>
       </view>
-    </u-popup>
+    </q-popup>
   </view>
 </template>
 
@@ -166,6 +162,7 @@ export default class TalkOperate extends Vue {
   }
 
   openReportDialog () {
+    console.log('举报')
     if (this.user) {
       this.commentActionClose()
       socialTalkModule.reportContentType = ReportContentType.comment

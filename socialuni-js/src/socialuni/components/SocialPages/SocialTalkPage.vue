@@ -39,23 +39,23 @@
 
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
-      <div class="row-col-center mb-sm mx-sm">
+<!--      <div class="row-col-center mb-sm mx-sm">
         <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
                 class="bd-radius pd-mn flex-1 bg-theme2">
           <template #default="{tab}">
             <div class="h30 px-xs row-all-center font-md">
               {{ tab }}
-              <!--            费劲啊实力哈哈-->
+              &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
             </div>
           </template>
         </q-tabs>
         <div class="row-col-center bg-click flex-none ml-sm font-md">更多
           <q-icon icon="mdi-chevron-right"></q-icon>
         </div>
-      </div>
+      </div>-->
 
 
-      <div>
+<!--      <div>
         <swiper circular class="h90 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
           <swiper-item class="bd-radius">
             <div class="h100p w100p flex-col flex-none bg-default bd-radius pd-sm">
@@ -64,7 +64,7 @@
 
                 <div>
                   <div class="font3-cut">
-                    <!--            简介最多30个字符-->
+                    &lt;!&ndash;            简介最多30个字符&ndash;&gt;
                     简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
                   </div>
                 </div>
@@ -73,7 +73,7 @@
           </swiper-item>
           <swiper-item class="bd-radius">
             <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-              <!--                        class="radius flex-none h100p"-->
+              &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
               <div class="row-nowrap overflow-hidden">
                 <div v-for="(item,index) in tags" v-if="index<5"
                      class="col-row-center mx-xs overflow-hidden h70 flex-1">
@@ -85,7 +85,7 @@
           </swiper-item>
           <swiper-item class="bd-radius">
             <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-              <!--                        class="radius flex-none h100p"-->
+              &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
               <div class="row-nowrap overflow-hidden">
                 <div v-for="(item,index) in tags" v-if="index<5"
                      class="col-row-center mx-xs overflow-hidden h70 flex-1">
@@ -96,7 +96,7 @@
             </div>
           </swiper-item>
         </swiper>
-      </div>
+      </div>-->
 
 
       <tabs-talk class="flex-1 bt-radius-15" ref="tabsTalk"

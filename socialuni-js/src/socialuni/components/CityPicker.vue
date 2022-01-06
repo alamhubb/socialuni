@@ -1,5 +1,5 @@
 <template>
-  <u-popup v-model="showCityPopup" mode="bottom" :border-radius="20" @close="close">
+  <q-popup :value="value" bottom @input="close">
     <div class="row-between-center q-box bb-1">
       <view class="flex-row">
         <view class="text-black text-md font-bold">城市筛选</view>
@@ -54,22 +54,24 @@
       <q-picker ref="citySelect" class="bg-white" v-model="bottomDistrict"
                 :dataList="districts"></q-picker>
     </view>
-  </u-popup>
+  </q-popup>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
 import AlertUtil from '../utils/AlertUtil'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import QPicker from '@/qing-ui/components/QPicker/QPicker.vue'
+import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 
 @Component({
   components: {
     QPicker,
-    QIcon
+    QIcon,
+    QPopup
   }
 })
 export default class CityPicker extends Vue {
@@ -85,12 +87,6 @@ export default class CityPicker extends Vue {
 
   @Model('input') readonly value!: any
 
-  @Watch('value')
-  valueWatch () {
-    if (this.value) {
-      this.open()
-    }
-  }
 
   open () {
     this.showCityPopup = true
