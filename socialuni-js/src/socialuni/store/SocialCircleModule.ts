@@ -39,7 +39,6 @@ export default class SocialCircleModule extends VuexModule {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
     return CircleAPI.queryCircleTypesAPI().then((res) => {
       this.circleTypes = res.data
-      console.log(this.circleTypes)
     })
   }
 }

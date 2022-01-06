@@ -139,7 +139,6 @@ export default class QTabs extends Vue {
 
   // 查询tab的布局信息
   getTabRect () {
-    console.log(this.uuid)
     // 创建节点查询
     const query = uni.createSelectorQuery().in(this)
     // 历遍所有tab，这里是执行了查询，最终使用exec()会一次性返回查询的数组结果

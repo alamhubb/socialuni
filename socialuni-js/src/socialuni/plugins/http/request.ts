@@ -128,7 +128,6 @@ export default class Request {
   }
 
   request<T> (options: options) {
-    console.log(options.dataType)
     const _options: newOptions = {
       baseUrl: this.config.baseUrl,
       dataType: options.dataType || this.config.dataType,

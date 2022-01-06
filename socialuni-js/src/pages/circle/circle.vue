@@ -195,8 +195,6 @@ export default class CirclePage extends Vue {
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
   onLoad () {
-
-    console.log(this.circleTypes)
   }
 
   pageTypeToCircleSearch () {

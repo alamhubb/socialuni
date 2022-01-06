@@ -97,7 +97,6 @@ export default class CircleSearch extends Vue {
 
   onLoad () {
     socialCircleModule.getCircleTypesAction()
-    console.log(this.circleTypes)
   }
 
   get showTags (): TagVO[] {

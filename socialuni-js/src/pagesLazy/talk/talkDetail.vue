@@ -2,7 +2,7 @@
   <view class="h100vh bg-default">
     <msg-input v-if="showMsgInput">
     </msg-input>
-    <u-navbar :is-back="false">
+    <q-navbar>
       <view class="flex-row w100vw px flex-auto">
         <view class="col-center bg-click color-default flex-none" @click="goBack">
           <q-icon icon="arrow-left"></q-icon>
@@ -14,7 +14,7 @@
           动态详情
         </view>
       </view>
-    </u-navbar>
+    </q-navbar>
     <view class="pb-155px bg-default" v-if="talk">
       <talk-item :talk="talk" showAllComment
                  @deleteTalk="deleteTalk"
@@ -54,9 +54,11 @@ import { socialAppStore } from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import TalkAPI from '@/socialuni/api/TalkAPI'
+import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 
 @Component({
   components: {
+    QNavbar,
     QIcon,
     MsgInput,
     TalkItem,

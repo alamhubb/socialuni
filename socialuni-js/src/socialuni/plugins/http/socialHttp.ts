@@ -12,8 +12,6 @@ import SocialuniConfig from '../../model/SocialuniConfig'
 import SocialSystemInfo from '../../const/SocialSystemInfo'
 
 const socialHttp: Request = new Request()
-console.log(socialConfig)
-console.log(socialHttp)
 
 let socialHttpUrl = process.env.VUE_APP_SOCIALUNI_URL
 if (!socialHttpUrl) {

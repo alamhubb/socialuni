@@ -15,8 +15,6 @@ export default class SocialMinxinVue extends Vue {
   onLaunch () {
     //@ts-ignore
     this.isAppPage = true
-    console.log(123)
-    console.log(this)
     //无论如何都要获取当前用户信息
     UserService.getMineUserInitDataAction()
     // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他

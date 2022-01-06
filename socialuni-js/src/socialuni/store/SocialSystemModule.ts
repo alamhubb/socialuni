@@ -3,14 +3,7 @@ import LoginProvider from '../const/LoginProvider'
 import PlatformType from '../const/PlatformType'
 import PlatformUtils from '../utils/PlatformUtils'
 import TokenUtil from '../utils/TokenUtil'
-import {
-  socialAppModule,
-  socialChatModule,
-  socialCircleModule,
-  socialLocationModule,
-  socialNotifyModule,
-  socialTagModule
-} from './index'
+import { socialAppModule, socialChatModule, socialLocationModule, socialNotifyModule, socialTagModule } from './index'
 import UniSystemType from '../const/UniSystemType'
 import UniPlatformType from '../const/UniPlatformType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
@@ -71,7 +64,7 @@ export default class SocialSystemModule extends VuexModule {
     // AppService.getHomeLoadAfterData()
     socialTagModule.getHotTagsAction()
     socialTagModule.getHotTagTypesAction()
-    socialCircleModule.getCircleTypesAction()
+    // socialCircleModule.getCircleTypesAction()
     socialLocationModule.getHotDistrictsAction()
     socialAppModule.getReportTypesAction()
     socialAppModule.getAppConfigAction()
