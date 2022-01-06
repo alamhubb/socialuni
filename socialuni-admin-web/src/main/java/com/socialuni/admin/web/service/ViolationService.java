@@ -13,6 +13,7 @@ import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.domain.BaseModelService;
 import com.socialuni.social.sdk.entity.user.SocialUserViolationEntity;
 import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.service.BaseModelUtils;
 import com.socialuni.social.sdk.service.KeywordsService;
 import com.socialuni.social.sdk.service.ReportService;
@@ -92,24 +93,7 @@ public class ViolationService {
 
     public void violateService(BaseModelDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
-        //修改内容，需要修改状态、删除原因、更新时间
-        modelDO.setStatus(ContentStatus.violation);
-        //如果封禁的话，要改一下删除原因，删除原因，违规原因
-        modelDO.setDeleteReason(violateType);
-        modelDO.setUpdateTime(curDate);
-        //内容违规则修改内容状态
-        baseModelService.save(modelDO);
-        //处理举报
-        //封禁用户
-        //如果已经是违规，不需要改为删除
-        UserDO violationUser = SocialUserUtil.get(modelDO.getUserId());
-        String vioReason = modelDO.getDeleteReason() + ",";
-        //不为官方系统用户才可封禁
-        if (!UserType.system.equals(violationUser.getType())) {
-            userViolationHandler(violationUser, vioReason, curDate, violateType);
-            userRepository.save(violationUser);
-            System.out.println("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getId() + "用户状态改为：" + violationUser.getStatus());
-        }
+        UserDO violationUser = modelContentViolation(modelDO, violateType);
 
         //修改举报内容
         reportDO.setAuditType(violateType);
@@ -147,6 +131,29 @@ public class ViolationService {
         //如果有举报记录
         //发放奖励和修改举报详情内容
         reportService.reportPass(reportDO, true);
+    }
+
+    public UserDO modelContentViolation(BaseModelDO modelDO, String violateType) {
+        Date curDate = new Date();
+        //修改内容，需要修改状态、删除原因、更新时间
+        modelDO.setStatus(ContentStatus.violation);
+        //如果封禁的话，要改一下删除原因，删除原因，违规原因
+        modelDO.setDeleteReason(violateType);
+        modelDO.setUpdateTime(curDate);
+        //内容违规则修改内容状态
+        baseModelService.save(modelDO);
+        //处理举报
+        //封禁用户
+        //如果已经是违规，不需要改为删除
+        UserDO violationUser = SocialUserUtil.get(modelDO.getUserId());
+        String vioReason = modelDO.getDeleteReason() + ",";
+        //不为官方系统用户才可封禁
+        if (!UserType.system.equals(violationUser.getType())) {
+            userViolationHandler(violationUser, vioReason, curDate, violateType);
+            userRepository.save(violationUser);
+            System.out.println("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getId() + "用户状态改为：" + violationUser.getStatus());
+        }
+        return violationUser;
     }
 
     //更改user状态

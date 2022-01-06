@@ -18,6 +18,10 @@ public class ResultRO<T> {
     private String errorMsg = ResultRO.successMsg;
     private T data;
 
+    public static <T> ResultRO<T> success() {
+        return new ResultRO<>();
+    }
+
     public static <T> ResultRO<T> success(T data) {
         return new ResultRO<>(data);
     }

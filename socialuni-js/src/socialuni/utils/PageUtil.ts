@@ -1,7 +1,7 @@
 import PagePath from '../const/PagePath'
 import { socialSystemModule, socialUserModule } from '../store'
 import MsgUtil from './MsgUtil'
-import Alert from './Alert'
+import AlertUtil from './AlertUtil'
 import RouterUtil from './RouterUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import SocialuniAuthQO from '../model/openData/SocialuniAuthQO'
@@ -83,7 +83,7 @@ export default class PageUtil {
   }
 
   static toFaceValuePage () {
-    Alert.confirm('是否查看颜值分介绍').then(() => {
+    AlertUtil.confirm('是否查看颜值分介绍').then(() => {
       RouterUtil.navigateTo(PagePath.faceValueInfo)
     })
   }

@@ -18,7 +18,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.manage.SocialTagManage;
-import com.socialuni.social.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.repository.community.TagRepository;
 import com.socialuni.social.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

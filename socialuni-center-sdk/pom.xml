@@ -25,7 +25,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>social-sdk</artifactId>

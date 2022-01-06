@@ -7,7 +7,7 @@ import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;
-import com.socialuni.social.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.repository.community.TagRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

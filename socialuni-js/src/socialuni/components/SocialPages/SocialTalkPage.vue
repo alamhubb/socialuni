@@ -1,13 +1,13 @@
 <template>
-  <view class="flex-col h100p">
+  <view class="flex-col h100p bg-white">
     <view v-show="showTagSearch" class="h100p">
       <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
       ></tag-search>
     </view>
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
-    <view v-show="!showTagSearch" class="flex-col h100vh bg-theme">
-      <q-navbar class="flex-none" :custom-class="'bg-theme'">
-        <q-search class="flex-auto" @click.native="openTagSearchVue">
+    <view v-show="!showTagSearch" class="flex-col h100vh">
+      <q-navbar class="flex-none" custom-class="bg-white">
+        <q-search class="flex-1 mx-sm bg-default" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
             <view class="cu-tag round bg-green-plain light row-all-center">
@@ -39,40 +39,70 @@
 
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
+<!--      <div class="row-col-center mb-sm mx-sm">
+        <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
+                class="bd-radius pd-mn flex-1 bg-theme2">
+          <template #default="{tab}">
+            <div class="h30 px-xs row-all-center font-md">
+              {{ tab }}
+              &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
+            </div>
+          </template>
+        </q-tabs>
+        <div class="row-col-center bg-click flex-none ml-sm font-md">更多
+          <q-icon icon="mdi-chevron-right"></q-icon>
+        </div>
+      </div>-->
 
-      <div class="flex-1 flex-col bg-theme-light bt-radius-15">
-<!--        <div class="flex-row px-smm pt-sm">
-          <div class="flex-col">
-            <div class="py-xs row-center font-18 color-tab font-bold">{{ tags[0].name }}</div>
-            <div class="flex-1 col-center">
-              <img class="bd-round size80" :src="tags[0].avatar"/>
-            </div>
-          </div>
-          <div>
-            &lt;!&ndash;            简介最多30个字符&ndash;&gt;
-            <div class="row-col-center ml-smm overflow-hidden">简介打发斯蒂芬撒旦法撒旦法撒旦法阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯</div>
-            <div class="flex-row mt-xs pl-xs">
-              <div v-for="(item,index) in tags" v-if="index<4">
-                <div class="cu-tag round bg-pink light ml-sm">
-                  {{ item.name }}
+
+<!--      <div>
+        <swiper circular class="h90 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
+          <swiper-item class="bd-radius">
+            <div class="h100p w100p flex-col flex-none bg-default bd-radius pd-sm">
+              <div class="row-col-center flex-none">
+                <img class="bd-round size70 flex-none mr-sm" :src="tags[0].avatar"/>
+
+                <div>
+                  <div class="font3-cut">
+                    &lt;!&ndash;            简介最多30个字符&ndash;&gt;
+                    简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="flex-row mt-sm pl-xs">
-              <div v-for="(item,index) in tags" v-if="index<4" class="ml-sm">
-                <div class="col-all-center">
-                  <img class="bd-round size40" :src="item.avatar"/>
-                  <div>{{ item.name }}</div>
+          </swiper-item>
+          <swiper-item class="bd-radius">
+            <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
+              &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
+              <div class="row-nowrap overflow-hidden">
+                <div v-for="(item,index) in tags" v-if="index<5"
+                     class="col-row-center mx-xs overflow-hidden h70 flex-1">
+                  <img class="bd-round size50" :src="item.avatar"/>
+                  <div class="font-cut">{{ item.name }}</div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>-->
-        <tabs-talk class="flex-1" ref="tabsTalk"
-                   :scroll-enable="scrollEnable"
-                   :selectTagIds="selectTagIds"
-        ></tabs-talk>
-      </div>
+          </swiper-item>
+          <swiper-item class="bd-radius">
+            <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
+              &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
+              <div class="row-nowrap overflow-hidden">
+                <div v-for="(item,index) in tags" v-if="index<5"
+                     class="col-row-center mx-xs overflow-hidden h70 flex-1">
+                  <img class="bd-round size50" :src="item.avatar"/>
+                  <div class="font-cut">{{ item.name }}</div>
+                </div>
+              </div>
+            </div>
+          </swiper-item>
+        </swiper>
+      </div>-->
+
+
+      <tabs-talk class="flex-1 bt-radius-15" ref="tabsTalk"
+                 :scroll-enable="scrollEnable"
+                 :selectTagIds="selectTagIds"
+      ></tabs-talk>
 
       <q-popup v-model="showFilter" bottom>
         <div class="row-between-center q-box bb-1">
@@ -127,7 +157,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkItem from '../SocialTalk/TalkItem.vue'
 import PagePath from '../../const/PagePath'
 import UnreadNotifyVO from '../../model/UnreadNotifyVO'
-import TagVO from '../../model/tag/TagVO'
+import TagVO from '../../model/community/tag/TagVO'
 import RouterUtil from '../../utils/RouterUtil'
 import PageUtil from '../../utils/PageUtil'
 import TalkFilterUtil from '../../utils/TalkFilterUtil'
@@ -146,22 +176,24 @@ import {
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import TagSearch from '../SocialTalk/TagSearch.vue'
 import TabsTalkVue from '../SocialTalk/tabsTalk.vue'
-import QButton from '../q-button/QButton.vue'
+import QButton from '../../../qing-ui/components/QButton/QButton.vue'
 import GenderType from '../../const/GenderType'
 import SocialuniConfig from '../../model/SocialuniConfig'
 import MsgInput from '../MsgInput.vue'
-import QNavbar from '../q-navbar/q-navbar.vue'
-import QSearch from '../q-search/q-search.vue'
-import QIcon from '../q-icon/q-icon.vue'
-import QPopup from '../q-popup/q-popup.vue'
-import QSlider from '../q-slider/q-slider.vue'
+import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
+import QSearch from '../../../qing-ui/components/QSearch/QSearch.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
+import QPopup from '../../../qing-ui/components/QPopup/QPopup.vue'
+import QSlider from '../../../qing-ui/components/QSlider/QSlider.vue'
 import ConfigMap from '@/socialuni/const/ConfigMap'
 import HomeSwiperVO from '@/socialuni/model/HomeSwiperVO'
+import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QTabs,
     QSlider,
     QPopup,
     QIcon,
@@ -188,7 +220,7 @@ export default class SocialTalkPage extends Vue {
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
   @socialAppStore.State('homeSwipers') homeSwipers: HomeSwiperVO[]
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
-
+  current = 0
   // tag 相关
   showTagSearch = false
   selectTag: TagVO = null
@@ -205,6 +237,16 @@ export default class SocialTalkPage extends Vue {
   showFilter = false
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
+
+  checkedCircle = '哈哈哈'
+
+  switchCircleTabValue (event: { detail: any }) {
+    const detail: {
+      current: number,
+      source: number
+    } = event.detail
+    this.current = detail.current
+  }
 
   get talkTabsTop () {
     if (this.configShowSwipers) {

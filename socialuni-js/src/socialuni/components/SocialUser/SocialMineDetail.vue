@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom" custom-class="bg-grey5">
+      <q-navbar class="q-solid-bottom" custom-class="bg-default">
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>
@@ -14,8 +14,7 @@
       <!-- #ifdef H5 -->
       <view class="h50 w100r"></view>
       <!-- #endif -->
-
-      <u-popup v-model="showMoreList" mode="right" :border-radius="15">
+      <q-popup v-model="showMoreList" bottom>
         <view class="w65vw flex-col py-xl mt-xl h100p">
           <view class="q-box-row mt-xl font-bold text-lg">
             清池 app
@@ -85,7 +84,7 @@
             </view>
           </view>
         </view>
-      </u-popup>
+      </q-popup>
       <msg-input>
       </msg-input>
     </view>
@@ -122,7 +121,7 @@
                   </view>
                   &lt;!&ndash;                不为自己且未关注&ndash;&gt;
                   <view class="col-center">
-                    <u-icon name="checkmark" color="success"></u-icon>
+                    <q-icon name="checkmark" color="success"></q-icon>
                   </view>
                 </view>
               </view>
@@ -149,13 +148,15 @@ import UserInfo from './UserInfo.vue'
 import UniUtil from '../../utils/UniUtil'
 import SkipUrlConst from '../../const/SkipUrlConst'
 import { socialAppModule, socialUserModule, socialUserStore } from '../../store'
-import QNavbar from '../q-navbar/q-navbar.vue'
-import QRowItem from '../q-row-item/q-row-item.vue'
+import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
+import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
 import OpenDataAPI from '../../api/OpenDataAPI'
-import Toast from '../../utils/Toast'
+import ToastUtil from '../../utils/ToastUtil'
 import MsgInput from '../MsgInput.vue'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.vue'
+import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
+import RouterUtil from '@/socialuni/utils/RouterUtil'
 
 @Component({
   components: {
@@ -163,6 +164,7 @@ import SocialLoginPage from '@/socialuni/components/SocialPages/SocialLoginPage.
     QIcon,
     MsgInput,
     QRowItem,
+    QPopup,
     QNavbar,
     UserInfo,
     UserEdit,
@@ -223,6 +225,12 @@ export default class SocialMineDetail extends Vue {
     this.showMoreList = false
   }
 
+  toPage(webUrl){
+    console.log('123123')
+    console.log(webUrl)
+    RouterUtil.navigateTo(webUrl)
+  }
+
   onPullDownRefresh () {
     this.initQuery()
   }
@@ -255,7 +263,7 @@ export default class SocialMineDetail extends Vue {
   initQuery () {
     if (this.user) {
       socialUserModule.getMineUserAction().then(() => {
-        Toast.toast('刷新成功')
+        ToastUtil.toast('刷新成功')
       }).finally(() => {
         this.stopPullDownRefresh()
       })

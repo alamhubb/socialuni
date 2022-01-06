@@ -1,7 +1,8 @@
 <template>
   <div class="h100p flex-col">
     <div class="flex-none">
-      <el-button class="w80p" type="primary" @click="reportPassList">审核全部</el-button>
+      <el-button class="w60p h50" type="primary" @click="reportPassList">审核全部</el-button>
+      <el-button @click="testRequet">test测试</el-button>
     </div>
     <!--    <div class="flex-none flex-row pa-20">
           <div class="row-col-center w50r">
@@ -57,6 +58,7 @@
           :key="img.id"
         >
           <el-image
+            class="index-sm"
             style="width: 200px; height: 200px"
             :src="getImgUrl(img.src,report.talk.userId)"
             aspect-ratio="1"
@@ -100,13 +102,13 @@
         <template #default="{row}">
           <div class="flex-row">
             <el-image
-              v-for="(img,index) in row.talk.imgs"
+              v-for="(img) in row.talk.imgs"
               :key="img.id"
               style="width: 100px; height: 200px"
               fit="contain"
               :src="getImgUrl(img.src,row.talk.userId)"
               :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
-              :z-index="index"
+              :z-index="999"
             />
           </div>
         </template>
@@ -249,9 +251,10 @@ import { Component, Vue } from 'vue-property-decorator'
 import ReportAPI from '@/api/ReportAPI'
 import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
-import ViolateType from './ViolateType'
 import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
+import ViolateType from '@/constants/ViolateType'
+import request from '@/plugins/request'
 
 @Component
 export default class PreAuditPage extends Vue {
@@ -331,6 +334,10 @@ export default class PreAuditPage extends Vue {
       this.reports.splice(this.reports.findIndex(item => item.id === row.id), 1)
       this.initData()
     })
+  }
+
+  testRequet() {
+    request.post('audit/test')
   }
 
   reportPassList() {

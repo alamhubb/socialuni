@@ -37,7 +37,7 @@ public class AppService {
 
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
         UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
-        return socialFrontLogDomain.sendErrorLog(frontErrorLogVO, mineUser);
+        return socialFrontLogDomain.sendErrorLog(frontErrorLogVO);
     }
 
 

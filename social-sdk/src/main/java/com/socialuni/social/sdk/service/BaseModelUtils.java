@@ -43,11 +43,11 @@ public class BaseModelUtils<T> {
         if (reportContentType.equals(ContentType.talk)) {
             modelDO = TalkUtils.get(reportDO.getContentId());
         } else if (reportContentType.equals(ContentType.comment)) {
-            modelDO = CommentUtils.get(reportDO.getCommentId());
+            modelDO = CommentUtils.get(reportDO.getContentId());
         } else if (reportContentType.equals(ContentType.message)) {
-            modelDO = messageRepository.findById(reportDO.getMessageId()).get();
+            modelDO = messageRepository.findById(reportDO.getContentId()).get();
         }else if (reportContentType.equals(ContentType.user)) {
-            modelDO = messageRepository.findById(reportDO.getMessageId()).get();
+            modelDO = messageRepository.findById(reportDO.getContentId()).get();
         } else {
             throw new SocialBusinessException("不存在的内容类型");
         }

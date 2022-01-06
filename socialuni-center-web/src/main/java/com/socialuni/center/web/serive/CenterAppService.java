@@ -1,12 +1,10 @@
 package com.socialuni.center.web.serive;
 
 
-import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.HomeSwiperDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.model.model.QO.FrontErrorLogVO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
@@ -48,8 +46,6 @@ public class CenterAppService {
     }
 
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
-        frontErrorLogVO.setDevId(DevAccountUtils.getDevId());
-        return socialFrontLogDomain.sendErrorLog(frontErrorLogVO, mineUser);
+        return socialFrontLogDomain.sendErrorLog(frontErrorLogVO);
     }
 }

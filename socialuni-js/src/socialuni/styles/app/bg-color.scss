@@ -7,10 +7,6 @@
   background-repeat: no-repeat;
 }
 
-.bg-active:active {
-  background-color: #eee;
-}
-
 .bg-opacity {
   opacity: 0;
 }
@@ -24,7 +20,7 @@
 }
 
 .bg-modal {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .bg-transparent {

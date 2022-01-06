@@ -129,12 +129,10 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import UserIdCard from '@/model/UserIdCard'
-import Img from '@/model/Img'
-import UserImg from '@/model/UserImg'
 import CommonStatus from '@/constants/CommonStatus'
 import ObjectUtils from '@/utils/ObjectUtils'
 
-  @Component
+@Component
 export default class Review extends Vue {
     data: number [] = [1, 2, 3, 4, 5]
     options: number [] = [1, 2, 3, 4, 5]
@@ -144,9 +142,9 @@ export default class Review extends Vue {
     userIdCards: UserIdCard [] = []
 
     created() {
-      this.$post('idCard/queryIdCards').then(res => {
+      /* this.$post('idCard/queryIdCards').then(res => {
         this.userIdCards = UserIdCard.getUsersByVOs(res.data)
-      })
+      })*/
     }
 
     tableRowClassName({ row }) {
@@ -203,12 +201,12 @@ export default class Review extends Vue {
         for (const idCard of idCards) {
           idCard.imgs = idCard.imgs.filter(item => item.checked)
         }
-        this.$confirm(`请确认是否进行审核:${auditType}`).then(() => {
+        /* this.$confirm(`请确认是否进行审核:${auditType}`).then(() => {
           this.$post('idCard/audit', {
             idCards: idCards,
             auditResultType: auditType
           })
-        })
+        })*/
       } else {
         this.$alert('请至少选择一条记录审核')
       }

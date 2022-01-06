@@ -2,19 +2,19 @@
   <view class="h100vh bg-default">
     <msg-input v-if="showMsgInput">
     </msg-input>
-    <u-navbar :is-back="false">
+    <q-navbar>
       <view class="flex-row w100vw px flex-auto">
-        <view class="col-center bg-active color-default flex-none" @click="goBack">
+        <view class="col-center bg-click color-default flex-none" @click="goBack">
           <q-icon icon="arrow-left"></q-icon>
         </view>
-        <view class="col-center bg-active color-default ml-lg flex-none" @click="goHome">
+        <view class="col-center bg-click color-default ml-lg flex-none" @click="goHome">
           <q-icon icon="home"></q-icon>
         </view>
         <view class="ml-lg font-bold text-md flex-none color-default">
           动态详情
         </view>
       </view>
-    </u-navbar>
+    </q-navbar>
     <view class="pb-155px bg-default" v-if="talk">
       <talk-item :talk="talk" showAllComment
                  @deleteTalk="deleteTalk"
@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import TalkItem from '@/socialuni/components/SocialTalk/TalkItem.vue'
 import TalkOperate from '@/socialuni/components/SocialTalk/talkOperate.vue'
@@ -54,9 +54,11 @@ import { socialAppStore } from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import TalkAPI from '@/socialuni/api/TalkAPI'
+import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 
 @Component({
   components: {
+    QNavbar,
     QIcon,
     MsgInput,
     TalkItem,

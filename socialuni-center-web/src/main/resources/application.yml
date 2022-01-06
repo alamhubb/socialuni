@@ -1,16 +1,17 @@
 spring:
   profiles:
-    active: devprod
+#    active: devprod
 #    active: localdevprod
 #    active: local
-#    active: qkylocal
+    active: qkylocal
+#    active: qkypc
 #    active: prod
 #    active: demo
 #    active: localprod
   jpa:
     database: MYSQL
-#    show-sql: true
     show-sql: false
+#    show-sql: true
     hibernate:
       ddl-auto: update
     properties:

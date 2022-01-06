@@ -1,3 +1,4 @@
+/*
 package com.socialuni.social.sdk.entity.circle;
 
 import com.socialuni.social.entity.model.DO.circle.CircleDO;
@@ -14,3 +15,4 @@ public class CircleEntity {
 //        circleDO.setName(ci);
     }
 }
+*/

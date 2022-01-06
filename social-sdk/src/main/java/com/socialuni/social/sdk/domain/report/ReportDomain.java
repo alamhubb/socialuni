@@ -95,7 +95,7 @@ public class ReportDomain {
                     reportDO = reportFactory.createReportDO(reportCause, modelDO, ReportSourceType.antispam, antispamDO.getId());
                 } else {*/
                 reportCause = "系统自动审查";
-                reportDO = reportFactory.createReportDO(reportCause, modelDO, ReportSourceType.systemAutoCheck);
+                reportDO = reportFactory.createReportDO(reportCause, modelDO, ReportSourceType.systemAutoCheck, modelDO.getDevId());
 //                }
 
                 //这里之后才能校验
@@ -134,7 +134,7 @@ public class ReportDomain {
 
 
     @Transactional
-    public ResultRO<Void> userReportContent(SocialReportAddQO socialReportAddQO, BaseModelDO modelDO, Integer requestUserId) {
+    public ResultRO<Void> userReportContent(SocialReportAddQO socialReportAddQO, BaseModelDO modelDO, Integer requestUserId, Integer devId) {
         //这里之后才能校验
 
         // 设置model
@@ -142,7 +142,7 @@ public class ReportDomain {
         //这里之后才能校验
         // 设置model
         //可以放到 report的 store 中
-        ReportDO reportDO = reportFactory.createReportDO(socialReportAddQO.getContent(), modelDO, ReportSourceType.userReport);
+        ReportDO reportDO = reportFactory.createReportDO(socialReportAddQO.getContent(), modelDO, ReportSourceType.userReport, devId);
 
         //保存数据
         reportDO = reportRepository.save(reportDO);

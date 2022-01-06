@@ -4,6 +4,7 @@ import com.socialuni.api.feignAPI.SocialuniLoginAPI;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.serive.CenterLoginService;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class CenterLoginController implements SocialuniLoginAPI<CenterMineUserDe
 
     @Override
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginData) {
-        return null;
+        throw new SocialBusinessException("不支持的登录方式");
     }
 
     @Override

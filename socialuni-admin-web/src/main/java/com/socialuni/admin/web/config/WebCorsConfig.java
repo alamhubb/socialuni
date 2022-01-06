@@ -9,16 +9,6 @@ import javax.annotation.Resource;
 
 @Configuration
 public class WebCorsConfig implements WebMvcConfigurer {
-
-    @Resource
-    private UserAuthInterceptor userAuthInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(userAuthInterceptor).addPathPatterns("/**");
-    }
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //设置允许跨域的路径

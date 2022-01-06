@@ -14,14 +14,14 @@
     <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center px-smm pt-10"
           @click="toTalkDetailVue">
       <view class="flex-row">
-        <view class="cu-tag round bg-orange light">
+        <view class="q-tag-warn">
           <q-icon icon="map-fill" size="14"></q-icon>
           <!--        有市区的名称就不显示省的名称-->
           <text v-if="talk.district.districtName">{{ talk.district.districtName }}</text>
           <text v-else>{{ talk.district.provinceName }}</text>
           <text v-if="talk.district.cityName">-{{ talk.district.cityName }}</text>
         </view>
-        <view v-if="talk.distance|| talk.distance===0" class="cu-tag round bg-orange light">
+        <view v-if="talk.distance|| talk.distance===0" class="q-tag-warn">
           <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
           <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
           <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
@@ -50,7 +50,7 @@
     <view v-if="talk.tags&&talk.tags.length && !talk.globalTop || talk.globalTop===1" class="card-text-row grid"
           @click="toTalkDetailVue">
       <view v-for="tag in talk.tags" :key="tag.id"
-            class="cu-tag round bg-pink light mt-10">
+            class="q-tag-theme mt-sm">
         #{{ tag.name }}
       </view>
     </view>
@@ -63,7 +63,7 @@ import TalkVO from '../../model/talk/TalkVO'
 import PagePath from '../../const/PagePath'
 import ImgUtil from '../../utils/ImgUtil'
 import RouterUtil from '../../utils/RouterUtil'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import GenderType from '../../const/GenderType'
 import SocialuniConfig from '../../model/SocialuniConfig'
 

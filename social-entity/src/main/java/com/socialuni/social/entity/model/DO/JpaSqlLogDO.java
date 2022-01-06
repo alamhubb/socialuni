@@ -23,7 +23,7 @@ import java.util.Date;
 })
 public class JpaSqlLogDO extends CommonBaseDO implements Serializable {
     //邀请你的用户
-    private Integer requestId;
+    private Long requestId;
     private String interfaceMethod;
     private Long spendTime;
 

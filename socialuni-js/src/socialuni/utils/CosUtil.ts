@@ -8,7 +8,7 @@ import COS from 'cos-wx-sdk-v5'
 import COS from 'cos-js-sdk-v5'
 // #endif
 import AppMsg from '../const/AppMsg'
-import Alert from './Alert'
+import AlertUtil from './AlertUtil'
 import CosAuthRO from '../model/cos/CosAuthRO'
 import DomFile from '../model/DomFile'
 import UniUtil from './UniUtil'
@@ -42,7 +42,7 @@ export default class CosUtil {
           resolve(data)
         } else {
           UniUtil.hideLoading()
-          Alert.error(AppMsg.uploadFailMsg)
+          AlertUtil.error(AppMsg.uploadFailMsg)
           reject(err)
         }
       })

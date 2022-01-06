@@ -2,13 +2,13 @@
   <!--      底部客服信息-->
   <div class="row-between">
     <navigator :url="homeUrl" class="u-type-info u-border-bottom">
-      <u-icon name="home" size="30" class="mr-xs"></u-icon>
+      <q-icon icon="home" size="15" class="mr-xs"></q-icon>
       查看官网
     </navigator>
 
-    <view @click="copyServiceNum" class="u-type-info u-border-bottom">
+    <view @click="copyServiceNum" class="flex-row u-type-info u-border-bottom">
       客服微信、QQ：{{ qqService }}
-      <u-icon name="attach" size="30" class="ml-xs"></u-icon>
+      <q-icon icon="attach" size="15" class="ml-xs"></q-icon>
     </view>
   </div>
 </template>
@@ -19,8 +19,11 @@ import UniUtil from '../../utils/UniUtil'
 import ConfigMap from '../../const/ConfigMap'
 import SkipUrlConst from '../../const/SkipUrlConst'
 import { socialConfigStore } from '../../store'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
-@Component
+@Component({
+  components: { QIcon }
+})
 export default class LoginFooterAppInfo extends Vue {
   @socialConfigStore.Getter(ConfigMap.qqServiceKey) qqService: string
 

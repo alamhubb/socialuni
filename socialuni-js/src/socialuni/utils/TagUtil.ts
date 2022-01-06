@@ -1,8 +1,9 @@
-import TagVO from '../model/tag/TagVO'
+import TagVO from '../model/community/tag/TagVO'
 import StorageUtil from './StorageUtil'
+import Constants from '@/socialuni/const/Constant'
 
 const initTag = new TagVO()
-initTag.name = '未选择'
+initTag.name = Constants.initTagName
 initTag.id = 0
 
 export default class TagUtil {

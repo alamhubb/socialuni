@@ -4,12 +4,13 @@ import ToastUtil from '@/utils/ToastUtil'
 import ErrorCode from '@/constants/ErrorCode'
 import MsgUtil from '@/utils/MsgUtil'
 import { userModule } from '@/store'
+import PageUtil from '@/utils/PageUtil'
 
 // create an axios instance
 const request = Axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 3000 // request timeout
+  timeout: 30000 // request timeout
 })
 // request interceptor
 request.interceptors.request.use(
@@ -105,6 +106,7 @@ request.interceptors.response.use(
           } else {
             MsgUtil.unLoginMessage()
           }
+          PageUtil.toHome()
           break
         case ErrorCode.custom:
           break

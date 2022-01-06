@@ -1,25 +1,24 @@
 <template>
-  <u-popup v-model="showCityPopup" mode="bottom" :border-radius="20" @close="close">
+  <q-popup :value="value" bottom @input="close">
     <div class="row-between-center q-box bb-1">
       <view class="flex-row">
         <view class="text-black text-md font-bold">城市筛选</view>
-        <view class="text-orange font-bold px bg-active" @click="getLocation">
+        <view class="text-orange font-bold px bg-click" @click="getLocation">
           <q-icon icon="map-fill" class="mr-nn" size="16"></q-icon>
           定位
         </view>
       </view>
       <view class="flex-row">
-        <view class="text-blue font-bold mx-sm px-sm bg-active" @click="close">取消</view>
-        <view class="text-green font-bold mx-sm px-sm bg-active" @click="confirm">确定</view>
+        <view class="text-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
+        <view class="text-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
       </view>
     </div>
-
-    <q-row-line class="mt-sm">
+    <div class="row-col-center px bg-white mt-sm">
       <view class="font-bold">
         当前选择：
       </view>
       <view v-if="bottomDistrict" class="row-col-center">
-        <q-icon v-if="bottomDistrict.isLocation" class="mr-mn" icon="map-fill" size="16" />
+        <q-icon v-if="bottomDistrict.isLocation" class="mr-mn" icon="map-fill" size="16"/>
         <view class="font-bold" v-if="bottomDistrict.provinceName">
           {{ bottomDistrict.provinceName }}
         </view>
@@ -49,26 +48,31 @@
           - {{ district.districtName }}
         </view>
       </view>
-    </q-row-line>
+    </div>
 
     <view class="mt-sm h360" v-if="districts && districts.length">
       <q-picker ref="citySelect" class="bg-white" v-model="bottomDistrict"
                 :dataList="districts"></q-picker>
     </view>
-  </u-popup>
+  </q-popup>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
-import Alert from '../utils/Alert'
-import QIcon from '@/socialuni/components/q-icon/q-icon.vue'
-import QRowLine from '@/socialuni/components/q-row-line/q-row-line.vue'
-import QPicker from '@/socialuni/components/q-picker/q-picker.vue'
+import AlertUtil from '../utils/AlertUtil'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
+import QPicker from '@/qing-ui/components/QPicker/QPicker.vue'
+import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
+
 @Component({
-  components: { QPicker, QRowLine, QIcon }
+  components: {
+    QPicker,
+    QIcon,
+    QPopup
+  }
 })
 export default class CityPicker extends Vue {
   public $refs!: {
@@ -83,12 +87,6 @@ export default class CityPicker extends Vue {
 
   @Model('input') readonly value!: any
 
-  @Watch('value')
-  valueWatch () {
-    if (this.value) {
-      this.open()
-    }
-  }
 
   open () {
     this.showCityPopup = true
@@ -128,7 +126,7 @@ export default class CityPicker extends Vue {
       this.bottomDistrict = district
       this.initPopupCity()
     }).catch(() => {
-      Alert.hint('定位功能已关闭，请手动开启')
+      AlertUtil.hint('定位功能已关闭，请手动开启')
       throw Error()
     })
   }

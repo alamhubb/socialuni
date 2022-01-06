@@ -3,12 +3,12 @@
         <block v-for="(childComment,index) in comment.childComments" :key="childComment.id">
             <view v-if="index<childCommentShowNum" class="flex-row py-mn">
                 <!--            {{childComment.no}}#-->
-                <text :class="comment.user.vipFlag?'text-red':'color-blue-dark'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
+                <text :class="comment.user.vipFlag?'text-red':'color-blue'" class="row-col-center" @click="toUserDetail(childComment.user.id)">{{childComment.user.nickname}}</text>
                 <view class="flex-sub row-col-center" @click="setReplyComment(talk,comment,childComment)">
                     <text v-if="childComment.replyComment">
                         <text class="mx-5">回复</text>
                         <!--                {{childComment.replyComment.no}}#-->
-                        <text class="color-blue-dark" @click.stop="toUserDetail(childComment.replyComment.user.id)">
+                        <text class="color-blue" @click.stop="toUserDetail(childComment.replyComment.user.id)">
                             {{childComment.replyComment.user.nickname}}
                         </text>
                     </text>
@@ -18,7 +18,7 @@
             </view>
         </block>
         <view v-show="comment.childCommentNum>childCommentShowNum || showOtherCommentClicked" class="pt-2">
-            <view class="font-orange row-col-center" @click="toggleOtherComments">
+            <view class="color-orange row-col-center" @click="toggleOtherComments">
                 <view v-show="comment.childCommentNum>childCommentShowNum">
                     查看其余{{comment.childCommentNum- childCommentShowNum}}条回复
                     <q-icon icon="arrow-down"></q-icon>
@@ -33,17 +33,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
 import CommentVO from '../../model/comment/CommentVO'
 import PagePath from '../../const/PagePath'
-import PageUtil from '../../utils/PageUtil'
 import { socialTalkModule } from '../../store'
 import JsonUtils from '../../utils/JsonUtil'
 import RouterUtil from '../../utils/RouterUtil'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 
-  @Component({
+@Component({
     components: { QIcon }
   })
 export default class ChildComment extends Vue {

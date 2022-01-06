@@ -1,9 +1,9 @@
 <template>
   <view class="h100p flex-col">
     <q-navbar v-if="value">
-      <q-icon class="ml" icon="arrow-leftward" @click="input"></q-icon>
-      <q-search class="flex-auto">
-        <q-icon class="mx-5 text-gray" icon="search" size="16"></q-icon>
+      <q-icon class="ml-smm" icon="arrow-leftward" @click="input"></q-icon>
+      <q-search class="flex-1 mx-sm bg-default">
+        <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
         <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
         <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"
@@ -20,40 +20,40 @@
       <view v-for="tag in showTags" :key="tag.id" @click="change(tag)"
             class="article-row row-between solid-bottom">
         <text>
-          #{{tag.name}}
+          #{{ tag.name }}
         </text>
         <view v-if="tag.count" class="row-col-center">
           <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
-          {{tag.count}}
+          {{ tag.count }}
         </view>
       </view>
     </view>
     <view v-else class="flex-col flex-1 overflow-hidden">
-      <q-card class="solid-bottom">
-        <q-card-row>
+      <div class="box solid-bottom">
+        <div class="flex-row">
           <text class="cuIcon-title text-green"></text>
           <text class="text-md font-bold">历史话题</text>
-        </q-card-row>
-        <q-card-grid class="mt-sm">
-          <view v-if="historyTags.length">
+        </div>
+        <div class="row-grid">
+          <template v-if="historyTags.length">
             <view v-for="tag in historyTags"
-                  class="ml-xs margin-right-xs cu-tag lg round bg-green-plain margin-bottom-sm"
+                  class="ml-xs mt-sm q-tag-theme lg round"
                   :key="tag.id"
                   @click="change(tag)">
-              {{tag.name}}
+              #{{ tag.name }}
             </view>
-          </view>
-          <view v-else class="pl-sm text-md text-gray">
+          </template>
+          <view v-else class="pl-sm mt-sm text-md text-gray">
             空
           </view>
-        </q-card-grid>
-      </q-card>
+        </div>
+      </div>
 
       <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
             <view class="row-all-center flex-auto">
-              <text class="uni-ellipsis">{{item.name}}</text>
+              <text class="uni-ellipsis">{{ item.name }}</text>
             </view>
           </view>
         </template>
@@ -61,10 +61,10 @@
           <view class="bg-white">
             <view class="q-box-row">
               <text class="cuIcon-title text-green margin-right-xs"></text>
-              <text class="font-bold">{{item.name}}</text>
+              <text class="font-bold">{{ item.name }}</text>
             </view>
 
-            <view if="item.childs">
+            <view>
               <q-row-item v-for="tag in item.tags" :key="tag.id" @click="change(tag)">
                 <view class="row-col-center can-click" @click.stop="change(tag)">
                   <image class="cu-avatar radius lg flex-none"
@@ -72,10 +72,10 @@
                   />
                   <view class="ml-sm overflow-hidden">
                     <view>
-                      {{tag.name}}
+                      {{ tag.name }}
                     </view>
                     <view class="text-gray text-sm text-ellipsis">
-                      帖子：{{tag.talkCount}}
+                      帖子：{{ tag.talkCount }}
                     </view>
                   </view>
                 </view>
@@ -90,29 +90,22 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model, Watch, Emit } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 
-import TagVO from '../../model/tag/TagVO'
-import TagTypeVO from '../../model/tag/TagTypeVO'
-import QRowItem from '../q-row-item/q-row-item.vue'
-import QIcon from '../q-icon/q-icon.vue'
-import { namespace } from 'vuex-class'
+import TagVO from '../../model/community/tag/TagVO'
+import TagTypeVO from '../../model/community/tag/TagTypeVO'
+import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import TagUtil from '../../utils/TagUtil'
-import QNavbar from '../q-navbar/q-navbar.vue'
-import QSearch from '../q-search/q-search.vue'
-import QCard from '../q-card/q-card.vue'
-import QCardRow from '../q-card-row/q-card-row.vue'
-import QCardGrid from '../q-card-grid/q-card-grid.vue'
-import QSidebar from '../q-sidebar/q-sidebar.vue'
+import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
+import QSearch from '../../../qing-ui/components/QSearch/QSearch.vue'
+import QSidebar from '../../../qing-ui/components/QSidebar/QSidebar.vue'
 import { socialTagStore } from '../../store'
 
 
 @Component({
   components: {
     QSidebar,
-    QCardGrid,
-    QCardRow,
-    QCard,
     QSearch,
     QNavbar,
     QRowItem,
@@ -123,7 +116,10 @@ export default class TagSearchPage extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 
-  @Prop({ type: Boolean, default: false }) readonly isAdd: boolean
+  @Prop({
+    type: Boolean,
+    default: false
+  }) readonly isAdd: boolean
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   // 输入内容查询时显示的列表tag
   // 进入页面只查询前20个，点击了输入内容才查询所有

@@ -6,7 +6,7 @@ import UniUtil from '@/socialuni/utils/UniUtil'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
 import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
 import OAuthService from '@/socialuni/service/OAuthService'
-import Toast from '@/socialuni/utils/Toast'
+import ToastUtil from '@/socialuni/utils/ToastUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import ResultRO from '@/socialuni/model/social/ResultRO'
 
@@ -15,8 +15,6 @@ export default class SocialMinxinVue extends Vue {
   onLaunch () {
     //@ts-ignore
     this.isAppPage = true
-    console.log(123)
-    console.log(this)
     //无论如何都要获取当前用户信息
     UserService.getMineUserInitDataAction()
     // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
@@ -54,7 +52,7 @@ export default class SocialMinxinVue extends Vue {
           } else {
             await OAuthService.oAuthUserPhoneNumLogin(authData)
           }
-          Toast.toastLong('授权成功')
+          ToastUtil.toastLong('授权成功')
           PageUtil.toMinePage()
         }
       }

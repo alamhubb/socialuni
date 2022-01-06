@@ -1,15 +1,15 @@
-import JsonUtil from '@/utils/JsonUtil'
+import ObjectUtil from '@/utils/ObjectUtil'
 
 export default class StorageUtil {
   // 改成any类型
   static setObj(key: string, value: any) {
-    localStorage.setItem(key, JsonUtil.toJson(value || null))
+    localStorage.setItem(key, ObjectUtil.toJson(value || null))
   }
 
   static getObj(key: string): any {
     const objStr: string = localStorage.getItem(key)
     if (objStr) {
-      return JsonUtil.jsonParse(objStr)
+      return ObjectUtil.toParse(objStr)
     }
     return null
   }

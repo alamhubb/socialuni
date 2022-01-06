@@ -13,6 +13,8 @@ import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -121,6 +123,14 @@ public class DevAccountUtils {
     }
 
     public static DevAccountDO getAdminDevAccountNotNull() {
+        DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
+        if (user == null) {
+            throw new SocialNotLoginException();
+        }
+        return user;
+    }
+
+    public static DevAccountDO getAdminDevAccountAllowNull() {
         String token = SocialTokenUtil.getToken();
         return DevAccountUtils.getDevAccountByToken(token);
     }
@@ -130,19 +140,18 @@ public class DevAccountUtils {
         //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据
         if (SocialAppEnv.getIsProdEnv()) {
             //校验解析token
-            String userId = SocialTokenUtil.getUserKeyByToken(token);
-            if (StringUtils.isEmpty(userId)) {
+            String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
+            if (StringUtils.isEmpty(devSecretKey)) {
                 return null;
             }
-            Integer userIdInt = Integer.parseInt(userId);
-            //todo 这里需要校验有效期吧
-            String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(userIdInt);
-            if (!token.equals(tokenCode)) {
-                return null;
-            }
-            DevAccountDO devAccountDO = devAccountRepository.findOneById(userIdInt);
+            DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devSecretKey);
             if (devAccountDO == null) {
                 throw new SocialParamsException("token被破解");
+            }
+            //todo 这里需要校验有效期吧
+            String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(devAccountDO.getId());
+            if (!token.equals(tokenCode)) {
+                return null;
             }
             return devAccountDO;
         } else {

@@ -103,8 +103,8 @@ import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
 import UserAPI from '../../api/UserAPI'
 import { parseDate } from '../../utils'
 import JsonUtils from '../../utils/JsonUtil'
-import Alert from '../../utils/Alert'
-import Toast from '../../utils/Toast'
+import AlertUtil from '../../utils/AlertUtil'
+import ToastUtil from '../../utils/ToastUtil'
 import { socialUserModule, socialUserStore } from '../../store'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import EnumStrVO from '../../const/EnumStrVO'
@@ -187,24 +187,24 @@ export default class UserEdit extends Vue {
   async saveUser () {
     if (this.contactAccount) {
       if (this.contactAccount.length > 30) {
-        Alert.hint('联系方式不能超过30个字符，例如：vx:491369310')
+        AlertUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
         return
       } else if (this.contactAccount.length < 5) {
-        Alert.hint('联系方式必须大于4个字符，例如：vx:491369310')
+        AlertUtil.hint('联系方式必须大于4个字符，例如：vx:491369310')
         return
       }
     }
 
     //修改了性别
     if (this.user.gender !== this.gender) {
-      const confirm = await Alert.confirm('性别修改后不可再更改，请确认是否修改')
+      const confirm = await AlertUtil.confirm('性别修改后不可再更改，请确认是否修改')
       if (!confirm) {
-        return Toast.toastLong('您选择了不修改性别')
+        return ToastUtil.toastLong('您选择了不修改性别')
       }
     }
 
     this.btnDisabled = true
-    Alert.confirm('是否确定修改个人信息').then(() => {
+    AlertUtil.confirm('是否确定修改个人信息').then(() => {
       const userCopy: UserEditVO = JsonUtils.deepClone(this.user)
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
@@ -216,7 +216,7 @@ export default class UserEdit extends Vue {
       userCopy.wbAccount = this.wbAccount
       UserAPI.editUserAPI(userCopy).then((res: any) => {
         socialUserModule.setUser(res.data)
-        Toast.toast('已修改')
+        ToastUtil.toast('已修改')
         this.closeUserEditPop()
       }).finally(() => {
         this.btnDisabled = false

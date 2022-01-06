@@ -1,4 +1,4 @@
-import { Action, Module, RegisterOptions, VuexModule } from 'vuex-class-modules'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
 import LoginProvider from '../const/LoginProvider'
 import PlatformType from '../const/PlatformType'
 import PlatformUtils from '../utils/PlatformUtils'
@@ -64,6 +64,7 @@ export default class SocialSystemModule extends VuexModule {
     // AppService.getHomeLoadAfterData()
     socialTagModule.getHotTagsAction()
     socialTagModule.getHotTagTypesAction()
+    // socialCircleModule.getCircleTypesAction()
     socialLocationModule.getHotDistrictsAction()
     socialAppModule.getReportTypesAction()
     socialAppModule.getAppConfigAction()

@@ -1,15 +1,18 @@
-/*
 package com.socialuni.admin.web.controller.oldadmin;
 
 
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;
 import com.socialuni.social.sdk.mapper.TalkMapper;
 import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.store.TalkQueryStore;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-*/
-/**
- * @author qinkaiyuan
- * @date 2020-03-15 22:05
- *//*
 
 @RestController
 @RequestMapping("keywords")
@@ -37,8 +35,6 @@ public class KeywordsManageController {
     @Resource
     private NotifyRepository notifyRepository;
     @Resource
-    private NotifyService notifyService;
-    @Resource
     private KeywordsRepository keywordsRepository;
     @Resource
     private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
@@ -49,24 +45,22 @@ public class KeywordsManageController {
     private TalkQueryStore talkQueryStore;
     @Resource
     private TalkMapper talkMapper;
-    @Resource
-    private CommentMapper commentMapper;
 
 
     @PostMapping("addKeywords")
     public ResultRO<KeywordsDO> addKeywords(@Valid @NotNull String content, String cause) {
         content = content.trim();
         if (StringUtils.isEmpty(content)) {
-            return new ResultRO<>("不能为空");
+            throw new SocialBusinessException("不能为空");
         }
         Optional<KeywordsDO> optionalViolateWordDO = keywordsRepository.findTopOneByText(content);
         if (optionalViolateWordDO.isPresent()) {
-            return new ResultRO<>("不能为重复");
+            throw new SocialBusinessException("不能为重复");
         }
         KeywordsDO keywordsDO = new KeywordsDO(content, cause);
 
         keywordsRepository.save(keywordsDO);
-        return new ResultRO<>();
+        return ResultRO.success(keywordsDO);
     }
 
     @PostMapping("closeKeywords")
@@ -75,18 +69,18 @@ public class KeywordsManageController {
         Optional<KeywordsDO> optionalViolateWordDO = keywordsRepository.findById(id);
         //存在
         if (!optionalViolateWordDO.isPresent()) {
-            return new ResultRO<>("错误了");
+            throw new SocialBusinessException("错误了");
         }
 
         KeywordsDO keywordsDO = optionalViolateWordDO.get();
         keywordsDO = getKeywordsDOResultVO(keywordsDO, closeCause);
         keywordsRepository.save(keywordsDO);
-        return new ResultRO<>();
+        return ResultRO.success(keywordsDO);
     }
 
     private KeywordsDO getKeywordsDOResultVO(KeywordsDO keywordsDO, String closeCause) {
 
-        keywordsDO.setStatus(BaseStatus.delete);
+        keywordsDO.setStatus(CommonStatus.delete);
         keywordsDO.setOpenPinyin(ConstBoolean.close);
         keywordsDO.setOpenText(ConstBoolean.close);
 
@@ -102,15 +96,15 @@ public class KeywordsManageController {
         Optional<KeywordsDO> optionalViolateWordDO = keywordsRepository.findById(id);
         //存在
         if (!optionalViolateWordDO.isPresent()) {
-            return new ResultRO<>("错误了");
+            throw new SocialBusinessException("错误了");
         }
 
         KeywordsDO keywordsDO = getKeywordsDOResultVO(optionalViolateWordDO.get(), type, cause);
         keywordsRepository.save(keywordsDO);
-        return new ResultRO<>();
+        return ResultRO.success(keywordsDO);
     }
 
-//    @GetMapping("batchClosePinyinOrTexts"),批量关闭时使用
+    //    @GetMapping("batchClosePinyinOrTexts"),批量关闭时使用
     public ResultRO<KeywordsDO> batchOpenPinyinOrTexts() {
         //获取关键词
         List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(StatusConst.enable, 19, 0.4);
@@ -120,7 +114,7 @@ public class KeywordsManageController {
         }
 
         keywordsRepository.saveAll(optionalViolateWordDOs);
-        return new ResultRO<>();
+        return ResultRO.success();
     }
 
     private KeywordsDO getKeywordsDOResultVO(KeywordsDO keywordsDO, String type, String cause) {
@@ -183,4 +177,3 @@ public class KeywordsManageController {
     }
 
 }
-*/

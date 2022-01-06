@@ -15,6 +15,7 @@ export default class RouterUtil {
    * @param params
    */
   static navigateTo (pagePath: string, params?: object): void {
+    console.log(pagePath)
     if (params) {
       const paramObj = new URLSearchParams()
       for (const key in params) {

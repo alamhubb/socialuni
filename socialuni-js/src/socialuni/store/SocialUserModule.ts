@@ -3,8 +3,8 @@ import { Action, Module, VuexModule } from 'vuex-class-modules'
 import UserAPI from '../api/UserAPI'
 import { socialUserModule } from './index'
 import UserStorageUtil from '../utils/UserStorageUtil'
-import Alert from '../utils/Alert'
-import Toast from '../utils/Toast'
+import AlertUtil from '../utils/AlertUtil'
+import ToastUtil from '../utils/ToastUtil'
 import UserService from '../service/UserService'
 import TokenUtil from '../utils/TokenUtil'
 import SocialLoginRO from '../model/social/SocialLoginRO'
@@ -35,9 +35,9 @@ export default class SocialUserModule extends VuexModule {
   }
 
   loginOut () {
-    return Alert.confirm('是否退出登录').then(() => {
+    return AlertUtil.confirm('是否退出登录').then(() => {
       UserService.clearUserInfoCom()
-      Toast.toast('用户退出')
+      ToastUtil.toast('用户退出')
     })
   }
 
@@ -48,10 +48,10 @@ export default class SocialUserModule extends VuexModule {
 
   @Action
   destroyAccount () {
-    return Alert.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
+    return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
       UserAPI.destroyAccountAPI().then(() => {
         UserService.clearUserInfoCom()
-        Toast.toast('注销成功')
+        ToastUtil.toast('注销成功')
       })
     })
   }

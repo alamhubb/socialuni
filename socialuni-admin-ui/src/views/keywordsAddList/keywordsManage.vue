@@ -17,18 +17,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import ReportAPI from '@/api/ReportAPI'
-import ReportVO from '@/model/report/ReportVO'
+import { Component, Vue } from 'vue-property-decorator'
 import KeywordsQueryAPI from '@/api/KeywordsQueryAPI'
 import keywordsVO from '@/model/violateWord/KeywordsVO'
 import keywordsTriggerVO from '@/model/violateWord/KeywordsTriggerVO'
-import el from 'element-ui/src/locale/lang/el'
 import KeywordsManageAPI from '@/api/KeywordsManageAPI'
 import keywordsTriggerDetailVO from '@/model/violateWord/KeywordsTriggerDetailVO'
-import KeywordsDetailTable from '@/views/keywordsManage/KeywordsDetailTable.vue'
-import TriggerDetailTable from '@/views/keywordsManage/TriggerDetailTable.vue'
-import KeywordsDetailVO from '@/model/violateWord/KeywordsDetailVO'
+import KeywordsDetailTable from '@/views/keywordManage/KeywordsDetailTable.vue'
+import TriggerDetailTable from '@/views/keywordManage/TriggerDetailTable.vue'
 // 违规率高不高
 // 违规次数、文本次数、拼音次数
 

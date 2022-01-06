@@ -1,3 +1,24 @@
+$text-none: 0;
+$text-nn: 12px;
+$text-mn: 12px;
+$text-mnn: 12px;
+$text-xs: 12px;
+$text-xss: 12px;
+$text-sm: 12px;
+$text-ssm: 12px;
+$text-smm: 13px;
+$text-df: 14px;
+$text-dff: 15px;
+$text-md: 16px;
+$text-mdd: 17px;
+$text-lg: 18px;
+$text-lgg: 19px;
+$text-xl: 20px;
+$text-xxl: 22px;
+$text-sl: 24px;
+$text-sxl: 26px;
+$text-ssl: 30px;
+
 // space
 $space-none: 0;
 $space-nn: 2px;
@@ -22,23 +43,27 @@ $space-ssl: 90px;
 $space-hun: 100px;
 // mini，小，默认、大
 //横向
-$box-x-mn: $space-xs;
+$box-x-nn: $space-xs;
+$box-x-mn: $space-xss;
 $box-x-sm: $space-sm;
 $box-x-df: $space-smm;
 $box-x-md: $space-df;
 
 //纵向
-$box-y-mn: $space-mn;
+$box-y-nn: $space-mn;
+$box-y-mn: $space-mnn;
 $box-y-sm: $space-xs;
 $box-y-df: $space-sm;
 $box-y-md: $space-smm;
 
+$box-nn: $box-y-nn $box-x-nn;
 $box-mn: $box-y-mn $box-x-mn;
 $box-sm: $box-y-sm $box-x-sm;
 $box-df: $box-y-df $box-x-df;
 $box-md: $box-y-md $box-x-md;
 
 $box-map: (
+        nn: $box-nn,
         mn: $box-mn,
         sm: $box-sm,
         df: $box-df,

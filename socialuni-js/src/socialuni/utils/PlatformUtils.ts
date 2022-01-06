@@ -9,7 +9,7 @@ import UserPayResultVO from '../model/user/UserPayResultVO'
 import MPUtil from './MPUtil'
 import APPUtil from './APPUtil'
 import AppUtilAPI from '../api/AppUtilAPI'
-import Toast from './Toast'
+import ToastUtil from './ToastUtil'
 
 // 统一处理各平台的订阅
 export default class PlatformUtils {
@@ -93,7 +93,7 @@ export default class PlatformUtils {
       .catch((err) => {
         // qq的取消支付没有走着里
         if (err.errMsg === Constants.wxPayCancel || err.errMsg === Constants.qqPayCancel || err.errMsg === Constants.appWxPayCancel) {
-          Toast.toast(AppMsg.payCancelMsg)
+          ToastUtil.toast(AppMsg.payCancelMsg)
           throw err
         } else {
           AppUtilAPI.sendErrorLogAPI(null, '支付失败', res, err)

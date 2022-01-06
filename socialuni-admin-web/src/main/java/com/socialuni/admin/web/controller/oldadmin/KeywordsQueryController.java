@@ -1,31 +1,24 @@
-/*
 package com.socialuni.admin.web.controller.oldadmin;
 
-import com.qingchi.admin.keywords.KeywordsDetailVO;
-import com.socialuni.social.model.common.ResultRO;
-import com.socialuni.social.constant.status.BaseStatus;
-import com.socialuni.social.constant.status.ContentStatus;
-import com.qingchi.base.constant.status.ReportStatus;
-import com.qingchi.base.mapper.CommentMapper;
-import com.qingchi.base.mapper.TalkMapper;
-import com.socialuni.social.model.common.BaseModelDO;
-import com.qingchi.base.model.chat.MessageDO;
-import com.qingchi.base.model.system.KeywordsDO;
-import com.qingchi.base.model.system.KeywordsTriggerDetailDO;
-import com.qingchi.base.model.talk.CommentDO;
-import com.qingchi.base.model.talk.TalkDO;
-import com.qingchi.base.repository.chat.MessageRepository;
-import com.qingchi.base.repository.keywords.KeywordsRepository;
-import com.qingchi.base.repository.keywords.KeywordsTriggerDetailRepository;
-import com.qingchi.base.repository.notify.NotifyRepository;
-import com.qingchi.base.repository.report.ReportRepository;
-import com.qingchi.base.repository.talk.CommentRepository;
-import com.qingchi.base.repository.talk.TalkRepository;
-import com.qingchi.base.service.KeywordsService;
-import com.qingchi.base.service.KeywordsTriggerService;
-import com.qingchi.base.service.NotifyService;
-import com.qingchi.base.service.ViolationService;
-import org.apache.commons.lang.StringUtils;
+import com.socialuni.admin.web.model.KeywordsDetailVO;
+import com.socialuni.admin.web.service.ViolationService;
+import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.social.entity.model.DO.base.BaseModelDO;
+import com.socialuni.social.entity.model.DO.comment.CommentDO;
+import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
+import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.social.entity.model.DO.message.MessageDO;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.sdk.mapper.TalkMapper;
+import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
+import com.socialuni.social.sdk.service.KeywordsService;
+import com.socialuni.social.sdk.service.KeywordsTriggerService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,11 +31,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 
-*/
-/**
- * @author qinkaiyuan
- * @date 2020-03-15 22:05
- *//*
 
 @RestController
 @RequestMapping("keywords")
@@ -53,8 +41,6 @@ public class KeywordsQueryController {
     private ViolationService violationService;
     @Resource
     private NotifyRepository notifyRepository;
-    @Resource
-    private NotifyService notifyService;
     @Resource
     private KeywordsRepository keywordsRepository;
     @Resource
@@ -68,8 +54,6 @@ public class KeywordsQueryController {
     private MessageRepository messageRepository;
     @Resource
     private TalkMapper talkMapper;
-    @Resource
-    private CommentMapper commentMapper;
 
     @Resource
     private KeywordsService keywordsService;
@@ -77,25 +61,21 @@ public class KeywordsQueryController {
     @Resource
     private KeywordsTriggerService keywordsTriggerService;
 
-
-    */
-/**
-     * 查询关键词列表
+    /*
+     *查询关键词列表
      *
-     * @return
-     *//*
+     *@return*/
+
 
     @PostMapping("queryKeywords")
     public ResultRO<List<KeywordsDO>> queryKeywords() {
         //先查询出来所有的关键词
-        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(BaseStatus.enable);
+        List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(CommonStatus.enable);
 
         return new ResultRO<>(wordDOs);
     }
 
-    */
-/**
-     * 功能说明
+    /* * 功能说明
      * 查询单个关键词违规律详细信息
      * <p>
      * 逻辑说明
@@ -112,14 +92,14 @@ public class KeywordsQueryController {
      * 返回内容
      *
      * @param content
-     * @return
-     *//*
+     * @return*/
+
 
     @PostMapping("queryKeyword")
     public ResultRO<KeywordsDetailVO> queryKeyword(@Valid @NotNull String content, @Valid @NotNull Integer count) {
         content = content.trim();
         if (StringUtils.isEmpty(content)) {
-            return new ResultRO<>("不能为空");
+            throw new SocialBusinessException("不能为空");
         }
         //获取talk，msg，comment 各 3w条
 
@@ -178,4 +158,3 @@ public class KeywordsQueryController {
 
 
 }
-*/

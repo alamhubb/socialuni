@@ -5,7 +5,7 @@ import SocialPhoneNumLoginQO from '../model/phone/SocialPhoneNumLoginQO'
 import MockAPI from '../api/MockAPI'
 import { socialSystemModule } from '../store'
 import Constants from '../const/Constant'
-import Toast from '../utils/Toast'
+import ToastUtil from '../utils/ToastUtil'
 import UniProviderLoginQO from '@/socialuni/model/UniProviderLoginQO'
 import LoginProvider from '@/socialuni/const/LoginProvider'
 
@@ -17,7 +17,7 @@ export default class LoginService {
     if (socialSystemModule.isMp && socialSystemModule.isMpQQ && provider === LoginProvider.wx) {
       if (socialSystemModule.isMpQQ) {
         if (result.detail.errMsg !== Constants.loginSuccess) {
-          return Toast.toast('您取消了登录')
+          return ToastUtil.toast('您取消了登录')
         }
       }
     }

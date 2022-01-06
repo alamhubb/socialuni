@@ -1,20 +1,19 @@
 <template>
   <view>
-    <u-popup :value="commentVisible" border-radius="20" mode="center"
-             @close="commentActionClose">
+    <q-popup :value="commentVisible" @input="commentActionClose">
       <view class="uni-tip w180">
         <uni-list class="w100">
-          <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
+          <uni-list-item :show-arrow="true" title="复制" @click.native="copyText"/>
           <uni-list-item v-if="user&&comment&&(user.id === comment.user.id||user.id ===talk.user.id)"
-                         :show-arrow="true" title="删除" @click="userDeleteComment"/>
+                         :show-arrow="true" title="删除" @click.native="userDeleteComment"/>
           <uni-list-item v-if="user" :show-arrow="true" title="举报"
-                         @click="openReportDialog"/>
+                         @click.native="openReportDialog"/>
         </uni-list>
       </view>
-    </u-popup>
+    </q-popup>
 
-    <u-popup :value="dialogVisible" border-radius="20" mode="center"
-             :mask-close-able="false">
+
+    <q-popup :value="dialogVisible">
       <view class="uni-tip">
         <view class="uni-tip-title">举报</view>
         <view class="uni-tip-content">
@@ -37,15 +36,15 @@
                               :show-confirm-bar="false"
                     />
         </view>
-        <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40p" type="default" @click="reportDialogClose" :plain="true">
+        <view class="uni-tip-group-button row-center">
+          <button class="uni-tip-button w40p mr" type="default" @click="reportDialogClose" :plain="true">
             取消
           </button>
           <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
           </button>
         </view>
       </view>
-    </u-popup>
+    </q-popup>
   </view>
 </template>
 
@@ -64,14 +63,16 @@ import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../const/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
 import UniUtil from '../../utils/UniUtil'
-import Alert from '../../utils/Alert'
+import AlertUtil from '../../utils/AlertUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import UPopup from 'uview-ui/components/u-popup/u-popup'
+import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QPopup,
     UPopup
   }
 })
@@ -104,7 +105,7 @@ export default class TalkOperate extends Vue {
       reportAdd.contentId = this.comment.id
     }
     if (ReportType.other === this.reportType && !this.reportContent) {
-      Alert.hint('选择其他违规时，请您补充观点')
+      AlertUtil.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
@@ -120,7 +121,7 @@ export default class TalkOperate extends Vue {
         }
         // 必须最后清空因为前面还要使用做判断
         this.reportDialogClose()
-        Alert.hint(res.data)
+        AlertUtil.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -155,12 +156,13 @@ export default class TalkOperate extends Vue {
   // 用户自己删除
   userDeleteComment () {
     this.commentActionClose()
-    Alert.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
+    AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
       this.deleteComment()
     })
   }
 
   openReportDialog () {
+    console.log('举报')
     if (this.user) {
       this.commentActionClose()
       socialTalkModule.reportContentType = ReportContentType.comment

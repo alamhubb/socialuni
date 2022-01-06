@@ -31,6 +31,22 @@
   }
 }
 
+.by {
+  border-top: $border-base;
+  border-bottom: $border-base;
+}
+
+.bx {
+  border-left: $border-base;
+  border-right: $border-base;
+}
+
+@each $directionKey, $directionValue in $direction-map {
+  .b#{''+$directionKey+''} {
+    border-#{''+$directionValue}: $border-base;
+  }
+}
+
 //单设置宽度
 //为什么有横杠，因为存在l1这种值
 @for $index from 1 through 10 {
@@ -52,10 +68,6 @@
   }
 
   @each $directionKey, $directionValue in $direction-map {
-    .b#{''+$directionKey+''} {
-      border-#{''+$directionValue}: $border-base;
-    }
-
     .b#{''+$directionKey+''}-#{''+$index+''} {
       border-#{''+$directionValue}: $border-base;
       border-#{''+$directionValue+''}-width: #{''+$index}px !important;
@@ -90,87 +102,96 @@
 }
 
 .bd-radius {
-  border: $border-base;
   border-radius: $border-radius-base !important;
 }
 
 .bt-radius {
-  border: $border-base;
   border-top-left-radius: $border-radius-base !important;
   border-top-right-radius: $border-radius-base !important;
 }
 
 .bb-radius {
-  border: $border-base;
   border-bottom-left-radius: $border-radius-base !important;
   border-bottom-right-radius: $border-radius-base !important;
 }
 
 .bl-radius {
-  border: $border-base;
   border-top-left-radius: $border-radius-base !important;
   border-bottom-left-radius: $border-radius-base !important;
 }
 
 .br-radius {
-  border: $border-base;
   border-top-right-radius: $border-radius-base !important;
   border-bottom-right-radius: $border-radius-base !important;
 }
 
 @each $directionKey, $directionValue in $direction-com-map {
   .b#{''+$directionKey+''}-radius {
-    border: $border-base;
     border-#{''+$directionValue+''}-radius: $border-radius-base !important;
   }
 }
 
 @for $index from 1 through 50 {
   .bd-radius-#{''+$index} {
-    border: $border-base;
     border-radius: #{''+$index}px !important;
   }
 
   @each $directionKey, $directionValue in $direction-com-map {
     .b#{''+$directionKey+''}-radius-#{''+$index} {
-      border: $border-base;
       border-#{''+$directionValue}radius: #{''+$index}px !important;
     }
 
     .bt-radius-#{''+$index} {
-      border: $border-base;
       border-top-left-radius: #{''+$index}px !important;
       border-top-right-radius: #{''+$index}px !important;
     }
 
     .bb-radius-#{''+$index} {
-      border: $border-base;
       border-bottom-left-radius: #{''+$index}px !important;
       border-bottom-right-radius: #{''+$index}px !important;
     }
 
     .bl-radius-#{''+$index} {
-      border: $border-base;
       border-top-left-radius: #{''+$index}px !important;
       border-bottom-left-radius: #{''+$index}px !important;
     }
 
     .br-radius-#{''+$index} {
-      border: $border-base;
       border-top-right-radius: #{''+$index}px !important;
       border-bottom-right-radius: #{''+$index}px !important;
     }
   }
 }
 
-@each $sizeKey, $sizeValue in $size-map {
+
+@each $sizeKey, $sizeValue in $padding-map {
   .bd-radius-#{''+$sizeKey} {
-    border-radius: #{''+$sizeValue}px !important;
+    border-radius: #{''+$sizeValue} !important;
   }
 
   @each $directionKey, $directionValue in $direction-com-map {
     .b#{''+$directionKey+''}-radius-#{''+$sizeKey} {
-      border-#{''+$directionValue}radius: #{''+$sizeValue}px !important;
+      border-#{''+$directionValue}radius: #{''+$sizeValue} !important;
+    }
+
+    .bt-radius-#{''+$sizeKey} {
+      border-top-left-radius: #{''+$sizeValue} !important;
+      border-top-right-radius: #{''+$sizeValue} !important;
+    }
+
+    .bb-radius-#{''+$sizeKey} {
+      border-bottom-left-radius: #{''+$sizeValue} !important;
+      border-bottom-right-radius: #{''+$sizeValue} !important;
+    }
+
+    .bl-radius-#{''+$sizeKey} {
+      border-top-left-radius: #{''+$sizeValue} !important;
+      border-bottom-left-radius: #{''+$sizeValue} !important;
+    }
+
+    .br-radius-#{''+$sizeKey} {
+      border-top-right-radius: #{''+$sizeValue} !important;
+      border-bottom-right-radius: #{''+$sizeValue} !important;
     }
   }
 }
@@ -181,6 +202,5 @@
 }
 
 .bd-round {
-  border: $border-base;
   border-radius: 2500px !important;
 }

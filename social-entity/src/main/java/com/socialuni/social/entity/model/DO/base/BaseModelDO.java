@@ -30,4 +30,6 @@ public interface BaseModelDO {
     void setReportNum(Integer reportNum);
 
     String getReportContentType();
+
+    Integer getDevId();
 }

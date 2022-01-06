@@ -1,12 +1,14 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p">
+  <view v-if="talkTabs.length" class="flex-col h100p bg-default">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-    <q-tabs :tabs="talkTabs" v-model="current" @input="tabsChange">
+    <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
+    <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
+            class="mg-sm bd-radius pd-mn">
       <template #default="{tab}">
-        <q-tab>
+        <div class="h30 px-xs row-all-center">
           {{ tab.name }}
           <!--            费劲啊实力哈哈-->
-        </q-tab>
+        </div>
       </template>
       <template #icon="{tab}">
         <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
@@ -22,11 +24,11 @@
       <view class="w12"></view>
     </view>-->
 
-    <city-picker v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
+    <city-picker ref="cityPicker" v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
-    <q-pull-refresh ref="pullRefresh" class="bg-theme-light" @refresh="queryEnd">
+    <q-pull-refresh ref="pullRefresh" class="bg-default" @refresh="queryEnd">
       <swiper :current="swiperCurrent"
               :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
@@ -40,11 +42,11 @@
                 @scroll.native="talksScrollEvent"
                 @scroll="talksScrollEvent"
           >-->
-          <scroll-view class="h100p bg-theme-light" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p bg-default" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-            <div class="px-sm pb-60 bg-theme-light"
+            <div class="px-sm pb-60 bg-default"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
@@ -126,13 +128,13 @@ import {
   socialUserStore
 } from '../../store'
 import TalkOperate from './talkOperate.vue'
-import QTab from '../q-tab/q-tab.vue'
-import QTabs from '../q-tabs/q-tabs.vue'
-import QIcon from '../q-icon/q-icon.vue'
+import QTab from '../../../qing-ui/components/QTab/QTab.vue'
+import QTabs from '../../../qing-ui/components/QTabs/QTabs.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
-import QPullRefresh from '@/socialuni/components/q-pull-refresh/QPullRefresh.vue'
+import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 
 
 // todo 后台可控制是否显示轮播图
@@ -152,6 +154,7 @@ import QPullRefresh from '@/socialuni/components/q-pull-refresh/QPullRefresh.vue
 export default class TabsTalkPage extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
+    citiPicker: CityPicker
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
 
@@ -223,10 +226,10 @@ export default class TabsTalkPage extends Vue {
     // h5有头顶和下边导航栏都算了高度
     // #ifdef H5
     //tab的高度加上导航栏的高度
-    this.talksListHeightSub = 44 + this.tabsHeight
+    this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
     // #ifndef H5
-    this.talksListHeightSub = socialSystemModule.statusBarHeight + 44 + this.tabsHeight
+    this.talksListHeightSub = socialSystemModule.statusBarHeight + socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
   }
 
@@ -390,7 +393,6 @@ export default class TabsTalkPage extends Vue {
   }
 
   // 城市选择
-
   showCityPopup = false
 
   openCityPicker () {

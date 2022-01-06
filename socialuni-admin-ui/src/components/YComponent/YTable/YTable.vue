@@ -9,26 +9,28 @@
     v-on="$listeners"
     @row-click="rowClick"
   >
-    <el-table-column v-if="index" type="index" />
-    <el-table-column v-if="checked" width="50">
+    <el-table-column v-if="index" type="index"/>
+    <el-table-column v-if="checked" width="80" align="center">
       <!--      不加scope不起作用-->
       <template slot="header" slot-scope="scope">
         <div>
           <el-checkbox
             :value="checkedAll"
             @change="checkedAllClick"
-          />
+          >全选</el-checkbox>
         </div>
       </template>
       <template #default="{row}">
-        <el-checkbox
-          v-model="row.checked"
-          @change="selectionChange"
-          @click.native.stop
-        />
+        <div>
+          <el-checkbox
+            v-model="row.checked"
+            @change="selectionChange"
+            @click.native.stop
+          />
+        </div>
       </template>
     </el-table-column>
-    <slot />
+    <slot/>
   </el-table>
 </template>
 
@@ -85,8 +87,6 @@ export default class YTable extends Vue {
   }
 
   /* get checkedAll() {
-    console.log(this.data.every(item => {
-      console.log(item.checked)
       return item.checked
     }))
     return this.data.every(item => item.checked)
@@ -124,6 +124,7 @@ export default class YTable extends Vue {
     })
   }
 
+  // 必须有这行，通过这行来触发selectionChange，不通过这行直接修改checked无法触发selectionChange
   toggleRowSelection(row) {
     row.checked = !row.checked
     this.selectionChange()

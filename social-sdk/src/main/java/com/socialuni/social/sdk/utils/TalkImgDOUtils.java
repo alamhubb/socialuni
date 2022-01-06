@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.social.sdk.repository.TalkImgRepository;
+import com.socialuni.social.sdk.repository.community.TalkImgRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -3,12 +3,12 @@ package com.socialuni.social.web.config;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.entity.model.DO.RequestLogDO;
+import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.utils.RequestLogUtil;
+import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
@@ -87,6 +87,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 //初始化的请求
                 || uri.contains("report/queryReportTypes")
                 //查询首页轮播图
+                || uri.contains("queryLocation")
                 || uri.contains("queryHomeSwipers")
                 || uri.contains("getAppLaunchData")
                 || uri.contains("tag/queryTags")

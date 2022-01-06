@@ -9,7 +9,7 @@ import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
 import com.socialuni.center.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.repository.community.TagRepository;
 import com.socialuni.social.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

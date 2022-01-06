@@ -4,7 +4,7 @@ import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.sdk.redis.FollowRedis;
-import com.socialuni.social.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.utils.TalkRedis;
 import com.socialuni.social.sdk.utils.TalkUtils;
 import lombok.extern.slf4j.Slf4j;

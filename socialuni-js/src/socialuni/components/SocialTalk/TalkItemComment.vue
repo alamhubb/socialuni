@@ -38,7 +38,7 @@
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
             <view class="flex-row py-mn" @click="toTalkDetailVue">
-              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'text-theme'"
+              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue'"
                     @click.stop="toUserDetail(comment.user.id)">
                 {{comment.user.nickname}}
               </view>
@@ -82,8 +82,8 @@ import JsonUtils from '../../utils/JsonUtil'
 import { socialTalkModule, socialUserStore } from '../../store'
 import MsgUtil from '../../utils/MsgUtil'
 import RouterUtil from '../../utils/RouterUtil'
-import QIcon from '../q-icon/q-icon.vue'
-import Toast from '../../utils/Toast'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
+import ToastUtil from '../../utils/ToastUtil'
 
 @Component({
   components: {
@@ -113,6 +113,7 @@ export default class TalkItemComment extends Vue {
 
   // 打开举报talk弹框
   openReportDialog () {
+    console.log(123123)
     if (this.user) {
       socialTalkModule.talk = this.talk
       socialTalkModule.reportContentType = ReportContentType.talk
@@ -130,7 +131,7 @@ export default class TalkItemComment extends Vue {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
-        Toast.toast('已抱过不能取消')
+        ToastUtil.toast('已抱过不能取消')
         return
       }
       this.talk.hasHugged = true

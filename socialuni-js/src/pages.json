@@ -26,11 +26,18 @@
       }
     },
     {
-      "path": "pages/star/star",
+      "path": "pages/web/webBrowser",
       "style": {
-        "navigationBarTitleText": "星星"
+        "navigationStyle": "custom"
       }
     }
+    /*,
+    {
+      "path": "pages/circle/circle",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }*/
   ],
   "subPackages": [
     {
@@ -67,10 +74,10 @@
     "height": "52px",
     "list": [
       /*{
-        "pagePath": "pages/star/star",
+        "pagePath": "pages/circle/circle",
         "iconPath": "static/img/deck-gray-36dp.png",
         "selectedIconPath": "static/img/deck-blue-36dp.png",
-        "text": "星海"
+        "text": "圈子"
       },*/
       {
         "pagePath": "pages/talk/talk",

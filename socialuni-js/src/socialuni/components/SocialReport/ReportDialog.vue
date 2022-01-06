@@ -31,7 +31,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
 import ReportType from '../../const/ReportType'
 import ReportContentType from '../../const/ReportContentType'
 import MessageVO from '../../model/message/MessageVO'
@@ -40,10 +39,10 @@ import ReportAPI from '../../api/ReportAPI'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MsgUtil from '../../utils/MsgUtil'
 import PlatformUtils from '../../utils/PlatformUtils'
-import Alert from '../../utils/Alert'
+import AlertUtil from '../../utils/AlertUtil'
 import { socialAppStore, socialChatModule, socialUserStore } from '../../store'
 
-  @Component
+@Component
 export default class ReportDialog extends Vue {
     public $refs!: {
       reportDialog: any;
@@ -86,14 +85,14 @@ export default class ReportDialog extends Vue {
       const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
       reportAdd.contentId = this.reportInfo.id
       if (ReportType.other === this.reportType && !this.reportContent) {
-        Alert.hint('选择其他违规时，请您补充观点')
+        AlertUtil.hint('选择其他违规时，请您补充观点')
       } else {
         ReportAPI.addReportAPI(reportAdd).then((res: any) => {
           socialChatModule.deleteMsgAction(reportAdd.contentId)
           // 调用删除内容
           // 关闭弹框病初始化数据
           this.closeDialogAndInitData()
-          Alert.hint(res.data)
+          AlertUtil.hint(res.data)
           PlatformUtils.requestSubscribeReport()
         })
       }

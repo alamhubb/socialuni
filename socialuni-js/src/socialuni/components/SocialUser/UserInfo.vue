@@ -1,5 +1,5 @@
 <template>
-  <view v-if="userProp" class="bg-theme-light pb-100">
+  <view v-if="userProp" class="bg-default pb-100">
     <view class="bg-white mb-sm">
       <view>
         <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
@@ -37,13 +37,19 @@
               <view class="text-md" :class="{'color-red':userProp.vipFlag}">
                 {{ userProp.nickname }}
               </view>
-              <view>
-                <view class="cu-tag radius text-df"
-                      :class="[getGenderBgColor(userProp)]">
+              <view class="flex-row">
+                <div v-if="userProp.gender==='girl'" class="box-nn q-tag-error mt-xs">
                   {{ userProp.age }}
-                  <q-icon class="row-col-start ml-2" size="14"
+                  <q-icon class="ml-nn"
+                          size="12"
                           :icon="getGenderIcon(userProp)"/>
-                </view>
+                </div>
+                <div v-else class="box-nn q-tag-theme mt-xs">
+                  {{ userProp.age }}
+                  <q-icon class="ml-nn"
+                          size="12"
+                          :icon="getGenderIcon(userProp)"/>
+                </div>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
@@ -84,7 +90,7 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button class="cu-btn round bd-blue px-smm bg-theme" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button class="cu-btn round bd-blue px-smm bg-theme-base" :class="'bd-'+getFollowStatusColor(followStatus)"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>
@@ -93,14 +99,14 @@
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
-          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+<!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
             <view class='cu-tag bg-green'>
               <q-icon size="18" icon="mdi-sword-cross"/>
             </view>
             <view class="cu-tag bg-white bd-green bd-r-radius">
               {{ userProp.justiceValue }}
             </view>
-          </view>
+          </view>-->
           <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
                       <view class='cu-tag bg-red'>
                         <q-icon size="18" icon="heart-fill"/>
@@ -124,32 +130,32 @@
           地区：{{ userProp.city }}
         </view>
 
-<!--        <view v-if="isMine" class="py-sm q-solid-bottom">
-          <div class="row-col-center">
-            <image class="size20px mr-xs"
-                   mode="aspectFit"
-                   :src="require('socialuni/static/img/socialuni_logo.jpg')"
-            />
-            社交联盟：
-            <view v-if="userProp.bindSocialuni">
-              {{ userProp.socialuniNickname }}
-              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
-                已绑定
-              </view>
-            </view>
-            <view v-else>
-              绑定后可发布动态
-              <button class="cu-btn radius sm bg-orange ml-xs"
-                      @click="toBindSocialuni">绑定
-              </button>
-            </view>
-          </div>
-        </view>-->
+        <!--        <view v-if="isMine" class="py-sm q-solid-bottom">
+                  <div class="row-col-center">
+                    <image class="size20px mr-xs"
+                           mode="aspectFit"
+                           :src="require('socialuni/static/img/socialuni_logo.jpg')"
+                    />
+                    社交联盟：
+                    <view v-if="userProp.bindSocialuni">
+                      {{ userProp.socialuniNickname }}
+                      <view class="ml-10 sm cu-tag bg-white bd-gray radius">
+                        已绑定
+                      </view>
+                    </view>
+                    <view v-else>
+                      绑定后可发布动态
+                      <button class="cu-btn radius sm bg-orange ml-xs"
+                              @click="toBindSocialuni">绑定
+                      </button>
+                    </view>
+                  </div>
+                </view>-->
         <view v-if="isMine" class="py-sm q-solid-bottom">
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
             手机号(仅自己可见)：
-            <view v-if="userProp.phoneNum">
+            <view v-if="userProp.phoneNum" class="row-col-center">
               {{ userProp.phoneNum }}
               <view class="ml-10 sm cu-tag bg-white bd-gray radius">
                 已绑定
@@ -194,7 +200,7 @@
             复制
           </button>
         </view>-->
-        <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-active"
+        <!--        <view v-if="isMine && !userProp.contactAccount" class="row-col-center row-between-center bg-click"
                       @click="$pageUtil.toUserContactInfoPage">
                   <view class="row-col-center">
                     <text class="text-md text-orange">他人获取您的联系方式时，您就能获得贝壳</text>
@@ -360,12 +366,12 @@ import {
   socialUserModule,
   socialUserStore
 } from '../../store'
-import QRowItem from '../q-row-item/q-row-item.vue'
-import Alert from '../../utils/Alert'
-import Toast from '../../utils/Toast'
+import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
+import AlertUtil from '../../utils/AlertUtil'
+import ToastUtil from '../../utils/ToastUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import QIcon from '../q-icon/q-icon.vue'
+import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
@@ -476,7 +482,7 @@ export default class UserInfo extends Vue {
     const userImg: ImgFileVO = this.userProp.imgs[0]
     reportAdd.contentId = userImg.id
     if (ReportType.other === this.reportType && !this.reportContent) {
-      Alert.hint('选择其他违规时，请您补充观点')
+      AlertUtil.hint('选择其他违规时，请您补充观点')
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         // todo  举报过后，是否大于系统阀值，大于系统阀值隐藏
@@ -485,7 +491,7 @@ export default class UserInfo extends Vue {
           this.frontDeleteUserImg()
         }
         this.closeDialogAndInitData()
-        Alert.hint(res.data)
+        AlertUtil.hint(res.data)
         PlatformUtils.requestSubscribeReport()
       })
     }
@@ -533,21 +539,21 @@ export default class UserInfo extends Vue {
 
   deleteImg () {
     if (this.userProp.imgs.length > 1) {
-      Alert.warning('请确认是否删除照片？').then(() => {
+      AlertUtil.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
         UserAPI.deleteUserImgAPI(imgs[0]).then((res: any) => {
           socialUserModule.setUser(res.data)
         })
       })
     } else {
-      Toast.toastLong('请至少保留一张照片')
+      ToastUtil.toastLong('请至少保留一张照片')
     }
   }
 
 
   async chooseImg () {
     if (this.mineUser.imgs.length > 2) {
-      Toast.toastLong('最多上传3张照片，请删除后继续！')
+      ToastUtil.toastLong('最多上传3张照片，请删除后继续！')
       return
     }
     try {
@@ -679,11 +685,11 @@ export default class UserInfo extends Vue {
   }
 
   hintJusticeInfo () {
-    Toast.toastLong('正义值，正确举报会增加正义值')
+    ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   hintBindTwice () {
-    Alert.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
+    AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
   addFollow () {
@@ -747,9 +753,9 @@ export default class UserInfo extends Vue {
   }
 
   refreshMine () {
-    Alert.confirm('是否刷新用户信息').then(() => {
+    AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
-        Toast.toast('刷新成功')
+        ToastUtil.toast('刷新成功')
       })
     })
   }

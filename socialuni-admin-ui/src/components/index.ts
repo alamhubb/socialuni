@@ -1,4 +1,4 @@
-import NavMenuItem from '@/components/layout/components/NavMenu/NavMenuItem.vue'
+import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 
 const components = {
   install(Vue) {

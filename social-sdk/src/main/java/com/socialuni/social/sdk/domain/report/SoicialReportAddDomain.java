@@ -12,6 +12,7 @@ import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.DateUtils;
@@ -131,7 +132,7 @@ public class SoicialReportAddDomain {
         return reportDomain.userReportContent(
                 reportAddVO,
                 modelDO,
-                mineUser.getId()
+                mineUser.getId(), modelDO.getDevId()
         );
     }
 

@@ -1,9 +1,9 @@
 spring:
   profiles:
 #    active: local
-    active: qkylocal
 #    active: localprod
-#    active: prod
+    active: prod
+#    active: qkylocal
   jpa:
     database: MYSQL
     #    show-sql: true

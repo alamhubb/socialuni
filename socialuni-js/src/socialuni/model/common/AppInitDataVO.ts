@@ -1,9 +1,9 @@
 import CenterUserDetailRO from '../social/CenterUserDetailRO'
 import DistrictVO from '../DistrictVO'
 // import ChatVO from "@/model/chat/ChatVO";
-import TagTypeVO from '../tag/TagTypeVO'
+import TagTypeVO from '../community/tag/TagTypeVO'
 import HomeSwiperVO from '../HomeSwiperVO'
-import TagVO from '../tag/TagVO'
+import TagVO from '../community/tag/TagVO'
 import UnreadNotifyVO from '../UnreadNotifyVO'
 import TalkVO from '../talk/TalkVO'
 
