@@ -2,14 +2,13 @@ package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.ReportDO;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.model.model.RO.community.tag.TagRO;
-import com.socialuni.social.sdk.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.factory.SocialTalkImgROFactory;
+import com.socialuni.social.sdk.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.CommentUtils;
 import com.socialuni.social.sdk.utils.TalkImgDOUtils;
@@ -28,11 +27,10 @@ public class ReportContentROFactory {
         ReportContentROFactory.socialTagRedis = socialTagRedis;
     }
 
-    public static ReportContentVO getReportContentVO(ReportDO reportDO) {
+    public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
-        String reportContentType = reportDO.getReportContentType();
         if (reportContentType.equals(ContentType.talk)) {
-            TalkDO talkDO = TalkUtils.get(reportDO.getContentId());
+            TalkDO talkDO = TalkUtils.get(contentId);
             reportContentVO.setId(talkDO.getId());
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());
@@ -52,7 +50,7 @@ public class ReportContentROFactory {
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(ContentType.comment)) {
-            CommentDO commentDO = CommentUtils.get(reportDO.getContentId());
+            CommentDO commentDO = CommentUtils.get(contentId);
             reportContentVO.setId(commentDO.getId());
             reportContentVO.setContent(commentDO.getContent());
             reportContentVO.setReportNum(commentDO.getReportNum());

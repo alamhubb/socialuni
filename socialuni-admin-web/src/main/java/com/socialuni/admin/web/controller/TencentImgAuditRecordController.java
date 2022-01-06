@@ -9,9 +9,12 @@ import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.model.model.QO.SocialIntIdQO;
 import com.socialuni.social.model.model.QO.SocialIntQO;
+import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.factory.ListConvertUtil;
+import com.socialuni.social.sdk.utils.TalkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,20 +65,21 @@ public class TencentImgAuditRecordController {
     @PostMapping("auditImgList")
     public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ImgAuditQO> auditQOS) {
         ResultRO<String> resultRO = new ResultRO<>();
-        /*for (ReportVO auditVO : auditVOS) {
-            //首先校验 reportid是否存在
-            ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
-            if (methodResult != null) {
-                return methodResult;
-            }
-        }*/
+        for (ImgAuditQO auditQO : auditQOS) {
+            this.reportAudit(auditQO);
+        }
         resultRO.setData("审核成功");
         return resultRO;
     }
 
-    public ResultRO<String> reportAudit(ImgAuditQO auditQO) {
-//        violationService.modelContentViolation()
-        return null;
+    public void reportAudit(ImgAuditQO auditQO) {
+        TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
+        tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
+        if (!ViolateType.noViolation.equals(auditQO.getViolateType())) {
+            TalkDO talkDO = TalkUtils.get(tencentCosAuditRecordDO.getContentId());
+            violationService.modelContentViolation(talkDO, auditQO.getViolateType());
+        }
+        tencentCosAuditRecordRepository.save(tencentCosAuditRecordDO);
     }
 
     /*@PostMapping("test")

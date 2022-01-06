@@ -53,7 +53,7 @@ public class ReportVO {
 
     public ReportVO(ReportDO reportDO) {
         this.id = reportDO.getId();
-        this.talk = ReportContentROFactory.getReportContentVO(reportDO);
+        this.talk = ReportContentROFactory.getReportContentVO(reportDO.getReportContentType(), reportDO.getContentId());
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
