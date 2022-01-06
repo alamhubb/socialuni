@@ -20,7 +20,7 @@
           </div>
         </div>-->
 
-    <data-table checked class="flex-1" height="100" :table-data="imgAuditList" border show-page :page-sizes="[20,50]">
+    <data-table checked class="flex-1 overflow-hidden" height="100" :table-data="imgAuditList" border show-page :page-sizes="[20,50]">
 <!--      <el-table-column>
         <template #default="{row}">
           <el-image

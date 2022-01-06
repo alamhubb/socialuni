@@ -57,7 +57,6 @@
           </div>
         </slot>
         <div v-if="showPage" class="flex-1 row-end">
-          {{ pageSizes }}--{{ pageable }}
           <y-pagination
               @change="filterTableData"
               v-model="pageable"
