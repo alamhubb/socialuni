@@ -6,6 +6,7 @@ import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.QO.ImgAuditQO;
 import com.socialuni.admin.web.model.RO.TencentCosAuditRecordRO;
 import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
+import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.model.model.QO.SocialIntIdQO;
@@ -29,6 +30,8 @@ import java.util.List;
 public class TencentImgAuditRecordController {
     @Resource
     TencentCosAuditRecordRepository tencentCosAuditRecordRepository;
+    @Resource
+    ViolationService violationService;
 
     /**
      * 查询cos图片审核历史详情
@@ -71,6 +74,7 @@ public class TencentImgAuditRecordController {
     }
 
     public ResultRO<String> reportAudit(ImgAuditQO auditQO) {
+//        violationService.modelContentViolation()
         return null;
     }
 
