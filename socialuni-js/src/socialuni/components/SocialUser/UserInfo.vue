@@ -99,14 +99,14 @@
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
-<!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
-            <view class='cu-tag bg-green'>
-              <q-icon size="18" icon="mdi-sword-cross"/>
-            </view>
-            <view class="cu-tag bg-white bd-green bd-r-radius">
-              {{ userProp.justiceValue }}
-            </view>
-          </view>-->
+          <!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+                      <view class='cu-tag bg-green'>
+                        <q-icon size="18" icon="mdi-sword-cross"/>
+                      </view>
+                      <view class="cu-tag bg-white bd-green bd-r-radius">
+                        {{ userProp.justiceValue }}
+                      </view>
+                    </view>-->
           <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
                       <view class='cu-tag bg-red'>
                         <q-icon size="18" icon="heart-fill"/>
@@ -585,17 +585,7 @@ export default class UserInfo extends Vue {
   }
 
   async toPhonePage () {
-    PageUtil.toPhonePage()
-
-    async toPhonePage () {
-      //开发模式模拟授权
-      if (socialAppModule.isDevMode) {
-        await MockService.mockBindSocialuniPhone()
-      } else {
-        const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.phone)
-        PageUtil.toSocialUniAuth(authVO)
-      }
-    }
+    await PageUtil.toPhonePage()
   }
 
   toIdentityAuth () {

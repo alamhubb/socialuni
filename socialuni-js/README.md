@@ -4,7 +4,7 @@ uniapp chat Community Dating Social app
 聊天 社区 社交 交友 app
 ### 遵循MIT开源协议，免费商用
 
-## [官网](https://shejiao.qingchiapp.com/)
+## [官网](https://socialuni.cn/)
 
 ## 介绍
 
@@ -101,7 +101,7 @@ app已上架，应用宝、360、oppo、vivo、小米、阿里应用中心，大
 已上架，微信小程序、qq小程序、下方有二维码，可扫码体验，也可在小程序中自行搜索 清池
 
 ### 代码启动体验
-插件仅支持git方式下载，不支持zip方式，详细配置手册请参考 [详细配置手册](https://shejiao.qingchiapp.com/configGuide/)
+插件仅支持git方式下载，不支持zip方式，详细配置手册请参考 [详细配置手册](https://socialuni.cn/configGuide/)
 
 ### 前端源码地址
 [清池前端项目 git地址 qingchi-uni](https://github.com/socialuni/social-ui.git)

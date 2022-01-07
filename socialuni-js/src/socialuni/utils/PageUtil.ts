@@ -1,10 +1,13 @@
 import PagePath from '../const/PagePath'
-import { socialSystemModule, socialUserModule } from '../store'
+import { socialAppModule, socialSystemModule, socialUserModule } from '../store'
 import MsgUtil from './MsgUtil'
 import AlertUtil from './AlertUtil'
 import RouterUtil from './RouterUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import SocialuniAuthQO from '../model/openData/SocialuniAuthQO'
+import AppConfig from '@/socialuni/config/AppConfig'
+import MockService from '@/socialuni/service/MockService'
+import SocialAuthType from '@/socialuni/const/SocialAuthType'
 
 
 export default class PageUtil {
@@ -61,8 +64,18 @@ export default class PageUtil {
     }
   }
 
-  static toPhonePage () {
-    RouterUtil.navigateTo(PagePath.userPhone)
+  static async toPhonePage () {
+    if (AppConfig.isDataCenter) {
+      RouterUtil.navigateTo(PagePath.userPhone)
+    } else {
+      //开发模式模拟授权
+      if (socialAppModule.isDevMode) {
+        await MockService.mockOAuthUserPhoneNumLogin()
+      } else {
+        const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.user)
+        PageUtil.toSocialUniAuth(authVO)
+      }
+    }
   }
 
   static toTalkPage () {

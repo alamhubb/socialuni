@@ -49,7 +49,7 @@ export default class WebBrowserPage extends Vue {
 
   onLoad (params) {
     console.log(params)
-    // this.webUrl = 'https://mp.qingchiapp.com'
+    // this.webUrl = 'https://mp.socialuni.cn'
     this.webUrl = decodeURIComponent(params.url)
     const title: string = params.title
     if (title) {
