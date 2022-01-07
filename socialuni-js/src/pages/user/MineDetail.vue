@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom">
+      <q-navbar class="q-solid-bottom" show-back>
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>
@@ -101,11 +101,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import QcLogin from '@/pages/login/QcLogin.vue'
-import { socialUserModule, socialUserStore } from '@/socialuni/store'
+import { socialOAuthModule, socialUserModule, socialUserStore } from '@/socialuni/store'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/const/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
-import { oAuthModule } from '@/store'
 import OpenDataAPI from '@/socialuni/api/OpenDataAPI'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
@@ -135,7 +134,7 @@ export default class MineDetail extends Vue {
 
   created () {
     UniUtil.showShareMenu()
-    this.showAuthThreeAuth = !!oAuthModule.threeSecretKey
+    this.showAuthThreeAuth = !!socialOAuthModule.threeSecretKey
   }
 
   toThreeAuthUserInfo () {

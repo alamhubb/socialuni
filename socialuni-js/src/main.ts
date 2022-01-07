@@ -3,7 +3,7 @@ import 'core-js'
 import Vue from 'vue'
 import App from './App.vue'
 import './plugins/socialuni'
-
+//@ts-ignore
 import * as utils from 'socialuni/utils'
 // main.js
 import store from '@/store'

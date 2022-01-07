@@ -14,7 +14,10 @@ import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class QIcon extends Vue {
   @Prop({ type: [String, Number] }) readonly size: string | number
-  @Prop({ type: String, default: '' }) readonly icon: string
+  @Prop({
+    type: String,
+    default: ''
+  }) readonly icon: string
   @Prop({ type: String }) readonly color: string
   @Prop({ type: String }) readonly addClass: string
 

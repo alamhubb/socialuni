@@ -1,11 +1,11 @@
 <template>
   <view class="w100p">
-    <view class="w100p position-fixed nav-index" :class="customClass">
+    <view class="w100p position-fixed nav-index bg-default" :class="customClass">
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
       <view class="row-col-center" :style="[navbarInnerStyle]">
-        <view v-if="showBack" class="col-center bg-click color-default flex-none" @click="goBack">
+        <view v-if="showBack" class="col-center bg-click color-default flex-none pl-sm" @click="goBack">
           <q-icon icon="arrow-left"></q-icon>
         </view>
         <slot></slot>

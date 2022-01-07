@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom" custom-class="bg-default">
+      <q-navbar class="q-solid-bottom" show-back>
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>

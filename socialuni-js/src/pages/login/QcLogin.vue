@@ -136,9 +136,11 @@ import AlertUtil from '@/socialuni/utils/AlertUtil'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
   components: {
+    QIcon,
     PhoneLoginForm,
     UserPrivacyAgreement,
     LoginFooterAppInfo

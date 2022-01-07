@@ -30,6 +30,7 @@ export default class QSelect extends Vue {
   @Prop() labelName: any[]
 
   get pickerItemIndex () {
+    //@ts-ignore
     const pickerItemIndex = this.list.findIndex(item => item[this.valueName] === this.value)
     console.log(pickerItemIndex)
     return pickerItemIndex
@@ -37,6 +38,7 @@ export default class QSelect extends Vue {
 
   get pickerItemLabel () {
     if (this.pickerItemIndex > -1) {
+      //@ts-ignore
       return this.list[this.pickerItemIndex][this.labelName]
     }
     return null
@@ -52,6 +54,7 @@ export default class QSelect extends Vue {
     if (index === null) {
       return null
     }
+    //@ts-ignore
     return this.list[index][this.valueName]
   }
 }

@@ -17,8 +17,8 @@ export default class TalkAPI {
     return socialHttp.post('talk/postTalk', data)
   }
 
-  static queryTalksAPI (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number) {
-    return socialHttp.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge))
+  static queryTalksAPI (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date) {
+    return socialHttp.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge, queryDate))
   }
 
   static queryUserTalksAPI (userId: string, talkIds: number[]) {

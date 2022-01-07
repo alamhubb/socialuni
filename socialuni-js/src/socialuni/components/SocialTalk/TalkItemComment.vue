@@ -26,7 +26,7 @@
             </text>
           </view>
         </view>
-        <view class="ml-30 button-icon row-col-center" @click="openReportDialog"
+        <view v-if="!talk.globalTop" class="ml-30 button-icon row-col-center" @click="openReportDialog"
               hover-class="uni-list-cell-hover">
           <q-icon icon="more-dot-fill"></q-icon>
         </view>
