@@ -30,9 +30,9 @@ server:
   port: 8091
   ssl:
     # 证书名称
-    key-store: localpc.qingchiapp.com.jks
+    key-store: localpc.socialuni.cn.jks
     #密钥库密码
-    key-store-password: 3bu32z78qm02
+    key-store-password: fx6541k7gmz
     key-store-type: JKS
 spring:
   datasource:
