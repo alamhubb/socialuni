@@ -1,11 +1,11 @@
 export default class LocationQueryQO {
   //纬度
-  latitude: number
+  latitude: string
   //经度
-  longitude: number
+  longitude: string
 
   constructor (latitude: number, longitude: number) {
-    this.latitude = latitude
-    this.longitude = longitude
+    this.latitude = String(latitude)
+    this.longitude = String(longitude)
   }
 }
