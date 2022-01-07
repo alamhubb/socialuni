@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.platform.weixin.token.WxTokenResult;
 //什么算是公共常量，就是放到任何项目都可以用的
 public class QQConst {
     public static final String qq_pay_url = "https://qpay.qq.com/cgi-bin/pay/qpay_unified_order.cgi";
-    public static final String qq_pay_result_notify_url = "https://api.qingchiapp.com/user/qqPayNotify";
+    public static final String qq_pay_result_notify_url = "https://api.socialuni.cn/user/qqPayNotify";
 
     public static final String qqLoginUrl = "https://api.q.qq.com/sns/jscode2session?";
     public static final String qq_msg_sec_check_url = "https://api.q.qq.com/api/json/security/MsgSecCheck?access_token=";
