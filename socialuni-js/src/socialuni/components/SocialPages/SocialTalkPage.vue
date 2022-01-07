@@ -1,12 +1,12 @@
 <template>
-  <view class="flex-col h100p bg-white">
+  <view class="flex-col h100p bg-theme4">
     <view v-show="showTagSearch" class="h100p">
       <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
       ></tag-search>
     </view>
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view v-show="!showTagSearch" class="flex-col h100vh">
-      <q-navbar class="flex-none" custom-class="bg-white">
+      <q-navbar class="flex-none" custom-class="bg-theme4">
         <q-search class="flex-1 mx-sm bg-default" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">

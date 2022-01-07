@@ -17,7 +17,7 @@
                       size="12"
                       :icon="getGenderIcon(talk.user)"/>
             </div>
-            <div v-else class="box-nn q-tag-theme ml-sm">
+            <div v-else class="box-nn q-tag-blue ml-sm">
               {{ talk.user.age }}
               <q-icon class="ml-nn"
                       size="12"

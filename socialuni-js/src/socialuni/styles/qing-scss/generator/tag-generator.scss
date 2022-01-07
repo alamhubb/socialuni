@@ -10,7 +10,7 @@
   border-color: mix($color-white, $color-main, 60%);
 }
 
-@each $key, $color in $colors-theme {
+@each $key, $color in $colors-base {
   .q-tag-#{''+$key+''} {
     padding: $box-mn;
     @extend .font-sm;

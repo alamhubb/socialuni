@@ -33,7 +33,6 @@ export default class SocialOAuthModule extends VuexModule {
 
   @Action
   queryDevAccountAction () {
-    console.log(socialOAuthModule.threeAppId)
     DevAccountAPI.queryDevAccountAPI(socialOAuthModule.threeAppId, LoginProvider.wx).then(res => {
       this.threeDevAccount = res.data
     })

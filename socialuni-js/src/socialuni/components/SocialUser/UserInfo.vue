@@ -44,7 +44,7 @@
                           size="12"
                           :icon="getGenderIcon(userProp)"/>
                 </div>
-                <div v-else class="box-nn q-tag-theme mt-xs">
+                <div v-else class="box-nn q-tag-blue mt-xs">
                   {{ userProp.age }}
                   <q-icon class="ml-nn"
                           size="12"
@@ -586,6 +586,16 @@ export default class UserInfo extends Vue {
 
   async toPhonePage () {
     PageUtil.toPhonePage()
+
+    async toPhonePage () {
+      //开发模式模拟授权
+      if (socialAppModule.isDevMode) {
+        await MockService.mockBindSocialuniPhone()
+      } else {
+        const authVO: SocialUniAuthQO = new SocialUniAuthQO(SocialAuthType.phone)
+        PageUtil.toSocialUniAuth(authVO)
+      }
+    }
   }
 
   toIdentityAuth () {

@@ -49,7 +49,9 @@ $color-bg-base: $color-white;
 $color-theme: #3383f6 !default;
 //主题亮色
 $color-theme2:#A2D2FF !default;
-//$color-theme-light:#ecf5ff !default;
+//背景色
+$color-theme3:#fafafa !default;
+$color-theme4:$color-white !default;
 
 $colors-theme: (
         white:$color-white,
@@ -123,6 +125,8 @@ $colors-custom-bg: (
         base: $color-bg-base,
         theme: $color-theme,
         theme2: $color-theme2,
+        theme3: $color-theme3,
+        theme4: $color-theme4,
         //theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,
