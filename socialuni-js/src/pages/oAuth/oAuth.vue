@@ -47,7 +47,7 @@
                   <view class="text-grey text-sm">微信个人信息</view>
                 </view>
                 <view class="col-center">
-                  <u-icon name="checkmark" color="success" size="40"></u-icon>
+                  <q-icon icon="checkmark" class="color-success" size="20"></q-icon>
                 </view>
               </view>
               <!--            为授权手机号显示授权手机号-->
@@ -101,7 +101,7 @@
           <view class="row-between-center w300 h40 mt-lg">
             <template>
               <view class="row-col-center" @click="goBackPage">
-                <u-icon class="mr-xs text-gray" name="arrow-left"></u-icon>
+                <q-icon class="mr-xs color-info" icon="arrow-left" size="12"></q-icon>
                 <view class="text-gray u-border-bottom">
                   不授权返回
                 </view>
@@ -137,9 +137,11 @@ import LoginProvider from '@/socialuni/const/LoginProvider'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import OAuthAPI from '@/api/OAuthAPI'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
   components: {
+    QIcon,
     UserPrivacyAgreement,
     LoginFooterAppInfo
   }
