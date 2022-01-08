@@ -45,7 +45,7 @@
                     open-type="getUserInfo"
                     class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @getuserinfo="providerLogin">
-              <q-icon color="white" name="qq-fill" size="19"
+              <q-icon color="white" icon="qq-fill" size="19"
                       class="mr-xs"></q-icon>
               QQ登录
             </button>
@@ -59,7 +59,7 @@
             <button v-if="isMpWx" :disabled="!openTypeBtnEnable"
                     class="bg-gradual-wx h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @click="providerLogin">
-              <q-icon color="white" name="weixin-fill" size="21"
+              <q-icon color="white" icon="weixin-fill" size="21"
                       class="mr-xs"></q-icon>
               微信登录
             </button>

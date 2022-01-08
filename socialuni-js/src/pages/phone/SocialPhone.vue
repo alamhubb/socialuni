@@ -27,7 +27,7 @@
         <view class="u-border-bottom text-gray">
           绑定手机号后可发表动态，详情
         </view>
-        <q-icon class="ml-xs color-info" name="arrow-right" size="12"></q-icon>
+        <q-icon class="ml-xs color-info" icon="arrow-right" size="12"></q-icon>
       </div>
 
       <!--        隐私提示-->
@@ -50,7 +50,7 @@
 
       <view class="row-between-center w100p">
         <view class="row-col-center" @click="goBackPage">
-          <q-icon class="mr-xs color-info" name="arrow-left" size="12"></q-icon>
+          <q-icon class="mr-xs color-info" icon="arrow-left" size="12"></q-icon>
           <view class="text-gray u-border-bottom">
             {{ user ? '不绑定返回' : '不登录返回' }}
           </view>

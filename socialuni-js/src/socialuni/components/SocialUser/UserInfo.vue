@@ -162,8 +162,7 @@
               </view>
             </view>
             <view v-else class="row-col-center">
-              未绑定
-              <button class="ml-xs cu-btn radius sm bg-orange"
+              <button class="ml-xs q-tag-warn bg-click"
                       @click="toPhonePage">绑定手机号
               </button>
             </view>

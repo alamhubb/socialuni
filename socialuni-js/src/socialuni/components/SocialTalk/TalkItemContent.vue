@@ -17,9 +17,12 @@
         <view class="q-tag-warn">
           <q-icon icon="map-fill" size="14"></q-icon>
           <!--        有市区的名称就不显示省的名称-->
-          <text v-if="talk.district.districtName">{{ talk.district.districtName }}</text>
-          <text v-else>{{ talk.district.provinceName }}</text>
-          <text v-if="talk.district.cityName">-{{ talk.district.cityName }}</text>
+          <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
+          <text v-if="talk.district.cityName">
+            <text v-if="!talk.district.districtName">-</text>
+            {{ talk.district.cityName }}
+          </text>
+          <text v-if="talk.district.districtName">-{{ talk.district.districtName }}</text>
         </view>
         <view v-if="talk.distance|| talk.distance===0" class="q-tag-warn">
           <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
