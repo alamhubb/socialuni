@@ -105,7 +105,6 @@ import { socialUserModule, socialUserStore } from '@/socialuni/store'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/const/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
-import OpenDataAPI from '@/socialuni/api/OpenDataAPI'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
 import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
@@ -133,16 +132,6 @@ export default class MineDetail extends Vue {
 
   created () {
     UniUtil.showShareMenu()
-  }
-
-  toThreeAuthUserInfo () {
-    OpenDataAPI.authUserInfoAPI().then(res => {
-      uni.navigateBackMiniProgram({
-        extraData: {
-          ...res.data
-        }
-      })
-    })
   }
 
   onShow () {

@@ -150,7 +150,6 @@ import SkipUrlConst from '../../const/SkipUrlConst'
 import { socialUserModule, socialUserStore } from '../../store'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
-import OpenDataAPI from '../../api/OpenDataAPI'
 import ToastUtil from '../../utils/ToastUtil'
 import MsgInput from '../MsgInput.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
@@ -181,16 +180,6 @@ export default class SocialMineDetail extends Vue {
 
   created () {
     UniUtil.showShareMenu()
-  }
-
-  toThreeAuthUserInfo () {
-    OpenDataAPI.authUserInfoAPI().then(res => {
-      uni.navigateBackMiniProgram({
-        extraData: {
-          ...res.data
-        }
-      })
-    })
   }
 
   onShow () {
