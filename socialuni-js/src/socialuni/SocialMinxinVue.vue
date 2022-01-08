@@ -8,11 +8,11 @@ import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
 
 @Component
 export default class SocialMinxinVue extends Vue {
+  isAppVuePage = false
+
   onLaunch (params) {
-    console.log(this)
-    console.log(123132)
     //@ts-ignore
-    this.isAppPage = true
+    this.isAppVuePage = true
     //无论如何都要获取当前用户信息
     UserService.getMineUserInitDataAction()
     // 执行获取系统信息的函数,始终保持第一，因为别的都依赖于他
@@ -32,7 +32,7 @@ export default class SocialMinxinVue extends Vue {
 
   onShow (params) {
     //@ts-ignore
-    if (this.isAppPage) {
+    if (this.isAppVuePage) {
       //避免已打开情况，进入不为lunchan而是show
       this.oAuthUserInfo(params)
     }
