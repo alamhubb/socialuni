@@ -9,6 +9,8 @@ import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
 @Component
 export default class SocialMinxinVue extends Vue {
   onLaunch (params) {
+    console.log(this)
+    console.log(123132)
     //@ts-ignore
     this.isAppPage = true
     //无论如何都要获取当前用户信息

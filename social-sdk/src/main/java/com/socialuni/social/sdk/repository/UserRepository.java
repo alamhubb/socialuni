@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,9 @@ public interface UserRepository extends JpaRepository<UserDO, Integer> {
 
     @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
     Optional<UserDO> findById(Integer id);
+
+    @Query(value = "select u from UserDO u,SocialUserViolationDO su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
+    List<UserDO> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
 
     /*@Modifying
     @Transactional
