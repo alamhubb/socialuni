@@ -1,8 +1,7 @@
-import { socialUserModule } from '../store'
+import { socialSystemModule, socialUserModule } from '../store'
 import ToastUtil from '../utils/ToastUtil'
 import PhoneAPI from '../api/PhoneAPI'
 import UniLoginUtil from '../utils/UniLoginUtil'
-import LoginProvider from '../const/LoginProvider'
 
 export default class PhoneService {
   static async bindPhoneNum (phoneNum: string, authCode: string) {
@@ -12,7 +11,6 @@ export default class PhoneService {
   }
 
   static async bindWxPhoneNum (wxGetPhoneInfoResult: any) {
-    console.log(wxGetPhoneInfoResult)
     if (wxGetPhoneInfoResult.detail.errMsg === 'getPhoneNumber:ok') {
       /**
        * 在回调中调用 wx.login 登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，
@@ -24,7 +22,7 @@ export default class PhoneService {
       // encryptedData: ""
       // errMsg: "getPhoneNumber:ok"
       // iv: ""
-      wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(LoginProvider.wx)
+      wxGetPhoneInfoResult.detail.code = await UniLoginUtil.getLoginCode(socialSystemModule.mpPlatform)
       const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
       socialUserModule.setUser(res.data)
     } else {

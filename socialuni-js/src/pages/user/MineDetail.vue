@@ -101,7 +101,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import QcLogin from '@/pages/login/QcLogin.vue'
-import { socialOAuthModule, socialUserModule, socialUserStore } from '@/socialuni/store'
+import { socialUserModule, socialUserStore } from '@/socialuni/store'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/const/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
@@ -130,11 +130,9 @@ export default class MineDetail extends Vue {
   showMoreList = false
   // 登录
   disabledLoginBtn = false
-  showAuthThreeAuth = false
 
   created () {
     UniUtil.showShareMenu()
-    this.showAuthThreeAuth = !!socialOAuthModule.threeSecretKey
   }
 
   toThreeAuthUserInfo () {

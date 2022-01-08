@@ -3,14 +3,12 @@ import SocialAuthType from '@/socialuni/const/SocialAuthType'
 import DevAccountAPI from '@/socialuni/api/DevAccountAPI'
 import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
-import LoginProvider from '@/socialuni/const/LoginProvider'
 import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
-import { socialOAuthModule } from '@/socialuni/store/index'
+import { socialOAuthModule, socialSystemModule } from '@/socialuni/store/index'
 
 @Module({ generateMutationSetters: true })
 export default class SocialOAuthModule extends VuexModule {
   //三方授权时携带的参数
-  threeSecretKey = ''
   threeAppId = null
   threeAuthType = null
   threeDevAccount: DevAccountRO = null
@@ -30,7 +28,7 @@ export default class SocialOAuthModule extends VuexModule {
 
   @Action
   queryDevAccountAction () {
-    DevAccountAPI.queryDevAccountAPI(socialOAuthModule.threeAppId, LoginProvider.wx).then(res => {
+    DevAccountAPI.queryDevAccountAPI(socialOAuthModule.threeAppId, socialSystemModule.mpPlatform).then(res => {
       this.threeDevAccount = res.data
     })
   }

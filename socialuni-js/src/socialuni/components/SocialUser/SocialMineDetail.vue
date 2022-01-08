@@ -147,7 +147,7 @@ import UserEdit from './UserEdit.vue'
 import UserInfo from './UserInfo.vue'
 import UniUtil from '../../utils/UniUtil'
 import SkipUrlConst from '../../const/SkipUrlConst'
-import { socialAppModule, socialUserModule, socialUserStore } from '../../store'
+import { socialUserModule, socialUserStore } from '../../store'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
 import OpenDataAPI from '../../api/OpenDataAPI'
@@ -178,11 +178,9 @@ export default class SocialMineDetail extends Vue {
   showMoreList = false
   // 登录
   disabledLoginBtn = false
-  showAuthThreeAuth = false
 
   created () {
     UniUtil.showShareMenu()
-    this.showAuthThreeAuth = !!socialAppModule.threeSecretKey
   }
 
   toThreeAuthUserInfo () {
