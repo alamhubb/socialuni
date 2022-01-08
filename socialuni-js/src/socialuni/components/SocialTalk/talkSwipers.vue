@@ -31,7 +31,7 @@ export default class TalkSwipersPage extends Vue {
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
 
   get showSwipers () {
-    return this.homeSwipers.length
+    return this.homeSwipers && this.homeSwipers.length
   }
 
   skipWebView (current: number) {

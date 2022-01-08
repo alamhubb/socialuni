@@ -3,7 +3,7 @@
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
     <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
-            class="mg-sm bd-radius pd-mn">
+            class="mg-sm bd-radius px-mn">
       <template #default="{tab}">
         <div class="h30 px-xs row-all-center">
           {{ tab.name }}

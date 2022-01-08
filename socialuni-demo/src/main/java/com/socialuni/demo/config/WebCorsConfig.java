@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
@@ -14,11 +13,11 @@ public class WebCorsConfig implements WebMvcConfigurer {
     @Resource
     private ProxyInterceptor proxyInterceptor;
 
-    @Override
+    /*@Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
         registry.addInterceptor(proxyInterceptor).addPathPatterns("/**");
-    }
+    }*/
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
