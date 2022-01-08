@@ -1,16 +1,16 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
+import { Module, VuexModule } from 'vuex-class-modules'
 import LoginProvider from '../const/LoginProvider'
 import PlatformType from '../const/PlatformType'
-import PlatformUtils from '../utils/PlatformUtils'
-import TokenUtil from '../utils/TokenUtil'
-import { socialAppModule, socialChatModule, socialLocationModule, socialNotifyModule, socialTagModule } from './index'
 import UniSystemType from '../const/UniSystemType'
 import UniPlatformType from '../const/UniPlatformType'
+import DevModeType from '@/socialuni/const/DevModeType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 
 //和终端相关的信息
 @Module({ generateMutationSetters: true })
 export default class SocialSystemModule extends VuexModule {
+  isDevMode: boolean = process.env.NODE_ENV === DevModeType.dev
+
   isIos = false
   isAndroid = false
 
@@ -54,35 +54,6 @@ export default class SocialSystemModule extends VuexModule {
     return this.isIos && this.isMpQQ
   }
 
-  //app启动的方法
-  @Action
-  async appLunchAction () {
-    //校验更新
-    PlatformUtils.checkUpdate()
-    // WebsocketUtil.websocketConnect(false)
-    // appModule.initGlobalDataLoadAPI()
-    // AppService.getHomeLoadAfterData()
-    socialTagModule.getHotTagsAction()
-    socialTagModule.getHotTagTypesAction()
-    // socialCircleModule.getCircleTypesAction()
-    socialLocationModule.getHotDistrictsAction()
-    socialAppModule.getReportTypesAction()
-    socialAppModule.getAppConfigAction()
-    socialAppModule.getHomeSwipersAction()
-    socialChatModule.getChatsAction()
-
-
-    //如果有token获取
-    if (TokenUtil.hasToken()) {
-      //查询通知列表
-      socialNotifyModule.queryNotifiesAction()
-    }
-    // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
-    // appModule.initGlobalDataReadyAPI()
-    // 测试时使用，生产时在talk也ready后查询
-    // appModule.initGlobalDataReadyAPI()
-    // 不为app平台在这里设置platform否则在systemInfo中设置
-  }
 
   // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
   getSystemInfo () {

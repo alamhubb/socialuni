@@ -4,7 +4,7 @@
  * @Version 1.0
  */
 import { PluginObject } from 'vue'
-import SocialuniConfig from './model/SocialuniConfig'
+import SocialuniConfig from './config/SocialuniConfig'
 import { registerSocialStore } from './store'
 import uView from 'uview-ui'
 import SocialMinxinVue from '@/socialuni/SocialMinxinVue.vue'

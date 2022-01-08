@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { socialAppModule, socialSystemModule, socialSystemStore, socialUserStore } from '../../store'
+import { socialSystemModule, socialSystemStore, socialUserStore } from '../../store'
 import AlertUtil from '../../utils/AlertUtil'
 import LoginService from '../../service/LoginService'
 import PageUtil from '../../utils/PageUtil'
@@ -160,7 +160,7 @@ export default class SocialLogin extends Vue {
 
   async socialuniLoginBase () {
     //开发模式模拟授权
-    if (socialAppModule.isDevMode) {
+    if (socialSystemModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
       const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)

@@ -1,5 +1,4 @@
 export default class AppConfig {
-  static readonly isDataCenter: string = process.env.VUE_APP_IS_DATA_CENTER
   static readonly websocketUrl: string = process.env.VUE_APP_WEBSOCKET_URL
 
   static readonly appName: string = '集美小世界app'

@@ -359,9 +359,9 @@ import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../const/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
 import {
-  socialAppModule,
   socialAppStore,
   socialConfigStore,
+  socialSystemModule,
   socialSystemStore,
   socialUserModule,
   socialUserStore
@@ -576,7 +576,7 @@ export default class UserInfo extends Vue {
 
   async toBindSocialuni () {
     //开发模式模拟授权
-    if (socialAppModule.isDevMode) {
+    if (socialSystemModule.isDevMode) {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
       const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.user)

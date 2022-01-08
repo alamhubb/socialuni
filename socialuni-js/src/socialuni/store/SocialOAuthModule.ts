@@ -13,9 +13,6 @@ export default class SocialOAuthModule extends VuexModule {
   threeSecretKey = ''
   threeAppId = null
   threeAuthType = null
-  // threeUserId = '123'
-  // threeAuthType = ''
-  // threeProviderType = ''
   threeDevAccount: DevAccountRO = null
 
   //是否为三方授权
@@ -41,24 +38,16 @@ export default class SocialOAuthModule extends VuexModule {
   setThreeAuthInfo (params) {
     if (params && params.referrerInfo) {
       const info = params.referrerInfo
-      console.log(info)
       if (info.appId) {
         //获取三方的appid
         socialOAuthModule.threeAppId = info.appId
         //如果有跳转信息
         const extraData: SocialuniAuthQO = info.extraData
         if (extraData) {
-          // socialOAuthModule.threeSecretKey = extraData.appSecretKey
-          // appModule.threeUserId = extraData.appUserId
           socialOAuthModule.threeAuthType = extraData.authType
           socialOAuthModule.queryDevAccountAction()
           if (!extraData.authType) {
-            /* const result: ResultRO<any> = new ResultRO<any>()
-             result.errorCode = ErrorCode.business
-             result.errorMsg = '社交联盟密钥错误'
-             result.success = false*/
             AlertUtil.hint('授权类型错误')
-            // uni.navigateBackMiniProgram({ extraData: result })
           }
           //支持非授权跳转
           /*if (!appModule.threeSecretKey) {

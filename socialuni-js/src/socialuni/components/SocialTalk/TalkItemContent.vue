@@ -65,7 +65,7 @@ import ImgUtil from '../../utils/ImgUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import GenderType from '../../const/GenderType'
-import SocialuniConfig from '../../model/SocialuniConfig'
+import SocialuniConfig from '../../config/SocialuniConfig'
 
 @Component({
   components: { QIcon }

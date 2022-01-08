@@ -8,7 +8,7 @@ import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
 import { socialConfig } from '../../index'
-import SocialuniConfig from '../../model/SocialuniConfig'
+import SocialuniConfig from '../../config/SocialuniConfig'
 import SocialSystemInfo from '../../const/SocialSystemInfo'
 
 const socialHttp: Request = new Request()

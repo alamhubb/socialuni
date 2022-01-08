@@ -40,7 +40,7 @@
           <view class="col-row-center w300">
             <!--                app和h5也都可以用微信登录-->
             <button :disabled="!openTypeBtnEnable"
-                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-active round mt w100p"
+                    class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                     @click="bindSocialuniPhone">
               前往清池授权手机号
             </button>

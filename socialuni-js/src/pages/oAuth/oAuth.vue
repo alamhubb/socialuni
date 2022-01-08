@@ -80,17 +80,17 @@
             <!--              没登录提示登录，如果为三方授权且为授权用户信息，追加 并授权三个字-->
             <!-- 只要不为QQ小程序平台都可以使用微信登录-->
             <button v-if="!user" :disabled="!openTypeBtnEnable"
-                    class="h40 cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
+                    class="h40 cu-btn lg bg-gradual-qq row-all-center bd-none bg-click round mt w100p"
                     @click="toLoginPage">
               前往登陆
             </button>
             <button v-else-if="!hasPhoneNum" :disabled="!openTypeBtnEnable"
-                    class="h40 cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
+                    class="h40 cu-btn lg bg-gradual-qq row-all-center bd-none bg-click round mt w100p"
                     @click="toBindPhone">
               前往绑定手机号
             </button>
             <button v-else :disabled="!openTypeBtnEnable"
-                    class="h40 cu-btn lg bg-gradual-qq row-all-center bd-none bg-active round mt w100p"
+                    class="h40 cu-btn lg bg-gradual-qq row-all-center bd-none bg-click round mt w100p"
                     @click="oAuthUserInfoAndPhoneNum">
               <template>
                 授权手机号和用户信息
@@ -128,12 +128,17 @@ import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import AppUtilAPI from '@/socialuni/api/AppUtilAPI'
 import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'
-import { socialOAuthModule, socialOAuthStore, socialSystemStore, socialUserStore } from '@/socialuni/store'
+import {
+  socialOAuthModule,
+  socialOAuthStore,
+  socialSystemModule,
+  socialSystemStore,
+  socialUserStore
+} from '@/socialuni/store'
 import JsonUtil from '@/socialuni/utils/JsonUtil'
 import ResultRO from '@/socialuni/model/social/ResultRO'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
 import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
-import LoginProvider from '@/socialuni/const/LoginProvider'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import OAuthAPI from '@/api/OAuthAPI'
@@ -208,7 +213,7 @@ export default class OAuth extends Vue {
         //处理用户授权
         await AlertUtil.confirm('是否确认授权您的手机号码')
         UniUtil.showLoading('授权中')
-        const threeAuthResultVO = await OAuthAPI.oAuthUserInfoAndPhoneNumAPI(socialOAuthModule.threeAppId, LoginProvider.wx)
+        const threeAuthResultVO = await OAuthAPI.oAuthUserInfoAndPhoneNumAPI(socialOAuthModule.threeAppId, socialSystemModule.mpPlatform)
         UniUtil.hideLoading()
         this.authSuccessGoBackThreeMp(threeAuthResultVO)
       } catch (e) {

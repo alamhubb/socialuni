@@ -103,7 +103,7 @@ import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
-import SocialuniConfig from '../../model/SocialuniConfig'
+import SocialuniConfig from '../../config/SocialuniConfig'
 import { socialUserStore } from '../../store'
 
 @Component({
