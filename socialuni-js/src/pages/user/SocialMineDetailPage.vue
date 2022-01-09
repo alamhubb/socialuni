@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SocialMineDetail from '../SocialUser/SocialMineDetail.vue'
+import SocialMineDetail from '../../socialuni/components/SocialUser/SocialMineDetail.vue'
 
 @Component({
   components: { SocialMineDetail }
