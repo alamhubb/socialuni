@@ -9,8 +9,8 @@
         </view>
       </view>
       <view class="flex-row">
-        <view class="text-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
-        <view class="text-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
+        <view class="color-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
+        <view class="color-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
       </view>
     </div>
     <div class="row-col-center px bg-white mt-sm">

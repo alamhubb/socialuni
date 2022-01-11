@@ -34,6 +34,7 @@ export default class SocialOAuthModule extends VuexModule {
   }
 
   setThreeAuthInfo (params) {
+    socialOAuthModule.threeAuthType = null
     if (params && params.referrerInfo) {
       const info = params.referrerInfo
       if (info.appId) {

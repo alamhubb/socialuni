@@ -14,7 +14,7 @@
       </view>
     </view>
     <view v-if="searchContent || showSearch">
-      <view v-if="searchContent&&isAdd" class="article-row row-col-center solid-bottom text-blue" @click="addTag">
+      <view v-if="searchContent&&isAdd" class="article-row row-col-center solid-bottom color-blue" @click="addTag">
         未找到相关标签，可点击
         <q-icon class="ml-sm" icon="arrow-rightward"></q-icon>
         此处去创建

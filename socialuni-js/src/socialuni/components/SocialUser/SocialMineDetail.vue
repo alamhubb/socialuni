@@ -68,13 +68,13 @@
             </view>
           </q-row-item>
           <view class="q-box w100p row-grid">
-            <navigator :url="userAgreementUrl" class="text-blue">
+            <navigator :url="userAgreementUrl" class="color-blue">
               《用户协议》
             </navigator>
-            <navigator :url="userPrivacyUrl" class="text-blue">
+            <navigator :url="userPrivacyUrl" class="color-blue">
               《隐私政策》
             </navigator>
-            <navigator :url="childProtectUrl" class="text-blue">
+            <navigator :url="childProtectUrl" class="color-blue">
               《儿童个人信息保护规则及监护人须知》
             </navigator>
           </view>

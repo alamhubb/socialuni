@@ -108,7 +108,7 @@
         <div class="row-between-center q-box bb-1">
           <view class="text-black text-md font-bold">动态筛选</view>
           <view class="flex-row">
-            <view class="text-blue font-bold mx-xs px" @click="hideFilter">取消</view>
+            <view class="color-blue font-bold mx-xs px" @click="hideFilter">取消</view>
             <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
           </view>
         </div>

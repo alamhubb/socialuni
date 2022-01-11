@@ -20,11 +20,11 @@ export default class SocialMinxinVue extends Vue {
     socialSystemModule.getSystemInfo()
     //为三方只授权不需要查询信息
     //页面启动，启动函数
-    //如果有跳转信息
     if (SocialuniConfig.authApp) {
-      //如果有跳转信息
       socialOAuthModule.setThreeAuthInfo(params)
-    } else {
+    }
+    //如果有跳转信息
+    if (!socialOAuthModule.threeAuthType) {
       socialAppModule.appLunchAction()
     }
     UniUtil.showShareMenu()

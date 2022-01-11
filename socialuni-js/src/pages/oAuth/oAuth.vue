@@ -206,7 +206,6 @@ export default class OAuth extends Vue {
   }
 
   async oAuthUserInfoAndPhoneNum () {
-    console.log(123)
     //有用户信息，并且伪授权用户信息
     if (this.hasPhoneNum) {
       try {

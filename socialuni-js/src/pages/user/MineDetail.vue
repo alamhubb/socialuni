@@ -123,7 +123,7 @@ import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
     MsgInput
   }
 })
-export default class QcMineDetail extends Vue {
+export default class MineDetail extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   showMsgInput = false
   showMoreList = false

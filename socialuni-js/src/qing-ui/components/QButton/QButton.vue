@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-smm py-sm bg-click font-14" style="line-height: 1" :class="buttonClass"
+    class="px-smm py-sm font-14" style="line-height: 1" :class="buttonClass"
     @click.stop="clickHandler"
     :disabled="disabled"
     :loading="loading"
