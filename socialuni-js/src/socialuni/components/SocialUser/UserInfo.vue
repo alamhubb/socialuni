@@ -357,14 +357,7 @@ import TalkVO from '../../model/talk/TalkVO'
 import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../const/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
-import {
-  socialAppStore,
-  socialConfigStore,
-  socialSystemModule,
-  socialSystemStore,
-  socialUserModule,
-  socialUserStore
-} from '../../store'
+import { socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore } from '../../store'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
@@ -374,9 +367,6 @@ import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
-import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
-import SocialAuthType from '@/socialuni/const/SocialAuthType'
-import MockService from '@/socialuni/service/MockService'
 
 
 @Component({
@@ -570,16 +560,6 @@ export default class UserInfo extends Vue {
       console.error(e)
     } finally {
       UniUtil.hideLoading()
-    }
-  }
-
-  async toBindSocialuni () {
-    //开发模式模拟授权
-    if (socialSystemModule.isDevMode) {
-      await MockService.mockOAuthUserPhoneNumLogin()
-    } else {
-      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.user)
-      PageUtil.toSocialUniAuth(authVO)
     }
   }
 

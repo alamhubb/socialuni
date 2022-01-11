@@ -164,7 +164,7 @@ export default class SocialLogin extends Vue {
       await MockService.mockOAuthUserPhoneNumLogin()
     } else {
       const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
-      PageUtil.toSocialUniAuth(authVO)
+      await PageUtil.toSocialUniAuth(authVO)
     }
     // const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
     // PageUtil.toSocialUniAuth(authVO)
