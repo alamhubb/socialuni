@@ -1,5 +1,5 @@
 <template>
-  <mine-detail v-if="isAuthApp" class="h100p"></mine-detail>
+  <qc-mine-detail v-if="isAuthApp" class="h100p"></qc-mine-detail>
   <social-mine-detail-page v-else class="h100p"></social-mine-detail-page>
 </template>
 
@@ -11,7 +11,7 @@ import QcMineDetail from '@/pages/user/QcMineDetail.vue'
 
 @Component({
   components: {
-    MineDetail: QcMineDetail,
+    QcMineDetail,
     SocialMineDetailPage
   }
 })
