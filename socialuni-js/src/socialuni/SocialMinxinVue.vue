@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { socialAppModule, socialOAuthModule, socialSystemModule } from '@/socialuni/store'
+import { socialAppModule, socialOAuthModule, socialSystemModule, socialUserModule } from '@/socialuni/store'
 import UserService from '@/socialuni/service/UserService'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import OAuthService from '@/socialuni/service/OAuthService'
@@ -43,7 +43,9 @@ export default class SocialMinxinVue extends Vue {
       //避免已打开情况，进入不为lunchan而是show
       socialOAuthModule.setThreeAuthInfo(params)
     } else {
-      await OAuthService.oAuthUserInfo(params)
+      if (!socialUserModule.user || !socialUserModule.user.phoneNum) {
+        await OAuthService.oAuthUserInfo(params)
+      }
     }
   }
 }
