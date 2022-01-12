@@ -25,7 +25,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletResponse;
+import java.nio.ByteBuffer;
 import java.util.Date;
+import java.util.Optional;
 
 @RestControllerAdvice
 @Slf4j
@@ -86,22 +88,26 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @ExceptionHandler(value = FeignException.class)
-    public ResultRO<Void> feignExceptionHandler(FeignException exception) {
-        exception.get
-
-        ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
-        log.info(exception.getClass().getName());
-        log.info(exception.toString());
-        String errorStr;
-        try {
-            errorStr = JsonUtil.objectMapper.writeValueAsString(exception);
-        } catch (JsonProcessingException e) {
-            errorStr = "解析异常出错";
-            e.printStackTrace();
+    public ResultRO<Void> feignExceptionHandler(FeignException feignException) {
+        Optional<ByteBuffer> responseOpt = feignException.responseBody();
+        feignException.printStackTrace();
+        if (responseOpt.isPresent()) {
+            ByteBuffer byteBuffer = responseOpt.get();
+            ResultRO<Void> resultRO = JsonUtil.parse(byteBuffer, new ResultRO<>());
+            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, resultRO.getErrorMsg(), feignException.toString());
+            return resultRO;
+        } else {
+            String errorStr;
+            try {
+                errorStr = JsonUtil.objectMapper.writeValueAsString(feignException);
+            } catch (JsonProcessingException e) {
+                errorStr = "解析异常出错";
+                e.printStackTrace();
+            }
+            ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
+            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, feignException.toString(), errorStr);
+            return resultRO;
         }
-        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, exception.toString(), errorStr);
-        exception.printStackTrace();
-        return resultRO;
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
