@@ -47,10 +47,19 @@ export default class RouterUtil {
     RouterUtil.navigateTo(RouterUtil.getWebUrl(webUrl, pageTitle))
   }
 
-  static navigateToMp (appId: string, path?: string): void {
-    uni.navigateToMiniProgram({
-      appId: appId,
-      path: path
+  static async navigateToMp (appId: string, path: string = null, extraData: any = null) {
+    return new Promise((resolve, reject) => {
+      uni.navigateToMiniProgram({
+        appId: appId,
+        path: path,
+        extraData: extraData,
+        success (res) {
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
     })
   }
 

@@ -12,7 +12,7 @@
       </q-search>
     </q-navbar>
     <view v-if="searchContent">
-      <view v-if="searchContent&&isAdd" class="article-row solid-bottom text-blue" @click="addTag">
+      <view v-if="searchContent&&isAdd" class="article-row solid-bottom color-blue" @click="addTag">
         未找到相关标签，可点击
         <q-icon icon="arrow_right_alt"></q-icon>
         此处去创建

@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom" custom-class="bg-default">
+      <q-navbar class="q-solid-bottom" show-back>
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>
@@ -68,13 +68,13 @@
             </view>
           </q-row-item>
           <view class="q-box w100p row-grid">
-            <navigator :url="userAgreementUrl" class="text-blue">
+            <navigator :url="userAgreementUrl" class="color-blue">
               《用户协议》
             </navigator>
-            <navigator :url="userPrivacyUrl" class="text-blue">
+            <navigator :url="userPrivacyUrl" class="color-blue">
               《隐私政策》
             </navigator>
-            <navigator :url="childProtectUrl" class="text-blue">
+            <navigator :url="childProtectUrl" class="color-blue">
               《儿童个人信息保护规则及监护人须知》
             </navigator>
           </view>
@@ -147,10 +147,9 @@ import UserEdit from './UserEdit.vue'
 import UserInfo from './UserInfo.vue'
 import UniUtil from '../../utils/UniUtil'
 import SkipUrlConst from '../../const/SkipUrlConst'
-import { socialAppModule, socialUserModule, socialUserStore } from '../../store'
+import { socialUserModule, socialUserStore } from '../../store'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
-import OpenDataAPI from '../../api/OpenDataAPI'
 import ToastUtil from '../../utils/ToastUtil'
 import MsgInput from '../MsgInput.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
@@ -178,21 +177,9 @@ export default class SocialMineDetail extends Vue {
   showMoreList = false
   // 登录
   disabledLoginBtn = false
-  showAuthThreeAuth = false
 
   created () {
     UniUtil.showShareMenu()
-    this.showAuthThreeAuth = !!socialAppModule.threeSecretKey
-  }
-
-  toThreeAuthUserInfo () {
-    OpenDataAPI.authUserInfoAPI().then(res => {
-      uni.navigateBackMiniProgram({
-        extraData: {
-          ...res.data
-        }
-      })
-    })
   }
 
   onShow () {

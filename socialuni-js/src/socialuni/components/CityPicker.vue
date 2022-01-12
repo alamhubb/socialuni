@@ -1,16 +1,16 @@
 <template>
   <q-popup :value="value" bottom @input="close">
-    <div class="row-between-center q-box bb-1">
+    <div class="row-between-center box-df bb-1">
       <view class="flex-row">
         <view class="text-black text-md font-bold">城市筛选</view>
-        <view class="text-orange font-bold px bg-click" @click="getLocation">
+        <view class="row-col-center text-orange font-bold px bg-click" @click="getLocation">
           <q-icon icon="map-fill" class="mr-nn" size="16"></q-icon>
           定位
         </view>
       </view>
       <view class="flex-row">
-        <view class="text-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
-        <view class="text-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
+        <view class="color-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
+        <view class="color-green font-bold mx-sm px-sm bg-click" @click="confirm">确定</view>
       </view>
     </div>
     <div class="row-col-center px bg-white mt-sm">
@@ -51,14 +51,14 @@
     </div>
 
     <view class="mt-sm h360" v-if="districts && districts.length">
-      <q-picker ref="citySelect" class="bg-white" v-model="bottomDistrict"
+      <q-picker ref="citySelect" class="bg-white h100p" v-model="bottomDistrict"
                 :dataList="districts"></q-picker>
     </view>
   </q-popup>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import DistrictVO from '../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../store'
 import LocationUtil from '../utils/LocationUtil'
@@ -83,13 +83,17 @@ export default class CityPicker extends Vue {
   @socialLocationStore.State('districts') readonly districts: DistrictVO[]
   @Prop() readonly district: DistrictVO
   bottomDistrict: DistrictVO = LocationUtil.initDistrict
-  showCityPopup = false
 
   @Model('input') readonly value!: any
 
+  @Watch('value')
+  valueWatch () {
+    if (this.value) {
+      this.open()
+    }
+  }
 
   open () {
-    this.showCityPopup = true
     this.bottomDistrict = this.district
     this.getLocation()
     // 如果未加载过全部数据，数据不完整，则加载全部数据，如果第二个没有子节点且或者子节点为0
@@ -105,7 +109,6 @@ export default class CityPicker extends Vue {
 
   @Emit()
   input () {
-    this.showCityPopup = false
     return false
   }
 

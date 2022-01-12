@@ -8,10 +8,7 @@ import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -85,6 +82,7 @@ public class ProxyInterceptor implements HandlerInterceptor {
             String body = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
             // set head.
             HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
             headers.set(SocialFeignHeaderName.socialSecretKeyHeaderName, socialDevSecretKey);
             //如果有token，或者社交登录时，不携带token，手动设置token
             if (SocialTokenUtil.hasToken()) {
@@ -107,7 +105,6 @@ public class ProxyInterceptor implements HandlerInterceptor {
             }
             //
             HttpEntity<String> requestEntity = new HttpEntity<>(body,headers);
-
 
 
             // run

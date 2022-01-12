@@ -45,13 +45,13 @@ public class AdminLoginService {
         }
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        return getSocialLoginROResultRO(devAccountDO);
+        return getSocialLoginROResultRO(devAccountDO, false);
     }
 
 
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        if (!SocialAppEnv.getIsProdEnv()) {
+        if (!SocialAppEnv.getContainsProdEnv()) {
             throw new SocialBusinessException("开发环境请使用秘钥登录");
         }
         //所有平台，手机号登陆方式代码一致
@@ -70,12 +70,13 @@ public class AdminLoginService {
 
         if (devAccountDO == null) {
             devAccountDO = devAccountEntity.createDevAccount(phoneNum);
+            return getSocialLoginROResultRO(devAccountDO, true);
         }
-        return getSocialLoginROResultRO(devAccountDO);
+        return getSocialLoginROResultRO(devAccountDO, false);
 
     }
 
-    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountDO devAccountDO) {
+    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountDO devAccountDO, boolean isNewAccount) {
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
         String devSecretKey = devAccountDO.getSecretKey();
@@ -84,6 +85,9 @@ public class AdminLoginService {
         userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountDO.getId())).getTokenCode();
 
         DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+        if (isNewAccount) {
+            devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+        }
 //        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
 
         SocialLoginRO<DevAccountRO> socialLoginRO = new SocialLoginRO<>(userToken, devAccountRO);

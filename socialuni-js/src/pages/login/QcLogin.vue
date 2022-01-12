@@ -6,10 +6,10 @@
     <div class="w100p pt-1p col-center flex-1">
       <div class="flex-none col-row-center h70">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
-        <div v-if="showPhoneView" class="text-md u-type-warning mt-xs">建议使用微信 或 QQ一键登录</div>
+        <div v-if="showPhoneView" class="text-md color-warn mt-xs">建议使用微信 或 QQ一键登录，无需等待</div>
       </div>
 
-      <view class="mt-xs h145px">
+      <view class="mt-xs h145">
         <phone-login-form v-if="showPhoneView" v-model="phoneFormData"></phone-login-form>
 
         <view v-else class="h120 row-center">
@@ -47,11 +47,15 @@
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <template v-if="!user">
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
-                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none bg-click round mt w100p"
+                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none mt w100p" :class="loginButtonDisabled?'':'bg-click'"
                 >
                   <q-icon custom-prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
                   手机号登录
                 </button>
+                <!--                <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
+                                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none round mt w100p"
+                                >
+                                </button>-->
                 <button v-else-if="isMpQQ" :disabled="!openTypeBtnEnable"
                         open-type="getUserInfo"
                         class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
@@ -136,9 +140,11 @@ import AlertUtil from '@/socialuni/utils/AlertUtil'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
   components: {
+    QIcon,
     PhoneLoginForm,
     UserPrivacyAgreement,
     LoginFooterAppInfo

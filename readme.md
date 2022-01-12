@@ -46,12 +46,12 @@
 数据存两份，开发者数据库一份，联盟一份，未来会拆开这个逻辑，支持不接入联盟的方式
 
 ### 社交联盟接入文档，使用方式:
-1. 登录社交联盟开发者网，注册成为开发者获取开发者秘钥，[社交联盟开发者网](admin.qingchiapp.com)
+1. 登录社交联盟开发者网，注册成为开发者获取开发者秘钥，[社交联盟开发者网](admin.socialuni.cn)
 
 2. clone社交联盟master分支的项目，[社交联盟项目](https://gitee.com/socialuni/socialuni)
 
 3. 只启动前端，在socialuni/socialuni-js前端项目中找到.env.development文件，将服务端地址配置为
-   https://devapi.qingchiapp.com 社交联盟开发环境地址，配置秘钥改为自己的开发者秘钥
+   https://devapi.socialuni.cn 社交联盟开发环境地址，配置秘钥改为自己的开发者秘钥
 
 4. 执行 `npm install` `npm run serve` 启动项目，即可体验
 
@@ -60,7 +60,7 @@
     * provider.qq和wx为自己的qq小程序id和秘钥，使用qq和微信登录需要，不使用可不填，可使用清池授权登录
     * 数据库配置可使用自己的，也可使用联盟提供的演示数据库
 6. 启动后台项目
-7. 修改前端项目配置，把服务器地址改为https://localpc.qingchiapp.com:8093，前端可不再配制秘钥
+7. 修改前端项目配置，把服务器地址改为https://localpc.socialuni.cn:8093，前端可不再配制秘钥
 8. 启动前端项目，即可体验
 
    
@@ -76,7 +76,7 @@ uniapp chat Community Dating Social app
 聊天 社区 社交 交友 app
 ### 遵循MIT开源协议，免费商用
 
-## [官网](https://shejiao.qingchiapp.com/)
+## [官网](https://shejiao.socialuni.cn/)
 
 ## 介绍
 
@@ -146,7 +146,7 @@ app已上架，应用宝、360、oppo、vivo、小米、阿里应用中心，大
 已上架，微信小程序、qq小程序、下方有二维码，可扫码体验，也可在小程序中自行搜索 清池
 
 ### 代码启动体验
-插件仅支持git方式下载，不支持zip方式，详细配置手册请参考 [详细配置手册](https://shejiao.qingchiapp.com/configGuide/)
+插件仅支持git方式下载，不支持zip方式，详细配置手册请参考 [详细配置手册](https://shejiao.socialuni.cn/configGuide/)
 
 ### 前端源码地址
 [清池前端项目 git地址 qingchi-uni](https://github.com/socialuni/social-ui.git)

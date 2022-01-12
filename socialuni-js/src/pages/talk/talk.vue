@@ -15,10 +15,12 @@ export default class TalkPage extends Vue {
   }
 
   onHide () {
+    //@ts-ignore
     this.$refs.socialTalk.tabsTalkOnHide()
   }
 
   onPageScroll (e) {
+    //@ts-ignore
     this.$refs.socialTalk.socialTalkScroll(e)
   }
 }

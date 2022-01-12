@@ -1,6 +1,6 @@
 import StorageUtil from './StorageUtil'
 import GenderType from '../const/GenderType'
-import SocialuniConfig from '../model/SocialuniConfig'
+import SocialuniConfig from '../config/SocialuniConfig'
 
 export default class TalkFilterUtil {
   static readonly minAgeFilterKey: string = 'minAgeFilter'

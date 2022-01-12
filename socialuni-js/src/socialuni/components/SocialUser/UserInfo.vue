@@ -44,7 +44,7 @@
                           size="12"
                           :icon="getGenderIcon(userProp)"/>
                 </div>
-                <div v-else class="box-nn q-tag-theme mt-xs">
+                <div v-else class="box-nn q-tag-blue mt-xs">
                   {{ userProp.age }}
                   <q-icon class="ml-nn"
                           size="12"
@@ -99,14 +99,14 @@
         </view>
 
         <view class="row-col-center py-sm q-solid-bottom">
-<!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
-            <view class='cu-tag bg-green'>
-              <q-icon size="18" icon="mdi-sword-cross"/>
-            </view>
-            <view class="cu-tag bg-white bd-green bd-r-radius">
-              {{ userProp.justiceValue }}
-            </view>
-          </view>-->
+          <!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+                      <view class='cu-tag bg-green'>
+                        <q-icon size="18" icon="mdi-sword-cross"/>
+                      </view>
+                      <view class="cu-tag bg-white bd-green bd-r-radius">
+                        {{ userProp.justiceValue }}
+                      </view>
+                    </view>-->
           <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
                       <view class='cu-tag bg-red'>
                         <q-icon size="18" icon="heart-fill"/>
@@ -162,8 +162,7 @@
               </view>
             </view>
             <view v-else class="row-col-center">
-              未绑定
-              <button class="ml-xs cu-btn radius sm bg-orange"
+              <button class="ml-xs q-tag-warn bg-click"
                       @click="toPhonePage">绑定手机号
               </button>
             </view>
@@ -358,14 +357,7 @@ import TalkVO from '../../model/talk/TalkVO'
 import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../const/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
-import {
-  socialAppModule,
-  socialAppStore,
-  socialConfigStore,
-  socialSystemStore,
-  socialUserModule,
-  socialUserStore
-} from '../../store'
+import { socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore } from '../../store'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
@@ -375,9 +367,6 @@ import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
-import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
-import SocialAuthType from '@/socialuni/const/SocialAuthType'
-import MockService from '@/socialuni/service/MockService'
 
 
 @Component({
@@ -574,18 +563,8 @@ export default class UserInfo extends Vue {
     }
   }
 
-  async toBindSocialuni () {
-    //开发模式模拟授权
-    if (socialAppModule.isDevMode) {
-      await MockService.mockOAuthUserPhoneNumLogin()
-    } else {
-      const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.user)
-      PageUtil.toSocialUniAuth(authVO)
-    }
-  }
-
   async toPhonePage () {
-    PageUtil.toPhonePage()
+    await PageUtil.toPhonePage()
   }
 
   toIdentityAuth () {

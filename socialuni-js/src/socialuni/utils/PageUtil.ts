@@ -61,7 +61,7 @@ export default class PageUtil {
     }
   }
 
-  static toPhonePage () {
+  static async toPhonePage () {
     RouterUtil.navigateTo(PagePath.userPhone)
   }
 
@@ -92,17 +92,15 @@ export default class PageUtil {
     RouterUtil.navigateTo(PagePath.userContactInfo)
   }
 
-  static toSocialUniAuth (authVO: SocialuniAuthQO) {
+  static async toSocialUniAuth (authVO: SocialuniAuthQO) {
     let appId = 'wx0bf5fe9ceeab514c'
     if (socialSystemModule.isMpQQ) {
       appId = '1109985787'
     }
-    uni.navigateToMiniProgram({
-      appId: appId,
-      // envVersion: 'trial',
-      // appId: '1109985787',
-      path: 'pages/oAuth/oAuth',
-      extraData: authVO
-    })
+    try {
+      await RouterUtil.navigateToMp(appId, 'pages/oAuth/oAuth', authVO)
+    } catch (e) {
+      console.log(e)
+    }
   }
 }

@@ -238,7 +238,7 @@ export default class CirclePage extends Vue {
   @Watch('searchContent')
   watchSearchContent () {
     if (!this.searchContent) {
-      this.showSearch = false
+      // this.showSearch = false
     }
   }
 
@@ -259,7 +259,7 @@ export default class CirclePage extends Vue {
   }
 
   showSearchView () {
-    this.showSearch = true
+    // this.showSearch = true
   }
 
   clearSearchContent () {

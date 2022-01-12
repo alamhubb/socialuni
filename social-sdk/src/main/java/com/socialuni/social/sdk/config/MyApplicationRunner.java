@@ -30,7 +30,7 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Async
     public void run(ApplicationArguments args) {
         configMapRefreshService.refreshConfigMap();
-        violationKeywordsService.refreshKeywords();
+//        violationKeywordsService.refreshKeywords();
         List<SocialDistrictRO> hotDistricts = districtRedis.getHotDistricts();
         AppData.setHotDistricts(hotDistricts);
 

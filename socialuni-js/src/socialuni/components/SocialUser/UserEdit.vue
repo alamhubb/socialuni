@@ -109,7 +109,7 @@ import { socialUserModule, socialUserStore } from '../../store'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import EnumStrVO from '../../const/EnumStrVO'
 import GenderType from '../../const/GenderType'
-import SocialuniConfig from '../../model/SocialuniConfig'
+import SocialuniConfig from '../../config/SocialuniConfig'
 import UserEditVO from '../../model/user/UserEditVO'
 
 @Component

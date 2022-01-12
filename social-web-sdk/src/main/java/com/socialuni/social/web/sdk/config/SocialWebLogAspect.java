@@ -61,7 +61,6 @@ public class SocialWebLogAspect {
             }
         }
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
-        log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
         return result;
     }
 }

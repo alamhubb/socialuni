@@ -77,8 +77,18 @@ $uni-font-size-paragraph:30upx;
 
 /* uni.scss */
 @import 'uview-ui/theme.scss';
+@import 'socialuni/styles/qing-scss/theme.scss';
 
 //主题色
-$color-bg-theme: #fff;
-$color-bg-theme-light: #f7f7fa;
-$color-tab: #3383f6;
+//$color-bg-theme: #fff;
+//$color-bg-theme-light: #f7f7fa;
+//$color-tab: #3383f6;
+
+//$color-theme: #FCD34D;
+//$color-bg-theme-light: #FEF3C7;
+//$color-tab: #B45309;
+
+$color-theme: #B45309;
+$color-theme2: #FEF3C7;
+$color-theme3: #FEF3C7;
+$color-theme4: #FCD34D;

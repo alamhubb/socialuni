@@ -1,7 +1,7 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom">
+      <q-navbar class="q-solid-bottom" show-back>
         <view class="ml-xl font-bold text-md flex-auto">
           个人资料
         </view>
@@ -71,13 +71,13 @@
           </q-row-item>
           <div class="flex-row">
             <view class="w100p row-grid">
-              <navigator :url="userAgreementUrl" class="text-blue">
+              <navigator :url="userAgreementUrl" class="color-blue">
                 《用户协议》
               </navigator>
-              <navigator :url="userPrivacyUrl" class="text-blue">
+              <navigator :url="userPrivacyUrl" class="color-blue">
                 《隐私政策》
               </navigator>
-              <navigator :url="childProtectUrl" class="text-blue">
+              <navigator :url="childProtectUrl" class="color-blue">
                 《儿童个人信息保护规则及监护人须知》
               </navigator>
             </view>
@@ -105,8 +105,6 @@ import { socialUserModule, socialUserStore } from '@/socialuni/store'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/const/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
-import { oAuthModule } from '@/store'
-import OpenDataAPI from '@/socialuni/api/OpenDataAPI'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
 import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
@@ -125,27 +123,15 @@ import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
     MsgInput
   }
 })
-export default class MineDetail extends Vue {
+export default class QcMineDetail extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   showMsgInput = false
   showMoreList = false
   // 登录
   disabledLoginBtn = false
-  showAuthThreeAuth = false
 
   created () {
     UniUtil.showShareMenu()
-    this.showAuthThreeAuth = !!oAuthModule.threeSecretKey
-  }
-
-  toThreeAuthUserInfo () {
-    OpenDataAPI.authUserInfoAPI().then(res => {
-      uni.navigateBackMiniProgram({
-        extraData: {
-          ...res.data
-        }
-      })
-    })
   }
 
   onShow () {

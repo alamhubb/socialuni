@@ -17,7 +17,7 @@
                       size="12"
                       :icon="getGenderIcon(talk.user)"/>
             </div>
-            <div v-else class="box-nn q-tag-theme ml-sm">
+            <div v-else class="box-nn q-tag-blue ml-sm">
               {{ talk.user.age }}
               <q-icon class="ml-nn"
                       size="12"
@@ -80,7 +80,7 @@
                 @click.stop="addFollow">
           关注
         </button>
-        <view v-else class="bg-grey5 box-xs" @click.stop="addFollow">已关注</view>
+        <view v-else class="box-xs" @click.stop="addFollow">已关注</view>
       </view>
     </view>
   </view>
@@ -103,7 +103,7 @@ import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
-import SocialuniConfig from '../../model/SocialuniConfig'
+import SocialuniConfig from '../../config/SocialuniConfig'
 import { socialUserStore } from '../../store'
 
 @Component({

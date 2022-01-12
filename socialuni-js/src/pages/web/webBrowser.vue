@@ -1,7 +1,16 @@
 <template>
   <view>
+    <!--  #ifdef MP -->
+    <q-navbar show-back>
+      <view class="row-between-center w100p flex-auto">
+        <view class="ml-xl font-bold text-md">
+          {{ title }}
+        </view>
+      </view>
+    </q-navbar>
+    <!--  #endif -->
     <!--  #ifndef MP -->
-    <q-navbar>
+    <q-navbar show-back>
       <view class="row-between-center w100p flex-auto">
         <view class="ml-xl font-bold text-md">
           {{ title }}
@@ -19,14 +28,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+//@ts-ignore
 import PagePath from 'socialuni/const/PagePath'
 import { socialSystemModule, socialSystemStore } from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
-import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
-  components: { QIcon, QNavbar }
+  components: { QNavbar }
 })
 export default class WebBrowserPage extends Vue {
   @socialSystemStore.State('titleHeight') titleHeight
@@ -40,7 +49,7 @@ export default class WebBrowserPage extends Vue {
 
   onLoad (params) {
     console.log(params)
-    // this.webUrl = 'https://mp.qingchiapp.com'
+    // this.webUrl = 'https://mp.socialuni.cn'
     this.webUrl = decodeURIComponent(params.url)
     const title: string = params.title
     if (title) {

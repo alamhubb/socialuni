@@ -1,35 +1,36 @@
 <template>
   <view :class="[uuid]" class="flex-row h100p">
-    <scroll-view scroll-y :scroll-top="oneScrollTop">
+    <!--    样式涉及到左侧选中小蓝块，所以这么写的-->
+    <scroll-view class="flex-1 h100p" scroll-y :scroll-top="oneScrollTop">
       <view v-for="(item,index) in dataList"
             :key="index" @click="oneLevelChange(index)"
             class="q-picker-one-level-item row-col-center"
             :class="{uuid,'q-picker-item-active':index === checkedOne}"
       >
-        <q-row-item class="flex-auto">
-          {{item.adName}}
+        <q-row-item class="flex-1">
+          {{ item.adName }}
         </q-row-item>
       </view>
     </scroll-view>
-    <scroll-view scroll-y :scroll-top="twoScrollTop">
+    <scroll-view class="flex-1 h100p" scroll-y :scroll-top="twoScrollTop">
       <view v-for="(item,index) in twoLevelData"
             :key="index" @click="twoLevelChange(index)"
             class="q-picker-two-level-item row-col-center"
             :class="{uuid,'q-picker-item-active':index === checkedTwo}"
       >
-        <q-row-item class="flex-auto">
-          {{item.adName}}
+        <q-row-item class="flex-1">
+          {{ item.adName }}
         </q-row-item>
       </view>
     </scroll-view>
-    <scroll-view scroll-y :scroll-top="threeScrollTop">
+    <scroll-view class="flex-1 h100p" scroll-y :scroll-top="threeScrollTop">
       <view v-for="(item,index) in threeLevelData"
             :key="index" @click="threeLevelChange(index)"
             class="q-picker-three-level-item row-col-center"
             :class="{uuid,'q-picker-item-active':index === checkedThree}"
       >
-        <q-row-item class="flex-auto">
-          {{item.adName}}
+        <q-row-item class="flex-1">
+          {{ item.adName }}
         </q-row-item>
       </view>
     </scroll-view>

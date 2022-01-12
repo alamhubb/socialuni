@@ -15,7 +15,7 @@ public class CenterLocationController implements SocialuniLocationAPI {
     public ResultRO<LocationQueryRO> queryLocation(LocationQueryQO queryQO) {
         LocationQueryRO locationQueryRO;
         //经纬度查询
-        if (StringUtils.isNotEmpty(queryQO.getLatitude())) {
+        if (queryQO.getLatitude() != null) {
             locationQueryRO = QQMapAPI.geocoder(queryQO);
             //ip查询
         } else if (StringUtils.isNotEmpty(queryQO.getIp())) {

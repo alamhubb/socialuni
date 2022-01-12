@@ -65,15 +65,13 @@ import PlatformUtils from '../../utils/PlatformUtils'
 import UniUtil from '../../utils/UniUtil'
 import AlertUtil from '../../utils/AlertUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import UPopup from 'uview-ui/components/u-popup/u-popup'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
-    QPopup,
-    UPopup
+    QPopup
   }
 })
 export default class TalkOperate extends Vue {

@@ -26,8 +26,14 @@ export default class UserAPI {
   }
 
   static deleteUserImgAPI (userImg: ImgFileVO) {
-    return socialHttp.post('user/deleteUserImg', userImg)
+    return socialHttp.post('user/deleteImg', userImg)
   }
+
+
+  static deleteUserImgNewAPI (userImg: ImgFileVO) {
+    return socialHttp.post('user/deleteUserImg', { userImgId: userImg.id })
+  }
+
 
   static identityAuthAPI (userImg: DomFile) {
     return socialHttp.post('identity/auth', userImg)
