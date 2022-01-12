@@ -1,13 +1,14 @@
 package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.constant.AdminAppConfigConst;
+import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.center.sdk.redis.DevAccountRedis;
 import com.socialuni.center.sdk.repository.DevAccountRepository;
-import com.socialuni.center.sdk.model.DevAccountDO;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.sdk.repository.community.TagRepository;
+import com.socialuni.social.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,10 +37,13 @@ public class DevAccountEntity {
         } else {
             lastDevId = AdminAppConfigConst.qingChiDevNum;
         }
+
         //加30以内随机数
         Long curDevNum = lastDevId + new Double((Math.random() * 20)).longValue();
         DevAccountDO devAccountDO = new DevAccountDO();
         Date curDate = new Date();
+        String secretKey = UUIDUtil.getUUID();
+        devAccountDO.setSecretKey(secretKey);
         devAccountDO.setPhoneNum(phoneNum);
 //        devAccountDO.setSecretKey(UUIDUtil.getUUID());
         devAccountDO.setAppGenderType(GenderType.all);

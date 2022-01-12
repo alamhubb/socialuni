@@ -14,7 +14,6 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -104,7 +103,7 @@ public class DevAccountUtils {
             return null;
         }
         DevAccountDO devAccountDO;
-        if (SocialAppEnv.getIsProdEnv()) {
+        if (SocialAppEnv.getContainsProdEnv()) {
             devAccountDO = devAccountRepository.findOneBySecretKey(secretKey);
         } else {
             ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(secretKey));
@@ -138,7 +137,7 @@ public class DevAccountUtils {
     //得到用户信息
     private static DevAccountDO getDevAccountByToken(String token) {
         //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据
-        if (SocialAppEnv.getIsProdEnv()) {
+        if (SocialAppEnv.getContainsProdEnv()) {
             //校验解析token
             String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
             if (StringUtils.isEmpty(devSecretKey)) {
