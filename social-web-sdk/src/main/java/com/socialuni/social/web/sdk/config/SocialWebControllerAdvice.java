@@ -9,6 +9,7 @@ import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,25 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
+        ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
+        log.info(exception.getClass().getName());
+        log.info(exception.toString());
+        String errorStr;
+        try {
+            errorStr = JsonUtil.objectMapper.writeValueAsString(exception);
+        } catch (JsonProcessingException e) {
+            errorStr = "解析异常出错";
+            e.printStackTrace();
+        }
+        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, exception.toString(), errorStr);
+        exception.printStackTrace();
+        return resultRO;
+    }
+
+    @ExceptionHandler(value = FeignException.class)
+    public ResultRO<Void> feignExceptionHandler(FeignException exception) {
+        exception.get
+
         ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
         log.info(exception.getClass().getName());
         log.info(exception.toString());
