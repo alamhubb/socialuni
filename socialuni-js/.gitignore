@@ -22,6 +22,7 @@ yarn-error.log*
 *.sln
 *.sw*
 /src/manifest.json
+/src/uni.scss
 /.env.production
 /.env
 /src/.env.production
