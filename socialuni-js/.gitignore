@@ -21,11 +21,11 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-/src/manifest.json
-/src/uni.scss
-/.env.production
 /.env
 /src/.env.production
 /src/.env
 /src/.env.development
+/src/manifest.json
+/src/uni.scss
+.env.production
 .env.development
