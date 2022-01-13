@@ -1,9 +1,7 @@
 package com.socialuni.social.sdk.entity.user;
 
-import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.manage.phone.AuthenticationManage;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
