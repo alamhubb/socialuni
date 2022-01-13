@@ -1,15 +1,10 @@
 package com.socialuni.center.web.insystem;
 
-import com.socialuni.center.sdk.feignAPI.SocialuniDevAccountAPI;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
-import com.socialuni.center.sdk.model.SyncProdDevAccountQO;
-import com.socialuni.center.sdk.repository.DevAccountRepository;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.center.web.insystem.admin.SocialuniAdminService;
-import com.socialuni.cloud.config.SocialAppEnv;
+import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
+import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.SocialParamsException;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

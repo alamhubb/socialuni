@@ -1,4 +1,4 @@
-package com.socialuni.center.sdk.model;
+package com.socialuni.social.entity.model.DO.dev;
 
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;

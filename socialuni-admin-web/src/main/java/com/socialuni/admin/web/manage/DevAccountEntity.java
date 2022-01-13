@@ -1,9 +1,9 @@
 package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.constant.AdminAppConfigConst;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.redis.DevAccountRedis;
-import com.socialuni.center.sdk.repository.DevAccountRepository;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.redis.DevAccountRedis;
+import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.StatusConst;

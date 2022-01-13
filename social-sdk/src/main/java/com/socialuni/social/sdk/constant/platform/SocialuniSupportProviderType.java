@@ -1,7 +1,6 @@
-package com.socialuni.center.sdk.constant;
+package com.socialuni.social.sdk.constant.platform;
 
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 
 import java.util.Arrays;
 import java.util.List;

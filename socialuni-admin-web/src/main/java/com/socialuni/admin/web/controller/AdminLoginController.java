@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.service.AdminLoginService;
-import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
+import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;

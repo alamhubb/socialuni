@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
 import com.socialuni.center.web.model.DO.UnionIdDO;
 import com.socialuni.center.web.repository.UnionIdRepository;
@@ -95,7 +95,7 @@ public class UnionIdDbUtil {
         if (user != null) {
             userId = user.getId();
         }
-        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevId());
+        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, UserDO user, Integer devId) {
@@ -108,7 +108,7 @@ public class UnionIdDbUtil {
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId) {
-        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevId());
+        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId, Integer devId) {
@@ -203,7 +203,7 @@ public class UnionIdDbUtil {
             throw new SocialParamsException("无效的内容标示2");
         }
 
-        Integer devId = DevAccountUtils.getDevId();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
         //有效，则校验商户id和userid是否一致
         //这里存在一个问题，有商户但是没用户的时候替换的问题
         //确认商户一致

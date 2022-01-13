@@ -1,6 +1,6 @@
 package com.socialuni.center.web.serive.circle;
 
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
@@ -25,7 +25,7 @@ public class CenterCircleService {
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
-        SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevId(), CenterUserUtil.getMineUserAllowNull());
+        SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), CenterUserUtil.getMineUserAllowNull());
         circleDO = socialCircleRepository.save(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
     }

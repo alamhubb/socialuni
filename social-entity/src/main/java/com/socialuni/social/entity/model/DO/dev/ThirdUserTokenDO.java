@@ -1,4 +1,4 @@
-package com.socialuni.center.web.model.DO;
+package com.socialuni.social.entity.model.DO.dev;
 
 import com.socialuni.social.entity.model.DO.user.base.CommonTokenBaseDO;
 import lombok.Data;

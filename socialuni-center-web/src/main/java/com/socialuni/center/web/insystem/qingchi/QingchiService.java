@@ -2,10 +2,10 @@ package com.socialuni.center.web.insystem.qingchi;
 
 import com.socialuni.api.model.RO.devAccount.DevAccountRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.model.DevAccountProviderDO;
-import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.sdk.repository.dev.DevAccountProviderRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.manage.DevAccountManage;

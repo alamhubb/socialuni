@@ -1,8 +1,7 @@
-package com.socialuni.center.sdk.feignAPI;
+package com.socialuni.social.sdk.feignAPI;
 
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
-import com.socialuni.center.sdk.model.SyncProdDevAccountQO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

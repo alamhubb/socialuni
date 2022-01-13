@@ -1,4 +1,4 @@
-package com.socialuni.center.sdk.model.QO;
+package com.socialuni.social.sdk.model.QO.dev;
 
 import lombok.Data;
 

@@ -1,10 +1,10 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
-import com.socialuni.center.web.model.DO.ThirdUserDO;
-import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.center.web.repository.ThirdUserRepository;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.social.sdk.repository.dev.ThirdUserRepository;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -90,7 +90,7 @@ public class CenterUserUtil {
     }
 
     public static ThirdUserDO getMineThirdUser(Integer mineUserId) {
-        Integer devId = DevAccountUtils.getDevId();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserDO thirdUserDO = thirdUserRepository.findByDevIdAndUserId(devId, mineUserId);
         return thirdUserDO;
     }

@@ -1,14 +1,14 @@
-package com.socialuni.center.sdk.utils;
+package com.socialuni.social.sdk.utils;
 
 import com.socialuni.api.config.SocialFeignHeaderName;
-import com.socialuni.center.sdk.feignAPI.SocialuniDevAccountAPI;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.model.DevAccountProviderDO;
-import com.socialuni.center.sdk.model.DevTokenDO;
-import com.socialuni.center.sdk.model.QO.DevAccountQueryQO;
-import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
-import com.socialuni.center.sdk.repository.DevAccountRepository;
-import com.socialuni.center.sdk.repository.DevTokenRepository;
+import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.entity.model.DO.dev.DevTokenDO;
+import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
+import com.socialuni.social.sdk.repository.dev.DevAccountProviderRepository;
+import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
+import com.socialuni.social.sdk.repository.dev.DevTokenRepository;
 import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
@@ -80,7 +80,7 @@ public class DevAccountUtils {
         return null;
     }
 
-    public static Integer getDevId() {
+    public static Integer getDevIdNotNull() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         return devAccountDO.getId();
     }

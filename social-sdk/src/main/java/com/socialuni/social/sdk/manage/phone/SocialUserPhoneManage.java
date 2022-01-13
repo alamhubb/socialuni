@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.manage.phone;
 
-import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.repository.user.SocialUserPhoneRepository;
+import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.social.utils.PhoneNumUtil;
+import com.socialuni.social.sdk.repository.user.SocialUserPhoneRepository;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.utils.PhoneNumUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -22,11 +22,13 @@ public class SocialUserPhoneManage {
     SocialUserPhoneRedis socialUserPhoneRedis;
 
     //校验用户是否已经绑定手机号，手机号是否已被绑定
+    //不存在已经授权了清池用户，再来绑定手机号的情况。
     public void checkBindPhoneNum(String phoneNum, Integer mineUserId) {
+        //进入这个方法一定是已经登陆了。
         //校验手机号格式
         PhoneNumUtil.checkPhoneNum(phoneNum);
-        //校验用户是否已经绑定手机号
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUserId);
+        //校验用户是否已经绑定手机号
         if (socialUserPhoneDO != null) {
             throw new SocialParamsException("用户已绑定手机号");
         }

@@ -1,10 +1,10 @@
 package com.socialuni.center.web.domain.thirdUser;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
-import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;

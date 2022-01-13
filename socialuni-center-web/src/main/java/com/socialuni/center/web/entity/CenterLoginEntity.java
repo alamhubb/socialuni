@@ -3,8 +3,8 @@ package com.socialuni.center.web.entity;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
-import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
@@ -23,7 +23,7 @@ public class CenterLoginEntity {
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
-        ThirdUserTokenDO tokenDO = thirdUserTokenManage.create(centerMineUserDetailRO.getId(), DevAccountUtils.getDevId(), socialMineUserDetailRO.getId());
+        ThirdUserTokenDO tokenDO = thirdUserTokenManage.create(centerMineUserDetailRO.getId(), DevAccountUtils.getDevIdNotNull(), socialMineUserDetailRO.getId());
 
         return new SocialLoginRO<>(tokenDO.getToken(), centerMineUserDetailRO);
     }
