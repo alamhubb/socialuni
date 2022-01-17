@@ -1,7 +1,7 @@
 package com.socialuni.center.web.serive;
 
 
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.HomeSwiperDO;
@@ -40,7 +40,7 @@ public class CenterAppService {
 
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         //homeSwipers
-        List<HomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(StatusConst.enable, DevAccountUtils.getDevId());
+        List<HomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(StatusConst.enable, DevAccountUtils.getDevIdNotNull());
         List<HomeSwiperVO> homeSwiperVOS = SocialHomeSwiperROFactory.toVOS(homeSwiperDOS);
         return new ResultRO<>(homeSwiperVOS);
     }

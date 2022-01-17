@@ -10,7 +10,7 @@ import com.socialuni.center.web.repository.shell.UserContactRepository;
 import com.socialuni.center.web.repository.user.UserDetailRepository;
 import com.socialuni.center.web.serive.chat.ChatService;
 import com.socialuni.center.sdk.utils.CenterUserUtil;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.sdk.utils.UnionIdDbUtil;
 import com.socialuni.constant.CommonStatus;
 import com.socialuni.sdk.constant.FollowConst;

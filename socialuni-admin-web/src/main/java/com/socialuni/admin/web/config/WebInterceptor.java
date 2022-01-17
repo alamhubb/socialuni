@@ -1,9 +1,8 @@
 package com.socialuni.admin.web.config;
 
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

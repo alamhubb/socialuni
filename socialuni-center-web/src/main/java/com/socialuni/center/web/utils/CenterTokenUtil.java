@@ -1,8 +1,8 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.center.web.repository.ThirdUserTokenRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.social.sdk.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -36,7 +36,7 @@ public class CenterTokenUtil {
         }
         //解析token
         ThirdUserTokenDO tokenDO = thirdUserTokenRepository.findFirstByToken(token);
-        Integer devId = DevAccountUtils.getDevId();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
 
         if (tokenDO == null) {
             throw new SocialNullUserException();

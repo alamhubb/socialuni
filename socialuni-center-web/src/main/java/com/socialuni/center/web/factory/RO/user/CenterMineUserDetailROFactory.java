@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CenterMineUserDetailROFactory {
     public static CenterMineUserDetailRO getMineUserDetail() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         return CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
     }
 

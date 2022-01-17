@@ -2,8 +2,8 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.AdminReportService;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.social.entity.model.DO.ReportDO;

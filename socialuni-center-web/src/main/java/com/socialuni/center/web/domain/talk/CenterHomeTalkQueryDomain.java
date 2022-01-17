@@ -5,7 +5,7 @@ import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.config.SocialAppConfig;
@@ -51,7 +51,7 @@ public class CenterHomeTalkQueryDomain {
     //查询非关注tab的动态列表
     public List<CenterTalkRO> queryHomeTabTalks(CenterHomeTabTalkQueryQO queryQO) {
         //获取当前用户
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
 
@@ -71,7 +71,7 @@ public class CenterHomeTalkQueryDomain {
         }
 
         //转换为rolist
-        List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser, DevAccountUtils.getDevId());
+        List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser, DevAccountUtils.getDevIdNotNull());
 
         List<CenterTalkRO> talkROS = CenterTalkROFactory.getTalkROS(socialTalkROFactories, mineUser);
         return talkROS;

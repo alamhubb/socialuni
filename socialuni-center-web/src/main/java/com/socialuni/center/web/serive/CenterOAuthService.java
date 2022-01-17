@@ -1,13 +1,13 @@
 package com.socialuni.center.web.serive;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.factory.RO.user.SocialOAuthUserROFactory;
 import com.socialuni.center.web.manage.DevAccountManage;
-import com.socialuni.center.web.model.DO.ThirdUserAuthDO;
-import com.socialuni.center.web.repository.ThirdUserAuthRepository;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserAuthDO;
+import com.socialuni.social.sdk.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
@@ -34,8 +34,8 @@ public class CenterOAuthService {
     private ThirdUserAuthRepository thirdUserAuthRepository;
 
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
-        Integer devId = DevAccountUtils.getDevId();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
             return new ResultRO<>();
@@ -57,7 +57,7 @@ public class CenterOAuthService {
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(OAuthUserInfoQO authVO, String authType) {
         //获取devaccount
         //获取绑定的手机号，根据手机号，获取user。然后返回这个user的信息，并且返回对应这个应用的userid
-        UserDO userDO = CenterUserUtil.getMineUser();
+        UserDO userDO = CenterUserUtil.getMineUserAllowNull();
         DevAccountDO devAccountDO = devAccountManage.checkApplyAuthQO(authVO);
         return oAuthUserInfo(devAccountDO, userDO, authType);
     }

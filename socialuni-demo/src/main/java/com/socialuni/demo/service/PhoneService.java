@@ -42,7 +42,7 @@ public class PhoneService {
             throw new SocialBusinessException("用户未授权");
         }
 
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         socialBindUserProviderAccountEntity.bindProviderAccount(mineUser.getId(), socialBindQO);
 

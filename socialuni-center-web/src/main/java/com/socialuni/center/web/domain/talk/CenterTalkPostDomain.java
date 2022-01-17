@@ -3,7 +3,7 @@ package com.socialuni.center.web.domain.talk;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -38,7 +38,7 @@ public class CenterTalkPostDomain {
     SocialContentAddEntity socialContentAddEntity;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         String content = talkPostQO.getContent();
 
@@ -78,7 +78,7 @@ public class CenterTalkPostDomain {
             }
         }
 
-        Integer devId = DevAccountUtils.getDevId();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
 
         talkPostQO.setDevId(devId);
         TagDO devTagDO = tagRepository.findFirstByDevId(devId);

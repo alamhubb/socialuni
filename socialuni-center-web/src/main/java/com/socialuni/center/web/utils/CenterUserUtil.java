@@ -1,10 +1,10 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
-import com.socialuni.center.web.model.DO.ThirdUserDO;
-import com.socialuni.center.web.model.DO.ThirdUserTokenDO;
-import com.socialuni.center.web.repository.ThirdUserRepository;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
+import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.social.sdk.repository.dev.ThirdUserRepository;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -25,7 +25,7 @@ public class CenterUserUtil {
     }
 
     public static Integer getMineUserId() {
-        UserDO user = CenterUserUtil.getMineUser();
+        UserDO user = CenterUserUtil.getMineUserAllowNull();
         if (user == null) {
             return null;
         }
@@ -40,9 +40,9 @@ public class CenterUserUtil {
         return userId.toString();
     }
 
-    public static UserDO getMineUser() {
+    public static UserDO getMineUserAllowNull() {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
-        return getMineUser(tokenDO);
+        return getMineUserAllowNull(tokenDO);
     }
 
     public static boolean isMine(Integer userId) {
@@ -50,9 +50,9 @@ public class CenterUserUtil {
         return userId.equals(mineUserId);
     }
 
-    public static UserDO getMineUser(String token) {
+    public static UserDO getMineUserAllowNull(String token) {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO(token);
-        return getMineUser(tokenDO);
+        return getMineUserAllowNull(tokenDO);
     }
 
     public static Integer getMineUserIdInterceptor() {
@@ -77,7 +77,7 @@ public class CenterUserUtil {
         return user;
     }
 
-    private static UserDO getMineUser(ThirdUserTokenDO tokenDO) {
+    private static UserDO getMineUserAllowNull(ThirdUserTokenDO tokenDO) {
         if (tokenDO == null) {
             return null;
         }
@@ -90,13 +90,13 @@ public class CenterUserUtil {
     }
 
     public static ThirdUserDO getMineThirdUser(Integer mineUserId) {
-        Integer devId = DevAccountUtils.getDevId();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserDO thirdUserDO = thirdUserRepository.findByDevIdAndUserId(devId, mineUserId);
         return thirdUserDO;
     }
 
     public static String getMineThirdUserId() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         return CenterUserUtil.getMineThirdUserId(mineUser.getId());
     }
 
@@ -110,7 +110,7 @@ public class CenterUserUtil {
 
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = CenterUserUtil.getMineUser();
+        UserDO userDO = CenterUserUtil.getMineUserAllowNull();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 

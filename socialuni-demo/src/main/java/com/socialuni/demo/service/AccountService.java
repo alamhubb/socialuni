@@ -21,7 +21,7 @@ public class AccountService {
     SocialBindUserProviderAccountEntity socialBindUserProviderAccountEntity;
 
     public ResultRO<Void> bindSocialuniAccount(SocialProviderLoginQO socialBindQO) {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserNotNull();
         socialBindUserProviderAccountEntity.bindProviderAccount(mineUser.getId(), socialBindQO);
         return new ResultRO<>();
     }

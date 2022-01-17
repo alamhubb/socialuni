@@ -1,7 +1,6 @@
 package com.socialuni.admin.web;
 
 import com.socialuni.api.config.EnableSocialuni;
-import com.socialuni.center.sdk.config.EnableSocialuniCenterSDK;
 import com.socialuni.social.sdk.config.EnableSocialSDK;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableSocialSDK
-@EnableSocialuniCenterSDK
 @EnableJpaRepositories
 @SpringBootApplication
 @EnableCaching

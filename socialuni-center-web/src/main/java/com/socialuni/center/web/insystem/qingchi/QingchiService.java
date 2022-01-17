@@ -2,10 +2,10 @@ package com.socialuni.center.web.insystem.qingchi;
 
 import com.socialuni.api.model.RO.devAccount.DevAccountRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.center.sdk.model.DevAccountDO;
-import com.socialuni.center.sdk.model.DevAccountProviderDO;
-import com.socialuni.center.sdk.repository.DevAccountProviderRepository;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.sdk.repository.dev.DevAccountProviderRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.entity.AuthThirdUserEntity;
 import com.socialuni.center.web.manage.DevAccountManage;
@@ -95,7 +95,7 @@ public class QingchiService {
 
     public ResultRO<CenterMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
         //只是记录一个授权记录
         //生成一条对三方的手机号授权，并且返回手机号信息
@@ -107,7 +107,7 @@ public class QingchiService {
     public ResultRO<CenterMineUserDetailRO> bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO) {
         // 只有清池支持渠道登录
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(bindPhoneQO, mineUser);
 
         //生成一条对三方的手机号授权，并且返回手机号信息
@@ -124,7 +124,7 @@ public class QingchiService {
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
         this.checkIsQingchiApp();
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }

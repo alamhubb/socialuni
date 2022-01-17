@@ -1,8 +1,8 @@
 package com.socialuni.center.web.serive;
 
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.sdk.utils.DevAccountUtils;
-import com.socialuni.center.sdk.model.DevAccountDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.app.SocialCosAuthRO;
 import com.socialuni.social.sdk.domain.SocialCosGetAuthDomain;

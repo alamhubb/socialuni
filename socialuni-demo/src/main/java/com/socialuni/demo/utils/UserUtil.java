@@ -24,7 +24,7 @@ public class UserUtil {
     }
 
     public static MineUserDetailRO getMineUser() {
-        UserDO mineUser = SocialUserUtil.getMineUser();
+        UserDO mineUser = SocialUserUtil.getMineUserNotNull();
         return UserUtil.getMineUser(mineUser);
     }
 
