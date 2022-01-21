@@ -2,14 +2,13 @@ package com.socialuni.center.web.config;
 
 import com.socialuni.center.web.exception.SocialNullDevAccountException;
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.exception.constant.ErrorCode;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -94,12 +93,8 @@ public class WebInterceptor extends SocialWebRequestLogInterceptor {
         if (devId == null) {
             log.info("开发者为空");
             throw new SocialNullDevAccountException();
-        } else if (user == null) {
-            log.info("用户未登录");
-            throw new SocialNotLoginException();
-        } else {
-            log.info("拦截器无法预见异常");
-            throw new SocialSystemException("拦截器无法预见异常");
         }
+        log.info("用户未登录");
+        throw new SocialNotLoginException();
     }
 }
