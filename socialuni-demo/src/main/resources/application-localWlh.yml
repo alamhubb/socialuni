@@ -1,6 +1,6 @@
 socialuni:
   secret-key: "f12be0da13bf4cf9b672c5e7957c71f2"
-  server-url: "https://api.qingchiapp.com:8091"
+  server-url: "https://api.socialuni.cn"
   app:
     static-resource-url: "https://cdxapp-1257733245.file.myqcloud.com"
     system-user-id: 1
