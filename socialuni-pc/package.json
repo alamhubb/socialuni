@@ -1,12 +1,12 @@
 {
   "name": "socialuni-pc",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "scripts": {
-    "build": "vue-tsc --noEmit && vite build",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "pinia": "^2.0.9",
