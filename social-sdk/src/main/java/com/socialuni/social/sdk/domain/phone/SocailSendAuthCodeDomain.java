@@ -12,9 +12,10 @@ import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
+import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -110,7 +111,7 @@ public class SocailSendAuthCodeDomain {
         String phoneNum = authCodeQO.getPhoneNum();
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
 
-        AuthenticationDO authenticationDO = new AuthenticationDO(SocialUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp);
+        AuthenticationDO authenticationDO = new AuthenticationDO(SocialUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountUtils.getDevIdAllowNull());
         authenticationDO.setStatus(StatusConst.fail);
         authRepository.save(authenticationDO);
 

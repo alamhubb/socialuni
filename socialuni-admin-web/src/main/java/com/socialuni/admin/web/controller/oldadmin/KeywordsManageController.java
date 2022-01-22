@@ -4,12 +4,14 @@ package com.socialuni.admin.web.controller.oldadmin;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.StatusConst;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;
 import com.socialuni.social.sdk.mapper.TalkMapper;
-import com.socialuni.social.sdk.repository.*;
+import com.socialuni.social.sdk.repository.KeywordsRepository;
+import com.socialuni.social.sdk.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.sdk.repository.NotifyRepository;
+import com.socialuni.social.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.store.TalkQueryStore;
 import org.apache.commons.lang3.StringUtils;
@@ -107,7 +109,7 @@ public class KeywordsManageController {
     //    @GetMapping("batchClosePinyinOrTexts"),批量关闭时使用
     public ResultRO<KeywordsDO> batchOpenPinyinOrTexts() {
         //获取关键词
-        List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(StatusConst.enable, 19, 0.4);
+        List<KeywordsDO> optionalViolateWordDOs = keywordsRepository.findAllByStatusAndOpenPinyinIsTrueAndPinyinNormalNumGreaterThanAndPinyinViolateRatioLessThan(CommonStatus.enable, 19, 0.4);
 
         for (KeywordsDO keywordsDO : optionalViolateWordDOs) {
             getKeywordsDOResultVO(keywordsDO, "pinyin", "批量关闭");

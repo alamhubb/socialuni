@@ -1,6 +1,6 @@
 package com.socialuni.social.entity.model.DO.dev;
 
-import com.socialuni.social.constant.StatusConst;
+import com.socialuni.social.constant.CommonStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,6 +33,6 @@ public class DevAuthCodeDO implements Serializable {
         this.authCode = authCode;
         this.ip = ip;
         this.createTime = new Date();
-        this.status = StatusConst.init;
+        this.status = CommonStatus.enable;
     }
 }

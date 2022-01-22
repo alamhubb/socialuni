@@ -1,9 +1,7 @@
 package com.socialuni.center.web.config;
 
-import com.socialuni.center.web.exception.SocialNullDevAccountException;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.sdk.utils.RedisUtil;
@@ -76,25 +74,6 @@ public class WebInterceptor extends SocialWebRequestLogInterceptor {
                 redisUtil.set(ipKey, 1, 60);
             }
         }
-
-        if (user != null) {
-            return true;
-        }
-        for (String whiteUrl : WhiteUrlListConfig.AppWhiteUrlList) {
-            if (uri.contains(whiteUrl)) {
-                return true;
-            }
-        }
-        for (String whiteUrl : WhiteUrlListConfig.needDevIdUrlList) {
-            if (uri.contains(whiteUrl) && devId != null) {
-                return true;
-            }
-        }
-        if (devId == null) {
-            log.info("开发者为空");
-            throw new SocialNullDevAccountException();
-        }
-        log.info("用户未登录");
-        throw new SocialNotLoginException();
+        return true;
     }
 }

@@ -1,4 +1,3 @@
-import ProviderUserVO from '../model/login/ProviderUserVO'
 import socialHttp from '../plugins/http/socialHttp'
 import UniProviderLoginQO from '../model/UniProviderLoginQO'
 import SocialLoginRO from '../model/social/SocialLoginRO'
@@ -17,10 +16,5 @@ export default class LoginAPI {
 
   static phoneLoginAPI (loginData: SocialPhoneNumLoginQO) {
     return socialHttp.post<SocialLoginRO<CenterUserDetailRO>>('login/phoneLogin', loginData)
-  }
-
-  //微信绑定手机号使用
-  static bindPhoneNumAPI (loginData: ProviderUserVO) {
-    return socialHttp.post<CenterUserDetailRO>('user/bindPhoneNumByWx', loginData)
   }
 }
