@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import request from "@/plugins/request";
+
 defineProps<{
   msg: string
 }>()
+
+request.post('talk/queryTalks')
 </script>
 
 <template>

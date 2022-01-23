@@ -13,6 +13,7 @@ import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.sdk.entity.talk.SocialHomeTalkQueryEntity;
 import com.socialuni.social.sdk.factory.SocialTalkROFactory;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,7 @@ public class SocialHomeTalkQueryDomain {
     @Resource
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
 
-    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser, Integer devId) {
+    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
         //talk
         socialHomeTabTalkQueryBO.setTalkIds(queryQO.getTalkIds());
@@ -39,7 +40,7 @@ public class SocialHomeTalkQueryDomain {
         socialHomeTabTalkQueryBO.setLat(queryQO.getLat());
         socialHomeTabTalkQueryBO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryBO.setMaxAge(queryQO.getMaxAge());
-        socialHomeTabTalkQueryBO.setDevId(devId);
+        socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdAllowNull());
 
         String queryQOGender = queryQO.getGender();
 
@@ -69,13 +70,8 @@ public class SocialHomeTalkQueryDomain {
 
     //查询非关注tab的动态列表
     public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
-        return this.queryHomeTabTalks(queryQO, mineUser, null);
-    }
-
-    //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser, Integer devId) {
         //校验gender类型,生成BO
-        SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser, devId);
+        SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
 
         String tabType = queryBO.getHomeTabType();
         if (!TalkTabType.values.contains(tabType)) {
