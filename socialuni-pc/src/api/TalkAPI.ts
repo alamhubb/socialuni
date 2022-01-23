@@ -20,7 +20,7 @@ export default class TalkAPI {
     return request.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge, queryDate))
   }*/
   static queryTalksAPI () {
-    return request.post<TalkVO>('talk/queryTalks')
+    return request.post<TalkVO[]>('talk/queryTalks')
   }
 
   static queryUserTalksAPI (userId: string, talkIds: number[]) {
