@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import FlexStyle from "@/cssModule/groupStyle/FlexStyle";
-
-
-const domtest = document.createElement('div')
-console.log(123)
-console.log(domtest)
-console.log(domtest.style)
-console.log(domtest.style.rubyPosition)
-for (const domElement of domtest.style) {
-  console.log(domElement)
-}
-</script>
+import FlexStyle from "@/cssModule/groupStyle/FlexStyle";</script>
 
 <template>
   <div>
     <div :style="FlexStyle.flexRow">
-      <div>123</div>
+      <div>123----</div>
       <div>456</div>
     </div>
-    <div>
+
+
+
+
+
+
+
+
+
+<!--    <div>
       <div>789</div>
       <div>45645</div>
     </div>
@@ -33,7 +31,7 @@ for (const domElement of domtest.style) {
           <div>
             <div class="h25 row-col-center">
               <text class="text-md">{{ talk.user.nickname }}</text>
-              <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
+              &lt;!&ndash;          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>&ndash;&gt;
               <template v-if="!talk.globalTop">
                 <div v-if="talk.user.gender==='girl'" class="box-nn q-tag-error ml-sm">
                   {{ talk.user.age }}
@@ -49,7 +47,7 @@ for (const domElement of domtest.style) {
                 </div>
               </template>
             </div>
-            <!--            <div class="text-gray text-sm h25 row-col-center">
+            &lt;!&ndash;            <div class="text-gray text-sm h25 row-col-center">
                           最新回复：{{ talk.updateTime| formatTime }}
                           <div v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
                             官方
@@ -60,19 +58,19 @@ for (const domElement of domtest.style) {
                                 @click.stop="confirmDeleteTalk">
                             删除
                           </text>
-                        </div>-->
+                        </div>&ndash;&gt;
           </div>
-          <!--                不为自己且未关注-->
-          <!--          <div v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
+          &lt;!&ndash;                不为自己且未关注&ndash;&gt;
+          &lt;!&ndash;          <div v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
                       <button v-if="!talk.hasFollowed" class="cu-btn round bd-theme bg-white text-theme px-smm"
                               @click.stop="addFollow">
                         关注
                       </button>
                       <div v-else class="box-xs" @click.stop="addFollow">已关注</div>
-                    </div>-->
+                    </div>&ndash;&gt;
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
