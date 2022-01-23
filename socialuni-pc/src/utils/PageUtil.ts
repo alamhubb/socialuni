@@ -1,4 +1,4 @@
-import router from '@/router/router'
+// import router from '@/router/router'
 
 export default class PageUtil {
   static toHome() {

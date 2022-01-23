@@ -2,28 +2,40 @@
   "name": "socialuni-pc",
   "version": "0.0.0",
   "scripts": {
+    "serve": "vite preview",
+    "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
-    "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@mdi/font": "5.9.55",
+    "axios": "^0.19.2",
     "pinia": "^2.0.9",
+    "roboto-fontface": "*",
     "vue": "^3.2.27",
     "vue-router": "^4.0.12",
-    "axios": "^0.19.2"
+    "vuetify": "^3.0.0-alpha.0",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.21",
     "@vitejs/plugin-vue": "^2.0.1",
+    "@vue/cli-plugin-babel": "5.0.0-beta.7",
+    "@vue/cli-service": "5.0.0-beta.7",
     "@vue/eslint-config-typescript": "^10.0.0",
+    "@vuetify/vite-plugin": "^1.0.0-alpha.3",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "sass": "^1.49.0",
+    "sass-loader": "^10.0.0",
     "typescript": "~4.5.4",
     "vite": "^2.7.13",
-    "vue-tsc": "^0.29.8"
+    "vue-cli-plugin-vuetify": "~2.4.5",
+    "vue-tsc": "^0.29.8",
+    "vuetify-loader": "^2.0.0-alpha.0",
+    "@vue/eslint-config-prettier": "^7.0.0"
   }
 }

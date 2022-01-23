@@ -1,13 +1,19 @@
-import {createApp} from 'vue'
-import {createPinia} from 'pinia'
+import {createApp} from "vue";
+import {createPinia} from "pinia";
 
-import App from './App.vue'
-import router from './router'
-import '@/styles/qing-scss/index.scss'
+import App from "./App.vue";
+import router from "./router";
+import "@/styles/qing-scss/index.scss";
 
-const app = createApp(App)
+import vuetify from "@/plugins/vuetify";
+import {loadFonts} from "@/plugins/webfontloader";
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+loadFonts();
+
+app.use(createPinia());
+app.use(router);
+app.use(vuetify);
+
+app.mount("#app");

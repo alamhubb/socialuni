@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import TheWelcome from '@/components/TheWelcome.vue'
+import TalkAPI from "@/api/TalkAPI";
+import TalkVO from "@/model/talk/TalkVO";
+
+const talks: TalkVO[] = []
+TalkAPI.queryTalksAPI().then((res) => {
+  talks.push(...res.data)
+})
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <v-btn>123</v-btn>
+  <div>{{talks}}</div>
 </template>
+

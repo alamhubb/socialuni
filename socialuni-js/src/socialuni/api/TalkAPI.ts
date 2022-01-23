@@ -1,5 +1,5 @@
 import TalkAddVO from '../model/talk/TalkAddVO'
-import socialHttp from '../plugins/http/socialHttp'
+import request from '../plugins/http/request'
 import CommentAddVO from '../model/comment/CommentAddVO'
 import HugAddVO from '../model/HugAddVO'
 import TalkQueryVO from '../model/talk/TalkQueryVO'
@@ -14,38 +14,38 @@ import ImgAddQO from '../model/user/ImgAddQO'
 export default class TalkAPI {
   static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
     const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, tagIds, visibleType, visibleGender)
-    return socialHttp.post('talk/postTalk', data)
+    return request.post('talk/postTalk', data)
   }
 
   static queryTalksAPI (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date) {
-    return socialHttp.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge, queryDate))
+    return request.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge, queryDate))
   }
 
   static queryUserTalksAPI (userId: string, talkIds: number[]) {
-    return socialHttp.post('talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
+    return request.post('talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
   }
 
   static queryTalkInfoAPI (talkId: string) {
-    return socialHttp.post('talk/queryTalkInfo', { talkId })
+    return request.post('talk/queryTalkInfo', { talkId })
   }
 
   static queryTalkDetailAPI (talkId: string) {
-    return socialHttp.post('talk/queryTalkDetail', { talkId })
+    return request.post('talk/queryTalkDetail', { talkId })
   }
 
   static addCommentAPI (comment: CommentAddVO) {
-    return socialHttp.post('comment/postComment', comment)
+    return request.post('comment/postComment', comment)
   }
 
   static addHugAPI (hug: HugAddVO) {
-    return socialHttp.post('hug/addHug', hug)
+    return request.post('hug/addHug', hug)
   }
 
   static deleteTalkAPI (talkId: number) {
-    return socialHttp.post('talk/deleteTalk', new TalkDeleteVO(talkId))
+    return request.post('talk/deleteTalk', new TalkDeleteVO(talkId))
   }
 
   static deleteCommentAPI (commentId: number) {
-    return socialHttp.post('comment/deleteComment', new CommentDeleteVO(commentId))
+    return request.post('comment/deleteComment', new CommentDeleteVO(commentId))
   }
 }
