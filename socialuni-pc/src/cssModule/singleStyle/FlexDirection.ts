@@ -1,5 +1,5 @@
 export default class FlexDirection {
-  static get flexDirection_row() {
+  static get row() {
     return {
       flexDirection: 'row',
     }

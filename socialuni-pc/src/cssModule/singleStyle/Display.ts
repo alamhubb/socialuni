@@ -1,5 +1,5 @@
 export default class Display {
-  static get display_flex() {
+  static get flex() {
     return {
       display: 'flex',
     }

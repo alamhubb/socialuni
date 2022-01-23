@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import TalkAPI from "@/api/TalkAPI";
-import TalkVO from "@/model/talk/TalkVO";
 import FlexStyle from "@/cssModule/groupStyle/FlexStyle";
-import AppMsg from "@/constants/AppMsg";
 
-const talks: TalkVO[] = []
-TalkAPI.queryTalksAPI().then((res) => {
-  talks.push(...res.data)
-  console.log(talks)
-})
 
-const domt = document.createElement('div')
-domt.style.flexDirection
-
-function testAdd() {
-  AppMsg.testValue++
-  console.log(AppMsg.testValue)
-
+const domtest = document.createElement('div')
+console.log(123)
+console.log(domtest)
+console.log(domtest.style)
+console.log(domtest.style.rubyPosition)
+for (const domElement of domtest.style) {
+  console.log(domElement)
 }
 </script>
 
 <template>
-  <v-btn @click="testAdd"> {{ 123 }}</v-btn>
-
   <div>
     <div :style="FlexStyle.flexRow">
       <div>123</div>
