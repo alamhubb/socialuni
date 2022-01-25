@@ -17,7 +17,7 @@
           <el-button type="primary" class="ml-5" @click="initQueryData">重置</el-button>
         </div>-->
         <div class="row-col-center w50p ml">
-          <div class="mr-sm">
+          <div class="mr-sm flex-none">
             用户查询手机号:
           </div>
           <div class="w200">
@@ -31,7 +31,13 @@
           </div>
           <el-button type="primary" class="ml-sm" @click="queryUserContentsByPhoneNums">查询</el-button>
           <el-button type="primary" class="ml-sm" @click="initQueryData">清空</el-button>
-          <el-button type="primary" class="ml-sm" :disabled="!(userReports.length > 0 && (userReports[0].user.status === $const.UserStatus.violation))" @click="removeUserBanByPhoneNum">解封</el-button>
+          <el-button
+            type="primary"
+            class="ml-sm"
+            :disabled="!(phoneNum && userReports.length > 0 && (userReports[0].user.status === $const.UserStatus.violation))"
+            @click="removeUserBanByPhoneNum"
+          >解封
+          </el-button>
 
           <!--        <el-button type="primary" @click="getViolation">获取违规关键词</el-button>-->
         </div>
@@ -83,24 +89,6 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="图片"
-        width="300"
-      >
-        <template #default="{row}">
-          <div class="flex-row">
-            <el-image
-              v-for="(img) in row.talk.imgs"
-              :key="img.id"
-              style="width: 200px; height: 200px"
-              fit="contain"
-              :src="getImgUrl(img.src,row.talk.userId)"
-              :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
-              :z-index="999"
-            />
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column
         label="用户"
         width="120"
       >
@@ -118,10 +106,54 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="违规原因"
+        width="160"
+      >
+        <template #default="{row}">
+          <el-radio-group v-model="row.violateType">
+            <div v-for="reportType in reportTypes">
+              <el-radio
+                :key="reportType"
+                :label="reportType"
+                :value="reportType"
+              />
+            </div>
+          </el-radio-group>
+        </template>
+      </el-table-column>
+      <el-table-column
         label="动态"
       >
         <template #default="{row}">
           {{ row.talk.id }} --- {{ row.talk.content }}
+        </template>
+      </el-table-column>
+      <el-table-column label="违规关键词" width="150">
+        <template #default="{row}">
+          <div v-for="word in row.triggerKeywords">
+            {{ word.keywordsText }} --- {{ word.matchText }}
+            <div v-if="word.usePinyin">
+              {{ word.keywordsPinyin }} --- {{ word.matchPinyin }}
+            </div>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="图片"
+        width="300"
+      >
+        <template #default="{row}">
+          <div class="flex-row">
+            <el-image
+              v-for="(img) in row.talk.imgs"
+              :key="img.id"
+              style="width: 200px; height: 200px"
+              fit="contain"
+              :src="getImgUrl(img.src,row.talk.userId)"
+              :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
+              :z-index="999"
+            />
+          </div>
         </template>
       </el-table-column>
       <el-table-column
@@ -149,32 +181,6 @@
           />
         </template>
       </el-table-column>-->
-      <el-table-column label="违规关键词" width="150">
-        <template #default="{row}">
-          <div v-for="word in row.triggerKeywords">
-            {{ word.keywordsText }} --- {{ word.matchText }}
-            <div v-if="word.usePinyin">
-              {{ word.keywordsPinyin }} --- {{ word.matchPinyin }}
-            </div>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="违规原因"
-        width="160"
-      >
-        <template #default="{row}">
-          <el-radio-group v-model="row.violateType">
-            <div v-for="reportType in reportTypes">
-              <el-radio
-                :key="reportType"
-                :label="reportType"
-                :value="reportType"
-              />
-            </div>
-          </el-radio-group>
-        </template>
-      </el-table-column>
       <!--      <el-table-column
                 label="举报类型"
                 width="160">
