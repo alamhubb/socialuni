@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import FlexStyle from "@/cssModule/groupStyle/FlexStyle";</script>
+</script>
 
 <template>
   <div>
-    <div :style="FlexStyle.flexRow">
+    <div :style="Display.block">
       <div>123----</div>
       <div>456</div>
     </div>

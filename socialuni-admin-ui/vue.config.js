@@ -14,8 +14,8 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
         // target: 'http://localhost:8180/',
-        // target: 'https://localpc.qingchiapp.com:8081',
-        target: 'https://admin.socialuni.cn:8081',
+        target: 'https://localpc.qingchiapp.com:8081',
+        // target: 'https://admin.socialuni.cn:8081',
         // target: `http://172.16.7.169:8080`,
         // target: 'http://172.16.7.169:8080',
         changeOrigin: true,

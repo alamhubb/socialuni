@@ -1,36 +1,41 @@
 <template>
   <div class="h100p flex-col">
-    <div class="flex-none">
-      <el-button class="w60p h50" type="primary" @click="reportPassList">审核全部</el-button>
-      <el-button @click="testRequet">test测试</el-button>
-    </div>
-    <!--    <div class="flex-none flex-row pa-20">
-          <div class="row-col-center w50r">
-            <div class="w100">
-              动态查询:
-            </div>
-            <div class="w200">
-              <el-input
-                  v-model="talkId"
-              ></el-input>
-            </div>
-            <el-button type="primary" @click="queryTalk">查询</el-button>
-            <el-button type="primary" @click="initQueryData" class="ml-5">重置</el-button>
+    <div class="flex-none flex-row">
+      <el-button class="w30p h50" type="primary" :disabled="userReports.length" @click="reportPassList">审核全部</el-button>
+      <!--      <el-button @click="testRequet">test测试</el-button>-->
+      <div class="flex-none flex-row w68p">
+        <!--        <div class="row-col-center w50r">
+          <div class="w100">
+            动态查询:
           </div>
-          <div class="row-col-center w50r">
-            <div class="w100">
-              用户查询:
-            </div>
-            <div class="w200">
-              <el-input
-                  v-model="userId"
-              ></el-input>
-            </div>
-            <el-button type="primary" @click="queryUserTalks">查询</el-button>
-
-    &lt;!&ndash;        <el-button type="primary" @click="getViolation">获取违规关键词</el-button>&ndash;&gt;
+          <div class="w200">
+            <el-input
+              v-model="talkId"
+            />
           </div>
+          <el-button type="primary" @click="queryTalk">查询</el-button>
+          <el-button type="primary" class="ml-5" @click="initQueryData">重置</el-button>
         </div>-->
+        <div class="row-col-center w50p ml">
+          <div class="mr-sm">
+            用户查询手机号:
+          </div>
+          <div class="w200">
+            <!--            <el-input
+              v-model="userId"
+            />-->
+            <el-input
+              v-model="phoneNum"
+              @click.native.stop="queryUserContentsByPhoneNums"
+            />
+          </div>
+          <el-button type="primary" class="ml-sm" @click="queryUserContentsByPhoneNums">查询</el-button>
+          <el-button type="primary" class="ml-sm" @click="initQueryData">清空</el-button>
+
+          <!--        <el-button type="primary" @click="getViolation">获取违规关键词</el-button>-->
+        </div>
+      </div>
+    </div>
     <!--    <el-card></el-card>-->
 
     <div v-if="talk" class="flex-auto overflow-scroll">
@@ -50,31 +55,12 @@
         {{ comment.content }}
       </div>
     </div>
-    <div v-else-if="userReports.length" class="flex-auto overflow-scroll">
-      <div v-for="report in userReports">
-        {{ report.talk.id }} --- {{ report.talk.content }}
-        <div
-          v-for="img in report.talk.imgs"
-          :key="img.id"
-        >
-          <el-image
-            class="index-sm"
-            style="width: 200px; height: 200px"
-            :src="getImgUrl(img.src,report.talk.userId)"
-            aspect-ratio="1"
-          />
-        </div>
-        <div v-for="comment in report.talk.comments">
-          {{ comment.content }}
-        </div>
-      </div>
-    </div>
 
     <el-table
       v-else
       class="flex-auto"
       height="100"
-      :data="reports"
+      :data="tableData"
       border
     >
       <!--              @row-click="tableRowClick"-->
@@ -97,14 +83,14 @@
       </el-table-column>
       <el-table-column
         label="图片"
-        width="100"
+        width="300"
       >
         <template #default="{row}">
           <div class="flex-row">
             <el-image
               v-for="(img) in row.talk.imgs"
               :key="img.id"
-              style="width: 100px; height: 200px"
+              style="width: 200px; height: 200px"
               fit="contain"
               :src="getImgUrl(img.src,row.talk.userId)"
               :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
@@ -132,7 +118,6 @@
       </el-table-column>
       <el-table-column
         label="动态"
-        width="150"
       >
         <template #default="{row}">
           {{ row.talk.id }} --- {{ row.talk.content }}
@@ -140,7 +125,7 @@
       </el-table-column>
       <el-table-column
         label="评论"
-        width="100"
+        width="150"
       >
         <template #default="{row}">
           <div v-for="comment in row.talk.comments">
@@ -151,7 +136,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column
+      <!--      <el-table-column
         label="包含"
         width="60"
       >
@@ -162,8 +147,8 @@
             :class="{'bg-red':row.triggerKeywords.length<2,'bg-green':row.triggerKeywords.length>1}"
           />
         </template>
-      </el-table-column>
-      <el-table-column label="违规关键词">
+      </el-table-column>-->
+      <el-table-column label="违规关键词" width="150">
         <template #default="{row}">
           <div v-for="word in row.triggerKeywords">
             {{ word.keywordsText }} --- {{ word.matchText }}
@@ -206,7 +191,7 @@
               </template>
             </el-table-column>-->
 
-      <el-table-column
+      <!--      <el-table-column
         label="操作"
         width="300"
       >
@@ -218,8 +203,8 @@
             {{ row.violateType }}
           </div>
         </template>
-      </el-table-column>
-      <el-table-column
+      </el-table-column>-->
+      <!--      <el-table-column
         label="违规原因"
         width="120"
       >
@@ -230,8 +215,8 @@
             placeholder="请输入内容"
           />
         </template>
-      </el-table-column>
-      <el-table-column
+      </el-table-column>-->
+      <!--      <el-table-column
         label="操作"
         width="200"
       >
@@ -240,7 +225,7 @@
           <el-button type="success" :disabled="!auditNote" @click="rowNoViolateClick(row)">不违规
           </el-button>
         </template>
-      </el-table-column>
+      </el-table-column>-->
     </el-table>
   </div>
 
@@ -266,8 +251,16 @@ export default class PreAuditPage extends Vue {
   auditNote = '未发现违规内容'
   talkId: number = null
   userId: number = null
+  phoneNum = 15910779659
   talk: Talk = null
   userReports: ReportVO[] = []
+
+  get tableData() {
+    if (this.userReports.length) {
+      return this.userReports
+    }
+    return this.reports
+  }
 
   initQueryData() {
     this.talk = null
@@ -289,9 +282,20 @@ export default class PreAuditPage extends Vue {
 
   queryUserTalks() {
     this.initQueryData()
-    ReportAPI.queryUserReportsAPI(this.userId).then((res: any) => {
-      this.userReports = res.data
-    })
+    if (this.userId) {
+      ReportAPI.queryUserReportsAPI(this.userId).then((res: any) => {
+        this.userReports = res.data
+      })
+    }
+  }
+
+  queryUserContentsByPhoneNums() {
+    this.initQueryData()
+    if (this.phoneNum) {
+      ReportAPI.queryUserContentsByPhoneNumAPI(this.phoneNum).then((res: any) => {
+        this.userReports = res.data
+      })
+    }
   }
 
   created() {
