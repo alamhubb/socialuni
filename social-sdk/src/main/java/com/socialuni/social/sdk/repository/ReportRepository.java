@@ -27,6 +27,7 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
 
     List<ReportDO> findTop10ByStatusInOrderByCreateTimeAsc(List<String> status);
 
+    List<ReportDO> findTop10ByReceiveUserIdOrderByCreateTimeDesc(Integer userId);
     List<ReportDO> findTop20ByStatusInOrderByCreateTimeAsc(List<String> status);
     List<ReportDO> findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(List<String> status, Integer devId);
 

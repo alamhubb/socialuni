@@ -31,6 +31,7 @@
           </div>
           <el-button type="primary" class="ml-sm" @click="queryUserContentsByPhoneNums">查询</el-button>
           <el-button type="primary" class="ml-sm" @click="initQueryData">清空</el-button>
+          <el-button type="primary" class="ml-sm" :disabled="!(userReports.length > 0 && (userReports[0].user.status === $const.UserStatus.violation))" @click="removeUserBanByPhoneNum">解封</el-button>
 
           <!--        <el-button type="primary" @click="getViolation">获取违规关键词</el-button>-->
         </div>
@@ -101,13 +102,13 @@
       </el-table-column>
       <el-table-column
         label="用户"
-        width="100"
+        width="120"
       >
         <template #default="{row}">
           <div>
             <el-avatar shape="square" :src="row.user.avatar" />
             <div>
-              {{ row.user.id }}
+              {{ row.user.id }}--{{ row.user.status }}
             </div>
             --
             <div>
@@ -240,6 +241,7 @@ import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
 import ViolateType from '@/constants/ViolateType'
 import request from '@/plugins/request'
+import UserAPI from '@/api/UserAPI'
 
 @Component
 export default class PreAuditPage extends Vue {
@@ -295,6 +297,12 @@ export default class PreAuditPage extends Vue {
       ReportAPI.queryUserContentsByPhoneNumAPI(this.phoneNum).then((res: any) => {
         this.userReports = res.data
       })
+    }
+  }
+
+  removeUserBanByPhoneNum() {
+    if (this.phoneNum) {
+      UserAPI.removeUserBanByPhoneNumAPI(this.phoneNum)
     }
   }
 

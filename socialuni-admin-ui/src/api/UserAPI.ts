@@ -17,4 +17,11 @@ export default class UserAPI {
       return res
     })
   }
+
+  static removeUserBanByPhoneNumAPI(phoneNum: number) {
+    return request.post('user/removeUserBanByPhoneNum', phoneNum).then(res => {
+      ToastUtil.success('解封成功')
+      return res
+    })
+  }
 }
