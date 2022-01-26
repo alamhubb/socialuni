@@ -1,11 +1,9 @@
-package com.socialuni.api.config;
+package com.socialuni.social.constant;
 
-import lombok.Data;
-
-@Data
 public class SocialFeignHeaderName {
 
     public static String socialSecretKeyHeaderName = "secretKey";
     public static String socialTokenHeaderName = "token";
+    public static String requestIpHeaderName = "requestIp";
 
 }

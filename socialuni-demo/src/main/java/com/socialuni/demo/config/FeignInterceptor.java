@@ -1,8 +1,9 @@
 package com.socialuni.demo.config;
 
-import com.socialuni.api.config.SocialFeignHeaderName;
+import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.utils.model.SocialUserAccountUtil;
+import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -25,6 +26,8 @@ public class FeignInterceptor implements RequestInterceptor {
 //        String socialSecret = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
 //        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialSecret);
         requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialDevSecretKey);
+        String userIp = IpUtil.getIpAddr();
+        requestTemplate.header(SocialFeignHeaderName.requestIpHeaderName, userIp);
 
         //如果有token，或者社交登录时，不携带token，手动设置token
         if (SocialTokenUtil.hasToken()) {

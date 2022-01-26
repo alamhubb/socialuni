@@ -1,4 +1,4 @@
-package com.socialuni.social.entity.model.DO;
+package com.socialuni.social.entity.model.DO.base;
 
 import com.socialuni.social.constant.CommonStatus;
 import lombok.Data;

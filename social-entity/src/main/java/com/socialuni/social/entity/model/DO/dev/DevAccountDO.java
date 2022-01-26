@@ -2,7 +2,7 @@ package com.socialuni.social.entity.model.DO.dev;
 
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
+import com.socialuni.social.entity.model.DO.base.CommonContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

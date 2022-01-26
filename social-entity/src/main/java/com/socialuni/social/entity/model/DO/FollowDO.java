@@ -1,5 +1,6 @@
 package com.socialuni.social.entity.model.DO;
 
+import com.socialuni.social.entity.model.DO.base.CommonContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {"userId", "beUserId"}),
         }
 )
-public class FollowDO extends CommonContentBaseDO{
+public class FollowDO extends CommonContentBaseDO {
     /**
      * 主用户
      */

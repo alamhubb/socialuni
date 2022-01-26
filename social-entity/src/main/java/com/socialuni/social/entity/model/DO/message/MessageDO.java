@@ -2,7 +2,7 @@ package com.socialuni.social.entity.model.DO.message;
 
 
 import com.socialuni.social.constant.*;
-import com.socialuni.social.entity.model.DO.CommonContentBaseDO;
+import com.socialuni.social.entity.model.DO.base.CommonContentBaseDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import lombok.Data;
 

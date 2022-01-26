@@ -119,7 +119,7 @@ public class SocialTalkPostDomain {
         List<SocialTalkImgDO> imgDOS = TalkImgDOFactory.newTalkImgDOS(socialTalkPostQO.getImgs());
 
         for (SocialTalkImgDO imgDO : imgDOS) {
-            imgDO.setTalkId(talkDO.getId());
+            imgDO.setContentId(talkDO.getId());
             imgDO.setUserId(talkDO.getUserId());
         }
 

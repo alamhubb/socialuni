@@ -1,9 +1,6 @@
 package com.socialuni.center.web.config;
 
-import com.socialuni.api.config.SocialFeignHeaderName;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
-import com.socialuni.social.sdk.utils.model.SocialUserAccountUtil;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
+import com.socialuni.social.constant.SocialFeignHeaderName;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;

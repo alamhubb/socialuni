@@ -59,7 +59,7 @@ public class TencentCloudCosService {
             SocialTalkImgDO talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
             if (talkImgDO != null) {
                 recordDO.setContentImgId(talkImgDO.getId());
-                recordDO.setContentId(talkImgDO.getTalkId());
+                recordDO.setContentId(talkImgDO.getContentId());
                 recordDO.setUserId(talkImgDO.getUserId());
             } else {
                 //不存在的talk，talk未发布成功

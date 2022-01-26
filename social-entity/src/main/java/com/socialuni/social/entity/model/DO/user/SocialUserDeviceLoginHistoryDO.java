@@ -1,6 +1,6 @@
 package com.socialuni.social.entity.model.DO.user;
 
-import com.socialuni.social.entity.model.DO.CommonBaseDO;
+import com.socialuni.social.entity.model.DO.base.CommonBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,5 +1,6 @@
 package com.socialuni.social.entity.model.DO;
 
+import com.socialuni.social.entity.model.DO.base.CommonBaseDO;
 import lombok.Data;
 
 import javax.persistence.Column;

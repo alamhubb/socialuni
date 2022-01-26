@@ -1,6 +1,6 @@
 package com.socialuni.demo.config;
 
-import com.socialuni.api.config.SocialFeignHeaderName;
+import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.sdk.utils.model.SocialUserAccountUtil;
