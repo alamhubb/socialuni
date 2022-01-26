@@ -3,7 +3,7 @@ import {createPinia} from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
-import "@/styles/qing-scss/index.scss";
+// import "@/styles/qing-scss/index.scss";
 // import "@/styles/index.scss";
 import vuetify from "@/plugins/vuetify";
 import {loadFonts} from "@/plugins/webfontloader";
