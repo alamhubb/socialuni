@@ -2,7 +2,7 @@ export default function myExample() {
   return {
     name: 'my-example', // this name will show up in warnings and errors
     resolveId(source) {
-      console.log(123123)
+      console.log(source)
 
       if (source === 'virtual-module') {
         return source; // this signals that rollup should not ask other plugins or check the file system to find this id
@@ -11,6 +11,7 @@ export default function myExample() {
     },
     load(id) {
       console.log(456456)
+      console.log(id)
       if (id === 'virtual-module') {
         return 'export default "This is virtual!"'; // the source code for "virtual-module"
       }
