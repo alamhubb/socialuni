@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+console.log(456778)
 const countDown: number = 0
 const phoneNum: string = ''
 const authCode: string = ''

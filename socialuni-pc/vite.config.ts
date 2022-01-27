@@ -2,21 +2,22 @@ import {fileURLToPath, URL} from 'url'
 
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vuetify from '@vuetify/vite-plugin'
 import Inspect from 'vite-plugin-inspect'
 import myExample from './rollup-plugin-my-example.js';
+import {babel} from '@rollup/plugin-babel';
+import babelPluginMyPlugin from './babel-plugin-myPlugin.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    vue(),
     // 仅适用于开发模式
     Inspect(),
     myExample(),
-    vue(),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
-    vuetify({
-      autoImport: true,
-    }),
+    babel({
+      babelHelpers: 'bundled',
+      plugins: [babelPluginMyPlugin()]
+    })
   ],
   resolve: {
     alias: {
