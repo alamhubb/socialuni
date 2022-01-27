@@ -3,7 +3,7 @@ import AppInitQueryVO from '../model/common/AppInitQueryVO'
 import AppUpdateVO from '../model/app/AppUpdateVO'
 import AppUpdateResultVO from '../model/app/AppUpdateResultVO'
 import FrontErrorLogVO from '../model/app/FrontErrorLogVO'
-import JsonUtil from '../utils/JsonUtil'
+import JsonUtil from '@/utils/JsonUtil'
 
 export default class AppUtilAPI {
   static queryAppInitDataLoadAPI (initQueryVO: AppInitQueryVO) {

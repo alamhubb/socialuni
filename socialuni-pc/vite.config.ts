@@ -15,8 +15,11 @@ export default defineConfig({
     Inspect(),
     myExample(),
     babel({
+      presets: ["@babel/preset-typescript"],
+      extensions: [".ts"],
       babelHelpers: 'bundled',
-      plugins: [babelPluginMyPlugin()]
+      exclude: 'node_modules/**',
+      plugins: [babelPluginMyPlugin()],
     })
   ],
   resolve: {
@@ -33,13 +36,6 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
-  },
-  css: {
-    preprocessorOptions: {
-      sass: {
-        additionalData: "@import '@/styles/index.scss'",
-      },
-    },
-  },
+  }
 })
 

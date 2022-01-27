@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import FlexStyle from "@/cssModule/groupStyle/FlexStyle";
+
+const abc = FlexStyle.flexRow
+const dfd = FlexStyle.flexRow.flexDirection
+console.log(abc)
+console.log(dfd)
 console.log(456778)
+console.log(FlexStyle.flexRow)
 const countDown: number = 0
 const phoneNum: string = ''
 const authCode: string = ''
