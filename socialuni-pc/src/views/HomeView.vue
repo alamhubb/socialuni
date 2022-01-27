@@ -7,14 +7,7 @@ console.log(abc)
 console.log(dfd)
 console.log(456778)
 console.log(FlexStyle.flexRow)
-const countDown: number = 0
 const phoneNum: string = ''
-const authCode: string = ''
-const inviteCode: string = ''
-const phoneNumMask: string = '###########'
-const authCodeMask: string = '####'
-const inviteCodeMask: string = '########'
-const snackbar: boolean = false
 /*
 const phoneNumRules: Function[] = [
   v => !!v || '请输入手机号',

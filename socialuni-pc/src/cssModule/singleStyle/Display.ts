@@ -1,4 +1,6 @@
-export default class Display {
+import CssModule from "@/cssModule/singleStyle/CssModule";
+
+export default class Display implements CssModule{
 static get none(){
       return {
         display: 'none'
