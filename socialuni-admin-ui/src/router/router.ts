@@ -77,7 +77,7 @@ export const constantRoutes = [
       }]
   },*/
   /* {
-    path: 'https://shejiao.qingchiapp.com/',
+    path: 'https://socialuni.cn/',
     meta: { title: '文档' }
   },*/
   // 404 page must be placed at the end !!!

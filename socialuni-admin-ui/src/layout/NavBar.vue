@@ -68,7 +68,7 @@ export default class NavBar extends Vue {
   }
 
   toDoc() {
-    window.open('https://shejiao.qingchiapp.com')
+    window.open('https://socialuni.cn')
   }
 
   toGitee() {
