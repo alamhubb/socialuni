@@ -3,6 +3,7 @@ package com.socialuni.social.web.config;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
+import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialNotLoginException;
@@ -24,9 +25,10 @@ import java.util.Date;
 
 @Component
 @Slf4j
-public class UserAuthInterceptor implements HandlerInterceptor {
+public class WebInterceptor extends SocialWebRequestLogInterceptor {
     @Resource
     private RedisUtil redisUtil;
+
 
     /*
      * 进入controller层之前拦截请求
@@ -34,33 +36,22 @@ public class UserAuthInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
-        Date startTime = new Date();
-
-        RequestLogDO requestLogDO = new RequestLogDO();
-        UserDO user = SocialUserUtil.getMineUserAllowNull();
-        if (user != null) {
-            requestLogDO.setUserId(user.getId());
-        }
-        String requestIp = IpUtil.getIpAddr(request);
-        String uri = request.getRequestURI();
+        super.preHandle(request, res, o);
         String requestMethod = request.getMethod();
-        requestLogDO.setIp(requestIp);
-        requestLogDO.setCreateTime(startTime);
-        requestLogDO.setSuccess(true);
-        requestLogDO.setErrorCode(ResultRO.successCode);
-        requestLogDO.setErrorType(ErrorType.success);
-        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
-        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
-        requestLogDO.setRequestMethod(requestMethod);
-        requestLogDO.setUri(uri);
-//        requestLogDO = RequestLogDOUtil.saveAsync(requestLogDO);
-//        RequestLogDOUtil.saveAsync(requestLogDO);
-        RequestLogUtil.set(requestLogDO);
 
-//        log.info("[{}({})]", requestLogDO.getRequestMethod(), requestLogDO.getUri());
-//        log.info("[requestId:{},{}],[{}({})]",Thread.currentThread().getName(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri());
+        if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
+            return true;
+        }
+        RequestLogDO requestLogDO = RequestLogUtil.get();
+        UserDO user = SocialUserUtil.getMineUserInterceptor();
+        Integer userId = SocialUserUtil.getMineUserIdInterceptor();
 
-        String ipKey = "ipKey:" + requestIp;
+        requestLogDO.setUserId(userId);
+        RequestLogUtil.saveAsync(requestLogDO);
+        String userIp = requestLogDO.getIp();
+        String uri = requestLogDO.getUri();
+
+        String ipKey = "ipKey:" + userIp;
 
         Object keyCountObj = redisUtil.get(ipKey);
         //如果已经有了赋值

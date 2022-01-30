@@ -1,4 +1,7 @@
 socialuni:
+  app:
+    static-resource-url: "https://devcdxapp-1257733245.file.myqcloud.com"
+    system-user-id: 1
   provider:
     qq:
       qq-mp-id: ""
