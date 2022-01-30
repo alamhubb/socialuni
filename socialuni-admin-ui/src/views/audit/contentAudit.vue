@@ -110,7 +110,7 @@
           width="160"
       >
         <template #default="{row}">
-          <el-radio-group v-model="row.violateType">
+          <el-radio-group v-if="!userReports.length" v-model="row.violateType">
             <div v-for="reportType in reportTypes">
               <el-radio
                   :key="reportType"
@@ -119,6 +119,7 @@
               />
             </div>
           </el-radio-group>
+          <div v-else> {{row.violateType }}</div>
         </template>
       </el-table-column>
       <el-table-column label="违规关键词" width="150">
