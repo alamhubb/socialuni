@@ -34,4 +34,7 @@ public class SocialImgBaseDO extends CommonContentBaseDO implements Serializable
 
     private String content;
 
+    public SocialImgBaseDO() {
+        this.reportNum = 0;
+    }
 }
