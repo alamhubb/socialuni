@@ -170,13 +170,13 @@ export default class KeywordsDetailTable extends Vue {
   }
 
   addKeywords(keyword: keywordsVO) {
+    this.query(keyword)
     MessageBox.prompt('请输入新增原因', '提示', {
       confirmButtonText: '确定',
       cancelButtonText: '取消'
     }).then((messageBoxData: any) => {
       KeywordsManageAPI.addKeywordsAPI(keyword.text, messageBoxData.value || '').then(res => {
         Message.success({ message: '新增,新增原因：' + messageBoxData.value, duration: 500 })
-        this.query(keyword)
       })
     })
   }
