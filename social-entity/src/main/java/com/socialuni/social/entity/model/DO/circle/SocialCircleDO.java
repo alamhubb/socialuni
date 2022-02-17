@@ -13,11 +13,11 @@ import java.io.Serializable;
  * @author qinkaiyuan
  * @date 2019-11-07 15:20
  */
+//                @Index(columnList = "showFront"),
 @Entity
 @Table(name = "s_circle",
         indexes = {
                 @Index(columnList = "status"),
-                @Index(columnList = "showFront"),
                 @Index(columnList = "count"),
                 @Index(columnList = "visibleGender"),
         },
