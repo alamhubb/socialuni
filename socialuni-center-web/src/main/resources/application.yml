@@ -5,9 +5,9 @@ spring:
 #    active: local
 #    active: qkylocal
 #    active: qkypc
-    active: prod
+#    active: prod
 #    active: demo
-#    active: localprod
+    active: localprod
   jpa:
     database: MYSQL
     show-sql: false
