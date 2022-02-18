@@ -53,8 +53,6 @@
           <q-icon icon="mdi-chevron-right"></q-icon>
         </div>
       </div>
-
-
       <div>
         <swiper circular class="h90 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
           <swiper-item class="bd-radius">

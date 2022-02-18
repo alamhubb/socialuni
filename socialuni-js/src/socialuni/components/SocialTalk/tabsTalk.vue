@@ -4,14 +4,21 @@
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
     <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
             class="mg-sm bd-radius px-mn">
-      <template #default="{tab}">
-        <div class="h30 px-xs row-all-center">
+      <template #default="{tab,index}">
+        <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':current===index}">
+          {{ tab.name }}
+          <!--            费劲啊实力哈哈-->
+        </div>
+        <div v-else class="h30 px-xs row-all-center" :class="{'font-md':current===index}">
           {{ tab.name }}
           <!--            费劲啊实力哈哈-->
         </div>
       </template>
       <template #icon="{tab}">
-        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
+        <q-icon class="pr-xs" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
+<!--        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>-->
+
+<!--        <q-icon icon="map-fill" size="14"></q-icon>-->
       </template>
     </q-tabs>
     <!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
@@ -42,12 +49,20 @@
                 @scroll.native="talksScrollEvent"
                 @scroll="talksScrollEvent"
           >-->
+
+          <!--          首页展示区分不同类型，
+                    圈子类型、关注类型、首页类型、同城类型-->
+
           <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
             <div class="px-sm pb-60 bg-theme3"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+              <div>
+
+              </div>
+
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
                            :talk-tab-type="talkTabObj.type"
@@ -77,6 +92,7 @@
                     class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
                 <!--  #endif -->
               </view>
+
               <!-- 下拉刷新组件 -->
               <view class="mt-xs">
                 <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
@@ -179,7 +195,8 @@ export default class TabsTalkPage extends Vue {
     }
   }
 
-  @socialTalkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
+  // @socialTalkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
+  talkTabs: TalkTabVO [] = []
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
 
@@ -205,6 +222,7 @@ export default class TabsTalkPage extends Vue {
 
   // 生命周期
   created () {
+    this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
     // LocationUtil.getCityByIpWebAPI()
     // 更新广告状态
     // 更新广告刷新时间

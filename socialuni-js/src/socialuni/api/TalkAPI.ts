@@ -10,12 +10,28 @@ import CommentDeleteVO from '../model/comment/CommentDeleteVO'
 import TalkVO from '../model/talk/TalkVO'
 import DomFile from '../model/DomFile'
 import ImgAddQO from '../model/user/ImgAddQO'
+import TalkTabVO from '@/socialuni/model/talk/TalkTabVO'
+import TalkTabType from '@/socialuni/const/TalkTabType'
 
 export default class TalkAPI {
   static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
     const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, tagIds, visibleType, visibleGender)
     return request.post('talk/postTalk', data)
   }
+
+  static queryHomeTalkTabsAPI () {
+    const talkTabFollowDefault = new TalkTabVO(TalkTabType.follow_name, TalkTabType.follow_type)
+    const talkTabHomeDefault = new TalkTabVO(TalkTabType.home_name, TalkTabType.home_type)
+    const talkTabCityDefault = new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type)
+    const cdxDefault = new TalkTabVO('处对象', TalkTabType.circle_type)
+    const kuolieDefault = new TalkTabVO('扩列', TalkTabType.circle_type)
+    const wangzheDefault = new TalkTabVO('王者', TalkTabType.circle_type)
+    const friendsDefault = new TalkTabVO('交友', TalkTabType.circle_type)
+    return [
+      talkTabFollowDefault, talkTabHomeDefault, talkTabCityDefault, cdxDefault, kuolieDefault, wangzheDefault, friendsDefault
+    ]
+  }
+
 
   static queryTalksAPI (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date) {
     return request.post<TalkVO>('talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge, queryDate))

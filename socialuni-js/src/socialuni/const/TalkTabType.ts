@@ -8,4 +8,7 @@ export default class TalkTabType {
 
   static readonly city_name: string = '同城'
   static readonly city_type: string = 'city'
+
+  //圈子类型
+  static readonly circle_type: string = 'circle'
 }
