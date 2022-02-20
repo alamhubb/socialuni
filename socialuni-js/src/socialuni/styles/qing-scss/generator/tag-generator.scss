@@ -22,3 +22,14 @@
     //border: 1px solid mix($color-white, $color, 60%);
   }
 }
+
+.q-tag-white {
+  padding: $box-mn;
+  @extend .font-sm;
+  @extend .bd-radius;
+  @extend .mr-sm;
+  @extend .row-col-center;
+  color: $color-main;
+  background: $color-white;
+  border: $border-base;
+}

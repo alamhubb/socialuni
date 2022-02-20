@@ -16,7 +16,7 @@
       <div class="position-absolute" :style="[tabSlideStyle]">
         <div class="position-absolute"
              :style="{width:barWidth+'px',height:barHeight+'px'}"
-             :class="[isBar?'bg-white bd-radius':'bg-theme t28 bd-radius-20']">
+             :class="[isBar?'bg-white bd-radius':'bg-theme t27 bd-radius-20']">
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@ export default class QTabs extends Vue {
           this.barWidth = res[0].width
           this.barHeight = res[0].height
         } else {
-          this.barWidth = 25
+          this.barWidth = 20
           this.barHeight = 3
         }
         res.forEach(item => {

@@ -1,26 +1,46 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p bg-theme3 bt-radius-15">
+  <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
-    <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
-            class="mg-sm bd-radius px-mn">
-      <template #default="{tab,index}">
-        <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':current===index}">
-          {{ tab.name }}
-          <!--            费劲啊实力哈哈-->
-        </div>
-        <div v-else class="h30 px-xs row-all-center" :class="{'font-md':current===index}">
-          {{ tab.name }}
-          <!--            费劲啊实力哈哈-->
-        </div>
-      </template>
-      <template #icon="{tab}">
-        <q-icon class="pr-xs" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
-<!--        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>-->
+    <div class="flex-row px-sm mb-xss">
+      <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
+              class="bd-radius flex-1 mr-sm">
+        <template #default="{tab,index}">
+          <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':current===index}">
+            {{ tab.name }}
+          </div>
+          <div v-else class="h30 px-xs row-all-center" :class="{'font-md':current===index}">
+            {{ tab.name }}
+          </div>
+        </template>
+        <template #icon="{tab}">
+          <q-icon class="pr-xs" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
+          <!--        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>-->
 
-<!--        <q-icon icon="map-fill" size="14"></q-icon>-->
-      </template>
-    </q-tabs>
+          <!--        <q-icon icon="map-fill" size="14"></q-icon>-->
+        </template>
+      </q-tabs>
+      <div class="flex-none row-col-center">
+        <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
+      </div>
+    </div>
+    <!--    <div class="bg-white px-xs pb-xs mb-sm">
+          <div class="flex-row bg-theme3 bd-radius py-xs">
+            <div class="flex-1 row-center">最新回复</div>
+            <div class="flex-1 row-center">
+              全国
+              &lt;!&ndash;       全国 、北京&ndash;&gt;
+            </div>
+            <div class="flex-1 row-center">性别
+              &lt;!&ndash;      性别，男，女&ndash;&gt;
+            </div>
+            <div class="flex-1 row-center">年龄
+              &lt;!&ndash;      20岁-24岁&ndash;&gt;
+            </div>
+            &lt;!&ndash;      发布时间，最新回复时间，楼主回复时间&ndash;&gt;
+          </div>
+        </div>-->
+
     <!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
             <view v-if="talkTabObj.loadMore===loading">
               <u-loading mode="circle"></u-loading>
@@ -30,10 +50,6 @@
     <!--<view class="px-sm">
       <view class="w12"></view>
     </view>-->
-
-    <city-picker ref="cityPicker" v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
-
-    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
     <q-pull-refresh ref="pullRefresh" @refresh="queryEnd">
       <swiper :current="swiperCurrent"
@@ -59,9 +75,12 @@
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
             <div class="px-sm pb-60 bg-theme3"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
-              <div>
-
-              </div>
+              <!--              <div class="flex-row mb-sm">
+                              <div class="flex-row flex-1 overflow-auto">
+                                <div v-for="item in tags" class="flex-none q-tag-white color-main">{{ item.name }}</div>
+                              </div>
+                              &lt;!&ndash;                <div class="q-tag-white color-main flex-none">筛选</div>&ndash;&gt;
+                            </div>-->
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
@@ -116,6 +135,12 @@
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
 
     <!--        默认附近，可以切换城市，城市-->
+
+    <city-picker ref="cityPicker" v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
+
+    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+
+    <social-talk-filter-dialog ref="talkFilterDialog"></social-talk-filter-dialog>
   </view>
 </template>
 
@@ -138,7 +163,7 @@ import {
   socialConfigStore,
   socialLocationModule,
   socialLocationStore,
-  socialSystemModule,
+  socialSystemModule, socialTagStore,
   socialTalkModule,
   socialTalkStore,
   socialUserStore
@@ -151,12 +176,15 @@ import CityPicker from '../CityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
+import TagVO from '@/socialuni/model/community/tag/TagVO'
+import SocialTalkFilterDialog from '@/socialuni/components/SocialTalk/SocialTalkFilterDialog.vue'
 
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    SocialTalkFilterDialog,
     QPullRefresh,
     CityPicker,
     QIcon,
@@ -171,6 +199,7 @@ export default class TabsTalkPage extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
     citiPicker: CityPicker
+    talkFilterDialog: SocialTalkFilterDialog
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
 
@@ -256,7 +285,13 @@ export default class TabsTalkPage extends Vue {
 
 
   @socialUserStore.State('user') user: CenterUserDetailRO
+  @socialTagStore.State('tags') tags: TagVO[]
+
   // 页面是否为首次查询
+
+  get HotTags () {
+    return this.tags.slice(0, 10)
+  }
 
   @socialLocationStore.State('location') location: DistrictVO
   @Prop() readonly selectTagIds: number[]
@@ -267,6 +302,10 @@ export default class TabsTalkPage extends Vue {
     socialLocationModule.appLunchInitDistrict().then(() => {
       this.autoChooseUseLocationQueryTalks(true)
     })
+  }
+
+  openTalkFilterDialog(){
+    this.$refs.talkFilterDialog.open()
   }
 
   // scroll-view到底部加载更多

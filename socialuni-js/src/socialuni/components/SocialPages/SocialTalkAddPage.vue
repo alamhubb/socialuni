@@ -9,7 +9,7 @@
         <q-button class="mr text-bold" sm :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
       </div>
     </q-navbar>
-    <city-picker v-model="showSearch" :district="district" @confirm="cityChange"></city-picker>
+    <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
 
     <view v-if="showTagSearch">
       <talk-add-tag-search :tags="tags" :is-add="true" :select-tags="selectTags" @change="changeTag"
@@ -21,7 +21,7 @@
     <view v-if="showTagAdd">
       <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
     </view>
-    <view v-show="!showSearch&&!showTagSearch&&!showTagAdd">
+    <view v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
       <view class="px-smm py-sm">
         <textarea class="h140 w100p" :maxlength="200"
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
@@ -56,7 +56,7 @@
       </view>
 
       <view class="px-sm pt-sm mt-xs row-between">
-        <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
+        <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openCityDialog">
           <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
           <block v-if="district.adCode">
             {{ district.provinceName }}
@@ -228,7 +228,7 @@ export default class SocialTalkAddPage extends Vue {
   showImgFiles: DomFile [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
-  showSearch = false
+  showCityDialog = false
   showTagSearch = false
   showTagAdd = false
 
@@ -381,12 +381,12 @@ export default class SocialTalkAddPage extends Vue {
     this.showTagAdd = true
   }
 
-  openSearchVue () {
+  openCityDialog () {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
       socialLocationModule.getDistrictsAction()
     }
-    this.showSearch = true
+    this.showCityDialog = true
   }
 
   cityChange (district: DistrictVO) {
