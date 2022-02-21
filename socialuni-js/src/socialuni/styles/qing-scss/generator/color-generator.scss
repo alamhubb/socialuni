@@ -1,6 +1,6 @@
 @each $colorKey, $color in $colors-font {
   .color-#{''+$colorKey+''} {
-    color: $color!important;
+    color: $color;
   }
 }
 

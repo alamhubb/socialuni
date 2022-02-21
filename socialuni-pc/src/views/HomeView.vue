@@ -97,9 +97,7 @@ authenticationClick() {
 </script>
 
 <template>
-  <v-btn>123</v-btn>
-
-  <div class="row-center h50 w100p">
+  <div :style="[wi]">
     <div>haha</div>
   </div>
 
