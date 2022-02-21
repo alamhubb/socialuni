@@ -1,6 +1,6 @@
 <template>
-  <view v-if="value" class="q-popup-box">
-    <q-model @click="input(false)" v-if="modal">
+  <view v-if="dialogVisible" class="q-popup-box">
+    <q-model @click="close" v-if="modal">
       <!--        ios端不支持prevent需要用stop代替-->
     </q-model>
     <div class="h100p" :class="bottom?'col-end':'row-all-center'">
@@ -29,13 +29,18 @@ export default class QPopup extends Vue {
   @Prop({ default: false }) readonly bottom: boolean
   @Prop({ default: false }) readonly top: boolean
   @Prop({ default: true }) readonly modal: boolean
-  @Model('input') readonly value: boolean
 
-  @Emit()
-  input (value: boolean) {
-    return value
+  dialogVisible: boolean = false
+
+  open () {
+    this.dialogVisible = true
   }
 
+
+  @Emit()
+  close () {
+    this.dialogVisible = false
+  }
   //下的话宽度100，中的话宽度90
   //下的话col-end 中的话 row-all-center
 }

@@ -2,7 +2,6 @@ import { VuexModule, Module, Action } from 'vuex-class-modules'
 import DistrictVO from '../model/DistrictVO'
 import LocationUtil from '../utils/LocationUtil'
 import DistrictAPI from '../api/DistrictAPI'
-import SocialAppModule from './SocialAppModule'
 
 @Module({ generateMutationSetters: true })
 export default class SocialLocationModule extends VuexModule {
@@ -12,6 +11,7 @@ export default class SocialLocationModule extends VuexModule {
   openLocation: boolean = LocationUtil.getOpenLocation()
   location: DistrictVO = LocationUtil.getLocation()
   districts: DistrictVO [] = []
+
   @Action
   async appLunchInitDistrict () {
     //首次打开无论如何获取用户地理位置

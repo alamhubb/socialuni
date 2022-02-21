@@ -155,7 +155,7 @@ import {
 import PlatformUtils from '../../utils/PlatformUtils'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import CityPicker from '../CityPicker.vue'
+import CityPicker from '../QCityPicker/QCityPicker.vue'
 import TalkAddTagSearch from '../SocialTagAdd/TalkAddTagSearch.vue'
 import AlertUtil from '../../utils/AlertUtil'
 import LocationUtil from '../../utils/LocationUtil'

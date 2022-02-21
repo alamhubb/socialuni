@@ -6,7 +6,6 @@ import AppAuthUtil from './AppAuthUtil'
 import { QQMapResult } from '@/socialuni/model/location/QQMapResult'
 
 const chinaAdCode = '100000'
-const initAdCode = '100001'
 
 const chinaDistrict = new DistrictVO()
 chinaDistrict.id = 1
@@ -14,21 +13,16 @@ chinaDistrict.adName = '中国'
 chinaDistrict.provinceName = '中国'
 chinaDistrict.adCode = chinaAdCode
 
-const initDistrict = new DistrictVO()
 //只在第一次进入系统查询时，设置初始值使用，查询之后就会把默认值替换了
-initDistrict.adCode = initAdCode
 
 export default class LocationUtil {
   static readonly chinaAdCode = chinaAdCode
-
-  static readonly initAdCode = initAdCode
 
   static readonly nationwide = '全国'
 
   static readonly locationKey = 'location'
   static readonly openLocationKey = 'openLocation'
 
-  static readonly initDistrict: DistrictVO = initDistrict
   static readonly chinaDistrict: DistrictVO = chinaDistrict
 
   static openLocation () {
@@ -40,7 +34,7 @@ export default class LocationUtil {
   }
 
   static getLocation (): DistrictVO {
-    return StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.initDistrict
+    return StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
   }
 
   static setLocation (district: DistrictVO) {
