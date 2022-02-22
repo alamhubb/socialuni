@@ -10,7 +10,7 @@ export default class TalkQueryVO {
   public gender: string
   public minAge: number
   public maxAge: number
-  public queryDate: Date
+  public queryTime: Date
 
   constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date) {
     this.talkIds = talkIds
@@ -25,6 +25,6 @@ export default class TalkQueryVO {
     this.gender = gender
     this.minAge = minAge
     this.maxAge = maxAge
-    this.queryDate = queryDate
+    this.queryTime = queryDate
   }
 }

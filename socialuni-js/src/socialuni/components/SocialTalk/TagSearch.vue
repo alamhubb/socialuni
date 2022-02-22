@@ -29,7 +29,7 @@
       </view>
     </view>
     <view v-else class="flex-col flex-1 overflow-hidden">
-      <div class="box solid-bottom">
+      <div class="q-box solid-bottom">
         <div class="flex-row">
           <text class="cuIcon-title text-green"></text>
           <text class="text-md font-bold">历史话题</text>

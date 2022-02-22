@@ -4,7 +4,7 @@ import ReportAPI from '../api/ReportAPI'
 import QingchiAPI from '../api/QingchiAPI'
 import {
   socialAppModule,
-  socialChatModule,
+  socialChatModule, socialCircleModule,
   socialConfigModule,
   socialLocationModule,
   socialNotifyModule,
@@ -28,6 +28,7 @@ export default class SocialAppModule extends VuexModule {
     PlatformUtils.checkUpdate()
     // WebsocketUtil.websocketConnect(false)
     socialTagModule.getHotTagsAction()
+    socialCircleModule.getHotCirclesAction()
     socialTagModule.getHotTagTypesAction()
     // socialCircleModule.getCircleTypesAction()
     socialLocationModule.getHotDistrictsAction()

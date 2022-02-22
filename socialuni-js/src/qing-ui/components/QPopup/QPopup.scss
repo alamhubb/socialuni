@@ -13,10 +13,6 @@
 //model index 以100开始
 //因为h5端navbar和tabbar为998
 .q-popup {
-  @extend .bg-white;
-  @extend .w90vw;
-  @extend .position-absolute;
-  @extend .popup-index;
   transition: all 0.3s linear;
   box-shadow: 0 8px 10px -5px rgb(0 0 0 / 20%), 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%);
 }

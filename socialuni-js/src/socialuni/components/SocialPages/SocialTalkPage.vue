@@ -33,6 +33,24 @@
         </view>
       </q-navbar>
 
+      <!--      <div class="flex-row">
+        <div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-sm bd-radius bg-click"
+             :class="'chunk-'+item">
+          哈哈
+        </div>
+      </div>
+      <div class="flex-row">
+        <div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-sm bd-radius bg-click"
+             :class="'chunk-'+item+'_light'">
+          哈哈
+        </div>
+      </div>
+      <div class="flex-row">
+        <div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-sm bd-radius bg-click"
+             :class="'chunk-'+item+'_plain'">
+          哈哈
+        </div>
+      </div>-->
       <!--  #ifdef APP-PLUS -->
       <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
       <!--  #endif -->

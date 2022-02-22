@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-smm py-sm font-14" style="line-height: 1" :class="buttonClass"
+    class="px-smm py-xs font-14 q-box-sm" :class="buttonClass"
     @click.stop="clickHandler"
     :disabled="disabled"
     :loading="loading"
@@ -200,7 +200,7 @@ export default class QButton extends Vue {
       this.dark ? 'dark' : this.light ? 'light' : this.plain ? 'plain' : this.colorType || 'dark',
       //大小
       this.df ? 'df' : this.md ? 'md' : this.sm ? 'sm' : this.xs ? 'xs' : this.size || 'df',
-      this.disabled ? 'disabled' : ''
+      this.disabled ? 'disabled' : 'bg-click'
     ]
   }
 

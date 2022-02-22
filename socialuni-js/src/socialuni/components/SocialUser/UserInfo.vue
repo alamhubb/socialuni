@@ -38,13 +38,13 @@
                 {{ userProp.nickname }}
               </view>
               <view class="flex-row">
-                <div v-if="userProp.gender==='girl'" class="box-nn q-tag-error mt-xs">
+                <div v-if="userProp.gender==='girl'" class="q-box-nn q-tag-error mt-xs">
                   {{ userProp.age }}
                   <q-icon class="ml-nn"
                           size="12"
                           :icon="getGenderIcon(userProp)"/>
                 </div>
-                <div v-else class="box-nn q-tag-blue mt-xs">
+                <div v-else class="q-box-nn q-tag-blue mt-xs">
                   {{ userProp.age }}
                   <q-icon class="ml-nn"
                           size="12"

@@ -231,7 +231,7 @@ export default class TabsTalkPage extends Vue {
 
   @socialConfigStore.Getter('talkCacheNum') readonly talkCacheNum: number
 
-  queryDate = new Date()
+  queryTime = new Date()
 
   // 供父组件调用，每次隐藏把数据缓存进storage
   tabsTalkOnHide () {
@@ -256,7 +256,7 @@ export default class TabsTalkPage extends Vue {
     // 更新广告状态
     // 更新广告刷新时间
     this.updateShowAd()
-    this.queryDate = new Date()
+    this.queryTime = new Date()
     // 根据本地存储获取之前的 homeName
     // 有了位置才进行查询,因为查询同城需要位置信息
     // 获取位置，查询同城talks使用
@@ -348,7 +348,7 @@ export default class TabsTalkPage extends Vue {
     CommonUtil.delayTime(0).then(() => {
       this.talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryDate).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
@@ -391,7 +391,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   refreshQueryDate () {
-    this.queryDate = new Date()
+    this.queryTime = new Date()
   }
 
   // 展示的talks

@@ -6,7 +6,10 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 /**
@@ -18,6 +21,7 @@ import java.io.Serializable;
 @Table(name = "s_circle",
         indexes = {
                 @Index(columnList = "status"),
+                @Index(columnList = "showFront"),
                 @Index(columnList = "count"),
                 @Index(columnList = "visibleGender"),
         },

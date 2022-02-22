@@ -11,13 +11,13 @@
           <text class="text-md">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
-            <div v-if="talk.user.gender==='girl'" class="box-nn q-tag-error ml-sm">
+            <div v-if="talk.user.gender==='girl'" class="q-box-nn q-tag-error ml-sm">
               {{ talk.user.age }}
               <q-icon class="ml-nn"
                       size="12"
                       :icon="getGenderIcon(talk.user)"/>
             </div>
-            <div v-else class="box-nn q-tag-blue ml-sm">
+            <div v-else class="q-box-nn q-tag-blue ml-sm">
               {{ talk.user.age }}
               <q-icon class="ml-nn"
                       size="12"
@@ -80,7 +80,7 @@
                 @click.stop="addFollow">
           关注
         </button>
-        <view v-else class="box-xs" @click.stop="addFollow">已关注</view>
+        <view v-else class="q-box-xs" @click.stop="addFollow">已关注</view>
       </view>
     </view>
   </view>

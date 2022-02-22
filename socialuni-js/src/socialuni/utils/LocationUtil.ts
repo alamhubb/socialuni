@@ -23,6 +23,9 @@ export default class LocationUtil {
   static readonly locationKey = 'location'
   static readonly openLocationKey = 'openLocation'
 
+  static readonly filterLocationKey = 'filterLocation'
+
+
   static readonly chinaDistrict: DistrictVO = chinaDistrict
 
   static openLocation () {
@@ -41,6 +44,13 @@ export default class LocationUtil {
     StorageUtil.setObj(LocationUtil.locationKey, district)
   }
 
+  static setFilterLocation (district: DistrictVO) {
+    StorageUtil.setObj(LocationUtil.filterLocationKey, district)
+  }
+
+  static getFilterLocation (): DistrictVO {
+    return StorageUtil.getObj(LocationUtil.filterLocationKey) || LocationUtil.chinaDistrict
+  }
 
   //查询地理位置的功能，
   //首先获取，用户是否授权了，获取地理位置的权限，如果用户授权了，则使用sdk，获取用户地理位置，更新经纬度，

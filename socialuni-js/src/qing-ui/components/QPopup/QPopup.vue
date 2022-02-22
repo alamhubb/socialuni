@@ -1,27 +1,42 @@
 <template>
-  <view v-if="dialogVisible" class="q-popup-box">
+  <div v-if="dialogVisible"
+        class="position-fixed overflow-hidden index-999 h100vh w100vw top-0 bottom-0 left-0 right-0">
     <q-model @click="close" v-if="modal">
       <!--        ios端不支持prevent需要用stop代替-->
     </q-model>
     <div class="h100p" :class="bottom?'col-end':'row-all-center'">
-      <view class="q-popup" :class="bottom?'w100vw bt-radius-20':'bd-radius-20'"
-            @touchmove.stop.prevent
-            @click.stop
+      <div class="q-popup bg-white position-absolute index-1005 flex-col"
+           :class="bottom?'w100vw bt-radius-20':'w90vw bd-radius-20'"
+           @touchmove.stop.prevent
+           @click.stop
       >
+        <div class="row-between-center box-df bb-1">
+          <div class="flex-row">
+            <slot name="left"></slot>
+          </div>
+          <div class="flex-row">
+            <q-button class="mr" @click="close">关闭</q-button>
+            <q-button @confirm="close">确定</q-button>
+          </div>
+        </div>
         <slot></slot>
-      </view>
+      </div>
     </div>
-  </view>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 import QModel from '@/qing-ui/components/QModel/QModel.vue'
+import QButton from '@/qing-ui/components/QButton/QButton.vue'
 
 /*
 显示出来已经选了的城市，给她画上钩
 * */
 @Component({
-  components: { QModel }
+  components: {
+    QButton,
+    QModel
+  }
 })
 export default class QPopup extends Vue {
   //如果是头顶或者底部则不为width100
@@ -41,6 +56,12 @@ export default class QPopup extends Vue {
   close () {
     this.dialogVisible = false
   }
+
+  @Emit()
+  confirm () {
+    this.close()
+  }
+
   //下的话宽度100，中的话宽度90
   //下的话col-end 中的话 row-all-center
 }

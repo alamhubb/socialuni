@@ -23,8 +23,36 @@
         <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
       </div>
 
-      <div>圈子</div>
-      <div>地区</div>
+      <div>
+        <div class="row-between-center">
+          <div>话题</div>
+          <div class="row-col-center">
+            <div>更多 <q-icon icon="mdi-chevron-right"></q-icon></div>
+          </div>
+        </div>
+        <div class="row-wrap">
+          <div class="flex-none q-tag-white">
+            全部
+          </div>
+          <div v-for="item in circles" class="flex-none q-tag-white">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row-between-center">
+          <div>话题</div>
+          <div class="flex-row">
+            <div>清空</div>
+            <div>更多 <q-icon icon="mdi-chevron-right"></q-icon></div>
+          </div>
+        </div>
+        <div class="row-wrap">
+          <div v-for="item in tags" class="flex-none q-tag-white">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
 
 
     </div>
@@ -38,13 +66,14 @@ import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 import QSlider from '@/qing-ui/components/QSlider/QSlider.vue'
-import { socialLocationModule, socialTagStore, socialTalkModule } from '@/socialuni/store'
+import { socialCircleStore, socialLocationModule, socialTagStore, socialTalkModule } from '@/socialuni/store'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TalkFilterUtil from '@/socialuni/utils/TalkFilterUtil'
 import CityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
 import DistrictVO from '@/socialuni/model/DistrictVO'
+import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 
 
 @Component({
@@ -64,6 +93,8 @@ export default class SocialTalkFilterDialog extends Vue {
 
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   @socialTagStore.State('tags') readonly tags: TagVO []
+  @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO []
+  @socialCircleStore.State('circles') readonly circles: SocialCircleRO []
   rangeValue: number[] = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   showCircleSearch = false
   circleSearchText = ''

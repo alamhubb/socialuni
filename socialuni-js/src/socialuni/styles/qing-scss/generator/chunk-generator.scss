@@ -1,4 +1,4 @@
-.chunk {
+.chunk{
   background: $color-white;
   border: $border-base;
   color: $color-main;
@@ -9,17 +9,23 @@
     //深色主题，字体白色，其他主题色
     color: $color-white;
     background-color: $color;
-  }
-  .chunk-#{''+$key+''}-plain {
-    //深色主题，字体白色，其他主题色
-    background-color: $color;
     border: $border-base;
     border-color: $color;
   }
-  .chunk-#{''+$key+''}-light {
+  .chunk-#{''+$key+''}_plain {
+    //朴素主题，字体白色，其他主题色
+    color: $color;
+    background-color: $color-white;
+    border: $border-base;
+    border-color: $color;
+  }
+  .chunk-#{''+$key+''}_light {
     //深色主题，字体白色，其他主题色
-    background-color: $color;
-    background: mix($color-white, $color, 90%);
+    color: $color;
+    background-color: mix($color-white, $color, 90%);
+    border: $border-base;
+    border-color: mix($color-white, $color, 60%);
   }
 }
+
 
