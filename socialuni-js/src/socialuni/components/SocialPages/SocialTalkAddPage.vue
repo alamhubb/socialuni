@@ -192,8 +192,6 @@ export default class SocialTalkAddPage extends Vue {
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
 
-  showCircleSearch = false
-
   circleSearchText = ''
 
   showVisibleTypeSelect = false

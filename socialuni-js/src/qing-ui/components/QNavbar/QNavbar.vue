@@ -4,7 +4,7 @@
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
-      <view class="row-col-center px-smm" :style="[navbarInnerStyle]">
+      <view class="row-col-center px-sm" :style="[navbarInnerStyle]">
         <q-icon v-if="showBack" icon="arrow-left" class="color-content mr" @click="goBack"></q-icon>
         <q-icon v-if="showHome" icon="home" class="color-content mr" @click="goHome"></q-icon>
         <slot></slot>

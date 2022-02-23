@@ -10,6 +10,7 @@ import TalkTabVO from '../model/talk/TalkTabVO'
 import TalkVueUtil from '../utils/TalkVueUtil'
 import TalkFilterUtil from '../utils/TalkFilterUtil'
 import SocialAppModule from './SocialAppModule'
+import TalkTabType from '@/socialuni/const/TalkTabType'
 
 
 @Module({ generateMutationSetters: true })
@@ -18,8 +19,8 @@ export default class SocialTalkModule extends VuexModule {
   userMinAge: number = TalkFilterUtil.getMinAgeFilter()
   userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
   userGender: string = TalkFilterUtil.getGenderFilter()
-
   talkTabs: TalkTabVO [] = TalkVueUtil.getTalkTabs()
+  circle: string = null
 
   // state
   currentContent: null
@@ -83,7 +84,10 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  setComment ({ talk, comment }) {
+  setComment ({
+    talk,
+    comment
+  }) {
     if (socialUserModule.user) {
       this.talk = talk
       this.comment = comment
@@ -96,7 +100,11 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  setReplyComment ({ talk, comment, replyComment }) {
+  setReplyComment ({
+    talk,
+    comment,
+    replyComment
+  }) {
     if (socialUserModule.user) {
       this.talk = talk
       this.comment = comment
@@ -130,5 +138,20 @@ export default class SocialTalkModule extends VuexModule {
     this.userMinAge = minAge
     this.userMaxAge = maxAge
     TalkFilterUtil.setFilterData(genderFilter, minAge, maxAge)
+  }
+
+  @Action
+  getTalkTabs () {
+    this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
+    const currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
+    const curTab = this.talkTabs.find((item, index) => index === currentTabIndex)
+    this.setCircle(curTab)
+  }
+
+  setCircle (curTab: TalkTabVO) {
+    if (curTab.type === TalkTabType.circle_type) {
+      this.circle = curTab.name
+      console.log(this.circle)
+    }
   }
 }

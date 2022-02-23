@@ -136,7 +136,7 @@
 
     <!--        默认附近，可以切换城市，城市-->
 
-    <city-picker ref="cityPicker" v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
+    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
@@ -178,15 +178,16 @@ import PageUtil from '../../utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import SocialTalkFilterDialog from '@/socialuni/components/SocialTalk/SocialTalkFilterDialog.vue'
+import QCityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
 
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QCityPicker,
     SocialTalkFilterDialog,
     QPullRefresh,
-    CityPicker,
     QIcon,
     QTabs,
     QTab,
@@ -198,8 +199,8 @@ import SocialTalkFilterDialog from '@/socialuni/components/SocialTalk/SocialTalk
 export default class TabsTalkPage extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
-    citiPicker: CityPicker
     talkFilterDialog: SocialTalkFilterDialog
+    cityPicker: QCityPicker
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
 
@@ -224,14 +225,33 @@ export default class TabsTalkPage extends Vue {
     }
   }
 
-  // @socialTalkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
-  talkTabs: TalkTabVO [] = []
+  @socialTalkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
+  // talkTabs: TalkTabVO [] = []
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
 
   @socialConfigStore.Getter('talkCacheNum') readonly talkCacheNum: number
 
   queryTime = new Date()
+
+
+  // 生命周期
+  created () {
+    // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
+    // LocationUtil.getCityByIpWebAPI()
+    // 更新广告状态
+    // 更新广告刷新时间
+    this.updateShowAd()
+    this.queryTime = new Date()
+    // 根据本地存储获取之前的 homeName
+    // 有了位置才进行查询,因为查询同城需要位置信息
+    // 获取位置，查询同城talks使用
+  }
+
+  mounted () {
+    // 获取元素高度，用来计算scroll-view高度
+    this.getTabBarTop()
+  }
 
   // 供父组件调用，每次隐藏把数据缓存进storage
   tabsTalkOnHide () {
@@ -249,23 +269,6 @@ export default class TabsTalkPage extends Vue {
     TalkVueUtil.setTalkTabsAll(storeTalkTabs, this.current, this.talkTabObj.type)
   }
 
-  // 生命周期
-  created () {
-    this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
-    // LocationUtil.getCityByIpWebAPI()
-    // 更新广告状态
-    // 更新广告刷新时间
-    this.updateShowAd()
-    this.queryTime = new Date()
-    // 根据本地存储获取之前的 homeName
-    // 有了位置才进行查询,因为查询同城需要位置信息
-    // 获取位置，查询同城talks使用
-  }
-
-  mounted () {
-    // 获取元素高度，用来计算scroll-view高度
-    this.getTabBarTop()
-  }
 
   tabsHeight = 0
   // 去除的高度,单位px
@@ -304,7 +307,7 @@ export default class TabsTalkPage extends Vue {
     })
   }
 
-  openTalkFilterDialog(){
+  openTalkFilterDialog () {
     this.$refs.talkFilterDialog.open()
   }
 
@@ -453,17 +456,16 @@ export default class TabsTalkPage extends Vue {
         item.loadMore = LoadMoreType.more
       }
     })
+    const curTab = this.talkTabs[current]
+    socialTalkModule.setCircle(curTab)
     //如果首次加载，则需要查询
-    if (this.talkTabs[current].firstLoad) {
+    if (curTab.firstLoad) {
       this.autoChooseUseLocationQueryTalks(true)
     }
   }
 
-  // 城市选择
-  showCityPopup = false
-
   openCityPicker () {
-    this.showCityPopup = true
+    this.$refs.cityPicker.open()
   }
 
   cityChange (district: DistrictVO) {

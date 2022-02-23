@@ -5,6 +5,7 @@ import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 
 @Module({ generateMutationSetters: true })
 export default class SocialCircleModule extends VuexModule {
+  circle: string = null
   circles: SocialCircleRO[] = []
   circleTypes: CircleTypeRO[] = []
 

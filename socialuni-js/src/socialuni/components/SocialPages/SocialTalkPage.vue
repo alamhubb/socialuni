@@ -7,7 +7,7 @@
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view v-show="!showTagSearch" class="flex-col h100vh">
       <q-navbar class="flex-none">
-        <q-search class="flex-1 mx-sm" @click.native="openTagSearchVue">
+        <q-search class="flex-1 mr-sm" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTag" class="flex-row flex-auto">
             <view class="cu-tag round bg-green-plain light row-all-center">
@@ -28,7 +28,7 @@
           <u-badge :count="unreadNotifiesNum" size="mini"
                    :offset="[0, 0]" @click="toNotifyVue"></u-badge>
         </view>
-        <view class="mr-sm">
+        <view>
           <q-icon icon="plus-circle" size="28" @click="toTalkAdd"></q-icon>
         </view>
       </q-navbar>
