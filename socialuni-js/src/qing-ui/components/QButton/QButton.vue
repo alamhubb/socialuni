@@ -1,6 +1,6 @@
 <template>
   <button
-    class="px-smm py-xs font-14 q-box-sm" :class="buttonClass"
+    class="font-df" :class="buttonClass"
     @click.stop="clickHandler"
     :disabled="disabled"
     :loading="loading"
@@ -36,6 +36,10 @@ import ComUtil from '../../../socialuni/components/utils/ComUtil'
 export default class QButton extends Vue {
   //颜色
   @Prop() color: string
+  @Prop({
+    default: false,
+    type: Boolean
+  }) text: boolean
   @Prop({
     default: false,
     type: Boolean
@@ -191,17 +195,32 @@ export default class QButton extends Vue {
     type: String
   }) showMessageCard: string
 
+  get curTheme () {
+    if (this.theme) return 'theme'
+    if (this.primary) return 'primary'
+    if (this.error) return 'error'
+    if (this.warn) return 'warn'
+    if (this.success) return 'success'
+    if (this.info) return 'info'
+    return ''
+  }
+
+  get curSize () {
+    if (this.xs) return 'xs'
+    if (this.sm) return 'sm'
+    if (this.df) return 'df'
+    if (this.md) return 'md'
+    return 'sm'
+  }
 
   get buttonClass () {
-    return [
-      //颜色
-      'bg-' + (this.theme ? 'theme' : this.primary ? 'primary' : this.error ? 'error' : this.warn ? 'warn' : this.success ? 'success' : this.info ? 'info' : this.color || 'white'),
-      //类型
-      this.dark ? 'dark' : this.light ? 'light' : this.plain ? 'plain' : this.colorType || 'dark',
-      //大小
-      this.df ? 'df' : this.md ? 'md' : this.sm ? 'sm' : this.xs ? 'xs' : this.size || 'df',
-      this.disabled ? 'disabled' : 'bg-click'
-    ]
+    let buttonClass = `${this.disabled ? 'bg-disabled' : 'bg-click'} `
+    if (this.text) {
+      buttonClass += `bd-none bg-white color-${this.curTheme}`
+    } else {
+      buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize}`
+    }
+    return buttonClass
   }
 
   clickHandler = ComUtil.throttle(this.click, 1000)
@@ -238,3 +257,60 @@ export default class QButton extends Vue {
   }
 }
 </script>
+<!--
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-df bd-radius bg-click"
+     :class="'chunk-'+item">
+  哈哈
+</div>
+</div>
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-df bd-radius bg-click"
+     :class="'chunk-'+item+'_light'">
+  哈哈
+</div>
+</div>
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-df bd-radius bg-click"
+     :class="'chunk-'+item+'_plain'">
+  哈哈
+</div>
+</div>
+
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-sm bd-radius bg-click"
+     :class="'chunk-'+item">
+  哈哈
+</div>
+</div>
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-sm bd-radius bg-click"
+     :class="'chunk-'+item+'_light'">
+  哈哈
+</div>
+</div>
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-sm bd-radius bg-click"
+     :class="'chunk-'+item+'_plain'">
+  哈哈
+</div>
+</div>
+
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-mn bd-radius bg-click"
+     :class="'chunk-'+item">
+  哈哈
+</div>
+</div>
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-mn bd-radius bg-click"
+     :class="'chunk-'+item+'_light'">
+  哈哈
+</div>
+</div>
+<div class="flex-row">
+<div v-for="item in ['primary','warn','success','error']" class="mg-sm q-box-mn bd-radius bg-click"
+     :class="'chunk-'+item+'_plain'">
+  哈哈
+</div>
+</div>-->

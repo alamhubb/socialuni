@@ -10,13 +10,13 @@
            @touchmove.stop.prevent
            @click.stop
       >
-        <div class="row-between-center box-df bb-1">
+        <div class="row-between-center bb-1 py-smm pd-xs">
           <div class="flex-row">
             <slot name="left"></slot>
           </div>
           <div class="flex-row">
-            <q-button class="mr" @click="close">关闭</q-button>
-            <q-button @confirm="close">确定</q-button>
+            <q-button class="mr-sm" @click="close" text info>关闭</q-button>
+            <q-button @confirm="close" theme text>确定</q-button>
           </div>
         </div>
         <slot></slot>

@@ -1,4 +1,4 @@
-.chunk{
+.chunk {
   background: $color-white;
   border: $border-base;
   color: $color-main;
@@ -22,9 +22,9 @@
   .chunk-#{''+$key+''}_light {
     //深色主题，字体白色，其他主题色
     color: $color;
-    background-color: mix($color-white, $color, 90%);
+    background-color: mix($color, $color-white, 10%);
     border: $border-base;
-    border-color: mix($color-white, $color, 60%);
+    border-color: mix($color, $color-white, 20%);
   }
 }
 

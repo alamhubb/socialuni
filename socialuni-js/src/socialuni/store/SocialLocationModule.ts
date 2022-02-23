@@ -17,20 +17,21 @@ export default class SocialLocationModule extends VuexModule {
     //首次打开无论如何获取用户地理位置
     const district: DistrictVO = await LocationUtil.getLocationNotAuth()
     if (district) {
-      this.location.lat = district.lat
-      this.location.lat = district.lat
-    }
-    //初始第一次查询才赋值，设置用户默认的位置信息
-    if (this.location.adCode === LocationUtil.initAdCode) {
-      this.setLocation(district)
-    } else {
       //只有未开启定位时，才使用后台返回的经纬度
       //为什么需要后台返回的定位信息？
       //只要获取了，就更新用户的地理位置
+      this.location.lon = district.lon
+      this.location.lat = district.lat
       if (district && district.lon && district.lat) {
         this.updateLocationLonAndLat(district.lon, district.lat)
       }
     }
+
+    /* //初始第一次查询才赋值，设置用户默认的位置信息
+     if (this.location.adCode === LocationUtil.initAdCode) {
+       this.setLocation(district)
+     } else {
+     }*/
   }
 
   @Action
