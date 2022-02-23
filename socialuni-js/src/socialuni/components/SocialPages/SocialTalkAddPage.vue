@@ -6,7 +6,7 @@
         <view class="ml-xl font-bold text-md flex-1">
           发布动态
         </view>
-        <q-button class="mr text-bold" sm :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
+        <q-button class="mr text-bold" theme :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
       </div>
     </q-navbar>
     <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>

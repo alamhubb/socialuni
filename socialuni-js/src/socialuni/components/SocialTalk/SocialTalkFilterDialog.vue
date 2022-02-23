@@ -1,5 +1,5 @@
 <template>
-  <q-popup ref="filterDialog" bottom :modal="false">
+  <q-popup ref="filterDialog" bottom hide-modal>
     <div class="h87vh py-sm px-sm">
       <div class="row-col-center mb-sm">
         <div class="mr-sm">性别:</div>

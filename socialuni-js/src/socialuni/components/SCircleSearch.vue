@@ -1,10 +1,9 @@
 <template>
-  <q-popup v-model="showCircleSearch" bottom :modal="false">
+  <q-popup ref="circleChooseDialog" v-model="showCircleSearch" bottom hide-modal hide-confirm>
+    <template #headerLeft>
+      <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
+    </template>
     <div class="h90vh py-sm">
-      <div class="px mb-sm row-col-center">
-        <q-input class="flex-1" v-model="circleSearchText"></q-input>
-        <div @click="closeDialog" class="flex-none ml-smm">取消</div>
-      </div>
       <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
@@ -55,13 +54,17 @@ import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
   }
 })
 export default class SCircleSearch extends Vue {
+  $refs: {
+    circleChooseDialog: QPopup
+  }
+
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
 
   showCircleSearch = false
   circleSearchText = ''
 
   openDialog () {
-    this.showCircleSearch = true
+    this.$refs.circleChooseDialog.open()
   }
 
   closeDialog () {

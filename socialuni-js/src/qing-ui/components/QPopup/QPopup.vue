@@ -11,12 +11,12 @@
            @click.stop
       >
         <div class="row-between-center bb-1 py-smm pd-xs">
-          <div class="flex-row">
-            <slot name="left"></slot>
+          <div class="flex-row flex-1">
+            <slot name="headerLeft"></slot>
           </div>
-          <div class="flex-row">
-            <q-button class="mr-sm" @click="close" text info>关闭</q-button>
-            <q-button @confirm="close" theme text>确定</q-button>
+          <div class="flex-row flex-none">
+            <q-button v-if="!hideCancel" @click="close" text info>{{cancelText}}</q-button>
+            <q-button v-if="!hideConfirm" @confirm="close" theme text>{{confirmText}}</q-button>
           </div>
         </div>
         <slot></slot>
@@ -44,6 +44,11 @@ export default class QPopup extends Vue {
   @Prop({ default: false }) readonly bottom: boolean
   @Prop({ default: false }) readonly top: boolean
   @Prop({ default: true }) readonly modal: boolean
+  @Prop({ default: false }) readonly hideModal: boolean
+  @Prop({ default: false }) readonly hideConfirm: boolean
+  @Prop({ default: false }) readonly hideCancel: boolean
+  @Prop({ default: '关 闭' }) readonly cancelText: boolean
+  @Prop({ default: '确 定' }) readonly confirmText: boolean
 
   dialogVisible: boolean = false
 
