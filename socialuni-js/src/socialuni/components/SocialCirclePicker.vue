@@ -3,8 +3,8 @@
     <template #headerLeft>
       <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
     </template>
-    <div class="h90vh py-sm">
-      <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
+    <div class="h90vh">
+      <q-sidebar :dataList="circleTypes" class="flex-1 flex-row overflow-hidden">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
             <view class="row-all-center flex-auto">
@@ -19,16 +19,14 @@
               <text class="font-bold font-md">{{ item.name }}</text>
             </view>
 
-            <view v-if="item.tags">
-              <div class="row-wrap overflow-hidden">
-                <div v-for="(circle,index) in item.tags"
-                     class="col-all-center ml-sm overflow-hidden mb-sm" @click="change(circle)">
-                  <img class="bd-round size50" :src="circle.avatar"/>
-                  <div class="font-cut">{{ circle.name }}</div>
-                  <div class="font-cut">{{ circle.talkCount }}</div>
-                </div>
+            <div v-if="item.circles" class="row-wrap overflow-hidden">
+              <div v-for="(circle,index) in item.circles"
+                   class="col-all-center ml-sm overflow-hidden mb-sm" @click="change(circle)">
+                <img class="bd-round size50" :src="circle.avatar"/>
+                <div class="font-cut">{{ circle.name }}</div>
+                <div class="font-cut">{{ circle.talkCount }}</div>
               </div>
-            </view>
+            </div>
           </view>
         </template>
       </q-sidebar>
@@ -41,9 +39,10 @@ import { Component, Emit, Vue } from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import { socialTagStore } from '@/socialuni/store'
+import { socialCircleStore, socialTagStore } from '@/socialuni/store'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
+import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 
 
 @Component({
@@ -53,12 +52,12 @@ import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
     QPopup
   }
 })
-export default class SCircleSearch extends Vue {
+export default class SocialCirclePicker extends Vue {
   $refs: {
     circleChooseDialog: QPopup
   }
 
-  @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
+  @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO[]
 
   showCircleSearch = false
   circleSearchText = ''
@@ -68,11 +67,12 @@ export default class SCircleSearch extends Vue {
   }
 
   closeDialog () {
-    this.showCircleSearch = false
+    this.$refs.circleChooseDialog.close()
   }
 
   @Emit()
   change (circle: SocialCircleRO) {
+    this.closeDialog()
     return circle
   }
 }

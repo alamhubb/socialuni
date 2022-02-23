@@ -4,10 +4,9 @@
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
-      <view class="row-col-center" :style="[navbarInnerStyle]">
-        <view v-if="showBack" class="col-center bg-click color-default flex-none pl-sm" @click="goBack">
-          <q-icon icon="arrow-left"></q-icon>
-        </view>
+      <view class="row-col-center px-smm" :style="[navbarInnerStyle]">
+        <q-icon v-if="showBack" icon="arrow-left" class="color-content mr" @click="goBack"></q-icon>
+        <q-icon v-if="showHome" icon="home" class="color-content mr" @click="goHome"></q-icon>
         <slot></slot>
       </view>
     </view>
@@ -24,6 +23,7 @@ import { socialSystemStore } from '../../../socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes
+import PageUtil from '@/socialuni/utils/PageUtil'
 
 
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
@@ -42,6 +42,10 @@ export default class QNavBar extends Vue {
     type: Boolean,
     default: false
   }) showBack: boolean
+  @Prop({
+    type: Boolean,
+    default: false
+  }) showHome: boolean
 
   @socialSystemStore.State('statusBarHeight') statusBarHeight
   @socialSystemStore.State('navBarHeight') navBarHeight
@@ -66,6 +70,10 @@ export default class QNavBar extends Vue {
 
   goBack () {
     RouterUtil.goBackOrHome()
+  }
+
+  goHome () {
+    PageUtil.goHome()
   }
 }
 </script>

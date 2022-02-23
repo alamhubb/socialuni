@@ -1,7 +1,7 @@
 <template>
   <div v-if="dialogVisible"
-        class="position-fixed overflow-hidden index-999 h100vh w100vw top-0 bottom-0 left-0 right-0">
-    <q-model @click="close" v-if="modal">
+       class="position-fixed overflow-hidden index-999 h100vh w100vw top-0 bottom-0 left-0 right-0">
+    <q-model @click="cancel" v-if="modal">
       <!--        ios端不支持prevent需要用stop代替-->
     </q-model>
     <div class="h100p" :class="bottom?'col-end':'row-all-center'">
@@ -15,8 +15,8 @@
             <slot name="headerLeft"></slot>
           </div>
           <div class="flex-row flex-none">
-            <q-button v-if="!hideCancel" @click="close" text info>{{cancelText}}</q-button>
-            <q-button v-if="!hideConfirm" @confirm="close" theme text>{{confirmText}}</q-button>
+            <q-button v-if="!hideCancel" @click="cancel" text info>{{ cancelText }}</q-button>
+            <q-button v-if="!hideConfirm" @click="confirm" theme text>{{ confirmText }}</q-button>
           </div>
         </div>
         <slot></slot>
@@ -56,14 +56,19 @@ export default class QPopup extends Vue {
     this.dialogVisible = true
   }
 
-
-  @Emit()
   close () {
     this.dialogVisible = false
   }
 
+
+  @Emit()
+  cancel () {
+    this.close()
+  }
+
   @Emit()
   confirm () {
+    console.log('chufale')
     this.close()
   }
 

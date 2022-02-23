@@ -153,7 +153,7 @@ import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import QTab from '@/qing-ui/components/QTab/QTab.vue'
 import TalkSearchPageType from '@/socialuni/const/TalkSearchPageType'
-import CircleSearch from '@/socialuni/components/SCircleSearch.vue'
+import CircleSearch from '@/socialuni/components/SocialCirclePicker.vue'
 
 
 @Component({

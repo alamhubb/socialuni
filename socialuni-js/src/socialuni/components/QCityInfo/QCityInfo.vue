@@ -39,8 +39,7 @@ export default class SocialCityInfo extends Vue {
   @Prop() value: DistrictVO
 
   @Prop({
-    default: false,
-    type: Boolean
+    default: false
   }) picker: boolean
 
   openCityPicker () {

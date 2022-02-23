@@ -1,18 +1,14 @@
 <template>
-  <q-popup ref="cityDialog" bottom @close="dialogClose">
-    <div class="row-between-center box-df bb-1">
-      <view class="flex-row">
+  <q-popup ref="cityDialog" bottom @cancel="dialogClose" @confirm="input">
+    <template #headerLeft>
+      <view class="flex-row ml-sm">
         <view class="text-black text-md font-bold">城市筛选</view>
         <view class="row-col-center text-orange font-bold px bg-click" @click="getLocation">
           <q-icon icon="map-fill" class="mr-nn" size="16"></q-icon>
           定位
         </view>
       </view>
-      <view class="flex-row">
-        <view class="color-blue font-bold mx-sm px-sm bg-click" @click="close">取消</view>
-        <view class="color-green font-bold mx-sm px-sm bg-click" @click="input">确定</view>
-      </view>
-    </div>
+    </template>
     <div class="row-col-center px bg-white mt-sm">
       <view class="font-bold">
         当前选择：
@@ -95,7 +91,6 @@ export default class QCityPicker extends Vue {
 
   @Emit()
   input () {
-    this.close()
     return this.cityValue
   }
 

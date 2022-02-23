@@ -29,6 +29,7 @@ export default class SocialAppModule extends VuexModule {
     // WebsocketUtil.websocketConnect(false)
     socialTagModule.getHotTagsAction()
     socialCircleModule.getHotCirclesAction()
+    socialCircleModule.getCircleTypesAction()
     socialTagModule.getHotTagTypesAction()
     // socialCircleModule.getCircleTypesAction()
     socialLocationModule.getHotDistrictsAction()

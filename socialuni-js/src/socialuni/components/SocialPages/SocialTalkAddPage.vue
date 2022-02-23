@@ -1,12 +1,11 @@
 <template>
   <view class="h100p bg-white">
-    <q-navbar>
+    <q-navbar show-back>
       <div class="w100p row-col-center">
-        <q-icon class="ml" icon="arrow-left" @click="goBackPage"></q-icon>
-        <view class="ml-xl font-bold text-md flex-1">
+        <view class="font-bold text-md flex-1">
           发布动态
         </view>
-        <q-button class="mr text-bold" theme :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
+        <q-button class="text-bold" theme :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
       </div>
     </q-navbar>
     <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
@@ -56,21 +55,7 @@
       </view>
 
       <view class="px-sm pt-sm mt-xs row-between">
-        <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openCityDialog">
-          <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
-          <block v-if="district.adCode">
-            {{ district.provinceName }}
-            <text v-if="district.cityName">
-              -{{ district.cityName }}
-            </text>
-            <text v-if="district.districtName">
-              -{{ district.districtName }}
-            </text>
-          </block>
-          <text v-else>
-            {{ district.adName }}
-          </text>
-        </view>
+        <q-city-info v-model="district" picker></q-city-info>
         <div class="row-between-center bg-click" @click="openCircleSearchDialog">
           <div>选择圈子</div>
           <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
@@ -178,12 +163,14 @@ import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import SCircleSearch from '@/socialuni/components/SCircleSearch.vue'
+import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
 import AppMsg from '@/socialuni/const/AppMsg'
+import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 
 @Component({
   components: {
-    SCircleSearch,
+    QCityInfo,
+    SCircleSearch: SocialCirclePicker,
     QInput,
     QSidebar,
     QPopup,
@@ -197,7 +184,7 @@ import AppMsg from '@/socialuni/const/AppMsg'
 })
 export default class SocialTalkAddPage extends Vue {
   $refs: {
-    circleSearch: SCircleSearch
+    circleSearch: SocialCirclePicker
   }
 
   @socialLocationStore.State('districts') readonly districts: DistrictVO[]
