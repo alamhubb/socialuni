@@ -36,10 +36,10 @@ $color-info: $color-content;
 //主题辅助背景色
 
 //默认背景
-$color-bg-default: #f7f7f7;
-$color-border-default: #dedede;
+$color-bg-default: #f7f7f7 !default;
+$color-border-default: #dedede !default;
 //主题色
-$color-bg-base: $color-white;
+$color-bg-base: $color-white !default;
 //主题色
 //$color-theme-base: $color-white !default;
 //主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
