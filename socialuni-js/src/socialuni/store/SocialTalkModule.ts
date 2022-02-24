@@ -155,7 +155,11 @@ export default class SocialTalkModule extends VuexModule {
     const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
     if (curTab.type === TalkTabType.circle_type) {
       this.setCircleName(curTab.name)
-    }
+    } /*
+    //不处理，前三个切来切去，不能修改上次使用的
+    else {
+      this.setCircleName(null)
+    }*/
     return curTab
   }
 
@@ -180,7 +184,6 @@ export default class SocialTalkModule extends VuexModule {
       circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
     }
 
-    console.log(circleTab)
     //添加到第四个位置
     this.talkTabs.splice(3, 0, circleTab)
     return this.setCurTabIndexUpdateCircle(3)

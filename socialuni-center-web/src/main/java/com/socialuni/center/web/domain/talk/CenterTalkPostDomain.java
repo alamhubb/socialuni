@@ -3,6 +3,7 @@ package com.socialuni.center.web.domain.talk;
 import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
+import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
@@ -49,9 +50,10 @@ public class CenterTalkPostDomain {
             throw new SocialParamsException("动态最多支持200个字，请精简动态内容");
         }
 
+
         // 查询的时候筛选
-        //系统管理员则不校验规则
-        if (!UserType.system.equals(mineUser.getType())) {
+        //系统管理员则不校验规则,生产环境才校验
+        if (SocialAppEnv.getIsProdEnv() && !UserType.system.equals(mineUser.getType())) {
             Date curDate = new Date();
             Date oneMinuteBefore = new Date(curDate.getTime() - DateTimeType.minute);
             //1分钟内不能发超过1条

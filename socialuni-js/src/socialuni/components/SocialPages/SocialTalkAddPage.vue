@@ -192,7 +192,7 @@ export default class SocialTalkAddPage extends Vue {
   @socialTagStore.State('tags') readonly storeTags: TagVO []
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
-  @socialTalkStore.State('circleName') circleName: string
+  // @socialTalkStore.State('circleName') circleName: string
 
   circleSearchText = ''
 
@@ -207,6 +207,7 @@ export default class SocialTalkAddPage extends Vue {
   GenderTypeAll = GenderType.all
 
   talkContent = ''
+  circleName = ''
   buttonDisabled = false
 
   visibleTypes = VisibleType.enums
@@ -255,6 +256,7 @@ export default class SocialTalkAddPage extends Vue {
     this.cosAuthRO = null
     this.showImgFiles = []
     this.tags = JsonUtils.deepClone(this.storeTags)
+    this.circleName = socialTalkModule.circleName
     this.district = socialLocationModule.location
 
     socialTagModule.getTagTypesAction()
@@ -417,6 +419,9 @@ export default class SocialTalkAddPage extends Vue {
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
+        //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
+        // socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
+        socialTalkModule.setCircleName(this.circleName)
         RouterUtil.reLaunch(PagePath.talk + '?load=true')
       })
       .catch(() => {
@@ -507,8 +512,7 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   circleChange (circle: SocialCircleRO) {
-    console.log(circle)
-    socialTalkModule.setCircleNameUpdateCurTabIndex(circle.name)
+    this.circleName = circle.name
   }
 }
 </script>
