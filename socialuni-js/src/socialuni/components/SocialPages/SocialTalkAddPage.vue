@@ -57,8 +57,8 @@
       <view class="px-sm pt-sm mt-xs row-between">
         <q-city-info v-model="district" picker></q-city-info>
         <div class="row-between-center bg-click" @click="openCircleSearchDialog">
-          <div>选择圈子</div>
-          <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          <div>{{ circleName || '选择圈子' }}</div>
+          <q-icon icon="arrow-right" class="text-md margin-right-sm" size="12"></q-icon>
         </div>
       </view>
       <view class="px-sm pt-sm">
@@ -117,7 +117,7 @@
         </div>
       </view>
 
-      <s-circle-search ref="circleSearch"></s-circle-search>
+      <s-circle-search ref="circleSearch" @change="circleChange"></s-circle-search>
     </view>
   </view>
 </template>
@@ -134,7 +134,7 @@ import {
   socialLocationModule,
   socialLocationStore,
   socialTagModule,
-  socialTagStore,
+  socialTagStore, socialTalkModule, socialTalkStore,
   socialUserStore
 } from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
@@ -166,6 +166,7 @@ import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
 import AppMsg from '@/socialuni/const/AppMsg'
 import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
+import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 
 @Component({
   components: {
@@ -191,6 +192,7 @@ export default class SocialTalkAddPage extends Vue {
   @socialTagStore.State('tags') readonly storeTags: TagVO []
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
+  @socialTalkStore.State('circleName') circleName: string
 
   circleSearchText = ''
 
@@ -502,6 +504,11 @@ export default class SocialTalkAddPage extends Vue {
     } else {
       PageUtil.toTalkPage()
     }
+  }
+
+  circleChange (circle: SocialCircleRO) {
+    console.log(circle)
+    socialTalkModule.setCircleNameUpdateCurTabIndex(circle.name)
   }
 }
 </script>

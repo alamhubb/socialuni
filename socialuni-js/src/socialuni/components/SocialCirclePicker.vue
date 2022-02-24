@@ -1,5 +1,5 @@
 <template>
-  <q-popup ref="circleChooseDialog" v-model="showCircleSearch" bottom hide-modal hide-confirm>
+  <q-popup ref="circleChooseDialog" bottom hide-modal hide-confirm>
     <template #headerLeft>
       <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
     </template>
@@ -59,7 +59,6 @@ export default class SocialCirclePicker extends Vue {
 
   @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO[]
 
-  showCircleSearch = false
   circleSearchText = ''
 
   openDialog () {

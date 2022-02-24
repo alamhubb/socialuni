@@ -20,7 +20,8 @@ export default class SocialTalkModule extends VuexModule {
   userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
   userGender: string = TalkFilterUtil.getGenderFilter()
   talkTabs: TalkTabVO [] = TalkVueUtil.getTalkTabs()
-  circle: string = null
+  currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
+  circleName: string = null
 
   // state
   currentContent: null
@@ -143,15 +144,45 @@ export default class SocialTalkModule extends VuexModule {
   @Action
   getTalkTabs () {
     this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
-    const currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
-    const curTab = this.talkTabs.find((item, index) => index === currentTabIndex)
-    this.setCircle(curTab)
+    this.updateCircleByTabIndex()
   }
 
-  setCircle (curTab: TalkTabVO) {
+  setCircleName (circleName: string) {
+    this.circleName = circleName
+  }
+
+  updateCircleByTabIndex () {
+    const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
     if (curTab.type === TalkTabType.circle_type) {
-      this.circle = curTab.name
-      console.log(this.circle)
+      this.setCircleName(curTab.name)
     }
+    return curTab
+  }
+
+  setCurrentTabIndex (currentTabIndex: number) {
+    this.currentTabIndex = currentTabIndex
+  }
+
+  setCurTabIndexUpdateCircle (currentTabIndex: number) {
+    this.setCurrentTabIndex(currentTabIndex)
+    return this.updateCircleByTabIndex()
+  }
+
+  setCircleNameUpdateCurTabIndex (circleName: string) {
+    const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
+
+    let circleTab
+    if (circleTabIndex > -1) {
+      circleTab = this.talkTabs[circleTabIndex]
+      //从当前位置删除
+      this.talkTabs.splice(circleTabIndex, 1)
+    } else {
+      circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
+    }
+
+    console.log(circleTab)
+    //添加到第四个位置
+    this.talkTabs.splice(3, 0, circleTab)
+    return this.setCurTabIndexUpdateCircle(3)
   }
 }

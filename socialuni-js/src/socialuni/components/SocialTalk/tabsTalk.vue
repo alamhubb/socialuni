@@ -3,13 +3,13 @@
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
     <div class="flex-row px-sm mb-xss">
-      <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
+      <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
               class="bd-radius flex-1 mr-sm">
         <template #default="{tab,index}">
-          <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':current===index}">
+          <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
             {{ tab.name }}
           </div>
-          <div v-else class="h30 px-xs row-all-center" :class="{'font-md':current===index}">
+          <div v-else class="h30 px-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
             {{ tab.name }}
           </div>
         </template>
@@ -52,7 +52,7 @@
     </view>-->
 
     <q-pull-refresh ref="pullRefresh" @refresh="queryEnd">
-      <swiper :current="swiperCurrent"
+      <swiper :current="currentTabIndex"
               :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
             }"
@@ -266,7 +266,7 @@ export default class TabsTalkPage extends Vue {
       storeTalkTabs.push(storeTalkTab)
     })
     //缓存记录本次推出时的默认值
-    TalkVueUtil.setTalkTabsAll(storeTalkTabs, this.current, this.talkTabObj.type)
+    TalkVueUtil.setTalkTabsAll(storeTalkTabs, this.currentTabIndex, this.talkTabObj.type)
   }
 
 
@@ -419,34 +419,32 @@ export default class TabsTalkPage extends Vue {
 
   get talkTabObj () {
     if (this.talkTabs && this.talkTabs.length) {
-      return this.talkTabs[this.current]
+      return this.talkTabs[this.currentTabIndex]
     } else {
       return null
     }
   }
 
   // 因为内部的滑动机制限制，请将tabs组件和swiper组件的current用不同变量赋值
-  current: number = TalkVueUtil.getCurTalkTabIndex()
+  @socialTalkStore.State('currentTabIndex') currentTabIndex: number
   // tabs组件的current值，表示当前活动的tab选项
-  swiperCurrent: number = TalkVueUtil.getCurTalkTabIndex()
   // swiper组件的current值，表示当前那个swiper-item是活动的
 
   // tabs通知swiper切换
   tabsChange (index) {
-    if (index === this.swiperCurrent) {
+    if (index === this.currentTabIndex) {
       if (this.talkTabObj.type === TalkTabType.city_type) {
         this.openCityPicker()
       }
       return
     }
-    this.swiperCurrent = index
+    socialTalkModule.setCurTabIndexUpdateCircle(index)
   }
 
   // talkSwipe
   talkSwiperChange (e) {
     const current = e.detail.current
-    this.swiperCurrent = current
-    this.current = current
+    const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
     // 存入store
     // 切换时截取其他的只保留后20条
     this.talkTabs.forEach((item, index) => {
@@ -456,8 +454,6 @@ export default class TabsTalkPage extends Vue {
         item.loadMore = LoadMoreType.more
       }
     })
-    const curTab = this.talkTabs[current]
-    socialTalkModule.setCircle(curTab)
     //如果首次加载，则需要查询
     if (curTab.firstLoad) {
       this.autoChooseUseLocationQueryTalks(true)
