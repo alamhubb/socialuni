@@ -15,6 +15,7 @@ public class SocialTalkPostQO implements ContentAddQO {
     private Integer devId;
     private String socialuniUid;
     private List<Integer> tagIds;
+    private String circleName;
     /*
      *  经度 Longitude 简写Lng
      * 纬度范围-90~90，经度范围-180~180
