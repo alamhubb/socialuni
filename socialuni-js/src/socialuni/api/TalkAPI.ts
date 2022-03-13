@@ -14,8 +14,8 @@ import TalkTabVO from '@/socialuni/model/talk/TalkTabVO'
 import TalkTabType from '@/socialuni/const/TalkTabType'
 
 export default class TalkAPI {
-  static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
-    const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, tagIds, visibleType, visibleGender)
+  static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string, circleName: string) {
+    const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, tagIds, visibleType, visibleGender, circleName)
     return request.post('talk/postTalk', data)
   }
 

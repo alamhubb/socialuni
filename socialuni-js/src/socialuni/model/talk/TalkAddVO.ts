@@ -1,6 +1,5 @@
 import DistrictVO from '../DistrictVO'
 import LocationUtil from '../../utils/LocationUtil'
-import DomFile from '../DomFile'
 import ImgAddQO from '../user/ImgAddQO'
 
 export default class TalkAddVO {
@@ -14,14 +13,17 @@ export default class TalkAddVO {
   public lon: number = null
   // 纬度,纬度范围-90~90
   public lat: number = null
+  public circleName: string = null
 
-  constructor (content: string, imgs: ImgAddQO[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string) {
+  constructor (content: string, imgs: ImgAddQO[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string, circleName: string) {
     this.content = content
     this.visibleType = visibleType
     this.visibleGender = visibleGender
     this.imgs = imgs
     this.tagIds = tagIds
     this.adCode = LocationUtil.chinaAdCode
+    this.adCode = LocationUtil.chinaAdCode
+    this.circleName = circleName
     if (district) {
       this.adCode = district.adCode
       this.lon = district.lon
