@@ -2,6 +2,7 @@ package com.socialuni.social.model.model.QO.community.talk;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +23,8 @@ public class SocialHomeTabTalkQueryQO {
 
     private Integer minAge;
     private Integer maxAge;
-
+    private Date queryTime;
     private String userGender;
     private String talkVisibleGender;
+    private String circleName;
 }

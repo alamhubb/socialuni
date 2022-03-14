@@ -81,7 +81,7 @@ public class TalkQueryTest {
         Date curDate = new Date();
         System.out.println("**************************************");
 
-        List<Integer> list = talkQueryStore.queryUserTalkIdsByTab(
+       /* List<Integer> list = talkQueryStore.queryUserTalkIdsByTab(
                 108,
                 null,
                 -500,
@@ -89,7 +89,7 @@ public class TalkQueryTest {
                 null,
                 GenderType.all,
                 null,
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7), PageRequest.of(0, 10), 1);
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7), PageRequest.of(0, 10), 1);*/
 
         /*List<Integer> list = talkMapper.queryTalkIdsByCom(
                 null,
@@ -103,7 +103,7 @@ public class TalkQueryTest {
                 //                null,
                 null);*/
 
-        System.out.println(Arrays.toString(list.toArray()));
+//        System.out.println(Arrays.toString(list.toArray()));
         System.out.println("12312313");
         System.out.println("最终耗时:" + (System.currentTimeMillis() - curDate.getTime()));
         System.out.println("**************************************");

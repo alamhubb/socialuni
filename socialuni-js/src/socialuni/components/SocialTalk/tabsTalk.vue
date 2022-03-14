@@ -163,7 +163,8 @@ import {
   socialConfigStore,
   socialLocationModule,
   socialLocationStore,
-  socialSystemModule, socialTagStore,
+  socialSystemModule,
+  socialTagStore,
   socialTalkModule,
   socialTalkStore,
   socialUserStore
@@ -172,7 +173,6 @@ import TalkOperate from './talkOperate.vue'
 import QTab from '../../../qing-ui/components/QTab/QTab.vue'
 import QTabs from '../../../qing-ui/components/QTabs/QTabs.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import CityPicker from '../QCityPicker/QCityPicker.vue'
 import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
@@ -351,7 +351,7 @@ export default class TabsTalkPage extends Vue {
     CommonUtil.delayTime(0).then(() => {
       this.talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialTalkModule.circleName).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {

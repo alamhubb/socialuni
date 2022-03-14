@@ -134,7 +134,8 @@ import {
   socialLocationModule,
   socialLocationStore,
   socialTagModule,
-  socialTagStore, socialTalkModule, socialTalkStore,
+  socialTagStore,
+  socialTalkModule,
   socialUserStore
 } from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
@@ -415,7 +416,7 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
+    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue, this.circleName)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()

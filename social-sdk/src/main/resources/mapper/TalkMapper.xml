@@ -5,15 +5,29 @@
         SELECT t.id
         FROM
         talk t,
-        tag tg,
-        talk_tag ttg,
+        <if test="tagIds!=null and tagIds.size()>0">
+            talk_tag tt,
+        </if>
+        <if test="circleId!=null">
+            talk_tag tt,
+        </if>
+        s_talk_circle tc,
         `user` u
         WHERE
-        t.id = ttg.talk_id
-        AND ttg.tag_id = tg.id
-        AND t.user_id = u.id
+        t.user_id = u.id
         and t.global_top = 0
-        and (t.status = #{status})
+        and
+        (
+        (t.status = #{status})
+        <!--or
+        (
+        u.id = #{mineUserId}
+        and t.status in
+        <foreach item="item" index="index" collection="mineTalkStatus"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+        )-->
+        )
         <!--    校验发布专属动态的用户性别必须与talk性别一致，才能显示-->
         <!--    规则1， 动态 and talkdovi = 'all' 或者 动态dovi = talkusergender 这个校验，有了下面就不需要校验 用户性别了-->
         and (t.visible_gender = 'all' or u.gender = t.visible_gender)
@@ -24,6 +38,10 @@
         </if>
         <if test="adCode!=null">
             and t.ad_code like concat(#{adCode}, '%')
+        </if>
+        <if test="circleId!=null">
+            AND t.id = tc.talk_id
+            AND tc.circle_id = #{circleId}
         </if>
         <choose>
             <!--    默认查全网可见的-->
@@ -52,14 +70,37 @@
             </otherwise>
         </choose>
         <if test="tagIds!=null and tagIds.size()>0">
-            and tg.id in
+            AND t.id = tt.talk_id
+            and tt.tag_id in
             <foreach item="item" index="index" collection="tagIds"
                      open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
+        <!--        <if test="queryTime!=null">
+                    AND t.update_time &lt; #{queryTime}
+                </if>-->
         group by t.id
         order by t.update_time desc limit 1000
+    </select>
+
+    <select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">
+        SELECT t.id
+        FROM
+        talk t,
+        s_talk_circle tc
+        WHERE
+        t.user_id=#{userId}
+        <if test="circleId!=null">
+            AND t.id = tc.talk_id
+            AND tc.circle_id = #{circleId}
+        </if>
+        and t.status in
+        <foreach item="item" index="index" collection="statusList"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by t.update_time desc limit 100
     </select>
 </mapper>
 

@@ -16,6 +16,7 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -64,23 +65,25 @@ public class TalkQueryStore {
         return this.queryTalksByIds(ids);
     }
 
-    public List<Integer> queryUserTalkIdsByTab(Integer userId, String postTalkUserGender,
+    public List<Integer> queryUserTalkIdsByTab(Integer mineUserId, String postTalkUserGender,
                                                Integer minAge, Integer maxAge, String adCode,
                                                String talkVisibleGender,
-                                               String mineUserGender, List<Integer> tagIds, Pageable pageable, Integer devId) {
+                                               String mineUserGender, List<Integer> tagIds, Pageable pageable, Integer devId, Date queryTime, Integer circleId) {
 //        log.info("queryUserTalkIdsByTab开始：" + new Date().getTime() / 1000);
 
 //        为什么区分两个方法, 因为这个是通用的，下面那个是区分用户的，所以不一起缓存
         List<Integer> ids = talkRedis.queryTalkIdsByTab(postTalkUserGender, minAge, maxAge, adCode,
-                talkVisibleGender, mineUserGender, tagIds, devId);
+                talkVisibleGender, mineUserGender, tagIds, devId, circleId);
 
-        if (userId != null) {
-            List<Integer> mineTalkIds = talkRedis.queryMineTalkIds(userId, PageRequest.of(0, 100));
+        if (mineUserId != null) {
+            List<Integer> mineTalkIds = talkRedis.queryMineTalkIdsByCom(mineUserId, circleId);
             ids.addAll(mineTalkIds);
         }
 
+//        queryTime,
+
         //对id进行下排序，找到前10
-        ids = talkRepository.queryTalkIdsByIds(ids, pageable);
+        ids = talkRepository.queryTalkIdsByIds(ids, queryTime, pageable);
 //        log.info("queryUserTalkIdsByTab结束：" + new Date().getTime() / 1000);
         return ids;
     }
@@ -88,10 +91,10 @@ public class TalkQueryStore {
     public List<TalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String postTalkUserGender,
                                                                          Integer minAge, Integer maxAge, String adCode,
                                                                          List<Integer> tagIds, String talkVisibleGender,
-                                                                         String mineUserGender, Integer devId) {
+                                                                         String mineUserGender, Integer devId, Date queryTime, Integer circleId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = this.queryUserTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
-                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId);
+                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId, queryTime, circleId);
         return this.queryTalksByIds(ids);
     }
 

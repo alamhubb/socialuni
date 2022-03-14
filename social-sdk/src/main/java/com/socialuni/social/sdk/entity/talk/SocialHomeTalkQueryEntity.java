@@ -26,16 +26,16 @@ public class SocialHomeTalkQueryEntity {
     }
 
     //查询非关注tab的动态列表
-    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryQO, UserDO mineUser) {
-        List<Integer> talkIds = queryQO.getTalkIds();
+    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, UserDO mineUser) {
+        List<Integer> talkIds = queryBO.getTalkIds();
 
         List<TalkDO> stickTalks = new ArrayList<>();
         if (talkIds.size() == 0 || (talkIds.size() == 1 && talkIds.get(0).equals(0))) {
-            stickTalks = this.queryStickTalks(queryQO.getDevId());
+            stickTalks = this.queryStickTalks(queryBO.getDevId());
         }
 
         //话题校验
-        List<Integer> tagIds = queryQO.getTagIds();
+        List<Integer> tagIds = queryBO.getTagIds();
         if (tagIds != null && tagIds.size() > 3) {
 //            return new ResultRO<>("最多同时筛选3个话题");
             throw new SocialParamsException("最多同时筛选3个话题");
@@ -48,7 +48,7 @@ public class SocialHomeTalkQueryEntity {
 //        }
 
         //用户的性别，展示的talk行呗
-        List<TalkDO> talkDOS = socialHomeTalkQueryStore.queryHomeTalks(queryQO, mineUser);
+        List<TalkDO> talkDOS = socialHomeTalkQueryStore.queryHomeTalks(queryBO, mineUser);
 
         stickTalks.addAll(talkDOS);
 

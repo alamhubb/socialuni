@@ -15,6 +15,7 @@ public class RedisKeysConst {
 
 
     public static final String queryMineTalkIds = "queryMineTalkIds";
+    public static final String queryMineTalkIdsByCom = "queryMineTalkIdsByCom";
     public static final String queryUserTalkIds = "queryUserTalkIds";
     public static final String queryUserFollowsTalkIds = "queryUserFollowsTalkIds";
 

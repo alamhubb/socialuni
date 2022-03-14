@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.domain.talk;
 
 import com.socialuni.social.constant.GenderType;
+import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialParamsException;
@@ -13,8 +14,10 @@ import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.sdk.entity.talk.SocialHomeTalkQueryEntity;
 import com.socialuni.social.sdk.factory.SocialTalkROFactory;
+import com.socialuni.social.sdk.repository.community.SocialCircleRepository;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -27,6 +30,8 @@ public class SocialHomeTalkQueryDomain {
     private SocialHomeTalkQueryEntity socialHomeTalkQueryEntity;
     @Resource
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
+    @Resource
+    private SocialCircleRepository socialCircleRepository;
 
     public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
@@ -34,14 +39,23 @@ public class SocialHomeTalkQueryDomain {
         socialHomeTabTalkQueryBO.setTalkIds(queryQO.getTalkIds());
         //tag
         socialHomeTabTalkQueryBO.setTagIds(queryQO.getTagIds());
-        socialHomeTabTalkQueryBO.setHomeTabType(queryQO.getHomeTabType());
+        String tabType = queryQO.getHomeTabType();
+        socialHomeTabTalkQueryBO.setHomeTabType(tabType);
         socialHomeTabTalkQueryBO.setAdCode(queryQO.getAdCode());
         socialHomeTabTalkQueryBO.setLon(queryQO.getLon());
         socialHomeTabTalkQueryBO.setLat(queryQO.getLat());
         socialHomeTabTalkQueryBO.setMinAge(queryQO.getMinAge());
+        socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
         socialHomeTabTalkQueryBO.setMaxAge(queryQO.getMaxAge());
         socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdAllowNull());
 
+        String circleName = queryQO.getCircleName();
+        if (TalkTabType.circle_type.equals(tabType)) {
+            if (StringUtils.isNotEmpty(circleName)) {
+                SocialCircleDO socialCircleDO = socialCircleRepository.findFirstByName(queryQO.getCircleName());
+                socialHomeTabTalkQueryBO.setCircleId(socialCircleDO.getId());
+            }
+        }
         String queryQOGender = queryQO.getGender();
 
         //校验query的GenderType是否正确

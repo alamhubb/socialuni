@@ -40,6 +40,8 @@ public class SocialHomeTalkQueryQOFactory {
         socialHomeTabTalkQueryQO.setLon(queryQO.getLon());
         socialHomeTabTalkQueryQO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryQO.setMaxAge(queryQO.getMaxAge());
+        socialHomeTabTalkQueryQO.setCircleName(queryQO.getCircleName());
+        socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryTime());
 //        socialHomeTabTalkQueryQO.setUserGender(queryQO.getUserGender());
 //        socialHomeTabTalkQueryQO.setTalkVisibleGender(queryQO.getTalkVisibleGender());
 //        socialHomeTabTalkQueryQO.setOpenPosition(queryQO.getOpenPosition());

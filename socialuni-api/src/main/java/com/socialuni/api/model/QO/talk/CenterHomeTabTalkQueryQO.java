@@ -2,6 +2,7 @@ package com.socialuni.api.model.QO.talk;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,10 +19,11 @@ public class CenterHomeTabTalkQueryQO {
     private String adCode;
     private Double lon;
     private Double lat;
-
+    private Date queryTime;
     private Integer minAge;
     private Integer maxAge;
     private String userGender;
     //新版本用genderType，旧版本用gender
     private String talkVisibleGender;
+    private String circleName;
 }

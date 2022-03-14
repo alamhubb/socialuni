@@ -1,18 +1,19 @@
 import { socialLocationModule } from '../../store'
 
 export default class TalkQueryVO {
-  public talkIds: number[]
-  public adCode: string
-  public lon: number
-  public lat: number
-  public tagIds: number[]
-  public homeTabType: string
-  public gender: string
-  public minAge: number
-  public maxAge: number
-  public queryTime: Date
+  talkIds: number[]
+  adCode: string
+  lon: number
+  lat: number
+  tagIds: number[]
+  homeTabType: string
+  gender: string
+  minAge: number
+  maxAge: number
+  queryTime: Date
+  circleName: string
 
-  constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date) {
+  constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string) {
     this.talkIds = talkIds
     const district = socialLocationModule.location
     if (district) {
@@ -26,5 +27,6 @@ export default class TalkQueryVO {
     this.minAge = minAge
     this.maxAge = maxAge
     this.queryTime = queryDate
+    this.circleName = circleName
   }
 }
