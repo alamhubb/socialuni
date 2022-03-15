@@ -1,4 +1,4 @@
-import HttpRequest, { requestConfig } from './httpRequest'
+import HttpRequest, { requestConfig } from '@/socialuni/plugins/http/httpRequest'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
 import { socialConfigModule, socialSystemModule } from '../../store'

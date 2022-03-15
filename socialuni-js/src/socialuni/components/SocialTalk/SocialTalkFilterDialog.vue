@@ -3,10 +3,21 @@
     <div class="h87vh py-sm px-sm">
       <div class="row-col-center mb-sm">
         <div class="mr-sm">性别:</div>
-        <div class="q-tag-white bg-click">不限</div>
+<!--        <div class="q-tag-white bg-click">不限</div>
         <div class="q-tag-white bg-click">女生</div>
         <div class="q-tag-white bg-click">男生</div>
-        <div class="q-tag-white bg-click">仅女生可见</div>
+        <div class="q-tag-white bg-click">仅女生可见</div>-->
+
+        <radio-group @change="genderChange" class="flex-1">
+          <div class="flex-row row-wrap">
+            <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
+              <label>
+                <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
+                <text class="ml-sm mr">{{ report.label }}</text>
+              </label>
+            </div>
+          </div>
+        </radio-group>
         <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
       </div>
       <div class="row-col-center mb-sm">
@@ -66,7 +77,13 @@ import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 import QSlider from '@/qing-ui/components/QSlider/QSlider.vue'
-import { socialCircleStore, socialLocationModule, socialTagStore, socialTalkModule } from '@/socialuni/store'
+import {
+  socialCircleStore,
+  socialLocationModule,
+  socialTagStore,
+  socialTalkModule,
+  socialUserStore
+} from '@/socialuni/store'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
@@ -74,6 +91,9 @@ import TalkFilterUtil from '@/socialuni/utils/TalkFilterUtil'
 import CityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
 import DistrictVO from '@/socialuni/model/DistrictVO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
+import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
+import GenderType from '@/socialuni/const/GenderType'
+import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 
 
 @Component({
@@ -90,7 +110,7 @@ export default class SocialTalkFilterDialog extends Vue {
   $refs: {
     filterDialog: QPopup;
   }
-
+  @socialUserStore.State('user') user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   @socialTagStore.State('tags') readonly tags: TagVO []
   @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO []
@@ -103,6 +123,9 @@ export default class SocialTalkFilterDialog extends Vue {
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
   showCityDialog = false
   district: DistrictVO = socialLocationModule.location
+  appGender: string = SocialuniConfig.appGenderType
+  // 组件内的值
+  genderTypeValue: string = socialTalkModule.userGender
 
   open () {
     this.$refs.filterDialog.open()
@@ -116,6 +139,21 @@ export default class SocialTalkFilterDialog extends Vue {
   @Emit()
   change (circle: SocialCircleRO) {
     return circle
+  }
+
+  get visibleGenders () {
+    if (this.user) {
+      if (this.user.gender === GenderType.girl) {
+        return GenderType.talkQueryGirlEnums
+      } else {
+        return GenderType.talkQueryBoyEnums
+      }
+    }
+    return GenderType.talkQueryEnums
+  }
+
+  genderChange ({ target }) {
+    this.genderTypeValue = target.value
   }
 }
 </script>

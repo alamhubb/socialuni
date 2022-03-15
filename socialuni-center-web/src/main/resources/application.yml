@@ -5,8 +5,8 @@ spring:
 #    active: local
 #    active: qkylocal
 #    active: qkypc
-#    active: prod
 #    active: demo
+#    active: prod
     active: localprod
   jpa:
     database: MYSQL

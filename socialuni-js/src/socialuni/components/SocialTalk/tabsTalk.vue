@@ -14,7 +14,7 @@
           </div>
         </template>
         <template #icon="{tab}">
-          <q-icon class="pr-xs" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
+          <q-icon class="pr-xs mb-nn" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
           <!--        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>-->
 
           <!--        <q-icon icon="map-fill" size="14"></q-icon>-->

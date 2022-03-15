@@ -101,14 +101,7 @@
                  :selectTagIds="selectTagIds"
       ></tabs-talk>
 
-      <q-popup v-model="showFilter" bottom>
-        <div class="row-between-center q-box bb-1">
-          <view class="text-black text-md font-bold">动态筛选</view>
-          <view class="flex-row">
-            <view class="color-blue font-bold mx-xs px" @click="hideFilter">取消</view>
-            <view class="text-green font-bold ml-lg mr-sm px" @click="filterQuery">确定</view>
-          </view>
-        </div>
+      <q-popup ref="filterPopup" bottom title="动态筛选" @cancel="hideFilter" @confirm="filterQuery">
         <view class="mt-sm pb-sm">
           <!--          只有当前应用类型为全部性别才显示性别筛选-->
           <view class="row-center px pt" v-if="appGender === GenderTypeAll">
@@ -207,6 +200,7 @@ import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 export default class SocialTalkPage extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
+    filterPopup: QPopup;
   }
   @socialTagStore.State('tags') readonly tags: TagVO []
   @socialUserStore.State('user') user: CenterUserDetailRO
@@ -347,7 +341,8 @@ export default class SocialTalkPage extends Vue {
 
   //隐藏和展示都使用user中的默认值
   showFilterModel () {
-    this.showFilter = true
+    this.$refs.filterPopup.open()
+    // this.showFilter = true
     //修复打开filter时，当前值不对的问题
   }
 

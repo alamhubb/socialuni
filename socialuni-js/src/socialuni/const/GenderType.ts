@@ -4,7 +4,6 @@ export default class GenderType {
   //现在没办法，只能是中文，以后可以连带后台一起改，因为目前就是用中文做的判断。
   static readonly all: string = 'all'
   static readonly allOld: string = '全部'
-  static readonly allStr: string = '所有性别'
 
   // 女生
   static readonly girl: string = 'girl'
@@ -27,9 +26,9 @@ export default class GenderType {
 
   static readonly onlyBoy: string = 'onlyBoy'
 
-  static readonly allEnum = new EnumStrVO(GenderType.all, GenderType.allStr)
-  static readonly girlEnum = new EnumStrVO(GenderType.girl, '女生发布')
-  static readonly boyEnum = new EnumStrVO(GenderType.boy, '男生发布')
+  static readonly allEnum = new EnumStrVO(GenderType.all, '不限')
+  static readonly girlEnum = new EnumStrVO(GenderType.girl, '女生')
+  static readonly boyEnum = new EnumStrVO(GenderType.boy, '男生')
   static readonly onlyGirlEnum = new EnumStrVO(GenderType.onlyGirl, '仅女生可见')
   static readonly onlyBoyEnum = new EnumStrVO(GenderType.onlyBoy, '仅男生可见')
 
@@ -46,9 +45,9 @@ export default class GenderType {
   static readonly talkQueryEnums: EnumStrVO[] = [
     GenderType.allEnum,
     GenderType.girlEnum,
-    GenderType.boyEnum,
-    GenderType.onlyGirlEnum,
-    GenderType.onlyBoyEnum
+    GenderType.boyEnum
+    // GenderType.onlyGirlEnum,
+    // GenderType.onlyBoyEnum
   ]
   ''
   static readonly talkQueryGirlEnums: EnumStrVO[] = [
@@ -80,7 +79,7 @@ export default class GenderType {
     new EnumStrVO(GenderType.boy, GenderType.userBoyStr)
   ]
 
-  static readonly values: string[] = GenderType.talkQueryEnums.map(item => item.value)
+  // static readonly values: string[] = GenderType.talkQueryEnums.map(item => item.value)
   //用来做兼容处理
   static readonly mapOld: Map<string, string> = new Map<string, string>([
     [GenderType.all, GenderType.all],
