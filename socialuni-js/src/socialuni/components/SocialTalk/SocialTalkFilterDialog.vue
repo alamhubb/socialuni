@@ -1,19 +1,14 @@
 <template>
   <q-popup ref="filterDialog" bottom hide-modal>
-    <div class="h87vh py-sm px-sm">
-      <div class="row-col-center mb-sm">
+    <div class="h87vh py-sm px">
+      <div class="row-col-center mt-sm mb-sm">
         <div class="mr-sm">性别:</div>
-<!--        <div class="q-tag-white bg-click">不限</div>
-        <div class="q-tag-white bg-click">女生</div>
-        <div class="q-tag-white bg-click">男生</div>
-        <div class="q-tag-white bg-click">仅女生可见</div>-->
-
         <radio-group @change="genderChange" class="flex-1">
-          <div class="flex-row row-wrap">
+          <div class="row-col-center row-wrap">
             <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
               <label>
                 <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
-                <text class="ml-sm mr">{{ report.label }}</text>
+                <text class="mr-sm">{{ report.label }}</text>
               </label>
             </div>
           </div>
@@ -21,11 +16,21 @@
         <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
       </div>
       <div class="row-col-center mb-sm">
-        <div class="mr-sm">年龄:</div>
-        <q-input class="w50 mr-xs"></q-input>
+        <div class="mr-sm">年龄:：{{ rangeValue[0] }} - {{ rangeValue[1] }}</div>
+        <q-slider
+          class="flex-1"
+          :value="rangeValue"
+          :min="rangeMin"
+          :max="rangMax"
+          :bar-height="3"
+          active-color="#FF6B00"
+          :format="format"
+          @change="handleRangeChange"
+        ></q-slider>
+<!--        <q-input class="w50 mr-xs"></q-input>
         岁 —
         <q-input class="w50 ml-sm mr-xs"></q-input>
-        岁
+        岁-->
         <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
       </div>
       <div class="row-col-center">
@@ -38,7 +43,9 @@
         <div class="row-between-center">
           <div>话题</div>
           <div class="row-col-center">
-            <div>更多 <q-icon icon="mdi-chevron-right"></q-icon></div>
+            <div>更多
+              <q-icon icon="mdi-chevron-right"></q-icon>
+            </div>
           </div>
         </div>
         <div class="row-wrap">
@@ -55,7 +62,9 @@
           <div>话题</div>
           <div class="flex-row">
             <div>清空</div>
-            <div>更多 <q-icon icon="mdi-chevron-right"></q-icon></div>
+            <div>更多
+              <q-icon icon="mdi-chevron-right"></q-icon>
+            </div>
           </div>
         </div>
         <div class="row-wrap">
@@ -154,6 +163,15 @@ export default class SocialTalkFilterDialog extends Vue {
 
   genderChange ({ target }) {
     this.genderTypeValue = target.value
+  }
+
+  format () {
+    return ''
+  }
+
+  handleRangeChange (e) {
+    console.log(e)
+    this.rangeValue = e
   }
 }
 </script>
