@@ -229,7 +229,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             @Param("talkIds") List<Integer> talkIds,
             @Param("userIds") List<Integer> userIds);
 
-    @Query(value = "SELECT t.id FROM TalkDO t where t.id in (:talkIds) and t.updateTime<:queryTime order by t.updateTime desc")
+    @Query(value = "SELECT t.id FROM TalkDO t where t.id in (:talkIds) and ((t.updateTime<:queryTime) or (:queryTime is null)) order by t.updateTime desc")
     List<Integer> queryTalkIdsByIds(
             @Param("talkIds") List<Integer> talkIds,
             @Param("queryTime") Date queryTime,

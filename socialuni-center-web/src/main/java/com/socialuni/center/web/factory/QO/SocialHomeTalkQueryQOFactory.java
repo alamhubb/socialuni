@@ -42,12 +42,14 @@ public class SocialHomeTalkQueryQOFactory {
         socialHomeTabTalkQueryQO.setMaxAge(queryQO.getMaxAge());
         socialHomeTabTalkQueryQO.setCircleName(queryQO.getCircleName());
         socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryTime());
+        if (socialHomeTabTalkQueryQO.getQueryTime() == null) {
+            socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryDate());
+        }
 //        socialHomeTabTalkQueryQO.setUserGender(queryQO.getUserGender());
 //        socialHomeTabTalkQueryQO.setTalkVisibleGender(queryQO.getTalkVisibleGender());
 //        socialHomeTabTalkQueryQO.setOpenPosition(queryQO.getOpenPosition());
 //        socialHomeTabTalkQueryQO.setPlatform(queryQO.getPlatform());
 //        socialHomeTabTalkQueryQO.setStandby(queryQO.getStandby());
-
         return socialHomeTabTalkQueryQO;
     }
 }

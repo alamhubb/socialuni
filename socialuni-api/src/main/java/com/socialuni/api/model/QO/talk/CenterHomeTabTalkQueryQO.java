@@ -20,6 +20,7 @@ public class CenterHomeTabTalkQueryQO {
     private Double lon;
     private Double lat;
     private Date queryTime;
+    private Date queryDate;
     private Integer minAge;
     private Integer maxAge;
     private String userGender;
