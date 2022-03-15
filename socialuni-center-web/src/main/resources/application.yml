@@ -32,5 +32,3 @@ mybatis:
 logging:
   file:
     name: socialuni.log
-  level:
-    com.socialuni.social.sdk: DEBUG
