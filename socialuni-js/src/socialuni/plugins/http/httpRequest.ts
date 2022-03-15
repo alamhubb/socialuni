@@ -1,7 +1,7 @@
 /* eslint-disable */
 /**
- * Request 0.0.9
- * @Class Request
+ * HttpRequest 0.0.9
+ * @Class HttpRequest
  * @description luch-request 0.0.9 http请求插件
  * @Author lu-ch
  * @Date 2019-08-20
@@ -82,7 +82,7 @@ interface requestConfig { // 请求之前参数配置项 (public)
   responseType: string;
 }
 
-export default class Request {
+export default class HttpRequest {
   config: config = {
     baseUrl: '',
     header: {
@@ -132,7 +132,7 @@ export default class Request {
       baseUrl: this.config.baseUrl,
       dataType: options.dataType || this.config.dataType,
       responseType: options.responseType || this.config.responseType,
-      url: Request.posUrl(options.url) ? options.url : (this.config.baseUrl + options.url),
+      url: HttpRequest.posUrl(options.url) ? options.url : (this.config.baseUrl + options.url),
       data: options.data || {},
       header: options.header || this.config.header,
       method: options.method || this.config.method

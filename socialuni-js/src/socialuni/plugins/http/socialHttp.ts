@@ -1,4 +1,4 @@
-import Request, { requestConfig } from './request'
+import HttpRequest, { requestConfig } from './httpRequest'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
 import { socialConfigModule, socialSystemModule } from '../../store'
@@ -11,7 +11,7 @@ import { socialConfig } from '../../index'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import SocialSystemInfo from '../../const/SocialSystemInfo'
 
-const socialHttp: Request = new Request()
+const socialHttp: HttpRequest = new HttpRequest()
 
 let socialHttpUrl = process.env.VUE_APP_SOCIALUNI_URL
 if (!socialHttpUrl) {
