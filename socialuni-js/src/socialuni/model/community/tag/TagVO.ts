@@ -6,4 +6,9 @@ export default class TagVO {
   public talkCount: number = null
   public avatar: string = null
   public description: string = null
+
+
+  constructor (name?: string) {
+    this.name = name || null
+  }
 }

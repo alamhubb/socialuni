@@ -9,15 +9,15 @@
       <q-navbar class="flex-none">
         <q-search class="flex-1 mr-sm" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
-          <view v-if="selectTag" class="flex-row flex-auto">
-            <view class="cu-tag round bg-green-plain light row-all-center">
-              {{ selectTag.name }}
+          <view v-if="selectTagName" class="flex-row flex-auto">
+            <view class="q-tag round bg-green-plain light row-all-center">
+              {{ selectTagName }}
             </view>
           </view>
           <input v-else :adjust-position="false" type="text"
                  placeholder="选择话题" confirm-type="search"/>
-          <q-icon v-if="selectTag" class="mr-sm text-gray row-all-center" icon="close"
-                  @click.native.stop="deleteTag(selectTag)"
+          <q-icon v-if="selectTagName" class="mr-sm text-gray row-all-center" icon="close"
+                  @click.native.stop="deleteTag"
           ></q-icon>
         </q-search>
         <view class="mr-sm" :class="{'text-theme':useFilters}">
@@ -98,7 +98,6 @@
 
       <tabs-talk class="flex-1" ref="tabsTalk"
                  :scroll-enable="scrollEnable"
-                 :selectTagIds="selectTagIds"
       ></tabs-talk>
 
       <q-popup ref="filterPopup" bottom title="动态筛选" @cancel="hideFilter" @confirm="filterQuery">
@@ -211,10 +210,10 @@ export default class SocialTalkPage extends Vue {
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
   @socialAppStore.State('homeSwipers') homeSwipers: HomeSwiperVO[]
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
+  @socialTagStore.State('selectTagName') selectTagName: string
   current = 0
   // tag 相关
   showTagSearch = false
-  selectTag: TagVO = null
   // 筛选相关
   rangeMin: number = TalkFilterUtil.minAgeFilterDefault
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
@@ -322,21 +321,13 @@ export default class SocialTalkPage extends Vue {
 
   // tag
   changeTag (tag: TagVO) {
-    this.selectTag = tag
+    socialTagModule.setSelectTagName(tag.name)
     this.initQuery()
   }
 
   deleteTag () {
-    this.selectTag = null
+    socialTagModule.setSelectTagName(null)
     this.initQuery()
-  }
-
-  get selectTagIds (): number[] {
-    if (this.selectTag) {
-      return [this.selectTag.id]
-    } else {
-      return []
-    }
   }
 
   //隐藏和展示都使用user中的默认值

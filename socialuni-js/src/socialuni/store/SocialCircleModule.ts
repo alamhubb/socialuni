@@ -5,9 +5,14 @@ import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 
 @Module({ generateMutationSetters: true })
 export default class SocialCircleModule extends VuexModule {
-  circle: string = null
+  circleName: string = null
   circles: SocialCircleRO[] = []
   circleTypes: CircleTypeRO[] = []
+  historyCircles: CircleTypeRO [] = []
+
+  setCircleName (circleName: string) {
+    this.circleName = circleName
+  }
 
   @Action
   getHotCirclesAction () {
@@ -16,6 +21,22 @@ export default class SocialCircleModule extends VuexModule {
       this.circles = res.data
     })
   }
+
+  //可以加一个使用过的circle列表
+  get mineCirclesTop10 () {
+    const showCircleNames: string[] = [null]
+    if (this.circleName) {
+      showCircleNames.push(this.circleName)
+    }
+    showCircleNames.push(...this.circles.map(item => item.name))
+    //当前选中的circle
+    //历史的circle
+    //热门的circle
+    const circleSet = new Set(showCircleNames)
+    const circles = Array.from(circleSet).slice(0, 10)
+    return circles
+  }
+
 
   //应该查询前20条已读和未读通知，然后有未读通知推送
   /*@Action

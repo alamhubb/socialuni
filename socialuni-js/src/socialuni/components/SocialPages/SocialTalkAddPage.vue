@@ -131,11 +131,11 @@ import TagVO from '../../model/community/tag/TagVO'
 import TagUtil from '../../utils/TagUtil'
 import CosUtil from '../../utils/CosUtil'
 import {
+  socialCircleModule,
   socialLocationModule,
   socialLocationStore,
   socialTagModule,
   socialTagStore,
-  socialTalkModule,
   socialUserStore
 } from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
@@ -257,7 +257,7 @@ export default class SocialTalkAddPage extends Vue {
     this.cosAuthRO = null
     this.showImgFiles = []
     this.tags = JsonUtils.deepClone(this.storeTags)
-    this.circleName = socialTalkModule.circleName
+    this.circleName = socialCircleModule.circleName
     this.district = socialLocationModule.location
 
     socialTagModule.getTagTypesAction()
@@ -422,7 +422,7 @@ export default class SocialTalkAddPage extends Vue {
         uni.hideLoading()
         //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
         // socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
-        socialTalkModule.setCircleName(this.circleName)
+        socialCircleModule.setCircleName(this.circleName)
         RouterUtil.reLaunch(PagePath.talk + '?load=true')
       })
       .catch(() => {

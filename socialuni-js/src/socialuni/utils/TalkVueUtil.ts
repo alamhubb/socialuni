@@ -39,16 +39,4 @@ export default class TalkVueUtil {
     }
     return index
   }
-
-  static getTalkTabType (): string {
-    return StorageUtil.getObj(TalkVueUtil.talkTabTypeKey) || TalkVueUtil.talkTabTypeDefault
-  }
-
-  static setTalkTabsAll (talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
-    if (talkTabs.length) {
-      StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
-    }
-    StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
-    StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
-  }
 }

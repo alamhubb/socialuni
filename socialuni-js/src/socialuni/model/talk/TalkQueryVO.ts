@@ -12,8 +12,9 @@ export default class TalkQueryVO {
   maxAge: number
   queryTime: Date
   circleName: string
+  tagNames: string[]
 
-  constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string) {
+  constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string, tagNames: string[]) {
     this.talkIds = talkIds
     const district = socialLocationModule.location
     if (district) {
@@ -28,5 +29,6 @@ export default class TalkQueryVO {
     this.maxAge = maxAge
     this.queryTime = queryDate
     this.circleName = circleName
+    this.tagNames = tagNames
   }
 }

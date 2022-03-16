@@ -140,7 +140,7 @@
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
-    <social-talk-filter-dialog ref="talkFilterDialog"></social-talk-filter-dialog>
+    <social-talk-filter-dialog ref="talkFilterDialog" @confirm="autoChooseUseLocationQueryTalks(true)"></social-talk-filter-dialog>
   </view>
 </template>
 
@@ -155,15 +155,16 @@ import LoadMoreType from '../../const/LoadMoreType'
 import DistrictVO from '../../model/DistrictVO'
 import Constants from '../../const/Constant'
 import StorageUtil from '../../utils/StorageUtil'
-import TalkVueUtil from '../../utils/TalkVueUtil'
 import TalkTabVO from '../../model/talk/TalkTabVO'
 import CommonUtil from '../../utils/CommonUtil'
 import TalkSwipers from './talkSwipers.vue'
 import {
+  socialCircleModule,
   socialConfigStore,
   socialLocationModule,
   socialLocationStore,
   socialSystemModule,
+  socialTagModule,
   socialTagStore,
   socialTalkModule,
   socialTalkStore,
@@ -258,15 +259,12 @@ export default class TabsTalkPage extends Vue {
     // 存入store
     const storeTalkTabs: TalkTabVO[] = []
     this.talkTabs.forEach(item => {
-      const storeTalkTab: TalkTabVO = new TalkTabVO()
+      const storeTalkTab: TalkTabVO = new TalkTabVO(item.name, item.type)
       storeTalkTab.talks = item.talks.slice(0, this.talkCacheNum)
-      storeTalkTab.name = item.name
-      storeTalkTab.type = item.type
-      storeTalkTab.firstLoad = true
       storeTalkTabs.push(storeTalkTab)
     })
     //缓存记录本次推出时的默认值
-    TalkVueUtil.setTalkTabsAll(storeTalkTabs, this.currentTabIndex, this.talkTabObj.type)
+    socialTalkModule.saveLastTalkTabs(storeTalkTabs, this.currentTabIndex, this.talkTabObj.type)
   }
 
 
@@ -297,7 +295,6 @@ export default class TabsTalkPage extends Vue {
   }
 
   @socialLocationStore.State('location') location: DistrictVO
-  @Prop() readonly selectTagIds: number[]
 
   //供父组件使用，不可删除
   initQuery () {
@@ -351,7 +348,7 @@ export default class TabsTalkPage extends Vue {
     CommonUtil.delayTime(0).then(() => {
       this.talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialTalkModule.circleName).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
@@ -442,7 +439,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   // talkSwipe
-  talkSwiperChange (e) {
+  async talkSwiperChange (e) {
     const current = e.detail.current
     const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
     // 存入store
@@ -456,7 +453,8 @@ export default class TabsTalkPage extends Vue {
     })
     //如果首次加载，则需要查询
     if (curTab.firstLoad) {
-      this.autoChooseUseLocationQueryTalks(true)
+      await this.autoChooseUseLocationQueryTalks(true)
+      this.tabsTalkOnHide()
     }
   }
 

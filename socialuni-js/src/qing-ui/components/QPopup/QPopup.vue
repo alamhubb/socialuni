@@ -25,7 +25,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import QModel from '@/qing-ui/components/QModel/QModel.vue'
 import QButton from '@/qing-ui/components/QButton/QButton.vue'
 
@@ -68,7 +68,6 @@ export default class QPopup extends Vue {
 
   @Emit()
   confirm () {
-    console.log('chufale')
     this.close()
   }
 

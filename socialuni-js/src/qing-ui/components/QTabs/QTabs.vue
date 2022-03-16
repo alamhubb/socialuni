@@ -20,16 +20,6 @@
         </div>
       </div>
     </div>
-    <!--    <view class="row-nowrap flex-1 mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
-          <view class="index-1000 w100p" :class="[uuid]">
-            <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
-
-            </slot>
-          </view>
-
-        </view>
-    &lt;!&ndash;     :style="[tabSlideStyle]"&ndash;&gt;
-       -->
   </scroll-view>
 </template>
 
@@ -67,7 +57,20 @@ export default class QTabs extends Vue {
   @Watch('value')
   valueWatch (val, oldVal) {
     if (val !== oldVal) {
-      this.leftBoxScrollLeft = this.tabScrollLefts[val]
+      this.$nextTick(() => {
+        this.getTabRect()
+        this.leftBoxScrollLeft = this.tabScrollLefts[this.value]
+      })
+    }
+  }
+
+  @Watch('tabs')
+  tabsWatch () {
+    if (this.tabs.length) {
+      this.$nextTick(() => {
+        this.getTabRect()
+        this.leftBoxScrollLeft = this.tabScrollLefts[this.value]
+      })
     }
   }
 
@@ -143,15 +146,15 @@ export default class QTabs extends Vue {
     const query = uni.createSelectorQuery().in(this)
     // 历遍所有tab，这里是执行了查询，最终使用exec()会一次性返回查询的数组结果
     // 只要size和rect两个参数
-    let uuid
-    if (this.isBar) {
+    const uuid = '.barUuid'
+    /*if (this.isBar) {
       uuid = '.barUuid'
     } else {
       uuid = '.lineUuid'
-    }
-
+    }*/
     query.selectAll(`.${this.uuid}${uuid}`).boundingClientRect((res: any) => {
       this.tabItemLefts = []
+      this.tabScrollLefts = []
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
         if (this.isBar) {

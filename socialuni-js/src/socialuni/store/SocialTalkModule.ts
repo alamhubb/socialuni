@@ -1,5 +1,5 @@
-import { VuexModule, Module, Action } from 'vuex-class-modules'
-import { socialUserModule } from './index'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
+import { socialCircleModule, socialUserModule } from './index'
 import CommentAddVO from '../model/comment/CommentAddVO'
 import CommentVO from '../model/comment/CommentVO'
 import TalkAPI from '../api/TalkAPI'
@@ -9,8 +9,8 @@ import CommonUtil from '../utils/CommonUtil'
 import TalkTabVO from '../model/talk/TalkTabVO'
 import TalkVueUtil from '../utils/TalkVueUtil'
 import TalkFilterUtil from '../utils/TalkFilterUtil'
-import SocialAppModule from './SocialAppModule'
 import TalkTabType from '@/socialuni/const/TalkTabType'
+import StorageUtil from '@/socialuni/utils/StorageUtil'
 
 
 @Module({ generateMutationSetters: true })
@@ -21,7 +21,6 @@ export default class SocialTalkModule extends VuexModule {
   userGender: string = TalkFilterUtil.getGenderFilter()
   talkTabs: TalkTabVO [] = TalkVueUtil.getTalkTabs()
   currentTabIndex: number = TalkVueUtil.getCurTalkTabIndex()
-  circleName: string = null
 
   // state
   currentContent: null
@@ -143,19 +142,17 @@ export default class SocialTalkModule extends VuexModule {
 
   @Action
   getTalkTabs () {
-    this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
+    // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
     this.updateCircleByTabIndex()
-  }
-
-  setCircleName (circleName: string) {
-    this.circleName = circleName
   }
 
   updateCircleByTabIndex () {
     const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
     if (curTab.type === TalkTabType.circle_type) {
-      this.setCircleName(curTab.name)
-    } /*
+      socialCircleModule.setCircleName(curTab.name)
+    } else {
+      socialCircleModule.setCircleName(null)
+    }/*
     //不处理，前三个切来切去，不能修改上次使用的
     else {
       this.setCircleName(null)
@@ -173,19 +170,31 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   setCircleNameUpdateCurTabIndex (circleName: string) {
-    const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
-
-    let circleTab
-    if (circleTabIndex > -1) {
-      circleTab = this.talkTabs[circleTabIndex]
-      //从当前位置删除
-      this.talkTabs.splice(circleTabIndex, 1)
-    } else {
-      circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
+    if (circleName) {
+      const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
+      let circleTab
+      if (circleTabIndex > -1) {
+        circleTab = this.talkTabs[circleTabIndex]
+        //从当前位置删除
+        this.talkTabs.splice(circleTabIndex, 1)
+      } else {
+        circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
+      }
+      circleTab.firstLoad = false
+      //添加到第四个位置
+      this.talkTabs.splice(3, 0, circleTab)
+      return this.setCurTabIndexUpdateCircle(3)
     }
+    return this.setCurTabIndexUpdateCircle(1)
+  }
 
-    //添加到第四个位置
-    this.talkTabs.splice(3, 0, circleTab)
-    return this.setCurTabIndexUpdateCircle(3)
+  saveLastTalkTabs (talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
+    //缓存记录本次推出时的默认值
+    // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
+    if (talkTabs.length) {
+      StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
+    }
+    StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
+    StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
   }
 }
