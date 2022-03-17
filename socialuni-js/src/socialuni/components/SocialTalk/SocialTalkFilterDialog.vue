@@ -69,6 +69,7 @@
             </div>
           </div>
           <div class="row-wrap">
+            {{ mineTagsTop10 }}
             <div v-for="item in mineTagsTop10" class="flex-none bg-click mb-sm"
                  :class="(selectTagName===item)?'q-tag-green-bd':'q-tag-white'"
                  @click="changeTagName(item)">
@@ -232,6 +233,7 @@ export default class SocialTalkFilterDialog extends Vue {
 
   // tag
   changeTag (tag: TagVO) {
+    socialTagModule.setMineHistoryTagNames(tag.name)
     this.changeTagName(tag.name)
   }
 

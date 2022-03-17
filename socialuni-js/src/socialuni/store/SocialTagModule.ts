@@ -2,10 +2,7 @@ import { Action, Module, VuexModule } from 'vuex-class-modules'
 import TagVO from '../model/community/tag/TagVO'
 import TagTypeVO from '../model/community/tag/TagTypeVO'
 import TagAPI from '../api/TagAPI'
-import StorageUtil from '@/socialuni/utils/StorageUtil'
-import TagStorageKey from '@/socialuni/constant/TagStorageKey'
-import { socialUserModule } from '@/socialuni/store/index'
-import ObjectUtil from '@/socialuni/utils/ObjectUtil'
+import TagStorageUtil from '@/socialuni/constant/TagStorageUtil'
 
 @Module({ generateMutationSetters: true })
 export default class SocialTagModule extends VuexModule {
@@ -15,7 +12,7 @@ export default class SocialTagModule extends VuexModule {
   selectTag: TagVO = null
   selectTagName: string = null
   //最多存4个
-  mineHistoryTagNames: string[] = []
+  mineHistoryTagNames: string[] = TagStorageUtil.getTagNames()
 
   get selectTagNames () {
     if (this.selectTagName) {
@@ -30,6 +27,7 @@ export default class SocialTagModule extends VuexModule {
     if (this.selectTag) {
       selectTagNames.push(this.selectTagName)
     }
+    selectTagNames.push(...this.mineHistoryTagNames)
     selectTagNames.push(...this.tags.map(item => item.name))
     //当前选中的Tag
     //历史的Tag
@@ -92,6 +90,6 @@ export default class SocialTagModule extends VuexModule {
   setMineHistoryTagNames (tagName: string) {
     this.mineHistoryTagNames.unshift(tagName)
     this.mineHistoryTagNames = this.mineHistoryTagNames.slice(0, 4)
-    StorageUtil.set(TagStorageKey.getMineHistoryTagNamesKey(socialUserModule.userId), ObjectUtil.toJson(this.mineHistoryTagNames))
+    TagStorageUtil.saveTagNames()
   }
 }
