@@ -117,7 +117,7 @@
         </div>
       </view>
 
-      <s-circle-search ref="circleSearch" @change="circleChange"></s-circle-search>
+      <social-circle-picker ref="circleSearch" @change="circleChange"></social-circle-picker>
     </view>
   </view>
 </template>
@@ -171,8 +171,8 @@ import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 
 @Component({
   components: {
+    SocialCirclePicker,
     QCityInfo,
-    SCircleSearch: SocialCirclePicker,
     QInput,
     QSidebar,
     QPopup,

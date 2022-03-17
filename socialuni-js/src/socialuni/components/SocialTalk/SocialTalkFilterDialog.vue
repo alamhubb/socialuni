@@ -69,7 +69,6 @@
             </div>
           </div>
           <div class="row-wrap">
-            {{ mineTagsTop10 }}
             <div v-for="item in mineTagsTop10" class="flex-none bg-click mb-sm"
                  :class="(selectTagName===item)?'q-tag-green-bd':'q-tag-white'"
                  @click="changeTagName(item)">
@@ -83,6 +82,8 @@
         <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
         ></tag-search>
       </view>
+
+      <social-circle-picker ref="circleSearch" @change="circleChange"></social-circle-picker>
     </div>
   </q-popup>
 </template>
@@ -115,10 +116,12 @@ import GenderType from '@/socialuni/constant/GenderType'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import TagSearch from '@/socialuni/components/SocialTalk/TagSearch.vue'
+import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
 
 
 @Component({
   components: {
+    SocialCirclePicker,
     TagSearch,
     CityPicker,
     QInput,
@@ -241,6 +244,10 @@ export default class SocialTalkFilterDialog extends Vue {
     console.log('trsdf')
     socialTagModule.getTagTypesAction()
     this.showTagSearch = true
+  }
+
+  circleChange (circle: SocialCircleRO) {
+    this.selectCircleName = circle.name
   }
 }
 </script>

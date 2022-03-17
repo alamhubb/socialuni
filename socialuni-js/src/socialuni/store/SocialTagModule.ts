@@ -77,6 +77,7 @@ export default class SocialTagModule extends VuexModule {
 
   setSelectTagName (selectTagName: string) {
     this.selectTagName = selectTagName
+    this.setMineHistoryTagNames(selectTagName)
   }
 
   get selectTagIds (): number[] {
@@ -88,8 +89,10 @@ export default class SocialTagModule extends VuexModule {
   }
 
   setMineHistoryTagNames (tagName: string) {
-    this.mineHistoryTagNames.unshift(tagName)
-    this.mineHistoryTagNames = this.mineHistoryTagNames.slice(0, 4)
-    TagStorageUtil.saveTagNames()
+    if (tagName) {
+      this.mineHistoryTagNames.unshift(tagName)
+      this.mineHistoryTagNames = this.mineHistoryTagNames.slice(0, 4)
+      TagStorageUtil.saveTagNames()
+    }
   }
 }
