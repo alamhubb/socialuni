@@ -1,7 +1,7 @@
 import UniUtil from './UniUtil'
 import AppConfig from '../config/AppConfig'
 import UserPayResultVO from '../model/user/UserPayResultVO'
-import PlatformType from '../const/PlatformType'
+import PlatformType from '../constant/PlatformType'
 import { socialSystemModule } from '../store'
 
 export default class WxUtils {

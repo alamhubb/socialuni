@@ -339,23 +339,23 @@ import TalkItemContent from '../SocialTalk/TalkItemContent.vue'
 import FollowAddVO from '../../model/FollowAddVO'
 import UserEdit from './UserEdit.vue'
 import UniUtil from '../../utils/UniUtil'
-import PagePath from '../../const/PagePath'
+import PagePath from '../../constant/PagePath'
 import FollowAPI from '../../api/FollowAPI'
-import FollowStatus from '../../const/FollowStatus'
+import FollowStatus from '../../constant/FollowStatus'
 import PageUtil from '../../utils/PageUtil'
 import ImgFileVO from '../../model/ImgFileVO'
 import ImgUtil from '../../utils/ImgUtil'
 import CosUtil from '../../utils/CosUtil'
 import UserAPI from '../../api/UserAPI'
-import Constants from '../../const/Constant'
-import ReportContentType from '../../const/ReportContentType'
-import ReportType from '../../const/ReportType'
+import Constants from '../../constant/Constant'
+import ReportContentType from '../../constant/ReportContentType'
+import ReportType from '../../constant/ReportType'
 import ReportAddVO from '../../model/report/ReportAddVO'
 import ReportAPI from '../../api/ReportAPI'
 import TalkOperate from '../SocialTalk/talkOperate.vue'
 import TalkVO from '../../model/talk/TalkVO'
 import MsgUtil from '../../utils/MsgUtil'
-import ConfigMap from '../../const/ConfigMap'
+import ConfigMap from '../../constant/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
 import { socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore } from '../../store'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
@@ -416,7 +416,7 @@ export default class UserInfo extends Vue {
   /*shellPayForUserContact () {
     if (!this.showUserContactBtnDisabled) {
       this.showUserContactBtnDisabled = true
-      const userShell = this.mineUser.shell
+      constant userShell = this.mineUser.shell
       if (userShell >= 10) {
         Alert.confirm('是否消耗10个贝壳查看用户：' + this.userProp.nickname + ' 的联系方式').then(() => {
           UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
@@ -429,7 +429,7 @@ export default class UserInfo extends Vue {
         })
       } else {
         Alert.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
-          const provider = systemModule.isApp ? ProviderType.wx : systemModule.mpPlatform
+          constant provider = systemModule.isApp ? ProviderType.wx : systemModule.mpPlatform
           PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
             UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
               this.userProp.contactAccount = res.data

@@ -37,7 +37,7 @@ export default class ChatVO {
   }*/
 /*
   static creatChat (user: UserVO): ChatVO {
-    const chat = new ChatVO()
+    constant chat = new ChatVO()
     chat.receiveUserId = user.id
     chat.nickname = user.nickname
     chat.type = ChatType.single

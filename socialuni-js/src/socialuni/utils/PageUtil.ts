@@ -1,4 +1,4 @@
-import PagePath from '../const/PagePath'
+import PagePath from '../constant/PagePath'
 import { socialSystemModule, socialUserModule } from '../store'
 import MsgUtil from './MsgUtil'
 import AlertUtil from './AlertUtil'
@@ -17,12 +17,12 @@ export default class PageUtil {
   }
 
   static toVipPage () {
-    /*const isIos: boolean = systemModule.isIos
+    /*constant isIos: boolean = systemModule.isIos
     if (isIos) {
       // 由于相关规范，iOS功能暂不可用
       MsgUtil.iosDisablePay()
     } else {
-      const user: UserVO = userModule.user
+      constant user: UserVO = userModule.user
       if (user) {
         RouterUtil.navigateTo(PagePath.userVip)
       } else {

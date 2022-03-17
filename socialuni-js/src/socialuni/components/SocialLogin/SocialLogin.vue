@@ -96,7 +96,7 @@ import SocialuniAuthQO from '../../model/openData/SocialuniAuthQO'
 import UniUtil from '../../utils/UniUtil'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MockService from '@/socialuni/service/MockService'
-import SocialAuthType from '@/socialuni/const/SocialAuthType'
+import SocialAuthType from '@/socialuni/constant/SocialAuthType'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
@@ -166,7 +166,7 @@ export default class SocialLogin extends Vue {
       const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
       await PageUtil.toSocialUniAuth(authVO)
     }
-    // const authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
+    // constant authVO: SocialuniAuthQO = new SocialuniAuthQO(SocialAuthType.phone)
     // PageUtil.toSocialUniAuth(authVO)
   }
 

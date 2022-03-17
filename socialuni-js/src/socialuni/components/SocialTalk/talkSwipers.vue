@@ -18,8 +18,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 import HomeSwiperVO from '../../model/HomeSwiperVO'
-import ConfigMap from '../../const/ConfigMap'
-import SkipType from '../../const/SkipType'
+import ConfigMap from '../../constant/ConfigMap'
+import SkipType from '../../constant/SkipType'
 import { socialAppStore, socialConfigStore, socialSystemModule } from '../../store'
 import RouterUtil from '../../utils/RouterUtil'
 

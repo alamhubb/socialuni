@@ -9,7 +9,7 @@ import CommonUtil from '../utils/CommonUtil'
 import TalkTabVO from '../model/talk/TalkTabVO'
 import TalkVueUtil from '../utils/TalkVueUtil'
 import TalkFilterUtil from '../utils/TalkFilterUtil'
-import TalkTabType from '@/socialuni/const/TalkTabType'
+import TalkTabType from '@/socialuni/constant/TalkTabType'
 import StorageUtil from '@/socialuni/utils/StorageUtil'
 
 

@@ -37,7 +37,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import TagVO from '../../model/community/tag/TagVO'
 import TagAPI from '../../api/TagAPI'
-import ErrorConst from '../../const/ErrorConst'
+import ErrorConst from '../../constant/ErrorConst'
 import AlertUtil from '../../utils/AlertUtil'
 import ResultRO from '@/socialuni/model/social/ResultRO'
 

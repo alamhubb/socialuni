@@ -1,5 +1,5 @@
 import TalkVO from './TalkVO'
-import LoadMoreType from '../../const/LoadMoreType'
+import LoadMoreType from '../../constant/LoadMoreType'
 
 export default class TalkTabVO {
   name: string = null

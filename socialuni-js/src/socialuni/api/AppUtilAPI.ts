@@ -3,7 +3,7 @@ import AppInitQueryVO from '../model/common/AppInitQueryVO'
 import AppUpdateVO from '../model/app/AppUpdateVO'
 import AppUpdateResultVO from '../model/app/AppUpdateResultVO'
 import FrontErrorLogVO from '../model/app/FrontErrorLogVO'
-import JsonUtil from '../utils/JsonUtil'
+import ObjectUtil from '../utils/ObjectUtil'
 
 export default class AppUtilAPI {
   static queryAppInitDataLoadAPI (initQueryVO: AppInitQueryVO) {
@@ -24,6 +24,6 @@ export default class AppUtilAPI {
     if (uri && uri.indexOf('sendErrorLog') > -1) {
       return
     }
-    return request.post('app/sendErrorLog', new FrontErrorLogVO(uri, detail, JsonUtil.toJson(params), JsonUtil.toJson(errorMsg)))
+    return request.post('app/sendErrorLog', new FrontErrorLogVO(uri, detail, ObjectUtil.toJson(params), ObjectUtil.toJson(errorMsg)))
   }
 }

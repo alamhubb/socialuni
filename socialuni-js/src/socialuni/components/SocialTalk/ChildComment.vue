@@ -36,9 +36,9 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
 import CommentVO from '../../model/comment/CommentVO'
-import PagePath from '../../const/PagePath'
+import PagePath from '../../constant/PagePath'
 import { socialTalkModule } from '../../store'
-import JsonUtils from '../../utils/JsonUtil'
+import JsonUtils from '../../utils/ObjectUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 

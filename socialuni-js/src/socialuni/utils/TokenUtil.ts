@@ -1,5 +1,5 @@
 import StorageUtil from './StorageUtil'
-import SocialSystemInfo from '@/socialuni/const/SocialSystemInfo'
+import SocialSystemInfo from '@/socialuni/constant/SocialSystemInfo'
 
 export default class TokenUtil {
   // 开发生产区分token，避免混淆，不区分的话会冲突

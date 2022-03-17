@@ -1,6 +1,6 @@
-import SkipType from '../const/SkipType'
-import SkipUrlConst from '../const/SkipUrlConst'
-import PagePath from '../const/PagePath'
+import SkipType from '../constant/SkipType'
+import SkipUrlConst from '../constant/SkipUrlConst'
+import PagePath from '../constant/PagePath'
 import { socialSystemModule } from '../store'
 import PageUtil from '@/socialuni/utils/PageUtil'
 

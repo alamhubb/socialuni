@@ -1,8 +1,8 @@
 import TokenUtil from './TokenUtil'
 import NotifyVO from '../model/NotifyVO'
-import JsonUtil from './JsonUtil'
+import ObjectUtil from './ObjectUtil'
 import { socialChatModule, socialNotifyModule } from '../store'
-import NotifyType from '../const/NotifyType'
+import NotifyType from '../constant/NotifyType'
 import AppConfig from '../config/AppConfig'
 import CommonUtil from './CommonUtil'
 
@@ -75,7 +75,7 @@ export default class WebsocketUtil {
     })
 
     uni.onSocketMessage((res: any) => {
-      const notify: NotifyVO = JsonUtil.jsonParse(res.data)
+      constant notify: NotifyVO = JsonUtil.jsonParse(res.data)
       // todo 直接将这个评论添加到talk中
       if (notify.type === NotifyType.comment) {
         notifyModule.addUnreadNotifies(notify.user)

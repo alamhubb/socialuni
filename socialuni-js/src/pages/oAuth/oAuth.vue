@@ -123,7 +123,7 @@ import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import ErrorCode from '@/socialuni/const/ErrorCode'
+import ErrorCode from '@/socialuni/constant/ErrorCode'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import AppUtilAPI from '@/socialuni/api/AppUtilAPI'
@@ -135,7 +135,7 @@ import {
   socialSystemStore,
   socialUserStore
 } from '@/socialuni/store'
-import JsonUtil from '@/socialuni/utils/JsonUtil'
+import ObjectUtil from '@/socialuni/utils/ObjectUtil'
 import ResultRO from '@/socialuni/model/social/ResultRO'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'
 import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
@@ -181,7 +181,7 @@ export default class OAuth extends Vue {
   authSuccess = false
 
   onLoad () {
-    JsonUtil.log(this.user)
+    ObjectUtil.log(this.user)
     console.log(this.user)
   }
 

@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SkipUrlConst from '../../const/SkipUrlConst'
+import SkipUrlConst from '../../constant/SkipUrlConst'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import { socialUserStore } from '../../store'
 

@@ -1,8 +1,8 @@
 import QQUtils from './QQUtils'
 import { socialPlatformModule, socialSystemModule, socialUserModule } from '../store'
 import WxUtils from './WxUtils'
-import AppMsg from '../const/AppMsg'
-import Constants from '../const/Constant'
+import AppMsg from '../constant/AppMsg'
+import Constants from '../constant/Constant'
 import MsgUtil from './MsgUtil'
 import UserPayResultVO from '../model/user/UserPayResultVO'
 

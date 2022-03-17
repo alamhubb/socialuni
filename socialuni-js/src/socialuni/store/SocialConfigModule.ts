@@ -1,5 +1,5 @@
 import { Module, VuexModule } from 'vuex-class-modules'
-import ConfigMap from '../const/ConfigMap'
+import ConfigMap from '../constant/ConfigMap'
 import Lodash from '../utils/Lodash'
 import SocialAppModule from './SocialAppModule'
 

@@ -1,6 +1,6 @@
 import { socialConfigModule, socialSystemModule, socialUserModule } from '../store'
 
-import AppMsg from '../const/AppMsg'
+import AppMsg from '../constant/AppMsg'
 import AlertUtil from './AlertUtil'
 import ToastUtil from './ToastUtil'
 import PageUtil from './PageUtil'

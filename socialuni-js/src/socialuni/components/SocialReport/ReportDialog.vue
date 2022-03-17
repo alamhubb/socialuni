@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import ReportType from '../../const/ReportType'
-import ReportContentType from '../../const/ReportContentType'
+import ReportType from '../../constant/ReportType'
+import ReportContentType from '../../constant/ReportContentType'
 import MessageVO from '../../model/message/MessageVO'
 import ReportAddVO from '../../model/report/ReportAddVO'
 import ReportAPI from '../../api/ReportAPI'

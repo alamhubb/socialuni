@@ -3,12 +3,12 @@
  * @Date 2021-03-05 20:09
  * @Version 1.0
  */
-import JsonUtil from './JsonUtil'
+import ObjectUtil from './ObjectUtil'
 
 export default class StorageUtil {
   static setObj (key: string, value: any) {
     if (value) {
-      uni.setStorageSync(key, JsonUtil.toJson(value))
+      uni.setStorageSync(key, ObjectUtil.toJson(value))
     } else {
       StorageUtil.remove(key)
     }
@@ -17,7 +17,7 @@ export default class StorageUtil {
   static getObj (key: string): any {
     const objStr: string = uni.getStorageSync(key)
     if (objStr) {
-      return JsonUtil.jsonParse(objStr)
+      return ObjectUtil.toParse(objStr)
     }
     return null
   }
@@ -26,7 +26,7 @@ export default class StorageUtil {
     if (value || value === 0 || value === '') {
       //string直接转换的话会加上""
       if (value instanceof Object) {
-        uni.setStorageSync(key, JsonUtil.toJson(value))
+        uni.setStorageSync(key, ObjectUtil.toJson(value))
       } else {
         uni.setStorageSync(key, value)
       }
@@ -39,7 +39,7 @@ export default class StorageUtil {
     const objStr: string = uni.getStorageSync(key)
     if (objStr) {
       try {
-        return JsonUtil.jsonParse(objStr)
+        return ObjectUtil.toParse(objStr)
       } catch {
         return objStr
       }

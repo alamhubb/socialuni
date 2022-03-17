@@ -1,5 +1,5 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
-import SocialAuthType from '@/socialuni/const/SocialAuthType'
+import SocialAuthType from '@/socialuni/constant/SocialAuthType'
 import DevAccountAPI from '@/socialuni/api/DevAccountAPI'
 import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
@@ -50,7 +50,7 @@ export default class SocialOAuthModule extends VuexModule {
           }
           //支持非授权跳转
           /*if (!appModule.threeSecretKey) {
-            const result: ResultVO<any> = new ResultVO<any>()
+            constant result: ResultVO<any> = new ResultVO<any>()
             result.errorCode = ErrorCode.business
             result.errorMsg = '社交联盟密钥错误'
             result.success = false

@@ -1,81 +1,87 @@
 <template>
   <q-popup ref="filterDialog" bottom hide-modal @confirm="confirm">
-    <div class="h87vh py-sm px">
-      <div class="row-col-center mt-sm mb-sm">
-        <div class="mr-sm">性别:</div>
-        <radio-group @change="genderChange" class="flex-1">
-          <div class="row-col-center row-wrap">
-            <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
-              <label>
-                <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
-                <text class="mr-sm">{{ report.label }}</text>
-              </label>
+    <div class="h87vh">
+      <div class="h100p py-sm px" v-show="!showTagSearch">
+        <div class="row-col-center mt-sm mb-sm">
+          <div class="mr-sm">性别:</div>
+          <radio-group @change="genderChange" class="flex-1">
+            <div class="row-col-center row-wrap">
+              <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
+                <label>
+                  <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
+                  <text class="mr-sm">{{ report.label }}</text>
+                </label>
+              </div>
+            </div>
+          </radio-group>
+          <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
+        </div>
+        <div class="row-col-center mb-sm">
+          <div class="mr-sm">年龄: {{ rangeValue[0] }} - {{ rangeValue[1] }}</div>
+          <q-slider
+            class="flex-1"
+            :value="rangeValue"
+            :min="rangeMin"
+            :max="rangMax"
+            :bar-height="3"
+            active-color="#FF6B00"
+            :format="format"
+            @change="handleRangeChange"
+          ></q-slider>
+          <!--        <q-input class="w50 mr-xs"></q-input>
+                  岁 —
+                  <q-input class="w50 ml-sm mr-xs"></q-input>
+                  岁-->
+          <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
+        </div>
+        <div class="row-col-center mb-sm">
+          <div class="mr-sm">地区:</div>
+          <q-city-info v-model="district" picker></q-city-info>
+          <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
+        </div>
+        <div>
+          <div class="row-between-center mb-sm">
+            <div>圈子:</div>
+            <div class="row-col-center bg-click">
+              <div>更多
+                <q-icon icon="mdi-chevron-right"></q-icon>
+              </div>
             </div>
           </div>
-        </radio-group>
-        <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
-      </div>
-      <div class="row-col-center mb-sm">
-        <div class="mr-sm">年龄: {{ rangeValue[0] }} - {{ rangeValue[1] }}</div>
-        <q-slider
-          class="flex-1"
-          :value="rangeValue"
-          :min="rangeMin"
-          :max="rangMax"
-          :bar-height="3"
-          active-color="#FF6B00"
-          :format="format"
-          @change="handleRangeChange"
-        ></q-slider>
-        <!--        <q-input class="w50 mr-xs"></q-input>
-                岁 —
-                <q-input class="w50 ml-sm mr-xs"></q-input>
-                岁-->
-        <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
-      </div>
-      <div class="row-col-center mb-sm">
-        <div class="mr-sm">地区:</div>
-        <q-city-info v-model="district" picker></q-city-info>
-        <!--      根据当前用户性别显示  <div class="q-tab">仅男生可见</div>-->
+          <div class="row-wrap">
+            <div v-for="item in mineCirclesTop10" class="flex-none bg-click mb-sm"
+                 :class="selectCircleName===item?'q-tag-green-bd':'q-tag-white'" @click="checkCircleName(item)">
+              {{ item || '不限' }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row-between-center mb-sm mt-sm">
+            <div>话题:</div>
+            <div class="row-col-center">
+              <!--            <div class="mr-md row-col-center bg-click color-sub">
+                            清空
+                            <q-icon icon="mdi-close"></q-icon>
+                          </div>-->
+              <div class="row-col-center bg-click" @click="openTagSearchVue">更多
+                <q-icon icon="mdi-chevron-right"></q-icon>
+              </div>
+            </div>
+          </div>
+          <div class="row-wrap">
+            <div v-for="item in mineTagsTop10" class="flex-none bg-click mb-sm"
+                 :class="(selectTagName===item)?'q-tag-green-bd':'q-tag-white'"
+                 @click="changeTagName(item)">
+              {{ item || '不限' }}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <div class="row-between-center mb-sm">
-          <div>圈子:</div>
-          <div class="row-col-center bg-click">
-            <div>更多
-              <q-icon icon="mdi-chevron-right"></q-icon>
-            </div>
-          </div>
-        </div>
-        <div class="row-wrap">
-          <div v-for="item in mineCirclesTop10" class="flex-none bg-click mb-sm"
-               :class="selectCircleName===item?'q-tag-green-bd':'q-tag-white'" @click="checkCircleName(item)">
-            {{ item || '不限' }}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="row-between-center mb-sm mt-sm">
-          <div>话题:</div>
-          <div class="row-col-center">
-            <!--            <div class="mr-md row-col-center bg-click color-sub">
-                          清空
-                          <q-icon icon="mdi-close"></q-icon>
-                        </div>-->
-            <div class="row-col-center bg-click">更多
-              <q-icon icon="mdi-chevron-right"></q-icon>
-            </div>
-          </div>
-        </div>
-        <div class="row-wrap">
-          <div v-for="item in mineTagsTop10" class="flex-none bg-click mb-sm"
-               :class="(selectTagName===item)?'q-tag-green-bd':'q-tag-white'"
-               @click="changeTag(item)">
-            {{ item || '不限' }}
-          </div>
-        </div>
-      </div>
+      <view v-if="showTagSearch" class="h100p">
+        <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
+        ></tag-search>
+      </view>
     </div>
   </q-popup>
 </template>
@@ -104,13 +110,15 @@ import CityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
 import DistrictVO from '@/socialuni/model/DistrictVO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
-import GenderType from '@/socialuni/const/GenderType'
+import GenderType from '@/socialuni/constant/GenderType'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
+import TagSearch from '@/socialuni/components/SocialTalk/TagSearch.vue'
 
 
 @Component({
   components: {
+    TagSearch,
     CityPicker,
     QInput,
     QCityInfo,
@@ -146,10 +154,15 @@ export default class SocialTalkFilterDialog extends Vue {
   selectCircleName = socialCircleModule.circleName
   checkedTags: TagVO[] = []
   selectTagName: string = socialTagModule.selectTagName
+  // tag 相关
+  showTagSearch = false
+
 
   open () {
     this.selectTagName = socialTagModule.selectTagName
     this.selectCircleName = socialCircleModule.circleName
+    this.initFilterValue()
+    this.showTagSearch = false
     this.$refs.filterDialog.open()
     console.log(this.district)
   }
@@ -195,6 +208,7 @@ export default class SocialTalkFilterDialog extends Vue {
   confirm () {
     socialTalkModule.setCircleNameUpdateCurTabIndex(this.selectCircleName)
     socialTagModule.setSelectTagName(this.selectTagName)
+    socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
   }
 
   async clearCheckedTags () {
@@ -203,12 +217,28 @@ export default class SocialTalkFilterDialog extends Vue {
   }
 
   // tag
-  changeTag (tagName: string) {
+  changeTagName (tagName: string) {
     this.selectTagName = tagName
   }
 
   deleteTag () {
     this.selectTagName = null
+  }
+
+  initFilterValue () {
+    this.genderTypeValue = socialTalkModule.userGender
+    this.rangeValue = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
+  }
+
+  // tag
+  changeTag (tag: TagVO) {
+    this.changeTagName(tag.name)
+  }
+
+  openTagSearchVue () {
+    console.log('trsdf')
+    socialTagModule.getTagTypesAction()
+    this.showTagSearch = true
   }
 }
 </script>

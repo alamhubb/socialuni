@@ -1,5 +1,5 @@
 import { SocialMpConfig } from '../model/SocialMpConfig'
-import GenderType from '../const/GenderType'
+import GenderType from '../constant/GenderType'
 import { Store } from 'vuex'
 
 export default class SocialuniConfig {

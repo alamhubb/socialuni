@@ -99,41 +99,6 @@
       <tabs-talk class="flex-1" ref="tabsTalk"
                  :scroll-enable="scrollEnable"
       ></tabs-talk>
-
-      <q-popup ref="filterPopup" bottom title="动态筛选" @cancel="hideFilter" @confirm="filterQuery">
-        <view class="mt-sm pb-sm">
-          <!--          只有当前应用类型为全部性别才显示性别筛选-->
-          <view class="row-center px pt" v-if="appGender === GenderTypeAll">
-            <view class="w50 flex-none">性别：</view>
-            <radio-group @change="genderChange" class="flex-1">
-              <div class="flex-row row-wrap">
-                <div v-for="report in visibleGenders" :key="report.value" class="mb-sm">
-                  <label>
-                    <radio :value="report.value" :checked="report.value===genderTypeValue"></radio>
-                    <text class="ml-sm mr">{{ report.label }}</text>
-                  </label>
-                </div>
-              </div>
-            </radio-group>
-          </view>
-          <view class="mt-sm pb-xl pt">
-            <view class="row-between px">
-              <view>发布人年龄：{{ rangeValue[0] }} - {{ rangeValue[1] }}</view>
-            </view>
-            <view class="px">
-              <q-slider
-                :value="rangeValue"
-                :min="rangeMin"
-                :max="rangMax"
-                :bar-height="3"
-                active-color="#FF6B00"
-                :format="format"
-                @change="handleRangeChange"
-              ></q-slider>
-            </view>
-          </view>
-        </view>
-      </q-popup>
     </view>
     <msg-input>
     </msg-input>
@@ -144,7 +109,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
 import TalkItem from '../SocialTalk/TalkItem.vue'
-import PagePath from '../../const/PagePath'
+import PagePath from '../../constant/PagePath'
 import UnreadNotifyVO from '../../model/UnreadNotifyVO'
 import TagVO from '../../model/community/tag/TagVO'
 import RouterUtil from '../../utils/RouterUtil'
@@ -166,7 +131,7 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import TagSearch from '../SocialTalk/TagSearch.vue'
 import TabsTalkVue from '../SocialTalk/tabsTalk.vue'
 import QButton from '../../../qing-ui/components/QButton/QButton.vue'
-import GenderType from '../../const/GenderType'
+import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import MsgInput from '../MsgInput.vue'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
@@ -174,7 +139,7 @@ import QSearch from '../../../qing-ui/components/QSearch/QSearch.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import QPopup from '../../../qing-ui/components/QPopup/QPopup.vue'
 import QSlider from '../../../qing-ui/components/QSlider/QSlider.vue'
-import ConfigMap from '@/socialuni/const/ConfigMap'
+import ConfigMap from '@/socialuni/constant/ConfigMap'
 import HomeSwiperVO from '@/socialuni/model/HomeSwiperVO'
 import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 
@@ -265,7 +230,6 @@ export default class SocialTalkPage extends Vue {
     UniUtil.showShareMenu()
     // 这里是不是有问题应该选择异性
     // 指的是用户选择的筛选性别
-    this.initFilterValue()
     this.initQuery()
     this.socialTalkScroll({ scrollTop: 0 })
   }
@@ -337,16 +301,6 @@ export default class SocialTalkPage extends Vue {
     //修复打开filter时，当前值不对的问题
   }
 
-  hideFilter () {
-    this.showFilter = false
-    this.initFilterValue()
-  }
-
-  initFilterValue () {
-    this.genderTypeValue = socialTalkModule.userGender
-    this.rangeValue = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
-  }
-
   get useFilters (): boolean {
     return socialTalkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialuniConfig.appGenderType) ||
       socialTalkModule.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
@@ -363,12 +317,6 @@ export default class SocialTalkPage extends Vue {
 
   genderChange ({ target }) {
     this.genderTypeValue = target.value
-  }
-
-  filterQuery () {
-    socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
-    this.hideFilter()
-    this.initQuery()
   }
 
   toNotifyVue () {

@@ -1,6 +1,6 @@
 import StorageUtil from './StorageUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import SocialSystemInfo from '@/socialuni/const/SocialSystemInfo'
+import SocialSystemInfo from '@/socialuni/constant/SocialSystemInfo'
 
 export default class UserStorageUtil {
   // 开发生产区分user，避免混淆，不区分的话会冲突

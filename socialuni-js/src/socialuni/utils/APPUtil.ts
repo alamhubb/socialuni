@@ -1,6 +1,6 @@
 import AppUtilAPI from '../api/AppUtilAPI'
 import UniUtil from './UniUtil'
-import AppUpdateType from '../const/AppUpdateType'
+import AppUpdateType from '../constant/AppUpdateType'
 import { socialConfigModule } from '../store'
 import AppConfig from '../config/AppConfig'
 import AlertUtil from './AlertUtil'

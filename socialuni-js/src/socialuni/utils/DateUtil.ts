@@ -1,4 +1,4 @@
-import Constants from '../const/Constant'
+import Constants from '../constant/Constant'
 
 /**
  * Parse the time to string

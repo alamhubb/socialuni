@@ -1,5 +1,5 @@
 import StorageUtil from './StorageUtil'
-import GenderType from '../const/GenderType'
+import GenderType from '../constant/GenderType'
 import SocialuniConfig from '../config/SocialuniConfig'
 
 export default class TalkFilterUtil {

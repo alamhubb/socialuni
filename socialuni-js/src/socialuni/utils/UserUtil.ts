@@ -1,6 +1,6 @@
-import GenderType from '../const/GenderType'
+import GenderType from '../constant/GenderType'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import FollowStatus from '../const/FollowStatus'
+import FollowStatus from '../constant/FollowStatus'
 
 export default class UserUtil {
   static getGenderIcon (user: CenterUserDetailRO): string {
@@ -58,8 +58,8 @@ export default class UserUtil {
     if (user.onlineFlag) {
       return Constants.onlineColor
     } else if (user.lastOnlineTime) {
-      const lastDateTime = new Date(user.lastOnlineTime).getTime()
-      const curDateTime = new Date().getTime()
+      constant lastDateTime = new Date(user.lastOnlineTime).getTime()
+      constant curDateTime = new Date().getTime()
       if (curDateTime / Constants.minute - 30 < lastDateTime / Constants.minute) {
         return Constants.onlineColor
       }

@@ -11,7 +11,7 @@ import TalkVO from '../model/talk/TalkVO'
 import DomFile from '../model/DomFile'
 import ImgAddQO from '../model/user/ImgAddQO'
 import TalkTabVO from '@/socialuni/model/talk/TalkTabVO'
-import TalkTabType from '@/socialuni/const/TalkTabType'
+import TalkTabType from '@/socialuni/constant/TalkTabType'
 
 export default class TalkAPI {
   static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, tagIds: number[], visibleType: string, visibleGender: string, circleName: string) {

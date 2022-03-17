@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SocialAuthType from '@/socialuni/const/SocialAuthType'
+import SocialAuthType from '@/socialuni/constant/SocialAuthType'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import { socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'

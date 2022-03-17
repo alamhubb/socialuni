@@ -1,5 +1,5 @@
 //三方平台登录返回的用户信息结构
-import LoginProvider from '../../const/LoginProvider'
+import LoginProvider from '../../constant/LoginProvider'
 
 export default class ProviderUserVO {
   provider: string = LoginProvider.qq

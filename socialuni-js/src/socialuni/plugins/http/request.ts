@@ -3,13 +3,13 @@ import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
 import { socialConfigModule, socialSystemModule } from '../../store'
 import UserService from '../../service/UserService'
-import ErrorConst from '../../const/ErrorConst'
+import ErrorConst from '../../constant/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
 import { socialConfig } from '../../index'
 import SocialuniConfig from '../../config/SocialuniConfig'
-import SocialSystemInfo from '../../const/SocialSystemInfo'
+import SocialSystemInfo from '../../constant/SocialSystemInfo'
 
 const request: HttpRequest = new HttpRequest()
 
@@ -42,7 +42,7 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
 
   /* else {
     //如果未登录，只允许查询talk，其他全部提示要登录
-    const configUrl: string = config.url
+    constant configUrl: string = config.url
     if (configUrl.indexOf('queryTalks') < 0 && configUrl.indexOf('wxLogin') < 0) {
       MsgUtil.unLoginMessage()
       cancel('用户未登录请求了没有权限的接口', config)

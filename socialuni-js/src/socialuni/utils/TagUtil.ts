@@ -1,6 +1,6 @@
 import TagVO from '../model/community/tag/TagVO'
 import StorageUtil from './StorageUtil'
-import Constants from '@/socialuni/const/Constant'
+import Constants from '@/socialuni/constant/Constant'
 
 const initTag = new TagVO()
 initTag.name = Constants.initTagName
