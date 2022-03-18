@@ -2,6 +2,8 @@ import { Action, Module, VuexModule } from 'vuex-class-modules'
 import CircleAPI from '../api/CircleAPI'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
+import TagStorageUtil from '@/socialuni/constant/TagStorageUtil'
+import SocialCircleStorageUtil from '@/socialuni/constant/SocialCircleStorageUtil'
 
 @Module({ generateMutationSetters: true })
 export default class SocialCircleModule extends VuexModule {
@@ -9,9 +11,20 @@ export default class SocialCircleModule extends VuexModule {
   circles: SocialCircleRO[] = []
   circleTypes: CircleTypeRO[] = []
   historyCircles: CircleTypeRO [] = []
+  //最多存4个
+  mineHistoryCircleNames: string[] = TagStorageUtil.getTagNames()
+
+  setMineHistoryCircleNames (circleName: string) {
+    if (circleName) {
+      this.mineHistoryCircleNames.unshift(circleName)
+      this.mineHistoryCircleNames = this.mineHistoryCircleNames.slice(0, 4)
+      SocialCircleStorageUtil.saveCircleNames()
+    }
+  }
 
   setCircleName (circleName: string) {
     this.circleName = circleName
+    this.setMineHistoryCircleNames(circleName)
   }
 
   @Action
@@ -28,6 +41,7 @@ export default class SocialCircleModule extends VuexModule {
     if (this.circleName) {
       showCircleNames.push(this.circleName)
     }
+    showCircleNames.push(...this.mineHistoryCircleNames)
     showCircleNames.push(...this.circles.map(item => item.name))
     //当前选中的circle
     //历史的circle

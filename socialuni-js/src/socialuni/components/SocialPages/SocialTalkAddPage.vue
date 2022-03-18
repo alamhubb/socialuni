@@ -136,6 +136,7 @@ import {
   socialLocationStore,
   socialTagModule,
   socialTagStore,
+  socialTalkModule,
   socialUserStore
 } from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
@@ -420,9 +421,12 @@ export default class SocialTalkAddPage extends Vue {
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
-        //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
-        // socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
-        socialCircleModule.setCircleName(this.circleName)
+        if (socialTalkModule.curTabIsCircle) {
+          //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
+          socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
+        } else {
+          socialCircleModule.setCircleName(this.circleName)
+        }
         RouterUtil.reLaunch(PagePath.talk + '?load=true')
       })
       .catch(() => {

@@ -250,13 +250,13 @@ export default class SocialTalkFilterDialog extends Vue {
   }
 
   openTagSearchVue () {
-    console.log('trsdf')
     socialTagModule.getTagTypesAction()
     this.showTagSearch = true
   }
 
   circleChange (circle: SocialCircleRO) {
-    this.selectCircleName = circle.name
+    socialCircleModule.setMineHistoryCircleNames(circle.name)
+    this.checkCircleName(circle.name)
   }
 
   openCircleDialog () {
