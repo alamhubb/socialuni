@@ -42,7 +42,7 @@
         <div>
           <div class="row-between-center mb-sm">
             <div>圈子:</div>
-            <div class="row-col-center bg-click">
+            <div class="row-col-center bg-click" @click="openCircleDialog">
               <div>更多
                 <q-icon icon="mdi-chevron-right"></q-icon>
               </div>
@@ -83,13 +83,13 @@
         ></tag-search>
       </view>
 
-      <social-circle-picker ref="circleSearch" @change="circleChange"></social-circle-picker>
+      <social-circle-picker ref="circleDialog" @change="circleChange"></social-circle-picker>
     </div>
   </q-popup>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
@@ -99,6 +99,7 @@ import {
   socialCircleModule,
   socialCircleStore,
   socialLocationModule,
+  socialLocationStore,
   socialTagModule,
   socialTagStore,
   socialTalkModule,
@@ -134,6 +135,7 @@ import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
 export default class SocialTalkFilterDialog extends Vue {
   $refs: {
     filterDialog: QPopup;
+    circleDialog: SocialCirclePicker;
   }
   @socialUserStore.State('user') user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
@@ -142,6 +144,7 @@ export default class SocialTalkFilterDialog extends Vue {
   @socialCircleStore.State('circles') readonly circles: SocialCircleRO []
   @socialCircleStore.Getter('mineCirclesTop10') readonly mineCirclesTop10: string []
   @socialTagStore.Getter('mineTagsTop10') readonly mineTagsTop10: string []
+  @socialLocationStore.Getter('location') location: DistrictVO
 
   rangeValue: number[] = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   showCircleSearch = false
@@ -160,6 +163,11 @@ export default class SocialTalkFilterDialog extends Vue {
   selectTagName: string = socialTagModule.selectTagName
   // tag 相关
   showTagSearch = false
+
+  @Watch('location')
+  locationWatch () {
+    this.district = this.location
+  }
 
 
   open () {
@@ -212,6 +220,7 @@ export default class SocialTalkFilterDialog extends Vue {
   confirm () {
     socialTalkModule.setCircleNameUpdateCurTabIndex(this.selectCircleName)
     socialTagModule.setSelectTagName(this.selectTagName)
+    socialLocationModule.setLocation(this.district)
     socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
   }
 
@@ -249,5 +258,10 @@ export default class SocialTalkFilterDialog extends Vue {
   circleChange (circle: SocialCircleRO) {
     this.selectCircleName = circle.name
   }
+
+  openCircleDialog () {
+    this.$refs.circleDialog.openDialog()
+  }
+
 }
 </script>

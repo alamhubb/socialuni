@@ -7,6 +7,11 @@
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view v-show="!showTagSearch" class="flex-col h100vh">
       <q-navbar class="flex-none">
+        <div class="row-col-center ml-xs mr-sm font-bold bg-click" @click="openCityPicker">
+          <q-icon size="14" icon="map-fill"></q-icon>
+          {{ location.adName }}
+          <q-icon icon="mdi-chevron-right"></q-icon>
+        </div>
         <q-search class="flex-1 mr-sm" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTagName" class="flex-row flex-auto">
@@ -20,9 +25,9 @@
                   @click.native.stop="deleteTag"
           ></q-icon>
         </q-search>
-        <view class="mr-sm" :class="{'text-theme':useFilters}">
-          <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
-        </view>
+        <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
+                  <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
+                </view>-->
         <view v-if="user" class="position-relative mr-sm">
           <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
           <u-badge :count="unreadNotifiesNum" size="mini"
@@ -102,6 +107,8 @@
     </view>
     <msg-input>
     </msg-input>
+
+    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
   </view>
 </template>
 
@@ -120,6 +127,8 @@ import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
   socialAppStore,
   socialConfigStore,
+  socialLocationModule,
+  socialLocationStore,
   socialNotifyModule,
   socialNotifyStore,
   socialTagModule,
@@ -142,11 +151,14 @@ import QSlider from '../../../qing-ui/components/QSlider/QSlider.vue'
 import ConfigMap from '@/socialuni/constant/ConfigMap'
 import HomeSwiperVO from '@/socialuni/model/HomeSwiperVO'
 import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
+import DistrictVO from '@/socialuni/model/DistrictVO'
+import QCityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QCityPicker,
     QTabs,
     QSlider,
     QPopup,
@@ -164,7 +176,7 @@ import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 export default class SocialTalkPage extends Vue {
   public $refs!: {
     tabsTalk: TabsTalkVue;
-    filterPopup: QPopup;
+    cityPicker: QCityPicker
   }
   @socialTagStore.State('tags') readonly tags: TagVO []
   @socialUserStore.State('user') user: CenterUserDetailRO
@@ -176,6 +188,8 @@ export default class SocialTalkPage extends Vue {
   @socialAppStore.State('homeSwipers') homeSwipers: HomeSwiperVO[]
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
   @socialTagStore.State('selectTagName') selectTagName: string
+  @socialLocationStore.Getter('location') location: DistrictVO
+
   current = 0
   // tag 相关
   showTagSearch = false
@@ -294,31 +308,6 @@ export default class SocialTalkPage extends Vue {
     this.initQuery()
   }
 
-  //隐藏和展示都使用user中的默认值
-  showFilterModel () {
-    this.$refs.filterPopup.open()
-    // this.showFilter = true
-    //修复打开filter时，当前值不对的问题
-  }
-
-  get useFilters (): boolean {
-    return socialTalkModule.userGender !== GenderType.talkQueryFilterMap.get(SocialuniConfig.appGenderType) ||
-      socialTalkModule.userMinAge !== TalkFilterUtil.minAgeFilterDefault ||
-      socialTalkModule.userMaxAge !== TalkFilterUtil.maxAgeFilterDefault
-  }
-
-  format () {
-    return ''
-  }
-
-  handleRangeChange (e) {
-    this.rangeValue = e
-  }
-
-  genderChange ({ target }) {
-    this.genderTypeValue = target.value
-  }
-
   toNotifyVue () {
     socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
     RouterUtil.navigateTo(PagePath.notify)
@@ -327,6 +316,15 @@ export default class SocialTalkPage extends Vue {
   // 点击加号去新增talk
   toTalkAdd () {
     PageUtil.toTalkAddPage()
+  }
+
+  openCityPicker () {
+    this.$refs.cityPicker.open()
+  }
+
+  cityChange (district: DistrictVO) {
+    socialLocationModule.setLocation(district)
+    this.$refs.tabsTalk.autoChooseUseLocationQueryTalks(true)
   }
 }
 </script>

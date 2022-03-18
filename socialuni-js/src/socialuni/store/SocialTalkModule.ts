@@ -183,6 +183,7 @@ export default class SocialTalkModule extends VuexModule {
       circleTab.firstLoad = false
       //添加到第四个位置
       this.talkTabs.splice(3, 0, circleTab)
+      this.talkTabs = this.talkTabs.slice(0, 9)
       return this.setCurTabIndexUpdateCircle(3)
     }
     return this.setCurTabIndexUpdateCircle(1)
@@ -196,5 +197,13 @@ export default class SocialTalkModule extends VuexModule {
     }
     StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
     StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
+  }
+
+  get curTab () {
+    return this.talkTabs[this.currentTabIndex]
+  }
+
+  get curTabIsCircle () {
+    return this.curTab.type === TalkTabType.circle_type
   }
 }

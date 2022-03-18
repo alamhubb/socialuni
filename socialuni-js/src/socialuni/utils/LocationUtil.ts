@@ -21,6 +21,7 @@ export default class LocationUtil {
   static readonly nationwide = '全国'
 
   static readonly locationKey = 'location'
+  static readonly circleLocationKey = 'circleLocationKey'
   static readonly openLocationKey = 'openLocation'
 
   static readonly filterLocationKey = 'filterLocation'
@@ -39,10 +40,18 @@ export default class LocationUtil {
   static getLocation (): DistrictVO {
     return StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
   }
+  static getCircleLocation (): DistrictVO {
+    return StorageUtil.getObj(LocationUtil.circleLocationKey) || LocationUtil.chinaDistrict
+  }
 
   static setLocation (district: DistrictVO) {
     StorageUtil.setObj(LocationUtil.locationKey, district)
   }
+
+  static setCircleLocation (district: DistrictVO) {
+    StorageUtil.setObj(LocationUtil.circleLocationKey, district)
+  }
+
 
   static setFilterLocation (district: DistrictVO) {
     StorageUtil.setObj(LocationUtil.filterLocationKey, district)

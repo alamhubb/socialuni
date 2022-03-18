@@ -17,10 +17,14 @@ export default class TalkQueryVO {
   constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string, tagNames: string[]) {
     this.talkIds = talkIds
     const district = socialLocationModule.location
+    //查询使用当前的
     if (district) {
       this.adCode = district.adCode
-      this.lon = district.lon
-      this.lat = district.lat
+    }
+    //经纬度始终使用同城的坐标
+    if (socialLocationModule.cityLocation) {
+      this.lon = socialLocationModule.cityLocation.lon
+      this.lat = socialLocationModule.cityLocation.lat
     }
     this.tagIds = tagIds
     this.homeTabType = tabType

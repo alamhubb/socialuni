@@ -6,19 +6,19 @@
       <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
               class="bd-radius flex-1 mr-sm">
         <template #default="{tab,index}">
-          <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
+<!--          <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
             {{ tab.name }}
-          </div>
-          <div v-else class="h30 px-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
+          </div>-->
+          <div class="h30 px-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
             {{ tab.name }}
           </div>
         </template>
-        <template #icon="{tab}">
+<!--        <template #icon="{tab}">
           <q-icon class="pr-xs mb-nn" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
-          <!--        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>-->
+          &lt;!&ndash;        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>&ndash;&gt;
 
-          <!--        <q-icon icon="map-fill" size="14"></q-icon>-->
-        </template>
+          &lt;!&ndash;        <q-icon icon="map-fill" size="14"></q-icon>&ndash;&gt;
+        </template>-->
       </q-tabs>
       <div class="flex-none row-col-center">
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
@@ -140,7 +140,8 @@
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
-    <social-talk-filter-dialog ref="talkFilterDialog" @confirm="autoChooseUseLocationQueryTalks(true)"></social-talk-filter-dialog>
+    <social-talk-filter-dialog ref="talkFilterDialog"
+                               @confirm="autoChooseUseLocationQueryTalks(true)"></social-talk-filter-dialog>
   </view>
 </template>
 
@@ -204,6 +205,7 @@ export default class TabsTalkPage extends Vue {
     cityPicker: QCityPicker
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
+  @socialLocationStore.Getter('location') location: DistrictVO
 
   @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
@@ -293,8 +295,6 @@ export default class TabsTalkPage extends Vue {
   get HotTags () {
     return this.tags.slice(0, 10)
   }
-
-  @socialLocationStore.State('location') location: DistrictVO
 
   //供父组件使用，不可删除
   initQuery () {
