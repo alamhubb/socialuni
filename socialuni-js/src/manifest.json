@@ -222,15 +222,6 @@
         "domain" : "www.socialuni.cn",
         "uniStatistics" : {
             "enable" : true
-        },
-        "sdkConfigs" : {
-            // 使用地图或位置相关功能必须填写其一
-            "maps" : {
-                "qqmap" : {
-                    // 腾讯地图秘钥 https://lbs.qq.com/dev/console/key/manage
-                    "key" : "FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD"
-                }
-            }
         }
     },
     /*全局关闭 uni统计*/
