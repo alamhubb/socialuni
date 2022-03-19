@@ -214,7 +214,7 @@ export default class SocialTalkAddPage extends Vue {
 
   visibleTypes = VisibleType.enums
 
-  district: DistrictVO = socialLocationModule.location
+  district: DistrictVO = socialLocationModule.cityLocation
   showImgFiles: DomFile [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
@@ -259,7 +259,7 @@ export default class SocialTalkAddPage extends Vue {
     this.showImgFiles = []
     this.tags = JsonUtils.deepClone(this.storeTags)
     this.circleName = socialCircleModule.circleName
-    this.district = socialLocationModule.location
+    this.district = socialLocationModule.cityLocation
 
     socialTagModule.getTagTypesAction()
 
@@ -349,8 +349,8 @@ export default class SocialTalkAddPage extends Vue {
     tagInTags.selected = true
   }
 
-  get selectTagIds () {
-    return this.selectTags.map(item => item.id)
+  get selectTagNames () {
+    return this.selectTags.map(item => item.name)
   }
 
   changeTag (tag: TagVO) {
@@ -417,7 +417,7 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue, this.circleName)
+    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()

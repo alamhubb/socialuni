@@ -90,16 +90,16 @@ public class SocialTalkPostDomain {
 
         if (tagIds == null) {
             tagIds = new ArrayList<>();
-            List<String> tagNames = talkVO.getTagNames();
-            for (String tagName : tagNames) {
-                TagDO tagDO = tagRepository.findFirstByName(tagName);
-                if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
-                    throw new SocialBusinessException("选择了无效的话题");
-                }
-                tagIds.add(tagDO.getId());
-            }
-            talkVO.setTagIds(tagIds);
         }
+        List<String> tagNames = talkVO.getTagNames();
+        for (String tagName : tagNames) {
+            TagDO tagDO = tagRepository.findFirstByName(tagName);
+            if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
+                throw new SocialBusinessException("选择了无效的话题");
+            }
+            tagIds.add(tagDO.getId());
+        }
+        talkVO.setTagIds(tagIds);
 
         List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd, talkVisibleGender);
 

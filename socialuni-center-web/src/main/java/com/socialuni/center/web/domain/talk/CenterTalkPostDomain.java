@@ -4,7 +4,6 @@ import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.cloud.config.SocialAppEnv;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -17,6 +16,7 @@ import com.socialuni.social.sdk.domain.talk.SocialTalkPostDomain;
 import com.socialuni.social.sdk.entity.content.SocialContentAddEntity;
 import com.socialuni.social.sdk.repository.community.TagRepository;
 import com.socialuni.social.sdk.repository.community.TalkRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +24,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -84,7 +86,13 @@ public class CenterTalkPostDomain {
 
         talkPostQO.setDevId(devId);
         TagDO devTagDO = tagRepository.findFirstByDevId(devId);
-        talkPostQO.getTagIds().add(devTagDO.getId());
+
+        List<String> tagNames = talkPostQO.getTagNames();
+        if (tagNames == null) {
+            tagNames = new ArrayList<>();
+        }
+        tagNames.add(devTagDO.getName());
+        talkPostQO.setTagNames(tagNames);
 
         socialContentAddEntity.paramsValidate(mineUser, talkPostQO);
         SocialTalkRO socialTalkRO = socialTalkPostDomain.postTalk(mineUser, talkPostQO);

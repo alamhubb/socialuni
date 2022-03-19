@@ -57,9 +57,11 @@ public class SocialHomeTalkQueryStore {
         //如果为首页不筛选地区和tag
         //只有为新版本全国才更改为空
         //如果首页，不筛选地理位置
+        Integer circleId = queryBO.getCircleId();
         if (TalkTabType.home_type.equals(tabType)) {
             adCode = null;
-        } else if (TalkTabType.city_type.equals(tabType)) {
+            circleId = null;
+        } else {
             //如果为空，为0或者为中国，则查询全部
             //话题校验
             //老版本走着里没啥问题，去判断到底多少，也能为空
@@ -112,7 +114,7 @@ public class SocialHomeTalkQueryStore {
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
         List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getTalkIds(), userId, postTalkUserGender,
-                minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), queryBO.getCircleId());
+                minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;
