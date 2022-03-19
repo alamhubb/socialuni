@@ -1,9 +1,12 @@
 package com.socialuni.social.sdk.domain.talk;
 
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
+import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
@@ -15,12 +18,15 @@ import com.socialuni.social.sdk.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.social.sdk.entity.talk.SocialHomeTalkQueryEntity;
 import com.socialuni.social.sdk.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.repository.community.SocialCircleRepository;
+import com.socialuni.social.sdk.repository.community.TagRepository;
+import com.socialuni.social.sdk.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -32,13 +38,31 @@ public class SocialHomeTalkQueryDomain {
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
     @Resource
     private SocialCircleRepository socialCircleRepository;
+    @Resource
+    private SocialTagRedis socialTagRedis;
+    @Resource
+    TagRepository tagRepository;
+
 
     public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
         //talk
         socialHomeTabTalkQueryBO.setTalkIds(queryQO.getTalkIds());
-        //tag
-        socialHomeTabTalkQueryBO.setTagIds(queryQO.getTagIds());
+
+        //tagNames转tagIds
+        List<Integer> tagIds = queryQO.getTagIds();
+        if (tagIds == null) {
+            tagIds = new ArrayList<>();
+            List<String> tagNames = queryQO.getTagNames();
+            for (String tagName : tagNames) {
+                TagDO tagDO = tagRepository.findFirstByName(tagName);
+                if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
+                    throw new SocialBusinessException("选择了无效的话题");
+                }
+                tagIds.add(tagDO.getId());
+            }
+            queryQO.setTagIds(tagIds);
+        }
         String tabType = queryQO.getHomeTabType();
         socialHomeTabTalkQueryBO.setHomeTabType(tabType);
         socialHomeTabTalkQueryBO.setAdCode(queryQO.getAdCode());

@@ -14,6 +14,7 @@ public class SocialHomeTabTalkQueryQO {
     private List<Integer> talkIds;
     private String homeTabType;
     private List<Integer> tagIds;
+    private List<String> tagNames;
     //新版本用genderType，旧版本用gender
     private String gender;
 

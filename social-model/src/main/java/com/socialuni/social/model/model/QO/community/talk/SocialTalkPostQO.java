@@ -15,6 +15,7 @@ public class SocialTalkPostQO implements ContentAddQO {
     private Integer devId;
     private String socialuniUid;
     private List<Integer> tagIds;
+    private List<String> tagNames;
     private String circleName;
     /*
      *  经度 Longitude 简写Lng

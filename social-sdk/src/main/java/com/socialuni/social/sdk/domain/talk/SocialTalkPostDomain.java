@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.domain.talk;
 
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
@@ -9,6 +10,7 @@ import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkTagDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
@@ -85,9 +87,26 @@ public class SocialTalkPostDomain {
         //获取经过后台认证的 行政区DO
         //话题校验
         List<Integer> tagIds = talkVO.getTagIds();
+
+        if (tagIds == null) {
+            tagIds = new ArrayList<>();
+            List<String> tagNames = talkVO.getTagNames();
+            for (String tagName : tagNames) {
+                TagDO tagDO = tagRepository.findFirstByName(tagName);
+                if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
+                    throw new SocialBusinessException("选择了无效的话题");
+                }
+                tagIds.add(tagDO.getId());
+            }
+            talkVO.setTagIds(tagIds);
+        }
+
         List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd, talkVisibleGender);
 
         SocialCircleDO socialCircleDO = socialCircleRepository.findFirstByName(talkVO.getCircleName());
+
+        socialCircleDO.setCount(socialCircleDO.getCount() + 1);
+        socialCircleDO = socialCircleRepository.save(socialCircleDO);
 
         TalkAddValidateRO talkAddValidateRO = new TalkAddValidateRO(districtDO, list, socialCircleDO);
         return talkAddValidateRO;

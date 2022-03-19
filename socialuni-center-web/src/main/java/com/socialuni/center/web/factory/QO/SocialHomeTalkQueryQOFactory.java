@@ -34,6 +34,7 @@ public class SocialHomeTalkQueryQOFactory {
         socialHomeTabTalkQueryQO.setTalkIds(talkIds);
         socialHomeTabTalkQueryQO.setHomeTabType(queryQO.getHomeTabType());
         socialHomeTabTalkQueryQO.setTagIds(queryQO.getTagIds());
+        socialHomeTabTalkQueryQO.setTagNames(queryQO.getTagNames());
         socialHomeTabTalkQueryQO.setGender(queryQO.getGender());
         socialHomeTabTalkQueryQO.setAdCode(queryQO.getAdCode());
         socialHomeTabTalkQueryQO.setLat(queryQO.getLat());

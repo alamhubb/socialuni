@@ -14,6 +14,7 @@ public class CenterHomeTabTalkQueryQO {
     private List<String> talkIds;
     private String homeTabType;
     private List<Integer> tagIds;
+    private List<String> tagNames;
     private String gender;
 
     private String adCode;
