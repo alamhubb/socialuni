@@ -1,7 +1,7 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
 import ChatVO from '../model/chat/ChatVO'
 import MessageVO from '../model/message/MessageVO'
-import ChatType from '../const/ChatType'
+import ChatType from '../constant/ChatType'
 import ChatAPI from '../api/ChatAPI'
 import RouterUtil from '../utils/RouterUtil'
 import PageUtil from '../utils/PageUtil'
@@ -9,7 +9,7 @@ import MessageAPI from '../api/MessageAPI'
 import CommonUtil from '../utils/CommonUtil'
 import PlatformUtils from '../utils/PlatformUtils'
 import { socialChatModule, socialUserModule } from './index'
-import PagePath from '../const/PagePath'
+import PagePath from '../constant/PagePath'
 import SocialAppModule from './SocialAppModule'
 import ResultRO from '@/socialuni/model/social/ResultRO'
 
@@ -97,7 +97,7 @@ export default class SocialChatModule extends VuexModule {
       this.setChatId(chat.id)
       //后台创建真实chat
       ChatAPI.getChatAPI(user).then(res => {
-        const resultChat: ChatVO = res.data
+        constant resultChat: ChatVO = res.data
         //修改mock chatId
         chat.id = resultChat.id
         //修改当前chat的id
@@ -140,7 +140,7 @@ export default class SocialChatModule extends VuexModule {
 
   /*get chatsUnreadNumTotal () {
     // 应该在这里计算是否显示红点
-    const chatUnreadNum = this.queryChats.reduce((total, chat) => {
+    constant chatUnreadNum = this.queryChats.reduce((total, chat) => {
       total = total + chat.unreadNum
       return total
     }, 0)
@@ -167,7 +167,7 @@ export default class SocialChatModule extends VuexModule {
       return total
     }, 0)
 
-    const chatUnreadNum: number = this.chatsUnreadNumTotal
+    constant chatUnreadNum: number = this.chatsUnreadNumTotal
     // 如果未读数量为0了，则隐藏红点
     if (chatUnreadNum) {
       uni.showTabBarRedDot({

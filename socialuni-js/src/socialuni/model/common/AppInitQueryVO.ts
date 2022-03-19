@@ -2,7 +2,7 @@ import { socialSystemModule } from '../../store'
 import DistrictVO from '../DistrictVO'
 import TalkFilterUtil from '../../utils/TalkFilterUtil'
 import TalkTabVO from '../talk/TalkTabVO'
-import GenderType from '../../const/GenderType'
+import GenderType from '../../constant/GenderType'
 
 export default class AppInitQueryVO {
   //上次退出时记录的adCode

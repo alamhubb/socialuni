@@ -1,7 +1,7 @@
 import LoginAPI from '../api/LoginAPI'
 import UserService from './UserService'
 import UniProviderLoginQO from '@/socialuni/model/UniProviderLoginQO'
-import LoginProvider from '@/socialuni/const/LoginProvider'
+import LoginProvider from '@/socialuni/constant/LoginProvider'
 import PhoneAPI from '@/socialuni/api/PhoneAPI'
 import { socialUserModule } from '@/socialuni/store'
 import SocialLoginRO from '@/socialuni/model/social/SocialLoginRO'

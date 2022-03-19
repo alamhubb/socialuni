@@ -16,8 +16,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import UniUtil from '../../utils/UniUtil'
-import ConfigMap from '../../const/ConfigMap'
-import SkipUrlConst from '../../const/SkipUrlConst'
+import ConfigMap from '../../constant/ConfigMap'
+import SkipUrlConst from '../../constant/SkipUrlConst'
 import { socialConfigStore } from '../../store'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 

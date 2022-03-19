@@ -1,35 +1,21 @@
 <template>
-  <view v-if="talkTabs.length" class="flex-col h100p bg-theme3 bt-radius-15">
+  <view v-if="talkTabs.length" class="flex-col h100p">
     <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
     <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
-    <q-tabs :tabs="talkTabs" v-model="current" type="line" @input="tabsChange"
-            class="mg-sm bd-radius px-mn">
-      <template #default="{tab}">
-        <div class="h30 px-xs row-all-center">
-          {{ tab.name }}
-          <!--            费劲啊实力哈哈-->
-        </div>
-      </template>
-      <template #icon="{tab}">
-        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>
-      </template>
-    </q-tabs>
-    <!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
-            <view v-if="talkTabObj.loadMore===loading">
-              <u-loading mode="circle"></u-loading>
-            </view>
-            <q-icon v-else size="18" icon="reload"></q-icon>
-          </view>-->
-    <!--<view class="px-sm">
-      <view class="w12"></view>
-    </view>-->
-
-    <city-picker ref="cityPicker" v-model="showCityPopup" :district="location" @confirm="cityChange"></city-picker>
-
-    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+    <div class="flex-row px-sm mb-xss">
+      <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
+              class="bd-radius flex-1 mr-sm">
+        <template #default="{tab,index,value}">
+          <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab.name }}</view>
+        </template>
+      </q-tabs>
+      <div class="flex-none row-col-center">
+        <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
+      </div>
+    </div>
 
     <q-pull-refresh ref="pullRefresh" @refresh="queryEnd">
-      <swiper :current="swiperCurrent"
+      <swiper :current="currentTabIndex"
               :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
             }"
@@ -42,12 +28,23 @@
                 @scroll.native="talksScrollEvent"
                 @scroll="talksScrollEvent"
           >-->
+
+          <!--          首页展示区分不同类型，
+                    圈子类型、关注类型、首页类型、同城类型-->
+
           <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
             <div class="px-sm pb-60 bg-theme3"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+              <!--              <div class="flex-row mb-sm">
+                              <div class="flex-row flex-1 overflow-auto">
+                                <div v-for="item in tags" class="flex-none q-tag-white color-main">{{ item.name }}</div>
+                              </div>
+                              &lt;!&ndash;                <div class="q-tag-white color-main flex-none">筛选</div>&ndash;&gt;
+                            </div>-->
+
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
                            :talk-tab-type="talkTabObj.type"
@@ -77,6 +74,7 @@
                     class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
                 <!--  #endif -->
               </view>
+
               <!-- 下拉刷新组件 -->
               <view class="mt-xs">
                 <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
@@ -100,6 +98,13 @@
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
 
     <!--        默认附近，可以切换城市，城市-->
+
+    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
+
+    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+
+    <social-talk-filter-dialog ref="talkFilterDialog"
+                               @confirm="autoChooseUseLocationQueryTalks(true)"></social-talk-filter-dialog>
   </view>
 </template>
 
@@ -110,19 +115,21 @@ import TalkAPI from '../../api/TalkAPI'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 
 import TalkItem from './TalkItem.vue'
-import LoadMoreType from '../../const/LoadMoreType'
+import LoadMoreType from '../../constant/LoadMoreType'
 import DistrictVO from '../../model/DistrictVO'
-import Constants from '../../const/Constant'
+import Constants from '../../constant/Constant'
 import StorageUtil from '../../utils/StorageUtil'
-import TalkVueUtil from '../../utils/TalkVueUtil'
 import TalkTabVO from '../../model/talk/TalkTabVO'
 import CommonUtil from '../../utils/CommonUtil'
 import TalkSwipers from './talkSwipers.vue'
 import {
+  socialCircleModule,
   socialConfigStore,
   socialLocationModule,
   socialLocationStore,
   socialSystemModule,
+  socialTagModule,
+  socialTagStore,
   socialTalkModule,
   socialTalkStore,
   socialUserStore
@@ -131,18 +138,20 @@ import TalkOperate from './talkOperate.vue'
 import QTab from '../../../qing-ui/components/QTab/QTab.vue'
 import QTabs from '../../../qing-ui/components/QTabs/QTabs.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import CityPicker from '../CityPicker.vue'
-import TalkTabType from '../../const/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
+import TagVO from '@/socialuni/model/community/tag/TagVO'
+import SocialTalkFilterDialog from '@/socialuni/components/SocialTalk/SocialTalkFilterDialog.vue'
+import QCityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
 
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    QCityPicker,
+    SocialTalkFilterDialog,
     QPullRefresh,
-    CityPicker,
     QIcon,
     QTabs,
     QTab,
@@ -154,9 +163,11 @@ import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 export default class TabsTalkPage extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
-    citiPicker: CityPicker
+    talkFilterDialog: SocialTalkFilterDialog
+    cityPicker: QCityPicker
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
+  @socialLocationStore.Getter('location') location: DistrictVO
 
   @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
@@ -173,43 +184,30 @@ export default class TabsTalkPage extends Vue {
     //必须有this.talkTabObj 且 不为首次加载才行
     if (this.talkTabObj && !this.talkTabObj.firstLoad) {
       //如果当前为关注，则重新查询,否则的话将关注列设置为首次查询
-      this.autoChooseUseLocationQueryTalks(true)
+      this.startPullDown()
       //把非当前的设置为初始
       this.talkTabs.filter(item => item.type !== this.talkTabObj.type).forEach(item => (item.firstLoad = true))
     }
   }
 
   @socialTalkStore.State('talkTabs') readonly talkTabs: TalkTabVO []
+  // talkTabs: TalkTabVO [] = []
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
 
   @socialConfigStore.Getter('talkCacheNum') readonly talkCacheNum: number
 
-  queryDate = new Date()
+  queryTime = new Date()
 
-  // 供父组件调用，每次隐藏把数据缓存进storage
-  tabsTalkOnHide () {
-    // 存入store
-    const storeTalkTabs: TalkTabVO[] = []
-    this.talkTabs.forEach(item => {
-      const storeTalkTab: TalkTabVO = new TalkTabVO()
-      storeTalkTab.talks = item.talks.slice(0, this.talkCacheNum)
-      storeTalkTab.name = item.name
-      storeTalkTab.type = item.type
-      storeTalkTab.firstLoad = true
-      storeTalkTabs.push(storeTalkTab)
-    })
-    //缓存记录本次推出时的默认值
-    TalkVueUtil.setTalkTabsAll(storeTalkTabs, this.current, this.talkTabObj.type)
-  }
 
   // 生命周期
   created () {
+    // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
     // LocationUtil.getCityByIpWebAPI()
     // 更新广告状态
     // 更新广告刷新时间
     this.updateShowAd()
-    this.queryDate = new Date()
+    this.queryTime = new Date()
     // 根据本地存储获取之前的 homeName
     // 有了位置才进行查询,因为查询同城需要位置信息
     // 获取位置，查询同城talks使用
@@ -220,15 +218,29 @@ export default class TabsTalkPage extends Vue {
     this.getTabBarTop()
   }
 
+  // 供父组件调用，每次隐藏把数据缓存进storage
+  tabsTalkOnHide () {
+    // 存入store
+    const storeTalkTabs: TalkTabVO[] = []
+    this.talkTabs.forEach(item => {
+      const storeTalkTab: TalkTabVO = new TalkTabVO(item.name, item.type)
+      storeTalkTab.talks = item.talks.slice(0, this.talkCacheNum)
+      storeTalkTabs.push(storeTalkTab)
+    })
+    //缓存记录本次推出时的默认值
+    socialTalkModule.saveLastTalkTabs(storeTalkTabs, this.currentTabIndex, this.talkTabObj.type)
+  }
+
+
   tabsHeight = 0
   // 去除的高度,单位px
   talksListHeightSub = 0
 
   getTabBarTop () {
-    this.tabsHeight = 50
+    this.tabsHeight = 40
     // h5有头顶和下边导航栏都算了高度
     // #ifdef H5
-    //tab的高度加上导航栏的高度
+    //tab的高度加上导航栏的高度,h5+ 50 底部
     this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
     // #ifndef H5
@@ -238,17 +250,24 @@ export default class TabsTalkPage extends Vue {
 
 
   @socialUserStore.State('user') user: CenterUserDetailRO
+  @socialTagStore.State('tags') tags: TagVO[]
+
   // 页面是否为首次查询
 
-  @socialLocationStore.State('location') location: DistrictVO
-  @Prop() readonly selectTagIds: number[]
+  get HotTags () {
+    return this.tags.slice(0, 10)
+  }
 
   //供父组件使用，不可删除
   initQuery () {
     //首次打开talk页面，获取用户位置用来查询
     socialLocationModule.appLunchInitDistrict().then(() => {
-      this.autoChooseUseLocationQueryTalks(true)
+      this.startPullDown()
     })
+  }
+
+  openTalkFilterDialog () {
+    this.$refs.talkFilterDialog.open()
   }
 
   // scroll-view到底部加载更多
@@ -291,7 +310,7 @@ export default class TabsTalkPage extends Vue {
     CommonUtil.delayTime(0).then(() => {
       this.talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, this.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryDate).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (this.talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
@@ -333,8 +352,12 @@ export default class TabsTalkPage extends Vue {
     }
   }
 
+  startPullDown () {
+    this.$refs.pullRefresh.startPulldownRefresh()
+  }
+
   refreshQueryDate () {
-    this.queryDate = new Date()
+    this.queryTime = new Date()
   }
 
   // 展示的talks
@@ -359,34 +382,30 @@ export default class TabsTalkPage extends Vue {
 
   get talkTabObj () {
     if (this.talkTabs && this.talkTabs.length) {
-      return this.talkTabs[this.current]
+      return this.talkTabs[this.currentTabIndex]
     } else {
       return null
     }
   }
 
   // 因为内部的滑动机制限制，请将tabs组件和swiper组件的current用不同变量赋值
-  current: number = TalkVueUtil.getCurTalkTabIndex()
+  @socialTalkStore.State('currentTabIndex') currentTabIndex: number
   // tabs组件的current值，表示当前活动的tab选项
-  swiperCurrent: number = TalkVueUtil.getCurTalkTabIndex()
   // swiper组件的current值，表示当前那个swiper-item是活动的
 
   // tabs通知swiper切换
   tabsChange (index) {
-    if (index === this.swiperCurrent) {
-      if (this.talkTabObj.type === TalkTabType.city_type) {
-        this.openCityPicker()
-      }
+    if (index === this.currentTabIndex) {
+      this.startPullDown()
       return
     }
-    this.swiperCurrent = index
+    socialTalkModule.setCurTabIndexUpdateCircle(index)
   }
 
   // talkSwipe
-  talkSwiperChange (e) {
+  async talkSwiperChange (e) {
     const current = e.detail.current
-    this.swiperCurrent = current
-    this.current = current
+    const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
     // 存入store
     // 切换时截取其他的只保留后20条
     this.talkTabs.forEach((item, index) => {
@@ -397,21 +416,19 @@ export default class TabsTalkPage extends Vue {
       }
     })
     //如果首次加载，则需要查询
-    if (this.talkTabs[current].firstLoad) {
-      this.autoChooseUseLocationQueryTalks(true)
+    if (curTab.firstLoad) {
+      await this.startPullDown()
+      this.tabsTalkOnHide()
     }
   }
 
-  // 城市选择
-  showCityPopup = false
-
   openCityPicker () {
-    this.showCityPopup = true
+    this.$refs.cityPicker.open()
   }
 
   cityChange (district: DistrictVO) {
     socialLocationModule.setLocation(district)
-    this.autoChooseUseLocationQueryTalks(true)
+    this.startPullDown()
   }
 
   @socialConfigStore.State('appConfig') readonly appConfig: object

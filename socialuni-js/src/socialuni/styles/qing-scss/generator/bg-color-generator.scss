@@ -3,5 +3,8 @@
     //深色主题，字体白色，其他主题色
     background-color: $color;
   }
+  .bg-#{''+$key+''}_light {
+    //深色主题，字体白色，其他主题色
+    background-color: mix($color-white, $color, 90%);
+  }
 }
-

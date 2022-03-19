@@ -1,9 +1,9 @@
 import { Module, VuexModule } from 'vuex-class-modules'
-import LoginProvider from '../const/LoginProvider'
-import PlatformType from '../const/PlatformType'
-import UniSystemType from '../const/UniSystemType'
-import UniPlatformType from '../const/UniPlatformType'
-import DevModeType from '@/socialuni/const/DevModeType'
+import LoginProvider from '../constant/LoginProvider'
+import PlatformType from '../constant/PlatformType'
+import UniSystemType from '../constant/UniSystemType'
+import UniPlatformType from '../constant/UniPlatformType'
+import DevModeType from '@/socialuni/constant/DevModeType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
 
 //和终端相关的信息

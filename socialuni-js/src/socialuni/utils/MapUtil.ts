@@ -1,5 +1,5 @@
 import AppConfig from '../config/AppConfig'
-import socialHttp from '@/socialuni/plugins/http/socialHttp'
+import request from '../plugins/http/request'
 import LocationQueryQO from '@/socialuni/model/location/LocationQueryQO'
 import { QQMapResult } from '@/socialuni/model/location/QQMapResult'
 import ResultRO from '@/socialuni/model/social/ResultRO'
@@ -14,13 +14,13 @@ export default class MapUtil {
           //小程序，且注册了qq的地图key
           if (socialSystemModule.isMp && AppConfig.qq_mp_map_key) {
             //小程序平台可直接调用
-            socialHttp.get('https://apis.map.qq.com/ws/geocoder/v1/?key=' + AppConfig.qq_mp_map_key + '&location=' + res.latitude + ',' + res.longitude).then((res: any) => {
+            request.get('https://apis.map.qq.com/ws/geocoder/v1/?key=' + AppConfig.qq_mp_map_key + '&location=' + res.latitude + ',' + res.longitude).then((res: any) => {
               resolve(res.result.ad_info)
             }).catch(() => {
               reject()
             })
           } else {
-            socialHttp.post<QQMapResult>('location/queryLocation', new LocationQueryQO(res.latitude, res.longitude)).then((res: ResultRO<QQMapResult>) => {
+            request.post<QQMapResult>('location/queryLocation', new LocationQueryQO(res.latitude, res.longitude)).then((res: ResultRO<QQMapResult>) => {
               resolve(res.data)
             }).catch(() => {
               reject()
@@ -39,7 +39,7 @@ export default class MapUtil {
       //小程序，且注册了qq的地图key
       if (socialSystemModule.isMp && AppConfig.qq_mp_map_key) {
         //小程序平台可直接调用
-        socialHttp.get('https://apis.map.qq.com/ws/location/v1/ip?key=' + AppConfig.qq_mp_map_key).then((res: any) => {
+        request.get('https://apis.map.qq.com/ws/location/v1/ip?key=' + AppConfig.qq_mp_map_key).then((res: any) => {
           const result: QQMapResult = res.result.ad_info
           result.location = res.result.location
           resolve(result)
@@ -48,7 +48,7 @@ export default class MapUtil {
         })
       } else {
         //其他平台需借用后台
-        socialHttp.post<QQMapResult>('location/queryLocation').then((res: ResultRO<QQMapResult>) => {
+        request.post<QQMapResult>('location/queryLocation').then((res: ResultRO<QQMapResult>) => {
           resolve(res.data)
         }).catch(() => {
           reject()

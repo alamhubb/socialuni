@@ -58,63 +58,27 @@ public class TalkRedis {
         return talkRepository.queryTalkIdsByUser(userId, ContentStatus.selfCanSeeContentStatus, pageable);
     }
 
+    //用户发布动态后需要更新这个缓存
+    @Cacheable(cacheNames = RedisKeysConst.queryMineTalkIdsByCom, key = "#userId+'-'+#circleId")
+    public List<Integer> queryMineTalkIdsByCom(Integer userId, Integer circleId) {
+        return talkMapper.queryMineTalkIdsByCom(userId, ContentStatus.selfCanSeeContentStatus, circleId);
+    }
+
     //这里有问题，应该清楚所有引用了当前用户的
     @Cacheable(cacheNames = RedisKeysConst.queryUserFollowsTalkIds, key = "#userId+'-'+#userIds+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
     public List<Integer> queryUserFollowsTalkIds(Integer userId, List<Integer> userIds, Pageable pageable) {
         return talkRepository.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#postTalkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds+'-'+#devId")
+    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#postTalkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds+'-'+#devId+'-'+#circleId")
     public List<Integer> queryTalkIdsByTab(String postTalkUserGender,
                                            Integer minAge, Integer maxAge, String adCode,
                                            String talkVisibleGender,
-                                           String mineUserGender, List<Integer> tagIds, Integer devId) {
-//        log.info("queryTalkIdsByTab开始：" + new Date().getTime() / 1000);
-        List<Integer> tagTalkIds;
-        //    talkvisible	minegender	结果
-        //    any	        null	    all,girl,boy
-        //    all	        girl	    all,girl
-        //    all	        boy	        all,boy
-        //    girl	        girl	    girl
-        //    boy	        boy	        boy
-        //        新增talk时，这三个，查询talk的缓存都要清楚
-        /*if (tagIds == null) {
-            //talk性别相同或者user性别相同，能解决talk性别和user性别的问题，能查出来合集，如果为全部，则userGender为null
-            tagTalkIds = talkRepository.queryTalkIdsByTagVisibleGender(talkVisibleGender, mineUserGender);
-        } else {
-            //不能自动自动添加应用tag，那样会导致应有所有tag的动态都查出来了
-            tagTalkIds = talkRepository.queryTalkIdsByTagIdsAndTagVisibleGender(tagIds, talkVisibleGender, mineUserGender);
-        }*/
-//        log.info("queryTalkIdsByTagVisibleGender结束：" + new Date().getTime() / 1000);
-//        List<Integer> userIds = userRepository.queryUserIdsByGenderAndAge(userGender, minAge, maxAge);
-
-        /*List<Integer> talkIds = talkRepository.queryTalkIdsByAdCodeAndGender(ContentStatus.enable, adCode,
-                talkGender, sessionUserGender, devId);*/
-//        Integer devId = DevAccountUtils.getDevId();
-        /*List<Integer> talkIds = talkRepository.queryTalkIdsByGenderAndAgeAndAdCodeAndGender(userGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkGender, sessionUserGender, devId);*/
-
-        /*List<Integer> talkIds = talkRepository.queryTalkIdsByCom(userGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkVisibleGender, mineUserGender, tagIds, null);   */
+                                           String mineUserGender, List<Integer> tagIds, Integer devId, Integer circleId) {
         List<Integer> talkIds = talkMapper.queryTalkIdsByCom(postTalkUserGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkVisibleGender, mineUserGender, tagIds, null);
-
-//        log.info("queryTalkIdsByGenderAndAgeAndAdCodeAndGender结束：" + new Date().getTime() / 1000);
-
-//        talkIds = filterTalkIds(talkIds, tagTalkIds);
-
-        /*List<Integer> ids = talkRepository.queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
-                filterTalkIds, userIds);*/
-
-       /* List<Integer> ids = talkRepository.queryTalkIdsTop10ByGenderAgeAndLikeAdCode(
-                userId, userGender, minAge, maxAge, ContentStatus.enable, ContentStatus.preAudit, adCode,
-                talkGender, sessionUserGender, devId);*/
-
-//        List<Integer> ids = talkRepository.queryTalkIdsTop10ByGenderAgeAndLikeAdCode1();
-//        log.info("queryTalkIdsByTab结束：" + new Date().getTime() / 1000);
+                talkVisibleGender, mineUserGender, tagIds, null, circleId);
         return talkIds;
     }
-
 
 
     public List<Integer> filterTalkIds(List<Integer> talkIds, List<Integer> tagTalkIds) {

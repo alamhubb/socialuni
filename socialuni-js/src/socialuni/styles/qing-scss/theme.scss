@@ -26,7 +26,7 @@ $color-primary: $color-blue;
 $color-error: $color-red;
 $color-warn: $color-orange;
 $color-success: $color-green;
-$color-info: $color-main;
+$color-info: $color-content;
 
 //系统默认色
 //系统默认字体色
@@ -36,10 +36,10 @@ $color-info: $color-main;
 //主题辅助背景色
 
 //默认背景
-$color-bg-default: #fafafa;
-$color-border-default: #dedede;
+$color-bg-default: #f7f7f7 !default;
+$color-border-default: #dedede !default;
 //主题色
-$color-bg-base: $color-white;
+$color-bg-base: $color-white !default;
 //主题色
 //$color-theme-base: $color-white !default;
 //主题下背景颜色，整体的背景颜色不一定与主题色一样，主题颜色对应的背景色
@@ -50,7 +50,7 @@ $color-theme: #3383f6 !default;
 //主题亮色
 $color-theme2:#A2D2FF !default;
 //背景色
-$color-theme3:#fafafa !default;
+$color-theme3:$color-bg-default !default;
 $color-theme4:$color-white !default;
 
 $colors-theme: (
@@ -79,7 +79,7 @@ $color-bg-menu-hover: #F1F4FE;
 //筛选器选中
 $color-bg-filter-active: #EAEBEC;
 //表头背景色
-$color-bg-table-header: #1F2329;
+$color-bg-table-header: #909399;
 //默认表头hover
 $color-bg-table-header-hover: #F7F7F7;
 

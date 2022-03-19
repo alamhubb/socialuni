@@ -1,13 +1,13 @@
 package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.constant.AdminAppConfigConst;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.redis.DevAccountRedis;
-import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.constant.StatusConst;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.redis.DevAccountRedis;
 import com.socialuni.social.sdk.repository.community.TagRepository;
+import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +49,7 @@ public class DevAccountEntity {
         devAccountDO.setAppGenderType(GenderType.all);
         devAccountDO.setDevNum(curDevNum);
         devAccountDO.setType(DevAccountType.personal);
-        devAccountDO.setStatus(StatusConst.enable);
+        devAccountDO.setStatus(CommonStatus.enable);
         devAccountDO.setCreateTime(curDate);
         devAccountDO.setUpdateTime(curDate);
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);

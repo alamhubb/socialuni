@@ -95,7 +95,7 @@ public class UnionIdDbUtil {
         if (user != null) {
             userId = user.getId();
         }
-        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
+        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdAllowNull());
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, UserDO user, Integer devId) {
@@ -108,7 +108,7 @@ public class UnionIdDbUtil {
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId) {
-        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
+        return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdAllowNull());
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId, Integer devId) {
@@ -203,7 +203,7 @@ public class UnionIdDbUtil {
             throw new SocialParamsException("无效的内容标示2");
         }
 
-        Integer devId = DevAccountUtils.getDevIdNotNull();
+        Integer devId = DevAccountUtils.getDevIdAllowNull();
         //有效，则校验商户id和userid是否一致
         //这里存在一个问题，有商户但是没用户的时候替换的问题
         //确认商户一致

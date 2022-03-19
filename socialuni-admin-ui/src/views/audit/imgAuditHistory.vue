@@ -31,6 +31,7 @@
             :src="row.url"
             :preview-src-list="[row.url]"
             :z-index="999"
+            @click.native.stop
           />
         </template>
       </el-table-column>

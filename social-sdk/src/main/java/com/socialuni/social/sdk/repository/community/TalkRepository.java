@@ -19,6 +19,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
 
     //清池使用的
     TalkDO findOneBySocialuniUid(String uid);
+
     /**
      * 查询可用的全局置顶的动态，为官方置顶的动态
      *
@@ -68,7 +69,7 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
     List<Integer> queryTalkIdsByTagIdsAndTagVisibleGender(
             @Param("tagIds") List<Integer> tagIds);
 
-//    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
+    //    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
     @Query(nativeQuery = true, value = "SELECT t.id FROM talk t " +
             "where t.global_top = 0 " +
             "and (t.status = :status)" +
@@ -228,9 +229,10 @@ public interface TalkRepository extends JpaRepository<TalkDO, Integer> {
             @Param("talkIds") List<Integer> talkIds,
             @Param("userIds") List<Integer> userIds);
 
-    @Query(value = "SELECT t.id FROM TalkDO t where t.id in (:talkIds) order by t.updateTime desc")
+    @Query(value = "SELECT t.id FROM TalkDO t where t.id in (:talkIds) and ((t.updateTime<:queryTime) or (:queryTime is null)) order by t.updateTime desc")
     List<Integer> queryTalkIdsByIds(
             @Param("talkIds") List<Integer> talkIds,
+            @Param("queryTime") Date queryTime,
             Pageable pageable);
 
 

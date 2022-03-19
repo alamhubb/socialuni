@@ -3,6 +3,7 @@ package com.socialuni.admin.web.model;
 
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.social.entity.model.DO.ReportDO;
+import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.repository.KeywordsTriggerDetailRepository;
@@ -11,6 +12,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,12 +60,22 @@ public class ReportVO {
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
         this.user = new ReportUserVO(SocialUserUtil.get(reportDO.getReceiveUserId()));
-        this.updateTime = new Date();
-        this.status = reportDO.getStatus();
+//        this.updateTime = new Date();
+//        this.status = reportDO.getStatus();
         this.checked = true;
         this.violateType = ViolateType.noViolation;
-
-        this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(reportDO.getId());
+        this.triggerKeywords = new ArrayList<>();
+        if (reportDO.getId() != null) {
+            this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(reportDO.getId());
+        }
     }
 
+    public ReportVO(BaseModelDO modelDO) {
+        this.talk = ReportContentROFactory.getReportContentVO(modelDO.getReportContentType(), modelDO.getId());
+        this.user = new ReportUserVO(SocialUserUtil.get(modelDO.getUserId()));
+        this.triggerKeywords = new ArrayList<>();
+        this.violateType = modelDO.getDeleteReason();
+//        this.checked = true;
+//        this.violateType = ViolateType.noViolation;
+    }
 }

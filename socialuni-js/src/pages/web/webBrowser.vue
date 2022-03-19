@@ -29,7 +29,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 //@ts-ignore
-import PagePath from 'socialuni/const/PagePath'
+import PagePath from 'socialuni/constant/PagePath'
 import { socialSystemModule, socialSystemStore } from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'

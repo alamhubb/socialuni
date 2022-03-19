@@ -22,7 +22,7 @@ public interface SocialuniTalkAPI {
     ResultRO<List<CenterTalkRO>> queryTalks();
 
     @PostMapping("queryTalks")
-    ResultRO<List<CenterTalkRO>> queryTalks(@RequestBody @Valid CenterHomeTabTalkQueryQO queryQO);
+    ResultRO<List<CenterTalkRO>> queryTalks(@RequestBody(required = false) CenterHomeTabTalkQueryQO queryQO);
 
     /**
      * 返回talk是因为三方需要Id

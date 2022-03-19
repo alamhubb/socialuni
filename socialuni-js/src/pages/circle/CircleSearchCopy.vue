@@ -12,7 +12,7 @@
       <div @click="input" class="flex-none mr-sm">取消</div>
     </q-navbar>
 
-    <q-sidebar :dataList="circleTypes" class="flex-1 flex-row overflow-hidden">
+    <q-sidebar :dataList="showCircleTypes" class="flex-1 flex-row overflow-hidden">
       <template #leftRow="{item,index,current}">
         <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
           <view class="row-all-center flex-auto">
@@ -97,6 +97,16 @@ export default class CircleSearch extends Vue {
 
   onLoad () {
     socialCircleModule.getCircleTypesAction()
+  }
+
+  get showCircleTypes () {
+    console.log(this.searchContent)
+    if (this.searchContent) {
+      const showCircleTypes = this.circleTypes.filter(item => item.circles.some(circle => circle.name.includes(this.searchContent)))
+      return showCircleTypes
+    } else {
+      return this.circleTypes
+    }
   }
 
   get showTags (): TagVO[] {

@@ -63,11 +63,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
-import PagePath from '../../const/PagePath'
+import PagePath from '../../constant/PagePath'
 import ImgUtil from '../../utils/ImgUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import GenderType from '../../const/GenderType'
+import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 
 @Component({
@@ -96,7 +96,7 @@ export default class TalkItemContent extends Vue {
   }
 
   /* previewImage(e) {
-    const current = e.target.dataset.src
+    constant current = e.target.dataset.src
     uni.previewImage({
       current: current,
       urls: this.showsImgSrcs

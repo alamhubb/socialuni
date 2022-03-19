@@ -6,7 +6,6 @@ import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.manage.phone.AuthenticationManage;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.dev.ThirdUserRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -42,21 +41,8 @@ public class SocialPhoneLoginEntity {
 
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
 
-
-        Integer devId = DevAccountUtils.getDevIdAllowNull();
-
         UserDO mineUser;
         if (socialUserPhoneDO != null) {
-            /*if (devId != null) {
-
-                //这里提示不对
-                ThirdUserDO thirdUserDO = thirdUserRepository.findByDevIdAndUserId(devId, socialUserPhoneDO.getUserId());
-                if (thirdUserDO != null) {
-                    throw new SocialParamsException("用户已绑定手机号");
-                }
-            }*/
-
-
             mineUser = SocialUserUtil.get(socialUserPhoneDO.getUserId());
         } else {
             mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);

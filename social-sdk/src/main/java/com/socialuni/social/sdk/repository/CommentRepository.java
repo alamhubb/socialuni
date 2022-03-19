@@ -47,6 +47,9 @@ public interface CommentRepository extends JpaRepository<CommentDO, Integer> {
     @Cacheable(cacheNames = "talkComments5", key = "{#talkId}")
     List<CommentDO> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
 
+
+    List<CommentDO> findTop10ByUserIdOrderByUpdateTimeDesc(Integer userId);
+
     //    talk详情页展示评论
     @Cacheable(cacheNames = "talkComments50", key = "{#talkId}")
     List<CommentDO> findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);

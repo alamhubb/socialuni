@@ -1,7 +1,7 @@
 import UniProviderLoginQO from '../model/UniProviderLoginQO'
 import UniLoginUtil from './UniLoginUtil'
 import UniUserInfoRO from '../model/UniUserInfoRO'
-import LoginProvider from '../const/LoginProvider'
+import LoginProvider from '../constant/LoginProvider'
 import { socialSystemModule } from '../store'
 import GetUserInfoRes = UniApp.GetUserInfoRes
 

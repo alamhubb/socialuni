@@ -1,7 +1,7 @@
 /* eslint-disable */
 /**
- * HttpRequest 0.0.9
- * @Class HttpRequest
+ * Request 0.0.9
+ * @Class Request
  * @description luch-request 0.0.9 http请求插件
  * @Author lu-ch
  * @Date 2019-08-20

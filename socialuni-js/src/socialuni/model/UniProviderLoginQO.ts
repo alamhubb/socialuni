@@ -1,9 +1,9 @@
 import { socialSystemModule } from '../store'
 import { socialConfig } from '../index'
 import UniUserInfoRO from './UniUserInfoRO'
-import LoginProvider from '../const/LoginProvider'
+import LoginProvider from '../constant/LoginProvider'
 import GetUserInfoRes = UniApp.GetUserInfoRes
-import PlatformType from '../const/PlatformType'
+import PlatformType from '../constant/PlatformType'
 
 export default class UniProviderLoginQO {
   provider = ''

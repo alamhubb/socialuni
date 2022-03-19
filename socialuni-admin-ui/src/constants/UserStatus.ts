@@ -1,4 +1,3 @@
-export enum UserStatus {
-  disabled = 0,
-  enabled = 1
+export default class UserStatus {
+  static readonly violation: string = '违规'
 }

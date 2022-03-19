@@ -1,4 +1,4 @@
-import PagePath from '../const/PagePath'
+import PagePath from '../constant/PagePath'
 
 export default class SkipUtil {
   static getWebUrl (webUrl: string, pageTitle = ''): string {

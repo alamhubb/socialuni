@@ -72,7 +72,7 @@ import CommonUtil from '@/socialuni/utils/CommonUtil'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import PhoneAPI from '@/socialuni/api/PhoneAPI'
 import { socialConfigStore } from '@/socialuni/store'
-import ConfigMap from '@/socialuni/const/ConfigMap'
+import ConfigMap from '@/socialuni/constant/ConfigMap'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({

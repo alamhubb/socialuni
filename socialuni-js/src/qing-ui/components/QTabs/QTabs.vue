@@ -1,10 +1,9 @@
 <template>
   <scroll-view :scroll-x="true" class="tabUuid overflow-hidden" :class="[uuid]" :scroll-left="leftBoxScrollLeft">
     <div class="row-nowrap position-relative">
-      <div class="barUuid fixed-index row-all-center" :class="[uuid,isBar?'flex-1':'flex-none']"
-           v-for="(tab,index) in tabs" @click="input(index)"
-           :key="index">
-        <div class="lineUuid" :class="[uuid,index===value?activeClass:unActiveClass]">
+      <div class="barUuid row-all-center" :class="[uuid,isBar?'fixed-index flex-1':'flex-none']"
+           v-for="(tab,index) in tabs" @click="input(index)" :key="tab.name">
+        <div class="lineUuid row-all-center" :class="[uuid,index===value?activeClass:unActiveClass]">
           <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
           </slot>
@@ -16,26 +15,17 @@
       <div class="position-absolute" :style="[tabSlideStyle]">
         <div class="position-absolute"
              :style="{width:barWidth+'px',height:barHeight+'px'}"
-             :class="[isBar?'bg-white bd-radius':'bg-theme t28 bd-radius-20']">
+             :class="[isBar?'bg-white bd-radius':'bg-theme t27 bd-radius-20']">
         </div>
       </div>
     </div>
-    <!--    <view class="row-nowrap flex-1 mr-smm flex-none" v-for="(tab,index) in tabs" @click="input(index)" :key="index">
-          <view class="index-1000 w100p" :class="[uuid]">
-            <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
-
-            </slot>
-          </view>
-
-        </view>
-    &lt;!&ndash;     :style="[tabSlideStyle]"&ndash;&gt;
-       -->
   </scroll-view>
 </template>
 
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import CommonUtil from '../../../socialuni/utils/CommonUtil'
+import TalkTabVO from '@/socialuni/model/talk/TalkTabVO'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 
@@ -62,12 +52,25 @@ export default class QTabs extends Vue {
   uuid: string = CommonUtil.getClassUUID()
 
   @Model('input') readonly value: number
-  @Prop({ default: [] }) readonly tabs: any[]
+  @Prop({ default: [] }) readonly tabs: TalkTabVO[]
 
   @Watch('value')
   valueWatch (val, oldVal) {
     if (val !== oldVal) {
-      this.leftBoxScrollLeft = this.tabScrollLefts[val]
+      this.$nextTick(() => {
+        this.getTabRect()
+        this.leftBoxScrollLeft = this.tabScrollLefts[this.value]
+      })
+    }
+  }
+
+  @Watch('tabs')
+  tabsWatch () {
+    if (this.tabs.length) {
+      this.$nextTick(() => {
+        this.getTabRect()
+        this.leftBoxScrollLeft = this.tabScrollLefts[this.value]
+      })
     }
   }
 
@@ -143,22 +146,22 @@ export default class QTabs extends Vue {
     const query = uni.createSelectorQuery().in(this)
     // 历遍所有tab，这里是执行了查询，最终使用exec()会一次性返回查询的数组结果
     // 只要size和rect两个参数
-    let uuid
-    if (this.isBar) {
+    const uuid = '.barUuid'
+    /*if (this.isBar) {
       uuid = '.barUuid'
     } else {
       uuid = '.lineUuid'
-    }
-
+    }*/
     query.selectAll(`.${this.uuid}${uuid}`).boundingClientRect((res: any) => {
       this.tabItemLefts = []
+      this.tabScrollLefts = []
       //如果元素还没加载出来，延迟0.1秒继续加载
       if (res && res.length) {
         if (this.isBar) {
           this.barWidth = res[0].width
           this.barHeight = res[0].height
         } else {
-          this.barWidth = 25
+          this.barWidth = 20
           this.barHeight = 3
         }
         res.forEach(item => {

@@ -1,5 +1,5 @@
 import { socialSystemModule } from '../../store'
-import PlatformType from '../../const/PlatformType'
+import PlatformType from '../../constant/PlatformType'
 
 export default class FrontErrorLogVO {
   uri: string = null

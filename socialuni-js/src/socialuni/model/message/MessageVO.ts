@@ -1,7 +1,7 @@
 import CenterUserDetailRO from '../social/CenterUserDetailRO'
-import CommonStatus from '../../const/CommonStatus'
-import MessageType from '../../const/mesaage/MessageType'
-import MessageContentType from '../../const/mesaage/MessageContentType'
+import CommonStatus from '../../constant/CommonStatus'
+import MessageType from '../../constant/mesaage/MessageType'
+import MessageContentType from '../../constant/mesaage/MessageContentType'
 
 export default class MessageVO {
   public id: number

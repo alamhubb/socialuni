@@ -7,12 +7,12 @@ import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import GetProviderRes = UniApp.GetProviderRes
 import LoginRes = UniApp.LoginRes
 import GetUserInfoRes = UniApp.GetUserInfoRes
-import AppMsg from '../const/AppMsg'
+import AppMsg from '../constant/AppMsg'
 import ToastUtil from './ToastUtil'
 import DomFile from '../model/DomFile'
 import UUIDUtil from './UUIDUtil'
 import ImgUtil from './ImgUtil'
-import JsonUtil from './JsonUtil'
+import ObjectUtil from './ObjectUtil'
 import { socialSystemModule } from '../store'
 
 export default class UniUtil {
@@ -167,7 +167,7 @@ export default class UniUtil {
         success (res) {
           const imgFiles: DomFile[] = res.tempFiles as DomFile[]
           for (const imgFile of imgFiles) {
-            JsonUtil.log(imgFile)
+            ObjectUtil.log(imgFile)
             // 不能大于10m大于10m就压缩不到100k
             // 获取压缩比
             const imgSize: number = imgFile.size

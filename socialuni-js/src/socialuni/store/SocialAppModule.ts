@@ -4,16 +4,17 @@ import ReportAPI from '../api/ReportAPI'
 import QingchiAPI from '../api/QingchiAPI'
 import {
   socialAppModule,
-  socialChatModule,
+  socialChatModule, socialCircleModule,
   socialConfigModule,
   socialLocationModule,
   socialNotifyModule,
-  socialTagModule
+  socialTagModule, socialTalkModule
 } from './index'
 import AppConfigAPI from '../api/AppConfigAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
 import PlatformUtils from '@/socialuni/utils/PlatformUtils'
 import TokenUtil from '@/socialuni/utils/TokenUtil'
+import SocialTalkModule from '@/socialuni/store/SocialTalkModule'
 
 @Module({ generateMutationSetters: true })
 export default class SocialAppModule extends VuexModule {
@@ -28,6 +29,9 @@ export default class SocialAppModule extends VuexModule {
     PlatformUtils.checkUpdate()
     // WebsocketUtil.websocketConnect(false)
     socialTagModule.getHotTagsAction()
+    socialTalkModule.getTalkTabs()
+    socialCircleModule.getHotCirclesAction()
+    socialCircleModule.getCircleTypesAction()
     socialTagModule.getHotTagTypesAction()
     // socialCircleModule.getCircleTypesAction()
     socialLocationModule.getHotDistrictsAction()

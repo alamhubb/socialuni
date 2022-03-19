@@ -16,5 +16,15 @@ public interface TalkMapper {
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
             @Param("tagIds") List<Integer> tagIds,
-            @Param("devId") Integer devId);
+            @Param("devId") Integer devId,
+//            @Param("queryTime") Date queryTime,
+//            @Param("mineUserId") Integer mineUserId,
+//            @Param("mineTalkStatus") List<String> mineTalkStatus,
+            @Param("circleId") Integer circleId
+    );
+
+    List<Integer> queryMineTalkIdsByCom(
+            @Param("userId") Integer userId,
+            @Param("status") List<String> statusList,
+            @Param("circleId") Integer circleId);
 }

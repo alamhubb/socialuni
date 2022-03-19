@@ -29,6 +29,10 @@ export default class ReportAPI {
     return request.post('report/queryUserReports?userId=' + userId)
   }
 
+  public static queryUserContentsByPhoneNumAPI(phoneNum: number) {
+    return request.post('report/queryUserContentsByPhoneNum?phoneNum=' + phoneNum)
+  }
+
   public static reportAuditAPI(row:ReportVO) {
     return request.post('report/reportAudit', row)
   }

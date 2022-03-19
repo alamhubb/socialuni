@@ -1,6 +1,6 @@
-import JsonUtils from './JsonUtil'
+import JsonUtils from './ObjectUtil'
 import TokenUtil from './TokenUtil'
-import ErrorConst from '../const/ErrorConst'
+import ErrorConst from '../constant/ErrorConst'
 import CommonUtil from './CommonUtil'
 
 export default class ImgUtil {
@@ -21,9 +21,9 @@ export default class ImgUtil {
         },
         success: res => {
           if (res.statusCode === ErrorConst.success) {
-            resolve(JsonUtils.jsonParse(res.data))
+            resolve(JsonUtils.toParse(res.data))
           } else {
-            reject(JsonUtils.jsonParse(res.data))
+            reject(JsonUtils.toParse(res.data))
           }
         },
         fail: res => {
@@ -47,9 +47,9 @@ export default class ImgUtil {
         },
         success: res => {
           if (res.statusCode === ErrorConst.success) {
-            resolve(JsonUtils.jsonParse(res.data))
+            resolve(JsonUtils.toParse(res.data))
           } else {
-            reject(JsonUtils.jsonParse(res.data))
+            reject(JsonUtils.toParse(res.data))
           }
         },
         fail: res => {

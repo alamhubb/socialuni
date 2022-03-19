@@ -1,6 +1,6 @@
 import StorageUtil from './StorageUtil'
 import TalkTabVO from '../model/talk/TalkTabVO'
-import TalkTabType from '../const/TalkTabType'
+import TalkTabType from '../constant/TalkTabType'
 
 const talkTabFollowDefault = new TalkTabVO()
 talkTabFollowDefault.name = TalkTabType.follow_name
@@ -17,8 +17,15 @@ talkTabCityDefault.type = TalkTabType.city_type
 export default class TalkVueUtil {
   static readonly TalkTabsKey: string = 'talkTabs'
   static readonly TalkTabsDefault: TalkTabVO [] = [
-    talkTabFollowDefault, talkTabHomeDefault, talkTabCityDefault
+    new TalkTabVO(TalkTabType.follow_name, TalkTabType.follow_type),
+    new TalkTabVO(TalkTabType.home_name, TalkTabType.home_type),
+    new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type),
+    new TalkTabVO('处对象', TalkTabType.circle_type),
+    new TalkTabVO('闺蜜', TalkTabType.circle_type),
+    new TalkTabVO('扩列', TalkTabType.circle_type),
+    new TalkTabVO('生活', TalkTabType.circle_type)
   ]
+
 
   static readonly talkTabIndexKey: string = 'talkTabIndex'
   static readonly talkTabIndexDefault: number = 1
@@ -28,8 +35,11 @@ export default class TalkVueUtil {
 
 
   static getTalkTabs (): TalkTabVO [] {
-    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
-    return homeTypeTalks || TalkVueUtil.TalkTabsDefault
+    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey) || TalkVueUtil.TalkTabsDefault
+    if (homeTypeTalks.length < 4) {
+      return TalkVueUtil.TalkTabsDefault
+    }
+    return homeTypeTalks
   }
 
   static getCurTalkTabIndex (): number {
@@ -38,17 +48,5 @@ export default class TalkVueUtil {
       index = index || TalkVueUtil.talkTabIndexDefault
     }
     return index
-  }
-
-  static getTalkTabType (): string {
-    return StorageUtil.getObj(TalkVueUtil.talkTabTypeKey) || TalkVueUtil.talkTabTypeDefault
-  }
-
-  static setTalkTabsAll (talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
-    if (talkTabs.length) {
-      StorageUtil.setObj(TalkVueUtil.TalkTabsKey, talkTabs)
-    }
-    StorageUtil.setObj(TalkVueUtil.talkTabIndexKey, talkTabIndex)
-    StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
   }
 }

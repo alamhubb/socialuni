@@ -31,6 +31,10 @@
             <artifactId>social-model</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>social-constant</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

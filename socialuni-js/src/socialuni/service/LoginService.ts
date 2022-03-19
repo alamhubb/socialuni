@@ -3,7 +3,7 @@ import UserService from './UserService'
 import UniUserUtil from '../utils/UniUserUtil'
 import SocialPhoneNumLoginQO from '../model/phone/SocialPhoneNumLoginQO'
 import { socialSystemModule } from '../store'
-import Constants from '../const/Constant'
+import Constants from '../constant/Constant'
 import ToastUtil from '../utils/ToastUtil'
 
 export default class LoginService {
@@ -33,10 +33,10 @@ export default class LoginService {
   }
 
   /*static async mockSocialuniLogin () {
-    const mockRes = await MockAPI.mockOAuthUserInfoAPI()
-    const providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(mockRes.data.token, null, mockRes.data.user, LoginProvider.socialuni)
+    constant mockRes = await MockAPI.mockOAuthUserInfoAPI()
+    constant providerLoginQO: UniProviderLoginQO = new UniProviderLoginQO(mockRes.data.token, null, mockRes.data.user, LoginProvider.socialuni)
 
-    const { data } = await LoginAPI.providerLoginAPI(providerLoginQO)
+    constant { data } = await LoginAPI.providerLoginAPI(providerLoginQO)
 
     UserService.getMineUserInitDataActionByToken(data)
   }*/

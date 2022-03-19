@@ -34,18 +34,23 @@ public class SocialHomeTalkQueryQOFactory {
         socialHomeTabTalkQueryQO.setTalkIds(talkIds);
         socialHomeTabTalkQueryQO.setHomeTabType(queryQO.getHomeTabType());
         socialHomeTabTalkQueryQO.setTagIds(queryQO.getTagIds());
+        socialHomeTabTalkQueryQO.setTagNames(queryQO.getTagNames());
         socialHomeTabTalkQueryQO.setGender(queryQO.getGender());
         socialHomeTabTalkQueryQO.setAdCode(queryQO.getAdCode());
         socialHomeTabTalkQueryQO.setLat(queryQO.getLat());
         socialHomeTabTalkQueryQO.setLon(queryQO.getLon());
         socialHomeTabTalkQueryQO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryQO.setMaxAge(queryQO.getMaxAge());
+        socialHomeTabTalkQueryQO.setCircleName(queryQO.getCircleName());
+        socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryTime());
+        if (socialHomeTabTalkQueryQO.getQueryTime() == null) {
+            socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryDate());
+        }
 //        socialHomeTabTalkQueryQO.setUserGender(queryQO.getUserGender());
 //        socialHomeTabTalkQueryQO.setTalkVisibleGender(queryQO.getTalkVisibleGender());
 //        socialHomeTabTalkQueryQO.setOpenPosition(queryQO.getOpenPosition());
 //        socialHomeTabTalkQueryQO.setPlatform(queryQO.getPlatform());
 //        socialHomeTabTalkQueryQO.setStandby(queryQO.getStandby());
-
         return socialHomeTabTalkQueryQO;
     }
 }

@@ -1,15 +1,18 @@
 package com.socialuni.social.entity.model.DO.talk;
 
-import com.socialuni.social.entity.model.DO.CommonBaseDO;
+import com.socialuni.social.entity.model.DO.base.SocialImgBaseDO;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "talk_img",
         indexes = {
-                @Index(columnList = "talkId")
+                @Index(columnList = "contentId")
         },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
@@ -17,22 +20,6 @@ import java.io.Serializable;
         }
 )
 @Data
-//
-public class SocialTalkImgDO extends CommonBaseDO implements Serializable {
-    //此类为talk子类，只能包含基础数据类型
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class SocialTalkImgDO extends SocialImgBaseDO implements Serializable {
 
-    private Integer talkId;
-    private Integer userId;
-
-    private String src;
-
-    private Double aspectRatio;
-
-    //压缩率
-    private Double quality;
-
-    private Integer size;
 }

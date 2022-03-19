@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TalkImgRepository extends JpaRepository<SocialTalkImgDO, Integer> {
-    @Cacheable(cacheNames = "talkImgsTalkId", key = "#talkId")
-    List<SocialTalkImgDO> findTop3ByTalkId(Integer talkId);
+    @Cacheable(cacheNames = "talkImgsTalkId", key = "#contentId")
+    List<SocialTalkImgDO> findTop3ByContentId(Integer contentId);
 
     //获取talkImg
     SocialTalkImgDO findFirstBySrc(String imgUlr);

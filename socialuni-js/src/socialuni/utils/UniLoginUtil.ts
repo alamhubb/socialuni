@@ -1,5 +1,5 @@
 import LoginRes = UniApp.LoginRes
-import UniPlatformType from '../const/UniPlatformType'
+import UniPlatformType from '../constant/UniPlatformType'
 import { socialSystemModule } from '../store'
 
 export default class UniLoginUtil {

@@ -9,7 +9,6 @@ import UserService from '../service/UserService'
 import TokenUtil from '../utils/TokenUtil'
 import SocialLoginRO from '../model/social/SocialLoginRO'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import SocialAppModule from './SocialAppModule'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })
@@ -32,6 +31,13 @@ export default class SocialUserModule extends VuexModule {
 
   get hasUser (): boolean {
     return !!this.user
+  }
+
+  get userId () {
+    if (this.user) {
+      return this.user.id
+    }
+    return null
   }
 
   loginOut () {

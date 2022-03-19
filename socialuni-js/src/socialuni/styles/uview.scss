@@ -1,3 +1,7 @@
 uni-button {
   margin: 0;
+
+  &:after {
+    border: none;
+  }
 }

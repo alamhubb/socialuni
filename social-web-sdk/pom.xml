@@ -30,6 +30,10 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>
+            <artifactId>social-constant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni</groupId>
             <artifactId>social-api-model</artifactId>
         </dependency>
         <dependency>

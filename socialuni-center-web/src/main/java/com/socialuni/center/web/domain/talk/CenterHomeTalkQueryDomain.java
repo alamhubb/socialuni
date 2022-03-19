@@ -20,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +51,7 @@ public class CenterHomeTalkQueryDomain {
     }
 
     //查询非关注tab的动态列表
-    public List<CenterTalkRO> queryHomeTabTalks(CenterHomeTabTalkQueryQO queryQO) {
+    public List<CenterTalkRO> queryHomeTabTalks(@Valid @NotNull CenterHomeTabTalkQueryQO queryQO) {
         //获取当前用户
         UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
@@ -71,7 +73,7 @@ public class CenterHomeTalkQueryDomain {
         }
 
         //转换为rolist
-        List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser, DevAccountUtils.getDevIdNotNull());
+        List<SocialTalkRO> socialTalkROFactories = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser);
 
         List<CenterTalkRO> talkROS = CenterTalkROFactory.getTalkROS(socialTalkROFactories, mineUser);
         return talkROS;

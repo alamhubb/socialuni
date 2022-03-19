@@ -33,7 +33,12 @@ public class CenterTalkService {
 
     //查询非关注tab的动态列表
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
-        List<CenterTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
+        List<CenterTalkRO> talkROS;
+        if (queryQO == null) {
+           talkROS = centerHomeTalkQueryDomain.queryHomeTalks();
+        } else {
+           talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
+        }
         return new ResultRO<>(talkROS);
     }
 

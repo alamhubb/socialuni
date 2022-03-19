@@ -7,7 +7,7 @@ import COS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
 // #endif
-import AppMsg from '../const/AppMsg'
+import AppMsg from '../constant/AppMsg'
 import AlertUtil from './AlertUtil'
 import CosAuthRO from '../model/cos/CosAuthRO'
 import DomFile from '../model/DomFile'
@@ -50,7 +50,7 @@ export default class CosUtil {
   }
 
   static postImgList(imgSrcs: DomFile[], cosAuthRO: CosAuthRO) {
-    // const { data } = await CosAPI.getCosAuthorizationAPI()
+    // constant { data } = await CosAPI.getCosAuthorizationAPI()
     const cos = CosUtil.getAuthorizationCos(cosAuthRO)
     // await Promise.all(imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, data, cos)))
     imgSrcs.map(imgFile => CosUtil.postObjectBase(imgFile, cosAuthRO, cos))

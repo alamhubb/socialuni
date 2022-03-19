@@ -1,15 +1,14 @@
 <template>
   <view class="h100p bg-white">
-    <q-navbar>
+    <q-navbar show-back>
       <div class="w100p row-col-center">
-        <q-icon class="ml" icon="arrow-left" @click="goBackPage"></q-icon>
-        <view class="ml-xl font-bold text-md flex-1">
+        <view class="font-bold text-md flex-1">
           发布动态
         </view>
-        <q-button class="mr text-bold" sm :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
+        <q-button class="text-bold" theme :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
       </div>
     </q-navbar>
-    <city-picker v-model="showSearch" :district="district" @confirm="cityChange"></city-picker>
+    <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
 
     <view v-if="showTagSearch">
       <talk-add-tag-search :tags="tags" :is-add="true" :select-tags="selectTags" @change="changeTag"
@@ -21,7 +20,7 @@
     <view v-if="showTagAdd">
       <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
     </view>
-    <view v-show="!showSearch&&!showTagSearch&&!showTagAdd">
+    <view v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
       <view class="px-smm py-sm">
         <textarea class="h140 w100p" :maxlength="200"
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
@@ -56,25 +55,11 @@
       </view>
 
       <view class="px-sm pt-sm mt-xs row-between">
-        <view v-if="district" class="q-tag q-round bg-orange-plain" @click="openSearchVue">
-          <q-icon v-if="district.isLocation || !district.adCode" icon="map-fill"/>
-          <block v-if="district.adCode">
-            {{ district.provinceName }}
-            <text v-if="district.cityName">
-              -{{ district.cityName }}
-            </text>
-            <text v-if="district.districtName">
-              -{{ district.districtName }}
-            </text>
-          </block>
-          <text v-else>
-            {{ district.adName }}
-          </text>
-        </view>
-        <!--        <div class="row-between-center bg-click" @click="openCircleSearchDialog">
-                  <div>选择圈子</div>
-                  <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-                </div>-->
+        <q-city-info v-model="district" picker></q-city-info>
+        <div class="row-between-center bg-click" @click="openCircleSearchDialog">
+          <div>{{ circleName || '选择圈子' }}</div>
+          <q-icon icon="arrow-right" class="text-md margin-right-sm" size="12"></q-icon>
+        </div>
       </view>
       <view class="px-sm pt-sm">
         <view class="row-grid">
@@ -132,7 +117,7 @@
         </div>
       </view>
 
-      <s-circle-search ref="circleSearch"></s-circle-search>
+      <social-circle-picker ref="circleSearch" @change="circleChange"></social-circle-picker>
     </view>
   </view>
 </template>
@@ -141,49 +126,54 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from '../../api/TalkAPI'
 import UniUtil from '../../utils/UniUtil'
 import DistrictVO from '../../model/DistrictVO'
-import JsonUtils from '../../utils/JsonUtil'
+import JsonUtils from '../../utils/ObjectUtil'
 import TagVO from '../../model/community/tag/TagVO'
 import TagUtil from '../../utils/TagUtil'
 import CosUtil from '../../utils/CosUtil'
 import {
+  socialCircleModule,
   socialLocationModule,
   socialLocationStore,
   socialTagModule,
   socialTagStore,
+  socialTalkModule,
   socialUserStore
 } from '../../store'
 import PlatformUtils from '../../utils/PlatformUtils'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import CityPicker from '../CityPicker.vue'
+import CityPicker from '../QCityPicker/QCityPicker.vue'
 import TalkAddTagSearch from '../SocialTagAdd/TalkAddTagSearch.vue'
 import AlertUtil from '../../utils/AlertUtil'
 import LocationUtil from '../../utils/LocationUtil'
-import VisibleType from '../../const/VisibleType'
-import EnumStrVO from '../../const/EnumStrVO'
+import VisibleType from '../../constant/VisibleType'
+import EnumStrVO from '../../constant/EnumStrVO'
 import ToastUtil from '../../utils/ToastUtil'
 import QNavbar from '../../../qing-ui/components/QNavbar/QNavbar.vue'
 import QButton from '../../../qing-ui/components/QButton/QButton.vue'
 import PageUtil from '../../utils/PageUtil'
-import GenderType from '../../const/GenderType'
+import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import DomFile from '../../model/DomFile'
 import CosAuthRO from '../../model/cos/CosAuthRO'
 import CosAPI from '../../api/CosAPI'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import RouterUtil from '../../utils/RouterUtil'
-import PagePath from '../../const/PagePath'
+import PagePath from '../../constant/PagePath'
 import SocialTagAdd from '../SocialTagAdd/SocialTagAdd.vue'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import SCircleSearch from '@/socialuni/components/SCircleSearch.vue'
-import AppMsg from '@/socialuni/const/AppMsg'
+import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
+import AppMsg from '@/socialuni/constant/AppMsg'
+import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
+import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 
 @Component({
   components: {
-    SCircleSearch,
+    SocialCirclePicker,
+    QCityInfo,
     QInput,
     QSidebar,
     QPopup,
@@ -197,15 +187,14 @@ import AppMsg from '@/socialuni/const/AppMsg'
 })
 export default class SocialTalkAddPage extends Vue {
   $refs: {
-    circleSearch: SCircleSearch
+    circleSearch: SocialCirclePicker
   }
 
   @socialLocationStore.State('districts') readonly districts: DistrictVO[]
   @socialTagStore.State('tags') readonly storeTags: TagVO []
   @socialUserStore.State('user') readonly user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
-
-  showCircleSearch = false
+  // @socialTalkStore.State('circleName') circleName: string
 
   circleSearchText = ''
 
@@ -220,15 +209,16 @@ export default class SocialTalkAddPage extends Vue {
   GenderTypeAll = GenderType.all
 
   talkContent = ''
+  circleName = ''
   buttonDisabled = false
 
   visibleTypes = VisibleType.enums
 
-  district: DistrictVO = socialLocationModule.location
+  district: DistrictVO = socialLocationModule.cityLocation
   showImgFiles: DomFile [] = []
   tags: TagVO [] = []
   imgMaxSize = 3
-  showSearch = false
+  showCityDialog = false
   showTagSearch = false
   showTagAdd = false
 
@@ -268,7 +258,8 @@ export default class SocialTalkAddPage extends Vue {
     this.cosAuthRO = null
     this.showImgFiles = []
     this.tags = JsonUtils.deepClone(this.storeTags)
-    this.district = socialLocationModule.location
+    this.circleName = socialCircleModule.circleName
+    this.district = socialLocationModule.cityLocation
 
     socialTagModule.getTagTypesAction()
 
@@ -358,8 +349,8 @@ export default class SocialTalkAddPage extends Vue {
     tagInTags.selected = true
   }
 
-  get selectTagIds () {
-    return this.selectTags.map(item => item.id)
+  get selectTagNames () {
+    return this.selectTags.map(item => item.name)
   }
 
   changeTag (tag: TagVO) {
@@ -381,12 +372,12 @@ export default class SocialTalkAddPage extends Vue {
     this.showTagAdd = true
   }
 
-  openSearchVue () {
+  openCityDialog () {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
       socialLocationModule.getDistrictsAction()
     }
-    this.showSearch = true
+    this.showCityDialog = true
   }
 
   cityChange (district: DistrictVO) {
@@ -426,10 +417,16 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.selectTagIds, this.visibleTypeValue, this.visibleGenderValue)
+    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
       .then(() => {
         this.buttonDisabled = false
         uni.hideLoading()
+        if (socialTalkModule.curTabIsCircle) {
+          //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
+          socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
+        } else {
+          socialCircleModule.setCircleName(this.circleName)
+        }
         RouterUtil.reLaunch(PagePath.talk + '?load=true')
       })
       .catch(() => {
@@ -517,6 +514,10 @@ export default class SocialTalkAddPage extends Vue {
     } else {
       PageUtil.toTalkPage()
     }
+  }
+
+  circleChange (circle: SocialCircleRO) {
+    this.circleName = circle.name
   }
 }
 </script>

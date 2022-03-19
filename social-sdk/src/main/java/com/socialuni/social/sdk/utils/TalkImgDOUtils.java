@@ -21,6 +21,6 @@ public class TalkImgDOUtils {
 
     //根据id列表从缓存中读取talk列表
     public static List<SocialTalkImgDO> findTop3ByTalkId(Integer talkId) {
-        return talkImgRepository.findTop3ByTalkId(talkId);
+        return talkImgRepository.findTop3ByContentId(talkId);
     }
 }

@@ -49,7 +49,7 @@
         </div>
       </q-card>
 
-      <div class="box-sm">
+      <div class="q-box-sm">
         <div>
           <text class="cuIcon-title"></text>
           <text class="font-md font-bold">圈子</text>
@@ -89,7 +89,7 @@
         </div>
       </div>
 
-      <div class="box-sm">
+      <div class="q-box-sm">
         <div>
           <text class="cuIcon-title"></text>
           <text class="font-md font-bold">话题</text>

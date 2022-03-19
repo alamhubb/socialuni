@@ -5,24 +5,37 @@
   word-break: break-all;
 }
 
+html {
+  height: 100vh;
+  width: 100vw;
+  color: #303133;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 page {
   height: 100%;
   background-color: #f6f7f9;
   font-family: Helvetica Neue, Helvetica, sans-serif;
   color: #303133;
   font-size: 14px;
-  overflow-x: hidden;
+  //不能有这个，要不然h5无法滚动
+  //overflow-x: hidden;
 }
 
-//隐藏scroll-view的滚动条
-::-webkit-scrollbar {
-  display: none;
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
 }
 
 view,
 scroll-view,
 swiper,
-button,
 input,
 textarea,
 label,
@@ -30,6 +43,10 @@ navigator,
 image,
 text {
   line-height: 1.4;
+}
+
+button {
+  line-height: 2;
 }
 
 ul {
@@ -43,11 +60,11 @@ ul {
 }
 
 .font2-cut {
-  display: -webkit-box;           //盒子模型
-  -webkit-box-orient:vertical;    //元素的排列方式，垂直居中
-  -webkit-line-clamp:2;           //设置行数，2行显示
-  overflow:hidden;                //隐藏溢出内容
-  text-overflow: ellipsis;        //超出的内容显示省略号
+  display: -webkit-box; //盒子模型
+  -webkit-box-orient: vertical; //元素的排列方式，垂直居中
+  -webkit-line-clamp: 2; //设置行数，2行显示
+  overflow: hidden; //隐藏溢出内容
+  text-overflow: ellipsis; //超出的内容显示省略号
 }
 
 
@@ -56,4 +73,62 @@ ul {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+a {
+  text-decoration: none
+}
+
+:focus {
+  outline-width: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.fade-in-out {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  /*初始状态 透明度为0*/
+  100% {
+    opacity: 1;
+  }
+  /*结束状态 透明度为1*/
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  /*初始状态 透明度为0*/
+  100% {
+    opacity: 0;
+  }
+  /*结束状态 透明度为1*/
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}
+
+.text-ellipsis {
+  //对超出内容隐藏
+  overflow: hidden !important;
+  //显示省略符号来代表被修剪的文本
+  text-overflow: ellipsis !important;
+  //文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。
+  white-space: nowrap !important;
+}
+
+.img-size100p {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }

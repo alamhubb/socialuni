@@ -2,7 +2,7 @@ package com.socialuni.demo.service;
 
 
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.StatusConst;
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.HomeSwiperDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.HomeSwiperVO;
@@ -30,7 +30,7 @@ public class AppService {
 
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         //homeSwipers
-        List<HomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusOrderByTopLevelAscIdDesc(StatusConst.enable);
+        List<HomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusOrderByTopLevelAscIdDesc(CommonStatus.enable);
         List<HomeSwiperVO> homeSwiperVOS = SocialHomeSwiperROFactory.toVOS(homeSwiperDOS);
         return new ResultRO<>(homeSwiperVOS);
     }

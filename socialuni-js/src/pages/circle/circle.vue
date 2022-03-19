@@ -27,7 +27,7 @@
       <!--    搜索的时候就是一个 圈子，一个话题-->
 
       <div v-else class="flex-col flex-1 overflow-hidden">
-        <div class="box-sm">
+        <div class="q-box-sm">
           <div class="mb-sm">
             <text class="cuIcon-title"></text>
             <text class="font-md font-bold">历史话题</text>
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="box-sm">
+        <div class="q-box-sm">
           <div>
             <text class="cuIcon-title"></text>
             <text class="font-md font-bold">圈子</text>
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div class="box-sm">
+        <div class="q-box-sm">
           <div>
             <text class="cuIcon-title"></text>
             <text class="font-md font-bold">话题</text>
@@ -152,8 +152,8 @@ import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
 import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import QTab from '@/qing-ui/components/QTab/QTab.vue'
-import TalkSearchPageType from '@/socialuni/const/TalkSearchPageType'
-import CircleSearch from '@/socialuni/components/SCircleSearch.vue'
+import TalkSearchPageType from '@/socialuni/constant/TalkSearchPageType'
+import CircleSearch from '@/socialuni/components/SocialCirclePicker.vue'
 
 
 @Component({
