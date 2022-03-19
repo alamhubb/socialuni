@@ -1,5 +1,5 @@
 <template>
-  <div v-if="dialogVisible"
+  <div v-if="dialogVisible || value"
        class="position-fixed overflow-hidden index-999 h100vh w100vw top-0 bottom-0 left-0 right-0">
     <q-model @click="cancel" v-if="modal">
       <!--        ios端不支持prevent需要用stop代替-->
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
 import QModel from '@/qing-ui/components/QModel/QModel.vue'
 import QButton from '@/qing-ui/components/QButton/QButton.vue'
 
@@ -50,6 +50,8 @@ export default class QPopup extends Vue {
   @Prop({ default: '关 闭' }) readonly cancelText: boolean
   @Prop({ default: '确 定' }) readonly confirmText: boolean
 
+  @Model() value: boolean
+
   dialogVisible: boolean = false
 
   open () {
@@ -57,6 +59,7 @@ export default class QPopup extends Vue {
   }
 
   close () {
+    this.input(false)
     this.dialogVisible = false
   }
 
@@ -69,6 +72,11 @@ export default class QPopup extends Vue {
   @Emit()
   confirm () {
     this.close()
+  }
+
+  @Emit()
+  input (visible) {
+    return visible
   }
 
   //下的话宽度100，中的话宽度90

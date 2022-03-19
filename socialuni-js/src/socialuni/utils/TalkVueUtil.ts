@@ -17,8 +17,15 @@ talkTabCityDefault.type = TalkTabType.city_type
 export default class TalkVueUtil {
   static readonly TalkTabsKey: string = 'talkTabs'
   static readonly TalkTabsDefault: TalkTabVO [] = [
-    talkTabFollowDefault, talkTabHomeDefault, talkTabCityDefault
+    new TalkTabVO(TalkTabType.follow_name, TalkTabType.follow_type),
+    new TalkTabVO(TalkTabType.home_name, TalkTabType.home_type),
+    new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type),
+    new TalkTabVO('处对象', TalkTabType.circle_type),
+    new TalkTabVO('闺蜜', TalkTabType.circle_type),
+    new TalkTabVO('扩列', TalkTabType.circle_type),
+    new TalkTabVO('生活', TalkTabType.circle_type)
   ]
+
 
   static readonly talkTabIndexKey: string = 'talkTabIndex'
   static readonly talkTabIndexDefault: number = 1
@@ -28,8 +35,11 @@ export default class TalkVueUtil {
 
 
   static getTalkTabs (): TalkTabVO [] {
-    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
-    return homeTypeTalks || TalkVueUtil.TalkTabsDefault
+    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey) || TalkVueUtil.TalkTabsDefault
+    if (homeTypeTalks.length < 4) {
+      return TalkVueUtil.TalkTabsDefault
+    }
+    return homeTypeTalks
   }
 
   static getCurTalkTabIndex (): number {
