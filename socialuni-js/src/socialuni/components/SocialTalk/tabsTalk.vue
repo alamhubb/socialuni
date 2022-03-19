@@ -5,20 +5,9 @@
     <div class="flex-row px-sm mb-xss">
       <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
               class="bd-radius flex-1 mr-sm">
-        <template #default="{tab,index}">
-<!--          <div v-if="tab.type==='city'" class="h30 pl-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
-            {{ tab.name }}
-          </div>-->
-          <div class="h30 px-xs row-all-center" :class="{'font-md':currentTabIndex===index}">
-            {{ tab.name }}
-          </div>
+        <template #default="{tab,index,value}">
+          <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab.name }}</view>
         </template>
-<!--        <template #icon="{tab}">
-          <q-icon class="pr-xs mb-nn" v-if="tab.type==='city'" size="14" icon="map-fill"></q-icon>
-          &lt;!&ndash;        <q-icon class="px-xs" v-if="tab.type==='city'" size="20" icon="arrow-down"></q-icon>&ndash;&gt;
-
-          &lt;!&ndash;        <q-icon icon="map-fill" size="14"></q-icon>&ndash;&gt;
-        </template>-->
       </q-tabs>
       <div class="flex-none row-col-center">
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
@@ -175,7 +164,6 @@ import TalkOperate from './talkOperate.vue'
 import QTab from '../../../qing-ui/components/QTab/QTab.vue'
 import QTabs from '../../../qing-ui/components/QTabs/QTabs.vue'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import TalkTabType from '../../constant/TalkTabType'
 import PageUtil from '../../utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
@@ -222,7 +210,7 @@ export default class TabsTalkPage extends Vue {
     //必须有this.talkTabObj 且 不为首次加载才行
     if (this.talkTabObj && !this.talkTabObj.firstLoad) {
       //如果当前为关注，则重新查询,否则的话将关注列设置为首次查询
-      this.autoChooseUseLocationQueryTalks(true)
+      this.startPullDown()
       //把非当前的设置为初始
       this.talkTabs.filter(item => item.type !== this.talkTabObj.type).forEach(item => (item.firstLoad = true))
     }
@@ -275,7 +263,7 @@ export default class TabsTalkPage extends Vue {
   talksListHeightSub = 0
 
   getTabBarTop () {
-    this.tabsHeight = 50
+    this.tabsHeight = 40
     // h5有头顶和下边导航栏都算了高度
     // #ifdef H5
     //tab的高度加上导航栏的高度
@@ -284,6 +272,10 @@ export default class TabsTalkPage extends Vue {
     // #ifndef H5
     this.talksListHeightSub = socialSystemModule.statusBarHeight + socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
+    console.log(socialSystemModule.statusBarHeight)
+    console.log(socialSystemModule.navBarHeight)
+    console.log(this.tabsHeight)
+    console.log(this.talksListHeightSub)
   }
 
 
@@ -300,7 +292,7 @@ export default class TabsTalkPage extends Vue {
   initQuery () {
     //首次打开talk页面，获取用户位置用来查询
     socialLocationModule.appLunchInitDistrict().then(() => {
-      this.autoChooseUseLocationQueryTalks(true)
+      this.startPullDown()
     })
   }
 
@@ -390,6 +382,10 @@ export default class TabsTalkPage extends Vue {
     }
   }
 
+  startPullDown () {
+    this.$refs.pullRefresh.startPulldownRefresh()
+  }
+
   refreshQueryDate () {
     this.queryTime = new Date()
   }
@@ -430,9 +426,7 @@ export default class TabsTalkPage extends Vue {
   // tabs通知swiper切换
   tabsChange (index) {
     if (index === this.currentTabIndex) {
-      if (this.talkTabObj.type === TalkTabType.city_type) {
-        this.openCityPicker()
-      }
+      this.startPullDown()
       return
     }
     socialTalkModule.setCurTabIndexUpdateCircle(index)
@@ -453,7 +447,7 @@ export default class TabsTalkPage extends Vue {
     })
     //如果首次加载，则需要查询
     if (curTab.firstLoad) {
-      await this.autoChooseUseLocationQueryTalks(true)
+      await this.startPullDown()
       this.tabsTalkOnHide()
     }
   }
@@ -464,7 +458,7 @@ export default class TabsTalkPage extends Vue {
 
   cityChange (district: DistrictVO) {
     socialLocationModule.setLocation(district)
-    this.autoChooseUseLocationQueryTalks(true)
+    this.startPullDown()
   }
 
   @socialConfigStore.State('appConfig') readonly appConfig: object

@@ -54,6 +54,9 @@ public class SocialHomeTalkQueryDomain {
         if (tagIds == null) {
             tagIds = new ArrayList<>();
             List<String> tagNames = queryQO.getTagNames();
+            if (tagNames == null) {
+                tagNames = new ArrayList<>();
+            }
             for (String tagName : tagNames) {
                 TagDO tagDO = tagRepository.findFirstByName(tagName);
                 if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {

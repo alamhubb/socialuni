@@ -1,10 +1,9 @@
 <template>
   <scroll-view :scroll-x="true" class="tabUuid overflow-hidden" :class="[uuid]" :scroll-left="leftBoxScrollLeft">
     <div class="row-nowrap position-relative">
-      <div class="barUuid fixed-index row-all-center" :class="[uuid,isBar?'flex-1':'flex-none']"
-           v-for="(tab,index) in tabs" @click="input(index)"
-           :key="index">
-        <div class="lineUuid" :class="[uuid,index===value?activeClass:unActiveClass]">
+      <div class="barUuid row-all-center" :class="[uuid,isBar?'fixed-index flex-1':'flex-none']"
+           v-for="(tab,index) in tabs" @click="input(index)" :key="tab.name">
+        <div class="lineUuid row-all-center" :class="[uuid,index===value?activeClass:unActiveClass]">
           <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
 
           </slot>
@@ -26,6 +25,7 @@
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import CommonUtil from '../../../socialuni/utils/CommonUtil'
+import TalkTabVO from '@/socialuni/model/talk/TalkTabVO'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 
@@ -52,7 +52,7 @@ export default class QTabs extends Vue {
   uuid: string = CommonUtil.getClassUUID()
 
   @Model('input') readonly value: number
-  @Prop({ default: [] }) readonly tabs: any[]
+  @Prop({ default: [] }) readonly tabs: TalkTabVO[]
 
   @Watch('value')
   valueWatch (val, oldVal) {
