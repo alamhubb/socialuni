@@ -417,7 +417,7 @@ export default class TabsTalkPage extends Vue {
     })
     //如果首次加载，则需要查询
     if (curTab.firstLoad) {
-      await this.startPullDown()
+      await this.autoChooseUseLocationQueryTalks(true)
       this.tabsTalkOnHide()
     }
   }
