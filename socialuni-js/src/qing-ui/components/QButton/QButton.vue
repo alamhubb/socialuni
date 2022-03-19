@@ -1,6 +1,6 @@
 <template>
   <button
-    class="font-df" :class="buttonClass"
+    class="font-df bg-click" :class="buttonClass"
     @click.stop="clickHandler"
     :disabled="disabled"
     :loading="loading"
