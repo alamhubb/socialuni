@@ -19,7 +19,7 @@
             //可取值template、custom、none
             "template" : {
                 "title" : "服务协议和隐私政策",
-                "message" : "　　请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了更好的向你提供服务，我们需要收集你的设备标识、操作日志等信息用于分析、优化应用性能。<br/>　　你可阅读<a href=\"https://www.qingchiapp.com/agreement\">《服务协议》</a>和<a href=\"https://www.qingchiapp.com/privacy\">《隐私政策》</a>了解详细信息。如果你同意，请点击下面按钮开始接受我们的服务。",
+                "message" : "　　请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了更好的向你提供服务，我们需要收集你的设备标识、操作日志等信息用于分析、优化应用性能。<br/>　　你可阅读<a href=\"https://www.socialuni.cn/agreement\">《服务协议》</a>和<a href=\"https://www.socialuni.cn/privacy\">《隐私政策》</a>了解详细信息。如果你同意，请点击下面按钮开始接受我们的服务。",
                 "buttonAccept" : "我知道了",
                 "buttonRefuse" : "暂不同意"
             }
@@ -96,7 +96,7 @@
                 },
                 "payment" : {
                     "weixin" : {
-                        "appid" : "wx682b729afd398217",
+                        "appid" : "",
                         "UniversalLinks" : ""
                     }
                 },
@@ -158,7 +158,6 @@
     "mp-weixin" : {
         /* 小程序特有相关 */
         "usingComponents" : true,
-        //        腾讯地图FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD
         "appid" : "wx0bf5fe9ceeab514c",
         "setting" : {
             "urlCheck" : true
@@ -220,9 +219,18 @@
         "router" : {
             "mode" : "history"
         },
-        "domain" : "www.qingchiapp.com",
+        "domain" : "www.socialuni.cn",
         "uniStatistics" : {
             "enable" : true
+        },
+        "sdkConfigs" : {
+            // 使用地图或位置相关功能必须填写其一
+            "maps" : {
+                "qqmap" : {
+                    // 腾讯地图秘钥 https://lbs.qq.com/dev/console/key/manage
+                    "key" : "FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD"
+                }
+            }
         }
     },
     /*全局关闭 uni统计*/
