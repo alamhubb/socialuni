@@ -44,65 +44,7 @@
 
       <talk-swipers class="flex-none" v-if="configShowSwipers"></talk-swipers>
 
-      <!--      <div class="row-col-center mb-sm mx-sm">
-              <q-tabs v-model="current" :tabs="['处对象圈','我的圈子','热门圈子']" type="bar"
-                      class="bd-radius pd-mn flex-1 bg-theme2">
-                <template #default="{tab}">
-                  <div class="h30 px-xs row-all-center font-md">
-                    {{ tab }}
-                    &lt;!&ndash;            费劲啊实力哈哈&ndash;&gt;
-                  </div>
-                </template>
-              </q-tabs>
-              <div class="row-col-center bg-click flex-none ml-sm font-md">更多
-                <q-icon icon="mdi-chevron-right"></q-icon>
-              </div>
-            </div>
-            <div>
-              <swiper circular class="h90 bd-radius mx-sm mb-sm" :current="current" @change="switchCircleTabValue">
-                <swiper-item class="bd-radius">
-                  <div class="h100p w100p flex-col flex-none bg-default bd-radius pd-sm">
-                    <div class="row-col-center flex-none">
-                      <img class="bd-round size70 flex-none mr-sm" :src="tags[0].avatar"/>
-
-                      <div>
-                        <div class="font3-cut">
-                          &lt;!&ndash;            简介最多30个字符&ndash;&gt;
-                          简介打发法师打发撒旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬旦法撒旦法阿斯顿发斯蒂芬
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </swiper-item>
-                <swiper-item class="bd-radius">
-                  <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-                    &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
-                    <div class="row-nowrap overflow-hidden">
-                      <div v-for="(item,index) in tags" v-if="index<5"
-                           class="col-row-center mx-xs overflow-hidden h70 flex-1">
-                        <img class="bd-round size50" :src="item.avatar"/>
-                        <div class="font-cut">{{ item.name }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </swiper-item>
-                <swiper-item class="bd-radius">
-                  <div class="h100p flex-col flex-none bg-default bd-radius py-sm px-xs overflow-hidden">
-                    &lt;!&ndash;                        class="radius flex-none h100p"&ndash;&gt;
-                    <div class="row-nowrap overflow-hidden">
-                      <div v-for="(item,index) in tags" v-if="index<5"
-                           class="col-row-center mx-xs overflow-hidden h70 flex-1">
-                        <img class="bd-round size50" :src="item.avatar"/>
-                        <div class="font-cut">{{ item.name }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </swiper-item>
-              </swiper>
-            </div>-->
-
-      <tabs-talk class="flex-1" ref="tabsTalk"
-                 :scroll-enable="scrollEnable"
+      <tabs-talk class="flex-1" ref="tabsTalk" :scroll-enable="scrollEnable"
       ></tabs-talk>
     </view>
     <msg-input>
@@ -207,8 +149,6 @@ export default class SocialTalkPage extends Vue {
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
 
-  checkedCircle = '哈哈哈'
-
   switchCircleTabValue (event: { detail: any }) {
     const detail: {
       current: number,
@@ -261,7 +201,7 @@ export default class SocialTalkPage extends Vue {
     // 只有开启了轮播图，才需要控制下方滚动
     if (this.configShowSwipers && this.homeSwipers && this.homeSwipers.length) {
       // +5点余量以防万一
-      const scrollTop = e.scrollTop + 1
+      const scrollTop = e.scrollTop + 3
       // 只有不可滚动时，且大于选项卡高度，才改为可用
       if ((!this.scrollEnable) && scrollTop >= this.talkTabsTop) {
         this.scrollEnable = true
@@ -272,7 +212,6 @@ export default class SocialTalkPage extends Vue {
       // 如果不显示轮播图，则下方talks一定可以滚动
       this.scrollEnable = true
     }
-    console.log(this.scrollEnable)
   }
 
   // 必须这么写否则不生效
