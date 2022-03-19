@@ -4,7 +4,7 @@
       <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
     </template>
     <div class="h90vh">
-      <q-sidebar :dataList="circleTypes" class="flex-1 flex-row overflow-hidden">
+      <q-sidebar :dataList="showCircleTypes" class="flex-1 flex-row overflow-hidden">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
             <view class="row-all-center flex-auto">
@@ -21,7 +21,7 @@
 
             <div v-if="item.circles" class="row-wrap overflow-hidden">
               <div v-for="(circle,index) in item.circles"
-                   class="col-all-center ml-sm overflow-hidden mb-sm" @click="change(circle)">
+                   class="col-all-center ml-sm overflow-hidden mb-sm bg-click" @click="change(circle)">
                 <img class="bd-round size50" :src="circle.avatar"/>
                 <div class="font-cut">{{ circle.name }}</div>
                 <div class="font-cut">{{ circle.talkCount }}</div>
@@ -39,10 +39,10 @@ import { Component, Emit, Vue } from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import { socialCircleStore, socialTagStore } from '@/socialuni/store'
-import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
+import { socialCircleStore } from '@/socialuni/store'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
+import ObjectUtil from '@/socialuni/utils/ObjectUtil'
 
 
 @Component({
@@ -60,6 +60,23 @@ export default class SocialCirclePicker extends Vue {
   @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO[]
 
   circleSearchText = ''
+
+  get showCircleTypes () {
+    if (this.circleSearchText) {
+      const showCircleTypes = this.circleTypes.reduce((all, item) => {
+        const data = item.circles.filter(circle => circle.name.includes(this.circleSearchText))
+        if (data.length) {
+          const itemCopy = ObjectUtil.deepClone(item)
+          itemCopy.circles = data
+          all.push(itemCopy)
+        }
+        return all
+      }, [])
+      return showCircleTypes
+    } else {
+      return this.circleTypes
+    }
+  }
 
   openDialog () {
     this.$refs.circleChooseDialog.open()
