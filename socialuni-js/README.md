@@ -6,6 +6,12 @@ uniapp chat Community Dating Social app
 
 ## [官网](https://socialuni.cn/)
 
+### 前端源码地址
+[清池前端项目 git地址 socialuni](https://gitee.com/socialuni/socialuni.git)
+
+### 后端源码地址
+* [社交联盟社交sdk，web项目 git地址 socialuni](https://gitee.com/socialuni/socialuni.git)
+
 ## 介绍
 
 ### 社交联盟是什么？
@@ -104,7 +110,7 @@ app已上架，应用宝、360、oppo、vivo、小米、阿里应用中心，大
 插件仅支持git方式下载，不支持zip方式，详细配置手册请参考 [详细配置手册](https://socialuni.cn/configGuide/)
 
 ### 前端源码地址
-[清池前端项目 git地址 socialuni](https://github.com/socialuni/socialuni.git)
+[清池前端项目 git地址 socialuni](https://gitee.com/socialuni/socialuni.git)
 
 ### 后端源码地址
 * [社交联盟社交sdk，web项目 git地址 socialuni](https://gitee.com/socialuni/socialuni.git)
