@@ -246,10 +246,6 @@ export default class TabsTalkPage extends Vue {
     // #ifndef H5
     this.talksListHeightSub = socialSystemModule.statusBarHeight + socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
-    console.log(socialSystemModule.statusBarHeight)
-    console.log(socialSystemModule.navBarHeight)
-    console.log(this.tabsHeight)
-    console.log(this.talksListHeightSub)
   }
 
 

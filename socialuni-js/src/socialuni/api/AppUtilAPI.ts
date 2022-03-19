@@ -1,19 +1,10 @@
 import request from '../plugins/http/request'
-import AppInitQueryVO from '../model/common/AppInitQueryVO'
 import AppUpdateVO from '../model/app/AppUpdateVO'
 import AppUpdateResultVO from '../model/app/AppUpdateResultVO'
 import FrontErrorLogVO from '../model/app/FrontErrorLogVO'
 import ObjectUtil from '../utils/ObjectUtil'
 
 export default class AppUtilAPI {
-  static queryAppInitDataLoadAPI (initQueryVO: AppInitQueryVO) {
-    return request.post('app/queryAppInitDataLoad', initQueryVO)
-  }
-
-  static queryAppInitDataReadyAPI () {
-    return request.post('app/queryAppInitDataReady')
-  }
-
   static checkUpdateAPI (versionCode: number) {
     const appUpdate = new AppUpdateVO(versionCode)
     return request.post<AppUpdateResultVO>('app/checkUpdate', appUpdate)
