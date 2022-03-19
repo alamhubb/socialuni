@@ -19,7 +19,8 @@ page {
   font-family: Helvetica Neue, Helvetica, sans-serif;
   color: #303133;
   font-size: 14px;
-  overflow-x: hidden;
+  //不能有这个，要不然h5无法滚动
+  //overflow-x: hidden;
 }
 
 body {
@@ -30,29 +31,6 @@ body {
 #app {
   height: 100%;
   width: 100%;
-}
-
-//隐藏scroll-view的滚动条
-::-webkit-scrollbar {
-  display: none;
-}
-
-//不显示滚动条
-html::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-//调整滚动条样式
-::-webkit-scrollbar {
-  width: 6px;
-  height: 10px;
-  top: 2px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 1em;
-  background-color: rgba(144, 147, 153, .3);
 }
 
 view,

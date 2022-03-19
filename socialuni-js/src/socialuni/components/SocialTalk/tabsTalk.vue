@@ -13,32 +13,6 @@
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
-    <!--    <div class="bg-white px-xs pb-xs mb-sm">
-          <div class="flex-row bg-theme3 bd-radius py-xs">
-            <div class="flex-1 row-center">最新回复</div>
-            <div class="flex-1 row-center">
-              全国
-              &lt;!&ndash;       全国 、北京&ndash;&gt;
-            </div>
-            <div class="flex-1 row-center">性别
-              &lt;!&ndash;      性别，男，女&ndash;&gt;
-            </div>
-            <div class="flex-1 row-center">年龄
-              &lt;!&ndash;      20岁-24岁&ndash;&gt;
-            </div>
-            &lt;!&ndash;      发布时间，最新回复时间，楼主回复时间&ndash;&gt;
-          </div>
-        </div>-->
-
-    <!--      <view class="row-col-center mr-60" @click="queryEnd(true)" hover-class="uni-list-cell-hover">
-            <view v-if="talkTabObj.loadMore===loading">
-              <u-loading mode="circle"></u-loading>
-            </view>
-            <q-icon v-else size="18" icon="reload"></q-icon>
-          </view>-->
-    <!--<view class="px-sm">
-      <view class="w12"></view>
-    </view>-->
 
     <q-pull-refresh ref="pullRefresh" @refresh="queryEnd">
       <swiper :current="currentTabIndex"
@@ -266,7 +240,7 @@ export default class TabsTalkPage extends Vue {
     this.tabsHeight = 40
     // h5有头顶和下边导航栏都算了高度
     // #ifdef H5
-    //tab的高度加上导航栏的高度
+    //tab的高度加上导航栏的高度,h5+ 50 底部
     this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight
     // #endif
     // #ifndef H5
