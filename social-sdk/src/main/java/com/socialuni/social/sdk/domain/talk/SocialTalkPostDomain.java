@@ -26,6 +26,7 @@ import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.TalkRedis;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -103,10 +104,15 @@ public class SocialTalkPostDomain {
 
         List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd, talkVisibleGender);
 
-        SocialCircleDO socialCircleDO = socialCircleRepository.findFirstByName(talkVO.getCircleName());
-
-        socialCircleDO.setCount(socialCircleDO.getCount() + 1);
-        socialCircleDO = socialCircleRepository.save(socialCircleDO);
+        String circleName = talkVO.getCircleName();
+        SocialCircleDO socialCircleDO = null;
+        if (StringUtils.isNotEmpty(circleName)) {
+            socialCircleDO = socialCircleRepository.findFirstByName(talkVO.getCircleName());
+            if (socialCircleDO != null) {
+                socialCircleDO.setCount(socialCircleDO.getCount() + 1);
+                socialCircleDO = socialCircleRepository.save(socialCircleDO);
+            }
+        }
 
         TalkAddValidateRO talkAddValidateRO = new TalkAddValidateRO(districtDO, list, socialCircleDO);
         return talkAddValidateRO;

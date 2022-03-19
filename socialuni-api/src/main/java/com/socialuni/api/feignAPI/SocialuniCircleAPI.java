@@ -28,6 +28,6 @@ public interface SocialuniCircleAPI {
     ResultRO<List<SocialCircleRO>> queryHotCircles();
 
     @PostMapping("queryCircleTypes")
-    public ResultRO<List<CircleTypeRO>> queryCircleTypes();
+    ResultRO<List<CircleTypeRO>> queryCircleTypes();
 }
 
