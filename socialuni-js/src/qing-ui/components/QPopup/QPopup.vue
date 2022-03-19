@@ -14,9 +14,9 @@
           <div class="flex-row flex-1">
             <slot name="headerLeft"></slot>
           </div>
-          <div class="flex-row flex-none pr-sm">
-            <q-button class="mr-sm" v-if="!hideCancel" @click="cancel" text info>{{ cancelText }}</q-button>
+          <div class="flex-row flex-none px-sm">
             <q-button v-if="!hideConfirm" @click="confirm" theme text>{{ confirmText }}</q-button>
+            <q-button class="ml-sm" v-if="!hideCancel" @click="cancel" text info>{{ cancelText }}</q-button>
           </div>
         </div>
         <slot></slot>

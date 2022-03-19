@@ -3,7 +3,7 @@
     <template #headerLeft>
       <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
     </template>
-    <div class="h90vh">
+    <div class="h80vh">
       <q-sidebar :dataList="showCircleTypes" class="flex-1 flex-row overflow-hidden">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">

@@ -1,6 +1,6 @@
 <template>
   <q-popup ref="filterDialog" bottom hide-modal @confirm="confirm">
-    <div class="h87vh">
+    <div class="h80vh">
       <div class="h100p py-sm px" v-show="!showTagSearch">
         <div class="row-col-center mt-sm mb-sm">
           <div class="mr-sm">性别:</div>
