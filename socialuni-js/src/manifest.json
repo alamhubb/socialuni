@@ -96,7 +96,7 @@
                 },
                 "payment" : {
                     "weixin" : {
-                        "appid" : "wx682b729afd398217",
+                        "appid" : "",
                         "UniversalLinks" : ""
                     }
                 },
