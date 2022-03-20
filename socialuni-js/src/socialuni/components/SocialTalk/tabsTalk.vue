@@ -38,20 +38,22 @@
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
             <div class="px-sm pb-60 bg-theme3"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
-<!--              <div class="card mb-sm elevation-4 px">
+              <talk-swipers v-if="talkTabs[swiperIndex].type === 'home' && configShowSwipers"></talk-swipers>
+
+              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
                 <div class="row-between-center mb-sm">
                   <div>
                     圈主：xxxx
                   </div>
                   <div class="row-col-center">
-                    <div>竞选圈主</div>
-                    <div class="ml-md">圈子管理</div>
+                    <div class="color-sub">竞选详情</div>
+                    <div class="color-sub ml-md">圈子管理</div>
                   </div>
                 </div>
                 <div class="row-col-center">
                   小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
                 </div>
-              </div>-->
+              </div>
 
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
@@ -177,6 +179,8 @@ export default class TabsTalkPage extends Vue {
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
   @socialLocationStore.Getter('location') location: DistrictVO
+  // 轮播图
+  @socialConfigStore.State('showSwipers') configShowSwipers: boolean
 
   @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
