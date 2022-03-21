@@ -6,7 +6,7 @@
     <div class="w100p pt-1p col-center flex-1">
       <div class="flex-none col-row-center h70">
         <div class="text-xxl font-bold">欢迎使用社交联盟授权登录</div>
-        <div v-if="showPhoneView" class="text-md color-warn mt-xs">建议使用微信 或 QQ一键登录，无需等待</div>
+        <div v-if="showPhoneView" class="text-md color-warn mt-xs">建议使用{{ isMpQQ ? 'QQ' : '微信' }}一键登录，无需等待</div>
       </div>
 
       <view class="mt-xs h145">
@@ -60,7 +60,7 @@
                         open-type="getUserInfo"
                         class="bg-gradual-qq h40 cu-btn lg row-all-center bd-none bg-click round mt w100p"
                         @getuserinfo="providerLogin">
-                  <q-icon color="white" icon="weixin-fill" size="21"
+                  <q-icon color="white" icon="qq-fill" size="19"
                           class="mr-xs"></q-icon>
                   QQ登录
                 </button>
@@ -195,7 +195,7 @@ export default class QcLogin extends Vue {
     if (socialOAuthModule.isThreeAuth) {
       PageUtil.toOAuthPage()
     } else {
-      RouterUtil.goBack()
+      PageUtil.toTalkPage()
     }
   }
 

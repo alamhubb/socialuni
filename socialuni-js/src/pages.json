@@ -14,6 +14,12 @@
       }
     },
     {
+      "path": "pages/circle/circleLeaderCampaign",
+      "style": {
+        "navigationBarTitleText": "竞选"
+      }
+    },
+    {
       "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"

@@ -2,7 +2,6 @@ package com.socialuni.social.entity.model.DO.talk;
 
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.base.CommonContentBaseDO;
 import com.socialuni.social.entity.model.DO.base.SocialPostContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ import java.io.Serializable;
         @Index(columnList = "socialuniUid"),
         @Index(columnList = "content"),
         @Index(columnList = "reportContentType"),
-        @Index(columnList = "globalTop"),
+        @Index(columnList = "globalTop")
 })
 @Data
 @NoArgsConstructor

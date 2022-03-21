@@ -127,7 +127,7 @@
 
         <view class="row-col-center py-sm q-solid-bottom">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
-          地区：{{ userProp.city }}
+          地区：{{ userProp.city || '' }}
         </view>
 
         <!--        <view v-if="isMine" class="py-sm q-solid-bottom">
