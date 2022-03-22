@@ -2,9 +2,7 @@ package com.socialuni.social.entity.model.DO.chat;
 
 
 import com.socialuni.social.constant.ChatStatus;
-import com.socialuni.social.constant.ChatTopLevel;
 import com.socialuni.social.constant.ChatType;
-import com.socialuni.social.constant.MatchType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +13,7 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2018-11-18 20:48
  */@Entity
-@Table(name = "chat")
+@Table(name = "s_chat")
 @Data
 public class ChatDO implements Serializable {
     @Id
@@ -35,7 +33,7 @@ public class ChatDO implements Serializable {
     private String type;
 
     //待匹配，匹配成功
-    private String matchStatus;
+//    private String matchStatus;
 
     private Date updateTime;
 
@@ -47,7 +45,7 @@ public class ChatDO implements Serializable {
     /**
      * chat的type 为匹配，或者普通聊天，或者群聊，或者通知等等,4 匹配中
      */
-    private String nickname;
+    private String chatName;
     private String avatar;
     //置顶标识
 //    private Boolean topFlag;
@@ -62,12 +60,12 @@ public class ChatDO implements Serializable {
         Date curDate = new Date();
         this.createTime = curDate;
         this.updateTime = curDate;
-        this.topLevel = ChatTopLevel.simple;
+//        this.topLevel = ChatTopLevel.simple;
         this.type = type;
         //如果为匹配
         if (ChatType.match.equals(type)) {
             this.status = ChatStatus.enable;
-            this.matchStatus = MatchType.waitMatch;
+//            this.matchStatus = MatchType.waitMatch;
         } else if (ChatType.single.equals(type)) {
             //如果为私聊，则默认为待开启状态，需要有一方发送消息后，才改为开启状态
 //            this.status = CommonStatus.waitOpen;
