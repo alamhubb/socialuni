@@ -57,7 +57,6 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 
 import TalkItem from '../SocialTalk/TalkItem.vue'
 import PagePath from '../../constant/PagePath'
-import UnreadNotifyVO from '../../model/UnreadNotifyVO'
 import TagVO from '../../model/community/tag/TagVO'
 import RouterUtil from '../../utils/RouterUtil'
 import PageUtil from '../../utils/PageUtil'
@@ -93,6 +92,7 @@ import HomeSwiperVO from '@/socialuni/model/HomeSwiperVO'
 import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 import DistrictVO from '@/socialuni/model/DistrictVO'
 import QCityPicker from '@/socialuni/components/QCityPicker/QCityPicker.vue'
+import UnreadNotifyVO from '@/socialuni/model/notify/UnreadNotifyVO'
 
 // todo 后台可控制是否显示轮播图
 

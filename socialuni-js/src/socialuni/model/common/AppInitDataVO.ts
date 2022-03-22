@@ -4,8 +4,8 @@ import DistrictVO from '../DistrictVO'
 import TagTypeVO from '../community/tag/TagTypeVO'
 import HomeSwiperVO from '../HomeSwiperVO'
 import TagVO from '../community/tag/TagVO'
-import UnreadNotifyVO from '../UnreadNotifyVO'
 import TalkVO from '../talk/TalkVO'
+import UnreadNotifyVO from '@/socialuni/model/notify/UnreadNotifyVO'
 
 export default class AppInitDataVO {
   user: CenterUserDetailRO = null
