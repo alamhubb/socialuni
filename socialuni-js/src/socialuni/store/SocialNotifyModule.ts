@@ -2,7 +2,6 @@ import { Action, Module, VuexModule } from 'vuex-class-modules'
 import UnreadNotifyVO from '../model/notify/UnreadNotifyVO'
 import NotifyAPI from '../api/NotifyAPI'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import SocialAppModule from './SocialAppModule'
 
 //用来存储当前用户的一些信息
 @Module({ generateMutationSetters: true })

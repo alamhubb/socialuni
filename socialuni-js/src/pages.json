@@ -59,6 +59,12 @@
           "style": {
             "navigationBarTitleText": "用户详情"
           }
+        },
+        {
+          "path": "notify/notify",
+          "style": {
+            "navigationBarTitleText": "通知列表"
+          }
         }
       ]
     }

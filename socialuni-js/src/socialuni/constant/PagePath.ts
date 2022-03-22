@@ -7,7 +7,7 @@ export default class PagePath {
 
   static readonly talkAdd: string = '/pagesLazy/talk/talkAdd'
   static readonly talkDetail: string = '/pagesLazy/talk/talkDetail'
-  static readonly notify: string = '/pages/notify/notify'
+  static readonly notify: string = '/pagesLazy/notify/notify'
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'
   static readonly message: string = '/pages/chat/message'
 
