@@ -26,6 +26,7 @@
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
+                  @input="talkContentInput"
         />
       </view>
       <!--      禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级-->
@@ -518,6 +519,21 @@ export default class SocialTalkAddPage extends Vue {
 
   circleChange (circle: SocialCircleRO) {
     this.circleName = circle.name
+  }
+
+  talkContentInput () {
+    const test = 'a12b'
+
+
+    //这种不匹配
+    const reg1 = /^\d{3,20}/g
+    //这种匹配
+    const reg2 = /\d{2}/g
+
+
+    const reg = /^\d{2}$/g
+    console.log(this.talkContent.replaceAll(reg, ''))
+    // this.talkContent = this.talkContent.replaceAll(reg, '')
   }
 }
 </script>

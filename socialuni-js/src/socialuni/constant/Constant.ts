@@ -8,6 +8,9 @@ export default class Constants {
   static readonly second = 1000
   static readonly minute: number = 60 * Constants.second
   static readonly hour: number = 60 * Constants.minute
+  static readonly day: number = 24 * Constants.hour
+  static readonly month: number = 30 * Constants.day
+  static readonly year: number = 365 * Constants.day
 
   // 用户在线图标颜色
   static readonly onlineColor: string = 'text-green'

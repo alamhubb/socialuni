@@ -12,7 +12,7 @@
         </view>
 
         <!-- 不为单性应用，且用户没修改过性别才可修改-->
-<!--        && !user.genderModified-->
+        <!--        && !user.genderModified-->
         <view class="cu-form-group" v-if="appGenderType === GenderTypeAll">
           <view class="title">性别</view>
           <view>
@@ -111,6 +111,8 @@ import EnumStrVO from '../../constant/EnumStrVO'
 import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import UserEditVO from '../../model/user/UserEditVO'
+import Constants from '@/socialuni/constant/Constant'
+import BirthAgeUtil from '@/socialuni/utils/BirthAgeUtil'
 
 @Component
 export default class UserEdit extends Vue {
@@ -140,7 +142,7 @@ export default class UserEdit extends Vue {
     if (this.user) {
       this.nickname = this.user.nickname || ''
       this.gender = this.user.gender || GenderType.girl
-      this.birthday = this.user.birthday || '1999-01-01'
+      this.birthday = this.user.birthday || '2001-01-01'
       this.city = this.user.city || ''
       // this.contactAccount = this.user.contactAccount || ''
       // this.wxAccount = this.user.wxAccount || ''
@@ -200,6 +202,13 @@ export default class UserEdit extends Vue {
       const confirm = await AlertUtil.confirm('性别修改后不可再更改，请确认是否修改')
       if (!confirm) {
         return ToastUtil.toastLong('您选择了不修改性别')
+      }
+    }
+
+    if (this.birthday && this.birthday.length > 4) {
+      const age = BirthAgeUtil.getAgeByBirth(this.birthday)
+      if (age < 18) {
+        return AlertUtil.hint('年龄不能小于18岁')
       }
     }
 
