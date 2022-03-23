@@ -35,16 +35,20 @@ public class SocialEditUserDomain {
         if (nickname.length() > 6) {
             throw new SocialBusinessException("昵称长度不能大于6");
         } else {
-            illegalWordService.checkHasIllegals(nickname);
-            //校验内容是否违规
-            if (TencentCloud.textIsViolation(nickname)) {
-                throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
+            String oldNickname = mineUser.getNickname();
+            //新旧昵称不一样，则更新
+            if (!nickname.equals(oldNickname)) {
+                illegalWordService.checkHasIllegals(nickname);
+                //校验内容是否违规
+                if (TencentCloud.textIsViolation(nickname)) {
+                    throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
+                }
+                HttpResult wxResult = WxUtil.checkTextWxSec(nickname);
+                if (wxResult.hasError()) {
+                    throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
+                }
+                mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
             }
-            HttpResult wxResult = WxUtil.checkTextWxSec(nickname);
-            if (wxResult.hasError()) {
-                throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
-            }
-            mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
         }
 
         String editGender = socialUserEditQO.getGender();
@@ -57,6 +61,10 @@ public class SocialEditUserDomain {
         String birthday = socialUserEditQO.getBirthday();
         if (StringUtils.isNotEmpty(birthday)) {
             mineUser.setBirthday(birthday);
+            int age = BirthdayAgeUtil.getAgeByBirth(birthday);
+            if (age < 18) {
+                throw new SocialBusinessException("年龄不能小于18岁");
+            }
             mineUser.setAge(BirthdayAgeUtil.getAgeByBirth(birthday));
         }
 
@@ -66,17 +74,21 @@ public class SocialEditUserDomain {
             if (userCity.length() > 10) {
                 throw new SocialBusinessException("市县区名称长度不能大于10");
             } else {
-                //校验内容是否违规
-                illegalWordService.checkHasIllegals(userCity);
+                String oldCity = mineUser.getCity();
+                //新旧昵称不一样，则更新
+                if (!userCity.equals(oldCity)) {
+                    //校验内容是否违规
+                    illegalWordService.checkHasIllegals(userCity);
 
-                if (TencentCloud.textIsViolation(userCity)) {
-                    throw new SocialBusinessException("地区名称违规");
+                    if (TencentCloud.textIsViolation(userCity)) {
+                        throw new SocialBusinessException("地区名称违规");
+                    }
+                    HttpResult wxResult = WxUtil.checkTextWxSec(userCity);
+                    if (wxResult.hasError()) {
+                        throw new SocialBusinessException("地区名称违规");
+                    }
+                    mineUser.setCity(userCity);
                 }
-                HttpResult wxResult = WxUtil.checkTextWxSec(userCity);
-                if (wxResult.hasError()) {
-                    throw new SocialBusinessException("地区名称违规");
-                }
-                mineUser.setCity(userCity);
             }
         }
         mineUser.setUpdateTime(new Date());
