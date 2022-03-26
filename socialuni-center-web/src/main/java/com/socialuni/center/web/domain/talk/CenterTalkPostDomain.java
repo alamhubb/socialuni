@@ -27,6 +27,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Component
@@ -45,13 +47,34 @@ public class CenterTalkPostDomain {
 
         String content = talkPostQO.getContent();
 
+        if (StringUtils.isNotEmpty(content)) {
+            String reg = "\\d+";//定义正则表达式
+            //编译正则表达式
+            Pattern patten = Pattern.compile(reg);
+            // 指定要匹配的字符串
+            Matcher matcher = patten.matcher(content);
+            List<String> matchStrs = new ArrayList<>();
+
+            //此处find()每次被调用后，会偏移到下一个匹配
+            while (matcher.find()) {
+                //获取当前匹配的值
+                matchStrs.add(matcher.group());
+                String numStr = matcher.group();
+                if (numStr.length() < 3) {
+                    int age = Integer.parseInt(numStr);
+                    if (age < 18) {
+                        throw new SocialBusinessException("禁止发布包含小于18岁未成年的内容");
+                    }
+                }
+            }
+        }
+
         if (StringUtils.isEmpty(content) && CollectionUtils.isEmpty(talkPostQO.getImgs())) {
             throw new SocialParamsException("不能发布文字和图片均为空的动态");
         }
         if (content.length() > 200) {
             throw new SocialParamsException("动态最多支持200个字，请精简动态内容");
         }
-
 
         // 查询的时候筛选
         //系统管理员则不校验规则,生产环境才校验
