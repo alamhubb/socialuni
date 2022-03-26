@@ -39,7 +39,8 @@ public class BirthdayAgeUtil {
         if (cal.before(birthDay)) { //出生日期晚于当前时间，无法计算
             return age;
         }
-        int yearNow = cal.get(Calendar.YEAR);  //当前年份
+        //+1,采用虚岁规则
+        int yearNow = cal.get(Calendar.YEAR) + 1; //当前年份
         int monthNow = cal.get(Calendar.MONTH);  //当前月份
         int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH); //当前日期
         cal.setTime(birthDay);

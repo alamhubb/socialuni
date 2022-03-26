@@ -74,7 +74,7 @@ public class SocialChatROFactory {
         chatRO.setId(chatDO.getId());
         chatRO.setType(chatDO.getType());
         if (ChatType.systemChats.contains(chatRO.getType())) {
-            chatRO.setNickname(chatDO.getNickname());
+            chatRO.setNickname(chatDO.getChatName());
             chatRO.setAvatar(chatDO.getAvatar());
         }
         chatRO.setTopFlag(false);

@@ -8,7 +8,9 @@ import com.socialuni.social.exception.constant.ErrorType;
 import com.socialuni.social.utils.JsonUtil;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
+import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.ByteBuffer;
 import java.util.Date;
@@ -75,7 +78,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
         ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
         String errorStr = exception.toString();
-        if (StringUtils.isEmpty(errorStr)){
+        if (StringUtils.isEmpty(errorStr)) {
             try {
                 errorStr = JsonUtil.objectMapper.writeValueAsString(exception);
             } catch (JsonProcessingException e) {
@@ -130,7 +133,22 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
 
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
         RequestLogDO requestLogDO = RequestLogUtil.get();
-
+        if (requestLogDO == null) {
+            HttpServletRequest request = RequestUtil.getRequest();
+            Date startTime = new Date();
+            String uri = request.getRequestURI();
+            String userIp = IpUtil.getIpAddr(request);
+            requestLogDO = new RequestLogDO();
+            requestLogDO.setIp(userIp);
+            requestLogDO.setCreateTime(startTime);
+            requestLogDO.setSuccess(true);
+            requestLogDO.setErrorType(ErrorType.success);
+            requestLogDO.setRequestMethod(request.getMethod());
+            requestLogDO.setSystemInfo(RequestUtil.getSystem());
+            requestLogDO.setProvider(RequestUtil.getProvider());
+            requestLogDO.setPlatform(RequestUtil.getPlatform());
+            requestLogDO.setUri(uri);
+        }
         Date endDate = new Date();
         long spendTime = endDate.getTime() - requestLogDO.getCreateTime().getTime();
         requestLogDO.setSuccess(false);
