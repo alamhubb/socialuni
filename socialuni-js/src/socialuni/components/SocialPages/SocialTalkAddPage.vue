@@ -26,7 +26,6 @@
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
                   v-model.trim="talkContent"
                   :show-confirm-bar="false"
-                  @input="talkContentInput"
         />
       </view>
       <!--      禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级-->
@@ -63,7 +62,12 @@
         </div>
       </view>
       <view class="px-sm pt-sm">
-        <view class="row-grid">
+        <view v-if="!selectTags.length" class="row-grid pb-10">
+          <view class="q-tag q-round bg-pink-plain">
+            <text @click="openTagSearchVue(false)">#添加话题</text>
+          </view>
+        </view>
+        <view v-else class="row-grid">
           <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
             <view class="q-tag q-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
@@ -304,9 +308,8 @@ export default class SocialTalkAddPage extends Vue {
     const selectTags = this.tags.filter(item => item.selected)
     if (selectTags.length > 0) {
       return selectTags
-    } else {
-      return TagUtil.initTagAry
     }
+    return []
   }
 
   @Watch('storeTags')
@@ -387,6 +390,22 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   addTalk () {
+    //禁止发布包含小于18年龄的岁数
+    let hasLt18Age = false
+    //这种不匹配
+    const reg = /\d+/g
+    this.talkContent.replace(reg, (match, matchVal) => {
+      const num = Number(match)
+      if (num < 18) {
+        hasLt18Age = true
+        ToastUtil.toastLong('禁止发布包含小于18岁未成年的内容')
+        return
+      }
+      return matchVal
+    })
+    if (hasLt18Age) {
+      return
+    }
     this.buttonDisabled = true
     if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
@@ -519,21 +538,6 @@ export default class SocialTalkAddPage extends Vue {
 
   circleChange (circle: SocialCircleRO) {
     this.circleName = circle.name
-  }
-
-  talkContentInput () {
-    const test = 'a12b'
-
-
-    //这种不匹配
-    const reg1 = /^\d{3,20}/g
-    //这种匹配
-    const reg2 = /\d{2}/g
-
-
-    const reg = /^\d{2}$/g
-    console.log(this.talkContent.replaceAll(reg, ''))
-    // this.talkContent = this.talkContent.replaceAll(reg, '')
   }
 }
 </script>
