@@ -32,7 +32,7 @@
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
 
-          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom" :scroll-top="scrollTop"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
@@ -40,20 +40,20 @@
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <talk-swipers v-if="talkTabs[swiperIndex].type === 'home' && configShowSwipers"></talk-swipers>
 
-<!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
-                <div class="row-between-center mb-sm">
-                  <div>
-                    圈主：xxxx
-                  </div>
-                  <div class="row-col-center">
-                    <div class="color-sub">竞选详情</div>
-                    <div class="color-sub ml-md">圈子管理</div>
-                  </div>
-                </div>
-                <div class="row-col-center">
-                  小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
-                </div>
-              </div>-->
+              <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+                              <div class="row-between-center mb-sm">
+                                <div>
+                                  圈主：xxxx
+                                </div>
+                                <div class="row-col-center">
+                                  <div class="color-sub">竞选详情</div>
+                                  <div class="color-sub ml-md">圈子管理</div>
+                                </div>
+                              </div>
+                              <div class="row-col-center">
+                                小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
+                              </div>
+                            </div>-->
 
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
@@ -408,6 +408,7 @@ export default class TabsTalkPage extends Vue {
   // tabs通知swiper切换
   tabsChange (index) {
     if (index === this.currentTabIndex) {
+      this.scrollTop = 0
       this.startPullDown()
       return
     }
@@ -486,6 +487,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   lastScrollTop = 0
+  scrollTop = 0
   curScrollTop = 0
   timeout = null
 
