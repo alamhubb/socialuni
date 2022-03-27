@@ -49,6 +49,10 @@ button {
   line-height: 1.5;
 }
 
+button::after {
+  border: none;
+}
+
 ul {
   list-style: none;
 }

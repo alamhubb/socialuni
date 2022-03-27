@@ -32,7 +32,7 @@
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
 
-          <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
@@ -182,7 +182,6 @@ export default class TabsTalkPage extends Vue {
   // 轮播图
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
 
-  @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
   loadMoreText = {
     contentdown: '点击显示更多',
