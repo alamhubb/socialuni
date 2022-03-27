@@ -9,6 +9,7 @@ import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.sdk.factory.ListConvertUtil;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -39,7 +40,7 @@ public class CenterTalkROFactory {
         centerTalkRO.setImgs(imgs);
         centerTalkRO.setComments(comments);
 
-        centerTalkRO.setContent(talkRO.getContent());
+        centerTalkRO.setContent(BirthdayAgeUtil.replaceAgeBetween10to18Str(talkRO.getContent()));
         centerTalkRO.setVisibleGender(talkRO.getVisibleGender());
         centerTalkRO.setUpdateTime(talkRO.getUpdateTime());
         centerTalkRO.setCommentNum(talkRO.getCommentNum());
