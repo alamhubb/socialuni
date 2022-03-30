@@ -174,6 +174,8 @@ import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
 import AppMsg from '@/socialuni/constant/AppMsg'
 import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
+import CosUploadResult from '@/socialuni/model/cos/CosUploadResult'
+import TencentCosAPI from '@/api/TencentCosAPI'
 
 @Component({
   components: {
@@ -436,23 +438,21 @@ export default class SocialTalkAddPage extends Vue {
     }
   }
 
-  publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
-      .then(() => {
-        this.buttonDisabled = false
-        uni.hideLoading()
-        if (socialTalkModule.curTabIsCircle) {
-          //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
-          socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
-        } else {
-          socialCircleModule.setCircleName(this.circleName)
-        }
-        RouterUtil.reLaunch(PagePath.talk + '?load=true')
-      })
-      .catch(() => {
-        this.buttonDisabled = false
-        uni.hideLoading()
-      })
+  async publishTalk () {
+    try {
+      await TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
+      if (socialTalkModule.curTabIsCircle) {
+        //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
+        socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
+      } else {
+        socialCircleModule.setCircleName(this.circleName)
+      }
+      RouterUtil.reLaunch(PagePath.talk + '?load=true')
+    } finally {
+      this.buttonDisabled = false
+      uni.hideLoading()
+      this.cosAuthRO = null
+    }
   }
 
   async uploadImgList () {
@@ -464,7 +464,13 @@ export default class SocialTalkAddPage extends Vue {
       }
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
-    CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
+    const res: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
+    for (const re of res) {
+      console.log(re)
+      console.log(re.Location)
+      TencentCosAPI.testAPI(re.Location, this.cosAuthRO)
+    }
+    console.log(this.cosAuthRO)
   }
 
   deleteImg (e) {
@@ -484,18 +490,17 @@ export default class SocialTalkAddPage extends Vue {
     }
     const count = this.imgMaxSize - this.showImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
-    console.log(imgFiles)
     this.showImgFiles.push(...imgFiles)
     //获取cos认证信息
-    this.getCosAuthRO()
+    await this.getCosAuthRO()
+    if (this.cosAuthRO) {
+      await this.uploadImgList()
+    }
   }
 
-  getCosAuthRO () {
-    if (!this.cosAuthRO) {
-      CosAPI.getCosAuthorizationAPI().then((res) => {
-        this.cosAuthRO = res.data
-      })
-    }
+  async getCosAuthRO () {
+    const res = await CosAPI.getCosAuthorizationAPI()
+    this.cosAuthRO = res.data
   }
 
   isFullImg () {
