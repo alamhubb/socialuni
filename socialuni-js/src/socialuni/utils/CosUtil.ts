@@ -7,26 +7,28 @@ import COS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
 // #endif
-import AppMsg from '../constant/AppMsg'
-import AlertUtil from './AlertUtil'
 import CosAuthRO from '../model/cos/CosAuthRO'
 import DomFile from '../model/DomFile'
-import UniUtil from './UniUtil'
 import TencentCosAPI from '@/api/TencentCosAPI'
-import UserAPI from '@/socialuni/api/UserAPI'
-import ImgAddQO from '@/socialuni/model/user/ImgAddQO'
+import CosAPI from '@/socialuni/api/CosAPI'
 
 export default class CosUtil {
   //向cos上传图片
+  static async getCosAuthRO () {
+    const authRes = await CosAPI.getCosAuthorizationAPI()
+    const cosAuthRO = new CosAuthRO(authRes.data)
+    cosAuthRO.cos = CosUtil.getAuthorizationCos(cosAuthRO)
+    return cosAuthRO
+  }
+
+  //向cos上传图片
   static async postImg (imgFile: DomFile, cosAuthRO: CosAuthRO) {
-    const cos = CosUtil.getAuthorizationCos(cosAuthRO)
-    await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO, cos)
+    await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
   }
 
   static async postImgList (imgSrcs: DomFile[], cosAuthRO: CosAuthRO) {
     // constant { data } = await CosAPI.getCosAuthorizationAPI()
-    const cos = CosUtil.getAuthorizationCos(cosAuthRO)
-    return await Promise.all(imgSrcs.map(async imgFile => TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO, cos)))
+    return await Promise.all(imgSrcs.map(async imgFile => TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)))
   }
 
   static getAuthorizationCos (cosAuthRO: CosAuthRO): COS {

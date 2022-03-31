@@ -169,6 +169,24 @@
           </div>
         </view>
 
+        <view v-if="isMine" class="py-sm q-solid-bottom">
+          <div class="row-col-center">
+            <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
+            手机号(仅自己可见)：
+            <view v-if="userProp.phoneNum" class="row-col-center">
+              {{ userProp.phoneNum }}
+              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
+                已绑定
+              </view>
+            </view>
+            <view v-else class="row-col-center">
+              <button class="ml-xs q-tag-warn bg-click"
+                      @click="toPhonePage">绑定手机号
+              </button>
+            </view>
+          </div>
+        </view>
+
 
         <!-- #ifndef MP-WEIXIN -->
         <!--        <view class="row-col-center py-sm q-solid-bottom">
@@ -367,6 +385,7 @@ import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CosAPI from '../../api/CosAPI'
+import CosAuthRO from '@/socialuni/model/cos/CosAuthRO'
 
 
 @Component({
@@ -399,8 +418,8 @@ export default class UserInfo extends Vue {
   reportType: string = ReportType.pornInfo
   pornInfo: string = ReportType.pornInfo
   reportContent = ''
-  talks: TalkVO[] = []
   @socialConfigStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
+  talks: TalkVO[] = []
 
   showUserContactBtnDisabled = false
 
@@ -547,10 +566,7 @@ export default class UserInfo extends Vue {
     }
     try {
       UniUtil.showLoading('上传中')
-      let cosAuthRO = null
-      CosAPI.getCosAuthorizationAPI().then(res => {
-        cosAuthRO = res.data
-      })
+      const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src

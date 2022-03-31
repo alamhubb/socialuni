@@ -133,7 +133,6 @@ import UniUtil from '../../utils/UniUtil'
 import DistrictVO from '../../model/DistrictVO'
 import JsonUtils from '../../utils/ObjectUtil'
 import TagVO from '../../model/community/tag/TagVO'
-import TagUtil from '../../utils/TagUtil'
 import CosUtil from '../../utils/CosUtil'
 import {
   socialCircleModule,
@@ -161,7 +160,6 @@ import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import DomFile from '../../model/DomFile'
 import CosAuthRO from '../../model/cos/CosAuthRO'
-import CosAPI from '../../api/CosAPI'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import RouterUtil from '../../utils/RouterUtil'
 import PagePath from '../../constant/PagePath'
@@ -465,12 +463,9 @@ export default class SocialTalkAddPage extends Vue {
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
     const res: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
-    for (const re of res) {
-      console.log(re)
-      console.log(re.Location)
-      TencentCosAPI.testAPI(re.Location, this.cosAuthRO)
-    }
-    console.log(this.cosAuthRO)
+    res.forEach((item, index) => {
+      TencentCosAPI.testAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO)
+    })
   }
 
   deleteImg (e) {
@@ -492,15 +487,10 @@ export default class SocialTalkAddPage extends Vue {
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
     this.showImgFiles.push(...imgFiles)
     //获取cos认证信息
-    await this.getCosAuthRO()
+    this.cosAuthRO = await CosUtil.getCosAuthRO()
     if (this.cosAuthRO) {
       await this.uploadImgList()
     }
-  }
-
-  async getCosAuthRO () {
-    const res = await CosAPI.getCosAuthorizationAPI()
-    this.cosAuthRO = res.data
   }
 
   isFullImg () {

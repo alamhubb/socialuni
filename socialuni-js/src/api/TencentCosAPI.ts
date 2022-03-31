@@ -7,34 +7,46 @@ import COS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
 // #endif
-import request from '../socialuni/plugins/http/request'
-import SocialLoginRO from '../socialuni/model/social/SocialLoginRO'
-import UniUserInfoRO from '@/socialuni/model/UniUserInfoRO'
-import OAuthUserInfoQO from '@/socialuni/model/dev/OAuthUserInfoQO'
 import DomFile from '@/socialuni/model/DomFile'
 import CosAuthRO from '@/socialuni/model/cos/CosAuthRO'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import AppMsg from '@/socialuni/constant/AppMsg'
 import CosUploadResult from '@/socialuni/model/cos/CosUploadResult'
-import CosUtil from '@/socialuni/utils/CosUtil'
+import request from '@/socialuni/plugins/http/request'
 
 export default class TencentCosAPI {
-  static testAPI (imgUrl, cosAuthRO: CosAuthRO) {
+  static async testAPI (imgUrl, imgKey, cosAuthRO: CosAuthRO) {
     const authKey = COS.getAuthorization({
       SecretId: cosAuthRO.credentials.tmpSecretId,
       SecretKey: cosAuthRO.credentials.tmpSecretKey,
-      Method: 'GET',
-      Expires: cosAuthRO.expiredTime
+      Method: 'get',
+      Key: imgKey
     })
-    request.get('https://' + imgUrl + '?ci-process=detect-label', null, {
+    console.log(authKey)
+    const res = await request.get('https://' + imgUrl + '?ci-process=detect-label', null, {
       header: {
-        Authorization: 'q-sign-algorithm=sha1&q-ak=AKIDzJM9gxOoPlsmQo7pVw73kBLFtKWTGfuv&q-sign-time=1648674291;1648677891&q-key-time=1648674291;1648677891&q-header-list=&q-url-param-list=&q-signature=8cd6a65f6da107c6f34d41ea5bc47921b1dea0fc',
+        Authorization: authKey,
+        'x-cos-security-token': cosAuthRO.credentials.sessionToken
       }
     })
+    console.log(res)
+    console.log(typeof res)
+    /*
+    const res = await cosAuthRO.cos.getObject({
+      Bucket: cosAuthRO.bucket,
+      Region: cosAuthRO.region,
+      DataType: 'blob',
+      QueryString: 'ci-process=detect-label',
+      Key: imgUrl,
+      onProgress: function (progressData) {
+        console.log(JSON.stringify(progressData))
+      }
+    })*/
+
   }
 
-  static async uploadFileAPI (imgFile: DomFile, data: CosAuthRO, cos) {
+  static async uploadFileAPI (imgFile: DomFile, cosAuthRO: CosAuthRO) {
     return new Promise<CosUploadResult>(async (resolve, reject) => {
       const headers = {
         // "fileid": "bba022e9313849acafeb34fd5d5a65f5avatar.jpg"
@@ -43,10 +55,9 @@ export default class TencentCosAPI {
           `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`,
       }
       const uploadImgFile = await UniUtil.getFile(imgFile)
-      console.log(cos)
-      cos.putObject({
-        Bucket: data.bucket,
-        Region: data.region,
+      cosAuthRO.cos.putObject({
+        Bucket: cosAuthRO.bucket,
+        Region: cosAuthRO.region,
         Key: imgFile.src,
         Body: uploadImgFile,
         Headers: headers,
