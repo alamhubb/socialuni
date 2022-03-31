@@ -3,10 +3,10 @@ spring:
 #    active: devprod
 #    active: localdevprod
 #    active: local
-#    active: qkylocal
+    active: qkylocal
 #    active: qkypc
 #    active: demo
-    active: prod
+#    active: prod
 #    active: localprod
   jpa:
     database: MYSQL
