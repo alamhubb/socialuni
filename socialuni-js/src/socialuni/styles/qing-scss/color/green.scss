@@ -1,12 +1,12 @@
-$color-green: #52C41A;
-$color-green1: #82CC6B;
-$color-green2: #73D13D;
-$color-green3: #95DE64;
-$color-green4: #B7EB8F;
-$color-green5: #C2E7B0;
-$color-green6: #F0F9EB;
+$color-green: #52C41A !default;
+$color-green1: #82CC6B !default;
+$color-green2: #73D13D !default;
+$color-green3: #95DE64 !default;
+$color-green4: #B7EB8F !default;
+$color-green5: #C2E7B0 !default;
+$color-green6: #F0F9EB !default;
 
-$color-green-light: $color-green6;
+$color-green-light: $color-green6 !default;
 
 $colors-green: (
         green:$color-green,
@@ -17,4 +17,4 @@ $colors-green: (
         green5:$color-green5,
         green6:$color-green6,
         green-light:$color-green-light,
-);
+)

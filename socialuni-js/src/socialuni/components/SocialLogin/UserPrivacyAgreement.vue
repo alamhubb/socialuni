@@ -2,7 +2,7 @@
   <!--        隐私提示-->
   <div>
     <view v-if="!user" class="row-center row-grid u-type-info">
-      <text class="mb-nn">
+      <text class="mb-nm">
         登录即代表同意
       </text>
       <navigator :url="userAgreementUrl" class="color-blue">

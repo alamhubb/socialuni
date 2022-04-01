@@ -63,13 +63,13 @@
       </view>
       <view class="px-sm pt-sm">
         <view v-if="!selectTags.length" class="row-grid pb-10">
-          <view class="q-tag q-round bg-pink-plain">
+          <view class="q-tag bd-round bg-pink-plain">
             <text @click="openTagSearchVue(false)">#添加话题</text>
           </view>
         </view>
         <view v-else class="row-grid">
           <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
-            <view class="q-tag q-round bg-pink-plain">
+            <view class="q-tag bd-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
               <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
                       @click.native.stop="deleteTag(tag)"/>
@@ -81,12 +81,12 @@
         </view>
         <view class="row-wrap">
           <view v-for="tag in unSelectTags" :key="tag.id" class="pb-10 px-mn">
-            <view class="q-tag q-round bg-pink-plain" @click="checkTag(tag)">
+            <view class="q-tag bd-round bg-pink-plain" @click="checkTag(tag)">
               #{{ tag.name }}
             </view>
           </view>
           <view class="row-all-center pb-10 px-mn">
-            <view class="q-tag q-round bg-orange-plain" @click="openTagSearchVue(false)">
+            <view class="q-tag bd-round bg-orange-plain" @click="openTagSearchVue(false)">
               更多
               <q-icon icon="arrow-right" size="12" class="ml-5"/>
             </view>

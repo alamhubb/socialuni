@@ -38,18 +38,7 @@
                 {{ userProp.nickname }}
               </view>
               <view class="flex-row">
-                <div v-if="userProp.gender==='girl'" class="q-box-nn q-tag-error mt-xs">
-                  {{ userProp.age }}
-                  <q-icon class="ml-nn"
-                          size="12"
-                          :icon="getGenderIcon(userProp)"/>
-                </div>
-                <div v-else class="q-box-nn q-tag-blue mt-xs">
-                  {{ userProp.age }}
-                  <q-icon class="ml-nn"
-                          size="12"
-                          :icon="getGenderIcon(userProp)"/>
-                </div>
+                <social-gender-tag :user="userProp"></social-gender-tag>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
@@ -98,34 +87,32 @@
           </view>
         </view>
 
-        <view class="row-col-center py-sm q-solid-bottom">
-          <!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
-                      <view class='cu-tag bg-green'>
-                        <q-icon size="18" icon="mdi-sword-cross"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-green bd-r-radius">
-                        {{ userProp.justiceValue }}
-                      </view>
-                    </view>-->
-          <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
-                      <view class='cu-tag bg-red'>
-                        <q-icon size="18" icon="heart-fill"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-red bd-r-radius">
-                        {{ userProp.loveValue }}
-                      </view>
+        <!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+                    <view class='cu-tag bg-green'>
+                      <q-icon size="18" icon="mdi-sword-cross"/>
                     </view>
-                    <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
-                      <view class='cu-tag bg-orange'>
-                        <q-icon size="18" icon="mdi-face"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-orange bd-r-radius">
-                        {{ userProp.faceRatio }}
-                      </view>
-                    </view>-->
-        </view>
+                    <view class="cu-tag bg-white bd-green bd-r-radius">
+                      {{ userProp.justiceValue }}
+                    </view>
+                  </view>-->
+        <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
+                    <view class='cu-tag bg-red'>
+                      <q-icon size="18" icon="heart-fill"/>
+                    </view>
+                    <view class="cu-tag bg-white bd-red bd-r-radius">
+                      {{ userProp.loveValue }}
+                    </view>
+                  </view>
+                  <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
+                    <view class='cu-tag bg-orange'>
+                      <q-icon size="18" icon="mdi-face"/>
+                    </view>
+                    <view class="cu-tag bg-white bd-orange bd-r-radius">
+                      {{ userProp.faceRatio }}
+                    </view>
+                  </view>-->
 
-        <view class="row-col-center py-sm q-solid-bottom">
+        <view class="row-col-center my">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
           地区：{{ userProp.city || '' }}
         </view>
@@ -151,7 +138,25 @@
                     </view>
                   </div>
                 </view>-->
-        <view v-if="isMine" class="py-sm q-solid-bottom">
+        <view v-if="isMine" class="mb">
+          <div class="row-col-center">
+            <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
+            手机号：
+            <view v-if="userProp.phoneNum" class="row-col-center">
+              {{ userProp.phoneNum }}
+              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
+                已绑定
+              </view>
+            </view>
+            <view v-else class="row-col-center">
+              <button class="ml-xs q-tag-warn bg-click"
+                      @click="toPhonePage">绑定手机号
+              </button>
+            </view>
+          </div>
+        </view>
+
+        <view v-if="isMine" class="mb q-solid-bottom">
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
             手机号(仅自己可见)：
@@ -169,24 +174,9 @@
           </div>
         </view>
 
-        <view v-if="isMine" class="py-sm q-solid-bottom">
-          <div class="row-col-center">
-            <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
-            手机号(仅自己可见)：
-            <view v-if="userProp.phoneNum" class="row-col-center">
-              {{ userProp.phoneNum }}
-              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
-                已绑定
-              </view>
-            </view>
-            <view v-else class="row-col-center">
-              <button class="ml-xs q-tag-warn bg-click"
-                      @click="toPhonePage">绑定手机号
-              </button>
-            </view>
-          </div>
-        </view>
 
+        <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
+        <!--        看他的性别等级-->
 
         <!-- #ifndef MP-WEIXIN -->
         <!--        <view class="row-col-center py-sm q-solid-bottom">
@@ -384,12 +374,12 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
-import CosAPI from '../../api/CosAPI'
-import CosAuthRO from '@/socialuni/model/cos/CosAuthRO'
+import SocialGenderTag from '@/socialuni/components/SocialGenderTag/SocialGenderTag.vue'
 
 
 @Component({
   components: {
+    SocialGenderTag,
     QIcon,
     QRowItem,
     TalkOperate,

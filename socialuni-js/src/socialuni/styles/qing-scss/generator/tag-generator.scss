@@ -21,9 +21,7 @@
     background: mix($color-white, $color, 90%);
     //border: 1px solid mix($color-white, $color, 60%);
   }
-}
 
-@each $key, $color in $colors-base {
   .q-tag-#{''+$key+''}-bd {
     padding: $box-mn;
     @extend .font-sm;
@@ -34,8 +32,18 @@
     background: mix($color-white, $color, 90%);
     border: 1px solid mix($color-white, $color, 60%);
   }
-}
 
+  .q-tag-#{''+$key+''}-round {
+    padding: $box-mn;
+    @extend .font-sm;
+    @extend .bd-round;
+    @extend .mr-sm;
+    @extend .row-col-center;
+    color: $color;
+    background: mix($color-white, $color, 90%);
+    border: 1px solid mix($color-white, $color, 60%);
+  }
+}
 
 .q-tag-white {
   padding: $box-mn;

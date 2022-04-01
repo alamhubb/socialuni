@@ -1,14 +1,14 @@
-$color-red: #C50F1A;
-$color-red1: #CF1322;
-$color-red2: #D4353F;
-$color-red3: #F5222D;
-$color-red4: #FF4D4F;
-$color-red5: #FF7875;
-$color-red6: #FFA39E;
-$color-red7: #FBC4C4;
-$color-red8: #FEF0F0;
+$color-red: #C50F1A !default;
+$color-red1: #CF1322 !default;
+$color-red2: #D4353F !default;
+$color-red3: #F5222D !default;
+$color-red4: #FF4D4F !default;
+$color-red5: #FF7875 !default;
+$color-red6: #FFA39E !default;
+$color-red7: #FBC4C4 !default;
+$color-red8: #FEF0F0 !default;
 
-$color-red-light: $color-red8;
+$color-red-light: $color-red8 !default;
 
 $colors-red: (
         red:$color-red,
@@ -21,4 +21,4 @@ $colors-red: (
         red7:$color-red7,
         red8:$color-red8,
         red-light:$color-red-light,
-);
+)

@@ -11,24 +11,13 @@
           <text class="text-md">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
-            <div v-if="talk.user.gender==='girl'" class="q-box-nn q-tag-error ml-sm">
-              {{ talk.user.age }}
-              <q-icon class="ml-nn"
-                      size="12"
-                      :icon="getGenderIcon(talk.user)"/>
-            </div>
-            <div v-else class="q-box-nn q-tag-blue ml-sm">
-              {{ talk.user.age }}
-              <q-icon class="ml-nn"
-                      size="12"
-                      :icon="getGenderIcon(talk.user)"/>
-            </div>
+            <social-gender-tag class="ml-xss" :user="talk.user"></social-gender-tag>
           </template>
 
           <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
                           :class="[getGenderBgColor(talk.user)]">
                       {{ talk.user.age }}
-                      <q-icon class="ml-nn"
+                      <q-icon class="ml-nm"
                               size="12"
                               :icon="getGenderIcon(talk.user)"/>
                     </view>-->
@@ -62,7 +51,7 @@
                     </view>-->
         </view>
         <view class="text-gray text-sm h25 row-col-center">
-          最新回复：{{ talk.updateTime| formatTime }}
+          {{ talk.updateTime| formatTime }}
           <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
             官方
           </view>
@@ -105,9 +94,13 @@ import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import { socialUserStore } from '../../store'
+import SocialGenderTag from '@/socialuni/components/SocialGenderTag/SocialGenderTag.vue'
 
 @Component({
-  components: { QIcon }
+  components: {
+    SocialGenderTag,
+    QIcon
+  }
 })
 export default class TalkItemHead extends Vue {
   @Prop() talkProp!: TalkVO
