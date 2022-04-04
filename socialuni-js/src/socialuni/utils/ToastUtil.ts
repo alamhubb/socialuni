@@ -31,4 +31,9 @@ export default class ToastUtil {
       })
     })
   }
+
+  public static error (title: string) {
+    ToastUtil.toast(title)
+    throw new Error(title)
+  }
 }

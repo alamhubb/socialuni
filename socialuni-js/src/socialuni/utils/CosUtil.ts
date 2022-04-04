@@ -21,11 +21,6 @@ export default class CosUtil {
     return cosAuthRO
   }
 
-  //向cos上传图片
-  static async postImg (imgFile: DomFile, cosAuthRO: CosAuthRO) {
-    await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
-  }
-
   static async postImgList (imgSrcs: DomFile[], cosAuthRO: CosAuthRO) {
     // constant { data } = await CosAPI.getCosAuthorizationAPI()
     return await Promise.all(imgSrcs.map(async imgFile => TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)))

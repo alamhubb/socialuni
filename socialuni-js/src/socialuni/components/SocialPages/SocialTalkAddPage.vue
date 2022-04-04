@@ -464,7 +464,7 @@ export default class SocialTalkAddPage extends Vue {
     })
     const res: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
     res.forEach((item, index) => {
-      TencentCosAPI.testAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO)
+      TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO)
     })
   }
 

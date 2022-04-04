@@ -5,6 +5,7 @@ import AlertUtil from './AlertUtil'
 import ToastUtil from './ToastUtil'
 import PageUtil from './PageUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
+import UniUtil from '@/socialuni/utils/UniUtil'
 
 export default class MsgUtil {
   static unBindPhoneNum () {
@@ -32,6 +33,11 @@ export default class MsgUtil {
         PageUtil.toMinePage()
       })
   }
+
+  static showUploadLoading () {
+    UniUtil.showLoading('上传中')
+  }
+
 
   static systemErrorMsg () {
     AlertUtil.hint(socialConfigModule.systemError604)

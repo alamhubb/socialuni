@@ -36,7 +36,7 @@ export default class CommonUtil {
   }
 
   //防抖
-  static debounce (func, wait) {
+  static debounceDelay (func, wait) {
     let timer
     return (...args) => {
       //清空上一个，只执行最后一次
@@ -46,6 +46,44 @@ export default class CommonUtil {
       }, wait)
     }
   }
+
+  //防抖立即执行
+  static debounce (func, wait) {
+    let timer = null
+    return async (...args: any[]) => {
+      if (!timer) {
+        func(...args)
+      }
+      if (timer) {
+        clearTimeout(timer.time)
+      }
+      timer = CommonUtil.setTimeout(wait)
+      timer.then(() => {
+        timer = null
+      })
+    }
+  }
+
+  static setTimeout<T> (delay: number = 1000, callback: (...args: any[]) => T = null) {
+    let time
+    const p1 = new Promise<T>(resolve => {
+      time = setTimeout(async () => {
+        if (callback) {
+          const res = await callback()
+          resolve(res)
+        } else {
+          resolve(null)
+        }
+      }, delay)
+    })
+    let cancel
+    const p2 = new Promise<T>((resolve, reject) => (cancel = reject))
+    const p: { cancel, time } & Promise<T> = Promise.race([p1, p2]) as any
+    p.cancel = cancel
+    p.time = time
+    return p
+  }
+
 
   public static getUUID (): string {
     const randoms: number[] = []

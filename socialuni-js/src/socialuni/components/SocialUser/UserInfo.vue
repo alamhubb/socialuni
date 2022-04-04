@@ -38,7 +38,7 @@
                 {{ userProp.nickname }}
               </view>
               <view class="flex-row">
-                <social-gender-tag :user="userProp"></social-gender-tag>
+                <social-gender-tag class="mt-sm" :user="userProp"></social-gender-tag>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
@@ -87,30 +87,36 @@
           </view>
         </view>
 
-        <!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
-                    <view class='cu-tag bg-green'>
-                      <q-icon size="18" icon="mdi-sword-cross"/>
-                    </view>
-                    <view class="cu-tag bg-white bd-green bd-r-radius">
-                      {{ userProp.justiceValue }}
-                    </view>
-                  </view>-->
-        <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
-                    <view class='cu-tag bg-red'>
-                      <q-icon size="18" icon="heart-fill"/>
-                    </view>
-                    <view class="cu-tag bg-white bd-red bd-r-radius">
-                      {{ userProp.loveValue }}
-                    </view>
+        <div class="flex-row">
+          <div class="q-tag">
+            <q-icon class="color-sub mr-mn" size="14" icon="mdi-alpha-v-circle"/>
+            <div class="mt-1">成年</div>
+          </div>
+        </div>
+        <!--        <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+                  <view class='cu-tag bg-green'>
+                    <q-icon size="18" icon="mdi-sword-cross"/>
                   </view>
-                  <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
-                    <view class='cu-tag bg-orange'>
-                      <q-icon size="18" icon="mdi-face"/>
-                    </view>
-                    <view class="cu-tag bg-white bd-orange bd-r-radius">
-                      {{ userProp.faceRatio }}
-                    </view>
-                  </view>-->
+                  <view class="cu-tag bg-white bd-green bd-r-radius">
+                    {{ userProp.justiceValue }}
+                  </view>
+                </view>
+                <view class="ml cu-capsule radius" @click="toLoveValuePage">
+                  <view class='cu-tag bg-red'>
+                    <q-icon size="18" icon="heart-fill"/>
+                  </view>
+                  <view class="cu-tag bg-white bd-red bd-r-radius">
+                    {{ userProp.loveValue }}
+                  </view>
+                </view>
+                <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
+                  <view class='cu-tag bg-orange'>
+                    <q-icon size="18" icon="mdi-face"/>
+                  </view>
+                  <view class="cu-tag bg-white bd-orange bd-r-radius">
+                    {{ userProp.faceRatio }}
+                  </view>
+                </view>-->
 
         <view class="row-col-center my">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
@@ -375,6 +381,7 @@ import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import SocialGenderTag from '@/socialuni/components/SocialGenderTag/SocialGenderTag.vue'
+import TencentCosAPI from '@/api/TencentCosAPI'
 
 
 @Component({
@@ -560,7 +567,7 @@ export default class UserInfo extends Vue {
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([CosUtil.postImg(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)

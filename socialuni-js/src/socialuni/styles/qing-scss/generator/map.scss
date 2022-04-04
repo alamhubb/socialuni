@@ -46,11 +46,12 @@ $space-hun: 100px;
 
 // mini，小，默认、大
 $box-nn: $space-nm $space-xss;
-$box-nm: $space-mn $space-xs;
-$box-mn: $space-mnn $space-xss;
-$box-sm: $space-xs $space-sm;
-$box-df: $space-sm $space-smm;
-$box-md: $space-smm $space-df;
+$box-nm: $space-nm $space-xss;
+$box-mn: $space-mn $space-xs;
+$box-sm: $space-mnn $space-xss;
+$box-df: $space-xs $space-sm;
+$box-md: $space-sm $space-smm;
+$box-lg: $space-smm $space-df;
 
 $box-map: (
         nn: $box-nn,
@@ -58,7 +59,8 @@ $box-map: (
         mn: $box-mn,
         sm: $box-sm,
         df: $box-df,
-        md: $box-md
+        md: $box-md,
+        lg: $box-lg
 );
 
 $padding-map: (

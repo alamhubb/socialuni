@@ -1,17 +1,18 @@
 <template>
   <view class="card-title pb-10" @click="toUserDetailVue">
     <image
-      class="card-title-avatar"
+      class="size50 bd-radius mr-sm"
       mode="aspectFill"
       :src="talk.user.avatar"
     />
     <view class="row-between flex-auto">
       <view>
         <view class="h25 row-col-center">
-          <text class="text-md">{{ talk.user.nickname }}</text>
+          <text class="text-df">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xss" :user="talk.user"></social-gender-tag>
+            <q-icon class="color-blue" size="18" icon="level"/>
           </template>
 
           <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
@@ -50,7 +51,7 @@
                       </view>
                     </view>-->
         </view>
-        <view class="text-gray text-sm h25 row-col-center">
+        <view class="color-sub text-sm h25 row-col-center">
           {{ talk.updateTime| formatTime }}
           <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
             官方

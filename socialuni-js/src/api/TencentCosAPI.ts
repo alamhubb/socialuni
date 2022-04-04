@@ -14,9 +14,10 @@ import AlertUtil from '@/socialuni/utils/AlertUtil'
 import AppMsg from '@/socialuni/constant/AppMsg'
 import CosUploadResult from '@/socialuni/model/cos/CosUploadResult'
 import request from '@/socialuni/plugins/http/request'
+import TencentCosIdInfoRO from '@/socialuni/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO'
 
 export default class TencentCosAPI {
-  static async testAPI (imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+  static async getImgTagAPI (imgUrl, imgKey, cosAuthRO: CosAuthRO) {
     const authKey = COS.getAuthorization({
       SecretId: cosAuthRO.credentials.tmpSecretId,
       SecretKey: cosAuthRO.credentials.tmpSecretKey,
@@ -46,6 +47,22 @@ export default class TencentCosAPI {
 
   }
 
+  static async getIdCardInfoAPI (imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+    const authKey = COS.getAuthorization({
+      SecretId: cosAuthRO.credentials.tmpSecretId,
+      SecretKey: cosAuthRO.credentials.tmpSecretKey,
+      Method: 'get',
+      Key: imgKey
+    })
+    const res: string = await request.get('https://' + imgUrl + '?ci-process=IDCardOCR', null, {
+      header: {
+        Authorization: authKey,
+        'x-cos-security-token': cosAuthRO.credentials.sessionToken
+      }
+    }) as any
+    return new TencentCosIdInfoRO(res)
+  }
+
   static async uploadFileAPI (imgFile: DomFile, cosAuthRO: CosAuthRO) {
     return new Promise<CosUploadResult>(async (resolve, reject) => {
       const headers = {
@@ -66,7 +83,6 @@ export default class TencentCosAPI {
         if (!err) {
           resolve(data)
         } else {
-          UniUtil.hideLoading()
           AlertUtil.error(AppMsg.uploadFailMsg)
           reject(err)
         }

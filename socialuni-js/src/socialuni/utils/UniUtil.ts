@@ -7,12 +7,12 @@ import GetSystemInfoResult = UniApp.GetSystemInfoResult
 import GetProviderRes = UniApp.GetProviderRes
 import LoginRes = UniApp.LoginRes
 import GetUserInfoRes = UniApp.GetUserInfoRes
+import GetImageInfoSuccessData = UniApp.GetImageInfoSuccessData
 import AppMsg from '../constant/AppMsg'
 import ToastUtil from './ToastUtil'
 import DomFile from '../model/DomFile'
 import UUIDUtil from './UUIDUtil'
 import ImgUtil from './ImgUtil'
-import ObjectUtil from './ObjectUtil'
 import { socialSystemModule } from '../store'
 
 export default class UniUtil {
@@ -165,55 +165,72 @@ export default class UniUtil {
         // sizeType: ['compressed'],
         count: count,
         success (res) {
-          const imgFiles: DomFile[] = res.tempFiles as DomFile[]
-          for (const imgFile of imgFiles) {
-            ObjectUtil.log(imgFile)
-            // 不能大于10m大于10m就压缩不到100k
-            // 获取压缩比
-            const imgSize: number = imgFile.size
-            if (imgSize / 1024 / 1024 > 10) {
-              ToastUtil.toastLong(AppMsg.imgSizeNotGt10MBMsg)
-              reject(AppMsg.imgSizeNotGt10MBMsg)
-            }
-            let ratio: number = 100
-            //如果大于100k 按照100k标准压缩
-            if (imgSize > 100 * 1024) {
-              //得出来100以下的压缩比
-              //(imgSize / 1024)计算kb
-              //100kb 除以 kb，再乘以百分数100
-              ratio = Math.round(10000 / (imgSize / 1024))
-            }
-            imgFile.quality = ratio
-            if (!socialSystemModule.isH5) {
-              UniUtil.compressImage(imgFile.path, ratio).then(res => {
-                imgFile.path = res
-                //计算压缩后的大小
-                imgFile.size = Math.round(imgSize * ratio / 100)
-              })
-            }
-            // 获取文件名
-            uni.getImageInfo({
-              src: imgFile.path,
-              success: (image) => {
-                imgFile.aspectRatio = image.width / image.height
-                let fileName = null
-                if (socialSystemModule.isH5) {
-                  fileName = imgFile.name
-                } else {
-                  fileName = imgFile.path
-                }
-                imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
-                imgFile.fileName = imgFile.src
-                resolve(imgFiles)
-              }
-            })
-          }
+          const imgFiles = UniUtil.imgFilesCompressHandler(res)
+          resolve(imgFiles)
         },
         fail (err) {
           reject(err)
         }
       })
     })
+  }
+
+  //选择图片
+  public static takePicture () {
+    return new Promise<DomFile[]>((resolve, reject) => {
+      uni.chooseImage({
+        sourceType: ['camera'],
+        sizeType: ['original'],
+        // sizeType: ['compressed'],
+        count: 1,
+        success (res) {
+          const imgFiles = UniUtil.imgFilesCompressHandler(res)
+          resolve(imgFiles)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  }
+
+  private static async imgFilesCompressHandler (res: UniApp.ChooseImageSuccessCallbackResult) {
+    const imgFiles: DomFile[] = res.tempFiles as DomFile[]
+    for (const imgFile of imgFiles) {
+      // 不能大于10m大于10m就压缩不到100k
+      // 获取压缩比
+      const imgSize: number = imgFile.size
+      if (imgSize / 1024 / 1024 > 50) {
+        ToastUtil.error(AppMsg.imgSizeNotGt50MBMsg)
+      }
+      let ratio: number = 100
+      //如果大于100k 按照100k标准压缩
+      if (imgSize > 100 * 1024) {
+        //得出来100以下的压缩比
+        //(imgSize / 1024)计算kb
+        //100kb 除以 kb，再乘以百分数100
+        ratio = Math.round(10000 / (imgSize / 1024))
+      }
+      imgFile.quality = ratio
+      if (!socialSystemModule.isH5) {
+        const res = await UniUtil.compressImage(imgFile.path, ratio)
+        imgFile.path = res
+        //计算压缩后的大小
+        imgFile.size = Math.round(imgSize * ratio / 100)
+      }
+      const image = await UniUtil.getImageInfo(imgFile.path)
+      // 获取文件名
+      imgFile.aspectRatio = image.width / image.height
+      let fileName = null
+      if (socialSystemModule.isH5) {
+        fileName = imgFile.name
+      } else {
+        fileName = imgFile.path
+      }
+      imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
+      imgFile.fileName = imgFile.src
+    }
+    return imgFiles
   }
 
   public static compressImage (filePath: string, quality: number): Promise<string> {
@@ -224,6 +241,21 @@ export default class UniUtil {
         quality: Math.max(quality, 20),
         success: res => {
           resolve(res.tempFilePath)
+        },
+        fail: err => {
+          reject(err)
+        }
+      })
+    })
+  }
+
+  public static getImageInfo (filePath: string) {
+    return new Promise<GetImageInfoSuccessData>((resolve, reject) => {
+      // 获取文件名
+      uni.getImageInfo({
+        src: filePath,
+        success: (image) => {
+          resolve(image)
         },
         fail: err => {
           reject(err)

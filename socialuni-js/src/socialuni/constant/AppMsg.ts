@@ -20,4 +20,5 @@ export default class AppMsg {
   static readonly identityAuthSuccessMsg: string = '认证成功，是否回到个人信息页面'
 
   static readonly imgSizeNotGt10MBMsg: string = '图片大小不能超过10MB！'
+  static readonly imgSizeNotGt50MBMsg: string = '图片大小不能超过50MB！'
 }

@@ -73,6 +73,12 @@
           }
         },
         {
+          "path": "user/identityAuth",
+          "style": {
+            "navigationBarTitleText": "成年认证"
+          }
+        },
+        {
           "path": "notify/notify",
           "style": {
             "navigationBarTitleText": "通知列表"
@@ -113,5 +119,7 @@
       "softinputNavBar": "none"
     }
   },
-  "navigateToMiniProgramAppIdList": ["1109985787"]
+  "navigateToMiniProgramAppIdList": [
+    "1109985787"
+  ]
 }

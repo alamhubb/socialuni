@@ -154,6 +154,16 @@ $colors-custom-border: (
         form: $color-border-form,
         divider: $color-border-divider,
         table: $color-border-table,
+        default: $color-border-default,
+        special: $color-special,
+        main: $color-main,
+        content: $color-content,
+        sub: $color-sub,
+        tip: $color-tip,
+        link: $color-link,
+        focus: $color-focus,
+        hover: $color-hover,
+        active: $color-active
 );
 
 $colors-border: map-merge($colors-base, $colors-custom-border);

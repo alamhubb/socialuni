@@ -5,8 +5,8 @@ import UserPayVO from '../model/user/UserPayVO'
 import UserPayResultVO from '../model/user/UserPayResultVO'
 import UserEditVO from '../model/user/UserEditVO'
 import ImgAddQO from '../model/user/ImgAddQO'
-import DomFile from '../model/DomFile'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
+import SocialUserIdentityAuthQO from '@/socialuni/model/QO/user/SocialUserIdentityAuthQO'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {
@@ -34,11 +34,6 @@ export default class UserAPI {
     return request.post('user/deleteUserImg', { userImgId: userImg.id })
   }
 
-
-  static identityAuthAPI (userImg: DomFile) {
-    return request.post('identity/auth', userImg)
-  }
-
   static updateAvatarAPI (avatar: string) {
     return request.post('user/updateAvatar?avatar=' + avatar)
   }
@@ -59,5 +54,13 @@ export default class UserAPI {
 
   static destroyAccountAPI () {
     return request.post('user/destroyAccount')
+  }
+
+  static identityAuthPreCheckAPI (authQO: SocialUserIdentityAuthQO) {
+    return request.post('user/identityAuthPreCheck', authQO)
+  }
+
+  static identityAuthAPI (authQO: SocialUserIdentityAuthQO) {
+    return request.post('user/identityAuth')
   }
 }
