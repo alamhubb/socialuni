@@ -59,7 +59,7 @@
     </div>
 
     <div class="ml">身份证校验结果：
-      <span v-if="idInfoPreCheckResult" class="color-success_dark">通过</span>
+      <span v-if="idInfoPreCheckResult&&idInfoPreCheckResult.Birth" class="color-success_dark">通过</span>
       <span v-else class="color-error_dark">未上传</span>
     </div>
 
@@ -91,7 +91,9 @@
 
 
     <div class="ml mt pb-50 font-bold">预校验结果：
-      <span v-if="preCheckResult">预校验分数：{{ preCheckResult.authScore }}，{{ preCheckResult.authHint }}</span>
+      <span v-if="preCheckResult" class="color-green_dark">预校验分数：{{ preCheckResult.authScore }}，{{
+          preCheckResult.authHint
+        }}</span>
       <span v-else>请点击预校验</span>
     </div>
     <!--    <view class="article-row">
@@ -121,6 +123,7 @@ import TencentCosIdInfoRO from '@/socialuni/model/RO/tencent/cos/idImgInfo/Tence
 import SocialUserIdentityAPI from '@/socialuni/api/SocialUserIdentityAPI'
 import ConfigMap from '@/socialuni/constant/ConfigMap'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
+import AlertUtil from '@/socialuni/utils/AlertUtil'
 
 const userStore = namespace('user')
 @Component({
@@ -154,11 +157,12 @@ export default class IdentityAuthView extends Vue {
       console.log(res.Location)
       try {
         const idRes = await TencentCosAPI.getIdCardInfoAPI(res.Location, imgFile.src, cosAuthRO)
-        console.log(idRes)
         this.idInfoPreCheckResult = idRes
-      } catch (e) {
+      } finally {
         this.checkIdInfoResult()
       }
+    } catch (e) {
+      this.idInfoPreCheckResult = null
     } finally {
       this.preCheckResult = null
       UniUtil.hideLoading()
@@ -186,6 +190,8 @@ export default class IdentityAuthView extends Vue {
     if (!this.preCheckResult) {
       ToastUtil.toast('请先点击预校验再进行认证')
     }
+    const { data } = await SocialUserIdentityAPI.userIdentityAuthAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
+    AlertUtil.hint(data)
   }
 
   previewImage (e) {
@@ -200,7 +206,7 @@ export default class IdentityAuthView extends Vue {
     if (!this.userIdImgFile) {
       ToastUtil.error('请上传真实的身份证正面照片')
     }
-    if (!this.idInfoPreCheckResult) {
+    if (!this.idInfoPreCheckResult || !this.idInfoPreCheckResult.Birth) {
       ToastUtil.error('请上传真实的身份证正面照片，' + ConfigMap.systemError604Default)
     }
   }

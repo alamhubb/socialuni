@@ -7,7 +7,7 @@ export default class SocialUserIdentityAPI {
     return request.post<SocialUserIdentityAuthPreCheckRO>('userIdentity/userIdentityAuthPreCheck', authQO)
   }
 
-  static identityAuthAPI (authQO: SocialUserIdentityAuthQO) {
-    return request.post('user/identityAuth')
+  static userIdentityAuthAPI (authQO: SocialUserIdentityAuthQO) {
+    return request.post<string>('userIdentity/userIdentityAuth', authQO)
   }
 }
