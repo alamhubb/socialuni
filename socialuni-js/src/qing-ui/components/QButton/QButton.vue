@@ -275,13 +275,10 @@ export default class QButton extends Vue {
   clickHandler = CommonUtil.debounce(this.btnClick, 1000)
 
   async btnClick () {
-    console.log(1)
     if (this.btnEnable) {
       this.btnEnable = false
       this.clickEmit()
-      console.log(2)
       try {
-        console.log(this.click)
         if (typeof this.click === 'function') {
           await this.click()
         } else {
@@ -300,9 +297,7 @@ export default class QButton extends Vue {
         // 只有方法正常执行完毕才会触发click
         this.clickAfter()
       } finally {
-        console.log(8)
         await CommonUtil.setTimeout()
-        console.log(9)
         this.btnEnable = true
       }
     }

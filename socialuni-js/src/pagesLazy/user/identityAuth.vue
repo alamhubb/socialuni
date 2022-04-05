@@ -38,8 +38,8 @@
     </div>
 
 
-    <div class="w100p pd col-all-center" @click="chooseIdImage">
-      <div class="h160 w250 col-all-center bd-sub bd-dashed bd-2 bg-click pd-xs">
+    <div class="w100p pd col-all-center">
+      <div class="h160 w250 col-all-center bd-sub bd-dashed bd-2 bg-click pd-xs" @click="chooseIdImage">
         <template v-if="!userIdImgFile">
           <q-icon class="color-sub" size="40" icon="plus"/>
           <div class="color-sub mt-sm">请点击上传身份证正面照片</div>
@@ -56,6 +56,11 @@
           <q-icon class="color-sub ml-mn" size="16" icon="close-circle-fill"/>
         </div>
       </div>
+    </div>
+
+    <div class="ml">身份证校验结果：
+      <span v-if="idInfoPreCheckResult" class="color-success_dark">通过</span>
+      <span v-else class="color-error_dark">未上传</span>
     </div>
 
     <div class="w100p pd col-all-center">
@@ -78,22 +83,17 @@
       </div>
     </div>
 
-    <view class="cu-bar btn-group bg-white mt-20px">
-      <q-button success :click="idAuthPreCheck">预校验</q-button>
-      <q-button success :click="identityAuth">认证</q-button>
+    <view class="flex-row mt-20px px">
+      <q-button class="flex-1" primary :click="idAuthPreCheck">预校验</q-button>
+      <q-button class="flex-1 ml" success :click="identityAuth">认证</q-button>
       <!--      <q-button success @click="identityAuth" :disabled="!imgFile || authBtnDisabled">认证</q-button>-->
     </view>
 
-    <div v-if="preCheckResult">
-      <div>预校验结果：</div>
-      <div>
-        校验分数： {{ preCheckResult.authScore }} (仅供参考)
-      </div>
-      <div>
-        提示信息： {{ preCheckResult.authHint }}
-      </div>
-    </div>
 
+    <div class="ml mt pb-50 font-bold">预校验结果：
+      <span v-if="preCheckResult">预校验分数：{{ preCheckResult.authScore }}，{{ preCheckResult.authHint }}</span>
+      <span v-else>请点击预校验</span>
+    </div>
     <!--    <view class="article-row">
           <view class="text-xxl color-red">您已认证通过，无需重复认证</view>
         </view>
@@ -114,11 +114,13 @@ import UniUtil from '@/socialuni/utils/UniUtil'
 import CosUtil from '@/socialuni/utils/CosUtil'
 import QButton from '@/qing-ui/components/QButton/QButton.vue'
 import TencentCosAPI from '@/api/TencentCosAPI'
-import UserAPI from '@/socialuni/api/UserAPI'
-import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SocialUserIdentityAuthQO from '@/socialuni/model/QO/user/SocialUserIdentityAuthQO'
 import SocialUserIdentityAuthPreCheckRO from '@/socialuni/model/RO/user/SocialUserIdentityAuthPreCheckRO'
 import MsgUtil from '@/socialuni/utils/MsgUtil'
+import TencentCosIdInfoRO from '@/socialuni/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO'
+import SocialUserIdentityAPI from '@/socialuni/api/SocialUserIdentityAPI'
+import ConfigMap from '@/socialuni/constant/ConfigMap'
+import ToastUtil from '@/socialuni/utils/ToastUtil'
 
 const userStore = namespace('user')
 @Component({
@@ -133,6 +135,7 @@ export default class IdentityAuthView extends Vue {
   userIdImgFile: DomFile = null
   authBtnDisabled = false
   preCheckResult: SocialUserIdentityAuthPreCheckRO = null
+  idInfoPreCheckResult: TencentCosIdInfoRO = null
 
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
@@ -143,14 +146,21 @@ export default class IdentityAuthView extends Vue {
     const imgFile = imgFiles[0]
     try {
       MsgUtil.showUploadLoading()
+      this.idInfoPreCheckResult = null
       this.userIdImgFile = imgFile
       imgFile.src = cosAuthRO.uploadImgPath + 'userAuthImg/userIdImg/' + imgFile.src
       const res = await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
       console.log(imgFile.src)
       console.log(res.Location)
-      const idRes = await TencentCosAPI.getIdCardInfoAPI(res.Location, imgFile.src, cosAuthRO)
-      console.log(idRes)
+      try {
+        const idRes = await TencentCosAPI.getIdCardInfoAPI(res.Location, imgFile.src, cosAuthRO)
+        console.log(idRes)
+        this.idInfoPreCheckResult = idRes
+      } catch (e) {
+        this.checkIdInfoResult()
+      }
     } finally {
+      this.preCheckResult = null
       UniUtil.hideLoading()
     }
   }
@@ -166,29 +176,16 @@ export default class IdentityAuthView extends Vue {
       imgFile.src = cosAuthRO.uploadImgPath + 'userAuthImg/userSelfImg/' + imgFile.src
       TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
     } finally {
+      this.preCheckResult = null
       UniUtil.hideLoading()
     }
   }
 
   async identityAuth () {
-    console.log(123)
-    /* this.authBtnDisabled = true
-     UniUtil.showLoading('认证中')
-     // 校验用户必须上传了照片，
-     CosUtil.postObject(this.imgFile, this.user.id).then(() => {
-       this.user.authNum = this.user.authNum + 1
-       UserAPI.identityAuthAPI(this.imgFile).then((res: any) => {
-         userModule.setUser(res.data)
-         Alert.confirm(AppMsg.identityAuthSuccessMsg).then(() => {
-           PageUtil.toMinePage()
-         })
-       }).finally(() => {
-         UniUtil.hideLoading()
-         this.authBtnDisabled = false
-       })
-     }).catch(() => {
-       this.authBtnDisabled = false
-     })*/
+    this.idAuthCheck()
+    if (!this.preCheckResult) {
+      ToastUtil.toast('请先点击预校验再进行认证')
+    }
   }
 
   previewImage (e) {
@@ -199,19 +196,33 @@ export default class IdentityAuthView extends Vue {
     })
   }
 
-  idAuthCheck () {
-    if (!this.userIdImgFile || !this.userIdImgFile.src) {
-      ToastUtil.error('请上传身份证正面照片')
+  checkIdInfoResult () {
+    if (!this.userIdImgFile) {
+      ToastUtil.error('请上传真实的身份证正面照片')
     }
+    if (!this.idInfoPreCheckResult) {
+      ToastUtil.error('请上传真实的身份证正面照片，' + ConfigMap.systemError604Default)
+    }
+  }
+
+  idAuthCheck () {
+    this.checkIdInfoResult()
     if (!this.imgFile || !this.imgFile.src) {
       ToastUtil.error('请上传自拍照片')
     }
   }
 
   async idAuthPreCheck () {
-    //研究promise setTimeout then resole
-    this.idAuthCheck()
-    await UserAPI.identityAuthPreCheckAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
+    this.preCheckResult = null
+    UniUtil.showLoading('校验中')
+    try {
+      //研究promise setTimeout then resole
+      this.idAuthCheck()
+      const res = await SocialUserIdentityAPI.userIdentityAuthPreCheckAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
+      this.preCheckResult = res.data
+    } finally {
+      UniUtil.hideLoading()
+    }
   }
 }
 </script>

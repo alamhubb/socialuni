@@ -123,7 +123,6 @@ import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import ErrorCode from '@/socialuni/constant/ErrorCode'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import AppUtilAPI from '@/socialuni/api/AppUtilAPI'
@@ -143,6 +142,7 @@ import ToastUtil from '@/socialuni/utils/ToastUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import OAuthAPI from '@/api/OAuthAPI'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
+import ErrorConst from '@/socialuni/constant/ErrorConst'
 
 @Component({
   components: {
@@ -197,7 +197,7 @@ export default class OAuth extends Vue {
   goBackPage () {
     if (socialOAuthModule.isThreeAuth) {
       const result: ResultRO<any> = new ResultRO<any>()
-      result.errorCode = ErrorCode.business
+      result.errorCode = ErrorConst.business
       result.errorMsg = '用户未授权'
       result.success = false
       UniUtil.showLoading('不授权，返回中...')

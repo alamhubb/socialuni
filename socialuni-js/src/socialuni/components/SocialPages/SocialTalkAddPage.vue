@@ -430,8 +430,8 @@ export default class SocialTalkAddPage extends Vue {
         this.publishTalk()
       } else {
         uni.hideLoading()
-        AlertUtil.error('上传图片失败' + AppMsg.contactServiceMsg)
         AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+        AlertUtil.error('上传图片失败' + AppMsg.contactServiceMsg)
       }
     }
   }
