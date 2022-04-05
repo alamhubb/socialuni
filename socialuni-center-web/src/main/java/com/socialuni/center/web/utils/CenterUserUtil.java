@@ -1,5 +1,6 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
@@ -44,6 +45,21 @@ public class CenterUserUtil {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
         return getMineUserAllowNull(tokenDO);
     }
+
+    public static UserDO getMineUserNotNull() {
+        UserDO user = CenterUserUtil.getMineUserAllowNull();
+        if (user == null) {
+            throw new SocialNotLoginException();
+        }
+        return user;
+    }
+
+
+    public static Integer getMineUserIdNotNull() {
+        UserDO user = CenterUserUtil.getMineUserNotNull();
+        return user.getId();
+    }
+
 
     public static boolean isMine(Integer userId) {
         Integer mineUserId = CenterUserUtil.getMineUserId();

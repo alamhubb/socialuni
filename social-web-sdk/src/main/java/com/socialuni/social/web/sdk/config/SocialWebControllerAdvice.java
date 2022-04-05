@@ -54,8 +54,8 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 return result;
             }
         }
-        if (responseVO.getErrorCode() > 0) {
-            response.setStatus(responseVO.getErrorCode());
+        if (responseVO.getCode() > 0) {
+            response.setStatus(responseVO.getCode());
         }
         //返回修改后的值
         return responseVO;
@@ -86,7 +86,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 e.printStackTrace();
             }
         }
-        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, exception.toString(), errorStr);
+        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, exception.toString(), errorStr);
         exception.printStackTrace();
         return resultRO;
     }
@@ -98,7 +98,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         if (responseOpt.isPresent()) {
             ByteBuffer byteBuffer = responseOpt.get();
             ResultRO<Void> resultRO = JsonUtil.parse(byteBuffer, new ResultRO<>());
-            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, resultRO.getErrorMsg(), feignException.toString());
+            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, resultRO.getErrorMsg(), feignException.toString());
             return resultRO;
         } else {
             String errorStr;
@@ -109,7 +109,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 e.printStackTrace();
             }
             ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
-            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, feignException.toString(), errorStr);
+            this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, feignException.toString(), errorStr);
             return resultRO;
         }
     }
@@ -118,7 +118,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     public ResultRO<Void> BindExceptionHandler(MethodArgumentNotValidException exception) {
         String msg = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         ResultRO<Void> resultRO = new ResultRO<>(ErrorCode.PARAMS_ERROR, msg);
-        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, msg, exception.getMessage());
+        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, msg, exception.getMessage());
         exception.printStackTrace();
         return resultRO;
     }
@@ -170,7 +170,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ResultRO<Void> notFound404ExceptionHandler(NoHandlerFoundException exception) {
         ResultRO<Void> resultRO = new ResultRO<>(404, "不存在的资源");
-        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getErrorCode(), ErrorType.error, resultRO.getErrorMsg(), exception.getMessage());
+        this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, resultRO.getErrorMsg(), exception.getMessage());
         return resultRO;
     }
 }

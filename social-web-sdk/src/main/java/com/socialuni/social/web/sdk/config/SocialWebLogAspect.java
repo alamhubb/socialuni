@@ -47,7 +47,7 @@ public class SocialWebLogAspect {
         if (result != null) {
             if (result instanceof ResultRO) {
                 ResultRO resultRO = (ResultRO) result;
-                requestLogDO.setErrorCode(resultRO.getErrorCode());
+                requestLogDO.setErrorCode(resultRO.getCode());
                 requestLogDO.setErrorMsg(resultRO.getErrorMsg());
                 requestLogDO.setSuccess(resultRO.getSuccess());
             } else {

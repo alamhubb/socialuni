@@ -1,16 +1,17 @@
 package com.socialuni.center.web.controller;
 
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
-import com.socialuni.api.model.QO.user.CenterUserEditQO;
 import com.socialuni.api.model.QO.user.CenterUserIdQO;
 import com.socialuni.api.model.QO.user.CenterUserImgDeleteQO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.center.web.serive.CenterUserService;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.model.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
-import com.socialuni.social.model.model.QO.user.SocialUserImgDeleteQO;
+import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthPreCheckRO;
+import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
