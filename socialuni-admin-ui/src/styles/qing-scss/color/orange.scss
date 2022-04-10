@@ -1,14 +1,14 @@
-$color-orange: #FF7800;
-$color-orange1: #FF9429;
-$color-orange2: #FFC069;
-$color-orange3: #FFAE52;
-$color-orange4: #FFC67A;
-$color-orange5: #FFDAA3;
-$color-orange6: #FFF6E6;
-$color-orange7: #F5DAB1;
-$color-orange8: #FDF6EC;
+$color-orange: #FF7800 !default;
+$color-orange1: #FF9429 !default;
+$color-orange2: #FFC069 !default;
+$color-orange3: #FFAE52 !default;
+$color-orange4: #FFC67A !default;
+$color-orange5: #FFDAA3 !default;
+$color-orange6: #FFF6E6 !default;
+$color-orange7: #F5DAB1 !default;
+$color-orange8: #FDF6EC !default;
 
-$color-orange-light: $color-orange5;
+$color-orange-light: $color-orange5 !default;
 
 $colors-orange: (
         orange:$color-orange,
@@ -21,4 +21,4 @@ $colors-orange: (
         orange7:$color-orange7,
         orange8:$color-orange8,
         orange-light:$color-orange-light,
-);
+)

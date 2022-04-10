@@ -1,14 +1,14 @@
-$color-blue: #1F71F6;
-$color-blue1: #2A86FF;
-$color-blue2: #40A9FF;
-$color-blue3: #69C0FF;
-$color-blue4: #91D5FF;
-$color-blue5: #BAE7FF;
-$color-blue6: #69C0FF;
-$color-blue7: #B3D8FF;
-$color-blue8: #EDF5FF;
+$color-blue: #1F71F6 !default;
+$color-blue1: #2A86FF !default;
+$color-blue2: #40A9FF !default;
+$color-blue3: #69C0FF !default;
+$color-blue4: #91D5FF !default;
+$color-blue5: #BAE7FF !default;
+$color-blue6: #69C0FF !default;
+$color-blue7: #B3D8FF !default;
+$color-blue8: #EDF5FF !default;
 
-$color-blue-light: $color-blue8;
+$color-blue-light: $color-blue8 !default;
 
 $colors-blue: (
         blue:$color-blue,
@@ -21,4 +21,4 @@ $colors-blue: (
         blue7:$color-blue7,
         blue8:$color-blue8,
         blue-light:$color-blue-light,
-);
+)
