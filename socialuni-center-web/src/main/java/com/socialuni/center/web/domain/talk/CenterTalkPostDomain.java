@@ -44,7 +44,7 @@ public class CenterTalkPostDomain {
     SocialContentAddEntity socialContentAddEntity;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         String content = talkPostQO.getContent();
 

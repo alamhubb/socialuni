@@ -34,7 +34,7 @@ public class CenterOAuthService {
     private ThirdUserAuthRepository thirdUserAuthRepository;
 
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
         Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
@@ -57,7 +57,7 @@ public class CenterOAuthService {
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(OAuthUserInfoQO authVO, String authType) {
         //获取devaccount
         //获取绑定的手机号，根据手机号，获取user。然后返回这个user的信息，并且返回对应这个应用的userid
-        UserDO userDO = CenterUserUtil.getMineUserAllowNull();
+        UserDO userDO = CenterUserUtil.getMineUserNotNull();
         DevAccountDO devAccountDO = devAccountManage.checkApplyAuthQO(authVO);
         return oAuthUserInfo(devAccountDO, userDO, authType);
     }

@@ -81,7 +81,7 @@ public class CenterUserIdentityService {
         if (resScore == 0) {
             throw new SocialBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }
-        Integer userId = CenterUserUtil.getMineUserIdNotNull();
+        Integer userId = CenterUserUtil.getMineUserId();
         SocialUserIdentityAuthImgDO socialUserIdentityImgDO = new SocialUserIdentityAuthImgDO();
         socialUserIdentityImgDO.setUserId(userId);
         socialUserIdentityImgDO.setUserIdImgSrc(socialUserIdentityAuthQO.getIdImgUrl());

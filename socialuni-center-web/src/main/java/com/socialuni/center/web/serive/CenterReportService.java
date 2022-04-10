@@ -17,7 +17,7 @@ public class CenterReportService {
     SoicialReportAddDomain soicialReportAddDomain;
 
     public ResultRO<Void> addReport(CenterReportAddQO centerReportAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         Integer contentId = UnionIdDbUtil.getResultByUnionId(centerReportAddQO.getReportContentType(), centerReportAddQO.getContentId());
 

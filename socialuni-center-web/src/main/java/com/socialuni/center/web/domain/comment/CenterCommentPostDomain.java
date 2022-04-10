@@ -25,7 +25,7 @@ public class CenterCommentPostDomain {
     private SocialCommentPostDomain socialCommentPostDomain;
 
     public CenterCommentRO postComment(CenterCommentPostQO addQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(addQO.getTalkId());
 

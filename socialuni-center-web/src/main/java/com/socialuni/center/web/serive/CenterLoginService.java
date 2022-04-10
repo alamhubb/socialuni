@@ -46,7 +46,7 @@ public class CenterLoginService {
     }*/
 
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull(loginData.getCode());
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull(loginData.getCode());
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
 
