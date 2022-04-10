@@ -12,30 +12,46 @@ export default class Arrays {
     return array[this.findIndex(array, value, prop)]
   }
 
-  static findIndex(array, value, prop?: string) {
+  static replace(array: any[], index, row: any) {
+    // @ts-ignore
+    return array.splice(index, 1, row)
+  }
+
+  static deleteIndex(array: any[], index: number) {
+    // @ts-ignore
+    return array.splice(index, 1)
+  }
+
+  static findIndex(array: any[], value, prop?: string) {
     const index = array.findIndex(item => {
-      console.log(prop)
-      console.log(item)
-      console.log(item[prop])
       return prop ? (item[prop] === value) : (item === value)
     })
     return index
   }
 
-  // 插叙添加时可选择的数据源
-  static delete(array, value, prop?: string) {
+  // 插叙添加时可选择的数据源,返回删除的数据
+  static deleteByPropName(array: any[], value, prop?: string) {
     const delIndex = this.findIndex(array, value, prop)
-    console.log(array)
-    console.log(delIndex)
+    const deleteData = array[delIndex]
     if (delIndex > -1) {
-      const del = array.splice(delIndex, 1)
-      console.log(del)
+      array.splice(delIndex, 1)
+      return deleteData
     }
+  }
+
+  static delete<T>(arrays: T[], predicate: (value: T, index: number, obj: T[]) => boolean): T {
+    const delIndex = arrays.findIndex(predicate)
+    const deleteData = arrays[delIndex]
+    if (delIndex > -1) {
+      arrays.splice(delIndex, 1)
+      return deleteData
+    }
+    return null
   }
 
   static deleteAry(array, delAry, prop?: string) {
     for (const delAryElement of delAry) {
-      this.delete(array, delAryElement[prop] || delAryElement, prop)
+      this.deleteByPropName(array, delAryElement[prop] || delAryElement, prop)
     }
   }
 
@@ -44,5 +60,17 @@ export default class Arrays {
     return array.filter((item) => {
       return !res.has(item[prop] || item) && res.set(item[prop] || item, 1)
     })
+  }
+
+  static hasRepeat(array: any[], prop?: string) {
+    const res = new Map()
+    for (const item of array) {
+      const key = item[prop] || item
+      if (res.has(key)) {
+        return key
+      }
+      res.set(key, 1)
+    }
+    return null
   }
 }
