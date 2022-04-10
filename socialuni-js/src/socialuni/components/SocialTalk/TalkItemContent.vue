@@ -4,13 +4,23 @@
       {{ talk.content }}
     </text>
     <view v-if="talk.imgs.length" class="card-text-row mt-10">
-      <image mode="aspectFill" class="card-text-img" v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
-             :class="{'bl-radius':index===0,'bd-radius':index===talk.imgs.length-1}"
-             :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}"
-             :src="getTalkSmallImgUrl(talk.user.id,img.src)"
-             :show-menu-by-longpress="true"
-             @click.stop="previewImage(index)"
-      ></image>
+      <div v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
+           class="position-relative card-text-img flex-row overflow-hidden"
+           :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}">
+        <image mode="aspectFill"
+               :class="{'bl-radius':index===0,'br-radius':index===talk.imgs.length-1}"
+               class="flex-1"
+               :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}"
+               :src="getTalkSmallImgUrl(talk.user.id,img.src)"
+               :show-menu-by-longpress="true"
+               @click.stop="previewImage(index)"
+        ></image>
+        <!--        <div class="bd-round size18 position-absolute mr-nn mt-nn right-0 row-all-center">
+                  <q-icon @click.native.stop="toIdentityAuth"
+                          class="color-success"
+                          size="16" icon="level"/>
+                </div>-->
+      </div>
     </view>
     <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center pt-10"
           @click="toTalkDetailVue">
@@ -64,7 +74,7 @@
         </view>
       </template>
       <template v-if="talk.tags&&talk.tags.length">
-        <view v-for="tag in talk.tags" :key="tag.id" @click.stop="toTalkDetailVue"
+        <view v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
               class="q-tag-theme mt-sm">
           #{{ tag.name }}
         </view>
@@ -82,8 +92,9 @@ import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
-import { socialTalkModule } from '@/socialuni/store'
+import { socialTagModule, socialTalkModule } from '@/socialuni/store'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
+import MsgUtil from '@/socialuni/utils/MsgUtil'
 
 @Component({
   components: { QIcon }
@@ -108,6 +119,11 @@ export default class TalkItemContent extends Vue {
     })
   }
 
+  chooseTags (tagName) {
+    AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
+      socialTagModule.setSelectTagName(tagName)
+    })
+  }
 
   getTalkLargeImgUrl (userId: string, src: string) {
     return ImgUtil.getTalkLargeImgUrl(userId, src)
@@ -134,6 +150,10 @@ export default class TalkItemContent extends Vue {
 
   goToThreeAppClick (appId, path) {
     RouterUtil.navigateToMp(appId, path)
+  }
+
+  toIdentityAuth () {
+    MsgUtil.identityAuthHint()
   }
 }
 </script>

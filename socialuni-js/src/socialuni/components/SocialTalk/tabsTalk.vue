@@ -315,21 +315,22 @@ export default class TabsTalkPage extends Vue {
     if (firstLoad) {
       this.refreshQueryDate()
     }
+    const talkTabObj = this.talkTabObj
     //只有在传false时校验后面的
-    const fistLoad = firstLoad || this.talkTabObj.firstLoad
+    const fistLoad = firstLoad || talkTabObj.firstLoad
     // query condition
     const talkIds: number[] = (fistLoad ? [] : this.talkIds)
     CommonUtil.delayTime(0).then(() => {
-      this.talkTabObj.firstLoad = false
+      talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
-      if (this.talkTabObj.loadMore === LoadMoreType.loading) {
+      if (talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
           if (fistLoad) {
-            this.talkTabObj.talks = res.data
+            talkTabObj.talks = res.data
           } else {
-            this.talkTabObj.talks.push(...res.data)
+            talkTabObj.talks.push(...res.data)
           }
         }
         // 如果还有大于等于10个就还可以加载
@@ -337,15 +338,15 @@ export default class TabsTalkPage extends Vue {
         CommonUtil.delayTime(100).then(() => {
           // 如果还有大于等于10个就还可以加载
           if (res.data && res.data.length >= this.lazyLoadNum) {
-            this.talkTabObj.loadMore = LoadMoreType.more
+            talkTabObj.loadMore = LoadMoreType.more
           } else {
             // 否则没有了
-            this.talkTabObj.loadMore = LoadMoreType.noMore
+            talkTabObj.loadMore = LoadMoreType.noMore
           }
         })
       }
     }).catch(() => {
-      this.talkTabObj.loadMore = LoadMoreType.more
+      talkTabObj.loadMore = LoadMoreType.more
     })
   }
 

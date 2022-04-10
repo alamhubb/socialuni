@@ -233,6 +233,11 @@ export default class SocialTalkPage extends Vue {
     this.showTagSearch = true
   }
 
+  @Watch('selectTagName')
+  selectTagNameWatch () {
+    this.initQuery()
+  }
+
   // tag
   changeTag (tag: TagVO) {
     socialTagModule.setSelectTagName(tag.name)
