@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white text-md" v-if="user">
+  <div class="bg-white text-md w100p" v-if="user">
     <div v-if="user.identityAuth" class="h400 row-all-center">
       <div class="text-xxl color-red">您已认证通过</div>
     </div>
@@ -42,7 +42,7 @@
       </div>
 
 
-      <div class="w100p pd col-all-center">
+      <div class="w100p col-all-center py">
         <div class="h160 w250 col-all-center bd-sub bd-dashed bd-2 bg-click pd-xs" @click="chooseIdImage">
           <template v-if="!userIdImgFile">
             <q-icon class="color-sub" size="40" icon="plus"/>
@@ -67,7 +67,7 @@
         <span v-else class="color-error_dark">未上传</span>
       </div>
 
-      <div class="w100p pd col-all-center">
+      <div class="w100p py col-all-center">
         <div class="h160 w250 col-all-center bd-sub bd-dashed bd-2 bg-click pd-xs" @click="chooseImg">
           <template v-if="!imgFile">
             <q-icon class="color-sub" size="40" icon="camera-fill"/>
@@ -102,7 +102,9 @@
       </div>
     </template>
 
-    <q-button @click="goBack" primary class="mx">返回</q-button>
+    <div class="px pb-30">
+      <q-button @click="goBack" primary>返回</q-button>
+    </div>
   </div>
 </template>
 

@@ -196,11 +196,17 @@ export default class TalkItemHead extends Vue {
     }
   }
 
-  getGenderIcon (user: CenterUserDetailRO) {
+  getGenderIcon (user
+    :
+    CenterUserDetailRO
+  ) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor (user: CenterUserDetailRO) {
+  getGenderBgColor (user
+    :
+    CenterUserDetailRO
+  ) {
     return UserUtil.getGenderBgColor(user)
   }
 }

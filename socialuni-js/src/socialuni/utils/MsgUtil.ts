@@ -64,7 +64,7 @@ export default class MsgUtil {
     if (socialUserModule.user.identityAuth) {
       msg = '您已完成成年认证'
     } else {
-      msg = '成年认证标识'
+      msg = '未获得成年认证标识'
     }
     AlertUtil.confirm(msg + '，是否继续前往成年认证页面', '前往').then(() => {
       PageUtil.toIdentityAuthPage()

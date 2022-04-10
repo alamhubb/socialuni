@@ -1,7 +1,7 @@
 export default class TalkDeleteVO {
-  public talkId: string
+  public talkId: number
 
-  constructor (talkId: string) {
+  constructor (talkId: number) {
     this.talkId = talkId
   }
 }

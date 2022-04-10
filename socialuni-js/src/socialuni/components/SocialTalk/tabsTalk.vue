@@ -389,7 +389,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   // 被举报后前台删除talk
-  deleteTalk (talkId: string) {
+  deleteTalk (talkId: number) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 

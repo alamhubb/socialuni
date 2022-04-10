@@ -71,11 +71,7 @@ request.interceptor.response(
         }
       }
     }
-
-
-    console.log('jinrulecuo')
     UniUtil.hideLoading()
-    console.log(error.statusCode)
     const result = error.data
     if (error.statusCode && result) {
       const errorMsg = result.errorMsg

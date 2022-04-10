@@ -5,7 +5,7 @@ import TagVO from '../community/tag/TagVO'
 import ImgFileVO from '../ImgFileVO'
 
 export default class TalkVO {
-  public id: string = null
+  public id: number = null
   public content: string = null
   public imgs: ImgFileVO [] = null
   public user: CenterUserDetailRO = null
