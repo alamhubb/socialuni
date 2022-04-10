@@ -1,18 +1,20 @@
 .q-tag {
   padding: $box-mn;
+  line-height: 1;
   @extend .font-sm;
   @extend .bd-radius;
   @extend .mr-sm;
   @extend .row-col-center;
   //深色主题，字体白色，其他主题色
   color: $color-main;
-  background: mix($color-white, $color-main, 90%);
+  background: mix($color-white, $color-main, 93%);
   border-color: mix($color-white, $color-main, 60%);
 }
 
 @each $key, $color in $colors-base {
   .q-tag-#{''+$key+''} {
     padding: $box-mn;
+    line-height: 1;
     @extend .font-sm;
     @extend .bd-radius;
     @extend .mr-sm;
@@ -21,11 +23,10 @@
     background: mix($color-white, $color, 90%);
     //border: 1px solid mix($color-white, $color, 60%);
   }
-}
 
-@each $key, $color in $colors-base {
   .q-tag-#{''+$key+''}-bd {
     padding: $box-mn;
+    line-height: 1;
     @extend .font-sm;
     @extend .bd-radius;
     @extend .mr-sm;
@@ -36,9 +37,9 @@
   }
 }
 
-
 .q-tag-white {
   padding: $box-mn;
+  line-height: 1;
   @extend .font-sm;
   @extend .bd-radius;
   @extend .mr-sm;

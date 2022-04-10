@@ -1,51 +1,58 @@
 <template>
   <view>
-    <view class="card-actions pt-10 row-between">
-      <view class="row-end flex-auto">
-        <view class="row-col-center button-icon" @click="setTalk" hover-class="uni-list-cell-hover">
-          <q-icon icon="mdi-comment-outline" size="24">
+    <view class="px-15 pt-10 row-between-center">
+      <view class="row-around-center flex-1">
+        <view class="row-col-center" @click="showShareMenu">
+          <q-button no-debounce text open-type="share">
+            <q-icon icon="share-square" size="26" add-class="color-black">
+            </q-icon>
+            <text class="ml-mn text-df">
+              分享
+            </text>
+          </q-button>
+        </view>
+        <view class="row-col-center" @click="setTalk">
+          <q-icon icon="mdi-comment-outline" size="22">
           </q-icon>
           <text v-if="talk.commentNum" class="ml-5">
-            {{talk.commentNum}}
+            {{ talk.commentNum }}
           </text>
         </view>
-      </view>
-      <view class="row-end flex-auto">
-        <!--                hover-class="uni-list-cell-hover"-->
         <view class="row-all-center">
           <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
-            <text>
-              抱抱
-            </text>
-            <q-icon class="ml-5" size="24"
+            <q-icon size="24"
                     :icon="getHugIcon(talk.hasHugged)"
                     :class="[getHugColor(talk.hasHugged)]"
             ></q-icon>
+            <text class="ml-mn">
+              抱抱
+            </text>
             <text v-if="talk.hugNum" class="ml-5">
-              {{talk.hugNum}}
+              {{ talk.hugNum }}
             </text>
           </view>
         </view>
-        <view v-if="!talk.globalTop" class="ml-30 button-icon row-col-center" @click="openReportDialog"
-              hover-class="uni-list-cell-hover">
-          <q-icon icon="more-dot-fill"></q-icon>
-        </view>
+      </view>
+      <!--                hover-class="uni-list-cell-hover"-->
+
+      <view v-if="!talk.globalTop" class="ml-sm flex-none button-icon row-col-center" @click="openReportDialog">
+        <q-icon icon="more-dot-fill"></q-icon>
       </view>
     </view>
     <view class="card-text">
-      <view class="flex-auto" v-if="talk.comments">
+      <view class="flex-1" v-if="talk.comments">
         <block v-for="(comment,index) in talk.comments" :key="comment.id">
           <view v-if="index < commentShowNum">
             <!--                        {{comment.no}}#-->
             <view class="flex-row py-mn" @click="toTalkDetailVue">
               <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue'"
                     @click.stop="toUserDetail(comment.user.id)">
-                {{comment.user.nickname}}
+                {{ comment.user.nickname }}
               </view>
               ：
               <view @longpress="openCommentActionDialog(comment)"
                     @click.stop="setComment(talk,comment)">
-                {{comment.content}}
+                {{ comment.content }}
               </view>
             </view>
             <child-comment :talk="talk" :comment-prop="comment"></child-comment>
@@ -54,7 +61,7 @@
         <view v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
           <view class="row-col-center color-orange pt-mn" @click="toTalkDetailVue">
             <view v-show="talk.commentNum>commentShowNum">
-              查看其余{{talk.commentNum - commentShowNum}}条评论
+              查看其余{{ talk.commentNum - commentShowNum }}条评论
             </view>
             <view v-show="false">
               收起评论
@@ -83,11 +90,14 @@ import { socialTalkModule, socialUserStore } from '../../store'
 import MsgUtil from '../../utils/MsgUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
+import QButton from '../../../qing-ui/components/QButton/QButton.vue'
 import ToastUtil from '../../utils/ToastUtil'
+import UniUtil from '@/socialuni/utils/UniUtil'
 
 @Component({
   components: {
     QIcon,
+    QButton,
     ChildComment
   }
 })
@@ -95,7 +105,10 @@ export default class TalkItemComment extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   // 因为无法直接修改，所以需要克隆一下
   @Prop() readonly talkProp!: TalkVO
-  @Prop({ type: Boolean, default: false }) readonly showAllComment: boolean
+  @Prop({
+    type: Boolean,
+    default: false
+  }) readonly showAllComment: boolean
 
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)
 
@@ -122,6 +135,11 @@ export default class TalkItemComment extends Vue {
       MsgUtil.unLoginMessage()
     }
   }
+
+  showShareMenu () {
+    UniUtil.showShareMenu()
+  }
+
 
   setTalk () {
     socialTalkModule.setTalk(this.talk)
@@ -170,7 +188,10 @@ export default class TalkItemComment extends Vue {
   }
 
   setComment (talk, comment) {
-    socialTalkModule.setComment({ talk, comment })
+    socialTalkModule.setComment({
+      talk,
+      comment
+    })
   }
 
   getHugIcon (hasHugged) {

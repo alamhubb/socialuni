@@ -1,8 +1,9 @@
 <template>
   <button
-    class="font-df bg-click" :class="buttonClass"
+    class="row-all-center line-h1"
+    :class="buttonClass"
     @click.stop="clickHandler"
-    :disabled="disabled"
+    :disabled="btnDisabled"
     :loading="loading"
     :form-type="formType"
     :open-type="openType"
@@ -17,7 +18,6 @@
     :send-message-path="sendMessagePath"
     :send-message-img="sendMessageImg"
     :show-message-card="showMessageCard"
-
     @getphonenumber="getphonenumber"
     @getuserinfo="getuserinfo"
     @error="errorHandler"
@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
-import ComUtil from '../../../socialuni/components/utils/ComUtil'
+import CommonUtil from '@/socialuni/utils/CommonUtil'
 
 @Component
 export default class QButton extends Vue {
@@ -89,6 +89,10 @@ export default class QButton extends Vue {
   @Prop({
     default: false,
     type: Boolean
+  }) lg: boolean
+  @Prop({
+    default: false,
+    type: Boolean
   }) df: boolean
   @Prop({
     default: false,
@@ -103,7 +107,7 @@ export default class QButton extends Vue {
   @Prop({
     default: 1000,
     type: [String, Number]
-  }) throttleTime: string | number
+  }) debounceTime: string | number
 
   //uni参数
   //是否禁用
@@ -195,6 +199,11 @@ export default class QButton extends Vue {
     type: String
   }) showMessageCard: string
 
+  @Prop({
+    default: false,
+    type: Boolean
+  }) noDebounce: boolean
+
   get curTheme () {
     if (this.theme) return 'theme'
     if (this.primary) return 'primary'
@@ -210,25 +219,20 @@ export default class QButton extends Vue {
     if (this.sm) return 'sm'
     if (this.df) return 'df'
     if (this.md) return 'md'
-    return 'sm'
+    if (this.lg) return 'lg'
+    return 'df'
   }
 
   get buttonClass () {
-    let buttonClass = `${this.disabled ? 'bg-disabled' : 'bg-click'} `
+    let buttonClass = `${this.btnDisabled ? 'bg-disabled' : 'bg-click'} `
     if (this.text) {
       buttonClass += `bd-none bg-white color-${this.curTheme}`
     } else {
-      buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize}`
+      buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize} text-${this.curSize}`
     }
     return buttonClass
   }
 
-  clickHandler = ComUtil.throttle(this.click, 1000)
-
-  @Emit()
-  click (e) {
-    return e
-  }
 
   // 下面为对接uniapp官方按钮开放能力事件回调的对接
   @Emit()
@@ -254,6 +258,74 @@ export default class QButton extends Vue {
   @Emit()
   launchapp (res) {
     return res
+  }
+
+
+  @Prop({
+    default: true,
+    type: Boolean
+  }) showLoading: boolean
+  @Prop({
+    default: () => {
+      return null
+    },
+    type: Function
+  }) click: () => Promise<void> | Array<() => Promise<void> | any>
+
+  btnEnable = true
+
+  get btnDisabled () {
+    return this.disabled || !this.btnEnable
+  }
+
+  get clickHandler () {
+    return CommonUtil.debounce(this.btnClick, this.noDebounce ? 0 : Number(this.debounceTime))
+  }
+
+  async btnClick () {
+    if (this.btnEnable) {
+      this.btnEnable = false
+      this.clickEmit()
+      try {
+        if (typeof this.click === 'function') {
+          await this.click()
+        } else {
+          // 获取方法和参数列表
+          const clickMethodAndArgsAry = this.click as Array<() => Promise<void> | any>
+          // 获取方法
+          const clickMethod = clickMethodAndArgsAry[0] as (values?: any[]) => Promise<void>
+          // 判断您是否包含参数
+          if (clickMethodAndArgsAry.length) {
+            const args: any[] = clickMethodAndArgsAry.slice(1, clickMethodAndArgsAry.length)
+            await clickMethod(...args)
+          } else {
+            await clickMethod()
+          }
+        }
+        // 只有方法正常执行完毕才会触发click
+        this.clickAfter()
+      } finally {
+        if (!this.noDebounce) {
+          await CommonUtil.setTimeout(Number(this.debounceTime))
+        }
+        this.btnEnable = true
+      }
+    }
+  }
+
+  //需要有两个返回，第一个结果
+  //第二个，解除禁用，每次点击都延迟一秒解禁可以。 接口返回后，延迟一秒，解除禁用
+
+
+  @Emit('click')
+  clickEmit () {
+    return null
+  }
+
+
+  @Emit()
+  clickAfter () {
+    return null
   }
 }
 </script>

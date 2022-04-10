@@ -5,7 +5,6 @@ import UserPayVO from '../model/user/UserPayVO'
 import UserPayResultVO from '../model/user/UserPayResultVO'
 import UserEditVO from '../model/user/UserEditVO'
 import ImgAddQO from '../model/user/ImgAddQO'
-import DomFile from '../model/DomFile'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 export default class UserAPI {
@@ -32,11 +31,6 @@ export default class UserAPI {
 
   static deleteUserImgNewAPI (userImg: ImgFileVO) {
     return request.post('user/deleteUserImg', { userImgId: userImg.id })
-  }
-
-
-  static identityAuthAPI (userImg: DomFile) {
-    return request.post('identity/auth', userImg)
   }
 
   static updateAvatarAPI (avatar: string) {

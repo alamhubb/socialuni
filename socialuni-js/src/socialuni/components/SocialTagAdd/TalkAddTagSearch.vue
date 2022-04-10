@@ -37,7 +37,7 @@
         </view>
         <view class="grid">
           <view v-for="tag in selectTags" :key="tag.id" class="row-col-center pb-10 px-mn">
-            <view class="q-tag q-round bg-pink-plain">
+            <view class="q-tag bd-round bg-pink-plain">
               #{{tag.name}}
               <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
                       @click="deleteTag(tag)"></q-icon>
@@ -49,7 +49,7 @@
         </view>
         <view class="grid">
           <view v-for="tag in showTags" :key="tag.id" class="row-center pb-10 px-mn">
-            <view class="q-tag q-round bg-pink-plain"
+            <view class="q-tag bd-round bg-pink-plain"
                   @click="checkTag(tag)">
               #{{tag.name}}
               <block v-if="tag.count">

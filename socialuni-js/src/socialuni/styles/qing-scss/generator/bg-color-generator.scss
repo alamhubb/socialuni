@@ -7,4 +7,8 @@
     //深色主题，字体白色，其他主题色
     background-color: mix($color-white, $color, 90%);
   }
+  .bg-#{''+$key+''}_dark {
+    //深色主题，字体白色，其他主题色
+    background-color: mix($color-black, $color, 10%);
+  }
 }

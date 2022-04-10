@@ -20,6 +20,7 @@ export default class TalkVO {
   public hasFollowed: boolean = null
   public district: DistrictVO = null
   public tags: TagVO [] = null
+  public circles: TagVO [] = null
   public distance: number = null
   public globalTop: number = null
 

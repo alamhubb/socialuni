@@ -38,18 +38,7 @@
                 {{ userProp.nickname }}
               </view>
               <view class="flex-row">
-                <div v-if="userProp.gender==='girl'" class="q-box-nn q-tag-error mt-xs">
-                  {{ userProp.age }}
-                  <q-icon class="ml-nn"
-                          size="12"
-                          :icon="getGenderIcon(userProp)"/>
-                </div>
-                <div v-else class="q-box-nn q-tag-blue mt-xs">
-                  {{ userProp.age }}
-                  <q-icon class="ml-nn"
-                          size="12"
-                          :icon="getGenderIcon(userProp)"/>
-                </div>
+                <social-gender-tag class="mt-sm" :user="userProp"></social-gender-tag>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
@@ -90,42 +79,51 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button class="cu-btn round bd-blue px-smm bg-theme-base" :class="'bd-'+getFollowStatusColor(followStatus)"
+            <button v-if="followStatus==='关注'" class="cu-btn round bd-theme bg-white text-theme px-smm"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>
+            <view v-else class="q-box-xs" @click.stop="addFollow">{{ followStatus }}</view>
             <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
           </view>
         </view>
 
-        <view class="row-col-center py-sm q-solid-bottom">
-          <!--          <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
-                      <view class='cu-tag bg-green'>
-                        <q-icon size="18" icon="mdi-sword-cross"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-green bd-r-radius">
-                        {{ userProp.justiceValue }}
-                      </view>
-                    </view>-->
-          <!--          <view class="ml cu-capsule radius" @click="toLoveValuePage">
-                      <view class='cu-tag bg-red'>
-                        <q-icon size="18" icon="heart-fill"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-red bd-r-radius">
-                        {{ userProp.loveValue }}
-                      </view>
-                    </view>
-                    <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
-                      <view class='cu-tag bg-orange'>
-                        <q-icon size="18" icon="mdi-face"/>
-                      </view>
-                      <view class="cu-tag bg-white bd-orange bd-r-radius">
-                        {{ userProp.faceRatio }}
-                      </view>
-                    </view>-->
-        </view>
+        <div class="flex-row pl-xs">
+          <div v-if="userProp.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+            <q-icon class="color-success mr-mn" size="14" icon="level"/>
+            <div class="font-xs">成年</div>
+          </div>
+          <div v-else class="q-tag q-box-nn" @click.stop="toIdentityAuth">
+            <q-icon class="color-sub mr-mn" size="14" icon="level"/>
+            <div class="font-xs">成年</div>
+          </div>
+        </div>
+        <!--        <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
+                  <view class='cu-tag bg-green'>
+                    <q-icon size="18" icon="mdi-sword-cross"/>
+                  </view>
+                  <view class="cu-tag bg-white bd-green bd-r-radius">
+                    {{ userProp.justiceValue }}
+                  </view>
+                </view>
+                <view class="ml cu-capsule radius" @click="toLoveValuePage">
+                  <view class='cu-tag bg-red'>
+                    <q-icon size="18" icon="heart-fill"/>
+                  </view>
+                  <view class="cu-tag bg-white bd-red bd-r-radius">
+                    {{ userProp.loveValue }}
+                  </view>
+                </view>
+                <view class="ml-lg cu-capsule radius" @click="toFaceValuePage">
+                  <view class='cu-tag bg-orange'>
+                    <q-icon size="18" icon="mdi-face"/>
+                  </view>
+                  <view class="cu-tag bg-white bd-orange bd-r-radius">
+                    {{ userProp.faceRatio }}
+                  </view>
+                </view>-->
 
-        <view class="row-col-center py-sm q-solid-bottom">
+        <view class="row-col-center my">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
           地区：{{ userProp.city || '' }}
         </view>
@@ -151,10 +149,10 @@
                     </view>
                   </div>
                 </view>-->
-        <view v-if="isMine" class="py-sm q-solid-bottom">
+        <view v-if="isMine" class="mb">
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
-            手机号(仅自己可见)：
+            手机号：
             <view v-if="userProp.phoneNum" class="row-col-center">
               {{ userProp.phoneNum }}
               <view class="ml-10 sm cu-tag bg-white bd-gray radius">
@@ -169,6 +167,8 @@
           </div>
         </view>
 
+        <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
+        <!--        看他的性别等级-->
 
         <!-- #ifndef MP-WEIXIN -->
         <!--        <view class="row-col-center py-sm q-solid-bottom">
@@ -366,11 +366,13 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
-import CosAPI from '../../api/CosAPI'
+import SocialGenderTag from '@/socialuni/components/SocialGenderTag/SocialGenderTag.vue'
+import TencentCosAPI from '@/api/TencentCosAPI'
 
 
 @Component({
   components: {
+    SocialGenderTag,
     QIcon,
     QRowItem,
     TalkOperate,
@@ -399,8 +401,8 @@ export default class UserInfo extends Vue {
   reportType: string = ReportType.pornInfo
   pornInfo: string = ReportType.pornInfo
   reportContent = ''
-  talks: TalkVO[] = []
   @socialConfigStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
+  talks: TalkVO[] = []
 
   showUserContactBtnDisabled = false
 
@@ -522,15 +524,11 @@ export default class UserInfo extends Vue {
     })
   }
 
-  created () {
-    this.queryMineTalks()
-  }
-
   deleteImg () {
     if (this.userProp.imgs.length > 1) {
       AlertUtil.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
-        UserAPI.deleteUserImgAPI(imgs[0]).then((res: any) => {
+        UserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
           socialUserModule.setUser(res.data)
         })
       })
@@ -547,14 +545,11 @@ export default class UserInfo extends Vue {
     }
     try {
       UniUtil.showLoading('上传中')
-      let cosAuthRO = null
-      CosAPI.getCosAuthorizationAPI().then(res => {
-        cosAuthRO = res.data
-      })
+      const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([CosUtil.postImg(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)
@@ -568,7 +563,7 @@ export default class UserInfo extends Vue {
   }
 
   toIdentityAuth () {
-    PageUtil.toIdentityAuthPage()
+    MsgUtil.identityAuthHint()
   }
 
   openVip () {
@@ -622,7 +617,10 @@ export default class UserInfo extends Vue {
     this.$refs.editPopup.open()
   }
 
-  @Watch('user')
+  @Watch('user', {
+    deep: true,
+    immediate: true
+  })
   watchUserChange (newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {

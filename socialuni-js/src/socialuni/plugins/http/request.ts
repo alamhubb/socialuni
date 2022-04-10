@@ -10,6 +10,9 @@ import AlertUtil from '../../utils/AlertUtil'
 import { socialConfig } from '../../index'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import SocialSystemInfo from '../../constant/SocialSystemInfo'
+import XmlUtil from '@/socialuni/utils/XmlUtil'
+import XmlResultRO from '@/socialuni/model/base/XmlResultRO'
+import ObjectUtil from '@/socialuni/utils/ObjectUtil'
 
 const request: HttpRequest = new HttpRequest()
 
@@ -56,42 +59,66 @@ request.interceptor.response(
     return response.data
   },
   error => {
-    UniUtil.hideLoading()
-    if (error.statusCode) {
+    //第一步，先判断 有没有error
+    //判断data类型，如果没类型，直接走
+    //有内容则为本系统？也不一定，判断拿内容类型
+    //然后本系统处理
+    if (error && error.statusCode) {
       const result = error.data
-      let errorMsg = ''
-      switch (error.statusCode) {
-        case ErrorConst.not_logged:
-        case ErrorConst.banned:
-          // 理论上不需要，因为token不会失效，也不会错误
-          // 已知可能，切换环境导致token不同
-          UserService.clearUserInfoCom()
-          if (result && result.errorMsg) {
-            AlertUtil.hint(result.errorMsg)
-          } else {
-            if (ErrorConst.not_logged === error.statusCode) {
-              MsgUtil.unLoginMessage()
-            } else {
-              const msg: string = socialConfigModule.systemError605
-              AlertUtil.hint(msg)
+      if (result) {
+        if (!result.errorMsg) {
+
+        }
+      }
+    }
+    UniUtil.hideLoading()
+    const result = error.data
+    if (error.statusCode && result) {
+      const errorMsg = result.errorMsg
+      if (errorMsg) {
+        switch (error.statusCode) {
+          case ErrorConst.not_logged:
+          case ErrorConst.banned:
+            // 理论上不需要，因为token不会失效，也不会错误
+            // 已知可能，切换环境导致token不同
+            UserService.clearUserInfoCom()
+            AlertUtil.hint(errorMsg)
+            break
+          case ErrorConst.custom:
+            break
+          default:
+            AlertUtil.hint(errorMsg)
+            AppUtilAPI.sendErrorLogAPI(error.config.url, errorMsg)
+            break
+        }
+      } else {
+        if (typeof result === 'string') {
+          if (result.startsWith('<?xml')) {
+            try {
+              const errorXml = XmlUtil.parseXml(result)
+              const resultXml = errorXml.elements[0]
+              const resultRO: XmlResultRO = {} as XmlResultRO
+              for (const element of resultXml.elements) {
+                if (element.elements) {
+                  resultRO[element.name] = element.elements[0].text
+                }
+              }
+              const msg: string = socialConfigModule.systemError604
+              AlertUtil.hint(resultRO.Message + '，请重试，' + msg)
+              // 返回接口返回的错误信息
+              return result
+            } finally {
             }
           }
-          break
-        case ErrorConst.custom:
-          break
-        default:
-          if (result && result.errorMsg) {
-            errorMsg = result.errorMsg
-            AlertUtil.hint(errorMsg)
-          } else {
-            MsgUtil.systemErrorMsg()
-          }
-          AppUtilAPI.sendErrorLogAPI(error.config.url, errorMsg)
-          break
+        }
+        MsgUtil.systemErrorMsg()
+        AppUtilAPI.sendErrorLogAPI(error.config.url, result)
       }
-      return result // 返回接口返回的错误信息
+      // 返回接口返回的错误信息
+      return result
     }
     MsgUtil.systemErrorMsg()
+    AppUtilAPI.sendErrorLogAPI(error.config.url, ObjectUtil.toJson(error))
     return error
   }
 )

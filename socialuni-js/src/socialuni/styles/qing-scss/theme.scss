@@ -1,8 +1,4 @@
-@import "color/blue";
-@import "color/green";
-@import "color/grey";
-@import "color/orange";
-@import "color/red";
+@import "color/color";
 
 //基础色
 $color-white: #fff;
@@ -10,17 +6,24 @@ $color-black: #000;
 
 //自定义颜色
 //字体颜色
-$color-special: #1F2329!default;
+$color-special: #1F2329 !default;
 //默认字体色
-$color-main: #333333!default;
-$color-content: #666666!default;
-$color-sub: #909399!default;
-$color-tip: #C0C4CC!default;
-$color-link: #409EFF!default;
-$color-focus: #66b1ff!default;
-$color-hover: #66b1ff!default;
-$color-active: #337ab7!default;
-$color-menu: #1F2329!default;
+$color-main: #333333 !default;
+$color-content: #666666 !default;
+$color-sub: #909399 !default;
+$color-tip: #C0C4CC !default;
+$color-link: #409EFF !default;
+$color-focus: #66b1ff !default;
+$color-hover: #66b1ff !default;
+$color-active: #337ab7 !default;
+$color-menu: #1F2329 !default;
+$color-pink: #ef799a !default;
+$color-girl: #ef799a !default;
+$color-girl-light: #ef799a !default;
+$color-boy: #3f93ee !default;
+$color-boy-light: #ddeefe !default;
+$color-pink1: #ffedf0 !default;
+
 
 $color-primary: $color-blue;
 $color-error: $color-red;
@@ -48,12 +51,14 @@ $color-bg-base: $color-white !default;
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
 $color-theme: #3383f6 !default;
 //主题亮色
-$color-theme2:#A2D2FF !default;
+$color-theme2: #A2D2FF !default;
 //背景色
-$color-theme3:$color-bg-default !default;
-$color-theme4:$color-white !default;
+$color-theme3: $color-bg-default !default;
+$color-theme4: $color-white !default;
 
 $colors-theme: (
+        girl:$color-girl,
+        boy:$color-boy,
         white:$color-white,
         black:$color-black,
         theme:$color-theme,
@@ -68,7 +73,8 @@ $mergeMap1: map-merge($colors-theme, $colors-blue);
 $mergeMap2: map-merge($mergeMap1, $colors-green);
 $mergeMap3: map-merge($mergeMap2, $colors-grey);
 $mergeMap4: map-merge($mergeMap3, $colors-orange);
-$colors-base: map-merge($mergeMap4, $colors-red);
+$mergeMap5: map-merge($mergeMap4, $colors-purple);
+$colors-base: map-merge($mergeMap5, $colors-red);
 
 //背景
 //头部菜单
@@ -127,7 +133,7 @@ $colors-custom-bg: (
         theme2: $color-theme2,
         theme3: $color-theme3,
         theme4: $color-theme4,
-        //theme-light: $color-theme-light,
+  //theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,
         menu-hover: $color-bg-menu-hover,
@@ -145,6 +151,16 @@ $colors-custom-border: (
         form: $color-border-form,
         divider: $color-border-divider,
         table: $color-border-table,
+        default: $color-border-default,
+        special: $color-special,
+        main: $color-main,
+        content: $color-content,
+        sub: $color-sub,
+        tip: $color-tip,
+        link: $color-link,
+        focus: $color-focus,
+        hover: $color-hover,
+        active: $color-active
 );
 
 $colors-border: map-merge($colors-base, $colors-custom-border);

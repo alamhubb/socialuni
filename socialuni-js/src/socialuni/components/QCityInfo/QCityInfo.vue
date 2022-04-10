@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="value" class="q-tag-warn bd-round row-col-center" @click="openCityPicker">
-      <q-icon icon="map-fill" size="14" class="mb-nn"/>
+      <q-icon icon="map-fill" size="14" class="mb-nm"/>
       <template v-if="value.adCode">
         {{ value.provinceName }}
         <template v-if="value.cityName">

@@ -1,15 +1,5 @@
 <template>
   <view class="h100p bg-white">
-    <q-navbar show-back>
-      <div class="w100p row-col-center">
-        <view class="font-bold text-md flex-1">
-          发布动态
-        </view>
-        <q-button class="text-bold" theme :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
-      </div>
-    </q-navbar>
-    <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
-
     <view v-if="showTagSearch">
       <talk-add-tag-search :tags="tags" :is-add="true" :select-tags="selectTags" @change="changeTag"
                            @close="closeTagSearch"
@@ -21,6 +11,15 @@
       <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
     </view>
     <view v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
+      <q-navbar show-back>
+        <div class="w100p row-col-center">
+          <view class="font-bold text-md flex-1">
+            发布动态
+          </view>
+          <q-button class="text-bold" theme :disabled="buttonDisabled" @click="addTalk">发布</q-button>
+        </div>
+      </q-navbar>
+      <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
       <view class="px-smm py-sm">
         <textarea class="h140 w100p" :maxlength="200"
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
@@ -62,9 +61,14 @@
         </div>
       </view>
       <view class="px-sm pt-sm">
-        <view class="row-grid">
+        <view v-if="!selectTags.length" class="row-grid pb-10">
+          <view class="q-tag bd-round bg-pink-plain">
+            <text @click="openTagSearchVue(false)">#添加话题</text>
+          </view>
+        </view>
+        <view v-else class="row-grid">
           <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
-            <view class="q-tag q-round bg-pink-plain">
+            <view class="q-tag bd-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
               <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
                       @click.native.stop="deleteTag(tag)"/>
@@ -76,12 +80,12 @@
         </view>
         <view class="row-wrap">
           <view v-for="tag in unSelectTags" :key="tag.id" class="pb-10 px-mn">
-            <view class="q-tag q-round bg-pink-plain" @click="checkTag(tag)">
+            <view class="q-tag bd-round bg-pink-plain" @click="checkTag(tag)">
               #{{ tag.name }}
             </view>
           </view>
           <view class="row-all-center pb-10 px-mn">
-            <view class="q-tag q-round bg-orange-plain" @click="openTagSearchVue(false)">
+            <view class="q-tag bd-round bg-orange-plain" @click="openTagSearchVue(false)">
               更多
               <q-icon icon="arrow-right" size="12" class="ml-5"/>
             </view>
@@ -128,7 +132,6 @@ import UniUtil from '../../utils/UniUtil'
 import DistrictVO from '../../model/DistrictVO'
 import JsonUtils from '../../utils/ObjectUtil'
 import TagVO from '../../model/community/tag/TagVO'
-import TagUtil from '../../utils/TagUtil'
 import CosUtil from '../../utils/CosUtil'
 import {
   socialCircleModule,
@@ -156,7 +159,6 @@ import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import DomFile from '../../model/DomFile'
 import CosAuthRO from '../../model/cos/CosAuthRO'
-import CosAPI from '../../api/CosAPI'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import RouterUtil from '../../utils/RouterUtil'
 import PagePath from '../../constant/PagePath'
@@ -169,6 +171,10 @@ import SocialCirclePicker from '@/socialuni/components/SocialCirclePicker.vue'
 import AppMsg from '@/socialuni/constant/AppMsg'
 import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
+import CosUploadResult from '@/socialuni/model/cos/CosUploadResult'
+import TencentCosAPI from '@/api/TencentCosAPI'
+import NumberUtil from '@/socialuni/utils/NumberUtil'
+import MsgUtil from '@/socialuni/utils/MsgUtil'
 
 @Component({
   components: {
@@ -303,9 +309,8 @@ export default class SocialTalkAddPage extends Vue {
     const selectTags = this.tags.filter(item => item.selected)
     if (selectTags.length > 0) {
       return selectTags
-    } else {
-      return TagUtil.initTagAry
     }
+    return []
   }
 
   @Watch('storeTags')
@@ -386,6 +391,34 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   addTalk () {
+    //禁止发布包含小于18年龄的岁数
+    let hasLt18Age = false
+    //这种不匹配
+    const reg = /\d+/g
+
+    let talkContent = this.talkContent
+    talkContent = talkContent.replace(/./g, (match, matchVal) => {
+      return NumberUtil.getNumberByHanzi(match)
+    })
+    talkContent.replace(reg, (match) => {
+      const num = Number(match)
+      if (num < 18) {
+        hasLt18Age = true
+        AlertUtil.error('根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会被审核后删除')
+        return
+      }
+      return match
+    })
+    if (hasLt18Age) {
+      return
+    }
+    for (const showImgFile of this.showImgFiles) {
+      if (showImgFile.needAuth) {
+        MsgUtil.uploadImgNeedAuthMsg()
+        return
+      }
+    }
+
     this.buttonDisabled = true
     if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
@@ -400,39 +433,26 @@ export default class SocialTalkAddPage extends Vue {
     }
   }
 
-  addTalkHandler () {
+  async addTalkHandler () {
     uni.showLoading({ title: '发布中' })
-    if (this.showImgFiles.length === 0) {
-      this.publishTalk()
-    } else {
-      if (this.cosAuthRO) {
-        this.uploadImgList()
-        this.publishTalk()
-      } else {
-        uni.hideLoading()
-        AlertUtil.error('上传图片失败' + AppMsg.contactServiceMsg)
-        AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-      }
-    }
+    this.publishTalk()
   }
 
-  publishTalk () {
-    TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
-      .then(() => {
-        this.buttonDisabled = false
-        uni.hideLoading()
-        if (socialTalkModule.curTabIsCircle) {
-          //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
-          socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
-        } else {
-          socialCircleModule.setCircleName(this.circleName)
-        }
-        RouterUtil.reLaunch(PagePath.talk + '?load=true')
-      })
-      .catch(() => {
-        this.buttonDisabled = false
-        uni.hideLoading()
-      })
+  async publishTalk () {
+    try {
+      await TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
+      if (socialTalkModule.curTabIsCircle) {
+        //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
+        socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
+      } else {
+        socialCircleModule.setCircleName(this.circleName)
+      }
+      RouterUtil.reLaunch(PagePath.talk + '?load=true')
+    } finally {
+      this.buttonDisabled = false
+      uni.hideLoading()
+      this.cosAuthRO = null
+    }
   }
 
   async uploadImgList () {
@@ -444,7 +464,18 @@ export default class SocialTalkAddPage extends Vue {
       }
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
-    CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
+    const uploadRes: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
+    if (!this.user.identityAuth) {
+      for (const item of uploadRes) {
+        const index = uploadRes.findIndex(uploadResItem => uploadResItem === item)
+        const res: string = await TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO) as any
+        console.log(res)
+        if (res.includes('人')) {
+          this.showImgFiles[index].needAuth = true
+          MsgUtil.uploadImgNeedAuthMsg()
+        }
+      }
+    }
   }
 
   deleteImg (e) {
@@ -464,17 +495,14 @@ export default class SocialTalkAddPage extends Vue {
     }
     const count = this.imgMaxSize - this.showImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
-    console.log(imgFiles)
     this.showImgFiles.push(...imgFiles)
     //获取cos认证信息
-    this.getCosAuthRO()
-  }
-
-  getCosAuthRO () {
-    if (!this.cosAuthRO) {
-      CosAPI.getCosAuthorizationAPI().then((res) => {
-        this.cosAuthRO = res.data
-      })
+    this.cosAuthRO = await CosUtil.getCosAuthRO()
+    if (this.cosAuthRO) {
+      await this.uploadImgList()
+    } else {
+      AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }
 

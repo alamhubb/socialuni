@@ -1,5 +1,3 @@
-import UniUtil from './UniUtil'
-import { Vue } from 'vue-property-decorator'
 import CommonUtil from './CommonUtil'
 
 export default class ScrollUtil {

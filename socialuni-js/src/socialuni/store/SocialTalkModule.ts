@@ -169,6 +169,7 @@ export default class SocialTalkModule extends VuexModule {
     return this.updateCircleByTabIndex()
   }
 
+  //tab选中当前的圈子
   setCircleNameUpdateCurTabIndex (circleName: string) {
     if (circleName) {
       const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
