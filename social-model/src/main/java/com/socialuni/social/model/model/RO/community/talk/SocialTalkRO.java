@@ -46,6 +46,7 @@ public class SocialTalkRO {
     private String districtName;
     //统一标识
     private String adCode;
+    private List<String> circles;
 
     private List<SocialTalkTagRO> tags;
 

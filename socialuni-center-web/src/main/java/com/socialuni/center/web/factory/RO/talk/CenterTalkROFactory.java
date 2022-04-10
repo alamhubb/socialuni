@@ -55,6 +55,7 @@ public class CenterTalkROFactory {
         centerTalkRO.setAdCode(talkRO.getAdCode());
 
         centerTalkRO.setTags(talkRO.getTags());
+        centerTalkRO.setCircles(talkRO.getCircles());
         centerTalkRO.setDistance(talkRO.getDistance());
         centerTalkRO.setThreeAppName(talkRO.getThreeAppName());
         centerTalkRO.setThreeMpQqAppId(talkRO.getThreeMpQqAppId());

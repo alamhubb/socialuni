@@ -11,5 +11,6 @@ public class UserIdentityAuthStatus extends CommonStatus {
     public static final String fail =  StatusConst.fail;
 
     public static final List<String> auditList = Arrays.asList(preAudit, audit);
+    public static final List<String> authList = Arrays.asList(preAudit, enable);
 }
 

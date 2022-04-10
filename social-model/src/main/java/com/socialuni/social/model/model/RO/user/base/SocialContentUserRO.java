@@ -14,6 +14,7 @@ public class SocialContentUserRO extends SocialListUserRO {
     //是否被对方关注
     private Boolean hasBeFollowed;
     private Boolean isMine;
+    private Boolean identityAuth;
 
     public SocialContentUserRO(SocialListUserRO userRO) {
         super(userRO);
@@ -24,5 +25,6 @@ public class SocialContentUserRO extends SocialListUserRO {
         this.hasFollowed = userRO.getHasFollowed();
         this.hasBeFollowed = userRO.getHasBeFollowed();
         this.isMine = userRO.getIsMine();
+        this.identityAuth = userRO.getIdentityAuth();
     }
 }
