@@ -1,13 +1,13 @@
 <template>
-  <div class="h100p  bg-white text-md" v-if="user">
+  <div class="bg-white text-md" v-if="user">
     <div v-if="user.identityAuth" class="h400 row-all-center">
-      <div class="text-xxl color-red">您已认证通过，无需重复认证</div>
+      <div class="text-xxl color-red">您已认证通过</div>
     </div>
     <template v-else>
-      <div class="mt-sm">
+      <div class="mt-sm pt">
         <div class="text-md ml">您好：</div>
-        <div class="text-md ml pl-md">应平台要求减少未成年人发布早恋内容</div>
-        <div class="text-md ml">恳请您的谅解，平台要求如下：</div>
+        <div class="text-md ml pl-md">应平台要求减少未成年人早恋行为的内容</div>
+        <div class="text-md ml">故进行成年认证，恳请您的谅解，平台要求如下：</div>
         <div class="row-all-center mt-sm">
           <image mode="aspectFill"
                  src="https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/other/qqbansjuvenilelove.png"
@@ -21,7 +21,7 @@
           基于平台要求，对相关功能做出以下调整:
         </div>
         <div class="ml mt-sm">
-          1、用户发表包含人物的图像时，需要获取进行成年认证
+          1、用户需要进行成年认证，才可以发布包含人物图像的图片
         </div>
       </div>
 
@@ -55,7 +55,7 @@
         </div>
         <div class="row-all-center mt-sm">
           <div class="color-sub bg-click" @click="chooseIdImage">点击可重新上传</div>
-          <div class="color-sub ml-sm bg-click" @click="userIdImgFile = null">
+          <div class="color-sub ml-sm bg-click" @click="clearIdImgFile">
             清除
             <q-icon class="color-sub ml-mn" size="16" icon="close-circle-fill"/>
           </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="row-all-center mt-sm">
           <div class="color-sub bg-click" @click="chooseImg">点击可重新自拍</div>
-          <div class="color-sub ml-sm bg-click" @click="imgFile = null">
+          <div class="color-sub ml-sm bg-click" @click="clearImgFile">
             清除
             <q-icon class="color-sub ml-mn" size="16" icon="close-circle-fill"/>
           </div>
@@ -123,7 +123,7 @@ import SocialUserIdentityAPI from '@/socialuni/api/SocialUserIdentityAPI'
 import ConfigMap from '@/socialuni/constant/ConfigMap'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
-import { socialUserStore } from '@/socialuni/store'
+import { socialUserModule, socialUserStore } from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 
 @Component({
@@ -149,12 +149,10 @@ export default class IdentityAuthView extends Vue {
     const imgFile = imgFiles[0]
     try {
       MsgUtil.showUploadLoading()
-      this.idInfoPreCheckResult = null
+      this.clearIdInfoPreCheckResult()
       this.userIdImgFile = imgFile
       imgFile.src = cosAuthRO.uploadImgPath + 'userAuthImg/userIdImg/' + imgFile.src
       const res = await TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
-      console.log(imgFile.src)
-      console.log(res.Location)
       try {
         const idRes = await TencentCosAPI.getIdCardInfoAPI(res.Location, imgFile.src, cosAuthRO)
         this.idInfoPreCheckResult = idRes
@@ -162,13 +160,27 @@ export default class IdentityAuthView extends Vue {
         this.checkIdInfoResult()
       }
     } catch (e) {
-      this.idInfoPreCheckResult = null
+      this.clearIdInfoPreCheckResult()
     } finally {
-      this.preCheckResult = null
+      this.clearCheckResult()
       UniUtil.hideLoading()
     }
   }
 
+  clearIdInfoPreCheckResult () {
+    this.idInfoPreCheckResult = null
+    this.clearCheckResult()
+  }
+
+  clearIdImgFile () {
+    this.userIdImgFile = null
+    this.clearIdInfoPreCheckResult()
+  }
+
+  clearImgFile () {
+    this.imgFile = null
+    this.clearCheckResult()
+  }
 
   async chooseImg () {
     const cosAuthRO = await CosUtil.getCosAuthRO()
@@ -180,18 +192,23 @@ export default class IdentityAuthView extends Vue {
       imgFile.src = cosAuthRO.uploadImgPath + 'userAuthImg/userSelfImg/' + imgFile.src
       TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
     } finally {
-      this.preCheckResult = null
+      this.clearCheckResult()
       UniUtil.hideLoading()
     }
+  }
+
+  clearCheckResult () {
+    this.preCheckResult = null
   }
 
   async identityAuth () {
     this.idAuthCheck()
     if (!this.preCheckResult) {
-      ToastUtil.toast('请先点击预校验再进行认证')
+      ToastUtil.error('请先点击预校验再进行认证')
     }
     const { data } = await SocialUserIdentityAPI.userIdentityAuthAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
     AlertUtil.hint(data)
+    socialUserModule.getMineUserAction()
   }
 
   previewImage (e) {
@@ -219,7 +236,7 @@ export default class IdentityAuthView extends Vue {
   }
 
   async idAuthPreCheck () {
-    this.preCheckResult = null
+    this.clearCheckResult()
     UniUtil.showLoading('校验中')
     try {
       //研究promise setTimeout then resole

@@ -1,5 +1,6 @@
 .q-tag {
   padding: $box-mn;
+  line-height: 1;
   @extend .font-sm;
   @extend .bd-radius;
   @extend .mr-sm;
@@ -13,6 +14,7 @@
 @each $key, $color in $colors-base {
   .q-tag-#{''+$key+''} {
     padding: $box-mn;
+    line-height: 1;
     @extend .font-sm;
     @extend .bd-radius;
     @extend .mr-sm;
@@ -24,6 +26,7 @@
 
   .q-tag-#{''+$key+''}-bd {
     padding: $box-mn;
+    line-height: 1;
     @extend .font-sm;
     @extend .bd-radius;
     @extend .mr-sm;
@@ -36,6 +39,7 @@
 
 .q-tag-white {
   padding: $box-mn;
+  line-height: 1;
   @extend .font-sm;
   @extend .bd-radius;
   @extend .mr-sm;

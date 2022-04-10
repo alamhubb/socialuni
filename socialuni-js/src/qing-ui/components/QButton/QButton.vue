@@ -1,6 +1,6 @@
 <template>
   <button
-    class="row-all-center"
+    class="row-all-center line-h1"
     :class="buttonClass"
     @click.stop="clickHandler"
     :disabled="btnDisabled"

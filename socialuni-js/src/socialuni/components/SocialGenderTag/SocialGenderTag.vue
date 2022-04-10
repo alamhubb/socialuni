@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="user.gender==='girl'" class="q-tag-girl bd-round bd-none q-box-nn">
+    <div v-if="user.gender==='girl'" class="q-tag-girl bd-round bd-none q-box-nn text-xs">
       {{ user.age }}
       <q-icon class="ml-nn" add-class="mdi-rotate-45"
               size="12"

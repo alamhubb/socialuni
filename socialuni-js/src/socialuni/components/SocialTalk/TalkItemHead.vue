@@ -1,13 +1,13 @@
 <template>
   <view class="card-title pb-10" @click="toUserDetailVue">
     <image
-      class="size50 bd-radius mr-sm"
+      class="size40 bd-radius mr-sm"
       mode="aspectFill"
       :src="talk.user.avatar"
     />
     <view class="row-between flex-auto">
-      <view>
-        <view class="h25 row-col-center">
+      <view class="col-center">
+        <view class="h20 row-col-start">
           <text class="text-df font-bold">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
@@ -51,8 +51,9 @@
                       </view>
                     </view>-->
         </view>
-        <view class="color-sub text-sm h25 row-col-center">
-          <div v-if="user.identityAuth" class="q-tag-success q-box-nn mr-5" @click.stop="toIdentityAuth">
+
+        <view class="color-sub text-sm h20 row-col-end" v-if="talk.user.identityAuth || talk.globalTop ||isMine">
+          <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn mr-5" @click.stop="toIdentityAuth">
             <q-icon class="color-success mr-mn" size="14" icon="level"/>
             <div class="font-xs">成年</div>
           </div>
