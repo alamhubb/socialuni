@@ -16,7 +16,7 @@ public class SocialReportController implements SocialuniReportUrl {
     SocialReportService socialReportService;
 
     @Override
-    public ResultRO<Void> addReport(SocialReportAddQO socialReportAddQO) {
+    public ResultRO<String> addReport(SocialReportAddQO socialReportAddQO) {
         return socialReportService.addReport(socialReportAddQO);
     }
 

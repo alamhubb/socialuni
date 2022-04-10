@@ -14,9 +14,9 @@ public class SocialReportService {
     @Resource
     SoicialReportAddDomain soicialReportAddDomain;
 
-    public ResultRO<Void> addReport(SocialReportAddQO socialReportAddQO) {
+    public ResultRO<String> addReport(SocialReportAddQO socialReportAddQO) {
         UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         soicialReportAddDomain.addReport(mineUser, socialReportAddQO);
-        return new ResultRO<>();
+        return soicialReportAddDomain.addReport(mineUser, socialReportAddQO);
     }
 }

@@ -42,6 +42,7 @@ public class CenterCommentROFactory {
         centerCommentRO.setContent(BirthdayAgeUtil.replaceAgeBetween10to18Str(socialCommentRO.getContent()));
         centerCommentRO.setChildCommentNum(socialCommentRO.getChildCommentNum());
         centerCommentRO.setHugNum(socialCommentRO.getHugNum());
+        centerCommentRO.setReportNum(socialCommentRO.getReportNum());
 
         if (socialCommentRO.getReplyComment() != null) {
             CenterReplyCommentRO replyComment = CenterReplyCommentROFactory.getReplyCommentRO(socialCommentRO.getReplyComment(), mineUser);

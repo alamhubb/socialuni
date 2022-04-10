@@ -17,7 +17,7 @@ public class CenterReportController implements SocialuniReportAPI {
     CenterReportService centerReportService;
 
     @Override
-    public ResultRO<Void> addReport(CenterReportAddQO socialReportAddQO) {
+    public ResultRO<String> addReport(CenterReportAddQO socialReportAddQO) {
         return centerReportService.addReport(socialReportAddQO);
     }
 

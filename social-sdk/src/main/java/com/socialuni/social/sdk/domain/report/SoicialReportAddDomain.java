@@ -46,7 +46,7 @@ public class SoicialReportAddDomain {
     @Resource
     private ModelContentCheck modelContentCheck;
 
-    public ResultRO<Void> addReport(UserDO mineUser, SocialReportAddQO reportAddVO) {
+    public ResultRO<String> addReport(UserDO mineUser, SocialReportAddQO reportAddVO) {
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.violateTypes.contains(reportType)) {
