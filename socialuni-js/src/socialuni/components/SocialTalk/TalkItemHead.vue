@@ -52,16 +52,16 @@
                     </view>-->
         </view>
         <view class="color-sub text-sm h25 row-col-center">
-          <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+          <div v-if="user.identityAuth" class="q-tag-success q-box-nn mr-5" @click.stop="toIdentityAuth">
             <q-icon class="color-success mr-mn" size="14" icon="level"/>
             <div class="font-xs">成年</div>
           </div>
-          <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
+          <view v-if="talk.globalTop" class="mr-5 sm cu-tag round bg-red light">
             官方
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
           <text v-if="isMine"
-                class="ml-5 color-blue1 bg-click"
+                class="color-blue1 bg-click"
                 @click.stop="confirmDeleteTalk">
             删除
           </text>
@@ -160,7 +160,9 @@ export default class TalkItemHead extends Vue {
   confirmDeleteTalk () {
     AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
-      TalkAPI.deleteTalkAPI(this.talk.id)
+      TalkAPI.deleteTalkAPI(this.talk.id).then(() => {
+        ToastUtil.toast('删除成功')
+      })
     })
   }
 

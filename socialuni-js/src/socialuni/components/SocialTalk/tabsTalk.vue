@@ -59,7 +59,7 @@
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
                            :talk-tab-type="talkTabObj.type"
-                           @deleteTalk="deleteTalk"
+                           @delete-talk="deleteTalk"
                 />
                 <!-- app端广告有问题-->
                 <!--  #ifdef APP-PLUS -->
@@ -389,7 +389,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   // 被举报后前台删除talk
-  deleteTalk (talkId: number) {
+  deleteTalk (talkId: string) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 

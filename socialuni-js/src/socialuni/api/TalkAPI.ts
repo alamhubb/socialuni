@@ -41,7 +41,7 @@ export default class TalkAPI {
     return request.post('hug/addHug', hug)
   }
 
-  static deleteTalkAPI (talkId: number) {
+  static deleteTalkAPI (talkId: string) {
     return request.post('talk/deleteTalk', new TalkDeleteVO(talkId))
   }
 

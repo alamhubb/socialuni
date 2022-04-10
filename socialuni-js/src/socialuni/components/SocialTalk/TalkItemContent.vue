@@ -25,7 +25,7 @@
     <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center pt-10"
           @click="toTalkDetailVue">
       <view class="row-end-center">
-        <div class="color-sub text-sm h25 row-col-center pl">
+        <div class="color-sub text-sm h25 row-col-center ml-smm">
           {{ talk.updateTime| formatTime }}
         </div>
         <view class="q-tag ml-sm">
@@ -66,7 +66,7 @@
               </view>
             </view>-->
     </view>
-    <div class="px-15 row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
+    <div class="px-sm row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
       <template v-if="talk.circles&&talk.circles.length">
         <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
               class="q-tag mt-sm">
