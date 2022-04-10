@@ -34,7 +34,7 @@ public class CenterUserUtil {
     }
 
     public static Integer getMineUserId() {
-        UserDO user = CenterUserUtil.getMineUserNotNull();
+        UserDO user = CenterUserUtil.getMineUser();
         return user.getId();
     }
 
@@ -48,10 +48,10 @@ public class CenterUserUtil {
 
     public static UserDO getMineUserAllowNull() {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
-        return getMineUserNotNull(tokenDO);
+        return getMineUser(tokenDO);
     }
 
-    public static UserDO getMineUserNotNull() {
+    public static UserDO getMineUser() {
         UserDO user = CenterUserUtil.getMineUserAllowNull();
         if (user == null) {
             throw new SocialNotLoginException();
@@ -65,9 +65,9 @@ public class CenterUserUtil {
         return userId.equals(mineUserId);
     }
 
-    public static UserDO getMineUserNotNull(String token) {
+    public static UserDO getMineUser(String token) {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO(token);
-        return getMineUserNotNull(tokenDO);
+        return getMineUser(tokenDO);
     }
 
     public static Integer getMineUserIdInterceptor() {
@@ -92,7 +92,7 @@ public class CenterUserUtil {
         return user;
     }
 
-    private static UserDO getMineUserNotNull(ThirdUserTokenDO tokenDO) {
+    private static UserDO getMineUser(ThirdUserTokenDO tokenDO) {
         if (tokenDO == null) {
             return null;
         }
@@ -111,7 +111,7 @@ public class CenterUserUtil {
     }
 
     public static String getMineThirdUserId() {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
         return CenterUserUtil.getMineThirdUserId(mineUser.getId());
     }
 
@@ -125,7 +125,7 @@ public class CenterUserUtil {
 
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = CenterUserUtil.getMineUserNotNull();
+        UserDO userDO = CenterUserUtil.getMineUser();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 

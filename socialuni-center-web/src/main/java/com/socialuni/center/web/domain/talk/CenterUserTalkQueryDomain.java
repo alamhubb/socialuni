@@ -28,7 +28,7 @@ public class CenterUserTalkQueryDomain {
         Integer userId = UnionIdDbUtil.getUserIdByUid(queryQO.getUserId());
 
         //获取自己的user
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
 
         List<Integer> talkIds = UnionIdDbUtil.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 

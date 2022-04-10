@@ -46,7 +46,7 @@ public class UnionIdDbUtil {
     }
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
-        UserDO user = CenterUserUtil.getMineUserNotNull();
+        UserDO user = CenterUserUtil.getMineUser();
         return getContentIdsByUnionIds(contentUnionIds, ContentType.talk, user);
     }
 
@@ -167,7 +167,7 @@ public class UnionIdDbUtil {
     }
 
     public static Integer getResultByUnionId(String contentType, String unionId) {
-        UserDO user = CenterUserUtil.getMineUserNotNull();
+        UserDO user = CenterUserUtil.getMineUser();
         return UnionIdDbUtil.getResultByUnionId(contentType, unionId, user);
     }
 
@@ -241,7 +241,7 @@ public class UnionIdDbUtil {
     }
 
     public static Integer getUserIdByUid(String unionId) {
-        UserDO user = CenterUserUtil.getMineUserNotNull();
+        UserDO user = CenterUserUtil.getMineUser();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.user, unionId, user);
     }
@@ -257,7 +257,7 @@ public class UnionIdDbUtil {
     }
 
     public static Integer getUserImgIdByUid(String unionId) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.userImg, unionId, mineUser);
     }

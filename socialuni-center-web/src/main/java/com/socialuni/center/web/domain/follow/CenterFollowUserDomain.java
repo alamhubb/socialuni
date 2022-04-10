@@ -44,7 +44,7 @@ public class CenterFollowUserDomain {
     }
 
     public Map<String, List<CenterUserFollowDetailRO>> queryUserFollows() {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
         Map<String, List<SocialUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
 
         Map<String, List<CenterUserFollowDetailRO>> centerMap = new HashMap<>();
