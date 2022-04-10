@@ -31,8 +31,7 @@ export default class TencentCosAPI {
         'x-cos-security-token': cosAuthRO.credentials.sessionToken
       }
     })
-    console.log(res)
-    console.log(typeof res)
+    return res
     /*
     const res = await cosAuthRO.cos.getObject({
       Bucket: cosAuthRO.bucket,

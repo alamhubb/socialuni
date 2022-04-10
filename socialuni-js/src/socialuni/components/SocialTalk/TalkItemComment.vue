@@ -1,41 +1,42 @@
 <template>
   <view>
-    <view class="card-actions pt-10 row-between">
+    <view class="px-15 pt-10 row-between-center">
       <view class="row-around-center flex-1">
-        <view class="row-col-center button-icon" @click="showShareMenu" hover-class="uni-list-cell-hover">
-          <q-button text open-type="share">
-            <q-icon icon="mdi-share" size="24">
+        <view class="row-col-center" @click="showShareMenu">
+          <q-button no-debounce text open-type="share">
+            <q-icon icon="share-square" size="26" add-class="color-black">
             </q-icon>
+            <text class="ml-mn text-df">
+              分享
+            </text>
           </q-button>
         </view>
-        <view class="row-col-center button-icon" @click="setTalk" hover-class="uni-list-cell-hover">
-          <q-icon icon="mdi-comment-outline" size="24">
+        <view class="row-col-center" @click="setTalk">
+          <q-icon icon="mdi-comment-outline" size="22">
           </q-icon>
           <text v-if="talk.commentNum" class="ml-5">
             {{ talk.commentNum }}
           </text>
         </view>
-      </view>
-      <view class="row-end flex-1">
-        <!--                hover-class="uni-list-cell-hover"-->
         <view class="row-all-center">
           <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
-            <text>
-              抱抱
-            </text>
-            <q-icon class="ml-5" size="24"
+            <q-icon size="24"
                     :icon="getHugIcon(talk.hasHugged)"
                     :class="[getHugColor(talk.hasHugged)]"
             ></q-icon>
+            <text class="ml-mn">
+              抱抱
+            </text>
             <text v-if="talk.hugNum" class="ml-5">
               {{ talk.hugNum }}
             </text>
           </view>
         </view>
-        <view v-if="!talk.globalTop" class="ml-30 button-icon row-col-center" @click="openReportDialog"
-              hover-class="uni-list-cell-hover">
-          <q-icon icon="more-dot-fill"></q-icon>
-        </view>
+      </view>
+      <!--                hover-class="uni-list-cell-hover"-->
+
+      <view v-if="!talk.globalTop" class="ml-sm flex-none button-icon row-col-center" @click="openReportDialog">
+        <q-icon icon="more-dot-fill"></q-icon>
       </view>
     </view>
     <view class="card-text">

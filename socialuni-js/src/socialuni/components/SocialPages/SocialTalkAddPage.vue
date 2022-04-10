@@ -1,15 +1,5 @@
 <template>
   <view class="h100p bg-white">
-    <q-navbar show-back>
-      <div class="w100p row-col-center">
-        <view class="font-bold text-md flex-1">
-          发布动态
-        </view>
-        <q-button class="text-bold" theme :disabled="buttonDisabled||!talkContent" @click="addTalk">发布</q-button>
-      </div>
-    </q-navbar>
-    <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
-
     <view v-if="showTagSearch">
       <talk-add-tag-search :tags="tags" :is-add="true" :select-tags="selectTags" @change="changeTag"
                            @close="closeTagSearch"
@@ -21,6 +11,15 @@
       <social-tag-add @change="addTagCheckTag" @close="closeTagAddVue"></social-tag-add>
     </view>
     <view v-show="!showCityDialog&&!showTagSearch&&!showTagAdd">
+      <q-navbar show-back>
+        <div class="w100p row-col-center">
+          <view class="font-bold text-md flex-1">
+            发布动态
+          </view>
+          <q-button class="text-bold" theme :disabled="buttonDisabled" @click="addTalk">发布</q-button>
+        </div>
+      </q-navbar>
+      <city-picker v-model="showCityDialog" :district="district" @confirm="cityChange"></city-picker>
       <view class="px-smm py-sm">
         <textarea class="h140 w100p" :maxlength="200"
                   placeholder="分享记录生活、交朋友、想说啥就说啥，不用再顾虑别人的看法了，放飞自己，享受自由吧！禁止发布违法乱纪、涉污涉黄、暴露不雅、广告内容，发布违规内容会影响用户在社交软件联盟中的信用评级！"
@@ -174,6 +173,8 @@ import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CosUploadResult from '@/socialuni/model/cos/CosUploadResult'
 import TencentCosAPI from '@/api/TencentCosAPI'
+import NumberUtil from '@/socialuni/utils/NumberUtil'
+import MsgUtil from '@/socialuni/utils/MsgUtil'
 
 @Component({
   components: {
@@ -394,18 +395,30 @@ export default class SocialTalkAddPage extends Vue {
     let hasLt18Age = false
     //这种不匹配
     const reg = /\d+/g
-    this.talkContent.replace(reg, (match, matchVal) => {
+
+    let talkContent = this.talkContent
+    talkContent = talkContent.replace(/./g, (match, matchVal) => {
+      return NumberUtil.getNumberByHanzi(match)
+    })
+    talkContent.replace(reg, (match) => {
       const num = Number(match)
       if (num < 18) {
         hasLt18Age = true
-        ToastUtil.toastLong('禁止发布包含小于18岁未成年的内容')
+        AlertUtil.error('根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会被审核后删除')
         return
       }
-      return matchVal
+      return match
     })
     if (hasLt18Age) {
       return
     }
+    for (const showImgFile of this.showImgFiles) {
+      if (showImgFile.needAuth) {
+        MsgUtil.uploadImgNeedAuthMsg()
+        return
+      }
+    }
+
     this.buttonDisabled = true
     if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
@@ -420,20 +433,9 @@ export default class SocialTalkAddPage extends Vue {
     }
   }
 
-  addTalkHandler () {
+  async addTalkHandler () {
     uni.showLoading({ title: '发布中' })
-    if (this.showImgFiles.length === 0) {
-      this.publishTalk()
-    } else {
-      if (this.cosAuthRO) {
-        this.uploadImgList()
-        this.publishTalk()
-      } else {
-        uni.hideLoading()
-        AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
-        AlertUtil.error('上传图片失败' + AppMsg.contactServiceMsg)
-      }
-    }
+    this.publishTalk()
   }
 
   async publishTalk () {
@@ -462,10 +464,18 @@ export default class SocialTalkAddPage extends Vue {
       }
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
-    const res: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
-    res.forEach((item, index) => {
-      TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO)
-    })
+    const uploadRes: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
+    if (!this.user.identityAuth) {
+      for (const item of uploadRes) {
+        const index = uploadRes.findIndex(uploadResItem => uploadResItem === item)
+        const res: string = await TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO) as any
+        console.log(res)
+        if (res.includes('人')) {
+          this.showImgFiles[index].needAuth = true
+          MsgUtil.uploadImgNeedAuthMsg()
+        }
+      }
+    }
   }
 
   deleteImg (e) {
@@ -490,6 +500,9 @@ export default class SocialTalkAddPage extends Vue {
     this.cosAuthRO = await CosUtil.getCosAuthRO()
     if (this.cosAuthRO) {
       await this.uploadImgList()
+    } else {
+      AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }
 

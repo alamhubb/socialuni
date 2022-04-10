@@ -89,7 +89,6 @@ export default class AlertUtil {
 
   public static error (msg: string, title?: string) {
     uni.showModal({
-      title: title || '错误',
       content: msg,
       showCancel: false
     })

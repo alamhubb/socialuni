@@ -8,11 +8,11 @@
     <view class="row-between flex-auto">
       <view>
         <view class="h25 row-col-center">
-          <text class="text-df">{{ talk.user.nickname }}</text>
+          <text class="text-df font-bold">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xss" :user="talk.user"></social-gender-tag>
-            <q-icon class="color-blue" size="18" icon="level"/>
+            <!--              <q-icon class="color-blue" size="18" icon="level" @click.native.stop="toIdentityAuth"/>-->
           </template>
 
           <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
@@ -52,7 +52,10 @@
                     </view>-->
         </view>
         <view class="color-sub text-sm h25 row-col-center">
-          {{ talk.updateTime| formatTime }}
+          <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+            <q-icon class="color-success mr-mn" size="14" icon="level"/>
+            <div class="font-xs">成年</div>
+          </div>
           <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
             官方
           </view>
@@ -123,6 +126,10 @@ export default class TalkItemHead extends Vue {
     if (RouterUtil.getCurrentPageURI() === PagePath.userDetail) {
       this.isUserDetail = true
     }
+  }
+
+  toIdentityAuth () {
+    MsgUtil.identityAuthHint()
   }
 
   toLoveValuePage () {

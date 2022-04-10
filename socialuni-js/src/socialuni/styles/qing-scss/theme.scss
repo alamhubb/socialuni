@@ -1,8 +1,4 @@
-@import "color/blue";
-@import "color/green";
-@import "color/grey";
-@import "color/orange";
-@import "color/red";
+@import "color/color";
 
 //基础色
 $color-white: #fff;
@@ -77,7 +73,8 @@ $mergeMap1: map-merge($colors-theme, $colors-blue);
 $mergeMap2: map-merge($mergeMap1, $colors-green);
 $mergeMap3: map-merge($mergeMap2, $colors-grey);
 $mergeMap4: map-merge($mergeMap3, $colors-orange);
-$colors-base: map-merge($mergeMap4, $colors-red);
+$mergeMap5: map-merge($mergeMap4, $colors-purple);
+$colors-base: map-merge($mergeMap5, $colors-red);
 
 //背景
 //头部菜单

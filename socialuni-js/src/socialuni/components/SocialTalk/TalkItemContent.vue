@@ -5,17 +5,21 @@
     </text>
     <view v-if="talk.imgs.length" class="card-text-row mt-10">
       <image mode="aspectFill" class="card-text-img" v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
+             :class="{'bl-radius':index===0,'bd-radius':index===talk.imgs.length-1}"
              :style="{'max-width':talk.imgs.length===1?Math.min(200*img.aspectRatio,230)+'px':'','max-height':talk.imgs.length===1?'200px':668/Math.min(talk.imgs.length,3)/2+'px'}"
              :src="getTalkSmallImgUrl(talk.user.id,img.src)"
              :show-menu-by-longpress="true"
              @click.stop="previewImage(index)"
       ></image>
     </view>
-    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center px-smm pt-10"
+    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center pt-10"
           @click="toTalkDetailVue">
-      <view class="flex-row">
-        <view class="q-tag-warn">
-          <q-icon icon="map-fill" size="14"></q-icon>
+      <view class="row-end-center">
+        <div class="color-sub text-sm h25 row-col-center pl">
+          {{ talk.updateTime| formatTime }}
+        </div>
+        <view class="q-tag ml-sm">
+          <q-icon icon="map-fill" class="color-purple mr-nn" size="14"></q-icon>
           <!--        有市区的名称就不显示省的名称-->
           <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
           <text v-if="talk.district.cityName">
@@ -23,40 +27,49 @@
             {{ talk.district.cityName }}
           </text>
           <text v-if="talk.district.districtName">-{{ talk.district.districtName }}</text>
-        </view>
-        <view v-if="talk.distance|| talk.distance===0" class="q-tag-warn">
-          <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
-          <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
-          <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
-          <text v-else>{{ talk.distance | numFixed1 }}公里</text>
+
+          <view class="row-col-center" v-if="talk.distance|| talk.distance===0">
+            <div class="px-xs">|</div>
+            <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
+            <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
+            <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
+            <text v-else>{{ talk.distance | numFixed1 }}公里</text>
+          </view>
         </view>
       </view>
 
-      <view class="row-col-center">
-        <!--      只有非单性才需要这样显示-->
-        <template v-if="appGenderType === GenderTypeAll">
-          <view v-if="talk.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
-            女生可见
-          </view>
-          <view v-else-if="talk.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
-            男生可见
-          </view>
-        </template>
-        <!-- 三方数据才显示数据来源-->
-        <view v-if="talk.threeContent" class="ml-sm cu-tag round bg-orange light"
-              @click.stop="goToThreeAppClick(talk.threeAppId,talk.threeTalkPath)">
-          {{ talk.threeAppName }}
-          <q-icon v-if="talk.threeAppId" icon="mdi-near-me" class="ml-xs" size="14"></q-icon>
+      <!--      <view class="row-col-center">
+              &lt;!&ndash;      只有非单性才需要这样显示&ndash;&gt;
+              <template v-if="appGenderType === GenderTypeAll">
+                <view v-if="talk.visibleGender === GenderTypeGirl" class="cu-tag round bg-pink light">
+                  女生可见
+                </view>
+                <view v-else-if="talk.visibleGender === GenderTypeBoy" class="cu-tag round bg-blue light">
+                  男生可见
+                </view>
+              </template>
+              &lt;!&ndash; 三方数据才显示数据来源&ndash;&gt;
+              <view v-if="talk.threeContent" class="ml-sm cu-tag round bg-orange light"
+                    @click.stop="goToThreeAppClick(talk.threeAppId,talk.threeTalkPath)">
+                {{ talk.threeAppName }}
+                <q-icon v-if="talk.threeAppId" icon="mdi-near-me" class="ml-xs" size="14"></q-icon>
+              </view>
+            </view>-->
+    </view>
+    <div class="px-15 row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
+      <template v-if="talk.circles&&talk.circles.length">
+        <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
+              class="q-tag-warn mt-sm">
+          &{{ circleName }}
         </view>
-      </view>
-    </view>
-    <view v-if="talk.tags&&talk.tags.length && !talk.globalTop || talk.globalTop===1" class="card-text-row grid"
-          @click="toTalkDetailVue">
-      <view v-for="tag in talk.tags" :key="tag.id"
-            class="q-tag-theme mt-sm">
-        #{{ tag.name }}
-      </view>
-    </view>
+      </template>
+      <template v-if="talk.tags&&talk.tags.length">
+        <view v-for="tag in talk.tags" :key="tag.id" @click.stop="toTalkDetailVue"
+              class="q-tag-theme mt-sm">
+          #{{ tag.name }}
+        </view>
+      </template>
+    </div>
   </view>
 </template>
 
@@ -69,6 +82,8 @@ import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
+import { socialTalkModule } from '@/socialuni/store'
+import AlertUtil from '@/socialuni/utils/AlertUtil'
 
 @Component({
   components: { QIcon }
@@ -86,6 +101,13 @@ export default class TalkItemContent extends Vue {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
+
+  chooseCircle (circleName) {
+    AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
+      socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
+    })
+  }
+
 
   getTalkLargeImgUrl (userId: string, src: string) {
     return ImgUtil.getTalkLargeImgUrl(userId, src)

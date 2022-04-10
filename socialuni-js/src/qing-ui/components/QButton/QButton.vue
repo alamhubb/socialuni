@@ -1,5 +1,6 @@
 <template>
   <button
+    class="row-all-center"
     :class="buttonClass"
     @click.stop="clickHandler"
     :disabled="btnDisabled"
@@ -106,7 +107,7 @@ export default class QButton extends Vue {
   @Prop({
     default: 1000,
     type: [String, Number]
-  }) throttleTime: string | number
+  }) debounceTime: string | number
 
   //uni参数
   //是否禁用
@@ -198,6 +199,11 @@ export default class QButton extends Vue {
     type: String
   }) showMessageCard: string
 
+  @Prop({
+    default: false,
+    type: Boolean
+  }) noDebounce: boolean
+
   get curTheme () {
     if (this.theme) return 'theme'
     if (this.primary) return 'primary'
@@ -272,7 +278,9 @@ export default class QButton extends Vue {
     return this.disabled || !this.btnEnable
   }
 
-  clickHandler = CommonUtil.debounce(this.btnClick, 1000)
+  get clickHandler () {
+    return CommonUtil.debounce(this.btnClick, this.noDebounce ? 0 : Number(this.debounceTime))
+  }
 
   async btnClick () {
     if (this.btnEnable) {
@@ -297,7 +305,9 @@ export default class QButton extends Vue {
         // 只有方法正常执行完毕才会触发click
         this.clickAfter()
       } finally {
-        await CommonUtil.setTimeout()
+        if (!this.noDebounce) {
+          await CommonUtil.setTimeout(Number(this.debounceTime))
+        }
         this.btnEnable = true
       }
     }

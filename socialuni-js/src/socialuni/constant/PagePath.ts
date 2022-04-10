@@ -8,6 +8,7 @@ export default class PagePath {
   static readonly talkAdd: string = '/pagesLazy/talk/talkAdd'
   static readonly talkDetail: string = '/pagesLazy/talk/talkDetail'
   static readonly notify: string = '/pagesLazy/notify/notify'
+  static readonly identityAuth: string = '/pagesLazy/user/identityAuth'
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'
   static readonly message: string = '/pages/chat/message'
 
@@ -19,7 +20,6 @@ export default class PagePath {
   static readonly userShell: string = '/pages/user/shell'
   static readonly userFollow: string = '/pages/user/follow'
   static readonly loveValue: string = '/pages/user/loveValue'
-  static readonly identityAuth: string = '/pages/user/identityAuth'
 
   static readonly webBrowser: string = '/pages/web/webBrowser'
   static readonly share: string = '/pages/share/share'

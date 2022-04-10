@@ -88,9 +88,13 @@
         </view>
 
         <div class="flex-row">
-          <div class="q-tag">
-            <q-icon class="color-sub mr-mn" size="14" icon="mdi-alpha-v-circle"/>
-            <div class="mt-1">成年</div>
+          <div v-if="userProp.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+            <q-icon class="color-success mr-mn" size="14" icon="level"/>
+            <div class="font-xs">成年</div>
+          </div>
+          <div v-else class="q-tag q-box-nn" @click.stop="toIdentityAuth">
+            <q-icon class="color-sub mr-mn" size="14" icon="level"/>
+            <div class="font-xs">成年</div>
           </div>
         </div>
         <!--        <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
@@ -161,25 +165,6 @@
             </view>
           </div>
         </view>
-
-        <view v-if="isMine" class="mb q-solid-bottom">
-          <div class="row-col-center">
-            <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
-            手机号(仅自己可见)：
-            <view v-if="userProp.phoneNum" class="row-col-center">
-              {{ userProp.phoneNum }}
-              <view class="ml-10 sm cu-tag bg-white bd-gray radius">
-                已绑定
-              </view>
-            </view>
-            <view v-else class="row-col-center">
-              <button class="ml-xs q-tag-warn bg-click"
-                      @click="toPhonePage">绑定手机号
-              </button>
-            </view>
-          </div>
-        </view>
-
 
         <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
         <!--        看他的性别等级-->
@@ -546,7 +531,7 @@ export default class UserInfo extends Vue {
     if (this.userProp.imgs.length > 1) {
       AlertUtil.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
-        UserAPI.deleteUserImgAPI(imgs[0]).then((res: any) => {
+        UserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
           socialUserModule.setUser(res.data)
         })
       })
@@ -581,7 +566,7 @@ export default class UserInfo extends Vue {
   }
 
   toIdentityAuth () {
-    PageUtil.toIdentityAuthPage()
+    MsgUtil.identityAuthHint()
   }
 
   openVip () {

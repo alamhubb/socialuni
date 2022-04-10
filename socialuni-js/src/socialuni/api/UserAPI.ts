@@ -6,7 +6,6 @@ import UserPayResultVO from '../model/user/UserPayResultVO'
 import UserEditVO from '../model/user/UserEditVO'
 import ImgAddQO from '../model/user/ImgAddQO'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
-import SocialUserIdentityAuthQO from '@/socialuni/model/QO/user/SocialUserIdentityAuthQO'
 
 export default class UserAPI {
   static getMineUserInfoAPI () {
@@ -54,13 +53,5 @@ export default class UserAPI {
 
   static destroyAccountAPI () {
     return request.post('user/destroyAccount')
-  }
-
-  static identityAuthPreCheckAPI (authQO: SocialUserIdentityAuthQO) {
-    return request.post('user/identityAuthPreCheck', authQO)
-  }
-
-  static identityAuthAPI (authQO: SocialUserIdentityAuthQO) {
-    return request.post('user/identityAuth')
   }
 }
