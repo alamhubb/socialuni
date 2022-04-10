@@ -87,7 +87,7 @@
           </view>
         </view>
 
-        <div class="flex-row">
+        <div class="flex-row pl-xs">
           <div v-if="userProp.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
             <q-icon class="color-success mr-mn" size="14" icon="level"/>
             <div class="font-xs">成年</div>
@@ -523,10 +523,6 @@ export default class UserInfo extends Vue {
     })
   }
 
-  created () {
-    this.queryMineTalks()
-  }
-
   deleteImg () {
     if (this.userProp.imgs.length > 1) {
       AlertUtil.warning('请确认是否删除照片？').then(() => {
@@ -620,7 +616,10 @@ export default class UserInfo extends Vue {
     this.$refs.editPopup.open()
   }
 
-  @Watch('user')
+  @Watch('user', {
+    deep: true,
+    immediate: true
+  })
   watchUserChange (newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {
