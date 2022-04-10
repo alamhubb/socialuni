@@ -1,20 +1,20 @@
 <template>
   <el-form-item :label="label" :label-width="labelWidth" :prop="prop">
-    <el-input
+    <el-checkbox
       :value="model||value"
       :readonly="readonly"
       size="small"
       @click.native.stop
       v-on="$listeners"
-      @input="change"
-      v-bind="$attrs"
-    />
+      @change="change"
+      v-bind="$attrs">
+      <slot></slot>
+    </el-checkbox>
   </el-form-item>
 </template>
 
 <script lang="ts">
 import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
-import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 
 /**
  * @author 秦开远
@@ -22,10 +22,8 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  *
  * 在数据源业务基础上，封装基础table
  */
-@Component({
-  components: { YSelect }
-})
-export default class YFormInput extends Vue {
+@Component
+export default class YFormCheckbox extends Vue {
   @Model('change') readonly model!: any
 
   @Prop() readonly label: string
@@ -33,10 +31,7 @@ export default class YFormInput extends Vue {
   @Prop() readonly prop: string
   @Prop() readonly labelWidth: string
 
-  @Prop() readonly options: []
-  @Prop() readonly optionLabel: string
   @Prop() readonly readonly: boolean
-  @Prop() readonly optionValue: string
 
   @Emit()
   change(value) {

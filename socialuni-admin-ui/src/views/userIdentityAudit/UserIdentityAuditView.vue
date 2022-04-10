@@ -1,17 +1,21 @@
 <template>
-  <div class="w100r h100r flex-col" />
+  <div>
+    123
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Talk from '@/model/talk/Talk'
+import UserIdentityAuditAPI from '@/api/UserIdentityAuditAPI'
 
 @Component
-export default class TestFlex extends Vue {
+export default class UserIdentityAuditView extends Vue {
   content = '5'
   talks: Talk[] = []
 
-  testAPI() {
+  created() {
+    UserIdentityAuditAPI.queryUserIdentityAuthAuditListAPI()
     /* TestAPI.testKeywordsAPI(this.content).then(res => {
       this.talks = res.data
     })*/

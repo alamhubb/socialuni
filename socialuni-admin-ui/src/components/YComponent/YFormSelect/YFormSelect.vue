@@ -1,9 +1,10 @@
 <template>
-  <el-form-item :label="label" v-bind="$attrs">
+  <el-form-item :label="label" :label-width="labelWidth" :prop="prop">
     <y-select
       class="w100p"
       :model="model"
-      :readonly="readonly"
+      v-bind="$attrs"
+      :disabled="readonly"
       :options="options"
       :label="optionLabel"
       :multiple="multiple"
@@ -27,22 +28,22 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
   components: { YSelect }
 })
 export default class YFormSelect extends Vue {
+
   @Model('change') readonly model!: any
 
   @Prop() readonly type: string
-
+  @Prop() readonly prop: string
+  @Prop() readonly labelWidth: string
   @Prop() readonly label: string
 
   @Prop() readonly options: []
-  @Prop() readonly optionLabel: string
   @Prop() readonly readonly: boolean
   @Prop({ default: false }) readonly multiple: boolean
-  @Prop() readonly optionValue: string
+  @Prop({ default: 'name' }) readonly optionLabel: string
+  @Prop({ default: 'value' }) readonly optionValue: string
 
   @Emit()
   change(value) {
-    console.log('触发了')
-    console.log(value)
     return value
   }
 }

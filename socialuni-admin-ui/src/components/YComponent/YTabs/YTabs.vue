@@ -9,9 +9,8 @@
       >
         <slot :tab="tab" :index="index">
           <div
-            class="col-row-center py-sm px font-16"
-            :class="[(value?tab[value]:index)===model?('color-blue '+activeClass):'color-gray']"
-          > {{ tab[label] }}
+            class="col-row-center py-sm px-sm font-14"
+            :class="[(value?tab[value]:index)===model?('color-blue '+activeClass):'color-gray']"> {{ tab[label] }}
           </div>
         </slot>
       </div>
@@ -32,7 +31,7 @@ export default class YTabs extends Vue {
     tabs: HTMLDivElement[];
   }
 
-  @Prop({ default: 'y' }) readonly direction: TabDirection
+  @Prop({ default: TabDirection.col }) readonly direction: TabDirection
 
   @Prop({ default: 100 }) readonly preShow: number
 
@@ -112,7 +111,7 @@ export default class YTabs extends Vue {
 
   // 如果水平方向
   get isXDirection(): boolean {
-    return this.direction === TabDirection.x
+    return this.direction === TabDirection.row
   }
 
   // 滑块样式

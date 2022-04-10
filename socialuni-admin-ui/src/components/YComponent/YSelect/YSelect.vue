@@ -1,11 +1,11 @@
 <template>
-  <el-select ref="select" size="small" :value="model" :placeholder="hint" v-bind="$attrs" filterable @change="change">
+  <el-select ref="select" :value="model" :placeholder="hint" v-bind="$attrs" @change="change" filterable>
     <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
     <el-option
-      v-for="item in optionsGet"
-      :key="item[value]!==undefined?item[value]:item"
-      :label="item[label || value]!==undefined?item[label || value]:item"
-      :value="item[value]!==undefined?item[value]:item"
+        v-for="item in optionsGet"
+        :key="item[value]!==undefined?item[value]:item"
+        :label="optionLabel(item)"
+        :value="item[value]!==undefined?item[value]:item"
     />
   </el-select>
 </template>
@@ -35,7 +35,7 @@ export default class YSelect extends Vue {
   // @Prop() readonly option: DataTableColumnOptionVO
   // 第二种使用方式
   @Prop() readonly options: []
-  @Prop() readonly label: string
+  @Prop({ default: 'name' }) readonly label: string
   @Prop({ default: 'value' }) readonly value: string
 
   @Emit()
@@ -45,6 +45,16 @@ export default class YSelect extends Vue {
 
   get optionsGet() {
     return this.options
+  }
+
+  optionLabel(item) {
+    if (item[this.label] !== undefined) {
+      return item[this.label]
+    } else if (item[this.value] !== undefined) {
+      return item[this.value]
+    } else {
+      return item
+    }
   }
 
   blur() {

@@ -4,20 +4,21 @@
     ref="table"
     v-bind="$attrs"
     :data="data"
-    header-row-class-name="bg-text-grey"
-    size="small"
+    border
+    :header-cell-style="{background:'#f3f5fb',color:'#444444','font-weight': 'bold'}"
     v-on="$listeners"
     @row-click="rowClick"
   >
-    <el-table-column v-if="index" type="index"/>
-    <el-table-column v-if="checked" width="80" align="center">
+    <y-table-column v-if="index" type="index" />
+    <y-table-column v-if="checked" width="80" align="left">
       <!--      不加scope不起作用-->
-      <template slot="header" slot-scope="scope">
+      <template slot="header">
         <div>
           <el-checkbox
             :value="checkedAll"
             @change="checkedAllClick"
-          >全选</el-checkbox>
+          >全选
+          </el-checkbox>
         </div>
       </template>
       <template #default="{row}">
@@ -29,8 +30,8 @@
           />
         </div>
       </template>
-    </el-table-column>
-    <slot/>
+    </y-table-column>
+    <slot />
   </el-table>
 </template>
 
@@ -108,6 +109,7 @@ export default class YTable extends Vue {
         this.setCurrentRow(null)
         this.checkedData = []
       }
+      this.$refs.table.toggleRowSelection(row)
     }
   }
 
