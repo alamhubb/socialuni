@@ -35,10 +35,8 @@ public class SocialUserIdentityAuthDO extends CommonContentBaseDO implements Ser
     private String sex;
     //认证次数
     private Integer authNum;
-    private Boolean authSuccess;
 
     public SocialUserIdentityAuthDO() {
         this.authNum = 0;
-        this.authSuccess = false;
     }
 }

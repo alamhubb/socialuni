@@ -5,13 +5,15 @@ import CosImgResultType from '@/constants/audit/CosImgResultType'
 import ViolateType from '@/constants/ViolateType'
 import UserStatus from '@/constants/UserStatus'
 import DataTypeStrEnum from '@/constants/enum/DataTypeStrEnum'
+import DataTableColumnTypeEnum from '@/components/dataTable/DataTableColumnTypeEnum'
 
 export default class GlobalConst {
-    static readonly OperationType: typeof OperationType = OperationType
-    static readonly DevAccountType: typeof DevAccountType = DevAccountType
-    static readonly ForbidStatus: typeof ForbidStatus = ForbidStatus
-    static readonly CosImgResultType: typeof CosImgResultType = CosImgResultType
-    static readonly ViolateType: typeof ViolateType = ViolateType
-    static readonly UserStatus: typeof UserStatus = UserStatus
-    static readonly DataTypeStrEnum: typeof DataTypeStrEnum = DataTypeStrEnum
+  static readonly OperationType: typeof OperationType = OperationType
+  static readonly DevAccountType: typeof DevAccountType = DevAccountType
+  static readonly ForbidStatus: typeof ForbidStatus = ForbidStatus
+  static readonly CosImgResultType: typeof CosImgResultType = CosImgResultType
+  static readonly ViolateType: typeof ViolateType = ViolateType
+  static readonly UserStatus: typeof UserStatus = UserStatus
+  static readonly DataTypeStrEnum: typeof DataTypeStrEnum = DataTypeStrEnum
+  static readonly DataTableColumnTypeEnum: typeof DataTableColumnTypeEnum = DataTableColumnTypeEnum
 }

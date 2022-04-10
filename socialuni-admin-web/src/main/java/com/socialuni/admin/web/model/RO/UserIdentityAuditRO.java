@@ -6,8 +6,10 @@ import com.socialuni.social.entity.model.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserIdentityAuditRO {
     Boolean checked;
     Integer id;
@@ -24,10 +26,12 @@ public class UserIdentityAuditRO {
     String sex;
     //认证次数
     Integer authNum;
+    Boolean success;
 
     public UserIdentityAuditRO(SocialUserIdentityAuthDO socialUserIdentityAuthDO, SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO, UserDO userDO) {
-        this.checked = false;
-        this.id = socialUserIdentityAuthDO.getUserId();
+        this.checked = true;
+        this.success = true;
+        this.id = socialUserIdentityAuthDO.getId();
         this.user = new ReportUserVO(userDO);
         this.userIdImgSrc = SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthImgDO.getUserIdImgSrc();
         this.userSelfieImgSrc = SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthImgDO.getUserSelfieImgSrc();

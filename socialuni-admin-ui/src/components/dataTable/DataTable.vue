@@ -1,6 +1,6 @@
 <template>
   <!--            <el-step title="数据库连接信息" />-->
-  <div class="flex-col" id="table_layout_control">
+  <div class="flex-col">
     <div v-if="showTableHeader" class="flex-none pb-sm">
       <slot name="header">
         <div class="row-between-center px-mn pb-sm">
@@ -8,24 +8,23 @@
             <div class="row-between-center flex-1">
               <div v-if="title" class="row-col-center">
                 <slot name="title">
-                  <div class="y-piece-md mr-sm"/>
+                  <div class="y-piece-md mr-sm" />
                   <div class="flex-none">{{ title }}</div>
                 </slot>
               </div>
               <div class="row-col-center">
-                <y-search v-model="searchForm.searchText" :title="searchTitle"></y-search>
+                <y-search v-model="searchForm.searchText" :title="searchTitle" />
               </div>
             </div>
           </slot>
-          <slot name="headerRight">
-          </slot>
+          <slot name="headerRight" />
         </div>
       </slot>
     </div>
 
     <y-table
-      v-loading="loading"
       ref="table"
+      v-loading="loading"
       class="flex-1"
       :data="filterTableList"
       v-bind="$attrs"
@@ -33,7 +32,7 @@
       @current-change="currentRowChange"
       @selection-change="selectionChange"
     >
-      <slot/>
+      <slot />
     </y-table>
 
     <slot name="tableFooter">
@@ -48,11 +47,11 @@
         </slot>
         <div v-if="showPage" class="flex-1 row-end">
           <y-pagination
-            background
-            @change="filterTableData"
             v-model="pageable"
+            background
             layout="total, sizes, prev, pager, next, jumper"
             :page-sizes="pageSizes"
+            @change="filterTableData"
           />
         </div>
       </div>
@@ -61,13 +60,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'
 import Pageable from '@/components/YComponent/YPageable/Pageable'
 import PinyinUtil from '@/utils/PinyinUtil'
-import YSearch from "@/components/YComponent/YSearch/YSearch.vue";
+import YSearch from '@/components/YComponent/YSearch/YSearch.vue'
 
 /**
  * @author 秦开远
@@ -76,7 +75,7 @@ import YSearch from "@/components/YComponent/YSearch/YSearch.vue";
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-  components: {YSearch, YPagination, YTable}
+  components: { YSearch, YPagination, YTable }
 })
 export default class DataTable extends Vue {
   $refs: {
@@ -84,16 +83,16 @@ export default class DataTable extends Vue {
   }
   @Model('change') model!: any
 
-  @Prop({default: ''}) readonly title: string
-  @Prop({default: false, type: Boolean}) readonly showTitle: string
-  @Prop({default: '检索'}) readonly searchTitle: string
-  @Prop({default: false, type: Boolean}) readonly checked: boolean
-  @Prop({default: false, type: Boolean}) readonly loading: boolean
+  @Prop({ default: '' }) readonly title: string
+  @Prop({ default: false, type: Boolean }) readonly showTitle: string
+  @Prop({ default: '检索' }) readonly searchTitle: string
+  @Prop({ default: false, type: Boolean }) readonly checked: boolean
+  @Prop({ default: false, type: Boolean }) readonly loading: boolean
   @Prop() readonly tableData: any[]
 
-  @Prop({default: false, type: Boolean}) readonly showPage: boolean
-  @Prop({default: false, type: Boolean}) readonly showHeader: boolean
-  @Prop({default: '', type: [Array, String]}) readonly searchField: boolean
+  @Prop({ default: false, type: Boolean }) readonly showPage: boolean
+  @Prop({ default: false, type: Boolean }) readonly showHeader: boolean
+  @Prop({ default: '', type: [Array, String] }) readonly searchField: boolean
 
   hasHeaderSlot = false
 
@@ -192,20 +191,20 @@ export default class DataTable extends Vue {
     }
   }
 
-  @Watch('searchForm', {deep: true})
+  @Watch('searchForm', { deep: true })
   searchFormWatch() {
     this.pageable = new Pageable(1, this.pageSizes[0])
     this.filterTableData()
   }
 
-  @Watch('pageable', {deep: true})
+  @Watch('pageable', { deep: true })
   pageableWatch() {
     this.filterTableData()
   }
 
   @Watch('tableData')
   tableDataWatch() {
-    //table替换需要重置
+    // table替换需要重置
     this.pageable = new Pageable(1, this.pageSizes[0])
     this.filterTableData()
   }
@@ -243,7 +242,7 @@ export default class DataTable extends Vue {
     this.$refs.table.toggleRowSelection(row)
   }
 
-  /*checkAllSelection() {
+  /* checkAllSelection() {
     this.$refs.table.checkAllSelection()
   }
 
