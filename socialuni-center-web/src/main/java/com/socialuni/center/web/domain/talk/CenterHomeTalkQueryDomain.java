@@ -53,7 +53,7 @@ public class CenterHomeTalkQueryDomain {
     //查询非关注tab的动态列表
     public List<CenterTalkRO> queryHomeTabTalks(@Valid @NotNull CenterHomeTabTalkQueryQO queryQO) {
         //获取当前用户
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
 

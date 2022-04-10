@@ -46,7 +46,7 @@ public class CenterUserIdentityService {
     SocialUserIdentityAuthRepository socialUserIdentityAuthRepository;
 
 
-    public ResultRO<SocialUserIdentityAuthPreCheckRO> identityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
+    public ResultRO<SocialUserIdentityAuthPreCheckRO> userIdentityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
         Integer resScore = TencentCloud.imgAuthGetScore(SocialAppConfig.getStaticResourceUrl() + socialUseIdentityAuthQO.getIdImgUrl(), SocialAppConfig.getStaticResourceUrl() + socialUseIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
             throw new SocialBusinessException("预校验失败，请重试，" + ErrorMsg.CONTACT_SERVICE);

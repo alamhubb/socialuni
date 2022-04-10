@@ -44,7 +44,7 @@ public class CenterUserService {
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
         UserDO detailUserDO = CenterUserUtil.get(centerUserIdQO.getUserId());
 
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         CenterUserDetailRO userDetailRO;
 
