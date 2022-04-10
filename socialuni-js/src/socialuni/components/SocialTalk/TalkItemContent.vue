@@ -69,14 +69,16 @@
     <div class="px-15 row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
       <template v-if="talk.circles&&talk.circles.length">
         <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
-              class="q-tag-warn mt-sm">
-          &{{ circleName }}
+              class="q-tag mt-sm">
+          <text class="color-purple mr-mn font-bold">&</text>
+          {{ circleName }}
         </view>
       </template>
       <template v-if="talk.tags&&talk.tags.length">
         <view v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
-              class="q-tag-theme mt-sm">
-          #{{ tag.name }}
+              class="q-tag mt-sm">
+          <text class="color-purple mr-mn font-bold">#</text>
+          {{ tag.name }}
         </view>
       </template>
     </div>
