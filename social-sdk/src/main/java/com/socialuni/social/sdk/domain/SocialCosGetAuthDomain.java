@@ -50,7 +50,9 @@ public class SocialCosGetAuthDomain {
         String[] allowActions = new String[]{
                 // 表单上传、小程序上传
                 "name/cos:PutObject",
-                "name/cos:PostObject"
+                "name/cos:PostObject",
+                "name/cos:GetObject"
+
         };
         config.put("allowActions", allowActions);
 

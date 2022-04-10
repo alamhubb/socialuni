@@ -50,7 +50,7 @@ public class CenterTalkRO {
     private String adCode;
 
     private List<SocialTalkTagRO> tags;
-
+    private List<String> circles;
     /**
      * 距离,单位千米
      */

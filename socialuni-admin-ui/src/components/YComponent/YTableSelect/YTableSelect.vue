@@ -1,19 +1,19 @@
 <template>
-  <el-table-column
+  <y-table-column
     :label="label||prop"
     v-bind="$attrs"
   >
     <template #default="{row,$index}">
       <y-select
         v-model="row[prop]"
-        :readonly="readonly"
+        :disabled="readonly"
         :options="options"
         :label="optionLabel"
         :value="optionValue"
         @change="change(row[prop],$index)"
       />
     </template>
-  </el-table-column>
+  </y-table-column>
 </template>
 
 <script lang="ts">
@@ -27,7 +27,7 @@ import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-  components: { YSelect }
+  components: {YSelect}
 })
 export default class YTableSelect extends Vue {
   @Prop() readonly prop: string
@@ -35,7 +35,7 @@ export default class YTableSelect extends Vue {
   @Prop() readonly propFun: Function
   @Prop() readonly label: string
   @Prop() readonly labelClass: string
-  @Prop({ default: '请选择' }) readonly hint: string
+  @Prop({default: '请选择'}) readonly hint: string
 
   @Prop() readonly options: []
   @Prop() readonly optionLabel: string
@@ -44,7 +44,7 @@ export default class YTableSelect extends Vue {
 
   @Emit()
   change(value, index) {
-    return { value, index }
+    return {value, index}
   }
 }
 </script>

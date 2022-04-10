@@ -41,7 +41,7 @@ public class CenterPhoneService {
     }
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }

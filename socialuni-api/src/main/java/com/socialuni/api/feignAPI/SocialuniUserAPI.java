@@ -7,7 +7,6 @@ import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
-import com.socialuni.social.model.model.QO.user.SocialUserImgDeleteQO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -37,4 +37,5 @@ public class CenterCommentRO {
      * 抱抱次数
      */
     private Integer hugNum;
+    private Integer reportNum;
 }

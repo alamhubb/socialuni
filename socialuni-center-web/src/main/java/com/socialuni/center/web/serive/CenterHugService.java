@@ -18,7 +18,7 @@ public class CenterHugService {
     private SocialAddHugDomain socialAddHugDomain;
 
     public ResultRO<Void> addHug(CenterHugAddQO centerHugAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
 
         Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(centerHugAddQO.getTalkId());
 

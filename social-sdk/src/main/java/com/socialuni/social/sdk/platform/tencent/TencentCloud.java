@@ -9,6 +9,7 @@ import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.iai.v20180301.IaiClient;
 import com.tencentcloudapi.iai.v20180301.models.CompareFaceRequest;
 import com.tencentcloudapi.iai.v20180301.models.CompareFaceResponse;
+import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -62,6 +63,18 @@ public class TencentCloud {
         ClientProfile clientProfile = new ClientProfile();
         clientProfile.setHttpProfile(httpProfile);
         return new CmsClient(cred, region, clientProfile);
+    }
+
+    public static OcrClient getOcrClient() {
+        Credential cred = TencentCloud.getCredential();
+        // 实例化一个http选项，可选的，没有特殊需求可以跳过
+        HttpProfile httpProfile = new HttpProfile();
+        httpProfile.setEndpoint("ocr.tencentcloudapi.com");
+        // 实例化一个client选项，可选的，没有特殊需求可以跳过
+        ClientProfile clientProfile = new ClientProfile();
+        clientProfile.setHttpProfile(httpProfile);
+        // 实例化要请求产品的client对象,clientProfile是可选的
+        return new OcrClient(cred, region, clientProfile);
     }
 
     public static boolean textIsViolation(String content) {
@@ -143,6 +156,13 @@ public class TencentCloud {
 
 
     public static boolean imgAuth(String userImg, String authImg) {
+        Integer resScore = TencentCloud.imgAuthGetScore(userImg, authImg);
+        //50分太高，老有人认证不过，设置为40
+        Integer authScore = 40;
+        return resScore >= authScore;
+    }
+
+    public static Integer imgAuthGetScore(String userImg, String authImg) {
         //新版本更新，userImg照片最多三张。上传非本人照片时，禁止上传
         Credential cred = TencentCloud.getCredential();
         ClientProfile clientProfile = TencentCloud.getClientProfile("iai.tencentcloudapi.com");
@@ -156,10 +176,9 @@ public class TencentCloud {
             resp = client.CompareFace(req);
         } catch (TencentCloudSDKException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
-        //50分太高，老有人认证不过，设置为40
-        Integer authScore = 40;
-        return resp.getScore() >= authScore;
+        Double scoreDb = Math.ceil(resp.getScore());
+        return scoreDb.intValue();
     }
 }

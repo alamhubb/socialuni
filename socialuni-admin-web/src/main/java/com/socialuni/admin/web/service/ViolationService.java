@@ -176,6 +176,7 @@ public class ViolationService {
         if (ViolateLevel.slight.equals(vioLevel)) {
             vioReason += "删除违规内容";
         } else {
+            //区分轻微、一般违规，和严重违规，一般和严重才增加次数
             Integer vioCount = socialUserViolationDO.getViolationCount();
             //一般违规
             if (ViolateLevel.general.equals(vioLevel)) {
@@ -206,7 +207,7 @@ public class ViolationService {
                     violationDay = 90;
                 }
             }
-            //区分轻微、一般违规，和严重违规，一般和严重才增加次数
+            socialUserViolationDO.setViolationCount(vioCount + 1);
         }
         //所有违规通用
         socialUserViolationDO.setViolationReason(vioReason);

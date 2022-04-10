@@ -1,7 +1,10 @@
 package com.socialuni.social.sdk.factory;
 
+import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.HugDO;
+import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.social.entity.model.DO.talk.SocialTalkCircleDO;
 import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
@@ -17,6 +20,8 @@ import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.platform.MapUtil;
 import com.socialuni.social.sdk.redis.HugRedis;
 import com.socialuni.social.sdk.repository.CommentRepository;
+import com.socialuni.social.sdk.repository.community.SocialCircleRepository;
+import com.socialuni.social.sdk.repository.community.SocialTalkCircleRepository;
 import com.socialuni.social.sdk.store.SocialTagRedis;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.TalkImgDOUtils;
@@ -42,6 +47,8 @@ public class SocialTalkROFactory {
     private static SocialTagRedis socialTagRedis;
     private static CommentDao commentDao;
     private static HugRedis hugRedis;
+    private static SocialCircleRepository socialCircleRepository;
+    private static SocialTalkCircleRepository socialTalkCircleRepository;
 
     @Resource
     public void setSocialTagRedis(SocialTagRedis socialTagRedis) {
@@ -63,7 +70,17 @@ public class SocialTalkROFactory {
         SocialTalkROFactory.hugRedis = hugRedis;
     }
 
-   /*
+    @Resource
+    public void setSocialCircleRepository(SocialCircleRepository socialCircleRepository) {
+        SocialTalkROFactory.socialCircleRepository = socialCircleRepository;
+    }
+
+    @Resource
+    public void setSocialTalkCircleRepository(SocialTalkCircleRepository socialTalkCircleRepository) {
+        SocialTalkROFactory.socialTalkCircleRepository = socialTalkCircleRepository;
+    }
+
+    /*
     private static SocialUserFansDetailRepository userFollowDetailRepository;
     private static HugRepository hugRepository;
     private static TagRepository TagRepository;
@@ -157,6 +174,14 @@ public class SocialTalkROFactory {
 
         List<SocialCommentRO> socialCommentROS = SocialCommentROFactory.getTalkCommentROs(mineUser, talkId, showAllComment);
         socialTalkRO.setComments(socialCommentROS);
+        List<String> circles = new ArrayList<>();
+
+        SocialTalkCircleDO socialTalkCircleDO = socialTalkCircleRepository.findFirstByTalkId(talkId);
+        if (socialTalkCircleDO != null) {
+            SocialCircleDO socialCircleDO = socialCircleRepository.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
+            circles.add(socialCircleDO.getName());
+        }
+        socialTalkRO.setCircles(circles);
 
         //10 毫秒
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getId());

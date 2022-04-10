@@ -1,13 +1,13 @@
 <template>
-  <el-form-item :label="label" :label-width="labelWidth">
+  <el-form-item :label="label" :label-width="labelWidth" :prop="prop">
     <el-input
-      :value="model"
+      :value="model||value"
       :readonly="readonly"
       size="small"
-      v-bind="$attrs"
       @click.native.stop
       v-on="$listeners"
       @input="change"
+      v-bind="$attrs"
     />
   </el-form-item>
 </template>
@@ -29,6 +29,8 @@ export default class YFormInput extends Vue {
   @Model('change') readonly model!: any
 
   @Prop() readonly label: string
+  @Prop() readonly value: string
+  @Prop() readonly prop: string
   @Prop() readonly labelWidth: string
 
   @Prop() readonly options: []
@@ -38,7 +40,6 @@ export default class YFormInput extends Vue {
 
   @Emit()
   change(value) {
-    console.log(value)
     return value
   }
 }

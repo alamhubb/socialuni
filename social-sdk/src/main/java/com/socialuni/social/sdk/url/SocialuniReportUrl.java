@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("report")
 public interface SocialuniReportUrl {
     @PostMapping("addReport")
-    ResultRO<Void> addReport(@RequestBody @Valid SocialReportAddQO socialReportAddQO);
+    ResultRO<String> addReport(@RequestBody @Valid SocialReportAddQO socialReportAddQO);
 
     @PostMapping("queryReportTypes")
     ResultRO<List<String>> queryReportTypes();

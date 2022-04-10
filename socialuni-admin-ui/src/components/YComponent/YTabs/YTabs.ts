@@ -1,5 +1,5 @@
 
 export enum TabDirection {
-  x = 'x',
-  y = 'y'
+  row = 'row',
+  col = 'col'
 }

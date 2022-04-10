@@ -31,6 +31,12 @@ export const menuRoutes = [
     name: RouterName.imgAuditHistory,
     component: () => import('@/views/audit/imgAuditHistory.vue'),
     meta: { title: RouterName.imgAuditHistory, icon: 'strengthMonitoring' }
+  },
+  {
+    path: '/userIdentityAudit',
+    name: RouterName.userIdentityAudit,
+    component: () => import('@/views/userIdentityAudit/UserIdentityAuditView.vue'),
+    meta: { title: RouterName.userIdentityAudit, icon: 'strengthMonitoring' }
   }
 ]
 
@@ -72,7 +78,7 @@ export const constantRoutes = [
       {
         path: '/test',
         name: '测试',
-        component: () => import('@/views/testTemp/testTemp.vue'),
+        component: () => import('@/views/testTemp/UserIdentityAuditView.vue'),
         meta: { title: '测试', icon: 'strengthMonitoring' }
       }]
   },*/

@@ -1,56 +1,45 @@
 <template>
   <!--            <el-step title="数据库连接信息" />-->
   <div class="flex-col">
-    <slot name="tableHeader">
-      <div v-if="showHeader" class="flex-none pb-sm">
-        <slot name="header">
-          <div class="row-between-center px-xs pb-sm">
-            <slot name="headerLeft">
-              <div class="row-between-center flex-1">
-                <div v-if="showTitle" class="row-col-center">
-                  <slot name="title">
-                    <div class="y-piece-md mr-sm"/>
-                    <div class="flex-none">{{ title }}</div>
-                  </slot>
-                </div>
-                <div class="row-col-center">
-                  <div class="flex-none">{{ searchTitle }}：</div>
-                  <el-input
-                      v-model="searchForm.searchText"
-                      size="small"
-                      placeholder="请输入要搜索的内容"
-                      class="w200"
-                      @input.native="filterTextInput"
-                  />
-                  <slot name="headerLeftAppend"></slot>
-                </div>
+    <div v-if="showTableHeader" class="flex-none pb-sm">
+      <slot name="header">
+        <div class="row-between-center px-mn pb-sm">
+          <slot name="headerLeft">
+            <div class="row-between-center flex-1">
+              <div v-if="title" class="row-col-center">
+                <slot name="title">
+                  <div class="y-piece-md mr-sm" />
+                  <div class="flex-none">{{ title }}</div>
+                </slot>
               </div>
-            </slot>
-            <slot name="headerRight">
-            </slot>
-          </div>
-
-          <slot name="headerBottom">
-
+              <div class="row-col-center">
+                <y-search v-model="searchForm.searchText" :title="searchTitle" />
+              </div>
+            </div>
           </slot>
-        </slot>
-      </div>
-    </slot>
+          <slot name="headerRight" />
+        </div>
+      </slot>
+    </div>
 
     <y-table
-        ref="table"
-        class="flex-1"
-        :data="filterTableList"
-        v-bind="$attrs"
-        :checked="checked"
-        @current-change="currentRowChange"
-        @selection-change="selectionChange"
+      ref="table"
+      v-loading="loading"
+      class="flex-1"
+      :data="filterTableList"
+      v-bind="$attrs"
+      :checked="checked"
+      @current-change="currentRowChange"
+      @selection-change="selectionChange"
     >
-      <slot/>
+      <slot />
     </y-table>
 
     <slot name="tableFooter">
-      <div v-if="showPage || checked" class="flex-none row-between-center pt-smm">
+      <div
+        v-if="showPage || checked"
+        class="flex-none row-between-center pt-smm"
+      >
         <slot name="footerLeft">
           <div v-if="checked" class="ml-sm">
             已选 {{ checkedData.length }} 条
@@ -58,10 +47,11 @@
         </slot>
         <div v-if="showPage" class="flex-1 row-end">
           <y-pagination
-              @change="filterTableData"
-              v-model="pageable"
-              layout="total,sizes,prev,pager,next"
-              :page-sizes="pageSizes"
+            v-model="pageable"
+            background
+            layout="total, sizes, prev, pager, next, jumper"
+            :page-sizes="pageSizes"
+            @change="filterTableData"
           />
         </div>
       </div>
@@ -70,12 +60,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import ObjectUtil from '../../utils/ObjectUtil'
 import YPagination from '@/components/YComponent/YPageable/YPagination.vue'
 import Pageable from '@/components/YComponent/YPageable/Pageable'
 import PinyinUtil from '@/utils/PinyinUtil'
+import YSearch from '@/components/YComponent/YSearch/YSearch.vue'
 
 /**
  * @author 秦开远
@@ -84,7 +75,7 @@ import PinyinUtil from '@/utils/PinyinUtil'
  * 在数据源业务基础上，封装基础table
  */
 @Component({
-  components: { YPagination, YTable }
+  components: { YSearch, YPagination, YTable }
 })
 export default class DataTable extends Vue {
   $refs: {
@@ -92,37 +83,57 @@ export default class DataTable extends Vue {
   }
   @Model('change') model!: any
 
-  @Prop({ default: '数据列表' }) readonly title: string
+  @Prop({ default: '' }) readonly title: string
   @Prop({ default: false, type: Boolean }) readonly showTitle: string
   @Prop({ default: '检索' }) readonly searchTitle: string
   @Prop({ default: false, type: Boolean }) readonly checked: boolean
+  @Prop({ default: false, type: Boolean }) readonly loading: boolean
   @Prop() readonly tableData: any[]
 
   @Prop({ default: false, type: Boolean }) readonly showPage: boolean
   @Prop({ default: false, type: Boolean }) readonly showHeader: boolean
   @Prop({ default: '', type: [Array, String] }) readonly searchField: boolean
-  @Prop({ default: [10, 20, 50, 100], type: Array }) readonly pageSizes: number[]
+
+  hasHeaderSlot = false
+
+  get showTableHeader() {
+    return this.showHeader || this.hasHeaderSlot
+  }
+
+  @Prop({
+    default: () => {
+      return [10, 20, 50, 100]
+    }, type: Array
+  }) readonly pageSizes: number[]
   @Prop({
     default: () => {
       return {
         searchText: ''
       }
-    }, type: Object
-  }) readonly searchForm: any
+    },
+    type: Object
+  })
+  readonly searchForm: any
   @Prop({
     default(tableData: []) {
       return tableData.filter((item: object) => {
         if (this.searchField) {
           if (typeof this.searchField === 'string') {
             const content = item[this.searchField]
-            if (!this.searchForm.searchText || PinyinUtil.match(this.searchForm.searchText, content)) {
+            if (
+              !this.searchForm.searchText ||
+              PinyinUtil.match(this.searchForm.searchText, content)
+            ) {
               return true
             }
             return false
           } else {
             for (const itemKey in this.searchField) {
               const content = this.searchField[itemKey]
-              if (!this.searchForm.searchText || PinyinUtil.match(this.searchForm.searchText, content)) {
+              if (
+                !this.searchForm.searchText ||
+                PinyinUtil.match(this.searchForm.searchText, content)
+              ) {
                 return true
               }
             }
@@ -131,30 +142,36 @@ export default class DataTable extends Vue {
         } else {
           for (const itemKey in item) {
             const content = String(item[itemKey])
-            if (!this.searchForm.searchText || PinyinUtil.match(this.searchForm.searchText, content)) {
+            if (
+              !this.searchForm.searchText ||
+              PinyinUtil.match(this.searchForm.searchText, content)
+            ) {
               return true
             }
           }
           return false
         }
-
       })
-    }, type: Function
-  }) readonly tableDataFilter: Function
+    },
+    type: Function
+  })
+  readonly tableDataFilter: Function
+
   @Prop({
     default(tableData: []) {
       return tableData
-    }, type: Function
-  }) readonly tableDataFilterAppend: Function
-
-  pageable: Pageable = null
+    },
+    type: Function
+  })
+  readonly tableDataFilterAppend: Function
+  pageable: Pageable = new Pageable(1, 10)
 
   get checkedData() {
-    return this.tableData.filter(item => item.checked)
+    return this.tableData.filter((item) => item.checked)
   }
 
   getCheckedData() {
-    return this.tableData.filter(item => item.checked)
+    return this.tableData.filter((item) => item.checked)
   }
 
   filterTextInput(e) {
@@ -166,6 +183,12 @@ export default class DataTable extends Vue {
       this.filterTableList = [...this.tableData]
     }
     this.pageable = new Pageable(1, this.pageSizes[0])
+  }
+
+  mounted() {
+    if (this.$slots.header) {
+      this.hasHeaderSlot = true
+    }
   }
 
   @Watch('searchForm', { deep: true })
@@ -181,20 +204,29 @@ export default class DataTable extends Vue {
 
   @Watch('tableData')
   tableDataWatch() {
-    //table替换需要重置
+    // table替换需要重置
     this.pageable = new Pageable(1, this.pageSizes[0])
     this.filterTableData()
   }
 
-  filterTableList: any [] = []
+  reset() {
+    this.pageable = new Pageable(1, this.pageSizes[0])
+    this.searchForm.searchText = ''
+    this.filterTableData()
+  }
+
+  filterTableList: any[] = []
 
   // 默认搜索全字段
   filterTableData() {
-    let data: any[] = this.tableDataFilterAppend(this.tableDataFilter(this.tableData))
+    let data: any[] = this.tableDataFilterAppend(
+      this.tableDataFilter(this.tableData)
+    )
     if (this.showPage) {
       this.pageable.total = data.length
-      const startIndex = (this.pageable.currentPage - 1) * this.pageable.pageSize
-      const endIndex = this.pageable.currentPage * this.pageable.pageSize
+      const startIndex =
+        (this.pageable.pageNum - 1) * this.pageable.pageSize
+      const endIndex = this.pageable.pageNum * this.pageable.pageSize
       data = data.slice(startIndex, endIndex)
     }
     if (ObjectUtil.toJson(data) !== ObjectUtil.toJson(this.filterTableList)) {
@@ -210,7 +242,7 @@ export default class DataTable extends Vue {
     this.$refs.table.toggleRowSelection(row)
   }
 
-  /*checkAllSelection() {
+  /* checkAllSelection() {
     this.$refs.table.checkAllSelection()
   }
 
@@ -224,14 +256,29 @@ export default class DataTable extends Vue {
   }
 
   currentRowChange(currentRow: any) {
-    if (currentRow) {
-      this.change(currentRow)
-    }
+    this.change(currentRow)
   }
 
   @Emit()
   selectionChange() {
-    return this.tableData.filter(item => item.checked)
+    return this.tableData.filter((item) => item.checked)
+  }
+
+  get selectWidth() {
+    if (this.searchTitle.length > 1) {
+      return this.searchTitle.length * 15 + 10 + 'px'
+    } else {
+      return '40px'
+    }
   }
 }
 </script>
+<style lang="scss">
+#table_layout_control {
+  .el-input-group__prepend {
+    font-size: 14px;
+    background: white;
+    color: black;
+  }
+}
+</style>

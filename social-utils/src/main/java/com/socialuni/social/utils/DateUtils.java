@@ -15,6 +15,7 @@ import java.util.Date;
 public class DateUtils {
     public static final SimpleDateFormat simpleYearFormat = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat simpleSlashDateFormat = new SimpleDateFormat("yyyy/MM/dd");
     public static final SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static final SimpleDateFormat timeStrFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
@@ -49,6 +50,15 @@ public class DateUtils {
     public static String getBirthDateByDateStr(String dateStr) {
         try {
             return DateUtils.simpleDateFormat.format(DateUtils.simpleDateFormat.parse(dateStr));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getBirthDateBySlashDateStr(String dateStr) {
+        try {
+            return DateUtils.simpleDateFormat.format(DateUtils.simpleSlashDateFormat.parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
