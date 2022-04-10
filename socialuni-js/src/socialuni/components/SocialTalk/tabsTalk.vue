@@ -120,7 +120,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
 import TalkAPI from '../../api/TalkAPI'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'

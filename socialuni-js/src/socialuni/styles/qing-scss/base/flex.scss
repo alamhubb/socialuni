@@ -196,6 +196,12 @@
   align-items: flex-end;
 }
 
+.row-col-start {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
 .row-col-end {
   display: flex;
   flex-direction: row;
