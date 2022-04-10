@@ -9,9 +9,8 @@
             talk_tag tt,
         </if>
         <if test="circleId!=null">
-            talk_tag tt,
+            s_talk_circle tc,
         </if>
-        s_talk_circle tc,
         `user` u
         WHERE
         t.user_id = u.id
@@ -87,8 +86,10 @@
     <select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">
         SELECT t.id
         FROM
-        talk t,
-        s_talk_circle tc
+        <if test="circleId!=null">
+            s_talk_circle tc,
+        </if>
+        talk t
         WHERE
         t.user_id=#{userId}
         <if test="circleId!=null">

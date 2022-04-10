@@ -1,22 +1,21 @@
 <template>
   <el-button
     v-bind="$attrs"
+    @click="clickHandler"
     :disabled="btnDisabled"
-    :loading="!btnEnable && showLoading && btnDisabled"
-    v-on="$listeners"
-    @click="btnClick"
-  >
-    <slot />
+    :loading="!btnEnable && showLoading && btnDisabled">
+    <slot></slot>
   </el-button>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
+import CommonUtil from "@/utils/CommonUtil";
 
 @Component
 export default class YButton extends Vue {
-  @Prop({ default: false, type: Boolean }) disabled: boolean
-  @Prop({ default: true, type: Boolean }) showLoading: boolean
+  @Prop({default: false, type: Boolean}) disabled: boolean
+  @Prop({default: true, type: Boolean}) showLoading: boolean
   @Prop({
     default: () => {
       return
@@ -30,9 +29,12 @@ export default class YButton extends Vue {
     return this.disabled || !this.btnEnable
   }
 
+  clickHandler = CommonUtil.debounce(this.btnClick, 1000)
+
   async btnClick() {
     if (this.btnEnable) {
       this.btnEnable = false
+      this.clickEmit()
       try {
         if (typeof this.click === 'function') {
           await this.click()
@@ -52,14 +54,25 @@ export default class YButton extends Vue {
         // 只有方法正常执行完毕才会触发click
         this.clickAfter()
       } finally {
+        await CommonUtil.setTimeout()
         this.btnEnable = true
       }
     }
   }
 
+  //需要有两个返回，第一个结果
+  //第二个，解除禁用，每次点击都延迟一秒解禁可以。 接口返回后，延迟一秒，解除禁用
+
+
+  @Emit('click')
+  clickEmit() {
+    return null
+  }
+
+
   @Emit()
   clickAfter() {
-    return
+    return null
   }
 }
 

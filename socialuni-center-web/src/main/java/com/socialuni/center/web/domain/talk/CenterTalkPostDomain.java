@@ -17,6 +17,7 @@ import com.socialuni.social.sdk.entity.content.SocialContentAddEntity;
 import com.socialuni.social.sdk.repository.community.TagRepository;
 import com.socialuni.social.sdk.repository.community.TalkRepository;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +28,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Component
@@ -41,9 +44,26 @@ public class CenterTalkPostDomain {
     SocialContentAddEntity socialContentAddEntity;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
 
         String content = talkPostQO.getContent();
+
+        //是否包含小于18岁的内容
+        if (StringUtils.isNotEmpty(content)) {
+            String reg = "\\d+";//定义正则表达式
+            //编译正则表达式
+            Pattern patten = Pattern.compile(reg);
+            // 指定要匹配的字符串
+            Matcher matcher = patten.matcher(content);
+            //此处find()每次被调用后，会偏移到下一个匹配
+            while (matcher.find()) {
+                //获取当前匹配的值
+                String numStr = matcher.group();
+                if (BirthdayAgeUtil.ageBetween10to18Str(numStr)) {
+                    throw new SocialBusinessException("禁止发布包含小于18岁未成年的内容");
+                }
+            }
+        }
 
         if (StringUtils.isEmpty(content) && CollectionUtils.isEmpty(talkPostQO.getImgs())) {
             throw new SocialParamsException("不能发布文字和图片均为空的动态");
@@ -51,7 +71,6 @@ public class CenterTalkPostDomain {
         if (content.length() > 200) {
             throw new SocialParamsException("动态最多支持200个字，请精简动态内容");
         }
-
 
         // 查询的时候筛选
         //系统管理员则不校验规则,生产环境才校验
@@ -88,7 +107,7 @@ public class CenterTalkPostDomain {
         TagDO devTagDO = tagRepository.findFirstByDevId(devId);
 
         List<String> tagNames = talkPostQO.getTagNames();
-        if (tagNames == null) {
+        if (tagNames == null || (tagNames.size() == 1 && tagNames.get(0).equals("添加话题"))) {
             tagNames = new ArrayList<>();
         }
         tagNames.add(devTagDO.getName());

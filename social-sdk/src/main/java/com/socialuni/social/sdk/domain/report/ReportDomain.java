@@ -134,7 +134,7 @@ public class ReportDomain {
 
 
     @Transactional
-    public ResultRO<Void> userReportContent(SocialReportAddQO socialReportAddQO, BaseModelDO modelDO, Integer requestUserId, Integer devId) {
+    public ResultRO<String> userReportContent(SocialReportAddQO socialReportAddQO, BaseModelDO modelDO, Integer requestUserId, Integer devId) {
         //这里之后才能校验
 
         // 设置model
@@ -217,6 +217,6 @@ public class ReportDomain {
         keywordsTriggerDetailRepository.saveAll(keywordsTriggers);*/
 
         //必须要单独保存，涉及到缓存
-        return new ResultRO<>(resultRO);
+        return resultRO;
     }
 }

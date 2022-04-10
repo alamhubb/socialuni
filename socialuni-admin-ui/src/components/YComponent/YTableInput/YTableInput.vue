@@ -1,5 +1,5 @@
 <template>
-  <el-table-column
+  <y-table-column
     :label="label||prop"
     v-bind="$attrs"
   >
@@ -8,12 +8,12 @@
         v-model="row[prop]"
         :readonly="readonly"
         size="small"
-        placeholder="请输入"
+        :placeholder="placeholder"
         @click.native.stop
         v-on="$listeners"
       />
     </template>
-  </el-table-column>
+  </y-table-column>
 </template>
 
 <script lang="ts">
@@ -35,7 +35,7 @@ export default class YTableInput extends Vue {
   @Prop() readonly propFun: Function
   @Prop() readonly label: string
   @Prop() readonly labelClass: string
-  @Prop({ default: '请选择' }) readonly hint: string
+  @Prop({ default: '请输入' }) readonly placeholder: string
   @Prop() readonly readonly: boolean
 }
 </script>

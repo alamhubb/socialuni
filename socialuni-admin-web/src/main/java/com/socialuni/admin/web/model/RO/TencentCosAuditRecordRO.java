@@ -4,16 +4,13 @@ import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.base.CommonContentBaseDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-public class TencentCosAuditRecordRO extends CommonContentBaseDO {
+public class TencentCosAuditRecordRO {
     private Boolean checked;
     private Integer id;
     //唯一ID标识。

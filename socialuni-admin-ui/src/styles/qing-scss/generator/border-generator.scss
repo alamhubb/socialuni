@@ -31,6 +31,22 @@
   }
 }
 
+.by {
+  border-top: $border-base;
+  border-bottom: $border-base;
+}
+
+.bx {
+  border-left: $border-base;
+  border-right: $border-base;
+}
+
+@each $directionKey, $directionValue in $direction-map {
+  .b#{''+$directionKey+''} {
+    border-#{''+$directionValue}: $border-base;
+  }
+}
+
 //单设置宽度
 //为什么有横杠，因为存在l1这种值
 @for $index from 1 through 10 {
@@ -52,10 +68,6 @@
   }
 
   @each $directionKey, $directionValue in $direction-map {
-    .b#{''+$directionKey+''} {
-      border-#{''+$directionValue}: $border-base;
-    }
-
     .b#{''+$directionKey+''}-#{''+$index+''} {
       border-#{''+$directionValue}: $border-base;
       border-#{''+$directionValue+''}-width: #{''+$index}px !important;

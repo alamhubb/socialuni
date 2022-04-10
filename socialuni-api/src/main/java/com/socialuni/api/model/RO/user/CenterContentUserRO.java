@@ -15,12 +15,14 @@ public class CenterContentUserRO extends CenterListUserRO {
     //是否被对方关注
     private Boolean hasBeFollowed;
     private Boolean isMine;
+    private Boolean identityAuth;
 
     public CenterContentUserRO(CenterContentUserRO centerContentUserRO) {
         super(centerContentUserRO);
         this.hasFollowed = centerContentUserRO.getHasFollowed();
         this.hasBeFollowed = centerContentUserRO.getHasBeFollowed();
         this.isMine = centerContentUserRO.getIsMine();
+        this.identityAuth = centerContentUserRO.getIdentityAuth();
     }
 
     public CenterContentUserRO(CenterListUserRO centerListUserRO, SocialContentUserRO userRO) {
@@ -28,6 +30,7 @@ public class CenterContentUserRO extends CenterListUserRO {
         this.hasFollowed = userRO.getHasFollowed();
         this.hasBeFollowed = userRO.getHasBeFollowed();
         this.isMine = userRO.getIsMine();
+        this.identityAuth = userRO.getIdentityAuth();
     }
 
     public CenterContentUserRO(SocialContentUserRO userRO) {
@@ -35,5 +38,6 @@ public class CenterContentUserRO extends CenterListUserRO {
         this.hasFollowed = userRO.getHasFollowed();
         this.hasBeFollowed = userRO.getHasBeFollowed();
         this.isMine = userRO.getIsMine();
+        this.identityAuth = userRO.getIdentityAuth();
     }
 }

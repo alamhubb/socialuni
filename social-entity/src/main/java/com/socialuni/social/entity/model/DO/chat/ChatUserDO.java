@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "chatUser", uniqueConstraints = {
+@Table(name = "s_chat_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"userId", "chat_id"}),
         @UniqueConstraint(columnNames = {"userId", "receiveUserId"})
 })

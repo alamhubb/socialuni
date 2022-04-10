@@ -10,13 +10,17 @@ import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthPreCheckRO;
+import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthRO;
 import com.socialuni.social.sdk.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.domain.user.SocialEditUserDomain;
+import com.socialuni.social.sdk.platform.tencent.TencentCloud;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +59,7 @@ public class CenterUserService {
 
 
     public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
         SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
@@ -64,7 +68,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
@@ -74,7 +78,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
 
         Integer userImgId = UnionIdDbUtil.getUserImgIdByUid(centerUserImgDeleteQO.getUserImgId());
 
@@ -83,5 +87,14 @@ public class CenterUserService {
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         return ResultRO.success(centerMineUserDetailRO);
+    }
+
+    public ResultRO<SocialUserIdentityAuthPreCheckRO> identityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
+        Integer resScore = TencentCloud.imgAuthGetScore(socialUseIdentityAuthQO.getIdImgUrl(), socialUseIdentityAuthQO.getSelfieImgUrl());
+        return null;
+    }
+
+    public ResultRO<SocialUserIdentityAuthRO> identityAuth(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
+        return null;
     }
 }

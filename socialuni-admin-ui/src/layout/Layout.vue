@@ -3,10 +3,10 @@
   <div class="h100p flex-col">
     <nav-bar />
     <div class="flex-row flex-1 overflow-hidden">
-      <nav-menu class="w200" />
+      <nav-menu class="w200 flex-none" />
       <div class="flex-1 overflow-auto pd">
         <transition name="fade-transform" mode="out-in">
-          <router-view :key="$route.path" />
+          <router-view :key="$route.path" class="h100p" />
         </transition>
       </div>
     </div>

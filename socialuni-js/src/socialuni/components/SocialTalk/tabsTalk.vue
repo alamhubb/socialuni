@@ -40,7 +40,7 @@
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <talk-swipers v-if="talkTabs[swiperIndex].type === 'home' && configShowSwipers"></talk-swipers>
 
-              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+<!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
                 <div class="row-between-center mb-sm">
                   <div>
                     圈主：xxxx
@@ -53,7 +53,7 @@
                 <div class="row-col-center">
                   小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
                 </div>
-              </div>
+              </div>-->
 
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">

@@ -1,7 +1,7 @@
 <template>
   <el-pagination
     v-bind="$attrs"
-    :current-page="pageable.currentPage"
+    :current-page="pageable.pageNum"
     :page-size="pageable.pageSize"
     :total="pageable.total"
     @size-change="handleSizeChange"
@@ -28,7 +28,7 @@ export default class YPagination extends Vue {
   }
 
   handleCurrentChange(val) {
-    this.pageable.currentPage = val
+    this.pageable.pageNum = val
     this.change(this.pageable)
   }
 }

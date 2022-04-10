@@ -28,7 +28,7 @@ public class CenterCommentDeleteDomain {
      * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
      */
     public ResultRO<Void> deleteComment(CenterCommentDeleteQO commentDeleteQO) {
-        UserDO userDO = CenterUserUtil.getMineUserAllowNull();
+        UserDO userDO = CenterUserUtil.getMineUser();
 
         Integer commentId = UnionIdDbUtil.getCommentIdByUid(commentDeleteQO.getCommentId());
 

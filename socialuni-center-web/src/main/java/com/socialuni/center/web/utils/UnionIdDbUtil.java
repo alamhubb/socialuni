@@ -281,7 +281,7 @@ public class UnionIdDbUtil {
     }
 
     public static String createTalkUid(Integer modeId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.talk, modeId, mineId);
     }
@@ -291,12 +291,12 @@ public class UnionIdDbUtil {
     }
 
     public static String createCommentUid(Integer modeId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         return createCommentUid(modeId, mineId);
     }
 
     public static String createCommentUid(String modeId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         return addUnionIdDO(ContentType.comment, modeId, mineId);
     }
 
@@ -311,13 +311,13 @@ public class UnionIdDbUtil {
     }
 
     public static String createUserUid(Integer modeId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.user, modeId, mineId);
     }
 
     public static String createUserUid(String modeId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.user, modeId, mineId);
     }
@@ -339,7 +339,7 @@ public class UnionIdDbUtil {
     }
 
     public static String createTalkImgUid(Integer contentId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.talkImg, Integer.valueOf(contentId), mineId);
     }
@@ -365,7 +365,7 @@ public class UnionIdDbUtil {
     }
 
     public static String createUserImgUid(String modeId) {
-        Integer mineId = CenterUserUtil.getMineUserId();
+        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.userImg, modeId, mineId);
     }

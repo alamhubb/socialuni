@@ -1,5 +1,6 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
@@ -24,11 +25,16 @@ public class CenterUserUtil {
         CenterUserUtil.thirdUserRepository = thirdUserRepository;
     }
 
-    public static Integer getMineUserId() {
+    public static Integer getMineUserIdAllowNull() {
         UserDO user = CenterUserUtil.getMineUserAllowNull();
         if (user == null) {
             return null;
         }
+        return user.getId();
+    }
+
+    public static Integer getMineUserId() {
+        UserDO user = CenterUserUtil.getMineUser();
         return user.getId();
     }
 
@@ -42,17 +48,26 @@ public class CenterUserUtil {
 
     public static UserDO getMineUserAllowNull() {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
-        return getMineUserAllowNull(tokenDO);
+        return getMineUser(tokenDO);
     }
+
+    public static UserDO getMineUser() {
+        UserDO user = CenterUserUtil.getMineUserAllowNull();
+        if (user == null) {
+            throw new SocialNotLoginException();
+        }
+        return user;
+    }
+
 
     public static boolean isMine(Integer userId) {
         Integer mineUserId = CenterUserUtil.getMineUserId();
         return userId.equals(mineUserId);
     }
 
-    public static UserDO getMineUserAllowNull(String token) {
+    public static UserDO getMineUser(String token) {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO(token);
-        return getMineUserAllowNull(tokenDO);
+        return getMineUser(tokenDO);
     }
 
     public static Integer getMineUserIdInterceptor() {
@@ -77,7 +92,7 @@ public class CenterUserUtil {
         return user;
     }
 
-    private static UserDO getMineUserAllowNull(ThirdUserTokenDO tokenDO) {
+    private static UserDO getMineUser(ThirdUserTokenDO tokenDO) {
         if (tokenDO == null) {
             return null;
         }
@@ -96,7 +111,7 @@ public class CenterUserUtil {
     }
 
     public static String getMineThirdUserId() {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        UserDO mineUser = CenterUserUtil.getMineUser();
         return CenterUserUtil.getMineThirdUserId(mineUser.getId());
     }
 
@@ -110,7 +125,7 @@ public class CenterUserUtil {
 
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = CenterUserUtil.getMineUserAllowNull();
+        UserDO userDO = CenterUserUtil.getMineUser();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 

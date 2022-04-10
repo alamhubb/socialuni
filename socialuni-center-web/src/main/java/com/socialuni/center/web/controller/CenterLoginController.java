@@ -21,7 +21,7 @@ public class CenterLoginController implements SocialuniLoginAPI<CenterMineUserDe
 
     @Override
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginData) {
-        throw new SocialBusinessException("不支持的登录方式");
+        throw new SocialBusinessException("不支持三方应用使用非清池渠道直接登录");
     }
 
     @Override

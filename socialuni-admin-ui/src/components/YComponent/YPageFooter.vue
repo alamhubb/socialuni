@@ -1,23 +1,22 @@
 <template>
   <div class="row-between-center">
     <div class="flex-row">
-      <slot name="actionLeft" />
+      <slot name="actionLeft">
+
+      </slot>
     </div>
     <div class="flex-row">
       <slot name="actionRight">
-        <el-button v-show="!hideCancel" @click="cancel">
-          {{ cancelTitle }}
-        </el-button>
-        <slot name="actionRightCenter" />
+        <el-button v-show="!hideCancel" @click="cancel">{{ cancelText }}</el-button>
+        <slot></slot>
         <y-button
           v-show="!hideConfirm"
           :click="confirm"
-          type="primary"
-          size="small"
-          :disabled="disabled"
+          @click="emitConfirm"
           @click-after="confirmAfter"
-        >
-          {{ confirmTitle }}
+          :disabled="disabled"
+          class="yy-btn">
+          {{ confirmText }}
         </y-button>
       </slot>
     </div>
@@ -34,9 +33,10 @@ import YButton from '@/components/YComponent/YButton.vue'
 export default class YPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) hideConfirm
   @Prop({ default: false, type: Boolean }) hideCancel
-  @Prop({ default: '确定' }) confirmTitle: boolean
-  @Prop({ default: '取消' }) cancelTitle: boolean
+  @Prop({ default: '确 定' }) confirmText: string
+  @Prop({ default: '取 消' }) cancelText: string
   @Prop({ default: false, type: Boolean }) disabled: boolean
+  @Prop({ default: false, type: Boolean }) cancelDisabled: boolean
   @Prop({
     default: () => {
       return
@@ -44,8 +44,13 @@ export default class YPageFooter extends Vue {
     type: Function
   }) confirm: () => Promise<void> | Array<() => Promise<void> | any>
 
-  @Emit()
+  @Emit('cancel')
   private cancel() {
+    return
+  }
+
+  @Emit('confirm')
+  emitConfirm() {
     return
   }
 

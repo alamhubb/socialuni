@@ -47,7 +47,8 @@
               <!-- 只要不为QQ小程序平台都可以使用微信登录-->
               <template v-if="!user">
                 <button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="phoneLogin"
-                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none mt w100p" :class="loginButtonDisabled?'':'bg-click'"
+                        class="h40 cu-btn lg bg-gradual-phone  row-all-center bd-none mt w100p"
+                        :class="loginButtonDisabled?'':'bg-click'"
                 >
                   <q-icon custom-prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
                   手机号登录
@@ -195,7 +196,7 @@ export default class QcLogin extends Vue {
     if (socialOAuthModule.isThreeAuth) {
       PageUtil.toOAuthPage()
     } else {
-      PageUtil.toTalkPage()
+      RouterUtil.goBackOrHome()
     }
   }
 
@@ -290,12 +291,13 @@ export default class QcLogin extends Vue {
         } else {
           PageUtil.toPhonePage()
         }
-      } else {
+      }
+      /*else {
         //有手机号才直接返回，没手机号继续提示绑定手机号
         if (this.hasPhoneNum) {
           this.goBackPage()
         }
-      }
+      }*/
     })
   }
 

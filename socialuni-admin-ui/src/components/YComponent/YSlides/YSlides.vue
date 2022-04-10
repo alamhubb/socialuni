@@ -6,7 +6,7 @@
       :key="index"
       :style="{'min-height': index === data.length - 1 ? rightLastHeightPx : ''}"
     >
-      <slot name="default" :item="item" />
+      <slot name="default" :item="item"/>
     </div>
   </div>
 </template>

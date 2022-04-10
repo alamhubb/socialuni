@@ -16,14 +16,13 @@ public class CenterReportService {
     @Resource
     SoicialReportAddDomain soicialReportAddDomain;
 
-    public ResultRO<Void> addReport(CenterReportAddQO centerReportAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+    public ResultRO<String> addReport(CenterReportAddQO centerReportAddQO) {
+        UserDO mineUser = CenterUserUtil.getMineUser();
 
         Integer contentId = UnionIdDbUtil.getResultByUnionId(centerReportAddQO.getReportContentType(), centerReportAddQO.getContentId());
 
         SocialReportAddQO socialReportAddQO = centerReportAddQO.toSocialQO(contentId);
 
-        soicialReportAddDomain.addReport(mineUser, socialReportAddQO);
-        return new ResultRO<>();
+        return soicialReportAddDomain.addReport(mineUser, socialReportAddQO);
     }
 }
