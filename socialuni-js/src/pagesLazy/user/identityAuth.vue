@@ -88,8 +88,8 @@
       </div>
 
       <view class="flex-row mt-20px px">
-        <q-button class="flex-1" primary :click="idAuthPreCheck">预校验</q-button>
-        <q-button class="flex-1 ml" success :click="identityAuth">认证</q-button>
+        <q-button class="flex-1" primary :disabled="authBtnDisabled" @click="idAuthPreCheck">预校验</q-button>
+        <q-button class="flex-1 ml" success :disabled="authBtnDisabled" @click="identityAuth">认证</q-button>
         <!--      <q-button success @click="identityAuth" :disabled="!imgFile || authBtnDisabled">认证</q-button>-->
       </view>
 
@@ -142,6 +142,10 @@ export default class IdentityAuthView extends Vue {
   preCheckResult: SocialUserIdentityAuthPreCheckRO = null
   idInfoPreCheckResult: TencentCosIdInfoRO = null
 
+  clearPreCheckResult () {
+    this.preCheckResult = null
+  }
+
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */
@@ -164,14 +168,14 @@ export default class IdentityAuthView extends Vue {
     } catch (e) {
       this.clearIdInfoPreCheckResult()
     } finally {
-      this.clearCheckResult()
+      this.clearPreCheckResult()
       UniUtil.hideLoading()
     }
   }
 
   clearIdInfoPreCheckResult () {
     this.idInfoPreCheckResult = null
-    this.clearCheckResult()
+    this.clearPreCheckResult()
   }
 
   clearIdImgFile () {
@@ -181,7 +185,7 @@ export default class IdentityAuthView extends Vue {
 
   clearImgFile () {
     this.imgFile = null
-    this.clearCheckResult()
+    this.clearPreCheckResult()
   }
 
   async chooseImg () {
@@ -194,13 +198,9 @@ export default class IdentityAuthView extends Vue {
       imgFile.src = cosAuthRO.uploadImgPath + 'userAuthImg/userSelfImg/' + imgFile.src
       TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)
     } finally {
-      this.clearCheckResult()
+      this.clearPreCheckResult()
       UniUtil.hideLoading()
     }
-  }
-
-  clearCheckResult () {
-    this.preCheckResult = null
   }
 
   async identityAuth () {
@@ -208,9 +208,16 @@ export default class IdentityAuthView extends Vue {
     if (!this.preCheckResult) {
       ToastUtil.error('请先点击预校验再进行认证')
     }
-    const { data } = await SocialUserIdentityAPI.userIdentityAuthAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
-    AlertUtil.hint(data)
-    socialUserModule.getMineUserAction()
+    this.authBtnDisabled = true
+    UniUtil.showLoading('认证中')
+    try {
+      const { data } = await SocialUserIdentityAPI.userIdentityAuthAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
+      AlertUtil.hint(data)
+      socialUserModule.getMineUserAction()
+    } finally {
+      UniUtil.hideLoading()
+      this.authBtnDisabled = false
+    }
   }
 
   previewImage (e) {
@@ -238,15 +245,17 @@ export default class IdentityAuthView extends Vue {
   }
 
   async idAuthPreCheck () {
-    this.clearCheckResult()
+    this.idAuthCheck()
     UniUtil.showLoading('校验中')
+    this.authBtnDisabled = true
+    this.clearPreCheckResult()
     try {
       //研究promise setTimeout then resole
-      this.idAuthCheck()
       const res = await SocialUserIdentityAPI.userIdentityAuthPreCheckAPI(new SocialUserIdentityAuthQO(this.userIdImgFile.src, this.imgFile.src))
       this.preCheckResult = res.data
     } finally {
       UniUtil.hideLoading()
+      this.authBtnDisabled = false
     }
   }
 

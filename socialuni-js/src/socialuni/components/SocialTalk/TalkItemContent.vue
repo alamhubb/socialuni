@@ -29,7 +29,7 @@
           {{ talk.updateTime| formatTime }}
         </div>
         <view class="q-tag ml-sm">
-          <q-icon icon="map-fill" class="color-purple mr-nn" size="14"></q-icon>
+          <q-icon icon="map-fill" class="color-purple mr-mn" size="14"></q-icon>
           <!--        有市区的名称就不显示省的名称-->
           <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
           <text v-if="talk.district.cityName">

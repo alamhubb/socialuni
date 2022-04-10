@@ -14,16 +14,14 @@
         </div>
         <q-search class="flex-1 mr-sm" @click.native="openTagSearchVue">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
-          <view v-if="selectTagName" class="flex-row flex-auto">
+          <view v-if="selectTagName" class="row-col-center flex-auto" @click.stop="">
             <view class="q-tag round bg-green-plain light row-all-center">
               {{ selectTagName }}
             </view>
+            <q-icon class="mr-sm text-gray row-all-center" icon="close" @click="deleteTag"></q-icon>
           </view>
           <input v-else :adjust-position="false" type="text"
                  placeholder="选择话题" confirm-type="search"/>
-          <q-icon v-if="selectTagName" class="mr-sm text-gray row-all-center" icon="close"
-                  @click.native.stop="deleteTag"
-          ></q-icon>
         </q-search>
         <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
                   <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
