@@ -5,6 +5,7 @@ import AlertUtil from './AlertUtil'
 import ToastUtil from './ToastUtil'
 import PageUtil from './PageUtil'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
+import UniUtil from '@/socialuni/utils/UniUtil'
 
 export default class MsgUtil {
   static unBindPhoneNum () {
@@ -26,12 +27,20 @@ export default class MsgUtil {
   }
 
   static unLoginMessage () {
-    AlertUtil.info(socialConfigModule.systemError601)
-      .then(() => {
-        // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
-        PageUtil.toMinePage()
-      })
+    if (!socialUserModule.user) {
+      AlertUtil.info(socialConfigModule.systemError601)
+        .then(() => {
+          // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
+          PageUtil.toMinePage()
+        })
+      throw new Error('未登录')
+    }
   }
+
+  static showUploadLoading () {
+    UniUtil.showLoading('上传中')
+  }
+
 
   static systemErrorMsg () {
     AlertUtil.hint(socialConfigModule.systemError604)
@@ -43,9 +52,22 @@ export default class MsgUtil {
     })
   }
 
-  static unIdentityAuth () {
-    AlertUtil.confirm('请对照片进行认证，才能进行此项操作', '前往认证').then(() => {
-      PageUtil.toMinePage()
+  static uploadImgNeedAuthMsg () {
+    AlertUtil.confirm('完成成年认证，才能发布包含人物图像的图片，是否前往进行成年认证', '前往').then(() => {
+      PageUtil.toIdentityAuthPage()
+    })
+  }
+
+  static identityAuthHint () {
+    this.unLoginMessage()
+    let msg
+    if (socialUserModule.user.identityAuth) {
+      msg = '您已完成成年认证'
+    } else {
+      msg = '未获得成年认证标识'
+    }
+    AlertUtil.confirm(msg + '，是否继续前往成年认证页面', '前往').then(() => {
+      PageUtil.toIdentityAuthPage()
     })
   }
 

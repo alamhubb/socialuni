@@ -3,6 +3,7 @@ export default class DomFile {
   // public src: string
   public src: string
   public fileName: string
+  public needAuth: boolean = false
 
   //小程序只有path和size
   path: string

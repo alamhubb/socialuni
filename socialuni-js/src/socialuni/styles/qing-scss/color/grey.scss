@@ -1,17 +1,17 @@
-$color-grey1: #141414;
-$color-grey2: #1f2329;
-$color-grey3: #282f3d;
-$color-grey4: #333333;
-$color-grey5: #434343;
-$color-grey6: #666666;
-$color-grey7: #999999;
-$color-grey8: #bfbfbf;
-$color-grey9: #d9d9d9;
-$color-grey10: #f0f0f0;
-$color-grey11: #f5f5f5;
+$color-grey1: #141414 !default;
+$color-grey2: #1f2329 !default;
+$color-grey3: #282f3d !default;
+$color-grey4: #333333 !default;
+$color-grey5: #434343 !default;
+$color-grey6: #666666 !default;
+$color-grey7: #999999 !default;
+$color-grey8: #bfbfbf !default;
+$color-grey9: #d9d9d9 !default;
+$color-grey10: #f0f0f0 !default;
+$color-grey11: #f5f5f5 !default;
 
-$color-grey: $color-grey3;
-$color-grey-light: $color-grey8;
+$color-grey: $color-grey3 !default;
+$color-grey-light: $color-grey8 !default;
 
 $colors-grey: (
         grey:$color-grey,
@@ -27,4 +27,4 @@ $colors-grey: (
         grey10:$color-grey10,
         grey11:$color-grey11,
         grey-light:$color-grey-light,
-);
+)

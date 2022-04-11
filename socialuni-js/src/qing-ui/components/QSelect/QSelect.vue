@@ -32,7 +32,6 @@ export default class QSelect extends Vue {
   get pickerItemIndex () {
     //@ts-ignore
     const pickerItemIndex = this.list.findIndex(item => item[this.valueName] === this.value)
-    console.log(pickerItemIndex)
     return pickerItemIndex
   }
 

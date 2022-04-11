@@ -1,9 +1,4 @@
 import TokenUtil from './TokenUtil'
-import NotifyVO from '../model/NotifyVO'
-import ObjectUtil from './ObjectUtil'
-import { socialChatModule, socialNotifyModule } from '../store'
-import NotifyType from '../constant/NotifyType'
-import AppConfig from '../config/AppConfig'
 import CommonUtil from './CommonUtil'
 
 export default class WebsocketUtil {

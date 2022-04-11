@@ -5,7 +5,7 @@ export default class AppMsg {
   static readonly notMpDisablePayMsg: string = '非小程序平台暂不支持此类支付功能'
   static readonly notPayMsg: string = '因平台政策原因暂不支持支付功能'
 
-  static readonly contactServiceMsg: string = '，请联系客服QQ：491369310'
+  static readonly contactServiceMsg: string = '，请联系客服微信：491369310'
 
   static readonly vipOpenFailMsg: string = '开通会员失败' + AppMsg.contactServiceMsg
 
@@ -20,4 +20,5 @@ export default class AppMsg {
   static readonly identityAuthSuccessMsg: string = '认证成功，是否回到个人信息页面'
 
   static readonly imgSizeNotGt10MBMsg: string = '图片大小不能超过10MB！'
+  static readonly imgSizeNotGt50MBMsg: string = '图片大小不能超过50MB！'
 }

@@ -148,6 +148,10 @@ export default class TalkOperate extends Vue {
 
   // 前端删除comment
   frontDeleteComment () {
+    console.log('qiantashanchu')
+    console.log(this.talk.comments)
+    console.log(this.comment.id)
+    console.log(this.talk.comments.findIndex(comment => comment.id === this.comment.id))
     this.talk.comments.splice(this.talk.comments.findIndex(comment => comment.id === this.comment.id), 1)
   }
 
@@ -160,7 +164,6 @@ export default class TalkOperate extends Vue {
   }
 
   openReportDialog () {
-    console.log('举报')
     if (this.user) {
       this.commentActionClose()
       socialTalkModule.reportContentType = ReportContentType.comment

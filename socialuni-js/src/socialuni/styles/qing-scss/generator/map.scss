@@ -1,5 +1,6 @@
 $text-none: 0;
 $text-nn: 12px;
+$text-nm: 12px;
 $text-mn: 12px;
 $text-mnn: 12px;
 $text-xs: 12px;
@@ -21,7 +22,8 @@ $text-ssl: 30px;
 
 // space
 $space-none: 0;
-$space-nn: 2px;
+$space-nn: 1px;
+$space-nm: 2px;
 $space-mn: 3px;
 $space-mnn: 4px;
 $space-xs: 5px;
@@ -43,23 +45,28 @@ $space-ssl: 90px;
 $space-hun: 100px;
 
 // mini，小，默认、大
-$box-nn: $space-mn $space-xs;
-$box-mn: $space-mnn $space-xss;
-$box-sm: $space-xs $space-sm;
-$box-df: $space-sm $space-smm;
-$box-md: $space-smm $space-df;
+$box-nn: $space-nm $space-xs;
+$box-nm: $space-nm $space-xs;
+$box-mn: $space-mn $space-xss;
+$box-sm: $space-mnn $space-xss;
+$box-df: $space-xs $space-sm;
+$box-md: $space-sm $space-smm;
+$box-lg: $space-smm $space-df;
 
 $box-map: (
         nn: $box-nn,
+        nm: $box-nm,
         mn: $box-mn,
         sm: $box-sm,
         df: $box-df,
-        md: $box-md
+        md: $box-md,
+        lg: $box-lg
 );
 
 $padding-map: (
         none: $space-none,
         nn: $space-nn,
+        nm: $space-nm,
         mn: $space-mn,
         mnn: $space-mnn,
         xs: $space-xs,
@@ -82,6 +89,7 @@ $padding-map: (
 $text-map: (
         none: $text-none,
         nn: $text-nn,
+        nm: $text-nm,
         mn: $text-mn,
         mnn: $text-mnn,
         xs: $text-xs,
@@ -105,6 +113,7 @@ $text-map: (
 $size-map: (
         none: none,
         nn: nn,
+        nm: nm,
         mn: mn,
         mnn: mnn,
         xs: xs,

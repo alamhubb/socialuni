@@ -4,7 +4,7 @@
       <view class="flex-row ml-sm">
         <view class="text-black text-md font-bold">城市筛选</view>
         <view class="row-col-center text-orange font-bold px bg-click" @click="getLocation">
-          <q-icon icon="map-fill" class="mr-nn" size="16"></q-icon>
+          <q-icon icon="map-fill" class="mr-nm" size="16"></q-icon>
           定位
         </view>
       </view>
@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Model, Vue } from 'vue-property-decorator'
 import DistrictVO from '../../model/DistrictVO'
 import { socialLocationModule, socialLocationStore } from '../../store'
 import LocationUtil from '../../utils/LocationUtil'

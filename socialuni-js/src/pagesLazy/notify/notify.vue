@@ -36,19 +36,18 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
+import { Component, Vue } from 'vue-property-decorator'
 import UnreadNotifyVO from '@/socialuni/model/notify/UnreadNotifyVO'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PagePath from '@/socialuni/constant/PagePath'
 import ImgUtil from '@/socialuni/utils/ImgUtil'
-import { socialAppStore, socialNotifyStore } from '@/socialuni/store'
+import { socialNotifyStore } from '@/socialuni/store'
 
 
 /**
- * todo 需要支持发表情,数据库字段，img字段img改为了src, 所有被封禁的用户允许登录查看，但是不允许操作，提示账号已被封禁
  * 发说说的时候限制字符长度 140个字
  * 取消身份认证功能
+ * todo 需要支持发表情,数据库字段，img字段img改为了src, 所有被封禁的用户允许登录查看，但是不允许操作，提示账号已被封禁
  */
 @Component
 export default class NotifyPage extends Vue {

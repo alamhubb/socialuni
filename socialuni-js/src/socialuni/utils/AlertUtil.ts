@@ -88,19 +88,10 @@ export default class AlertUtil {
   }
 
   public static error (msg: string, title?: string) {
-    return new Promise((resolve, reject) => {
-      uni.showModal({
-        title: title || '错误',
-        content: msg,
-        showCancel: false,
-        success (res) {
-          if (res.confirm) {
-            resolve(null)
-          } else if (res.cancel) {
-            reject()
-          }
-        }
-      })
+    uni.showModal({
+      content: msg,
+      showCancel: false
     })
+    throw new Error(msg)
   }
 }

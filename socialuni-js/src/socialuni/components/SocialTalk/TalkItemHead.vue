@@ -1,34 +1,24 @@
 <template>
   <view class="card-title pb-10" @click="toUserDetailVue">
     <image
-      class="card-title-avatar"
+      class="size40 bd-radius mr-sm"
       mode="aspectFill"
       :src="talk.user.avatar"
     />
     <view class="row-between flex-auto">
-      <view>
-        <view class="h25 row-col-center">
-          <text class="text-md">{{ talk.user.nickname }}</text>
+      <view class="col-center">
+        <view class="h20 row-col-start">
+          <text class="text-df font-bold">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
-            <div v-if="talk.user.gender==='girl'" class="q-box-nn q-tag-error ml-sm">
-              {{ talk.user.age }}
-              <q-icon class="ml-nn"
-                      size="12"
-                      :icon="getGenderIcon(talk.user)"/>
-            </div>
-            <div v-else class="q-box-nn q-tag-blue ml-sm">
-              {{ talk.user.age }}
-              <q-icon class="ml-nn"
-                      size="12"
-                      :icon="getGenderIcon(talk.user)"/>
-            </div>
+            <social-gender-tag class="ml-xss" :user="talk.user"></social-gender-tag>
+            <!--              <q-icon class="color-blue" size="18" icon="level" @click.native.stop="toIdentityAuth"/>-->
           </template>
 
           <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"
                           :class="[getGenderBgColor(talk.user)]">
                       {{ talk.user.age }}
-                      <q-icon class="ml-nn"
+                      <q-icon class="ml-nm"
                               size="12"
                               :icon="getGenderIcon(talk.user)"/>
                     </view>-->
@@ -61,14 +51,18 @@
                       </view>
                     </view>-->
         </view>
-        <view class="text-gray text-sm h25 row-col-center">
-          最新回复：{{ talk.updateTime| formatTime }}
-          <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
+
+        <view class="color-sub text-sm h20 row-col-end" v-if="talk.user.identityAuth || talk.globalTop ||isMine">
+          <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn mr-5" @click.stop="toIdentityAuth">
+            <q-icon class="color-success mr-mn" size="14" icon="level"/>
+            <div class="font-xs">成年</div>
+          </div>
+          <view v-if="talk.globalTop" class="mr-5 sm cu-tag round bg-red light">
             官方
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
           <text v-if="isMine"
-                class="ml-5 color-blue1 bg-click"
+                class="color-blue1 bg-click"
                 @click.stop="confirmDeleteTalk">
             删除
           </text>
@@ -105,9 +99,13 @@ import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import { socialUserStore } from '../../store'
+import SocialGenderTag from '@/socialuni/components/SocialGenderTag/SocialGenderTag.vue'
 
 @Component({
-  components: { QIcon }
+  components: {
+    SocialGenderTag,
+    QIcon
+  }
 })
 export default class TalkItemHead extends Vue {
   @Prop() talkProp!: TalkVO
@@ -129,6 +127,10 @@ export default class TalkItemHead extends Vue {
     if (RouterUtil.getCurrentPageURI() === PagePath.userDetail) {
       this.isUserDetail = true
     }
+  }
+
+  toIdentityAuth () {
+    MsgUtil.identityAuthHint()
   }
 
   toLoveValuePage () {
@@ -159,7 +161,9 @@ export default class TalkItemHead extends Vue {
   confirmDeleteTalk () {
     AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
-      TalkAPI.deleteTalkAPI(this.talk.id)
+      TalkAPI.deleteTalkAPI(this.talk.id).then(() => {
+        ToastUtil.toast('删除成功')
+      })
     })
   }
 
@@ -192,11 +196,17 @@ export default class TalkItemHead extends Vue {
     }
   }
 
-  getGenderIcon (user: CenterUserDetailRO) {
+  getGenderIcon (user
+    :
+    CenterUserDetailRO
+  ) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor (user: CenterUserDetailRO) {
+  getGenderBgColor (user
+    :
+    CenterUserDetailRO
+  ) {
     return UserUtil.getGenderBgColor(user)
   }
 }

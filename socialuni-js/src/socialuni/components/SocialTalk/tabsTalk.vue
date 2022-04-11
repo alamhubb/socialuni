@@ -32,7 +32,7 @@
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
 
-          <scroll-view class="h100p" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom" :scroll-top="scrollTop"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
@@ -40,26 +40,26 @@
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
               <talk-swipers v-if="talkTabs[swiperIndex].type === 'home' && configShowSwipers"></talk-swipers>
 
-<!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
-                <div class="row-between-center mb-sm">
-                  <div>
-                    圈主：xxxx
-                  </div>
-                  <div class="row-col-center">
-                    <div class="color-sub">竞选详情</div>
-                    <div class="color-sub ml-md">圈子管理</div>
-                  </div>
-                </div>
-                <div class="row-col-center">
-                  小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
-                </div>
-              </div>-->
+              <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+                              <div class="row-between-center mb-sm">
+                                <div>
+                                  圈主：xxxx
+                                </div>
+                                <div class="row-col-center">
+                                  <div class="color-sub">竞选详情</div>
+                                  <div class="color-sub ml-md">圈子管理</div>
+                                </div>
+                              </div>
+                              <div class="row-col-center">
+                                小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
+                              </div>
+                            </div>-->
 
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
                            :talk-tab-type="talkTabObj.type"
-                           @deleteTalk="deleteTalk"
+                           @delete-talk="deleteTalk"
                 />
                 <!-- app端广告有问题-->
                 <!--  #ifdef APP-PLUS -->
@@ -120,7 +120,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
 import TalkAPI from '../../api/TalkAPI'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
@@ -182,7 +182,6 @@ export default class TabsTalkPage extends Vue {
   // 轮播图
   @socialConfigStore.State('showSwipers') configShowSwipers: boolean
 
-  @Prop() readonly scrollEnable: boolean
   readonly loading: string = LoadMoreType.loading
   loadMoreText = {
     contentdown: '点击显示更多',
@@ -316,21 +315,22 @@ export default class TabsTalkPage extends Vue {
     if (firstLoad) {
       this.refreshQueryDate()
     }
+    const talkTabObj = this.talkTabObj
     //只有在传false时校验后面的
-    const fistLoad = firstLoad || this.talkTabObj.firstLoad
+    const fistLoad = firstLoad || talkTabObj.firstLoad
     // query condition
     const talkIds: number[] = (fistLoad ? [] : this.talkIds)
     CommonUtil.delayTime(0).then(() => {
-      this.talkTabObj.firstLoad = false
+      talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, this.talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
-      if (this.talkTabObj.loadMore === LoadMoreType.loading) {
+      if (talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
           if (fistLoad) {
-            this.talkTabObj.talks = res.data
+            talkTabObj.talks = res.data
           } else {
-            this.talkTabObj.talks.push(...res.data)
+            talkTabObj.talks.push(...res.data)
           }
         }
         // 如果还有大于等于10个就还可以加载
@@ -338,15 +338,15 @@ export default class TabsTalkPage extends Vue {
         CommonUtil.delayTime(100).then(() => {
           // 如果还有大于等于10个就还可以加载
           if (res.data && res.data.length >= this.lazyLoadNum) {
-            this.talkTabObj.loadMore = LoadMoreType.more
+            talkTabObj.loadMore = LoadMoreType.more
           } else {
             // 否则没有了
-            this.talkTabObj.loadMore = LoadMoreType.noMore
+            talkTabObj.loadMore = LoadMoreType.noMore
           }
         })
       }
     }).catch(() => {
-      this.talkTabObj.loadMore = LoadMoreType.more
+      talkTabObj.loadMore = LoadMoreType.more
     })
   }
 
@@ -409,6 +409,7 @@ export default class TabsTalkPage extends Vue {
   // tabs通知swiper切换
   tabsChange (index) {
     if (index === this.currentTabIndex) {
+      this.scrollTop = 0
       this.startPullDown()
       return
     }
@@ -487,6 +488,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   lastScrollTop = 0
+  scrollTop = 0
   curScrollTop = 0
   timeout = null
 

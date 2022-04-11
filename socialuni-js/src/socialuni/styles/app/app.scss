@@ -46,7 +46,11 @@ text {
 }
 
 button {
-  line-height: 2;
+  line-height: 1.5;
+}
+
+button::after {
+  border: none;
 }
 
 ul {
