@@ -42,6 +42,11 @@
         width="50"
       />
       <el-table-column
+        label="性别"
+        prop="sex"
+        width="50"
+      />
+      <el-table-column
         label="审核结果"
         width="120"
       >
