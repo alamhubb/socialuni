@@ -65,15 +65,15 @@ public class TalkQueryStore {
         return this.queryTalksByIds(ids);
     }
 
-    public List<Integer> queryUserTalkIdsByTab(Integer mineUserId, String postTalkUserGender,
-                                               Integer minAge, Integer maxAge, String adCode,
-                                               String talkVisibleGender,
-                                               String mineUserGender, List<Integer> tagIds, Pageable pageable, Integer devId, Date queryTime, Integer circleId) {
+    public List<Integer> queryTalkIdsByTab(Integer mineUserId, String postTalkUserGender,
+                                           Integer minAge, Integer maxAge, String adCode,
+                                           String talkVisibleGender,
+                                           String mineUserGender, List<Integer> tagIds, Pageable pageable, Integer devId, Date queryTime, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
 //        log.info("queryUserTalkIdsByTab开始：" + new Date().getTime() / 1000);
 
 //        为什么区分两个方法, 因为这个是通用的，下面那个是区分用户的，所以不一起缓存
         List<Integer> ids = talkRedis.queryTalkIdsByTab(postTalkUserGender, minAge, maxAge, adCode,
-                talkVisibleGender, mineUserGender, tagIds, devId, circleId);
+                talkVisibleGender, mineUserGender, tagIds, devId, circleId, hasPeopleImgTalkNeedIdentity);
 
         if (mineUserId != null) {
             List<Integer> mineTalkIds = talkRedis.queryMineTalkIdsByCom(mineUserId, circleId);
@@ -91,10 +91,10 @@ public class TalkQueryStore {
     public List<TalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String postTalkUserGender,
                                                                          Integer minAge, Integer maxAge, String adCode,
                                                                          List<Integer> tagIds, String talkVisibleGender,
-                                                                         String mineUserGender, Integer devId, Date queryTime, Integer circleId) {
+                                                                         String mineUserGender, Integer devId, Date queryTime, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
         int page = talkIds.size() / 10;
-        List<Integer> ids = this.queryUserTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
-                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId, queryTime, circleId);
+        List<Integer> ids = this.queryTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
+                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId, queryTime, circleId, hasPeopleImgTalkNeedIdentity);
         return this.queryTalksByIds(ids);
     }
 

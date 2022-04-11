@@ -3,10 +3,15 @@ package com.socialuni.social.sdk.factory;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.model.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.platform.MapUtil;
+import com.socialuni.social.sdk.utils.ImgCheckUtil;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class TalkDOFactory {
@@ -43,6 +48,19 @@ public class TalkDOFactory {
         talkDO.setVisibleGender(socialTalkPostQO.getVisibleGender());
         talkDO.setVisibleType(socialTalkPostQO.getVisibleType());
 
+        //是否包含图片
+        if (socialTalkPostQO.getImgs().size() > 0) {
+            List<SocialTalkImgAddQO> imgs = socialTalkPostQO.getImgs();
+            for (SocialTalkImgAddQO img : imgs) {
+                Boolean hasPeople = ImgCheckUtil.hasPeopleImg(img.getSrc());
+                if (hasPeople) {
+                    talkDO.setHasPeopleImg(true);
+                    break;
+                }
+            }
+        }
+        //是否已经认证
+        talkDO.setIdentityAuth(SocialUserUtil.getUserIsIdentityAuth(user.getId()));
 
         return talkDO;
     }

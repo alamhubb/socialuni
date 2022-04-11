@@ -10,6 +10,7 @@ import com.tencentcloudapi.iai.v20180301.IaiClient;
 import com.tencentcloudapi.iai.v20180301.models.CompareFaceRequest;
 import com.tencentcloudapi.iai.v20180301.models.CompareFaceResponse;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
+import com.tencentcloudapi.tiia.v20190529.TiiaClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -75,6 +76,18 @@ public class TencentCloud {
         clientProfile.setHttpProfile(httpProfile);
         // 实例化要请求产品的client对象,clientProfile是可选的
         return new OcrClient(cred, region, clientProfile);
+    }
+
+    public static TiiaClient getTiiaClient() {
+        Credential cred = TencentCloud.getCredential();
+        // 实例化一个http选项，可选的，没有特殊需求可以跳过
+        HttpProfile httpProfile = new HttpProfile();
+        httpProfile.setEndpoint("tiia.tencentcloudapi.com");
+        // 实例化一个client选项，可选的，没有特殊需求可以跳过
+        ClientProfile clientProfile = new ClientProfile();
+        clientProfile.setHttpProfile(httpProfile);
+        // 实例化要请求产品的client对象,clientProfile是可选的
+        return new TiiaClient(cred, region, clientProfile);
     }
 
     public static boolean textIsViolation(String content) {

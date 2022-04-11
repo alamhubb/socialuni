@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.constant.UserIdentityAuthStatus;
 import com.socialuni.social.entity.model.DO.user.*;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.SocialuniProviderLoginType;
@@ -9,6 +10,7 @@ import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.repository.UserRepository;
 import com.socialuni.social.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.repository.user.SocialUserViolationRepository;
+import com.socialuni.social.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +21,15 @@ import javax.annotation.Resource;
 public class SocialUserUtil {
     private static CommonTokenRepository commonTokenRepository;
     private static UserRepository userRepository;
+    private static SocialUserIdentityAuthRepository socialUserIdentityAuthRepository;
     private static SocialUserPhoneRedis socialUserPhoneRedis;
     private static SocialUserAccountRepository socialUserAccountRepository;
     private static SocialUserViolationRepository socialUserViolationRepository;
+
+    @Resource
+    public void setSocialUserIdentityAuthRepository(SocialUserIdentityAuthRepository socialUserIdentityAuthRepository) {
+        SocialUserUtil.socialUserIdentityAuthRepository = socialUserIdentityAuthRepository;
+    }
 
     @Resource
     public void setCommonUserRepository(UserRepository userRepository) {
@@ -169,6 +177,11 @@ public class SocialUserUtil {
             return null;
         }
         return userRepository.findOneById(userId);
+    }
+
+    public static Boolean getUserIsIdentityAuth(Integer userId) {
+        SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.findFirstByUserId(userId);
+        return UserIdentityAuthStatus.authSuccessList.contains(socialUserIdentityAuthDO.getStatus());
     }
 
     public static UserDO getByUid(String uid) {

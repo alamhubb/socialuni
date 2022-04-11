@@ -49,7 +49,7 @@ public class SocialContentUserROFactory {
 
         SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.findFirstByUserId(user.getId());
         if (socialUserIdentityAuthDO != null) {
-            if (UserIdentityAuthStatus.authList.contains(socialUserIdentityAuthDO.getStatus())) {
+            if (UserIdentityAuthStatus.authSuccessList.contains(socialUserIdentityAuthDO.getStatus())) {
                 userRO.setIdentityAuth(true);
             }
         }

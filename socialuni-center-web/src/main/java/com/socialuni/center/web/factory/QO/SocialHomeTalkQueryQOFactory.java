@@ -46,6 +46,7 @@ public class SocialHomeTalkQueryQOFactory {
         if (socialHomeTabTalkQueryQO.getQueryTime() == null) {
             socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryDate());
         }
+        socialHomeTabTalkQueryQO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
 //        socialHomeTabTalkQueryQO.setUserGender(queryQO.getUserGender());
 //        socialHomeTabTalkQueryQO.setTalkVisibleGender(queryQO.getTalkVisibleGender());
 //        socialHomeTabTalkQueryQO.setOpenPosition(queryQO.getOpenPosition());
