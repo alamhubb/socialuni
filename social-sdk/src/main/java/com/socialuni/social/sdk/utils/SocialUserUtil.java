@@ -181,6 +181,9 @@ public class SocialUserUtil {
 
     public static Boolean getUserIsIdentityAuth(Integer userId) {
         SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.findFirstByUserId(userId);
+        if (socialUserIdentityAuthDO == null) {
+            return false;
+        }
         return UserIdentityAuthStatus.authSuccessList.contains(socialUserIdentityAuthDO.getStatus());
     }
 
