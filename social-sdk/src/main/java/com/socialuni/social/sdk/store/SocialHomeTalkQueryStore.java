@@ -111,10 +111,14 @@ public class SocialHomeTalkQueryStore {
             tagIds = null;
         }
 
+        Boolean hasPeopleImgTalkNeedIdentity = queryBO.getHasPeopleImgTalkNeedIdentity();
+        //false转为null
+        if (hasPeopleImgTalkNeedIdentity == null || !hasPeopleImgTalkNeedIdentity) {
+            hasPeopleImgTalkNeedIdentity = null;
+        }
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getTalkIds(), userId, postTalkUserGender,
-                minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId);
+        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getTalkIds(), userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, hasPeopleImgTalkNeedIdentity);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

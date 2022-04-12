@@ -89,6 +89,8 @@ public class TalkDO extends SocialPostContentBaseDO implements BaseModelDO, Seri
     private Integer maxAge;
     //发表商户
     private Integer devId;
+    private Boolean hasPeopleImg;
+    private Boolean identityAuth;
 
     //do 只有一个构造
     public TalkDO(Integer userId, String content) {
@@ -99,5 +101,7 @@ public class TalkDO extends SocialPostContentBaseDO implements BaseModelDO, Seri
         this.reportNum = 0;
         this.globalTop = 0;
         this.reportContentType = ContentType.talk;
+        this.hasPeopleImg = false;
+        this.identityAuth = false;
     }
 }

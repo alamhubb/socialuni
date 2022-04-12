@@ -20,7 +20,8 @@ public interface TalkMapper {
 //            @Param("queryTime") Date queryTime,
 //            @Param("mineUserId") Integer mineUserId,
 //            @Param("mineTalkStatus") List<String> mineTalkStatus,
-            @Param("circleId") Integer circleId
+            @Param("circleId") Integer circleId,
+            @Param("hasPeopleImgTalkNeedIdentity") Boolean hasPeopleImgTalkNeedIdentity
     );
 
     List<Integer> queryMineTalkIdsByCom(

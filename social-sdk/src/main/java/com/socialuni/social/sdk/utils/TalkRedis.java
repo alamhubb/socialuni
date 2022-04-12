@@ -70,13 +70,13 @@ public class TalkRedis {
         return talkRepository.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#postTalkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds+'-'+#devId+'-'+#circleId")
+    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#postTalkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds+'-'+#devId+'-'+#circleId+'-'+#hasPeopleImgTalkNeedIdentity")
     public List<Integer> queryTalkIdsByTab(String postTalkUserGender,
                                            Integer minAge, Integer maxAge, String adCode,
                                            String talkVisibleGender,
-                                           String mineUserGender, List<Integer> tagIds, Integer devId, Integer circleId) {
+                                           String mineUserGender, List<Integer> tagIds, Integer devId, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
         List<Integer> talkIds = talkMapper.queryTalkIdsByCom(postTalkUserGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkVisibleGender, mineUserGender, tagIds, null, circleId);
+                talkVisibleGender, mineUserGender, tagIds, null, circleId, hasPeopleImgTalkNeedIdentity);
         return talkIds;
     }
 

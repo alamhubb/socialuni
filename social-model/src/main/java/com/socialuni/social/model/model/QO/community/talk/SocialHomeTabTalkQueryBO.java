@@ -28,4 +28,6 @@ public class SocialHomeTabTalkQueryBO {
     private String talkVisibleGender;
     private Integer devId;
     private Integer circleId;
+    //排除未实名认证的图片内容
+    private Boolean hasPeopleImgTalkNeedIdentity;
 }

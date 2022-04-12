@@ -76,6 +76,9 @@
                 #{item}
             </foreach>
         </if>
+        <if test="hasPeopleImgTalkNeedIdentity != null">
+            AND (t.has_people_img = false or (t.has_people_img = true and t.identity_auth = true))
+        </if>
         <!--        <if test="queryTime!=null">
                     AND t.update_time &lt; #{queryTime}
                 </if>-->
