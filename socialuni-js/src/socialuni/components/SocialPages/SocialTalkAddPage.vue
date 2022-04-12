@@ -173,8 +173,8 @@ import QCityInfo from '@/socialuni/components/QCityInfo/QCityInfo.vue'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CosUploadResult from '@/socialuni/model/cos/CosUploadResult'
 import TencentCosAPI from '@/api/TencentCosAPI'
-import NumberUtil from '@/socialuni/utils/NumberUtil'
 import MsgUtil from '@/socialuni/utils/MsgUtil'
+import ModelContentCheckUtil from '@/socialuni/utils/ModelContentCheckUtil'
 
 @Component({
   components: {
@@ -392,30 +392,7 @@ export default class SocialTalkAddPage extends Vue {
 
   addTalk () {
     if (!this.user.identityAuth) {
-      let talkContent = this.talkContent
-      //替换汉字数字
-      talkContent = talkContent.replace(/./g, (match) => {
-        return NumberUtil.getNumberByHanzi(match)
-      })
-      //删除非数字，字母
-      talkContent = talkContent.replace(/[^\u4E00-\u9FA5\w]*/g, '')
-
-      //禁止发布包含小于18年龄的岁数
-      let hasLt18Age = false
-      //这种不匹配
-      const reg = /\d+/g
-      talkContent.replace(reg, (match) => {
-        const num = Number(match)
-        if (num > 6 && num < 18) {
-          hasLt18Age = true
-          AlertUtil.error('根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会按违反社区规则进行封号处罚')
-          return
-        }
-        return match
-      })
-      if (hasLt18Age) {
-        return
-      }
+      ModelContentCheckUtil.hasUn18Content(this.talkContent)
       for (const showImgFile of this.showImgFiles) {
         if (showImgFile.needAuth) {
           MsgUtil.uploadImgNeedAuthMsg()
@@ -423,7 +400,6 @@ export default class SocialTalkAddPage extends Vue {
         }
       }
     }
-
     this.buttonDisabled = true
     if (this.talkContent || this.showImgFiles.length) {
       if (this.talkContent && this.talkContent.length > 200) {
@@ -437,6 +413,7 @@ export default class SocialTalkAddPage extends Vue {
       this.buttonDisabled = false
     }
   }
+
 
   async addTalkHandler () {
     uni.showLoading({ title: '发布中' })
