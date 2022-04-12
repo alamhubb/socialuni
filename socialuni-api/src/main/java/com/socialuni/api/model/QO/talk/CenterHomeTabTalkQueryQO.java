@@ -28,4 +28,6 @@ public class CenterHomeTabTalkQueryQO {
     //新版本用genderType，旧版本用gender
     private String talkVisibleGender;
     private String circleName;
+    //排除未实名认证的图片内容
+    private Boolean hasPeopleImgTalkNeedIdentity;
 }

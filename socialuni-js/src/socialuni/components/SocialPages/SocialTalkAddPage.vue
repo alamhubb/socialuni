@@ -402,7 +402,7 @@ export default class SocialTalkAddPage extends Vue {
     })
     talkContent.replace(reg, (match) => {
       const num = Number(match)
-      if (num < 18) {
+      if (match.length === 2 && num < 18) {
         hasLt18Age = true
         AlertUtil.error('根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会被审核后删除')
         return
@@ -469,7 +469,7 @@ export default class SocialTalkAddPage extends Vue {
       for (const item of uploadRes) {
         const index = uploadRes.findIndex(uploadResItem => uploadResItem === item)
         const res: string = await TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO) as any
-        console.log(res)
+        console.log('包含人物：' + res.includes('人'), res)
         if (res.includes('人')) {
           this.showImgFiles[index].needAuth = true
           MsgUtil.uploadImgNeedAuthMsg()

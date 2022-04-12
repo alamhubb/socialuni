@@ -11,7 +11,11 @@
           <text class="text-df font-bold">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
-            <social-gender-tag class="ml-xss" :user="talk.user"></social-gender-tag>
+            <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
+            <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+              <q-icon class="color-success" size="14" icon="level"/>
+              <div class="font-xs ml-nn">成年</div>
+            </div>
             <!--              <q-icon class="color-blue" size="18" icon="level" @click.native.stop="toIdentityAuth"/>-->
           </template>
 
@@ -52,17 +56,15 @@
                     </view>-->
         </view>
 
-        <view class="color-sub text-sm h20 row-col-end" v-if="talk.user.identityAuth || talk.globalTop ||isMine">
-          <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn mr-5" @click.stop="toIdentityAuth">
-            <q-icon class="color-success mr-mn" size="14" icon="level"/>
-            <div class="font-xs">成年</div>
-          </div>
-          <view v-if="talk.globalTop" class="mr-5 sm cu-tag round bg-red light">
+        <!--        <view class="color-sub text-sm h20 row-col-end" v-if="talk.user.identityAuth || talk.globalTop ||isMine">-->
+        <view class="color-sub text-sm h20 row-col-end line-h1">
+          {{ talk.updateTime| formatTime }}
+          <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
             官方
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
           <text v-if="isMine"
-                class="color-blue1 bg-click"
+                class="ml-5 color-blue1 bg-click row-col-end line-h1"
                 @click.stop="confirmDeleteTalk">
             删除
           </text>

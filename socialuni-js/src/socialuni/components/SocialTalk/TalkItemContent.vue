@@ -25,9 +25,9 @@
     <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center pt-10"
           @click="toTalkDetailVue">
       <view class="row-end-center">
-        <div class="color-sub text-sm h25 row-col-center ml-smm">
-          {{ talk.updateTime| formatTime }}
-        </div>
+        <!--        <div class="color-sub text-sm h25 row-col-center ml-smm">
+                  {{ talk.updateTime| formatTime }}
+                </div>-->
         <view class="q-tag ml-sm">
           <q-icon icon="map-fill" class="color-purple mr-mn" size="14"></q-icon>
           <!--        有市区的名称就不显示省的名称-->

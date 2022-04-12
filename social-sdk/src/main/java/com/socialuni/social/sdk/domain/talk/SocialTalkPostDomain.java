@@ -22,6 +22,7 @@ import com.socialuni.social.sdk.factory.TalkImgDOFactory;
 import com.socialuni.social.sdk.manage.talk.SocialTalkCreateManage;
 import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.sdk.repository.community.*;
+import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.TalkRedis;
@@ -57,8 +58,13 @@ public class SocialTalkPostDomain {
     SocialTalkCreateManage socialTalkCreateManage;
     @Resource
     SocialTalkCircleRepository socialTalkCircleRepository;
+    @Resource
+    ModelContentCheck modelContentCheck;
 
     public SocialTalkRO postTalk(UserDO mineUser, SocialTalkPostQO talkPostQO) {
+        modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
+        //校验内容是否违规
+//        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
         //获取应用对应的话题
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());

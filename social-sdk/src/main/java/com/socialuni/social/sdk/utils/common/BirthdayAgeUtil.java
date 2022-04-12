@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.utils.common;
 
+import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -100,7 +101,7 @@ public class BirthdayAgeUtil {
     public static boolean ageBetween10to18Str(String numStr) {
         if (numStr.length() == 2) {
             int age = Integer.parseInt(numStr);
-            return age < 18 && age > 9;
+            return age < 18;
         }
         return false;
     }
@@ -120,11 +121,47 @@ public class BirthdayAgeUtil {
     }
 
     public static String replaceAgeBetween10to18Str(String content) {
+        //删除非数字、字母、汉字
+        content = BirthdayAgeUtil.formatHanziNumContentOnlyEmptyChar(content);
         //定义正则表达式
         String reg = "\\d+";
         //编译正则表达式
         Pattern patten = Pattern.compile(reg);
         return StringUtil.replaceAll(content, patten, (result) -> BirthdayAgeUtil.getAgeBetween10to18Str(result.group()));
+    }
+
+    public static String formatHanziNumContent(String content) {
+        //匹配非空格内容
+        String regEx = "\\S+";
+        Pattern p = Pattern.compile(regEx);
+        content = StringUtil.replaceAll(content, p, (result) -> {
+            String resGroup = result.group();
+            Integer hanziNum = ModelContentCheck.hanziNumberMap.get(resGroup);
+            if (hanziNum != null) {
+                return hanziNum.toString();
+            }
+            return resGroup;
+        });
+        //删除非数字、字母、汉字
+        content = content.trim().replaceAll("[^\\u4E00-\\u9FA5\\w]", "");
+        return content;
+    }
+
+    public static String formatHanziNumContentOnlyEmptyChar(String content) {
+        //匹配非空格内容
+        String regEx = "\\S+";
+        Pattern p = Pattern.compile(regEx);
+        content = StringUtil.replaceAll(content, p, (result) -> {
+            String resGroup = result.group();
+            Integer hanziNum = ModelContentCheck.hanziNumberMap.get(resGroup);
+            if (hanziNum != null) {
+                return hanziNum.toString();
+            }
+            return resGroup;
+        });
+        //删除非数字、字母、汉字
+        content = content.trim().replaceAll("[\\t ]", "");
+        return content;
     }
 
     public static Integer replaceAgeBetween10to18StrTo18(Integer age) {

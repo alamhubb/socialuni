@@ -13,7 +13,7 @@ export default class PhoneAPI {
   }
 
   static sendAuthCodeAPI (phoneNum: string) {
-    return request.post('phone/sendPhoneAuthCode', new SocialSendAuthCodeQO(phoneNum))
+    return request.post('phone/sendAuthCode', new SocialSendAuthCodeQO(phoneNum))
   }
 
   static bindPhoneNumAPI (phoneNum: string, authCode: string) {
