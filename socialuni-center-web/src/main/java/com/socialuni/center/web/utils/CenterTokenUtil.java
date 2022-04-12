@@ -1,5 +1,6 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.sdk.repository.dev.ThirdUserTokenRepository;
@@ -39,18 +40,18 @@ public class CenterTokenUtil {
         Integer devId = DevAccountUtils.getDevIdNotNull();
 
         if (tokenDO == null) {
-            throw new SocialNullUserException();
+            throw new SocialNotLoginException();
         }
 
         if (!tokenDO.getDevId().equals(devId)) {
             log.error("开发者信息错误，请清空token");
-            throw new SocialNullUserException();
+            throw new SocialNotLoginException();
         }
         Date date = new Date();
         //如果当前时间大于时效时间，则时效了
         if (date.getTime() > tokenDO.getExpiredTime().getTime()) {
 //            throw new SocialBusinessException("用户凭证过期，请重新登录");
-            throw new SocialNullUserException();
+            throw new SocialNotLoginException();
         }
         //数据库的devId
         String doUserThirdId = tokenDO.getThirdUserId();

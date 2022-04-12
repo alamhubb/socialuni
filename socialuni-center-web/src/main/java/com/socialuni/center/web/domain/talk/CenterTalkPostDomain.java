@@ -15,7 +15,6 @@ import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.domain.talk.SocialTalkPostDomain;
 import com.socialuni.social.sdk.repository.community.TagRepository;
 import com.socialuni.social.sdk.repository.community.TalkRepository;
-import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +36,6 @@ public class CenterTalkPostDomain {
     TagRepository tagRepository;
     @Resource
     TalkRepository talkRepository;
-    @Resource
-    ModelContentCheck modelContentCheck;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
         UserDO mineUser = CenterUserUtil.getMineUser();
@@ -94,8 +91,6 @@ public class CenterTalkPostDomain {
         }
         tagNames.add(devTagDO.getName());
         talkPostQO.setTagNames(tagNames);
-
-        modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
 
         SocialTalkRO socialTalkRO = socialTalkPostDomain.postTalk(mineUser, talkPostQO);
 

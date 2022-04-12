@@ -9,7 +9,6 @@ import com.socialuni.social.sdk.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.service.comment.IllegalWordService;
 import com.socialuni.social.sdk.utils.QQUtil;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.sdk.utils.StringUtil;
 import com.socialuni.social.sdk.utils.WxUtil;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -84,20 +83,7 @@ public class ModelContentCheck {
 
     //包含未成年内容
     public static void hasUn18Content(String content) {
-        //匹配非空格内容
-        String regEx = "\\S+";
-        Pattern p = Pattern.compile(regEx);
-        content = StringUtil.replaceAll(content, p, (result) -> {
-            String resGroup = result.group();
-            Integer hanziNum = ModelContentCheck.hanziNumberMap.get(resGroup);
-            if (hanziNum != null) {
-                return hanziNum.toString();
-            }
-            return resGroup;
-        });
-
-        //删除非数字、字母、汉字
-        content = content.trim().replaceAll("[^\\u4E00-\\u9FA5\\w]", "");
+        content = BirthdayAgeUtil.formatHanziNumContent(content);
 
         String reg = "\\d+";//定义正则表达式
         //编译正则表达式
