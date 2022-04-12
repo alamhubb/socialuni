@@ -41,6 +41,7 @@ import PlatformUtils from '../utils/PlatformUtils'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import MsgUtil from '../utils/MsgUtil'
 import ToastUtil from '../utils/ToastUtil'
+import ModelContentCheckUtil from '@/socialuni/utils/ModelContentCheckUtil'
 
 @Component
 export default class MsgInput extends Vue {
@@ -72,6 +73,9 @@ export default class MsgInput extends Vue {
     if (this.user && this.user.phoneNum) {
       // 如果有值
       if (this.content) {
+        if (!this.user.identityAuth) {
+          ModelContentCheckUtil.hasUn18Content(this.content)
+        }
         socialTalkModule.addComment({ content: this.content })
         this.content = ''
         // 申请订阅
