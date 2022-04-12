@@ -59,6 +59,9 @@ public class SocialTalkPostDomain {
     SocialTalkCircleRepository socialTalkCircleRepository;
 
     public SocialTalkRO postTalk(UserDO mineUser, SocialTalkPostQO talkPostQO) {
+
+        //校验内容是否违规
+//        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
         //获取应用对应的话题
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
         TalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
