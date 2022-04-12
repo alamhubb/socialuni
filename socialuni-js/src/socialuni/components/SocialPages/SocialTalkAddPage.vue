@@ -391,31 +391,36 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   addTalk () {
-    //禁止发布包含小于18年龄的岁数
-    let hasLt18Age = false
-    //这种不匹配
-    const reg = /\d+/g
+    if (!this.user.identityAuth) {
+      let talkContent = this.talkContent
+      //替换汉字数字
+      talkContent = talkContent.replace(/./g, (match) => {
+        return NumberUtil.getNumberByHanzi(match)
+      })
+      //删除非数字，字母
+      talkContent = talkContent.replace(/[^\u4E00-\u9FA5\w]*/g, '')
 
-    let talkContent = this.talkContent
-    talkContent = talkContent.replace(/./g, (match, matchVal) => {
-      return NumberUtil.getNumberByHanzi(match)
-    })
-    talkContent.replace(reg, (match) => {
-      const num = Number(match)
-      if (match.length === 2 && num < 18) {
-        hasLt18Age = true
-        AlertUtil.error('根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会被审核后删除')
+      //禁止发布包含小于18年龄的岁数
+      let hasLt18Age = false
+      //这种不匹配
+      const reg = /\d+/g
+      talkContent.replace(reg, (match) => {
+        const num = Number(match)
+        if (num > 6 && num < 18) {
+          hasLt18Age = true
+          AlertUtil.error('根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会按违反社区规则进行封号处罚')
+          return
+        }
+        return match
+      })
+      if (hasLt18Age) {
         return
       }
-      return match
-    })
-    if (hasLt18Age) {
-      return
-    }
-    for (const showImgFile of this.showImgFiles) {
-      if (showImgFile.needAuth) {
-        MsgUtil.uploadImgNeedAuthMsg()
-        return
+      for (const showImgFile of this.showImgFiles) {
+        if (showImgFile.needAuth) {
+          MsgUtil.uploadImgNeedAuthMsg()
+          return
+        }
       }
     }
 
