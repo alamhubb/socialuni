@@ -20,9 +20,12 @@
         </view>
         <view class="row-all-center">
           <view @click="addHug" class="text-df line-height-1 row-all-center px-0 border-none">
-            <q-icon size="24"
-                    :icon="getHugIcon(talk.hasHugged)"
-                    :class="[getHugColor(talk.hasHugged)]"
+            <q-icon v-if="talk.hasHugged" size="24"
+                    icon="heart-fill"
+                    class="color-red3"
+            ></q-icon>
+            <q-icon v-else size="24"
+                    icon="heart"
             ></q-icon>
             <text class="ml-mn">
               抱抱
