@@ -39,7 +39,7 @@
           <text v-if="talk.district.districtName">-{{ talk.district.districtName }}</text>
 
           <view class="row-col-center" v-if="talk.distance|| talk.distance===0">
-            <div class="px-xs">|</div>
+            <div class="px-xs row-col-center">|</div>
             <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
             <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
             <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
