@@ -13,6 +13,7 @@ export default class TalkQueryVO {
   queryTime: Date
   circleName: string
   tagNames: string[]
+  hasPeopleImgTalkNeedIdentity: boolean = false
 
   constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string, tagNames: string[]) {
     this.talkIds = talkIds

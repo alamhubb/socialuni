@@ -3,7 +3,7 @@
   line-height: 1;
   @extend .font-sm;
   @extend .bd-radius;
-  @extend .mr-sm;
+  @extend .mr-xs;
   @extend .row-col-center;
   //深色主题，字体白色，其他主题色
   color: $color-main;
@@ -17,7 +17,7 @@
     line-height: 1;
     @extend .font-sm;
     @extend .bd-radius;
-    @extend .mr-sm;
+    @extend .mr-xs;
     @extend .row-col-center;
     color: $color;
     background: mix($color-white, $color, 90%);
@@ -29,7 +29,7 @@
     line-height: 1;
     @extend .font-sm;
     @extend .bd-radius;
-    @extend .mr-sm;
+    @extend .mr-xs;
     @extend .row-col-center;
     color: $color;
     background: mix($color-white, $color, 90%);
@@ -42,7 +42,7 @@
   line-height: 1;
   @extend .font-sm;
   @extend .bd-radius;
-  @extend .mr-sm;
+  @extend .mr-xs;
   @extend .row-col-center;
   color: $color-main;
   background: $color-white;
