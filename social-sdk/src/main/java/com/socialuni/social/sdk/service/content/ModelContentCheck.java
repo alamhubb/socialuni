@@ -81,9 +81,15 @@ public class ModelContentCheck {
         }
     }
 
+    public static void main(String[] args) {
+        ModelContentCheck.hasUn18Content("有没有十5 以下的妹妹 我qq2973327997");
+    }
+
     //包含未成年内容
     public static void hasUn18Content(String content) {
+        System.out.println(content);
         content = BirthdayAgeUtil.formatHanziNumContent(content);
+        System.out.println(content);
 
         String reg = "\\d+";//定义正则表达式
         //编译正则表达式
