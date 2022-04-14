@@ -7,14 +7,13 @@
     />
     <view class="row-between flex-auto">
       <view class="col-center">
-        <view class="h20 row-col-start">
+        <view class="h20 row-col-center">
           <text class="text-df font-bold">{{ talk.user.nickname }}</text>
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
             <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
-              <q-icon class="color-success" size="14" icon="level"/>
-              <div class="font-xs ml-nn">成年</div>
+              <q-icon size="14" icon="level"/>
             </div>
             <!--              <q-icon class="color-blue" size="18" icon="level" @click.native.stop="toIdentityAuth"/>-->
           </template>
@@ -72,11 +71,8 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <button v-if="!talk.hasFollowed" class="cu-btn round bd-theme bg-white text-theme px-smm"
-                @click.stop="addFollow">
-          关注
-        </button>
-        <view v-else class="q-box-xs" @click.stop="addFollow">已关注</view>
+        <div v-if="!talk.hasFollowed" class="color-content chunk q-box-nm bd-radius" @click.stop="addFollow">关注</div>
+        <div v-else class="color-content" @click.stop="addFollow">已关注</div>
       </view>
     </view>
   </view>

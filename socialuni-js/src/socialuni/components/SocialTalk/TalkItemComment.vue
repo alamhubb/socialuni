@@ -42,34 +42,32 @@
         <q-icon icon="more-dot-fill"></q-icon>
       </view>
     </view>
-    <view class="card-text">
-      <view class="flex-1" v-if="talk.comments">
-        <block v-for="(comment,index) in talk.comments" :key="comment.id">
-          <view v-if="index < commentShowNum">
-            <!--                        {{comment.no}}#-->
-            <view class="flex-row py-mn" @click="toTalkDetailVue">
-              <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue'"
-                    @click.stop="toUserDetail(comment.user.id)">
-                {{ comment.user.nickname }}
-              </view>
-              ：
-              <view @longpress="openCommentActionDialog(comment)"
-                    @click.stop="setComment(talk,comment)">
-                {{ comment.content }}
-              </view>
+    <view class="px-15 mt-xs" v-if="talk.comments">
+      <block v-for="(comment,index) in talk.comments" :key="comment.id">
+        <view v-if="index < commentShowNum">
+          <!--                        {{comment.no}}#-->
+          <view class="flex-row py-mn" @click="toTalkDetailVue">
+            <view class="flex-none" :class="comment.user.vipFlag?'color-red':'color-blue'"
+                  @click.stop="toUserDetail(comment.user.id)">
+              {{ comment.user.nickname }}
             </view>
-            <child-comment :talk="talk" :comment-prop="comment"></child-comment>
+            ：
+            <view @longpress="openCommentActionDialog(comment)"
+                  @click.stop="setComment(talk,comment)">
+              {{ comment.content }}
+            </view>
           </view>
-        </block>
-        <view v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
-          <view class="row-col-center color-orange pt-mn" @click="toTalkDetailVue">
-            <view v-show="talk.commentNum>commentShowNum">
-              查看其余{{ talk.commentNum - commentShowNum }}条评论
-            </view>
-            <view v-show="false">
-              收起评论
-              <q-icon icon="arrow-up"></q-icon>
-            </view>
+          <child-comment :talk="talk" :comment-prop="comment"></child-comment>
+        </view>
+      </block>
+      <view v-show="!showAllComment && (talk.commentNum>commentShowNum || showOtherCommentClicked)">
+        <view class="row-col-center color-orange pt-mn" @click="toTalkDetailVue">
+          <view v-show="talk.commentNum>commentShowNum">
+            查看其余{{ talk.commentNum - commentShowNum }}条评论
+          </view>
+          <view v-show="false">
+            收起评论
+            <q-icon icon="arrow-up"></q-icon>
           </view>
         </view>
       </view>

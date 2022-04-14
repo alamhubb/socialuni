@@ -1,8 +1,8 @@
 <template>
   <view>
-    <text class="card-text text-dff" @click="toTalkDetailVue" selectable>
+    <div class="card-text text-df" @click="toTalkDetailVue" selectable>
       {{ talk.content }}
-    </text>
+    </div>
     <view v-if="talk.imgs.length" class="card-text-row mt-10">
       <div v-for="(img,index) in talk.imgs.slice(0,3)" :key="img.id"
            class="position-relative card-text-img flex-row overflow-hidden"
@@ -22,31 +22,48 @@
                 </div>-->
       </div>
     </view>
-    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-between-center pt-10"
-          @click="toTalkDetailVue">
-      <view class="row-end-center">
-        <!--        <div class="color-sub text-sm h25 row-col-center ml-smm">
-                  {{ talk.updateTime| formatTime }}
-                </div>-->
-        <view class="q-tag ml-sm">
-          <q-icon icon="map-fill" class="color-purple mr-mn" size="14"></q-icon>
-          <!--        有市区的名称就不显示省的名称-->
-          <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
-          <text v-if="talk.district.cityName">
-            <text v-if="!talk.district.districtName">-</text>
-            {{ talk.district.cityName }}
-          </text>
-          <text v-if="talk.district.districtName">-{{ talk.district.districtName }}</text>
+    <div class="px-smm row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
+      <template v-if="talk.tags&&talk.tags.length">
+        <view v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
+              class="mt-xs color-blue_dark mr-sm">
+          <text class="color-blue mr-nn">#</text>
+          {{ tag.name }}
+        </view>
+      </template>
+    </div>
 
-          <view class="row-col-center" v-if="talk.distance|| talk.distance===0">
-            <div class="px-xs row-col-center">|</div>
-            <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
-            <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
-            <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
-            <text v-else>{{ talk.distance | numFixed1 }}公里</text>
-          </view>
+    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-col-center mt-xss px-sm"
+          @click="toTalkDetailVue">
+      <div v-if="talk.circles&&talk.circles.length">
+        <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
+              class="q-tag mr-sm">
+          <!--          <q-icon icon="moments" class="color-purple mr-mn" size="12"></q-icon>-->
+          <q-icon icon="mdi-send" class="color-purple mr-mn mdi-rotate-315" size="12"></q-icon>
+          <text class="pt-nn">{{ circleName }}圈</text>
+        </view>
+      </div>
+
+      <view class="q-tag">
+        <q-icon icon="map-fill" class="color-purple mr-mn" size="12"></q-icon>
+        <!--        有市区的名称就不显示省的名称-->
+        <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
+        <text v-if="talk.district.cityName">
+          <text v-if="!talk.district.districtName">-</text>
+          {{ talk.district.cityName }}
+        </text>
+        <text v-if="talk.district.districtName">-{{ talk.district.districtName }}</text>
+
+        <view class="row-col-center" v-if="talk.distance|| talk.distance===0">
+          <div class="px-xs row-col-center">|</div>
+          <text v-if="talk.distance<0.5">{{ 0.5 }}公里</text>
+          <text v-else-if="talk.distance<1">{{ 1 }}公里</text>
+          <text v-else-if="talk.distance<5">{{ 5 }}公里</text>
+          <text v-else>{{ talk.distance | numFixed1 }}公里</text>
         </view>
       </view>
+      <!--        <div class="color-sub text-sm h25 row-col-center ml-smm">
+                {{ talk.updateTime| formatTime }}
+              </div>-->
 
       <!--      <view class="row-col-center">
               &lt;!&ndash;      只有非单性才需要这样显示&ndash;&gt;
@@ -66,22 +83,7 @@
               </view>
             </view>-->
     </view>
-    <div class="px-sm row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
-      <template v-if="talk.circles&&talk.circles.length">
-        <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
-              class="q-tag mt-sm">
-          <text class="color-purple mr-mn font-bold">&</text>
-          {{ circleName }}
-        </view>
-      </template>
-      <template v-if="talk.tags&&talk.tags.length">
-        <view v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
-              class="q-tag mt-sm">
-          <text class="color-purple mr-mn font-bold">#</text>
-          {{ tag.name }}
-        </view>
-      </template>
-    </div>
+
   </view>
 </template>
 
