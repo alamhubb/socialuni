@@ -129,7 +129,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import UserIdCard from '@/model/UserIdCard'
-import CommonStatus from '@/constants/CommonStatus'
+import CommonStatus from '@/constant/CommonStatus'
 import ObjectUtils from '@/utils/ObjectUtils'
 
 @Component

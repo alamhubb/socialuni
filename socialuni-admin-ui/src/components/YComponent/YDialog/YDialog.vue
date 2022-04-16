@@ -1,13 +1,13 @@
 <template>
-  <el-dialog
-    auto-close
-    append-to-body
-    :visible.sync="showDialog"
-    :close-on-click-modal="false"
-    :title="title"
-    v-bind="$attrs"
-    class="neibuDialog"
-    @close="dialogClose"
+  <dialog-box
+auto-close
+              append-to-body
+              :visible.sync="showDialog"
+              :close-on-click-modal="false"
+              :title="title"
+              @close="dialogClose"
+              v-bind="$attrs"
+              class="neibuDialog"
   >
     <slot />
     <div>
@@ -20,14 +20,15 @@
           :hide-confirm="hideConfirm"
           :confirm-text="confirmTitle"
           :cancel-text="hideConfirm?'关闭' :cancelTitle"
-          :confirm="confirm"
           @cancel="dialogCancel"
+          :confirm="confirm"
           @confirm="dialogConfirm"
           @confirm-after="close"
-        />
+        >
+        </y-page-footer>
       </slot>
     </div>
-  </el-dialog>
+  </dialog-box>
 </template>
 
 <script lang="ts">

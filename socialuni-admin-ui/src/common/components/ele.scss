@@ -1,0 +1,77 @@
+$yy-btn-color: #C50F1A !default;
+$yy-color-white: #FFFFFF !default;
+$yy-color-black: #000000 !default;
+
+.yy-btn {
+  background: $yy-btn-color;
+  color: #FFFFFF;
+  border: 1px solid $yy-btn-color;
+
+  &:hover,
+  &:focus {
+    color: #FFFFFF;
+    background-color: mix($yy-color-white, $yy-btn-color, 20%);
+    border-color: mix($yy-color-white, $yy-btn-color, 20%);
+  }
+
+  &:active {
+    color: #FFFFFF;
+    background-color: mix($yy-color-black, $yy-btn-color, 10%);
+    border-color: mix($yy-color-black, $yy-btn-color, 10%);
+  }
+}
+
+#table_layout_control{
+  .caozuo{
+    height: 33px;
+    margin-left: 10px;
+    .el-button-group>.el-button:not(:last-child),.el-button-group>.el-button:last-child{
+      background: $yy-btn-color;
+      color: white;
+      border: 1px solid $yy-btn-color;
+    }
+    .el-dropdown__caret-button{
+      padding: 9px 5px;
+    }
+  }
+  .el-pagination{
+    padding-right: 0;
+  }
+  .input-with-select{
+    .el-input-group__prepend{
+      padding-right: 0;
+    }
+    .el-input__inner{
+      padding-left: 0;
+    }
+    .el-select{
+      margin-right: 0;
+      /*&:after{
+        content: '：';
+        width: 1px;
+        position: absolute;
+        right: 0;
+        top: 23%;
+      }*/
+      .el-input--suffix .el-input__inner{
+        padding-left: 35px;
+      }
+      .el-input__inner{
+        padding-right: 0;
+      }
+      .el-input__suffix{
+        left: 5px;
+        right: unset;
+      }
+    }
+    .el-input__inner{
+      border-left: none;
+    }
+    >.el-input__inner:focus{
+      border-color: #e4e7ed;
+    }
+    >.el-input__inner:hover{
+      border-color: #e4e7ed;
+    }
+  }
+}

@@ -6,4 +6,6 @@ export default class EnumStrVO<T = string> {
     this.value = value
     this.name = name || value
   }
+
+  static nullEnum = new EnumStrVO(null)
 }

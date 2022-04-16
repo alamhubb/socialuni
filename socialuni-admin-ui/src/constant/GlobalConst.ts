@@ -1,10 +1,10 @@
-import { OperationType } from '@/constants/OperationType'
-import DevAccountType from '@/constants/DevAccountType'
-import ForbidStatus from '@/constants/audit/ForbidStatus'
-import CosImgResultType from '@/constants/audit/CosImgResultType'
-import ViolateType from '@/constants/ViolateType'
-import UserStatus from '@/constants/UserStatus'
-import DataTypeStrEnum from '@/constants/enum/DataTypeStrEnum'
+import { OperationType } from '@/constant/OperationType'
+import DevAccountType from '@/constant/DevAccountType'
+import ForbidStatus from '@/constant/audit/ForbidStatus'
+import CosImgResultType from '@/constant/audit/CosImgResultType'
+import ViolateType from '@/constant/ViolateType'
+import UserStatus from '@/constant/UserStatus'
+import DataTypeStrEnum from '@/constant/enum/DataTypeStrEnum'
 import DataTableColumnTypeEnum from '@/components/dataTable/DataTableColumnTypeEnum'
 
 export default class GlobalConst {

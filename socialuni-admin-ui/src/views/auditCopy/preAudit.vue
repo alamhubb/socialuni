@@ -254,7 +254,7 @@ import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
 import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
-import ViolateType from '@/constants/ViolateType'
+import ViolateType from '@/constant/ViolateType'
 
 @Component
 export default class PreAuditPage extends Vue {
