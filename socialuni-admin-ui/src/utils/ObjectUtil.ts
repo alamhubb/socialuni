@@ -20,7 +20,7 @@ export default class ObjectUtil {
     console.log(JSON.stringify(object))
   }
 
-  static toFormData(object: Record<string, any>): FormData {
+  static toFormData(object: Record<string, any> | any): FormData {
     const formData = new FormData()
     Object.keys(object).forEach((key) => {
       const data = object[key]
@@ -35,6 +35,23 @@ export default class ObjectUtil {
       }
     })
     return formData
+  }
+
+  static toParamData(object: Record<string, any>): string {
+    const paramObj = new URLSearchParams()
+    Object.keys(object).forEach((key) => {
+      const data = object[key]
+      if (data instanceof Array) {
+        data.forEach((item) => {
+          paramObj.append(key, item)
+        })
+      } else {
+        if (data !== null) {
+          paramObj.append(key, data)
+        }
+      }
+    })
+    return paramObj.toString()
   }
 
   // 需要将叶子节点的 children 设置为 null
@@ -67,5 +84,15 @@ export default class ObjectUtil {
   // 如果undefined返回null
   static getValue<T>(obj: T): T {
     return this.isUndefined(obj) ? null : obj
+  }
+
+  static spread(...objs): any {
+    const obj = {}
+    for (const obj1 of objs) {
+      if (obj1 instanceof Object) {
+        Object.assign(obj, obj1)
+      }
+    }
+    return obj
   }
 }

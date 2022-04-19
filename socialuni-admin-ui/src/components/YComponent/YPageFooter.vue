@@ -1,5 +1,5 @@
 <template>
-  <div class="row-between-center">
+  <div class="row-between-center w100p shadow-top">
     <div class="flex-row">
       <slot name="actionLeft">
 
@@ -7,9 +7,11 @@
     </div>
     <div class="flex-row">
       <slot name="actionRight">
-        <el-button v-show="!hideCancel" @click="cancel">{{ cancelText }}</el-button>
+        <el-button size="mini" v-show="!hideCancel" @click="cancel">{{ cancelText }}</el-button>
         <slot></slot>
+        <!--        有防抖所以无法连续触发-->
         <y-button
+          size="mini"
           v-show="!hideConfirm"
           :click="confirm"
           @click="emitConfirm"
@@ -38,9 +40,7 @@ export default class YPageFooter extends Vue {
   @Prop({ default: false, type: Boolean }) disabled: boolean
   @Prop({ default: false, type: Boolean }) cancelDisabled: boolean
   @Prop({
-    default: () => {
-      return
-    },
+    default: null,
     type: Function
   }) confirm: () => Promise<void> | Array<() => Promise<void> | any>
 

@@ -63,6 +63,8 @@ public class SocialTalkPostDomain {
 
     public SocialTalkRO postTalk(UserDO mineUser, SocialTalkPostQO talkPostQO) {
         modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
+
+
         //校验内容是否违规
 //        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
         //获取应用对应的话题

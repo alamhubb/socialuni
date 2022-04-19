@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.factory;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.entity.model.DO.DistrictDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
@@ -59,6 +60,16 @@ public class TalkDOFactory {
                 }
             }
         }
+
+        Boolean userIdentityAuth = SocialUserUtil.getUserIsIdentityAuth(user.getId());
+        //如果存在人物图像，则不可发表
+        if (talkDO.getHasPeopleImg()) {
+            if (!userIdentityAuth) {
+                throw new SocialBusinessException("完成成年认证，才能发布包含人物图像的图片");
+            }
+        }
+
+
         //是否已经认证
         talkDO.setIdentityAuth(SocialUserUtil.getUserIsIdentityAuth(user.getId()));
 

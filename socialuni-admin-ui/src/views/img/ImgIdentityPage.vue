@@ -71,7 +71,7 @@ import Talk from '@/model/talk/Talk'
 import ReportVO from '@/model/report/ReportVO'
 import Identity from '@/model/user/Identity'
 import ImgIdentityAPI from '@/api/ImgIdentityAPI'
-import ViolateType from '@/constants/ViolateType'
+import ViolateType from '@/constant/ViolateType'
 
 @Component
 export default class ImgIdentity extends Vue {

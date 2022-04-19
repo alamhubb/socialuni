@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 /* Layout */
 import Layout from '@/layout/Layout.vue'
-import RouterName from '@/constants/RouterName'
+import RouterName from '@/constant/RouterName'
 
 Vue.use(VueRouter)
 

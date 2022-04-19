@@ -15,11 +15,6 @@ import java.util.regex.Pattern;
  * @date 2019-02-24 22:12
  */
 public class BirthdayAgeUtil {
-    public static void main(String[] args) throws ParseException {
-        System.out.println(BirthdayAgeUtil.getYearBirthDateByAge(18));
-        System.out.println(BirthdayAgeUtil.getYearStrByAge(18));
-    }
-
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat birthdayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -132,24 +127,27 @@ public class BirthdayAgeUtil {
 
     public static String formatHanziNumContent(String content) {
         //匹配非空格内容
-        String regEx = "\\S+";
+        String regEx = "\\S";
         Pattern p = Pattern.compile(regEx);
         content = StringUtil.replaceAll(content, p, (result) -> {
             String resGroup = result.group();
+            System.out.println(resGroup);
             Integer hanziNum = ModelContentCheck.hanziNumberMap.get(resGroup);
             if (hanziNum != null) {
                 return hanziNum.toString();
             }
             return resGroup;
         });
+        System.out.println(content);
         //删除非数字、字母、汉字
         content = content.trim().replaceAll("[^\\u4E00-\\u9FA5\\w]", "");
+        System.out.println(content);
         return content;
     }
 
     public static String formatHanziNumContentOnlyEmptyChar(String content) {
         //匹配非空格内容
-        String regEx = "\\S+";
+        String regEx = "\\S";
         Pattern p = Pattern.compile(regEx);
         content = StringUtil.replaceAll(content, p, (result) -> {
             String resGroup = result.group();

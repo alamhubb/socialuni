@@ -103,7 +103,7 @@ export default class QButton extends Vue {
     type: Boolean
   }) xs: boolean
 
-  // 节流，一定时间内只能触发一次
+  // 防抖，一定时间内只能触发一次
   @Prop({
     default: 1000,
     type: [String, Number]

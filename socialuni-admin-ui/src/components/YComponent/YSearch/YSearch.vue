@@ -77,7 +77,7 @@
 import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
 import TableSelect from '@/model/common/TableSelect'
-import DataTypeStrEnum from '@/constants/enum/DataTypeStrEnum'
+import DataTypeStrEnum from '@/constant/enum/DataTypeStrEnum'
 
 /**
  * @author 秦开远

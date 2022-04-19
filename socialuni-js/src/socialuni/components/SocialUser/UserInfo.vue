@@ -79,11 +79,11 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button v-if="followStatus==='关注'" class="cu-btn round bd-theme bg-white text-theme px-smm"
+            <button v-if="followStatus==='关注'" class="color-content chunk q-box-nm bd-radius"
                     @click.stop="addFollow">
               {{ followStatus }}
             </button>
-            <view v-else class="q-box-xs" @click.stop="addFollow">{{ followStatus }}</view>
+            <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
             <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
           </view>
         </view>

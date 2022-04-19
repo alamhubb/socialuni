@@ -1,5 +1,5 @@
 import UserImg from '@/model/UserImg'
-import ComConst from '@/constants/ComConst'
+import ComConst from '@/constant/ComConst'
 
 export default class UserIdCard {
   userId: number

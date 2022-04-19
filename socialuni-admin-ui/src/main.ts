@@ -6,7 +6,7 @@ import '@/router/interceptor'
 import '@/styles/index.scss'
 import './plugins/element'
 import components from '@/components'
-import GlobalConst from '@/constants/GlobalConst'
+import GlobalConst from '@/constant/GlobalConst'
 
 Vue.prototype.$const = GlobalConst
 

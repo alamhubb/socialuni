@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import TokenUtil from '@/utils/TokenUtil'
 import ToastUtil from '@/utils/ToastUtil'
-import ErrorCode from '@/constants/ErrorCode'
+import ErrorCode from '@/constant/ErrorCode'
 import MsgUtil from '@/utils/MsgUtil'
 import { userModule } from '@/store'
 import PageUtil from '@/utils/PageUtil'

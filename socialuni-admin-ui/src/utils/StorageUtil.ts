@@ -1,9 +1,9 @@
-import ObjectUtil from '@/utils/ObjectUtil'
+import ObjectUtil from './ObjectUtil'
 
 export default class StorageUtil {
   // 改成any类型
   static setObj(key: string, value: any) {
-    localStorage.setItem(key, ObjectUtil.toJson(value || null))
+    localStorage.setItem(key, ObjectUtil.toJson(value))
   }
 
   static getObj(key: string): any {

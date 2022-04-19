@@ -4,7 +4,7 @@
  * @param {string} cFormat
  * @returns {string}
  */
-import CommonConst from '@/constants/CommonConst'
+import CommonConst from '@/constant/common/CommonConst'
 
 export function parseTime(dateProp: Date, cFormat?: string) {
   const format = cFormat || '{y}-{m}-{d} {h}:{i}'
@@ -67,6 +67,7 @@ export function backendDateFormat(dateStr: string): Date {
  * talk的时间
  */
 export function formatTime(dateStr: string | number | Date) {
+  console.log(dateStr)
   let date: Date
   // 如果字符串类型，ios平台不支持直接转date，需要工具类转换
   if (typeof dateStr === 'string') {
@@ -95,6 +96,11 @@ export function formatTime(dateStr: string | number | Date) {
 
 export function parseDate(date: Date) {
   const format = '{y}-{m}-{d}'
+  return parseTime(date, format)
+}
+
+export function parseTimeSecond(date: Date) {
+  const format = '{y}-{m}-{d} {h}:{i}:{s}'
   return parseTime(date, format)
 }
 

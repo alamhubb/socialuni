@@ -11,7 +11,7 @@
       <slot name="header"></slot>
     </template>
     <template #default="{row,$index}" v-if="!$const.DataTableColumnTypeEnum.elTableTypes.includes(type)">
-      <slot name="default" :row="row" $index="$index">
+      <slot name="default" :row="row" :$index="$index">
         <template v-if="$const.DataTableColumnTypeEnum.values.includes(type)">
           <!--<el-checkbox
             v-if="type === ColumnType.check || column.type === ColumnType.check"
@@ -44,7 +44,9 @@
           <template v-else-if="type===$const.DataTableColumnTypeEnum.label">
             <!--        这里逻辑太重了，最好优化-->
             <slot name="default" :row="row">
-              <el-tooltip v-if="tipProp && row[tipProp] && showMsg(row)" effect="dark"
+              <el-tooltip
+v-if="tipProp && row[tipProp] && showMsg(row)"
+effect="dark"
                           :content="row[tipProp] || propFun ? propFun(row[prop], row) : row[prop]"
                           placement="top-start">
                 <div>
@@ -57,9 +59,13 @@
             <!--        <slot name="default" :row="row">{{  row[prop] }}</slot>-->
           </template>
 
-          <el-button v-else-if="type===$const.DataTableColumnTypeEnum.delete" @click="deleteEvent($index)" size="small"
+          <el-button
+v-else-if="type===$const.DataTableColumnTypeEnum.delete"
+@click="deleteEvent($index)"
+size="small"
                      :disabled="deleteDisabled"
-                     type="danger" plain>
+                     type="danger"
+plain>
             {{
               deleteTitle
             }}

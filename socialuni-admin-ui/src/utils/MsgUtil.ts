@@ -1,5 +1,5 @@
 import ToastUtil from '@/utils/ToastUtil'
-import ErrorMsg from '@/constants/ErrorMsg'
+import ErrorMsg from '@/constant/ErrorMsg'
 
 export default class MsgUtil {
   static unLoginMessage() {

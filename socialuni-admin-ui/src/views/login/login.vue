@@ -147,11 +147,11 @@ export default class LoginPage extends Vue {
   }
 
   get authCodeRight() {
-    return this.loginUser.authCode && this.loginUser.authCode.length === 4 && NumberUtil.isAllNumber(this.loginUser.authCode)
+    return this.loginUser.authCode && this.loginUser.authCode.length === 4 && NumberUtil.isNumber(this.loginUser.authCode)
   }
 
   get phoneNumberRight() {
-    return this.loginUser.phoneNum && this.loginUser.phoneNum.length === 11 && NumberUtil.isAllNumber(this.loginUser.phoneNum)
+    return this.loginUser.phoneNum && this.loginUser.phoneNum.length === 11 && NumberUtil.isNumber(this.loginUser.phoneNum)
   }
 
   // 手机号登陆和手机号绑定
