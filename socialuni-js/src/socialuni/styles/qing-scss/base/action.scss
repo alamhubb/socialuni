@@ -2,11 +2,23 @@
   /*悬浮时变手指*/
   cursor: pointer;
 }
+
 .cursor-crosshair {
   /*悬浮时变手指*/
   cursor: crosshair;
 }
+
 .select-none {
   /*禁止选中变蓝*/
   user-select: none;
+}
+
+.cursor-not-allowed {
+  /*悬浮时变手指*/
+  cursor: not-allowed;
+}
+
+.cursor_n-resize {
+  /*悬浮时变手指*/
+  cursor: n-resize;
 }
