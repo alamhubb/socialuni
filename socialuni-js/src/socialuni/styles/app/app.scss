@@ -33,6 +33,10 @@ body {
   width: 100%;
 }
 
+text {
+  line-height: 1;
+}
+
 view,
 scroll-view,
 swiper,
@@ -40,8 +44,7 @@ input,
 textarea,
 label,
 navigator,
-image,
-text {
+image {
   line-height: 1.4;
 }
 
