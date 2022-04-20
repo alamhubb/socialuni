@@ -41,6 +41,8 @@ public class AppConfigConst {
 
     public static final Map<String, Object> appConfigMap = new HashMap<>(100);
 
+    
+
     //审核成功分
     public static final String auditSuccessKey = "举报成功奖励分数";
     public static final Integer auditSuccessValue = 10;
