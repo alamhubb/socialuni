@@ -41,8 +41,10 @@ public class ConfigMapRefreshService {
             log.warn("广告展示频率不建议大于30，没有意义");
         }
         List<Integer> showAdList = new ArrayList<>();
+        //设置广告间隔
         showAdList.add(talkAdInterval - 1);
         for (int i = 0; i < talkShowAdCount - 1; i++) {
+            //每次*2
             int a = talkAdInterval * (i + 2) - 1;
             if (i < 4) {
                 a = a + (((i + 1) * i) / 2) * talkAdInterval / 2;

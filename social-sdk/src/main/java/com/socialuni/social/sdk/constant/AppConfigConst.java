@@ -10,6 +10,11 @@ import java.util.Map;
 
 @Slf4j
 public class AppConfigConst {
+    public static final String talkShowAdIntervalKey = "广告展示数量间隔";
+    public static final String talkShowAdCountKey = "动态页广告展示次数";
+    public static final String talkShowAdIndexListKey = "动态页展示广告索引列表";
+
+
     public static final Integer qingchiDevId = 1;
     public static final String appConfig = "appConfig";
 
@@ -25,9 +30,7 @@ public class AppConfigConst {
     public static final String errorCode604SystemKey = "604系统异常提示";
     public static final String errorCode601UnLogin = "601未登录提示";
     public static final String rewardedAdLimit = "每天观看激励视频限制次数";
-    public static final String talkShowAdIntervalKey = "广告展示数量间隔";
-    public static final String talkShowAdCountKey = "动态页广告展示次数";
-    public static final String talkShowAdIndexListKey = "动态页展示广告索引列表";
+
 
     //获取联系方式消费贝壳数量
     public static final String contactExpenseShellKey = "contactExpenseShell";
@@ -39,9 +42,10 @@ public class AppConfigConst {
     public static final String appAppUpdateVersionKey = "appAppUpdateVersion";
     public static final String updateModeKey = "updateMode";
 
-    public static final Map<String, Object> appConfigMap = new HashMap<>(100);
-
-    
+    public static final Map<String, Object> appConfigMap = new HashMap<String, Object>(){{
+        put(AppConfigConst.talkShowAdIntervalKey, 8);
+        put(AppConfigConst.talkShowAdCountKey, 10);
+    }};
 
     //审核成功分
     public static final String auditSuccessKey = "举报成功奖励分数";
