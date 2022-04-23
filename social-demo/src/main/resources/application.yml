@@ -6,8 +6,8 @@ spring:
     throw-exception-if-no-handler-found: true
   jpa:
     database: MYSQL
-    show-sql: true
-#    show-sql: false
+#    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
