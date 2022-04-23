@@ -45,7 +45,6 @@ spring:
     #    url: jdbc:mysql://cdb-ovq86wcu.bj.tencentcdb.com:10204/qingchidev?characterEncoding=utf-8&useSSL=false
     username: school_dev
     password: x8NAPw3dLwWpy56w
-    driver-class-name: com.mysql.jdbc.Driver
     hikari:
       read-only: false
       #等待连接池分配连接的最大时长（毫秒）
