@@ -1,6 +1,8 @@
 package com.socialuni.social.web.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,5 +23,10 @@ public class WebCorsConfig implements WebMvcConfigurer {
 //                .exposedHeaders(HttpHeaders.SET_COOKIE, "haha")
                 //跨域允许时间
                 .maxAge(3600);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
