@@ -24,8 +24,7 @@ public class SocialCircleService {
     private SocialCircleRedis socialCircleRedis;
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, UserDO user) {
-
-            SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), user);
+        SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), user);
         circleDO = socialCircleRepository.save(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
     }
@@ -38,6 +37,4 @@ public class SocialCircleService {
     public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
         return ResultRO.success(socialCircleRedis.getAllCircleTypesRedis(GenderType.all));
     }
-
-
 }
