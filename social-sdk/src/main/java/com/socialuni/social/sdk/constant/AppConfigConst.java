@@ -14,6 +14,22 @@ public class AppConfigConst {
     public static final String talkShowAdCountKey = "动态页广告展示次数";
     public static final String talkShowAdIndexListKey = "动态页展示广告索引列表";
 
+    //用户可以获取几次验证码
+    public static final String authCodeCountKey = "用户可以获取几次验证码";
+    public static final String authCodeIpCountKey = "用户IP可以获取几次验证码";
+    public static final String authCodePhoneCountKey = "手机号可以获取几次验证码";
+    //验证码有效时间多少秒
+    public static final String authCodeValidMinuteKey = "验证码有效时间多少分";
+
+    public static final Map<String, Object> appConfigMap = new HashMap<String, Object>(){{
+        put(AppConfigConst.talkShowAdIntervalKey, 8);
+        put(AppConfigConst.talkShowAdCountKey, 10);
+        put(AppConfigConst.authCodeCountKey, 30);
+        put(AppConfigConst.authCodeIpCountKey, 200);
+        put(AppConfigConst.authCodePhoneCountKey, 30);
+        put(AppConfigConst.authCodeValidMinuteKey, 30);
+    }};
+
 
     public static final Integer qingchiDevId = 1;
     public static final String appConfig = "appConfig";
@@ -42,10 +58,6 @@ public class AppConfigConst {
     public static final String appAppUpdateVersionKey = "appAppUpdateVersion";
     public static final String updateModeKey = "updateMode";
 
-    public static final Map<String, Object> appConfigMap = new HashMap<String, Object>(){{
-        put(AppConfigConst.talkShowAdIntervalKey, 8);
-        put(AppConfigConst.talkShowAdCountKey, 10);
-    }};
 
     //审核成功分
     public static final String auditSuccessKey = "举报成功奖励分数";
@@ -73,13 +85,9 @@ public class AppConfigConst {
     public static final Integer reportCountHide = 1;
     //验证码间隔多少秒
     public static final String authCodeIntervalKey = "验证码间隔多少秒";
-    //验证码有效时间多少秒
-    public static final String authCodeValidMinuteKey = "验证码有效时间多少分";
 
-    //用户可以获取几次验证码
-    public static final String authCodeCountKey = "用户可以获取几次验证码";
-    public static final String authCodeIpCountKey = "用户IP可以获取几次验证码";
-    public static final String authCodePhoneCountKey = "手机号可以获取几次验证码";
+
+
 
     public static final String notify_skip_page = "/pagesLazy/talk/talkDetail?talkId=";
 
