@@ -1,16 +1,21 @@
-import { Module, VuexModule } from 'vuex-class-modules'
+import {Module, VuexModule} from 'vuex-class-modules'
 import LoginProvider from '../constant/LoginProvider'
 import PlatformType from '../constant/PlatformType'
-import UniSystemType from '../constant/UniSystemType'
-import UniPlatformType from '../constant/UniPlatformType'
+import UniSystemType from '../constant/uni/UniSystemType'
+import UniPlatformType from '../constant/uni/UniPlatformType'
 import DevModeType from '@/socialuni/constant/DevModeType'
 import GetSystemInfoResult = UniApp.GetSystemInfoResult
+import UniDeviceType from "@/socialuni/constant/uni/UniDeviceType";
 
 //和终端相关的信息
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialSystemModule extends VuexModule {
   isDevMode: boolean = process.env.NODE_ENV === DevModeType.dev
 
+  //设备，pc，手机，ipad
+  device = null
+  isPc = false
+  isMobile = false
   isIos = false
   isAndroid = false
 
@@ -29,9 +34,10 @@ export default class SocialSystemModule extends VuexModule {
   //推送使用，用于app端记录给谁推送，区分用户
   clientid = ''
   // 条件编译属性
-  // ios android h5,默认安卓
+  // ios android windows,默认安卓
   system = ''
   systemInfo: GetSystemInfoResult = null
+  //h5，小程序，app
   platform = ''
   // 小程序类型
   mpPlatform = ''
@@ -50,13 +56,13 @@ export default class SocialSystemModule extends VuexModule {
   appVersion = 0
 
   //ios和qq小程序禁止虚拟支付，统一判断
-  get isIosAndMpQQ () {
+  get isIosAndMpQQ() {
     return this.isIos && this.isMpQQ
   }
 
 
   // 动态页展示广告,设置一些默认值，在这里设置还是去使用的地方设置
-  getSystemInfo () {
+  getSystemInfo() {
     //设置平台
     // #ifdef APP-PLUS
     this.isApp = true
@@ -95,6 +101,10 @@ export default class SocialSystemModule extends VuexModule {
     //小程序开发工具时会为 devtools
     const platform: string = systemInfo.platform
     //设置系统
+    if (model === UniDeviceType.pc) {
+      this.isPc = true
+      this.device = UniDeviceType.pc
+    }
     if ((platform && (platform === UniSystemType.ios)) || (model && (model.indexOf('iPhone') > -1 || model.indexOf('iPad') > -1))) {
       this.isIos = true
       //必须有此判断，要不然会覆盖mp的值
@@ -103,6 +113,10 @@ export default class SocialSystemModule extends VuexModule {
       this.isAndroid = true
       this.system = UniSystemType.android
     }
+
+    console.log(model)
+    console.log(this.isPc)
+    console.log(this.device)
 
     this.screenHeight = systemInfo.screenHeight
     this.windowHeight = systemInfo.windowHeight
