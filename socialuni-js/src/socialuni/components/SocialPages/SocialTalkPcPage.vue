@@ -1,6 +1,6 @@
 <template>
   <div class="h100p row-center">
-    <div class="flex-col h100p w700">
+    <div class="flex-col h100p w600">
       <view v-show="showTagSearch" class="h100p">
         <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
         ></tag-search>
@@ -41,7 +41,124 @@
         <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
         <!--  #endif -->
 
-        <tabs-talk class="flex-1" ref="tabsTalk"></tabs-talk>
+        <view ref="tabsTalk" v-if="talkTabs.length" class="flex-col h100p">
+          <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
+          <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
+          <div class="flex-row px-sm mb-xss">
+            <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
+                    class="bd-radius flex-1 mr-sm">
+              <template #default="{tab,index,value}">
+                <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab.name }}</view>
+              </template>
+            </q-tabs>
+            <div class="flex-none row-col-center">
+              <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
+            </div>
+          </div>
+
+          <q-pull-refresh ref="pullRefresh" @refresh="queryEnd">
+            <swiper :current="currentTabIndex"
+                    :style="{
+                  'height':'calc(100vh - '+talksListHeightSub+'px)',
+                }"
+                    @change="talkSwiperChange">
+              <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
+                <!--
+                使用view实现的问题，没有scroll事件小程序上
+                <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
+                      :lower-threshold="800"
+                      @scroll.native="talksScrollEvent"
+                      @scroll="talksScrollEvent"
+                >-->
+
+                <!--          首页展示区分不同类型，
+                          圈子类型、关注类型、首页类型、同城类型-->
+
+                <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom" :scroll-top="scrollTop"
+                             :lower-threshold="800"
+                             @scroll="talksScrollEvent">
+                  <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+                  <div class="px-sm pb-60 bg-theme3"
+                       v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
+                    <talk-swipers v-if="talkTabs[swiperIndex].type === 'home' && configShowSwipers"></talk-swipers>
+
+                    <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+                                    <div class="row-between-center mb-sm">
+                                      <div>
+                                        圈主：xxxx
+                                      </div>
+                                      <div class="row-col-center">
+                                        <div class="color-sub">竞选详情</div>
+                                        <div class="color-sub ml-md">圈子管理</div>
+                                      </div>
+                                    </div>
+                                    <div class="row-col-center">
+                                      小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
+                                    </div>
+                                  </div>-->
+
+
+                    <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
+                      <talk-item :talk="talk"
+                                 :talk-tab-type="talkTabObj.type"
+                                 @delete-talk="deleteTalk"
+                      />
+                      <!-- app端广告有问题-->
+                      <!--  #ifdef APP-PLUS -->
+                      <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                        <ad class="bg-white" adpid="1890536227"></ad>
+                      </view>-->
+                      <!--  #endif -->
+                      <!--wx平台显示的广告-->
+                      <!--  #ifdef MP-WEIXIN -->
+                      <ad v-if="showAd&&showAdIndexList.includes(index)"
+                          class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
+                      <!--  #endif -->
+
+                      <!--qq平台显示的广告-->
+                      <!--  #ifdef MP-QQ -->
+                      <ad v-if="showAd&&showAdIndexList.includes(index)"
+                          class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
+                      <!--  #endif -->
+
+                      <!--头条平台显示的广告-->
+                      <!--  #ifdef MP-TOUTIAO -->
+                      <ad v-if="showAd&&showAdIndexList.includes(index)"
+                          class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
+                      <!--  #endif -->
+                    </view>
+
+                    <!-- 下拉刷新组件 -->
+                    <view class="mt-xs">
+                      <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
+                                     :contentText="loadMoreText"></uni-load-more>
+                    </view>
+                  </div>
+                  <template v-else>
+                    <view v-if="user" class="row-center h500 pt-100 font-bold text-gray text-md">
+                      您还没有关注其他人
+                    </view>
+                    <view v-else class="row-center h500 pt-100 font-bold text-gray text-md" @click="toLoginVue">
+                      您还没有登录，点击登录
+                    </view>
+                  </template>
+                </scroll-view>
+              </swiper-item>
+            </swiper>
+          </q-pull-refresh>
+          <!--            从附近哪里选择城市-->
+          <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
+          <!--            除去搜索栏和导航栏的高度就是剩余高度-->
+
+          <!--        默认附近，可以切换城市，城市-->
+
+          <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
+
+          <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+
+          <social-talk-filter-dialog ref="talkFilterDialog"
+                                     @confirm="autoChooseUseLocationQueryTalks(true)"></social-talk-filter-dialog>
+        </view>
       </view>
       <msg-input>
       </msg-input>
@@ -63,15 +180,18 @@ import TalkFilterUtil from '../../utils/TalkFilterUtil'
 import UniUtil from '../../utils/UniUtil'
 import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
-  socialAppStore, socialCircleModule,
+  socialAppStore,
+  socialCircleModule,
   socialConfigStore,
   socialLocationModule,
   socialLocationStore,
   socialNotifyModule,
-  socialNotifyStore, socialSystemModule,
+  socialNotifyStore,
+  socialSystemModule,
   socialTagModule,
   socialTagStore,
-  socialTalkModule, socialTalkStore,
+  socialTalkModule,
+  socialTalkStore,
   socialUserStore
 } from '../../store'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
@@ -128,8 +248,8 @@ export default class SocialTalkPcPage extends Vue {
     talkFilterDialog: SocialTalkFilterDialog
     cityPicker: QCityPicker
   }
-  @socialTagStore.State('tags') readonly tags: TagVO []
   @socialUserStore.State('user') user: CenterUserDetailRO
+  @socialTagStore.State('tags') tags: TagVO[]
   // 轮播图
   // 点击通知去通知页
   @socialNotifyStore.Getter('unreadNotifies') unreadNotifies: UnreadNotifyVO[]
@@ -139,6 +259,8 @@ export default class SocialTalkPcPage extends Vue {
   @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
   @socialTagStore.State('selectTagName') selectTagName: string
   @socialLocationStore.Getter('location') location: DistrictVO
+
+  dynamic = null
 
   current = 0
   // tag 相关
@@ -156,6 +278,26 @@ export default class SocialTalkPcPage extends Vue {
   showFilter = false
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
+
+
+  // 生命周期
+  created() {
+    // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
+    // LocationUtil.getCityByIpWebAPI()
+    // 更新广告状态
+    // 更新广告刷新时间
+    this.updateShowAd()
+    this.queryTime = new Date()
+    this.load()
+    // 根据本地存储获取之前的 homeName
+    // 有了位置才进行查询,因为查询同城需要位置信息
+    // 获取位置，查询同城talks使用
+  }
+
+  load() {
+    this.dynamic = () => import('@/socialuni/components/SocialPages/LoadComponent.vue')
+    // this.dynamic = () => import('@/socialuni/components/SocialPages' + this.contentName + '.vue')
+  }
 
   switchCircleTabValue(event: { detail: any }) {
     const detail: {
@@ -186,6 +328,8 @@ export default class SocialTalkPcPage extends Vue {
   // life
   mounted() {
     this.pageMounted()
+    // 获取元素高度，用来计算scroll-view高度
+    this.getTabBarTop()
   }
 
   pageMounted() {
@@ -194,10 +338,6 @@ export default class SocialTalkPcPage extends Vue {
     // 指的是用户选择的筛选性别
     this.initQuery()
     this.socialTalkScroll({scrollTop: 0})
-  }
-
-  tabsTalkOnHide() {
-    this.$refs.tabsTalk.tabsTalkOnHide()
   }
 
   @Watch('homeSwipers')
@@ -226,17 +366,6 @@ export default class SocialTalkPcPage extends Vue {
   @Watch('unreadNotifies')
   unreadNotifiesWatch() {
     this.unreadNotifiesNum = this.unreadNotifies.length
-  }
-
-  // 去除页面初始化的，初始化查询
-  initQuery() {
-    // this.$refs.tabsTalk.initQuery()
-    this.$nextTick(() => {
-      //首次打开talk页面，获取用户位置用来查询
-      // locationModule.appLunchInitDistrict().then(() => {
-      this.$refs.tabsTalk.initQuery()
-      // })
-    })
   }
 
   openTagSearchVue() {
@@ -270,19 +399,12 @@ export default class SocialTalkPcPage extends Vue {
     PageUtil.toTalkAddPage()
   }
 
-  openCityPicker() {
-    this.$refs.cityPicker.open()
-  }
-
   cityChange(district: DistrictVO) {
     socialLocationModule.setLocation(district)
     this.$refs.tabsTalk.autoChooseUseLocationQueryTalks(true)
   }
 
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
-  @socialLocationStore.Getter('location') location: DistrictVO
-  // 轮播图
-  @socialConfigStore.State('showSwipers') configShowSwipers: boolean
 
   readonly loading: string = LoadMoreType.loading
   loadMoreText = {
@@ -314,24 +436,6 @@ export default class SocialTalkPcPage extends Vue {
   queryTime = new Date()
 
 
-  // 生命周期
-  created() {
-    // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
-    // LocationUtil.getCityByIpWebAPI()
-    // 更新广告状态
-    // 更新广告刷新时间
-    this.updateShowAd()
-    this.queryTime = new Date()
-    // 根据本地存储获取之前的 homeName
-    // 有了位置才进行查询,因为查询同城需要位置信息
-    // 获取位置，查询同城talks使用
-  }
-
-  mounted() {
-    // 获取元素高度，用来计算scroll-view高度
-    this.getTabBarTop()
-  }
-
   // 供父组件调用，每次隐藏把数据缓存进storage
   tabsTalkOnHide() {
     // 存入store
@@ -362,9 +466,6 @@ export default class SocialTalkPcPage extends Vue {
     // #endif
   }
 
-
-  @socialUserStore.State('user') user: CenterUserDetailRO
-  @socialTagStore.State('tags') tags: TagVO[]
 
   // 页面是否为首次查询
 
@@ -540,11 +641,6 @@ export default class SocialTalkPcPage extends Vue {
 
   openCityPicker() {
     this.$refs.cityPicker.open()
-  }
-
-  cityChange(district: DistrictVO) {
-    socialLocationModule.setLocation(district)
-    this.startPullDown()
   }
 
   @socialConfigStore.State('appConfig') readonly appConfig: object

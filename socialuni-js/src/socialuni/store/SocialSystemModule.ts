@@ -103,7 +103,12 @@ export default class SocialSystemModule extends VuexModule {
     //设置系统
     if (model === UniDeviceType.pc) {
       this.isPc = true
+      this.isMobile = false
       this.device = UniDeviceType.pc
+    } else {
+      this.isPc = false
+      this.isMobile = true
+      this.device = UniDeviceType.phone
     }
     if ((platform && (platform === UniSystemType.ios)) || (model && (model.indexOf('iPhone') > -1 || model.indexOf('iPad') > -1))) {
       this.isIos = true

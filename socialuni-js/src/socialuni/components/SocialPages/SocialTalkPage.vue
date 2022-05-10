@@ -1,29 +1,24 @@
 <template>
   <div class="h100p">
-    <social-talk-pc-page v-if="isPc"></social-talk-pc-page>
-    <social-talk-mobile-page v-else></social-talk-mobile-page>
+    <!--    <social-talk-pc-page v-if="isPc"></social-talk-pc-page>-->
+    <!--    <social-talk-mobile-page v-else></social-talk-mobile-page>-->
+    <social-talk-mobile-page></social-talk-mobile-page>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 
 import TalkItem from '../SocialTalk/TalkItem.vue'
-import PagePath from '../../constant/PagePath'
 import TagVO from '../../model/community/tag/TagVO'
-import RouterUtil from '../../utils/RouterUtil'
-import PageUtil from '../../utils/PageUtil'
 import TalkFilterUtil from '../../utils/TalkFilterUtil'
-import UniUtil from '../../utils/UniUtil'
 import TalkSwipers from '../SocialTalk/talkSwipers.vue'
 import {
   socialAppStore,
   socialConfigStore,
-  socialLocationModule,
   socialLocationStore,
-  socialNotifyModule,
-  socialNotifyStore, socialSystemStore,
-  socialTagModule,
+  socialNotifyStore,
+  socialSystemStore,
   socialTagStore,
   socialTalkModule,
   socialUserStore
