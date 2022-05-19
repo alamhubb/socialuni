@@ -39,7 +39,7 @@ public class WebInterceptor extends SocialWebRequestLogInterceptor {
         Integer userId = CenterUserUtil.getMineUserIdInterceptor();
 
         requestLogDO.setUserId(userId);
-        Integer devId = DevAccountUtils.getDevIdAllowNull();
+        Integer devId = DevAccountUtils.getDevIdNotNull();
         requestLogDO.setDevId(devId);
         RequestLogUtil.saveAsync(requestLogDO);
         String userIp = requestLogDO.getIp();

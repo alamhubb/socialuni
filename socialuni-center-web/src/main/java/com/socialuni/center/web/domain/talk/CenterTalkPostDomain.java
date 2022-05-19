@@ -83,14 +83,14 @@ public class CenterTalkPostDomain {
         Integer devId = DevAccountUtils.getDevIdNotNull();
 
         talkPostQO.setDevId(devId);
-        TagDO devTagDO = tagRepository.findFirstByDevId(devId);
+       /* TagDO devTagDO = tagRepository.findFirstByDevId(devId);
 
         List<String> tagNames = talkPostQO.getTagNames();
         if (tagNames == null || (tagNames.size() == 1 && tagNames.get(0).equals("添加话题"))) {
             tagNames = new ArrayList<>();
         }
         tagNames.add(devTagDO.getName());
-        talkPostQO.setTagNames(tagNames);
+        talkPostQO.setTagNames(tagNames);*/
 
         SocialTalkRO socialTalkRO = socialTalkPostDomain.postTalk(mineUser, talkPostQO);
 

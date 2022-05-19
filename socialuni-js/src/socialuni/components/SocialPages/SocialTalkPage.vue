@@ -99,5 +99,7 @@ export default class SocialTalkPage extends Vue {
   showFilter = false
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
+
+
 }
 </script>

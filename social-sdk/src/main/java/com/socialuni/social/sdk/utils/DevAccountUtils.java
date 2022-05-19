@@ -72,13 +72,13 @@ public class DevAccountUtils {
         return devAccountDO.getDevNum();
     }
 
-    public static Integer getDevIdAllowNull() {
+    /*public static Integer getDevIdAllowNull() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
         if (devAccountDO != null) {
             return devAccountDO.getId();
         }
         return null;
-    }
+    }*/
 
     public static Integer getDevIdNotNull() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
@@ -116,7 +116,8 @@ public class DevAccountUtils {
         //先从req中获取
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
         if (devAccountDO == null) {
-            throw new SocialBusinessException("开发者信息为空");
+            devAccountDO = DevAccountUtils.getDevAccount(1);
+//            throw new SocialBusinessException("开发者信息为空");
         }
         return devAccountDO;
     }
@@ -174,7 +175,7 @@ public class DevAccountUtils {
         }
     }
 
-    /*public static DevAccountDO getDevAccount(Integer devId) {
-        return devAccountRepository.findFirstById(devId);
-    }*/
+    public static DevAccountDO getDevAccount(Integer devId) {
+        return devAccountRepository.findOneById(devId);
+    }
 }

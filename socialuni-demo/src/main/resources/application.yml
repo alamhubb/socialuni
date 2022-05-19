@@ -2,9 +2,9 @@ spring:
   profiles:
 #    active: qkypc
 #    active: local
-#    active: qkylocal
+    active: qkylocal
 #    active: localprod
-    active: prod
+#    active: prod
 #    active: demo
   jpa:
     database: MYSQL

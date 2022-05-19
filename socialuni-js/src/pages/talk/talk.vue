@@ -1,25 +1,26 @@
 <template>
-  <social-talk-page ref="socialTalk"></social-talk-page>
+  <!--  <social-talk-page ref="socialTalk"></social-talk-page>-->
+  <social-talk-mobile-page ref="socialTalk"></social-talk-mobile-page>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import SocialTalkPage from 'socialuni/components/SocialPages/SocialTalkPage.vue'
+import {Component, Vue} from 'vue-property-decorator'
+import SocialTalkMobilePage from "@/socialuni/components/SocialPages/SocialTalkMobilePage.vue";
 
 @Component({
-  components: { SocialTalkPage }
+  components: {SocialTalkMobilePage}
 })
 export default class TalkPage extends Vue {
   $refs: {
-    socialTalk: SocialTalkPage
+    socialTalk: SocialTalkMobilePage
   }
 
-  onHide () {
+  onHide() {
     //@ts-ignore
     this.$refs.socialTalk.tabsTalkOnHide()
   }
 
-  onPageScroll (e) {
+  onPageScroll(e) {
     //@ts-ignore
     this.$refs.socialTalk.socialTalkScroll(e)
   }

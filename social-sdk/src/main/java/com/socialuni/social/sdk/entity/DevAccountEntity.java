@@ -1,10 +1,10 @@
-package com.socialuni.admin.web.manage;
+package com.socialuni.social.sdk.entity;
 
-import com.socialuni.admin.web.constant.AdminAppConfigConst;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.sdk.redis.DevAccountRedis;
 import com.socialuni.social.sdk.repository.community.TagRepository;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
@@ -51,6 +51,7 @@ public class DevAccountEntity {
         devAccountDO.setType(DevAccountType.personal);
         devAccountDO.setStatus(CommonStatus.enable);
         devAccountDO.setCreateTime(curDate);
+        devAccountDO.setCallApiCount(0);
         devAccountDO.setUpdateTime(curDate);
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
 

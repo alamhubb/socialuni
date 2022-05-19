@@ -2,7 +2,7 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.admin.web.manage.DevAccountEntity;
+import com.socialuni.social.sdk.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;

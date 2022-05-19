@@ -46,8 +46,6 @@ public class AuthThirdUserEntity {
     //登录和 绑定手机号和微信手机号三个地方使用
     public CenterMineUserDetailRO authThirdUser(UserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
-        String uid = UnionIdDbUtil.createUserUid(mineUser.getId(), mineUser, devAccountDO);
-        centerMineUserDetailRO.setId(uid);
 
         //只是记录一个授权记录
         ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getId(), centerMineUserDetailRO.getId());

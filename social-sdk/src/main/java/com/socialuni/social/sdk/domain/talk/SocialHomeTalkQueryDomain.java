@@ -74,7 +74,7 @@ public class SocialHomeTalkQueryDomain {
         socialHomeTabTalkQueryBO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
         socialHomeTabTalkQueryBO.setMaxAge(queryQO.getMaxAge());
-        socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdAllowNull());
+        socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdNotNull());
 
         String circleName = queryQO.getCircleName();
         if (TalkTabType.circle_type.equals(tabType)) {

@@ -20,6 +20,7 @@ public class AppConfigConst {
     public static final String authCodePhoneCountKey = "手机号可以获取几次验证码";
     //验证码有效时间多少秒
     public static final String authCodeValidMinuteKey = "验证码有效时间多少分";
+    public static final String authCodeIntervalKey = "验证码间隔多少秒";
 
     public static final Map<String, Object> appConfigMap = new HashMap<String, Object>(){{
         put(AppConfigConst.talkShowAdIntervalKey, 8);
@@ -28,6 +29,7 @@ public class AppConfigConst {
         put(AppConfigConst.authCodeIpCountKey, 200);
         put(AppConfigConst.authCodePhoneCountKey, 30);
         put(AppConfigConst.authCodeValidMinuteKey, 30);
+        put(AppConfigConst.authCodeIntervalKey, 120);
     }};
 
 
@@ -83,8 +85,6 @@ public class AppConfigConst {
     //被多少人举报则隐藏
     public static final String reportCountHideKey = "被举报几次隐藏";
     public static final Integer reportCountHide = 1;
-    //验证码间隔多少秒
-    public static final String authCodeIntervalKey = "验证码间隔多少秒";
 
 
 

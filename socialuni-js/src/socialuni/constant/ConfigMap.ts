@@ -35,7 +35,8 @@ export default class ConfigMap {
   static readonly shellInfoUrlDefault: string = 'https://www.socialuni.cn/shellInfo'
 
   // 验证码间隔多少秒
-  static readonly authCodeIntervalKey: string = 'authCodeInterval'
+  static readonly authCodeIntervalKey: string = '验证码间隔多少秒'
+  static readonly authCodeInterval: string = 'authCodeInterval'
   static readonly authCodeIntervalDefault: number = 60
 
   static readonly qqServiceKey: string = 'qqService'

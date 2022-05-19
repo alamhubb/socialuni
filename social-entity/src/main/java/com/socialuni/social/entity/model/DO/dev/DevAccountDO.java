@@ -30,13 +30,12 @@ public class DevAccountDO extends CommonContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Long devNum;
     //个人身份证，企业税号
-    @Column(nullable = false, columnDefinition = "varchar(255) default ''")
+    @Column(columnDefinition = "varchar(255) default ''")
     private String identityNum;
     @Column(nullable = false, columnDefinition = "varchar(255) default '" + GenderType.all + "'")
     private String appGenderType;
     private String appName;
     //手机号
-    @Column(nullable = false)
     private String phoneNum;
 
     //类型，帐户类型，个人，企业
@@ -44,7 +43,7 @@ public class DevAccountDO extends CommonContentBaseDO implements Serializable {
     private String type;
 
     //个人或企业名称
-    @Column(nullable = false, columnDefinition = "varchar(255) default ''")
+    @Column(columnDefinition = "varchar(255) default ''")
     private String realName;
 
     //api调用次数

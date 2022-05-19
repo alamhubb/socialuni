@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.constant;
+package com.socialuni.social.sdk.constant;
 
 
 import lombok.extern.slf4j.Slf4j;
