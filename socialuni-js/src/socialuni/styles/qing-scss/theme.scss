@@ -9,6 +9,7 @@ $color-black: #000;
 $color-special: #1F2329 !default;
 //默认字体色
 $color-main: #333333 !default;
+$color-th: #444444 !default;
 $color-content: #666666 !default;
 $color-sub: #909399 !default;
 $color-tip: #C0C4CC !default;
@@ -113,6 +114,7 @@ $colors-custom-font: (
         default: $color-main,
         special: $color-special,
         main: $color-main,
+        th: $color-th,
         content: $color-content,
         sub: $color-sub,
         tip: $color-tip,

@@ -7,7 +7,6 @@
   @extend .row-col-center;
   //深色主题，字体白色，其他主题色
   color: $color-main;
-  @extend .overflow-hidden;
   background: mix($color-white, $color-main, 93%);
   border-color: mix($color-white, $color-main, 60%);
 }
@@ -21,21 +20,7 @@
     @extend .mr-xs;
     @extend .row-col-center;
     color: $color;
-    @extend .overflow-hidden;
     background: mix($color-white, $color, 90%);
-    //border: 1px solid mix($color-white, $color, 60%);
-  }
-
-  .q-tag-#{''+$key+''}_dark {
-    padding: $box-mn;
-    line-height: 1;
-    @extend .font-sm;
-    @extend .bd-radius;
-    @extend .mr-xs;
-    @extend .row-col-center;
-    color: $color-white;
-    @extend .overflow-hidden;
-    background: $color;
     //border: 1px solid mix($color-white, $color, 60%);
   }
 
@@ -47,7 +32,6 @@
     @extend .mr-xs;
     @extend .row-col-center;
     color: $color;
-    @extend .overflow-hidden;
     background: mix($color-white, $color, 90%);
     border: 1px solid mix($color-white, $color, 60%);
   }
@@ -60,7 +44,6 @@
   @extend .bd-radius;
   @extend .mr-xs;
   @extend .row-col-center;
-  @extend .overflow-hidden;
   color: $color-main;
   background: $color-white;
   border: $border-base;
