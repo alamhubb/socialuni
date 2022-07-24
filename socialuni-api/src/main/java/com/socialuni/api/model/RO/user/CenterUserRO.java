@@ -1,5 +1,6 @@
 package com.socialuni.api.model.RO.user;
 
+import com.socialuni.api.model.RO.SocialuniUidRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class CenterUserRO {
+public class CenterUserRO extends SocialuniUidRO {
     //必须为string，返回给app后是uuid无法变为int
     private String id;
     private String nickname;
@@ -18,7 +19,7 @@ public class CenterUserRO {
     private String gender;
 
     public CenterUserRO(CenterUserRO centerUserRO) {
-        this.id = centerUserRO.getId();
+        super(centerUserRO);
         this.nickname = centerUserRO.getNickname();
         this.avatar = centerUserRO.getAvatar();
         this.gender = centerUserRO.getGender();

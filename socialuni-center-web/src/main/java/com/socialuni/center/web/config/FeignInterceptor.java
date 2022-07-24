@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @ConditionalOnClass(RequestInterceptor.class)
 public class FeignInterceptor implements RequestInterceptor {
     @Value("${socialuni.secret-key}")
-    private String socialDevSecretKey;
+    private String socialuniDevSecretKey;
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialDevSecretKey);
+        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialuniDevSecretKey);
     }
 }

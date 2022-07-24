@@ -14,6 +14,7 @@ public class SocialAppConfig {
     private static String userDefaultAvatar;
     private static Integer systemUserId;
     private static String staticResourceUrl;
+    private static String socialuniDevSecretKey;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
 
@@ -33,6 +34,12 @@ public class SocialAppConfig {
         SocialAppConfig.systemUserId = systemUserId;
     }
 
+
+    @Value("${socialuni.secret-key}")
+    public static void setSocialuniDevSecretKey(String socialuniDevSecretKey) {
+        SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
+    }
+
     public static String getUserDefaultAvatar() {
         return userDefaultAvatar;
     }
@@ -47,5 +54,11 @@ public class SocialAppConfig {
             throw new SocialParamsException("图片路径错误异常");
         }
         return staticResourceUrl + "/";
+    }
+
+    //是否配置了中心服务器
+    public static boolean hasCenterServer() {
+        //为空则异常
+        return StringUtils.isNotEmpty(socialuniDevSecretKey);
     }
 }
