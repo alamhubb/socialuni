@@ -1,6 +1,8 @@
 package com.socialuni.center.web.config;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -19,5 +21,10 @@ public class FeignInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialuniDevSecretKey);
+
+        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        if (mineUser != null) {
+            requestTemplate.header(SocialFeignHeaderName.thirdUserId, mineUser.getId().toString());
+        }
     }
 }

@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CenterUserRO extends SocialuniUidRO {
     //必须为string，返回给app后是uuid无法变为int
-    private String id;
     private String nickname;
     private String avatar;
     private String gender;

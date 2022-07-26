@@ -10,11 +10,13 @@ import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.function.Function;
 
 
+@Component
 public class UniAPIUtils {
     static SocialuniUserAPI socialuniUserAPI;
 
