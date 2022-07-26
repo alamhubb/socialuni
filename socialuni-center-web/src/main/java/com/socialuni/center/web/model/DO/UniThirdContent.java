@@ -9,24 +9,21 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "u_socialuni_uid",
+@Table(name = "u_third_content",
         indexes = {
-                @Index(columnList = "socialuniId")
+                @Index(columnList = "thirdId")
         },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
                 @UniqueConstraint(columnNames = {"contentId", "contentType"}),
+                @UniqueConstraint(columnNames = {"thirdId", "contentType"}),
         }
 )
 @Data
 @NoArgsConstructor
-public class SocialuniUidDO extends CommonBaseDO {
+public class UniThirdContent extends CommonBaseDO {
     @Column(nullable = false, updatable = false)
-    private String socialuniUid;
-    private String contentUid;
-
-    public SocialuniUidDO(SocialuniUidRO appDO, SocialuniUidRO socialuniDO) {
-        this.contentUid = appDO.getId();
-        this.socialuniUid = socialuniDO.getId();
-    }
+    private String thirdId;
+    private Integer contentId;
+    private String contentType;
 }
