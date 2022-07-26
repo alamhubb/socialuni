@@ -27,11 +27,10 @@ public class UniAPIUtils {
 
     //list转换，TO类List转为RO类List
     public static <QO extends ContentAddQO, RO extends SocialuniUidRO> void callUniAPI(SocialuniUidRO appRO, Function<QO, ResultRO<RO>> function, QO postQO) {
-        ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.getMineUser();
+        ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
         CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
         if (centerMineUserDetailRO == null) {
-            UserDO mineUser = SocialUserUtil.getMineUserNotNull();
-
+            UserDO mineUser = CenterUserUtil.getMineUser();
             //生成登录类
             SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
             socialProviderLoginQO.setNickName(mineUser.getNickname());

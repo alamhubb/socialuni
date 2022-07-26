@@ -2,6 +2,7 @@ package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.manage.UniUserAccountRepository;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
@@ -57,13 +58,21 @@ public class CenterUserUtil {
     }
 
     public static UserDO getMineUserAllowNull() {
-        String thirdUserId = CenterTokenUtil.getThirdUserId();
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
+        UserDO userDO;
+        //区分本应用和其他应用的不同逻辑
+        if (devAccountDO.getId() == 1) {
+            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
+            userDO = getMineUser(tokenDO);
+        } else {
+            String thirdUserId = CenterTokenUtil.getThirdUserId();
 
-        UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), thirdUserId);
-        if (uniUserAccountDO == null){
-            return null;
+            UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), thirdUserId);
+            if (uniUserAccountDO == null) {
+                return null;
+            }
+            userDO = SocialUserUtil.get(uniUserAccountDO.getUserId());
         }
-        UserDO userDO = SocialUserUtil.get(uniUserAccountDO.getUserId());
         return userDO;
     }
 
