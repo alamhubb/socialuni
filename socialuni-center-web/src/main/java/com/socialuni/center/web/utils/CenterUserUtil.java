@@ -1,5 +1,7 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.center.web.manage.UniUserAccountRepository;
+import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
@@ -10,6 +12,8 @@ import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
+import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +23,16 @@ import javax.annotation.Resource;
 @Component
 public class CenterUserUtil {
     private static ThirdUserRepository thirdUserRepository;
+    private static UniUserAccountRepository uniUserAccountRepository;
 
     @Resource
     public void setThirdUserRepository(ThirdUserRepository thirdUserRepository) {
         CenterUserUtil.thirdUserRepository = thirdUserRepository;
+    }
+
+    @Resource
+    public void setUniUserAccountRepository(UniUserAccountRepository uniUserAccountRepository) {
+        CenterUserUtil.uniUserAccountRepository = uniUserAccountRepository;
     }
 
     public static Integer getMineUserIdAllowNull() {
@@ -47,8 +57,14 @@ public class CenterUserUtil {
     }
 
     public static UserDO getMineUserAllowNull() {
-        ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
-        return getMineUser(tokenDO);
+        String thirdUserId = CenterTokenUtil.getThirdUserId();
+
+        UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), thirdUserId);
+        if (uniUserAccountDO == null){
+            return null;
+        }
+        UserDO userDO = SocialUserUtil.get(uniUserAccountDO.getUserId());
+        return userDO;
     }
 
     public static UserDO getMineUser() {

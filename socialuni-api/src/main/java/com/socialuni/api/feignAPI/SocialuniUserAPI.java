@@ -25,6 +25,9 @@ public interface SocialuniUserAPI {
     @PostMapping("getMineUser")
     ResultRO<CenterMineUserDetailRO> getMineUser();
 
+    @PostMapping("queryThirdUser")
+    ResultRO<CenterMineUserDetailRO> queryThirdUser();
+
     @PostMapping("queryUserDetail")
     ResultRO<CenterUserDetailRO> queryUserDetail(@RequestBody @Valid CenterUserIdQO centerUserIdQO);
 

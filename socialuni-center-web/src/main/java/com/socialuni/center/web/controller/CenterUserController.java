@@ -34,6 +34,11 @@ public class CenterUserController implements SocialuniUserAPI {
     }
 
     @Override
+    public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
+        return centerUserService.queryThirdUser();
+    }
+
+    @Override
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
         return centerUserService.queryUserDetail(centerUserIdQO);
     }

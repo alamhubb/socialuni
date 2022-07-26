@@ -51,6 +51,15 @@ public class CenterUserService {
         return new ResultRO<>(mineUser);
     }
 
+    public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
+        UserDO mineUserDO = CenterUserUtil.getMineUserAllowNull();
+        if (mineUserDO == null) {
+            return ResultRO.success();
+        }
+        CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
+        return new ResultRO<>(mineUser);
+    }
+
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
         UserDO detailUserDO = CenterUserUtil.get(centerUserIdQO.getUserId());
 

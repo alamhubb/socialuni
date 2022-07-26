@@ -102,13 +102,14 @@ public class DevAccountUtils {
         if (StringUtils.isEmpty(secretKey)) {
             return null;
         }
-        DevAccountDO devAccountDO;
+        /*DevAccountDO devAccountDO;
         if (SocialAppEnv.getContainsProdEnv()) {
             devAccountDO = devAccountRepository.findOneBySecretKey(secretKey);
         } else {
             ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(secretKey));
             devAccountDO = resultRO.getData();
-        }
+        }*/
+        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(secretKey);
         return devAccountDO;
     }
 
@@ -138,7 +139,7 @@ public class DevAccountUtils {
     //得到用户信息
     private static DevAccountDO getDevAccountByToken(String token) {
         //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据
-        if (SocialAppEnv.getContainsProdEnv()) {
+        /*if (SocialAppEnv.getContainsProdEnv()) {
             //校验解析token
             String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
             if (StringUtils.isEmpty(devSecretKey)) {
@@ -172,7 +173,22 @@ public class DevAccountUtils {
                 throw new SocialParamsException("token被破解");
             }
             return devAccountDO;
+        }*/
+        //校验解析token
+        String devSecretKey = SocialTokenUtil.getUserKeyByToken(token);
+        if (StringUtils.isEmpty(devSecretKey)) {
+            return null;
         }
+        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devSecretKey);
+        if (devAccountDO == null) {
+            throw new SocialParamsException("token被破解");
+        }
+        //todo 这里需要校验有效期吧
+        String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(devAccountDO.getId());
+        if (!token.equals(tokenCode)) {
+            return null;
+        }
+        return devAccountDO;
     }
 
     public static DevAccountDO getDevAccount(Integer devId) {
