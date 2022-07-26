@@ -1,5 +1,9 @@
 package com.socialuni.social.model.model.QO;
 
-public interface ContentAddQO {
-    String getContent();
+import lombok.Data;
+
+@Data
+public class ContentAddQO {
+    String id;
+    String content;
 }

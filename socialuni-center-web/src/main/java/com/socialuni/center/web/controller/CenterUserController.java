@@ -7,6 +7,7 @@ import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.center.web.serive.CenterUserService;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
@@ -21,6 +22,11 @@ public class CenterUserController implements SocialuniUserAPI {
 
     @Resource
     private CenterUserService centerUserService;
+
+    @Override
+    public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+        return centerUserService.registryUser(loginQO);
+    }
 
     @Override
     public ResultRO<CenterMineUserDetailRO> getMineUser() {

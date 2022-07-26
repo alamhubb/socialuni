@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SocialTalkPostQO implements ContentAddQO {
+public class SocialTalkPostQO extends ContentAddQO {
     private List<SocialTalkImgAddQO> imgs;
     private String adCode;
     private String visibleType;

@@ -4,16 +4,15 @@ import com.socialuni.api.model.QO.user.CenterUserIdQO;
 import com.socialuni.api.model.QO.user.CenterUserImgDeleteQO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
+import com.socialuni.center.web.entity.UniUserRegistryDomain;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.factory.RO.user.CenterUserDetailROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialUserIdentityAuthQO;
-import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
-import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
-import com.socialuni.social.model.model.QO.user.SocialUserImgDeleteQO;
+import com.socialuni.social.model.model.QO.user.*;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthPreCheckRO;
 import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthRO;
@@ -21,6 +20,7 @@ import com.socialuni.social.sdk.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.platform.tencent.TencentCloud;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +35,16 @@ public class CenterUserService {
     SocialAddUserImgDomain socialAddUserImgDomain;
     @Resource
     SocialDeleteUserImgDomain socialDeleteUserImgDomain;
+    @Resource
+    UniUserRegistryDomain socialuniUserRegistryDomain;
+
+
+    public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
+        UserDO mineUserDO = socialuniUserRegistryDomain.registryUser(devAccountDO, loginQO);
+        CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
+        return new ResultRO<>(mineUser);
+    }
 
     public ResultRO<CenterMineUserDetailRO> getMineUser() {
         CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail();

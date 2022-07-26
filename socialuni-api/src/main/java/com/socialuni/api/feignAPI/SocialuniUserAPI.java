@@ -5,6 +5,7 @@ import com.socialuni.api.model.QO.user.CenterUserImgDeleteQO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.QO.user.SocialUserEditQO;
 import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,6 +19,8 @@ import javax.validation.Valid;
 @RequestMapping("user")
 @FeignClient(name = "user", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniUserAPI {
+    @PostMapping("registryUser")
+    ResultRO<CenterMineUserDetailRO> registryUser(@RequestBody @Valid SocialProviderLoginQO loginQO);
 
     @PostMapping("getMineUser")
     ResultRO<CenterMineUserDetailRO> getMineUser();

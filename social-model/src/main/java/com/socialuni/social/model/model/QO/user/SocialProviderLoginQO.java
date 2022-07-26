@@ -1,6 +1,7 @@
 package com.socialuni.social.model.model.QO.user;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author qinkaiyuan
@@ -8,12 +9,13 @@ import lombok.Data;
  */
 @Data
 public class SocialProviderLoginQO {
-    //qq、wx、phone,前台叫provider
+    //qq、wx、phone,前台叫provider,
     private String loginType;
-    //todo，provider plateform好像还是有点乱，需要确认，涉及到数据库用户信息和常量类型
+    //小程序平台 todo，provider plateform好像还是有点乱，需要确认，涉及到数据库用户信息和常量类型
     private String provider;
     //h5、mp、app//先判断平台，然后判断provider
     private String platform;
+    private String system;
 
     //为什么这里存用户名什么的，因为app时，微信情况下，直接有unionId，就不再去请求了
     //app平台兑换openid unionid使用,目测 accessToken无用了
