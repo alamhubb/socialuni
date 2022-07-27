@@ -1,4 +1,4 @@
-package com.socialuni.center.web.manage;
+package com.socialuni.center.web.repository;
 
 
 import com.socialuni.center.web.model.DO.UniUserAccountDO;

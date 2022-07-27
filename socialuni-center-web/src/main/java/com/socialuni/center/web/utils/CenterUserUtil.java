@@ -1,6 +1,6 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.web.manage.UniUserAccountRepository;
+import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.exception.SocialNotLoginException;
@@ -13,8 +13,6 @@ import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

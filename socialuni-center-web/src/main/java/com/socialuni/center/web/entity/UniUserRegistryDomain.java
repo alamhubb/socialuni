@@ -1,6 +1,6 @@
 package com.socialuni.center.web.entity;
 
-import com.socialuni.center.web.manage.UniUserAccountRepository;
+import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
