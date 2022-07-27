@@ -18,10 +18,13 @@ public class SocialUserPhoneBaseDO extends CommonContentBaseDO implements Serial
     private String phoneCountryCode;
     @Column(nullable = false)
     private String phoneNum;
+    @Column(nullable = false)
+    private Boolean thirdAuth;
 
     public SocialUserPhoneBaseDO(Integer userId, String phoneCountryCode, String phoneNum) {
         this.userId = userId;
         this.phoneCountryCode = phoneCountryCode;
         this.phoneNum = phoneNum;
+        this.thirdAuth = false;
     }
 }

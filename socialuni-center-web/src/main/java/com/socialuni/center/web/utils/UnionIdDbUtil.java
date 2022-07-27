@@ -112,8 +112,9 @@ public class UnionIdDbUtil {
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId, Integer devId) {
+        return contentId.toString();
 //        return contentId.toString();
-        Date curDate = new Date();
+        /*Date curDate = new Date();
 //        log.info("创建uniond1：" + SystemUtil.getCurrentTimeSecond());
         //如果这两个都不为空则查找是否存在有效的
         //每天0点到现在不能发布超过10条
@@ -163,7 +164,7 @@ public class UnionIdDbUtil {
 //        log.info("创建uniond：" + unionIdDO.getUnionId());
         unionIdStore.saveAsync(unionIdDO);
 //        log.info("创建uniond6：" + SystemUtil.getCurrentTimeSecond());
-        return unionIdDO.getUnionId();
+        return unionIdDO.getUnionId();*/
     }
 
     public static Integer getResultByUnionId(String contentType, String unionId) {

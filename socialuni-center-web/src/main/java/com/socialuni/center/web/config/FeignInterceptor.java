@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnClass(RequestInterceptor.class)
 public class FeignInterceptor implements RequestInterceptor {
-    @Value("${socialuni.secret-key}")
+    @Value("${socialuni.secret-key:null}")
     private String socialuniDevSecretKey;
 
     @Override

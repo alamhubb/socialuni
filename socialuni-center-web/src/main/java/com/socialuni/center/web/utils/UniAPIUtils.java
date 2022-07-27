@@ -3,10 +3,12 @@ package com.socialuni.center.web.utils;
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
 import com.socialuni.api.model.RO.SocialuniUidRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.ContentAddQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
@@ -27,26 +29,28 @@ public class UniAPIUtils {
 
     //list转换，TO类List转为RO类List
     public static <QO extends ContentAddQO, RO extends SocialuniUidRO> void callUniAPI(SocialuniUidRO appRO, Function<QO, ResultRO<RO>> function, QO postQO) {
-        ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
-        CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
-        if (centerMineUserDetailRO == null) {
-            UserDO mineUser = CenterUserUtil.getMineUser();
-            //生成登录类
-            SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-            socialProviderLoginQO.setNickName(mineUser.getNickname());
-            socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
-            socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
-            socialProviderLoginQO.setBirthday(mineUser.getBirthday());
-            socialProviderLoginQO.setCity(mineUser.getCity());
-            socialProviderLoginQO.setUnionId(mineUser.getId().toString());
+        if (SocialAppConfig.hasCenterServer()){
+            ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
+            CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
+            if (centerMineUserDetailRO == null) {
+                UserDO mineUser = CenterUserUtil.getMineUser();
+                //生成登录类
+                SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
+                socialProviderLoginQO.setNickName(mineUser.getNickname());
+                socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
+                socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+                socialProviderLoginQO.setBirthday(mineUser.getBirthday());
+                socialProviderLoginQO.setCity(mineUser.getCity());
+                socialProviderLoginQO.setUnionId(mineUser.getId().toString());
 
-            socialProviderLoginQO.setProvider(RequestUtil.getProvider());
-            socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
-            socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+                socialProviderLoginQO.setProvider(RequestUtil.getProvider());
+                socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
+                socialProviderLoginQO.setSystem(RequestUtil.getSystem());
 
-            socialuniUserAPI.registryUser(socialProviderLoginQO);
+                socialuniUserAPI.registryUser(socialProviderLoginQO);
+            }
+            postQO.setId(appRO.getId());
+            function.apply(postQO);
         }
-        postQO.setId(appRO.getId());
-        function.apply(postQO);
     }
 }

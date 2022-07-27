@@ -61,4 +61,11 @@ public class SocialUserPhoneManage {
         socialUserPhoneDO = socialUserPhoneRepository.save(socialUserPhoneDO);
         return socialUserPhoneDO;
     }
+
+    public SocialUserPhoneDO createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum, Boolean thirdAuth) {
+        SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUserId, phoneCountryCode, phoneNum);
+        socialUserPhoneDO.setThirdAuth(true);
+        socialUserPhoneDO = socialUserPhoneRepository.save(socialUserPhoneDO);
+        return socialUserPhoneDO;
+    }
 }

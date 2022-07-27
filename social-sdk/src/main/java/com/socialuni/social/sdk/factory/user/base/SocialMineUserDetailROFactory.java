@@ -48,10 +48,12 @@ public class SocialMineUserDetailROFactory {
             //为自己返回生日，方便修改，和手机号
             mineUserDetailRO.setBirthday(mineUser.getBirthday());
             if (socialUserPhoneDO != null) {
-                String realPhoneNum = socialUserPhoneDO.getPhoneNum();
-                if (StringUtils.isNotEmpty(realPhoneNum)) {
-                    realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);
-                    mineUserDetailRO.setPhoneNum(realPhoneNum);
+                if (!socialUserPhoneDO.getThirdAuth()){
+                    String realPhoneNum = socialUserPhoneDO.getPhoneNum();
+                    if (StringUtils.isNotEmpty(realPhoneNum)) {
+                        realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);
+                        mineUserDetailRO.setPhoneNum(realPhoneNum);
+                    }
                 }
             }
         }

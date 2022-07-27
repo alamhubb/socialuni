@@ -44,7 +44,7 @@ public class UniUserRegistryDomain {
 
             uniUserAccountRepository.save(uniUserAccountDO);
 
-            socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", "三方注册");
+            socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", "手机号为三方授权", true);
         }
         return mineUser;
     }
