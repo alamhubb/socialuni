@@ -7,6 +7,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.manage.SocialUserManage;
+import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class UniUserRegistryDomain {
     private SocialUserManage socialUserManage;
     @Resource
     UniUserAccountRepository uniUserAccountRepository;
+    @Resource
+    SocialUserPhoneManage socialUserPhoneManage;
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
@@ -40,6 +43,8 @@ public class UniUserRegistryDomain {
             UniUserAccountDO uniUserAccountDO = new UniUserAccountDO(devId, thirdUserId, mineUser.getId());
 
             uniUserAccountRepository.save(uniUserAccountDO);
+
+            socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", "三方注册");
         }
         return mineUser;
     }
