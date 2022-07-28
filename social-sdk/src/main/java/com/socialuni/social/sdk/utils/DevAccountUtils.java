@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
@@ -121,6 +122,16 @@ public class DevAccountUtils {
 //            throw new SocialBusinessException("开发者信息为空");
         }
         return devAccountDO;
+    }
+
+    public static boolean isCenterServer() {
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
+        Integer devId = devAccountDO.getId();
+        return devId == 1;
+    }
+
+    public static boolean notCenterServer() {
+        return !DevAccountUtils.isCenterServer();
     }
 
     public static DevAccountDO getAdminDevAccountNotNull() {

@@ -44,20 +44,27 @@ public class UniAPIUtils {
     public static <QO extends ContentAddQO, RO extends SocialuniUidRO> SocialuniUidRO callUniAPI(String contentType, Function<QO, SocialuniUidRO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         Integer devId = devAccountDO.getId();
-        if (StringUtils.isNotEmpty(contentAddQO.getId())) {
-            if (devAccountDO.getId() == 1) {
+        String thirdId = contentAddQO.getId();
+        if (StringUtils.isNotEmpty(thirdId)) {
+            if (DevAccountUtils.isCenterServer()) {
                 throw new SocialSystemException("默认开发者不该进入校验内容是否重复逻辑");
             }
             //如果已经存在此动态，则无需重复添加，直接返回
-            UniThirdContentDO uniThirdContentDO = uniThirdContentRepository.findByDevIdAndContentTypeAndThirdId(devId, contentType, contentAddQO.getId());
+            UniThirdContentDO uniThirdContentDO = uniThirdContentRepository.findByDevIdAndContentTypeAndThirdId(devId, contentType, thirdId);
             if (uniThirdContentDO != null) {
                 return null;
             }
         }
         SocialuniUidRO socialuniUidRO = domain.apply(contentAddQO);
         //如果自身为中心
-        if (StringUtils.isNotEmpty(contentAddQO.getId())) {
-            UniThirdContentDO uniThirdContentDO = new UniThirdContentDO(devId, contentType, contentAddQO.getId(), socialuniUidRO.getId());
+        if (DevAccountUtils.notCenterServer()) {
+            //如果无后台模式会为空
+            UniThirdContentDO uniThirdContentDO;
+            if (StringUtils.isEmpty(thirdId)) {
+                uniThirdContentDO = new UniThirdContentDO(devId, contentType, thirdId, socialuniUidRO.getId());
+            } else {
+                uniThirdContentDO = new UniThirdContentDO(devId, contentType, socialuniUidRO.getId(), socialuniUidRO.getId());
+            }
             uniThirdContentRepository.save(uniThirdContentDO);
         }
         //如果配置了中心
