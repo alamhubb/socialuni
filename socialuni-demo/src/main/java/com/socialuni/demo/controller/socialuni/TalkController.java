@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,8 +32,8 @@ public class TalkController implements SocialuniTalkAPI {
     }
 
     @Override
-    public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
-        return socialuniTalkAPI.postTalk(talkPostQO);
+    public ResultRO<CenterTalkRO> postTalk(URI baseUrl, SocialTalkPostQO talkPostQO) {
+        return socialuniTalkAPI.postTalk(baseUrl, talkPostQO);
     }
 
     @Override

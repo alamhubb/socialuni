@@ -39,6 +39,9 @@ public class DevAccountDO extends CommonContentBaseDO implements Serializable {
     private String phoneNum;
     //联盟id，唯一标识，不得小于32位，全网唯一
     private String socialuniId;
+    private String apiUrl;
+    //调用子应用时传入的秘钥，由对方提供
+    private String apiSecretKey;
 
     //类型，帐户类型，个人，企业
     @Column(nullable = false, columnDefinition = "varchar(20) default '" + DevAccountType.personal + "'")

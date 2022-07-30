@@ -53,6 +53,7 @@ public class DevAccountEntity {
         devAccountDO.setCreateTime(curDate);
         devAccountDO.setCallApiCount(0);
         devAccountDO.setUpdateTime(curDate);
+        devAccountDO.setSocialuniId(UUIDUtil.getUUID());
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
 
         //创建话题，还要创建用户

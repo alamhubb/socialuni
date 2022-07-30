@@ -4,6 +4,7 @@ import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,6 +20,10 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDO, Intege
     @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
     DevAccountDO findOneBySecretKey(String secretKey);
 
+
+    @Cacheable(cacheNames = "getDevAccountBySocialuniId", key = "#socialuniId")
+    DevAccountDO findOneBySocialuniId(String socialuniId);
+
     DevAccountDO findOneByAppName(String appName);
 
     DevAccountDO findOneByDevNum(Long devNum);
@@ -28,4 +33,6 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDO, Intege
 
     //不需要缓存，低频, admin登录使用
     DevAccountDO findOneByPhoneNumOrderByIdAsc(String phoneNum);
+
+    List<DevAccountDO> findAllByStatusAndApiUrlNotNullAndApiSecretKeyNotNull(String status);
 }

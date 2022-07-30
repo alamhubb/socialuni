@@ -5,7 +5,6 @@ import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.sdk.repository.dev.ThirdUserTokenRepository;
-import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
@@ -33,7 +32,7 @@ public class CenterTokenUtil {
     }
     public static String getThirdUserId() {
         HttpServletRequest request = RequestUtil.getRequest();
-        String thirdUserId = request.getHeader(SocialFeignHeaderName.thirdUserId);
+        String thirdUserId = request.getHeader(SocialFeignHeaderName.socialuniThirdUserId);
         if (SocialTokenUtil.isSuccess(thirdUserId)) {
             return thirdUserId;
         }

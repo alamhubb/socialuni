@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RequestMapping("talk")
@@ -30,7 +31,7 @@ public interface SocialuniTalkAPI {
      * @return
      */
     @PostMapping("postTalk")
-    ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);
+    ResultRO<CenterTalkRO> postTalk(URI baseUrl, @RequestBody @Valid SocialTalkPostQO talkPostQO);
 
     @PostMapping("deleteTalk")
     ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkIdQO talkIdQO);

@@ -1,10 +1,12 @@
 package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.social.entity.model.DO.dev.DevSocialuniIdDO;
 import com.socialuni.social.sdk.constant.AppData;
 import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.sdk.entity.DevAccountEntity;
 import com.socialuni.social.sdk.redis.DistrictRedis;
+import com.socialuni.social.sdk.repository.dev.DevSocialuniIdRepository;
 import com.socialuni.social.sdk.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
@@ -31,6 +33,9 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     DevAccountEntity devAccountEntity;
 
+    @Resource
+    DevSocialuniIdRepository devSocialuniIdRepository;
+
     @Override
     @Async
     public void run(ApplicationArguments args) {
@@ -40,7 +45,11 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountDO == null) {
-            devAccountEntity.createDevAccount(null);
+            devAccountDO = devAccountEntity.createDevAccount(null);
+            DevSocialuniIdDO devSocialuniIdDO = new DevSocialuniIdDO();
+            //设置第一个的socialuniId
+            devSocialuniIdDO.setSocialuniId(devAccountDO.getSocialuniId());
+            devSocialuniIdRepository.save(devSocialuniIdDO);
         }
 
         configMapRefreshService.refreshConfigMap();

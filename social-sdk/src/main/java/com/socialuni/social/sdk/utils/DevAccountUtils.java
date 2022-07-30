@@ -205,4 +205,8 @@ public class DevAccountUtils {
     public static DevAccountDO getDevAccount(Integer devId) {
         return devAccountRepository.findOneById(devId);
     }
+
+    public static DevAccountDO getDevAccountBySocialuniId(String socialuniId) {
+        return devAccountRepository.findOneBySocialuniId(socialuniId);
+    }
 }
