@@ -1,19 +1,13 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
-import com.socialuni.social.entity.model.DO.dev.DevTokenDO;
-import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.sdk.repository.dev.DevAccountProviderRepository;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.sdk.repository.dev.DevTokenRepository;
-import com.socialuni.cloud.config.SocialAppEnv;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
@@ -124,14 +118,14 @@ public class DevAccountUtils {
         return devAccountDO;
     }
 
-    public static boolean isCenterServer() {
+    public static boolean notPushServer() {
+        return !DevAccountUtils.pushServer();
+    }
+
+    public static boolean pushServer() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         Integer devId = devAccountDO.getId();
         return devId == 1;
-    }
-
-    public static boolean notCenterServer() {
-        return !DevAccountUtils.isCenterServer();
     }
 
     public static DevAccountDO getAdminDevAccountNotNull() {

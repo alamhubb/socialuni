@@ -1,21 +1,13 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.web.model.DO.UniThirdContentDO;
+import com.socialuni.center.web.model.DO.UniThirdContentIdDO;
 import com.socialuni.center.web.repository.UniThirdContentRepository;
-import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.model.model.QO.ContentAddQO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.social.sdk.manage.SocialUserManage;
-import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -38,11 +30,11 @@ public class UniThirdContentUtils {
         if (devAccountDO.getId() == 1) {
             throw new SocialSystemException("默认开发者不该进入校验内容是否重复逻辑");
         }
-        UniThirdContentDO uniThirdContentDO = uniThirdContentRepository.findByDevIdAndContentTypeAndThirdId(devId, contentType, contentAddQO.getId());
+        UniThirdContentIdDO uniThirdContentDO = uniThirdContentRepository.findByDevIdAndContentTypeAndThirdId(devId, contentType, contentAddQO.getId());
         if (uniThirdContentDO == null) {
             return;
         }
-        uniThirdContentDO = new UniThirdContentDO(devId, contentType, contentAddQO.getId(), contentId);
+        uniThirdContentDO = new UniThirdContentIdDO(devId, contentType, contentAddQO.getId(), contentId);
 
         uniThirdContentRepository.save(uniThirdContentDO);
     }
