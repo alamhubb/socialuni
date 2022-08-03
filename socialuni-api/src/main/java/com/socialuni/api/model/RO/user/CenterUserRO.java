@@ -1,6 +1,6 @@
 package com.socialuni.api.model.RO.user;
 
-import com.socialuni.api.model.RO.SocialuniUidRO;
+import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
 import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class CenterUserRO extends SocialuniUidRO {
+public class CenterUserRO extends SocialuniContentIdRO {
     //必须为string，返回给app后是uuid无法变为int
     private String nickname;
     private String avatar;

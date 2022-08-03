@@ -1,6 +1,5 @@
-package com.socialuni.api.model.RO;
+package com.socialuni.social.model.model.RO.community;
 
-import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,11 +9,11 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniUidRO {
+public class SocialuniContentIdRO {
     //必须为string，返回给app后是uuid无法变为int
-    private String id;
+    private Integer id;
 
-    public SocialuniUidRO(SocialuniUidRO socialuniUidRO) {
-        this.id = socialuniUidRO.getId();
+    public SocialuniContentIdRO(SocialuniContentIdRO socialuniContentIdRO) {
+        this.id = socialuniContentIdRO.getId();
     }
 }

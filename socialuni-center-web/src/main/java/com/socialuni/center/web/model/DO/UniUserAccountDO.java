@@ -1,6 +1,5 @@
 package com.socialuni.center.web.model.DO;
 
-import com.socialuni.api.model.RO.SocialuniUidRO;
 import com.socialuni.social.entity.model.DO.base.CommonBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;

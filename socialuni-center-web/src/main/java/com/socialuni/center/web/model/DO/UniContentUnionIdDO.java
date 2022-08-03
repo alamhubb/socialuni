@@ -45,7 +45,8 @@ public class UniContentUnionIdDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private String readContentUnionId;
 
-    public UniContentUnionIdDO(String contentType, Integer contentId) {
+    public UniContentUnionIdDO(Integer dataDevId, String contentType, Integer contentId) {
+        this.dataDevId = dataDevId;
         this.contentId = contentId;
         this.contentType = contentType;
     }

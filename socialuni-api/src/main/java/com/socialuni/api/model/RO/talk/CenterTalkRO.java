@@ -1,7 +1,8 @@
 package com.socialuni.api.model.RO.talk;
 
-import com.socialuni.api.model.RO.SocialuniUidRO;
+import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
 import com.socialuni.api.model.RO.user.CenterContentUserRO;
+import com.socialuni.social.model.model.RO.community.SocialuniUnionIdRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkTagRO;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.List;
  * 不需要像帖子一样，每次有回复都刷新，因为不愁看，且你评论后的，有动静你会有通知
  */
 @Data
-public class CenterTalkRO extends SocialuniUidRO {
+public class CenterTalkRO extends SocialuniUnionIdRO {
     private CenterContentUserRO user;
     private String content;
     private List<CenterTalkImgRO> imgs;

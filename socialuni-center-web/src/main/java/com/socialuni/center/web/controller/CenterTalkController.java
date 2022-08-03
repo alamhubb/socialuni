@@ -30,7 +30,7 @@ public class CenterTalkController implements SocialuniTalkAPI {
     }
 
     @Override
-    public ResultRO<CenterTalkRO> postTalk(URI baseUrl, SocialTalkPostQO talkPostQO) {
+    public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         return centerTalkService.postTalk(talkPostQO);
     }
 

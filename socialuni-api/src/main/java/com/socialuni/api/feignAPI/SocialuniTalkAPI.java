@@ -31,7 +31,7 @@ public interface SocialuniTalkAPI {
      * @return
      */
     @PostMapping("postTalk")
-    ResultRO<CenterTalkRO> postTalk(URI baseUrl, @RequestBody @Valid SocialTalkPostQO talkPostQO);
+    ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);
 
     @PostMapping("deleteTalk")
     ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkIdQO talkIdQO);

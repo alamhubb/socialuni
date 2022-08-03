@@ -1,20 +1,20 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
-import com.socialuni.api.model.RO.SocialuniUidRO;
+import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.model.DO.UniThirdContentIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
-import com.socialuni.center.web.repository.UniThirdContentRepository;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.model.model.QO.ContentAddQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.model.model.RO.community.SocialuniUnionIdRO;
+import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
@@ -24,8 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.net.URI;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
@@ -52,12 +50,20 @@ public class UniAPIUtils {
     }
 
     //list转换，TO类List转为RO类List
-    public static <QO extends ContentAddQO, RO extends SocialuniUidRO> SocialuniUidRO callUniAPI(String contentType, Function<QO, SocialuniUidRO> domain, BiFunction<URI, QO, ResultRO<RO>> callApi, QO contentAddQO) {
-        String socialuniId = RequestUtil.getDataSocialuniId();
+    public static <QO extends ContentAddQO, RO extends SocialuniUnionIdRO> SocialuniUnionIdRO callUniAPI(String contentType, Function<QO, SocialuniContentIdRO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
+        String dataSocialuniId = RequestUtil.getDataSocialuniId();
+        //校验此条数据是否已经写入过。
+        String dataContentUnionId = contentAddQO.getId();
+        //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
         DevAccountDO dataDevAccount = null;
         //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
-        if (StringUtils.isNotEmpty(socialuniId)) {
-            dataDevAccount = DevAccountUtils.getDevAccountBySocialuniId(socialuniId);
+        if (StringUtils.isEmpty(dataSocialuniId) && !StringUtils.isEmpty(dataContentUnionId)) {
+            //有一个为空
+            throw new SocialParamsException("缺少数据所有者id");
+        }
+        if (StringUtils.isNotEmpty(dataSocialuniId)) {
+            //appSocialuniId不为空
+            dataDevAccount = DevAccountUtils.getDevAccountBySocialuniId(dataSocialuniId);
             if (dataDevAccount == null) {
                 throw new SocialParamsException("不存在的联盟Id");
             }
@@ -68,10 +74,8 @@ public class UniAPIUtils {
             }
             //异常，有推送时，则开发者肯定不为中心，而是三方
             if (DevAccountUtils.pushServer()) {
-                throw new SocialBusinessException("逻辑错误，中心重复调用自己，或者秘钥泄露");
+                throw new SocialSystemException("逻辑错误，中心重复调用自己，或者秘钥泄露");
             }
-            //校验此条数据是否已经写入过。
-            String dataContentUnionId = contentAddQO.getId();
             //仅仅是个校验，防止重复写入 ， dataSocialuniId都不空才能查，dataSociuni为空，则肯定thirdId为空
             if (StringUtils.isNotEmpty(dataContentUnionId)) {
                 //如果已经存在此动态，则无需重复添加，直接返回
@@ -84,13 +88,27 @@ public class UniAPIUtils {
         //推送的需要校验，非推送的不用校验
         //校验功能搞好了，接下来就可以直接写入数据了
         //不为空
-        SocialuniUidRO socialuniUidRO = domain.apply(contentAddQO);
+        SocialuniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
+
         //这就写入了数据，然后写入unionId表
         //如果自身为中心
+        UniContentUnionIdDO uniContentUnionIdDO;
         if (DevAccountUtils.pushServer()) {
             //如果无后台模式会为空
-            UniContentUnionIdDO uniContentUnionIdDO = new UniContentUnionIdDO(contentType, Integer.parseInt(socialuniUidRO.getId()));
+            uniContentUnionIdDO = new UniContentUnionIdDO(1, contentType, socialuniContentIdRO.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        } else {
+            //无后台模式
+            if (StringUtils.isEmpty(dataContentUnionId)) {
+                //如果无后台模式会为空
+                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
+                uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+            } else {
+                //中心了
+                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
+                uniContentUnionIdDO.setDataContentUnionId(dataContentUnionId);
+                uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+            }
         }
 
 
@@ -109,7 +127,7 @@ public class UniAPIUtils {
 
         //给中心设置开发者秘钥，在应用启动时，判断是否设置了中心服务器，
 
-        devAccountRepository.findAllByStatusAndApiUrlNotNullAndApiSecretKeyNotNull(CommonStatus.enable);
+//        devAccountRepository.findAllByStatusAndApiUrlNotNullAndApiSecretKeyNotNull(CommonStatus.enable);
 
 
         //如果配置了中心
@@ -133,11 +151,13 @@ public class UniAPIUtils {
 
                 socialuniUserAPI.registryUser(socialProviderLoginQO);
             }
-            contentAddQO.setId(socialuniUidRO.getId());
-//            callApi.apply(contentAddQO);
+            if (StringUtils.isEmpty(dataContentUnionId) && DevAccountUtils.pushServer()) {
+                contentAddQO.setId(uniContentUnionIdDO.getId().toString());
+            }
+            callApi.apply(contentAddQO);
         } else {
 
         }
-        return socialuniUidRO;
+        return socialuniContentIdRO;
     }
 }
