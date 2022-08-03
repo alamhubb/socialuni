@@ -8,6 +8,7 @@ import com.socialuni.api.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.serive.CenterTalkService;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ public class CenterTalkController implements SocialuniTalkAPI {
     }
 
     @Override
-    public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
+    public ResultRO<SocialTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         return centerTalkService.postTalk(talkPostQO);
     }
 

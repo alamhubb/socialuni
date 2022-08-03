@@ -9,8 +9,8 @@ public class SocialOAuthUserROFactory {
 
     public static SocialOAuthUserRO getSocialOAuthUserRO(CenterMineUserDetailRO mineUser) {
         SocialOAuthUserRO socialUserRO = new SocialOAuthUserRO();
-        socialUserRO.setOpenId(mineUser.getId());
-        socialUserRO.setUnionId(mineUser.getId());
+        socialUserRO.setOpenId(mineUser.getId().toString());
+        socialUserRO.setUnionId(mineUser.getId().toString());
         socialUserRO.setNickName(mineUser.getNickname());
         socialUserRO.setAvatarUrl(mineUser.getAvatar());
         socialUserRO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));

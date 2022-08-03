@@ -65,8 +65,7 @@ public class SocialTalkService {
 
     public ResultRO<Void> postTalk(SocialTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
-        socialTalkPostDomain.postTalk(mineUser, talkPostQO);
+        socialTalkPostDomain.postTalk(talkPostQO);
         return new ResultRO<>();
     }
 

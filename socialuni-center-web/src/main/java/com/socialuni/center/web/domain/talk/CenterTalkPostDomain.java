@@ -92,7 +92,7 @@ public class CenterTalkPostDomain {
         tagNames.add(devTagDO.getName());
         talkPostQO.setTagNames(tagNames);*/
 
-        SocialTalkRO socialTalkRO = socialTalkPostDomain.postTalk(mineUser, talkPostQO);
+        SocialTalkRO socialTalkRO = socialTalkPostDomain.postTalk(talkPostQO);
 
         CenterTalkRO centerTalkRO = CenterTalkROFactory.getTalkRO(socialTalkRO, mineUser);
         return centerTalkRO;

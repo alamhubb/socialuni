@@ -25,6 +25,7 @@ import com.socialuni.social.sdk.repository.community.*;
 import com.socialuni.social.sdk.service.content.ModelContentCheck;
 import com.socialuni.social.sdk.service.tag.TagService;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.sdk.utils.TalkRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -61,7 +62,9 @@ public class SocialTalkPostDomain {
     @Resource
     ModelContentCheck modelContentCheck;
 
-    public SocialTalkRO postTalk(UserDO mineUser, SocialTalkPostQO talkPostQO) {
+    public SocialTalkRO postTalk(SocialTalkPostQO talkPostQO) {
+        UserDO mineUser = SocialUserUtil.getMineUserNotNull();
+
         modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
 
 

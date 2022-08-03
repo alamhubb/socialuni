@@ -50,8 +50,9 @@ public class UniAPIUtils {
     }
 
     //list转换，TO类List转为RO类List
-    public static <QO extends ContentAddQO, RO extends SocialuniUnionIdRO> SocialuniUnionIdRO callUniAPI(String contentType, Function<QO, SocialuniContentIdRO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
-        String dataSocialuniId = RequestUtil.getDataSocialuniId();
+    public static <QO extends ContentAddQO, RO extends SocialuniContentIdRO> SocialuniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
+//        , Function<QO, ResultRO<RO>> callApi, QO contentAddQO
+        /*String dataSocialuniId = RequestUtil.getDataSocialuniId();
         //校验此条数据是否已经写入过。
         String dataContentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
@@ -158,6 +159,7 @@ public class UniAPIUtils {
         } else {
 
         }
-        return socialuniContentIdRO;
+        return socialuniContentIdRO;*/
+        return null;
     }
 }

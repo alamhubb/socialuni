@@ -17,7 +17,7 @@ public class SocialBindUserSocialuniAccountDomain {
     SocialBindUserProviderAccountEntity socialBindUserProviderAccountEntity;
 
 
-    public void bindUserSocialAccount(Integer mineUserId, SocialLoginRO<CenterMineUserDetailRO> socialLoginRO) {
+    /*public void bindUserSocialAccount(Integer mineUserId, SocialLoginRO<CenterMineUserDetailRO> socialLoginRO) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniProviderLoginType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
@@ -30,7 +30,7 @@ public class SocialBindUserSocialuniAccountDomain {
 
         socialBindUserProviderAccountEntity.bindProviderAccount(mineUserId, loginQO);
     }
-
+*/
     @Async
     public void bindUserSocialAccount(Integer mineUserId, String token, String userUid) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();

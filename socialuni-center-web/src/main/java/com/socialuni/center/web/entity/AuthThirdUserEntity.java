@@ -48,7 +48,7 @@ public class AuthThirdUserEntity {
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //只是记录一个授权记录
-        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getId(), centerMineUserDetailRO.getId());
+        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getId(), centerMineUserDetailRO.getId().toString());
 
         if (AuthType.phone.equals(authType)) {
             thirdUserAuthManage.getOrCreate(threeUserDO, AuthType.user);
