@@ -1,5 +1,7 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
+import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
@@ -34,6 +36,8 @@ import java.util.regex.Pattern;
 public class UnionIdDbUtil {
     private static UnionIdRepository unionIdRepository;
     private static UnionIdStore unionIdStore;
+
+    private static UniContentUnionIdRepository uniContentUnionIdRepository;
 
     @Resource
     public void setUnionIdRepository(UnionIdRepository unionIdRepository) {
@@ -98,6 +102,10 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
+    private static Long addUnionIdDO(String contentType, Integer contentId) {
+        return UnionIdDbUtil.addUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, contentId);
+    }
+
     private static String addUnionIdDO(String contentType, Integer contentId, UserDO user, Integer devId) {
         //如果这两个都不为空则查找是否存在有效的
         Integer userId = null;
@@ -107,11 +115,22 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, devId);
     }
 
+    private static Long addUnionIdDO(Integer devId, String contentType, Integer contentId) {
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(devId, contentType, contentId);
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(devId, contentType, contentId);
+        }
+        return uniContentUnionIdDO.getId();
+    }
+
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId) {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId, Integer devId) {
+
+//        uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId()
+
         return contentId.toString();
 //        return contentId.toString();
         /*Date curDate = new Date();
@@ -311,12 +330,6 @@ public class UnionIdDbUtil {
         return addUnionIdDO(ContentType.comment, modeId, userId);
     }
 
-    public static String createUserUid(Integer modeId) {
-        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
-        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return addUnionIdDO(ContentType.user, modeId, mineId);
-    }
-
     public static String createUserUid(String modeId) {
         Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
@@ -326,6 +339,11 @@ public class UnionIdDbUtil {
     public static String createUserUid(Integer modeId, UserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.user, modeId, user);
+    }
+
+    public static Long createUserUid(Integer userId) {
+        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
+        return addUnionIdDO(ContentType.user, userId);
     }
 
     public static String createUserUid(Integer modeId, UserDO user, DevAccountDO devAccountDO) {

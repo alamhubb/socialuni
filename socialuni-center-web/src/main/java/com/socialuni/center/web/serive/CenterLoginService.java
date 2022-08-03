@@ -91,7 +91,7 @@ public class CenterLoginService {
 
         CenterMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
-        ThirdUserTokenDO tokenDO = tokenManage.create(centerUserDetailRO.getId().toString(), devAccountDO.getId(), mineUser.getId());
+        TokenDO tokenDO = tokenManage.create(centerUserDetailRO.getId());
 
         //生成返回对象
         SocialLoginRO<CenterMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();

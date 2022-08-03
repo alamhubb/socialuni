@@ -19,9 +19,8 @@ import java.io.Serializable;
         },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
-                @UniqueConstraint(columnNames = {"contentType", "contentId"}),
-                @UniqueConstraint(columnNames = {"readDevId", "readContentUnionId"}),
-                @UniqueConstraint(columnNames = {"dataDevId", "dataContentUnionId"}),
+                @UniqueConstraint(columnNames = {"contentType", "dataDevId", "contentId"}),
+                @UniqueConstraint(columnNames = {"contentType", "dataDevId", "dataContentUnionId", "readDevId", "readContentUnionId"}),
         }
 )
 @Data
