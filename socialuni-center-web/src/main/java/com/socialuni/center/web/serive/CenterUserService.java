@@ -49,7 +49,7 @@ public class CenterUserService {
 
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(devAccountDO.getId(), Integer.valueOf(loginQO.getUnionId()));
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(devAccountDO.getId(), ContentType.user, mineUserDO.getId(), Integer.valueOf(loginQO.getUnionId()));
+            uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), ContentType.user, mineUserDO.getId(), Integer.valueOf(loginQO.getUnionId()));
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         }
         CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);

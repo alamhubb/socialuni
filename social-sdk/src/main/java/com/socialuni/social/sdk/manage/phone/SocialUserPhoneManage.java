@@ -7,6 +7,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.repository.user.SocialUserPhoneRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.utils.PhoneNumUtil;
 import org.springframework.stereotype.Component;
@@ -57,14 +58,7 @@ public class SocialUserPhoneManage {
 
     //创建手机号信息
     public SocialUserPhoneDO createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum) {
-        SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUserId, phoneCountryCode, phoneNum);
-        socialUserPhoneDO = socialUserPhoneRepository.save(socialUserPhoneDO);
-        return socialUserPhoneDO;
-    }
-
-    public SocialUserPhoneDO createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum, Boolean thirdAuth) {
-        SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUserId, phoneCountryCode, phoneNum);
-        socialUserPhoneDO.setThirdAuth(true);
+        SocialUserPhoneDO socialUserPhoneDO = new SocialUserPhoneDO(mineUserId, phoneCountryCode, phoneNum, DevAccountUtils.getDevIdNotNull());
         socialUserPhoneDO = socialUserPhoneRepository.save(socialUserPhoneDO);
         return socialUserPhoneDO;
     }

@@ -50,6 +50,17 @@ public class CenterTokenUtil {
         return null;
     }
 
+    public static Integer getDataDevId() {
+        HttpServletRequest request = RequestUtil.getRequest();
+        String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataSocialuniId);
+        if (SocialTokenUtil.isSuccess(dataSocialuniId)) {
+            Integer userId = Integer.parseInt(dataSocialuniId);
+            return userId;
+        }
+//        return SocialTokenUtil.getSocialuniToken();
+        return null;
+    }
+
     public static ThirdUserTokenDO getThirdUserTokenDO(String token) {
         //解析token
         String userThirdId = SocialTokenUtil.getUserKeyByToken(token);

@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
@@ -80,6 +81,20 @@ public class DevAccountUtils {
         return devAccountDO.getId();
     }
 
+    public static Integer getDataDevIdNotNull() {
+        String dataSocialuniId = RequestUtil.getDataSocialuniId();
+        if (StringUtils.isEmpty(dataSocialuniId)) {
+            return 1;
+        }
+        //先从req中获取
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountBySocialuniId(dataSocialuniId);
+        if (devAccountDO == null) {
+            throw new SocialParamsException("不存在的联盟Id");
+        }
+        return devAccountDO.getId();
+    }
+
+
     //mock登录时使用
     public static DevAccountProviderDO getDevAccountProviderDOByDevAndMpType(Integer devId, String mpType) {
         DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByDevIdAndMpType(devId, mpType);
@@ -117,6 +132,7 @@ public class DevAccountUtils {
         }
         return devAccountDO;
     }
+
 
     public static boolean notPushServer() {
         return !DevAccountUtils.pushServer();

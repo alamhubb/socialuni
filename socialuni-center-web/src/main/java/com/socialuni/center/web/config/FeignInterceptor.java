@@ -1,8 +1,14 @@
 package com.socialuni.center.web.config;
 
+import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.utils.CenterUserUtil;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +27,32 @@ public class FeignInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
+        //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
 
         requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialuniDevSecretKey);
+
+
+        /*ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
+        CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
+        if (centerMineUserDetailRO == null) {
+            UserDO mineUser = CenterUserUtil.getMineUser();
+            String phoneNum =  SocialUserUtil.getUserPhoneNum(mineUser.getId());
+            //生成登录类
+            SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
+            socialProviderLoginQO.setNickName(mineUser.getNickname());
+            socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
+            socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+            socialProviderLoginQO.setBirthday(mineUser.getBirthday());
+            socialProviderLoginQO.setCity(mineUser.getCity());
+            socialProviderLoginQO.setUnionId(mineUser.getId().toString());
+
+            socialProviderLoginQO.setProvider(RequestUtil.getProvider());
+            socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
+            socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+            socialProviderLoginQO.setPhoneNum(phoneNum);
+
+            socialuniUserAPI.registryUser(socialProviderLoginQO);
+        }*/
 
         UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         if (mineUser != null) {

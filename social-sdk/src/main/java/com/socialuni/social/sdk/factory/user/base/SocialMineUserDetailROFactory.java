@@ -5,6 +5,7 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
 import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -48,7 +49,7 @@ public class SocialMineUserDetailROFactory {
             //为自己返回生日，方便修改，和手机号
             mineUserDetailRO.setBirthday(mineUser.getBirthday());
             if (socialUserPhoneDO != null) {
-                if (!socialUserPhoneDO.getThirdAuth()){
+                if (DevAccountUtils.getDevIdNotNull().equals(socialUserPhoneDO.getDevId())){
                     String realPhoneNum = socialUserPhoneDO.getPhoneNum();
                     if (StringUtils.isNotEmpty(realPhoneNum)) {
                         realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);

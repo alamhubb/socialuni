@@ -107,10 +107,6 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
-    private static Integer addUnionIdDO(String contentType, Integer contentId) {
-        return UnionIdDbUtil.addUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, contentId);
-    }
-
     private static String addUnionIdDO(String contentType, Integer contentId, UserDO user, Integer devId) {
         //如果这两个都不为空则查找是否存在有效的
         Integer userId = null;
@@ -120,10 +116,11 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, devId);
     }
 
-    private static Integer addUnionIdDO(Integer devId, String contentType, Integer contentId) {
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(devId, contentType, contentId);
+    private static Integer addUnionIdDO(String contentType, Integer contentId) {
+        Integer dataDevId = DevAccountUtils.getDataDevIdNotNull();
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(dataDevId, contentType, contentId);
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(devId, contentType, contentId);
+            uniContentUnionIdDO = new UniContentUnionIdDO(dataDevId, DevAccountUtils.getDevIdNotNull(), contentType, contentId);
         }
         return uniContentUnionIdDO.getId();
     }

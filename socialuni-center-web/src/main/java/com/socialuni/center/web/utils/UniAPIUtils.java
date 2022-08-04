@@ -19,6 +19,7 @@ import com.socialuni.social.sdk.config.SocialAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -53,11 +54,12 @@ public class UniAPIUtils {
     public static <QO extends ContentAddQO, RO extends SocialuniContentIdRO> SocialuniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         String dataSocialuniId = RequestUtil.getDataSocialuniId();
         //校验此条数据是否已经写入过。
-        String dataContentUnionId = contentAddQO.getId();
+        String dataContentUnionIdStr = contentAddQO.getId();
+        Integer dataContentUnionId = Integer.valueOf(dataContentUnionIdStr);
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
         DevAccountDO dataDevAccount = null;
         //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
-        if (StringUtils.isEmpty(dataSocialuniId) && !StringUtils.isEmpty(dataContentUnionId)) {
+        if (StringUtils.isEmpty(dataSocialuniId) && !StringUtils.isEmpty(dataContentUnionIdStr)) {
             //有一个为空
             throw new SocialParamsException("缺少数据所有者id");
         }
@@ -77,7 +79,7 @@ public class UniAPIUtils {
                 throw new SocialSystemException("逻辑错误，中心重复调用自己，或者秘钥泄露");
             }
             //仅仅是个校验，防止重复写入 ， dataSocialuniId都不空才能查，dataSociuni为空，则肯定thirdId为空
-            if (StringUtils.isNotEmpty(dataContentUnionId)) {
+            if (StringUtils.isNotEmpty(dataContentUnionIdStr)) {
                 //如果已经存在此动态，则无需重复添加，直接返回
                 UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, dataContentUnionId);
                 if (uniContentUnionIdDO != null) {
@@ -95,17 +97,17 @@ public class UniAPIUtils {
         UniContentUnionIdDO uniContentUnionIdDO;
         if (DevAccountUtils.pushServer()) {
             //如果无后台模式会为空
-            uniContentUnionIdDO = new UniContentUnionIdDO(1, contentType, socialuniContentIdRO.getId());
+            uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         } else {
             //无后台模式
-            if (StringUtils.isEmpty(dataContentUnionId)) {
+            if (StringUtils.isEmpty(dataContentUnionIdStr)) {
                 //如果无后台模式会为空
-                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
+                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             } else {
                 //中心了
-                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
+                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
                 uniContentUnionIdDO.setDataContentUnionId(dataContentUnionId);
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             }
@@ -132,26 +134,9 @@ public class UniAPIUtils {
 
         //如果配置了中心
         if (SocialAppConfig.hasCenterServer()) {
-            ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
-            CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
-            if (centerMineUserDetailRO == null) {
-                UserDO mineUser = CenterUserUtil.getMineUser();
-                //生成登录类
-                SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-                socialProviderLoginQO.setNickName(mineUser.getNickname());
-                socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
-                socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
-                socialProviderLoginQO.setBirthday(mineUser.getBirthday());
-                socialProviderLoginQO.setCity(mineUser.getCity());
-                socialProviderLoginQO.setUnionId(mineUser.getId().toString());
 
-                socialProviderLoginQO.setProvider(RequestUtil.getProvider());
-                socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
-                socialProviderLoginQO.setSystem(RequestUtil.getSystem());
-
-                socialuniUserAPI.registryUser(socialProviderLoginQO);
-            }
-            if (StringUtils.isEmpty(dataContentUnionId) && DevAccountUtils.pushServer()) {
+            //数据id为空
+            if (StringUtils.isEmpty(dataContentUnionIdStr) && DevAccountUtils.pushServer()) {
                 contentAddQO.setId(uniContentUnionIdDO.getId().toString());
             }
             callApi.apply(contentAddQO);

@@ -6,6 +6,7 @@ import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.manage.SocialUserManage;
 import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.repository.UserRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -25,15 +26,6 @@ public class SocialUserPhoneEntity {
     //外层已经校验过了
     public UserDO createUserPhoneEntity(String phoneNum) {
         UserDO mineUser = socialUserManage.createUserByPhoneLogin();
-        //创建或返回
-        socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-        socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", phoneNum);
-        return mineUser;
-    }
-
-    //外层已经校验过了
-    public UserDO createUserPhoneEntity(String phoneNum, SocialProviderLoginQO loginQO) {
-        UserDO mineUser = socialUserManage.createUserByProviderLogin(loginQO);
         //创建或返回
         socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
         socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", phoneNum);

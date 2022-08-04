@@ -39,15 +39,18 @@ public class UniContentUnionIdDO implements Serializable {
     //数据读取方
     private Integer readDevId;
     private Integer readContentUnionId;
+    //写入方
+    private Integer writeDevId;
 
-    public UniContentUnionIdDO(Integer dataDevId, String contentType, Integer contentId) {
+    public UniContentUnionIdDO(Integer dataDevId, Integer writeDevId, String contentType, Integer contentId) {
         this.dataDevId = dataDevId;
+        this.writeDevId = writeDevId;
         this.contentId = contentId;
         this.contentType = contentType;
     }
 
-    public UniContentUnionIdDO(Integer dataDevId, String contentType, Integer contentId, Integer dataContentUnionId) {
-        this(dataDevId, contentType, contentId);
+    public UniContentUnionIdDO(Integer dataDevId, Integer writeDevId, String contentType, Integer contentId, Integer dataContentUnionId) {
+        this(dataDevId, writeDevId, contentType, contentId);
         this.dataContentUnionId = dataContentUnionId;
     }
 
