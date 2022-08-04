@@ -102,7 +102,7 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
-    private static Long addUnionIdDO(String contentType, Integer contentId) {
+    private static Integer addUnionIdDO(String contentType, Integer contentId) {
         return UnionIdDbUtil.addUnionIdDO(DevAccountUtils.getDevIdNotNull(), contentType, contentId);
     }
 
@@ -115,7 +115,7 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, devId);
     }
 
-    private static Long addUnionIdDO(Integer devId, String contentType, Integer contentId) {
+    private static Integer addUnionIdDO(Integer devId, String contentType, Integer contentId) {
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(devId, contentType, contentId);
         if (uniContentUnionIdDO == null) {
             uniContentUnionIdDO = new UniContentUnionIdDO(devId, contentType, contentId);
@@ -341,7 +341,7 @@ public class UnionIdDbUtil {
         return addUnionIdDO(ContentType.user, modeId, user);
     }
 
-    public static Long createUserUid(Integer userId) {
+    public static Integer createUserUid(Integer userId) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.user, userId);
     }

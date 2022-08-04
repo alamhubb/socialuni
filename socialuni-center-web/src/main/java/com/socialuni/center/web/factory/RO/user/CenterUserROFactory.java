@@ -10,7 +10,7 @@ public class CenterUserROFactory {
     public static CenterUserRO getUserRO(SocialUserRO socialUserRO, UserDO mineUser) {
         //user基础信息
         CenterUserRO user = new CenterUserRO(socialUserRO);
-        Long uid = UnionIdDbUtil.createUserUid(socialUserRO.getId());
+        Integer uid = UnionIdDbUtil.createUserUid(socialUserRO.getId());
         user.setId(uid);
         /*user.setAvatar(socialUserRO.getAvatar());
         user.setGender(socialUserRO.getGender());

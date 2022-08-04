@@ -1,6 +1,9 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.exception.SocialUserTokenExpireException;
 import com.socialuni.social.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -43,12 +46,13 @@ public class SocialTokenDOUtil {
         //如果当前时间大于时效时间，则时效了
         if (date.getTime() > tokenDO.getExpiredTime().getTime()) {
             //"用户凭证过期，请重新登录",必须用这个
-            return null;
+//            return null;
+            throw new SocialUserTokenExpireException();
         }
         Integer doUserId = tokenDO.getUserId();
         if (!userId.equals(doUserId)) {
             log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
-            return null;
+            throw new SocialSystemException("绕过验证");
         }
         //返回user
         return tokenDO;

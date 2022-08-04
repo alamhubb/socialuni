@@ -75,7 +75,7 @@ public class CenterLoginService {
 
     @Transactional
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>>  phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
+//        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
         UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
@@ -84,21 +84,21 @@ public class CenterLoginService {
 //        TokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
 //        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = new SocialLoginRO<>(socialUserTokenDO.getToken(), mineUserDetailRO);
         //中心授权
-        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
+//        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
 
         //获取开发者对应的账号
         SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         CenterMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
-        TokenDO tokenDO = tokenManage.create(centerUserDetailRO.getId());
+        TokenDO tokenDO = tokenManage.create(socialMineUserDetailRO.getId());
 
         //生成返回对象
         SocialLoginRO<CenterMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();
 
         applySocialUniOAuthRO.setToken(tokenDO.getToken());
         applySocialUniOAuthRO.setUser(centerUserDetailRO);
-        return ResultRO.success(centerLoginRO);
+        return ResultRO.success(applySocialUniOAuthRO);
     }
 
     /*

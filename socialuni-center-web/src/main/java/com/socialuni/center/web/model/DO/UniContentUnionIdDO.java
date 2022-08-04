@@ -28,7 +28,7 @@ import java.io.Serializable;
 public class UniContentUnionIdDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(nullable = false, updatable = false)
     private String contentType;
     @Column(nullable = false, updatable = false)

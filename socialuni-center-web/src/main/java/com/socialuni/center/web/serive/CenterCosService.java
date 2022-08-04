@@ -16,7 +16,7 @@ public class CenterCosService {
     private SocialCosGetAuthDomain socialCosGetAuthDomain;
 
     public ResultRO<SocialCosAuthRO> getCosAuth() {
-        String userId = CenterUserUtil.getMineThirdUserId();
+        String userId = CenterUserUtil.getMineUserStringId();
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
 //        String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();
 //        String uploadImgPath = devAppName + "/user/" + userId + "/";

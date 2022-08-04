@@ -1,11 +1,13 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.sdk.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.sdk.utils.SocialTokenDOUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,13 @@ public class CenterTokenUtil {
         String token = SocialTokenUtil.getToken();
         return CenterTokenUtil.getThirdUserTokenDO(token);
     }
+
+    public static TokenDO getUserTokenDO() {
+        String token = SocialTokenUtil.getToken();
+        return SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+    }
+
+
     public static String getThirdUserId() {
         HttpServletRequest request = RequestUtil.getRequest();
         String thirdUserId = request.getHeader(SocialFeignHeaderName.socialuniThirdUserId);
