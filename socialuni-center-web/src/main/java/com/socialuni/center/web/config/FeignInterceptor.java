@@ -3,12 +3,9 @@ package com.socialuni.center.web.config;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
@@ -29,7 +26,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         if (mineUser != null) {
-            requestTemplate.header(SocialFeignHeaderName.socialuniThirdUserId, mineUser.getId().toString());
+            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUser.getId().toString());
         }
 
         //理论上不可能存在下列情况，没有dataSocialuniId只能是自有数据和无后台，无后台也应该在request设置dataSocialuniId

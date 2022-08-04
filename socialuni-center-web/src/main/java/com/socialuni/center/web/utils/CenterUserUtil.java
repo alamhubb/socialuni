@@ -7,10 +7,7 @@ import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
-import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
-import com.socialuni.social.sdk.repository.dev.ThirdUserRepository;
-import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.sdk.utils.SocialTokenDOUtil;
@@ -60,7 +57,7 @@ public class CenterUserUtil {
 //            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
             userDO = SocialUserUtil.getAllowNull(SocialUserUtil.getMineUserIdAllowNull());
         } else {
-            String thirdUserId = CenterTokenUtil.getThirdUserId();
+            Integer thirdUserId = CenterTokenUtil.getDataUserUnionId();
 
             UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), thirdUserId);
             if (uniUserAccountDO == null) {

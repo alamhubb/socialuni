@@ -7,9 +7,12 @@ import com.socialuni.api.model.RO.user.CenterUserDetailRO;
 import com.socialuni.center.web.entity.UniUserRegistryDomain;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.factory.RO.user.CenterUserDetailROFactory;
+import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
+import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.*;
@@ -37,11 +40,20 @@ public class CenterUserService {
     SocialDeleteUserImgDomain socialDeleteUserImgDomain;
     @Resource
     UniUserRegistryDomain socialuniUserRegistryDomain;
-
+    @Resource
+    UniContentUnionIdRepository uniContentUnionIdRepository;
 
     public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         UserDO mineUserDO = socialuniUserRegistryDomain.registryUser(devAccountDO, loginQO);
+
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(1, ContentType.user, mineUserDO.getId());
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(1, ContentType.user, mineUserDO.getId());
+            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        }
+
+
         CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
         return new ResultRO<>(mineUser);
     }
