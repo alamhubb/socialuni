@@ -26,7 +26,7 @@ public class CenterTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static CenterTalkRO getTalkRO(SocialTalkRO talkRO, UserDO mineUser) {
-        String talkId = UnionIdDbUtil.createTalkUid(talkRO.getId());
+        String talkId = UnionIdDbUtil.createTalkUid(talkRO.getId()).toString();
 
         CenterContentUserRO centerTalkUserRO = CenterContentUserROFactory.getContentUserRO(talkRO.getUser(), mineUser);
         List<CenterTalkImgRO> imgs = CenterTalkImgROFactory.getHomeTalkImgROS(talkRO.getImgs());

@@ -305,10 +305,15 @@ public class UnionIdDbUtil {
         return addUnionIdDO(ContentType.talk, modeId, userId);
     }
 
-    public static String createTalkUid(Integer modeId) {
+    /*public static String createTalkUid(Integer modeId) {
         Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.talk, modeId, mineId);
+    }*/
+
+    public static Integer createTalkUid(Integer modeId) {
+        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
+        return addUnionIdDO(ContentType.talk, modeId);
     }
 
     public static String createCommentUid(CommentDO commentDO) {

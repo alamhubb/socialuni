@@ -4,9 +4,12 @@ import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
+import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
+import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.utils.CenterTokenUtil;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
@@ -43,6 +46,8 @@ public class CenterLoginService {
     TokenManage tokenManage;
     @Resource
     ThirdUserTokenManage thirdUserTokenManage;
+    @Resource
+    UniContentUnionIdRepository uniContentUnionIdRepository;
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     /*@Transactional
@@ -74,11 +79,18 @@ public class CenterLoginService {
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>>  phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
 //        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
         UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(1, ContentType.user, mineUser.getId());
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(1, ContentType.user, mineUser.getId());
+            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        }
+
         //向三方应用授权，不存在登录接口向三方授权的情况了
 //        CenterMineUserDetailRO mineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
 //        TokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
