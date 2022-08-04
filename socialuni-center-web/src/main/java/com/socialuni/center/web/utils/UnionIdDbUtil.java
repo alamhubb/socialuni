@@ -40,6 +40,11 @@ public class UnionIdDbUtil {
     private static UniContentUnionIdRepository uniContentUnionIdRepository;
 
     @Resource
+    public void setUniContentUnionIdRepository(UniContentUnionIdRepository uniContentUnionIdRepository) {
+        UnionIdDbUtil.uniContentUnionIdRepository = uniContentUnionIdRepository;
+    }
+
+    @Resource
     public void setUnionIdRepository(UnionIdRepository unionIdRepository) {
         UnionIdDbUtil.unionIdRepository = unionIdRepository;
     }

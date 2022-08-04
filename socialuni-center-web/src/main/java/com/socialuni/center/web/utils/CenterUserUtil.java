@@ -58,8 +58,7 @@ public class CenterUserUtil {
         //区分本应用和其他应用的不同逻辑
         if (devAccountDO.getId() == 1) {
 //            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
-            TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
-            userDO = SocialUserUtil.getAllowNull(tokenDO.getUserId());
+            userDO = SocialUserUtil.getAllowNull(SocialUserUtil.getMineUserIdAllowNull());
         } else {
             String thirdUserId = CenterTokenUtil.getThirdUserId();
 
@@ -142,7 +141,7 @@ public class CenterUserUtil {
     }
 
     public static UserDO getMineUserInterceptor() {
-        ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
+        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
         if (tokenDO == null) {
             return null;
         }
