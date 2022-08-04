@@ -35,14 +35,20 @@ public class UniContentUnionIdDO implements Serializable {
     //数据所有方
     @Column(nullable = false, updatable = false)
     private Integer dataDevId;
-    private String dataContentUnionId;
+    private Integer dataContentUnionId;
     //数据读取方
-    private String readDevId;
-    private String readContentUnionId;
+    private Integer readDevId;
+    private Integer readContentUnionId;
 
     public UniContentUnionIdDO(Integer dataDevId, String contentType, Integer contentId) {
         this.dataDevId = dataDevId;
         this.contentId = contentId;
         this.contentType = contentType;
     }
+
+    public UniContentUnionIdDO(Integer dataDevId, String contentType, Integer contentId, Integer dataContentUnionId) {
+        this(dataDevId, contentType, contentId);
+        this.dataContentUnionId = dataContentUnionId;
+    }
+
 }
