@@ -15,12 +15,12 @@ import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.domain.login.SocialProviderLoginDomain;
-import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
-import com.socialuni.social.sdk.entity.user.SocialProviderLoginEntity;
-import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.social.sdk.manage.TokenManage;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.domain.login.SocialProviderLoginDomain;
+import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.center.web.entity.user.SocialProviderLoginEntity;
+import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
+import com.socialuni.center.web.manage.TokenManage;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

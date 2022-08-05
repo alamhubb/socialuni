@@ -11,7 +11,7 @@ import com.socialuni.social.model.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRO;
 import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
-import com.socialuni.social.sdk.service.SocialChatService;
+import com.socialuni.center.web.service.SocialChatService;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

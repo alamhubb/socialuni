@@ -13,8 +13,8 @@ import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.center.web.constant.AuthType;
+import com.socialuni.center.web.redis.SocialUserPhoneRedis;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -3,7 +3,6 @@ package com.socialuni.social.web;
 import com.socialuni.social.sdk.config.EnableSocialSDK;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableSocialSDK

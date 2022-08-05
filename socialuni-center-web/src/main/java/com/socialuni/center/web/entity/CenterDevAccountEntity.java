@@ -3,9 +3,9 @@ package com.socialuni.center.web.entity;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
+import com.socialuni.center.web.redis.SocialUserPhoneRedis;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

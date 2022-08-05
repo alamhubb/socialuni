@@ -10,7 +10,6 @@ import com.socialuni.social.entity.model.DO.dev.DevTokenDO;
 import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.sdk.repository.dev.DevTokenRepository;
-import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;

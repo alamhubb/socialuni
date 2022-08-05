@@ -13,7 +13,7 @@ import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.model.model.RO.community.SocialuniUnionIdRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.social.sdk.domain.talk.SocialTalkPostDomain;
+import com.socialuni.center.web.domain.talk.SocialTalkPostDomain;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

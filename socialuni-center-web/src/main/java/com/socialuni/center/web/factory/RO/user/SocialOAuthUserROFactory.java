@@ -2,8 +2,8 @@ package com.socialuni.center.web.factory.RO.user;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
-import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
+import com.socialuni.center.web.constant.GenderTypeNumEnum;
+import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 
 public class SocialOAuthUserROFactory {
 

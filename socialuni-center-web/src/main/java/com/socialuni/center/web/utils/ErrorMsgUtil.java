@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils;
 
 
-import com.socialuni.social.sdk.constant.ErrorMsg;
+import com.socialuni.center.web.constant.ErrorMsg;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.utils.DateUtils;
 

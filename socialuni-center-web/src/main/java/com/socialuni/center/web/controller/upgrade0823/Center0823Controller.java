@@ -7,7 +7,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.social.sdk.repository.UserRepository;
+import com.socialuni.center.web.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

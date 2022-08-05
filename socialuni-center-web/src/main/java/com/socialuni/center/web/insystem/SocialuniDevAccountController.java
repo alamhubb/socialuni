@@ -1,9 +1,9 @@
 package com.socialuni.center.web.insystem;
 
-import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
+import com.socialuni.center.web.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
-import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
+import com.socialuni.center.web.model.QO.dev.DevAccountQueryQO;
+import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 

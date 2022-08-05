@@ -9,7 +9,7 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

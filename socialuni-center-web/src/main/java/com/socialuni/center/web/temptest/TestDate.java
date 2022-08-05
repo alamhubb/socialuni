@@ -1,7 +1,7 @@
 package com.socialuni.center.web.temptest;
 
-import com.socialuni.social.sdk.utils.StringUtil;
-import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
+import com.socialuni.center.web.utils.StringUtil;
+import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 
 import java.util.regex.Pattern;
 

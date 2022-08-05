@@ -2,13 +2,13 @@ package com.socialuni.center.web.controller.upgrade0823;
 
 import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
 import com.socialuni.center.web.model.DO.UnionIdDO;
-import com.socialuni.social.sdk.repository.dev.ThirdUserAuthRepository;
-import com.socialuni.social.sdk.repository.dev.ThirdUserRepository;
-import com.socialuni.social.sdk.repository.dev.ThirdUserTokenRepository;
+import com.socialuni.center.web.repository.dev.ThirdUserAuthRepository;
+import com.socialuni.center.web.repository.dev.ThirdUserRepository;
+import com.socialuni.center.web.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.sdk.domain.phone.SocialBindUserSocialuniAccountDomain;
-import com.socialuni.social.sdk.repository.UserRepository;
+import com.socialuni.center.web.domain.phone.SocialBindUserSocialuniAccountDomain;
+import com.socialuni.center.web.repository.UserRepository;
 import com.socialuni.social.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

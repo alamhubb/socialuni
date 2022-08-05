@@ -5,12 +5,12 @@ import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
-import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.manage.SocialUserFansDetailManage;
-import com.socialuni.social.sdk.manage.SocialUserManage;
-import com.socialuni.social.sdk.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
+import com.socialuni.center.web.manage.SocialUserFansDetailManage;
+import com.socialuni.center.web.manage.SocialUserManage;
+import com.socialuni.center.web.manage.phone.SocialUserPhoneManage;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

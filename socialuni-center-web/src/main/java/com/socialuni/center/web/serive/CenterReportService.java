@@ -3,7 +3,7 @@ package com.socialuni.center.web.serive;
 import com.socialuni.api.model.QO.CenterReportAddQO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.social.sdk.domain.report.SoicialReportAddDomain;
+import com.socialuni.center.web.domain.report.SoicialReportAddDomain;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;

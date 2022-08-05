@@ -7,12 +7,12 @@ import com.socialuni.social.entity.model.DO.HomeSwiperDO;
 import com.socialuni.social.model.model.HomeSwiperVO;
 import com.socialuni.social.model.model.QO.FrontErrorLogVO;
 import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.factory.SocialHomeSwiperROFactory;
-import com.socialuni.social.sdk.repository.HomeSwiperRepository;
-import com.socialuni.social.sdk.service.SocialFrontLogDomain;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.constant.AppConfigConst;
+import com.socialuni.center.web.constant.ViolateType;
+import com.socialuni.center.web.factory.SocialHomeSwiperROFactory;
+import com.socialuni.center.web.repository.HomeSwiperRepository;
+import com.socialuni.center.web.service.SocialFrontLogDomain;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -2,10 +2,10 @@ package com.socialuni.center.test;
 
 import com.socialuni.center.web.CenterWebApplication;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.sdk.mapper.TalkMapper;
-import com.socialuni.social.sdk.mapper.TalkTagMapper;
-import com.socialuni.social.sdk.repository.community.TalkRepository;
-import com.socialuni.social.sdk.store.TalkQueryStore;
+import com.socialuni.center.web.mapper.TalkMapper;
+import com.socialuni.center.web.mapper.TalkTagMapper;
+import com.socialuni.center.web.repository.community.TalkRepository;
+import com.socialuni.center.web.store.TalkQueryStore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

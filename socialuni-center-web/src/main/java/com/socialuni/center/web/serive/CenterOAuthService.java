@@ -2,12 +2,12 @@ package com.socialuni.center.web.serive;
 
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.factory.RO.user.SocialOAuthUserROFactory;
 import com.socialuni.center.web.manage.DevAccountManage;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserAuthDO;
-import com.socialuni.social.sdk.repository.dev.ThirdUserAuthRepository;
+import com.socialuni.center.web.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
@@ -16,8 +16,8 @@ import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.constant.AuthType;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

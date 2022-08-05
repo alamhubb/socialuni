@@ -4,8 +4,8 @@ import com.socialuni.api.model.RO.user.CenterContentUserRO;
 import com.socialuni.api.model.RO.user.CenterListUserRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.base.SocialContentUserRO;
-import com.socialuni.social.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
+import com.socialuni.center.web.repository.user.identity.SocialUserIdentityAuthRepository;
+import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 
 import javax.annotation.Resource;
 

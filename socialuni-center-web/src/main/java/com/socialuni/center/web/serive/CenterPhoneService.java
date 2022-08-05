@@ -9,10 +9,10 @@ import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
-import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.domain.phone.SocailSendAuthCodeDomain;
-import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.constant.AuthType;
+import com.socialuni.center.web.domain.phone.SocailSendAuthCodeDomain;
+import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

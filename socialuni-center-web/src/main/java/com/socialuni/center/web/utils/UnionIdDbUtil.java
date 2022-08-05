@@ -3,7 +3,7 @@ package com.socialuni.center.web.utils;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
 import com.socialuni.center.web.model.DO.UnionIdDO;
 import com.socialuni.center.web.repository.UnionIdRepository;

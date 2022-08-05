@@ -8,7 +8,7 @@ import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.factory.user.base.SocialMineUserDetailROFactory;
+import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -8,7 +8,6 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;

@@ -18,12 +18,12 @@ import com.socialuni.social.model.model.QO.user.*;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthPreCheckRO;
 import com.socialuni.social.model.model.RO.user.SocialUserIdentityAuthRO;
-import com.socialuni.social.sdk.domain.user.SocialAddUserImgDomain;
-import com.socialuni.social.sdk.domain.user.SocialDeleteUserImgDomain;
-import com.socialuni.social.sdk.domain.user.SocialEditUserDomain;
-import com.socialuni.social.sdk.platform.tencent.TencentCloud;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.domain.user.SocialAddUserImgDomain;
+import com.socialuni.center.web.domain.user.SocialDeleteUserImgDomain;
+import com.socialuni.center.web.domain.user.SocialEditUserDomain;
+import com.socialuni.center.web.platform.tencent.TencentCloud;
+import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

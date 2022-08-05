@@ -5,7 +5,7 @@ import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.model.model.QO.ContentAddQO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

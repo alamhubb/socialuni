@@ -5,13 +5,13 @@ import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.exception.SocialUserBannedException;
 import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
-import com.socialuni.social.sdk.constant.status.UserStatus;
+import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.utils.SocialTokenDOUtil;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.utils.SocialTokenDOUtil;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

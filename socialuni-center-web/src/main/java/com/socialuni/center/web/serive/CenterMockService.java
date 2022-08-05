@@ -1,14 +1,14 @@
 package com.socialuni.center.web.serive;
 
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.entity.CenterDevAccountEntity;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.center.web.constant.AuthType;
+import com.socialuni.center.web.redis.SocialUserPhoneRedis;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

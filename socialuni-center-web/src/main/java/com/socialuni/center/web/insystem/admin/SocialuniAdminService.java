@@ -1,14 +1,14 @@
 package com.socialuni.center.web.insystem.admin;
 
-import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
-import com.socialuni.social.sdk.repository.dev.DevAccountProviderRepository;
-import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
+import com.socialuni.center.web.model.QO.dev.SyncProdDevAccountQO;
+import com.socialuni.center.web.repository.dev.DevAccountProviderRepository;
+import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
 import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.sdk.manage.SocialTagManage;
-import com.socialuni.social.sdk.repository.community.TagRepository;
+import com.socialuni.center.web.manage.SocialTagManage;
+import com.socialuni.center.web.repository.community.TagRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
