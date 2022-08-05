@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.controller;
 
-import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.center.web.constant.platform.SocialuniSupportProviderType;
+import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
 import lombok.Data;

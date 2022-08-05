@@ -18,7 +18,7 @@ public class SocialUserRO extends SocialuniContentIdRO {
     private String gender;
 
     public SocialUserRO(SocialUserRO userRO) {
-        this.id = userRO.getId();
+        super(userRO);
         this.nickname = userRO.getNickname();
         this.avatar = userRO.getAvatar();
         this.gender = userRO.getGender();

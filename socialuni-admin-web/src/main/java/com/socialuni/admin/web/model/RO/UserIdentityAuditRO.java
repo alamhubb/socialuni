@@ -4,7 +4,7 @@ import com.socialuni.admin.web.model.ReportUserVO;
 import com.socialuni.social.entity.model.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.config.SocialAppConfig;
+import com.socialuni.center.web.config.SocialAppConfig;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

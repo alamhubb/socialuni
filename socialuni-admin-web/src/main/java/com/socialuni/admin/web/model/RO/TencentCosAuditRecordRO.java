@@ -5,8 +5,8 @@ import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.constant.ViolateType;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import lombok.Data;
 
 @Data

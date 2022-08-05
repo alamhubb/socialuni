@@ -1,8 +1,6 @@
 package com.socialuni.api.model.RO.talk;
 
-import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
 import com.socialuni.api.model.RO.user.CenterContentUserRO;
-import com.socialuni.social.model.model.RO.community.SocialuniUnionIdRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkTagRO;
 import lombok.Data;

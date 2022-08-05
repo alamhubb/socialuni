@@ -5,9 +5,9 @@ import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.social.entity.model.DO.ReportDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.constant.ViolateType;
+import com.socialuni.center.web.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

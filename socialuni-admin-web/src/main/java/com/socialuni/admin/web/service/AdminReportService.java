@@ -10,12 +10,12 @@ import com.socialuni.social.entity.model.DO.ReportDetailDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
 import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.constant.ReportSourceType;
-import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.repository.*;
-import com.socialuni.social.sdk.service.BaseModelUtils;
-import com.socialuni.social.sdk.service.KeywordsService;
+import com.socialuni.center.web.config.SocialAppConfig;
+import com.socialuni.center.web.constant.ReportSourceType;
+import com.socialuni.center.web.constant.ViolateType;
+import com.socialuni.center.web.repository.*;
+import com.socialuni.center.web.service.BaseModelUtils;
+import com.socialuni.center.web.service.KeywordsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

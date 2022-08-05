@@ -5,10 +5,10 @@ import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.repository.dev.ThirdUserRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
+import com.socialuni.center.web.redis.SocialUserPhoneRedis;
+import com.socialuni.center.web.repository.dev.ThirdUserRepository;
+import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
