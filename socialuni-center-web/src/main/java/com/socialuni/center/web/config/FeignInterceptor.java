@@ -42,9 +42,11 @@ public class FeignInterceptor implements RequestInterceptor {
         requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, socialuniDevSecretKey);
         requestTemplate.header(SocialFeignHeaderName.dataSocialuniId, DevAccountUtils.getAppSocialuniId());
 
-
+        System.out.println(requestTemplate.url());
         UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
-
+        String postUrl = requestTemplate.url();
+//        if (!postUrl.contains("user/registryUser")){
+        System.out.println(postUrl);
         if (mineUser != null) {
             Integer userUnionId = CenterUserUtil.getMineUserUnionId();
             Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
@@ -72,6 +74,7 @@ public class FeignInterceptor implements RequestInterceptor {
             }
             requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, userUnionId.toString());
         }
+//        }
 
 
         //理论上不可能存在下列情况，没有dataSocialuniId只能是自有数据和无后台，无后台也应该在request设置dataSocialuniId
