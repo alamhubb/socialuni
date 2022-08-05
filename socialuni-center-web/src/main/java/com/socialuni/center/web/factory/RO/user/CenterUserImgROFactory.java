@@ -1,11 +1,11 @@
 package com.socialuni.center.web.factory.RO.user;
 
 
-import com.socialuni.api.model.RO.user.CenterUserImgRO;
+import com.socialuni.center.web.model.RO.user.CenterUserImgRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.factory.ListConvertUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.UserImgRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.UserImgRO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.socialuni.center.web.config;
 
-import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
+import com.socialuni.center.web.model.DO.JpaSqlLogDO;
 import com.socialuni.center.web.utils.JpaSqlLogDOUtil;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

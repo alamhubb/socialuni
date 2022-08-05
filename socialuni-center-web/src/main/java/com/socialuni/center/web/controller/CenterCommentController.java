@@ -1,9 +1,9 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniCommentAPI;
-import com.socialuni.api.model.QO.comment.CenterCommentDeleteQO;
-import com.socialuni.api.model.QO.comment.CenterCommentPostQO;
-import com.socialuni.api.model.RO.talk.CenterCommentRO;
+import com.socialuni.center.web.feignAPI.SocialuniCommentAPI;
+import com.socialuni.center.web.model.QO.comment.CenterCommentDeleteQO;
+import com.socialuni.center.web.model.QO.comment.CenterCommentPostQO;
+import com.socialuni.center.web.model.RO.talk.CenterCommentRO;
 import com.socialuni.center.web.serive.CenterCommentService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,11 +1,11 @@
 package com.socialuni.center.web.domain.comment;
 
-import com.socialuni.api.model.QO.comment.CenterCommentDeleteQO;
+import com.socialuni.center.web.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.domain.comment.SocialCommentDeleteDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

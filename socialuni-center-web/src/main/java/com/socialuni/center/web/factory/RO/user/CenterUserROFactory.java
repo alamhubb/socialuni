@@ -1,16 +1,16 @@
 package com.socialuni.center.web.factory.RO.user;
 
-import com.socialuni.api.model.RO.user.CenterUserRO;
+import com.socialuni.center.web.model.RO.user.CenterUserRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
 
 public class CenterUserROFactory {
 
     public static CenterUserRO getUserRO(SocialUserRO socialUserRO, UserDO mineUser) {
         //user基础信息
         CenterUserRO user = new CenterUserRO(socialUserRO);
-        Integer uid = UnionIdDbUtil.createUserUid(socialUserRO.getId());
+        Integer uid = UnionIdDbUtil.createUserUid(socialUserRO);
         user.setId(uid);
         /*user.setAvatar(socialUserRO.getAvatar());
         user.setGender(socialUserRO.getGender());

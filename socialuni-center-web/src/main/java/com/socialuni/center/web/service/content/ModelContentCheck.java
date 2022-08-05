@@ -4,7 +4,7 @@ import com.socialuni.center.web.constant.ErrorMsg;
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.service.comment.IllegalWordService;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.utils.QQUtil;

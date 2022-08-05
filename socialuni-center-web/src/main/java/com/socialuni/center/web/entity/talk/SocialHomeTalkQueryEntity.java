@@ -5,10 +5,10 @@ import com.socialuni.center.web.constant.TalkTabType;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.SocialHomeTalkQueryStore;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryBO;
+import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

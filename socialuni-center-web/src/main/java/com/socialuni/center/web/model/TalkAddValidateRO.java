@@ -1,8 +1,8 @@
 package com.socialuni.center.web.model;
 
-import com.socialuni.social.entity.model.DO.DistrictDO;
-import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
-import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.center.web.model.DO.DistrictDO;
+import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
+import com.socialuni.center.web.model.DO.tag.TagDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

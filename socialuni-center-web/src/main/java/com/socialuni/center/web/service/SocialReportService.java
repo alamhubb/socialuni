@@ -1,9 +1,9 @@
 package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.domain.report.SoicialReportAddDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.model.model.QO.SocialReportAddQO;
+import com.socialuni.center.web.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 

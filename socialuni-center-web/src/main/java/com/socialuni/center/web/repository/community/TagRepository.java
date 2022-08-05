@@ -1,7 +1,7 @@
 package com.socialuni.center.web.repository.community;
 
 import com.socialuni.center.web.redis.redisKey.TagRedisKey;
-import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.center.web.model.DO.tag.TagDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

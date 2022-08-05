@@ -4,7 +4,7 @@ import com.socialuni.center.web.constant.SocialuniProviderLoginType;
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.redis.SocialUserPhoneRedis;
 import com.socialuni.social.constant.UserIdentityAuthStatus;
-import com.socialuni.social.entity.model.DO.user.*;
+import com.socialuni.center.web.model.DO.user.*;
 import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.center.web.repository.CommonTokenRepository;
 import com.socialuni.center.web.repository.UserRepository;

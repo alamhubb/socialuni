@@ -1,10 +1,10 @@
 package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.domain.notify.SocialQueryNotifyDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
+import com.socialuni.center.web.model.RO.app.SocialUnreadNotifyVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

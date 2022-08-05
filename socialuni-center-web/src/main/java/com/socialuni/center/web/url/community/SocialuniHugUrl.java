@@ -1,6 +1,6 @@
 package com.socialuni.center.web.url.community;
 
-import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
+import com.socialuni.center.web.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -2,10 +2,10 @@ package com.socialuni.center.web.domain.hug;
 
 import com.socialuni.center.web.redis.HugRedis;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.entity.model.DO.HugDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
+import com.socialuni.center.web.model.DO.HugDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.SocialHugAddQO;
 import com.socialuni.center.web.utils.TalkRedis;
 import com.socialuni.center.web.utils.TalkUtils;
 import org.springframework.stereotype.Component;

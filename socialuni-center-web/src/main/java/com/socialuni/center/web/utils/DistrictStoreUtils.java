@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.redis.DistrictRedis;
-import com.socialuni.social.entity.model.DO.DistrictDO;
+import com.socialuni.center.web.model.DO.DistrictDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

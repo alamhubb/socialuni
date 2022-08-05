@@ -3,7 +3,7 @@ package com.socialuni.center.web.utils;
 import com.socialuni.center.web.redis.RedisKeysUtil;
 import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.mapper.TalkMapper;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import org.springframework.cache.annotation.CacheEvict;

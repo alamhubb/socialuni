@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage;
 
 import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.TokenDO;
 import com.socialuni.center.web.repository.CommonTokenRepository;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;

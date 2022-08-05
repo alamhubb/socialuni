@@ -3,9 +3,9 @@ package com.socialuni.center.web.domain.follow;
 
 import com.socialuni.center.web.factory.user.base.SocialUserFollowDetailROFactory;
 import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.entity.model.DO.FollowDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.center.web.model.DO.FollowDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
 import com.socialuni.center.web.repository.FollowRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;

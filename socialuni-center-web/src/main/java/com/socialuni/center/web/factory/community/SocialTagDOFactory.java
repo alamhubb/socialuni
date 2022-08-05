@@ -2,7 +2,7 @@ package com.socialuni.center.web.factory.community;
 
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.entity.model.DO.tag.TagDO;
+import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.config.SocialAppConfig;
 import lombok.Data;
 import lombok.NoArgsConstructor;

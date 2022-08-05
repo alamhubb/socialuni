@@ -1,11 +1,11 @@
 package com.socialuni.center.web.model.RO.match;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserImgDO;
 import com.socialuni.center.web.model.RO.UserImgVO;
 import com.socialuni.center.web.utils.model.DO.UserImgDOUtils;
-import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
+import com.socialuni.center.web.model.RO.app.SocialDistrictRO;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

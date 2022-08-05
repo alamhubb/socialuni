@@ -1,14 +1,14 @@
 package com.socialuni.center.web.factory.RO.talk;
 
-import com.socialuni.api.model.RO.user.CenterContentUserRO;
+import com.socialuni.center.web.model.RO.user.CenterContentUserRO;
 import com.socialuni.center.web.factory.RO.user.CenterContentUserROFactory;
-import com.socialuni.api.model.RO.talk.CenterCommentRO;
-import com.socialuni.api.model.RO.talk.CenterTalkImgRO;
-import com.socialuni.api.model.RO.talk.CenterTalkRO;
+import com.socialuni.center.web.model.RO.talk.CenterCommentRO;
+import com.socialuni.center.web.model.RO.talk.CenterTalkImgRO;
+import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.factory.ListConvertUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class CenterTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static CenterTalkRO getTalkRO(SocialTalkRO talkRO, UserDO mineUser) {
-        String talkId = UnionIdDbUtil.createTalkUid(talkRO.getId()).toString();
+        Integer talkId = UnionIdDbUtil.createTalkUid(talkRO);
 
         CenterContentUserRO centerTalkUserRO = CenterContentUserROFactory.getContentUserRO(talkRO.getUser(), mineUser);
         List<CenterTalkImgRO> imgs = CenterTalkImgROFactory.getHomeTalkImgROS(talkRO.getImgs());

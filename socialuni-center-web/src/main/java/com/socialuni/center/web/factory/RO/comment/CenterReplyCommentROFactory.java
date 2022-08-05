@@ -1,11 +1,11 @@
 package com.socialuni.center.web.factory.RO.comment;
 
-import com.socialuni.api.model.RO.user.CenterUserRO;
+import com.socialuni.center.web.model.RO.user.CenterUserRO;
 import com.socialuni.center.web.factory.RO.user.CenterUserROFactory;
-import com.socialuni.api.model.RO.talk.CenterReplyCommentRO;
+import com.socialuni.center.web.model.RO.talk.CenterReplyCommentRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.community.comment.SocialReplyCommentRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.community.comment.SocialReplyCommentRO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

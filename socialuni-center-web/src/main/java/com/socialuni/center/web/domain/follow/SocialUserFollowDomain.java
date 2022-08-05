@@ -3,7 +3,7 @@ package com.socialuni.center.web.domain.follow;
 import com.socialuni.center.web.manage.FollowManage;
 import com.socialuni.center.web.manage.SocialUserFansDetailManage;
 import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.entity.model.DO.FollowDO;
+import com.socialuni.center.web.model.DO.FollowDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.redis.FollowRedis;
 import org.springframework.scheduling.annotation.Async;

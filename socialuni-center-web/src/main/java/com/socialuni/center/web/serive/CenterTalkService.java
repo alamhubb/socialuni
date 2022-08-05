@@ -1,18 +1,15 @@
 package com.socialuni.center.web.serive;
 
-import com.socialuni.api.feignAPI.SocialuniTalkAPI;
-import com.socialuni.api.model.QO.talk.CenterHomeTabTalkQueryQO;
-import com.socialuni.api.model.QO.talk.CenterTalkIdQO;
-import com.socialuni.api.model.QO.talk.CenterUserTalkQueryQO;
-import com.socialuni.api.model.RO.talk.CenterTalkRO;
+import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.QO.talk.CenterTalkIdQO;
+import com.socialuni.center.web.model.QO.talk.CenterUserTalkQueryQO;
+import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.domain.talk.*;
-import com.socialuni.center.web.utils.UniAPIUtils;
+import com.socialuni.center.web.feignAPI.SocialuniTalkAPI;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.model.model.RO.community.UniContentIdRO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,11 +60,12 @@ public class CenterTalkService {
     public ResultRO<SocialTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
 
-        UniContentIdRO socialuniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, socialTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
+//        UniContentIdRO socialuniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, socialTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
 //        SocialuniContentIdRO socialuniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, socialTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
 
-        SocialTalkRO centerTalkRO = (SocialTalkRO) socialuniContentIdRO;
-        return new ResultRO<>(centerTalkRO);
+//        SocialTalkRO centerTalkRO = (SocialTalkRO) socialuniContentIdRO;
+//        return new ResultRO<>(centerTalkRO);
+        return null;
     }
 
     public ResultRO<Void> deleteTalk(CenterTalkIdQO talkIdQO) {

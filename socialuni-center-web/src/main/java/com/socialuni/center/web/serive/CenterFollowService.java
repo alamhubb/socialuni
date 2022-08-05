@@ -1,8 +1,8 @@
 package com.socialuni.center.web.serive;
 
 
-import com.socialuni.api.model.QO.follow.CenterFollowAddQO;
-import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
+import com.socialuni.center.web.model.QO.follow.CenterFollowAddQO;
+import com.socialuni.center.web.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.center.web.domain.follow.CenterFollowUserDomain;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;

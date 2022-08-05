@@ -1,8 +1,8 @@
 package com.socialuni.center.web.factory;
 
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
+import com.socialuni.center.web.model.DO.ReportDO;
+import com.socialuni.center.web.model.DO.base.BaseModelDO;
 import com.socialuni.center.web.constant.ReportSourceType;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.service.ReportService;

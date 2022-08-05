@@ -4,9 +4,9 @@ import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.constant.CommonConst;
 import com.socialuni.center.web.constant.GenderTypeNumEnum;
 import com.socialuni.center.web.constant.UserType;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.StringUtils;
 

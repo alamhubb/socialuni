@@ -1,6 +1,6 @@
 package com.socialuni.center.web.constant;
 
-import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
+import com.socialuni.center.web.model.RO.app.SocialDistrictRO;
 
 import java.util.List;
 

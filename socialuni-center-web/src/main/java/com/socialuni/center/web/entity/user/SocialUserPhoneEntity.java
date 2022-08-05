@@ -4,7 +4,7 @@ import com.socialuni.center.web.manage.SocialUserFansDetailManage;
 import com.socialuni.center.web.manage.SocialUserManage;
 import com.socialuni.center.web.manage.phone.SocialUserPhoneManage;
 import com.socialuni.center.web.repository.UserRepository;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

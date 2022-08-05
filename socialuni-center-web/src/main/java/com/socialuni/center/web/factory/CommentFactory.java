@@ -1,8 +1,8 @@
 package com.socialuni.center.web.factory;
 
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.repository.CommentRepository;
 import org.springframework.stereotype.Component;

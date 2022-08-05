@@ -1,7 +1,7 @@
 package com.socialuni.center.web.redis;
 
 import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.center.web.repository.user.SocialUserPhoneRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import org.springframework.cache.annotation.Cacheable;

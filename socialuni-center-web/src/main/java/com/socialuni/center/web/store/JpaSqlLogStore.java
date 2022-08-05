@@ -1,6 +1,6 @@
 package com.socialuni.center.web.store;
 
-import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
+import com.socialuni.center.web.model.DO.JpaSqlLogDO;
 import com.socialuni.center.web.repository.JpaSqlLogRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

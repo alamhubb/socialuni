@@ -3,7 +3,7 @@ package com.socialuni.center.web.service;
 import com.socialuni.center.web.constant.AppConfigConst;
 import com.socialuni.center.web.constant.ConfigValueType;
 import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.entity.model.DO.AppConfigDO;
+import com.socialuni.center.web.model.DO.AppConfigDO;
 import com.socialuni.center.web.repository.AppConfigRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,13 +1,11 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.TokenDO;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.center.web.utils.SocialTokenDOUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +50,7 @@ public class CenterTokenUtil {
 
     public static Integer getDataDevId() {
         HttpServletRequest request = RequestUtil.getRequest();
-        String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataSocialuniId);
+        String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
         if (SocialTokenUtil.isSuccess(dataSocialuniId)) {
             Integer userId = Integer.parseInt(dataSocialuniId);
             return userId;

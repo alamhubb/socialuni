@@ -1,8 +1,8 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniLocationAPI;
-import com.socialuni.api.model.QO.location.LocationQueryQO;
-import com.socialuni.api.model.QO.location.LocationQueryRO;
+import com.socialuni.center.web.feignAPI.SocialuniLocationAPI;
+import com.socialuni.center.web.model.QO.location.LocationQueryQO;
+import com.socialuni.center.web.model.QO.location.LocationQueryRO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.center.web.platform.QQMapAPI;
 import com.socialuni.social.web.sdk.utils.IpUtil;

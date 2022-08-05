@@ -6,12 +6,12 @@ import com.socialuni.center.web.repository.ReportRepository;
 import com.socialuni.center.web.repository.UserImgRepository;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.TalkRedis;
-import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.message.MessageDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.ReportDO;
+import com.socialuni.center.web.model.DO.base.BaseModelDO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.message.MessageDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import org.springframework.stereotype.Service;
 

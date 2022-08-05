@@ -1,11 +1,11 @@
 package com.socialuni.center.web.domain.talk;
 
-import com.socialuni.api.model.QO.talk.CenterTalkIdQO;
+import com.socialuni.center.web.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.domain.talk.SocialTalkDeleteDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkDeleteQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkDeleteQO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

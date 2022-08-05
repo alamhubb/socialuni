@@ -1,6 +1,6 @@
 package com.socialuni.center.web.manage.talk;
 
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.TalkQueryStore;
 import com.socialuni.center.web.utils.TalkRedis;

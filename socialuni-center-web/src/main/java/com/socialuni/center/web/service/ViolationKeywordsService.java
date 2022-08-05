@@ -2,8 +2,8 @@ package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.constant.config.AppConfigStatic;
 import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.entity.model.DO.keywords.IllegalWordDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
+import com.socialuni.center.web.model.DO.keywords.IllegalWordDO;
+import com.socialuni.center.web.model.DO.keywords.KeywordsDO;
 import com.socialuni.center.web.repository.IllegalWordRepository;
 import com.socialuni.center.web.repository.KeywordsRepository;
 import org.springframework.stereotype.Service;

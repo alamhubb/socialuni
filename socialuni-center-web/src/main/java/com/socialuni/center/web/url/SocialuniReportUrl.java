@@ -1,6 +1,6 @@
 package com.socialuni.center.web.url;
 
-import com.socialuni.social.model.model.QO.SocialReportAddQO;
+import com.socialuni.center.web.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

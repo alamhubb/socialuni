@@ -1,10 +1,10 @@
 package com.socialuni.center.web.url.user;
 
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

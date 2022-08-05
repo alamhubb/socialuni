@@ -1,7 +1,7 @@
 package com.socialuni.center.web.repository;
 
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.base.BaseModelDO;
+import com.socialuni.center.web.model.DO.user.UserImgDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

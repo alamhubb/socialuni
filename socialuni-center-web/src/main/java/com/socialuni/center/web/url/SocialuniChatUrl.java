@@ -2,9 +2,9 @@ package com.socialuni.center.web.url;
 
 
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
+import com.socialuni.center.web.model.RO.message.chat.ChatReadVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

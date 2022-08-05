@@ -1,8 +1,8 @@
 /*
 package com.socialuni.social.sdk.manage.circle;
 
-import com.socialuni.social.entity.model.DO.circle.CircleDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.circle.CircleDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import org.springframework.stereotype.Component;
 
 @Component

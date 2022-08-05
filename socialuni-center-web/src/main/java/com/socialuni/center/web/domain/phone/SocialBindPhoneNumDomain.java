@@ -2,10 +2,10 @@ package com.socialuni.center.web.domain.phone;
 
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.manage.phone.AuthenticationManage;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

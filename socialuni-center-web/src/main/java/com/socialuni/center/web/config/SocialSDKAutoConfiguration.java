@@ -1,7 +1,6 @@
 package com.socialuni.center.web.config;
 
 import com.socialuni.cloud.config.EnableSocialCloudServiceSDK;
-import com.socialuni.social.entity.config.EnableSocialEntitySDK;
 import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

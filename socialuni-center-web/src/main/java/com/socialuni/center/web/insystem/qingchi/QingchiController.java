@@ -1,15 +1,15 @@
 package com.socialuni.center.web.insystem.qingchi;
 
-import com.socialuni.api.feignAPI.insystem.SocialuniQingchiAPI;
-import com.socialuni.api.model.RO.devAccount.DevAccountRO;
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.feignAPI.insystem.SocialuniQingchiAPI;
+import com.socialuni.center.web.model.RO.devAccount.DevAccountRO;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.web.model.QO.SocialBindWxPhoneNumQO;
+import com.socialuni.center.web.model.QO.user.OAuthUserInfoQO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
+import com.socialuni.center.web.model.RO.user.phone.SocialSendAuthCodeQO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

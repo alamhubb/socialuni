@@ -2,8 +2,8 @@ package com.socialuni.center.web.utils.model;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.constant.GenderTypeNumEnum;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.SocialOAuthUserRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.SocialOAuthUserRO;
 
 /**
  * @author qinkaiyuan 查询结果可以没有set和空构造，前台传值可以没有get

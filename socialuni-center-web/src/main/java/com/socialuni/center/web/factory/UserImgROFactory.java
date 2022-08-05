@@ -1,8 +1,8 @@
 package com.socialuni.center.web.factory;
 
 
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
-import com.socialuni.social.model.model.RO.user.UserImgRO;
+import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.RO.user.UserImgRO;
 import com.socialuni.center.web.config.SocialAppConfig;
 
 import java.util.List;

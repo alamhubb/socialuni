@@ -1,11 +1,11 @@
 package com.socialuni.center.web.factory.RO.user;
 
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.api.model.RO.user.CenterUserDetailRO;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.CenterUserDetailRO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import org.springframework.stereotype.Component;
 
 @Component

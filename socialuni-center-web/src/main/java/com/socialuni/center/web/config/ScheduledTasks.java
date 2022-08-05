@@ -1,6 +1,6 @@
 package com.socialuni.center.web.config;
 
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.repository.UserRepository;
 import com.socialuni.center.web.service.ViolationKeywordsService;

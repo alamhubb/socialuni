@@ -3,12 +3,12 @@ package com.socialuni.center.web.service.comment;
 
 import com.socialuni.center.web.domain.comment.SocialCommentDeleteDomain;
 import com.socialuni.center.web.domain.comment.SocialCommentPostDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentDeleteQO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
+import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

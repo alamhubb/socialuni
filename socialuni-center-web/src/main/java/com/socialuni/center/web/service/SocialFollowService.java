@@ -3,11 +3,11 @@ package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.domain.follow.SocialQueryUserFollowsDomain;
 import com.socialuni.center.web.domain.follow.SocialUserFollowDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.model.model.QO.community.SocialFollowAddQO;
+import com.socialuni.center.web.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

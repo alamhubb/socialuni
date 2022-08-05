@@ -1,9 +1,9 @@
 package com.socialuni.center.web.serive;
 
 
-import com.socialuni.api.model.QO.comment.CenterCommentDeleteQO;
-import com.socialuni.api.model.QO.comment.CenterCommentPostQO;
-import com.socialuni.api.model.RO.talk.CenterCommentRO;
+import com.socialuni.center.web.model.QO.comment.CenterCommentDeleteQO;
+import com.socialuni.center.web.model.QO.comment.CenterCommentPostQO;
+import com.socialuni.center.web.model.RO.talk.CenterCommentRO;
 import com.socialuni.center.web.domain.comment.CenterCommentDeleteDomain;
 import com.socialuni.center.web.domain.comment.CenterCommentPostDomain;
 import com.socialuni.social.api.model.ResultRO;

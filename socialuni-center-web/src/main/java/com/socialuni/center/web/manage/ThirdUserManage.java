@@ -1,6 +1,6 @@
 package com.socialuni.center.web.manage;
 
-import com.socialuni.social.entity.model.DO.dev.ThirdUserDO;
+import com.socialuni.center.web.model.DO.dev.ThirdUserDO;
 import com.socialuni.center.web.repository.dev.ThirdUserRepository;
 import org.springframework.stereotype.Service;
 

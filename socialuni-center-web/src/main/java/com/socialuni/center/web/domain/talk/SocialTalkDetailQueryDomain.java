@@ -3,12 +3,12 @@ package com.socialuni.center.web.domain.talk;
 import com.socialuni.center.web.factory.SocialTalkROFactory;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.TalkUtils;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkIdQO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkIdQO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
 
 @Service

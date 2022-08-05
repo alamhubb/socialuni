@@ -9,12 +9,12 @@ import com.socialuni.center.web.platform.WxDecode;
 import com.socialuni.center.web.platform.WxPhoneNumRO;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.SocialBindWxPhoneNumQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.center.web.utils.UniProviderUtil;
 import com.socialuni.social.utils.JsonUtil;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

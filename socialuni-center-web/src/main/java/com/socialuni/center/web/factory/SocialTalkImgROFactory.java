@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory;
 
-import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkImgRO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkImgRO;
 import com.socialuni.center.web.config.SocialAppConfig;
 import lombok.Data;
 

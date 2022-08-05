@@ -1,6 +1,6 @@
 package com.socialuni.center.web.repository.community;
 
-import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
+import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

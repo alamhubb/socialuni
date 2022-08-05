@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage.phone;
 
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.constant.status.UserStatus;

@@ -2,12 +2,12 @@ package com.socialuni.center.web.domain.comment;
 
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.utils.TalkUtils;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentDeleteQO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

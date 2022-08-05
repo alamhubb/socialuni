@@ -1,7 +1,7 @@
 package com.socialuni.center.web.repository.dev;
 
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.dev.DevSocialuniIdDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevSocialuniIdDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

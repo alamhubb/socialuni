@@ -1,7 +1,7 @@
 package com.socialuni.center.web.store;
 
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.ReportDO;
+import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.repository.ReportRepository;
 import org.springframework.stereotype.Component;
 

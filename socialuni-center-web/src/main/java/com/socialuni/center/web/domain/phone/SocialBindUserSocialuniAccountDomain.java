@@ -3,7 +3,7 @@ package com.socialuni.center.web.domain.phone;
 import com.socialuni.center.web.constant.SocialuniProviderLoginType;
 import com.socialuni.center.web.constant.platform.PlatformType;
 import com.socialuni.center.web.entity.user.SocialBindUserProviderAccountEntity;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package com.socialuni.center.web.repository;
 
 
 import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.TokenDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

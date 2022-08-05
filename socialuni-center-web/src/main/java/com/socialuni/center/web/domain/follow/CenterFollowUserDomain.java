@@ -1,16 +1,16 @@
 package com.socialuni.center.web.domain.follow;
 
 
-import com.socialuni.api.model.QO.follow.CenterFollowAddQO;
-import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
+import com.socialuni.center.web.model.QO.follow.CenterFollowAddQO;
+import com.socialuni.center.web.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.center.web.factory.RO.user.CenterUserFollowDetailROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.domain.follow.SocialQueryUserFollowsDomain;
 import com.socialuni.center.web.domain.follow.SocialUserFollowDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

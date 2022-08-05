@@ -1,13 +1,13 @@
-import HttpRequest, { requestConfig } from '@/socialuni/plugins/http/httpRequest'
+import HttpRequest, {requestConfig} from '@/socialuni/plugins/http/httpRequest'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
-import { socialConfigModule, socialSystemModule } from '../../store'
+import {socialConfigModule, socialSystemModule} from '../../store'
 import UserService from '../../service/UserService'
 import ErrorConst from '../../constant/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
-import { socialConfig } from '../../index'
+import {socialConfig} from '../../index'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import SocialSystemInfo from '../../constant/SocialSystemInfo'
 import XmlUtil from '@/socialuni/utils/XmlUtil'
@@ -81,7 +81,7 @@ request.interceptor.response(
           case ErrorConst.banned:
             // 理论上不需要，因为token不会失效，也不会错误
             // 已知可能，切换环境导致token不同
-            // UserService.clearUserInfoCom()
+            UserService.clearUserInfoCom()
             AlertUtil.hint(errorMsg)
             break
           case ErrorConst.custom:

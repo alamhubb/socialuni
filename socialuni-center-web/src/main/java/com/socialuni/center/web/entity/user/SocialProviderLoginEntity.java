@@ -7,10 +7,10 @@ import com.socialuni.center.web.model.UniUnionIdRO;
 import com.socialuni.center.web.store.SocialUserAccountStore;
 import com.socialuni.center.web.utils.SocialUniProviderUtil;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.entity.model.DO.user.SocialUserAccountDO;
+import com.socialuni.center.web.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

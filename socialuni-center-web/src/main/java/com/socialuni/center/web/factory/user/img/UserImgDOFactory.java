@@ -3,10 +3,10 @@ package com.socialuni.center.web.factory.user.img;
 
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserImgDO;
 import com.socialuni.center.web.constant.AppConfigConst;
-import com.socialuni.social.model.model.QO.user.SocialUserImgAddQO;
+import com.socialuni.center.web.model.QO.user.SocialUserImgAddQO;
 
 import java.util.Date;
 

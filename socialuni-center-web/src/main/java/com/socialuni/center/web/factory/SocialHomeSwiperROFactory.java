@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory;
 
-import com.socialuni.social.entity.model.DO.HomeSwiperDO;
-import com.socialuni.social.model.model.HomeSwiperVO;
+import com.socialuni.center.web.model.DO.HomeSwiperDO;
+import com.socialuni.center.web.model.HomeSwiperVO;
 
 import java.util.List;
 

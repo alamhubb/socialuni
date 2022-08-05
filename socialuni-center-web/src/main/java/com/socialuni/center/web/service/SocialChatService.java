@@ -4,9 +4,9 @@ import com.socialuni.center.web.model.OpenChatVO;
 import com.socialuni.center.web.model.RO.UserIdVO;
 import com.socialuni.center.web.domain.chat.ChatQueryDomain;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRO;
+import com.socialuni.center.web.model.RO.message.chat.ChatReadVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRemoveVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

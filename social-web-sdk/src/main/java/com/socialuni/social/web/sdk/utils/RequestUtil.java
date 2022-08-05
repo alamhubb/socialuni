@@ -57,8 +57,8 @@ public class RequestUtil {
         return RequestUtil.getHeader(SocialWebHeaderName.platformHeaderName);
     }
 
-    public static String getDataSocialuniId() {
-        return RequestUtil.getHeader(SocialFeignHeaderName.dataSocialuniId);
+    public static String getDataOriginalSocialuniId() {
+        return RequestUtil.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
     }
 
     //根据cookie名获取cookie值

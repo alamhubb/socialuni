@@ -5,7 +5,7 @@ package com.socialuni.sdk.factory;
 import com.qingchi.web.model.DO.UserDetailDO;
 import com.qingchi.web.model.RO.MineUserDetailRO;
 import com.qingchi.web.repsotiory.UserDetailRepository;
-import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
+import com.socialuni.center.web.model.RO.user.SocialUserDetailRO;
 import com.socialuni.entity.model.DO.user.UserDO;
 import org.springframework.stereotype.Component;
 

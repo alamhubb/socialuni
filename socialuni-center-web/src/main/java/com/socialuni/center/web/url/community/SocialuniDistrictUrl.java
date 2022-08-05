@@ -1,6 +1,6 @@
 package com.socialuni.center.web.url.community;
 
-import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
+import com.socialuni.center.web.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

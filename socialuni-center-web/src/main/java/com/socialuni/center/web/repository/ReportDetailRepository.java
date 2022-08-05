@@ -1,7 +1,7 @@
 package com.socialuni.center.web.repository;
 
-import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.ReportDetailDO;
+import com.socialuni.center.web.model.DO.ReportDO;
+import com.socialuni.center.web.model.DO.ReportDetailDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

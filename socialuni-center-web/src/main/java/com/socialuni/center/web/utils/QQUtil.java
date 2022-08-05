@@ -11,7 +11,7 @@ import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.platform.weixin.token.WxTokenResult;
 import com.socialuni.center.web.utils.common.RestUtil;
 import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.social.entity.model.DO.NotifyDO;
+import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.utils.UUIDUtil;

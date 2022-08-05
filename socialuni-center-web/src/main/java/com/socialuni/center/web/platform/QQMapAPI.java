@@ -1,7 +1,7 @@
 package com.socialuni.center.web.platform;
 
-import com.socialuni.api.model.QO.location.LocationQueryQO;
-import com.socialuni.api.model.QO.location.LocationQueryRO;
+import com.socialuni.center.web.model.QO.location.LocationQueryQO;
+import com.socialuni.center.web.model.QO.location.LocationQueryRO;
 import com.socialuni.center.web.model.QQMapGeocoderRO;
 import com.socialuni.center.web.model.QQMapGeocoderResultRO;
 import com.socialuni.center.web.model.*;

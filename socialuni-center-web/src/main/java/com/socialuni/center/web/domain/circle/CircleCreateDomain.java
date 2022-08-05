@@ -1,7 +1,7 @@
 package com.socialuni.center.web.domain.circle;
 
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.circle.CircleCreateQO;
 import org.springframework.stereotype.Component;
 
 @Component

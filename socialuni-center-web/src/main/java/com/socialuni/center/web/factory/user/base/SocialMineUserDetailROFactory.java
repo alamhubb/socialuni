@@ -1,9 +1,9 @@
 package com.socialuni.center.web.factory.user.base;
 
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.SocialUserDetailRO;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.SocialUserDetailRO;
 import com.socialuni.center.web.redis.SocialUserPhoneRedis;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;

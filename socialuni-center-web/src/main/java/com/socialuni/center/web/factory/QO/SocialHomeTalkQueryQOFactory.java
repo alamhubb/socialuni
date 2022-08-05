@@ -1,8 +1,8 @@
 package com.socialuni.center.web.factory.QO;
 
-import com.socialuni.api.model.QO.talk.CenterHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 
 import java.util.List;
 

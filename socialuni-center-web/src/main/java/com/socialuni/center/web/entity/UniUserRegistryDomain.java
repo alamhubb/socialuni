@@ -2,9 +2,9 @@ package com.socialuni.center.web.entity;
 
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.center.web.repository.UniUserAccountRepository;
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
 import com.socialuni.center.web.manage.SocialUserFansDetailManage;

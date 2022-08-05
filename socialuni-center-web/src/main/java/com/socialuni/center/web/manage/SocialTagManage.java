@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage;
 
-import com.socialuni.social.entity.model.DO.tag.TagDO;
-import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
+import com.socialuni.center.web.model.DO.tag.TagDO;
+import com.socialuni.center.web.model.QO.community.tag.TagAddQO;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.factory.community.SocialTagDOFactory;
 import com.socialuni.center.web.repository.community.TagRepository;

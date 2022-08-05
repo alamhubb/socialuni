@@ -1,7 +1,7 @@
 package com.socialuni.center.web.url.community;
 
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.app.SocialUnreadNotifyVO;
+import com.socialuni.center.web.model.RO.app.SocialUnreadNotifyVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 

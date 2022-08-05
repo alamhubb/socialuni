@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory.community;
 
-import com.socialuni.social.entity.model.DO.tag.TagDO;
-import com.socialuni.social.model.model.RO.community.tag.TagRO;
+import com.socialuni.center.web.model.DO.tag.TagDO;
+import com.socialuni.center.web.model.RO.community.tag.TagRO;
 import com.socialuni.center.web.factory.ListConvertUtil;
 import org.apache.commons.lang3.StringUtils;
 

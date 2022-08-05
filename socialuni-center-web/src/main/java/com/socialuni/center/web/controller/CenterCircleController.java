@@ -1,16 +1,16 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniChatAPI;
-import com.socialuni.api.feignAPI.SocialuniCircleAPI;
+import com.socialuni.center.web.feignAPI.SocialuniChatAPI;
+import com.socialuni.center.web.feignAPI.SocialuniCircleAPI;
 import com.socialuni.center.web.serive.circle.CenterCircleService;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.entity.model.DO.circle.SocialCircleDO;
-import com.socialuni.social.model.model.QO.community.circle.CircleCreateQO;
-import com.socialuni.social.model.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.model.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
+import com.socialuni.center.web.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.center.web.model.RO.community.circle.CircleTypeRO;
+import com.socialuni.center.web.model.RO.community.circle.SocialCircleRO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRO;
+import com.socialuni.center.web.model.RO.message.chat.ChatReadVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRemoveVO;
 import com.socialuni.center.web.service.SocialChatService;
 import org.springframework.web.bind.annotation.RestController;
 

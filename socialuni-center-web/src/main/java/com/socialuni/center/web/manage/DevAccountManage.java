@@ -3,10 +3,10 @@ package com.socialuni.center.web.manage;
 
 import com.socialuni.center.web.repository.dev.DevAccountProviderRepository;
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountProviderDO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.model.model.QO.user.OAuthUserInfoQO;
+import com.socialuni.center.web.model.QO.user.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

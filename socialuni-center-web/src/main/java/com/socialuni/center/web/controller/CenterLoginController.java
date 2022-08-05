@@ -1,14 +1,14 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniLoginAPI;
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.web.feignAPI.SocialuniLoginAPI;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.serive.CenterLoginService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

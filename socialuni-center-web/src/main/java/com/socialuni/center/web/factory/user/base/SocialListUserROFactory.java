@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory.user.base;
 
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.base.SocialListUserRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.base.SocialListUserRO;
 
 public class SocialListUserROFactory {
     public static SocialListUserRO getListUserRO(UserDO userDO) {

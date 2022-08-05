@@ -1,13 +1,13 @@
 package com.socialuni.center.web.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.entity.model.DO.NotifyDO;
-import com.socialuni.social.entity.model.DO.chat.ChatDO;
-import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
-import com.socialuni.social.entity.model.DO.message.MessageDO;
-import com.socialuni.social.entity.model.DO.message.MessageReceiveDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
+import com.socialuni.center.web.model.DO.NotifyDO;
+import com.socialuni.center.web.model.DO.chat.ChatDO;
+import com.socialuni.center.web.model.DO.chat.ChatUserDO;
+import com.socialuni.center.web.model.DO.message.MessageDO;
+import com.socialuni.center.web.model.DO.message.MessageReceiveDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRO;
 import com.socialuni.center.web.constant.NotifyType;
 import com.socialuni.center.web.factory.SocialChatROFactory;
 import com.socialuni.social.utils.JsonUtil;

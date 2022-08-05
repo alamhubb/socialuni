@@ -1,6 +1,6 @@
 package com.socialuni.center.web.repository;
 
-import com.socialuni.social.entity.model.DO.notify.PushMessageDO;
+import com.socialuni.center.web.model.DO.notify.PushMessageDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

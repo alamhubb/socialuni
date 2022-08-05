@@ -3,7 +3,7 @@ package com.socialuni.center.web.exception;
 import com.socialuni.center.web.utils.ErrorMsgUtil;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.base.SocialInfoException;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 
 public class SocialUserBannedException extends SocialInfoException {
     //用户被封禁

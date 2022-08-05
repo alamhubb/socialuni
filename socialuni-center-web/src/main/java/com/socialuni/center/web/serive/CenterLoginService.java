@@ -1,26 +1,25 @@
 package com.socialuni.center.web.serive;
 
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.web.domain.login.SocialProviderLoginDomain;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
+import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.center.web.entity.user.SocialProviderLoginEntity;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
+import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
+import com.socialuni.center.web.manage.TokenManage;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
+import com.socialuni.center.web.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.center.web.domain.login.SocialProviderLoginDomain;
-import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
-import com.socialuni.center.web.entity.user.SocialProviderLoginEntity;
-import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.center.web.manage.TokenManage;
-import com.socialuni.center.web.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -81,11 +80,11 @@ public class CenterLoginService {
         //根据user获取返回结果
         UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(1, ContentType.user, mineUser.getId());
-        if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), mineUser.getId());
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(ContentType.user, mineUser.getId());
+        /*if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), mineUser.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
-        }
+        }*/
 
         //向三方应用授权，不存在登录接口向三方授权的情况了
 //        CenterMineUserDetailRO mineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);

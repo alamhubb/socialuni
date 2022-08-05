@@ -1,7 +1,7 @@
 package com.socialuni.center.web.service;
 
-import com.socialuni.social.entity.model.DO.chat.ChatDO;
-import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
+import com.socialuni.center.web.model.DO.chat.ChatDO;
+import com.socialuni.center.web.model.DO.chat.ChatUserDO;
 import lombok.Data;
 
 @Data

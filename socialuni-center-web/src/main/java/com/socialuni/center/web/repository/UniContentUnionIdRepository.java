@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UniContentUnionIdRepository extends JpaRepository<UniContentUnionIdDO, Integer> {
 
-    UniContentUnionIdDO findByDataDevIdAndDataContentUnionId(Integer devId, Integer dataContentUnionId);
+    UniContentUnionIdDO findByOriginalDevIdAndOriginalContentUnionId(Integer originalDevId, Integer originalContentUnionId);
 
 
-    UniContentUnionIdDO findByDataDevIdAndContentTypeAndContentId(Integer devId, String contentType, Integer contentId);
+    UniContentUnionIdDO findByContentTypeAndContentId(String contentType, Integer contentId);
 
 }
 

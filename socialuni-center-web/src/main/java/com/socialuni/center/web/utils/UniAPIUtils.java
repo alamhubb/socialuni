@@ -1,17 +1,17 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.api.feignAPI.SocialuniUserAPI;
+import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.model.model.QO.ContentAddQO;
-import com.socialuni.social.model.model.RO.community.UniContentIdRO;
+import com.socialuni.center.web.model.QO.ContentAddQO;
+import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -44,7 +44,7 @@ public class UniAPIUtils {
 
     //list转换，TO类List转为RO类List
     public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
-        String dataSocialuniId = RequestUtil.getDataSocialuniId();
+        String dataSocialuniId = RequestUtil.getDataOriginalSocialuniId();
         //校验此条数据是否已经写入过。
         String dataContentUnionIdStr = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
@@ -72,10 +72,10 @@ public class UniAPIUtils {
             //仅仅是个校验，防止重复写入 ， dataSocialuniId都不空才能查，dataSociuni为空，则肯定thirdId为空
             if (StringUtils.isNotEmpty(dataContentUnionIdStr)) {
                 //如果已经存在此动态，则无需重复添加，直接返回
-                UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(dataContentUnionIdStr));
-                if (uniContentUnionIdDO != null) {
-                    return null;
-                }
+//                UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(dataContentUnionIdStr));
+//                if (uniContentUnionIdDO != null) {
+//                    return null;
+//                }
             }
         }
         //推送的需要校验，非推送的不用校验
@@ -85,23 +85,23 @@ public class UniAPIUtils {
 
         //这就写入了数据，然后写入unionId表
         //如果自身为中心
-        UniContentUnionIdDO uniContentUnionIdDO;
-        if (DevAccountUtils.pushServer()) {
+        UniContentUnionIdDO uniContentUnionIdDO = new UniContentUnionIdDO();
+        /*if (DevAccountUtils.pushServer()) {
             //如果无后台模式会为空
-            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         } else {
             //无后台模式
             if (StringUtils.isEmpty(dataContentUnionIdStr)) {
                 //如果无后台模式会为空
-                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
+                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             } else {
                 //中心了
-                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataDevIdNotNull(), Integer.valueOf(dataContentUnionIdStr), DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
+                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataOriginalDevIdNotNull(), Integer.valueOf(dataContentUnionIdStr), DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             }
-        }
+        }*/
 
 
         //如果是中心 m则向所有子节点发请求， owner是传过来的， id自己的，秘钥自己的，从数据库里获取，自己对应对方的秘钥

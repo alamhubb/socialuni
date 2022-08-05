@@ -1,7 +1,7 @@
 package com.socialuni.center.web.domain.talk;
 
-import com.socialuni.api.model.QO.talk.CenterHomeTabTalkQueryQO;
-import com.socialuni.api.model.RO.talk.CenterTalkRO;
+import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
@@ -11,9 +11,9 @@ import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.constant.TalkTabType;
 import com.socialuni.center.web.domain.talk.SocialHomeTalkQueryDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.talk.SocialHomeTabTalkQueryQO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.center.web.model.RectangleVO;
 import com.socialuni.center.web.platform.MapUtil;
 import lombok.extern.slf4j.Slf4j;

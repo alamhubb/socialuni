@@ -3,9 +3,9 @@ package com.socialuni.center.web.entity.comment;
 import com.socialuni.center.web.manage.talk.TalkManage;
 import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
 import com.socialuni.center.web.store.CommentStore;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

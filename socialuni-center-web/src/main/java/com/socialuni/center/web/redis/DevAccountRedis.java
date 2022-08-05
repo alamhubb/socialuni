@@ -1,7 +1,7 @@
 package com.socialuni.center.web.redis;
 
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;

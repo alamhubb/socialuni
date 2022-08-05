@@ -1,10 +1,10 @@
 package com.socialuni.center.web.factory.RO.user;
 
-import com.socialuni.api.model.RO.user.CenterContentUserRO;
-import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
+import com.socialuni.center.web.model.RO.user.CenterContentUserRO;
+import com.socialuni.center.web.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.center.web.factory.ListConvertUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

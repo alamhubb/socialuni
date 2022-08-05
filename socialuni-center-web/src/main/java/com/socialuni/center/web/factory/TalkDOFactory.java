@@ -1,12 +1,12 @@
 package com.socialuni.center.web.factory;
 
 import com.socialuni.center.web.model.RectangleVO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.entity.model.DO.DistrictDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.DistrictDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkImgAddQO;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkImgAddQO;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.center.web.platform.MapUtil;
 import com.socialuni.center.web.utils.ImgCheckUtil;
 import com.socialuni.center.web.utils.SocialUserUtil;

@@ -1,10 +1,10 @@
 package com.socialuni.center.web.manage.talk;
 
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.entity.model.DO.DistrictDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.DistrictDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.factory.TalkDOFactory;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.center.web.utils.TalkRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

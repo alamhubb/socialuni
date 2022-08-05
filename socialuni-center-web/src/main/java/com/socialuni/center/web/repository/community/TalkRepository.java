@@ -2,7 +2,7 @@ package com.socialuni.center.web.repository.community;
 
 
 import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

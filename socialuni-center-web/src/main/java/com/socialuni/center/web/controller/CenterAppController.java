@@ -1,11 +1,11 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniAppAPI;
+import com.socialuni.center.web.feignAPI.SocialuniAppAPI;
 import com.socialuni.center.web.serive.CenterAppService;
-import com.socialuni.social.model.model.HomeSwiperVO;
+import com.socialuni.center.web.model.HomeSwiperVO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.social.model.model.QO.FrontErrorLogVO;
+import com.socialuni.center.web.model.RO.app.SocialAppLaunchDataRO;
+import com.socialuni.center.web.model.QO.FrontErrorLogVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.social.entity.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.TokenDO;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.exception.SocialUserTokenExpireException;
 import com.socialuni.center.web.repository.CommonTokenRepository;

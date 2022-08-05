@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory;
 
-import com.socialuni.social.entity.model.DO.DistrictDO;
-import com.socialuni.social.model.model.RO.app.SocialDistrictRO;
+import com.socialuni.center.web.model.DO.DistrictDO;
+import com.socialuni.center.web.model.RO.app.SocialDistrictRO;
 import lombok.Data;
 
 import java.util.List;

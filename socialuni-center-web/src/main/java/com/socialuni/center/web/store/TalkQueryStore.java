@@ -1,8 +1,8 @@
 package com.socialuni.center.web.store;
 
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.talk.SocialUserTalkQueryQO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.center.web.redis.FollowRedis;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.TalkRedis;

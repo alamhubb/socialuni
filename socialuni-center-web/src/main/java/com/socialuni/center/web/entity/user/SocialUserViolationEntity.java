@@ -2,7 +2,7 @@ package com.socialuni.center.web.entity.user;
 
 import com.socialuni.center.web.repository.user.SocialUserViolationRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.entity.model.DO.user.SocialUserViolationDO;
+import com.socialuni.center.web.model.DO.user.SocialUserViolationDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

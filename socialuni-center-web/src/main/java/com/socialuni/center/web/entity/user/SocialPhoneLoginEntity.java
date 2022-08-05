@@ -4,9 +4,9 @@ import com.socialuni.center.web.manage.phone.AuthenticationManage;
 import com.socialuni.center.web.manage.phone.SocialUserPhoneManage;
 import com.socialuni.center.web.repository.dev.ThirdUserRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

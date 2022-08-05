@@ -2,10 +2,10 @@ package com.socialuni.center.web.domain.user;
 
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.QO.user.SocialUserImgDeleteQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.center.web.repository.UserImgRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

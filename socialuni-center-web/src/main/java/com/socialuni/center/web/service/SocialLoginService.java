@@ -2,11 +2,11 @@ package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.center.web.domain.login.SocialProviderLoginDomain;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
+import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

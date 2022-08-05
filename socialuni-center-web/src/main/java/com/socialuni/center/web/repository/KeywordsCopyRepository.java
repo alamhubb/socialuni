@@ -1,6 +1,6 @@
 package com.socialuni.center.web.repository;
 
-import com.socialuni.social.entity.model.DO.keywords.KeywordsCopyDO;
+import com.socialuni.center.web.model.DO.keywords.KeywordsCopyDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

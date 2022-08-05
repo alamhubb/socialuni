@@ -1,14 +1,14 @@
 package com.socialuni.center.web.serive;
 
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.model.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
+import com.socialuni.center.web.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.center.web.constant.AuthType;
 import com.socialuni.center.web.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;

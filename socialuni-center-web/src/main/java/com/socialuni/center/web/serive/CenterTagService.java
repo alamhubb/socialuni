@@ -3,12 +3,12 @@ package com.socialuni.center.web.serive;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.domain.tag.SoicialTagAddDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.store.SocialTagRedis;
-import com.socialuni.social.model.model.QO.community.tag.TagAddQO;
+import com.socialuni.center.web.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.community.tag.TagRO;
-import com.socialuni.social.model.model.RO.community.tag.TagTypeRO;
+import com.socialuni.center.web.model.RO.community.tag.TagRO;
+import com.socialuni.center.web.model.RO.community.tag.TagTypeRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

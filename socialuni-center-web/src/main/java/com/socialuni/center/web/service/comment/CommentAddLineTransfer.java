@@ -1,8 +1,8 @@
 package com.socialuni.center.web.service.comment;
 
 
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

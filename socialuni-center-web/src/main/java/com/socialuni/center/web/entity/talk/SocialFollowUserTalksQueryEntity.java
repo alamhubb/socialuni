@@ -3,8 +3,8 @@ package com.socialuni.center.web.entity.talk;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.SocialHomeTalkQueryStore;
 import com.socialuni.center.web.store.TalkQueryStore;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
 package com.socialuni.center.web.factory.RO.talk;
 
-import com.socialuni.api.model.RO.talk.CenterTalkImgRO;
+import com.socialuni.center.web.model.RO.talk.CenterTalkImgRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.factory.ListConvertUtil;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkImgRO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkImgRO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

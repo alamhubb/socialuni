@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage;
 
-import com.socialuni.social.entity.model.DO.user.SocialUserFansDetailDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserFansDetailDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.redis.UserFansDetailRedis;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

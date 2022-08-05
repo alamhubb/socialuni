@@ -1,9 +1,9 @@
 package com.socialuni.center.web.url;
 
-import com.socialuni.social.model.model.HomeSwiperVO;
+import com.socialuni.center.web.model.HomeSwiperVO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.social.model.model.QO.FrontErrorLogVO;
+import com.socialuni.center.web.model.RO.app.SocialAppLaunchDataRO;
+import com.socialuni.center.web.model.QO.FrontErrorLogVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

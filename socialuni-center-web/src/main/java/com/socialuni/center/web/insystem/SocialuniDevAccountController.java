@@ -1,7 +1,7 @@
 package com.socialuni.center.web.insystem;
 
 import com.socialuni.center.web.feignAPI.SocialuniDevAccountAPI;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;

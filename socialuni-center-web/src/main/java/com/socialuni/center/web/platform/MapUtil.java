@@ -1,6 +1,6 @@
 package com.socialuni.center.web.platform;
 
-import com.socialuni.api.model.QO.location.LocationQueryRO;
+import com.socialuni.center.web.model.QO.location.LocationQueryRO;
 import com.socialuni.center.web.model.RectangleVO;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 

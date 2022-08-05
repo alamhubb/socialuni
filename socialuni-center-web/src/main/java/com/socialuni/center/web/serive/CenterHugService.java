@@ -1,12 +1,12 @@
 package com.socialuni.center.web.serive;
 
 
-import com.socialuni.api.model.QO.CenterHugAddQO;
+import com.socialuni.center.web.model.QO.CenterHugAddQO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.domain.hug.SocialAddHugDomain;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.community.SocialHugAddQO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 

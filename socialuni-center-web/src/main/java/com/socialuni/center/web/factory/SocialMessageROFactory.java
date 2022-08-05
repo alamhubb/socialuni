@@ -2,11 +2,11 @@ package com.socialuni.center.web.factory;
 
 
 import com.socialuni.social.constant.MessageStatus;
-import com.socialuni.social.entity.model.DO.message.MessageDO;
-import com.socialuni.social.entity.model.DO.message.MessageReceiveDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.message.message.SocialMessageRO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
+import com.socialuni.center.web.model.DO.message.MessageDO;
+import com.socialuni.center.web.model.DO.message.MessageReceiveDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.message.message.SocialMessageRO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
 import com.socialuni.center.web.factory.user.base.SocialUserROFactory;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import lombok.Data;

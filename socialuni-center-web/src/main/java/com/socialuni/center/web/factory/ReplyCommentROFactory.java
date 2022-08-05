@@ -1,12 +1,12 @@
 package com.socialuni.center.web.factory;
 
 import com.socialuni.center.web.factory.user.base.SocialUserROFactory;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.utils.CommentUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.model.model.RO.community.comment.SocialReplyCommentRO;
-import com.socialuni.social.model.model.RO.user.base.SocialUserRO;
+import com.socialuni.center.web.model.RO.community.comment.SocialReplyCommentRO;
+import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
 import org.springframework.stereotype.Component;
 
 @Component

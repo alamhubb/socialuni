@@ -1,11 +1,11 @@
 package com.socialuni.center.web.domain.talk;
 
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.TalkRedis;
-import com.socialuni.social.model.model.QO.community.talk.SocialTalkDeleteQO;
+import com.socialuni.center.web.model.QO.community.talk.SocialTalkDeleteQO;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.procedure.ParameterMisuseException;
 import org.springframework.stereotype.Service;

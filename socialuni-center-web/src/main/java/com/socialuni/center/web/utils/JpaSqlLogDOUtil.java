@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.store.JpaSqlLogStore;
-import com.socialuni.social.entity.model.DO.JpaSqlLogDO;
+import com.socialuni.center.web.model.DO.JpaSqlLogDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

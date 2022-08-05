@@ -1,10 +1,10 @@
 package com.socialuni.center.web.store;
 
 import com.socialuni.center.web.factory.CommentFactory;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
-import com.socialuni.social.model.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

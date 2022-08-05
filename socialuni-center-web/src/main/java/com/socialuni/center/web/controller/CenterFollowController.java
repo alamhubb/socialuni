@@ -1,8 +1,8 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniFollowAPI;
-import com.socialuni.api.model.QO.follow.CenterFollowAddQO;
-import com.socialuni.api.model.RO.user.CenterUserFollowDetailRO;
+import com.socialuni.center.web.feignAPI.SocialuniFollowAPI;
+import com.socialuni.center.web.model.QO.follow.CenterFollowAddQO;
+import com.socialuni.center.web.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.center.web.serive.CenterFollowService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;

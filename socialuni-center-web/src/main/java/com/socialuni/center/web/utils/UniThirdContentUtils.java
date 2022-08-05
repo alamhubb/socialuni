@@ -2,9 +2,9 @@ package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.model.model.QO.ContentAddQO;
+import com.socialuni.center.web.model.QO.ContentAddQO;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

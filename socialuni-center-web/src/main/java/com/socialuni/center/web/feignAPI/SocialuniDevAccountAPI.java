@@ -1,6 +1,6 @@
 package com.socialuni.center.web.feignAPI;
 
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;

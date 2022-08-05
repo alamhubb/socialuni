@@ -1,11 +1,11 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.api.feignAPI.SocialuniChatAPI;
+import com.socialuni.center.web.feignAPI.SocialuniChatAPI;
 import com.socialuni.center.web.service.SocialChatService;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRO;
-import com.socialuni.social.model.model.RO.message.chat.ChatReadVO;
-import com.socialuni.social.model.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRO;
+import com.socialuni.center.web.model.RO.message.chat.ChatReadVO;
+import com.socialuni.center.web.model.RO.message.chat.ChatRemoveVO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

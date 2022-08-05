@@ -1,7 +1,7 @@
 package com.socialuni.center.web.redis;
 
 import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
-import com.socialuni.social.entity.model.DO.HugDO;
+import com.socialuni.center.web.model.DO.HugDO;
 import com.socialuni.center.web.repository.HugRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

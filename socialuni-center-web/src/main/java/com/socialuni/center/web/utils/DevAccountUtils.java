@@ -4,8 +4,8 @@ import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountProviderDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.repository.dev.DevAccountProviderRepository;
@@ -87,8 +87,8 @@ public class DevAccountUtils {
         return devAccountDO.getId();
     }
 
-    public static Integer getDataDevIdNotNull() {
-        String dataSocialuniId = RequestUtil.getDataSocialuniId();
+    public static Integer getDataOriginalDevIdNotNull() {
+        String dataSocialuniId = RequestUtil.getDataOriginalSocialuniId();
         if (StringUtils.isEmpty(dataSocialuniId)) {
             return 1;
         }

@@ -2,7 +2,7 @@ package com.socialuni.center.web.service;
 
 
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.QO.FrontErrorLogVO;
+import com.socialuni.center.web.model.QO.FrontErrorLogVO;
 import com.socialuni.social.web.sdk.constant.ErrorPlatformType;
 import com.socialuni.social.web.sdk.model.ErrorRequestLogDO;
 import com.socialuni.social.web.sdk.model.RequestLogDO;

@@ -2,9 +2,9 @@ package com.socialuni.center.web.entity.chat;
 
 import com.socialuni.center.web.repository.ChatRepository;
 import com.socialuni.social.constant.ChatType;
-import com.socialuni.social.entity.model.DO.chat.ChatDO;
-import com.socialuni.social.entity.model.DO.chat.ChatUserDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.chat.ChatDO;
+import com.socialuni.center.web.model.DO.chat.ChatUserDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
 import com.socialuni.center.web.repository.ChatUserRepository;
 import org.springframework.stereotype.Component;
 

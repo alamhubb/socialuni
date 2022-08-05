@@ -1,17 +1,14 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.web.repository.UniUserAccountRepository;
-import com.socialuni.center.web.model.DO.UniUserAccountDO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.user.TokenDO;
-import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.center.web.exception.SocialUserBannedException;
-import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.center.web.constant.status.UserStatus;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.center.web.utils.SocialTokenDOUtil;
-import com.socialuni.center.web.utils.SocialUserUtil;
+import com.socialuni.center.web.exception.SocialUserBannedException;
+import com.socialuni.center.web.model.DO.UniUserAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.center.web.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.repository.UniUserAccountRepository;
+import com.socialuni.social.exception.SocialNotLoginException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -116,7 +113,7 @@ public class CenterUserUtil {
 
     public static Integer getMineUserUnionId() {
         UserDO user = CenterUserUtil.getMineUserNotNull();
-        return UnionIdDbUtil.createUserUid(user.getId());
+        return UnionIdDbUtil.createUserUid(user);
     }
 
     public static String getMineUserStringId() {

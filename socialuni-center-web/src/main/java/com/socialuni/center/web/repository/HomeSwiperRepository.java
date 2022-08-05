@@ -1,6 +1,6 @@
 package com.socialuni.center.web.repository;
 
-import com.socialuni.social.entity.model.DO.HomeSwiperDO;
+import com.socialuni.center.web.model.DO.HomeSwiperDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

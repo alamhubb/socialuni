@@ -1,8 +1,8 @@
 package com.socialuni.center.web.service;
 
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.center.web.model.DO.keywords.KeywordsDO;
+import com.socialuni.center.web.model.DO.keywords.KeywordsTriggerDetailDO;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,14 +1,14 @@
 package com.socialuni.center.web.factory.RO.talk;
 
-import com.socialuni.api.model.RO.user.CenterUserRO;
+import com.socialuni.center.web.model.RO.user.CenterUserRO;
 import com.socialuni.center.web.factory.RO.comment.CenterReplyCommentROFactory;
 import com.socialuni.center.web.factory.RO.user.CenterUserROFactory;
-import com.socialuni.api.model.RO.talk.CenterCommentRO;
-import com.socialuni.api.model.RO.talk.CenterReplyCommentRO;
+import com.socialuni.center.web.model.RO.talk.CenterCommentRO;
+import com.socialuni.center.web.model.RO.talk.CenterReplyCommentRO;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.factory.ListConvertUtil;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.RO.community.comment.SocialCommentRO;
+import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
