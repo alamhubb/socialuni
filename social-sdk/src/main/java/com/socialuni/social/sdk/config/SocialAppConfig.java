@@ -65,7 +65,7 @@ public class SocialAppConfig {
     //是否配置了中心服务器
     public static boolean hasCenterServer() {
         //为空则异常
-        return StringUtils.isNotEmpty(socialuniDevSecretKey);
+        return StringUtils.isNotEmpty(centerSocialuniId);
     }
 
     //是否配置了中心服务器

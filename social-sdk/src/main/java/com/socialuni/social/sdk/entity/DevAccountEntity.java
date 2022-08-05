@@ -28,8 +28,12 @@ public class DevAccountEntity {
     @Resource
     private TagRepository tagRepository;
 
-    //创建开发者账号
     public DevAccountDO createDevAccount(String phoneNum) {
+        return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
+    }
+
+    //创建开发者账号
+    public DevAccountDO createDevAccount(String phoneNum, String socialuniId) {
         Optional<DevAccountDO> devAccountDOOptional = devAccountRepository.findFirstByOrderByIdDesc();
         Long lastDevId;
         if (devAccountDOOptional.isPresent()) {
@@ -53,7 +57,7 @@ public class DevAccountEntity {
         devAccountDO.setCreateTime(curDate);
         devAccountDO.setCallApiCount(0);
         devAccountDO.setUpdateTime(curDate);
-        devAccountDO.setSocialuniId(UUIDUtil.getUUID());
+        devAccountDO.setSocialuniId(socialuniId);
         devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
 
         //创建话题，还要创建用户
