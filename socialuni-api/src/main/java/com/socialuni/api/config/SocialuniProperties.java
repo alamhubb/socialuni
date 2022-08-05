@@ -10,5 +10,6 @@ public class SocialuniProperties {
     private String secretKey;
     private String serverUrl;
     private String centerSocialuniId;
+    private String socialuniId;
 
 }

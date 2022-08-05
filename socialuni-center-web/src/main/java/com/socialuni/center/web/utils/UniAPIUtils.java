@@ -1,25 +1,18 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
-import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
-import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.model.model.QO.ContentAddQO;
-import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.model.model.RO.community.SocialuniUnionIdRO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
 import com.socialuni.social.sdk.config.SocialAppConfig;
-import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -55,7 +48,6 @@ public class UniAPIUtils {
         String dataSocialuniId = RequestUtil.getDataSocialuniId();
         //校验此条数据是否已经写入过。
         String dataContentUnionIdStr = contentAddQO.getId();
-        Integer dataContentUnionId = Integer.valueOf(dataContentUnionIdStr);
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
         DevAccountDO dataDevAccount = null;
         //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
@@ -81,7 +73,7 @@ public class UniAPIUtils {
             //仅仅是个校验，防止重复写入 ， dataSocialuniId都不空才能查，dataSociuni为空，则肯定thirdId为空
             if (StringUtils.isNotEmpty(dataContentUnionIdStr)) {
                 //如果已经存在此动态，则无需重复添加，直接返回
-                UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, dataContentUnionId);
+                UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(dataContentUnionIdStr));
                 if (uniContentUnionIdDO != null) {
                     return null;
                 }
@@ -108,7 +100,7 @@ public class UniAPIUtils {
             } else {
                 //中心了
                 uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
-                uniContentUnionIdDO.setDataContentUnionId(dataContentUnionId);
+                uniContentUnionIdDO.setDataContentUnionId(Integer.valueOf(dataContentUnionIdStr));
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             }
         }

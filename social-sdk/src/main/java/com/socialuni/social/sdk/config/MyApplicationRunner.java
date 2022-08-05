@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.repository.dev.DevSocialuniIdRepository;
 import com.socialuni.social.sdk.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Async;
@@ -44,7 +45,12 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountDO == null) {
-            devAccountEntity.createDevAccount(null);
+            if (StringUtils.isEmpty(SocialAppConfig.getAppSocialuniId())) {
+                devAccountEntity.createDevAccount(null);
+            } else {
+                devAccountEntity.createDevAccount(null, SocialAppConfig.getAppSocialuniId());
+            }
+
             /*DevSocialuniIdDO devSocialuniIdDO = new DevSocialuniIdDO();
             //设置第一个的socialuniId
             devSocialuniIdDO.setSocialuniId(devAccountDO.getSocialuniId());

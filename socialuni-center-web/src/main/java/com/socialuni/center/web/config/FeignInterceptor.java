@@ -5,7 +5,6 @@ import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.entity.model.DO.UniOutRegisterUserDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
@@ -49,11 +48,18 @@ public class FeignInterceptor implements RequestInterceptor {
 
         if (mineUser != null) {
             Integer userUnionId = CenterUserUtil.getMineUserUnionId();
-            Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
+//            Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
 
-            UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserUnionId(centerDevId, userUnionId);
+            /*UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserUnionId(centerDevId, userUnionId);
+
+            //有没有可能你自己这边记录了，但是那边给你删掉了
             //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
             if (uniOutRegisterUserDO == null) {
+                uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, userUnionId);
+                uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
+            }*/
+            ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
+            if (resultRO.getData() == null){
                 String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
                 //生成登录类
                 SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
@@ -68,12 +74,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
                 socialProviderLoginQO.setSystem(RequestUtil.getSystem());
                 socialProviderLoginQO.setPhoneNum(phoneNum);
-
-                ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.registryUser(socialProviderLoginQO);
-
-
-                uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, userUnionId);
-                uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
+                socialuniUserAPI.registryUser(socialProviderLoginQO);
             }
             requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, userUnionId.toString());
         }

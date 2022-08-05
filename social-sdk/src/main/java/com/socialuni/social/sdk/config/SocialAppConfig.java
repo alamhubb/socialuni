@@ -15,6 +15,7 @@ public class SocialAppConfig {
     private static Integer systemUserId;
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
+    private static String appSocialuniId;
     private static String centerSocialuniId;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
@@ -44,6 +45,11 @@ public class SocialAppConfig {
     @Value("${socialuni.center-socialuni-id:null}")
     public void setCenterSocialuniId(String centerSocialuniId) {
         SocialAppConfig.centerSocialuniId = centerSocialuniId;
+    }
+
+    @Value("${socialuni.socialuni-id:null}")
+    public void setAppSocialuniId(String appSocialuniId) {
+        SocialAppConfig.appSocialuniId = appSocialuniId;
     }
 
     public static String getUserDefaultAvatar() {
@@ -76,5 +82,14 @@ public class SocialAppConfig {
         }
         //为空则异常
         return centerSocialuniId;
+    }
+
+    //是否配置了中心服务器
+    public static String getAppSocialuniId() {
+        if (StringUtils.isEmpty(appSocialuniId) || appSocialuniId.length() != 32) {
+            return null;
+        }
+        //为空则异常
+        return appSocialuniId;
     }
 }

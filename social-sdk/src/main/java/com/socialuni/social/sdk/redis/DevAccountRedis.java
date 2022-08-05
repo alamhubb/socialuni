@@ -16,7 +16,8 @@ public class DevAccountRedis {
     @Caching(
             put = {
                     @CachePut(cacheNames = "getDevAccountById", key = "#devAccount.id"),
-                    @CachePut(cacheNames = "getDevAccountBySecretKey", key = "#devAccount.secretKey", condition="#devAccount.secretKey!=null" )
+                    @CachePut(cacheNames = "getDevAccountBySecretKey", key = "#devAccount.secretKey", condition="#devAccount.secretKey!=null"),
+                    @CachePut(cacheNames = "getDevAccountBySocialuniId", key = "#devAccount.socialuniId")
             }
     )
     public DevAccountDO saveDevAccount(DevAccountDO devAccount) {
