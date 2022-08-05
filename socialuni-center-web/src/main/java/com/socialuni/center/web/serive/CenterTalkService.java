@@ -11,7 +11,7 @@ import com.socialuni.center.web.utils.UniAPIUtils;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.model.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
+import com.socialuni.social.model.model.RO.community.UniContentIdRO;
 import com.socialuni.social.model.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +63,7 @@ public class CenterTalkService {
     public ResultRO<SocialTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
 
-        SocialuniContentIdRO socialuniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, socialTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
+        UniContentIdRO socialuniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, socialTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
 //        SocialuniContentIdRO socialuniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, socialTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
 
         SocialTalkRO centerTalkRO = (SocialTalkRO) socialuniContentIdRO;

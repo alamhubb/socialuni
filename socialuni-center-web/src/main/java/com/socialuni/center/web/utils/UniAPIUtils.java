@@ -11,7 +11,7 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.model.model.QO.ContentAddQO;
-import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
+import com.socialuni.social.model.model.RO.community.UniContentIdRO;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -43,7 +43,7 @@ public class UniAPIUtils {
     }
 
     //list转换，TO类List转为RO类List
-    public static <QO extends ContentAddQO, RO extends SocialuniContentIdRO> SocialuniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         String dataSocialuniId = RequestUtil.getDataSocialuniId();
         //校验此条数据是否已经写入过。
         String dataContentUnionIdStr = contentAddQO.getId();
@@ -81,7 +81,7 @@ public class UniAPIUtils {
         //推送的需要校验，非推送的不用校验
         //校验功能搞好了，接下来就可以直接写入数据了
         //不为空
-        SocialuniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
+        UniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
 
         //这就写入了数据，然后写入unionId表
         //如果自身为中心

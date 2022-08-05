@@ -115,6 +115,9 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, devId);
     }
 
+    //针对所有外部的数据，内部的数据，生成unionId。
+
+
     private static Integer addUnionIdDO(String contentType, Integer contentId) {
         Integer dataDevId = DevAccountUtils.getDataDevIdNotNull();
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(dataDevId, contentType, contentId);

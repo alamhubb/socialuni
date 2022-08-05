@@ -61,7 +61,6 @@ public class RequestUtil {
         return RequestUtil.getHeader(SocialFeignHeaderName.dataSocialuniId);
     }
 
-
     //根据cookie名获取cookie值
     public static String getCookie(String cookieName) {
         Cookie[] cookies = getCookies();

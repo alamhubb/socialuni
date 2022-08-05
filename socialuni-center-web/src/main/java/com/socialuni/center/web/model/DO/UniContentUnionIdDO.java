@@ -1,5 +1,7 @@
 package com.socialuni.center.web.model.DO;
 
+import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -41,17 +43,13 @@ public class UniContentUnionIdDO implements Serializable {
     private Integer writeDevId;
     private Integer writeContentUnionId;
 
-    public UniContentUnionIdDO(String contentType, Integer dataDevId, Integer dataContentUnionId, Integer writeDevId, Integer contentId) {
+    //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
+    public UniContentUnionIdDO(String contentType, Integer dataDevId, Integer dataContentUnionId, Integer writeDevId, Integer writeContentUnionId, Integer contentId) {
         this.contentType = contentType;
-        this.dataDevId = dataDevId;
-        this.dataContentUnionId = dataContentUnionId;
+        this.dataDevId = DevAccountUtils.getDataDevIdNotNull();
+        this.dataContentUnionId = RequestUtil.getDataSocialuniId();
         this.writeDevId = writeDevId;
         this.contentId = contentId;
-    }
-
-    public UniContentUnionIdDO(Integer dataDevId, Integer dataContentUnionId, Integer writeDevId, Integer writeContentUnionId, String contentType) {
-        this(contentType, dataDevId, dataContentUnionId, writeDevId, null);
         this.writeContentUnionId = writeContentUnionId;
     }
-
 }

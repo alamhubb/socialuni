@@ -1,8 +1,8 @@
 package com.socialuni.social.entity.model.DO.talk;
 
 import com.socialuni.social.constant.ContentType;
+import com.socialuni.social.entity.model.DO.UniContentBaseDO;
 import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.base.SocialPostContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +26,7 @@ import java.io.Serializable;
 })
 @Data
 @NoArgsConstructor
-public class TalkDO extends SocialPostContentBaseDO implements BaseModelDO, Serializable {
+public class TalkDO extends UniContentBaseDO implements BaseModelDO, Serializable {
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,6 +94,7 @@ public class TalkDO extends SocialPostContentBaseDO implements BaseModelDO, Seri
 
     //do 只有一个构造
     public TalkDO(Integer userId, String content) {
+        super(ContentType.talk);
         this.userId = userId;
         this.content = content;
         this.commentNum = 0;

@@ -1,6 +1,7 @@
 package com.socialuni.social.entity.model.DO.user;
 
-import com.socialuni.social.entity.model.DO.user.base.CommonUserBaseDO;
+import com.socialuni.social.constant.ContentType;
+import com.socialuni.social.entity.model.DO.UniContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -21,5 +22,16 @@ import java.io.Serializable;
         }
 )
 @Data
-public class UserDO extends CommonUserBaseDO implements Serializable {
+public class UserDO extends UniContentBaseDO implements Serializable {
+    private String nickname;
+    private String avatar;
+    private String gender;
+    private String birthday;
+    private Integer age;
+    private String city;
+    private String type;
+
+    public UserDO() {
+        super(ContentType.user);
+    }
 }

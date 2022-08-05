@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniContentIdRO {
+public class UniContentIdRO {
     //必须为string，返回给app后是uuid无法变为int
     private Integer id;
     private String creatorSocialuniId;
     private String creatorContentUnionId;
 
-    public SocialuniContentIdRO(Integer id, String creatorSocialuniId, String creatorContentUnionId) {
+    public UniContentIdRO(Integer id, String creatorSocialuniId, String creatorContentUnionId) {
         this.id = id;
         this.creatorSocialuniId = creatorSocialuniId;
         this.creatorContentUnionId = creatorContentUnionId;
     }
 
-    public SocialuniContentIdRO(SocialuniContentIdRO socialuniContentIdRO) {
+    public UniContentIdRO(UniContentIdRO socialuniContentIdRO) {
         this.id = socialuniContentIdRO.getId();
         this.creatorSocialuniId = socialuniContentIdRO.getCreatorSocialuniId();
         this.creatorContentUnionId = socialuniContentIdRO.getCreatorContentUnionId();
