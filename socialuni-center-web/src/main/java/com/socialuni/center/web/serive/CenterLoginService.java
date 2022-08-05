@@ -83,7 +83,7 @@ public class CenterLoginService {
 
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(1, ContentType.user, mineUser.getId());
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), ContentType.user, mineUser.getId());
+            uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), mineUser.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         }
 

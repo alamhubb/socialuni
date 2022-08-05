@@ -1,8 +1,10 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.api.feignAPI.SocialuniUserAPI;
+import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
+import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.exception.SocialBusinessException;
@@ -10,9 +12,6 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.model.model.QO.ContentAddQO;
 import com.socialuni.social.model.model.RO.community.SocialuniContentIdRO;
-import com.socialuni.center.web.config.SocialAppConfig;
-import com.socialuni.center.web.repository.dev.DevAccountRepository;
-import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -89,18 +88,17 @@ public class UniAPIUtils {
         UniContentUnionIdDO uniContentUnionIdDO;
         if (DevAccountUtils.pushServer()) {
             //如果无后台模式会为空
-            uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         } else {
             //无后台模式
             if (StringUtils.isEmpty(dataContentUnionIdStr)) {
                 //如果无后台模式会为空
-                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
+                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             } else {
                 //中心了
-                uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), contentType, socialuniContentIdRO.getId());
-                uniContentUnionIdDO.setDataContentUnionId(Integer.valueOf(dataContentUnionIdStr));
+                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataDevIdNotNull(), Integer.valueOf(dataContentUnionIdStr), DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
                 uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             }
         }

@@ -1,29 +1,28 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.repository.UniContentUnionIdRepository;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
 import com.socialuni.center.web.model.DO.UnionIdDO;
+import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.entity.model.DO.comment.CommentDO;
+import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.utils.ObjectUtil;
-import com.socialuni.social.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 
@@ -120,7 +119,7 @@ public class UnionIdDbUtil {
         Integer dataDevId = DevAccountUtils.getDataDevIdNotNull();
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndContentTypeAndContentId(dataDevId, contentType, contentId);
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(dataDevId, DevAccountUtils.getDevIdNotNull(), contentType, contentId);
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, dataDevId, DevAccountUtils.getDevIdNotNull(), contentId);
         }
         return uniContentUnionIdDO.getId();
     }
@@ -412,6 +411,11 @@ public class UnionIdDbUtil {
     }
 
     public static String createMessageUid(Integer modeId, Integer userId) {
+        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
+        return addUnionIdDO(ContentType.message, modeId, userId);
+    }
+
+    public static String createTalkUnionId(Integer dataDevId, Integer dataUnionId, Integer writeDevId,Integer ) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.message, modeId, userId);
     }

@@ -20,8 +20,8 @@ import java.io.Serializable;
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
                 @UniqueConstraint(columnNames = {"contentType", "contentId"}),
-                @UniqueConstraint(columnNames = {"dataDevId", "dataContentUnionId"}),
-                @UniqueConstraint(columnNames = {"readDevId", "readContentUnionId"}),
+                @UniqueConstraint(columnNames = {"dataDevId", "dataContentUnionId", "writeDevId"}),
+                @UniqueConstraint(columnNames = {"writeDevId", "writeContentUnionId"}),
         }
 )
 @Data
@@ -37,22 +37,21 @@ public class UniContentUnionIdDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer dataDevId;
     private Integer dataContentUnionId;
-    //数据读取方
-    private Integer readDevId;
-    private Integer readContentUnionId;
     //写入方
     private Integer writeDevId;
-
-    public UniContentUnionIdDO(Integer dataDevId, Integer writeDevId, String contentType, Integer contentId) {
-        this.dataDevId = dataDevId;
-        this.writeDevId = writeDevId;
-        this.contentId = contentId;
-        this.contentType = contentType;
-    }
+    private Integer writeContentUnionId;
 
     public UniContentUnionIdDO(String contentType, Integer dataDevId, Integer dataContentUnionId, Integer writeDevId, Integer contentId) {
-        this(dataDevId, writeDevId, contentType, contentId);
+        this.contentType = contentType;
+        this.dataDevId = dataDevId;
         this.dataContentUnionId = dataContentUnionId;
+        this.writeDevId = writeDevId;
+        this.contentId = contentId;
+    }
+
+    public UniContentUnionIdDO(Integer dataDevId, Integer dataContentUnionId, Integer writeDevId, Integer writeContentUnionId, String contentType) {
+        this(contentType, dataDevId, dataContentUnionId, writeDevId, null);
+        this.writeContentUnionId = writeContentUnionId;
     }
 
 }
