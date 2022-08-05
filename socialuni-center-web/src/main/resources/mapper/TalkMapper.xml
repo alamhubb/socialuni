@@ -11,7 +11,7 @@
         <if test="circleId!=null">
             s_talk_circle tc,
         </if>
-        `user` u
+        `s_user` u
         WHERE
         t.user_id = u.id
         and t.global_top = 0
