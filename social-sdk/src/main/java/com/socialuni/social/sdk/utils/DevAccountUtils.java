@@ -1,16 +1,16 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.sdk.config.SocialAppConfig;
+import com.socialuni.social.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.sdk.repository.dev.DevAccountProviderRepository;
 import com.socialuni.social.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.sdk.repository.dev.DevTokenRepository;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -55,6 +55,12 @@ public class DevAccountUtils {
     }
 
 
+    public static String getAppSocialuniId() {
+        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
+        return devAccountDO.getSocialuniId();
+    }
+
+
     public static String getAppGenderType() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
         if (devAccountDO != null) {
@@ -94,6 +100,15 @@ public class DevAccountUtils {
         return devAccountDO.getId();
     }
 
+    public static Integer getCenterDevIdNotNull() {
+        String socialuniId = SocialAppConfig.getCenterSocialuniId();
+        DevAccountDO centerDevAccount = DevAccountUtils.getDevAccountBySocialuniId(socialuniId);
+        if (centerDevAccount == null) {
+            throw new SocialParamsException("不存在的联盟开发者ID");
+        }
+        return centerDevAccount.getId();
+    }
+
 
     //mock登录时使用
     public static DevAccountProviderDO getDevAccountProviderDOByDevAndMpType(Integer devId, String mpType) {
@@ -108,7 +123,7 @@ public class DevAccountUtils {
 
     public static DevAccountDO getDevAccountAllowNull() {
         //先从req中获取
-        String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
+        String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialuniSecretKey);
         if (StringUtils.isEmpty(secretKey)) {
             return null;
         }

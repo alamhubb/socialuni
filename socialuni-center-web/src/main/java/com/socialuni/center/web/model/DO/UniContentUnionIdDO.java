@@ -19,8 +19,9 @@ import java.io.Serializable;
         },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
-                @UniqueConstraint(columnNames = {"contentType", "dataDevId", "contentId"}),
-                @UniqueConstraint(columnNames = {"contentType", "dataDevId", "dataContentUnionId", "readDevId", "readContentUnionId"}),
+                @UniqueConstraint(columnNames = {"contentType", "contentId"}),
+                @UniqueConstraint(columnNames = {"dataDevId", "dataContentUnionId"}),
+                @UniqueConstraint(columnNames = {"readDevId", "readContentUnionId"}),
         }
 )
 @Data
@@ -49,7 +50,7 @@ public class UniContentUnionIdDO implements Serializable {
         this.contentType = contentType;
     }
 
-    public UniContentUnionIdDO(Integer dataDevId, Integer writeDevId, String contentType, Integer contentId, Integer dataContentUnionId) {
+    public UniContentUnionIdDO(String contentType, Integer dataDevId, Integer dataContentUnionId, Integer writeDevId, Integer contentId) {
         this(dataDevId, writeDevId, contentType, contentId);
         this.dataContentUnionId = dataContentUnionId;
     }

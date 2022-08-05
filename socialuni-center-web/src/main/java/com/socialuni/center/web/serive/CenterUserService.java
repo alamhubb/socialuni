@@ -13,7 +13,6 @@ import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.*;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
@@ -24,6 +23,7 @@ import com.socialuni.social.sdk.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.platform.tencent.TencentCloud;
 import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -44,12 +44,14 @@ public class CenterUserService {
     UniContentUnionIdRepository uniContentUnionIdRepository;
 
     public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        UserDO mineUserDO = socialuniUserRegistryDomain.registryUser(devAccountDO, loginQO);
-
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(devAccountDO.getId(), Integer.valueOf(loginQO.getUnionId()));
-        if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(DevAccountUtils.getDataDevIdNotNull(), DevAccountUtils.getDevIdNotNull(), ContentType.user, mineUserDO.getId(), Integer.valueOf(loginQO.getUnionId()));
+        Integer dataDevId = DevAccountUtils.getDataDevIdNotNull();
+        UserDO mineUserDO;
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(loginQO.getUnionId()));
+        if (uniContentUnionIdDO != null) {
+            mineUserDO = SocialUserUtil.getNotNull(uniContentUnionIdDO.getContentId());
+        } else {
+            mineUserDO = socialuniUserRegistryDomain.registryUser(dataDevId, loginQO);
+            uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataDevIdNotNull(), Integer.valueOf(loginQO.getUnionId()), DevAccountUtils.getDevIdNotNull(), mineUserDO.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         }
         CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
@@ -88,7 +90,7 @@ public class CenterUserService {
 
 
     public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
@@ -97,7 +99,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
@@ -107,7 +109,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         Integer userImgId = UnionIdDbUtil.getUserImgIdByUid(centerUserImgDeleteQO.getUserImgId());
 

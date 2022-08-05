@@ -163,7 +163,7 @@ public class ReportDomain {
 
 
         //用户举报其他用户的逻辑
-        UserDO receiveUser = SocialUserUtil.get(receiveUserId);
+        UserDO receiveUser = SocialUserUtil.getNotNull(receiveUserId);
 
 
         Integer modelReportNum = modelDO.getReportNum() + 1;

@@ -6,19 +6,15 @@ import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
-import com.socialuni.center.web.utils.CenterTokenUtil;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.entity.model.DO.user.TokenDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.model.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.domain.login.SocialProviderLoginDomain;
 import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.entity.user.SocialProviderLoginEntity;
@@ -70,7 +66,7 @@ public class CenterLoginService {
     }*/
 
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        UserDO mineUser = CenterUserUtil.getMineUser(loginData.getCode());
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull(loginData.getCode());
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
 

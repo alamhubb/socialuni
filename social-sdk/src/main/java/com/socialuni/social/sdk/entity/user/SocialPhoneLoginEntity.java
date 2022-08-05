@@ -43,7 +43,7 @@ public class SocialPhoneLoginEntity {
 
         UserDO mineUser;
         if (socialUserPhoneDO != null) {
-            mineUser = SocialUserUtil.get(socialUserPhoneDO.getUserId());
+            mineUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
         } else {
             mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         }

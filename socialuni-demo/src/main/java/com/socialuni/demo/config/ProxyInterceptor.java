@@ -83,7 +83,7 @@ public class ProxyInterceptor implements HandlerInterceptor {
             // set head.
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set(SocialFeignHeaderName.socialSecretKeyHeaderName, socialDevSecretKey);
+            headers.set(SocialFeignHeaderName.socialuniSecretKey, socialDevSecretKey);
             //如果有token，或者社交登录时，不携带token，手动设置token
             if (SocialTokenUtil.hasToken()) {
                 //走了这里一定是绑定了社交联盟账号，获取社交联盟账户

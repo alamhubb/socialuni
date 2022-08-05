@@ -154,7 +154,7 @@ public class SocialTalkROFactory {
         Integer talkId = talkDO.getId();
 
         socialTalkRO.setId(talkId);
-        UserDO talkUser = SocialUserUtil.get(talkDO.getUserId());
+        UserDO talkUser = SocialUserUtil.getNotNull(talkDO.getUserId());
         SocialContentUserRO socialTalkUserRO = SocialContentUserROFactory.newContentUserRO(talkUser, mineUser);
 //        socialTalkUserRO.setId(UnionIdDbUtil.createUserUid(socialTalkUserRO.getId(), user));
 

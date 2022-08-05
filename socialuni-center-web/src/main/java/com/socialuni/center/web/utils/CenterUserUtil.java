@@ -55,7 +55,7 @@ public class CenterUserUtil {
         //区分本应用和其他应用的不同逻辑
         if (devAccountDO.getId() == 1) {
 //            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
-            userDO = SocialUserUtil.getAllowNull(SocialUserUtil.getMineUserIdAllowNull());
+            userDO = SocialUserUtil.getMineUserAllowNull();
         } else {
             Integer dataUserUnionId = CenterTokenUtil.getDataUserUnionId();
 
@@ -63,13 +63,13 @@ public class CenterUserUtil {
             if (uniUserAccountDO == null) {
                 return null;
             }
-            userDO = SocialUserUtil.get(uniUserAccountDO.getUserId());
+            userDO = SocialUserUtil.getNotNull(uniUserAccountDO.getUserId());
         }
         return userDO;
     }
 
     //改名为notnull就行
-    public static UserDO getMineUser() {
+    public static UserDO getMineUserNotNull() {
         UserDO user = CenterUserUtil.getMineUserAllowNull();
         if (user == null) {
             throw new SocialNotLoginException();
@@ -84,16 +84,16 @@ public class CenterUserUtil {
 
     //下面都是联盟的
 
-    public static UserDO getMineUser(String token) {
+    public static UserDO getMineUserNotNull(String token) {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO(token);
-        return getMineUser(tokenDO);
+        return getMineUserNotNull(tokenDO);
     }
 
-    private static UserDO getMineUser(ThirdUserTokenDO tokenDO) {
+    private static UserDO getMineUserNotNull(ThirdUserTokenDO tokenDO) {
         if (tokenDO == null) {
             return null;
         }
-        UserDO user = SocialUserUtil.get(tokenDO.getUserId());
+        UserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
         if (user.getStatus().equals(UserStatus.violation)) {
             throw new SocialUserBannedException(user);
         }
@@ -110,8 +110,13 @@ public class CenterUserUtil {
     }
 
     public static Integer getMineUserId() {
-        UserDO user = CenterUserUtil.getMineUser();
+        UserDO user = CenterUserUtil.getMineUserNotNull();
         return user.getId();
+    }
+
+    public static Integer getMineUserUnionId() {
+        UserDO user = CenterUserUtil.getMineUserNotNull();
+        return UnionIdDbUtil.createUserUid(user.getId());
     }
 
     public static String getMineUserStringId() {
@@ -142,7 +147,7 @@ public class CenterUserUtil {
         if (tokenDO == null) {
             return null;
         }
-        UserDO user = SocialUserUtil.get(tokenDO.getUserId());
+        UserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
         if (user.getStatus().equals(UserStatus.violation)) {
             return null;
         }
@@ -174,12 +179,12 @@ public class CenterUserUtil {
 
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = CenterUserUtil.getMineUser();
+        UserDO userDO = CenterUserUtil.getMineUserNotNull();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 
     public static UserDO get(String userId) {
         Integer id = UnionIdDbUtil.getUserIdByUid(userId);
-        return SocialUserUtil.get(id);
+        return SocialUserUtil.getNotNull(id);
     }
 }

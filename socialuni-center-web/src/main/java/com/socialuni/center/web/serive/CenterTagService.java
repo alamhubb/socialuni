@@ -23,7 +23,7 @@ public class CenterTagService {
     SoicialTagAddDomain soicialTagAddDomain;
 
     public ResultRO<TagRO> addTag(TagAddQO tagAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
         return new ResultRO<>(tagRO);
     }

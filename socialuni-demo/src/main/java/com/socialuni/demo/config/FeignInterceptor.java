@@ -25,7 +25,7 @@ public class FeignInterceptor implements RequestInterceptor {
 //        requestTemplate.header("appId", authProperties.getAppId());
 //        String socialSecret = RequestUtil.getHeader(SocialFeignHeaderName.socialSecretKeyHeaderName);
 //        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialSecret);
-        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialDevSecretKey);
+        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, socialDevSecretKey);
         String userIp = IpUtil.getIpAddr();
         requestTemplate.header(SocialFeignHeaderName.requestIpHeaderName, userIp);
 

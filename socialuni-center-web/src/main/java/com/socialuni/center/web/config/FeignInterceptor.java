@@ -1,12 +1,16 @@
 package com.socialuni.center.web.config;
 
+import com.socialuni.api.feignAPI.SocialuniUserAPI;
 import com.socialuni.api.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.entity.model.DO.UniOutRegisterUserDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
+import com.socialuni.social.sdk.repository.UniOutRegisterUserRepository;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialUserUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -16,6 +20,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 //开发环境访问线上环境需要
 @Slf4j
 @Component
@@ -24,40 +30,54 @@ public class FeignInterceptor implements RequestInterceptor {
     @Value("${socialuni.secret-key:null}")
     private String socialuniDevSecretKey;
 
+    @Resource
+    UniOutRegisterUserRepository uniOutRegisterUserRepository;
+
+    @Resource
+    SocialuniUserAPI socialuniUserAPI;
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
         //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
 
-        requestTemplate.header(SocialFeignHeaderName.socialSecretKeyHeaderName, socialuniDevSecretKey);
+        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, socialuniDevSecretKey);
+        requestTemplate.header(SocialFeignHeaderName.dataSocialuniId, DevAccountUtils.getAppSocialuniId());
 
-
-        /*ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.queryThirdUser();
-        CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
-        if (centerMineUserDetailRO == null) {
-            UserDO mineUser = CenterUserUtil.getMineUser();
-            String phoneNum =  SocialUserUtil.getUserPhoneNum(mineUser.getId());
-            //生成登录类
-            SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-            socialProviderLoginQO.setNickName(mineUser.getNickname());
-            socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
-            socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
-            socialProviderLoginQO.setBirthday(mineUser.getBirthday());
-            socialProviderLoginQO.setCity(mineUser.getCity());
-            socialProviderLoginQO.setUnionId(mineUser.getId().toString());
-
-            socialProviderLoginQO.setProvider(RequestUtil.getProvider());
-            socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
-            socialProviderLoginQO.setSystem(RequestUtil.getSystem());
-            socialProviderLoginQO.setPhoneNum(phoneNum);
-
-            socialuniUserAPI.registryUser(socialProviderLoginQO);
-        }*/
 
         UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+
         if (mineUser != null) {
-            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUser.getId().toString());
+            Integer userUnionId = CenterUserUtil.getMineUserUnionId();
+            Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
+
+            UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserUnionId(centerDevId, userUnionId);
+            //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
+            if (uniOutRegisterUserDO == null) {
+                String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
+                //生成登录类
+                SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
+                socialProviderLoginQO.setNickName(mineUser.getNickname());
+                socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
+                socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+                socialProviderLoginQO.setBirthday(mineUser.getBirthday());
+                socialProviderLoginQO.setCity(mineUser.getCity());
+                socialProviderLoginQO.setUnionId(mineUser.getId().toString());
+
+                socialProviderLoginQO.setProvider(RequestUtil.getProvider());
+                socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
+                socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+                socialProviderLoginQO.setPhoneNum(phoneNum);
+
+                ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.registryUser(socialProviderLoginQO);
+
+
+                uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, userUnionId);
+                uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
+            }
+            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, userUnionId.toString());
         }
+
 
         //理论上不可能存在下列情况，没有dataSocialuniId只能是自有数据和无后台，无后台也应该在request设置dataSocialuniId
         /*if (StringUtils.isEmpty(dataSocialuniId)) {

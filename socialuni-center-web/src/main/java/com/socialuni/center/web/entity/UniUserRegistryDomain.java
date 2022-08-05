@@ -1,11 +1,9 @@
 package com.socialuni.center.web.entity;
 
-import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.social.entity.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.model.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.entity.user.SocialUserPhoneEntity;
@@ -35,27 +33,26 @@ public class UniUserRegistryDomain {
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
-    public UserDO registryUser(DevAccountDO devAccountDO, SocialProviderLoginQO loginQO) {
-        Integer devId = devAccountDO.getId();
+    public UserDO registryUser(Integer dataDevId, SocialProviderLoginQO loginQO) {
         String thirdUserIdStr = loginQO.getUnionId();
         Integer dataUserUnionId = Integer.parseInt(thirdUserIdStr);
-        UniUserAccountDO uniUnionIdRO = uniUserAccountRepository.findByDevIdAndThirdUserId(devId, dataUserUnionId);
+        UniUserAccountDO uniUnionIdRO = uniUserAccountRepository.findByDevIdAndThirdUserId(dataDevId, dataUserUnionId);
         UserDO mineUser;
         //如果已经注册过
         if (uniUnionIdRO != null) {
-            mineUser = SocialUserUtil.get(uniUnionIdRO.getUserId());
+            mineUser = SocialUserUtil.getNotNull(uniUnionIdRO.getUserId());
         } else {
             String phoneNum = loginQO.getPhoneNum();
             SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
             if (socialUserPhoneDO != null) {
-                mineUser = SocialUserUtil.get(socialUserPhoneDO.getUserId());
+                mineUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
             } else {
                 mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
             }
             //创建或返回
             socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
 
-            UniUserAccountDO uniUserAccountDO = new UniUserAccountDO(devId, dataUserUnionId, mineUser.getId());
+            UniUserAccountDO uniUserAccountDO = new UniUserAccountDO(dataDevId, dataUserUnionId, mineUser.getId());
 
             uniUserAccountRepository.save(uniUserAccountDO);
 

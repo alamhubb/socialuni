@@ -16,19 +16,19 @@ public class CenterNotifyService {
     private SocialQueryNotifyDomain socialQueryNotifyDomain;
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryNotifies() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifies() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifiesAndUpdateHasRead() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifiesAndUpdateHasRead(mineUser);
         return new ResultRO<>(list);
     }

@@ -5,7 +5,6 @@ import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.social.entity.model.DO.tag.TagDO;
 import com.socialuni.social.entity.model.DO.user.UserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
@@ -23,9 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Slf4j
 @Component
@@ -38,7 +35,7 @@ public class CenterTalkPostDomain {
     TalkRepository talkRepository;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         String content = talkPostQO.getContent();
 

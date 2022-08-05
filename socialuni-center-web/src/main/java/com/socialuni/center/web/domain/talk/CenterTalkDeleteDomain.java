@@ -24,7 +24,7 @@ public class CenterTalkDeleteDomain {
     public void deleteTalk(CenterTalkIdQO talkIdQO) {
         Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(talkIdQO.getTalkId());
 
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         SocialTalkDeleteQO socialTalkDeleteQO = new SocialTalkDeleteQO(talkId);
 

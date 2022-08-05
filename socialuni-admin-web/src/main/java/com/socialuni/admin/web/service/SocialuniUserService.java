@@ -31,7 +31,7 @@ public class SocialuniUserService {
         if (thirdUserDO == null) {
             throw new SocialParamsException("用户不存在或开发者无权限");
         }
-        UserDO user = SocialUserUtil.get(thirdUserDO.getUserId());
+        UserDO user = SocialUserUtil.getNotNull(thirdUserDO.getUserId());
         return user;
     }
 }

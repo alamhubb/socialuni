@@ -59,7 +59,7 @@ public class ReportVO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialUserUtil.get(reportDO.getReceiveUserId()));
+        this.user = new ReportUserVO(SocialUserUtil.getNotNull(reportDO.getReceiveUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -72,7 +72,7 @@ public class ReportVO {
 
     public ReportVO(BaseModelDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getReportContentType(), modelDO.getId());
-        this.user = new ReportUserVO(SocialUserUtil.get(modelDO.getUserId()));
+        this.user = new ReportUserVO(SocialUserUtil.getNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
         this.violateType = modelDO.getDeleteReason();
 //        this.checked = true;

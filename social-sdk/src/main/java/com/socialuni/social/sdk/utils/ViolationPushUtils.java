@@ -40,7 +40,7 @@ public class ViolationPushUtils {
 
         BaseModelDO baseModelDO = BaseModelUtils.getModelByReport(reportDO);
 
-        UserDO vioUser = SocialUserUtil.get(baseModelDO.getUserId());
+        UserDO vioUser = SocialUserUtil.getNotNull(baseModelDO.getUserId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

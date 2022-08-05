@@ -94,7 +94,7 @@ public class SocialUserUtil {
             return null;
         }
         //返回user
-        UserDO mineUser = SocialUserUtil.get(tokenDO.getUserId());
+        UserDO mineUser = SocialUserUtil.getNotNull(tokenDO.getUserId());
         return mineUser;
     }
 
@@ -127,7 +127,7 @@ public class SocialUserUtil {
             return null;
         }
         //返回user
-        UserDO user = SocialUserUtil.get(tokenDO.getUserId());
+        UserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
         return user;
     }
 
@@ -161,7 +161,7 @@ public class SocialUserUtil {
         return UserUtils.get(Integer.valueOf(userId));
     }*/
 
-    public static UserDO get(Integer userId) {
+    public static UserDO getNotNull(Integer userId) {
         if (userId == null) {
             throw new SocialNullUserException();
         }
@@ -192,7 +192,7 @@ public class SocialUserUtil {
         if (socialUserAccountDO == null) {
             throw new SocialNullUserException();
         }
-        return SocialUserUtil.get(socialUserAccountDO.getUserId());
+        return SocialUserUtil.getNotNull(socialUserAccountDO.getUserId());
     }
 
     public static boolean isMine(UserDO mineUser, Integer userId) {

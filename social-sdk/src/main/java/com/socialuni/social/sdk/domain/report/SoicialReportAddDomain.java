@@ -118,7 +118,7 @@ public class SoicialReportAddDomain {
             throw new SocialParamsException("内容已被举报，审核中");
         }
         //这里之后才能校验
-        UserDO receiveUser = SocialUserUtil.get(modelDO.getUserId());
+        UserDO receiveUser = SocialUserUtil.getNotNull(modelDO.getUserId());
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {
             if (UserType.system.equals(receiveUser.getType())) {

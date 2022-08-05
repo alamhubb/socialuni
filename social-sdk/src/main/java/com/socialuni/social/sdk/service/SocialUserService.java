@@ -36,7 +36,7 @@ public class SocialUserService {
     }
 
     public ResultRO<SocialUserDetailRO> queryUserDetail(SocialUserIdQO socialUserIdQO) {
-        UserDO detailUserDO = SocialUserUtil.get(socialUserIdQO.getUserId());
+        UserDO detailUserDO = SocialUserUtil.getNotNull(socialUserIdQO.getUserId());
 
         UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 

@@ -69,7 +69,7 @@ public class ViolationService {
         baseModelService.save(modelDO);
 
         //user改为正常
-        UserDO violationUser = SocialUserUtil.get(modelDO.getUserId());
+        UserDO violationUser = SocialUserUtil.getNotNull(modelDO.getUserId());
         String userStatus = violationUser.getStatus();
         //存在用户发表其他内容，被封的情况
         if (ReportStatus.auditStatus.contains(userStatus)) {
@@ -145,7 +145,7 @@ public class ViolationService {
         //处理举报
         //封禁用户
         //如果已经是违规，不需要改为删除
-        UserDO violationUser = SocialUserUtil.get(modelDO.getUserId());
+        UserDO violationUser = SocialUserUtil.getNotNull(modelDO.getUserId());
         String vioReason = modelDO.getDeleteReason() + ",";
         //不为官方系统用户才可封禁
         if (!UserType.system.equals(violationUser.getType())) {
