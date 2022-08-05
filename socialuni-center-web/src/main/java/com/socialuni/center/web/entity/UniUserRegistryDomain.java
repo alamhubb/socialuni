@@ -3,7 +3,7 @@ package com.socialuni.center.web.entity;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
@@ -33,11 +33,11 @@ public class UniUserRegistryDomain {
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
-    public UserDO registryUser(Integer dataDevId, SocialProviderLoginQO loginQO) {
+    public SocialUserDO registryUser(Integer dataDevId, SocialProviderLoginQO loginQO) {
         String thirdUserIdStr = loginQO.getUnionId();
         Integer dataUserUnionId = Integer.parseInt(thirdUserIdStr);
         UniUserAccountDO uniUnionIdRO = uniUserAccountRepository.findByDevIdAndThirdUserId(dataDevId, dataUserUnionId);
-        UserDO mineUser;
+        SocialUserDO mineUser;
         //如果已经注册过
         if (uniUnionIdRO != null) {
             mineUser = SocialUserUtil.getNotNull(uniUnionIdRO.getUserId());

@@ -4,7 +4,7 @@ import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.SocialHomeTalkQueryStore;
 import com.socialuni.center.web.store.TalkQueryStore;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class SocialFollowUserTalksQueryEntity {
     private SocialHomeTalkQueryStore socialHomeTalkQueryStore;
 
     //查询用户关注的动态列表
-    public List<TalkDO> queryUserFollowTalks(List<Integer> talkIds, UserDO mineUser) {
+    public List<TalkDO> queryUserFollowTalks(List<Integer> talkIds, SocialUserDO mineUser) {
         if (mineUser == null) {
             return new ArrayList<>();
         }

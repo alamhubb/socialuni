@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "user_img",
+@Table(name = "s_user_img",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空
@@ -19,6 +19,6 @@ import java.io.Serializable;
         }
 )
 @Data
-public class UserImgDO extends SocialUserImgBaseDO implements Serializable {
+public class SocialUserImgDO extends SocialUserImgBaseDO implements Serializable {
 
 }

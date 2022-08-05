@@ -13,14 +13,12 @@ import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.message.MessageReceiveDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserAccountDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.repository.user.SocialUserAccountRepository;
-import com.socialuni.center.web.utils.*;
 import com.socialuni.social.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -49,7 +47,7 @@ public class NotifyDomain {
     @Resource
     private NotifyRepository notifyRepository;
 
-    public List<NotifyDO> saveCreateCommentNotifies(CommentDO commentDO, TalkDO talkDO, CommentDO parentCommentDO, CommentDO replyCommentDO, UserDO requestUser) {
+    public List<NotifyDO> saveCreateCommentNotifies(CommentDO commentDO, TalkDO talkDO, CommentDO parentCommentDO, CommentDO replyCommentDO, SocialUserDO requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
         Integer commentId = commentDO.getId();
@@ -132,14 +130,14 @@ public class NotifyDomain {
     @Resource
     private UserRepository userRepository;
 
-    public void sendNotifies(List<NotifyDO> notifies, UserDO requestUser) {
+    public void sendNotifies(List<NotifyDO> notifies, SocialUserDO requestUser) {
         for (NotifyDO notify : notifies) {
             sendNotify(notify, requestUser);
         }
     }
 
     //发送通知
-    public void sendNotify(NotifyDO notify, UserDO requestUser) throws SocialException {
+    public void sendNotify(NotifyDO notify, SocialUserDO requestUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getReceiveUserId();

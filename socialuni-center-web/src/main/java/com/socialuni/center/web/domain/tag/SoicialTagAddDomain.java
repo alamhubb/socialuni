@@ -7,7 +7,7 @@ import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.service.comment.IllegalWordService;
 import com.socialuni.cloud.config.SocialAppEnv;
 import com.socialuni.center.web.model.DO.tag.TagDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.model.QO.community.tag.TagAddQO;
 import com.socialuni.center.web.model.RO.community.tag.TagRO;
@@ -31,7 +31,7 @@ public class SoicialTagAddDomain {
     @Resource
     private SocialTagManage socialTagManage;
 
-    public TagRO addTag(UserDO mineUser, TagAddQO tagAddVO) {
+    public TagRO addTag(SocialUserDO mineUser, TagAddQO tagAddVO) {
         if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
         }

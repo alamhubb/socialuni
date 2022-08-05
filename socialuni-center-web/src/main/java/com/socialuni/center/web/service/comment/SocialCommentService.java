@@ -3,7 +3,7 @@ package com.socialuni.center.web.service.comment;
 
 import com.socialuni.center.web.domain.comment.SocialCommentDeleteDomain;
 import com.socialuni.center.web.domain.comment.SocialCommentPostDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
@@ -27,7 +27,7 @@ public class SocialCommentService {
     SocialCommentDeleteDomain socialCommentDeleteDomain;
 
     public ResultRO<SocialCommentRO> postComment(SocialCommentPostQO socialCommentPostQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialCommentRO socialCommentRO = socialPostCommentDomain.postComment(mineUser, socialCommentPostQO);
 
@@ -35,7 +35,7 @@ public class SocialCommentService {
     }
 
     public ResultRO<Void> deleteComment(SocialCommentDeleteQO commentDeleteQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         socialCommentDeleteDomain.deleteComment(mineUser, commentDeleteQO);
         return new ResultRO<>();
     }

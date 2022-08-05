@@ -8,9 +8,8 @@ import com.socialuni.center.web.manage.ThirdUserAuthManage;
 import com.socialuni.center.web.manage.ThirdUserManage;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.dev.ThirdUserDO;
-import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.constant.AuthType;
@@ -44,7 +43,7 @@ public class AuthThirdUserEntity {
     }*/
 
     //登录和 绑定手机号和微信手机号三个地方使用
-    public CenterMineUserDetailRO authThirdUser(UserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
+    public CenterMineUserDetailRO authThirdUser(SocialUserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //只是记录一个授权记录

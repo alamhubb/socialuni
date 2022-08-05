@@ -10,7 +10,7 @@ import com.socialuni.center.web.platform.weixin.WxConst;
 import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +22,7 @@ import java.util.HashMap;
  */
 public class CommentPushUtils {
     //动态评论通知
-    public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, UserDO requestUser) {
+    public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialUserDO requestUser) {
         CommentDO comment = CommentUtils.get(notify.getCommentId());
         TalkDO talk = TalkUtils.get(comment.getTalkId());
         CommentDO replyComment;

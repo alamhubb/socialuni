@@ -3,7 +3,7 @@ package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.domain.follow.SocialQueryUserFollowsDomain;
 import com.socialuni.center.web.domain.follow.SocialUserFollowDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.api.model.ResultRO;
@@ -36,7 +36,7 @@ public class SocialFollowService {
     }
 
     public ResultRO<Map<String, List<SocialUserFollowDetailRO>>> queryUserFollows() {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         Map<String, List<SocialUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
         return new ResultRO<>(map);
     }

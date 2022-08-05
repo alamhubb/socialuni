@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory.user.base;
 
 import com.socialuni.center.web.model.DO.user.SocialUserFansDetailDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
 import com.socialuni.center.web.factory.ListConvertUtil;
@@ -20,7 +20,7 @@ public class SocialUserFollowDetailROFactory {
         SocialUserFollowDetailROFactory.userFansDetailRedis = userFansDetailRedis;
     }
 
-    public static SocialUserFollowDetailRO newSocialFollowUserRO(UserDO user, UserDO mineUser) {
+    public static SocialUserFollowDetailRO newSocialFollowUserRO(SocialUserDO user, SocialUserDO mineUser) {
         SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(user.getId());
         if (socialUserFansDetailDO == null) {
             throw new SocialSystemException("用户粉丝详情未创建");
@@ -28,7 +28,7 @@ public class SocialUserFollowDetailROFactory {
         return SocialUserFollowDetailROFactory.newSocialFollowUserRO(user, mineUser, socialUserFansDetailDO);
     }
 
-    public static SocialUserFollowDetailRO newSocialFollowUserRO(UserDO user, UserDO mineUser, SocialUserFansDetailDO socialUserFansDetailDO) {
+    public static SocialUserFollowDetailRO newSocialFollowUserRO(SocialUserDO user, SocialUserDO mineUser, SocialUserFansDetailDO socialUserFansDetailDO) {
         SocialUserFollowDetailRO userRO = new SocialUserFollowDetailRO(SocialContentUserROFactory.newContentUserRO(user, mineUser));
         //用户关注粉丝数
         userRO.setFansNum(socialUserFansDetailDO.getFansNum());
@@ -39,7 +39,7 @@ public class SocialUserFollowDetailROFactory {
         return userRO;
     }
 
-    public static List<SocialUserFollowDetailRO> newUsers(List<UserDO> users, UserDO mineUser) {
+    public static List<SocialUserFollowDetailRO> newUsers(List<SocialUserDO> users, SocialUserDO mineUser) {
         return ListConvertUtil.toList(SocialUserFollowDetailROFactory::newSocialFollowUserRO, users, mineUser);
     }
 }

@@ -5,7 +5,7 @@ import com.socialuni.center.web.factory.user.base.SocialUserDetailROFactory;
 import com.socialuni.center.web.domain.user.SocialAddUserImgDomain;
 import com.socialuni.center.web.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.center.web.domain.user.SocialEditUserDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialUserEditQO;
 import com.socialuni.center.web.model.QO.user.SocialUserImgAddQO;
 import com.socialuni.center.web.model.QO.user.SocialUserImgDeleteQO;
@@ -36,9 +36,9 @@ public class SocialUserService {
     }
 
     public ResultRO<SocialUserDetailRO> queryUserDetail(SocialUserIdQO socialUserIdQO) {
-        UserDO detailUserDO = SocialUserUtil.getNotNull(socialUserIdQO.getUserId());
+        SocialUserDO detailUserDO = SocialUserUtil.getNotNull(socialUserIdQO.getUserId());
 
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialUserDetailRO userDetailRO;
 
@@ -52,7 +52,7 @@ public class SocialUserService {
     }
 
     public ResultRO<SocialMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
@@ -60,7 +60,7 @@ public class SocialUserService {
     }
 
     public ResultRO<SocialMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
@@ -69,7 +69,7 @@ public class SocialUserService {
 
 
     public ResultRO<SocialMineUserDetailRO> deleteUserImg(SocialUserImgDeleteQO socialUserImgDeleteQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(socialUserImgDeleteQO, mineUser);
 

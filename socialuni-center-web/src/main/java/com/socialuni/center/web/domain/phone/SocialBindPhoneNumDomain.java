@@ -4,7 +4,7 @@ import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.manage.phone.AuthenticationManage;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class SocialBindPhoneNumDomain {
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
     //  分连个业务，一个是手机号登录，一个是绑定手机号。 绑定手机号的时候，提示手机号已被使用就行了。登录的时候才提示被封禁，这里只是绑定手机号的逻辑
-    public SocialMineUserDetailRO bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO, UserDO mineUser) {
+    public SocialMineUserDetailRO bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO, SocialUserDO mineUser) {
         //登录的时候如果没有手机号，则手机号注册成功，自动注册一个user，用户名待填，自动生成一个昵称，密码待填，头像待上传
         //如果已经登录过，则返回那个已经注册的user，根据手机号获取user，返回登录成功
         //记录用户错误日志

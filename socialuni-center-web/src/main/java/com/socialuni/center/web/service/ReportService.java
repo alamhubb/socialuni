@@ -8,8 +8,7 @@ import com.socialuni.social.constant.ReportStatus;
 import com.socialuni.center.web.model.DO.JusticeValueOrderDO;
 import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.model.DO.ReportDetailDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.repository.*;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.ReportDetailUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.social.utils.DateUtils;
@@ -72,7 +71,7 @@ public class ReportService {
 
             //变更detail
             for (ReportDetailDO reportDetailDO : reportDetailDOS) {
-                UserDO detailUser = SocialUserUtil.getNotNull(reportDetailDO.getUserId());
+                SocialUserDO detailUser = SocialUserUtil.getNotNull(reportDetailDO.getUserId());
 
                 //相同部分
                 JusticeValueOrderDO justiceValueOrderDO = new JusticeValueOrderDO();

@@ -4,7 +4,7 @@ import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.center.web.model.DO.UniOutRegisterUserDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.constant.GenderTypeNumEnum;
 import com.socialuni.center.web.repository.UniOutRegisterUserRepository;
@@ -43,7 +43,7 @@ public class FeignInterceptor implements RequestInterceptor {
         requestTemplate.header(SocialFeignHeaderName.dataOriginalSocialuniId, DevAccountUtils.getAppSocialuniId());
 
         System.out.println(requestTemplate.url());
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         String postUrl = requestTemplate.url();
 //        if (!postUrl.contains("user/registryUser")){
         System.out.println(postUrl);

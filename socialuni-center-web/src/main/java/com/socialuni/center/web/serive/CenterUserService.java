@@ -9,7 +9,7 @@ import com.socialuni.center.web.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.center.web.domain.user.SocialEditUserDomain;
 import com.socialuni.center.web.entity.UniUserRegistryDomain;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.*;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.RO.user.SocialUserIdentityAuthPreCheckRO;
@@ -41,7 +41,7 @@ public class CenterUserService {
 
     public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
         Integer dataDevId = DevAccountUtils.getDataOriginalDevIdNotNull();
-        UserDO mineUserDO = null;
+        SocialUserDO mineUserDO = null;
 //        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(loginQO.getUnionId()));
 //        if (uniContentUnionIdDO != null) {
 //            mineUserDO = SocialUserUtil.getNotNull(uniContentUnionIdDO.getContentId());
@@ -60,7 +60,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
-        UserDO mineUserDO = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUserDO = CenterUserUtil.getMineUserAllowNull();
         if (mineUserDO == null) {
             return ResultRO.success();
         }
@@ -69,9 +69,9 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        UserDO detailUserDO = CenterUserUtil.get(centerUserIdQO.getUserId());
+        SocialUserDO detailUserDO = CenterUserUtil.get(centerUserIdQO.getUserId());
 
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         CenterUserDetailRO userDetailRO = new CenterUserDetailRO();
 
@@ -86,7 +86,7 @@ public class CenterUserService {
 
 
     public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
@@ -95,7 +95,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
@@ -105,7 +105,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         Integer userImgId = UnionIdDbUtil.getUserImgIdByUid(centerUserImgDeleteQO.getUserImgId());
 

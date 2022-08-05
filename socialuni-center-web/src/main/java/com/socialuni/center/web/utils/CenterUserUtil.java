@@ -5,8 +5,8 @@ import com.socialuni.center.web.exception.SocialUserBannedException;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
-import com.socialuni.center.web.model.DO.user.TokenDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.social.exception.SocialNotLoginException;
 import lombok.extern.slf4j.Slf4j;
@@ -46,9 +46,9 @@ public class CenterUserUtil {
     // 不允许为空的要判断是否未登录
 
 
-    public static UserDO getMineUserAllowNull() {
+    public static SocialUserDO getMineUserAllowNull() {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        UserDO userDO;
+        SocialUserDO userDO;
         //区分本应用和其他应用的不同逻辑
         if (devAccountDO.getId() == 1) {
 //            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
@@ -66,8 +66,8 @@ public class CenterUserUtil {
     }
 
     //改名为notnull就行
-    public static UserDO getMineUserNotNull() {
-        UserDO user = CenterUserUtil.getMineUserAllowNull();
+    public static SocialUserDO getMineUserNotNull() {
+        SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
         if (user == null) {
             throw new SocialNotLoginException();
         }
@@ -81,16 +81,16 @@ public class CenterUserUtil {
 
     //下面都是联盟的
 
-    public static UserDO getMineUserNotNull(String token) {
+    public static SocialUserDO getMineUserNotNull(String token) {
         ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO(token);
         return getMineUserNotNull(tokenDO);
     }
 
-    private static UserDO getMineUserNotNull(ThirdUserTokenDO tokenDO) {
+    private static SocialUserDO getMineUserNotNull(ThirdUserTokenDO tokenDO) {
         if (tokenDO == null) {
             return null;
         }
-        UserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
         if (user.getStatus().equals(UserStatus.violation)) {
             throw new SocialUserBannedException(user);
         }
@@ -99,7 +99,7 @@ public class CenterUserUtil {
     }
 
     public static Integer getMineUserIdAllowNull() {
-        UserDO user = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
         if (user == null) {
             return null;
         }
@@ -107,12 +107,12 @@ public class CenterUserUtil {
     }
 
     public static Integer getMineUserId() {
-        UserDO user = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO user = CenterUserUtil.getMineUserNotNull();
         return user.getId();
     }
 
     public static Integer getMineUserUnionId() {
-        UserDO user = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO user = CenterUserUtil.getMineUserNotNull();
         return UnionIdDbUtil.createUserUid(user);
     }
 
@@ -131,7 +131,7 @@ public class CenterUserUtil {
     }
 
     public static Integer getMineUserIdInterceptor() {
-        UserDO user = CenterUserUtil.getMineUserInterceptor();
+        SocialUserDO user = CenterUserUtil.getMineUserInterceptor();
         if (user == null) {
             return null;
         }
@@ -139,12 +139,12 @@ public class CenterUserUtil {
         return user.getId();
     }
 
-    public static UserDO getMineUserInterceptor() {
-        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
+    public static SocialUserDO getMineUserInterceptor() {
+        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
         if (tokenDO == null) {
             return null;
         }
-        UserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
         if (user.getStatus().equals(UserStatus.violation)) {
             return null;
         }
@@ -176,11 +176,11 @@ public class CenterUserUtil {
 
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO userDO = CenterUserUtil.getMineUserNotNull();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 
-    public static UserDO get(String userId) {
+    public static SocialUserDO get(String userId) {
         Integer id = UnionIdDbUtil.getUserIdByUid(userId);
         return SocialUserUtil.getNotNull(id);
     }

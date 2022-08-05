@@ -4,7 +4,7 @@ import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.utils.CommentUtils;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
 import lombok.Data;
@@ -51,7 +51,7 @@ public class UnreadCommentVO {
     }
 
     public UnreadCommentVO(CommentDO commentDO) {
-        UserDO sessionUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO sessionUser = SocialUserUtil.getMineUserAllowNull();
 //        Integer devId = DevAccountUtils.getDevId();
 //
 //        this.id = UnionIdDbUtil.createCommentUid(socialCommentDO.getId(),  sessionUser);

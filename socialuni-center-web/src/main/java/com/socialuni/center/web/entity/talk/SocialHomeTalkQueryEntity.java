@@ -6,7 +6,7 @@ import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.SocialHomeTalkQueryStore;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class SocialHomeTalkQueryEntity {
     }
 
     //查询非关注tab的动态列表
-    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, UserDO mineUser) {
+    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO mineUser) {
         List<Integer> talkIds = queryBO.getTalkIds();
 
         List<TalkDO> stickTalks = new ArrayList<>();

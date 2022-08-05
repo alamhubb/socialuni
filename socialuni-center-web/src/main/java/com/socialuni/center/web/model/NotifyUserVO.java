@@ -1,6 +1,6 @@
 package com.socialuni.center.web.model;
 
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import lombok.Data;
 
 /**
@@ -19,7 +19,7 @@ public class NotifyUserVO {
     }
 
     //与其他业务不同，推送，所以是给接收方看的，为接收方id
-    public NotifyUserVO(UserDO sendUser, Integer receiveUserId) {
+    public NotifyUserVO(SocialUserDO sendUser, Integer receiveUserId) {
 //        Integer devId = DevAccountUtils.getDevId();
 //        this.id = UnionIdDbUtil.createUserUid(sendUser.getId(),  receiveUserId);
         this.nickname = sendUser.getNickname();

@@ -2,7 +2,7 @@ package com.socialuni.center.web.store;
 
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.center.web.constant.CommonConst;
 import com.socialuni.center.web.constant.TalkTabType;
@@ -28,7 +28,7 @@ public class SocialHomeTalkQueryStore {
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, UserDO user) {
+    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO user) {
         String postTalkUserGender = queryBO.getTalkUserGender();
         String talkVisibleGender = queryBO.getTalkVisibleGender();
         String tabType = queryBO.getHomeTabType();

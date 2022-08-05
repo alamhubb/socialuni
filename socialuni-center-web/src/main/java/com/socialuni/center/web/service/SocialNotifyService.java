@@ -1,7 +1,7 @@
 package com.socialuni.center.web.service;
 
 import com.socialuni.center.web.domain.notify.SocialQueryNotifyDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.center.web.model.RO.app.SocialUnreadNotifyVO;
@@ -16,19 +16,19 @@ public class SocialNotifyService {
     private SocialQueryNotifyDomain socialQueryNotifyDomain;
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryNotifies() {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifies() {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifiesAndUpdateHasRead() {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifiesAndUpdateHasRead(mineUser);
         return new ResultRO<>(list);
     }

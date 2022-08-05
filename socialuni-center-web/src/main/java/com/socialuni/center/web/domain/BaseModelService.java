@@ -11,7 +11,7 @@ import com.socialuni.center.web.model.DO.base.BaseModelDO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.message.MessageDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import org.springframework.stereotype.Service;
 
@@ -58,8 +58,8 @@ public class BaseModelService {
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
             return reportRepository.findFirstOneByMessageId(messageDO.getId());
-        } else if (model instanceof UserImgDO) {
-            UserImgDO userImgDO = (UserImgDO) model;
+        } else if (model instanceof SocialUserImgDO) {
+            SocialUserImgDO userImgDO = (SocialUserImgDO) model;
             return reportRepository.findFirstOneByUserImgId(userImgDO.getId());
         } else {
             throw new SocialBusinessException("错误的内容类型");

@@ -1,8 +1,8 @@
 package com.socialuni.center.web.model.RO.match;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.center.web.model.RO.UserImgVO;
 import com.socialuni.center.web.utils.model.DO.UserImgDOUtils;
 import com.socialuni.center.web.model.RO.app.SocialDistrictRO;
@@ -48,7 +48,7 @@ public class MatchUserVO {
     public MatchUserVO() {
     }
 
-    public MatchUserVO(UserDO user, UserDO sessionUser) {
+    public MatchUserVO(SocialUserDO user, SocialUserDO sessionUser) {
         if (user != null) {
             this.id = UnionIdDbUtil.createUserImgUid(user.getId(), sessionUser);
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
@@ -60,7 +60,7 @@ public class MatchUserVO {
             //满分10W /1千，得到百分之颜值分
 //            this.faceRatio = (int) Math.ceil((double) user.getFaceRatio() / MatchConstants.FACE_RATIO_BASE_MULTIPLE);
 //            this.likeCount = user.getLikeCount();
-            List<UserImgDO> userImgDOS = UserImgDOUtils.getImgs(user.getId());
+            List<SocialUserImgDO> userImgDOS = UserImgDOUtils.getImgs(user.getId());
 //            this.imgs = UserImgBO.userImgDOToVOS(userImgDOS, sessionUser);
 //            this.onlineFlag = user.getOnlineFlag();
 //            this.lastOnlineTime = user.getLastOnlineTime();
@@ -69,7 +69,7 @@ public class MatchUserVO {
         }
     }
 
-    public static List<MatchUserVO> userDOToVOS(List<UserDO> userDOs, UserDO user) {
+    public static List<MatchUserVO> userDOToVOS(List<SocialUserDO> userDOs, SocialUserDO user) {
         return userDOs.stream().map(item -> new MatchUserVO(item, user)).collect(Collectors.toList());
     }
 

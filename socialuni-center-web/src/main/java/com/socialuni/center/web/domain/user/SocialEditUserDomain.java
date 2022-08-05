@@ -4,7 +4,7 @@ import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.platform.tencent.TencentCloud;
 import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.service.comment.IllegalWordService;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.QO.user.SocialUserEditQO;
@@ -25,7 +25,7 @@ public class SocialEditUserDomain {
     @Resource
     UserRepository userRepository;
 
-    public SocialMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, UserDO mineUser) {
+    public SocialMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialUserDO mineUser) {
 
         //昵称
         String nickname = socialUserEditQO.getNickname();

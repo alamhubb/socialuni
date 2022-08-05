@@ -9,7 +9,7 @@ import com.socialuni.center.web.platform.WxDecode;
 import com.socialuni.center.web.platform.WxPhoneNumRO;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.center.web.utils.UniProviderUtil;
 import com.socialuni.social.utils.JsonUtil;
@@ -30,7 +30,7 @@ public class SocialBindWxPhoneNumDomain {
     private SocialUserAccountManage socialUserAccountManage;
 
     //微信绑定手机号方法
-    public SocialMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, UserDO mineUser) {
+    public SocialMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialUserDO mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
         socialProviderLoginQO.setProvider(UniappProviderType.wx);

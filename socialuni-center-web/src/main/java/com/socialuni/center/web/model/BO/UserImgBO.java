@@ -2,8 +2,8 @@ package com.socialuni.center.web.model.BO;
 
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.center.web.constant.AppConfigConst;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.model.RO.UserImgVO;
@@ -43,7 +43,7 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public UserImgBO(UserImgDO img, UserDO user) {
+    public UserImgBO(SocialUserImgDO img, SocialUserDO user) {
         this.id = UnionIdDbUtil.createUserImgUid(img.getId(), user);
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
@@ -52,9 +52,9 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public UserImgDO toUserImgDO(UserDO user, String imgUrl) {
+    public SocialUserImgDO toUserImgDO(SocialUserDO user, String imgUrl) {
         //这里需要记录，变更历史，通过照片有效无效记录，
-        UserImgDO userImgDO = new UserImgDO();
+        SocialUserImgDO userImgDO = new SocialUserImgDO();
         userImgDO.setSrc(imgUrl + this.getSrc());
         userImgDO.setAspectRatio(this.getAspectRatio());
         userImgDO.setQuality(this.getQuality());
@@ -95,7 +95,7 @@ public class UserImgBO {
         return imgVO;
     }
 
-    public static List<UserImgVO> userImgDOToVOS(List<UserImgDO> imgDOs, UserDO user) {
+    public static List<UserImgVO> userImgDOToVOS(List<SocialUserImgDO> imgDOs, SocialUserDO user) {
         return imgDOs.stream().map(item -> new UserImgBO(item, user).toVO()).collect(Collectors.toList());
     }
 }

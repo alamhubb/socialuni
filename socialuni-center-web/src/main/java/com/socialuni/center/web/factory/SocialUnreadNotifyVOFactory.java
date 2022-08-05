@@ -4,7 +4,7 @@ import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.center.web.constant.NotifyType;
 import com.socialuni.center.web.repository.CommentRepository;
@@ -44,7 +44,7 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVOFactory.talkRepository = talkRepository;
     }
 
-    public static SocialUnreadNotifyVO newUnreadNotifyVO(UserDO user) {
+    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialUserDO user) {
         SocialUnreadNotifyVO notifyVO = new SocialUnreadNotifyVO();
         if (user != null) {
             notifyVO.setNickname(user.getNickname());
@@ -56,7 +56,7 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
-        UserDO notifyUser = SocialUserUtil.getNotNull(notifyDO.getUserId());
+        SocialUserDO notifyUser = SocialUserUtil.getNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();

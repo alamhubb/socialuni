@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage.phone;
 
 import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.constant.status.UserStatus;
@@ -47,7 +47,7 @@ public class SocialUserPhoneManage {
         //校验手机号状态是否可用
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (socialUserPhoneDO != null) {
-            UserDO phoneUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
+            SocialUserDO phoneUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
             //如果手机号违规，则返回手机号不可用
             if (phoneUser.getStatus().equals(UserStatus.violation)) {
                 throw new SocialBusinessException("手机号不可用");

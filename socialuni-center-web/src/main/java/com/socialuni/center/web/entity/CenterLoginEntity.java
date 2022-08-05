@@ -5,7 +5,7 @@ import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class CenterLoginEntity {
     @Resource
     private ThirdUserTokenManage thirdUserTokenManage;
 
-    public SocialLoginRO<CenterMineUserDetailRO> getCenterMineUserDetailROBySocialLoginRO(UserDO mineUser, SocialLoginRO<SocialMineUserDetailRO> socialLoginRO) {
+    public SocialLoginRO<CenterMineUserDetailRO> getCenterMineUserDetailROBySocialLoginRO(SocialUserDO mineUser, SocialLoginRO<SocialMineUserDetailRO> socialLoginRO) {
         SocialMineUserDetailRO socialMineUserDetailRO = socialLoginRO.getUser();
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);

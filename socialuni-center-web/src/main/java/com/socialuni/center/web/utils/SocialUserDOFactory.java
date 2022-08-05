@@ -6,13 +6,13 @@ import com.socialuni.center.web.constant.GenderTypeNumEnum;
 import com.socialuni.center.web.constant.UserType;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.StringUtils;
 
 public class SocialUserDOFactory {
-    public static UserDO newUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        UserDO user = new UserDO();
+    public static SocialUserDO newUserByProviderLogin(SocialProviderLoginQO loginQO) {
+        SocialUserDO user = new SocialUserDO();
         user.setNickname(loginQO.getNickName());
         user.setAvatar(loginQO.getAvatarUrl());
         user.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
@@ -33,8 +33,8 @@ public class SocialUserDOFactory {
         return user;
     }
 
-    public static UserDO newUserByPhoneLogin() {
-        UserDO user = new UserDO();
+    public static SocialUserDO newUserByPhoneLogin() {
+        SocialUserDO user = new SocialUserDO();
         user.setNickname("未命名");
         user.setAvatar(SocialAppConfig.getUserDefaultAvatar());
         user.setGender(GenderType.girl);

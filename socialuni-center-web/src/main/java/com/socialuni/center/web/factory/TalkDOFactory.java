@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory;
 
 import com.socialuni.center.web.model.RectangleVO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.DO.DistrictDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.social.exception.SocialBusinessException;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 public class TalkDOFactory {
-    public static TalkDO newTalkDO(UserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
+    public static TalkDO newTalkDO(SocialUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
         TalkDO talkDO = new TalkDO(user.getId(), socialTalkPostQO.getContent());
 
         talkDO.setDevId(socialTalkPostQO.getDevId());

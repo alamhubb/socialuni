@@ -9,11 +9,10 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.SocialReportAddQO;
-import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.social.utils.DateUtils;
@@ -47,7 +46,7 @@ public class SoicialReportAddDomain {
     @Resource
     private ModelContentCheck modelContentCheck;
 
-    public ResultRO<String> addReport(UserDO mineUser, SocialReportAddQO reportAddVO) {
+    public ResultRO<String> addReport(SocialUserDO mineUser, SocialReportAddQO reportAddVO) {
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.violateTypes.contains(reportType)) {
@@ -119,7 +118,7 @@ public class SoicialReportAddDomain {
             throw new SocialParamsException("内容已被举报，审核中");
         }
         //这里之后才能校验
-        UserDO receiveUser = SocialUserUtil.getNotNull(modelDO.getUserId());
+        SocialUserDO receiveUser = SocialUserUtil.getNotNull(modelDO.getUserId());
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {
             if (UserType.system.equals(receiveUser.getType())) {

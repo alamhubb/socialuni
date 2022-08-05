@@ -15,6 +15,10 @@ public class SocialUserRO extends SocialContentIdCO {
     private String avatar;
     private String gender;
 
+    public SocialUserRO(SocialContentIdCO contentIdCO) {
+        super(contentIdCO);
+    }
+
     public SocialUserRO(SocialUserRO userRO) {
         super(userRO);
         this.nickname = userRO.getNickname();

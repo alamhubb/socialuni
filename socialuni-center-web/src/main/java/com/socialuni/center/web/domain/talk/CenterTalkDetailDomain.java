@@ -5,8 +5,7 @@ import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.center.web.domain.talk.SocialTalkDetailQueryDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ public class CenterTalkDetailDomain {
     SocialTalkDetailQueryDomain socialTalkDetailQueryDomain;
 
     public CenterTalkRO queryTalkDetail(CenterTalkIdQO centerTalkIdQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(centerTalkIdQO.getTalkId());
 

@@ -4,7 +4,7 @@ import com.socialuni.center.web.model.QO.CenterReportAddQO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.domain.report.SoicialReportAddDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class CenterReportService {
     SoicialReportAddDomain soicialReportAddDomain;
 
     public ResultRO<String> addReport(CenterReportAddQO centerReportAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         Integer contentId = UnionIdDbUtil.getResultByUnionId(centerReportAddQO.getReportContentType(), centerReportAddQO.getContentId());
 

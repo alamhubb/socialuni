@@ -22,7 +22,7 @@ import com.socialuni.center.web.model.DO.talk.SocialTalkCircleDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkTagDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
@@ -63,7 +63,7 @@ public class SocialTalkPostDomain {
     ModelContentCheck modelContentCheck;
 
     public SocialTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
 
@@ -81,7 +81,7 @@ public class SocialTalkPostDomain {
     }
 
 
-    public TalkAddValidateRO paramsValidate(UserDO mineUser, SocialTalkPostQO talkVO) {
+    public TalkAddValidateRO paramsValidate(SocialUserDO mineUser, SocialTalkPostQO talkVO) {
 
         //校验地理位置
         String adCode = talkVO.getAdCode();
@@ -129,7 +129,7 @@ public class SocialTalkPostDomain {
         return talkAddValidateRO;
     }
 
-    public TalkDO saveEntity(UserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
+    public TalkDO saveEntity(SocialUserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {

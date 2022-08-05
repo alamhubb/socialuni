@@ -10,7 +10,7 @@ import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkCircleDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkDistrictRO;
@@ -114,25 +114,25 @@ public class SocialTalkROFactory {
 
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, Integer talkId) {
+    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, Integer talkId) {
         TalkDO talkDO = TalkUtils.get(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialTalkRO getTalkRO(TalkDO talkDO, UserDO mineUser) {
+    public static SocialTalkRO getTalkRO(TalkDO talkDO, SocialUserDO mineUser) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialTalkRO getTalkDetailPageTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment) {
+    public static SocialTalkRO getTalkDetailPageTalkRO(SocialUserDO mineUser, TalkDO talkDO, Boolean showAllComment) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, TalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialTalkRO> newHomeTalkROs(UserDO mineUser, List<TalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
+    public static List<SocialTalkRO> newHomeTalkROs(SocialUserDO mineUser, List<TalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -146,7 +146,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialTalkRO newHomeTalkRO(UserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialTalkRO socialTalkRO = new SocialTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
@@ -154,7 +154,7 @@ public class SocialTalkROFactory {
         Integer talkId = talkDO.getId();
 
         socialTalkRO.setId(talkId);
-        UserDO talkUser = SocialUserUtil.getNotNull(talkDO.getUserId());
+        SocialUserDO talkUser = SocialUserUtil.getNotNull(talkDO.getUserId());
         SocialContentUserRO socialTalkUserRO = SocialContentUserROFactory.newContentUserRO(talkUser, mineUser);
 //        socialTalkUserRO.setId(UnionIdDbUtil.createUserUid(socialTalkUserRO.getId(), user));
 

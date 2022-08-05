@@ -1,6 +1,6 @@
 package com.socialuni.center.web.config;
 
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.repository.UserRepository;
 import com.socialuni.center.web.service.ViolationKeywordsService;
@@ -61,8 +61,8 @@ public class ScheduledTasks {
     @Scheduled(fixedRate = 600000)
     public void updateUserStatus() {
         Date curDate = new Date();
-        List<UserDO> users = userRepository.findCanUnfreezeViolationUser(UserStatus.violation, curDate);
-        for (UserDO user : users) {
+        List<SocialUserDO> users = userRepository.findCanUnfreezeViolationUser(UserStatus.violation, curDate);
+        for (SocialUserDO user : users) {
             user.setUpdateTime(curDate);
             user.setStatus(UserStatus.enable);
             userRepository.save(user);

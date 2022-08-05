@@ -5,8 +5,7 @@ import com.socialuni.center.web.model.RO.talk.CenterCommentRO;
 import com.socialuni.center.web.factory.RO.talk.CenterCommentROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.center.web.domain.comment.SocialCommentPostDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ public class CenterCommentPostDomain {
     private SocialCommentPostDomain socialCommentPostDomain;
 
     public CenterCommentRO postComment(CenterCommentPostQO addQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
         Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(addQO.getTalkId());
 

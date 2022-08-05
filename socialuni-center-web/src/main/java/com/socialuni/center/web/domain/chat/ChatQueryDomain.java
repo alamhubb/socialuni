@@ -5,7 +5,7 @@ import com.socialuni.social.constant.ChatStatus;
 import com.socialuni.social.constant.ChatType;
 import com.socialuni.center.web.model.DO.chat.ChatDO;
 import com.socialuni.center.web.model.DO.chat.ChatUserDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.message.chat.ChatRO;
 import com.socialuni.center.web.repository.ChatRepository;
 import com.socialuni.center.web.repository.ChatUserRepository;
@@ -27,7 +27,7 @@ public class ChatQueryDomain {
 
     //登录情况下查询用户有权限的chatuser
     //初始化和查询chat列表触发的
-    public List<ChatRO> getChats(UserDO user) {
+    public List<ChatRO> getChats(SocialUserDO user) {
         //未登录的情况只插叙你官方的chats
         List<ChatUserDO> chatUsers = chatUserRepository.findByChatStatusAndUserIdAndFrontShowTrueOrderByChatTopLevelDescTopFlagDescUpdateTimeDesc(ChatStatus.enable, user.getId());
         //查询的时候chat列表展示不为当前用户的

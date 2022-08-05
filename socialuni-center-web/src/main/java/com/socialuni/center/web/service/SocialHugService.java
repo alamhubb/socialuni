@@ -2,7 +2,7 @@ package com.socialuni.center.web.service;
 
 
 import com.socialuni.center.web.domain.hug.SocialAddHugDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.api.model.ResultRO;
@@ -16,7 +16,7 @@ public class SocialHugService {
     private SocialAddHugDomain socialAddHugDomain;
 
     public ResultRO<Void> addHug(SocialHugAddQO socialHugAddQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         socialAddHugDomain.addHug(mineUser, socialHugAddQO);
         return new ResultRO<>();
     }

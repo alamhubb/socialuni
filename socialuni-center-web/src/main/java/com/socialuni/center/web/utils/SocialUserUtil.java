@@ -52,7 +52,7 @@ public class SocialUserUtil {
     }
 
     public static Integer getMineUserIdAllowNull() {
-        UserDO user = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO user = SocialUserUtil.getMineUserAllowNull();
         if (user == null) {
             return null;
         }
@@ -60,7 +60,7 @@ public class SocialUserUtil {
         return userId;
     }
 
-    public static Integer getMineUserIdAllowNull(UserDO mineUser) {
+    public static Integer getMineUserIdAllowNull(SocialUserDO mineUser) {
         //解析token
         if (mineUser == null) {
             return null;
@@ -77,9 +77,9 @@ public class SocialUserUtil {
         return userId;
     }
 
-    public static UserDO getMineUserNotNull() {
+    public static SocialUserDO getMineUserNotNull() {
         //解析token
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         if (mineUser == null) {
             throw new SocialNullUserException();
         }
@@ -87,19 +87,19 @@ public class SocialUserUtil {
         return mineUser;
     }
 
-    public static UserDO getMineUserAllowNull() {
+    public static SocialUserDO getMineUserAllowNull() {
         //解析token
-        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
+        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
         if (tokenDO == null) {
             return null;
         }
         //返回user
-        UserDO mineUser = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO mineUser = SocialUserUtil.getNotNull(tokenDO.getUserId());
         return mineUser;
     }
 
     public static Integer getMineUserIdInterceptor() {
-        UserDO user = SocialUserUtil.getMineUserInterceptor();
+        SocialUserDO user = SocialUserUtil.getMineUserInterceptor();
         if (user == null) {
             return null;
         }
@@ -107,8 +107,8 @@ public class SocialUserUtil {
         return user.getId();
     }
 
-    public static UserDO getMineUserInterceptor() {
-        UserDO user = SocialUserUtil.getMineUserAllowNull();
+    public static SocialUserDO getMineUserInterceptor() {
+        SocialUserDO user = SocialUserUtil.getMineUserAllowNull();
         if (user == null) {
             return null;
         }
@@ -120,19 +120,19 @@ public class SocialUserUtil {
     }
 
     //必须有，websocket无法从request中获取token只能传入
-    public static UserDO getUserByWebsocketToken(String token) {
+    public static SocialUserDO getUserByWebsocketToken(String token) {
         //解析token
-        TokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
         if (tokenDO == null) {
             return null;
         }
         //返回user
-        UserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
         return user;
     }
 
     public static String getMineUserPhoneNum() {
-        UserDO userDO = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO userDO = SocialUserUtil.getMineUserAllowNull();
         return SocialUserUtil.getUserPhoneNum(userDO.getId());
     }
 
@@ -161,18 +161,18 @@ public class SocialUserUtil {
         return UserUtils.get(Integer.valueOf(userId));
     }*/
 
-    public static UserDO getNotNull(Integer userId) {
+    public static SocialUserDO getNotNull(Integer userId) {
         if (userId == null) {
             throw new SocialNullUserException();
         }
-        UserDO commonUserDOOptional = userRepository.findOneById(userId);
+        SocialUserDO commonUserDOOptional = userRepository.findOneById(userId);
         if (commonUserDOOptional == null) {
             throw new SocialNullUserException();
         }
         return commonUserDOOptional;
     }
 
-    public static UserDO getAllowNull(Integer userId) {
+    public static SocialUserDO getAllowNull(Integer userId) {
         if (userId == null) {
             return null;
         }
@@ -187,7 +187,7 @@ public class SocialUserUtil {
         return UserIdentityAuthStatus.authSuccessList.contains(socialUserIdentityAuthDO.getStatus());
     }
 
-    public static UserDO getByUid(String uid) {
+    public static SocialUserDO getByUid(String uid) {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(SocialuniProviderLoginType.socialuni, uid);
         if (socialUserAccountDO == null) {
             throw new SocialNullUserException();
@@ -195,7 +195,7 @@ public class SocialUserUtil {
         return SocialUserUtil.getNotNull(socialUserAccountDO.getUserId());
     }
 
-    public static boolean isMine(UserDO mineUser, Integer userId) {
+    public static boolean isMine(SocialUserDO mineUser, Integer userId) {
         if (mineUser == null) {
             return false;
         }

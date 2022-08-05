@@ -1,6 +1,6 @@
 package com.socialuni.center.web.platform;
 
-import com.socialuni.center.web.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import lombok.Data;
 
 /**
@@ -11,7 +11,7 @@ import lombok.Data;
 public class TokenVO {
     private String tokenCode;
 
-    public TokenVO(TokenDO tokenDO) {
+    public TokenVO(SocialTokenDO tokenDO) {
         this.tokenCode = tokenDO.getToken();
     }
 }

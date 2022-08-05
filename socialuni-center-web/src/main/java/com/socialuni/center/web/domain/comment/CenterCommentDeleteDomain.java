@@ -3,8 +3,7 @@ package com.socialuni.center.web.domain.comment;
 import com.socialuni.center.web.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.center.web.domain.comment.SocialCommentDeleteDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,7 @@ public class CenterCommentDeleteDomain {
      * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
      */
     public ResultRO<Void> deleteComment(CenterCommentDeleteQO commentDeleteQO) {
-        UserDO userDO = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO userDO = CenterUserUtil.getMineUserNotNull();
 
         Integer commentId = UnionIdDbUtil.getCommentIdByUid(commentDeleteQO.getCommentId());
 

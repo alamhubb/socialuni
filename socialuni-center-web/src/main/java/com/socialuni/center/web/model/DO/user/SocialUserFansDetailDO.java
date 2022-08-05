@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_fans_detail",
+@Table(name = "s_user_fans_detail",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "userId")
         }
@@ -27,7 +27,7 @@ public class SocialUserFansDetailDO implements Serializable {
     @Column(nullable = false)
     private Integer followNum;
 
-    public SocialUserFansDetailDO(UserDO user) {
+    public SocialUserFansDetailDO(SocialUserDO user) {
         this.userId = user.getId();
         this.fansNum = 0;
         this.followNum = 0;

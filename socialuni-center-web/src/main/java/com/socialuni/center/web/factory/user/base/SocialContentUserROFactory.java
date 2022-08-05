@@ -3,7 +3,7 @@ package com.socialuni.center.web.factory.user.base;
 import com.socialuni.center.web.manage.FollowManage;
 import com.socialuni.social.constant.UserIdentityAuthStatus;
 import com.socialuni.center.web.model.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.center.web.repository.user.identity.SocialUserIdentityAuthRepository;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class SocialContentUserROFactory {
         SocialContentUserROFactory.followManage = followManage;
     }
 
-    public static SocialContentUserRO newContentUserRO(UserDO user, UserDO mineUser) {
+    public static SocialContentUserRO newContentUserRO(SocialUserDO user, SocialUserDO mineUser) {
         SocialContentUserRO userRO = new SocialContentUserRO(SocialListUserROFactory.getListUserRO(user));
 
         userRO.setHasFollowed(false);

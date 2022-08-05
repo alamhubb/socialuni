@@ -11,7 +11,7 @@ import com.socialuni.center.web.service.BaseModelUtils;
 import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.ReportRepository;
 import com.socialuni.social.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +40,7 @@ public class ViolationPushUtils {
 
         BaseModelDO baseModelDO = BaseModelUtils.getModelByReport(reportDO);
 
-        UserDO vioUser = SocialUserUtil.getNotNull(baseModelDO.getUserId());
+        SocialUserDO vioUser = SocialUserUtil.getNotNull(baseModelDO.getUserId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

@@ -8,7 +8,7 @@ import com.socialuni.center.web.model.DO.base.BaseModelParentDO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.message.MessageDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.repository.MessageRepository;
@@ -68,8 +68,8 @@ public class BaseModelUtils<T> {
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = BaseModelUtils.getModelByClass(model);
             baseModelParentDO.setMessageId(messageDO.getId());
-        } else if (model instanceof UserImgDO) {
-            UserImgDO userImgDO = BaseModelUtils.getModelByClass(model);
+        } else if (model instanceof SocialUserImgDO) {
+            SocialUserImgDO userImgDO = BaseModelUtils.getModelByClass(model);
             baseModelParentDO.setUserImgId(userImgDO.getId());
         } else {
             throw new SocialBusinessException("错误的内容类型");

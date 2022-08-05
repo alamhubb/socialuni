@@ -4,7 +4,7 @@ import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.entity.CenterDevAccountEntity;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.SocialOAuthUserRO;
 import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import com.socialuni.center.web.constant.AuthType;
@@ -43,7 +43,7 @@ public class CenterMockService {
 //        DevAccountProviderDO devAccountProviderDO = DevAccountUtils.getDevAccountProviderDO(mpType);
 //        OAuthUserInfoQO authVO = new OAuthUserInfoQO(devAccountProviderDO.getAppId(), devAccountProviderDO.getMpType());
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        UserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
+        SocialUserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
         return centerOAuthService.oAuthUserInfo(devAccountDO, userDO, authType);
     }
 

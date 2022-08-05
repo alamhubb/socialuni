@@ -3,7 +3,7 @@ package com.socialuni.center.web.serive;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.domain.tag.SoicialTagAddDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.store.SocialTagRedis;
 import com.socialuni.center.web.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.api.model.ResultRO;
@@ -23,7 +23,7 @@ public class CenterTagService {
     SoicialTagAddDomain soicialTagAddDomain;
 
     public ResultRO<TagRO> addTag(TagAddQO tagAddQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
         return new ResultRO<>(tagRO);
     }

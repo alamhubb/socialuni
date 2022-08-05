@@ -10,7 +10,6 @@ import com.socialuni.center.web.service.KeywordsTriggerService;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.center.web.config.SocialAppConfig;
-import com.socialuni.center.web.constant.*;
 import com.socialuni.center.web.domain.BaseModelService;
 import com.socialuni.center.web.model.QO.SocialReportAddQO;
 import com.socialuni.social.api.model.ResultRO;
@@ -19,8 +18,7 @@ import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.model.DO.ReportDetailDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
 import com.socialuni.center.web.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.repository.*;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.QQUtil;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.WxUtil;
@@ -165,7 +163,7 @@ public class ReportDomain {
 
 
         //用户举报其他用户的逻辑
-        UserDO receiveUser = SocialUserUtil.getNotNull(receiveUserId);
+        SocialUserDO receiveUser = SocialUserUtil.getNotNull(receiveUserId);
 
 
         Integer modelReportNum = modelDO.getReportNum() + 1;

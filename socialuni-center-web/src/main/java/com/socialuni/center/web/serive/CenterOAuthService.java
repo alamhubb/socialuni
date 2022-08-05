@@ -11,7 +11,7 @@ import com.socialuni.center.web.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.center.web.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.center.web.model.RO.SocialOAuthUserRO;
@@ -34,7 +34,7 @@ public class CenterOAuthService {
     private ThirdUserAuthRepository thirdUserAuthRepository;
 
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
@@ -57,13 +57,13 @@ public class CenterOAuthService {
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(OAuthUserInfoQO authVO, String authType) {
         //获取devaccount
         //获取绑定的手机号，根据手机号，获取user。然后返回这个user的信息，并且返回对应这个应用的userid
-        UserDO userDO = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO userDO = CenterUserUtil.getMineUserNotNull();
         DevAccountDO devAccountDO = devAccountManage.checkApplyAuthQO(authVO);
         return oAuthUserInfo(devAccountDO, userDO, authType);
     }
 
     //授权获取用户信息，根据appId知道授权给哪个商户的
-    public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(DevAccountDO devAccountDO, UserDO mineUser, String authType) {
+    public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(DevAccountDO devAccountDO, SocialUserDO mineUser, String authType) {
 
 
         SocialLoginRO<CenterMineUserDetailRO> loginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, authType, devAccountDO);

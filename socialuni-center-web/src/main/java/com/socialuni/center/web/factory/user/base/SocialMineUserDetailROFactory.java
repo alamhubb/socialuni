@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory.user.base;
 
 import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.RO.user.SocialUserDetailRO;
 import com.socialuni.center.web.redis.SocialUserPhoneRedis;
@@ -22,12 +22,12 @@ public class SocialMineUserDetailROFactory {
     }
 
     public static SocialMineUserDetailRO getMineUserDetail() {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         SocialMineUserDetailRO mineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
         return mineUserDetailRO;
     }
 
-    public static SocialMineUserDetailRO getMineUserDetail(UserDO mineUser) {
+    public static SocialMineUserDetailRO getMineUserDetail(SocialUserDO mineUser) {
         //用户关注粉丝数
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
 
@@ -35,7 +35,7 @@ public class SocialMineUserDetailROFactory {
     }
 
 
-    public static SocialMineUserDetailRO getMineUserDetail(UserDO mineUser, SocialUserPhoneDO socialUserPhoneDO) {
+    public static SocialMineUserDetailRO getMineUserDetail(SocialUserDO mineUser, SocialUserPhoneDO socialUserPhoneDO) {
         //user基础信息
         SocialUserDetailRO socialUserDetailRO = SocialUserDetailROFactory.getUserDetailRO(mineUser, mineUser);
 

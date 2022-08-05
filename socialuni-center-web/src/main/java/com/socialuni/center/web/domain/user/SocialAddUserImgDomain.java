@@ -4,8 +4,8 @@ import com.socialuni.center.web.constant.AppConfigConst;
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.center.web.model.QO.user.SocialUserImgAddQO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.config.SocialAppConfig;
@@ -25,9 +25,9 @@ public class SocialAddUserImgDomain {
     @Resource
     UserRepository userRepository;
 
-    public SocialMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, UserDO mineUser) {
+    public SocialMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, SocialUserDO mineUser) {
 
-        UserImgDO userImgDO = new UserImgDO();
+        SocialUserImgDO userImgDO = new SocialUserImgDO();
         userImgDO.setSrc(socialUserImgAddQO.getSrc());
         userImgDO.setAspectRatio(socialUserImgAddQO.getAspectRatio());
         userImgDO.setQuality(socialUserImgAddQO.getQuality());

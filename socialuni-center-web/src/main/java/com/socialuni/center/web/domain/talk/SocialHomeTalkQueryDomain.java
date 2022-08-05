@@ -10,7 +10,7 @@ import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
 import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -44,7 +44,7 @@ public class SocialHomeTalkQueryDomain {
     TagRepository tagRepository;
 
 
-    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
+    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, SocialUserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
         //talk
         socialHomeTabTalkQueryBO.setTalkIds(queryQO.getTalkIds());
@@ -111,7 +111,7 @@ public class SocialHomeTalkQueryDomain {
     }
 
     //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, UserDO mineUser) {
+    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, SocialUserDO mineUser) {
         //校验gender类型,生成BO
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
 

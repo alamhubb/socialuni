@@ -6,9 +6,7 @@ import com.socialuni.center.web.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.center.web.factory.RO.user.CenterUserFollowDetailROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.center.web.domain.follow.SocialQueryUserFollowsDomain;
-import com.socialuni.center.web.domain.follow.SocialUserFollowDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Component;
@@ -44,7 +42,7 @@ public class CenterFollowUserDomain {
     }
 
     public Map<String, List<CenterUserFollowDetailRO>> queryUserFollows() {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         Map<String, List<SocialUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
 
         Map<String, List<CenterUserFollowDetailRO>> centerMap = new HashMap<>();

@@ -10,8 +10,7 @@ import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.constant.TalkTabType;
-import com.socialuni.center.web.domain.talk.SocialHomeTalkQueryDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.center.web.model.RectangleVO;
@@ -53,7 +52,7 @@ public class CenterHomeTalkQueryDomain {
     //查询非关注tab的动态列表
     public List<CenterTalkRO> queryHomeTabTalks(@Valid @NotNull CenterHomeTabTalkQueryQO queryQO) {
         //获取当前用户
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
 

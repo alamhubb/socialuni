@@ -4,7 +4,7 @@ import com.socialuni.center.web.constant.ErrorMsg;
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.service.comment.IllegalWordService;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.utils.QQUtil;
@@ -50,7 +50,7 @@ public class ModelContentCheck {
     @Resource
     private IllegalWordService illegalWordService;
 
-    public void checkUser(UserDO mineUser) {
+    public void checkUser(SocialUserDO mineUser) {
         String userPhoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
 
         //如果不为系统管理员，只有管理员才能评论置顶内容
@@ -106,7 +106,7 @@ public class ModelContentCheck {
         }
     }
 
-    public void checkUserAndContent(String content, UserDO requestUser) {
+    public void checkUserAndContent(String content, SocialUserDO requestUser) {
         //如果不为系统管理员，只有管理员才能评论置顶内容
 //        if (!UserType.system.equals(requestUser.getType())) {
         this.checkUser(requestUser);
@@ -119,7 +119,7 @@ public class ModelContentCheck {
         }
     }
 
-    public void checkUserAndLongContent(String content, UserDO mineUser) {
+    public void checkUserAndLongContent(String content, SocialUserDO mineUser) {
         this.checkUserAndContent(content, mineUser);
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {

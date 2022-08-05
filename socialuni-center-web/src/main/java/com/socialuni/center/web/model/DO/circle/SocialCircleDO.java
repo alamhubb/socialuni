@@ -2,7 +2,7 @@ package com.socialuni.center.web.model.DO.circle;
 
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.model.DO.base.CommonContentBaseDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -64,7 +64,7 @@ public class SocialCircleDO extends CommonContentBaseDO implements Serializable 
     private Boolean showFront;
     private Integer devId;
 
-    public SocialCircleDO(String name, String description, Integer devId, UserDO createUser) {
+    public SocialCircleDO(String name, String description, Integer devId, SocialUserDO createUser) {
         this.name = name;
         this.description = description;
         this.applyUserId = createUser.getId();

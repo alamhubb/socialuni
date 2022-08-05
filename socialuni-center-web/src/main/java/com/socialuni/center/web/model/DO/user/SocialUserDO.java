@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user",
+@Table(name = "s_user",
         //查询条件索引，索引列不能为空
         indexes = {
                 @Index(columnList = "gender"),
@@ -22,7 +22,7 @@ import java.io.Serializable;
         }
 )
 @Data
-public class UserDO extends SocialContentBaseDO implements Serializable {
+public class SocialUserDO extends SocialContentBaseDO implements Serializable {
     private String nickname;
     private String avatar;
     private String gender;
@@ -31,7 +31,7 @@ public class UserDO extends SocialContentBaseDO implements Serializable {
     private String city;
     private String type;
 
-    public UserDO() {
+    public SocialUserDO() {
         super(ContentType.user);
     }
 }

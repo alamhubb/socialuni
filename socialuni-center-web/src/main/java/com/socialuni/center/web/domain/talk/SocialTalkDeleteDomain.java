@@ -2,7 +2,7 @@ package com.socialuni.center.web.domain.talk;
 
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.TalkRedis;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkDeleteQO;
@@ -25,7 +25,7 @@ public class SocialTalkDeleteDomain {
     @Resource
     private TalkRedis talkRedis;
 
-    public void deleteTalk(UserDO mineUser, SocialTalkDeleteQO talkDeleteQO) {
+    public void deleteTalk(SocialUserDO mineUser, SocialTalkDeleteQO talkDeleteQO) {
 
         /**
          * 删除动态操作，

@@ -9,7 +9,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.constant.StatusConst;
 import com.socialuni.center.web.model.DO.AuthenticationDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.RO.user.phone.SocialSendAuthCodeQO;
@@ -42,7 +42,7 @@ public class SocailSendAuthCodeDomain {
     SocialUserPhoneManage socialUserPhoneManage;
 
     //发送验证码
-    private void sendAuthCodeCheck(String phoneNum, UserDO mineUser, String userIp) {
+    private void sendAuthCodeCheck(String phoneNum, SocialUserDO mineUser, String userIp) {
 
         //h5登录也需要防止
         if (StringUtils.isEmpty(userIp)) {
@@ -102,7 +102,7 @@ public class SocailSendAuthCodeDomain {
         }
     }
 
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, UserDO mineUser) {
+    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, SocialUserDO mineUser) {
         //要防的是同1个ip无线刷验证码
         //发送验证码时要记录ip，记录用户id，记录请求内容
         //限制手机号，同1手机号做多2条，

@@ -2,7 +2,7 @@ package com.socialuni.center.web.factory;
 
 import com.socialuni.center.web.factory.user.base.SocialUserROFactory;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.CommentUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.RO.community.comment.SocialReplyCommentRO;
@@ -16,7 +16,7 @@ public class ReplyCommentROFactory {
         SocialReplyCommentRO socialReplyCommentRO = new SocialReplyCommentRO();
         socialReplyCommentRO.setId(comment.getId());
 //        replyCommentRO.setNo(comment.getNo());
-        UserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
+        SocialUserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
         SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);
         socialReplyCommentRO.setUser(commentUserRO);
         return socialReplyCommentRO;

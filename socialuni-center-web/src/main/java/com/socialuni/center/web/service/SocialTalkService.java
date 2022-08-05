@@ -5,9 +5,8 @@ import com.socialuni.center.web.domain.talk.*;
 import com.socialuni.center.web.model.RectangleVO;
 import com.socialuni.center.web.platform.MapUtil;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.config.SocialAppConfig;
-import com.socialuni.center.web.domain.talk.*;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.QO.community.talk.*;
 import com.socialuni.social.api.model.ResultRO;
@@ -34,7 +33,7 @@ public class SocialTalkService {
     //查询非关注tab的动态列表
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<SocialTalkRO>> queryHomeTalks() {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO queryQO = new SocialHomeTabTalkQueryQO();
         queryQO.setTalkIds(new ArrayList<>());
@@ -57,7 +56,7 @@ public class SocialTalkService {
     //查询非关注tab的动态列表
     public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO) {
         //获取当前用户
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         //转换为rolist
         List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
@@ -72,19 +71,19 @@ public class SocialTalkService {
 
     public ResultRO<Void> deleteTalk(SocialTalkDeleteQO talkDeleteQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         socialTalkDeleteDomain.deleteTalk(mineUser, talkDeleteQO);
         return new ResultRO<>();
     }
 
     public ResultRO<SocialTalkRO> queryTalkDetail(SocialTalkIdQO socialTalkIdQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         SocialTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(socialTalkIdQO, mineUser);
         return ResultRO.success(socialTalkRO);
     }
 
     public ResultRO<List<SocialTalkRO>> queryUserTalks(SocialUserTalkQueryQO queryQO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         List<SocialTalkRO> talkROS = socialUserTalkQueryDomain.queryUserTalks(queryQO, mineUser);
         return ResultRO.success(talkROS);
     }

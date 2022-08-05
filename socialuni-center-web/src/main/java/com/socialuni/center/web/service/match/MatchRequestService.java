@@ -7,7 +7,7 @@ import com.socialuni.center.web.model.DO.chat.ChatDO;
 import com.socialuni.center.web.model.DO.chat.ChatUserDO;
 import com.socialuni.center.web.model.DO.message.MessageDO;
 import com.socialuni.center.web.model.DO.message.MessageReceiveDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.ChatRepository;
 import com.socialuni.center.web.repository.ChatUserRepository;
 import com.socialuni.center.web.repository.MessageReceiveRepository;
@@ -38,7 +38,7 @@ public class MatchRequestService {
     private EntityManager entityManager;
 
     @Transactional
-    public void sendMatchSuccessMsgToUser(UserDO user, UserDO receiveUser) {
+    public void sendMatchSuccessMsgToUser(SocialUserDO user, SocialUserDO receiveUser) {
         //匹配成功
         //chat_user中为3个人。
         //一个系统用户

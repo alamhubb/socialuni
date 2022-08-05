@@ -7,7 +7,7 @@ import com.socialuni.social.constant.ChatStatus;
 import com.socialuni.social.constant.ChatType;
 import com.socialuni.center.web.model.DO.chat.ChatDO;
 import com.socialuni.center.web.model.DO.chat.ChatUserDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.message.chat.ChatRO;
 import com.socialuni.center.web.repository.ChatRepository;
 import com.socialuni.center.web.repository.ChatUserRepository;
@@ -31,7 +31,7 @@ public class ChatService {
 
     //获取私聊的chat
     //查看对方主页时
-    public ChatRO seeUserDetailGetOrCreateChat(UserDO user, Integer receiveUserId) {
+    public ChatRO seeUserDetailGetOrCreateChat(SocialUserDO user, Integer receiveUserId) {
         Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatStatusAndUserIdAndReceiveUserId(ChatStatus.enable, user.getId(), receiveUserId);
         ChatUserDO chatUserDO;
         //如果创建过，则获取。返回
@@ -54,7 +54,7 @@ public class ChatService {
     //登录情况下查询用户有权限的chatuser
     //详情页面，需要知道是否关注你了
 
-    public CreateSingleChatResult seeUserDetailCreateChat(UserDO user, Integer receiveUserId) {
+    public CreateSingleChatResult seeUserDetailCreateChat(SocialUserDO user, Integer receiveUserId) {
         ChatDO chat = new ChatDO(ChatType.single);
 
         //生成chat

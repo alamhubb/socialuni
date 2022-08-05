@@ -1,7 +1,7 @@
 package com.socialuni.center.web.factory.user.base;
 
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.center.web.model.RO.user.SocialUserDetailRO;
 import com.socialuni.center.web.model.RO.user.UserImgRO;
 import com.socialuni.center.web.model.RO.user.base.SocialUserFollowDetailRO;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 public class SocialUserDetailROFactory {
-    public static SocialUserDetailRO getUserDetailRO(UserDO userDO, UserDO mineUser) {
+    public static SocialUserDetailRO getUserDetailRO(SocialUserDO userDO, SocialUserDO mineUser) {
         //user基础信息
         SocialUserFollowDetailRO socialUserDetailFollowRO = SocialUserFollowDetailROFactory.newSocialFollowUserRO(userDO, mineUser);
 
@@ -21,7 +21,7 @@ public class SocialUserDetailROFactory {
         SocialUserDetailRO userDetailVO = new SocialUserDetailRO(socialUserDetailFollowRO);
 
         //用户图片
-        List<UserImgDO> imgDOS = UserImgDOUtils.getImgs(userDO.getId());
+        List<SocialUserImgDO> imgDOS = UserImgDOUtils.getImgs(userDO.getId());
         List<UserImgRO> imgVOS = UserImgROFactory.userImgDOToVOS(imgDOS);
         userDetailVO.setImgs(imgVOS);
 

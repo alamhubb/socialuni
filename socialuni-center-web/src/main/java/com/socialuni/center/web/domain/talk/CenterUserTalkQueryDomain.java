@@ -5,8 +5,7 @@ import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
-import com.socialuni.center.web.domain.talk.SocialUserTalkQueryDomain;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ public class CenterUserTalkQueryDomain {
         Integer userId = UnionIdDbUtil.getUserIdByUid(queryQO.getUserId());
 
         //获取自己的user
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
         List<Integer> talkIds = UnionIdDbUtil.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 

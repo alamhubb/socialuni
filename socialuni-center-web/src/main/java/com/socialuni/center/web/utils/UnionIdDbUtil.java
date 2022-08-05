@@ -10,7 +10,7 @@ import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.dev.DevAccountDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
@@ -57,31 +57,31 @@ public class UnionIdDbUtil {
     }
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
-        UserDO user = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
         return getContentIdsByUnionIds(contentUnionIds, ContentType.talk, user);
     }
 
-    public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds, UserDO user) {
+    public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds, SocialUserDO user) {
         return getContentIdsByUnionIds(contentUnionIds, ContentType.talk, user);
     }
 
-    public static List<Integer> getContentIdsByUserUnionIds(List<String> contentUnionIds, UserDO user) {
+    public static List<Integer> getContentIdsByUserUnionIds(List<String> contentUnionIds, SocialUserDO user) {
         return getContentIdsByUnionIds(contentUnionIds, ContentType.user, user);
     }
 
-    public static List<Integer> getContentIdsByUserImgUnionIds(List<String> contentUnionIds, UserDO user) {
+    public static List<Integer> getContentIdsByUserImgUnionIds(List<String> contentUnionIds, SocialUserDO user) {
         return getContentIdsByUnionIds(contentUnionIds, ContentType.userImg, user);
     }
 
-    public static List<Integer> getContentIdsByCommentUnionIds(List<String> contentUnionIds, UserDO user) {
+    public static List<Integer> getContentIdsByCommentUnionIds(List<String> contentUnionIds, SocialUserDO user) {
         return getContentIdsByUnionIds(contentUnionIds, ContentType.comment, user);
     }
 
-    public static List<Integer> getContentIdsByMessageUnionIds(List<String> contentUnionIds, UserDO user) {
+    public static List<Integer> getContentIdsByMessageUnionIds(List<String> contentUnionIds, SocialUserDO user) {
         return getContentIdsByUnionIds(contentUnionIds, ContentType.message, user);
     }
 
-    public static List<Integer> getContentIdsByUnionIds(List<String> contentUnionIds, String contentType, UserDO user) {
+    public static List<Integer> getContentIdsByUnionIds(List<String> contentUnionIds, String contentType, SocialUserDO user) {
         List<Integer> ids = new ArrayList<>();
         if (ObjectUtil.isNotEmpty(contentUnionIds)) {
             for (String contentUnionId : contentUnionIds) {
@@ -100,7 +100,7 @@ public class UnionIdDbUtil {
     }
 
 
-    private static String addUnionIdDO(String contentType, Integer contentId, UserDO user) {
+    private static String addUnionIdDO(String contentType, Integer contentId, SocialUserDO user) {
         //如果这两个都不为空则查找是否存在有效的
         Integer userId = null;
         if (user != null) {
@@ -109,7 +109,7 @@ public class UnionIdDbUtil {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
     }
 
-    private static String addUnionIdDO(String contentType, Integer contentId, UserDO user, Integer devId) {
+    private static String addUnionIdDO(String contentType, Integer contentId, SocialUserDO user, Integer devId) {
         //如果这两个都不为空则查找是否存在有效的
         Integer userId = null;
         if (user != null) {
@@ -240,12 +240,12 @@ public class UnionIdDbUtil {
     }
 
     public static Integer getResultByUnionId(String contentType, String unionId) {
-        UserDO user = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
         return UnionIdDbUtil.getResultByUnionId(contentType, unionId, user);
     }
 
     //根据uid获取真实id
-    public static Integer getResultByUnionId(String contentType, String unionId, UserDO user) {
+    public static Integer getResultByUnionId(String contentType, String unionId, SocialUserDO user) {
 //        Integer resultRO = new (user.getId());
 //        return resultRO;
 
@@ -295,7 +295,7 @@ public class UnionIdDbUtil {
     }
 
 
-    public static Integer getTalkIdByUnionId(String unionId, UserDO user) {
+    public static Integer getTalkIdByUnionId(String unionId, SocialUserDO user) {
         return getResultByUnionId(ContentType.talk, unionId, user);
     }
 
@@ -303,7 +303,7 @@ public class UnionIdDbUtil {
         return getResultByUnionId(ContentType.talk, unionId);
     }
 
-    public static Integer getCommentIdByUid(String unionId, UserDO user) {
+    public static Integer getCommentIdByUid(String unionId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.comment, unionId, user);
     }
@@ -314,28 +314,28 @@ public class UnionIdDbUtil {
     }
 
     public static Integer getUserIdByUid(String unionId) {
-        UserDO user = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.user, unionId, user);
     }
 
-    public static Integer getUserIdByUid(String unionId, UserDO user) {
+    public static Integer getUserIdByUid(String unionId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.user, unionId, user);
     }
 
-    public static Integer getUserImgIdByUid(String unionId, UserDO user) {
+    public static Integer getUserImgIdByUid(String unionId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.userImg, unionId, user);
     }
 
     public static Integer getUserImgIdByUid(String unionId) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return getResultByUnionId(ContentType.userImg, unionId, mineUser);
     }
 
-    public static Integer getMessageIdByUid(String unionId, UserDO user) {
+    public static Integer getMessageIdByUid(String unionId, SocialUserDO user) {
         Integer messageIdResult = getResultByUnionId(ContentType.message, unionId, user);
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return messageIdResult;
@@ -343,7 +343,7 @@ public class UnionIdDbUtil {
 
     //如果包含用户id和devid，则先查询，是否已经有了，
     //否则新建
-    public static String createTalkUid(Integer modeId, UserDO user) {
+    public static String createTalkUid(Integer modeId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.talk, modeId, user);
     }
@@ -378,7 +378,7 @@ public class UnionIdDbUtil {
         return addUnionIdDO(ContentType.comment, modeId, mineId);
     }
 
-    public static String createCommentUid(Integer modeId, UserDO user) {
+    public static String createCommentUid(Integer modeId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.comment, modeId, user);
     }
@@ -402,7 +402,7 @@ public class UnionIdDbUtil {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.talkImg, Integer.valueOf(contentId), mineId);
     }
-    public static String createUserImgUid(Integer modeId, UserDO user) {
+    public static String createUserImgUid(Integer modeId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.userImg, modeId, user);
     }

@@ -1,7 +1,7 @@
 package com.socialuni.center.web.config;
 
 import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.RedisUtil;
@@ -35,7 +35,7 @@ public class WebInterceptor extends SocialWebRequestLogInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
-        UserDO user = CenterUserUtil.getMineUserInterceptor();
+        SocialUserDO user = CenterUserUtil.getMineUserInterceptor();
         Integer userId = CenterUserUtil.getMineUserIdInterceptor();
 
         requestLogDO.setUserId(userId);

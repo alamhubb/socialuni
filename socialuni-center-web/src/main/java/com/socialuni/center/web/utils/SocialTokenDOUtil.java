@@ -1,6 +1,6 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.web.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.exception.SocialUserTokenExpireException;
 import com.socialuni.center.web.repository.CommonTokenRepository;
@@ -22,12 +22,12 @@ public class SocialTokenDOUtil {
         SocialTokenDOUtil.commonTokenRepository = commonTokenRepository;
     }
 
-    public static TokenDO getCommonTokenDOAllowNull() {
+    public static SocialTokenDO getCommonTokenDOAllowNull() {
         String token = SocialTokenUtil.getToken();
         return SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
     }
 
-    public static TokenDO getCommonTokenDOAllowNull(String token) {
+    public static SocialTokenDO getCommonTokenDOAllowNull(String token) {
         if (StringUtils.isEmpty(token)) {
             return null;
         }
@@ -37,7 +37,7 @@ public class SocialTokenDOUtil {
         }
         //解析token
         Integer userId = Integer.valueOf(userKey);
-        TokenDO tokenDO = commonTokenRepository.findOneByToken(token);
+        SocialTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
         if (tokenDO == null) {
             return null;
         }

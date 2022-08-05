@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage;
 
 import com.socialuni.center.web.model.DO.user.SocialUserFansDetailDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.redis.UserFansDetailRedis;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class SocialUserFansDetailManage {
     @Resource
     private UserFansDetailRedis userFansDetailRedis;
 
-    public SocialUserFansDetailDO getOrCreateUserFollowDetail(UserDO mineUser) {
+    public SocialUserFansDetailDO getOrCreateUserFollowDetail(SocialUserDO mineUser) {
         SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(mineUser.getId());
         if (socialUserFansDetailDO == null) {
             socialUserFansDetailDO = new SocialUserFansDetailDO(mineUser);
@@ -22,7 +22,7 @@ public class SocialUserFansDetailManage {
         return socialUserFansDetailDO;
     }
 
-    public SocialUserFansDetailDO createUserDetailFollow(UserDO mineUser) {
+    public SocialUserFansDetailDO createUserDetailFollow(SocialUserDO mineUser) {
         SocialUserFansDetailDO socialUserFansDetailDO = new SocialUserFansDetailDO(mineUser);
         socialUserFansDetailDO = userFansDetailRedis.save(socialUserFansDetailDO);
         return socialUserFansDetailDO;

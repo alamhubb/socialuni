@@ -10,8 +10,8 @@ import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.manage.TokenManage;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.model.DO.user.TokenDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
@@ -65,7 +65,7 @@ public class CenterLoginService {
     }*/
 
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        UserDO mineUser = CenterUserUtil.getMineUserNotNull(loginData.getCode());
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull(loginData.getCode());
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
 
@@ -78,7 +78,7 @@ public class CenterLoginService {
 //        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
-        UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+        SocialUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(ContentType.user, mineUser.getId());
         /*if (uniContentUnionIdDO == null) {
@@ -98,7 +98,7 @@ public class CenterLoginService {
 
         CenterMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
-        TokenDO tokenDO = tokenManage.create(socialMineUserDetailRO.getId());
+        SocialTokenDO tokenDO = tokenManage.create(socialMineUserDetailRO.getId());
 
         //生成返回对象
         SocialLoginRO<CenterMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();

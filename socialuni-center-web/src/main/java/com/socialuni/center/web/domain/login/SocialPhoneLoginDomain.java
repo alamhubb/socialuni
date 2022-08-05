@@ -3,8 +3,8 @@ package com.socialuni.center.web.domain.login;
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.manage.TokenManage;
 import com.socialuni.center.web.store.SocialUserDeviceLoginHistoryStore;
-import com.socialuni.center.web.model.DO.user.TokenDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
@@ -25,11 +25,11 @@ public class SocialPhoneLoginDomain {
 
     @Transactional
     public SocialLoginRO<SocialMineUserDetailRO> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+        SocialUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
         SocialMineUserDetailRO userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        TokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
+        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
 
 //        SocialUserDeviceLoginHistoryDO socialUserDeviceLoginHistoryDO = new SocialUserDeviceLoginHistoryDO();
 

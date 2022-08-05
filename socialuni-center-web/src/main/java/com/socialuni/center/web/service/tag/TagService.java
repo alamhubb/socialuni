@@ -6,7 +6,7 @@ import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.model.DO.tag.TagTypeDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.repository.community.TagRepository;
 import com.socialuni.center.web.repository.community.TagTypeRepository;
@@ -38,7 +38,7 @@ public class TagService {
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    public List<TagDO> checkAndUpdateTagCount(UserDO user, List<Integer> tagIds, String talkOperateType, String talkGender) {
+    public List<TagDO> checkAndUpdateTagCount(SocialUserDO user, List<Integer> tagIds, String talkOperateType, String talkGender) {
         List<TagDO> tagDOList = new ArrayList<>();
 
 //        Integer devId = DevAccountUtils.getDevId();

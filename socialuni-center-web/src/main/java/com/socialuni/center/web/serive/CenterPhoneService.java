@@ -5,7 +5,7 @@ import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.center.web.model.DO.dev.DevAccountDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import com.socialuni.center.web.model.RO.user.phone.SocialSendAuthCodeQO;
@@ -34,14 +34,14 @@ public class CenterPhoneService {
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
-        UserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+        SocialUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
         //中心授权
         SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
         return ResultRO.success(centerLoginRO);
     }
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
-        UserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }

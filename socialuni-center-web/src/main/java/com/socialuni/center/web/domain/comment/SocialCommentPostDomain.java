@@ -9,7 +9,7 @@ import com.socialuni.center.web.service.content.ModelContentCheck;
 import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
@@ -46,7 +46,7 @@ public class SocialCommentPostDomain {
     private ModelContentCheck modelContentCheck;
 
 
-    public SocialCommentRO postComment(UserDO mineUser, SocialCommentPostQO addQO) {
+    public SocialCommentRO postComment(SocialUserDO mineUser, SocialCommentPostQO addQO) {
         //校验comment
         CommentAddLineTransfer commentAddLineTransfer = this.checkCommentAddVO(
                 mineUser,
@@ -76,7 +76,7 @@ public class SocialCommentPostDomain {
 
 
     //校验添加新增comment的评论是否正确
-    private CommentAddLineTransfer checkCommentAddVO(UserDO requestUser, SocialCommentPostQO addVO) {
+    private CommentAddLineTransfer checkCommentAddVO(SocialUserDO requestUser, SocialCommentPostQO addVO) {
         //校验内容是否违规
         modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
 

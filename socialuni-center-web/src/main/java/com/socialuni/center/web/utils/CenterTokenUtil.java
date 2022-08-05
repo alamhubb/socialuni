@@ -1,7 +1,7 @@
 package com.socialuni.center.web.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.center.web.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.dev.ThirdUserTokenRepository;
@@ -31,7 +31,7 @@ public class CenterTokenUtil {
         return CenterTokenUtil.getThirdUserTokenDO(token);
     }
 
-    public static TokenDO getUserTokenDO() {
+    public static SocialTokenDO getUserTokenDO() {
         String token = SocialTokenUtil.getToken();
         return SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
     }

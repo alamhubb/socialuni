@@ -2,8 +2,8 @@ package com.socialuni.center.web.domain.user;
 
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.model.DO.user.UserImgDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.center.web.repository.UserImgRepository;
@@ -19,8 +19,8 @@ public class SocialDeleteUserImgDomain {
     @Resource
     UserImgRepository userImgRepository;
 
-    public SocialMineUserDetailRO deleteUserImg(SocialUserImgDeleteQO img, UserDO mineUser) {
-        UserImgDO userImg = userImgRepository.getUserImgByUserIdAndId(mineUser.getId(), img.getUserImgId());
+    public SocialMineUserDetailRO deleteUserImg(SocialUserImgDeleteQO img, SocialUserDO mineUser) {
+        SocialUserImgDO userImg = userImgRepository.getUserImgByUserIdAndId(mineUser.getId(), img.getUserImgId());
         userImg.setStatus(ContentStatus.delete);
         userImg.setUpdateTime(new Date());
         userImgRepository.save(userImg);

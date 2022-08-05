@@ -2,7 +2,7 @@ package com.socialuni.center.web.entity;
 
 import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
 import com.socialuni.center.web.redis.SocialUserPhoneRedis;
 import com.socialuni.center.web.utils.SocialUserUtil;
@@ -18,12 +18,12 @@ public class CenterDevAccountEntity {
     @Resource
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public UserDO getOrCreateDevAccountUserDO(DevAccountDO devAccountDO) {
+    public SocialUserDO getOrCreateDevAccountUserDO(DevAccountDO devAccountDO) {
         String phoneNum = devAccountDO.getPhoneNum();
 
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
 
-        UserDO mineUser;
+        SocialUserDO mineUser;
         if (socialUserPhoneDO == null) {
             //如果没注册账号，则直接注册
             //            throw new SocialBusinessException("默认使用开发者账号绑定的手机号对应的清池账号进行测试，请登录清池注册后测试");

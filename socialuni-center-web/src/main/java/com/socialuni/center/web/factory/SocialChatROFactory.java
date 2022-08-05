@@ -10,7 +10,7 @@ import com.socialuni.center.web.model.DO.chat.ChatDO;
 import com.socialuni.center.web.model.DO.chat.ChatUserDO;
 import com.socialuni.center.web.model.DO.message.MessageDO;
 import com.socialuni.center.web.model.DO.message.MessageReceiveDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.message.chat.ChatRO;
 import com.socialuni.center.web.model.RO.message.message.SocialMessageRO;
 import com.socialuni.center.web.constant.CommonConst;
@@ -133,7 +133,7 @@ public class SocialChatROFactory {
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
         if (!ChatType.systemChats.contains(chatRO.getType())) {
-            UserDO receiveUser = SocialUserUtil.getNotNull(chatUserDO.getReceiveUserId());
+            SocialUserDO receiveUser = SocialUserUtil.getNotNull(chatUserDO.getReceiveUserId());
 
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setNickname(receiveUser.getAvatar());

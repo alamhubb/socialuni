@@ -5,7 +5,7 @@ import com.socialuni.center.web.store.SocialCircleRedis;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.center.web.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.center.web.model.RO.community.circle.SocialCircleRO;
@@ -23,7 +23,7 @@ public class SocialCircleService {
     @Resource
     private SocialCircleRedis socialCircleRedis;
 
-    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, UserDO user) {
+    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialUserDO user) {
         SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), user);
         circleDO = socialCircleRepository.save(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));

@@ -7,7 +7,7 @@ import com.socialuni.center.web.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.center.web.model.DO.HomeSwiperDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.HomeSwiperVO;
 import com.socialuni.center.web.model.QO.FrontErrorLogVO;
 import com.socialuni.center.web.model.RO.app.SocialAppLaunchDataRO;
@@ -46,7 +46,7 @@ public class SocialAppService {
     }
 
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
-        UserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         return socialFrontLogDomain.sendErrorLog(frontErrorLogVO);
     }
 }

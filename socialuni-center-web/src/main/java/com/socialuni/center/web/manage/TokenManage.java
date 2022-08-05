@@ -1,7 +1,7 @@
 package com.socialuni.center.web.manage;
 
 import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.center.web.model.DO.user.TokenDO;
+import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.center.web.repository.CommonTokenRepository;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import org.springframework.stereotype.Service;
@@ -14,14 +14,14 @@ public class TokenManage {
     @Resource
     CommonTokenRepository commonTokenRepository;
 
-    public TokenDO create(Integer userId) {
+    public SocialTokenDO create(Integer userId) {
         String token = SocialTokenUtil.generateTokenByUserId(userId);
-        TokenDO commonUserTokenDO = this.create(userId, token);
+        SocialTokenDO commonUserTokenDO = this.create(userId, token);
         return commonUserTokenDO;
     }
 
-    public TokenDO create(Integer userId, String token) {
-        TokenDO commonUserTokenDO = new TokenDO();
+    public SocialTokenDO create(Integer userId, String token) {
+        SocialTokenDO commonUserTokenDO = new SocialTokenDO();
         commonUserTokenDO.setToken(token);
         commonUserTokenDO.setUserId(userId);
         Date curDate = new Date();

@@ -5,7 +5,7 @@ import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.dao.CommentDao;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.social.utils.SystemUtil;
@@ -35,12 +35,12 @@ public class SocialCommentROFactory {
         SocialCommentROFactory.commentRepository = commentRepository;
     }
 
-    public static SocialCommentRO newTalkCommentRO(UserDO mineUser, CommentDO comment, boolean showAll) {
+    public static SocialCommentRO newTalkCommentRO(SocialUserDO mineUser, CommentDO comment, boolean showAll) {
         SocialCommentRO socialCommentRO = new SocialCommentRO();
         socialCommentRO.setId(comment.getId());
         socialCommentRO.setNo(comment.getNo());
 
-        UserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
+        SocialUserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
         SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);
         socialCommentRO.setUser(commentUserRO);
 
@@ -60,7 +60,7 @@ public class SocialCommentROFactory {
         return socialCommentRO;
     }
 
-    public static List<SocialCommentRO> getTalkCommentROs(UserDO mineUser, Integer talkId, Boolean showAllComment) {
+    public static List<SocialCommentRO> getTalkCommentROs(SocialUserDO mineUser, Integer talkId, Boolean showAllComment) {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
         List<CommentDO> commentDOS;
@@ -74,7 +74,7 @@ public class SocialCommentROFactory {
         return commentVOS;
     }
 
-    public static List<SocialCommentRO> getCommentChildCommentROs(UserDO mineUser, Integer commentId, Boolean showAllComment) {
+    public static List<SocialCommentRO> getCommentChildCommentROs(SocialUserDO mineUser, Integer commentId, Boolean showAllComment) {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
         List<CommentDO> commentDOS;
@@ -89,7 +89,7 @@ public class SocialCommentROFactory {
     }
 
 
-    private static List<SocialCommentRO> newTalkCommentVOs(UserDO mineUser, List<CommentDO> commentDOS, boolean showAll) {
+    private static List<SocialCommentRO> newTalkCommentVOs(SocialUserDO mineUser, List<CommentDO> commentDOS, boolean showAll) {
         return commentDOS.stream()
                 //过滤掉非自己的预审核状态的评论
                 .filter(talkCommentDO -> {

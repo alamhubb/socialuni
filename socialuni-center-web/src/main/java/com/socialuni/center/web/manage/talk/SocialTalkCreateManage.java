@@ -1,6 +1,6 @@
 package com.socialuni.center.web.manage.talk;
 
-import com.socialuni.center.web.model.DO.user.UserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.DO.DistrictDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.factory.TalkDOFactory;
@@ -17,7 +17,7 @@ public class SocialTalkCreateManage {
     @Resource
     TalkRedis talkRedis;
 
-    public TalkDO createTalkDO(UserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
+    public TalkDO createTalkDO(SocialUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
         TalkDO talkDO = TalkDOFactory.newTalkDO(user, socialTalkPostQO, district);
         //保存说说
         talkDO = talkRedis.save(talkDO);

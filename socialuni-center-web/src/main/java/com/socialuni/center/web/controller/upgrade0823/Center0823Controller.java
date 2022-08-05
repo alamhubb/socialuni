@@ -1,22 +1,11 @@
 package com.socialuni.center.web.controller.upgrade0823;
 
-import com.socialuni.center.web.factory.DO.UnionIdDOFactory;
-import com.socialuni.center.web.model.DO.UnionIdDO;
-import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentType;
-import com.socialuni.center.web.model.DO.user.UserDO;
-import com.socialuni.center.web.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.center.web.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.xml.crypto.Data;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author qinkaiyuan
