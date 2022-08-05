@@ -36,12 +36,12 @@ public class SocialAppConfig {
     }
 
 
-    @Value("${socialuni.secret-key}")
+    @Value("${socialuni.secret-key:null}")
     public void setSocialuniDevSecretKey(String socialuniDevSecretKey) {
         SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
     }
 
-    @Value("${socialuni.center-socialuni-id}")
+    @Value("${socialuni.center-socialuni-id:null}")
     public void setCenterSocialuniId(String centerSocialuniId) {
         SocialAppConfig.centerSocialuniId = centerSocialuniId;
     }
@@ -64,12 +64,16 @@ public class SocialAppConfig {
 
     //是否配置了中心服务器
     public static boolean hasCenterServer() {
+        System.out.println(centerSocialuniId);
         //为空则异常
-        return StringUtils.isNotEmpty(centerSocialuniId);
+        return StringUtils.isNotEmpty(getCenterSocialuniId());
     }
 
     //是否配置了中心服务器
     public static String getCenterSocialuniId() {
+        if (StringUtils.isEmpty(centerSocialuniId) || centerSocialuniId.length() != 32) {
+            return null;
+        }
         //为空则异常
         return centerSocialuniId;
     }

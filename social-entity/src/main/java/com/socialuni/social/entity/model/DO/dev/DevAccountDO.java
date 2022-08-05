@@ -21,6 +21,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = {"secretKey"}),
                 @UniqueConstraint(columnNames = {"devNum"}),
                 @UniqueConstraint(columnNames = {"phoneNum"}),
+                @UniqueConstraint(columnNames = {"socialuniId"}),
         }
 )
 public class DevAccountDO extends CommonContentBaseDO implements Serializable {
