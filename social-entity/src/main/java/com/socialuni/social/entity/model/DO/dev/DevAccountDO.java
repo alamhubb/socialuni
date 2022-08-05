@@ -31,7 +31,6 @@ public class DevAccountDO extends CommonContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Long devNum;
     //个人身份证，企业税号
-    @Column(columnDefinition = "varchar(255) default ''")
     private String identityNum;
     @Column(nullable = false, columnDefinition = "varchar(255) default '" + GenderType.all + "'")
     private String appGenderType;

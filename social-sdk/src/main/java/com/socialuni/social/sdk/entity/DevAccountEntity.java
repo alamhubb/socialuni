@@ -49,6 +49,7 @@ public class DevAccountEntity {
         String secretKey = UUIDUtil.getUUID();
         devAccountDO.setSecretKey(secretKey);
         devAccountDO.setPhoneNum(phoneNum);
+        devAccountDO.setIdentityNum(null);
 //        devAccountDO.setSecretKey(UUIDUtil.getUUID());
         devAccountDO.setAppGenderType(GenderType.all);
         devAccountDO.setDevNum(curDevNum);
