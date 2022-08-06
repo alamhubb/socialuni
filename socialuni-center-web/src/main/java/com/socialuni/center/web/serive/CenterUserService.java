@@ -1,5 +1,6 @@
 package com.socialuni.center.web.serive;
 
+import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.model.QO.user.CenterUserIdQO;
 import com.socialuni.center.web.model.QO.user.CenterUserImgDeleteQO;
 import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
@@ -18,8 +19,10 @@ import com.socialuni.center.web.platform.tencent.TencentCloud;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -41,15 +44,16 @@ public class CenterUserService {
 
     public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
         Integer dataDevId = DevAccountUtils.getDataOriginalDevIdNotNull();
-        SocialUserDO mineUserDO = null;
-//        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(loginQO.getUnionId()));
-//        if (uniContentUnionIdDO != null) {
-//            mineUserDO = SocialUserUtil.getNotNull(uniContentUnionIdDO.getContentId());
-//        } else {
-//            mineUserDO = socialuniUserRegistryDomain.registryUser(dataDevId, loginQO);
-//            uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataOriginalDevIdNotNull(), Integer.valueOf(loginQO.getUnionId()), DevAccountUtils.getDevIdNotNull(), mineUserDO.getId());
-//            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
-//        }
+        Integer thirdUserId = Integer.valueOf(loginQO.getUnionId());
+        SocialUserDO mineUserDO;
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByOriginalDevIdAndOriginalContentUnionId(dataDevId, thirdUserId);
+        if (uniContentUnionIdDO != null) {
+            mineUserDO = SocialUserUtil.getNotNull(uniContentUnionIdDO.getContentId());
+        } else {
+            mineUserDO = socialuniUserRegistryDomain.registryUser(dataDevId, loginQO);
+            UnionIdDbUtil.createUserUid(mineUserDO);
+            //生成id
+        }
         CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
         return new ResultRO<>(mineUser);
     }
