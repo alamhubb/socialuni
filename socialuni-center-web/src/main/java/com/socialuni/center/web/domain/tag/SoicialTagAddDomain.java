@@ -5,7 +5,7 @@ import com.socialuni.center.web.manage.SocialTagManage;
 import com.socialuni.center.web.platform.tencent.TencentCloud;
 import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.service.comment.IllegalWordService;
-import com.socialuni.cloud.config.SocialAppEnv;
+import com.socialuni.center.web.config.SocialAppEnv;
 import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;

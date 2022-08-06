@@ -4,7 +4,7 @@ import com.socialuni.center.web.constant.AppConfigConst;
 import com.socialuni.center.web.constant.ErrorMsg;
 import com.socialuni.center.web.manage.phone.SocialUserPhoneManage;
 import com.socialuni.center.web.redis.SocialUserPhoneRedis;
-import com.socialuni.cloud.tencent.TencentSmsServe;
+import com.socialuni.center.web.utils.TencentSmsServe;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.constant.StatusConst;

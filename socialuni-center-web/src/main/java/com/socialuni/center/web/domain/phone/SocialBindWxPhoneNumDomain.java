@@ -12,7 +12,7 @@ import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.center.web.utils.UniProviderUtil;
-import com.socialuni.social.utils.JsonUtil;
+import com.socialuni.social.web.sdk.utils.JsonUtil;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import lombok.extern.slf4j.Slf4j;

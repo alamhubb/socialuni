@@ -13,7 +13,7 @@ import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.ReportRepository;
-import com.socialuni.social.utils.DateUtils;
+import com.socialuni.center.web.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

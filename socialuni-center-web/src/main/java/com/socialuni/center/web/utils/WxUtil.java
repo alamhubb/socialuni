@@ -16,7 +16,7 @@ import com.socialuni.center.web.model.DO.user.SocialUserAccountDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.center.web.repository.user.SocialUserAccountRepository;
-import com.socialuni.social.utils.UUIDUtil;
+import com.socialuni.social.web.sdk.utils.UUIDUtil;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;

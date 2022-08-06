@@ -21,15 +21,6 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni</groupId>
-            <artifactId>socialuni-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
             <artifactId>social-web-sdk</artifactId>
         </dependency>
         <dependency>
@@ -38,19 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>
-            <artifactId>social-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
             <artifactId>social-exception</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-entity</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-utils</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,10 +50,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>cloud-service</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

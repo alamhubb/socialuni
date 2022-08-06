@@ -1,4 +1,4 @@
-package com.socialuni.social.utils;
+package com.socialuni.social.web.sdk.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

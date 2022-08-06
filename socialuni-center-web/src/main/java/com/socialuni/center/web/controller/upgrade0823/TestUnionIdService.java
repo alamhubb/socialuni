@@ -9,7 +9,7 @@ import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.center.web.domain.phone.SocialBindUserSocialuniAccountDomain;
 import com.socialuni.center.web.repository.UserRepository;
-import com.socialuni.social.utils.UUIDUtil;
+import com.socialuni.social.web.sdk.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

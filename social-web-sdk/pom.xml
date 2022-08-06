@@ -50,10 +50,6 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni</groupId>
-            <artifactId>social-utils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
             <artifactId>social-exception</artifactId>
         </dependency>
         <dependency>

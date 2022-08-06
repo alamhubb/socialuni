@@ -1,4 +1,4 @@
-package com.socialuni.social.utils;
+package com.socialuni.center.web.utils;
 
 import com.socialuni.social.exception.SocialBusinessException;
 import org.apache.commons.lang3.StringUtils;

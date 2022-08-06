@@ -11,7 +11,7 @@ import com.socialuni.center.web.model.DO.ReportDetailDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.ReportDetailUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.utils.DateUtils;
+import com.socialuni.center.web.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

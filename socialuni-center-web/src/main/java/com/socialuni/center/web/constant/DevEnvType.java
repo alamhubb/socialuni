@@ -1,4 +1,4 @@
-package com.socialuni.cloud.constant;
+package com.socialuni.center.web.constant;
 
 public class DevEnvType {
     public static final String prod = "prod";

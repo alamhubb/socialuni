@@ -18,7 +18,7 @@ import com.socialuni.center.web.platform.tencent.TencentCloud;
 import com.socialuni.center.web.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.center.web.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.center.web.utils.common.BirthdayAgeUtil;
-import com.socialuni.social.utils.DateUtils;
+import com.socialuni.center.web.utils.DateUtils;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.tencentcloudapi.ocr.v20181119.models.IDCardOCRRequest;

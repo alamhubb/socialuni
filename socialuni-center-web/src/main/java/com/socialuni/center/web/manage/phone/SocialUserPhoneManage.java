@@ -9,7 +9,7 @@ import com.socialuni.center.web.redis.SocialUserPhoneRedis;
 import com.socialuni.center.web.repository.user.SocialUserPhoneRepository;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.utils.PhoneNumUtil;
+import com.socialuni.center.web.utils.PhoneNumUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

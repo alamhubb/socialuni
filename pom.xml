@@ -20,14 +20,11 @@
 
     <modules>
         <module>social-constant</module>
-        <module>social-utils</module>
         <module>social-api-model</module>
         <module>social-exception</module>
         <module>social-web-sdk</module>
-        <module>socialuni-utils</module>
         <module>socialuni-center-web</module>
         <module>socialuni-admin-web</module>
-        <module>cloud-service</module>
     </modules>
 
     <properties>
@@ -50,11 +47,6 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>social-utils</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
                 <artifactId>social-api-model</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
@@ -66,21 +58,6 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-web-sdk</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-api</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-utils</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>cloud-service</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->

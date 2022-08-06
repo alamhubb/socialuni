@@ -2,7 +2,7 @@ package com.socialuni.center.web.config.websocket;
 
 
 import com.socialuni.center.web.model.NotifyVO;
-import com.socialuni.social.utils.IntegerUtils;
+import com.socialuni.center.web.utils.IntegerUtils;
 import com.socialuni.center.web.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

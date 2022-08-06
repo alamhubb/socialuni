@@ -15,7 +15,7 @@ import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.SocialReportAddQO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.utils.DateUtils;
+import com.socialuni.center.web.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

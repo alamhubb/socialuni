@@ -19,7 +19,7 @@ import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.repository.user.SocialUserAccountRepository;
-import com.socialuni.social.utils.JsonUtil;
+import com.socialuni.social.web.sdk.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;

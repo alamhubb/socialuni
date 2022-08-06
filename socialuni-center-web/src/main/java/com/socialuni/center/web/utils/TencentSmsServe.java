@@ -1,10 +1,9 @@
-package com.socialuni.cloud.tencent;
+package com.socialuni.center.web.utils;
 
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
-import com.socialuni.cloud.config.SocialAppEnv;
+import com.socialuni.center.web.config.SocialAppEnv;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.utils.AuthCodeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

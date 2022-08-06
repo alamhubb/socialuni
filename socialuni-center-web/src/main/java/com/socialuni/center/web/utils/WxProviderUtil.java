@@ -7,7 +7,7 @@ import com.socialuni.center.web.platform.WxDecode;
 import com.socialuni.center.web.utils.common.RestUtil;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.exception.UniSdkException;
-import com.socialuni.social.utils.JsonUtil;
+import com.socialuni.social.web.sdk.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;

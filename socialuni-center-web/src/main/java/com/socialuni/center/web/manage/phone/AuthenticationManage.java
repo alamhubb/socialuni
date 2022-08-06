@@ -5,7 +5,7 @@ import com.socialuni.center.web.model.DO.AuthenticationDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.constant.AppConfigConst;
 import com.socialuni.center.web.repository.AuthenticationRepository;
-import com.socialuni.social.utils.IntegerUtils;
+import com.socialuni.center.web.utils.IntegerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

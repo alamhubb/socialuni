@@ -3,7 +3,7 @@ package com.socialuni.center.web.factory.DO;
 import com.socialuni.center.web.model.DO.UnionIdDO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.social.utils.ObjectUtil;
+import com.socialuni.center.web.utils.ObjectUtil;
 
 import java.util.Date;
 

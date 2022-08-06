@@ -3,7 +3,7 @@ package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.constant.ErrorMsg;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.social.utils.DateUtils;
+import com.socialuni.center.web.utils.DateUtils;
 
 import java.text.MessageFormat;
 import java.util.Date;

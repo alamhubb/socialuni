@@ -1,11 +1,6 @@
 package com.socialuni.social.web.sdk.utils;
 
-import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.exception.SocialNullUserException;
-import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.social.utils.UUIDUtil;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -1,14 +1,14 @@
 package com.socialuni.center.web.entity;
 
 import com.socialuni.center.web.constant.AdminAppConfigConst;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.redis.DevAccountRedis;
 import com.socialuni.center.web.repository.community.TagRepository;
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.DevAccountType;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
-import com.socialuni.social.utils.UUIDUtil;
+import com.socialuni.social.web.sdk.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,4 +1,4 @@
-package com.socialuni.cloud.config;
+package com.socialuni.center.web.config;
 
 import org.springframework.context.annotation.Import;
 

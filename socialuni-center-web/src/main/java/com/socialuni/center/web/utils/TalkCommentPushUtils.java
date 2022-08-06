@@ -12,7 +12,7 @@ import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.talk.TalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.social.utils.DateUtils;
+import com.socialuni.center.web.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

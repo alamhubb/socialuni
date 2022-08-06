@@ -8,7 +8,7 @@ import com.socialuni.center.web.model.DO.comment.CommentDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.utils.SocialUserUtil;
-import com.socialuni.social.utils.SystemUtil;
+import com.socialuni.center.web.utils.SystemUtil;
 import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

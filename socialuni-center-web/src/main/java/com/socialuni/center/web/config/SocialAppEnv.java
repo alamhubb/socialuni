@@ -1,6 +1,6 @@
-package com.socialuni.cloud.config;
+package com.socialuni.center.web.config;
 
-import com.socialuni.cloud.constant.DevEnvType;
+import com.socialuni.center.web.constant.DevEnvType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

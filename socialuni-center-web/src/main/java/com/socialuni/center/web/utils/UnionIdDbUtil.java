@@ -11,7 +11,7 @@ import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.utils.ObjectUtil;
+import com.socialuni.center.web.utils.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
