@@ -18,10 +18,6 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
         <!--        支持get请求-->
         <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient -->
         <dependency>

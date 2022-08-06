@@ -25,6 +25,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.tencent.cloud</groupId>
             <artifactId>cos-sts-java</artifactId>
             <version>3.0.6</version>

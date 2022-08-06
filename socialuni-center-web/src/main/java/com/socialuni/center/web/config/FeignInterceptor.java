@@ -48,15 +48,17 @@ public class FeignInterceptor implements RequestInterceptor {
 //        if (!postUrl.contains("user/registryUser")){
         System.out.println(postUrl);
         if (mineUser != null) {
-            Integer userUnionId = CenterUserUtil.getMineUserUnionId();
+            Integer mineUserId = mineUser.getId();
+            Integer mineUserUnionId = CenterUserUtil.getMineUserUnionId();
+            //主要是记录有没有的
             Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
-            UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserUnionId(centerDevId, userUnionId);
+            UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserId);
             //有没有可能你自己这边记录了，但是那边给你删掉了
             //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
             if (uniOutRegisterUserDO == null) {
-                uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, userUnionId);
+                uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserId);
                 uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
-                String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
+                String phoneNum = SocialUserUtil.getUserPhoneNum(mineUserId);
                 //生成登录类
                 SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
                 socialProviderLoginQO.setNickName(mineUser.getNickname());
@@ -64,7 +66,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
                 socialProviderLoginQO.setBirthday(mineUser.getBirthday());
                 socialProviderLoginQO.setCity(mineUser.getCity());
-                socialProviderLoginQO.setUnionId(mineUser.getId().toString());
+                socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
 
                 socialProviderLoginQO.setProvider(RequestUtil.getProvider());
                 socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
@@ -72,7 +74,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 socialProviderLoginQO.setPhoneNum(phoneNum);
                 socialuniUserAPI.registryUser(socialProviderLoginQO);
             }
-            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, userUnionId.toString());
+            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUserUnionId.toString());
         }
 //        }
 

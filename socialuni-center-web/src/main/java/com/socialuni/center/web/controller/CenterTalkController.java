@@ -1,5 +1,6 @@
 package com.socialuni.center.web.controller;
 
+import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.feignAPI.SocialuniTalkAPI;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
@@ -7,7 +8,6 @@ import com.socialuni.center.web.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.center.web.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.center.web.serive.CenterTalkService;
-import com.socialuni.center.web.serive.SocialuniTalkService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +19,7 @@ public class CenterTalkController implements SocialuniTalkAPI {
     @Resource
     private CenterTalkService centerTalkService;
     @Resource
-    private SocialuniTalkService socialuniTalkService;
+    private SocialuniTalkAPI socialuniTalkAPI;
 
     @Override
     public ResultRO<List<CenterTalkRO>> queryTalks() {
@@ -28,7 +28,10 @@ public class CenterTalkController implements SocialuniTalkAPI {
 
     @Override
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
-        return centerTalkService.queryTalks(queryQO);
+        if (SocialAppConfig.noCenterServer()) {
+            return centerTalkService.queryTalks(queryQO);
+        }
+        return socialuniTalkAPI.queryTalks(queryQO);
     }
 
     @Override

@@ -11,7 +11,6 @@ import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.center.web.utils.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -113,7 +112,7 @@ public class UnionIdDbUtil {
 
     //针对所有外部的数据，内部的数据，生成unionId。
 
-    private static Integer createUnionIdByQuery(UniContentIdRO uniContentIdRO) {
+    public static Integer createUnionIdByQuery(UniContentIdRO uniContentIdRO) {
         Integer fromDevId = DevAccountUtils.getCenterDevIdNotNull();
         //读
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountBySocialuniId(uniContentIdRO.getOriginalSocialuniId());
@@ -136,12 +135,12 @@ public class UnionIdDbUtil {
         return uniContentUnionIdDO.getId();
     }
 
-    private static Integer createUnionIdBySelfWrite(SocialContentIdCO socialContentIdRO) {
+    public static Integer createUnionIdBySelfWrite(SocialContentIdCO socialContentIdRO) {
         return createUnionIdByWrite(socialContentIdRO, null);
     }
 
 
-    private static Integer createUnionIdByWrite(SocialContentIdCO socialContentIdRO, Integer originalContentUnionId) {
+    public static Integer createUnionIdByWrite(SocialContentIdCO socialContentIdRO, Integer originalContentUnionId) {
         Integer originalDevId = DevAccountUtils.getDataOriginalDevIdNotNull();
         UniContentUnionIdDO uniContentUnionIdDO;
 

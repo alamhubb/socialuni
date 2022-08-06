@@ -40,8 +40,6 @@ public class CenterTalkService {
         if (SocialAppConfig.hasCenterServer()) {
             ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks();
             talkROS = resultRO.getData();
-
-
         } else {
             talkROS = centerHomeTalkQueryDomain.queryHomeTalks();
         }

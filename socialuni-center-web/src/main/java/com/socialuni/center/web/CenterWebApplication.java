@@ -15,25 +15,25 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@EnableFeignClients("com.socialuni.center")
 @ComponentScan("com.socialuni.center")
 @EnableJpaRepositories("com.socialuni.center")
-@EnableFeignClients("com.socialuni.center")
 @EntityScan("com.socialuni.center")
 @EnableTransactionManagement
 @EnableAsync
 @EnableCaching
 //复用feignBean不注册问题
-@EnableSocialuni
-@EnableSocialCloudServiceSDK
-@MapperScan("com.socialuni.center")
+@MapperScan("com.socialuni.center.web.mapper")
 @EnableSocialWebSDK
 //复用feignBean不注册问题
 @EnableConfigurationProperties({
+        SocialuniProperties.class,
         SocialuniAppProperties.class,
         SocialuniQQMapProperties.class,
         SocialuniCloudTencentCosProperties.class,
         SocialuniProviderQQProperties.class,
         SocialuniProviderWxProperties.class,
+        SocialuniCloudTencentSmsProperties.class,
         SocialuniUserProperties.class
 })
 public class CenterWebApplication {

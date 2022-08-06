@@ -39,7 +39,7 @@ public class CenterTalkROFactory {
         centerTalkRO.setUser(centerTalkUserRO);
         centerTalkRO.setImgs(imgs);
         centerTalkRO.setComments(comments);
-
+        centerTalkRO.setContentType(talkRO.getContentType());
         centerTalkRO.setContent(BirthdayAgeUtil.replaceAgeBetween10to18Str(talkRO.getContent()));
         centerTalkRO.setVisibleGender(talkRO.getVisibleGender());
         centerTalkRO.setUpdateTime(talkRO.getUpdateTime());

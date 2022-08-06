@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Table(name = "u_out_register_user",
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
-                @UniqueConstraint(columnNames = {"devId", "userUnionId"}),
+                @UniqueConstraint(columnNames = {"devId", "userId"}),
         }
 )
 @Data
@@ -21,10 +21,10 @@ public class UniOutRegisterUserDO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer devId;
-    private Integer userUnionId;
+    private Integer userId;
 
-    public UniOutRegisterUserDO(Integer devId, Integer userUnionId) {
+    public UniOutRegisterUserDO(Integer devId, Integer userId) {
         this.devId = devId;
-        this.userUnionId = userUnionId;
+        this.userId = userId;
     }
 }

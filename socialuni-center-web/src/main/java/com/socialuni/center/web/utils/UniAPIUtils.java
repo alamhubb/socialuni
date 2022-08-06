@@ -46,11 +46,11 @@ public class UniAPIUtils {
     public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         String dataSocialuniId = RequestUtil.getDataOriginalSocialuniId();
         //校验此条数据是否已经写入过。
-        String dataContentUnionIdStr = contentAddQO.getId();
+        Integer dataContentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
         DevAccountDO dataDevAccount = null;
         //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
-        if (StringUtils.isEmpty(dataSocialuniId) && !StringUtils.isEmpty(dataContentUnionIdStr)) {
+        if (StringUtils.isEmpty(dataSocialuniId) && dataContentUnionId != null) {
             //有一个为空
             throw new SocialParamsException("缺少数据所有者id");
         }
@@ -70,12 +70,12 @@ public class UniAPIUtils {
                 throw new SocialSystemException("逻辑错误，中心重复调用自己，或者秘钥泄露");
             }
             //仅仅是个校验，防止重复写入 ， dataSocialuniId都不空才能查，dataSociuni为空，则肯定thirdId为空
-            if (StringUtils.isNotEmpty(dataContentUnionIdStr)) {
+            if (dataContentUnionId != null) {
                 //如果已经存在此动态，则无需重复添加，直接返回
-//                UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByDataDevIdAndDataContentUnionId(dataDevId, Integer.valueOf(dataContentUnionIdStr));
-//                if (uniContentUnionIdDO != null) {
-//                    return null;
-//                }
+                UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByOriginalDevIdAndOriginalContentUnionId(dataDevId, dataContentUnionId);
+                if (uniContentUnionIdDO != null) {
+                    return null;
+                }
             }
         }
         //推送的需要校验，非推送的不用校验
@@ -83,27 +83,30 @@ public class UniAPIUtils {
         //不为空
         UniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
 
+
         //这就写入了数据，然后写入unionId表
         //如果自身为中心
-        UniContentUnionIdDO uniContentUnionIdDO = new UniContentUnionIdDO();
-        /*if (DevAccountUtils.pushServer()) {
+
+        contentAddQO.setContentType(contentType);
+
+        //无后台模式
+        if (dataContentUnionId == null) {
             //如果无后台模式会为空
-            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
-            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
-        } else {
-            //无后台模式
-            if (StringUtils.isEmpty(dataContentUnionIdStr)) {
-                //如果无后台模式会为空
-                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
-                uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
-            } else {
-                //中心了
-                uniContentUnionIdDO = new UniContentUnionIdDO(contentType, DevAccountUtils.getDataOriginalDevIdNotNull(), Integer.valueOf(dataContentUnionIdStr), DevAccountUtils.getDevIdNotNull(), socialuniContentIdRO.getId());
-                uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+            dataContentUnionId = UnionIdDbUtil.createUnionIdByWrite(socialuniContentIdRO, dataContentUnionId);
+            //错误，无后台，非pushserver，但是也可push
+//            if (DevAccountUtils.pushServer()) {
+            if (SocialAppConfig.hasCenterServer()) {
+                contentAddQO.setId(dataContentUnionId);
             }
-        }*/
-
-
+        } else {
+            //中心了
+            UnionIdDbUtil.createUnionIdByWrite(socialuniContentIdRO, dataContentUnionId);
+        }
+        //如果配置了中心
+        if (SocialAppConfig.hasCenterServer()) {
+            //数据id为空
+            callApi.apply(contentAddQO);
+        }
         //如果是中心 m则向所有子节点发请求， owner是传过来的， id自己的，秘钥自己的，从数据库里获取，自己对应对方的秘钥
 
         //如果是子应用 则向中心发请求， 秘钥配置在启动设置中， owner是自己的id，id也设置
@@ -120,19 +123,6 @@ public class UniAPIUtils {
         //给中心设置开发者秘钥，在应用启动时，判断是否设置了中心服务器，
 
 //        devAccountRepository.findAllByStatusAndApiUrlNotNullAndApiSecretKeyNotNull(CommonStatus.enable);
-
-
-        //如果配置了中心
-        if (SocialAppConfig.hasCenterServer()) {
-
-            //数据id为空
-            if (StringUtils.isEmpty(dataContentUnionIdStr) && DevAccountUtils.pushServer()) {
-                contentAddQO.setId(uniContentUnionIdDO.getId().toString());
-            }
-            callApi.apply(contentAddQO);
-        } else {
-
-        }
         return socialuniContentIdRO;
     }
 }
