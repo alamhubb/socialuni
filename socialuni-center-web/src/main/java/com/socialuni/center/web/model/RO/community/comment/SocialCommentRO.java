@@ -1,6 +1,7 @@
 package com.socialuni.center.web.model.RO.community.comment;
 
 
+import com.socialuni.center.web.model.DO.SocialContentIdCO;
 import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 
@@ -8,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class SocialCommentRO {
-    private Integer id;
-
+public class SocialCommentRO extends SocialContentIdCO {
     private Integer no;
 
     /**

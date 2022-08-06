@@ -2,20 +2,15 @@ package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.model.DO.SocialContentIdCO;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.model.DO.UnionIdDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.RO.community.UniContentIdRO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
-import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
-import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.center.web.model.RO.community.UniContentIdRO;
-import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.social.utils.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -24,8 +19,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 
@@ -254,10 +247,13 @@ public class UnionIdDbUtil {
         }
         //todo 这里直接返回了
         //存在数据库性能问题，使用真实id，兼容旧版本
-        if (UnionIdDbUtil.isInteger(unionId)) {
-            return Integer.valueOf(unionId);
+        if (!UnionIdDbUtil.isInteger(unionId)) {
+            throw new SocialParamsException("错误的内容标识2");
         }
-
+        Integer uId = Integer.valueOf(unionId);
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(uId);
+        return uniContentUnionIdDO.getContentId();
+/*
         //通用部分
         //判断uid有效
         Optional<UnionIdDO> contentUnionIdDOOptional = unionIdRepository.findFirstByUnionIdOrderByIdDesc(unionId);
@@ -291,7 +287,7 @@ public class UnionIdDbUtil {
         if (!(unionUserId == null || unionUserId.equals(userId))) {
             throw new SocialParamsException("错误的用户标示");
         }
-        return contentUnionIdDO.getContentId();
+        return contentUnionIdDO.getContentId();*/
     }
 
 
@@ -364,13 +360,8 @@ public class UnionIdDbUtil {
         return createUnionIdBySelfWrite(talkRO);
     }
 
-    public static String createCommentUid(CommentDO commentDO) {
-        return createCommentUid(commentDO.getId());
-    }
-
-    public static String createCommentUid(Integer modeId) {
-        Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
-        return createCommentUid(modeId, mineId);
+    public static Integer createCommentUid(SocialContentIdCO socialContentIdCO) {
+        return createUnionIdBySelfWrite(socialContentIdCO);
     }
 
     public static String createCommentUid(String modeId) {
@@ -392,6 +383,7 @@ public class UnionIdDbUtil {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return createUnionIdBySelfWrite(socialUserRO);
     }
+
     public static String addUnionIdDO(String contentType, String contentId, Integer userId) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(contentType, Integer.valueOf(contentId), userId);
@@ -402,11 +394,11 @@ public class UnionIdDbUtil {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.talkImg, Integer.valueOf(contentId), mineId);
     }
+
     public static String createUserImgUid(Integer modeId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
         return addUnionIdDO(ContentType.userImg, modeId, user);
     }
-
 
 
     public static boolean isInteger(String str) {

@@ -1,7 +1,8 @@
 package com.socialuni.center.web.model.DO.comment;
 
-import com.socialuni.center.web.model.DO.base.CommonContentBaseDO;
+import com.socialuni.center.web.model.DO.UniContentBaseDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
+import com.socialuni.social.constant.ContentType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,11 +20,7 @@ import java.io.Serializable;
         @Index(columnList = "reportContentType"),
 })
 @Data
-public class CommentDO extends CommonContentBaseDO implements BaseModelDO, Serializable {
-    //如果这个评论 有parent，就代表已经是一个子评论，就不用把他设置为parent而是用它的parentId，他是否有parent
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class CommentDO extends UniContentBaseDO implements BaseModelDO, Serializable {
     private String socialuniUid;
 
     private Integer no;
@@ -88,4 +85,8 @@ public class CommentDO extends CommonContentBaseDO implements BaseModelDO, Seria
     private Integer devId;
     //三方id，只有为三方自己查询的时候才显示
     private String threeId;
+
+    public CommentDO() {
+        super(ContentType.comment);
+    }
 }

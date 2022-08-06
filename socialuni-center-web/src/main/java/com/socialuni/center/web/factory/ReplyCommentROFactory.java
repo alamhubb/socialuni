@@ -7,6 +7,7 @@ import com.socialuni.center.web.utils.CommentUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.model.RO.community.comment.SocialReplyCommentRO;
 import com.socialuni.center.web.model.RO.user.base.SocialUserRO;
+import com.socialuni.social.constant.ContentType;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,7 @@ public class ReplyCommentROFactory {
         CommentDO comment = CommentUtils.get(replyCommentId);
         SocialReplyCommentRO socialReplyCommentRO = new SocialReplyCommentRO();
         socialReplyCommentRO.setId(comment.getId());
+        socialReplyCommentRO.setContentType(ContentType.comment);
 //        replyCommentRO.setNo(comment.getNo());
         SocialUserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
         SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);

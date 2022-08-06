@@ -16,8 +16,8 @@ import java.io.Serializable;
 public class SocialContentIdCO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
     private Integer id;
+    @Column(nullable = false, updatable = false)
     private String contentType;
 
     public SocialContentIdCO(String contentType) {

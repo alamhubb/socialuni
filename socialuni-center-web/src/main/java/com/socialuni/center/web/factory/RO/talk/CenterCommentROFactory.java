@@ -26,7 +26,7 @@ public class CenterCommentROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static CenterCommentRO getCommentRO(SocialCommentRO socialCommentRO, SocialUserDO mineUser) {
-        String id = UnionIdDbUtil.createCommentUid(socialCommentRO.getId());
+        Integer id = UnionIdDbUtil.createCommentUid(socialCommentRO);
 
         CenterUserRO userRO = CenterUserROFactory.getUserRO(socialCommentRO.getUser(), mineUser);
 
@@ -37,6 +37,7 @@ public class CenterCommentROFactory {
         centerCommentRO.setId(id);
         centerCommentRO.setUser(userRO);
         centerCommentRO.setChildComments(childComments);
+        centerCommentRO.setContentType(socialCommentRO.getContentType());
 
         centerCommentRO.setNo(socialCommentRO.getNo());
         centerCommentRO.setContent(BirthdayAgeUtil.replaceAgeBetween10to18Str(socialCommentRO.getContent()));

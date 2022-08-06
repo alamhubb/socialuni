@@ -1,5 +1,6 @@
 package com.socialuni.center.web.model.DO;
 
+import com.socialuni.center.web.model.SocialContentIdDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,16 +28,12 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class UniContentUnionIdDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(nullable = false, updatable = false)
-    private String contentType;
+public class UniContentUnionIdDO extends SocialContentIdDO implements Serializable {
     private Integer contentId;
     //数据所有方
     @Column(nullable = false, updatable = false)
     private Integer originalDevId;
+    //主要是不想泄露真实id，所以用的其他id
     private Integer originalContentUnionId;
     //写入方
     private Integer fromDevId;
@@ -44,7 +41,7 @@ public class UniContentUnionIdDO implements Serializable {
 
     //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
     public UniContentUnionIdDO(String contentType, Integer originalDevId, Integer originalContentUnionId, Integer fromDevId, Integer fromContentUnionId, Integer contentId) {
-        this.contentType = contentType;
+        super(contentType);
         this.originalDevId = originalDevId;
         this.originalContentUnionId = originalContentUnionId;
         //这俩字段应该用不到，只是方便统计有用，也不是读出来的数据有用，评论时需要根据这个通知到对方，

@@ -45,6 +45,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setUser(commentUserRO);
 
         socialCommentRO.setContent(comment.getContent());
+        socialCommentRO.setContentType(comment.getContentType());
         socialCommentRO.setHugNum(comment.getHugNum());
         socialCommentRO.setReportNum(comment.getReportNum());
         socialCommentRO.setCreateTime(comment.getCreateTime());

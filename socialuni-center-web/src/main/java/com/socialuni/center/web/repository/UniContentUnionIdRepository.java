@@ -11,5 +11,7 @@ public interface UniContentUnionIdRepository extends JpaRepository<UniContentUni
 
     UniContentUnionIdDO findByContentTypeAndContentId(String contentType, Integer contentId);
 
+    UniContentUnionIdDO findOneById(Integer id);
+
 }
 

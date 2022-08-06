@@ -1,6 +1,7 @@
 package com.socialuni.center.web.model.RO.talk;
 
 
+import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.center.web.model.RO.user.CenterUserRO;
 import lombok.Data;
 
@@ -8,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class CenterCommentRO {
-    private String id;
-
+public class CenterCommentRO extends UniContentIdRO {
     private Integer no;
 
     /**

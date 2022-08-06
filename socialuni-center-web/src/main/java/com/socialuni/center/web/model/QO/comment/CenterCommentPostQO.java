@@ -1,5 +1,6 @@
 package com.socialuni.center.web.model.QO.comment;
 
+import com.socialuni.center.web.model.QO.ContentAddQO;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -12,8 +13,7 @@ import javax.validation.constraints.NotBlank;
  * @since TODO[起始版本号]
  */
 @Data
-public class CenterCommentPostQO {
-    private String content;
+public class CenterCommentPostQO extends ContentAddQO {
     @NotBlank
     private String talkId;
     private String commentId;
