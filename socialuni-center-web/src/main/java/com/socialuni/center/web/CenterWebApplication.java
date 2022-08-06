@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableAsync
 @EnableCaching
-//复用feignBean不注册问题
+//很奇怪，需要写到具体的包名
 @MapperScan("com.socialuni.center.web.mapper")
 @EnableSocialWebSDK
 //复用feignBean不注册问题
