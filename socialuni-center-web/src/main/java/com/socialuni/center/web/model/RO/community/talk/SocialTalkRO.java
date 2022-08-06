@@ -3,6 +3,7 @@ package com.socialuni.center.web.model.RO.community.talk;
 import com.socialuni.center.web.model.DO.SocialContentIdCO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.center.web.model.RO.user.base.SocialContentUserRO;
+import com.socialuni.social.constant.ContentType;
 import lombok.Data;
 
 import java.util.Date;

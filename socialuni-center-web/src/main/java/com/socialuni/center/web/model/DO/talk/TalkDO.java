@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "talk", indexes = {
+@Table(name = "s_talk", indexes = {
         @Index(columnList = "visibleGender"),
         @Index(columnList = "visibleType"),
         @Index(columnList = "adCode"),

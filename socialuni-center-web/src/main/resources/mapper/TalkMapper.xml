@@ -4,9 +4,9 @@
     <select id="queryTalkIdsByCom" resultType="java.lang.Integer">
         SELECT t.id
         FROM
-        talk t,
+        s_talk t,
         <if test="tagIds!=null and tagIds.size()>0">
-            talk_tag tt,
+            s_talk_tag tt,
         </if>
         <if test="circleId!=null">
             s_talk_circle tc,
@@ -92,7 +92,7 @@
         <if test="circleId!=null">
             s_talk_circle tc,
         </if>
-        talk t
+        s_talk t
         WHERE
         t.user_id=#{userId}
         <if test="circleId!=null">

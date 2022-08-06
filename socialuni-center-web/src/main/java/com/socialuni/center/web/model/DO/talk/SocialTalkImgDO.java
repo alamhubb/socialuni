@@ -10,7 +10,7 @@ import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "talk_img",
+@Table(name = "s_talk_img",
         indexes = {
                 @Index(columnList = "contentId")
         },

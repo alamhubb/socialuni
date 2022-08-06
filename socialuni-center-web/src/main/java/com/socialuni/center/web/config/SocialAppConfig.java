@@ -75,6 +75,12 @@ public class SocialAppConfig {
         return StringUtils.isNotEmpty(getCenterSocialuniId());
     }
 
+    public static boolean noCenterServer() {
+        System.out.println(centerSocialuniId);
+        //为空则异常
+        return !hasCenterServer();
+    }
+
     //是否配置了中心服务器
     public static String getCenterSocialuniId() {
         if (StringUtils.isEmpty(centerSocialuniId) || centerSocialuniId.length() != 32) {

@@ -1,5 +1,6 @@
 package com.socialuni.center.web.model.RO.community;
 
+import com.socialuni.center.web.model.DO.SocialContentIdCO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,23 +10,18 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class UniContentIdRO {
-    //必须为string，返回给app后是uuid无法变为int
-    private Integer id;
-    private String contentType;
+public class UniContentIdRO extends SocialContentIdCO {
     private String originalSocialuniId;
     private Integer originalContentUnionId;
 
     public UniContentIdRO(Integer id, String contentType, String originalSocialuniId, Integer originalContentUnionId) {
-        this.id = id;
-        this.contentType = contentType;
+        super(id, contentType);
         this.originalSocialuniId = originalSocialuniId;
         this.originalContentUnionId = originalContentUnionId;
     }
 
     public UniContentIdRO(UniContentIdRO socialuniContentIdRO) {
-        this.id = socialuniContentIdRO.getId();
-        this.contentType = socialuniContentIdRO.getContentType();
+        super(socialuniContentIdRO);
         this.originalSocialuniId = socialuniContentIdRO.getOriginalSocialuniId();
         this.originalContentUnionId = socialuniContentIdRO.getOriginalContentUnionId();
     }

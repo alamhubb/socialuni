@@ -38,8 +38,6 @@ public class CenterTalkPostDomain {
 
         String content = talkPostQO.getContent();
 
-
-
         if (StringUtils.isEmpty(content) && CollectionUtils.isEmpty(talkPostQO.getImgs())) {
             throw new SocialParamsException("不能发布文字和图片均为空的动态");
         }
