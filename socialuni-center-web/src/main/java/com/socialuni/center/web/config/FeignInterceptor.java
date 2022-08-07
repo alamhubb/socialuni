@@ -74,7 +74,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 socialProviderLoginQO.setPhoneNum(phoneNum);
                 socialuniUserAPI.registryUser(socialProviderLoginQO);
             }
-            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUserUnionId.toString());
+            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUserUnionId);
         }
 //        }
 

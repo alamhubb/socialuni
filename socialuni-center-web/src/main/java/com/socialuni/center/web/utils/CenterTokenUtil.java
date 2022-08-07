@@ -38,13 +38,8 @@ public class CenterTokenUtil {
 
 
     public static String getDataUserUnionId() {
-        HttpServletRequest request = RequestUtil.getRequest();
-        String thirdUserId = request.getHeader(SocialFeignHeaderName.dataUserUnionId);
-        if (SocialTokenUtil.isSuccess(thirdUserId)) {
-            return thirdUserId;
-        }
-//        return SocialTokenUtil.getSocialuniToken();
-        return null;
+        String thirdUserId = RequestUtil.getHeader(SocialFeignHeaderName.dataUserUnionId);
+        return thirdUserId;
     }
 
     public static Integer getDataDevId() {

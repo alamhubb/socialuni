@@ -76,7 +76,7 @@ public class SocialAppConfig {
 
     public static boolean serverIsCenter() {
         //为空则异常
-        return StringUtils.isEmpty(getCenterSocialuniId());
+        return StringUtils.isEmpty(getDevSecretKey());
     }
 
     //是否配置了中心服务器
@@ -86,6 +86,14 @@ public class SocialAppConfig {
         }
         //为空则异常
         return centerSocialuniId;
+    }
+
+    public static String getDevSecretKey() {
+        if (StringUtils.isEmpty(socialuniDevSecretKey) || socialuniDevSecretKey.length() != 32) {
+            return null;
+        }
+        //为空则异常
+        return socialuniDevSecretKey;
     }
 
     //是否配置了中心服务器
