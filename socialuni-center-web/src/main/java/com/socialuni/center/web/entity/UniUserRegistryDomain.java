@@ -35,8 +35,7 @@ public class UniUserRegistryDomain {
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
     public SocialUserDO registryUser(Integer dataDevId, SocialProviderLoginQO loginQO) {
         String thirdUserIdStr = loginQO.getUnionId();
-        Integer dataUserUnionId = Integer.parseInt(thirdUserIdStr);
-        UniUserAccountDO uniUnionIdRO = uniUserAccountRepository.findByDevIdAndThirdUserId(dataDevId, dataUserUnionId);
+        UniUserAccountDO uniUnionIdRO = uniUserAccountRepository.findByDevIdAndThirdUserId(dataDevId, thirdUserIdStr);
         SocialUserDO mineUser;
         //如果已经注册过
         if (uniUnionIdRO != null) {
@@ -52,7 +51,7 @@ public class UniUserRegistryDomain {
             //创建或返回
             socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
 
-            UniUserAccountDO uniUserAccountDO = new UniUserAccountDO(dataDevId, dataUserUnionId, mineUser.getId());
+            UniUserAccountDO uniUserAccountDO = new UniUserAccountDO(dataDevId, thirdUserIdStr, mineUser.getId());
 
             uniUserAccountRepository.save(uniUserAccountDO);
 

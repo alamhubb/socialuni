@@ -54,7 +54,7 @@ public class CenterUserUtil {
 //            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
             userDO = SocialUserUtil.getMineUserAllowNull();
         } else {
-            Integer dataUserUnionId = CenterTokenUtil.getDataUserUnionId();
+            String dataUserUnionId = CenterTokenUtil.getDataUserUnionId();
 
             UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), dataUserUnionId);
             if (uniUserAccountDO == null) {

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UniUserAccountRepository extends JpaRepository<UniUserAccountDO, Integer> {
 
 
-    UniUserAccountDO findByDevIdAndThirdUserId(Integer devId, Integer thirdUserId);
+    UniUserAccountDO findByDevIdAndThirdUserId(Integer devId, String thirdUserId);
 
 }
 

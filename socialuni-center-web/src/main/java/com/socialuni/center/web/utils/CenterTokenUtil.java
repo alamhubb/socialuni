@@ -37,12 +37,11 @@ public class CenterTokenUtil {
     }
 
 
-    public static Integer getDataUserUnionId() {
+    public static String getDataUserUnionId() {
         HttpServletRequest request = RequestUtil.getRequest();
         String thirdUserId = request.getHeader(SocialFeignHeaderName.dataUserUnionId);
         if (SocialTokenUtil.isSuccess(thirdUserId)) {
-            Integer userId = Integer.parseInt(thirdUserId);
-            return userId;
+            return thirdUserId;
         }
 //        return SocialTokenUtil.getSocialuniToken();
         return null;

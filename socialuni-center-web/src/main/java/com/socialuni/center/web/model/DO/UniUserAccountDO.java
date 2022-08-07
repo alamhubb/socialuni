@@ -23,11 +23,11 @@ public class UniUserAccountDO extends CommonBaseDO {
     @Column(nullable = false, updatable = false)
     private Integer devId;
     @Column(nullable = false, updatable = false)
-    private Integer thirdUserId;
+    private String thirdUserId;
     @Column(nullable = false, updatable = false)
     private Integer userId;
 
-    public UniUserAccountDO(Integer devId, Integer thirdUserId, Integer userId) {
+    public UniUserAccountDO(Integer devId, String thirdUserId, Integer userId) {
         this.devId = devId;
         this.thirdUserId = thirdUserId;
         this.userId = userId;
