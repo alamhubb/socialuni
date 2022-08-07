@@ -16,6 +16,10 @@ import java.io.Serializable;
                 @Index(columnList = "userId"),
                 @Index(columnList = "phoneNum"),
                 @Index(columnList = "status"),
+        },
+        uniqueConstraints = {
+                //每个渠道都是唯一的
+                @UniqueConstraint(columnNames = {"devId", "phoneNum"})
         }
 )
 @Data

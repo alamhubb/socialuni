@@ -13,9 +13,12 @@ import com.socialuni.center.web.model.QO.user.SocialUserEditQO;
 import com.socialuni.center.web.model.QO.user.SocialUserImgAddQO;
 import com.socialuni.center.web.model.RO.user.SocialUserIdentityAuthPreCheckRO;
 import com.socialuni.center.web.model.RO.user.SocialUserIdentityAuthRO;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.Map;
 
 @RestController
 public class CenterUserController implements SocialuniUserAPI {
@@ -24,7 +27,7 @@ public class CenterUserController implements SocialuniUserAPI {
     private CenterUserService centerUserService;
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+    public ResultRO<CenterMineUserDetailRO> registryUser(URI baseUrl, Map<String, Object> headerMap, SocialProviderLoginQO loginQO) {
         return centerUserService.registryUser(loginQO);
     }
 

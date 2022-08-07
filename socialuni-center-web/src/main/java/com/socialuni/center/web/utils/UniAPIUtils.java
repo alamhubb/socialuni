@@ -90,7 +90,10 @@ public class UniAPIUtils {
                 //都需要往中心推送，并且使用中心返回的unionId更新
                 String apiUrl = SocialAppConfig.getSocialuniServerUrl();
                 URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
-                ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, new HashMap<>(), contentAddQO);
+                Map<String, Object> headerMap = new HashMap<String, Object>() {{
+                    put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+                }};
+                ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
                 if (resultRO == null) {
                     return null;
                 }
