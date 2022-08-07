@@ -37,7 +37,7 @@ public class CenterTalkService {
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<CenterTalkRO>> queryTalks() {
         List<CenterTalkRO> talkROS;
-        if (SocialAppConfig.hasCenterServer()) {
+        if (SocialAppConfig.serverIsChild()) {
             ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks();
             talkROS = resultRO.getData();
         } else {
@@ -60,7 +60,7 @@ public class CenterTalkService {
     public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         CenterTalkRO centerTalkRO;
-        if (SocialAppConfig.noCenterServer()) {
+        if (SocialAppConfig.serverIsCenter()) {
             centerTalkRO = centerTalkPostDomain.postTalk(talkPostQO);
         } else {
             UniContentIdRO uniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, centerTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);

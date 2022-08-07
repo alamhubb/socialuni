@@ -1,8 +1,8 @@
 package com.socialuni.center.web.model.DO.user;
 
 import com.socialuni.center.web.model.DO.SocialContentBaseDO;
-import com.socialuni.social.constant.ContentType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Index;
@@ -22,6 +22,7 @@ import java.io.Serializable;
         }
 )
 @Data
+@NoArgsConstructor
 public class SocialUserDO extends SocialContentBaseDO implements Serializable {
     private String nickname;
     private String avatar;
@@ -30,8 +31,4 @@ public class SocialUserDO extends SocialContentBaseDO implements Serializable {
     private Integer age;
     private String city;
     private String type;
-
-    public SocialUserDO() {
-        super(ContentType.user);
-    }
 }

@@ -1,6 +1,5 @@
 package com.socialuni.center.web.model.DO;
 
-import com.socialuni.center.web.model.SocialContentIdDO;
 import com.socialuni.social.constant.CommonStatus;
 import lombok.Data;
 
@@ -15,8 +14,7 @@ import java.util.Date;
  */
 @MappedSuperclass
 @Data
-public class SocialContentBaseDO extends SocialContentIdDO implements Serializable {
-
+public class SocialContentBaseDO extends SocialCommonBaseDO implements Serializable {
     @Column(nullable = false)
     private String status;
 
@@ -24,13 +22,7 @@ public class SocialContentBaseDO extends SocialContentIdDO implements Serializab
     private Date updateTime;
 
     public SocialContentBaseDO() {
-        this.updateTime = new Date();
-        this.status = CommonStatus.enable;
-    }
-
-    public SocialContentBaseDO(String contentType) {
-        super(contentType);
-        this.updateTime = new Date();
+        this.updateTime = super.getCreateTime();
         this.status = CommonStatus.enable;
     }
 }

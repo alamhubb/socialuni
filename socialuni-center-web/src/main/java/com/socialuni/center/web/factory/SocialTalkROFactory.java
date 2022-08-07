@@ -187,7 +187,7 @@ public class SocialTalkROFactory {
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getId());
         List<SocialTalkTagRO> tagROs = tagDOS.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
-        socialTalkRO.setContentType(talkDO.getContentType());
+//        socialTalkRO.setContentType(talkDO.getContentType());
         socialTalkRO.setTags(tagROs);
         log.debug("结束查询comment" + new Date().getTime() / 1000);
         socialTalkRO.setUpdateTime(talkDO.getUpdateTime());

@@ -1,6 +1,6 @@
 package com.socialuni.center.web.model.RO.user.base;
 
-import com.socialuni.center.web.model.DO.SocialContentIdCO;
+import com.socialuni.center.web.model.RO.community.SocialContentIdRO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class SocialUserRO extends SocialContentIdCO {
+public class SocialUserRO extends SocialContentIdRO {
     private String nickname;
     private String avatar;
     private String gender;
 
-    public SocialUserRO(SocialContentIdCO contentIdCO) {
-        super(contentIdCO);
+    public SocialUserRO(SocialContentIdRO userRO) {
+        super(userRO);
     }
 
     public SocialUserRO(SocialUserRO userRO) {

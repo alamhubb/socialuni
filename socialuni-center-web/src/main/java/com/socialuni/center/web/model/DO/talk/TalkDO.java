@@ -94,7 +94,6 @@ public class TalkDO extends SocialContentBaseDO implements BaseModelDO, Serializ
 
     //do 只有一个构造
     public TalkDO(Integer userId, String content) {
-        super(ContentType.talk);
         this.userId = userId;
         this.content = content;
         this.commentNum = 0;

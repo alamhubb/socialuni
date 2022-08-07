@@ -26,7 +26,7 @@ public class CenterTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static CenterTalkRO getTalkRO(SocialTalkRO talkRO, SocialUserDO mineUser) {
-        Integer talkId = UnionIdDbUtil.createTalkUid(talkRO);
+        String talkId = UnionIdDbUtil.createTalkUid(talkRO.getId());
 
         CenterContentUserRO centerTalkUserRO = CenterContentUserROFactory.getContentUserRO(talkRO.getUser(), mineUser);
         List<CenterTalkImgRO> imgs = CenterTalkImgROFactory.getHomeTalkImgROS(talkRO.getImgs());
@@ -39,7 +39,6 @@ public class CenterTalkROFactory {
         centerTalkRO.setUser(centerTalkUserRO);
         centerTalkRO.setImgs(imgs);
         centerTalkRO.setComments(comments);
-        centerTalkRO.setContentType(talkRO.getContentType());
         centerTalkRO.setContent(BirthdayAgeUtil.replaceAgeBetween10to18Str(talkRO.getContent()));
         centerTalkRO.setVisibleGender(talkRO.getVisibleGender());
         centerTalkRO.setUpdateTime(talkRO.getUpdateTime());

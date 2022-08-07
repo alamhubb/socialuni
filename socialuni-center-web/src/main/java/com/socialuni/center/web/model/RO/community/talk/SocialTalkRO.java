@@ -1,9 +1,8 @@
 package com.socialuni.center.web.model.RO.community.talk;
 
-import com.socialuni.center.web.model.DO.SocialContentIdCO;
+import com.socialuni.center.web.model.RO.community.SocialContentIdRO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.center.web.model.RO.user.base.SocialContentUserRO;
-import com.socialuni.social.constant.ContentType;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,7 +12,7 @@ import java.util.List;
  * 不需要像帖子一样，每次有回复都刷新，因为不愁看，且你评论后的，有动静你会有通知
  */
 @Data
-public class SocialTalkRO extends SocialContentIdCO {
+public class SocialTalkRO extends SocialContentIdRO {
     private SocialContentUserRO user;
     private String content;
     private List<SocialTalkImgRO> imgs;

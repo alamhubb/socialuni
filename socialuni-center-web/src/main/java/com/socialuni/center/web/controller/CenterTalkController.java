@@ -28,7 +28,7 @@ public class CenterTalkController implements SocialuniTalkAPI {
 
     @Override
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
-        if (SocialAppConfig.noCenterServer()) {
+        if (SocialAppConfig.serverIsCenter()) {
             return centerTalkService.queryTalks(queryQO);
         }
         return socialuniTalkAPI.queryTalks(queryQO);

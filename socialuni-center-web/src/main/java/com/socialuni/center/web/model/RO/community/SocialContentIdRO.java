@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class UniContentIdRO {
-    private String id;
+public class SocialContentIdRO {
+    private Integer id;
 
-    public UniContentIdRO(String id) {
+    public SocialContentIdRO(Integer id) {
         this.id = id;
     }
 
-    public UniContentIdRO(UniContentIdRO socialuniContentIdRO) {
+    public SocialContentIdRO(SocialContentIdRO socialuniContentIdRO) {
         this.id = socialuniContentIdRO.getId();
     }
 }

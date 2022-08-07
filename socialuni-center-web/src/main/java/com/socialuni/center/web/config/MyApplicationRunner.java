@@ -58,7 +58,7 @@ public class MyApplicationRunner implements ApplicationRunner {
         }
 
         System.out.println(SocialAppConfig.getCenterSocialuniId());
-        if (SocialAppConfig.hasCenterServer()) {
+        if (SocialAppConfig.serverIsChild()) {
             System.out.println("创建中心的开发者");
             DevAccountDO centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialAppConfig.getCenterSocialuniId());
             if (centerDevDO == null) {

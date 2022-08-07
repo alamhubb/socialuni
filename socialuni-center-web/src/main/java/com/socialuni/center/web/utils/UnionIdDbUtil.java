@@ -1,16 +1,13 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.web.model.DO.SocialContentIdCO;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.center.web.model.RO.community.UniContentIdRO;
-import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.repository.UnionIdRepository;
 import com.socialuni.center.web.store.UnionIdStore;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -46,6 +43,41 @@ public class UnionIdDbUtil {
     @Resource
     public void setUnionIdStore(UnionIdStore unionIdStore) {
         UnionIdDbUtil.unionIdStore = unionIdStore;
+    }
+
+    public static String getUnionIdByContentTypeAndContentId(String contentType, Integer contentId) {
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(contentType, contentId);
+        //没有写入
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, contentId, UUIDUtil.getUUID());
+            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+            //有的话更新
+        }
+        return uniContentUnionIdDO.getUnionId();
+    }
+
+    //只有往中心推送后，可调用这里更新
+    public static void updateUnionIdByContentTypeAndContentId(String contentType, Integer contentId, String unionId) {
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(contentType, contentId);
+        //没有写入
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, contentId, unionId);
+            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+            //有的话更新
+        } else {
+            uniContentUnionIdDO.setUnionId(unionId);
+            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        }
+    }
+
+    public static Integer getContentId(String unionId) {
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUnionId(unionId);
+        //没有写入
+        if (uniContentUnionIdDO == null) {
+            throw new SocialParamsException("错误的内容标识");
+            //有的话更新
+        }
+        return uniContentUnionIdDO.getContentId();
     }
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
@@ -111,62 +143,6 @@ public class UnionIdDbUtil {
     }
 
     //针对所有外部的数据，内部的数据，生成unionId。
-
-    public static Integer createUnionIdByQuery(UniContentIdRO uniContentIdRO) {
-        Integer fromDevId = DevAccountUtils.getCenterDevIdNotNull();
-        //读
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountBySocialuniId(uniContentIdRO.getOriginalSocialuniId());
-        Integer originalDevId = devAccountDO.getId();
-        Integer originalContentUnionId = uniContentIdRO.getOriginalContentUnionId();
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByOriginalDevIdAndOriginalContentUnionId(originalDevId, originalContentUnionId);
-        if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(uniContentIdRO.getContentType(), originalDevId, originalContentUnionId, fromDevId, uniContentIdRO.getId(), null);
-            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
-        }
-
-        //读的也存在读自己系统里的数据的情况
-
-        //查询时， 10调数据，5条自己系统的，5条别的系统推送过来的。这种情况不需要生成id。已经有了。
-
-        //只有子应用，查询时，需要从中心拿数据，拿到数据以后需要先转成自己的
-        //这种是防止已经读过这条数据了，但是又重复写入一次。
-
-
-        return uniContentUnionIdDO.getId();
-    }
-
-    public static Integer createUnionIdBySelfWrite(SocialContentIdCO socialContentIdRO) {
-        return createUnionIdByWrite(socialContentIdRO, null);
-    }
-
-
-    public static Integer createUnionIdByWrite(SocialContentIdCO socialContentIdRO, Integer originalContentUnionId) {
-        Integer originalDevId = DevAccountUtils.getDataOriginalDevIdNotNull();
-        UniContentUnionIdDO uniContentUnionIdDO;
-
-        String contentType = socialContentIdRO.getContentType();
-        Integer contentId = socialContentIdRO.getId();
-        //自有
-        if (originalContentUnionId == null) {
-            //自有的必须写一次，不存在重复的情况。理论上
-            uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(contentType, contentId);
-        } else {
-            //推送
-            //推送的有可能存在
-            uniContentUnionIdDO = uniContentUnionIdRepository.findByOriginalDevIdAndOriginalContentUnionId(originalDevId, originalContentUnionId);
-        }
-        if (uniContentUnionIdDO == null) {
-            Integer dataOriginalDevId = DevAccountUtils.getDataOriginalDevIdNotNull();
-            Integer dataFromDevId = DevAccountUtils.getDevIdNotNull();
-            //如果原始为1，则只能为1写入，存在情况， 其他开发者查询旧数据，旧数据没有写入，通过这里写入一次
-            if (dataOriginalDevId == 1) {
-                dataFromDevId = 1;
-            }
-            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, dataOriginalDevId, originalContentUnionId, dataFromDevId, null, contentId);
-            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
-        }
-        return uniContentUnionIdDO.getId();
-    }
 
     private static String addUnionIdDO(String contentType, Integer contentId, Integer userId) {
         return UnionIdDbUtil.addUnionIdDO(contentType, contentId, userId, DevAccountUtils.getDevIdNotNull());
@@ -244,13 +220,10 @@ public class UnionIdDbUtil {
         if (StringUtils.isEmpty(unionId)) {
             throw new SocialParamsException("无效的内容标示1");
         }
-        //todo 这里直接返回了
-        //存在数据库性能问题，使用真实id，兼容旧版本
-        if (!UnionIdDbUtil.isInteger(unionId)) {
-            throw new SocialParamsException("错误的内容标识2");
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUnionId(unionId);
+        if (uniContentUnionIdDO == null) {
+            throw new SocialParamsException("错误的内容标识3");
         }
-        Integer uId = Integer.valueOf(unionId);
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(uId);
         return uniContentUnionIdDO.getContentId();
 /*
         //通用部分
@@ -354,33 +327,33 @@ public class UnionIdDbUtil {
         return addUnionIdDO(ContentType.talk, modeId, mineId);
     }*/
 
-    public static Integer createTalkUid(SocialTalkRO talkRO) {
+    public static String createTalkUid(Integer talkId) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return createUnionIdBySelfWrite(talkRO);
+        return getUnionIdByContentTypeAndContentId(ContentType.talk, talkId);
     }
 
-    public static Integer createCommentUid(SocialContentIdCO socialContentIdCO) {
-        return createUnionIdBySelfWrite(socialContentIdCO);
+    public static String createCommentUid(Integer commentId) {
+        return getUnionIdByContentTypeAndContentId(ContentType.comment, commentId);
     }
 
     public static String createCommentUid(String modeId) {
         Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
-        return addUnionIdDO(ContentType.comment, modeId, mineId);
+        return getUnionIdByContentTypeAndContentId(ContentType.comment, Integer.valueOf(modeId));
     }
 
     public static String createCommentUid(Integer modeId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return addUnionIdDO(ContentType.comment, modeId, user);
+        return getUnionIdByContentTypeAndContentId(ContentType.comment, modeId);
     }
 
     public static String createCommentUid(Integer modeId, Integer userId) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return addUnionIdDO(ContentType.comment, modeId, userId);
+        return getUnionIdByContentTypeAndContentId(ContentType.comment, modeId);
     }
 
-    public static Integer createUserUid(SocialContentIdCO socialUserRO) {
+    public static String createUserUid(Integer userId) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return createUnionIdBySelfWrite(socialUserRO);
+        return getUnionIdByContentTypeAndContentId(ContentType.user, userId);
     }
 
     public static String addUnionIdDO(String contentType, String contentId, Integer userId) {
@@ -391,12 +364,12 @@ public class UnionIdDbUtil {
     public static String createTalkImgUid(Integer contentId) {
         Integer mineId = CenterUserUtil.getMineUserIdAllowNull();
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return addUnionIdDO(ContentType.talkImg, Integer.valueOf(contentId), mineId);
+        return getUnionIdByContentTypeAndContentId(ContentType.talkImg, contentId);
     }
 
     public static String createUserImgUid(Integer modeId, SocialUserDO user) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return addUnionIdDO(ContentType.userImg, modeId, user);
+        return getUnionIdByContentTypeAndContentId(ContentType.userImg, modeId);
     }
 
 

@@ -69,16 +69,14 @@ public class SocialAppConfig {
     }
 
     //是否配置了中心服务器
-    public static boolean hasCenterServer() {
-        System.out.println(centerSocialuniId);
+    public static boolean serverIsChild() {
         //为空则异常
-        return StringUtils.isNotEmpty(getCenterSocialuniId());
+        return !serverIsCenter();
     }
 
-    public static boolean noCenterServer() {
-        System.out.println(centerSocialuniId);
+    public static boolean serverIsCenter() {
         //为空则异常
-        return !hasCenterServer();
+        return StringUtils.isEmpty(getCenterSocialuniId());
     }
 
     //是否配置了中心服务器

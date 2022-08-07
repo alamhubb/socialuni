@@ -1,18 +1,15 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.config.SocialAppConfig;
+import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
+import com.socialuni.center.web.model.QO.ContentAddQO;
+import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
-import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.center.web.model.QO.ContentAddQO;
-import com.socialuni.center.web.model.RO.community.UniContentIdRO;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +18,7 @@ import java.util.function.Function;
 
 
 @Component
+@Slf4j
 public class UniAPIUtils {
     static SocialuniUserAPI socialuniUserAPI;
     static UniContentUnionIdRepository uniContentUnionIdRepository;
@@ -42,8 +40,61 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    //list转换，TO类List转为RO类List
     public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
+        //校验此条数据是否已经写入过。
+        String contentUnionId = contentAddQO.getId();
+        //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
+        //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
+
+        if (StringUtils.isNotEmpty(contentUnionId)) {
+            if (!DevAccountUtils.pusherIsCenterServer()) {
+                throw new SocialParamsException("开发者信息错误");
+            }
+            UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUnionId(contentUnionId);
+            if (uniContentUnionIdDO != null) {
+                log.info("重复写入数据:{}", contentUnionId);
+                return null;
+            }
+        }
+
+
+        //1.执行业务
+        //2.生成unionId
+        //3.记录unionId
+        //4.返回
+
+        UniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
+
+
+        if (DevAccountUtils.pusherIsCenterServer() || SocialAppConfig.serverIsChild()) {
+            //根据本系统的uid，获取contentId
+            Integer contentId = UnionIdDbUtil.getContentId(socialuniContentIdRO.getId());
+            if (DevAccountUtils.pusherIsCenterServer()) {
+                //直接使用中心的unionId更新就行
+
+                //判断是否已有unionId，如果已有，则无需写入，为重复写入
+
+                //推送的需要校验，非推送的不用校验
+                //校验功能搞好了，接下来就可以直接写入数据了
+                //不为空
+                socialuniContentIdRO.setId(contentUnionId);
+            } else if (SocialAppConfig.serverIsChild()) {
+                //都需要往中心推送，并且使用中心返回的unionId更新
+                ResultRO<RO> resultRO = callApi.apply(contentAddQO);
+                if (resultRO == null) {
+                    return null;
+                }
+                UniContentIdRO uniContentIdRO = resultRO.getData();
+
+                socialuniContentIdRO.setId(uniContentIdRO.getId());
+            }
+            UnionIdDbUtil.updateUnionIdByContentTypeAndContentId(contentType, contentId, socialuniContentIdRO.getId());
+        }
+        return socialuniContentIdRO;
+    }
+
+    //list转换，TO类List转为RO类List
+    /*public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         String dataSocialuniId = RequestUtil.getDataOriginalSocialuniId();
         //校验此条数据是否已经写入过。
         Integer dataContentUnionId = contentAddQO.getId();
@@ -124,5 +175,5 @@ public class UniAPIUtils {
 
 //        devAccountRepository.findAllByStatusAndApiUrlNotNullAndApiSecretKeyNotNull(CommonStatus.enable);
         return socialuniContentIdRO;
-    }
+    }*/
 }

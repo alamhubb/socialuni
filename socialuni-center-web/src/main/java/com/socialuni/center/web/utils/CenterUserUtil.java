@@ -111,9 +111,9 @@ public class CenterUserUtil {
         return user.getId();
     }
 
-    public static Integer getMineUserUnionId() {
+    public static String getMineUserUnionId() {
         SocialUserDO user = CenterUserUtil.getMineUserNotNull();
-        return UnionIdDbUtil.createUserUid(user);
+        return UnionIdDbUtil.createUserUid(user.getId());
     }
 
     public static String getMineUserStringId() {

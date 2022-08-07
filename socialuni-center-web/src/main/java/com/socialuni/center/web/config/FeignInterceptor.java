@@ -49,7 +49,7 @@ public class FeignInterceptor implements RequestInterceptor {
         System.out.println(postUrl);
         if (mineUser != null) {
             Integer mineUserId = mineUser.getId();
-            Integer mineUserUnionId = CenterUserUtil.getMineUserUnionId();
+            String mineUserUnionId = CenterUserUtil.getMineUserUnionId();
             //主要是记录有没有的
             Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
             UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserId);

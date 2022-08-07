@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 @Component
 public class DevAccountUtils {
@@ -102,6 +103,9 @@ public class DevAccountUtils {
 
     public static Integer getCenterDevIdNotNull() {
         String socialuniId = SocialAppConfig.getCenterSocialuniId();
+        if (StringUtils.isEmpty(socialuniId)) {
+            return null;
+        }
         DevAccountDO centerDevAccount = DevAccountUtils.getDevAccountBySocialuniId(socialuniId);
         if (centerDevAccount == null) {
             throw new SocialParamsException("不存在的联盟开发者ID");
@@ -151,6 +155,21 @@ public class DevAccountUtils {
 
     public static boolean notPushServer() {
         return !DevAccountUtils.pushServer();
+    }
+
+    //为中心向服务器推送
+    public static boolean pusherIsCenterServer() {
+        return Objects.equals(DevAccountUtils.getDevIdNotNull(), DevAccountUtils.getCenterDevIdNotNull());
+    }
+
+    //为自己向自己推送
+    public static boolean pusherIsSelfServer() {
+        return DevAccountUtils.getDevIdNotNull() == 1;
+    }
+
+    //非中心和非自己向中心推送
+    public static boolean pusherNotSelfCenter() {
+        return !DevAccountUtils.pusherIsSelfServer() && !DevAccountUtils.pusherIsCenterServer();
     }
 
     public static boolean pushServer() {

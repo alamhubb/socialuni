@@ -1,9 +1,9 @@
 package com.socialuni.center.web.model.RO.talk;
 
-import com.socialuni.center.web.model.RO.user.CenterContentUserRO;
 import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkTagRO;
+import com.socialuni.center.web.model.RO.user.CenterContentUserRO;
 import lombok.Data;
 
 import java.util.Date;
