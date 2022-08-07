@@ -38,6 +38,9 @@ public class FeignInterceptor implements RequestInterceptor {
 
 //        requestTemplate.header(SocialFeignHeaderName.dataOriginalSocialuniId, DevAccountUtils.getAppSocialuniId());
 
+
+
+
         System.out.println(requestTemplate);
         System.out.println(requestTemplate.url());
         System.out.println(11111);
@@ -50,8 +53,9 @@ public class FeignInterceptor implements RequestInterceptor {
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         String postUrl = requestTemplate.url();
 
-
-
+        if (SocialAppConfig.serverIsChild()){
+            requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+        }
         System.out.println(postUrl);
 
         if (!postUrl.contains("user/registryUser")){
