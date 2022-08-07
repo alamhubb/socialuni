@@ -34,5 +34,5 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDO, Intege
     //不需要缓存，低频, admin登录使用
     DevAccountDO findOneByPhoneNumOrderByIdAsc(String phoneNum);
 
-    List<DevAccountDO> findAllByStatusAndApiUrlNotNullAndApiSecretKeyNotNull(String status);
+    List<DevAccountDO> findAll();
 }

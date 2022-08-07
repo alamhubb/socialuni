@@ -1,20 +1,20 @@
 package com.socialuni.center.web.config;
 
+import com.socialuni.center.web.constant.GenderTypeNumEnum;
 import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
-import com.socialuni.center.web.utils.CenterUserUtil;
-import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.center.web.model.DO.UniOutRegisterUserDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.center.web.constant.GenderTypeNumEnum;
 import com.socialuni.center.web.repository.UniOutRegisterUserRepository;
+import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
+import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import feign.Target;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +25,6 @@ import javax.annotation.Resource;
 @Component
 @ConditionalOnClass(RequestInterceptor.class)
 public class FeignInterceptor implements RequestInterceptor {
-    @Value("${socialuni.secret-key:null}")
-    private String socialuniDevSecretKey;
-
     @Resource
     UniOutRegisterUserRepository uniOutRegisterUserRepository;
 
@@ -39,10 +36,17 @@ public class FeignInterceptor implements RequestInterceptor {
 
         //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
 
-        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, socialuniDevSecretKey);
-        requestTemplate.header(SocialFeignHeaderName.dataOriginalSocialuniId, DevAccountUtils.getAppSocialuniId());
+//        requestTemplate.header(SocialFeignHeaderName.dataOriginalSocialuniId, DevAccountUtils.getAppSocialuniId());
 
+        System.out.println(requestTemplate);
         System.out.println(requestTemplate.url());
+        System.out.println(11111);
+        Target target = requestTemplate.feignTarget();
+        String targetUrl = target.url();
+
+
+        System.out.println(requestTemplate.feignTarget());
+        System.out.println(22222222);
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         String postUrl = requestTemplate.url();
 //        if (!postUrl.contains("user/registryUser")){
@@ -66,7 +70,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
                 socialProviderLoginQO.setBirthday(mineUser.getBirthday());
                 socialProviderLoginQO.setCity(mineUser.getCity());
-                socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
+                socialProviderLoginQO.setUnionId(mineUserUnionId);
 
                 socialProviderLoginQO.setProvider(RequestUtil.getProvider());
                 socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());

@@ -6,14 +6,14 @@ import com.socialuni.center.web.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.center.web.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.social.api.model.ResultRO;
+import feign.HeaderMap;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("talk")
 @FeignClient(name = "talk", url = "${socialuni.server-url:https://api.socialuni.cn}")
@@ -26,11 +26,12 @@ public interface SocialuniTalkAPI {
 
     /**
      * 返回talk是因为三方需要Id
+     *
      * @param talkPostQO
      * @return
      */
     @PostMapping("postTalk")
-    ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);
+    ResultRO<CenterTalkRO> postTalk(@RequestParam(required = false) URI baseUrl, @RequestParam(required = false) @HeaderMap Map<String, String> headerMap, @RequestBody @Valid SocialTalkPostQO talkPostQO);
 
     @PostMapping("deleteTalk")
     ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkIdQO talkIdQO);

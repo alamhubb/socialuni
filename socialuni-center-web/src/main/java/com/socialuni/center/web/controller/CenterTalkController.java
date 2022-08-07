@@ -12,7 +12,9 @@ import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class CenterTalkController implements SocialuniTalkAPI {
@@ -35,7 +37,7 @@ public class CenterTalkController implements SocialuniTalkAPI {
     }
 
     @Override
-    public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
+    public ResultRO<CenterTalkRO> postTalk(URI baseUrl, Map<String, String> headerMap, SocialTalkPostQO talkPostQO) {
         return centerTalkService.postTalk(talkPostQO);
     }
 

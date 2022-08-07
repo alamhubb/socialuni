@@ -15,6 +15,7 @@ public class SocialAppConfig {
     private static Integer systemUserId;
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
+    private static String socialuniServerUrl;
     private static String appSocialuniId;
     private static String centerSocialuniId;
     public static final Integer homeTalkQueryMinAge = -500;
@@ -40,6 +41,11 @@ public class SocialAppConfig {
     @Value("${socialuni.secret-key:null}")
     public void setSocialuniDevSecretKey(String socialuniDevSecretKey) {
         SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
+    }
+
+    @Value("${socialuni.server-url:null}")
+    public void setSocialuniServerUrl(String socialuniServerUrl) {
+        SocialAppConfig.socialuniServerUrl = socialuniServerUrl;
     }
 
     @Value("${socialuni.center-socialuni-id:null}")
@@ -76,7 +82,7 @@ public class SocialAppConfig {
 
     public static boolean serverIsCenter() {
         //为空则异常
-        return StringUtils.isEmpty(getDevSecretKey());
+        return StringUtils.isEmpty(getSocialuniServerUrl());
     }
 
     //是否配置了中心服务器
@@ -94,6 +100,14 @@ public class SocialAppConfig {
         }
         //为空则异常
         return socialuniDevSecretKey;
+    }
+
+    public static String getSocialuniServerUrl() {
+        if (StringUtils.isEmpty(socialuniServerUrl)) {
+            return null;
+        }
+        //为空则异常
+        return socialuniServerUrl;
     }
 
     //是否配置了中心服务器

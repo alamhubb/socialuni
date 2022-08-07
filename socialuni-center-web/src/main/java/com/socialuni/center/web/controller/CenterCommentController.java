@@ -9,6 +9,8 @@ import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.Map;
 
 @RestController
 public class CenterCommentController implements SocialuniCommentAPI {
@@ -16,7 +18,7 @@ public class CenterCommentController implements SocialuniCommentAPI {
     CenterCommentService centerCommentService;
 
     @Override
-    public ResultRO<CenterCommentRO> postComment(CenterCommentPostQO centerCommentPostQO) {
+    public ResultRO<CenterCommentRO> postComment(URI baseUrl, Map<String, String> headerMap, CenterCommentPostQO centerCommentPostQO) {
         return centerCommentService.postComment(centerCommentPostQO);
     }
 

@@ -1,19 +1,27 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.center.web.base.ThrFunction;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.QO.ContentAddQO;
 import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 
@@ -40,7 +48,7 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, ThrFunction<URI, Map<String, String>, QO, ResultRO<RO>> callApi, QO contentAddQO) {
         //校验此条数据是否已经写入过。
         String contentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
@@ -80,7 +88,12 @@ public class UniAPIUtils {
                 socialuniContentIdRO.setId(contentUnionId);
             } else if (SocialAppConfig.serverIsChild()) {
                 //都需要往中心推送，并且使用中心返回的unionId更新
-                ResultRO<RO> resultRO = callApi.apply(contentAddQO);
+                String apiUrl = SocialAppConfig.getSocialuniServerUrl();
+                URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
+                Map<String, String> headerMap = new HashMap<String, String>() {{
+                    put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+                }};
+                ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
                 if (resultRO == null) {
                     return null;
                 }
@@ -90,6 +103,25 @@ public class UniAPIUtils {
             }
             UnionIdDbUtil.updateUnionIdByContentTypeAndContentId(contentType, contentId, socialuniContentIdRO.getId());
         }
+
+
+        if (SocialAppConfig.serverIsCenter()) {
+            List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
+            for (DevAccountDO devAccountDO : devAccountDOS) {
+                Integer pushServerId = DevAccountUtils.getDevIdNotNull();
+                //如果为自己，或者为推送者
+                if (devAccountDO.getId() == 1 || devAccountDO.getId().equals(pushServerId) || StringUtils.isEmpty(devAccountDO.getApiSecretKey()) || StringUtils.isEmpty(devAccountDO.getApiUrl())) {
+                    continue;
+                }
+                //都需要往中心推送，并且使用中心返回的unionId更新
+                URI determinedBasePathUri = URI.create(Objects.requireNonNull(devAccountDO.getApiUrl()));
+                Map<String, String> headerMap = new HashMap<String, String>() {{
+                    put(SocialFeignHeaderName.socialuniSecretKey, devAccountDO.getApiSecretKey());
+                }};
+                ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
+            }
+        }
+
         return socialuniContentIdRO;
     }
 
