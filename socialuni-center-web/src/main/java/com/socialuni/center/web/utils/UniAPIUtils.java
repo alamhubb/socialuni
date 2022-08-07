@@ -102,10 +102,7 @@ public class UniAPIUtils {
                 socialuniContentIdRO.setId(uniContentIdRO.getId());
             }
             UnionIdDbUtil.updateUnionIdByContentTypeAndContentId(contentType, contentId, socialuniContentIdRO.getId());
-        }
-
-
-        if (SocialAppConfig.serverIsCenter()) {
+        } else if (SocialAppConfig.serverIsCenter()) {
             List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
             for (DevAccountDO devAccountDO : devAccountDOS) {
                 Integer pushServerId = DevAccountUtils.getDevIdNotNull();
@@ -118,6 +115,7 @@ public class UniAPIUtils {
                 Map<String, Object> headerMap = new HashMap<String, Object>() {{
                     put(SocialFeignHeaderName.socialuniSecretKey, devAccountDO.getApiSecretKey());
                 }};
+                contentAddQO.setId(socialuniContentIdRO.getId());
                 ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
             }
         }

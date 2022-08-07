@@ -10,6 +10,7 @@ import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.social.exception.SocialNotLoginException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -55,7 +56,9 @@ public class CenterUserUtil {
             userDO = SocialUserUtil.getMineUserAllowNull();
         } else {
             String dataUserUnionId = CenterTokenUtil.getDataUserUnionId();
-
+            if (StringUtils.isEmpty(dataUserUnionId)){
+                return null;
+            }
             UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), dataUserUnionId);
             if (uniUserAccountDO == null) {
                 return null;
