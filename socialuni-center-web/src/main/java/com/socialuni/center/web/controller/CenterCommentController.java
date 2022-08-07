@@ -18,7 +18,7 @@ public class CenterCommentController implements SocialuniCommentAPI {
     CenterCommentService centerCommentService;
 
     @Override
-    public ResultRO<CenterCommentRO> postComment(URI baseUrl, Map<String, String> headerMap, CenterCommentPostQO centerCommentPostQO) {
+    public ResultRO<CenterCommentRO> postComment(URI baseUrl, Map<String, Object> headerMap, CenterCommentPostQO centerCommentPostQO) {
         return centerCommentService.postComment(centerCommentPostQO);
     }
 

@@ -6,7 +6,6 @@ import com.socialuni.center.web.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.center.web.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
 import com.socialuni.social.api.model.ResultRO;
-import feign.HeaderMap;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +30,7 @@ public interface SocialuniTalkAPI {
      * @return
      */
     @PostMapping("postTalk")
-    ResultRO<CenterTalkRO> postTalk(@RequestParam(required = false) URI baseUrl, @RequestParam(required = false) @HeaderMap Map<String, String> headerMap, @RequestBody @Valid SocialTalkPostQO talkPostQO);
+    ResultRO<CenterTalkRO> postTalk(URI baseUrl, @RequestHeader Map<String, Object> headerMap, @RequestBody @Valid SocialTalkPostQO talkPostQO);
 
     @PostMapping("deleteTalk")
     ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkIdQO talkIdQO);

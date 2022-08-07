@@ -48,7 +48,7 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, ThrFunction<URI, Map<String, String>, QO, ResultRO<RO>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, ThrFunction<URI, Map<String, Object>, QO, ResultRO<RO>> callApi, QO contentAddQO) {
         //校验此条数据是否已经写入过。
         String contentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
@@ -90,7 +90,7 @@ public class UniAPIUtils {
                 //都需要往中心推送，并且使用中心返回的unionId更新
                 String apiUrl = SocialAppConfig.getSocialuniServerUrl();
                 URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
-                Map<String, String> headerMap = new HashMap<String, String>() {{
+                Map<String, Object> headerMap = new HashMap<String, Object>() {{
                     put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
                 }};
                 ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
@@ -115,7 +115,7 @@ public class UniAPIUtils {
                 }
                 //都需要往中心推送，并且使用中心返回的unionId更新
                 URI determinedBasePathUri = URI.create(Objects.requireNonNull(devAccountDO.getApiUrl()));
-                Map<String, String> headerMap = new HashMap<String, String>() {{
+                Map<String, Object> headerMap = new HashMap<String, Object>() {{
                     put(SocialFeignHeaderName.socialuniSecretKey, devAccountDO.getApiSecretKey());
                 }};
                 ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);

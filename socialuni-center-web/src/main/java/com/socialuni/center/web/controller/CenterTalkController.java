@@ -1,6 +1,5 @@
 package com.socialuni.center.web.controller;
 
-import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.feignAPI.SocialuniTalkAPI;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
@@ -30,14 +29,11 @@ public class CenterTalkController implements SocialuniTalkAPI {
 
     @Override
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
-        if (SocialAppConfig.serverIsCenter()) {
-            return centerTalkService.queryTalks(queryQO);
-        }
-        return socialuniTalkAPI.queryTalks(queryQO);
+        return centerTalkService.queryTalks(queryQO);
     }
 
     @Override
-    public ResultRO<CenterTalkRO> postTalk(URI baseUrl, Map<String, String> headerMap, SocialTalkPostQO talkPostQO) {
+    public ResultRO<CenterTalkRO> postTalk(URI baseUrl, Map<String, Object> headerMap, SocialTalkPostQO talkPostQO) {
         return centerTalkService.postTalk(talkPostQO);
     }
 

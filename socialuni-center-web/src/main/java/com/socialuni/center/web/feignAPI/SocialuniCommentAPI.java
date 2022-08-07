@@ -19,7 +19,7 @@ import java.util.Map;
 @FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniCommentAPI {
     @PostMapping("postComment")
-    ResultRO<CenterCommentRO> postComment(@RequestParam(required = false) URI baseUrl, @RequestParam(required = false) @HeaderMap Map<String, String> headerMap, @RequestBody @Valid CenterCommentPostQO commentVO);
+    ResultRO<CenterCommentRO> postComment(@RequestParam(required = false) URI baseUrl, @RequestParam(required = false) @HeaderMap Map<String, Object> headerMap, @RequestBody @Valid CenterCommentPostQO commentVO);
 
     @PostMapping("deleteComment")
     ResultRO<Void> deleteComment(@RequestBody @Valid CenterCommentDeleteQO commentVO);
