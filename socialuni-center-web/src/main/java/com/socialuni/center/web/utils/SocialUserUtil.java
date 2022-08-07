@@ -144,6 +144,14 @@ public class SocialUserUtil {
         return socialUserPhoneDO.getPhoneNum();
     }
 
+    public static SocialUserPhoneDO getUserPhoneNumDO(Integer userId) {
+        SocialUserPhoneDO socialUserPhoneDO = SocialUserUtil.getUserPhoneDO(userId);
+        if (socialUserPhoneDO == null) {
+            return null;
+        }
+        return socialUserPhoneDO;
+    }
+
     public static SocialUserPhoneDO getUserPhoneDO(Integer userId) {
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(userId);
         return socialUserPhoneDO;

@@ -29,7 +29,6 @@ public class SocialUserPhoneDO extends CommonContentBaseDO implements Serializab
     private Integer userId;
     @Column(nullable = false)
     private String phoneCountryCode;
-    @Column(nullable = false)
     private String phoneNum;
     @Column(nullable = false)
     private Integer devId;

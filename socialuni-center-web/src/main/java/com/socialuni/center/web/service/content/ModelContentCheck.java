@@ -2,6 +2,7 @@ package com.socialuni.center.web.service.content;
 
 import com.socialuni.center.web.constant.ErrorMsg;
 import com.socialuni.center.web.constant.status.UserStatus;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.center.web.platform.weixin.HttpResult;
 import com.socialuni.center.web.service.comment.IllegalWordService;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
@@ -51,11 +52,11 @@ public class ModelContentCheck {
     private IllegalWordService illegalWordService;
 
     public void checkUser(SocialUserDO mineUser) {
-        String userPhoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
+        SocialUserPhoneDO userPhoneNum = SocialUserUtil.getUserPhoneNumDO(mineUser.getId());
 
         //如果不为系统管理员，只有管理员才能评论置顶内容
         //未绑定手机号，不能发表动态，正常用户应该无法访问，应为突破了内容，或者逻辑有问题
-        if (StringUtils.isEmpty(userPhoneNum)) {
+        if (userPhoneNum == null) {
             throw new SocialParamsException(ErrorMsg.bindPhoneNumCan);
         }
         //如果用户状态不为可用
