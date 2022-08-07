@@ -11,6 +11,7 @@ import com.socialuni.center.web.manage.SocialUserFansDetailManage;
 import com.socialuni.center.web.manage.SocialUserManage;
 import com.socialuni.center.web.manage.phone.SocialUserPhoneManage;
 import com.socialuni.center.web.utils.SocialUserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,9 +43,13 @@ public class UniUserRegistryDomain {
             mineUser = SocialUserUtil.getNotNull(uniUnionIdRO.getUserId());
         } else {
             String phoneNum = loginQO.getPhoneNum();
-            SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
-            if (socialUserPhoneDO != null) {
-                mineUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
+            if (StringUtils.isNotEmpty(phoneNum)) {
+                SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+                if (socialUserPhoneDO != null) {
+                    mineUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
+                } else {
+                    mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+                }
             } else {
                 mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
             }
