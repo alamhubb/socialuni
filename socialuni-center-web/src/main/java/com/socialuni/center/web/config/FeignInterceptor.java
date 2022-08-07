@@ -49,37 +49,44 @@ public class FeignInterceptor implements RequestInterceptor {
         System.out.println(22222222);
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         String postUrl = requestTemplate.url();
-//        if (!postUrl.contains("user/registryUser")){
-        System.out.println(postUrl);
-        if (mineUser != null) {
-            Integer mineUserId = mineUser.getId();
-            String mineUserUnionId = CenterUserUtil.getMineUserUnionId();
-            //主要是记录有没有的
-            Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
-            UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserId);
-            //有没有可能你自己这边记录了，但是那边给你删掉了
-            //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
-            if (uniOutRegisterUserDO == null) {
-                uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserId);
-                uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
-                String phoneNum = SocialUserUtil.getUserPhoneNum(mineUserId);
-                //生成登录类
-                SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
-                socialProviderLoginQO.setNickName(mineUser.getNickname());
-                socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
-                socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
-                socialProviderLoginQO.setBirthday(mineUser.getBirthday());
-                socialProviderLoginQO.setCity(mineUser.getCity());
-                socialProviderLoginQO.setUnionId(mineUserUnionId);
 
-                socialProviderLoginQO.setProvider(RequestUtil.getProvider());
-                socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
-                socialProviderLoginQO.setSystem(RequestUtil.getSystem());
-                socialProviderLoginQO.setPhoneNum(phoneNum);
-                socialuniUserAPI.registryUser(socialProviderLoginQO);
+
+
+        System.out.println(postUrl);
+
+        if (!postUrl.contains("user/registryUser")){
+            if (mineUser != null) {
+                Integer mineUserId = mineUser.getId();
+                String mineUserUnionId = CenterUserUtil.getMineUserUnionId();
+                //主要是记录有没有的
+                Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
+                UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserId);
+                //有没有可能你自己这边记录了，但是那边给你删掉了
+                //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
+                if (uniOutRegisterUserDO == null) {
+                    String phoneNum = SocialUserUtil.getUserPhoneNum(mineUserId);
+                    //生成登录类
+                    SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
+                    socialProviderLoginQO.setNickName(mineUser.getNickname());
+                    socialProviderLoginQO.setAvatarUrl(mineUser.getAvatar());
+                    socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+                    socialProviderLoginQO.setBirthday(mineUser.getBirthday());
+                    socialProviderLoginQO.setCity(mineUser.getCity());
+                    socialProviderLoginQO.setUnionId(mineUserUnionId);
+
+                    socialProviderLoginQO.setProvider(RequestUtil.getProvider());
+                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
+                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+                    socialProviderLoginQO.setPhoneNum(phoneNum);
+                    socialuniUserAPI.registryUser(socialProviderLoginQO);
+
+                    uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserId);
+                    uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
+                }
+                requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUserUnionId);
             }
-            requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUserUnionId);
         }
+
 //        }
 
 
