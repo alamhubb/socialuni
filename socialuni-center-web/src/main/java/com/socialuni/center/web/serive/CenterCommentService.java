@@ -30,18 +30,11 @@ public class CenterCommentService {
     CenterCommentDeleteDomain centerCommentDeleteDomain;
     @Resource
     SocialuniCommentAPI socialuniCommentAPI;
+
     public ResultRO<CenterCommentRO> postComment(CenterCommentPostQO centerCommentPostQO) {
-
-        CenterCommentRO centerCommentRO;
-
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
-        if (SocialAppConfig.serverIsCenter()) {
-            centerCommentRO = centerCommentPostDomain.postComment(centerCommentPostQO);
-        } else {
-            UniContentIdRO uniContentIdRO = UniAPIUtils.callUniAPI(ContentType.comment, centerCommentPostDomain::postComment, socialuniCommentAPI::postComment, centerCommentPostQO);
-            centerCommentRO = (CenterCommentRO) uniContentIdRO;
-        }
-
+        UniContentIdRO uniContentIdRO = UniAPIUtils.callUniAPI(ContentType.comment, centerCommentPostDomain::postComment, socialuniCommentAPI::postComment, centerCommentPostQO);
+        CenterCommentRO centerCommentRO = (CenterCommentRO) uniContentIdRO;
         return new ResultRO<>(centerCommentRO);
     }
 
