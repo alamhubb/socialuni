@@ -43,17 +43,17 @@ public class SocialAppConfig {
         SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
     }
 
-    @Value("${socialuni.server-url:null}")
+    @Value("${socialuni.server-url:#{null}}")
     public void setSocialuniServerUrl(String socialuniServerUrl) {
         SocialAppConfig.socialuniServerUrl = socialuniServerUrl;
     }
 
-    @Value("${socialuni.center-socialuni-id:null}")
+    @Value("${socialuni.center-socialuni-id:#{null}}")
     public void setCenterSocialuniId(String centerSocialuniId) {
         SocialAppConfig.centerSocialuniId = centerSocialuniId;
     }
 
-    @Value("${socialuni.socialuni-id:null}")
+    @Value("${socialuni.socialuni-id:#{null}}")
     public void setAppSocialuniId(String appSocialuniId) {
         SocialAppConfig.appSocialuniId = appSocialuniId;
     }

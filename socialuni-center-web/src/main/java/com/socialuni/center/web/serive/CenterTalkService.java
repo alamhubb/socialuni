@@ -60,12 +60,8 @@ public class CenterTalkService {
     public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         CenterTalkRO centerTalkRO;
-        if (SocialAppConfig.serverIsCenter()) {
-            centerTalkRO = centerTalkPostDomain.postTalk(talkPostQO);
-        } else {
-            UniContentIdRO uniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, centerTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
-            centerTalkRO = (CenterTalkRO) uniContentIdRO;
-        }
+        UniContentIdRO uniContentIdRO = UniAPIUtils.callUniAPI(ContentType.talk, centerTalkPostDomain::postTalk, socialuniTalkAPI::postTalk, talkPostQO);
+        centerTalkRO = (CenterTalkRO) uniContentIdRO;
         return ResultRO.success(centerTalkRO);
     }
 
