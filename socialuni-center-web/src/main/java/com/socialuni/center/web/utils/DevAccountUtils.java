@@ -139,6 +139,9 @@ public class DevAccountUtils {
             devAccountDO = resultRO.getData();
         }*/
         DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(secretKey);
+        if (devAccountDO == null) {
+            throw new SocialParamsException("开发者信息错误");
+        }
         return devAccountDO;
     }
 

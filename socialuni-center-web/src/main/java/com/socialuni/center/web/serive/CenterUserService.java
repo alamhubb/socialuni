@@ -7,6 +7,7 @@ import com.socialuni.center.web.entity.UniUserRegistryDomain;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.model.DO.UniUserAccountDO;
+import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.*;
 import com.socialuni.center.web.model.RO.user.*;
@@ -18,6 +19,7 @@ import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +42,11 @@ public class CenterUserService {
     UniUserAccountRepository uniUserAccountRepository;
 
     public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+        //注册只向三方开发，所以不能为自己
         Integer dataDevId = DevAccountUtils.getDevIdNotNull();
+        if (dataDevId == 1){
+            throw new SocialParamsException("开发者信息错误");
+        }
         String thirdUserId = loginQO.getUnionId();
         SocialUserDO mineUserDO;
         UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(dataDevId, thirdUserId);
