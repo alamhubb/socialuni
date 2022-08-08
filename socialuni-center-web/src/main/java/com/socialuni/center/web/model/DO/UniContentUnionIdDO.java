@@ -25,14 +25,20 @@ public class UniContentUnionIdDO extends SocialCommonBaseDO implements Serializa
     private String contentType;
     private Integer contentId;
     private String unionId;
+    //数据所属权
+//    private Integer belongDevId;
+    //数据来源方
+    private Integer fromDevId;
     //数据所有方
     //主要是不想泄露真实id，所以用的其他id
 
     //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
-    public UniContentUnionIdDO(String contentType, Integer contentId, String unionId) {
+    public UniContentUnionIdDO(String contentType, Integer contentId, String unionId, Integer fromDevId) {
         //这俩字段应该用不到，只是方便统计有用，也不是读出来的数据有用，评论时需要根据这个通知到对方，
         this.contentId = contentId;
         this.unionId = unionId;
         this.contentType = contentType;
+//        this.belongDevId = belongDevId;
+        this.fromDevId = fromDevId;
     }
 }

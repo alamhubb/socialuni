@@ -3,13 +3,16 @@ package com.socialuni.center.web.config;
 import com.socialuni.center.web.constant.GenderTypeNumEnum;
 import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.model.DO.UniOutRegisterUserDO;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.repository.UniOutRegisterUserRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
+import com.socialuni.center.web.utils.UnionIdDbUtil;
+import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -22,7 +25,6 @@ import javax.annotation.Resource;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -56,7 +58,6 @@ public class FeignInterceptor implements RequestInterceptor {
         if (!postUrl.contains("user/registryUser")) {
             if (mineUser != null) {
                 Integer mineUserId = mineUser.getId();
-                String mineUserUnionId = CenterUserUtil.getMineUserUnionId();
                 //主要是记录有没有的
                 Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
                 UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserId);
@@ -71,8 +72,6 @@ public class FeignInterceptor implements RequestInterceptor {
                     socialProviderLoginQO.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
                     socialProviderLoginQO.setBirthday(mineUser.getBirthday());
                     socialProviderLoginQO.setCity(mineUser.getCity());
-                    socialProviderLoginQO.setUnionId(mineUserUnionId);
-
                     socialProviderLoginQO.setProvider(RequestUtil.getProvider());
                     socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
                     socialProviderLoginQO.setSystem(RequestUtil.getSystem());
@@ -87,12 +86,13 @@ public class FeignInterceptor implements RequestInterceptor {
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
                         put(SocialFeignHeaderName.socialuniSecretKey, devSecretKey);
                     }};
-                    socialuniUserAPI.registryUser(determinedBasePathUri, headerMap, socialProviderLoginQO);
-
-//                    uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserId);
-//                    uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
+                    ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.registryUser(determinedBasePathUri, headerMap, socialProviderLoginQO);
+                    CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
+                    UnionIdDbUtil.updateUnionIdByContentTypeAndContentId(ContentType.user, mineUserId, centerMineUserDetailRO.getId());
+                    uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserId);
+                    uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
                 }
-                requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, mineUserUnionId);
+                requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, CenterUserUtil.getMineUserUnionId());
             }
         }
 

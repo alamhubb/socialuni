@@ -49,7 +49,7 @@ public class UnionIdDbUtil {
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(contentType, contentId);
         //没有写入
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, contentId, UUIDUtil.getUUID());
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, contentId, UUIDUtil.getUUID(), DevAccountUtils.getDevIdNotNull());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             //有的话更新
         }
@@ -61,7 +61,7 @@ public class UnionIdDbUtil {
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(contentType, contentId);
         //没有写入
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, contentId, unionId);
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, contentId, unionId, DevAccountUtils.getDevIdNotNull());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
             //有的话更新
         } else {

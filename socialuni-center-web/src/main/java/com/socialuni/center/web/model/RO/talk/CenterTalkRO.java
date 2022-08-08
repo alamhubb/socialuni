@@ -16,10 +16,10 @@ import java.util.List;
 public class CenterTalkRO extends UniContentIdRO {
     private CenterContentUserRO user;
     private String content;
-    private List<com.socialuni.center.web.model.RO.talk.CenterTalkImgRO> imgs;
+    private List<CenterTalkImgRO> imgs;
     //未来可以修改，但要有记录，修改过就显示已修改，显示修改记录
     private Date updateTime;
-    private List<com.socialuni.center.web.model.RO.talk.CenterCommentRO> comments;
+    private List<CenterCommentRO> comments;
 
     /**
      * 评论数量
