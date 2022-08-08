@@ -9,10 +9,9 @@ import com.socialuni.center.web.model.PushValue;
 import com.socialuni.center.web.platform.qq.QQConst;
 import com.socialuni.center.web.platform.weixin.WxConst;
 import com.socialuni.center.web.model.DO.NotifyDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.center.web.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -24,8 +23,8 @@ import java.util.HashMap;
 public class TalkCommentPushUtils {
     //动态评论通知
     public static PushMsgDTO getTalkPushDTO(String provider, NotifyDO notify, SocialUserDO requestUser) {
-        CommentDO comment = CommentUtils.get(notify.getCommentId());
-        TalkDO talk = TalkUtils.get(comment.getTalkId());
+        SocialCommentDO comment = CommentUtils.get(notify.getCommentId());
+        SocialTalkDO talk = TalkUtils.get(comment.getTalkId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

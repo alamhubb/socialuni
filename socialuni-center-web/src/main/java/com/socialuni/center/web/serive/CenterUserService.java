@@ -12,7 +12,6 @@ import com.socialuni.center.web.platform.tencent.TencentCloud;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
-import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
@@ -70,7 +69,7 @@ public class CenterUserService {
 
         CenterUserDetailRO userDetailRO = new CenterUserDetailRO();
 
-        if (mineUser != null && detailUserDO.getId().equals(mineUser.getId())) {
+        if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
 //            userDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(detailUserDO);
         } else {
 //            userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);

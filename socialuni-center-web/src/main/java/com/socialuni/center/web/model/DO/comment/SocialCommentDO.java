@@ -1,15 +1,17 @@
 package com.socialuni.center.web.model.DO.comment;
 
-import com.socialuni.center.web.model.DO.UniContentBaseDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.center.web.model.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "comment", indexes = {
+@Table(name = "s_comment", indexes = {
         @Index(columnList = "status"),
         @Index(columnList = "createTime"),
         @Index(columnList = "updateTime"),
@@ -18,9 +20,10 @@ import java.io.Serializable;
         @Index(columnList = "parentCommentId"),
         @Index(columnList = "content"),
         @Index(columnList = "reportContentType"),
+        @Index(columnList = "unionId"),
 })
 @Data
-public class CommentDO extends UniContentBaseDO implements BaseModelDO, Serializable {
+public class SocialCommentDO extends SocialUnionContentBaseDO implements BaseModelDO, Serializable {
     private String socialuniUid;
 
     private Integer no;
@@ -85,8 +88,4 @@ public class CommentDO extends UniContentBaseDO implements BaseModelDO, Serializ
     private Integer devId;
     //三方id，只有为三方自己查询的时候才显示
     private String threeId;
-
-    public CommentDO() {
-        super(ContentType.comment);
-    }
 }

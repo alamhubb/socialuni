@@ -1,9 +1,9 @@
 package com.socialuni.center.web.factory;
 
 import com.socialuni.center.web.model.DO.NotifyDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.center.web.constant.NotifyType;
@@ -60,18 +60,18 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();
-        CommentDO commentDO = CommentUtils.get(commentId);
-        TalkDO talk = TalkUtils.get(commentDO.getTalkId());
+        SocialCommentDO commentDO = CommentUtils.get(commentId);
+        SocialTalkDO talk = TalkUtils.get(commentDO.getTalkId());
 
         //赋值
-        notifyVO.setTalkId(talk.getId().toString());
+        notifyVO.setTalkId(talk.getUnionId().toString());
         notifyVO.setContent(commentDO.getContent());
         notifyVO.setCreateTime(commentDO.getCreateTime());
         notifyVO.setHasRead(notifyDO.getHasRead());
 
         switch (notifyDO.getType()) {
             case NotifyType.talk_comment:
-                List<SocialTalkImgDO> socialTalkImgDOS = TalkImgDOUtils.findTop3ByTalkId(talk.getId());
+                List<SocialTalkImgDO> socialTalkImgDOS = TalkImgDOUtils.findTop3ByTalkId(talk.getUnionId());
 //                List<TalkImgDO> talkImgDOS = talk.getImgs();
                 if (socialTalkImgDOS.size() > 0) {
                     notifyVO.setReplyImg(socialTalkImgDOS.get(0).getSrc());
@@ -80,11 +80,11 @@ public class SocialUnreadNotifyVOFactory {
                 }
                 break;
             case NotifyType.comment_comment:
-                CommentDO optionalCommentDO1 = CommentUtils.get(commentDO.getParentCommentId());
+                SocialCommentDO optionalCommentDO1 = CommentUtils.get(commentDO.getParentCommentId());
                 notifyVO.setReplyContent(optionalCommentDO1.getContent());
                 break;
             case NotifyType.reply_comment:
-                CommentDO optionalCommentDO2 = CommentUtils.get(commentDO.getReplyCommentId());
+                SocialCommentDO optionalCommentDO2 = CommentUtils.get(commentDO.getReplyCommentId());
                 notifyVO.setReplyContent(optionalCommentDO2.getContent());
                 break;
         }

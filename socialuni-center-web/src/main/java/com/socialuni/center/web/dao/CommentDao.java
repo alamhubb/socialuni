@@ -1,6 +1,6 @@
 package com.socialuni.center.web.dao;
 
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,20 +18,20 @@ public class CommentDao {
     @Resource
     CommentRepository commentRepository;
 
-    public List<CommentDO> queryTalkComments(Integer talkId) {
+    public List<SocialCommentDO> queryTalkComments(Integer talkId) {
         return commentRepository.findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 
-    public List<CommentDO> queryTalkDetailComments(Integer talkId) {
+    public List<SocialCommentDO> queryTalkDetailComments(Integer talkId) {
         return commentRepository.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 
 
-    public List<CommentDO> queryCommentChildComments(Integer commentId) {
+    public List<SocialCommentDO> queryCommentChildComments(Integer commentId) {
         return commentRepository.findTop3ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(commentId, ContentStatus.selfCanSeeContentStatus);
     }
 
-    public List<CommentDO> queryCommentDetailChildComments(Integer commentId) {
+    public List<SocialCommentDO> queryCommentDetailChildComments(Integer commentId) {
         return commentRepository.findTop50ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(commentId, ContentStatus.selfCanSeeContentStatus);
     }
 }

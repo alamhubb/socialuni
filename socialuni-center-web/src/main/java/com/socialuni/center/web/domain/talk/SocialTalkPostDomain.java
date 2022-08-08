@@ -21,7 +21,7 @@ import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkCircleDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkTagDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
@@ -72,7 +72,7 @@ public class SocialTalkPostDomain {
 //        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
         //获取应用对应的话题
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
-        TalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
+        SocialTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
         reportDomain.checkKeywordsCreateReport(talkDO);
         //不使用图片安全校验
         //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
@@ -129,7 +129,7 @@ public class SocialTalkPostDomain {
         return talkAddValidateRO;
     }
 
-    public TalkDO saveEntity(SocialUserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
+    public SocialTalkDO saveEntity(SocialUserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {
@@ -146,14 +146,14 @@ public class SocialTalkPostDomain {
             //还差男生的没写
         }
 
-        TalkDO talkDO = socialTalkCreateManage.createTalkDO(userDO, socialTalkPostQO, district);
+        SocialTalkDO talkDO = socialTalkCreateManage.createTalkDO(userDO, socialTalkPostQO, district);
 
         List<SocialTalkTagDO> list = new ArrayList<>();
 
         for (TagDO tagDO : tags) {
             SocialTalkTagDO socialTalkTagDO = new SocialTalkTagDO();
             socialTalkTagDO.setTagId(tagDO.getId());
-            socialTalkTagDO.setTalkId(talkDO.getId());
+            socialTalkTagDO.setTalkId(talkDO.getUnionId());
             list.add(socialTalkTagDO);
         }
         talkTagRepository.saveAll(list);
@@ -161,7 +161,7 @@ public class SocialTalkPostDomain {
         List<SocialTalkImgDO> imgDOS = TalkImgDOFactory.newTalkImgDOS(socialTalkPostQO.getImgs());
 
         for (SocialTalkImgDO imgDO : imgDOS) {
-            imgDO.setContentId(talkDO.getId());
+            imgDO.setContentId(talkDO.getUnionId());
             imgDO.setUserId(talkDO.getUserId());
         }
 
@@ -169,7 +169,7 @@ public class SocialTalkPostDomain {
 
         if (socialCircleDO != null) {
             SocialTalkCircleDO socialTalkCircleDO = new SocialTalkCircleDO();
-            socialTalkCircleDO.setTalkId(talkDO.getId());
+            socialTalkCircleDO.setTalkId(talkDO.getUnionId());
             socialTalkCircleDO.setCircleId(socialCircleDO.getId());
             socialTalkCircleRepository.save(socialTalkCircleDO);
         }

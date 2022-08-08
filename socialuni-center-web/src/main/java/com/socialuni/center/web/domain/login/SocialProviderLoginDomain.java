@@ -27,7 +27,7 @@ public class SocialProviderLoginDomain {
 
         SocialMineUserDetailRO userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
+        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
         return new SocialLoginRO<>(socialUserTokenDO.getToken(), userDetailRO);
     }

@@ -1,7 +1,7 @@
 package com.socialuni.center.web.model.DO.talk;
 
-import com.socialuni.center.web.model.DO.SocialContentBaseDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
+import com.socialuni.center.web.model.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.social.constant.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,15 +22,14 @@ import java.io.Serializable;
         @Index(columnList = "socialuniUid"),
         @Index(columnList = "content"),
         @Index(columnList = "reportContentType"),
+        @Index(columnList = "unionId"),
         @Index(columnList = "globalTop")
+
 })
 @Data
 @NoArgsConstructor
-public class TalkDO extends SocialContentBaseDO implements BaseModelDO, Serializable {
+public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelDO, Serializable {
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String socialuniUid;
     //内容主体
     private String content;
@@ -93,7 +92,7 @@ public class TalkDO extends SocialContentBaseDO implements BaseModelDO, Serializ
     private Boolean identityAuth;
 
     //do 只有一个构造
-    public TalkDO(Integer userId, String content) {
+    public SocialTalkDO(Integer userId, String content) {
         this.userId = userId;
         this.content = content;
         this.commentNum = 0;

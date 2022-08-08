@@ -3,7 +3,7 @@ package com.socialuni.center.web.domain.talk;
 import com.socialuni.center.web.factory.SocialTalkROFactory;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.TalkUtils;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class SocialTalkDetailQueryDomain {
 
     public SocialTalkRO queryTalkDetail(SocialTalkIdQO socialTalkIdQO, SocialUserDO mineUser) {
-        TalkDO talkDO = TalkUtils.get(socialTalkIdQO.getTalkId());
+        SocialTalkDO talkDO = TalkUtils.get(socialTalkIdQO.getTalkId());
         //自己的动态可以看预审核
         if (SocialUserUtil.isMine(mineUser, talkDO.getUserId())) {
             if (!ContentStatus.selfCanSeeContentStatus.contains(talkDO.getStatus())) {

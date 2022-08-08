@@ -137,7 +137,7 @@ public class SocialChatROFactory {
 
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setNickname(receiveUser.getAvatar());
-            chatRO.setReceiveUserId(receiveUser.getId());
+            chatRO.setReceiveUserId(receiveUser.getUnionId());
             chatRO.setUnreadNum(chatUserDO.getUnreadNum());
 //            this.vipFlag = receiveUser.getVipFlag();
             //不为系统群聊才有记录了未读数量，才有未读数量

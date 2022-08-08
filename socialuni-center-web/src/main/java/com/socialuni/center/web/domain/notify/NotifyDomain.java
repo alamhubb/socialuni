@@ -9,9 +9,9 @@ import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.utils.*;
 import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.chat.ChatUserDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.model.DO.message.MessageReceiveDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserAccountDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialParamsException;
@@ -47,19 +47,19 @@ public class NotifyDomain {
     @Resource
     private NotifyRepository notifyRepository;
 
-    public List<NotifyDO> saveCreateCommentNotifies(CommentDO commentDO, TalkDO talkDO, CommentDO parentCommentDO, CommentDO replyCommentDO, SocialUserDO requestUser) {
+    public List<NotifyDO> saveCreateCommentNotifies(SocialCommentDO commentDO, SocialTalkDO talkDO, SocialCommentDO parentCommentDO, SocialCommentDO replyCommentDO, SocialUserDO requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
-        Integer commentId = commentDO.getId();
-        Integer talkId = talkDO.getId();
+        Integer commentId = commentDO.getUnionId();
+        Integer talkId = talkDO.getUnionId();
         Integer commentUserId = commentDO.getUserId();
         //如果评论的自己的动态，则给所有二级评论人发通知
         if (commentUserId.equals(talkUserId)) {
             //自己评论了自己的talk则要通知所有 其他评论了这个talk的人
             //判断不为子评论，本人回复了别人就是子评论，不给其他评论了这个talk的人发送通知
             if (parentCommentDO == null) {
-                List<CommentDO> commentDOS = commentRepository.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkUserId, ContentStatus.selfCanSeeContentStatus);
-                for (CommentDO childComment : commentDOS) {
+                List<SocialCommentDO> commentDOS = commentRepository.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkUserId, ContentStatus.selfCanSeeContentStatus);
+                for (SocialCommentDO childComment : commentDOS) {
                     //不给自己发送通知
                     if (!childComment.getUserId().equals(commentUserId)) {
                         NotifyDO notify = new NotifyDO(commentUserId, childComment.getUserId(), commentId, talkId, NotifyType.talk_comment);
@@ -90,8 +90,8 @@ public class NotifyDomain {
                 notifies.add(commentNotify);
             } else {
                 //但是要给所有这条评论的子评论用户发通知
-                List<CommentDO> childComments = commentRepository.findByParentCommentId(parentCommentDO.getId());
-                for (CommentDO childCommentDO : childComments) {
+                List<SocialCommentDO> childComments = commentRepository.findByParentCommentId(parentCommentDO.getUnionId());
+                for (SocialCommentDO childCommentDO : childComments) {
                     //但是不能给自己发
                     if (!childCommentDO.getUserId().equals(commentUserId)) {
                         NotifyDO notify = new NotifyDO(commentUserId, childCommentDO.getUserId(), commentId, talkId, NotifyType.comment_comment);

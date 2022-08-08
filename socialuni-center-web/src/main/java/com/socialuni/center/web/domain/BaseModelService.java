@@ -8,9 +8,9 @@ import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.TalkRedis;
 import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.model.DO.message.MessageDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import org.springframework.stereotype.Service;
@@ -34,11 +34,11 @@ public class BaseModelService {
     private TalkRedis talkRedis;
 
     public BaseModelDO save(BaseModelDO model) {
-        if (model instanceof TalkDO) {
-            TalkDO talkDO = (TalkDO) model;
+        if (model instanceof SocialTalkDO) {
+            SocialTalkDO talkDO = (SocialTalkDO) model;
             return talkRedis.save(talkDO);
-        } else if (model instanceof CommentDO) {
-            CommentDO commentDO = (CommentDO) model;
+        } else if (model instanceof SocialCommentDO) {
+            SocialCommentDO commentDO = (SocialCommentDO) model;
             return commentRepository.save(commentDO);
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
@@ -49,12 +49,12 @@ public class BaseModelService {
     }
 
     public Optional<ReportDO> findReportByModel(BaseModelDO model) {
-        if (model instanceof TalkDO) {
-            TalkDO talkDO = (TalkDO) model;
-            return reportRepository.findFirstOneByTalkId(talkDO.getId());
-        } else if (model instanceof CommentDO) {
-            CommentDO commentDO = (CommentDO) model;
-            return reportRepository.findFirstOneByCommentId(commentDO.getId());
+        if (model instanceof SocialTalkDO) {
+            SocialTalkDO talkDO = (SocialTalkDO) model;
+            return reportRepository.findFirstOneByTalkId(talkDO.getUnionId());
+        } else if (model instanceof SocialCommentDO) {
+            SocialCommentDO commentDO = (SocialCommentDO) model;
+            return reportRepository.findFirstOneByCommentId(commentDO.getUnionId());
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
             return reportRepository.findFirstOneByMessageId(messageDO.getId());

@@ -28,7 +28,7 @@ public class SocialUserFansDetailDO implements Serializable {
     private Integer followNum;
 
     public SocialUserFansDetailDO(SocialUserDO user) {
-        this.userId = user.getId();
+        this.userId = user.getUnionId();
         this.fansNum = 0;
         this.followNum = 0;
     }

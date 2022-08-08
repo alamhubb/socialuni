@@ -17,22 +17,22 @@ public class SocialQueryNotifyDomain {
     private NotifyRepository notifyRepository;
 
     public List<SocialUnreadNotifyVO> queryNotifies(SocialUserDO mineUser) {
-        List<NotifyDO> notifyDOS = notifyRepository.findTop20ByReceiveUserIdAndTypeInOrderByHasReadDescIdDesc(mineUser.getId(), NotifyType.comments);
+        List<NotifyDO> notifyDOS = notifyRepository.findTop20ByReceiveUserIdAndTypeInOrderByHasReadDescIdDesc(mineUser.getUnionId(), NotifyType.comments);
         return SocialUnreadNotifyVOFactory.unreadNotifyDOToVOS(notifyDOS);
     }
 
     public List<SocialUnreadNotifyVO> queryUnreadNotifies(SocialUserDO mineUser) {
-        List<NotifyDO> notifyDOS = notifyRepository.findAllByReceiveUserIdAndTypeInAndHasReadFalseOrderByIdDesc(mineUser.getId(), NotifyType.comments);
+        List<NotifyDO> notifyDOS = notifyRepository.findAllByReceiveUserIdAndTypeInAndHasReadFalseOrderByIdDesc(mineUser.getUnionId(), NotifyType.comments);
         return SocialUnreadNotifyVOFactory.unreadNotifyDOToVOS(notifyDOS);
     }
 
     public List<SocialUnreadNotifyVO> queryUnreadNotifiesAndUpdateHasRead(SocialUserDO mineUser) {
-        List<NotifyDO> notifyDOS = notifyRepository.findAllByReceiveUserIdAndTypeInAndHasReadFalseOrderByIdDesc(mineUser.getId(), NotifyType.comments);
+        List<NotifyDO> notifyDOS = notifyRepository.findAllByReceiveUserIdAndTypeInAndHasReadFalseOrderByIdDesc(mineUser.getUnionId(), NotifyType.comments);
         for (NotifyDO notifyDO : notifyDOS) {
             notifyDO.setHasRead(true);
         }
         notifyRepository.saveAll(notifyDOS);
-        notifyDOS = notifyRepository.findTop20ByReceiveUserIdAndTypeInOrderByHasReadDescIdDesc(mineUser.getId(), NotifyType.comments);
+        notifyDOS = notifyRepository.findTop20ByReceiveUserIdAndTypeInOrderByHasReadDescIdDesc(mineUser.getUnionId(), NotifyType.comments);
         return SocialUnreadNotifyVOFactory.unreadNotifyDOToVOS(notifyDOS);
     }
 }

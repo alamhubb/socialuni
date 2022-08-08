@@ -51,13 +51,13 @@ public class CenterTalkPostDomain {
             Date curDate = new Date();
             Date oneMinuteBefore = new Date(curDate.getTime() - DateTimeType.minute);
             //1分钟内不能发超过1条
-            Integer minuteCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getId(), oneMinuteBefore, curDate);
+            Integer minuteCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), oneMinuteBefore, curDate);
             if (minuteCount > 0) {
                 log.info("1分钟最多发布1条动态，请稍后再试:+" + content);
                 throw new SocialBusinessException("1分钟最多发布1条动态，请稍后再试");
             }
             Date tenMinuteBefore = new Date(curDate.getTime() - 10L * DateTimeType.minute);
-            Integer tenMinuteBeforeCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getId(), tenMinuteBefore, curDate);
+            Integer tenMinuteBeforeCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), tenMinuteBefore, curDate);
             if (tenMinuteBeforeCount > 2) {
                 log.info("10分钟最多发布3条动态，请稍后再试:+" + content);
                 throw new SocialBusinessException("10分钟最多发布3条动态，请稍后再试");
@@ -67,7 +67,7 @@ public class CenterTalkPostDomain {
             Date zero = DateUtils.getTodayZeroDate();
             //10分钟内不能发超过5条
             //1天内不能发超过10条
-            Integer oneDayBeforeCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getId(), zero, curDate);
+            Integer oneDayBeforeCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), zero, curDate);
             if (oneDayBeforeCount > 9) {
                 log.info("1天最多发布10条动态，请稍后再试:+" + content);
                 throw new SocialBusinessException("1天最多发布10条动态，请稍后再试");

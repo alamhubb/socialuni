@@ -4,6 +4,7 @@ import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.UserRepository;
 import com.socialuni.center.web.utils.SocialUserDOFactory;
+import com.socialuni.center.web.utils.UnionIdDbUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +21,9 @@ public class SocialUserManage {
     }
 
     public SocialUserDO createUserByPhoneLogin() {
+        Integer userUnionId = UnionIdDbUtil.createUserUuid();
         SocialUserDO user = SocialUserDOFactory.newUserByPhoneLogin();
+        user.setUnionId(userUnionId);
         user = userRepository.save(user);
         return user;
     }

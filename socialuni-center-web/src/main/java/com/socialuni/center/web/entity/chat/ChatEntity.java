@@ -27,12 +27,12 @@ public class ChatEntity {
         chat = chatRepository.save(chat);
 
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
-        ChatUserDO groupOwnerChatUser = new ChatUserDO(chat, groupOwner.getId());
+        ChatUserDO groupOwnerChatUser = new ChatUserDO(chat, groupOwner.getUnionId());
 
         List<ChatUserDO> chatUserDOS = new ArrayList<>();
         chatUserDOS.add(groupOwnerChatUser);
         for (SocialUserDO grouper : groupers) {
-            ChatUserDO grouperChatUser = new ChatUserDO(chat, grouper.getId());
+            ChatUserDO grouperChatUser = new ChatUserDO(chat, grouper.getUnionId());
             chatUserDOS.add(grouperChatUser);
         }
         chatUserRepository.saveAll(chatUserDOS);

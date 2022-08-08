@@ -14,7 +14,7 @@ public class SocialUserFansDetailManage {
     private UserFansDetailRedis userFansDetailRedis;
 
     public SocialUserFansDetailDO getOrCreateUserFollowDetail(SocialUserDO mineUser) {
-        SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(mineUser.getId());
+        SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(mineUser.getUnionId());
         if (socialUserFansDetailDO == null) {
             socialUserFansDetailDO = new SocialUserFansDetailDO(mineUser);
             socialUserFansDetailDO = userFansDetailRedis.save(socialUserFansDetailDO);

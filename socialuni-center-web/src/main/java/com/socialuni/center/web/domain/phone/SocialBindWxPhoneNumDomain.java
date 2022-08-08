@@ -40,7 +40,7 @@ public class SocialBindWxPhoneNumDomain {
         UniUnionIdRO loginResult = UniProviderUtil.getUnionIdRO(socialProviderLoginQO);
         String sessionKey = loginResult.getSession_key();
 
-        socialUserAccountManage.updateSessionKey(UniappProviderType.wx, loginResult.getSession_key(), mineUser.getId());
+        socialUserAccountManage.updateSessionKey(UniappProviderType.wx, loginResult.getSession_key(), mineUser.getUnionId());
         WxPhoneNumRO phoneNumVO;
         try {
             String phoneJson = WxDecode.decrypt(sessionKey, bindPhoneQO.getEncryptedData(), bindPhoneQO.getIv());

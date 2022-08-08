@@ -5,9 +5,9 @@ import com.socialuni.social.constant.ContentType;
 import com.socialuni.center.web.model.DO.ReportDO;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
 import com.socialuni.center.web.model.DO.base.BaseModelParentDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.model.DO.message.MessageDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserImgDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
@@ -59,12 +59,12 @@ public class BaseModelUtils<T> {
     }
 
     public static <T extends BaseModelParentDO> void setBaseModel(T baseModelParentDO, BaseModelDO model) {
-        if (model instanceof TalkDO) {
-            TalkDO talkDO = BaseModelUtils.getModelByClass(model);
-            baseModelParentDO.setTalkId(talkDO.getId());
-        } else if (model instanceof CommentDO) {
-            CommentDO commentDO = BaseModelUtils.getModelByClass(model);
-            baseModelParentDO.setCommentId(commentDO.getId());
+        if (model instanceof SocialTalkDO) {
+            SocialTalkDO talkDO = BaseModelUtils.getModelByClass(model);
+            baseModelParentDO.setTalkId(talkDO.getUnionId());
+        } else if (model instanceof SocialCommentDO) {
+            SocialCommentDO commentDO = BaseModelUtils.getModelByClass(model);
+            baseModelParentDO.setCommentId(commentDO.getUnionId());
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = BaseModelUtils.getModelByClass(model);
             baseModelParentDO.setMessageId(messageDO.getId());

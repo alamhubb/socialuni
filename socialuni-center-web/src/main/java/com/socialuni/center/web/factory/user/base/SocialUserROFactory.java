@@ -8,7 +8,7 @@ public class SocialUserROFactory {
     public static SocialUserRO getUserRO(SocialUserDO userDO) {
         //user基础信息
         SocialUserRO user = new SocialUserRO(SocialContentIdROFactory.getContentIdRO(userDO));
-        user.setId(userDO.getId());
+        user.setId(userDO.getUnionId());
         user.setNickname(userDO.getNickname());
         user.setAvatar(userDO.getAvatar());
         user.setGender(userDO.getGender());

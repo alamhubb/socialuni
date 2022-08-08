@@ -1,8 +1,8 @@
 package com.socialuni.center.web.repository;
 
 
-import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,20 +11,17 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<SocialUserDO, Integer> {
     @Query(value = "select u.id from SocialUserDO u")
     List<Integer> findAllUserIds();
 
     @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
-    SocialUserDO findOneById(Integer id);
+    SocialUserDO findOneByUnionId(Integer id);
 
-    @CachePut(cacheNames = RedisKeysConst.userById, key = "#user.id")
+    @CachePut(cacheNames = RedisKeysConst.userById, key = "#user.unionId")
     SocialUserDO save(SocialUserDO user);
 
-    @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
-    Optional<SocialUserDO> findById(Integer id);
 
     @Query(value = "select u from SocialUserDO u,SocialUserViolationDO su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
     List<SocialUserDO> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);

@@ -5,7 +5,7 @@ import com.socialuni.center.web.constant.TalkTabType;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.SocialHomeTalkQueryStore;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -22,15 +22,15 @@ public class SocialHomeTalkQueryEntity {
     @Resource
     private SocialHomeTalkQueryStore socialHomeTalkQueryStore;
 
-    public List<TalkDO> queryStickTalks(Integer devId) {
+    public List<SocialTalkDO> queryStickTalks(Integer devId) {
         return talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, devId, CommonConst.initNum);
     }
 
     //查询非关注tab的动态列表
-    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO mineUser) {
+    public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO mineUser) {
         List<Integer> talkIds = queryBO.getTalkIds();
 
-        List<TalkDO> stickTalks = new ArrayList<>();
+        List<SocialTalkDO> stickTalks = new ArrayList<>();
         if (TalkTabType.home_type.equals(queryBO.getHomeTabType())) {
             if (talkIds.size() == 0 || (talkIds.size() == 1 && talkIds.get(0).equals(0))) {
                 stickTalks = this.queryStickTalks(queryBO.getDevId());
@@ -51,7 +51,7 @@ public class SocialHomeTalkQueryEntity {
 //        }
 
         //用户的性别，展示的talk行呗
-        List<TalkDO> talkDOS = socialHomeTalkQueryStore.queryHomeTalks(queryBO, mineUser);
+        List<SocialTalkDO> talkDOS = socialHomeTalkQueryStore.queryHomeTalks(queryBO, mineUser);
 
         stickTalks.addAll(talkDOS);
 

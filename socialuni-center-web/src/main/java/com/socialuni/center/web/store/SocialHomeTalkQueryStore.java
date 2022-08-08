@@ -1,7 +1,7 @@
 package com.socialuni.center.web.store;
 
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.center.web.constant.CommonConst;
@@ -28,7 +28,7 @@ public class SocialHomeTalkQueryStore {
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<TalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO user) {
+    public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO user) {
         String postTalkUserGender = queryBO.getTalkUserGender();
         String talkVisibleGender = queryBO.getTalkVisibleGender();
         String tabType = queryBO.getHomeTabType();
@@ -38,7 +38,7 @@ public class SocialHomeTalkQueryStore {
         Integer userId = null;
         String mineUserGender = null;
         if (user != null) {
-            userId = user.getId();
+            userId = user.getUnionId();
             mineUserGender = user.getGender();
         }
 
@@ -118,7 +118,7 @@ public class SocialHomeTalkQueryStore {
         }
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getTalkIds(), userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, hasPeopleImgTalkNeedIdentity);
+        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getTalkIds(), userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, hasPeopleImgTalkNeedIdentity);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

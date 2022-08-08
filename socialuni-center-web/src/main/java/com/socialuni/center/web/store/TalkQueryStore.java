@@ -1,6 +1,6 @@
 package com.socialuni.center.web.store;
 
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.center.web.redis.FollowRedis;
@@ -29,22 +29,22 @@ public class TalkQueryStore {
     @Resource
     FollowRedis followRedis;
 
-    public List<TalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
+    public List<SocialTalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
         List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserFollowsTalkIds(userId, beUserIds, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
-    public List<TalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialUserDO mineUser) {
+    public List<SocialTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialUserDO mineUser) {
         List<Integer> talkIds = queryQO.getTalkIds();
         Integer userId = queryQO.getUserId();
 
         if (ObjectUtils.isEmpty(talkIds)) {
             talkIds = Collections.singletonList(0);
         }
-        List<TalkDO> talks;
-        if (mineUser != null && mineUser.getId().equals(userId)) {
+        List<SocialTalkDO> talks;
+        if (mineUser != null && mineUser.getUnionId().equals(userId)) {
             talks = this.queryTalksTop10ByMine(talkIds, userId);
         } else {
             talks = this.queryTalksTop10ByUser(talkIds, userId);
@@ -52,14 +52,14 @@ public class TalkQueryStore {
         return talks;
     }
 
-    public List<TalkDO> queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
+    public List<SocialTalkDO> queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
     //查看自己的动态，能查看到预审查状态的
-    public List<TalkDO> queryTalksTop10ByMine(List<Integer> talkIds, Integer userId) {
+    public List<SocialTalkDO> queryTalksTop10ByMine(List<Integer> talkIds, Integer userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryMineTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
@@ -72,26 +72,26 @@ public class TalkQueryStore {
 //        log.info("queryUserTalkIdsByTab开始：" + new Date().getTime() / 1000);
 
 //        为什么区分两个方法, 因为这个是通用的，下面那个是区分用户的，所以不一起缓存
-        List<Integer> ids = talkRedis.queryTalkIdsByTab(postTalkUserGender, minAge, maxAge, adCode,
+        List<Integer> talkUnionIds = talkRedis.queryTalkIdsByTab(postTalkUserGender, minAge, maxAge, adCode,
                 talkVisibleGender, mineUserGender, tagIds, devId, circleId, hasPeopleImgTalkNeedIdentity);
 
         if (mineUserId != null) {
             List<Integer> mineTalkIds = talkRedis.queryMineTalkIdsByCom(mineUserId, circleId);
-            ids.addAll(mineTalkIds);
+            talkUnionIds.addAll(mineTalkIds);
         }
 
 //        queryTime,
 
         //对id进行下排序，找到前10
-        ids = talkRepository.queryTalkIdsByIds(ids, queryTime, pageable);
+        talkUnionIds = talkRepository.queryTalkIdsByIds(talkUnionIds, queryTime, pageable);
 //        log.info("queryUserTalkIdsByTab结束：" + new Date().getTime() / 1000);
-        return ids;
+        return talkUnionIds;
     }
 
-    public List<TalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String postTalkUserGender,
-                                                                         Integer minAge, Integer maxAge, String adCode,
-                                                                         List<Integer> tagIds, String talkVisibleGender,
-                                                                         String mineUserGender, Integer devId, Date queryTime, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
+    public List<SocialTalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String postTalkUserGender,
+                                                                               Integer minAge, Integer maxAge, String adCode,
+                                                                               List<Integer> tagIds, String talkVisibleGender,
+                                                                               String mineUserGender, Integer devId, Date queryTime, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
         int page = talkIds.size() / 10;
         List<Integer> ids = this.queryTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
                 talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId, queryTime, circleId, hasPeopleImgTalkNeedIdentity);
@@ -99,12 +99,12 @@ public class TalkQueryStore {
     }
 
     //根据id列表从缓存中读取talk列表
-    public List<TalkDO> queryTalksByIds(List<Integer> ids) {
-        List<TalkDO> talkDOS = new ArrayList<>();
+    public List<SocialTalkDO> queryTalksByIds(List<Integer> ids) {
+        List<SocialTalkDO> talkDOS = new ArrayList<>();
         for (Integer id : ids) {
 //            SocialTalkRO talkEO = TalkROFactory.newTalkRO(id);
 //            talkDOS.add(talkEO);
-            TalkDO talkDO = TalkUtils.get(id);
+            SocialTalkDO talkDO = TalkUtils.get(id);
             talkDOS.add(talkDO);
         }
         return talkDOS;

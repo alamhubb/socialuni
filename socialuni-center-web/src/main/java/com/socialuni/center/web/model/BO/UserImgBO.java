@@ -59,7 +59,7 @@ public class UserImgBO {
         userImgDO.setAspectRatio(this.getAspectRatio());
         userImgDO.setQuality(this.getQuality());
         userImgDO.setSize(this.size);
-        userImgDO.setUserId(user.getId());
+        userImgDO.setUserId(user.getUnionId());
         userImgDO.setStatus(ContentStatus.enable);
         userImgDO.setCreateTime(new Date());
         userImgDO.setContent(AppConfigConst.img_content);

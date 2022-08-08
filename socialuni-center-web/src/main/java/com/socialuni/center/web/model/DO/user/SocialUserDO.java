@@ -1,6 +1,5 @@
 package com.socialuni.center.web.model.DO.user;
 
-import com.socialuni.center.web.model.DO.SocialContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,12 +17,13 @@ import java.io.Serializable;
                 @Index(columnList = "age"),
                 @Index(columnList = "type"),
                 @Index(columnList = "status"),
+                @Index(columnList = "unionId"),
                 //通过程序保证手机号唯一，要不然没办法设置默认值，''会出现列不唯一的情况，null会影响索引
         }
 )
 @Data
 @NoArgsConstructor
-public class SocialUserDO extends SocialContentBaseDO implements Serializable {
+public class SocialUserDO extends SocialUnionContentBaseDO implements Serializable {
     private String nickname;
     private String avatar;
     private String gender;

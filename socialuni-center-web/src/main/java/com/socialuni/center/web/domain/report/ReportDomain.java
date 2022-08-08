@@ -7,7 +7,7 @@ import com.socialuni.center.web.factory.ReportFactory;
 import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.service.KeywordsService;
 import com.socialuni.center.web.service.KeywordsTriggerService;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.domain.BaseModelService;
@@ -62,7 +62,7 @@ public class ReportDomain {
     BaseModelService baseModelService;
 
     @Transactional
-    public void checkImgCreateReport(TalkDO talkDO, List<SocialTalkImgAddQO> imgs) {
+    public void checkImgCreateReport(SocialTalkDO talkDO, List<SocialTalkImgAddQO> imgs) {
         if (imgs.size() > 0) {
             for (SocialTalkImgAddQO img : imgs) {
                 String imgFullUrl = SocialAppConfig.getStaticResourceUrl() + img.getSrc();

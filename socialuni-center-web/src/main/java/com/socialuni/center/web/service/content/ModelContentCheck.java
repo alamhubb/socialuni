@@ -52,7 +52,7 @@ public class ModelContentCheck {
     private IllegalWordService illegalWordService;
 
     public void checkUser(SocialUserDO mineUser) {
-        SocialUserPhoneDO userPhoneNum = SocialUserUtil.getUserPhoneNumDO(mineUser.getId());
+        SocialUserPhoneDO userPhoneNum = SocialUserUtil.getUserPhoneNumDO(mineUser.getUnionId());
 
         //如果不为系统管理员，只有管理员才能评论置顶内容
         //未绑定手机号，不能发表动态，正常用户应该无法访问，应为突破了内容，或者逻辑有问题
@@ -112,7 +112,7 @@ public class ModelContentCheck {
 //        if (!UserType.system.equals(requestUser.getType())) {
         this.checkUser(requestUser);
         if (StringUtils.isNotEmpty(content)) {
-            boolean hasAuth = SocialUserUtil.getUserIsIdentityAuth(requestUser.getId());
+            boolean hasAuth = SocialUserUtil.getUserIsIdentityAuth(requestUser.getUnionId());
             if (!hasAuth) {
                 ModelContentCheck.hasUn18Content(content);
             }

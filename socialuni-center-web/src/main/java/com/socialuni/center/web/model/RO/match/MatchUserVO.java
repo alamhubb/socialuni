@@ -50,7 +50,7 @@ public class MatchUserVO {
 
     public MatchUserVO(SocialUserDO user, SocialUserDO sessionUser) {
         if (user != null) {
-            this.id = UnionIdDbUtil.createUserImgUid(user.getId());
+            this.id = UnionIdDbUtil.createUserUid(user.getUnionId());
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
             this.gender = user.getGender();
 //            this.location = user.getLocation();
@@ -60,7 +60,7 @@ public class MatchUserVO {
             //满分10W /1千，得到百分之颜值分
 //            this.faceRatio = (int) Math.ceil((double) user.getFaceRatio() / MatchConstants.FACE_RATIO_BASE_MULTIPLE);
 //            this.likeCount = user.getLikeCount();
-            List<SocialUserImgDO> userImgDOS = UserImgDOUtils.getImgs(user.getId());
+            List<SocialUserImgDO> userImgDOS = UserImgDOUtils.getImgs(user.getUnionId());
 //            this.imgs = UserImgBO.userImgDOToVOS(userImgDOS, sessionUser);
 //            this.onlineFlag = user.getOnlineFlag();
 //            this.lastOnlineTime = user.getLastOnlineTime();

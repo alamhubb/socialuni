@@ -36,11 +36,11 @@ public class CenterOAuthService {
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         Integer devId = DevAccountUtils.getDevIdNotNull();
-        ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getId(), AuthType.phone, CommonStatus.enable);
+        ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
             return new ResultRO<>();
         }
-        String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getId());
+        String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getUnionId());
         return ResultRO.success(new OAuthGetUserPhoneNumRO(phoneNum));
     }
 

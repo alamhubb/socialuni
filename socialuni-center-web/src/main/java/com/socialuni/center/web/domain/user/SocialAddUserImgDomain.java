@@ -32,7 +32,7 @@ public class SocialAddUserImgDomain {
         userImgDO.setAspectRatio(socialUserImgAddQO.getAspectRatio());
         userImgDO.setQuality(socialUserImgAddQO.getQuality());
         userImgDO.setSize(socialUserImgAddQO.getSize());
-        userImgDO.setUserId(mineUser.getId());
+        userImgDO.setUserId(mineUser.getUnionId());
         userImgDO.setStatus(ContentStatus.enable);
         userImgDO.setCreateTime(new Date());
         userImgDO.setContent(AppConfigConst.img_content);

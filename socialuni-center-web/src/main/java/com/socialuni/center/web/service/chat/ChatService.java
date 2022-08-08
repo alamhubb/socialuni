@@ -32,7 +32,7 @@ public class ChatService {
     //获取私聊的chat
     //查看对方主页时
     public ChatRO seeUserDetailGetOrCreateChat(SocialUserDO user, Integer receiveUserId) {
-        Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatStatusAndUserIdAndReceiveUserId(ChatStatus.enable, user.getId(), receiveUserId);
+        Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatStatusAndUserIdAndReceiveUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
         ChatUserDO chatUserDO;
         //如果创建过，则获取。返回
         if (chatUserDOOptional.isPresent()) {
@@ -61,11 +61,11 @@ public class ChatService {
         chat = chatRepository.save(chat);
 
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
-        ChatUserDO mineChatUser = new ChatUserDO(chat, user.getId(), receiveUserId);
+        ChatUserDO mineChatUser = new ChatUserDO(chat, user.getUnionId(), receiveUserId);
         //创建时不改为true，详见fronshow字段，修改状态逻辑
 //        mineChatUser.setFrontShow(true);
 
-        ChatUserDO receiveChatUser = new ChatUserDO(chat, receiveUserId, user.getId());
+        ChatUserDO receiveChatUser = new ChatUserDO(chat, receiveUserId, user.getUnionId());
 
         List<ChatUserDO> chatUserDOS = Arrays.asList(mineChatUser, receiveChatUser);
         chatUserRepository.saveAll(chatUserDOS);

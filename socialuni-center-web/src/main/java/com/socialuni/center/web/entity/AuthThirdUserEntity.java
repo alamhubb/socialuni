@@ -47,12 +47,12 @@ public class AuthThirdUserEntity {
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //只是记录一个授权记录
-        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getId(), centerMineUserDetailRO.getId().toString());
+        ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getUnionId(), centerMineUserDetailRO.getId().toString());
 
         if (AuthType.phone.equals(authType)) {
             thirdUserAuthManage.getOrCreate(threeUserDO, AuthType.user);
             //只有为手机号授权时才返回手机号
-            SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
+            SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getUnionId());
             if (socialUserPhoneDO == null) {
                 throw new SocialBusinessException("用户未绑定手机号，请先绑定手机号");
             }

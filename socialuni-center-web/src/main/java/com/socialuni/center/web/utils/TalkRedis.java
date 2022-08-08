@@ -3,7 +3,7 @@ package com.socialuni.center.web.utils;
 import com.socialuni.center.web.redis.RedisKeysUtil;
 import com.socialuni.center.web.redis.redisKey.RedisKeysConst;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.mapper.TalkMapper;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import org.springframework.cache.annotation.CacheEvict;
@@ -33,9 +33,9 @@ public class TalkRedis {
 //                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, allEntries = true),
                     @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, allEntries = true),
             },
-            put = {@CachePut(cacheNames = RedisKeysConst.talkById, key = "#talkDO.id")}
+            put = {@CachePut(cacheNames = RedisKeysConst.talkById, key = "#talkDO.unionId")}
     )
-    public TalkDO save(TalkDO talkDO) {
+    public SocialTalkDO save(SocialTalkDO talkDO) {
         //清空用户的
         Set redisKeys = redisUtil.keys(RedisKeysUtil.getRedisKeys(RedisKeysConst.queryUserTalkIds, talkDO.getUserId() + "*"));
         //清空自己的

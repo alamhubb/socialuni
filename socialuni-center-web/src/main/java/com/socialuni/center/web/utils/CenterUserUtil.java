@@ -12,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
 @Slf4j
 @Component
 public class CenterUserUtil {
@@ -96,21 +94,21 @@ public class CenterUserUtil {
         if (user == null) {
             return null;
         }
-        return user.getId();
+        return user.getUnionId();
     }
 
     public static Integer getMineUserId() {
         SocialUserDO user = CenterUserUtil.getMineUserNotNull();
-        return user.getId();
+        return user.getUnionId();
     }
 
     public static String getMineUserUnionId() {
         SocialUserDO user = CenterUserUtil.getMineUserNotNull();
-        return UnionIdDbUtil.createUserUid(user.getId());
+        return UnionIdDbUtil.createUserUid(user.getUnionId());
     }
 
     public static String getUserUnionId(SocialUserDO userDO) {
-        return UnionIdDbUtil.createUserUid(userDO.getId());
+        return UnionIdDbUtil.createUserUid(userDO.getUnionId());
     }
 
     public static String getMineUserStringId() {
@@ -133,7 +131,7 @@ public class CenterUserUtil {
             return null;
         }
         //返回user
-        return user.getId();
+        return user.getUnionId();
     }
 
     public static SocialUserDO getMineUserInterceptor() {
@@ -174,7 +172,7 @@ public class CenterUserUtil {
 
     public static String getMineUserPhoneNum() {
         SocialUserDO userDO = CenterUserUtil.getMineUserNotNull();
-        return SocialUserUtil.getUserPhoneNum(userDO.getId());
+        return SocialUserUtil.getUserPhoneNum(userDO.getUnionId());
     }
 
     public static SocialUserDO get(String userId) {

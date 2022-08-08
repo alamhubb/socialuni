@@ -3,7 +3,8 @@ package com.socialuni.center.web.factory;
 import com.socialuni.center.web.model.RectangleVO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.DO.DistrictDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
+import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
@@ -16,8 +17,8 @@ import java.util.List;
 
 @Component
 public class TalkDOFactory {
-    public static TalkDO newTalkDO(SocialUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
-        TalkDO talkDO = new TalkDO(user.getId(), socialTalkPostQO.getContent());
+    public static SocialTalkDO newTalkDO(SocialUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
+        SocialTalkDO talkDO = new SocialTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
 
         talkDO.setDevId(socialTalkPostQO.getDevId());
         //设置社交联盟唯一id
@@ -61,7 +62,7 @@ public class TalkDOFactory {
             }
         }
 
-        Boolean userIdentityAuth = SocialUserUtil.getUserIsIdentityAuth(user.getId());
+        Boolean userIdentityAuth = SocialUserUtil.getUserIsIdentityAuth(user.getUnionId());
         //如果存在人物图像，则不可发表
         if (talkDO.getHasPeopleImg()) {
             if (!userIdentityAuth) {
@@ -71,8 +72,10 @@ public class TalkDOFactory {
 
 
         //是否已经认证
-        talkDO.setIdentityAuth(SocialUserUtil.getUserIsIdentityAuth(user.getId()));
+        talkDO.setIdentityAuth(SocialUserUtil.getUserIsIdentityAuth(user.getUnionId()));
 
+        Integer talkUnionId = UnionIdDbUtil.createTalkUuid();
+        talkDO.setUnionId(talkUnionId);
         return talkDO;
     }
 }

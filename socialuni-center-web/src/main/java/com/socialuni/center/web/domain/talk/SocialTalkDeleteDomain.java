@@ -1,7 +1,7 @@
 package com.socialuni.center.web.domain.talk;
 
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.utils.TalkRedis;
@@ -32,15 +32,15 @@ public class SocialTalkDeleteDomain {
          * 如果是系统管理员删除动态，则必须填写原因，删除后发表动态的用户将被封禁
          * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
          */
-        TalkDO talkDO = talkRepository.findOneById(talkDeleteQO.getTalkId());
+        SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkDeleteQO.getTalkId());
         //或者不为自己可见的状态
         if (talkDO == null || !ContentStatus.selfCanSeeContentStatus.contains(talkDO.getStatus())) {
             throw new ParameterMisuseException("无法删除不存在的动态");
         }
         //不是管理员的话就必须是自己删除自己
         //是否是自己删除自己的动态
-        if (!talkDO.getUserId().equals(mineUser.getId())) {
-            log.warn("有人尝试删除不属于自己的动态,用户名:{},id:{},尝试删除talkId：{}", mineUser.getNickname(), mineUser.getId(), talkDO.getId());
+        if (!talkDO.getUserId().equals(mineUser.getUnionId())) {
+            log.warn("有人尝试删除不属于自己的动态,用户名:{},id:{},尝试删除talkId：{}", mineUser.getNickname(), mineUser.getUnionId(), talkDO.getUnionId());
             throw new ParameterMisuseException("系统异常，无法删除不属于自己的动态");
         }
         talkDO.setUpdateTime(new Date());

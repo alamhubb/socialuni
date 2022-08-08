@@ -56,7 +56,7 @@ public class SocialUserUtil {
         if (user == null) {
             return null;
         }
-        Integer userId = user.getId();
+        Integer userId = user.getUnionId();
         return userId;
     }
 
@@ -65,7 +65,7 @@ public class SocialUserUtil {
         if (mineUser == null) {
             return null;
         }
-        Integer userId = mineUser.getId();
+        Integer userId = mineUser.getUnionId();
         return userId;
     }
 
@@ -104,7 +104,7 @@ public class SocialUserUtil {
             return null;
         }
         //返回user
-        return user.getId();
+        return user.getUnionId();
     }
 
     public static SocialUserDO getMineUserInterceptor() {
@@ -133,7 +133,7 @@ public class SocialUserUtil {
 
     public static String getMineUserPhoneNum() {
         SocialUserDO userDO = SocialUserUtil.getMineUserAllowNull();
-        return SocialUserUtil.getUserPhoneNum(userDO.getId());
+        return SocialUserUtil.getUserPhoneNum(userDO.getUnionId());
     }
 
     public static String getUserPhoneNum(Integer userId) {
@@ -173,7 +173,7 @@ public class SocialUserUtil {
         if (userId == null) {
             throw new SocialNullUserException();
         }
-        SocialUserDO commonUserDOOptional = userRepository.findOneById(userId);
+        SocialUserDO commonUserDOOptional = userRepository.findOneByUnionId(userId);
         if (commonUserDOOptional == null) {
             throw new SocialNullUserException();
         }
@@ -184,7 +184,7 @@ public class SocialUserUtil {
         if (userId == null) {
             return null;
         }
-        return userRepository.findOneById(userId);
+        return userRepository.findOneByUnionId(userId);
     }
 
     public static Boolean getUserIsIdentityAuth(Integer userId) {
@@ -207,6 +207,6 @@ public class SocialUserUtil {
         if (mineUser == null) {
             return false;
         }
-        return userId.equals(mineUser.getId());
+        return userId.equals(mineUser.getUnionId());
     }
 }

@@ -2,7 +2,7 @@ package com.socialuni.center.web.repository;
 
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.center.web.model.DO.base.BaseModelDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -24,12 +24,12 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface CommentRepository extends JpaRepository<CommentDO, Integer> {
+public interface CommentRepository extends JpaRepository<SocialCommentDO, Integer> {
     BaseModelDO findOneByIdAndStatus(Integer id, String status);
 
-    CommentDO findOneById(Integer id);
+    SocialCommentDO findOneByUnionId(Integer id);
 
-    CommentDO findOneBySocialuniUid(String id);
+    SocialCommentDO findOneBySocialuniUid(String id);
 
     @Caching(evict = {
             //用户的talks肯定变化了
@@ -41,40 +41,40 @@ public interface CommentRepository extends JpaRepository<CommentDO, Integer> {
             @CacheEvict(cacheNames = "commentComments3", key = "#comment.parentCommentId", condition = "#comment.parentCommentId!=null"),
             @CacheEvict(cacheNames = "commentComments50", key = "#comment.parentCommentId", condition = "#comment.parentCommentId!=null")
     })
-    CommentDO save(CommentDO comment);
+    SocialCommentDO save(SocialCommentDO comment);
 
     //    展示评论
     @Cacheable(cacheNames = "talkComments5", key = "{#talkId}")
-    List<CommentDO> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
+    List<SocialCommentDO> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
 
 
-    List<CommentDO> findTop10ByUserIdOrderByUpdateTimeDesc(Integer userId);
+    List<SocialCommentDO> findTop10ByUserIdOrderByUpdateTimeDesc(Integer userId);
 
     //    talk详情页展示评论
     @Cacheable(cacheNames = "talkComments50", key = "{#talkId}")
-    List<CommentDO> findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
+    List<SocialCommentDO> findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);
 
     @Cacheable(cacheNames = "commentComments3", key = "{#commentId}")
-    List<CommentDO> findTop3ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Integer commentId, List<String> status);
+    List<SocialCommentDO> findTop3ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Integer commentId, List<String> status);
 
     //   展示子回复,避免性能问题，限制最多50条，再多不如私聊了
     @Cacheable(cacheNames = "commentComments50", key = "{#commentId}")
-    List<CommentDO> findTop50ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Integer commentId, List<String> status);
+    List<SocialCommentDO> findTop50ByParentCommentIdAndStatusInOrderByUpdateTimeDesc(Integer commentId, List<String> status);
 
     @Transactional
     @Modifying
-    @Query("update CommentDO t set t.status = '" + CommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
+    @Query("update SocialCommentDO t set t.status = '" + CommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
     Integer updateUserCommentStatusIn(@Param("userId") Integer userId, @Param("status") List<String> status);
 
-    Optional<CommentDO> findOneByIdAndStatusIn(Integer id, List<String> status);
+    Optional<SocialCommentDO> findOneByIdAndStatusIn(Integer id, List<String> status);
 
     //获取最新的评论
-    CommentDO findFirstByTalkIdOrderByIdDesc(Integer talkId);
+    SocialCommentDO findFirstByTalkIdOrderByIdDesc(Integer talkId);
 
 
-    List<CommentDO> findByParentCommentId(Integer commentId);
+    List<SocialCommentDO> findByParentCommentId(Integer commentId);
 
 
     //查询关键词触发次数时使用
-    Page<CommentDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
+    Page<SocialCommentDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
 }

@@ -33,21 +33,21 @@ public class SocialContentUserROFactory {
         userRO.setHasBeFollowed(false);
         userRO.setIdentityAuth(false);
 
-        if (mineUser != null && user.getId().equals(mineUser.getId())) {
+        if (mineUser != null && user.getUnionId().equals(mineUser.getUnionId())) {
             userRO.setIsMine(true);
         } else {
             userRO.setIsMine(false);
         }
 
         if (mineUser != null && !userRO.getIsMine()) {
-            boolean hasFollowUser = followManage.userHasFollowBeUser(mineUser.getId(), user.getId());
+            boolean hasFollowUser = followManage.userHasFollowBeUser(mineUser.getUnionId(), user.getUnionId());
             userRO.setHasFollowed(hasFollowUser);
 
-            boolean hasBeFollowed = followManage.userHasFollowBeUser(user.getId(), mineUser.getId());
+            boolean hasBeFollowed = followManage.userHasFollowBeUser(user.getUnionId(), mineUser.getUnionId());
             userRO.setHasBeFollowed(hasBeFollowed);
         }
 
-        SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.findFirstByUserId(user.getId());
+        SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.findFirstByUserId(user.getUnionId());
         if (socialUserIdentityAuthDO != null) {
             if (UserIdentityAuthStatus.authSuccessList.contains(socialUserIdentityAuthDO.getStatus())) {
                 userRO.setIdentityAuth(true);

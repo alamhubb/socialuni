@@ -21,7 +21,7 @@ public class SocialUserFollowDetailROFactory {
     }
 
     public static SocialUserFollowDetailRO newSocialFollowUserRO(SocialUserDO user, SocialUserDO mineUser) {
-        SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(user.getId());
+        SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(user.getUnionId());
         if (socialUserFansDetailDO == null) {
             throw new SocialSystemException("用户粉丝详情未创建");
         }

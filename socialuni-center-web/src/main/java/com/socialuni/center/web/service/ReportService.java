@@ -80,7 +80,7 @@ public class ReportService {
                 if (isViolation) {
                     Date todayZero = DateUtils.getTodayZeroDate();
                     //查看用户待审核的举报数量
-                    Integer reportSuccessCount = reportDetailRepository.countByUserIdAndStatusNotAndCreateTimeBetween(detailUser.getId(), ReportStatus.audit, todayZero, curDate);
+                    Integer reportSuccessCount = reportDetailRepository.countByUserIdAndStatusNotAndCreateTimeBetween(detailUser.getUnionId(), ReportStatus.audit, todayZero, curDate);
                     //todo  缺少发送通知功能，等我精神好了在写
                     reportDetailDO.setStatus(ReportStatus.violation);
                     if (reportSuccessCount > 9) {
@@ -107,7 +107,7 @@ public class ReportService {
 //                    detailUser.setJusticeValue(detailUser.getJusticeValue() - AppConfigConst.reportErrorValue);
                 }
                 justiceValueOrderDO.setCreateTime(curDate);
-                justiceValueOrderDO.setUserId(detailUser.getId());
+                justiceValueOrderDO.setUserId(detailUser.getUnionId());
                 justiceValueOrderDO.setReportDetailId(reportDetailDO.getId());
 
                 justiceValueOrderRepository.save(justiceValueOrderDO);

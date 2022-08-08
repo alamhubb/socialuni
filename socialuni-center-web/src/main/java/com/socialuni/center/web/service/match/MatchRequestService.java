@@ -47,10 +47,10 @@ public class MatchRequestService {
         //上来系统给对方发一个匹配成功;然后对方回复
         ChatDO chat = new ChatDO(ChatType.match);
         //match属于私聊，需要保存对方的内容，方便展示头像昵称
-        ChatUserDO mineChatUser = new ChatUserDO(chat, user.getId(), receiveUser.getId());
+        ChatUserDO mineChatUser = new ChatUserDO(chat, user.getUnionId(), receiveUser.getUnionId());
         //自己的设置为待匹配状态，需要等对方回复后才能改为正常
         mineChatUser.setStatus(MatchType.waitMatch);
-        ChatUserDO receiveChatUser = new ChatUserDO(chat, receiveUser.getId(), user.getId());
+        ChatUserDO receiveChatUser = new ChatUserDO(chat, receiveUser.getUnionId(), user.getUnionId());
         List<ChatUserDO> chatUserDOS = Arrays.asList(mineChatUser, receiveChatUser);
         //生成chat
         chat = chatRepository.save(chat);
@@ -58,7 +58,7 @@ public class MatchRequestService {
 
 
 //        List<NotifyDO> notifies = new ArrayList<>();
-        MessageDO message = new MessageDO(chat.getId(), "匹配成功，只有您能主动发起会话", user.getId(), MessageType.system);
+        MessageDO message = new MessageDO(chat.getId(), "匹配成功，只有您能主动发起会话", user.getUnionId(), MessageType.system);
         List<MessageReceiveDO> messageReceiveDOS = new ArrayList<>();
         //给自己和对方各生成一条消息
         for (ChatUserDO chatUserDO : chatUserDOS) {
@@ -69,7 +69,7 @@ public class MatchRequestService {
         }
         messageReceiveDORepository.saveAll(messageReceiveDOS);
         message = messageRepository.save(message);
-        Optional<MessageReceiveDO> messageReceiveOptional = messageReceiveDOS.stream().filter(receiveMsg -> receiveMsg.getUserId().equals(receiveUser.getId())).findFirst();
+        Optional<MessageReceiveDO> messageReceiveOptional = messageReceiveDOS.stream().filter(receiveMsg -> receiveMsg.getUserId().equals(receiveUser.getUnionId())).findFirst();
         /*if (messageReceiveOptional.isPresent()) {
             NotifyDO notifyDO = new NotifyDO(messageReceiveOptional.get());
             notifies.add(notifyDO);

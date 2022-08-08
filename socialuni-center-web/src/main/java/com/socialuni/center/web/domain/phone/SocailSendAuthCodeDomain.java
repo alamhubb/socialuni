@@ -57,7 +57,7 @@ public class SocailSendAuthCodeDomain {
             socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
         } else {
             //校验手机号是否可用
-            socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getId());
+            socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getUnionId());
         }
 
         //然后查ip总次数，大于2也不行
@@ -82,7 +82,7 @@ public class SocailSendAuthCodeDomain {
         Integer phoneNumCount = authRepository.countByPhoneNum(phoneNum);
 
         if (mineUser != null) {
-            Integer userCount = authRepository.countByUserId(mineUser.getId());
+            Integer userCount = authRepository.countByUserId(mineUser.getUnionId());
             if (userCount >= userLimitCount) {
 //                UserLogStoreUtils.save(new UserLogDO("用户获取达到获取验证码次数上限", user, phoneNum));
 //                return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);

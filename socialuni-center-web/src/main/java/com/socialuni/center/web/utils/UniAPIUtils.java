@@ -58,7 +58,7 @@ public class UniAPIUtils {
             if (!DevAccountUtils.pusherIsCenterServer()) {
                 throw new SocialParamsException("开发者信息错误");
             }
-            UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUnionId(contentUnionId);
+            UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(contentUnionId);
             if (uniContentUnionIdDO != null) {
                 log.info("重复写入数据:{}", contentUnionId);
                 return null;

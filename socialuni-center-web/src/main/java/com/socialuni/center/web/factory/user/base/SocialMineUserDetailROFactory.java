@@ -29,7 +29,7 @@ public class SocialMineUserDetailROFactory {
 
     public static SocialMineUserDetailRO getMineUserDetail(SocialUserDO mineUser) {
         //用户关注粉丝数
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getId());
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getUnionId());
 
         return SocialMineUserDetailROFactory.getMineUserDetail(mineUser, socialUserPhoneDO);
     }

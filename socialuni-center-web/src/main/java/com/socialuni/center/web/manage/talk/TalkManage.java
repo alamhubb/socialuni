@@ -1,6 +1,6 @@
 package com.socialuni.center.web.manage.talk;
 
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.TalkQueryStore;
 import com.socialuni.center.web.utils.TalkRedis;
@@ -30,7 +30,7 @@ public class TalkManage {
      * @param talk
      * @return
      */
-    public TalkDO updateTalkByAddComment(TalkDO talk) {
+    public SocialTalkDO updateTalkByAddComment(SocialTalkDO talk) {
         Integer commentNum = talk.getCommentNum();
         if (commentNum == null) {
             talk.setCommentNum(1);

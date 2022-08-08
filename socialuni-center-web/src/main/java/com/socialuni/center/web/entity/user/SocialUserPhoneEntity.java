@@ -26,7 +26,7 @@ public class SocialUserPhoneEntity {
         SocialUserDO mineUser = socialUserManage.createUserByPhoneLogin();
         //创建或返回
         socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-        socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), "86", phoneNum);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), "86", phoneNum);
         return mineUser;
     }
 
@@ -34,9 +34,9 @@ public class SocialUserPhoneEntity {
     public SocialUserDO checkPhoneNumAndCreateBind(SocialUserDO mineUser, String phoneCountryCode, String phoneNum) {
         //业务校验
         //校验手机号是否已被使用
-        socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getId());
+        socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getUnionId());
 
-        socialUserPhoneManage.createUserPhoneNum(mineUser.getId(), phoneCountryCode, phoneNum);
+        socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), phoneCountryCode, phoneNum);
 
         mineUser.setUpdateTime(new Date());
         mineUser = userRepository.save(mineUser);

@@ -9,7 +9,7 @@ import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
 import com.socialuni.center.web.model.DO.tag.TagDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
@@ -120,7 +120,7 @@ public class SocialHomeTalkQueryDomain {
             throw new SocialParamsException("错误的tab类型");
         }
         //得到数据库talk
-        List<TalkDO> talkDOS;
+        List<SocialTalkDO> talkDOS;
         //为关注，查询关注
         if ((TalkTabType.follow_type.equals(tabType))) {
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(queryBO.getTalkIds(), mineUser);

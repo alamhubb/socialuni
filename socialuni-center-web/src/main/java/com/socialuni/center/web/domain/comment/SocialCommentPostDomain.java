@@ -3,27 +3,26 @@ package com.socialuni.center.web.domain.comment;
 import com.socialuni.center.web.constant.UserType;
 import com.socialuni.center.web.domain.notify.NotifyDomain;
 import com.socialuni.center.web.domain.report.ReportDomain;
+import com.socialuni.center.web.entity.comment.SocialPostCommentEntity;
 import com.socialuni.center.web.factory.SocialCommentROFactory;
-import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
-import com.socialuni.center.web.service.content.ModelContentCheck;
 import com.socialuni.center.web.model.DO.NotifyDO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.center.web.entity.comment.SocialPostCommentEntity;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.repository.community.TalkRepository;
+import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
+import com.socialuni.center.web.service.content.ModelContentCheck;
+import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author qinkaiyuan
@@ -56,9 +55,9 @@ public class SocialCommentPostDomain {
         //校验结果
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
         //保存comment，内部关联保存了talk、parentComment、replyComment
-        commentAddLineTransfer = socialPostCommentEntity.saveComment(addQO, commentAddLineTransfer, mineUser.getId());
+        commentAddLineTransfer = socialPostCommentEntity.saveComment(addQO, commentAddLineTransfer, mineUser.getUnionId());
 
-        CommentDO commentDO = commentAddLineTransfer.getCommentDO();
+        SocialCommentDO commentDO = commentAddLineTransfer.getCommentDO();
 
         // 校验是否触发关键词
         reportDomain.checkKeywordsCreateReport(commentDO);
@@ -82,11 +81,10 @@ public class SocialCommentPostDomain {
 
         Integer talkId = addVO.getTalkId();
         //因为与下面有关联所以拿到了上面
-        Optional<TalkDO> talkOptional = talkRepository.findById(talkId);
-        if (!talkOptional.isPresent()) {
+        SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkId);
+        if (talkDO == null) {
             throw new SocialParamsException("无法评论不存在的动态");
         }
-        TalkDO talkDO = talkOptional.get();
         //不为系统用户才校验
         if (!UserType.system.equals(requestUser.getType())) {
             if (!ObjectUtils.isEmpty(talkDO.getGlobalTop()) && talkDO.getGlobalTop() > 0) {
@@ -94,22 +92,20 @@ public class SocialCommentPostDomain {
             }
         }
 
-        CommentDO parentCommentDO = null;
+        SocialCommentDO parentCommentDO = null;
         if (addVO.getCommentId() != null) {
-            Optional<CommentDO> commentOptional = commentRepository.findById(addVO.getCommentId());
-            if (!commentOptional.isPresent()) {
+            parentCommentDO = commentRepository.findOneByUnionId(addVO.getCommentId());
+            if (parentCommentDO == null) {
                 throw new SocialParamsException("无法回复不存在的评论");
             }
-            parentCommentDO = commentOptional.get();
         }
         //得到回复的评论
-        CommentDO replyCommentDO = null;
+        SocialCommentDO replyCommentDO = null;
         if (addVO.getReplyCommentId() != null) {
-            Optional<CommentDO> replyCommentOptional = commentRepository.findById(addVO.getReplyCommentId());
-            if (!replyCommentOptional.isPresent()) {
+            replyCommentDO = commentRepository.findOneByUnionId(addVO.getReplyCommentId());
+            if (replyCommentDO == null) {
                 throw new SocialParamsException("无法回复不存在的子评论");
             }
-            replyCommentDO = replyCommentOptional.get();
         }
         return new CommentAddLineTransfer(talkDO, parentCommentDO, replyCommentDO);
     }

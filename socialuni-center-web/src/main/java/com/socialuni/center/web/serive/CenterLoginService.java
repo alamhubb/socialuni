@@ -1,6 +1,5 @@
 package com.socialuni.center.web.serive;
 
-import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.domain.login.SocialProviderLoginDomain;
 import com.socialuni.center.web.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
@@ -14,12 +13,12 @@ import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.center.web.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.center.web.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.center.web.model.RO.user.login.SocialLoginRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -80,7 +79,7 @@ public class CenterLoginService {
         //根据user获取返回结果
         SocialUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByContentTypeAndContentId(ContentType.user, mineUser.getId());
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(mineUser.getUnionId());
         /*if (uniContentUnionIdDO == null) {
             uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), mineUser.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);

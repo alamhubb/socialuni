@@ -44,7 +44,7 @@ public class SocialMessageROFactory {
 
     //websocket推新消息时设置为未读
     public SocialMessageRO getMessageRO(MessageDO messageDO, boolean readFlag, SocialUserDO user) {
-        SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(messageDO, user.getId());
+        SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(messageDO, user.getUnionId());
         socialMessageRO.setIsRead(false);
         return socialMessageRO;
     }

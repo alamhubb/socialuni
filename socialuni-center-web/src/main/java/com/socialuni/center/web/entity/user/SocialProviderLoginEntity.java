@@ -39,12 +39,12 @@ public class SocialProviderLoginEntity {
         //如果已经注册过
         if (socialUserAccountDO != null) {
             mineUser = SocialUserUtil.getNotNull(socialUserAccountDO.getUserId());
-            socialUserAccountManage.updateSessionKey(loginQO.getProvider(), uniUnionIdRO.getSession_key(), mineUser.getId());
+            socialUserAccountManage.updateSessionKey(loginQO.getProvider(), uniUnionIdRO.getSession_key(), mineUser.getUnionId());
         } else {
             mineUser = socialUserManage.createUserByProviderLogin(loginQO);
             //创建或返回
             socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
-            socialUserAccountManage.create(mineUser.getId(), loginQO, uniUnionIdRO);
+            socialUserAccountManage.create(mineUser.getUnionId(), loginQO, uniUnionIdRO);
         }
         return mineUser;
     }

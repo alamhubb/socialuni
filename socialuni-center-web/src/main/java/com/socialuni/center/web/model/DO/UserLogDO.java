@@ -33,7 +33,7 @@ public class UserLogDO {
     }
 
     public UserLogDO(String content, SocialUserDO user) {
-        this.userId = user != null ? user.getId() : null;
+        this.userId = user != null ? user.getUnionId() : null;
         this.content = content;
         this.createTime = new Date();
         this.ip = IpUtil.getIpAddr();

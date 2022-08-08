@@ -9,7 +9,7 @@ import com.socialuni.center.web.model.DO.circle.SocialCircleDO;
 import com.socialuni.center.web.model.DO.tag.TagDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkCircleDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.center.web.model.RO.community.comment.SocialCommentRO;
@@ -115,24 +115,24 @@ public class SocialTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, Integer talkId) {
-        TalkDO talkDO = TalkUtils.get(talkId);
+        SocialTalkDO talkDO = TalkUtils.get(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialTalkRO getTalkRO(TalkDO talkDO, SocialUserDO mineUser) {
+    public static SocialTalkRO getTalkRO(SocialTalkDO talkDO, SocialUserDO mineUser) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialTalkRO getTalkDetailPageTalkRO(SocialUserDO mineUser, TalkDO talkDO, Boolean showAllComment) {
+    public static SocialTalkRO getTalkDetailPageTalkRO(SocialUserDO mineUser, SocialTalkDO talkDO, Boolean showAllComment) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, TalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, SocialTalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialTalkRO> newHomeTalkROs(SocialUserDO mineUser, List<TalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
+    public static List<SocialTalkRO> newHomeTalkROs(SocialUserDO mineUser, List<SocialTalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -146,12 +146,12 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, TalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, SocialTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialTalkRO socialTalkRO = new SocialTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
 //        Integer talkId = UnionIdDbUtil.createTalkUid(talkDO.getId(), user);
-        Integer talkId = talkDO.getId();
+        Integer talkId = talkDO.getUnionId();
 
         socialTalkRO.setId(talkId);
         SocialUserDO talkUser = SocialUserUtil.getNotNull(talkDO.getUserId());
@@ -162,7 +162,7 @@ public class SocialTalkROFactory {
 
         socialTalkRO.setContent(talkDO.getContent());
         //70毫秒，可缓存
-        List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(talkDO.getId());
+        List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(talkDO.getUnionId());
 //        List<TalkImgDO> imgDOS = talkDO.getImgs();
         if (imgDOS != null && imgDOS.size() > 0) {
             socialTalkRO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
@@ -184,7 +184,7 @@ public class SocialTalkROFactory {
         socialTalkRO.setCircles(circles);
 
         //10 毫秒
-        List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getId());
+        List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
         List<SocialTalkTagRO> tagROs = tagDOS.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
 //        socialTalkRO.setContentType(talkDO.getContentType());
@@ -245,7 +245,7 @@ public class SocialTalkROFactory {
         //40毫秒
         if (mineUser != null) {
             //20毫秒
-            HugDO hugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getId(), mineUser.getId());
+            HugDO hugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
             if (hugDO != null) {
                 socialTalkRO.setHasHugged(true);
             }

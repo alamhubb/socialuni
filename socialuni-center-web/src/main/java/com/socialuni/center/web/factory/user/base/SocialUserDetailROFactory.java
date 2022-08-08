@@ -21,7 +21,7 @@ public class SocialUserDetailROFactory {
         SocialUserDetailRO userDetailVO = new SocialUserDetailRO(socialUserDetailFollowRO);
 
         //用户图片
-        List<SocialUserImgDO> imgDOS = UserImgDOUtils.getImgs(userDO.getId());
+        List<SocialUserImgDO> imgDOS = UserImgDOUtils.getImgs(userDO.getUnionId());
         List<UserImgRO> imgVOS = UserImgROFactory.userImgDOToVOS(imgDOS);
         userDetailVO.setImgs(imgVOS);
 

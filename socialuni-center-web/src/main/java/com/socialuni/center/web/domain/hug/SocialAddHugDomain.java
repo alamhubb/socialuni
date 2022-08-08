@@ -3,7 +3,7 @@ package com.socialuni.center.web.domain.hug;
 import com.socialuni.center.web.redis.HugRedis;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.center.web.model.DO.HugDO;
-import com.socialuni.center.web.model.DO.talk.TalkDO;
+import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.community.SocialHugAddQO;
 import com.socialuni.center.web.utils.TalkRedis;
@@ -23,8 +23,8 @@ public class SocialAddHugDomain {
 
     public ResultRO<Void> addHug(SocialUserDO mineUser, SocialHugAddQO socialHugAddQO) {
         if (socialHugAddQO.getTalkId() != null) {
-            TalkDO talkDO = TalkUtils.get(socialHugAddQO.getTalkId());
-            HugDO hugDO = new HugDO(mineUser.getId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());
+            SocialTalkDO talkDO = TalkUtils.get(socialHugAddQO.getTalkId());
+            HugDO hugDO = new HugDO(mineUser.getUnionId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());
             hugRedis.save(hugDO);
             Integer hugNum = talkDO.getHugNum();
             if (hugNum == null) {

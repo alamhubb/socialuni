@@ -1,7 +1,7 @@
 package com.socialuni.center.web.model;
 
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.utils.CommentUtils;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
@@ -50,7 +50,7 @@ public class UnreadCommentVO {
     public UnreadCommentVO() {
     }
 
-    public UnreadCommentVO(CommentDO commentDO) {
+    public UnreadCommentVO(SocialCommentDO commentDO) {
         SocialUserDO sessionUser = SocialUserUtil.getMineUserAllowNull();
 //        Integer devId = DevAccountUtils.getDevId();
 //
@@ -66,7 +66,7 @@ public class UnreadCommentVO {
         }
     }
 
-    public static List<UnreadCommentVO> commentDOToVOS(List<CommentDO> commentDOS) {
+    public static List<UnreadCommentVO> commentDOToVOS(List<SocialCommentDO> commentDOS) {
         return commentDOS.stream().map(UnreadCommentVO::new).collect(Collectors.toList());
     }
 }

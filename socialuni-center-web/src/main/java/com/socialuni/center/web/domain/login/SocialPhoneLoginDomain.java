@@ -29,7 +29,7 @@ public class SocialPhoneLoginDomain {
 
         SocialMineUserDetailRO userDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getId());
+        SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
 //        SocialUserDeviceLoginHistoryDO socialUserDeviceLoginHistoryDO = new SocialUserDeviceLoginHistoryDO();
 

@@ -67,7 +67,7 @@ public class SocialCircleDO extends CommonContentBaseDO implements Serializable 
     public SocialCircleDO(String name, String description, Integer devId, SocialUserDO createUser) {
         this.name = name;
         this.description = description;
-        this.applyUserId = createUser.getId();
+        this.applyUserId = createUser.getUnionId();
         this.devId = devId;
         this.tagTypeId = 1;
         this.count = 0;

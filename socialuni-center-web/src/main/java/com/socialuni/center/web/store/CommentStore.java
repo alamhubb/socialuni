@@ -1,10 +1,11 @@
 package com.socialuni.center.web.store;
 
 import com.socialuni.center.web.factory.CommentFactory;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.center.web.utils.UnionIdDbUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,8 +19,8 @@ public class CommentStore {
     private CommentFactory commentFactory;
 
     //保存新增的comment
-    public CommentDO saveAddComment(SocialCommentPostQO addVO, Integer mineUserId) {
-        CommentDO commentDO = commentFactory.createCommentDO(
+    public SocialCommentDO saveAddComment(SocialCommentPostQO addVO, Integer mineUserId) {
+        SocialCommentDO commentDO = commentFactory.createCommentDO(
                 addVO,
                 mineUserId
         );
@@ -38,7 +39,7 @@ public class CommentStore {
      */
     public CommentAddLineTransfer updateCommentByAddComment(CommentAddLineTransfer commentAddLineTransfer) {
         Date curDate = new Date();
-        CommentDO parentComment = commentAddLineTransfer.getParentComment();
+        SocialCommentDO parentComment = commentAddLineTransfer.getParentComment();
         //执行comment关联操作
         //为父评论添加子评论数
         if (parentComment != null) {
@@ -49,7 +50,7 @@ public class CommentStore {
             } else {
                 parentComment.setChildCommentNum(++ChildCommentNum);
             }
-            CommentDO replyComment = commentAddLineTransfer.getReplyComment();
+            SocialCommentDO replyComment = commentAddLineTransfer.getReplyComment();
             if (replyComment == null) {
                 //只有直接回复父评论，才更新时间
                 parentComment.setUpdateTime(curDate);

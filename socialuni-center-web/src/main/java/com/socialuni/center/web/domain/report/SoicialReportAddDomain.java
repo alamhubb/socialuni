@@ -78,7 +78,7 @@ public class SoicialReportAddDomain {
                 return new ResultRO<>("您涉嫌胡乱举报，被禁止使用举报功能");
                 //小于-10一天只能举报两次
             }*/
-            Integer reportCount = reportDetailRepository.countByUserIdAndCreateTimeBetween(mineUser.getId(), todayZero, curDate);
+            Integer reportCount = reportDetailRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), todayZero, curDate);
            /* if (userJusticeValue < AppConfigConst.limitReportValue) {
                 if (reportCount >= AppConfigConst.lowLimitReportCount) {
                     return new ResultRO<>("因您的正义值低于：" + AppConfigConst.limitReportValue + "，所以您每天只能举报：" + AppConfigConst.lowLimitReportCount + "次");
@@ -98,7 +98,7 @@ public class SoicialReportAddDomain {
         if (ContentType.talk.equals(reportContentType)) {
             //查询出 评论信息
             //只查询正常能看到的，违规，审核，删除的都提示
-            modelDO = talkRepository.findOneById(reportAddVO.getContentId());
+            modelDO = talkRepository.findOneByUnionId(reportAddVO.getContentId());
         } else if (ContentType.comment.equals(reportContentType)) {
             modelDO = commentRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.message.equals(reportContentType)) {
@@ -123,7 +123,7 @@ public class SoicialReportAddDomain {
         if (!mineUser.getType().equals(UserType.system)) {
             if (UserType.system.equals(receiveUser.getType())) {
                 throw new SocialParamsException("不能举报官方内容");
-            } else if (mineUser.getId().equals(receiveUser.getId())) {
+            } else if (mineUser.getUnionId().equals(receiveUser.getUnionId())) {
                 throw new SocialParamsException("不能举报自己的评论");
             } /*else if (modelDO.getStatus().equals(CommonStatus.noViolation)) {
                 return new ResultVO<>("内容已审核，不违规");
@@ -132,7 +132,7 @@ public class SoicialReportAddDomain {
         return reportDomain.userReportContent(
                 reportAddVO,
                 modelDO,
-                mineUser.getId(), modelDO.getDevId()
+                mineUser.getUnionId(), modelDO.getDevId()
         );
     }
 

@@ -1,7 +1,8 @@
 package com.socialuni.center.web.factory;
 
+import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.center.web.model.DO.comment.CommentDO;
+import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.center.web.repository.CommentRepository;
@@ -21,15 +22,15 @@ public class CommentFactory {
      * @param requestUserId
      * @return
      */
-    public CommentDO createCommentDO(SocialCommentPostQO addVO, Integer requestUserId) {
+    public SocialCommentDO createCommentDO(SocialCommentPostQO addVO, Integer requestUserId) {
         //创建 do一步,获取序号
-        CommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(addVO.getTalkId());
+        SocialCommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(addVO.getTalkId());
         Integer commentNo = 0;
         if (commentNoDO != null) {
             commentNo = commentNoDO.getNo();
         }
         //构建DO，comment基础内容
-        CommentDO comment = new CommentDO();
+        SocialCommentDO comment = new SocialCommentDO();
         comment.setNo(++commentNo);
         comment.setContent(addVO.getContent());
         comment.setStatus(ContentStatus.enable);
@@ -46,6 +47,10 @@ public class CommentFactory {
         comment.setTalkId(addVO.getTalkId());
         comment.setUserId(requestUserId);
         comment.setSocialuniUid(addVO.getSocialuniUid());
+
+        Integer unionId = UnionIdDbUtil.createCommentUuid();
+        comment.setUnionId(unionId);
+
 //        comment.setDevId(DevAccountUtils.getDevId());
 //        comment.setThreeId(threeUnionId);
         return comment;
