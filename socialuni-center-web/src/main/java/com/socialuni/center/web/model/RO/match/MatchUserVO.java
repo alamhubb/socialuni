@@ -50,7 +50,7 @@ public class MatchUserVO {
 
     public MatchUserVO(SocialUserDO user, SocialUserDO sessionUser) {
         if (user != null) {
-            this.id = UnionIdDbUtil.createUserImgUid(user.getId(), sessionUser);
+            this.id = UnionIdDbUtil.createUserImgUid(user.getId());
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
             this.gender = user.getGender();
 //            this.location = user.getLocation();

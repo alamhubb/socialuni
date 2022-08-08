@@ -2,13 +2,12 @@ package com.socialuni.center.web.utils;
 
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.exception.SocialUserBannedException;
-import com.socialuni.center.web.model.DO.UniUserAccountDO;
 import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -18,20 +17,6 @@ import javax.annotation.Resource;
 @Slf4j
 @Component
 public class CenterUserUtil {
-//    private static ThirdUserRepository thirdUserRepository;
-    private static UniUserAccountRepository uniUserAccountRepository;
-
-/*
-    @Resource
-    public void setThirdUserRepository(ThirdUserRepository thirdUserRepository) {
-        CenterUserUtil.thirdUserRepository = thirdUserRepository;
-    }
-*/
-    @Resource
-    public void setUniUserAccountRepository(UniUserAccountRepository uniUserAccountRepository) {
-        CenterUserUtil.uniUserAccountRepository = uniUserAccountRepository;
-    }
-
     //被封禁的用户，可以干嘛，不可以干嘛， 只能往日志里记录id时使用，
     //只有getMineUser时判断状态，只会限制自己
     //携带用户信息，
@@ -55,18 +40,24 @@ public class CenterUserUtil {
 //            ThirdUserTokenDO tokenDO = CenterTokenUtil.getThirdUserTokenDO();
             userDO = SocialUserUtil.getMineUserAllowNull();
         } else {
-            String dataUserUnionId = CenterTokenUtil.getDataUserUnionId();
-            if (StringUtils.isEmpty(dataUserUnionId)){
-                return null;
-            }
-            UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(DevAccountUtils.getDevIdNotNull(), dataUserUnionId);
-            if (uniUserAccountDO == null) {
-                return null;
-            }
-            userDO = SocialUserUtil.getNotNull(uniUserAccountDO.getUserId());
+            userDO = CenterUserUtil.getDataUser();
         }
         return userDO;
     }
+
+
+    public static SocialUserDO getDataUser() {
+        String thirdUserId = CenterTokenUtil.getDataUserUnionId();
+        if (StringUtils.isEmpty(thirdUserId)) {
+            return null;
+        }
+        Integer userId = UnionIdDbUtil.getUserIdByUid(thirdUserId);
+        if (userId == null) {
+            throw new SocialParamsException("错误的用户标识");
+        }
+        return SocialUserUtil.getNotNull(userId);
+    }
+
 
     //改名为notnull就行
     public static SocialUserDO getMineUserNotNull() {
@@ -79,7 +70,6 @@ public class CenterUserUtil {
         }
         return user;
     }
-
 
 
     //下面都是联盟的
@@ -117,6 +107,10 @@ public class CenterUserUtil {
     public static String getMineUserUnionId() {
         SocialUserDO user = CenterUserUtil.getMineUserNotNull();
         return UnionIdDbUtil.createUserUid(user.getId());
+    }
+
+    public static String getUserUnionId(SocialUserDO userDO) {
+        return UnionIdDbUtil.createUserUid(userDO.getId());
     }
 
     public static String getMineUserStringId() {

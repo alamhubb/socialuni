@@ -1,13 +1,16 @@
 package com.socialuni.center.web.utils;
 
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.center.web.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.center.web.repository.dev.ThirdUserTokenRepository;
+import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
+import com.socialuni.social.web.sdk.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 @Slf4j
@@ -35,7 +39,6 @@ public class CenterTokenUtil {
         String token = SocialTokenUtil.getToken();
         return SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
     }
-
 
     public static String getDataUserUnionId() {
         String thirdUserId = RequestUtil.getHeader(SocialFeignHeaderName.dataUserUnionId);

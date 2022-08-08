@@ -5,15 +5,11 @@ import com.socialuni.center.web.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.center.web.domain.user.SocialEditUserDomain;
 import com.socialuni.center.web.entity.UniUserRegistryDomain;
 import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
-import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.model.DO.UniUserAccountDO;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.*;
 import com.socialuni.center.web.model.RO.user.*;
 import com.socialuni.center.web.platform.tencent.TencentCloud;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
-import com.socialuni.center.web.repository.UniUserAccountRepository;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
@@ -24,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 @Service
 @Slf4j
@@ -38,25 +35,16 @@ public class CenterUserService {
     UniUserRegistryDomain socialuniUserRegistryDomain;
     @Resource
     UniContentUnionIdRepository uniContentUnionIdRepository;
-    @Resource
-    UniUserAccountRepository uniUserAccountRepository;
 
+    @Transactional
     public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
         Integer dataDevId = DevAccountUtils.getDevIdNotNull();
-        if (dataDevId == 1){
+        if (dataDevId == 1) {
             throw new SocialParamsException("开发者信息错误");
         }
-        String thirdUserId = loginQO.getUnionId();
-        SocialUserDO mineUserDO;
-        UniUserAccountDO uniUserAccountDO = uniUserAccountRepository.findByDevIdAndThirdUserId(dataDevId, thirdUserId);
-        if (uniUserAccountDO != null) {
-            mineUserDO = SocialUserUtil.getNotNull(uniUserAccountDO.getUserId());
-        } else {
-            mineUserDO = socialuniUserRegistryDomain.registryUser(dataDevId, loginQO);
-            UnionIdDbUtil.createUserUid(mineUserDO.getId());
-            //生成id
-        }
+        SocialUserDO mineUserDO = socialuniUserRegistryDomain.registryUser(loginQO);
+        //生成id
         CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
         return new ResultRO<>(mineUser);
     }
