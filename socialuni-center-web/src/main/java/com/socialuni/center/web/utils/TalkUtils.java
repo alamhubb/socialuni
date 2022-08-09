@@ -17,9 +17,6 @@ public class TalkUtils {
     }
 
     public static SocialTalkDO get(Integer talkId) {
-        if (UnionIdDbUtil.notSelfData(talkId)) {
-            return null;
-        }
         SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkId);
         if (talkDO == null) {
             throw new SocialParamsException("不存在的动态内容");

@@ -5,6 +5,7 @@ import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.TalkQueryStore;
 import com.socialuni.center.web.utils.TalkRedis;
 import com.socialuni.center.web.utils.TalkUtils;
+import com.socialuni.center.web.utils.UnionIdDbUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +32,11 @@ public class TalkManage {
      * @param talk
      * @return
      */
-    public SocialTalkDO updateTalkByAddComment(Integer talkId) {
-        SocialTalkDO talk = TalkUtils.get(talkId);
-        if (talk == null) {
-            return null;
+    public void updateTalkByAddComment(Integer talkId) {
+        if (UnionIdDbUtil.notSelfData(talkId)) {
+            return;
         }
+        SocialTalkDO talk = TalkUtils.get(talkId);
         Integer commentNum = talk.getCommentNum();
         if (commentNum == null) {
             talk.setCommentNum(1);
@@ -44,8 +45,6 @@ public class TalkManage {
         }
         //更新talk更新时间
         talk.setUpdateTime(new Date());
-
-        talk = talkRedis.save(talk);
-        return talk;
+        talkRedis.save(talk);
     }
 }

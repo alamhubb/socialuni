@@ -92,7 +92,11 @@ public class UnionIdDbUtil {
     }
 
     public static Boolean notSelfData(Integer unionId) {
-        return getUnionDOByUnionIdNotNull(unionId).getFromDevId() != 1;
+        return !isSelfData(unionId);
+    }
+
+    public static Boolean isSelfData(Integer unionId) {
+        return getUnionDOByUnionIdNotNull(unionId).getFromDevId() == 1;
     }
 
     //获取可为空， 将中心的数据写入本系统

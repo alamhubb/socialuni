@@ -2,14 +2,13 @@ package com.socialuni.center.web.store;
 
 import com.socialuni.center.web.factory.CommentFactory;
 import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
-import com.socialuni.center.web.repository.CommentRepository;
-import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
 import com.socialuni.center.web.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.center.web.repository.CommentRepository;
+import com.socialuni.center.web.utils.CommentUtils;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @Component
 public class CommentStore {
@@ -34,37 +33,21 @@ public class CommentStore {
     /**
      * 修改comment时，关联更新回复评论和父评论，返回更新后的内容到comment中了
      *
-     * @param commentAddLineTransfer
      * @return
      */
-    public CommentAddLineTransfer updateCommentByAddComment(SocialCommentPostQO addVO) {
-        Date curDate = new Date();
-        SocialCommentDO parentComment = commentAddLineTransfer.getParentComment();
-        //执行comment关联操作
-        //为父评论添加子评论数
-        if (parentComment != null) {
-            Integer ChildCommentNum = parentComment.getChildCommentNum();
-            //这里属于业务
-            if (ChildCommentNum == null) {
-                parentComment.setChildCommentNum(1);
-            } else {
-                parentComment.setChildCommentNum(++ChildCommentNum);
-            }
-            SocialCommentDO replyComment = commentAddLineTransfer.getReplyComment();
-            if (replyComment == null) {
-                //只有直接回复父评论，才更新时间
-                parentComment.setUpdateTime(curDate);
-            } else {
-                //测试所有自己评论自己，刚才处空指针了
-                replyComment.setUpdateTime(curDate);
-                //更新后保存到数据库
-                replyComment = commentRepository.save(replyComment);
-                commentAddLineTransfer.setReplyComment(replyComment);
-            }
-            //更新后保存到数据库
-            parentComment = commentRepository.save(parentComment);
-            commentAddLineTransfer.setParentComment(parentComment);
+    public void updateCommentByAddComment(SocialCommentPostQO addVO) {
+        if (addVO.getCommentId() == null || UnionIdDbUtil.notSelfData(addVO.getCommentId())) {
+            return;
         }
-        return commentAddLineTransfer;
+        SocialCommentDO parentComment = CommentUtils.get(addVO.getCommentId());
+        Integer ChildCommentNum = parentComment.getChildCommentNum();
+        //这里属于业务
+        if (ChildCommentNum == null) {
+            parentComment.setChildCommentNum(1);
+        } else {
+            parentComment.setChildCommentNum(++ChildCommentNum);
+        }
+        //更新后保存到数据库
+        commentRepository.save(parentComment);
     }
 }

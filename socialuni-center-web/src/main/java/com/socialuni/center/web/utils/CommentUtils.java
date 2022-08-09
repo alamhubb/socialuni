@@ -19,12 +19,9 @@ public class CommentUtils {
     }
 
     public static SocialCommentDO get(Integer unionId) {
-        if (UnionIdDbUtil.notSelfData(unionId)) {
-            return null;
-        }
         SocialCommentDO commentDO = commentRepository.findOneByUnionId(unionId);
         if (commentDO == null) {
-            throw new SocialSystemException("comment为空");
+            throw new SocialSystemException("不存在的评论");
         }
         return commentDO;
     }
