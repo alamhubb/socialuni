@@ -52,14 +52,6 @@ export function formatHMS (time: number) {
   return str
 }
 
-export function backendDateFormat (dateStr: string): Date {
-  dateStr = dateStr || ''
-  dateStr = dateStr.replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '').replace(/-/g, '/').substr(0, 19)
-  let date = new Date(dateStr)
-  // +8小时
-  date = new Date(date.getTime() + 8 * 60 * 60 * 1000)
-  return date
-}
 
 /**
  * @param {string} dateStr
@@ -92,6 +84,16 @@ export function formatTime (dateStr: string | number | Date) {
   }
   return (d.getMonth() + 1 + '-' + d.getDate())
 }
+
+export function backendDateFormat (dateStr: string): Date {
+  dateStr = dateStr || ''
+  dateStr = dateStr.replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '').replace(/-/g, '/').substr(0, 19)
+  let date = new Date(dateStr)
+  // +8小时
+  date = new Date(date.getTime() + 8 * 60 * 60 * 1000)
+  return date
+}
+
 
 export function parseDate (date: Date) {
   const format = '{y}-{m}-{d}'
