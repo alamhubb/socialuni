@@ -100,7 +100,7 @@ public class UniAPIUtils {
 
                 socialuniContentIdRO.setId(uniContentIdRO.getId());
             }
-            UnionIdDbUtil.updateUidByUnionIdNotNull(contentType, contentId, socialuniContentIdRO.getId());
+            UnionIdDbUtil.updateUidByUnionIdNotNull(contentId, socialuniContentIdRO.getId());
         } else if (SocialAppConfig.serverIsCenter()) {
             /*List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
             for (DevAccountDO devAccountDO : devAccountDOS) {
