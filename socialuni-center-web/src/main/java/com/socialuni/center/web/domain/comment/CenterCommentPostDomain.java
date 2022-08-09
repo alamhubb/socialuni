@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 /**
  * @author qinkaiyuan
@@ -23,6 +24,7 @@ public class CenterCommentPostDomain {
     @Resource
     private SocialCommentPostDomain socialCommentPostDomain;
 
+    @Transactional
     public CenterCommentRO postComment(CenterCommentPostQO addQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 

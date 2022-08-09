@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 /**
  * @author qinkaiyuan
@@ -42,6 +43,7 @@ public class SocialCommentPostDomain {
     private ModelContentCheck modelContentCheck;
 
 
+    @Transactional
     public SocialCommentRO postComment(SocialUserDO mineUser, SocialCommentPostQO addQO) {
         //校验内容是否违规
         modelContentCheck.checkUserAndContent(addQO.getContent(), mineUser);
