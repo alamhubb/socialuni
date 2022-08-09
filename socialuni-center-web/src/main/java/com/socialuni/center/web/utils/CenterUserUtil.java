@@ -49,7 +49,7 @@ public class CenterUserUtil {
         if (StringUtils.isEmpty(thirdUserId)) {
             return null;
         }
-        Integer userId = UnionIdDbUtil.getUserIdByUid(thirdUserId);
+        Integer userId = UnionIdDbUtil.getUserDOIdByUid(thirdUserId);
         if (userId == null) {
             throw new SocialParamsException("错误的用户标识");
         }
@@ -176,7 +176,7 @@ public class CenterUserUtil {
     }
 
     public static SocialUserDO get(String userId) {
-        Integer id = UnionIdDbUtil.getUserIdByUid(userId);
+        Integer id = UnionIdDbUtil.getUserDOIdByUid(userId);
         return SocialUserUtil.getNotNull(id);
     }
 }

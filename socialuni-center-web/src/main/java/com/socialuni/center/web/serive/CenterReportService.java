@@ -19,7 +19,7 @@ public class CenterReportService {
     public ResultRO<String> addReport(CenterReportAddQO centerReportAddQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
-        Integer contentId = UnionIdDbUtil.getResultByUnionId(centerReportAddQO.getReportContentType(), centerReportAddQO.getContentId());
+        Integer contentId = UnionIdDbUtil.getUnionIdByUuid(centerReportAddQO.getContentId());
 
         SocialReportAddQO socialReportAddQO = centerReportAddQO.toSocialQO(contentId);
 

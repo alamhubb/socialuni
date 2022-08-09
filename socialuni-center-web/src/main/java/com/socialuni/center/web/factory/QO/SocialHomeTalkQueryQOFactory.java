@@ -1,10 +1,7 @@
 package com.socialuni.center.web.factory.QO;
 
-import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
-import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryQO;
-
-import java.util.List;
+import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
 
 /**
  * @author qinkaiyuan
@@ -13,8 +10,6 @@ import java.util.List;
 public class SocialHomeTalkQueryQOFactory {
     public static SocialHomeTabTalkQueryQO getTalkQueryQO(CenterHomeTabTalkQueryQO queryQO) {
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = new SocialHomeTabTalkQueryQO();
-
-        List<Integer> talkIds = UnionIdDbUtil.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 
          /*private List<Integer> talkIds;
         private String tabType;
@@ -31,7 +26,6 @@ public class SocialHomeTalkQueryQOFactory {
         private String platform;
         private String standby;*/
 
-        socialHomeTabTalkQueryQO.setTalkIds(talkIds);
         socialHomeTabTalkQueryQO.setHomeTabType(queryQO.getHomeTabType());
         socialHomeTabTalkQueryQO.setTagIds(queryQO.getTagIds());
         socialHomeTabTalkQueryQO.setTagNames(queryQO.getTagNames());

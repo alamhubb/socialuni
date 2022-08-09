@@ -35,10 +35,8 @@ public class SocialuniTalkService {
         if (SocialAppConfig.serverIsChild()) {
             ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks();
             talkROS = resultRO.getData();
-
-
         } else {
-            talkROS = centerHomeTalkQueryDomain.queryHomeTalks();
+            talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(null);
 
             //根据socialTalks 获取 socialtalks
         }

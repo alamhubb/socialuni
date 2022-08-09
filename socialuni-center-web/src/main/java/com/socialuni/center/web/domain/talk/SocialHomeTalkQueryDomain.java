@@ -47,7 +47,6 @@ public class SocialHomeTalkQueryDomain {
     public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, SocialUserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
         //talk
-        socialHomeTabTalkQueryBO.setTalkIds(queryQO.getTalkIds());
 
         //tagNames转tagIds
         List<Integer> tagIds = queryQO.getTagIds();

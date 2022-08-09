@@ -12,6 +12,7 @@ import SocialSystemInfo from '../../constant/SocialSystemInfo'
 import XmlUtil from '@/socialuni/utils/XmlUtil'
 import XmlResultRO from '@/socialuni/model/base/XmlResultRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
+import UserService from "@/socialuni/service/UserService";
 
 const request: HttpRequest = new HttpRequest()
 
@@ -80,7 +81,7 @@ request.interceptor.response(
           case ErrorConst.banned:
             // 理论上不需要，因为token不会失效，也不会错误
             // 已知可能，切换环境导致token不同
-            // UserService.clearUserInfoCom()
+            UserService.clearUserInfoCom()
             AlertUtil.hint(errorMsg)
             break
           case ErrorConst.custom:

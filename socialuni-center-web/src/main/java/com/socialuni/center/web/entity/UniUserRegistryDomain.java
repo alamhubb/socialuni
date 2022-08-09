@@ -1,15 +1,16 @@
 package com.socialuni.center.web.entity;
 
-import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.center.web.entity.user.SocialUserPhoneEntity;
 import com.socialuni.center.web.manage.SocialUserFansDetailManage;
 import com.socialuni.center.web.manage.SocialUserManage;
 import com.socialuni.center.web.manage.phone.SocialUserPhoneManage;
-import com.socialuni.center.web.utils.CenterUserUtil;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.center.web.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.center.web.utils.SocialUserUtil;
+import com.socialuni.social.exception.SocialParamsException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -24,12 +24,12 @@ public class CenterUserTalkQueryDomain {
 
     public List<CenterTalkRO> queryUserTalks(CenterUserTalkQueryQO queryQO) {
 
-        Integer userId = UnionIdDbUtil.getUserIdByUid(queryQO.getUserId());
+        Integer userId = UnionIdDbUtil.getUserDOIdByUid(queryQO.getUserId());
 
         //获取自己的user
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
-        List<Integer> talkIds = UnionIdDbUtil.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
+        List<Integer> talkIds = UnionIdDbUtil.getDOIdsByTalkUnionIds(queryQO.getTalkIds());
 
         SocialUserTalkQueryQO socialUserTalkQueryQO = new SocialUserTalkQueryQO(userId, talkIds);
 

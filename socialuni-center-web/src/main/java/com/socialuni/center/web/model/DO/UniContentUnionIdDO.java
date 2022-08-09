@@ -20,7 +20,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class UniContentUnionIdDO extends SocialCommonBaseDO implements Serializable {
     private String contentType;
-    private String uuid;
+    private Integer contentId;
+    private String unionId;
     //数据所属权
 //    private Integer belongDevId;
     //数据来源方

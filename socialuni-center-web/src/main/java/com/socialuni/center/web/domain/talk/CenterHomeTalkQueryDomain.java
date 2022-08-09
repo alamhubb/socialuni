@@ -1,26 +1,25 @@
 package com.socialuni.center.web.domain.talk;
 
-import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
-import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
+import com.socialuni.center.web.config.SocialAppConfig;
+import com.socialuni.center.web.constant.TalkTabType;
 import com.socialuni.center.web.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
+import com.socialuni.center.web.model.DO.user.SocialUserDO;
+import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
+import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.center.web.model.RO.talk.CenterTalkRO;
+import com.socialuni.center.web.model.RectangleVO;
+import com.socialuni.center.web.platform.MapUtil;
 import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialSystemException;
-import com.socialuni.center.web.config.SocialAppConfig;
-import com.socialuni.center.web.constant.TalkTabType;
-import com.socialuni.center.web.model.DO.user.SocialUserDO;
-import com.socialuni.center.web.model.QO.community.talk.SocialHomeTabTalkQueryQO;
-import com.socialuni.center.web.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.center.web.model.RectangleVO;
-import com.socialuni.center.web.platform.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,26 +30,23 @@ public class CenterHomeTalkQueryDomain {
     private SocialHomeTalkQueryDomain socialHomeTalkQueryDomain;
 
     //查询非关注tab的动态列表
-    public List<CenterTalkRO> queryHomeTalks() {
-        //获取当前用户
-        CenterHomeTabTalkQueryQO queryQO = new CenterHomeTabTalkQueryQO();
-        queryQO.setTalkIds(new ArrayList<>());
-        queryQO.setHomeTabType(TalkTabType.home_type);
-        //如果经纬度为空
-        RectangleVO rectangleVO = MapUtil.getRectangle();
-        if (rectangleVO != null) {
-            queryQO.setLon(rectangleVO.getLon());
-            queryQO.setLat(rectangleVO.getLat());
+    public List<CenterTalkRO> queryHomeTabTalks(@Valid CenterHomeTabTalkQueryQO queryQO) {
+        if (queryQO==null){
+            //获取当前用户
+            queryQO = new CenterHomeTabTalkQueryQO();
+            queryQO.setTalkIds(new ArrayList<>());
+            queryQO.setHomeTabType(TalkTabType.home_type);
+            //如果经纬度为空
+            RectangleVO rectangleVO = MapUtil.getRectangle();
+            if (rectangleVO != null) {
+                queryQO.setLon(rectangleVO.getLon());
+                queryQO.setLat(rectangleVO.getLat());
+            }
+            queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
+            queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
+            queryQO.setGender(DevAccountUtils.getAppGenderType());
         }
-        queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
-        queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
-        queryQO.setGender(DevAccountUtils.getAppGenderType());
 
-        return this.queryHomeTabTalks(queryQO);
-    }
-
-    //查询非关注tab的动态列表
-    public List<CenterTalkRO> queryHomeTabTalks(@Valid @NotNull CenterHomeTabTalkQueryQO queryQO) {
         //获取当前用户
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 

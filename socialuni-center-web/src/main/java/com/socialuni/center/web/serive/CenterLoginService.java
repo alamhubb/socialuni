@@ -8,7 +8,6 @@ import com.socialuni.center.web.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.center.web.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.center.web.manage.ThirdUserTokenManage;
 import com.socialuni.center.web.manage.TokenManage;
-import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
 import com.socialuni.center.web.model.DO.user.SocialTokenDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
 import com.socialuni.center.web.model.QO.user.SocialPhoneNumQO;

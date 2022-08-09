@@ -105,33 +105,33 @@ public class UnionIdDbUtil {
         return uniContentUnionIdDO.getId();
     }
 
-    public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
+    public static List<Integer> getDOIdsByTalkUnionIds(List<String> contentUnionIds) {
         SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.talk);
+        return getDOIdsByUnionIds(contentUnionIds);
     }
 
-    public static List<Integer> getContentIdsByUserUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.user);
+    public static List<Integer> getIdsByUserUnionIds(List<String> contentUnionIds) {
+        return getDOIdsByUnionIds(contentUnionIds);
     }
 
-    public static List<Integer> getContentIdsByUserImgUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.userImg);
+    public static List<Integer> getIdsByUserImgUnionIds(List<String> contentUnionIds) {
+        return getDOIdsByUnionIds(contentUnionIds);
     }
 
-    public static List<Integer> getContentIdsByCommentUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.comment);
+    public static List<Integer> getIdsByCommentUnionIds(List<String> contentUnionIds) {
+        return getDOIdsByUnionIds(contentUnionIds);
     }
 
-    public static List<Integer> getContentIdsByMessageUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.message);
+    public static List<Integer> getIdsByMessageUnionIds(List<String> contentUnionIds) {
+        return getDOIdsByUnionIds(contentUnionIds);
     }
 
-    public static List<Integer> getContentIdsByUnionIds(List<String> contentUnionIds, String contentType) {
+    public static List<Integer> getDOIdsByUnionIds(List<String> contentUnionIds) {
         List<Integer> ids = new ArrayList<>();
         if (ObjectUtil.isNotEmpty(contentUnionIds)) {
             for (String contentUnionId : contentUnionIds) {
 //                log.info("查询单个id：" + System.currentTimeMillis());
-                Integer id = UnionIdDbUtil.getResultByUnionId(contentType, contentUnionId);
+                Integer id = UnionIdDbUtil.getDOIdByUnionId(contentUnionId);
                 ids.add(id);
             }
         }
@@ -144,11 +144,51 @@ public class UnionIdDbUtil {
         return ids;
     }
 
+
+    public static Integer getMessageIdByUid(String unionId) {
+        Integer messageIdResult = getDOIdByUnionId(unionId);
+        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
+        return messageIdResult;
+    }
+
+
     //根据uid获取真实id
-    public static Integer getResultByUnionId(String contentType, String unionId) {
+    public static Integer getUnionIdByUuid(String contentType, String unionId) {
 //        Integer resultRO = new (user.getId());
 //        return resultRO;
+        if (StringUtils.isEmpty(unionId)) {
+            throw new SocialParamsException("无效的内容标示1");
+        }
+        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUnionId(unionId);
+        if (uniContentUnionIdDO == null) {
+            uniContentUnionIdDO = new UniContentUnionIdDO(contentType, null, unionId, DevAccountUtils.getCenterDevIdNotNull());
+            uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        }
+        return uniContentUnionIdDO.getId();
+    }
 
+
+    public static Integer getTalkUnionIdByUnionId(String unionId) {
+        return getUnionIdByUuid(ContentType.talk, unionId);
+    }
+
+    public static Integer getUserUnionIdByUid(String unionId) {
+        return getUnionIdByUuid(ContentType.user, unionId);
+    }
+
+    public static Integer getUserImgUnionIdByUid(String unionId) {
+        return getUnionIdByUuid(ContentType.userImg, unionId);
+    }
+
+    public static Integer getCommentUnionIdByUid(String unionId) {
+        return getUnionIdByUuid(ContentType.comment, unionId);
+    }
+
+
+    //根据uid获取真实id
+    public static Integer getDOIdByUnionId(String unionId) {
+//        Integer resultRO = new (user.getId());
+//        return resultRO;
         if (StringUtils.isEmpty(unionId)) {
             throw new SocialParamsException("无效的内容标示1");
         }
@@ -157,64 +197,25 @@ public class UnionIdDbUtil {
             throw new SocialParamsException("错误的内容标识3");
         }
         return uniContentUnionIdDO.getId();
-/*
-        //通用部分
-        //判断uid有效
-        Optional<UnionIdDO> contentUnionIdDOOptional = unionIdRepository.findFirstByUnionIdOrderByIdDesc(unionId);
-        if (!contentUnionIdDOOptional.isPresent()) {
-            throw new SocialParamsException("无效的内容标示");
-        }
-
-        UnionIdDO contentUnionIdDO = contentUnionIdDOOptional.get();
-        //不为启用 或 如果已过期，已失效
-        if (!contentUnionIdDO.getStatus().equals(CommonStatus.enable)) {
-            throw new SocialBusinessException("内容已过期，请刷新");
-        }
-
-        //类型不对应
-        if (!contentUnionIdDO.getContentType().equals(contentType)) {
-            throw new SocialParamsException("无效的内容标示2");
-        }
-
-        Integer devId = DevAccountUtils.getDevIdNotNull();
-        //有效，则校验商户id和userid是否一致
-        //这里存在一个问题，有商户但是没用户的时候替换的问题
-        //确认商户一致
-        Integer unionDevId = contentUnionIdDO.getDevId();
-        //商户号必须一致，任何情况，都未null或者都为有值
-        if (!Objects.equals(devId, unionDevId)) {
-            throw new SocialSystemException("有人商户秘钥被盗用了");
-        }
-        Integer unionUserId = contentUnionIdDO.getUserId();
-        //数据库可以为null，存在未登录用户，替换登录后用户unionId的情况
-        Integer userId = user == null ? null : user.getId();
-        if (!(unionUserId == null || unionUserId.equals(userId))) {
-            throw new SocialParamsException("错误的用户标示");
-        }
-        return contentUnionIdDO.getContentId();*/
     }
 
-    public static Integer getMessageIdByUid(String unionId) {
-        Integer messageIdResult = getResultByUnionId(ContentType.message, unionId);
-        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return messageIdResult;
+    public static Integer getTalkDOIdByUnionId(String unionId) {
+        return getDOIdByUnionId(unionId);
     }
 
-    public static Integer getTalkIdByUnionId(String unionId) {
-        return getResultByUnionId(ContentType.talk, unionId);
+    public static Integer getUserDOIdByUid(String unionId) {
+        return getDOIdByUnionId(unionId);
     }
 
-    public static Integer getUserIdByUid(String unionId) {
-        return getResultByUnionId(ContentType.user, unionId);
+    public static Integer getUserImgDOIdByUid(String unionId) {
+        return getDOIdByUnionId(unionId);
     }
 
-    public static Integer getUserImgIdByUid(String unionId) {
-        return getResultByUnionId(ContentType.userImg, unionId);
+    public static Integer getCommentDOIdByUid(String unionId) {
+        return getDOIdByUnionId(unionId);
     }
 
-    public static Integer getCommentIdByUid(String unionId) {
-        return getResultByUnionId(ContentType.comment, unionId);
-    }
+
 
 
     public static String createTalkUid(Integer talkId) {

@@ -41,20 +41,19 @@ public class CenterTalkService {
             ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks();
             talkROS = resultRO.getData();
         } else {
-            talkROS = centerHomeTalkQueryDomain.queryHomeTalks();
+            talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(null);
         }
         return new ResultRO<>(talkROS);
     }
 
     //查询非关注tab的动态列表
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
-        List<CenterTalkRO> talkROS;
-        if (queryQO == null) {
-            talkROS = centerHomeTalkQueryDomain.queryHomeTalks();
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniTalkAPI.queryTalks(queryQO);
         } else {
-            talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
+            List<CenterTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
+            return new ResultRO<>(talkROS);
         }
-        return new ResultRO<>(talkROS);
     }
 
     public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {

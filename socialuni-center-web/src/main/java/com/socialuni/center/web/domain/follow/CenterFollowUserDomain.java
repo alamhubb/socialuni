@@ -27,7 +27,7 @@ public class CenterFollowUserDomain {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = CenterUserUtil.getMineUserId();
 
-        Integer followUserId = UnionIdDbUtil.getUserIdByUid(addVO.getBeUserId());
+        Integer followUserId = UnionIdDbUtil.getUserDOIdByUid(addVO.getBeUserId());
 
         socialUserFollowDomain.addFlow(mineUserId, followUserId);
         return new ResultRO<>();
@@ -36,7 +36,7 @@ public class CenterFollowUserDomain {
     public ResultRO<Void> cancelFollow(CenterFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = CenterUserUtil.getMineUserId();
-        Integer followUserId = UnionIdDbUtil.getUserIdByUid(addVO.getBeUserId());
+        Integer followUserId = UnionIdDbUtil.getUserDOIdByUid(addVO.getBeUserId());
         socialUserFollowDomain.cancelFollow(mineUserId, followUserId);
         return new ResultRO<>();
     }

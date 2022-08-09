@@ -36,7 +36,6 @@ public class SocialTalkService {
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO queryQO = new SocialHomeTabTalkQueryQO();
-        queryQO.setTalkIds(new ArrayList<>());
         queryQO.setHomeTabType(TalkTabType.home_type);
         //如果经纬度为空
         RectangleVO rectangleVO = MapUtil.getRectangle();

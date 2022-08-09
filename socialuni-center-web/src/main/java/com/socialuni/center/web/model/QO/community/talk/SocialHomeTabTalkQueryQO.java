@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Data
 public class SocialHomeTabTalkQueryQO {
-    private List<Integer> talkIds;
     private String homeTabType;
     private List<Integer> tagIds;
     private List<String> tagNames;

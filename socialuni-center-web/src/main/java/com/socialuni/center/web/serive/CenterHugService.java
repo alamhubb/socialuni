@@ -20,7 +20,7 @@ public class CenterHugService {
     public ResultRO<Void> addHug(CenterHugAddQO centerHugAddQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
-        Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(centerHugAddQO.getTalkId());
+        Integer talkId = UnionIdDbUtil.getTalkDOIdByUnionId(centerHugAddQO.getTalkId());
 
         socialAddHugDomain.addHug(mineUser, new SocialHugAddQO(talkId, null));
         return new ResultRO<>();
