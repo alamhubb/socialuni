@@ -92,7 +92,8 @@ public class TalkQueryStore {
                                                                                Integer minAge, Integer maxAge, String adCode,
                                                                                List<Integer> tagIds, String talkVisibleGender,
                                                                                String mineUserGender, Integer devId, Date queryTime, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
-        int page = talkIds.size() / 10;
+//        int page = talkIds.size() / 10;
+        int page = 0;
         List<Integer> ids = this.queryTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
                 talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId, queryTime, circleId, hasPeopleImgTalkNeedIdentity);
         return this.queryTalksByIds(ids);

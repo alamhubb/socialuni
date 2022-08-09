@@ -118,7 +118,7 @@ public class SocialHomeTalkQueryStore {
         }
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getTalkIds(), userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, hasPeopleImgTalkNeedIdentity);
+        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(null, userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, hasPeopleImgTalkNeedIdentity);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

@@ -122,7 +122,7 @@ public class SocialHomeTalkQueryDomain {
         List<SocialTalkDO> talkDOS;
         //为关注，查询关注
         if ((TalkTabType.follow_type.equals(tabType))) {
-            talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(queryBO.getTalkIds(), mineUser);
+            talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else {
             talkDOS = socialHomeTalkQueryEntity.queryHomeTalks(queryBO, mineUser);
         }
