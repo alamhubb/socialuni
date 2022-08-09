@@ -43,8 +43,9 @@ public class CenterCommentRO extends UniContentIdRO {
         super(ContentType.comment, centerCommentRO);
         this.user = new CenterUserRO(centerCommentRO.getUser());
         this.childComments = CenterCommentROFactory.getCommentROs(centerCommentRO.getChildComments());
-        this.replyComment = new CenterReplyCommentRO(centerCommentRO.getReplyComment());
-
+        if (centerCommentRO.getReplyComment() != null) {
+            this.replyComment = new CenterReplyCommentRO(centerCommentRO.getReplyComment());
+        }
         this.no = centerCommentRO.getNo();
         this.content = centerCommentRO.getContent();
         this.createTime = centerCommentRO.getCreateTime();

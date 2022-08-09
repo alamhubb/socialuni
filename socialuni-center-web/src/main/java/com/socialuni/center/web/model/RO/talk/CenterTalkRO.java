@@ -1,5 +1,6 @@
 package com.socialuni.center.web.model.RO.talk;
 
+import com.socialuni.center.web.factory.RO.talk.CenterCommentROFactory;
 import com.socialuni.center.web.factory.RO.talk.CenterTalkImgROFactory;
 import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.center.web.model.RO.community.talk.SocialTalkDistrictRO;
@@ -75,7 +76,7 @@ public class CenterTalkRO extends UniContentIdRO {
         super(ContentType.talk, centerTalkRO);
         this.user = new CenterContentUserRO(centerTalkRO.getUser());
         this.imgs = CenterTalkImgROFactory.getCenterTalkImgROS(centerTalkRO.getImgs());
-        this.comments = centerTalkRO.getComments();
+        this.comments = CenterCommentROFactory.getCommentROs(centerTalkRO.getComments());
 
         this.tags = centerTalkRO.getTags();
         this.circles = centerTalkRO.getCircles();

@@ -73,7 +73,7 @@ public class UniAPIUtils {
 
 
         UniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
-
+        Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
         //mark 多库同步版本
 
         if (SocialAppConfig.serverIsChild()) {
@@ -91,7 +91,6 @@ public class UniAPIUtils {
             UniContentIdRO uniContentIdRO = resultRO.getData();
             socialuniContentIdRO.setId(uniContentIdRO.getId());
             //根据本系统的uid，获取contentId
-            Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
             UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, socialuniContentIdRO.getId());
         } else if (SocialAppConfig.serverIsCenter()) {
             /*List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();

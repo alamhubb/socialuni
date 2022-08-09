@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -78,12 +79,17 @@ public class FeignInterceptor implements RequestInterceptor {
                         socialProviderLoginQO.setPhoneNum(phoneNum);
                     }
                     System.out.println(123123);
-                    URI uri = URI.create(postUrl);
-                    String absoluteUri = uri.getScheme() + "://" + uri.getAuthority();
-                    URI determinedBasePathUri = URI.create(absoluteUri);
-                    String devSecretKey = requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey).iterator().next();
+//                    URI uri = URI.create(postUrl);
+//                    String absoluteUri = uri.getScheme() + "://" + uri.getAuthority();
+//                    URI determinedBasePathUri = URI.create(absoluteUri);
+
+                    String apiUrl = SocialAppConfig.getSocialuniServerUrl();
+                    URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
+
+//                    Collection<String> headerKeyValues = requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey);
+//                    String devSecretKey = headerKeyValues.iterator().next();
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
-                        put(SocialFeignHeaderName.socialuniSecretKey, devSecretKey);
+                        put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
                     }};
                     ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.registryUser(determinedBasePathUri, headerMap, socialProviderLoginQO);
                     CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
