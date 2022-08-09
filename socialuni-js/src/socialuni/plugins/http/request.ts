@@ -93,6 +93,7 @@ request.interceptor.response(
         }
       } else {
         if (typeof result === 'string') {
+          //之前存在返回xml的情况
           if (result.startsWith('<?xml')) {
             try {
               const errorXml = XmlUtil.parseXml(result)
