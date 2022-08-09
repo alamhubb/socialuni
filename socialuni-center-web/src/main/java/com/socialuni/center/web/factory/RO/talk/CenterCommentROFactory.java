@@ -55,4 +55,8 @@ public class CenterCommentROFactory {
     public static List<CenterCommentRO> getCommentROs(List<SocialCommentRO> ROS, SocialUserDO mineUser) {
         return ListConvertUtil.toList(CenterCommentROFactory::getCommentRO, ROS, mineUser);
     }
+
+    public static List<CenterCommentRO> getCommentROs(List<CenterCommentRO> ROS) {
+        return ListConvertUtil.toList(CenterCommentRO::new, ROS);
+    }
 }

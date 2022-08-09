@@ -1,6 +1,6 @@
 package com.socialuni.center.web.model.RO.talk;
 
-import com.socialuni.center.web.utils.UnionIdDbUtil;
+import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.social.constant.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CenterTalkImgRO {
+public class CenterTalkImgRO extends UniContentIdRO {
     private String id;
     private String src;
     private Double aspectRatio;
@@ -18,7 +18,7 @@ public class CenterTalkImgRO {
 
 
     public CenterTalkImgRO(CenterTalkImgRO centerTalkImgRO) {
-        this.id = UnionIdDbUtil.createUidByUid(ContentType.talkImg, centerTalkImgRO.getId());
+        super(ContentType.talkImg, centerTalkImgRO);
         this.src = centerTalkImgRO.getSrc();
         this.aspectRatio = centerTalkImgRO.getAspectRatio();
     }
