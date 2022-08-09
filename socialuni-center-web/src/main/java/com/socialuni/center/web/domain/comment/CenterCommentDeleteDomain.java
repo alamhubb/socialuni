@@ -29,7 +29,7 @@ public class CenterCommentDeleteDomain {
     public ResultRO<Void> deleteComment(CenterCommentDeleteQO commentDeleteQO) {
         SocialUserDO userDO = CenterUserUtil.getMineUserNotNull();
 
-        Integer commentId = UnionIdDbUtil.getCommentDOIdByUid(commentDeleteQO.getCommentId());
+        Integer commentId = UnionIdDbUtil.getCommentIdByUid(commentDeleteQO.getCommentId());
 
         SocialCommentDeleteQO socialCommentDeleteQO = new SocialCommentDeleteQO(commentId);
 

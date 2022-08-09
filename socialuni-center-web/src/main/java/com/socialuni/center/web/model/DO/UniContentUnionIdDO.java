@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class UniContentUnionIdDO extends SocialCommonBaseDO implements Serializable {
     private String contentType;
     private Integer contentId;
-    private String unionId;
+    private String uuid;
     //数据所属权
 //    private Integer belongDevId;
     //数据来源方

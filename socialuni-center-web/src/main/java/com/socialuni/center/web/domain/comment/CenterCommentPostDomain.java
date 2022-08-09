@@ -26,14 +26,14 @@ public class CenterCommentPostDomain {
     public CenterCommentRO postComment(CenterCommentPostQO addQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
-        Integer talkId = UnionIdDbUtil.getTalkDOIdByUnionId(addQO.getTalkId());
+        Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(addQO.getTalkId());
 
         Integer commentId = null;
         Integer replyCommentId = null;
         if (addQO.getCommentId() != null) {
-            commentId = UnionIdDbUtil.getCommentDOIdByUid(addQO.getCommentId());
+            commentId = UnionIdDbUtil.getCommentIdByUid(addQO.getCommentId());
             if (addQO.getReplyCommentId() != null) {
-                replyCommentId = UnionIdDbUtil.getCommentDOIdByUid(addQO.getReplyCommentId());
+                replyCommentId = UnionIdDbUtil.getCommentIdByUid(addQO.getReplyCommentId());
             }
         }
 

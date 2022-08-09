@@ -26,7 +26,7 @@ public class CenterTalkDetailDomain {
     public CenterTalkRO queryTalkDetail(CenterTalkIdQO centerTalkIdQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
-        Integer talkId = UnionIdDbUtil.getTalkDOIdByUnionId(centerTalkIdQO.getTalkId());
+        Integer talkId = UnionIdDbUtil.getTalkIdByUnionId(centerTalkIdQO.getTalkId());
 
         SocialTalkIdQO socialTalkIdQO = new SocialTalkIdQO(talkId);
 

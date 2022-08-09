@@ -65,6 +65,7 @@ public class UniAPIUtils {
             }
         }
 
+
         //1.执行业务
         //2.生成unionId
         //3.记录unionId
@@ -76,7 +77,7 @@ public class UniAPIUtils {
 
         if (DevAccountUtils.pusherIsCenterServer() || SocialAppConfig.serverIsChild()) {
             //根据本系统的uid，获取contentId
-            Integer contentId = UnionIdDbUtil.getUnionIdByUuid(socialuniContentIdRO.getId());
+            Integer contentId = UnionIdDbUtil.getContentId(socialuniContentIdRO.getId());
             if (DevAccountUtils.pusherIsCenterServer()) {
                 //直接使用中心的unionId更新就行
 

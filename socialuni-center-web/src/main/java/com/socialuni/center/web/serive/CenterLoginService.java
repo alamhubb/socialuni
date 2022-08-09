@@ -78,7 +78,6 @@ public class CenterLoginService {
         //根据user获取返回结果
         SocialUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(mineUser.getUnionId());
         /*if (uniContentUnionIdDO == null) {
             uniContentUnionIdDO = new UniContentUnionIdDO(ContentType.user, DevAccountUtils.getDataOriginalDevIdNotNull(), null, DevAccountUtils.getDevIdNotNull(), mineUser.getId());
             uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
