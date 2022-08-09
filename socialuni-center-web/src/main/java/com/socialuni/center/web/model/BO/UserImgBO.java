@@ -44,7 +44,7 @@ public class UserImgBO {
     }
 
     public UserImgBO(SocialUserImgDO img, SocialUserDO user) {
-        this.id = UnionIdDbUtil.createUserImgUid(img.getId());
+        this.id = UnionIdDbUtil.getUidByUnionIdNotNull(img.getId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
         this.setWidth((double) 360);

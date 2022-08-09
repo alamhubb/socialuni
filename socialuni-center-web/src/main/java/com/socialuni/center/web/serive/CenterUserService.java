@@ -101,7 +101,7 @@ public class CenterUserService {
     public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
 
-        Integer userImgId = UnionIdDbUtil.getUserImgIdByUid(centerUserImgDeleteQO.getUserImgId());
+        Integer userImgId = UnionIdDbUtil.getUserImgUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
 

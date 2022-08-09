@@ -12,7 +12,6 @@ import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.center.web.utils.SocialUserUtil;
 import com.socialuni.center.web.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -57,14 +56,14 @@ public class FeignInterceptor implements RequestInterceptor {
 
         if (!postUrl.contains("user/registryUser")) {
             if (mineUser != null) {
-                Integer mineUserId = mineUser.getUnionId();
+                Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
                 Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
-                UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserId);
+                UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserUnionId);
                 //有没有可能你自己这边记录了，但是那边给你删掉了
                 //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
                 if (uniOutRegisterUserDO == null) {
-                    String phoneNum = SocialUserUtil.getUserPhoneNum(mineUserId);
+                    String phoneNum = SocialUserUtil.getUserPhoneNum(mineUserUnionId);
                     //生成登录类
                     SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
                     socialProviderLoginQO.setNickName(mineUser.getNickname());
@@ -88,8 +87,8 @@ public class FeignInterceptor implements RequestInterceptor {
                     }};
                     ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.registryUser(determinedBasePathUri, headerMap, socialProviderLoginQO);
                     CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
-                    UnionIdDbUtil.updateUnionIdByContentTypeAndContentId(ContentType.user, mineUserId, centerMineUserDetailRO.getId());
-                    uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserId);
+                    UnionIdDbUtil.updateUidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
+                    uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);
                     uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
                 }
                 requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, CenterUserUtil.getMineUserUnionId());

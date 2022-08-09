@@ -26,7 +26,7 @@ public class CenterCommentROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static CenterCommentRO getCommentRO(SocialCommentRO socialCommentRO, SocialUserDO mineUser) {
-        String id = UnionIdDbUtil.createCommentUid(socialCommentRO.getId());
+        String id = UnionIdDbUtil.getUidByUnionIdNotNull(socialCommentRO.getId());
 
         CenterUserRO userRO = CenterUserROFactory.getUserRO(socialCommentRO.getUser(), mineUser);
 

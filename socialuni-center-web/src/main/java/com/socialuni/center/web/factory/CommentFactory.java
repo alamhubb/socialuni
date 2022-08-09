@@ -48,7 +48,7 @@ public class CommentFactory {
         comment.setUserId(requestUserId);
         comment.setSocialuniUid(addVO.getSocialuniUid());
 
-        Integer unionId = UnionIdDbUtil.createCommentUuid();
+        Integer unionId = UnionIdDbUtil.createCommentUnionId();
         comment.setUnionId(unionId);
 
 //        comment.setDevId(DevAccountUtils.getDevId());

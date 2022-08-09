@@ -74,7 +74,7 @@ public class TalkDOFactory {
         //是否已经认证
         talkDO.setIdentityAuth(SocialUserUtil.getUserIsIdentityAuth(user.getUnionId()));
 
-        Integer talkUnionId = UnionIdDbUtil.createTalkUuid();
+        Integer talkUnionId = UnionIdDbUtil.createTalkUnionId();
         talkDO.setUnionId(talkUnionId);
         return talkDO;
     }

@@ -49,7 +49,7 @@ public class CenterUserUtil {
         if (StringUtils.isEmpty(thirdUserId)) {
             return null;
         }
-        Integer userId = UnionIdDbUtil.getUserIdByUid(thirdUserId);
+        Integer userId = UnionIdDbUtil.getUserUnionIdByUidNotNull(thirdUserId);
         if (userId == null) {
             throw new SocialParamsException("错误的用户标识");
         }
@@ -104,11 +104,11 @@ public class CenterUserUtil {
 
     public static String getMineUserUnionId() {
         SocialUserDO user = CenterUserUtil.getMineUserNotNull();
-        return UnionIdDbUtil.createUserUid(user.getUnionId());
+        return UnionIdDbUtil.getUidByUnionIdNotNull(user.getUnionId());
     }
 
     public static String getUserUnionId(SocialUserDO userDO) {
-        return UnionIdDbUtil.createUserUid(userDO.getUnionId());
+        return UnionIdDbUtil.getUidByUnionIdNotNull(userDO.getUnionId());
     }
 
     public static String getMineUserStringId() {
@@ -176,7 +176,7 @@ public class CenterUserUtil {
     }
 
     public static SocialUserDO get(String userId) {
-        Integer id = UnionIdDbUtil.getUserIdByUid(userId);
+        Integer id = UnionIdDbUtil.getUserUnionIdByUidNotNull(userId);
         return SocialUserUtil.getNotNull(id);
     }
 }

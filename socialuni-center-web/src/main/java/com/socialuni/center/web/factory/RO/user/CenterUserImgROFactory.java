@@ -12,7 +12,7 @@ import java.util.List;
 public class CenterUserImgROFactory {
     public static CenterUserImgRO getUserImgRO(UserImgRO userImg, SocialUserDO mineUser) {
         CenterUserImgRO imgVO = new CenterUserImgRO(userImg);
-        String uid = UnionIdDbUtil.createUserImgUid(userImg.getId());
+        String uid = UnionIdDbUtil.getUidByUnionIdNotNull(userImg.getId());
         imgVO.setId(uid);
         return imgVO;
     }

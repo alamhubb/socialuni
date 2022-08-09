@@ -20,7 +20,7 @@ public class CenterReplyCommentROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static CenterReplyCommentRO getReplyCommentRO(SocialReplyCommentRO commentRO, SocialUserDO mineUser) {
-        String id = UnionIdDbUtil.createCommentUid(commentRO.getId());
+        String id = UnionIdDbUtil.getUidByUnionIdNotNull(commentRO.getId());
         CenterUserRO userRO = CenterUserROFactory.getUserRO(commentRO.getUser(), mineUser);
 
         CenterReplyCommentRO centerReplyCommentRO = new CenterReplyCommentRO();

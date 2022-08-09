@@ -2,6 +2,7 @@ package com.socialuni.center.web.serive;
 
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.domain.talk.*;
+import com.socialuni.center.web.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.center.web.feignAPI.SocialuniTalkAPI;
 import com.socialuni.center.web.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.center.web.model.QO.talk.CenterHomeTabTalkQueryQO;
@@ -36,24 +37,19 @@ public class CenterTalkService {
 
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<CenterTalkRO>> queryTalks() {
-        List<CenterTalkRO> talkROS;
-        if (SocialAppConfig.serverIsChild()) {
-            ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks();
-            talkROS = resultRO.getData();
-        } else {
-            talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(null);
-        }
-        return new ResultRO<>(talkROS);
+        return this.queryTalks(null);
     }
 
     //查询非关注tab的动态列表
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
+        List<CenterTalkRO> talkROS;
         if (SocialAppConfig.serverIsChild()) {
-            return socialuniTalkAPI.queryTalks(queryQO);
+            ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks(queryQO);
+            talkROS = CenterTalkROFactory.getTalkROS(resultRO.getData());
         } else {
-            List<CenterTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
-            return new ResultRO<>(talkROS);
+            talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
         }
+        return new ResultRO<>(talkROS);
     }
 
     public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {

@@ -22,7 +22,7 @@ public class CenterTalkImgROFactory {
     //用户详情
     public static CenterTalkImgRO getHomeTalkImgRO(SocialTalkImgRO imgRO) {
         CenterTalkImgRO centerTalkImgRO = new CenterTalkImgRO();
-        String id = UnionIdDbUtil.createTalkImgUid(imgRO.getId());
+        String id = UnionIdDbUtil.getUidByUnionIdNotNull(imgRO.getId());
         centerTalkImgRO.setId(id);
         centerTalkImgRO.setSrc(imgRO.getSrc());
         centerTalkImgRO.setAspectRatio(imgRO.getAspectRatio());
@@ -31,5 +31,9 @@ public class CenterTalkImgROFactory {
 
     public static List<CenterTalkImgRO> getHomeTalkImgROS(List<SocialTalkImgRO> imgROS) {
         return ListConvertUtil.toList(CenterTalkImgROFactory::getHomeTalkImgRO, imgROS);
+    }
+
+    public static List<CenterTalkImgRO> getCenterTalkImgROS(List<CenterTalkImgRO> imgROS) {
+        return ListConvertUtil.toList(CenterTalkImgRO::new, imgROS);
     }
 }

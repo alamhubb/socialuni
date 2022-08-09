@@ -21,7 +21,7 @@ public class SocialUserManage {
     }
 
     public SocialUserDO createUserByPhoneLogin() {
-        Integer userUnionId = UnionIdDbUtil.createUserUuid();
+        Integer userUnionId = UnionIdDbUtil.createUserUnionId();
         SocialUserDO user = SocialUserDOFactory.newUserByPhoneLogin();
         user.setUnionId(userUnionId);
         user = userRepository.save(user);

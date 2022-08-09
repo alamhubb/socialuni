@@ -4,7 +4,6 @@ import com.socialuni.center.web.base.ThrFunction;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.feignAPI.SocialuniUserAPI;
 import com.socialuni.center.web.model.DO.UniContentUnionIdDO;
-import com.socialuni.center.web.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.model.QO.ContentAddQO;
 import com.socialuni.center.web.model.RO.community.UniContentIdRO;
 import com.socialuni.center.web.repository.UniContentUnionIdRepository;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -77,7 +75,7 @@ public class UniAPIUtils {
 
         if (DevAccountUtils.pusherIsCenterServer() || SocialAppConfig.serverIsChild()) {
             //根据本系统的uid，获取contentId
-            Integer contentId = UnionIdDbUtil.getContentId(socialuniContentIdRO.getId());
+            Integer contentId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
             if (DevAccountUtils.pusherIsCenterServer()) {
                 //直接使用中心的unionId更新就行
 
@@ -102,9 +100,9 @@ public class UniAPIUtils {
 
                 socialuniContentIdRO.setId(uniContentIdRO.getId());
             }
-            UnionIdDbUtil.updateUnionIdByContentTypeAndContentId(contentType, contentId, socialuniContentIdRO.getId());
+            UnionIdDbUtil.updateUidByUnionIdNotNull(contentType, contentId, socialuniContentIdRO.getId());
         } else if (SocialAppConfig.serverIsCenter()) {
-            List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
+            /*List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
             for (DevAccountDO devAccountDO : devAccountDOS) {
                 Integer pushServerId = DevAccountUtils.getDevIdNotNull();
                 //如果为自己，或者为推送者
@@ -118,7 +116,7 @@ public class UniAPIUtils {
                 }};
                 contentAddQO.setId(socialuniContentIdRO.getId());
                 ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
-            }
+            }*/
         }
 
         return socialuniContentIdRO;
