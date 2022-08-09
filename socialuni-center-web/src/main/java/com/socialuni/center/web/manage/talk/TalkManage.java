@@ -4,6 +4,7 @@ import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.store.TalkQueryStore;
 import com.socialuni.center.web.utils.TalkRedis;
+import com.socialuni.center.web.utils.TalkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,11 @@ public class TalkManage {
      * @param talk
      * @return
      */
-    public SocialTalkDO updateTalkByAddComment(SocialTalkDO talk) {
+    public SocialTalkDO updateTalkByAddComment(Integer talkId) {
+        SocialTalkDO talk = TalkUtils.get(talkId);
+        if (talk == null) {
+            return null;
+        }
         Integer commentNum = talk.getCommentNum();
         if (commentNum == null) {
             talk.setCommentNum(1);

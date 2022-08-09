@@ -69,38 +69,30 @@ public class UniAPIUtils {
         //3.记录unionId
         //4.返回
 
+        //判断这条动态是不是本应用的
+
+
         UniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
 
         //mark 多库同步版本
 
-        if (DevAccountUtils.pusherIsCenterServer() || SocialAppConfig.serverIsChild()) {
-            //根据本系统的uid，获取contentId
-            Integer contentId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
-            if (DevAccountUtils.pusherIsCenterServer()) {
-                //直接使用中心的unionId更新就行
-
-                //判断是否已有unionId，如果已有，则无需写入，为重复写入
-
-                //推送的需要校验，非推送的不用校验
-                //校验功能搞好了，接下来就可以直接写入数据了
-                //不为空
-                socialuniContentIdRO.setId(contentUnionId);
-            } else if (SocialAppConfig.serverIsChild()) {
-                //都需要往中心推送，并且使用中心返回的unionId更新
-                String apiUrl = SocialAppConfig.getSocialuniServerUrl();
-                URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
-                Map<String, Object> headerMap = new HashMap<String, Object>() {{
-                    put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
-                }};
-                ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
-                if (resultRO == null) {
-                    return null;
-                }
-                UniContentIdRO uniContentIdRO = resultRO.getData();
-
-                socialuniContentIdRO.setId(uniContentIdRO.getId());
+        if (SocialAppConfig.serverIsChild()) {
+            //都需要往中心推送，并且使用中心返回的unionId更新
+            String apiUrl = SocialAppConfig.getSocialuniServerUrl();
+            URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
+            Map<String, Object> headerMap = new HashMap<String, Object>() {{
+                put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+            }};
+            ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
+            if (resultRO == null) {
+                return null;
             }
-            UnionIdDbUtil.updateUidByUnionIdNotNull(contentId, socialuniContentIdRO.getId());
+            //根据中西能返回更新uid
+            UniContentIdRO uniContentIdRO = resultRO.getData();
+            socialuniContentIdRO.setId(uniContentIdRO.getId());
+            //根据本系统的uid，获取contentId
+            Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
+            UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, socialuniContentIdRO.getId());
         } else if (SocialAppConfig.serverIsCenter()) {
             /*List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
             for (DevAccountDO devAccountDO : devAccountDOS) {

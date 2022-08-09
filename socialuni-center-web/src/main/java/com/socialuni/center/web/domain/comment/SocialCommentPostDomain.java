@@ -5,7 +5,6 @@ import com.socialuni.center.web.domain.notify.NotifyDomain;
 import com.socialuni.center.web.domain.report.ReportDomain;
 import com.socialuni.center.web.entity.comment.SocialPostCommentEntity;
 import com.socialuni.center.web.factory.SocialCommentROFactory;
-import com.socialuni.center.web.model.DO.NotifyDO;
 import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.model.DO.user.SocialUserDO;
@@ -15,14 +14,12 @@ import com.socialuni.center.web.repository.CommentRepository;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.service.comment.CommentAddLineTransfer;
 import com.socialuni.center.web.service.content.ModelContentCheck;
-import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author qinkaiyuan
@@ -46,29 +43,26 @@ public class SocialCommentPostDomain {
 
 
     public SocialCommentRO postComment(SocialUserDO mineUser, SocialCommentPostQO addQO) {
-        //校验comment
-        CommentAddLineTransfer commentAddLineTransfer = this.checkCommentAddVO(
-                mineUser,
-                addQO
-        );
+        //校验内容是否违规
+        modelContentCheck.checkUserAndContent(addQO.getContent(), mineUser);
 
         //校验结果
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
         //保存comment，内部关联保存了talk、parentComment、replyComment
-        commentAddLineTransfer = socialPostCommentEntity.saveComment(addQO, commentAddLineTransfer, mineUser.getUnionId());
 
-        SocialCommentDO commentDO = commentAddLineTransfer.getCommentDO();
+        SocialCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
 
         // 校验是否触发关键词
         reportDomain.checkKeywordsCreateReport(commentDO);
 
         //如果不为待审核，才发送通知
-        if (commentDO.getStatus().equals(ContentStatus.enable)) {
+        //注释通知相关功能
+        /*if (commentDO.getStatus().equals(ContentStatus.enable)) {
             List<NotifyDO> notifyDOS = notifyDomain.saveCreateCommentNotifies(commentDO, commentAddLineTransfer.getTalk(), commentAddLineTransfer.getParentComment(), commentAddLineTransfer.getReplyComment(), mineUser);
 
             //推送消息
             notifyDomain.sendNotifies(notifyDOS, mineUser);
-        }
+        }*/
 
         return SocialCommentROFactory.newTalkCommentRO(mineUser, commentDO, false);
     }

@@ -85,7 +85,14 @@ public class UnionIdDbUtil {
             throw new SocialParamsException("无效的内容标示4");
         }
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(unionId);
+        if (uniContentUnionIdDO == null) {
+            throw new SocialParamsException("无效的内容标示5");
+        }
         return uniContentUnionIdDO;
+    }
+
+    public static Boolean notSelfData(Integer unionId) {
+        return getUnionDOByUnionIdNotNull(unionId).getFromDevId() != 1;
     }
 
     //获取可为空， 将中心的数据写入本系统
@@ -109,7 +116,6 @@ public class UnionIdDbUtil {
     }
 
 
-
     //结果不可为空 ，为前台传入的数据,根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static Integer getUserUnionIdByUidNotNull(String uid) {
         return getUnionIdByUidNotNull(uid);
@@ -129,6 +135,11 @@ public class UnionIdDbUtil {
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static Integer getUnionIdByUidNotNull(String uuid) {
+        return getUnionByUidNotNull(uuid).getId();
+    }
+
+    //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
+    public static UniContentUnionIdDO getUnionByUidNotNull(String uuid) {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标示1");
         }
@@ -136,10 +147,8 @@ public class UnionIdDbUtil {
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("错误的内容标识2");
         }
-        return uniContentUnionIdDO.getId();
+        return uniContentUnionIdDO;
     }
-
-
 
     public static Integer getUnionIdByUid(String uuid) {
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(uuid);

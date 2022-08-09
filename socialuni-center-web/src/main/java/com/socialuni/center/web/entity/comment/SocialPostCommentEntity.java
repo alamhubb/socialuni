@@ -18,19 +18,16 @@ public class SocialPostCommentEntity {
     @Resource
     private TalkManage talkManage;
 
-    public CommentAddLineTransfer saveComment(SocialCommentPostQO addVO, CommentAddLineTransfer commentAddLineTransfer, Integer mineUserId) {
+    public SocialCommentDO saveComment(SocialCommentPostQO addVO, Integer mineUserId) {
         //创建和保存comment到db
         SocialCommentDO commentDO = commentStore.saveAddComment(addVO, mineUserId);
 
         //关联更新talk到db，时间、评论次数等
-        SocialTalkDO talkDO = talkManage.updateTalkByAddComment(commentAddLineTransfer.getTalk());
+        talkManage.updateTalkByAddComment(addVO.getTalkId());
         //设置为更新后的talk
-        commentAddLineTransfer.setTalk(talkDO);
         //关联更新comment到db，时间、评论次数等
-        commentAddLineTransfer = commentStore.updateCommentByAddComment(commentAddLineTransfer);
+        commentStore.updateCommentByAddComment(addVO);
 
-        commentAddLineTransfer.setCommentDO(commentDO);
-
-        return commentAddLineTransfer;
+        return commentDO;
     }
 }

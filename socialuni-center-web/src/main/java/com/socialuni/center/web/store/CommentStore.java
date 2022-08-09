@@ -37,7 +37,7 @@ public class CommentStore {
      * @param commentAddLineTransfer
      * @return
      */
-    public CommentAddLineTransfer updateCommentByAddComment(CommentAddLineTransfer commentAddLineTransfer) {
+    public CommentAddLineTransfer updateCommentByAddComment(SocialCommentPostQO addVO) {
         Date curDate = new Date();
         SocialCommentDO parentComment = commentAddLineTransfer.getParentComment();
         //执行comment关联操作

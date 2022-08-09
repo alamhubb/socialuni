@@ -1,8 +1,8 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.center.web.model.DO.talk.SocialTalkDO;
 import com.socialuni.center.web.repository.community.TalkRepository;
+import com.socialuni.social.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,8 +17,11 @@ public class TalkUtils {
     }
 
     public static SocialTalkDO get(Integer talkId) {
+        if (UnionIdDbUtil.notSelfData(talkId)) {
+            return null;
+        }
         SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkId);
-        if (talkDO == null){
+        if (talkDO == null) {
             throw new SocialParamsException("不存在的动态内容");
         }
         return talkDO;

@@ -1,9 +1,9 @@
 package com.socialuni.center.web.utils;
 
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.center.web.model.DO.comment.SocialCommentDO;
 import com.socialuni.center.web.repository.CommentRepository;
+import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.social.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,11 +18,11 @@ public class CommentUtils {
         CommentUtils.commentRepository = commentRepository;
     }
 
-    public static SocialCommentDO get(Integer commentId) {
-        if (commentId == null) {
-            throw new SocialSystemException("commentId为空");
+    public static SocialCommentDO get(Integer unionId) {
+        if (UnionIdDbUtil.notSelfData(unionId)) {
+            return null;
         }
-        SocialCommentDO commentDO = commentRepository.findOneByUnionId(commentId);
+        SocialCommentDO commentDO = commentRepository.findOneByUnionId(unionId);
         if (commentDO == null) {
             throw new SocialSystemException("comment为空");
         }
