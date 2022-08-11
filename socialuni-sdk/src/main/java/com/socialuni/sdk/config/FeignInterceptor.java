@@ -1,19 +1,10 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.model.DO.UniOutRegisterUserDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.repository.UniOutRegisterUserRepository;
 import com.socialuni.sdk.utils.CenterUserUtil;
-import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +12,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -55,7 +42,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         System.out.println(postUrl);
 
-        if (!postUrl.contains("user/registryUser")) {
+        /*if (!postUrl.contains("user/registryUser")) {
             if (mineUser != null) {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
@@ -99,7 +86,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 }
                 requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, CenterUserUtil.getMineUserUnionId());
             }
-        }
+        }*/
 
 //        }
 

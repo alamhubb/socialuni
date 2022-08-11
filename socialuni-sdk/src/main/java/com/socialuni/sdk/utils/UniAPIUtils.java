@@ -1,6 +1,5 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.base.ThrFunction;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
@@ -46,7 +45,7 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    public static <QO extends ContentAddQO> ResultRO<Object> callUniAPI(Boolean needUnionId, Function<QO, ResultRO<Object>> domain, ThrFunction<URI, Map<String, Object>, QO, ResultRO<Object>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO> ResultRO<Object> callUniAPI(Boolean needUnionId, Function<QO, ResultRO<Object>> domain, Function<QO, ResultRO<Object>> callApi, QO contentAddQO) {
         //校验此条数据是否已经写入过。
         String contentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
@@ -88,7 +87,7 @@ public class UniAPIUtils {
                 Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
 
                 //mark 多库同步版本
-                resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
+                resultRO = callApi.apply(contentAddQO);
                 UniContentIdRO uniContentIdRO = (UniContentIdRO)resultRO.getData();
 
                 //根据unionId更新为中心返回的uid
@@ -96,7 +95,7 @@ public class UniAPIUtils {
                 UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, socialuniContentIdRO.getId());
             } else {
                 domain.apply(contentAddQO);
-                resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
+                resultRO = callApi.apply(contentAddQO);
             }
         }
         return resultRO;
