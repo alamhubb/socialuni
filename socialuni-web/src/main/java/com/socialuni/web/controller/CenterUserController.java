@@ -1,4 +1,4 @@
-package com.socialuni.sdk.controller;
+package com.socialuni.web.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.user.*;
@@ -8,13 +8,17 @@ import com.socialuni.sdk.serive.CenterUserService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.net.URI;
 import java.util.Map;
 
 @RestController
 public class CenterUserController implements SocialuniUserAPI {
-
+    @PostConstruct
+    public void someMethod(){
+        System.out.println("大撒旦法撒旦老接口11111111111");
+    }
     @Resource
     private CenterUserService centerUserService;
 

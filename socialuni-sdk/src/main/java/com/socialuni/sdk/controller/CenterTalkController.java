@@ -10,6 +10,7 @@ import com.socialuni.sdk.serive.CenterTalkService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -19,6 +20,12 @@ public class CenterTalkController implements SocialuniTalkAPI {
     private CenterTalkService centerTalkService;
     @Resource
     private SocialuniTalkAPI socialuniTalkAPI;
+
+
+    @PostConstruct
+    public void someMethod(){
+        System.out.println("大撒旦法撒旦老接口");
+    }
     @Resource
     private com.socialuni.sdk.api.SocialuniTalkAPIImpl SocialuniTalkAPIImpl;
 
