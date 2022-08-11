@@ -1,15 +1,11 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.model.QO.user.CenterUserIdQO;
-import com.socialuni.sdk.model.QO.user.CenterUserImgDeleteQO;
+import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
 import com.socialuni.sdk.serive.CenterUserService;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
-import com.socialuni.sdk.model.QO.user.SocialUserImgAddQO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

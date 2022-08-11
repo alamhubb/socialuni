@@ -47,10 +47,8 @@ public class SocialuniAPIImplAspect {
 
         Object result = joinPoint.proceed();
 
-        // 不为写入日志，才保存，写入日志为自己，如果保存会无限循环
-        if (interfaceAndMethodName.contains("Log")) {
-            return result;
-        }
+        System.out.println(interfaceAndMethodName);
+
         Date endDate = new Date();
         long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
         //执行时间大于1秒的，才记录

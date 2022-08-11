@@ -1,10 +1,10 @@
-package com.socialuni.sdk.config;
+package com.socialuni.web.config;
 
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.social.exception.constant.ErrorCode;
+import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.RedisUtil;
+import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
