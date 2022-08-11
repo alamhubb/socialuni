@@ -1,4 +1,4 @@
-package com.socialuni.web.config;
+package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.constant.status.UserStatus;

@@ -1,4 +1,4 @@
-package com.socialuni.web.config;
+package com.socialuni.sdk.config;
 
 
 import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;

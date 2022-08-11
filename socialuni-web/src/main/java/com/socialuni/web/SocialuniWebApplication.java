@@ -1,6 +1,6 @@
 package com.socialuni.web;
 
-import com.socialuni.web.config.EnableSocialuni;
+import com.socialuni.sdk.config.EnableSocialuni;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;

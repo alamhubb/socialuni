@@ -1,4 +1,4 @@
-package com.socialuni.sdk.controller.upgrade0823;
+package com.socialuni.web.controller;
 
 import com.socialuni.sdk.factory.DO.UnionIdDOFactory;
 import com.socialuni.sdk.model.DO.UnionIdDO;

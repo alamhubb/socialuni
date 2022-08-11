@@ -1,4 +1,4 @@
-package com.socialuni.web.config;
+package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.AppData;

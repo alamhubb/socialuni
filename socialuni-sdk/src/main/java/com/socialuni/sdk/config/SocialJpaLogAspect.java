@@ -1,4 +1,4 @@
-package com.socialuni.web.config;
+package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.model.DO.JpaSqlLogDO;
 import com.socialuni.sdk.utils.JpaSqlLogDOUtil;
@@ -19,7 +19,7 @@ import java.util.Date;
 @Aspect
 @Component
 @Slf4j
-public class SocialuniAPIImplAspect {
+public class SocialJpaLogAspect {
     //获取方法类全名+方法名
     private String getInterfaceAndMethodName(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
         //获取目标类对象
@@ -35,7 +35,7 @@ public class SocialuniAPIImplAspect {
         return new StringBuffer(interfaceName).append(".").append(methodName).toString();
     }
 
-    @Pointcut("execution(* com.socialuni.sdk.api..*.*(..))")
+    @Pointcut("within(org.springframework.data.jpa.repository.JpaRepository+)")
     public void sqlRepositoryLog() {
     }
 
@@ -47,8 +47,10 @@ public class SocialuniAPIImplAspect {
 
         Object result = joinPoint.proceed();
 
-        System.out.println(interfaceAndMethodName);
-
+        // 不为写入日志，才保存，写入日志为自己，如果保存会无限循环
+        if (interfaceAndMethodName.contains("Log")) {
+            return result;
+        }
         Date endDate = new Date();
         long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
         //执行时间大于1秒的，才记录

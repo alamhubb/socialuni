@@ -1,4 +1,4 @@
-package com.socialuni.sdk.controller.upgrade0823;
+package com.socialuni.web.controller;
 
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.GetMapping;
