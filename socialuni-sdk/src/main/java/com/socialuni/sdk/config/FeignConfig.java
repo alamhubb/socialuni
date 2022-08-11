@@ -22,18 +22,6 @@ public class FeignConfig implements WebMvcRegistrations {
     private static class FeignRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
         @Override
         protected boolean isHandler(Class<?> beanType) {
-            System.out.println(beanType.getName());
-            if (beanType.getName().contains("SocialuniTalkAPIImpl")) {
-
-                AnnotationUtils.findAnnotation(beanType, Service.class);
-
-                System.out.println(super.isHandler(beanType));
-
-                System.out.println(AnnotationUtils.findAnnotation(beanType, FeignClient.class) == null);
-
-                System.out.println(AnnotationUtils.findAnnotation(beanType, Service.class) == null);
-            }
-
             return super.isHandler(beanType) &&
                     AnnotationUtils.findAnnotation(beanType, FeignClient.class) == null &&
                     AnnotationUtils.findAnnotation(beanType, Service.class) == null;
