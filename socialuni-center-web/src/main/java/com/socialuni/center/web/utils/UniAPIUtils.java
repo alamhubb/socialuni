@@ -46,7 +46,7 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    public static <QO extends ContentAddQO, RO extends UniContentIdRO> UniContentIdRO callUniAPI(String contentType, Function<QO, RO> domain, ThrFunction<URI, Map<String, Object>, QO, ResultRO<RO>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO> ResultRO<Object> callUniAPI(Boolean needUnionId, Function<QO, ResultRO<Object>> domain, ThrFunction<URI, Map<String, Object>, QO, ResultRO<Object>> callApi, QO contentAddQO) {
         //校验此条数据是否已经写入过。
         String contentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
@@ -63,17 +63,13 @@ public class UniAPIUtils {
             }
         }
 
-
         //1.执行业务
         //2.生成unionId
         //3.记录unionId
         //4.返回
 
         //判断这条动态是不是本应用的
-
-
-        UniContentIdRO socialuniContentIdRO = domain.apply(contentAddQO);
-        Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
+        ResultRO<Object> resultRO = domain.apply(contentAddQO);
         //mark 多库同步版本
 
         if (SocialAppConfig.serverIsChild()) {
@@ -83,17 +79,31 @@ public class UniAPIUtils {
             Map<String, Object> headerMap = new HashMap<String, Object>() {{
                 put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
             }};
-            ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
-            if (resultRO == null) {
-                return null;
+
+            if (needUnionId) {
+                //执行本系统逻辑
+                resultRO = domain.apply(contentAddQO);
+                UniContentIdRO socialuniContentIdRO = (UniContentIdRO)resultRO.getData();
+                //根据本系统uid获取unionId
+                Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
+
+                //mark 多库同步版本
+                resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
+                UniContentIdRO uniContentIdRO = (UniContentIdRO)resultRO.getData();
+
+                //根据unionId更新为中心返回的uid
+                socialuniContentIdRO.setId(uniContentIdRO.getId());
+                UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, socialuniContentIdRO.getId());
+            } else {
+                domain.apply(contentAddQO);
+                resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
             }
-            //根据中西能返回更新uid
-            UniContentIdRO uniContentIdRO = resultRO.getData();
-            socialuniContentIdRO.setId(uniContentIdRO.getId());
-            //根据本系统的uid，获取contentId
-            UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, socialuniContentIdRO.getId());
-        } else if (SocialAppConfig.serverIsCenter()) {
-            /*List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
+        }
+        return resultRO;
+
+
+        /*else if (SocialAppConfig.serverIsCenter()) {
+            List<DevAccountDO> devAccountDOS = devAccountRepository.findAll();
             for (DevAccountDO devAccountDO : devAccountDOS) {
                 Integer pushServerId = DevAccountUtils.getDevIdNotNull();
                 //如果为自己，或者为推送者
@@ -107,10 +117,8 @@ public class UniAPIUtils {
                 }};
                 contentAddQO.setId(socialuniContentIdRO.getId());
                 ResultRO<RO> resultRO = callApi.apply(determinedBasePathUri, headerMap, contentAddQO);
-            }*/
-        }
-
-        return socialuniContentIdRO;
+            }
+        }*/
     }
 
     //list转换，TO类List转为RO类List

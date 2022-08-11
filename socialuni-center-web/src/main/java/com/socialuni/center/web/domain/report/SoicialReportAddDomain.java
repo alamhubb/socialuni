@@ -5,6 +5,7 @@ import com.socialuni.center.web.constant.UserType;
 import com.socialuni.center.web.constant.ViolateType;
 import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.service.content.ModelContentCheck;
+import com.socialuni.center.web.utils.CenterUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
@@ -46,7 +47,8 @@ public class SoicialReportAddDomain {
     @Resource
     private ModelContentCheck modelContentCheck;
 
-    public ResultRO<String> addReport(SocialUserDO mineUser, SocialReportAddQO reportAddVO) {
+    public ResultRO<String> addReport(SocialReportAddQO reportAddVO) {
+        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.violateTypes.contains(reportType)) {
