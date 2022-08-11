@@ -14,7 +14,6 @@ import com.socialuni.social.entity.model.DO.message.MessageDO;
 import com.socialuni.social.entity.model.DO.talk.TalkDO;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.center.web.mapper.TalkMapper;
-import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.service.KeywordsService;
 import com.socialuni.center.web.service.KeywordsTriggerService;

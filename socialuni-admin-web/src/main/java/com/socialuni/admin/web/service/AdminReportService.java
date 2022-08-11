@@ -13,7 +13,6 @@ import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.center.web.config.SocialAppConfig;
 import com.socialuni.center.web.constant.ReportSourceType;
 import com.socialuni.center.web.constant.ViolateType;
-import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.service.BaseModelUtils;
 import com.socialuni.center.web.service.KeywordsService;
 import org.apache.commons.lang3.StringUtils;

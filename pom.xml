@@ -23,6 +23,8 @@
         <module>social-api-model</module>
         <module>social-exception</module>
         <module>social-web-sdk</module>
+        <module>socialuni-web</module>
+        <module>socialuni-sdk</module>
         <module>socialuni-center-web</module>
         <module>socialuni-admin-web</module>
     </modules>
@@ -43,6 +45,16 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-constant</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-web</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

@@ -1,7 +1,6 @@
 package com.socialuni.center.test;
 
-import com.socialuni.center.web.CenterWebApplication;
-import com.socialuni.center.web.controller.upgrade0823.TestUnionIdService;
+import com.socialuni.sdk.controller.upgrade0823.TestUnionIdService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

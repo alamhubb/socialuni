@@ -12,7 +12,6 @@ import com.socialuni.center.web.constant.ViolateType;
 import com.socialuni.center.web.constant.status.UserStatus;
 import com.socialuni.center.web.domain.BaseModelService;
 import com.socialuni.center.web.entity.user.SocialUserViolationEntity;
-import com.socialuni.center.web.repository.*;
 import com.socialuni.center.web.repository.community.TalkRepository;
 import com.socialuni.center.web.service.BaseModelUtils;
 import com.socialuni.center.web.service.KeywordsService;

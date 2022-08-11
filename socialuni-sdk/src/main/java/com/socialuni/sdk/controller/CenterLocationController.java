@@ -1,0 +1,30 @@
+package com.socialuni.sdk.controller;
+
+import com.socialuni.sdk.feignAPI.SocialuniLocationAPI;
+import com.socialuni.sdk.model.QO.location.LocationQueryQO;
+import com.socialuni.sdk.model.QO.location.LocationQueryRO;
+import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.sdk.platform.QQMapAPI;
+import com.socialuni.social.web.sdk.utils.IpUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CenterLocationController implements SocialuniLocationAPI {
+    @Override
+    public ResultRO<LocationQueryRO> queryLocation(LocationQueryQO queryQO) {
+        LocationQueryRO locationQueryRO;
+        //经纬度查询
+        if (queryQO.getLatitude() != null) {
+            locationQueryRO = QQMapAPI.geocoder(queryQO);
+            //ip查询
+        } else if (StringUtils.isNotEmpty(queryQO.getIp())) {
+            locationQueryRO = QQMapAPI.getIpLocation(queryQO.getIp());
+            //requestIp查询
+        } else {
+            String ip = IpUtil.getIpAddr();
+            locationQueryRO = QQMapAPI.getIpLocation(ip);
+        }
+        return ResultRO.success(locationQueryRO);
+    }
+}
