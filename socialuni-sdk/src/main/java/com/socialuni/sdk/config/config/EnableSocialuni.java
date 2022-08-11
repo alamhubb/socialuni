@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 //可以注入tokenkey和token秘钥
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import({SocialuniAutoConfiguration.class, FeignConfig.class})
+@Import({FeignConfig.class, SocialuniAutoConfiguration.class})
 public @interface EnableSocialuni {
 }
