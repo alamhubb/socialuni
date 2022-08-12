@@ -1,4 +1,4 @@
-package com.socialuni.social.web.sdk.config;
+package com.socialuni.sdk.config;
 
 
 import com.socialuni.social.exception.constant.ErrorType;
@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-@Component
-@ConditionalOnMissingBean(SocialWebRequestLogInterceptor.class)
 @Slf4j
-public class SocialWebRequestLogInterceptor implements HandlerInterceptor {
+@Component
+@ConditionalOnMissingBean(HandlerInterceptor.class)
+public class SocialuniWebInterceptor implements HandlerInterceptor {
 
     /*
      * 进入controller层之前拦截请求
@@ -27,6 +27,7 @@ public class SocialWebRequestLogInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
+        System.out.println(456456456);
         String requestMethod = request.getMethod();
 
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {

@@ -1,9 +1,9 @@
-package com.socialuni.web.config;
+package com.socialuni.sdk.config;
 
-import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 @Configuration
-public class WebCorsConfig implements WebMvcConfigurer {
+public class SocialuniWebConfig implements WebMvcConfigurer {
     @Resource
-    private SocialWebRequestLogInterceptor socialWebRequestLogInterceptor;
+    private HandlerInterceptor handlerInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -40,6 +40,6 @@ public class WebCorsConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(socialWebRequestLogInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(handlerInterceptor).addPathPatterns("/**");
     }
 }

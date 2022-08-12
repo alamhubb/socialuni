@@ -1,11 +1,11 @@
 package com.socialuni.web.config;
 
+import com.socialuni.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.RedisUtil;
 import com.socialuni.social.exception.constant.ErrorCode;
-import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
-public class WebInterceptor extends SocialWebRequestLogInterceptor {
+public class WebInterceptor extends SocialuniWebInterceptor {
     @Resource
     private RedisUtil redisUtil;
 
@@ -29,6 +29,7 @@ public class WebInterceptor extends SocialWebRequestLogInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
         super.preHandle(request, res, o);
+        System.out.println(12312312);
         String requestMethod = request.getMethod();
 
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {

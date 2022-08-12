@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableFeignClients("com.socialuni")
-@ComponentScan(basePackages = { "com.socialuni","com.socialuni.sdk.controller"} )
+@ComponentScan("com.socialuni")
 @EnableJpaRepositories("com.socialuni")
 @EntityScan("com.socialuni")
 @EnableTransactionManagement

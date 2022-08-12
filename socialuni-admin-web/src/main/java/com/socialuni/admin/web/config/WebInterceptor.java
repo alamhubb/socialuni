@@ -3,7 +3,7 @@ package com.socialuni.admin.web.config;
 import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
 import com.socialuni.center.web.utils.DevAccountUtils;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.web.sdk.config.SocialWebRequestLogInterceptor;
+import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
-public class WebInterceptor extends SocialWebRequestLogInterceptor {
+public class WebInterceptor extends SocialuniWebInterceptor {
     /*
      * 进入controller层之前拦截请求
      * 在请求处理之前进行调用（Controller方法调用之前
