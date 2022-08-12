@@ -1,12 +1,14 @@
 package com.socialuni.sdk.serive;
 
 
+import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.domain.comment.CenterCommentDeleteDomain;
 import com.socialuni.sdk.domain.comment.CenterCommentPostDomain;
 import com.socialuni.sdk.feignAPI.SocialuniCommentAPI;
 import com.socialuni.sdk.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
+import com.socialuni.sdk.utils.UniAPIUtils;
 import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,11 +32,18 @@ public class CenterCommentService {
     public ResultRO<CenterCommentRO> postComment(CenterCommentPostQO centerCommentPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         CenterCommentRO centerCommentRO = centerCommentPostDomain.postComment(centerCommentPostQO);
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return UniAPIUtils.callUniAPIAndUpdateUid(centerCommentRO, socialuniCommentAPI::postComment, centerCommentPostQO);
+        }
         return ResultRO.success(centerCommentRO);
     }
 
     public ResultRO<Void> deleteComment(CenterCommentDeleteQO commentDeleteQO) {
         centerCommentDeleteDomain.deleteComment(commentDeleteQO);
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniCommentAPI.deleteComment(commentDeleteQO);
+        }
         return new ResultRO<>();
     }
 }

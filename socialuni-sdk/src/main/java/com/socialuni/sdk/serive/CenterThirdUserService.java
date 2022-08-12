@@ -1,29 +1,29 @@
 package com.socialuni.sdk.serive;
 
-import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.domain.user.SocialEditUserDomain;
 import com.socialuni.sdk.entity.UniUserRegistryDomain;
 import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
-import com.socialuni.sdk.factory.RO.user.CenterUserDetailROFactory;
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
 import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.CenterUserUtil;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 @Service
 @Slf4j
-public class CenterUserService {
+public class CenterThirdUserService {
     @Resource
     SocialEditUserDomain socialEditUserDomain;
     @Resource
@@ -34,18 +34,32 @@ public class CenterUserService {
     UniUserRegistryDomain socialuniUserRegistryDomain;
     @Resource
     UniContentUnionIdRepository uniContentUnionIdRepository;
-    @Resource
-    SocialuniUserAPI socialuniUserAPI;
+
+    @Transactional
+    public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+        //注册只向三方开发，所以不能为自己
+        Integer dataDevId = DevAccountUtils.getDevIdNotNull();
+        if (dataDevId == 1) {
+            throw new SocialParamsException("开发者信息错误");
+        }
+        SocialUserDO mineUserDO = socialuniUserRegistryDomain.registryUser(loginQO);
+        //生成id
+        CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
+        return new ResultRO<>(mineUser);
+    }
 
     public ResultRO<CenterMineUserDetailRO> getMineUser() {
-        CenterMineUserDetailRO mineUserDetailRO;
-        if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.getMineUser();
-            mineUserDetailRO = new CenterMineUserDetailRO(resultRO.getData());
-        } else {
-            mineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail();
+        CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail();
+        return new ResultRO<>(mineUser);
+    }
+
+    public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
+        SocialUserDO mineUserDO = CenterUserUtil.getMineUserAllowNull();
+        if (mineUserDO == null) {
+            return ResultRO.success();
         }
-        return new ResultRO<>(mineUserDetailRO);
+        CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail(mineUserDO);
+        return new ResultRO<>(mineUser);
     }
 
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
@@ -53,13 +67,14 @@ public class CenterUserService {
 
         SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
 
-        CenterUserDetailRO userDetailRO;
-        if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(centerUserIdQO);
-            userDetailRO = new CenterUserDetailRO(resultRO.getData());
+        CenterUserDetailRO userDetailRO = new CenterUserDetailRO();
+
+        if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
+//            userDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(detailUserDO);
         } else {
-            userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
+//            userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
         }
+
         return new ResultRO<>(userDetailRO);
     }
 
@@ -67,10 +82,6 @@ public class CenterUserService {
     public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
         SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
-
-        if (SocialAppConfig.serverIsChild()) {
-            return socialuniUserAPI.editUser(socialUserEditQO);
-        }
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
@@ -82,9 +93,6 @@ public class CenterUserService {
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
-        if (SocialAppConfig.serverIsChild()) {
-            return socialuniUserAPI.addUserImg(socialUserImgAddQO);
-        }
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         return ResultRO.success(centerMineUserDetailRO);
@@ -96,9 +104,7 @@ public class CenterUserService {
         Integer userImgId = UnionIdDbUtil.getUserImgUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
-        if (SocialAppConfig.serverIsChild()) {
-            return socialuniUserAPI.deleteUserImg(centerUserImgDeleteQO);
-        }
+
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         return ResultRO.success(centerMineUserDetailRO);

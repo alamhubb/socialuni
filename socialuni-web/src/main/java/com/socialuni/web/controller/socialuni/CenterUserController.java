@@ -16,18 +16,8 @@ public class CenterUserController implements SocialuniUserAPI {
     private CenterUserService centerUserAPIImpl;
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
-        return centerUserAPIImpl.registryUser(loginQO);
-    }
-
-    @Override
     public ResultRO<CenterMineUserDetailRO> getMineUser() {
         return centerUserAPIImpl.getMineUser();
-    }
-
-    @Override
-    public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
-        return centerUserAPIImpl.queryThirdUser();
     }
 
     @Override

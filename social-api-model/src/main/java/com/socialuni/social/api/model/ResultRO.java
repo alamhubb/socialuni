@@ -24,6 +24,10 @@ public class ResultRO<T> {
         return new ResultRO<>();
     }
 
+    public static <T> ResultRO<T> failed(Integer errorCode, String errorMsg) {
+        return new ResultRO<>(errorCode, errorMsg);
+    }
+
     public static <T> ResultRO<T> success(T data) {
         return new ResultRO<>(data);
     }

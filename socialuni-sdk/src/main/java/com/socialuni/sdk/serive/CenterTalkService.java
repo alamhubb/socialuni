@@ -9,6 +9,7 @@ import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
+import com.socialuni.sdk.utils.UniAPIUtils;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,10 @@ public class CenterTalkService {
 
     public ResultRO<CenterTalkRO> postTalk(SocialTalkPostQO talkPostQO) {
         CenterTalkRO talkRO = centerTalkPostDomain.postTalk(talkPostQO);
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return UniAPIUtils.callUniAPIAndUpdateUid(talkRO, socialuniTalkAPI::postTalk, talkPostQO);
+        }
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         return ResultRO.success(talkRO);
     }
@@ -58,16 +63,33 @@ public class CenterTalkService {
     public ResultRO<Void> deleteTalk(CenterTalkIdQO talkIdQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         centerTalkDeleteDomain.deleteTalk(talkIdQO);
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniTalkAPI.deleteTalk(talkIdQO);
+        }
         return new ResultRO<>();
     }
 
     public ResultRO<CenterTalkRO> queryTalkDetail(CenterTalkIdQO talkIdQO) {
-        CenterTalkRO centerTalkRO = centerTalkDetailDomain.queryTalkDetail(talkIdQO);
-        return new ResultRO<>(centerTalkRO);
+        CenterTalkRO centerTalkRO;
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            ResultRO<CenterTalkRO> centerTalkROResultRO = socialuniTalkAPI.queryTalkDetail(talkIdQO);
+            centerTalkRO = new CenterTalkRO(centerTalkROResultRO.getData());
+        } else {
+            centerTalkRO = centerTalkDetailDomain.queryTalkDetail(talkIdQO);
+        }
+        return ResultRO.success(centerTalkRO);
     }
 
     public ResultRO<List<CenterTalkRO>> queryUserTalks(CenterUserTalkQueryQO centerUserTalkQueryQO) {
-        List<CenterTalkRO> centerTalkROS = centerUserTalkQueryDomain.queryUserTalks(centerUserTalkQueryQO);
-        return new ResultRO<>(centerTalkROS);
+        List<CenterTalkRO> talkROS;
+        if (SocialAppConfig.serverIsChild()) {
+            ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryUserTalks(centerUserTalkQueryQO);
+            talkROS = CenterTalkROFactory.getTalkROS(resultRO.getData());
+        } else {
+            talkROS = centerUserTalkQueryDomain.queryUserTalks(centerUserTalkQueryQO);
+        }
+        return new ResultRO<>(talkROS);
     }
 }

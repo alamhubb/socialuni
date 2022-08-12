@@ -15,14 +15,8 @@ import javax.validation.Valid;
 @RequestMapping("user")
 @FeignClient(name = "user", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniUserAPI {
-    @PostMapping("registryUser")
-    ResultRO<CenterMineUserDetailRO> registryUser(@RequestBody @Valid SocialProviderLoginQO loginQO);
-
     @PostMapping("getMineUser")
     ResultRO<CenterMineUserDetailRO> getMineUser();
-
-    @PostMapping("queryThirdUser")
-    ResultRO<CenterMineUserDetailRO> queryThirdUser();
 
     @PostMapping("queryUserDetail")
     ResultRO<CenterUserDetailRO> queryUserDetail(@RequestBody @Valid CenterUserIdQO centerUserIdQO);

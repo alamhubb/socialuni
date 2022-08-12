@@ -1,5 +1,6 @@
 package com.socialuni.web.controller.socialuni;
 
+import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.feignAPI.SocialuniHugAPI;
 import com.socialuni.sdk.model.QO.CenterHugAddQO;
 import com.socialuni.sdk.serive.CenterHugService;
@@ -12,9 +13,16 @@ import javax.annotation.Resource;
 public class CenterHugController implements SocialuniHugAPI {
     @Resource
     CenterHugService centerHugAPIImpl;
+    @Resource
+    SocialuniHugAPI socialuniHugAPI;
 
     @Override
     public ResultRO<Void> addHug(CenterHugAddQO socialHugAddQO) {
-        return centerHugAPIImpl.addHug(socialHugAddQO);
+        centerHugAPIImpl.addHug(socialHugAddQO);
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniHugAPI.addHug(socialHugAddQO);
+        }
+        return new ResultRO<>();
     }
 }

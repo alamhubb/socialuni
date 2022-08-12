@@ -1,5 +1,7 @@
 package com.socialuni.sdk.serive.circle;
 
+import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.factory.community.SocialCircleROFactory;
@@ -23,19 +25,36 @@ public class CenterCircleService {
     @Resource
     private SocialCircleRedis socialCircleRedis;
 
+    @Resource
+    SocialuniCircleAPI socialuniCircleAPI;
+
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
         SocialCircleDO circleDO = new SocialCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), CenterUserUtil.getMineUserNotNull());
         circleDO = socialCircleRepository.save(circleDO);
-        return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
+
+        ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
+
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            resultRO = socialuniCircleAPI.createCircle(circleCreateQO);
+        }
+        return resultRO;
     }
 
 
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniCircleAPI.queryHotCircles();
+        }
         return ResultRO.success(socialCircleRedis.getHotCirclesRedis(GenderType.all));
     }
 
     public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniCircleAPI.queryCircleTypes();
+        }
         return ResultRO.success(socialCircleRedis.getAllCircleTypesRedis(GenderType.all));
     }
 

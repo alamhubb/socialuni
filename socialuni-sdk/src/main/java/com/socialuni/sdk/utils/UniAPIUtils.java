@@ -2,16 +2,13 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.QO.ContentAddQO;
 import com.socialuni.sdk.model.RO.community.UniContentIdRO;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
-import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -45,59 +42,34 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    public static <QO extends ContentAddQO> ResultRO<Object> callUniAPI(Boolean needUnionId, Function<QO, ResultRO<Object>> domain, Function<QO, ResultRO<Object>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO, RO extends Object> ResultRO<RO> callUniAPIAndUpdateUid(UniContentIdRO uniContentIdRO, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         //校验此条数据是否已经写入过。
-        String contentUnionId = contentAddQO.getId();
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
         //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
-
-        if (StringUtils.isNotEmpty(contentUnionId)) {
-            if (!DevAccountUtils.pusherIsCenterServer()) {
-                throw new SocialParamsException("开发者信息错误");
-            }
-            UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(contentUnionId);
-            if (uniContentUnionIdDO != null) {
-                log.info("重复写入数据:{}", contentUnionId);
-                return null;
-            }
-        }
-
         //1.执行业务
         //2.生成unionId
         //3.记录unionId
         //4.返回
 
         //判断这条动态是不是本应用的
-        ResultRO<Object> resultRO = domain.apply(contentAddQO);
         //mark 多库同步版本
+        //都需要往中心推送，并且使用中心返回的unionId更新
+        String apiUrl = SocialAppConfig.getSocialuniServerUrl();
+        URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
+        Map<String, Object> headerMap = new HashMap<String, Object>() {{
+            put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+        }};
+        //执行本系统逻辑
+        //根据本系统uid获取unionId
+        Integer unionId = UnionIdDbUtil.getUnionIdByUid(uniContentIdRO.getId());
 
-        if (SocialAppConfig.serverIsChild()) {
-            //都需要往中心推送，并且使用中心返回的unionId更新
-            String apiUrl = SocialAppConfig.getSocialuniServerUrl();
-            URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
-            Map<String, Object> headerMap = new HashMap<String, Object>() {{
-                put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
-            }};
+        //mark 多库同步版本
+        ResultRO<RO> resultRO = callApi.apply(contentAddQO);
+        uniContentIdRO = (UniContentIdRO) resultRO.getData();
 
-            if (needUnionId) {
-                //执行本系统逻辑
-                resultRO = domain.apply(contentAddQO);
-                UniContentIdRO socialuniContentIdRO = (UniContentIdRO)resultRO.getData();
-                //根据本系统uid获取unionId
-                Integer unionId = UnionIdDbUtil.getUnionIdByUid(socialuniContentIdRO.getId());
+        //根据unionId更新为中心返回的uid
+        UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, uniContentIdRO.getId());
 
-                //mark 多库同步版本
-                resultRO = callApi.apply(contentAddQO);
-                UniContentIdRO uniContentIdRO = (UniContentIdRO)resultRO.getData();
-
-                //根据unionId更新为中心返回的uid
-                socialuniContentIdRO.setId(uniContentIdRO.getId());
-                UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, socialuniContentIdRO.getId());
-            } else {
-                domain.apply(contentAddQO);
-                resultRO = callApi.apply(contentAddQO);
-            }
-        }
         return resultRO;
 
 

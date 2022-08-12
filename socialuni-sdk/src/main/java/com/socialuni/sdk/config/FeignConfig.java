@@ -20,6 +20,9 @@ public class FeignConfig implements WebMvcRegistrations {
     private static class FeignRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
         @Override
         protected boolean isHandler(Class<?> beanType) {
+            System.out.println(beanType.getName());
+            System.out.println(super.isHandler(beanType));
+            System.out.println(beanType.getAnnotation(FeignClient.class));
             return super.isHandler(beanType) &&
                     beanType.getAnnotation(FeignClient.class) == null;
         }

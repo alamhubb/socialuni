@@ -1,5 +1,6 @@
 package com.socialuni.sdk.serive;
 
+import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.domain.report.SoicialReportAddDomain;
 import com.socialuni.sdk.feignAPI.SocialuniReportAPI;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
@@ -26,15 +27,20 @@ public class CenterReportService {
     @Resource
     DevAccountRepository devAccountRepository;
 
-
     public ResultRO<String> addReport(CenterReportAddQO centerReportAddQO) {
         Integer contentId = UnionIdDbUtil.getUnionIdByUidNotNull(centerReportAddQO.getContentId());
 
         SocialReportAddQO socialReportAddQO = centerReportAddQO.toSocialQO(contentId);
 
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
+        ResultRO<String> resultRO = soicialReportAddDomain.addReport(socialReportAddQO);
 
-        return soicialReportAddDomain.addReport(socialReportAddQO);
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniReportAPI.addReport(centerReportAddQO);
+        }
+
+        return resultRO;
 
     }
 }
