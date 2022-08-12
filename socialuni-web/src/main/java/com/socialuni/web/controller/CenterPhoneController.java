@@ -1,6 +1,5 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniPhoneAPI;
 import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.serive.CenterPhoneService;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;

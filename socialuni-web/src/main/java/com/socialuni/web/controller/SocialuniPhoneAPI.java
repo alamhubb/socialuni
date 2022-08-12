@@ -1,11 +1,10 @@
-package com.socialuni.sdk.feignAPI;
+package com.socialuni.web.controller;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import javax.validation.Valid;
  * 前端初始化内容
  */
 @RequestMapping("phone")
-@FeignClient(name = "phone", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniPhoneAPI {
     @PostMapping("sendAuthCode")
     ResultRO<Void> sendAuthCode(@RequestBody @Valid SocialSendAuthCodeQO authCodeQO);

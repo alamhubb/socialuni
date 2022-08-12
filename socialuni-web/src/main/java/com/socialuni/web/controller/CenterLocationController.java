@@ -1,18 +1,24 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniLocationAPI;
 import com.socialuni.sdk.model.QO.location.LocationQueryQO;
 import com.socialuni.sdk.model.QO.location.LocationQueryRO;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.platform.QQMapAPI;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
+@RequestMapping("location")
 @RestController
-public class CenterLocationController implements SocialuniLocationAPI {
-    @Override
-    public ResultRO<LocationQueryRO> queryLocation(LocationQueryQO queryQO) {
+public class CenterLocationController  {
+
+    @PostMapping("queryLocation")
+    public ResultRO<LocationQueryRO> queryLocation(@RequestBody @Valid LocationQueryQO queryQO) {
         LocationQueryRO locationQueryRO;
         //经纬度查询
         if (queryQO.getLatitude() != null) {

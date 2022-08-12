@@ -1,7 +1,6 @@
 package com.socialuni.web.controller;
 
 
-import com.socialuni.sdk.feignAPI.SocialuniMockOAuthAPI;
 import com.socialuni.sdk.serive.CenterMockService;
 import com.socialuni.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.api.model.ResultRO;
