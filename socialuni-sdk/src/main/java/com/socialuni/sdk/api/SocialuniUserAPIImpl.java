@@ -1,4 +1,4 @@
-package com.socialuni.web.controller;
+package com.socialuni.sdk.api;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.user.*;
@@ -6,20 +6,19 @@ import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
 import com.socialuni.sdk.serive.CenterUserService;
 import com.socialuni.social.api.model.ResultRO;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.net.URI;
 import java.util.Map;
 
-@RestController
-public class CenterUserController implements SocialuniUserAPI {
+@Service
+public class SocialuniUserAPIImpl implements SocialuniUserAPI {
     @Resource
     private CenterUserService centerUserService;
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> registryUser(URI baseUrl, Map<String, Object> headerMap, SocialProviderLoginQO loginQO) {
+    public ResultRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
         return centerUserService.registryUser(loginQO);
     }
 

@@ -1,11 +1,11 @@
-package com.socialuni.web.controller;
+package com.socialuni.web.controller.socialuni;
 
+import com.socialuni.sdk.api.SocialuniChatAPIImpl;
 import com.socialuni.sdk.feignAPI.SocialuniChatAPI;
-import com.socialuni.sdk.service.SocialChatService;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRemoveVO;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 public class CenterChatController implements SocialuniChatAPI {
     @Resource
-    SocialChatService socialChatService;
+    SocialuniChatAPIImpl socialuniChatAPIImpl;
 
     @Override
     public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
@@ -33,7 +33,7 @@ public class CenterChatController implements SocialuniChatAPI {
 
     @Override
     public ResultRO<List<ChatRO>> queryChats() {
-        return socialChatService.queryChatList();
+        return null;
     }
 
 /*    @Override

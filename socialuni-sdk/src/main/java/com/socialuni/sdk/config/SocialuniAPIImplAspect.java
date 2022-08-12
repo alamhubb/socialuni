@@ -48,27 +48,6 @@ public class SocialuniAPIImplAspect {
         Object result = joinPoint.proceed();
 
         System.out.println(interfaceAndMethodName);
-
-        Date endDate = new Date();
-        long spendTime = endDate.getTime() - jpaSqlLogDO.getCreateTime().getTime();
-        //执行时间大于1秒的，才记录
-        if (spendTime > 1000) {
-            jpaSqlLogDO.setEndTime(endDate);
-            jpaSqlLogDO.setSpendTime(spendTime);
-
-            String params = Arrays.toString(joinPoint.getArgs());
-            jpaSqlLogDO.setParams(params);
-
-            jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
-
-            RequestLogDO requestLogDO = RequestLogUtil.get();
-            if (requestLogDO != null) {
-                jpaSqlLogDO.setRequestId(requestLogDO.getId());
-            }
-            log.info("[{}：{}],[spendTimes:{}]", jpaSqlLogDO.getRequestId(), interfaceAndMethodName, spendTime);
-
-            JpaSqlLogDOUtil.saveAsync(jpaSqlLogDO);
-        }
         return result;
     }
 }

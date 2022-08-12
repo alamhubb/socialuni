@@ -1,12 +1,12 @@
-package com.socialuni.web.controller;
+package com.socialuni.sdk.api;
 
 import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
-import com.socialuni.sdk.serive.circle.CenterCircleService;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
-import org.springframework.web.bind.annotation.RestController;
+import com.socialuni.sdk.serive.circle.CenterCircleService;
+import com.socialuni.social.api.model.ResultRO;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,8 +16,8 @@ import java.util.List;
  * @date 2018-11-18 20:45
  */
 
-@RestController
-public class CenterCircleController implements SocialuniCircleAPI {
+@Service
+public class SocialuniCircleAPIImpl implements SocialuniCircleAPI {
 
     @Resource
     CenterCircleService centerCircleService;

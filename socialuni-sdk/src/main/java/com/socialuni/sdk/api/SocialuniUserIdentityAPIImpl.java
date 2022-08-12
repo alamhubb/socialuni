@@ -1,16 +1,16 @@
-package com.socialuni.web.controller;
+package com.socialuni.sdk.api;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserIdentityAPI;
-import com.socialuni.sdk.serive.CenterUserIdentityService;
 import com.socialuni.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
+import com.socialuni.sdk.serive.CenterUserIdentityService;
 import com.socialuni.social.api.model.ResultRO;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@RestController
-public class CenterUserIdentityController implements SocialuniUserIdentityAPI {
+@Service
+public class SocialuniUserIdentityAPIImpl implements SocialuniUserIdentityAPI {
     @Resource
     private CenterUserIdentityService centerUserIdentityService;
 

@@ -1,4 +1,4 @@
-package com.socialuni.web.controller;
+package com.socialuni.web.controller.socialuni;
 
 import com.socialuni.sdk.feignAPI.SocialuniDistrictAPI;
 import com.socialuni.sdk.constant.AppData;

@@ -6,18 +6,15 @@ import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.net.URI;
-import java.util.Map;
 
 
 @RequestMapping("user")
 public interface SocialuniUserAPI {
     @PostMapping("registryUser")
-    ResultRO<CenterMineUserDetailRO> registryUser(URI baseUrl, @RequestHeader Map<String, Object> headerMap, @RequestBody @Valid SocialProviderLoginQO loginQO);
+    ResultRO<CenterMineUserDetailRO> registryUser(@RequestBody @Valid SocialProviderLoginQO loginQO);
 
     @PostMapping("getMineUser")
     ResultRO<CenterMineUserDetailRO> getMineUser();
