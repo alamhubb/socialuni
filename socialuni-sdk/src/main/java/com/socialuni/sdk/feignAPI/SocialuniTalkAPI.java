@@ -6,6 +6,7 @@ import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.social.api.model.ResultRO;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("talk")
+@FeignClient(name = "talk", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTalkAPI {
     @GetMapping("queryTalks")
     ResultRO<List<CenterTalkRO>> queryTalks();

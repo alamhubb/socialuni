@@ -1,10 +1,10 @@
 package com.socialuni.web.controller.socialuni;
 
-import com.socialuni.sdk.api.SocialuniCircleAPIImpl;
 import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
+import com.socialuni.sdk.serive.circle.CenterCircleService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,20 +20,20 @@ import java.util.List;
 public class CenterCircleController implements SocialuniCircleAPI {
 
     @Resource
-    SocialuniCircleAPIImpl centerCircleAPIImpl;
+    CenterCircleService centerCircleService;
 
     @Override
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
-        return centerCircleAPIImpl.createCircle(circleCreateQO);
+        return centerCircleService.createCircle(circleCreateQO);
     }
 
     @Override
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
-        return centerCircleAPIImpl.queryHotCircles();
+        return centerCircleService.queryHotCircles();
     }
 
     @Override
     public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
-        return centerCircleAPIImpl.queryCircleTypes();
+        return centerCircleService.queryCircleTypes();
     }
 }

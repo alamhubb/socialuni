@@ -1,12 +1,12 @@
 package com.socialuni.web.controller.socialuni;
 
-import com.socialuni.sdk.api.SocialuniTalkAPIImpl;
 import com.socialuni.sdk.feignAPI.SocialuniTalkAPI;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
+import com.socialuni.sdk.serive.CenterTalkService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +19,7 @@ public class CenterTalkController implements SocialuniTalkAPI {
     private SocialuniTalkAPI socialuniTalkAPI;
 
     @Resource
-    private SocialuniTalkAPIImpl socialuniTalkAPIImpl;
+    private CenterTalkService socialuniTalkAPIImpl;
 
     @Override
     public ResultRO<List<CenterTalkRO>> queryTalks() {
