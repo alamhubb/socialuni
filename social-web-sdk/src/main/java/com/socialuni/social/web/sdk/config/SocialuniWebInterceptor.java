@@ -21,6 +21,9 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
     @PostConstruct
     private void hehe(){
         System.out.println("执行了注入了吗");
+        String classPath = SocialuniWebInterceptor.class.getResource("/").getPath();
+
+        System.out.println("项目路径：" + classPath);
     }
 
     /*
