@@ -7,8 +7,6 @@ import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -18,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @Slf4j
-@Component
-@ConditionalOnMissingBean(HandlerInterceptor.class)
 public class SocialuniWebInterceptor implements HandlerInterceptor {
 
     @PostConstruct

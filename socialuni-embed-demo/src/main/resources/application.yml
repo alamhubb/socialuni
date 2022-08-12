@@ -1,0 +1,33 @@
+spring:
+  profiles:
+#    active: devprod
+#    active: localdevprod
+#    active: local
+    active: dev
+#    active: qkypc
+#    active: demo
+#    active: prod
+#    active: localprod
+  datasource:
+    initialization-mode: always
+    data: classpath:dataInit/data.sql
+  jpa:
+    database: MYSQL
+    show-sql: false
+#    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+        format_sql: true
+  #不要为我们工程中的资源文件建立映射
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  file:
+    name: socialuni.log

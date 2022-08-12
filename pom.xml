@@ -27,6 +27,7 @@
         <module>socialuni-sdk</module>
         <module>socialuni-center-web</module>
         <module>socialuni-admin-web</module>
+        <module>socialuni-embed-demo</module>
     </modules>
 
     <properties>
@@ -70,6 +71,11 @@
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>social-web-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>socialuni-embed-demo</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->

@@ -3,7 +3,6 @@ package com.socialuni.social.web.sdk.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -13,7 +12,7 @@ import javax.annotation.Resource;
 @Configuration
 public class SocialuniWebConfig implements WebMvcConfigurer {
     @Resource
-    private HandlerInterceptor handlerInterceptor;
+    private SocialuniWebInterceptor socialuniWebInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -40,6 +39,6 @@ public class SocialuniWebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(handlerInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(socialuniWebInterceptor).addPathPatterns("/**");
     }
 }

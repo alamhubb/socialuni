@@ -13,10 +13,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableFeignClients("com.socialuni")
-@ComponentScan("com.socialuni")
-@EnableJpaRepositories("com.socialuni")
-@EntityScan("com.socialuni")
+@EnableFeignClients("com.socialuni.sdk")
+@ComponentScan("com.socialuni.sdk")
+@EnableJpaRepositories("com.socialuni.sdk")
+@EntityScan("com.socialuni.sdk")
 @EnableTransactionManagement
 @EnableAsync
 //很奇怪，需要写到具体的包名
