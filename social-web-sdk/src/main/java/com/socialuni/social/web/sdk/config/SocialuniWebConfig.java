@@ -1,4 +1,4 @@
-package com.socialuni.sdk.config;
+package com.socialuni.social.web.sdk.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

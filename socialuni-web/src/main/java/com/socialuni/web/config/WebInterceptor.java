@@ -1,6 +1,6 @@
 package com.socialuni.web.config;
 
-import com.socialuni.sdk.config.SocialuniWebInterceptor;
+import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
@@ -29,7 +29,6 @@ public class WebInterceptor extends SocialuniWebInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
         super.preHandle(request, res, o);
-        System.out.println(12312312);
         String requestMethod = request.getMethod();
 
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
