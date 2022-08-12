@@ -25,7 +25,7 @@ public class SocialuniTalkAPIImpl implements SocialuniTalkAPI {
 
     @Override
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
-        return null;
+        return centerTalkService.queryTalks(queryQO);
     }
 
     @Override
