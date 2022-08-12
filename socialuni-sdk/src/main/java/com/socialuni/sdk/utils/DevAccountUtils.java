@@ -1,7 +1,6 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialAppConfig;
-import com.socialuni.sdk.feignAPI.SocialuniDevAccountAPI;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.sdk.model.DO.dev.DevAccountDO;
@@ -28,7 +27,6 @@ public class DevAccountUtils {
     private static DevAccountRepository devAccountRepository;
     private static DevAccountProviderRepository devAccountProviderRepository;
     private static DevTokenRepository devTokenRepository;
-    private static SocialuniDevAccountAPI socialuniDevAccountAPI;
 
     @Resource
     public void setDevTokenRepository(DevTokenRepository devTokenRepository) {
@@ -43,11 +41,6 @@ public class DevAccountUtils {
     @Resource
     public void setDevAccountProviderRepository(DevAccountProviderRepository devAccountProviderRepository) {
         DevAccountUtils.devAccountProviderRepository = devAccountProviderRepository;
-    }
-
-    @Resource
-    public void setSocialuniDevAccountAPI(SocialuniDevAccountAPI socialuniDevAccountAPI) {
-        DevAccountUtils.socialuniDevAccountAPI = socialuniDevAccountAPI;
     }
 
     public static String getDevSocialSecretKey() {

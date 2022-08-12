@@ -1,4 +1,4 @@
-package com.socialuni.sdk.config;
+package com.socialuni.web.config;
 
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.CenterUserUtil;
