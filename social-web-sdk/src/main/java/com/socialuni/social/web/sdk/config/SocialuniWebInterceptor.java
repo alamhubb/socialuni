@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
@@ -20,6 +21,11 @@ import java.util.Date;
 @Component
 @ConditionalOnMissingBean(HandlerInterceptor.class)
 public class SocialuniWebInterceptor implements HandlerInterceptor {
+
+    @PostConstruct
+    private void hehe(){
+        System.out.println("执行了注入了吗");
+    }
 
     /*
      * 进入controller层之前拦截请求
