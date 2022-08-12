@@ -21,11 +21,6 @@ public class CenterTalkController implements SocialuniTalkAPI {
     @Resource
     private SocialuniTalkAPI socialuniTalkAPI;
 
-
-    @PostConstruct
-    public void someMethod(){
-        System.out.println("大撒旦法撒旦老接口");
-    }
     @Resource
     private com.socialuni.sdk.api.SocialuniTalkAPIImpl SocialuniTalkAPIImpl;
 

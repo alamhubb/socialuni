@@ -1,11 +1,10 @@
 package com.socialuni.sdk.feignAPI;
 
 
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRemoveVO;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import java.util.List;
  */
 
 @RequestMapping("chat")
-@FeignClient(name = "chat", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniChatAPI {
     @PostMapping("readChat")
     ResultRO<?> readChatMessages(@RequestBody @Valid ChatReadVO chatVO);

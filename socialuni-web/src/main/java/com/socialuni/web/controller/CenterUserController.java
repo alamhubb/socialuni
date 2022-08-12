@@ -15,10 +15,6 @@ import java.util.Map;
 
 @RestController
 public class CenterUserController implements SocialuniUserAPI {
-    @PostConstruct
-    public void someMethod(){
-        System.out.println("大撒旦法撒旦老接口11111111111");
-    }
     @Resource
     private CenterUserService centerUserService;
 

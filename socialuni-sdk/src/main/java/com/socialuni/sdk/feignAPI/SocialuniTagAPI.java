@@ -1,10 +1,9 @@
 package com.socialuni.sdk.feignAPI;
 
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("tag")
-@FeignClient(name = "tag", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTagAPI {
     @PostMapping("addTag")
     ResultRO<TagRO> addTag(@RequestBody @Valid TagAddQO tagAddVO);

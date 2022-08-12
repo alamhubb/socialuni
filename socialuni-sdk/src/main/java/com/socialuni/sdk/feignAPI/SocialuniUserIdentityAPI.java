@@ -12,7 +12,6 @@ import javax.validation.Valid;
 
 
 @RequestMapping("userIdentity")
-@FeignClient(name = "userIdentity", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniUserIdentityAPI {
 //    @PostMapping("idImgAuthPreCheck")
 //    ResultRO<SocialUserIdentityAuthPreCheckRO> idImgAuthPreCheck(@RequestBody @Valid SocialUserIdImgCheckQO socialUserIdImgCheckQO);

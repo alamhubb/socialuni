@@ -1,11 +1,10 @@
 package com.socialuni.sdk.feignAPI;
 
 
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import java.util.List;
  */
 
 @RequestMapping("circle")
-@FeignClient(name = "circle", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniCircleAPI {
     @PostMapping("createCircle")
     ResultRO<SocialCircleRO> createCircle(@RequestBody @Valid CircleCreateQO circleCreateQO);
