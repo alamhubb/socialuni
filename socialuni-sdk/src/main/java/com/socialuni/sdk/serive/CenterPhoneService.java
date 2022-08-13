@@ -1,17 +1,17 @@
 package com.socialuni.sdk.serive;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.sdk.domain.thirdUser.AuthThirdUserDomain;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.constant.AuthType;
 import com.socialuni.sdk.domain.phone.SocailSendAuthCodeDomain;
+import com.socialuni.sdk.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.sdk.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class CenterPhoneService {
     }
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }

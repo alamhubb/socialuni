@@ -1,20 +1,20 @@
 package com.socialuni.sdk.domain.talk;
 
-import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
-import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.config.SocialAppEnv;
+import com.socialuni.sdk.constant.UserType;
+import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.sdk.repository.community.TagRepository;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
-import com.socialuni.sdk.constant.UserType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class CenterTalkPostDomain {
     TalkRepository talkRepository;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         String content = talkPostQO.getContent();
 

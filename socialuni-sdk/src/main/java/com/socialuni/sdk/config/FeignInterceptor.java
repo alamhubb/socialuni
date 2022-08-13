@@ -1,9 +1,7 @@
 package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.repository.UniOutRegisterUserRepository;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -37,7 +35,6 @@ public class FeignInterceptor implements RequestInterceptor {
         System.out.println(requestTemplate.feignTarget());
         System.out.println(requestTemplate.feignTarget().url());
         System.out.println(requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey));
-        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
         String postUrl = requestTemplate.path();
 
         System.out.println(postUrl);

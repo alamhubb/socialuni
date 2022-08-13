@@ -10,8 +10,8 @@ import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
 import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
@@ -54,7 +54,7 @@ public class CenterThirdUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
-        SocialUserDO mineUserDO = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUserDO = SocialUserUtil.getMineUserAllowNull();
         if (mineUserDO == null) {
             return ResultRO.success();
         }
@@ -63,9 +63,9 @@ public class CenterThirdUserService {
     }
 
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        SocialUserDO detailUserDO = CenterUserUtil.get(centerUserIdQO.getUserId());
+        SocialUserDO detailUserDO = SocialUserUtil.get(centerUserIdQO.getUserId());
 
-        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         CenterUserDetailRO userDetailRO = new CenterUserDetailRO();
 
@@ -80,7 +80,7 @@ public class CenterThirdUserService {
 
 
     public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
         CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
@@ -89,7 +89,7 @@ public class CenterThirdUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
@@ -99,7 +99,7 @@ public class CenterThirdUserService {
     }
 
     public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         Integer userImgId = UnionIdDbUtil.getUserImgUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
 

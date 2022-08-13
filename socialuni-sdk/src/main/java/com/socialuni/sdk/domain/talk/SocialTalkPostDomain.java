@@ -6,13 +6,7 @@ import com.socialuni.sdk.domain.report.ReportDomain;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.factory.TalkImgDOFactory;
 import com.socialuni.sdk.manage.talk.SocialTalkCreateManage;
-import com.socialuni.sdk.model.TalkAddValidateRO;
-import com.socialuni.sdk.repository.community.*;
-import com.socialuni.sdk.service.content.ModelContentCheck;
-import com.socialuni.sdk.service.tag.TagService;
-import com.socialuni.sdk.utils.CenterUserUtil;
-import com.socialuni.sdk.utils.DistrictStoreUtils;
-import com.socialuni.sdk.utils.TalkRedis;
+import com.socialuni.sdk.model.DO.DistrictDO;
 import com.socialuni.sdk.model.DO.circle.SocialCircleDO;
 import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkCircleDO;
@@ -20,14 +14,19 @@ import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkTagDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.repository.community.*;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.sdk.model.DO.DistrictDO;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.exception.SocialParamsException;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.sdk.model.TalkAddValidateRO;
+import com.socialuni.sdk.repository.community.*;
+import com.socialuni.sdk.service.content.ModelContentCheck;
+import com.socialuni.sdk.service.tag.TagService;
+import com.socialuni.sdk.utils.DistrictStoreUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.TalkRedis;
+import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.constant.GenderType;
+import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -64,7 +63,7 @@ public class SocialTalkPostDomain {
     ModelContentCheck modelContentCheck;
 
     public SocialTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
 

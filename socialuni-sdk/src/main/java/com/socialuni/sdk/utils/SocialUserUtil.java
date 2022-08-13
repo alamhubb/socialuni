@@ -4,14 +4,13 @@ import com.socialuni.sdk.constant.SocialuniProviderLoginType;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.model.DO.user.*;
 import com.socialuni.sdk.redis.SocialUserPhoneRedis;
-import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.social.constant.UserIdentityAuthStatus;
-import com.socialuni.sdk.model.DO.user.*;
-import com.socialuni.social.exception.SocialNullUserException;
 import com.socialuni.sdk.repository.CommonTokenRepository;
 import com.socialuni.sdk.repository.UserRepository;
 import com.socialuni.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.repository.user.SocialUserViolationRepository;
+import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
+import com.socialuni.social.constant.UserIdentityAuthStatus;
+import com.socialuni.social.exception.SocialNullUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -78,6 +77,10 @@ public class SocialUserUtil {
         return userId;
     }
 
+    public static String getMineUserStringIdNotNull() {
+        return getMineUserIdNotNull().toString();
+    }
+
     public static SocialUserDO getMineUserNotNull() {
         //解析token
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
@@ -86,6 +89,15 @@ public class SocialUserUtil {
         }
         //返回user
         return mineUser;
+    }
+
+    //下面都是联盟的
+    public static SocialUserDO getMineUserNotNull(String token) {
+        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        if (tokenDO == null) {
+            throw new SocialNullUserException();
+        }
+        return SocialUserUtil.getNotNull(tokenDO.getUserId());
     }
 
     public static SocialUserDO getMineUserAllowNull() {
@@ -179,6 +191,11 @@ public class SocialUserUtil {
             throw new SocialNullUserException();
         }
         return commonUserDOOptional;
+    }
+
+    public static SocialUserDO get(String userId) {
+        Integer id = UnionIdDbUtil.getUserUnionIdByUidNotNull(userId);
+        return SocialUserUtil.getNotNull(id);
     }
 
     public static SocialUserDO getAllowNull(Integer userId) {

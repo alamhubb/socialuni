@@ -11,8 +11,8 @@ import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.platform.MapUtil;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.social.exception.SocialSystemException;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,7 @@ public class CenterHomeTalkQueryDomain {
         }
 
         //获取当前用户
-        SocialUserDO mineUser = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
 

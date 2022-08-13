@@ -1,14 +1,14 @@
 package com.socialuni.sdk.domain.follow;
 
 
+import com.socialuni.sdk.factory.RO.user.CenterUserFollowDetailROFactory;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.follow.CenterFollowAddQO;
 import com.socialuni.sdk.model.RO.user.CenterUserFollowDetailRO;
-import com.socialuni.sdk.factory.RO.user.CenterUserFollowDetailROFactory;
-import com.socialuni.sdk.utils.CenterUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserFollowDetailRO;
+import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -25,7 +25,7 @@ public class CenterFollowUserDomain {
 
     public ResultRO<Void> addFlow(CenterFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = CenterUserUtil.getMineUserId();
+        Integer mineUserId = SocialUserUtil.getMineUserIdNotNull();
 
         Integer followUserId = UnionIdDbUtil.getUserUnionIdByUidNotNull(addVO.getBeUserId());
 
@@ -35,14 +35,14 @@ public class CenterFollowUserDomain {
 
     public ResultRO<Void> cancelFollow(CenterFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
-        Integer mineUserId = CenterUserUtil.getMineUserId();
+        Integer mineUserId = SocialUserUtil.getMineUserIdNotNull();
         Integer followUserId = UnionIdDbUtil.getUserUnionIdByUidNotNull(addVO.getBeUserId());
         socialUserFollowDomain.cancelFollow(mineUserId, followUserId);
         return new ResultRO<>();
     }
 
     public Map<String, List<CenterUserFollowDetailRO>> queryUserFollows() {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
         Map<String, List<SocialUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
 
         Map<String, List<CenterUserFollowDetailRO>> centerMap = new HashMap<>();

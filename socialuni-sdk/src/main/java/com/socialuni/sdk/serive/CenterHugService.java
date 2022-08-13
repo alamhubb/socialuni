@@ -1,12 +1,12 @@
 package com.socialuni.sdk.serive;
 
 
-import com.socialuni.sdk.model.QO.CenterHugAddQO;
-import com.socialuni.sdk.utils.CenterUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.domain.hug.SocialAddHugDomain;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.QO.CenterHugAddQO;
 import com.socialuni.sdk.model.QO.community.SocialHugAddQO;
+import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class CenterHugService {
     private SocialAddHugDomain socialAddHugDomain;
 
     public ResultRO<Void> addHug(CenterHugAddQO centerHugAddQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         Integer talkId = UnionIdDbUtil.getTalkUnionIdByUidNotNull(centerHugAddQO.getTalkId());
 

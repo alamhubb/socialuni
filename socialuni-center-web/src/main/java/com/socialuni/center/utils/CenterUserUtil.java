@@ -1,4 +1,4 @@
-package com.socialuni.sdk.utils;
+package com.socialuni.center.utils;
 
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.exception.SocialUserBannedException;
@@ -6,6 +6,7 @@ import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.DO.dev.ThirdUserTokenDO;
 import com.socialuni.sdk.model.DO.user.SocialTokenDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.utils.*;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;

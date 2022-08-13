@@ -3,13 +3,12 @@ package com.socialuni.sdk.domain.report;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.repository.*;
-import com.socialuni.sdk.repository.*;
-import com.socialuni.sdk.service.content.ModelContentCheck;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.QO.SocialReportAddQO;
+import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.repository.community.TalkRepository;
+import com.socialuni.sdk.service.content.ModelContentCheck;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
@@ -17,7 +16,6 @@ import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.exception.SocialBusinessException;
 import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +47,7 @@ public class SoicialReportAddDomain {
     private ModelContentCheck modelContentCheck;
 
     public ResultRO<String> addReport(SocialReportAddQO reportAddVO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.violateTypes.contains(reportType)) {

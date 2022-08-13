@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.sdk.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
-import com.socialuni.sdk.utils.CenterUserUtil;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class CenterCommentPostDomain {
 
     @Transactional
     public CenterCommentRO postComment(CenterCommentPostQO addQO) {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
         Integer talkId = UnionIdDbUtil.getTalkUnionIdByUidNotNull(addQO.getTalkId());
 

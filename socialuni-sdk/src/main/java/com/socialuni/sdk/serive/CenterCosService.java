@@ -1,10 +1,10 @@
 package com.socialuni.sdk.serive;
 
-import com.socialuni.sdk.utils.CenterUserUtil;
-import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.domain.SocialCosGetAuthDomain;
+import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.RO.app.SocialCosAuthRO;
+import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class CenterCosService {
     private SocialCosGetAuthDomain socialCosGetAuthDomain;
 
     public ResultRO<SocialCosAuthRO> getCosAuth() {
-        String userId = CenterUserUtil.getMineUserStringId();
+        String userId = SocialUserUtil.getMineUserStringIdNotNull();
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
 //        String devAppName = Pinyin.toPinyin(devAccountDO.getAppName(), "").toLowerCase();
 //        String uploadImgPath = devAppName + "/user/" + userId + "/";

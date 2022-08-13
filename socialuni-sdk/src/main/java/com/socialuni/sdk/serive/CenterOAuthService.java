@@ -1,20 +1,19 @@
 package com.socialuni.sdk.serive;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
-import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.constant.AuthType;
 import com.socialuni.sdk.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.sdk.factory.RO.user.SocialOAuthUserROFactory;
 import com.socialuni.sdk.manage.DevAccountManage;
+import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.DO.dev.ThirdUserAuthDO;
-import com.socialuni.sdk.repository.dev.ThirdUserAuthRepository;
-import com.socialuni.sdk.utils.CenterUserUtil;
-import com.socialuni.sdk.constant.AuthType;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.sdk.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.sdk.model.RO.SocialOAuthUserRO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.sdk.repository.dev.ThirdUserAuthRepository;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
@@ -34,7 +33,7 @@ public class CenterOAuthService {
     private ThirdUserAuthRepository thirdUserAuthRepository;
 
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
         Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
@@ -57,7 +56,7 @@ public class CenterOAuthService {
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(OAuthUserInfoQO authVO, String authType) {
         //获取devaccount
         //获取绑定的手机号，根据手机号，获取user。然后返回这个user的信息，并且返回对应这个应用的userid
-        SocialUserDO userDO = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO userDO = SocialUserUtil.getMineUserNotNull();
         DevAccountDO devAccountDO = devAccountManage.checkApplyAuthQO(authVO);
         return oAuthUserInfo(devAccountDO, userDO, authType);
     }

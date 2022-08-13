@@ -1,6 +1,5 @@
 package com.socialuni.sdk.serive;
 
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.domain.user.SocialAddUserImgDomain;
@@ -14,6 +13,7 @@ import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.utils.DateUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.UserIdentityAuthStatus;
@@ -81,7 +81,7 @@ public class CenterUserIdentityService {
         if (resScore == 0) {
             throw new SocialBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }
-        Integer userId = CenterUserUtil.getMineUserId();
+        Integer userId = SocialUserUtil.getMineUserIdNotNull();
         SocialUserIdentityAuthImgDO socialUserIdentityImgDO = new SocialUserIdentityAuthImgDO();
         socialUserIdentityImgDO.setUserId(userId);
         socialUserIdentityImgDO.setUserIdImgSrc(socialUserIdentityAuthQO.getIdImgUrl());

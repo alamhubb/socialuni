@@ -1,17 +1,17 @@
 package com.socialuni.sdk.factory.RO.user;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CenterMineUserDetailROFactory {
     public static CenterMineUserDetailRO getMineUserDetail() {
-        SocialUserDO mineUser = CenterUserUtil.getMineUserNotNull();
+        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
         return CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
     }
 

@@ -165,7 +165,7 @@ public class UnionIdDbUtil {
     }
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
-        SocialUserDO user = CenterUserUtil.getMineUserAllowNull();
+        SocialUserDO user = SocialUserUtil.getMineUserAllowNull();
         return getContentIdsByUnionIds(contentUnionIds, ContentType.talk);
     }
 
