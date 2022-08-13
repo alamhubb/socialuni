@@ -1,5 +1,6 @@
 package com.socialuni.social.web.sdk.utils;
 
+import com.socialuni.social.web.sdk.SocialRequestToken;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
@@ -28,14 +30,34 @@ public class SocialTokenUtil {
         SocialTokenUtil.tokenName = tokenName;
     }
 
-    public static String getToken() {
+
+    private static SocialRequestToken socialRequestToken;
+
+    @Resource
+    public void setSocialRequestToken(SocialRequestToken socialRequestToken) {
+        SocialTokenUtil.socialRequestToken = socialRequestToken;
+    }
+
+    public static String getTokenBase() {
         HttpServletRequest request = RequestUtil.getRequest();
-        String token = request.getHeader(tokenName);
+
+        String token = socialRequestToken.getToken(request);
         if (SocialTokenUtil.isSuccess(token)) {
             return token;
         }
 //        return SocialTokenUtil.getSocialuniToken();
         return null;
+    }
+
+    public static String getToken() {
+        HttpServletRequest request = RequestUtil.getRequest();
+
+        String token = socialRequestToken.getToken(request);
+        /*if (SocialTokenUtil.isSuccess(token)) {
+            return token;
+        }*/
+//        return SocialTokenUtil.getSocialuniToken();
+        return token;
     }
 
     public static String getSocialuniToken() {
