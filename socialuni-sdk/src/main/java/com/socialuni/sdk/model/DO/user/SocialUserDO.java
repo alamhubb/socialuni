@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 @Entity
@@ -17,8 +18,11 @@ import java.io.Serializable;
                 @Index(columnList = "age"),
                 @Index(columnList = "type"),
                 @Index(columnList = "status"),
-                @Index(columnList = "unionId"),
                 //通过程序保证手机号唯一，要不然没办法设置默认值，''会出现列不唯一的情况，null会影响索引
+        },
+        //手机号唯一
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "unionId"),
         }
 )
 @Data

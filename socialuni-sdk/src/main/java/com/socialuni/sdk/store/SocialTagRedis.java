@@ -10,7 +10,7 @@ import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.model.DO.tag.TagTypeDO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
-import com.socialuni.sdk.constant.CommonConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.redis.redisKey.TagRedisKey;
 import com.socialuni.sdk.repository.community.TagRepository;
 import com.socialuni.sdk.repository.community.TagTypeRepository;
@@ -114,7 +114,7 @@ public class SocialTagRedis {
 
     private List<TagTypeDO> getTagTypes() {
         //查询出来所有启用的类型的tagTypes，按talk数量排序
-        return tagTypeRepository.findByStatusAndTalkCountGreaterThanOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable, CommonConst.zero);
+        return tagTypeRepository.findByStatusAndTalkCountGreaterThanOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable, SocialuniCommonConst.zero);
     }
 
     //给tagtype设置它的子标签

@@ -5,7 +5,7 @@ import com.socialuni.social.constant.GenderType;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
-import com.socialuni.sdk.constant.CommonConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +65,7 @@ public class SocialHomeTalkQueryStore {
             //如果为空，为0或者为中国，则查询全部
             //话题校验
             //老版本走着里没啥问题，去判断到底多少，也能为空
-            if (adCode == null || CommonConst.chinaDistrictCode.equals(adCode)) {
+            if (adCode == null || SocialuniCommonConst.chinaDistrictCode.equals(adCode)) {
                 adCode = null;
                 //否则去重后面100的整除。like查询
             } else {

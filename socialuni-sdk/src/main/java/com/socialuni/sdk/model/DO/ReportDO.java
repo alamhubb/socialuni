@@ -11,7 +11,7 @@ import java.util.Date;
  * 举报信息
  */
 @Entity
-@Table(name = "report")
+@Table(name = "s_report")
 @Data
 public class ReportDO implements Serializable {
     @Id

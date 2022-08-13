@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data@Entity
 
-@Table(name = "notify")
+@Table(name = "s_notify")
 public class NotifyDO implements Serializable {
 
     @Id

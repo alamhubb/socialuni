@@ -6,12 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "test_user",
-        uniqueConstraints = {
-                //不允许不同应用重复写入一条内容
-                @UniqueConstraint(columnNames = {"name"}),
-        }
-)
+@Table(name = "test_user")
 @Data
 @NoArgsConstructor
 public class UserDO {

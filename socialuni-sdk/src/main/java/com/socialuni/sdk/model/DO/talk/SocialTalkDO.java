@@ -15,7 +15,6 @@ import java.io.Serializable;
         @Index(columnList = "visibleType"),
         @Index(columnList = "adCode"),
         @Index(columnList = "status"),
-        @Index(columnList = "devId"),
         @Index(columnList = "createTime"),
         @Index(columnList = "updateTime"),
         @Index(columnList = "userId"),
@@ -37,21 +36,26 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
     /**
      * 评论数量
      */
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer commentNum;
+    private Integer devId;
     /**
      * 抱抱次数
      */
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer hugNum;
     /**
      * 举报次数
      */
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer reportNum;
-
+    @Column(nullable = false)
     private Integer userId;
 
     /**
      * 全局置顶标识，默认0，数越大级别越高
      */
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer globalTop;
 
     /**
@@ -60,12 +64,11 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
     private String deleteReason;
     private String reportContentType;
     private String violateType;
-    @Column(columnDefinition = "varchar(255) default 'fullNetwork'")
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'fullNetwork'")
     private String visibleType;
     //可见性别
-    @Column(columnDefinition = "varchar(255) default 'all'")
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'all'")
     private String visibleGender;
-
     private String adCode;
     private String adName;
     private String cityName;
@@ -87,7 +90,6 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
     private Integer minAge;
     private Integer maxAge;
     //发表商户
-    private Integer devId;
     private Boolean hasPeopleImg;
     private Boolean identityAuth;
 

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.entity.talk;
 
-import com.socialuni.sdk.constant.CommonConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.store.SocialHomeTalkQueryStore;
@@ -23,7 +23,7 @@ public class SocialHomeTalkQueryEntity {
     private SocialHomeTalkQueryStore socialHomeTalkQueryStore;
 
     public List<SocialTalkDO> queryStickTalks(Integer devId) {
-        return talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, devId, CommonConst.initNum);
+        return talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, devId, SocialuniCommonConst.initNum);
     }
 
     //查询非关注tab的动态列表

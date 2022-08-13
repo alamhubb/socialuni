@@ -1,27 +1,29 @@
 package com.socialuni.sdk.domain.report;
 
+import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.constant.config.AppConfigStatic;
 import com.socialuni.sdk.constant.status.UserStatus;
+import com.socialuni.sdk.domain.BaseModelService;
 import com.socialuni.sdk.factory.ReportFactory;
+import com.socialuni.sdk.model.DO.ReportDO;
+import com.socialuni.sdk.model.DO.ReportDetailDO;
+import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.QO.SocialReportAddQO;
+import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.service.KeywordsService;
 import com.socialuni.sdk.service.KeywordsTriggerService;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
-import com.socialuni.sdk.config.SocialAppConfig;
-import com.socialuni.sdk.domain.BaseModelService;
-import com.socialuni.sdk.model.QO.SocialReportAddQO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.QQUtil;
 import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.ReportDetailDO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -95,7 +97,9 @@ public class ReportDomain {
                     reportDO = reportFactory.createReportDO(reportCause, modelDO, ReportSourceType.antispam, antispamDO.getId());
                 } else {*/
                 reportCause = "系统自动审查";
-                reportDO = reportFactory.createReportDO(reportCause, modelDO, ReportSourceType.systemAutoCheck, modelDO.getDevId());
+
+                UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(modelDO.getUnionId());
+                reportDO = reportFactory.createReportDO(reportCause, modelDO, ReportSourceType.systemAutoCheck, uniContentUnionIdDO.getFromDevId());
 //                }
 
                 //这里之后才能校验

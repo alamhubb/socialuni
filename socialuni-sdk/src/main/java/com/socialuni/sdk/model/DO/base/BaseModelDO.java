@@ -1,7 +1,6 @@
 package com.socialuni.sdk.model.DO.base;
 
 
-import java.io.Serializable;
 import java.util.Date;
 
 public interface BaseModelDO {
@@ -31,5 +30,5 @@ public interface BaseModelDO {
 
     String getReportContentType();
 
-    Integer getDevId();
+    Integer getUnionId();
 }

@@ -1,10 +1,11 @@
 package com.socialuni.center.test;
 
-import com.socialuni.social.constant.GenderType;
+import com.socialuni.center.CenterWebApplication;
 import com.socialuni.sdk.mapper.TalkMapper;
 import com.socialuni.sdk.mapper.TalkTagMapper;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.store.TalkQueryStore;
+import com.socialuni.social.constant.GenderType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

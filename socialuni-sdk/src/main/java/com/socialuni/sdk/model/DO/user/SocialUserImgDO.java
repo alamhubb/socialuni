@@ -1,8 +1,9 @@
 package com.socialuni.sdk.model.DO.user;
 
-import com.socialuni.sdk.model.DO.user.base.SocialUserImgBaseDO;
+import com.socialuni.sdk.model.DO.base.SocialImgBaseDO;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
@@ -19,6 +20,14 @@ import java.io.Serializable;
         }
 )
 @Data
-public class SocialUserImgDO extends SocialUserImgBaseDO implements Serializable {
+public class SocialUserImgDO extends SocialImgBaseDO implements Serializable {
+        private String deleteReason;
 
+        //是否已认证
+        @Column(nullable = false)
+        private Boolean isSelfAuth;
+
+        private String violateType;
+
+        private String reportContentType;
 }

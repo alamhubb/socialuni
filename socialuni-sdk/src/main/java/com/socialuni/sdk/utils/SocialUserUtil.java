@@ -93,7 +93,7 @@ public class SocialUserUtil {
 
     //下面都是联盟的
     public static SocialUserDO getMineUserNotNull(String token) {
-        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
+        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
         if (tokenDO == null) {
             throw new SocialNullUserException();
         }
@@ -118,6 +118,15 @@ public class SocialUserUtil {
         }
         //返回user
         return user.getUnionId();
+    }
+
+    public static String getMineUserIdStrInterceptor() {
+        SocialUserDO user = SocialUserUtil.getMineUserInterceptor();
+        if (user == null) {
+            return null;
+        }
+        //返回user
+        return user.getUnionId().toString();
     }
 
     public static SocialUserDO getMineUserInterceptor() {

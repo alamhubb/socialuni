@@ -1,6 +1,6 @@
 package com.socialuni.social.web.sdk.utils;
 
-import com.socialuni.social.web.sdk.SocialRequestToken;
+import com.socialuni.social.web.sdk.config.SocialRequestToken;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -22,14 +22,7 @@ public class SocialTokenUtil {
         SocialTokenUtil.tokenSecretKey = tokenKey;
     }
 
-    private static String tokenName;
     public final static String socialuniTokenName = "socialuniToken";
-
-    @Value("${socialuni.user.token-name:token}")
-    public void setTokenName(String tokenName) {
-        SocialTokenUtil.tokenName = tokenName;
-    }
-
 
     private static SocialRequestToken socialRequestToken;
 

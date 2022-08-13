@@ -4,6 +4,7 @@ import com.socialuni.sdk.model.DO.UnionIdDO;
 import com.socialuni.sdk.utils.ObjectUtil;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.social.web.sdk.utils.IpUtil;
 
 import java.util.Date;
 
@@ -18,6 +19,7 @@ public class UnionIdDOFactory {
         unionIdDO.setContentId(contentId);
         unionIdDO.setDevId(devId);
         unionIdDO.setUserId(userId);
+        unionIdDO.setIp(IpUtil.getIpAddr());
 
         unionIdDO.setCreateTime(curDate);
         unionIdDO.setUpdateTime(curDate);

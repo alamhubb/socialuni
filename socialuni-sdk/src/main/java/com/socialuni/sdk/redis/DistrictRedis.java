@@ -1,6 +1,6 @@
 package com.socialuni.sdk.redis;
 
-import com.socialuni.sdk.constant.CommonConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.factory.SocialDistrictROFactory;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.constant.CommonStatus;
@@ -119,6 +119,6 @@ public class DistrictRedis {
     }
 
     private List<DistrictDO> getChinaProvinces() {
-        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(CommonConst.chinaDistrictCode, CommonStatus.enable);
+        return districtRepository.findByParentAdCodeAndStatusOrderByAdCode(SocialuniCommonConst.chinaDistrictCode, CommonStatus.enable);
     }
 }

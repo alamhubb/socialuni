@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.socialuni.social.web.sdk")
 @EntityScan("com.socialuni.social.web.sdk")
 @EnableConfigurationProperties({
-        SocialuniWebProperties.class,
+        SocialuniWebProperties.class
 })
 public class SocialWebSDKAutoConfiguration {
 }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 //什么算是公共常量，就是放到任何项目都可以用的
-public class CommonConst {
+public class SocialuniCommonConst {
     public static final List<Integer> emptyIds = Collections.singletonList(0);
     public static final List<Long> emptyLongIds = Collections.singletonList(0L);
 
@@ -30,4 +30,5 @@ public class CommonConst {
     public static final String chinaDistrictCode = "100000";
     public static final String initAdCode = "100001";
     public static final String positionAdCode = "100002";
+    public static final String devEnvTagName = "测试环境";
 }

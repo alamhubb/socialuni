@@ -1,11 +1,9 @@
-package com.socialuni.web.config;
+package com.socialuni.center.config;
 
-import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.utils.CenterUserUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.RedisUtil;
 import com.socialuni.social.exception.constant.ErrorCode;
+import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -35,10 +33,6 @@ public class WebInterceptor extends SocialuniWebInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
-        SocialUserDO user = CenterUserUtil.getMineUserInterceptor();
-        Integer userId = CenterUserUtil.getMineUserIdInterceptor();
-
-        requestLogDO.setUserId(userId);
         Integer devId = DevAccountUtils.getDevIdNotNull();
         requestLogDO.setDevId(devId);
         RequestLogUtil.saveAsync(requestLogDO);

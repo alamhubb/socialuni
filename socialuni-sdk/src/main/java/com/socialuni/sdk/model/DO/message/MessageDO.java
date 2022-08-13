@@ -1,9 +1,9 @@
 package com.socialuni.sdk.model.DO.message;
 
 
-import com.socialuni.social.constant.*;
-import com.socialuni.sdk.model.DO.base.CommonContentBaseDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.model.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.constant.*;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,14 +17,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "message")
-public class MessageDO extends CommonContentBaseDO implements BaseModelDO, Serializable {
-    //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private Integer devId;
-
+public class MessageDO extends SocialUnionContentBaseDO implements BaseModelDO, Serializable {
     private String content;
 
     private Integer chatId;

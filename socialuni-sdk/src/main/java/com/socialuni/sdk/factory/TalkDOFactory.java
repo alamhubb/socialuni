@@ -20,7 +20,6 @@ public class TalkDOFactory {
     public static SocialTalkDO newTalkDO(SocialUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
         SocialTalkDO talkDO = new SocialTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
 
-        talkDO.setDevId(socialTalkPostQO.getDevId());
         //设置社交联盟唯一id
         talkDO.setSocialuniUid(socialTalkPostQO.getSocialuniUid());
 

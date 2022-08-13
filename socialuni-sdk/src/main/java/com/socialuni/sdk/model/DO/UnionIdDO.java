@@ -51,6 +51,7 @@ public class UnionIdDO implements Serializable {
     private Long validTime;
     //失效时间
     private Date expiredTime;
+    private String ip;
 
     //内容类型，id，关联商户，关联用户id
 }

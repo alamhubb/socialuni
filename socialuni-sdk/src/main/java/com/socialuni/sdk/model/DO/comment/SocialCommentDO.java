@@ -25,7 +25,6 @@ import java.io.Serializable;
 @Data
 public class SocialCommentDO extends SocialUnionContentBaseDO implements BaseModelDO, Serializable {
     private String socialuniUid;
-
     private Integer no;
 
     /**
@@ -84,8 +83,6 @@ public class SocialCommentDO extends SocialUnionContentBaseDO implements BaseMod
     private Integer maxAge;
     //可见性别
     private String gender;
-    //发表商户
-    private Integer devId;
     //三方id，只有为三方自己查询的时候才显示
     private String threeId;
 }

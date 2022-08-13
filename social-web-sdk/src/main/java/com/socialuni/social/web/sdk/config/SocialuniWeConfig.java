@@ -1,8 +1,10 @@
 package com.socialuni.social.web.sdk.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-public class SocialuniWeConfig{
+@Component
+public class SocialuniWeConfig {
 
     private static String tokenName;
 
@@ -13,6 +15,7 @@ public class SocialuniWeConfig{
 
 
     public static String getTokenName() {
+        System.out.println("tokenName:" + tokenName);
         //为空则异常
         return tokenName;
     }

@@ -10,7 +10,7 @@ import java.util.Date;
  * @date 2019-11-07 15:20
  */
 @Entity
-@Table(name = "tag_type",
+@Table(name = "s_tag_type",
         indexes = {
                 @Index(columnList = "orderLevel"),
                 @Index(columnList = "talkCount")
@@ -29,10 +29,10 @@ public class TagTypeDO  {
     private String status;
 
     //访问+发帖次数
-    @Column(columnDefinition = "int default 0")
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer count;
     //本标签共有多少帖子
-    @Column(columnDefinition = "int default 0")
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer talkCount;
 
     private Date createTime;

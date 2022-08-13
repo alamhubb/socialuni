@@ -3,6 +3,7 @@ package com.socialuni.sdk.domain.report;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.SocialReportAddQO;
@@ -11,6 +12,7 @@ import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.service.content.ModelContentCheck;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
@@ -130,10 +132,11 @@ public class SoicialReportAddDomain {
                 return new ResultVO<>("内容已审核，不违规");
             }*/
         }
+        UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(modelDO.getUnionId());
         return reportDomain.userReportContent(
                 reportAddVO,
                 modelDO,
-                mineUser.getUnionId(), modelDO.getDevId()
+                mineUser.getUnionId(), uniContentUnionIdDO.getFromDevId()
         );
     }
 

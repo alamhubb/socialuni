@@ -29,7 +29,7 @@ public class RequestLogDO {
     private Long id;
     //邀请你的用户
     private Integer devId;
-    private Integer userId;
+    private String userId;
     private String ip;
     private String uri;
     private Long spendTime;

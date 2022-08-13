@@ -2,6 +2,7 @@ package com.socialuni.social.web.sdk.utils;
 
 import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.constant.SocialWebHeaderName;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -10,11 +11,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
 
 /**
  * 当前线程的request工具类，从request中获取内容
  */
+@Slf4j
 public class RequestUtil {
 
 
@@ -26,7 +27,9 @@ public class RequestUtil {
     }
 
     public static HttpServletResponse getResponse() {
-        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
+        return servletRequestAttributes.getResponse();
     }
 
     public static String getParameter(String key) {
@@ -38,11 +41,29 @@ public class RequestUtil {
     }
 
     public static String getHeader(String key) {
-        String value = getRequest().getHeader(key);
+        HttpServletRequest request = getRequest();
+        if (key == null) {
+            log.info("这是null吗？" + request);
+            log.info(request.getRequestURI());
+            return null;
+        }
+        String value = request.getHeader(key);
         if (headerIsEmpty(value)) {
             return null;
         }
         return value;
+    }
+
+    public static String getRequestValue(String key) {
+        String value = getHeader(key);
+        if (!headerIsEmpty(value)) {
+            return value;
+        }
+        value = getParameter(key);
+        if (!headerIsEmpty(value)) {
+            return value;
+        }
+        return null;
     }
 
     public static String getSystem() {

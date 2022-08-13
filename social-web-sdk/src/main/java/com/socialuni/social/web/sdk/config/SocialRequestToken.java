@@ -1,4 +1,4 @@
-package com.socialuni.social.web.sdk;
+package com.socialuni.social.web.sdk.config;
 
 import javax.servlet.http.HttpServletRequest;
 

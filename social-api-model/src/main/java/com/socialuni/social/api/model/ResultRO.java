@@ -53,6 +53,7 @@ public class ResultRO<T> {
         this.code = errorCode;
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
+        this.msg = errorMsg;
         this.success = false;
     }
 

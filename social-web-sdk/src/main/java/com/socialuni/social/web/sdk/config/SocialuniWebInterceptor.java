@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
@@ -19,12 +20,15 @@ import java.util.Date;
 public class SocialuniWebInterceptor implements HandlerInterceptor {
 
     @PostConstruct
-    private void hehe(){
+    private void hehe() {
         System.out.println("执行了注入了吗");
         String classPath = SocialuniWebInterceptor.class.getResource("/").getPath();
 
         System.out.println("项目路径：" + classPath);
     }
+
+    @Resource
+    SocialuniWebInterceptorConfig socialuniWebInterceptorConfig;
 
     /*
      * 进入controller层之前拦截请求
@@ -47,6 +51,7 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         RequestLogDO requestLogDO = new RequestLogDO();
 //        requestLogDO.setRequestId(RequestIdUtil.addId());
         requestLogDO.setIp(userIp);
+        requestLogDO.setUserId(socialuniWebInterceptorConfig.getUserId());
         requestLogDO.setCreateTime(startTime);
         requestLogDO.setSuccess(true);
         requestLogDO.setErrorType(ErrorType.success);

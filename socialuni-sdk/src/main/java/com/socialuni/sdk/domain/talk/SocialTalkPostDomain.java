@@ -1,6 +1,6 @@
 package com.socialuni.sdk.domain.talk;
 
-import com.socialuni.sdk.constant.CommonConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.constant.TalkOperateType;
 import com.socialuni.sdk.domain.report.ReportDomain;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
@@ -65,8 +65,11 @@ public class SocialTalkPostDomain {
     public SocialTalkRO postTalk(SocialTalkPostQO talkPostQO) {
         SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
 
-        modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
+        List<String> tagNames = talkPostQO.getTagNames();
 
+        if (!tagNames.contains(SocialuniCommonConst.devEnvTagName)) {
+            modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
+        }
 
         //校验内容是否违规
 //        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
@@ -87,7 +90,7 @@ public class SocialTalkPostDomain {
         String adCode = talkVO.getAdCode();
         //如果为未定位或者老版本，adcode为空，则设置为中国地区
         if (adCode == null) {
-            adCode = CommonConst.chinaDistrictCode;
+            adCode = SocialuniCommonConst.chinaDistrictCode;
         }
         //根据adcode获取地区名
         DistrictDO districtDO = DistrictStoreUtils.findFirstOneByAdCode(adCode);

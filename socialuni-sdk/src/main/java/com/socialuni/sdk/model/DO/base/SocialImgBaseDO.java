@@ -1,5 +1,6 @@
 package com.socialuni.sdk.model.DO.base;
 
+import com.socialuni.sdk.model.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,12 +8,7 @@ import java.io.Serializable;
 
 @MappedSuperclass
 @Data
-public class SocialImgBaseDO extends CommonContentBaseDO implements Serializable {
-    //此类为talk子类，只能包含基础数据类型
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class SocialImgBaseDO extends SocialUnionContentBaseDO implements Serializable {
     private Integer contentId;
 
     @Column(nullable = false, updatable = false)

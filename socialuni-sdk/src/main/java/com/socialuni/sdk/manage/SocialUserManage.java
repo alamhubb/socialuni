@@ -15,7 +15,9 @@ public class SocialUserManage {
     UserRepository userRepository;
 
     public SocialUserDO createUserByProviderLogin(SocialProviderLoginQO loginQO) {
+        Integer userUnionId = UnionIdDbUtil.createUserUnionId();
         SocialUserDO user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
+        user.setUnionId(userUnionId);
         user = userRepository.save(user);
         return user;
     }
