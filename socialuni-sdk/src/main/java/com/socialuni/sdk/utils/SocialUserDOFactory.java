@@ -8,28 +8,32 @@ import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.constant.GenderType;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class SocialUserDOFactory {
     public static SocialUserDO newUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        SocialUserDO user = new SocialUserDO();
-        user.setNickname(loginQO.getNickName());
-        user.setAvatar(loginQO.getAvatarUrl());
-        user.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
+        SocialUserDO user = newUserByPhoneLogin();
 
+        if (StringUtils.isNotEmpty(loginQO.getNickName())) {
+            user.setNickname(loginQO.getNickName());
+        }
+        if (StringUtils.isNotEmpty(loginQO.getAvatarUrl())) {
+            user.setAvatar(loginQO.getAvatarUrl());
+        }
+        if (ObjectUtils.isNotEmpty(loginQO.getGender())) {
+            user.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
+        }
         String userBirthday = loginQO.getBirthday();
         //判断生日是否为空
-        if (StringUtils.isEmpty(userBirthday)) {
-            //为空使用系统默认
-            user.setAge(CommonConst.defaultAge);
-            user.setBirthday(BirthdayAgeUtil.getYearBirthDateByAge(user.getAge()));
-        } else {
+        if (StringUtils.isNotEmpty(userBirthday)) {
             //不为空使用
             user.setBirthday(userBirthday);
             user.setAge(BirthdayAgeUtil.getAgeByBirth(user.getBirthday()));
         }
-        user.setCity(loginQO.getCity());
-        user.setType(UserType.personal);
+        if (ObjectUtils.isNotEmpty(loginQO.getCity())) {
+            user.setCity(loginQO.getCity());
+        }
         return user;
     }
 

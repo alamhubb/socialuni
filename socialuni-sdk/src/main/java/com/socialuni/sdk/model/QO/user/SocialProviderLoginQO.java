@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
  * @date 2019-02-14 22:03
  */
 @Data
+@NoArgsConstructor
 public class SocialProviderLoginQO {
     //qq、wx、phone,前台叫provider,
     private String loginType;
@@ -52,4 +53,9 @@ public class SocialProviderLoginQO {
 //    private String appId;
 //    private String secret;
 //    private Integer devId;
+
+
+    public SocialProviderLoginQO(String nickName) {
+        this.nickName = nickName;
+    }
 }

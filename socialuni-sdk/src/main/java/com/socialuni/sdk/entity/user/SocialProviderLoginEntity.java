@@ -25,6 +25,8 @@ public class SocialProviderLoginEntity {
     private SocialUserAccountStore socialUserAccountStore;
     @Resource
     private SocialUserAccountManage socialUserAccountManage;
+    @Resource
+    SocialUserEntity socialUserEntity;
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
@@ -41,9 +43,7 @@ public class SocialProviderLoginEntity {
             mineUser = SocialUserUtil.getNotNull(socialUserAccountDO.getUserId());
             socialUserAccountManage.updateSessionKey(loginQO.getProvider(), uniUnionIdRO.getSession_key(), mineUser.getUnionId());
         } else {
-            mineUser = socialUserManage.createUserByProviderLogin(loginQO);
-            //创建或返回
-            socialUserFansDetailManage.getOrCreateUserFollowDetail(mineUser);
+            mineUser = socialUserEntity.createUserAndDetail(loginQO);
             socialUserAccountManage.create(mineUser.getUnionId(), loginQO, uniUnionIdRO);
         }
         return mineUser;

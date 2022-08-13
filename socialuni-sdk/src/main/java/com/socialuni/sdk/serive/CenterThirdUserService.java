@@ -6,13 +6,11 @@ import com.socialuni.sdk.domain.user.SocialEditUserDomain;
 import com.socialuni.sdk.entity.UniUserRegistryDomain;
 import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.QO.user.*;
-import com.socialuni.sdk.model.RO.user.*;
-import com.socialuni.sdk.platform.tencent.TencentCloud;
+import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -48,10 +46,6 @@ public class CenterThirdUserService {
         return new ResultRO<>(mineUser);
     }
 
-    public ResultRO<CenterMineUserDetailRO> getMineUser() {
-        CenterMineUserDetailRO mineUser = CenterMineUserDetailROFactory.getMineUserDetail();
-        return new ResultRO<>(mineUser);
-    }
 
     public ResultRO<CenterMineUserDetailRO> queryThirdUser() {
         SocialUserDO mineUserDO = SocialUserUtil.getMineUserAllowNull();
@@ -62,60 +56,4 @@ public class CenterThirdUserService {
         return new ResultRO<>(mineUser);
     }
 
-    public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        SocialUserDO detailUserDO = SocialUserUtil.get(centerUserIdQO.getUserId());
-
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
-
-        CenterUserDetailRO userDetailRO = new CenterUserDetailRO();
-
-        if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
-//            userDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(detailUserDO);
-        } else {
-//            userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
-        }
-
-        return new ResultRO<>(userDetailRO);
-    }
-
-
-    public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
-        SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
-
-        CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
-
-        return ResultRO.success(centerMineUserDetailRO);
-    }
-
-    public ResultRO<CenterMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
-
-        SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
-
-        CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
-
-        return ResultRO.success(centerMineUserDetailRO);
-    }
-
-    public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
-
-        Integer userImgId = UnionIdDbUtil.getUserImgUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
-
-        SocialMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
-
-        CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
-
-        return ResultRO.success(centerMineUserDetailRO);
-    }
-
-    public ResultRO<SocialUserIdentityAuthPreCheckRO> identityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
-        Integer resScore = TencentCloud.imgAuthGetScore(socialUseIdentityAuthQO.getIdImgUrl(), socialUseIdentityAuthQO.getSelfieImgUrl());
-        return null;
-    }
-
-    public ResultRO<SocialUserIdentityAuthRO> identityAuth(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
-        return null;
-    }
 }

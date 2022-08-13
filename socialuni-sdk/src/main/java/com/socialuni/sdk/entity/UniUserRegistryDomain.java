@@ -1,6 +1,7 @@
 package com.socialuni.sdk.entity;
 
 import com.socialuni.sdk.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.sdk.entity.user.SocialUserEntity;
 import com.socialuni.sdk.entity.user.SocialUserPhoneEntity;
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.manage.SocialUserManage;
@@ -25,6 +26,8 @@ public class UniUserRegistryDomain {
     SocialPhoneLoginEntity socialPhoneLoginEntity;
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
+    @Resource
+    SocialUserEntity socialUserEntity;
 
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
@@ -38,7 +41,8 @@ public class UniUserRegistryDomain {
         if (socialUserPhoneDO != null) {
             mineUser = SocialUserUtil.getNotNull(socialUserPhoneDO.getUserId());
         } else {
-            mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+            mineUser = socialUserEntity.createUserAndDetail(loginQO);
+            socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, "86", phoneNum);
         }
         /*} else {
             mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
