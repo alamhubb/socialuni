@@ -15,7 +15,6 @@ public class SocialuniWeConfig {
 
 
     public static String getTokenName() {
-        System.out.println("tokenName:" + tokenName);
         //为空则异常
         return tokenName;
     }

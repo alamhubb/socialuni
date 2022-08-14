@@ -16,8 +16,8 @@ public class TalkUtils {
         TalkUtils.talkRepository = talkRepository;
     }
 
-    public static SocialTalkDO get(Integer talkId) {
-        SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkId);
+    public static SocialTalkDO get(Integer talkUnionId) {
+        SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkUnionId);
         if (talkDO == null) {
             throw new SocialParamsException("不存在的动态内容");
         }

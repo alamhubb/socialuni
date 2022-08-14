@@ -8,11 +8,6 @@ import javax.annotation.PostConstruct;
 
 @Configurable
 public class TokenDefaultConfiguration {
-    @PostConstruct
-    public void sfasdf(){
-        System.out.println("注册了默认的request");
-    }
-
     @Bean
     @ConditionalOnMissingBean(SocialRequestToken.class)
     public SocialRequestToken defaultSocialRequestToken() {

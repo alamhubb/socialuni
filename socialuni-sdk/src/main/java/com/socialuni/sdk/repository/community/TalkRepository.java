@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
-    @Cacheable(cacheNames = RedisKeysConst.talkById, key = "#id")
-    SocialTalkDO findOneByUnionId(Integer id);
+    @Cacheable(cacheNames = RedisKeysConst.talkById, key = "#talkUnionId")
+    SocialTalkDO findOneByUnionId(Integer talkUnionId);
 
     //清池使用的
     SocialTalkDO findOneBySocialuniUid(String uid);
@@ -32,20 +32,20 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
     List<SocialTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     //查询自己talk和他人详情talk
-    @Query(value = "SELECT t.id FROM SocialTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
+    @Query(value = "SELECT t.unionId FROM SocialTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
     List<Integer> queryTalkIdsByUser(
             @Param("userId") Integer userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
-    @Query(value = "SELECT t.id FROM SocialTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
+    @Query(value = "SELECT t.unionId FROM SocialTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
     List<Integer> queryTalkIdsByUserOrderByUpdateTime(
             @Param("userId") Integer userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
     //查询自己关注的用户列表，包含自己的,类似朋友圈
-    @Query(value = "select t.id from SocialTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
+    @Query(value = "SELECT t.unionId from SocialTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
     List<Integer> queryTalkIdsByUserFollow(
             @Param("userId") Integer userId,
             @Param("onlyUserSeeStatus") List<String> onlyUserSeeStatus,
@@ -70,7 +70,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
             @Param("tagIds") List<Integer> tagIds);
 
     //    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAdCodeAndGender, key = "#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t " +
             "where t.global_top = 0 " +
             "and (t.status = :status)" +
             "and (:adCode is null or t.ad_code like concat(:adCode,'%')) " +
@@ -85,7 +85,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
             @Param("devId") Integer devId);
 
     /*@Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#userGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId")
-    @Query(nativeQuery = true, value = "SELECT t.id FROM s_talk t,s_content c,u_dev_content d,c_user u " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM s_talk t,s_content c,u_dev_content d,c_user u " +
             "where c.global_top = 0 " +
             "and c.content_type = '动态' and c.id = t.content_id and c.user_id = u.id and c.id = d.content_id " +
             "and (:userGender is null or u.gender = :userGender) " +
@@ -107,7 +107,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
 
 
     @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t,user u " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t,user u " +
             "where t.global_top = 0 " +
             "and t.user_id = u.id " +
             //筛选女生、男生发布的、不筛选值为null
@@ -136,7 +136,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
             @Param("devId") Integer devId);
 
 
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t,tag tg,talk_tag ttg,user u WHERE t.id = ttg.talk_id AND ttg.tag_id = tg.id AND t.user_id = u.id " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t,tag tg,talk_tag ttg,user u WHERE t.id = ttg.talk_id AND ttg.tag_id = tg.id AND t.user_id = u.id " +
             "and t.global_top = 0 " +
             "and tg.id in (:tagIds) " +
             //筛选女生、男生发布的、不筛选值为null
@@ -197,7 +197,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
 
     //上个版本的代码用来备份
     @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t,user u " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t,user u " +
             "where t.global_top = 0 " +
             "and t.user_id = u.id " +
             //筛选女生、男生发布的、不筛选值为null
@@ -221,7 +221,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
             @Param("talkIds") List<Integer> talkIds,
             @Param("devId") Integer devId);
 
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t " +
             "where t.id in (:talkIds) " +
             "and t.user_id in (:userIds) " +
             "order by t.update_time desc")
@@ -239,7 +239,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
     //根据性别年龄和同城
     //tag的性别等于app性别，或者用户性别等于tag性别
     /*@Cacheable(cacheNames = "queryTalkIdsTop10ByGenderAgeAndLikeAdCode", key = "#talkIds+'-'+#userIds+'-'+#tagTalkIds+'-'+#userId+'-'+#status+'-'+#adCode+'-'+#talkGender+'-'+#mineUserGender+'-'+#devId+'-'+#pageable.pageSize+'-'+#pageable.pageNumber")
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t " +
+    @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t " +
             "where " +
             "t.user_id in (:userIds) " +
             "and t.id in (:tagTalkIds) " +
@@ -263,7 +263,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
             @Param("devId") Integer devId,
             Pageable pageable);*/
 
-    @Query(nativeQuery = true, value = "SELECT t.id FROM talk t " +
+    @Query(nativeQuery = true, value = "SELECT t.union_id FROM talk t " +
             "where t.global_top = 0 " +
             "and t.user_id in (:userIds) " +
             "and t.id in (:tagTalkIds) " +
