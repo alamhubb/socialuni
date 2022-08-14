@@ -1,13 +1,20 @@
 package com.socialuni.embed.demo.controller;
 
 import com.socialuni.embed.demo.model.TokenDO;
+import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.model.UserDO;
+import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.constant.VisibleType;
-import com.socialuni.sdk.factory.user.base.SocialUserROFactory;
+import com.socialuni.sdk.factory.user.base.SocialContentUserROFactory;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
+import com.socialuni.sdk.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
+import com.socialuni.sdk.serive.CenterCommentService;
 import com.socialuni.sdk.serive.CenterTalkService;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
@@ -35,7 +42,11 @@ public class TestController {
     @Resource
     CenterTalkService centerTalkService;
     @Resource
+    CenterCommentService centerCommentService;
+    @Resource
     TestTokenRepository testTokenRepository;
+    @Resource
+    TestUserService testUserService;
 
     @GetMapping("login")
     public Map<String, Object> login(String name) {
@@ -48,20 +59,26 @@ public class TestController {
 
         tokenDO = testTokenRepository.save(tokenDO);
 
+        TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
+
+        SocialUserDO socialUserDO = SocialUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
+        SocialContentUserRO socialContentUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
+
         Map<String, Object> map = new HashMap<>();
-        map.put("user", userDO);
+        map.put("user", socialContentUserRO);
         map.put("token", tokenDO.getToken());
         return map;
     }
 
     @GetMapping("getMineUser")
     public SocialUserRO getMineUser() {
-        SocialUserRO socialUserRO = SocialUserROFactory.getUserRO(SocialUserUtil.getMineUserNotNull());
+        SocialUserDO socialUserDO = SocialUserUtil.getMineUserNotNull();
+        SocialContentUserRO socialUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return socialUserRO;
     }
 
     @GetMapping("postTalk")
-    public CenterTalkRO getMineUser(String content) {
+    public CenterTalkRO postTalk(String content) {
         SocialTalkPostQO socialTalkPostQO = new SocialTalkPostQO();
         socialTalkPostQO.setContent(content);
         socialTalkPostQO.setVisibleGender(GenderType.all);
@@ -72,6 +89,15 @@ public class TestController {
             add(SocialuniCommonConst.devEnvTagName);
         }});
         ResultRO<CenterTalkRO> resultRO = centerTalkService.postTalk(socialTalkPostQO);
+        return resultRO.getData();
+    }
+
+    @GetMapping("postComment")
+    public CenterCommentRO postComment(String talkId, String content) {
+        CenterCommentPostQO socialTalkPostQO = new CenterCommentPostQO();
+        socialTalkPostQO.setContent(content);
+        socialTalkPostQO.setTalkId(talkId);
+        ResultRO<CenterCommentRO> resultRO = centerCommentService.postComment(socialTalkPostQO);
         return resultRO.getData();
     }
 

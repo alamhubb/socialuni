@@ -1,11 +1,13 @@
 package com.socialuni.sdk.domain.comment;
 
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.domain.notify.NotifyDomain;
 import com.socialuni.sdk.domain.report.ReportDomain;
 import com.socialuni.sdk.entity.comment.SocialPostCommentEntity;
 import com.socialuni.sdk.factory.SocialCommentROFactory;
 import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
@@ -14,6 +16,7 @@ import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.service.comment.CommentAddLineTransfer;
 import com.socialuni.sdk.service.content.ModelContentCheck;
+import com.socialuni.sdk.store.SocialTagRedis;
 import com.socialuni.social.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author qinkaiyuan
@@ -41,13 +46,18 @@ public class SocialCommentPostDomain {
     private TalkRepository talkRepository;
     @Resource
     private ModelContentCheck modelContentCheck;
-
+    @Resource
+    private  SocialTagRedis socialTagRedis;
 
     @Transactional
     public SocialCommentRO postComment(SocialUserDO mineUser, SocialCommentPostQO addQO) {
-        //校验内容是否违规
-        modelContentCheck.checkUserAndContent(addQO.getContent(), mineUser);
-
+        List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(addQO.getTalkId());
+        List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
+        //开发环境不校验
+        if (!tagNames.contains(SocialuniCommonConst.devEnvTagName)) {
+            //校验内容是否违规
+            modelContentCheck.checkUserAndContent(addQO.getContent(), mineUser);
+        }
         //校验结果
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
         //保存comment，内部关联保存了talk、parentComment、replyComment

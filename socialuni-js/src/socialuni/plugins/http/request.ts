@@ -2,7 +2,7 @@ import HttpRequest, {requestConfig} from '@/socialuni/plugins/http/httpRequest'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
 import {socialConfigModule, socialSystemModule} from '../../store'
-import ErrorConst from '../../constant/ErrorConst'
+import ErrorCode from '../../constant/ErrorCode'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
@@ -77,14 +77,14 @@ request.interceptor.response(
       const errorMsg = result.errorMsg
       if (errorMsg) {
         switch (error.statusCode) {
-          case ErrorConst.not_logged:
-          case ErrorConst.banned:
+          case ErrorCode.not_logged:
+          case ErrorCode.banned:
             // 理论上不需要，因为token不会失效，也不会错误
             // 已知可能，切换环境导致token不同
             UserService.clearUserInfoCom()
             AlertUtil.hint(errorMsg)
             break
-          case ErrorConst.custom:
+          case ErrorCode.custom:
             break
           default:
             AlertUtil.hint(errorMsg)

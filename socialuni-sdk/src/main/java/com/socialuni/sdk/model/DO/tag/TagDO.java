@@ -68,6 +68,7 @@ public class TagDO implements Serializable {
     private String visibleGender;
 
     //是否在前台展示，app产品，不在前台展示
+    @Column(columnDefinition = "bit default true")
     private Boolean showFront;
     private Integer devId;
 }

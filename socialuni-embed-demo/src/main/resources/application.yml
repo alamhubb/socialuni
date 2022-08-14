@@ -3,8 +3,8 @@ spring:
 #    active: devprod
 #    active: localdevprod
 #    active: local
-    active: dev
-#    active: qkypc
+#    active: dev
+    active: qkypc
 #    active: demo
 #    active: prod
 #    active: localprod

@@ -1,4 +1,4 @@
-export default class ErrorConst {
+export default class ErrorCode {
   // 成功
   static readonly success: number = 0
   // 错误码

@@ -5,9 +5,9 @@
  */
 import { v4 as uuidv4 } from 'uuid'
 
-//各平台通用工具类
+// 各平台通用工具类
 export default class UUIDUtil {
-  public static getUUID (): string {
+  public static getUUID(): string {
     const randoms: number[] = []
     for (let i = 0; i < 16; i++) {
       randoms.push(Math.round(Math.random() * 255))

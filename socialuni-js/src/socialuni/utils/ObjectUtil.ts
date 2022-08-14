@@ -1,26 +1,26 @@
 export default class ObjectUtil {
   // 改成any类型
-  static deepClone<T> (object: T): T {
+  static deepClone<T>(object: T): T {
     if (object) {
       return JSON.parse(JSON.stringify(object))
     }
     return null
   }
 
-  static toJson (object: any): string {
+  static toJson(object: any): string {
     // return JSON.stringify(object)
     return JSON.stringify(object)
   }
 
-  static toParse (objJson: string): any {
+  static toParse(objJson: string): any {
     return JSON.parse(objJson)
   }
 
-  static log (object: any) {
+  static log(object: any) {
     console.log(JSON.stringify(object))
   }
 
-  static toFormData (object: Record<string, any> | any): FormData {
+  static toFormData(object: Record<string, any> | any): FormData {
     const formData = new FormData()
     Object.keys(object).forEach((key) => {
       const data = object[key]
@@ -37,7 +37,7 @@ export default class ObjectUtil {
     return formData
   }
 
-  static toParamData (object: Record<string, any>): string {
+  static toParamData(object: Record<string, any>): string {
     const paramObj = new URLSearchParams()
     Object.keys(object).forEach((key) => {
       const data = object[key]
@@ -66,7 +66,7 @@ export default class ObjectUtil {
   }*/
 
   // 递归清空子节点
-  static treeRecursion (data: any[]) {
+  static treeRecursion(data: any[]) {
     for (const item of data) {
       if (item.childList && item.childList.length > 0) {
         this.treeRecursion(item.childList)
@@ -77,19 +77,21 @@ export default class ObjectUtil {
     return data
   }
 
-  private static isUndefined (obj) {
+  private static isUndefined(obj) {
     return obj === undefined
   }
 
   // 如果undefined返回null
-  static getValue<T> (obj: T): T {
+  static getValue<T>(obj: T): T {
     return this.isUndefined(obj) ? null : obj
   }
 
-  static spread (...objs): any {
+  static spread(...objs): any {
     const obj = {}
     for (const obj1 of objs) {
-      Object.assign(obj, obj1)
+      if (obj1 instanceof Object) {
+        Object.assign(obj, obj1)
+      }
     }
     return obj
   }

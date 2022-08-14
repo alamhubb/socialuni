@@ -142,7 +142,7 @@ public class SocialUserUtil {
     }
 
     //必须有，websocket无法从request中获取token只能传入
-    public static SocialUserDO getUserByWebsocketToken(String token) {
+    public static SocialUserDO getUserByToken(String token) {
         //解析token
         SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull(token);
         if (tokenDO == null) {

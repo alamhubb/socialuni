@@ -118,7 +118,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
@@ -142,7 +142,7 @@ import ToastUtil from '@/socialuni/utils/ToastUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import OAuthAPI from '@/api/OAuthAPI'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
-import ErrorConst from '@/socialuni/constant/ErrorConst'
+import ErrorCode from '@/socialuni/constant/ErrorCode'
 
 @Component({
   components: {
@@ -180,32 +180,32 @@ export default class OAuth extends Vue {
   //是否授权成功
   authSuccess = false
 
-  onLoad () {
+  onLoad() {
     ObjectUtil.log(this.user)
     console.log(this.user)
   }
 
-  toLoginPage () {
+  toLoginPage() {
     PageUtil.toMinePage()
   }
 
-  toBindPhone () {
+  toBindPhone() {
     PageUtil.toPhonePage()
   }
 
 
-  goBackPage () {
+  goBackPage() {
     if (socialOAuthModule.isThreeAuth) {
       const result: ResultRO<any> = new ResultRO<any>()
-      result.errorCode = ErrorConst.business
+      result.errorCode = ErrorCode.business
       result.errorMsg = '用户未授权'
       result.success = false
       UniUtil.showLoading('不授权，返回中...')
-      uni.navigateBackMiniProgram({ extraData: result })
+      uni.navigateBackMiniProgram({extraData: result})
     }
   }
 
-  async oAuthUserInfoAndPhoneNum () {
+  async oAuthUserInfoAndPhoneNum() {
     //有用户信息，并且伪授权用户信息
     if (this.hasPhoneNum) {
       try {
@@ -225,7 +225,7 @@ export default class OAuth extends Vue {
   }
 
   //授权成功返回第三方小程序
-  authSuccessGoBackThreeMp (extraData: ResultRO<SocialLoginRO<UniUserInfoRO>>) {
+  authSuccessGoBackThreeMp(extraData: ResultRO<SocialLoginRO<UniUserInfoRO>>) {
     this.goBackCountDown = 1
     let hintText = ''
     if (extraData.success) {
