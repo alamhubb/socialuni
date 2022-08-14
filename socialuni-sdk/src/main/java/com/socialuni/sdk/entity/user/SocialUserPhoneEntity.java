@@ -3,8 +3,8 @@ package com.socialuni.sdk.entity.user;
 import com.socialuni.sdk.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.manage.SocialUserManage;
 import com.socialuni.sdk.manage.phone.SocialUserPhoneManage;
-import com.socialuni.sdk.repository.UserRepository;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

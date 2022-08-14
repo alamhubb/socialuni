@@ -1,6 +1,6 @@
 package com.socialuni.sdk.domain.phone;
 
-import com.socialuni.sdk.constant.SocialuniProviderLoginType;
+import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.entity.user.SocialBindUserProviderAccountEntity;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
@@ -32,7 +32,7 @@ public class SocialBindUserSocialuniAccountDomain {
     @Async
     public void bindUserSocialAccount(Integer mineUserId, String token, String userUid) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
-        loginQO.setProvider(SocialuniProviderLoginType.socialuni);
+        loginQO.setProvider(SocialuniAccountProviderType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
         loginQO.setCode(token);
 

@@ -1,9 +1,11 @@
 package com.socialuni.sdk.model.DO.dev;
 
-import com.socialuni.sdk.model.DO.user.base.CommonTokenBaseDO;
+import com.socialuni.sdk.model.DO.base.CommonContentBaseDO;
+import com.socialuni.social.constant.DateTimeType;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "third_user_token",
@@ -20,17 +22,28 @@ import javax.persistence.*;
         }
 )
 @Data
-public class ThirdUserTokenDO extends CommonTokenBaseDO {
-    @Column(nullable = false)
+public class ThirdUserTokenDO extends CommonContentBaseDO {
+    @Column(nullable = false, updatable = false)
     private Integer devId;
     private String thirdUserId;
+    @Column(nullable = false, updatable = false)
+    private Integer userId;
+
+    @Column(nullable = false, updatable = false)
+    private String token;
+
+    @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
+    private Date expiredTime;
 
     public ThirdUserTokenDO() {
+        this.expiredTime = new Date(new Date().getTime() + DateTimeType.quarter);
     }
 
     public ThirdUserTokenDO(Integer userId, String token, Integer devId,String thirdUserId) {
-        super(userId, token);
+        this.userId = userId;
+        this.token = token;
         this.devId = devId;
         this.thirdUserId = thirdUserId;
+        this.expiredTime = new Date(new Date().getTime() + DateTimeType.quarter);
     }
 }

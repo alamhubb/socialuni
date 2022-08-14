@@ -1,13 +1,13 @@
 package com.socialuni.sdk.model.DO.user;
 
-import com.socialuni.sdk.model.DO.user.base.CommonTokenBaseDO;
+import com.socialuni.sdk.model.DO.base.CommonContentBaseDO;
+import com.socialuni.social.constant.DateTimeType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 //为什么使用s_token
 @Entity
@@ -16,6 +16,7 @@ import java.io.Serializable;
         indexes = {
                 //关联需要键索引，索引列不能为空
                 @Index(columnList = "userId"),
+                @Index(columnList = "devId"),
         },
         //手机号唯一
         uniqueConstraints = {
@@ -23,5 +24,22 @@ import java.io.Serializable;
         }
 )
 @Data
-public class SocialTokenDO extends CommonTokenBaseDO implements Serializable {
+@NoArgsConstructor
+public class SocialTokenDO extends CommonContentBaseDO implements Serializable {
+        @Column(nullable = false, updatable = false)
+        private Integer userId;
+        @Column(nullable = false, updatable = false)
+        private Integer devId;
+
+        @Column(nullable = false, updatable = false)
+        private String token;
+
+        @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
+        private Date expiredTime;
+
+        public SocialTokenDO(Integer userId, String token) {
+                this.userId = userId;
+                this.token = token;
+                this.expiredTime = new Date(new Date().getTime() + DateTimeType.quarter);
+        }
 }

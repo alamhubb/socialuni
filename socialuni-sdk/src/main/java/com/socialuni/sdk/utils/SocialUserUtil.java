@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.constant.SocialuniProviderLoginType;
+import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.model.DO.user.*;
 import com.socialuni.sdk.redis.SocialUserPhoneRedis;
@@ -223,7 +223,7 @@ public class SocialUserUtil {
     }
 
     public static SocialUserDO getByUid(String uid) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(SocialuniProviderLoginType.socialuni, uid);
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUnionId(SocialuniAccountProviderType.socialuni, uid);
         if (socialUserAccountDO == null) {
             throw new SocialNullUserException();
         }

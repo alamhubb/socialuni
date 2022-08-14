@@ -27,14 +27,20 @@ public class SocialUserPhoneManage {
     public void checkBindPhoneNum(String phoneNum, Integer mineUserId) {
         //进入这个方法一定是已经登陆了。
         //校验手机号格式
-        PhoneNumUtil.checkPhoneNum(phoneNum);
+        checkBindPhoneNumHasBind(phoneNum);
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUserId);
         //校验用户是否已经绑定手机号
         if (socialUserPhoneDO != null) {
             throw new SocialParamsException("用户已绑定手机号");
         }
+    }
+
+    public void checkBindPhoneNumHasBind(String phoneNum) {
+        //进入这个方法一定是已经登陆了。
+        //校验手机号格式
+        PhoneNumUtil.checkPhoneNum(phoneNum);
         //校验手机号状态是否可用
-        socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         if (socialUserPhoneDO != null) {
             //用户为空，则代表就是这个用户，用户不为空才校验手机号是否已被使用
             throw new SocialBusinessException("手机号已被绑定");

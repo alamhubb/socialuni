@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils.model;
 
-import com.socialuni.sdk.constant.SocialuniProviderLoginType;
+import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.model.DO.user.SocialUserAccountDO;
 import com.socialuni.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
@@ -20,15 +20,15 @@ public class SocialUserAccountUtil {
     }
 
     public static boolean mineBindSocialuniAccount() {
-        return SocialUserAccountUtil.getMineAccountByProvider(SocialuniProviderLoginType.socialuni) != null;
+        return SocialUserAccountUtil.getMineAccountByProvider(SocialuniAccountProviderType.socialuni) != null;
     }
 
     public static SocialUserAccountDO getMineSocialAccount() {
-        return SocialUserAccountUtil.getMineAccountByProvider(SocialuniProviderLoginType.socialuni);
+        return SocialUserAccountUtil.getMineAccountByProvider(SocialuniAccountProviderType.socialuni);
     }
 
     public static SocialUserAccountDO getUserSocialAccount(Integer userId) {
-        return SocialUserAccountUtil.getUserAccountByProvider(SocialuniProviderLoginType.socialuni, userId);
+        return SocialUserAccountUtil.getUserAccountByProvider(SocialuniAccountProviderType.socialuni, userId);
     }
 
     public static SocialUserAccountDO getMineAccountByProvider(String provider) {

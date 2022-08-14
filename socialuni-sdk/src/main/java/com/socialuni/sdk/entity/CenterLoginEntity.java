@@ -1,13 +1,13 @@
 package com.socialuni.sdk.entity;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.sdk.manage.ThirdUserTokenManage;
 import com.socialuni.sdk.model.DO.dev.ThirdUserTokenDO;
-import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

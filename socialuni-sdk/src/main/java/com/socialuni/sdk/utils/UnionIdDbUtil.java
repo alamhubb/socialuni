@@ -144,25 +144,21 @@ public class UnionIdDbUtil {
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static UniContentUnionIdDO getUnionByUidNotNull(String uuid) {
-        if (StringUtils.isEmpty(uuid)) {
-            throw new SocialParamsException("无效的内容标示1");
-        }
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(uuid);
+        UniContentUnionIdDO uniContentUnionIdDO = getUnionByUidAllowNull(uuid);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("错误的内容标识2");
         }
         return uniContentUnionIdDO;
     }
 
-    public static Integer getUnionIdByUid(String uuid) {
-        UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(uuid);
-        //没有写入
-        if (uniContentUnionIdDO == null) {
-            throw new SocialParamsException("错误的内容标识");
-            //有的话更新
+    //外部使用可能查询不存在的
+    public static UniContentUnionIdDO getUnionByUidAllowNull(String uuid) {
+        if (StringUtils.isEmpty(uuid)) {
+            throw new SocialParamsException("无效的内容标示1");
         }
-        return uniContentUnionIdDO.getId();
+        return uniContentUnionIdRepository.findByUuid(uuid);
     }
+
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
         SocialUserDO user = SocialUserUtil.getMineUserAllowNull();

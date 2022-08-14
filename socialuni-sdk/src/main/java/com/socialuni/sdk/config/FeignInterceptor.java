@@ -1,8 +1,22 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
+import com.socialuni.sdk.constant.GenderTypeNumEnum;
+import com.socialuni.sdk.feignAPI.SocialuniThirdUserAPI;
+import com.socialuni.sdk.model.DO.UniOutRegisterUserDO;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.repository.UniOutRegisterUserRepository;
+import com.socialuni.sdk.repository.user.SocialUserAccountRepository;
+import com.socialuni.sdk.store.SocialUserAccountStore;
+import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +24,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 //开发环境访问线上环境需要
 @Slf4j
@@ -20,7 +38,12 @@ public class FeignInterceptor implements RequestInterceptor {
     UniOutRegisterUserRepository uniOutRegisterUserRepository;
 
     @Resource
-    SocialuniUserAPI socialuniUserAPI;
+    SocialUserAccountRepository socialUserAccountRepository;
+
+    @Resource
+    SocialuniThirdUserAPI socialuniThirdUserAPI;
+    @Resource
+    private SocialUserAccountStore socialUserAccountStore;
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
@@ -39,12 +62,21 @@ public class FeignInterceptor implements RequestInterceptor {
 
         System.out.println(postUrl);
 
-        /*if (!postUrl.contains("user/registryUser")) {
+        //还是要加一个联盟账户渠道
+
+        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+
+        if (!postUrl.contains("user/registryUser")) {
             if (mineUser != null) {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
                 Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
                 UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserUnionId);
+
+//                SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getUserSocialAccount(mineUser.getId());
+
+                //有可能存在已经查询过这个用户了，然后unionId表已经记录了，然后你登录了，发现是你，然后怎么办。把这个的，把这儿用户的unionId，变为这个unionId就行了。
+
                 //有没有可能你自己这边记录了，但是那边给你删掉了
                 //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
                 if (uniOutRegisterUserDO == null) {
@@ -75,15 +107,17 @@ public class FeignInterceptor implements RequestInterceptor {
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
                         put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
                     }};
-                    ResultRO<CenterMineUserDetailRO> resultRO = socialuniUserAPI.registryUser(determinedBasePathUri, headerMap, socialProviderLoginQO);
-                    CenterMineUserDetailRO centerMineUserDetailRO = resultRO.getData();
+                    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
+                    SocialLoginRO<CenterMineUserDetailRO> loginRO = resultRO.getData();
+                    CenterMineUserDetailRO centerMineUserDetailRO = loginRO.getUser();
+
                     UnionIdDbUtil.updateUidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
                     uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);
                     uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
                 }
-                requestTemplate.header(SocialFeignHeaderName.dataUserUnionId, CenterUserUtil.getMineUserUnionId());
+                requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUser.getUnionId().toString());
             }
-        }*/
+        }
 
 //        }
 

@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SocialuniWeConfig {
+public class SocialuniWebConfig {
 
     private static String tokenName;
 
     @Value("${socialuni.user.token-name:token}")
     public void setTokenName(String tokenName) {
-        SocialuniWeConfig.tokenName = tokenName;
+        SocialuniWebConfig.tokenName = tokenName;
     }
 
 

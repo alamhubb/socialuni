@@ -14,6 +14,6 @@ public class SocialRequestTokenImpl implements SocialRequestToken{
 
     @Override
     public String getToken(HttpServletRequest request){
-        return RequestUtil.getHeader(SocialuniWeConfig.getTokenName());
+        return RequestUtil.getHeader(SocialuniWebConfig.getTokenName());
     }
 }
