@@ -390,7 +390,7 @@ export default class SocialTalkAddPage extends Vue {
     this.district = district
   }
 
-  addTalk() {
+  async addTalk() {
     if (!this.user) {
       AlertUtil.error('请进行登录')
     }
@@ -398,7 +398,7 @@ export default class SocialTalkAddPage extends Vue {
       ModelContentCheckUtil.hasUn18Content(this.talkContent)
       for (const showImgFile of this.showImgFiles) {
         if (showImgFile.needAuth) {
-          MsgUtil.uploadImgNeedAuthMsg()
+          await MsgUtil.uploadImgNeedAuthMsg()
           return
         }
       }
@@ -441,6 +441,7 @@ export default class SocialTalkAddPage extends Vue {
   }
 
   async uploadImgList() {
+    MsgUtil.showUploadLoading()
     //设置图片路径，必须在这里设置，如果放到获取的地方，可能多次上传，就不行了
     this.showImgFiles.forEach(item => {
       //只有不包含，才赋值src，有值代表已经赋值过了
@@ -461,6 +462,7 @@ export default class SocialTalkAddPage extends Vue {
         }
       }
     }
+    UniUtil.hideLoading()
   }
 
   deleteImg(e) {

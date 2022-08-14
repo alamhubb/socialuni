@@ -1,4 +1,4 @@
-import { socialConfigModule, socialSystemModule, socialUserModule } from '../store'
+import {socialConfigModule, socialSystemModule, socialUserModule} from '../store'
 
 import AppMsg from '../constant/AppMsg'
 import AlertUtil from './AlertUtil'
@@ -8,7 +8,7 @@ import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import UniUtil from '@/socialuni/utils/UniUtil'
 
 export default class MsgUtil {
-  static unBindPhoneNum () {
+  static unBindPhoneNum() {
     const user: CenterUserDetailRO = socialUserModule.user
     if (!user) {
       MsgUtil.unLoginMessage()
@@ -26,7 +26,7 @@ export default class MsgUtil {
     }
   }
 
-  static unLoginMessage () {
+  static unLoginMessage() {
     if (!socialUserModule.user) {
       AlertUtil.info(socialConfigModule.systemError601)
         .then(() => {
@@ -37,28 +37,28 @@ export default class MsgUtil {
     }
   }
 
-  static showUploadLoading () {
+  static showUploadLoading() {
     UniUtil.showLoading('上传中')
   }
 
 
-  static systemErrorMsg () {
+  static systemErrorMsg() {
     AlertUtil.hint(socialConfigModule.systemError604)
   }
 
-  static unUploadImg () {
+  static unUploadImg() {
     AlertUtil.confirm('请完善用户信息绑定手机号并上传照片，才能进行此项操作，是否前往完善信息', '前往').then(() => {
       PageUtil.toMinePage()
     })
   }
 
-  static uploadImgNeedAuthMsg () {
-    AlertUtil.confirm('完成成年认证，才能发布包含人物图像的图片，是否前往进行成年认证', '前往').then(() => {
+  static async uploadImgNeedAuthMsg() {
+    await AlertUtil.confirm('完成成年认证，才能发布包含人物图像的图片，是否前往进行成年认证', '前往').then(() => {
       PageUtil.toIdentityAuthPage()
     })
   }
 
-  static identityAuthHint () {
+  static identityAuthHint() {
     this.unLoginMessage()
     let msg
     if (socialUserModule.user.identityAuth) {
@@ -71,27 +71,27 @@ export default class MsgUtil {
     })
   }
 
-  static iosDisablePay () {
+  static iosDisablePay() {
     return AlertUtil.hint(AppMsg.iosDisablePayMsg)
   }
 
-  static notMpDisablePay () {
+  static notMpDisablePay() {
     return AlertUtil.hint(AppMsg.notMpDisablePayMsg)
   }
 
-  static notPay () {
+  static notPay() {
     return AlertUtil.hint(AppMsg.notPayMsg)
   }
 
-  static payFailMsg () {
+  static payFailMsg() {
     return AlertUtil.hint(AppMsg.payFailMsg)
   }
 
-  static sysErrMsg () {
+  static sysErrMsg() {
     return AlertUtil.hint(socialConfigModule.systemError604)
   }
 
-  static cantPopupPromptToast () {
+  static cantPopupPromptToast() {
     if (socialSystemModule.isIosAndMpQQ) {
       ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
     }
