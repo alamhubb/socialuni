@@ -69,10 +69,10 @@
 import ChatType from '@/socialuni/constant/ChatType'
 import CommonStatus from '@/socialuni/constant/CommonStatus'
 import ChatVO from '@/socialuni/model/chat/ChatVO'
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import Constants from '@/socialuni/constant/Constant'
 import UniUtil from '@/socialuni/utils/UniUtil'
-import { socialChatModule, socialChatStore } from '@/socialuni/store'
+import {socialChatModule, socialChatStore} from '@/socialuni/store'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import ChatAPI from '@/socialuni/api/ChatAPI'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
@@ -89,32 +89,32 @@ export default class ChatPage extends Vue {
   readonly closeStatus: string = CommonStatus.close
   showChatHint: boolean = uni.getStorageSync(Constants.showChatHintKey) !== 'false'
 
-  closeUploadImgHint () {
+  closeUploadImgHint() {
     this.showChatHint = false
     uni.setStorageSync(Constants.showChatHintKey, 'false')
   }
 
-  onLoad () {
+  onLoad() {
     UniUtil.showShareMenu()
     //需要先清除，再跳转页面
   }
 
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     this.initQuery()
   }
 
   // 初始查询，会清空已有talk
-  initQuery () {
-    socialChatModule.getChatsAction().finally(() => {
+  initQuery() {
+    /*socialChatModule.getChatsAction().finally(() => {
       this.stopPullDownRefresh()
-    })
+    })*/
   }
 
-  stopPullDownRefresh () {
+  stopPullDownRefresh() {
     uni.stopPullDownRefresh()
   }
 
-  showBottomMenuClick (chatId: number) {
+  showBottomMenuClick(chatId: number) {
     this.chatId = chatId
     UniUtil.actionSheet(['关闭会话', '列表中删除']).then((index: number) => {
       if (index === 0) {
@@ -127,7 +127,7 @@ export default class ChatPage extends Vue {
     })
   }
 
-  closeChat () {
+  closeChat() {
     AlertUtil.confirm('是否确定关闭会话，对方将无法再给您发送消息').then(() => {
       ChatAPI.closeChatAPI(this.chatId).then(() => {
         socialChatModule.deleteChatAction(this.chatId)
@@ -138,7 +138,7 @@ export default class ChatPage extends Vue {
     })
   }
 
-  frontDeleteChat () {
+  frontDeleteChat() {
     AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(() => {
       ChatAPI.frontDeleteChatAPI(this.chatId).then(() => {
         socialChatModule.deleteChatAction(this.chatId)
@@ -148,7 +148,7 @@ export default class ChatPage extends Vue {
     })
   }
 
-  get showChats (): ChatVO[] {
+  get showChats(): ChatVO[] {
     if (this.chats && this.chats.length) {
       //a和b比较，返回结果1，则倒序，后者在前面
       return this.chats.sort((chat, chatAfter) => {
@@ -209,7 +209,7 @@ export default class ChatPage extends Vue {
     }
   }*/
 
-  toMessagePage (chat: ChatVO) {
+  toMessagePage(chat: ChatVO) {
     //需要先清除，再跳转页面
     socialChatModule.setChatIdToMessagePage(chat.id)
   }
