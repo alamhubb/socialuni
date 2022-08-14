@@ -54,7 +54,7 @@ public class CenterUserUtil {
         if (userId == null) {
             throw new SocialParamsException("错误的用户标识");
         }
-        return SocialUserUtil.getNotNull(userId);
+        return SocialUserUtil.getUserNotNull(userId);
     }
 
 
@@ -82,7 +82,7 @@ public class CenterUserUtil {
         if (tokenDO == null) {
             return null;
         }
-        SocialUserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO user = SocialUserUtil.getUserNotNull(tokenDO.getUserId());
         if (user.getStatus().equals(UserStatus.violation)) {
             throw new SocialUserBannedException(user);
         }
@@ -140,7 +140,7 @@ public class CenterUserUtil {
         if (tokenDO == null) {
             return null;
         }
-        SocialUserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO user = SocialUserUtil.getUserNotNull(tokenDO.getUserId());
         if (user.getStatus().equals(UserStatus.violation)) {
             return null;
         }
@@ -178,6 +178,6 @@ public class CenterUserUtil {
 
     public static SocialUserDO get(String userId) {
         Integer id = UnionIdDbUtil.getUserUnionIdByUidNotNull(userId);
-        return SocialUserUtil.getNotNull(id);
+        return SocialUserUtil.getUserNotNull(id);
     }
 }

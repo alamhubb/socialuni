@@ -40,7 +40,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setId(comment.getUnionId());
         socialCommentRO.setNo(comment.getNo());
 
-        SocialUserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
+        SocialUserDO commentUser = SocialUserUtil.getUserNotNull(comment.getUserId());
         SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);
         socialCommentRO.setUser(commentUserRO);
 

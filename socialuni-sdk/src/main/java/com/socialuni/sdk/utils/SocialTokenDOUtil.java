@@ -1,11 +1,11 @@
 package com.socialuni.sdk.utils;
 
+import com.socialuni.sdk.config.SocialTokenUtil;
 import com.socialuni.sdk.model.DO.user.SocialTokenDO;
+import com.socialuni.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.exception.SocialUserTokenExpireException;
-import com.socialuni.sdk.repository.CommonTokenRepository;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

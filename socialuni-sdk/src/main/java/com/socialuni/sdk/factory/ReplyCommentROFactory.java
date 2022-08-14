@@ -17,7 +17,7 @@ public class ReplyCommentROFactory {
         socialReplyCommentRO.setId(comment.getUnionId());
 //        socialReplyCommentRO.setContentType(ContentType.comment);
 //        replyCommentRO.setNo(comment.getNo());
-        SocialUserDO commentUser = SocialUserUtil.getNotNull(comment.getUserId());
+        SocialUserDO commentUser = SocialUserUtil.getUserNotNull(comment.getUserId());
         SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);
         socialReplyCommentRO.setUser(commentUserRO);
         return socialReplyCommentRO;

@@ -71,7 +71,7 @@ public class ReportService {
 
             //变更detail
             for (ReportDetailDO reportDetailDO : reportDetailDOS) {
-                SocialUserDO detailUser = SocialUserUtil.getNotNull(reportDetailDO.getUserId());
+                SocialUserDO detailUser = SocialUserUtil.getUserNotNull(reportDetailDO.getUserId());
 
                 //相同部分
                 JusticeValueOrderDO justiceValueOrderDO = new JusticeValueOrderDO();

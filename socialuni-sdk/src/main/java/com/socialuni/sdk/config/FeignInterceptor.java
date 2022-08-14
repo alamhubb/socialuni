@@ -49,24 +49,15 @@ public class FeignInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
 
-//        requestTemplate.header(SocialFeignHeaderName.dataOriginalSocialuniId, DevAccountUtils.getAppSocialuniId());
+        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
 
-
-        System.out.println(requestTemplate);
-        System.out.println(requestTemplate.url());
-        System.out.println(11111);
-        System.out.println(requestTemplate.feignTarget());
-        System.out.println(requestTemplate.feignTarget().url());
-        System.out.println(requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey));
         String postUrl = requestTemplate.path();
-
-        System.out.println(postUrl);
 
         //还是要加一个联盟账户渠道
 
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
-        if (!postUrl.contains("user/registryUser")) {
+        if (!postUrl.contains("thirdUser/registryUser")) {
             if (mineUser != null) {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
@@ -91,6 +82,7 @@ public class FeignInterceptor implements RequestInterceptor {
                     socialProviderLoginQO.setProvider(RequestUtil.getProvider());
                     socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
                     socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+                    socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
                     if (SocialAppConfig.serverIsChild()) {
                         socialProviderLoginQO.setPhoneNum(phoneNum);
                     }
@@ -115,7 +107,10 @@ public class FeignInterceptor implements RequestInterceptor {
                     uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);
                     uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
                 }
-                requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUser.getUnionId().toString());
+
+                String mineUserUid = UnionIdDbUtil.getUidByUnionIdNotNull(mineUserUnionId);
+
+                requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
             }
         }
 

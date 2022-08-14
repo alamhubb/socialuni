@@ -11,7 +11,7 @@ import com.socialuni.sdk.repository.dev.DevAccountProviderRepository;
 import com.socialuni.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.repository.dev.DevTokenRepository;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
+import com.socialuni.sdk.config.SocialTokenUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

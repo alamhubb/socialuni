@@ -49,7 +49,7 @@ public class CenterUserService {
     }
 
     public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        SocialUserDO detailUserDO = SocialUserUtil.get(centerUserIdQO.getUserId());
+        SocialUserDO detailUserDO = SocialUserUtil.getUserByUid(centerUserIdQO.getUserId());
 
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 

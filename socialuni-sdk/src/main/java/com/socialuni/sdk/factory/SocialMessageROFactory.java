@@ -26,7 +26,7 @@ public class SocialMessageROFactory {
     public static SocialMessageRO getMessageRO(MessageDO messageDO, Integer lookMessageUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
 
-        SocialUserDO userDO = SocialUserUtil.getNotNull(messageDO.getUserId());
+        SocialUserDO userDO = SocialUserUtil.getUserNotNull(messageDO.getUserId());
         SocialUserRO messageUser = SocialUserROFactory.getUserRO(userDO);
         boolean isMine = messageDO.getUserId().equals(lookMessageUserId);
 

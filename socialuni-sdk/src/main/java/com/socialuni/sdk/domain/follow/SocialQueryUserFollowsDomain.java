@@ -25,11 +25,11 @@ public class SocialQueryUserFollowsDomain {
         Map<String, List<SocialUserFollowDetailRO>> map = new HashMap<>();
         //查询他的关注
         List<FollowDO> followDOS = followRepository.findTop30ByUserIdAndStatusOrderByUpdateTimeDesc(mineUser.getUnionId(), CommonStatus.enable);
-        List<SocialUserDO> userDOS = followDOS.stream().map(followDO -> SocialUserUtil.getNotNull(followDO.getBeUserId())).collect(Collectors.toList());
+        List<SocialUserDO> userDOS = followDOS.stream().map(followDO -> SocialUserUtil.getUserNotNull(followDO.getBeUserId())).collect(Collectors.toList());
         List<SocialUserFollowDetailRO> followUserVOS = SocialUserFollowDetailROFactory.newUsers(userDOS, mineUser);
         //查询他的粉丝
         List<FollowDO> fans = followRepository.findTop30ByBeUserIdAndStatusOrderByUpdateTimeDesc(mineUser.getUnionId(), CommonStatus.enable);
-        List<SocialUserDO> fansUserDOS = fans.stream().map(followDO -> SocialUserUtil.getNotNull(followDO.getUserId())).collect(Collectors.toList());
+        List<SocialUserDO> fansUserDOS = fans.stream().map(followDO -> SocialUserUtil.getUserNotNull(followDO.getUserId())).collect(Collectors.toList());
         List<SocialUserFollowDetailRO> fansUserVOS = SocialUserFollowDetailROFactory.newUsers(fansUserDOS, mineUser);
         map.put("follows", followUserVOS);
         map.put("fans", fansUserVOS);

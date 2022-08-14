@@ -1,4 +1,4 @@
-package com.socialuni.sdk.controller;
+package com.socialuni.center.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniThirdUserAPI;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;

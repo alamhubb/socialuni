@@ -1,5 +1,6 @@
 package com.socialuni.sdk.utils;
 
+import com.socialuni.sdk.config.SocialRequestUserConfig;
 import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.model.DO.user.*;
@@ -26,6 +27,13 @@ public class SocialUserUtil {
     private static SocialUserAccountRepository socialUserAccountRepository;
     private static SocialUserViolationRepository socialUserViolationRepository;
 
+    private static SocialRequestUserConfig socialRequestUserConfig;
+
+    @Resource
+    public void setSocialRequestUserConfig(SocialRequestUserConfig socialRequestUserConfig) {
+        SocialUserUtil.socialRequestUserConfig = socialRequestUserConfig;
+    }
+
     @Resource
     public void setSocialUserIdentityAuthRepository(SocialUserIdentityAuthRepository socialUserIdentityAuthRepository) {
         SocialUserUtil.socialUserIdentityAuthRepository = socialUserIdentityAuthRepository;
@@ -51,14 +59,6 @@ public class SocialUserUtil {
         SocialUserUtil.socialUserViolationRepository = socialUserViolationRepository;
     }
 
-    public static Integer getMineUserIdAllowNull() {
-        SocialUserDO user = SocialUserUtil.getMineUserAllowNull();
-        if (user == null) {
-            return null;
-        }
-        Integer userId = user.getUnionId();
-        return userId;
-    }
 
     public static Integer getMineUserIdAllowNull(SocialUserDO mineUser) {
         //解析token
@@ -70,11 +70,7 @@ public class SocialUserUtil {
     }
 
     public static Integer getMineUserIdNotNull() {
-        Integer userId = SocialUserUtil.getMineUserIdAllowNull();
-        if (userId == null) {
-            throw new SocialNullUserException();
-        }
-        return userId;
+        return getMineUserNotNull().getId();
     }
 
     public static String getMineUserStringIdNotNull() {
@@ -94,21 +90,22 @@ public class SocialUserUtil {
     //下面都是联盟的
     public static SocialUserDO getMineUserNotNull(String token) {
         SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDONotNull(token);
-        if (tokenDO == null) {
-            throw new SocialNullUserException();
-        }
-        return SocialUserUtil.getNotNull(tokenDO.getUserId());
+        return SocialUserUtil.getUserNotNull(tokenDO.getUserId());
     }
 
     public static SocialUserDO getMineUserAllowNull() {
-        //解析token
-        SocialTokenDO tokenDO = SocialTokenDOUtil.getCommonTokenDOAllowNull();
-        if (tokenDO == null) {
+        Integer userId = getMineUserIdAllowNull();
+        if (userId == null) {
             return null;
         }
         //返回user
-        SocialUserDO mineUser = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO mineUser = SocialUserUtil.getUserNotNull(userId);
         return mineUser;
+    }
+
+    public static Integer getMineUserIdAllowNull() {
+        //解析token
+        return socialRequestUserConfig.getUserId();
     }
 
     public static Integer getMineUserIdInterceptor() {
@@ -149,7 +146,7 @@ public class SocialUserUtil {
             return null;
         }
         //返回user
-        SocialUserDO user = SocialUserUtil.getNotNull(tokenDO.getUserId());
+        SocialUserDO user = SocialUserUtil.getUserNotNull(tokenDO.getUserId());
         return user;
     }
 
@@ -191,7 +188,7 @@ public class SocialUserUtil {
         return UserUtils.get(Integer.valueOf(userId));
     }*/
 
-    public static SocialUserDO getNotNull(Integer userId) {
+    public static SocialUserDO getUserNotNull(Integer userId) {
         if (userId == null) {
             throw new SocialNullUserException();
         }
@@ -202,9 +199,9 @@ public class SocialUserUtil {
         return commonUserDOOptional;
     }
 
-    public static SocialUserDO get(String userId) {
-        Integer id = UnionIdDbUtil.getUserUnionIdByUidNotNull(userId);
-        return SocialUserUtil.getNotNull(id);
+    public static SocialUserDO getUserByUid(String uid) {
+        Integer id = UnionIdDbUtil.getUserUnionIdByUidNotNull(uid);
+        return SocialUserUtil.getUserNotNull(id);
     }
 
     public static SocialUserDO getAllowNull(Integer userId) {
@@ -227,7 +224,7 @@ public class SocialUserUtil {
         if (socialUserAccountDO == null) {
             throw new SocialNullUserException();
         }
-        return SocialUserUtil.getNotNull(socialUserAccountDO.getUserId());
+        return SocialUserUtil.getUserNotNull(socialUserAccountDO.getUserId());
     }
 
     public static boolean isMine(SocialUserDO mineUser, Integer userId) {

@@ -19,7 +19,7 @@ import com.socialuni.sdk.serive.CenterTalkService;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
+import com.socialuni.sdk.config.SocialTokenUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

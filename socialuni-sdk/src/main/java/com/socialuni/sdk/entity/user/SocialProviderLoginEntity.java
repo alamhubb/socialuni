@@ -40,7 +40,7 @@ public class SocialProviderLoginEntity {
         SocialUserDO mineUser;
         //如果已经注册过
         if (socialUserAccountDO != null) {
-            mineUser = SocialUserUtil.getNotNull(socialUserAccountDO.getUserId());
+            mineUser = SocialUserUtil.getUserNotNull(socialUserAccountDO.getUserId());
             socialUserAccountManage.updateSessionKey(loginQO.getProvider(), uniUnionIdRO.getSession_key(), mineUser.getUnionId());
         } else {
             mineUser = socialUserEntity.createUserAndDetail(loginQO);
