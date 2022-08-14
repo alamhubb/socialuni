@@ -1,10 +1,10 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
+import {Action, Module, VuexModule} from 'vuex-class-modules'
 import DistrictVO from '../model/DistrictVO'
 import LocationUtil from '../utils/LocationUtil'
-import DistrictAPI from '../api/DistrictAPI'
-import { socialTalkModule } from '@/socialuni/store/index'
+import DistrictAPI from '../api/socialuni/DistrictAPI'
+import {socialTalkModule} from '@/socialuni/store/index'
 
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialLocationModule extends VuexModule {
   // 系统加载时通过getDistrictAction赋值
   //有记录的花记录上一次的，没有记录的话初始全国的
@@ -14,7 +14,7 @@ export default class SocialLocationModule extends VuexModule {
   circleLocation: DistrictVO = LocationUtil.getCircleLocation()
   districts: DistrictVO [] = []
 
-  get location () {
+  get location() {
     if (socialTalkModule.curTabIsCircle) {
       return this.circleLocation
     }
@@ -22,7 +22,7 @@ export default class SocialLocationModule extends VuexModule {
   }
 
   @Action
-  async appLunchInitDistrict () {
+  async appLunchInitDistrict() {
     //首次打开无论如何获取用户地理位置
     const district: DistrictVO = await LocationUtil.getLocationNotAuth()
     if (district) {
@@ -36,18 +36,18 @@ export default class SocialLocationModule extends VuexModule {
   }
 
   @Action
-  openLocationAction () {
+  openLocationAction() {
     this.openLocation = true
     LocationUtil.openLocation()
   }
 
-  updateLocationLonAndLat (lon, lat) {
+  updateLocationLonAndLat(lon, lat) {
     this.cityLocation.lon = lon
     this.cityLocation.lat = lat
     this.setCityLocation(this.cityLocation)
   }
 
-  setCityLocation (district: DistrictVO) {
+  setCityLocation(district: DistrictVO) {
     //只要开启过定位就不再关闭
     //如果空值则默认中国，后台定位不到有时候会返回空，11.21此逻辑已修改，无论如何后台不会返回空
     if (!district || !district.adCode) {
@@ -59,7 +59,7 @@ export default class SocialLocationModule extends VuexModule {
     this.cityLocation = district
   }
 
-  setLocation (district: DistrictVO) {
+  setLocation(district: DistrictVO) {
     console.log(district)
     //只要开启过定位就不再关闭
     //如果空值则默认中国，后台定位不到有时候会返回空，11.21此逻辑已修改，无论如何后台不会返回空
@@ -78,7 +78,7 @@ export default class SocialLocationModule extends VuexModule {
   }
 
   @Action
-  getDistrictsAction () {
+  getDistrictsAction() {
     // 查询所有城市
     DistrictAPI.queryDistrictsAPI().then((res: any) => {
       this.districts = res.data
@@ -86,7 +86,7 @@ export default class SocialLocationModule extends VuexModule {
   }
 
   @Action
-  getHotDistrictsAction () {
+  getHotDistrictsAction() {
     // 查询所有城市
     DistrictAPI.queryHotDistrictsAPI().then((res: any) => {
       this.districts = res.data

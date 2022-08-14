@@ -215,7 +215,7 @@ import UnreadNotifyVO from '@/socialuni/model/notify/UnreadNotifyVO'
 import LoadMoreType from "@/socialuni/constant/LoadMoreType";
 import TalkTabVO from "@/socialuni/model/talk/TalkTabVO";
 import CommonUtil from "@/socialuni/utils/CommonUtil";
-import TalkAPI from "@/socialuni/api/TalkAPI";
+import TalkAPI from "@/socialuni/api/socialuni/TalkAPI";
 import TalkVO from "@/socialuni/model/talk/TalkVO";
 import Constants from "@/socialuni/constant/Constant";
 import StorageUtil from "@/socialuni/utils/StorageUtil";

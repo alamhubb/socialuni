@@ -99,19 +99,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
-import UserAPI from '../../api/UserAPI'
-import { parseDate } from '../../utils'
+import {Component, Emit, Vue, Watch} from 'vue-property-decorator'
+import UserAPI from '../../api/socialuni/UserAPI'
+import {parseDate} from '../../utils'
 import JsonUtils from '../../utils/ObjectUtil'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
-import { socialUserModule, socialUserStore } from '../../store'
+import {socialUserModule, socialUserStore} from '../../store'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import EnumStrVO from '../../constant/EnumStrVO'
 import GenderType from '../../constant/GenderType'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import UserEditVO from '../../model/user/UserEditVO'
-import Constants from '@/socialuni/constant/Constant'
 import BirthAgeUtil from '@/socialuni/utils/BirthAgeUtil'
 
 @Component
@@ -133,12 +132,12 @@ export default class UserEdit extends Vue {
 
   genders: EnumStrVO [] = GenderType.userEditEnums
 
-  created () {
+  created() {
     this.endDate = parseDate(new Date())
     this.initData()
   }
 
-  initData () {
+  initData() {
     if (this.user) {
       this.nickname = this.user.nickname || ''
       this.gender = this.user.gender || GenderType.girl
@@ -153,40 +152,40 @@ export default class UserEdit extends Vue {
   }
 
   @Watch('user')
-  watchUserChange () {
+  watchUserChange() {
     this.initData()
   }
 
   @Emit('close')
-  closeUserEditPop () {
+  closeUserEditPop() {
     return ''
   }
 
-  clearNickname () {
+  clearNickname() {
     this.nickname = ''
   }
 
-  clearLocation () {
+  clearLocation() {
     this.city = ''
   }
 
-  clearWxAccount () {
+  clearWxAccount() {
     this.wxAccount = ''
   }
 
-  clearContactAccount () {
+  clearContactAccount() {
     this.contactAccount = ''
   }
 
-  clearQqAccount () {
+  clearQqAccount() {
     this.qqAccount = ''
   }
 
-  clearWbAccount () {
+  clearWbAccount() {
     this.wbAccount = ''
   }
 
-  async saveUser () {
+  async saveUser() {
     if (this.contactAccount) {
       if (this.contactAccount.length > 30) {
         AlertUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
@@ -236,11 +235,11 @@ export default class UserEdit extends Vue {
     })
   }
 
-  dateChange ({ target }) {
+  dateChange({target}) {
     this.birthday = target.value
   }
 
-  genderChange ({ target }) {
+  genderChange({target}) {
     this.gender = target.value
   }
 }

@@ -1,22 +1,23 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
+import {Action, Module, VuexModule} from 'vuex-class-modules'
 import HomeSwiperVO from '../model/HomeSwiperVO'
-import ReportAPI from '../api/ReportAPI'
+import ReportAPI from '../api/socialuni/ReportAPI'
 import QingchiAPI from '../api/QingchiAPI'
 import {
   socialAppModule,
-  socialChatModule, socialCircleModule,
+  socialChatModule,
+  socialCircleModule,
   socialConfigModule,
   socialLocationModule,
   socialNotifyModule,
-  socialTagModule, socialTalkModule
+  socialTagModule,
+  socialTalkModule
 } from './index'
 import AppConfigAPI from '../api/AppConfigAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
 import PlatformUtils from '@/socialuni/utils/PlatformUtils'
 import TokenUtil from '@/socialuni/utils/TokenUtil'
-import SocialTalkModule from '@/socialuni/store/SocialTalkModule'
 
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialAppModule extends VuexModule {
   reportTypes: string[] = []
   homeSwipers: HomeSwiperVO[] = []
@@ -24,7 +25,7 @@ export default class SocialAppModule extends VuexModule {
 
   //app启动的方法
   @Action
-  async appLunchAction () {
+  async appLunchAction() {
     //校验更新
     PlatformUtils.checkUpdate()
     // WebsocketUtil.websocketConnect(false)
@@ -51,9 +52,10 @@ export default class SocialAppModule extends VuexModule {
     // appModule.initGlobalDataReadyAPI()
     // 不为app平台在这里设置platform否则在systemInfo中设置
   }
+
   // actions
   @Action
-  getReportTypesAction () {
+  getReportTypesAction() {
     ReportAPI.queryReportTypesAPI().then(res => {
       this.reportTypes = res.data
     })
@@ -61,14 +63,14 @@ export default class SocialAppModule extends VuexModule {
 
   // actions
   @Action
-  getHomeSwipersAction () {
+  getHomeSwipersAction() {
     QingchiAPI.queryHomeSwipersAPI().then(res => {
       this.homeSwipers = res.data
     })
   }
 
   @Action
-  getAppConfigAction () {
+  getAppConfigAction() {
     AppConfigAPI.getAppConfigAPI().then(res => {
       const appInitData: AppInitDataRO = res.data
       socialConfigModule.appConfig = appInitData.appConfig

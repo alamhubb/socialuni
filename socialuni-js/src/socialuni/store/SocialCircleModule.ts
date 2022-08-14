@@ -1,5 +1,5 @@
 import { Action, Module, VuexModule } from 'vuex-class-modules'
-import CircleAPI from '../api/CircleAPI'
+import CircleAPI from '../api/socialuni/CircleAPI'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import TagStorageUtil from '@/socialuni/constant/TagStorageUtil'

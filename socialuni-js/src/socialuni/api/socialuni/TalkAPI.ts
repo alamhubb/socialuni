@@ -1,0 +1,51 @@
+import TalkAddVO from '../../model/talk/TalkAddVO'
+import request from '../../plugins/http/request'
+import CommentAddVO from '../../model/comment/CommentAddVO'
+import HugAddVO from '../../model/HugAddVO'
+import TalkQueryVO from '../../model/talk/TalkQueryVO'
+import UserTalkQueryVO from '../../model/user/UserTalkQueryVO'
+import DistrictVO from '../../model/DistrictVO'
+import TalkDeleteVO from '../../model/talk/TalkDeleteVO'
+import CommentDeleteVO from '../../model/comment/CommentDeleteVO'
+import TalkVO from '../../model/talk/TalkVO'
+import DomFile from '../../model/DomFile'
+import ImgAddQO from '../../model/user/ImgAddQO'
+
+export default class TalkAPI {
+  static addTalkAPI(content: string, imgs: DomFile[], district: DistrictVO, visibleType: string, visibleGender: string, circleName: string, tagNames: string[]) {
+    const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, visibleType, visibleGender, circleName, tagNames)
+    return request.post('socialuni/talk/postTalk', data)
+  }
+
+  static queryTalksAPI(talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string, tagNames: string[]) {
+    return request.post<TalkVO>('socialuni/talk/queryTalks', new TalkQueryVO(talkIds, tagIds, tabType, gender, minAge, maxAge, queryDate, circleName, tagNames))
+  }
+
+  static queryUserTalksAPI(userId: string, talkIds: number[]) {
+    return request.post('socialuni/talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
+  }
+
+  static queryTalkInfoAPI(talkId: string) {
+    return request.post('socialuni/talk/queryTalkInfo', {talkId})
+  }
+
+  static queryTalkDetailAPI(talkId: string) {
+    return request.post('socialuni/talk/queryTalkDetail', {talkId})
+  }
+
+  static addCommentAPI(comment: CommentAddVO) {
+    return request.post('socialuni/comment/postComment', comment)
+  }
+
+  static addHugAPI(hug: HugAddVO) {
+    return request.post('socialuni/hug/addHug', hug)
+  }
+
+  static deleteTalkAPI(talkId: number) {
+    return request.post('socialuni/talk/deleteTalk', new TalkDeleteVO(talkId))
+  }
+
+  static deleteCommentAPI(commentId: number) {
+    return request.post('socialuni/comment/deleteComment', new CommentDeleteVO(commentId))
+  }
+}

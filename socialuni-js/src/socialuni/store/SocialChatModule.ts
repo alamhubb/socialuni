@@ -1,4 +1,4 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
+import {Action, Module, VuexModule} from 'vuex-class-modules'
 import ChatVO from '../model/chat/ChatVO'
 import MessageVO from '../model/message/MessageVO'
 import ChatType from '../constant/ChatType'
@@ -8,12 +8,10 @@ import PageUtil from '../utils/PageUtil'
 import MessageAPI from '../api/MessageAPI'
 import CommonUtil from '../utils/CommonUtil'
 import PlatformUtils from '../utils/PlatformUtils'
-import { socialChatModule, socialUserModule } from './index'
+import {socialChatModule, socialUserModule} from './index'
 import PagePath from '../constant/PagePath'
-import SocialAppModule from './SocialAppModule'
-import ResultRO from '@/socialuni/model/social/ResultRO'
 
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialChatModule extends VuexModule {
   chatId: number = null
   chats: ChatVO[] = []
@@ -47,16 +45,16 @@ export default class SocialChatModule extends VuexModule {
 
 
   //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
-  get chat (): ChatVO {
+  get chat(): ChatVO {
     return this.chats[this.chatIndex]
     // return this.chats[0this.chatIndex.]
   }
 
-  get chatIndex (): number {
+  get chatIndex(): number {
     return this.chats.findIndex(item => item.id === this.chatId)
   }
 
-  get messages (): MessageVO[] {
+  get messages(): MessageVO[] {
     if (this.chat.messages.length) {
       // JsonUtils.log(this.chat)
     }
@@ -69,19 +67,19 @@ export default class SocialChatModule extends VuexModule {
   //列表中进入，需要调用后台，更新时间。
 
   //从列表中进入
-  setChatIdToMessagePage (chatId: number) {
+  setChatIdToMessagePage(chatId: number) {
     this.setChatId(chatId)
     this.readChatAction(this.chat)
     PageUtil.toMessagePage()
     this.scrollToMessagePageBottom()
   }
 
-  setChatId (chatId: number) {
+  setChatId(chatId: number) {
     this.chatId = chatId
   }
 
   @Action
-  userDetailToMessagePage (chat: ChatVO) {
+  userDetailToMessagePage(chat: ChatVO) {
     //第一步，先看列表中是否已有与此用户的聊天列表
     const findChat = this.chats.find(item => item.id === chat.id)
     //如果已有,则直接跳转过去
@@ -109,7 +107,7 @@ export default class SocialChatModule extends VuexModule {
     this.setChatIdToMessagePage(chat.id)
   }
 
-  openChatAction (content) {
+  openChatAction(content) {
     const needPayOpen = this.chat.needPayOpen
     return ChatAPI.openChatAPI(this.chat.id, this.chat.needPayOpen, content).then((res) => {
       socialChatModule.replaceChat(this.chatIndex, res.data)
@@ -121,7 +119,7 @@ export default class SocialChatModule extends VuexModule {
   }
 
   //来消息后，替换已有chat
-  pushMsgReplaceChat (chatIndex, chat: ChatVO) {
+  pushMsgReplaceChat(chatIndex, chat: ChatVO) {
     const oldChat = this.chats[chatIndex]
     const messages: MessageVO[] = oldChat.messages
     //将新消息放到当前msg中
@@ -133,7 +131,7 @@ export default class SocialChatModule extends VuexModule {
   }
 
 
-  replaceChat (chatIndex, chat: ChatVO) {
+  replaceChat(chatIndex, chat: ChatVO) {
     this.chats.splice(chatIndex, 1, chat)
   }
 
@@ -160,7 +158,7 @@ export default class SocialChatModule extends VuexModule {
   // 四个地方使用，初始查询，推送消息，阅读清空消息，删除消息
   //为什么不使用get呢,get不行微信小程序有兼容问题
   @Action
-  computedChatsUnreadNumTotalAction () {
+  computedChatsUnreadNumTotalAction() {
     // 应该在这里计算是否显示红点
     /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
       total = total + chat.unreadNum
@@ -181,7 +179,7 @@ export default class SocialChatModule extends VuexModule {
   }
 
 
-  scrollToMessagePageBottom () {
+  scrollToMessagePageBottom() {
     CommonUtil.delayTime(100).then(() => {
       this.scrollTop = this.messages.length * 500
       // this.scrollTop = -1000
@@ -196,7 +194,7 @@ export default class SocialChatModule extends VuexModule {
   //一，在展示当前chat，2没在，但是列表中有，3列表中没有
   //如果是正在聊的，需要改为，已读，先不做已读未读
   @Action
-  pushChatAndMessagesAction (newChat: ChatVO) {
+  pushChatAndMessagesAction(newChat: ChatVO) {
     // console.log('出发了pushchat')
     // 如果正在这个chat聊天
     if (RouterUtil.getCurrentPageURI() === PagePath.message && this.chatId === newChat.id) {
@@ -238,7 +236,7 @@ export default class SocialChatModule extends VuexModule {
 
   //在聊天界面的时候，自己发送msg 本地添加msg
   @Action
-  pushMessageAction (msg: MessageVO) {
+  pushMessageAction(msg: MessageVO) {
     this.messages.push(msg)
     // JsonUtils.log(this.messages)
     // console.log(JSON.stringify(msg))
@@ -263,7 +261,7 @@ export default class SocialChatModule extends VuexModule {
 
   // 前台和后台都将chat和msg改为已读,更新chat的时间
   @Action
-  readChatAction (chat: ChatVO) {
+  readChatAction(chat: ChatVO) {
     //目前不根据点击时间更新，只根据消息时间更新
     // chat.updateTime = new Date().getTime()
     // 不为自己的 且未读的
@@ -288,13 +286,13 @@ export default class SocialChatModule extends VuexModule {
 
   //获取chats
   @Action
-  getChatsAction () {
-    return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
+  getChatsAction() {
+    /*return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
       this.setChats(res.data)
-    })
+    })*/
   }
 
-  setChats (chats: ChatVO[]) {
+  setChats(chats: ChatVO[]) {
     this.chats = chats
     this.computedChatsUnreadNumTotalAction()
   }
@@ -302,12 +300,12 @@ export default class SocialChatModule extends VuexModule {
 
   //前台删除，需要增加后台删除逻辑
   @Action
-  deleteMsgAction (msgId: number) {
+  deleteMsgAction(msgId: number) {
     this.messages.splice(this.messages.findIndex(msg => msg.id === msgId), 1)
   }
 
   @Action
-  deleteChatAction (chatId: number) {
+  deleteChatAction(chatId: number) {
     this.chats.splice(this.chats.findIndex(chat => chat.id === chatId), 1)
   }
 }

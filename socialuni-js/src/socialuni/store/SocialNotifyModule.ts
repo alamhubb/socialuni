@@ -1,18 +1,18 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
+import {Action, Module, VuexModule} from 'vuex-class-modules'
 import UnreadNotifyVO from '../model/notify/UnreadNotifyVO'
-import NotifyAPI from '../api/NotifyAPI'
+import NotifyAPI from '../api/socialuni/NotifyAPI'
 import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 
 //用来存储当前用户的一些信息
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialNotifyModule extends VuexModule {
   notifies: UnreadNotifyVO [] = []
 
-  get unreadNotifies (): UnreadNotifyVO [] {
+  get unreadNotifies(): UnreadNotifyVO [] {
     return this.notifies.filter(item => !item.hasRead)
   }
 
-  addUnreadNotifies (user: CenterUserDetailRO) {
+  addUnreadNotifies(user: CenterUserDetailRO) {
     const notify: UnreadNotifyVO = new UnreadNotifyVO()
     notify.hasRead = false
     notify.avatar = user.avatar
@@ -24,7 +24,7 @@ export default class SocialNotifyModule extends VuexModule {
 
   //应该查询前20条已读和未读通知，然后有未读通知推送
   @Action
-  queryNotifiesAction () {
+  queryNotifiesAction() {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
     return NotifyAPI.queryNotifiesAPI().then((res: any) => {
       this.notifies = res.data
@@ -32,7 +32,7 @@ export default class SocialNotifyModule extends VuexModule {
   }
 
   @Action
-  queryUnreadNotifiesAndUpdateHasReadAction () {
+  queryUnreadNotifiesAndUpdateHasReadAction() {
     this.notifies.forEach(item => {
       item.hasRead = true
     })

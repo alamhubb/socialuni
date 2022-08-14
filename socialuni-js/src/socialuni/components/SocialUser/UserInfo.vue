@@ -331,8 +331,8 @@
 </template>
 
 <script lang="ts">
-import { Component, PropSync, Vue, Watch } from 'vue-property-decorator'
-import TalkAPI from '../../api/TalkAPI'
+import {Component, PropSync, Vue, Watch} from 'vue-property-decorator'
+import TalkAPI from '../../api/socialuni/TalkAPI'
 import TalkItem from '../SocialTalk/TalkItem.vue'
 import UserUtil from '../../utils/UserUtil'
 import TalkItemContent from '../SocialTalk/TalkItemContent.vue'
@@ -340,24 +340,24 @@ import FollowAddVO from '../../model/FollowAddVO'
 import UserEdit from './UserEdit.vue'
 import UniUtil from '../../utils/UniUtil'
 import PagePath from '../../constant/PagePath'
-import FollowAPI from '../../api/FollowAPI'
+import FollowAPI from '../../api/socialuni/FollowAPI'
 import FollowStatus from '../../constant/FollowStatus'
 import PageUtil from '../../utils/PageUtil'
 import ImgFileVO from '../../model/ImgFileVO'
 import ImgUtil from '../../utils/ImgUtil'
 import CosUtil from '../../utils/CosUtil'
-import UserAPI from '../../api/UserAPI'
+import UserAPI from '../../api/socialuni/UserAPI'
 import Constants from '../../constant/Constant'
 import ReportContentType from '../../constant/ReportContentType'
 import ReportType from '../../constant/ReportType'
 import ReportAddVO from '../../model/report/ReportAddVO'
-import ReportAPI from '../../api/ReportAPI'
+import ReportAPI from '../../api/socialuni/ReportAPI'
 import TalkOperate from '../SocialTalk/talkOperate.vue'
 import TalkVO from '../../model/talk/TalkVO'
 import MsgUtil from '../../utils/MsgUtil'
 import ConfigMap from '../../constant/ConfigMap'
 import PlatformUtils from '../../utils/PlatformUtils'
-import { socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore } from '../../store'
+import {socialAppStore, socialConfigStore, socialSystemStore, socialUserModule, socialUserStore} from '../../store'
 import QRowItem from '../../../qing-ui/components/QRowItem/QRowItem.vue'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
@@ -406,7 +406,7 @@ export default class UserInfo extends Vue {
 
   showUserContactBtnDisabled = false
 
-  toMessagePage () {
+  toMessagePage() {
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
     //mock chat
@@ -452,7 +452,7 @@ export default class UserInfo extends Vue {
   }*/
 
 
-  openReportDialog () {
+  openReportDialog() {
     if (this.userProp) {
       this.$refs.reportDialog.open()
     } else {
@@ -460,15 +460,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  frontDeleteUserImg () {
+  frontDeleteUserImg() {
     this.userProp.imgs.splice(this.imgIndex, 1)
   }
 
-  reportTypeChange ({ target }) {
+  reportTypeChange({target}) {
     this.reportType = target.value
   }
 
-  addReport () {
+  addReport() {
     const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
     const userImg: ImgFileVO = this.userProp.imgs[0]
     reportAdd.contentId = userImg.id
@@ -488,18 +488,18 @@ export default class UserInfo extends Vue {
     }
   }
 
-  closeDialogAndInitData () {
+  closeDialogAndInitData() {
     this.$refs.reportDialog.close()
     this.initReportData()
   }
 
-  initReportData () {
+  initReportData() {
     this.imgIndex = 0
     this.reportContent = ''
     this.reportType = ReportType.pornInfo
   }
 
-  get bottomMenuItemList () {
+  get bottomMenuItemList() {
     if (this.isMine) {
       return ['上传', '删除']
     } else {
@@ -507,7 +507,7 @@ export default class UserInfo extends Vue {
     }
   }
 
-  showBottomMenuClick (imgIndex: number) {
+  showBottomMenuClick(imgIndex: number) {
     this.imgIndex = imgIndex
     UniUtil.actionSheet(this.bottomMenuItemList).then((index: number) => {
       if (this.isMine) {
@@ -524,7 +524,7 @@ export default class UserInfo extends Vue {
     })
   }
 
-  deleteImg () {
+  deleteImg() {
     if (this.userProp.imgs.length > 1) {
       AlertUtil.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
@@ -538,7 +538,7 @@ export default class UserInfo extends Vue {
   }
 
 
-  async chooseImg () {
+  async chooseImg() {
     if (this.mineUser.imgs.length > 2) {
       ToastUtil.toastLong('最多上传3张照片，请删除后继续！')
       return
@@ -558,43 +558,43 @@ export default class UserInfo extends Vue {
     }
   }
 
-  async toPhonePage () {
+  async toPhonePage() {
     await PageUtil.toPhonePage()
   }
 
-  toIdentityAuth () {
+  toIdentityAuth() {
     MsgUtil.identityAuthHint()
   }
 
-  openVip () {
+  openVip() {
     PageUtil.toVipPage()
   }
 
-  get isMine (): boolean {
+  get isMine(): boolean {
     // 两个都有值，且两个都相等，才为自己
     return this.userProp && this.mineUser && this.userProp.id === this.mineUser.id
   }
 
-  get talkIds () {
+  get talkIds() {
     if (this.talks.length) {
       return this.talks.map(item => item.id)
     }
     return []
   }
 
-  copyText (textCopy: string) {
+  copyText(textCopy: string) {
     UniUtil.textCopy(textCopy)
   }
 
-  deleteTalk (talkId: number) {
+  deleteTalk(talkId: number) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
-  closeUserEditPop () {
+  closeUserEditPop() {
     this.$refs.editPopup.close()
   }
 
-  moreAction () {
+  moreAction() {
     if (this.isMine) {
       const menuList: string [] = ['刷新', '编辑', '退出登录']
       UniUtil.actionSheet(menuList).then((index: number) => {
@@ -613,7 +613,7 @@ export default class UserInfo extends Vue {
     this.openEditDialog()
   }*/
 
-  openEditDialog () {
+  openEditDialog() {
     this.$refs.editPopup.open()
   }
 
@@ -621,14 +621,14 @@ export default class UserInfo extends Vue {
     deep: true,
     immediate: true
   })
-  watchUserChange (newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
+  watchUserChange(newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {
       this.queryMineTalks()
     }
   }
 
-  queryMineTalks () {
+  queryMineTalks() {
     if (this.userProp) {
       this.followStatus = FollowStatus.getFollowStatus(this.userProp)
       this.hasFollowed = this.userProp.hasFollowed
@@ -639,21 +639,21 @@ export default class UserInfo extends Vue {
   }
 
 
-  getGenderIcon (user: CenterUserDetailRO) {
+  getGenderIcon(user: CenterUserDetailRO) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor (user: CenterUserDetailRO) {
+  getGenderBgColor(user: CenterUserDetailRO) {
     return UserUtil.getGenderBgColor(user)
   }
 
-  toFollowVue () {
+  toFollowVue() {
     if (this.isMine) {
       RouterUtil.navigateTo(PagePath.userFollow)
     }
   }
 
-  toLoveValuePage () {
+  toLoveValuePage() {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
     } else {
@@ -661,15 +661,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  hintJusticeInfo () {
+  hintJusticeInfo() {
     ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
-  hintBindTwice () {
+  hintBindTwice() {
     AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
-  addFollow () {
+  addFollow() {
     if (this.mineUser) {
       if (!this.followBtnDisabled) {
         this.followBtnDisabled = true
@@ -700,15 +700,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  getFollowStatusColor (followStatus: string) {
+  getFollowStatusColor(followStatus: string) {
     return UserUtil.getFollowStatusColor(followStatus)
   }
 
-  toFaceValuePage () {
+  toFaceValuePage() {
     PageUtil.toFaceValuePage()
   }
 
-  get imgUrls () {
+  get imgUrls() {
     if (this.userProp && this.userProp.imgs) {
       return this.userProp.imgs.map(item => ImgUtil.getUserLargeImgUrl(item.src))
     } else {
@@ -716,7 +716,7 @@ export default class UserInfo extends Vue {
     }
   }
 
-  previewImage (e) {
+  previewImage(e) {
     const current = e.target.dataset.src
     uni.previewImage({
       current: current,
@@ -724,12 +724,12 @@ export default class UserInfo extends Vue {
     })
   }
 
-  closeUploadImgHint () {
+  closeUploadImgHint() {
     this.showUploadImgHint = false
     uni.setStorageSync(Constants.showUploadImgHintKey, 'false')
   }
 
-  refreshMine () {
+  refreshMine() {
     AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -737,12 +737,12 @@ export default class UserInfo extends Vue {
     })
   }
 
-  loginOut () {
+  loginOut() {
     socialUserModule.loginOut()
   }
 
   //前往贝壳页面
-  toUserShell () {
+  toUserShell() {
     PageUtil.toShellPage()
   }
 

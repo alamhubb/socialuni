@@ -127,7 +127,7 @@
 </template>
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-property-decorator'
-import TalkAPI from '../../api/TalkAPI'
+import TalkAPI from '../../api/socialuni/TalkAPI'
 import UniUtil from '../../utils/UniUtil'
 import DistrictVO from '../../model/DistrictVO'
 import JsonUtils from '../../utils/ObjectUtil'

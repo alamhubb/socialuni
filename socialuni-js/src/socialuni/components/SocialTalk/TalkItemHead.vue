@@ -79,14 +79,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
 import FollowAddVO from '../../model/FollowAddVO'
 import PagePath from '../../constant/PagePath'
-import TalkAPI from '../../api/TalkAPI'
+import TalkAPI from '../../api/socialuni/TalkAPI'
 import UserUtil from '../../utils/UserUtil'
 import JsonUtils from '../../utils/ObjectUtil'
-import FollowAPI from '../../api/FollowAPI'
+import FollowAPI from '../../api/socialuni/FollowAPI'
 import PageUtil from '../../utils/PageUtil'
 import MsgUtil from '../../utils/MsgUtil'
 import TalkTabType from '../../constant/TalkTabType'
@@ -96,7 +96,7 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import AlertUtil from '../../utils/AlertUtil'
 import ToastUtil from '../../utils/ToastUtil'
 import SocialuniConfig from '../../config/SocialuniConfig'
-import { socialUserStore } from '../../store'
+import {socialUserStore} from '../../store'
 import SocialGenderTag from '@/socialuni/components/SocialGenderTag/SocialGenderTag.vue'
 
 @Component({
@@ -117,21 +117,21 @@ export default class TalkItemHead extends Vue {
   followType: string = TalkTabType.follow_type
 
   @Watch('talkProp')
-  talkPropWatch () {
+  talkPropWatch() {
     this.talk = JsonUtils.deepClone(this.talkProp)
   }
 
-  created () {
+  created() {
     if (RouterUtil.getCurrentPageURI() === PagePath.userDetail) {
       this.isUserDetail = true
     }
   }
 
-  toIdentityAuth () {
+  toIdentityAuth() {
     MsgUtil.identityAuthHint()
   }
 
-  toLoveValuePage () {
+  toLoveValuePage() {
     if (this.user) {
       if (SocialuniConfig.authApp) {
         PageUtil.toLoveValuePage()
@@ -141,22 +141,22 @@ export default class TalkItemHead extends Vue {
     }
   }
 
-  hintJusticeInfo () {
+  hintJusticeInfo() {
     ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己
-  get isMine (): boolean {
+  get isMine(): boolean {
     return this.user && this.user.id === this.talk.user.id
   }
 
-  toUserDetailVue () {
+  toUserDetailVue() {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
       RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + this.talk.user.id)
     }
   }
 
-  confirmDeleteTalk () {
+  confirmDeleteTalk() {
     AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       TalkAPI.deleteTalkAPI(this.talk.id).then(() => {
@@ -165,11 +165,11 @@ export default class TalkItemHead extends Vue {
     })
   }
 
-  openVip () {
+  openVip() {
     PageUtil.toVipPage()
   }
 
-  addFollow () {
+  addFollow() {
     if (this.user) {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
@@ -194,16 +194,16 @@ export default class TalkItemHead extends Vue {
     }
   }
 
-  getGenderIcon (user
-    :
-    CenterUserDetailRO
+  getGenderIcon(user
+                  :
+                  CenterUserDetailRO
   ) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor (user
-    :
-    CenterUserDetailRO
+  getGenderBgColor(user
+                     :
+                     CenterUserDetailRO
   ) {
     return UserUtil.getGenderBgColor(user)
   }

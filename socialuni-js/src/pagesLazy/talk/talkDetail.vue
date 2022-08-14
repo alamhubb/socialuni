@@ -44,16 +44,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import TalkItem from '@/socialuni/components/SocialTalk/TalkItem.vue'
 import TalkOperate from '@/socialuni/components/SocialTalk/talkOperate.vue'
 import TalkVO from '@/socialuni/model/talk/TalkVO'
-import { socialAppStore } from '@/socialuni/store'
+import {socialAppStore} from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
-import TalkAPI from '@/socialuni/api/TalkAPI'
+import TalkAPI from '@/socialuni/api/socialuni/TalkAPI'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 
 @Component({
@@ -70,11 +70,11 @@ export default class TalkDetail extends Vue {
   showMsgInput = false
   @socialAppStore.State('appConfig') readonly appConfig: object
 
-  deleteTalk () {
+  deleteTalk() {
     RouterUtil.goBackOrHome()
   }
 
-  onLoad (params) {
+  onLoad(params) {
     const talkId = params.talkId
     TalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
       this.talk = res.data
@@ -82,19 +82,19 @@ export default class TalkDetail extends Vue {
     })
   }
 
-  goHome () {
+  goHome() {
     PageUtil.goHome()
   }
 
-  goBack () {
+  goBack() {
     RouterUtil.goBackOrHome()
   }
 
-  onShow () {
+  onShow() {
     this.showMsgInput = true
   }
 
-  onHide () {
+  onHide() {
     this.showMsgInput = false
   }
 }

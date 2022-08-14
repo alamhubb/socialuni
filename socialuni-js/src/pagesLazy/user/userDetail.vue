@@ -7,28 +7,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import UserAPI from '@/socialuni/api/UserAPI'
+import UserAPI from '@/socialuni/api/socialuni/UserAPI'
 import MsgInput from '@/socialuni/components/MsgInput.vue'
 import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
 
 @Component({
-  components: { MsgInput, UserInfo }
+  components: {MsgInput, UserInfo}
 })
 export default class UserDetail extends Vue {
   user: CenterUserDetailRO = null
   showMsgInput = false
 
-  onShow () {
+  onShow() {
     this.showMsgInput = true
   }
 
-  onHide () {
+  onHide() {
     this.showMsgInput = false
   }
 
-  onLoad (params) {
+  onLoad(params) {
     const userId = params.userId
     // 这里有问题，有时候直接进入页面没有userId
     UserAPI.queryUserDetailAPI(userId).then((res: any) => {

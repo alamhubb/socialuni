@@ -9,7 +9,7 @@
           </view>
           <view>
             <label class="ml-10" :for="report">
-              <text>{{report}}</text>
+              <text>{{ report }}</text>
             </label>
           </view>
         </label>
@@ -30,72 +30,72 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-property-decorator'
 import ReportType from '../../constant/ReportType'
 import ReportContentType from '../../constant/ReportContentType'
 import MessageVO from '../../model/message/MessageVO'
 import ReportAddVO from '../../model/report/ReportAddVO'
-import ReportAPI from '../../api/ReportAPI'
+import ReportAPI from '../../api/socialuni/ReportAPI'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import MsgUtil from '../../utils/MsgUtil'
 import PlatformUtils from '../../utils/PlatformUtils'
 import AlertUtil from '../../utils/AlertUtil'
-import { socialAppStore, socialChatModule, socialUserStore } from '../../store'
+import {socialAppStore, socialChatModule, socialUserStore} from '../../store'
 
 @Component
 export default class ReportDialog extends Vue {
-    public $refs!: {
-      reportDialog: any;
-    }
+  public $refs!: {
+    reportDialog: any;
+  }
 
-    @socialAppStore.State('reportTypes') reportTypes: string[]
-    @socialAppStore.State('appConfig') readonly appConfig: object
-    @Prop() readonly reportInfo: MessageVO
-    @Prop() readonly reportInfoType: string
-    @socialUserStore.State('user') user: CenterUserDetailRO
-    reportType: string = ReportType.pornInfo
-    pornInfo: string = ReportType.pornInfo
-    reportContent = ''
-    reportContentType: string = ReportContentType.message
+  @socialAppStore.State('reportTypes') reportTypes: string[]
+  @socialAppStore.State('appConfig') readonly appConfig: object
+  @Prop() readonly reportInfo: MessageVO
+  @Prop() readonly reportInfoType: string
+  @socialUserStore.State('user') user: CenterUserDetailRO
+  reportType: string = ReportType.pornInfo
+  pornInfo: string = ReportType.pornInfo
+  reportContent = ''
+  reportContentType: string = ReportContentType.message
 
-    openReport () {
-      if (this.user) {
-        this.$refs.reportDialog.open()
-      } else {
-        MsgUtil.unLoginMessage()
-      }
+  openReport() {
+    if (this.user) {
+      this.$refs.reportDialog.open()
+    } else {
+      MsgUtil.unLoginMessage()
     }
+  }
 
-    closeDialogAndInitData () {
-      this.$refs.reportDialog.close()
-      this.initReportData()
-    }
+  closeDialogAndInitData() {
+    this.$refs.reportDialog.close()
+    this.initReportData()
+  }
 
-    initReportData () {
-      this.reportContent = ''
-      this.reportContentType = ReportContentType.message
-      this.reportType = ReportType.pornInfo
-    }
+  initReportData() {
+    this.reportContent = ''
+    this.reportContentType = ReportContentType.message
+    this.reportType = ReportType.pornInfo
+  }
 
-    reportTypeChange ({ target }) {
-      this.reportType = target.value
-    }
+  reportTypeChange({target}) {
+    this.reportType = target.value
+  }
 
-    addReport () {
-      const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
-      reportAdd.contentId = this.reportInfo.id
-      if (ReportType.other === this.reportType && !this.reportContent) {
-        AlertUtil.hint('选择其他违规时，请您补充观点')
-      } else {
-        ReportAPI.addReportAPI(reportAdd).then((res: any) => {
-          socialChatModule.deleteMsgAction(reportAdd.contentId)
-          // 调用删除内容
-          // 关闭弹框病初始化数据
-          this.closeDialogAndInitData()
-          AlertUtil.hint(res.data)
-          PlatformUtils.requestSubscribeReport()
-        })
-      }
+  addReport() {
+    const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
+    reportAdd.contentId = this.reportInfo.id
+    if (ReportType.other === this.reportType && !this.reportContent) {
+      AlertUtil.hint('选择其他违规时，请您补充观点')
+    } else {
+      ReportAPI.addReportAPI(reportAdd).then((res: any) => {
+        socialChatModule.deleteMsgAction(reportAdd.contentId)
+        // 调用删除内容
+        // 关闭弹框病初始化数据
+        this.closeDialogAndInitData()
+        AlertUtil.hint(res.data)
+        PlatformUtils.requestSubscribeReport()
+      })
     }
+  }
 }
 </script>

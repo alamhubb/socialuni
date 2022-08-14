@@ -76,10 +76,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from '../../model/talk/TalkVO'
 import PagePath from '../../constant/PagePath'
-import TalkAPI from '../../api/TalkAPI'
+import TalkAPI from '../../api/socialuni/TalkAPI'
 import ReportContentType from '../../constant/ReportContentType'
 import HugAddVO from '../../model/HugAddVO'
 import ChildComment from './ChildComment.vue'
@@ -87,7 +87,7 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 import CommentVO from '../../model/comment/CommentVO'
 import TalkUtil from '../../utils/TalkUtil'
 import JsonUtils from '../../utils/ObjectUtil'
-import { socialTalkModule, socialUserStore } from '../../store'
+import {socialTalkModule, socialUserStore} from '../../store'
 import MsgUtil from '../../utils/MsgUtil'
 import RouterUtil from '../../utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
@@ -114,19 +114,19 @@ export default class TalkItemComment extends Vue {
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)
 
   @Watch('talkProp')
-  talkPropWatch () {
+  talkPropWatch() {
     this.talk = JsonUtils.deepClone(this.talkProp)
   }
 
   // 打开更多操作评论弹框，复制删除，举报
-  openCommentActionDialog (comment: CommentVO) {
+  openCommentActionDialog(comment: CommentVO) {
     socialTalkModule.talk = this.talk
     socialTalkModule.comment = comment
     socialTalkModule.commentActionShow = true
   }
 
   // 打开举报talk弹框
-  openReportDialog () {
+  openReportDialog() {
     console.log(123123)
     if (this.user) {
       socialTalkModule.talk = this.talk
@@ -137,16 +137,16 @@ export default class TalkItemComment extends Vue {
     }
   }
 
-  showShareMenu () {
+  showShareMenu() {
     UniUtil.showShareMenu()
   }
 
 
-  setTalk () {
+  setTalk() {
     socialTalkModule.setTalk(this.talk)
   }
 
-  addHug () {
+  addHug() {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
@@ -162,7 +162,7 @@ export default class TalkItemComment extends Vue {
     }
   }
 
-  toUserDetail (userId: string) {
+  toUserDetail(userId: string) {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
       RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
     }
@@ -170,13 +170,13 @@ export default class TalkItemComment extends Vue {
 
   showOtherCommentClicked = false
 
-  toTalkDetailVue () {
+  toTalkDetailVue() {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
 
-  get commentLimitNum () {
+  get commentLimitNum() {
     if (this.showAllComment || this.showOtherCommentClicked) {
       return this.talk.commentNum
     } else {
@@ -184,22 +184,22 @@ export default class TalkItemComment extends Vue {
     }
   }
 
-  get commentShowNum () {
+  get commentShowNum() {
     return this.talk.commentNum > this.commentLimitNum ? (this.commentLimitNum - 1) : this.commentLimitNum
   }
 
-  setComment (talk, comment) {
+  setComment(talk, comment) {
     socialTalkModule.setComment({
       talk,
       comment
     })
   }
 
-  getHugIcon (hasHugged) {
+  getHugIcon(hasHugged) {
     return TalkUtil.getHugIcon(hasHugged)
   }
 
-  getHugColor (hasHugged) {
+  getHugColor(hasHugged) {
     return TalkUtil.getHugColor(hasHugged)
   }
 }

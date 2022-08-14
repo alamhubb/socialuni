@@ -1,10 +1,10 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
+import {Action, Module, VuexModule} from 'vuex-class-modules'
 import TagVO from '../model/community/tag/TagVO'
 import TagTypeVO from '../model/community/tag/TagTypeVO'
-import TagAPI from '../api/TagAPI'
+import TagAPI from '../api/socialuni/TagAPI'
 import TagStorageUtil from '@/socialuni/constant/TagStorageUtil'
 
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialTagModule extends VuexModule {
   tags: TagVO[] = []
   tagTypes: TagTypeVO[] = []
@@ -14,7 +14,7 @@ export default class SocialTagModule extends VuexModule {
   //最多存4个
   mineHistoryTagNames: string[] = TagStorageUtil.getTagNames()
 
-  get selectTagNames () {
+  get selectTagNames() {
     if (this.selectTagName) {
       return [this.selectTagName]
     }
@@ -22,7 +22,7 @@ export default class SocialTagModule extends VuexModule {
   }
 
   //可以加一个使用过的circle列表
-  get mineTagsTop10 () {
+  get mineTagsTop10() {
     const selectTagNames: string[] = [null]
     if (this.selectTag) {
       selectTagNames.push(this.selectTagName)
@@ -38,7 +38,7 @@ export default class SocialTagModule extends VuexModule {
   }
 
   @Action
-  getHotTagsAction () {
+  getHotTagsAction() {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
     return TagAPI.queryHotTagsAPI().then((res: any) => {
       this.tags = res.data
@@ -47,7 +47,7 @@ export default class SocialTagModule extends VuexModule {
 
   //应该查询前20条已读和未读通知，然后有未读通知推送
   @Action
-  getTagsAction () {
+  getTagsAction() {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
     return TagAPI.queryTagsAPI().then((res: any) => {
       this.tags = res.data
@@ -55,7 +55,7 @@ export default class SocialTagModule extends VuexModule {
   }
 
   @Action
-  getHotTagTypesAction () {
+  getHotTagTypesAction() {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
     return TagAPI.queryHotTagTypesAPI().then((res: any) => {
       this.tagTypes = res.data
@@ -66,7 +66,7 @@ export default class SocialTagModule extends VuexModule {
   }
 
   @Action
-  getTagTypesAction () {
+  getTagTypesAction() {
     if (!this.tagTypes[1] || !this.tagTypes[1].tags || !this.tagTypes[1].tags.length) {
       // 查询前20条，未读优先，如果没有未读，就是按时间排序
       return TagAPI.queryTagTypesAPI().then((res: any) => {
@@ -75,12 +75,12 @@ export default class SocialTagModule extends VuexModule {
     }
   }
 
-  setSelectTagName (selectTagName: string) {
+  setSelectTagName(selectTagName: string) {
     this.selectTagName = selectTagName
     this.setMineHistoryTagNames(selectTagName)
   }
 
-  get selectTagIds (): number[] {
+  get selectTagIds(): number[] {
     if (this.selectTag) {
       return [this.selectTag.id]
     } else {
@@ -88,7 +88,7 @@ export default class SocialTagModule extends VuexModule {
     }
   }
 
-  setMineHistoryTagNames (tagName: string) {
+  setMineHistoryTagNames(tagName: string) {
     if (tagName) {
       this.mineHistoryTagNames.unshift(tagName)
       this.mineHistoryTagNames = this.mineHistoryTagNames.slice(0, 4)

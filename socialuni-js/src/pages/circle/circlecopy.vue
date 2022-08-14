@@ -7,7 +7,7 @@
       <u-form-item label="圈子描述：">
         <u-input type="textarea" height="140" v-model="circleForm.circleDesc"/>
       </u-form-item>
-      <u-form-item label="圈子分类："  prop="tagTypeId">
+      <u-form-item label="圈子分类：" prop="tagTypeId">
         <q-select v-model="circleForm.tagTypeId" :list="selectTagTypes" label-name="name" value-name="id"></q-select>
 
         <!--        <u-input type="select" :select-open="selectShow" :value="circleForm.tagTypeId"
@@ -26,21 +26,21 @@
 
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import CircleCreateQO from '@/socialuni/model/community/circle/CircleCreateQO'
-import CircleAPI from '@/socialuni/api/CircleAPI'
-import { socialTagStore } from '@/socialuni/store'
+import CircleAPI from '@/socialuni/api/socialuni/CircleAPI'
+import {socialTagStore} from '@/socialuni/store'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import QSelect from '@/qing-ui/components/QSelect/QSelect.vue'
 
 @Component({
-  components: { QSelect, QIcon }
+  components: {QSelect, QIcon}
 })
 export default class CirclePage extends Vue {
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
 
-  get selectTagTypes () {
+  get selectTagTypes() {
     return this.tagTypes.slice(1, this.tagTypes.length - 1)
   }
 
@@ -66,12 +66,12 @@ export default class CirclePage extends Vue {
 
   circleForm = new CircleCreateQO()
 
-  selectConfirm (values: { value: number }[]) {
+  selectConfirm(values: { value: number }[]) {
     this.circleForm.tagTypeId = values[0].value
   }
 
   // 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
-  onReady () {
+  onReady() {
     this.$refs.uForm.setRules(this.rules)
   }
 
@@ -93,7 +93,7 @@ export default class CirclePage extends Vue {
   }
 
 
-  submit () {
+  submit() {
     this.$refs.uForm.validate(valid => {
       if (valid) {
         CircleAPI.createCircleAPI(this.circleForm)
