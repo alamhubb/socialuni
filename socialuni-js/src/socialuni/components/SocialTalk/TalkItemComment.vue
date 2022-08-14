@@ -111,6 +111,7 @@ export default class TalkItemComment extends Vue {
     default: false
   }) readonly showAllComment: boolean
 
+  //列表变化，内容没更新的问题
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)
 
   @Watch('talkProp')
