@@ -1,4 +1,4 @@
-package com.socialuni.web.controller.socialuni;
+package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.feignAPI.SocialuniReportAPI;

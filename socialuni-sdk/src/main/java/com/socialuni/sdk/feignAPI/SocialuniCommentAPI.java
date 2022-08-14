@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@RequestMapping("comment")
+@RequestMapping("socialuni/comment")
 @FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniCommentAPI {
     @PostMapping("postComment")

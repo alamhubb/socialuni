@@ -1,13 +1,13 @@
 import JsonUtils from './ObjectUtil'
 import TokenUtil from './TokenUtil'
-import ErrorCode from '../constant/ErrorCode'
+import ErrorConst from '../constant/ErrorConst'
 import CommonUtil from './CommonUtil'
 
 export default class ImgUtil {
   // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'
   static readonly uploadImgUrl: string = process.env.VUE_APP_BASE_API + 'upload/img/'
 
-  static uploadImgNewAPI(uploadImg: string, type: string): Promise<any> {
+  static uploadImgNewAPI (uploadImg: string, type: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
@@ -20,7 +20,7 @@ export default class ImgUtil {
           type: type// 自己系统中的用户id
         },
         success: res => {
-          if (res.statusCode === ErrorCode.success) {
+          if (res.statusCode === ErrorConst.success) {
             resolve(JsonUtils.toParse(res.data))
           } else {
             reject(JsonUtils.toParse(res.data))
@@ -33,7 +33,7 @@ export default class ImgUtil {
     })
   }
 
-  static uploadImgAPI(uploadImg: string, type: string): Promise<any> {
+  static uploadImgAPI (uploadImg: string, type: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
@@ -46,7 +46,7 @@ export default class ImgUtil {
           type: type// 自己系统中的用户id
         },
         success: res => {
-          if (res.statusCode === ErrorCode.success) {
+          if (res.statusCode === ErrorConst.success) {
             resolve(JsonUtils.toParse(res.data))
           } else {
             reject(JsonUtils.toParse(res.data))
@@ -59,41 +59,41 @@ export default class ImgUtil {
     })
   }
 
-  static getTalkLargeImgUrl(userId: string, src: string): string {
+  static getTalkLargeImgUrl (userId: string, src: string): string {
     // 如果包含'/'则代表是新逻辑
     return src + '!normal'
   }
 
-  static getTalkSmallImgUrl(userId: string, src: string): string {
+  static getTalkSmallImgUrl (userId: string, src: string): string {
     // 如果包含'/'则代表是新逻辑
     return src + '!thumbnail'
   }
 
-  static getUserSmallImgUrl(src: string): string {
+  static getUserSmallImgUrl (src: string): string {
     return src + '!thumbnail'
   }
 
-  static getUserLargeImgUrl(src: string): string {
+  static getUserLargeImgUrl (src: string): string {
     return src + '!normal'
   }
 
-  static getTalkUploadFormat(userId: string, filePath: string): string {
+  static getTalkUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/talk/normal/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserAvatarUploadFormat(userId: string, filePath: string): string {
+  static getUserAvatarUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/avatar/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserImgUploadFormat(userId: string, filePath: string): string {
+  static getUserImgUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/img/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getUserIdentityUploadFormat(userId: string, filePath: string): string {
+  static getUserIdentityUploadFormat (userId: string, filePath: string): string {
     return 'user/' + userId + '/identity/' + CommonUtil.getUUID() + ImgUtil.getFileSuffixName(filePath)
   }
 
-  static getFileSuffixName(filePath: string): string {
+  static getFileSuffixName (filePath: string): string {
     //有可能存在asfasdf.fasdfasd.123123123dsfasdffasdf3213这种乱格式
     //如果不包含.则默认jpg
     if (filePath.indexOf('.') < 0) {

@@ -21,7 +21,7 @@ import javax.validation.Valid;
  * @date 2021-07-28 11:09
  * 前端初始化内容
  */
-@RequestMapping("qingchi")
+@RequestMapping("socialuni/qingchi")
 @FeignClient(name = "qingchi", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniQingchiAPI {
     @PostMapping("providerLogin")

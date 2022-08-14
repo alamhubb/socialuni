@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("follow")
+@RequestMapping("socialuni/follow")
 @FeignClient(name = "follow", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniFollowAPI {
 

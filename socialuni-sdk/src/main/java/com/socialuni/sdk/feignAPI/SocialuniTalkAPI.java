@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("talk")
+@RequestMapping("socialuni/talk")
 @FeignClient(name = "talk", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTalkAPI {
     @GetMapping("queryTalks")

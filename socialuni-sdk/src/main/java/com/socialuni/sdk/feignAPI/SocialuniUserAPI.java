@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 
-@RequestMapping("user")
+@RequestMapping("socialuni/user")
 @FeignClient(name = "user", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniUserAPI {
     @PostMapping("getMineUser")

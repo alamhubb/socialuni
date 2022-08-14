@@ -1,4 +1,4 @@
-package com.socialuni.web.controller.socialuni;
+package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.feignAPI.SocialuniDistrictAPI;

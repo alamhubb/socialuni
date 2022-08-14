@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@RequestMapping("hug")
+@RequestMapping("socialuni/hug")
 @FeignClient(name = "hug", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniHugAPI {
     @PostMapping("addHug")

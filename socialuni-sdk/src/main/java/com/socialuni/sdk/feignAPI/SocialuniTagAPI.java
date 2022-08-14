@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("tag")
+@RequestMapping("socialuni/tag")
 @FeignClient(name = "tag", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTagAPI {
     @PostMapping("addTag")

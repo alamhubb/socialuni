@@ -1,4 +1,4 @@
-package com.socialuni.web.controller.socialuni;
+package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniFollowAPI;
 import com.socialuni.sdk.model.QO.follow.CenterFollowAddQO;

@@ -1,4 +1,4 @@
-package com.socialuni.web.controller.socialuni;
+package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniChatAPI;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;

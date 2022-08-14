@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2018-11-18 20:45
  */
 
-@RequestMapping("district")
+@RequestMapping("socialuni/district")
 @FeignClient(name = "district", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniDistrictAPI {
     @PostMapping("queryHotDistricts")

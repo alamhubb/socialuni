@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("report")
+@RequestMapping("socialuni/report")
 @FeignClient(name = "report", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniReportAPI {
     @PostMapping("addReport")

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 
-@RequestMapping("userIdentity")
+@RequestMapping("socialuni/userIdentity")
 @FeignClient(name = "userIdentity", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniUserIdentityAPI {
 //    @PostMapping("idImgAuthPreCheck")
