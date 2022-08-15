@@ -3,13 +3,14 @@ spring:
 #    active: devprod
 #    active: localdevprod
 #    active: local
-    active: qkylocal
+    active: localpre
+#    active: qkylocal
 #    active: qkypc
 #    active: demo
 #    active: prod
 #    active: localprod
   datasource:
-    initialization-mode: always
+    initialization-mode: never
     data: classpath:dataInit/data.sql
   jpa:
     database: MYSQL

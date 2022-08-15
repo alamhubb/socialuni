@@ -1,0 +1,80 @@
+socialuni:
+  socialuni-id: "17e212a46c7b4e5ebc70a934bef4ed27"
+  app:
+    static-resource-url: "https://devcdxapp-1257733245.file.myqcloud.com"
+    system-user-id: 1
+  user:
+    token-secret-key: "cf902df9f1c04f868d51ce8920f555bc"
+  provider:
+    qq:
+      qq-mp-id: "1109985787"
+      qq-mp-secret: "9nybzpBQDkDgEW0Z"
+      qq-merchant-id: ""
+      qq-merchant-key: ""
+    wx:
+      wx-app-id: "wx682b729afd398217"
+      wx-mp-id: "wx0bf5fe9ceeab514c"
+      wx-mp-secret: "888e23c5d82cb185c433c541c43a6cea"
+      wx-merchant-id: ""
+      wx-merchant-key: ""
+  cloud:
+    tencent:
+      cos:
+        secret-id: "AKIDzJM9gxOoPlsmQo7pVw73kBLFtKWTGfuv"
+        secret-key: "w0preCKDpwwnYAakfOxKWVFcnlV6UeYE"
+        region: "ap-beijing"
+        bucket-name: "devcdxapp-1257733245"
+      sms:
+        app-id: 1400346447
+        app-key: "f00e0cab3f16d5bd30dbf7097c3d0d51"
+        sms-sign: "清池交友"
+        template-id: 570636
+  map:
+    qq:
+      secret-key: "FZDBZ-5XCLO-OCYW6-SRG4Y-ZFP7O-IJBSD"
+server:
+  port: 8091
+  ssl:
+    # 证书名称
+    key-store: localpc.socialuni.cn.jks
+    #密钥库密码
+    key-store-password: fx6541k7gmz
+    key-store-type: JKS
+spring:
+  datasource:
+    url: jdbc:mysql://bj-cdb-3dq1yzws.sql.tencentcdb.com:60459/socialuni_preprod?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 2012aihO
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      read-only: false
+      #等待连接池分配连接的最大时长（毫秒）
+      connection-timeout: 600000
+      #一个连接idle状态的最大时长（毫秒），超时则被释放
+      idle-timeout: 600000
+      #一个连接的生命时长（毫秒），超时而且没被使用则被释放
+      max-lifetime: 1800000
+      login-timeout: 600
+      #连接池中允许的最大连接数。缺省值：10；推荐的公式：((CPU内核数量 * 2) + 硬盘数量)
+      maximum-pool-size: 600
+      minimum-idle: 30
+  # REDIS (RedisProperties)
+  # Redis数据库索引（默认为0）
+  redis:
+    database: 0
+    # Redis服务器地址
+    host: "127.0.0.1"
+    # Redis服务器连接端口
+    port: 6379
+    # 连接超时时间（毫秒）
+    timeout: 30s
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 500
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 50
+        # 连接池中的最小空闲连接
+        min-idle: 30

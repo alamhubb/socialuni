@@ -50,6 +50,7 @@ public class UnionIdDbUtil {
         return createUnionIdByContentType(ContentType.user);
     }
 
+
     public static Integer createTalkUnionId() {
         return createUnionIdByContentType(ContentType.talk);
     }

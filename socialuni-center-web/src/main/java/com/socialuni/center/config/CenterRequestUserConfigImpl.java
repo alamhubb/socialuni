@@ -5,6 +5,7 @@ import com.socialuni.sdk.config.SocialRequestUserConfigDefaultImpl;
 import com.socialuni.sdk.config.SocialTokenUtil;
 import com.socialuni.sdk.model.DO.user.SocialTokenDO;
 import com.socialuni.sdk.repository.CommonTokenRepository;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -25,8 +26,12 @@ public class CenterRequestUserConfigImpl extends SocialRequestUserConfigDefaultI
 
     @Override
     public Integer getUserId() {
+        Integer devId = DevAccountUtils.getDevIdNotNull();
+        if (devId == 1) {
+            return super.getUserId();
+        }
         String token = SocialTokenUtil.getToken();
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             return null;
         }
         SocialTokenDO socialTokenDO = commonTokenRepository.findOneByToken(token);
