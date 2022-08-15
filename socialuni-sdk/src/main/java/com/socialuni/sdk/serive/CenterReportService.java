@@ -28,6 +28,11 @@ public class CenterReportService {
     DevAccountRepository devAccountRepository;
 
     public ResultRO<String> addReport(CenterReportAddQO centerReportAddQO) {
+        //如果应用，则调用中心
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniReportAPI.addReport(centerReportAddQO);
+        }
+
         Integer contentId = UnionIdDbUtil.getUnionIdByUidNotNull(centerReportAddQO.getContentId());
 
         SocialReportAddQO socialReportAddQO = centerReportAddQO.toSocialQO(contentId);
@@ -35,12 +40,6 @@ public class CenterReportService {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         ResultRO<String> resultRO = soicialReportAddDomain.addReport(socialReportAddQO);
 
-        //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
-            return socialuniReportAPI.addReport(centerReportAddQO);
-        }
-
         return resultRO;
-
     }
 }

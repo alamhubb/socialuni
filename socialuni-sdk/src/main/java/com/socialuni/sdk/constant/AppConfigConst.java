@@ -22,6 +22,11 @@ public class AppConfigConst {
     public static final String authCodeValidMinuteKey = "验证码有效时间多少分";
     public static final String authCodeIntervalKey = "验证码间隔多少秒";
 
+    public static final String highLimitReportCountKey = "限制每天高质量举报次数";
+    public static final String reportCountHideKey = "被举报几次隐藏";
+    public static final Integer reportCountHide = 1;
+
+
     public static final Map<String, Object> appConfigMap = new HashMap<String, Object>(){{
         put(AppConfigConst.talkShowAdIntervalKey, 8);
         put(AppConfigConst.talkShowAdCountKey, 10);
@@ -30,8 +35,13 @@ public class AppConfigConst {
         put(AppConfigConst.authCodePhoneCountKey, 30);
         put(AppConfigConst.authCodeValidMinuteKey, 30);
         put(AppConfigConst.authCodeIntervalKey, 120);
+        put(AppConfigConst.highLimitReportCountKey, 20);
+        put(AppConfigConst.reportCountHideKey, 1);
     }};
 
+
+    //限制每天高质量举报次数
+    public static final Integer highLimitReportCount = 20;
 
     public static final Integer qingchiDevId = 1;
     public static final String appConfig = "appConfig";
@@ -76,17 +86,10 @@ public class AppConfigConst {
     //低于多少分限制举报
     public static final String limitReportKey = "低于多少分限制举报";
     public static final Integer limitReportValue = -10;
-    //限制每天高质量举报次数
-    public static final String highLimitReportCountKey = "限制每天高质量举报次数";
-    public static final Integer highLimitReportCount = 20;
     //限制每天低质量举报次数
     public static final String lowLimitReportCountKey = "限制每天低质量举报次数";
     public static final Integer lowLimitReportCount = 2;
     //被多少人举报则隐藏
-    public static final String reportCountHideKey = "被举报几次隐藏";
-    public static final Integer reportCountHide = 1;
-
-
 
 
     public static final String notify_skip_page = "/pagesLazy/talk/talkDetail?talkId=";

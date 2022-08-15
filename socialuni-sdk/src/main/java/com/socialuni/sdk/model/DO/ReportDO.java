@@ -103,7 +103,10 @@ public class ReportDO implements Serializable {
     private String reportSourceType;
     private Integer antispamId;
     private Integer devId;
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer reportNum;
 
     public ReportDO() {
+        reportNum = 0;
     }
 }

@@ -11,8 +11,10 @@ import java.util.Date;
 
 /**
  * 举报信息
- */@Entity
-@Data@Table(name = "report_detail")
+ */
+@Entity
+@Data
+@Table(name = "report_detail")
 public class ReportDetailDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,13 +51,14 @@ public class ReportDetailDO implements Serializable {
     }
 
     //    todo 这里有个坑 content 改为了 cause
-    public ReportDetailDO(String cause, String reportType, ReportDO reportDO, BaseModelDO model) {
+    public ReportDetailDO(String cause, String reportType, ReportDO reportDO, UniContentUnionIdDO uniContentUnionIdDO, BaseModelDO model) {
         this.cause = cause;
 
-        this.modelId = model.getId();
-        this.content = model.getContent();
-
-        this.receiveUserId = model.getUserId();
+        this.modelId = uniContentUnionIdDO.getId();
+        if (model != null) {
+            this.content = model.getContent();
+            this.receiveUserId = model.getUserId();
+        }
         this.reportId = reportDO.getId();
         this.reportType = reportType;
 
@@ -63,8 +66,8 @@ public class ReportDetailDO implements Serializable {
         this.status = ReportStatus.audit;
     }
 
-    public ReportDetailDO(String cause, String reportType, ReportDO reportDO, BaseModelDO model, Integer requestUserId) {
-        this(cause, reportType, reportDO, model);
+    public ReportDetailDO(String cause, String reportType, ReportDO reportDO, UniContentUnionIdDO uniContentUnionIdDO, BaseModelDO model, Integer requestUserId) {
+        this(cause, reportType, reportDO, uniContentUnionIdDO, model);
         this.userId = requestUserId;
     }
 }

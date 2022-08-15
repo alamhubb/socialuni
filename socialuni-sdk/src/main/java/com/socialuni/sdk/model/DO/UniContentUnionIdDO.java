@@ -18,7 +18,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class UniContentUnionIdDO extends SocialCommonBaseDO implements Serializable {
+public class UniContentUnionIdDO extends SocialContentBaseDO implements Serializable {
     private String contentType;
     private String uuid;
     //数据所属权

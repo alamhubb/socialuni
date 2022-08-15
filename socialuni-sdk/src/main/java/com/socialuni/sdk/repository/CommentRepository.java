@@ -25,7 +25,7 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface CommentRepository extends JpaRepository<SocialCommentDO, Integer> {
-    BaseModelDO findOneByIdAndStatus(Integer id, String status);
+    BaseModelDO findOneByUnionIdAndStatus(Integer id, String status);
 
     SocialCommentDO findOneByUnionId(Integer id);
 
