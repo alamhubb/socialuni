@@ -37,7 +37,7 @@ public class SocialCommentDeleteDomain {
             throw new SocialParamsException("评论已经删除");
         }
         SocialCommentDO commentDO = optionalCommentDO.get();
-        SocialTalkDO talkDO = TalkUtils.get(commentDO.getTalkId());
+        SocialTalkDO talkDO = TalkUtils.getNotNull(commentDO.getTalkId());
         //是否是自己删除自己的动态
         if (commentDO.getUserId().equals(mineUser.getUnionId())) {
             commentDO.setStatus(ContentStatus.delete);

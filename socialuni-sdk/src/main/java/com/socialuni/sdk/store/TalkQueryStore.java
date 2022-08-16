@@ -105,7 +105,7 @@ public class TalkQueryStore {
         for (Integer id : ids) {
 //            SocialTalkRO talkEO = TalkROFactory.newTalkRO(id);
 //            talkDOS.add(talkEO);
-            SocialTalkDO talkDO = TalkUtils.get(id);
+            SocialTalkDO talkDO = TalkUtils.getNotNull(id);
             talkDOS.add(talkDO);
         }
         return talkDOS;

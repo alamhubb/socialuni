@@ -115,7 +115,7 @@ public class SocialTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static SocialTalkRO newHomeTalkRO(SocialUserDO mineUser, Integer talkId) {
-        SocialTalkDO talkDO = TalkUtils.get(talkId);
+        SocialTalkDO talkDO = TalkUtils.getNotNull(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 

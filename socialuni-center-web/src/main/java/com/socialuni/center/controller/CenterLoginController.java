@@ -6,7 +6,6 @@ import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.serive.CenterLoginService;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.SocialBusinessException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,8 @@ public class CenterLoginController{
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @PostMapping("providerLogin")
     public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
-        throw new SocialBusinessException("不支持三方应用使用非清池渠道直接登录");
+        ResultRO<SocialLoginRO<CenterMineUserDetailRO>> resultRO = centerLoginService.providerLogin(loginData);
+        return resultRO;
     }
 
 

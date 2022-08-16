@@ -23,7 +23,7 @@ public class SocialAddHugDomain {
 
     public ResultRO<Void> addHug(SocialUserDO mineUser, SocialHugAddQO socialHugAddQO) {
         if (socialHugAddQO.getTalkId() != null) {
-            SocialTalkDO talkDO = TalkUtils.get(socialHugAddQO.getTalkId());
+            SocialTalkDO talkDO = TalkUtils.getNotNull(socialHugAddQO.getTalkId());
             HugDO hugDO = new HugDO(mineUser.getUnionId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());
             hugRedis.save(hugDO);
             Integer hugNum = talkDO.getHugNum();

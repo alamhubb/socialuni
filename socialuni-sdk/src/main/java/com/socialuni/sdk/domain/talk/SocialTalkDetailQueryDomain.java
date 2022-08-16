@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class SocialTalkDetailQueryDomain {
 
     public SocialTalkRO queryTalkDetail(SocialTalkIdQO socialTalkIdQO, SocialUserDO mineUser) {
-        SocialTalkDO talkDO = TalkUtils.get(socialTalkIdQO.getTalkId());
+        SocialTalkDO talkDO = TalkUtils.getNotNull(socialTalkIdQO.getTalkId());
         //自己的动态可以看预审核
         if (SocialUserUtil.isMine(mineUser, talkDO.getUserId())) {
             if (!ContentStatus.selfCanSeeContentStatus.contains(talkDO.getStatus())) {

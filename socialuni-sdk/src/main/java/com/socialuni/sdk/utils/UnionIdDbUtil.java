@@ -92,14 +92,6 @@ public class UnionIdDbUtil {
         return uniContentUnionIdDO;
     }
 
-    public static Boolean notSelfData(Integer unionId) {
-        return !isSelfData(unionId);
-    }
-
-    public static Boolean isSelfData(Integer unionId) {
-        return getUnionDOByUnionIdNotNull(unionId).getFromDevId() == 1;
-    }
-
     //获取可为空， 将中心的数据写入本系统
     public static String createTalkUidByUid(String talkUid) {
         //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了

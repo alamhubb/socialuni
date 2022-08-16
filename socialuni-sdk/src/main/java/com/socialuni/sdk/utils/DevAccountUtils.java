@@ -149,10 +149,6 @@ public class DevAccountUtils {
     }
 
 
-    public static boolean notPushServer() {
-        return !DevAccountUtils.pushServer();
-    }
-
     //为中心向服务器推送
     public static boolean pusherIsCenterServer() {
         return Objects.equals(DevAccountUtils.getDevIdNotNull(), DevAccountUtils.getCenterDevIdNotNull());

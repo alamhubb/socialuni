@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReplyCommentROFactory {
     public static SocialReplyCommentRO newReplyCommentRO(Integer replyCommentId) {
-        SocialCommentDO comment = CommentUtils.get(replyCommentId);
+        SocialCommentDO comment = CommentUtils.getNotNull(replyCommentId);
         SocialReplyCommentRO socialReplyCommentRO = new SocialReplyCommentRO();
         socialReplyCommentRO.setId(comment.getUnionId());
 //        socialReplyCommentRO.setContentType(ContentType.comment);

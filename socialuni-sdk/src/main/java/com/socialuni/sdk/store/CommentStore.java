@@ -5,7 +5,6 @@ import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -36,10 +35,10 @@ public class CommentStore {
      * @return
      */
     public void updateCommentByAddComment(SocialCommentPostQO addVO) {
-        if (addVO.getCommentId() == null || UnionIdDbUtil.notSelfData(addVO.getCommentId())) {
+        SocialCommentDO parentComment = CommentUtils.getAllowNull(addVO.getCommentId());
+        if (parentComment == null) {
             return;
         }
-        SocialCommentDO parentComment = CommentUtils.get(addVO.getCommentId());
         Integer ChildCommentNum = parentComment.getChildCommentNum();
         //这里属于业务
         if (ChildCommentNum == null) {
