@@ -32,7 +32,7 @@ public class SocialCommentDeleteDomain {
      * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
      */
     public ResultRO<Void> deleteComment(SocialUserDO mineUser, SocialCommentDeleteQO commentDeleteQO) {
-        Optional<SocialCommentDO> optionalCommentDO = commentRepository.findOneByIdAndStatusIn(commentDeleteQO.getCommentId(), ContentStatus.otherCanSeeContentStatus);
+        Optional<SocialCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentDeleteQO.getCommentId(), ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {
             throw new SocialParamsException("评论已经删除");
         }

@@ -12,7 +12,7 @@ import java.util.Date;
  * 获取用户联系方式的记录，记录谁获取的谁
  */
 @Data
-@Table(name = "user_contact", uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "beUserId", "type"}))
+@Table(name = "s_user_contact", uniqueConstraints = @UniqueConstraint(columnNames = {"userId", "beUserId", "type"}))
 @Entity
 public class UserContactDO implements Serializable {
     //必有

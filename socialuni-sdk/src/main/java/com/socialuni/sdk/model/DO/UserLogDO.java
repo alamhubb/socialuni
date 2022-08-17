@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "user_log")
+@Table(name = "s_user_log")
 public class UserLogDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

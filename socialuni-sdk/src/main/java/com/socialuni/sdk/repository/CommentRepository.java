@@ -66,7 +66,7 @@ public interface CommentRepository extends JpaRepository<SocialCommentDO, Intege
     @Query("update SocialCommentDO t set t.status = '" + CommonStatus.delete + "' where t.userId=:userId and t.status in (:status)")
     Integer updateUserCommentStatusIn(@Param("userId") Integer userId, @Param("status") List<String> status);
 
-    Optional<SocialCommentDO> findOneByIdAndStatusIn(Integer id, List<String> status);
+    Optional<SocialCommentDO> findOneByUnionIdAndStatusIn(Integer id, List<String> status);
 
     //获取最新的评论
     SocialCommentDO findFirstByTalkIdOrderByIdDesc(Integer talkId);

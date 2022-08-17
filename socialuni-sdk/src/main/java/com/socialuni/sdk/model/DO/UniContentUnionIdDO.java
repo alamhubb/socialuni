@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "u_content_union_id",
+@Table(name = "s_content_union_id",
         indexes = {
                 @Index(columnList = "contentType"),
         },

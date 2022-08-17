@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 //@Entity
-@Table(name = "third_content_uid",
+@Table(name = "s_third_content_uid",
         indexes = {
                 @Index(columnList = "contentType"),
                 @Index(columnList = "contentId"),

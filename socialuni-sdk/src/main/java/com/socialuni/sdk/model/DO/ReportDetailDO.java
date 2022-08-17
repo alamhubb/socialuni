@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Data
-@Table(name = "report_detail")
+@Table(name = "s_report_detail")
 public class ReportDetailDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

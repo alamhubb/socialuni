@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "dev_account_provider",
+@Table(name = "s_dev_account_provider",
         indexes = {
                 @Index(columnList = "status"),
                 @Index(columnList = "devId"),

@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(name = "district",
+@Table(name = "s_district",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"adCode"})}
         , indexes = {
         @Index(columnList = "count"),
