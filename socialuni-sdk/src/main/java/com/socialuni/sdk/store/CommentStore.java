@@ -8,6 +8,7 @@ import com.socialuni.sdk.utils.CommentUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Component
 public class CommentStore {
@@ -34,7 +35,10 @@ public class CommentStore {
      *
      * @return
      */
-    public void updateCommentByAddComment(SocialCommentPostQO addVO) {
+    public void updateParentReplyCommentByAddComment(SocialCommentPostQO addVO) {
+        if (addVO.getCommentId() == null) {
+            return;
+        }
         SocialCommentDO parentComment = CommentUtils.getAllowNull(addVO.getCommentId());
         if (parentComment == null) {
             return;
@@ -45,6 +49,19 @@ public class CommentStore {
             parentComment.setChildCommentNum(1);
         } else {
             parentComment.setChildCommentNum(++ChildCommentNum);
+        }
+        Date curDate = new Date();
+        //只有直接回复父评论，才更新时间
+        parentComment.setUpdateTime(curDate);
+
+        if (addVO.getCommentId() != null) {
+            SocialCommentDO replyComment = CommentUtils.getAllowNull(addVO.getCommentId());
+            if (replyComment != null) {
+                //测试所有自己评论自己，刚才处空指针了
+                replyComment.setUpdateTime(curDate);
+                //更新后保存到数据库
+                commentRepository.save(replyComment);
+            }
         }
         //更新后保存到数据库
         commentRepository.save(parentComment);
