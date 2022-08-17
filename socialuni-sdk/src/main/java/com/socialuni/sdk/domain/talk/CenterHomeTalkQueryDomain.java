@@ -30,7 +30,7 @@ public class CenterHomeTalkQueryDomain {
 
     //查询非关注tab的动态列表
     public List<CenterTalkRO> queryHomeTabTalks(@Valid CenterHomeTabTalkQueryQO queryQO) {
-        if (queryQO==null){
+        if (queryQO == null) {
             //获取当前用户
             queryQO = new CenterHomeTabTalkQueryQO();
             queryQO.setHomeTabType(TalkTabType.home_type);
@@ -43,6 +43,7 @@ public class CenterHomeTalkQueryDomain {
             queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
             queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
             queryQO.setGender(DevAccountUtils.getAppGenderType());
+            queryQO.setPageNum(0);
         }
 
         Integer pageNum = queryQO.getPageNum();

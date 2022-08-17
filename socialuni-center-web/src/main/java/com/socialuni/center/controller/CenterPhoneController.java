@@ -26,7 +26,7 @@ public class CenterPhoneController {
 
     @PostMapping("sendAuthCode")
     public ResultRO<Void> sendAuthCode(@RequestBody @Valid SocialSendAuthCodeQO authCodeQO){
-        return centerPhoneService.sendAuthCode(authCodeQO);
+        return phoneService.sendAuthCode(authCodeQO);
     }
 
     @PostMapping("phoneLogin")
