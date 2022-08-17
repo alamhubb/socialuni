@@ -4,13 +4,15 @@ import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.sdk.serive.CenterNotifyService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class CenterNotifyController  {
+@RequestMapping("notify")
+public class OldCenterNotifyController  {
     @Resource
     private CenterNotifyService centerNotifyService;
 

@@ -7,6 +7,7 @@ import com.socialuni.sdk.serive.CenterTagService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -14,7 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class CenterTagController {
+@RequestMapping("tag")
+public class OldCenterTagController {
     @Resource
     CenterTagService centerTagAPIImpl;
 

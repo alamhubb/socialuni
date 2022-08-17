@@ -3,11 +3,11 @@ spring:
 #    active: devprod
 #    active: localdevprod
 #    active: local
-    active: localpre
+#    active: localpre
+    active: prod
 #    active: qkylocal
 #    active: qkypc
 #    active: demo
-#    active: prod
 #    active: localprod
   datasource:
     initialization-mode: never

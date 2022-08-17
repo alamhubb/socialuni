@@ -6,13 +6,15 @@ import com.socialuni.sdk.serive.CenterUserIdentityService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-public class CenterUserIdentityController {
+@RequestMapping("userIdentity")
+public class OldCenterUserIdentityController {
     @Resource
     private CenterUserIdentityService centerUserIdentityAPIImpl;
 

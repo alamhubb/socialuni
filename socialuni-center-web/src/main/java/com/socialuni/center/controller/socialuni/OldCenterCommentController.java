@@ -7,13 +7,15 @@ import com.socialuni.sdk.serive.CenterCommentService;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-public class CenterCommentController {
+@RequestMapping("comment")
+public class OldCenterCommentController {
     @Resource
     CenterCommentService centerCommentService;
 

@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("chat")
-public class CenterChatController {
+public class OldCenterChatController {
     @PostMapping("readChat")
     public ResultRO<?> readChatMessages(@RequestBody @Valid ChatReadVO chatVO) {
         return null;

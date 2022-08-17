@@ -6,6 +6,7 @@ import com.socialuni.sdk.feignAPI.SocialuniDistrictAPI;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,7 +18,8 @@ import java.util.List;
  */
 
 @RestController
-public class CenterDistrictController {
+@RequestMapping("district")
+public class OldCenterDistrictController {
     @Resource
     SocialuniDistrictAPI socialuniDistrictAPI;
     @PostMapping("queryHotDistricts")

@@ -28,7 +28,7 @@ public class SocialHomeTalkQueryEntity {
 
     //查询非关注tab的动态列表
     public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO mineUser) {
-        Integer curPage = 0;
+        Integer curPage = queryBO.getPageNum();
         List<SocialTalkDO> stickTalks = new ArrayList<>();
         if (TalkTabType.home_type.equals(queryBO.getHomeTabType())) {
             if (curPage == 0) {

@@ -20,8 +20,8 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("socialuni/circle")
-public class CenterCircleController {
+@RequestMapping("circle")
+public class OldCenterCircleController {
 
     @Resource
     CenterCircleService centerCircleService;

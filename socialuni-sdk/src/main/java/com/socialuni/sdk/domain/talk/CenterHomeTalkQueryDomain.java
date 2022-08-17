@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,7 +33,6 @@ public class CenterHomeTalkQueryDomain {
         if (queryQO==null){
             //获取当前用户
             queryQO = new CenterHomeTabTalkQueryQO();
-            queryQO.setTalkIds(new ArrayList<>());
             queryQO.setHomeTabType(TalkTabType.home_type);
             //如果经纬度为空
             RectangleVO rectangleVO = MapUtil.getRectangle();
@@ -45,6 +43,14 @@ public class CenterHomeTalkQueryDomain {
             queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
             queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
             queryQO.setGender(DevAccountUtils.getAppGenderType());
+        }
+
+        Integer pageNum = queryQO.getPageNum();
+        if (pageNum == null) {
+            if (queryQO.getTalkIds() != null) {
+                pageNum = queryQO.getTalkIds().size() / 10;
+                queryQO.setPageNum(pageNum);
+            }
         }
 
         //获取当前用户
