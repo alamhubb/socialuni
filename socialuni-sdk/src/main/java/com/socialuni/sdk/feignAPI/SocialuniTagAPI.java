@@ -16,7 +16,7 @@ import java.util.List;
 @FeignClient(name = "tag", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniTagAPI {
     @PostMapping("addTag")
-    ResultRO<TagRO> addTag(@RequestBody @Valid TagAddQO tagAddVO);
+    ResultRO<TagRO> addTag(@RequestBody @Valid TagAddQO tagAddQO);
 
     @PostMapping("queryTags")
     ResultRO<List<TagRO>> queryTags();

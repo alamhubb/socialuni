@@ -15,8 +15,8 @@ import javax.validation.Valid;
 @FeignClient(name = "comment", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniCommentAPI {
     @PostMapping("postComment")
-    ResultRO<CenterCommentRO> postComment(@RequestBody @Valid CenterCommentPostQO commentVO);
+    ResultRO<CenterCommentRO> postComment(@RequestBody @Valid CenterCommentPostQO centerCommentPostQO);
 
     @PostMapping("deleteComment")
-    ResultRO<Void> deleteComment(@RequestBody @Valid CenterCommentDeleteQO commentVO);
+    ResultRO<Void> deleteComment(@RequestBody @Valid CenterCommentDeleteQO commentDeleteQO);
 }

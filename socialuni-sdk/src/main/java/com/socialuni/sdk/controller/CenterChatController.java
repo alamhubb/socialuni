@@ -7,6 +7,7 @@ import com.socialuni.sdk.model.RO.message.chat.ChatRemoveVO;
 import com.socialuni.social.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,8 @@ public class CenterChatController implements SocialuniChatAPI {
 
     @Override
     public ResultRO<List<ChatRO>> queryChats() {
-        return null;
+        List<ChatRO> list = new ArrayList<>();
+        return ResultRO.success(list);
     }
 
 /*    @Override
