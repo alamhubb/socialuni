@@ -29,7 +29,9 @@ public class AuthenticationDO extends CommonContentBaseDO implements Serializabl
     private Integer id;
     //开发者Id，代表那个开发者渠道发送的
     private Integer devId;
+    @Column(nullable = false)
     private String phoneNum;
+    @Column(nullable = false)
     private String authCode;
     private Date createTime;
     //过期时间
