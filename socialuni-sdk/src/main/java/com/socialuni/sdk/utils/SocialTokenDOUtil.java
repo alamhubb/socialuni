@@ -44,11 +44,25 @@ public class SocialTokenDOUtil {
         if (userKey == null) {
             throw new SocialNotLoginException();
         }
-        //解析token
-        Integer userId = Integer.valueOf(userKey);
         SocialTokenDO tokenDO = commonTokenRepository.findOneByToken(token);
         if (tokenDO == null) {
             throw new SocialNotLoginException();
+        }
+        Integer doUserId = tokenDO.getUserId();
+        Integer userId;
+        if (IntegerUtils.strIsAllNumber(userKey)) {
+            //解析token
+            userId = Integer.valueOf(userKey);
+            if (!userId.equals(doUserId)) {
+                log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
+                throw new SocialSystemException("绕过验证");
+            }
+        } else {
+            String uid = UnionIdDbUtil.getUidByUnionIdNotNull(doUserId);
+            if (!userKey.equals(uid)) {
+                log.error("绕过验证，错误的userId:{},{}", uid, userKey);
+                throw new SocialSystemException("绕过验证");
+            }
         }
         Date date = new Date();
         //如果当前时间大于时效时间，则时效了
@@ -56,11 +70,6 @@ public class SocialTokenDOUtil {
             //"用户凭证过期，请重新登录",必须用这个
 //            return null;
             throw new SocialUserTokenExpireException();
-        }
-        Integer doUserId = tokenDO.getUserId();
-        if (!userId.equals(doUserId)) {
-            log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
-            throw new SocialSystemException("绕过验证");
         }
         //返回user
         return tokenDO;

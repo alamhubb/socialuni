@@ -1,8 +1,13 @@
 package com.socialuni.center.config;
 
+import com.socialuni.center.qingchi.QingchiTokenDO;
+import com.socialuni.center.qingchi.QingchiTokenRepository;
+import com.socialuni.center.qingchi.QingchiUserAccountDO;
+import com.socialuni.center.qingchi.QingchiUserAccountRepository;
 import com.socialuni.sdk.config.SocialRequestUserConfig;
 import com.socialuni.sdk.config.SocialRequestUserConfigDefaultImpl;
 import com.socialuni.sdk.config.SocialTokenUtil;
+import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.model.DO.user.SocialTokenDO;
 import com.socialuni.sdk.repository.CommonTokenRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
@@ -14,14 +19,24 @@ import javax.annotation.Resource;
 
 @Component
 public class CenterRequestUserConfigImpl extends SocialRequestUserConfigDefaultImpl implements SocialRequestUserConfig {
-
     @Resource
     CommonTokenRepository commonTokenRepository;
-
+    @Resource
+    QingchiTokenRepository qingchiTokenRepository;
+    @Resource
+    QingchiUserAccountRepository qingchiUserAccountRepository;
 
     @Override
     public String getToken() {
-        return super.getToken();
+        String token = super.getToken();
+        QingchiTokenDO qingchiTokenDO = qingchiTokenRepository.findOneByToken(token);
+        if (qingchiTokenDO != null) {
+            QingchiUserAccountDO qingchiUserAccountDO = qingchiUserAccountRepository.findOneByUserIdAndProvider(qingchiTokenDO.getUserId(), SocialuniAccountProviderType.socialuni);
+            if (qingchiUserAccountDO != null) {
+                return qingchiUserAccountDO.getSessionKey();
+            }
+        }
+        return token;
     }
 
     @Override
@@ -38,6 +53,7 @@ public class CenterRequestUserConfigImpl extends SocialRequestUserConfigDefaultI
         if (socialTokenDO != null) {
             return socialTokenDO.getUserId();
         }
+        //三方应用传的可以直接传用户id作为token
         return UnionIdDbUtil.getUserUnionIdByUidNotNull(token);
     }
 }
