@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.socialuni.center")
 @EntityScan("com.socialuni.center")
 @EnableSocialuni
-//@EnableCaching
+@EnableCaching
 public class CenterWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(CenterWebApplication.class, args);

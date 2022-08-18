@@ -70,7 +70,7 @@ public class SocialUserUtil {
     }
 
     public static Integer getMineUserIdNotNull() {
-        return getMineUserNotNull().getId();
+        return getMineUserNotNull().getUnionId();
     }
 
     public static String getMineUserStringIdNotNull() {

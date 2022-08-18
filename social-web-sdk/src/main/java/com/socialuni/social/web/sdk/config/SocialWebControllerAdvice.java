@@ -5,6 +5,7 @@ import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.base.SocialException;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
+import com.socialuni.social.exception.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.*;
 import feign.FeignException;
@@ -42,7 +43,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         if (response.getStatus() != 200 && response.getStatus() != 404) {
             System.out.println("不应该触发这里");
 //            ErrorLogUtils.save(new ErrorLogDO(UserUtils.getMineUserId(), "状态码非200，系统错误", result));
-            responseVO = new ResultRO(ErrorCode.SYSTEM_ERROR, "系统异常");
+            responseVO = new ResultRO(ErrorCode.SYSTEM_ERROR, ErrorMsg.systemErrorMsg);
         } else {
             if (result instanceof ResultRO) {
                 responseVO = (ResultRO) result;
@@ -72,7 +73,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
-        ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
+        ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
         String errorStr = exception.toString();
         if (StringUtils.isEmpty(errorStr)) {
             try {
@@ -104,7 +105,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 errorStr = "解析异常出错";
                 e.printStackTrace();
             }
-            ResultRO<Void> resultRO = new ResultRO<>(500, "系统异常");
+            ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
             this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, feignException.toString(), errorStr);
             return resultRO;
         }

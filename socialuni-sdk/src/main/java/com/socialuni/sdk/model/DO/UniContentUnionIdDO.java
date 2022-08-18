@@ -19,11 +19,14 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class UniContentUnionIdDO extends SocialContentBaseDO implements Serializable {
+    @Column(nullable = false)
     private String contentType;
+    @Column(nullable = false)
     private String uuid;
     //数据所属权
 //    private Integer belongDevId;
     //数据来源方
+    @Column(nullable = false)
     private Integer fromDevId;
     //数据所有方
     //主要是不想泄露真实id，所以用的其他id
