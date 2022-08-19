@@ -70,5 +70,6 @@ public class TagDO implements Serializable {
     //是否在前台展示，app产品，不在前台展示
     @Column(columnDefinition = "bit default true")
     private Boolean showFront;
+    //devId为唯一是因为根据开发者创建圈子，且不可修改
     private Integer devId;
 }
