@@ -4,7 +4,6 @@ import com.socialuni.sdk.config.SocialTokenUtil;
 import com.socialuni.sdk.model.DO.user.SocialTokenDO;
 import com.socialuni.sdk.repository.CommonTokenRepository;
 import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialSystemException;
 import com.socialuni.social.exception.SocialUserTokenExpireException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -55,13 +54,13 @@ public class SocialTokenDOUtil {
             userId = Integer.valueOf(userKey);
             if (!userId.equals(doUserId)) {
                 log.error("绕过验证，错误的userId:{},{}", doUserId, userId);
-                throw new SocialSystemException("绕过验证");
+                throw new SocialNotLoginException();
             }
         } else {
             String uid = UnionIdDbUtil.getUidByUnionIdNotNull(doUserId);
             if (!userKey.equals(uid)) {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);
-                throw new SocialSystemException("绕过验证");
+                throw new SocialNotLoginException();
             }
         }
         Date date = new Date();
