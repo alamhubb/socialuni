@@ -27,7 +27,6 @@
         <module>socialuni-sdk</module>
         <module>socialuni-admin-web</module>
         <module>socialuni-embed-demo</module>
-        <module>socialuni-center-web</module>
     </modules>
 
     <properties>
