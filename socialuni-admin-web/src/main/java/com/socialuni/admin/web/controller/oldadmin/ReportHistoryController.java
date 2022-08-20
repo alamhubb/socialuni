@@ -53,7 +53,7 @@ public class ReportHistoryController {
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
         Page<ReportDO> reportDOPage = reportRepository.findByStatusAndAuditTypeAndReceiveUserStatusNotOrderByIdDesc(pageable, CommonStatus.violation, ViolateType.pornInfo, CommonStatus.violation);
         List<ReportVO> reportVOS = reportDOPage.getContent().stream().map(ReportVO::new).collect(Collectors.toList());
-//        List<TalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
+//        List<SocialTalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
 //        return new ResultVO<>(list.stream().map(ReportTalkVO::new).collect(Collectors.toList()));
         return new ResultVO<>(reportVOS);
     }*//*
@@ -66,7 +66,7 @@ public class ReportHistoryController {
         Page<ReportDO> reportDOPage = reportRepository.findByStatusNotInAndHasReviewFalseOrderByIdDesc(pageable, ReportStatus.auditStatus);
         List<ReportDO> queryDos = reportDOPage.getContent();
         List<ReportVO> reportVOS = queryDos.stream().map(ReportVO::new).collect(Collectors.toList());
-//        List<TalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
+//        List<SocialTalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
 //        return new ResultVO<>(list.stream().map(ReportTalkVO::new).collect(Collectors.toList()));
 
 

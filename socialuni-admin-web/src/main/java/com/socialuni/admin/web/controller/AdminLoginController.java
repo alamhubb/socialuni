@@ -1,10 +1,10 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.service.AdminLoginService;
-import com.socialuni.center.web.model.QO.dev.DevAccountQueryQO;
+import com.socialuni.sdk.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
+import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

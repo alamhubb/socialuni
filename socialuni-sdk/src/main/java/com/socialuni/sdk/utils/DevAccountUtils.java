@@ -183,6 +183,14 @@ public class DevAccountUtils {
         return DevAccountUtils.getDevAccountByToken(token);
     }
 
+    public static Integer getAdminDevAccountIdAllowNull() {
+        DevAccountDO devAccountDO = getAdminDevAccountAllowNull();
+        if (devAccountDO == null) {
+            return null;
+        }
+        return devAccountDO.getId();
+    }
+
     //得到用户信息
     private static DevAccountDO getDevAccountByToken(String token) {
         //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据

@@ -10,12 +10,12 @@ import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.model.model.QO.SocialIntIdQO;
-import com.socialuni.social.model.model.QO.SocialIntQO;
-import com.socialuni.center.web.constant.ViolateType;
-import com.socialuni.center.web.factory.ListConvertUtil;
-import com.socialuni.center.web.utils.TalkUtils;
+import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.model.QO.SocialIntIdQO;
+import com.socialuni.sdk.model.QO.SocialIntQO;
+import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.factory.ListConvertUtil;
+import com.socialuni.sdk.utils.TalkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -77,7 +77,7 @@ public class TencentImgAuditRecordController {
         TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
         tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
         if (!ViolateType.noViolation.equals(auditQO.getViolateType())) {
-            TalkDO talkDO = TalkUtils.get(tencentCosAuditRecordDO.getContentId());
+            SocialTalkDO talkDO = TalkUtils.getNotNull(tencentCosAuditRecordDO.getContentId());
             violationService.modelContentViolation(talkDO, auditQO.getViolateType());
         }
         tencentCosAuditRecordRepository.save(tencentCosAuditRecordDO);

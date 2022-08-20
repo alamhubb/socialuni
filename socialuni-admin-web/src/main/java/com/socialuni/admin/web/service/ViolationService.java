@@ -1,23 +1,24 @@
 package com.socialuni.admin.web.service;
 
+import com.socialuni.sdk.repository.*;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.user.SocialUserViolationDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.center.web.constant.UserType;
-import com.socialuni.center.web.constant.ViolateLevel;
-import com.socialuni.center.web.constant.ViolateType;
-import com.socialuni.center.web.constant.status.UserStatus;
-import com.socialuni.center.web.domain.BaseModelService;
-import com.socialuni.center.web.entity.user.SocialUserViolationEntity;
-import com.socialuni.center.web.repository.community.TalkRepository;
-import com.socialuni.center.web.service.BaseModelUtils;
-import com.socialuni.center.web.service.KeywordsService;
-import com.socialuni.center.web.service.ReportService;
-import com.socialuni.center.web.store.ReportStore;
-import com.socialuni.center.web.utils.SocialUserUtil;
+import com.socialuni.sdk.model.DO.ReportDO;
+import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.model.DO.user.SocialUserViolationDO;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.constant.UserType;
+import com.socialuni.sdk.constant.ViolateLevel;
+import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.constant.status.UserStatus;
+import com.socialuni.sdk.domain.BaseModelService;
+import com.socialuni.sdk.entity.user.SocialUserViolationEntity;
+import com.socialuni.sdk.repository.community.TalkRepository;
+import com.socialuni.sdk.service.BaseModelUtils;
+import com.socialuni.sdk.service.KeywordsService;
+import com.socialuni.sdk.service.ReportService;
+import com.socialuni.sdk.store.ReportStore;
+import com.socialuni.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +69,7 @@ public class ViolationService {
         baseModelService.save(modelDO);
 
         //user改为正常
-        UserDO violationUser = SocialUserUtil.getNotNull(modelDO.getUserId());
+        SocialUserDO violationUser = SocialUserUtil.getUserNotNull(modelDO.getUserId());
         String userStatus = violationUser.getStatus();
         //存在用户发表其他内容，被封的情况
         if (ReportStatus.auditStatus.contains(userStatus)) {
@@ -92,7 +93,7 @@ public class ViolationService {
 
     public void violateService(BaseModelDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
-        UserDO violationUser = modelContentViolation(modelDO, violateType);
+        SocialUserDO violationUser = modelContentViolation(modelDO, violateType);
 
         //修改举报内容
         reportDO.setAuditType(violateType);
@@ -132,7 +133,7 @@ public class ViolationService {
         reportService.reportPass(reportDO, true);
     }
 
-    public UserDO modelContentViolation(BaseModelDO modelDO, String violateType) {
+    public SocialUserDO modelContentViolation(BaseModelDO modelDO, String violateType) {
         Date curDate = new Date();
         //修改内容，需要修改状态、删除原因、更新时间
         modelDO.setStatus(ContentStatus.violation);
@@ -144,7 +145,7 @@ public class ViolationService {
         //处理举报
         //封禁用户
         //如果已经是违规，不需要改为删除
-        UserDO violationUser = SocialUserUtil.getNotNull(modelDO.getUserId());
+        SocialUserDO violationUser = SocialUserUtil.getUserNotNull(modelDO.getUserId());
         String vioReason = modelDO.getDeleteReason() + ",";
         //不为官方系统用户才可封禁
         if (!UserType.system.equals(violationUser.getType())) {
@@ -156,7 +157,7 @@ public class ViolationService {
     }
 
     //更改user状态
-    public void userViolationHandler(UserDO violationUser, String vioReason, Date curDate, String violateType) {
+    public void userViolationHandler(SocialUserDO violationUser, String vioReason, Date curDate, String violateType) {
         String vioLevel;
         //轻微
         if (ViolateType.slightViolation.equals(violateType)) {

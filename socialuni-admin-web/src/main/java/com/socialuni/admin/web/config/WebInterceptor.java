@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.social.exception.SocialNotLoginException;
 import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
@@ -31,7 +31,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
         RequestLogDO requestLogDO = RequestLogUtil.get();
         DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
         if (user != null) {
-            requestLogDO.setUserId(user.getId());
+            requestLogDO.setUserId(user.getId().toString());
         }
         RequestLogUtil.saveAsync(requestLogDO);
         String userIp = requestLogDO.getIp();

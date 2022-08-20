@@ -3,13 +3,13 @@ package com.socialuni.admin.web.controller.openService;
 import com.socialuni.admin.web.constant.ImgThumbnailType;
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
+import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.social.entity.model.DO.user.UserImgDO;
-import com.socialuni.center.web.config.SocialAppConfig;
-import com.socialuni.center.web.repository.UserImgRepository;
-import com.socialuni.center.web.repository.community.TalkImgRepository;
+import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.repository.UserImgRepository;
+import com.socialuni.sdk.repository.community.TalkImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -66,7 +66,7 @@ public class TencentCloudCosService {
                 return;
             }
         } else {
-            UserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);
+            SocialUserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);
             if (userImgDO != null) {
                 recordDO.setContentImgId(userImgDO.getId());
                 recordDO.setContentId(userImgDO.getUserId());

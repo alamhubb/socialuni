@@ -1,8 +1,8 @@
 package com.socialuni.admin.web.model;
 
-import com.socialuni.api.model.RO.talk.CenterCommentRO;
-import com.socialuni.social.model.model.RO.community.tag.TagRO;
-import com.socialuni.social.model.model.RO.community.talk.SocialTalkImgRO;
+import com.socialuni.sdk.model.RO.community.tag.TagRO;
+import com.socialuni.sdk.model.RO.community.talk.SocialTalkImgRO;
+import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
 import lombok.Data;
 
 import java.util.List;
