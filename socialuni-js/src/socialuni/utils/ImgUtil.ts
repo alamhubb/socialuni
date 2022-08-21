@@ -101,7 +101,8 @@ export default class ImgUtil {
     }
     //如果后缀长度大于6则默认jpg，因为图片都是最长4个，富裕1个，6个
     const fileSuffixName = filePath.substr(filePath.lastIndexOf('.'))
-    if (fileSuffixName.length > 6) {
+    //有可能存在asfasdf.fasdfasd.这种乱格式
+    if (fileSuffixName.length > 6 || fileSuffixName.length < 2) {
       return '.jpg'
     }
     return fileSuffixName

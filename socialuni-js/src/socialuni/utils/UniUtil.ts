@@ -196,7 +196,9 @@ export default class UniUtil {
 
   private static async imgFilesCompressHandler (res: UniApp.ChooseImageSuccessCallbackResult) {
     const imgFiles: DomFile[] = res.tempFiles as DomFile[]
-    for (const imgFile of imgFiles) {
+    const tempFilePaths: string[] = res.tempFilePaths as string[]
+    for (let i = 0; i < imgFiles.length; i++) {
+      const imgFile = imgFiles[i]
       // 不能大于10m大于10m就压缩不到100k
       // 获取压缩比
       const imgSize: number = imgFile.size
@@ -213,7 +215,7 @@ export default class UniUtil {
       }
       imgFile.quality = ratio
       if (!socialSystemModule.isH5) {
-        const res = await UniUtil.compressImage(imgFile.path, ratio)
+        const res = await UniUtil.compressImage(tempFilePaths[i], ratio)
         imgFile.path = res
         //计算压缩后的大小
         imgFile.size = Math.round(imgSize * ratio / 100)
@@ -225,7 +227,7 @@ export default class UniUtil {
       if (socialSystemModule.isH5) {
         fileName = imgFile.name
       } else {
-        fileName = imgFile.path
+        fileName = tempFilePaths[i]
       }
       imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
       imgFile.fileName = imgFile.src
