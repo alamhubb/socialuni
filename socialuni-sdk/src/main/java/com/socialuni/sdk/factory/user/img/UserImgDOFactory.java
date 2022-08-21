@@ -28,7 +28,7 @@ public class UserImgDOFactory {
         userImgDO.setReportContentType(ContentType.userImg);
         userImgDO.setReportNum(0);
         userImgDO.setIsSelfAuth(false);
-        Integer userImgUnionId = UnionIdDbUtil.createUserUnionId();
+        Integer userImgUnionId = UnionIdDbUtil.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
 
         mineUser.setAvatar(SocialAppConfig.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");

@@ -21,7 +21,7 @@ public interface UserImgRepository extends JpaRepository<SocialUserImgDO, Intege
 
     SocialUserImgDO getUserImgByUserIdAndSrc(Integer userId, String src);
 
-    SocialUserImgDO getUserImgByUserIdAndId(Integer userId, Integer id);
+    SocialUserImgDO getUserImgByUserIdAndUnionId(Integer userId, Integer unionId);
 
     //获取talkImg
     SocialUserImgDO findFirstBySrc(String imgUlr);

@@ -73,8 +73,9 @@ public class SocialUserUtil {
         return getMineUserNotNull().getUnionId();
     }
 
-    public static String getMineUserStringIdNotNull() {
-        return getMineUserIdNotNull().toString();
+    public static String getMineUserUuidIdNotNull() {
+        Integer mineUserId = getMineUserIdNotNull();
+        return UnionIdDbUtil.getUidByUnionIdNotNull(mineUserId);
     }
 
     public static SocialUserDO getMineUserNotNull() {
