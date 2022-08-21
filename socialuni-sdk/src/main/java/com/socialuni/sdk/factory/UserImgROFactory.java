@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class UserImgROFactory {
     public static UserImgRO DOtoRO(SocialUserImgDO userImg) {
         UserImgRO imgVO = new UserImgRO();
-        imgVO.setId(userImg.getId());
+        imgVO.setId(userImg.getUnionId());
         imgVO.setSrc(SocialAppConfig.getStaticResourceUrl() + userImg.getSrc());
         imgVO.setAspectRatio(userImg.getAspectRatio());
         return imgVO;

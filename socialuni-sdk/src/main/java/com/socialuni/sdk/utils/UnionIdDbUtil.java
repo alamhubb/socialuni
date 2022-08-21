@@ -50,6 +50,10 @@ public class UnionIdDbUtil {
         return createUnionIdByContentType(ContentType.user);
     }
 
+    public static Integer createUserImgUnionId() {
+        return createUnionIdByContentType(ContentType.userImg);
+    }
+
 
     public static Integer createTalkUnionId() {
         return createUnionIdByContentType(ContentType.talk);

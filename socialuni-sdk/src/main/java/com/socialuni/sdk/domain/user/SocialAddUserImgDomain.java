@@ -3,6 +3,7 @@ package com.socialuni.sdk.domain.user;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.factory.user.img.UserImgDOFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserImgAddQO;
@@ -27,19 +28,7 @@ public class SocialAddUserImgDomain {
 
     public SocialMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, SocialUserDO mineUser) {
 
-        SocialUserImgDO userImgDO = new SocialUserImgDO();
-        userImgDO.setSrc(socialUserImgAddQO.getSrc());
-        userImgDO.setAspectRatio(socialUserImgAddQO.getAspectRatio());
-        userImgDO.setQuality(socialUserImgAddQO.getQuality());
-        userImgDO.setSize(socialUserImgAddQO.getSize());
-        userImgDO.setUserId(mineUser.getUnionId());
-        userImgDO.setStatus(ContentStatus.enable);
-        userImgDO.setCreateTime(new Date());
-        userImgDO.setContent(AppConfigConst.img_content);
-        userImgDO.setReportContentType(ContentType.userImg);
-        userImgDO.setReportNum(0);
-        userImgDO.setIsSelfAuth(false);
-        mineUser.setAvatar(SocialAppConfig.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");
+        SocialUserImgDO userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
         userRepository.save(mineUser);
         userImgRepository.save(userImgDO);
 

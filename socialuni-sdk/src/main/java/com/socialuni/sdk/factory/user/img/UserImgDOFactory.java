@@ -1,6 +1,8 @@
 package com.socialuni.sdk.factory.user.img;
 
 
+import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
@@ -26,7 +28,11 @@ public class UserImgDOFactory {
         userImgDO.setReportContentType(ContentType.userImg);
         userImgDO.setReportNum(0);
         userImgDO.setIsSelfAuth(false);
-        mineUser.setAvatar(userImgDO.getSrc() + "!avatar");
+        Integer userImgUnionId = UnionIdDbUtil.createUserUnionId();
+        userImgDO.setUnionId(userImgUnionId);
+
+        mineUser.setAvatar(SocialAppConfig.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");
+
         return userImgDO;
     }
 }
