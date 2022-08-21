@@ -43,6 +43,9 @@ public class BaseModelService {
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
             return messageRepository.save(messageDO);
+        } else if (model instanceof SocialUserImgDO) {
+            SocialUserImgDO userImgDO = (SocialUserImgDO) model;
+            return userImgRepository.save(userImgDO);
         } else {
             throw new SocialBusinessException("错误的内容类型");
         }

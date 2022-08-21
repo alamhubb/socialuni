@@ -46,8 +46,8 @@ public class BaseModelUtils<T> {
             modelDO = CommentUtils.getNotNull(reportDO.getContentId());
         } else if (reportContentType.equals(ContentType.message)) {
             modelDO = messageRepository.findById(reportDO.getContentId()).get();
-        }else if (reportContentType.equals(ContentType.user)) {
-            modelDO = messageRepository.findById(reportDO.getContentId()).get();
+        } else if (reportContentType.equals(ContentType.userImg)) {
+            modelDO = userImgRepository.findOneByUnionId(reportDO.getContentId());
         } else {
             throw new SocialBusinessException("不存在的内容类型");
         }

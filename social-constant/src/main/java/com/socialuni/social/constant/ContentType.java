@@ -14,5 +14,5 @@ public class ContentType {
     public final static String talk = "动态";
     public final static String comment = "评论";
     public final static String message = "消息";
-    public final static List<String> reportContentTypeTypes = Arrays.asList(user, userImg, talk, comment, message);
+    public final static List<String> reportContentTypeTypes = Arrays.asList(userImg, talk, comment, message);
 }
