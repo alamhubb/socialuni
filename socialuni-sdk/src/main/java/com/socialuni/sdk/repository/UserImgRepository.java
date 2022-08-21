@@ -19,6 +19,8 @@ public interface UserImgRepository extends JpaRepository<SocialUserImgDO, Intege
 
     BaseModelDO findOneByUnionIdAndStatus(Integer id, String status);
 
+    List<SocialUserImgDO> findAllByUnionIdIsNull();
+
     SocialUserImgDO getUserImgByUserIdAndSrc(Integer userId, String src);
 
     SocialUserImgDO getUserImgByUserIdAndUnionId(Integer userId, Integer unionId);

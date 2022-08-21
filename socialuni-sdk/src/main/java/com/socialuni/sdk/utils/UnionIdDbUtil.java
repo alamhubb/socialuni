@@ -54,7 +54,6 @@ public class UnionIdDbUtil {
         return createUnionIdByContentType(ContentType.userImg);
     }
 
-
     public static Integer createTalkUnionId() {
         return createUnionIdByContentType(ContentType.talk);
     }
