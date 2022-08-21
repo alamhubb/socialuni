@@ -12,7 +12,7 @@ import java.io.Serializable;
  * 开发者账户
  */
 @Data@Entity
-@Table(name = "dev_account",
+@Table(name = "s_dev_account",
         indexes = {
                 @Index(columnList = "realName"),
         },

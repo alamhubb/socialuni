@@ -2,7 +2,7 @@
 package com.socialuni.admin.web.model;
 
 
-import com.qingchi.base.model.talk.CommentDO;
+import com.qingchi.base.model.talk.SocialCommentDO;
 import lombok.Data;
 
 @Data
@@ -12,7 +12,7 @@ public class TalkCommentVO {
     public TalkCommentVO() {
     }
 
-    public TalkCommentVO(CommentDO commentDO) {
+    public TalkCommentVO(SocialCommentDO commentDO) {
         this.content = commentDO.getContent();
     }
 }

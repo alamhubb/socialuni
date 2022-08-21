@@ -12,9 +12,13 @@
       >
         <div class="row-between-center bb-1 py-smm pd-xs">
           <div class="flex-row flex-1">
-            <slot name="headerLeft"></slot>
+            <slot name="headerLeft">
+              <div class="row-all-center w100p font-md font-bold">
+                {{ title }}
+              </div>
+            </slot>
           </div>
-          <div class="flex-row flex-none px-sm">
+          <div class="flex-row flex-none px-sm" v-if="!hideButton">
             <q-button v-if="!hideConfirm" @click="confirm" theme text>{{ confirmText }}</q-button>
             <q-button class="ml-sm" v-if="!hideCancel" @click="cancel" text info>{{ cancelText }}</q-button>
           </div>
@@ -25,7 +29,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue} from 'vue-property-decorator'
 import QModel from '@/qing-ui/components/QModel/QModel.vue'
 import QButton from '@/qing-ui/components/QButton/QButton.vue'
 
@@ -40,42 +44,44 @@ import QButton from '@/qing-ui/components/QButton/QButton.vue'
 })
 export default class QPopup extends Vue {
   //如果是头顶或者底部则不为width100
-  @Prop({ default: '' }) readonly position: string
-  @Prop({ default: false }) readonly bottom: boolean
-  @Prop({ default: false }) readonly top: boolean
-  @Prop({ default: true }) readonly modal: boolean
-  @Prop({ default: false }) readonly hideModal: boolean
-  @Prop({ default: false }) readonly hideConfirm: boolean
-  @Prop({ default: false }) readonly hideCancel: boolean
-  @Prop({ default: '关 闭' }) readonly cancelText: boolean
-  @Prop({ default: '确 定' }) readonly confirmText: boolean
+  @Prop({default: ''}) readonly position: string
+  @Prop({default: ''}) readonly title: string
+  @Prop({default: false}) readonly bottom: boolean
+  @Prop({default: false}) readonly top: boolean
+  @Prop({default: true}) readonly modal: boolean
+  @Prop({default: false}) readonly hideModal: boolean
+  @Prop({default: false}) readonly hideConfirm: boolean
+  @Prop({default: false}) readonly hideButton: boolean
+  @Prop({default: false}) readonly hideCancel: boolean
+  @Prop({default: '关 闭'}) readonly cancelText: boolean
+  @Prop({default: '确 定'}) readonly confirmText: boolean
 
   @Model() value: boolean
 
   dialogVisible: boolean = false
 
-  open () {
+  open() {
     this.dialogVisible = true
   }
 
-  close () {
+  close() {
     this.input(false)
     this.dialogVisible = false
   }
 
 
   @Emit()
-  cancel () {
+  cancel() {
     this.close()
   }
 
   @Emit()
-  confirm () {
+  confirm() {
     this.close()
   }
 
   @Emit()
-  input (visible) {
+  input(visible) {
     return visible
   }
 

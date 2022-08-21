@@ -2,6 +2,7 @@ package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.model.DO.ReportDO;
+import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.service.ReportService;
@@ -21,6 +22,7 @@ public class ReportFactory {
 
     public ReportDO createReportDO(
             String cause,
+            UniContentUnionIdDO uniContentUnionIdDO,
             BaseModelDO model,
             String reportSourceType, Integer devId
     ) {
@@ -28,7 +30,11 @@ public class ReportFactory {
         ReportDO reportDO = new ReportDO();
 
         reportDO.setCause(cause);
-        reportDO.setReportContent(model.getContent());
+        if (model != null) {
+            reportDO.setReportContent(model.getContent());
+            //设置被举报用户
+            reportDO.setReceiveUserId(model.getUserId());
+        }
         if (ReportSourceType.userReport.equals(reportSourceType)) {
             reportDO.setStatus(ReportStatus.audit);
         } else {
@@ -43,12 +49,11 @@ public class ReportFactory {
         reportDO.setUpdateTime(curDate);
         reportDO.setDevId(devId);
         //内容来源
-        reportDO.setReportContentType(model.getReportContentType());
+        reportDO.setReportContentType(uniContentUnionIdDO.getContentType());
         //举报来源
         reportDO.setReportSourceType(reportSourceType);
-        //设置被举报用户
-        reportDO.setReceiveUserId(model.getUserId());
-        reportDO.setContentId(model.getId());
+
+        reportDO.setContentId(uniContentUnionIdDO.getId());
         return reportDO;
     }
 

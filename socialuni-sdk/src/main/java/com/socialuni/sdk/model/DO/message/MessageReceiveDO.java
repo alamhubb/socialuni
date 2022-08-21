@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "message_receive", uniqueConstraints = {
+@Table(name = "s_message_receive", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"receiveUserId", "message_id"})
 })
 @ToString(exclude = "message")

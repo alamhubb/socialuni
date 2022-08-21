@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "message")
+@Table(name = "s_message")
 public class MessageDO extends SocialUnionContentBaseDO implements BaseModelDO, Serializable {
     private String content;
 

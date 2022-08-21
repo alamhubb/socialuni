@@ -60,8 +60,8 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();
-        SocialCommentDO commentDO = CommentUtils.get(commentId);
-        SocialTalkDO talk = TalkUtils.get(commentDO.getTalkId());
+        SocialCommentDO commentDO = CommentUtils.getNotNull(commentId);
+        SocialTalkDO talk = TalkUtils.getNotNull(commentDO.getTalkId());
 
         //赋值
         notifyVO.setTalkId(talk.getUnionId().toString());
@@ -80,11 +80,11 @@ public class SocialUnreadNotifyVOFactory {
                 }
                 break;
             case NotifyType.comment_comment:
-                SocialCommentDO optionalCommentDO1 = CommentUtils.get(commentDO.getParentCommentId());
+                SocialCommentDO optionalCommentDO1 = CommentUtils.getNotNull(commentDO.getParentCommentId());
                 notifyVO.setReplyContent(optionalCommentDO1.getContent());
                 break;
             case NotifyType.reply_comment:
-                SocialCommentDO optionalCommentDO2 = CommentUtils.get(commentDO.getReplyCommentId());
+                SocialCommentDO optionalCommentDO2 = CommentUtils.getNotNull(commentDO.getReplyCommentId());
                 notifyVO.setReplyContent(optionalCommentDO2.getContent());
                 break;
         }

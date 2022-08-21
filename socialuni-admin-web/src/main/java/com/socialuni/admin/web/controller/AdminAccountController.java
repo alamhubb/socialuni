@@ -2,15 +2,15 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.service.AdminAccountService;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.center.web.model.QO.dev.SyncProdDevAccountQO;
-import com.socialuni.center.web.redis.DevAccountRedis;
-import com.socialuni.center.web.repository.dev.DevAccountProviderRepository;
-import com.socialuni.center.web.repository.dev.DevAccountRepository;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.model.QO.dev.SyncProdDevAccountQO;
+import com.socialuni.sdk.redis.DevAccountRedis;
+import com.socialuni.sdk.repository.dev.DevAccountProviderRepository;
+import com.socialuni.sdk.repository.dev.DevAccountRepository;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.center.web.repository.community.TagRepository;
-import com.socialuni.social.utils.UUIDUtil;
+import com.socialuni.sdk.repository.community.TagRepository;
+import com.socialuni.social.web.sdk.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

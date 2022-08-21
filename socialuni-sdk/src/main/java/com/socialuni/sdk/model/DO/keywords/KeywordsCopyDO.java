@@ -15,7 +15,7 @@ import java.io.Serializable;
 /**
  * 违规单词表
  */
-@Table(name = "keywords_copy", uniqueConstraints = {
+@Table(name = "s_keywords_copy", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"text"})
 })
 public class KeywordsCopyDO implements Serializable {

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 //联盟里其他app已注册的本应用里的用户
 @Entity
-@Table(name = "u_out_register_user",
+@Table(name = "s_out_register_user",
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
                 @UniqueConstraint(columnNames = {"devId", "userId"}),

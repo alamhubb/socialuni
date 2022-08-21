@@ -42,12 +42,10 @@ public class RequestUtil {
 
     public static String getHeader(String key) {
         HttpServletRequest request = getRequest();
-        log.info("key:"+key);
         if (key == null) {
             return null;
         }
         String value = request.getHeader(key);
-        log.info("value:"+value);
         if (headerIsEmpty(value)) {
             return null;
         }

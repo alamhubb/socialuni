@@ -32,6 +32,19 @@ public class SocialTokenUtil {
         SocialTokenUtil.socialRequestToken = socialRequestToken;
     }
 
+    public static void main(String[] args) {
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmZWY0MWRkZjk5YzA0Y2I2YTNiZjE4OTkwNjQwMGE1MF9kYzZmMmU3NDZlNWU0NDliYjc4YjM4YjhjMGE4NjU1NSJ9.mTxWy-EQU1uteMSFikRTNvitE96bjcSSXcTVwsZSMIE";
+        if (SocialTokenUtil.isSuccess(token)) {
+            try {
+                String tokenSubject = Jwts.parser().setSigningKey("da838b62ed0e412bb560254ebdc356c1").parseClaimsJws(token).getBody().getSubject();
+                System.out.println(tokenSubject.split("_")[0]);
+            } catch (Exception e) {
+                log.error("生成token异常");
+                //必须这么写，不能返回异常，返回异常会记录，会记录用户，会走这里，会循环报错
+            }
+        }
+    }
+
     public static String getToken() {
         String token = socialRequestToken.getToken();
         /*if (SocialTokenUtil.isSuccess(token)) {

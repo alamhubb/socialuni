@@ -72,6 +72,7 @@ public class SocialHomeTalkQueryDomain {
         socialHomeTabTalkQueryBO.setLat(queryQO.getLat());
         socialHomeTabTalkQueryBO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
+        socialHomeTabTalkQueryBO.setPageNum(queryQO.getPageNum());
         socialHomeTabTalkQueryBO.setMaxAge(queryQO.getMaxAge());
         socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdNotNull());
 

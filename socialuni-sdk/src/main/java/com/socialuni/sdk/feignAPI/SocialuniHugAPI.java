@@ -13,5 +13,5 @@ import javax.validation.Valid;
 @FeignClient(name = "hug", url = "${socialuni.server-url:https://api.socialuni.cn}")
 public interface SocialuniHugAPI {
     @PostMapping("addHug")
-    ResultRO<Void> addHug(@RequestBody @Valid CenterHugAddQO addVO);
+    ResultRO<Void> addHug(@RequestBody @Valid CenterHugAddQO socialHugAddQO);
 }

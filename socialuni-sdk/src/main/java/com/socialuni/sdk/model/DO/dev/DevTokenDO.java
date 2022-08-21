@@ -9,7 +9,7 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2019-02-19 22:27
  */@Entity
-@Table(name = "dev_token")
+@Table(name = "s_dev_token")
 @Data
 public class DevTokenDO {
     @Id

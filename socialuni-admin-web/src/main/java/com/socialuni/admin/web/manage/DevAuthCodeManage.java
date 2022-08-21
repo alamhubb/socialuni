@@ -1,10 +1,10 @@
 package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
-import com.socialuni.social.entity.model.DO.dev.DevAuthCodeDO;
+import com.socialuni.sdk.model.DO.dev.DevAuthCodeDO;
 import com.socialuni.social.constant.DateTimeType;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.utils.IntegerUtils;
+import com.socialuni.sdk.utils.IntegerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,7 @@ public class DevAuthCodeManage {
     //用户手机号登陆，和非微信小程序绑定手机号，发送验证码时候，都会触发这里
     //用户未登录，校验手机号格式 校验手机号是否合理，是否为已封禁手机号
     //用户已登录 校验用户不能已绑定手机号 ，校验手机号和用户匹配，验手机号和用户的关系，判断手机号是否已绑定，
-   /* public ResultRO<String> verifyUserAndPhoneNumMatch(String phoneNum, UserDO user) {
+   /* public ResultRO<String> verifyUserAndPhoneNumMatch(String phoneNum, SocialUserDO user) {
         if (IntegerUtils.strHasNoNumber(phoneNum)) {
             return new ResultRO<>("请输入正确的手机号");
         }
@@ -66,7 +66,7 @@ public class DevAuthCodeManage {
             //用户为空的时候，代表没登陆，所以已绑定的手机号也是可以通过的，因为可能在自己在登陆
 
             //如果已被使用的手机号已违规，就不能登陆了，违规了，登陆自己的也没意义，不能操作
-            UserDO phoneUser = UserUtils.get(socialUserPhoneDO.getUserId());
+            SocialUserDO phoneUser = UserUtils.get(socialUserPhoneDO.getUserId());
             if (phoneUser.getStatus().equals(UserStatus.violation)) {
                 UserDetailDO userDetailDO = CenterUserUtil.getUserDetail(user.getId());
                 return new ResultRO<>(ErrorMsgUtil.getErrorCode605ContactServiceValue(userDetailDO.getViolationEndTime()));

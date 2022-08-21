@@ -70,7 +70,7 @@ public class SocialUserUtil {
     }
 
     public static Integer getMineUserIdNotNull() {
-        return getMineUserNotNull().getId();
+        return getMineUserNotNull().getUnionId();
     }
 
     public static String getMineUserStringIdNotNull() {
@@ -192,11 +192,11 @@ public class SocialUserUtil {
         if (userId == null) {
             throw new SocialNullUserException();
         }
-        SocialUserDO commonUserDOOptional = userRepository.findOneByUnionId(userId);
-        if (commonUserDOOptional == null) {
+        SocialUserDO socialUserDO = getAllowNull(userId);
+        if (socialUserDO == null) {
             throw new SocialNullUserException();
         }
-        return commonUserDOOptional;
+        return socialUserDO;
     }
 
     public static SocialUserDO getUserByUid(String uid) {

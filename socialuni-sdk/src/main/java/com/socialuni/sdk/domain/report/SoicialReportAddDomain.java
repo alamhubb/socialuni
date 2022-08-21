@@ -95,46 +95,59 @@ public class SoicialReportAddDomain {
         //现在这个意思是，只能举报，正常显示的动态，待审核，不违规，预审核，删除的都举报不了
         //理论上来说这些状态应该都是不能被举报的，因为看不见，所以这个逻辑现在也没啥问题，没了不违规状态了
         //查询动态状态是否为正常
-        BaseModelDO modelDO;
+        BaseModelDO modelDO = null;
         // 举报了动态
         // 举报了动态
         if (ContentType.talk.equals(reportContentType)) {
             //查询出 评论信息
             //只查询正常能看到的，违规，审核，删除的都提示
             modelDO = talkRepository.findOneByUnionId(reportAddVO.getContentId());
+            if (modelDO != null && !modelDO.getStatus().equals(ContentStatus.enable)) {
+                modelDO = null;
+            }
         } else if (ContentType.comment.equals(reportContentType)) {
-            modelDO = commentRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
+            modelDO = commentRepository.findOneByUnionIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.message.equals(reportContentType)) {
-            modelDO = messageRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
+            modelDO = messageRepository.findOneByUnionIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else if (ContentType.userImg.equals(reportContentType)) {
-            modelDO = userImgRepository.findOneByIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
+            modelDO = userImgRepository.findOneByUnionIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
         } else {
             throw new SocialParamsException("错误的内容类型");
         }
+        if (modelDO == null) {
+            throw new SocialBusinessException("内容已被举报，审核中");
+        }
+
+        UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(reportAddVO.getContentId());
+
+        //则代表这条数据不属于本系统
         //这里限制了内容只能被举报一次，只有第一次被举报时，修改用户状态和动态状态
         //之后，只有审核时，才修改动态，
-        if (modelDO == null) {
-            throw new SocialParamsException("内容已被举报，审核中");
-        }
         //不为正常则不该看到，提示已被举报，有点问题不影响业务的小问题，提示信息不对
-        if (!ContentStatus.enable.equals(modelDO.getStatus())) {
+        if (!ContentStatus.enable.equals(uniContentUnionIdDO.getStatus())) {
             throw new SocialParamsException("内容已被举报，审核中");
         }
+        Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialUserDO receiveUser = SocialUserUtil.getUserNotNull(modelDO.getUserId());
-        //举报人不为系统管理员才校验
-        if (!mineUser.getType().equals(UserType.system)) {
-            if (UserType.system.equals(receiveUser.getType())) {
-                throw new SocialParamsException("不能举报官方内容");
-            } else if (mineUser.getUnionId().equals(receiveUser.getUnionId())) {
-                throw new SocialParamsException("不能举报自己的评论");
-            } /*else if (modelDO.getStatus().equals(CommonStatus.noViolation)) {
+        SocialUserDO receiveUser = SocialUserUtil.getAllowNull(receiveUserUnionId);
+
+        //本系统user,才进行相关校验
+        if (receiveUser != null) {
+            //举报人不为系统管理员才校验
+            if (!mineUser.getType().equals(UserType.system)) {
+                if (UserType.system.equals(receiveUser.getType())) {
+                    throw new SocialParamsException("不能举报官方内容");
+                } else if (mineUser.getUnionId().equals(receiveUser.getUnionId())) {
+                    throw new SocialParamsException("不能举报自己的评论");
+                } /*else if (modelDO.getStatus().equals(CommonStatus.noViolation)) {
                 return new ResultVO<>("内容已审核，不违规");
             }*/
+            }
         }
-        UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(modelDO.getUnionId());
+
         return reportDomain.userReportContent(
                 reportAddVO,
+                uniContentUnionIdDO,
                 modelDO,
                 mineUser.getUnionId(), uniContentUnionIdDO.getFromDevId()
         );

@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 全局配置表
  */
-@Table(name = "app_config")
+@Table(name = "s_app_config")
 public class AppConfigDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

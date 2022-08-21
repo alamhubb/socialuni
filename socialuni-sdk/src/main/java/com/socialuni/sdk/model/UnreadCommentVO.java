@@ -62,7 +62,7 @@ public class UnreadCommentVO {
         //不明白下面这行的意义，未读消息不需要显示子评论吧
         //        this.childComments = UnreadCommentVO.commentDOToVOS(commentRepository.findTop3ByParentCommentOrderByUpdateTimeDescIdDesc(commentDO));
         if (!ObjectUtils.isEmpty(commentDO.getReplyCommentId())) {
-            this.replyComment = new UnreadCommentVO(CommentUtils.get(commentDO.getReplyCommentId()));
+            this.replyComment = new UnreadCommentVO(CommentUtils.getNotNull(commentDO.getReplyCommentId()));
         }
     }
 

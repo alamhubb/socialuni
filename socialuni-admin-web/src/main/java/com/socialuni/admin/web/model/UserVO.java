@@ -1,7 +1,7 @@
 /*
 package com.socialuni.admin.web.model;
 
-import com.socialuni.social.model.DO.user.SocialUserDO;
+import com.socialuni.social.model.DO.user.SocialSocialUserDO;
 import lombok.Data;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class UserVO {
     public UserVO() {
     }
 
-    public UserVO(SocialUserDO user) {
+    public UserVO(SocialSocialUserDO user) {
         this.id = user.getId();
         this.nickname = user.getNickname();
         this.gender = user.getGender();
@@ -40,7 +40,7 @@ public class UserVO {
         this.avatar = user.getAvatar();
     }
 
-    public static List<UserVO> userDOToVOS(List<SocialUserDO> userDOs) {
+    public static List<UserVO> userDOToVOS(List<SocialSocialUserDO> userDOs) {
         return userDOs.stream().map(UserVO::new).collect(Collectors.toList());
     }
 }

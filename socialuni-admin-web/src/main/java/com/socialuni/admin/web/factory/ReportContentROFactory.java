@@ -2,17 +2,17 @@ package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.tag.TagDO;
-import com.socialuni.social.entity.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.model.model.RO.community.tag.TagRO;
-import com.socialuni.center.web.factory.SocialTalkImgROFactory;
-import com.socialuni.center.web.factory.community.SocialTagROFactory;
-import com.socialuni.center.web.store.SocialTagRedis;
-import com.socialuni.center.web.utils.CommentUtils;
-import com.socialuni.center.web.utils.TalkImgDOUtils;
-import com.socialuni.center.web.utils.TalkUtils;
+import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.model.DO.tag.TagDO;
+import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.model.RO.community.tag.TagRO;
+import com.socialuni.sdk.factory.SocialTalkImgROFactory;
+import com.socialuni.sdk.factory.community.SocialTagROFactory;
+import com.socialuni.sdk.store.SocialTagRedis;
+import com.socialuni.sdk.utils.CommentUtils;
+import com.socialuni.sdk.utils.TalkImgDOUtils;
+import com.socialuni.sdk.utils.TalkUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -30,7 +30,7 @@ public class ReportContentROFactory {
     public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
         if (reportContentType.equals(ContentType.talk)) {
-            TalkDO talkDO = TalkUtils.get(contentId);
+            SocialTalkDO talkDO = TalkUtils.getNotNull(contentId);
             reportContentVO.setId(talkDO.getId());
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());
@@ -38,7 +38,7 @@ public class ReportContentROFactory {
 
 //            SocialCommentROFactory.getTalkCommentROs()
 //
-//            CommentUtils.getAll(talkDO.getId()).stream().filter((CommentDO commentDO) -> commentDO.getUserId().equals(userId)).map(talk::new).collect(Collectors.toList());
+//            CommentUtils.getAll(talkDO.getId()).stream().filter((SocialCommentDO commentDO) -> commentDO.getUserId().equals(userId)).map(talk::new).collect(Collectors.toList());
 //            reportContentVO.setComments(talkDO.getUserId());
 
             List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getId());
@@ -50,7 +50,7 @@ public class ReportContentROFactory {
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(ContentType.comment)) {
-            CommentDO commentDO = CommentUtils.get(contentId);
+            SocialCommentDO commentDO = CommentUtils.getNotNull(contentId);
             reportContentVO.setId(commentDO.getId());
             reportContentVO.setContent(commentDO.getContent());
             reportContentVO.setReportNum(commentDO.getReportNum());

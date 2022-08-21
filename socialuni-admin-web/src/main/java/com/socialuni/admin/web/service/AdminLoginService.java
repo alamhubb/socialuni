@@ -2,20 +2,19 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.center.web.entity.DevAccountEntity;
+import com.socialuni.sdk.config.SocialTokenUtil;
+import com.socialuni.sdk.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.center.web.feignAPI.SocialuniDevAccountAPI;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.dev.DevTokenDO;
-import com.socialuni.center.web.model.QO.dev.DevAccountQueryQO;
-import com.socialuni.center.web.repository.dev.DevAccountRepository;
-import com.socialuni.center.web.repository.dev.DevTokenRepository;
+import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.model.DO.dev.DevTokenDO;
+import com.socialuni.sdk.model.QO.dev.DevAccountQueryQO;
+import com.socialuni.sdk.repository.dev.DevAccountRepository;
+import com.socialuni.sdk.repository.dev.DevTokenRepository;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.model.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.model.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.utils.PhoneNumUtil;
-import com.socialuni.social.web.sdk.utils.SocialTokenUtil;
+import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.sdk.utils.PhoneNumUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,14 +30,11 @@ public class AdminLoginService {
     DevAccountEntity devAccountEntity;
     @Resource
     DevTokenRepository devTokenRepository;
-    @Resource
-    SocialuniDevAccountAPI socialuniDevAccountAPI;
 
     //秘钥登录
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountQueryQO devAccountQueryQO) {
-        ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(devAccountQueryQO);
-        DevAccountDO devAccountDO = resultRO.getData();
+        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devAccountQueryQO.getSecretKey());
         if (devAccountDO == null) {
             throw new SocialBusinessException("秘钥错误");
         }

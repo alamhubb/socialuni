@@ -23,6 +23,7 @@ public class SocialHomeTabTalkQueryQO {
 
     private Integer minAge;
     private Integer maxAge;
+    private Integer pageNum;
     private Date queryTime;
     private String userGender;
     private String talkVisibleGender;

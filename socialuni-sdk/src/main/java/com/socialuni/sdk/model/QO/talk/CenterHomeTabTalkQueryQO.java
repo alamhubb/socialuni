@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 public class CenterHomeTabTalkQueryQO {
     private List<String> talkIds;
+    private Integer pageNum;
     private String homeTabType;
     private List<Integer> tagIds;
     private List<String> tagNames;

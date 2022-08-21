@@ -26,8 +26,7 @@ import java.io.Serializable;
                 @Index(columnList = "visibleGender"),
         },
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"name"}),
-                @UniqueConstraint(columnNames = {"devId"})
+                @UniqueConstraint(columnNames = {"name"})
         }
 )
 @Data

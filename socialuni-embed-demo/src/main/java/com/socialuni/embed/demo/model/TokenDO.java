@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "test_token")
+@Table(name = "s_test_token")
 @Data
 @NoArgsConstructor
 public class TokenDO {

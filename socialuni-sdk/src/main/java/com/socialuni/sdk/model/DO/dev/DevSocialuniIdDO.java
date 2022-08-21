@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "u_socialuni_id",
+@Table(name = "s_socialuni_id",
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
                 @UniqueConstraint(columnNames = {"socialuniId"})

@@ -13,37 +13,38 @@
     </q-popup>
 
 
-    <q-popup :value="dialogVisible">
-      <view class="uni-tip">
-        <view class="uni-tip-title">举报</view>
-        <view class="uni-tip-content">
-          <radio-group class="uni-list" @change="reportTypeChange">
-            <label class="uni-list-cell flex-row uni-list-cell-pd"
-                   v-for="report in reportTypes" :key="report">
-              <view>
-                <radio :id="report" :value="report" :checked="report===pornInfo"></radio>
-              </view>
-              <view>
-                <label class="ml-10" :for="report">
-                  <text>{{ report }}</text>
-                </label>
-              </view>
-            </label>
-          </radio-group>
-        </view>
-        <view class="uni-textarea bd-1 bd-radius-xs">
+    <q-popup :value="dialogVisible" hide-button title="举报">
+      <div class="w100p row-center">
+        <view class="uni-tip">
+          <view class="uni-tip-content">
+            <radio-group class="uni-list" @change="reportTypeChange">
+              <label class="uni-list-cell flex-row uni-list-cell-pd"
+                     v-for="report in reportTypes" :key="report">
+                <view>
+                  <radio :id="report" :value="report" :checked="report===pornInfo"></radio>
+                </view>
+                <view>
+                  <label class="ml-10" :for="report">
+                    <text>{{ report }}</text>
+                  </label>
+                </view>
+              </label>
+            </radio-group>
+          </view>
+          <view class="uni-textarea bd-1 bd-radius-xs">
                     <textarea placeholder="其他违规必填，其他情况选填，可详细陈述观点" v-model.trim="reportContent"
                               :show-confirm-bar="false"
                     />
+          </view>
+          <view class="uni-tip-group-button row-center">
+            <button class="uni-tip-button w40p mr" type="default" @click="reportDialogClose" :plain="true">
+              取消
+            </button>
+            <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
+            </button>
+          </view>
         </view>
-        <view class="uni-tip-group-button row-center">
-          <button class="uni-tip-button w40p mr" type="default" @click="reportDialogClose" :plain="true">
-            取消
-          </button>
-          <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
-          </button>
-        </view>
-      </view>
+      </div>
     </q-popup>
   </view>
 </template>

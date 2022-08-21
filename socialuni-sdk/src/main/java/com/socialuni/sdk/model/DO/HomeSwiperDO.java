@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 全局配置表
  */
-@Table(name = "home_swiper")
+@Table(name = "s_home_swiper")
 public class HomeSwiperDO  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

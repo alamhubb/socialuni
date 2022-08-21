@@ -3,25 +3,25 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.SocialuniUserService;
+import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.dev.DevAccountDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.center.web.constant.AppConfigConst;
-import com.socialuni.center.web.constant.ViolateType;
-import com.socialuni.center.web.redis.SocialUserPhoneRedis;
-import com.socialuni.center.web.repository.CommentRepository;
-import com.socialuni.center.web.repository.KeywordsRepository;
-import com.socialuni.center.web.repository.NotifyRepository;
-import com.socialuni.center.web.repository.ReportRepository;
-import com.socialuni.center.web.repository.community.TalkRepository;
-import com.socialuni.center.web.repository.dev.ThirdUserRepository;
-import com.socialuni.center.web.service.KeywordsService;
-import com.socialuni.center.web.store.TalkQueryStore;
-import com.socialuni.center.web.utils.DevAccountUtils;
+import com.socialuni.sdk.model.DO.ReportDO;
+import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.sdk.repository.CommentRepository;
+import com.socialuni.sdk.repository.KeywordsRepository;
+import com.socialuni.sdk.repository.NotifyRepository;
+import com.socialuni.sdk.repository.ReportRepository;
+import com.socialuni.sdk.repository.community.TalkRepository;
+import com.socialuni.sdk.repository.dev.ThirdUserRepository;
+import com.socialuni.sdk.service.KeywordsService;
+import com.socialuni.sdk.store.TalkQueryStore;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +61,7 @@ public class ReportController {
 
     @RequestMapping("getViolation")
     public ResultRO<Object> getViolation() {
-        List<TalkDO> talkDOS = talkRepository.findTop2000ByStatusAndViolateTypeOrderByIdDesc(ContentStatus.violation, ViolateType.pornInfo);
+        List<SocialTalkDO> talkDOS = talkRepository.findTop2000ByStatusAndViolateTypeOrderByIdDesc(ContentStatus.violation, ViolateType.pornInfo);
         VioKeywordsUtil.gatherKeywords(talkDOS);
         return new ResultRO<>();
     }
@@ -115,13 +115,13 @@ public class ReportController {
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {
         //展示用户的前多少条动态，评论，
 
-        UserDO user = new UserDO();
+        SocialUserDO user = new SocialUserDO();
         user.setId(userId);
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
 //        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserAndStatusOrderByUpdateTimeDesc(user, CommonStatus.violation);
         List<ReportDO> reportDOS = new ArrayList<>();
         List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
-//        List<TalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
+//        List<SocialTalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
 //        return new ResultVO<>(list.stream().map(ReportTalkVO::new).collect(Collectors.toList()));
         return new ResultRO<>(reportVOS);
     }
@@ -139,18 +139,18 @@ public class ReportController {
 
     @PostMapping("queryUserContentsByPhoneNum")
     public ResultRO<List<ReportVO>> queryUserContentsByPhoneNum(String phoneNum) {
-        UserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
+        SocialUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
         List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserIdOrderByCreateTimeDesc(user.getId());
         List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         //查询用户10条动态
-        List<TalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getId());
+        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getId());
         List<ReportVO> talkReportVOS = talkDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         //查询用户10条评论
-        List<CommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getId());
+        List<SocialCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getId());
         List<ReportVO> commentReportVOS = commentDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         reportVOS.addAll(talkReportVOS);
@@ -194,7 +194,7 @@ public class ReportController {
         }
         reportDO.setAuditType(auditType);
         if (reportContentType.equals(ReportContentType.talk)) {
-            TalkDO talkDO = reportDO.getTalk();
+            SocialTalkDO talkDO = reportDO.getTalk();
             if (ReportType.noViolationList.contains(auditType)) {
                 violationService.generalViolationsReportHandler(talkDO, auditType, reportDO);
             } else {
@@ -204,7 +204,7 @@ public class ReportController {
             NotifyDO notifyDO = notifyRepository.save(new NotifyDO(systemUser, talkDO.getUser(), talkDO));
             notifyDOS.add(notifyDO);
         } else if (reportContentType.equals(ReportContentType.comment)) {
-            CommentDO commentDO = reportDO.getComment();
+            SocialCommentDO commentDO = reportDO.getComment();
             if (ReportType.noViolationList.contains(auditType)) {
                 violationService.generalViolationsReportHandler(commentDO, auditType, reportDO);
             } else {
@@ -261,7 +261,7 @@ public class ReportController {
             return new ResultVO<>("错误的类型");
         }
         //user改为正常
-        UserDO receiveUser = modelDO.getUser();
+        SocialUserDO receiveUser = modelDO.getUser();
         String userStatus = receiveUser.getStatus();
         if (userStatus.equals(CommonStatus.audit)) {
             receiveUser.setStatus(CommonStatus.enable);
@@ -280,7 +280,7 @@ public class ReportController {
         List<ReportDetailDO> reportDetailDOS = reportDO.getChildReports();
         //变更detail
         for (ReportDetailDO reportDetailDO : reportDetailDOS) {
-            UserDO detailUser = reportDetailDO.getUser();
+            SocialUserDO detailUser = reportDetailDO.getUser();
             //如果今天已经成功举报了10个以上，则不再发放奖励
             reportDetailDO.setStatus(CommonStatus.noViolation);
             //错误的举报，user减分

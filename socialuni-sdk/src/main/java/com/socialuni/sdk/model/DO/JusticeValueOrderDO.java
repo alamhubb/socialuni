@@ -10,7 +10,7 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2020-03-15 17:15
  */@Entity
-@Table(name = "justice_value_order")
+@Table(name = "s_justice_value_order")
 @Data
 public class JusticeValueOrderDO implements Serializable {
     /**

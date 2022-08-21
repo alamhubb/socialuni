@@ -3,6 +3,7 @@ package com.socialuni.social.web.sdk.config;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.exception.constant.ErrorCode;
 import com.socialuni.social.exception.constant.ErrorType;
+import com.socialuni.social.exception.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
@@ -53,9 +54,9 @@ public class SocialWebLogAspect {
             } else {
                 requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
                 requestLogDO.setErrorType(ErrorType.error);
-                requestLogDO.setErrorMsg("系统异常");
+                requestLogDO.setErrorMsg(ErrorMsg.systemErrorMsg);
                 requestLogDO.setSuccess(false);
-                requestLogDO.setInnerMsg("系统异常");
+                requestLogDO.setInnerMsg(ErrorMsg.systemErrorMsg);
                 requestLogDO.setInnerMsgDetail(result.toString());
                 ErrorLogUtil.saveAsync(requestLogDO);
             }

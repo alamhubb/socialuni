@@ -88,14 +88,13 @@ public class TalkQueryStore {
         return talkUnionIds;
     }
 
-    public List<SocialTalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(List<Integer> talkIds, Integer userId, String postTalkUserGender,
+    public List<SocialTalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(Integer pageNum, Integer userId, String postTalkUserGender,
                                                                                Integer minAge, Integer maxAge, String adCode,
                                                                                List<Integer> tagIds, String talkVisibleGender,
                                                                                String mineUserGender, Integer devId, Date queryTime, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
 //        int page = talkIds.size() / 10;
-        int page = 0;
         List<Integer> ids = this.queryTalkIdsByTab(userId, postTalkUserGender, minAge, maxAge, adCode,
-                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(page, 10), devId, queryTime, circleId, hasPeopleImgTalkNeedIdentity);
+                talkVisibleGender, mineUserGender, tagIds, PageRequest.of(pageNum, 10), devId, queryTime, circleId, hasPeopleImgTalkNeedIdentity);
         return this.queryTalksByIds(ids);
     }
 
@@ -105,7 +104,7 @@ public class TalkQueryStore {
         for (Integer id : ids) {
 //            SocialTalkRO talkEO = TalkROFactory.newTalkRO(id);
 //            talkDOS.add(talkEO);
-            SocialTalkDO talkDO = TalkUtils.get(id);
+            SocialTalkDO talkDO = TalkUtils.getNotNull(id);
             talkDOS.add(talkDO);
         }
         return talkDOS;

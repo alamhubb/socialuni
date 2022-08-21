@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2019-02-14 22:03
  */
 @Entity
-@Table(name = "dev_auth_code")
+@Table(name = "s_dev_auth_code")
 @Data
 public class DevAuthCodeDO implements Serializable {
     @Id

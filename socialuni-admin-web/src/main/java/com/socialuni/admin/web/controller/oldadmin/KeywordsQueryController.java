@@ -2,21 +2,22 @@ package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
+import com.socialuni.sdk.repository.*;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.CommonStatus;
 import com.socialuni.social.constant.ContentStatus;
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.comment.CommentDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.entity.model.DO.message.MessageDO;
-import com.socialuni.social.entity.model.DO.talk.TalkDO;
+import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
+import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.model.DO.message.MessageDO;
+import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.center.web.mapper.TalkMapper;
-import com.socialuni.center.web.repository.community.TalkRepository;
-import com.socialuni.center.web.service.KeywordsService;
-import com.socialuni.center.web.service.KeywordsTriggerService;
+import com.socialuni.sdk.mapper.TalkMapper;
+import com.socialuni.sdk.repository.community.TalkRepository;
+import com.socialuni.sdk.service.KeywordsService;
+import com.socialuni.sdk.service.KeywordsTriggerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -107,8 +108,8 @@ public class KeywordsQueryController {
         //得到所有触发的
         List<BaseModelDO> baseModelDOS = new ArrayList<>();
         Pageable pageable = PageRequest.of(0, count);
-        Page<TalkDO> talkModels = talkRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
-        Page<CommentDO> commentDOS = commentRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<SocialTalkDO> talkModels = talkRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<SocialCommentDO> commentDOS = commentRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<MessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
 
         baseModelDOS.addAll(talkModels.getContent());

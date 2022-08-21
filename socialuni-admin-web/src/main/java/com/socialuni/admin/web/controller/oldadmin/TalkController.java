@@ -24,15 +24,15 @@ public class TalkController {
     */
 /*@PostMapping("queryTalk")
     public ResultVO<ReportContentVO> queryTalk(Integer talkId) {
-        TalkDO talkDO = talkRepository.findById(talkId).get();
+        SocialTalkDO talkDO = talkRepository.findById(talkId).get();
         return new ResultVO<>(new ReportContentVO(talkDO));
     }
 
     @PostMapping("queryUserTalks")
     public ResultVO<List<ReportContentVO>> queryUserTalks(Integer userId) {
-        UserDO userDO = new UserDO();
+        SocialUserDO userDO = new SocialUserDO();
         userDO.setId(userId);
-        List<TalkDO> talks = talkRepository.findTop20ByUserIdOrderByIdDesc(userDO.getId());
+        List<SocialTalkDO> talks = talkRepository.findTop20ByUserIdOrderByIdDesc(userDO.getId());
         List<ReportContentVO> talkVOS = talks.stream().map(ReportContentVO::new).collect(Collectors.toList());
         return new ResultVO<>(talkVOS);
     }*//*

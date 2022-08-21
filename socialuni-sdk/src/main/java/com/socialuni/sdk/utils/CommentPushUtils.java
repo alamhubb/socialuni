@@ -22,13 +22,13 @@ import java.util.HashMap;
 public class CommentPushUtils {
     //动态评论通知
     public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialUserDO requestUser) {
-        SocialCommentDO comment = CommentUtils.get(notify.getCommentId());
-        SocialTalkDO talk = TalkUtils.get(comment.getTalkId());
+        SocialCommentDO comment = CommentUtils.getNotNull(notify.getCommentId());
+        SocialTalkDO talk = TalkUtils.getNotNull(comment.getTalkId());
         SocialCommentDO replyComment;
         if (comment.getReplyCommentId() == null) {
-            replyComment = CommentUtils.get(comment.getParentCommentId());
+            replyComment = CommentUtils.getNotNull(comment.getParentCommentId());
         } else {
-            replyComment = CommentUtils.get(comment.getReplyCommentId());
+            replyComment = CommentUtils.getNotNull(comment.getReplyCommentId());
         }
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();

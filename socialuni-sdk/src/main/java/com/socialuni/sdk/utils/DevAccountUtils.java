@@ -149,10 +149,6 @@ public class DevAccountUtils {
     }
 
 
-    public static boolean notPushServer() {
-        return !DevAccountUtils.pushServer();
-    }
-
     //为中心向服务器推送
     public static boolean pusherIsCenterServer() {
         return Objects.equals(DevAccountUtils.getDevIdNotNull(), DevAccountUtils.getCenterDevIdNotNull());
@@ -185,6 +181,14 @@ public class DevAccountUtils {
     public static DevAccountDO getAdminDevAccountAllowNull() {
         String token = SocialTokenUtil.getToken();
         return DevAccountUtils.getDevAccountByToken(token);
+    }
+
+    public static Integer getAdminDevAccountIdAllowNull() {
+        DevAccountDO devAccountDO = getAdminDevAccountAllowNull();
+        if (devAccountDO == null) {
+            return null;
+        }
+        return devAccountDO.getId();
     }
 
     //得到用户信息

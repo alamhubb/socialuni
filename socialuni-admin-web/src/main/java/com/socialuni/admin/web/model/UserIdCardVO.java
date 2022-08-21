@@ -1,7 +1,7 @@
 /*
 package com.socialuni.admin.web.model;
 
-import com.socialuni.social.model.DO.user.SocialUserDO;
+import com.socialuni.social.model.DO.user.SocialSocialUserDO;
 import lombok.Data;
 
 import java.util.Date;
@@ -27,7 +27,7 @@ public class UserIdCardVO {
     public UserIdCardVO() {
     }
 
-    public UserIdCardVO(SocialUserDO user) {
+    public UserIdCardVO(SocialSocialUserDO user) {
         this.userId = user.getId();
         this.nickname = user.getNickname();
         this.gender = user.getGender();
@@ -40,7 +40,7 @@ public class UserIdCardVO {
         this.createDate = user.getCreateTime();
     }
 
-    public static List<UserIdCardVO> userDOToVOS(List<SocialUserDO> userDOs) {
+    public static List<UserIdCardVO> userDOToVOS(List<SocialSocialUserDO> userDOs) {
         return userDOs.stream().map(UserIdCardVO::new).collect(Collectors.toList());
     }
 }

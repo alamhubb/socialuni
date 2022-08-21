@@ -5,10 +5,10 @@ import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Component
 public class CommentStore {
@@ -35,17 +35,33 @@ public class CommentStore {
      *
      * @return
      */
-    public void updateCommentByAddComment(SocialCommentPostQO addVO) {
-        if (addVO.getCommentId() == null || UnionIdDbUtil.notSelfData(addVO.getCommentId())) {
+    public void updateParentReplyCommentByAddComment(SocialCommentPostQO addVO) {
+        if (addVO.getCommentId() == null) {
             return;
         }
-        SocialCommentDO parentComment = CommentUtils.get(addVO.getCommentId());
+        SocialCommentDO parentComment = CommentUtils.getAllowNull(addVO.getCommentId());
+        if (parentComment == null) {
+            return;
+        }
         Integer ChildCommentNum = parentComment.getChildCommentNum();
         //这里属于业务
         if (ChildCommentNum == null) {
             parentComment.setChildCommentNum(1);
         } else {
             parentComment.setChildCommentNum(++ChildCommentNum);
+        }
+        Date curDate = new Date();
+        //只有直接回复父评论，才更新时间
+        parentComment.setUpdateTime(curDate);
+
+        if (addVO.getCommentId() != null) {
+            SocialCommentDO replyComment = CommentUtils.getAllowNull(addVO.getCommentId());
+            if (replyComment != null) {
+                //测试所有自己评论自己，刚才处空指针了
+                replyComment.setUpdateTime(curDate);
+                //更新后保存到数据库
+                commentRepository.save(replyComment);
+            }
         }
         //更新后保存到数据库
         commentRepository.save(parentComment);

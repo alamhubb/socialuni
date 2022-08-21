@@ -24,7 +24,9 @@ public class SocialPostCommentEntity {
         talkManage.updateTalkByAddComment(addVO.getTalkId());
         //设置为更新后的talk
         //关联更新comment到db，时间、评论次数等
-        commentStore.updateCommentByAddComment(addVO);
+        if (addVO.getCommentId() != null) {
+            commentStore.updateParentReplyCommentByAddComment(addVO);
+        }
 
         return commentDO;
     }

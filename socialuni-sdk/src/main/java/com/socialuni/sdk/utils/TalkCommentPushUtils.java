@@ -23,8 +23,8 @@ import java.util.HashMap;
 public class TalkCommentPushUtils {
     //动态评论通知
     public static PushMsgDTO getTalkPushDTO(String provider, NotifyDO notify, SocialUserDO requestUser) {
-        SocialCommentDO comment = CommentUtils.get(notify.getCommentId());
-        SocialTalkDO talk = TalkUtils.get(comment.getTalkId());
+        SocialCommentDO comment = CommentUtils.getNotNull(notify.getCommentId());
+        SocialTalkDO talk = TalkUtils.getNotNull(comment.getTalkId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

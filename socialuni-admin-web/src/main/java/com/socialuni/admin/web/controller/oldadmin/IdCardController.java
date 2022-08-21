@@ -4,7 +4,7 @@ package com.socialuni.admin.web.controller.oldadmin;
 import com.qingchi.admin.modelvo.UserIdCardVO;
 import com.socialuni.social.model.common.ResultRO;
 import com.socialuni.social.constant.status.ContentStatus;
-import com.socialuni.social.model.DO.user.SocialUserDO;
+import com.socialuni.social.model.DO.user.SocialSocialUserDO;
 import com.qingchi.base.repository.user.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +35,7 @@ public class IdCardController {
     @PostMapping("queryIdCards")
     public ResultRO<List<UserIdCardVO>> queryIdCards() {
         //todo 这里有问题，第一个次审核过，目前等于永久审核过，存在问题，每次上传照片都应该审核
-//        List<SocialUserDO> userDOS = userRepository.findByIdCardStatus(ContentStatus.audit);
+//        List<SocialSocialUserDO> userDOS = userRepository.findByIdCardStatus(ContentStatus.audit);
 //        return new ResultRO<>(UserIdCardVO.userDOToVOS(userDOS));
         return null;
     }
@@ -56,9 +56,9 @@ public class IdCardController {
 /*
         List<UserIdCardVO> userIdCardVOS = auditVO.getIdCards();
         List<AdminAuditRecordDO> auditRecordDOS = new ArrayList<>();
-        List<UserDO> users = new ArrayList<>();
+        List<SocialUserDO> users = new ArrayList<>();
         for (UserIdCardVO user : userIdCardVOS) {
-            UserDO userDO = userRepository.getOne(user.getUserId());
+            SocialUserDO userDO = userRepository.getOne(user.getUserId());
             AdminAuditRecordDO auditRecordDO = new AdminAuditRecordDO();
             //认证通过的图片改为已认证，未通过的改为未认证，查询的时候只查询enabled和已认证的
             //记录审核操作
@@ -75,7 +75,7 @@ public class IdCardController {
             } else {
                 Logger.logger.warn("系统异常，用户不存在idcard却进入了审核");
             }
-            auditRecordDO.setAdminUser(new AdminUserDO(1));
+            auditRecordDO.setAdminUser(new AdminSocialUserDO(1));
             auditRecordDO.setUser(userDO);
             List<AdminAuditRecordImgDO> auditRecordImgDOS = new ArrayList<>();
             auditRecordDO.setAuditRecordImgs(auditRecordImgDOS);

@@ -1,20 +1,21 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.model.ReportVO;
+import com.socialuni.sdk.repository.*;
 import com.socialuni.social.api.model.ResultRO;
 import com.socialuni.social.constant.ContentType;
 import com.socialuni.social.constant.ReportStatus;
-import com.socialuni.social.entity.model.DO.NotifyDO;
-import com.socialuni.social.entity.model.DO.ReportDO;
-import com.socialuni.social.entity.model.DO.ReportDetailDO;
-import com.socialuni.social.entity.model.DO.base.BaseModelDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.entity.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.center.web.config.SocialAppConfig;
-import com.socialuni.center.web.constant.ReportSourceType;
-import com.socialuni.center.web.constant.ViolateType;
-import com.socialuni.center.web.service.BaseModelUtils;
-import com.socialuni.center.web.service.KeywordsService;
+import com.socialuni.sdk.model.DO.NotifyDO;
+import com.socialuni.sdk.model.DO.ReportDO;
+import com.socialuni.sdk.model.DO.ReportDetailDO;
+import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
+import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.constant.ReportSourceType;
+import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.service.BaseModelUtils;
+import com.socialuni.sdk.service.KeywordsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

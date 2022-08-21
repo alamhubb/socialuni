@@ -50,6 +50,11 @@ public class UnionIdDbUtil {
         return createUnionIdByContentType(ContentType.user);
     }
 
+    public static Integer createUserImgUnionId() {
+        return createUnionIdByContentType(ContentType.userImg);
+    }
+
+
     public static Integer createTalkUnionId() {
         return createUnionIdByContentType(ContentType.talk);
     }
@@ -89,14 +94,6 @@ public class UnionIdDbUtil {
             throw new SocialParamsException("无效的内容标示5");
         }
         return uniContentUnionIdDO;
-    }
-
-    public static Boolean notSelfData(Integer unionId) {
-        return !isSelfData(unionId);
-    }
-
-    public static Boolean isSelfData(Integer unionId) {
-        return getUnionDOByUnionIdNotNull(unionId).getFromDevId() == 1;
     }
 
     //获取可为空， 将中心的数据写入本系统

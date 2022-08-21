@@ -11,7 +11,7 @@ import java.util.Date;
  * 自己表示字段，其他表示关联的表内字段
  */
 @Data
-@Table(name = "third_user",
+@Table(name = "s_third_user",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"devId", "userId"}),
                 @UniqueConstraint(columnNames = "thirdUserId")

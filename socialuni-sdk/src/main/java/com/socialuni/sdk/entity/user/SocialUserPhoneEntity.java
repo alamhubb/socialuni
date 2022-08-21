@@ -8,6 +8,7 @@ import com.socialuni.sdk.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.Date;
 
 @Component
@@ -22,6 +23,7 @@ public class SocialUserPhoneEntity {
     SocialUserFansDetailManage socialUserFansDetailManage;
 
     //外层已经校验过了
+    @Transactional
     public SocialUserDO createUserPhoneEntity(String phoneNum) {
         SocialUserDO mineUser = socialUserManage.createUserByPhoneLogin();
         //创建或返回

@@ -35,6 +35,7 @@ public class SocialHomeTalkQueryQOFactory {
         socialHomeTabTalkQueryQO.setLon(queryQO.getLon());
         socialHomeTabTalkQueryQO.setMinAge(queryQO.getMinAge());
         socialHomeTabTalkQueryQO.setMaxAge(queryQO.getMaxAge());
+        socialHomeTabTalkQueryQO.setPageNum(queryQO.getPageNum());
         socialHomeTabTalkQueryQO.setCircleName(queryQO.getCircleName());
         socialHomeTabTalkQueryQO.setQueryTime(queryQO.getQueryTime());
         if (socialHomeTabTalkQueryQO.getQueryTime() == null) {

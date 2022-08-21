@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "third_user_auth",
+@Table(name = "s_third_user_auth",
         indexes = {
                 @Index(columnList = "status")
         },

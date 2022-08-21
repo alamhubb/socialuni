@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 违规词
  */
-@Table(name = "illegal_word", uniqueConstraints = {
+@Table(name = "s_illegal_word", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"word"})
 })
 public class IllegalWordDO implements Serializable {

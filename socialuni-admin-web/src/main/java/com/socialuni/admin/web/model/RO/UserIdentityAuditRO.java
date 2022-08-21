@@ -1,10 +1,10 @@
 package com.socialuni.admin.web.model.RO;
 
 import com.socialuni.admin.web.model.ReportUserVO;
-import com.socialuni.social.entity.model.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.social.entity.model.DO.user.SocialUserIdentityAuthImgDO;
-import com.socialuni.social.entity.model.DO.user.UserDO;
-import com.socialuni.center.web.config.SocialAppConfig;
+import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthDO;
+import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.config.SocialAppConfig;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +28,7 @@ public class UserIdentityAuditRO {
     Integer authNum;
     Boolean success;
 
-    public UserIdentityAuditRO(SocialUserIdentityAuthDO socialUserIdentityAuthDO, SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO, UserDO userDO) {
+    public UserIdentityAuditRO(SocialUserIdentityAuthDO socialUserIdentityAuthDO, SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO, SocialUserDO userDO) {
         this.checked = true;
         this.success = true;
         this.id = socialUserIdentityAuthDO.getId();

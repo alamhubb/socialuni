@@ -9,7 +9,7 @@ import com.qingchi.base.mapper.TalkMapper;
 import com.socialuni.social.model.common.BaseModelDO;
 import com.qingchi.base.model.report.ReportDO;
 import com.qingchi.base.model.system.KeywordsDO;
-import com.qingchi.base.model.talk.TalkDO;
+import com.qingchi.base.model.talk.SocialTalkDO;
 import com.qingchi.base.repository.keywords.KeywordsRepository;
 import com.qingchi.base.repository.report.ReportRepository;
 import com.qingchi.base.repository.talk.TalkRepository;
@@ -59,7 +59,7 @@ public class KeywordsTempController {
     public ResultRO<List<BaseModelDO>> test5(@Valid @NotNull String content, @Valid @NotNull Integer count) {
 //        TencentCloud.textIsViolation(content);
 //        Pageable pageable = PageRequest.of(0, count);
-//        Page<TalkDO> talkModels = talkRepository.findByStatusNotInAndContentLikeOrderByIdDesc(pageable, ContentStatus.auditStatus, "%" + content + "%");
+//        Page<SocialTalkDO> talkModels = talkRepository.findByStatusNotInAndContentLikeOrderByIdDesc(pageable, ContentStatus.auditStatus, "%" + content + "%");
 //        // 数字串集合
 //        String numAryReg = "\\d+";
 //
@@ -172,8 +172,8 @@ public class KeywordsTempController {
         for (int i = 0; i < 175; i++) {
             QingLogger.logger.info("开始时间i:" + i + ":{}", Long.toString(new Date().getTime() / 1000));
 //            Pageable pageable = PageRequest.of(i, 1000);
-            List<TalkDO> talkDOS = talkMapper.queryTalksByPageOrderById(i * 1000, 1000);
-//            List<TalkDO> talkDOS = talkRepository.findAllByOrderById(pageable);
+            List<SocialTalkDO> talkDOS = talkMapper.queryTalksByPageOrderById(i * 1000, 1000);
+//            List<SocialTalkDO> talkDOS = talkRepository.findAllByOrderById(pageable);
 
             QingLogger.logger.info("查询数量:" + talkDOS.size() + "个---------------------");
             if (talkDOS.size() > 0) {
@@ -188,7 +188,7 @@ public class KeywordsTempController {
 
 
             //保存一个原本，存储相关内容，就是本来是污，,.,.的，保存 污.,..的，往后截取6个，或者到最后
-            for (TalkDO talkDO : talkDOS) {
+            for (SocialTalkDO talkDO : talkDOS) {
                 KeywordsTriggerDO keywordsTriggerDO = keywordsService.getKeywordsTriggerDO(talkDO, ContentType.talk);
                 list.add(keywordsTriggerDO);
             }*//*
