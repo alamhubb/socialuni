@@ -67,8 +67,10 @@ public class SocialTokenDOUtil {
             if (!userKey.equals(uid)) {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);
                 RequestLogDO requestLogDO = RequestLogUtil.get();
-                requestLogDO.setUserId(doUserId.toString());
-                RequestLogUtil.save(requestLogDO);
+                if (requestLogDO != null) {
+                    requestLogDO.setUserId(doUserId.toString());
+                    RequestLogUtil.save(requestLogDO);
+                }
                 throw new SocialNotLoginException();
             }
         }

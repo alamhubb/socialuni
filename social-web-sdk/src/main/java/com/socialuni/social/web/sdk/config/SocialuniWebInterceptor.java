@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,35 +31,29 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
             return true;
         }
-
         Date startTime = new Date();
-
         String uri = request.getRequestURI();
         String userIp = IpUtil.getIpAddr(request);
-
         RequestLogDO requestLogDO = new RequestLogDO();
 //        requestLogDO.setRequestId(RequestIdUtil.addId());
         requestLogDO.setIp(userIp);
-        requestLogDO.setUserId(socialuniWebInterceptorConfig.getUserId());
         requestLogDO.setCreateTime(startTime);
         requestLogDO.setSuccess(true);
         requestLogDO.setErrorType(ErrorType.success);
         requestLogDO.setRequestMethod(requestMethod);
-
         requestLogDO.setSystemInfo(RequestUtil.getSystem());
         requestLogDO.setProvider(RequestUtil.getProvider());
         requestLogDO.setPlatform(RequestUtil.getPlatform());
-
         requestLogDO.setUri(uri);
+        RequestLogUtil.set(requestLogDO);
 
-
+        requestLogDO.setUserId(socialuniWebInterceptorConfig.getUserId());
 //        requestLogDO.setErrorCode(ResultRO.successCode);
 //        requestLogDO.setErrorType(ErrorType.success);
 //        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
 //        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
 
         requestLogDO = RequestLogUtil.save(requestLogDO);
-        RequestLogUtil.set(requestLogDO);
         return true;
     }
 }

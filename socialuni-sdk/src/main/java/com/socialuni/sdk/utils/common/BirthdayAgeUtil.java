@@ -131,17 +131,14 @@ public class BirthdayAgeUtil {
         Pattern p = Pattern.compile(regEx);
         content = StringUtil.replaceAll(content, p, (result) -> {
             String resGroup = result.group();
-            System.out.println(resGroup);
             Integer hanziNum = ModelContentCheck.hanziNumberMap.get(resGroup);
             if (hanziNum != null) {
                 return hanziNum.toString();
             }
             return resGroup;
         });
-        System.out.println(content);
         //删除非数字、字母、汉字
         content = content.trim().replaceAll("[^\\u4E00-\\u9FA5\\w]", "");
-        System.out.println(content);
         return content;
     }
 

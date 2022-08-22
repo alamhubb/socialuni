@@ -33,7 +33,7 @@ public class SocialTokenUtil {
     }
 
     public static void main(String[] args) {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmZWY0MWRkZjk5YzA0Y2I2YTNiZjE4OTkwNjQwMGE1MF9kYzZmMmU3NDZlNWU0NDliYjc4YjM4YjhjMGE4NjU1NSJ9.mTxWy-EQU1uteMSFikRTNvitE96bjcSSXcTVwsZSMIE";
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NTc3NjRkNmU1ZDE0Yjk4ODMwNDBiZjVjYzY0MjdkMF9lM2E3ZDJlMzFiMDM0M2Q2YjUxMzEwZWZhZmIzNGI5YSJ9.Ccnu2c1NGH2VMFFQcTnCxLNvrJVBljKfd0BDOjQS9J4";
         if (SocialTokenUtil.isSuccess(token)) {
             try {
                 String tokenSubject = Jwts.parser().setSigningKey("da838b62ed0e412bb560254ebdc356c1").parseClaimsJws(token).getBody().getSubject();
