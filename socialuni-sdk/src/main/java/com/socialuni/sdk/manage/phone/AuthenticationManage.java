@@ -1,9 +1,9 @@
 package com.socialuni.sdk.manage.phone;
 
 import com.socialuni.sdk.utils.IntegerUtils;
-import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.sdk.model.DO.AuthenticationDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.repository.AuthenticationRepository;
 import lombok.extern.slf4j.Slf4j;

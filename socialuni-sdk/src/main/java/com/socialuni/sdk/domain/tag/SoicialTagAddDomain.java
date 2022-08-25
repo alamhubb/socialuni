@@ -10,7 +10,7 @@ import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.repository.community.TagRepository;
 import com.socialuni.sdk.utils.WxUtil;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import org.apache.commons.lang3.StringUtils;

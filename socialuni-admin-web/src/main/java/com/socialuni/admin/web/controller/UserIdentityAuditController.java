@@ -1,8 +1,8 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.RO.UserIdentityAuditRO;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.UserIdentityAuthStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;

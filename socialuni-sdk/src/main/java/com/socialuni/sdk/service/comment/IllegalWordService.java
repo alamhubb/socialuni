@@ -4,7 +4,7 @@ package com.socialuni.sdk.service.comment;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.config.AppConfigStatic;
 import com.socialuni.sdk.model.DO.keywords.IllegalWordDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.repository.IllegalWordRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

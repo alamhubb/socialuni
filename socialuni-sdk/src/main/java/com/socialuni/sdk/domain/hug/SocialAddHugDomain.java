@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.DO.HugDO;
 import org.springframework.stereotype.Component;
 

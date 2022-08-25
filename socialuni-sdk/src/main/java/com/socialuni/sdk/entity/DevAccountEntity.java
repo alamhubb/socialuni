@@ -5,10 +5,10 @@ import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.redis.DevAccountRedis;
 import com.socialuni.sdk.repository.community.TagRepository;
 import com.socialuni.sdk.repository.dev.DevAccountRepository;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.DevAccountType;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.web.sdk.utils.UUIDUtil;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.DevAccountType;
+import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.sdk.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

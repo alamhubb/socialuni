@@ -13,8 +13,8 @@ import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.platform.MapUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

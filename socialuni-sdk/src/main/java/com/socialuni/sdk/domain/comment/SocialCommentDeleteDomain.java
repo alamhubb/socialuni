@@ -4,11 +4,11 @@ import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentDeleteQO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

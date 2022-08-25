@@ -1,7 +1,7 @@
 package com.socialuni.social.web.sdk.config;
 
 
-import com.socialuni.social.exception.constant.ErrorType;
+import com.socialuni.social.web.sdk.constant.ErrorType;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

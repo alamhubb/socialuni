@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.repository.UserImgRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

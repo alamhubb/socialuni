@@ -8,7 +8,7 @@ import com.socialuni.sdk.model.RO.user.CenterUserFollowDetailRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserFollowDetailRO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.DO.keywords.IllegalWordDO;
 import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
 import com.socialuni.sdk.repository.IllegalWordRepository;
 import com.socialuni.sdk.repository.KeywordsRepository;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

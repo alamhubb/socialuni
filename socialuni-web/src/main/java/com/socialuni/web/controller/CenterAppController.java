@@ -4,7 +4,7 @@ import com.socialuni.sdk.model.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.sdk.serive.CenterAppService;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

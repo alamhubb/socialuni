@@ -6,7 +6,7 @@ import com.socialuni.sdk.domain.follow.SocialUserFollowDomain;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.model.QO.community.SocialFollowAddQO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserFollowDetailRO;
 import org.springframework.stereotype.Service;
 

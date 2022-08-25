@@ -3,7 +3,7 @@ package com.socialuni.sdk.feignAPI;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -9,7 +9,7 @@ import com.socialuni.sdk.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
 import com.socialuni.sdk.utils.UniAPIUtils;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

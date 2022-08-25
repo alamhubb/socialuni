@@ -9,7 +9,7 @@ import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

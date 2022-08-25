@@ -4,7 +4,7 @@ import com.socialuni.sdk.feignAPI.SocialuniTalkAPI;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.domain.talk.*;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -8,7 +8,7 @@ import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
 import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.manage.SocialTagManage;
 import com.socialuni.sdk.repository.community.TagRepository;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

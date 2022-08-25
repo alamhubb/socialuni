@@ -5,7 +5,7 @@ import com.socialuni.sdk.domain.login.SocialProviderLoginDomain;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import org.springframework.stereotype.Service;
 

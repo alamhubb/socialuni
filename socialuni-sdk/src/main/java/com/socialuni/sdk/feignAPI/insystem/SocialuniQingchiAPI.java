@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;

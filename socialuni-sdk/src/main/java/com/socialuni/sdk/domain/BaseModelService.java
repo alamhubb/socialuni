@@ -12,7 +12,7 @@ import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.DO.message.MessageDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

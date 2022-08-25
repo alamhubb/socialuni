@@ -8,8 +8,7 @@ import com.socialuni.sdk.repository.BlackKeywordsRepository;
 import com.socialuni.sdk.repository.CustomKeywordsRepository;
 import com.socialuni.sdk.repository.WhiteKeywordsRepository;
 import com.socialuni.sdk.utils.KeywordsUtils;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.sdk.model.DO.keywords.*;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

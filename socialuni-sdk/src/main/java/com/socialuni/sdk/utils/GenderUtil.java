@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 
 /**
  * @author qinkaiyuan

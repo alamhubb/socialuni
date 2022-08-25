@@ -3,8 +3,8 @@ package com.socialuni.sdk.utils;
 import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.repository.community.TalkRepository;
-import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

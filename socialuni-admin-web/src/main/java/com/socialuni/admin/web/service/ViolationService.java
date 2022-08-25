@@ -1,8 +1,8 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.sdk.repository.*;
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.model.DO.ReportDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.user.SocialUserViolationDO;

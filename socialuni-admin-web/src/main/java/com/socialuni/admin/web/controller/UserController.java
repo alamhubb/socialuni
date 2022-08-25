@@ -2,9 +2,9 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.SocialuniUserService;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.repository.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,11 +1,11 @@
 package com.socialuni.social.web.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.base.SocialException;
-import com.socialuni.social.exception.constant.ErrorCode;
-import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.exception.constant.ErrorMsg;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.web.sdk.exception.base.SocialException;
+import com.socialuni.social.web.sdk.constant.ErrorCode;
+import com.socialuni.social.web.sdk.constant.ErrorType;
+import com.socialuni.social.web.sdk.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.*;
 import feign.FeignException;

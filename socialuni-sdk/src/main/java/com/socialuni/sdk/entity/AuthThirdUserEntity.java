@@ -10,7 +10,7 @@ import com.socialuni.sdk.manage.ThirdUserTokenManage;
 import com.socialuni.sdk.model.DO.dev.ThirdUserDO;
 import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.constant.AuthType;
 import com.socialuni.sdk.redis.SocialUserPhoneRedis;

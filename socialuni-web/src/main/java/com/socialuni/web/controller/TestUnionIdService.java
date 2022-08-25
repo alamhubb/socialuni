@@ -6,10 +6,10 @@ import com.socialuni.sdk.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.sdk.repository.dev.ThirdUserRepository;
 import com.socialuni.sdk.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.sdk.repository.UnionIdRepository;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.domain.phone.SocialBindUserSocialuniAccountDomain;
 import com.socialuni.sdk.repository.UserRepository;
-import com.socialuni.social.web.sdk.utils.UUIDUtil;
+import com.socialuni.sdk.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

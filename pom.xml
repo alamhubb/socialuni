@@ -19,9 +19,6 @@
     <description>qingchi_back project for Spring Boot</description>
 
     <modules>
-        <module>social-constant</module>
-        <module>social-api-model</module>
-        <module>social-exception</module>
         <module>social-web-sdk</module>
         <module>socialuni-web</module>
         <module>socialuni-sdk</module>
@@ -44,27 +41,12 @@
         <dependencies>
             <dependency>
                 <groupId>com.socialuni</groupId>
-                <artifactId>social-constant</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-sdk</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>social-api-model</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>social-exception</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

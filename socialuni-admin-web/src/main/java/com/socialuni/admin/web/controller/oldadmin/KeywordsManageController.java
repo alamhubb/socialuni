@@ -2,10 +2,10 @@ package com.socialuni.admin.web.controller.oldadmin;
 
 
 import com.socialuni.admin.web.service.ViolationService;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.status.ConstBoolean;
 import com.socialuni.sdk.mapper.TalkMapper;
 import com.socialuni.sdk.repository.KeywordsRepository;

@@ -2,7 +2,7 @@ package com.socialuni.admin.web.config;
 
 import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.social.exception.SocialNotLoginException;
+import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
 import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

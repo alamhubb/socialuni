@@ -15,8 +15,8 @@ import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

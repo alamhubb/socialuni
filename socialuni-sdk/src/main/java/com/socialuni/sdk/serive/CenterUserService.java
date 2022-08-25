@@ -15,7 +15,7 @@ import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

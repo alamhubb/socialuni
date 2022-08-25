@@ -2,7 +2,7 @@ package com.socialuni.sdk.feignAPI;
 
 import com.socialuni.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

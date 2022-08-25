@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
 import com.socialuni.sdk.serive.CenterTagService;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

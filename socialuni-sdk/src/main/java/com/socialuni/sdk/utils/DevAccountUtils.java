@@ -1,12 +1,12 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialAppConfig;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
 import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
-import com.socialuni.social.exception.SocialNotLoginException;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.repository.dev.DevAccountProviderRepository;
 import com.socialuni.sdk.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.repository.dev.DevTokenRepository;
@@ -81,7 +81,7 @@ public class DevAccountUtils {
         return devAccountDO.getId();
     }
 
-    public static Integer getDataOriginalDevIdNotNull() {
+    /*public static Integer getDataOriginalDevIdNotNull() {
         String dataSocialuniId = RequestUtil.getDataOriginalSocialuniId();
         if (StringUtils.isEmpty(dataSocialuniId)) {
             return 1;
@@ -92,7 +92,7 @@ public class DevAccountUtils {
             throw new SocialParamsException("不存在的联盟Id");
         }
         return devAccountDO.getId();
-    }
+    }*/
 
     public static Integer getCenterDevIdNotNull() {
         String socialuniId = SocialAppConfig.getCenterSocialuniId();

@@ -4,7 +4,7 @@ import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.TalkRedis;
-import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkDeleteQO;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.procedure.ParameterMisuseException;

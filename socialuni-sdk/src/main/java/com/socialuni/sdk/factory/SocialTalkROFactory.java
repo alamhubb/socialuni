@@ -23,7 +23,7 @@ import com.socialuni.sdk.repository.community.SocialTalkCircleRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.TalkImgDOUtils;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.RO.user.base.SocialContentUserRO;
 import lombok.Data;

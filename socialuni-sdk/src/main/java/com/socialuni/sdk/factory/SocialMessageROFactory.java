@@ -7,7 +7,7 @@ import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.RO.message.message.SocialMessageRO;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.MessageStatus;
+import com.socialuni.sdk.constant.socialuni.MessageStatus;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import org.springframework.stereotype.Component;

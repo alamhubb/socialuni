@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;

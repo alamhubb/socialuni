@@ -1,22 +1,17 @@
 package com.socialuni.sdk.domain.user;
 
-import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
-import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.factory.user.img.UserImgDOFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserImgAddQO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.constant.ContentType;
 import com.socialuni.sdk.repository.UserImgRepository;
 import com.socialuni.sdk.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @Component
 @Slf4j

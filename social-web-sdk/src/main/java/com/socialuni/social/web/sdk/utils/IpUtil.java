@@ -1,6 +1,6 @@
 package com.socialuni.social.web.sdk.utils;
 
-import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.web.sdk.constant.SocialWebHeaderName;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +20,7 @@ public class IpUtil {
         if (os.toLowerCase().startsWith("win")) {  //如果是Windows系统
             ipAddress = "123.119.137.133";
         } else {
-            ipAddress = RequestUtil.getHeader(SocialFeignHeaderName.requestIpHeaderName);
+            ipAddress = RequestUtil.getHeader(SocialWebHeaderName.requestIpHeaderName);
             if (StringUtils.isEmpty(ipAddress)) {
                 try {
                     ipAddress = request.getHeader("x-forwarded-for");

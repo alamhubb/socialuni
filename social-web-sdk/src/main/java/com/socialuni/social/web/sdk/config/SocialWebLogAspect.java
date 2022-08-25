@@ -1,9 +1,9 @@
 package com.socialuni.social.web.sdk.config;
 
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.constant.ErrorCode;
-import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.exception.constant.ErrorMsg;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.web.sdk.constant.ErrorCode;
+import com.socialuni.social.web.sdk.constant.ErrorType;
+import com.socialuni.social.web.sdk.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

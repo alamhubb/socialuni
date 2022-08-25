@@ -1,6 +1,6 @@
 package com.socialuni.sdk.model.DO.circle;
 
-import com.socialuni.social.constant.GenderType;
+import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.model.DO.base.CommonContentBaseDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import lombok.Data;

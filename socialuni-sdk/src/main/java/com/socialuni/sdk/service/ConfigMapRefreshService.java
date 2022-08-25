@@ -4,7 +4,7 @@ import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ConfigValueType;
 import com.socialuni.sdk.model.DO.AppConfigDO;
 import com.socialuni.sdk.repository.AppConfigRepository;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

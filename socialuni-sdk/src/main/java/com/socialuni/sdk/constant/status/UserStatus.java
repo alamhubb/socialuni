@@ -1,8 +1,8 @@
 package com.socialuni.sdk.constant.status;
 
 
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.ConstStatus;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.ConstStatus;
 
 import java.util.Arrays;
 import java.util.List;

@@ -4,7 +4,7 @@ import com.socialuni.sdk.feignAPI.SocialuniChatAPI;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRemoveVO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;

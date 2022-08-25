@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.sdk.serive.circle.CenterCircleService;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

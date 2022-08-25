@@ -4,7 +4,7 @@ package com.socialuni.sdk.domain.follow;
 import com.socialuni.sdk.factory.user.base.SocialUserFollowDetailROFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.model.DO.FollowDO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserFollowDetailRO;
 import com.socialuni.sdk.repository.FollowRepository;
