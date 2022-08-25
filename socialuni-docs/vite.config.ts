@@ -16,6 +16,12 @@ export default defineConfig({
         linkify: true,
         typographer: true,
       },
+      markdownItSetup(md) {
+        // add anchor links to your H[x] tags
+        md.use(require('markdown-it-anchor'))
+        // add code syntax highlighting with Prism
+        md.use(require('markdown-it-prism'))
+      },
     }),
   ],
   server: {

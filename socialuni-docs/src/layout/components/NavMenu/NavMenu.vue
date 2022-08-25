@@ -1,21 +1,33 @@
 <template>
-  <el-menu :default-active="activeMenu">
-    <!--      mode="horizontal"-->
-    <!--    如果router没有子节点，或者仅仅有一个展示的子节点，或者总是展示-->
-    <nav-menu-item
-        v-for="route in menuRoutes"
-        :key="route.path"
-        :route="route"
-        :base-path="route.path"
-    />
-  </el-menu>
+  <div>
+    <div v-for="menu in menus" :id="menu.meta.title">
+      {{menu.meta.title}}
+    </div>
+  </div>
 </template>
 
-<script setup>
-import {computed} from "vue";
+<script setup lang="ts">
+import type { Ref } from 'vue'
+import {computed, ref} from "vue";
 import {useRoute} from "vue-router";
+import {constantRouters} from "@/router";
+import type {RouteRecordRaw} from "vue-router";
+
 const route = useRoute()
-console.log(this)
+console.log(route.path)
+console.log(route.name)
+console.log(route)
+console.log(route.name)
+console.log(route.path)
+
+const curRouteParentName = route.path.split('/').filter(item => !!item)[0]
+const parentRoute: RouteRecordRaw = constantRouters.find(item => item.name === curRouteParentName)
+
+const menus:Ref<RouteRecordRaw[]> = ref([])
+if (parentRoute.children) {
+  menus.value = parentRoute.children
+}
+
 const key = computed(() => {
   return route.path
 })
