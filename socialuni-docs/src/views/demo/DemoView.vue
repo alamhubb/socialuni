@@ -175,7 +175,7 @@ import ObjectUtil from "@/utils/ObjectUtil";
 import ToastUtil from "@/utils/ToastUtil";
 import AlertUtil from "@/utils/AlertUtil";
 import AppConst from "@/constant/AppConst";
-import Hello from "@/views/home/HomeView.md";
+import Hello from "@/views/home/home.md";
 
 const userName = ref('')
 const user = ref(null)
