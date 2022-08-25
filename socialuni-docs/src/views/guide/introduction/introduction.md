@@ -21,13 +21,13 @@
 
 ![img.png](img.png)
 
-5. 在浏览器中输入 [https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks](https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks)
+4. 在浏览器中输入 [https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks](https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks)
 
 ![img_1.png](img_1.png)
 
 看到以下内容，则代表成功从中心获取到了动态数据
 
-6. 接下来则可以开始配置前端模块
+5. 接下来则可以开始配置前端模块
 
 ### 前端模块
 
