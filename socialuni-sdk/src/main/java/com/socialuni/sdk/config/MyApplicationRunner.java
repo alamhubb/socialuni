@@ -1,14 +1,13 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.AppData;
-import com.socialuni.sdk.redis.DistrictRedis;
-import com.socialuni.sdk.service.ConfigMapRefreshService;
-import com.socialuni.sdk.service.ViolationKeywordsService;
+import com.socialuni.sdk.entity.DevAccountEntity;
 import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
-import com.socialuni.sdk.entity.DevAccountEntity;
+import com.socialuni.sdk.redis.DistrictRedis;
 import com.socialuni.sdk.repository.dev.DevSocialuniIdRepository;
+import com.socialuni.sdk.service.ConfigMapRefreshService;
+import com.socialuni.sdk.service.ViolationKeywordsService;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -58,15 +57,12 @@ public class MyApplicationRunner implements ApplicationRunner {
             devSocialuniIdRepository.save(devSocialuniIdDO);*/
         }
 
-        System.out.println(SocialAppConfig.getCenterSocialuniId());
         if (SocialAppConfig.serverIsChild()) {
-            System.out.println("创建中心的开发者");
             DevAccountDO centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialAppConfig.getCenterSocialuniId());
             if (centerDevDO == null) {
                 devAccountEntity.createDevAccount(null, SocialAppConfig.getCenterSocialuniId());
             }
         }
-
 
         configMapRefreshService.refreshConfigMap();
 //        violationKeywordsService.refreshKeywords();

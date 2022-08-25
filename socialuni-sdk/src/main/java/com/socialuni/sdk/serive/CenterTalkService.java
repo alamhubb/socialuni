@@ -1,6 +1,7 @@
 package com.socialuni.sdk.serive;
 
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.domain.talk.*;
 import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.sdk.feignAPI.SocialuniTalkAPI;
@@ -9,6 +10,9 @@ import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
+import com.socialuni.sdk.model.RectangleVO;
+import com.socialuni.sdk.platform.MapUtil;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UniAPIUtils;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
@@ -40,6 +44,21 @@ public class CenterTalkService {
 
     //查询非关注tab的动态列表
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
+        if (queryQO == null) {
+            //获取当前用户
+            queryQO = new CenterHomeTabTalkQueryQO();
+            queryQO.setHomeTabType(TalkTabType.home_type);
+            //如果经纬度为空
+            RectangleVO rectangleVO = MapUtil.getRectangle();
+            if (rectangleVO != null) {
+                queryQO.setLon(rectangleVO.getLon());
+                queryQO.setLat(rectangleVO.getLat());
+            }
+            queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
+            queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
+            queryQO.setGender(DevAccountUtils.getAppGenderType());
+            queryQO.setPageNum(0);
+        }
         List<CenterTalkRO> talkROS;
         if (SocialAppConfig.serverIsChild()) {
             ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks(queryQO);
