@@ -10,11 +10,12 @@
     <description>qingchi_back project for Spring Boot</description>
 
     <parent>
-        <groupId>com.socialuni</groupId>
-        <artifactId>socialuni-parent</artifactId>
-        <version>0.2.0</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.9.RELEASE</version>
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +27,7 @@
         <dependency>
             <groupId>com.socialuni</groupId>
             <artifactId>socialuni-sdk</artifactId>
+            <version>0.2.0</version>
         </dependency>
 
         <dependency>
