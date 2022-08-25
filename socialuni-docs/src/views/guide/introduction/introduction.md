@@ -32,7 +32,7 @@
 ### 前端模块
 
 1. 打开socialuni目录中的socialuni-js项目
-2. 在socialuni-js项目中的根目录执行 
+2. 在socialuni-js项目的根目录执行 
 ```
 npm install
 ```
