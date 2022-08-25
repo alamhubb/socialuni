@@ -2,14 +2,14 @@ spring:
   profiles:
 #    active: devprod
 #    active: localdevprod
-#    active: local
-    active: qkylocal
+    active: local
+#    active: qkylocal
 #    active: qkypc
 #    active: demo
 #    active: prod
 #    active: localprod
   datasource:
-    initialization-mode: always
+    initialization-mode: never
     data: classpath:dataInit/data.sql
   jpa:
     database: MYSQL

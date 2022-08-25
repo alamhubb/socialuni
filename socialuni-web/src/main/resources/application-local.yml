@@ -2,7 +2,7 @@ socialuni:
   server-url: "https://api.socialuni.cn"
   secret-key: "d9a53b2892a540689b4ef608bdca3d2e"
   app:
-    static-resource-url: "https://devcdxapp-1257733245.file.myqcloud.com"
+    static-resource-url: ""
     system-user-id: 1
   user:
     token-secret-key: "tokenSecretKey"
