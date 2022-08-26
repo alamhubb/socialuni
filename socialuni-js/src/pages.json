@@ -83,6 +83,12 @@
           "style": {
             "navigationBarTitleText": "通知列表"
           }
+        },
+        {
+          "path": "circle/ApplyCircleMasterView",
+          "style": {
+            "navigationBarTitleText": "申请圈主"
+          }
         }
       ]
     }

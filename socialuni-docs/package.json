@@ -1,6 +1,7 @@
 {
   "name": "socialuni-demo-ui",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -11,12 +12,18 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.9",
+    "@mdi/font": "^7.0.96",
     "axios": "^0.27.2",
     "clipboard": "^2.0.11",
     "element-plus": "^2.2.13",
     "github-markdown-css": "^5.1.0",
     "highlight.js": "^11.6.0",
+    "markdown-it-anchor": "^8.6.4",
+    "markdown-it-code-copy": "^0.1.1",
+    "markdown-it-copy": "^1.2.0",
+    "markdown-it-github-headings": "^2.0.1",
     "marked": "^4.0.18",
+    "rollup-plugin-md": "^1.0.1",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3",
     "vue3-json-viewer": "^2.2.2"
@@ -29,14 +36,13 @@
     "@vue/tsconfig": "^0.1.3",
     "eslint": "^8.21.0",
     "eslint-plugin-vue": "^9.3.0",
-    "markdown-it-anchor": "^8.6.4",
-    "markdown-it-prism": "^2.2.5",
     "md-powerpack": "^1.0.3",
     "npm-run-all": "^4.1.5",
     "sass": "^1.54.4",
     "typescript": "~4.7.4",
     "vite": "^3.0.4",
     "vite-plugin-md": "^0.20.2",
+    "vite-plugin-md-string": "^1.0.7",
     "vue-tsc": "^0.39.5"
   }
 }

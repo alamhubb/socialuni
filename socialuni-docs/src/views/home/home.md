@@ -1,4 +1,44 @@
-# My Page
-There I was, there I was ... in the jungle. Then I started hearing this ticking sound and I realized it was some sort of _counter_?
+# vite-plugin-md-string
 
-I looked a bit closer and realized I could **press** this counter and it would change! What is this magic?
+### this is get markdown string from *.md vite-plugin
+
+## install
+
+```shell
+npm install vite-plugin-md-string -D
+```
+
+## usage
+
+```js
+import mdString from 'vite-plugin-md-string'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+    plugins: [vue(), mdString()],
+    server: {
+        host: "0.0.0.0"
+    },
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
+    }
+})
+```
+
+## demo
+
+### input ./hello.md
+
+```markdown
+# hello world
+```
+
+### output ./hello.js
+
+```markdown
+import helloStr from './hello.md'
+
+console.log(helloStr) // hello world
+```
