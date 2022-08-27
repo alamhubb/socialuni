@@ -1,6 +1,6 @@
 <template>
   <div>
-    <markdown>
+    <markdown :src="require('./home.md')">
     </markdown>
   </div>
 </template>

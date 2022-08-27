@@ -43,6 +43,11 @@
     "vite": "^3.0.4",
     "vite-plugin-md": "^0.20.2",
     "vite-plugin-md-string": "^1.0.7",
-    "vue-tsc": "^0.39.5"
+    "vue-tsc": "^0.39.5",
+    "@babel/generator": "^7.15.4",
+    "@babel/parser": "^7.15.6",
+    "@babel/traverse": "^7.15.4",
+    "@babel/types": "^7.10.3",
+    "vue-loader": "15.9.8"
   }
 }
