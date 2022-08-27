@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import {useSlots} from "vue";
 import {marked} from 'marked'
-import hljs from 'highlight.js'
+import {getHighlighter} from 'shiki'
 
-import 'github-markdown-css/github-markdown.css'
-import 'highlight.js/styles/github.css'
-
+// const theme = 'material-palenight'
 const props = defineProps({
   src: String
 })
@@ -23,22 +21,25 @@ if (props.src) {
 // https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/markdown/hello.md
   }
 }
+const highlighter = await getHighlighter({
+  theme: 'nord'
+})
 const defaultOptions = {
   renderer: new marked.Renderer(),
   gfm: true,
   smartLists: true,
   smartypants: true,
   highlight(code) {
-    return hljs.highlightAuto(code).value
+    return highlighter
+        .codeToHtml(code)
   }
 }
 marked.setOptions(defaultOptions)
 const mdHtml = marked(mdText)
+
 </script>
 
 <template>
-  <div class="markdown-body">
-    <div v-html="mdHtml">
-    </div>
+  <div v-html="mdHtml" class="pd">
   </div>
 </template>

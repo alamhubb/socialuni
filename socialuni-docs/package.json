@@ -18,17 +18,24 @@
     "element-plus": "^2.2.13",
     "github-markdown-css": "^5.1.0",
     "highlight.js": "^11.6.0",
+    "i": "^0.3.7",
     "markdown-it-anchor": "^8.6.4",
     "markdown-it-code-copy": "^0.1.1",
     "markdown-it-copy": "^1.2.0",
     "markdown-it-github-headings": "^2.0.1",
     "marked": "^4.0.18",
+    "npm": "^8.18.0",
     "rollup-plugin-md": "^1.0.1",
+    "shiki": "^0.10.1",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3",
     "vue3-json-viewer": "^2.2.2"
   },
   "devDependencies": {
+    "@babel/generator": "^7.15.4",
+    "@babel/parser": "^7.15.6",
+    "@babel/traverse": "^7.15.4",
+    "@babel/types": "^7.10.3",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/node": "^16.11.47",
     "@vitejs/plugin-vue": "^3.0.1",
@@ -43,11 +50,7 @@
     "vite": "^3.0.4",
     "vite-plugin-md": "^0.20.2",
     "vite-plugin-md-string": "^1.0.7",
-    "vue-tsc": "^0.39.5",
-    "@babel/generator": "^7.15.4",
-    "@babel/parser": "^7.15.6",
-    "@babel/traverse": "^7.15.4",
-    "@babel/types": "^7.10.3",
-    "vue-loader": "15.9.8"
+    "vue-loader": "15.9.8",
+    "vue-tsc": "^0.39.5"
   }
 }
