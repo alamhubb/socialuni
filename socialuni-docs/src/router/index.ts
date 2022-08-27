@@ -1,14 +1,13 @@
-import {createRouter, createWebHistory} from 'vue-router'
-import HomeView1 from '@/views/home/home.md'
-import HomeView from '@/views/home/HomeView.vue'
 import type {RouteRecordRaw} from "vue-router";
+import {createRouter, createWebHistory} from 'vue-router'
+import MarkdownVue from "@/components/MarkdownVue";
 
 export const constantRouters: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'home',
         meta: {title: '首页'},
-        component: HomeView
+        component: MarkdownVue(import( '@/views/home/home.md'))
     }
 ]
 

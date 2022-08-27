@@ -34,7 +34,6 @@ const defaultOptions = {
 }
 marked.setOptions(defaultOptions)
 const mdHtml = marked(mdText)
-
 </script>
 
 <template>
