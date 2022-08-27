@@ -21,6 +21,7 @@ if (props.src) {
 // https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/markdown/hello.md
   }
 }
+console.log(mdText)
 const highlighter = await getHighlighter({
   theme: 'nord'
 })

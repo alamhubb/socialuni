@@ -1,6 +1,7 @@
 <template>
   <div>
-    <markdown :src="require('@/views/home/home.md')">
+    <markdown>
+      # hello
     </markdown>
   </div>
 </template>
