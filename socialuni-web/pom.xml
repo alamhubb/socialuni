@@ -5,6 +5,7 @@
 
     <artifactId>socialuni-web</artifactId>
     <packaging>jar</packaging>
+    <version>0.2.0</version>
 
     <name>socialuni-web</name>
     <description>qingchi_back project for Spring Boot</description>
