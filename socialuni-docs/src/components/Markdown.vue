@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import {useSlots} from "vue";
 import {marked} from 'marked'
-import {getHighlighter} from 'shiki'
+import {getHighlighter, setCDN} from 'shiki'
+
 
 // const theme = 'material-palenight'
 const props = defineProps({
   src: String
 })
 
+
+setCDN('https://unpkg.com/shiki/')
 
 let mdText = ''
 if (props.src) {
@@ -21,6 +24,8 @@ if (props.src) {
 // https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/markdown/hello.md
   }
 }
+
+
 console.log(mdText)
 const highlighter = await getHighlighter({
   theme: 'nord'
