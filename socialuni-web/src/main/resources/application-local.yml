@@ -1,7 +1,5 @@
 socialuni:
   socialuni-id: "d15502ebc20f4f21bf2b375f2b3ac312"
-  center-socialuni-id: "17e212a46c7b4e5ebc70a934bef4ed27"
-  server-url: "https://api.socialuni.cn"
   secret-key: "d9a53b2892a540689b4ef608bdca3d2e"
   app:
     static-resource-url: ""

@@ -38,12 +38,12 @@ public class SocialAppConfig {
     }
 
 
-    @Value("${socialuni.secret-key:null}")
+    @Value("${socialuni.secret-key:#{null}}")
     public void setSocialuniDevSecretKey(String socialuniDevSecretKey) {
         SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
     }
 
-    @Value("${socialuni.central-server-url:#{null}}")
+    @Value("${socialuni.central-server-url:https://api.socialuni.cn}")
     public void setSocialuniServerUrl(String socialuniServerUrl) {
         SocialAppConfig.socialuniServerUrl = socialuniServerUrl;
     }
@@ -82,7 +82,7 @@ public class SocialAppConfig {
 
     public static boolean serverIsCenter() {
         //为空则异常
-        return StringUtils.isEmpty(getSocialuniServerUrl());
+        return StringUtils.isEmpty(getDevSecretKey());
     }
 
     //是否配置了中心服务器
