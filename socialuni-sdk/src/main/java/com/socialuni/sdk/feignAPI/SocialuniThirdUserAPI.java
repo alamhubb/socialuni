@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 
 @RequestMapping("socialuni/thirdUser")
-@FeignClient(name = "thirdUser", url = "${socialuni.server-url:https://api.socialuni.cn}")
+@FeignClient(name = "thirdUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniThirdUserAPI {
     @PostMapping("registryUser")
     ResultRO<SocialLoginRO<CenterMineUserDetailRO>> registryUser(@RequestBody @Valid SocialProviderLoginQO loginQO);

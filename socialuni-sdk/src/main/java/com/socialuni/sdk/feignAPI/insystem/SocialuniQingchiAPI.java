@@ -22,7 +22,7 @@ import javax.validation.Valid;
  * 前端初始化内容
  */
 @RequestMapping("socialuni/qingchi")
-@FeignClient(name = "qingchi", url = "${socialuni.server-url:https://api.socialuni.cn}")
+@FeignClient(name = "qingchi", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniQingchiAPI {
     @PostMapping("providerLogin")
     ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);

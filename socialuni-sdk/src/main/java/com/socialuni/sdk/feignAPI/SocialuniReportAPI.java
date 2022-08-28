@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("socialuni/report")
-@FeignClient(name = "report", url = "${socialuni.server-url:https://api.socialuni.cn}")
+@FeignClient(name = "report", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniReportAPI {
     @PostMapping("addReport")
     ResultRO<String> addReport(@RequestBody @Valid CenterReportAddQO socialReportAddQO);

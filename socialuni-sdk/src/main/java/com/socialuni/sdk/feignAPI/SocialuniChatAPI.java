@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @RequestMapping("socialuni/chat")
-@FeignClient(name = "chat", url = "${socialuni.server-url:https://api.socialuni.cn}")
+@FeignClient(name = "chat", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniChatAPI {
     @PostMapping("readChat")
     ResultRO<?> readChatMessages(@RequestBody @Valid ChatReadVO chatVO);

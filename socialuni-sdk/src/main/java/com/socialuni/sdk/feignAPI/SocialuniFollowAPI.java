@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequestMapping("socialuni/follow")
-@FeignClient(name = "follow", url = "${socialuni.server-url:https://api.socialuni.cn}")
+@FeignClient(name = "follow", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniFollowAPI {
 
     @PostMapping("queryUserFollows")
