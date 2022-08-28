@@ -6,7 +6,6 @@ import '@/styles/index.scss'
 import 'element-plus/dist/index.css'
 import JsonViewer from "vue3-json-viewer";
 import "vue3-json-viewer/dist/index.css";
-// import 'github-markdown-css/github-markdown.css'
 import '@mdi/font/css/materialdesignicons.min.css';
 
 const app = createApp(App)

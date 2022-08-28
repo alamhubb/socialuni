@@ -13,8 +13,6 @@ export default function vitePluginRequire(opts?: { fileRegex?: RegExp; log?: (..
             if (resolvedConfig.resolve.alias[0].find === '@') {
                 aliasUrl = resolvedConfig.resolve.alias[0].replacement
                 aliasUrl = aliasUrl.replace(/\\/g, '/')
-                console.log(11111111)
-                console.log(aliasUrl)
             }
         },
         name: "vite-plugin-require",
