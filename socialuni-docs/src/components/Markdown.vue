@@ -2,7 +2,10 @@
 import {useSlots} from "vue";
 import {marked} from 'marked'
 import {getHighlighter, setCDN} from 'shiki'
+import hljs from 'highlight.js'
 
+import 'github-markdown-css/github-markdown.css'
+import 'highlight.js/styles/github.css'
 
 // const theme = 'material-palenight'
 const props = defineProps({
@@ -28,7 +31,7 @@ if (props.src) {
 
 console.log(mdText)
 const highlighter = await getHighlighter({
-  theme: 'nord'
+  theme: 'material-palenight'
 })
 const defaultOptions = {
   renderer: new marked.Renderer(),
@@ -36,9 +39,10 @@ const defaultOptions = {
   smartLists: true,
   smartypants: true,
   highlight(code) {
-    return highlighter
-        .codeToHtml(code)
+    // return highlighter.codeToHtml(code)
+    return hljs.highlightAuto(code).value
   }
+
 }
 marked.setOptions(defaultOptions)
 const mdHtml = marked(mdText)
@@ -46,6 +50,6 @@ const mdHtml = marked(mdText)
 </script>
 
 <template>
-  <div v-html="mdHtml" class="pd">
+  <div class="markdown-body" v-html="mdHtml">
   </div>
 </template>
