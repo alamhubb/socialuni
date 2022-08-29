@@ -1,6 +1,6 @@
 <template>
   <div
-      class="row-between box-shadow px"
+      class="row-between box-shadow px w100p"
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
       <img src="@/assets/img/logo.jpg" class="h40" alt="logo">
@@ -9,11 +9,16 @@
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
-        <div class="bg-click mx-sm font-16" @click="toDoc">文档</div>
+        <div v-for="route in constantRouters">
+          <router-link v-if="!route.meta.hidden" :to="route.path">
+            {{route.meta.title}}
+          </router-link>
+        </div>
         <el-divider direction="vertical" class="mr"/>
         <i class="mdi mdi-github font-30 bg-click" @click="toGitee"/>
+
       </div>
-      <div class="flex-1 row-end-center">
+      <div class="row-end-center">
         <div v-if="user" class="row-col-center">
           <el-tag class="mr-10" type="warning" effect="dark">{{ user.phoneNum }}</el-tag>
           <el-dropdown>
@@ -47,6 +52,8 @@
 </template>
 
 <script setup>
+import {constantRouters} from "@/router";
+
 function longinOut() {
   // userModule.userLoginOut()
 }
