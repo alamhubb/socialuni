@@ -1,18 +1,18 @@
-var rollupPluginutils = require('rollup-pluginutils');
+import {createFilter} from 'rollup-pluginutils'
 
-function markdown() {
-    const filter = rollupPluginutils.createFilter(['**/*.md']);
+
+export default function VitePluginMarkdown() {
+    const filter = createFilter(['**/*.md']);
     return {
-        name: 'md',
+        name: 'markdown',
         transform(md, id) {
             if (!filter(id)) {
                 return null
             }
+            console.log(md)
             return {
                 code: `export default ${JSON.stringify(md)};`
             }
         }
     }
 }
-
-module.exports = markdown;

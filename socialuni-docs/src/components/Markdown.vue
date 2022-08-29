@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import {useSlots} from "vue";
+import {createApp, useSlots} from "vue";
 import {marked} from 'marked'
 import {getHighlighter, setCDN} from 'shiki'
 import hljs from 'highlight.js'
+import {h} from 'vue'
 
 import 'github-markdown-css/github-markdown.css'
 import 'highlight.js/styles/github.css'
+import App from "@/App.vue";
 
 // const theme = 'material-palenight'
 const props = defineProps({
@@ -45,7 +47,6 @@ const defaultOptions = {
 marked.setOptions(defaultOptions)
 const mdHtml = marked(mdText)
 console.log(mdHtml)
-
 </script>
 
 <template>
