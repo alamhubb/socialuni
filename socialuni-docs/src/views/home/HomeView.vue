@@ -1,10 +1,9 @@
 <template>
   <div>
-    123
+    <div class="p-8">123</div>
     <markdown :src="import('/src/views/home/home.md')">
     </markdown>
   </div>
 </template>
 <script setup lang="ts">
-import Markdown from "@/components/Markdown.vue";
-</script>
+import Markdown from "@/components/Markdown.vue";</script>
