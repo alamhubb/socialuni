@@ -18,7 +18,6 @@ setCDN('https://unpkg.com/shiki/')
 let mdText = ''
 if (props.src) {
   //如果为src
-  console.log(props.src)
   mdText = props.src
 } else {
   const slots = useSlots();
@@ -27,12 +26,11 @@ if (props.src) {
 // https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/markdown/hello.md
   }
 }
-
-
-console.log(mdText)
+/*
 const highlighter = await getHighlighter({
   theme: 'material-palenight'
-})
+})*/
+
 const defaultOptions = {
   renderer: new marked.Renderer(),
   gfm: true,
@@ -44,12 +42,15 @@ const defaultOptions = {
   }
 
 }
+
 marked.setOptions(defaultOptions)
 const mdHtml = marked(mdText)
+console.log(mdHtml)
 
 </script>
 
 <template>
-  <div class="markdown-body" v-html="mdHtml">
+  <div class="markdown-body">
+    123
   </div>
 </template>

@@ -12,7 +12,7 @@ export default function vitePluginRequire(opts?: { fileRegex?: RegExp; log?: (..
             if (/\/node_modules\//g.test(id)) return;
             let newCode = code;
             if (fileRegex.test(id)) {
-                const plugins: parser.ParserPlugin[] = /(.vue)$/.test(id) ? ["vue-loader"] : ["jsx"];
+                let plugins: parser.ParserPlugin[] = /(.vue)$/.test(id) ? ["vue-loader"] : ["jsx"];
                 const ast = parser.parse(code, {
                     sourceType: "module",
                     plugins,
