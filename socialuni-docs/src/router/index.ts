@@ -13,7 +13,7 @@ export const constantRouters: RouteRecordRaw[] = [
                 path: '/',
                 name: 'home',
                 meta: {title: '首页'},
-                component: MarkdownVue(import( '@/views/home/home.md')),
+                component: import( '@/views/home/home.md'),
             }
         ]
 
@@ -29,13 +29,13 @@ export const constantRouters: RouteRecordRaw[] = [
                 path: 'introduction',
                 name: 'introduction',
                 meta: {title: '入门'},
-                component: MarkdownVue(import('@/views/guide/introduction/introduction.md'))
+                component: import('@/views/guide/introduction/introduction.md')
             },
             {
                 path: 'moreUsage',
                 name: 'moreUsage',
                 meta: {title: '更多用法'},
-                component: MarkdownVue(import('@/views/guide/moreUsage/moreUsage.md'))
+                component: import('@/views/guide/moreUsage/moreUsage.md')
             }
         ]
 
