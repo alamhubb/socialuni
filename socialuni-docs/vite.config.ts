@@ -2,12 +2,15 @@ import {fileURLToPath, URL} from 'node:url'
 
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
-import md from '@socialuni/vite-plugin-md'
-import vitePluginRequire from "./vite-plugin-require/index"
-
+import markdown from 'vite-plugin-md'
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(), md(), vitePluginRequire()],
+    plugins: [
+        vue({
+            include: [/\.vue$/, /\.md$/]
+        }),
+        markdown()
+    ],
     server: {
         host: "0.0.0.0"
     },

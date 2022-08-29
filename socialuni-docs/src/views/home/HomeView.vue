@@ -1,6 +1,7 @@
 <template>
   <div>
-    <markdown :src="require('@/views/home/home.md')">
+    123
+    <markdown :src="import('/src/views/home/home.md')">
     </markdown>
   </div>
 </template>
