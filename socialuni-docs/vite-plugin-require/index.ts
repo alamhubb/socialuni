@@ -1,20 +1,11 @@
 import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
 import generate from "@babel/generator";
-import {Plugin} from "vite";
-
-import {BinaryExpression, identifier, importDeclaration, importDefaultSpecifier, stringLiteral} from "@babel/types";
-
+import { Plugin } from "vite";
+import { importDeclaration, importDefaultSpecifier, stringLiteral, declareVariable, identifier, BinaryExpression } from "@babel/types";
 export default function vitePluginRequire(opts?: { fileRegex?: RegExp; log?: (...arg: any[]) => void }): Plugin {
-    const {fileRegex = /(.jsx?|.tsx?|.vue)$/, log} = opts || {};
-    let aliasUrl = ''
+    const { fileRegex = /(.jsx?|.tsx?|.vue)$/, log } = opts || {};
     return {
-        configResolved(resolvedConfig) {
-            if (resolvedConfig.resolve.alias[0].find === '@') {
-                aliasUrl = resolvedConfig.resolve.alias[0].replacement
-                aliasUrl = aliasUrl.replace(/\\/g, '/')
-            }
-        },
         name: "vite-plugin-require",
         async transform(code: string, id: string) {
             //  Exclude files in node_modules
@@ -28,19 +19,14 @@ export default function vitePluginRequire(opts?: { fileRegex?: RegExp; log?: (..
                 });
                 traverse.default(ast, {
                     enter(path) {
-                        if (path.isIdentifier({name: "require"})) {
+                        if (path.isIdentifier({ name: "require" })) {
                             const arg = (path.container as Record<string, any>)?.arguments?.[0];
+
                             if (arg) {
-                                console.log(arg)
-                                let stringVal = "";
+                                let stringVal: string = "";
                                 switch (arg?.type) {
                                     case "StringLiteral":
                                         stringVal = arg.value;
-                                        if (aliasUrl) {
-                                            if (stringVal.startsWith('@')) {
-                                                stringVal = aliasUrl + arg.value.substring(1, arg.value.length)
-                                            }
-                                        }
                                         break;
                                     case "Identifier":
                                         const IdentifierName = arg.name;
@@ -120,7 +106,6 @@ export default function vitePluginRequire(opts?: { fileRegex?: RegExp; log?: (..
                 });
                 const output = generate.default(ast, {});
                 newCode = output.code;
-                // console.log(newCode)
             }
             return {
                 code: newCode,
