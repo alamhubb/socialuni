@@ -9,9 +9,7 @@ import vitePluginRequire from "./vite-plugin-require/index"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue({
-        include: [/\.vue$/, /\.md$/], // <--
-    }), markdown(), vitePluginRequire()],
+    plugins: [vue(), markdown(), vitePluginRequire()],
     server: {
         host: "0.0.0.0"
     },
