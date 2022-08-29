@@ -26,8 +26,7 @@ if (props.src) {
 // https://cdxapp-1257733245.cos.ap-beijing.myqcloud.com/qingchi/markdown/hello.md
   }
 }
-/*
-const highlighter = await getHighlighter({
+/*const highlighter = await getHighlighter({
   theme: 'material-palenight'
 })*/
 
@@ -50,7 +49,6 @@ console.log(mdHtml)
 </script>
 
 <template>
-  <div class="markdown-body">
-    123
+  <div class="markdown-body" v-html="mdHtml">
   </div>
 </template>
