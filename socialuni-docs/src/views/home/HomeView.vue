@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ptl-20 bg-red-50">123</div>
+    <div class="pd bg-green">123</div>
 <!--    <markdown :src="import('/src/views/home/home.md')">
     </markdown>-->
   </div>
