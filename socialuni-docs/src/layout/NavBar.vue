@@ -1,9 +1,9 @@
 <template>
   <div
-      class="row-between box-shadow px w100p"
+      class="row-between box-shadow px w100p py-xs bb-shadow shadow-b"
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
-      <img src="@/assets/img/logo.jpg" class="h40" alt="logo">
+      <img src="@/imgs/logo.jpg" class="h40" alt="logo">
 <!--      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>-->
     </div>
 
@@ -15,16 +15,16 @@
           </router-link>
         </div>
         <el-divider direction="vertical" class="mr"/>
-        <i class="mdi mdi-github font-30 bg-click" @click="toGitee"/>
+        <i class="mdi mdi-github font-32 bg-click" @click="toGitee"/>
 
       </div>
-      <div class="row-end-center">
+<!--      <div class="row-end-center">
         <div v-if="user" class="row-col-center">
           <el-tag class="mr-10" type="warning" effect="dark">{{ user.phoneNum }}</el-tag>
           <el-dropdown>
             <div>
               <el-avatar shape="square" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"/>
-              <i class="el-icon-caret-bottom el-icon--right"/>
+              <i class="el-icon-caret-bottom el-icon&#45;&#45;right"/>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>{{
@@ -35,7 +35,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </div>
-      </div>
+      </div>-->
 
       <!--        <el-dropdown trigger="click" class="flex-none">
         <div class="el-dropdown-link color-white pointer row-end-center h100p pr-md">

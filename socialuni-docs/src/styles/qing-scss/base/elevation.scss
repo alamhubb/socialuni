@@ -21,6 +21,11 @@
   box-shadow: 0 1px 5px -1px rgba(0, 0, 0, .1);
 }
 
+.shadow-b{
+  border-bottom: 1px solid rgba(60, 60, 67, .12);
+  //box-shadow: 0 1px 5px -1px rgba(60, 60, 67, .12);
+}
+
 .elevation-right {
   box-shadow: 3px 0 3px -3px rgba(0, 0, 0, .12);
 }
