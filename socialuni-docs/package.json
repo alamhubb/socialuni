@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
+    "element-plus": "^2.2.13",
     "@mdi/font": "^7.0.96",
     "axios": "^0.27.2",
     "github-markdown-css": "^5.1.0",
@@ -18,14 +20,11 @@
     "vue3-json-viewer": "^2.2.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.3",
-    "autoprefixer": "^10.4.8",
-    "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8",
-    "typescript": "^4.6.4",
-    "unocss": "^0.45.13",
-    "vite": "^3.0.7",
-    "vite-plugin-md": "^0.20.2",
-    "vue-tsc": "^0.39.5"
+    "@types/node": "^16.11.47",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "@vue/tsconfig": "^0.1.3",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.4",
+    "vite-plugin-md": "^0.20.2"
   }
 }
