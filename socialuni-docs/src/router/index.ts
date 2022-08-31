@@ -1,6 +1,5 @@
 import type {RouteRecordRaw} from "vue-router";
 import {createRouter, createWebHistory} from 'vue-router'
-import MarkdownVue from "@/components/MarkdownVue";
 import Layout from "@/layout/Layout.vue";
 
 export const constantRouters: RouteRecordRaw[] = [
