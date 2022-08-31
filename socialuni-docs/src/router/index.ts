@@ -1,6 +1,7 @@
 import type {RouteRecordRaw} from "vue-router";
 import {createRouter, createWebHistory} from 'vue-router'
 import Layout from "@/layout/Layout.vue";
+import HomeView from '@/views/home/HomeView.vue'
 
 export const constantRouters: RouteRecordRaw[] = [
     {
@@ -12,7 +13,7 @@ export const constantRouters: RouteRecordRaw[] = [
                 path: '/',
                 name: 'home',
                 meta: {title: '首页'},
-                component: import( '@/views/home/HomeView.vue'),
+                component: HomeView,
             }
         ]
     },
