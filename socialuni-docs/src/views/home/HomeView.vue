@@ -6,13 +6,13 @@
 
     <div>
       <div class="flex-row mt">
-        <div class="q-chunk-theme bd-round q-box w100px row-all-center bg-click">快速入门</div>
-        <div class="q-chunk bg-gray100 bd-round q-box w100px row-all-center bg-click ml">体验 demo</div>
+        <div class="q-button-theme">快速入门</div>
+        <div class="q-button ml bg-gray100">体验 demo</div>
       </div>
     </div>
-<!--    123
-    <markdown :src="import('/src/views/home/home.md')">
-    </markdown>-->
+    <!--    123
+        <markdown :src="import('/src/views/home/home.md')">
+        </markdown>-->
   </div>
 </template>
 <script setup lang="ts">

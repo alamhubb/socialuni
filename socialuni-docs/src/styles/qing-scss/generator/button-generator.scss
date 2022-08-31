@@ -1,51 +1,23 @@
-.q-button{
-  padding: $box-mn;
-  line-height: 1;
-  @extend .font-sm;
-  @extend .bd-radius;
-  @extend .mr-xs;
-  @extend .row-col-center;
-  //深色主题，字体白色，其他主题色
+.q-button {
+  @extend .bd-round;
+  @extend .q-box-md;
+  @extend .row-all-center;
+  @extend .bg-click;
+  background: $color-white;
+  border: $border-base;
   color: $color-main;
-  background: mix($color-white, $color-main, 93%);
-  border-color: mix($color-white, $color-main, 60%);
+  border-color: $color-grey8;
 }
 
 @each $key, $color in $colors-base {
   .q-button-#{''+$key+''} {
-    padding: $box-mn;
-    line-height: 1;
-    @extend .font-sm;
-    @extend .bd-radius;
-    @extend .mr-xs;
-    @extend .row-col-center;
-    color: $color;
-    background: mix($color-white, $color, 90%);
-    //border: 1px solid mix($color-white, $color, 60%);
-    border: 1px solid mix($color-white, $color, 60%);
+    @extend .bd-round;
+    @extend .q-box-md;
+    @extend .row-all-center;
+    @extend .bg-click;
+    color: $color-white;
+    background-color: $color;
+    border: $border-base;
+    border-color: $color;
   }
-
-  .q-button-#{''+$key+''}-bd {
-    padding: $box-mn;
-    line-height: 1;
-    @extend .font-sm;
-    @extend .bd-radius;
-    @extend .mr-xs;
-    @extend .row-col-center;
-    color: $color;
-    background: mix($color-white, $color, 90%);
-    border: 1px solid mix($color-white, $color, 60%);
-  }
-}
-
-.q-button-white {
-  padding: $box-mn;
-  line-height: 1;
-  @extend .font-sm;
-  @extend .bd-radius;
-  @extend .mr-xs;
-  @extend .row-col-center;
-  color: $color-main;
-  background: $color-white;
-  border: $border-base;
 }
