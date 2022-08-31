@@ -1,5 +1,5 @@
 <template>
-  <div class="pd-30 md:ml-20% md:mr-5%">
+  <div class="pd-30 md:ml-15% md:mr-5%">
     <div class="font-32 sm:text-44px font-bold color-theme mt-20">社交联盟</div>
     <div class="color-blue-gray700 font-32 sm:text-44px font-bold">社交软件集成解决方案</div>
     <div class="color-grey400 font-18 sm:text-20px mt-sm">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持</div>
