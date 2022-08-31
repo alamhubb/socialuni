@@ -1,25 +1,25 @@
-.chunk {
+.q-chunk {
   background: $color-white;
   border: $border-base;
   color: $color-main;
 }
 
 @each $key, $color in $colors-bg {
-  .chunk-#{''+$key+''} {
+  .q-chunk-#{''+$key+''} {
     //深色主题，字体白色，其他主题色
     color: $color-white;
     background-color: $color;
     border: $border-base;
     border-color: $color;
   }
-  .chunk-#{''+$key+''}_plain {
+  .q-chunk-#{''+$key+''}_plain {
     //朴素主题，字体白色，其他主题色
     color: $color;
     background-color: $color-white;
     border: $border-base;
     border-color: $color;
   }
-  .chunk-#{''+$key+''}_light {
+  .q-chunk-#{''+$key+''}_light {
     //深色主题，字体白色，其他主题色
     color: $color;
     background-color: mix($color, $color-white, 10%);
