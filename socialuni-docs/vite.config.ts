@@ -15,10 +15,17 @@ export default defineConfig({
         Unocss({
             presets: [], // disable default preset
             rules: [
-                [/^pd-(\d+)$/, match => ({ padding: `${match[1]}px` })],
-                [/^pl-(\d+)$/, match => ({ 'padding-left': `${match[1]}px` })],
-                [/^pr-(\d+)$/, match => ({ 'padding-left': `${match[1]}px` })],
-                [/^pt-(\d+)$/, match => ({ 'padding-left': `${match[1]}px` })],
+                [/^pd-(\d+)$/, match => ({padding: `${match[1]}px`})],
+                [/^py-(\d+)$/, match => ({'padding-top': `${match[1]}px`, 'padding-bottom': `${match[1]}px`})],
+                [/^px-(\d+)$/, match => ({'padding-left': `${match[1]}px`, 'padding-right': `${match[1]}px`})],
+                [/^pt-(\d+)$/, match => ({'padding-top': `${match[1]}px`})],
+                [/^pb-(\d+)$/, match => ({'padding-bottom': `${match[1]}px`})],
+                [/^pl-(\d+)$/, match => ({'padding-left': `${match[1]}px`})],
+                [/^pr-(\d+)$/, match => ({'padding-right': `${match[1]}px`})],
+                [/^ptl-(\d+)$/, match => ({'padding-top': `${match[1]}px`, 'padding-left': `${match[1]}px`})],
+                [/^ptr-(\d+)$/, match => ({'padding-top': `${match[1]}px`, 'padding-right': `${match[1]}px`})],
+                [/^pbl-(\d+)$/, match => ({'padding-bottom': `${match[1]}px`, 'padding-left': `${match[1]}px`})],
+                [/^pbr-(\d+)$/, match => ({'padding-bottom': `${match[1]}px`, 'padding-right': `${match[1]}px`})],
             ],
         }),
     ],
