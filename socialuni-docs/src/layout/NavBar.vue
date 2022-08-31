@@ -1,11 +1,11 @@
 <template>
   <div
-      class="row-between box-shadow px w100p py-xs bb-shadow shadow-b"
+      class="row-between box-shadow px py-mn w100p bb-shadow shadow-b"
   >
-    <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
+    <router-link to="/" class="flex-none row-col-center mr-40 bg-click">
       <img src="@/imgs/logo.jpg" class="h40" alt="logo">
 <!--      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>-->
-    </div>
+    </router-link>
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
@@ -15,7 +15,12 @@
           </router-link>
         </div>
         <el-divider direction="vertical" class="mr"/>
-        <i class="mdi mdi-github font-32 bg-click" @click="toGitee"/>
+        <a href="https://gitee.com/socialuni/socialuni" target="_blank">
+          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="bg-click size30 mr-sm"/></div>
+        </a>
+        <a href="https://github.com/social-uni/socialuni" target="_blank">
+          <i class="mdi mdi-github font-36 bg-click"/>
+        </a>
 
       </div>
 <!--      <div class="row-end-center">
