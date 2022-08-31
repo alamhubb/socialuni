@@ -3,7 +3,7 @@
       class="row-between box-shadow px py-mn w100p bb-shadow shadow-b"
   >
     <router-link to="/" class="flex-none row-col-center mr-40 bg-click">
-      <img src="@/imgs/logo.jpg" class="h40" alt="logo">
+      <img src="@/imgs/logo.jpg" class="h50" alt="logo">
 <!--      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>-->
     </router-link>
 
