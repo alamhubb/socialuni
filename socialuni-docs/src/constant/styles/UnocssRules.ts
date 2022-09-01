@@ -1,10 +1,6 @@
 import type {Rule} from "unocss";
 import StylesColor from "./StylesColor";
-
-
-const res = StylesColor.generateReactiveCss('sm')
-console.log(res)
-console.log(123)
+import ObjectUtil from "../../utils/ObjectUtil";
 
 export default class UnocssRules {
     static rules: Rule[] = [
@@ -67,7 +63,19 @@ export default class UnocssRules {
             'margin-bottom': `${match[2] || 20}${match[3] || 'px'}`,
             'margin-right': `${match[2] || 20}${match[3] || 'px'}`
         })],
-        [/^font-(\d+)((.+)?)$/, match => ({'font-size': `${match[2] || 20}${match[3] || 'px'}`})],
-        [/^bg-(.+)$/, match => ({'background': StylesColor.getColorByName(match[1])})],
+        StylesColor.generateReactiveCss([/^font-(\d+)(.+)?$/, match => ({'font-size': `${match[1] || 20}${match[2] || 'px'}`})]),
+        /*[/^font-(\d+)(.+)?$/, match => {
+            const resObj = {
+                'font-size': `${match[1] || 20}${match[2] || 'px'}`
+            }
+
+            const resStr = `
+        @media (min-width: 768px) {
+            .${match[0]} ${ObjectUtil.toJson(resObj).replace(/"/g,'')}
+            }
+       ` as any
+            console.log(resStr)
+            return resStr
+        }],*/
     ]
 }
