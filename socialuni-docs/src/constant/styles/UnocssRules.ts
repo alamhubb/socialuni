@@ -1,9 +1,10 @@
 import type {Rule} from "unocss";
-import StylesColor from "@/constant/styles/StylesColor";
+import StylesColor from "./StylesColor";
 
 
-const res = StylesColor.generateReactiveCss('md')
+const res = StylesColor.generateReactiveCss('sm')
 console.log(res)
+console.log(123)
 
 export default class UnocssRules {
     static rules: Rule[] = [

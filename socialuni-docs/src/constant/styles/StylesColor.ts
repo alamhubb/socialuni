@@ -1,5 +1,5 @@
-import Breakpoints from "@/constant/styles/Breakpoints";
-import ObjectUtil from "@/utils/ObjectUtil";
+import Breakpoints from "./Breakpoints";
+import ObjectUtil from "../../utils/ObjectUtil";
 
 export default class StylesColor {
     static greenColors: { [key in string]: string } = {
@@ -53,7 +53,9 @@ export default class StylesColor {
         return this.colors[colorName]
     }
 
-    static generateReactiveCss(breakpoints: string, styleClass: any = {'font-weight': 12}) {
+    static generateReactiveCss(breakpoints: string, styleClass: any = {'font-weight': '12px'}) {
+        console.log(breakpoints)
+        console.log(breakpoints === Breakpoints.sm)
         if (breakpoints === Breakpoints.sm) {
            return  `
 @media (min-width: 768px) {
