@@ -2,7 +2,6 @@
   "name": "vite-project",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -20,6 +19,7 @@
     "vue3-json-viewer": "^2.2.2"
   },
   "devDependencies": {
+    "ts-node": "^10.9.1",
     "@types/node": "^16.11.47",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/tsconfig": "^0.1.3",
