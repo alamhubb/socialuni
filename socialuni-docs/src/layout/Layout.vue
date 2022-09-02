@@ -1,7 +1,7 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100p flex-col">
-    <nav-bar />
+<!--    <nav-bar />-->
     <div class="flex-row flex-1 overflow-hidden">
 <!--      <nav-menu v-if="route.name !== 'home'" class="w200 flex-none" />-->
       <div class="h100p pd-30 overflow-y-auto">

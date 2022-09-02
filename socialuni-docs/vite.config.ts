@@ -17,7 +17,6 @@ export default defineConfig({
         markdown(),
         // Unocss(),
         Unocss({
-            presets: [],
             rules: UnocssRules.rules
         }),
     ],
