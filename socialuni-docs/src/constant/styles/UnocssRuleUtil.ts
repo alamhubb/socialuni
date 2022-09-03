@@ -1,6 +1,7 @@
 import type {Rule} from "unocss";
 import ColorStyles from "./ColorStyles";
 import ObjectUtil from "../../utils/ObjectUtil";
+import SizeStyles from "./SizeStyles";
 
 export const directionMap: { [key in string]: string[] } = {
     'l': ['left'],
@@ -14,28 +15,41 @@ export const directionMap: { [key in string]: string[] } = {
 }
 
 export default class UnocssRuleUtil {
-    static getStyles(propertyPrefix: string, match: string[]) {
-        const direction = match[1]
-        const valueNum = match[2]
-        const valueUnit = match[3]
 
+
+    static getNumStyles(propertyPrefix: string, match: string[]) {
+        console.log(match[0])
+        const direction = match[1]
+        const size = match[2]
+        const valueUnit = match[3]
+        return this.getStyles(propertyPrefix, direction, size, valueUnit)
+    }
+
+    static getSizeStyles(propertyPrefix: string, match: string[]) {
+        console.log(match[0])
+        const direction = match[1]
+        const size = match[3]
+        return this.getStyles(propertyPrefix, direction, size)
+    }
+
+    static getStyles(propertyPrefix: string, direction: string, size: any, valueUnit: string = '') {
+        if (size === undefined || size === '' || size === null) {
+            size = 20
+        } else {
+            if (SizeStyles.sizesMap[size] !== undefined) {
+                size = SizeStyles.sizesMap[size]
+            }
+        }
+        if (size > 0) {
+            valueUnit = valueUnit || 'px'
+        }
+
+        const styleValue = size + (valueUnit)
 
         const directionAry: string[] = directionMap[direction]
-        console.log(11111111)
-        console.log(match[0])
-        console.log(propertyPrefix)
-        console.log(direction)
-        console.log(directionAry)
-        console.log(2222222222)
         if (!directionAry) {
             return
         }
-
-
-        console.log(directionAry)
-
-        const styleValue = (valueNum !== '' ? valueNum : 20) + (valueUnit || 'px')
-
         const style: { [key in string]: string } = {}
         for (const string of directionAry) {
             if (string) {
@@ -44,6 +58,7 @@ export default class UnocssRuleUtil {
                 style[(propertyPrefix)] = styleValue
             }
         }
+        console.log(style)
         return style
     }
 }
