@@ -26,13 +26,13 @@ body {
   overflow-x: hidden;
 }
 
-//不显示滚动条
+/*不显示滚动条*/
 html::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-//调整滚动条样式
+/*调整滚动条样式*/
 ::-webkit-scrollbar {
   width: 6px;
   height: 10px;

@@ -10,9 +10,9 @@
   box-shadow: 0 -1px 3px -1px rgba(0, 0, 0, .12);
 }
 
-//h-shadow v-shadow blur spread color inset;
-//10px 10px 100px #500606
-// 向右偏移 下偏移 扩展的模糊区域 阴影大小 背景色
+/*h-shadow v-shadow blur spread color inset;*/
+/*10px 10px 100px #500606*/
+/* 向右偏移 下偏移 扩展的模糊区域 阴影大小 背景色*/
 .elevation-top {
   box-shadow: 0 -3px 3px -3px rgba(0, 0, 0, .12);
 }
@@ -23,7 +23,7 @@
 
 .shadow-b{
   border-bottom: 1px solid rgba(60, 60, 67, .12);
-  //box-shadow: 0 1px 5px -1px rgba(60, 60, 67, .12);
+  /*box-shadow: 0 1px 5px -1px rgba(60, 60, 67, .12);*/
 }
 
 .elevation-right {

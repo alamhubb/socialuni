@@ -18,7 +18,6 @@ export default class UnocssRuleUtil {
 
 
     static getNumStyles(propertyPrefix: string, match: string[]) {
-        console.log(match[0])
         const direction = match[1]
         const size = match[2]
         const valueUnit = match[3]
@@ -26,10 +25,16 @@ export default class UnocssRuleUtil {
     }
 
     static getSizeStyles(propertyPrefix: string, match: string[]) {
-        console.log(match[0])
         const direction = match[1]
         const size = match[3]
         return this.getStyles(propertyPrefix, direction, size)
+    }
+
+    static getDirectionStyles(propertyPrefix: string, match: string[]) {
+        const direction = match[1]
+        const size = match[2]
+        const valueUnit = match[3]
+        return this.getStyles('', direction, size, valueUnit)
     }
 
     static getStyles(propertyPrefix: string, direction: string, size: any, valueUnit: string = '') {
@@ -52,10 +57,14 @@ export default class UnocssRuleUtil {
         }
         const style: { [key in string]: string } = {}
         for (const string of directionAry) {
-            if (string) {
-                style[(propertyPrefix + '-' + string)] = styleValue
+            if (propertyPrefix) {
+                if (string) {
+                    style[(propertyPrefix + '-' + string)] = styleValue
+                } else {
+                    style[propertyPrefix] = styleValue
+                }
             } else {
-                style[(propertyPrefix)] = styleValue
+                style[string] = styleValue
             }
         }
         console.log(style)

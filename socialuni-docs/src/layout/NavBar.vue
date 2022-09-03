@@ -1,6 +1,6 @@
 <template>
   <div
-      class="row-between box-shadow px py-mn w100p bb-shadow shadow-b"
+      class="row-between box-shadow px py-mn w100% shadow-b"
   >
     <router-link to="/" class="flex-none row-col-center mr-40 bg-click">
       <img src="@/imgs/logo.jpg" class="h50" alt="logo">

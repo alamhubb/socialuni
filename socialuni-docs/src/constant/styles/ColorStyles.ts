@@ -1,8 +1,9 @@
 import Breakpoints from "./Breakpoints";
 import ObjectUtil from "../../utils/ObjectUtil";
 
+
 export default class ColorStyles {
-    static greenColors: { [key in string]: string } = {
+    static greenColors = {
         green: '#52C41A',
         green1: '#82CC6B',
         green2: '#73D13D',
@@ -11,7 +12,7 @@ export default class ColorStyles {
         green5: '#C2E7B0',
         green6: '#F0F9EB',
     }
-    static blueColors: { [key in string]: string } = {
+    static blueColors = {
         green: '#1F71F6',
         green1: '#2A86FF',
         green2: '#40A9FF',
@@ -22,7 +23,7 @@ export default class ColorStyles {
         green7: '#B3D8FF',
         green8: '#EDF5FF',
     }
-    static greyColors: { [key in string]: string } = {
+    static greyColors = {
         green: '#282f3d',
         green1: '#141414',
         green2: '#1f2329',
@@ -43,13 +44,13 @@ export default class ColorStyles {
         green8: '#ececec',*/
     }
 
-    static colors: { [key in string]: string } = {
-        ...ColorStyles.greenColors
+    static themeColors = {
+        theme: '#28a5dc'
     }
 
-
-    static getColorByName(colorName: string) {
-        console.log(this.colors[colorName])
-        return this.colors[colorName]
+    static colors = {
+        ...ColorStyles.themeColors,
+        ...ColorStyles.greenColors,
+        ...ColorStyles.blueColors,
     }
 }
