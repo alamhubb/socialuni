@@ -1,5 +1,5 @@
 export default class BackgroundStyle {
-    static theme: {
+    static theme = {
         background: '#28a5dc'
     }
 }

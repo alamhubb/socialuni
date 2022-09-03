@@ -8,6 +8,7 @@ export default class MediaUtil {
     private windowHeight = document.body.clientHeight
 
     static init(...styleArgs: any[]) {
+        console.log(styleArgs)
         const mediaUtil: MediaUtil = new MediaUtil()
         window.onresize = (e) => {
             mediaUtil.windowWidth.value = document.body.clientWidth
@@ -18,31 +19,39 @@ export default class MediaUtil {
         return mediaUtil
     }
 
+    sm(...styleArgs: any[]) {
+        this.mediaStyles['sm'] = styleArgs
+        return this
+    }
+
     md(...styleArgs: any[]) {
         this.mediaStyles['md'] = styleArgs
         return this
     }
 
     get style() {
-        if (this.windowWidth.value > MediaConst.sl && this.mediaStyles['sl']) {
-            return this.mediaStyles['sl']
-        }
-        if (this.windowWidth.value > MediaConst.xl && this.mediaStyles['xl']) {
-            return this.mediaStyles['xl']
-        }
-        if (this.windowWidth.value > MediaConst.lg && this.mediaStyles['lg']) {
-            return this.mediaStyles['lg']
-        }
-        if (this.windowWidth.value > MediaConst.md && this.mediaStyles['md']) {
-            return this.mediaStyles['md']
+        const resStylesAry = []
+        if (this.mediaStyles['default']) {
+            resStylesAry.push(this.mediaStyles['default'])
         }
         if (this.windowWidth.value > MediaConst.sm && this.mediaStyles['sm']) {
-            return this.mediaStyles['sm']
+            resStylesAry.push(this.mediaStyles['sm'])
         }
-        if (this.mediaStyles['default']) {
-            return this.mediaStyles['default']
-        } else {
-            return {}
+        if (this.windowWidth.value > MediaConst.md && this.mediaStyles['md']) {
+            resStylesAry.push(this.mediaStyles['md'])
         }
+        if (this.windowWidth.value > MediaConst.lg && this.mediaStyles['lg']) {
+            resStylesAry.push(this.mediaStyles['lg'])
+        }
+        if (this.windowWidth.value > MediaConst.xl && this.mediaStyles['xl']) {
+            resStylesAry.push(this.mediaStyles['xl'])
+        }
+        if (this.windowWidth.value > MediaConst.sl && this.mediaStyles['sl']) {
+            resStylesAry.push(this.mediaStyles['sl'])
+        }
+        const resStyles = resStylesAry.flatMap(item => item.flat())
+
+        console.log(resStyles)
+        return Object.assign({},...resStyles)
     }
 }

@@ -1,6 +1,19 @@
-
-
 export default class FontSizeStyle {
+    static font12 = {
+        fontSize: '12px'
+    }
+    static font14 = {
+        fontSize: '14px'
+    }
+    static font16 = {
+        fontSize: '16px'
+    }
+    static font18 = {
+        fontSize: '18px'
+    }
+    static font20 = {
+        fontSize: '20px'
+    }
     static font22 = {
         fontSize: '22px'
     }

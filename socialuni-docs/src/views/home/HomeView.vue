@@ -1,10 +1,15 @@
 <template>
   <div>
+
+
     <div class="md:ml-15% md:mr-5%">
-
-
-      <div :style="[MediaUtil.init(FontSizeStyle.font22).sm(FontSizeStyle.font32).md(FontSizeStyle.font44).style]">测试响应式布局</div>
-
+      <div
+          :style="[MediaUtil.init(FontSizeStyle.font22,FontWeightStyle.bold,ColorStyle.theme)
+          .sm(FontSizeStyle.font32)
+          .md(FontSizeStyle.font44)
+          .style]">
+        测试响应式布局
+      </div>
 
 
       <div class="font-32 sm:font-44 font-bold color-theme mt-20">社交联盟</div>
@@ -44,7 +49,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import Markdown from "@/components/Markdown.vue";
 import FontSizeStyle from "../../styles/jsStyle/FontSizeStyle";
+import FontWeightStyle from "../../styles/jsStyle/FontWeightStyle";
+import ColorStyle from "../../styles/jsStyle/ColorStyle";
 import MediaUtil from "../../styles/jsStyle/MediaUtil";
+
+console.log(ColorStyle)
+console.log(ColorStyle.theme)
 </script>
