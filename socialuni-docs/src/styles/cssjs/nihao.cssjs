@@ -1,0 +1,9 @@
+const cssStyle = {
+    '.qqq': {
+        height: '15px',
+        width: '15px',
+        background: 'red',
+    }
+}
+
+export default cssStyle

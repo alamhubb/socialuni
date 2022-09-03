@@ -1,6 +1,4 @@
 import type {Rule} from "unocss";
-import ColorStyles from "./ColorStyles";
-import ObjectUtil from "../../utils/ObjectUtil";
 import UnocssRuleUtil, {directionMap} from "./UnocssRuleUtil";
 
 export default class UnocssRules {

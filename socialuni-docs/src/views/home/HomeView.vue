@@ -1,6 +1,12 @@
 <template>
   <div>
     <div class="md:ml-15% md:mr-5%">
+
+
+      <div :style="[MediaUtil.init(FontSizeStyle.font22).sm(FontSizeStyle.font32).md(FontSizeStyle.font44).style]">测试响应式布局</div>
+
+
+
       <div class="font-32 sm:font-44 font-bold color-theme mt-20">社交联盟</div>
       <div class="color-blue-gray700 font-32 sm:text-44px font-bold">开源社交软件开发集成解决方案</div>
       <div class="color-grey400 font-18 sm:text-20px mt-sm">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持
@@ -39,4 +45,6 @@
 </template>
 <script setup lang="ts">
 import Markdown from "@/components/Markdown.vue";
+import FontSizeStyle from "../../styles/jsStyle/FontSizeStyle";
+import MediaUtil from "../../styles/jsStyle/MediaUtil";
 </script>
