@@ -3,7 +3,7 @@
     <div class="max-w-900">
       <div>
         <div class="font-32 md:font-44 font-bold color-theme mt-50">社交联盟</div>
-        <div class="color-main font-32 md:font-44 font-bold">开源社交软件集成解决方案</div>
+        <div class="color-main font-32 md:font-44 font-bold">社交软件解决方案</div>
 <!--        <div class="color-content font-18 md:font-20 mt-10">An approachable, performant and versatile framework for building web user interfaces.</div>-->
         <div class="color-content font-18 md:font-20 mt-10">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持</div>
 
