@@ -17,8 +17,5 @@
 import NavMenu from '@/layout/components/NavMenu/NavMenu.vue'
 import NavBar from './NavBar.vue'
 import {useRoute} from "vue-router";
-
 const route = useRoute()
-console.log(route.path)
-console.log(route.name)
 </script>

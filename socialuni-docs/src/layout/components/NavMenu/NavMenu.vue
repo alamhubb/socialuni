@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="menus.length">
     <div v-for="menu in menus" :id="menu.meta.title">
       {{ menu.meta.title }}
     </div>
@@ -16,28 +16,20 @@ import {constantRouters} from "@/router";
 const route = useRoute()
 console.log(route.path)
 console.log(route.name)
-console.log(route)
-console.log(route.name)
-console.log(route.path)
 
 const curRouteParentName = route.path.split('/').filter(item => !!item)[0]
+
+console.log(curRouteParentName)
+const menus: Ref<RouteRecordRaw[]> = ref([])
+
 const parentRoute: RouteRecordRaw = constantRouters.find(item => item.name === curRouteParentName)
 
-const menus: Ref<RouteRecordRaw[]> = ref([])
-if (parentRoute.children) {
+if (parentRoute && parentRoute.children) {
   menus.value = parentRoute.children
 }
 
 const key = computed(() => {
   return route.path
-})
-const activeMenu = computed(() => {
-  const {meta, path} = route
-  // if set path, the sidebar will highlight the path you set
-  if (meta.activeMenu) {
-    return meta.activeMenu
-  }
-  return path
 })
 
 function longinOut() {

@@ -4,6 +4,7 @@ import ErrorCode from "@/constant/ErrorCode";
 import ToastUtil from "@/utils/ToastUtil";
 import MsgUtil from "@/utils/MsgUtil";
 import AppConst from "@/constant/AppConst";
+import UserStore from "@/store/UserStore";
 // create an axios instance
 
 const request = axios.create({
@@ -58,6 +59,7 @@ request.interceptors.response.use(
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
                         // userModule.clearUserInfo()
+                        UserStore.clearUser()
                         if (result && result.errorMsg) {
                             ToastUtil.error(result.errorMsg)
                         } else {

@@ -44,6 +44,7 @@ export const constantRouters: RouteRecordRaw[] = [
     },
     {
         path: '/demo',
+        component: Layout,
         meta: {title: 'demo'},
         redirect: '/demo',
         children: [

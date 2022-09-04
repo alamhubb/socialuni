@@ -1,6 +1,6 @@
 <template>
   <div
-      class="row-between box-shadow px-30 lg:px-100 py-3 w100% shadow-b"
+      class="row-between box-shadow px-30 py-3 w100% shadow-b"
   >
     <router-link to="/" class="flex-none row-col-center mr-40 use-click">
       <img src="@/imgs/logo.jpg" class="h50" alt="logo">
@@ -10,7 +10,7 @@
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
         <div v-for="route in constantRouters">
-          <router-link v-if="!route.meta.hidden" :to="route.path" class="hover-color-theme px font-bold color-content">
+          <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme" class="hover-color-theme px font-bold color-content">
             {{route.meta.title}}
           </router-link>
         </div>
@@ -58,20 +58,4 @@
 
 <script setup>
 import {constantRouters} from "@/router";
-
-function longinOut() {
-  // userModule.userLoginOut()
-}
-
-function toDoc() {
-  window.open('https://shejiao.qingchiapp.com')
-}
-
-function toGitee() {
-  window.open('https://gitee.com/socialuni/socialuni')
-}
-
-function toHome() {
-  this.$router.push('/')
-}
 </script>

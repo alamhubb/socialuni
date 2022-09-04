@@ -1,6 +1,6 @@
 <template>
-<!--  <div class="px-smm divHeight overflow-x-hidden flex-col">
-    <el-alert type="warning" effect="dark" class="my-sm">
+  <div class="px-smm divHeight overflow-x-hidden flex-col">
+    <el-alert type="warning" effect="dark" class="position-absolute t-70 l-0 w80% r-0 index-sm">
       <template #title>
         当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
         <a href="https://socialuni.cn/app" target="_blank" class="color-white">
@@ -155,11 +155,11 @@
         </el-tabs>
       </el-col>
     </el-row>
-  </div>-->
+  </div>
 </template>
 
 <script setup lang="ts">
-/*import {
+import {
   Check,
   Delete,
   Edit,
@@ -176,9 +176,8 @@ import ToastUtil from "@/utils/ToastUtil";
 import request from "@/plugins/request";
 import TokenUtil from "@/utils/TokenUtil";
 import ObjectUtil from "@/utils/ObjectUtil";
-import User from "@/model/user/User";*/
+import User from "@/model/user/User";
 
-/*
 
 const userName = ref('')
 
@@ -257,7 +256,6 @@ async function postComment() {
   commentContent.value = ''
   await queryTalks()
 }
-*/
 
 //如果未登录，可以登录不可以退出
 
