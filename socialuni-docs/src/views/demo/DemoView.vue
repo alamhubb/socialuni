@@ -1,5 +1,5 @@
 <template>
-  <div class="divHeight overflow-x-hidden flex-col h100%">
+  <div class="divHeight overflow-x-hidden flex-col">
     <el-alert type="warning" effect="dark" class="mb">
       <template #title>
         当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
@@ -8,7 +8,7 @@
         </a>
       </template>
     </el-alert>
-    <el-row :gutter="20" class="flex-1 overflow-hidden">
+    <el-row :gutter="20" class="flex-1 overflow-auto">
       <el-col :xs="24" :sm="12" class="h100% overflow-auto pb-10">
         <el-collapse v-model="loginAPIActive" accordion class="by-0">
           <el-collapse-item :name="1">
@@ -169,15 +169,12 @@ import {
   StarFilled
 } from '@element-plus/icons-vue'
 import {computed, ref} from "vue";
-import AlertUtil from "@/utils/AlertUtil";
 import AppConst from "@/constant/AppConst";
 import UserStore from "@/store/UserStore";
 import ToastUtil from "@/utils/ToastUtil";
 import request from "@/plugins/request";
 import TokenUtil from "@/utils/TokenUtil";
 import ObjectUtil from "@/utils/ObjectUtil";
-import User from "@/model/user/User";
-
 
 const userName = ref('')
 
@@ -196,8 +193,8 @@ const userJson = computed(() => {
 })
 const token = TokenUtil.get()
 if (token) {
-  request.get('/getMineUser').then((user) => {
-    UserStore.setUser(user.data)
+  request.get('/getMineUser').then((res) => {
+    UserStore.setUser(res.data)
   })
 }
 
@@ -223,7 +220,8 @@ queryTalks()
 
 async function queryTalks() {
   talksLoading.value = true
-  const talkList: any[] = await request.get('/queryTalks') as any
+  const res: any = await request.get('/queryTalks') as any
+  const talkList: any[] = res.data
   talks.value = talkList
   talksLoading.value = false
 }

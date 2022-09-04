@@ -49,7 +49,7 @@ public class TestController {
     TestUserService testUserService;
 
     @GetMapping("login")
-    public Map<String, Object> login(String name) {
+    public ResultRO<Map<String, Object>> login(String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
         }
@@ -67,18 +67,18 @@ public class TestController {
         Map<String, Object> map = new HashMap<>();
         map.put("user", socialContentUserRO);
         map.put("token", tokenDO.getToken());
-        return map;
+        return ResultRO.success(map);
     }
 
     @GetMapping("getMineUser")
-    public SocialUserRO getMineUser() {
+    public ResultRO<SocialUserRO> getMineUser() {
         SocialUserDO socialUserDO = SocialUserUtil.getMineUserNotNull();
         SocialContentUserRO socialUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
-        return socialUserRO;
+        return ResultRO.success(socialUserRO);
     }
 
     @GetMapping("postTalk")
-    public CenterTalkRO postTalk(String content) {
+    public ResultRO<CenterTalkRO> postTalk(String content) {
         SocialTalkPostQO socialTalkPostQO = new SocialTalkPostQO();
         socialTalkPostQO.setContent(content);
         socialTalkPostQO.setVisibleGender(GenderType.all);
@@ -89,21 +89,22 @@ public class TestController {
             add(SocialuniCommonConst.devEnvTagName);
         }});
         ResultRO<CenterTalkRO> resultRO = centerTalkService.postTalk(socialTalkPostQO);
-        return resultRO.getData();
+        return resultRO;
     }
 
     @GetMapping("postComment")
-    public CenterCommentRO postComment(String talkId, String content) {
+    public ResultRO<CenterCommentRO> postComment(String talkId, String content) {
         CenterCommentPostQO socialTalkPostQO = new CenterCommentPostQO();
         socialTalkPostQO.setContent(content);
         socialTalkPostQO.setTalkId(talkId);
         ResultRO<CenterCommentRO> resultRO = centerCommentService.postComment(socialTalkPostQO);
-        return resultRO.getData();
+        return resultRO;
     }
 
     //如果header里面没有，则从reqeust里面拿
     @GetMapping("queryTalks")
-    public List<CenterTalkRO> talks() {
-        return centerTalkService.queryTalks().getData();
+    public ResultRO<List<CenterTalkRO>> talks() {
+        ResultRO<List<CenterTalkRO>> resultRO = centerTalkService.queryTalks();
+        return resultRO;
     }
 }
