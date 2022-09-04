@@ -16,17 +16,19 @@
       <div class="flex-none row-col-center">
         <div v-for="route in constantRouters">
           <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme"
-                       class="hover-color-theme mr-sm font-bold color-content">
+                       class="hover-color-theme mr-sm md:mr font-bold color-content">
             {{ route.meta.title }}
           </router-link>
         </div>
         <el-divider direction="vertical" class="mr-smm"/>
-        <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm">
-          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size30"/></div>
-        </a>
-        <a href="https://github.com/social-uni/socialuni" target="_blank">
-          <i class="mdi mdi-github font-36 use-click color-black"/>
-        </a>
+        <div class="row-col-center">
+          <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
+            <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size31"/></div>
+          </a>
+          <a href="https://github.com/social-uni/socialuni" target="_blank">
+            <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
+          </a>
+        </div>
         <div v-if="user" class="row-col-center">
           <el-divider direction="vertical" class="mr-smm"/>
           <el-dropdown v-if="user" trigger="click">
