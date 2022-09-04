@@ -138,7 +138,7 @@
                 <div class="ml-xs">
                   动态内容：{{ talk.content }}
                 </div>
-                <div v-if="talk.comments.length" class="bg-grey6_light pd-sm bd-radius mt-sm">
+                <div v-if="talk.comments.length" class="bg-grey6-light pd-sm bd-radius mt-sm">
                   <div>评论内容（仅显示最近三条评论）：</div>
                   <div class="mt-xs" v-for="comment in talk.comments.slice(0,3)">
                     {{ comment.user.nickname }}：{{ comment.content }}

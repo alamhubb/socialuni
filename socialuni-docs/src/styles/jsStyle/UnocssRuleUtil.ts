@@ -5,8 +5,6 @@ import SizeStyles from "./SizeStyles";
 import {match} from "assert";
 import tinycolor2 from "tinycolor2";
 
-console.log(tinycolor2)
-
 export const directionMap: { [key in string]: string[] } = {
     'l': ['left'],
     'r': ['right'],
@@ -20,6 +18,12 @@ export const directionMap: { [key in string]: string[] } = {
 
 export default class UnocssRuleUtil {
     static defaultUnit = 'px'
+
+    static getSizeStyles(propertyPrefix: string, match: string[]) {
+        const direction = match[1]
+        const size = match[3]
+        return this.getStyles(propertyPrefix, direction, size)
+    }
 
     static getNumStyles(propertyPrefix: string, match: string[]) {
         const direction = match[1]
@@ -79,18 +83,45 @@ export default class UnocssRuleUtil {
         return {}
     }
 
+    static getBorderDarkStyles(match: string[], theme): { [key in string]: string } {
+        const direction = match[1]
+        const colorTheme = match[3]
+        let color = ColorStyles.themeColors.border
+            if (colorTheme) {
+                color = tinycolor2.mix(ColorStyles.colors[colorTheme], ColorStyles.themeColors.black, 10)
+        }
+        // border-color: mix($color-white, $color-main, 60%);
+        //bd bt
+        //bd-them bt-theme
+        //bd-them-2 bt-theme
+        //bd-color-theme
+        //bd-2
+        return this.getBorderColorStyles(direction, color);
+    }
+    static getBorderLightStyles(match: string[], theme): { [key in string]: string } {
+        const direction = match[1]
+        const colorTheme = match[3]
+        let color = ColorStyles.themeColors.border
+        if (colorTheme) {
+            color = tinycolor2.mix(ColorStyles.colors[colorTheme], ColorStyles.themeColors.white, 90)
+        }
+        // border-color: mix($color-white, $color-main, 60%);
+        //bd bt
+        //bd-them bt-theme
+        //bd-them-2 bt-theme
+        //bd-color-theme
+        //bd-2
+        return this.getBorderColorStyles(direction, color);
+    }
     static getBorderStyles(match: string[], theme): { [key in string]: string } {
         const direction = match[1]
         const colorTheme = match[3]
         let color = ColorStyles.themeColors.border
-
-        console.log(match[0])
-        console.log(colorTheme)
         if (colorTheme) {
-            console.log(colorTheme)
-            console.log(ColorStyles.colors[colorTheme])
-            color = tinycolor2.mix(ColorStyles.colors[colorTheme], ColorStyles.themeColors.black, 10)
+            color = ColorStyles.colors[colorTheme]
         }
+        console.log( match[0])
+        console.log(colorTheme)
         console.log(color)
         // border-color: mix($color-white, $color-main, 60%);
         //bd bt
@@ -98,6 +129,10 @@ export default class UnocssRuleUtil {
         //bd-them-2 bt-theme
         //bd-color-theme
         //bd-2
+        return this.getBorderColorStyles(direction, color);
+    }
+
+    private static getBorderColorStyles(direction: string, color: string): { [key in string]: string } {
         if (direction === 'd') {
             return {
                 'border': `1px solid ${color}`
@@ -111,9 +146,6 @@ export default class UnocssRuleUtil {
                 'border-bottom': `1px solid ${color}`,
             }
         } else if (direction === 'l') {
-
-            console.log(color)
-            console.log(111111)
             return {
                 'border-left': `1px solid ${color}`,
             }

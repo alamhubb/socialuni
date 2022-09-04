@@ -3,15 +3,6 @@ import ObjectUtil from "../../utils/ObjectUtil";
 
 
 export default class ColorStyles {
-    static greenColors = {
-        green: '#52C41A',
-        green1: '#82CC6B',
-        green2: '#73D13D',
-        green3: '#95DE64',
-        green4: '#B7EB8F',
-        green5: '#C2E7B0',
-        green6: '#F0F9EB',
-    }
     static blueColors = {
         blue: '#409EFF',
         green1: '#2A86FF',
@@ -22,6 +13,24 @@ export default class ColorStyles {
         green6: '#69C0FF',
         green7: '#B3D8FF',
         green8: '#EDF5FF',
+    }
+    static greenColors = {
+        green: '#67C23A',
+        green1: '#82CC6B',
+        green2: '#73D13D',
+        green3: '#95DE64',
+        green4: '#B7EB8F',
+        green5: '#C2E7B0',
+        green6: '#F0F9EB',
+    }
+    static orangeColors = {
+        green: '#E6A23C',
+        green1: '#82CC6B',
+        green2: '#73D13D',
+        green3: '#95DE64',
+        green4: '#B7EB8F',
+        green5: '#C2E7B0',
+        green6: '#F0F9EB',
     }
     static redColors = {
         red: '#F56C6C',
@@ -34,9 +43,8 @@ export default class ColorStyles {
         green7: '#B3D8FF',
         green8: '#EDF5FF',
     }
-
     static grayColors: { [key in string]: string } = {
-        gray: '#f2f2f2',
+        gray: '#909399',
     }
 
     static themeColors: { [key in string]: string } = {

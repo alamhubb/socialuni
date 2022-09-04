@@ -24,14 +24,18 @@ export default defineConfig({
                 }
             },
             rules: [
+                [/^p(.)(-(\D+))?$/, match => UnocssRuleUtil.getSizeStyles('padding', match)],
                 [/^p(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('padding', match)],
+                [/^m(.)(-(\D+))?$/, match => UnocssRuleUtil.getSizeStyles('margin', match)],
                 [/^m(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('margin', match)],
                 [/^(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getDirectionStyles('', match)],
-                [/^b(.)(-(.+))?$/, (match, theme) => UnocssRuleUtil.getBorderStyles(match, theme)],
-                [/^b(.)-(\d+)?$/, (match, theme) => UnocssRuleUtil.getBorderWidthStyles(match, theme)],
-                [/^b(.)-radius(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getBorderRadiusStyles(match)],
-                [/^bg-(.+)_light$/, match => ({'background': tinycolor2.mix(ColorStyles.colors[match[1]], ColorStyles.themeColors.white, 90)})],
-                [/^bg-(.+)_dark$/, match => ({'background': tinycolor2.mix(ColorStyles.colors[match[1]], ColorStyles.themeColors.black, 10)})],
+                [/^b([dtblfxy])(-(\w+))?$/, (match, theme) => UnocssRuleUtil.getBorderStyles(match, theme)],
+                [/^b([dtblfxy])(-(\w+))?-dark$/, (match, theme) => UnocssRuleUtil.getBorderDarkStyles(match, theme)],
+                [/^b([dtblfxy])(-(\w+))?-light$/, (match, theme) => UnocssRuleUtil.getBorderLightStyles(match, theme)],
+                [/^b([dtblfxy])-(\d+)?$/, (match, theme) => UnocssRuleUtil.getBorderWidthStyles(match, theme)],
+                [/^b([dtblfxy])-radius(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getBorderRadiusStyles(match)],
+                [/^bg-(\w+)-light$/, match => ({'background': tinycolor2.mix(ColorStyles.colors[match[1]], ColorStyles.themeColors.white, 90)})],
+                [/^bg-(\w+)-dark$/, match => ({'background': tinycolor2.mix(ColorStyles.colors[match[1]], ColorStyles.themeColors.black, 10)})],
                 [/^font-(\d+)(\D+)?$/, match => {
                     return ({'font-size': `${match[1]}${match[2] || 'px'}`})
                 }],
@@ -56,8 +60,11 @@ export default defineConfig({
                 })
             },
             shortcuts: [
-                [/^btn(-(.+))?$/, ([, , c]) => `${c ? 'bg-' + c + ' color-white bd-' + c : 'bg-white bd color-main'}  py-10 px-20 bd-radius-20 use-click`],
-                [/^note(-(.+))?$/, ([, , c]) => `bl-${c} bl-5 bg-${c}_light py-8 px-16 bd-radius`],
+                [/^btn$/, () => `bg-white bd color-main py-10 px-20 bd-radius-20`],
+                [/^btn-(\w+)?$/, ([, color]) => `bg-${color} color-white bd-${color}-dark py-10 px-20 bd-radius-20`],
+                [/^btn-(\w+)-light?$/, ([, color]) => `bg-${color}-light color-main bd py-10 px-20 bd-radius-20`],
+                [/^btn-(\w+)-plain?$/, ([, color]) => `bg-white color-${color} bd-${color} py-10 px-20 bd-radius-20`],
+                [/^note-(\w+)?$/, ([, c]) => `bl-${c} bl-5 bg-${c}-light py-8 px-16 bd-radius`],
             ]
 
         })

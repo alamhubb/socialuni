@@ -12,7 +12,7 @@
             <div class="btn-theme use-click">快速入门</div>
           </router-link>
           <router-link to="/demo">
-            <div class="btn-gray use-click color-main ml-20">体验demo</div>
+            <div class="btn-gray-light use-click ml-20">体验demo</div>
           </router-link>
         </div>
       </div>
