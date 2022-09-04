@@ -3,7 +3,7 @@ import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
 import '@/styles/index.css'
-import './styles/cssjs/nihao.cssjs'
+import 'uno.css'
 import 'element-plus/dist/index.css'
 import JsonViewer from "vue3-json-viewer";
 import "vue3-json-viewer/dist/index.css";

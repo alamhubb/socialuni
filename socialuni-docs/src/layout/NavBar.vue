@@ -43,7 +43,7 @@
       </div>-->
 
       <!--        <el-dropdown trigger="click" class="flex-none">
-        <div class="el-dropdown-link color-white pointer row-end-center h100p pr-md">
+        <div class="el-dropdown-link color-white pointer row-end-center h100% pr-md">
           {{ user ? user.username : '18600' }}
           <i class="el-icon-arrow-down el-icon&#45;&#45;right" />
         </div>

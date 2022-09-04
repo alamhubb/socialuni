@@ -1,28 +1,11 @@
 <template>
-  <div>
-
-
-    <div class="md:ml-15% md:mr-5%">
-      <div
-          :style="[MediaUtil.init(FontSizeStyle.font22,FontWeightStyle.bold,ColorStyle.theme)
-          .sm(FontSizeStyle.font32)
-          .md(FontSizeStyle.font44)
-          .style]">
-        测试响应式布局
-      </div>
-
-
-      <div class="font-32 sm:font-44 font-bold color-theme mt-20">社交联盟</div>
-      <div class="color-blue-gray700 font-32 sm:text-44px font-bold">开源社交软件开发集成解决方案</div>
-      <div class="color-grey400 font-18 sm:text-20px mt-sm">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持
-      </div>
-
-      <div class="flex-row mt-md">
-        <router-link to="/guide">
-          <div class="q-button-theme">快速入门</div>
-        </router-link>
-
-        <!--      <div class="q-button ml bg-gray100">体验 demo</div>-->
+  <div class="row-center">
+    <div class="max-w-1152">
+      <div>
+        <div class="font-32 md:font-44 font-bold color-theme mt-60">社交联盟</div>
+        <div class="color-blue-gray700 font-32 md:font-44 font-bold">开源社交软件集成解决方案</div>
+        <div class="color-grey400 font-18 md:font-20 mt-sm">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持
+        </div>
       </div>
 
       <div class="row-wrap pt-30px">
@@ -49,11 +32,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import FontSizeStyle from "../../styles/jsStyle/FontSizeStyle";
-import FontWeightStyle from "../../styles/jsStyle/FontWeightStyle";
-import ColorStyle from "../../styles/jsStyle/ColorStyle";
-import MediaUtil from "../../styles/jsStyle/MediaUtil";
-
-console.log(ColorStyle)
-console.log(ColorStyle.theme)
+import Markdown from "@/components/Markdown.vue";
 </script>
+

@@ -1,16 +1,11 @@
-@import 'margin/index';
-@import 'padding/index';
 @import 'lineHeight.css';
 @import 'action.css';
 @import 'click.css';
 @import 'elevation.css';
 @import 'ellipsis.css';
 @import 'flex.css';
-@import 'height';
 @import 'overflow.css';
 @import 'position.css';
-@import 'size';
 @import 'transform.css';
-@import 'width';
 @import 'z-index.css';
 

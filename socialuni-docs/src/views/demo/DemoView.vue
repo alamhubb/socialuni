@@ -16,7 +16,7 @@
     </div>
 
     <el-row :gutter="20" class="flex-1 overflow-hidden">
-      <el-col :xs="24" :sm="12" class="h100p overflow-auto pb-sm">
+      <el-col :xs="24" :sm="12" class="h100% overflow-auto pb-sm">
         <el-collapse v-model="loginAPIActive" accordion class="by-none">
           <el-collapse-item :name="1">
             <template #title>
@@ -114,7 +114,7 @@
         </el-tabs>
       </el-col>
 
-      <el-col v-if="talks" :xs="24" :sm="12" class="h100p overflow-hidden talkDataTabsDiv">
+      <el-col v-if="talks" :xs="24" :sm="12" class="h100% overflow-hidden talkDataTabsDiv">
         <div class="font-bold font-md mt-sm">三、查询动态</div>
 
         <div class="custom-block font-bold font-md mt-sm">
@@ -125,9 +125,9 @@
             {{ AppConst.baseUrl }}/queryTalks
           </el-link>
         </div>
-        <el-tabs v-model="talkActiveName" class="h100p" v-loading="talksLoading" element-loading-text="动态刷新中...">
+        <el-tabs v-model="talkActiveName" class="h100%" v-loading="talksLoading" element-loading-text="动态刷新中...">
           <el-tab-pane label="动态展示" name="preview">
-            <div class="h100p overflow-auto pr-xs">
+            <div class="h100% overflow-auto pr-xs">
               <div v-for="talk in talks" class="mb-sm bd bd-radius pd-sm elevation-bottom">
                 <div class="mb-sm row-col-center">
                   <img class="size40 mr-sm" :src="talk.user.avatar">
@@ -148,7 +148,7 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="动态JSON预览" name="json">
-            <div class="h100p overflow-auto pr-xs pb-sm">
+            <div class="h100% overflow-auto pr-xs pb-sm">
               <JsonViewer :value="talks"/>
             </div>
           </el-tab-pane>

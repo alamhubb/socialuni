@@ -3,13 +3,10 @@ import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import markdown from 'vite-plugin-md'
-// vite.config.ts
-import Unocss from 'unocss/vite'
-import cssjs from "./src/plugins/cssjs";
+import unocss from 'unocss/vite'
 import ColorStyles from "./src/constant/styles/ColorStyles";
 import UnocssRuleUtil from "./src/constant/styles/UnocssRuleUtil";
-
-console.log(cssjs)
+// vite.config.ts
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,6 +16,42 @@ export default defineConfig({
             include: [/\.vue$/, /\.md$/]
         }),
         markdown(),
+        unocss({
+            theme: {
+                colors: {
+                    ...ColorStyles.themeColors
+                }
+            },
+            rules: [
+                [/^p(.)(-(\D+))?$/, match => UnocssRuleUtil.getSizeStyles('padding', match)],
+                [/^p(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getNumStyles('padding', match)],
+                [/^m(.)(-(\D+))?$/, match => UnocssRuleUtil.getSizeStyles('margin', match)],
+                [/^m(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getNumStyles('margin', match)],
+                [/^(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getDirectionStyles('', match)],
+                [/^font-(\d+)(\D+)?$/, match => {
+                    return ({'font-size': `${match[1]}${match[2] || 'px'}`})
+                }],
+                [/^w(\d+)(\D+)?$/, match => {
+                    return ({'width': `${match[1]}${match[2] || 'px'}`})
+                }],
+                [/^h(\d+)(\D+)?$/, match => {
+                    return ({'height': `${match[1]}${match[2] || 'px'}`})
+                }],
+                [/^size(\d+)(\D+)?$/, match => {
+                    return ({
+                        'width': `${match[1]}${match[2] || 'px'}`,
+                        'height': `${match[1]}${match[2] || 'px'}`
+                    })
+                }]
+            ],
+            postprocess: (util) => {
+                util.entries.forEach((i) => {
+                    const value = i[1]
+                    if (value && typeof value === 'string' && /^-?[\.\d]+rem$/.test(value))
+                        i[1] = `${+value.slice(0, -3) * 4}px`
+                })
+            }
+        })
     ],
     server: {
         host: "0.0.0.0"

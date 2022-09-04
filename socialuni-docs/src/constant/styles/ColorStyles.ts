@@ -45,7 +45,8 @@ export default class ColorStyles {
     }
 
     static themeColors = {
-        theme: '#28a5dc'
+        theme: '#28a5dc',
+        default: '#f9f9f9'
     }
 
     static colors = {
