@@ -11,7 +11,9 @@
 
 ## 快速开始
 
-社交联盟代码模板分为前后端两个模块，本示例仅展示独立项目使用方式，如需要嵌入已有系统，请参考[demo项目](/demo)
+社交联盟代码模板分为前后端两个模块，本示例仅展示独立项目使用方式，如需要嵌入已有系统，
+后端请参考[demo项目](/demo)
+前端请参考[官网项目](https://gitee.com/socialuni/socialuni/blob/master/socialuni-docs/src/views/demo/DemoView.vue)
 
 ### 后端模块
 

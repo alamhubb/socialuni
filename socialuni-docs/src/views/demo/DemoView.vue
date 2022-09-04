@@ -10,7 +10,7 @@
       <template #title>
         当前页面仅为面向开发者快速体验使用，本页面项目代码详见：
         <a href="https://gitee.com/socialuni/socialuni/tree/master/socialuni-embed-demo" target="_blank" class="color-white">
-          socialuni-embed-demo /（-ui前端)
+          socialuni-embed-demo
         </a>
       </template>
     </el-alert>
