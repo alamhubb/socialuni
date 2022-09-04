@@ -3,15 +3,21 @@
       class="row-between box-shadow px-30 py-3 w100% shadow-b"
   >
     <router-link to="/" class="flex-none row-col-center mr-40 use-click">
-      <img src="@/imgs/logo.jpg" class="h50" alt="logo">
-      <div class="font-22 ml-3 mb-2 font-bold color-main">社交联盟</div>
+      <div class="row-col-center" v-if="MediaUtil.gtMd">
+        <img src="@/imgs/logo.jpg" class="h50" alt="logo">
+        <div class="font-22 ml-3 mb-2 font-bold color-main">社交联盟</div>
+      </div>
+      <div v-else class="row-col-center">
+        <img src="@/imgs/socialunilogo.jpg" class="h40" alt="logo">
+      </div>
     </router-link>
 
     <div class="flex-1 row-end">
-      <div class="flex-none row-col-center mr">
+      <div class="flex-none row-col-center">
         <div v-for="route in constantRouters">
-          <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme" class="hover-color-theme px font-bold color-content">
-            {{route.meta.title}}
+          <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme"
+                       class="hover-color-theme px-sm font-bold color-content">
+            {{ route.meta.title }}
           </router-link>
         </div>
         <el-divider direction="vertical" class="mr"/>
@@ -70,6 +76,7 @@ import UserStore from "@/store/UserStore";
 import AlertUtil from "@/utils/AlertUtil";
 import TokenUtil from "@/utils/TokenUtil";
 import ToastUtil from "@/utils/ToastUtil";
+import MediaUtil from "@/styles/jsStyle/MediaUtil";
 import {computed} from "vue";
 
 const user = computed(() => {
