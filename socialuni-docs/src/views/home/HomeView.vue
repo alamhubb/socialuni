@@ -2,17 +2,18 @@
   <div class="row-center">
     <div class="max-w-900">
       <div>
-        <div class="font-32 md:font-44 font-bold color-theme mt-60">社交联盟</div>
+        <div class="font-32 md:font-44 font-bold color-theme mt-50">社交联盟</div>
         <div class="color-main font-32 md:font-44 font-bold">开源社交软件集成解决方案</div>
-        <div class="color-content font-18 md:font-20 mt-10">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持
-        </div>
+<!--        <div class="color-content font-18 md:font-20 mt-10">An approachable, performant and versatile framework for building web user interfaces.</div>-->
+        <div class="color-content font-18 md:font-20 mt-10">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持</div>
 
         <div class="flex-row mt-30">
           <router-link to="/guide">
-            <div class="btn-theme use-click">快速入门</div>
+            <div class="btn-theme use-click font-16">快速入门</div>
           </router-link>
           <router-link to="/demo">
-            <div class="btn-gray-light use-click ml-20">体验demo</div>
+            <div class="btn-gray-light use-click ml-20 font-16">体验demo</div>
+<!--            <div class="btn-gray-light use-click ml-20 font-16">Get Started</div>-->
           </router-link>
         </div>
       </div>
