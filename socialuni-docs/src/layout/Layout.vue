@@ -4,7 +4,7 @@
     <nav-bar/>
     <div class="flex-row flex-1 overflow-hidden">
 <!--      <nav-menu class="w200 flex-none"/>-->
-      <div class="flex-1 h100% pd-30 overflow-y-auto">
+      <div class="flex-1 h100% pd-20 md:pd-30 overflow-y-auto">
         <transition name="fade-transform" mode="out-in">
           <router-view :key="$route.path"/>
         </transition>

@@ -1,8 +1,8 @@
 <template>
   <div
-      class="row-between box-shadow px-30 py-3 w100% shadow-b"
+      class="row-between box-shadow px-20 md:px-30 py-3 w100% shadow-b"
   >
-    <router-link to="/" class="flex-none row-col-center mr-40 use-click">
+    <router-link to="/" class="flex-none row-col-center use-click">
       <div class="row-col-center" v-if="MediaUtil.gtMd">
         <img src="@/imgs/logo.jpg" class="h50" alt="logo">
         <div class="font-22 ml-3 mb-2 font-bold color-main">社交联盟</div>
@@ -16,19 +16,19 @@
       <div class="flex-none row-col-center">
         <div v-for="route in constantRouters">
           <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme"
-                       class="hover-color-theme px-sm font-bold color-content">
+                       class="hover-color-theme mr-sm font-bold color-content">
             {{ route.meta.title }}
           </router-link>
         </div>
-        <el-divider direction="vertical" class="mr"/>
-        <a href="https://gitee.com/socialuni/socialuni" target="_blank">
-          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size30 mr"/></div>
+        <el-divider direction="vertical" class="mr-smm"/>
+        <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm">
+          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size30"/></div>
         </a>
         <a href="https://github.com/social-uni/socialuni" target="_blank">
           <i class="mdi mdi-github font-36 use-click color-black"/>
         </a>
         <div v-if="user" class="row-col-center">
-          <el-divider direction="vertical" class="mx"/>
+          <el-divider direction="vertical" class="mr-smm"/>
           <el-dropdown v-if="user" trigger="click">
             <div class="row-col-center">
               <el-avatar :size="34">{{ user.nickname }}</el-avatar>

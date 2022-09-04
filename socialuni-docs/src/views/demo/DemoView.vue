@@ -134,7 +134,7 @@
         </div>
         <el-tabs v-model="talkActiveName" class="h100%" v-loading="talksLoading" element-loading-text="动态刷新中...">
           <el-tab-pane label="动态展示" name="preview">
-            <div class="h100% overflow-auto pr-xs">
+            <div class="h100% overflow-auto">
               <div v-for="talk in talks" class="mb-sm bd bd-radius pd-sm elevation-bottom">
                 <div class="mb-sm row-col-center">
                   <img class="size40 mr-sm" :src="talk.user.avatar">
@@ -155,7 +155,7 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="动态JSON预览" name="json">
-            <div class="h100% overflow-auto pr-xs pb-sm">
+            <div class="h100% overflow-auto pb-sm">
               <JsonViewer :value="talks"/>
             </div>
           </el-tab-pane>
