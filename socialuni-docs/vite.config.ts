@@ -7,6 +7,8 @@ import unocss from 'unocss/vite'
 import ColorStyles from "./src/styles/jsStyle/ColorStyles";
 import UnocssRuleUtil from "./src/styles/jsStyle/UnocssRuleUtil";
 import tinycolor2 from "tinycolor2";
+import markdownItAnchor from 'markdown-it-anchor'
+
 // vite.config.ts
 
 // https://vitejs.dev/config/
@@ -16,7 +18,17 @@ export default defineConfig({
         vue({
             include: [/\.vue$/, /\.md$/]
         }),
-        markdown(),
+        markdown({
+            markdownItOptions: {
+                html: true,
+                linkify: true,
+                typographer: true,
+            },
+            markdownItSetup(md) {
+                // add anchor links to your H[x] tags
+                md.use(markdownItAnchor)
+            },
+        }),
         unocss({
             theme: {
                 colors: {

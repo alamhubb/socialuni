@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import 'github-markdown-css/github-markdown.css'
-import 'highlight.js/styles/github.css'
 // const theme = 'material-palenight'
 const props = defineProps({
   src: Promise<{ default: any }>

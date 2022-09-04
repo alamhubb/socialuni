@@ -23,6 +23,7 @@ export const constantRouters: RouteRecordRaw[] = [
     {
         path: '/guide',
         component: Layout,
+        name: 'guide',
         meta: {title: '入门'},
         redirect: '/guide/introduction',
         children: [

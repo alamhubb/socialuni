@@ -1,4 +1,5 @@
 <template>
+  123
   <div v-if="menus.length">
     <div v-for="menu in menus" :id="menu.meta.title">
       {{ menu.meta.title }}
@@ -21,13 +22,15 @@ const curRouteParentName = route.path.split('/').filter(item => !!item)[0]
 
 console.log(curRouteParentName)
 const menus: Ref<RouteRecordRaw[]> = ref([])
-
+console.log(menus)
 const parentRoute: RouteRecordRaw = constantRouters.find(item => item.name === curRouteParentName)
+console.log(parentRoute)
 
 if (parentRoute && parentRoute.children) {
   menus.value = parentRoute.children
 }
 
+console.log(menus.value.length)
 const key = computed(() => {
   return route.path
 })
