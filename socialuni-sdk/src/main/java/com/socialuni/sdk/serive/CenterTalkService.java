@@ -1,6 +1,8 @@
 package com.socialuni.sdk.serive;
 
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.domain.talk.*;
 import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
@@ -9,6 +11,8 @@ import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
+import com.socialuni.sdk.model.RO.community.tag.TagRO;
+import com.socialuni.sdk.model.RO.community.talk.SocialTalkTagRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.platform.MapUtil;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CenterTalkService {
@@ -66,6 +71,18 @@ public class CenterTalkService {
         } else {
             talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
         }
+        //如果不为测试环境则过滤到测试环境标签的数据
+        /*if (DevAccountUtils.getDevIdNotNull() != 3) {
+            talkROS = talkROS.stream().filter(talkRO -> {
+                List<SocialTalkTagRO> tagROES = talkRO.getTags();
+                for (SocialTalkTagRO tagRO : tagROES) {
+                    if (tagRO.getName().equals(SocialuniCommonConst.devEnvTagName)) {
+                        return false;
+                    }
+                }
+                return true;
+            }).collect(Collectors.toList());
+        }*/
         return new ResultRO<>(talkROS);
     }
 

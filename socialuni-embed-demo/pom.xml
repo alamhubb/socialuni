@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>socialuni-embed-demo</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>socialuni-embed-demo</name>
     <packaging>jar</packaging>
     <description>socialuni-embed-demo</description>

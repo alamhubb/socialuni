@@ -107,4 +107,9 @@ public class TestController {
         ResultRO<List<CenterTalkRO>> resultRO = centerTalkService.queryTalks();
         return resultRO;
     }
+
+    @GetMapping("statistics")
+    public ResultRO<Void> statistics() {
+        return ResultRO.success();
+    }
 }

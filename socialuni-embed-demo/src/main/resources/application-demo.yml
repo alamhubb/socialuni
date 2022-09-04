@@ -1,5 +1,7 @@
 socialuni:
   socialuni-id: "d15502ebc20f4f21bf2b375f2b3ac312"
+  secret-key: "d9a53b2892a540689b4ef608bdca3d2e"
+#  central-server-url: "https://localpc.socialuni.cn:8091"
   app:
     static-resource-url: "https://cdxapp-1257733245.file.myqcloud.com"
     system-user-id: 1

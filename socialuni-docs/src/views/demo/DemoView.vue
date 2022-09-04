@@ -1,10 +1,16 @@
 <template>
   <div class="divHeight overflow-x-hidden flex-col">
     <el-alert type="warning" effect="dark" class="mb">
-      <template #title>
+<!--      <template #title>
         当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
         <a href="https://socialuni.cn/app" target="_blank" class="color-white">
           https://socialuni.cn/app
+        </a>
+      </template>-->
+      <template #title>
+        当前页面仅为面向开发者快速体验使用，本页面项目代码详见：
+        <a href="https://gitee.com/socialuni/socialuni/tree/master/socialuni-embed-demo" target="_blank" class="color-white">
+          socialuni-embed-demo /（-ui前端)
         </a>
       </template>
     </el-alert>
@@ -125,7 +131,7 @@
             {{ AppConst.baseUrl }}/queryTalks
           </el-link>
         </div>
-        <el-tabs v-model="talkActiveName" class="h100p" v-loading="talksLoading" element-loading-text="动态刷新中...">
+        <el-tabs v-model="talkActiveName" class="h100%" v-loading="talksLoading" element-loading-text="动态刷新中...">
           <el-tab-pane label="动态展示" name="preview">
             <div class="h100% overflow-auto pr-xs">
               <div v-for="talk in talks" class="mb-sm bd bd-radius pd-sm elevation-bottom">
