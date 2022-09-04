@@ -16,7 +16,7 @@
       <div class="flex-none row-col-center">
         <div v-for="route in constantRouters">
           <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme"
-                       class="hover-color-theme mr-sm md:mr font-bold color-content">
+                       class="hover-color-theme mx-xs md:mx-smm font-bold color-content">
             {{ route.meta.title }}
           </router-link>
         </div>
