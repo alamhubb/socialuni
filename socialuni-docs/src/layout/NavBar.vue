@@ -20,17 +20,17 @@
             {{ route.meta.title }}
           </router-link>
         </div>
-        <el-divider direction="vertical" class="mr-smm"/>
+        <el-divider direction="vertical" class="mr-smm md:mr"/>
         <div class="row-col-center">
           <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
             <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size31"/></div>
           </a>
-          <a href="https://github.com/social-uni/socialuni" target="_blank">
+          <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
             <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
           </a>
         </div>
         <div v-if="user" class="row-col-center">
-          <el-divider direction="vertical" class="mr-smm"/>
+          <el-divider direction="vertical" class="mr-smm md:mr"/>
           <el-dropdown v-if="user" trigger="click">
             <div class="row-col-center">
               <el-avatar :size="34">{{ user.nickname }}</el-avatar>
