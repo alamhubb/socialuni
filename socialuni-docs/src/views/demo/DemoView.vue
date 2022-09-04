@@ -1,15 +1,16 @@
 <template>
   <div class="divHeight overflow-x-hidden flex-col">
     <el-alert type="warning" effect="dark" class="mb">
-<!--      <template #title>
-        当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
-        <a href="https://socialuni.cn/app" target="_blank" class="color-white">
-          https://socialuni.cn/app
-        </a>
-      </template>-->
+      <!--      <template #title>
+              当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
+              <a href="https://socialuni.cn/app" target="_blank" class="color-white">
+                https://socialuni.cn/app
+              </a>
+            </template>-->
       <template #title>
         当前页面仅为面向开发者快速体验使用，本页面项目代码详见：
-        <a href="https://gitee.com/socialuni/socialuni/tree/master/socialuni-embed-demo" target="_blank" class="color-white">
+        <a href="https://gitee.com/socialuni/socialuni/tree/master/socialuni-embed-demo" target="_blank"
+           class="color-white">
           socialuni-embed-demo
         </a>
       </template>
@@ -208,7 +209,8 @@ async function userLogin() {
   if (!userName.value) {
     ToastUtil.throwError('请输入用户名')
   }
-  const loginRO: { user: any, token: string } = await request.get('/login', {params: {name: userName.value}})
+  const res: any = await request.get('/login', {params: {name: userName.value}})
+  const loginRO: { user: any, token: string } = res.data
   UserStore.setUser(loginRO.user)
   TokenUtil.set(loginRO.token)
   loginAPIActive.value = 2
