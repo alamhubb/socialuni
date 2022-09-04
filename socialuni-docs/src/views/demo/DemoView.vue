@@ -1,6 +1,6 @@
 <template>
-  <div class="px-smm divHeight overflow-x-hidden flex-col">
-    <el-alert type="warning" effect="dark" class="position-absolute t-70 l-0 w80% r-0 index-sm">
+  <div class="divHeight overflow-x-hidden flex-col">
+    <el-alert type="warning" effect="dark" class="mb">
       <template #title>
         当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
         <a href="https://socialuni.cn/app" target="_blank" class="color-white">
@@ -9,14 +9,14 @@
       </template>
     </el-alert>
     <el-row :gutter="20" class="flex-1 overflow-hidden">
-      <el-col :xs="24" :sm="12" class="h100p overflow-auto pb-sm">
-        <el-collapse v-model="loginAPIActive" accordion class="by-none">
+      <el-col :xs="24" :sm="12" class="h100p overflow-auto pb-10">
+        <el-collapse v-model="loginAPIActive" accordion class="by-0">
           <el-collapse-item :name="1">
             <template #title>
               <div class="font-bold font-md row-col-center">一、登录接口</div>
             </template>
-            <div class="custom-block font-bold font-md">
-              <div class="flex-none mb-xs">请求方式：GET</div>
+            <div class="note-primary">
+              <div class="flex-none mb-xs font-bold font-16">请求方式：GET</div>
               <el-link type="warning"
                        :href="AppConst.baseUrl+'/login?name='+ (userName ? userName : (user && user.nickname || 'xxx'))"
                        target="_blank">
@@ -51,7 +51,7 @@
         <el-tabs v-model="activeName" class="mb-sm">
           <el-tab-pane label="发布动态" name="talk">
             <div>
-              <div class="custom-block font-bold font-md">
+              <div class="note-primary font-bold font-md">
                 <div class="flex-none mb-xs">请求方式：GET</div>
                 <el-link type="warning" :href="AppConst.baseUrl+'/postTalk?content=?content='+talkContent"
                          target="_blank">
@@ -79,7 +79,7 @@
           </el-tab-pane>
           <el-tab-pane label="发布评论" name="comment">
             <div>
-              <div class="custom-block font-bold font-md">
+              <div class="note-primary font-bold font-md">
                 <div class="flex-none mb-xs">请求方式：GET</div>
                 <el-link type="warning"
                          :href="AppConst.baseUrl+'/postComment?talkId='+((talks && talks.length && talks[0].id||'xxx'))+'&content='+commentContent"
@@ -117,7 +117,7 @@
       <el-col v-if="talks" :xs="24" :sm="12" class="h100p overflow-hidden talkDataTabsDiv">
         <div class="font-bold font-md mt-sm">三、查询动态</div>
 
-        <div class="custom-block font-bold font-md mt-sm">
+        <div class="note-primary font-bold font-md mt-sm">
           <div class="flex-none mb-xs">请求方式：GET</div>
           <el-link type="warning"
                    :href="AppConst.baseUrl+'/queryTalks'"

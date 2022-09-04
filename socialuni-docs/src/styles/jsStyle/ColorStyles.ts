@@ -13,7 +13,7 @@ export default class ColorStyles {
         green6: '#F0F9EB',
     }
     static blueColors = {
-        green: '#1F71F6',
+        blue: '#409EFF',
         green1: '#2A86FF',
         green2: '#40A9FF',
         green3: '#69C0FF',
@@ -23,25 +23,20 @@ export default class ColorStyles {
         green7: '#B3D8FF',
         green8: '#EDF5FF',
     }
-    static greyColors = {
-        green: '#282f3d',
-        green1: '#141414',
-        green2: '#1f2329',
-        green3: '#282f3d',
-        green4: '#333333',
-        green5: '#434343',
-        green6: '#666666',
-        green7: '#999999',
-        green8: '#EDF5FF',/*
-        green8: '#d9d9d9',
+    static redColors = {
+        red: '#F56C6C',
+        green1: '#2A86FF',
+        green2: '#40A9FF',
+        green3: '#69C0FF',
+        green4: '#91D5FF',
+        green5: '#BAE7FF',
+        green6: '#69C0FF',
+        green7: '#B3D8FF',
         green8: '#EDF5FF',
-        green8: '#f0f0f0',
-        green8: '#f5f5f5',
-        green8: '#F3F4F7',
-        green8: '#f3f5fb',
-        green8: '#EAEBEC',
-        green8: '#e5e5e5',
-        green8: '#ececec',*/
+    }
+
+    static grayColors: { [key in string]: string } = {
+        gray: '#f2f2f2',
     }
 
     static themeColors: { [key in string]: string } = {
@@ -52,15 +47,17 @@ export default class ColorStyles {
         border: '#e6e6e6',
         main: '#213547',
         content: '#3c3c3cb3',
-    }
-    static grayColors: { [key in string]: string } = {
-        gray: '#f2f2f2',
+        primary: this.blueColors.blue,
+        danger: this.redColors.red,
+        success: this.greenColors.green,
+        info: this.grayColors.gray,
     }
 
     static colors: { [key in string]: string } = {
         ...ColorStyles.themeColors,
         ...ColorStyles.greenColors,
         ...ColorStyles.blueColors,
+        ...ColorStyles.redColors,
         ...ColorStyles.grayColors,
     }
 }

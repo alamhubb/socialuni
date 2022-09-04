@@ -8,32 +8,3 @@
   padding: $box-df !important;
 }
 
-.custom-block {
-  @extend .bg-blue-light;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border-left: 5px solid var(--el-color-primary);;
-}
-
-.custom-block.error {
-  @extend .bg-red-light;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border-left: 5px solid var(--el-color-danger);
-}
-
-.custom-block.success {
-  padding: 8px 16px;
-  @extend .bg-green-light;
-  border-radius: 4px;
-  border-left: 5px solid var(--el-color-success);
-}
-
-.custom-block.info {
-  padding: 8px 16px;
-  @extend .bg-grey_light;
-  border-radius: 4px;
-  border-left: 5px solid var(--el-color-info);
-}
-
-

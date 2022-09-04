@@ -35,14 +35,63 @@ export default class UnocssRuleUtil {
         return this.getStyles('', direction, size, valueUnit)
     }
 
+    static getBorderWidthStyles(match: string[], theme): { [key in string]: string } {
+        const direction = match[1]
+        const width = match[2]
+
+        // border-color: mix($color-white, $color-main, 60%);
+        //bd bt
+        //bd-them bt-theme
+        //bd-them-2 bt-theme
+        //bd-color-theme
+        //bd-2
+        if (direction === 'd') {
+            return {
+                'border-width': `${width}px`
+            }
+        } else if (direction === 't') {
+            return {
+                'border-top-width': `${width}px`,
+            }
+        } else if (direction === 'b') {
+            return {
+                'border-bottom-width': `${width}px`,
+            }
+        } else if (direction === 'l') {
+            return {
+                'border-left-width': `${width}px`,
+            }
+        } else if (direction === 'r') {
+            return {
+                'border-right-width': `${width}px`,
+            }
+        } else if (direction === 'x') {
+            return {
+                'border-left-width': `${width}px`,
+                'border-right-width': `${width}px`,
+            }
+        } else if (direction === 'y') {
+            return {
+                'border-top-width': `${width}px`,
+                'border-bottom-width': `${width}px`
+            }
+        }
+        return {}
+    }
+
     static getBorderStyles(match: string[], theme): { [key in string]: string } {
         const direction = match[1]
         const colorTheme = match[3]
         let color = ColorStyles.themeColors.border
+
+        console.log(match[0])
+        console.log(colorTheme)
         if (colorTheme) {
+            console.log(colorTheme)
+            console.log(ColorStyles.colors[colorTheme])
             color = tinycolor2.mix(ColorStyles.colors[colorTheme], ColorStyles.themeColors.black, 10)
         }
-
+        console.log(color)
         // border-color: mix($color-white, $color-main, 60%);
         //bd bt
         //bd-them bt-theme
@@ -62,6 +111,9 @@ export default class UnocssRuleUtil {
                 'border-bottom': `1px solid ${color}`,
             }
         } else if (direction === 'l') {
+
+            console.log(color)
+            console.log(111111)
             return {
                 'border-left': `1px solid ${color}`,
             }

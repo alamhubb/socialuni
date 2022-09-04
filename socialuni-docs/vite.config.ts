@@ -6,6 +6,7 @@ import markdown from 'vite-plugin-md'
 import unocss from 'unocss/vite'
 import ColorStyles from "./src/styles/jsStyle/ColorStyles";
 import UnocssRuleUtil from "./src/styles/jsStyle/UnocssRuleUtil";
+import tinycolor2 from "tinycolor2";
 // vite.config.ts
 
 // https://vitejs.dev/config/
@@ -26,8 +27,11 @@ export default defineConfig({
                 [/^p(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('padding', match)],
                 [/^m(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('margin', match)],
                 [/^(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getDirectionStyles('', match)],
-                [/^b(.)(-(\D+))?$/, (match, theme) => UnocssRuleUtil.getBorderStyles(match, theme)],
+                [/^b(.)(-(.+))?$/, (match, theme) => UnocssRuleUtil.getBorderStyles(match, theme)],
+                [/^b(.)-(\d+)?$/, (match, theme) => UnocssRuleUtil.getBorderWidthStyles(match, theme)],
                 [/^b(.)-radius(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getBorderRadiusStyles(match)],
+                [/^bg-(.+)_light$/, match => ({'background': tinycolor2.mix(ColorStyles.colors[match[1]], ColorStyles.themeColors.white, 90)})],
+                [/^bg-(.+)_dark$/, match => ({'background': tinycolor2.mix(ColorStyles.colors[match[1]], ColorStyles.themeColors.black, 10)})],
                 [/^font-(\d+)(\D+)?$/, match => {
                     return ({'font-size': `${match[1]}${match[2] || 'px'}`})
                 }],
@@ -52,7 +56,8 @@ export default defineConfig({
                 })
             },
             shortcuts: [
-                [/^btn(-(.*))?$/, ([, , c]) => `${c ? 'bg-' + c + ' color-white bd-' + c : 'bg-white bd color-main'}  py-10 px-20 bd-radius-20 use-click`],
+                [/^btn(-(.+))?$/, ([, , c]) => `${c ? 'bg-' + c + ' color-white bd-' + c : 'bg-white bd color-main'}  py-10 px-20 bd-radius-20 use-click`],
+                [/^note(-(.+))?$/, ([, , c]) => `bl-${c} bl-5 bg-${c}_light py-8 px-16 bd-radius`],
             ]
 
         })

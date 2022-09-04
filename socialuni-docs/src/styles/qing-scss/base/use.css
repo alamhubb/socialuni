@@ -3,11 +3,11 @@
 }
 
 .use-click:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .use-click:focus {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .use-click:active {
@@ -15,7 +15,7 @@
 }
 
 .use-hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .use-active {

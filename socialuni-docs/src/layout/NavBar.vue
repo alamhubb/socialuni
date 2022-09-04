@@ -16,10 +16,10 @@
         </div>
         <el-divider direction="vertical" class="mr"/>
         <a href="https://gitee.com/socialuni/socialuni" target="_blank">
-          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="bg-click size30 mr"/></div>
+          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size30 mr"/></div>
         </a>
         <a href="https://github.com/social-uni/socialuni" target="_blank">
-          <i class="mdi mdi-github font-36 use-click"/>
+          <i class="mdi mdi-github font-36 use-click color-black"/>
         </a>
 
       </div>
