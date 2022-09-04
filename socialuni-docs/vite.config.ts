@@ -4,8 +4,8 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import markdown from 'vite-plugin-md'
 import unocss from 'unocss/vite'
-import ColorStyles from "./src/constant/styles/ColorStyles";
-import UnocssRuleUtil from "./src/constant/styles/UnocssRuleUtil";
+import ColorStyles from "./src/styles/jsStyle/ColorStyles";
+import UnocssRuleUtil from "./src/styles/jsStyle/UnocssRuleUtil";
 // vite.config.ts
 
 // https://vitejs.dev/config/

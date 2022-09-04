@@ -4,6 +4,7 @@ import Layout from "@/layout/Layout.vue";
 import HomeView from '@/views/home/HomeView.vue'
 import Introduction from '@/views/guide/introduction/introduction.md'
 import MoreUsage from '@/views/guide/moreUsage/moreUsage.md'
+import DemoView from '@/views/demo/DemoView.vue'
 
 export const constantRouters: RouteRecordRaw[] = [
     {
@@ -40,6 +41,19 @@ export const constantRouters: RouteRecordRaw[] = [
         ]
 
         // component: import( '@/views/home/HomeView.vue')
+    },
+    {
+        path: '/demo',
+        meta: {title: 'demo'},
+        redirect: '/demo',
+        children: [
+            {
+                path: '',
+                name: 'demo',
+                meta: {title: 'demo'},
+                component: DemoView
+            }
+        ]
     }
 ]
 

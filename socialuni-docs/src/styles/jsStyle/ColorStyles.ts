@@ -51,6 +51,7 @@ export default class ColorStyles {
         default: '#f9f9f9',
         border: '#e6e6e6',
         main: '#213547',
+        content: '#3c3c3cb3',
     }
     static grayColors: { [key in string]: string } = {
         gray: '#f2f2f2',

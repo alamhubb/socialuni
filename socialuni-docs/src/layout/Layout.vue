@@ -1,12 +1,12 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100% flex-col color-main">
-    <nav-bar />
+    <nav-bar/>
     <div class="flex-row flex-1 overflow-hidden">
-<!--      <nav-menu v-if="route.name !== 'home'" class="w200 flex-none" />-->
+      <nav-menu v-if="route.name !== 'home'" class="w200 flex-none"/>
       <div class="flex-1 h100% pd-30 overflow-y-auto">
         <transition name="fade-transform" mode="out-in">
-          <router-view :key="$route.path" />
+          <router-view :key="$route.path"/>
         </transition>
       </div>
     </div>

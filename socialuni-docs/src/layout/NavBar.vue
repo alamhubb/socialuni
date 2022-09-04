@@ -1,25 +1,25 @@
 <template>
   <div
-      class="row-between box-shadow px py-mn w100% shadow-b"
+      class="row-between box-shadow px-30 lg:px-100 py-3 w100% shadow-b"
   >
-    <router-link to="/" class="flex-none row-col-center mr-40 bg-click">
+    <router-link to="/" class="flex-none row-col-center mr-40 use-click">
       <img src="@/imgs/logo.jpg" class="h50" alt="logo">
-<!--      <div class="font-19 ml-3 mt-1 font-bold color-social">社交软件联盟</div>-->
+      <div class="font-22 ml-3 mb-2 font-bold color-main">社交联盟</div>
     </router-link>
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
         <div v-for="route in constantRouters">
-          <router-link v-if="!route.meta.hidden" :to="route.path">
+          <router-link v-if="!route.meta.hidden" :to="route.path" class="hover-color-theme px font-bold color-content">
             {{route.meta.title}}
           </router-link>
         </div>
         <el-divider direction="vertical" class="mr"/>
         <a href="https://gitee.com/socialuni/socialuni" target="_blank">
-          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="bg-click size30 mr-sm"/></div>
+          <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="bg-click size30 mr"/></div>
         </a>
         <a href="https://github.com/social-uni/socialuni" target="_blank">
-          <i class="mdi mdi-github font-36 bg-click"/>
+          <i class="mdi mdi-github font-36 use-click"/>
         </a>
 
       </div>

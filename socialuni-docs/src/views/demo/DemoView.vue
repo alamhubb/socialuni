@@ -1,6 +1,5 @@
 <template>
-  <div class="px-smm divHeight overflow-x-hidden flex-col">
-    <hello></hello>
+<!--  <div class="px-smm divHeight overflow-x-hidden flex-col">
     <el-alert type="warning" effect="dark" class="my-sm">
       <template #title>
         当前页面仅为面向开发者快速体验使用，更完整的功能请点击前往：
@@ -9,14 +8,8 @@
         </a>
       </template>
     </el-alert>
-
-    <div v-if="user" class="row-between-center font-bold font-md bb pb-sm flex-none">
-      <div>用户名：{{ user ? user.nickname : '未登录' }}</div>
-      <el-button :disabled="!user" @click="logout">退出</el-button>
-    </div>
-
     <el-row :gutter="20" class="flex-1 overflow-hidden">
-      <el-col :xs="24" :sm="12" class="h100% overflow-auto pb-sm">
+      <el-col :xs="24" :sm="12" class="h100p overflow-auto pb-sm">
         <el-collapse v-model="loginAPIActive" accordion class="by-none">
           <el-collapse-item :name="1">
             <template #title>
@@ -44,7 +37,8 @@
         </el-collapse>
         <div v-if="!user" class="mb-sm">
           <div class="row-col-center my-sm">
-            <star-filled class="mr-xs color-red4 w7"></star-filled>请输入用户名，然后点击登录
+            <star-filled class="mr-xs color-red4 w7"></star-filled>
+            请输入用户名，然后点击登录
           </div>
           <div class="row-col-center">
             <el-input v-model="userName" placeholder="请输入任意用户名"></el-input>
@@ -72,7 +66,10 @@
                 </el-link>
               </div>
               <div class="row-between-center my-sm">
-                <div><star-filled class="mr-xs color-red4 w7"></star-filled>请输入您要发布的动态，点击发布</div>
+                <div>
+                  <star-filled class="mr-xs color-red4 w7"></star-filled>
+                  请输入您要发布的动态，点击发布
+                </div>
                 <el-button class="ml-sm" @click="postTalk">发布</el-button>
               </div>
               <div class="row-col-center">
@@ -103,7 +100,10 @@
                 </el-link>
               </div>
               <div class="row-between-center my-sm">
-                <div><star-filled class="mr-xs color-red4 w7"></star-filled>请输入您要评论的内容，点击评论</div>
+                <div>
+                  <star-filled class="mr-xs color-red4 w7"></star-filled>
+                  请输入您要评论的内容，点击评论
+                </div>
                 <el-button class="ml-sm" @click="postComment">评论</el-button>
               </div>
               <div class="row-col-center">
@@ -114,7 +114,7 @@
         </el-tabs>
       </el-col>
 
-      <el-col v-if="talks" :xs="24" :sm="12" class="h100% overflow-hidden talkDataTabsDiv">
+      <el-col v-if="talks" :xs="24" :sm="12" class="h100p overflow-hidden talkDataTabsDiv">
         <div class="font-bold font-md mt-sm">三、查询动态</div>
 
         <div class="custom-block font-bold font-md mt-sm">
@@ -125,9 +125,9 @@
             {{ AppConst.baseUrl }}/queryTalks
           </el-link>
         </div>
-        <el-tabs v-model="talkActiveName" class="h100%" v-loading="talksLoading" element-loading-text="动态刷新中...">
+        <el-tabs v-model="talkActiveName" class="h100p" v-loading="talksLoading" element-loading-text="动态刷新中...">
           <el-tab-pane label="动态展示" name="preview">
-            <div class="h100% overflow-auto pr-xs">
+            <div class="h100p overflow-auto pr-xs">
               <div v-for="talk in talks" class="mb-sm bd bd-radius pd-sm elevation-bottom">
                 <div class="mb-sm row-col-center">
                   <img class="size40 mr-sm" :src="talk.user.avatar">
@@ -148,18 +148,18 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="动态JSON预览" name="json">
-            <div class="h100% overflow-auto pr-xs pb-sm">
+            <div class="h100p overflow-auto pr-xs pb-sm">
               <JsonViewer :value="talks"/>
             </div>
           </el-tab-pane>
         </el-tabs>
       </el-col>
     </el-row>
-  </div>
+  </div>-->
 </template>
 
 <script setup lang="ts">
-import {
+/*import {
   Check,
   Delete,
   Edit,
@@ -168,44 +168,38 @@ import {
   Star,
   StarFilled
 } from '@element-plus/icons-vue'
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import AlertUtil from "@/utils/AlertUtil";
+import AppConst from "@/constant/AppConst";
+import UserStore from "@/store/UserStore";
+import ToastUtil from "@/utils/ToastUtil";
 import request from "@/plugins/request";
 import TokenUtil from "@/utils/TokenUtil";
 import ObjectUtil from "@/utils/ObjectUtil";
-import ToastUtil from "@/utils/ToastUtil";
-import AlertUtil from "@/utils/AlertUtil";
-import AppConst from "@/constant/AppConst";
-import Hello from "@/views/home/home.md";
+import User from "@/model/user/User";*/
+
+/*
 
 const userName = ref('')
-const user = ref(null)
-const userJson = ref('')
-const token = ref(TokenUtil.get())
+
+const user = computed(() => {
+  return UserStore.user
+})
+
 const talkContent = ref('')
 const commentContent = ref('')
 const activeName = ref('talk')
 const talkActiveName = ref('preview')
 const loginAPIActive = ref(1)
 const talksLoading = ref(false)
-
-
-if (token.value) {
-  const userRO: any = await request.get('/getMineUser', {params: {token: token.value}})
-  user.value = userRO
-  userJson.value = ObjectUtil.toJson(user.value)
-}
-
-//第一块用户信息，登录不登录各一种形式
-//第二块发表动态
-//三块展示
-
-const talks: any = ref(await request.get('/queryTalks'))
-
-async function queryTalks() {
-  talksLoading.value= true
-  const talkList: any[] = await request.get('/queryTalks') as any
-  talks.value = talkList
-  talksLoading.value= false
+const userJson = computed(() => {
+  return ObjectUtil.toJson(UserStore.user)
+})
+const token = TokenUtil.get()
+if (token) {
+  request.get('/getMineUser').then((user) => {
+    UserStore.setUser(user.data)
+  })
 }
 
 async function userLogin() {
@@ -213,21 +207,26 @@ async function userLogin() {
     ToastUtil.throwError('请输入用户名')
   }
   const loginRO: { user: any, token: string } = await request.get('/login', {params: {name: userName.value}})
-  user.value = loginRO.user
+  UserStore.setUser(loginRO.user)
   TokenUtil.set(loginRO.token)
-  token.value = loginRO.token
-  userJson.value = ObjectUtil.toJson(user.value)
   loginAPIActive.value = 2
   ToastUtil.success('登录成功')
   userName.value = ''
-  await queryTalks()
+  queryTalks()
 }
 
-async function logout() {
-  await AlertUtil.confirm('是否确认退出')
-  user.value = null
-  TokenUtil.remove()
-  ToastUtil.success('退出成功')
+//第一块用户信息，登录不登录各一种形式
+//第二块发表动态
+//三块展示
+
+const talks: any = ref([])
+queryTalks()
+
+async function queryTalks() {
+  talksLoading.value = true
+  const talkList: any[] = await request.get('/queryTalks') as any
+  talks.value = talkList
+  talksLoading.value = false
 }
 
 async function postTalk() {
@@ -258,6 +257,7 @@ async function postComment() {
   commentContent.value = ''
   await queryTalks()
 }
+*/
 
 //如果未登录，可以登录不可以退出
 
