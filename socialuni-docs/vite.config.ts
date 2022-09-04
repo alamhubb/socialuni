@@ -23,11 +23,10 @@ export default defineConfig({
                 }
             },
             rules: [
-                [/^p(.)(-(\D+))?$/, match => UnocssRuleUtil.getSizeStyles('padding', match)],
-                [/^p(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getNumStyles('padding', match)],
-                [/^m(.)(-(\D+))?$/, match => UnocssRuleUtil.getSizeStyles('margin', match)],
-                [/^m(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getNumStyles('margin', match)],
+                [/^p(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('padding', match)],
+                [/^m(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('margin', match)],
                 [/^(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getDirectionStyles('', match)],
+                [/^b(.)-radius(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getBorderRadiusStyles(match)],
                 [/^font-(\d+)(\D+)?$/, match => {
                     return ({'font-size': `${match[1]}${match[2] || 'px'}`})
                 }],
@@ -42,7 +41,7 @@ export default defineConfig({
                         'width': `${match[1]}${match[2] || 'px'}`,
                         'height': `${match[1]}${match[2] || 'px'}`
                     })
-                }]
+                }],
             ],
             postprocess: (util) => {
                 util.entries.forEach((i) => {
@@ -50,7 +49,11 @@ export default defineConfig({
                     if (value && typeof value === 'string' && /^-?[\.\d]+rem$/.test(value))
                         i[1] = `${+value.slice(0, -3) * 4}px`
                 })
-            }
+            },
+            shortcuts: [
+                [/^btn-(.*)$/, ([, c]) => `bg-${c} color-white py-10 px-20 bd-radius-20 use-click`],
+            ]
+
         })
     ],
     server: {
