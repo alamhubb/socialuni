@@ -120,9 +120,6 @@ export default class UnocssRuleUtil {
         if (colorTheme) {
             color = ColorStyles.colors[colorTheme]
         }
-        console.log( match[0])
-        console.log(colorTheme)
-        console.log(color)
         // border-color: mix($color-white, $color-main, 60%);
         //bd bt
         //bd-them bt-theme
@@ -246,7 +243,6 @@ export default class UnocssRuleUtil {
                 style[string] = styleValue
             }
         }
-        console.log(style)
         return style
     }
 }
