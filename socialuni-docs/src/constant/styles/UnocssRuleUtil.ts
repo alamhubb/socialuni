@@ -3,6 +3,9 @@ import ColorStyles from "./ColorStyles";
 import ObjectUtil from "../../utils/ObjectUtil";
 import SizeStyles from "./SizeStyles";
 import {match} from "assert";
+import tinycolor2 from "tinycolor2";
+
+console.log(tinycolor2)
 
 export const directionMap: { [key in string]: string[] } = {
     'l': ['left'],
@@ -30,6 +33,54 @@ export default class UnocssRuleUtil {
         const size = match[2]
         const valueUnit = match[3]
         return this.getStyles('', direction, size, valueUnit)
+    }
+
+    static getBorderStyles(match: string[], theme): { [key in string]: string } {
+        const direction = match[1]
+        const colorTheme = match[3]
+        let color = ColorStyles.themeColors.border
+        if (colorTheme) {
+            color = tinycolor2.mix(ColorStyles.colors[colorTheme], ColorStyles.themeColors.black, 10)
+        }
+
+        // border-color: mix($color-white, $color-main, 60%);
+        //bd bt
+        //bd-them bt-theme
+        //bd-them-2 bt-theme
+        //bd-color-theme
+        //bd-2
+        if (direction === 'd') {
+            return {
+                'border': `1px solid ${color}`
+            }
+        } else if (direction === 't') {
+            return {
+                'border-top': `1px solid ${color}`,
+            }
+        } else if (direction === 'b') {
+            return {
+                'border-bottom': `1px solid ${color}`,
+            }
+        } else if (direction === 'l') {
+            return {
+                'border-left': `1px solid ${color}`,
+            }
+        } else if (direction === 'r') {
+            return {
+                'border-right': `1px solid ${color}`,
+            }
+        } else if (direction === 'x') {
+            return {
+                'border-left': `1px solid ${color}`,
+                'border-right': `1px solid ${color}`,
+            }
+        } else if (direction === 'y') {
+            return {
+                'border-top': `1px solid ${color}`,
+                'border-bottom': `1px solid ${color}`
+            }
+        }
+        return {}
     }
 
     static getBorderRadiusStyles(match: string[]): { [key in string]: string } {

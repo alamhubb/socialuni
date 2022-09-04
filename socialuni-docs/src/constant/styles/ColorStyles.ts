@@ -44,14 +44,22 @@ export default class ColorStyles {
         green8: '#ececec',*/
     }
 
-    static themeColors = {
+    static themeColors: { [key in string]: string } = {
         theme: '#28a5dc',
-        default: '#f9f9f9'
+        white: '#ffffff',
+        black: '#000000',
+        default: '#f9f9f9',
+        border: '#e6e6e6',
+        main: '#213547',
+    }
+    static grayColors: { [key in string]: string } = {
+        gray: '#f2f2f2',
     }
 
-    static colors = {
+    static colors: { [key in string]: string } = {
         ...ColorStyles.themeColors,
         ...ColorStyles.greenColors,
         ...ColorStyles.blueColors,
+        ...ColorStyles.grayColors,
     }
 }

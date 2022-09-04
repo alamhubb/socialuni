@@ -3,7 +3,7 @@
     <div class="max-w-1152">
       <div>
         <div class="font-32 md:font-44 font-bold color-theme mt-60">社交联盟</div>
-        <div class="color-blue-gray700 font-32 md:font-44 font-bold">开源社交软件集成解决方案</div>
+        <div class="color-main font-32 md:font-44 font-bold">开源社交软件集成解决方案</div>
         <div class="color-grey400 font-18 md:font-20 mt-10">提供免费的社交软件模板，丰富的用户非隐私数据，运营盈利支持
         </div>
 
@@ -11,18 +11,15 @@
           <router-link to="/guide">
             <div class="btn-theme use-click">快速入门</div>
           </router-link>
-<!--          <div class="flex-row mt-30">
-            <router-link to="/guide">
-              <div class="q-button-theme">快速入门</div>
-            </router-link>
-            &lt;!&ndash;      <div class="q-button ml bg-gray100">体验 demo</div>&ndash;&gt;
-          </div>-->
+          <router-link to="/guide">
+            <div class="btn-gray use-click color-main ml-20">体验demo</div>
+          </router-link>
         </div>
       </div>
 
       <div class="row-wrap pt-30px">
         <div class="w100% sm:w50% lg:w33% mt-20px">
-          <div class="bg-default pd bd-radius  mr-20px">
+          <div class="bg-default pd bd-radius mr-20px">
             <div class="font-md font-bold">开发提效</div>
             <div class="color-grey15 mt-10px">社交领域前后端业务组件、模板，约定优于配置原则，支持自定义</div>
           </div>

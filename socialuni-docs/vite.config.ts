@@ -19,13 +19,14 @@ export default defineConfig({
         unocss({
             theme: {
                 colors: {
-                    ...ColorStyles.themeColors
+                    ...ColorStyles.colors
                 }
             },
             rules: [
                 [/^p(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('padding', match)],
                 [/^m(.)(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getNumStyles('margin', match)],
                 [/^(.)-(\d+)(\D+)?$/, match => UnocssRuleUtil.getDirectionStyles('', match)],
+                [/^b(.)(-(\D+))?$/, (match, theme) => UnocssRuleUtil.getBorderStyles(match, theme)],
                 [/^b(.)-radius(-(\d+)(\D+)?)?$/, match => UnocssRuleUtil.getBorderRadiusStyles(match)],
                 [/^font-(\d+)(\D+)?$/, match => {
                     return ({'font-size': `${match[1]}${match[2] || 'px'}`})
@@ -51,7 +52,7 @@ export default defineConfig({
                 })
             },
             shortcuts: [
-                [/^btn-(.*)$/, ([, c]) => `bg-${c} color-white py-10 px-20 bd-radius-20 use-click`],
+                [/^btn(-(.*))?$/, ([, , c]) => `${c ? 'bg-' + c + ' color-white bd-' + c : 'bg-white bd color-main'}  py-10 px-20 bd-radius-20 use-click`],
             ]
 
         })

@@ -1,6 +1,6 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
-  <div class="h100% flex-col">
+  <div class="h100% flex-col color-main">
     <nav-bar />
     <div class="flex-row flex-1 overflow-hidden">
 <!--      <nav-menu v-if="route.name !== 'home'" class="w200 flex-none" />-->
