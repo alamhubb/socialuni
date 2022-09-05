@@ -1,0 +1,60 @@
+<template>
+  <div
+      class="row-between box-shadow px-20 md:px-30 py-3 w100% shadow-b h55"
+  >
+    <router-link to="/qingchi" class="flex-none row-col-center use-click">
+      <div class="row-col-center">
+        <img src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/full.jpg!thumbnail" class="h40" alt="logo">
+        <div class="font-22 ml-5 mb-2 font-bold color-main">清池app</div>
+      </div>
+    </router-link>
+
+    <div class="flex-1 row-end">
+      <div class="flex-none row-col-center">
+        <router-link to="/" active-class="color-theme"
+                     class="hover-color-theme mx-xs md:mx-smm font-bold color-content">
+          社交联盟
+        </router-link>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import {
+  ArrowDown,
+  CaretBottom,
+  Check,
+  Delete,
+  Edit,
+  Message,
+  Search,
+  Star,
+  StarFilled
+} from '@element-plus/icons-vue'
+import {qingchiRouters} from "@/router";
+import UserStore from "@/store/UserStore";
+import AlertUtil from "@/utils/AlertUtil";
+import TokenUtil from "@/utils/TokenUtil";
+import ToastUtil from "@/utils/ToastUtil";
+import MediaUtil from "@/styles/jsStyle/MediaUtil";
+import {computed, defineProps} from "vue";
+
+const user = computed(() => {
+  return UserStore.user
+})
+
+const props = defineProps({
+  title: String,
+  logo: String,
+  bigLogo: String,
+  routers: []
+})
+
+async function logout() {
+  await AlertUtil.confirm('是否确认退出')
+  UserStore.clearUser()
+  TokenUtil.remove()
+  ToastUtil.success('退出成功')
+}
+</script>
