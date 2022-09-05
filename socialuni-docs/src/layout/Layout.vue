@@ -7,7 +7,7 @@
       <!--      <nav-menu class="w200 flex-none"/>-->
       <div class="flex-1 pd-20 md:pd-30 overflow-y-auto max-w-900">
         <transition name="fade-transform" mode="out-in">
-          <router-view class="h100%" :key="$route.path"/>
+          <router-view :key="$route.path"/>
         </transition>
       </div>
     </div>
