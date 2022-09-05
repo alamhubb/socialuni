@@ -28,7 +28,7 @@ public class SocialuniAdminService {
     @Resource
     private DevAccountProviderRepository devAccountProviderRepository;
 
-    @Transactional
+    /*@Transactional
     public void syncProdDevAccountToDev(SyncProdDevAccountQO syncProdDevAccountQO) {
         //判断此开发者是否已经创建，没创建则创建，创建则修改
         DevAccountDO prodDevAccount = syncProdDevAccountQO.getDevAccountDO();
@@ -69,5 +69,5 @@ public class SocialuniAdminService {
             prodDevAccountProvider.setDevId(devAccountDO.getId());
             devAccountProviderRepository.save(prodDevAccountProvider);
         }
-    }
+    }*/
 }

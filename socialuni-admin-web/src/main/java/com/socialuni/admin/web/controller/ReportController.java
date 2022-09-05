@@ -78,7 +78,7 @@ public class ReportController {
         DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
         List<ReportDO> reportDOS;
         //清池可以查询所有，否则只能查询自己的
-        if (user.getId().equals(AppConfigConst.qingchiDevId)) {
+        if (DevAccountUtils.isAdmin()) {
             reportDOS = reportRepository.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
         } else {
             reportDOS = reportRepository.findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(ReportStatus.auditStatus, user.getId());

@@ -2,7 +2,7 @@
   <div class="h100p row-all-center">
     <el-card class="w600">
       <el-form ref="devForm" :model="user" :rules="formRule" label-position="right" label-width="130px">
-        <el-form-item label="开发者Id：">
+<!--        <el-form-item label="开发者Id：">
           <div class="row-between-center">
             <div>
               {{ user.devNum }}
@@ -17,7 +17,7 @@
               </el-button>
             </div>
           </div>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item label="开发者密钥：">
           <div class="row-between-center">
             <div class="color-content">
@@ -50,7 +50,7 @@
             </el-button>
           </div>
         </el-form-item>-->
-        <el-form-item label="app简称：" prop="appName">
+<!--        <el-form-item label="app简称：" prop="appName">
           <div class="row-between-center">
             <div>
               <el-input
@@ -66,9 +66,9 @@
             </el-button>
           </div>
         </el-form-item>
-        <!--        <el-form-item :label="userTypeLabel+'：'" required>
+        &lt;!&ndash;        <el-form-item :label="userTypeLabel+'：'" required>
           <el-input v-model="user.realName" />
-        </el-form-item>-->
+        </el-form-item>&ndash;&gt;
         <el-form-item label="微信 appId：" prop="wxMpAppId">
           <el-input v-model="user.wxMpAppId" placeholder="微信和qq appId至少填写一个" clearable @input="clearValidate" />
         </el-form-item>
@@ -80,7 +80,7 @@
         </el-form-item>
         <el-form-item label="qq小程序名称：">
           <el-input v-model="user.qqMpAppName" placeholder="不填写默认app简称" clearable />
-        </el-form-item>
+        </el-form-item>-->
       </el-form>
     </el-card>
   </div>

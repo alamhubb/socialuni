@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories
 @SpringBootApplication
-@EnableCaching
 @EnableSocialuni
 @EntityScan("com.socialuni.admin")
+//@EnableCaching
 public class AdminWebApplication {
 
     public static void main(String[] args) {

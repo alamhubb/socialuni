@@ -2,6 +2,7 @@ package com.socialuni.admin.web.controller.oldadmin;
 
 
 import com.socialuni.admin.web.service.ViolationService;
+import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
@@ -51,6 +52,7 @@ public class KeywordsManageController {
 
     @PostMapping("addKeywords")
     public ResultRO<KeywordsDO> addKeywords(@Valid @NotNull String content, String cause) {
+        CheckIsAdminUtil.checkAdmin();
         content = content.trim();
         if (StringUtils.isEmpty(content)) {
             throw new SocialBusinessException("不能为空");
@@ -67,6 +69,7 @@ public class KeywordsManageController {
 
     @PostMapping("closeKeywords")
     public ResultRO<KeywordsDO> closeKeywords(Integer id, String closeCause) {
+        CheckIsAdminUtil.checkAdmin();
         //获取关键词
         Optional<KeywordsDO> optionalViolateWordDO = keywordsRepository.findById(id);
         //存在
@@ -94,6 +97,7 @@ public class KeywordsManageController {
 
     @PostMapping("openPinyinOrText")
     public ResultRO<KeywordsDO> openPinyinOrText(Integer id, String type, String cause) {
+        CheckIsAdminUtil.checkAdmin();
         //获取关键词
         Optional<KeywordsDO> optionalViolateWordDO = keywordsRepository.findById(id);
         //存在

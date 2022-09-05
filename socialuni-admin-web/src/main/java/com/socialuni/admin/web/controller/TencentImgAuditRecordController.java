@@ -7,6 +7,7 @@ import com.socialuni.admin.web.model.QO.ImgAuditQO;
 import com.socialuni.admin.web.model.RO.TencentCosAuditRecordRO;
 import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
 import com.socialuni.admin.web.service.ViolationService;
+import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentType;
@@ -42,6 +43,7 @@ public class TencentImgAuditRecordController {
      */
     @PostMapping("queryImgAuditHistory")
     public ResultRO<List<TencentCosAuditRecordRO>> queryImgAuditHistory(@RequestBody SocialIntQO intQO) {
+        CheckIsAdminUtil.checkAdmin();
         List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop20ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullAndContentTypeOrderByIdDesc(CommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail, ContentType.talk);
         List<TencentCosAuditRecordRO> listRo = ListConvertUtil.toList(TencentCosAuditRecordRO::new, list);
         return ResultRO.success(listRo);
@@ -52,6 +54,7 @@ public class TencentImgAuditRecordController {
      */
     @PostMapping("reviewAuditHistory")
     public ResultRO<Object> queryImgAuditHistory(@RequestBody List<SocialIntIdQO> idQOList) {
+        CheckIsAdminUtil.checkAdmin();
         List<TencentCosAuditRecordDO> list = new ArrayList<>();
         for (SocialIntIdQO socialIntIdQO : idQOList) {
             TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(socialIntIdQO.getId());
@@ -65,6 +68,7 @@ public class TencentImgAuditRecordController {
 
     @PostMapping("auditImgList")
     public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ImgAuditQO> auditQOS) {
+        CheckIsAdminUtil.checkAdmin();
         ResultRO<String> resultRO = new ResultRO<>();
         for (ImgAuditQO auditQO : auditQOS) {
             this.reportAudit(auditQO);
