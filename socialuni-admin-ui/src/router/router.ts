@@ -11,14 +11,14 @@ export const menuRoutes = [
     path: '',
     name: RouterName.devAccount,
     component: () => import('@/views/devInfo/devInfo.vue'),
-    meta: { title: '开发者信息', icon: 'strengthMonitoring' }
+    meta: { title: '开发者信息', icon: 'strengthMonitoring', isOpen: true }
   },
   {
     path: 'contentAudit',
     name: RouterName.contentAudit,
     component: () => import('@/views/audit/contentAudit.vue'),
     // children: showRouterList,
-    meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring' }
+    meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring', isOpen: true }
   },
   {
     path: '/keywordManage',

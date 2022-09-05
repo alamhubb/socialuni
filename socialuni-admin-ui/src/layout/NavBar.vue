@@ -9,9 +9,22 @@
 
     <div class="flex-1 row-end">
       <div class="flex-none row-col-center mr">
-        <div class="bg-click mx-sm font-16" @click="toDoc">文档</div>
+        <a href="https://socialuni.cn" target="_blank" class="mr-sm md:mr bg-click">
+          <div class="row-all-center">官网文档</div>
+        </a>
         <el-divider direction="vertical" class="mr" />
-        <i class="mdi mdi-github font-30 bg-click" @click="toGitee" />
+        <a href="https://socialuni.cn/demo" target="_blank" class="mr-sm md:mr bg-click">
+          <div class="row-all-center">demo演示</div>
+        </a>
+        <el-divider direction="vertical" class="mr" />
+        <div class="row-col-center">
+          <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
+            <div class="row-all-center"><img src="@/assets/imgs/giteelogo.png" class="use-click size31"/></div>
+          </a>
+          <a href="https://github.com/social-uni/socialuni" target="_blank" class="md:mr-sm">
+            <div class="row-all-center"><i class="mdi mdi-github font-36 use-click color-black"/></div>
+          </a>
+        </div>
       </div>
       <div class="flex-1 row-end-center">
         <div v-if="user" class="row-col-center">
