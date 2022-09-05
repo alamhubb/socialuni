@@ -61,7 +61,7 @@
                     </div>
                     <div class="mx-1">|</div>-->
         <div>
-          客服微信：
+          联系微信：
           <a target="_blank"
              href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTE5NzE3NA==&scene=124#wechat_redirect">
             491369310
@@ -69,7 +69,7 @@
         </div>
         <div class="mx-xs">|</div>
         <div>
-          客服QQ：
+          联系QQ：
           <a target="_blank"
              href="https://wpa.qq.com/msgrd?v=3&uin=491369310&site=qq&menu=yes">
             491369310
