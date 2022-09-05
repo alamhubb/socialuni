@@ -2,6 +2,7 @@ import type {RouteRecordRaw} from "vue-router";
 import {createRouter, createWebHistory} from 'vue-router'
 import Layout from "@/layout/Layout.vue";
 import HomeView from '@/views/home/HomeView.vue'
+import QingchiHomeView from '@/views/qingchi/QingchiHomeView.vue'
 import Introduction from '@/views/guide/introduction/introduction.md'
 import MoreUsage from '@/views/guide/moreUsage/moreUsage.md'
 import DemoView from '@/views/demo/DemoView.vue'
@@ -12,62 +13,62 @@ export const qingchiRouters: RouteRecordRaw[] = [
         path: '',
         name: 'qingchi',
         meta: {title: '清池', hidden: true},
-        component: () => import('@/views/qingchi/QingchiHomeView.vue')
+        component: QingchiHomeView
     },
     {
-        path: RouterConst.agreementName,
+        path: '/qingchi/' + RouterConst.agreementName,
         name: RouterConst.agreementName,
         meta: {title: RouterConst.agreementTitle},
         component: () => import('@/views/qingchi/agreement/agreement.md')
     },
     {
-        path: RouterConst.privacyName,
+        path: '/qingchi/' + RouterConst.privacyName,
         name: RouterConst.privacyName,
         meta: {title: RouterConst.privacyTitle},
         component: () => import('@/views/qingchi/privacy/privacy.md')
     },
     {
-        path: RouterConst.childProtectName,
+        path: '/qingchi/' + RouterConst.childProtectName,
         name: RouterConst.childProtectName,
         meta: {title: RouterConst.childProtectTitle},
         component: () => import('@/views/qingchi/childProtect/childProtect.md')
     },
     {
-        path: RouterConst.suggestName,
+        path: '/qingchi/' + RouterConst.suggestName,
         name: RouterConst.suggestName,
         meta: {title: RouterConst.suggestTitle},
         component: () => import('@/views/qingchi/suggest/suggest.md')
     },
     {
-        path: RouterConst.contactName,
+        path: '/qingchi/' + RouterConst.contactName,
         name: RouterConst.contactName,
         meta: {title: RouterConst.contactTitle},
         component: () => import('@/views/qingchi/contact/contact.md')
     },
     {
-        path: RouterConst.rulesName,
+        path: '/qingchi/' + RouterConst.rulesName,
         name: RouterConst.rulesName,
         meta: {title: RouterConst.rulesTitle},
         component: () => import('@/views/qingchi/rules/rules.md')
     },
     {
-        path: RouterConst.groupName,
+        path: '/qingchi/' + RouterConst.groupName,
         name: RouterConst.groupName,
         meta: {title: RouterConst.groupTitle},
         component: () => import('@/views/qingchi/group/group.md')
     },
     {
-        path: RouterConst.officialName,
+        path: '/qingchi/' + RouterConst.officialName,
         name: RouterConst.officialName,
         meta: {title: RouterConst.officialTitle},
         component: () => import('@/views/qingchi/official/official.md')
     },
     {
-        path: RouterConst.about,
+        path: '/qingchi/' + RouterConst.about,
         name: RouterConst.about,
         meta: {title: RouterConst.aboutTitle},
         component: () => import('@/views/qingchi/about/about.md')
-    },
+    }
 ]
 
 export const constantRouters: RouteRecordRaw[] = [
@@ -124,7 +125,7 @@ export const constantRouters: RouteRecordRaw[] = [
         path: '/qingchi',
         component: Layout,
         meta: {title: '清池app'},
-        redirect: '/qingchi',
+        redirect: '/qingchi/haha',
         children: qingchiRouters
     }
 ]

@@ -16,6 +16,14 @@
           社交联盟
         </router-link>
       </div>
+<!--      <div class="flex-none row-col-center">
+        <div v-for="route in qingchiRouters">
+          <router-link v-if="!route.meta.hidden" :to="route.path" active-class="color-theme"
+                       class="hover-color-theme mx-xs md:mx-smm font-bold color-content">
+            {{ route.meta.title }}
+          </router-link>
+        </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -32,25 +40,16 @@ import {
   Star,
   StarFilled
 } from '@element-plus/icons-vue'
-import {qingchiRouters} from "@/router";
 import UserStore from "@/store/UserStore";
 import AlertUtil from "@/utils/AlertUtil";
 import TokenUtil from "@/utils/TokenUtil";
 import ToastUtil from "@/utils/ToastUtil";
-import MediaUtil from "@/styles/jsStyle/MediaUtil";
 import {computed, defineProps} from "vue";
+import {qingchiRouters} from "@/router/index.ts";
 
 const user = computed(() => {
   return UserStore.user
 })
-
-const props = defineProps({
-  title: String,
-  logo: String,
-  bigLogo: String,
-  routers: []
-})
-
 async function logout() {
   await AlertUtil.confirm('是否确认退出')
   UserStore.clearUser()
