@@ -6,7 +6,7 @@
 ### 微信群：
 <div>
 <div class="w45r col-row-center">
- <img src="/img/group/wx_group_code.png" alt="QQ1群"/>
+ <img src="@/imgs/wx_group_code.png" alt="QQ1群"/>
  <p>关注公众号，点击进交友群，加客服好友，邀请进群，秒通过</p>
 </div>
 </div>

@@ -13,7 +13,7 @@ import markdownItAnchor from 'markdown-it-anchor'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: './',
+    base: '/',
     plugins: [
         vue({
             include: [/\.vue$/, /\.md$/]

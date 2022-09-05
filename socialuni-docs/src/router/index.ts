@@ -51,12 +51,12 @@ export const qingchiRouters: RouteRecordRaw[] = [
         meta: {title: RouterConst.rulesTitle},
         component: () => import('@/views/qingchi/rules/rules.md')
     },
-    {
+    /*{
         path: '/qingchi/' + RouterConst.groupName,
         name: RouterConst.groupName,
         meta: {title: RouterConst.groupTitle},
         component: () => import('@/views/qingchi/group/group.md')
-    },
+    },*/
     {
         path: '/qingchi/' + RouterConst.officialName,
         name: RouterConst.officialName,
@@ -125,7 +125,7 @@ export const constantRouters: RouteRecordRaw[] = [
         path: '/qingchi',
         component: Layout,
         meta: {title: '清池app'},
-        redirect: '/qingchi/haha',
+        redirect: '/qingchi',
         children: qingchiRouters
     }
 ]
