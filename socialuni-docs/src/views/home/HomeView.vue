@@ -1,5 +1,5 @@
 <template>
-  <div class="row-center">
+  <div class="col-between-center h100%">
     <div class="max-w-900">
       <div>
         <div class="font-32 md:font-44 font-bold color-theme mt-50">社交联盟</div>
@@ -36,6 +36,49 @@
             <div class="font-md font-bold">运营支持</div>
             <div class="color-content mt-10px">提供社交领域运营解决方案，用户拉新、盈利方案、垃圾信息过滤等</div>
           </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="flex-none text-tip body-2 flex-col">
+      <div class="row-center row-wrap">
+        <div class="text-black">@2019-2022 社交联盟</div>
+        <div class="mx-xs">|</div>
+        <div>清池科技滦州市有限公司</div>
+        <div class="mx-xs">|</div>
+        <div><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">冀ICP备19028721号-4</a></div>
+        <!--            <div class="mx-1">|</div>
+                    <div>公众号：<a
+                        href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTE5NzE3NA==&scene=124#wechat_redirect"
+                        target="_blank">qingchicn</a></div>-->
+      </div>
+      <div class="mt-xs row-center row-wrap">
+        <!--            <div>
+                      客服微博：
+                      <a href="https://weibo.com/u/2724054747" target="_blank">清池恋爱交友app</a>
+                    </div>
+                    <div class="mx-1">|</div>-->
+        <div>
+          客服微信：
+          <a target="_blank"
+             href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3NTE5NzE3NA==&scene=124#wechat_redirect">
+            491369310
+          </a>
+        </div>
+        <div class="mx-xs">|</div>
+        <div>
+          客服QQ：
+          <a target="_blank"
+             href="https://wpa.qq.com/msgrd?v=3&uin=491369310&site=qq&menu=yes">
+            491369310
+          </a>
+        </div>
+        <div class="mx-xs">|</div>
+        <div>
+          联系邮箱：
+          <a href="mailto:socialuni@163.com">socialuni@163.com</a>
         </div>
       </div>
     </div>
