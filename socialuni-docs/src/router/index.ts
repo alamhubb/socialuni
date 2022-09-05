@@ -108,6 +108,20 @@ export const constantRouters: RouteRecordRaw[] = [
         // component: import( '@/views/home/HomeView.vue')
     },
     {
+        path: '/api',
+        component: Layout,
+        meta: {title: 'api文档'},
+        redirect: '/api',
+        children: [
+            {
+                path: '',
+                name: 'api',
+                meta: {title: 'api文档'},
+                component: ()=>import('@/views/api/api.md')
+            }
+        ]
+    },
+    {
         path: '/demo',
         component: Layout,
         meta: {title: 'demo'},

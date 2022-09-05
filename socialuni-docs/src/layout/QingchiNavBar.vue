@@ -44,7 +44,7 @@ import UserStore from "@/store/UserStore";
 import AlertUtil from "@/utils/AlertUtil";
 import TokenUtil from "@/utils/TokenUtil";
 import ToastUtil from "@/utils/ToastUtil";
-import {computed, defineProps} from "vue";
+import {computed} from "vue";
 import {qingchiRouters} from "@/router/index.ts";
 
 const user = computed(() => {

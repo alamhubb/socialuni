@@ -8,6 +8,8 @@ import ColorStyles from "./src/styles/jsStyle/ColorStyles";
 import UnocssRuleUtil from "./src/styles/jsStyle/UnocssRuleUtil";
 import tinycolor2 from "tinycolor2";
 import markdownItAnchor from 'markdown-it-anchor'
+import markdownItPrism from 'markdown-it-prism'
+import markdownItShiki from 'markdown-it-shiki'
 
 // vite.config.ts
 
@@ -27,6 +29,11 @@ export default defineConfig({
             markdownItSetup(md) {
                 // add anchor links to your H[x] tags
                 md.use(markdownItAnchor)
+                // add code syntax highlighting with Prism
+                md.use(markdownItPrism)
+                md.use(markdownItShiki, {
+                    theme: 'material-palenight'
+                })
             },
         }),
         unocss({
