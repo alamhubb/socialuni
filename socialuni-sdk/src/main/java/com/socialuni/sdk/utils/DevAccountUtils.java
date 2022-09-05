@@ -81,6 +81,12 @@ public class DevAccountUtils {
         return devAccountDO.getId();
     }
 
+    public static boolean isAdmin() {
+        DevAccountDO devAccountDO = DevAccountUtils.getAdminDevAccountNotNull();
+        return devAccountDO.getId() == 1;
+    }
+
+
     /*public static Integer getDataOriginalDevIdNotNull() {
         String dataSocialuniId = RequestUtil.getDataOriginalSocialuniId();
         if (StringUtils.isEmpty(dataSocialuniId)) {

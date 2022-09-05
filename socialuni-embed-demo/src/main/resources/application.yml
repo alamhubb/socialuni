@@ -2,11 +2,11 @@ spring:
   profiles:
 #    active: devprod
 #    active: localdevprod
-#    active: local
+    active: local
 #    active: dev
 #    active: qkypc
 #    active: demo
-    active: prod
+#    active: prod
 #    active: localprod
   datasource:
     initialization-mode: never

@@ -22,6 +22,9 @@
         </div>
         <el-divider direction="vertical" class="mr-smm md:mr"/>
         <div class="row-col-center">
+          <a href="https://admin.socialuni.cn" target="_blank" class="mr-sm md:mr">
+            <div class="row-all-center">后台管理</div>
+          </a>
           <a href="https://gitee.com/socialuni/socialuni" target="_blank" class="mr-sm md:mr">
             <div class="row-all-center"><img src="@/imgs/giteelogo.png" class="use-click size31"/></div>
           </a>

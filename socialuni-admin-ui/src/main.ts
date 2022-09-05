@@ -7,7 +7,9 @@ import '@/styles/index.scss'
 import './plugins/element'
 import components from '@/components'
 import GlobalConst from '@/constant/GlobalConst'
+import VueClipBoard from 'vue-clipboard2'
 
+Vue.use(VueClipBoard)
 Vue.prototype.$const = GlobalConst
 
 Vue.use(components)
