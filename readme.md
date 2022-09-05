@@ -27,9 +27,19 @@
   </tbody>
 </table>
 
+### 社交联盟官网
+[https://socialuni.cn](https://socialuni.cn)
+### web演示系统
+[https://socialuni.cn/demo](https://socialuni.cn/demo)
+### 后台管理系统地址
+[https://admin.socialuni.cn](https://admin.socialuni.cn)
+* 接入社交联盟，从社交联盟获取数据需要在后台管理系统中注册用户，获取开发者秘钥，携带秘钥访问社交联盟API获取数据
+
+
 # 入门
 
-## 项目地址 [https://gitee.com/socialuni/socialuni](https://gitee.com/socialuni/socialuni)
+## 项目gitee地址 [https://gitee.com/socialuni/socialuni](https://gitee.com/socialuni/socialuni)
+## 项目github地址 [https://github.com/social-uni/socialuni](https://github.com/social-uni/socialuni)
 
 ## 社交联盟是什么？
 
