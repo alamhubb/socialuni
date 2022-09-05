@@ -43,6 +43,24 @@
 ## 快速开始
 社交联盟代码模板分为前后端两个模块，本示例仅展示独立项目使用方式，如需要嵌入已有系统，请参考[更多用法](#更多用法)
 
+
+### 前端模块
+
+1. 打开socialuni目录中的socialuni-js项目
+
+2. 在socialuni-js项目的根目录执行
+```
+npm install
+```
+3. install成功后执行，控制台出现下图内容则代表启动成功
+ ```
+npm run serve
+```
+![img_3.png](./doc/imgs/img_3.png)
+4. 使用浏览器打开 [http://localhost:8024/](http://localhost:8024/)，出现此图，则代表项目启动成功
+
+![img_4.png](./doc/imgs/img_4.png)
+
 ### 后端模块
 
 1. 使用git clone https://gitee.com/socialuni/socialuni.git
@@ -59,24 +77,6 @@
 ![img_1.png](./doc/imgs/img_1.png)
 
 看到以下内容，则代表成功从中心获取到了动态数据
-
-5. 接下来则可以开始配置前端模块
-
-### 前端模块
-
-1. 打开socialuni目录中的socialuni-js项目
-2. 在socialuni-js项目的根目录执行
-```
-npm install
-```
-3. install成功后执行，控制台出现下图内容则代表启动成功
- ```
-npm run serve
-```
-![img_3.png](./doc/imgs/img_3.png)
-4. 使用浏览器打开 [http://localhost:8024/](http://localhost:8024/)，出现此图，则代表项目启动成功
-
-![img_4.png](./doc/imgs/img_4.png)
 
 ### 更多用法
 
