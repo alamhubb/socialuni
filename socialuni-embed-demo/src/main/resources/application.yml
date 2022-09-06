@@ -1,8 +1,8 @@
 spring:
   profiles:
 #    active: local
-    active: dev
-#    active: prod
+#    active: dev
+    active: prod
   datasource:
     initialization-mode: never
     data: classpath:dataInit/data.sql
@@ -30,5 +30,3 @@ mybatis:
 logging:
   file:
     name: socialuni.log
-springdoc:
-  packages-to-scan: com.socialuni.sdk
