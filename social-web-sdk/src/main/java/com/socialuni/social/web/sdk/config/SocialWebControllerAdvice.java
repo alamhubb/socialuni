@@ -39,23 +39,17 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse serverHttpResponse) {
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
-        ResultRO responseVO;
-        if (response.getStatus() != 200 && response.getStatus() != 404) {
-            log.info("不应该触发这里");
-//            ErrorLogUtils.save(new ErrorLogDO(UserUtils.getMineUserId(), "状态码非200，系统错误", result));
-            responseVO = new ResultRO(ErrorCode.SYSTEM_ERROR, ErrorMsg.systemErrorMsg);
-        } else {
+        if (response.getStatus() == 200) {
             if (result instanceof ResultRO) {
-                responseVO = (ResultRO) result;
-            } else {
+                Integer resCode = ((ResultRO<?>) result).getCode();
+                if (resCode > 0) {
+                    response.setStatus(resCode);
+                }
                 return result;
             }
+            return ResultRO.success(result);
         }
-        if (responseVO.getCode() > 0) {
-            response.setStatus(responseVO.getCode());
-        }
-        //返回修改后的值
-        return responseVO;
+        return result;
     }
 
     @Override
