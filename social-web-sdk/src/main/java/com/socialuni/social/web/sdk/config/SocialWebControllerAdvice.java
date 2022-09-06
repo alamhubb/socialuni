@@ -39,15 +39,11 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse serverHttpResponse) {
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
-        if (response.getStatus() == 200) {
-            if (result instanceof ResultRO) {
-                Integer resCode = ((ResultRO<?>) result).getCode();
-                if (resCode > 0) {
-                    response.setStatus(resCode);
-                }
-                return result;
+        if (response.getStatus() == 200 && result instanceof ResultRO) {
+            Integer resCode = ((ResultRO<?>) result).getCode();
+            if (resCode > 0) {
+                response.setStatus(resCode);
             }
-            return ResultRO.success(result);
         }
         return result;
     }
