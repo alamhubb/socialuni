@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class CenterTagController implements SocialuniTagAPI {
+public class SocialuniTagController implements SocialuniTagAPI {
     @Resource
     CenterTagService centerTagAPIImpl;
 

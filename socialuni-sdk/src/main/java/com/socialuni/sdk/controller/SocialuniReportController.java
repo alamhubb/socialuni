@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class CenterReportController implements SocialuniReportAPI {
+public class SocialuniReportController implements SocialuniReportAPI {
     @Resource
     CenterReportService centerReportAPIImpl;
 

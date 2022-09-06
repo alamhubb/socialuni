@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @RestController
-public class CenterChatController implements SocialuniChatAPI {
+public class SocialuniChatController implements SocialuniChatAPI {
     @Override
     public ResultRO<?> readChatMessages(ChatReadVO chatVO) {
         return null;

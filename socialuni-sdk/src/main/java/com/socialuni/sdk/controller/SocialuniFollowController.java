@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class CenterFollowController implements SocialuniFollowAPI {
+public class SocialuniFollowController implements SocialuniFollowAPI {
     @Resource
     CenterFollowService centerFollowService;
 

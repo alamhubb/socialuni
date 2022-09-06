@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-public class CenterHugController implements SocialuniHugAPI {
+public class SocialuniHugController implements SocialuniHugAPI {
     @Resource
     CenterHugService centerHugAPIImpl;
     @Resource

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-public class CenterCommentController implements SocialuniCommentAPI {
+public class SocialuniCommentController implements SocialuniCommentAPI {
     @Resource
     CenterCommentService centerCommentService;
 

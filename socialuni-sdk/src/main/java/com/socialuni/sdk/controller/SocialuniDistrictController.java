@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @RestController
-public class CenterDistrictController implements SocialuniDistrictAPI {
+public class SocialuniDistrictController implements SocialuniDistrictAPI {
     @Resource
     SocialuniDistrictAPI socialuniDistrictAPI;
     @Override

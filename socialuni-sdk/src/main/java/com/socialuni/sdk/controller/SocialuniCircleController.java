@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @RestController
-public class CenterCircleController implements SocialuniCircleAPI {
+public class SocialuniCircleController implements SocialuniCircleAPI {
 
     @Resource
     CenterCircleService centerCircleService;
