@@ -23,12 +23,12 @@ public class CenterTalkDetailDomain {
     @Resource
     SocialTalkDetailQueryDomain socialTalkDetailQueryDomain;
 
-    public CenterTalkRO queryTalkDetail(CenterTalkIdQO centerTalkIdQO) {
+    public CenterTalkRO queryTalkDetail(String talkId) {
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
-        Integer talkId = UnionIdDbUtil.getTalkUnionIdByUidNotNull(centerTalkIdQO.getTalkId());
+        Integer talkIdInt = UnionIdDbUtil.getTalkUnionIdByUidNotNull(talkId);
 
-        SocialTalkIdQO socialTalkIdQO = new SocialTalkIdQO(talkId);
+        SocialTalkIdQO socialTalkIdQO = new SocialTalkIdQO(talkIdInt);
 
         SocialTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(socialTalkIdQO, mineUser);
 

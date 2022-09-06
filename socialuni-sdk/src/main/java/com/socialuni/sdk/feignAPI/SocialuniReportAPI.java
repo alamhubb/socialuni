@@ -2,7 +2,10 @@ package com.socialuni.sdk.feignAPI;
 
 import com.socialuni.sdk.model.QO.CenterReportAddQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +15,13 @@ import java.util.List;
 
 @RequestMapping("socialuni/report")
 @FeignClient(name = "report", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@Tag(name = "社区模块/举报模块")
 public interface SocialuniReportAPI {
     @PostMapping("addReport")
+    @Operation(summary = "举报")
     ResultRO<String> addReport(@RequestBody @Valid CenterReportAddQO socialReportAddQO);
 
-    @PostMapping("queryReportTypes")
+    @GetMapping("queryReportTypes")
+    @Operation(summary = "查询举报类型列表")
     ResultRO<List<String>> queryReportTypes();
 }

@@ -108,16 +108,16 @@ export const constantRouters: RouteRecordRaw[] = [
         // component: import( '@/views/home/HomeView.vue')
     },
     {
-        path: '/api',
+        path: '/config',
         component: Layout,
-        meta: {title: 'api文档'},
-        redirect: '/api',
+        meta: {title: '配置'},
+        redirect: '/config',
         children: [
             {
                 path: '',
-                name: 'api',
-                meta: {title: 'api文档'},
-                component: ()=>import('@/views/api/api.md')
+                name: 'config',
+                meta: {title: '配置'},
+                component: ()=>import('@/views/config/config.md')
             }
         ]
     },
@@ -132,6 +132,20 @@ export const constantRouters: RouteRecordRaw[] = [
                 name: 'demo',
                 meta: {title: 'demo'},
                 component: DemoView
+            }
+        ]
+    },
+    {
+        path: '/dataFlow',
+        component: Layout,
+        meta: {title: '数据流向'},
+        redirect: '/dataFlow',
+        children: [
+            {
+                path: '',
+                name: 'dataFlow',
+                meta: {title: '数据流向'},
+                component: ()=>import('@/views/dataFlow/dataFlow.md')
             }
         ]
     },

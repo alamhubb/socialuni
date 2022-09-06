@@ -22,6 +22,9 @@
         </div>
         <el-divider direction="vertical" class="mr-smm md:mr"/>
         <div class="row-col-center">
+          <a href="https://console-docs.apipost.cn/preview/940ead4467df9d6d/0e3f3c24b231f818?target_id=b78d2016-0442-4a2f-9588-953a364bd21c" target="_blank" class="mr-sm md:mr">
+            <div class="row-all-center">api接口文档</div>
+          </a>
           <a href="https://admin.socialuni.cn" target="_blank" class="mr-sm md:mr">
             <div class="row-all-center">后台管理</div>
           </a>

@@ -142,15 +142,15 @@ public class ReportController {
         SocialUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
-        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserIdOrderByCreateTimeDesc(user.getId());
+        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserIdOrderByCreateTimeDesc(user.getUnionId());
         List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         //查询用户10条动态
-        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getId());
+        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());
         List<ReportVO> talkReportVOS = talkDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         //查询用户10条评论
-        List<SocialCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getId());
+        List<SocialCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getUnionId());
         List<ReportVO> commentReportVOS = commentDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         reportVOS.addAll(talkReportVOS);

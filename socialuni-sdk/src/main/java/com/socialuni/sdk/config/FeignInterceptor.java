@@ -86,7 +86,6 @@ public class FeignInterceptor implements RequestInterceptor {
                     if (SocialAppConfig.serverIsChild()) {
                         socialProviderLoginQO.setPhoneNum(phoneNum);
                     }
-                    System.out.println(123123);
 //                    URI uri = URI.create(postUrl);
 //                    String absoluteUri = uri.getScheme() + "://" + uri.getAuthority();
 //                    URI determinedBasePathUri = URI.create(absoluteUri);

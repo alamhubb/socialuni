@@ -106,14 +106,14 @@ public class CenterTalkService {
         return new ResultRO<>();
     }
 
-    public ResultRO<CenterTalkRO> queryTalkDetail(CenterTalkIdQO talkIdQO) {
+    public ResultRO<CenterTalkRO> queryTalkDetail(String talkId) {
         CenterTalkRO centerTalkRO;
         //如果应用，则调用中心
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterTalkRO> centerTalkROResultRO = socialuniTalkAPI.queryTalkDetail(talkIdQO);
+            ResultRO<CenterTalkRO> centerTalkROResultRO = socialuniTalkAPI.queryTalkDetail(talkId);
             centerTalkRO = new CenterTalkRO(centerTalkROResultRO.getData());
         } else {
-            centerTalkRO = centerTalkDetailDomain.queryTalkDetail(talkIdQO);
+            centerTalkRO = centerTalkDetailDomain.queryTalkDetail(talkId);
         }
         return ResultRO.success(centerTalkRO);
     }

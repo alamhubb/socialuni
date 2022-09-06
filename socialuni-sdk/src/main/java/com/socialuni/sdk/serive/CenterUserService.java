@@ -48,14 +48,14 @@ public class CenterUserService {
         return new ResultRO<>(mineUserDetailRO);
     }
 
-    public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        SocialUserDO detailUserDO = SocialUserUtil.getUserByUid(centerUserIdQO.getUserId());
+    public ResultRO<CenterUserDetailRO> queryUserDetail(String userId) {
+        SocialUserDO detailUserDO = SocialUserUtil.getUserByUid(userId);
 
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         CenterUserDetailRO userDetailRO;
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(centerUserIdQO);
+            ResultRO<CenterUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(userId);
             userDetailRO = new CenterUserDetailRO(resultRO.getData());
         } else {
             userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);

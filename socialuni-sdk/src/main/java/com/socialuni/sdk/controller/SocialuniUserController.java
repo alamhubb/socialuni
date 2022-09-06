@@ -21,8 +21,8 @@ public class SocialuniUserController implements SocialuniUserAPI {
     }
 
     @Override
-    public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        return centerUserAPIImpl.queryUserDetail(centerUserIdQO);
+    public ResultRO<CenterUserDetailRO> queryUserDetail(String userId) {
+        return centerUserAPIImpl.queryUserDetail(userId);
     }
 
     @Override

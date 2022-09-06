@@ -42,8 +42,8 @@ public class SocialuniTalkController implements SocialuniTalkAPI {
     }
 
     @Override
-    public ResultRO<CenterTalkRO> queryTalkDetail(CenterTalkIdQO talkIdQO) {
-        return socialuniTalkAPIImpl.queryTalkDetail(talkIdQO);
+    public ResultRO<CenterTalkRO> queryTalkDetail(String talkId) {
+        return socialuniTalkAPIImpl.queryTalkDetail(talkId);
     }
 
     @Override

@@ -30,3 +30,5 @@ mybatis:
 logging:
   file:
     name: socialuni.log
+springdoc:
+  packages-to-scan: com.socialuni.sdk

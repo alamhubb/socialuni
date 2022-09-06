@@ -1,3 +1,4 @@
+/*
 package com.socialuni.sdk.feignAPI.insystem;
 
 import com.socialuni.sdk.model.RO.devAccount.DevAccountRO;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+*/
 /**
  * @author qinkaiyuan
  * @date 2021-07-28 11:09
  * 前端初始化内容
- */
+ *//*
+
 @RequestMapping("socialuni/qingchi")
 @FeignClient(name = "qingchi", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniQingchiAPI {
@@ -43,3 +46,4 @@ public interface SocialuniQingchiAPI {
     @PostMapping("queryDevAccount")
     ResultRO<DevAccountRO> queryDevAccount(@RequestBody @Valid OAuthUserInfoQO devAccountQueryQO);
 }
+*/
