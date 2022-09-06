@@ -41,7 +41,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         HttpServletResponse response = sshrp.getServletResponse();
         ResultRO responseVO;
         if (response.getStatus() != 200 && response.getStatus() != 404) {
-            System.out.println("不应该触发这里");
+            log.info("不应该触发这里");
 //            ErrorLogUtils.save(new ErrorLogDO(UserUtils.getMineUserId(), "状态码非200，系统错误", result));
             responseVO = new ResultRO(ErrorCode.SYSTEM_ERROR, ErrorMsg.systemErrorMsg);
         } else {
