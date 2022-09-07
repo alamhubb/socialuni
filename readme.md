@@ -33,7 +33,7 @@
 ### 社交联盟官网 [https://socialuni.cn](https://socialuni.cn)
 ### 演示demo系统 [https://socialuni.cn/demo](https://socialuni.cn/demo)
 ### 开放接口api文档 [开放接口api文档](https://console-docs.apipost.cn/preview/940ead4467df9d6d/0e3f3c24b231f818?target_id=b78d2016-0442-4a2f-9588-953a364bd21c)
-### 极速体验-点击接口获取JSON格式用户动态数据列表 -> [https://api.socialuni.cn/socialuni/talk/queryTalks](https://api.socialuni.cn/socialuni/talk/queryTalks)
+### 极速体验-点击url获取JSON格式用户动态数据列表 -> [https://api.socialuni.cn/socialuni/talk/queryTalks](https://api.socialuni.cn/socialuni/talk/queryTalks)
 ### 后台管理系统地址 [https://admin.socialuni.cn](https://admin.socialuni.cn)
 * 完整的接入社交联盟，从社交联盟获取数据需要在后台管理系统中注册成为开发者，获取开发者秘钥，携带秘钥访问社交联盟API获取数据
 ### 项目gitee地址 [https://gitee.com/socialuni/socialuni](https://gitee.com/socialuni/socialuni)
