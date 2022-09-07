@@ -7,6 +7,6 @@ export default class ReportAPI {
   }
 
   static queryReportTypesAPI() {
-    return request.post<string[]>('socialuni/report/queryReportTypes')
+    return request.get<string[]>('socialuni/report/queryReportTypes')
   }
 }

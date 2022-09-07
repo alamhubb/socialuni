@@ -6,10 +6,7 @@ import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -35,12 +32,16 @@ public class SocialCircleDO extends CommonContentBaseDO implements Serializable 
     private Integer tagTypeId;
 
     private String name;
+    //所在城市名称
+    private String cityName;
 
     private String avatar;
 
     //访问+发帖次数
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer count;
     //本标签共有多少帖子
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer talkCount;
 
     /**
@@ -66,7 +67,7 @@ public class SocialCircleDO extends CommonContentBaseDO implements Serializable 
     public SocialCircleDO(String name, String description, Integer devId, SocialUserDO createUser) {
         this.name = name;
         this.description = description;
-        this.applyUserId = createUser.getUnionId();
+        this.applyUserId = 1;
         this.devId = devId;
         this.tagTypeId = 1;
         this.count = 0;

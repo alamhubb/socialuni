@@ -1,5 +1,5 @@
 import PagePath from '../constant/PagePath'
-import { socialSystemModule, socialUserModule } from '../store'
+import {socialSystemModule, socialUserModule} from '../store'
 import MsgUtil from './MsgUtil'
 import AlertUtil from './AlertUtil'
 import RouterUtil from './RouterUtil'
@@ -8,15 +8,15 @@ import SocialuniAuthQO from '../model/openData/SocialuniAuthQO'
 
 
 export default class PageUtil {
-  static goHome (): void {
+  static goHome(): void {
     PageUtil.toTalkPage()
   }
 
-  static toOAuthPage () {
+  static toOAuthPage() {
     RouterUtil.navigateTo(PagePath.oAuth)
   }
 
-  static toVipPage () {
+  static toVipPage() {
     /*constant isIos: boolean = systemModule.isIos
     if (isIos) {
       // 由于相关规范，iOS功能暂不可用
@@ -31,7 +31,7 @@ export default class PageUtil {
     }*/
   }
 
-  static toShellPage () {
+  static toShellPage() {
     if (socialSystemModule.isIos) {
       // 由于相关规范，iOS功能暂不可用
       MsgUtil.iosDisablePay()
@@ -44,55 +44,61 @@ export default class PageUtil {
     }
   }
 
-  static toLoveValuePage () {
+  static toLoveValuePage() {
     RouterUtil.navigateTo(PagePath.loveValue)
   }
 
-  static toMinePage () {
+  static toMinePage() {
     RouterUtil.switchTab(PagePath.userMine)
   }
 
-  static toTalkAddPage () {
+  static toTalkAddPage() {
     const user: CenterUserDetailRO = socialUserModule.user
-    if (user && user.phoneNum) {
-      RouterUtil.navigateTo(PagePath.talkAdd)
-    } else {
+    if (!user || !user.phoneNum) {
       MsgUtil.unBindPhoneNum()
+    } else if (!user.school) {
+      // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
+      AlertUtil.confirm('设置学校名称才能发表内容，是否前往设置学校名称页面')
+        .then(() => {
+          PageUtil.toMinePage()
+        })
+    } else {
+      RouterUtil.navigateTo(PagePath.talkAdd)
     }
   }
 
-  static async toPhonePage () {
+  static async toPhonePage() {
     RouterUtil.navigateTo(PagePath.userPhone)
   }
 
-  static toTalkPage () {
+  static toTalkPage() {
     RouterUtil.switchTab(PagePath.talk)
   }
 
-  static toIdentityAuthPage () {
+  static toIdentityAuthPage() {
     RouterUtil.navigateTo(PagePath.identityAuth)
   }
 
-  static toUserMatchPage (user: CenterUserDetailRO) {
+  static toUserMatchPage(user: CenterUserDetailRO) {
     // store.commit('match/setUser', user)
     // RouterUtil.navigateTo(PagePath.userMatch)
   }
 
-  static toMessagePage () {
+  static toMessagePage() {
     RouterUtil.navigateTo(PagePath.message)
   }
 
-  static toFaceValuePage () {
+  static toFaceValuePage() {
     AlertUtil.confirm('是否查看颜值分介绍').then(() => {
       RouterUtil.navigateTo(PagePath.faceValueInfo)
     })
   }
 
-  static toUserContactInfoPage () {
+  static toUserContactInfoPage() {
     RouterUtil.navigateTo(PagePath.userContactInfo)
   }
 
-  static async toSocialUniAuth (authVO: SocialuniAuthQO) {
+  static async toSocialUniAuth(authVO: SocialuniAuthQO) {
     let appId = 'wx0bf5fe9ceeab514c'
     if (socialSystemModule.isMpQQ) {
       appId = '1109985787'

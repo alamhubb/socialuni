@@ -98,15 +98,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import MsgInput from '@/socialuni/components/MsgInput.vue'
+import {Component, Vue} from 'vue-property-decorator'
+import MsgInput from '@/components/MsgInput.vue'
 import QcLogin from '@/pages/login/QcLogin.vue'
-import { socialUserModule, socialUserStore } from '@/socialuni/store'
+import {socialUserModule, socialUserStore} from '@/socialuni/store'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/constant/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import UserInfo from '@/socialuni/components/SocialUser/UserInfo.vue'
+import UserInfo from '@/components/SocialUser/UserInfo.vue'
 import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
@@ -130,70 +130,70 @@ export default class QcMineDetail extends Vue {
   // 登录
   disabledLoginBtn = false
 
-  created () {
+  created() {
     UniUtil.showShareMenu()
   }
 
-  onShow () {
+  onShow() {
     this.showMsgInput = true
   }
 
-  onHide () {
+  onHide() {
     this.showMsgInput = false
   }
 
-  destroyAccount () {
+  destroyAccount() {
     this.hideMoreList()
     socialUserModule.destroyAccount().catch(() => {
       this.showMoreListAction()
     })
   }
 
-  logout () {
+  logout() {
     this.hideMoreList()
     socialUserModule.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }
 
-  showMoreListAction () {
+  showMoreListAction() {
     this.showMoreList = true
   }
 
-  hideMoreList () {
+  hideMoreList() {
     this.showMoreList = false
   }
 
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     this.initQuery()
   }
 
-  get homeUrl (): string {
+  get homeUrl(): string {
     return SkipUrlConst.homeUrl()
   }
 
-  get suggestUrl (): string {
+  get suggestUrl(): string {
     return SkipUrlConst.suggestUrl()
   }
 
-  get contactUsUrl (): string {
+  get contactUsUrl(): string {
     return SkipUrlConst.contactUsUrl()
   }
 
-  get userAgreementUrl (): string {
+  get userAgreementUrl(): string {
     return SkipUrlConst.userAgreementUrl()
   }
 
-  get userPrivacyUrl (): string {
+  get userPrivacyUrl(): string {
     return SkipUrlConst.userPrivacyUrl()
   }
 
-  get childProtectUrl (): string {
+  get childProtectUrl(): string {
     return SkipUrlConst.childProtectUrl()
   }
 
   // 初始查询，会清空已有talk
-  initQuery () {
+  initQuery() {
     if (this.user) {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -203,7 +203,7 @@ export default class QcMineDetail extends Vue {
     }
   }
 
-  stopPullDownRefresh () {
+  stopPullDownRefresh() {
     uni.stopPullDownRefresh()
   }
 }

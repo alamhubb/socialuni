@@ -64,15 +64,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import SocialAuthType from '@/socialuni/constant/SocialAuthType'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
-import { socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
+import {socialSystemModule, socialSystemStore, socialUserStore} from '@/socialuni/store'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
-import UserPrivacyAgreement from '@/socialuni/components/SocialLogin/UserPrivacyAgreement.vue'
-import LoginFooterAppInfo from '@/socialuni/components/SocialLogin/LoginFooterAppInfo.vue'
+import UserPrivacyAgreement from '@/components/SocialLogin/UserPrivacyAgreement.vue'
+import LoginFooterAppInfo from '@/components/SocialLogin/LoginFooterAppInfo.vue'
 import SocialuniAuthQO from '@/socialuni/model/openData/SocialuniAuthQO'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import MockService from '@/socialuni/service/MockService'
@@ -97,7 +97,7 @@ export default class SocialPhonePage extends Vue {
   //如果三方信息错误，上面是显示，申请授权方信息错误，不予授权
   openTypeBtnEnable = true
 
-  goBackPage () {
+  goBackPage() {
     if (!this.user) {
       PageUtil.goHome()
     } else {
@@ -105,7 +105,7 @@ export default class SocialPhonePage extends Vue {
     }
   }
 
-  async bindSocialuniPhone () {
+  async bindSocialuniPhone() {
     if (this.openTypeBtnEnable) {
       UniUtil.showLoading('跳转中')
       this.openTypeBtnEnable = false

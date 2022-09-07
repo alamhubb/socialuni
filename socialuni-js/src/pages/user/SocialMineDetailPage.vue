@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import SocialMineDetail from '../../socialuni/components/SocialUser/SocialMineDetail.vue'
+import {Component, Vue} from 'vue-property-decorator'
+import SocialMineDetail from '../../components/SocialUser/SocialMineDetail.vue'
 
 @Component({
-  components: { SocialMineDetail }
+  components: {SocialMineDetail}
 })
 export default class SocialMineDetailPage extends Vue {
 

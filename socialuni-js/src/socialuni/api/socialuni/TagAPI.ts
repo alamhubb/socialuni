@@ -9,19 +9,19 @@ export default class TagAPI {
 
   //前端新增talk时，需要选择tag，前端搜索时使用
   static queryTagsAPI() {
-    return request.post('socialuni/tag/queryTags')
+    return request.get('socialuni/tag/queryTags')
   }
 
   static queryHotTagsAPI() {
-    return request.post('socialuni/tag/queryHotTags')
+    return request.get('socialuni/tag/queryHotTags')
   }
 
   static queryTagTypesAPI() {
-    return request.post('socialuni/tag/queryTagTypes')
+    return request.get('socialuni/tag/queryTagTypes')
   }
 
   static queryHotTagTypesAPI() {
-    return request.post('socialuni/tag/queryHotTagTypes')
+    return request.get('socialuni/tag/queryHotTagTypes')
   }
 
   static queryUserRecentlyDistrictsAPI() {

@@ -5,6 +5,7 @@ export default class CenterUserDetailRO {
   nickname: string = ''
   avatar: string = ''
   gender: string = null
+  school: string = null
   age: number = null
   identityAuth: boolean = false
   city = ''

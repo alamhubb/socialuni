@@ -32,10 +32,6 @@ public class ResultRO<T> {
         return new ResultRO<>(data);
     }
 
-    public static <T> ResultRO<T> success(ResultRO<T> resultRO) {
-        return new ResultRO<>(resultRO.getData(), resultRO.getMsg());
-    }
-
     public static <T> ResultRO<T> success(T data, String msg) {
         return new ResultRO<>(data, msg);
     }

@@ -1,4 +1,7 @@
 export default class AppConfig {
+  //首页Tab的名称
+  static readonly homeMainTabName: string = process.env.VUE_APP_SOCIALUNI_APP_MAIN_TAB_NAME
+
   static readonly websocketUrl: string = process.env.VUE_APP_WEBSOCKET_URL
 
   static readonly appName: string = '集美小世界app'

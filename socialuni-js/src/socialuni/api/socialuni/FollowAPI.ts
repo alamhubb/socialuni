@@ -11,6 +11,6 @@ export default class FollowAPI {
   }
 
   static queryUserFollowsAPI() {
-    return request.post('socialuni/follow/queryUserFollows')
+    return request.get('socialuni/follow/queryUserFollows')
   }
 }

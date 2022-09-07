@@ -15,7 +15,7 @@ import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
 import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 import QTab from '@/qing-ui/components/QTab/QTab.vue'
-import CircleSearch from '@/socialuni/components/SocialCirclePicker.vue'
+import CircleSearch from '@/components/SocialCirclePicker.vue'
 
 
 @Component({

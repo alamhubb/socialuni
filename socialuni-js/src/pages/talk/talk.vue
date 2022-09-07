@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
-import SocialTalkMobilePage from "@/socialuni/components/SocialPages/SocialTalkMobilePage.vue";
+import SocialTalkMobilePage from "@/components/SocialPages/SocialTalkMobilePage.vue";
 
 @Component({
   components: {SocialTalkMobilePage}
