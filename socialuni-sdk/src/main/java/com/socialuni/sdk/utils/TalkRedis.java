@@ -2,7 +2,7 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.redis.RedisKeysUtil;
 import com.socialuni.sdk.redis.redisKey.RedisKeysConst;
-import com.socialuni.social.constant.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.mapper.TalkMapper;
 import com.socialuni.sdk.repository.community.TalkRepository;

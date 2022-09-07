@@ -15,10 +15,10 @@ import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthReposito
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.UserIdentityAuthStatus;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.tencentcloudapi.ocr.v20181119.models.IDCardOCRRequest;

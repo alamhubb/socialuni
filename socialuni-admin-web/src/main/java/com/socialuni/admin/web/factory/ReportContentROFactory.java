@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.DO.tag.TagDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
@@ -31,7 +31,7 @@ public class ReportContentROFactory {
         ReportContentVO reportContentVO = new ReportContentVO();
         if (reportContentType.equals(ContentType.talk)) {
             SocialTalkDO talkDO = TalkUtils.getNotNull(contentId);
-            reportContentVO.setId(talkDO.getId());
+            reportContentVO.setId(contentId);
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());
             reportContentVO.setUserId(talkDO.getUserId());
@@ -41,12 +41,12 @@ public class ReportContentROFactory {
 //            CommentUtils.getAll(talkDO.getId()).stream().filter((SocialCommentDO commentDO) -> commentDO.getUserId().equals(userId)).map(talk::new).collect(Collectors.toList());
 //            reportContentVO.setComments(talkDO.getUserId());
 
-            List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getId());
+            List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(contentId);
             List<TagRO> tagROES = SocialTagROFactory.tagDOToROS(tagDOS);
             reportContentVO.setTags(tagROES);
             reportContentVO.setStatus(talkDO.getStatus());
 
-            List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(talkDO.getId());
+            List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(contentId);
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(ContentType.comment)) {

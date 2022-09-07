@@ -15,6 +15,6 @@ public interface SocialUserIdentityAuthRepository extends JpaRepository<SocialUs
     @Cacheable(cacheNames = "getUserIdentityInfo", key = "#userId")
     SocialUserIdentityAuthDO findFirstByUserId(Integer userId);
 
-    List<SocialUserIdentityAuthDO> findByStatusIn(List<String> status);
+    List<SocialUserIdentityAuthDO> findTop20ByStatusInOrderByIdDesc(List<String> status);
 }
 

@@ -2,9 +2,9 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.sdk.repository.*;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.model.DO.NotifyDO;
 import com.socialuni.sdk.model.DO.ReportDO;
 import com.socialuni.sdk.model.DO.ReportDetailDO;

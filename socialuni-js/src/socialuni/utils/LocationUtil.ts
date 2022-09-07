@@ -1,9 +1,9 @@
 import DistrictVO from '../model/DistrictVO'
 import StorageUtil from './StorageUtil'
 import MapUtil from './MapUtil'
-import { socialLocationModule, socialSystemModule } from '../store'
+import {socialLocationModule, socialSystemModule} from '../store'
 import AppAuthUtil from './AppAuthUtil'
-import { QQMapResult } from '@/socialuni/model/location/QQMapResult'
+import {QQMapResult} from '@/socialuni/model/location/QQMapResult'
 
 const chinaAdCode = '100000'
 
@@ -29,35 +29,36 @@ export default class LocationUtil {
 
   static readonly chinaDistrict: DistrictVO = chinaDistrict
 
-  static openLocation () {
+  static openLocation() {
     StorageUtil.setObj(LocationUtil.openLocationKey, '1')
   }
 
-  static getOpenLocation () {
+  static getOpenLocation() {
     return !!StorageUtil.get(LocationUtil.openLocationKey)
   }
 
-  static getLocation (): DistrictVO {
+  static getLocation(): DistrictVO {
     return StorageUtil.getObj(LocationUtil.locationKey) || LocationUtil.chinaDistrict
   }
-  static getCircleLocation (): DistrictVO {
+
+  static getCircleLocation(): DistrictVO {
     return StorageUtil.getObj(LocationUtil.circleLocationKey) || LocationUtil.chinaDistrict
   }
 
-  static setLocation (district: DistrictVO) {
+  static setLocation(district: DistrictVO) {
     StorageUtil.setObj(LocationUtil.locationKey, district)
   }
 
-  static setCircleLocation (district: DistrictVO) {
+  static setCircleLocation(district: DistrictVO) {
     StorageUtil.setObj(LocationUtil.circleLocationKey, district)
   }
 
 
-  static setFilterLocation (district: DistrictVO) {
+  static setFilterLocation(district: DistrictVO) {
     StorageUtil.setObj(LocationUtil.filterLocationKey, district)
   }
 
-  static getFilterLocation (): DistrictVO {
+  static getFilterLocation(): DistrictVO {
     return StorageUtil.getObj(LocationUtil.filterLocationKey) || LocationUtil.chinaDistrict
   }
 
@@ -93,7 +94,7 @@ export default class LocationUtil {
   //没授权就用web获取地理位置，授权了就用sdk，基础util 就返回位置信息，具体存哪里store决定
 
   //无需授权，根据组合方式获取地理位置，无论如何都会返回地理位置
-  static async getLocationNotAuth () {
+  static async getLocationNotAuth() {
     let hasAuth
     //如果小程序，
     if (socialSystemModule.isMp) {
@@ -106,6 +107,7 @@ export default class LocationUtil {
     } else {
       hasAuth = socialLocationModule.openLocation
     }
+    console.log(hasAuth)
     //如果非小程序，获取用户是否授权过，授权过使用组合方式
     //如果用户已经授权过地理位置了
     if (hasAuth) {
@@ -116,7 +118,7 @@ export default class LocationUtil {
   }
 
   // 组合sdk和webapi
-  static getCurLocationCom () {
+  static getCurLocationCom() {
     return LocationUtil.getCurLocationBySDK().then((res: DistrictVO) => {
       return res
     }).catch(() => {
@@ -127,7 +129,7 @@ export default class LocationUtil {
   }
 
   // 使用sdk精准定位
-  static getCurLocationBySDK (): Promise<DistrictVO> {
+  static getCurLocationBySDK(): Promise<DistrictVO> {
     return MapUtil.getLocationBySdk().then((res: QQMapResult) => {
       const district: DistrictVO = new DistrictVO()
       district.adCode = res.adcode
@@ -153,8 +155,11 @@ export default class LocationUtil {
   }
 
   // 使用webapi粗略定位
-  static async getCityByIpWebAPI () {
+  static async getCityByIpWebAPI() {
     return MapUtil.getLocationByWeb().then((res: QQMapResult) => {
+      if (!res) {
+        return null
+      }
       const district: DistrictVO = new DistrictVO()
       district.adCode = res.adcode
       district.provinceName = res.province

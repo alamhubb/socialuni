@@ -1,6 +1,6 @@
 package com.socialuni.sdk.manage;
 
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.model.DO.FollowDO;
 import com.socialuni.sdk.repository.FollowRepository;
 import com.socialuni.sdk.redis.FollowRedis;

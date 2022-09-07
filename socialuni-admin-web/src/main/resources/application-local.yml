@@ -1,5 +1,4 @@
 socialuni:
-  server-url: "https://api.socialuni.cn"
   app:
     static-resource-url: "https://devcdxapp-1257733245.file.myqcloud.com"
     system-user-id: 1

@@ -9,7 +9,7 @@ import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.utils.GenderUtil;
 import com.socialuni.sdk.utils.WxUtil;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.repository.UserRepository;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.StringUtils;

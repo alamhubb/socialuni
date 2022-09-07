@@ -3,7 +3,7 @@ package com.socialuni.admin.web.model.RO;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.utils.SocialUserUtil;

@@ -2,8 +2,8 @@ package com.socialuni.sdk.factory.DO;
 
 import com.socialuni.sdk.model.DO.UnionIdDO;
 import com.socialuni.sdk.utils.ObjectUtil;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 
 import java.util.Date;

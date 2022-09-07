@@ -25,28 +25,12 @@
             <artifactId>feign-httpclient</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-constant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-api-model</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-constant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni</groupId>
-            <artifactId>social-exception</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

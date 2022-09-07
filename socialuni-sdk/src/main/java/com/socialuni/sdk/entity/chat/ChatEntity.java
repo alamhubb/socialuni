@@ -4,7 +4,7 @@ import com.socialuni.sdk.repository.ChatRepository;
 import com.socialuni.sdk.model.DO.chat.ChatDO;
 import com.socialuni.sdk.model.DO.chat.ChatUserDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.social.constant.ChatType;
+import com.socialuni.sdk.constant.socialuni.ChatType;
 import com.socialuni.sdk.repository.ChatUserRepository;
 import org.springframework.stereotype.Component;
 

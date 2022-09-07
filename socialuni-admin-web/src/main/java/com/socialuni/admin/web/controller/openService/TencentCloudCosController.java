@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.controller.openService;
 
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

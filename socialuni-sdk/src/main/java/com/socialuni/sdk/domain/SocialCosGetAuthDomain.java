@@ -1,7 +1,7 @@
 package com.socialuni.sdk.domain;
 
-import com.socialuni.social.exception.SocialParamsException;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import com.socialuni.social.web.sdk.utils.JsonUtil;
 import com.socialuni.sdk.model.RO.app.SocialCosAuthRO;
 import com.tencent.cloud.CosStsClient;

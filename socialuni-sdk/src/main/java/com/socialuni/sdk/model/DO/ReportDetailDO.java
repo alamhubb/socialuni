@@ -2,7 +2,7 @@ package com.socialuni.sdk.model.DO;
 
 
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import lombok.Data;
 
 import javax.persistence.*;

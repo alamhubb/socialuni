@@ -15,7 +15,7 @@ import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -48,14 +48,14 @@ public class CenterUserService {
         return new ResultRO<>(mineUserDetailRO);
     }
 
-    public ResultRO<CenterUserDetailRO> queryUserDetail(CenterUserIdQO centerUserIdQO) {
-        SocialUserDO detailUserDO = SocialUserUtil.getUserByUid(centerUserIdQO.getUserId());
+    public ResultRO<CenterUserDetailRO> queryUserDetail(String userId) {
+        SocialUserDO detailUserDO = SocialUserUtil.getUserByUid(userId);
 
         SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
 
         CenterUserDetailRO userDetailRO;
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(centerUserIdQO);
+            ResultRO<CenterUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(userId);
             userDetailRO = new CenterUserDetailRO(resultRO.getData());
         } else {
             userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);

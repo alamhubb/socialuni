@@ -2,7 +2,7 @@ package com.socialuni.sdk.model.DO.talk;
 
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.user.SocialUnionContentBaseDO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

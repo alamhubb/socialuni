@@ -1,7 +1,7 @@
 package com.socialuni.sdk.store;
 
 import com.socialuni.sdk.utils.TalkRedis;
-import com.socialuni.social.constant.GenderType;
+import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;

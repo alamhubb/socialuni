@@ -1,0 +1,23 @@
+.q-button {
+  @extend .bd-round;
+  @extend .q-box-md;
+  @extend .row-all-center;
+  @extend .bg-click;
+  background: $color-white;
+  border: $border-base;
+  color: $color-main;
+  border-color: $color-grey8;
+}
+
+@each $key, $color in $colors-base {
+  .q-button-#{''+$key+''} {
+    @extend .bd-round;
+    @extend .q-box-md;
+    @extend .row-all-center;
+    @extend .bg-click;
+    color: $color-white;
+    background-color: $color;
+    border: $border-base;
+    border-color: $color;
+  }
+}

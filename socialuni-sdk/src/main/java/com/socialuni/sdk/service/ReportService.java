@@ -11,7 +11,7 @@ import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.ReportDetailUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

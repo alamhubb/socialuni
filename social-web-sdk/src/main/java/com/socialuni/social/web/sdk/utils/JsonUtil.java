@@ -3,7 +3,7 @@ package com.socialuni.social.web.sdk.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

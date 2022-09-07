@@ -3,7 +3,7 @@ package com.socialuni.sdk.service;
 import com.socialuni.sdk.model.OpenChatVO;
 import com.socialuni.sdk.model.RO.UserIdVO;
 import com.socialuni.sdk.domain.chat.ChatQueryDomain;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRemoveVO;

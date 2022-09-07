@@ -15,10 +15,10 @@ import com.socialuni.sdk.repository.ChatRepository;
 import com.socialuni.sdk.repository.MessageReceiveRepository;
 import com.socialuni.sdk.repository.MessageRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.ChatStatus;
-import com.socialuni.social.constant.ChatType;
-import com.socialuni.social.constant.ChatUserStatus;
-import com.socialuni.social.constant.MessageStatus;
+import com.socialuni.sdk.constant.socialuni.ChatStatus;
+import com.socialuni.sdk.constant.socialuni.ChatType;
+import com.socialuni.sdk.constant.socialuni.ChatUserStatus;
+import com.socialuni.sdk.constant.socialuni.MessageStatus;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

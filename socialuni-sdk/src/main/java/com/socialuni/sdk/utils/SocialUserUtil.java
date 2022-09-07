@@ -10,8 +10,8 @@ import com.socialuni.sdk.repository.UserRepository;
 import com.socialuni.sdk.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.repository.user.SocialUserViolationRepository;
 import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.social.constant.UserIdentityAuthStatus;
-import com.socialuni.social.exception.SocialNullUserException;
+import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
+import com.socialuni.social.web.sdk.exception.SocialNullUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

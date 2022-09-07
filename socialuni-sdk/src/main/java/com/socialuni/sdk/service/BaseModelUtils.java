@@ -12,9 +12,9 @@ import com.socialuni.sdk.repository.MessageRepository;
 import com.socialuni.sdk.repository.UserImgRepository;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.social.constant.ContentType;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

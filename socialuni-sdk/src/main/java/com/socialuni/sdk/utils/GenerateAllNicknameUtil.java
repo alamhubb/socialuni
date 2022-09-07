@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 

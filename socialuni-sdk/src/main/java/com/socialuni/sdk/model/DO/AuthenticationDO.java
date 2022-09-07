@@ -1,8 +1,8 @@
 package com.socialuni.sdk.model.DO;
 
 import com.socialuni.sdk.model.DO.base.CommonContentBaseDO;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import lombok.Data;
 
 import javax.persistence.*;

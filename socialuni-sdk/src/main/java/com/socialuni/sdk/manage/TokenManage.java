@@ -3,7 +3,7 @@ package com.socialuni.sdk.manage;
 import com.socialuni.sdk.model.DO.user.SocialTokenDO;
 import com.socialuni.sdk.repository.CommonTokenRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.social.constant.DateTimeType;
+import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.sdk.config.SocialTokenUtil;
 import org.springframework.stereotype.Service;
 

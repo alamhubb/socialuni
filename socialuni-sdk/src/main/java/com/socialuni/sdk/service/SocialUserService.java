@@ -13,7 +13,7 @@ import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.model.QO.user.SocialUserIdQO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialUserDetailRO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

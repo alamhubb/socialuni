@@ -2,8 +2,8 @@ package com.socialuni.sdk.factory.community;
 
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.constant.GenderType;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.GenderType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

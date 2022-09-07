@@ -19,11 +19,7 @@ export default class TalkVueUtil {
   static readonly TalkTabsDefault: TalkTabVO [] = [
     new TalkTabVO(TalkTabType.follow_name, TalkTabType.follow_type),
     new TalkTabVO(TalkTabType.home_name, TalkTabType.home_type),
-    new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type),
-    new TalkTabVO('处对象', TalkTabType.circle_type),
-    new TalkTabVO('闺蜜', TalkTabType.circle_type),
-    new TalkTabVO('扩列', TalkTabType.circle_type),
-    new TalkTabVO('生活', TalkTabType.circle_type)
+    new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type)
   ]
 
 
@@ -34,7 +30,7 @@ export default class TalkVueUtil {
   static readonly talkTabTypeDefault: string = TalkTabType.home_type
 
 
-  static getTalkTabs (): TalkTabVO [] {
+  static getTalkTabs(): TalkTabVO [] {
     const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey) || TalkVueUtil.TalkTabsDefault
     if (homeTypeTalks.length < 4) {
       return TalkVueUtil.TalkTabsDefault
@@ -42,7 +38,7 @@ export default class TalkVueUtil {
     return homeTypeTalks
   }
 
-  static getCurTalkTabIndex (): number {
+  static getCurTalkTabIndex(): number {
     let index = StorageUtil.getObj(TalkVueUtil.talkTabIndexKey)
     if (index !== 0) {
       index = index || TalkVueUtil.talkTabIndexDefault

@@ -8,7 +8,7 @@ import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.platform.MapUtil;
 import com.socialuni.sdk.utils.ImgCheckUtil;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import org.springframework.stereotype.Component;

@@ -4,7 +4,7 @@ package com.socialuni.sdk.model.RO.talk;
 import com.socialuni.sdk.factory.RO.talk.CenterCommentROFactory;
 import com.socialuni.sdk.model.RO.community.UniContentIdRO;
 import com.socialuni.sdk.model.RO.user.CenterUserRO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

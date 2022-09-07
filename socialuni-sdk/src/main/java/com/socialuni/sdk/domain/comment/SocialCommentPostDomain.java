@@ -17,7 +17,7 @@ import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.service.comment.CommentAddLineTransfer;
 import com.socialuni.sdk.service.content.ModelContentCheck;
 import com.socialuni.sdk.store.SocialTagRedis;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;

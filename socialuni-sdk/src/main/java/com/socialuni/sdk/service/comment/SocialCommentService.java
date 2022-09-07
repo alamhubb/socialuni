@@ -7,7 +7,7 @@ import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentDeleteQO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.community.comment.SocialCommentRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

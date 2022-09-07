@@ -1,6 +1,9 @@
 package com.socialuni.sdk.serive;
 
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.sdk.constant.SocialuniCommonConst;
+import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.domain.talk.*;
 import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.sdk.feignAPI.SocialuniTalkAPI;
@@ -8,13 +11,19 @@ import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
+import com.socialuni.sdk.model.RO.community.tag.TagRO;
+import com.socialuni.sdk.model.RO.community.talk.SocialTalkTagRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
+import com.socialuni.sdk.model.RectangleVO;
+import com.socialuni.sdk.platform.MapUtil;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UniAPIUtils;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CenterTalkService {
@@ -40,6 +49,21 @@ public class CenterTalkService {
 
     //查询非关注tab的动态列表
     public ResultRO<List<CenterTalkRO>> queryTalks(CenterHomeTabTalkQueryQO queryQO) {
+        if (queryQO == null) {
+            //获取当前用户
+            queryQO = new CenterHomeTabTalkQueryQO();
+            queryQO.setHomeTabType(TalkTabType.home_type);
+            //如果经纬度为空
+            RectangleVO rectangleVO = MapUtil.getRectangle();
+            if (rectangleVO != null) {
+                queryQO.setLon(rectangleVO.getLon());
+                queryQO.setLat(rectangleVO.getLat());
+            }
+            queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
+            queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
+            queryQO.setGender(DevAccountUtils.getAppGenderType());
+            queryQO.setPageNum(0);
+        }
         List<CenterTalkRO> talkROS;
         if (SocialAppConfig.serverIsChild()) {
             ResultRO<List<CenterTalkRO>> resultRO = socialuniTalkAPI.queryTalks(queryQO);
@@ -47,6 +71,18 @@ public class CenterTalkService {
         } else {
             talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
         }
+        //如果不为测试环境则过滤到测试环境标签的数据
+        /*if (DevAccountUtils.getDevIdNotNull() != 3) {
+            talkROS = talkROS.stream().filter(talkRO -> {
+                List<SocialTalkTagRO> tagROES = talkRO.getTags();
+                for (SocialTalkTagRO tagRO : tagROES) {
+                    if (tagRO.getName().equals(SocialuniCommonConst.devEnvTagName)) {
+                        return false;
+                    }
+                }
+                return true;
+            }).collect(Collectors.toList());
+        }*/
         return new ResultRO<>(talkROS);
     }
 
@@ -70,14 +106,14 @@ public class CenterTalkService {
         return new ResultRO<>();
     }
 
-    public ResultRO<CenterTalkRO> queryTalkDetail(CenterTalkIdQO talkIdQO) {
+    public ResultRO<CenterTalkRO> queryTalkDetail(String talkId) {
         CenterTalkRO centerTalkRO;
         //如果应用，则调用中心
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterTalkRO> centerTalkROResultRO = socialuniTalkAPI.queryTalkDetail(talkIdQO);
+            ResultRO<CenterTalkRO> centerTalkROResultRO = socialuniTalkAPI.queryTalkDetail(talkId);
             centerTalkRO = new CenterTalkRO(centerTalkROResultRO.getData());
         } else {
-            centerTalkRO = centerTalkDetailDomain.queryTalkDetail(talkIdQO);
+            centerTalkRO = centerTalkDetailDomain.queryTalkDetail(talkId);
         }
         return ResultRO.success(centerTalkRO);
     }

@@ -1,7 +1,6 @@
 package com.socialuni.sdk.domain.talk;
 
-import com.socialuni.sdk.config.SocialAppConfig;
-import com.socialuni.sdk.constant.TalkTabType;
+import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
@@ -9,12 +8,9 @@ import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
-import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.sdk.platform.MapUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.exception.SocialSystemException;
+import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -30,22 +26,6 @@ public class CenterHomeTalkQueryDomain {
 
     //查询非关注tab的动态列表
     public List<CenterTalkRO> queryHomeTabTalks(@Valid CenterHomeTabTalkQueryQO queryQO) {
-        if (queryQO == null) {
-            //获取当前用户
-            queryQO = new CenterHomeTabTalkQueryQO();
-            queryQO.setHomeTabType(TalkTabType.home_type);
-            //如果经纬度为空
-            RectangleVO rectangleVO = MapUtil.getRectangle();
-            if (rectangleVO != null) {
-                queryQO.setLon(rectangleVO.getLon());
-                queryQO.setLat(rectangleVO.getLat());
-            }
-            queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
-            queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
-            queryQO.setGender(DevAccountUtils.getAppGenderType());
-            queryQO.setPageNum(0);
-        }
-
         Integer pageNum = queryQO.getPageNum();
         if (pageNum == null) {
             if (queryQO.getTalkIds() != null) {

@@ -2,7 +2,7 @@ package com.socialuni.sdk.model.RO.user;
 
 import com.socialuni.sdk.model.RO.community.UniContentIdRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

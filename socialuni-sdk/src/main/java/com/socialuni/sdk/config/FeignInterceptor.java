@@ -13,8 +13,8 @@ import com.socialuni.sdk.store.SocialUserAccountStore;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.SocialFeignHeaderName;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -86,7 +86,6 @@ public class FeignInterceptor implements RequestInterceptor {
                     if (SocialAppConfig.serverIsChild()) {
                         socialProviderLoginQO.setPhoneNum(phoneNum);
                     }
-                    System.out.println(123123);
 //                    URI uri = URI.create(postUrl);
 //                    String absoluteUri = uri.getScheme() + "://" + uri.getAuthority();
 //                    URI determinedBasePathUri = URI.create(absoluteUri);

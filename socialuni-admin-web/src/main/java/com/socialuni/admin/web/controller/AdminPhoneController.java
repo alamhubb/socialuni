@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.service.AdminPhoneService;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import org.springframework.web.bind.annotation.*;
 

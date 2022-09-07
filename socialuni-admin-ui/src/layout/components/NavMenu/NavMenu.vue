@@ -4,6 +4,7 @@
     <!--    如果router没有子节点，或者仅仅有一个展示的子节点，或者总是展示-->
     <nav-menu-item
       v-for="route in routes"
+      v-show="route.meta.isOpen || (user&&user.devNum === 1212121212)"
       :key="route.path"
       :route="route"
       :base-path="route.path"
@@ -15,11 +16,17 @@
 import { Component, Vue } from 'vue-property-decorator'
 import NavMenuItem from '@/layout/components/NavMenu/NavMenuItem.vue'
 import { menuRoutes } from '@/router/router'
+import { namespace } from 'vuex-class'
+import DevAccountRO from '@/model/base/DevAccountRO'
+
+const userStore = namespace('user')
 
 @Component({
   components: { NavMenuItem }
 })
 export default class NavMenu extends Vue {
+  @userStore.State('user') user: DevAccountRO
+
   /*  @userStore.State('user')
     user: UserVO
 

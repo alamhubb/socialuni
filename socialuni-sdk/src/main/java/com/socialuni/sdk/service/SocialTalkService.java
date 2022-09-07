@@ -8,8 +8,8 @@ import com.socialuni.sdk.platform.MapUtil;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.constant.GenderType;
-import com.socialuni.social.api.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
 

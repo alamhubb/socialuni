@@ -1,7 +1,7 @@
 package com.socialuni.sdk.model.RO.talk;
 
 import com.socialuni.sdk.model.RO.community.UniContentIdRO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -25,8 +25,8 @@ import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.sdk.repository.dev.DevAccountProviderRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

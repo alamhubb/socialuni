@@ -11,8 +11,8 @@ import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.sdk.repository.HomeSwiperRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.CommonStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

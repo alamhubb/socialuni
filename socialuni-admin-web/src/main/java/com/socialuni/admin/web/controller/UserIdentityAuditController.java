@@ -1,8 +1,9 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.RO.UserIdentityAuditRO;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.UserIdentityAuthStatus;
+import com.socialuni.admin.web.utils.CheckIsAdminUtil;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
@@ -34,7 +35,8 @@ public class UserIdentityAuditController {
      */
     @PostMapping("queryUserIdentityAuthAuditList")
     public ResultRO<List<UserIdentityAuditRO>> queryAuditUserIdentityList() {
-        List<SocialUserIdentityAuthDO> list = socialUserIdentityAuthRepository.findByStatusIn(UserIdentityAuthStatus.auditList);
+        CheckIsAdminUtil.checkAdmin();
+        List<SocialUserIdentityAuthDO> list = socialUserIdentityAuthRepository.findTop20ByStatusInOrderByIdDesc(UserIdentityAuthStatus.auditList);
         List<UserIdentityAuditRO> list1 = new ArrayList<>();
         for (SocialUserIdentityAuthDO socialUserIdentityAuthDO : list) {
             SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO = socialUserIdentityAuthImgRepository.findFirstById(socialUserIdentityAuthDO.getUserIdentityImgId());
@@ -53,6 +55,7 @@ public class UserIdentityAuditController {
      */
     @PostMapping("auditUserIdentityList")
     public ResultRO<List<UserIdentityAuditRO>> auditUserIdentityList(@RequestBody List<UserIdentityAuditRO> audits) {
+        CheckIsAdminUtil.checkAdmin();
         for (UserIdentityAuditRO audit : audits) {
             SocialUserIdentityAuthDO socialUserIdentityAuthDO = socialUserIdentityAuthRepository.getOne(audit.getId());
             if (audit.getSuccess()) {

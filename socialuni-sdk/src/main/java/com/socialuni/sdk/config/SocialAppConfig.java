@@ -1,6 +1,6 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,17 +38,17 @@ public class SocialAppConfig {
     }
 
 
-    @Value("${socialuni.secret-key:null}")
+    @Value("${socialuni.secret-key:#{null}}")
     public void setSocialuniDevSecretKey(String socialuniDevSecretKey) {
         SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
     }
 
-    @Value("${socialuni.server-url:#{null}}")
+    @Value("${socialuni.central-server-url:https://api.socialuni.cn}")
     public void setSocialuniServerUrl(String socialuniServerUrl) {
         SocialAppConfig.socialuniServerUrl = socialuniServerUrl;
     }
 
-    @Value("${socialuni.center-socialuni-id:#{null}}")
+    @Value("${socialuni.central-socialuni-id:17e212a46c7b4e5ebc70a934bef4ed27}")
     public void setCenterSocialuniId(String centerSocialuniId) {
         SocialAppConfig.centerSocialuniId = centerSocialuniId;
     }
@@ -82,7 +82,7 @@ public class SocialAppConfig {
 
     public static boolean serverIsCenter() {
         //为空则异常
-        return StringUtils.isEmpty(getSocialuniServerUrl());
+        return StringUtils.isEmpty(getDevSecretKey());
     }
 
     //是否配置了中心服务器

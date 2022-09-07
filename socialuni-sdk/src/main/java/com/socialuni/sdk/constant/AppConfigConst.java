@@ -1,8 +1,8 @@
 package com.socialuni.sdk.constant;
 
 
-import com.socialuni.social.constant.DateTimeType;
-import com.socialuni.social.constant.OpenDataQueryType;
+import com.socialuni.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.sdk.constant.socialuni.OpenDataQueryType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;

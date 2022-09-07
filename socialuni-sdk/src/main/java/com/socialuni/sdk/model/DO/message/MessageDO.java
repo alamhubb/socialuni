@@ -1,9 +1,9 @@
 package com.socialuni.sdk.model.DO.message;
 
 
+import com.socialuni.sdk.constant.socialuni.*;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.user.SocialUnionContentBaseDO;
-import com.socialuni.social.constant.*;
 import lombok.Data;
 
 import javax.persistence.*;

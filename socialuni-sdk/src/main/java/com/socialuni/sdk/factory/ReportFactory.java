@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.repository.CommentRepository;
 import com.socialuni.sdk.service.ReportService;
-import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

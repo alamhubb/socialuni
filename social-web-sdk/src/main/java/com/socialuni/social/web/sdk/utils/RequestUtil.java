@@ -1,6 +1,5 @@
 package com.socialuni.social.web.sdk.utils;
 
-import com.socialuni.social.constant.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.constant.SocialWebHeaderName;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -76,9 +75,9 @@ public class RequestUtil {
         return RequestUtil.getHeader(SocialWebHeaderName.platformHeaderName);
     }
 
-    public static String getDataOriginalSocialuniId() {
+    /*public static String getDataOriginalSocialuniId() {
         return RequestUtil.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
-    }
+    }*/
 
     //根据cookie名获取cookie值
     public static String getCookie(String cookieName) {

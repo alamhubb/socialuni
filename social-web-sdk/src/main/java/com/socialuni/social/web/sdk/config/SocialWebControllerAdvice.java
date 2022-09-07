@@ -1,11 +1,11 @@
 package com.socialuni.social.web.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.exception.base.SocialException;
-import com.socialuni.social.exception.constant.ErrorCode;
-import com.socialuni.social.exception.constant.ErrorType;
-import com.socialuni.social.exception.constant.ErrorMsg;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.web.sdk.exception.base.SocialException;
+import com.socialuni.social.web.sdk.constant.ErrorCode;
+import com.socialuni.social.web.sdk.constant.ErrorType;
+import com.socialuni.social.web.sdk.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.*;
 import feign.FeignException;
@@ -39,23 +39,13 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse serverHttpResponse) {
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
-        ResultRO responseVO;
-        if (response.getStatus() != 200 && response.getStatus() != 404) {
-            System.out.println("不应该触发这里");
-//            ErrorLogUtils.save(new ErrorLogDO(UserUtils.getMineUserId(), "状态码非200，系统错误", result));
-            responseVO = new ResultRO(ErrorCode.SYSTEM_ERROR, ErrorMsg.systemErrorMsg);
-        } else {
-            if (result instanceof ResultRO) {
-                responseVO = (ResultRO) result;
-            } else {
-                return result;
+        if (response.getStatus() == 200 && result instanceof ResultRO) {
+            Integer resCode = ((ResultRO<?>) result).getCode();
+            if (resCode > 0) {
+                response.setStatus(resCode);
             }
         }
-        if (responseVO.getCode() > 0) {
-            response.setStatus(responseVO.getCode());
-        }
-        //返回修改后的值
-        return responseVO;
+        return result;
     }
 
     @Override

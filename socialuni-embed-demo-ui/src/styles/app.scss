@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+  color: #303133;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+//不显示滚动条
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+//调整滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  top: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: rgba(144, 147, 153, .3);
+}
+
+a {
+  text-decoration: none
+}
+
+:focus {
+  outline-width: 0;
+}

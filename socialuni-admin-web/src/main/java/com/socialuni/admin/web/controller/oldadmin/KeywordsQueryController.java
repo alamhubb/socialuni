@@ -2,18 +2,19 @@ package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
+import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.sdk.repository.*;
-import com.socialuni.social.api.model.ResultRO;
-import com.socialuni.social.constant.CommonStatus;
-import com.socialuni.social.constant.ContentStatus;
-import com.socialuni.social.constant.ReportStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
 import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.model.DO.message.MessageDO;
 import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.social.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.mapper.TalkMapper;
 import com.socialuni.sdk.repository.community.TalkRepository;
 import com.socialuni.sdk.service.KeywordsService;
@@ -69,6 +70,7 @@ public class KeywordsQueryController {
 
     @PostMapping("queryKeywords")
     public ResultRO<List<KeywordsDO>> queryKeywords() {
+        CheckIsAdminUtil.checkAdmin();
         //先查询出来所有的关键词
         List<KeywordsDO> wordDOs = keywordsRepository.findAllByStatusOrderByTextViolateRatioDesc(CommonStatus.enable);
 
@@ -97,6 +99,7 @@ public class KeywordsQueryController {
 
     @PostMapping("queryKeyword")
     public ResultRO<KeywordsDetailVO> queryKeyword(@Valid @NotNull String content, @Valid @NotNull Integer count) {
+        CheckIsAdminUtil.checkAdmin();
         content = content.trim();
         if (StringUtils.isEmpty(content)) {
             throw new SocialBusinessException("不能为空");

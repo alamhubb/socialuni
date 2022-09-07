@@ -8,8 +8,8 @@ import com.socialuni.sdk.repository.user.SocialUserPhoneRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.PhoneNumUtil;
 import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.social.exception.SocialBusinessException;
-import com.socialuni.social.exception.SocialParamsException;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

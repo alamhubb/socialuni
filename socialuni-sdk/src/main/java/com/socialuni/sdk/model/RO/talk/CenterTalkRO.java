@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.RO.community.UniContentIdRO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkDistrictRO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkTagRO;
 import com.socialuni.sdk.model.RO.user.CenterContentUserRO;
-import com.socialuni.social.constant.ContentType;
+import com.socialuni.sdk.constant.socialuni.ContentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
