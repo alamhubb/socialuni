@@ -75,7 +75,7 @@
               <div class="row-between-center my-sm">
                 <div>
                   <star-filled class="mr-xs color-red4 w7"></star-filled>
-                  请输入您要发布的动态，点击发布
+                  请输入您要发布的动态，点击发布，发布内容仅演示环境可见，生产环境已屏蔽演示环境发布的内容
                 </div>
                 <el-button class="ml-sm" @click="postTalk">发布</el-button>
               </div>
