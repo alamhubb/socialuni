@@ -5,7 +5,8 @@ import {Store} from 'vuex'
 export default class SocialuniConfig {
   //app的性别类型，全部性别，还是仅女生可用
   static readonly appGenderType = GenderType.all
-  static readonly authApp = !!process.env.VUE_APP_IS_DATA_CENTER
+  static readonly authApp = true
+  // static readonly authApp = !!process.env.VUE_APP_IS_DATA_CENTER
   static readonly socialuniHttpBaseUrl = 'https://api.socialuni.cn'
   // static readonly devSocialuniHttpBaseUrl = 'https://devapi.socialuni.cn'
   static readonly devSocialuniHttpBaseUrl = 'https://localpc.socialuni.cn:8091'
