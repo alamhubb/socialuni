@@ -40,6 +40,10 @@ public class TencentSmsServe {
         String authCode = AuthCodeUtil.getAuthCode();
         return TencentSmsServe.sendAuthCode(phoneNum, authCode, "30");
     }
+    public static String sendAuthCode(String phoneNum,String sendAuthCode) {
+        String authCode = AuthCodeUtil.getAuthCode();
+        return TencentSmsServe.sendAuthCode(phoneNum, authCode, "30");
+    }
 
     public static String sendAuthCode(String phoneNum, String authCode, String authCodeValidMinute) {
         SmsSingleSender ssender = new SmsSingleSender(appId, appKey);

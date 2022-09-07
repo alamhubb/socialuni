@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import SocialLoginPage from 'socialuni/components/SocialPages/SocialLoginPage.vue'
+import {Component, Vue} from 'vue-property-decorator'
+import SocialLoginPage from 'components/SocialPages/SocialLoginPage.vue'
 
 @Component({
-  components: { SocialLoginPage }
+  components: {SocialLoginPage}
 })
 export default class LoginPage extends Vue {
 }

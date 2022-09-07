@@ -8,27 +8,18 @@ talkTabFollowDefault.name = TalkTabType.follow_name
 talkTabFollowDefault.type = TalkTabType.follow_type
 
 const talkTabHomeDefault = new TalkTabVO()
-talkTabHomeDefault.name = TalkTabType.home_name
+talkTabHomeDefault.name = AppConfig.homeMainTabName || TalkTabType.home_name
 talkTabHomeDefault.type = TalkTabType.home_type
 
 const talkTabCityDefault = new TalkTabVO()
 talkTabCityDefault.name = TalkTabType.city_name
 talkTabCityDefault.type = TalkTabType.city_type
 
-let defaultTabs = []
-if (AppConfig.isSchoolType) {
-  defaultTabs = [
-    new TalkTabVO(TalkTabType.follow_name, TalkTabType.follow_type),
-    new TalkTabVO(TalkTabType.school_name, TalkTabType.school_type),
-    new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type)
-  ]
-} else {
-  defaultTabs = [
-    new TalkTabVO(TalkTabType.follow_name, TalkTabType.follow_type),
-    new TalkTabVO(TalkTabType.home_name, TalkTabType.home_type),
-    new TalkTabVO(TalkTabType.city_name, TalkTabType.city_type)
-  ]
-}
+const defaultTabs = [
+  talkTabFollowDefault,
+  talkTabHomeDefault,
+  talkTabCityDefault
+]
 
 export default class TalkVueUtil {
   static readonly TalkTabsKey: string = 'talkTabs'

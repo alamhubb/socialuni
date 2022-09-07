@@ -1,11 +1,6 @@
-import SocialuniAppType from "@/socialuni/constant/SocialuniAppType";
-
 export default class AppConfig {
-  static readonly appType: string = process.env.VUE_APP_SOCIALUNI_APP_TYPE
-
-  static get isSchoolType() {
-    return this.appType === SocialuniAppType.school
-  }
+  //首页Tab的名称
+  static readonly homeMainTabName: string = process.env.VUE_APP_SOCIALUNI_APP_MAIN_TAB_NAME
 
   static readonly websocketUrl: string = process.env.VUE_APP_WEBSOCKET_URL
 

@@ -16,9 +16,6 @@ import java.io.Serializable;
 @MappedSuperclass
 @Data
 public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private Integer unionId;
 
     public Integer getUnionId() {

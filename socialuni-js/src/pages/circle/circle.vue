@@ -136,10 +136,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 
 
-import { socialCircleStore, socialTagStore } from '@/socialuni/store'
+import {socialCircleStore, socialTagStore} from '@/socialuni/store'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import TagUtil from '@/socialuni/utils/TagUtil'
@@ -153,7 +153,7 @@ import QTabs from '@/qing-ui/components/QTabs/QTabs.vue'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import QTab from '@/qing-ui/components/QTab/QTab.vue'
 import TalkSearchPageType from '@/socialuni/constant/TalkSearchPageType'
-import CircleSearch from '@/socialuni/components/SocialCirclePicker.vue'
+import CircleSearch from '@/components/SocialCirclePicker.vue'
 
 
 @Component({
@@ -194,21 +194,21 @@ export default class CirclePage extends Vue {
 
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
-  onLoad () {
+  onLoad() {
   }
 
-  pageTypeToCircleSearch () {
+  pageTypeToCircleSearch() {
     console.log('触发了')
     console.log(this.pageType)
     this.pageType = TalkSearchPageType.circleSearch
     console.log(this.pageType)
   }
 
-  pageTypeToTalkSearch () {
+  pageTypeToTalkSearch() {
     this.pageType = TalkSearchPageType.talkSearch
   }
 
-  get showTags (): TagVO[] {
+  get showTags(): TagVO[] {
     if (this.searchContent) {
       return this.tags.filter(tag => tag.name.indexOf(this.searchContent) > -1)
     } else {
@@ -217,13 +217,13 @@ export default class CirclePage extends Vue {
   }
 
   @Emit()
-  input () {
+  input() {
     this.clearSearchContent()
     return false
   }
 
   @Emit()
-  change (tag: TagVO) {
+  change(tag: TagVO) {
     this.input()
     const tagIndex: number = this.historyTags.findIndex(item => item.id === tag.id)
     if (tagIndex > -1) {
@@ -236,13 +236,13 @@ export default class CirclePage extends Vue {
   }
 
   @Watch('searchContent')
-  watchSearchContent () {
+  watchSearchContent() {
     if (!this.searchContent) {
       // this.showSearch = false
     }
   }
 
-  switchCircleTabValue (event: { detail: any }) {
+  switchCircleTabValue(event: { detail: any }) {
     const detail: {
       current: number,
       source: number
@@ -250,7 +250,7 @@ export default class CirclePage extends Vue {
     this.circleCurrent = detail.current
   }
 
-  switchTagTabValue (event: { detail: any }) {
+  switchTagTabValue(event: { detail: any }) {
     const detail: {
       current: number,
       source: number
@@ -258,16 +258,16 @@ export default class CirclePage extends Vue {
     this.tagCurrent = detail.current
   }
 
-  showSearchView () {
+  showSearchView() {
     // this.showSearch = true
   }
 
-  clearSearchContent () {
+  clearSearchContent() {
     this.searchContent = ''
   }
 
   @Emit()
-  addTag () {
+  addTag() {
     return ''
   }
 

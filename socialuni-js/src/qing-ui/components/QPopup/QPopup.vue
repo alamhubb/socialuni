@@ -56,7 +56,7 @@ export default class QPopup extends Vue {
   @Prop({default: '关 闭'}) readonly cancelText: boolean
   @Prop({default: '确 定'}) readonly confirmText: boolean
 
-  @Model() value: boolean
+  @Model('input') value: boolean
 
   dialogVisible: boolean = false
 

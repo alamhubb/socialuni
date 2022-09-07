@@ -9,11 +9,11 @@ import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 
 export default class UserAPI {
   static getMineUserInfoAPI() {
-    return request.post('socialuni/user/getMineUser')
+    return request.get('socialuni/user/getMineUser')
   }
 
   static queryUserDetailAPI(userId: string) {
-    return request.post('socialuni/user/queryUserDetail', new UserQueryVO(userId))
+    return request.get('socialuni/user/queryUserDetail', new UserQueryVO(userId))
   }
 
   static editUserAPI(user: UserEditVO) {

@@ -15,13 +15,12 @@ export default class TalkAddVO {
   public lat: number = null
   public circleName: string = null
 
-  constructor (content: string, imgs: ImgAddQO[], district: DistrictVO, visibleType: string, visibleGender: string, circleName: string, tagNames: string[]) {
+  constructor(content: string, imgs: ImgAddQO[], district: DistrictVO, visibleType: string, visibleGender: string, circleName: string, tagNames: string[]) {
     this.content = content
+    this.adCode = LocationUtil.chinaAdCode
     this.visibleType = visibleType
     this.visibleGender = visibleGender
     this.imgs = imgs
-    this.adCode = LocationUtil.chinaAdCode
-    this.adCode = LocationUtil.chinaAdCode
     this.circleName = circleName
     this.tagNames = tagNames
     if (district) {
