@@ -3,7 +3,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Layout from "@/layout/Layout.vue";
 import HomeView from '@/views/home/HomeView.vue'
 import QingchiHomeView from '@/views/qingchi/QingchiHomeView.vue'
-import Introduction from '@/views/guide/introduction/introduction.md'
+import Introduction from '@/views/guide/introduction.md'
 import MoreUsage from '@/views/guide/moreUsage/moreUsage.md'
 import DemoView from '@/views/demo/DemoView.vue'
 import RouterConst from "@/router/RouterConst";
@@ -90,22 +90,15 @@ export const constantRouters: RouteRecordRaw[] = [
         component: Layout,
         name: 'guide',
         meta: {title: '入门'},
-        redirect: '/guide/introduction',
+        redirect: '/guide',
         children: [
             {
-                path: 'introduction',
-                name: 'introduction',
+                path: '',
+                name: 'guide',
                 meta: {title: '入门'},
                 component: Introduction
-            },
-            {
-                path: 'moreUsage',
-                name: 'moreUsage',
-                meta: {title: '更多用法'},
-                component: MoreUsage
             }
         ]
-        // component: import( '@/views/home/HomeView.vue')
     },
     {
         path: '/config',
