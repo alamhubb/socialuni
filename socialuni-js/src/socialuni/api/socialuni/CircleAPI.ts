@@ -20,4 +20,8 @@ export default class CircleAPI {
   static queryCircleTypesAPI() {
     return request.get<CircleTypeRO []>('socialuni/circle/queryCircleTypes')
   }
+
+  static queryCirclesByTypeAPI(circleTypeName: string) {
+    return request.get<SocialCircleRO []>('socialuni/circle/queryCirclesByCircleType/' + circleTypeName)
+  }
 }

@@ -177,15 +177,8 @@
           <div class="q-tag-green q-box-df" @click="openSetSchoolDialog">填写学校名称</div>
         </view>
 
-        <q-popup ref="schoolDialog">
-          <view class="w65vw flex-col py-xl mt-xl h100r">
-            <div class="flex-row">
-              <view class="row-center mt-xl font-bold text-lg w100r">
-                学校名称
-              </view>
-            </div>
-          </view>
-        </q-popup>
+        <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
+
 
         <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
         <!--        看他的性别等级-->
@@ -396,10 +389,14 @@ import SocialGenderTag from '@/components/SocialGenderTag/SocialGenderTag.vue'
 import TencentCosAPI from '@/api/TencentCosAPI'
 import QPcModel from "@/components/QPcModel/QPcModel.vue";
 import QPopup from "@/qing-ui/components/QPopup/QPopup.vue";
+import QSearch from "@/qing-ui/components/QSearch/QSearch.vue";
+import UserSchoolEditDialog from "@/components/SocialUser/UserSchoolEditDialog.vue";
 
 
 @Component({
   components: {
+    UserSchoolEditDialog,
+    QSearch,
     QPopup,
     QPcModel,
     SocialGenderTag,
@@ -415,7 +412,7 @@ export default class UserInfo extends Vue {
   $refs!: {
     reportDialog: any;
     editPopup: any;
-    schoolDialog: QPopup;
+    schoolEditDialog: UserSchoolEditDialog;
   }
 
   @socialUserStore.State('user') mineUser: CenterUserDetailRO
@@ -778,7 +775,7 @@ export default class UserInfo extends Vue {
   }
 
   openSetSchoolDialog() {
-    this.$refs.schoolDialog.open()
+    this.$refs.schoolEditDialog.open()
   }
 
   /*switchOpenContact (openContact) {

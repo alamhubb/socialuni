@@ -11,11 +11,12 @@ public class SocialCircleROFactory {
     public static SocialCircleRO getCircleRO(SocialCircleDO circleDO) {
         SocialCircleRO circleRO = new SocialCircleRO();
         circleRO.setId(circleDO.getId());
-        circleRO.setName(StringUtils.substring(circleDO.getName(), 0, 4));
+        circleRO.setName(circleDO.getName());
+//        circleRO.setName(StringUtils.substring(circleDO.getName(), 0, 4));
         circleRO.setCount(circleDO.getCount());
         circleRO.setTalkCount(circleDO.getTalkCount());
         circleRO.setAvatar(circleDO.getAvatar());
-        circleRO.setDescription( circleDO.getDescription());
+        circleRO.setDescription(circleDO.getDescription());
         return circleRO;
     }
 
