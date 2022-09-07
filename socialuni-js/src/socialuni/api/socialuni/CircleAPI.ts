@@ -14,10 +14,10 @@ export default class CircleAPI {
   }
 
   static queryHotCirclesAPI() {
-    return request.post<SocialCircleRO []>('socialuni/circle/queryHotCircles')
+    return request.get<SocialCircleRO []>('socialuni/circle/queryHotCircles')
   }
 
   static queryCircleTypesAPI() {
-    return request.post<CircleTypeRO []>('socialuni/circle/queryCircleTypes')
+    return request.get<CircleTypeRO []>('socialuni/circle/queryCircleTypes')
   }
 }

@@ -16,7 +16,7 @@ import UserService from "@/socialuni/service/UserService";
 
 const request: HttpRequest = new HttpRequest()
 
-let socialHttpUrl = process.env.VUE_APP_SOCIALUNI_URL
+let socialHttpUrl = process.env.VUE_APP_BASE_URL
 if (!socialHttpUrl) {
   if (SocialSystemInfo.isDevMode) {
     socialHttpUrl = SocialuniConfig.devSocialuniHttpBaseUrl
