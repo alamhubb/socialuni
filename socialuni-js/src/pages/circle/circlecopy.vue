@@ -28,7 +28,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import CircleCreateQO from '@/socialuni/model/community/circle/CircleCreateQO'
-import CircleAPI from '@/socialuni/api/socialuni/CircleAPI'
+import SocialuniCircleAPI from '@/socialuni/api/socialuni/SocialuniCircleAPI'
 import {socialTagStore} from '@/socialuni/store'
 import TagTypeVO from '@/socialuni/model/community/tag/TagTypeVO'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
@@ -96,7 +96,7 @@ export default class CirclePage extends Vue {
   submit() {
     this.$refs.uForm.validate(valid => {
       if (valid) {
-        CircleAPI.createCircleAPI(this.circleForm)
+        SocialuniCircleAPI.createCircleAPI(this.circleForm)
         console.log('验证通过')
       } else {
         console.log('验证失败')

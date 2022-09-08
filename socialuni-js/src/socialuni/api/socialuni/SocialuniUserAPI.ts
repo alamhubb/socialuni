@@ -7,7 +7,7 @@ import UserEditVO from '../../model/user/UserEditVO'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
 
-export default class UserAPI {
+export default class SocialuniUserAPI {
   static getMineUserInfoAPI() {
     return request.get('socialuni/user/getMineUser')
   }

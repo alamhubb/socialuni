@@ -1,6 +1,7 @@
 package com.socialuni.sdk.feignAPI;
 
 
+import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.talk.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
@@ -34,9 +35,9 @@ public interface SocialuniCircleAPI {
     @Operation(summary = "查询所有圈子分类")
     ResultRO<List<CircleTypeRO>> queryCircleTypes();
 
-    @GetMapping("queryCirclesByCircleType/{circleTypeName}")
+    @PostMapping("queryCirclesByCircleType")
     @Operation(summary = "根据圈子分类名称查询分类下的所有圈子")
-    ResultRO<List<SocialCircleRO>> queryCirclesByCircleType(@PathVariable String circleTypeName);
+    ResultRO<List<SocialCircleRO>> queryCirclesByCircleType(@RequestBody @Valid SocialuniCircleQueryByTypeQO socialuniCircleQueryByTypeQO);
 
 }
 

@@ -2,6 +2,7 @@ package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
+import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.talk.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
@@ -44,8 +45,8 @@ public class SocialuniCircleController implements SocialuniCircleAPI {
     }
 
     @Override
-    public ResultRO<List<SocialCircleRO>> queryCirclesByCircleType(String circleTypeName) {
-        List<SocialCircleRO> list = circleQueryDomain.queryCirclesByCircleType(circleTypeName);
+    public ResultRO<List<SocialCircleRO>> queryCirclesByCircleType(SocialuniCircleQueryByTypeQO socialuniCircleQueryByTypeQO) {
+        List<SocialCircleRO> list = circleQueryDomain.queryCirclesByCircleType(socialuniCircleQueryByTypeQO);
         return ResultRO.success(list);
     }
 

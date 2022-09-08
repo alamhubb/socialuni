@@ -171,10 +171,10 @@
           <q-icon class="text-gray mr-xs" icon="mdi-school"/>
           学校名称：
 
-          <div v-if="userProp.schoolName">
+          <div v-if="userProp.schoolName" @click="openSetSchoolDialog">
             {{ userProp.schoolName || '' }}
           </div>
-          <div class="q-tag-green q-box-df" @click="openSetSchoolDialog">填写学校名称</div>
+          <div v-else class="q-tag-green q-box-df" @click="openSetSchoolDialog">填写学校名称</div>
         </view>
 
         <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
@@ -359,7 +359,7 @@ import PageUtil from '../../socialuni/utils/PageUtil'
 import ImgFileVO from '../../socialuni/model/ImgFileVO'
 import ImgUtil from '../../socialuni/utils/ImgUtil'
 import CosUtil from '../../socialuni/utils/CosUtil'
-import UserAPI from '../../socialuni/api/socialuni/UserAPI'
+import SocialuniUserAPI from '../../socialuni/api/socialuni/SocialuniUserAPI'
 import Constants from '../../socialuni/constant/Constant'
 import ReportContentType from '../../socialuni/constant/ReportContentType'
 import ReportType from '../../socialuni/constant/ReportType'
@@ -556,7 +556,7 @@ export default class UserInfo extends Vue {
     if (this.userProp.imgs.length > 1) {
       AlertUtil.warning('请确认是否删除照片？').then(() => {
         const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
-        UserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
+        SocialuniUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
           socialUserModule.setUser(res.data)
         })
       })
@@ -577,7 +577,7 @@ export default class UserInfo extends Vue {
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), UserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)

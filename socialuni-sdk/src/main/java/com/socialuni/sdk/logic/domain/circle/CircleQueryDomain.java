@@ -4,6 +4,7 @@ import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
+import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
@@ -20,7 +21,8 @@ public class CircleQueryDomain {
     @Resource
     SocialCircleRepository socialCircleRepository;
 
-    public List<SocialCircleRO> queryCirclesByCircleType(String circleTypeName) {
+    public List<SocialCircleRO> queryCirclesByCircleType(SocialuniCircleQueryByTypeQO socialuniCircleQueryByTypeQO) {
+        String circleTypeName = socialuniCircleQueryByTypeQO.getCircleTypeName();
         SocialuniTagTypeDO tagTypeDO = tagTypeRepository.findFirstByName(circleTypeName);
         if (tagTypeDO == null) {
             return new ArrayList<>();

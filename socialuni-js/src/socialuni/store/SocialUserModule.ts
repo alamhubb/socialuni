@@ -1,6 +1,6 @@
 import {Action, Module, VuexModule} from 'vuex-class-modules'
 
-import UserAPI from '../api/socialuni/UserAPI'
+import SocialuniUserAPI from '../api/socialuni/SocialuniUserAPI'
 import {socialUserModule} from './index'
 import UserStorageUtil from '../utils/UserStorageUtil'
 import AlertUtil from '../utils/AlertUtil'
@@ -55,7 +55,7 @@ export default class SocialUserModule extends VuexModule {
   @Action
   destroyAccount() {
     return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
-      UserAPI.destroyAccountAPI().then(() => {
+      SocialuniUserAPI.destroyAccountAPI().then(() => {
         UserService.clearUserInfoCom()
         ToastUtil.toast('注销成功')
       })
@@ -67,7 +67,7 @@ export default class SocialUserModule extends VuexModule {
    */
   @Action
   getMineUserAction() {
-    return UserAPI.getMineUserInfoAPI().then((res: any) => {
+    return SocialuniUserAPI.getMineUserInfoAPI().then((res: any) => {
       socialUserModule.setUser(res.data)
     })
   }

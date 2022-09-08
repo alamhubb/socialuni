@@ -6,16 +6,16 @@ import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.VisibleType;
-import com.socialuni.sdk.factory.RO.user.CenterContentUserROFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.factory.RO.user.SocialuniContentUserROFactory;
+import com.socialuni.sdk.logic.service.SocialuniCommentService;
+import com.socialuni.sdk.logic.service.talk.SocialuniTalkService;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
-import com.socialuni.sdk.model.RO.user.CenterContentUserRO;
-import com.socialuni.sdk.model.RO.user.CenterUserRO;
-import com.socialuni.sdk.logic.service.CenterCommentService;
-import com.socialuni.sdk.logic.service.talk.CenterTalkService;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.sdk.model.RO.user.SocialuniContentUserRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
@@ -40,9 +40,9 @@ public class TestController {
     @Resource
     TestUserRepository testUserRepository;
     @Resource
-    CenterTalkService centerTalkService;
+    SocialuniTalkService centerTalkService;
     @Resource
-    CenterCommentService centerCommentService;
+    SocialuniCommentService centerCommentService;
     @Resource
     TestTokenRepository testTokenRepository;
     @Resource
@@ -62,7 +62,7 @@ public class TestController {
         TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
         SocialuniUserDO socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
-        CenterContentUserRO socialContentUserRO = CenterContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
+        SocialuniContentUserRO socialContentUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
 
         Map<String, Object> map = new HashMap<>();
         map.put("user", socialContentUserRO);
@@ -73,7 +73,7 @@ public class TestController {
     @GetMapping("getMineUser")
     public ResultRO<SocialuniUserRO> getMineUser() {
         SocialuniUserDO socialUserDO = SocialuniUserUtil.getMineUserNotNull();
-        CenterContentUserRO socialUserRO = CenterContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
+        SocialuniContentUserRO socialUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);
     }
 

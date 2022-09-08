@@ -2,6 +2,7 @@ package com.socialuni.sdk.logic.domain.user;
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserExpandDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
+import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.check.SocialuniSchoolCheck;
 import com.socialuni.sdk.model.QO.user.SocialUserSchoolNameEditQO;
 import com.socialuni.sdk.dao.repository.UserRepository;
@@ -10,6 +11,7 @@ import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.sdk.utils.SocialuniUserExpandUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
@@ -38,17 +40,20 @@ public class SocialuniEditUserSchoolNameDomain {
 
         socialuniSchoolCheck.checkSchoolName(schoolName);
 
-        Integer userId = SocialuniUserUtil.getMineUserIdNotNull();
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        SocialuniUserExpandDO socialuniUserExpandDO = socialuniUserExpandRepository.findByUserId(userId);
+        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandUtil.getUserExpandDO(mineUserId);
 
         if (socialuniUserExpandDO == null) {
             socialuniUserExpandDO = new SocialuniUserExpandDO();
+            socialuniUserExpandDO.setUserId(mineUserId);
         }
         socialuniUserExpandDO.setSchoolName(schoolName);
 
         socialuniUserExpandRepository.save(socialuniUserExpandDO);
 
-        return null;
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO  = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
+
+        return socialuniMineUserDetailRO;
     }
 }

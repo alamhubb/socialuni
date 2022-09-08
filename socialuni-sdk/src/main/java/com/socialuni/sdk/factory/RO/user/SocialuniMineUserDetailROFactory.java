@@ -26,6 +26,10 @@ public class SocialuniMineUserDetailROFactory {
         SocialuniMineUserDetailRO mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         return mineUserDetailRO;
     }
+    public static SocialuniMineUserDetailRO getMineUserDetail(Integer mineUserId) {
+        SocialuniUserDO mineUser =  SocialuniUserUtil.getUserNotNull(mineUserId);
+        return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
+    }
 
     public static SocialuniMineUserDetailRO getMineUserDetail(SocialuniUserDO mineUser) {
         //用户关注粉丝数

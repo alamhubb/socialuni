@@ -172,7 +172,7 @@ public class ViolationService {
         }
 
         int violationDay = 0;
-        SocialUserViolationDO socialUserViolationDO = socialUserViolationEntity.getOrCreateViolationDO(violationUser.getId());
+        SocialUserViolationDO socialUserViolationDO = socialUserViolationEntity.getOrCreateViolationDO(violationUser.getUnionId());
         //轻微违规只删除内容
         if (ViolateLevel.slight.equals(vioLevel)) {
             vioReason += "删除违规内容";

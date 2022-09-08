@@ -9,7 +9,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import UserAPI from '@/socialuni/api/socialuni/UserAPI'
+import SocialuniUserAPI from '@/socialuni/api/socialuni/SocialuniUserAPI'
 import MsgInput from '@/components/MsgInput.vue'
 import UserInfo from '@/components/SocialUser/UserInfo.vue'
 
@@ -31,7 +31,7 @@ export default class UserDetail extends Vue {
   onLoad(params) {
     const userId = params.userId
     // 这里有问题，有时候直接进入页面没有userId
-    UserAPI.queryUserDetailAPI(userId).then((res: any) => {
+    SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
       this.user = res.data
     })
   }

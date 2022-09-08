@@ -1,11 +1,11 @@
-import { Action, Module, VuexModule } from 'vuex-class-modules'
-import CircleAPI from '../api/socialuni/CircleAPI'
+import {Action, Module, VuexModule} from 'vuex-class-modules'
+import SocialuniCircleAPI from '../api/socialuni/SocialuniCircleAPI'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import TagStorageUtil from '@/socialuni/constant/TagStorageUtil'
 import SocialCircleStorageUtil from '@/socialuni/constant/SocialCircleStorageUtil'
 
-@Module({ generateMutationSetters: true })
+@Module({generateMutationSetters: true})
 export default class SocialCircleModule extends VuexModule {
   circleName: string = null
   circles: SocialCircleRO[] = []
@@ -14,7 +14,7 @@ export default class SocialCircleModule extends VuexModule {
   //最多存4个
   mineHistoryCircleNames: string[] = TagStorageUtil.getTagNames()
 
-  setMineHistoryCircleNames (circleName: string) {
+  setMineHistoryCircleNames(circleName: string) {
     if (circleName) {
       this.mineHistoryCircleNames.unshift(circleName)
       this.mineHistoryCircleNames = this.mineHistoryCircleNames.slice(0, 4)
@@ -22,21 +22,21 @@ export default class SocialCircleModule extends VuexModule {
     }
   }
 
-  setCircleName (circleName: string) {
+  setCircleName(circleName: string) {
     this.circleName = circleName
     this.setMineHistoryCircleNames(circleName)
   }
 
   @Action
-  getHotCirclesAction () {
+  getHotCirclesAction() {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
-    return CircleAPI.queryHotCirclesAPI().then((res) => {
+    return SocialuniCircleAPI.queryHotCirclesAPI().then((res) => {
       this.circles = res.data
     })
   }
 
   //可以加一个使用过的circle列表
-  get mineCirclesTop10 () {
+  get mineCirclesTop10() {
     const showCircleNames: string[] = [null]
     if (this.circleName) {
       showCircleNames.push(this.circleName)
@@ -71,9 +71,9 @@ export default class SocialCircleModule extends VuexModule {
   }*/
 
   @Action
-  getCircleTypesAction () {
+  getCircleTypesAction() {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
-    return CircleAPI.queryCircleTypesAPI().then((res) => {
+    return SocialuniCircleAPI.queryCircleTypesAPI().then((res) => {
       this.circleTypes = res.data
     })
   }
