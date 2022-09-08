@@ -1,4 +1,4 @@
-package com.socialuni.sdk.model;
+package com.socialuni.sdk.model.RO.app;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  * @date 2020-05-23 17:21
  */
 @Data
-public class HomeSwiperVO {
+public class HomeTabRO {
     private String name;
     private String skipUrl;
     private String imgUrl;
@@ -16,8 +16,8 @@ public class HomeSwiperVO {
     private String standUrl;
     private String standType;
 
-    public HomeSwiperVO toVO() {
-        HomeSwiperVO homeSwiperVO = new HomeSwiperVO();
+    public HomeTabRO toVO() {
+        HomeTabRO homeSwiperVO = new HomeTabRO();
         homeSwiperVO.setName(this.name);
         homeSwiperVO.setSkipUrl(this.skipUrl);
         homeSwiperVO.setImgUrl(this.imgUrl);

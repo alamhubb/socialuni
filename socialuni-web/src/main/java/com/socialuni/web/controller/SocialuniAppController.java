@@ -1,6 +1,6 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.model.HomeSwiperVO;
+import com.socialuni.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.sdk.logic.service.SocialuniAppService;
@@ -32,6 +32,12 @@ public class SocialuniAppController {
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         return centerAppService.queryHomeSwipers();
     }
+
+
+    /*@PostMapping("queryHomeTabs")
+    public ResultRO<List<Tabvo>> queryHomeSwipers() {
+        return centerAppService.queryHomeSwipers();
+    }*/
 
     @PostMapping("sendErrorLog")
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {

@@ -1,7 +1,6 @@
 import {Action, Module, VuexModule} from 'vuex-class-modules'
 import HomeSwiperVO from '../model/HomeSwiperVO'
 import ReportAPI from '../api/socialuni/ReportAPI'
-import QingchiAPI from '../api/QingchiAPI'
 import {
   socialAppModule,
   socialChatModule,
@@ -12,7 +11,7 @@ import {
   socialTagModule,
   socialTalkModule
 } from './index'
-import AppConfigAPI from '../api/AppConfigAPI'
+import AppConfigAPI from '../../api/AppConfigAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
 import PlatformUtils from '@/socialuni/utils/PlatformUtils'
 import TokenUtil from '@/socialuni/utils/TokenUtil'
@@ -64,7 +63,7 @@ export default class SocialAppModule extends VuexModule {
   // actions
   @Action
   getHomeSwipersAction() {
-    QingchiAPI.queryHomeSwipersAPI().then(res => {
+    AppConfigAPI.queryHomeSwipersAPI().then(res => {
       this.homeSwipers = res.data
     })
   }

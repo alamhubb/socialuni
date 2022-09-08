@@ -5,7 +5,7 @@ import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.factory.SocialHomeSwiperROFactory;
 import com.socialuni.sdk.dao.DO.HomeSwiperDO;
-import com.socialuni.sdk.model.HomeSwiperVO;
+import com.socialuni.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.sdk.dao.repository.HomeSwiperRepository;

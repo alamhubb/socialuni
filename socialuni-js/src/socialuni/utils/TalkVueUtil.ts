@@ -1,14 +1,13 @@
 import StorageUtil from './StorageUtil'
 import TalkTabVO from '../model/talk/TalkTabVO'
 import TalkTabType from '../constant/TalkTabType'
-import AppConfig from "@/socialuni/config/AppConfig";
 
 const talkTabFollowDefault = new TalkTabVO()
 talkTabFollowDefault.name = TalkTabType.follow_name
 talkTabFollowDefault.type = TalkTabType.follow_type
 
 const talkTabHomeDefault = new TalkTabVO()
-talkTabHomeDefault.name = AppConfig.homeMainTabName || TalkTabType.home_name
+talkTabHomeDefault.name = TalkTabType.home_name
 talkTabHomeDefault.type = TalkTabType.home_type
 
 const talkTabCityDefault = new TalkTabVO()
