@@ -1,6 +1,7 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.model.ReportVO;
+import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ContentType;
@@ -14,8 +15,8 @@ import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.service.BaseModelUtils;
-import com.socialuni.sdk.service.KeywordsService;
+import com.socialuni.sdk.logic.service.BaseModelUtils;
+import com.socialuni.sdk.logic.service.KeywordsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

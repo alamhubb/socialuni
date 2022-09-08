@@ -2,7 +2,7 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.platform.weixin.HttpResult;
-import com.socialuni.sdk.service.comment.IllegalWordService;
+import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 
 import javax.annotation.Resource;

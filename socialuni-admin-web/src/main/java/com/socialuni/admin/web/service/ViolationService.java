@@ -1,5 +1,6 @@
 package com.socialuni.admin.web.service;
 
+import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
@@ -11,13 +12,13 @@ import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateLevel;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.constant.status.UserStatus;
-import com.socialuni.sdk.domain.BaseModelService;
-import com.socialuni.sdk.entity.user.SocialUserViolationEntity;
-import com.socialuni.sdk.repository.community.TalkRepository;
-import com.socialuni.sdk.service.BaseModelUtils;
-import com.socialuni.sdk.service.KeywordsService;
-import com.socialuni.sdk.service.ReportService;
-import com.socialuni.sdk.store.ReportStore;
+import com.socialuni.sdk.logic.domain.BaseModelService;
+import com.socialuni.sdk.logic.entity.user.SocialUserViolationEntity;
+import com.socialuni.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.sdk.logic.service.BaseModelUtils;
+import com.socialuni.sdk.logic.service.KeywordsService;
+import com.socialuni.sdk.logic.service.ReportService;
+import com.socialuni.sdk.dao.store.ReportStore;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

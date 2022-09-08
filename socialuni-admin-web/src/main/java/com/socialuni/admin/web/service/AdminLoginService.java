@@ -3,13 +3,13 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.sdk.config.SocialTokenUtil;
-import com.socialuni.sdk.entity.DevAccountEntity;
+import com.socialuni.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.sdk.model.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.DO.dev.DevTokenDO;
 import com.socialuni.sdk.model.QO.dev.DevAccountQueryQO;
-import com.socialuni.sdk.repository.dev.DevAccountRepository;
-import com.socialuni.sdk.repository.dev.DevTokenRepository;
+import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
+import com.socialuni.sdk.dao.repository.dev.DevTokenRepository;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;

@@ -4,8 +4,8 @@ import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.model.DO.ReportDO;
 import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.repository.CommentRepository;
-import com.socialuni.sdk.service.ReportService;
+import com.socialuni.sdk.dao.repository.CommentRepository;
+import com.socialuni.sdk.logic.service.ReportService;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import org.springframework.stereotype.Component;
 

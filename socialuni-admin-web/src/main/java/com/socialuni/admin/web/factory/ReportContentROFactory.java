@@ -9,7 +9,7 @@ import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.factory.SocialTalkImgROFactory;
 import com.socialuni.sdk.factory.community.SocialTagROFactory;
-import com.socialuni.sdk.store.SocialTagRedis;
+import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.utils.TalkImgDOUtils;
 import com.socialuni.sdk.utils.TalkUtils;

@@ -4,7 +4,7 @@ import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
-import com.socialuni.sdk.serive.CenterUserService;
+import com.socialuni.sdk.logic.service.user.CenterUserService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 

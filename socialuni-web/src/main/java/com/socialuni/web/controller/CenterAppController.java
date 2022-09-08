@@ -3,7 +3,7 @@ package com.socialuni.web.controller;
 import com.socialuni.sdk.model.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.sdk.serive.CenterAppService;
+import com.socialuni.sdk.logic.service.CenterAppService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

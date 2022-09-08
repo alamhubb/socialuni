@@ -1,6 +1,6 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.serive.CenterCosService;
+import com.socialuni.sdk.logic.service.CenterCosService;
 import com.socialuni.sdk.model.RO.app.SocialCosAuthRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;

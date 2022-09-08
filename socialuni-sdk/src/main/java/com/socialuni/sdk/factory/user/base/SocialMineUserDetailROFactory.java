@@ -4,7 +4,7 @@ import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialUserDetailRO;
-import com.socialuni.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import org.apache.commons.lang3.StringUtils;

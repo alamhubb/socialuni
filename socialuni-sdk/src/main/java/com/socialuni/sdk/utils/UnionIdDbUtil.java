@@ -2,9 +2,9 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.repository.UniContentUnionIdRepository;
-import com.socialuni.sdk.repository.UnionIdRepository;
-import com.socialuni.sdk.store.UnionIdStore;
+import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.dao.repository.UnionIdRepository;
+import com.socialuni.sdk.dao.store.UnionIdStore;
 import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;

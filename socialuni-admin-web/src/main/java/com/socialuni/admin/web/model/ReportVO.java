@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.DO.ReportDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import lombok.Data;
 import org.springframework.stereotype.Component;

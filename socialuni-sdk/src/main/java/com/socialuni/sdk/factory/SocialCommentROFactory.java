@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.sdk.dao.CommentDao;
 import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.repository.CommentRepository;
+import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.utils.SystemUtil;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;

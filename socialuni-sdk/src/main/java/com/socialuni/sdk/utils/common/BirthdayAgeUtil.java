@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils.common;
 
-import com.socialuni.sdk.service.content.ModelContentCheck;
+import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.utils.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 

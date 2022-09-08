@@ -7,12 +7,12 @@ import com.socialuni.sdk.model.PushNotifyVO;
 import com.socialuni.sdk.model.PushValue;
 import com.socialuni.sdk.platform.qq.QQConst;
 import com.socialuni.sdk.platform.weixin.WxConst;
-import com.socialuni.sdk.service.BaseModelUtils;
+import com.socialuni.sdk.logic.service.BaseModelUtils;
 import com.socialuni.sdk.model.DO.NotifyDO;
 import com.socialuni.sdk.model.DO.ReportDO;
 import com.socialuni.sdk.model.DO.base.BaseModelDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.repository.ReportRepository;
+import com.socialuni.sdk.dao.repository.ReportRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

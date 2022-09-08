@@ -1,7 +1,7 @@
 package com.socialuni.sdk.factory.user.base;
 
-import com.socialuni.sdk.manage.FollowManage;
-import com.socialuni.sdk.repository.user.identity.SocialUserIdentityAuthRepository;
+import com.socialuni.sdk.logic.manage.FollowManage;
+import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;

@@ -6,7 +6,7 @@ import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.status.UserStatus;
-import com.socialuni.sdk.repository.UserRepository;
+import com.socialuni.sdk.dao.repository.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

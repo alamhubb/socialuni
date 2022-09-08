@@ -1,7 +1,7 @@
 package com.socialuni.web.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniNotifyAPI;
-import com.socialuni.sdk.serive.CenterNotifyService;
+import com.socialuni.sdk.logic.service.CenterNotifyService;
 import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;

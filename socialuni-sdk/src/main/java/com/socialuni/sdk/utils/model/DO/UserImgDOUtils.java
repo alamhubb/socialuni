@@ -2,7 +2,7 @@ package com.socialuni.sdk.utils.model.DO;
 
 import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.repository.UserImgRepository;
+import com.socialuni.sdk.dao.repository.UserImgRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

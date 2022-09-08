@@ -1,8 +1,8 @@
 package com.socialuni.sdk.factory;
 
 
-import com.socialuni.sdk.manage.FollowManage;
-import com.socialuni.sdk.constant.SocialuniCommonConst;
+import com.socialuni.sdk.logic.manage.FollowManage;
+import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.LoadMoreType;
 import com.socialuni.sdk.model.DO.chat.ChatDO;
 import com.socialuni.sdk.model.DO.chat.ChatUserDO;
@@ -11,9 +11,9 @@ import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
 import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.sdk.model.RO.message.message.SocialMessageRO;
-import com.socialuni.sdk.repository.ChatRepository;
-import com.socialuni.sdk.repository.MessageReceiveRepository;
-import com.socialuni.sdk.repository.MessageRepository;
+import com.socialuni.sdk.dao.repository.ChatRepository;
+import com.socialuni.sdk.dao.repository.MessageReceiveRepository;
+import com.socialuni.sdk.dao.repository.MessageRepository;
 import com.socialuni.sdk.utils.SocialUserUtil;
 import com.socialuni.sdk.constant.socialuni.ChatStatus;
 import com.socialuni.sdk.constant.socialuni.ChatType;
@@ -95,7 +95,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chatDO);
         //查询用户这个chatUser下的消息
         //已经确认过chat为可用的
-        List<MessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.enable, SocialuniCommonConst.emptyIds);
+        List<MessageDO> messageDOS = messageRepository.findTop31ByChatIdAndStatusAndIdNotInOrderByIdDesc(chatDO.getId(), ChatStatus.enable, SocialuniConst.emptyIds);
         if (messageDOS.size() > 30) {
             messageDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);
@@ -164,7 +164,7 @@ public class SocialChatROFactory {
         ChatRO chatRO = SocialChatROFactory.getChatRO(chatDO, chatUserDO);
         //系统群聊读取message表
         //查询用户这个chatUser下的消息
-        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop31ByChatUserIdAndChatUserStatusAndStatusAndMessageIdNotInOrderByIdDesc(chatUserDO.getId(), ChatUserStatus.enable, MessageStatus.enable, SocialuniCommonConst.emptyIds);
+        List<MessageReceiveDO> messageReceiveDOS = messageReceiveRepository.findTop31ByChatUserIdAndChatUserStatusAndStatusAndMessageIdNotInOrderByIdDesc(chatUserDO.getId(), ChatUserStatus.enable, MessageStatus.enable, SocialuniConst.emptyIds);
         if (messageReceiveDOS.size() > 30) {
             messageReceiveDOS.subList(1, 31);
             chatRO.setLoadMore(LoadMoreType.more);

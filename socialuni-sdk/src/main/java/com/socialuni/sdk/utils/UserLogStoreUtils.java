@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.model.DO.UserLogDO;
-import com.socialuni.sdk.repository.log.UserLogRepository;
+import com.socialuni.sdk.dao.repository.log.UserLogRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

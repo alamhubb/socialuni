@@ -4,7 +4,7 @@ import com.socialuni.sdk.feignAPI.SocialuniCommentAPI;
 import com.socialuni.sdk.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
-import com.socialuni.sdk.serive.CenterCommentService;
+import com.socialuni.sdk.logic.service.CenterCommentService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 

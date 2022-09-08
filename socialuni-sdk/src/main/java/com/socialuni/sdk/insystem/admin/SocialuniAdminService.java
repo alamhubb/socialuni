@@ -1,20 +1,13 @@
 package com.socialuni.sdk.insystem.admin;
 
-import com.socialuni.sdk.model.QO.dev.SyncProdDevAccountQO;
-import com.socialuni.sdk.repository.dev.DevAccountProviderRepository;
-import com.socialuni.sdk.repository.dev.DevAccountRepository;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
-import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.manage.SocialTagManage;
-import com.socialuni.sdk.repository.community.TagRepository;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.sdk.dao.repository.dev.DevAccountProviderRepository;
+import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
+import com.socialuni.sdk.logic.manage.SocialTagManage;
+import com.socialuni.sdk.dao.repository.community.TagRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service

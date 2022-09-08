@@ -1,7 +1,7 @@
 package com.socialuni.web.controller;
 
 
-import com.socialuni.sdk.serive.CenterOAuthService;
+import com.socialuni.sdk.logic.service.CenterOAuthService;
 import com.socialuni.sdk.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.sdk.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.sdk.model.RO.SocialOAuthUserRO;

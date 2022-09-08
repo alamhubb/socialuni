@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.DO.user.SocialUserDO;
 import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import com.socialuni.sdk.model.RO.user.base.SocialUserFollowDetailRO;
 import com.socialuni.sdk.factory.ListConvertUtil;
-import com.socialuni.sdk.redis.UserFansDetailRedis;
+import com.socialuni.sdk.dao.redis.UserFansDetailRedis;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

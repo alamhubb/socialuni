@@ -1,7 +1,7 @@
 package com.socialuni.web.controller;
 
 import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.sdk.serive.CenterPhoneService;
+import com.socialuni.sdk.logic.service.phone.CenterPhoneService;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
