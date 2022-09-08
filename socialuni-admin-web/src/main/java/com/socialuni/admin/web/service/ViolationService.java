@@ -4,10 +4,10 @@ import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.user.SocialUserViolationDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserViolationDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateLevel;
 import com.socialuni.sdk.constant.ViolateType;
@@ -19,7 +19,7 @@ import com.socialuni.sdk.logic.service.BaseModelUtils;
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.ReportService;
 import com.socialuni.sdk.dao.store.ReportStore;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +70,7 @@ public class ViolationService {
         baseModelService.save(modelDO);
 
         //user改为正常
-        SocialUserDO violationUser = SocialUserUtil.getUserNotNull(modelDO.getUserId());
+        SocialuniUserDO violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
         String userStatus = violationUser.getStatus();
         //存在用户发表其他内容，被封的情况
         if (ReportStatus.auditStatus.contains(userStatus)) {
@@ -94,7 +94,7 @@ public class ViolationService {
 
     public void violateService(BaseModelDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
-        SocialUserDO violationUser = modelContentViolation(modelDO, violateType);
+        SocialuniUserDO violationUser = modelContentViolation(modelDO, violateType);
 
         //修改举报内容
         reportDO.setAuditType(violateType);
@@ -134,7 +134,7 @@ public class ViolationService {
         reportService.reportPass(reportDO, true);
     }
 
-    public SocialUserDO modelContentViolation(BaseModelDO modelDO, String violateType) {
+    public SocialuniUserDO modelContentViolation(BaseModelDO modelDO, String violateType) {
         Date curDate = new Date();
         //修改内容，需要修改状态、删除原因、更新时间
         modelDO.setStatus(ContentStatus.violation);
@@ -146,7 +146,7 @@ public class ViolationService {
         //处理举报
         //封禁用户
         //如果已经是违规，不需要改为删除
-        SocialUserDO violationUser = SocialUserUtil.getUserNotNull(modelDO.getUserId());
+        SocialuniUserDO violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
         String vioReason = modelDO.getDeleteReason() + ",";
         //不为官方系统用户才可封禁
         if (!UserType.system.equals(violationUser.getType())) {
@@ -158,7 +158,7 @@ public class ViolationService {
     }
 
     //更改user状态
-    public void userViolationHandler(SocialUserDO violationUser, String vioReason, Date curDate, String violateType) {
+    public void userViolationHandler(SocialuniUserDO violationUser, String vioReason, Date curDate, String violateType) {
         String vioLevel;
         //轻微
         if (ViolateType.slightViolation.equals(violateType)) {

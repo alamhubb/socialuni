@@ -2,16 +2,16 @@ package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.sdk.feignAPI.SocialuniThirdUserAPI;
-import com.socialuni.sdk.model.DO.UniOutRegisterUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.UniOutRegisterUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.dao.store.SocialUserAccountStore;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
@@ -55,7 +55,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         //还是要加一个联盟账户渠道
 
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         if (!postUrl.contains("thirdUser/registryUser")) {
             if (mineUser != null) {
@@ -71,7 +71,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 //有没有可能你自己这边记录了，但是那边给你删掉了
                 //未在中心注册，则需要查询一下，未注册注册，如果直接注册呢，应该也可以，查注一体就行了。
                 if (uniOutRegisterUserDO == null) {
-                    String phoneNum = SocialUserUtil.getUserPhoneNum(mineUserUnionId);
+                    String phoneNum = SocialuniUserUtil.getUserPhoneNum(mineUserUnionId);
                     //生成登录类
                     SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
                     socialProviderLoginQO.setNickName(mineUser.getNickname());
@@ -98,9 +98,9 @@ public class FeignInterceptor implements RequestInterceptor {
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
                         put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
                     }};
-                    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
-                    SocialLoginRO<CenterMineUserDetailRO> loginRO = resultRO.getData();
-                    CenterMineUserDetailRO centerMineUserDetailRO = loginRO.getUser();
+                    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
+                    SocialLoginRO<SocialuniMineUserDetailRO> loginRO = resultRO.getData();
+                    SocialuniMineUserDetailRO centerMineUserDetailRO = loginRO.getUser();
 
                     UnionIdDbUtil.updateUidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
                     uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);

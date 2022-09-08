@@ -2,8 +2,8 @@ package com.socialuni.sdk.logic.domain.user;
 
 import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.factory.user.img.UserImgDOFactory;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserImgAddQO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.dao.repository.UserImgRepository;
@@ -21,7 +21,7 @@ public class SocialAddUserImgDomain {
     @Resource
     UserRepository userRepository;
 
-    public SocialMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, SocialUserDO mineUser) {
+    public SocialMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
 
         SocialUserImgDO userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
         userRepository.save(mineUser);

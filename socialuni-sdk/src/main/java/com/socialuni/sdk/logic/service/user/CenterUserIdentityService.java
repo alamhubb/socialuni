@@ -5,15 +5,15 @@ import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;
-import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
 import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.utils.DateUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
@@ -81,7 +81,7 @@ public class CenterUserIdentityService {
         if (resScore == 0) {
             throw new SocialBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }
-        Integer userId = SocialUserUtil.getMineUserIdNotNull();
+        Integer userId = SocialuniUserUtil.getMineUserIdNotNull();
         SocialUserIdentityAuthImgDO socialUserIdentityImgDO = new SocialUserIdentityAuthImgDO();
         socialUserIdentityImgDO.setUserId(userId);
         socialUserIdentityImgDO.setUserIdImgSrc(socialUserIdentityAuthQO.getIdImgUrl());

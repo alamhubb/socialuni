@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.service;
 
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
+import com.socialuni.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
 import lombok.Data;
 
 @Data

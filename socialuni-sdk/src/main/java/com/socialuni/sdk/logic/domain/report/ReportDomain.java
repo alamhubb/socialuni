@@ -7,20 +7,20 @@ import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.logic.domain.BaseModelService;
 import com.socialuni.sdk.factory.ReportFactory;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.ReportDetailDO;
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;
 import com.socialuni.sdk.utils.QQUtil;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
@@ -168,7 +168,7 @@ public class ReportDomain {
 
 
             //用户举报其他用户的逻辑
-            SocialUserDO receiveUser = SocialUserUtil.getUserNotNull(receiveUserId);
+            SocialuniUserDO receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserId);
 
 
             Integer modelReportNum = modelDO.getReportNum() + 1;

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.factory;
 
 
-import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.RO.user.UserImgRO;
 import com.socialuni.sdk.config.SocialAppConfig;
 

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.manage;
 
-import com.socialuni.sdk.model.DO.user.SocialUserFansDetailDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserFansDetailDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.redis.UserFansDetailRedis;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class SocialUserFansDetailManage {
     @Resource
     private UserFansDetailRedis userFansDetailRedis;
 
-    public SocialUserFansDetailDO getOrCreateUserFollowDetail(SocialUserDO mineUser) {
+    public SocialUserFansDetailDO getOrCreateUserFollowDetail(SocialuniUserDO mineUser) {
         SocialUserFansDetailDO socialUserFansDetailDO = userFansDetailRedis.findUserFansDetailByUserId(mineUser.getUnionId());
         if (socialUserFansDetailDO == null) {
             socialUserFansDetailDO = new SocialUserFansDetailDO(mineUser);
@@ -22,7 +22,7 @@ public class SocialUserFansDetailManage {
         return socialUserFansDetailDO;
     }
 
-    public SocialUserFansDetailDO createUserDetailFollow(SocialUserDO mineUser) {
+    public SocialUserFansDetailDO createUserDetailFollow(SocialuniUserDO mineUser) {
         SocialUserFansDetailDO socialUserFansDetailDO = new SocialUserFansDetailDO(mineUser);
         socialUserFansDetailDO = userFansDetailRedis.save(socialUserFansDetailDO);
         return socialUserFansDetailDO;

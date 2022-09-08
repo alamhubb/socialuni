@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.dao.repository.UnionIdRepository;
 import com.socialuni.sdk.dao.store.UnionIdStore;
@@ -156,7 +156,7 @@ public class UnionIdDbUtil {
 
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
-        SocialUserDO user = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO user = SocialuniUserUtil.getMineUserAllowNull();
         return getContentIdsByUnionIds(contentUnionIds, ContentType.talk);
     }
 

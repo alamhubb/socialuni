@@ -4,12 +4,12 @@ import com.socialuni.admin.web.model.RO.UserIdentityAuditRO;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
-import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.sdk.model.DO.user.SocialUserIdentityAuthImgDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +41,7 @@ public class UserIdentityAuditController {
         for (SocialUserIdentityAuthDO socialUserIdentityAuthDO : list) {
             SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO = socialUserIdentityAuthImgRepository.findFirstById(socialUserIdentityAuthDO.getUserIdentityImgId());
 
-            SocialUserDO userDO = SocialUserUtil.getUserNotNull(socialUserIdentityAuthDO.getUserId());
+            SocialuniUserDO userDO = SocialuniUserUtil.getUserNotNull(socialUserIdentityAuthDO.getUserId());
 
             UserIdentityAuditRO userIdentityAuditRO = new UserIdentityAuditRO(socialUserIdentityAuthDO, socialUserIdentityAuthImgDO, userDO);
             list1.add(userIdentityAuditRO);

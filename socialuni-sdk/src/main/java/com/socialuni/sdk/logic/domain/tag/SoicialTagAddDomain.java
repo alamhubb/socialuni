@@ -6,8 +6,8 @@ import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.config.SocialAppEnv;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
@@ -31,7 +31,7 @@ public class SoicialTagAddDomain {
     @Resource
     private SocialTagManage socialTagManage;
 
-    public TagRO addTag(SocialUserDO mineUser, TagAddQO tagAddVO) {
+    public TagRO addTag(SocialuniUserDO mineUser, TagAddQO tagAddVO) {
         if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
         }

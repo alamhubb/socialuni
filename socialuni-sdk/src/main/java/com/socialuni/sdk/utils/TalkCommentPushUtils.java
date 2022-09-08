@@ -8,10 +8,10 @@ import com.socialuni.sdk.model.PushNotifyVO;
 import com.socialuni.sdk.model.PushValue;
 import com.socialuni.sdk.platform.qq.QQConst;
 import com.socialuni.sdk.platform.weixin.WxConst;
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import java.util.HashMap;
  */
 public class TalkCommentPushUtils {
     //动态评论通知
-    public static PushMsgDTO getTalkPushDTO(String provider, NotifyDO notify, SocialUserDO requestUser) {
+    public static PushMsgDTO getTalkPushDTO(String provider, NotifyDO notify, SocialuniUserDO requestUser) {
         SocialCommentDO comment = CommentUtils.getNotNull(notify.getCommentId());
         SocialTalkDO talk = TalkUtils.getNotNull(comment.getTalkId());
 

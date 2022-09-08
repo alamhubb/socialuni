@@ -1,7 +1,7 @@
 package com.socialuni.sdk.factory.RO.comment;
 
 import com.socialuni.sdk.factory.RO.user.CenterUserROFactory;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.community.comment.SocialReplyCommentRO;
 import com.socialuni.sdk.model.RO.talk.CenterReplyCommentRO;
 import com.socialuni.sdk.model.RO.user.CenterUserRO;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class CenterReplyCommentROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static CenterReplyCommentRO getReplyCommentRO(SocialReplyCommentRO commentRO, SocialUserDO mineUser) {
+    public static CenterReplyCommentRO getReplyCommentRO(SocialReplyCommentRO commentRO, SocialuniUserDO mineUser) {
         String id = UnionIdDbUtil.getUidByUnionIdNotNull(commentRO.getId());
         CenterUserRO userRO = CenterUserROFactory.getUserRO(commentRO.getUser(), mineUser);
 

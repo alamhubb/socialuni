@@ -7,7 +7,7 @@ import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.VisibleType;
 import com.socialuni.sdk.factory.user.base.SocialContentUserROFactory;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
@@ -16,7 +16,7 @@ import com.socialuni.sdk.model.RO.user.base.SocialContentUserRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import com.socialuni.sdk.logic.service.CenterCommentService;
 import com.socialuni.sdk.logic.service.talk.CenterTalkService;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.config.SocialTokenUtil;
@@ -61,7 +61,7 @@ public class TestController {
 
         TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
-        SocialUserDO socialUserDO = SocialUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
+        SocialuniUserDO socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
         SocialContentUserRO socialContentUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
 
         Map<String, Object> map = new HashMap<>();
@@ -72,7 +72,7 @@ public class TestController {
 
     @GetMapping("getMineUser")
     public ResultRO<SocialUserRO> getMineUser() {
-        SocialUserDO socialUserDO = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO socialUserDO = SocialuniUserUtil.getMineUserNotNull();
         SocialContentUserRO socialUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);
     }

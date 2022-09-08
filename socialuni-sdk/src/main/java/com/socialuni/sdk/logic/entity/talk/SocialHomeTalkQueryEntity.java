@@ -4,8 +4,8 @@ import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.SocialHomeTalkQueryStore;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -27,7 +27,7 @@ public class SocialHomeTalkQueryEntity {
     }
 
     //查询非关注tab的动态列表
-    public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO mineUser) {
+    public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialuniUserDO mineUser) {
         Integer curPage = queryBO.getPageNum();
         List<SocialTalkDO> stickTalks = new ArrayList<>();
         if (TalkTabType.home_type.equals(queryBO.getHomeTabType())) {

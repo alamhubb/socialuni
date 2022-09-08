@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.model.DO.UnionIdDO;
+import com.socialuni.sdk.dao.DO.UnionIdDO;
 import com.socialuni.sdk.dao.repository.UnionIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;

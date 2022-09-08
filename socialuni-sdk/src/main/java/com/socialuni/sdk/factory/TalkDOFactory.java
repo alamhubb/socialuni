@@ -1,13 +1,13 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.DO.DistrictDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.DistrictDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.platform.MapUtil;
 import com.socialuni.sdk.utils.ImgCheckUtil;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 public class TalkDOFactory {
-    public static SocialTalkDO newTalkDO(SocialUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
+    public static SocialTalkDO newTalkDO(SocialuniUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
         SocialTalkDO talkDO = new SocialTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
 
         //设置社交联盟唯一id
@@ -61,7 +61,7 @@ public class TalkDOFactory {
             }
         }
 
-        Boolean userIdentityAuth = SocialUserUtil.getUserIsIdentityAuth(user.getUnionId());
+        Boolean userIdentityAuth = SocialuniUserUtil.getUserIsIdentityAuth(user.getUnionId());
         //如果存在人物图像，则不可发表
         if (talkDO.getHasPeopleImg()) {
             if (!userIdentityAuth) {
@@ -71,7 +71,7 @@ public class TalkDOFactory {
 
 
         //是否已经认证
-        talkDO.setIdentityAuth(SocialUserUtil.getUserIsIdentityAuth(user.getUnionId()));
+        talkDO.setIdentityAuth(SocialuniUserUtil.getUserIsIdentityAuth(user.getUnionId()));
 
         Integer talkUnionId = UnionIdDbUtil.createTalkUnionId();
         talkDO.setUnionId(talkUnionId);

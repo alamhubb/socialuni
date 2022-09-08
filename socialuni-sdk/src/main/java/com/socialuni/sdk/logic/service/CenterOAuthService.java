@@ -4,17 +4,17 @@ import com.socialuni.sdk.constant.AuthType;
 import com.socialuni.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.sdk.factory.RO.user.SocialOAuthUserROFactory;
 import com.socialuni.sdk.logic.manage.DevAccountManage;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
-import com.socialuni.sdk.model.DO.dev.ThirdUserAuthDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserAuthDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.sdk.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.sdk.model.RO.SocialOAuthUserRO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;
@@ -33,13 +33,13 @@ public class CenterOAuthService {
     private ThirdUserAuthRepository thirdUserAuthRepository;
 
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         Integer devId = DevAccountUtils.getDevIdNotNull();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
             return new ResultRO<>();
         }
-        String phoneNum = SocialUserUtil.getUserPhoneNum(mineUser.getUnionId());
+        String phoneNum = SocialuniUserUtil.getUserPhoneNum(mineUser.getUnionId());
         return ResultRO.success(new OAuthGetUserPhoneNumRO(phoneNum));
     }
 
@@ -56,16 +56,16 @@ public class CenterOAuthService {
     public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(OAuthUserInfoQO authVO, String authType) {
         //获取devaccount
         //获取绑定的手机号，根据手机号，获取user。然后返回这个user的信息，并且返回对应这个应用的userid
-        SocialUserDO userDO = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO userDO = SocialuniUserUtil.getMineUserNotNull();
         DevAccountDO devAccountDO = devAccountManage.checkApplyAuthQO(authVO);
         return oAuthUserInfo(devAccountDO, userDO, authType);
     }
 
     //授权获取用户信息，根据appId知道授权给哪个商户的
-    public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(DevAccountDO devAccountDO, SocialUserDO mineUser, String authType) {
+    public ResultRO<SocialLoginRO<SocialOAuthUserRO>> oAuthUserInfo(DevAccountDO devAccountDO, SocialuniUserDO mineUser, String authType) {
 
 
-        SocialLoginRO<CenterMineUserDetailRO> loginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, authType, devAccountDO);
+        SocialLoginRO<SocialuniMineUserDetailRO> loginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, authType, devAccountDO);
 
         SocialOAuthUserRO socialOAuthUserRO = SocialOAuthUserROFactory.getSocialOAuthUserRO(loginRO.getUser());
 

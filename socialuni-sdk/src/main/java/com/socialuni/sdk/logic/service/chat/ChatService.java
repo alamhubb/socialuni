@@ -3,9 +3,9 @@ package com.socialuni.sdk.logic.service.chat;
 
 import com.socialuni.sdk.factory.SocialChatROFactory;
 import com.socialuni.sdk.logic.service.CreateSingleChatResult;
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.socialuni.ChatStatus;
 import com.socialuni.sdk.constant.socialuni.ChatType;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
@@ -31,7 +31,7 @@ public class ChatService {
 
     //获取私聊的chat
     //查看对方主页时
-    public ChatRO seeUserDetailGetOrCreateChat(SocialUserDO user, Integer receiveUserId) {
+    public ChatRO seeUserDetailGetOrCreateChat(SocialuniUserDO user, Integer receiveUserId) {
         Optional<ChatUserDO> chatUserDOOptional = chatUserRepository.findFirstByChatStatusAndUserIdAndReceiveUserId(ChatStatus.enable, user.getUnionId(), receiveUserId);
         ChatUserDO chatUserDO;
         //如果创建过，则获取。返回
@@ -54,7 +54,7 @@ public class ChatService {
     //登录情况下查询用户有权限的chatuser
     //详情页面，需要知道是否关注你了
 
-    public CreateSingleChatResult seeUserDetailCreateChat(SocialUserDO user, Integer receiveUserId) {
+    public CreateSingleChatResult seeUserDetailCreateChat(SocialuniUserDO user, Integer receiveUserId) {
         ChatDO chat = new ChatDO(ChatType.single);
 
         //生成chat

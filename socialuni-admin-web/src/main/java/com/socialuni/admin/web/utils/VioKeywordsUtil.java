@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.utils;
 
 
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 
 import java.util.*;
 

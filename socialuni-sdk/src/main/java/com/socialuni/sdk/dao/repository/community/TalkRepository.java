@@ -2,7 +2,7 @@ package com.socialuni.sdk.dao.repository.community;
 
 
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -8,10 +8,10 @@ import com.socialuni.sdk.model.PushValue;
 import com.socialuni.sdk.platform.qq.QQConst;
 import com.socialuni.sdk.platform.weixin.WxConst;
 import com.socialuni.sdk.logic.service.BaseModelUtils;
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.ReportRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class ViolationPushUtils {
 
         BaseModelDO baseModelDO = BaseModelUtils.getModelByReport(reportDO);
 
-        SocialUserDO vioUser = SocialUserUtil.getUserNotNull(baseModelDO.getUserId());
+        SocialuniUserDO vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

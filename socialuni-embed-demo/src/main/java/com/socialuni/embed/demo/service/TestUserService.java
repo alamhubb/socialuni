@@ -8,8 +8,8 @@ import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.sdk.logic.entity.user.SocialUserEntity;
 import com.socialuni.sdk.logic.manage.TokenManage;
-import com.socialuni.sdk.model.DO.user.SocialTokenDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class TestUserService {
             UserDO userDO = testUserRepository.findOneById(tokenDO.getUserId());
 
             SocialProviderLoginQO loginQO = new SocialProviderLoginQO(userDO.getName());
-            SocialUserDO socialUserDO = socialUserEntity.createUserAndDetail(loginQO);
+            SocialuniUserDO socialUserDO = socialUserEntity.createUserAndDetail(loginQO);
             //创建联盟token
             SocialTokenDO socialUserTokenDO = tokenManage.create(socialUserDO.getUnionId());
             //关联本系统和联盟的token

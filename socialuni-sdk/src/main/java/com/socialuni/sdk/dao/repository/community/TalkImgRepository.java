@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository.community;
 
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

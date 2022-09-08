@@ -1,8 +1,8 @@
 package com.socialuni.sdk.model.RO.match;
 
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.RO.UserImgVO;
 import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
@@ -48,7 +48,7 @@ public class MatchUserVO {
     public MatchUserVO() {
     }
 
-    public MatchUserVO(SocialUserDO user, SocialUserDO sessionUser) {
+    public MatchUserVO(SocialuniUserDO user, SocialuniUserDO sessionUser) {
         if (user != null) {
             this.id = UnionIdDbUtil.getUidByUnionIdNotNull(user.getUnionId());
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
@@ -69,7 +69,7 @@ public class MatchUserVO {
         }
     }
 
-    public static List<MatchUserVO> userDOToVOS(List<SocialUserDO> userDOs, SocialUserDO user) {
+    public static List<MatchUserVO> userDOToVOS(List<SocialuniUserDO> userDOs, SocialuniUserDO user) {
         return userDOs.stream().map(item -> new MatchUserVO(item, user)).collect(Collectors.toList());
     }
 

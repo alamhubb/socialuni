@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.service;
 
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ConfigValueType;
-import com.socialuni.sdk.model.DO.AppConfigDO;
+import com.socialuni.sdk.dao.DO.AppConfigDO;
 import com.socialuni.sdk.dao.repository.AppConfigRepository;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import lombok.extern.slf4j.Slf4j;

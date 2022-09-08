@@ -1,9 +1,9 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.constant.ReportSourceType;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.logic.service.ReportService;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;

@@ -2,12 +2,12 @@ package com.socialuni.admin.web.model;
 
 
 import com.socialuni.admin.web.factory.ReportContentROFactory;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.dao.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -59,7 +59,7 @@ public class ReportVO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialUserUtil.getUserNotNull(reportDO.getReceiveUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportDO.getReceiveUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -72,7 +72,7 @@ public class ReportVO {
 
     public ReportVO(BaseModelDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getReportContentType(), modelDO.getId());
-        this.user = new ReportUserVO(SocialUserUtil.getUserNotNull(modelDO.getUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
         this.violateType = modelDO.getDeleteReason();
 //        this.checked = true;

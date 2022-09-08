@@ -4,13 +4,13 @@ package com.socialuni.sdk.logic.service;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.factory.SocialHomeSwiperROFactory;
-import com.socialuni.sdk.model.DO.HomeSwiperDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.HomeSwiperDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.sdk.dao.repository.HomeSwiperRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class SocialAppService {
     }
 
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         return socialFrontLogDomain.sendErrorLog(frontErrorLogVO);
     }
 }

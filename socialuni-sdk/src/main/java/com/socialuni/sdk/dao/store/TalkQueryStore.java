@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.sdk.dao.redis.FollowRedis;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
@@ -36,7 +36,7 @@ public class TalkQueryStore {
         return this.queryTalksByIds(ids);
     }
 
-    public List<SocialTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialUserDO mineUser) {
+    public List<SocialTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         List<Integer> talkIds = queryQO.getTalkIds();
         Integer userId = queryQO.getUserId();
 

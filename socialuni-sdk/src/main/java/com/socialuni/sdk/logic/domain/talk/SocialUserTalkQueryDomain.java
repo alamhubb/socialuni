@@ -3,8 +3,8 @@ package com.socialuni.sdk.logic.domain.talk;
 import com.socialuni.sdk.factory.ListConvertUtil;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.dao.store.TalkQueryStore;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class SocialUserTalkQueryDomain {
     @Resource
     TalkQueryStore talkQueryStore;
 
-    public List<SocialTalkRO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialUserDO mineUser) {
+    public List<SocialTalkRO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         //获取自己的user
         List<SocialTalkDO> talks = talkQueryStore.queryUserTalks(queryQO, mineUser);
 

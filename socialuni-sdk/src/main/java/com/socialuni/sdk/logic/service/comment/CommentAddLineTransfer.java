@@ -1,8 +1,8 @@
 package com.socialuni.sdk.logic.service.comment;
 
 
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

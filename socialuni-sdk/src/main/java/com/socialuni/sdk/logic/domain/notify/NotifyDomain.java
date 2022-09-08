@@ -8,13 +8,13 @@ import com.socialuni.sdk.model.NotifyVO;
 import com.socialuni.sdk.model.PushMsgDTO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.utils.*;
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserAccountDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserAccountDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
@@ -48,7 +48,7 @@ public class NotifyDomain {
     @Resource
     private NotifyRepository notifyRepository;
 
-    public List<NotifyDO> saveCreateCommentNotifies(SocialCommentDO commentDO, SocialTalkDO talkDO, SocialCommentDO parentCommentDO, SocialCommentDO replyCommentDO, SocialUserDO requestUser) {
+    public List<NotifyDO> saveCreateCommentNotifies(SocialCommentDO commentDO, SocialTalkDO talkDO, SocialCommentDO parentCommentDO, SocialCommentDO replyCommentDO, SocialuniUserDO requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
         Integer commentId = commentDO.getUnionId();
@@ -131,14 +131,14 @@ public class NotifyDomain {
     @Resource
     private UserRepository userRepository;
 
-    public void sendNotifies(List<NotifyDO> notifies, SocialUserDO requestUser) {
+    public void sendNotifies(List<NotifyDO> notifies, SocialuniUserDO requestUser) {
         for (NotifyDO notify : notifies) {
             sendNotify(notify, requestUser);
         }
     }
 
     //发送通知
-    public void sendNotify(NotifyDO notify, SocialUserDO requestUser) throws SocialException {
+    public void sendNotify(NotifyDO notify, SocialuniUserDO requestUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getReceiveUserId();

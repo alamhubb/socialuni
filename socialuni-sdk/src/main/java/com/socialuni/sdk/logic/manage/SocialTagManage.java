@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.manage;
 
-import com.socialuni.sdk.model.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.factory.community.SocialTagDOFactory;

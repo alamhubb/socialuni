@@ -1,12 +1,12 @@
 package com.socialuni.sdk.factory.user.base;
 
-import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialUserDetailRO;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +22,12 @@ public class SocialMineUserDetailROFactory {
     }
 
     public static SocialMineUserDetailRO getMineUserDetail() {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         SocialMineUserDetailRO mineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
         return mineUserDetailRO;
     }
 
-    public static SocialMineUserDetailRO getMineUserDetail(SocialUserDO mineUser) {
+    public static SocialMineUserDetailRO getMineUserDetail(SocialuniUserDO mineUser) {
         //用户关注粉丝数
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getUnionId());
 
@@ -35,7 +35,7 @@ public class SocialMineUserDetailROFactory {
     }
 
 
-    public static SocialMineUserDetailRO getMineUserDetail(SocialUserDO mineUser, SocialUserPhoneDO socialUserPhoneDO) {
+    public static SocialMineUserDetailRO getMineUserDetail(SocialuniUserDO mineUser, SocialUserPhoneDO socialUserPhoneDO) {
         //user基础信息
         SocialUserDetailRO socialUserDetailRO = SocialUserDetailROFactory.getUserDetailRO(mineUser, mineUser);
 

@@ -7,7 +7,7 @@ import com.socialuni.sdk.model.RO.talk.CenterTalkImgRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.factory.ListConvertUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import lombok.Data;
@@ -25,7 +25,7 @@ import java.util.List;
 public class CenterTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static CenterTalkRO getTalkRO(SocialTalkRO talkRO, SocialUserDO mineUser) {
+    public static CenterTalkRO getTalkRO(SocialTalkRO talkRO, SocialuniUserDO mineUser) {
         String talkId = UnionIdDbUtil.getUidByUnionIdNotNull(talkRO.getId());
 
         CenterContentUserRO centerTalkUserRO = CenterContentUserROFactory.getContentUserRO(talkRO.getUser(), mineUser);
@@ -67,7 +67,7 @@ public class CenterTalkROFactory {
         return centerTalkRO;
     }
 
-    public static List<CenterTalkRO> getTalkROS(List<SocialTalkRO> ROS, SocialUserDO mineUser) {
+    public static List<CenterTalkRO> getTalkROS(List<SocialTalkRO> ROS, SocialuniUserDO mineUser) {
         return ListConvertUtil.toList(CenterTalkROFactory::getTalkRO, ROS, mineUser);
     }
 

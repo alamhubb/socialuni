@@ -4,9 +4,9 @@ import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.sdk.constant.socialuni.ContentType;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 
 @Data
@@ -51,7 +51,7 @@ public class TencentCosAuditRecordRO {
         if (recordDO.getContentType().equals(ContentType.talk)) {
             this.talk = ReportContentROFactory.getReportContentVO(ContentType.talk, recordDO.getContentId());
         }
-        SocialUserDO userDO = SocialUserUtil.getAllowNull(recordDO.getUserId());
+        SocialuniUserDO userDO = SocialuniUserUtil.getAllowNull(recordDO.getUserId());
         if (userDO != null) {
             this.setAvatar(userDO.getAvatar());
             this.setNickname(userDO.getNickname());

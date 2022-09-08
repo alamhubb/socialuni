@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.exception.SocialSystemException;

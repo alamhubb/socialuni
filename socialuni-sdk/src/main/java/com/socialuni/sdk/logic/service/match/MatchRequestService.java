@@ -1,10 +1,10 @@
 package com.socialuni.sdk.logic.service.match;
 
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.sdk.dao.DO.message.MessageDO;
+import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.socialuni.ChatType;
 import com.socialuni.sdk.constant.socialuni.MatchType;
 import com.socialuni.sdk.constant.socialuni.MessageType;
@@ -38,7 +38,7 @@ public class MatchRequestService {
     private EntityManager entityManager;
 
     @Transactional
-    public void sendMatchSuccessMsgToUser(SocialUserDO user, SocialUserDO receiveUser) {
+    public void sendMatchSuccessMsgToUser(SocialuniUserDO user, SocialuniUserDO receiveUser) {
         //匹配成功
         //chat_user中为3个人。
         //一个系统用户

@@ -1,17 +1,17 @@
 package com.socialuni.sdk.factory;
 
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.sdk.constant.NotifyType;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkImgDOUtils;
 import com.socialuni.sdk.utils.TalkUtils;
 import org.springframework.stereotype.Component;
@@ -44,7 +44,7 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVOFactory.talkRepository = talkRepository;
     }
 
-    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialUserDO user) {
+    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialuniUserDO user) {
         SocialUnreadNotifyVO notifyVO = new SocialUnreadNotifyVO();
         if (user != null) {
             notifyVO.setNickname(user.getNickname());
@@ -56,7 +56,7 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
-        SocialUserDO notifyUser = SocialUserUtil.getUserNotNull(notifyDO.getUserId());
+        SocialuniUserDO notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();

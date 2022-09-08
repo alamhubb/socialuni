@@ -2,7 +2,7 @@ package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.constant.AppData;
 import com.socialuni.sdk.logic.entity.DevAccountEntity;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.sdk.dao.redis.DistrictRedis;
 import com.socialuni.sdk.dao.repository.dev.DevSocialuniIdRepository;

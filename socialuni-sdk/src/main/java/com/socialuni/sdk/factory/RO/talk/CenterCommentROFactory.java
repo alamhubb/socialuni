@@ -3,7 +3,7 @@ package com.socialuni.sdk.factory.RO.talk;
 import com.socialuni.sdk.factory.ListConvertUtil;
 import com.socialuni.sdk.factory.RO.comment.CenterReplyCommentROFactory;
 import com.socialuni.sdk.factory.RO.user.CenterUserROFactory;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
 import com.socialuni.sdk.model.RO.talk.CenterReplyCommentRO;
@@ -25,7 +25,7 @@ import java.util.List;
 public class CenterCommentROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static CenterCommentRO getCommentRO(SocialCommentRO socialCommentRO, SocialUserDO mineUser) {
+    public static CenterCommentRO getCommentRO(SocialCommentRO socialCommentRO, SocialuniUserDO mineUser) {
         String id = UnionIdDbUtil.getUidByUnionIdNotNull(socialCommentRO.getId());
 
         CenterUserRO userRO = CenterUserROFactory.getUserRO(socialCommentRO.getUser(), mineUser);
@@ -52,7 +52,7 @@ public class CenterCommentROFactory {
         return centerCommentRO;
     }
 
-    public static List<CenterCommentRO> getCommentROs(List<SocialCommentRO> ROS, SocialUserDO mineUser) {
+    public static List<CenterCommentRO> getCommentROs(List<SocialCommentRO> ROS, SocialuniUserDO mineUser) {
         return ListConvertUtil.toList(CenterCommentROFactory::getCommentRO, ROS, mineUser);
     }
 

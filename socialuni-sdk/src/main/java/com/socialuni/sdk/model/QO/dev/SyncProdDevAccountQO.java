@@ -1,7 +1,7 @@
 package com.socialuni.sdk.model.QO.dev;
 
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
-import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountProviderDO;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

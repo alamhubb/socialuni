@@ -2,11 +2,11 @@ package com.socialuni.sdk.logic.domain.circle;
 
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.factory.community.SocialCircleROFactory;
-import com.socialuni.sdk.model.DO.circle.SocialCircleDO;
-import com.socialuni.sdk.model.DO.tag.TagTypeDO;
+import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
-import com.socialuni.sdk.dao.repository.community.TagTypeRepository;
+import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,12 +16,12 @@ import java.util.List;
 @Service
 public class CircleQueryDomain {
     @Resource
-    TagTypeRepository tagTypeRepository;
+    SocialuniTagTypeRepository tagTypeRepository;
     @Resource
     SocialCircleRepository socialCircleRepository;
 
     public List<SocialCircleRO> queryCirclesByCircleType(String circleTypeName) {
-        TagTypeDO tagTypeDO = tagTypeRepository.findFirstByName(circleTypeName);
+        SocialuniTagTypeDO tagTypeDO = tagTypeRepository.findFirstByName(circleTypeName);
         if (tagTypeDO == null) {
             return new ArrayList<>();
         }

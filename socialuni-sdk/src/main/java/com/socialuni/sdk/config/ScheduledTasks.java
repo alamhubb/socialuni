@@ -1,6 +1,6 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.logic.service.ViolationKeywordsService;
@@ -61,8 +61,8 @@ public class ScheduledTasks {
     @Scheduled(fixedRate = 600000)
     public void updateUserStatus() {
         Date curDate = new Date();
-        List<SocialUserDO> users = userRepository.findCanUnfreezeViolationUser(UserStatus.violation, curDate);
-        for (SocialUserDO user : users) {
+        List<SocialuniUserDO> users = userRepository.findCanUnfreezeViolationUser(UserStatus.violation, curDate);
+        for (SocialuniUserDO user : users) {
             user.setUpdateTime(curDate);
             user.setStatus(UserStatus.enable);
             userRepository.save(user);

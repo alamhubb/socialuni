@@ -3,13 +3,13 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.SocialuniUserService;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.sdk.dao.repository.CommentRepository;
@@ -114,7 +114,7 @@ public class ReportController {
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {
         //展示用户的前多少条动态，评论，
 
-        SocialUserDO user = new SocialUserDO();
+        SocialuniUserDO user = new SocialuniUserDO();
         user.setId(userId);
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
 //        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserAndStatusOrderByUpdateTimeDesc(user, CommonStatus.violation);
@@ -138,7 +138,7 @@ public class ReportController {
 
     @PostMapping("queryUserContentsByPhoneNum")
     public ResultRO<List<ReportVO>> queryUserContentsByPhoneNum(String phoneNum) {
-        SocialUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
+        SocialuniUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
         List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserIdOrderByCreateTimeDesc(user.getUnionId());

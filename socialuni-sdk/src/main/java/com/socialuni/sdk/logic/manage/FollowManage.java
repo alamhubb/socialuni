@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.manage;
 
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.model.DO.FollowDO;
+import com.socialuni.sdk.dao.DO.FollowDO;
 import com.socialuni.sdk.dao.repository.FollowRepository;
 import com.socialuni.sdk.dao.redis.FollowRedis;
 import org.springframework.scheduling.annotation.Async;

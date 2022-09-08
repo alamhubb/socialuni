@@ -1,6 +1,6 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.logic.service.login.CenterLoginService;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
@@ -25,20 +25,20 @@ public class CenterLoginController{
     private CenterLoginService centerLoginService;
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @PostMapping("providerLogin")
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
         throw new SocialBusinessException("不支持三方应用使用非清池渠道直接登录");
     }
 
 
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @PostMapping("socialuniPhoneLogin")
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> socialuniPhoneLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> socialuniPhoneLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
         return centerLoginService.socialuniPhoneLogin(loginData);
     }
 
     @PostMapping("phoneLogin")
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
-        ResultRO<SocialLoginRO<CenterMineUserDetailRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
+        ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
         return resultRO;
     }
 }

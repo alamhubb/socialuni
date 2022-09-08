@@ -1,6 +1,6 @@
 package com.socialuni.sdk.factory.community;
 
-import com.socialuni.sdk.model.DO.tag.TagTypeDO;
+import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.factory.ListConvertUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 public class SociaCircleTypeROFactory {
-    public static CircleTypeRO getCircleTypeRO(TagTypeDO tagTypeDO) {
+    public static CircleTypeRO getCircleTypeRO(SocialuniTagTypeDO tagTypeDO) {
         CircleTypeRO tagTypeRO = new CircleTypeRO();
         tagTypeRO.setId(tagTypeDO.getId());
         tagTypeRO.setName(StringUtils.substring(tagTypeDO.getName(), 0, 4));
@@ -17,7 +17,7 @@ public class SociaCircleTypeROFactory {
         return tagTypeRO;
     }
 
-    public static List<CircleTypeRO> tagDOToROS(List<TagTypeDO> DOs) {
+    public static List<CircleTypeRO> tagDOToROS(List<SocialuniTagTypeDO> DOs) {
         return ListConvertUtil.toList(SociaCircleTypeROFactory::getCircleTypeRO, DOs);
     }
 }

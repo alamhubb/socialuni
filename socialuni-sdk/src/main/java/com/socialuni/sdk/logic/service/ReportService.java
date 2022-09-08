@@ -4,14 +4,14 @@ import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.factory.ReportFactory;
-import com.socialuni.sdk.model.DO.JusticeValueOrderDO;
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.ReportDetailDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.JusticeValueOrderDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.ReportDetailUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +72,7 @@ public class ReportService {
 
             //变更detail
             for (ReportDetailDO reportDetailDO : reportDetailDOS) {
-                SocialUserDO detailUser = SocialUserUtil.getUserNotNull(reportDetailDO.getUserId());
+                SocialuniUserDO detailUser = SocialuniUserUtil.getUserNotNull(reportDetailDO.getUserId());
 
                 //相同部分
                 JusticeValueOrderDO justiceValueOrderDO = new JusticeValueOrderDO();

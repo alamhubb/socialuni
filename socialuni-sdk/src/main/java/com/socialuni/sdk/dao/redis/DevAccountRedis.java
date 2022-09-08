@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.redis;
 
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;

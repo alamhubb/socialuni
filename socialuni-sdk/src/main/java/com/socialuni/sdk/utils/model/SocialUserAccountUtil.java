@@ -1,9 +1,9 @@
 package com.socialuni.sdk.utils.model;
 
 import com.socialuni.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.sdk.model.DO.user.SocialUserAccountDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserAccountDO;
 import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +32,7 @@ public class SocialUserAccountUtil {
     }
 
     public static SocialUserAccountDO getMineAccountByProvider(String provider) {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, SocialUserUtil.getMineUserIdNotNull());
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, SocialuniUserUtil.getMineUserIdNotNull());
         return socialUserAccountDO;
     }
 

@@ -7,21 +7,21 @@ import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.factory.TalkImgDOFactory;
 import com.socialuni.sdk.logic.manage.talk.SocialTalkCreateManage;
-import com.socialuni.sdk.model.DO.DistrictDO;
-import com.socialuni.sdk.model.DO.circle.SocialCircleDO;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkCircleDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkTagDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.DistrictDO;
+import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkCircleDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkTagDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
 import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.logic.service.tag.TagService;
 import com.socialuni.sdk.utils.DistrictStoreUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
@@ -63,7 +63,7 @@ public class SocialTalkPostDomain {
     ModelContentCheck modelContentCheck;
 
     public SocialTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         List<String> tagNames = talkPostQO.getTagNames();
 
@@ -84,7 +84,7 @@ public class SocialTalkPostDomain {
     }
 
 
-    public TalkAddValidateRO paramsValidate(SocialUserDO mineUser, SocialTalkPostQO talkVO) {
+    public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialTalkPostQO talkVO) {
 
         //校验地理位置
         String adCode = talkVO.getAdCode();
@@ -132,7 +132,7 @@ public class SocialTalkPostDomain {
         return talkAddValidateRO;
     }
 
-    public SocialTalkDO saveEntity(SocialUserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
+    public SocialTalkDO saveEntity(SocialuniUserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {

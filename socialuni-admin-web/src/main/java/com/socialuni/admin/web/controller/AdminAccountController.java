@@ -2,7 +2,7 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.service.AdminAccountService;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.sdk.dao.repository.dev.DevAccountProviderRepository;

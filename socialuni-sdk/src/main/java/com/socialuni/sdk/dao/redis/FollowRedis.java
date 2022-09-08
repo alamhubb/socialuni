@@ -2,7 +2,7 @@ package com.socialuni.sdk.dao.redis;
 
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.model.DO.FollowDO;
+import com.socialuni.sdk.dao.DO.FollowDO;
 import com.socialuni.sdk.dao.repository.FollowRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;

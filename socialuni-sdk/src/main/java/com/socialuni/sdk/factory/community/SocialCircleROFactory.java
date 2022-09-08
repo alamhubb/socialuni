@@ -1,9 +1,8 @@
 package com.socialuni.sdk.factory.community;
 
-import com.socialuni.sdk.model.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.sdk.factory.ListConvertUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 

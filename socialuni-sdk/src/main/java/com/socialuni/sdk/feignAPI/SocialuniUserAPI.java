@@ -1,13 +1,10 @@
 package com.socialuni.sdk.feignAPI;
 
 import com.socialuni.sdk.model.QO.user.*;
-import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +18,7 @@ import javax.validation.Valid;
 public interface SocialuniUserAPI {
     @GetMapping("getMineUser")
     @Operation(summary = "获取用户个人详情")
-    ResultRO<CenterMineUserDetailRO> getMineUser();
+    ResultRO<SocialuniMineUserDetailRO> getMineUser();
 
     @GetMapping("queryUserDetail/{talkId}")
     @Operation(summary = "获取他人用户详情")
@@ -30,13 +27,13 @@ public interface SocialuniUserAPI {
 
     @PostMapping("editUser")
     @Operation(summary = "编辑用户")
-    ResultRO<CenterMineUserDetailRO> editUser(@RequestBody @Valid SocialUserEditQO socialUserEditQO);
+    ResultRO<SocialuniMineUserDetailRO> editUser(@RequestBody @Valid SocialUserEditQO socialUserEditQO);
 
     @PostMapping("addUserImg")
     @Operation(summary = "添加用户图片")
-    ResultRO<CenterMineUserDetailRO> addUserImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
+    ResultRO<SocialuniMineUserDetailRO> addUserImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
 
     @PostMapping("deleteUserImg")
     @Operation(summary = "删除用户图片")
-    ResultRO<CenterMineUserDetailRO> deleteUserImg(@RequestBody @Valid CenterUserImgDeleteQO centerUserImgDeleteQO);
+    ResultRO<SocialuniMineUserDetailRO> deleteUserImg(@RequestBody @Valid CenterUserImgDeleteQO centerUserImgDeleteQO);
 }

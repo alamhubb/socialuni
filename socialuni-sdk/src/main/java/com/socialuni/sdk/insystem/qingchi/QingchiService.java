@@ -10,21 +10,21 @@ import com.socialuni.sdk.logic.entity.AuthThirdUserEntity;
 import com.socialuni.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.sdk.logic.entity.user.SocialProviderLoginEntity;
 import com.socialuni.sdk.logic.manage.DevAccountManage;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
-import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountProviderDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.model.RO.devAccount.DevAccountRO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.sdk.dao.repository.dev.DevAccountProviderRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -70,48 +70,48 @@ public class QingchiService {
 
     //因旧版本原因合在了一起，新版本要拆开
     @Transactional
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
 //        loginQO.setDevId(devAccountDO.getId());
 
         //创建或返回
-        SocialUserDO mineUser = socialProviderLoginEntity.providerLogin(loginQO);
+        SocialuniUserDO mineUser = socialProviderLoginEntity.providerLogin(loginQO);
 
         //中心授权
-        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.user, devAccountDO);
+        SocialLoginRO<SocialuniMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.user, devAccountDO);
         return ResultRO.success(centerLoginRO);
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>>  phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>>  phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
-        SocialUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+        SocialuniUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
         //中心授权
-        SocialLoginRO<CenterMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
+        SocialLoginRO<SocialuniMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
         return ResultRO.success(centerLoginRO);
     }
 
-    public ResultRO<CenterMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
         //只是记录一个授权记录
         //生成一条对三方的手机号授权，并且返回手机号信息
-        CenterMineUserDetailRO centerMineUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, AuthType.phone, devAccountDO, socialMineUserDetailRO);
+        SocialuniMineUserDetailRO centerMineUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, AuthType.phone, devAccountDO, socialMineUserDetailRO);
         return new ResultRO<>(centerMineUserDetailRO);
     }
 
     //微信绑定手机号方法
-    public ResultRO<CenterMineUserDetailRO> bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO) {
         // 只有清池支持渠道登录
         DevAccountDO devAccountDO = this.checkIsQingchiApp();
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(bindPhoneQO, mineUser);
 
         //生成一条对三方的手机号授权，并且返回手机号信息
-        CenterMineUserDetailRO centerMineUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, AuthType.phone, devAccountDO, socialMineUserDetailRO);
+        SocialuniMineUserDetailRO centerMineUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, AuthType.phone, devAccountDO, socialMineUserDetailRO);
         //授权成功
         //token有效期三个月
         //生成userToken
@@ -124,7 +124,7 @@ public class QingchiService {
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
         this.checkIsQingchiApp();
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }

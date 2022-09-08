@@ -2,12 +2,12 @@ package com.socialuni.sdk.logic.service.content;
 
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.status.UserStatus;
-import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
 import com.socialuni.sdk.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.QQUtil;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
@@ -51,8 +51,8 @@ public class ModelContentCheck {
     @Resource
     private IllegalWordService illegalWordService;
 
-    public void checkUser(SocialUserDO mineUser) {
-        SocialUserPhoneDO userPhoneNum = SocialUserUtil.getUserPhoneNumDO(mineUser.getUnionId());
+    public void checkUser(SocialuniUserDO mineUser) {
+        SocialUserPhoneDO userPhoneNum = SocialuniUserUtil.getUserPhoneNumDO(mineUser.getUnionId());
 
         //如果不为系统管理员，只有管理员才能评论置顶内容
         //未绑定手机号，不能发表动态，正常用户应该无法访问，应为突破了内容，或者逻辑有问题
@@ -105,12 +105,12 @@ public class ModelContentCheck {
         }
     }
 
-    public void checkUserAndContent(String content, SocialUserDO requestUser) {
+    public void checkUserAndContent(String content, SocialuniUserDO requestUser) {
         //如果不为系统管理员，只有管理员才能评论置顶内容
 //        if (!UserType.system.equals(requestUser.getType())) {
         this.checkUser(requestUser);
         if (StringUtils.isNotEmpty(content)) {
-            boolean hasAuth = SocialUserUtil.getUserIsIdentityAuth(requestUser.getUnionId());
+            boolean hasAuth = SocialuniUserUtil.getUserIsIdentityAuth(requestUser.getUnionId());
             if (!hasAuth) {
                 ModelContentCheck.hasUn18Content(content);
             }
@@ -118,7 +118,7 @@ public class ModelContentCheck {
         }
     }
 
-    public void checkUserAndLongContent(String content, SocialUserDO mineUser) {
+    public void checkUserAndLongContent(String content, SocialuniUserDO mineUser) {
         this.checkUserAndContent(content, mineUser);
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {

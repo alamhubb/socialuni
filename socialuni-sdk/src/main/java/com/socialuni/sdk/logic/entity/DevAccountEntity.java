@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.entity;
 
 import com.socialuni.sdk.constant.AdminAppConfigConst;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;

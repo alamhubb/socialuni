@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.domain.talk;
 import com.socialuni.sdk.config.SocialAppEnv;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
@@ -11,7 +11,7 @@ import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
@@ -34,7 +34,7 @@ public class CenterTalkPostDomain {
     TalkRepository talkRepository;
 
     public CenterTalkRO postTalk(SocialTalkPostQO talkPostQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         String content = talkPostQO.getContent();
 

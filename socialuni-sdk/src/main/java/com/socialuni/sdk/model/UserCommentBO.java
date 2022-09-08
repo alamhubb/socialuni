@@ -1,7 +1,7 @@
 package com.socialuni.sdk.model;
 
 //import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 
@@ -20,7 +20,7 @@ public class UserCommentBO {
     public UserCommentBO() {
     }
 
-    public UserCommentBO(SocialUserDO user, SocialUserDO reqUser) {
+    public UserCommentBO(SocialuniUserDO user, SocialuniUserDO reqUser) {
         if (user != null) {
 //            this.id = UnionIdDbUtil.createUserUid(user.getId(),  reqUser);
             this.nickname = user.getNickname();

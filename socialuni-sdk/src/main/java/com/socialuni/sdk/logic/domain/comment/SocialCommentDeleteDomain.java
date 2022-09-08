@@ -1,8 +1,8 @@
 package com.socialuni.sdk.logic.domain.comment;
 
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
@@ -31,7 +31,7 @@ public class SocialCommentDeleteDomain {
      * 如果是系统管理员删除动态，则必须填写原因，删除后发表动态的用户将被封禁
      * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
      */
-    public ResultRO<Void> deleteComment(SocialUserDO mineUser, SocialCommentDeleteQO commentDeleteQO) {
+    public ResultRO<Void> deleteComment(SocialuniUserDO mineUser, SocialCommentDeleteQO commentDeleteQO) {
         Optional<SocialCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentDeleteQO.getCommentId(), ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {
             throw new SocialParamsException("评论已经删除");

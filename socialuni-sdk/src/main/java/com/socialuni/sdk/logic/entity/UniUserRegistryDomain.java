@@ -8,13 +8,13 @@ import com.socialuni.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.logic.manage.SocialUserManage;
 import com.socialuni.sdk.logic.manage.TokenManage;
 import com.socialuni.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.model.DO.user.SocialTokenDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
@@ -41,8 +41,8 @@ public class UniUserRegistryDomain {
 
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
-    public SocialLoginRO<CenterMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
-        SocialUserDO mineUser = null;
+    public SocialLoginRO<SocialuniMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
+        SocialuniUserDO mineUser = null;
         //如果已经注册过
         String phoneNum = loginQO.getPhoneNum();
 
@@ -65,11 +65,11 @@ public class UniUserRegistryDomain {
             }
         } else {
             //已注册，更新token
-            mineUser = SocialUserUtil.getUserNotNull(uniContentUnionIdDO.getId());
+            mineUser = SocialuniUserUtil.getUserNotNull(uniContentUnionIdDO.getId());
         }
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
-        CenterMineUserDetailRO userDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
+        SocialuniMineUserDetailRO userDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         return new SocialLoginRO<>(socialUserTokenDO.getToken(), userDetailRO);
         //如果uid存在，则代表用户注册过

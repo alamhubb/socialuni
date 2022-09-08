@@ -1,6 +1,6 @@
 package com.socialuni.sdk.factory.community;
 
-import com.socialuni.sdk.model.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.factory.ListConvertUtil;
 import org.apache.commons.lang3.StringUtils;

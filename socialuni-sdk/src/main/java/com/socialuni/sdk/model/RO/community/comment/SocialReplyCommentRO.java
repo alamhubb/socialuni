@@ -1,6 +1,6 @@
 package com.socialuni.sdk.model.RO.community.comment;
 
-import com.socialuni.sdk.model.DO.SocialCommonBaseDO;
+import com.socialuni.sdk.dao.DO.SocialCommonBaseDO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 

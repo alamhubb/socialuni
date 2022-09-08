@@ -6,14 +6,14 @@ import com.socialuni.sdk.utils.SocialTagStore;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.tag.TagTypeDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.dao.redis.redisKey.TagRedisKey;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
-import com.socialuni.sdk.dao.repository.community.TagTypeRepository;
+import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class SocialTagRedis {
     @Resource
     private TagRepository tagRepository;
     @Resource
-    private TagTypeRepository tagTypeRepository;
+    private SocialuniTagTypeRepository tagTypeRepository;
     @Resource
     private SocialTagStore socialTagStore;
 
@@ -82,7 +82,7 @@ public class SocialTagRedis {
         initTagTypes.add(getHotTagType(appGenderType));
 
         //转成vo
-        List<TagTypeDO> tagTypes = getTagTypes();
+        List<SocialuniTagTypeDO> tagTypes = getTagTypes();
         initTagTypes.addAll(SocialTagTypeROFactory.tagDOToROS(tagTypes));
         return initTagTypes;
     }
@@ -94,7 +94,7 @@ public class SocialTagRedis {
         //插入一个热门类别，根据性别获取一个
         initTagTypes.add(getHotTagType(appGenderType));
         //查询全部，但是不查询子节点
-        List<TagTypeDO> tagTypes = getTagTypes();
+        List<SocialuniTagTypeDO> tagTypes = getTagTypes();
         initTagTypes.addAll(tagTypesSetTags(tagTypes, appGenderType));
         return initTagTypes;
     }
@@ -112,15 +112,15 @@ public class SocialTagRedis {
     }
 
 
-    private List<TagTypeDO> getTagTypes() {
+    private List<SocialuniTagTypeDO> getTagTypes() {
         //查询出来所有启用的类型的tagTypes，按talk数量排序
         return tagTypeRepository.findByStatusAndTalkCountGreaterThanOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable, SocialuniConst.zero);
     }
 
     //给tagtype设置它的子标签
-    private List<TagTypeRO> tagTypesSetTags(List<TagTypeDO> DOs, String appGenderType) {
+    private List<TagTypeRO> tagTypesSetTags(List<SocialuniTagTypeDO> DOs, String appGenderType) {
         List<TagTypeRO> tagTypeROS = new ArrayList<>();
-        for (TagTypeDO tagTypeDO : DOs) {
+        for (SocialuniTagTypeDO tagTypeDO : DOs) {
             //如果为女生，且app为男生，则不查询
             if (tagTypeDO.getName().equals(GenderType.girlTagTypeName)) {
                 //如果tagType和appgender性别相反，什么也不做
@@ -151,7 +151,7 @@ public class SocialTagRedis {
     }
 
     //根据typeid获取所有
-    private List<TagRO> getTagsByTagTypeId(TagTypeDO tagTypeDO, String appGenderType) {
+    private List<TagRO> getTagsByTagTypeId(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
         List<TagDO> tagDOS;
         if (appGenderType.equals(GenderType.all)) {
             tagDOS = tagRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), ContentStatus.enable);

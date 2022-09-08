@@ -2,8 +2,8 @@ package com.socialuni.sdk.platform.wangyi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.sdk.constant.WyCheckConst;
-import com.socialuni.sdk.model.DO.AntispamDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.AntispamDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.repository.AntispamRepository;
 import com.socialuni.sdk.utils.UUIDUtil;
 import org.apache.commons.codec.digest.DigestUtils;

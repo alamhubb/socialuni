@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.config;
 
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.RedisUtil;
 import com.socialuni.social.web.sdk.constant.ErrorCode;

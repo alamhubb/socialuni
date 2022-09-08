@@ -2,11 +2,11 @@ package com.socialuni.sdk.logic.service.tag;
 
 import com.socialuni.sdk.constant.TalkOperateType;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.tag.TagTypeDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
-import com.socialuni.sdk.dao.repository.community.TagTypeRepository;
+import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.sdk.utils.SocialTagStore;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
@@ -33,12 +33,12 @@ public class TagService {
     @Resource
     private SocialTagStore tagQueryRepository;
     @Resource
-    private TagTypeRepository tagTypeRepository;
+    private SocialuniTagTypeRepository tagTypeRepository;
 
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    public List<TagDO> checkAndUpdateTagCount(SocialUserDO user, List<Integer> tagIds, String talkOperateType, String talkGender) {
+    public List<TagDO> checkAndUpdateTagCount(SocialuniUserDO user, List<Integer> tagIds, String talkOperateType, String talkGender) {
         List<TagDO> tagDOList = new ArrayList<>();
 
 //        Integer devId = DevAccountUtils.getDevId();
@@ -70,7 +70,7 @@ public class TagService {
                             String tagVisibleGender = tagDO.getVisibleGender();
                             //如果为单性话题
                             if (!tagVisibleGender.equals(GenderType.all)) {
-                                TagTypeDO tagTypeDO = null;
+                                SocialuniTagTypeDO tagTypeDO = null;
                                 if (tagVisibleGender.equals(GenderType.girl)) {
                                     tagTypeDO = tagTypeRepository.findFirstByName(GenderType.girlTagTypeName);
                                 } else if (tagVisibleGender.equals(GenderType.boy)) {
@@ -83,8 +83,8 @@ public class TagService {
                             tagDO.setTalkCount(tagDO.getTalkCount() + 1);
 
                             logger.info("tagTypeId:{}", tagDO.getTagTypeId());
-                            Optional<TagTypeDO> optionalTagTypeDO = tagTypeRepository.findById(tagDO.getTagTypeId());
-                            TagTypeDO tagTypeDO = optionalTagTypeDO.get();
+                            Optional<SocialuniTagTypeDO> optionalTagTypeDO = tagTypeRepository.findById(tagDO.getTagTypeId());
+                            SocialuniTagTypeDO tagTypeDO = optionalTagTypeDO.get();
                             tagTypeDO.setTalkCount(tagTypeDO.getTalkCount() + 1);
                             tagTypeRepository.save(tagTypeDO);
                         }

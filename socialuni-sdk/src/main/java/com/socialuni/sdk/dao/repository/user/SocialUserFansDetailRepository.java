@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository.user;
 
 
-import com.socialuni.sdk.model.DO.user.SocialUserFansDetailDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserFansDetailDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserFansDetailRepository extends JpaRepository<SocialUserFansDetailDO, Integer> {

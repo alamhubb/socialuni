@@ -1,6 +1,6 @@
 package com.socialuni.sdk.factory;
 
-import com.socialuni.sdk.model.DO.DistrictDO;
+import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import lombok.Data;
 

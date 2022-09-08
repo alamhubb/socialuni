@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserTokenDO;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
 import com.socialuni.social.web.sdk.exception.SocialNotLoginException;

@@ -1,9 +1,9 @@
 package com.socialuni.sdk.logic.domain.comment;
 
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.comment.CenterCommentDeleteQO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentDeleteQO;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class CenterCommentDeleteDomain {
      * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
      */
     public ResultRO<Void> deleteComment(CenterCommentDeleteQO commentDeleteQO) {
-        SocialUserDO userDO = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO userDO = SocialuniUserUtil.getMineUserNotNull();
 
         Integer commentId = UnionIdDbUtil.getCommentUnionIdByUidNotNull(commentDeleteQO.getCommentId());
 

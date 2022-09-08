@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository.dev;
 
-import com.socialuni.sdk.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserTokenDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

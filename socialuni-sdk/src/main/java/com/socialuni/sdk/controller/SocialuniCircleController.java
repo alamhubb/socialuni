@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
-import com.socialuni.sdk.logic.service.circle.CenterCircleService;
+import com.socialuni.sdk.logic.service.circle.SocialuniCircleService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +22,7 @@ import java.util.List;
 public class SocialuniCircleController implements SocialuniCircleAPI {
 
     @Resource
-    CenterCircleService centerCircleService;
+    SocialuniCircleService centerCircleService;
     @Resource
     CircleQueryDomain circleQueryDomain;
     @Resource

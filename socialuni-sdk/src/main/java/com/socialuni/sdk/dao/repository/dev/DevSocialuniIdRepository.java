@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository.dev;
 
-import com.socialuni.sdk.model.DO.dev.DevSocialuniIdDO;
+import com.socialuni.sdk.dao.DO.dev.DevSocialuniIdDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

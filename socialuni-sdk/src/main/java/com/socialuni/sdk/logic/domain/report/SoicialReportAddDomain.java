@@ -4,15 +4,15 @@ import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.dao.repository.*;
-import com.socialuni.sdk.model.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.model.DO.base.BaseModelDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.repository.*;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.utils.DateUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
@@ -50,7 +50,7 @@ public class SoicialReportAddDomain {
     private ModelContentCheck modelContentCheck;
 
     public ResultRO<String> addReport(SocialReportAddQO reportAddVO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.violateTypes.contains(reportType)) {
@@ -130,7 +130,7 @@ public class SoicialReportAddDomain {
         }
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialUserDO receiveUser = SocialUserUtil.getAllowNull(receiveUserUnionId);
+        SocialuniUserDO receiveUser = SocialuniUserUtil.getAllowNull(receiveUserUnionId);
 
         //本系统user,才进行相关校验
         if (receiveUser != null) {

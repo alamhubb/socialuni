@@ -9,14 +9,14 @@ import com.socialuni.sdk.logic.entity.user.SocialProviderLoginEntity;
 import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.sdk.logic.manage.TokenManage;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class CenterLoginService {
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
         // 只有清池支持渠道登录
         // 其他的只支持社交联盟登陆
         if (!UniappProviderType.values.contains(loginQO.getProvider())) {
@@ -60,39 +60,39 @@ public class CenterLoginService {
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialLoginRO.getUser();
 
-        SocialUserDO mineUser = SocialUserUtil.getUserNotNull(socialMineUserDetailRO.getId());
+        SocialuniUserDO mineUser = SocialuniUserUtil.getUserNotNull(socialMineUserDetailRO.getId());
 
-        CenterMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
+        SocialuniMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //生成返回对象
-        SocialLoginRO<CenterMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();
+        SocialLoginRO<SocialuniMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();
 
         applySocialUniOAuthRO.setToken(socialLoginRO.getToken());
         applySocialUniOAuthRO.setUser(centerUserDetailRO);
         return ResultRO.success(applySocialUniOAuthRO);
     }
 
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull(loginData.getCode());
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
 
-        CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
+        SocialuniMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        SocialLoginRO<CenterMineUserDetailRO> socialLoginRO = new SocialLoginRO<>(loginData.getCode(), centerMineUserDetailRO);
+        SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = new SocialLoginRO<>(loginData.getCode(), centerMineUserDetailRO);
         return ResultRO.success(socialLoginRO);
     }
 
     @Transactional
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
 
         SocialMineUserDetailRO socialMineUserDetailRO = socialLoginRO.getUser();
 
-        SocialUserDO mineUser = SocialUserUtil.getUserNotNull(socialMineUserDetailRO.getId());
+        SocialuniUserDO mineUser = SocialuniUserUtil.getUserNotNull(socialMineUserDetailRO.getId());
 
-        CenterMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
+        SocialuniMineUserDetailRO centerUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //生成返回对象
-        SocialLoginRO<CenterMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();
+        SocialLoginRO<SocialuniMineUserDetailRO> applySocialUniOAuthRO = new SocialLoginRO<>();
 
         applySocialUniOAuthRO.setToken(socialLoginRO.getToken());
         applySocialUniOAuthRO.setUser(centerUserDetailRO);

@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.SocialuniUserService;
 import com.socialuni.social.web.sdk.model.ResultRO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.repository.UserRepository;
@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("removeUserBanByPhoneNum")
     public ResultRO<List<ReportVO>> removeUserBanByPhoneNum(String phoneNum) {
-        SocialUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
+        SocialuniUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
         if (!user.getStatus().equals(UserStatus.violation)) {
             throw new SocialBusinessException("用户未被封禁");
         }

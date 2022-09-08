@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository.dev;
 
-import com.socialuni.sdk.model.DO.dev.DevTokenDO;
+import com.socialuni.sdk.dao.DO.dev.DevTokenDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

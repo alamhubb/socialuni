@@ -3,12 +3,12 @@ package com.socialuni.sdk.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.constant.NotifyType;
 import com.socialuni.sdk.factory.SocialChatROFactory;
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.sdk.dao.DO.message.MessageDO;
+import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.social.web.sdk.utils.JsonUtil;
 import lombok.Data;
@@ -31,13 +31,13 @@ public class NotifyVO {
     public NotifyVO() {
     }
 
-    public NotifyVO(SocialUserDO user) {
+    public NotifyVO(SocialuniUserDO user) {
         //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
         this.user = new NotifyUserVO(user, null);
         this.type = NotifyType.comment;
     }
 
-    public NotifyVO(NotifyDO notify, SocialUserDO user, MessageReceiveDO messageReceive, ChatUserDO chatUser, ChatDO chatDO) {
+    public NotifyVO(NotifyDO notify, SocialuniUserDO user, MessageReceiveDO messageReceive, ChatUserDO chatUser, ChatDO chatDO) {
         this(user);
         this.chat = SocialChatROFactory.getChatRO(chatDO, chatUser, messageReceive);
         this.receiveUserId = notify.getReceiveUserId();
@@ -45,7 +45,7 @@ public class NotifyVO {
         //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
     }
 
-    public NotifyVO(ChatDO chat, SocialUserDO user, MessageDO message) {
+    public NotifyVO(ChatDO chat, SocialuniUserDO user, MessageDO message) {
         this(user);
         this.chat = SocialChatROFactory.getChatRO(chat, message);
         this.type = NotifyType.message;

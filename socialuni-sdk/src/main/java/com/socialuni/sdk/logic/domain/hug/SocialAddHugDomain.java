@@ -1,13 +1,13 @@
 package com.socialuni.sdk.logic.domain.hug;
 
 import com.socialuni.sdk.dao.redis.HugRedis;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.social.web.sdk.model.ResultRO;
-import com.socialuni.sdk.model.DO.HugDO;
+import com.socialuni.sdk.dao.DO.HugDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,7 +21,7 @@ public class SocialAddHugDomain {
     @Resource
     private HugRedis hugRedis;
 
-    public ResultRO<Void> addHug(SocialUserDO mineUser, SocialHugAddQO socialHugAddQO) {
+    public ResultRO<Void> addHug(SocialuniUserDO mineUser, SocialHugAddQO socialHugAddQO) {
         if (socialHugAddQO.getTalkId() != null) {
             SocialTalkDO talkDO = TalkUtils.getNotNull(socialHugAddQO.getTalkId());
             HugDO hugDO = new HugDO(mineUser.getUnionId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());

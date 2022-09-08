@@ -1,7 +1,7 @@
 package com.socialuni.web.controller;
 
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
@@ -22,5 +22,5 @@ public interface SocialuniPhoneAPI {
     ResultRO<Void> sendAuthCode(@RequestBody @Valid SocialSendAuthCodeQO authCodeQO);
 
     @PostMapping("phoneLogin")
-    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
+    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
 }

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository;
 
 
-import com.socialuni.sdk.model.DO.AuthenticationDO;
+import com.socialuni.sdk.dao.DO.AuthenticationDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

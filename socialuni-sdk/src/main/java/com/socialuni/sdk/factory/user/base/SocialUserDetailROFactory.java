@@ -1,7 +1,7 @@
 package com.socialuni.sdk.factory.user.base;
 
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.RO.user.SocialUserDetailRO;
 import com.socialuni.sdk.model.RO.user.UserImgRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserFollowDetailRO;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 public class SocialUserDetailROFactory {
-    public static SocialUserDetailRO getUserDetailRO(SocialUserDO userDO, SocialUserDO mineUser) {
+    public static SocialUserDetailRO getUserDetailRO(SocialuniUserDO userDO, SocialuniUserDO mineUser) {
         //user基础信息
         SocialUserFollowDetailRO socialUserDetailFollowRO = SocialUserFollowDetailROFactory.newSocialFollowUserRO(userDO, mineUser);
 

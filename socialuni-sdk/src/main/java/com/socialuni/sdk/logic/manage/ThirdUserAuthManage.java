@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.manage;
 
-import com.socialuni.sdk.model.DO.dev.ThirdUserAuthDO;
-import com.socialuni.sdk.model.DO.dev.ThirdUserDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserAuthDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserDO;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;

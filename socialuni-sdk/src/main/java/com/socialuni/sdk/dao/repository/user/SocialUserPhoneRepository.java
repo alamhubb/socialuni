@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository.user;
 
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
-import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;

@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.entity.comment;
 
 import com.socialuni.sdk.logic.manage.talk.TalkManage;
 import com.socialuni.sdk.dao.store.CommentStore;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import org.springframework.stereotype.Service;
 

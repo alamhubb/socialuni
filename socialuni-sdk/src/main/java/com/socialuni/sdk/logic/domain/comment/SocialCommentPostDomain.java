@@ -6,10 +6,10 @@ import com.socialuni.sdk.logic.domain.notify.NotifyDomain;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.sdk.factory.SocialCommentROFactory;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.sdk.model.RO.community.comment.SocialCommentRO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
@@ -50,7 +50,7 @@ public class SocialCommentPostDomain {
     private  SocialTagRedis socialTagRedis;
 
     @Transactional
-    public SocialCommentRO postComment(SocialUserDO mineUser, SocialCommentPostQO addQO) {
+    public SocialCommentRO postComment(SocialuniUserDO mineUser, SocialCommentPostQO addQO) {
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(addQO.getTalkId());
         List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
         //开发环境不校验
@@ -81,7 +81,7 @@ public class SocialCommentPostDomain {
 
 
     //校验添加新增comment的评论是否正确
-    private CommentAddLineTransfer checkCommentAddVO(SocialUserDO requestUser, SocialCommentPostQO addVO) {
+    private CommentAddLineTransfer checkCommentAddVO(SocialuniUserDO requestUser, SocialCommentPostQO addVO) {
         //校验内容是否违规
         modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
 

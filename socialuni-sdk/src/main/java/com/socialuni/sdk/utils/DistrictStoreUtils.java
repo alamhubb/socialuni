@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.dao.redis.DistrictRedis;
-import com.socialuni.sdk.model.DO.DistrictDO;
+import com.socialuni.sdk.dao.DO.DistrictDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

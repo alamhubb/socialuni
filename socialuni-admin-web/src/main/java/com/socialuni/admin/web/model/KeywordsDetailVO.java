@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.model;
 
-import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import lombok.Data;
 
 import java.util.List;

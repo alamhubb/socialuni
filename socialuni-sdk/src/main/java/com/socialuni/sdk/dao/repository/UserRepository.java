@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository;
 
 
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,19 +12,19 @@ import org.springframework.data.repository.query.Param;
 import java.util.Date;
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<SocialUserDO, Integer> {
-    @Query(value = "select u.id from SocialUserDO u")
+public interface UserRepository extends JpaRepository<SocialuniUserDO, Integer> {
+    @Query(value = "select u.id from SocialuniUserDO u")
     List<Integer> findAllUserIds();
 
     @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
-    SocialUserDO findOneByUnionId(Integer id);
+    SocialuniUserDO findOneByUnionId(Integer id);
 
     @CachePut(cacheNames = RedisKeysConst.userById, key = "#user.unionId")
-    SocialUserDO save(SocialUserDO user);
+    SocialuniUserDO save(SocialuniUserDO user);
 
 
-    @Query(value = "select u from SocialUserDO u,SocialUserViolationDO su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
-    List<SocialUserDO> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
+    @Query(value = "select u from SocialuniUserDO u,SocialUserViolationDO su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
+    List<SocialuniUserDO> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
 
     /*@Modifying
     @Transactional
@@ -105,8 +105,8 @@ public interface UserRepository extends JpaRepository<SocialUserDO, Integer> {
                     //按5分钟时段排序5*60*1000 5分钟
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
-    List<SocialUserDO> queryMatchUsers(@Param("userId") Integer userId, @Param("genders") List<String> genders, @Param("ids") List<Integer> ids,
-                                       @Param("status") String status, @Param("statuses") List<String> statuses, @Param("userStatus") String userStatus);
+    List<SocialuniUserDO> queryMatchUsers(@Param("userId") Integer userId, @Param("genders") List<String> genders, @Param("ids") List<Integer> ids,
+                                          @Param("status") String status, @Param("statuses") List<String> statuses, @Param("userStatus") String userStatus);
 
     @Query(nativeQuery = true,
             value = "SELECT DISTINCT u.*, m.status FROM " +
@@ -124,7 +124,7 @@ public interface UserRepository extends JpaRepository<SocialUserDO, Integer> {
                     //按5分钟时段排序5*60*1000 5分钟
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
-    List<SocialUserDO> queryLikeMeMatchUsers(@Param("userId") Integer userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
+    List<SocialuniUserDO> queryLikeMeMatchUsers(@Param("userId") Integer userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
 
     @Query(nativeQuery = true,
             value = "SELECT DISTINCT u.*, m.status FROM " +
@@ -142,7 +142,7 @@ public interface UserRepository extends JpaRepository<SocialUserDO, Integer> {
                     //按5分钟时段排序5*60*1000 5分钟
                     "FLOOR(UNIX_TIMESTAMP(u.`last_online_time`)/3600) DESC," +
                     "u.face_ratio * (FLOOR(1 + RAND()*10)) DESC LIMIT 20")
-    List<SocialUserDO> queryILikeMatchUsers(@Param("userId") Integer userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
+    List<SocialuniUserDO> queryILikeMatchUsers(@Param("userId") Integer userId, @Param("ids") List<Integer> ids, @Param("status") String status, @Param("userStatus") String userStatus);
 
 
     //注释未登录的展示颜值限制"AND (u.`face_ratio`<=65000) " +

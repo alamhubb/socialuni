@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.repository;
 
 
-import com.socialuni.sdk.model.DO.dev.DevAuthCodeDO;
+import com.socialuni.sdk.dao.DO.dev.DevAuthCodeDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DevAuthCodeRepository extends JpaRepository<DevAuthCodeDO, Integer> {

@@ -7,10 +7,10 @@ import com.socialuni.sdk.factory.SocialTalkROFactory;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.sdk.logic.entity.talk.SocialHomeTalkQueryEntity;
-import com.socialuni.sdk.model.DO.circle.SocialCircleDO;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
@@ -44,7 +44,7 @@ public class SocialHomeTalkQueryDomain {
     TagRepository tagRepository;
 
 
-    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, SocialUserDO mineUser) {
+    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
         //talk
 
@@ -111,7 +111,7 @@ public class SocialHomeTalkQueryDomain {
     }
 
     //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, SocialUserDO mineUser) {
+    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         //校验gender类型,生成BO
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
 

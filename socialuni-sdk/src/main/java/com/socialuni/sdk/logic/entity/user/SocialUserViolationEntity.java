@@ -1,8 +1,8 @@
 package com.socialuni.sdk.logic.entity.user;
 
 import com.socialuni.sdk.dao.repository.user.SocialUserViolationRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserViolationDO;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
+import com.socialuni.sdk.dao.DO.user.SocialUserViolationDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -13,7 +13,7 @@ public class SocialUserViolationEntity {
     private SocialUserViolationRepository socialUserViolationRepository;
 
     public SocialUserViolationDO getOrCreateViolationDO(Integer userId) {
-        SocialUserViolationDO socialUserViolationDO = SocialUserUtil.getUserViolationDO(userId);
+        SocialUserViolationDO socialUserViolationDO = SocialuniUserUtil.getUserViolationDO(userId);
         if (socialUserViolationDO == null) {
             socialUserViolationDO = socialUserViolationRepository.save(new SocialUserViolationDO(userId));
         }

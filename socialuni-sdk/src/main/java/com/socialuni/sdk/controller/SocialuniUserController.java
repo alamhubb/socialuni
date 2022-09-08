@@ -2,9 +2,9 @@ package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.user.*;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
-import com.socialuni.sdk.logic.service.user.CenterUserService;
+import com.socialuni.sdk.logic.service.user.SocialuniUserService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,10 +13,10 @@ import javax.annotation.Resource;
 @RestController
 public class SocialuniUserController implements SocialuniUserAPI {
     @Resource
-    private CenterUserService centerUserAPIImpl;
+    private SocialuniUserService centerUserAPIImpl;
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> getMineUser() {
+    public ResultRO<SocialuniMineUserDetailRO> getMineUser() {
         return centerUserAPIImpl.getMineUser();
     }
 
@@ -26,17 +26,17 @@ public class SocialuniUserController implements SocialuniUserAPI {
     }
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
+    public ResultRO<SocialuniMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
         return centerUserAPIImpl.editUser(socialUserEditQO);
     }
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
         return centerUserAPIImpl.addUserImg(socialUserImgAddQO);
     }
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
+    public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
         return centerUserAPIImpl.deleteUserImg(centerUserImgDeleteQO);
     }
 }

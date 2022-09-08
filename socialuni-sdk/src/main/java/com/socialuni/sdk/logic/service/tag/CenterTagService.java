@@ -3,12 +3,12 @@ package com.socialuni.sdk.logic.service.tag;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.logic.domain.tag.SoicialTagAddDomain;
 import com.socialuni.sdk.feignAPI.SocialuniTagAPI;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class CenterTagService {
     SocialuniTagAPI socialuniTagAPI;
 
     public ResultRO<TagRO> addTag(TagAddQO tagAddQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserNotNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
 
         //如果应用，则调用中心

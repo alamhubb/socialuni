@@ -11,7 +11,7 @@ import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentType;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.QO.SocialIntIdQO;
 import com.socialuni.sdk.model.QO.SocialIntQO;
 import com.socialuni.sdk.constant.ViolateType;

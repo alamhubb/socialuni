@@ -1,6 +1,6 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.QO.dev.DevAccountQueryQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;

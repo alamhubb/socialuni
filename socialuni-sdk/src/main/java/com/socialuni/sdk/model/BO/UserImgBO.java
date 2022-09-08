@@ -1,8 +1,8 @@
 package com.socialuni.sdk.model.BO;
 
 import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.RO.UserImgVO;
 import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.constant.AppConfigConst;
@@ -43,7 +43,7 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public UserImgBO(SocialUserImgDO img, SocialUserDO user) {
+    public UserImgBO(SocialUserImgDO img, SocialuniUserDO user) {
         this.id = UnionIdDbUtil.getUidByUnionIdNotNull(img.getId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
@@ -52,7 +52,7 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public SocialUserImgDO toUserImgDO(SocialUserDO user, String imgUrl) {
+    public SocialUserImgDO toUserImgDO(SocialuniUserDO user, String imgUrl) {
         //这里需要记录，变更历史，通过照片有效无效记录，
         SocialUserImgDO userImgDO = new SocialUserImgDO();
         userImgDO.setSrc(imgUrl + this.getSrc());
@@ -95,7 +95,7 @@ public class UserImgBO {
         return imgVO;
     }
 
-    public static List<UserImgVO> userImgDOToVOS(List<SocialUserImgDO> imgDOs, SocialUserDO user) {
+    public static List<UserImgVO> userImgDOToVOS(List<SocialUserImgDO> imgDOs, SocialuniUserDO user) {
         return imgDOs.stream().map(item -> new UserImgBO(item, user).toVO()).collect(Collectors.toList());
     }
 }

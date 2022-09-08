@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository.dev;
 
 
-import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountProviderDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

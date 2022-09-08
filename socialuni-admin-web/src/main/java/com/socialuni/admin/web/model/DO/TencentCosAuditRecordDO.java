@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.model.DO;
 
-import com.socialuni.sdk.model.DO.base.CommonContentBaseDO;
+import com.socialuni.sdk.dao.DO.base.CommonContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

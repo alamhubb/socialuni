@@ -2,8 +2,8 @@ package com.socialuni.sdk.logic.service.tag;
 
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.logic.domain.tag.SoicialTagAddDomain;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
@@ -23,7 +23,7 @@ public class SocialTagService {
     SoicialTagAddDomain soicialTagAddDomain;
 
     public ResultRO<TagRO> addTag(TagAddQO tagAddQO) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
         return new ResultRO<>(tagRO);
     }

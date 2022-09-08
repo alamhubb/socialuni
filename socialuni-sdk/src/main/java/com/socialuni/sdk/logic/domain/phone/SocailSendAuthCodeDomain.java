@@ -5,13 +5,13 @@ import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.sdk.utils.TencentSmsServe;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.sdk.constant.socialuni.StatusConst;
-import com.socialuni.sdk.model.DO.AuthenticationDO;
+import com.socialuni.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
@@ -42,7 +42,7 @@ public class SocailSendAuthCodeDomain {
     SocialUserPhoneManage socialUserPhoneManage;
 
     //发送验证码
-    private void sendAuthCodeCheck(String phoneNum, SocialUserDO mineUser, String userIp) {
+    private void sendAuthCodeCheck(String phoneNum, SocialuniUserDO mineUser, String userIp) {
 
         //h5登录也需要防止
         if (StringUtils.isEmpty(userIp)) {
@@ -102,7 +102,7 @@ public class SocailSendAuthCodeDomain {
         }
     }
 
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, SocialUserDO mineUser) {
+    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, SocialuniUserDO mineUser) {
         //要防的是同1个ip无线刷验证码
         //发送验证码时要记录ip，记录用户id，记录请求内容
         //限制手机号，同1手机号做多2条，
@@ -111,7 +111,7 @@ public class SocailSendAuthCodeDomain {
         String phoneNum = authCodeQO.getPhoneNum();
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
 
-        AuthenticationDO authenticationDO = new AuthenticationDO(SocialUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountUtils.getDevIdNotNull());
+        AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountUtils.getDevIdNotNull());
         authenticationDO.setStatus(StatusConst.fail);
         authRepository.save(authenticationDO);
 

@@ -1,15 +1,15 @@
 package com.socialuni.sdk.logic.entity;
 
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.ThirdUserAuthManage;
 import com.socialuni.sdk.logic.manage.ThirdUserManage;
 import com.socialuni.sdk.logic.manage.ThirdUserTokenManage;
-import com.socialuni.sdk.model.DO.dev.ThirdUserDO;
-import com.socialuni.sdk.model.DO.user.SocialUserPhoneDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.constant.AuthType;
@@ -43,8 +43,8 @@ public class AuthThirdUserEntity {
     }*/
 
     //登录和 绑定手机号和微信手机号三个地方使用
-    public CenterMineUserDetailRO authThirdUser(SocialUserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
-        CenterMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
+    public SocialuniMineUserDetailRO authThirdUser(SocialuniUserDO mineUser, String authType, DevAccountDO devAccountDO, SocialMineUserDetailRO socialMineUserDetailRO) {
+        SocialuniMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
         //只是记录一个授权记录
         ThirdUserDO threeUserDO = thirdUserManage.getOrCreate(devAccountDO.getId(), mineUser.getUnionId(), centerMineUserDetailRO.getId().toString());

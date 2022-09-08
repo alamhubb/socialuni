@@ -2,10 +2,10 @@ package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.sdk.constant.socialuni.ContentType;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.tag.TagDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.tag.TagDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.factory.SocialTalkImgROFactory;
 import com.socialuni.sdk.factory.community.SocialTagROFactory;

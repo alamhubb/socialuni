@@ -3,8 +3,8 @@ package com.socialuni.sdk.logic.manage;
 
 import com.socialuni.sdk.dao.repository.dev.DevAccountProviderRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
-import com.socialuni.sdk.model.DO.dev.DevAccountProviderDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountProviderDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.user.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;

@@ -2,8 +2,8 @@ package com.socialuni.sdk.dao.store;
 
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.constant.socialuni.GenderType;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkTabType;
@@ -28,7 +28,7 @@ public class SocialHomeTalkQueryStore {
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialUserDO user) {
+    public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialuniUserDO user) {
         String postTalkUserGender = queryBO.getTalkUserGender();
         String talkVisibleGender = queryBO.getTalkVisibleGender();
         String tabType = queryBO.getHomeTabType();

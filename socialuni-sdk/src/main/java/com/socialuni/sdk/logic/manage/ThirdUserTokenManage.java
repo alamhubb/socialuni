@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.manage;
 
-import com.socialuni.sdk.model.DO.dev.ThirdUserTokenDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserTokenDO;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.sdk.config.SocialTokenUtil;
 import org.springframework.stereotype.Service;

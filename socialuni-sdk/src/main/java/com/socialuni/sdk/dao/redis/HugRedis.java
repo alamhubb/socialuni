@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.redis;
 
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
-import com.socialuni.sdk.model.DO.HugDO;
+import com.socialuni.sdk.dao.DO.HugDO;
 import com.socialuni.sdk.dao.repository.HugRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

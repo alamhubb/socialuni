@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.model;
 
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import lombok.Data;
 
 
@@ -14,7 +14,7 @@ public class ReportUserVO {
     public ReportUserVO() {
     }
 
-    public ReportUserVO(SocialUserDO user) {
+    public ReportUserVO(SocialuniUserDO user) {
         this.nickname = user.getNickname();
         this.avatar = user.getAvatar();
         this.status = user.getStatus();

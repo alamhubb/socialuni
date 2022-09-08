@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository.dev;
 
 
-import com.socialuni.sdk.model.DO.dev.ThirdUserAuthDO;
+import com.socialuni.sdk.dao.DO.dev.ThirdUserAuthDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

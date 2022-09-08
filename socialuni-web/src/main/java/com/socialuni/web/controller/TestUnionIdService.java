@@ -1,7 +1,7 @@
 package com.socialuni.web.controller;
 
 import com.socialuni.sdk.factory.DO.UnionIdDOFactory;
-import com.socialuni.sdk.model.DO.UnionIdDO;
+import com.socialuni.sdk.dao.DO.UnionIdDO;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserTokenRepository;

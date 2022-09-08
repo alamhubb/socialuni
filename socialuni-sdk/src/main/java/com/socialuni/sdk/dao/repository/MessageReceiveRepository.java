@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository;
 
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
+import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

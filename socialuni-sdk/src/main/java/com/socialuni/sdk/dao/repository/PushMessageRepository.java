@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository;
 
-import com.socialuni.sdk.model.DO.notify.PushMessageDO;
+import com.socialuni.sdk.dao.DO.notify.PushMessageDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

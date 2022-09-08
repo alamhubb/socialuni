@@ -4,17 +4,17 @@ package com.socialuni.sdk.factory;
 import com.socialuni.sdk.logic.manage.FollowManage;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.LoadMoreType;
-import com.socialuni.sdk.model.DO.chat.ChatDO;
-import com.socialuni.sdk.model.DO.chat.ChatUserDO;
-import com.socialuni.sdk.model.DO.message.MessageDO;
-import com.socialuni.sdk.model.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.sdk.dao.DO.message.MessageDO;
+import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.sdk.model.RO.message.message.SocialMessageRO;
 import com.socialuni.sdk.dao.repository.ChatRepository;
 import com.socialuni.sdk.dao.repository.MessageReceiveRepository;
 import com.socialuni.sdk.dao.repository.MessageRepository;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.ChatStatus;
 import com.socialuni.sdk.constant.socialuni.ChatType;
 import com.socialuni.sdk.constant.socialuni.ChatUserStatus;
@@ -133,7 +133,7 @@ public class SocialChatROFactory {
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
         if (!ChatType.systemChats.contains(chatRO.getType())) {
-            SocialUserDO receiveUser = SocialUserUtil.getUserNotNull(chatUserDO.getReceiveUserId());
+            SocialuniUserDO receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getReceiveUserId());
 
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setNickname(receiveUser.getAvatar());

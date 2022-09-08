@@ -1,11 +1,11 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.factory.RO.talk.CenterTalkROFactory;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class CenterTalkDetailDomain {
     SocialTalkDetailQueryDomain socialTalkDetailQueryDomain;
 
     public CenterTalkRO queryTalkDetail(String talkId) {
-        SocialUserDO mineUser = SocialUserUtil.getMineUserAllowNull();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         Integer talkIdInt = UnionIdDbUtil.getTalkUnionIdByUidNotNull(talkId);
 

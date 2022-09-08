@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository;
 
 
-import com.socialuni.sdk.model.DO.AntispamDO;
+import com.socialuni.sdk.dao.DO.AntispamDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

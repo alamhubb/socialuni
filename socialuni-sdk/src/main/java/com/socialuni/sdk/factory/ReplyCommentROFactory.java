@@ -1,12 +1,12 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.factory.user.base.SocialUserROFactory;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.community.comment.SocialReplyCommentRO;
 import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,7 +17,7 @@ public class ReplyCommentROFactory {
         socialReplyCommentRO.setId(comment.getUnionId());
 //        socialReplyCommentRO.setContentType(ContentType.comment);
 //        replyCommentRO.setNo(comment.getNo());
-        SocialUserDO commentUser = SocialUserUtil.getUserNotNull(comment.getUserId());
+        SocialuniUserDO commentUser = SocialuniUserUtil.getUserNotNull(comment.getUserId());
         SocialUserRO commentUserRO = SocialUserROFactory.getUserRO(commentUser);
         socialReplyCommentRO.setUser(commentUserRO);
         return socialReplyCommentRO;

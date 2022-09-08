@@ -1,8 +1,8 @@
 package com.socialuni.sdk.logic.service;
 
 import com.socialuni.sdk.constant.config.AppConfigStatic;
-import com.socialuni.sdk.model.DO.keywords.IllegalWordDO;
-import com.socialuni.sdk.model.DO.keywords.KeywordsDO;
+import com.socialuni.sdk.dao.DO.keywords.IllegalWordDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.sdk.dao.repository.IllegalWordRepository;
 import com.socialuni.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;

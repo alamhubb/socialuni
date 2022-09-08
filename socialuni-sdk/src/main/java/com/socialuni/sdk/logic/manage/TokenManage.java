@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.manage;
 
-import com.socialuni.sdk.model.DO.user.SocialTokenDO;
+import com.socialuni.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.sdk.dao.repository.CommonTokenRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.constant.socialuni.DateTimeType;

@@ -1,10 +1,10 @@
 package com.socialuni.sdk.logic.service;
 
-import com.socialuni.sdk.model.DO.dev.DevAccountDO;
+import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.logic.entity.CenterDevAccountEntity;
 import com.socialuni.sdk.constant.AuthType;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
@@ -43,7 +43,7 @@ public class CenterMockService {
 //        DevAccountProviderDO devAccountProviderDO = DevAccountUtils.getDevAccountProviderDO(mpType);
 //        OAuthUserInfoQO authVO = new OAuthUserInfoQO(devAccountProviderDO.getAppId(), devAccountProviderDO.getMpType());
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        SocialUserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
+        SocialuniUserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
         return centerOAuthService.oAuthUserInfo(devAccountDO, userDO, authType);
     }
 

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.manage;
 
 import com.socialuni.sdk.model.UniUnionIdRO;
-import com.socialuni.sdk.model.DO.user.SocialUserAccountDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserAccountDO;
 import com.socialuni.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;

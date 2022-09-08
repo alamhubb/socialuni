@@ -7,10 +7,10 @@ import com.socialuni.sdk.model.PushNotifyVO;
 import com.socialuni.sdk.model.PushValue;
 import com.socialuni.sdk.platform.qq.QQConst;
 import com.socialuni.sdk.platform.weixin.WxConst;
-import com.socialuni.sdk.model.DO.NotifyDO;
-import com.socialuni.sdk.model.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import java.util.HashMap;
  */
 public class CommentPushUtils {
     //动态评论通知
-    public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialUserDO requestUser) {
+    public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialuniUserDO requestUser) {
         SocialCommentDO comment = CommentUtils.getNotNull(notify.getCommentId());
         SocialTalkDO talk = TalkUtils.getNotNull(comment.getTalkId());
         SocialCommentDO replyComment;
@@ -37,7 +37,7 @@ public class CommentPushUtils {
         pushNotifyVO.setNickname(new PushValue(requestUser.getNickname()));
         pushNotifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(comment.getCreateTime())));
         pushNotifyVO.setBeContent(new PushValue(StringUtils.substring(replyComment.getContent(), 0, 20)));
-        pushNotifyVO.setBeNickname(new PushValue(SocialUserUtil.getUserNotNull(replyComment.getUserId()).getNickname()));
+        pushNotifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(replyComment.getUserId()).getNickname()));
 
         HashMap<String, Object> data = new HashMap<>();
         PushMsgDTO pushMsgDTO = null;

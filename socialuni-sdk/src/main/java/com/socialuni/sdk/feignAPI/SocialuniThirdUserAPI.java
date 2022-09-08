@@ -1,7 +1,7 @@
 package com.socialuni.sdk.feignAPI;
 
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,9 +21,9 @@ import javax.validation.Valid;
 public interface SocialuniThirdUserAPI {
     @PostMapping("registryUser")
     @Operation(summary = "注册用户，由三方应用服务端发起，携带用户信息和秘钥")
-    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> registryUser(@RequestBody @Valid SocialProviderLoginQO loginQO);
+    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> registryUser(@RequestBody @Valid SocialProviderLoginQO loginQO);
 
     @GetMapping("queryThirdUser")
     @Operation(summary = "查询用户信息，由三方应用服务端发起，携带用户token")
-    ResultRO<CenterMineUserDetailRO> queryThirdUser();
+    ResultRO<SocialuniMineUserDetailRO> queryThirdUser();
 }

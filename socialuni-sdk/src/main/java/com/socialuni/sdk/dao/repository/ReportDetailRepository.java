@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.repository;
 
-import com.socialuni.sdk.model.DO.ReportDO;
-import com.socialuni.sdk.model.DO.ReportDetailDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.ReportDetailDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

@@ -1,6 +1,6 @@
 package com.socialuni.web.controller;
 
-import com.socialuni.sdk.model.RO.user.CenterMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.logic.service.phone.CenterPhoneService;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
@@ -23,7 +23,7 @@ public class CenterPhoneController implements SocialuniPhoneAPI {
     }
 
     @Override
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         return centerPhoneService.phoneLogin(socialPhoneNumQO);
     }
 }

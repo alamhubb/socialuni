@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.manage;
 
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.DO.user.SocialUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.utils.SocialUserDOFactory;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
@@ -14,17 +14,17 @@ public class SocialUserManage {
     @Resource
     UserRepository userRepository;
 
-    public SocialUserDO createUserByProviderLogin(SocialProviderLoginQO loginQO) {
+    public SocialuniUserDO createUserByProviderLogin(SocialProviderLoginQO loginQO) {
         Integer userUnionId = UnionIdDbUtil.createUserUnionId();
-        SocialUserDO user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
+        SocialuniUserDO user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
         user.setUnionId(userUnionId);
         user = userRepository.save(user);
         return user;
     }
 
-    public SocialUserDO createUserByPhoneLogin() {
+    public SocialuniUserDO createUserByPhoneLogin() {
         Integer userUnionId = UnionIdDbUtil.createUserUnionId();
-        SocialUserDO user = SocialUserDOFactory.newUserByPhoneLogin();
+        SocialuniUserDO user = SocialUserDOFactory.newUserByPhoneLogin();
         user.setUnionId(userUnionId);
         user = userRepository.save(user);
         return user;

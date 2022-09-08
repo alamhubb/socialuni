@@ -1,6 +1,6 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.sdk.utils.SocialUserUtil;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.config.SocialuniWebInterceptorConfig;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class SocialuniWebInterceptorConfigImpl implements SocialuniWebInterceptorConfig {
     @Override
     public String getUserId() {
-        return SocialUserUtil.getMineUserIdStrInterceptor();
+        return SocialuniUserUtil.getMineUserIdStrInterceptor();
     }
 }

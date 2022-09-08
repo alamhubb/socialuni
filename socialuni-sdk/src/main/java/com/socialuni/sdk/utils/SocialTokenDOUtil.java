@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialTokenUtil;
-import com.socialuni.sdk.model.DO.user.SocialTokenDO;
+import com.socialuni.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.sdk.dao.repository.CommonTokenRepository;
 import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
 import com.socialuni.social.web.sdk.exception.SocialUserTokenExpireException;
