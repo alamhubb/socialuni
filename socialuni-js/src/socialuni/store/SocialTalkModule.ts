@@ -11,7 +11,6 @@ import TalkVueUtil from '../utils/TalkVueUtil'
 import TalkFilterUtil from '../utils/TalkFilterUtil'
 import TalkTabType from '@/socialuni/constant/TalkTabType'
 import StorageUtil from '@/socialuni/utils/StorageUtil'
-import AppConfigAPI from "@/api/AppConfigAPI";
 
 
 @Module({generateMutationSetters: true})
@@ -143,7 +142,7 @@ export default class SocialTalkModule extends VuexModule {
 
   @Action
   getTalkTabs() {
-    this.talkTabs = AppConfigAPI.queryHomeTalkTabsAPI()
+    // this.talkTabs = AppConfigAPI.queryHomeTalkTabsAPI()
     this.updateCircleByTabIndex()
   }
 
