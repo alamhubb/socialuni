@@ -12,7 +12,17 @@
       <div class="px-sm mt">
         已选校园名称： {{ curSchoolName || null }}
       </div>
-
+      <!--      <q-select v-model="curSchoolName" :list="schools" label-name="name" value-name="name"></q-select>-->
+      <scroll-view class="mt-sm h380 bt" scroll-y>
+        <div v-for="circle in filterCircles" class="bb px-sm py-sm row-between-center"
+             @click="curSchoolName = circle.name">
+          <div>{{
+              circle.name
+            }}
+          </div>
+          <q-icon v-if="circle.name === curSchoolName" icon="checkmark" size="16"></q-icon>
+        </div>
+      </scroll-view>
     </div>
   </q-popup>
 </template>

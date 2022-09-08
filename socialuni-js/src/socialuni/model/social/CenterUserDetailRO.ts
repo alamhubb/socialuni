@@ -1,6 +1,6 @@
 import ImgFileVO from '../ImgFileVO'
 
-export default class SocialuniUserDetailRO {
+export default class CenterUserDetailRO {
   id: string = null
   nickname: string = ''
   avatar: string = ''
