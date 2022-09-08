@@ -1,12 +1,12 @@
 package com.socialuni.sdk.logic.service.user;
 
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;
 import com.socialuni.sdk.logic.entity.UniUserRegistryDomain;
-import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
-import com.socialuni.sdk.factory.RO.user.CenterUserDetailROFactory;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.*;
@@ -43,22 +43,22 @@ public class SocialuniUserService {
             ResultRO<SocialuniMineUserDetailRO> resultRO = socialuniUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniMineUserDetailRO(resultRO.getData());
         } else {
-            mineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail();
+            mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail();
         }
         return new ResultRO<>(mineUserDetailRO);
     }
 
-    public ResultRO<CenterUserDetailRO> queryUserDetail(String userId) {
+    public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
         SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUid(userId);
 
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        CenterUserDetailRO userDetailRO;
+        SocialuniUserDetailRO userDetailRO;
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<CenterUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(userId);
-            userDetailRO = new CenterUserDetailRO(resultRO.getData());
+            ResultRO<SocialuniUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(userId);
+            userDetailRO = new SocialuniUserDetailRO(resultRO.getData());
         } else {
-            userDetailRO = CenterUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
+            userDetailRO = SocialuniUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
         }
         return new ResultRO<>(userDetailRO);
     }
@@ -66,42 +66,37 @@ public class SocialuniUserService {
 
     public ResultRO<SocialuniMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
-        SocialMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
         if (SocialAppConfig.serverIsChild()) {
             return socialuniUserAPI.editUser(socialUserEditQO);
         }
 
-        SocialuniMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
-
-        return ResultRO.success(centerMineUserDetailRO);
+        return ResultRO.success(socialMineUserDetailRO);
     }
 
     public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        SocialMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
         if (SocialAppConfig.serverIsChild()) {
             return socialuniUserAPI.addUserImg(socialUserImgAddQO);
         }
-        SocialuniMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
 
-        return ResultRO.success(centerMineUserDetailRO);
+        return ResultRO.success(socialMineUserDetailRO);
     }
 
-    public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(CenterUserImgDeleteQO centerUserImgDeleteQO) {
+    public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer userImgId = UnionIdDbUtil.getUserImgUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
+        Integer userImgId = UnionIdDbUtil.getUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
 
-        SocialMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
         if (SocialAppConfig.serverIsChild()) {
             return socialuniUserAPI.deleteUserImg(centerUserImgDeleteQO);
         }
-        SocialuniMineUserDetailRO centerMineUserDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(socialMineUserDetailRO, mineUser);
-
-        return ResultRO.success(centerMineUserDetailRO);
+        return ResultRO.success(socialMineUserDetailRO);
     }
 
     public ResultRO<SocialUserIdentityAuthPreCheckRO> identityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {

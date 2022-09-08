@@ -1,14 +1,14 @@
 package com.socialuni.sdk.factory.QO;
 
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryQO;
-import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
+import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 
 /**
  * @author qinkaiyuan
  * @date 2021-08-06 20:47
  */
 public class SocialHomeTalkQueryQOFactory {
-    public static SocialHomeTabTalkQueryQO getTalkQueryQO(CenterHomeTabTalkQueryQO queryQO) {
+    public static SocialHomeTabTalkQueryQO getTalkQueryQO(SocialuniHomeTabTalkQueryQO queryQO) {
         SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = new SocialHomeTabTalkQueryQO();
 
          /*private List<Integer> talkIds;

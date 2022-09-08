@@ -1,12 +1,12 @@
 package com.socialuni.sdk.model;
 
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -38,10 +38,10 @@ public class UnreadCommentVO {
      */
     private Date createTime;
 
-    private SocialTalkRO talk;
+    private SocialuniTalkRO talk;
 
 
-    private SocialUserRO user;
+    private SocialuniUserRO user;
 
     private List<UnreadCommentVO> childComments;
 

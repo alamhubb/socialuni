@@ -1,7 +1,7 @@
 package com.socialuni.sdk.model.RO.message.message;
 
 
-import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,7 +16,7 @@ public class SocialMessageRO {
     // 前端遍历使用
     private Integer id;
     private String content;
-    private SocialUserRO user;
+    private SocialuniUserRO user;
     // 前端对比是否为当前用户使用，聊天页面
     //用来帮助前端判断是否为自己发送的
     private Boolean isMine;

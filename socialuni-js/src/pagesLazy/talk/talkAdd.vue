@@ -394,7 +394,7 @@ export default class SocialTalkAddPage extends Vue {
     if (!this.user) {
       AlertUtil.error('请进行登录')
     }
-    if (!this.user.school) {
+    if (!this.user.schoolName) {
       AlertUtil.error('请设置您所在的学校后才可发表动态')
     }
     if (!this.user.identityAuth) {

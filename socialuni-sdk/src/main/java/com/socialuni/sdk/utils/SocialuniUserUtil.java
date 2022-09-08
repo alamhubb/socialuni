@@ -201,7 +201,7 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDO getUserByUid(String uid) {
-        Integer id = UnionIdDbUtil.getUserUnionIdByUidNotNull(uid);
+        Integer id = UnionIdDbUtil.getUnionIdByUidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }
 

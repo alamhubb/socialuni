@@ -1,9 +1,9 @@
 package com.socialuni.sdk.logic.entity;
 
+import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.sdk.logic.entity.user.SocialUserEntity;
 import com.socialuni.sdk.logic.entity.user.SocialUserPhoneEntity;
-import com.socialuni.sdk.factory.RO.user.CenterMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.logic.manage.SocialUserManage;
 import com.socialuni.sdk.logic.manage.TokenManage;
@@ -69,7 +69,7 @@ public class UniUserRegistryDomain {
         }
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
-        SocialuniMineUserDetailRO userDetailRO = CenterMineUserDetailROFactory.getMineUserDetail(mineUser);
+        SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         return new SocialLoginRO<>(socialUserTokenDO.getToken(), userDetailRO);
         //如果uid存在，则代表用户注册过

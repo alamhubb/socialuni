@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.entity.comment;
 import com.socialuni.sdk.logic.manage.talk.TalkManage;
 import com.socialuni.sdk.dao.store.CommentStore;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ public class SocialPostCommentEntity {
     @Resource
     private TalkManage talkManage;
 
-    public SocialCommentDO saveComment(SocialCommentPostQO addVO, Integer mineUserId) {
+    public SocialCommentDO saveComment(SocialuniCommentPostQO addVO, Integer mineUserId) {
         //创建和保存comment到db
         SocialCommentDO commentDO = commentStore.saveAddComment(addVO, mineUserId);
 

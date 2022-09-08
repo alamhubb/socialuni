@@ -1,6 +1,6 @@
 package com.socialuni.sdk.feignAPI;
 
-import com.socialuni.sdk.model.QO.CenterReportAddQO;
+import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +19,7 @@ import java.util.List;
 public interface SocialuniReportAPI {
     @PostMapping("addReport")
     @Operation(summary = "举报")
-    ResultRO<String> addReport(@RequestBody @Valid CenterReportAddQO socialReportAddQO);
+    ResultRO<String> addReport(@RequestBody @Valid SocialuniReportAddQO socialReportAddQO);
 
     @GetMapping("queryReportTypes")
     @Operation(summary = "查询举报类型列表")

@@ -15,13 +15,13 @@ public class SocialBindUserSocialuniAccountDomain {
     SocialBindUserProviderAccountEntity socialBindUserProviderAccountEntity;
 
 
-    /*public void bindUserSocialAccount(Integer mineUserId, SocialLoginRO<CenterMineUserDetailRO> socialLoginRO) {
+    /*public void bindUserSocialAccount(Integer mineUserId, SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniProviderLoginType.socialuni);
         loginQO.setPlatform(PlatformType.mp);
         loginQO.setCode(socialLoginRO.getToken());
 
-        CenterMineUserDetailRO centerUserDetailRO = socialLoginRO.getUser();
+        SocialuniMineUserDetailRO centerUserDetailRO = socialLoginRO.getUser();
 
         loginQO.setUnionId(centerUserDetailRO.getId());
         loginQO.setOpenId(centerUserDetailRO.getId());

@@ -13,6 +13,7 @@ import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
@@ -20,7 +21,6 @@ import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryQO;
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -111,7 +111,7 @@ public class SocialHomeTalkQueryDomain {
     }
 
     //查询非关注tab的动态列表
-    public List<SocialTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
+    public List<SocialuniTalkRO> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         //校验gender类型,生成BO
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
 
@@ -128,7 +128,7 @@ public class SocialHomeTalkQueryDomain {
             talkDOS = socialHomeTalkQueryEntity.queryHomeTalks(queryBO, mineUser);
         }
         //转换为rolist
-        List<SocialTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryBO);
+        List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryBO);
         return socialTalkROs;
     }
 }

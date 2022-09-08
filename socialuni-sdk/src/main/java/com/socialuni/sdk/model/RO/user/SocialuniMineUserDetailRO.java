@@ -9,25 +9,11 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniMineUserDetailRO extends CenterUserDetailRO {
+public class SocialuniMineUserDetailRO extends SocialuniUserDetailRO {
     private String phoneNum;
     private String birthday;
 
-    public SocialuniMineUserDetailRO(SocialuniMineUserDetailRO userRO) {
+    public SocialuniMineUserDetailRO(SocialuniUserDetailRO userRO) {
         super(userRO);
-        this.phoneNum = userRO.getPhoneNum();
-        this.birthday = userRO.getBirthday();
-    }
-
-    public SocialuniMineUserDetailRO(CenterUserDetailRO centerUserDetailRO, SocialMineUserDetailRO userRO) {
-        super(centerUserDetailRO);
-        this.phoneNum = userRO.getPhoneNum();
-        this.birthday = userRO.getBirthday();
-    }
-
-    public SocialuniMineUserDetailRO(SocialMineUserDetailRO userRO) {
-        super(userRO);
-        this.phoneNum = userRO.getPhoneNum();
-        this.birthday = userRO.getBirthday();
     }
 }

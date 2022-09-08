@@ -2,8 +2,8 @@ package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.feignAPI.SocialuniHugAPI;
-import com.socialuni.sdk.model.QO.CenterHugAddQO;
-import com.socialuni.sdk.logic.service.CenterHugService;
+import com.socialuni.sdk.logic.service.SocialuniHugService;
+import com.socialuni.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,12 +12,12 @@ import javax.annotation.Resource;
 @RestController
 public class SocialuniHugController implements SocialuniHugAPI {
     @Resource
-    CenterHugService centerHugAPIImpl;
+    SocialuniHugService centerHugAPIImpl;
     @Resource
     SocialuniHugAPI socialuniHugAPI;
 
     @Override
-    public ResultRO<Void> addHug(CenterHugAddQO socialHugAddQO) {
+    public ResultRO<Void> addHug(SocialuniHugAddQO socialHugAddQO) {
         centerHugAPIImpl.addHug(socialHugAddQO);
         //如果应用，则调用中心
         if (SocialAppConfig.serverIsChild()) {

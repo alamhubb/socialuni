@@ -1,10 +1,10 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniTagAPI;
+import com.socialuni.sdk.logic.service.tag.SocialuniTagService;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.sdk.model.RO.community.tag.TagTypeRO;
-import com.socialuni.sdk.logic.service.tag.CenterTagService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class SocialuniTagController implements SocialuniTagAPI {
     @Resource
-    CenterTagService centerTagAPIImpl;
+    SocialuniTagService centerTagAPIImpl;
 
     @Override
     public ResultRO<TagRO> addTag(TagAddQO tagAddQO) {

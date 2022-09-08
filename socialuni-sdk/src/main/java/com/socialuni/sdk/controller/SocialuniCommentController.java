@@ -1,10 +1,10 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniCommentAPI;
-import com.socialuni.sdk.model.QO.comment.CenterCommentDeleteQO;
-import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
-import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
-import com.socialuni.sdk.logic.service.CenterCommentService;
+import com.socialuni.sdk.logic.service.SocialuniCommentService;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
+import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,15 +13,15 @@ import javax.annotation.Resource;
 @RestController
 public class SocialuniCommentController implements SocialuniCommentAPI {
     @Resource
-    CenterCommentService centerCommentService;
+    SocialuniCommentService centerCommentService;
 
     @Override
-    public ResultRO<CenterCommentRO> postComment(CenterCommentPostQO centerCommentPostQO) {
+    public ResultRO<SocialuniCommentRO> postComment(SocialuniCommentPostQO centerCommentPostQO) {
         return centerCommentService.postComment(centerCommentPostQO);
     }
 
     @Override
-    public ResultRO<Void> deleteComment(CenterCommentDeleteQO commentDeleteQO) {
+    public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         return centerCommentService.deleteComment(commentDeleteQO);
     }
 }

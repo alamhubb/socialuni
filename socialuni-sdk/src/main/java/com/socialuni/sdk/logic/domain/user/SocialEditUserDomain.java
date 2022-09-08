@@ -1,12 +1,12 @@
 package com.socialuni.sdk.logic.domain.user;
 
-import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
+import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.platform.tencent.TencentCloud;
 import com.socialuni.sdk.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
-import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.GenderUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
@@ -25,7 +25,7 @@ public class SocialEditUserDomain {
     @Resource
     UserRepository userRepository;
 
-    public SocialMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDO mineUser) {
+    public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDO mineUser) {
 
         //昵称
         String nickname = socialUserEditQO.getNickname();
@@ -95,7 +95,7 @@ public class SocialEditUserDomain {
 
         mineUser = userRepository.save(mineUser);
 
-        SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         return socialMineUserDetailRO;
     }
 }

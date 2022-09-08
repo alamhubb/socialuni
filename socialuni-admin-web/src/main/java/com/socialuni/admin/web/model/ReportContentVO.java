@@ -1,8 +1,7 @@
 package com.socialuni.admin.web.model;
 
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkImgRO;
-import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
+import com.socialuni.sdk.model.RO.talk.CenterTalkImgRO;
 import lombok.Data;
 
 import java.util.List;
@@ -16,13 +15,13 @@ public class ReportContentVO {
     private String status;
 
 
-    private List<CenterCommentRO> comments;
+    private List<SocialuniCommentRO> comments;
 //举报次数
 
 
     public Integer reportNum;
 
-    private List<SocialTalkImgRO> imgs;
+    private List<SocialuniTalkImgRO> imgs;
     private List<TagRO> tags;
 
 }

@@ -1,6 +1,6 @@
 <template>
   <q-popup ref="schoolDialog" bottom>
-    <div class="h500 pd">
+    <div class="h550 pd">
       <q-search class="flex-1 mx-sm bg-default">
         <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
         <input v-model.trim="schoolNameValue" :adjust-position="false" type="text" focus
@@ -9,9 +9,10 @@
                 @click="clearSchoolNameValue"
         ></q-icon>
       </q-search>
-      <div>
-        <div v-for="circle in filterCircles">{{ circle.name }}</div>
+      <div class="px-sm mt">
+        已选校园名称： {{ curSchoolName || null }}
       </div>
+
     </div>
   </q-popup>
 </template>
@@ -23,9 +24,11 @@ import QSearch from "@/qing-ui/components/QSearch/QSearch.vue";
 import QIcon from "@/qing-ui/components/QLocation/QIcon.vue";
 import CircleAPI from "@/socialuni/api/socialuni/CircleAPI";
 import SocialCircleRO from "@/socialuni/model/community/circle/SocialCircleRO";
+import {socialUserModule} from "@/socialuni/store";
+import QSelect from "@/qing-ui/components/QSelect/QSelect.vue";
 
 @Component({
-  components: {QIcon, QPopup, QSearch}
+  components: {QSelect, QIcon, QPopup, QSearch}
 })
 export default class UserSchoolEditDialog extends Vue {
   $refs!: {
@@ -34,17 +37,23 @@ export default class UserSchoolEditDialog extends Vue {
     schoolDialog: QPopup;
   }
 
+  curSchoolName = null
+
   schoolNameValue = null
-  circles: SocialCircleRO[] = []
+  schools: SocialCircleRO[] = []
 
   open() {
+    if (socialUserModule.user.schoolName) {
+      this.curSchoolName = socialUserModule.user.schoolName
+      this.schoolNameValue = this.curSchoolName
+    }
     this.querySchoolCircles()
     this.$refs.schoolDialog.open()
   }
 
   async querySchoolCircles() {
     const res = await CircleAPI.queryCirclesByTypeAPI('大学')
-    this.circles = res.data
+    this.schools = res.data
   }
 
   clearSchoolNameValue() {
@@ -53,9 +62,9 @@ export default class UserSchoolEditDialog extends Vue {
 
   get filterCircles() {
     if (this.schoolNameValue) {
-      return this.circles.filter(item => item.name.includes(this.schoolNameValue))
+      return this.schools.filter(item => item.name.includes(this.schoolNameValue))
     }
-    return this.circles
+    return this.schools
   }
 }
 </script>

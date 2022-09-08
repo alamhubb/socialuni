@@ -1,8 +1,9 @@
 package com.socialuni.sdk.factory;
 
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkImgRO;
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkImgRO;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
 import lombok.Data;
 
 import java.util.List;
@@ -12,9 +13,10 @@ import java.util.stream.Collectors;
 public class SocialTalkImgROFactory {
 
 
-    public static SocialTalkImgRO newTalkImgRO(SocialTalkImgDO socialTalkImgDO) {
-        SocialTalkImgRO socialTalkImgRO = new SocialTalkImgRO();
-        socialTalkImgRO.setId(socialTalkImgDO.getId());
+    public static SocialuniTalkImgRO newTalkImgRO(SocialTalkImgDO socialTalkImgDO) {
+        SocialuniTalkImgRO socialTalkImgRO = new SocialuniTalkImgRO();
+        String uid = UnionIdDbUtil.getUidByUnionIdNotNull(socialTalkImgDO.getUnionId());
+        socialTalkImgRO.setId(uid);
 
         socialTalkImgRO.setSrc(SocialAppConfig.getStaticResourceUrl()  + socialTalkImgDO.getSrc());
         socialTalkImgRO.setAspectRatio(socialTalkImgDO.getAspectRatio());
@@ -22,7 +24,7 @@ public class SocialTalkImgROFactory {
     }
 
 
-    public static List<SocialTalkImgRO> newTalkImgROS(List<SocialTalkImgDO> imgDOS) {
+    public static List<SocialuniTalkImgRO> newTalkImgROS(List<SocialTalkImgDO> imgDOS) {
         return imgDOS.stream().map(SocialTalkImgROFactory::newTalkImgRO).collect(Collectors.toList());
     }
 }

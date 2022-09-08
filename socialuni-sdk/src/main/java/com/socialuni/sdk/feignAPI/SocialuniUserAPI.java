@@ -2,7 +2,7 @@ package com.socialuni.sdk.feignAPI;
 
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,7 +22,7 @@ public interface SocialuniUserAPI {
 
     @GetMapping("queryUserDetail/{talkId}")
     @Operation(summary = "获取他人用户详情")
-    ResultRO<CenterUserDetailRO> queryUserDetail(@PathVariable("talkId") String userId);
+    ResultRO<SocialuniUserDetailRO> queryUserDetail(@PathVariable("talkId") String userId);
 
 
     @PostMapping("editUser")
@@ -35,5 +35,5 @@ public interface SocialuniUserAPI {
 
     @PostMapping("deleteUserImg")
     @Operation(summary = "删除用户图片")
-    ResultRO<SocialuniMineUserDetailRO> deleteUserImg(@RequestBody @Valid CenterUserImgDeleteQO centerUserImgDeleteQO);
+    ResultRO<SocialuniMineUserDetailRO> deleteUserImg(@RequestBody @Valid SocialuniUserImgDeleteQO centerUserImgDeleteQO);
 }

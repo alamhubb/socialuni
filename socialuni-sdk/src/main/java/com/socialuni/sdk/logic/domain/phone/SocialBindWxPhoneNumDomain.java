@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.domain.phone;
 
 import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
-import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
+import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.sdk.model.UniUnionIdRO;
 import com.socialuni.sdk.platform.WxDecode;
@@ -10,7 +10,7 @@ import com.socialuni.sdk.platform.WxPhoneNumRO;
 import com.socialuni.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.UniProviderUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
@@ -30,7 +30,7 @@ public class SocialBindWxPhoneNumDomain {
     private SocialUserAccountManage socialUserAccountManage;
 
     //微信绑定手机号方法
-    public SocialMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDO mineUser) {
+    public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDO mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
         socialProviderLoginQO.setProvider(UniappProviderType.wx);
@@ -50,7 +50,7 @@ public class SocialBindWxPhoneNumDomain {
         }
         mineUser = socialUserPhoneEntity.checkPhoneNumAndCreateBind(mineUser, phoneNumVO.getCountryCode(), phoneNumVO.getPurePhoneNumber());
         //根据用户得到返回详情
-        SocialMineUserDetailRO mineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
+        SocialuniMineUserDetailRO mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         //返回真实手机号
         mineUserDetailRO.setPhoneNum(phoneNumVO.getPurePhoneNumber());
         return mineUserDetailRO;

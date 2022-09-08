@@ -71,7 +71,7 @@ public class AuthenticationManage {
             //如果已被使用的手机号已违规，就不能登陆了，违规了，登陆自己的也没意义，不能操作
             UserDO phoneUser = UserUtils.get(socialUserPhoneDO.getUserId());
             if (phoneUser.getStatus().equals(UserStatus.violation)) {
-                UserDetailDO userDetailDO = CenterUserUtil.getUserDetail(user.getId());
+                UserDetailDO userDetailDO = SocialuniUserUtil.getUserDetail(user.getId());
                 return new ResultRO<>(ErrorMsgUtil.getErrorCode605ContactServiceValue(userDetailDO.getViolationEndTime()));
             }
         }

@@ -8,7 +8,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import org.springframework.stereotype.Service;
@@ -29,18 +29,18 @@ public class SocialPhoneService {
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }
 
-    public ResultRO<SocialMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        SocialMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
 
         return new ResultRO<>(socialMineUserDetailRO);
     }
 
-    public ResultRO<SocialMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO socialBindWxPhoneNumQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO socialBindWxPhoneNumQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //微信绑定手机号方法
-        SocialMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
 
         return new ResultRO<>(socialMineUserDetailRO);
     }

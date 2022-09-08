@@ -10,14 +10,14 @@ import com.socialuni.sdk.utils.ImgCheckUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
+import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class TalkDOFactory {
-    public static SocialTalkDO newTalkDO(SocialuniUserDO user, SocialTalkPostQO socialTalkPostQO, DistrictDO district) {
+    public static SocialTalkDO newTalkDO(SocialuniUserDO user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
         SocialTalkDO talkDO = new SocialTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
 
         //设置社交联盟唯一id

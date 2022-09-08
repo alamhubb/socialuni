@@ -1,9 +1,9 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniFollowAPI;
-import com.socialuni.sdk.model.QO.follow.CenterFollowAddQO;
-import com.socialuni.sdk.model.RO.user.CenterUserFollowDetailRO;
-import com.socialuni.sdk.logic.service.CenterFollowService;
+import com.socialuni.sdk.logic.service.SocialuniFollowService;
+import com.socialuni.sdk.model.QO.follow.SocialuniFollowAddQO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,20 +14,20 @@ import java.util.Map;
 @RestController
 public class SocialuniFollowController implements SocialuniFollowAPI {
     @Resource
-    CenterFollowService centerFollowService;
+    SocialuniFollowService centerFollowService;
 
     @Override
-    public ResultRO<Map<String, List<CenterUserFollowDetailRO>>> queryUserFollows() {
+    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
         return centerFollowService.queryUserFollows();
     }
 
     @Override
-    public ResultRO<Void> addFollow(CenterFollowAddQO addVO) {
+    public ResultRO<Void> addFollow(SocialuniFollowAddQO addVO) {
         return centerFollowService.addFollow(addVO);
     }
 
     @Override
-    public ResultRO<Void> cancelFollow(CenterFollowAddQO addVO) {
+    public ResultRO<Void> cancelFollow(SocialuniFollowAddQO addVO) {
         return centerFollowService.cancelFollow(addVO);
     }
 }

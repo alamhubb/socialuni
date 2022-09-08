@@ -1,8 +1,9 @@
 package com.socialuni.sdk.model;
 
 //import com.socialuni.sdk.utils.UnionIdDbUtil;
+
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import lombok.Data;
 
 /**
@@ -11,7 +12,7 @@ import lombok.Data;
  */
 @Data
 public class UserCommentBO {
-    private Integer id;
+    private String id;
     private String nickname;
     private String avatar;
     private String gender;
@@ -30,8 +31,8 @@ public class UserCommentBO {
         }
     }
 
-    public SocialUserRO toVO() {
-        SocialUserRO userCommentVO = new SocialUserRO();
+    public SocialuniUserRO toVO() {
+        SocialuniUserRO userCommentVO = new SocialuniUserRO();
         userCommentVO.setId(this.id);
         userCommentVO.setNickname(this.nickname);
         userCommentVO.setAvatar(this.avatar);

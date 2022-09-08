@@ -1,13 +1,12 @@
 package com.socialuni.sdk.logic.domain.thirdUser;
 
+import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.entity.AuthThirdUserEntity;
-import com.socialuni.sdk.factory.user.base.SocialMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.dao.DO.dev.ThirdUserTokenDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class AuthThirdUserDomain {
     //手机号和渠道登录，还有三方授权，三个地方使用
     public SocialLoginRO<SocialuniMineUserDetailRO> thirdUserAuthLogin(SocialuniUserDO mineUser, String authType, DevAccountDO devAccountDO) {
         //获取开发者对应的账号
-        SocialMineUserDetailRO socialMineUserDetailRO = SocialMineUserDetailROFactory.getMineUserDetail(mineUser);
+        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         SocialuniMineUserDetailRO centerUserDetailRO = authThirdUserEntity.authThirdUser(mineUser, authType, devAccountDO, socialMineUserDetailRO);
 

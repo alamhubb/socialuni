@@ -21,14 +21,14 @@ public interface SocialuniOAuthAPI {
 
 
 /*    @PostMapping("oAuthUserInfo")
-    ResultRO<SocialLoginRO<CenterUserDetailRO>> oAuthUserInfo(OAuthUserInfoQO authVO);
+    ResultRO<SocialLoginRO<SocialuniUserDetailRO>> oAuthUserInfo(OAuthUserInfoQO authVO);
 
 
     @PostMapping("oAuthUserPhoneNum")
-    ResultRO<SocialLoginRO<CenterUserDetailRO>> oAuthUserPhoneNum(OAuthUserInfoQO authVO);
+    ResultRO<SocialLoginRO<SocialuniUserDetailRO>> oAuthUserPhoneNum(OAuthUserInfoQO authVO);
 
     @PostMapping("getUserInfo")
-    ResultRO<SocialLoginRO<CenterUserDetailRO>> getUserInfo(OAuthUserInfoQO authVO);
+    ResultRO<SocialLoginRO<SocialuniUserDetailRO>> getUserInfo(OAuthUserInfoQO authVO);
 
     @PostMapping("getUserPhoneNum")
     ResultRO<OAuthUserPhoneNumRO> getOAuthUserPhoneNum();*/

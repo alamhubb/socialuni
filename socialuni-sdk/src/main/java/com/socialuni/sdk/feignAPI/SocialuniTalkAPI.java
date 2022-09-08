@@ -1,20 +1,15 @@
 package com.socialuni.sdk.feignAPI;
 
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.sdk.model.QO.talk.CenterHomeTabTalkQueryQO;
-import com.socialuni.sdk.model.QO.talk.CenterTalkIdQO;
-import com.socialuni.sdk.model.QO.talk.CenterUserTalkQueryQO;
-import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
+import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
+import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
+import com.socialuni.sdk.model.QO.talk.SocialuniTalkIdQO;
+import com.socialuni.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.servers.Server;
-import io.swagger.v3.oas.annotations.servers.ServerVariable;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -55,11 +50,11 @@ import java.util.List;
 public interface SocialuniTalkAPI {
     @GetMapping("queryTalks")
     @Operation(summary = "查询动态列表，无需参数")
-    ResultRO<List<CenterTalkRO>> queryTalks();
+    ResultRO<List<SocialuniTalkRO>> queryTalks();
 
     @PostMapping("queryTalks")
     @Operation(summary = "查询动态列表")
-    ResultRO<List<CenterTalkRO>> queryTalks(@RequestBody(required = false) CenterHomeTabTalkQueryQO queryQO);
+    ResultRO<List<SocialuniTalkRO>> queryTalks(@RequestBody(required = false) SocialuniHomeTabTalkQueryQO queryQO);
 
     /**
      * 返回talk是因为三方需要Id
@@ -69,17 +64,17 @@ public interface SocialuniTalkAPI {
      */
     @PostMapping("postTalk")
     @Operation(summary = "发表动态")
-    ResultRO<CenterTalkRO> postTalk(@RequestBody @Valid SocialTalkPostQO talkPostQO);
+    ResultRO<SocialuniTalkRO> postTalk(@RequestBody @Valid SocialuniTalkPostQO talkPostQO);
 
     @PostMapping("deleteTalk")
     @Operation(summary = "删除动态")
-    ResultRO<Void> deleteTalk(@RequestBody @Valid CenterTalkIdQO talkIdQO);
+    ResultRO<Void> deleteTalk(@RequestBody @Valid SocialuniTalkIdQO talkIdQO);
 
     @GetMapping("queryTalkDetail/{talkId}")
     @Operation(summary = "查询动态详情")
-    ResultRO<CenterTalkRO> queryTalkDetail(@PathVariable("talkId") String talkId);
+    ResultRO<SocialuniTalkRO> queryTalkDetail(@PathVariable("talkId") String talkId);
 
     @PostMapping("queryUserTalks")
     @Operation(summary = "查询用户动态列表")
-    ResultRO<List<CenterTalkRO>> queryUserTalks(@RequestBody @Valid CenterUserTalkQueryQO queryQO);
+    ResultRO<List<SocialuniTalkRO>> queryUserTalks(@RequestBody @Valid SocialuniUserTalkQueryQO queryQO);
 }

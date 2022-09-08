@@ -52,7 +52,7 @@ public class ViolationPushUtils {
         //违规用户
         pushNotifyVO.setBeNickname(new PushValue(vioUser.getNickname()));
 
-//        UserDetailDO userDetailDO =  CenterUserUtil.getUserDetail(vioUser.getId());
+//        UserDetailDO userDetailDO =  SocialuniUserUtil.getUserDetail(vioUser.getId());
 
         //处理结果
 //        pushNotifyVO.setResult(new PushValue(StringUtils.substring(userDetailDO.getViolationReason(), 0, 20)));

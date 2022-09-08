@@ -1,6 +1,6 @@
 package com.socialuni.sdk.feignAPI;
 
-import com.socialuni.sdk.model.QO.CenterHugAddQO;
+import com.socialuni.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,5 +17,5 @@ import javax.validation.Valid;
 public interface SocialuniHugAPI {
     @PostMapping("addHug")
     @Operation(summary = "点赞")
-    ResultRO<Void> addHug(@RequestBody @Valid CenterHugAddQO socialHugAddQO);
+    ResultRO<Void> addHug(@RequestBody @Valid SocialuniHugAddQO socialHugAddQO);
 }

@@ -24,7 +24,7 @@ public class HugAddBO {
         HugDO hugDO = new HugDO();
         hugDO.setCreateTime(new Date());
         hugDO.setTalkId(talkDO.getId());
-        hugDO.setUserId(CenterUserUtil.getMineUserId());
+        hugDO.setUserId(SocialuniUserUtil.getMineUserId());
         return hugDO;
     }
 
@@ -32,7 +32,7 @@ public class HugAddBO {
         HugDO hugDO = new HugDO();
         hugDO.setCreateTime(new Date());
         hugDO.setCommentId(commentDO.getId());
-        hugDO.setUserId(CenterUserUtil.getMineUserId());
+        hugDO.setUserId(SocialuniUserUtil.getMineUserId());
         return hugDO;
     }*/
 

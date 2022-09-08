@@ -116,22 +116,6 @@ public class UnionIdDbUtil {
 
 
     //结果不可为空 ，为前台传入的数据,根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
-    public static Integer getUserUnionIdByUidNotNull(String uid) {
-        return getUnionIdByUidNotNull(uid);
-    }
-
-    public static Integer getTalkUnionIdByUidNotNull(String uid) {
-        return getUnionIdByUidNotNull(uid);
-    }
-
-    public static Integer getUserImgUnionIdByUidNotNull(String uid) {
-        return getUnionIdByUidNotNull(uid);
-    }
-
-    public static Integer getCommentUnionIdByUidNotNull(String uid) {
-        return getUnionIdByUidNotNull(uid);
-    }
-
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     public static Integer getUnionIdByUidNotNull(String uuid) {
         return getUnionByUidNotNull(uuid).getId();

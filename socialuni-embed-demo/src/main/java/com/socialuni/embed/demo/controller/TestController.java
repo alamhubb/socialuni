@@ -6,14 +6,14 @@ import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.VisibleType;
-import com.socialuni.sdk.factory.user.base.SocialContentUserROFactory;
+import com.socialuni.sdk.factory.RO.user.CenterContentUserROFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
+import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.CenterTalkRO;
-import com.socialuni.sdk.model.RO.user.base.SocialContentUserRO;
-import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
+import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
+import com.socialuni.sdk.model.RO.user.CenterContentUserRO;
+import com.socialuni.sdk.model.RO.user.CenterUserRO;
 import com.socialuni.sdk.logic.service.CenterCommentService;
 import com.socialuni.sdk.logic.service.talk.CenterTalkService;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
@@ -62,7 +62,7 @@ public class TestController {
         TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
         SocialuniUserDO socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
-        SocialContentUserRO socialContentUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
+        CenterContentUserRO socialContentUserRO = CenterContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
 
         Map<String, Object> map = new HashMap<>();
         map.put("user", socialContentUserRO);
@@ -71,15 +71,15 @@ public class TestController {
     }
 
     @GetMapping("getMineUser")
-    public ResultRO<SocialUserRO> getMineUser() {
+    public ResultRO<SocialuniUserRO> getMineUser() {
         SocialuniUserDO socialUserDO = SocialuniUserUtil.getMineUserNotNull();
-        SocialContentUserRO socialUserRO = SocialContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
+        CenterContentUserRO socialUserRO = CenterContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);
     }
 
     @GetMapping("postTalk")
-    public ResultRO<CenterTalkRO> postTalk(String content) {
-        SocialTalkPostQO socialTalkPostQO = new SocialTalkPostQO();
+    public ResultRO<SocialuniTalkRO> postTalk(String content) {
+        SocialuniTalkPostQO socialTalkPostQO = new SocialuniTalkPostQO();
         socialTalkPostQO.setContent(content);
         socialTalkPostQO.setVisibleGender(GenderType.all);
         socialTalkPostQO.setImgs(new ArrayList<>());
@@ -88,23 +88,23 @@ public class TestController {
         socialTalkPostQO.setTagNames(new ArrayList<String>() {{
             add(SocialuniConst.devEnvTagName);
         }});
-        ResultRO<CenterTalkRO> resultRO = centerTalkService.postTalk(socialTalkPostQO);
+        ResultRO<SocialuniTalkRO> resultRO = centerTalkService.postTalk(socialTalkPostQO);
         return resultRO;
     }
 
     @GetMapping("postComment")
-    public ResultRO<CenterCommentRO> postComment(String talkId, String content) {
-        CenterCommentPostQO socialTalkPostQO = new CenterCommentPostQO();
+    public ResultRO<SocialuniCommentRO> postComment(String talkId, String content) {
+        SocialuniCommentPostQO socialTalkPostQO = new SocialuniCommentPostQO();
         socialTalkPostQO.setContent(content);
         socialTalkPostQO.setTalkId(talkId);
-        ResultRO<CenterCommentRO> resultRO = centerCommentService.postComment(socialTalkPostQO);
+        ResultRO<SocialuniCommentRO> resultRO = centerCommentService.postComment(socialTalkPostQO);
         return resultRO;
     }
 
     //如果header里面没有，则从reqeust里面拿
     @GetMapping("queryTalks")
-    public ResultRO<List<CenterTalkRO>> talks() {
-        ResultRO<List<CenterTalkRO>> resultRO = centerTalkService.queryTalks();
+    public ResultRO<List<SocialuniTalkRO>> talks() {
+        ResultRO<List<SocialuniTalkRO>> resultRO = centerTalkService.queryTalks();
         return resultRO;
     }
 

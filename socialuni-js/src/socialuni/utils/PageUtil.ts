@@ -56,7 +56,7 @@ export default class PageUtil {
     const user: CenterUserDetailRO = socialUserModule.user
     if (!user || !user.phoneNum) {
       MsgUtil.unBindPhoneNum()
-    } else if (!user.school) {
+    } else if (!user.schoolName) {
       // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
       AlertUtil.confirm('设置学校名称才能发表内容，是否前往设置学校名称页面')
         .then(() => {

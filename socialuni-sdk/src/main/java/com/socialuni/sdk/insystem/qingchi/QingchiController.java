@@ -29,12 +29,12 @@ public class QingchiController implements SocialuniQingchiAPI {
     private QingchiService qingchiService;
 
     @Override
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
         return qingchiService.providerLogin(loginQO);
     }
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO bindWxPhoneNumQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO bindWxPhoneNumQO) {
         return qingchiService.bindWxPhoneNum(bindWxPhoneNumQO);
     }
 
@@ -44,12 +44,12 @@ public class QingchiController implements SocialuniQingchiAPI {
     }
 
     @Override
-    public ResultRO<CenterMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO phoneNumQO) {
+    public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO phoneNumQO) {
         return qingchiService.bindPhoneNum(phoneNumQO);
     }
 
     @Override
-    public ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO){
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO){
         return qingchiService.phoneLogin(socialPhoneNumQO);
     }
 

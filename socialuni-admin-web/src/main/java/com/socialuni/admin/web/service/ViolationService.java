@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.sdk.dao.repository.*;
-import com.socialuni.sdk.repository.*;
+
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.dao.DO.ReportDO;

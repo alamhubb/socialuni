@@ -15,8 +15,8 @@ import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkTagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkPostQO;
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
+import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
 import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.logic.service.tag.TagService;
@@ -62,7 +62,7 @@ public class SocialTalkPostDomain {
     @Resource
     ModelContentCheck modelContentCheck;
 
-    public SocialTalkRO postTalk(SocialTalkPostQO talkPostQO) {
+    public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         List<String> tagNames = talkPostQO.getTagNames();
@@ -79,12 +79,12 @@ public class SocialTalkPostDomain {
         reportDomain.checkKeywordsCreateReport(talkDO);
         //不使用图片安全校验
         //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
-        SocialTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
+        SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
     }
 
 
-    public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialTalkPostQO talkVO) {
+    public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialuniTalkPostQO talkVO) {
 
         //校验地理位置
         String adCode = talkVO.getAdCode();
@@ -132,7 +132,7 @@ public class SocialTalkPostDomain {
         return talkAddValidateRO;
     }
 
-    public SocialTalkDO saveEntity(SocialuniUserDO userDO, SocialTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
+    public SocialTalkDO saveEntity(SocialuniUserDO userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {

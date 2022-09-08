@@ -2,9 +2,10 @@ package com.socialuni.sdk.dao.store;
 
 import com.socialuni.sdk.factory.CommentFactory;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.utils.CommentUtils;
+import com.socialuni.sdk.utils.UnionIdDbUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,9 +19,9 @@ public class CommentStore {
     private CommentFactory commentFactory;
 
     //保存新增的comment
-    public SocialCommentDO saveAddComment(SocialCommentPostQO addVO, Integer mineUserId) {
+    public SocialCommentDO saveAddComment(SocialuniCommentPostQO addQO, Integer mineUserId) {
         SocialCommentDO commentDO = commentFactory.createCommentDO(
-                addVO,
+                addQO,
                 mineUserId
         );
 
@@ -35,11 +36,15 @@ public class CommentStore {
      *
      * @return
      */
-    public void updateParentReplyCommentByAddComment(SocialCommentPostQO addVO) {
+    public void updateParentReplyCommentByAddComment(SocialuniCommentPostQO addVO) {
         if (addVO.getCommentId() == null) {
             return;
         }
-        SocialCommentDO parentComment = CommentUtils.getAllowNull(addVO.getCommentId());
+
+        Integer commentId  = UnionIdDbUtil.getUnionIdByUidNotNull(addVO.getCommentId());
+
+
+        SocialCommentDO parentComment = CommentUtils.getAllowNull(commentId);
         if (parentComment == null) {
             return;
         }
@@ -55,7 +60,9 @@ public class CommentStore {
         parentComment.setUpdateTime(curDate);
 
         if (addVO.getCommentId() != null) {
-            SocialCommentDO replyComment = CommentUtils.getAllowNull(addVO.getCommentId());
+            Integer replyId = UnionIdDbUtil.getUnionIdByUidNotNull(addVO.getReplyCommentId());
+
+            SocialCommentDO replyComment = CommentUtils.getAllowNull(replyId);
             if (replyComment != null) {
                 //测试所有自己评论自己，刚才处空指针了
                 replyComment.setUpdateTime(curDate);

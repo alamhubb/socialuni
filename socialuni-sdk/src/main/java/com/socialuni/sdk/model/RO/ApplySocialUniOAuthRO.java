@@ -1,10 +1,10 @@
 package com.socialuni.sdk.model.RO;
 
-import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import lombok.Data;
 
 @Data
 public class ApplySocialUniOAuthRO {
     private String token;
-    private SocialUserRO user;
+    private SocialuniUserRO user;
 }

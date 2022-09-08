@@ -1,14 +1,14 @@
 package com.socialuni.sdk.factory;
 
 
-import com.socialuni.sdk.factory.user.base.SocialUserROFactory;
 import com.socialuni.sdk.dao.DO.message.MessageDO;
 import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.factory.RO.user.SocialuniUserROFactory;
 import com.socialuni.sdk.model.RO.message.message.SocialMessageRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.MessageStatus;
-import com.socialuni.sdk.model.RO.user.base.SocialUserRO;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class SocialMessageROFactory {
         SocialMessageRO messageRO = new SocialMessageRO();
 
         SocialuniUserDO userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
-        SocialUserRO messageUser = SocialUserROFactory.getUserRO(userDO);
+        SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO);
         boolean isMine = messageDO.getUserId().equals(lookMessageUserId);
 
         messageRO.setId(messageDO.getId());

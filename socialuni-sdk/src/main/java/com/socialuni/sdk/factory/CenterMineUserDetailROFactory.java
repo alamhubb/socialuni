@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class CenterMineUserDetailROFactory {
+public class SocialuniMineUserDetailROFactory {
     public static UserDetailRepository userDetailRepository;
 
     @Resource
@@ -22,7 +22,7 @@ public class CenterMineUserDetailROFactory {
 
 
     public static MineUserDetailRO getMineUserDetail() {
-        UserDO mineUser = CenterUserUtil.getMineUser();
+        UserDO mineUser = SocialuniUserUtil.getMineUser();
         return MineUserDetailROFactory.getMineUserDetail(mineUser);
     }
 
@@ -30,32 +30,32 @@ public class CenterMineUserDetailROFactory {
         //根据用户得到返回详情
         UserDetailDO userDetailDO = userDetailRepository.findOneByUserId(mineUser.getId());
 
-        CenterUserDetailRO centerUserDetailRO = UserDetailROFactory.getUserDetailRO(mineUser, userDetailDO);
+        SocialuniUserDetailRO centerUserDetailRO = UserDetailROFactory.getUserDetailRO(mineUser, userDetailDO);
 
         return MineUserDetailROFactory.getMineUserDetail(centerUserDetailRO, userDetailDO);
     }
 
     public static MineUserDetailRO editUserGetMineUserDetail(UserDO mineUser, UserDetailDO userDetailDO) {
-        CenterUserDetailRO centerUserDetailRO = UserDetailROFactory.getUserDetailRO(mineUser, userDetailDO);
+        SocialuniUserDetailRO centerUserDetailRO = UserDetailROFactory.getUserDetailRO(mineUser, userDetailDO);
         return MineUserDetailROFactory.getMineUserDetail(centerUserDetailRO, userDetailDO);
     }
 
     //绑定手机号后获取用户详情
     public static MineUserDetailRO bindPhoneNumGetMineUserDetail(SocialUserDetailRO socialUserDetailRO, UserDO mineUser) {
-        UserDetailDO userDetailDO = CenterUserUtil.getUserDetail(mineUser.getId());
-        CenterUserDetailRO centerUserDetailRO = UserDetailROFactory.getUserDetailRO(socialUserDetailRO, mineUser, userDetailDO);
+        UserDetailDO userDetailDO = SocialuniUserUtil.getUserDetail(mineUser.getId());
+        SocialuniUserDetailRO centerUserDetailRO = UserDetailROFactory.getUserDetailRO(socialUserDetailRO, mineUser, userDetailDO);
         return MineUserDetailROFactory.getMineUserDetail(centerUserDetailRO, userDetailDO);
     }
 
     //登录后获取用户详情
     public static MineUserDetailRO providerLoginGetMineUserDetail(UserDO mineUser, UserDetailLoginEO userDetailLoginEO) {
         //用户关注粉丝数
-        CenterUserDetailRO centerUserDetailRO = UserDetailROFactory.providerLoginGetMineUserDetail(mineUser, userDetailLoginEO.getUserDetailDO(), userDetailLoginEO.getUserFollowDetailDO());
+        SocialuniUserDetailRO centerUserDetailRO = UserDetailROFactory.providerLoginGetMineUserDetail(mineUser, userDetailLoginEO.getUserDetailDO(), userDetailLoginEO.getUserFollowDetailDO());
 
         return MineUserDetailROFactory.getMineUserDetail(centerUserDetailRO, userDetailLoginEO.getUserDetailDO());
     }
 
-    public static MineUserDetailRO getMineUserDetail(CenterUserDetailRO centerUserDetailRO, UserDetailDO userDetailDO) {
+    public static MineUserDetailRO getMineUserDetail(SocialuniUserDetailRO centerUserDetailRO, UserDetailDO userDetailDO) {
         //user基础信息
         MineUserDetailRO userDetail = new MineUserDetailRO(centerUserDetailRO);
 

@@ -1,8 +1,8 @@
 package com.socialuni.sdk.feignAPI;
 
-import com.socialuni.sdk.model.QO.comment.CenterCommentDeleteQO;
-import com.socialuni.sdk.model.QO.comment.CenterCommentPostQO;
-import com.socialuni.sdk.model.RO.talk.CenterCommentRO;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
+import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,9 +19,9 @@ import javax.validation.Valid;
 public interface SocialuniCommentAPI {
     @PostMapping("postComment")
     @Operation(summary = "发表评论")
-    ResultRO<CenterCommentRO> postComment(@RequestBody @Valid CenterCommentPostQO centerCommentPostQO);
+    ResultRO<SocialuniCommentRO> postComment(@RequestBody @Valid SocialuniCommentPostQO centerCommentPostQO);
 
     @PostMapping("deleteComment")
     @Operation(summary = "删除评论")
-    ResultRO<Void> deleteComment(@RequestBody @Valid CenterCommentDeleteQO commentDeleteQO);
+    ResultRO<Void> deleteComment(@RequestBody @Valid SocialuniCommentDeleteQO commentDeleteQO);
 }

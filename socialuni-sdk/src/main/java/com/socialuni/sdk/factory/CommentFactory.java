@@ -1,8 +1,8 @@
 package com.socialuni.sdk.factory;
 
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.model.QO.community.comment.SocialCommentPostQO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
@@ -22,9 +22,20 @@ public class CommentFactory {
      * @param requestUserId
      * @return
      */
-    public SocialCommentDO createCommentDO(SocialCommentPostQO addVO, Integer requestUserId) {
+    public SocialCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
+
+        Integer talkId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getTalkId());
+
+        Integer commentId = null;
+        Integer replyCommentId = null;
+        if (addQO.getCommentId() != null) {
+            commentId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getCommentId());
+            if (addQO.getReplyCommentId() != null) {
+                replyCommentId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getReplyCommentId());
+            }
+        }
         //创建 do一步,获取序号
-        SocialCommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(addVO.getTalkId());
+        SocialCommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(talkId);
         Integer commentNo = 0;
         if (commentNoDO != null) {
             commentNo = commentNoDO.getNo();
@@ -32,7 +43,7 @@ public class CommentFactory {
         //构建DO，comment基础内容
         SocialCommentDO comment = new SocialCommentDO();
         comment.setNo(++commentNo);
-        comment.setContent(addVO.getContent());
+        comment.setContent(addQO.getContent());
         comment.setStatus(ContentStatus.enable);
         comment.setReportContentType(ContentType.comment);
         comment.setHugNum(0);
@@ -42,11 +53,11 @@ public class CommentFactory {
         comment.setCreateTime(curDate);
         comment.setUpdateTime(curDate);
         //关联内容
-        comment.setReplyCommentId(addVO.getReplyCommentId());
-        comment.setParentCommentId(addVO.getCommentId());
-        comment.setTalkId(addVO.getTalkId());
+        comment.setReplyCommentId(replyCommentId);
+        comment.setParentCommentId(commentId);
+        comment.setTalkId(talkId);
         comment.setUserId(requestUserId);
-        comment.setSocialuniUid(addVO.getSocialuniUid());
+//        comment.setSocialuniUid(addVO.getSocialuniUid());
 
         Integer unionId = UnionIdDbUtil.createCommentUnionId();
         comment.setUnionId(unionId);

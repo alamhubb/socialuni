@@ -4,7 +4,7 @@ import com.socialuni.sdk.logic.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.sdk.logic.domain.login.SocialProviderLoginDomain;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.sdk.model.RO.user.SocialMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import org.springframework.stereotype.Service;
@@ -18,13 +18,13 @@ public class SocialLoginService {
     @Resource
     SocialPhoneLoginDomain socialPhoneLoginDomain;
 
-    public ResultRO<SocialLoginRO<SocialMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
-        SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(SocialProviderLoginQO loginQO) {
+        SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
         return new ResultRO<>(socialLoginRO);
     }
 
-    public ResultRO<SocialLoginRO<SocialMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        SocialLoginRO<SocialMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
+    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+        SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
         return new ResultRO<>(socialLoginRO);
     }
 }

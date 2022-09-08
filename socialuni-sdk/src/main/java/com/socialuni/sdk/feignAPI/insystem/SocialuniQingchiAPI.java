@@ -28,20 +28,20 @@ import javax.validation.Valid;
 @FeignClient(name = "qingchi", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniQingchiAPI {
     @PostMapping("providerLogin")
-    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);
+    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);
 
     //仅供清池app使用，绑定手机号，绑定微信手机号，发送验证码，手机号登录都是清池专属
     @PostMapping("bindWxPhoneNum")
-    ResultRO<CenterMineUserDetailRO> bindWxPhoneNum(@RequestBody @Valid SocialBindWxPhoneNumQO bindWxPhoneNumQO);
+    ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(@RequestBody @Valid SocialBindWxPhoneNumQO bindWxPhoneNumQO);
 
     @PostMapping("sendAuthCode")
     ResultRO<Void> sendAuthCode(@RequestBody @Valid SocialSendAuthCodeQO authCodeQO);
 
     @PostMapping("bindPhoneNum")
-    ResultRO<CenterMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO);
+    ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO);
 
     @PostMapping("phoneLogin")
-    ResultRO<SocialLoginRO<CenterMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
+    ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO);
 
     @PostMapping("queryDevAccount")
     ResultRO<DevAccountRO> queryDevAccount(@RequestBody @Valid OAuthUserInfoQO devAccountQueryQO);

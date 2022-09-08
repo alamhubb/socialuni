@@ -7,7 +7,7 @@ import com.socialuni.sdk.utils.DevAccountUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CenterRequestUserConfigImpl extends SocialRequestUserConfigDefaultImpl implements SocialRequestUserConfig {
+public class SocialuniRequestUserConfigImpl extends SocialRequestUserConfigDefaultImpl implements SocialRequestUserConfig {
     @Override
     public String getToken() {
         String token = super.getToken();

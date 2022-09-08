@@ -1,7 +1,7 @@
 package com.socialuni.sdk.feignAPI;
 
-import com.socialuni.sdk.model.QO.follow.CenterFollowAddQO;
-import com.socialuni.sdk.model.RO.user.CenterUserFollowDetailRO;
+import com.socialuni.sdk.model.QO.follow.SocialuniFollowAddQO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,14 +22,14 @@ public interface SocialuniFollowAPI {
 
     @GetMapping("queryUserFollows")
     @Operation(summary = "查询用户关注列表")
-    ResultRO<Map<String, List<CenterUserFollowDetailRO>>> queryUserFollows();
+    ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows();
 
     @PostMapping("addFollow")
     @Operation(summary = "关注用户")
-    ResultRO<Void> addFollow(@RequestBody @Valid CenterFollowAddQO addVO);
+    ResultRO<Void> addFollow(@RequestBody @Valid SocialuniFollowAddQO addVO);
 
     @PostMapping("cancelFollow")
     @Operation(summary = "取消关注")
-    ResultRO<Void> cancelFollow(@RequestBody @Valid CenterFollowAddQO addVO);
+    ResultRO<Void> cancelFollow(@RequestBody @Valid SocialuniFollowAddQO addVO);
 
 }

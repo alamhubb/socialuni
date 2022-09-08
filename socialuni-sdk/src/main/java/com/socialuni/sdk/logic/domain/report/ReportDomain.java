@@ -16,7 +16,7 @@ import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
-import com.socialuni.sdk.repository.*;
+
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;
 import com.socialuni.sdk.utils.QQUtil;

@@ -2,14 +2,10 @@ package com.socialuni.sdk.feignAPI;
 
 
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
-import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.sdk.model.RO.user.CenterUserDetailRO;
+import com.socialuni.sdk.model.RO.talk.circle.CircleTypeRO;
+import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

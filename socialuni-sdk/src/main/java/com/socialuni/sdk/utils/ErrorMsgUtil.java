@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class ErrorMsgUtil {
     public static String getErrorCode605ContactServiceValue(SocialuniUserDO userDO) {
-//        UserDetailDO userDetailDO = CenterUserUtil.getUserDetail(userDO);
+//        UserDetailDO userDetailDO = SocialuniUserUtil.getUserDetail(userDO);
 //        Date violationEndTime = userDetailDO.getViolationEndTime();
 //        return ErrorMsgUtil.getErrorCode605ContactServiceValue(violationEndTime);
         return null;

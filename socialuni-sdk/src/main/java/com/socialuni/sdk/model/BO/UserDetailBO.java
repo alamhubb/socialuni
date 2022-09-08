@@ -243,7 +243,7 @@ public class UserDetailBO {
         if (isSeeMineDetail) {
             sessionUser = beSeeUser;
         } else {
-            sessionUser = CenterUserUtil.getMineUser();
+            sessionUser = SocialuniUserUtil.getMineUser();
         }
         this.id = UnionIdDbUtil.createUserUid(beSeeUser.getId(), sessionUser, devId);
         this.isMine = isSeeMineDetail;

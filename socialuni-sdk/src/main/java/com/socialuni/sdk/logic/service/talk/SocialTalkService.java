@@ -3,6 +3,7 @@ package com.socialuni.sdk.logic.service.talk;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.logic.domain.talk.*;
 import com.socialuni.sdk.model.QO.community.talk.*;
+import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.platform.MapUtil;
 import com.socialuni.sdk.config.SocialAppConfig;
@@ -10,7 +11,6 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.social.web.sdk.model.ResultRO;
-import com.socialuni.sdk.model.RO.community.talk.SocialTalkRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,7 +31,7 @@ public class SocialTalkService {
 
     //查询非关注tab的动态列表
     //无参数get请求访问talks，主要为了方便用户体验。
-    public ResultRO<List<SocialTalkRO>> queryHomeTalks() {
+    public ResultRO<List<SocialuniTalkRO>> queryHomeTalks() {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO queryQO = new SocialHomeTabTalkQueryQO();
@@ -52,16 +52,16 @@ public class SocialTalkService {
 
     //查询非关注tab的动态列表
     //查询非关注tab的动态列表
-    public ResultRO<List<SocialTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO) {
+    public ResultRO<List<SocialuniTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO) {
         //获取当前用户
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         //转换为rolist
-        List<SocialTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
+        List<SocialuniTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
         return new ResultRO<>(socialTalkROs);
     }
 
-    public ResultRO<Void> postTalk(SocialTalkPostQO talkPostQO) {
+    public ResultRO<Void> postTalk(SocialuniTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         socialTalkPostDomain.postTalk(talkPostQO);
         return new ResultRO<>();
@@ -74,15 +74,15 @@ public class SocialTalkService {
         return new ResultRO<>();
     }
 
-    public ResultRO<SocialTalkRO> queryTalkDetail(SocialTalkIdQO socialTalkIdQO) {
+    public ResultRO<SocialuniTalkRO> queryTalkDetail(SocialTalkIdQO socialTalkIdQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
-        SocialTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(socialTalkIdQO, mineUser);
+        SocialuniTalkRO socialTalkRO = socialTalkDetailQueryDomain.queryTalkDetail(socialTalkIdQO, mineUser);
         return ResultRO.success(socialTalkRO);
     }
 
-    public ResultRO<List<SocialTalkRO>> queryUserTalks(SocialUserTalkQueryQO queryQO) {
+    public ResultRO<List<SocialuniTalkRO>> queryUserTalks(SocialUserTalkQueryQO queryQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
-        List<SocialTalkRO> talkROS = socialUserTalkQueryDomain.queryUserTalks(queryQO, mineUser);
+        List<SocialuniTalkRO> talkROS = socialUserTalkQueryDomain.queryUserTalks(queryQO, mineUser);
         return ResultRO.success(talkROS);
     }
 }

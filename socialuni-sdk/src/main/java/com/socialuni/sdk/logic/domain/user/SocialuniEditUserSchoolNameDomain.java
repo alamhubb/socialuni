@@ -1,6 +1,5 @@
 package com.socialuni.sdk.logic.domain.user;
 
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserExpandDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
 import com.socialuni.sdk.logic.check.SocialuniSchoolCheck;

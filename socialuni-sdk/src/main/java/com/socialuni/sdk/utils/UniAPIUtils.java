@@ -3,9 +3,9 @@ package com.socialuni.sdk.utils;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.ContentAddQO;
-import com.socialuni.sdk.model.RO.community.UniContentIdRO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
+import com.socialuni.sdk.model.RO.user.SocialuniContentIdRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class UniAPIUtils {
         UniAPIUtils.socialuniUserAPI = socialuniUserAPI;
     }
 
-    public static <QO extends ContentAddQO, RO extends Object> ResultRO<RO> callUniAPIAndUpdateUid(UniContentIdRO uniContentIdRO, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
+    public static <QO extends ContentAddQO, RO extends Object> ResultRO<RO> callUniAPIAndUpdateUid(SocialuniContentIdRO uniContentIdRO, Function<QO, ResultRO<RO>> callApi, QO contentAddQO) {
         //校验此条数据是否已经写入过。
         //存在appSocialuniId不为空，但是dataContentUnionId为空的情况，无后台模式。
         //首先判断是否为其他应用往本应用推送，否则就是自己的应用写入
@@ -65,7 +65,7 @@ public class UniAPIUtils {
 
         //mark 多库同步版本
         ResultRO<RO> resultRO = callApi.apply(contentAddQO);
-        uniContentIdRO = (UniContentIdRO) resultRO.getData();
+        uniContentIdRO = (SocialuniContentIdRO) resultRO.getData();
 
         //根据unionId更新为中心返回的uid
         UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, uniContentIdRO.getId());

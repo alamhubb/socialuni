@@ -171,8 +171,8 @@
           <q-icon class="text-gray mr-xs" icon="mdi-school"/>
           学校名称：
 
-          <div v-if="userProp.school">
-            {{ userProp.school || '' }}
+          <div v-if="userProp.schoolName">
+            {{ userProp.schoolName || '' }}
           </div>
           <div class="q-tag-green q-box-df" @click="openSetSchoolDialog">填写学校名称</div>
         </view>
