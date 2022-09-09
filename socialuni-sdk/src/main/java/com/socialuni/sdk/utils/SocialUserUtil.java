@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.config.SocialRequestUserConfig;
+import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
 import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.model.DO.user.*;
