@@ -2,7 +2,11 @@ package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.sdk.constant.GenderTypeVO;
+import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkTabType;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.sdk.dao.store.SocialHomeTalkQueryStore;
 import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
@@ -18,6 +22,7 @@ import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -27,6 +32,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -42,12 +48,22 @@ public class SocialHomeTalkQueryDomain {
     private SocialTagRedis socialTagRedis;
     @Resource
     TagRepository tagRepository;
+    @Resource
+    private TalkRepository talkRepository;
+    @Resource
+    private SocialHomeTalkQueryStore socialHomeTalkQueryStore;
 
+    public List<SocialuniTalkRO> queryStickTalks() {
+        List<SocialTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountUtils.getDevIdNotNull(), SocialuniConst.initNum);
+        //转换为rolist
+        List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
+        return socialTalkROs;
+    }
 
     public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
         //talk
-
+        //话题校验
         //tagNames转tagIds
         List<String> tagNames = queryQO.getTagNames();
         List<Integer> tagIds = new ArrayList<>();
@@ -60,6 +76,10 @@ public class SocialHomeTalkQueryDomain {
                 throw new SocialBusinessException("选择了无效的话题");
             }
             tagIds.add(tagDO.getId());
+        }
+        if (tagIds.size() > 3) {
+//            return new ResultRO<>("最多同时筛选3个话题");
+            throw new SocialParamsException("最多同时筛选3个话题");
         }
         socialHomeTabTalkQueryBO.setTagIds(tagIds);
         socialHomeTabTalkQueryBO.setHomeTabName(queryQO.getHomeTabName());
@@ -101,7 +121,8 @@ public class SocialHomeTalkQueryDomain {
         }
         socialHomeTabTalkQueryBO.setTalkVisibleGender(genderTypeQueryVO.getTalkVisibleGender());
         socialHomeTabTalkQueryBO.setTalkUserGender(genderTypeQueryVO.getTalkUserGender());
-//        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
+        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
+        socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
 
         return socialHomeTabTalkQueryBO;
     }
@@ -113,6 +134,7 @@ public class SocialHomeTalkQueryDomain {
 
         //根据不同的tab区分不同的查询逻辑
         String homeTabName = queryBO.getHomeTabName();
+
         //得到数据库talk
         List<SocialTalkDO> talkDOS;
         if (homeTabName.equals(TalkTabType.follow_name)) {
@@ -120,24 +142,16 @@ public class SocialHomeTalkQueryDomain {
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else if (homeTabName.equals(TalkTabType.home_name) || homeTabName.equals(TalkTabType.city_name)) {
             //执行首页查询逻辑
-            talkDOS = socialHomeTalkQueryEntity.queryHomeTalks(queryBO, mineUser);
-        } else if () {
+            List<SocialTalkDO> stickTalks = new ArrayList<>();
 
-        }
+            talkDOS = socialHomeTalkQueryStore.queryHomeTalks(queryBO, mineUser);
 
+            stickTalks.addAll(talkDOS);
+            talkDOS = stickTalks;
 
-        if (!TalkTabType.values.contains(homeTabName)) {
-            throw new SocialParamsException("错误的tab类型");
-        }
-        //需要校验
-
-        //得到数据库talk
-        List<SocialTalkDO> talkDOS;
-        //为关注，查询关注
-        if ((TalkTabType.follow_type.equals(homeTabName))) {
-            talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else {
-            talkDOS = socialHomeTalkQueryEntity.queryHomeTalks(queryBO, mineUser);
+            talkDOS = new ArrayList<>();
+            System.out.println(homeTabName);
         }
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryBO);

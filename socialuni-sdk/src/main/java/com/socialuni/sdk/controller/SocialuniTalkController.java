@@ -19,35 +19,40 @@ public class SocialuniTalkController implements SocialuniTalkAPI {
     private SocialuniTalkAPI socialuniTalkAPI;
 
     @Resource
-    private SocialuniTalkService socialuniTalkAPIImpl;
+    private SocialuniTalkService socialuniTalkService;
 
     @Override
     public ResultRO<List<SocialuniTalkRO>> queryTalks() {
-        return socialuniTalkAPIImpl.queryTalks();
+        return socialuniTalkService.queryTalks();
+    }
+
+    @Override
+    public ResultRO<List<SocialuniTalkRO>> queryStickTalks() {
+        return socialuniTalkService.queryStickTalks();
     }
 
     @Override
     public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniHomeTabTalkQueryQO queryQO) {
-        return socialuniTalkAPIImpl.queryTalks(queryQO);
+        return socialuniTalkService.queryTalks(queryQO);
     }
 
     @Override
     public ResultRO<SocialuniTalkRO> postTalk(SocialuniTalkPostQO talkPostQO) {
-        return socialuniTalkAPIImpl.postTalk(talkPostQO);
+        return socialuniTalkService.postTalk(talkPostQO);
     }
 
     @Override
     public ResultRO<Void> deleteTalk(SocialuniTalkIdQO talkIdQO) {
-        return socialuniTalkAPIImpl.deleteTalk(talkIdQO);
+        return socialuniTalkService.deleteTalk(talkIdQO);
     }
 
     @Override
     public ResultRO<SocialuniTalkRO> queryTalkDetail(String talkId) {
-        return socialuniTalkAPIImpl.queryTalkDetail(talkId);
+        return socialuniTalkService.queryTalkDetail(talkId);
     }
 
     @Override
     public ResultRO<List<SocialuniTalkRO>> queryUserTalks(SocialuniUserTalkQueryQO queryQO) {
-        return socialuniTalkAPIImpl.queryUserTalks(queryQO);
+        return socialuniTalkService.queryUserTalks(queryQO);
     }
 }

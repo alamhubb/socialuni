@@ -36,6 +36,18 @@ public class SocialuniTalkService {
     @Resource
     SocialTalkPostDomain socialTalkPostDomain;
 
+    @Resource
+    SocialHomeTalkQueryDomain socialHomeTalkQueryDomain;
+
+    public ResultRO<List<SocialuniTalkRO>> queryStickTalks() {
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniTalkAPI.queryStickTalks();
+        }
+        List<SocialuniTalkRO> list = socialHomeTalkQueryDomain.queryStickTalks();
+        return ResultRO.success(list);
+    }
+
+
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<SocialuniTalkRO>> queryTalks() {
         if (SocialAppConfig.serverIsChild()) {

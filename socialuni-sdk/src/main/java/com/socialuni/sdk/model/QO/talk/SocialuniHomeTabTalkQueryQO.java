@@ -24,10 +24,11 @@ public class SocialuniHomeTabTalkQueryQO {
 
     //首页tab名称
     private String homeTabName;
-    // 筛选的话题列表
-    private List<String> tagNames;
     // 筛选的用户行呗
     private String gender;
+    // 筛选用户年龄
+    private Integer minAge;
+    private Integer maxAge;
     // 筛选的城市
     private String adCode;
     // 记录用户地理位置，计算距离
@@ -35,7 +36,11 @@ public class SocialuniHomeTabTalkQueryQO {
     private Double lat;
     // 记录查询时间，用来分页
     private Date queryTime;
-    // 筛选用户年龄
-    private Integer minAge;
-    private Integer maxAge;
+
+    // 筛选的话题列表
+    private List<String> tagNames;
+    //仅查询设置了实名认证的用户的照片
+    private Boolean hasPeopleImgTalkNeedIdentity;
+    //仅查询设置了学校信息的用户动态
+    private Boolean userHasSchoolNam;
 }

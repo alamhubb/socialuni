@@ -31,7 +31,7 @@ public class SocialHomeTalkQueryStore {
     public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialuniUserDO user) {
         String postTalkUserGender = queryBO.getTalkUserGender();
         String talkVisibleGender = queryBO.getTalkVisibleGender();
-        String tabType = queryBO.getHomeTabName();
+        String homeTabName = queryBO.getHomeTabName();
 
         //        log.info("queryNotFollowTalks开始2：" + new Date().getTime() / 1000);
         //userId特殊处理
@@ -57,10 +57,8 @@ public class SocialHomeTalkQueryStore {
         //如果为首页不筛选地区和tag
         //只有为新版本全国才更改为空
         //如果首页，不筛选地理位置
-        Integer circleId = queryBO.getCircleId();
-        if (TalkTabType.home_type.equals(tabType)) {
+        if (TalkTabType.home_type.equals(homeTabName)) {
             adCode = null;
-            circleId = null;
         } else {
             //如果为空，为0或者为中国，则查询全部
             //话题校验
@@ -118,7 +116,7 @@ public class SocialHomeTalkQueryStore {
         }*/
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(1, userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, null);
+        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(1, userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), queryBO.getCircleId(), null);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

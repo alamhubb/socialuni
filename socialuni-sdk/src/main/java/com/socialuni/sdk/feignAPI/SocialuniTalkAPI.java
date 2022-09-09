@@ -52,6 +52,10 @@ public interface SocialuniTalkAPI {
     @Operation(summary = "查询动态列表，无需参数")
     ResultRO<List<SocialuniTalkRO>> queryTalks();
 
+    @GetMapping("queryStickTalks")
+    @Operation(summary = "查询制定动态列表，无需参数")
+    ResultRO<List<SocialuniTalkRO>> queryStickTalks();
+
     @PostMapping("queryTalks")
     @Operation(summary = "查询动态列表")
     ResultRO<List<SocialuniTalkRO>> queryTalks(@RequestBody(required = false) SocialuniHomeTabTalkQueryQO queryQO);

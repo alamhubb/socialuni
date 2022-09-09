@@ -22,7 +22,7 @@ public class SocialHomeTalkQueryEntity {
     private TalkRepository talkRepository;
     @Resource
     private SocialHomeTalkQueryStore socialHomeTalkQueryStore;
-
+/*
     public List<SocialTalkDO> queryStickTalks(Integer devId) {
         return talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, devId, SocialuniConst.initNum);
     }
@@ -58,10 +58,10 @@ public class SocialHomeTalkQueryEntity {
 
         stickTalks.addAll(talkDOS);
 
-        /*if (stickTalks.size() > 10) {
+        *//*if (stickTalks.size() > 10) {
             stickTalks = stickTalks.subList(0, 10);
-        }*/
+        }*//*
 //        log.info("queryNotFollowTalks结束1：" + new Date().getTime() / 1000);
         return stickTalks;
-    }
+    }*/
 }

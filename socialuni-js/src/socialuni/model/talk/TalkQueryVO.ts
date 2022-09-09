@@ -1,22 +1,18 @@
-import { socialLocationModule } from '../../store'
+import {socialLocationModule} from '../../store'
 
 export default class TalkQueryVO {
-  talkIds: number[]
-  adCode: string
-  lon: number
-  lat: number
-  tagIds: number[]
-  homeTabType: string
+  homeTabName: string
   gender: string
   minAge: number
   maxAge: number
+  adCode: string
+  lon: number
+  lat: number
   queryTime: Date
-  circleName: string
   tagNames: string[]
-  hasPeopleImgTalkNeedIdentity: boolean = false
 
-  constructor (talkIds: number[], tagIds: number[], tabType: string, gender: string, minAge: number, maxAge: number, queryDate: Date, circleName: string, tagNames: string[]) {
-    this.talkIds = talkIds
+  constructor(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[]) {
+    this.homeTabName = homeTabName
     const district = socialLocationModule.location
     //查询使用当前的
     if (district) {
@@ -27,13 +23,10 @@ export default class TalkQueryVO {
       this.lon = socialLocationModule.cityLocation.lon
       this.lat = socialLocationModule.cityLocation.lat
     }
-    this.tagIds = tagIds
-    this.homeTabType = tabType
     this.gender = gender
     this.minAge = minAge
     this.maxAge = maxAge
-    this.queryTime = queryDate
-    this.circleName = circleName
+    this.queryTime = queryTime
     this.tagNames = tagNames
   }
 }

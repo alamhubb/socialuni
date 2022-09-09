@@ -151,7 +151,6 @@ import TalkTabVO from '../../socialuni/model/talk/TalkTabVO'
 import CommonUtil from '../../socialuni/utils/CommonUtil'
 import TalkSwipers from './talkSwipers.vue'
 import {
-  socialCircleModule,
   socialConfigStore,
   socialLocationModule,
   socialLocationStore,
@@ -340,7 +339,7 @@ export default class TabsTalkPage extends Vue {
     CommonUtil.delayTime(0).then(() => {
       talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkIds, socialTagModule.selectTagIds, talkTabObj.type, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialCircleModule.circleName, socialTagModule.selectTagNames).then((res: any) => {
+    return TalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialTagModule.selectTagNames).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
@@ -349,6 +348,7 @@ export default class TabsTalkPage extends Vue {
           } else {
             talkTabObj.talks.push(...res.data)
           }
+          this.queryTime = talkTabObj.talks[0].updateTime
         } else {
           talkTabObj.talks = []
         }

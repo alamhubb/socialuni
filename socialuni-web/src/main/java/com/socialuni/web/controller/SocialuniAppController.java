@@ -1,5 +1,6 @@
 package com.socialuni.web.controller;
 
+import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.HomeTabRO;
@@ -39,9 +40,9 @@ public class SocialuniAppController {
     @PostMapping("queryHomeTabs")
     public ResultRO<List<HomeTabRO>> queryHomeTabs() {
         List<HomeTabRO> list = new ArrayList<HomeTabRO>() {{
-            add(new HomeTabRO("关注"));
-            add(new HomeTabRO("首页"));
-            add(new HomeTabRO("同城"));
+            add(new HomeTabRO(TalkTabType.follow_name));
+            add(new HomeTabRO(TalkTabType.home_name));
+            add(new HomeTabRO(TalkTabType.city_name));
             add(new HomeTabRO("本校"));
         }};
         return ResultRO.success(list);
