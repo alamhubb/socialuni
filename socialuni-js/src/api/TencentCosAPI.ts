@@ -17,7 +17,7 @@ import request from '@/socialuni/plugins/http/request'
 import TencentCosIdInfoRO from '@/socialuni/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO'
 
 export default class TencentCosAPI {
-  static async getImgTagAPI (imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+  static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
     const authKey = COS.getAuthorization({
       SecretId: cosAuthRO.credentials.tmpSecretId,
       SecretKey: cosAuthRO.credentials.tmpSecretKey,
@@ -46,7 +46,7 @@ export default class TencentCosAPI {
 
   }
 
-  static async getIdCardInfoAPI (imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+  static async getIdCardInfoAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
     const authKey = COS.getAuthorization({
       SecretId: cosAuthRO.credentials.tmpSecretId,
       SecretKey: cosAuthRO.credentials.tmpSecretKey,
@@ -62,7 +62,7 @@ export default class TencentCosAPI {
     return new TencentCosIdInfoRO(res)
   }
 
-  static async uploadFileAPI (imgFile: DomFile, cosAuthRO: CosAuthRO) {
+  static async uploadFileAPI(imgFile: DomFile, cosAuthRO: CosAuthRO) {
     return new Promise<CosUploadResult>(async (resolve, reject) => {
       const headers = {
         // "fileid": "bba022e9313849acafeb34fd5d5a65f5avatar.jpg"
@@ -70,7 +70,7 @@ export default class TencentCosAPI {
         'Pic-Operations':
           `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`,
       }
-      const uploadImgFile = await UniUtil.getFile(imgFile)
+      const uploadImgFile = await UniUtil.getFile(imgFile) as any
       cosAuthRO.cos.putObject({
         Bucket: cosAuthRO.bucket,
         Region: cosAuthRO.region,

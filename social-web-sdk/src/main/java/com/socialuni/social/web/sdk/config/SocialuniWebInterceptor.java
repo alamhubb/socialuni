@@ -18,7 +18,7 @@ import java.util.Date;
 @Slf4j
 public class SocialuniWebInterceptor implements HandlerInterceptor {
     @Resource
-    SocialuniWebInterceptorConfig socialuniWebInterceptorConfig;
+    SocialRequestUserConfig socialRequestUserConfig;
 
     /*
      * 进入controller层之前拦截请求
@@ -47,7 +47,7 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         requestLogDO.setUri(uri);
         RequestLogUtil.set(requestLogDO);
 
-        requestLogDO.setUserId(socialuniWebInterceptorConfig.getUserId());
+        requestLogDO.setUserId(socialRequestUserConfig.getUserId());
 //        requestLogDO.setErrorCode(ResultRO.successCode);
 //        requestLogDO.setErrorType(ErrorType.success);
 //        requestLogDO.setErrorMsg(ErrorMsg.successMsg);

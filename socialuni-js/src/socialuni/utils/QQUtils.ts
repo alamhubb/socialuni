@@ -5,6 +5,7 @@ import UserPayResultVO from '../model/user/UserPayResultVO'
 export default class QQUtils {
   static subscribeAppMsg (tmplIds: string[]) {
     return new Promise((resolve, reject) => {
+      //@ts-ignore
       qq.subscribeAppMsg({
         tmplIds: tmplIds,
         subscribe: true,
@@ -23,6 +24,7 @@ export default class QQUtils {
   }
 
   static createInterstitialAd () {
+    //@ts-ignore
     return qq.createInterstitialAd({
       adUnitId: AppConfig.qq_insert_ad_id
     })
@@ -30,6 +32,7 @@ export default class QQUtils {
 
   static requestPayment (payResult: UserPayResultVO): Promise<void> {
     return new Promise((resolve, reject) => {
+      //@ts-ignore
       qq.requestPayment({
         package: payResult.package,
         bargainor_id: AppConfig.qq_bargainor_id,

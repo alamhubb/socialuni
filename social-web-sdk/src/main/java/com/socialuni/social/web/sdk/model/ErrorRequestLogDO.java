@@ -38,7 +38,7 @@ public class ErrorRequestLogDO {
     private Long requestId;
     //邀请你的用户
     private Integer devId;
-    private String userId;
+    private Integer userId;
     private String ip;
     private String uri;
     private Long spendTime;

@@ -37,7 +37,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
         RequestLogDO requestLogDO = RequestLogUtil.get();
         DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
         if (user != null) {
-            requestLogDO.setUserId(user.getId().toString());
+            requestLogDO.setUserId(user.getId());
         }
         RequestLogUtil.saveAsync(requestLogDO);
         String ipKey = requestLogDO.getIp();
