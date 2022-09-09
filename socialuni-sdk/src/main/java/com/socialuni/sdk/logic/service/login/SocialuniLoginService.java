@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.service.login;
 
 import com.socialuni.sdk.constant.platform.UniappProviderType;
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.sdk.logic.domain.login.SocialProviderLoginDomain;
 import com.socialuni.sdk.logic.domain.thirdUser.AuthThirdUserDomain;

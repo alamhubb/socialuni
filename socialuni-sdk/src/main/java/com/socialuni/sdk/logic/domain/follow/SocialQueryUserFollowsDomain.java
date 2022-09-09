@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.domain.follow;
 
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.factory.RO.user.SocialuniUserFollowDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserFollowDetailROFactory;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;

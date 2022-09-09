@@ -2,7 +2,7 @@ package com.socialuni.web.controller;
 
 import com.socialuni.sdk.model.QO.location.LocationQueryQO;
 import com.socialuni.sdk.model.QO.location.LocationQueryRO;
-import com.socialuni.sdk.platform.QQMapAPI;
+import com.socialuni.sdk.logic.platform.QQMapAPI;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.social.web.sdk.utils.IpUtil;
 import org.apache.commons.lang3.StringUtils;

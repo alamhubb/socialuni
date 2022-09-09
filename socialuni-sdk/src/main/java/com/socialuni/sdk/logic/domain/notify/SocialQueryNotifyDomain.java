@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.domain.notify;
 
 import com.socialuni.sdk.constant.NotifyType;
-import com.socialuni.sdk.factory.SocialUnreadNotifyVOFactory;
+import com.socialuni.sdk.logic.factory.SocialUnreadNotifyVOFactory;
 import com.socialuni.sdk.dao.DO.NotifyDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;

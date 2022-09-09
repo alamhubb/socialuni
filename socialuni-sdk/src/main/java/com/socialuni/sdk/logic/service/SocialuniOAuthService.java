@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.service;
 
 import com.socialuni.sdk.constant.AuthType;
-import com.socialuni.sdk.factory.RO.user.SocialuniOAuthUserROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniOAuthUserROFactory;
 import com.socialuni.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.sdk.logic.manage.DevAccountManage;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;

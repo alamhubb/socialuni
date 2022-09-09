@@ -8,7 +8,7 @@ import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.status.ConstBoolean;
-import com.socialuni.sdk.mapper.TalkMapper;
+import com.socialuni.sdk.dao.mapper.TalkMapper;
 import com.socialuni.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.sdk.dao.repository.NotifyRepository;

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.constant.socialuni.GenderType;
-import com.socialuni.sdk.factory.QO.SocialHomeTalkQueryQOFactory;
+import com.socialuni.sdk.logic.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.domain.circle;
 
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.factory.community.SocialCircleROFactory;
+import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;

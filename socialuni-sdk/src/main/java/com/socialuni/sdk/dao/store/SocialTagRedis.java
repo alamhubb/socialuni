@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.factory.community.SocialTagROFactory;
-import com.socialuni.sdk.factory.community.SocialTagTypeROFactory;
+import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
+import com.socialuni.sdk.logic.factory.community.SocialTagTypeROFactory;
 import com.socialuni.sdk.utils.SocialTagStore;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;

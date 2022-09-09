@@ -1,8 +1,8 @@
 package com.socialuni.sdk.logic.service.user;
 
 import com.socialuni.sdk.config.SocialAppConfig;
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.sdk.factory.RO.user.SocialuniUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;
@@ -11,7 +11,7 @@ import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
-import com.socialuni.sdk.platform.tencent.TencentCloud;
+import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;

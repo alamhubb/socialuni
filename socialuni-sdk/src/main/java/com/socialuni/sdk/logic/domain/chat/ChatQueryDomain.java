@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.chat;
 
-import com.socialuni.sdk.factory.SocialChatROFactory;
+import com.socialuni.sdk.logic.factory.SocialChatROFactory;
 import com.socialuni.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;

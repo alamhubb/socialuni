@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.service.content;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
-import com.socialuni.sdk.platform.weixin.HttpResult;
+import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.QQUtil;

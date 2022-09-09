@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.entity;
 
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.sdk.logic.entity.user.SocialUserEntity;
 import com.socialuni.sdk.logic.entity.user.SocialUserPhoneEntity;

@@ -16,7 +16,7 @@ import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.dao.DO.message.MessageDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.mapper.TalkMapper;
+import com.socialuni.sdk.dao.mapper.TalkMapper;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.manage.talk;
 
-import com.socialuni.sdk.factory.TalkDOFactory;
+import com.socialuni.sdk.logic.factory.TalkDOFactory;
 import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;

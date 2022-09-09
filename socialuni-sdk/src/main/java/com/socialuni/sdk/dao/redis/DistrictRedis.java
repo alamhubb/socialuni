@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.redis;
 
 import com.socialuni.sdk.constant.SocialuniConst;
-import com.socialuni.sdk.factory.SocialDistrictROFactory;
+import com.socialuni.sdk.logic.factory.SocialDistrictROFactory;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.dao.DO.DistrictDO;

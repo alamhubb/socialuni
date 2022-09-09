@@ -4,7 +4,7 @@ import com.socialuni.sdk.dao.redis.RedisKeysUtil;
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.mapper.TalkMapper;
+import com.socialuni.sdk.dao.mapper.TalkMapper;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

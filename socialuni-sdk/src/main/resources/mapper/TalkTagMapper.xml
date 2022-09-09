@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.socialuni.sdk.mapper.TalkTagMapper">
+<mapper namespace="com.socialuni.sdk.dao.mapper.TalkTagMapper">
     <!--        SELECT DISTINCT ttg.talk_id-->
     <select id="queryTagTalkIdsByCom" resultType="java.lang.Integer">
         SELECT ttg.talk_id

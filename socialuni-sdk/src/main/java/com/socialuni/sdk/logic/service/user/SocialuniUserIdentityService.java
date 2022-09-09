@@ -9,7 +9,7 @@ import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
-import com.socialuni.sdk.platform.tencent.TencentCloud;
+import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.utils.DateUtils;

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.domain.user;
 
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.sdk.factory.user.img.UserImgDOFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.user.img.UserImgDOFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserImgAddQO;

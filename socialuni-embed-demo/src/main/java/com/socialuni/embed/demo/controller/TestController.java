@@ -7,7 +7,7 @@ import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.VisibleType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.factory.RO.user.SocialuniContentUserROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.sdk.logic.service.talk.SocialuniTalkService;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;

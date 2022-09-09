@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.factory.CommentFactory;
+import com.socialuni.sdk.logic.factory.CommentFactory;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;

@@ -2,7 +2,7 @@ package com.socialuni.sdk.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.constant.NotifyType;
-import com.socialuni.sdk.factory.SocialChatROFactory;
+import com.socialuni.sdk.logic.factory.SocialChatROFactory;
 import com.socialuni.sdk.dao.DO.NotifyDO;
 import com.socialuni.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.sdk.dao.DO.chat.ChatUserDO;

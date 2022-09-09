@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.domain.talk;
 import com.socialuni.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.sdk.constant.GenderTypeVO;
 import com.socialuni.sdk.constant.TalkTabType;
-import com.socialuni.sdk.factory.SocialTalkROFactory;
+import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
 import com.socialuni.sdk.logic.entity.talk.SocialHomeTalkQueryEntity;

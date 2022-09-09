@@ -10,7 +10,7 @@ import com.socialuni.sdk.model.QO.talk.SocialuniTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.sdk.platform.MapUtil;
+import com.socialuni.sdk.logic.platform.MapUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UniAPIUtils;
 import com.socialuni.social.web.sdk.model.ResultRO;

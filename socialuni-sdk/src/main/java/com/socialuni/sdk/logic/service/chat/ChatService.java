@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.service.chat;
 
 
-import com.socialuni.sdk.factory.SocialChatROFactory;
+import com.socialuni.sdk.logic.factory.SocialChatROFactory;
 import com.socialuni.sdk.logic.service.CreateSingleChatResult;
 import com.socialuni.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.sdk.dao.DO.chat.ChatUserDO;

@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.service;
 
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.factory.SocialHomeSwiperROFactory;
+import com.socialuni.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.sdk.dao.DO.HomeSwiperDO;
 import com.socialuni.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;

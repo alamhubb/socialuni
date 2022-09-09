@@ -1,9 +1,9 @@
 package com.socialuni.sdk.logic.domain.tag;
 
-import com.socialuni.sdk.factory.community.SocialTagROFactory;
+import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.sdk.logic.manage.SocialTagManage;
-import com.socialuni.sdk.platform.tencent.TencentCloud;
-import com.socialuni.sdk.platform.weixin.HttpResult;
+import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
+import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.config.SocialAppEnv;
 import com.socialuni.sdk.dao.DO.tag.TagDO;

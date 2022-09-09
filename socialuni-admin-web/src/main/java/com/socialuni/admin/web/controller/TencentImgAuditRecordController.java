@@ -15,7 +15,7 @@ import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.QO.SocialIntIdQO;
 import com.socialuni.sdk.model.QO.SocialIntQO;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.factory.ListConvertUtil;
+import com.socialuni.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.sdk.utils.TalkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

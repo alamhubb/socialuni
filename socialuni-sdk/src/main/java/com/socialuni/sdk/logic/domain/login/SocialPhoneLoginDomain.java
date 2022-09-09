@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.login;
 
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.TokenManage;
 import com.socialuni.sdk.dao.store.SocialUserDeviceLoginHistoryStore;
 import com.socialuni.sdk.dao.DO.user.SocialTokenDO;

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.service;
 
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;

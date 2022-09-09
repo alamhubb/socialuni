@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.thirdUser;
 
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.entity.AuthThirdUserEntity;
 import com.socialuni.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;

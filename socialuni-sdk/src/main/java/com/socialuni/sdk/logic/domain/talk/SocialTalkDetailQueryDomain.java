@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.talk;
 
-import com.socialuni.sdk.factory.SocialTalkROFactory;
+import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;

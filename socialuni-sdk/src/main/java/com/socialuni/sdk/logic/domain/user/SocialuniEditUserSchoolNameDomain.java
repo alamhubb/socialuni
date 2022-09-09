@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.domain.user;
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserExpandDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.check.SocialuniSchoolCheck;
 import com.socialuni.sdk.model.QO.user.SocialUserSchoolNameEditQO;
 import com.socialuni.sdk.dao.repository.UserRepository;

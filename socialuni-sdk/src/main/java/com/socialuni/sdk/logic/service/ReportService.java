@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.service;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.dao.repository.*;
-import com.socialuni.sdk.factory.ReportFactory;
+import com.socialuni.sdk.logic.factory.ReportFactory;
 import com.socialuni.sdk.dao.DO.JusticeValueOrderDO;
 import com.socialuni.sdk.dao.DO.ReportDO;
 import com.socialuni.sdk.dao.DO.ReportDetailDO;

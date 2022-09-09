@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.factory.community.SociaCircleTypeROFactory;
-import com.socialuni.sdk.factory.community.SocialCircleROFactory;
+import com.socialuni.sdk.logic.factory.community.SociaCircleTypeROFactory;
+import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.utils.SocialTagStore;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;

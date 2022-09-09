@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialAppConfig;
-import com.socialuni.sdk.platform.tencent.TencentCloud;
+import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.tiia.v20190529.TiiaClient;
 import com.tencentcloudapi.tiia.v20190529.models.DetectLabelRequest;

@@ -5,7 +5,7 @@ import com.socialuni.sdk.logic.domain.talk.*;
 import com.socialuni.sdk.model.QO.community.talk.*;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.sdk.platform.MapUtil;
+import com.socialuni.sdk.logic.platform.MapUtil;
 import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;

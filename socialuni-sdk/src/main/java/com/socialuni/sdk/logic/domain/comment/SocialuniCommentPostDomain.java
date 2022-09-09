@@ -7,7 +7,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
-import com.socialuni.sdk.factory.SocialCommentROFactory;
+import com.socialuni.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.sdk.logic.domain.notify.NotifyDomain;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.logic.entity.comment.SocialPostCommentEntity;

@@ -6,7 +6,7 @@ import com.socialuni.sdk.constant.config.AppConfigStatic;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.logic.domain.BaseModelService;
-import com.socialuni.sdk.factory.ReportFactory;
+import com.socialuni.sdk.logic.factory.ReportFactory;
 import com.socialuni.sdk.dao.DO.ReportDO;
 import com.socialuni.sdk.dao.DO.ReportDetailDO;
 import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;

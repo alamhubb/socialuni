@@ -2,11 +2,11 @@ package com.socialuni.sdk.logic.domain.phone;
 
 import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
-import com.socialuni.sdk.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.sdk.model.UniUnionIdRO;
-import com.socialuni.sdk.platform.WxDecode;
-import com.socialuni.sdk.platform.WxPhoneNumRO;
+import com.socialuni.sdk.logic.platform.WxDecode;
+import com.socialuni.sdk.logic.platform.WxPhoneNumRO;
 import com.socialuni.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
