@@ -1,4 +1,4 @@
-package com.socialuni.sdk.utils.model;
+package com.socialuni.sdk.utils.model.DO;
 
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
@@ -8,12 +8,12 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Component
-public class TagUtils {
+public class SocialuniTagDOUtils {
     private static TagRepository tagRepository;
 
     @Resource
     public void setTagRepository(TagRepository tagRepository) {
-        TagUtils.tagRepository = tagRepository;
+        SocialuniTagDOUtils.tagRepository = tagRepository;
     }
 
     public static List<TagDO> save(List<TagDO> tagDOS) {

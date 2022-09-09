@@ -1,7 +1,6 @@
 package com.socialuni.sdk.logic.entity.talk;
 
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.sdk.dao.store.SocialHomeTalkQueryStore;
 import com.socialuni.sdk.dao.store.TalkQueryStore;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -23,9 +22,6 @@ public class SocialFollowUserTalksQueryEntity {
     private TalkRepository talkRepository;
     @Resource
     private TalkQueryStore talkQueryStore;
-    @Resource
-    private SocialHomeTalkQueryStore socialHomeTalkQueryStore;
-
     //查询用户关注的动态列表
     public List<SocialTalkDO> queryUserFollowTalks(List<Integer> talkIds, SocialuniUserDO mineUser) {
         if (mineUser == null) {

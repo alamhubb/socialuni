@@ -1,13 +1,13 @@
 package com.socialuni.sdk.logic.factory.community;
 
-import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
 import com.socialuni.sdk.logic.factory.ListConvertUtil;
 
 import java.util.List;
 
 public class SocialCircleROFactory {
-    public static SocialCircleRO getCircleRO(SocialCircleDO circleDO) {
+    public static SocialCircleRO getCircleRO(SocialuniCircleDO circleDO) {
         SocialCircleRO circleRO = new SocialCircleRO();
         circleRO.setId(circleDO.getId());
         circleRO.setName(circleDO.getName());
@@ -19,7 +19,7 @@ public class SocialCircleROFactory {
         return circleRO;
     }
 
-    public static List<SocialCircleRO> circleDOToROS(List<SocialCircleDO> DOs) {
+    public static List<SocialCircleRO> circleDOToROS(List<SocialuniCircleDO> DOs) {
         return ListConvertUtil.toList(SocialCircleROFactory::getCircleRO, DOs);
     }
 }

@@ -5,7 +5,7 @@ import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.utils.SocialTagStore;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
-import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.RO.talk.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
@@ -39,7 +39,7 @@ public class SocialuniCircleRedis {
      */
     @Cacheable(cacheNames = "circlesHot", key = "#appGenderType")
     public List<SocialCircleRO> getHotCirclesRedis(String appGenderType) {
-        List<SocialCircleDO> circles = socialCircleRepository.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
+        List<SocialuniCircleDO> circles = socialCircleRepository.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
 
         List<SocialCircleRO> circleROS = SocialCircleROFactory.circleDOToROS(circles);
         return circleROS;
@@ -109,7 +109,7 @@ public class SocialuniCircleRedis {
                 if (!appGenderType.equals(GenderType.boy)) {
                     //获取所有女生话题
                     CircleTypeRO tagTypeRO = SociaCircleTypeROFactory.getCircleTypeRO(tagTypeDO);
-                    List<SocialCircleDO> tagDOS = socialCircleRepository.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
+                    List<SocialuniCircleDO> tagDOS = socialCircleRepository.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
                     tagTypeRO.setCircles(SocialCircleROFactory.circleDOToROS(tagDOS));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -119,7 +119,7 @@ public class SocialuniCircleRedis {
                 if (!appGenderType.equals(GenderType.girl)) {
                     //获取所有男生话题
                     CircleTypeRO tagTypeRO = SociaCircleTypeROFactory.getCircleTypeRO(tagTypeDO);
-                    List<SocialCircleDO> tagDOS = socialCircleRepository.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
+                    List<SocialuniCircleDO> tagDOS = socialCircleRepository.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
                     tagTypeRO.setCircles(SocialCircleROFactory.circleDOToROS(tagDOS));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -134,7 +134,7 @@ public class SocialuniCircleRedis {
 
     //根据typeid获取所有
     public List<SocialCircleRO> getCirclesByTagTypeDOAndGender(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
-        List<SocialCircleDO> tagDOS;
+        List<SocialuniCircleDO> tagDOS;
         if (appGenderType.equals(GenderType.all)) {
             tagDOS = getCirclesByTagTypeId(tagTypeDO.getId());
         } else {
@@ -146,7 +146,7 @@ public class SocialuniCircleRedis {
 
 
     //根据typeid获取所有
-    public List<SocialCircleDO> getCirclesByTagTypeId(Integer tagTypeId) {
+    public List<SocialuniCircleDO> getCirclesByTagTypeId(Integer tagTypeId) {
         // 从数据库中获取tag列表
         return socialCircleRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeId, ContentStatus.enable);
     }

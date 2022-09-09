@@ -28,7 +28,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialCircleDO extends CommonContentBaseDO implements Serializable {
+public class SocialuniCircleDO extends CommonContentBaseDO implements Serializable {
     private Integer tagTypeId;
 
     private String name;
@@ -64,7 +64,7 @@ public class SocialCircleDO extends CommonContentBaseDO implements Serializable 
     private Boolean showFront;
     private Integer devId;
 
-    public SocialCircleDO(String name, String description, Integer devId, SocialuniUserDO createUser) {
+    public SocialuniCircleDO(String name, String description, Integer devId, SocialuniUserDO createUser) {
         this.name = name;
         this.description = description;
         this.applyUserId = 1;

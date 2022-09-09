@@ -1,7 +1,7 @@
 <template>
   <q-popup ref="schoolDialog" bottom @confirm="confirm">
     <div class="h550 pd">
-      <q-search class="flex-1 mx-sm bg-default">
+      <q-search class="mx-sm bg-default">
         <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
         <input v-model.trim="filterSchoolNameText" :adjust-position="false" type="text" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>

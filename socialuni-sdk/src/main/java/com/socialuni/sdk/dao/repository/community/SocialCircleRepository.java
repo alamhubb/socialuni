@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository.community;
 
-import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,21 +8,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 
-public interface SocialCircleRepository extends JpaRepository<SocialCircleDO, Integer> {
+public interface SocialCircleRepository extends JpaRepository<SocialuniCircleDO, Integer> {
 
     //查询热门前10tag
-    List<SocialCircleDO> findByStatusOrderByCountDesc(String status, Pageable pageable);
-
-    SocialCircleDO findFirstByName(String name);
+    List<SocialuniCircleDO> findByStatusOrderByCountDesc(String status, Pageable pageable);
+    @Cacheable(cacheNames = "getCircleInfoByName", key = "#name")
+    SocialuniCircleDO findFirstByNameAndStatus(String name, String status);
 
     @Cacheable(cacheNames = "getCircleInfo", key = "#circleId")
-    SocialCircleDO findFirstByIdAndStatus(Integer circleId, String status);
+    SocialuniCircleDO findFirstByIdAndStatus(Integer circleId, String status);
 
-    List<SocialCircleDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
+    List<SocialuniCircleDO> findByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
 
     //获取tagTYpe所有子tag
     @Cacheable(cacheNames = "getCirclesByType", key = "#tagTypeId")
-    List<SocialCircleDO> findByTagTypeIdAndStatusOrderByCountDesc(Integer tagTypeId, String status);
+    List<SocialuniCircleDO> findByTagTypeIdAndStatusOrderByCountDesc(Integer tagTypeId, String status);
 
-    List<SocialCircleDO> findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(Integer tagTypeId, String status, String gender);
+    List<SocialuniCircleDO> findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(Integer tagTypeId, String status, String gender);
 }

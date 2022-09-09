@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.domain.circle;
 
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
-import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
@@ -27,7 +27,7 @@ public class CircleQueryDomain {
         if (tagTypeDO == null) {
             return new ArrayList<>();
         }
-        List<SocialCircleDO> list = socialCircleRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), CommonStatus.enable);
+        List<SocialuniCircleDO> list = socialCircleRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), CommonStatus.enable);
 
         return SocialCircleROFactory.circleDOToROS(list);
     }

@@ -8,7 +8,7 @@ import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.logic.factory.TalkImgDOFactory;
 import com.socialuni.sdk.logic.manage.talk.SocialTalkCreateManage;
 import com.socialuni.sdk.dao.DO.DistrictDO;
-import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkCircleDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
@@ -25,6 +25,7 @@ import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.sdk.utils.model.DO.SocialuniCircleDOUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -119,20 +120,18 @@ public class SocialTalkPostDomain {
         List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd, talkVisibleGender);
 
         String circleName = talkVO.getCircleName();
-        SocialCircleDO socialCircleDO = null;
+        SocialuniCircleDO socialCircleDO = null;
         if (StringUtils.isNotEmpty(circleName)) {
-            socialCircleDO = socialCircleRepository.findFirstByName(talkVO.getCircleName());
-            if (socialCircleDO != null) {
-                socialCircleDO.setCount(socialCircleDO.getCount() + 1);
-                socialCircleDO = socialCircleRepository.save(socialCircleDO);
-            }
+            socialCircleDO = SocialuniCircleDOUtil.getCircleEnable(talkVO.getCircleName());
+            socialCircleDO.setCount(socialCircleDO.getCount() + 1);
+            socialCircleDO = socialCircleRepository.save(socialCircleDO);
         }
 
         TalkAddValidateRO talkAddValidateRO = new TalkAddValidateRO(districtDO, list, socialCircleDO);
         return talkAddValidateRO;
     }
 
-    public SocialTalkDO saveEntity(SocialuniUserDO userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialCircleDO socialCircleDO) {
+    public SocialTalkDO saveEntity(SocialuniUserDO userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialuniCircleDO socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {

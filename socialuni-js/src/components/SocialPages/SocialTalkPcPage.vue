@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="h100p row-center">
     <div class="flex-col h100p w600">
@@ -5,7 +6,7 @@
         <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
         ></tag-search>
       </view>
-      <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
+      &lt;!&ndash;    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh&ndash;&gt;
       <view v-show="!showTagSearch" class="flex-col h100vh">
         <q-navbar class="flex-none">
           <div class="row-col-center ml-xs mr-sm font-bold bg-click" @click="openCityPicker">
@@ -24,9 +25,9 @@
             <input v-else :adjust-position="false" type="text"
                    placeholder="选择话题" confirm-type="search"/>
           </q-search>
-          <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
+          &lt;!&ndash;        <view class="mr-sm" :class="{'text-theme':useFilters}">
                     <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
-                  </view>-->
+                  </view>&ndash;&gt;
           <view v-if="user" class="position-relative mr-sm">
             <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
             <u-badge :count="unreadNotifiesNum" size="mini"
@@ -37,13 +38,13 @@
           </view>
         </q-navbar>
 
-        <!--  #ifdef APP-PLUS -->
-        <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
-        <!--  #endif -->
+        &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
+        &lt;!&ndash; <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>&ndash;&gt;
+        &lt;!&ndash;  #endif &ndash;&gt;
 
         <view ref="tabsTalk" v-if="talkTabs.length" class="flex-col h100p">
-          <!--  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">-->
-          <!--    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"-->
+          &lt;!&ndash;  <view v-if="talkTabs.length" class="flex-col h100p bg-primary">&ndash;&gt;
+          &lt;!&ndash;    <q-tabs :tabs="talkTabs" v-model="current" type="bar" @input="tabsChange"&ndash;&gt;
           <div class="flex-row px-sm mb-xss">
             <q-tabs :tabs="talkTabs" :value="currentTabIndex" type="line" @input="tabsChange"
                     class="bd-radius flex-1 mr-sm">
@@ -63,26 +64,26 @@
                 }"
                     @change="talkSwiperChange">
               <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
-                <!--
+                &lt;!&ndash;
                 使用view实现的问题，没有scroll事件小程序上
                 <view class="h100p bg-default" :class="[scrollEnable?'overflow-scroll':'overflow-hidden']" :scroll-y="scrollEnable" @scrolltolower="onreachBottom"
                       :lower-threshold="800"
                       @scroll.native="talksScrollEvent"
                       @scroll="talksScrollEvent"
-                >-->
+                >&ndash;&gt;
 
-                <!--          首页展示区分不同类型，
-                          圈子类型、关注类型、首页类型、同城类型-->
+                &lt;!&ndash;          首页展示区分不同类型，
+                          圈子类型、关注类型、首页类型、同城类型&ndash;&gt;
 
                 <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom" :scroll-top="scrollTop"
                              :lower-threshold="800"
                              @scroll="talksScrollEvent">
-                  <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
+                  &lt;!&ndash;          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白&ndash;&gt;
                   <div class="px-sm pb-60 bg-theme3"
                        v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].type !== 'follow'">
                     <talk-swipers v-if="talkTabs[swiperIndex].type === 'home' && configShowSwipers"></talk-swipers>
 
-                    <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
+                    &lt;!&ndash;              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
                                     <div class="row-between-center mb-sm">
                                       <div>
                                         圈主：xxxx
@@ -95,7 +96,7 @@
                                     <div class="row-col-center">
                                       小圈主：胺分散法，撒飞洒地方，阿斯蒂芬阿萨德，士大夫撒地方，
                                     </div>
-                                  </div>-->
+                                  </div>&ndash;&gt;
 
 
                     <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
@@ -103,32 +104,32 @@
                                  :talk-tab-type="talkTabObj.type"
                                  @delete-talk="deleteTalk"
                       />
-                      <!-- app端广告有问题-->
-                      <!--  #ifdef APP-PLUS -->
-                      <!--<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
+                      &lt;!&ndash; app端广告有问题&ndash;&gt;
+                      &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
+                      &lt;!&ndash;<view v-if="showAd&&showAdIndexList.includes(index)" class="mb-5">
                         <ad class="bg-white" adpid="1890536227"></ad>
-                      </view>-->
-                      <!--  #endif -->
-                      <!--wx平台显示的广告-->
-                      <!--  #ifdef MP-WEIXIN -->
+                      </view>&ndash;&gt;
+                      &lt;!&ndash;  #endif &ndash;&gt;
+                      &lt;!&ndash;wx平台显示的广告&ndash;&gt;
+                      &lt;!&ndash;  #ifdef MP-WEIXIN &ndash;&gt;
                       <ad v-if="showAd&&showAdIndexList.includes(index)"
                           class="bg-white mb-5" unit-id="adunit-65c8911d279d228f" ad-type="video" ad-theme="white"></ad>
-                      <!--  #endif -->
+                      &lt;!&ndash;  #endif &ndash;&gt;
 
-                      <!--qq平台显示的广告-->
-                      <!--  #ifdef MP-QQ -->
+                      &lt;!&ndash;qq平台显示的广告&ndash;&gt;
+                      &lt;!&ndash;  #ifdef MP-QQ &ndash;&gt;
                       <ad v-if="showAd&&showAdIndexList.includes(index)"
                           class="bg-white mb-5" unit-id="bcc21923107071ac3f8aa076c7e00229" type="card"></ad>
-                      <!--  #endif -->
+                      &lt;!&ndash;  #endif &ndash;&gt;
 
-                      <!--头条平台显示的广告-->
-                      <!--  #ifdef MP-TOUTIAO -->
+                      &lt;!&ndash;头条平台显示的广告&ndash;&gt;
+                      &lt;!&ndash;  #ifdef MP-TOUTIAO &ndash;&gt;
                       <ad v-if="showAd&&showAdIndexList.includes(index)"
                           class="bg-white mb-5" type="banner video large" unit-id="3snract0gqnc3fn16d"></ad>
-                      <!--  #endif -->
+                      &lt;!&ndash;  #endif &ndash;&gt;
                     </view>
 
-                    <!-- 下拉刷新组件 -->
+                    &lt;!&ndash; 下拉刷新组件 &ndash;&gt;
                     <view class="mt-xs">
                       <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
                                      :contentText="loadMoreText"></uni-load-more>
@@ -146,11 +147,11 @@
               </swiper-item>
             </swiper>
           </q-pull-refresh>
-          <!--            从附近哪里选择城市-->
-          <!--            搜索栏左边加个筛选按钮可以筛选性别年龄-->
-          <!--            除去搜索栏和导航栏的高度就是剩余高度-->
+          &lt;!&ndash;            从附近哪里选择城市&ndash;&gt;
+          &lt;!&ndash;            搜索栏左边加个筛选按钮可以筛选性别年龄&ndash;&gt;
+          &lt;!&ndash;            除去搜索栏和导航栏的高度就是剩余高度&ndash;&gt;
 
-          <!--        默认附近，可以切换城市，城市-->
+          &lt;!&ndash;        默认附近，可以切换城市，城市&ndash;&gt;
 
           <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
 
@@ -726,3 +727,4 @@ export default class SocialTalkPcPage extends Vue {
   }
 }
 </script>
+-->

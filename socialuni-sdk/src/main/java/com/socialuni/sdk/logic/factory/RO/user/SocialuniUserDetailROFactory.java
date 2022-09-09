@@ -6,7 +6,7 @@ import com.socialuni.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserImgRO;
-import com.socialuni.sdk.utils.SocialuniUserExpandUtil;
+import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class SocialuniUserDetailROFactory {
         //user基础信息
         SocialuniUserDetailRO userDetailVO = new SocialuniUserDetailRO(socialUserDetailFollowRO);
 
-        String schoolName = SocialuniUserExpandUtil.getUserSchoolName(userDO.getId());
+        String schoolName = SocialuniUserExpandDOUtil.getUserSchoolNameAllowNull(userDO.getId());
 
         userDetailVO.setSchoolName(schoolName);
         //用户图片

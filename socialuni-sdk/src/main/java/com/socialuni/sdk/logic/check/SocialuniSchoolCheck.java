@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.check;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
-import com.socialuni.sdk.dao.DO.circle.SocialCircleDO;
+import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +27,7 @@ public class SocialuniSchoolCheck {
         if (tagTypeDO == null) {
             throw new SocialParamsException("未找到大学圈子分类");
         }
-        List<SocialCircleDO> circleDOS = socialCircleRedis.getCirclesByTagTypeId(tagTypeDO.getId());
+        List<SocialuniCircleDO> circleDOS = socialCircleRedis.getCirclesByTagTypeId(tagTypeDO.getId());
 
         if (circleDOS.stream().noneMatch(item -> item.getName().equals(schoolName))) {
             throw new SocialParamsException("不存在的大学名称，请添加大学名称");

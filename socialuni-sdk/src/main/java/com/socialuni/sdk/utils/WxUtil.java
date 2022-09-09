@@ -130,6 +130,9 @@ public class WxUtil {
      * @param content
      */
     public static HttpResult checkTextWxSec(String content) {
+        if (StringUtils.isEmpty(wx_mp_secret)) {
+            return new HttpResult();
+        }
         HttpResult result = checkContentWxSecPost(content);
         assert result != null;
         if (result.hasError()) {
@@ -163,7 +166,7 @@ public class WxUtil {
 
             Thumbnails.of(new URL(imgUrl)).size(700, 1300).toFile(file);
 
-            FileSystemResource fileResource  = new FileSystemResource(file);
+            FileSystemResource fileResource = new FileSystemResource(file);
 
             // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
             MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();

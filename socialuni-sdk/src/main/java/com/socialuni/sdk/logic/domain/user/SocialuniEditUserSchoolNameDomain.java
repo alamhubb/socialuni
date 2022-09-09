@@ -11,7 +11,7 @@ import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.sdk.utils.SocialuniUserExpandUtil;
+import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +42,7 @@ public class SocialuniEditUserSchoolNameDomain {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandUtil.getUserExpandDO(mineUserId);
+        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandDOUtil.getUserExpandDO(mineUserId);
 
         if (socialuniUserExpandDO == null) {
             socialuniUserExpandDO = new SocialuniUserExpandDO();

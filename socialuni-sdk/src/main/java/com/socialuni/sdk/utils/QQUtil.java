@@ -96,7 +96,7 @@ public class QQUtil {
     }  */
 
     public static String refreshAccessToken() {
-        String url = QQConst.qqTokenUrl+"appid=" + qq_mp_id + "&secret=" + qq_mp_secret;
+        String url = QQConst.qqTokenUrl + "appid=" + qq_mp_id + "&secret=" + qq_mp_secret;
         Date curDate = new Date();
         log.info("从qq获取认证信息:{}", url);
         ResponseEntity<WxTokenResult> responseEntity = RestUtil.restTemplate().getForEntity(url, WxTokenResult.class);
@@ -126,6 +126,9 @@ public class QQUtil {
      * @param content
      */
     public static HttpResult checkContentQQSec(String content) {
+        if (StringUtils.isEmpty(qq_mp_secret)) {
+            return new HttpResult();
+        }
         HttpResult qqResult = checkContentQQSecPost(content);
         assert qqResult != null;
         if (qqResult.hasError()) {
@@ -152,7 +155,7 @@ public class QQUtil {
 
             Thumbnails.of(new URL(imgUrl)).size(700, 1300).toFile(file);
 
-            FileSystemResource fileResource  = new FileSystemResource(file);
+            FileSystemResource fileResource = new FileSystemResource(file);
 
             // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
             MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();

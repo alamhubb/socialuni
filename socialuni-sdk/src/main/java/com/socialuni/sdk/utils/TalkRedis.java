@@ -25,6 +25,7 @@ public class TalkRedis {
     @Resource
     private TalkMapper talkMapper;
 
+
     @Caching(
             evict = {
                     @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByTab, allEntries = true),
@@ -59,9 +60,9 @@ public class TalkRedis {
     }
 
     //用户发布动态后需要更新这个缓存
-    @Cacheable(cacheNames = RedisKeysConst.queryMineTalkIdsByCom, key = "#userId+'-'+#circleId")
-    public List<Integer> queryMineTalkIdsByCom(Integer userId, Integer circleId) {
-        return talkMapper.queryMineTalkIdsByCom(userId, ContentStatus.selfCanSeeContentStatus, circleId);
+    @Cacheable(cacheNames = RedisKeysConst.queryMineTalkIdsByCom, key = "#userId")
+    public List<Integer> queryMineTalkIdsByCom(Integer userId) {
+        return talkMapper.queryMineTalkIdsByCom(userId, ContentStatus.selfCanSeeContentStatus);
     }
 
     //这里有问题，应该清楚所有引用了当前用户的
@@ -69,17 +70,6 @@ public class TalkRedis {
     public List<Integer> queryUserFollowsTalkIds(Integer userId, List<Integer> userIds, Pageable pageable) {
         return talkRepository.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
-
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTab, key = "#postTalkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds+'-'+#devId+'-'+#circleId+'-'+#hasPeopleImgTalkNeedIdentity")
-    public List<Integer> queryTalkIdsByTab(String postTalkUserGender,
-                                           Integer minAge, Integer maxAge, String adCode,
-                                           String talkVisibleGender,
-                                           String mineUserGender, List<Integer> tagIds, Integer devId, Integer circleId, Boolean hasPeopleImgTalkNeedIdentity) {
-        List<Integer> talkIds = talkMapper.queryTalkIdsByCom(postTalkUserGender, minAge, maxAge, ContentStatus.enable, adCode,
-                talkVisibleGender, mineUserGender, tagIds, null, circleId, hasPeopleImgTalkNeedIdentity);
-        return talkIds;
-    }
-
 
     public List<Integer> filterTalkIds(List<Integer> talkIds, List<Integer> tagTalkIds) {
         Map<Integer, Integer> talkIdMap = new HashMap<>();

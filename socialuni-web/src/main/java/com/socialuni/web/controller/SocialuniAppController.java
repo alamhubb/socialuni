@@ -43,7 +43,7 @@ public class SocialuniAppController {
             add(new HomeTabRO(TalkTabType.follow_name));
             add(new HomeTabRO(TalkTabType.home_name));
             add(new HomeTabRO(TalkTabType.city_name));
-            add(new HomeTabRO("本校"));
+            add(new HomeTabRO(TalkTabType.self_school));
         }};
         return ResultRO.success(list);
     }
