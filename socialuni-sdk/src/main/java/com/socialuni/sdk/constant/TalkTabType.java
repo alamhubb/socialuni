@@ -14,4 +14,11 @@ public class TalkTabType {
     public static final String circle_type = "circle";
 
     public static final List<String> values = Arrays.asList(TalkTabType.follow_type, TalkTabType.home_type, TalkTabType.city_type, TalkTabType.circle_type);
+
+
+    public static final String follow_name = "关注";
+    public static final String home_name = "首页";
+    public static final String city_name = "同城";
+
+    public static final List<String> names = Arrays.asList(TalkTabType.follow_name, TalkTabType.home_name, TalkTabType.city_name);
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -28,10 +29,13 @@ public class SocialHomeTalkQueryEntity {
 
     //查询非关注tab的动态列表
     public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialuniUserDO mineUser) {
-        Integer curPage = queryBO.getPageNum();
+//        Integer curPage = queryBO.getPageNum();
         List<SocialTalkDO> stickTalks = new ArrayList<>();
-        if (TalkTabType.home_type.equals(queryBO.getHomeTabType())) {
-            if (curPage == 0) {
+
+        Date queryTime = queryBO.getQueryTime();
+
+        if (TalkTabType.home_type.equals(queryBO.getHomeTabName())) {
+            if (queryTime == null) {
                 stickTalks = this.queryStickTalks(queryBO.getDevId());
             }
         }

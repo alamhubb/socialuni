@@ -31,7 +31,7 @@ public class SocialHomeTalkQueryStore {
     public List<SocialTalkDO> queryHomeTalks(SocialHomeTabTalkQueryBO queryBO, SocialuniUserDO user) {
         String postTalkUserGender = queryBO.getTalkUserGender();
         String talkVisibleGender = queryBO.getTalkVisibleGender();
-        String tabType = queryBO.getHomeTabType();
+        String tabType = queryBO.getHomeTabName();
 
         //        log.info("queryNotFollowTalks开始2：" + new Date().getTime() / 1000);
         //userId特殊处理
@@ -111,14 +111,14 @@ public class SocialHomeTalkQueryStore {
             tagIds = null;
         }
 
-        Boolean hasPeopleImgTalkNeedIdentity = queryBO.getHasPeopleImgTalkNeedIdentity();
+        /*Boolean hasPeopleImgTalkNeedIdentity = queryBO.getHasPeopleImgTalkNeedIdentity();
         //false转为null
         if (hasPeopleImgTalkNeedIdentity == null || !hasPeopleImgTalkNeedIdentity) {
             hasPeopleImgTalkNeedIdentity = null;
-        }
+        }*/
 
         log.debug("开始数据库查询：" + new Date().getTime() / 1000);
-        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO.getPageNum(), userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, hasPeopleImgTalkNeedIdentity);
+        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(1, userId, postTalkUserGender, minAge, maxAge, adCode, tagIds, talkVisibleGender, mineUserGender, queryBO.getDevId(), queryBO.getQueryTime(), circleId, null);
         log.debug("结束数据库查询：" + new Date().getTime() / 1000);
 //        log.info("queryNotFollowTalks结束2：" + new Date().getTime() / 1000);
         return talkDOS;

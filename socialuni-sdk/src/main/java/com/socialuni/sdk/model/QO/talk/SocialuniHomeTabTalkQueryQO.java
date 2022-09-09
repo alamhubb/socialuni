@@ -11,24 +11,31 @@ import java.util.List;
  */
 @Data
 public class SocialuniHomeTabTalkQueryQO {
-    private List<String> talkIds;
-    private Integer pageNum;
-    private String homeTabType;
-    private List<Integer> tagIds;
-    private List<String> tagNames;
-    private String gender;
+//    private List<String> talkIds;
+//    private Integer pageNum;
+//    private String homeTabType;
+//    private List<Integer> tagIds;
+//    private Date queryDate;
+//    private String userGender;
+    //新版本用genderType，旧版本用gender
+//    private String talkVisibleGender;
+    //排除未实名认证的图片内容， 由应用控制，不由前端控制
+//    private Boolean hasPeopleImgTalkNeedIdentity;
 
+    //首页tab名称
+    private String homeTabName;
+    // 筛选的话题列表
+    private List<String> tagNames;
+    // 筛选的用户行呗
+    private String gender;
+    // 筛选的城市
     private String adCode;
+    // 记录用户地理位置，计算距离
     private Double lon;
     private Double lat;
+    // 记录查询时间，用来分页
     private Date queryTime;
-    private Date queryDate;
+    // 筛选用户年龄
     private Integer minAge;
     private Integer maxAge;
-    private String userGender;
-    //新版本用genderType，旧版本用gender
-    private String talkVisibleGender;
-    private String circleName;
-    //排除未实名认证的图片内容
-    private Boolean hasPeopleImgTalkNeedIdentity;
 }

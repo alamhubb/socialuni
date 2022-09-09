@@ -1,9 +1,7 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.constant.socialuni.GenderType;
-import com.socialuni.sdk.logic.factory.QO.SocialHomeTalkQueryQOFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.DevAccountUtils;
@@ -24,18 +22,9 @@ public class SocialuniHomeTalkQueryDomain {
 
     //查询非关注tab的动态列表
     public List<SocialuniTalkRO> queryHomeTabTalks(@Valid SocialuniHomeTabTalkQueryQO queryQO) {
-        Integer pageNum = queryQO.getPageNum();
-        if (pageNum == null) {
-            if (queryQO.getTalkIds() != null) {
-                pageNum = queryQO.getTalkIds().size() / 10;
-                queryQO.setPageNum(pageNum);
-            }
-        }
-
         //获取当前用户
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        SocialHomeTabTalkQueryQO socialHomeTabTalkQueryQO = SocialHomeTalkQueryQOFactory.getTalkQueryQO(queryQO);
 
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
@@ -53,7 +42,7 @@ public class SocialuniHomeTalkQueryDomain {
         }
 
         //转换为rolist
-        List<SocialuniTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(socialHomeTabTalkQueryQO, mineUser);
+        List<SocialuniTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
 
         return socialTalkROs;
     }

@@ -31,7 +31,7 @@ public class SocialTalkService {
 
     //查询非关注tab的动态列表
     //无参数get请求访问talks，主要为了方便用户体验。
-    public ResultRO<List<SocialuniTalkRO>> queryHomeTalks() {
+    /*public ResultRO<List<SocialuniTalkRO>> queryHomeTalks() {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         SocialHomeTabTalkQueryQO queryQO = new SocialHomeTabTalkQueryQO();
@@ -49,17 +49,17 @@ public class SocialTalkService {
         //转换为rolist
         return this.queryHomeTabTalks(queryQO);
     }
-
+*/
     //查询非关注tab的动态列表
     //查询非关注tab的动态列表
-    public ResultRO<List<SocialuniTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO) {
+    /*public ResultRO<List<SocialuniTalkRO>> queryHomeTabTalks(SocialHomeTabTalkQueryQO queryQO) {
         //获取当前用户
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = socialHomeTalkQueryDomain.queryHomeTabTalks(queryQO, mineUser);
         return new ResultRO<>(socialTalkROs);
-    }
+    }*/
 
     public ResultRO<Void> postTalk(SocialuniTalkPostQO talkPostQO) {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见

@@ -38,32 +38,28 @@ public class SocialuniTalkService {
 
     //无参数get请求访问talks，主要为了方便用户体验。
     public ResultRO<List<SocialuniTalkRO>> queryTalks() {
-        return this.queryTalks(null);
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniTalkAPI.queryTalks();
+        }
+        SocialuniHomeTabTalkQueryQO queryQO = new SocialuniHomeTabTalkQueryQO();
+        //获取当前用户
+        queryQO.setHomeTabName(TalkTabType.home_name);
+        //如果经纬度为空
+        RectangleVO rectangleVO = MapUtil.getRectangle();
+        if (rectangleVO != null) {
+            queryQO.setLon(rectangleVO.getLon());
+            queryQO.setLat(rectangleVO.getLat());
+        }
+        queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
+        queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
+        queryQO.setGender(DevAccountUtils.getAppGenderType());
+        return this.queryTalks(queryQO);
     }
 
     //查询非关注tab的动态列表
     public ResultRO<List<SocialuniTalkRO>> queryTalks(SocialuniHomeTabTalkQueryQO queryQO) {
-        if (queryQO == null) {
-            //获取当前用户
-            queryQO = new SocialuniHomeTabTalkQueryQO();
-            queryQO.setHomeTabType(TalkTabType.home_type);
-            //如果经纬度为空
-            RectangleVO rectangleVO = MapUtil.getRectangle();
-            if (rectangleVO != null) {
-                queryQO.setLon(rectangleVO.getLon());
-                queryQO.setLat(rectangleVO.getLat());
-            }
-            queryQO.setMinAge(SocialAppConfig.homeTalkQueryMinAge);
-            queryQO.setMaxAge(SocialAppConfig.homeTalkQueryMaxAge);
-            queryQO.setGender(DevAccountUtils.getAppGenderType());
-            queryQO.setPageNum(0);
-        }
-        List<SocialuniTalkRO> talkROS;
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<List<SocialuniTalkRO>> resultRO = socialuniTalkAPI.queryTalks(queryQO);
-            talkROS = resultRO.getData();
-        } else {
-            talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
+            return socialuniTalkAPI.queryTalks(queryQO);
         }
         //如果不为测试环境则过滤到测试环境标签的数据
         /*if (DevAccountUtils.getDevIdNotNull() != 3) {
@@ -77,6 +73,8 @@ public class SocialuniTalkService {
                 return true;
             }).collect(Collectors.toList());
         }*/
+
+        List<SocialuniTalkRO> talkROS = centerHomeTalkQueryDomain.queryHomeTabTalks(queryQO);
         return new ResultRO<>(talkROS);
     }
 

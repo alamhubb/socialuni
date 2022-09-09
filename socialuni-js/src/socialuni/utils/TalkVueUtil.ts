@@ -4,15 +4,18 @@ import TalkTabType from '../constant/TalkTabType'
 
 const talkTabFollowDefault = new TalkTabVO()
 talkTabFollowDefault.name = TalkTabType.follow_name
-talkTabFollowDefault.type = TalkTabType.follow_type
+talkTabFollowDefault.appDefaultTab = true
+// talkTabFollowDefault.type = TalkTabType.follow_type
 
 const talkTabHomeDefault = new TalkTabVO()
 talkTabHomeDefault.name = TalkTabType.home_name
-talkTabHomeDefault.type = TalkTabType.home_type
+talkTabHomeDefault.appDefaultTab = true
+// talkTabHomeDefault.type = TalkTabType.home_type
 
 const talkTabCityDefault = new TalkTabVO()
 talkTabCityDefault.name = TalkTabType.city_name
-talkTabCityDefault.type = TalkTabType.city_type
+talkTabCityDefault.appDefaultTab = true
+// talkTabCityDefault.type = TalkTabType.city_type
 
 const defaultTabs = [
   talkTabFollowDefault,
@@ -20,9 +23,12 @@ const defaultTabs = [
   talkTabCityDefault
 ]
 
+const TalkTabsDefaultNames = defaultTabs.map(item => item.name)
+
 export default class TalkVueUtil {
   static readonly TalkTabsKey: string = 'talkTabs'
   static readonly TalkTabsDefault: TalkTabVO [] = defaultTabs
+  static readonly TalkTabsDefaultNames: string [] = TalkTabsDefaultNames
 
 
   static readonly talkTabIndexKey: string = 'talkTabIndex'
@@ -32,21 +38,12 @@ export default class TalkVueUtil {
   static readonly talkTabTypeDefault: string = TalkTabType.home_type
 
 
-  static getTalkTabs(): TalkTabVO [] {
-    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey) || TalkVueUtil.TalkTabsDefault
-
-    if (homeTypeTalks.length < 4) {
-      return TalkVueUtil.TalkTabsDefault
-    }
-    if (homeTypeTalks[1].name !== TalkVueUtil.TalkTabsDefault[1].name) {
-      homeTypeTalks[1].name = TalkVueUtil.TalkTabsDefault[1].name
-      homeTypeTalks[1].type = TalkVueUtil.TalkTabsDefault[1].type
-      homeTypeTalks[1].talks = []
-    }
-    return homeTypeTalks
+  static getTalkTabs (): TalkTabVO [] {
+    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
+    return homeTypeTalks || TalkVueUtil.TalkTabsDefault
   }
 
-  static getCurTalkTabIndex(): number {
+  static getCurTalkTabIndex (): number {
     let index = StorageUtil.getObj(TalkVueUtil.talkTabIndexKey)
     if (index !== 0) {
       index = index || TalkVueUtil.talkTabIndexDefault

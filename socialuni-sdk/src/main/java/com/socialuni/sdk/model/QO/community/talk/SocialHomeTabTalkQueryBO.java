@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class SocialHomeTabTalkQueryBO {
-    private String homeTabType;
+    private String homeTabName;
     private List<Integer> tagIds;
     //新版本用genderType，旧版本用gender
 
@@ -20,14 +20,15 @@ public class SocialHomeTabTalkQueryBO {
     private Double lat;
 
     private Integer minAge;
-    private Integer pageNum;
+    //    private Integer pageNum;
     private Integer maxAge;
     private Date queryTime;
 
     private String talkUserGender;
     private String talkVisibleGender;
     private Integer devId;
+    //查询圈子内容，需要设置circleid
     private Integer circleId;
     //排除未实名认证的图片内容
-    private Boolean hasPeopleImgTalkNeedIdentity;
+//    private Boolean hasPeopleImgTalkNeedIdentity;
 }
