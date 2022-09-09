@@ -28,6 +28,7 @@ export default class CosUtil {
 
   static getAuthorizationCos (cosAuthRO: CosAuthRO): COS {
     const credentials = cosAuthRO && cosAuthRO.credentials
+    //@ts-ignore
     if (!cosAuthRO || !credentials) return console.error('credentials invalid')
     const cosObj = new COS({
       // ForcePathStyle: true, // 如果使用了很多存储桶，可以通过打开后缀式，减少配置白名单域名数量，请求时会用地域域名
@@ -49,6 +50,7 @@ export default class CosUtil {
   static getAuthorizationKey (cosAuthRO: CosAuthRO) {
     const credentials = cosAuthRO && cosAuthRO.credentials
     if (!cosAuthRO || !credentials) return console.error('credentials invalid')
+    //@ts-ignore
     const authKey: string = new COS().getAuthorization({
       /** 计算签名用的密钥 SecretId，必选 */
       SecretId: cosAuthRO.credentials.tmpSecretId,

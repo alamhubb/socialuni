@@ -7,6 +7,7 @@ import { socialSystemModule } from '../store'
 export default class WxUtils {
   static subscribeAppMsg (tmplIds: string[]) {
     return new Promise((resolve, reject) => {
+      //@ts-ignore
       qq.subscribeAppMsg({
         tmplIds: tmplIds,
         subscribe: true,
@@ -25,6 +26,7 @@ export default class WxUtils {
   }
 
   static createInterstitialAd () {
+    //@ts-ignore
     return qq.createInterstitialAd({
       adUnitId: AppConfig.qq_insert_ad_id
     })
@@ -33,6 +35,7 @@ export default class WxUtils {
   static requestPayment (payResult: UserPayResultVO): Promise<void> {
     return new Promise((resolve, reject) => {
       if (PlatformType.mp === socialSystemModule.platform) {
+        //@ts-ignore
         wx.requestPayment({
           timeStamp: payResult.timeStamp,
           nonceStr: payResult.nonceStr,
