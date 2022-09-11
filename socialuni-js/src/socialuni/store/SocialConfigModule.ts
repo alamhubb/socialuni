@@ -94,7 +94,7 @@ export default class SocialConfigModule extends VuexModule {
     if (Lodash.isEmpty(this.appConfig)) {
       return ConfigMap.systemError601Default
     } else {
-      return this.appConfig[ConfigMap.systemError601Key]
+      return this.appConfig[ConfigMap.systemError601UnLoginErrorKey]
     }
   }
 
@@ -102,7 +102,7 @@ export default class SocialConfigModule extends VuexModule {
     if (Lodash.isEmpty(this.appConfig)) {
       return ConfigMap.systemError604Default
     } else {
-      return this.appConfig[ConfigMap.systemError604Key]
+      return this.appConfig[ConfigMap.systemError604SystemErrorKey]
     }
   }
 
@@ -110,7 +110,7 @@ export default class SocialConfigModule extends VuexModule {
     if (Lodash.isEmpty(this.appConfig)) {
       return ConfigMap.systemError605Default
     } else {
-      return this.appConfig[ConfigMap.systemError605Key]
+      return this.appConfig[ConfigMap.systemError605UserViolationErrorKey]
     }
   }
 
