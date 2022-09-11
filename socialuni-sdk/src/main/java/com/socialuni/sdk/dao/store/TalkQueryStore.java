@@ -83,8 +83,11 @@ public class TalkQueryStore {
         }
         String talkVisibleGender = queryBO.getTalkVisibleGender();
 
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
-        String mineUserGender = mineUser.getGender();
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        String mineUserGender = null;
+        if (mineUser != null) {
+            mineUserGender = mineUser.getGender();
+        }
 
 
         //查询所有talkId
@@ -113,11 +116,13 @@ public class TalkQueryStore {
             //取交集
             userTalkUnionIds.retainAll(queryTalkUnionIds);
         }
-        Integer mineUserId = mineUser.getUnionId();
-        if (mineUserId != null) {
-            List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIdsByCom(mineUserId);
-            //取交集
-            userTalkUnionIds.retainAll(queryTalkUnionIds);
+        if (mineUser != null) {
+            Integer mineUserId = mineUser.getUnionId();
+            if (mineUserId != null) {
+                List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIdsByCom(mineUserId);
+                //取交集
+                userTalkUnionIds.retainAll(queryTalkUnionIds);
+            }
         }
         if (userTalkUnionIds.size() > 10) {
             userTalkUnionIds = userTalkUnionIds.subList(0, 10);

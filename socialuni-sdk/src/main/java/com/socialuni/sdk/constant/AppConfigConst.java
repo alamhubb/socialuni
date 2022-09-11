@@ -25,7 +25,9 @@ public class AppConfigConst {
     public static final String highLimitReportCountKey = "限制每天高质量举报次数";
     public static final String reportCountHideKey = "被举报几次隐藏";
     public static final Integer reportCountHide = 1;
-
+    public static final String systemError601UnLoginErrorKey = "systemError601";
+    public static final String systemError604SystemErrorKey = "systemError604";
+    public static final String systemError605UserViolationErrorKey = "systemError605";
 
     public static final Map<String, Object> appConfigMap = new HashMap<String, Object>(){{
         put(AppConfigConst.talkShowAdIntervalKey, 8);
@@ -37,6 +39,9 @@ public class AppConfigConst {
         put(AppConfigConst.authCodeIntervalKey, 120);
         put(AppConfigConst.highLimitReportCountKey, 20);
         put(AppConfigConst.reportCountHideKey, 1);
+        put(AppConfigConst.systemError601UnLoginErrorKey, "未登录，是否跳转至登录页");
+        put(AppConfigConst.systemError604SystemErrorKey, "有任何疑问请联系客服微信：491369310");
+        put(AppConfigConst.systemError605UserViolationErrorKey, "账号违规，被封禁，有任何疑问，联系客服微博：清池恋爱交友app，微信或qq:491369310");
     }};
 
 
