@@ -1,5 +1,6 @@
 package com.socialuni.web.controller;
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.sdk.model.QO.FrontErrorLogVO;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author qinkaiyuan
@@ -39,12 +41,7 @@ public class SocialuniAppController {
 
     @PostMapping("queryHomeTabs")
     public ResultRO<List<HomeTabRO>> queryHomeTabs() {
-        List<HomeTabRO> list = new ArrayList<HomeTabRO>() {{
-            add(new HomeTabRO(TalkTabType.follow_name));
-            add(new HomeTabRO(TalkTabType.home_name));
-            add(new HomeTabRO(TalkTabType.city_name));
-            add(new HomeTabRO(TalkTabType.self_school));
-        }};
+        List<HomeTabRO> list = SocialuniAppConfig.getHomeTabNames().stream().map(HomeTabRO::new).collect(Collectors.toList());
         return ResultRO.success(list);
     }
 

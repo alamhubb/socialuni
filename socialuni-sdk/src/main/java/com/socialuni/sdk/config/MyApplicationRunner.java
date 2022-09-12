@@ -37,20 +37,9 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     DevSocialuniIdRepository devSocialuniIdRepository;
 
-    @Autowired(required = false)
-    SocialuniAppConfig socialuniAppConfig;
-
     @Override
     @Async
     public void run(ApplicationArguments args) {
-        //判断是否已经有注册的开发者，没有的话注册。
-        if (socialuniAppConfig == null) {
-            System.out.println(1111);
-        } else {
-            System.out.println(222);
-            System.out.println(socialuniAppConfig.follow_name);
-        }
-
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者

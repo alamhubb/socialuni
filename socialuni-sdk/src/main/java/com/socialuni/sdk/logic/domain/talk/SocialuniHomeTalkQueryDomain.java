@@ -1,9 +1,11 @@
 package com.socialuni.sdk.logic.domain.talk;
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.sdk.constant.GenderTypeVO;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkTabType;
+import com.socialuni.sdk.constant.config.SocialuniAppType;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
@@ -87,14 +89,11 @@ public class SocialuniHomeTalkQueryDomain {
         return socialTalkROs;
     }
 
+    @Resource
+    SocialuniTalkQueryGenerateQueryBOByTabDomain socialuniTalkQueryGenerateQueryBOByTabDomain;
+
 
     public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
-
-
-
-
-
-
         //主要逻辑区分就是这里，
 
 
@@ -104,26 +103,21 @@ public class SocialuniHomeTalkQueryDomain {
 
         //同性社区
         //主要是校验appgender,只允许同性别用户使用，不同性别则要保证同性别
-        if (mineUser != null) {
-            String appGender = DevAccountUtils.getAppGenderType();
-            String mineUserGender = mineUser.getGender();
-            //app性别为女生，且用户不为女生提示错误
-            if (appGender.equals(GenderType.girl) && !mineUserGender.equals(GenderType.girl)) {
-                throw new SocialSystemException("此软件为女生专属应用");
-            } else if (appGender.equals(GenderType.boy) && !mineUserGender.equals(GenderType.boy)) {
-                throw new SocialSystemException("此软件为男生专属应用");
+        if (SocialuniAppType.genderTypeList.contains(SocialuniAppConfig.getAppType())){
+            if (mineUser != null) {
+                String appGender = DevAccountUtils.getAppGenderType();
+                String mineUserGender = mineUser.getGender();
+                //app性别为女生，且用户不为女生提示错误
+                if (appGender.equals(GenderType.girl) && !mineUserGender.equals(GenderType.girl)) {
+                    throw new SocialSystemException("此软件为女生专属应用");
+                } else if (appGender.equals(GenderType.boy) && !mineUserGender.equals(GenderType.boy)) {
+                    throw new SocialSystemException("此软件为男生专属应用");
+                }
             }
         }
+
         //校园社区
-
-
-
-
-
-
-
-
-        SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
+        SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO =socialuniTalkQueryGenerateQueryBOByTabDomain.GenerateQueryBOByTab();
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
 
@@ -131,6 +125,31 @@ public class SocialuniHomeTalkQueryDomain {
         //talk
         //话题校验
         //tagNames转tagIds
+
+
+        String homeTabName = queryQO.getHomeTabName();
+        socialHomeTabTalkQueryBO.setHomeTabName(homeTabName);
+
+        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
+        socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
+
+        if (SocialuniAppConfig.getHomeTabName().equals(homeTabName)) {
+            socialHomeTabTalkQueryBO.setAdCode(null);
+        } else if (homeTabName.equals(SocialuniAppConfig.getCityTabName())) {
+            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
+            socialHomeTabTalkQueryBO.setCircleId(null);
+        } else {
+            if (homeTabName.equals(TalkTabType.self_school)) {
+                homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
+            }
+            SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnable(homeTabName);
+            socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
+        }
+
+
+
+
+        //通用校验
         List<String> tagNames = queryQO.getTagNames();
         List<Integer> tagIds = new ArrayList<>();
         if (tagNames == null) {
@@ -149,9 +168,49 @@ public class SocialuniHomeTalkQueryDomain {
         }
         socialHomeTabTalkQueryBO.setTagIds(tagIds);
 
-        String homeTabName = queryQO.getHomeTabName();
-        socialHomeTabTalkQueryBO.setHomeTabName(homeTabName);
 
+        String queryQOGender = queryQO.getGender();
+        //校验query的GenderType是否正确
+        GenderTypeQueryVO genderTypeQueryVO = GenderTypeVO.GenderTypeQueryMap.get(queryQOGender);
+        if (genderTypeQueryVO == null) {
+            throw new SocialParamsException("错误的性别类型");
+        }
+        //如果为专属性别动态
+        if (mineUser != null) {
+            if (GenderType.onlyGenders.contains(queryQOGender)) {
+//                throw new SocialParamsException("请登录后查看，查看专属性别动态");
+                String mineUserGender = mineUser.getGender();
+                //如果为筛选仅男生可见，且用户不为男生，则报错
+                if (queryQOGender.equals(GenderType.onlyBoy) && !GenderType.boy.equals(mineUserGender)) {
+                    throw new SocialParamsException("仅男生可见动态");
+                } else if (queryQOGender.equals(GenderType.onlyGirl) && !GenderType.girl.equals(mineUserGender)) {
+                    throw new SocialParamsException("仅女生可见动态");
+                }
+            }
+        }
+        socialHomeTabTalkQueryBO.setTalkVisibleGender(genderTypeQueryVO.getTalkVisibleGender());
+        socialHomeTabTalkQueryBO.setTalkUserGender(genderTypeQueryVO.getTalkUserGender());
+
+        //通用逻辑
+        //年龄
+        //设置极限值
+        Integer minAge = -500;
+        Integer frontMinAge = queryQO.getMinAge();
+        //如果前台传过来的不为空则使用前台的
+        if (!ObjectUtils.isEmpty(frontMinAge) && frontMinAge > 8) {
+            minAge = frontMinAge;
+        }
+        socialHomeTabTalkQueryBO.setMinAge(minAge);
+        //设置极限值
+        Integer maxAge = 500;
+        Integer frontMaxAge = queryQO.getMaxAge();
+        //如果前台传过来的不为空则使用前台的，40为前台最大值，如果选择40则等于没设置上线
+        if (!ObjectUtils.isEmpty(frontMaxAge) && frontMaxAge < 40) {
+            maxAge = frontMaxAge;
+        }
+        socialHomeTabTalkQueryBO.setMaxAge(maxAge);
+        socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
+        socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdNotNull());
 
         String adCode = queryQO.getAdCode();
         //如果首页，不筛选地理位置
@@ -173,74 +232,6 @@ public class SocialuniHomeTalkQueryDomain {
         socialHomeTabTalkQueryBO.setAdCode(adCode);
         socialHomeTabTalkQueryBO.setLon(queryQO.getLon());
         socialHomeTabTalkQueryBO.setLat(queryQO.getLat());
-
-        //年龄
-        //设置极限值
-        Integer minAge = -500;
-        Integer frontMinAge = queryQO.getMinAge();
-        //如果前台传过来的不为空则使用前台的
-        if (!ObjectUtils.isEmpty(frontMinAge) && frontMinAge > 8) {
-            minAge = frontMinAge;
-        }
-        socialHomeTabTalkQueryBO.setMinAge(minAge);
-        //设置极限值
-        Integer maxAge = 500;
-        Integer frontMaxAge = queryQO.getMaxAge();
-        //如果前台传过来的不为空则使用前台的，40为前台最大值，如果选择40则等于没设置上线
-        if (!ObjectUtils.isEmpty(frontMaxAge) && frontMaxAge < 40) {
-            maxAge = frontMaxAge;
-        }
-        socialHomeTabTalkQueryBO.setMaxAge(maxAge);
-        socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
-        socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdNotNull());
-
-//        socialHomeTabTalkQueryBO.setPageNum(queryQO.getPageNum());
-       /* String circleName = queryQO.getCircleName();
-        if (TalkTabType.circle_type.equals(tabType)) {
-            if (StringUtils.isNotEmpty(circleName)) {
-                SocialCircleDO socialCircleDO = socialCircleRepository.findFirstByName(queryQO.getCircleName());
-                socialHomeTabTalkQueryBO.setCircleId(socialCircleDO.getId());
-            }
-        }*/
-        String queryQOGender = queryQO.getGender();
-
-        //校验query的GenderType是否正确
-        GenderTypeQueryVO genderTypeQueryVO = GenderTypeVO.GenderTypeQueryMap.get(queryQOGender);
-        if (genderTypeQueryVO == null) {
-            throw new SocialParamsException("错误的性别类型");
-        }
-        //如果为专属性别动态
-        if (mineUser != null) {
-            if (GenderType.onlyGenders.contains(queryQOGender)) {
-//                throw new SocialParamsException("请登录后查看，查看专属性别动态");
-                String mineUserGender = mineUser.getGender();
-                //如果为筛选仅男生可见，且用户不为男生，则报错
-                if (queryQOGender.equals(GenderType.onlyBoy) && !GenderType.boy.equals(mineUserGender)) {
-                    throw new SocialParamsException("仅男生可见动态");
-                } else if (queryQOGender.equals(GenderType.onlyGirl) && !GenderType.girl.equals(mineUserGender)) {
-                    throw new SocialParamsException("仅女生可见动态");
-                }
-            }
-        }
-        socialHomeTabTalkQueryBO.setTalkVisibleGender(genderTypeQueryVO.getTalkVisibleGender());
-        socialHomeTabTalkQueryBO.setTalkUserGender(genderTypeQueryVO.getTalkUserGender());
-        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
-        socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
-
-
-
-        if (TalkTabType.home_name.equals(homeTabName)) {
-            socialHomeTabTalkQueryBO.setAdCode(null);
-        } else if (homeTabName.equals(TalkTabType.city_name)) {
-            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
-            socialHomeTabTalkQueryBO.setCircleId(null);
-        } else {
-            if (homeTabName.equals(TalkTabType.self_school)) {
-                homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
-            }
-            SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnable(homeTabName);
-            socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
-        }
 
         return socialHomeTabTalkQueryBO;
     }
