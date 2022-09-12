@@ -37,6 +37,9 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     DevSocialuniIdRepository devSocialuniIdRepository;
 
+    @Autowired(required = false)
+    private SocialuniAppConfig socialuniAppConfig;
+
     @Override
     @Async
     public void run(ApplicationArguments args) {

@@ -41,7 +41,7 @@ public class SocialuniAppController {
 
     @PostMapping("queryHomeTabs")
     public ResultRO<List<HomeTabRO>> queryHomeTabs() {
-        List<HomeTabRO> list = SocialuniAppConfig.getHomeTabNames().stream().map(HomeTabRO::new).collect(Collectors.toList());
+        List<HomeTabRO> list = SocialuniAppConfig.homeTabNames.stream().map(HomeTabRO::new).collect(Collectors.toList());
         return ResultRO.success(list);
     }
 

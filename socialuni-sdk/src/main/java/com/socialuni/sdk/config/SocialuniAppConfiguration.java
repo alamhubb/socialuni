@@ -16,11 +16,11 @@ import java.util.List;
 
 @Configurable
 public class SocialuniAppConfiguration {
-    @Bean
-    @ConditionalOnMissingBean(SocialuniAppConfigurer.class)
-    public SocialuniAppConfigurer defaultSocialuniAppConfigurer() {
-        return new SocialuniAppConfigurer();
-    }
+   /* @Bean
+    @ConditionalOnMissingBean(SocialuniAppConfig.class)
+    public SocialuniAppConfig defaultSocialuniAppConfigurer() {
+        return new SocialuniAppConfig();
+    }*/
 
     @Bean
     @ConditionalOnMissingBean(SocialuniTalkQueryGenerateQueryBOByTabDomain.class)

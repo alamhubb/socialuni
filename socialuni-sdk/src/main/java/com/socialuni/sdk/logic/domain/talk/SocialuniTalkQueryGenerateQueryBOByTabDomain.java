@@ -51,9 +51,9 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
        socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
 
-       if (SocialuniAppConfig.getHomeTabName().equals(homeTabName)) {
+       if (SocialuniAppConfig.homeTabName.equals(homeTabName)) {
            socialHomeTabTalkQueryBO.setAdCode(null);
-       } else if (homeTabName.equals(SocialuniAppConfig.getCityTabName())) {
+       } else if (homeTabName.equals(SocialuniAppConfig.cityTabName)) {
            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
            socialHomeTabTalkQueryBO.setCircleId(null);
        } else {
@@ -64,5 +64,6 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
            socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
        }
 
+       return socialHomeTabTalkQueryBO;
    }
 }

@@ -103,7 +103,7 @@ public class SocialuniHomeTalkQueryDomain {
 
         //同性社区
         //主要是校验appgender,只允许同性别用户使用，不同性别则要保证同性别
-        if (SocialuniAppType.genderTypeList.contains(SocialuniAppConfig.getAppType())){
+        if (SocialuniAppType.genderTypeList.contains(SocialuniAppConfig.appGender)) {
             if (mineUser != null) {
                 String appGender = DevAccountUtils.getAppGenderType();
                 String mineUserGender = mineUser.getGender();
@@ -117,7 +117,7 @@ public class SocialuniHomeTalkQueryDomain {
         }
 
         //校园社区
-        SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO =socialuniTalkQueryGenerateQueryBOByTabDomain.GenerateQueryBOByTab();
+        SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.GenerateQueryBOByTab(queryQO, mineUser);
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
 
@@ -133,7 +133,7 @@ public class SocialuniHomeTalkQueryDomain {
         socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
         socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
 
-        if (SocialuniAppConfig.getHomeTabName().equals(homeTabName)) {
+        /*if (SocialuniAppConfig.getHomeTabName().equals(homeTabName)) {
             socialHomeTabTalkQueryBO.setAdCode(null);
         } else if (homeTabName.equals(SocialuniAppConfig.getCityTabName())) {
             //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
@@ -145,9 +145,7 @@ public class SocialuniHomeTalkQueryDomain {
             SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnable(homeTabName);
             socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
         }
-
-
-
+*/
 
         //通用校验
         List<String> tagNames = queryQO.getTagNames();
