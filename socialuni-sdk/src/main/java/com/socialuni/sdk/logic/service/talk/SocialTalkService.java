@@ -1,15 +1,10 @@
 package com.socialuni.sdk.logic.service.talk;
 
-import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.logic.domain.talk.*;
 import com.socialuni.sdk.model.QO.community.talk.*;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.sdk.logic.platform.MapUtil;
-import com.socialuni.sdk.config.SocialAppConfig;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +20,7 @@ public class SocialTalkService {
     @Resource
     SocialTalkDetailQueryDomain socialTalkDetailQueryDomain;
     @Resource
-    SocialHomeTalkQueryDomain socialHomeTalkQueryDomain;
+    SocialuniHomeTalkQueryDomain socialHomeTalkQueryDomain;
     @Resource
     SocialUserTalkQueryDomain socialUserTalkQueryDomain;
 

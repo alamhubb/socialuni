@@ -10,6 +10,7 @@ import com.socialuni.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Async;
@@ -36,10 +37,19 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     DevSocialuniIdRepository devSocialuniIdRepository;
 
+    @Autowired(required = false)
+    SocialuniAppConfig socialuniAppConfig;
+
     @Override
     @Async
     public void run(ApplicationArguments args) {
         //判断是否已经有注册的开发者，没有的话注册。
+        if (socialuniAppConfig == null) {
+            System.out.println(1111);
+        } else {
+            System.out.println(222);
+            System.out.println(socialuniAppConfig.follow_name);
+        }
 
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
 

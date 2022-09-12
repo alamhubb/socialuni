@@ -37,7 +37,7 @@ public class SocialuniTalkService {
     SocialTalkPostDomain socialTalkPostDomain;
 
     @Resource
-    SocialHomeTalkQueryDomain socialHomeTalkQueryDomain;
+    SocialuniHomeTalkQueryDomain socialHomeTalkQueryDomain;
 
     public ResultRO<List<SocialuniTalkRO>> queryStickTalks() {
         if (SocialAppConfig.serverIsChild()) {
