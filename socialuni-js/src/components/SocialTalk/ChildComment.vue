@@ -43,6 +43,7 @@ import {socialTalkModule} from '../../socialuni/store'
 import JsonUtils from '../../socialuni/utils/ObjectUtil'
 import RouterUtil from '../../socialuni/utils/RouterUtil'
 import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
+import PageUtil from "@/socialuni/utils/PageUtil";
 
 @Component({
   components: {QIcon}
@@ -72,7 +73,7 @@ export default class ChildComment extends Vue {
 
   toUserDetail(userId: string) {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
-      RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+      PageUtil.toUserDetail(userId)
     }
   }
 

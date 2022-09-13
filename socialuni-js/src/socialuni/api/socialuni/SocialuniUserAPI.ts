@@ -13,7 +13,7 @@ export default class SocialuniUserAPI {
   }
 
   static queryUserDetailAPI(userId: string) {
-    return request.get('socialuni/user/queryUserDetail', new UserQueryVO(userId))
+    return request.get('socialuni/user/queryUserDetail/' + userId)
   }
 
   static editUserAPI(user: UserEditVO) {
@@ -53,5 +53,9 @@ export default class SocialuniUserAPI {
 
   static destroyAccountAPI() {
     return request.post('socialuni/user/destroyAccount')
+  }
+
+  static getUserImgListAPI(userId: string) {
+    return request.get<ImgFileVO[]>('socialuni/user/getUserImgList/' + userId)
   }
 }

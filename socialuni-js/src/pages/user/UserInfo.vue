@@ -1,53 +1,34 @@
 <template>
-  <view v-if="userProp" class="bg-default pb-100">
-    <view class="bg-white mb-sm">
-      <view>
-        <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
-          <swiper-item v-for="(img,index) in imgUrls" :key="img">
-            <image class="size100p" @longpress="showBottomMenuClick(index)"
-                   :data-src="img"
-                   @click="previewImage"
-                   mode="aspectFill"
-                   :src="img"
-            ></image>
-          </swiper-item>
-        </swiper>
-        <image v-else class="sizeUserImg" @click="showBottomMenuClick(0)"
-               mode="aspectFill"
-               src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"
-        ></image>
-        <view v-if="showUploadImgHint && imgUrls.length" class="row-col-center bg-orange">
-          <view class="flex-auto flex-row px">
-            单击图片预览，长按图片进行操作
-          </view>
-          <view class="flex-none mr-10">
-            <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
-          </view>
-        </view>
-      </view>
-      <view class="pd-sm">
+  <view v-if="pageUser" class="bg-default pb-100">
+    <view class="mb-sm pt-200 bg-no-repeat"
+          style="background-image: url('https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg')">
+      <view class="pd-sm bg-white bd-radius-10">
         <view class="row-col-center py-sm">
           <image
             class="size65 bd-radius-xs mr-sm"
             mode="aspectFill"
-            :src="userProp.avatar"
+            :src="pageUser.avatar"
+            @click="moreAction"
           />
           <view class="flex-auto row-between">
             <view class="flex-col flex-auto">
-              <view class="text-md" :class="{'color-red':userProp.vipFlag}">
-                {{ userProp.nickname }}
+              <view class="text-md" :class="{'color-red':pageUser.vipFlag}">
+                {{ pageUser.nickname }}
               </view>
               <view class="flex-row">
-                <social-gender-tag class="mt-sm" :user="userProp"></social-gender-tag>
+                <social-gender-tag class="mt-sm" :user="pageUser"></social-gender-tag>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>
             </view>
 
             <view class="row-col-center" v-if="isMine">
-              <q-icon icon="edit-pen" size="24" class="mr-xs" @click="moreAction"/>
+              <q-button @click="toEditUserInfo" class="chunk-theme_light bd-round">
+                <q-icon icon="edit-pen" size="16" class="mr-xs q-box-xs"/>
+                编辑资料
+              </q-button>
             </view>
-            <view v-else-if="userProp.beFollow" class="row-col-center">
+            <view v-else-if="pageUser.beFollow" class="row-col-center">
               <view class="bg-default text-sm px-xs text-gray">
                 对方关注了您
               </view>
@@ -58,14 +39,14 @@
           <view class="flex-row flex-auto" :class="{'row-around':isMine}">
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
               <text class="text-lg font-bold text-black row-center">
-                {{ userProp.followNum }}
+                {{ pageUser.followNum }}
               </text>
               <text class="text-sm text-gray">关注</text>
             </view>
 
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
               <text class="text-lg font-bold text-black row-center">
-                {{ userProp.fansNum }}
+                {{ pageUser.fansNum }}
               </text>
               <text class="text-sm text-gray">被关注</text>
             </view>
@@ -89,7 +70,7 @@
         </view>
 
         <div class="flex-row pl-xs">
-          <div v-if="userProp.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+          <div v-if="pageUser.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
             <q-icon class="color-success mr-mn" size="14" icon="level"/>
             <div class="font-xs">成年</div>
           </div>
@@ -125,7 +106,7 @@
 
         <view class="row-col-center my">
           <q-icon class="text-gray mr-xs" icon="map-fill"/>
-          地区：{{ userProp.city || '' }}
+          地区：{{ pageUser.city || '' }}
         </view>
 
         <!--        <view v-if="isMine" class="py-sm q-solid-bottom">
@@ -153,8 +134,8 @@
           <div class="row-col-center">
             <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
             手机号：
-            <view v-if="userProp.phoneNum" class="row-col-center">
-              {{ userProp.phoneNum }}
+            <view v-if="pageUser.phoneNum" class="row-col-center">
+              {{ pageUser.phoneNum }}
               <view class="ml-10 sm cu-tag bg-white bd-gray radius">
                 已绑定
               </view>
@@ -171,8 +152,8 @@
           <q-icon class="text-gray mr-xs" icon="mdi-school"/>
           学校名称：
 
-          <div v-if="userProp.schoolName" @click="openSetSchoolDialog">
-            {{ userProp.schoolName || '' }}
+          <div v-if="pageUser.schoolName" @click="openSetSchoolDialog">
+            {{ pageUser.schoolName || '' }}
           </div>
           <div v-else class="q-tag-green q-box-df" @click="openSetSchoolDialog">填写学校名称</div>
         </view>
@@ -272,41 +253,34 @@
           </view>
         </view>-->
       </view>
+      <!--      <view>
+              <swiper v-if="imgUrls.length" class="square-dot w100vw h230">
+                <swiper-item v-for="(img,index) in imgUrls" :key="img">
+                  <image class="size100p" @longpress="showBottomMenuClick(index)"
+                         :data-src="img"
+                         @click="previewImage"
+                         mode="aspectFill"
+                         :src="img"
+                  ></image>
+                </swiper-item>
+              </swiper>
+              <image v-else class="sizeUserImg" @click="showBottomMenuClick(0)"
+                     mode="aspectFill"
+                     src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"
+              ></image>
+              <view v-if="showUploadImgHint && imgUrls.length" class="row-col-center bg-orange">
+                <view class="flex-auto flex-row px">
+                  单击图片预览，长按图片进行操作
+                </view>
+                <view class="flex-none mr-10">
+                  <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
+                </view>
+              </view>
+            </view>-->
+
     </view>
 
-    <uni-popup ref="reportDialog" :custom="true" :mask-click="false">
-      <view class="uni-tip">
-        <view class="uni-tip-title">举报</view>
-        <view class="uni-tip-content">
-          <radio-group class="uni-list" @change="reportTypeChange">
-            <label class="uni-list-cell flex-row uni-list-cell-pd"
-                   v-for="report in reportTypes" :key="report">
-              <view>
-                <radio :id="report" :value="report" :checked="report===pornInfo"></radio>
-              </view>
-              <view>
-                <label class="ml-10" :for="report">
-                  <text>{{ report }}</text>
-                </label>
-              </view>
-            </label>
-          </radio-group>
-        </view>
-        <view class="uni-textarea bd-1 bd-radius-xs">
-            <textarea placeholder="其他违规必填，其他情况选填，可详细陈述观点" v-model.trim="reportContent"
-                      :show-confirm-bar="false"
-            />
-        </view>
-        <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40p" type="default" @click="closeDialogAndInitData"
-                  :plain="true">
-            取消
-          </button>
-          <button class="uni-tip-button w40p" type="primary" @click="addReport" :disabled="!reportType">确定
-          </button>
-        </view>
-      </view>
-    </uni-popup>
+    <user-info-img :user="pageUser"></user-info-img>
 
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
     <!--  #ifdef MP-WEIXIN -->
@@ -322,6 +296,7 @@
     <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
 
+    <div class="px-smm mb-xs">动态</div>
     <view v-for="talk in talks" :key="talk.id" class="px-sm">
       <talk-item :talk="talk" @deleteTalk="deleteTalk"></talk-item>
     </view>
@@ -337,64 +312,44 @@
     <!--  #ifdef APP-PLUS -->
     <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>
     <!--  #endif -->
-    <uni-popup ref="editPopup" type="center">
-      <user-edit @close="closeUserEditPop"></user-edit>
-    </uni-popup>
   </view>
 </template>
 
 <script lang="ts">
 import {Component, PropSync, Vue, Watch} from 'vue-property-decorator'
 import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
-import TalkItem from '../SocialTalk/TalkItem.vue'
+import TalkItem from '../../components/SocialTalk/TalkItem.vue'
 import UserUtil from '../../socialuni/utils/UserUtil'
-import TalkItemContent from '../SocialTalk/TalkItemContent.vue'
+import TalkItemContent from '../../components/SocialTalk/TalkItemContent.vue'
 import FollowAddVO from '../../socialuni/model/FollowAddVO'
-import UserEdit from './UserEdit.vue'
 import UniUtil from '../../socialuni/utils/UniUtil'
 import PagePath from '../../socialuni/constant/PagePath'
 import FollowAPI from '../../socialuni/api/socialuni/FollowAPI'
 import FollowStatus from '../../socialuni/constant/FollowStatus'
 import PageUtil from '../../socialuni/utils/PageUtil'
-import ImgFileVO from '../../socialuni/model/ImgFileVO'
-import ImgUtil from '../../socialuni/utils/ImgUtil'
-import CosUtil from '../../socialuni/utils/CosUtil'
-import SocialuniUserAPI from '../../socialuni/api/socialuni/SocialuniUserAPI'
-import Constants from '../../socialuni/constant/Constant'
-import ReportContentType from '../../socialuni/constant/ReportContentType'
-import ReportType from '../../socialuni/constant/ReportType'
-import ReportAddVO from '../../socialuni/model/report/ReportAddVO'
-import ReportAPI from '../../socialuni/api/socialuni/ReportAPI'
-import TalkOperate from '../SocialTalk/talkOperate.vue'
+import TalkOperate from '../../components/SocialTalk/talkOperate.vue'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import MsgUtil from '../../socialuni/utils/MsgUtil'
-import ConfigMap from '../../socialuni/constant/ConfigMap'
-import PlatformUtils from '../../socialuni/utils/PlatformUtils'
-import {
-  socialAppStore,
-  socialConfigStore,
-  socialSystemStore,
-  socialUserModule,
-  socialUserStore
-} from '../../socialuni/store'
+import {socialAppStore, socialSystemStore, socialUserModule, socialUserStore} from '../../socialuni/store'
 import QRowItem from '../../qing-ui/components/QRowItem/QRowItem.vue'
 import AlertUtil from '../../socialuni/utils/AlertUtil'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
 import RouterUtil from '../../socialuni/utils/RouterUtil'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
 import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
-import DomFile from '../../socialuni/model/DomFile'
-import ImgAddQO from '../../socialuni/model/user/ImgAddQO'
 import SocialGenderTag from '@/components/SocialGenderTag/SocialGenderTag.vue'
-import TencentCosAPI from '@/api/TencentCosAPI'
 import QPcModel from "@/components/QPcModel/QPcModel.vue";
 import QPopup from "@/qing-ui/components/QPopup/QPopup.vue";
 import QSearch from "@/qing-ui/components/QSearch/QSearch.vue";
-import UserSchoolEditDialog from "@/components/SocialUser/UserSchoolEditDialog.vue";
+import UserSchoolEditDialog from "@/pagesLazy/user/UserSchoolEditDialog.vue";
+import QButton from "@/qing-ui/components/QButton/QButton.vue";
+import UserInfoImg from "@/pages/user/UserInfoImg.vue";
 
 
 @Component({
   components: {
+    UserInfoImg,
+    QButton,
     UserSchoolEditDialog,
     QSearch,
     QPopup,
@@ -403,7 +358,6 @@ import UserSchoolEditDialog from "@/components/SocialUser/UserSchoolEditDialog.v
     QIcon,
     QRowItem,
     TalkOperate,
-    UserEdit,
     TalkItem,
     TalkItemContent
   }
@@ -411,25 +365,16 @@ import UserSchoolEditDialog from "@/components/SocialUser/UserSchoolEditDialog.v
 export default class UserInfo extends Vue {
   $refs!: {
     reportDialog: any;
-    editPopup: any;
     schoolEditDialog: UserSchoolEditDialog;
   }
 
   @socialUserStore.State('user') mineUser: CenterUserDetailRO
   @socialAppStore.State('appConfig') readonly appConfig: object
-  @socialAppStore.State('reportTypes') reportTypes: string[]
   @socialSystemStore.State('isIos') isIos: boolean
-  @PropSync('user') userProp: CenterUserDetailRO
+  @PropSync('user') pageUser: CenterUserDetailRO
   followBtnDisabled = false
   hasFollowed = false
   followStatus: string = FollowStatus.follow
-  imgIndex = 0
-  showUploadImgHint: boolean = uni.getStorageSync(Constants.showUploadImgHintKey) !== 'false'
-  readonly reportContentType: string = ReportContentType.userImg
-  reportType: string = ReportType.pornInfo
-  pornInfo: string = ReportType.pornInfo
-  reportContent = ''
-  @socialConfigStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
   talks: TalkVO[] = []
 
   showUserContactBtnDisabled = false
@@ -479,113 +424,6 @@ export default class UserInfo extends Vue {
     }
   }*/
 
-
-  openReportDialog() {
-    if (this.userProp) {
-      this.$refs.reportDialog.open()
-    } else {
-      MsgUtil.unLoginMessage()
-    }
-  }
-
-  frontDeleteUserImg() {
-    this.userProp.imgs.splice(this.imgIndex, 1)
-  }
-
-  reportTypeChange({target}) {
-    this.reportType = target.value
-  }
-
-  addReport() {
-    const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
-    const userImg: ImgFileVO = this.userProp.imgs[0]
-    reportAdd.contentId = userImg.id
-    if (ReportType.other === this.reportType && !this.reportContent) {
-      AlertUtil.hint('选择其他违规时，请您补充观点')
-    } else {
-      ReportAPI.addReportAPI(reportAdd).then((res: any) => {
-        // todo  举报过后，是否大于系统阀值，大于系统阀值隐藏
-        const reportNum: number = userImg.reportNum + 1
-        if (reportNum >= this.reportHideCount) {
-          this.frontDeleteUserImg()
-        }
-        this.closeDialogAndInitData()
-        AlertUtil.hint(res.data)
-        PlatformUtils.requestSubscribeReport()
-      })
-    }
-  }
-
-  closeDialogAndInitData() {
-    this.$refs.reportDialog.close()
-    this.initReportData()
-  }
-
-  initReportData() {
-    this.imgIndex = 0
-    this.reportContent = ''
-    this.reportType = ReportType.pornInfo
-  }
-
-  get bottomMenuItemList() {
-    if (this.isMine) {
-      return ['上传', '删除']
-    } else {
-      return ['举报']
-    }
-  }
-
-  showBottomMenuClick(imgIndex: number) {
-    this.imgIndex = imgIndex
-    UniUtil.actionSheet(this.bottomMenuItemList).then((index: number) => {
-      if (this.isMine) {
-        if (index === 0) {
-          this.chooseImg()
-        } else if (index === 1) {
-          this.deleteImg()
-        }
-      } else {
-        if (index === 0) {
-          this.openReportDialog()
-        }
-      }
-    })
-  }
-
-  deleteImg() {
-    if (this.userProp.imgs.length > 1) {
-      AlertUtil.warning('请确认是否删除照片？').then(() => {
-        const imgs: ImgFileVO[] = this.userProp.imgs.splice(this.imgIndex, 1)
-        SocialuniUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
-          socialUserModule.setUser(res.data)
-        })
-      })
-    } else {
-      ToastUtil.toastLong('请至少保留一张照片')
-    }
-  }
-
-
-  async chooseImg() {
-    if (this.mineUser.imgs.length > 2) {
-      ToastUtil.toastLong('最多上传3张照片，请删除后继续！')
-      return
-    }
-    try {
-      UniUtil.showLoading('上传中')
-      const cosAuthRO = await CosUtil.getCosAuthRO()
-      const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
-      const imgFile: DomFile = imgFiles[0]
-      imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
-      socialUserModule.setUser(res[1].data)
-    } catch (e) {
-      console.error(e)
-    } finally {
-      UniUtil.hideLoading()
-    }
-  }
-
   async toPhonePage() {
     await PageUtil.toPhonePage()
   }
@@ -600,7 +438,7 @@ export default class UserInfo extends Vue {
 
   get isMine(): boolean {
     // 两个都有值，且两个都相等，才为自己
-    return this.userProp && this.mineUser && this.userProp.id === this.mineUser.id
+    return this.pageUser && this.mineUser && this.pageUser.id === this.mineUser.id
   }
 
   get talkIds() {
@@ -618,32 +456,24 @@ export default class UserInfo extends Vue {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
-  closeUserEditPop() {
-    this.$refs.editPopup.close()
-  }
-
   moreAction() {
     if (this.isMine) {
-      const menuList: string [] = ['刷新', '编辑', '退出登录']
+      const menuList: string [] = ['退出登录']
       UniUtil.actionSheet(menuList).then((index: number) => {
         if (index === 0) {
-          this.refreshMine()
-        } else if (index === 1) {
-          this.openEditDialog()
-        } else if (index === 2) {
           this.loginOut()
         }
       })
     }
   }
 
+  toEditUserInfo() {
+    PageUtil.toEditMineInfo()
+  }
+
   /*mounted () {
     this.openEditDialog()
   }*/
-
-  openEditDialog() {
-    this.$refs.editPopup.open()
-  }
 
   @Watch('user', {
     deep: true,
@@ -657,10 +487,10 @@ export default class UserInfo extends Vue {
   }
 
   queryMineTalks() {
-    if (this.userProp) {
-      this.followStatus = FollowStatus.getFollowStatus(this.userProp)
-      this.hasFollowed = this.userProp.hasFollowed
-      TalkAPI.queryUserTalksAPI(this.userProp.id, this.talkIds).then((res: any) => {
+    if (this.pageUser) {
+      this.followStatus = FollowStatus.getFollowStatus(this.pageUser)
+      this.hasFollowed = this.pageUser.hasFollowed
+      TalkAPI.queryUserTalksAPI(this.pageUser.id, this.talkIds).then((res: any) => {
         this.talks = res.data
       })
     }
@@ -701,11 +531,11 @@ export default class UserInfo extends Vue {
     if (this.mineUser) {
       if (!this.followBtnDisabled) {
         this.followBtnDisabled = true
-        const followAdd: FollowAddVO = new FollowAddVO(this.userProp.id)
+        const followAdd: FollowAddVO = new FollowAddVO(this.pageUser.id)
         // 如果已经关注
         if (this.followStatus === FollowStatus.follow) {
           this.hasFollowed = true
-          if (this.userProp.hasBeFollowed) {
+          if (this.pageUser.hasBeFollowed) {
             // 进行关注操作
             this.followStatus = FollowStatus.eachFollow
           } else {
@@ -734,27 +564,6 @@ export default class UserInfo extends Vue {
 
   toFaceValuePage() {
     PageUtil.toFaceValuePage()
-  }
-
-  get imgUrls() {
-    if (this.userProp && this.userProp.imgs) {
-      return this.userProp.imgs.map(item => ImgUtil.getUserLargeImgUrl(item.src))
-    } else {
-      return []
-    }
-  }
-
-  previewImage(e) {
-    const current = e.target.dataset.src
-    uni.previewImage({
-      current: current,
-      urls: this.imgUrls
-    })
-  }
-
-  closeUploadImgHint() {
-    this.showUploadImgHint = false
-    uni.setStorageSync(Constants.showUploadImgHintKey, 'false')
   }
 
   refreshMine() {

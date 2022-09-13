@@ -1,5 +1,5 @@
 export default class ImgFileVO {
-  public id: number
+  public id: string
   public path: string
   public size: number
   public src: string
@@ -9,7 +9,7 @@ export default class ImgFileVO {
   public quality: number
   public reportNum: number
 
-  constructor (imgFile: ImgFileVO) {
+  constructor(imgFile: ImgFileVO) {
     if (imgFile) {
       this.path = imgFile.path
       this.size = imgFile.size

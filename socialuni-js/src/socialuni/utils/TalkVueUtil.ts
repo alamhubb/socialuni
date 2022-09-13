@@ -38,12 +38,13 @@ export default class TalkVueUtil {
   static readonly talkTabTypeDefault: string = TalkTabType.home_type
 
 
-  static getTalkTabs (): TalkTabVO [] {
+  static getTalkTabs(): TalkTabVO [] {
     const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
+    console.log(homeTypeTalks)
     return homeTypeTalks || TalkVueUtil.TalkTabsDefault
   }
 
-  static getCurTalkTabIndex (): number {
+  static getCurTalkTabIndex(): number {
     let index = StorageUtil.getObj(TalkVueUtil.talkTabIndexKey)
     if (index !== 0) {
       index = index || TalkVueUtil.talkTabIndexDefault

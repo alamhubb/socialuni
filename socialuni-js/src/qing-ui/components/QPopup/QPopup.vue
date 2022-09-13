@@ -53,6 +53,7 @@ export default class QPopup extends Vue {
   @Prop({default: false}) readonly hideConfirm: boolean
   @Prop({default: false}) readonly hideButton: boolean
   @Prop({default: false}) readonly hideCancel: boolean
+  @Prop({default: false}) readonly customClose: boolean
   @Prop({default: '关 闭'}) readonly cancelText: boolean
   @Prop({default: '确 定'}) readonly confirmText: boolean
 
@@ -77,6 +78,9 @@ export default class QPopup extends Vue {
 
   @Emit()
   confirm() {
+    if (this.customClose) {
+      return
+    }
     this.close()
   }
 

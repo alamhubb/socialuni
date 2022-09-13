@@ -18,8 +18,13 @@ public class UserImgDOUtils {
     }
 
     public static List<SocialUserImgDO> getImgs(Integer userId) {
-        return userImgRepository.findTop3ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.otherCanSeeContentStatus);
+        return userImgRepository.findTop6ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.otherCanSeeContentStatus);
     }
+
+    public static List<SocialUserImgDO> getImgs50(Integer userId) {
+        return userImgRepository.findTop50ByUserIdAndStatusInOrderByCreateTimeDesc(userId, ContentStatus.otherCanSeeContentStatus);
+    }
+
 
     public static SocialUserImgDO find(Integer imgId) {
         return userImgRepository.findById(imgId).get();

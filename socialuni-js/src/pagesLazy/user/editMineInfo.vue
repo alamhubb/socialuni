@@ -1,6 +1,5 @@
 <template>
-  <view v-if="user" class="cu-dialog flex-col">
-    <view class="bg-white row-all-center text-md pt-sm font-bold">编辑个人信息</view>
+  <view v-if="user" class="flex-col">
     <view class="pt-0 bg-white solid-bottom flex-auto overflow-auto">
       <view>
         <view class="cu-form-group">
@@ -92,7 +91,7 @@
       </view>
     </view>
     <view class="cu-bar btn-group bg-white flex-none pt-5 pb-sm">
-      <button class="cu-btn bd-gray radius bg-white" @click="closeUserEditPop">取消</button>
+      <!--      <button class="cu-btn bd-gray radius bg-white" @click="closeUserEditPop">取消</button>-->
       <button class="cu-btn bg-green radius" @click="saveUser" :disabled="btnDisabled">保存</button>
     </view>
   </view>

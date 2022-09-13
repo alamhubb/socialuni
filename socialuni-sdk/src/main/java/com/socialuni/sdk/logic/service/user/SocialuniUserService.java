@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.service.user;
 
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
@@ -9,17 +10,20 @@ import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;
 import com.socialuni.sdk.logic.entity.UniUserRegistryDomain;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
 import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -49,15 +53,13 @@ public class SocialuniUserService {
     }
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
-        SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUid(userId);
-
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
-
         SocialuniUserDetailRO userDetailRO;
         if (SocialAppConfig.serverIsChild()) {
             ResultRO<SocialuniUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(userId);
             userDetailRO = new SocialuniUserDetailRO(resultRO.getData());
         } else {
+            SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+            SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUid(userId);
             userDetailRO = SocialuniUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
         }
         return new ResultRO<>(userDetailRO);
@@ -99,12 +101,16 @@ public class SocialuniUserService {
         return ResultRO.success(socialMineUserDetailRO);
     }
 
-    public ResultRO<SocialUserIdentityAuthPreCheckRO> identityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
-        Integer resScore = TencentCloud.imgAuthGetScore(socialUseIdentityAuthQO.getIdImgUrl(), socialUseIdentityAuthQO.getSelfieImgUrl());
-        return null;
-    }
+    public ResultRO<List<SocialuniUserImgRO>> getUserImgList(String userId) {
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniUserAPI.getUserImgList(userId);
+        } else {
+            Integer userUnionId = UnionIdDbUtil.getUnionIdByUidNotNull(userId);
+            List<SocialUserImgDO> imgs50 = UserImgDOUtils.getImgs50(userUnionId);
 
-    public ResultRO<SocialUserIdentityAuthRO> identityAuth(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
-        return null;
+            List<SocialuniUserImgRO> imgs50Ro = UserImgROFactory.userImgDOToVOS(imgs50);
+
+            return new ResultRO<>(imgs50Ro);
+        }
     }
 }

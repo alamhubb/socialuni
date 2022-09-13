@@ -12,6 +12,18 @@ export default class PageUtil {
     PageUtil.toTalkPage()
   }
 
+  static toUserDetail(userId: string) {
+    RouterUtil.navigateTo(PagePath.userDetail, {userId})
+  }
+
+  static toEditMineInfo() {
+    RouterUtil.navigateTo(PagePath.editMineInfo)
+  }
+
+  static toUserImgList(userId: string) {
+    RouterUtil.navigateTo(PagePath.userImgList, {userId})
+  }
+
   static toOAuthPage() {
     RouterUtil.navigateTo(PagePath.oAuth)
   }

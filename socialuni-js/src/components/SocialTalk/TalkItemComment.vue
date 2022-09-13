@@ -94,6 +94,7 @@ import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
 import QButton from '../../qing-ui/components/QButton/QButton.vue'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
 import UniUtil from '@/socialuni/utils/UniUtil'
+import PageUtil from "@/socialuni/utils/PageUtil";
 
 @Component({
   components: {
@@ -165,7 +166,7 @@ export default class TalkItemComment extends Vue {
 
   toUserDetail(userId: string) {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
-      RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
+      PageUtil.toUserDetail(userId)
     }
   }
 

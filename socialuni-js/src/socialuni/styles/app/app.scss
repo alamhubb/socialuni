@@ -46,6 +46,8 @@ label,
 navigator,
 image {
   line-height: 1.4;
+  box-sizing: border-box;
+  word-break: break-all;
 }
 
 button {

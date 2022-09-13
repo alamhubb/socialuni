@@ -15,6 +15,7 @@ import AppConfigAPI from '../../api/AppConfigAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
 import PlatformUtils from '@/socialuni/utils/PlatformUtils'
 import TokenUtil from '@/socialuni/utils/TokenUtil'
+import UserService from "@/socialuni/service/UserService";
 
 @Module({generateMutationSetters: true})
 export default class SocialAppModule extends VuexModule {
@@ -27,24 +28,32 @@ export default class SocialAppModule extends VuexModule {
   async appLunchAction() {
     //校验更新
     PlatformUtils.checkUpdate()
-    // WebsocketUtil.websocketConnect(false)
-    socialTagModule.getHotTagsAction()
-    socialTalkModule.getTalkTabs()
-    socialCircleModule.getHotCirclesAction()
-    socialCircleModule.getCircleTypesAction()
-    socialTagModule.getHotTagTypesAction()
-    // socialCircleModule.getCircleTypesAction()
-    socialLocationModule.getHotDistrictsAction()
-    socialAppModule.getReportTypesAction()
-    socialAppModule.getAppConfigAction()
-    socialAppModule.getHomeSwipersAction()
-    socialChatModule.getChatsAction()
 
-    //如果有token获取
-    if (TokenUtil.hasToken()) {
-      //查询通知列表
-      socialNotifyModule.queryNotifiesAction()
+    try {
+      //无论如何都要获取当前用户信息
+      UserService.getMineUserInitDataAction()
+      // WebsocketUtil.websocketConnect(false)
+      socialTagModule.getHotTagsAction()
+      socialTalkModule.getTalkTabs()
+      socialCircleModule.getHotCirclesAction()
+      socialCircleModule.getCircleTypesAction()
+      socialTagModule.getHotTagTypesAction()
+      // socialCircleModule.getCircleTypesAction()
+      socialLocationModule.getHotDistrictsAction()
+      socialAppModule.getReportTypesAction()
+      socialAppModule.getAppConfigAction()
+      socialAppModule.getHomeSwipersAction()
+      socialChatModule.getChatsAction()
+      //如果有token获取
+      if (TokenUtil.hasToken()) {
+        //查询通知列表
+        socialNotifyModule.queryNotifiesAction()
+      }
+    } finally {
+
     }
+
+
     // 初始化数据看一下这些请求是否可以合并 登录之后也要链接websocket
     // appModule.initGlobalDataReadyAPI()
     // 测试时使用，生产时在talk也ready后查询

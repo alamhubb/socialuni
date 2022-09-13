@@ -13,6 +13,8 @@ export default class PagePath {
   static readonly message: string = '/pages/chat/message'
 
   static readonly userDetail: string = '/pagesLazy/user/userDetail'
+  static readonly editMineInfo: string = '/pagesLazy/user/editMineInfo'
+  static readonly userImgList: string = '/pagesLazy/user/userImgList'
   static readonly userVip: string = '/pages/user/vip'
   static readonly userContactInfo: string = '/pages/user/contactInfo'
   // 不明白这个页面干嘛的 static readonly messageSetting: string = '/pages/user/messageSetting'

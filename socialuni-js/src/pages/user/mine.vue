@@ -1,14 +1,9 @@
 <template>
   <view class="bg-default h100p flex-col">
     <view v-if="user">
-      <q-navbar class="q-solid-bottom" show-back>
-        <view class="ml-xl font-bold text-md flex-auto">
-          个人资料
-        </view>
-        <view class="mr">
-          <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
-        </view>
-      </q-navbar>
+      <!--      <view class="mr">
+              <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
+            </view>-->
       <user-info :user="user"></user-info>
 
 
@@ -104,7 +99,7 @@ import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/constant/SkipUrlConst'
 import UniUtil from '@/socialuni/utils/UniUtil'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
-import UserInfo from '@/components/SocialUser/UserInfo.vue'
+import UserInfo from '@/pages/user/UserInfo.vue'
 import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'

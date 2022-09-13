@@ -8,6 +8,12 @@
   },
   "pages": [
     {
+      "path": "pages/user/mine",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/talk/talk",
       "style": {
         "navigationStyle": "custom"
@@ -17,12 +23,6 @@
       "path": "pages/circle/circleLeaderCampaign",
       "style": {
         "navigationBarTitleText": "竞选"
-      }
-    },
-    {
-      "path": "pages/user/mine",
-      "style": {
-        "navigationStyle": "custom"
       }
     },
     {
@@ -70,6 +70,18 @@
           "path": "user/userDetail",
           "style": {
             "navigationBarTitleText": "用户详情"
+          }
+        },
+        {
+          "path": "user/editMineInfo",
+          "style": {
+            "navigationBarTitleText": "编辑资料"
+          }
+        },
+        {
+          "path": "user/userImgList",
+          "style": {
+            "navigationBarTitleText": "相册列表"
           }
         },
         {

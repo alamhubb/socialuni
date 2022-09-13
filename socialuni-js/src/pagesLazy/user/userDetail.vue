@@ -11,7 +11,7 @@ import {Component, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import SocialuniUserAPI from '@/socialuni/api/socialuni/SocialuniUserAPI'
 import MsgInput from '@/components/MsgInput.vue'
-import UserInfo from '@/components/SocialUser/UserInfo.vue'
+import UserInfo from '@/pages/user/UserInfo.vue'
 
 @Component({
   components: {MsgInput, UserInfo}

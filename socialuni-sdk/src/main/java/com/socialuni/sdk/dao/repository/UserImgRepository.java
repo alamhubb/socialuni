@@ -11,7 +11,10 @@ import java.util.List;
 public interface UserImgRepository extends JpaRepository<SocialUserImgDO, Integer> {
 
     @Cacheable(cacheNames = "getUserImgByUserId", key = "#userId")
-    List<SocialUserImgDO> findTop3ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
+    List<SocialUserImgDO> findTop6ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
+
+    @Cacheable(cacheNames = "getUserImgByUserIdTop50", key = "#userId")
+    List<SocialUserImgDO> findTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
 
     //需要注意不能使用 @cachePut 上面是数组
     @CacheEvict(cacheNames = "getUserImgByUserId", key = "#userImgDO.userId")

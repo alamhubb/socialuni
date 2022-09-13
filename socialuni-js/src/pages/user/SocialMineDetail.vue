@@ -140,10 +140,9 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
-import TalkItem from '../SocialTalk/TalkItem.vue'
+import TalkItem from '../../components/SocialTalk/TalkItem.vue'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
-import TalkItemContent from '../SocialTalk/TalkItemContent.vue'
-import UserEdit from './UserEdit.vue'
+import TalkItemContent from '../../components/SocialTalk/TalkItemContent.vue'
 import UserInfo from './UserInfo.vue'
 import UniUtil from '../../socialuni/utils/UniUtil'
 import SkipUrlConst from '../../socialuni/constant/SkipUrlConst'
@@ -151,7 +150,7 @@ import {socialUserModule, socialUserStore} from '../../socialuni/store'
 import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
 import QRowItem from '../../qing-ui/components/QRowItem/QRowItem.vue'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
-import MsgInput from '../MsgInput.vue'
+import MsgInput from '../../components/MsgInput.vue'
 import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
 import SocialLoginPage from '@/components/SocialPages/SocialLoginPage.vue'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
@@ -166,7 +165,6 @@ import RouterUtil from '@/socialuni/utils/RouterUtil'
     QPopup,
     QNavbar,
     UserInfo,
-    UserEdit,
     TalkItem,
     TalkItemContent
   }

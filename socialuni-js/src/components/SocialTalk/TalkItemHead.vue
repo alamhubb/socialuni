@@ -152,7 +152,7 @@ export default class TalkItemHead extends Vue {
 
   toUserDetailVue() {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
-      RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + this.talk.user.id)
+      PageUtil.toUserDetail(this.talk.user.id)
     }
   }
 
