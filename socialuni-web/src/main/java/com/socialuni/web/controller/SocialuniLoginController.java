@@ -26,7 +26,7 @@ public class SocialuniLoginController{
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
     @PostMapping("providerLogin")
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
-        throw new SocialBusinessException("不支持三方应用使用非清池渠道直接登录");
+        return centerLoginService.providerLogin(loginData);
     }
 
 
