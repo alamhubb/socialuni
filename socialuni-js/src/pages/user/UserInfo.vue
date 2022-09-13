@@ -344,6 +344,11 @@ import QSearch from "@/qing-ui/components/QSearch/QSearch.vue";
 import UserSchoolEditDialog from "@/pagesLazy/user/UserSchoolEditDialog.vue";
 import QButton from "@/qing-ui/components/QButton/QButton.vue";
 import UserInfoImg from "@/pages/user/UserInfoImg.vue";
+import CosUtil from "@/socialuni/utils/CosUtil";
+import DomFile from "@/socialuni/model/DomFile";
+import TencentCosAPI from "@/api/TencentCosAPI";
+import SocialuniUserAPI from "@/socialuni/api/socialuni/SocialuniUserAPI";
+import ImgAddQO from "@/socialuni/model/user/ImgAddQO";
 
 
 @Component({
@@ -458,9 +463,11 @@ export default class UserInfo extends Vue {
 
   moreAction() {
     if (this.isMine) {
-      const menuList: string [] = ['退出登录']
+      const menuList: string [] = ['上传头像', '退出登录']
       UniUtil.actionSheet(menuList).then((index: number) => {
         if (index === 0) {
+          this.uploadUserAvatarImg()
+        } else if (index === 1) {
           this.loginOut()
         }
       })
@@ -576,6 +583,22 @@ export default class UserInfo extends Vue {
 
   loginOut() {
     socialUserModule.loginOut()
+  }
+
+  async uploadUserAvatarImg() {
+    try {
+      UniUtil.showLoading('上传中')
+      const cosAuthRO = await CosUtil.getCosAuthRO()
+      const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+      const imgFile: DomFile = imgFiles[0]
+      imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+      socialUserModule.setUser(res[1].data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      UniUtil.hideLoading()
+    }
   }
 
   //前往贝壳页面

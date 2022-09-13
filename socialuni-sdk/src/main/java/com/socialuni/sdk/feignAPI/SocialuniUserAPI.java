@@ -35,6 +35,10 @@ public interface SocialuniUserAPI {
     @Operation(summary = "添加用户图片")
     ResultRO<SocialuniMineUserDetailRO> addUserImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
 
+    @PostMapping("addUserAvatarImg")
+    @Operation(summary = "添加用户图片")
+    ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
+
     @PostMapping("deleteUserImg")
     @Operation(summary = "删除用户图片")
     ResultRO<SocialuniMineUserDetailRO> deleteUserImg(@RequestBody @Valid SocialuniUserImgDeleteQO centerUserImgDeleteQO);

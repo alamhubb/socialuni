@@ -38,6 +38,11 @@ public class SocialuniUserController implements SocialuniUserAPI {
     }
 
     @Override
+    public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialUserImgAddQO socialUserImgAddQO) {
+        return socialuniUserService.addUserAvatarImg(socialUserImgAddQO);
+    }
+
+    @Override
     public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
         return socialuniUserService.deleteUserImg(centerUserImgDeleteQO);
     }

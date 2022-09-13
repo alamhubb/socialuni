@@ -89,6 +89,20 @@ public class SocialuniUserService {
         return ResultRO.success(socialMineUserDetailRO);
     }
 
+    public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialUserImgAddQO socialUserImgAddQO) {
+        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+
+
+        SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
+
+        if (SocialAppConfig.serverIsChild()) {
+            return socialuniUserAPI.addUserAvatarImg(socialUserImgAddQO);
+        }
+
+        return ResultRO.success(socialMineUserDetailRO);
+    }
+
+
     public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
