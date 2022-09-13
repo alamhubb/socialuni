@@ -1,7 +1,8 @@
 spring:
   profiles:
-#    active: dev
-    active: schooldev
+    active: dev
+#    active: schooldev
+#    active: local
 #    active: prod
   datasource:
     initialization-mode: never

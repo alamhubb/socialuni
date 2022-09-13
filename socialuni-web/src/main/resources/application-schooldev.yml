@@ -23,8 +23,8 @@ socialuni:
     # 使用微信渠道登录时需要输入的内容， 不使用保持默认即可
     wx:
       wx-app-id: ""
-      wx-mp-id: "wx0bf5fe9ceeab514c"
-      wx-mp-secret: "888e23c5d82cb185c433c541c43a6cea"
+      wx-mp-id: ""
+      wx-mp-secret: ""
       # 使用微信支付时需要填写的内容， 不使用保持默认即可
       wx-merchant-id: ""
       wx-merchant-key: ""
