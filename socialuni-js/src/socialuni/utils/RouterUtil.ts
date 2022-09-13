@@ -105,6 +105,18 @@ export default class RouterUtil {
     // uni.navigateBack({ delta: 1 })
   }
 
+  static goBackOrMine (): void {
+    const pages = getCurrentPages()
+    if (pages.length === 1) {
+      PageUtil.toMinePage()
+    } else {
+      uni.navigateBack({
+        delta: 1
+      })
+    }
+    // uni.navigateBack({ delta: 1 })
+  }
+
   static goBack (): void {
     uni.navigateBack({ delta: 1 })
   }
