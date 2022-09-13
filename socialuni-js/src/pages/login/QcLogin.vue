@@ -131,11 +131,11 @@
 
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import PhoneLoginForm from '@/pages/login/PhoneLoginForm.vue'
 import UserPrivacyAgreement from '@/components/SocialLogin/UserPrivacyAgreement.vue'
 import LoginFooterAppInfo from '@/components/SocialLogin/LoginFooterAppInfo.vue'
-import {socialOAuthModule, socialSystemModule, socialSystemStore, socialUserStore} from '@/socialuni/store'
+import { socialOAuthModule, socialSystemModule, socialSystemStore, socialUserStore } from '@/socialuni/store'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 import PhoneNumFormData from '@/socialuni/model/phone/PhoneNumFormData'
 import LoginService from '@/socialuni/service/LoginService'
@@ -175,15 +175,15 @@ export default class QcLogin extends Vue {
   //同意协议
   // contractChecked = true
 
-  created() {
+  created () {
     this.initData()
   }
 
-  onLoad() {
+  onLoad () {
     this.initData()
   }
 
-  initData() {
+  initData () {
     this.phoneFormData = new PhoneNumFormData()
     //不为微信则默认为验证码方式绑定
     if (this.user && !this.isMpWx) {
@@ -191,11 +191,11 @@ export default class QcLogin extends Vue {
     }
   }
 
-  get loginButtonDisabled() {
+  get loginButtonDisabled () {
     return this.phoneFormData && (PhoneNumFormData.phoneNumberError(this.phoneFormData.phoneNum) || PhoneNumFormData.authCodeError(this.phoneFormData.authCode) || !this.openTypeBtnEnable)
   }
 
-  goBackPage() {
+  goBackPage () {
     if (socialOAuthModule.isThreeAuth) {
       PageUtil.toOAuthPage()
     } else {
@@ -203,7 +203,7 @@ export default class QcLogin extends Vue {
     }
   }
 
-  switchShowPhoneNum() {
+  switchShowPhoneNum () {
     if (this.showPhoneView) {
       this.showPhoneView = false
     } else {
@@ -213,7 +213,7 @@ export default class QcLogin extends Vue {
 
   //平台登录
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
-  async providerLogin(result) {
+  async providerLogin (result) {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
@@ -227,7 +227,7 @@ export default class QcLogin extends Vue {
     }
   }
 
-  async phoneLogin() {
+  async phoneLogin () {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
@@ -240,7 +240,7 @@ export default class QcLogin extends Vue {
     }
   }
 
-  goToOAuthPage() {
+  goToOAuthPage () {
     if (socialOAuthModule.isThreeAuth) {
       if (this.hasPhoneNum) {
         PageUtil.toOAuthPage()
@@ -251,7 +251,7 @@ export default class QcLogin extends Vue {
   }
 
   //手机号登录和手机号绑定
-  async bindPhoneNum() {
+  async bindPhoneNum () {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
@@ -266,7 +266,7 @@ export default class QcLogin extends Vue {
   }
 
   // 微信点击按钮，获取手机号用来绑定
-  async bindWxPhoneNum(obj: any) {
+  async bindWxPhoneNum (obj: any) {
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
@@ -279,7 +279,7 @@ export default class QcLogin extends Vue {
     }
   }
 
-  loginAfterHint(msg: string) {
+  loginAfterHint (msg: string) {
     if (!this.user.phoneNum) {
       msg += '，绑定手机号后才可发布内容'
     }
@@ -294,13 +294,12 @@ export default class QcLogin extends Vue {
         } else {
           PageUtil.toPhonePage()
         }
-      }
-      /*else {
+      } else {
         //有手机号才直接返回，没手机号继续提示绑定手机号
         if (this.hasPhoneNum) {
-          this.goBackPage()
+          RouterUtil.goBackOrMine()
         }
-      }*/
+      }
     })
   }
 
