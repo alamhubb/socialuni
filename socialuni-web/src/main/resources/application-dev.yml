@@ -24,8 +24,8 @@ socialuni:
     wx:
       wx-app-id: ""
       wx-mp-id: ""
-      # 使用微信支付时需要填写的内容， 不使用保持默认即可
       wx-mp-secret: ""
+      # 使用微信支付时需要填写的内容， 不使用保持默认即可
       wx-merchant-id: ""
       wx-merchant-key: ""
   cloud:
