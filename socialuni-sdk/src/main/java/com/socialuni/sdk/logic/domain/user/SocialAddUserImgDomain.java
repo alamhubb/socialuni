@@ -31,4 +31,14 @@ public class SocialAddUserImgDomain {
 
         return socialMineUserDetailRO;
     }
+
+    public SocialuniMineUserDetailRO addUserAvatarImg(SocialUserImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
+
+        SocialUserImgDO userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
+        userRepository.save(mineUser);
+
+        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
+
+        return socialMineUserDetailRO;
+    }
 }

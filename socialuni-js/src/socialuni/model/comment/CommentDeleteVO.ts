@@ -1,7 +1,7 @@
 export default class CommentDeleteVO {
-  public commentId: number
+  public commentId: string
 
-  constructor (commentId: number) {
+  constructor(commentId: string) {
     this.commentId = commentId
   }
 }

@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="bg-white py-sm px-xs bd-radius-10 elevation-4 mb-sm">
-        <div v-if="imgUrls.length" class="flex-row w100p">
+        <div v-if="imgUrls.length" class="flex-row">
           <div v-for="(img,index) in imgUrls.slice(0,4)" :key="img" class="row-all-center w25p flex-none px-xs">
             <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
             <image v-if="index!==3" class="w100p h75 bd-radius" @longpress="imgLongPress(index)"
@@ -31,36 +31,8 @@
             </div>
           </div>
         </div>
-        <div v-else class="flex-row">
-          <div class="flex-1 row-all-center">
-            <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
-            <image class="size65  bd-radius" @click="showBottomMenuClick(0)"
-                   mode="aspectFill"
-                   src="https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg"
-            ></image>
-          </div>
-          <div class="flex-1 row-all-center">
-            <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
-            <image class="size65 bd-radius" @click="showBottomMenuClick(0)"
-                   mode="aspectFill"
-                   src="https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg"
-            ></image>
-          </div>
-          <div class="flex-1 row-all-center">
-            <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
-            <image class="size65 bd-radius" @click="showBottomMenuClick(0)"
-                   mode="aspectFill"
-                   src="https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg"
-            ></image>
-          </div>
-          <div class="flex-1 row-all-center">
-            <div class="size65 bd-radius row-all-center"
-                 style="background-image: url('https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg');background-size: cover">
-              <div class="size100p bg-shadow bd-radius row-all-center color-white">
-                更多
-              </div>
-            </div>
-          </div>
+        <div v-else class="flex-row h75 row-all-center">
+          <div class="color-sub">点击右上角加号上传照片</div>
         </div>
       </div>
     </div>

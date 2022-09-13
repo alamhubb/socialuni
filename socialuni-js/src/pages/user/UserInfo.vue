@@ -457,7 +457,7 @@ export default class UserInfo extends Vue {
     UniUtil.textCopy(textCopy)
   }
 
-  deleteTalk(talkId: number) {
+  deleteTalk(talkId: string) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 

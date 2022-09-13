@@ -335,7 +335,7 @@ export default class TabsTalkPage extends Vue {
     //只有在传false时校验后面的
     const fistLoad = firstLoad || talkTabObj.firstLoad
     // query condition
-    const talkIds: number[] = (fistLoad ? [] : this.talkIds)
+    const talkIds: string[] = (fistLoad ? [] : this.talkIds)
     CommonUtil.delayTime(0).then(() => {
       talkTabObj.firstLoad = false
     })
@@ -408,7 +408,7 @@ export default class TabsTalkPage extends Vue {
   }
 
   // 被举报后前台删除talk
-  deleteTalk(talkId: number) {
+  deleteTalk(talkId: string) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 

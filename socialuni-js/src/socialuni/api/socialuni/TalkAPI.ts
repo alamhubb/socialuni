@@ -21,7 +21,7 @@ export default class TalkAPI {
     return request.post<TalkVO>('socialuni/talk/queryTalks', new TalkQueryVO(homeTabName, gender, minAge, maxAge, queryTime, tagNames))
   }
 
-  static queryUserTalksAPI(userId: string, talkIds: number[]) {
+  static queryUserTalksAPI(userId: string, talkIds: string[]) {
     return request.post('socialuni/talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
   }
 
@@ -41,11 +41,11 @@ export default class TalkAPI {
     return request.post('socialuni/hug/addHug', hug)
   }
 
-  static deleteTalkAPI(talkId: number) {
+  static deleteTalkAPI(talkId: string) {
     return request.post('socialuni/talk/deleteTalk', new TalkDeleteVO(talkId))
   }
 
-  static deleteCommentAPI(commentId: number) {
+  static deleteCommentAPI(commentId: string) {
     return request.post('socialuni/comment/deleteComment', new CommentDeleteVO(commentId))
   }
 }

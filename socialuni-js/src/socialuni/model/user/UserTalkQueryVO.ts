@@ -1,8 +1,8 @@
 export default class UserTalkQueryVO {
   public userId: string
-  public talkIds: number[]
+  public talkIds: string[]
 
-  constructor (userId: string, talkIds: number[]) {
+  constructor(userId: string, talkIds: string[]) {
     this.userId = userId
     this.talkIds = talkIds
   }

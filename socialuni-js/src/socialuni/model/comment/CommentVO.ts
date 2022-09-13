@@ -1,7 +1,7 @@
 import CenterUserDetailRO from '../social/CenterUserDetailRO'
 
 export default class CommentVO {
-  public id: number = null
+  public id: string = null
   public no: number = null
   public hugNum: number = null
   public childCommentNum: number = null
