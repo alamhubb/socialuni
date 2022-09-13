@@ -7,7 +7,6 @@ import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.constant.config.SocialuniAppType;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.TalkQueryStore;
@@ -25,8 +24,6 @@ import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.model.DO.SocialuniCircleDOUtil;
-import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -113,35 +110,9 @@ public class SocialuniHomeTalkQueryDomain {
         }
 
         //校园社区
-        SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.GenerateQueryBOByTab(queryQO, mineUser);
+        SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.generateQueryBOByTab(queryQO, mineUser);
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
-
-
-        //talk
-        //话题校验
-        //tagNames转tagIds
-
-
-        String homeTabName = queryQO.getHomeTabName();
-        socialHomeTabTalkQueryBO.setHomeTabName(homeTabName);
-
-        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
-        socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
-
-        /*if (SocialuniAppConfig.getHomeTabName().equals(homeTabName)) {
-            socialHomeTabTalkQueryBO.setAdCode(null);
-        } else if (homeTabName.equals(SocialuniAppConfig.getCityTabName())) {
-            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
-            socialHomeTabTalkQueryBO.setCircleId(null);
-        } else {
-            if (homeTabName.equals(TalkTabType.self_school)) {
-                homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
-            }
-            SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnable(homeTabName);
-            socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
-        }
-*/
 
         //通用校验
         List<String> tagNames = queryQO.getTagNames();

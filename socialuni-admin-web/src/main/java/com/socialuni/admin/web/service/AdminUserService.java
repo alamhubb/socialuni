@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class SocialuniUserService {
+public class AdminUserService {
     @Resource
     SocialUserPhoneRedis socialUserPhoneRedis;
     @Resource

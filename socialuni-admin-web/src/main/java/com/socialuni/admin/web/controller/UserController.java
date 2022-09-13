@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportVO;
-import com.socialuni.admin.web.service.SocialuniUserService;
+import com.socialuni.admin.web.service.AdminUserService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
@@ -20,13 +20,13 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
     @Resource
-    SocialuniUserService socialuniUserService;
+    AdminUserService adminUserService;
     @Resource
     UserRepository userRepository;
 
     @PostMapping("removeUserBanByPhoneNum")
     public ResultRO<List<ReportVO>> removeUserBanByPhoneNum(String phoneNum) {
-        SocialuniUserDO user = socialuniUserService.getUserByPhoneNum(phoneNum);
+        SocialuniUserDO user = adminUserService.getUserByPhoneNum(phoneNum);
         if (!user.getStatus().equals(UserStatus.violation)) {
             throw new SocialBusinessException("用户未被封禁");
         }

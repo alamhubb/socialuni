@@ -40,7 +40,7 @@ public class SocialuniHomeTabTalkQueryQO {
     // 筛选的话题列表
     private List<String> tagNames;
     //仅查询设置了实名认证的用户的照片
-    private Boolean hasPeopleImgTalkNeedIdentity;
+//    private Boolean hasPeopleImgTalkNeedIdentity;
     //仅查询设置了学校信息的用户动态
-    private Boolean userHasSchoolNam;
+//    private Boolean userHasSchoolNam;
 }

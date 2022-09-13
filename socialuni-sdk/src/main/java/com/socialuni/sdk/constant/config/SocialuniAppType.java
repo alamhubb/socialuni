@@ -1,6 +1,5 @@
 package com.socialuni.sdk.constant.config;
 
-import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 
@@ -31,7 +30,7 @@ public class SocialuniAppType {
         defaultAppConfigBO.setHomeTabName("首页");
         defaultAppConfigBO.setCityTabName("同城");
         defaultAppConfigBO.setTabNames(Arrays.asList("关注", "首页", "同城"));
-        defaultAppConfigBO.setMustAdultCanPostPeoplePhoto(true);
+        defaultAppConfigBO.setNeedAdultCanPostPeoplePhoto(true);
         SocialuniAppType.defaultAppConfigBO = defaultAppConfigBO;
 
 
@@ -58,7 +57,7 @@ public class SocialuniAppType {
         schoolAppConfigBO.setCityTabName("同城");
         schoolAppConfigBO.setSelfSchoolTabName("本校");
         schoolAppConfigBO.setTabNames(Arrays.asList("关注", "大学", "同城", "本校"));
-        schoolAppConfigBO.setMustHasSchoolCanPostTalk(true);
+        schoolAppConfigBO.setHasSchoolCanPostTalk(true);
         SocialuniAppType.schoolAppConfigBO = schoolAppConfigBO;
 
         appTypeMap = new HashMap<>();
