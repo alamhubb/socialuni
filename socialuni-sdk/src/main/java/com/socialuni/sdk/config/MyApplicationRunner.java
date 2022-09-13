@@ -1,6 +1,8 @@
 package com.socialuni.sdk.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.constant.AppData;
+import com.socialuni.sdk.constant.config.SocialuniAppType;
 import com.socialuni.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
@@ -9,6 +11,7 @@ import com.socialuni.sdk.dao.repository.dev.DevSocialuniIdRepository;
 import com.socialuni.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.social.web.sdk.utils.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -42,7 +45,24 @@ public class MyApplicationRunner implements ApplicationRunner {
 
     @Override
     @Async
-    public void run(ApplicationArguments args) {
+    public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
+        //如果为null，则为default类型
+        if (socialuniAppConfig == null) {
+            SocialuniAppConfig.appConfig = SocialuniAppType.defaultAppConfigBO;
+        } else {
+            String appType = (String) socialuniAppConfig.getClass().getField("appType").get(null);
+            SocialuniAppConfigBO socialuniAppConfigBO = (SocialuniAppConfigBO) socialuniAppConfig.getClass().getField("appConfig").get(null);
+            if (socialuniAppConfigBO == null) {
+                SocialuniAppConfig.appConfig = SocialuniAppType.appTypeMap.get(appType);
+            } else {
+                //写了appConfig，则完全已自定义的为准
+                SocialuniAppConfig.appConfig = socialuniAppConfigBO;
+            }
+        }
+
+        System.out.println(JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appConfig));
+
+
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者

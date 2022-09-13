@@ -95,15 +95,11 @@ public class SocialuniHomeTalkQueryDomain {
 
     public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
         //主要逻辑区分就是这里，
-
-
         //通用逻辑
-
         //普通类型的逻辑
-
         //同性社区
         //主要是校验appgender,只允许同性别用户使用，不同性别则要保证同性别
-        if (SocialuniAppType.genderTypeList.contains(SocialuniAppConfig.appGender)) {
+        if (SocialuniAppType.genderTypeList.contains(SocialuniAppConfig.appConfig.getAppGender())) {
             if (mineUser != null) {
                 String appGender = DevAccountUtils.getAppGenderType();
                 String mineUserGender = mineUser.getGender();

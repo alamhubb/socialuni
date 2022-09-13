@@ -51,19 +51,18 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(queryQO.getHasPeopleImgTalkNeedIdentity());
        socialHomeTabTalkQueryBO.setUserHasSchoolNam(queryQO.getUserHasSchoolNam());
 
-       if (SocialuniAppConfig.homeTabName.equals(homeTabName)) {
+       if (SocialuniAppConfig.appConfig.getHomeTabName().equals(homeTabName)) {
            socialHomeTabTalkQueryBO.setAdCode(null);
-       } else if (homeTabName.equals(SocialuniAppConfig.cityTabName)) {
+       } else if (homeTabName.equals(SocialuniAppConfig.appConfig.getCityTabName())) {
            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
            socialHomeTabTalkQueryBO.setCircleId(null);
        } else {
-           if (homeTabName.equals(TalkTabType.self_school)) {
+           if (homeTabName.equals(SocialuniAppConfig.appConfig.getSelfSchoolTabName())) {
                homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
            }
            SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnable(homeTabName);
            socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
        }
-
        return socialHomeTabTalkQueryBO;
    }
 }
