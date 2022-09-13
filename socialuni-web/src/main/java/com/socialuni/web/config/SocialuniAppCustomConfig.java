@@ -17,7 +17,7 @@ public class SocialuniAppCustomConfig extends SocialuniAppConfig {
     //首页的tab栏目
     public static SocialuniAppConfigBO appConfig;
 
-    //可以通过这里给appConfig自定义，可参考父类的方式
+    //可以通过这里给appConfig自定义，可参考SocialuniAppType类的方式
     static {
 
     }
