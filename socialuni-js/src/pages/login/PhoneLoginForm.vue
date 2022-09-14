@@ -66,17 +66,17 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 import PhoneNumFormData from '@/socialuni/model/phone/PhoneNumFormData'
 import CommonUtil from '@/socialuni/utils/CommonUtil'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
-import PhoneAPI from '@/socialuni/api/PhoneAPI'
-import {socialConfigStore} from '@/socialuni/store'
+import PhoneAPI from '@/socialuni/api/socialuni/PhoneAPI'
+import { socialConfigStore } from '@/socialuni/store'
 import ConfigMap from '@/socialuni/constant/ConfigMap'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 
 @Component({
-  components: {QIcon}
+  components: { QIcon }
 })
 export default class PhoneLoginForm extends Vue {
   @socialConfigStore.Getter(ConfigMap.authCodeInterval) authCodeInterval: number
@@ -84,12 +84,12 @@ export default class PhoneLoginForm extends Vue {
   @Model('input') readonly value!: PhoneNumFormData
 
   @Emit()
-  input() {
+  input () {
     return this.value
   }
 
   @Watch('showPhoneView')
-  showPhoneViewWatch() {
+  showPhoneViewWatch () {
     if (this.showPhoneView) {
       this.phoneNumInputFocus()
     } else {
@@ -103,40 +103,40 @@ export default class PhoneLoginForm extends Vue {
   authCodeFocus = false
   phoneNumFocus = false
 
-  get phoneNumIsError() {
+  get phoneNumIsError () {
     //有值，错误，才算错误
     return this.value.phoneNum && PhoneNumFormData.phoneNumberError(this.value.phoneNum)
   }
 
-  get authCodeIsError() {
+  get authCodeIsError () {
     //手机号正确，验证码错误才为错误
     return !PhoneNumFormData.phoneNumberError(this.value.phoneNum) && PhoneNumFormData.authCodeError(this.value.authCode)
   }
 
-  phoneNumInputFocus() {
+  phoneNumInputFocus () {
     this.phoneNumFocus = true
   }
 
-  phoneNumInputBlur() {
+  phoneNumInputBlur () {
     this.phoneNumFocus = false
   }
 
-  authCodeInputFocus() {
+  authCodeInputFocus () {
     this.authCodeFocus = true
     CommonUtil.delayTime(100).then(() => {
       this.authCodeFocus = true
     })
   }
 
-  authCodeInputBlur() {
+  authCodeInputBlur () {
     this.authCodeFocus = false
   }
 
-  get sendAuthCodeBtnDisabled() {
+  get sendAuthCodeBtnDisabled () {
     return PhoneNumFormData.phoneNumberError(this.value.phoneNum) || Boolean(this.countDown)
   }
 
-  phoneNumClear() {
+  phoneNumClear () {
     this.value.phoneNum = ''
     this.input()
     CommonUtil.delayTime(100).then(() => {
@@ -144,13 +144,13 @@ export default class PhoneLoginForm extends Vue {
     })
   }
 
-  authCodeClear() {
+  authCodeClear () {
     this.value.authCode = ''
     this.input()
     this.authCodeInputFocus()
   }
 
-  sendCodeClick() {
+  sendCodeClick () {
     if (PhoneNumFormData.phoneNumberError(this.value.phoneNum)) {
       return ToastUtil.toast('请输入正确的手机号')
     }

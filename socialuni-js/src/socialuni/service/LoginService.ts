@@ -1,4 +1,4 @@
-import LoginAPI from '../api/LoginAPI'
+import LoginAPI from '../api/socialuni/LoginAPI'
 import UserService from './UserService'
 import UniUserUtil from '../utils/UniUserUtil'
 import SocialPhoneNumLoginQO from '../model/phone/SocialPhoneNumLoginQO'

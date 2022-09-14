@@ -1,6 +1,6 @@
 import { socialSystemModule, socialUserModule } from '../store'
 import ToastUtil from '../utils/ToastUtil'
-import PhoneAPI from '../api/PhoneAPI'
+import PhoneAPI from '../api/socialuni/PhoneAPI'
 import UniLoginUtil from '../utils/UniLoginUtil'
 
 export default class PhoneService {
