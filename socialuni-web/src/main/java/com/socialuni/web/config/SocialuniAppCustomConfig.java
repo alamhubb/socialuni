@@ -16,6 +16,8 @@ public class SocialuniAppCustomConfig extends SocialuniAppConfig {
 
     //首页的tab栏目
     public static SocialuniAppConfigBO appConfig;
+    //系统提供一些默认配置，然后再将用户的自定义配置和系统的配置合并
+
 
     //可以通过这里给appConfig自定义，可参考SocialuniAppType类的方式
     static {

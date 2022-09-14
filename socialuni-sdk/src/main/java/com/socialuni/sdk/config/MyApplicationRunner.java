@@ -79,6 +79,7 @@ public class MyApplicationRunner implements ApplicationRunner {
             devSocialuniIdRepository.save(devSocialuniIdDO);*/
         }
 
+        //创建中心
         if (SocialAppConfig.serverIsChild()) {
             DevAccountDO centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialAppConfig.getCenterSocialuniId());
             if (centerDevDO == null) {
