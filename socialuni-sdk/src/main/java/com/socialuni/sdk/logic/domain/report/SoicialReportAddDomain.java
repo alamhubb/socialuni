@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.report;
 
-import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.dao.repository.*;
@@ -87,7 +87,7 @@ public class SoicialReportAddDomain {
                     return new ResultRO<>("因您的正义值低于：" + AppConfigConst.limitReportValue + "，所以您每天只能举报：" + AppConfigConst.lowLimitReportCount + "次");
                 }
             }*/
-            Integer highLimitReportCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.highLimitReportCountKey);
+            Integer highLimitReportCount = SocialuniAppConfig.appMoreConfig.getHighLimitReportCount();
             if (reportCount >= highLimitReportCount) {
                 throw new SocialParamsException("每人每天只能举报" + highLimitReportCount + "次");
             }

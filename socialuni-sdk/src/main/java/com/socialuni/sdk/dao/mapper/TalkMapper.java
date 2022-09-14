@@ -28,7 +28,7 @@ public interface TalkMapper {
 
     List<Integer> queryMineTalkIdsByCom(
             @Param("userId") Integer userId,
-            @Param("status") List<String> statusList);
+            @Param("statusList") List<String> statusList);
 
 
     /*List<Integer> queryTalkIdsByCom(

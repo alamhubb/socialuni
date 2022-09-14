@@ -60,14 +60,13 @@ import ReportAPI from '../../socialuni/api/socialuni/ReportAPI'
 import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
 import {
   socialAppStore,
-  socialConfigStore,
+  socialConfigModule,
   socialTalkModule,
   socialTalkStore,
   socialUserStore
 } from '../../socialuni/store'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import MsgUtil from '../../socialuni/utils/MsgUtil'
-import ConfigMap from '../../socialuni/constant/ConfigMap'
 import PlatformUtils from '../../socialuni/utils/PlatformUtils'
 import UniUtil from '../../socialuni/utils/UniUtil'
 import AlertUtil from '../../socialuni/utils/AlertUtil'
@@ -94,8 +93,11 @@ export default class TalkOperate extends Vue {
   pornInfo: string = ReportType.pornInfo
   reportType: string = ReportType.pornInfo
   reportContent = ''
+
   // 被举报次数大于多少，则隐藏
-  @socialConfigStore.Getter(ConfigMap.reportHideCountKey) reportHideCount: number
+  get reportCountHide() {
+    return socialConfigModule.appConfig.reportCountHide
+  }
 
   reportDialogClose() {
     socialTalkModule.reportDialogShow = false
@@ -115,12 +117,12 @@ export default class TalkOperate extends Vue {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
           const reportNum: number = this.comment.reportNum + 1
-          if (reportNum >= this.reportHideCount) {
+          if (reportNum >= this.reportCountHide) {
             this.frontDeleteComment()
           }
         } else {
           const reportNum: number = this.talk.reportNum + 1
-          if (reportNum >= this.reportHideCount) {
+          if (reportNum >= this.reportCountHide) {
             this.$emit('deleteTalk', this.talk.id)
           }
         }

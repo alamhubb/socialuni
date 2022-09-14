@@ -151,7 +151,7 @@ import TalkTabVO from '../../socialuni/model/talk/TalkTabVO'
 import CommonUtil from '../../socialuni/utils/CommonUtil'
 import TalkSwipers from './talkSwipers.vue'
 import {
-  socialConfigStore,
+  socialConfigModule,
   socialLocationModule,
   socialLocationStore,
   socialSystemModule,
@@ -195,8 +195,11 @@ export default class TabsTalkPage extends Vue {
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
   @socialLocationStore.Getter('location') location: DistrictVO
+
   // 轮播图
-  @socialConfigStore.State('showSwipers') configShowSwipers: boolean
+  configShowSwipers() {
+    return socialConfigModule.appConfig.showSwipers
+  }
 
   readonly loading: string = LoadMoreType.loading
   loadMoreText = {
@@ -223,7 +226,7 @@ export default class TabsTalkPage extends Vue {
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
 
-  @socialConfigStore.Getter('talkCacheNum') readonly talkCacheNum: number
+  readonly talkCacheNum: number = 4
 
   queryTime = new Date()
 
@@ -464,11 +467,9 @@ export default class TabsTalkPage extends Vue {
     this.startPullDown()
   }
 
-  @socialConfigStore.State('appConfig') readonly appConfig: object
-
   // 每次查询几条
   get lazyLoadNum(): number {
-    return this.appConfig[Constants.everyLoadNum] || Constants.everyLoadNum_number
+    return socialConfigModule.appConfig[Constants.everyLoadNum] || Constants.everyLoadNum_number
   }
 
   showAd = false
@@ -491,11 +492,11 @@ export default class TabsTalkPage extends Vue {
 
   // 默认30分钟展示1次
   get showAdMinutes(): number {
-    return this.appConfig[Constants.talkShowAdTimeInterval] || Constants.talkShowAdTimeIntervalDefault
+    return socialConfigModule.appConfig[Constants.talkShowAdTimeInterval] || Constants.talkShowAdTimeIntervalDefault
   }
 
   get showAdIndexList(): number[] {
-    return this.appConfig[Constants.talkShowAdIndexListKey] || Constants.talkShowAdIndexAryDefault
+    return socialConfigModule.appConfig[Constants.talkShowAdIndexListKey] || Constants.talkShowAdIndexAryDefault
   }
 
   @Watch('talks')

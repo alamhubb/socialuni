@@ -1,10 +1,10 @@
 package com.socialuni.sdk.logic.manage.phone;
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.utils.IntegerUtils;
 import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.dao.repository.AuthenticationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +38,7 @@ public class AuthenticationManage {
 
         //如果发送过验证码
         //校验验证码是否过期，如果当前时间晚于30分钟后则验证码失效
-        Integer authCodeValidMinute = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeValidMinuteKey);
+        Integer authCodeValidMinute = SocialuniAppConfig.appMoreConfig.getAuthCodeValidMinute();
         long canTime = authenticationDO.getCreateTime().getTime() + authCodeValidMinute * DateTimeType.minute;
         long curTime = new Date().getTime();
         if (curTime > canTime) {

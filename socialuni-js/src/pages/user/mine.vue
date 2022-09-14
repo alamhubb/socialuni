@@ -86,14 +86,13 @@
       </msg-input>
     </view>
     <!--      title="欢迎登录清池app"-->
-    <qc-login v-else class="h100p"></qc-login>
+    <login v-else class="h100p"></login>
   </view>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import MsgInput from '@/components/MsgInput.vue'
-import QcLogin from '@/pages/login/QcLogin.vue'
 import {socialUserModule, socialUserStore} from '@/socialuni/store'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import SkipUrlConst from '@/socialuni/constant/SkipUrlConst'
@@ -104,15 +103,16 @@ import QRowItem from '@/qing-ui/components/QRowItem/QRowItem.vue'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
+import Login from "@/pages/login/login.vue";
 
 @Component({
   components: {
+    Login,
     QPopup,
     QIcon,
     QNavbar,
     QRowItem,
     UserInfo,
-    QcLogin,
     MsgInput
   }
 })

@@ -2,7 +2,7 @@
   <view v-if="pageUser" class="bg-default pb-100">
     <view class="mb-sm pt-200 bg-no-repeat"
           style="background-image: url('https://cdxapp-1257733245.file.myqcloud.com/socialuni/common/app/userDefaultTopImg.jpg')">
-      <view class="pd-sm bg-white bd-radius-10">
+      <view class="pd-sm bg-white bt-radius-10">
         <view class="row-col-center py-sm">
           <image
             class="size65 bd-radius-xs mr-sm"
@@ -341,7 +341,7 @@ import SocialGenderTag from '@/components/SocialGenderTag/SocialGenderTag.vue'
 import QPcModel from "@/components/QPcModel/QPcModel.vue";
 import QPopup from "@/qing-ui/components/QPopup/QPopup.vue";
 import QSearch from "@/qing-ui/components/QSearch/QSearch.vue";
-import UserSchoolEditDialog from "@/pagesLazy/user/UserSchoolEditDialog.vue";
+import UserSchoolEditDialog from "@/pages/user/UserSchoolEditDialog.vue";
 import QButton from "@/qing-ui/components/QButton/QButton.vue";
 import UserInfoImg from "@/pages/user/UserInfoImg.vue";
 import CosUtil from "@/socialuni/utils/CosUtil";

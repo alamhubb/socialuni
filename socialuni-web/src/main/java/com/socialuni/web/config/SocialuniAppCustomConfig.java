@@ -2,6 +2,7 @@ package com.socialuni.web.config;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.sdk.config.SocialuniAppMoreConfigBO;
 import com.socialuni.sdk.constant.config.SocialuniAppType;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import org.springframework.stereotype.Component;
@@ -16,11 +17,10 @@ public class SocialuniAppCustomConfig extends SocialuniAppConfig {
 
     //首页的tab栏目
     public static SocialuniAppConfigBO appConfig;
+    public static SocialuniAppMoreConfigBO appMoreConfig = new SocialuniAppMoreConfigBO();
     //系统提供一些默认配置，然后再将用户的自定义配置和系统的配置合并
-
 
     //可以通过这里给appConfig自定义，可参考SocialuniAppType类的方式
     static {
-
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <q-popup ref="schoolDialog" bottom @confirm="confirm">
-    <div class="h550 pd">
-      <q-search class="mx-sm bg-default">
+    <div class="h80vh pd flex-col">
+      <q-search class="mx-sm bg-default flex-none">
         <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
         <input v-model.trim="filterSchoolNameText" :adjust-position="false" type="text" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
@@ -9,11 +9,11 @@
                 @click="clearSchoolNameValue"
         ></q-icon>
       </q-search>
-      <div class="px-sm mt">
-        已选校园名称： {{ schoolNameValue || null }}
+      <div class="px-sm mt flex-none">
+        已选校园名称： {{ schoolNameValue || "" }}
       </div>
       <!--      <q-select v-model="curSchoolName" :list="schools" label-name="name" value-name="name"></q-select>-->
-      <scroll-view class="mt-sm h380 bt" scroll-y>
+      <scroll-view class="mt-sm flex-1 bt" scroll-y>
         <div v-for="circle in filterCircles" class="bb px-sm py-sm row-between-center"
              @click="schoolNameValue = circle.name">
           <div>{{

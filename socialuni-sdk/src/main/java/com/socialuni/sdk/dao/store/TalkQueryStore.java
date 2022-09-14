@@ -110,17 +110,16 @@ public class TalkQueryStore {
             //取交集
             userTalkUnionIds.retainAll(queryTalkUnionIds);
         }
-        if (mineUser != null) {
-            Integer mineUserId = mineUser.getUnionId();
-            if (mineUserId != null) {
-                List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIdsByCom(mineUserId);
-                //取交集
-                userTalkUnionIds.retainAll(queryTalkUnionIds);
-            }
+        Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
+        if (mineUserId != null) {
+            List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIdsByCom(mineUserId);
+            //取交集
+            userTalkUnionIds.addAll(queryTalkUnionIds);
         }
-        if (userTalkUnionIds.size() > 10) {
+        userTalkUnionIds = talkRepository.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), PageRequest.of(0, 10));
+        /*if (userTalkUnionIds.size() > 10) {
             userTalkUnionIds = userTalkUnionIds.subList(0, 10);
-        }
+        }*/
         return this.queryTalksByIds(userTalkUnionIds);
     }
 

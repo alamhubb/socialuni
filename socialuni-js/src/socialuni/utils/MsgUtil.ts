@@ -1,4 +1,4 @@
-import { socialConfigModule, socialSystemModule, socialUserModule } from '../store'
+import {socialConfigModule, socialSystemModule, socialUserModule} from '../store'
 
 import AppMsg from '../constant/AppMsg'
 import AlertUtil from './AlertUtil'
@@ -8,27 +8,22 @@ import CenterUserDetailRO from '../model/social/CenterUserDetailRO'
 import UniUtil from '@/socialuni/utils/UniUtil'
 
 export default class MsgUtil {
-  static unBindPhoneNum () {
+  static unBindPhoneNum() {
     const user: CenterUserDetailRO = socialUserModule.user
     if (!user) {
       MsgUtil.unLoginMessage()
     } else {
       // 如果登录了仅仅没绑定手机号，则提示跳转，区分qq和微信不同
-      AlertUtil.confirm('绑定手机号才能发布内容，是否跳转至绑定手机号页面')
+      AlertUtil.confirm('绑定手机号才能发布内容，是否前往绑定手机号页面')
         .then(() => {
-          // #ifdef MP-WEIXIN
-          PageUtil.toMinePage()
-          // #endif
-          // #ifndef MP-WEIXIN
           PageUtil.toPhonePage()
-          // #endif
         })
     }
   }
 
-  static unLoginMessage () {
+  static unLoginMessage() {
     if (!socialUserModule.user) {
-      AlertUtil.info(socialConfigModule.systemError601)
+      AlertUtil.info(socialConfigModule.appConfig.errorMsg601UnLogin)
         .then(() => {
           // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
           PageUtil.toMinePage()
@@ -37,28 +32,27 @@ export default class MsgUtil {
     }
   }
 
-  static showUploadLoading () {
+  static showUploadLoading() {
     UniUtil.showLoading('上传中')
   }
 
-
-  static systemErrorMsg () {
-    AlertUtil.hint(socialConfigModule.systemError604)
+  static systemErrorMsg() {
+    AlertUtil.hint(socialConfigModule.appConfig.errorMsg604SystemError)
   }
 
-  static unUploadImg () {
+  static unUploadImg() {
     AlertUtil.confirm('请完善用户信息绑定手机号并上传照片，才能进行此项操作，是否前往完善信息', '前往').then(() => {
       PageUtil.toMinePage()
     })
   }
 
-  static async uploadImgNeedAuthMsg () {
+  static async uploadImgNeedAuthMsg() {
     await AlertUtil.confirm('未进行成年认证，发布包含人物的图像将不予展示，是否前往进行成年认证', '前往').then(() => {
       PageUtil.toIdentityAuthPage()
     })
   }
 
-  static identityAuthHint () {
+  static identityAuthHint() {
     this.unLoginMessage()
     let msg
     if (socialUserModule.user.identityAuth) {
@@ -71,27 +65,23 @@ export default class MsgUtil {
     })
   }
 
-  static iosDisablePay () {
+  static iosDisablePay() {
     return AlertUtil.hint(AppMsg.iosDisablePayMsg)
   }
 
-  static notMpDisablePay () {
+  static notMpDisablePay() {
     return AlertUtil.hint(AppMsg.notMpDisablePayMsg)
   }
 
-  static notPay () {
+  static notPay() {
     return AlertUtil.hint(AppMsg.notPayMsg)
   }
 
-  static payFailMsg () {
+  static payFailMsg() {
     return AlertUtil.hint(AppMsg.payFailMsg)
   }
 
-  static sysErrMsg () {
-    return AlertUtil.hint(socialConfigModule.systemError604)
-  }
-
-  static cantPopupPromptToast () {
+  static cantPopupPromptToast() {
     if (socialSystemModule.isIosAndMpQQ) {
       ToastUtil.toastLong('如遇到无法弹出输入框，请重启应用')
     }

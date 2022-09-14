@@ -30,7 +30,7 @@ export default class TalkAPI {
   }
 
   static queryTalkDetailAPI(talkId: string) {
-    return request.post('socialuni/talk/queryTalkDetail', {talkId})
+    return request.get('socialuni/talk/queryTalkDetail/' + talkId)
   }
 
   static addCommentAPI(comment: CommentAddVO) {

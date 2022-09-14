@@ -1,18 +1,17 @@
 <template>
-  <!--  <social-talk-page ref="socialTalk"></social-talk-page>-->
-  <social-talk-mobile-page ref="socialTalk"></social-talk-mobile-page>
+  <social-talk-page ref="socialTalk"></social-talk-page>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
-import SocialTalkMobilePage from "@/components/SocialPages/SocialTalkMobilePage.vue";
+import SocialTalkPage from "@/components/SocialPages/SocialTalkPage.vue";
 
 @Component({
-  components: {SocialTalkMobilePage}
+  components: {SocialTalkPage}
 })
 export default class TalkPage extends Vue {
   $refs: {
-    socialTalk: SocialTalkMobilePage
+    socialTalk: SocialTalkPage
   }
 
   onHide() {

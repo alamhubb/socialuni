@@ -1,10 +1,10 @@
 package com.socialuni.sdk.logic.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.AppConfigConst;
-import com.socialuni.sdk.constant.ConfigValueType;
-import com.socialuni.sdk.dao.DO.AppConfigDO;
 import com.socialuni.sdk.dao.repository.AppConfigRepository;
-import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.web.sdk.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +22,19 @@ public class ConfigMapRefreshService {
     @Resource
     private AppConfigRepository appConfigRepository;
 
-    public void refreshConfigMap() {
-        List<AppConfigDO> appConfigDOS = appConfigRepository.findAllByStatusOrderByCreateTimeDesc(CommonStatus.enable);
+    public void refreshConfigMap() throws JsonProcessingException {
+        /*List<AppConfigDO> appConfigDOS = appConfigRepository.findAllByStatusOrderByCreateTimeDesc(CommonStatus.enable);
         for (AppConfigDO appConfigDO : appConfigDOS) {
             if (ConfigValueType.stringType.equals(appConfigDO.getValueType())) {
-                AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getStringValue());
+                SocialuniAppConfig.appConfig.get AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getStringValue());
             } else if (ConfigValueType.number.equals(appConfigDO.getValueType())) {
-                AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getNumberValue());
+                SocialuniAppConfig.appConfig AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getNumberValue());
             } else if (ConfigValueType.booleanType.equals(appConfigDO.getValueType())) {
-                AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getBooleanValue());
+                SocialuniAppConfig.appConfig AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getBooleanValue());
             }
-        }
-        Integer talkAdInterval = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.talkShowAdIntervalKey);
-        Integer talkShowAdCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.talkShowAdCountKey);
+        }*/
+        Integer talkAdInterval = SocialuniAppConfig.appMoreConfig.getTalkShowAdInterval();
+        Integer talkShowAdCount = SocialuniAppConfig.appMoreConfig.getTalkShowAdCount();
         if (talkAdInterval < 6) {
             log.error("广告展示频率不能低于6");
         } else if (talkAdInterval > 30) {
@@ -42,7 +42,7 @@ public class ConfigMapRefreshService {
         }
         List<Integer> showAdList = new ArrayList<>();
         //7, 15, 27, 43, 63, 87, 111, 135, 159, 183
-         //8 12 16 20 24 24 24 24 24
+        //8 12 16 20 24 24 24 24 24
         //设置广告间隔
         showAdList.add(talkAdInterval - 1);
         for (int i = 0; i < talkShowAdCount - 1; i++) {
@@ -56,7 +56,9 @@ public class ConfigMapRefreshService {
             }
             showAdList.add(a);
         }
+        //todo 下版本删除AppConfigConst.appConfigMap 相关内容
         AppConfigConst.appConfigMap.put(AppConfigConst.talkShowAdIndexListKey, showAdList);
-        log.info("系统配置表数据：{}", AppConfigConst.appConfigMap);
+        SocialuniAppConfig.appMoreConfig.setTalkShowAdIndexList(showAdList);
+        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appConfig), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appMoreConfig));
     }
 }

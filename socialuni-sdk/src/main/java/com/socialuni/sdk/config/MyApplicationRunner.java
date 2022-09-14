@@ -11,6 +11,7 @@ import com.socialuni.sdk.dao.repository.dev.DevSocialuniIdRepository;
 import com.socialuni.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.sdk.utils.ObjectUtil;
 import com.socialuni.social.web.sdk.utils.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,21 +48,25 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         //如果为null，则为default类型
-        if (socialuniAppConfig == null) {
-            SocialuniAppConfig.appConfig = SocialuniAppType.defaultAppConfigBO;
-        } else {
+        if (socialuniAppConfig != null) {
             String appType = (String) socialuniAppConfig.getClass().getField("appType").get(null);
+            if (appType == null) {
+                appType = SocialuniAppType.defaultType;
+            }
             SocialuniAppConfigBO socialuniAppConfigBO = (SocialuniAppConfigBO) socialuniAppConfig.getClass().getField("appConfig").get(null);
+            SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = (SocialuniAppMoreConfigBO) socialuniAppConfig.getClass().getField("appMoreConfig").get(null);
+            SocialuniAppConfigBO appTypeConfig = SocialuniAppType.appTypeMap.get(appType);
             if (socialuniAppConfigBO == null) {
-                SocialuniAppConfig.appConfig = SocialuniAppType.appTypeMap.get(appType);
+                SocialuniAppConfig.appConfig = appTypeConfig;
             } else {
                 //写了appConfig，则完全已自定义的为准
-                SocialuniAppConfig.appConfig = socialuniAppConfigBO;
+                SocialuniAppConfig.appConfig = ObjectUtil.mergeObjects(socialuniAppConfigBO, appTypeConfig);
+            }
+            if (socialuniAppMoreConfigBO != null) {
+                SocialuniAppConfig.appMoreConfig = ObjectUtil.mergeObjects(socialuniAppMoreConfigBO, SocialuniAppConfig.appMoreConfig);
             }
         }
-
         System.out.println(JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appConfig));
-
 
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
 

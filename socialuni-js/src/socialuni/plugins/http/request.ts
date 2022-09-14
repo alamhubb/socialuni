@@ -78,6 +78,11 @@ request.interceptor.response(
       if (errorMsg) {
         switch (error.statusCode) {
           case ErrorConst.not_logged:
+            // 理论上不需要，因为token不会失效，也不会错误
+            // 已知可能，切换环境导致token不同
+            UserService.clearUserInfoCom()
+            MsgUtil.unLoginMessage()
+            break
           case ErrorConst.banned:
             // 理论上不需要，因为token不会失效，也不会错误
             // 已知可能，切换环境导致token不同
@@ -104,7 +109,7 @@ request.interceptor.response(
                   resultRO[element.name] = element.elements[0].text
                 }
               }
-              const msg: string = socialConfigModule.systemError604
+              const msg: string = socialConfigModule.appConfig.errorMsg604SystemError
               AlertUtil.hint(resultRO.Message + '，请重试，' + msg)
               // 返回接口返回的错误信息
               return result

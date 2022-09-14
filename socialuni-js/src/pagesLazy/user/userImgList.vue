@@ -29,8 +29,8 @@ import ToastUtil from "@/socialuni/utils/ToastUtil";
 import HintMsg from "@/socialuni/constant/HintMsg";
 import UniUtil from "@/socialuni/utils/UniUtil";
 import AlertUtil from "@/socialuni/utils/AlertUtil";
-import UserSchoolEditDialog from "@/pagesLazy/user/UserSchoolEditDialog.vue";
-import SocialuniReportDialog from "@/pagesLazy/report/SocialuniReportDialog.vue";
+import UserSchoolEditDialog from "@/pages/user/UserSchoolEditDialog.vue";
+import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
 import ReportContentType from "@/socialuni/constant/ReportContentType";
 
 @Component({

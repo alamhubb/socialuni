@@ -18,17 +18,18 @@
 import {Component, Vue} from 'vue-property-decorator'
 
 import HomeSwiperVO from '../../socialuni/model/HomeSwiperVO'
-import ConfigMap from '../../socialuni/constant/ConfigMap'
 import SkipType from '../../socialuni/constant/SkipType'
-import {socialAppStore, socialConfigStore, socialSystemModule} from '../../socialuni/store'
+import {socialAppStore, socialConfigModule, socialSystemModule} from '../../socialuni/store'
 import RouterUtil from '../../socialuni/utils/RouterUtil'
 
 // todo 后台可控制是否显示轮播图
 @Component
 export default class TalkSwipersPage extends Vue {
   @socialAppStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
-  @socialConfigStore.Getter(ConfigMap.homeUrlKey) homeUrl: string
-  @socialConfigStore.Getter(ConfigMap.swiperHeightKey) swiperHeight: number
+
+  get swiperHeight() {
+    return socialConfigModule.appConfig.swiperHeight
+  }
 
   get showSwipers() {
     return this.homeSwipers && this.homeSwipers.length

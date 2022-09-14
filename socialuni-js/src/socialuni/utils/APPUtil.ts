@@ -1,12 +1,12 @@
 import AppUtilAPI from '../api/AppUtilAPI'
 import UniUtil from './UniUtil'
 import AppUpdateType from '../constant/AppUpdateType'
-import { socialConfigModule } from '../store'
+import {socialConfigModule} from '../store'
 import AppConfig from '../config/AppConfig'
 import AlertUtil from './AlertUtil'
 
 export default class APPUtil {
-  static checkUpdate () {
+  static checkUpdate() {
     plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
       const version = widgetInfo.version.split('.').join('')
       AppUtilAPI.checkUpdateAPI(Number(version)).then((res) => {
@@ -24,14 +24,14 @@ export default class APPUtil {
               plus.runtime.restart()
             })
           }).catch(() => {
-            AlertUtil.hint('更新失败，' + socialConfigModule.contactService)
+            AlertUtil.hint('更新失败，' + socialConfigModule.appConfig.errorMsgContactService)
           })
         }
       })
     })
   }
 
-  static createRewardedVideoAd () {
+  static createRewardedVideoAd() {
     return UniUtil.createRewardedVideoAd(AppConfig.app_award_ad_id)
   }
 }

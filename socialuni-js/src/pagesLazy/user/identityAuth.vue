@@ -122,10 +122,9 @@ import SocialUserIdentityAuthPreCheckRO from '@/socialuni/model/RO/user/SocialUs
 import MsgUtil from '@/socialuni/utils/MsgUtil'
 import TencentCosIdInfoRO from '@/socialuni/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO'
 import SocialUserIdentityAPI from '@/socialuni/api/socialuni/SocialUserIdentityAPI'
-import ConfigMap from '@/socialuni/constant/ConfigMap'
 import ToastUtil from '@/socialuni/utils/ToastUtil'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
-import {socialUserModule, socialUserStore} from '@/socialuni/store'
+import {socialConfigModule, socialUserModule, socialUserStore} from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 
 @Component({
@@ -233,7 +232,7 @@ export default class IdentityAuthView extends Vue {
       ToastUtil.error('请上传真实的身份证正面照片')
     }
     if (!this.idInfoPreCheckResult || !this.idInfoPreCheckResult.Birth) {
-      ToastUtil.error('请上传真实的身份证正面照片，' + ConfigMap.systemError604Default)
+      ToastUtil.error('请上传真实的身份证正面照片，' + socialConfigModule.appConfig.errorMsgContactService)
     }
   }
 

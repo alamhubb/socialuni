@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.domain.report;
 
 import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.constant.config.AppConfigStatic;
 import com.socialuni.sdk.constant.status.UserStatus;
@@ -174,7 +175,7 @@ public class ReportDomain {
             Integer modelReportNum = modelDO.getReportNum() + 1;
             modelDO.setReportNum(modelReportNum);
             //被1个人举报就进入审核中,这里做判断是因为阀值以后可能会调整
-            Integer reportCountHide = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.reportCountHideKey);
+            Integer reportCountHide = SocialuniAppConfig.appMoreConfig.getReportCountHide();
             //大于阀值，更改动态和用户状态，否则只增加举报此数
             if (modelReportNum >= reportCountHide) {
                 modelDO.setStatus(ContentStatus.audit);

@@ -21,16 +21,17 @@
   </view>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
 import CommonUtil from '../../../socialuni/utils/CommonUtil'
-import SelectorQuery = UniApp.SelectorQuery
-import NodesRef = UniApp.NodesRef
+import SelectorQuery = UniApp.SelectorQuery;
+import NodesRef = UniApp.NodesRef;
 
 /*
 显示出来已经选了的城市，给她画上钩
 * */
 @Component
 export default class QSidebar extends Vue {
+  multipleSlots = true
   /**
    * 避免组件重复，设置uuid
    */
@@ -42,11 +43,11 @@ export default class QSidebar extends Vue {
   /**
    * 左侧菜单宽度
    */
-  @Prop({ default: 200 }) readonly leftBoxWidth: number
+  @Prop({default: 200}) readonly leftBoxWidth: number
   /**
    * 提前量，提前多少高度px显示到下一个
    */
-  @Prop({ default: 100 }) readonly preShow: number
+  @Prop({default: 100}) readonly preShow: number
   /**
    * 控制左侧滚动
    */
@@ -73,25 +74,25 @@ export default class QSidebar extends Vue {
   rightItemTops: any[] = []
 
   //渲染完毕后计算高度
-  mounted () {
+  mounted() {
     this.initBoxItemTops()
   }
 
   //数据变化时重新计算高度
   @Watch('dataList')
-  dataListWatch () {
+  dataListWatch() {
     this.initBoxItemTops()
   }
 
   //计算高度
-  initBoxItemTops () {
+  initBoxItemTops() {
     this.initComponentsHeight()
     this.initRightBoxItemTops()
     this.initLeftBoxItemTops()
   }
 
   //计算组建高度
-  initComponentsHeight () {
+  initComponentsHeight() {
     //获取整个组件的高度
     const query: SelectorQuery = uni.createSelectorQuery().in(this)
     const nodeBox: NodesRef = query.select('.' + this.uuid + '.q-sidebar-box')
@@ -107,7 +108,7 @@ export default class QSidebar extends Vue {
   }
 
   //计算左侧菜单元素临界点
-  initLeftBoxItemTops () {
+  initLeftBoxItemTops() {
     const query: SelectorQuery = uni.createSelectorQuery().in(this)
     //存储左侧菜单需要滚动到的点
     const nodeLeft: NodesRef = query.selectAll('.' + this.uuid + '.sidebar-left-item')
@@ -129,7 +130,7 @@ export default class QSidebar extends Vue {
   }
 
   //计算右侧菜单元素滚动高度
-  initRightBoxItemTops () {
+  initRightBoxItemTops() {
     const query: SelectorQuery = uni.createSelectorQuery().in(this)
     //存储右侧菜单滚动时的临界点
     const node: NodesRef = query.selectAll('.' + this.uuid + '.sidebar-right-item')
@@ -163,7 +164,7 @@ export default class QSidebar extends Vue {
   }
 
   //传入左侧选中 样式类
-  leftMenuClick (index: number) {
+  leftMenuClick(index: number) {
     //如果选中的当前的，则直接返回
     if (index === this.chooseIndex) return
     this.leftScrollToIndex(index)
@@ -171,13 +172,13 @@ export default class QSidebar extends Vue {
     this.rightBoxScrollIntoId = 'sidebar-right-' + index
   }
 
-  leftScrollToIndex (index: number) {
+  leftScrollToIndex(index: number) {
     //设置当前
     this.chooseIndex = index
     this.leftBoxScrollTop = this.leftItemTops[index]
   }
 
-  rightBoxScroll (e) {
+  rightBoxScroll(e) {
     const scrollTop = e.detail.scrollTop
     const scrollIndex = this.rightItemTops.findIndex((item, index) => {
       const height1 = item
@@ -190,7 +191,7 @@ export default class QSidebar extends Vue {
 
 
   //最后一个元素占满屏幕高度，如果不给额外高度，无法滚动到最后一个，因为是靠上边界决定左侧菜单的
-  get rightLastHeightPx () {
+  get rightLastHeightPx() {
     return this.componentHeight + 'px'
   }
 }

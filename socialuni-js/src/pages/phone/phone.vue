@@ -1,22 +1,17 @@
 <template>
-  <qc-login v-if="isAuthApp"></qc-login>
-  <social-phone v-else></social-phone>
+  <login class="h100p"></login>
 </template>
 
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import QcLogin from '@/pages/login/QcLogin.vue'
-import SocialPhone from '@/pages/phone/SocialPhone.vue'
-import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
+import {Component, Vue} from 'vue-property-decorator'
+import Login from "@/pages/login/login.vue";
 
 @Component({
   components: {
-    SocialPhone,
-    QcLogin
+    Login
   }
 })
 export default class PhonePage extends Vue {
-  isAuthApp = SocialuniConfig.authApp
 }
 </script>

@@ -50,7 +50,7 @@ import CenterUserDetailRO from "@/socialuni/model/social/CenterUserDetailRO";
 import {socialUserModule, socialUserStore} from '@/socialuni/store'
 import ImgFileVO from "@/socialuni/model/ImgFileVO";
 import AlertUtil from "@/socialuni/utils/AlertUtil";
-import SocialuniReportDialog from "@/pagesLazy/report/SocialuniReportDialog.vue";
+import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
 import ReportContentType from "@/socialuni/constant/ReportContentType";
 import CosUtil from "@/socialuni/utils/CosUtil";
 import DomFile from "@/socialuni/model/DomFile";

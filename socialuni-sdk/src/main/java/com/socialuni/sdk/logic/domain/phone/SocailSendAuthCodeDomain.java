@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.phone;
 
-import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
@@ -67,7 +67,7 @@ public class SocailSendAuthCodeDomain {
         AuthenticationDO authenticationDO = authRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
         if (authenticationDO != null) {
             Date lastDate = authenticationDO.getCreateTime();
-            Integer authCodeInterval = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeIntervalKey);
+            Integer authCodeInterval = SocialuniAppConfig.appMoreConfig.getAuthCodeInterval();
             long canDate = lastDate.getTime() + authCodeInterval * DateTimeType.second;
             long curDate = new Date().getTime();
             if (curDate < canDate) {
@@ -75,9 +75,9 @@ public class SocailSendAuthCodeDomain {
             }
         }
         //都是默认30次
-        final Integer userLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeCountKey);
+        final Integer userLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodeCount();
 //        final Integer ipLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeIpCountKey);
-        final Integer phoneLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodePhoneCountKey);
+        final Integer phoneLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodePhoneCount();
         //首先查手机号总次数，如果大于1，则不行
         Integer phoneNumCount = authRepository.countByPhoneNum(phoneNum);
 

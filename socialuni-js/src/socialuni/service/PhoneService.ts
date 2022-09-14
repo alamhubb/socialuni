@@ -1,16 +1,16 @@
-import { socialSystemModule, socialUserModule } from '../store'
+import {socialSystemModule, socialUserModule} from '../store'
 import ToastUtil from '../utils/ToastUtil'
 import PhoneAPI from '../api/socialuni/PhoneAPI'
 import UniLoginUtil from '../utils/UniLoginUtil'
 
 export default class PhoneService {
-  static async bindPhoneNum (phoneNum: string, authCode: string) {
+  static async bindPhoneNum(phoneNum: string, authCode: string) {
     //手机号绑定
     const user = await PhoneAPI.bindPhoneNumAPI(phoneNum, authCode)
     socialUserModule.setUser(user)
   }
 
-  static async bindWxPhoneNum (wxGetPhoneInfoResult: any) {
+  static async bindWxPhoneNum(wxGetPhoneInfoResult: any) {
     if (wxGetPhoneInfoResult.detail.errMsg === 'getPhoneNumber:ok') {
       /**
        * 在回调中调用 wx.login 登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，
@@ -26,8 +26,7 @@ export default class PhoneService {
       const res = await PhoneAPI.bindWxPhoneNumAPI(wxGetPhoneInfoResult.detail)
       socialUserModule.setUser(res.data)
     } else {
-      ToastUtil.toast('您选择了不绑定')
-      throw Error('您选择了不绑定')
+      ToastUtil.error('您选择了不绑定')
     }
   }
 }

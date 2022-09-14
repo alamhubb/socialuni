@@ -36,12 +36,6 @@
       "style": {
         "navigationStyle": "custom"
       }
-    },
-    {
-      "path": "pages/oAuth/oAuth",
-      "style": {
-        "navigationStyle": "custom"
-      }
     }
   ],
   "subPackages": [

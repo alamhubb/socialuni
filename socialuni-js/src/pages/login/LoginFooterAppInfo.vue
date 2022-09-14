@@ -1,13 +1,13 @@
 <template>
   <!--      底部客服信息-->
   <div class="row-between">
-    <navigator :url="homeUrl" class="u-type-info u-border-bottom">
+    <navigator v-if="homeUrl" :url="homeUrl" class="u-type-info u-border-bottom">
       <q-icon icon="home" size="15" class="mr-xs"></q-icon>
       查看官网
     </navigator>
 
-    <view @click="copyServiceNum" class="flex-row u-type-info u-border-bottom">
-      客服{{ isMpQQ ? 'QQ' : '微信' }}：{{ qqService }}
+    <view v-if="serviceWeChat" @click="copyServiceNum" class="flex-row u-type-info u-border-bottom">
+      客服微信：{{ serviceWeChat }}
       <q-icon icon="attach" size="15" class="ml-xs"></q-icon>
     </view>
   </div>
@@ -16,9 +16,8 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import UniUtil from '../../socialuni/utils/UniUtil'
-import ConfigMap from '../../socialuni/constant/ConfigMap'
 import SkipUrlConst from '../../socialuni/constant/SkipUrlConst'
-import {socialConfigStore, socialSystemStore} from '../../socialuni/store'
+import {socialConfigModule, socialSystemStore} from '../../socialuni/store'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
 
@@ -26,15 +25,18 @@ import SystemStoreProp from '@/socialuni/store/SystemStoreProp'
   components: {QIcon}
 })
 export default class LoginFooterAppInfo extends Vue {
-  @socialConfigStore.Getter(ConfigMap.qqServiceKey) qqService: string
   @socialSystemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
+
+  get serviceWeChat() {
+    return socialConfigModule.appConfig.serviceWeChat
+  }
 
   get homeUrl(): string {
     return SkipUrlConst.homeUrl()
   }
 
   copyServiceNum() {
-    UniUtil.textCopy('491369310', '客服联系方式已复制')
+    UniUtil.textCopy(this.serviceWeChat, '客服联系方式已复制')
   }
 }
 </script>

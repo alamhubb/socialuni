@@ -13,6 +13,9 @@ import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Component
 @Slf4j
 public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
@@ -30,14 +33,12 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
 
         if (SocialuniAppConfig.appConfig.getHomeTabName().equals(homeTabName)) {
             socialHomeTabTalkQueryBO.setAdCode(null);
-        } else if (homeTabName.equals(SocialuniAppConfig.appConfig.getCityTabName())) {
-            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰
+        } else if (Arrays.asList(SocialuniAppConfig.appConfig.getCityTabName(), SocialuniAppConfig.appConfig.getFollowTabName()).contains(homeTabName)) {
+            //无用逻辑，仅为注释作用，city已经是null，但为了逻辑清晰，城市和关注无需处理
             socialHomeTabTalkQueryBO.setCircleId(null);
         } else {
             this.generateQueryBOByNotHomeCityOthers(queryQO, mineUser, socialHomeTabTalkQueryBO);
         }
-
-
         return socialHomeTabTalkQueryBO;
     }
 
