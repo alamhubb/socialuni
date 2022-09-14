@@ -1,5 +1,6 @@
-package com.socialuni.web.controller;
+package com.socialuni.sdk.controller;
 
+import com.socialuni.sdk.feignAPI.SocialuniLoginAPI;
 import com.socialuni.sdk.logic.service.login.SocialuniLoginService;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
@@ -19,24 +20,17 @@ import javax.validation.Valid;
  * 目前认为用不到这个类,社交联盟不提供登录功能，只提供授权功能
  */
 @RestController
-@RequestMapping("login")
-public class SocialuniLoginController{
+public class SocialuniLoginController implements SocialuniLoginAPI {
     @Resource
     private SocialuniLoginService centerLoginService;
+
     //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
-    @PostMapping("providerLogin")
+    @Override
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
         return centerLoginService.providerLogin(loginData);
     }
 
-
-    //三方渠道登录，qq、wx、社交联盟，兼容各平台，h5、app、mp
-    @PostMapping("socialuniPhoneLogin")
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> socialuniPhoneLogin(@RequestBody @Valid SocialProviderLoginQO loginData) {
-        return centerLoginService.socialuniPhoneLogin(loginData);
-    }
-
-    @PostMapping("phoneLogin")
+    @Override
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(@RequestBody @Valid SocialPhoneNumQO socialPhoneNumQO) {
         ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = centerLoginService.phoneLogin(socialPhoneNumQO);
         return resultRO;

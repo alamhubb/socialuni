@@ -1,5 +1,6 @@
-package com.socialuni.web.controller;
+package com.socialuni.sdk.controller;
 
+import com.socialuni.sdk.feignAPI.SocialuniPhoneAPI;
 import com.socialuni.sdk.logic.service.phone.SocialuniPhoneService;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
@@ -16,7 +17,6 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("phone")
 public class SocialuniPhoneController implements SocialuniPhoneAPI {
     @Resource
     SocialuniPhoneService socialuniPhoneService;
@@ -25,18 +25,12 @@ public class SocialuniPhoneController implements SocialuniPhoneAPI {
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
         return socialuniPhoneService.sendAuthCode(authCodeQO);
     }
-
     @Override
-    public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        return socialuniPhoneService.phoneLogin(socialPhoneNumQO);
-    }
-
-    @PostMapping("bindWxPhoneNum")
     public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(@RequestBody @Valid SocialBindWxPhoneNumQO bindWxPhoneNumQO) {
         return socialuniPhoneService.bindWxPhoneNum(bindWxPhoneNumQO);
     }
 
-    @PostMapping("bindPhoneNum")
+    @Override
     public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(@RequestBody @Valid SocialPhoneNumQO phoneNumQO) {
         return socialuniPhoneService.bindPhoneNum(phoneNumQO);
     }
