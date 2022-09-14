@@ -1,7 +1,5 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.constant.SocialuniConst;
-import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
@@ -16,7 +14,6 @@ import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.utils.TalkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -24,7 +21,6 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -88,12 +84,14 @@ public class TalkQueryStore {
         if (mineUser != null) {
             mineUserGender = mineUser.getGender();
         }
-
-
+        Boolean hasPeopleImgNeedIdentity = null;
+        if (queryBO.getHasPeopleImgNeedIdentity()) {
+            hasPeopleImgNeedIdentity = true;
+        }
         //查询所有talkId
         //需要连接用户表查询，后面不需要重复筛选，因为已经基础过滤出来了这些值，后面与合并逻辑，所以不需要在过滤
         List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, queryBO.getAdCode(),
-                talkVisibleGender, mineUserGender, null, queryBO.getQueryTime(), queryBO.getHasPeopleImgTalkNeedIdentity());
+                talkVisibleGender, mineUserGender, null, queryBO.getQueryTime(), hasPeopleImgNeedIdentity);
 
         List<Integer> tagIds = queryBO.getTagIds();
         //没选择tag的情况，

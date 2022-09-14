@@ -2,6 +2,7 @@ package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkOperateType;
+import com.socialuni.sdk.dao.DO.talk.*;
 import com.socialuni.sdk.dao.repository.community.*;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
@@ -10,10 +11,6 @@ import com.socialuni.sdk.logic.manage.talk.SocialTalkCreateManage;
 import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkCircleDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkTagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
@@ -62,6 +59,9 @@ public class SocialTalkPostDomain {
     SocialTalkCircleRepository socialTalkCircleRepository;
     @Resource
     ModelContentCheck modelContentCheck;
+    @Resource
+    TalkAdultAuditRepository talkAdultAuditRepository;
+
 
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
@@ -78,6 +78,14 @@ public class SocialTalkPostDomain {
         TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
         SocialTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
         reportDomain.checkKeywordsCreateReport(talkDO);
+
+        //如果用户包含人物头像,且用户未认证
+        if (talkDO.getHasPeopleImg() && !talkDO.getIdentityAuth()) {
+            //则添加一条待审核的动态，qq平台只查询审核通过的动态
+            SocialTalkAdultAuditDO socialTalkAdultAuditDO = new SocialTalkAdultAuditDO(talkDO.getUnionId());
+            talkAdultAuditRepository.save(socialTalkAdultAuditDO);
+        }
+
         //不使用图片安全校验
         //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
         SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);

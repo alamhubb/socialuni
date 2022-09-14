@@ -9,6 +9,7 @@ import java.io.Serializable;
 @MappedSuperclass
 @Data
 public class SocialImgBaseDO extends SocialUnionContentBaseDO implements Serializable {
+    @Column(nullable = false, updatable = false)
     private Integer contentId;
 
     @Column(nullable = false, updatable = false)

@@ -28,7 +28,7 @@ public class SocialHomeTabTalkQueryBO {
     private Integer devId;
     //查询圈子内容，需要设置circleid
     private Integer circleId;
-    //排除未实名认证的图片内容
-    private Boolean hasPeopleImgTalkNeedIdentity;
+    //仅查询成年审核通过的照片动态
+    private Boolean hasPeopleImgNeedIdentity;
     private Boolean userHasSchoolNam;
 }

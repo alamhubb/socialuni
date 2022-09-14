@@ -2,12 +2,14 @@ package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.sdk.constant.platform.UniappProviderType;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.sdk.utils.model.DO.SocialuniCircleDOUtil;
 import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +25,13 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
         //如果后台配置了，则以后台为主，如果后台为null则看前台传值，
         SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.appConfig;
         //优先使用后台配置
-        socialHomeTabTalkQueryBO.setHasPeopleImgTalkNeedIdentity(socialuniAppConfigBO.getHasSchoolCanPostTalk());
+        socialHomeTabTalkQueryBO.setHasPeopleImgNeedIdentity(socialuniAppConfigBO.getHasSchoolCanPostTalk());
         socialHomeTabTalkQueryBO.setUserHasSchoolNam(socialuniAppConfigBO.getHasSchoolCanPostTalk());
+
+        //qq渠道默认查询认证的用户内容
+        if (UniappProviderType.qq.equals(RequestUtil.getProvider())){
+            socialHomeTabTalkQueryBO.setHasPeopleImgNeedIdentity(true);
+        }
 
 
         if (SocialuniAppConfig.appConfig.getHomeTabName().equals(homeTabName)) {

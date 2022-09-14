@@ -16,9 +16,6 @@ import java.util.List;
 @RestController
 public class SocialuniTalkController implements SocialuniTalkAPI {
     @Resource
-    private SocialuniTalkAPI socialuniTalkAPI;
-
-    @Resource
     private SocialuniTalkService socialuniTalkService;
 
     @Override

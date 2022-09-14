@@ -61,17 +61,9 @@ public class TalkDOFactory {
             }
         }
 
+        //用户是否已经认证
         Boolean userIdentityAuth = SocialuniUserUtil.getUserIsIdentityAuth(user.getUnionId());
-        //如果存在人物图像，则不可发表
-        if (talkDO.getHasPeopleImg()) {
-            if (!userIdentityAuth) {
-                throw new SocialBusinessException("完成成年认证，才能发布包含人物图像的图片");
-            }
-        }
-
-
-        //是否已经认证
-        talkDO.setIdentityAuth(SocialuniUserUtil.getUserIsIdentityAuth(user.getUnionId()));
+        talkDO.setIdentityAuth(userIdentityAuth);
 
         Integer talkUnionId = UnionIdDbUtil.createTalkUnionId();
         talkDO.setUnionId(talkUnionId);
