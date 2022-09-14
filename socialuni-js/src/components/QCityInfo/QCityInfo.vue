@@ -1,19 +1,22 @@
 <template>
   <div>
-    <div v-if="value" class="q-tag-warn bd-round row-col-center" @click="openCityPicker">
+    <div @click="openCityPicker" class="row-col-center">
       <q-icon icon="map-fill" size="14" class="mb-nm"/>
-      <template v-if="value.adCode">
-        {{ value.provinceName }}
-        <template v-if="value.cityName">
-          -{{ value.cityName }}
+      <div v-if="value" class="q-tag-warn bd-round row-col-center">
+        <template v-if="value.adCode">
+          {{ value.provinceName }}
+          <template v-if="value.cityName">
+            -{{ value.cityName }}
+          </template>
+          <template v-if="value.districtName">
+            -{{ value.districtName }}
+          </template>
         </template>
-        <template v-if="value.districtName">
-          -{{ value.districtName }}
-        </template>
-      </template>
-      <text v-else>
-        {{ value.adName }}
-      </text>
+        <text v-else>
+          {{ value.adName }}
+        </text>
+      </div>
+      <div v-else>中国</div>
     </div>
     <q-city-picker v-if="picker" ref="cityPicker" :value="value" @input="input"></q-city-picker>
   </div>

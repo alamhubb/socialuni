@@ -60,7 +60,6 @@ export default class SocialLocationModule extends VuexModule {
   }
 
   setLocation(district: DistrictVO) {
-    console.log(district)
     //只要开启过定位就不再关闭
     //如果空值则默认中国，后台定位不到有时候会返回空，11.21此逻辑已修改，无论如何后台不会返回空
     if (!district || !district.adCode) {
