@@ -3,8 +3,6 @@ package com.socialuni.sdk.utils;
 import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
-import com.socialuni.sdk.dao.repository.UnionIdRepository;
-import com.socialuni.sdk.dao.store.UnionIdStore;
 import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +22,6 @@ import java.util.regex.Pattern;
 @Component
 @Slf4j
 public class UnionIdDbUtil {
-    private static UnionIdRepository unionIdRepository;
-    private static UnionIdStore unionIdStore;
-
     private static UniContentUnionIdRepository uniContentUnionIdRepository;
 
     @Resource
@@ -34,15 +29,6 @@ public class UnionIdDbUtil {
         UnionIdDbUtil.uniContentUnionIdRepository = uniContentUnionIdRepository;
     }
 
-    @Resource
-    public void setUnionIdRepository(UnionIdRepository unionIdRepository) {
-        UnionIdDbUtil.unionIdRepository = unionIdRepository;
-    }
-
-    @Resource
-    public void setUnionIdStore(UnionIdStore unionIdStore) {
-        UnionIdDbUtil.unionIdStore = unionIdStore;
-    }
 
     //根据空的创建， 本系统写入数据时，需要先创建，然后写入内容表unionId，然后再根据返回内容更新uid
     public static Integer createUserUnionId() {
@@ -85,11 +71,11 @@ public class UnionIdDbUtil {
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
     public static UniContentUnionIdDO getUnionDOByUnionIdNotNull(Integer unionId) {
         if (unionId == null) {
-            throw new SocialParamsException("无效的内容标示4");
+            throw new SocialParamsException("无效的内容标识4");
         }
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(unionId);
         if (uniContentUnionIdDO == null) {
-            throw new SocialParamsException("无效的内容标示5");
+            throw new SocialParamsException("无效的内容标识5");
         }
         return uniContentUnionIdDO;
     }
@@ -102,7 +88,7 @@ public class UnionIdDbUtil {
 
     public static String createUidByUid(String contentType, String uuid) {
         if (StringUtils.isEmpty(uuid)) {
-            throw new SocialParamsException("无效的内容标示3");
+            throw new SocialParamsException("无效的内容标识3");
         }
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(uuid);
         //没有写入
@@ -133,7 +119,7 @@ public class UnionIdDbUtil {
     //外部使用可能查询不存在的
     public static UniContentUnionIdDO getUnionByUidAllowNull(String uuid) {
         if (StringUtils.isEmpty(uuid)) {
-            throw new SocialParamsException("无效的内容标示1");
+            throw new SocialParamsException("无效的内容标识1");
         }
         return uniContentUnionIdRepository.findByUuid(uuid);
     }
@@ -191,7 +177,7 @@ public class UnionIdDbUtil {
 //        return resultRO;
 
         if (StringUtils.isEmpty(unionId)) {
-            throw new SocialParamsException("无效的内容标示1");
+            throw new SocialParamsException("无效的内容标识1");
         }
         UniContentUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(unionId);
         if (uniContentUnionIdDO == null) {
@@ -203,7 +189,7 @@ public class UnionIdDbUtil {
         //判断uid有效
         Optional<UnionIdDO> contentUnionIdDOOptional = unionIdRepository.findFirstByUnionIdOrderByIdDesc(unionId);
         if (!contentUnionIdDOOptional.isPresent()) {
-            throw new SocialParamsException("无效的内容标示");
+            throw new SocialParamsException("无效的内容标识");
         }
 
         UnionIdDO contentUnionIdDO = contentUnionIdDOOptional.get();
@@ -214,7 +200,7 @@ public class UnionIdDbUtil {
 
         //类型不对应
         if (!contentUnionIdDO.getContentType().equals(contentType)) {
-            throw new SocialParamsException("无效的内容标示2");
+            throw new SocialParamsException("无效的内容标识2");
         }
 
         Integer devId = DevAccountUtils.getDevIdNotNull();

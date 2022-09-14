@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.socialuni.sdk.dao.mapper.TalkImgMapper">
+    <select id="queryTalkImgsTop3ByTalkUidOrderByIdAsc" resultType="com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO">
+        SELECT t.*
+        FROM
+        s_talk_img t
+        WHERE
+        <if test="hasPeopleImgTalkNeedIdentity != null">
+            (t.has_people_img = false or (t.has_people_img = true and t.identity_auth = true))
+        </if>
+        order by t.id asc LIMIT 3
+    </select>
+</mapper>
+
+

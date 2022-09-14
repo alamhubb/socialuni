@@ -33,7 +33,6 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
             socialHomeTabTalkQueryBO.setHasPeopleImgNeedIdentity(true);
         }
 
-
         if (SocialuniAppConfig.appConfig.getHomeTabName().equals(homeTabName)) {
             socialHomeTabTalkQueryBO.setAdCode(null);
         } else if (homeTabName.equals(SocialuniAppConfig.appConfig.getCityTabName())) {

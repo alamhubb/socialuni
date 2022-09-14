@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.factory;
 
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
+import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
@@ -129,12 +130,12 @@ public class SocialTalkROFactory {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, SocialTalkDO talkDO, SocialuniHomeTabTalkQueryQO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, SocialTalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserDO mineUser, List<SocialTalkDO> talkDOS, SocialuniHomeTabTalkQueryQO queryVO) {
+    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserDO mineUser, List<SocialTalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -148,7 +149,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, SocialTalkDO talkDO, Boolean showAllComment, SocialuniHomeTabTalkQueryQO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, SocialTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialuniTalkRO socialTalkRO = new SocialuniTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
@@ -166,7 +167,7 @@ public class SocialTalkROFactory {
 
         socialTalkRO.setContent(talkDO.getContent());
         //70毫秒，可缓存
-        List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(talkDO.getUnionId());
+        List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkUid(talkDO.getUnionId(), queryVO.getHasPeopleImgNeedIdentity());
 //        List<TalkImgDO> imgDOS = talkDO.getImgs();
         if (imgDOS != null && imgDOS.size() > 0) {
             socialTalkRO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
@@ -270,7 +271,7 @@ public class SocialTalkROFactory {
 
         if (queryVO == null) {
             RectangleVO rectangleVO = MapUtil.getRectangle();
-            queryVO = new SocialuniHomeTabTalkQueryQO();
+            queryVO = new SocialHomeTabTalkQueryBO();
             if (rectangleVO != null) {
                 queryVO.setLat(rectangleVO.getLat());
                 queryVO.setLon(rectangleVO.getLon());

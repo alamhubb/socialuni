@@ -65,24 +65,22 @@ public class SocialuniHomeTalkQueryDomain {
     public List<SocialuniTalkRO> queryHomeTabTalks(SocialuniHomeTabTalkQueryQO queryQO) {
         //根据不同的tab区分不同的查询逻辑
         String homeTabName = queryQO.getHomeTabName();
-
         //获取当前用户
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
+        //校验gender类型,生成BO，包含业务逻辑
+        SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
         //得到数据库talk
         List<SocialTalkDO> talkDOS;
         if (homeTabName.equals(TalkTabType.follow_name)) {
             //查询关注的用户
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else {
-            //校验gender类型,生成BO，包含业务逻辑
-            SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
-
             //支持你修改bo
             talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO);
         }
         //转换为rolist
-        List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryQO);
+        List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryBO);
         return socialTalkROs;
     }
 

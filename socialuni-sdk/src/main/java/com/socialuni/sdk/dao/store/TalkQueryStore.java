@@ -84,14 +84,10 @@ public class TalkQueryStore {
         if (mineUser != null) {
             mineUserGender = mineUser.getGender();
         }
-        Boolean hasPeopleImgNeedIdentity = null;
-        if (queryBO.getHasPeopleImgNeedIdentity()) {
-            hasPeopleImgNeedIdentity = true;
-        }
         //查询所有talkId
         //需要连接用户表查询，后面不需要重复筛选，因为已经基础过滤出来了这些值，后面与合并逻辑，所以不需要在过滤
         List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, queryBO.getAdCode(),
-                talkVisibleGender, mineUserGender, null, queryBO.getQueryTime(), hasPeopleImgNeedIdentity);
+                talkVisibleGender, mineUserGender, null, queryBO.getQueryTime());
 
         List<Integer> tagIds = queryBO.getTagIds();
         //没选择tag的情况，

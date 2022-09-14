@@ -17,10 +17,7 @@ public interface TalkMapper {
             @Param("talkVisibleGender") String talkVisibleGender,
             @Param("mineUserGender") String mineUserGender,
             @Param("devId") Integer devId,
-            @Param("queryTime") Date queryTime,
-//            @Param("mineUserId") Integer mineUserId,
-//            @Param("mineTalkStatus") List<String> mineTalkStatus,
-            @Param("hasPeopleImgTalkNeedIdentity") Boolean hasPeopleImgTalkNeedIdentity
+            @Param("queryTime") Date queryTime
     );
 
     List<Integer> queryTalkIdsByAndTag(@Param("tagIds") List<Integer> tagIds);
