@@ -49,22 +49,6 @@ public class TalkDOFactory {
         talkDO.setVisibleGender(socialTalkPostQO.getVisibleGender());
         talkDO.setVisibleType(socialTalkPostQO.getVisibleType());
 
-        //是否包含图片
-        if (socialTalkPostQO.getImgs().size() > 0) {
-            List<SocialTalkImgAddQO> imgs = socialTalkPostQO.getImgs();
-            for (SocialTalkImgAddQO img : imgs) {
-                Boolean hasPeople = ImgCheckUtil.hasPeopleImg(img.getSrc());
-                if (hasPeople) {
-                    talkDO.setHasPeopleImg(true);
-                    break;
-                }
-            }
-        }
-
-        //用户是否已经认证
-        Boolean userIdentityAuth = SocialuniUserUtil.getUserIsIdentityAuth(user.getUnionId());
-        talkDO.setIdentityAuth(userIdentityAuth);
-
         Integer talkUnionId = UnionIdDbUtil.createTalkUnionId();
         talkDO.setUnionId(talkUnionId);
         return talkDO;

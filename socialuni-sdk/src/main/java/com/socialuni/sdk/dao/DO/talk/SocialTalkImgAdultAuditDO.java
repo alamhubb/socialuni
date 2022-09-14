@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_talk_adult_audit",
+@Table(name = "s_talk_img_adult_audit",
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
                 @UniqueConstraint(columnNames = {"contentId"})
@@ -17,11 +17,11 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialTalkAdultAuditDO extends SocialContentBaseDO implements Serializable {
+public class SocialTalkImgAdultAuditDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer contentUid;
 
-    public SocialTalkAdultAuditDO(Integer contentUid) {
+    public SocialTalkImgAdultAuditDO(Integer contentUid) {
         this.contentUid = contentUid;
     }
 }

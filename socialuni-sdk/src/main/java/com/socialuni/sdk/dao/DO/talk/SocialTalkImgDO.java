@@ -21,5 +21,13 @@ import java.io.Serializable;
 )
 @Data
 public class SocialTalkImgDO extends SocialImgBaseDO implements Serializable {
+    //发表商户
+    private Boolean hasPeopleImg;
+    private Boolean adultAuth;
 
+    //do 只有一个构造
+    public SocialTalkImgDO() {
+        this.hasPeopleImg = false;
+        this.adultAuth = false;
+    }
 }

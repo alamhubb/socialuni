@@ -12,12 +12,14 @@ import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
 import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.logic.service.tag.TagService;
 import com.socialuni.sdk.utils.DistrictStoreUtils;
+import com.socialuni.sdk.utils.ImgCheckUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
@@ -60,7 +62,7 @@ public class SocialTalkPostDomain {
     @Resource
     ModelContentCheck modelContentCheck;
     @Resource
-    TalkAdultAuditRepository talkAdultAuditRepository;
+    TalkAdultImgAuditRepository talkAdultAuditRepository;
 
 
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
@@ -79,12 +81,18 @@ public class SocialTalkPostDomain {
         SocialTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
         reportDomain.checkKeywordsCreateReport(talkDO);
 
-        //如果用户包含人物头像,且用户未认证
-        if (talkDO.getHasPeopleImg() && !talkDO.getIdentityAuth()) {
-            //则添加一条待审核的动态，qq平台只查询审核通过的动态
-            SocialTalkAdultAuditDO socialTalkAdultAuditDO = new SocialTalkAdultAuditDO(talkDO.getUnionId());
-            talkAdultAuditRepository.save(socialTalkAdultAuditDO);
+        List<SocialTalkImgDO> imgDOS = talkDO.getImgs();
+
+        for (SocialTalkImgDO imgDO : imgDOS) {
+            //如果用户包含人物头像,且用户未认证
+            if (imgDO.getHasPeopleImg() && !imgDO.getAdultAuth()) {
+                //则添加一条待审核的动态，qq平台只查询审核通过的动态
+                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(talkDO.getUnionId());
+                talkAdultAuditRepository.save(socialTalkAdultAuditDO);
+            }
         }
+
+
 
         //不使用图片安全校验
         //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
@@ -158,6 +166,7 @@ public class SocialTalkPostDomain {
 
         SocialTalkDO talkDO = socialTalkCreateManage.createTalkDO(userDO, socialTalkPostQO, district);
 
+
         List<SocialTalkTagDO> list = new ArrayList<>();
 
         for (TagDO tagDO : tags) {
@@ -170,12 +179,23 @@ public class SocialTalkPostDomain {
 
         List<SocialTalkImgDO> imgDOS = TalkImgDOFactory.newTalkImgDOS(socialTalkPostQO.getImgs());
 
+        //用户是否已经认证
+        Boolean userIdentityAuth = SocialuniUserUtil.getUserIsIdentityAuth(talkDO.getUserId());
+
         for (SocialTalkImgDO imgDO : imgDOS) {
             imgDO.setContentId(talkDO.getUnionId());
             imgDO.setUserId(talkDO.getUserId());
+            //是否包含图片
+            boolean hasPeople = ImgCheckUtil.hasPeopleImg(imgDO.getSrc());
+            if (hasPeople) {
+                imgDO.setHasPeopleImg(true);
+            }
+            //是否成年认证通过
+            imgDO.setAdultAuth(userIdentityAuth);
         }
 
         List<SocialTalkImgDO> talkImgDOS = talkImgRepository.saveAll(imgDOS);
+        talkDO.setImgs(talkImgDOS);
 
         if (socialCircleDO != null) {
             SocialTalkCircleDO socialTalkCircleDO = new SocialTalkCircleDO();
@@ -183,7 +203,6 @@ public class SocialTalkPostDomain {
             socialTalkCircleDO.setCircleId(socialCircleDO.getId());
             socialTalkCircleRepository.save(socialTalkCircleDO);
         }
-
         return talkDO;
     }
 }

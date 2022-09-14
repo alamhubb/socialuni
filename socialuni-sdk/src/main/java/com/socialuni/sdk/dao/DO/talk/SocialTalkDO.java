@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "s_talk", indexes = {
@@ -90,8 +91,11 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
     private Integer minAge;
     private Integer maxAge;
     //发表商户
-    private Boolean hasPeopleImg;
-    private Boolean identityAuth;
+//    private Boolean hasPeopleImg;
+//    private Boolean identityAuth;
+
+    @Transient
+    private List<SocialTalkImgDO> imgs;
 
     //do 只有一个构造
     public SocialTalkDO(Integer userId, String content) {
@@ -102,7 +106,5 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
         this.reportNum = 0;
         this.globalTop = 0;
         this.reportContentType = ContentType.talk;
-        this.hasPeopleImg = false;
-        this.identityAuth = false;
     }
 }
