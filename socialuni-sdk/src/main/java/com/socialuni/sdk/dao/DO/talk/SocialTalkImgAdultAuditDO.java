@@ -12,16 +12,16 @@ import java.io.Serializable;
 @Table(name = "s_talk_img_adult_audit",
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
-                @UniqueConstraint(columnNames = {"contentId"})
+                @UniqueConstraint(columnNames = {"talkImgId"})
         }
 )
 @Data
 @NoArgsConstructor
 public class SocialTalkImgAdultAuditDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false)
-    private Integer contentUid;
+    private Integer talkImgId;
 
-    public SocialTalkImgAdultAuditDO(Integer contentUid) {
-        this.contentUid = contentUid;
+    public SocialTalkImgAdultAuditDO(Integer talkImgId) {
+        this.talkImgId = talkImgId;
     }
 }

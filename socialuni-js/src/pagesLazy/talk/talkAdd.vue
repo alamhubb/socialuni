@@ -137,6 +137,7 @@ import {
   socialCircleModule,
   socialLocationModule,
   socialLocationStore,
+  socialSystemModule,
   socialTagModule,
   socialTagStore,
   socialTalkModule,
@@ -455,19 +456,22 @@ export default class TalkAddView extends Vue {
       // item.src = ImgUtil.imgUrl + item.cosSrc
     })
     const uploadRes: CosUploadResult[] = await CosUtil.postImgList(this.showImgFiles, this.cosAuthRO)
-    if (!this.user.identityAuth) {
-      for (const item of uploadRes) {
-        const index = uploadRes.findIndex(uploadResItem => uploadResItem === item)
-        const res: string = await TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO) as any
-        console.log('包含人物：' + res.includes('人'), res)
-        if (res.includes('人')) {
-          this.showImgFiles[index].needAuth = true
+    //qq平台才进行未成年人图片校验
+    if (socialSystemModule.isMpQQ) {
+      if (!this.user.identityAuth) {
+        for (const item of uploadRes) {
+          const index = uploadRes.findIndex(uploadResItem => uploadResItem === item)
+          const res: string = await TencentCosAPI.getImgTagAPI(item.Location, this.showImgFiles[index].src, this.cosAuthRO) as any
+          console.log('包含人物：' + res.includes('人'), res)
+          if (res.includes('人')) {
+            this.showImgFiles[index].needAuth = true
+          }
         }
-      }
-      for (const showImgFile of this.showImgFiles) {
-        if (showImgFile.needAuth) {
-          MsgUtil.uploadImgNeedAuthMsg()
-          break
+        for (const showImgFile of this.showImgFiles) {
+          if (showImgFile.needAuth) {
+            MsgUtil.uploadImgNeedAuthMsg()
+            break
+          }
         }
       }
     }

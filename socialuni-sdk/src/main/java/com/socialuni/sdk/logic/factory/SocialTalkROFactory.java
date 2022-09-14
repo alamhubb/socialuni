@@ -1,5 +1,6 @@
 package com.socialuni.sdk.logic.factory;
 
+import com.socialuni.sdk.constant.platform.UniappProviderType;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
@@ -29,6 +30,7 @@ import com.socialuni.sdk.utils.TalkImgDOUtils;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -166,8 +168,10 @@ public class SocialTalkROFactory {
         socialTalkRO.setUser(socialTalkUserRO);
 
         socialTalkRO.setContent(talkDO.getContent());
+
+
         //70毫秒，可缓存
-        List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkUid(talkDO.getUnionId(), queryVO.getHasPeopleImgNeedIdentity());
+        List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkUid(talkDO.getUnionId());
 //        List<TalkImgDO> imgDOS = talkDO.getImgs();
         if (imgDOS != null && imgDOS.size() > 0) {
             socialTalkRO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));

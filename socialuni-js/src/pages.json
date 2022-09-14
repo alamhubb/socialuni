@@ -8,21 +8,15 @@
   },
   "pages": [
     {
-      "path": "pages/user/mine",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/talk/talk",
       "style": {
         "navigationStyle": "custom"
       }
     },
     {
-      "path": "pages/circle/circleLeaderCampaign",
+      "path": "pages/user/mine",
       "style": {
-        "navigationBarTitleText": "竞选"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -94,12 +88,6 @@
           "path": "notify/notify",
           "style": {
             "navigationBarTitleText": "通知列表"
-          }
-        },
-        {
-          "path": "circle/ApplyCircleMasterView",
-          "style": {
-            "navigationBarTitleText": "申请圈主"
           }
         }
       ]

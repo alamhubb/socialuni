@@ -1,5 +1,6 @@
 <template>
   <view class="article">
+    <q-navbar>创建话题</q-navbar>
     <view class="pd-sm pt-0 bg-white solid-bottom">
       <view>
         <view class="cu-form-group">
@@ -34,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import TagVO from '../../socialuni/model/community/tag/TagVO'
 import TagAPI from '../../socialuni/api/socialuni/TagAPI'
 import ErrorConst from '../../socialuni/constant/ErrorConst'
@@ -48,17 +49,17 @@ export default class SocialTagAdd extends Vue {
   // tag描述
   tagDescription = ''
 
-  closePopup() {
+  closePopup () {
     this.$emit('close')
   }
 
-  checkTag(tag: TagVO) {
+  checkTag (tag: TagVO) {
     this.tagName = ''
     this.tagDescription = ''
     this.$emit('change', tag)
   }
 
-  addTagClick() {
+  addTagClick () {
     TagAPI.addTagAPI(this.tagName, this.tagDescription).then((res: any) => {
       this.checkTag(res.data)
     }).catch((res: ResultRO<TagVO>) => {
@@ -70,7 +71,7 @@ export default class SocialTagAdd extends Vue {
     })
   }
 
-  clearTagName() {
+  clearTagName () {
     this.tagName = ''
   }
 }

@@ -87,12 +87,10 @@ public class SocialTalkPostDomain {
             //如果用户包含人物头像,且用户未认证
             if (imgDO.getHasPeopleImg() && !imgDO.getAdultAuth()) {
                 //则添加一条待审核的动态，qq平台只查询审核通过的动态
-                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(talkDO.getUnionId());
+                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(imgDO.getId());
                 talkAdultAuditRepository.save(socialTalkAdultAuditDO);
             }
         }
-
-
 
         //不使用图片安全校验
         //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());

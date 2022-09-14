@@ -1,8 +1,11 @@
 package com.socialuni.sdk.utils;
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
+import com.socialuni.sdk.constant.platform.UniappProviderType;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.dao.mapper.TalkImgMapper;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
+import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +19,11 @@ public class TalkImgDOUtils {
     private static TalkImgMapper talkImgMapper;
 
     @Resource
+    public void setTalkImgMapper(TalkImgMapper talkImgMapper) {
+        TalkImgDOUtils.talkImgMapper = talkImgMapper;
+    }
+
+    @Resource
     public void setTalkImgRepository(TalkImgRepository talkImgRepository) {
         TalkImgDOUtils.talkImgRepository = talkImgRepository;
     }
@@ -27,9 +35,11 @@ public class TalkImgDOUtils {
     }
 
     //根据id列表从缓存中读取talk列表
-    public static List<SocialTalkImgDO> findTop3ByTalkUid(Integer talkId, Boolean hasPeopleImgTalkNeedIdentity) {
+    public static List<SocialTalkImgDO> findTop3ByTalkUid(Integer talkId) {
+        Boolean hasPeopleImgTalkNeedIdentity = SocialuniAppConfig.appConfig.getTalkImgNeedAdultAuth();
+        //qq渠道默认查询认证的用户内容
         Boolean hasPeopleImgTalkNeedIdentityCopy = null;
-        if (hasPeopleImgTalkNeedIdentity) {
+        if (hasPeopleImgTalkNeedIdentity || UniappProviderType.qq.equals(RequestUtil.getProvider())) {
             hasPeopleImgTalkNeedIdentityCopy = true;
         }
         return talkImgMapper.queryTalkImgsTop3ByTalkUidOrderByIdAsc(talkId, hasPeopleImgTalkNeedIdentityCopy);

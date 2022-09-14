@@ -1,26 +1,40 @@
 package com.socialuni.sdk.dao.DO.talk;
 
+import com.socialuni.sdk.dao.DO.SocialCommonBaseDO;
+import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
 import com.socialuni.sdk.dao.DO.base.SocialImgBaseDO;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "s_talk_img",
         indexes = {
                 @Index(columnList = "contentId")
-        },
-        uniqueConstraints = {
-                //一个人只能关注另一个人一次
-                @UniqueConstraint(columnNames = {"src"})
         }
 )
 @Data
-public class SocialTalkImgDO extends SocialImgBaseDO implements Serializable {
+public class SocialTalkImgDO extends SocialCommonBaseDO implements Serializable {
+    @Column(nullable = false, updatable = false)
+    private Integer contentId;
+
+    @Column(nullable = false, updatable = false)
+    private Integer userId;
+
+    @Column(nullable = false, updatable = false)
+    private String src;
+
+    @Column(nullable = false, updatable = false)
+    private Double aspectRatio;
+
+    //压缩率
+    private Double quality;
+    //图片大小
+    private Integer size;
+
+    private String content;
+
     //发表商户
     private Boolean hasPeopleImg;
     private Boolean adultAuth;

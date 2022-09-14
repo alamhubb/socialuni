@@ -25,13 +25,8 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
         //如果后台配置了，则以后台为主，如果后台为null则看前台传值，
         SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.appConfig;
         //优先使用后台配置
-        socialHomeTabTalkQueryBO.setHasPeopleImgNeedIdentity(socialuniAppConfigBO.getHasSchoolCanPostTalk());
+//        socialHomeTabTalkQueryBO.setHasPeopleImgNeedIdentity(socialuniAppConfigBO.getNeedAdultCanPostPeoplePhoto());
         socialHomeTabTalkQueryBO.setUserHasSchoolNam(socialuniAppConfigBO.getHasSchoolCanPostTalk());
-
-        //qq渠道默认查询认证的用户内容
-        if (UniappProviderType.qq.equals(RequestUtil.getProvider())){
-            socialHomeTabTalkQueryBO.setHasPeopleImgNeedIdentity(true);
-        }
 
         if (SocialuniAppConfig.appConfig.getHomeTabName().equals(homeTabName)) {
             socialHomeTabTalkQueryBO.setAdCode(null);

@@ -15,9 +15,6 @@ public class SocialTalkImgROFactory {
 
     public static SocialuniTalkImgRO newTalkImgRO(SocialTalkImgDO socialTalkImgDO) {
         SocialuniTalkImgRO socialTalkImgRO = new SocialuniTalkImgRO();
-        String uid = UnionIdDbUtil.getUidByUnionIdNotNull(socialTalkImgDO.getUnionId());
-        socialTalkImgRO.setId(uid);
-
         socialTalkImgRO.setSrc(SocialAppConfig.getStaticResourceUrl()  + socialTalkImgDO.getSrc());
         socialTalkImgRO.setAspectRatio(socialTalkImgDO.getAspectRatio());
         return socialTalkImgRO;

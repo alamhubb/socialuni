@@ -30,7 +30,7 @@ public class SocialuniAppType {
         defaultAppConfigBO.setHomeTabName("首页");
         defaultAppConfigBO.setCityTabName("同城");
         defaultAppConfigBO.setTabNames(Arrays.asList("关注", "首页", "同城"));
-        defaultAppConfigBO.setNeedAdultCanPostPeoplePhoto(true);
+        defaultAppConfigBO.setTalkImgNeedAdultAuth(true);
         SocialuniAppType.defaultAppConfigBO = defaultAppConfigBO;
 
 

@@ -5,9 +5,9 @@
         SELECT t.*
         FROM
         s_talk_img t
-        WHERE
+        WHERE t.content_id = #{talkUid}
         <if test="hasPeopleImgTalkNeedIdentity != null">
-            (t.has_people_img = false or (t.has_people_img = true and t.identity_auth = true))
+            and (t.has_people_img = false or (t.has_people_img = true and t.identity_auth = true))
         </if>
         order by t.id asc LIMIT 3
     </select>

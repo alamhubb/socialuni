@@ -29,6 +29,6 @@ public class SocialHomeTabTalkQueryBO {
     //查询圈子内容，需要设置circleid
     private Integer circleId;
     //仅查询成年审核通过的照片动态
-    private Boolean hasPeopleImgNeedIdentity;
+//    private Boolean hasPeopleImgNeedIdentity;
     private Boolean userHasSchoolNam;
 }

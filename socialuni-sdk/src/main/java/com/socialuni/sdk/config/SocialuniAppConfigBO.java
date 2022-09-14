@@ -15,7 +15,7 @@ public class SocialuniAppConfigBO {
     private List<String> tabNames;
 
     //配置1，是否成年认证才可以发表自拍
-    private Boolean needAdultCanPostPeoplePhoto = false;
+    private Boolean talkImgNeedAdultAuth = false;
     //配置2，是否填写校园才可以发帖
     private Boolean hasSchoolCanPostTalk = false;
     //配置3，应用性别
