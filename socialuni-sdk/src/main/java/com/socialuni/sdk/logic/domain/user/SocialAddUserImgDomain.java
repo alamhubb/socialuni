@@ -24,7 +24,7 @@ public class SocialAddUserImgDomain {
     public SocialuniMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
 
         SocialUserImgDO userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
-        userRepository.save(mineUser);
+//        userRepository.save(mineUser);
         userImgRepository.save(userImgDO);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
