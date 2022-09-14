@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.config.SocialAppEnv;
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
@@ -11,6 +12,7 @@ import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +86,9 @@ public class SocialuniTalkPostDomain {
         tagNames.add(devTagDO.getName());
         talkPostQO.setTagNames(tagNames);*/
 
+        if (SocialuniAppConfig.appConfig.getHasSchoolCanPostTalk()) {
+            SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
+        }
         SocialuniTalkRO socialTalkRO = socialTalkPostDomain.postTalk(talkPostQO);
 
         return socialTalkRO;
