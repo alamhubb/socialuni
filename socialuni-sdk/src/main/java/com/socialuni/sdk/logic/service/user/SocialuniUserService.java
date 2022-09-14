@@ -53,16 +53,19 @@ public class SocialuniUserService {
     }
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
-        SocialuniUserDetailRO userDetailRO;
         if (SocialAppConfig.serverIsChild()) {
-            ResultRO<SocialuniUserDetailRO> resultRO = socialuniUserAPI.queryUserDetail(userId);
-            userDetailRO = new SocialuniUserDetailRO(resultRO.getData());
+            return socialuniUserAPI.queryUserDetail(userId);
         } else {
+            SocialuniUserDetailRO userDetailRO;
             SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
             SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUid(userId);
-            userDetailRO = SocialuniUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
+            if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
+                userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
+            } else {
+                userDetailRO = SocialuniUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
+            }
+            return new ResultRO<>(userDetailRO);
         }
-        return new ResultRO<>(userDetailRO);
     }
 
 

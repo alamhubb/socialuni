@@ -1,9 +1,9 @@
 spring:
   profiles:
 #    active: dev
-    active: schooldev
+#    active: schooldev
 #    active: local
-#    active: prod
+    active: prod
   datasource:
     initialization-mode: never
     data: classpath:dataInit/data.sql

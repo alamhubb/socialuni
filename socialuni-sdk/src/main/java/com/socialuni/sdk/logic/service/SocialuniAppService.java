@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.service;
 
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.logic.factory.SocialHomeSwiperROFactory;
@@ -31,7 +32,7 @@ public class SocialuniAppService {
 
     public ResultRO<SocialAppLaunchDataRO> getAppConfig() {
         SocialAppLaunchDataRO appInitData = new SocialAppLaunchDataRO();
-        appInitData.setAppConfig(AppConfigConst.appConfigMap);
+        appInitData.setAppConfig(SocialuniAppConfig.appMoreConfig);
 //        appInitData.setOnlineUsersCount(WebsocketServer.getOnlineCount());
         appInitData.setReportTypes(ViolateType.frontShowReportTypes);
         return new ResultRO<>(appInitData);

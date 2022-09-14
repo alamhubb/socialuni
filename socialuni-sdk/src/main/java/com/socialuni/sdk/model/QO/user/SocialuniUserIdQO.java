@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class SocialUserIdQO {
+public class SocialuniUserIdQO {
     @NotNull
-    private Integer userId;
+    private String userId;
 }
