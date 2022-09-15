@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.service.user;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
@@ -47,7 +47,7 @@ public class SocialuniUserIdentityService {
 
 
     public ResultRO<SocialUserIdentityAuthPreCheckRO> userIdentityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
-        Integer resScore = TencentCloud.imgAuthGetScore(SocialAppConfig.getStaticResourceUrl() + socialUseIdentityAuthQO.getIdImgUrl(), SocialAppConfig.getStaticResourceUrl() + socialUseIdentityAuthQO.getSelfieImgUrl());
+        Integer resScore = TencentCloud.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
             throw new SocialBusinessException("预校验失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }
@@ -66,7 +66,7 @@ public class SocialuniUserIdentityService {
         OcrClient client = TencentCloud.getOcrClient();
         // 实例化一个请求对象,每个接口都会对应一个request对象
         IDCardOCRRequest req = new IDCardOCRRequest();
-        req.setImageUrl(SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl());
+        req.setImageUrl(SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl());
         // 返回的resp是一个IDCardOCRResponse的实例，与请求对象对应
         IDCardOCRResponse resp = null;
         try {
@@ -77,7 +77,7 @@ public class SocialuniUserIdentityService {
         if (StringUtils.isEmpty(resp.getBirth())) {
             throw new SocialBusinessException("请上传真实的身份信息，" + ErrorMsg.CONTACT_SERVICE);
         }
-        Integer resScore = TencentCloud.imgAuthGetScore(SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl(), SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthQO.getSelfieImgUrl());
+        Integer resScore = TencentCloud.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
             throw new SocialBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }

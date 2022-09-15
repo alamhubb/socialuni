@@ -4,7 +4,7 @@ import com.socialuni.admin.web.model.ReportUserVO;
 import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,8 +33,8 @@ public class UserIdentityAuditRO {
         this.success = true;
         this.id = socialUserIdentityAuthDO.getId();
         this.user = new ReportUserVO(userDO);
-        this.userIdImgSrc = SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthImgDO.getUserIdImgSrc();
-        this.userSelfieImgSrc = SocialAppConfig.getStaticResourceUrl() + socialUserIdentityAuthImgDO.getUserSelfieImgSrc();
+        this.userIdImgSrc = SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthImgDO.getUserIdImgSrc();
+        this.userSelfieImgSrc = SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthImgDO.getUserSelfieImgSrc();
         this.preCheckScore = socialUserIdentityAuthImgDO.getPreCheckScore();
         this.age = socialUserIdentityAuthDO.getAge();
         this.birth = socialUserIdentityAuthDO.getBirth();

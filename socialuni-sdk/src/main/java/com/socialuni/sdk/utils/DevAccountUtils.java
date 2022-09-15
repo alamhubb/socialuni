@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
@@ -101,7 +101,7 @@ public class DevAccountUtils {
     }*/
 
     public static Integer getCenterDevIdNotNull() {
-        String socialuniId = SocialAppConfig.getCenterSocialuniId();
+        String socialuniId = SocialuniSystemConst.getCenterSocialuniId();
         if (StringUtils.isEmpty(socialuniId)) {
             return null;
         }

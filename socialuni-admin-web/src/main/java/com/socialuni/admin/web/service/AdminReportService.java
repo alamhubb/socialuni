@@ -12,7 +12,7 @@ import com.socialuni.sdk.dao.DO.ReportDetailDO;
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.logic.service.BaseModelUtils;
@@ -80,7 +80,7 @@ public class AdminReportService {
         //判断是否违规
         if (reportDOOptional.isPresent()) {
             List<NotifyDO> notifyDOS = new ArrayList<>();
-            Integer systemUserId = SocialAppConfig.getSystemUserId();
+            Integer systemUserId = SocialuniSystemConst.getSystemUserId();
             ReportDO reportDO = reportDOOptional.get();
             //为待审核才继续处理
             if (ReportStatus.auditStatus.contains(reportDO.getStatus())) {

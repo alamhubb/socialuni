@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.domain.report;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.constant.config.AppConfigStatic;
@@ -69,7 +69,7 @@ public class ReportDomain {
     public void checkImgCreateReport(SocialTalkDO talkDO, List<SocialTalkImgAddQO> imgs) {
         if (imgs.size() > 0) {
             for (SocialTalkImgAddQO img : imgs) {
-                String imgFullUrl = SocialAppConfig.getStaticResourceUrl() + img.getSrc();
+                String imgFullUrl = SocialuniSystemConst.getStaticResourceUrl() + img.getSrc();
                 WxUtil.checkImgSecPost(imgFullUrl);
                 QQUtil.checkImgSecPost(imgFullUrl);
             }

@@ -1,9 +1,8 @@
 package com.socialuni.sdk.logic.factory;
 
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkImgRO;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
 import lombok.Data;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class SocialTalkImgROFactory {
 
     public static SocialuniTalkImgRO newTalkImgRO(SocialTalkImgDO socialTalkImgDO) {
         SocialuniTalkImgRO socialTalkImgRO = new SocialuniTalkImgRO();
-        socialTalkImgRO.setSrc(SocialAppConfig.getStaticResourceUrl()  + socialTalkImgDO.getSrc());
+        socialTalkImgRO.setSrc(SocialuniSystemConst.getStaticResourceUrl()  + socialTalkImgDO.getSrc());
         socialTalkImgRO.setAspectRatio(socialTalkImgDO.getAspectRatio());
         return socialTalkImgRO;
     }

@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.manage;
 
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.factory.community.SocialTagDOFactory;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class SocialTagManage {
     }
 
     public TagDO createDevAccountTagDO(Integer devId, String appName) {
-        TagDO tagDO = SocialTagDOFactory.toTagDO(appName, "开发者对应的话题", SocialAppConfig.getSystemUserId());
+        TagDO tagDO = SocialTagDOFactory.toTagDO(appName, "开发者对应的话题", SocialuniSystemConst.getSystemUserId());
 
         tagDO.setTagTypeId(32);
         tagDO.setDevId(devId);

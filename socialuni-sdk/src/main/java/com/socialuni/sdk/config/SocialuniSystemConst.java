@@ -1,5 +1,6 @@
 package com.socialuni.sdk.config;
 
+import com.socialuni.sdk.constant.DevEnvType;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2019-09-28 10:06
  */
 @Component
-public class SocialAppConfig {
+public class SocialuniSystemConst {
     private static String userDefaultAvatar;
     private static Integer systemUserId;
     private static String staticResourceUrl;
@@ -24,38 +25,38 @@ public class SocialAppConfig {
     //放model合适只有创建时候才需要赋值这个
     @Value("${socialuni.user.user-default-avatar:https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png!avatar}")
     public void setUserDefaultAvatar(String userDefaultAvatar) {
-        SocialAppConfig.userDefaultAvatar = userDefaultAvatar;
+        SocialuniSystemConst.userDefaultAvatar = userDefaultAvatar;
     }
 
     @Value("${socialuni.app.static-resource-url}")
     public void setStaticResourceUrl(String staticResourceUrl) {
-        SocialAppConfig.staticResourceUrl = staticResourceUrl;
+        SocialuniSystemConst.staticResourceUrl = staticResourceUrl;
     }
 
     @Value("${socialuni.app.system-user-id}")
     public void setSystemUserId(Integer systemUserId) {
-        SocialAppConfig.systemUserId = systemUserId;
+        SocialuniSystemConst.systemUserId = systemUserId;
     }
 
 
     @Value("${socialuni.secret-key:#{null}}")
     public void setSocialuniDevSecretKey(String socialuniDevSecretKey) {
-        SocialAppConfig.socialuniDevSecretKey = socialuniDevSecretKey;
+        SocialuniSystemConst.socialuniDevSecretKey = socialuniDevSecretKey;
     }
 
     @Value("${socialuni.central-server-url:https://api.socialuni.cn}")
     public void setSocialuniServerUrl(String socialuniServerUrl) {
-        SocialAppConfig.socialuniServerUrl = socialuniServerUrl;
+        SocialuniSystemConst.socialuniServerUrl = socialuniServerUrl;
     }
 
     @Value("${socialuni.central-socialuni-id:17e212a46c7b4e5ebc70a934bef4ed27}")
     public void setCenterSocialuniId(String centerSocialuniId) {
-        SocialAppConfig.centerSocialuniId = centerSocialuniId;
+        SocialuniSystemConst.centerSocialuniId = centerSocialuniId;
     }
 
     @Value("${socialuni.socialuni-id:#{null}}")
     public void setAppSocialuniId(String appSocialuniId) {
-        SocialAppConfig.appSocialuniId = appSocialuniId;
+        SocialuniSystemConst.appSocialuniId = appSocialuniId;
     }
 
     public static String getUserDefaultAvatar() {
@@ -118,4 +119,18 @@ public class SocialAppConfig {
         //为空则异常
         return appSocialuniId;
     }
+
+    private static String activeEnv;
+
+    @Value("${spring.profiles.active}")
+    public void setActiveEnv(String activeEnv) {
+        SocialuniSystemConst.activeEnv = activeEnv;
+    }
+
+    //用来判断是否发送短信的
+    //用来判断生产环境不支持同步，不能往生产环境同步内容
+    public static Boolean getIsProdEnv() {
+        return activeEnv.equals(DevEnvType.prod);
+    }
+
 }

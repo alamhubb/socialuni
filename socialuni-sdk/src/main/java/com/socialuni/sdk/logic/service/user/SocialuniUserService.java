@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.service.user;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
@@ -13,7 +13,6 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
-import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
@@ -43,7 +42,7 @@ public class SocialuniUserService {
 
     public ResultRO<SocialuniMineUserDetailRO> getMineUser() {
         SocialuniMineUserDetailRO mineUserDetailRO;
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             ResultRO<SocialuniMineUserDetailRO> resultRO = socialuniUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniMineUserDetailRO(resultRO.getData());
         } else {
@@ -53,7 +52,7 @@ public class SocialuniUserService {
     }
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.queryUserDetail(userId);
         } else {
             SocialuniUserDetailRO userDetailRO;
@@ -73,7 +72,7 @@ public class SocialuniUserService {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.editUser(socialUserEditQO);
         }
 
@@ -85,7 +84,7 @@ public class SocialuniUserService {
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.addUserImg(socialUserImgAddQO);
         }
 
@@ -98,7 +97,7 @@ public class SocialuniUserService {
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
 
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.addUserAvatarImg(socialUserImgAddQO);
         }
 
@@ -112,14 +111,14 @@ public class SocialuniUserService {
         Integer userImgId = UnionIdDbUtil.getUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.deleteUserImg(centerUserImgDeleteQO);
         }
         return ResultRO.success(socialMineUserDetailRO);
     }
 
     public ResultRO<List<SocialuniUserImgRO>> getUserImgList(String userId) {
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.getUserImgList(userId);
         } else {
             Integer userUnionId = UnionIdDbUtil.getUnionIdByUidNotNull(userId);

@@ -5,7 +5,6 @@ import com.socialuni.sdk.logic.manage.SocialTagManage;
 import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
-import com.socialuni.sdk.config.SocialAppEnv;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
@@ -32,10 +31,9 @@ public class SoicialTagAddDomain {
     private SocialTagManage socialTagManage;
 
     public TagRO addTag(SocialuniUserDO mineUser, TagAddQO tagAddVO) {
-        if (SocialAppEnv.getIsDevProdEnv()) {
+        /*if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
-        }
-
+        }*/
         String tagName = tagAddVO.getTagName();
         if (tagName.length() > 6) {
             throw new SocialBusinessException("话题最多支持六个字");

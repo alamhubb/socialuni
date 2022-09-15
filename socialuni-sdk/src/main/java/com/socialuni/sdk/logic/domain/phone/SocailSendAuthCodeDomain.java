@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.domain.phone;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
@@ -60,37 +61,39 @@ public class SocailSendAuthCodeDomain {
             socialUserPhoneManage.checkBindPhoneNum(phoneNum, mineUser.getUnionId());
         }
 
-        //然后查ip总次数，大于2也不行
-        //然后查userId 大于2也不行
-        //时间，必须大于30秒，同一个手机号
-        //获取数据库的认证信息的验证码,校验时间10分钟可以发一次验证码
-        AuthenticationDO authenticationDO = authRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
-        if (authenticationDO != null) {
-            Date lastDate = authenticationDO.getCreateTime();
-            Integer authCodeInterval = SocialuniAppConfig.appMoreConfig.getAuthCodeInterval();
-            long canDate = lastDate.getTime() + authCodeInterval * DateTimeType.second;
-            long curDate = new Date().getTime();
-            if (curDate < canDate) {
-                throw new SocialBusinessException("获取验证码过于频繁，请稍候重试");
+        //生产环境才进行校验
+        if (SocialuniSystemConst.getIsProdEnv()) {
+            //然后查ip总次数，大于2也不行
+            //然后查userId 大于2也不行
+            //时间，必须大于30秒，同一个手机号
+            //获取数据库的认证信息的验证码,校验时间10分钟可以发一次验证码
+            AuthenticationDO authenticationDO = authRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
+            if (authenticationDO != null) {
+                Date lastDate = authenticationDO.getCreateTime();
+                Integer authCodeInterval = SocialuniAppConfig.appMoreConfig.getAuthCodeInterval();
+                long canDate = lastDate.getTime() + authCodeInterval * DateTimeType.second;
+                long curDate = new Date().getTime();
+                if (curDate < canDate) {
+                    throw new SocialBusinessException("获取验证码过于频繁，请稍候重试");
+                }
             }
-        }
-        //都是默认30次
-        final Integer userLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodeCount();
+            //都是默认30次
+            final Integer userLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodeCount();
 //        final Integer ipLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeIpCountKey);
-        final Integer phoneLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodePhoneCount();
-        //首先查手机号总次数，如果大于1，则不行
-        Integer phoneNumCount = authRepository.countByPhoneNum(phoneNum);
+            final Integer phoneLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodePhoneCount();
+            //首先查手机号总次数，如果大于1，则不行
+            Integer phoneNumCount = authRepository.countByPhoneNum(phoneNum);
 
-        if (mineUser != null) {
-            Integer userCount = authRepository.countByUserId(mineUser.getUnionId());
-            if (userCount >= userLimitCount) {
+            if (mineUser != null) {
+                Integer userCount = authRepository.countByUserId(mineUser.getUnionId());
+                if (userCount >= userLimitCount) {
 //                UserLogStoreUtils.save(new UserLogDO("用户获取达到获取验证码次数上限", user, phoneNum));
 //                return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
-                throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
+                    throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
+                }
             }
-        }
 //        Integer ipCount = authRepository.countByIp(userIp);
-        if (phoneNumCount >= phoneLimitCount) {
+            if (phoneNumCount >= phoneLimitCount) {
 //        if (phoneNumCount >= phoneLimitCount || ipCount >= ipLimitCount) {
             /*if (phoneNumCount >= phoneLimitCount) {
                 UserLogStoreUtils.save(new UserLogDO("手机号获取达到获取验证码次数上限", user, phoneNum));
@@ -98,7 +101,8 @@ public class SocailSendAuthCodeDomain {
                 UserLogStoreUtils.save(new UserLogDO("用户IP获取达到获取验证码次数上限", user, phoneNum));
             }
             return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);*/
-            throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
+                throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
+            }
         }
     }
 
@@ -109,7 +113,10 @@ public class SocailSendAuthCodeDomain {
         String userIp = IpUtil.getIpAddr();
 
         String phoneNum = authCodeQO.getPhoneNum();
+
+
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
+
 
         AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountUtils.getDevIdNotNull());
         authenticationDO.setStatus(StatusConst.fail);

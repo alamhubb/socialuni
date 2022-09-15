@@ -7,7 +7,7 @@ import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.dao.repository.UserImgRepository;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
@@ -45,7 +45,7 @@ public class TencentCloudCosService {
         } else {
             recordDO.setImgThumbType(ImgThumbnailType.original);
         }
-        String cosRootUrl = SocialAppConfig.getStaticResourceUrl();
+        String cosRootUrl = SocialuniSystemConst.getStaticResourceUrl();
         Integer cosRootLength = cosRootUrl.length();
         int subStrLength = 54;
         if (!(imgThumbTypes[0].length() > subStrLength)) {

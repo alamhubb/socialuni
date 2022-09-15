@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.factory.user.img;
 
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ContentType;
@@ -31,7 +31,7 @@ public class UserImgDOFactory {
         Integer userImgUnionId = UnionIdDbUtil.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
 
-        mineUser.setAvatar(SocialAppConfig.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");
+        mineUser.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");
 
         return userImgDO;
     }

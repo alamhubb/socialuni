@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.service.circle;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
@@ -43,7 +43,7 @@ public class SocialuniCircleService {
         ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
 
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             resultRO = socialuniCircleAPI.createCircle(circleCreateQO);
         }
         return resultRO;
@@ -52,14 +52,14 @@ public class SocialuniCircleService {
 
     public ResultRO<List<SocialCircleRO>> queryHotCircles() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniCircleAPI.queryHotCircles();
         }
         return ResultRO.success(socialCircleRedis.getHotCirclesRedis(GenderType.all));
     }
 
     public ResultRO<List<CircleTypeRO>> queryCircleTypes() {
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniCircleAPI.queryCircleTypes();
         }
         return ResultRO.success(socialCircleRedis.getAllCircleTypesRedis(GenderType.all));

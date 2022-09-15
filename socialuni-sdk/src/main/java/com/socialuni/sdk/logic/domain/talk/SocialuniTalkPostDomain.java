@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.domain.talk;
 
-import com.socialuni.sdk.config.SocialAppEnv;
 import com.socialuni.sdk.config.SocialuniAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
@@ -47,7 +47,7 @@ public class SocialuniTalkPostDomain {
 
         // 查询的时候筛选
         //系统管理员则不校验规则,生产环境才校验
-        if (SocialAppEnv.getIsProdEnv() && !UserType.system.equals(mineUser.getType())) {
+        if (SocialuniSystemConst.getIsProdEnv() && !UserType.system.equals(mineUser.getType())) {
             Date curDate = new Date();
             Date oneMinuteBefore = new Date(curDate.getTime() - DateTimeType.minute);
             //1分钟内不能发超过1条

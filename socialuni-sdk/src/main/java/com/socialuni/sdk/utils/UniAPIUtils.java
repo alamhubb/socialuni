@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.ContentAddQO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
@@ -54,10 +54,10 @@ public class UniAPIUtils {
         //判断这条动态是不是本应用的
         //mark 多库同步版本
         //都需要往中心推送，并且使用中心返回的unionId更新
-        String apiUrl = SocialAppConfig.getSocialuniServerUrl();
+        String apiUrl = SocialuniSystemConst.getSocialuniServerUrl();
         URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
         Map<String, Object> headerMap = new HashMap<String, Object>() {{
-            put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+            put(SocialFeignHeaderName.socialuniSecretKey, SocialuniSystemConst.getDevSecretKey());
         }};
         //执行本系统逻辑
         //根据本系统uid获取unionId

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.factory.community;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
@@ -19,7 +19,7 @@ public class SocialTagDOFactory implements Serializable {
         //先默认为1，以后设置可以更改选择类型
         tagDO.setTagTypeId(1);
         tagDO.setName(tagName);
-        tagDO.setAvatar(SocialAppConfig.getStaticResourceUrl() + "qingchi/static/qclogo.jpg!avatar");
+        tagDO.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + "qingchi/static/qclogo.jpg!avatar");
         tagDO.setDescription(tagDesc);
         tagDO.setStatus(ContentStatus.enable);
         tagDO.setCount(0);

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.service;
 
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.feignAPI.SocialuniFollowAPI;
 import com.socialuni.sdk.logic.domain.follow.SocialuniFollowUserDomain;
 import com.socialuni.sdk.model.QO.follow.SocialuniFollowAddQO;
@@ -25,7 +25,7 @@ public class SocialuniFollowService {
         //有问题，应该关注完刷新前台用户
         centerFollowUserDomain.addFlow(addQO);
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniFollowAPI.addFollow(addQO);
         }
         return new ResultRO<>();
@@ -35,7 +35,7 @@ public class SocialuniFollowService {
         //有问题，应该关注完刷新前台用户
         centerFollowUserDomain.cancelFollow(addQO);
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniFollowAPI.cancelFollow(addQO);
         }
         return new ResultRO<>();
@@ -43,7 +43,7 @@ public class SocialuniFollowService {
 
     public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniFollowAPI.queryUserFollows();
         }
         Map<String, List<SocialuniUserFollowDetailRO>> map = centerFollowUserDomain.queryUserFollows();

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.service;
 
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.comment.SocialuniCommentDeleteDomain;
 import com.socialuni.sdk.logic.domain.comment.SocialuniCommentPostDomain;
 import com.socialuni.sdk.feignAPI.SocialuniCommentAPI;
@@ -33,7 +33,7 @@ public class SocialuniCommentService {
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
         SocialuniCommentRO centerCommentRO = centerCommentPostDomain.postComment(centerCommentPostQO);
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
 //            return null;
             return UniAPIUtils.callUniAPIAndUpdateUid(centerCommentRO, socialuniCommentAPI::postComment, centerCommentPostQO);
         }
@@ -42,7 +42,7 @@ public class SocialuniCommentService {
 
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         centerCommentDeleteDomain.deleteComment(commentDeleteQO);
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniCommentAPI.deleteComment(commentDeleteQO);
         }
         return new ResultRO<>();

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.feignAPI.SocialuniHugAPI;
 import com.socialuni.sdk.logic.service.SocialuniHugService;
 import com.socialuni.sdk.model.QO.SocialuniHugAddQO;
@@ -20,7 +20,7 @@ public class SocialuniHugController implements SocialuniHugAPI {
     public ResultRO<Void> addHug(SocialuniHugAddQO socialHugAddQO) {
         centerHugAPIImpl.addHug(socialHugAddQO);
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniHugAPI.addHug(socialHugAddQO);
         }
         return new ResultRO<>();

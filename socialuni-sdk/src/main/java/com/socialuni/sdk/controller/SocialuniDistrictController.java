@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.feignAPI.SocialuniDistrictAPI;
 import com.socialuni.sdk.constant.AppData;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
@@ -22,7 +22,7 @@ public class SocialuniDistrictController implements SocialuniDistrictAPI {
     @Override
     public ResultRO<List<SocialDistrictRO>> queryHotDistricts() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniDistrictAPI.queryHotDistricts();
         }
         return new ResultRO<>(AppData.getHotDistricts());
@@ -31,7 +31,7 @@ public class SocialuniDistrictController implements SocialuniDistrictAPI {
     @Override
     public ResultRO<List<SocialDistrictRO>> queryDistricts() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniDistrictAPI.queryDistricts();
         }
         return new ResultRO<>(AppData.getAllDistricts());

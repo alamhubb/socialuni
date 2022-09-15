@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.tiia.v20190529.TiiaClient;
@@ -12,7 +12,7 @@ public class ImgCheckUtil {
         TiiaClient client = TencentCloud.getTiiaClient();
         // 实例化一个请求对象,每个接口都会对应一个request对象
         DetectLabelRequest req = new DetectLabelRequest();
-        req.setImageUrl(SocialAppConfig.getStaticResourceUrl() + imgUrl);
+        req.setImageUrl(SocialuniSystemConst.getStaticResourceUrl() + imgUrl);
         // 返回的resp是一个DetectLabelResponse的实例，与请求对象对应
         DetectLabelResponse resp = null;
         try {

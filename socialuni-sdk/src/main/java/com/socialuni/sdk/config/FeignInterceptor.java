@@ -49,7 +49,7 @@ public class FeignInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         //根据库里表有没有数据判断，是否调用，如果注册了，就在自己表里设置下，记录下。
 
-        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+        requestTemplate.header(SocialFeignHeaderName.socialuniSecretKey, SocialuniSystemConst.getDevSecretKey());
 
         String postUrl = requestTemplate.path();
 
@@ -83,20 +83,20 @@ public class FeignInterceptor implements RequestInterceptor {
                     socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
                     socialProviderLoginQO.setSystem(RequestUtil.getSystem());
                     socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
-                    if (SocialAppConfig.serverIsChild()) {
+                    if (SocialuniSystemConst.serverIsChild()) {
                         socialProviderLoginQO.setPhoneNum(phoneNum);
                     }
 //                    URI uri = URI.create(postUrl);
 //                    String absoluteUri = uri.getScheme() + "://" + uri.getAuthority();
 //                    URI determinedBasePathUri = URI.create(absoluteUri);
 
-                    String apiUrl = SocialAppConfig.getSocialuniServerUrl();
+                    String apiUrl = SocialuniSystemConst.getSocialuniServerUrl();
                     URI determinedBasePathUri = URI.create(Objects.requireNonNull(apiUrl));
 
 //                    Collection<String> headerKeyValues = requestTemplate.headers().get(SocialFeignHeaderName.socialuniSecretKey);
 //                    String devSecretKey = headerKeyValues.iterator().next();
                     Map<String, Object> headerMap = new HashMap<String, Object>() {{
-                        put(SocialFeignHeaderName.socialuniSecretKey, SocialAppConfig.getDevSecretKey());
+                        put(SocialFeignHeaderName.socialuniSecretKey, SocialuniSystemConst.getDevSecretKey());
                     }};
                     ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> resultRO = socialuniThirdUserAPI.registryUser(socialProviderLoginQO);
                     SocialLoginRO<SocialuniMineUserDetailRO> loginRO = resultRO.getData();

@@ -2,7 +2,7 @@ package com.socialuni.sdk.utils;
 
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
-import com.socialuni.sdk.config.SocialAppEnv;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +54,7 @@ public class TencentSmsServe {
         try {
             log.info("发送验证码authCode:{}", authCode);
             //生产环境才发送验证码
-            if (SocialAppEnv.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
+            if (SocialuniSystemConst.getIsProdEnv() && StringUtil.isNotEmpty(appKey)) {
                 SmsSingleSenderResult result = ssender.sendWithParam("86", phoneNum, templateId, params, smsSign, "", "");
                 if (result == null || result.result != 0) {
                     throw new SocialBusinessException("验证码发送失败，请稍候重试");

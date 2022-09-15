@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.sdk.constant.UserType;
@@ -40,7 +40,7 @@ public class SocialUserDOFactory {
     public static SocialuniUserDO newUserByPhoneLogin() {
         SocialuniUserDO user = new SocialuniUserDO();
         user.setNickname("未命名");
-        user.setAvatar(SocialAppConfig.getUserDefaultAvatar());
+        user.setAvatar(SocialuniSystemConst.getUserDefaultAvatar());
         user.setGender(GenderType.girl);
         user.setAge(SocialuniConst.defaultAge);
         user.setBirthday(BirthdayAgeUtil.getYearBirthDateByAge(user.getAge()));

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.service.report;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.report.SoicialReportAddDomain;
 import com.socialuni.sdk.feignAPI.SocialuniReportAPI;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
@@ -29,7 +29,7 @@ public class SocialuniReportService {
 
     public ResultRO<String> addReport(SocialuniReportAddQO centerReportAddQO) {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniReportAPI.addReport(centerReportAddQO);
         }
 

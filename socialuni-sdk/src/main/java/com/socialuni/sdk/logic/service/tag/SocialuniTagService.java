@@ -1,6 +1,6 @@
 package com.socialuni.sdk.logic.service.tag;
 
-import com.socialuni.sdk.config.SocialAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.tag.SoicialTagAddDomain;
 import com.socialuni.sdk.feignAPI.SocialuniTagAPI;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -32,7 +32,7 @@ public class SocialuniTagService {
         TagRO tagRO = soicialTagAddDomain.addTag(mineUser, tagAddQO);
 
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTagAPI.addTag(tagAddQO);
         }
 
@@ -41,7 +41,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagRO>> queryTags() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTagAPI.queryTags();
         }
         List<TagRO> tags = socialTagRedis.getAllTagsRedis(GenderType.all);
@@ -50,7 +50,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagRO>> queryHotTags() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTagAPI.queryHotTags();
         }
         List<TagRO> tags = socialTagRedis.getHotTagsRedis(GenderType.all);
@@ -60,7 +60,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagTypeRO>> queryTagTypes() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTagAPI.queryTagTypes();
         }
         List<TagTypeRO> tags = socialTagRedis.getAllTageTypesRedis(GenderType.all);
@@ -70,7 +70,7 @@ public class SocialuniTagService {
 
     public ResultRO<List<TagTypeRO>> queryHotTagTypes() {
         //如果应用，则调用中心
-        if (SocialAppConfig.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTagAPI.queryHotTagTypes();
         }
         List<TagTypeRO> tags = socialTagRedis.getHotTagTypesRedis(GenderType.all);
