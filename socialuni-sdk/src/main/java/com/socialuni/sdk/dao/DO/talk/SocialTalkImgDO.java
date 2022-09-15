@@ -33,6 +33,7 @@ public class SocialTalkImgDO extends SocialCommonBaseDO implements Serializable 
     //图片大小
     private Integer size;
 
+    //用来存储ocr后的图片内容，用户图片部分也需要相关功能
     private String content;
 
     //发表商户

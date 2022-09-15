@@ -72,6 +72,10 @@ public class SocialTalkPostDomain {
 
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
             modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
+
+            //不使用图片安全校验，原因是啥，今晚确认
+//            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
+            //还需要获取图片中的cor
         }
 
         //校验内容是否违规
@@ -91,9 +95,6 @@ public class SocialTalkPostDomain {
                 talkAdultAuditRepository.save(socialTalkAdultAuditDO);
             }
         }
-
-        //不使用图片安全校验
-        //        reportDomain.checkImgCreateReport(talkDO, talkPostQO.getImgs());
         SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
     }

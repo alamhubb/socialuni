@@ -66,7 +66,7 @@ public class ReportDomain {
     BaseModelService baseModelService;
 
     @Transactional
-    public void checkImgCreateReport(SocialTalkDO talkDO, List<SocialTalkImgAddQO> imgs) {
+    public void checkImgCreateReport(List<SocialTalkImgAddQO> imgs) {
         if (imgs.size() > 0) {
             for (SocialTalkImgAddQO img : imgs) {
                 String imgFullUrl = SocialuniSystemConst.getStaticResourceUrl() + img.getSrc();
