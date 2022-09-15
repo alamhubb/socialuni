@@ -1,5 +1,5 @@
 <template>
-  <view :class="[uuid]" class="q-sidebar-box h100p overflow-hidden flex-row">
+  <view :class="[uuid]" class="q-sidebar-box h100p overflow-hidden flex-row w100p">
     <scroll-view class="flex-none h100p" :scroll-top="leftBoxScrollTop" scroll-y
                  :style="{'width':leftBoxWidth/2+'px'}">
       <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-left-item" :key="index"
@@ -18,10 +18,10 @@
         <slot name="rightRow" v-bind:item="item"></slot>
       </view>
     </scroll-view>
-    <scroll-view v-else-if="dataList.length&&dataList[this.chooseIndex]" class="flex-1 h100p bg-default" scroll-y>
+    <scroll-view v-else-if="dataList.length" class="flex-1 h100p bg-default" scroll-y>
       <view :class="[uuid]" class="sidebar-right-item"
       >
-        <slot name="rightRow" v-bind:item="dataList[this.chooseIndex]"></slot>
+        <slot name="rightRow" v-bind:item="dataList[chooseIndex]"></slot>
       </view>
     </scroll-view>
   </view>
@@ -83,6 +83,12 @@ export default class QSidebar extends Vue {
   //渲染完毕后计算高度
   mounted() {
     this.initBoxItemTops()
+  }
+
+  get curChooseLeftData() {
+    if (this.dataList.length) {
+      return this.dataList[this.chooseIndex]
+    }
   }
 
   //数据变化时重新计算高度

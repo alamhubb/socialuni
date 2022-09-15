@@ -149,7 +149,7 @@
     /* SDK配置 */
     "usingComponents": true,
     "uniStatistics": {
-      "enable": true
+      "enable": false
     },
     "compilerVersion": 2
   },
@@ -171,7 +171,7 @@
       }
     },
     "uniStatistics": {
-      "enable": true
+      "enable": false
     }
   },
   "mp-qq": {
@@ -189,28 +189,28 @@
       }
     },
     "uniStatistics": {
-      "enable": true
+      "enable": false
     }
   },
   // 高速公路行驶持续后台定位
   "mp-alipay": {
     "usingComponents": true,
     "uniStatistics": {
-      "enable": true
+      "enable": false
     }
   },
   "mp-baidu": {
     "usingComponents": true,
     "appid": "17880065",
     "uniStatistics": {
-      "enable": true
+      "enable": false
     }
   },
   "mp-toutiao": {
     "usingComponents": true,
     "appid": "ttdfffa94240d52071",
     "uniStatistics": {
-      "enable": true
+      "enable": false
     }
   },
   // 高速公路行驶持续后台定位
@@ -221,7 +221,7 @@
     },
     "domain": "www.socialuni.cn",
     "uniStatistics": {
-      "enable": true
+      "enable": false
     }
   },
   /*全局关闭 uni统计*/

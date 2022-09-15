@@ -216,7 +216,7 @@ export default class SocialTalkModule extends VuexModule {
       const appTas = this.talkTabs.filter(item => item.appDefaultTab)
 
       //添加到第四个位置
-      this.talkTabs.splice(appTas.length - 1, 0, circleTab)
+      this.talkTabs.splice(appTas.length, 0, circleTab)
       //最多保存了9个
       this.talkTabs = this.talkTabs.slice(0, 9)
       return this.setCurTabIndexUpdateCircle(appTas.length)

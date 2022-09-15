@@ -4,8 +4,8 @@ export default class AppConfig {
 
   static readonly websocketUrl: string = process.env.VUE_APP_WEBSOCKET_URL
 
-  static readonly appName: string = '集美小世界app'
-  static readonly title: string = '集美小世界 - 女生日常分享交友圈'
+  static readonly appName: string = ''
+  static readonly title: string = '官网'
   static readonly keywords: string = '年轻人,扩列,处对象,交友,cdx,处qy,处vy,处闺蜜,处兄弟,谈恋爱,处cp,游戏,兴趣社区,年轻人交友,年轻人社区'
   static readonly description: string = '这是一个00后专属的交友app，00后，交友就上清池app，来这里找到你心怡的小哥哥小姐姐，找到一起开黑的小伙伴，找到志同道合的朋友'
 
