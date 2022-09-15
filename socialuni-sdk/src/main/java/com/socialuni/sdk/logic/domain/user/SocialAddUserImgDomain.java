@@ -1,5 +1,6 @@
 package com.socialuni.sdk.logic.domain.user;
 
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.user.img.UserImgDOFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -24,9 +25,7 @@ public class SocialAddUserImgDomain {
     public SocialuniMineUserDetailRO addUserImg(SocialUserImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
 
         SocialUserImgDO userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
-//        userRepository.save(mineUser);
         userImgRepository.save(userImgDO);
-
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         return socialMineUserDetailRO;
@@ -34,7 +33,7 @@ public class SocialAddUserImgDomain {
 
     public SocialuniMineUserDetailRO addUserAvatarImg(SocialUserImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
 
-        SocialUserImgDO userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
+        mineUser.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + socialUserImgAddQO.getSrc() + "!avatar");
         userRepository.save(mineUser);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
