@@ -4,7 +4,7 @@
       <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
     </template>
     <div class="h80vh">
-      <q-sidebar :dataList="showCircleTypes" class="flex-1 flex-row overflow-hidden">
+      <q-sidebar :dataList="showCircleTypes" class="flex-1 flex-row overflow-hidden" :right-scroll="false">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
             <view class="row-all-center flex-auto">
