@@ -1,9 +1,7 @@
-import { socialSystemModule } from '../store'
-import { socialConfig } from '../index'
+import {socialSystemModule} from '../store'
 import UniUserInfoRO from './UniUserInfoRO'
 import LoginProvider from '../constant/LoginProvider'
-import GetUserInfoRes = UniApp.GetUserInfoRes
-import PlatformType from '../constant/PlatformType'
+import GetUserInfoRes = UniApp.GetUserInfoRes;
 
 export default class UniProviderLoginQO {
   provider = ''
@@ -40,7 +38,7 @@ export default class UniProviderLoginQO {
   // appId = ''
   // secret = ''
 
-  constructor (providerCode: string, userInfoRes: GetUserInfoRes, userInfoRO: UniUserInfoRO, provider?: string) {
+  constructor(providerCode: string, userInfoRes: GetUserInfoRes, userInfoRO: UniUserInfoRO, provider?: string) {
     this.platform = socialSystemModule.platform
     //如果为小程序的话不传值，默认为小程序类型
     this.provider = provider || socialSystemModule.mpPlatform

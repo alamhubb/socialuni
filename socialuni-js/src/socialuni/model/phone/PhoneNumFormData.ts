@@ -1,7 +1,7 @@
 import NumberUtil from '../../utils/NumberUtil'
 
 export default class PhoneNumFormData {
-  phoneNum: string = '18600409559'
+  phoneNum: string = ''
   authCode: string = null
 
   static phoneNumberError(phoneNum) {

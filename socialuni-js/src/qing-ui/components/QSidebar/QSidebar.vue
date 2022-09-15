@@ -18,7 +18,7 @@
         <slot name="rightRow" v-bind:item="item"></slot>
       </view>
     </scroll-view>
-    <scroll-view v-else class="flex-1 h100p bg-default" scroll-y>
+    <scroll-view v-else-if="dataList.length&&dataList[this.chooseIndex]" class="flex-1 h100p bg-default" scroll-y>
       <view :class="[uuid]" class="sidebar-right-item"
       >
         <slot name="rightRow" v-bind:item="dataList[this.chooseIndex]"></slot>

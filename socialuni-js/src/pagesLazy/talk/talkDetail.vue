@@ -55,6 +55,7 @@ import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import TalkAPI from '@/socialuni/api/socialuni/TalkAPI'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
+import UniUtil from "@/socialuni/utils/UniUtil";
 
 @Component({
   components: {
@@ -75,6 +76,7 @@ export default class TalkDetail extends Vue {
   }
 
   onLoad(params) {
+    UniUtil.showShareMenu()
     const talkId = params.talkId
     TalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
       this.talk = res.data

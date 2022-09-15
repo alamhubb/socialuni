@@ -6,7 +6,6 @@ import ErrorConst from '../../constant/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
-import {socialConfig} from '../../index'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import SocialSystemInfo from '../../constant/SocialSystemInfo'
 import XmlUtil from '@/socialuni/utils/XmlUtil'
@@ -38,7 +37,7 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
   } else {
     config.header.token = null
   }
-  config.header.secretKey = socialConfig.secretKey
+  // config.header.secretKey = socialConfig.secretKey
   config.header.provider = socialSystemModule.mpPlatform
   config.header.platform = socialSystemModule.platform
   config.header.system = socialSystemModule.system
