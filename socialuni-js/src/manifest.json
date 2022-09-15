@@ -174,6 +174,24 @@
       "enable": true
     }
   },
+  "mp-qq": {
+    "usingComponents": true,
+    "appid": "1112240360",
+    "optimization": {
+      "subPackages": true
+    },
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      },
+      "scope.phoneNumber": {
+        "desc": "您的手机号将用于账号绑定"
+      }
+    },
+    "uniStatistics": {
+      "enable": true
+    }
+  },
   // 高速公路行驶持续后台定位
   "mp-alipay": {
     "usingComponents": true,
@@ -191,24 +209,6 @@
   "mp-toutiao": {
     "usingComponents": true,
     "appid": "ttdfffa94240d52071",
-    "uniStatistics": {
-      "enable": true
-    }
-  },
-  "mp-qq": {
-    "usingComponents": true,
-    "appid": "1109985787",
-    "optimization": {
-      "subPackages": true
-    },
-    "permission": {
-      "scope.userLocation": {
-        "desc": "你的位置信息将用于小程序位置接口的效果展示"
-      },
-      "scope.phoneNumber": {
-        "desc": "您的手机号将用于账号绑定"
-      }
-    },
     "uniStatistics": {
       "enable": true
     }

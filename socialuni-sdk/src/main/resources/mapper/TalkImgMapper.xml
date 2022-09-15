@@ -7,7 +7,7 @@
         s_talk_img t
         WHERE t.content_id = #{talkUid}
         <if test="hasPeopleImgTalkNeedIdentity != null">
-            and (t.has_people_img = false or (t.has_people_img = true and t.identity_auth = true))
+            and (t.has_people_img = false or (t.has_people_img = true and t.adult_auth = true))
         </if>
         order by t.id asc LIMIT 3
     </select>
