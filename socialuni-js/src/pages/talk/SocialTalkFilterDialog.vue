@@ -111,7 +111,6 @@ import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TalkFilterUtil from '@/socialuni/utils/TalkFilterUtil'
 import CityPicker from '@/components/QCityPicker/QCityPicker.vue'
 import DistrictVO from '@/socialuni/model/DistrictVO'
-import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
 import GenderType from '@/socialuni/constant/GenderType'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
@@ -140,7 +139,6 @@ export default class SocialTalkFilterDialog extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
   @socialTagStore.State('tags') readonly tags: TagVO []
-  @socialCircleStore.State('circleTypes') readonly circleTypes: CircleTypeRO []
   @socialCircleStore.State('circles') readonly circles: SocialCircleRO []
   @socialCircleStore.Getter('mineCirclesTop10') readonly mineCirclesTop10: string []
   @socialTagStore.Getter('mineTagsTop10') readonly mineTagsTop10: string []

@@ -36,7 +36,6 @@ export default class SocialAppModule extends VuexModule {
       socialTagModule.getHotTagsAction()
       socialTalkModule.getTalkTabs()
       socialCircleModule.getHotCirclesAction()
-      socialCircleModule.getCircleTypesAction()
       socialTagModule.getHotTagTypesAction()
       // socialCircleModule.getCircleTypesAction()
       socialLocationModule.getHotDistrictsAction()
