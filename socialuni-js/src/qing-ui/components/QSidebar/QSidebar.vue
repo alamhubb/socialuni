@@ -1,5 +1,5 @@
 <template>
-  <view :class="[uuid]" class="q-sidebar-box">
+  <view :class="[uuid]" class="q-sidebar-box h100p overflow-hidden flex-row">
     <scroll-view class="flex-none h100p" :scroll-top="leftBoxScrollTop" scroll-y
                  :style="{'width':leftBoxWidth/2+'px'}">
       <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-left-item" :key="index"
@@ -8,7 +8,7 @@
         <slot name="leftRow" v-bind:item="item" v-bind:index="index" v-bind:current="chooseIndex"></slot>
       </view>
     </scroll-view>
-    <scroll-view class="flex-1 h100p bg-default" :scroll-into-view="rightBoxScrollIntoId" scroll-y
+    <scroll-view v-if="rightScroll" class="flex-1 h100p bg-default" :scroll-into-view="rightBoxScrollIntoId" scroll-y
                  @scroll="rightBoxScroll">
       <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-right-item"
             :id="'sidebar-right-'+index"
@@ -16,6 +16,12 @@
             :style="{'height': index === dataList.length - 1 ? rightLastHeightPx : ''}"
       >
         <slot name="rightRow" v-bind:item="item"></slot>
+      </view>
+    </scroll-view>
+    <scroll-view v-else class="flex-1 h100p bg-default" scroll-y>
+      <view :class="[uuid]" class="sidebar-right-item"
+      >
+        <slot name="rightRow" v-bind:item="dataList[this.chooseIndex]"></slot>
       </view>
     </scroll-view>
   </view>
@@ -40,6 +46,7 @@ export default class QSidebar extends Vue {
    * 展示的数据
    */
   @Prop() readonly dataList: any []
+  @Prop({default: true, type: Boolean}) readonly rightScroll: boolean
   /**
    * 左侧菜单宽度
    */
