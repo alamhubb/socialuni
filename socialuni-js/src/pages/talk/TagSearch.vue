@@ -112,7 +112,7 @@ import {socialTagStore} from '../../socialuni/store'
     QIcon
   }
 })
-export default class TagSearchPage extends Vue {
+export default class TagSearch extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 

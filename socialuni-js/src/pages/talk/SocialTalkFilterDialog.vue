@@ -116,7 +116,7 @@ import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
 import GenderType from '@/socialuni/constant/GenderType'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
-import TagSearch from '@/components/SocialTalk/TagSearch.vue'
+import TagSearch from '@/pages/talk/TagSearch.vue'
 import SocialCirclePicker from '@/components/SocialCirclePicker.vue'
 
 

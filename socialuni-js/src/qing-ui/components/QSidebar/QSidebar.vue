@@ -8,7 +8,7 @@
         <slot name="leftRow" v-bind:item="item" v-bind:index="index" v-bind:current="chooseIndex"></slot>
       </view>
     </scroll-view>
-    <scroll-view class="flex-auto h100p bg-default" :scroll-into-view="rightBoxScrollIntoId" scroll-y
+    <scroll-view class="flex-1 h100p bg-default" :scroll-into-view="rightBoxScrollIntoId" scroll-y
                  @scroll="rightBoxScroll">
       <view v-for="(item,index) in dataList" :class="[uuid]" class="sidebar-right-item"
             :id="'sidebar-right-'+index"
@@ -81,7 +81,9 @@ export default class QSidebar extends Vue {
   //数据变化时重新计算高度
   @Watch('dataList')
   dataListWatch() {
-    this.initBoxItemTops()
+    this.$nextTick(() => {
+      this.initBoxItemTops()
+    })
   }
 
   //计算高度

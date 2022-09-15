@@ -140,9 +140,9 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
-import TalkItem from '../../components/SocialTalk/TalkItem.vue'
+import TalkItem from '../talk/talkItem/TalkItem.vue'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
-import TalkItemContent from '../../components/SocialTalk/TalkItemContent.vue'
+import TalkItemContent from '../talk/talkItem/TalkItemContent.vue'
 import UserInfo from './UserInfo.vue'
 import UniUtil from '../../socialuni/utils/UniUtil'
 import SkipUrlConst from '../../socialuni/constant/SkipUrlConst'

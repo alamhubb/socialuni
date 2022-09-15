@@ -25,5 +25,5 @@ public interface SocialuniTagTypeRepository extends JpaRepository<SocialuniTagTy
     @Cacheable(cacheNames = "tagTypeById", key = "#id")
     Optional<SocialuniTagTypeDO> findById(Integer id);
 
-    List<SocialuniTagTypeDO> findByStatusAndTalkCountGreaterThanOrderByOrderLevelDescTalkCountDesc(String status, Integer zeroCount);
+    List<SocialuniTagTypeDO> findByStatusOrderByOrderLevelDescTalkCountDesc(String status);
 }

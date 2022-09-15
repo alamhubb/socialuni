@@ -114,7 +114,7 @@ public class SocialTagRedis {
 
     private List<SocialuniTagTypeDO> getTagTypes() {
         //查询出来所有启用的类型的tagTypes，按talk数量排序
-        return tagTypeRepository.findByStatusAndTalkCountGreaterThanOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable, SocialuniConst.zero);
+        return tagTypeRepository.findByStatusOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable);
     }
 
     //给tagtype设置它的子标签

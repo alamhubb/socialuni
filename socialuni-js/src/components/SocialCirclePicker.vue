@@ -35,11 +35,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import {Component, Emit, Vue} from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import { socialCircleStore } from '@/socialuni/store'
+import {socialCircleStore} from '@/socialuni/store'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
@@ -61,7 +61,7 @@ export default class SocialCirclePicker extends Vue {
 
   circleSearchText = ''
 
-  get showCircleTypes () {
+  get showCircleTypes() {
     if (this.circleSearchText) {
       const showCircleTypes = this.circleTypes.reduce((all, item) => {
         const data = item.circles.filter(circle => circle.name.includes(this.circleSearchText))
@@ -78,16 +78,17 @@ export default class SocialCirclePicker extends Vue {
     }
   }
 
-  openDialog () {
+  openDialog() {
+    this.circleSearchText = ''
     this.$refs.circleChooseDialog.open()
   }
 
-  closeDialog () {
+  closeDialog() {
     this.$refs.circleChooseDialog.close()
   }
 
   @Emit()
-  change (circle: SocialCircleRO) {
+  change(circle: SocialCircleRO) {
     this.closeDialog()
     return circle
   }
