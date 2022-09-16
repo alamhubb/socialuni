@@ -79,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import FollowAddVO from '../../socialuni/model/FollowAddVO'
 import PagePath from '../../socialuni/constant/PagePath'
@@ -95,8 +95,7 @@ import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
 import AlertUtil from '../../socialuni/utils/AlertUtil'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
-import SocialuniConfig from '../../socialuni/config/SocialuniConfig'
-import {socialUserStore} from '../../socialuni/store'
+import { socialUserStore } from '../../socialuni/store'
 import SocialGenderTag from '@/components/SocialGenderTag/SocialGenderTag.vue'
 
 @Component({
@@ -117,46 +116,36 @@ export default class TalkItemHead extends Vue {
   followType: string = TalkTabType.follow_type
 
   @Watch('talkProp')
-  talkPropWatch() {
+  talkPropWatch () {
     this.talk = JsonUtils.deepClone(this.talkProp)
   }
 
-  created() {
+  created () {
     if (RouterUtil.getCurrentPageURI() === PagePath.userDetail) {
       this.isUserDetail = true
     }
   }
 
-  toIdentityAuth() {
+  toIdentityAuth () {
     MsgUtil.identityAuthHint()
   }
 
-  toLoveValuePage() {
-    if (this.user) {
-      if (SocialuniConfig.authApp) {
-        PageUtil.toLoveValuePage()
-      }
-    } else {
-      MsgUtil.unLoginMessage()
-    }
-  }
-
-  hintJusticeInfo() {
+  hintJusticeInfo () {
     ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
   // 自己不为null，且是自己
-  get isMine(): boolean {
+  get isMine (): boolean {
     return this.user && this.user.id === this.talk.user.id
   }
 
-  toUserDetailVue() {
+  toUserDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail) {
       PageUtil.toUserDetail(this.talk.user.id)
     }
   }
 
-  confirmDeleteTalk() {
+  confirmDeleteTalk () {
     AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
       TalkAPI.deleteTalkAPI(this.talk.id).then(() => {
@@ -165,11 +154,11 @@ export default class TalkItemHead extends Vue {
     })
   }
 
-  openVip() {
+  openVip () {
     PageUtil.toVipPage()
   }
 
-  addFollow() {
+  addFollow () {
     if (this.user) {
       if (!this.followBtnDisabled) {
         const followAdd: FollowAddVO = new FollowAddVO(this.talk.user.id)
@@ -194,15 +183,13 @@ export default class TalkItemHead extends Vue {
     }
   }
 
-  getGenderIcon(user
-                  :
+  getGenderIcon (user:
                   CenterUserDetailRO
   ) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor(user
-                     :
+  getGenderBgColor (user:
                      CenterUserDetailRO
   ) {
     return UserUtil.getGenderBgColor(user)

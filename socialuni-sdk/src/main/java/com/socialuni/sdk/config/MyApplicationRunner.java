@@ -48,6 +48,7 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         //如果为null，则为default类型
+        //初始化默认值
         if (socialuniAppConfig != null) {
             String appType = (String) socialuniAppConfig.getClass().getField("appType").get(null);
             if (appType == null) {

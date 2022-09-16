@@ -88,52 +88,45 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import TalkVO from '../../../socialuni/model/talk/TalkVO'
 import PagePath from '../../../socialuni/constant/PagePath'
 import ImgUtil from '../../../socialuni/utils/ImgUtil'
 import RouterUtil from '../../../socialuni/utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import GenderType from '../../../socialuni/constant/GenderType'
-import SocialuniConfig from '../../../socialuni/config/SocialuniConfig'
-import {socialTagModule, socialTalkModule} from '@/socialuni/store'
+import { socialTagModule, socialTalkModule } from '@/socialuni/store'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import MsgUtil from '@/socialuni/utils/MsgUtil'
 
 @Component({
-  components: {QIcon}
+  components: { QIcon }
 })
 export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
-  GenderTypeAll = GenderType.all
-  GenderTypeGirl = GenderType.girl
-  GenderTypeBoy = GenderType.boy
-  appGenderType = SocialuniConfig.appGenderType
-
-  toTalkDetailVue() {
+  toTalkDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
 
-  chooseCircle(circleName) {
+  chooseCircle (circleName) {
     AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
       socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
     })
   }
 
-  chooseTags(tagName) {
+  chooseTags (tagName) {
     AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
       socialTagModule.setSelectTagName(tagName)
     })
   }
 
-  getTalkLargeImgUrl(userId: string, src: string) {
+  getTalkLargeImgUrl (userId: string, src: string) {
     return ImgUtil.getTalkLargeImgUrl(userId, src)
   }
 
-  getTalkSmallImgUrl(userId: string, src: string) {
+  getTalkSmallImgUrl (userId: string, src: string) {
     return ImgUtil.getTalkSmallImgUrl(userId, src)
   }
 
@@ -145,18 +138,18 @@ export default class TalkItemContent extends Vue {
     })
   } */
 
-  previewImage(index) {
+  previewImage (index) {
     uni.previewImage({
       current: index,
       urls: this.talk.imgs.map(item => this.getTalkLargeImgUrl(this.talk.user.id, item.src))
     })
   }
 
-  goToThreeAppClick(appId, path) {
+  goToThreeAppClick (appId, path) {
     RouterUtil.navigateToMp(appId, path)
   }
 
-  toIdentityAuth() {
+  toIdentityAuth () {
     MsgUtil.identityAuthHint()
   }
 }

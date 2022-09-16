@@ -53,7 +53,6 @@ import PagePath from '../../socialuni/constant/PagePath'
 import TagVO from '../../socialuni/model/community/tag/TagVO'
 import RouterUtil from '../../socialuni/utils/RouterUtil'
 import PageUtil from '../../socialuni/utils/PageUtil'
-import TalkFilterUtil from '../../socialuni/utils/TalkFilterUtil'
 import UniUtil from '../../socialuni/utils/UniUtil'
 import {
   socialAppStore,
@@ -64,13 +63,10 @@ import {
   socialNotifyStore,
   socialTagModule,
   socialTagStore,
-  socialTalkModule,
   socialUserStore
 } from '../../socialuni/store'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
 import QButton from '../../qing-ui/components/QButton/QButton.vue'
-import GenderType from '../../socialuni/constant/GenderType'
-import SocialuniConfig from '../../socialuni/config/SocialuniConfig'
 import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
 import QSearch from '../../qing-ui/components/QSearch/QSearch.vue'
 import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
@@ -124,45 +120,15 @@ export default class TalkView extends Vue {
   @socialLocationStore.Getter('location') location: DistrictVO
 
   current = 0
-  // tag 相关
-  // 筛选相关
-  rangeMin: number = TalkFilterUtil.minAgeFilterDefault
-  rangMax: number = TalkFilterUtil.maxAgeFilterDefault
-  // 组件内的值
-  genderTypeValue: string = socialTalkModule.userGender
-  appGender: string = SocialuniConfig.appGenderType
-  GenderTypeAll = GenderType.all
-  rangeValue: number[] = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   unreadNotifiesNum = 0
-  // filter内容
-  showFilter = false
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
-
-  switchCircleTabValue (event: { detail: any }) {
-    const detail: {
-      current: number,
-      source: number
-    } = event.detail
-    this.current = detail.current
-  }
 
   get talkTabsTop () {
     if (socialConfigModule.appConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
       return socialConfigModule.appConfig.swiperHeight + 10
     }
     return 0
-  }
-
-  get visibleGenders () {
-    if (this.user) {
-      if (this.user.gender === GenderType.girl) {
-        return GenderType.talkQueryGirlEnums
-      } else {
-        return GenderType.talkQueryBoyEnums
-      }
-    }
-    return GenderType.talkQueryEnums
   }
 
   // life

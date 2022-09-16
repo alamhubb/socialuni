@@ -108,7 +108,6 @@ import TagVO from '@/socialuni/model/community/tag/TagVO'
 import TalkFilterUtil from '@/socialuni/utils/TalkFilterUtil'
 import CityPicker from '@/components/QCityPicker/QCityPicker.vue'
 import DistrictVO from '@/socialuni/model/DistrictVO'
-import SocialuniConfig from '@/socialuni/config/SocialuniConfig'
 import GenderType from '@/socialuni/constant/GenderType'
 import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
@@ -152,7 +151,6 @@ export default class SocialTalkFilterDialog extends Vue {
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
   showCityDialog = false
   district: DistrictVO = socialLocationModule.location
-  appGender: string = SocialuniConfig.appGenderType
   // 组件内的值
   genderTypeValue: string = socialTalkModule.userGender
 

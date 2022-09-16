@@ -6,8 +6,6 @@ import ErrorConst from '../../constant/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
-import SocialuniConfig from '../../config/SocialuniConfig'
-import SocialSystemInfo from '../../constant/SocialSystemInfo'
 import XmlUtil from '@/socialuni/utils/XmlUtil'
 import XmlResultRO from '@/socialuni/model/base/XmlResultRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
@@ -15,14 +13,7 @@ import UserService from '@/socialuni/service/UserService'
 
 const request: HttpRequest = new HttpRequest()
 
-let socialHttpUrl = process.env.VUE_APP_BASE_URL
-if (!socialHttpUrl) {
-  if (SocialSystemInfo.isDevMode) {
-    socialHttpUrl = SocialuniConfig.devSocialuniHttpBaseUrl
-  } else {
-    socialHttpUrl = SocialuniConfig.socialuniHttpBaseUrl
-  }
-}
+const socialHttpUrl = process.env.VUE_APP_BASE_URL
 
 request.setConfig(config => { /* 设置全局配置 */
   config.baseUrl = socialHttpUrl + '/'/* 根域名不同 */

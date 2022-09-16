@@ -156,7 +156,6 @@ import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
 import QButton from '../../qing-ui/components/QButton/QButton.vue'
 import PageUtil from '../../socialuni/utils/PageUtil'
 import GenderType from '../../socialuni/constant/GenderType'
-import SocialuniConfig from '../../socialuni/config/SocialuniConfig'
 import DomFile from '../../socialuni/model/DomFile'
 import CosAuthRO from '../../socialuni/model/cos/CosAuthRO'
 import AppUtilAPI from '../../socialuni/api/AppUtilAPI'
@@ -209,8 +208,7 @@ export default class TalkAddView extends Vue {
   //默认全网
   visibleTypeValue = VisibleType.fullNetwork.value
   //默认为软件的性别
-  visibleGenderValue = SocialuniConfig.appGenderType
-  appGenderType = SocialuniConfig.appGenderType
+  visibleGenderValue = GenderType.all
   GenderTypeAll = GenderType.all
 
   talkContent = ''

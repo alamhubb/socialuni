@@ -98,17 +98,16 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Vue, Watch} from 'vue-property-decorator'
+import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
 import SocialuniUserAPI from '../../socialuni/api/socialuni/SocialuniUserAPI'
-import {parseDate} from '../../socialuni/utils'
+import { parseDate } from '../../socialuni/utils'
 import JsonUtils from '../../socialuni/utils/ObjectUtil'
 import AlertUtil from '../../socialuni/utils/AlertUtil'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
-import {socialUserModule, socialUserStore} from '../../socialuni/store'
+import { socialUserModule, socialUserStore } from '../../socialuni/store'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
 import EnumStrVO from '../../socialuni/constant/EnumStrVO'
 import GenderType from '../../socialuni/constant/GenderType'
-import SocialuniConfig from '../../socialuni/config/SocialuniConfig'
 import UserEditVO from '../../socialuni/model/user/UserEditVO'
 import BirthAgeUtil from '@/socialuni/utils/BirthAgeUtil'
 
@@ -126,17 +125,17 @@ export default class UserEdit extends Vue {
   endDate = ''
   btnDisabled = false
 
-  appGenderType = SocialuniConfig.appGenderType
+  appGenderType = GenderType.all
   GenderTypeAll = GenderType.all
 
   genders: EnumStrVO [] = GenderType.userEditEnums
 
-  created() {
+  created () {
     this.endDate = parseDate(new Date())
     this.initData()
   }
 
-  initData() {
+  initData () {
     if (this.user) {
       this.nickname = this.user.nickname || ''
       this.gender = this.user.gender || GenderType.girl
@@ -151,40 +150,40 @@ export default class UserEdit extends Vue {
   }
 
   @Watch('user')
-  watchUserChange() {
+  watchUserChange () {
     this.initData()
   }
 
   @Emit('close')
-  closeUserEditPop() {
+  closeUserEditPop () {
     return ''
   }
 
-  clearNickname() {
+  clearNickname () {
     this.nickname = ''
   }
 
-  clearLocation() {
+  clearLocation () {
     this.city = ''
   }
 
-  clearWxAccount() {
+  clearWxAccount () {
     this.wxAccount = ''
   }
 
-  clearContactAccount() {
+  clearContactAccount () {
     this.contactAccount = ''
   }
 
-  clearQqAccount() {
+  clearQqAccount () {
     this.qqAccount = ''
   }
 
-  clearWbAccount() {
+  clearWbAccount () {
     this.wbAccount = ''
   }
 
-  async saveUser() {
+  async saveUser () {
     if (this.contactAccount) {
       if (this.contactAccount.length > 30) {
         AlertUtil.hint('联系方式不能超过30个字符，例如：vx:491369310')
@@ -234,11 +233,11 @@ export default class UserEdit extends Vue {
     })
   }
 
-  dateChange({target}) {
+  dateChange ({ target }) {
     this.birthday = target.value
   }
 
-  genderChange({target}) {
+  genderChange ({ target }) {
     this.gender = target.value
   }
 }
