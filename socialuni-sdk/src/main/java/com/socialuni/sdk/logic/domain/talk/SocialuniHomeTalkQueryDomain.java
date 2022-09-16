@@ -61,14 +61,12 @@ public class SocialuniHomeTalkQueryDomain {
     //查询非关注tab的动态列表
     public List<SocialuniTalkRO> queryHomeTabTalks(SocialuniHomeTabTalkQueryQO queryQO) {
         //区分是否为自身应用，不同逻辑
-        if (DevAccountUtils.isCenter()) {
+        /*if (DevAccountUtils.isCenter()) {
 
 
         } else {
 
-        }
-
-
+        }*/
         //根据不同的tab区分不同的查询逻辑
         String homeTabName = queryQO.getHomeTabName();
         //获取当前用户
