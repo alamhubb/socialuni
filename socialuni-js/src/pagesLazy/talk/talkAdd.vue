@@ -151,7 +151,6 @@ import AlertUtil from '../../socialuni/utils/AlertUtil'
 import LocationUtil from '../../socialuni/utils/LocationUtil'
 import VisibleType from '../../socialuni/constant/VisibleType'
 import EnumStrVO from '../../socialuni/constant/EnumStrVO'
-import ToastUtil from '../../socialuni/utils/ToastUtil'
 import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
 import QButton from '../../qing-ui/components/QButton/QButton.vue'
 import PageUtil from '../../socialuni/utils/PageUtil'
@@ -207,6 +206,7 @@ export default class TalkAddView extends Vue {
   visibleTypeValue = VisibleType.fullNetwork.value
   //默认为软件的性别
   visibleGenderValue = GenderType.all
+  appGenderType = GenderType.all
   GenderTypeAll = GenderType.all
 
   talkContent = ''
@@ -411,7 +411,7 @@ export default class TalkAddView extends Vue {
       // 申请订阅
       PlatformUtils.requestSubscribeTalk()
     } else {
-      ToastUtil.toastLong('不能发布文字和图片均为空的动态')
+      AlertUtil.hint('不能发布文字和图片均为空的动态')
       this.buttonDisabled = false
     }
   }

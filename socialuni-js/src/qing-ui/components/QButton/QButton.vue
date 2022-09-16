@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
 import CommonUtil from '@/socialuni/utils/CommonUtil'
 
 @Component
@@ -204,7 +204,7 @@ export default class QButton extends Vue {
     type: Boolean
   }) noDebounce: boolean
 
-  get curTheme () {
+  get curTheme() {
     if (this.theme) return 'theme'
     if (this.primary) return 'primary'
     if (this.error) return 'error'
@@ -214,7 +214,7 @@ export default class QButton extends Vue {
     return ''
   }
 
-  get curSize () {
+  get curSize() {
     if (this.xs) return 'xs'
     if (this.sm) return 'sm'
     if (this.df) return 'df'
@@ -223,7 +223,7 @@ export default class QButton extends Vue {
     return 'df'
   }
 
-  get buttonClass () {
+  get buttonClass() {
     let buttonClass = `${this.btnDisabled ? 'bg-disabled' : 'bg-click'} `
     if (this.text) {
       buttonClass += `bd-none bg-white color-${this.curTheme}`
@@ -236,27 +236,27 @@ export default class QButton extends Vue {
 
   // 下面为对接uniapp官方按钮开放能力事件回调的对接
   @Emit()
-  getphonenumber (res) {
+  getphonenumber(res) {
     return res
   }
 
   @Emit()
-  getuserinfo (res) {
+  getuserinfo(res) {
     return res
   }
 
   @Emit('error')
-  errorHandler (res) {
+  errorHandler(res) {
     return res
   }
 
   @Emit()
-  opensetting (res) {
+  opensetting(res) {
     return res
   }
 
   @Emit()
-  launchapp (res) {
+  launchapp(res) {
     return res
   }
 
@@ -274,38 +274,40 @@ export default class QButton extends Vue {
 
   btnEnable = true
 
-  get btnDisabled () {
+  get btnDisabled() {
     return this.disabled || !this.btnEnable
   }
 
-  get clickHandler () {
+  get clickHandler() {
     return CommonUtil.debounce(this.btnClick, this.noDebounce ? 0 : Number(this.debounceTime))
   }
 
-  async btnClick () {
+  async btnClick() {
     if (this.btnEnable) {
       this.btnEnable = false
       this.clickEmit()
       try {
-        if (typeof this.click === 'function') {
-          await this.click()
-        } else {
-          // 获取方法和参数列表
-          const clickMethodAndArgsAry = this.click as Array<() => Promise<void> | any>
-          // 获取方法
-          const clickMethod = clickMethodAndArgsAry[0] as (values?: any[]) => Promise<void>
-          // 判断您是否包含参数
-          if (clickMethodAndArgsAry.length) {
-            const args: any[] = clickMethodAndArgsAry.slice(1, clickMethodAndArgsAry.length)
-            await clickMethod(...args)
+        if (this.click) {
+          if (typeof this.click === 'function') {
+            await this.click()
           } else {
-            await clickMethod()
+            // 获取方法和参数列表
+            const clickMethodAndArgsAry = this.click as Array<() => Promise<void> | any>
+            // 获取方法
+            const clickMethod = clickMethodAndArgsAry[0] as (values?: any[]) => Promise<void>
+            // 判断您是否包含参数
+            if (clickMethodAndArgsAry.length) {
+              const args: any[] = clickMethodAndArgsAry.slice(1, clickMethodAndArgsAry.length)
+              await clickMethod(...args)
+            } else {
+              await clickMethod()
+            }
           }
+          // 只有方法正常执行完毕才会触发click
+          this.clickAfter()
         }
-        // 只有方法正常执行完毕才会触发click
-        this.clickAfter()
       } finally {
-        if (!this.noDebounce) {
+        if (this.click && !this.noDebounce) {
           await CommonUtil.setTimeout(Number(this.debounceTime))
         }
         this.btnEnable = true
@@ -318,13 +320,13 @@ export default class QButton extends Vue {
 
 
   @Emit('click')
-  clickEmit () {
+  clickEmit() {
     return null
   }
 
 
   @Emit()
-  clickAfter () {
+  clickAfter() {
     return null
   }
 }
