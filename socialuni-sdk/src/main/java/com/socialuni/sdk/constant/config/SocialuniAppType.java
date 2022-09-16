@@ -1,11 +1,11 @@
 package com.socialuni.sdk.constant.config;
 
 import com.socialuni.sdk.config.SocialuniAppConfigBO;
-import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.sdk.config.SocialuniAppMoreConfigBO;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,24 +17,16 @@ public class SocialuniAppType {
 
     public static List<String> genderTypeList = Arrays.asList(SocialuniAppType.boy, SocialuniAppType.girl);
 
-    public static SocialuniAppConfigBO defaultAppConfigBO;
-    public static SocialuniAppConfigBO boyAppConfigBO;
-    public static SocialuniAppConfigBO girlAppConfigBO;
-    public static SocialuniAppConfigBO schoolAppConfigBO;
-
-    public static Map<String, SocialuniAppConfigBO> appTypeMap;
-
-    public static SocialuniAppConfigBO getAppDefaultConfigByAppType(String appType) {
+    public static SocialuniAppConfigBO getAppConfigByAppType(String appType) {
         if (StringUtils.isEmpty(appType) || (appType.equals(SocialuniAppType.defaultType))) {
-            return SocialuniAppType.getDefaultTypeAppDefaultConfig();
+            return SocialuniAppType.getDefaultTypeAppConfig();
         } else if (appType.equals(SocialuniAppType.school)) {
-            return SocialuniAppType.getSchoolTypeAppDefaultConfig();
+            return SocialuniAppType.getSchoolTypeAppConfig();
         }
-        return null;
+        throw new SocialParamsException("不支持的应用类型");
     }
 
-
-    public static SocialuniAppConfigBO getDefaultTypeAppDefaultConfig() {
+    public static SocialuniAppConfigBO getDefaultTypeAppConfig() {
         SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
         appConfig.setFollowTabName("关注");
         appConfig.setHomeTabName("首页");
@@ -43,7 +35,12 @@ public class SocialuniAppType {
         return appConfig;
     }
 
-    public static SocialuniAppConfigBO getSchoolTypeAppDefaultConfig() {
+    public static SocialuniAppMoreConfigBO getDefaultAppMoreConfig() {
+        SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = new SocialuniAppMoreConfigBO();
+        return socialuniAppMoreConfigBO;
+    }
+
+    public static SocialuniAppConfigBO getSchoolTypeAppConfig() {
         SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
         appConfig.setFollowTabName("关注");
         appConfig.setHomeTabName("大学");

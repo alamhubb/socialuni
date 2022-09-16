@@ -51,21 +51,9 @@ public class MyApplicationRunner implements ApplicationRunner {
         //初始化默认值
         if (socialuniAppConfig != null) {
             String appType = (String) socialuniAppConfig.getClass().getField("appType").get(null);
-            if (appType == null) {
-                appType = SocialuniAppType.defaultType;
-            }
             SocialuniAppConfigBO socialuniAppConfigBO = (SocialuniAppConfigBO) socialuniAppConfig.getClass().getField("appConfig").get(null);
             SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = (SocialuniAppMoreConfigBO) socialuniAppConfig.getClass().getField("appMoreConfig").get(null);
-            SocialuniAppConfigBO appTypeConfig = SocialuniAppType.appTypeMap.get(appType);
-            if (socialuniAppConfigBO == null) {
-                SocialuniAppConfig.appConfig = appTypeConfig;
-            } else {
-                //写了appConfig，则完全已自定义的为准
-                SocialuniAppConfig.appConfig = ObjectUtil.mergeObjects(socialuniAppConfigBO, appTypeConfig);
-            }
-            if (socialuniAppMoreConfigBO != null) {
-                SocialuniAppConfig.appMoreConfig = ObjectUtil.mergeObjects(socialuniAppMoreConfigBO, SocialuniAppConfig.appMoreConfig);
-            }
+            SocialuniAppConfig.resetSocialuniAppConfig(appType, socialuniAppConfigBO, socialuniAppMoreConfigBO);
         }
         System.out.println(JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appConfig));
 
