@@ -90,17 +90,16 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
 
 import TagVO from '../../socialuni/model/community/tag/TagVO'
-import TagTypeVO from '../../socialuni/model/community/tag/TagTypeVO'
 import QRowItem from '../../qing-ui/components/QRowItem/QRowItem.vue'
 import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
 import TagUtil from '../../socialuni/utils/TagUtil'
 import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
 import QSearch from '../../qing-ui/components/QSearch/QSearch.vue'
 import QSidebar from '../../qing-ui/components/QSidebar/QSidebar.vue'
-import {socialTagStore} from '../../socialuni/store'
+import { socialTagModule } from '../../socialuni/store'
 
 
 @Component({
@@ -120,16 +119,28 @@ export default class TagSearch extends Vue {
     type: Boolean,
     default: false
   }) readonly isAdd: boolean
-  @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
-  // 输入内容查询时显示的列表tag
-  // 进入页面只查询前20个，点击了输入内容才查询所有
-  @socialTagStore.State('tags') readonly tags: TagVO []
+
+  get tagTypes () {
+    return socialTagModule.tagTypes
+  }
+
+  get tags () {
+    return socialTagModule.tags
+  }
+
+  mounted () {
+    socialTagModule.getTagTypesAction()
+  }
+
+  openTagSearchDialog () {
+
+  }
 
   searchContent = ''
   showSearch = false
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
-  get showTags(): TagVO[] {
+  get showTags (): TagVO[] {
     if (this.searchContent) {
       return this.tags.filter(tag => tag.name.indexOf(this.searchContent) > -1)
     } else {
@@ -138,13 +149,13 @@ export default class TagSearch extends Vue {
   }
 
   @Emit()
-  input() {
+  input () {
     this.clearSearchContent()
     return false
   }
 
   @Emit()
-  change(tag: TagVO) {
+  change (tag: TagVO) {
     this.input()
     const tagIndex: number = this.historyTags.findIndex(item => item.id === tag.id)
     if (tagIndex > -1) {
@@ -157,22 +168,22 @@ export default class TagSearch extends Vue {
   }
 
   @Watch('searchContent')
-  watchSearchContent() {
+  watchSearchContent () {
     if (!this.searchContent) {
       this.showSearch = false
     }
   }
 
-  showSearchView() {
+  showSearchView () {
     this.showSearch = true
   }
 
-  clearSearchContent() {
+  clearSearchContent () {
     this.searchContent = ''
   }
 
   @Emit()
-  addTag() {
+  addTag () {
     return ''
   }
 

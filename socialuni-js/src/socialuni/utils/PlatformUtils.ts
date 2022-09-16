@@ -56,10 +56,10 @@ export default class PlatformUtils {
   // 统一处理各平台的订阅
   static requestSubscribeMessage (tmplIds: string[]) {
     // #ifdef MP-WEIXIN
-    PlatformUtils.requestSubscribeMessage(tmplIds)
+    // WxUtils.subscribeAppMsg(tmplIds)
     // #endif
     // #ifdef MP-QQ
-    QQUtils.subscribeAppMsg(tmplIds)
+    // QQUtils.subscribeAppMsg(tmplIds)
     // #endif
   }
 
