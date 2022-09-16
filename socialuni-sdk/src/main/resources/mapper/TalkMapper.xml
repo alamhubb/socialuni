@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.socialuni.sdk.dao.mapper.TalkMapper">
+    <!--        mybatis 一个参数时自定义属性名不生效 所以使用list-->
     <select id="queryTalkIdsByAndTag" resultType="java.lang.Integer">
         SELECT t.union_id FROM s_talk t,s_talk_tag tt WHERE t.union_id = tt.talk_id
         AND tt.tag_id in
-        <foreach item="item" index="index" collection="tagIds"
+        <foreach item="item" index="index" collection="list"
                  open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
 
     <select id="queryTalkIdsByAndCircle" resultType="java.lang.Integer">
-        SELECT t.union_id FROM s_talk t,s_talk_circle tc WHERE t.union_id = tc.talk_id AND tc.circle_id = #{circleId}
+        SELECT t.union_id
+        FROM s_talk t,
+             s_talk_circle tc
+        WHERE t.union_id = tc.talk_id
+          AND tc.circle_id = #{circleId}
     </select>
 
     <select id="queryTalkIdsByAndUserExpand" resultType="java.lang.Integer">
-        SELECT t.union_id FROM s_talk t,s_user_expand ue WHERE t.user_id = ue.user_id AND ue.school_name is not null
+        SELECT t.union_id
+        FROM s_talk t,
+             s_user_expand ue
+        WHERE t.user_id = ue.user_id
+          AND ue.school_name is not null
     </select>
 
     <select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">

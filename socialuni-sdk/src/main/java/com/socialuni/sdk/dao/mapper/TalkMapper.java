@@ -20,6 +20,7 @@ public interface TalkMapper {
             @Param("queryTime") Date queryTime
     );
 
+    //mybatis 一个参数时自定义属性名不生效 所以使用list
     List<Integer> queryTalkIdsByAndTag(@Param("tagIds") List<Integer> tagIds);
 
     List<Integer> queryTalkIdsByAndCircle(@Param("circleId") Integer circleId);
