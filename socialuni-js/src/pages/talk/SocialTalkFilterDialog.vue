@@ -1,7 +1,7 @@
 <template>
   <q-popup ref="filterDialog" bottom hide-modal @confirm="confirm">
     <div class="h80vh">
-      <div class="h100p py-sm px" v-show="!showTagSearch">
+      <div class="h100p py-sm px">
         <div class="row-col-center mt-sm mb-sm">
           <div class="mr-sm">性别:</div>
           <radio-group @change="genderChange" class="flex-1">
@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
+import {Component, Emit, Vue, Watch} from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
@@ -158,30 +158,29 @@ export default class SocialTalkFilterDialog extends Vue {
   checkedTags: TagVO[] = []
   selectTagName: string = socialTagModule.selectTagName
 
-
   @Watch('location')
-  locationWatch () {
+  locationWatch() {
     this.district = this.location
   }
 
 
-  open () {
+  open() {
     this.selectTagName = socialTagModule.selectTagName
     this.selectCircleName = socialCircleModule.circleName
     this.initFilterValue()
     this.$refs.filterDialog.open()
   }
 
-  close () {
+  close() {
     this.showCircleSearch = false
   }
 
   @Emit()
-  change (circle: SocialCircleRO) {
+  change(circle: SocialCircleRO) {
     return circle
   }
 
-  get visibleGenders () {
+  get visibleGenders() {
     if (this.user) {
       if (this.user.gender === GenderType.girl) {
         return GenderType.talkQueryGirlEnums
@@ -192,66 +191,66 @@ export default class SocialTalkFilterDialog extends Vue {
     return GenderType.talkQueryEnums
   }
 
-  genderChange ({ target }) {
+  genderChange({target}) {
     this.genderTypeValue = target.value
   }
 
-  format () {
+  format() {
     return ''
   }
 
-  handleRangeChange (e) {
+  handleRangeChange(e) {
     console.log(e)
     this.rangeValue = e
   }
 
-  checkCircleName (circleName: string) {
+  checkCircleName(circleName: string) {
     this.selectCircleName = circleName
   }
 
   @Emit()
-  confirm () {
+  confirm() {
     socialTalkModule.setCircleNameUpdateCurTabIndex(this.selectCircleName)
     socialTagModule.setSelectTagName(this.selectTagName)
     socialLocationModule.setLocation(this.district)
     socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
   }
 
-  async clearCheckedTags () {
+  async clearCheckedTags() {
     await AlertUtil.confirm('是否确认清空已选择的话题？')
     this.checkedTags = []
   }
 
   // tag
-  changeTagName (tagName: string) {
+  changeTagName(tagName: string) {
     this.selectTagName = tagName
   }
 
-  deleteTag () {
+  deleteTag() {
     this.selectTagName = null
   }
 
-  initFilterValue () {
+  initFilterValue() {
     this.genderTypeValue = socialTalkModule.userGender
     this.rangeValue = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   }
 
   // tag
-  changeTag (tag: TagVO) {
+  changeTag(tag: TagVO) {
     socialTagModule.setMineHistoryTagNames(tag.name)
     this.changeTagName(tag.name)
   }
 
-  openTagSearchVue () {
+  openTagSearchVue() {
     this.$refs.tagPicker.open()
   }
 
-  circleChange (circle: SocialCircleRO) {
+  circleChange(circle: SocialCircleRO) {
     socialCircleModule.setMineHistoryCircleNames(circle.name)
     this.checkCircleName(circle.name)
   }
 
-  openCircleDialog () {
+  openCircleDialog() {
     this.$refs.circleDialog.openDialog()
   }
 }
