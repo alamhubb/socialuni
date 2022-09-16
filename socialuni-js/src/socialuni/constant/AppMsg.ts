@@ -15,7 +15,7 @@ export default class AppMsg {
 
   static readonly paySuccessMsg: string = '充值成功'
 
-  static readonly uploadFailMsg: string = '上传失败' + AppMsg.contactServiceMsg
+  static readonly uploadFailMsg: string = '照片上传失败，请重试或联系客服'
 
   static readonly identityAuthSuccessMsg: string = '认证成功，是否回到个人信息页面'
 
