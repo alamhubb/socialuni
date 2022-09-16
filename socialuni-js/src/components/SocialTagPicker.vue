@@ -81,22 +81,20 @@ export default class SocialTagPicker extends Vue {
     }
   }
 
-  openDialog () {
+  open () {
     this.searchText = ''
-    if (!this.tagTypes[1].tags.length) {
-      socialTagModule.getTagTypesAction()
-    }
+    socialTagModule.getTagTypesAction()
     this.$refs.dialog.open()
   }
 
-  closeDialog () {
+  close () {
     this.$refs.dialog.close()
   }
 
   @Emit()
-  change (circle: SocialCircleRO) {
-    this.closeDialog()
-    return circle
+  change (tag: SocialCircleRO) {
+    this.close()
+    return tag
   }
 }
 </script>

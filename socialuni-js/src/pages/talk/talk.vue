@@ -1,27 +1,22 @@
 <template>
   <view class="flex-col h100p">
-    <view v-show="showTagSearch" class="h100p">
-      <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
-      ></tag-search>
-    </view>
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
-    <view v-show="!showTagSearch" class="flex-col h100vh">
+    <view class="flex-col h100vh">
       <q-navbar class="flex-none">
         <div class="row-col-center ml-xs mr-sm font-bold bg-click" @click="openCityPicker">
           <q-icon size="14" icon="map-fill"></q-icon>
           {{ location.adName }}
           <q-icon icon="mdi-chevron-right"></q-icon>
         </div>
-        <q-search class="flex-1 mr-sm" @click.native="openTagSearchVue">
+        <q-search class="flex-1 mr-sm" @click.native="openTagPicker">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
-          <view v-if="selectTagName" class="row-col-center flex-auto" @click.stop="">
+          <view v-if="selectTagName" class="row-col-center flex-1" @click.stop="">
             <view class="q-tag round bg-green-plain light row-all-center">
               {{ selectTagName }}
             </view>
             <q-icon class="mr-sm text-gray row-all-center" icon="close" @click="deleteTag"></q-icon>
           </view>
-          <input v-else :adjust-position="false" type="text"
-                 placeholder="选择话题" confirm-type="search"/>
+          <div class="cursor-text flex-1">选择话题</div>
         </q-search>
         <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
                   <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
@@ -45,6 +40,8 @@
     <msg-input>
     </msg-input>
 
+
+    <socia-tag-picker ref="tagPicker" @change="changeTag"></socia-tag-picker>
     <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
   </view>
 </template>
@@ -88,11 +85,14 @@ import MsgInput from '@/components/MsgInput.vue'
 import TabsTalk from '@/pages/talk/tabsTalk.vue'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import TagSearch from '@/pages/talk/TagSearch.vue'
+import SociaTagPicker from '@/components/SocialTagPicker.vue'
+import SocialTagPicker from '@/components/SocialTagPicker.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
+    SociaTagPicker,
     QCityPicker,
     QTabs,
     QSlider,
@@ -107,10 +107,11 @@ import TagSearch from '@/pages/talk/TagSearch.vue'
     TalkSwipers
   }
 })
-export default class SocialTalkPage extends Vue {
+export default class TalkView extends Vue {
   public $refs!: {
     tabsTalk: TabsTalk;
     cityPicker: QCityPicker
+    tagPicker: SocialTagPicker
   }
   @socialTagStore.State('tags') readonly tags: TagVO []
   @socialUserStore.State('user') user: CenterUserDetailRO
@@ -124,7 +125,6 @@ export default class SocialTalkPage extends Vue {
 
   current = 0
   // tag 相关
-  showTagSearch = false
   // 筛选相关
   rangeMin: number = TalkFilterUtil.minAgeFilterDefault
   rangMax: number = TalkFilterUtil.maxAgeFilterDefault
@@ -225,9 +225,10 @@ export default class SocialTalkPage extends Vue {
     })
   }
 
-  openTagSearchVue () {
-    this.showTagSearch = true
+  openTagPicker () {
+    this.$refs.tagPicker.open()
   }
+
 
   @Watch('selectTagName')
   selectTagNameWatch () {

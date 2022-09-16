@@ -78,10 +78,7 @@
         </div>
       </div>
 
-      <view v-if="showTagSearch" class="h100p">
-        <tag-search class="h100p" v-model="showTagSearch" @change="changeTag"
-        ></tag-search>
-      </view>
+      <social-tag-picker ref="tagPicker" @change="changeTag"></social-tag-picker>
 
       <social-circle-picker ref="circleDialog" @change="circleChange"></social-circle-picker>
     </div>
@@ -89,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Vue, Watch} from 'vue-property-decorator'
+import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
@@ -117,10 +114,12 @@ import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import TagSearch from '@/pages/talk/TagSearch.vue'
 import SocialCirclePicker from '@/components/SocialCirclePicker.vue'
+import SocialTagPicker from '@/components/SocialTagPicker.vue'
 
 
 @Component({
   components: {
+    SocialTagPicker,
     SocialCirclePicker,
     TagSearch,
     CityPicker,
@@ -135,6 +134,7 @@ export default class SocialTalkFilterDialog extends Vue {
   $refs: {
     filterDialog: QPopup;
     circleDialog: SocialCirclePicker;
+    tagPicker: SocialTagPicker;
   }
   @socialUserStore.State('user') user: CenterUserDetailRO
   @socialTagStore.State('tagTypes') readonly tagTypes: TagTypeVO[]
@@ -159,34 +159,31 @@ export default class SocialTalkFilterDialog extends Vue {
   selectCircleName = socialCircleModule.circleName
   checkedTags: TagVO[] = []
   selectTagName: string = socialTagModule.selectTagName
-  // tag 相关
-  showTagSearch = false
+
 
   @Watch('location')
-  locationWatch() {
+  locationWatch () {
     this.district = this.location
   }
 
 
-  open() {
+  open () {
     this.selectTagName = socialTagModule.selectTagName
     this.selectCircleName = socialCircleModule.circleName
     this.initFilterValue()
-    this.showTagSearch = false
     this.$refs.filterDialog.open()
-    console.log(this.district)
   }
 
-  close() {
+  close () {
     this.showCircleSearch = false
   }
 
   @Emit()
-  change(circle: SocialCircleRO) {
+  change (circle: SocialCircleRO) {
     return circle
   }
 
-  get visibleGenders() {
+  get visibleGenders () {
     if (this.user) {
       if (this.user.gender === GenderType.girl) {
         return GenderType.talkQueryGirlEnums
@@ -197,69 +194,67 @@ export default class SocialTalkFilterDialog extends Vue {
     return GenderType.talkQueryEnums
   }
 
-  genderChange({target}) {
+  genderChange ({ target }) {
     this.genderTypeValue = target.value
   }
 
-  format() {
+  format () {
     return ''
   }
 
-  handleRangeChange(e) {
+  handleRangeChange (e) {
     console.log(e)
     this.rangeValue = e
   }
 
-  checkCircleName(circleName: string) {
+  checkCircleName (circleName: string) {
     this.selectCircleName = circleName
   }
 
   @Emit()
-  confirm() {
+  confirm () {
     socialTalkModule.setCircleNameUpdateCurTabIndex(this.selectCircleName)
     socialTagModule.setSelectTagName(this.selectTagName)
     socialLocationModule.setLocation(this.district)
     socialTalkModule.setFilterData(this.genderTypeValue, this.rangeValue[0], this.rangeValue[1])
   }
 
-  async clearCheckedTags() {
+  async clearCheckedTags () {
     await AlertUtil.confirm('是否确认清空已选择的话题？')
     this.checkedTags = []
   }
 
   // tag
-  changeTagName(tagName: string) {
+  changeTagName (tagName: string) {
     this.selectTagName = tagName
   }
 
-  deleteTag() {
+  deleteTag () {
     this.selectTagName = null
   }
 
-  initFilterValue() {
+  initFilterValue () {
     this.genderTypeValue = socialTalkModule.userGender
     this.rangeValue = [socialTalkModule.userMinAge, socialTalkModule.userMaxAge]
   }
 
   // tag
-  changeTag(tag: TagVO) {
+  changeTag (tag: TagVO) {
     socialTagModule.setMineHistoryTagNames(tag.name)
     this.changeTagName(tag.name)
   }
 
-  openTagSearchVue() {
-    socialTagModule.getTagTypesAction()
-    this.showTagSearch = true
+  openTagSearchVue () {
+    this.$refs.tagPicker.open()
   }
 
-  circleChange(circle: SocialCircleRO) {
+  circleChange (circle: SocialCircleRO) {
     socialCircleModule.setMineHistoryCircleNames(circle.name)
     this.checkCircleName(circle.name)
   }
 
-  openCircleDialog() {
+  openCircleDialog () {
     this.$refs.circleDialog.openDialog()
   }
-
 }
 </script>
