@@ -6,7 +6,6 @@ import com.socialuni.admin.web.service.AdminUserService;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.logic.service.user.SocialuniUserService;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.dao.DO.ReportDO;
@@ -78,7 +77,7 @@ public class ReportController {
         DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
         List<ReportDO> reportDOS;
         //清池可以查询所有，否则只能查询自己的
-        if (DevAccountUtils.isAdmin()) {
+        if (DevAccountUtils.isCenter()) {
             reportDOS = reportRepository.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
         } else {
             reportDOS = reportRepository.findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(ReportStatus.auditStatus, user.getId());

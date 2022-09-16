@@ -2,6 +2,7 @@ package com.socialuni.sdk.constant.config;
 
 import com.socialuni.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,49 +22,51 @@ public class SocialuniAppType {
     public static SocialuniAppConfigBO girlAppConfigBO;
     public static SocialuniAppConfigBO schoolAppConfigBO;
 
-    public static Map<String,SocialuniAppConfigBO> appTypeMap;
+    public static Map<String, SocialuniAppConfigBO> appTypeMap;
+
+    public static SocialuniAppConfigBO getAppDefaultConfigByAppType(String appType) {
+        if (StringUtils.isEmpty(appType) || (appType.equals(SocialuniAppType.defaultType))) {
+            return SocialuniAppType.getDefaultTypeAppDefaultConfig();
+        } else if (appType.equals(SocialuniAppType.school)) {
+            return SocialuniAppType.getSchoolTypeAppDefaultConfig();
+        }
+        return null;
+    }
 
 
-    static {
-        SocialuniAppConfigBO defaultAppConfigBO = new SocialuniAppConfigBO();
-        defaultAppConfigBO.setFollowTabName("关注");
-        defaultAppConfigBO.setHomeTabName("首页");
-        defaultAppConfigBO.setCityTabName("同城");
-        defaultAppConfigBO.setTabNames(Arrays.asList("关注", "首页", "同城"));
-//        defaultAppConfigBO.setTalkImgNeedAdultAuth(true);
-        SocialuniAppType.defaultAppConfigBO = defaultAppConfigBO;
+    public static SocialuniAppConfigBO getDefaultTypeAppDefaultConfig() {
+        SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
+        appConfig.setFollowTabName("关注");
+        appConfig.setHomeTabName("首页");
+        appConfig.setCityTabName("同城");
+        appConfig.setTabNames(Arrays.asList("关注", "首页", "同城"));
+        return appConfig;
+    }
 
+    public static SocialuniAppConfigBO getSchoolTypeAppDefaultConfig() {
+        SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
+        appConfig.setFollowTabName("关注");
+        appConfig.setHomeTabName("大学");
+        appConfig.setCityTabName("同城");
+        appConfig.setSelfSchoolTabName("本校");
+        appConfig.setTabNames(Arrays.asList("关注", "大学", "同城", "本校"));
+        appConfig.setHasSchoolCanPostTalk(true);
 
-        SocialuniAppConfigBO boyAppConfigBO = new SocialuniAppConfigBO();
+       /* SocialuniAppConfigBO boyAppConfigBO=new SocialuniAppConfigBO();
         boyAppConfigBO.setFollowTabName("关注");
         boyAppConfigBO.setHomeTabName("男生");
         boyAppConfigBO.setCityTabName("同城");
-        boyAppConfigBO.setTabNames(Arrays.asList("关注", "男生", "同城"));
+        boyAppConfigBO.setTabNames(Arrays.asList("关注","男生","同城"));
         boyAppConfigBO.setAppGender(GenderType.boy);
-        SocialuniAppType.boyAppConfigBO = boyAppConfigBO;
+        SocialuniAppType.boyAppConfigBO=boyAppConfigBO;
 
-        SocialuniAppConfigBO girlAppConfigBO = new SocialuniAppConfigBO();
+        SocialuniAppConfigBO girlAppConfigBO=new SocialuniAppConfigBO();
         girlAppConfigBO.setFollowTabName("关注");
         girlAppConfigBO.setHomeTabName("女生");
         girlAppConfigBO.setCityTabName("同城");
-        girlAppConfigBO.setTabNames(Arrays.asList("关注", "女生", "同城"));
+        girlAppConfigBO.setTabNames(Arrays.asList("关注","女生","同城"));
         girlAppConfigBO.setAppGender(GenderType.girl);
-        SocialuniAppType.girlAppConfigBO = girlAppConfigBO;
-
-
-        SocialuniAppConfigBO schoolAppConfigBO = new SocialuniAppConfigBO();
-        schoolAppConfigBO.setFollowTabName("关注");
-        schoolAppConfigBO.setHomeTabName("大学");
-        schoolAppConfigBO.setCityTabName("同城");
-        schoolAppConfigBO.setSelfSchoolTabName("本校");
-        schoolAppConfigBO.setTabNames(Arrays.asList("关注", "大学", "同城", "本校"));
-        schoolAppConfigBO.setHasSchoolCanPostTalk(true);
-        SocialuniAppType.schoolAppConfigBO = schoolAppConfigBO;
-
-        appTypeMap = new HashMap<>();
-        appTypeMap.put(SocialuniAppType.school,SocialuniAppType.schoolAppConfigBO);
-        appTypeMap.put(SocialuniAppType.boy,SocialuniAppType.boyAppConfigBO);
-        appTypeMap.put(SocialuniAppType.girl,SocialuniAppType.girlAppConfigBO);
-        appTypeMap.put(SocialuniAppType.defaultType,SocialuniAppType.defaultAppConfigBO);
+        SocialuniAppType.girlAppConfigBO=girlAppConfigBO;*/
+        return appConfig;
     }
 }

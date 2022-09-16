@@ -81,7 +81,7 @@ public class DevAccountUtils {
         return devAccountDO.getId();
     }
 
-    public static boolean isAdmin() {
+    public static boolean isCenter() {
         DevAccountDO devAccountDO = DevAccountUtils.getAdminDevAccountNotNull();
         return devAccountDO.getId() == 1;
     }

@@ -1,10 +1,7 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
-import com.socialuni.sdk.constant.GenderTypeQueryVO;
-import com.socialuni.sdk.constant.GenderTypeVO;
-import com.socialuni.sdk.constant.SocialuniConst;
-import com.socialuni.sdk.constant.TalkTabType;
+import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.constant.config.SocialuniAppType;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
@@ -63,6 +60,15 @@ public class SocialuniHomeTalkQueryDomain {
 
     //查询非关注tab的动态列表
     public List<SocialuniTalkRO> queryHomeTabTalks(SocialuniHomeTabTalkQueryQO queryQO) {
+        //区分是否为自身应用，不同逻辑
+        if (DevAccountUtils.isCenter()) {
+
+
+        } else {
+
+        }
+
+
         //根据不同的tab区分不同的查询逻辑
         String homeTabName = queryQO.getHomeTabName();
         //获取当前用户
