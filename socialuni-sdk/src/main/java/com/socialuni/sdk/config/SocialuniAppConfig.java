@@ -15,6 +15,7 @@ public class SocialuniAppConfig {
             appType = SocialuniAppType.defaultType;
         }
         SocialuniAppConfigBO appTypeConfig = SocialuniAppType.getAppConfigByAppType(appType);
+        //如果没设置自定义的使用默认的
         if (appConfig == null) {
             SocialuniAppConfig.appConfig = appTypeConfig;
         } else {
