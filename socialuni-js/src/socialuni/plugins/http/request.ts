@@ -1,18 +1,18 @@
-import HttpRequest, {requestConfig} from '@/socialuni/plugins/http/httpRequest'
+import HttpRequest, { requestConfig } from '@/socialuni/plugins/http/httpRequest'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
-import {socialConfigModule, socialSystemModule} from '../../store'
+import { socialConfigModule, socialSystemModule } from '../../store'
 import ErrorConst from '../../constant/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
 import AppUtilAPI from '../../api/AppUtilAPI'
 import AlertUtil from '../../utils/AlertUtil'
-import {socialConfig} from '../../index'
+import { socialConfig } from '../../index'
 import SocialuniConfig from '../../config/SocialuniConfig'
 import SocialSystemInfo from '../../constant/SocialSystemInfo'
 import XmlUtil from '@/socialuni/utils/XmlUtil'
 import XmlResultRO from '@/socialuni/model/base/XmlResultRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
-import UserService from "@/socialuni/service/UserService";
+import UserService from '@/socialuni/service/UserService'
 
 const request: HttpRequest = new HttpRequest()
 
@@ -27,7 +27,8 @@ if (!socialHttpUrl) {
 
 request.setConfig(config => { /* 设置全局配置 */
   config.baseUrl = socialHttpUrl + '/'/* 根域名不同 */
-  config.timeout = 60 * 1000
+  //超时时间设置为10秒
+  config.timeout = 10 * 1000
   return config
 })
 request.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
