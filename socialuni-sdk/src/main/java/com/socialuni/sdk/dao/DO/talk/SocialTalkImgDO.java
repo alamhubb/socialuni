@@ -15,7 +15,7 @@ import java.io.Serializable;
         }
 )
 @Data
-public class SocialTalkImgDO extends SocialCommonBaseDO implements Serializable {
+public class SocialTalkImgDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer contentId;
 

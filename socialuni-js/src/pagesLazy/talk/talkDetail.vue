@@ -47,14 +47,15 @@
 import {Component, Vue} from 'vue-property-decorator'
 import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
 import MsgInput from '@/components/MsgInput.vue'
-import TalkItem from '@/components/SocialTalk/TalkItem.vue'
-import TalkOperate from '@/components/SocialTalk/talkOperate.vue'
+import TalkItem from '@/pages/talk/talkItem/TalkItem.vue'
+import TalkOperate from '@/pages/talk/talkOperate.vue'
 import TalkVO from '@/socialuni/model/talk/TalkVO'
 import {socialAppStore} from '@/socialuni/store'
 import RouterUtil from '@/socialuni/utils/RouterUtil'
 import PageUtil from '@/socialuni/utils/PageUtil'
 import TalkAPI from '@/socialuni/api/socialuni/TalkAPI'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
+import UniUtil from "@/socialuni/utils/UniUtil";
 
 @Component({
   components: {
@@ -75,6 +76,7 @@ export default class TalkDetail extends Vue {
   }
 
   onLoad(params) {
+    UniUtil.showShareMenu()
     const talkId = params.talkId
     TalkAPI.queryTalkDetailAPI(talkId).then((res: any) => {
       this.talk = res.data

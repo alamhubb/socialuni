@@ -12,6 +12,7 @@ import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
 import SocialuniUserAPI from '@/socialuni/api/socialuni/SocialuniUserAPI'
 import MsgInput from '@/components/MsgInput.vue'
 import UserInfo from '@/pages/user/UserInfo.vue'
+import UniUtil from "@/socialuni/utils/UniUtil";
 
 @Component({
   components: {MsgInput, UserInfo}
@@ -29,6 +30,7 @@ export default class UserDetail extends Vue {
   }
 
   onLoad(params) {
+    UniUtil.showShareMenu()
     const userId = params.userId
     // 这里有问题，有时候直接进入页面没有userId
     SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {

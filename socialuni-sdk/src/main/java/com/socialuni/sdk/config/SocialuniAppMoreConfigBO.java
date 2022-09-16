@@ -13,17 +13,17 @@ public class SocialuniAppMoreConfigBO {
     // 首页swiper高度
     private Integer swiperHeight = 130;
     // 官网首页url
-    private String homeUrl = "https://www.socialuni.cn/";
+    private String homeUrl = "https://www.socialuni.cn/qingchi/";
     // 建议页url
-    private String suggestUrl = "https://www.socialuni.cn/suggest";
+    private String suggestUrl = "https://www.socialuni.cn/qingchi/suggest";
     //联系我们页url
-    private String contactUsUrl = "https://www.socialuni.cn/contact";
+    private String contactUsUrl = "https://www.socialuni.cn/qingchi/contact";
     //用户协议页url
-    private String userAgreementUrl = "https://www.socialuni.cn/agreement";
+    private String userAgreementUrl = "https://www.socialuni.cn/qingchi/agreement";
     //用户隐私页url
-    private String userPrivacyUrl = "https://www.socialuni.cn/privacy";
+    private String userPrivacyUrl = "https://www.socialuni.cn/qingchi/privacy";
     //儿童保护协议页url
-    private String childProtectUrl = "https://www.socialuni.cn/childProtect";
+    private String childProtectUrl = "https://www.socialuni.cn/qingchi/childProtect";
     //激励视频限制次数页url
     private Integer rewardedAdLimit = 3;
     //动态缓存数量

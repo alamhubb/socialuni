@@ -4,7 +4,7 @@
       <q-icon class="ml-smm" icon="arrow-leftward" @click="input"></q-icon>
       <q-search class="flex-1 mx-sm bg-default">
         <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
-        <input v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
+        <input class="flex-1" v-model="searchContent" :adjust-position="false" type="text" @focus="showSearchView" focus
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
         <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"
                 @click="clearSearchContent"
@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden">
+      <q-sidebar :dataList="tagTypes" class="flex-1 flex-row overflow-hidden" :right-scroll="false">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
             <view class="row-all-center flex-auto">
@@ -112,7 +112,7 @@ import {socialTagStore} from '../../socialuni/store'
     QIcon
   }
 })
-export default class TagSearchPage extends Vue {
+export default class TagSearch extends Vue {
   // 只有从新增talk界面进入时才可新增标签
   @Model('input') readonly value: boolean
 

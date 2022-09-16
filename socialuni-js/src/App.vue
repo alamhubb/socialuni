@@ -1,12 +1,16 @@
 <script lang="ts">
 import Vue from 'vue'
-import {socialSystemModule} from "@/socialuni/store";
+import {socialAppModule, socialSystemModule} from "@/socialuni/store";
+import UniUtil from "@/socialuni/utils/UniUtil";
 
 export default Vue.extend({
   mpType: 'app',
-  onLaunch(){
+  onLaunch() {
     socialSystemModule.getSystemInfo()
     console.log(socialSystemModule.systemInfo)
+    //如果有跳转信息
+    socialAppModule.appLunchAction()
+    UniUtil.showShareMenu()
   }
 })
 </script>

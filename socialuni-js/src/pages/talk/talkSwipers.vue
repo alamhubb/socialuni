@@ -24,7 +24,7 @@ import RouterUtil from '../../socialuni/utils/RouterUtil'
 
 // todo 后台可控制是否显示轮播图
 @Component
-export default class TalkSwipersPage extends Vue {
+export default class TalkSwipers extends Vue {
   @socialAppStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
 
   get swiperHeight() {

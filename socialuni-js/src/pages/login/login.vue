@@ -31,9 +31,10 @@
       <div class="row-center pb">
         <!--            如果为授权手机号，则提示-->
         <view class="u-border-bottom text-gray">
-          绑定手机号后可发表动态，详情
+          绑定手机号后可发表动态
+          <!--          ，详情-->
         </view>
-        <q-icon class="ml-xs text-gray" icon="arrow-right"></q-icon>
+        <!--        <q-icon class="ml-xs text-gray" icon="arrow-right"></q-icon>-->
       </div>
 
       <!--        隐私提示-->

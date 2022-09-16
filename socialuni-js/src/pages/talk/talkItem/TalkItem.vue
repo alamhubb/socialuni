@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
-import TalkVO from '../../socialuni/model/talk/TalkVO'
-import TalkItemHead from './TalkItemHead.vue'
+import TalkVO from '../../../socialuni/model/talk/TalkVO'
+import TalkItemHead from '../TalkItemHead.vue'
 import TalkItemContent from './TalkItemContent.vue'
 import TalkItemComment from './TalkItemComment.vue'
 

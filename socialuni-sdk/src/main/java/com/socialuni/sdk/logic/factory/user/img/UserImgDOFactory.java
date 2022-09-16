@@ -30,9 +30,6 @@ public class UserImgDOFactory {
         userImgDO.setIsSelfAuth(false);
         Integer userImgUnionId = UnionIdDbUtil.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
-
-        mineUser.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + userImgDO.getSrc() + "!avatar");
-
         return userImgDO;
     }
 }

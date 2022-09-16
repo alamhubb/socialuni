@@ -142,7 +142,7 @@ import TalkVO from '../../socialuni/model/talk/TalkVO'
 import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
 
-import TalkItem from './TalkItem.vue'
+import TalkItem from './talkItem/TalkItem.vue'
 import LoadMoreType from '../../socialuni/constant/LoadMoreType'
 import DistrictVO from '../../socialuni/model/DistrictVO'
 import Constants from '../../socialuni/constant/Constant'
@@ -168,7 +168,7 @@ import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
 import PageUtil from '../../socialuni/utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
-import SocialTalkFilterDialog from '@/components/SocialTalk/SocialTalkFilterDialog.vue'
+import SocialTalkFilterDialog from '@/pages/talk/SocialTalkFilterDialog.vue'
 import QCityPicker from '@/components/QCityPicker/QCityPicker.vue'
 
 
@@ -187,7 +187,7 @@ import QCityPicker from '@/components/QCityPicker/QCityPicker.vue'
     TalkItem
   }
 })
-export default class TabsTalkPage extends Vue {
+export default class TabsTalk extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
     talkFilterDialog: SocialTalkFilterDialog
