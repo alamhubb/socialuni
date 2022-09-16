@@ -1,8 +1,6 @@
-package com.socialuni.sdk.model.RO.talk.circle;
+package com.socialuni.sdk.model.RO.community.circle;
 
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @author qinkaiyuan
@@ -10,11 +8,12 @@ import java.util.List;
  */
 
 @Data
-public class CircleTypeRO {
+public class SocialCircleRO {
     public Integer id;
     public String name;
+    public String avatar;
+    public String description;
     public Boolean selected;
     private Integer talkCount;
     private Integer count;
-    private List<SocialCircleRO> circles;
 }

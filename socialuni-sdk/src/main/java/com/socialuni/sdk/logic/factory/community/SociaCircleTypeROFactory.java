@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.factory.community;
 
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
-import com.socialuni.sdk.model.RO.talk.circle.CircleTypeRO;
+import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.logic.factory.ListConvertUtil;
 import org.apache.commons.lang3.StringUtils;
 

@@ -3,8 +3,8 @@ package com.socialuni.sdk.feignAPI;
 
 import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
-import com.socialuni.sdk.model.RO.talk.circle.CircleTypeRO;
-import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
+import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
+import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

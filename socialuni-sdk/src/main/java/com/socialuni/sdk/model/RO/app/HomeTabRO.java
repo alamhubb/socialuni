@@ -1,6 +1,5 @@
 package com.socialuni.sdk.model.RO.app;
 
-import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
 import lombok.Data;
 
 /**

@@ -5,7 +5,7 @@ import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
-import com.socialuni.sdk.model.RO.talk.circle.SocialCircleRO;
+import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import org.springframework.stereotype.Service;
