@@ -13,7 +13,7 @@ public class SocialuniAppMoreConfigBO {
     // 首页swiper高度
     private Integer swiperHeight = 130;
     // 官网首页url
-    private String homeUrl = "https://www.socialuni.cn/qingchi/";
+    private String homeUrl = "https://www.socialuni.cn/";
     // 建议页url
     private String suggestUrl = "https://www.socialuni.cn/qingchi/suggest";
     //联系我们页url
