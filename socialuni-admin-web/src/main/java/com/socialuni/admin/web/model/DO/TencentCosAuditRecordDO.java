@@ -45,7 +45,7 @@ public class TencentCosAuditRecordDO extends CommonContentBaseDO {
     @Column(columnDefinition = "text")
     private String imgKey;
     //key获取
-    private Integer contentImgId;
-    private Integer userId;
-    private Integer contentId;
+    private Integer imgContentUid;
+    private Integer userUid;
+    private Integer contentUid;
 }

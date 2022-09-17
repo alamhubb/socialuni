@@ -1,7 +1,5 @@
 package com.socialuni.sdk.dao.DO.talk;
 
-import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
-import com.socialuni.sdk.dao.DO.base.SocialImgBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 
@@ -10,7 +8,7 @@ import java.io.Serializable;
 
 @MappedSuperclass
 @Data
-public class SocialuniImgBaseDO extends SocialContentBaseDO implements Serializable {
+public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer contentId;
 

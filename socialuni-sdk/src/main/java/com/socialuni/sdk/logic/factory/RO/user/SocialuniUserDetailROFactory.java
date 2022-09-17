@@ -21,7 +21,7 @@ public class SocialuniUserDetailROFactory {
         //user基础信息
         SocialuniUserDetailRO userDetailVO = new SocialuniUserDetailRO(socialUserDetailFollowRO);
 
-        String schoolName = SocialuniUserExpandDOUtil.getUserSchoolNameAllowNull(userDO.getId());
+        String schoolName = SocialuniUserExpandDOUtil.getUserSchoolNameAllowNull(userDO.getHahaId());
 
         userDetailVO.setSchoolName(schoolName);
         //用户图片

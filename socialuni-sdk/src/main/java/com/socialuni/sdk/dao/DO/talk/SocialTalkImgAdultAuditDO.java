@@ -1,7 +1,6 @@
 package com.socialuni.sdk.dao.DO.talk;
 
 import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
-import com.socialuni.sdk.dao.DO.base.SocialImgBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

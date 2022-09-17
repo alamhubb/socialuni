@@ -18,6 +18,6 @@ public class ReportUserVO {
         this.nickname = user.getNickname();
         this.avatar = user.getAvatar();
         this.status = user.getStatus();
-        this.id = user.getId();
+        this.id = user.getHahaId();
     }
 }

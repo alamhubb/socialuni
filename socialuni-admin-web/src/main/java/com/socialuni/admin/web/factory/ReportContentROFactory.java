@@ -51,7 +51,7 @@ public class ReportContentROFactory {
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(ContentType.comment)) {
             SocialCommentDO commentDO = CommentUtils.getNotNull(contentId);
-            reportContentVO.setId(commentDO.getId());
+            reportContentVO.setId(commentDO.getUnionId());
             reportContentVO.setContent(commentDO.getContent());
             reportContentVO.setReportNum(commentDO.getReportNum());
             reportContentVO.setUserId(commentDO.getUserId());

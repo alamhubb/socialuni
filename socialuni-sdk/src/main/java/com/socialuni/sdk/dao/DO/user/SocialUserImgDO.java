@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.DO.user;
 
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.base.SocialImgBaseDO;
+import com.socialuni.sdk.dao.DO.talk.SocialuniImgBaseDO;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -21,7 +21,7 @@ import java.io.Serializable;
         }
 )
 @Data
-public class SocialUserImgDO extends SocialImgBaseDO implements BaseModelDO, Serializable {
+public class SocialUserImgDO extends SocialuniImgBaseDO implements BaseModelDO, Serializable {
     private String deleteReason;
 
     //是否已认证
@@ -31,4 +31,11 @@ public class SocialUserImgDO extends SocialImgBaseDO implements BaseModelDO, Ser
     private String violateType;
 
     private String reportContentType;
+
+    @Column(nullable = false)
+    private Integer reportNum;
+
+    public SocialUserImgDO() {
+        this.reportNum = 0;
+    }
 }

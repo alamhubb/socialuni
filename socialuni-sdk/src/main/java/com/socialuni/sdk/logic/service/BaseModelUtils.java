@@ -67,10 +67,10 @@ public class BaseModelUtils<T> {
             baseModelParentDO.setCommentId(commentDO.getUnionId());
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = BaseModelUtils.getModelByClass(model);
-            baseModelParentDO.setMessageId(messageDO.getId());
+            baseModelParentDO.setMessageId(messageDO.getHahaId());
         } else if (model instanceof SocialUserImgDO) {
             SocialUserImgDO userImgDO = BaseModelUtils.getModelByClass(model);
-            baseModelParentDO.setUserImgId(userImgDO.getId());
+            baseModelParentDO.setUserImgId(userImgDO.getHahaId());
         } else {
             throw new SocialBusinessException("错误的内容类型");
         }
