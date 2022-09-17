@@ -27,14 +27,4 @@ public class SocialuniReportAddQO {
     private String content;
     //新版本用这个，不用上面那个了content
     private String cause;
-
-    public SocialReportAddQO toSocialQO(Integer contentId) {
-        SocialReportAddQO socialReportAddQO = new SocialReportAddQO();
-        socialReportAddQO.setContentId(contentId);
-        socialReportAddQO.setContent(this.content);
-        socialReportAddQO.setReportType(this.reportType);
-        socialReportAddQO.setReportContentType(this.reportContentType);
-        socialReportAddQO.setCause(this.cause);
-        return socialReportAddQO;
-    }
 }

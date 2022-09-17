@@ -5,7 +5,7 @@ import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
 import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.dao.repository.UserImgRepository;
@@ -32,9 +32,9 @@ public class TencentCloudCosService {
         boolean containsTalk = imgUrl.contains("talk");
         String contentType;
         if (containsTalk) {
-            contentType = ContentType.talk;
+            contentType = SocialuniContentType.talk;
         } else {
-            contentType = ContentType.user;
+            contentType = SocialuniContentType.user;
         }
         recordDO.setStatus(CommonStatus.enable);
         recordDO.setContentType(contentType);
@@ -55,10 +55,10 @@ public class TencentCloudCosService {
         String imgKey = imgThumbTypes[0].substring(subStrLength);
         recordDO.setImgKey(imgKey);
 
-        if (contentType.equals(ContentType.talk)) {
+        if (contentType.equals(SocialuniContentType.talk)) {
             SocialTalkImgDO talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
             if (talkImgDO != null) {
-                recordDO.setImgContentId(talkImgDO.getId());
+                recordDO.setImgContentId(talkImgDO.getUnionId());
                 recordDO.setImgParentContentId(talkImgDO.getTalkId());
                 recordDO.setUserId(talkImgDO.getUserId());
             } else {

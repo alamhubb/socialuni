@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
@@ -29,7 +29,7 @@ public class ReportContentROFactory {
 
     public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
-        if (reportContentType.equals(ContentType.talk)) {
+        if (reportContentType.equals(SocialuniContentType.talk)) {
             SocialTalkDO talkDO = TalkUtils.getNotNull(contentId);
             reportContentVO.setId(contentId);
             reportContentVO.setContent(talkDO.getContent());
@@ -49,13 +49,13 @@ public class ReportContentROFactory {
             List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(contentId);
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
-        } else if (reportContentType.equals(ContentType.comment)) {
+        } else if (reportContentType.equals(SocialuniContentType.comment)) {
             SocialCommentDO commentDO = CommentUtils.getNotNull(contentId);
             reportContentVO.setId(commentDO.getUnionId());
             reportContentVO.setContent(commentDO.getContent());
             reportContentVO.setReportNum(commentDO.getReportNum());
             reportContentVO.setUserId(commentDO.getUserId());
-        } else if (reportContentType.equals(ContentType.userImg)) {
+        } else if (reportContentType.equals(SocialuniContentType.userImg)) {
 
             /*UserImgDO userImg = UserImgUtils.find(reportDO.getUserImgId());
             reportContentVO.userId = userImg.getUserId();
@@ -66,7 +66,7 @@ public class ReportContentROFactory {
             reportContentVO.setContent(commentDO.getContent());
             reportContentVO.setReportNum(commentDO.getReportNum());
             reportContentVO.setUserId(commentDO.getUserId());*/
-        } else if (reportContentType.equals(ContentType.message)) {
+        } else if (reportContentType.equals(SocialuniContentType.message)) {
             /*MessageDO message = MessageStoreUtils.findById(reportDO.getMessageId());
             reportContentVO.userId = message.getUserId();
             reportContentVO.content = message.getContent();

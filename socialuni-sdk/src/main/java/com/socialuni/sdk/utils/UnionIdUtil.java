@@ -3,7 +3,7 @@ package com.socialuni.sdk.utils;
 import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -32,19 +32,23 @@ public class UnionIdUtil {
 
     //根据空的创建， 本系统写入数据时，需要先创建，然后写入内容表unionId，然后再根据返回内容更新uid
     public static Integer createUserUnionId() {
-        return createUnionIdByContentType(ContentType.user);
+        return createUnionIdByContentType(SocialuniContentType.user);
     }
 
     public static Integer createUserImgUnionId() {
-        return createUnionIdByContentType(ContentType.userImg);
+        return createUnionIdByContentType(SocialuniContentType.userImg);
+    }
+
+    public static Integer createTalkImgUnionId() {
+        return createUnionIdByContentType(SocialuniContentType.talkImg);
     }
 
     public static Integer createTalkUnionId() {
-        return createUnionIdByContentType(ContentType.talk);
+        return createUnionIdByContentType(SocialuniContentType.talk);
     }
 
     public static Integer createCommentUnionId() {
-        return createUnionIdByContentType(ContentType.comment);
+        return createUnionIdByContentType(SocialuniContentType.comment);
     }
 
     //自身创建
@@ -121,23 +125,23 @@ public class UnionIdUtil {
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
         SocialuniUserDO user = SocialuniUserUtil.getMineUserAllowNull();
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.talk);
+        return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.talk);
     }
 
     public static List<Integer> getContentIdsByUserUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.user);
+        return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.user);
     }
 
     public static List<Integer> getContentIdsByUserImgUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.userImg);
+        return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.userImg);
     }
 
     public static List<Integer> getContentIdsByCommentUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.comment);
+        return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.comment);
     }
 
     public static List<Integer> getContentIdsByMessageUnionIds(List<String> contentUnionIds) {
-        return getContentIdsByUnionIds(contentUnionIds, ContentType.message);
+        return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.message);
     }
 
     public static List<Integer> getContentIdsByUnionIds(List<String> contentUnionIds, String contentType) {

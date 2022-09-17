@@ -26,7 +26,7 @@ public interface BaseModelDO {
 
     void setReportNum(Integer reportNum);
 
-    String getReportContentType();
+    String getContentType();
 
     Integer getUnionId();
 }

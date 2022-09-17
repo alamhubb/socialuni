@@ -35,7 +35,6 @@ public class MessageDO extends SocialUnionContentBaseDO implements BaseModelDO, 
     private String type;
     //图文，图片，文字，视频，这种类型，内容类型
     private String contentType;
-    private String reportContentType;
     private String readStatus;
     //有多少人已读
     private Integer readNum;
@@ -56,7 +55,7 @@ public class MessageDO extends SocialUnionContentBaseDO implements BaseModelDO, 
         this.createTime = curDate;
         this.updateTime = curDate;
         this.content = content;
-        this.reportContentType = ContentType.message;
+        this.contentType = SocialuniContentType.message;
         //自己的chatUser，记录自己的未读消息数量，和是否置顶了，生成chatVo时使用
         this.status = MessageStatus.enable;
         this.readStatus = MessageReadStatus.sending;

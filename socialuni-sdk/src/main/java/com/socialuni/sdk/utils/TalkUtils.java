@@ -27,11 +27,12 @@ public class TalkUtils {
         return talkDO;
     }
 
+    //逻辑没问题，第一行是校验
     public static SocialTalkDO getAllowNull(Integer unionId) {
         UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
         SocialTalkDO talkDO = talkRepository.findOneByUnionId(unionId);
         if (talkDO == null) {
-            //用户写入的数据，不该出现不存在的情况
+            //只有开发者相等才进入， 用户写入的数据，不该出现不存在的情况
             if (Objects.equals(DevAccountUtils.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
                 throw new SocialSystemException("动态丢失了，请联系客服");
             }

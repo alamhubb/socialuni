@@ -50,7 +50,7 @@ public class WangYiUtil {
     public static AntispamDO checkWYContentSecPost(BaseModelDO baseModelDO) throws IOException {
         AntispamDO antispamDO = new AntispamDO();
         //设置内容主体相关
-        antispamDO.setContentType(baseModelDO.getReportContentType());
+        antispamDO.setContentType(baseModelDO.getContentType());
         antispamDO.setContentId(baseModelDO.getUnionId());
         antispamDO.setContent(baseModelDO.getContent());
         antispamDO.setCreateTime(new Date());

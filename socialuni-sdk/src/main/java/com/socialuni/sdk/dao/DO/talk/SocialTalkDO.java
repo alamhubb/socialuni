@@ -1,7 +1,7 @@
 package com.socialuni.sdk.dao.DO.talk;
 
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -63,7 +63,7 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
      * 删除原因
      */
     private String deleteReason;
-    private String reportContentType;
+    private String contentType;
     private String violateType;
     @Column(nullable = false, columnDefinition = "varchar(255) default 'fullNetwork'")
     private String visibleType;
@@ -105,6 +105,6 @@ public class SocialTalkDO extends SocialUnionContentBaseDO implements BaseModelD
         this.hugNum = 0;
         this.reportNum = 0;
         this.globalTop = 0;
-        this.reportContentType = ContentType.talk;
+        this.contentType = SocialuniContentType.talk;
     }
 }

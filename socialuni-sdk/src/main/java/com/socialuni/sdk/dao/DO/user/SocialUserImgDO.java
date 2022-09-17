@@ -22,16 +22,4 @@ import java.io.Serializable;
 )
 @Data
 public class SocialUserImgDO extends SocialuniImgBaseDO implements BaseModelDO, Serializable {
-    private String deleteReason;
-
-    private String violateType;
-
-    private String reportContentType;
-
-    @Column(nullable = false)
-    private Integer reportNum;
-
-    public SocialUserImgDO() {
-        this.reportNum = 0;
-    }
 }

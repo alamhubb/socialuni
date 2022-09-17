@@ -4,7 +4,6 @@ import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.report.SoicialReportAddDomain;
 import com.socialuni.sdk.feignAPI.SocialuniReportAPI;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
@@ -33,12 +32,8 @@ public class SocialuniReportService {
             return socialuniReportAPI.addReport(centerReportAddQO);
         }
 
-        Integer contentId = UnionIdUtil.getUnionIdByUuidNotNull(centerReportAddQO.getContentId());
-
-        SocialReportAddQO socialReportAddQO = centerReportAddQO.toSocialQO(contentId);
-
         //校验是否触发关键词，如果触发生成举报，修改动态为预审查，只能用户自己可见
-        ResultRO<String> resultRO = soicialReportAddDomain.addReport(socialReportAddQO);
+        ResultRO<String> resultRO = soicialReportAddDomain.addReport(centerReportAddQO);
 
         return resultRO;
     }

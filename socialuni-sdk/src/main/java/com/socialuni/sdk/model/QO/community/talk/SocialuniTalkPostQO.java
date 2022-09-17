@@ -11,8 +11,8 @@ public class SocialuniTalkPostQO extends ContentAddQO {
     private String adCode;
     private String visibleType;
     private String visibleGender;
-    private Integer devId;
-    private String socialuniUid;
+//    private Integer devId;
+//    private String socialuniUid;
     private List<Integer> tagIds;
     private List<String> tagNames;
     private String circleName;

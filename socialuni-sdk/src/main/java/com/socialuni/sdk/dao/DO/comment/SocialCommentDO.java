@@ -76,7 +76,7 @@ public class SocialCommentDO extends SocialUnionContentBaseDO implements BaseMod
      */
     private String deleteReason;
     private String violateType;
-    private String reportContentType;
+    private String contentType;
 
     //最大最小可见年龄
     private Integer minAge;

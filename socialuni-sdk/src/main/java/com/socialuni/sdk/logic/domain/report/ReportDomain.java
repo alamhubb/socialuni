@@ -14,7 +14,7 @@ import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.QO.SocialReportAddQO;
+import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 
 import com.socialuni.sdk.logic.service.KeywordsService;
@@ -85,7 +85,7 @@ public class ReportDomain {
 
             // 校验是否触发关键词
             List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerService
-                    .checkContentTriggerKeywords(modelDO, modelDO.getReportContentType(), AppConfigStatic.getKeywordDOs(), false);
+                    .checkContentTriggerKeywords(modelDO, modelDO.getContentType(), AppConfigStatic.getKeywordDOs(), false);
 
 
 //            if (!CollectionUtils.isEmpty(keywordsTriggers) || antispamDO.hasViolate()) {
@@ -139,7 +139,7 @@ public class ReportDomain {
 
 
     @Transactional
-    public ResultRO<String> userReportContent(SocialReportAddQO socialReportAddQO, UniContentUnionIdDO uniContentUnionIdDO, BaseModelDO modelDO, Integer mineUserId, Integer devId) {
+    public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, UniContentUnionIdDO uniContentUnionIdDO, BaseModelDO modelDO, Integer mineUserId, Integer devId) {
         //这里之后才能校验
 
         // 设置model

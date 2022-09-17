@@ -10,7 +10,7 @@ import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.model.QO.SocialIntIdQO;
 import com.socialuni.sdk.model.QO.SocialIntQO;
@@ -44,7 +44,7 @@ public class TencentImgAuditRecordController {
     @PostMapping("queryImgAuditHistory")
     public ResultRO<List<TencentCosAuditRecordRO>> queryImgAuditHistory(@RequestBody SocialIntQO intQO) {
         CheckIsAdminUtil.checkAdmin();
-        List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop20ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullAndContentTypeOrderByIdDesc(CommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail, ContentType.talk);
+        List<TencentCosAuditRecordDO> list = tencentCosAuditRecordRepository.findTop20ByStatusNotAndScoreGreaterThanEqualAndForbiddenStatusAndImgThumbTypeAndUserIdNotNullAndContentTypeOrderByIdDesc(CommonStatus.delete, intQO.getNumber(), TencentCosAuditStatus.enable, ImgThumbnailType.thumbnail, SocialuniContentType.talk);
         List<TencentCosAuditRecordRO> listRo = ListConvertUtil.toList(TencentCosAuditRecordRO::new, list);
         return ResultRO.success(listRo);
     }

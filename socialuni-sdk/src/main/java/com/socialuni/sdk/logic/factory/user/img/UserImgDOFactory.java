@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.factory.user.img;
 
 import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.constant.AppConfigConst;
@@ -24,9 +24,9 @@ public class UserImgDOFactory {
         userImgDO.setStatus(ContentStatus.enable);
         userImgDO.setCreateTime(new Date());
         userImgDO.setContent(AppConfigConst.img_content);
-        userImgDO.setReportContentType(ContentType.userImg);
+        userImgDO.setContentType(SocialuniContentType.userImg);
         userImgDO.setReportNum(0);
-        userImgDO.setIsSelfAuth(false);
+        userImgDO.setAdultAuth(false);
         Integer userImgUnionId = UnionIdUtil.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
         return userImgDO;

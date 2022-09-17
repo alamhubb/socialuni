@@ -3,7 +3,7 @@ package com.socialuni.admin.web.model.RO;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
@@ -48,8 +48,8 @@ public class TencentCosAuditRecordRO {
         this.result = recordDO.getResult();
         this.url = recordDO.getUrl();
         this.violateType = ViolateType.noViolation;
-        if (recordDO.getContentType().equals(ContentType.talk)) {
-            this.talk = ReportContentROFactory.getReportContentVO(ContentType.talk, recordDO.getImgParentContentId());
+        if (recordDO.getContentType().equals(SocialuniContentType.talk)) {
+            this.talk = ReportContentROFactory.getReportContentVO(SocialuniContentType.talk, recordDO.getImgParentContentId());
         }
         SocialuniUserDO userDO = SocialuniUserUtil.getAllowNull(recordDO.getUserId());
         if (userDO != null) {

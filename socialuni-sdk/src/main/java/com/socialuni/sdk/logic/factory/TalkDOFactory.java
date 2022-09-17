@@ -4,6 +4,7 @@ import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.logic.platform.MapUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
@@ -15,7 +16,7 @@ public class TalkDOFactory {
         SocialTalkDO talkDO = new SocialTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
 
         //设置社交联盟唯一id
-        talkDO.setSocialuniUid(socialTalkPostQO.getSocialuniUid());
+//        talkDO.setSocialuniUid(socialTalkPostQO.getSocialuniUid());
 
 //        socialTalkDO.setDevId(DevAccountUtils.getDevId());
 
@@ -34,6 +35,7 @@ public class TalkDOFactory {
 
         //使用talk本身存储,position 和 district
         talkDO.setAdCode(district.getAdCode());
+        talkDO.setDevId(DevAccountUtils.getDevIdNotNull());
         talkDO.setAdName(district.getAdName());
         talkDO.setProvinceName(district.getProvinceName());
         talkDO.setCityName(district.getCityName());

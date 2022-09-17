@@ -31,7 +31,7 @@ public class ReportVO {
 // 关联类型，关联的是说说，评论，匹配，用户信息
 
 
-    private String reportContentType;
+    private String contentType;
     private List<ReportDetailVO> childReports;
     private ReportUserVO user;
     private Date updateTime;
@@ -55,7 +55,7 @@ public class ReportVO {
 
     public ReportVO(ReportDO reportDO) {
         this.id = reportDO.getId();
-        this.talk = ReportContentROFactory.getReportContentVO(reportDO.getReportContentType(), reportDO.getContentId());
+        this.talk = ReportContentROFactory.getReportContentVO(reportDO.getContentType(), reportDO.getContentId());
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
@@ -71,7 +71,7 @@ public class ReportVO {
     }
 
     public ReportVO(BaseModelDO modelDO) {
-        this.talk = ReportContentROFactory.getReportContentVO(modelDO.getReportContentType(), modelDO.getUnionId());
+        this.talk = ReportContentROFactory.getReportContentVO(modelDO.getContentType(), modelDO.getUnionId());
         this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
         this.violateType = modelDO.getDeleteReason();

@@ -20,7 +20,7 @@ public class ReportDO implements Serializable {
 
     //被举报的用户
     private Integer receiveUserId;
-
+/*
     //不能直接使用do，因为无法直接获取缓存内容，但是也没必要获取，更新缓存就行了，再说2021.1.29
     //加入一列作为外键
     private Integer messageId;
@@ -30,9 +30,11 @@ public class ReportDO implements Serializable {
 
     //加入一列作为外键
     private Integer userImgId;
+    //加入一列作为外键
+    private Integer talkImgId;
 
     //加入一列作为外键
-    private Integer talkId;
+    private Integer talkId;*/
 
     private Integer contentId;
 
@@ -46,7 +48,7 @@ public class ReportDO implements Serializable {
     /**
      * 关联类型，关联的是说说，评论，匹配，用户信息
      */
-    private String reportContentType;
+    private String contentType;
 
     /**
      * 关联信息的版本号

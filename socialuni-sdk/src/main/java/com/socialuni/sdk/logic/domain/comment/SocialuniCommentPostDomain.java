@@ -1,5 +1,6 @@
 package com.socialuni.sdk.logic.domain.comment;
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
@@ -17,6 +18,7 @@ import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdUtil;
+import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,12 @@ public class SocialuniCommentPostDomain {
             //校验内容是否违规
             SocialuniContentCheckUtil.checkUserInputLongTextContent(addQO.getContent());
         }
+
+        //评论暂时不需要校园名称
+       /* if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
+            SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
+        }*/
+
         //校验结果
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
         //保存comment，内部关联保存了talk、parentComment、replyComment

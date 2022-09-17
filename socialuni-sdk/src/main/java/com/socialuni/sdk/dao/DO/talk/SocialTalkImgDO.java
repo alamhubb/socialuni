@@ -1,5 +1,6 @@
 package com.socialuni.sdk.dao.DO.talk;
 
+import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.io.Serializable;
         }
 )
 @Data
-public class SocialTalkImgDO extends SocialuniImgBaseDO implements Serializable {
+public class SocialTalkImgDO extends SocialuniImgBaseDO implements BaseModelDO, Serializable {
     @Column(nullable = false, updatable = false)
     private Integer talkId;
 }

@@ -48,7 +48,7 @@ public class ViolationPushUtils {
         //违规内容
         pushNotifyVO.setBeContent(new PushValue(StringUtils.substring(baseModelDO.getContent(), 0, 20)));
         //违规内容类型
-        pushNotifyVO.setBeContentType(new PushValue(reportDO.getReportContentType()));
+        pushNotifyVO.setBeContentType(new PushValue(reportDO.getContentType()));
         //违规用户
         pushNotifyVO.setBeNickname(new PushValue(vioUser.getNickname()));
 

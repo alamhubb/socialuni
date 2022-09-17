@@ -4,7 +4,7 @@ import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.sdk.dao.repository.*;
 
 import com.socialuni.social.web.sdk.model.ResultRO;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.dao.DO.NotifyDO;
 import com.socialuni.sdk.dao.DO.ReportDO;
@@ -85,7 +85,7 @@ public class AdminReportService {
             //为待审核才继续处理
             if (ReportStatus.auditStatus.contains(reportDO.getStatus())) {
                 //校验违规类型
-                if (!ContentType.reportContentTypeTypes.contains(reportDO.getReportContentType())) {
+                if (!SocialuniContentType.reportContentTypeTypes.contains(reportDO.getContentType())) {
                     return new ResultRO<>("错误的违规内容类型");
                 }
 

@@ -32,8 +32,8 @@ public class TalkManage {
      * @param talk
      * @return
      */
-    public void updateTalkByAddComment(String talkUId) {
-        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(talkUId);
+    public void updateTalkByAddComment(String talkUuid) {
+        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(talkUuid);
         SocialTalkDO talk = TalkUtils.getAllowNull(talkId);
         if (talk == null) {
             return;

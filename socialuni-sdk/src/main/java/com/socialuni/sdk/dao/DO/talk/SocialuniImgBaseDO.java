@@ -32,8 +32,18 @@ public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Seri
     //ocr后查看是否包含未成年内容
     private Boolean hasUnderageContent;
 
+    private String deleteReason;
+
+    private String violateType;
+
+    private String contentType;
+
+    @Column(nullable = false)
+    private Integer reportNum;
+
     //do 只有一个构造
     public SocialuniImgBaseDO() {
+        this.reportNum = 0;
         this.hasPeopleImg = false;
         this.adultAuth = false;
         this.hasUnderageContent = false;

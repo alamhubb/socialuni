@@ -74,9 +74,9 @@ public class SocialuniTalkPostDomain {
             }
         }
 
-        Integer devId = DevAccountUtils.getDevIdNotNull();
+//        Integer devId = DevAccountUtils.getDevIdNotNull();
 
-        talkPostQO.setDevId(devId);
+//        talkPostQO.setDevId(devId);
        /* TagDO devTagDO = tagRepository.findFirstByDevId(devId);
 
         List<String> tagNames = talkPostQO.getTagNames();
@@ -86,9 +86,7 @@ public class SocialuniTalkPostDomain {
         tagNames.add(devTagDO.getName());
         talkPostQO.setTagNames(tagNames);*/
 
-        if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
-            SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
-        }
+
         SocialuniTalkRO socialTalkRO = socialTalkPostDomain.postTalk(talkPostQO);
 
         return socialTalkRO;

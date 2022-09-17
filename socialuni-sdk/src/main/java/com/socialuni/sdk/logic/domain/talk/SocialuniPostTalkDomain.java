@@ -1,5 +1,6 @@
 package com.socialuni.sdk.logic.domain.talk;
 
+import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkOperateType;
 import com.socialuni.sdk.dao.DO.talk.*;
@@ -26,6 +27,7 @@ import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.utils.model.DO.SocialuniCircleDOUtil;
+import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -87,7 +89,7 @@ public class SocialuniPostTalkDomain {
             //如果用户包含人物头像,且用户未认证
             if (imgDO.getHasPeopleImg() && !imgDO.getAdultAuth()) {
                 //则添加一条待审核的动态，qq平台只查询审核通过的动态
-                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(imgDO.getId());
+                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(imgDO.getUnionId());
                 talkAdultAuditRepository.save(socialTalkAdultAuditDO);
             }
         }
@@ -115,6 +117,10 @@ public class SocialuniPostTalkDomain {
             //不使用图片安全校验，原因是啥，今晚确认
 //            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
             //还需要获取图片中的cor
+        }
+
+        if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
+            SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
         }
 
         for (SocialTalkImgAddQO talkVOImg : talkVOImgs) {

@@ -12,7 +12,7 @@ import com.socialuni.sdk.dao.repository.MessageRepository;
 import com.socialuni.sdk.dao.repository.UserImgRepository;
 import com.socialuni.sdk.utils.CommentUtils;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
@@ -35,18 +35,18 @@ public class BaseModelUtils<T> {
     }
 
     public static BaseModelDO getModelByReport(ReportDO reportDO) {
-        String reportContentType = reportDO.getReportContentType();
-        if (!ContentType.reportContentTypeTypes.contains(reportContentType)) {
+        String reportContentType = reportDO.getContentType();
+        if (!SocialuniContentType.reportContentTypeTypes.contains(reportContentType)) {
             throw new SocialBusinessException("不存在的内容类型");
         }
         BaseModelDO modelDO;
-        if (reportContentType.equals(ContentType.talk)) {
+        if (reportContentType.equals(SocialuniContentType.talk)) {
             modelDO = TalkUtils.getNotNull(reportDO.getContentId());
-        } else if (reportContentType.equals(ContentType.comment)) {
+        } else if (reportContentType.equals(SocialuniContentType.comment)) {
             modelDO = CommentUtils.getNotNull(reportDO.getContentId());
-        } else if (reportContentType.equals(ContentType.message)) {
+        } else if (reportContentType.equals(SocialuniContentType.message)) {
             modelDO = messageRepository.findById(reportDO.getContentId()).get();
-        } else if (reportContentType.equals(ContentType.userImg)) {
+        } else if (reportContentType.equals(SocialuniContentType.userImg)) {
             modelDO = userImgRepository.findOneByUnionId(reportDO.getContentId());
         } else {
             throw new SocialBusinessException("不存在的内容类型");
@@ -76,25 +76,25 @@ public class BaseModelUtils<T> {
         }
     }
 
-    public static ReportDO setBaseModelId(ReportDO reportDO, BaseModelDO baseModelDO) {
+   /* public static ReportDO setBaseModelId(ReportDO reportDO, BaseModelDO baseModelDO) {
         switch (baseModelDO.getReportContentType()) {
-            case ContentType.userImg:
+            case SocialuniContentType.userImg:
                 reportDO.setUserImgId(baseModelDO.getUnionId());
                 break;
-            case ContentType.talk:
+            case SocialuniContentType.talk:
                 reportDO.setTalkId(baseModelDO.getUnionId());
                 break;
-            case ContentType.comment:
+            case SocialuniContentType.comment:
                 reportDO.setCommentId(baseModelDO.getUnionId());
                 break;
-            case ContentType.message:
+            case SocialuniContentType.message:
                 reportDO.setMessageId(baseModelDO.getUnionId());
                 break;
             default:
                 throw new SocialParamsException("错误的内容类型");
         }
         return reportDO;
-    }
+    }*/
 
     public static <T> T getModelByClass(BaseModelDO model) {
         return (T) model;

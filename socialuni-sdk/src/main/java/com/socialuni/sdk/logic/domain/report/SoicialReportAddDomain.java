@@ -7,16 +7,16 @@ import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
-import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
@@ -42,14 +42,14 @@ public class SoicialReportAddDomain {
     @Resource
     private UserImgRepository userImgRepository;
     @Resource
+    private TalkImgRepository talkImgRepository;
+    @Resource
     private MessageRepository messageRepository;
 
     @Resource
     private ReportDomain reportDomain;
-    @Resource
-    private SocialuniContentCheckUtil modelContentCheck;
 
-    public ResultRO<String> addReport(SocialReportAddQO reportAddVO) {
+    public ResultRO<String> addReport(SocialuniReportAddQO reportAddVO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
@@ -57,7 +57,7 @@ public class SoicialReportAddDomain {
             throw new SocialParamsException("错误的举报类型");
         }
         String reportContentType = reportAddVO.getReportContentType();
-        if (!ContentType.reportContentTypeTypes.contains(reportContentType)) {
+        if (!SocialuniContentType.reportContentTypeTypes.contains(reportContentType)) {
             throw new SocialParamsException("错误的举报内容类型");
         }
         if (ViolateType.other.equals(reportType) && StringUtils.isEmpty(reportAddVO.getContent())) {
@@ -97,35 +97,41 @@ public class SoicialReportAddDomain {
         //理论上来说这些状态应该都是不能被举报的，因为看不见，所以这个逻辑现在也没啥问题，没了不违规状态了
         //查询动态状态是否为正常
         BaseModelDO modelDO = null;
+
+        String contentUuId = UnionIdUtil.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
+        Integer contentUnionId = UnionIdUtil.getUnionIdByUuidNotNull(contentUuId);
+        UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(contentUnionId);
+
         // 举报了动态
         // 举报了动态
-        if (ContentType.talk.equals(reportContentType)) {
+        if (SocialuniContentType.talk.equals(reportContentType)) {
             //查询出 评论信息
             //只查询正常能看到的，违规，审核，删除的都提示
-            modelDO = talkRepository.findOneByUnionId(reportAddVO.getContentId());
+            modelDO = talkRepository.findOneByUnionId(contentUnionId);
             if (modelDO != null && !modelDO.getStatus().equals(ContentStatus.enable)) {
                 modelDO = null;
             }
-        } else if (ContentType.comment.equals(reportContentType)) {
-            modelDO = commentRepository.findOneByUnionIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
-        } else if (ContentType.message.equals(reportContentType)) {
-            modelDO = messageRepository.findOneByUnionIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
-        } else if (ContentType.userImg.equals(reportContentType)) {
-            modelDO = userImgRepository.findOneByUnionIdAndStatus(reportAddVO.getContentId(), ContentStatus.enable);
-        } else {
+        } else if (SocialuniContentType.comment.equals(reportContentType)) {
+            modelDO = commentRepository.findOneByUnionIdAndStatus(contentUnionId, ContentStatus.enable);
+        } else if (SocialuniContentType.message.equals(reportContentType)) {
+            modelDO = messageRepository.findOneByUnionIdAndStatus(contentUnionId, ContentStatus.enable);
+        } else if (SocialuniContentType.userImg.equals(reportContentType)) {
+            modelDO = userImgRepository.findOneByUnionIdAndStatus(contentUnionId, ContentStatus.enable);
+        } else if (SocialuniContentType.talkImg.equals(reportContentType)) {
+            modelDO = talkImgRepository.findOneByUnionIdAndStatus(contentUnionId, ContentStatus.enable);
+        }else {
             throw new SocialParamsException("错误的内容类型");
         }
         if (modelDO == null) {
             throw new SocialBusinessException("内容已被举报，审核中");
         }
 
-        UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(reportAddVO.getContentId());
 
         //则代表这条数据不属于本系统
         //这里限制了内容只能被举报一次，只有第一次被举报时，修改用户状态和动态状态
         //之后，只有审核时，才修改动态，
         //不为正常则不该看到，提示已被举报，有点问题不影响业务的小问题，提示信息不对
-        if (!ContentStatus.enable.equals(uniContentUnionIdDO.getStatus())) {
+        if (!ContentStatus.enable.equals(modelDO.getStatus())) {
             throw new SocialParamsException("内容已被举报，审核中");
         }
         Integer receiveUserUnionId = modelDO.getUserId();

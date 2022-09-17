@@ -49,7 +49,7 @@ public class ReportFactory {
         reportDO.setUpdateTime(curDate);
         reportDO.setDevId(devId);
         //内容来源
-        reportDO.setReportContentType(uniContentUnionIdDO.getContentType());
+        reportDO.setContentType(uniContentUnionIdDO.getContentType());
         //举报来源
         reportDO.setReportSourceType(reportSourceType);
 
