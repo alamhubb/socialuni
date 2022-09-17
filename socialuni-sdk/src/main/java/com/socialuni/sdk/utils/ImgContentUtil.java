@@ -62,7 +62,6 @@ public class ImgContentUtil {
         COSObject cosObject = cosClient.getObject(getObj);
         COSObjectInputStream content = cosObject.getObjectContent();
         String response = IOUtils.toString(content);
-        System.out.println(response);
     }
 
     public static boolean hasQrCodeByCloudAPI(String imgKey) {
@@ -75,7 +74,6 @@ public class ImgContentUtil {
             // 返回的resp是一个QrcodeOCRResponse的实例，与请求对象对应
             QrcodeOCRResponse resp = client.QrcodeOCR(req);
             // 输出json格式的字符串回包
-            System.out.println(QrcodeOCRResponse.toJsonString(resp));
             return true;
         } catch (TencentCloudSDKException e) {
             return false;

@@ -22,15 +22,11 @@ public class RequestIdUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(curDate);
         int minute = calendar.get(Calendar.MINUTE);
-        System.out.println(minute);
         int ageMinuteTen = minute / 10;
         calendar.set(Calendar.MINUTE, ageMinuteTen * 10);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 //        calendar.set(Calendar.MILLISECOND, 0);
         Date lastTenMinutes = calendar.getTime();
-
-        System.out.println(lastTenMinutes);
-        System.out.println(lastTenMinutes.getTime());
     }
 }

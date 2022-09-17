@@ -149,7 +149,6 @@ public class ReportDomain {
                     baseModelService.save(modelDO);
                 }
             }
-
         }
         return modelDO;
     }

@@ -13,8 +13,10 @@ import com.socialuni.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.ObjectUtil;
 import com.socialuni.social.web.sdk.utils.JsonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Async;
@@ -28,6 +30,7 @@ import java.util.List;
  * @date 2019-10-24 11:57
  */
 @Component
+@Slf4j
 public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     private ConfigMapRefreshService configMapRefreshService;
@@ -55,7 +58,7 @@ public class MyApplicationRunner implements ApplicationRunner {
             SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = (SocialuniAppMoreConfigBO) socialuniAppConfig.getClass().getField("appMoreConfig").get(null);
             SocialuniAppConfig.resetSocialuniAppConfig(appType, socialuniAppConfigBO, socialuniAppMoreConfigBO);
         }
-        System.out.println(JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appConfig));
+        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
 

@@ -207,16 +207,13 @@ public class SocialuniPostTalkDomain {
         }
         talkTagRepository.saveAll(list);
 
-        System.out.println("测试异步111");
         socialuniPostTalkDomainAsync.saveTalkImgs(socialTalkPostQO, talkDO);
-        System.out.println("测试异步222");
         if (socialCircleDO != null) {
             SocialTalkCircleDO socialTalkCircleDO = new SocialTalkCircleDO();
             socialTalkCircleDO.setTalkId(talkDO.getUnionId());
             socialTalkCircleDO.setCircleId(socialCircleDO.getId());
             socialTalkCircleRepository.save(socialTalkCircleDO);
         }
-        System.out.println("测试异步3333");
         return talkDO;
     }
 }

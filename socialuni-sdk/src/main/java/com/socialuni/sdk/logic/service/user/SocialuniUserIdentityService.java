@@ -119,10 +119,7 @@ public class SocialuniUserIdentityService {
         socialUserIdentityDO.setSex(resp.getSex());
         socialUserIdentityDO.setNation(resp.getNation());
         socialUserIdentityAuthRepository.save(socialUserIdentityDO);
-        System.out.println(resp.getBirth());
-        System.out.println(DateUtils.getBirthDateBySlashDateStr(resp.getBirth()));
         // 输出json格式的字符串回包
-        System.out.println(IDCardOCRResponse.toJsonString(resp));
         return ResultRO.success("认证信息已经提交，请您耐心等待审核结果，预计3个工作日内完成认证");
     }
 }

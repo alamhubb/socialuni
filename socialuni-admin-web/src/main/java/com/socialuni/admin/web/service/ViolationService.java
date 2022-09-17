@@ -152,7 +152,7 @@ public class ViolationService {
         if (!UserType.system.equals(violationUser.getType())) {
             userViolationHandler(violationUser, vioReason, curDate, violateType);
             userRepository.save(violationUser);
-            System.out.println("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getUnionId() + "用户状态改为：" + violationUser.getStatus());
+            log.info("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getUnionId() + "用户状态改为：" + violationUser.getStatus());
         }
         return violationUser;
     }

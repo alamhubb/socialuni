@@ -42,6 +42,7 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Component
@@ -78,14 +79,15 @@ public class SocialuniPostTalkDomainAsync {
                 // todo && !imgDO.getAdultAuth() 目前认证不严格，所以暂时认证的也需要审核
 //                if (!imgDO.getAdultAuth()) {
                 //则添加一条待审核的动态，qq平台只查询审核通过的动态
-                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(talkImgDO.getUnionId());
-                talkAdultAuditRepository.save(socialTalkAdultAuditDO);
 //                }
+                CompletableFuture.runAsync(()->{
+                    SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(talkImgDO.getUnionId());
+                    talkAdultAuditRepository.save(socialTalkAdultAuditDO);
+                });
             }
             reportDomain.checkKeywordsCreateReport(talkImgDO);
         }
         imgDOS = talkImgRepository.saveAll(imgDOS);
-        System.out.println("测试异步444");
         talkDO.setImgs(imgDOS);
     }
 }

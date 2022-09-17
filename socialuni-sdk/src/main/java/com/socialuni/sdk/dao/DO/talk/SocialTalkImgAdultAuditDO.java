@@ -1,5 +1,7 @@
 package com.socialuni.sdk.dao.DO.talk;
 
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,7 @@ public class SocialTalkImgAdultAuditDO extends SocialContentBaseDO implements Se
     private Integer talkImgId;
 
     public SocialTalkImgAdultAuditDO(Integer talkImgId) {
+        this.setStatus(ContentStatus.preAudit);
         this.talkImgId = talkImgId;
     }
 }
