@@ -8,6 +8,7 @@ import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
+import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
@@ -26,8 +27,6 @@ public class SoicialTagAddDomain {
     @Resource
     private TagRepository tagRepository;
     @Resource
-    private IllegalWordService illegalWordService;
-    @Resource
     private SocialTagManage socialTagManage;
 
     public TagRO addTag(SocialuniUserDO mineUser, TagAddQO tagAddVO) {
@@ -38,7 +37,7 @@ public class SoicialTagAddDomain {
         if (tagName.length() > 6) {
             throw new SocialBusinessException("话题最多支持六个字");
         }
-        illegalWordService.checkHasIllegals(tagName);
+        SocialuniContentCheckUtil.checkUserInputTextContent(tagName, mineUser);
         //校验内容是否违规
 
         TagDO dbTag = tagRepository.findFirstByName(tagName);
@@ -46,17 +45,8 @@ public class SoicialTagAddDomain {
         if (dbTag != null) {
             throw new SocialBusinessException("标签已经存在，请直接使用");
         }
-        if (TencentCloud.textIsViolation(tagName)) {
-            throw new SocialBusinessException("标签名称违规");
-        }
-
         String description = tagAddVO.getDescription();
-        if (StringUtils.isNotEmpty(description)) {
-            HttpResult wxDesResult = WxUtil.checkTextWxSec(description);
-            if (wxDesResult.hasError()) {
-                throw new SocialBusinessException("标签描述包含违规内容，禁止发布，请修改后重试");
-            }
-        }
+        SocialuniContentCheckUtil.checkUserInputTextContent(description, mineUser);
         TagDO tagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
         TagRO tagRO = SocialTagROFactory.getTagRO(tagDO);
         return tagRO;

@@ -20,8 +20,6 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniEditUserSchoolNameDomain {
     @Resource
-    IllegalWordService illegalWordService;
-    @Resource
     UserRepository userRepository;
 
     @Resource

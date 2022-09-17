@@ -58,8 +58,6 @@ public class UserCreateService {
     private IdCardRepository idCardRepository;
     @Resource
     private VipSaleRepository vipSaleRepository;
-    @Resource
-    private IllegalWordService illegalWordService;
     @Value("${config.initAvatar}")
     private String initAvatar;
     @Resource

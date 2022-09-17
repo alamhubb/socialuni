@@ -44,11 +44,12 @@ public class SocialuniContentCheckUtil {
         if (StringUtils.isNotEmpty(content)) {
             //校验是否包含违禁词
             illegalWordService.checkHasIllegals(content);
-
-            HttpResult wxResult = WxUtil.checkTextWxSec(content);
+            //只用微信校验一下基本的
+            /*HttpResult wxResult = WxUtil.checkTextWxSec(content);
             if (wxResult.hasError()) {
                 throw new SocialBusinessException(ErrorMsg.CHECK_VIOLATION_ERR_MSG);
-            }
+            }*/
+            //qq要求必须接入，只用qq校验一下基本的
             HttpResult qqResult = QQUtil.checkContentQQSec(content);
             if (qqResult.hasError()) {
                 throw new SocialBusinessException(ErrorMsg.CHECK_VIOLATION_ERR_MSG);

@@ -5,6 +5,7 @@ import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.GenderUtil;
@@ -21,8 +22,6 @@ import java.util.Date;
 @Component
 public class SocialEditUserDomain {
     @Resource
-    IllegalWordService illegalWordService;
-    @Resource
     UserRepository userRepository;
 
     public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDO mineUser) {
@@ -38,15 +37,7 @@ public class SocialEditUserDomain {
             String oldNickname = mineUser.getNickname();
             //新旧昵称不一样，则更新
             if (!nickname.equals(oldNickname)) {
-                illegalWordService.checkHasIllegals(nickname);
-                //校验内容是否违规
-                if (TencentCloud.textIsViolation(nickname)) {
-                    throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
-                }
-                HttpResult wxResult = WxUtil.checkTextWxSec(nickname);
-                if (wxResult.hasError()) {
-                    throw new SocialBusinessException("昵称包含违规内容，禁止修改，请修改后重试");
-                }
+                SocialuniContentCheckUtil.checkUserInputTextContent(nickname, mineUser);
                 mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
             }
         }
@@ -77,16 +68,7 @@ public class SocialEditUserDomain {
                 String oldCity = mineUser.getCity();
                 //新旧昵称不一样，则更新
                 if (!userCity.equals(oldCity)) {
-                    //校验内容是否违规
-                    illegalWordService.checkHasIllegals(userCity);
-
-                    if (TencentCloud.textIsViolation(userCity)) {
-                        throw new SocialBusinessException("地区名称违规");
-                    }
-                    HttpResult wxResult = WxUtil.checkTextWxSec(userCity);
-                    if (wxResult.hasError()) {
-                        throw new SocialBusinessException("地区名称违规");
-                    }
+                    SocialuniContentCheckUtil.checkUserInputTextContent(userCity, mineUser);
                     mineUser.setCity(userCity);
                 }
             }
