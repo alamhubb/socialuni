@@ -28,7 +28,7 @@ public class TalkUtils {
     }
 
     public static SocialTalkDO getAllowNull(Integer unionId) {
-        UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(unionId);
+        UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
         SocialTalkDO talkDO = talkRepository.findOneByUnionId(unionId);
         if (talkDO == null) {
             //用户写入的数据，不该出现不存在的情况

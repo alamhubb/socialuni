@@ -67,10 +67,10 @@ public class BaseModelUtils<T> {
             baseModelParentDO.setCommentId(commentDO.getUnionId());
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = BaseModelUtils.getModelByClass(model);
-            baseModelParentDO.setMessageId(messageDO.getHahaId());
+            baseModelParentDO.setMessageId(messageDO.getUnionId());
         } else if (model instanceof SocialUserImgDO) {
             SocialUserImgDO userImgDO = BaseModelUtils.getModelByClass(model);
-            baseModelParentDO.setUserImgId(userImgDO.getHahaId());
+            baseModelParentDO.setUserImgId(userImgDO.getUnionId());
         } else {
             throw new SocialBusinessException("错误的内容类型");
         }
@@ -79,16 +79,16 @@ public class BaseModelUtils<T> {
     public static ReportDO setBaseModelId(ReportDO reportDO, BaseModelDO baseModelDO) {
         switch (baseModelDO.getReportContentType()) {
             case ContentType.userImg:
-                reportDO.setUserImgId(baseModelDO.getId());
+                reportDO.setUserImgId(baseModelDO.getUnionId());
                 break;
             case ContentType.talk:
-                reportDO.setTalkId(baseModelDO.getId());
+                reportDO.setTalkId(baseModelDO.getUnionId());
                 break;
             case ContentType.comment:
-                reportDO.setCommentId(baseModelDO.getId());
+                reportDO.setCommentId(baseModelDO.getUnionId());
                 break;
             case ContentType.message:
-                reportDO.setMessageId(baseModelDO.getId());
+                reportDO.setMessageId(baseModelDO.getUnionId());
                 break;
             default:
                 throw new SocialParamsException("错误的内容类型");

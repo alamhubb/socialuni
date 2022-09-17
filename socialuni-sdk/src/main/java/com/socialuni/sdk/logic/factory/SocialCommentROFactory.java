@@ -11,7 +11,7 @@ import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.SystemUtil;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -40,7 +40,7 @@ public class SocialCommentROFactory {
     public static SocialuniCommentRO newTalkCommentRO(SocialuniUserDO mineUser, SocialCommentDO comment, boolean showAll) {
         SocialuniCommentRO socialCommentRO = new SocialuniCommentRO();
 
-        String uid = UnionIdDbUtil.getUidByUnionIdNotNull(comment.getUnionId());
+        String uid = UnionIdUtil.getUuidByUnionIdNotNull(comment.getUnionId());
 
         socialCommentRO.setId(uid);
         socialCommentRO.setNo(comment.getNo());

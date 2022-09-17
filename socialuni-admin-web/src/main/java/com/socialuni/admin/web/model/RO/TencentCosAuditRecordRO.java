@@ -49,9 +49,9 @@ public class TencentCosAuditRecordRO {
         this.url = recordDO.getUrl();
         this.violateType = ViolateType.noViolation;
         if (recordDO.getContentType().equals(ContentType.talk)) {
-            this.talk = ReportContentROFactory.getReportContentVO(ContentType.talk, recordDO.getContentUid());
+            this.talk = ReportContentROFactory.getReportContentVO(ContentType.talk, recordDO.getImgParentContentId());
         }
-        SocialuniUserDO userDO = SocialuniUserUtil.getAllowNull(recordDO.getUserUid());
+        SocialuniUserDO userDO = SocialuniUserUtil.getAllowNull(recordDO.getUserId());
         if (userDO != null) {
             this.setAvatar(userDO.getAvatar());
             this.setNickname(userDO.getNickname());

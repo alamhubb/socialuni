@@ -60,10 +60,10 @@ public class BaseModelService {
             return reportRepository.findFirstOneByCommentId(commentDO.getUnionId());
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
-            return reportRepository.findFirstOneByMessageId(messageDO.getHahaId());
+            return reportRepository.findFirstOneByMessageId(messageDO.getUnionId());
         } else if (model instanceof SocialUserImgDO) {
             SocialUserImgDO userImgDO = (SocialUserImgDO) model;
-            return reportRepository.findFirstOneByUserImgId(userImgDO.getHahaId());
+            return reportRepository.findFirstOneByUserImgId(userImgDO.getUnionId());
         } else {
             throw new SocialBusinessException("错误的内容类型");
         }

@@ -13,7 +13,7 @@ import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ContentType;
@@ -119,7 +119,7 @@ public class SoicialReportAddDomain {
             throw new SocialBusinessException("内容已被举报，审核中");
         }
 
-        UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(reportAddVO.getContentId());
+        UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(reportAddVO.getContentId());
 
         //则代表这条数据不属于本系统
         //这里限制了内容只能被举报一次，只有第一次被举报时，修改用户状态和动态状态

@@ -136,7 +136,7 @@ public class KeywordsTriggerService {
         boolean modifyReportStatusFlag = false;
 
         String baseModelContent = baseModelDO.getContent();
-        Integer baseModelId = baseModelDO.getId();
+        Integer baseModelId = baseModelDO.getUnionId();
 
         //记录这条内容是否有触发关键词
         //记录触发的关键词列表

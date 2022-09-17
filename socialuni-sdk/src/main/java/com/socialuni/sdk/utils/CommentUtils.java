@@ -29,7 +29,7 @@ public class CommentUtils {
     }
 
     public static SocialCommentDO getAllowNull(Integer unionId) {
-        UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(unionId);
+        UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
         SocialCommentDO commentDO = commentRepository.findOneByUnionId(unionId);
         if (commentDO == null) {
             if (Objects.equals(DevAccountUtils.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {

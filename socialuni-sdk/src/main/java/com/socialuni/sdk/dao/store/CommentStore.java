@@ -5,7 +5,7 @@ import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -41,7 +41,7 @@ public class CommentStore {
             return;
         }
 
-        Integer commentId  = UnionIdDbUtil.getUnionIdByUidNotNull(addVO.getCommentId());
+        Integer commentId  = UnionIdUtil.getUnionIdByUuidNotNull(addVO.getCommentId());
 
 
         SocialCommentDO parentComment = CommentUtils.getAllowNull(commentId);
@@ -60,7 +60,7 @@ public class CommentStore {
         parentComment.setUpdateTime(curDate);
 
         if (addVO.getCommentId() != null) {
-            Integer replyId = UnionIdDbUtil.getUnionIdByUidNotNull(addVO.getReplyCommentId());
+            Integer replyId = UnionIdUtil.getUnionIdByUuidNotNull(addVO.getReplyCommentId());
 
             SocialCommentDO replyComment = CommentUtils.getAllowNull(replyId);
             if (replyComment != null) {

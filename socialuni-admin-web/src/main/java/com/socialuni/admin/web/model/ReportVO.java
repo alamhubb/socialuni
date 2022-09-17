@@ -71,7 +71,7 @@ public class ReportVO {
     }
 
     public ReportVO(BaseModelDO modelDO) {
-        this.talk = ReportContentROFactory.getReportContentVO(modelDO.getReportContentType(), modelDO.getId());
+        this.talk = ReportContentROFactory.getReportContentVO(modelDO.getReportContentType(), modelDO.getUnionId());
         this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
         this.violateType = modelDO.getDeleteReason();

@@ -51,7 +51,7 @@ public class WangYiUtil {
         AntispamDO antispamDO = new AntispamDO();
         //设置内容主体相关
         antispamDO.setContentType(baseModelDO.getReportContentType());
-        antispamDO.setContentId(baseModelDO.getId());
+        antispamDO.setContentId(baseModelDO.getUnionId());
         antispamDO.setContent(baseModelDO.getContent());
         antispamDO.setCreateTime(new Date());
         //执行校验

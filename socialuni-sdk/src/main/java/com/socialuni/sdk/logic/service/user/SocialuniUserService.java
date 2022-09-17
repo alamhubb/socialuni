@@ -15,7 +15,7 @@ import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
@@ -108,7 +108,7 @@ public class SocialuniUserService {
     public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer userImgId = UnionIdDbUtil.getUnionIdByUidNotNull(centerUserImgDeleteQO.getUserImgId());
+        Integer userImgId = UnionIdUtil.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
         if (SocialuniSystemConst.serverIsChild()) {
@@ -121,7 +121,7 @@ public class SocialuniUserService {
         if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.getUserImgList(userId);
         } else {
-            Integer userUnionId = UnionIdDbUtil.getUnionIdByUidNotNull(userId);
+            Integer userUnionId = UnionIdUtil.getUnionIdByUuidNotNull(userId);
             List<SocialUserImgDO> imgs50 = UserImgDOUtils.getImgs50(userUnionId);
 
             List<SocialuniUserImgRO> imgs50Ro = UserImgROFactory.userImgDOToVOS(imgs50);

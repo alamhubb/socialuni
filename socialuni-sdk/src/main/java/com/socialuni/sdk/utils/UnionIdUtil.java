@@ -21,12 +21,12 @@ import java.util.regex.Pattern;
  */
 @Component
 @Slf4j
-public class UnionIdDbUtil {
+public class UnionIdUtil {
     private static UniContentUnionIdRepository uniContentUnionIdRepository;
 
     @Resource
     public void setUniContentUnionIdRepository(UniContentUnionIdRepository uniContentUnionIdRepository) {
-        UnionIdDbUtil.uniContentUnionIdRepository = uniContentUnionIdRepository;
+        UnionIdUtil.uniContentUnionIdRepository = uniContentUnionIdRepository;
     }
 
 
@@ -56,7 +56,7 @@ public class UnionIdDbUtil {
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
-    public static void updateUidByUnionIdNotNull(Integer unionId, String uuid) {
+    public static void updateUuidByUnionIdNotNull(Integer unionId, String uuid) {
         UniContentUnionIdDO uniContentUnionIdDO = getUnionDOByUnionIdNotNull(unionId);
         //没有写入
         uniContentUnionIdDO.setUuid(uuid);
@@ -64,7 +64,7 @@ public class UnionIdDbUtil {
     }
 
     //social层，根据unionId获取uid，不可为空
-    public static String getUidByUnionIdNotNull(Integer unionId) {
+    public static String getUuidByUnionIdNotNull(Integer unionId) {
         return getUnionDOByUnionIdNotNull(unionId).getUuid();
     }
 
@@ -80,13 +80,7 @@ public class UnionIdDbUtil {
         return uniContentUnionIdDO;
     }
 
-    //获取可为空， 将中心的数据写入本系统
-    public static String createTalkUidByUid(String talkUid) {
-        //需要设置有效期，根据查询类型，，设置的还要看是不是已经有有效的了？再次查询无论如何都生成旧的，以前的就不管了
-        return createUidByUid(ContentType.talk, talkUid);
-    }
-
-    public static String createUidByUid(String contentType, String uuid) {
+    public static String createUnionIdByUuid(String contentType, String uuid) {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识3");
         }
@@ -103,13 +97,13 @@ public class UnionIdDbUtil {
 
     //结果不可为空 ，为前台传入的数据,根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
-    public static Integer getUnionIdByUidNotNull(String uuid) {
-        return getUnionByUidNotNull(uuid).getId();
+    public static Integer getUnionIdByUuidNotNull(String uuid) {
+        return getUnionByUuidNotNull(uuid).getId();
     }
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
-    public static UniContentUnionIdDO getUnionByUidNotNull(String uuid) {
-        UniContentUnionIdDO uniContentUnionIdDO = getUnionByUidAllowNull(uuid);
+    public static UniContentUnionIdDO getUnionByUuidNotNull(String uuid) {
+        UniContentUnionIdDO uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("错误的内容标识2");
         }
@@ -117,7 +111,7 @@ public class UnionIdDbUtil {
     }
 
     //外部使用可能查询不存在的
-    public static UniContentUnionIdDO getUnionByUidAllowNull(String uuid) {
+    public static UniContentUnionIdDO getUnionByUuidAllowNull(String uuid) {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识1");
         }
@@ -151,7 +145,7 @@ public class UnionIdDbUtil {
         if (ObjectUtil.isNotEmpty(contentUnionIds)) {
             for (String uuid : contentUnionIds) {
 //                log.info("查询单个id：" + System.currentTimeMillis());
-                Integer id = UnionIdDbUtil.getUnionIdByUidNotNull(uuid);
+                Integer id = UnionIdUtil.getUnionIdByUuidNotNull(uuid);
                 ids.add(id);
             }
         }

@@ -1,6 +1,6 @@
 package com.socialuni.sdk.model.RO.user;
 
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +18,6 @@ public class SocialuniContentIdRO {
     }
 
     public SocialuniContentIdRO(String contentType, SocialuniContentIdRO socialuniContentIdRO) {
-        this.id = UnionIdDbUtil.createUidByUid(contentType, socialuniContentIdRO.getId());
+        this.id = UnionIdUtil.createUnionIdByUuid(contentType, socialuniContentIdRO.getId());
     }
 }

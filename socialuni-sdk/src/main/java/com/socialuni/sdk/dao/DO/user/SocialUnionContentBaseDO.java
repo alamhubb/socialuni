@@ -1,6 +1,7 @@
 package com.socialuni.sdk.dao.DO.user;
 
 import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.Data;
 
 import javax.persistence.MappedSuperclass;
@@ -19,8 +20,8 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
 //        throw new SocialParamsException("内容id字段不可使用，请使用unionId");
         return this.unionId;
     }
-    public Integer getHahaId() {
-//        throw new SocialParamsException("内容id字段不可使用，请使用unionId");
-        return this.unionId;
+
+    public Integer getId() {
+        throw new SocialParamsException("禁止使用内容类的获取标识方法");
     }
 }

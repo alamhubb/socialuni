@@ -1,7 +1,7 @@
 package com.socialuni.sdk.logic.factory;
 
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.constant.socialuni.ContentType;
@@ -24,14 +24,14 @@ public class CommentFactory {
      */
     public SocialCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
 
-        Integer talkId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getTalkId());
+        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         Integer commentId = null;
         Integer replyCommentId = null;
         if (addQO.getCommentId() != null) {
-            commentId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getCommentId());
+            commentId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getCommentId());
             if (addQO.getReplyCommentId() != null) {
-                replyCommentId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getReplyCommentId());
+                replyCommentId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getReplyCommentId());
             }
         }
         //创建 do一步,获取序号
@@ -59,7 +59,7 @@ public class CommentFactory {
         comment.setUserId(requestUserId);
 //        comment.setSocialuniUid(addVO.getSocialuniUid());
 
-        Integer unionId = UnionIdDbUtil.createCommentUnionId();
+        Integer unionId = UnionIdUtil.createCommentUnionId();
         comment.setUnionId(unionId);
 
 //        comment.setDevId(DevAccountUtils.getDevId());

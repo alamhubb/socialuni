@@ -1,10 +1,7 @@
 package com.socialuni.sdk.logic.factory;
 
-import com.socialuni.sdk.constant.platform.UniappProviderType;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
-import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
-import com.socialuni.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.RO.user.SocialuniContentUserRO;
 import com.socialuni.sdk.model.RectangleVO;
@@ -29,8 +26,7 @@ import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkImgDOUtils;
 import com.socialuni.sdk.utils.TalkUtils;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -158,7 +154,7 @@ public class SocialTalkROFactory {
 //        Integer talkId = UnionIdDbUtil.createTalkUid(talkDO.getId(), user);
         Integer talkId = talkDO.getUnionId();
 
-        String uid = UnionIdDbUtil.getUidByUnionIdNotNull(talkId);
+        String uid = UnionIdUtil.getUuidByUnionIdNotNull(talkId);
 
         socialTalkRO.setId(uid);
         SocialuniUserDO talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());

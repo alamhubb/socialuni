@@ -81,7 +81,7 @@ public class TencentImgAuditRecordController {
         TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
         tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
         if (!ViolateType.noViolation.equals(auditQO.getViolateType())) {
-            SocialTalkDO talkDO = TalkUtils.getNotNull(tencentCosAuditRecordDO.getContentUid());
+            SocialTalkDO talkDO = TalkUtils.getNotNull(tencentCosAuditRecordDO.getImgParentContentId());
             violationService.modelContentViolation(talkDO, auditQO.getViolateType());
         }
         tencentCosAuditRecordRepository.save(tencentCosAuditRecordDO);

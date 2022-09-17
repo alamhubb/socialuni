@@ -8,7 +8,7 @@ import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class SocialuniReportService {
             return socialuniReportAPI.addReport(centerReportAddQO);
         }
 
-        Integer contentId = UnionIdDbUtil.getUnionIdByUidNotNull(centerReportAddQO.getContentId());
+        Integer contentId = UnionIdUtil.getUnionIdByUuidNotNull(centerReportAddQO.getContentId());
 
         SocialReportAddQO socialReportAddQO = centerReportAddQO.toSocialQO(contentId);
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialuniTalkUtil {
     public static SocialTalkDO get(String talkId) {
-        Integer id = UnionIdDbUtil.getUnionIdByUidNotNull(talkId);
+        Integer id = UnionIdUtil.getUnionIdByUuidNotNull(talkId);
         return TalkUtils.getNotNull(id);
     }
 }

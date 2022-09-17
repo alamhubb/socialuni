@@ -8,7 +8,7 @@ import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class SocialuniCommentDeleteDomain {
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer commentId = UnionIdDbUtil.getUnionIdByUidNotNull(commentDeleteQO.getCommentId());
+        Integer commentId = UnionIdUtil.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
 
         Optional<SocialCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {

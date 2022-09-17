@@ -58,9 +58,9 @@ public class TencentCloudCosService {
         if (contentType.equals(ContentType.talk)) {
             SocialTalkImgDO talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
             if (talkImgDO != null) {
-                recordDO.setImgContentUid(talkImgDO.getId());
-                recordDO.setContentUid(talkImgDO.getContentId());
-                recordDO.setUserUid(talkImgDO.getUserId());
+                recordDO.setImgContentId(talkImgDO.getId());
+                recordDO.setImgParentContentId(talkImgDO.getContentId());
+                recordDO.setUserId(talkImgDO.getUserId());
             } else {
                 //不存在的talk，talk未发布成功
                 return;
@@ -68,9 +68,9 @@ public class TencentCloudCosService {
         } else {
             SocialUserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);
             if (userImgDO != null) {
-                recordDO.setImgContentUid(userImgDO.getUnionId());
-                recordDO.setContentUid(userImgDO.getUserId());
-                recordDO.setUserUid(userImgDO.getUserId());
+                recordDO.setImgContentId(userImgDO.getUnionId());
+                recordDO.setImgParentContentId(userImgDO.getUserId());
+                recordDO.setUserId(userImgDO.getUserId());
             } else {
                 ErrorLogUtil.error("错误的imgKey");
             }

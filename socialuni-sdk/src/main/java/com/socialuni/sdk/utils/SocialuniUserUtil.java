@@ -76,7 +76,7 @@ public class SocialuniUserUtil {
 
     public static String getMineUserUuidIdNotNull() {
         Integer mineUserId = getMineUserIdNotNull();
-        return UnionIdDbUtil.getUidByUnionIdNotNull(mineUserId);
+        return UnionIdUtil.getUuidByUnionIdNotNull(mineUserId);
     }
 
     public static SocialuniUserDO getMineUserNotNull() {
@@ -202,7 +202,7 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDO getUserByUid(String uid) {
-        Integer id = UnionIdDbUtil.getUnionIdByUidNotNull(uid);
+        Integer id = UnionIdUtil.getUnionIdByUuidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }
 

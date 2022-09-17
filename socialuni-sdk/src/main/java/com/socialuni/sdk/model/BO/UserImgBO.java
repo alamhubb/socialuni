@@ -1,6 +1,6 @@
 package com.socialuni.sdk.model.BO;
 
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.model.RO.UserImgVO;
@@ -44,7 +44,7 @@ public class UserImgBO {
     }
 
     public UserImgBO(SocialUserImgDO img, SocialuniUserDO user) {
-        this.id = UnionIdDbUtil.getUidByUnionIdNotNull(img.getHahaId());
+        this.id = UnionIdUtil.getUuidByUnionIdNotNull(img.getUnionId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
         this.setWidth((double) 360);

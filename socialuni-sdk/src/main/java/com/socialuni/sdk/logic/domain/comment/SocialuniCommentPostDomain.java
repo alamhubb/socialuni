@@ -16,7 +16,7 @@ import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,7 @@ public class SocialuniCommentPostDomain {
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer talkId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getTalkId());
+        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);

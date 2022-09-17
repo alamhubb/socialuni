@@ -108,7 +108,7 @@ public class ViolationService {
         //不是轻微违规，则将所有待审核内容改为违规
         if (!ViolateType.slightViolation.equals(violateType)) {
             //查询用户所有为待审核和预审核的内容，改为违规
-            List<ReportDO> reportDOS = reportStore.queryUserOtherWaitAuditContent(violationUser.getHahaId());
+            List<ReportDO> reportDOS = reportStore.queryUserOtherWaitAuditContent(violationUser.getUnionId());
             for (ReportDO linkReport : reportDOS) {
                 //修改关联内容的状态，为违规
                 BaseModelDO linkModelDO = BaseModelUtils.getModelByReport(linkReport);
@@ -152,7 +152,7 @@ public class ViolationService {
         if (!UserType.system.equals(violationUser.getType())) {
             userViolationHandler(violationUser, vioReason, curDate, violateType);
             userRepository.save(violationUser);
-            System.out.println("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getHahaId() + "用户状态改为：" + violationUser.getStatus());
+            System.out.println("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getUnionId() + "用户状态改为：" + violationUser.getStatus());
         }
         return violationUser;
     }

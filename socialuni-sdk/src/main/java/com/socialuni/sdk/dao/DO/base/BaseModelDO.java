@@ -4,8 +4,6 @@ package com.socialuni.sdk.dao.DO.base;
 import java.util.Date;
 
 public interface BaseModelDO {
-    Integer getId();
-
     String getStatus();
 
     void setStatus(String status);

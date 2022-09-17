@@ -1,8 +1,8 @@
 package com.socialuni.sdk.dao.DO.talk;
 
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.constant.socialuni.ContentType;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -4,7 +4,7 @@ import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.utils.SocialUserDOFactory;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ public class SocialUserManage {
     UserRepository userRepository;
 
     public SocialuniUserDO createUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        Integer userUnionId = UnionIdDbUtil.createUserUnionId();
+        Integer userUnionId = UnionIdUtil.createUserUnionId();
         SocialuniUserDO user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
         user.setUnionId(userUnionId);
         user = userRepository.save(user);
@@ -23,7 +23,7 @@ public class SocialUserManage {
     }
 
     public SocialuniUserDO createUserByPhoneLogin() {
-        Integer userUnionId = UnionIdDbUtil.createUserUnionId();
+        Integer userUnionId = UnionIdUtil.createUserUnionId();
         SocialuniUserDO user = SocialUserDOFactory.newUserByPhoneLogin();
         user.setUnionId(userUnionId);
         user = userRepository.save(user);

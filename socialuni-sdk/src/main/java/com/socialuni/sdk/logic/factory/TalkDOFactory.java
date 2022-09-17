@@ -4,7 +4,7 @@ import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.logic.platform.MapUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import org.springframework.stereotype.Component;
@@ -43,7 +43,7 @@ public class TalkDOFactory {
         talkDO.setVisibleGender(socialTalkPostQO.getVisibleGender());
         talkDO.setVisibleType(socialTalkPostQO.getVisibleType());
 
-        Integer talkUnionId = UnionIdDbUtil.createTalkUnionId();
+        Integer talkUnionId = UnionIdUtil.createTalkUnionId();
         talkDO.setUnionId(talkUnionId);
         return talkDO;
     }

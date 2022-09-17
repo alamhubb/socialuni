@@ -30,7 +30,7 @@ public class SocialMessageROFactory {
         SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO);
         boolean isMine = messageDO.getUserId().equals(lookMessageUserId);
 
-        messageRO.setId(messageDO.getHahaId());
+        messageRO.setId(messageDO.getUnionId());
         messageRO.setContent(messageDO.getContent());
         messageRO.setCreateTime(messageDO.getCreateTime());
         messageRO.setUser(messageUser);

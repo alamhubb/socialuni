@@ -61,14 +61,14 @@ public class UniAPIUtils {
         }};
         //执行本系统逻辑
         //根据本系统uid获取unionId
-        Integer unionId = UnionIdDbUtil.getUnionIdByUidNotNull(uniContentIdRO.getId());
+        Integer unionId = UnionIdUtil.getUnionIdByUuidNotNull(uniContentIdRO.getId());
 
         //mark 多库同步版本
         ResultRO<RO> resultRO = callApi.apply(contentAddQO);
         uniContentIdRO = (SocialuniContentIdRO) resultRO.getData();
 
         //根据unionId更新为中心返回的uid
-        UnionIdDbUtil.updateUidByUnionIdNotNull(unionId, uniContentIdRO.getId());
+        UnionIdUtil.updateUuidByUnionIdNotNull(unionId, uniContentIdRO.getId());
 
         return resultRO;
 

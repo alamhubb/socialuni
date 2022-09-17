@@ -1,8 +1,7 @@
 package com.socialuni.sdk.logic.factory.user.img;
 
 
-import com.socialuni.sdk.config.SocialuniSystemConst;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ContentType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -28,7 +27,7 @@ public class UserImgDOFactory {
         userImgDO.setReportContentType(ContentType.userImg);
         userImgDO.setReportNum(0);
         userImgDO.setIsSelfAuth(false);
-        Integer userImgUnionId = UnionIdDbUtil.createUserImgUnionId();
+        Integer userImgUnionId = UnionIdUtil.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
         return userImgDO;
     }

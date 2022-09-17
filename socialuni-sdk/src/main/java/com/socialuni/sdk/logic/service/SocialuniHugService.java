@@ -6,7 +6,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class SocialuniHugService {
     public ResultRO<Void> addHug(SocialuniHugAddQO centerHugAddQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer talkId = UnionIdDbUtil.getUnionIdByUidNotNull(centerHugAddQO.getTalkId());
+        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(centerHugAddQO.getTalkId());
 
         socialAddHugDomain.addHug(mineUser, new SocialHugAddQO(talkId, null));
         return new ResultRO<>();

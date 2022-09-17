@@ -13,7 +13,6 @@ import com.socialuni.sdk.dao.DO.ReportDetailDO;
 import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
@@ -22,7 +21,7 @@ import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;
 import com.socialuni.sdk.utils.QQUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
@@ -100,7 +99,7 @@ public class ReportDomain {
                 } else {*/
                 reportCause = "系统自动审查";
 
-                UniContentUnionIdDO uniContentUnionIdDO = UnionIdDbUtil.getUnionDOByUnionIdNotNull(modelDO.getUnionId());
+                UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionDOByUnionIdNotNull(modelDO.getUnionId());
                 reportDO = reportFactory.createReportDO(reportCause, uniContentUnionIdDO, modelDO, ReportSourceType.systemAutoCheck, uniContentUnionIdDO.getFromDevId());
 //                }
 

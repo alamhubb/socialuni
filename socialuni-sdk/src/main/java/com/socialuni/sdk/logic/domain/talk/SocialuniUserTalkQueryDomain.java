@@ -5,7 +5,7 @@ import com.socialuni.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdDbUtil;
+import com.socialuni.sdk.utils.UnionIdUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,12 +22,12 @@ public class SocialuniUserTalkQueryDomain {
 
     public List<SocialuniTalkRO> queryUserTalks(SocialuniUserTalkQueryQO queryQO) {
 
-        Integer userId = UnionIdDbUtil.getUnionIdByUidNotNull(queryQO.getUserId());
+        Integer userId = UnionIdUtil.getUnionIdByUuidNotNull(queryQO.getUserId());
 
         //获取自己的user
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        List<Integer> talkIds = UnionIdDbUtil.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
+        List<Integer> talkIds = UnionIdUtil.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 
         SocialUserTalkQueryQO socialUserTalkQueryQO = new SocialUserTalkQueryQO(userId, talkIds);
 
