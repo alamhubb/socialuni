@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.constant;
+package com.socialuni.sdk.openService;
 
 public class TencentCosAuditStatus {
     public static final Integer enable = 0;

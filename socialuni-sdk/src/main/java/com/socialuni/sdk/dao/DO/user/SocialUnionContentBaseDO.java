@@ -20,8 +20,4 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
 //        throw new SocialParamsException("内容id字段不可使用，请使用unionId");
         return this.unionId;
     }
-
-    public Integer getId() {
-        throw new SocialParamsException("禁止使用内容类的获取标识方法");
-    }
 }

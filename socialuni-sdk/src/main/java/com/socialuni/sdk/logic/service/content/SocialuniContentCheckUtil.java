@@ -2,6 +2,7 @@ package com.socialuni.sdk.logic.service.content;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.ErrorMsg;
+import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.platform.weixin.HttpResult;
@@ -50,10 +51,10 @@ public class SocialuniContentCheckUtil {
             Boolean disableContentHasContactInfo = SocialuniAppConfig.getAppConfig().getDisableContentHasContactInfo();
             if (disableContentHasContactInfo) {
                 if (SocialuniContentCheckUtil.hasWxContactInfo(content)) {
-                    throw new SocialBusinessException("禁止发布包含微信联系方式的内容");
+                    throw new SocialBusinessException("禁止发布包含微信联系方式的内容，可在个人信息中填写联系方式");
                 }
                 if (SocialuniContentCheckUtil.hasQQContactInfo(content)) {
-                    throw new SocialBusinessException("禁止发布包含qq联系方式的内容");
+                    throw new SocialBusinessException("禁止发布包含qq联系方式的内容，可在个人信息中填写联系方式");
                 }
             }
         }

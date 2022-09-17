@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.model.RO;
 
 import com.socialuni.admin.web.factory.ReportContentROFactory;
-import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
+import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;

@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.model.DO;
+package com.socialuni.sdk.dao.DO;
 
 import com.socialuni.sdk.dao.DO.base.CommonContentBaseDO;
 import lombok.Data;

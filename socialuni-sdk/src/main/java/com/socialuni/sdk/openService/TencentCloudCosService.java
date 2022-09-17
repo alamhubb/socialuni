@@ -1,8 +1,6 @@
-package com.socialuni.admin.web.controller.openService;
+package com.socialuni.sdk.openService;
 
-import com.socialuni.admin.web.constant.ImgThumbnailType;
-import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
-import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
+import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;

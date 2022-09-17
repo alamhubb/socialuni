@@ -19,7 +19,7 @@ import java.io.Serializable;
         @Index(columnList = "talkId"),
         @Index(columnList = "parentCommentId"),
         @Index(columnList = "content"),
-        @Index(columnList = "reportContentType"),
+        @Index(columnList = "contentType"),
         @Index(columnList = "unionId"),
 })
 @Data

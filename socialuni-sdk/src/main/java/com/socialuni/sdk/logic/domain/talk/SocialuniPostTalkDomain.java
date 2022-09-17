@@ -1,8 +1,10 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkOperateType;
+import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.dao.DO.talk.*;
 import com.socialuni.sdk.dao.repository.community.*;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
@@ -109,21 +111,27 @@ public class SocialuniPostTalkDomain {
         if (StringUtils.isEmpty(talkVOContent) && CollectionUtils.isEmpty(talkVOImgs)) {
             throw new SocialParamsException("'不能发布文字和图片均为空的动态'");
         }
-        //不为开发环境，则校验内容
-        if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
-            SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent);
-            //不使用图片安全校验，原因是啥，今晚确认
-//            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
-            //还需要获取图片中的cor
+
+        //系统管理员不校验相关内容
+        if (!UserType.system.equals(mineUser.getType())) {
+            //不为开发环境，则校验内容
+            if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
+                SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent);
+            }
         }
 
         if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
             SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
         }
 
+
         for (SocialTalkImgAddQO talkVOImg : talkVOImgs) {
             String imgTextContent = ImgContentUtil.getImgTextContent(talkVOImg.getSrc());
             talkVOImg.setContent(imgTextContent);
+            //系统管理员不校验相关内容
+            if (!UserType.system.equals(mineUser.getType())) {
+                SocialuniContentCheckUtil.checkUserInputLongTextContent(imgTextContent);
+            }
         }
 
         //校验地理位置

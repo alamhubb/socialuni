@@ -15,13 +15,13 @@ import java.util.Optional;
 public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
     Optional<ReportDO> findByReceiveUserIdAndInfoVersionNo(Integer receiveUserId, Integer infoVersionNo);
 
-    Optional<ReportDO> findFirstOneByTalkId(Integer talkId);
+//    Optional<ReportDO> findFirstOneByTalkId(Integer talkId);
 
-    Optional<ReportDO> findFirstOneByCommentId(Integer commentId);
+//    Optional<ReportDO> findFirstOneByCommentId(Integer commentId);
 
-    Optional<ReportDO> findFirstOneByUserImgId(Integer userImgId);
+//    Optional<ReportDO> findFirstOneByUserImgId(Integer userImgId);
 
-    Optional<ReportDO> findFirstOneByMessageId(Integer messageId);
+//    Optional<ReportDO> findFirstOneByMessageId(Integer messageId);
 
 //    List<ReportDO> findTop5ByStatusAndTalkStatusInOrStatusAndUserImgStatusInOrStatusAndCommentStatusInOrStatusAndMessageStatusInOrderByCreateTimeAsc(String status, List<String> talkStatus, String status1, List<String> userImgStatus, String status2, List<String> commentStatus, String status3, List<String> messageStatus);
 

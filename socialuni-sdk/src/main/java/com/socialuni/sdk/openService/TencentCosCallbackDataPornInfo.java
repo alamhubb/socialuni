@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.controller.openService;
+package com.socialuni.sdk.openService;
 
 import lombok.Data;
 

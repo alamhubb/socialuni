@@ -8,6 +8,7 @@ import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.auth.COSSigner;
 import com.qcloud.cos.http.HttpMethodName;
 import com.qcloud.cos.http.HttpProtocol;
+import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.region.Region;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.model.RO.app.SocialCosAuthRO;
@@ -286,6 +287,12 @@ public class TencentCloudAPI {
 // 3 生成 cos 客户端。
         COSClient cosClient = new COSClient(cred, clientConfig);
         return cosClient;
+    }
+
+    public static GetObjectRequest getCosClientGetRequest(String imgKey) {
+        // 实例化要请求产品的client对象,clientProfile是可选的
+        GetObjectRequest getObj = new GetObjectRequest(bucketName, imgKey);
+        return getObj;
     }
 
     //init cos client

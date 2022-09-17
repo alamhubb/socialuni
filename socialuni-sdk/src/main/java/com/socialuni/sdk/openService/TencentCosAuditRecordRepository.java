@@ -1,7 +1,7 @@
-package com.socialuni.admin.web.repository;
+package com.socialuni.sdk.openService;
 
 
-import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
+import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

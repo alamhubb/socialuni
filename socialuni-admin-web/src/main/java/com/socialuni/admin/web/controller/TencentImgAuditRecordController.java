@@ -1,11 +1,11 @@
 package com.socialuni.admin.web.controller;
 
-import com.socialuni.admin.web.constant.ImgThumbnailType;
-import com.socialuni.admin.web.constant.TencentCosAuditStatus;
-import com.socialuni.admin.web.model.DO.TencentCosAuditRecordDO;
+import com.socialuni.sdk.openService.ImgThumbnailType;
+import com.socialuni.sdk.openService.TencentCosAuditStatus;
+import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.QO.ImgAuditQO;
 import com.socialuni.admin.web.model.RO.TencentCosAuditRecordRO;
-import com.socialuni.admin.web.repository.TencentCosAuditRecordRepository;
+import com.socialuni.sdk.openService.TencentCosAuditRecordRepository;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;

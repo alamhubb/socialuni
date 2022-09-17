@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TalkImgRepository extends JpaRepository<SocialTalkImgDO, Integer> {
-    @Cacheable(cacheNames = "talkImgsTalkId", key = "#contentId")
-    List<SocialTalkImgDO> findTop3ByContentId(Integer contentId);
+    @Cacheable(cacheNames = "talkImgsTalkId", key = "#talkId")
+    List<SocialTalkImgDO> findTop3ByTalkId(Integer talkId);
 
     BaseModelDO findOneByUnionIdAndStatus(Integer unionId, String status);
 

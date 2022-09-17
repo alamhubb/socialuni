@@ -57,7 +57,7 @@ public class BaseModelService {
             throw new SocialBusinessException("错误的内容类型");
         }
     }
-
+/*
     public Optional<ReportDO> findReportByModel(BaseModelDO model) {
         if (model instanceof SocialTalkDO) {
             SocialTalkDO talkDO = (SocialTalkDO) model;
@@ -74,5 +74,5 @@ public class BaseModelService {
         } else {
             throw new SocialBusinessException("错误的内容类型");
         }
-    }
+    }*/
 }

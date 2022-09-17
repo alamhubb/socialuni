@@ -5,7 +5,7 @@
         SELECT t.*
         FROM
         s_talk_img t
-        WHERE t.content_id = #{talkUid}
+        WHERE t.talk_id = #{talkUid}
         <if test="hasPeopleImgTalkNeedIdentity != null">
             and (t.has_people_img = false or (t.has_people_img = true and t.adult_auth = true))
         </if>

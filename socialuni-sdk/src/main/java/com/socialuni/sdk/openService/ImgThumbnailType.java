@@ -1,4 +1,4 @@
-package com.socialuni.admin.web.constant;
+package com.socialuni.sdk.openService;
 
 /**
  * @author qinkaiyuan

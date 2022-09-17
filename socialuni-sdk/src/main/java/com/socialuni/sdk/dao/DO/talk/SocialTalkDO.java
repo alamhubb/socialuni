@@ -21,7 +21,7 @@ import java.util.List;
         @Index(columnList = "userId"),
         @Index(columnList = "socialuniUid"),
         @Index(columnList = "content"),
-        @Index(columnList = "reportContentType"),
+        @Index(columnList = "contentType"),
         @Index(columnList = "unionId"),
         @Index(columnList = "globalTop")
 
