@@ -43,8 +43,8 @@ public class TextContentUtil {
 
     // 清除所有空白和特殊字符
     public static String clearAllEmptyAndSpecialChart(String content) {
-        if (content == null) {
-            throw new RuntimeException("要清除空白和特殊字符的字符串不能为null");
+        if (StringUtils.isEmpty(content)) {
+            return content;
         }
         content = TextContentUtil.clearAllEmptyChart(content);
         content = TextContentUtil.clearAllSpecialChart(content);
@@ -64,8 +64,8 @@ public class TextContentUtil {
 
     // 清除掉所有特殊字符
     private static String clearAllSpecialChart(String content) {
-        if (content == null) {
-            throw new RuntimeException("要清除特殊字符的字符串不能为null");
+        if (StringUtils.isEmpty(content)) {
+            return content;
         }
         String regEx = "[`_~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         //生成正则
@@ -78,6 +78,9 @@ public class TextContentUtil {
 
     //将其他字符的数字转为int数字
     public static String formatOtherNumContent(String content) {
+        if (StringUtils.isEmpty(content)) {
+            return content;
+        }
         //匹配非空格内容
         String regEx = "\\S";
         //生成正则
@@ -94,17 +97,17 @@ public class TextContentUtil {
     }
 
     //根据方法替换内容
-    public static String replaceAll(String input, Pattern pattern,
+    public static String replaceAll(String content, Pattern pattern,
                                     Function<Matcher, String> replacer) {
-        if (StringUtils.isNotEmpty(input)) {
-            Matcher matcher = pattern.matcher(input);
-            StringBuffer result = new StringBuffer();
-            while (matcher.find()) {
-                matcher.appendReplacement(result, replacer.apply(matcher));
-            }
-            matcher.appendTail(result);
-            return result.toString();
+        if (StringUtils.isEmpty(content)) {
+            return content;
         }
-        return input;
+        Matcher matcher = pattern.matcher(content);
+        StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(result, replacer.apply(matcher));
+        }
+        matcher.appendTail(result);
+        return result.toString();
     }
 }

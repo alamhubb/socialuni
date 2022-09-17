@@ -84,6 +84,9 @@ public class SocialuniContentCheckUtil {
 
     //包含未成年内容
     private static void hasUn18ContentThrowError(String content) {
+        if (StringUtils.isEmpty(content)) {
+            return;
+        }
         //去除特殊和空白字符
         content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
         //将其他字符的数字转为int数字
@@ -106,6 +109,9 @@ public class SocialuniContentCheckUtil {
 
     //包含qq联系方式
     private static boolean hasWxContactInfo(String content) {
+        if (StringUtils.isEmpty(content)) {
+            return false;
+        }
         //去除特殊和空白字符
         content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
         String reg = "\\w{6,20}";//定义正则表达式
@@ -119,6 +125,9 @@ public class SocialuniContentCheckUtil {
 
     //包含微信联系方式
     private static boolean hasQQContactInfo(String content) {
+        if (StringUtils.isEmpty(content)) {
+            return false;
+        }
         //去除特殊和空白字符
         content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
         String reg = "\\d{5,11}";//定义正则表达式
