@@ -2,20 +2,15 @@ package com.socialuni.sdk.logic.service.content;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.ErrorMsg;
-import com.socialuni.sdk.constant.status.UserStatus;
-import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
 import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.utils.QQUtil;
-import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.sdk.utils.content.TextContentUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -42,7 +37,7 @@ public class SocialuniContentCheckUtil {
     //图片校验微信、qq、都有也不花钱，还有内容安全
     //什么样的调用什么样的接口
     //校验用户发表长文本内容，用户评论，用户动态
-    public static void checkUserInputLongTextContent(String content, SocialuniUserDO mineUser) {
+    public static void checkUserInputTextContent(String content, SocialuniUserDO mineUser) {
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         //不为空才进行校验

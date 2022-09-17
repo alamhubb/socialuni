@@ -100,7 +100,7 @@ public class SocialTalkPostDomain {
 
         //不为开发环境，则校验内容
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
-            SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent, mineUser);
+            SocialuniContentCheckUtil.checkUserInputTextContent(talkVOContent, mineUser);
             //不使用图片安全校验，原因是啥，今晚确认
 //            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
             //还需要获取图片中的cor

@@ -54,7 +54,16 @@ export default class ModelContentCheckUtil {
   new EnumNumVO(7, '柒'),
   new EnumNumVO(8, '捌'),
   new EnumNumVO(9, '玖'),
-  new EnumNumVO(1, '拾')
+  new EnumNumVO(1, '拾'),
+  new EnumNumVO(1, '①'),
+  new EnumNumVO(2, '②'),
+  new EnumNumVO(3, '③'),
+  new EnumNumVO(4, '④'),
+  new EnumNumVO(5, '⑤'),
+  new EnumNumVO(6, '⑥'),
+  new EnumNumVO(7, '⑦'),
+  new EnumNumVO(8, '⑧'),
+  new EnumNumVO(9, '⑨')
 ].forEach(item => {
   ModelContentCheckUtil.numberMap.set(item.name, String(item.value))
 })
