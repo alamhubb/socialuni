@@ -10,9 +10,6 @@ import java.io.Serializable;
 @Data
 public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
-    private Integer contentId;
-
-    @Column(nullable = false, updatable = false)
     private Integer userId;
 
     @Column(nullable = false, updatable = false)
