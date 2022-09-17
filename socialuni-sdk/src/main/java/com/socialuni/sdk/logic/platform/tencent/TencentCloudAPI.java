@@ -25,6 +25,8 @@ import com.tencentcloudapi.iai.v20180301.IaiClient;
 import com.tencentcloudapi.iai.v20180301.models.CompareFaceRequest;
 import com.tencentcloudapi.iai.v20180301.models.CompareFaceResponse;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
+import com.tencentcloudapi.ocr.v20181119.models.GeneralFastOCRRequest;
+import com.tencentcloudapi.ocr.v20181119.models.GeneralFastOCRResponse;
 import com.tencentcloudapi.tiia.v20190529.TiiaClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -67,92 +69,6 @@ public class TencentCloudAPI {
     public void setBucketName(String bucketName) {
         TencentCloudAPI.bucketName = bucketName;
     }
-
-    //init cos client
-    public static COSClient getCosClient() {
-        //https://cloud.tencent.com/document/product/436/10199#.E5.88.9D.E5.A7.8B.E5.8C.96.E5.AE.A2.E6.88.B7.E7.AB.AF
-// 1 初始化用户身份信息（secretId, secretKey）。
-// SECRETID和SECRETKEY请登录访问管理控制台 https://console.cloud.tencent.com/cam/capi 进行查看和管理
-        String secretId = TencentCloudAPI.secretId;
-        String secretKey = TencentCloudAPI.secretKey;
-        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
-// 2 设置 bucket 的地域, COS 地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
-// clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分。
-        Region region = new Region(TencentCloudAPI.region);
-        ClientConfig clientConfig = new ClientConfig(region);
-// 这里建议设置使用 https 协议
-// 从 5.6.54 版本开始，默认使用了 https
-        clientConfig.setHttpProtocol(HttpProtocol.https);
-// 3 生成 cos 客户端。
-        COSClient cosClient = new COSClient(cred, clientConfig);
-        return cosClient;
-    }
-
-    //init cos client
-    public static String getCosSign(String imgKey) {
-        //https://cloud.tencent.com/document/product/436/10199#.E5.88.9D.E5.A7.8B.E5.8C.96.E5.AE.A2.E6.88.B7.E7.AB.AF
-// 1 初始化用户身份信息（secretId, secretKey）。
-// SECRETID和SECRETKEY请登录访问管理控制台 https://console.cloud.tencent.com/cam/capi 进行查看和管理
-        String secretId = TencentCloudAPI.secretId;
-        String secretKey = TencentCloudAPI.secretKey;
-        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
-// 2 设置 bucket 的地域, COS 地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
-// clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分。
-        Region region = new Region(TencentCloudAPI.region);
-        ClientConfig clientConfig = new ClientConfig(region);
-
-// 存储桶的命名格式为 BucketName-APPID，此处填写的存储桶名称必须为此格式
-        String bucketName = TencentCloudAPI.bucketName;
-
-// 对象键(Key)是对象在存储桶中的唯一标识。详情请参见 [对象键](https://cloud.tencent.com/document/product/436/13324)
-//若key不是以“/”开头，则需要在key的开头加上“/”，否则直接resource_path=key
-        String resource_path = "/" + imgKey;
-
-// 用来生成签名
-        COSSigner signer = new COSSigner();
-// 设置签名过期时间(可选)，若未进行设置，则默认使用 ClientConfig 中的签名过期时间(1小时)
-// 这里设置签名在半个小时后过期
-        Date expirationDate = new Date(System.currentTimeMillis() + 30L * 60L * 1000L);
-
-// 填写本次请求的参数
-        Map<String, String> params = new HashMap<String, String>();
-
-// 填写本次请求的头部
-        Map<String, String> headers = new HashMap<String, String>();
-// host 必填
-        headers.put(Headers.HOST, clientConfig.getEndpointBuilder().buildGeneralApiEndpoint(bucketName));
-
-// 请求的 HTTP 方法，上传请求用 PUT，下载请求用 GET，删除请求用 DELETE
-        HttpMethodName method = HttpMethodName.GET;
-
-        String sign = signer.buildAuthorizationStr(method, resource_path, headers, params, cred, expirationDate, true);
-        return sign;
-    }
-
-
-    //获取图片中的文本内容，先分析在ocr？
-    public static void getImgTextContent(String imgUrl) {
-//        SocialuniSystemConst.getStaticResourceUrl() + imgUrl;
-//        COSClient cosClient = TencentCloudAPI.getCosClient();
-//        cosClient.getObject()
-
-/*            const authKey = COS.getAuthorization({
-                SecretId: cosAuthRO.credentials.tmpSecretId,
-                SecretKey: cosAuthRO.credentials.tmpSecretKey,
-                Method: 'get',
-                Key: imgKey
-    })
-        console.log(authKey)
-    const res = await request.get('https://' + imgUrl + '?ci-process=OCR', null, {
-                header: {
-            Authorization: authKey,
-                    'x-cos-security-token': cosAuthRO.credentials.sessionToken
-        }
-    })*/
-
-//        RestUtil.getFileRestTemplate().getForEntity(map_ip_url + map_web_key + "&ip=" + ip, QQMapGeocoderRO.class);
-    }
-
 
     public static SocialCosAuthRO getCosAuthorization(String userId) {
         if (StringUtils.isEmpty(userId)) {
@@ -350,5 +266,66 @@ public class TencentCloudAPI {
         }
         Double scoreDb = Math.ceil(resp.getScore());
         return scoreDb.intValue();
+    }
+
+    //init cos client
+    public static COSClient getCosClient() {
+        //https://cloud.tencent.com/document/product/436/10199#.E5.88.9D.E5.A7.8B.E5.8C.96.E5.AE.A2.E6.88.B7.E7.AB.AF
+// 1 初始化用户身份信息（secretId, secretKey）。
+// SECRETID和SECRETKEY请登录访问管理控制台 https://console.cloud.tencent.com/cam/capi 进行查看和管理
+        String secretId = TencentCloudAPI.secretId;
+        String secretKey = TencentCloudAPI.secretKey;
+        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
+// 2 设置 bucket 的地域, COS 地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
+// clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分。
+        Region region = new Region(TencentCloudAPI.region);
+        ClientConfig clientConfig = new ClientConfig(region);
+// 这里建议设置使用 https 协议
+// 从 5.6.54 版本开始，默认使用了 https
+        clientConfig.setHttpProtocol(HttpProtocol.https);
+// 3 生成 cos 客户端。
+        COSClient cosClient = new COSClient(cred, clientConfig);
+        return cosClient;
+    }
+
+    //init cos client
+    public static String getCosSign(String imgKey) {
+        //https://cloud.tencent.com/document/product/436/10199#.E5.88.9D.E5.A7.8B.E5.8C.96.E5.AE.A2.E6.88.B7.E7.AB.AF
+// 1 初始化用户身份信息（secretId, secretKey）。
+// SECRETID和SECRETKEY请登录访问管理控制台 https://console.cloud.tencent.com/cam/capi 进行查看和管理
+        String secretId = TencentCloudAPI.secretId;
+        String secretKey = TencentCloudAPI.secretKey;
+        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
+// 2 设置 bucket 的地域, COS 地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
+// clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分。
+        Region region = new Region(TencentCloudAPI.region);
+        ClientConfig clientConfig = new ClientConfig(region);
+
+// 存储桶的命名格式为 BucketName-APPID，此处填写的存储桶名称必须为此格式
+        String bucketName = TencentCloudAPI.bucketName;
+
+// 对象键(Key)是对象在存储桶中的唯一标识。详情请参见 [对象键](https://cloud.tencent.com/document/product/436/13324)
+//若key不是以“/”开头，则需要在key的开头加上“/”，否则直接resource_path=key
+        String resource_path = "/" + imgKey;
+
+// 用来生成签名
+        COSSigner signer = new COSSigner();
+// 设置签名过期时间(可选)，若未进行设置，则默认使用 ClientConfig 中的签名过期时间(1小时)
+// 这里设置签名在半个小时后过期
+        Date expirationDate = new Date(System.currentTimeMillis() + 30L * 60L * 1000L);
+
+// 填写本次请求的参数
+        Map<String, String> params = new HashMap<String, String>();
+
+// 填写本次请求的头部
+        Map<String, String> headers = new HashMap<String, String>();
+// host 必填
+        headers.put(Headers.HOST, clientConfig.getEndpointBuilder().buildGeneralApiEndpoint(bucketName));
+
+// 请求的 HTTP 方法，上传请求用 PUT，下载请求用 GET，删除请求用 DELETE
+        HttpMethodName method = HttpMethodName.GET;
+
+        String sign = signer.buildAuthorizationStr(method, resource_path, headers, params, cred, expirationDate, true);
+        return sign;
     }
 }

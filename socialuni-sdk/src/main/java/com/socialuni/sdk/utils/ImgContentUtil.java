@@ -1,15 +1,48 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
+import com.socialuni.sdk.constant.ErrorMsg;
+import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
+import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.logic.platform.tencent.TencentCloudAPI;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
+import com.tencentcloudapi.ocr.v20181119.OcrClient;
+import com.tencentcloudapi.ocr.v20181119.models.GeneralFastOCRRequest;
+import com.tencentcloudapi.ocr.v20181119.models.GeneralFastOCRResponse;
+import com.tencentcloudapi.ocr.v20181119.models.IDCardOCRResponse;
+import com.tencentcloudapi.ocr.v20181119.models.TextDetection;
 import com.tencentcloudapi.tiia.v20190529.TiiaClient;
 import com.tencentcloudapi.tiia.v20190529.models.DetectLabelRequest;
 import com.tencentcloudapi.tiia.v20190529.models.DetectLabelResponse;
 import org.apache.commons.lang3.StringUtils;
 
 public class ImgContentUtil {
+    public static String getImgTextContent(String imgUrl) {
+        // 实例化要请求产品的client对象,clientProfile是可选的
+        OcrClient client = TencentCloudAPI.getOcrClient();
+
+        // 实例化一个请求对象,每个接口都会对应一个request对象
+        GeneralFastOCRRequest req = new GeneralFastOCRRequest();
+        req.setImageUrl(SocialuniSystemConst.getStaticResourceUrl() + imgUrl);
+
+        GeneralFastOCRResponse resp;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            resp = client.GeneralFastOCR(req);
+            TextDetection[] textDetections = resp.getTextDetections();
+            for (TextDetection textDetection : textDetections) {
+                stringBuilder.append(textDetection.getDetectedText());
+            }
+            return stringBuilder.toString();
+        } catch (TencentCloudSDKException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static boolean hasPeopleImg(String imgUrl) {
         TiiaClient client = TencentCloudAPI.getTiiaClient();
         // 实例化一个请求对象,每个接口都会对应一个request对象

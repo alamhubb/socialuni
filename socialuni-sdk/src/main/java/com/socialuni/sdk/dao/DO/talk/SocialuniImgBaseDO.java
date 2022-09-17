@@ -1,21 +1,16 @@
 package com.socialuni.sdk.dao.DO.talk;
 
-import com.socialuni.sdk.dao.DO.SocialCommonBaseDO;
 import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
 import com.socialuni.sdk.dao.DO.base.SocialImgBaseDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "s_talk_img",
-        indexes = {
-                @Index(columnList = "contentId")
-        }
-)
+@MappedSuperclass
 @Data
-public class SocialTalkImgDO extends SocialContentBaseDO implements Serializable {
+public class SocialuniImgBaseDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer contentId;
 
@@ -43,7 +38,7 @@ public class SocialTalkImgDO extends SocialContentBaseDO implements Serializable
     private Boolean hasUnderageContent;
 
     //do 只有一个构造
-    public SocialTalkImgDO() {
+    public SocialuniImgBaseDO() {
         this.hasPeopleImg = false;
         this.adultAuth = false;
         this.hasUnderageContent = false;

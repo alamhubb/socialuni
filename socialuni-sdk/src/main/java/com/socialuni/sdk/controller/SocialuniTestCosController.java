@@ -3,6 +3,7 @@ package com.socialuni.sdk.controller;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.platform.tencent.TencentCloudAPI;
 import com.socialuni.sdk.logic.platform.weixin.WxConst;
+import com.socialuni.sdk.utils.ImgContentUtil;
 import com.socialuni.sdk.utils.common.RestUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.http.HttpEntity;
@@ -24,13 +25,6 @@ public class SocialuniTestCosController {
 
     @GetMapping("test1")
     public ResultRO testCos(String imgKey) {
-        String sign = TencentCloudAPI.getCosSign(imgKey);
-        String imgUrl = SocialuniSystemConst.getStaticResourceUrl() + imgKey + "?ci-process=OCR";
-        HttpHeaders requestHeader = new HttpHeaders();
-        requestHeader.set("Authorization", sign);
-        HttpEntity<Void> requestEntity = new HttpEntity<>(null, requestHeader);
-
-        ResponseEntity<String> responseEntity = RestUtil.getDefaultRestTemplate().getForEntity(imgUrl, String.class, requestEntity);
-        return new ResultRO<>(responseEntity);
+        return new ResultRO<>(ImgContentUtil.getImgTextContent(imgKey));
     }
 }
