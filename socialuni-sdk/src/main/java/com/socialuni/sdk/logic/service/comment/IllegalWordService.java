@@ -23,6 +23,9 @@ public class IllegalWordService {
     IllegalWordRepository illegalWordRepository;
 
     public void checkHasIllegals(String content) {
+        if (StringUtils.isEmpty(content)) {
+            return;
+        }
         content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
 
         List<IllegalWordDO> illegals = AppConfigStatic.getIllegals();

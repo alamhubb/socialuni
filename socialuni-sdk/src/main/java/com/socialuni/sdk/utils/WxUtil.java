@@ -130,7 +130,7 @@ public class WxUtil {
      * @param content
      */
     public static HttpResult checkTextWxSec(String content) {
-        if (StringUtils.isEmpty(wx_mp_secret)) {
+        if (StringUtils.isEmpty(wx_mp_secret) || StringUtils.isEmpty(content)) {
             return new HttpResult();
         }
         HttpResult result = checkContentWxSecPost(content);

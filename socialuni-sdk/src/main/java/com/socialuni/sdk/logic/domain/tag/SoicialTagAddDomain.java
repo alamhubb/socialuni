@@ -2,18 +2,13 @@ package com.socialuni.sdk.logic.domain.tag;
 
 import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.sdk.logic.manage.SocialTagManage;
-import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
-import com.socialuni.sdk.logic.platform.weixin.HttpResult;
-import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
-import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,7 +32,7 @@ public class SoicialTagAddDomain {
         if (tagName.length() > 6) {
             throw new SocialBusinessException("话题最多支持六个字");
         }
-        SocialuniContentCheckUtil.checkUserInputTextContent(tagName, mineUser);
+        SocialuniContentCheckUtil.checkUserInputLongTextContent(tagName, mineUser);
         //校验内容是否违规
 
         TagDO dbTag = tagRepository.findFirstByName(tagName);
@@ -46,7 +41,7 @@ public class SoicialTagAddDomain {
             throw new SocialBusinessException("标签已经存在，请直接使用");
         }
         String description = tagAddVO.getDescription();
-        SocialuniContentCheckUtil.checkUserInputTextContent(description, mineUser);
+        SocialuniContentCheckUtil.checkUserInputLongTextContent(description, mineUser);
         TagDO tagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
         TagRO tagRO = SocialTagROFactory.getTagRO(tagDO);
         return tagRO;

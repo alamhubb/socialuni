@@ -15,9 +15,13 @@ public class SocialuniAppConfigBO {
     private List<String> tabNames;
     
 
-    //配置1，是否禁止未成年人内容
+    //是否禁止未成年人内容
     private Boolean disableUnderageContent = false;
-    //配置2，是否必须填写校园才允许发帖
+
+    //是否禁止内容中包含联系方式
+    private Boolean disableContentHasContactInfo = false;
+
+    //是否必须填写校园才允许发帖
     private Boolean mustSetSchoolCanPost = false;
     //配置3，应用性别
     private String appGender = GenderType.all;

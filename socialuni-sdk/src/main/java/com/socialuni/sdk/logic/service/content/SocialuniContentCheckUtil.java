@@ -7,7 +7,6 @@ import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.utils.QQUtil;
-import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.sdk.utils.content.TextContentUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
@@ -36,8 +35,33 @@ public class SocialuniContentCheckUtil {
     //有禁止使用的qq号，有微信安全校验，有qq安全校验，可以都走一遍，也不收钱
     //图片校验微信、qq、都有也不花钱，还有内容安全
     //什么样的调用什么样的接口
-    //校验用户发表长文本内容，用户评论，用户动态
-    public static void checkUserInputTextContent(String content, SocialuniUserDO mineUser) {
+    //校验用户发表长文本内容，用户评论，用户动态，目前采用的统一规则，短文本是否需要校验年龄不确认，先校验这
+    public static void checkUserInputLongTextContent(String content, SocialuniUserDO mineUser) {
+        //使用校验短文本内容
+        SocialuniContentCheckUtil.checkUserInputShortTextContent(content, mineUser);
+        //不为空才进行校验
+        if (StringUtils.isNotEmpty(content)) {
+            Boolean disableUnderageContent = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
+            //如果禁用，则判断是否包含未成年人内容
+            if (disableUnderageContent) {
+                //本系统内的违规词校验
+                SocialuniContentCheckUtil.hasUn18ContentThrowError(content);
+            }
+            //是否禁止包含联系方式
+            Boolean disableContentHasContactInfo = SocialuniAppConfig.getAppConfig().getDisableContentHasContactInfo();
+            if (disableContentHasContactInfo) {
+                if (SocialuniContentCheckUtil.hasWxContactInfo(content)) {
+                    throw new SocialBusinessException("禁止发布包含微信联系方式的内容");
+                }
+                if (SocialuniContentCheckUtil.hasQQContactInfo(content)) {
+                    throw new SocialBusinessException("禁止发布包含qq联系方式的内容");
+                }
+            }
+        }
+    }
+
+    //短文本内容中不校验年龄相关
+    private static void checkUserInputShortTextContent(String content, SocialuniUserDO mineUser) {
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         //不为空才进行校验
@@ -54,18 +78,12 @@ public class SocialuniContentCheckUtil {
             if (qqResult.hasError()) {
                 throw new SocialBusinessException(ErrorMsg.CHECK_VIOLATION_ERR_MSG);
             }
-            //获取是否禁用18岁以下未成年人内容。
-            Boolean disableUnderageContent = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
-            //如果禁用，则判断是否包含未成年人内容
-            if (disableUnderageContent) {
-                //本系统内的违规词校验
-                SocialuniContentCheckUtil.hasUn18ContentThrowError(content);
-            }
         }
     }
 
+
     //包含未成年内容
-    public static void hasUn18ContentThrowError(String content) {
+    private static void hasUn18ContentThrowError(String content) {
         //去除特殊和空白字符
         content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
         //将其他字符的数字转为int数字
@@ -84,5 +102,31 @@ public class SocialuniContentCheckUtil {
                 throw new SocialBusinessException("根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会按违反社区规则进行封号处罚");
             }
         }
+    }
+
+    //包含qq联系方式
+    private static boolean hasWxContactInfo(String content) {
+        //去除特殊和空白字符
+        content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
+        String reg = "\\w{6,20}";//定义正则表达式
+        //编译正则表达式
+        Pattern patten = Pattern.compile(reg);
+        // 指定要匹配的字符串
+        Matcher matcher = patten.matcher(content);
+        //此处find()每次被调用后，会偏移到下一个匹配
+        return matcher.find();
+    }
+
+    //包含微信联系方式
+    private static boolean hasQQContactInfo(String content) {
+        //去除特殊和空白字符
+        content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
+        String reg = "\\d{5,11}";//定义正则表达式
+        //编译正则表达式
+        Pattern patten = Pattern.compile(reg);
+        // 指定要匹配的字符串
+        Matcher matcher = patten.matcher(content);
+        //此处find()每次被调用后，会偏移到下一个匹配
+        return matcher.find();
     }
 }

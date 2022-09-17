@@ -82,7 +82,6 @@ public class TextContentUtil {
         String regEx = "\\S";
         //生成正则
         Pattern p = Pattern.compile(regEx);
-        //
         content = TextContentUtil.replaceAll(content, p, (result) -> {
             String resGroup = result.group();
             Integer hanziNum = TextContentUtil.hanziNumberMap.get(resGroup);

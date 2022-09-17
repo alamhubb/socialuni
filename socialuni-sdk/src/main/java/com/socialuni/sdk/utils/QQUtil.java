@@ -126,7 +126,7 @@ public class QQUtil {
      * @param content
      */
     public static HttpResult checkContentQQSec(String content) {
-        if (StringUtils.isEmpty(qq_mp_secret)) {
+        if (StringUtils.isEmpty(qq_mp_secret) || StringUtils.isEmpty(content)) {
             return new HttpResult();
         }
         HttpResult qqResult = checkContentQQSecPost(content);

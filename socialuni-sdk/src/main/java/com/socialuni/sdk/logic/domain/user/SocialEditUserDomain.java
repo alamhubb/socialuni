@@ -1,15 +1,11 @@
 package com.socialuni.sdk.logic.domain.user;
 
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
-import com.socialuni.sdk.logic.platform.weixin.HttpResult;
-import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.GenderUtil;
-import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
@@ -37,7 +33,7 @@ public class SocialEditUserDomain {
             String oldNickname = mineUser.getNickname();
             //新旧昵称不一样，则更新
             if (!nickname.equals(oldNickname)) {
-                SocialuniContentCheckUtil.checkUserInputTextContent(nickname, mineUser);
+                SocialuniContentCheckUtil.checkUserInputLongTextContent(nickname, mineUser);
                 mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
             }
         }
@@ -68,7 +64,7 @@ public class SocialEditUserDomain {
                 String oldCity = mineUser.getCity();
                 //新旧昵称不一样，则更新
                 if (!userCity.equals(oldCity)) {
-                    SocialuniContentCheckUtil.checkUserInputTextContent(userCity, mineUser);
+                    SocialuniContentCheckUtil.checkUserInputLongTextContent(userCity, mineUser);
                     mineUser.setCity(userCity);
                 }
             }
