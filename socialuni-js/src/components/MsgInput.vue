@@ -35,13 +35,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator'
-import {socialTalkModule, socialTalkStore, socialUserStore} from '../socialuni/store'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { socialTalkModule, socialTalkStore, socialUserStore } from '../socialuni/store'
 import PlatformUtils from '../socialuni/utils/PlatformUtils'
 import CenterUserDetailRO from '../socialuni/model/social/CenterUserDetailRO'
 import MsgUtil from '../socialuni/utils/MsgUtil'
 import ToastUtil from '../socialuni/utils/ToastUtil'
-import ModelContentCheckUtil from '@/socialuni/utils/ModelContentCheckUtil'
 
 @Component
 export default class MsgInput extends Vue {
@@ -52,14 +51,14 @@ export default class MsgInput extends Vue {
   inputContentFocusInput = false
 
   @Watch('inputContentFocus')
-  inputContentFocusWatch() {
+  inputContentFocusWatch () {
     setTimeout(() => {
       this.inputContentFocusInput = this.inputContentFocus
       console.log(this.inputContentFocusInput)
     }, 0)
   }
 
-  get msgInputPlaceholder() {
+  get msgInputPlaceholder () {
     if (this.currentContent) {
       return '回复：' + this.currentContent
     } else {
@@ -68,15 +67,15 @@ export default class MsgInput extends Vue {
   }
 
   // formid有坑，只能发送给自己openid
-  sendComment() {
+  sendComment () {
     // 登录才能发表评论
     if (this.user && this.user.phoneNum) {
       // 如果有值
       if (this.content) {
-        if (!this.user.identityAuth) {
+        /*if (!this.user.identityAuth) {
           ModelContentCheckUtil.hasUn18Content(this.content)
-        }
-        socialTalkModule.addComment({content: this.content})
+        }*/
+        socialTalkModule.addComment({ content: this.content })
         this.content = ''
         // 申请订阅
         PlatformUtils.requestSubscribeComment()
@@ -88,7 +87,7 @@ export default class MsgInput extends Vue {
     }
   }
 
-  inputContentBlur() {
+  inputContentBlur () {
     socialTalkModule.inputContentBlur()
   }
 }

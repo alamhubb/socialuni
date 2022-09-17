@@ -37,8 +37,6 @@ public class SocialuniContentCheckUtil {
     //什么样的调用什么样的接口
     //校验用户发表长文本内容，用户评论，用户动态，目前采用的统一规则，短文本是否需要校验年龄不确认，先校验这
     public static void checkUserInputLongTextContent(String content, SocialuniUserDO mineUser) {
-        //使用校验短文本内容
-        SocialuniContentCheckUtil.checkUserInputShortTextContent(content, mineUser);
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {
             Boolean disableUnderageContent = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
@@ -58,6 +56,8 @@ public class SocialuniContentCheckUtil {
                 }
             }
         }
+        //使用校验短文本内容
+        SocialuniContentCheckUtil.checkUserInputShortTextContent(content, mineUser);
     }
 
     //短文本内容中不校验年龄相关
