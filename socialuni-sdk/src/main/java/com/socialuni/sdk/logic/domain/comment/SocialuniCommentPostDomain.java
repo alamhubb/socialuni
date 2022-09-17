@@ -7,6 +7,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
+import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.sdk.logic.domain.notify.NotifyDomain;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
@@ -50,6 +51,9 @@ public class SocialuniCommentPostDomain {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer talkId = UnionIdDbUtil.getUnionIdByUidNotNull(addQO.getTalkId());
+
+        //校验用户
+        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
 
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkId);
         List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());

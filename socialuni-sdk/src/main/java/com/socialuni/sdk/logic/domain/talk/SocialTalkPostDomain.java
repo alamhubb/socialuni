@@ -4,6 +4,7 @@ import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkOperateType;
 import com.socialuni.sdk.dao.DO.talk.*;
 import com.socialuni.sdk.dao.repository.community.*;
+import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.logic.factory.TalkImgDOFactory;
@@ -97,7 +98,8 @@ public class SocialTalkPostDomain {
     public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialuniTalkPostQO talkVO) {
         List<String> tagNames = talkVO.getTagNames();
         String talkVOContent = talkVO.getContent();
-
+        //校验用户
+        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         //不为开发环境，则校验内容
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
             SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent, mineUser);

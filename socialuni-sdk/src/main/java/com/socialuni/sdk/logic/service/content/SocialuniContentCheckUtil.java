@@ -63,8 +63,6 @@ public class SocialuniContentCheckUtil {
 
     //短文本内容中不校验年龄相关
     private static void checkUserInputShortTextContent(String content, SocialuniUserDO mineUser) {
-        //校验用户
-        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {
             //校验是否包含违禁词

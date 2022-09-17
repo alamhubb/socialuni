@@ -1,5 +1,6 @@
 package com.socialuni.sdk.logic.domain.user;
 
+import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
@@ -21,7 +22,6 @@ public class SocialEditUserDomain {
     UserRepository userRepository;
 
     public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDO mineUser) {
-
         //昵称
         String nickname = socialUserEditQO.getNickname();
         if (StringUtils.isEmpty(nickname)) {

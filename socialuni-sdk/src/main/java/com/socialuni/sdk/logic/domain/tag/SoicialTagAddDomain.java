@@ -1,5 +1,6 @@
 package com.socialuni.sdk.logic.domain.tag;
 
+import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.sdk.logic.manage.SocialTagManage;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
@@ -25,6 +26,8 @@ public class SoicialTagAddDomain {
     private SocialTagManage socialTagManage;
 
     public TagRO addTag(SocialuniUserDO mineUser, TagAddQO tagAddVO) {
+        //校验用户
+        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         /*if (SocialAppEnv.getIsDevProdEnv()) {
             throw new SocialBusinessException("demo演示环境不支持创建tag，防止tag与生产环境不一致");
         }*/
