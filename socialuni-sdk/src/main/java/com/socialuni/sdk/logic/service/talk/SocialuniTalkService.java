@@ -34,7 +34,7 @@ public class SocialuniTalkService {
     @Resource
     SocialuniTalkAPI socialuniTalkAPI;
     @Resource
-    SocialTalkPostDomain socialTalkPostDomain;
+    SocialuniPostTalkDomain socialTalkPostDomain;
 
     @Resource
     SocialuniHomeTalkQueryDomain socialHomeTalkQueryDomain;

@@ -20,6 +20,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ImgContentUtil {
     public static String getImgTextContent(String imgUrl) {
+        if (StringUtils.isEmpty(imgUrl)) {
+            throw new SocialParamsException("图片路径不能为空");
+        }
         // 实例化要请求产品的client对象,clientProfile是可选的
         OcrClient client = TencentCloudAPI.getOcrClient();
 

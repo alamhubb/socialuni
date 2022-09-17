@@ -35,7 +35,7 @@ public class SoicialTagAddDomain {
         if (tagName.length() > 6) {
             throw new SocialBusinessException("话题最多支持六个字");
         }
-        SocialuniContentCheckUtil.checkUserInputLongTextContent(tagName, mineUser);
+        SocialuniContentCheckUtil.checkUserInputLongTextContent(tagName);
         //校验内容是否违规
 
         TagDO dbTag = tagRepository.findFirstByName(tagName);
@@ -44,7 +44,7 @@ public class SoicialTagAddDomain {
             throw new SocialBusinessException("标签已经存在，请直接使用");
         }
         String description = tagAddVO.getDescription();
-        SocialuniContentCheckUtil.checkUserInputLongTextContent(description, mineUser);
+        SocialuniContentCheckUtil.checkUserInputLongTextContent(description);
         TagDO tagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
         TagRO tagRO = SocialTagROFactory.getTagRO(tagDO);
         return tagRO;

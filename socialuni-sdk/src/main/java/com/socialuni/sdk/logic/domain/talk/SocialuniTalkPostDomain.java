@@ -27,7 +27,7 @@ import java.util.Date;
 @Component
 public class SocialuniTalkPostDomain {
     @Resource
-    SocialTalkPostDomain socialTalkPostDomain;
+    SocialuniPostTalkDomain socialTalkPostDomain;
     @Resource
     TagRepository tagRepository;
     @Resource

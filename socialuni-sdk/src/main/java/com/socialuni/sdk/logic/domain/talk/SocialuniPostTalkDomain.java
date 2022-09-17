@@ -40,7 +40,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class SocialTalkPostDomain {
+public class SocialuniPostTalkDomain {
     @Resource
     TalkRepository talkRepository;
     @Resource
@@ -79,9 +79,6 @@ public class SocialTalkPostDomain {
 
         SocialTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
 
-
-
-
         reportDomain.checkKeywordsCreateReport(talkDO);
 
         List<SocialTalkImgDO> imgDOS = talkDO.getImgs();
@@ -104,17 +101,25 @@ public class SocialTalkPostDomain {
         String talkVOContent = talkVO.getContent();
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
-        //不为开发环境，则校验内容
-        if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
-            SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent, mineUser);
-            //不使用图片安全校验，原因是啥，今晚确认
-//            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
-            //还需要获取图片中的cor
-        }
+
         List<SocialTalkImgAddQO> talkVOImgs = talkVO.getImgs();
         //校验内容不能全部为空
         if (StringUtils.isEmpty(talkVOContent) && CollectionUtils.isEmpty(talkVOImgs)) {
             throw new SocialParamsException("'不能发布文字和图片均为空的动态'");
+        }
+
+
+        //不为开发环境，则校验内容
+        if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
+            SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent);
+            //不使用图片安全校验，原因是啥，今晚确认
+//            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
+            //还需要获取图片中的cor
+        }
+
+        for (SocialTalkImgAddQO talkVOImg : talkVOImgs) {
+            String imgTextContent = ImgContentUtil.getImgTextContent(talkVOImg.getSrc());
+            talkVOImg.setContent(imgTextContent);
         }
 
         //校验地理位置
@@ -197,6 +202,9 @@ public class SocialTalkPostDomain {
         for (SocialTalkImgDO imgDO : imgDOS) {
             imgDO.setContentId(talkDO.getUnionId());
             imgDO.setUserId(talkDO.getUserId());
+            //包含未成年内容
+            boolean hasUn18Content = SocialuniContentCheckUtil.hasUn18ContentThrowError(imgDO.getContent());
+            imgDO.setHasUnderageContent(hasUn18Content);
             //是否包含图片
             boolean hasPeople = ImgContentUtil.hasPeopleImg(imgDO.getSrc());
             if (hasPeople) {

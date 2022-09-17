@@ -36,7 +36,7 @@ public class SocialuniContentCheckUtil {
     //图片校验微信、qq、都有也不花钱，还有内容安全
     //什么样的调用什么样的接口
     //校验用户发表长文本内容，用户评论，用户动态，目前采用的统一规则，短文本是否需要校验年龄不确认，先校验这
-    public static void checkUserInputLongTextContent(String content, SocialuniUserDO mineUser) {
+    public static void checkUserInputLongTextContent(String content) {
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {
             Boolean disableUnderageContent = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
@@ -58,11 +58,11 @@ public class SocialuniContentCheckUtil {
             }
         }
         //使用校验短文本内容
-        SocialuniContentCheckUtil.checkUserInputShortTextContent(content, mineUser);
+        SocialuniContentCheckUtil.checkUserInputShortTextContent(content);
     }
 
     //短文本内容中不校验年龄相关
-    private static void checkUserInputShortTextContent(String content, SocialuniUserDO mineUser) {
+    private static void checkUserInputShortTextContent(String content) {
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {
             //校验是否包含违禁词
@@ -82,7 +82,7 @@ public class SocialuniContentCheckUtil {
 
 
     //包含未成年内容
-    private static boolean hasUn18ContentThrowError(String content) {
+    public static boolean hasUn18ContentThrowError(String content) {
         if (StringUtils.isEmpty(content)) {
             return false;
         }

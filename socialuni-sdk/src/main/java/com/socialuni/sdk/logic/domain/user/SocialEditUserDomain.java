@@ -33,7 +33,7 @@ public class SocialEditUserDomain {
             String oldNickname = mineUser.getNickname();
             //新旧昵称不一样，则更新
             if (!nickname.equals(oldNickname)) {
-                SocialuniContentCheckUtil.checkUserInputLongTextContent(nickname, mineUser);
+                SocialuniContentCheckUtil.checkUserInputLongTextContent(nickname);
                 mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
             }
         }
@@ -64,7 +64,7 @@ public class SocialEditUserDomain {
                 String oldCity = mineUser.getCity();
                 //新旧昵称不一样，则更新
                 if (!userCity.equals(oldCity)) {
-                    SocialuniContentCheckUtil.checkUserInputLongTextContent(userCity, mineUser);
+                    SocialuniContentCheckUtil.checkUserInputLongTextContent(userCity);
                     mineUser.setCity(userCity);
                 }
             }

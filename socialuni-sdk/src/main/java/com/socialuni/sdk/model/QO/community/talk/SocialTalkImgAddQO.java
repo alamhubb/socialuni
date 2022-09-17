@@ -10,4 +10,5 @@ public class SocialTalkImgAddQO {
     private Integer size;
     //压缩率
     private Double quality;
+    private String content;
 }

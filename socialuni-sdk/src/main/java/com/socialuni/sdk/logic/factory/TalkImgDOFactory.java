@@ -14,6 +14,7 @@ public class TalkImgDOFactory {
         socialTalkImgDO.setSrc(talkImgVO.getSrc());
         socialTalkImgDO.setAspectRatio(talkImgVO.getAspectRatio());
         socialTalkImgDO.setSize(talkImgVO.getSize());
+        socialTalkImgDO.setContent(talkImgVO.getContent());
         socialTalkImgDO.setQuality(talkImgVO.getQuality());
         return socialTalkImgDO;
     }

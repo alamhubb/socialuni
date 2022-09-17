@@ -60,7 +60,7 @@ public class SocialuniCommentPostDomain {
         //开发环境不校验
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
             //校验内容是否违规
-            SocialuniContentCheckUtil.checkUserInputLongTextContent(addQO.getContent(), mineUser);
+            SocialuniContentCheckUtil.checkUserInputLongTextContent(addQO.getContent());
         }
         //校验结果
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
