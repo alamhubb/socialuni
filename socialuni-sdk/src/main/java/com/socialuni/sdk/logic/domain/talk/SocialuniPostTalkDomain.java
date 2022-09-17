@@ -200,7 +200,7 @@ public class SocialuniPostTalkDomain {
         Boolean userIdentityAuth = SocialuniUserUtil.getUserIsIdentityAuth(talkDO.getUserId());
 
         for (SocialTalkImgDO imgDO : imgDOS) {
-            imgDO.setContentId(talkDO.getUnionId());
+            imgDO.setTalkId(talkDO.getUnionId());
             imgDO.setUserId(talkDO.getUserId());
             //包含未成年内容
             boolean hasUn18Content = SocialuniContentCheckUtil.hasUn18ContentThrowError(imgDO.getContent());

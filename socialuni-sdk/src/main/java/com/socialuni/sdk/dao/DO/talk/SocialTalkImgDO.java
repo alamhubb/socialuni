@@ -1,6 +1,5 @@
 package com.socialuni.sdk.dao.DO.talk;
 
-import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
