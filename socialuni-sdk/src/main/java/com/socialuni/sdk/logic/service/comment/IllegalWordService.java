@@ -4,6 +4,7 @@ package com.socialuni.sdk.logic.service.comment;
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.config.AppConfigStatic;
 import com.socialuni.sdk.dao.DO.keywords.IllegalWordDO;
+import com.socialuni.sdk.utils.content.TextContentUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.sdk.dao.repository.IllegalWordRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,8 @@ public class IllegalWordService {
     IllegalWordRepository illegalWordRepository;
 
     public void checkHasIllegals(String content) {
+        content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
+
         List<IllegalWordDO> illegals = AppConfigStatic.getIllegals();
 
         List<IllegalWordDO> triggerWords = new ArrayList<>();

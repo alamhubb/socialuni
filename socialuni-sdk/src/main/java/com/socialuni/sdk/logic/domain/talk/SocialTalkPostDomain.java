@@ -12,11 +12,11 @@ import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
-import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.logic.service.tag.TagService;
 import com.socialuni.sdk.utils.DistrictStoreUtils;
 import com.socialuni.sdk.utils.ImgCheckUtil;
@@ -30,8 +30,10 @@ import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,28 +62,20 @@ public class SocialTalkPostDomain {
     @Resource
     SocialTalkCircleRepository socialTalkCircleRepository;
     @Resource
-    ModelContentCheck modelContentCheck;
-    @Resource
     TalkAdultImgAuditRepository talkAdultAuditRepository;
 
 
+    @Transactional
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        //校验内容
+        TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
 
-        List<String> tagNames = talkPostQO.getTagNames();
-
-        if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
-            modelContentCheck.checkUserAndLongContent(talkPostQO.getContent(), mineUser);
-
-            //不使用图片安全校验，原因是啥，今晚确认
-//            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
-            //还需要获取图片中的cor
-        }
 
         //校验内容是否违规
 //        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
         //获取应用对应的话题
-        TalkAddValidateRO talkAddValidateRO = this.paramsValidate(mineUser, talkPostQO);
+
         SocialTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
         reportDomain.checkKeywordsCreateReport(talkDO);
 
@@ -101,6 +95,21 @@ public class SocialTalkPostDomain {
 
 
     public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialuniTalkPostQO talkVO) {
+        List<String> tagNames = talkVO.getTagNames();
+        String talkVOContent = talkVO.getContent();
+
+        //不为开发环境，则校验内容
+        if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
+            SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent, mineUser);
+            //不使用图片安全校验，原因是啥，今晚确认
+//            reportDomain.checkImgCreateReport(talkPostQO.getImgs());
+            //还需要获取图片中的cor
+        }
+        List<SocialTalkImgAddQO> talkVOImgs = talkVO.getImgs();
+        //校验内容不能全部为空
+        if (StringUtils.isEmpty(talkVOContent) && CollectionUtils.isEmpty(talkVOImgs)) {
+            throw new SocialParamsException("'不能发布文字和图片均为空的动态'");
+        }
 
         //校验地理位置
         String adCode = talkVO.getAdCode();
@@ -114,7 +123,7 @@ public class SocialTalkPostDomain {
             throw new SocialParamsException("选择了不存在的地区");
         }
 
-        String talkVisibleGender = talkVO.getVisibleGender();
+//        String talkVisibleGender = talkVO.getVisibleGender();
         //获取经过后台认证的 行政区DO
         //话题校验
         List<Integer> tagIds = talkVO.getTagIds();
@@ -122,7 +131,6 @@ public class SocialTalkPostDomain {
         if (tagIds == null) {
             tagIds = new ArrayList<>();
         }
-        List<String> tagNames = talkVO.getTagNames();
         for (String tagName : tagNames) {
             TagDO tagDO = tagRepository.findFirstByName(tagName);
             if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
@@ -132,16 +140,15 @@ public class SocialTalkPostDomain {
         }
         talkVO.setTagIds(tagIds);
 
-        List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd, talkVisibleGender);
+        List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd);
 
         String circleName = talkVO.getCircleName();
         SocialuniCircleDO socialCircleDO = null;
         if (StringUtils.isNotEmpty(circleName)) {
-            socialCircleDO = SocialuniCircleDOUtil.getCircleEnable(talkVO.getCircleName());
+            socialCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(talkVO.getCircleName());
             socialCircleDO.setCount(socialCircleDO.getCount() + 1);
             socialCircleDO = socialCircleRepository.save(socialCircleDO);
         }
-
         TalkAddValidateRO talkAddValidateRO = new TalkAddValidateRO(districtDO, list, socialCircleDO);
         return talkAddValidateRO;
     }

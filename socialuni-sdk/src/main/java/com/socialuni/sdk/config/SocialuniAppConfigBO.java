@@ -13,11 +13,12 @@ public class SocialuniAppConfigBO {
     private String cityTabName;
     private String selfSchoolTabName;
     private List<String> tabNames;
+    
 
-    //配置1，是否成年认证才可以发表自拍
-    private Boolean talkImgNeedAdultAuth = false;
-    //配置2，是否填写校园才可以发帖
-    private Boolean hasSchoolCanPostTalk = false;
+    //配置1，是否禁止未成年人内容
+    private Boolean disableUnderageContent = false;
+    //配置2，是否必须填写校园才允许发帖
+    private Boolean mustSetSchoolCanPost = false;
     //配置3，应用性别
     private String appGender = GenderType.all;
 }

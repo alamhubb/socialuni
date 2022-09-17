@@ -38,7 +38,7 @@ public class TagService {
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    public List<TagDO> checkAndUpdateTagCount(SocialuniUserDO user, List<Integer> tagIds, String talkOperateType, String talkGender) {
+    public List<TagDO> checkAndUpdateTagCount(SocialuniUserDO user, List<Integer> tagIds, String talkOperateType) {
         List<TagDO> tagDOList = new ArrayList<>();
 
 //        Integer devId = DevAccountUtils.getDevId();

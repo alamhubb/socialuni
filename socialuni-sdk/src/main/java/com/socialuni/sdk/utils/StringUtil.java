@@ -34,18 +34,4 @@ public class StringUtil {
         //没有为空的就是都不为空
         return Arrays.stream(stringList).noneMatch(StringUtils::isEmpty);
     }
-
-    public static String replaceAll(String input, Pattern pattern,
-                                    Function<Matcher, String> replacer) {
-        if (StringUtils.isNotEmpty(input)) {
-            Matcher matcher = pattern.matcher(input);
-            StringBuffer result = new StringBuffer();
-            while (matcher.find()) {
-                matcher.appendReplacement(result, replacer.apply(matcher));
-            }
-            matcher.appendTail(result);
-            return result.toString();
-        }
-        return input;
-    }
 }

@@ -38,7 +38,7 @@ public class AuthenticationManage {
 
         //如果发送过验证码
         //校验验证码是否过期，如果当前时间晚于30分钟后则验证码失效
-        Integer authCodeValidMinute = SocialuniAppConfig.appMoreConfig.getAuthCodeValidMinute();
+        Integer authCodeValidMinute = SocialuniAppConfig.getAppMoreConfig().getAuthCodeValidMinute();
         long canTime = authenticationDO.getCreateTime().getTime() + authCodeValidMinute * DateTimeType.minute;
         long curTime = new Date().getTime();
         if (curTime > canTime) {

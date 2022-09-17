@@ -11,6 +11,7 @@ import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.dao.repository.user.SocialUserViolationRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
+import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
 import com.socialuni.social.web.sdk.exception.SocialNullUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -82,7 +83,7 @@ public class SocialuniUserUtil {
         //解析token
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         if (mineUser == null) {
-            throw new SocialNullUserException();
+            throw new SocialNotLoginException();
         }
         //返回user
         return mineUser;

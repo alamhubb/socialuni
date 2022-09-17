@@ -4,11 +4,10 @@ import com.socialuni.sdk.constant.config.SocialuniAppType;
 import com.socialuni.sdk.utils.ObjectUtil;
 
 public class SocialuniAppConfig {
-    public static String appType = SocialuniAppType.defaultType;
+    static String appType = SocialuniAppType.defaultType;
     //首页的tab栏目
-    public static SocialuniAppConfigBO appConfig = SocialuniAppType.getDefaultTypeAppConfig();
-    public static SocialuniAppMoreConfigBO appMoreConfig = SocialuniAppType.getDefaultAppMoreConfig();
-
+    static SocialuniAppConfigBO appConfig = SocialuniAppType.getDefaultTypeAppConfig();
+    static SocialuniAppMoreConfigBO appMoreConfig = SocialuniAppType.getDefaultAppMoreConfig();
 
     public static void resetSocialuniAppConfig(String appType, SocialuniAppConfigBO appConfig, SocialuniAppMoreConfigBO appMoreConfig) {
         if (appType == null) {
@@ -25,5 +24,17 @@ public class SocialuniAppConfig {
         if (appMoreConfig != null) {
             SocialuniAppConfig.appMoreConfig = ObjectUtil.mergeObjects(appMoreConfig, SocialuniAppConfig.appMoreConfig);
         }
+    }
+
+    public static String getAppType() {
+        return appType;
+    }
+
+    public static SocialuniAppConfigBO getAppConfig() {
+        return appConfig;
+    }
+
+    public static SocialuniAppMoreConfigBO getAppMoreConfig() {
+        return appMoreConfig;
     }
 }

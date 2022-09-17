@@ -7,9 +7,10 @@ import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.model.QO.SocialReportAddQO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.sdk.logic.service.content.ModelContentCheck;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
@@ -46,7 +47,7 @@ public class SoicialReportAddDomain {
     @Resource
     private ReportDomain reportDomain;
     @Resource
-    private ModelContentCheck modelContentCheck;
+    private SocialuniContentCheckUtil modelContentCheck;
 
     public ResultRO<String> addReport(SocialReportAddQO reportAddVO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
@@ -67,7 +68,7 @@ public class SoicialReportAddDomain {
         //正义值小于300不能再举报
         //给用户通知，您举报成功失败，奖励或扣除积分，每天满多少，低于0 2练个，低于200不能再举报
         if (!mineUser.getType().equals(UserType.system)) {
-            modelContentCheck.checkUser(mineUser);
+            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
             //校验内容是否违规
             /*if (resultRO.hasError()) {
                 return new ResultRO<>(resultRO);
@@ -87,7 +88,7 @@ public class SoicialReportAddDomain {
                     return new ResultRO<>("因您的正义值低于：" + AppConfigConst.limitReportValue + "，所以您每天只能举报：" + AppConfigConst.lowLimitReportCount + "次");
                 }
             }*/
-            Integer highLimitReportCount = SocialuniAppConfig.appMoreConfig.getHighLimitReportCount();
+            Integer highLimitReportCount = SocialuniAppConfig.getAppMoreConfig().getHighLimitReportCount();
             if (reportCount >= highLimitReportCount) {
                 throw new SocialParamsException("每人每天只能举报" + highLimitReportCount + "次");
             }

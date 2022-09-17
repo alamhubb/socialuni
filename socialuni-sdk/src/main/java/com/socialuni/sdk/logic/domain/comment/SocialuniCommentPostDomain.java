@@ -11,7 +11,7 @@ import com.socialuni.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.sdk.logic.domain.notify.NotifyDomain;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.logic.entity.comment.SocialPostCommentEntity;
-import com.socialuni.sdk.logic.service.content.ModelContentCheck;
+import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
@@ -43,8 +43,6 @@ public class SocialuniCommentPostDomain {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private ModelContentCheck modelContentCheck;
-    @Resource
     private SocialTagRedis socialTagRedis;
 
     @Transactional
@@ -58,7 +56,7 @@ public class SocialuniCommentPostDomain {
         //开发环境不校验
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
             //校验内容是否违规
-            modelContentCheck.checkUserAndContent(addQO.getContent(), mineUser);
+            SocialuniContentCheckUtil.checkUserInputLongTextContent(addQO.getContent(), mineUser);
         }
         //校验结果
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用

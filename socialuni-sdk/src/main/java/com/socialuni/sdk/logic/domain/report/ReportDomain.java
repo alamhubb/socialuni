@@ -175,7 +175,7 @@ public class ReportDomain {
             Integer modelReportNum = modelDO.getReportNum() + 1;
             modelDO.setReportNum(modelReportNum);
             //被1个人举报就进入审核中,这里做判断是因为阀值以后可能会调整
-            Integer reportCountHide = SocialuniAppConfig.appMoreConfig.getReportCountHide();
+            Integer reportCountHide = SocialuniAppConfig.getAppMoreConfig().getReportCountHide();
             //大于阀值，更改动态和用户状态，否则只增加举报此数
             if (modelReportNum >= reportCountHide) {
                 modelDO.setStatus(ContentStatus.audit);

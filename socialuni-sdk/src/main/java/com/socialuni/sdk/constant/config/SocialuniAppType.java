@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class SocialuniAppType {
     public static String school = "大学";
@@ -47,7 +46,7 @@ public class SocialuniAppType {
         appConfig.setCityTabName("同城");
         appConfig.setSelfSchoolTabName("本校");
         appConfig.setTabNames(Arrays.asList("关注", "大学", "同城", "本校"));
-        appConfig.setHasSchoolCanPostTalk(true);
+        appConfig.setMustSetSchoolCanPost(true);
 
        /* SocialuniAppConfigBO boyAppConfigBO=new SocialuniAppConfigBO();
         boyAppConfigBO.setFollowTabName("关注");

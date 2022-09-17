@@ -34,6 +34,7 @@ export default class ModelContentCheckUtil {
 }
 
 [
+  new EnumNumVO(0, '零'),
   new EnumNumVO(1, '一'),
   new EnumNumVO(2, '二'),
   new EnumNumVO(3, '三'),

@@ -17,7 +17,7 @@ public class SocialuniCircleDOUtil {
         SocialuniCircleDOUtil.socialCircleRepository = socialCircleRepository;
     }
 
-    public static SocialuniCircleDO getCircleEnable(String circleName) {
+    public static SocialuniCircleDO getCircleEnableNotNull(String circleName) {
         SocialuniCircleDO circleDO = socialCircleRepository.findFirstByNameAndStatus(circleName, CommonStatus.enable);
         if (circleDO == null) {
             throw new SocialParamsException("使用了不存在的圈子");

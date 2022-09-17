@@ -36,7 +36,7 @@ public class TalkImgDOUtils {
 
     //根据id列表从缓存中读取talk列表
     public static List<SocialTalkImgDO> findTop3ByTalkUid(Integer talkId) {
-        Boolean hasPeopleImgTalkNeedIdentity = SocialuniAppConfig.appConfig.getTalkImgNeedAdultAuth();
+        Boolean hasPeopleImgTalkNeedIdentity = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
         //qq渠道默认查询认证的用户内容
         Boolean hasPeopleImgTalkNeedIdentityCopy = null;
         if (hasPeopleImgTalkNeedIdentity || UniappProviderType.qq.equals(RequestUtil.getProvider())) {

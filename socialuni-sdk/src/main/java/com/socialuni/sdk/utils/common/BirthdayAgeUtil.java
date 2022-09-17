@@ -1,7 +1,6 @@
 package com.socialuni.sdk.utils.common;
 
-import com.socialuni.sdk.logic.service.content.ModelContentCheck;
-import com.socialuni.sdk.utils.StringUtil;
+import com.socialuni.sdk.utils.content.TextContentUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
@@ -115,7 +114,7 @@ public class BirthdayAgeUtil {
         return numStr;
     }
 
-    public static String replaceAgeBetween10to18Str(String content) {
+    /*public static String replaceAgeBetween10to18Str(String content) {
         //删除非数字、字母、汉字
         content = BirthdayAgeUtil.formatHanziNumContentOnlyEmptyChar(content);
         //定义正则表达式
@@ -123,26 +122,9 @@ public class BirthdayAgeUtil {
         //编译正则表达式
         Pattern patten = Pattern.compile(reg);
         return StringUtil.replaceAll(content, patten, (result) -> BirthdayAgeUtil.getAgeBetween10to18Str(result.group()));
-    }
+    }*/
 
-    public static String formatHanziNumContent(String content) {
-        //匹配非空格内容
-        String regEx = "\\S";
-        Pattern p = Pattern.compile(regEx);
-        content = StringUtil.replaceAll(content, p, (result) -> {
-            String resGroup = result.group();
-            Integer hanziNum = ModelContentCheck.hanziNumberMap.get(resGroup);
-            if (hanziNum != null) {
-                return hanziNum.toString();
-            }
-            return resGroup;
-        });
-        //删除非数字、字母、汉字
-        content = content.trim().replaceAll("[^\\u4E00-\\u9FA5\\w]", "");
-        return content;
-    }
-
-    public static String formatHanziNumContentOnlyEmptyChar(String content) {
+    /*public static String formatHanziNumContentOnlyEmptyChar(String content) {
         //匹配非空格内容
         String regEx = "\\S";
         Pattern p = Pattern.compile(regEx);
@@ -157,14 +139,14 @@ public class BirthdayAgeUtil {
         //删除非数字、字母、汉字
         content = content.trim().replaceAll("[\\t ]", "");
         return content;
-    }
+    }*/
 
     public static Integer replaceAgeBetween10to18StrTo18(Integer age) {
         //定义正则表达式
         String reg = "\\d+";
         //编译正则表达式
         Pattern patten = Pattern.compile(reg);
-        String ageStr = StringUtil.replaceAll(age.toString(), patten, (result) -> BirthdayAgeUtil.getAgeBetween10to18StrTo18(result.group()));
+        String ageStr = TextContentUtil.replaceAll(age.toString(), patten, (result) -> BirthdayAgeUtil.getAgeBetween10to18StrTo18(result.group()));
         return Integer.valueOf(ageStr);
     }
 }

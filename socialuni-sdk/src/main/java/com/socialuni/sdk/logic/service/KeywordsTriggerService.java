@@ -7,7 +7,7 @@ import com.socialuni.sdk.dao.DO.keywords.*;
 import com.socialuni.sdk.dao.repository.BlackKeywordsRepository;
 import com.socialuni.sdk.dao.repository.CustomKeywordsRepository;
 import com.socialuni.sdk.dao.repository.WhiteKeywordsRepository;
-import com.socialuni.sdk.utils.KeywordsUtils;
+import com.socialuni.sdk.utils.content.TextContentUtil;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -144,7 +144,7 @@ public class KeywordsTriggerService {
         //不为null
         if (baseModelContent != null) {
             //删除空白字符和空格，去除特殊字符，升为大写
-            String contentFormat = KeywordsUtils.StringFilter(baseModelContent.trim().replaceAll("\\s*", "").toUpperCase());
+            String contentFormat = TextContentUtil.clearAllEmptyAndSpecialChart(baseModelContent).toUpperCase();
             //文本不为空,拼音和文本都需要判空
             if (StringUtils.isNotEmpty(contentFormat)) {
                 //以下逻辑，为获取每个字在拼音中的位置， 拼音与文字位置对应，做的辅助功能
@@ -169,7 +169,7 @@ public class KeywordsTriggerService {
                 //遍历关键词
                 for (KeywordsDO keywordsDO : keywordDOs) {
                     //这部分可以优化，不为文字以后才弄拼音，本来已经特殊处理了，可是因为有5和圈5重复，导致需要给5加个，
-                    String keywordsText = KeywordsUtils.StringFilter(keywordsDO.getText().trim().replaceAll("\\s*", "").toUpperCase());
+                    String keywordsText = TextContentUtil.clearAllEmptyAndSpecialChart(keywordsDO.getText()).toUpperCase();
                     //判空
                     if (StringUtils.isNotEmpty(keywordsText)) {
                         //记录这个关键词是否触发

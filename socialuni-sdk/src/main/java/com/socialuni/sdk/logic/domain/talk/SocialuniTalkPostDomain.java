@@ -86,7 +86,7 @@ public class SocialuniTalkPostDomain {
         tagNames.add(devTagDO.getName());
         talkPostQO.setTagNames(tagNames);*/
 
-        if (SocialuniAppConfig.appConfig.getHasSchoolCanPostTalk()) {
+        if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
             SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
         }
         SocialuniTalkRO socialTalkRO = socialTalkPostDomain.postTalk(talkPostQO);

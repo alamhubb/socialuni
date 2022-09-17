@@ -70,7 +70,7 @@ public class SocailSendAuthCodeDomain {
             AuthenticationDO authenticationDO = authRepository.findFirstByPhoneNumOrderByCreateTimeDescIdAsc(phoneNum);
             if (authenticationDO != null) {
                 Date lastDate = authenticationDO.getCreateTime();
-                Integer authCodeInterval = SocialuniAppConfig.appMoreConfig.getAuthCodeInterval();
+                Integer authCodeInterval = SocialuniAppConfig.getAppMoreConfig().getAuthCodeInterval();
                 long canDate = lastDate.getTime() + authCodeInterval * DateTimeType.second;
                 long curDate = new Date().getTime();
                 if (curDate < canDate) {
@@ -78,9 +78,9 @@ public class SocailSendAuthCodeDomain {
                 }
             }
             //都是默认30次
-            final Integer userLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodeCount();
+            final Integer userLimitCount = SocialuniAppConfig.getAppMoreConfig().getAuthCodeCount();
 //        final Integer ipLimitCount = (Integer) AppConfigConst.appConfigMap.get(AppConfigConst.authCodeIpCountKey);
-            final Integer phoneLimitCount = SocialuniAppConfig.appMoreConfig.getAuthCodePhoneCount();
+            final Integer phoneLimitCount = SocialuniAppConfig.getAppMoreConfig().getAuthCodePhoneCount();
             //首先查手机号总次数，如果大于1，则不行
             Integer phoneNumCount = authRepository.countByPhoneNum(phoneNum);
 

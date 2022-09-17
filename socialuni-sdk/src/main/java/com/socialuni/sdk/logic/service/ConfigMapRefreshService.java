@@ -33,8 +33,8 @@ public class ConfigMapRefreshService {
                 SocialuniAppConfig.appConfig AppConfigConst.appConfigMap.put(appConfigDO.getConfigKey(), appConfigDO.getBooleanValue());
             }
         }*/
-        Integer talkAdInterval = SocialuniAppConfig.appMoreConfig.getTalkShowAdInterval();
-        Integer talkShowAdCount = SocialuniAppConfig.appMoreConfig.getTalkShowAdCount();
+        Integer talkAdInterval = SocialuniAppConfig.getAppMoreConfig().getTalkShowAdInterval();
+        Integer talkShowAdCount = SocialuniAppConfig.getAppMoreConfig().getTalkShowAdCount();
         if (talkAdInterval < 6) {
             log.error("广告展示频率不能低于6");
         } else if (talkAdInterval > 30) {
@@ -58,7 +58,7 @@ public class ConfigMapRefreshService {
         }
         //todo 下版本删除AppConfigConst.appConfigMap 相关内容
         AppConfigConst.appConfigMap.put(AppConfigConst.talkShowAdIndexListKey, showAdList);
-        SocialuniAppConfig.appMoreConfig.setTalkShowAdIndexList(showAdList);
-        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appConfig), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.appMoreConfig));
+        SocialuniAppConfig.getAppMoreConfig().setTalkShowAdIndexList(showAdList);
+        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
     }
 }
