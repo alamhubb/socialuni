@@ -40,10 +40,11 @@ public class SocialuniContentCheckUtil {
         //不为空才进行校验
         if (StringUtils.isNotEmpty(content)) {
             Boolean disableUnderageContent = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
-            //如果禁用，则判断是否包含未成年人内容
+            //如果禁止包含未成年人内容
             if (disableUnderageContent) {
-                //本系统内的违规词校验
-                SocialuniContentCheckUtil.hasUn18ContentThrowError(content);
+                if (SocialuniContentCheckUtil.hasUn18ContentThrowError(content)) {
+                    throw new SocialBusinessException("根据平台规则，禁止发布包含小于18岁未成年的内容");
+                }
             }
             //是否禁止包含联系方式
             Boolean disableContentHasContactInfo = SocialuniAppConfig.getAppConfig().getDisableContentHasContactInfo();
@@ -83,9 +84,9 @@ public class SocialuniContentCheckUtil {
 
 
     //包含未成年内容
-    private static void hasUn18ContentThrowError(String content) {
+    private static boolean hasUn18ContentThrowError(String content) {
         if (StringUtils.isEmpty(content)) {
-            return;
+            return false;
         }
         //去除特殊和空白字符
         content = TextContentUtil.clearAllEmptyAndSpecialChart(content);
@@ -101,10 +102,11 @@ public class SocialuniContentCheckUtil {
         while (matcher.find()) {
             //获取当前匹配的值
             String numStr = matcher.group();
-            if (BirthdayAgeUtil.ageBetween10to18Str(numStr)) {
-                throw new SocialBusinessException("根据平台规则，禁止发布包含小于18岁未成年的内容，规避此规则内容会按违反社区规则进行封号处罚");
+            if (BirthdayAgeUtil.lessThan18Str(numStr)) {
+                return true;
             }
         }
+        return false;
     }
 
     //包含qq联系方式

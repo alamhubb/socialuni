@@ -1,13 +1,11 @@
 package com.socialuni.sdk.utils.common;
 
-import com.socialuni.sdk.utils.content.TextContentUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 /**
  * @author qinkaiyuan
@@ -92,26 +90,12 @@ public class BirthdayAgeUtil {
         return null;
     }
 
-    public static boolean ageBetween10to18Str(String numStr) {
+    public static boolean lessThan18Str(String numStr) {
         if (numStr.length() == 2) {
             int age = Integer.parseInt(numStr);
             return age < 18;
         }
         return false;
-    }
-
-    public static String getAgeBetween10to18Str(String numStr) {
-        if (BirthdayAgeUtil.ageBetween10to18Str(numStr)) {
-            return "";
-        }
-        return numStr;
-    }
-
-    public static String getAgeBetween10to18StrTo18(String numStr) {
-        if (BirthdayAgeUtil.ageBetween10to18Str(numStr)) {
-            return "18";
-        }
-        return numStr;
     }
 
     /*public static String replaceAgeBetween10to18Str(String content) {
@@ -140,13 +124,4 @@ public class BirthdayAgeUtil {
         content = content.trim().replaceAll("[\\t ]", "");
         return content;
     }*/
-
-    public static Integer replaceAgeBetween10to18StrTo18(Integer age) {
-        //定义正则表达式
-        String reg = "\\d+";
-        //编译正则表达式
-        Pattern patten = Pattern.compile(reg);
-        String ageStr = TextContentUtil.replaceAll(age.toString(), patten, (result) -> BirthdayAgeUtil.getAgeBetween10to18StrTo18(result.group()));
-        return Integer.valueOf(ageStr);
-    }
 }
