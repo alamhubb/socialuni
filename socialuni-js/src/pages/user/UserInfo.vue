@@ -315,7 +315,7 @@
 </template>
 
 <script lang="ts">
-import {Component, PropSync, Vue, Watch} from 'vue-property-decorator'
+import { Component, PropSync, Vue, Watch } from 'vue-property-decorator'
 import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
 import TalkItem from '../talk/talkItem/TalkItem.vue'
 import UserUtil from '../../socialuni/utils/UserUtil'
@@ -329,7 +329,7 @@ import PageUtil from '../../socialuni/utils/PageUtil'
 import TalkOperate from '../talk/talkOperate.vue'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import MsgUtil from '../../socialuni/utils/MsgUtil'
-import {socialAppStore, socialSystemStore, socialUserModule, socialUserStore} from '../../socialuni/store'
+import { socialAppStore, socialSystemStore, socialUserModule, socialUserStore } from '../../socialuni/store'
 import QRowItem from '../../qing-ui/components/QRowItem/QRowItem.vue'
 import AlertUtil from '../../socialuni/utils/AlertUtil'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
@@ -383,7 +383,7 @@ export default class UserInfo extends Vue {
 
   showUserContactBtnDisabled = false
 
-  toMessagePage() {
+  toMessagePage () {
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
     //mock chat
@@ -428,39 +428,39 @@ export default class UserInfo extends Vue {
     }
   }*/
 
-  async toPhonePage() {
+  async toPhonePage () {
     await PageUtil.toPhonePage()
   }
 
-  toIdentityAuth() {
+  toIdentityAuth () {
     MsgUtil.identityAuthHint()
   }
 
-  openVip() {
+  openVip () {
     PageUtil.toVipPage()
   }
 
-  get isMine(): boolean {
+  get isMine (): boolean {
     // 两个都有值，且两个都相等，才为自己
     return this.pageUser && this.mineUser && this.pageUser.id === this.mineUser.id
   }
 
-  get talkIds() {
+  get talkIds () {
     if (this.talks.length) {
       return this.talks.map(item => item.id)
     }
     return []
   }
 
-  copyText(textCopy: string) {
+  copyText (textCopy: string) {
     UniUtil.textCopy(textCopy)
   }
 
-  deleteTalk(talkId: string) {
+  deleteTalk (talkId: string) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
-  moreAction() {
+  moreAction () {
     if (this.isMine) {
       const menuList: string [] = ['上传头像', '退出登录']
       UniUtil.actionSheet(menuList).then((index: number) => {
@@ -473,7 +473,7 @@ export default class UserInfo extends Vue {
     }
   }
 
-  toEditUserInfo() {
+  toEditUserInfo () {
     PageUtil.toEditMineInfo()
   }
 
@@ -485,14 +485,14 @@ export default class UserInfo extends Vue {
     deep: true,
     immediate: true
   })
-  watchUserChange(newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
+  watchUserChange (newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {
       this.queryMineTalks()
     }
   }
 
-  queryMineTalks() {
+  queryMineTalks () {
     if (this.pageUser) {
       this.followStatus = FollowStatus.getFollowStatus(this.pageUser)
       this.hasFollowed = this.pageUser.hasFollowed
@@ -503,21 +503,21 @@ export default class UserInfo extends Vue {
   }
 
 
-  getGenderIcon(user: CenterUserDetailRO) {
+  getGenderIcon (user: CenterUserDetailRO) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor(user: CenterUserDetailRO) {
+  getGenderBgColor (user: CenterUserDetailRO) {
     return UserUtil.getGenderBgColor(user)
   }
 
-  toFollowVue() {
+  toFollowVue () {
     if (this.isMine) {
       RouterUtil.navigateTo(PagePath.userFollow)
     }
   }
 
-  toLoveValuePage() {
+  toLoveValuePage () {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
     } else {
@@ -525,15 +525,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  hintJusticeInfo() {
+  hintJusticeInfo () {
     ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
-  hintBindTwice() {
+  hintBindTwice () {
     AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
-  addFollow() {
+  addFollow () {
     if (this.mineUser) {
       if (!this.followBtnDisabled) {
         this.followBtnDisabled = true
@@ -564,15 +564,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  getFollowStatusColor(followStatus: string) {
+  getFollowStatusColor (followStatus: string) {
     return UserUtil.getFollowStatusColor(followStatus)
   }
 
-  toFaceValuePage() {
+  toFaceValuePage () {
     PageUtil.toFaceValuePage()
   }
 
-  refreshMine() {
+  refreshMine () {
     AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -580,15 +580,15 @@ export default class UserInfo extends Vue {
     })
   }
 
-  loginOut() {
+  loginOut () {
     socialUserModule.loginOut()
   }
 
-  async uploadUserAvatarImg() {
+  async uploadUserAvatarImg () {
     try {
-      UniUtil.showLoading('上传中')
       const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+      UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
       const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
@@ -601,11 +601,11 @@ export default class UserInfo extends Vue {
   }
 
   //前往贝壳页面
-  toUserShell() {
+  toUserShell () {
     PageUtil.toShellPage()
   }
 
-  openSetSchoolDialog() {
+  openSetSchoolDialog () {
     if (this.isMine) {
       this.$refs.schoolEditDialog.open()
     }

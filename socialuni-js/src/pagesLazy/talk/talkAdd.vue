@@ -486,11 +486,11 @@ export default class TalkAddView extends Vue {
         return
       }
     }
+    //获取cos认证信息
+    this.cosAuthRO = await CosUtil.getCosAuthRO()
     const count = this.imgMaxSize - this.showImgFiles.length
     const imgFiles: DomFile[] = await UniUtil.chooseImage(count)
     this.showImgFiles.push(...imgFiles)
-    //获取cos认证信息
-    this.cosAuthRO = await CosUtil.getCosAuthRO()
     if (this.cosAuthRO) {
       this.uploadImgList()
     } else {

@@ -21,7 +21,7 @@ public class QQMapAPI {
     }
 
     public static LocationQueryRO geocoder(LocationQueryQO queryQO) {
-        ResponseEntity<QQMapGeocoderRO> responseEntity = RestUtil.getFileRestTemplate().getForEntity(map_geocoder_url + map_web_key + "&location=" + queryQO.getLatitude() + "," + queryQO.getLongitude(), QQMapGeocoderRO.class);
+        ResponseEntity<QQMapGeocoderRO> responseEntity = RestUtil.getDefaultRestTemplate().getForEntity(map_geocoder_url + map_web_key + "&location=" + queryQO.getLatitude() + "," + queryQO.getLongitude(), QQMapGeocoderRO.class);
         QQMapGeocoderRO qqMapGeocoderRO = responseEntity.getBody();
         if (qqMapGeocoderRO == null) {
             return null;
@@ -34,7 +34,7 @@ public class QQMapAPI {
     }
 
     public static LocationQueryRO getIpLocation(String ip) {
-        ResponseEntity<QQMapGeocoderRO> responseEntity = RestUtil.getFileRestTemplate().getForEntity(map_ip_url + map_web_key + "&ip=" + ip, QQMapGeocoderRO.class);
+        ResponseEntity<QQMapGeocoderRO> responseEntity = RestUtil.getDefaultRestTemplate().getForEntity(map_ip_url + map_web_key + "&ip=" + ip, QQMapGeocoderRO.class);
         QQMapGeocoderRO qqMapGeocoderRO = responseEntity.getBody();
         if (qqMapGeocoderRO == null) {
             return null;

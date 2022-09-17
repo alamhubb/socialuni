@@ -110,7 +110,7 @@ public class WxUtil {
         String url = WxConst.wxTokenUrl + appIDAndAppSecret;
         Date curDate = new Date();
         log.info("从微信获取认证信息:{}", url);
-        ResponseEntity<WxTokenResult> responseEntity = RestUtil.restTemplate().getForEntity(url, WxTokenResult.class);
+        ResponseEntity<WxTokenResult> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(url, WxTokenResult.class);
         WxTokenResult wxToken = responseEntity.getBody();
         if (wxToken == null || wxToken.hasError()) {
             log.info("获取微信认证信息失败:{}", wxToken);
@@ -148,7 +148,7 @@ public class WxUtil {
         HashMap<String, Object> postData = new HashMap<>();
         postData.put("content", content);
         String url = WxConst.wx_msg_sec_check_url + WxUtil.getAccessToken();
-        return RestUtil.restTemplate().postForEntity(url, postData, HttpResult.class).getBody();
+        return RestUtil.getXmlRestTemplate().postForEntity(url, postData, HttpResult.class).getBody();
     }
 
     public static void checkImgSecPost(String imgUrl) {
@@ -175,7 +175,7 @@ public class WxUtil {
             // 2、使用postForEntity请求接口
             String imgCheckUrl = WxConst.wx_img_sec_check_url + WxUtil.getAccessToken();
 
-            HttpResult httpResult = RestUtil.getFileRestTemplate().postForEntity(imgCheckUrl, paramMap, HttpResult.class).getBody();
+            HttpResult httpResult = RestUtil.getDefaultRestTemplate().postForEntity(imgCheckUrl, paramMap, HttpResult.class).getBody();
             if (httpResult != null) {
                 log.info(httpResult.getErrmsg());
                 log.info(httpResult.getErrcode().toString());
@@ -192,7 +192,7 @@ public class WxUtil {
         pushMsgDTO.setTouser(openId);
         //如果评论
         String url = WxConst.push_msg_url + accessToken;
-        HttpResult result = RestUtil.restTemplate().postForEntity(url, pushMsgDTO, HttpResult.class).getBody();
+        HttpResult result = RestUtil.getXmlRestTemplate().postForEntity(url, pushMsgDTO, HttpResult.class).getBody();
         PushMessageUtils.savePushMsg(notify, pushMsgDTO, result, platform);
     }
 
@@ -284,7 +284,7 @@ public class WxUtil {
 
         // 创建 HttpEntity
         HttpEntity<String> requestEntity = new HttpEntity<>(xmlString.toString(), requestHeader);
-        ResponseEntity<String> responseEntity = RestUtil.restTemplate().postForEntity(WxConst.wx_pay_url, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = RestUtil.getXmlRestTemplate().postForEntity(WxConst.wx_pay_url, requestEntity, String.class);
         String xmlStr = responseEntity.getBody();
         XStream xstream = new XStream();
         xstream.alias("xml", QQPayResult.class);

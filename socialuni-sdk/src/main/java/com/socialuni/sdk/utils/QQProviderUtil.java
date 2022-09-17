@@ -32,7 +32,7 @@ public class QQProviderUtil {
         String code = unionIdData.getCode();
 
         String url = QQProviderUtil.getUnionIdUrl(platform, code);
-        ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.restTemplate().getForEntity(url, UniUnionIdRO.class);
+        ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(url, UniUnionIdRO.class);
         return responseEntity.getBody();
     }
 

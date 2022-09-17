@@ -2,7 +2,6 @@ package com.socialuni.sdk.utils.common;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -13,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestUtil {
-    public static RestTemplate getFileRestTemplate(){
+    public static RestTemplate getDefaultRestTemplate(){
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate;
     }
 
-    public static RestTemplate restTemplate() {
+    public static RestTemplate getXmlRestTemplate() {
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         RestTemplate restTemplate = restTemplateBuilder.build();
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();

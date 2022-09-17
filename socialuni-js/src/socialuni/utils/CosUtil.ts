@@ -14,25 +14,25 @@ import CosAPI from '@/socialuni/api/CosAPI'
 
 export default class CosUtil {
   //向cos上传图片
-  static async getCosAuthRO () {
+  static async getCosAuthRO() {
     const authRes = await CosAPI.getCosAuthorizationAPI()
-    const cosAuthRO = new CosAuthRO(authRes.data)
+    const cosAuthRO = authRes.data
     cosAuthRO.cos = CosUtil.getAuthorizationCos(cosAuthRO)
     return cosAuthRO
   }
 
-  static async postImgList (imgSrcs: DomFile[], cosAuthRO: CosAuthRO) {
+  static async postImgList(imgSrcs: DomFile[], cosAuthRO: CosAuthRO) {
     // constant { data } = await CosAPI.getCosAuthorizationAPI()
     return await Promise.all(imgSrcs.map(async imgFile => TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO)))
   }
 
-  static getAuthorizationCos (cosAuthRO: CosAuthRO): COS {
+  static getAuthorizationCos(cosAuthRO: CosAuthRO): COS {
     const credentials = cosAuthRO && cosAuthRO.credentials
     //@ts-ignore
     if (!cosAuthRO || !credentials) return console.error('credentials invalid')
     const cosObj = new COS({
       // ForcePathStyle: true, // 如果使用了很多存储桶，可以通过打开后缀式，减少配置白名单域名数量，请求时会用地域域名
-      getAuthorization (options, callback) {
+      getAuthorization(options, callback) {
         // 异步获取临时密钥
         callback({
           TmpSecretId: cosAuthRO.credentials.tmpSecretId,
@@ -47,7 +47,7 @@ export default class CosUtil {
     return cosObj
   }
 
-  static getAuthorizationKey (cosAuthRO: CosAuthRO) {
+  static getAuthorizationKey(cosAuthRO: CosAuthRO) {
     const credentials = cosAuthRO && cosAuthRO.credentials
     if (!cosAuthRO || !credentials) return console.error('credentials invalid')
     //@ts-ignore

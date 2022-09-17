@@ -9,7 +9,7 @@ import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
-import com.socialuni.sdk.logic.platform.tencent.TencentCloud;
+import com.socialuni.sdk.logic.platform.tencent.TencentCloudAPI;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.utils.DateUtils;
@@ -47,7 +47,7 @@ public class SocialuniUserIdentityService {
 
 
     public ResultRO<SocialUserIdentityAuthPreCheckRO> userIdentityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
-        Integer resScore = TencentCloud.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getSelfieImgUrl());
+        Integer resScore = TencentCloudAPI.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
             throw new SocialBusinessException("预校验失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }
@@ -63,7 +63,7 @@ public class SocialuniUserIdentityService {
 
     public ResultRO<String> userIdentityAuth(SocialUserIdentityAuthQO socialUserIdentityAuthQO) {
         // 实例化要请求产品的client对象,clientProfile是可选的
-        OcrClient client = TencentCloud.getOcrClient();
+        OcrClient client = TencentCloudAPI.getOcrClient();
         // 实例化一个请求对象,每个接口都会对应一个request对象
         IDCardOCRRequest req = new IDCardOCRRequest();
         req.setImageUrl(SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl());
@@ -77,7 +77,7 @@ public class SocialuniUserIdentityService {
         if (StringUtils.isEmpty(resp.getBirth())) {
             throw new SocialBusinessException("请上传真实的身份信息，" + ErrorMsg.CONTACT_SERVICE);
         }
-        Integer resScore = TencentCloud.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getSelfieImgUrl());
+        Integer resScore = TencentCloudAPI.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
             throw new SocialBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
         }

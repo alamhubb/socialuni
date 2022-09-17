@@ -6,14 +6,8 @@ import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.utils.UnionIdDbUtil;
 import com.socialuni.sdk.logic.platform.MapUtil;
-import com.socialuni.sdk.utils.ImgCheckUtil;
-import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class TalkDOFactory {

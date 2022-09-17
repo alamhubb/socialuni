@@ -42,25 +42,25 @@
 </template>
 
 <script lang="ts">
-import {Component, PropSync, Vue} from 'vue-property-decorator'
-import UniUtil from "@/socialuni/utils/UniUtil";
-import SocialuniUserAPI from "@/socialuni/api/socialuni/SocialuniUserAPI";
-import ImgUtil from "@/socialuni/utils/ImgUtil";
-import CenterUserDetailRO from "@/socialuni/model/social/CenterUserDetailRO";
-import {socialUserModule, socialUserStore} from '@/socialuni/store'
-import ImgFileVO from "@/socialuni/model/ImgFileVO";
-import AlertUtil from "@/socialuni/utils/AlertUtil";
-import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
-import ReportContentType from "@/socialuni/constant/ReportContentType";
-import CosUtil from "@/socialuni/utils/CosUtil";
-import DomFile from "@/socialuni/model/DomFile";
-import TencentCosAPI from "@/api/TencentCosAPI";
-import ImgAddQO from "@/socialuni/model/user/ImgAddQO";
-import PageUtil from "@/socialuni/utils/PageUtil";
-import QIcon from "@/qing-ui/components/QLocation/QIcon.vue";
+import { Component, PropSync, Vue } from 'vue-property-decorator'
+import UniUtil from '@/socialuni/utils/UniUtil'
+import SocialuniUserAPI from '@/socialuni/api/socialuni/SocialuniUserAPI'
+import ImgUtil from '@/socialuni/utils/ImgUtil'
+import CenterUserDetailRO from '@/socialuni/model/social/CenterUserDetailRO'
+import { socialUserModule, socialUserStore } from '@/socialuni/store'
+import ImgFileVO from '@/socialuni/model/ImgFileVO'
+import AlertUtil from '@/socialuni/utils/AlertUtil'
+import SocialuniReportDialog from '@/pages/report/SocialuniReportDialog.vue'
+import ReportContentType from '@/socialuni/constant/ReportContentType'
+import CosUtil from '@/socialuni/utils/CosUtil'
+import DomFile from '@/socialuni/model/DomFile'
+import TencentCosAPI from '@/api/TencentCosAPI'
+import ImgAddQO from '@/socialuni/model/user/ImgAddQO'
+import PageUtil from '@/socialuni/utils/PageUtil'
+import QIcon from '@/qing-ui/components/QLocation/QIcon.vue'
 
 @Component({
-  components: {QIcon, SocialuniReportDialog}
+  components: { QIcon, SocialuniReportDialog }
 })
 export default class UserInfoImg extends Vue {
   $refs!: {
@@ -69,7 +69,7 @@ export default class UserInfoImg extends Vue {
   @socialUserStore.State('user') mineUser: CenterUserDetailRO
   @PropSync('user') pageUser: CenterUserDetailRO
 
-  get imgUrls() {
+  get imgUrls () {
     if (this.pageUser && this.pageUser.imgs) {
       return this.pageUser.imgs.map(item => ImgUtil.getUserLargeImgUrl(item.src))
     } else {
@@ -77,19 +77,20 @@ export default class UserInfoImg extends Vue {
     }
   }
 
-  get isMine(): boolean {
+  get isMine (): boolean {
     // 两个都有值，且两个都相等，才为自己
     return this.pageUser && this.mineUser && this.pageUser.id === this.mineUser.id
   }
 
-  async uploadUserImg() {
+  async uploadUserImg () {
     try {
-      UniUtil.showLoading('上传中')
       const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+      UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
       const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      TencentCosAPI.getImgTextContentAPI(res[0].Location, imgFile.src, cosAuthRO)
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)
@@ -98,14 +99,14 @@ export default class UserInfoImg extends Vue {
     }
   }
 
-  previewImage(current) {
+  previewImage (current) {
     uni.previewImage({
       current: current,
       urls: this.imgUrls
     })
   }
 
-  imgLongPress(imgIndex: number) {
+  imgLongPress (imgIndex: number) {
     if (this.isMine) {
       UniUtil.actionSheet(['删除']).then((index: number) => {
         if (index === 0) {
@@ -121,7 +122,7 @@ export default class UserInfoImg extends Vue {
     }
   }
 
-  deleteImg(imgIndex) {
+  deleteImg (imgIndex) {
     AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
       SocialuniUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
@@ -130,21 +131,21 @@ export default class UserInfoImg extends Vue {
     })
   }
 
-  frontDeleteImg(imgIndex) {
+  frontDeleteImg (imgIndex) {
     return this.pageUser.imgs.splice(imgIndex, 1)
   }
 
-  openReportDialog(imgIndex) {
+  openReportDialog (imgIndex) {
     const imgId = this.pageUser.imgs[imgIndex].id
     this.$refs.reportDialog.openReportDialog(ReportContentType.userImg, imgId)
   }
 
-  reportSuccessDeleteImg(imgId) {
+  reportSuccessDeleteImg (imgId) {
     const imgIndex = this.pageUser.imgs.findIndex(item => item.id === imgId)
     this.frontDeleteImg(imgIndex)
   }
 
-  toUserImgList() {
+  toUserImgList () {
     PageUtil.toUserImgList(this.pageUser.id)
   }
 }

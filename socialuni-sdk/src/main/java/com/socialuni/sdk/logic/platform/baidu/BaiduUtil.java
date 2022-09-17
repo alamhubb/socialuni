@@ -34,12 +34,12 @@ public class BaiduUtil {
      * @return
      */
     public static String getAccessToken() {
-        ResponseEntity<TokenDTO> responseEntity = RestUtil.restTemplate().getForEntity(tokenUrl + "getBdSession", TokenDTO.class);
+        ResponseEntity<TokenDTO> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(tokenUrl + "getBdSession", TokenDTO.class);
         return Objects.requireNonNull(responseEntity.getBody()).getAccessToken();
     }
 
     public static String refreshAccessToken() {
-        ResponseEntity<TokenDTO> responseEntity = RestUtil.restTemplate().getForEntity(tokenUrl + "refreshBdSession", TokenDTO.class);
+        ResponseEntity<TokenDTO> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(tokenUrl + "refreshBdSession", TokenDTO.class);
         return Objects.requireNonNull(responseEntity.getBody()).getAccessToken();
     }
 }

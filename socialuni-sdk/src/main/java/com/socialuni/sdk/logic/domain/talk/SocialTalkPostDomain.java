@@ -20,7 +20,7 @@ import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
 import com.socialuni.sdk.logic.service.tag.TagService;
 import com.socialuni.sdk.utils.DistrictStoreUtils;
-import com.socialuni.sdk.utils.ImgCheckUtil;
+import com.socialuni.sdk.utils.ImgContentUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
@@ -78,6 +78,10 @@ public class SocialTalkPostDomain {
         //获取应用对应的话题
 
         SocialTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
+
+
+
+
         reportDomain.checkKeywordsCreateReport(talkDO);
 
         List<SocialTalkImgDO> imgDOS = talkDO.getImgs();
@@ -194,7 +198,7 @@ public class SocialTalkPostDomain {
             imgDO.setContentId(talkDO.getUnionId());
             imgDO.setUserId(talkDO.getUserId());
             //是否包含图片
-            boolean hasPeople = ImgCheckUtil.hasPeopleImg(imgDO.getSrc());
+            boolean hasPeople = ImgContentUtil.hasPeopleImg(imgDO.getSrc());
             if (hasPeople) {
                 imgDO.setHasPeopleImg(true);
             }

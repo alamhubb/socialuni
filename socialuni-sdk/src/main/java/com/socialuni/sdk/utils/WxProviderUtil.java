@@ -50,7 +50,7 @@ public class WxProviderUtil {
                 wxMpSecret = WxProviderUtil.wxMpSecret;
             }*/
             String url = WxProviderUtil.getUnionIdUrl(platform, code, wxMpId, wxMpSecret);
-            ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.restTemplate().getForEntity(url, UniUnionIdRO.class);
+            ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(url, UniUnionIdRO.class);
             UniUnionIdRO uniUnionIdRO = Objects.requireNonNull(responseEntity.getBody());
             // 微信需要单独解析
             return WxProviderUtil.decodeUnionId(unionIdData, uniUnionIdRO);

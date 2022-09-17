@@ -99,7 +99,7 @@ public class QQUtil {
         String url = QQConst.qqTokenUrl + "appid=" + qq_mp_id + "&secret=" + qq_mp_secret;
         Date curDate = new Date();
         log.info("从qq获取认证信息:{}", url);
-        ResponseEntity<WxTokenResult> responseEntity = RestUtil.restTemplate().getForEntity(url, WxTokenResult.class);
+        ResponseEntity<WxTokenResult> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(url, WxTokenResult.class);
         WxTokenResult qqToken = responseEntity.getBody();
         if (qqToken == null || qqToken.hasError()) {
             log.info("获取qq认证信息失败:{}", qqToken);
@@ -117,7 +117,7 @@ public class QQUtil {
         HashMap<String, Object> postData = new HashMap<>();
         postData.put("content", content);
         String url = QQConst.qq_msg_sec_check_url + QQUtil.getAccessToken();
-        return RestUtil.restTemplate().postForEntity(url, postData, HttpResult.class).getBody();
+        return RestUtil.getXmlRestTemplate().postForEntity(url, postData, HttpResult.class).getBody();
     }
 
     /**
@@ -140,7 +140,7 @@ public class QQUtil {
         return qqResult;
     }
 
-    public static void checkImgSecPost(String imgUrl) {
+    public static void qqMediaCheckAsync(String imgUrl) {
         try {
             //获取文件后缀名
             String[] suffix = imgUrl.split("\\.");
@@ -167,7 +167,39 @@ public class QQUtil {
 
             String imgCheckUrl = QQConst.qq_img_sec_check_url + QQUtil.getAccessToken();
 
-            HttpImgCheckResult httpResult = RestUtil.getFileRestTemplate().postForEntity(imgCheckUrl, paramMap, HttpImgCheckResult.class).getBody();
+            HttpImgCheckResult httpResult = RestUtil.getDefaultRestTemplate().postForEntity(imgCheckUrl, paramMap, HttpImgCheckResult.class).getBody();
+            if (httpResult != null) {
+                log.info(httpResult.getErrMsg());
+                log.info(httpResult.getErrCode().toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new SocialBusinessException("上传照片失败");
+        }
+    }
+
+    //校验的话会很慢
+    public static void checkImgSecPost(String imgUrl) {
+        try {
+            //获取文件后缀名
+            String fileTypeName = ImgContentUtil.getFileSuffixName(imgUrl);
+            File file = File.createTempFile("checkImgTemp", fileTypeName);
+
+            Thumbnails.of(new URL(imgUrl)).size(700, 1300).toFile(file);
+
+            FileSystemResource fileResource = new FileSystemResource(file);
+
+            // 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
+            MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
+            paramMap.add("appid", qq_mp_id);
+            paramMap.add("media", fileResource);
+            // 2、使用postForEntity请求接口
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(paramMap, headers);
+
+            String imgCheckUrl = QQConst.qq_img_sec_check_url + QQUtil.getAccessToken();
+
+            HttpImgCheckResult httpResult = RestUtil.getDefaultRestTemplate().postForEntity(imgCheckUrl, paramMap, HttpImgCheckResult.class).getBody();
             if (httpResult != null) {
                 log.info(httpResult.getErrMsg());
                 log.info(httpResult.getErrCode().toString());
@@ -189,7 +221,7 @@ public class QQUtil {
 
 //         = new PushMsgDTO(accessToken, openId, template_id, page, data, emphasis_keyword)
         String url = QQConst.push_msg_url + accessToken;
-        HttpResult result = RestUtil.restTemplate().postForEntity(url, pushMsgDTO, HttpResult.class).getBody();
+        HttpResult result = RestUtil.getXmlRestTemplate().postForEntity(url, pushMsgDTO, HttpResult.class).getBody();
         PushMessageUtils.savePushMsg(notify, pushMsgDTO, result, platform);
         if (result != null && result.hasError()) {
             Integer errCode = result.getErrcode();
@@ -198,7 +230,7 @@ public class QQUtil {
                 accessToken = QQUtil.refreshAccessToken();
                 pushMsgDTO.setAccess_token(accessToken);
                 url = QQConst.push_msg_url + accessToken;
-                result = RestUtil.restTemplate().postForEntity(url, pushMsgDTO, HttpResult.class).getBody();
+                result = RestUtil.getXmlRestTemplate().postForEntity(url, pushMsgDTO, HttpResult.class).getBody();
                 PushMessageUtils.savePushMsg(notify, pushMsgDTO, result, platform);
             }
         }
@@ -255,7 +287,7 @@ public class QQUtil {
                 .append("</xml>");
         // 创建 HttpEntity
         HttpEntity<String> requestEntity = new HttpEntity<>(xmlString.toString(), requestHeader);
-        ResponseEntity<String> responseEntity = RestUtil.restTemplate().postForEntity(QQConst.qq_pay_url, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = RestUtil.getXmlRestTemplate().postForEntity(QQConst.qq_pay_url, requestEntity, String.class);
         XStream xstream = new XStream();
         xstream.alias("xml", QQPayResult.class);
         Object qqPayResult = xstream.fromXML(responseEntity.getBody());

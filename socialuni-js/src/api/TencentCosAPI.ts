@@ -43,7 +43,35 @@ export default class TencentCosAPI {
         console.log(JSON.stringify(progressData))
       }
     })*/
+  }
 
+  static async getImgTextContentAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
+    const authKey = COS.getAuthorization({
+      SecretId: cosAuthRO.credentials.tmpSecretId,
+      SecretKey: cosAuthRO.credentials.tmpSecretKey,
+      Method: 'get',
+      Key: imgKey
+    })
+    console.log(authKey)
+    const res = await request.get('https://' + imgUrl + '?ci-process=OCR', null, {
+      header: {
+        Authorization: authKey,
+        'x-cos-security-token': cosAuthRO.credentials.sessionToken
+      }
+    })
+    console.log(res)
+    return res
+    /*
+    const res = await cosAuthRO.cos.getObject({
+      Bucket: cosAuthRO.bucket,
+      Region: cosAuthRO.region,
+      DataType: 'blob',
+      QueryString: 'ci-process=detect-label',
+      Key: imgUrl,
+      onProgress: function (progressData) {
+        console.log(JSON.stringify(progressData))
+      }
+    })*/
   }
 
   static async getIdCardInfoAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
