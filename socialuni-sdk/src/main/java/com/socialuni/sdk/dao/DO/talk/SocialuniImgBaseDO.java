@@ -24,6 +24,7 @@ public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Seri
     private Integer size;
 
     //用来存储ocr后的图片内容，用户图片部分也需要相关功能
+    @Column(columnDefinition = "text")
     private String content;
 
     //发表商户
@@ -31,6 +32,8 @@ public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Seri
     private Boolean adultAuth;
     //ocr后查看是否包含未成年内容
     private Boolean hasUnderageContent;
+
+    private Boolean hasQrCode;
 
     private String deleteReason;
 
@@ -47,5 +50,6 @@ public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Seri
         this.hasPeopleImg = false;
         this.adultAuth = false;
         this.hasUnderageContent = false;
+        this.hasQrCode = false;
     }
 }

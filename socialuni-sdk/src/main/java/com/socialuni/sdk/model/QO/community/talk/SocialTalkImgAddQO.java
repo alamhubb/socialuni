@@ -11,4 +11,5 @@ public class SocialTalkImgAddQO {
     //压缩率
     private Double quality;
     private String content;
+    private Boolean hasQrCode;
 }

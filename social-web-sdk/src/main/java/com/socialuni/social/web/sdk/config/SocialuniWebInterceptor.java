@@ -8,6 +8,8 @@ import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
@@ -31,6 +33,8 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         if (requestMethod.equals(RequestMethod.OPTIONS.name())) {
             return true;
         }
+        //保存下当前的request，防止异步无法处理request问题
+        RequestLogUtil.setRequest(request);
         Date startTime = new Date();
         String uri = request.getRequestURI();
         String userIp = IpUtil.getIpAddr(request);
@@ -52,6 +56,7 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
 //        requestLogDO.setErrorType(ErrorType.success);
 //        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
 //        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
+
 
         requestLogDO = RequestLogUtil.save(requestLogDO);
         return true;

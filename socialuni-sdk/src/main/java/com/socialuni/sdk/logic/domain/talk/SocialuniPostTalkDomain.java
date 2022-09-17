@@ -34,6 +34,7 @@ import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -61,13 +62,11 @@ public class SocialuniPostTalkDomain {
     @Resource
     SocialCircleRepository socialCircleRepository;
     @Resource
-    TalkImgRepository talkImgRepository;
+    SocialuniPostTalkDomainAsync socialuniPostTalkDomainAsync;
     @Resource
     SocialTalkCreateManage socialTalkCreateManage;
     @Resource
     SocialTalkCircleRepository socialTalkCircleRepository;
-    @Resource
-    TalkAdultImgAuditRepository talkAdultAuditRepository;
 
 
     @Transactional
@@ -85,16 +84,6 @@ public class SocialuniPostTalkDomain {
 
         reportDomain.checkKeywordsCreateReport(talkDO);
 
-        List<SocialTalkImgDO> imgDOS = talkDO.getImgs();
-
-        for (SocialTalkImgDO imgDO : imgDOS) {
-            //如果用户包含人物头像,且用户未认证
-            if (imgDO.getHasPeopleImg() && !imgDO.getAdultAuth()) {
-                //则添加一条待审核的动态，qq平台只查询审核通过的动态
-                SocialTalkImgAdultAuditDO socialTalkAdultAuditDO = new SocialTalkImgAdultAuditDO(imgDO.getUnionId());
-                talkAdultAuditRepository.save(socialTalkAdultAuditDO);
-            }
-        }
         SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
     }
@@ -112,6 +101,10 @@ public class SocialuniPostTalkDomain {
             throw new SocialParamsException("'不能发布文字和图片均为空的动态'");
         }
 
+        if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
+            SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
+        }
+
         //系统管理员不校验相关内容
         if (!UserType.system.equals(mineUser.getType())) {
             //不为开发环境，则校验内容
@@ -120,17 +113,25 @@ public class SocialuniPostTalkDomain {
             }
         }
 
-        if (SocialuniAppConfig.getAppConfig().getMustSetSchoolCanPost()) {
-            SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(SocialuniUserUtil.getMineUserIdNotNull());
-        }
-
-
         for (SocialTalkImgAddQO talkVOImg : talkVOImgs) {
             String imgTextContent = ImgContentUtil.getImgTextContent(talkVOImg.getSrc());
             talkVOImg.setContent(imgTextContent);
             //系统管理员不校验相关内容
             if (!UserType.system.equals(mineUser.getType())) {
                 SocialuniContentCheckUtil.checkUserInputLongTextContent(imgTextContent);
+
+                boolean hasQrCode = ImgContentUtil.hasQrCodeByCloudAPI(talkVOImg.getSrc());
+
+                talkVOImg.setHasQrCode(hasQrCode);
+
+                //是否禁止包含联系方式
+                Boolean disableContentHasQrCode = SocialuniAppConfig.getAppConfig().getDisableContentHasQrCode();
+                if (disableContentHasQrCode) {
+                    if (hasQrCode) {
+                        throw new SocialBusinessException("禁止发布包含二维码的内容，可在个人信息中填写联系方式");
+                    }
+                }
+
             }
         }
 
@@ -206,35 +207,16 @@ public class SocialuniPostTalkDomain {
         }
         talkTagRepository.saveAll(list);
 
-        List<SocialTalkImgDO> imgDOS = TalkImgDOFactory.newTalkImgDOS(socialTalkPostQO.getImgs());
-
-        //用户是否已经认证
-        Boolean userIdentityAuth = SocialuniUserUtil.getUserIsIdentityAuth(talkDO.getUserId());
-
-        for (SocialTalkImgDO imgDO : imgDOS) {
-            imgDO.setTalkId(talkDO.getUnionId());
-            imgDO.setUserId(talkDO.getUserId());
-            //包含未成年内容
-            boolean hasUn18Content = SocialuniContentCheckUtil.hasUn18ContentThrowError(imgDO.getContent());
-            imgDO.setHasUnderageContent(hasUn18Content);
-            //是否包含图片
-            boolean hasPeople = ImgContentUtil.hasPeopleImg(imgDO.getSrc());
-            if (hasPeople) {
-                imgDO.setHasPeopleImg(true);
-            }
-            //是否成年认证通过
-            imgDO.setAdultAuth(userIdentityAuth);
-        }
-
-        List<SocialTalkImgDO> talkImgDOS = talkImgRepository.saveAll(imgDOS);
-        talkDO.setImgs(talkImgDOS);
-
+        System.out.println("测试异步111");
+        socialuniPostTalkDomainAsync.saveTalkImgs(socialTalkPostQO, talkDO);
+        System.out.println("测试异步222");
         if (socialCircleDO != null) {
             SocialTalkCircleDO socialTalkCircleDO = new SocialTalkCircleDO();
             socialTalkCircleDO.setTalkId(talkDO.getUnionId());
             socialTalkCircleDO.setCircleId(socialCircleDO.getId());
             socialTalkCircleRepository.save(socialTalkCircleDO);
         }
+        System.out.println("测试异步3333");
         return talkDO;
     }
 }

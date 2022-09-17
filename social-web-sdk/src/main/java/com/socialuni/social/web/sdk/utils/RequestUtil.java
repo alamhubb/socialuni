@@ -20,6 +20,7 @@ public class RequestUtil {
 
     //获取到当前线程绑定的请求对象
     public static HttpServletRequest getRequest() {
+//        return RequestLogUtil.getRequest();
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
         return servletRequestAttributes.getRequest();

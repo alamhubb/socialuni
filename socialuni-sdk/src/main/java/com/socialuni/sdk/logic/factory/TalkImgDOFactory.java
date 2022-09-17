@@ -22,6 +22,7 @@ public class TalkImgDOFactory {
         Integer talkImgUnionId = UnionIdUtil.createTalkImgUnionId();
         socialTalkImgDO.setUnionId(talkImgUnionId);
         socialTalkImgDO.setContentType(SocialuniContentType.talkImg);
+        socialTalkImgDO.setHasQrCode(talkImgVO.getHasQrCode());
         return socialTalkImgDO;
     }
 

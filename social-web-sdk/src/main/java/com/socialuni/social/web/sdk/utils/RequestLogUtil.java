@@ -4,8 +4,10 @@ package com.socialuni.social.web.sdk.utils;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.store.RequestLogStore;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class RequestLogUtil {
@@ -31,6 +33,25 @@ public class RequestLogUtil {
     }
 
     private static final ThreadLocal<RequestLogDO> requestLog = new ThreadLocal<>();
+
+    private static final ThreadLocal<RequestAttributes> requestAttributes = new ThreadLocal<>();
+    private static final ThreadLocal<HttpServletRequest> request = new ThreadLocal<>();
+
+    public static void setRequest(HttpServletRequest request) {
+        RequestLogUtil.request.set(request);
+    }
+
+    public static HttpServletRequest getRequest() {
+        return RequestLogUtil.request.get();
+    }
+
+    public static void setRequestAttributes(RequestAttributes requestAttributes) {
+        RequestLogUtil.requestAttributes.set(requestAttributes);
+    }
+
+    public static RequestAttributes getRequestAttributes() {
+        return requestAttributes.get();
+    }
 
     public static void set(RequestLogDO requestLogDO) {
         requestLog.set(requestLogDO);

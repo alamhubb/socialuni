@@ -82,18 +82,7 @@ public class ReportDomain {
 //    @Transactional
     @Async
     public BaseModelDO checkKeywordsCreateReport(BaseModelDO modelDO) {
-
-
         String contentType = modelDO.getContentType();
-
-        //如果为动态
-        if (contentType.equals(SocialuniContentType.talk)) {
-            SocialTalkDO talkDO = (SocialTalkDO) modelDO;
-            List<SocialTalkImgDO> talkImgDOS = talkDO.getImgs();
-            for (SocialTalkImgDO talkImgDO : talkImgDOS) {
-                this.checkKeywordsCreateReport(talkImgDO);
-            }
-        }
 
         //不为空才校验内容
         if (StringUtils.isNotEmpty(modelDO.getContent())) {
