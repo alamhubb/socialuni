@@ -1,9 +1,11 @@
 package com.socialuni.sdk.logic.domain;
 
+import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.MessageRepository;
 import com.socialuni.sdk.dao.repository.ReportRepository;
 import com.socialuni.sdk.dao.repository.UserImgRepository;
+import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.TalkRedis;
 import com.socialuni.sdk.dao.DO.ReportDO;
@@ -32,6 +34,8 @@ public class BaseModelService {
     private ReportRepository reportRepository;
     @Resource
     private TalkRedis talkRedis;
+    @Resource
+    private TalkImgRepository talkImgRepository;
 
     public BaseModelDO save(BaseModelDO model) {
         if (model instanceof SocialTalkDO) {
@@ -46,6 +50,9 @@ public class BaseModelService {
         } else if (model instanceof SocialUserImgDO) {
             SocialUserImgDO userImgDO = (SocialUserImgDO) model;
             return userImgRepository.save(userImgDO);
+        } else if (model instanceof SocialTalkImgDO) {
+            SocialTalkImgDO talkImgDO = (SocialTalkImgDO) model;
+            return talkImgRepository.save(talkImgDO);
         } else {
             throw new SocialBusinessException("错误的内容类型");
         }

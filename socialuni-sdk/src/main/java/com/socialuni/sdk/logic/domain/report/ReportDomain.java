@@ -4,7 +4,10 @@ import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.*;
 import com.socialuni.sdk.constant.config.AppConfigStatic;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.constant.status.UserStatus;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
 import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.logic.domain.BaseModelService;
 import com.socialuni.sdk.logic.factory.ReportFactory;
@@ -19,13 +22,11 @@ import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.sdk.utils.QQUtil;
-import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdUtil;
-import com.socialuni.sdk.utils.WxUtil;
+import com.socialuni.sdk.utils.*;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -63,6 +64,8 @@ public class ReportDomain {
     private ReportFactory reportFactory;
     @Resource
     BaseModelService baseModelService;
+    @Resource
+    TalkRedis talkRedis;
 
     @Transactional
     public void checkImgCreateReport(List<SocialTalkImgAddQO> imgs) {
@@ -76,8 +79,22 @@ public class ReportDomain {
     }
 
     //根据是否违规生成举报信息，只需要basedo基础信息就够
-    @Transactional
+//    @Transactional
+    @Async
     public BaseModelDO checkKeywordsCreateReport(BaseModelDO modelDO) {
+
+
+        String contentType = modelDO.getContentType();
+
+        //如果为动态
+        if (contentType.equals(SocialuniContentType.talk)) {
+            SocialTalkDO talkDO = (SocialTalkDO) modelDO;
+            List<SocialTalkImgDO> talkImgDOS = talkDO.getImgs();
+            for (SocialTalkImgDO talkImgDO : talkImgDOS) {
+                this.checkKeywordsCreateReport(talkImgDO);
+            }
+        }
+
         //不为空才校验内容
         if (StringUtils.isNotEmpty(modelDO.getContent())) {
             //网易三方审查
@@ -85,7 +102,7 @@ public class ReportDomain {
 
             // 校验是否触发关键词
             List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerService
-                    .checkContentTriggerKeywords(modelDO, modelDO.getContentType(), AppConfigStatic.getKeywordDOs(), false);
+                    .checkContentTriggerKeywords(modelDO, contentType, AppConfigStatic.getKeywordDOs(), false);
 
 
 //            if (!CollectionUtils.isEmpty(keywordsTriggers) || antispamDO.hasViolate()) {
@@ -132,7 +149,18 @@ public class ReportDomain {
                 modelDO.setStatus(ContentStatus.preAudit);
                 modelDO.setUpdateTime(new Date());
                 baseModelService.save(modelDO);
+                if (contentType.equals(SocialuniContentType.talkImg)) {
+                    //同步更新talk状态
+                    SocialTalkImgDO socialTalkImgDO = (SocialTalkImgDO) modelDO;
+                    Integer talkId = socialTalkImgDO.getTalkId();
+                    SocialTalkDO talkDO = TalkUtils.getNotNull(talkId);
+
+                    talkDO.setStatus(ContentStatus.preAudit);
+                    talkDO.setUpdateTime(new Date());
+                    baseModelService.save(modelDO);
+                }
             }
+
         }
         return modelDO;
     }

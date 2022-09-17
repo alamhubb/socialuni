@@ -38,9 +38,6 @@ public class SocialuniTalkPostDomain {
 
         String content = talkPostQO.getContent();
 
-        if (StringUtils.isEmpty(content) && CollectionUtils.isEmpty(talkPostQO.getImgs())) {
-            throw new SocialParamsException("不能发布文字和图片均为空的动态");
-        }
         if (content.length() > 200) {
             throw new SocialParamsException("动态最多支持200个字，请精简动态内容");
         }

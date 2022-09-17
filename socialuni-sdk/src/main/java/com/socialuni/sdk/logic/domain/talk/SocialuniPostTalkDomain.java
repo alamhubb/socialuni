@@ -109,8 +109,6 @@ public class SocialuniPostTalkDomain {
         if (StringUtils.isEmpty(talkVOContent) && CollectionUtils.isEmpty(talkVOImgs)) {
             throw new SocialParamsException("'不能发布文字和图片均为空的动态'");
         }
-
-
         //不为开发环境，则校验内容
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
             SocialuniContentCheckUtil.checkUserInputLongTextContent(talkVOContent);
