@@ -116,15 +116,18 @@ export default class TalkOperate extends Vue {
     } else {
       ReportAPI.addReportAPI(reportAdd).then((res: any) => {
         if (this.reportContentType === ReportContentType.comment) {
-          const reportNum: number = this.comment.reportNum + 1
+          /*const reportNum: number = this.comment.reportNum + 1
           if (reportNum >= this.reportCountHide) {
             this.frontDeleteComment()
-          }
+          }*/
+          this.frontDeleteComment()
         } else {
+          /*
           const reportNum: number = this.talk.reportNum + 1
           if (reportNum >= this.reportCountHide) {
             this.$emit('deleteTalk', this.talk.id)
-          }
+          }*/
+          this.$emit('deleteTalk', this.talk.id)
         }
         // 必须最后清空因为前面还要使用做判断
         this.reportDialogClose()
@@ -157,10 +160,6 @@ export default class TalkOperate extends Vue {
 
   // 前端删除comment
   frontDeleteComment() {
-    console.log('qiantashanchu')
-    console.log(this.talk.comments)
-    console.log(this.comment.id)
-    console.log(this.talk.comments.findIndex(comment => comment.id === this.comment.id))
     this.talk.comments.splice(this.talk.comments.findIndex(comment => comment.id === this.comment.id), 1)
   }
 
