@@ -31,6 +31,7 @@ import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -70,13 +71,17 @@ public class SocialuniHomeTalkQueryDomain {
         } else {
 
         }*/
-        //根据不同的tab区分不同的查询逻辑
-        String homeTabName = queryQO.getHomeTabName();
+
         //获取当前用户
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         //校验gender类型,生成BO，包含业务逻辑
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
+
+
+        //根据不同的tab区分不同的查询逻辑
+        String homeTabName = queryBO.getHomeTabName();
+
         //得到数据库talk
         List<SocialuniTalkDO> talkDOS;
         if (homeTabName.equals(TalkTabType.follow_name)) {

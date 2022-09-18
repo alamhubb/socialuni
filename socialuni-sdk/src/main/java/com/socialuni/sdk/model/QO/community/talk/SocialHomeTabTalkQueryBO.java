@@ -31,4 +31,7 @@ public class SocialHomeTabTalkQueryBO {
     //仅查询成年审核通过的照片动态
 //    private Boolean hasPeopleImgNeedIdentity;
     private Boolean userHasSchoolNam;
+
+    //首页tab名称
+    private String homeTabName;
 }
