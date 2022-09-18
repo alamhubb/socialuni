@@ -11,6 +11,9 @@ import java.util.List;
  */
 @Data
 public class SocialHomeTabTalkQueryBO {
+    //兼容旧版本
+    private List<String> talkIds;
+
     private List<Integer> tagIds;
     //新版本用genderType，旧版本用gender
 

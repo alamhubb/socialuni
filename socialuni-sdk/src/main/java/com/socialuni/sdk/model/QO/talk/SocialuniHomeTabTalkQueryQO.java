@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class SocialuniHomeTabTalkQueryQO {
-//    private List<String> talkIds;
+
 //    private Integer pageNum;
 
 //    private List<Integer> tagIds;
@@ -25,6 +25,7 @@ public class SocialuniHomeTabTalkQueryQO {
     //兼容旧版本
     private String homeTabType;
     private String circleName;
+    private List<String> talkIds;
 
     //首页tab名称
     private String homeTabName;

@@ -24,6 +24,8 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
         //如果后台配置了，则以后台为主，如果后台为null则看前台传值，
         SocialuniAppConfigBO socialuniAppConfigBO = SocialuniAppConfig.getAppConfig();
 
+        //兼容旧版本
+        socialHomeTabTalkQueryBO.setTalkIds(queryQO.getTalkIds());
         String homeTabName = queryQO.getHomeTabName();
         if (StringUtils.isEmpty(homeTabName)) {
             String homeTabType = queryQO.getHomeTabType();
