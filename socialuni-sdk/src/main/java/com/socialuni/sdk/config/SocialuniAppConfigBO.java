@@ -15,20 +15,20 @@ public class SocialuniAppConfigBO {
     private List<String> tabNames;
 
     //是否禁止未成年人内容
-    private Boolean disableUnderageContent = false;
+    private Boolean disableUnderageContent;
 
     //是否禁止内容中包含联系方式
-    private Boolean disableContentHasContactInfo = false;
+    private Boolean disableContentHasContactInfo;
 
     //是否禁止内容中包含二维码
-    private Boolean disableContentHasQrCode = false;
+    private Boolean disableContentHasQrCode;
 
     //是否必须填写校园才允许发帖
-    private Boolean mustSetSchoolCanPost = false;
+    private Boolean mustSetSchoolCanPost;
 
     //todo 相关功能未实现 用户必须实名认证
-    private Boolean userMustIdentityAuth = false;
+    private Boolean userMustIdentityAuth;
 
     //配置3，应用性别
-    private String appGender = GenderType.all;
+    private String appGender;
 }
