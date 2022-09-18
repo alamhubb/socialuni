@@ -1,13 +1,14 @@
 package com.socialuni.sdk.model.QO.community.talk;
 
 import com.socialuni.sdk.model.QO.ContentAddQO;
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 public class SocialuniTalkPostQO extends ContentAddQO {
-    private List<SocialTalkImgAddQO> imgs;
+    private List<SocialuniImgAddQO> imgs;
     private String adCode;
     private String visibleType;
     private String visibleGender;

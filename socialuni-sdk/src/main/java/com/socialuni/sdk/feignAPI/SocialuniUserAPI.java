@@ -1,5 +1,6 @@
 package com.socialuni.sdk.feignAPI;
 
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserDetailRO;
@@ -33,11 +34,11 @@ public interface SocialuniUserAPI {
 
     @PostMapping("addUserImg")
     @Operation(summary = "添加用户图片")
-    ResultRO<SocialuniMineUserDetailRO> addUserImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
+    ResultRO<SocialuniMineUserDetailRO> addUserImg(@RequestBody @Valid SocialuniImgAddQO socialUserImgAddQO);
 
     @PostMapping("addUserAvatarImg")
     @Operation(summary = "添加用户图片")
-    ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(@RequestBody @Valid SocialUserImgAddQO socialUserImgAddQO);
+    ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(@RequestBody @Valid SocialuniImgAddQO socialUserImgAddQO);
 
     @PostMapping("deleteUserImg")
     @Operation(summary = "删除用户图片")

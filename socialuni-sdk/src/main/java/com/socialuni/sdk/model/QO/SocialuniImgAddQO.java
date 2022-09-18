@@ -1,14 +1,13 @@
-package com.socialuni.sdk.model.QO.user;
+package com.socialuni.sdk.model.QO;
 
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Data
-public class SocialUserImgAddQO {
+public class SocialuniImgAddQO {
     @NotBlank
     private String src;
     @NotNull
@@ -16,4 +15,6 @@ public class SocialUserImgAddQO {
     //压缩率
     private Double quality;
     private Integer size;
+    private String content;
+    private Boolean hasQrCode;
 }

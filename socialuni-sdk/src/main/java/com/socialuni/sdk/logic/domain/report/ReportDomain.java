@@ -17,8 +17,8 @@ import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
 import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
 
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;
@@ -68,9 +68,9 @@ public class ReportDomain {
     TalkRedis talkRedis;
 
     @Transactional
-    public void checkImgCreateReport(List<SocialTalkImgAddQO> imgs) {
+    public void checkImgCreateReport(List<SocialuniImgAddQO> imgs) {
         if (imgs.size() > 0) {
-            for (SocialTalkImgAddQO img : imgs) {
+            for (SocialuniImgAddQO img : imgs) {
                 String imgFullUrl = SocialuniSystemConst.getStaticResourceUrl() + img.getSrc();
                 WxUtil.checkImgSecPost(imgFullUrl);
                 QQUtil.checkImgSecPost(imgFullUrl);

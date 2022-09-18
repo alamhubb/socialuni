@@ -1,6 +1,7 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.logic.service.user.SocialuniUserService;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
@@ -33,12 +34,12 @@ public class SocialuniUserController implements SocialuniUserAPI {
     }
 
     @Override
-    public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialuniImgAddQO socialUserImgAddQO) {
         return socialuniUserService.addUserImg(socialUserImgAddQO);
     }
 
     @Override
-    public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialUserImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
         return socialuniUserService.addUserAvatarImg(socialUserImgAddQO);
     }
 

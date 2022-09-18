@@ -11,6 +11,7 @@ import com.socialuni.sdk.logic.entity.UniUserRegistryDomain;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.factory.UserImgROFactory;
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.model.RO.user.*;
 import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
@@ -79,7 +80,7 @@ public class SocialuniUserService {
         return ResultRO.success(socialMineUserDetailRO);
     }
 
-    public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialUserImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialuniImgAddQO socialUserImgAddQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
@@ -91,7 +92,7 @@ public class SocialuniUserService {
         return ResultRO.success(socialMineUserDetailRO);
     }
 
-    public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialUserImgAddQO socialUserImgAddQO) {
+    public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
 

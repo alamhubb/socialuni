@@ -7,6 +7,8 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.sdk.logic.service.comment.IllegalWordService;
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
+import com.socialuni.sdk.utils.ImgContentUtil;
 import com.socialuni.sdk.utils.QQUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.sdk.utils.content.TextContentUtil;
@@ -138,5 +140,23 @@ public class SocialuniContentCheckUtil {
         Matcher matcher = patten.matcher(content);
         //此处find()每次被调用后，会偏移到下一个匹配
         return matcher.find();
+    }
+
+    public static void validateImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
+        String imgTextContent = ImgContentUtil.getImgTextContent(socialUserImgAddQO.getSrc());
+        socialUserImgAddQO.setContent(imgTextContent);
+        boolean hasQrCode = ImgContentUtil.hasQrCodeByCloudAPI(socialUserImgAddQO.getSrc());
+        socialUserImgAddQO.setHasQrCode(hasQrCode);
+        //系统管理员不校验相关内容
+        if (!UserType.system.equals(mineUser.getType())) {
+            SocialuniContentCheckUtil.checkUserInputLongTextContent(imgTextContent);
+            //是否禁止包含联系方式
+            Boolean disableContentHasQrCode = SocialuniAppConfig.getAppConfig().getDisableContentHasQrCode();
+            if (disableContentHasQrCode) {
+                if (hasQrCode) {
+                    throw new SocialBusinessException("禁止发布包含二维码的内容，可在个人信息中填写联系方式");
+                }
+            }
+        }
     }
 }

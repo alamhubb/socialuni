@@ -1,7 +1,6 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
-import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.TalkOperateType;
 import com.socialuni.sdk.constant.UserType;
@@ -10,14 +9,13 @@ import com.socialuni.sdk.dao.repository.community.*;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.domain.report.ReportDomain;
 import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
-import com.socialuni.sdk.logic.factory.TalkImgDOFactory;
 import com.socialuni.sdk.logic.manage.talk.SocialTalkCreateManage;
 import com.socialuni.sdk.dao.DO.DistrictDO;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkImgAddQO;
+import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.TalkAddValidateRO;
@@ -34,7 +32,6 @@ import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -95,7 +92,7 @@ public class SocialuniPostTalkDomain {
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
 
-        List<SocialTalkImgAddQO> talkVOImgs = talkVO.getImgs();
+        List<SocialuniImgAddQO> talkVOImgs = talkVO.getImgs();
         //校验内容不能全部为空
         if (StringUtils.isEmpty(talkVOContent) && CollectionUtils.isEmpty(talkVOImgs)) {
             throw new SocialParamsException("'不能发布文字和图片均为空的动态'");
@@ -113,26 +110,8 @@ public class SocialuniPostTalkDomain {
             }
         }
 
-        for (SocialTalkImgAddQO talkVOImg : talkVOImgs) {
-            String imgTextContent = ImgContentUtil.getImgTextContent(talkVOImg.getSrc());
-            talkVOImg.setContent(imgTextContent);
-            //系统管理员不校验相关内容
-            if (!UserType.system.equals(mineUser.getType())) {
-                SocialuniContentCheckUtil.checkUserInputLongTextContent(imgTextContent);
-
-                boolean hasQrCode = ImgContentUtil.hasQrCodeByCloudAPI(talkVOImg.getSrc());
-
-                talkVOImg.setHasQrCode(hasQrCode);
-
-                //是否禁止包含联系方式
-                Boolean disableContentHasQrCode = SocialuniAppConfig.getAppConfig().getDisableContentHasQrCode();
-                if (disableContentHasQrCode) {
-                    if (hasQrCode) {
-                        throw new SocialBusinessException("禁止发布包含二维码的内容，可在个人信息中填写联系方式");
-                    }
-                }
-
-            }
+        for (SocialuniImgAddQO talkVOImg : talkVOImgs) {
+            SocialuniContentCheckUtil.validateImg(talkVOImg, mineUser);
         }
 
         //校验地理位置
