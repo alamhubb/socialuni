@@ -8,13 +8,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_comment", indexes = {
-        @Index(columnList = "createTime"),
-        @Index(columnList = "talkId"),
-        @Index(columnList = "parentCommentId"),
-        @Index(columnList = "hasUnderageContent"),
-        @Index(columnList = "hasContactInfo")
-})
+@Table(name = "s_comment",
+        indexes = {
+                @Index(columnList = "status"),
+                @Index(columnList = "userId"),
+                @Index(columnList = "updateTime"),
+                @Index(columnList = "createTime"),
+                @Index(columnList = "talkId"),
+                @Index(columnList = "parentCommentId"),
+                @Index(columnList = "hasUnderageContent"),
+                @Index(columnList = "hasContactInfo")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "unionId"),
+        }
+)
 @Data
 public class SocialuniCommentDO extends SocialUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {
     private Integer no;

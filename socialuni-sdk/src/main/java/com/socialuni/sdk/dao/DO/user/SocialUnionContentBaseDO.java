@@ -11,15 +11,6 @@ import java.io.Serializable;
  * @date 2019-08-13 23:34
  */
 @MappedSuperclass
-@Table(
-        indexes = {
-                @Index(columnList = "userId"),
-                @Index(columnList = "updateTime"),
-        },
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "unionId"),
-        }
-)
 @Data
 public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false)

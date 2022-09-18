@@ -15,11 +15,6 @@ import java.util.Date;
  * @date 2019-08-13 23:34
  */
 @MappedSuperclass
-@Table(
-        indexes = {
-                @Index(columnList = "status")
-        }
-)
 @Data
 public class SocialContentBaseDO extends SocialCommonBaseDO implements Serializable {
     @Column(nullable = false)

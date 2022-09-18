@@ -5,14 +5,14 @@ import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "s_talk_has_underage_img_audit",
+        indexes = {
+                @Index(columnList = "status")
+        },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
                 @UniqueConstraint(columnNames = "talkId")

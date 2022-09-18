@@ -6,21 +6,27 @@ import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_talk", indexes = {
-        @Index(columnList = "visibleGender"),
-        @Index(columnList = "visibleType"),
-        @Index(columnList = "adCode"),
-        @Index(columnList = "createTime"), @Index(columnList = "contentType"),
-        @Index(columnList = "globalTop"), @Index(columnList = "hasPeopleImg"),
-        @Index(columnList = "peopleImgIsAdult"), @Index(columnList = "hasUnderageContent"),
-        @Index(columnList = "hasContactInfo"), @Index(columnList = "hasQrCode")})
+@Table(name = "s_talk",
+        indexes = {
+                @Index(columnList = "status"),
+                @Index(columnList = "userId"),
+                @Index(columnList = "updateTime"),
+                @Index(columnList = "visibleGender"),
+                @Index(columnList = "visibleType"),
+                @Index(columnList = "adCode"),
+                @Index(columnList = "createTime"), @Index(columnList = "contentType"),
+                @Index(columnList = "globalTop"), @Index(columnList = "hasPeopleImg"),
+                @Index(columnList = "peopleImgIsAdult"), @Index(columnList = "hasUnderageContent"),
+                @Index(columnList = "hasContactInfo"), @Index(columnList = "hasQrCode")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "unionId"),
+        }
+)
 @Data
 @NoArgsConstructor
 public class SocialuniTalkDO extends SocialUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {

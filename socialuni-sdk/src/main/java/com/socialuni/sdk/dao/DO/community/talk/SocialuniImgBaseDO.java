@@ -10,11 +10,6 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @MappedSuperclass
-@Table(
-        indexes = {
-                @Index(columnList = "src")
-        }
-)
 @Data
 public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Serializable {
     @Column(nullable = false, updatable = false)

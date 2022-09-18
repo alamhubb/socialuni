@@ -15,7 +15,17 @@ import java.util.Date;
  */
 @Data
 @Entity
-@Table(name = "s_message")
+@Table(
+        name = "s_message",
+        indexes = {
+                @Index(columnList = "status"),
+                @Index(columnList = "userId"),
+                @Index(columnList = "updateTime"),
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "unionId"),
+        }
+)
 public class MessageDO extends SocialUnionContentBaseDO implements Serializable {
     private Integer chatId;
     //官方，普通

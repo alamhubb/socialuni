@@ -2,16 +2,20 @@ package com.socialuni.sdk.dao.DO.community.talk;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "s_talk_img",
         indexes = {
+                @Index(columnList = "status"),
+                @Index(columnList = "userId"),
+                @Index(columnList = "updateTime"),
+                @Index(columnList = "src"),
                 @Index(columnList = "talkId")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "unionId"),
         }
 )
 @Data
