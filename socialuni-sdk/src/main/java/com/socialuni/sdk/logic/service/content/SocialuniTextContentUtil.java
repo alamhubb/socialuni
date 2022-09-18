@@ -53,7 +53,7 @@ public class SocialuniTextContentUtil {
             Boolean disableContentHasContactInfo = SocialuniAppConfig.getAppConfig().getDisableContentHasContactInfo();
             if (disableContentHasContactInfo) {
                 if (SocialuniTextContentUtil.hasContactInfo(content)) {
-                    throw new SocialBusinessException("禁止发布包含微信联系方式的内容，可在个人信息中填写联系方式");
+                    throw new SocialBusinessException("禁止发布包含联系方式的内容，可在个人信息中填写联系方式");
                 }
             }
         }

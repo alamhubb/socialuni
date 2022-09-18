@@ -22,5 +22,14 @@ public class SocialuniAppCustomConfig extends SocialuniAppConfig {
 
     //可以通过这里给appConfig自定义，可参考SocialuniAppType类的方式
     static {
+        SocialuniAppConfigBO socialuniAppConfigBO = new SocialuniAppConfigBO();
+        //禁止发布未成年内容
+        socialuniAppConfigBO.setDisableUnderageContent(true);
+        //禁止发布包含二维码的内容
+        socialuniAppConfigBO.setDisableContentHasQrCode(true);
+        //禁止发布包含联系方式的内容
+        socialuniAppConfigBO.setDisableContentHasContactInfo(true);
+
+        SocialuniAppCustomConfig.appConfig = socialuniAppConfigBO;
     }
 }
