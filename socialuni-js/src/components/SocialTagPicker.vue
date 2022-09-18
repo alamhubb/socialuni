@@ -21,11 +21,11 @@
             </view>
 
             <div v-if="item.tags" class="row-wrap overflow-hidden">
-              <div v-for="(circle,index) in item.tags"
-                   class="col-all-center ml-sm overflow-hidden mb-sm bg-click" @click="change(circle)">
-                <img class="bd-round size50" :src="circle.avatar"/>
-                <div class="font-cut">{{ circle.name }}</div>
-                <div class="font-cut">{{ circle.talkCount }}</div>
+              <div v-for="(tag,index) in item.tags"
+                   class="col-all-center ml-sm overflow-hidden mb-sm bg-click" @click="change(tag)">
+                <img class="bd-round size50" :src="tag.avatar"/>
+                <div class="font-cut">{{ tag.name }}</div>
+                <div class="font-cut">{{ tag.count }}</div>
               </div>
             </div>
           </view>
@@ -37,11 +37,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import {Component, Emit, Vue} from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import { socialTagModule } from '@/socialuni/store'
+import {socialTagModule} from '@/socialuni/store'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
 
@@ -58,13 +58,13 @@ export default class SocialTagPicker extends Vue {
     dialog: QPopup
   }
 
-  get tagTypes () {
+  get tagTypes() {
     return socialTagModule.tagTypes
   }
 
   searchText = ''
 
-  get showTagTypes () {
+  get showTagTypes() {
     if (this.searchText) {
       const showTagTypes = this.tagTypes.reduce((all, item) => {
         const data = item.tags.filter(circle => circle.name.includes(this.searchText))
@@ -81,18 +81,18 @@ export default class SocialTagPicker extends Vue {
     }
   }
 
-  open () {
+  open() {
     this.searchText = ''
     socialTagModule.getTagTypesAction()
     this.$refs.dialog.open()
   }
 
-  close () {
+  close() {
     this.$refs.dialog.close()
   }
 
   @Emit()
-  change (tag: SocialCircleRO) {
+  change(tag: SocialCircleRO) {
     this.close()
     return tag
   }

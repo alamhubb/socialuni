@@ -25,7 +25,7 @@
                    class="col-all-center ml-sm overflow-hidden mb-sm bg-click" @click="change(circle)">
                 <img class="bd-round size50" :src="circle.avatar"/>
                 <div class="font-cut">{{ circle.name }}</div>
-                <div class="font-cut">{{ circle.talkCount }}</div>
+                <div class="font-cut">{{ circle.count }}</div>
               </div>
             </div>
           </view>
@@ -37,11 +37,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import {Component, Emit, Vue} from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import { socialCircleModule } from '@/socialuni/store'
+import {socialCircleModule} from '@/socialuni/store'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
 
@@ -58,13 +58,13 @@ export default class SocialCirclePicker extends Vue {
     circleChooseDialog: QPopup
   }
 
-  get circleTypes () {
+  get circleTypes() {
     return socialCircleModule.circleTypes
   }
 
   circleSearchText = ''
 
-  get showCircleTypes () {
+  get showCircleTypes() {
     if (this.circleSearchText) {
       const showCircleTypes = this.circleTypes.reduce((all, item) => {
         const data = item.circles.filter(circle => circle.name.includes(this.circleSearchText))
@@ -81,7 +81,7 @@ export default class SocialCirclePicker extends Vue {
     }
   }
 
-  openDialog () {
+  openDialog() {
     this.circleSearchText = ''
     if (!this.circleTypes.length) {
       socialCircleModule.getCircleTypesAction()
@@ -89,12 +89,12 @@ export default class SocialCirclePicker extends Vue {
     this.$refs.circleChooseDialog.open()
   }
 
-  closeDialog () {
+  closeDialog() {
     this.$refs.circleChooseDialog.close()
   }
 
   @Emit()
-  change (circle: SocialCircleRO) {
+  change(circle: SocialCircleRO) {
     this.closeDialog()
     return circle
   }

@@ -16,6 +16,7 @@ import java.io.Serializable;
                 @Index(columnList = "userId"),
                 @Index(columnList = "updateTime"),
                 @Index(columnList = "gender"),
+                //有时候根据名字查询
                 @Index(columnList = "nickname"),
                 @Index(columnList = "age"),
                 @Index(columnList = "type"),

@@ -15,6 +15,7 @@ import java.io.Serializable;
                 @Index(columnList = "status"),
                 @Index(columnList = "userId"),
                 @Index(columnList = "updateTime"),
+                @Index(columnList = "createTime"),
                 @Index(columnList = "src"),
                 @Index(columnList = "hasPeopleImg"),
                 @Index(columnList = "peopleImgIsAdult"),

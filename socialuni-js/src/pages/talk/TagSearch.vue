@@ -75,7 +75,7 @@
                       {{ tag.name }}
                     </view>
                     <view class="text-gray text-sm text-ellipsis">
-                      帖子：{{ tag.talkCount }}
+                      帖子：{{ tag.count }}
                     </view>
                   </view>
                 </view>
@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Model, Prop, Vue, Watch } from 'vue-property-decorator'
+import {Component, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 
 import TagVO from '../../socialuni/model/community/tag/TagVO'
 import QRowItem from '../../qing-ui/components/QRowItem/QRowItem.vue'
@@ -99,7 +99,7 @@ import TagUtil from '../../socialuni/utils/TagUtil'
 import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
 import QSearch from '../../qing-ui/components/QSearch/QSearch.vue'
 import QSidebar from '../../qing-ui/components/QSidebar/QSidebar.vue'
-import { socialTagModule } from '../../socialuni/store'
+import {socialTagModule} from '../../socialuni/store'
 
 
 @Component({
@@ -120,19 +120,19 @@ export default class TagSearch extends Vue {
     default: false
   }) readonly isAdd: boolean
 
-  get tagTypes () {
+  get tagTypes() {
     return socialTagModule.tagTypes
   }
 
-  get tags () {
+  get tags() {
     return socialTagModule.tags
   }
 
-  mounted () {
+  mounted() {
     socialTagModule.getTagTypesAction()
   }
 
-  openTagSearchDialog () {
+  openTagSearchDialog() {
 
   }
 
@@ -140,7 +140,7 @@ export default class TagSearch extends Vue {
   showSearch = false
   historyTags: TagVO [] = TagUtil.getStorageHistoryTags()
 
-  get showTags (): TagVO[] {
+  get showTags(): TagVO[] {
     if (this.searchContent) {
       return this.tags.filter(tag => tag.name.indexOf(this.searchContent) > -1)
     } else {
@@ -149,13 +149,13 @@ export default class TagSearch extends Vue {
   }
 
   @Emit()
-  input () {
+  input() {
     this.clearSearchContent()
     return false
   }
 
   @Emit()
-  change (tag: TagVO) {
+  change(tag: TagVO) {
     this.input()
     const tagIndex: number = this.historyTags.findIndex(item => item.id === tag.id)
     if (tagIndex > -1) {
@@ -168,22 +168,22 @@ export default class TagSearch extends Vue {
   }
 
   @Watch('searchContent')
-  watchSearchContent () {
+  watchSearchContent() {
     if (!this.searchContent) {
       this.showSearch = false
     }
   }
 
-  showSearchView () {
+  showSearchView() {
     this.showSearch = true
   }
 
-  clearSearchContent () {
+  clearSearchContent() {
     this.searchContent = ''
   }
 
   @Emit()
-  addTag () {
+  addTag() {
     return ''
   }
 

@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "s_talk",
         indexes = {
+                @Index(columnList = "devId"),
                 @Index(columnList = "status"),
                 @Index(columnList = "userId"),
                 @Index(columnList = "updateTime"),

@@ -17,6 +17,10 @@ public class UserImgDOFactory {
     public static SocialuniUserImgDO toUserImgDO(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
         //这里需要记录，变更历史，通过照片有效无效记录，
         SocialuniUserImgDO userImgDO = new SocialuniUserImgDO();
+
+        Integer userImgUnionId = SocialuniUnionIdUtil.createUserImgUnionId();
+        userImgDO.setUnionId(userImgUnionId);
+
         userImgDO.setSrc(socialUserImgAddQO.getSrc());
         userImgDO.setAspectRatio(socialUserImgAddQO.getAspectRatio());
         userImgDO.setQuality(socialUserImgAddQO.getQuality());
@@ -40,9 +44,6 @@ public class UserImgDOFactory {
             //则添加一条待审核的动态，qq平台只查询审核通过的动态
 //                }
         }
-
-        Integer userImgUnionId = SocialuniUnionIdUtil.createUserImgUnionId();
-        userImgDO.setUnionId(userImgUnionId);
         return userImgDO;
     }
 }

@@ -121,7 +121,7 @@ public class TalkQueryStore {
         }
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         if (mineUserId != null) {
-            List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIdsByCom(mineUserId);
+            List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIds(mineUserId, PageRequest.of(0, 10));
             //取交集
             userTalkUnionIds.addAll(queryTalkUnionIds);
         }

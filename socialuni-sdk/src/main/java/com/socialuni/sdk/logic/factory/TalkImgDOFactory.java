@@ -13,14 +13,15 @@ import java.util.stream.Collectors;
 public class TalkImgDOFactory {
     public static SocialuniTalkImgDO newTalkImgDO(SocialuniImgAddQO talkImgVO) {
         SocialuniTalkImgDO socialTalkImgDO = new SocialuniTalkImgDO();
+        Integer talkImgUnionId = SocialuniUnionIdUtil.createTalkImgUnionId();
+        socialTalkImgDO.setUnionId(talkImgUnionId);
 
         socialTalkImgDO.setSrc(talkImgVO.getSrc());
         socialTalkImgDO.setAspectRatio(talkImgVO.getAspectRatio());
         socialTalkImgDO.setSize(talkImgVO.getSize());
         socialTalkImgDO.setContent(talkImgVO.getContent());
         socialTalkImgDO.setQuality(talkImgVO.getQuality());
-        Integer talkImgUnionId = SocialuniUnionIdUtil.createTalkImgUnionId();
-        socialTalkImgDO.setUnionId(talkImgUnionId);
+
         socialTalkImgDO.setContentType(SocialuniContentType.talkImg);
         return socialTalkImgDO;
     }

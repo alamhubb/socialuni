@@ -12,6 +12,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "s_report",
+        indexes = {
+                @Index(columnList = "devId")
+        },
         uniqueConstraints = {
 //一个内容只能生成一条举报记录，多次举报生成举报详情
                 @UniqueConstraint(columnNames = {"contentId"}),
