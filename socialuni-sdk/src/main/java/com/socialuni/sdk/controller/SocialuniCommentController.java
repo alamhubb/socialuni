@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniCommentAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniCommentAPI;
 import com.socialuni.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;

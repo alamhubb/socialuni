@@ -198,7 +198,7 @@ export default class TabsTalk extends Vue {
 
   // 轮播图
   configShowSwipers() {
-    return socialConfigModule.appConfig.showSwipers
+    return socialConfigModule.appMoreConfig.showSwipers
   }
 
   readonly loading: string = LoadMoreType.loading
@@ -469,7 +469,7 @@ export default class TabsTalk extends Vue {
 
   // 每次查询几条
   get lazyLoadNum(): number {
-    return socialConfigModule.appConfig[Constants.everyLoadNum] || Constants.everyLoadNum_number
+    return socialConfigModule.appMoreConfig[Constants.everyLoadNum] || Constants.everyLoadNum_number
   }
 
   showAd = false
@@ -492,11 +492,11 @@ export default class TabsTalk extends Vue {
 
   // 默认30分钟展示1次
   get showAdMinutes(): number {
-    return socialConfigModule.appConfig[Constants.talkShowAdTimeInterval] || Constants.talkShowAdTimeIntervalDefault
+    return socialConfigModule.appMoreConfig[Constants.talkShowAdTimeInterval] || Constants.talkShowAdTimeIntervalDefault
   }
 
   get showAdIndexList(): number[] {
-    return socialConfigModule.appConfig[Constants.talkShowAdIndexListKey] || Constants.talkShowAdIndexAryDefault
+    return socialConfigModule.appMoreConfig[Constants.talkShowAdIndexListKey] || Constants.talkShowAdIndexAryDefault
   }
 
   @Watch('talks')

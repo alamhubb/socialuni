@@ -125,8 +125,8 @@ export default class TalkView extends Vue {
   scrollEnable = false
 
   get talkTabsTop() {
-    if (socialConfigModule.appConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
-      return socialConfigModule.appConfig.swiperHeight + 10
+    if (socialConfigModule.appMoreConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
+      return socialConfigModule.appMoreConfig.swiperHeight + 10
     }
     return 0
   }
@@ -154,7 +154,7 @@ export default class TalkView extends Vue {
 
   socialTalkScroll(e) {
     // 只有开启了轮播图，才需要控制下方滚动
-    if (socialConfigModule.appConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
+    if (socialConfigModule.appMoreConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
       // +5点余量以防万一
       const scrollTop = e.scrollTop + 3
       // 只有不可滚动时，且大于选项卡高度，才改为可用

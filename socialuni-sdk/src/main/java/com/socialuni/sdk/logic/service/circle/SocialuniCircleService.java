@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.service.circle;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
-import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;

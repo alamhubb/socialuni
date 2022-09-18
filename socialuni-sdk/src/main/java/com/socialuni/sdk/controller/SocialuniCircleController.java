@@ -1,7 +1,7 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.logic.domain.circle.CircleQueryDomain;
-import com.socialuni.sdk.feignAPI.SocialuniCircleAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;

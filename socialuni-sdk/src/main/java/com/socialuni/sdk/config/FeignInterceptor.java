@@ -1,7 +1,7 @@
 package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.sdk.feignAPI.SocialuniThirdUserAPI;
+import com.socialuni.sdk.feignAPI.openData.SocialuniThirdUserAPI;
 import com.socialuni.sdk.dao.DO.UniOutRegisterUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;

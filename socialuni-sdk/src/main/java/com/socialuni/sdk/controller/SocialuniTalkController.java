@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniTalkAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.sdk.logic.service.talk.SocialuniTalkService;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;

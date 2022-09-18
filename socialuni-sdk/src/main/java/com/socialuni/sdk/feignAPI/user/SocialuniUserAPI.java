@@ -1,4 +1,4 @@
-package com.socialuni.sdk.feignAPI;
+package com.socialuni.sdk.feignAPI.user;
 
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.user.*;

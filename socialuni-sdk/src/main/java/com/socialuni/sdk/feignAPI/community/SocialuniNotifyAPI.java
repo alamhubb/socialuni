@@ -1,4 +1,4 @@
-package com.socialuni.sdk.feignAPI;
+package com.socialuni.sdk.feignAPI.community;
 
 import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.web.sdk.model.ResultRO;

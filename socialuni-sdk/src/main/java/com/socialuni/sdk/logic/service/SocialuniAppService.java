@@ -32,7 +32,8 @@ public class SocialuniAppService {
 
     public ResultRO<SocialAppLaunchDataRO> getAppConfig() {
         SocialAppLaunchDataRO appInitData = new SocialAppLaunchDataRO();
-        appInitData.setAppConfig(SocialuniAppConfig.getAppMoreConfig());
+        appInitData.setAppConfig(SocialuniAppConfig.getAppConfig());
+        appInitData.setAppMoreConfig(SocialuniAppConfig.getAppMoreConfig());
 //        appInitData.setOnlineUsersCount(WebsocketServer.getOnlineCount());
         appInitData.setReportTypes(ViolateType.frontShowReportTypes);
         return new ResultRO<>(appInitData);

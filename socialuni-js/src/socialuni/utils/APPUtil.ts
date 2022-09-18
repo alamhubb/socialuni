@@ -1,4 +1,4 @@
-import AppUtilAPI from '../api/AppUtilAPI'
+import SocialuniAppAPI from '../api/socialuni/SocialuniAppAPI'
 import UniUtil from './UniUtil'
 import AppUpdateType from '../constant/AppUpdateType'
 import {socialConfigModule} from '../store'
@@ -9,7 +9,7 @@ export default class APPUtil {
   static checkUpdate() {
     plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
       const version = widgetInfo.version.split('.').join('')
-      AppUtilAPI.checkUpdateAPI(Number(version)).then((res) => {
+      SocialuniAppAPI.checkUpdateAPI(Number(version)).then((res) => {
         const updateType = res.data.updateType
         const updateUrl = res.data.updateUrl
         const updateHint = res.data.updateHint
@@ -24,7 +24,7 @@ export default class APPUtil {
               plus.runtime.restart()
             })
           }).catch(() => {
-            AlertUtil.hint('更新失败，' + socialConfigModule.appConfig.errorMsgContactService)
+            AlertUtil.hint('更新失败，' + socialConfigModule.appMoreConfig.errorMsgContactService)
           })
         }
       })

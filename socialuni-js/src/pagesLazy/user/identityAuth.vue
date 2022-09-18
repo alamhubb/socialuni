@@ -232,7 +232,7 @@ export default class IdentityAuthView extends Vue {
       ToastUtil.error('请上传真实的身份证正面照片')
     }
     if (!this.idInfoPreCheckResult || !this.idInfoPreCheckResult.Birth) {
-      ToastUtil.error('请上传真实的身份证正面照片，' + socialConfigModule.appConfig.errorMsgContactService)
+      ToastUtil.error('请上传真实的身份证正面照片，' + socialConfigModule.appMoreConfig.errorMsgContactService)
     }
   }
 

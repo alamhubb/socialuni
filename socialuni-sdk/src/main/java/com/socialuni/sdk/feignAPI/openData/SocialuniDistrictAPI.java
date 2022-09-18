@@ -1,4 +1,4 @@
-package com.socialuni.sdk.feignAPI;
+package com.socialuni.sdk.feignAPI.openData;
 
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.web.sdk.model.ResultRO;

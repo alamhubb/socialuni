@@ -126,7 +126,7 @@
   </view>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import {Component, Vue, Watch} from 'vue-property-decorator'
 import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
 import UniUtil from '../../socialuni/utils/UniUtil'
 import DistrictVO from '../../socialuni/model/DistrictVO'
@@ -157,7 +157,7 @@ import PageUtil from '../../socialuni/utils/PageUtil'
 import GenderType from '../../socialuni/constant/GenderType'
 import DomFile from '../../socialuni/model/DomFile'
 import CosAuthRO from '../../socialuni/model/cos/CosAuthRO'
-import AppUtilAPI from '../../socialuni/api/AppUtilAPI'
+import SocialuniAppAPI from '../../socialuni/api/socialuni/SocialuniAppAPI'
 import RouterUtil from '../../socialuni/utils/RouterUtil'
 import PagePath from '../../socialuni/constant/PagePath'
 import SocialTagAdd from '../../components/SocialTagAdd/SocialTagAdd.vue'
@@ -224,12 +224,12 @@ export default class TalkAddView extends Vue {
 
   cosAuthRO: CosAuthRO = null
 
-  openCircleSearchDialog () {
+  openCircleSearchDialog() {
     this.$refs.circleSearch.openDialog()
   }
 
   //根据用户性别显示不同内容
-  get visibleGenders () {
+  get visibleGenders() {
     //如果已登录
     if (this.user && this.user.gender === GenderType.girl) {
       return GenderType.talkAddGirlEnums
@@ -237,24 +237,24 @@ export default class TalkAddView extends Vue {
     return GenderType.talkAddBoyEnums
   }
 
-  get visibleType () {
+  get visibleType() {
     return this.visibleTypes.find(item => item.value === this.visibleTypeValue)
   }
 
-  get visibleGender () {
+  get visibleGender() {
     return this.visibleGenders.find(item => item.value === this.visibleGenderValue)
   }
 
-  get visibleTypeValueIndex () {
+  get visibleTypeValueIndex() {
     return [this.visibleTypes.findIndex(item => item.value === this.visibleType.value)]
   }
 
-  get visibleGenderValueIndex () {
+  get visibleGenderValueIndex() {
     return [this.visibleGenders.findIndex(item => item.value === this.visibleGender.value)]
   }
 
   //进入talk页面，需要加载下当前地理位置，发布时携带
-  created () {
+  created() {
     this.cosAuthRO = null
     this.showImgFiles = []
     this.tags = JsonUtils.deepClone(this.storeTags)
@@ -270,28 +270,28 @@ export default class TalkAddView extends Vue {
     })
   }
 
-  selectVisibleTypeChange (visibleTypes: EnumStrVO[]) {
+  selectVisibleTypeChange(visibleTypes: EnumStrVO[]) {
     this.visibleTypeValue = visibleTypes[0].value
   }
 
-  selectVisibleGenderChange (visibleGenders: EnumStrVO[]) {
+  selectVisibleGenderChange(visibleGenders: EnumStrVO[]) {
     this.visibleGenderValue = visibleGenders[0].value
   }
 
-  onReady () {
+  onReady() {
     // this.showSearch = true
   }
 
-  onUnload () {
+  onUnload() {
     this.talkContent = ''
     this.showImgFiles = []
   }
 
-  get showImgUrls () {
+  get showImgUrls() {
     return this.showImgFiles.map((item: DomFile) => item.path)
   }
 
-  openTagSearchVue (query: boolean) {
+  openTagSearchVue(query: boolean) {
     if (query || this.tags.length < 11) {
       socialTagModule.getTagsAction()
     }
@@ -299,7 +299,7 @@ export default class TalkAddView extends Vue {
     this.showTagSearch = true
   }
 
-  get selectTags (): TagVO[] {
+  get selectTags(): TagVO[] {
     const selectTags = this.tags.filter(item => item.selected)
     if (selectTags.length > 0) {
       return selectTags
@@ -308,7 +308,7 @@ export default class TalkAddView extends Vue {
   }
 
   @Watch('storeTags')
-  watchStoreHotTagsChange () {
+  watchStoreHotTagsChange() {
     const tags = JsonUtils.deepClone(this.storeTags)
     this.selectTags.forEach(item => {
       const tag: TagVO = tags.find(tag => item.id === tag.id)
@@ -319,21 +319,21 @@ export default class TalkAddView extends Vue {
     this.tags = tags
   }
 
-  get unSelectTags (): TagVO[] {
+  get unSelectTags(): TagVO[] {
     return this.tags.filter((item, index) => !item.selected && index < 7)
   }
 
-  addTagCheckTag (tag: TagVO) {
+  addTagCheckTag(tag: TagVO) {
     this.closeTagAddVue()
     this.checkTag(tag)
     this.openTagSearchVue(true)
   }
 
-  closeTagAddVue () {
+  closeTagAddVue() {
     this.showTagAdd = false
   }
 
-  checkTag (tag: TagVO) {
+  checkTag(tag: TagVO) {
     if (this.selectTags.length > 4) {
       // todo 后台还没有校验
       AlertUtil.hint('最多选择5个话题')
@@ -348,30 +348,30 @@ export default class TalkAddView extends Vue {
     tagInTags.selected = true
   }
 
-  get selectTagNames () {
+  get selectTagNames() {
     return this.selectTags.map(item => item.name)
   }
 
-  changeTag (tag: TagVO) {
+  changeTag(tag: TagVO) {
     this.checkTag(tag)
     this.closeTagSearch()
   }
 
-  deleteTag (tag: TagVO) {
+  deleteTag(tag: TagVO) {
     const tagInTags: TagVO = this.selectTags.find(item => item.id === tag.id)
     tagInTags.selected = false
   }
 
-  closeTagSearch () {
+  closeTagSearch() {
     this.showTagSearch = false
   }
 
-  showAddTag () {
+  showAddTag() {
     this.closeTagSearch()
     this.showTagAdd = true
   }
 
-  openCityDialog () {
+  openCityDialog() {
     // 如果第二个没有子节点且或者子节点为0
     if (!this.districts[1].childs || !this.districts[1].childs.length) {
       socialLocationModule.getDistrictsAction()
@@ -379,12 +379,12 @@ export default class TalkAddView extends Vue {
     this.showCityDialog = true
   }
 
-  cityChange (district: DistrictVO) {
+  cityChange(district: DistrictVO) {
     // 如果没使用定位，则使用之前的定位
     this.district = district
   }
 
-  async addTalk () {
+  async addTalk() {
     if (!this.user) {
       AlertUtil.error('请进行登录')
     }
@@ -416,12 +416,12 @@ export default class TalkAddView extends Vue {
   }
 
 
-  async addTalkHandler () {
-    uni.showLoading({ title: '发布中' })
+  async addTalkHandler() {
+    uni.showLoading({title: '发布中'})
     this.publishTalk()
   }
 
-  async publishTalk () {
+  async publishTalk() {
     try {
       await TalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
       if (socialTalkModule.curTabIsCircle) {
@@ -438,7 +438,7 @@ export default class TalkAddView extends Vue {
     }
   }
 
-  async uploadImgList () {
+  async uploadImgList() {
     // MsgUtil.showUploadLoading()
     //设置图片路径，必须在这里设置，如果放到获取的地方，可能多次上传，就不行了
     this.showImgFiles.forEach(item => {
@@ -471,14 +471,14 @@ export default class TalkAddView extends Vue {
     // UniUtil.hideLoading()
   }
 
-  deleteImg (e) {
+  deleteImg(e) {
     this.showImgFiles.splice(e, 1)
   }
 
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */
-  async chooseImage () {
+  async chooseImage() {
     if (this.showImgFiles.length >= this.imgMaxSize) {
       const isContinue = await this.isFullImg()
       console.log('是否继续?', isContinue)
@@ -494,12 +494,12 @@ export default class TalkAddView extends Vue {
     if (this.cosAuthRO) {
       this.uploadImgList()
     } else {
-      AppUtilAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }
 
-  isFullImg () {
+  isFullImg() {
     return new Promise((resolve) => {
       uni.showModal({
         content: '已经有' + this.imgMaxSize + '张图片了,是否清空现有图片？',
@@ -518,7 +518,7 @@ export default class TalkAddView extends Vue {
     })
   }
 
-  previewImage (e) {
+  previewImage(e) {
     const current = e.target.dataset.src
     uni.previewImage({
       current: current,
@@ -526,7 +526,7 @@ export default class TalkAddView extends Vue {
     })
   }
 
-  goBackPage () {
+  goBackPage() {
     if (this.showTagSearch) {
       this.closeTagSearch()
     } else if (this.showTagAdd) {
@@ -537,7 +537,7 @@ export default class TalkAddView extends Vue {
     }
   }
 
-  circleChange (circle: SocialCircleRO) {
+  circleChange(circle: SocialCircleRO) {
     this.circleName = circle.name
   }
 }

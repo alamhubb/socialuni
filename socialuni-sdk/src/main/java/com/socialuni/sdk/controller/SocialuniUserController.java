@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
+import com.socialuni.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.logic.service.user.SocialuniUserService;

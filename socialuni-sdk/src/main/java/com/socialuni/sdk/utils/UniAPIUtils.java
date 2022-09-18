@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
+import com.socialuni.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.ContentAddQO;
 import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;

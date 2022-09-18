@@ -11,7 +11,7 @@ import {
   socialTagModule,
   socialTalkModule
 } from './index'
-import AppConfigAPI from '../../api/AppConfigAPI'
+import SocialuniAppAPI from '../api/socialuni/SocialuniAppAPI'
 import AppInitDataRO from '../model/common/AppInitDataRO'
 import PlatformUtils from '@/socialuni/utils/PlatformUtils'
 import TokenUtil from '@/socialuni/utils/TokenUtil'
@@ -71,16 +71,17 @@ export default class SocialAppModule extends VuexModule {
   // actions
   @Action
   getHomeSwipersAction() {
-    AppConfigAPI.queryHomeSwipersAPI().then(res => {
+    SocialuniAppAPI.queryHomeSwipersAPI().then(res => {
       this.homeSwipers = res.data
     })
   }
 
   @Action
   getAppConfigAction() {
-    AppConfigAPI.getAppConfigAPI().then(res => {
+    SocialuniAppAPI.getAppConfigAPI().then(res => {
       const appInitData: AppInitDataRO = res.data
       socialConfigModule.appConfig = appInitData.appConfig
+      socialConfigModule.appMoreConfig = appInitData.appMoreConfig
       this.onlineUsersCount = appInitData.onlineUsersCount
       this.reportTypes = appInitData.reportTypes
     })

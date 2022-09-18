@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.service.tag;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.tag.SoicialTagAddDomain;
-import com.socialuni.sdk.feignAPI.SocialuniTagAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniTagAPI;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;

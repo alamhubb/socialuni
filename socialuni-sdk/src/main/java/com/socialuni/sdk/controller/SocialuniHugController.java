@@ -1,7 +1,7 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
-import com.socialuni.sdk.feignAPI.SocialuniHugAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniHugAPI;
 import com.socialuni.sdk.logic.service.SocialuniHugService;
 import com.socialuni.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.web.sdk.model.ResultRO;

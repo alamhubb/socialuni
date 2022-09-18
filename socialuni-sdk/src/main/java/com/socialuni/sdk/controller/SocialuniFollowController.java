@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniFollowAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniFollowAPI;
 import com.socialuni.sdk.logic.service.SocialuniFollowService;
 import com.socialuni.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;

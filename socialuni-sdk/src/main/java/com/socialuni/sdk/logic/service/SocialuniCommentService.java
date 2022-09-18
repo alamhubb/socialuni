@@ -4,7 +4,7 @@ package com.socialuni.sdk.logic.service;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.comment.SocialuniCommentDeleteDomain;
 import com.socialuni.sdk.logic.domain.comment.SocialuniCommentPostDomain;
-import com.socialuni.sdk.feignAPI.SocialuniCommentAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniCommentAPI;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;

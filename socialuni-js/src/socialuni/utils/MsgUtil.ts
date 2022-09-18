@@ -23,7 +23,7 @@ export default class MsgUtil {
 
   static unLoginMessage() {
     if (!socialUserModule.user) {
-      AlertUtil.info(socialConfigModule.appConfig.errorMsg601UnLogin)
+      AlertUtil.info(socialConfigModule.appMoreConfig.errorMsg601UnLogin)
         .then(() => {
           // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
           PageUtil.toMinePage()
@@ -37,7 +37,7 @@ export default class MsgUtil {
   }
 
   static systemErrorMsg() {
-    AlertUtil.hint(socialConfigModule.appConfig.errorMsg604SystemError)
+    AlertUtil.hint(socialConfigModule.appMoreConfig.errorMsg604SystemError)
   }
 
   static unUploadImg() {

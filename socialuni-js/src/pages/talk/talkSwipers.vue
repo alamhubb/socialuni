@@ -28,7 +28,7 @@ export default class TalkSwipers extends Vue {
   @socialAppStore.State('homeSwipers') readonly homeSwipers: HomeSwiperVO[]
 
   get swiperHeight() {
-    return socialConfigModule.appConfig.swiperHeight
+    return socialConfigModule.appMoreConfig.swiperHeight
   }
 
   get showSwipers() {

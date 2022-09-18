@@ -28,7 +28,7 @@ export default class LoginFooterAppInfo extends Vue {
   @socialSystemStore.State(SystemStoreProp.isMpQQ) isMpQQ: boolean
 
   get serviceWeChat() {
-    return socialConfigModule.appConfig.serviceWeChat
+    return socialConfigModule.appMoreConfig.serviceWeChat
   }
 
   get homeUrl(): string {

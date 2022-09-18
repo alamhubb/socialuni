@@ -5,7 +5,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
 import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.dao.utils.content.SocialuniUserImgDOUtil;
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
+import com.socialuni.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;

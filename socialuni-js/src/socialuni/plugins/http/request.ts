@@ -1,10 +1,10 @@
-import HttpRequest, { requestConfig } from '@/socialuni/plugins/http/httpRequest'
+import HttpRequest, {requestConfig} from '@/socialuni/plugins/http/httpRequest'
 import TokenUtil from '../../utils/TokenUtil'
 import UniUtil from '../../utils/UniUtil'
-import { socialConfigModule, socialSystemModule } from '../../store'
+import {socialConfigModule, socialSystemModule} from '../../store'
 import ErrorConst from '../../constant/ErrorConst'
 import MsgUtil from '../../utils/MsgUtil'
-import AppUtilAPI from '../../api/AppUtilAPI'
+import SocialuniAppAPI from '../../api/socialuni/SocialuniAppAPI'
 import AlertUtil from '../../utils/AlertUtil'
 import XmlUtil from '@/socialuni/utils/XmlUtil'
 import XmlResultRO from '@/socialuni/model/base/XmlResultRO'
@@ -83,7 +83,7 @@ request.interceptor.response(
             break
           default:
             AlertUtil.hint(errorMsg)
-            AppUtilAPI.sendErrorLogAPI(error.config.url, errorMsg)
+            SocialuniAppAPI.sendErrorLogAPI(error.config.url, errorMsg)
             break
         }
       } else {
@@ -99,7 +99,7 @@ request.interceptor.response(
                   resultRO[element.name] = element.elements[0].text
                 }
               }
-              const msg: string = socialConfigModule.appConfig.errorMsg604SystemError
+              const msg: string = socialConfigModule.appMoreConfig.errorMsg604SystemError
               AlertUtil.hint(resultRO.Message + '，请重试，' + msg)
               // 返回接口返回的错误信息
               return result
@@ -108,13 +108,13 @@ request.interceptor.response(
           }
         }
         MsgUtil.systemErrorMsg()
-        AppUtilAPI.sendErrorLogAPI(error.config.url, result)
+        SocialuniAppAPI.sendErrorLogAPI(error.config.url, result)
       }
       // 返回接口返回的错误信息
       return result
     }
     MsgUtil.systemErrorMsg()
-    AppUtilAPI.sendErrorLogAPI(error.config.url, ObjectUtil.toJson(error))
+    SocialuniAppAPI.sendErrorLogAPI(error.config.url, ObjectUtil.toJson(error))
     return error
   }
 )

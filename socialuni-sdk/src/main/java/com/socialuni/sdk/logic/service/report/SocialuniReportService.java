@@ -2,8 +2,8 @@ package com.socialuni.sdk.logic.service.report;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.report.SoicialReportAddDomain;
-import com.socialuni.sdk.feignAPI.SocialuniReportAPI;
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniReportAPI;
+import com.socialuni.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;

@@ -26,9 +26,9 @@ public class SocialuniAppCustomConfig extends SocialuniAppConfig {
         //禁止发布未成年内容
         socialuniAppConfigBO.setDisableUnderageContent(true);
         //禁止发布包含二维码的内容
-        socialuniAppConfigBO.setDisableContentHasQrCode(true);
+        socialuniAppConfigBO.setDisableContentHasQrCode(false);
         //禁止发布包含联系方式的内容
-        socialuniAppConfigBO.setDisableContentHasContactInfo(true);
+        socialuniAppConfigBO.setDisableContentHasContactInfo(false);
 
         SocialuniAppCustomConfig.appConfig = socialuniAppConfigBO;
     }

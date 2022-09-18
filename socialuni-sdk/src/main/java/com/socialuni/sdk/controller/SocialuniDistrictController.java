@@ -1,7 +1,7 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
-import com.socialuni.sdk.feignAPI.SocialuniDistrictAPI;
+import com.socialuni.sdk.feignAPI.openData.SocialuniDistrictAPI;
 import com.socialuni.sdk.constant.AppData;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.web.sdk.model.ResultRO;

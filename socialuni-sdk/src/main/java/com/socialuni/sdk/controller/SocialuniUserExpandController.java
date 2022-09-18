@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniUserExpandAPI;
+import com.socialuni.sdk.feignAPI.user.SocialuniUserExpandAPI;
 import com.socialuni.sdk.logic.service.user.SocialuniUserExpandService;
 import com.socialuni.sdk.model.QO.user.SocialUserSchoolNameEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;

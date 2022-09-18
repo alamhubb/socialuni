@@ -1,5 +1,5 @@
 import QQUtils from './QQUtils'
-import { socialPlatformModule, socialSystemModule, socialUserModule } from '../store'
+import {socialPlatformModule, socialSystemModule, socialUserModule} from '../store'
 import WxUtils from './WxUtils'
 import AppMsg from '../constant/AppMsg'
 import Constants from '../constant/Constant'
@@ -8,13 +8,13 @@ import UserPayResultVO from '../model/user/UserPayResultVO'
 
 import MPUtil from './MPUtil'
 import APPUtil from './APPUtil'
-import AppUtilAPI from '../api/AppUtilAPI'
+import SocialuniAppAPI from '../api/socialuni/SocialuniAppAPI'
 import ToastUtil from './ToastUtil'
 
 // 统一处理各平台的订阅
 export default class PlatformUtils {
   // talk相关订阅
-  static requestSubscribeTalk () {
+  static requestSubscribeTalk() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(socialPlatformModule.wx_talkTemplateIds)
     // #endif
@@ -24,7 +24,7 @@ export default class PlatformUtils {
   }
 
   // Comment相关订阅
-  static requestSubscribeComment () {
+  static requestSubscribeComment() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(socialPlatformModule.wx_commentTemplateIds)
     // #endif
@@ -34,7 +34,7 @@ export default class PlatformUtils {
   }
 
   // Chat Message 相关订阅
-  static requestSubscribeChat () {
+  static requestSubscribeChat() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(socialPlatformModule.wx_messageTemplateIds)
     // #endif
@@ -44,7 +44,7 @@ export default class PlatformUtils {
   }
 
   // Report相关订阅
-  static requestSubscribeReport () {
+  static requestSubscribeReport() {
     // #ifdef MP-WEIXIN
     PlatformUtils.requestSubscribeMessage(socialPlatformModule.wx_reportTemplateIds)
     // #endif
@@ -54,7 +54,7 @@ export default class PlatformUtils {
   }
 
   // 统一处理各平台的订阅
-  static requestSubscribeMessage (tmplIds: string[]) {
+  static requestSubscribeMessage(tmplIds: string[]) {
     // #ifdef MP-WEIXIN
     // WxUtils.subscribeAppMsg(tmplIds)
     // #endif
@@ -64,7 +64,7 @@ export default class PlatformUtils {
   }
 
   // 统一处理各平台的支付
-  static userPay (provider: string, payType: string, amount?: number) {
+  static userPay(provider: string, payType: string, amount?: number) {
     MsgUtil.notPay()
     /*return PlatformUtils.pay(provider, payType, amount).then(() => {
       UserStore.getMineUserAction().then(() => {
@@ -75,7 +75,7 @@ export default class PlatformUtils {
   }
 
   //所有只能直接调用这个
-  static async pay (provider: string, payType: string, amount?: number) {
+  static async pay(provider: string, payType: string, amount?: number) {
     if (!socialUserModule.user) {
       return MsgUtil.unLoginMessage()
     } else if (socialSystemModule.isIos) {
@@ -88,7 +88,7 @@ export default class PlatformUtils {
     })*/
   }
 
-  private static async cashPay (res: UserPayResultVO): Promise<any> {
+  private static async cashPay(res: UserPayResultVO): Promise<any> {
     return PlatformUtils.requestPayment(res)
       .catch((err) => {
         // qq的取消支付没有走着里
@@ -96,7 +96,7 @@ export default class PlatformUtils {
           ToastUtil.toast(AppMsg.payCancelMsg)
           throw err
         } else {
-          AppUtilAPI.sendErrorLogAPI(null, '支付失败', res, err)
+          SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)
           MsgUtil.payFailMsg()
           throw err
         }
@@ -107,7 +107,7 @@ export default class PlatformUtils {
   //会员走userPay
   //会员走cashPay
   //底层requestPayment处理平台差异。
-  private static async requestPayment (payResult: UserPayResultVO) {
+  private static async requestPayment(payResult: UserPayResultVO) {
     if (socialSystemModule.isMpQQ) {
       return QQUtils.requestPayment(payResult)
     } else if (socialSystemModule.isMpWx || socialSystemModule.isApp) {
@@ -117,7 +117,7 @@ export default class PlatformUtils {
     }
   }
 
-  static checkUpdate () {
+  static checkUpdate() {
     // #ifdef MP
     MPUtil.checkUpdate()
     // #endif

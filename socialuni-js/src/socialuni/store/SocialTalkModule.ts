@@ -11,7 +11,7 @@ import TalkVueUtil from '../utils/TalkVueUtil'
 import TalkFilterUtil from '../utils/TalkFilterUtil'
 import TalkTabType from '@/socialuni/constant/TalkTabType'
 import StorageUtil from '@/socialuni/utils/StorageUtil'
-import AppConfigAPI from '@/api/AppConfigAPI'
+import SocialuniAppAPI from '@/socialuni/api/socialuni/SocialuniAppAPI'
 
 
 @Module({generateMutationSetters: true})
@@ -143,7 +143,7 @@ export default class SocialTalkModule extends VuexModule {
 
   @Action
   async getTalkTabs() {
-    const res = await AppConfigAPI.queryHomeTabsAPI()
+    const res = await SocialuniAppAPI.queryHomeTabsAPI()
     //根据后端返回的tab更新tabs
     this.updateTalkTabs(res.data)
     this.updateCircleByTabIndex()

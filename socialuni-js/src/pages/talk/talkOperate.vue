@@ -96,7 +96,7 @@ export default class TalkOperate extends Vue {
 
   // 被举报次数大于多少，则隐藏
   get reportCountHide() {
-    return socialConfigModule.appConfig.reportCountHide
+    return socialConfigModule.appMoreConfig.reportCountHide
   }
 
   reportDialogClose() {

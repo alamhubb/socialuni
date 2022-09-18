@@ -1,4 +1,4 @@
-package com.socialuni.sdk.feignAPI;
+package com.socialuni.sdk.feignAPI.community;
 
 import com.socialuni.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;

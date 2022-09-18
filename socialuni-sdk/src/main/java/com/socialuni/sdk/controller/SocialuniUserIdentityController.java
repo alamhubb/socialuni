@@ -1,6 +1,6 @@
 package com.socialuni.sdk.controller;
 
-import com.socialuni.sdk.feignAPI.SocialuniUserIdentityAPI;
+import com.socialuni.sdk.feignAPI.user.SocialuniUserIdentityAPI;
 import com.socialuni.sdk.logic.service.user.SocialuniUserIdentityService;
 import com.socialuni.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;

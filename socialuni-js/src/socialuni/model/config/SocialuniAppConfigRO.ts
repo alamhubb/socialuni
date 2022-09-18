@@ -1,36 +1,21 @@
-export default class SocialuniAppConfigRO {
-// 会员价格
-  vipPrice: number = null
-  // 首页swiper高度
-  swiperHeight: number = null
-  // 首页
-  homeUrl: string = null
-  // 建议
-  suggestUrl: string = null
-  //联系我们
-  contactUsUrl: string = null
-  //用户协议
-  userAgreementUrl: string = null
-  //用户隐私
-  userPrivacyUrl: string = null
-  //儿童保护协议
-  childProtectUrl: string = null
-  serviceWeChat: string = null
-  //激励视频限制次数
-  rewardedAdLimit: number = null
-  //获取联系方式消耗多少贝壳
-  contactExpenseShell: number = null
-  //用户获得贝壳百分比
-  contactUserReceiveShell: number = null
-  //验证码间隔多少秒
-  authCodeInterval: number = null
-  //被举报几次隐藏
-  reportCountHide: number = null
-  //展示轮播图
-  showSwipers: boolean = true
+import GenderType from "@/socialuni/constant/GenderType";
 
-  //系统异常错误消息
-  errorMsg601UnLogin: string = "未登录，请进行登录，是否前往登录"
-  errorMsg604SystemError: string = "系统异常，有任何疑问请联系客服"
-  errorMsgContactService: string = "有任何疑问请联系客服"
+export default class SocialuniAppConfigRO {//首页的tab栏目
+  //是否禁止未成年人内容
+  disableUnderageContent = false;
+
+  //是否禁止内容中包含联系方式
+  disableContentHasContactInfo = false;
+
+  //是否禁止内容中包含二维码
+  disableContentHasQrCode = false;
+
+  //是否必须填写校园才允许发帖
+  mustSetSchoolCanPost = false;
+
+  //todo 相关功能未实现 用户必须实名认证
+  userMustIdentityAuth = false;
+
+  //配置3，应用性别
+  appGender = GenderType.all;
 }

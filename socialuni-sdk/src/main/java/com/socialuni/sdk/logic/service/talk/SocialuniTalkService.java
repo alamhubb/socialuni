@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.service.talk;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.TalkTabType;
-import com.socialuni.sdk.feignAPI.SocialuniTalkAPI;
+import com.socialuni.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.sdk.logic.domain.talk.*;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
