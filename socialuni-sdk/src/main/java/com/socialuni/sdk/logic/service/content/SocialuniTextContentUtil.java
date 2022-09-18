@@ -45,7 +45,7 @@ public class SocialuniTextContentUtil {
             Boolean disableUnderageContent = SocialuniAppConfig.getAppConfig().getDisableUnderageContent();
             //如果禁止包含未成年人内容
             if (disableUnderageContent) {
-                if (SocialuniTextContentUtil.hasUn18ContentThrowError(content)) {
+                if (SocialuniTextContentUtil.textHasUn18Content(content)) {
                     throw new SocialBusinessException("根据平台规则，禁止发布包含小于18岁未成年的内容");
                 }
             }
@@ -82,7 +82,7 @@ public class SocialuniTextContentUtil {
 
 
     //包含未成年内容
-    public static boolean hasUn18ContentThrowError(String content) {
+    public static boolean textHasUn18Content(String content) {
         if (StringUtils.isEmpty(content)) {
             return false;
         }
@@ -170,7 +170,7 @@ public class SocialuniTextContentUtil {
         //只有当前不包含才校验，已包含则无需再次校验
         if (!socialuniTextCheckDO.getHasUnderageContent()) {
             //包含未成年内容
-            if (SocialuniTextContentUtil.hasUn18ContentThrowError(content)) {
+            if (SocialuniTextContentUtil.textHasUn18Content(content)) {
                 socialuniTextCheckDO.setHasUnderageContent(true);
             }
         }
