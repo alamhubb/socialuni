@@ -1,24 +1,19 @@
 package com.socialuni.sdk.logic.domain.talk;
 
-import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.UserType;
+import com.socialuni.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.DateUtils;
-import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.constant.socialuni.DateTimeType;
-import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.Date;

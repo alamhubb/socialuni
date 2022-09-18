@@ -1,11 +1,12 @@
 package com.socialuni.sdk.logic.factory;
 
-import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.sdk.utils.UnionIdUtil;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.dao.repository.CommentRepository;
-import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.repository.CommentRepository;
+import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
+import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -22,26 +23,26 @@ public class CommentFactory {
      * @param requestUserId
      * @return
      */
-    public SocialCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
+    public SocialuniCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
 
-        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
+        Integer talkId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         Integer commentId = null;
         Integer replyCommentId = null;
         if (addQO.getCommentId() != null) {
-            commentId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getCommentId());
+            commentId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addQO.getCommentId());
             if (addQO.getReplyCommentId() != null) {
-                replyCommentId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getReplyCommentId());
+                replyCommentId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addQO.getReplyCommentId());
             }
         }
         //创建 do一步,获取序号
-        SocialCommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(talkId);
+        SocialuniCommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(talkId);
         Integer commentNo = 0;
         if (commentNoDO != null) {
             commentNo = commentNoDO.getNo();
         }
         //构建DO，comment基础内容
-        SocialCommentDO comment = new SocialCommentDO();
+        SocialuniCommentDO comment = new SocialuniCommentDO();
         comment.setNo(++commentNo);
         comment.setContent(addQO.getContent());
         comment.setStatus(ContentStatus.enable);
@@ -57,9 +58,12 @@ public class CommentFactory {
         comment.setParentCommentId(commentId);
         comment.setTalkId(talkId);
         comment.setUserId(requestUserId);
+        comment.setHasContactInfo(false);
+        comment.setHasUnderageContent(false);
+        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(comment);
 //        comment.setSocialuniUid(addVO.getSocialuniUid());
 
-        Integer unionId = UnionIdUtil.createCommentUnionId();
+        Integer unionId = SocialuniUnionIdUtil.createCommentUnionId();
         comment.setUnionId(unionId);
 
 //        comment.setDevId(DevAccountUtils.getDevId());

@@ -1,8 +1,8 @@
 package com.socialuni.sdk.dao.repository.community;
 
 
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,12 +13,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.Date;
 import java.util.List;
 
-public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
+public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> {
     @Cacheable(cacheNames = RedisKeysConst.talkById, key = "#talkUnionId")
-    SocialTalkDO findOneByUnionId(Integer talkUnionId);
+    SocialuniTalkDO findOneByUnionId(Integer talkUnionId);
 
     //清池使用的
-    SocialTalkDO findOneBySocialuniUid(String uid);
+    SocialuniTalkDO findOneBySocialuniUid(String uid);
 
     /**
      * 查询可用的全局置顶的动态，为官方置顶的动态
@@ -29,23 +29,23 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
      */
     //缓存
     @Cacheable(cacheNames = "stickTalks", key = "{#devId}")
-    List<SocialTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
+    List<SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     //查询自己talk和他人详情talk
-    @Query(value = "SELECT t.unionId FROM SocialTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
+    @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
     List<Integer> queryTalkIdsByUser(
             @Param("userId") Integer userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
-    @Query(value = "SELECT t.unionId FROM SocialTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
+    @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
     List<Integer> queryTalkIdsByUserOrderByUpdateTime(
             @Param("userId") Integer userId,
             @Param("status") List<String> status,
             Pageable pageable);
 
     //查询自己关注的用户列表，包含自己的,类似朋友圈
-    @Query(value = "SELECT t.unionId from SocialTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
+    @Query(value = "SELECT t.unionId from SocialuniTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
     List<Integer> queryTalkIdsByUserFollow(
             @Param("userId") Integer userId,
             @Param("onlyUserSeeStatus") List<String> onlyUserSeeStatus,
@@ -229,7 +229,7 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
             @Param("talkIds") List<Integer> talkIds,
             @Param("userIds") List<Integer> userIds);
 
-    @Query(value = "SELECT t.unionId FROM SocialTalkDO t where t.unionId in (:talkIds) and ((t.updateTime<:queryTime) or (:queryTime is null)) order by t.updateTime desc")
+    @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.unionId in (:talkIds) and ((t.updateTime<:queryTime) or (:queryTime is null)) order by t.updateTime desc")
     List<Integer> queryTalkIdsByIds(
             @Param("talkIds") List<Integer> talkIds,
             @Param("queryTime") Date queryTime,
@@ -286,10 +286,10 @@ public interface TalkRepository extends JpaRepository<SocialTalkDO, Integer> {
     //查询user指定时间内发帖数量的，限制发帖数量的
     Integer countByUserIdAndCreateTimeBetween(Integer userId, Date startDate, Date endDate);
 
-    List<SocialTalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
+    List<SocialuniTalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
 
     //查询关键词触发次数时使用
-    Page<SocialTalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
+    Page<SocialuniTalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
 /*
 
     //供后台统计使用**************************************************************************************

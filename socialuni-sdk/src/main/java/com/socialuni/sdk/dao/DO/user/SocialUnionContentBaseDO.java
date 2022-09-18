@@ -1,10 +1,9 @@
 package com.socialuni.sdk.dao.DO.user;
 
 import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.Data;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -12,12 +11,57 @@ import java.io.Serializable;
  * @date 2019-08-13 23:34
  */
 @MappedSuperclass
+@Table(
+        indexes = {
+                @Index(columnList = "userId"),
+                @Index(columnList = "updateTime"),
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "unionId"),
+        }
+)
 @Data
 public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Serializable {
+    @Column(nullable = false)
+    private Integer userId;
+    @Column(nullable = false)
+    private String contentType;
+    @Column(nullable = false)
     private Integer unionId;
+    //内容主体
+    @Column(columnDefinition = "text")
+    private String content;
+    /**
+     * 举报次数
+     */
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer reportNum;
 
-    public Integer getUnionId() {
-//        throw new SocialParamsException("内容id字段不可使用，请使用unionId");
-        return this.unionId;
+    //违规类型
+    private String violateType;
+
+    /**
+     * 删除原因
+     */
+    private String deleteReason;
+
+    public SocialUnionContentBaseDO() {
+        this.reportNum = 0;
+    }
+
+    public SocialUnionContentBaseDO(Integer userId, String contentType, String content) {
+        this.userId = userId;
+        this.contentType = contentType;
+        this.content = content;
+    }
+
+    public SocialUnionContentBaseDO(SocialUnionContentBaseDO socialUnionContentBaseDO, String content) {
+        this.userId = socialUnionContentBaseDO.getUserId();
+        this.unionId = socialUnionContentBaseDO.getUnionId();
+        this.contentType = socialUnionContentBaseDO.getContentType();
+        this.content = content;
+        this.reportNum = socialUnionContentBaseDO.getReportNum();
+
+        this.setStatus(socialUnionContentBaseDO.getStatus());
     }
 }

@@ -1,13 +1,14 @@
 package com.socialuni.sdk.logic.service.comment;
 
 
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * 用来传输业务线用到的数据，避免重复查询数据库
+ *
  * @author qinkaiyuan
  * @date 2020-11-11 13:59
  */
@@ -15,15 +16,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentAddLineTransfer {
 
-    private SocialCommentDO commentDO;
+    private SocialuniCommentDO commentDO;
 
-    private SocialTalkDO talk;
+    private SocialuniTalkDO talk;
 
-    private SocialCommentDO parentComment;
+    private SocialuniCommentDO parentComment;
 
-    private SocialCommentDO replyComment;
+    private SocialuniCommentDO replyComment;
 
-    public CommentAddLineTransfer(SocialTalkDO talk, SocialCommentDO parentComment, SocialCommentDO replyComment) {
+    public CommentAddLineTransfer(SocialuniTalkDO talk, SocialuniCommentDO parentComment, SocialuniCommentDO replyComment) {
         this.talk = talk;
         this.parentComment = parentComment;
         this.replyComment = replyComment;

@@ -1,7 +1,5 @@
 package com.socialuni.sdk.model.RO.user;
 
-import com.socialuni.sdk.utils.UnionIdUtil;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**

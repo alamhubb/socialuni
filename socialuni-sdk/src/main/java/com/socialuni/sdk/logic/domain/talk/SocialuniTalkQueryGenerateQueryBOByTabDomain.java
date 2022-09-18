@@ -4,10 +4,10 @@ import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.utils.SocialuniCircleDOUtil;
+import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
-import com.socialuni.sdk.utils.model.DO.SocialuniCircleDOUtil;
-import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

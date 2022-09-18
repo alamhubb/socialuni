@@ -14,7 +14,7 @@ import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
@@ -40,7 +40,7 @@ public class SocialuniLoginService {
     @Resource
     ThirdUserTokenManage thirdUserTokenManage;
     @Resource
-    UniContentUnionIdRepository uniContentUnionIdRepository;
+    SocialuniUnionIdRepository uniContentUnionIdRepository;
     @Resource
     SocialLoginService socialLoginService;
     @Resource

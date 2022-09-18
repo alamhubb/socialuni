@@ -2,17 +2,16 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.repository.ReportRepository;
+import com.socialuni.sdk.dao.utils.content.SocialuniContentDOUtil;
+import com.socialuni.sdk.logic.platform.qq.QQConst;
+import com.socialuni.sdk.logic.platform.weixin.WxConst;
 import com.socialuni.sdk.model.PushMsgDTO;
 import com.socialuni.sdk.model.PushNotifyVO;
 import com.socialuni.sdk.model.PushValue;
-import com.socialuni.sdk.logic.platform.qq.QQConst;
-import com.socialuni.sdk.logic.platform.weixin.WxConst;
-import com.socialuni.sdk.logic.service.BaseModelUtils;
-import com.socialuni.sdk.dao.DO.NotifyDO;
-import com.socialuni.sdk.dao.DO.ReportDO;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.repository.ReportRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +36,7 @@ public class ViolationPushUtils {
     public static PushMsgDTO getViolationPushDTO(String platform, NotifyDO notify) {
         ReportDO reportDO = reportRepository.findById(notify.getReportId()).get();
 
-        BaseModelDO baseModelDO = BaseModelUtils.getModelByReport(reportDO);
+        BaseModelDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
 
         SocialuniUserDO vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 
@@ -82,7 +81,7 @@ public class ViolationPushUtils {
             //违规内容
             data.put("thing2", pushNotifyVO.getBeContent());
             //处罚决定
-            data.put("thing3",pushNotifyVO.getResult());
+            data.put("thing3", pushNotifyVO.getResult());
             //备注
             data.put("thing4", pushNotifyVO.getRemark());
 

@@ -1,12 +1,12 @@
 package com.socialuni.sdk.openService;
 
-import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.config.SocialuniSystemConst;
-import com.socialuni.sdk.dao.repository.UserImgRepository;
+import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.sdk.dao.repository.SocialuniUserImgRepository;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class TencentCloudCosService {
     @Resource
     TencentCosAuditRecordRepository tencentCosAuditRecordRepository;
     @Resource
-    UserImgRepository userImgRepository;
+    SocialuniUserImgRepository userImgRepository;
     @Resource
     TalkImgRepository talkImgRepository;
 
@@ -54,7 +54,7 @@ public class TencentCloudCosService {
         recordDO.setImgKey(imgKey);
 
         if (contentType.equals(SocialuniContentType.talk)) {
-            SocialTalkImgDO talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
+            SocialuniTalkImgDO talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
             if (talkImgDO != null) {
                 recordDO.setImgContentId(talkImgDO.getUnionId());
                 recordDO.setImgParentContentId(talkImgDO.getTalkId());
@@ -64,7 +64,7 @@ public class TencentCloudCosService {
                 return;
             }
         } else {
-            SocialUserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);
+            SocialuniUserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);
             if (userImgDO != null) {
                 recordDO.setImgContentId(userImgDO.getUnionId());
                 recordDO.setImgParentContentId(userImgDO.getUserId());

@@ -1,11 +1,11 @@
 package com.socialuni.sdk.model;
 
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
+import com.socialuni.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
-import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -50,7 +50,7 @@ public class UnreadCommentVO {
     public UnreadCommentVO() {
     }
 
-    public UnreadCommentVO(SocialCommentDO commentDO) {
+    public UnreadCommentVO(SocialuniCommentDO commentDO) {
         SocialuniUserDO sessionUser = SocialuniUserUtil.getMineUserAllowNull();
 //        Integer devId = DevAccountUtils.getDevId();
 //
@@ -58,15 +58,15 @@ public class UnreadCommentVO {
         this.no = commentDO.getNo();
         this.content = commentDO.getContent();
         this.createTime = commentDO.getCreateTime();
-        this.user = new UserCommentBO(SocialuniUserUtil.getUserNotNull(commentDO.getUserId()),  sessionUser).toVO();
+        this.user = new UserCommentBO(SocialuniUserUtil.getUserNotNull(commentDO.getUserId()), sessionUser).toVO();
         //不明白下面这行的意义，未读消息不需要显示子评论吧
         //        this.childComments = UnreadCommentVO.commentDOToVOS(commentRepository.findTop3ByParentCommentOrderByUpdateTimeDescIdDesc(commentDO));
         if (!ObjectUtils.isEmpty(commentDO.getReplyCommentId())) {
-            this.replyComment = new UnreadCommentVO(CommentUtils.getNotNull(commentDO.getReplyCommentId()));
+            this.replyComment = new UnreadCommentVO(SocialuniCommentDOUtil.getNotCommentNull(commentDO.getReplyCommentId()));
         }
     }
 
-    public static List<UnreadCommentVO> commentDOToVOS(List<SocialCommentDO> commentDOS) {
+    public static List<UnreadCommentVO> commentDOToVOS(List<SocialuniCommentDO> commentDOS) {
         return commentDOS.stream().map(UnreadCommentVO::new).collect(Collectors.toList());
     }
 }

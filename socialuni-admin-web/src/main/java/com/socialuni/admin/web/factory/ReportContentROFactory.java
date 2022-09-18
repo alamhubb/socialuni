@@ -2,17 +2,17 @@ package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.model.RO.community.tag.TagRO;
+import com.socialuni.sdk.dao.store.SocialTagRedis;
+import com.socialuni.sdk.dao.utils.content.SocialuniCommentDOUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.sdk.logic.factory.SocialTalkImgROFactory;
 import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
-import com.socialuni.sdk.dao.store.SocialTagRedis;
-import com.socialuni.sdk.utils.CommentUtils;
-import com.socialuni.sdk.utils.TalkImgDOUtils;
-import com.socialuni.sdk.utils.TalkUtils;
+import com.socialuni.sdk.model.RO.community.tag.TagRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -30,7 +30,7 @@ public class ReportContentROFactory {
     public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
         if (reportContentType.equals(SocialuniContentType.talk)) {
-            SocialTalkDO talkDO = TalkUtils.getNotNull(contentId);
+            SocialuniTalkDO talkDO = SocialuniTalkDORedis.getNotNull(contentId);
             reportContentVO.setId(contentId);
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());
@@ -46,11 +46,11 @@ public class ReportContentROFactory {
             reportContentVO.setTags(tagROES);
             reportContentVO.setStatus(talkDO.getStatus());
 
-            List<SocialTalkImgDO> imgDOS = TalkImgDOUtils.findTop3ByTalkId(contentId);
+            List<SocialuniTalkImgDO> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(SocialuniContentType.comment)) {
-            SocialCommentDO commentDO = CommentUtils.getNotNull(contentId);
+            SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(contentId);
             reportContentVO.setId(commentDO.getUnionId());
             reportContentVO.setContent(commentDO.getContent());
             reportContentVO.setReportNum(commentDO.getReportNum());

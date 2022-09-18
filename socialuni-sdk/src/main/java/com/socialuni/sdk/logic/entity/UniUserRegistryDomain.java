@@ -8,14 +8,14 @@ import com.socialuni.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.logic.manage.SocialUserManage;
 import com.socialuni.sdk.logic.manage.TokenManage;
 import com.socialuni.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
+import com.socialuni.sdk.dao.DO.SocialuniUnionIdDO;
 import com.socialuni.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdUtil;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -51,7 +51,7 @@ public class UniUserRegistryDomain {
             throw new SocialParamsException("用户唯一标识不能为空");
         }
 
-        UniContentUnionIdDO uniContentUnionIdDO = UnionIdUtil.getUnionByUuidAllowNull(userUid);
+        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionByUuidAllowNull(userUid);
         //新注册
         if (uniContentUnionIdDO == null) {
             //为空，则只注册

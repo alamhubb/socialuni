@@ -1,10 +1,10 @@
 package com.socialuni.sdk.model.RO.match;
 
-import com.socialuni.sdk.utils.UnionIdUtil;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
 import com.socialuni.sdk.model.RO.UserImgVO;
-import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
+import com.socialuni.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -50,7 +50,7 @@ public class MatchUserVO {
 
     public MatchUserVO(SocialuniUserDO user, SocialuniUserDO sessionUser) {
         if (user != null) {
-            this.id = UnionIdUtil.getUuidByUnionIdNotNull(user.getUnionId());
+            this.id = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(user.getUnionId());
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
             this.gender = user.getGender();
 //            this.location = user.getLocation();
@@ -60,7 +60,7 @@ public class MatchUserVO {
             //满分10W /1千，得到百分之颜值分
 //            this.faceRatio = (int) Math.ceil((double) user.getFaceRatio() / MatchConstants.FACE_RATIO_BASE_MULTIPLE);
 //            this.likeCount = user.getLikeCount();
-            List<SocialUserImgDO> userImgDOS = UserImgDOUtils.getImgs(user.getUnionId());
+            List<SocialuniUserImgDO> userImgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(user.getUnionId());
 //            this.imgs = UserImgBO.userImgDOToVOS(userImgDOS, sessionUser);
 //            this.onlineFlag = user.getOnlineFlag();
 //            this.lastOnlineTime = user.getLastOnlineTime();

@@ -1,14 +1,14 @@
 package com.socialuni.sdk.logic.domain.comment;
 
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
@@ -36,14 +36,14 @@ public class SocialuniCommentDeleteDomain {
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer commentId = UnionIdUtil.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
+        Integer commentId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
 
-        Optional<SocialCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
+        Optional<SocialuniCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {
             throw new SocialParamsException("评论已经删除");
         }
-        SocialCommentDO commentDO = optionalCommentDO.get();
-        SocialTalkDO talkDO = TalkUtils.getNotNull(commentDO.getTalkId());
+        SocialuniCommentDO commentDO = optionalCommentDO.get();
+        SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
         //是否是自己删除自己的动态
         if (commentDO.getUserId().equals(mineUser.getUnionId())) {
             commentDO.setStatus(ContentStatus.delete);

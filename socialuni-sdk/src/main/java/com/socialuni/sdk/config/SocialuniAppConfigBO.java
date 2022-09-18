@@ -13,7 +13,6 @@ public class SocialuniAppConfigBO {
     private String cityTabName;
     private String selfSchoolTabName;
     private List<String> tabNames;
-    
 
     //是否禁止未成年人内容
     private Boolean disableUnderageContent = false;
@@ -26,6 +25,9 @@ public class SocialuniAppConfigBO {
 
     //是否必须填写校园才允许发帖
     private Boolean mustSetSchoolCanPost = false;
+
+    //todo 相关功能未实现 用户必须实名认证
+    private Boolean userMustIdentityAuth = false;
 
     //配置3，应用性别
     private String appGender = GenderType.all;

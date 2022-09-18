@@ -1,10 +1,10 @@
 package com.socialuni.sdk.logic.domain.talk;
 
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.sdk.utils.TalkRedis;
-import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkDeleteQO;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.procedure.ParameterMisuseException;
@@ -23,7 +23,7 @@ public class SocialTalkDeleteDomain {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private TalkRedis talkRedis;
+    private SocialuniTalkDORedis talkRedis;
 
     public void deleteTalk(SocialuniUserDO mineUser, SocialTalkDeleteQO talkDeleteQO) {
 
@@ -32,7 +32,7 @@ public class SocialTalkDeleteDomain {
          * 如果是系统管理员删除动态，则必须填写原因，删除后发表动态的用户将被封禁
          * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
          */
-        SocialTalkDO talkDO = talkRepository.findOneByUnionId(talkDeleteQO.getTalkId());
+        SocialuniTalkDO talkDO = talkRepository.findOneByUnionId(talkDeleteQO.getTalkId());
         //或者不为自己可见的状态
         if (talkDO == null || !ContentStatus.selfCanSeeContentStatus.contains(talkDO.getStatus())) {
             throw new ParameterMisuseException("无法删除不存在的动态");

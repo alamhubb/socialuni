@@ -1,7 +1,6 @@
 package com.socialuni.sdk.dao.DO;
 
 
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import lombok.Data;
 
@@ -22,7 +21,7 @@ public class ReportDetailDO implements Serializable {
 
     private Integer userId;
     //应该就是contentId
-    private Integer modelId;
+    private Integer contentId;
 
     private Integer receiveUserId;
 
@@ -40,7 +39,7 @@ public class ReportDetailDO implements Serializable {
      * 举报时的备注信息
      */
     private String content;
-    private String cause;
+    private String reportCause;
 
     /**
      * 举报的状态，待审核，已通过，未通过，和report状态完全联动
@@ -51,23 +50,16 @@ public class ReportDetailDO implements Serializable {
     }
 
     //    todo 这里有个坑 content 改为了 cause
-    public ReportDetailDO(String cause, String reportType, ReportDO reportDO, UniContentUnionIdDO uniContentUnionIdDO, BaseModelDO model) {
-        this.cause = cause;
+    public ReportDetailDO(String reportCause, String reportType, ReportDO reportDO, String content, Integer requestUserId) {
+        this.reportCause = reportCause;
 
-        this.modelId = uniContentUnionIdDO.getId();
-        if (model != null) {
-            this.content = model.getContent();
-            this.receiveUserId = model.getUserId();
-        }
+        this.contentId = reportDO.getContentId();
+        this.content = content;
         this.reportId = reportDO.getId();
         this.reportType = reportType;
+        this.userId = requestUserId;
 
         this.createTime = new Date();
         this.status = ReportStatus.audit;
-    }
-
-    public ReportDetailDO(String cause, String reportType, ReportDO reportDO, UniContentUnionIdDO uniContentUnionIdDO, BaseModelDO model, Integer requestUserId) {
-        this(cause, reportType, reportDO, uniContentUnionIdDO, model);
-        this.userId = requestUserId;
     }
 }

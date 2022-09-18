@@ -3,9 +3,9 @@ package com.socialuni.admin.web.model;
 
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.sdk.dao.DO.ReportDO;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
@@ -59,7 +59,7 @@ public class ReportVO {
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportDO.getReceiveUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportDO.getContentUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
@@ -70,7 +70,7 @@ public class ReportVO {
         }
     }
 
-    public ReportVO(BaseModelDO modelDO) {
+    public ReportVO(SocialUnionContentBaseDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getContentType(), modelDO.getUnionId());
         this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();

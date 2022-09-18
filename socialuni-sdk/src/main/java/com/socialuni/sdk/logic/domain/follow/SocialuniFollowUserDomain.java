@@ -4,8 +4,8 @@ package com.socialuni.sdk.logic.domain.follow;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ public class SocialuniFollowUserDomain {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        Integer followUserId = UnionIdUtil.getUnionIdByUuidNotNull(addVO.getBeUserId());
+        Integer followUserId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addVO.getBeUserId());
 
         socialUserFollowDomain.addFlow(mineUserId, followUserId);
         return new ResultRO<>();
@@ -33,7 +33,7 @@ public class SocialuniFollowUserDomain {
     public ResultRO<Void> cancelFollow(SocialuniFollowAddQO addVO) {
         //有问题，应该关注完刷新前台用户
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
-        Integer followUserId = UnionIdUtil.getUnionIdByUuidNotNull(addVO.getBeUserId());
+        Integer followUserId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addVO.getBeUserId());
         socialUserFollowDomain.cancelFollow(mineUserId, followUserId);
         return new ResultRO<>();
     }

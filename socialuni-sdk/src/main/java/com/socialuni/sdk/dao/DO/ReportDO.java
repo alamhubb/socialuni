@@ -11,7 +11,12 @@ import java.util.Date;
  * 举报信息
  */
 @Entity
-@Table(name = "s_report")
+@Table(name = "s_report",
+        uniqueConstraints = {
+//一个内容只能生成一条举报记录，多次举报生成举报详情
+                @UniqueConstraint(columnNames = {"contentId"}),
+        }
+)
 @Data
 public class ReportDO implements Serializable {
     @Id
@@ -19,7 +24,7 @@ public class ReportDO implements Serializable {
     private Integer id;
 
     //被举报的用户
-    private Integer receiveUserId;
+    private Integer contentUserId;
 /*
     //不能直接使用do，因为无法直接获取缓存内容，但是也没必要获取，更新缓存就行了，再说2021.1.29
     //加入一列作为外键
@@ -73,7 +78,7 @@ public class ReportDO implements Serializable {
     /**
      * 举报时的备注信息
      */
-    private String cause;
+//    private String cause;
 
     /**
      * 被举报的内容，用户昵称，因用户昵称可修改，所以需要记录
@@ -104,7 +109,7 @@ public class ReportDO implements Serializable {
     //举报来源类型，用户举报还是系统自动审核
     private String reportSourceType;
     private Integer antispamId;
-    private Integer devId;
+    //    private Integer devId;
     @Column(nullable = false, columnDefinition = "int default 0")
     private Integer reportNum;
 

@@ -4,10 +4,9 @@ import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.logic.domain.report.SoicialReportAddDomain;
 import com.socialuni.sdk.feignAPI.SocialuniReportAPI;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.sdk.utils.UnionIdUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class SocialuniReportService {
     @Resource
     SocialuniUserAPI socialuniUserAPI;
     @Resource
-    UniContentUnionIdRepository uniContentUnionIdRepository;
+    SocialuniUnionIdRepository uniContentUnionIdRepository;
     @Resource
     DevAccountRepository devAccountRepository;
 

@@ -1,24 +1,22 @@
 package com.socialuni.sdk.logic.domain.comment;
 
-import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.SocialuniConst;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.sdk.logic.domain.notify.NotifyDomain;
-import com.socialuni.sdk.logic.domain.report.ReportDomain;
+import com.socialuni.sdk.logic.domain.report.SoicialuniReportDomainDOUtil;
 import com.socialuni.sdk.logic.entity.comment.SocialPostCommentEntity;
-import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
+import com.socialuni.sdk.logic.factory.SocialCommentROFactory;
+import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdUtil;
-import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +38,7 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialPostCommentEntity socialPostCommentEntity;
     @Resource
-    private ReportDomain reportDomain;
+    private SoicialuniReportDomainDOUtil soicialuniReportDomain;
     @Resource
     private CommentRepository commentRepository;
     @Resource
@@ -52,17 +50,16 @@ public class SocialuniCommentPostDomain {
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
-
-        //校验用户
-        SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+        Integer talkId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkId);
         List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
         //开发环境不校验
         if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
+            //校验用户
+            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
             //校验内容是否违规
-            SocialuniContentCheckUtil.checkUserInputLongTextContent(addQO.getContent());
+            SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(addQO.getContent());
         }
 
         //评论暂时不需要校园名称
@@ -74,10 +71,10 @@ public class SocialuniCommentPostDomain {
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
         //保存comment，内部关联保存了talk、parentComment、replyComment
 
-        SocialCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
+        SocialuniCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
 
         // 校验是否触发关键词
-        reportDomain.checkKeywordsCreateReport(commentDO);
+        soicialuniReportDomain.systemPreCheckReport(commentDO);
 
         //如果不为待审核，才发送通知
         //注释通知相关功能

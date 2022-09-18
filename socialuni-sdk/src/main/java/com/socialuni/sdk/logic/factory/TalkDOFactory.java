@@ -1,19 +1,22 @@
 package com.socialuni.sdk.logic.factory;
 
-import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.DistrictDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.UnionIdUtil;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.logic.platform.MapUtil;
+import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
+import com.socialuni.sdk.model.RectangleVO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TalkDOFactory {
-    public static SocialTalkDO newTalkDO(SocialuniUserDO user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
-        SocialTalkDO talkDO = new SocialTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
+    public static SocialuniTalkDO newTalkDO(SocialuniUserDO user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
+        SocialuniTalkDO talkDO = new SocialuniTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
+        Integer talkUnionId = SocialuniUnionIdUtil.createTalkUnionId();
+
+        talkDO.setUnionId(talkUnionId);
 
         //设置社交联盟唯一id
 //        talkDO.setSocialuniUid(socialTalkPostQO.getSocialuniUid());
@@ -35,7 +38,6 @@ public class TalkDOFactory {
 
         //使用talk本身存储,position 和 district
         talkDO.setAdCode(district.getAdCode());
-        talkDO.setDevId(DevAccountUtils.getDevIdNotNull());
         talkDO.setAdName(district.getAdName());
         talkDO.setProvinceName(district.getProvinceName());
         talkDO.setCityName(district.getCityName());
@@ -45,8 +47,8 @@ public class TalkDOFactory {
         talkDO.setVisibleGender(socialTalkPostQO.getVisibleGender());
         talkDO.setVisibleType(socialTalkPostQO.getVisibleType());
 
-        Integer talkUnionId = UnionIdUtil.createTalkUnionId();
-        talkDO.setUnionId(talkUnionId);
+        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(talkDO.getContent(), talkDO);
+
         return talkDO;
     }
 }

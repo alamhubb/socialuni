@@ -2,7 +2,6 @@ package com.socialuni.sdk.dao.DO.message;
 
 
 import com.socialuni.sdk.constant.socialuni.*;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import lombok.Data;
 
@@ -17,53 +16,28 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "s_message")
-public class MessageDO extends SocialUnionContentBaseDO implements BaseModelDO, Serializable {
-    private String content;
-
+public class MessageDO extends SocialUnionContentBaseDO implements Serializable {
     private Integer chatId;
-
-    private Date createTime;
-    private Date updateTime;
-    /**
-     * 哪个评论的
-     */
-    private Integer userId;
-
-    //状态
-    private String status;
     //官方，普通
     private String type;
     //图文，图片，文字，视频，这种类型，内容类型
-    private String contentType;
+    private String messageContentType;
     private String readStatus;
     //有多少人已读
     private Integer readNum;
-    /**
-     * 删除原因
-     */
-    private String deleteReason;
-    private Integer reportNum;
 
-    private String violateType;
 
     public MessageDO() {
     }
 
     public MessageDO(Integer chatId, String content, Integer userId) {
+        super(userId, SocialuniContentType.message, content);
         this.chatId = chatId;
-        Date curDate = new Date();
-        this.createTime = curDate;
-        this.updateTime = curDate;
-        this.content = content;
-        this.contentType = SocialuniContentType.message;
         //自己的chatUser，记录自己的未读消息数量，和是否置顶了，生成chatVo时使用
-        this.status = MessageStatus.enable;
         this.readStatus = MessageReadStatus.sending;
         this.readNum = 0;
         this.type = MessageType.simple;
-        this.contentType = MessageContentType.text;
-        this.userId = userId;
-        this.reportNum = 0;
+        this.messageContentType = MessageContentType.text;
     }
 
     public MessageDO(Integer chatId, String content, Integer userId, String type) {

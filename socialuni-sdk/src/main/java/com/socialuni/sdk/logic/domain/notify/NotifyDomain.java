@@ -3,23 +3,22 @@ package com.socialuni.sdk.logic.domain.notify;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.constant.NotifyType;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
-import com.socialuni.sdk.dao.repository.*;
-import com.socialuni.sdk.model.NotifyVO;
-import com.socialuni.sdk.model.PushMsgDTO;
-
-import com.socialuni.sdk.utils.*;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.dao.DO.NotifyDO;
 import com.socialuni.sdk.dao.DO.chat.ChatUserDO;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserAccountDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
+import com.socialuni.sdk.model.NotifyVO;
+import com.socialuni.sdk.model.PushMsgDTO;
+import com.socialuni.sdk.utils.*;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import com.socialuni.social.web.sdk.exception.base.SocialException;
-import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.web.sdk.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -48,7 +47,7 @@ public class NotifyDomain {
     @Resource
     private NotifyRepository notifyRepository;
 
-    public List<NotifyDO> saveCreateCommentNotifies(SocialCommentDO commentDO, SocialTalkDO talkDO, SocialCommentDO parentCommentDO, SocialCommentDO replyCommentDO, SocialuniUserDO requestUser) {
+    public List<NotifyDO> saveCreateCommentNotifies(SocialuniCommentDO commentDO, SocialuniTalkDO talkDO, SocialuniCommentDO parentCommentDO, SocialuniCommentDO replyCommentDO, SocialuniUserDO requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
         Integer commentId = commentDO.getUnionId();
@@ -59,8 +58,8 @@ public class NotifyDomain {
             //自己评论了自己的talk则要通知所有 其他评论了这个talk的人
             //判断不为子评论，本人回复了别人就是子评论，不给其他评论了这个talk的人发送通知
             if (parentCommentDO == null) {
-                List<SocialCommentDO> commentDOS = commentRepository.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkUserId, ContentStatus.selfCanSeeContentStatus);
-                for (SocialCommentDO childComment : commentDOS) {
+                List<SocialuniCommentDO> commentDOS = commentRepository.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkUserId, ContentStatus.selfCanSeeContentStatus);
+                for (SocialuniCommentDO childComment : commentDOS) {
                     //不给自己发送通知
                     if (!childComment.getUserId().equals(commentUserId)) {
                         NotifyDO notify = new NotifyDO(commentUserId, childComment.getUserId(), commentId, talkId, NotifyType.talk_comment);
@@ -91,8 +90,8 @@ public class NotifyDomain {
                 notifies.add(commentNotify);
             } else {
                 //但是要给所有这条评论的子评论用户发通知
-                List<SocialCommentDO> childComments = commentRepository.findByParentCommentId(parentCommentDO.getUnionId());
-                for (SocialCommentDO childCommentDO : childComments) {
+                List<SocialuniCommentDO> childComments = commentRepository.findByParentCommentId(parentCommentDO.getUnionId());
+                for (SocialuniCommentDO childCommentDO : childComments) {
                     //但是不能给自己发
                     if (!childCommentDO.getUserId().equals(commentUserId)) {
                         NotifyDO notify = new NotifyDO(commentUserId, childCommentDO.getUserId(), commentId, talkId, NotifyType.comment_comment);

@@ -2,16 +2,15 @@ package com.socialuni.sdk.logic.domain.user;
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserExpandDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
-import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.sdk.logic.check.SocialuniSchoolCheck;
-import com.socialuni.sdk.model.QO.user.SocialUserSchoolNameEditQO;
 import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
-import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
+import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.sdk.logic.check.SocialuniSchoolCheck;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.model.QO.user.SocialUserSchoolNameEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
@@ -50,7 +49,7 @@ public class SocialuniEditUserSchoolNameDomain {
 
         socialuniUserExpandRepository.save(socialuniUserExpandDO);
 
-        SocialuniMineUserDetailRO socialuniMineUserDetailRO  = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
+        SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
 
         return socialuniMineUserDetailRO;
     }

@@ -35,7 +35,6 @@
             #{item}
         </foreach>
     </select>
-
     <select id="queryTalkIdsByAndUser" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM
@@ -48,6 +47,18 @@
         <!--    规则1， 动态 and talkdovi = 'all' 或者 动态dovi = talkusergender 这个校验，有了下面就不需要校验 用户性别了-->
         and (t.visible_gender = 'all' or u.gender = t.visible_gender)
         and u.age between #{minAge} and #{maxAge}
+        <!--    筛选成年，联系方式，二维码相关内容-->
+        <if test="disableUnderageContent != null">
+            and (t.has_people_img = false or (t.has_people_img = true and t.adult_auth = true))
+            and t.has_underage_content = false
+            and u.age > 17
+        </if>
+        <if test="disableContentHasContactInfo != null">
+            and t.has_contact_info = false
+        </if>
+        <if test="disableContentHasQrCode != null">
+            and t.has_qr_code = false
+        </if>
         <!--    筛选女生、男生发布的、不筛选值为null-->
         <if test="talkUserGender!=null">
             and u.gender = #{talkUserGender}

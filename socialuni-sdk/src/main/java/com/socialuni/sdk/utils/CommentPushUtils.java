@@ -2,15 +2,17 @@ package com.socialuni.sdk.utils;
 
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.utils.content.SocialuniCommentDOUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.sdk.logic.platform.qq.QQConst;
+import com.socialuni.sdk.logic.platform.weixin.WxConst;
 import com.socialuni.sdk.model.PushMsgDTO;
 import com.socialuni.sdk.model.PushNotifyVO;
 import com.socialuni.sdk.model.PushValue;
-import com.socialuni.sdk.logic.platform.qq.QQConst;
-import com.socialuni.sdk.logic.platform.weixin.WxConst;
-import com.socialuni.sdk.dao.DO.NotifyDO;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -22,13 +24,13 @@ import java.util.HashMap;
 public class CommentPushUtils {
     //动态评论通知
     public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialuniUserDO requestUser) {
-        SocialCommentDO comment = CommentUtils.getNotNull(notify.getCommentId());
-        SocialTalkDO talk = TalkUtils.getNotNull(comment.getTalkId());
-        SocialCommentDO replyComment;
+        SocialuniCommentDO comment = SocialuniCommentDOUtil.getNotCommentNull(notify.getCommentId());
+        SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(comment.getTalkId());
+        SocialuniCommentDO replyComment;
         if (comment.getReplyCommentId() == null) {
-            replyComment = CommentUtils.getNotNull(comment.getParentCommentId());
+            replyComment = SocialuniCommentDOUtil.getNotCommentNull(comment.getParentCommentId());
         } else {
-            replyComment = CommentUtils.getNotNull(comment.getReplyCommentId());
+            replyComment = SocialuniCommentDOUtil.getNotCommentNull(comment.getReplyCommentId());
         }
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();

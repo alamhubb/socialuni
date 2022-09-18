@@ -1,22 +1,21 @@
 package com.socialuni.admin.web.controller;
 
-import com.socialuni.sdk.openService.ImgThumbnailType;
-import com.socialuni.sdk.openService.TencentCosAuditStatus;
-import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.QO.ImgAuditQO;
 import com.socialuni.admin.web.model.RO.TencentCosAuditRecordRO;
-import com.socialuni.sdk.openService.TencentCosAuditRecordRepository;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.sdk.model.QO.SocialIntIdQO;
 import com.socialuni.sdk.model.QO.SocialIntQO;
-import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.logic.factory.ListConvertUtil;
-import com.socialuni.sdk.utils.TalkUtils;
+import com.socialuni.sdk.openService.ImgThumbnailType;
+import com.socialuni.sdk.openService.TencentCosAuditRecordRepository;
+import com.socialuni.sdk.openService.TencentCosAuditStatus;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -81,7 +80,7 @@ public class TencentImgAuditRecordController {
         TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
         tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
         if (!ViolateType.noViolation.equals(auditQO.getViolateType())) {
-            SocialTalkDO talkDO = TalkUtils.getNotNull(tencentCosAuditRecordDO.getImgParentContentId());
+            SocialuniTalkDO talkDO = SocialuniTalkDORedis.getNotNull(tencentCosAuditRecordDO.getImgParentContentId());
             violationService.modelContentViolation(talkDO, auditQO.getViolateType());
         }
         tencentCosAuditRecordRepository.save(tencentCosAuditRecordDO);

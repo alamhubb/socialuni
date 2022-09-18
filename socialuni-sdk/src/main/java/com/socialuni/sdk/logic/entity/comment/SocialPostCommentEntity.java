@@ -1,8 +1,8 @@
 package com.socialuni.sdk.logic.entity.comment;
 
-import com.socialuni.sdk.logic.manage.talk.TalkManage;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.sdk.dao.store.CommentStore;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.logic.manage.talk.TalkManage;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,9 @@ public class SocialPostCommentEntity {
     @Resource
     private TalkManage talkManage;
 
-    public SocialCommentDO saveComment(SocialuniCommentPostQO addVO, Integer mineUserId) {
+    public SocialuniCommentDO saveComment(SocialuniCommentPostQO addVO, Integer mineUserId) {
         //创建和保存comment到db
-        SocialCommentDO commentDO = commentStore.saveAddComment(addVO, mineUserId);
+        SocialuniCommentDO commentDO = commentStore.saveAddComment(addVO, mineUserId);
 
         //关联更新talk到db，时间、评论次数等
         talkManage.updateTalkByAddComment(addVO.getTalkId());

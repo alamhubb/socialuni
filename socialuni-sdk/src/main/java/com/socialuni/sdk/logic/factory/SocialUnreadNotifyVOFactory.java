@@ -1,19 +1,19 @@
 package com.socialuni.sdk.logic.factory;
 
-import com.socialuni.sdk.dao.DO.NotifyDO;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.sdk.constant.NotifyType;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.sdk.utils.CommentUtils;
+import com.socialuni.sdk.dao.utils.content.SocialuniCommentDOUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
+import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.TalkImgDOUtils;
-import com.socialuni.sdk.utils.TalkUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -60,8 +60,8 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();
-        SocialCommentDO commentDO = CommentUtils.getNotNull(commentId);
-        SocialTalkDO talk = TalkUtils.getNotNull(commentDO.getTalkId());
+        SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
+        SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
 
         //赋值
         notifyVO.setTalkId(talk.getUnionId().toString());
@@ -71,7 +71,7 @@ public class SocialUnreadNotifyVOFactory {
 
         switch (notifyDO.getType()) {
             case NotifyType.talk_comment:
-                List<SocialTalkImgDO> socialTalkImgDOS = TalkImgDOUtils.findTop3ByTalkId(talk.getUnionId());
+                List<SocialuniTalkImgDO> socialTalkImgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talk.getUnionId());
 //                List<TalkImgDO> talkImgDOS = talk.getImgs();
                 if (socialTalkImgDOS.size() > 0) {
                     notifyVO.setReplyImg(socialTalkImgDOS.get(0).getSrc());
@@ -80,11 +80,11 @@ public class SocialUnreadNotifyVOFactory {
                 }
                 break;
             case NotifyType.comment_comment:
-                SocialCommentDO optionalCommentDO1 = CommentUtils.getNotNull(commentDO.getParentCommentId());
+                SocialuniCommentDO optionalCommentDO1 = SocialuniCommentDOUtil.getNotCommentNull(commentDO.getParentCommentId());
                 notifyVO.setReplyContent(optionalCommentDO1.getContent());
                 break;
             case NotifyType.reply_comment:
-                SocialCommentDO optionalCommentDO2 = CommentUtils.getNotNull(commentDO.getReplyCommentId());
+                SocialuniCommentDO optionalCommentDO2 = SocialuniCommentDOUtil.getNotCommentNull(commentDO.getReplyCommentId());
                 notifyVO.setReplyContent(optionalCommentDO2.getContent());
                 break;
         }

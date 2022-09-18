@@ -1,21 +1,21 @@
 package com.socialuni.sdk.logic.domain.talk;
 
-import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
+import com.socialuni.sdk.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.QO.community.talk.SocialTalkIdQO;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SocialTalkDetailQueryDomain {
 
     public SocialuniTalkRO queryTalkDetail(SocialTalkIdQO socialTalkIdQO, SocialuniUserDO mineUser) {
-        SocialTalkDO talkDO = TalkUtils.getNotNull(socialTalkIdQO.getTalkId());
+        SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialTalkIdQO.getTalkId());
         //自己的动态可以看预审核
         if (SocialuniUserUtil.isMine(mineUser, talkDO.getUserId())) {
             if (!ContentStatus.selfCanSeeContentStatus.contains(talkDO.getStatus())) {

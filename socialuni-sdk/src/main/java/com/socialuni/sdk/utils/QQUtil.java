@@ -182,7 +182,7 @@ public class QQUtil {
     public static void checkImgSecPost(String imgUrl) {
         try {
             //获取文件后缀名
-            String fileTypeName = ImgContentUtil.getFileSuffixName(imgUrl);
+            String fileTypeName = SocialuniImgContentUtil.getFileSuffixName(imgUrl);
             File file = File.createTempFile("checkImgTemp", fileTypeName);
 
             Thumbnails.of(new URL(imgUrl)).size(700, 1300).toFile(file);

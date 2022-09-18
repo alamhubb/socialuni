@@ -1,22 +1,21 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.model.ReportVO;
-import com.socialuni.sdk.dao.repository.*;
-
-import com.socialuni.social.web.sdk.model.ResultRO;
-import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.sdk.dao.DO.NotifyDO;
-import com.socialuni.sdk.dao.DO.ReportDO;
-import com.socialuni.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
-import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.ReportSourceType;
 import com.socialuni.sdk.constant.ViolateType;
-import com.socialuni.sdk.logic.service.BaseModelUtils;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.sdk.dao.DO.NotifyDO;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
+import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.sdk.dao.repository.*;
+import com.socialuni.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.sdk.logic.service.KeywordsService;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,7 @@ public class AdminReportService {
     private NotifyRepository notifyRepository;
     @Resource
     private KeywordsService keywordsService;
-//    @Resource
+    //    @Resource
 //    private NotifyService notifyService;
     @Resource
     private ReportDetailRepository reportDetailRepository;
@@ -98,7 +97,7 @@ public class AdminReportService {
 //                    return new ResultVO<>("审核不违规，必须填写原因");
                 }
 
-                BaseModelDO modelDO = BaseModelUtils.getModelByReport(reportDO);
+                SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
                 //如果是违规
                 if (violation) {
                     String violateType = auditVO.getViolateType();

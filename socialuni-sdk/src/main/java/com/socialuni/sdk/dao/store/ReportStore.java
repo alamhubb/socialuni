@@ -14,6 +14,6 @@ public class ReportStore {
     ReportRepository reportRepository;
 
     public List<ReportDO> queryUserOtherWaitAuditContent(Integer userId) {
-        return reportRepository.findByReceiveUserIdAndStatusIn(userId, ReportStatus.auditStatus);
+        return reportRepository.findByContentUserIdAndStatusIn(userId, ReportStatus.auditStatus);
     }
 }

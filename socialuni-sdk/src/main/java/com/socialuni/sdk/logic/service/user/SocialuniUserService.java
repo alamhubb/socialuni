@@ -1,23 +1,27 @@
 package com.socialuni.sdk.logic.service.user;
 
 import com.socialuni.sdk.config.SocialuniSystemConst;
-import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
-import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
+import com.socialuni.sdk.dao.utils.content.SocialuniUserImgDOUtil;
+import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.sdk.logic.domain.user.SocialEditUserDomain;
 import com.socialuni.sdk.logic.entity.UniUserRegistryDomain;
-import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
-import com.socialuni.sdk.model.QO.user.*;
-import com.socialuni.sdk.model.RO.user.*;
-import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.sdk.model.QO.user.SocialUserImgDeleteQO;
+import com.socialuni.sdk.model.QO.user.SocialuniUserImgDeleteQO;
+import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserDetailRO;
+import com.socialuni.sdk.model.RO.user.SocialuniUserImgRO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.sdk.utils.UnionIdUtil;
-import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,7 +41,7 @@ public class SocialuniUserService {
     @Resource
     UniUserRegistryDomain socialuniUserRegistryDomain;
     @Resource
-    UniContentUnionIdRepository uniContentUnionIdRepository;
+    SocialuniUnionIdRepository uniContentUnionIdRepository;
     @Resource
     SocialuniUserAPI socialuniUserAPI;
 
@@ -58,7 +62,7 @@ public class SocialuniUserService {
         } else {
             SocialuniUserDetailRO userDetailRO;
             SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
-            SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUid(userId);
+            SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUuid(userId);
             if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
                 userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
             } else {
@@ -109,7 +113,7 @@ public class SocialuniUserService {
     public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer userImgId = UnionIdUtil.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
+        Integer userImgId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialDeleteUserImgDomain.deleteUserImg(new SocialUserImgDeleteQO(userImgId), mineUser);
         if (SocialuniSystemConst.serverIsChild()) {
@@ -122,8 +126,8 @@ public class SocialuniUserService {
         if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.getUserImgList(userId);
         } else {
-            Integer userUnionId = UnionIdUtil.getUnionIdByUuidNotNull(userId);
-            List<SocialUserImgDO> imgs50 = UserImgDOUtils.getImgs50(userUnionId);
+            Integer userUnionId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(userId);
+            List<SocialuniUserImgDO> imgs50 = SocialuniUserImgDOUtil.getUserImgsTop50(userUnionId);
 
             List<SocialuniUserImgRO> imgs50Ro = UserImgROFactory.userImgDOToVOS(imgs50);
 

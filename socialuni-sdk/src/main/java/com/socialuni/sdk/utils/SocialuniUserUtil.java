@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
 import com.socialuni.sdk.constant.SocialuniAccountProviderType;
+import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.DO.user.*;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
@@ -10,7 +10,8 @@ import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.dao.repository.user.SocialUserViolationRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
-import com.socialuni.sdk.constant.socialuni.UserIdentityAuthStatus;
+import com.socialuni.sdk.dao.utils.SocialTokenDOUtil;
+import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
 import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
 import com.socialuni.social.web.sdk.exception.SocialNullUserException;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +77,7 @@ public class SocialuniUserUtil {
 
     public static String getMineUserUuidIdNotNull() {
         Integer mineUserId = getMineUserIdNotNull();
-        return UnionIdUtil.getUuidByUnionIdNotNull(mineUserId);
+        return SocialuniUnionIdUtil.getUuidByUnionIdNotNull(mineUserId);
     }
 
     public static SocialuniUserDO getMineUserNotNull() {
@@ -201,8 +202,8 @@ public class SocialuniUserUtil {
         return socialUserDO;
     }
 
-    public static SocialuniUserDO getUserByUid(String uid) {
-        Integer id = UnionIdUtil.getUnionIdByUuidNotNull(uid);
+    public static SocialuniUserDO getUserByUuid(String uid) {
+        Integer id = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }
 

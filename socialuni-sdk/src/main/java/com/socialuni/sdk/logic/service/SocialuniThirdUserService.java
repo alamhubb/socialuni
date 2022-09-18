@@ -10,7 +10,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.model.ResultRO;
@@ -33,7 +33,7 @@ public class SocialuniThirdUserService {
     @Resource
     UniUserRegistryDomain socialuniUserRegistryDomain;
     @Resource
-    UniContentUnionIdRepository uniContentUnionIdRepository;
+    SocialuniUnionIdRepository uniContentUnionIdRepository;
     @Resource
     TokenManage tokenManage;
     @Transactional

@@ -3,14 +3,13 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.admin.web.model.ReportVO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.AdminUserService;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.dao.repository.KeywordsRepository;
@@ -18,9 +17,10 @@ import com.socialuni.sdk.dao.repository.NotifyRepository;
 import com.socialuni.sdk.dao.repository.ReportRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.repository.dev.ThirdUserRepository;
-import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.dao.store.TalkQueryStore;
+import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,6 +124,7 @@ public class ReportController {
 //        return new ResultVO<>(list.stream().map(ReportTalkVO::new).collect(Collectors.toList()));
         return new ResultRO<>(reportVOS);
     }
+
     @Resource
     SocialUserPhoneRedis socialUserPhoneRedis;
     @Resource
@@ -141,15 +142,15 @@ public class ReportController {
         SocialuniUserDO user = adminUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
-        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserIdOrderByCreateTimeDesc(user.getUnionId());
+        List<ReportDO> reportDOS = reportRepository.findTop10ByContentUserIdOrderByCreateTimeDesc(user.getUnionId());
         List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         //查询用户10条动态
-        List<SocialTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());
+        List<SocialuniTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());
         List<ReportVO> talkReportVOS = talkDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         //查询用户10条评论
-        List<SocialCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getUnionId());
+        List<SocialuniCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getUnionId());
         List<ReportVO> commentReportVOS = commentDOS.stream().map(ReportVO::new).collect(Collectors.toList());
 
         reportVOS.addAll(talkReportVOS);

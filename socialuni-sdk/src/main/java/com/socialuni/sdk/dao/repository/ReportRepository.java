@@ -6,14 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author qinkaiyuan
  * @date 2019-09-27 23:21
  */
 public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
-    Optional<ReportDO> findByReceiveUserIdAndInfoVersionNo(Integer receiveUserId, Integer infoVersionNo);
+    ReportDO findOneByContentId(Integer contentId);
 
 //    Optional<ReportDO> findFirstOneByTalkId(Integer talkId);
 
@@ -27,7 +26,7 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
 
     List<ReportDO> findTop10ByStatusInOrderByCreateTimeAsc(List<String> status);
 
-    List<ReportDO> findTop10ByReceiveUserIdOrderByCreateTimeDesc(Integer userId);
+    List<ReportDO> findTop10ByContentUserIdOrderByCreateTimeDesc(Integer userId);
     List<ReportDO> findTop20ByStatusInOrderByCreateTimeAsc(List<String> status);
     List<ReportDO> findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(List<String> status, Integer devId);
 
@@ -35,7 +34,7 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
 
 //    List<ReportDO> findTop30ByStatusAndTalkStatusInOrStatusAndUserImgStatusInOrStatusAndCommentStatusInOrStatusAndMessageStatusInOrderByCreateTimeAsc(String status, List<String> talkStatus, String status1, List<String> userImgStatus, String status2, List<String> commentStatus, String status3, List<String> messageStatus);
 
-    List<ReportDO> findTop10ByReceiveUserIdAndStatusOrderByUpdateTimeDesc(Integer userId, String status);
+//    List<ReportDO> findTop10ByReceiveUserIdAndStatusOrderByUpdateTimeDesc(Integer userId, String status);
 
 //    Page<ReportDO> findByStatusAndAuditTypeAndReceiveUserStatusNotOrderByIdDesc(Pageable pageable, String status, String auditType, String userStatus);
 
@@ -46,6 +45,6 @@ public interface ReportRepository extends JpaRepository<ReportDO, Integer> {
     Page<ReportDO> findByStatusOrderByIdDesc(Pageable pageable, String status);
 
     //查询用户其他为审核中的状态
-    List<ReportDO> findByReceiveUserIdAndStatusIn(Integer userId, List<String> status);
+    List<ReportDO> findByContentUserIdAndStatusIn(Integer userId, List<String> status);
 
 }

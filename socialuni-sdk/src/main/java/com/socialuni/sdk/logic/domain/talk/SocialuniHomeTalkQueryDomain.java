@@ -1,29 +1,32 @@
 package com.socialuni.sdk.logic.domain.talk;
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
-import com.socialuni.sdk.constant.*;
+import com.socialuni.sdk.constant.GenderTypeQueryVO;
+import com.socialuni.sdk.constant.GenderTypeVO;
+import com.socialuni.sdk.constant.SocialuniConst;
+import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.constant.config.SocialuniAppType;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
-import com.socialuni.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.sdk.dao.store.TalkQueryStore;
-import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
-import com.socialuni.sdk.dao.store.SocialTagRedis;
-import com.socialuni.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
+import com.socialuni.sdk.constant.socialuni.GenderType;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
+import com.socialuni.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.sdk.dao.store.SocialTagRedis;
+import com.socialuni.sdk.dao.store.TalkQueryStore;
+import com.socialuni.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
+import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
+import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -52,7 +55,7 @@ public class SocialuniHomeTalkQueryDomain {
     private SocialuniUserExpandRepository socialuniUserExpandRepository;
 
     public List<SocialuniTalkRO> queryStickTalks() {
-        List<SocialTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountUtils.getDevIdNotNull(), SocialuniConst.initNum);
+        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountUtils.getDevIdNotNull(), SocialuniConst.initNum);
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
         return socialTalkROs;
@@ -75,7 +78,7 @@ public class SocialuniHomeTalkQueryDomain {
         //校验gender类型,生成BO，包含业务逻辑
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
         //得到数据库talk
-        List<SocialTalkDO> talkDOS;
+        List<SocialuniTalkDO> talkDOS;
         if (homeTabName.equals(TalkTabType.follow_name)) {
             //查询关注的用户
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);

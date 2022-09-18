@@ -1,6 +1,6 @@
 package com.socialuni.sdk.utils;
 
-import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +9,10 @@ import javax.annotation.Resource;
 @Component
 @Slf4j
 public class UniThirdContentUtils {
-    static UniContentUnionIdRepository uniContentUnionIdRepository;
+    static SocialuniUnionIdRepository uniContentUnionIdRepository;
 
     @Resource
-    public void setUniContentUnionIdRepository(UniContentUnionIdRepository uniContentUnionIdRepository) {
+    public void setUniContentUnionIdRepository(SocialuniUnionIdRepository uniContentUnionIdRepository) {
         UniThirdContentUtils.uniContentUnionIdRepository = uniContentUnionIdRepository;
     }
 

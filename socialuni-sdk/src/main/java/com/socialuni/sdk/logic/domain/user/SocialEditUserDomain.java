@@ -1,15 +1,14 @@
 package com.socialuni.sdk.logic.domain.user;
 
-import com.socialuni.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
+import com.socialuni.sdk.dao.repository.UserRepository;
+import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.GenderUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +32,7 @@ public class SocialEditUserDomain {
             String oldNickname = mineUser.getNickname();
             //新旧昵称不一样，则更新
             if (!nickname.equals(oldNickname)) {
-                SocialuniContentCheckUtil.checkUserInputLongTextContent(nickname);
+                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(nickname);
                 mineUser.setNickname(StringUtils.substring(nickname, 0, 6));
             }
         }
@@ -64,7 +63,7 @@ public class SocialEditUserDomain {
                 String oldCity = mineUser.getCity();
                 //新旧昵称不一样，则更新
                 if (!userCity.equals(oldCity)) {
-                    SocialuniContentCheckUtil.checkUserInputLongTextContent(userCity);
+                    SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(userCity);
                     mineUser.setCity(userCity);
                 }
             }

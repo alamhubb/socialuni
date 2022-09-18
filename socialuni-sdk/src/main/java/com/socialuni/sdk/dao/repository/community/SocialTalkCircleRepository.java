@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository.community;
 
-import com.socialuni.sdk.dao.DO.talk.SocialTalkCircleDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialTalkCircleDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since TODO[起始版本号]
  */
 public interface SocialTalkCircleRepository extends JpaRepository<SocialTalkCircleDO, Integer> {
-    @Cacheable(cacheNames = "getTalkCircleInfo",key = "#talkId")
+    @Cacheable(cacheNames = "getTalkCircleInfo", key = "#talkId")
     SocialTalkCircleDO findFirstByTalkId(Integer talkId);
 }

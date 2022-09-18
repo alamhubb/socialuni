@@ -3,23 +3,22 @@ package com.socialuni.admin.web.controller.oldadmin;
 import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.sdk.dao.repository.*;
-
-import com.socialuni.social.web.sdk.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.comment.SocialCommentDO;
+import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.dao.DO.message.MessageDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.mapper.TalkMapper;
+import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.KeywordsTriggerService;
+import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.web.sdk.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,7 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -110,10 +112,10 @@ public class KeywordsQueryController {
         //通用逻辑
         KeywordsDO keywordsDO = new KeywordsDO(content, "");
         //得到所有触发的
-        List<BaseModelDO> baseModelDOS = new ArrayList<>();
+        List<SocialUnionContentBaseDO> baseModelDOS = new ArrayList<>();
         Pageable pageable = PageRequest.of(0, count);
-        Page<SocialTalkDO> talkModels = talkRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
-        Page<SocialCommentDO> commentDOS = commentRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<SocialuniTalkDO> talkModels = talkRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<SocialuniCommentDO> commentDOS = commentRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<MessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
 
         baseModelDOS.addAll(talkModels.getContent());
@@ -127,7 +129,7 @@ public class KeywordsQueryController {
         //进行校验的关键词列表
         List<KeywordsDO> keywordsDOS = Collections.singletonList(keywordsDO);
         //遍历talk
-        for (BaseModelDO modelDO : baseModelDOS) {
+        for (SocialUnionContentBaseDO modelDO : baseModelDOS) {
             String auditResult = modelDO.getStatus();
             // 根据10w条去触发这个keywords
             //然后得到keywordsTriggers

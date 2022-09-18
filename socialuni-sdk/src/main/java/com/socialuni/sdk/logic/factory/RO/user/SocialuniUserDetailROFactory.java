@@ -1,13 +1,13 @@
 package com.socialuni.sdk.logic.factory.RO.user;
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserImgRO;
-import com.socialuni.sdk.utils.model.DO.SocialuniUserExpandDOUtil;
-import com.socialuni.sdk.utils.model.DO.UserImgDOUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class SocialuniUserDetailROFactory {
 
         userDetailVO.setSchoolName(schoolName);
         //用户图片
-        List<SocialUserImgDO> imgDOS = UserImgDOUtils.getImgs(userDO.getUnionId());
+        List<SocialuniUserImgDO> imgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(userDO.getUnionId());
         List<SocialuniUserImgRO> imgVOS = UserImgROFactory.userImgDOToVOS(imgDOS);
         userDetailVO.setImgs(imgVOS);
 

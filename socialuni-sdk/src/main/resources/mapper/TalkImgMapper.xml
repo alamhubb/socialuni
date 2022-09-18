@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.socialuni.sdk.dao.mapper.TalkImgMapper">
-    <select id="queryTalkImgsTop3ByTalkUidOrderByIdAsc" resultType="com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO">
-        SELECT t.*
-        FROM
-        s_talk_img t
-        WHERE t.talk_id = #{talkUid}
-        <if test="hasPeopleImgTalkNeedIdentity != null">
-            and (t.has_people_img = false or (t.has_people_img = true and t.adult_auth = true))
-        </if>
+    <!--          不为null代表禁用-->
+    <select id="queryTalkImgIdsTop3ByTalkIdOrderByIdAsc" resultType="java.lang.Integer">
+        SELECT t.union_id
+        FROM s_talk_img t
+        WHERE t.talk_id = #{talkId}
         order by t.id asc LIMIT 3
     </select>
 </mapper>

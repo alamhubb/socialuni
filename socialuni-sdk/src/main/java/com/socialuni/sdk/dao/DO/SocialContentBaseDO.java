@@ -4,7 +4,9 @@ import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.Index;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +15,11 @@ import java.util.Date;
  * @date 2019-08-13 23:34
  */
 @MappedSuperclass
+@Table(
+        indexes = {
+                @Index(columnList = "status")
+        }
+)
 @Data
 public class SocialContentBaseDO extends SocialCommonBaseDO implements Serializable {
     @Column(nullable = false)

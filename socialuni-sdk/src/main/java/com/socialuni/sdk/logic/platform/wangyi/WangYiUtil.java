@@ -3,7 +3,7 @@ package com.socialuni.sdk.logic.platform.wangyi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.sdk.constant.WyCheckConst;
 import com.socialuni.sdk.dao.DO.AntispamDO;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.repository.AntispamRepository;
 import com.socialuni.sdk.utils.UUIDUtil;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -47,7 +47,7 @@ public class WangYiUtil {
     }
 
 
-    public static AntispamDO checkWYContentSecPost(BaseModelDO baseModelDO) throws IOException {
+    public static AntispamDO checkWYContentSecPost(SocialUnionContentBaseDO baseModelDO) throws IOException {
         AntispamDO antispamDO = new AntispamDO();
         //设置内容主体相关
         antispamDO.setContentType(baseModelDO.getContentType());

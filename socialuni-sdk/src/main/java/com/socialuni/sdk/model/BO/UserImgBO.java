@@ -1,12 +1,12 @@
 package com.socialuni.sdk.model.BO;
 
-import com.socialuni.sdk.utils.UnionIdUtil;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
-import com.socialuni.sdk.model.RO.UserImgVO;
-import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.sdk.model.RO.UserImgVO;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -43,8 +43,8 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public UserImgBO(SocialUserImgDO img, SocialuniUserDO user) {
-        this.id = UnionIdUtil.getUuidByUnionIdNotNull(img.getUnionId());
+    public UserImgBO(SocialuniUserImgDO img, SocialuniUserDO user) {
+        this.id = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(img.getUnionId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
         this.setWidth((double) 360);
@@ -52,9 +52,9 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public SocialUserImgDO toUserImgDO(SocialuniUserDO user, String imgUrl) {
+    public SocialuniUserImgDO toUserImgDO(SocialuniUserDO user, String imgUrl) {
         //这里需要记录，变更历史，通过照片有效无效记录，
-        SocialUserImgDO userImgDO = new SocialUserImgDO();
+        SocialuniUserImgDO userImgDO = new SocialuniUserImgDO();
         userImgDO.setSrc(imgUrl + this.getSrc());
         userImgDO.setAspectRatio(this.getAspectRatio());
         userImgDO.setQuality(this.getQuality());
@@ -65,7 +65,7 @@ public class UserImgBO {
         userImgDO.setContent(AppConfigConst.img_content);
         userImgDO.setContentType(SocialuniContentType.userImg);
         userImgDO.setReportNum(0);
-        userImgDO.setAdultAuth(false);
+        userImgDO.setPeopleImgIsAdult(false);
         user.setAvatar(userImgDO.getSrc() + "!avatar");
         return userImgDO;
     }
@@ -95,7 +95,7 @@ public class UserImgBO {
         return imgVO;
     }
 
-    public static List<UserImgVO> userImgDOToVOS(List<SocialUserImgDO> imgDOs, SocialuniUserDO user) {
+    public static List<UserImgVO> userImgDOToVOS(List<SocialuniUserImgDO> imgDOs, SocialuniUserDO user) {
         return imgDOs.stream().map(item -> new UserImgBO(item, user).toVO()).collect(Collectors.toList());
     }
 }

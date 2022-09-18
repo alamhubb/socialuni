@@ -1,11 +1,11 @@
 package com.socialuni.sdk.logic.manage.talk;
 
-import com.socialuni.sdk.dao.DO.talk.SocialTalkDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.TalkQueryStore;
-import com.socialuni.sdk.utils.TalkRedis;
-import com.socialuni.sdk.utils.TalkUtils;
-import com.socialuni.sdk.utils.UnionIdUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class TalkManage {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private TalkRedis talkRedis;
+    private SocialuniTalkDORedis talkRedis;
     @Resource
     private TalkQueryStore talkQueryStore;
 
@@ -33,8 +33,8 @@ public class TalkManage {
      * @return
      */
     public void updateTalkByAddComment(String talkUuid) {
-        Integer talkId = UnionIdUtil.getUnionIdByUuidNotNull(talkUuid);
-        SocialTalkDO talk = TalkUtils.getAllowNull(talkId);
+        Integer talkId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(talkUuid);
+        SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         if (talk == null) {
             return;
         }

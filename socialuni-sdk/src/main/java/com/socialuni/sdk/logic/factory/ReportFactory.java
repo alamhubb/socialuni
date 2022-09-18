@@ -1,40 +1,37 @@
 package com.socialuni.sdk.logic.factory;
 
 import com.socialuni.sdk.constant.ReportSourceType;
-import com.socialuni.sdk.dao.DO.ReportDO;
-import com.socialuni.sdk.dao.DO.UniContentUnionIdDO;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.repository.CommentRepository;
-import com.socialuni.sdk.logic.service.ReportService;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
 public class ReportFactory {
-    @Resource
-    private CommentRepository commentRepository;
+    public static ReportDO createReportDO(
+            String reportSourceType,
+            SocialUnionContentBaseDO socialuniContentBO
+    ) {
+        return ReportFactory.createReportDO(socialuniContentBO.getContentType(), socialuniContentBO.getUnionId(), socialuniContentBO.getContent(), socialuniContentBO.getUserId(), reportSourceType);
+    }
 
-    @Resource
-    private ReportService reportService;
 
-    public ReportDO createReportDO(
-            String cause,
-            UniContentUnionIdDO uniContentUnionIdDO,
-            BaseModelDO model,
-            String reportSourceType, Integer devId
+    private static ReportDO createReportDO(
+            String contentType,
+            Integer contentId,
+            String content,
+            Integer contentUserId,
+            String reportSourceType
     ) {
         // 设置model
         ReportDO reportDO = new ReportDO();
 
-        reportDO.setCause(cause);
-        if (model != null) {
-            reportDO.setReportContent(model.getContent());
-            //设置被举报用户
-            reportDO.setReceiveUserId(model.getUserId());
-        }
+//        reportDO.setCause(cause);
+        reportDO.setReportContent(content);
+        //设置被举报用户
+        reportDO.setContentUserId(contentUserId);
         if (ReportSourceType.userReport.equals(reportSourceType)) {
             reportDO.setStatus(ReportStatus.audit);
         } else {
@@ -47,13 +44,13 @@ public class ReportFactory {
         Date curDate = new Date();
         reportDO.setCreateTime(curDate);
         reportDO.setUpdateTime(curDate);
-        reportDO.setDevId(devId);
+//        reportDO.setDevId(DevAccountUtils.getDevIdNotNull());
         //内容来源
-        reportDO.setContentType(uniContentUnionIdDO.getContentType());
+        reportDO.setContentType(contentType);
         //举报来源
         reportDO.setReportSourceType(reportSourceType);
 
-        reportDO.setContentId(uniContentUnionIdDO.getId());
+        reportDO.setContentId(contentId);
         return reportDO;
     }
 

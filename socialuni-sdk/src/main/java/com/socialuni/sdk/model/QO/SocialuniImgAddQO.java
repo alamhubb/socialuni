@@ -17,4 +17,5 @@ public class SocialuniImgAddQO {
     private Integer size;
     private String content;
     private Boolean hasQrCode;
+//    private Boolean hasPeopleImg;
 }

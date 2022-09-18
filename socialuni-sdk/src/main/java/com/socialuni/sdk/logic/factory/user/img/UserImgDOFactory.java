@@ -1,23 +1,23 @@
 package com.socialuni.sdk.logic.factory.user.img;
 
 
-import com.socialuni.sdk.logic.service.content.SocialuniContentCheckUtil;
-import com.socialuni.sdk.utils.ImgContentUtil;
-import com.socialuni.sdk.utils.UnionIdUtil;
+import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserImgDO;
-import com.socialuni.sdk.constant.AppConfigConst;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
+import com.socialuni.sdk.utils.SocialuniImgContentUtil;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 
 import java.util.Date;
 
 public class UserImgDOFactory {
 
-    public static SocialUserImgDO toUserImgDO(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
+    public static SocialuniUserImgDO toUserImgDO(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
         //这里需要记录，变更历史，通过照片有效无效记录，
-        SocialUserImgDO userImgDO = new SocialUserImgDO();
+        SocialuniUserImgDO userImgDO = new SocialuniUserImgDO();
         userImgDO.setSrc(socialUserImgAddQO.getSrc());
         userImgDO.setAspectRatio(socialUserImgAddQO.getAspectRatio());
         userImgDO.setQuality(socialUserImgAddQO.getQuality());
@@ -28,14 +28,11 @@ public class UserImgDOFactory {
         userImgDO.setContent(AppConfigConst.img_content);
         userImgDO.setContentType(SocialuniContentType.userImg);
         userImgDO.setReportNum(0);
-
-        //包含未成年内容
-        boolean hasUn18Content = SocialuniContentCheckUtil.hasUn18ContentThrowError(userImgDO.getContent());
-        userImgDO.setHasUnderageContent(hasUn18Content);
+        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(userImgDO);
         //是否成年认证通过
-        userImgDO.setAdultAuth(false);
+        userImgDO.setPeopleImgIsAdult(false);
         //是否包含人物图片
-        boolean hasPeople = ImgContentUtil.hasPeopleImg(userImgDO.getSrc());
+        boolean hasPeople = SocialuniImgContentUtil.hasPeopleImg(userImgDO.getSrc());
         //如果用户包含人物头像,且用户未认证,
         if (hasPeople) {
             userImgDO.setHasPeopleImg(true);
@@ -45,7 +42,7 @@ public class UserImgDOFactory {
 //                }
         }
 
-        Integer userImgUnionId = UnionIdUtil.createUserImgUnionId();
+        Integer userImgUnionId = SocialuniUnionIdUtil.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
         return userImgDO;
     }

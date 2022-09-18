@@ -1,24 +1,22 @@
 package com.socialuni.admin.web.service;
 
-import com.socialuni.sdk.dao.repository.*;
-
-import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.sdk.dao.DO.ReportDO;
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserViolationDO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateLevel;
 import com.socialuni.sdk.constant.ViolateType;
+import com.socialuni.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.constant.status.UserStatus;
-import com.socialuni.sdk.logic.domain.BaseModelService;
-import com.socialuni.sdk.logic.entity.user.SocialUserViolationEntity;
+import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.sdk.dao.DO.user.SocialUserViolationDO;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.sdk.dao.repository.*;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.sdk.logic.service.BaseModelUtils;
+import com.socialuni.sdk.dao.store.ReportStore;
+import com.socialuni.sdk.dao.utils.content.SocialuniContentDOUtil;
+import com.socialuni.sdk.logic.entity.user.SocialUserViolationEntity;
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.logic.service.ReportService;
-import com.socialuni.sdk.dao.store.ReportStore;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,7 +32,7 @@ public class ViolationService {
     @Resource
     private CommentRepository commentRepository;
     @Resource
-    private UserImgRepository userImgRepository;
+    private SocialuniUserImgRepository userImgRepository;
     @Resource
     private MessageRepository messageRepository;
     @Resource
@@ -48,13 +46,13 @@ public class ViolationService {
     @Resource
     private KeywordsService keywordsService;
     @Resource
-    private BaseModelService baseModelService;
+    private SocialuniContentService baseModelService;
     @Resource
     private ReportStore reportStore;
     @Resource
     private SocialUserViolationEntity socialUserViolationEntity;
 
-    public void noViolateService(BaseModelDO modelDO, String auditNote, ReportDO reportDO) {
+    public void noViolateService(SocialUnionContentBaseDO modelDO, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
         //审核通过不再接受举报，前台点击举报时，提示已官方审核通过
         //talk状态变更
@@ -67,7 +65,7 @@ public class ViolationService {
             log.info("用户已经自行删除此条内容：{}", contentStatus);
         }
 
-        baseModelService.save(modelDO);
+        SocialuniContentDOUtil.save(modelDO);
 
         //user改为正常
         SocialuniUserDO violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
@@ -92,7 +90,7 @@ public class ViolationService {
         reportService.reportPass(reportDO, false);
     }
 
-    public void violateService(BaseModelDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
+    public void violateService(SocialUnionContentBaseDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
         SocialuniUserDO violationUser = modelContentViolation(modelDO, violateType);
 
@@ -111,14 +109,14 @@ public class ViolationService {
             List<ReportDO> reportDOS = reportStore.queryUserOtherWaitAuditContent(violationUser.getUnionId());
             for (ReportDO linkReport : reportDOS) {
                 //修改关联内容的状态，为违规
-                BaseModelDO linkModelDO = BaseModelUtils.getModelByReport(linkReport);
+                SocialUnionContentBaseDO linkModelDO = SocialuniContentDOUtil.getContentDOByContentId(linkReport.getContentId());
                 //修改内容，需要修改状态、删除原因、更新时间
                 linkModelDO.setStatus(ContentStatus.violation);
                 //如果封禁的话，要改一下删除原因，删除原因，违规原因
                 linkModelDO.setDeleteReason(violateType);
                 linkModelDO.setUpdateTime(curDate);
                 //内容违规则修改内容状态
-                baseModelService.save(linkModelDO);
+                SocialuniContentDOUtil.save(linkModelDO);
                 //修改举报内容
                 linkReport.setAuditType(ViolateType.otherIllegalLinkage);
                 linkReport.setStatus(ReportStatus.violation);
@@ -142,7 +140,7 @@ public class ViolationService {
         modelDO.setDeleteReason(violateType);
         modelDO.setUpdateTime(curDate);
         //内容违规则修改内容状态
-        baseModelService.save(modelDO);
+        SocialuniContentDOUtil.save(modelDO);
         //处理举报
         //封禁用户
         //如果已经是违规，不需要改为删除

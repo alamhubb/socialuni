@@ -3,7 +3,7 @@ package com.socialuni.sdk.utils;
 import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.feignAPI.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.ContentAddQO;
-import com.socialuni.sdk.dao.repository.UniContentUnionIdRepository;
+import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.model.RO.user.SocialuniContentIdRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
@@ -23,7 +23,7 @@ import java.util.function.Function;
 @Slf4j
 public class UniAPIUtils {
     static SocialuniUserAPI socialuniUserAPI;
-    static UniContentUnionIdRepository uniContentUnionIdRepository;
+    static SocialuniUnionIdRepository uniContentUnionIdRepository;
 
     static DevAccountRepository devAccountRepository;
 
@@ -33,7 +33,7 @@ public class UniAPIUtils {
     }
 
     @Resource
-    public void setUniContentUnionIdRepository(UniContentUnionIdRepository uniContentUnionIdRepository) {
+    public void setUniContentUnionIdRepository(SocialuniUnionIdRepository uniContentUnionIdRepository) {
         UniAPIUtils.uniContentUnionIdRepository = uniContentUnionIdRepository;
     }
 
@@ -61,14 +61,14 @@ public class UniAPIUtils {
         }};
         //执行本系统逻辑
         //根据本系统uid获取unionId
-        Integer unionId = UnionIdUtil.getUnionIdByUuidNotNull(uniContentIdRO.getId());
+        Integer unionId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(uniContentIdRO.getId());
 
         //mark 多库同步版本
         ResultRO<RO> resultRO = callApi.apply(contentAddQO);
         uniContentIdRO = (SocialuniContentIdRO) resultRO.getData();
 
         //根据unionId更新为中心返回的uid
-        UnionIdUtil.updateUuidByUnionIdNotNull(unionId, uniContentIdRO.getId());
+        SocialuniUnionIdUtil.updateUuidByUnionIdNotNull(unionId, uniContentIdRO.getId());
 
         return resultRO;
 

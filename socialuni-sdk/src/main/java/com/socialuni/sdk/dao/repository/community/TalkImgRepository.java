@@ -1,20 +1,28 @@
 package com.socialuni.sdk.dao.repository.community;
 
-import com.socialuni.sdk.dao.DO.base.BaseModelDO;
-import com.socialuni.sdk.dao.DO.talk.SocialTalkImgDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TalkImgRepository extends JpaRepository<SocialTalkImgDO, Integer> {
+public interface TalkImgRepository extends JpaRepository<SocialuniTalkImgDO, Integer> {
     @Cacheable(cacheNames = "talkImgsTalkId", key = "#talkId")
-    List<SocialTalkImgDO> findTop3ByTalkId(Integer talkId);
+    List<SocialuniTalkImgDO> findTop3ByTalkId(Integer talkId);
+/*    @Cacheable(cacheNames = "getTalkImgUnionIdsByTalkIdTop3", key = "#talkId")
+    List<Integer> findUnionIdTop3ByTalkIdAndStatusInOrderByIdAsc(Integer talkId, List<String> status);*/
 
-    BaseModelDO findOneByUnionIdAndStatus(Integer unionId, String status);
+    @Cacheable(cacheNames = "getTalkImgUnionIdsByTalkIdTop3", key = "#talkId")
+    List<Integer> findUnionIdTop3ByTalkIdOrderByIdAsc(Integer talkId);
+
+    @Cacheable(cacheNames = "getTalkImgByUnionId", key = "#unionId")
+    SocialuniTalkImgDO findOneByUnionId(Integer unionId);
+
+    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
 
     //获取talkImg
-    SocialTalkImgDO findFirstBySrc(String imgUlr);
+    SocialuniTalkImgDO findFirstBySrc(String imgUlr);
 
 //    @CachePut(cacheNames = "talkImgsTalkId", key = "#imgs[0].talkId")
 //    List<TalkImgDO> saveAll(List<TalkImgDO> imgs);
