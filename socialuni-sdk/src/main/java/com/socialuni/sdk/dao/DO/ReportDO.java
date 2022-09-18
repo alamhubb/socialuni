@@ -23,6 +23,10 @@ public class ReportDO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //不能删掉，后台管理根据这个区分用户可以审核的内容范围
+    @Column(nullable = false)
+    Integer devId;
+
     //被举报的用户
     private Integer contentUserId;
 /*

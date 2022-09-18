@@ -4,7 +4,6 @@ import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.sdk.dao.DO.SocialuniUnionIdDO;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.ReportDetailRepository;
@@ -35,7 +34,7 @@ public class SoicialReportAddDomain {
     @Resource
     private ReportDetailRepository reportDetailRepository;
     @Resource
-    private SoicialuniReportDomainDOUtil soicialuniReportDomain;
+    private SoicialuniUserAddReportDomain soicialuniReportDomain;
 
     public ResultRO<String> addReport(SocialuniReportAddQO reportAddVO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
@@ -87,7 +86,6 @@ public class SoicialReportAddDomain {
 
         String contentUuId = SocialuniUnionIdUtil.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
         Integer contentUnionId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(contentUuId);
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentUnionId);
 
         SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);
 

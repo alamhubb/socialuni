@@ -9,7 +9,7 @@ import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.domain.notify.NotifyDomain;
-import com.socialuni.sdk.logic.domain.report.SoicialuniReportDomainDOUtil;
+import com.socialuni.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.sdk.logic.entity.comment.SocialPostCommentEntity;
 import com.socialuni.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
@@ -38,7 +38,7 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialPostCommentEntity socialPostCommentEntity;
     @Resource
-    private SoicialuniReportDomainDOUtil soicialuniReportDomain;
+    private SoicialuniSystemPreCheckReportDomainDOUtil soicialuniReportDomain;
     @Resource
     private CommentRepository commentRepository;
     @Resource

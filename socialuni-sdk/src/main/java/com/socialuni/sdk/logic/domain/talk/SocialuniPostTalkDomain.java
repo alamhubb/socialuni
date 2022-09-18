@@ -19,7 +19,7 @@ import com.socialuni.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.sdk.logic.domain.report.SoicialuniReportDomainDOUtil;
+import com.socialuni.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.logic.factory.TalkImgDOFactory;
 import com.socialuni.sdk.logic.manage.talk.SocialTalkCreateManage;
@@ -54,7 +54,7 @@ public class SocialuniPostTalkDomain {
     @Resource
     TagRepository tagRepository;
     @Resource
-    private SoicialuniReportDomainDOUtil soicialuniReportDomain;
+    private SoicialuniSystemPreCheckReportDomainDOUtil soicialuniReportDomain;
     @Resource
     SocialuniTalkDORedis talkRedis;
     @Resource

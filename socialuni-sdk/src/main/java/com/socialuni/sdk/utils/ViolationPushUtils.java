@@ -4,6 +4,7 @@ import com.socialuni.sdk.constant.ErrorMsg;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
 import com.socialuni.sdk.dao.DO.NotifyDO;
 import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.ReportRepository;
 import com.socialuni.sdk.dao.utils.content.SocialuniContentDOUtil;
@@ -36,7 +37,7 @@ public class ViolationPushUtils {
     public static PushMsgDTO getViolationPushDTO(String platform, NotifyDO notify) {
         ReportDO reportDO = reportRepository.findById(notify.getReportId()).get();
 
-        BaseModelDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
+        SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
 
         SocialuniUserDO vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 

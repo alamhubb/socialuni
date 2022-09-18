@@ -18,7 +18,6 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     SocialuniTalkDO findOneByUnionId(Integer talkUnionId);
 
     //清池使用的
-    SocialuniTalkDO findOneBySocialuniUid(String uid);
 
     /**
      * 查询可用的全局置顶的动态，为官方置顶的动态

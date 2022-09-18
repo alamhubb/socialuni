@@ -7,6 +7,7 @@ import com.socialuni.sdk.logic.platform.MapUtil;
 import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.sdk.model.RectangleVO;
+import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,8 @@ public class TalkDOFactory {
 
         //使用talk本身存储,position 和 district
         talkDO.setAdCode(district.getAdCode());
+        //不要删掉，根据devId查询了动态
+        talkDO.setDevId(DevAccountUtils.getDevIdNotNull());
         talkDO.setAdName(district.getAdName());
         talkDO.setProvinceName(district.getProvinceName());
         talkDO.setCityName(district.getCityName());

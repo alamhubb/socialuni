@@ -39,7 +39,6 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
 
     //违规类型
     private String violateType;
-
     /**
      * 删除原因
      */
@@ -50,6 +49,7 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
     }
 
     public SocialUnionContentBaseDO(Integer userId, String contentType, String content) {
+        this.reportNum = 0;
         this.userId = userId;
         this.contentType = contentType;
         this.content = content;
@@ -61,7 +61,6 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
         this.contentType = socialUnionContentBaseDO.getContentType();
         this.content = content;
         this.reportNum = socialUnionContentBaseDO.getReportNum();
-
         this.setStatus(socialUnionContentBaseDO.getStatus());
     }
 }

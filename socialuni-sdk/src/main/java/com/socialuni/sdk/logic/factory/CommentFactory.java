@@ -60,7 +60,7 @@ public class CommentFactory {
         comment.setUserId(requestUserId);
         comment.setHasContactInfo(false);
         comment.setHasUnderageContent(false);
-        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(comment);
+        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(comment.getContent(), comment);
 //        comment.setSocialuniUid(addVO.getSocialuniUid());
 
         Integer unionId = SocialuniUnionIdUtil.createCommentUnionId();

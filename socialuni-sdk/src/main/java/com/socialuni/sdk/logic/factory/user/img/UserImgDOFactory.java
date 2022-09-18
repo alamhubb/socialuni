@@ -1,7 +1,6 @@
 package com.socialuni.sdk.logic.factory.user.img;
 
 
-import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -21,14 +20,14 @@ public class UserImgDOFactory {
         userImgDO.setSrc(socialUserImgAddQO.getSrc());
         userImgDO.setAspectRatio(socialUserImgAddQO.getAspectRatio());
         userImgDO.setQuality(socialUserImgAddQO.getQuality());
+        userImgDO.setContent(socialUserImgAddQO.getContent());
         userImgDO.setSize(socialUserImgAddQO.getSize());
         userImgDO.setUserId(mineUser.getUnionId());
         userImgDO.setStatus(ContentStatus.enable);
         userImgDO.setCreateTime(new Date());
-        userImgDO.setContent(AppConfigConst.img_content);
         userImgDO.setContentType(SocialuniContentType.userImg);
         userImgDO.setReportNum(0);
-        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(userImgDO);
+        SocialuniTextContentUtil.setHasUnderageAndContactInfoByContentText(userImgDO.getContent(), userImgDO);
         //是否成年认证通过
         userImgDO.setPeopleImgIsAdult(false);
         //是否包含人物图片

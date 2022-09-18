@@ -5,7 +5,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
 import com.socialuni.sdk.dao.repository.SocialuniUserImgRepository;
 import com.socialuni.sdk.dao.repository.UserRepository;
-import com.socialuni.sdk.logic.domain.report.SoicialuniReportDomainDOUtil;
+import com.socialuni.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.user.img.UserImgDOFactory;
 import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
@@ -23,8 +23,6 @@ public class SocialAddUserImgDomain {
     SocialuniUserImgRepository userImgRepository;
     @Resource
     UserRepository userRepository;
-    @Resource
-    SoicialuniReportDomainDOUtil soicialuniReportDomain;
 
     public SocialuniMineUserDetailRO addUserImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
@@ -33,7 +31,7 @@ public class SocialAddUserImgDomain {
 
         userImgDO = userImgRepository.save(userImgDO);
 
-        soicialuniReportDomain.systemPreCheckReport(userImgDO);
+        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(userImgDO);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
