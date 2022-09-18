@@ -12,17 +12,19 @@
       <div class="px-sm mt flex-none">
         已选校园名称： {{ schoolNameValue || "" }}
       </div>
-      <!--      <q-select v-model="curSchoolName" :list="schools" label-name="name" value-name="name"></q-select>-->
-      <scroll-view class="mt-sm flex-1 bt" scroll-y>
-        <div v-for="circle in filterCircles" class="bb px-sm py-sm row-between-center"
-             @click="schoolNameValue = circle.name">
-          <div>{{
-              circle.name
-            }}
+      <div class="flex-1 overflow-hidden">
+        <!--      <q-select v-model="curSchoolName" :list="schools" label-name="name" value-name="name"></q-select>-->
+        <scroll-view class="mt-sm h100p bt" scroll-y>
+          <div v-for="circle in filterCircles" class="bb px-sm py-sm row-between-center"
+               @click="schoolNameValue = circle.name">
+            <div>{{
+                circle.name
+              }}
+            </div>
+            <q-icon v-if="circle.name === schoolNameValue" icon="checkmark" size="16"></q-icon>
           </div>
-          <q-icon v-if="circle.name === schoolNameValue" icon="checkmark" size="16"></q-icon>
-        </div>
-      </scroll-view>
+        </scroll-view>
+      </div>
     </div>
   </q-popup>
 </template>

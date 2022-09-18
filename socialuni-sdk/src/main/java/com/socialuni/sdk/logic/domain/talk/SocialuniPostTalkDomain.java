@@ -17,6 +17,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.*;
 import com.socialuni.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
@@ -54,8 +55,6 @@ public class SocialuniPostTalkDomain {
     @Resource
     TagRepository tagRepository;
     @Resource
-    private SoicialuniSystemPreCheckReportDomainDOUtil soicialuniReportDomain;
-    @Resource
     SocialuniTalkDORedis talkRedis;
     @Resource
     TalkTagRepository talkTagRepository;
@@ -82,7 +81,7 @@ public class SocialuniPostTalkDomain {
 
         SocialuniTalkDO talkDO = this.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
 
-        soicialuniReportDomain.systemPreCheckReport(talkDO);
+        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(talkDO);
 
         SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;

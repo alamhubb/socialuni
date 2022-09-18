@@ -101,6 +101,7 @@ export default class QSidebar extends Vue {
 
   //计算高度
   initBoxItemTops() {
+    this.chooseIndex = 0
     this.initComponentsHeight()
     this.initRightBoxItemTops()
     this.initLeftBoxItemTops()

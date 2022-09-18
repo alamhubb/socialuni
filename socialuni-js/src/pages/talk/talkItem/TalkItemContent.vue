@@ -25,25 +25,25 @@
     <div class="px-smm row-wrap" v-if="!talk.globalTop || talk.globalTop===1">
       <template v-if="talk.tags&&talk.tags.length">
         <view v-for="tag in talk.tags" :key="tag.id" @click.stop="chooseTags(tag.name)"
-              class="mt-xs color-blue_dark mr-sm">
+              class="mt-sm color-blue_dark mr-sm">
           <text class="color-blue mr-nn">#</text>
           {{ tag.name }}
         </view>
       </template>
     </div>
 
-    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-col-center mt-xss px-sm"
+    <view v-if="!talk.globalTop || talk.globalTop===1" class="row-col-center px-sm row-wrap"
           @click="toTalkDetailVue">
       <div v-if="talk.circles&&talk.circles.length">
         <view v-for="circleName in talk.circles" :key="circleName" @click.stop="chooseCircle(circleName)"
-              class="q-tag mr-sm">
+              class="q-tag mr-sm mt-xss">
           <!--          <q-icon icon="moments" class="color-purple mr-mn" size="12"></q-icon>-->
           <q-icon icon="mdi-send" class="color-purple mr-mn mdi-rotate-315" size="12"></q-icon>
           <text class="pt-nn">{{ circleName }}圈</text>
         </view>
       </div>
 
-      <view class="q-tag">
+      <view class="q-tag mt-xss">
         <q-icon icon="map-fill" class="color-purple mr-mn" size="12"></q-icon>
         <!--        有市区的名称就不显示省的名称-->
         <text v-if="!talk.district.cityName || !talk.district.districtName">{{ talk.district.provinceName }}</text>
@@ -88,45 +88,45 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import {Component, Prop, Vue} from 'vue-property-decorator'
 import TalkVO from '../../../socialuni/model/talk/TalkVO'
 import PagePath from '../../../socialuni/constant/PagePath'
 import ImgUtil from '../../../socialuni/utils/ImgUtil'
 import RouterUtil from '../../../socialuni/utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
-import { socialTagModule, socialTalkModule } from '@/socialuni/store'
+import {socialTagModule, socialTalkModule} from '@/socialuni/store'
 import AlertUtil from '@/socialuni/utils/AlertUtil'
 import MsgUtil from '@/socialuni/utils/MsgUtil'
 
 @Component({
-  components: { QIcon }
+  components: {QIcon}
 })
 export default class TalkItemContent extends Vue {
   @Prop() talk: TalkVO
 
-  toTalkDetailVue () {
+  toTalkDetailVue() {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
 
-  chooseCircle (circleName) {
+  chooseCircle(circleName) {
     AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
       socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
     })
   }
 
-  chooseTags (tagName) {
+  chooseTags(tagName) {
     AlertUtil.confirm(`是否筛选${tagName}话题的内容`).then(() => {
       socialTagModule.setSelectTagName(tagName)
     })
   }
 
-  getTalkLargeImgUrl (userId: string, src: string) {
+  getTalkLargeImgUrl(userId: string, src: string) {
     return ImgUtil.getTalkLargeImgUrl(userId, src)
   }
 
-  getTalkSmallImgUrl (userId: string, src: string) {
+  getTalkSmallImgUrl(userId: string, src: string) {
     return ImgUtil.getTalkSmallImgUrl(userId, src)
   }
 
@@ -138,18 +138,18 @@ export default class TalkItemContent extends Vue {
     })
   } */
 
-  previewImage (index) {
+  previewImage(index) {
     uni.previewImage({
       current: index,
       urls: this.talk.imgs.map(item => this.getTalkLargeImgUrl(this.talk.user.id, item.src))
     })
   }
 
-  goToThreeAppClick (appId, path) {
+  goToThreeAppClick(appId, path) {
     RouterUtil.navigateToMp(appId, path)
   }
 
-  toIdentityAuth () {
+  toIdentityAuth() {
     MsgUtil.identityAuthHint()
   }
 }
