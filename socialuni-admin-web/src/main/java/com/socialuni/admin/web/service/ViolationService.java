@@ -7,6 +7,7 @@ import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.sdk.constant.status.UserStatus;
 import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserViolationDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -45,8 +46,6 @@ public class ViolationService {
     private UserRepository userRepository;
     @Resource
     private KeywordsService keywordsService;
-    @Resource
-    private SocialuniContentService baseModelService;
     @Resource
     private ReportStore reportStore;
     @Resource
@@ -132,7 +131,7 @@ public class ViolationService {
         reportService.reportPass(reportDO, true);
     }
 
-    public SocialuniUserDO modelContentViolation(BaseModelDO modelDO, String violateType) {
+    public SocialuniUserDO modelContentViolation(SocialUnionContentBaseDO modelDO, String violateType) {
         Date curDate = new Date();
         //修改内容，需要修改状态、删除原因、更新时间
         modelDO.setStatus(ContentStatus.violation);

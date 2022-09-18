@@ -9,6 +9,7 @@ import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.store.SocialTagRedis;
 import com.socialuni.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.sdk.logic.factory.SocialTalkImgROFactory;
 import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
@@ -30,7 +31,7 @@ public class ReportContentROFactory {
     public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
         if (reportContentType.equals(SocialuniContentType.talk)) {
-            SocialuniTalkDO talkDO = SocialuniTalkDORedis.getNotNull(contentId);
+            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
             reportContentVO.setId(contentId);
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());

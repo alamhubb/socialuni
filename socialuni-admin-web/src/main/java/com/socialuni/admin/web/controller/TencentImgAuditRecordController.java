@@ -9,6 +9,7 @@ import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.sdk.model.QO.SocialIntIdQO;
 import com.socialuni.sdk.model.QO.SocialIntQO;
@@ -80,7 +81,7 @@ public class TencentImgAuditRecordController {
         TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
         tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
         if (!ViolateType.noViolation.equals(auditQO.getViolateType())) {
-            SocialuniTalkDO talkDO = SocialuniTalkDORedis.getNotNull(tencentCosAuditRecordDO.getImgParentContentId());
+            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(tencentCosAuditRecordDO.getImgParentContentId());
             violationService.modelContentViolation(talkDO, auditQO.getViolateType());
         }
         tencentCosAuditRecordRepository.save(tencentCosAuditRecordDO);

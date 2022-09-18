@@ -134,7 +134,7 @@ public class KeywordsQueryController {
             // 根据10w条去触发这个keywords
             //然后得到keywordsTriggers
             List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerService
-                    .checkContentTriggerKeywords(modelDO, modelDO.getContentType(), keywordsDOS, true);
+                    .checkContentTriggerKeywords(modelDO, keywordsDOS, true);
 
             for (KeywordsTriggerDetailDO keywordsTrigger : keywordsTriggers) {
                 //然后传入keyword，和状态，和keyword
