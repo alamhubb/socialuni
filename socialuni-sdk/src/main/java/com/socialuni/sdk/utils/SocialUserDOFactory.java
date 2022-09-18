@@ -4,6 +4,7 @@ import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.sdk.constant.UserType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -38,10 +39,14 @@ public class SocialUserDOFactory {
     }
 
     public static SocialuniUserDO newUserByPhoneLogin() {
+        Integer userUnionId = SocialuniUnionIdUtil.createUserUnionId();
         SocialuniUserDO user = new SocialuniUserDO();
+        user.setUserId(userUnionId);
+        user.setUnionId(userUnionId);
         user.setNickname("未命名");
         user.setAvatar(SocialuniSystemConst.getUserDefaultAvatar());
         user.setGender(GenderType.girl);
+        user.setContentType(SocialuniContentType.user);
         user.setAge(SocialuniConst.defaultAge);
         user.setBirthday(BirthdayAgeUtil.getYearBirthDateByAge(user.getAge()));
         user.setCity("北京");

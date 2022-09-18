@@ -2,21 +2,17 @@ package com.socialuni.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.constant.AppData;
-import com.socialuni.sdk.constant.config.SocialuniAppType;
-import com.socialuni.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.sdk.dao.redis.DistrictRedis;
 import com.socialuni.sdk.dao.repository.dev.DevSocialuniIdRepository;
+import com.socialuni.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.sdk.logic.service.ViolationKeywordsService;
+import com.socialuni.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.ObjectUtil;
-import com.socialuni.social.web.sdk.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Async;
@@ -58,7 +54,7 @@ public class MyApplicationRunner implements ApplicationRunner {
             SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = (SocialuniAppMoreConfigBO) socialuniAppConfig.getClass().getField("appMoreConfig").get(null);
             SocialuniAppConfig.resetSocialuniAppConfig(appType, socialuniAppConfigBO, socialuniAppMoreConfigBO);
         }
-        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
+//        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
         DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
 

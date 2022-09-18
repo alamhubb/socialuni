@@ -13,7 +13,14 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "s_talk", indexes = {@Index(columnList = "visibleGender"), @Index(columnList = "visibleType"), @Index(columnList = "adCode"), @Index(columnList = "createTime"), @Index(columnList = "contentType"), @Index(columnList = "globalTop"), @Index(columnList = "hasPeopleImg"), @Index(columnList = "peopleImgIsAdult"), @Index(columnList = "hasUnderageContent"), @Index(columnList = "hasContactInfo"), @Index(columnList = "hasQrCode")})
+@Table(name = "s_talk", indexes = {
+        @Index(columnList = "visibleGender"),
+        @Index(columnList = "visibleType"),
+        @Index(columnList = "adCode"),
+        @Index(columnList = "createTime"), @Index(columnList = "contentType"),
+        @Index(columnList = "globalTop"), @Index(columnList = "hasPeopleImg"),
+        @Index(columnList = "peopleImgIsAdult"), @Index(columnList = "hasUnderageContent"),
+        @Index(columnList = "hasContactInfo"), @Index(columnList = "hasQrCode")})
 @Data
 @NoArgsConstructor
 public class SocialuniTalkDO extends SocialUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {

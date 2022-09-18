@@ -8,17 +8,14 @@ import java.util.List;
 
 @Mapper
 public interface TalkMapper {
-    List<Integer> queryTalkIdsByAndUser(
-            @Param("talkUserGender") String talkUserGender,
-            @Param("minAge") Integer minAge,
-            @Param("maxAge") Integer maxAge,
-            @Param("status") String status,
-            @Param("adCode") String adCode,
-            @Param("talkVisibleGender") String talkVisibleGender,
-            @Param("mineUserGender") String mineUserGender,
-            @Param("devId") Integer devId,
-            @Param("queryTime") Date queryTime
-    );
+    List<Integer> queryTalkIdsByAndUser(@Param("talkUserGender") String talkUserGender, @Param("minAge") Integer minAge,
+                                        @Param("maxAge") Integer maxAge, @Param("status") String status, @Param("adCode") String adCode,
+                                        @Param("talkVisibleGender") String talkVisibleGender,
+                                        @Param("mineUserGender") String mineUserGender,
+                                        @Param("devId") Integer devId, @Param("queryTime") Date queryTime,
+                                        @Param("disableUnderageContent") Boolean disableUnderageContent,
+                                        @Param("disableContentHasContactInfo") Boolean disableContentHasContactInfo,
+                                        @Param("disableContentHasQrCode") Boolean disableContentHasQrCode);
 
     //mybatis 一个参数时自定义属性名不生效 所以使用list
     List<Integer> queryTalkIdsByAndTag(@Param("tagIds") List<Integer> tagIds);
@@ -27,9 +24,7 @@ public interface TalkMapper {
 
     List<Integer> queryTalkIdsByAndUserExpand();
 
-    List<Integer> queryMineTalkIdsByCom(
-            @Param("userId") Integer userId,
-            @Param("statusList") List<String> statusList);
+    List<Integer> queryMineTalkIdsByCom(@Param("userId") Integer userId, @Param("statusList") List<String> statusList);
 
 
     /*List<Integer> queryTalkIdsByCom(

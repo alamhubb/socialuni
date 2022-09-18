@@ -31,7 +31,7 @@ export default class SocialAppModule extends VuexModule {
 
     try {
       //无论如何都要获取当前用户信息
-      UserService.getMineUserInitDataAction()
+      await UserService.getMineUserInitDataAction()
       // WebsocketUtil.websocketConnect(false)
       socialTagModule.getHotTagsAction()
       socialTalkModule.getTalkTabs()

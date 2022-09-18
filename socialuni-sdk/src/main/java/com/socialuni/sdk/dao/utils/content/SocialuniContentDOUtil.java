@@ -86,7 +86,7 @@ public class SocialuniContentDOUtil<T> {
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {
             throw new SocialParamsException("错误的内容类型");
         }
-        SocialUnionContentBaseDO contentBaseDO = null;
+        SocialUnionContentBaseDO contentBaseDO;
         if (contentType.equals(SocialuniContentType.user)) {
             contentBaseDO = SocialuniUserUtil.getUserNotNull(contentId);
         } else if (contentType.equals(SocialuniContentType.userImg)) {

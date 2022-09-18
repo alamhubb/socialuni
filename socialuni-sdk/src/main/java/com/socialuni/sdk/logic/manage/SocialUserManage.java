@@ -15,17 +15,13 @@ public class SocialUserManage {
     UserRepository userRepository;
 
     public SocialuniUserDO createUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        Integer userUnionId = SocialuniUnionIdUtil.createUserUnionId();
         SocialuniUserDO user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
-        user.setUnionId(userUnionId);
         user = userRepository.save(user);
         return user;
     }
 
     public SocialuniUserDO createUserByPhoneLogin() {
-        Integer userUnionId = SocialuniUnionIdUtil.createUserUnionId();
         SocialuniUserDO user = SocialUserDOFactory.newUserByPhoneLogin();
-        user.setUnionId(userUnionId);
         user = userRepository.save(user);
         return user;
     }

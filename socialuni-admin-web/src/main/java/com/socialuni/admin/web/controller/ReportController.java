@@ -114,8 +114,8 @@ public class ReportController {
     public ResultRO<List<ReportVO>> queryReports(Integer userId) {
         //展示用户的前多少条动态，评论，
 
-        SocialuniUserDO user = new SocialuniUserDO();
-        user.setId(userId);
+        /*SocialuniUserDO user = new SocialuniUserDO();
+        user.setId(userId);*/
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
 //        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserAndStatusOrderByUpdateTimeDesc(user, CommonStatus.violation);
         List<ReportDO> reportDOS = new ArrayList<>();

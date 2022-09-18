@@ -93,7 +93,7 @@ public class SoicialuniUserAddReportDomain {
             resultRO.setData(ErrorMsg.reportSubmitHide);
         }
         //todo 存到userDetail表
-        receiveUser.setReportNum(receiveUser.getReportNum() + 1);
+//        receiveUser.setReportNum(receiveUser.getReportNum() + 1);
 //       非用户自身操作不更改时间 receiveUser.setUpdateTime(new Date());
         userRepository.save(receiveUser);
 

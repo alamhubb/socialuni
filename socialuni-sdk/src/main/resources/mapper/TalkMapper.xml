@@ -49,7 +49,7 @@
         and u.age between #{minAge} and #{maxAge}
         <!--    筛选成年，联系方式，二维码相关内容-->
         <if test="disableUnderageContent != null">
-            and (t.has_people_img = false or (t.has_people_img = true and t.adult_auth = true))
+            and (t.has_people_img = false or (t.has_people_img = true and t.people_img_is_adult = true))
             and t.has_underage_content = false
             and u.age > 17
         </if>
