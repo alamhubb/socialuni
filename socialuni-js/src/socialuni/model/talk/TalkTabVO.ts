@@ -12,9 +12,10 @@ export default class TalkTabVO {
   appDefaultTab: boolean = false
   scrollTop: number = 0
   loadMore: string = LoadMoreType.more
+  queryTime: Date = new Date()
 
 
-  constructor (name: string = null, type: string = null) {
+  constructor(name: string = null, type: string = null) {
     this.name = name
     this.type = type
   }
