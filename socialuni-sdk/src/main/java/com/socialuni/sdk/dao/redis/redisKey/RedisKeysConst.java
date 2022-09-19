@@ -19,6 +19,15 @@ public class RedisKeysConst {
     public static final String queryUserTalkIds = "queryUserTalkIds";
     public static final String queryUserFollowsTalkIds = "queryUserFollowsTalkIds";
 
+
+    public static final String queryTalkIdsByAndUser = "queryTalkIdsByAndUser";
+    public static final String queryTalkIdsByTalkCondition = "queryTalkIdsByTalkCondition";
+    public static final String queryTalkIdsByAndTag = "queryTalkIdsByAndTag";
+    public static final String queryTalkIdsByAndCircle = "queryTalkIdsByAndCircle";
+    public static final String queryTalkIdsByAndUserExpand = "queryTalkIdsByAndUserExpand";
+
+
+
     public static final String queryTalkIdsByTab = "queryTalkIdsByTab";
     public static final String queryTalkIdsByTagVisibleGender = "queryTalkIdsByTagVisibleGender";
     public static final String queryTalkIdsByTagIdsAndTagVisibleGender = "queryTalkIdsByTagIdsAndTagVisibleGender";
