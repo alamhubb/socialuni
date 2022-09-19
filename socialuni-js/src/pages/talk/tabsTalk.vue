@@ -140,7 +140,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
-import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
+import SocialuniTalkAPI from '../../socialuni/api/socialuni/SocialuniTalkAPI'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
 
 import TalkItem from './talkItem/TalkItem.vue'
@@ -344,10 +344,21 @@ export default class TabsTalk extends Vue {
   // 默认地理位置是北京，以后可以根据ip获取当前城市
   // 话题的话显示最热门的话题，且只查询包含话题的动态
   async queryTalks (firstLoad?: boolean) {
-    if (firstLoad) {
-      this.refreshQueryDate()
-    }
     const talkTabObj = this.curTalkTabObj
+    if (firstLoad) {
+      talkTabObj.talks = []
+      this.refreshQueryDate()
+      //如果首页刷新时，查询置顶动态
+      if (talkTabObj.name === socialConfigModule.appConfig.homeTabName) {
+        //查询置顶冬天
+        SocialuniTalkAPI.queryStickTalksAPI().then(res => {
+          const stickTalks = res.data
+          if (stickTalks.length) {
+            talkTabObj.talks.unshift(...stickTalks)
+          }
+        })
+      }
+    }
     //只有在传false时校验后面的
     const fistLoad = firstLoad || talkTabObj.firstLoad
     // query condition
@@ -355,15 +366,11 @@ export default class TabsTalk extends Vue {
     CommonUtil.delayTime(0).then(() => {
       talkTabObj.firstLoad = false
     })
-    return TalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialTagModule.selectTagNames).then((res: any) => {
+    return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, this.queryTime, socialTagModule.selectTagNames).then((res: any) => {
       // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
       if (talkTabObj.loadMore === LoadMoreType.loading) {
         if (res.data && res.data.length) {
-          if (fistLoad) {
-            talkTabObj.talks = res.data
-          } else {
-            talkTabObj.talks.push(...res.data)
-          }
+          talkTabObj.talks.push(...res.data)
           this.queryTime = talkTabObj.talks[talkTabObj.talks.length - 1].updateTime
         } else {
           talkTabObj.talks = []
