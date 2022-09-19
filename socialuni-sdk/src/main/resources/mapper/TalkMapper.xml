@@ -93,9 +93,9 @@
                 and (t.visible_type = 'fullNetwork' or (t.dev_id = #{devId} and t.visible_type = 'selfSoft'))
             </otherwise>
         </choose>
-        <!--<choose>
-            &lt;!&ndash;    如果为全部，则显示全部的，和性别一致的。 如果筛选专属，则不为all，走or，则筛选的是性别一致的，所以判断没问题&ndash;&gt;
-            &lt;!&ndash;    只有全部走前面逻辑，其他都走后面的逻辑，需要为这么写，只有为全部的时候才需要判断，这俩一致，都为全部，其他情况就是展示和用户性别一致的专属动态&ndash;&gt;
+        <choose>
+            <!--    如果为全部，则显示全部的，和性别一致的。 如果筛选专属，则不为all，走or，则筛选的是性别一致的，所以判断没问题-->
+            <!--    只有全部走前面逻辑，其他都走后面的逻辑，需要为这么写，只有为全部的时候才需要判断，这俩一致，都为全部，其他情况就是展示和用户性别一致的专属动态-->
             <when test="talkVisibleGender == 'all'">
                 and (t.visible_gender = 'all'
                 <if test="mineUserGender!=null">
@@ -108,7 +108,7 @@
                     and t.visible_gender = #{mineUserGender}
                 </if>
             </otherwise>
-        </choose>-->
+        </choose>
         order by t.update_time desc
     </select>
 

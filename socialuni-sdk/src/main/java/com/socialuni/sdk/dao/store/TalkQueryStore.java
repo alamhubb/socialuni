@@ -96,7 +96,7 @@ public class TalkQueryStore {
         List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, appConfig.getDisableUnderageContent());
         List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(
                 ContentStatus.enable, queryBO.getAdCode(),
-                talkUserGender, mineUserGender, null,
+                queryBO.getTalkVisibleGender(), mineUserGender, null,
                 appConfig.getDisableUnderageContent(),
                 appConfig.getDisableContentHasContactInfo(),
                 appConfig.getDisableContentHasQrCode());
