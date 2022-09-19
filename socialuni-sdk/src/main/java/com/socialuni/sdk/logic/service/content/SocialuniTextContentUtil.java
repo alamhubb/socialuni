@@ -115,7 +115,7 @@ public class SocialuniTextContentUtil {
         return SocialuniTextContentUtil.hasWxContactInfo(content) || SocialuniTextContentUtil.hasQQContactInfo(content);
     }
 
-    //包含qq联系方式
+    //包含微信联系方式
     private static boolean hasWxContactInfo(String content) {
         if (StringUtils.isEmpty(content)) {
             return false;
@@ -131,7 +131,7 @@ public class SocialuniTextContentUtil {
         return matcher.find();
     }
 
-    //包含微信联系方式
+    //包含qq联系方式
     private static boolean hasQQContactInfo(String content) {
         if (StringUtils.isEmpty(content)) {
             return false;

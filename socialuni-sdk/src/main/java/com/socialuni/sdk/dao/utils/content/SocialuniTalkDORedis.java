@@ -28,6 +28,11 @@ public class SocialuniTalkDORedis {
 
     @Caching(
             evict = {
+                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByAndUser, allEntries = true),
+                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByTalkCondition, allEntries = true),
+                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByAndTag, allEntries = true),
+                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByAndCircle, allEntries = true),
+                    @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByAndUserExpand, allEntries = true),
                     @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByTab, allEntries = true),
                     @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByTagVisibleGender, allEntries = true),
                     @CacheEvict(cacheNames = RedisKeysConst.queryTalkIdsByTagIdsAndTagVisibleGender, allEntries = true),

@@ -9,14 +9,15 @@
                  open="(" separator="," close=")">
             #{item}
         </foreach>
+        order by t.update_time desc
     </select>
 
     <select id="queryTalkIdsByAndCircle" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM s_talk t,
              s_talk_circle tc
-        WHERE t.union_id = tc.talk_id
-          AND tc.circle_id = #{circleId}
+        WHERE t.union_id = tc.talk_id AND tc.circle_id = #{circleId}
+        order by t.update_time desc
     </select>
 
     <select id="queryTalkIdsByAndUserExpand" resultType="java.lang.Integer">
@@ -25,6 +26,7 @@
              s_user_expand ue
         WHERE t.user_id = ue.user_id
           AND ue.school_name is not null
+        order by t.update_time desc
     </select>
 
     <select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">
@@ -34,7 +36,9 @@
                  open="(" separator="," close=")">
             #{item}
         </foreach>
+        order by t.update_time desc
     </select>
+
     <select id="queryTalkIdsByAndUser" resultType="java.lang.Integer">
         SELECT t.union_id
         FROM
@@ -49,19 +53,32 @@
         and u.age between #{minAge} and #{maxAge}
         <!--    筛选成年，联系方式，二维码相关内容-->
         <if test="disableUnderageContent != null">
+            and u.age > 17
+        </if>
+        <!--    筛选女生、男生发布的、不筛选值为null-->
+        <if test="talkUserGender!=null">
+            and u.gender = #{talkUserGender}
+        </if>
+        order by t.update_time desc
+    </select>
+
+    <select id="queryTalkIdsByTalkCondition" resultType="java.lang.Integer">
+        SELECT t.union_id
+        FROM
+        s_talk t
+        WHERE
+        t.global_top = 0
+        and (t.status = #{status})
+        <!--    筛选成年，联系方式，二维码相关内容-->
+        <if test="disableUnderageContent != null">
             and (t.has_people_img = false or (t.has_people_img = true and t.people_img_is_adult = true))
             and t.has_underage_content = false
-            and u.age > 17
         </if>
         <if test="disableContentHasContactInfo != null">
             and t.has_contact_info = false
         </if>
         <if test="disableContentHasQrCode != null">
             and t.has_qr_code = false
-        </if>
-        <!--    筛选女生、男生发布的、不筛选值为null-->
-        <if test="talkUserGender!=null">
-            and u.gender = #{talkUserGender}
         </if>
         <if test="adCode!=null">
             and t.ad_code like concat(#{adCode}, '%')
@@ -92,9 +109,6 @@
                 </if>
             </otherwise>
         </choose>
-        <if test="queryTime!=null">
-            AND t.update_time &lt; #{queryTime}
-        </if>
         order by t.update_time desc
     </select>
 

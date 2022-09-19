@@ -11,41 +11,45 @@ import TalkVO from '../../model/talk/TalkVO'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
 
-export default class TalkAPI {
-  static addTalkAPI(content: string, imgs: DomFile[], district: DistrictVO, visibleType: string, visibleGender: string, circleName: string, tagNames: string[]) {
+export default class SocialuniTalkAPI {
+  static queryStickTalksAPI () {
+    return request.get<TalkVO[]>('socialuni/talk/queryStickTalks')
+  }
+
+  static addTalkAPI (content: string, imgs: DomFile[], district: DistrictVO, visibleType: string, visibleGender: string, circleName: string, tagNames: string[]) {
     const data: TalkAddVO = new TalkAddVO(content, imgs.map(item => new ImgAddQO(item)), district, visibleType, visibleGender, circleName, tagNames)
     return request.post('socialuni/talk/postTalk', data)
   }
 
-  static queryTalksAPI(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[]) {
+  static queryTalksAPI (homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[]) {
     return request.post<TalkVO>('socialuni/talk/queryTalks', new TalkQueryVO(homeTabName, gender, minAge, maxAge, queryTime, tagNames))
   }
 
-  static queryUserTalksAPI(userId: string, talkIds: string[]) {
+  static queryUserTalksAPI (userId: string, talkIds: string[]) {
     return request.post('socialuni/talk/queryUserTalks', new UserTalkQueryVO(userId, talkIds))
   }
 
-  static queryTalkInfoAPI(talkId: string) {
-    return request.post('socialuni/talk/queryTalkInfo', {talkId})
+  static queryTalkInfoAPI (talkId: string) {
+    return request.post('socialuni/talk/queryTalkInfo', { talkId })
   }
 
-  static queryTalkDetailAPI(talkId: string) {
+  static queryTalkDetailAPI (talkId: string) {
     return request.get('socialuni/talk/queryTalkDetail/' + talkId)
   }
 
-  static addCommentAPI(comment: CommentAddVO) {
+  static addCommentAPI (comment: CommentAddVO) {
     return request.post('socialuni/comment/postComment', comment)
   }
 
-  static addHugAPI(hug: HugAddVO) {
+  static addHugAPI (hug: HugAddVO) {
     return request.post('socialuni/hug/addHug', hug)
   }
 
-  static deleteTalkAPI(talkId: string) {
+  static deleteTalkAPI (talkId: string) {
     return request.post('socialuni/talk/deleteTalk', new TalkDeleteVO(talkId))
   }
 
-  static deleteCommentAPI(commentId: string) {
+  static deleteCommentAPI (commentId: string) {
     return request.post('socialuni/comment/deleteComment', new CommentDeleteVO(commentId))
   }
 }

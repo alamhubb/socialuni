@@ -10,6 +10,7 @@ export default class TalkTabVO {
   firstLoad: boolean = true
   //用来区分是否为app内置tab，读取缓存过滤使用
   appDefaultTab: boolean = false
+  scrollTop: number = 0
   loadMore: string = LoadMoreType.more
 
 

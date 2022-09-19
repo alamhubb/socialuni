@@ -1,6 +1,5 @@
 package com.socialuni.sdk.config;
 
-import com.socialuni.sdk.constant.socialuni.GenderType;
 import lombok.Data;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class SocialuniAppConfigBO {
     private Boolean mustSetSchoolCanPost;
 
     //todo 相关功能未实现 用户必须实名认证
-    private Boolean userMustIdentityAuth;
+    private Boolean mustIdentityAuthCanPost;
 
     //配置3，应用性别
     private String appGender;

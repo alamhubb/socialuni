@@ -1,8 +1,8 @@
-import {Action, Module, VuexModule} from 'vuex-class-modules'
-import {socialCircleModule, socialUserModule} from './index'
+import { Action, Module, VuexModule } from 'vuex-class-modules'
+import { socialCircleModule, socialUserModule } from './index'
 import CommentAddVO from '../model/comment/CommentAddVO'
 import CommentVO from '../model/comment/CommentVO'
-import TalkAPI from '../api/socialuni/TalkAPI'
+import SocialuniTalkAPI from '../api/socialuni/SocialuniTalkAPI'
 import TalkVO from '../model/talk/TalkVO'
 import MsgUtil from '../utils/MsgUtil'
 import CommonUtil from '../utils/CommonUtil'
@@ -14,7 +14,7 @@ import StorageUtil from '@/socialuni/utils/StorageUtil'
 import SocialuniAppAPI from '@/socialuni/api/socialuni/SocialuniAppAPI'
 
 
-@Module({generateMutationSetters: true})
+@Module({ generateMutationSetters: true })
 export default class SocialTalkModule extends VuexModule {
   // filter内容
   userMinAge: number = TalkFilterUtil.getMinAgeFilter()
@@ -36,7 +36,7 @@ export default class SocialTalkModule extends VuexModule {
   reportContentType = ''
 
   @Action
-  addComment({content}) {
+  addComment ({ content }) {
     // 使输入框失去焦点，隐藏
     const commentAdd: CommentAddVO = new CommentAddVO(content, this.talk.id)
     const tempComment: CommentVO = commentAdd.toComment()
@@ -55,7 +55,7 @@ export default class SocialTalkModule extends VuexModule {
       this.talk.comments.unshift(tempComment)
       this.talk.commentNum++
     }
-    TalkAPI.addCommentAPI(commentAdd).then((res: any) => {
+    SocialuniTalkAPI.addCommentAPI(commentAdd).then((res: any) => {
       if (this.comment) {
         this.comment.childComments.splice(0, 1, res.data)
       } else {
@@ -71,7 +71,7 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  setTalk(talk) {
+  setTalk (talk) {
     const user = socialUserModule.user
     if (user && user.phoneNum) {
       this.talk = talk
@@ -85,10 +85,10 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  setComment({
-               talk,
-               comment
-             }) {
+  setComment ({
+    talk,
+    comment
+  }) {
     if (socialUserModule.user) {
       this.talk = talk
       this.comment = comment
@@ -101,11 +101,11 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  setReplyComment({
-                    talk,
-                    comment,
-                    replyComment
-                  }) {
+  setReplyComment ({
+    talk,
+    comment,
+    replyComment
+  }) {
     if (socialUserModule.user) {
       this.talk = talk
       this.comment = comment
@@ -118,7 +118,7 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  inputContentFocusEvent() {
+  inputContentFocusEvent () {
     MsgUtil.cantPopupPromptToast()
     // 需要有延迟，要不然无法成功切换
     CommonUtil.delayTime(200).then(() => {
@@ -127,14 +127,14 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  inputContentBlur() {
+  inputContentBlur () {
     // 需要有延迟，要不然无法触发按钮事件
     CommonUtil.delayTime(100).then(() => {
       this.inputContentFocus = false
     })
   }
 
-  setFilterData(genderFilter: string, minAge: number, maxAge: number) {
+  setFilterData (genderFilter: string, minAge: number, maxAge: number) {
     this.userGender = genderFilter
     this.userMinAge = minAge
     this.userMaxAge = maxAge
@@ -142,14 +142,14 @@ export default class SocialTalkModule extends VuexModule {
   }
 
   @Action
-  async getTalkTabs() {
+  async getTalkTabs () {
     const res = await SocialuniAppAPI.queryHomeTabsAPI()
     //根据后端返回的tab更新tabs
     this.updateTalkTabs(res.data)
     this.updateCircleByTabIndex()
   }
 
-  updateTalkTabs(talkTabs: TalkTabVO []) {
+  updateTalkTabs (talkTabs: TalkTabVO []) {
     //兼容旧版本，还未设置这个属性
     for (const talkTab of this.talkTabs) {
       if (TalkVueUtil.TalkTabsDefaultNames.includes(talkTab.name)) {
@@ -176,7 +176,7 @@ export default class SocialTalkModule extends VuexModule {
     this.talkTabs = newTabs
   }
 
-  updateCircleByTabIndex() {
+  updateCircleByTabIndex () {
     const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
     if (curTab.type === TalkTabType.circle_type) {
       socialCircleModule.setCircleName(curTab.name)
@@ -190,17 +190,17 @@ export default class SocialTalkModule extends VuexModule {
     return curTab
   }
 
-  setCurrentTabIndex(currentTabIndex: number) {
+  setCurrentTabIndex (currentTabIndex: number) {
     this.currentTabIndex = currentTabIndex
   }
 
-  setCurTabIndexUpdateCircle(currentTabIndex: number) {
+  setCurTabIndexUpdateCircle (currentTabIndex: number) {
     this.setCurrentTabIndex(currentTabIndex)
     return this.updateCircleByTabIndex()
   }
 
   //tab选中当前的圈子
-  setCircleNameUpdateCurTabIndex(circleName: string) {
+  setCircleNameUpdateCurTabIndex (circleName: string) {
     if (circleName) {
       const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
       let circleTab
@@ -224,7 +224,7 @@ export default class SocialTalkModule extends VuexModule {
     return this.setCurTabIndexUpdateCircle(1)
   }
 
-  saveLastTalkTabs(talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
+  saveLastTalkTabs (talkTabs: TalkTabVO [], talkTabIndex: number, talkTabType: string) {
     //缓存记录本次推出时的默认值
     // TalkVueUtil.setTalkTabsAll(talkTabs, talkTabIndex, talkTabType)
     if (talkTabs.length) {
@@ -234,11 +234,11 @@ export default class SocialTalkModule extends VuexModule {
     StorageUtil.setObj(TalkVueUtil.talkTabTypeKey, talkTabType)
   }
 
-  get curTab() {
+  get curTab () {
     return this.talkTabs[this.currentTabIndex]
   }
 
-  get curTabIsCircle() {
+  get curTabIsCircle () {
     return this.curTab.type === TalkTabType.circle_type
   }
 }

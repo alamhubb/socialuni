@@ -76,10 +76,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../../socialuni/model/talk/TalkVO'
 import PagePath from '../../../socialuni/constant/PagePath'
-import TalkAPI from '../../../socialuni/api/socialuni/TalkAPI'
+import SocialuniTalkAPI from '../../../socialuni/api/socialuni/SocialuniTalkAPI'
 import ReportContentType from '../../../socialuni/constant/ReportContentType'
 import HugAddVO from '../../../socialuni/model/HugAddVO'
 import ChildComment from '../ChildComment.vue'
@@ -87,14 +87,14 @@ import CenterUserDetailRO from '../../../socialuni/model/social/CenterUserDetail
 import CommentVO from '../../../socialuni/model/comment/CommentVO'
 import TalkUtil from '../../../socialuni/utils/TalkUtil'
 import JsonUtils from '../../../socialuni/utils/ObjectUtil'
-import {socialTalkModule, socialUserStore} from '../../../socialuni/store'
+import { socialTalkModule, socialUserStore } from '../../../socialuni/store'
 import MsgUtil from '../../../socialuni/utils/MsgUtil'
 import RouterUtil from '../../../socialuni/utils/RouterUtil'
 import QIcon from '../../../qing-ui/components/QIcon/QIcon.vue'
 import QButton from '../../../qing-ui/components/QButton/QButton.vue'
 import ToastUtil from '../../../socialuni/utils/ToastUtil'
 import UniUtil from '@/socialuni/utils/UniUtil'
-import PageUtil from "@/socialuni/utils/PageUtil";
+import PageUtil from '@/socialuni/utils/PageUtil'
 
 @Component({
   components: {
@@ -116,19 +116,19 @@ export default class TalkItemComment extends Vue {
   talk: TalkVO = JsonUtils.deepClone(this.talkProp)
 
   @Watch('talkProp')
-  talkPropWatch() {
+  talkPropWatch () {
     this.talk = JsonUtils.deepClone(this.talkProp)
   }
 
   // 打开更多操作评论弹框，复制删除，举报
-  openCommentActionDialog(comment: CommentVO) {
+  openCommentActionDialog (comment: CommentVO) {
     socialTalkModule.talk = this.talk
     socialTalkModule.comment = comment
     socialTalkModule.commentActionShow = true
   }
 
   // 打开举报talk弹框
-  openReportDialog() {
+  openReportDialog () {
     console.log(123123)
     if (this.user) {
       socialTalkModule.talk = this.talk
@@ -139,16 +139,16 @@ export default class TalkItemComment extends Vue {
     }
   }
 
-  showShareMenu() {
+  showShareMenu () {
     UniUtil.showShareMenu()
   }
 
 
-  setTalk() {
+  setTalk () {
     socialTalkModule.setTalk(this.talk)
   }
 
-  addHug() {
+  addHug () {
     // 登录才可以点赞
     if (this.user) {
       if (this.talk.hasHugged) {
@@ -158,13 +158,13 @@ export default class TalkItemComment extends Vue {
       this.talk.hasHugged = true
       this.talk.hugNum++
       const hugAdd: HugAddVO = new HugAddVO(this.talk.id)
-      TalkAPI.addHugAPI(hugAdd)
+      SocialuniTalkAPI.addHugAPI(hugAdd)
     } else {
       MsgUtil.unLoginMessage()
     }
   }
 
-  toUserDetail(userId: string) {
+  toUserDetail (userId: string) {
     if (RouterUtil.getCurrentPageURI() !== PagePath.userDetail || RouterUtil.getCurrentPage().options.userId !== String(userId)) {
       PageUtil.toUserDetail(userId)
     }
@@ -172,13 +172,13 @@ export default class TalkItemComment extends Vue {
 
   showOtherCommentClicked = false
 
-  toTalkDetailVue() {
+  toTalkDetailVue () {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
       RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
     }
   }
 
-  get commentLimitNum() {
+  get commentLimitNum () {
     if (this.showAllComment || this.showOtherCommentClicked) {
       return this.talk.commentNum
     } else {
@@ -186,22 +186,22 @@ export default class TalkItemComment extends Vue {
     }
   }
 
-  get commentShowNum() {
+  get commentShowNum () {
     return this.talk.commentNum > this.commentLimitNum ? (this.commentLimitNum - 1) : this.commentLimitNum
   }
 
-  setComment(talk, comment) {
+  setComment (talk, comment) {
     socialTalkModule.setComment({
       talk,
       comment
     })
   }
 
-  getHugIcon(hasHugged) {
+  getHugIcon (hasHugged) {
     return TalkUtil.getHugIcon(hasHugged)
   }
 
-  getHugColor(hasHugged) {
+  getHugColor (hasHugged) {
     return TalkUtil.getHugColor(hasHugged)
   }
 }

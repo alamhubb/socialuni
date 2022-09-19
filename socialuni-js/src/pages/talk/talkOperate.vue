@@ -50,14 +50,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 import CommentVO from '../../socialuni/model/comment/CommentVO'
 import ReportType from '../../socialuni/constant/ReportType'
 import ReportAddVO from '../../socialuni/model/report/ReportAddVO'
 import ReportContentType from '../../socialuni/constant/ReportContentType'
 import ReportAPI from '../../socialuni/api/socialuni/ReportAPI'
-import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
+import SocialuniTalkAPI from '../../socialuni/api/socialuni/SocialuniTalkAPI'
 import {
   socialAppStore,
   socialConfigModule,
@@ -95,16 +95,16 @@ export default class TalkOperate extends Vue {
   reportContent = ''
 
   // 被举报次数大于多少，则隐藏
-  get reportCountHide() {
+  get reportCountHide () {
     return socialConfigModule.appMoreConfig.reportCountHide
   }
 
-  reportDialogClose() {
+  reportDialogClose () {
     socialTalkModule.reportDialogShow = false
     this.initData()
   }
 
-  addReport() {
+  addReport () {
     const reportAdd: ReportAddVO = new ReportAddVO(this.reportContentType, this.reportType, this.reportContent)
     if (this.reportContentType === ReportContentType.talk) {
       reportAdd.contentId = this.talk.id
@@ -137,41 +137,41 @@ export default class TalkOperate extends Vue {
     }
   }
 
-  deleteComment() {
+  deleteComment () {
     this.frontDeleteComment()
-    TalkAPI.deleteCommentAPI(this.comment.id).then(() => {
+    SocialuniTalkAPI.deleteCommentAPI(this.comment.id).then(() => {
       this.initData()
     })
   }
 
-  copyText() {
+  copyText () {
     UniUtil.textCopy(this.comment.content)
     this.closeActionAndInitData()
   }
 
-  closeActionAndInitData() {
+  closeActionAndInitData () {
     this.commentActionClose()
     this.initData()
   }
 
-  commentActionClose() {
+  commentActionClose () {
     socialTalkModule.commentActionShow = false
   }
 
   // 前端删除comment
-  frontDeleteComment() {
+  frontDeleteComment () {
     this.talk.comments.splice(this.talk.comments.findIndex(comment => comment.id === this.comment.id), 1)
   }
 
   // 用户自己删除
-  userDeleteComment() {
+  userDeleteComment () {
     this.commentActionClose()
     AlertUtil.confirm('是否确定删除此条评论，此操作无法恢复').then(() => {
       this.deleteComment()
     })
   }
 
-  openReportDialog() {
+  openReportDialog () {
     if (this.user) {
       this.commentActionClose()
       socialTalkModule.reportContentType = ReportContentType.comment
@@ -181,11 +181,11 @@ export default class TalkOperate extends Vue {
     }
   }
 
-  reportTypeChange({target}) {
+  reportTypeChange ({ target }) {
     this.reportType = target.value
   }
 
-  initData() {
+  initData () {
     socialTalkModule.talk = null
     socialTalkModule.comment = null
     socialTalkModule.reportContentType = ''
