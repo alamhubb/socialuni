@@ -50,12 +50,17 @@ public class SocialuniTalkImgDOUtil {
         return list;
     }
 
+    public static SocialuniTalkImgDO saveTalkImgDO(SocialuniTalkImgDO talkImgDO){
+        return talkImgRepository.save(talkImgDO);
+    }
+
     public static List<SocialuniTalkImgDO> getTalkImgsTop3(Integer talkId) {
         List<SocialuniTalkImgDO> talkImgDOS = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
         for (SocialuniTalkImgDO talkImgDO : talkImgDOS) {
             if (ObjectUtils.isEmpty(talkImgDO.getUnionId())) {
                 Integer unionId = SocialuniUnionIdUtil.createTalkImgUnionId();
                 talkImgDO.setUnionId(unionId);
+                SocialuniTalkImgDOUtil.saveTalkImgDO(talkImgDO);
             }
         }
         List<Integer> integers = talkImgDOS.stream().map(SocialUnionContentBaseDO::getUnionId).collect(Collectors.toList());
