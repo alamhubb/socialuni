@@ -29,16 +29,23 @@
 
 ## 客户端功能点
 
-| 功能点           | 是否支持 | 配置类属性 |
-|---------------|------|-------|
-| 圈子            | √    | 无     |
-| 话题            | √    | 无     |
-| 首页tabs可配置     | √    | SocialuniAppConfig.appConfig.tabNames     |
-| 禁止发表未成年人内容    | √    | SocialuniAppConfig.appConfig.disableUnderageContent     |
-| 禁止发表包含联系方式的内容 | √    | SocialuniAppConfig.appConfig.disableContentHasContactInfo     |
-| 禁止发表包含二维码的内容  | √    | SocialuniAppConfig.appConfig.disableContentHasQrCode     |
-| 必须设置校园才能发帖    | √    | SocialuniAppConfig.appConfig.mustSetSchoolCanPost     |
-| 必须实名认证才能发帖    | ×    | SocialuniAppConfig.appConfig.mustIdentityAuthCanPost     |
+| 功能点              | 是否支持 | 配置类属性 |
+|------------------|------|-------|
+| 社区功能，帖子，评论，点赞    | √    | 无     |
+| 帖子筛选，年龄，性别，城市，定位 | √    | 无     |
+| 圈子               | √    | 无     |
+| 话题               | √    | 无     |
+| 校园               | √    | 无     |
+| 首页tabs可配置        | √    | SocialuniAppConfig.appConfig.tabNames     |
+| 禁止发表未成年人内容       | √    | SocialuniAppConfig.appConfig.disableUnderageContent     |
+| 禁止发表包含联系方式的内容    | √    | SocialuniAppConfig.appConfig.disableContentHasContactInfo     |
+| 禁止发表包含二维码的内容     | √    | SocialuniAppConfig.appConfig.disableContentHasQrCode     |
+| 必须设置校园才能发帖       | √    | SocialuniAppConfig.appConfig.mustSetSchoolCanPost     |
+| 违禁词管理            | √    | 无     |
+| 敏感词管理            | √    | 无     |
+| 必须实名认证才能发帖       | ×    | SocialuniAppConfig.appConfig.mustIdentityAuthCanPost     |
+| 仅(男生，女生)性别社区     | ×    | SocialuniAppConfig.appConfig.appGender     |
+| 付费获取联系方式    | ×    |      |
 
 ## 后台管理功能点
 | 功能点           | 是否支持 | 配置类属性 |
