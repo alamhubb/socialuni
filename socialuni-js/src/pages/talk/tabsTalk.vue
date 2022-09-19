@@ -371,7 +371,7 @@ export default class TabsTalk extends Vue {
           } else {
             talkTabObj.talks.push(...res.data)
           }
-          this.queryTime = talkTabObj.talks[talkTabObj.talks.length - 1].updateTime
+          talkTabObj.queryTime = talkTabObj.talks[talkTabObj.talks.length - 1].updateTime
         } else {
           talkTabObj.talks = []
         }
