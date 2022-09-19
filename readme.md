@@ -27,6 +27,26 @@
   </tbody>
 </table>
 
+## 客户端功能点
+
+| 功能点           | 是否支持 | 配置类属性 |
+|---------------|------|-------|
+| 圈子            | √    | 无     |
+| 话题            | √    | 无     |
+| 首页tabs可配置     | √    | SocialuniAppConfig.appConfig.tabNames     |
+| 禁止发表未成年人内容    | √    | SocialuniAppConfig.appConfig.disableUnderageContent     |
+| 禁止发表包含联系方式的内容 | √    | SocialuniAppConfig.appConfig.disableContentHasContactInfo     |
+| 禁止发表包含二维码的内容  | √    | SocialuniAppConfig.appConfig.disableContentHasQrCode     |
+| 必须设置校园才能发帖    | √    | SocialuniAppConfig.appConfig.mustSetSchoolCanPost     |
+| 必须实名认证才能发帖    | ×    | SocialuniAppConfig.appConfig.mustIdentityAuthCanPost     |
+
+## 后台管理功能点
+| 功能点           | 是否支持 | 配置类属性 |
+|---------------|------|-------|
+| 支持内容审核        | √    | 无     |
+| 支持添加敏感词       | √    | 无     |
+| 支持实名认证审核      | √    | 无     |
+
 # 入门
 
 ## 文档相关网站地址
@@ -64,25 +84,25 @@ npm install
  ```
 npm run serve
 ```
-![img_3.png](./doc/imgs/img_3.png)
+![img_3.png](https://cdxapp-1257733245.file.myqcloud.com/socialuni/doc/readme/img_3.png)
 4. 使用浏览器打开 [http://localhost:8024/](http://localhost:8024/)，出现此图，则代表项目启动成功
 
-![img_4.png](./doc/imgs/img_4.png)
+![img_4.png](https://cdxapp-1257733245.file.myqcloud.com/socialuni/doc/readme/img_4.png)
 
 ### 后端模块
 
 1. 使用git clone https://gitee.com/socialuni/socialuni.git
 2. 打开socialuni项目，使用maven，install 安装socialuni-parent目录，安装后出现下图中内容则代表安装成功
 
-![img_2.png](./doc/imgs/img_2.png)
+![img_2.png](https://cdxapp-1257733245.file.myqcloud.com/socialuni/doc/readme/img_2.png)
 
 3. 安装成功后，启动socialuni-web项目，控制台出现以下内容则项目启动成功
 
-![img.png](./doc/imgs/img.png)
+![img.png](https://cdxapp-1257733245.file.myqcloud.com/socialuni/doc/readme/img.png)
 
 4. 在浏览器中输入 [https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks](https://localpc.socialuni.cn:8091/socialuni/talk/queryTalks)
 
-![img_1.png](./doc/imgs/img_1.png)
+![img_1.png](https://cdxapp-1257733245.file.myqcloud.com/socialuni/doc/readme/img_1.png)
 
 看到以下内容，则代表成功从中心获取到了动态数据
 
