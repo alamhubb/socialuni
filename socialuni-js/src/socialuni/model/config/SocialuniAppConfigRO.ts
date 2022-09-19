@@ -1,21 +1,27 @@
-import GenderType from "@/socialuni/constant/GenderType";
+export default class SocialuniAppConfigRO {
+  //首页的tab栏目
+  followTabName: string = null
+  homeTabName: string = null
+  cityTabName: string = null
+  selfSchoolTabName: string = null
+  tabNames: string[] = null
 
-export default class SocialuniAppConfigRO {//首页的tab栏目
+
   //是否禁止未成年人内容
-  disableUnderageContent = false;
+  disableUnderageContent: boolean = null;
 
   //是否禁止内容中包含联系方式
-  disableContentHasContactInfo = false;
+  disableContentHasContactInfo: boolean = null;
 
   //是否禁止内容中包含二维码
-  disableContentHasQrCode = false;
+  disableContentHasQrCode: boolean = null;
 
   //是否必须填写校园才允许发帖
-  mustSetSchoolCanPost = false;
+  mustSetSchoolCanPost: boolean = null;
 
   //todo 相关功能未实现 用户必须实名认证
-  userMustIdentityAuth = false;
+  userMustIdentityAuth: boolean = null;
 
   //配置3，应用性别
-  appGender = GenderType.all;
+  appGender: string = null
 }

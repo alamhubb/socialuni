@@ -88,6 +88,7 @@ export default class QPullRefresh extends Vue {
 
   //开启下拉刷新
   startPulldownRefresh () {
+    //避免频繁下拉
     if (+new Date() - this.timeDiff < 100) {
       return
     }
