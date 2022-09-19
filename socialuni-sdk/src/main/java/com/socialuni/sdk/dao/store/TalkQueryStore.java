@@ -142,7 +142,7 @@ public class TalkQueryStore {
             userTalkUnionIds = userTalkUnionIds.subList(0, 900);
         }
 
-        userTalkUnionIds = talkRepository.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), PageRequest.of(0, 10));
+        userTalkUnionIds = talkRepository.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), pageRequest);
         /*if (userTalkUnionIds.size() > 10) {
             userTalkUnionIds = userTalkUnionIds.subList(0, 10);
         }*/
