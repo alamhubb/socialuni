@@ -16,7 +16,7 @@ public interface TalkImgRepository extends JpaRepository<SocialuniTalkImgDO, Int
 
     @Cacheable(cacheNames = "getTalkImgUnionIdsByTalkIdTop3", key = "#talkId")
     @Query(nativeQuery = true, value = "select t.union_id from s_talk_img t where t.talk_id =:talkId order by t.id asc limit 3")
-    List<Integer> findUnionIdTop3ByTalkIdOrderByIdAsc(Integer talkId);
+    List<SocialuniTalkImgDO> findUnionIdTop3ByTalkIdOrderByIdAsc(Integer talkId);
 
     @Cacheable(cacheNames = "getTalkImgByUnionId", key = "#unionId")
     SocialuniTalkImgDO findOneByUnionId(Integer unionId);
