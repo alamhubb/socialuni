@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("report")
+@RequestMapping("talkImgAudit")
 //照片是否成年认证审核
 public class TalkImgAdultAuditController {
     @Resource
