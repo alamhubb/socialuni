@@ -5,6 +5,7 @@ import SocialTalkTabCircleRO from '@/socialuni/model/community/circle/SocialTalk
 export default class TalkTabVO {
   name: string = null
   circle: SocialTalkTabCircleRO = null
+  //有用的，需要根据此判断进入添加talk也面是否自定带入
   type: string = null
   talks: TalkVO[] = []
   firstLoad: boolean = true

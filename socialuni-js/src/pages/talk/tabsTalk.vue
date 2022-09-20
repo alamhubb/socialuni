@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <q-pull-refresh ref="pullRefresh" @refresh="queryEnd">
+    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh">
       <swiper :current="currentTabIndex"
               :style="{
               'height':'calc(100vh - '+talksListHeightSub+'px)',
@@ -32,7 +32,7 @@
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
 
-          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="onreachBottom"
+          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
                        :scroll-top="talkTabs[swiperIndex].scrollTop"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
@@ -106,7 +106,8 @@
 
               <!-- 下拉刷新组件 -->
               <view class="mt-xs">
-                <uni-load-more :status="talkTabs[swiperIndex].loadMore" @click.native="queryEnd"
+                <uni-load-more :status="talkTabs[swiperIndex].loadMore"
+                               @click.native="clickOnreachBottom"
                                :contentText="loadMoreText"></uni-load-more>
               </view>
             </div>
@@ -127,18 +128,15 @@
     <!--            除去搜索栏和导航栏的高度就是剩余高度-->
 
     <!--        默认附近，可以切换城市，城市-->
-
-    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
-
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
 
     <social-talk-filter-dialog ref="talkFilterDialog"
-                               @confirm="tabsChange(currentTabIndex)"></social-talk-filter-dialog>
+                               @confirm="startPullDown"></social-talk-filter-dialog>
   </view>
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import SocialuniTalkAPI from '../../socialuni/api/socialuni/SocialuniTalkAPI'
 import CenterUserDetailRO from '../../socialuni/model/social/CenterUserDetailRO'
@@ -170,14 +168,12 @@ import PageUtil from '../../socialuni/utils/PageUtil'
 import QPullRefresh from '@/qing-ui/components/QPullRefresh/QPullRefresh.vue'
 import TagVO from '@/socialuni/model/community/tag/TagVO'
 import SocialTalkFilterDialog from '@/pages/talk/SocialTalkFilterDialog.vue'
-import QCityPicker from '@/components/QCityPicker/QCityPicker.vue'
 
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
-    QCityPicker,
     SocialTalkFilterDialog,
     QPullRefresh,
     QIcon,
@@ -192,13 +188,12 @@ export default class TabsTalk extends Vue {
   $refs: {
     pullRefresh: QPullRefresh
     talkFilterDialog: SocialTalkFilterDialog
-    cityPicker: QCityPicker
   }
   @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
   @socialLocationStore.Getter('location') location: DistrictVO
 
   // 轮播图
-  configShowSwipers() {
+  configShowSwipers () {
     return socialConfigModule.appMoreConfig.showSwipers
   }
 
@@ -209,21 +204,21 @@ export default class TabsTalk extends Vue {
     contentnomore: '没有更多数据了,点击刷新'
   }
 
-  get followTabName() {
+  get followTabName () {
     return socialConfigModule.appConfig.followTabName
   }
 
-  get homeTabName() {
+  get homeTabName () {
     return socialConfigModule.appConfig.homeTabName
   }
 
-  get cityTabName() {
+  get cityTabName () {
     return socialConfigModule.appConfig.cityTabName
   }
 
   // 用户登录后重新查询
   @Watch('user')
-  watchUserChange() {
+  watchUserChange () {
     //系统不为首次加载
     //必须有this.talkTabObj 且 不为首次加载才行
     if (this.curTalkTabObj && !this.curTalkTabObj.firstLoad) {
@@ -242,7 +237,7 @@ export default class TabsTalk extends Vue {
   readonly talkCacheNum: number = 4
 
   // 生命周期
-  created() {
+  created () {
     // this.talkTabs = TalkAPI.queryHomeTalkTabsAPI()
     // LocationUtil.getCityByIpWebAPI()
     // 更新广告状态
@@ -253,13 +248,13 @@ export default class TabsTalk extends Vue {
     // 获取位置，查询同城talks使用
   }
 
-  mounted() {
+  mounted () {
     // 获取元素高度，用来计算scroll-view高度
     this.getTabBarTop()
   }
 
   // 供父组件调用，每次隐藏把数据缓存进storage
-  tabsTalkOnHide() {
+  tabsTalkOnHide () {
     // 存入store
     const storeTalkTabs: TalkTabVO[] = []
     this.talkTabs.forEach(item => {
@@ -272,11 +267,13 @@ export default class TabsTalk extends Vue {
   }
 
 
+  @socialUserStore.State('user') user: CenterUserDetailRO
+
   tabsHeight = 0
   // 去除的高度,单位px
   talksListHeightSub = 0
 
-  getTabBarTop() {
+  getTabBarTop () {
     this.tabsHeight = 40
     // h5有头顶和下边导航栏都算了高度
     // #ifdef H5
@@ -288,45 +285,109 @@ export default class TabsTalk extends Vue {
     // #endif
   }
 
-
-  @socialUserStore.State('user') user: CenterUserDetailRO
-  @socialTagStore.State('tags') tags: TagVO[]
-
-  // 页面是否为首次查询
-
-  get HotTags() {
-    return this.tags.slice(0, 10)
-  }
-
-  //供父组件使用，不可删除
-  initQuery() {
-    //首次打开talk页面，获取用户位置用来查询
-    socialLocationModule.appLunchInitDistrict().then(() => {
-      this.startPullDown()
-    })
-  }
-
-  openTalkFilterDialog() {
+  openTalkFilterDialog () {
     this.$refs.talkFilterDialog.open()
   }
 
-  // scroll-view到底部加载更多
-  onreachBottom(e) {
-    // 只要不是没有了就还可以加载
-    if (this.curTalkTabObj.loadMore === LoadMoreType.more) {
-      this.autoChooseUseLocationQueryTalks(false)
+  //供父组件使用，不可删除
+  initQuery () {
+    //首次打开talk页面，获取用户位置用来查询
+    socialLocationModule.appLunchInitDistrict().then(() => {
+      this.manualPulldownRefresh()
+    })
+  }
+
+  //js触发下拉刷新效果
+  startPullDown () {
+    this.tabScrollToTop()
+    this.$refs.pullRefresh.startPulldownRefresh()
+  }
+  tabScrollToTop () {
+    this.curTalkTabObj.scrollTop = 0
+  }
+
+  //用户手动执行下拉刷星
+  private manualPulldownRefresh () {
+    this.tabScrollToTop()
+    this.curTalkTabObj.queryTime = new Date()
+    this.curTalkTabObj.firstLoad = true
+    this.clickOnreachBottom()
+  }
+
+  //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
+  async clickOnreachBottom () {
+    //停止查询方法
+    const talkTab = this.curTalkTabObj
+    if (talkTab) {
+      //如果正在查询，则停止查询，没办法省略因为修改和使用的是一个变量
+      if (talkTab.loadMore === LoadMoreType.loading) {
+        talkTab.loadMore = LoadMoreType.more
+      } else {
+        talkTab.loadMore = LoadMoreType.more
+        //如果正在查询，则更改状态为加载更多,点击暂停加载。
+        await this.autoChooseUseLocationQueryTalks()
+      }
+      this.$refs.pullRefresh.endPulldownRefresh()
     }
   }
 
+  // scroll-view到底部加载更多
   //如果用户开了定位，就获取经纬度去查询，如果用户没开启定位，就不使用经纬度，没必要每次都获取经纬度。
-  async autoChooseUseLocationQueryTalks(firstLoad?: boolean) {
+  async autoChooseUseLocationQueryTalks () {
+    const talkTabObj = this.curTalkTabObj
+    //只有在传false时校验后面的
+    const firstLoad = talkTabObj.firstLoad
     //只有不为加载中才可以加载
     //手动刷新可以刷新，或者为
     if (this.curTalkTabObj.loadMore === LoadMoreType.more || firstLoad) {
+      const newTalks = []
       // 执行正在加载动画
       this.curTalkTabObj.loadMore = LoadMoreType.loading
       // if (firstLoad) {
-      await this.queryTalks(firstLoad)
+      // 默认地理位置是北京，以后可以根据ip获取当前城市
+      // 话题的话显示最热门的话题，且只查询包含话题的动态
+      if (firstLoad) {
+        talkTabObj.firstLoad = false
+        //如果首页刷新时，查询置顶动态
+        if (talkTabObj.name === socialConfigModule.appConfig.homeTabName) {
+          //查询置顶冬天
+          SocialuniTalkAPI.queryStickTalksAPI().then(res => {
+            const stickTalks = res.data
+            if (stickTalks.length) {
+              newTalks.unshift(...stickTalks)
+            }
+          })
+        }
+      }
+      return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames).then((res: any) => {
+        // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
+        if (talkTabObj.loadMore === LoadMoreType.loading) {
+          if (res.data && res.data.length) {
+            if (firstLoad) {
+              newTalks.push(...res.data)
+              talkTabObj.talks = newTalks
+            } else {
+              talkTabObj.talks.push(...res.data)
+            }
+            talkTabObj.queryTime = talkTabObj.talks[talkTabObj.talks.length - 1].updateTime
+          } else {
+            talkTabObj.talks = []
+          }
+          // 如果还有大于等于10个就还可以加载
+          //scroll-view的坑，如果不这么写，同步修改的话，会立马触发下次滚动到底部事件
+          CommonUtil.delayTime(100).then(() => {
+            // 如果还有大于等于10个就还可以加载
+            if (res.data && res.data.length >= this.lazyLoadNum) {
+              talkTabObj.loadMore = LoadMoreType.more
+            } else {
+              // 否则没有了
+              talkTabObj.loadMore = LoadMoreType.noMore
+            }
+          })
+        }
+      }).catch(() => {
+        talkTabObj.loadMore = LoadMoreType.more
+      })
       // }
       //首次时加载地理位置就好了，之后就是点击定位的时候加载
       /*if (locationModule.openLocation) {
@@ -337,93 +398,7 @@ export default class TabsTalk extends Vue {
     }
   }
 
-  // 默认地理位置是北京，以后可以根据ip获取当前城市
-  // 话题的话显示最热门的话题，且只查询包含话题的动态
-  async queryTalks(firstLoad?: boolean) {
-    const talkTabObj = this.curTalkTabObj
-    //只有在传false时校验后面的
-    const fistLoad = firstLoad || talkTabObj.firstLoad
-    const newTalks = []
-    if (firstLoad) {
-      this.refreshQueryDate()
-      //如果首页刷新时，查询置顶动态
-      if (talkTabObj.name === socialConfigModule.appConfig.homeTabName) {
-        //查询置顶冬天
-        SocialuniTalkAPI.queryStickTalksAPI().then(res => {
-          const stickTalks = res.data
-          if (stickTalks.length) {
-            newTalks.unshift(...stickTalks)
-          }
-        })
-      }
-    }
-    // query condition
-    CommonUtil.delayTime(0).then(() => {
-      talkTabObj.firstLoad = false
-    })
-    return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames).then((res: any) => {
-      // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
-      if (talkTabObj.loadMore === LoadMoreType.loading) {
-        if (res.data && res.data.length) {
-          if (fistLoad) {
-            newTalks.push(...res.data)
-            talkTabObj.talks = newTalks
-          } else {
-            talkTabObj.talks.push(...res.data)
-          }
-          talkTabObj.queryTime = talkTabObj.talks[talkTabObj.talks.length - 1].updateTime
-        } else {
-          talkTabObj.talks = []
-        }
-        // 如果还有大于等于10个就还可以加载
-        //scroll-view的坑，如果不这么写，同步修改的话，会立马触发下次滚动到底部事件
-        CommonUtil.delayTime(100).then(() => {
-          // 如果还有大于等于10个就还可以加载
-          if (res.data && res.data.length >= this.lazyLoadNum) {
-            talkTabObj.loadMore = LoadMoreType.more
-          } else {
-            // 否则没有了
-            talkTabObj.loadMore = LoadMoreType.noMore
-          }
-        })
-      }
-    }).catch(() => {
-      talkTabObj.loadMore = LoadMoreType.more
-    })
-  }
-
-  async queryEnd() {
-    //停止查询方法
-    const talkTab = this.curTalkTabObj
-    if (talkTab) {
-      //如果正在查询，则更改状态为加载更多
-      const loadMoreState = talkTab.loadMore
-      if (loadMoreState === LoadMoreType.loading) {
-        talkTab.loadMore = LoadMoreType.more
-      } else {
-        await this.autoChooseUseLocationQueryTalks(true)
-        this.$refs.pullRefresh.endPulldownRefresh()
-      }
-    }
-  }
-
-  startPullDown() {
-    this.$refs.pullRefresh.startPulldownRefresh()
-  }
-
-  refreshQueryDate() {
-    this.curTalkTabObj.queryTime = new Date()
-  }
-
-  // 展示的talks
-  get talkIds() {
-    if (this.talks.length) {
-      return this.talks.map(item => item.id)
-    }
-    return []
-  }
-
-  get talks(): TalkVO[] {
+  get talks (): TalkVO[] {
     if (this.talkTabs && this.talkTabs.length) {
       return this.curTalkTabObj.talks
     }
@@ -431,11 +406,11 @@ export default class TabsTalk extends Vue {
   }
 
   // 被举报后前台删除talk
-  deleteTalk(talkId: string) {
+  deleteTalk (talkId: string) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
-  get curTalkTabObj() {
+  get curTalkTabObj () {
     if (this.talkTabs && this.talkTabs.length) {
       return this.talkTabs[this.currentTabIndex]
     } else {
@@ -449,17 +424,16 @@ export default class TabsTalk extends Vue {
   // swiper组件的current值，表示当前那个swiper-item是活动的
 
   // tabs通知swiper切换
-  tabsChange(index) {
+  async tabsChange (index) {
     if (index === this.currentTabIndex) {
-      this.curTalkTabObj.scrollTop = 0
-      this.startPullDown()
+      this.tabScrollToTop()
       return
     }
     socialTalkModule.setCurTabIndexUpdateCircle(index)
   }
 
   // talkSwipe
-  async talkSwiperChange(e) {
+  async talkSwiperChange (e) {
     const current = e.detail.current
     const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
     // 存入store
@@ -473,29 +447,20 @@ export default class TabsTalk extends Vue {
     })
     //如果首次加载，则需要查询
     if (curTab.firstLoad) {
-      await this.autoChooseUseLocationQueryTalks(true)
+      this.startPullDown()
       this.tabsTalkOnHide()
     }
   }
 
-  openCityPicker() {
-    this.$refs.cityPicker.open()
-  }
-
-  cityChange(district: DistrictVO) {
-    socialLocationModule.setLocation(district)
-    this.startPullDown()
-  }
-
   // 每次查询几条
-  get lazyLoadNum(): number {
+  get lazyLoadNum (): number {
     return socialConfigModule.appMoreConfig[Constants.everyLoadNum] || Constants.everyLoadNum_number
   }
 
   showAd = false
 
   // 广告相关
-  updateShowAd() {
+  updateShowAd () {
     // 如果展示广告
     // 获取上次展示时间
     const lastDateStr: string = StorageUtil.get(Constants.lastShowAdTime)
@@ -511,16 +476,16 @@ export default class TabsTalk extends Vue {
   }
 
   // 默认30分钟展示1次
-  get showAdMinutes(): number {
+  get showAdMinutes (): number {
     return socialConfigModule.appMoreConfig[Constants.talkShowAdTimeInterval] || Constants.talkShowAdTimeIntervalDefault
   }
 
-  get showAdIndexList(): number[] {
+  get showAdIndexList (): number[] {
     return socialConfigModule.appMoreConfig[Constants.talkShowAdIndexListKey] || Constants.talkShowAdIndexAryDefault
   }
 
   @Watch('talks')
-  watchTalks() {
+  watchTalks () {
     // 如果已有talk数量大于系统阀值，加载出来第2页后，就重置下次看广告时间
     if (this.showAd && this.talks.length >= 50) {
       StorageUtil.set(Constants.lastShowAdTime, String(new Date()))
@@ -533,7 +498,7 @@ export default class TabsTalk extends Vue {
   timeout = null
 
   // app端兼容问题，滚动页面评论input不会失去焦点，需要手动控制
-  talksScrollEvent({detail}) {
+  talksScrollEvent ({ detail }) {
     // 如果处于获取焦点状态，则失去焦点
     if (socialTalkModule.inputContentFocus) {
       socialTalkModule.inputContentBlur()
@@ -549,7 +514,7 @@ export default class TabsTalk extends Vue {
 
   throttleScroll = CommonUtil.throttle(this.scrollHandler, 300)
 
-  scrollHandler() {
+  scrollHandler () {
     //如果向下滚动超过50隐藏
     if (this.curScrollTop > (this.lastScrollTop + 500)) {
       uni.hideTabBar()
@@ -564,7 +529,7 @@ export default class TabsTalk extends Vue {
     this.lastScrollTop = this.curScrollTop
   }
 
-  toLoginVue() {
+  toLoginVue () {
     PageUtil.toMinePage()
   }
 }
