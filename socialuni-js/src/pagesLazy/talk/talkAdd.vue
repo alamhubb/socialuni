@@ -261,8 +261,6 @@ export default class TalkAddView extends Vue {
     this.circleName = socialCircleModule.circleName
     this.district = socialLocationModule.cityLocation
 
-    socialTagModule.getTagTypesAction()
-
     //默认获取当前位置，可以修改
     //发布时获取下没问题，不应该使用筛选条件的，使用webapi获取大概位置，不需要用户授权的
     LocationUtil.getLocationNotAuth().then((district: DistrictVO) => {

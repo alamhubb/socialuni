@@ -107,7 +107,6 @@ export default class LocationUtil {
     } else {
       hasAuth = socialLocationModule.openLocation
     }
-    console.log(hasAuth)
     //如果非小程序，获取用户是否授权过，授权过使用组合方式
     //如果用户已经授权过地理位置了
     if (hasAuth) {
