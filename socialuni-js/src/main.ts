@@ -17,7 +17,9 @@ Object.keys(utils).forEach(key => {
 })
 
 // 全局混入social必要内容
-// Vue.mixin(SocialMinxinVue)
+// #ifdef MP-QQ
+Vue.mixin(SocialMinxinVue)
+// #endif
 
 new App({
   store

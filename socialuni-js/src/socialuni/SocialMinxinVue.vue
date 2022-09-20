@@ -7,7 +7,7 @@ import PageUtil from '@/socialuni/utils/PageUtil'
 @Component
 export default class SocialMinxinVue extends Vue {
   pageOnloadDate = new Date()
-
+/*
   onLoad () {
     this.pageOnloadDate = new Date()
     // console.log('onLoad')
@@ -63,6 +63,17 @@ export default class SocialMinxinVue extends Vue {
       console.log(timeDiff)
       console.log(RouterUtil.getCurrentPageURI())
       console.log('updated')
+    }
+  }*/
+
+  onShareAppMessage () {
+    const title = '年轻人生活分享社区'
+    const path = '/pages/talk'
+    const imageUrl = 'https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/full.jpg!avatar'
+    return {
+      title: title,
+      path: path,
+      imageUrl: imageUrl
     }
   }
 }
