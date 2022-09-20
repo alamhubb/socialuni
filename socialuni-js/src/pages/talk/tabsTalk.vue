@@ -367,22 +367,17 @@ export default class TabsTalk extends Vue {
       return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames).then((res: any) => {
         // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
         if (talkTabObj.loadMore === LoadMoreType.loading) {
-          if (res.data && res.data.length) {
+          if (res.data) {
             if (firstLoad) {
               //必须这么写，要不然存在置顶后返回的情况就有问题了，也不能直接使用talkTabObj.talks.push。那样会存在闪烁的情况那样等于分了两次push
               resDataTalks.push(...res.data)
               //首次加载，则重新赋值重置内容
               talkTabObj.talks = resDataTalks
+              talkTabObj.queryTime = new Date()
             } else {
               //追加新内容
               talkTabObj.talks.push(...res.data)
-            }
-            talkTabObj.queryTime = res.data[res.data.length - 1].updateTime
-          } else {
-            //首次加载无论是否有值都重新赋值
-            if (firstLoad) {
-              talkTabObj.talks = resDataTalks
-              talkTabObj.queryTime = new Date()
+              talkTabObj.queryTime = res.data[res.data.length - 1].updateTime
             }
           }
           // 如果还有大于等于10个就还可以加载
