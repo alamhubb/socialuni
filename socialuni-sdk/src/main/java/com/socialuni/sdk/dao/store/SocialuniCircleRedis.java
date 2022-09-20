@@ -1,17 +1,17 @@
 package com.socialuni.sdk.dao.store;
 
-import com.socialuni.sdk.logic.factory.community.SociaCircleTypeROFactory;
-import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
-import com.socialuni.sdk.utils.SocialTagStore;
+import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
+import com.socialuni.sdk.dao.redis.redisKey.CircleRedisKey;
+import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
+import com.socialuni.sdk.logic.factory.community.SociaCircleTypeROFactory;
+import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
-import com.socialuni.sdk.dao.repository.community.TagRepository;
-import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -23,11 +23,7 @@ import java.util.List;
 @Component
 public class SocialuniCircleRedis {
     @Resource
-    private TagRepository tagRepository;
-    @Resource
     private SocialuniTagTypeRepository tagTypeRepository;
-    @Resource
-    private SocialTagStore socialTagStore;
     @Resource
     private SocialCircleRepository socialCircleRepository;
 
@@ -44,52 +40,38 @@ public class SocialuniCircleRedis {
         return circleROS;
     }
 
-   /* @Cacheable(cacheNames = "circlesAll", key = "#appGenderType")
-    public List<TagRO> getAllCirclesRedis(String appGenderType) {
-        List<TagDO> tagDOS;
-        if (appGenderType.equals(GenderType.all)) {
-            tagDOS = tagRepository.findAllByStatusOrderByCountDesc(ContentStatus.enable);
-        } else {
-            tagDOS = tagRepository.findAllByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, appGenderType);
-        }
-        return SocialTagROFactory.tagDOToROS(tagDOS);
-    }*/
-
-
-  /*  @Cacheable(cacheNames = "circleTypesHot", key = "#appGenderType")
-    public List<TagTypeRO> getHotCircleTypesRedis(String appGenderType) {
-        List<TagTypeRO> initTagTypes = new ArrayList<>();
+    @Cacheable(cacheNames = "circleTypesHot", key = "#appGenderType")
+    public List<CircleTypeRO> getHotCircleTypesRedis(String appGenderType) {
+        List<CircleTypeRO> initCircleTypes = new ArrayList<>();
         //插入一个热门类别
-        initTagTypes.add(getHotCircleType(appGenderType));
+        initCircleTypes.add(getHotCircleType(appGenderType));
 
         //转成vo
-        List<TagTypeDO> tagTypes = getCircleTypes();
-        initTagTypes.addAll(SocialTagTypeROFactory.tagDOToROS(tagTypes));
-        return initTagTypes;
+        List<SocialuniTagTypeDO> tagTypes = getCircleTypes();
+        initCircleTypes.addAll(SociaCircleTypeROFactory.tagDOToROS(tagTypes));
+        return initCircleTypes;
     }
-*/
 
     @Cacheable(cacheNames = "circleTypesAll", key = "#appGenderType")
     public List<CircleTypeRO> getAllCircleTypesRedis(String appGenderType) {
-        List<CircleTypeRO> initTagTypes = new ArrayList<>();
+        List<CircleTypeRO> initCircleTypes = new ArrayList<>();
         //插入一个热门类别，根据性别获取一个
-        initTagTypes.add(getHotCircleType(appGenderType));
+        initCircleTypes.add(getHotCircleType(appGenderType));
         //查询全部，但是不查询子节点
         List<SocialuniTagTypeDO> tagTypes = getCircleTypes();
-        initTagTypes.addAll(circleTypesSetCircles(tagTypes, appGenderType));
-        return initTagTypes;
+        initCircleTypes.addAll(circleTypesSetCircles(tagTypes, appGenderType));
+        return initCircleTypes;
     }
-
 
     //获取热门类型的tagtype
     private CircleTypeRO getHotCircleType(String appGenderType) {
         //插入一个热门类别
-        CircleTypeRO hotTagTypeRO = new CircleTypeRO();
-        hotTagTypeRO.setId(9999);
-        hotTagTypeRO.setName("热门");
+        CircleTypeRO hotCircleTypeRO = new CircleTypeRO();
+        hotCircleTypeRO.setId(9999);
+        hotCircleTypeRO.setName("热门");
 
-        hotTagTypeRO.setCircles(getHotCirclesRedis(appGenderType));
-        return hotTagTypeRO;
+        hotCircleTypeRO.setCircles(getHotCirclesRedis(appGenderType));
+        return hotCircleTypeRO;
     }
 
 
@@ -124,7 +106,7 @@ public class SocialuniCircleRedis {
                 }
             } else {
                 CircleTypeRO tagTypeRO = SociaCircleTypeROFactory.getCircleTypeRO(tagTypeDO);
-                tagTypeRO.setCircles(getCirclesByTagTypeDOAndGender(tagTypeDO, appGenderType));
+                tagTypeRO.setCircles(getCirclesByCircleTypeDOAndGender(tagTypeDO, appGenderType));
                 tagTypeROS.add(tagTypeRO);
             }
         }
@@ -132,21 +114,20 @@ public class SocialuniCircleRedis {
     }
 
     //根据typeid获取所有
-    public List<SocialCircleRO> getCirclesByTagTypeDOAndGender(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
+    public List<SocialuniCircleDO> getCirclesByCircleTypeId(Integer tagTypeId) {
+        // 从数据库中获取tag列表
+        return socialCircleRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeId, ContentStatus.enable);
+    }
+
+    //根据typeid获取所有
+    public List<SocialCircleRO> getCirclesByCircleTypeDOAndGender(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
         List<SocialuniCircleDO> tagDOS;
         if (appGenderType.equals(GenderType.all)) {
-            tagDOS = getCirclesByTagTypeId(tagTypeDO.getId());
+            tagDOS = getCirclesByCircleTypeId(tagTypeDO.getId());
         } else {
             tagDOS = socialCircleRepository.findByTagTypeIdAndStatusAndVisibleGenderOrderByCountDesc(tagTypeDO.getId(), ContentStatus.enable, appGenderType);
         }
         // 从数据库中获取tag列表
         return SocialCircleROFactory.circleDOToROS(tagDOS);
-    }
-
-
-    //根据typeid获取所有
-    public List<SocialuniCircleDO> getCirclesByTagTypeId(Integer tagTypeId) {
-        // 从数据库中获取tag列表
-        return socialCircleRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeId, ContentStatus.enable);
     }
 }
