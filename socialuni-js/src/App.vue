@@ -7,7 +7,6 @@ export default Vue.extend({
   mpType: 'app',
   onLaunch() {
     socialSystemModule.getSystemInfo()
-    console.log(socialSystemModule.systemInfo)
     //如果有跳转信息
     socialAppModule.appLunchAction()
     UniUtil.showShareMenu()

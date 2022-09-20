@@ -18,6 +18,10 @@ export default class SocialuniCircleAPI {
     return request.get<SocialCircleRO []>('socialuni/circle/queryHotCircles')
   }
 
+  static queryHotCircleTypesAPI() {
+    return request.get<CircleTypeRO []>('socialuni/circle/queryHotCircleTypes')
+  }
+
   static queryCircleTypesAPI() {
     return request.get<CircleTypeRO []>('socialuni/circle/queryCircleTypes')
   }
