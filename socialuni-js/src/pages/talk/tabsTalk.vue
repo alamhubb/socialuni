@@ -197,7 +197,6 @@ export default class TabsTalk extends Vue {
     return socialConfigModule.appMoreConfig.showSwipers
   }
 
-  readonly loading: string = LoadMoreType.loading
   loadMoreText = {
     contentdown: '点击显示更多',
     contentrefresh: '正在加载...',
@@ -318,6 +317,7 @@ export default class TabsTalk extends Vue {
     this.clickOnreachBottom()
   }
 
+
   //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
   async clickOnreachBottom () {
     //停止查询方法
@@ -373,10 +373,11 @@ export default class TabsTalk extends Vue {
               resDataTalks.push(...res.data)
               //首次加载，则重新赋值重置内容
               talkTabObj.talks = resDataTalks
-              talkTabObj.queryTime = new Date()
             } else {
               //追加新内容
               talkTabObj.talks.push(...res.data)
+            }
+            if (res.data.length) {
               talkTabObj.queryTime = res.data[res.data.length - 1].updateTime
             }
           }
