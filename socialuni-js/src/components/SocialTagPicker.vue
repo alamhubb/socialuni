@@ -5,7 +5,7 @@
     </template>
     <div class="h80vh">
       <scroll-view class="h100p" scroll-y v-if="searchText">
-        <view v-for="tag in showTags" :key="tag.name" @click="change(tag)"
+        <view v-for="tag in showTags" :key="tag.id" @click="change(tag)"
               class="article-row row-between solid-bottom">
           <text>
             #{{ tag.name }}
@@ -77,7 +77,13 @@ export default class SocialTagPicker extends Vue {
 
   get showTags () {
     //去除热门，要不然会存在重复
-    return this.tagTypes.slice(1, this.tagTypes.length - 1).flatMap(item => item.tags.filter(tag => tag.name.includes(this.searchText)))
+    return this.tagTypes.slice(1, this.tagTypes.length - 1)
+      .flatMap(item => {
+        if (item && item.tags) {
+          return item.tags.filter(tag => tag.name.includes(this.searchText))
+        }
+        return []
+      })
   }
 
   searchText = ''
