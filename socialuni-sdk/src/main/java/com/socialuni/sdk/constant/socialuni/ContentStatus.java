@@ -16,7 +16,7 @@ public class ContentStatus extends CommonStatus {
     public static final String preAudit = ConstStatus.preAudit;
 
     //审核中
-    public static final String audit = ConstStatus.audit;
+    public static final String auditing = ConstStatus.auditing;
 
     //违规
     public static final String violation = ConstStatus.violation;
@@ -28,7 +28,7 @@ public class ContentStatus extends CommonStatus {
     public static final List<String> selfCanSeeContentStatus = Arrays.asList(ContentStatus.enable, ContentStatus.preAudit);
 
     //查询 不为审核中的内容
-    public static final List<String> auditStatus = Arrays.asList(ContentStatus.preAudit, ContentStatus.audit);
+    public static final List<String> auditStatus = Arrays.asList(ContentStatus.preAudit, ContentStatus.auditing);
    /* //启用
     public static final String normal = "正常";
     //删除

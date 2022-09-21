@@ -81,7 +81,7 @@ public class SoicialuniUserAddReportDomain {
         Integer reportCountHide = SocialuniAppConfig.getAppMoreConfig().getReportCountHide();
         //大于阀值，更改动态和用户状态，否则只增加举报此数
         if (modelReportNum >= reportCountHide) {
-            modelDO.setStatus(ContentStatus.audit);
+            modelDO.setStatus(ContentStatus.auditing);
             //如果被举报的用户是官方，则不修改官方的用户状态、只存在于官方自己举报自己时，也不能修改自己的用户状态
             if (!receiveUser.getType().equals(UserType.system)) {
                 //只有用户为正常时，才改为待审核，如果用户已被封禁则不改变状态

@@ -16,10 +16,20 @@ import java.util.Objects;
 public class SocialuniTalkDOUtil {
 
     private static TalkRepository talkRepository;
+    private static SocialuniTalkDORedis socialuniTalkDORedis;
+
+    @Resource
+    public void setSocialuniTalkDORediss(SocialuniTalkDORedis socialuniTalkDORediss) {
+        SocialuniTalkDOUtil.socialuniTalkDORedis = socialuniTalkDORediss;
+    }
 
     @Resource
     public void setTalkRepository(TalkRepository talkRepository) {
         SocialuniTalkDOUtil.talkRepository = talkRepository;
+    }
+
+    public static SocialuniTalkDO save(SocialuniTalkDO talkDO) {
+        return socialuniTalkDORedis.save(talkDO);
     }
 
     public static SocialuniTalkDO getTalkNotNull(Integer talkUnionId) {

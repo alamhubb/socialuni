@@ -1,7 +1,8 @@
 <template>
   <div class="h100p flex-col">
     <div class="flex-none flex-row">
-      <el-button class="w30p h50" type="primary" :disabled="userReports.length" @click="reportPassList">审核全部</el-button>
+      <el-button class="w30p h50" type="primary" :disabled="userReports.length" @click="reportPassList">审核全部
+      </el-button>
       <!--      <el-button @click="testRequet">test测试</el-button>-->
       <div class="flex-none flex-row w68p">
         <!--        <div class="row-col-center w50r">
@@ -25,17 +26,17 @@
               v-model="userId"
             />-->
             <el-input
-              v-model="phoneNum"
-              @click.native.stop="queryUserContentsByPhoneNums"
+                v-model="phoneNum"
+                @click.native.stop="queryUserContentsByPhoneNums"
             />
           </div>
           <el-button type="primary" class="ml-sm" @click="queryUserContentsByPhoneNums">查询</el-button>
           <el-button type="primary" class="ml-sm" @click="clearPhoneNum">清空</el-button>
           <el-button
-            type="primary"
-            class="ml-sm"
-            :disabled="!(phoneNum && userReports.length > 0 && (userReports[0].user.status === $const.UserStatus.violation))"
-            @click="removeUserBanByPhoneNum"
+              type="primary"
+              class="ml-sm"
+              :disabled="!(phoneNum && userReports.length > 0 && (userReports[0].user.status === $const.UserStatus.violation))"
+              @click="removeUserBanByPhoneNum"
           >解封
           </el-button>
 
@@ -48,14 +49,14 @@
     <div v-if="talk" class="flex-auto overflow-scroll">
       {{ talk.content }}
       <div
-        v-for="img in talk.imgs"
-        :key="img.id"
+          v-for="img in talk.imgs"
+          :key="img.id"
       >
         <el-image
-          style="width: 200px; height: 200px"
-          fit="contain"
-          :src="getImgUrl(img.src,talk.userId)"
-          aspect-ratio="1"
+            style="width: 200px; height: 200px"
+            fit="contain"
+            :src="getImgUrl(img.src,talk.userId)"
+            aspect-ratio="1"
         />
       </div>
       <div v-for="comment in talk.comments">
@@ -64,42 +65,42 @@
     </div>
 
     <el-table
-      v-else
-      class="flex-auto"
-      height="100"
-      :data="tableData"
-      border
+        v-else
+        class="flex-auto"
+        height="100"
+        :data="tableData"
+        border
     >
       <!--              @row-click="tableRowClick"-->
       <el-table-column
-        label="序号"
-        type="index"
+          label="序号"
+          type="index"
       />
       <el-table-column
-        width="40"
-        :render-header="colHeaderRender"
+          width="40"
+          :render-header="colHeaderRender"
       >
         <template #default="{row}">
           <div>
             <el-checkbox
-              v-model="row.checked"
-              @click.native.stop
+                v-model="row.checked"
+                @click.native.stop
             />
           </div>
         </template>
       </el-table-column>
       <el-table-column
-        label="用户"
-        width="120"
+          label="用户"
+          width="120"
       >
         <template #default="{row}">
           <div>
             <el-image
-              style="width: 100px; height: 100px"
-              fit="contain"
-              :src="row.user.avatar"
-              :preview-src-list="[row.user.avatar]"
-              :z-index="999"
+                style="width: 100px; height: 100px"
+                fit="contain"
+                :src="row.user.avatar"
+                :preview-src-list="[row.user.avatar]"
+                :z-index="999"
             />
             <div>
               {{ row.user.id }}--{{ row.user.status }}
@@ -112,21 +113,36 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="违规原因"
-        width="160"
+          label="违规原因"
+          width="160"
       >
         <template #default="{row}">
-          <el-radio-group v-if="!userReports.length" v-model="row.violateType">
-            <div v-for="reportType in reportTypes">
-              <el-radio
-                :key="reportType"
-                class="pt-sm"
-                :label="reportType"
-                :value="reportType"
-              />
-            </div>
-          </el-radio-group>
-          <div v-else> {{ row.violateType }}</div>
+          <!--          区分是否查询用户的-->
+          <div v-if="userReports.length"> {{ row.violateType }}</div>
+          <template v-else>
+            <el-radio-group v-if="row.auditContentType === $const.SocialuniAuditContentType.report"
+                            v-model="row.violateType"
+            >
+              <div v-for="reportType in reportTypesFilter">
+                <el-radio
+                    :key="reportType"
+                    class="pt-sm"
+                    :label="reportType"
+                    :value="reportType"
+                />
+              </div>
+            </el-radio-group>
+            <el-radio-group v-else v-model="row.violateType">
+              <div v-for="reportType in reportTypesUnderage">
+                <el-radio
+                    :key="reportType"
+                    class="pt-sm"
+                    :label="reportType"
+                    :value="reportType"
+                />
+              </div>
+            </el-radio-group>
+          </template>
         </template>
       </el-table-column>
       <el-table-column label="违规关键词" width="150">
@@ -140,33 +156,33 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="图片"
-        width="300"
+          label="图片"
+          width="300"
       >
         <template #default="{row}">
           <div class="flex-row">
             <el-image
-              v-for="(img) in row.talk.imgs"
-              :key="img.id"
-              style="width: 200px; height: 200px"
-              fit="contain"
-              :src="getImgUrl(img.src,row.talk.userId)"
-              :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
-              :z-index="999"
+                v-for="(img) in row.talk.imgs"
+                :key="img.id"
+                style="width: 200px; height: 200px"
+                fit="contain"
+                :src="getImgUrl(img.src,row.talk.userId)"
+                :preview-src-list="row.talk.imgs.map(item=>getImgUrl(item.src))"
+                :z-index="999"
             />
           </div>
         </template>
       </el-table-column>
       <el-table-column
-        label="动态"
+          label="动态"
       >
         <template #default="{row}">
           {{ row.talk.id }} --- {{ row.talk.content }}
         </template>
       </el-table-column>
       <el-table-column
-        label="评论"
-        width="150"
+          label="评论"
+          width="150"
       >
         <template #default="{row}">
           <div v-for="comment in row.talk.comments">
@@ -335,6 +351,14 @@ export default class PreAuditPage extends Vue {
     this.queryReports()
   }
 
+  get reportTypesFilter() {
+    return this.reportTypes.slice(2, this.reportTypes.length)
+  }
+
+  get reportTypesUnderage() {
+    return this.reportTypes.slice(0, this.reportTypes.length - 1)
+  }
+
   queryReports() {
     this.reports = []
     ReportAPI.queryReportsAPI().then(res => {
@@ -359,11 +383,11 @@ export default class PreAuditPage extends Vue {
   reportPass(row: ReportVO) {
     ReportAPI.reportAuditAPI(row).then((res: any) => {
       Message.success(
-        {
-          showClose: true,
-          message: res.data || res.errorMsg,
-          duration: 1500
-        })
+          {
+            showClose: true,
+            message: res.data || res.errorMsg,
+            duration: 1500
+          })
       this.reports.splice(this.reports.findIndex(item => item.id === row.id), 1)
       this.initData()
     })
@@ -380,11 +404,11 @@ export default class PreAuditPage extends Vue {
     }*/
     ReportAPI.reportAuditListAPI(this.reports.filter(item => item.checked)).then((res: any) => {
       Message.success(
-        {
-          showClose: true,
-          message: res.data || res.errorMsg,
-          duration: 1500
-        })
+          {
+            showClose: true,
+            message: res.data || res.errorMsg,
+            duration: 1500
+          })
       this.queryReports()
       this.initData()
     })
@@ -443,9 +467,9 @@ export default class PreAuditPage extends Vue {
 
   colHeaderRender({ column, $index }) {
     return (
-      <el-checkbox value={!this.hasNoChecked} onChange={this.checkedAllChange}
-      >
-      </el-checkbox>
+        <el-checkbox value={!this.hasNoChecked} onChange={this.checkedAllChange}
+        >
+        </el-checkbox>
     )
   }
 }
