@@ -1,7 +1,7 @@
 <template>
   <q-popup ref="dialog" bottom hide-modal hide-confirm>
     <template #headerLeft>
-      <q-input class="w100p ml-sm" v-model="searchText"></q-input>
+      <q-input class="w100p ml-sm bd-round" v-model="searchText"></q-input>
     </template>
     <div class="h80vh">
       <scroll-view class="h100p" scroll-y v-if="searchText">

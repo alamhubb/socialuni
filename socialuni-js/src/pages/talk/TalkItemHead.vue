@@ -71,7 +71,7 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <div v-if="!talk.hasFollowed" class="color-content chunk q-box-nm bd-radius" @click.stop="addFollow">关注</div>
+        <div v-if="!talk.hasFollowed" class="color-content chunk q-box-mn bd-radius" @click.stop="addFollow">关注</div>
         <div v-else class="color-content" @click.stop="addFollow">已关注</div>
       </view>
     </view>

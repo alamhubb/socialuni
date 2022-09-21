@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Prop, Vue} from 'vue-property-decorator'
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import CommonUtil from '@/socialuni/utils/CommonUtil'
 
 @Component
@@ -40,6 +40,10 @@ export default class QButton extends Vue {
     default: false,
     type: Boolean
   }) text: boolean
+  @Prop({
+    default: false,
+    type: Boolean
+  }) round: boolean
   @Prop({
     default: false,
     type: Boolean
@@ -204,7 +208,7 @@ export default class QButton extends Vue {
     type: Boolean
   }) noDebounce: boolean
 
-  get curTheme() {
+  get curTheme () {
     if (this.theme) return 'theme'
     if (this.primary) return 'primary'
     if (this.error) return 'error'
@@ -214,7 +218,7 @@ export default class QButton extends Vue {
     return ''
   }
 
-  get curSize() {
+  get curSize () {
     if (this.xs) return 'xs'
     if (this.sm) return 'sm'
     if (this.df) return 'df'
@@ -223,12 +227,15 @@ export default class QButton extends Vue {
     return 'df'
   }
 
-  get buttonClass() {
+  get buttonClass () {
     let buttonClass = `${this.btnDisabled ? 'bg-disabled' : 'bg-click'} `
     if (this.text) {
       buttonClass += `bd-none bg-white color-${this.curTheme}`
     } else {
       buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize} text-${this.curSize}`
+      if (this.round) {
+        buttonClass += ' bd-round'
+      }
     }
     return buttonClass
   }
@@ -236,27 +243,27 @@ export default class QButton extends Vue {
 
   // 下面为对接uniapp官方按钮开放能力事件回调的对接
   @Emit()
-  getphonenumber(res) {
+  getphonenumber (res) {
     return res
   }
 
   @Emit()
-  getuserinfo(res) {
+  getuserinfo (res) {
     return res
   }
 
   @Emit('error')
-  errorHandler(res) {
+  errorHandler (res) {
     return res
   }
 
   @Emit()
-  opensetting(res) {
+  opensetting (res) {
     return res
   }
 
   @Emit()
-  launchapp(res) {
+  launchapp (res) {
     return res
   }
 
@@ -274,15 +281,15 @@ export default class QButton extends Vue {
 
   btnEnable = true
 
-  get btnDisabled() {
+  get btnDisabled () {
     return this.disabled || !this.btnEnable
   }
 
-  get clickHandler() {
+  get clickHandler () {
     return CommonUtil.debounce(this.btnClick, this.noDebounce ? 0 : Number(this.debounceTime))
   }
 
-  async btnClick() {
+  async btnClick () {
     if (this.btnEnable) {
       this.btnEnable = false
       this.clickEmit()
@@ -320,13 +327,13 @@ export default class QButton extends Vue {
 
 
   @Emit('click')
-  clickEmit() {
+  clickEmit () {
     return null
   }
 
 
   @Emit()
-  clickAfter() {
+  clickAfter () {
     return null
   }
 }
