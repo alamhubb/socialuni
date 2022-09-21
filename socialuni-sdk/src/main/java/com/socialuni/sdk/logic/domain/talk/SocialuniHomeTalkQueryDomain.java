@@ -12,7 +12,7 @@ import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
+import com.socialuni.sdk.dao.repository.user.SocialuniUserExpandRepository;
 import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
@@ -31,7 +31,6 @@ import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

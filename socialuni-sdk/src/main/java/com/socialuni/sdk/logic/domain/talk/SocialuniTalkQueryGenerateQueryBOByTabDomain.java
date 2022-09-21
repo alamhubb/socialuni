@@ -6,7 +6,7 @@ import com.socialuni.sdk.constant.TalkTabType;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.utils.SocialuniCircleDOUtil;
-import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
+import com.socialuni.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import lombok.extern.slf4j.Slf4j;

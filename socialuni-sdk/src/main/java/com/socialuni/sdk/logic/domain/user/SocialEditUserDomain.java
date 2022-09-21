@@ -4,7 +4,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.UserRepository;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
-import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.sdk.model.QO.user.edit.SocialUserEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.GenderUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;

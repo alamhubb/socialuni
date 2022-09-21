@@ -89,7 +89,7 @@ public class SocialTokenUtil {
                 String tokenSubject = Jwts.parser().setSigningKey(SocialTokenUtil.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
                 return tokenSubject.split("_")[0];
             } catch (Exception e) {
-                log.error("生成token异常");
+                log.error("解析token异常");
                 //必须这么写，不能返回异常，返回异常会记录，会记录用户，会走这里，会循环报错
                 return null;
             }

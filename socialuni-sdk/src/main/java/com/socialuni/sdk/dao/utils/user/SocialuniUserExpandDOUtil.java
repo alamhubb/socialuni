@@ -1,9 +1,11 @@
-package com.socialuni.sdk.dao.utils;
+package com.socialuni.sdk.dao.utils.user;
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserExpandDO;
-import com.socialuni.sdk.dao.repository.SocialuniUserExpandRepository;
+import com.socialuni.sdk.dao.DO.user.SocialuniUserSocialCoinDO;
+import com.socialuni.sdk.dao.repository.user.SocialuniUserExpandRepository;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -19,26 +21,32 @@ public class SocialuniUserExpandDOUtil {
         SocialuniUserExpandDOUtil.socialuniUserExpandRepository = socialuniUserExpandRepository;
     }
 
-
-    public static SocialuniUserExpandDO getUserExpandDO(Integer userId) {
+    public static SocialuniUserExpandDO getAllowNull(Integer userId) {
         SocialuniUserExpandDO socialuniUserExpandDO = socialuniUserExpandRepository.findByUserId(userId);
         return socialuniUserExpandDO;
     }
 
-    public static String getUserSchoolNameAllowNull(Integer userId) {
-        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandDOUtil.getUserExpandDO(userId);
+    public static SocialuniUserExpandDO getOrCreate(Integer userId) {
+        SocialuniUserExpandDO socialuniUserExpandDO = getAllowNull(userId);
         if (socialuniUserExpandDO == null) {
-            return null;
+            socialuniUserExpandDO = new SocialuniUserExpandDO();
+            socialuniUserExpandDO.setUserId(userId);
         }
-        return socialuniUserExpandDO.getSchoolName();
+        return socialuniUserExpandDO;
     }
 
     public static String getUserSchoolNameNotNull(Integer userId) {
-        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandDOUtil.getUserExpandDO(userId);
-        if (socialuniUserExpandDO == null) {
+        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandDOUtil.getOrCreate(userId);
+        if (StringUtils.isEmpty(socialuniUserExpandDO.getSchoolName())) {
             throw new SocialParamsException("请设置校园名称");
         }
         return socialuniUserExpandDO.getSchoolName();
     }
+
+    public static SocialuniUserExpandDO saveUserExpandDO(SocialuniUserExpandDO socialuniUserExpandDO) {
+        return socialuniUserExpandRepository.save(socialuniUserExpandDO);
+    }
+
+
 
 }

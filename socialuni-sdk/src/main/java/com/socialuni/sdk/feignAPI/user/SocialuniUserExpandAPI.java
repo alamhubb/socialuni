@@ -1,6 +1,7 @@
 package com.socialuni.sdk.feignAPI.user;
 
-import com.socialuni.sdk.model.QO.user.SocialUserSchoolNameEditQO;
+import com.socialuni.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
+import com.socialuni.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.web.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "userExpand", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniUserExpandAPI {
     @PostMapping("editUserSchool")
-    @Operation(summary = "获取用户个人详情")
+    @Operation(summary = "编辑用户学校名称")
     ResultRO<SocialuniMineUserDetailRO> editUserSchool(@RequestBody SocialUserSchoolNameEditQO socialMineUserDetailQO);
+
+    @PostMapping("editUserContactInfo")
+    @Operation(summary = "编辑用户联系方式")
+    ResultRO<SocialuniMineUserDetailRO> editUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
 }

@@ -25,7 +25,7 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
     /**
      * 举报次数
      */
-    @Column(nullable = false, columnDefinition = "int default 0")
+    @Column(nullable = false)
     private Integer reportNum;
 
     //违规类型
