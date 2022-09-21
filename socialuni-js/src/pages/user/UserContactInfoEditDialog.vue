@@ -1,14 +1,24 @@
 <template>
   <q-popup ref="dialog" bottom @confirm="confirm">
-    <div class="h40vh pd flex-col">
-      <div class="mb">
+    <div class="h50vh pd flex-col">
+      <div>填写联系方式，方便他人联系您</div>
+      <div class="mt">
         联系方式：
       </div>
-      <div>
+      <div class="mt">
         <q-input class="w100p" v-model="contactInfoValue" placeholder="在此输入您的联系方式"></q-input>
       </div>
-      <div class="mt">填写联系方式，方便他人联系您</div>
-      <div class="mt">他人可通过付费1元的方式获取您的联系方式</div>
+      <div class="mt row-col-center">
+        他人是否可获取您的联系方式：
+      </div>
+      <div class="row-col-center mt">
+        <u-switch v-model="openContactInfo"></u-switch>
+        <div class="ml-sm" @click="openContactInfo=!openContactInfo">
+          {{ openContactInfo ? '他人可获取' : '他人不可获取' }}
+        </div>
+      </div>
+      <div class="mt">打开开关，他人可通过付费1元的方式获取您的联系方式</div>
+      <div class="mt-xs">未来会给您提供50%收益分成（目前不支持）</div>
     </div>
   </q-popup>
 </template>
@@ -38,24 +48,33 @@ export default class UserContactInfoEditDialog extends Vue {
     dialog: QPopup;
   }
 
-  contactInfoValue = null
+  contactInfoValue: string = null
+  openContactInfo: boolean = true
 
   open () {
     this.contactInfoValue = null
+    this.openContactInfo = true
     if (socialUserModule.user.contactInfo) {
       this.contactInfoValue = socialUserModule.user.contactInfo
+      this.openContactInfo = socialUserModule.user.openContactInfo
     }
     this.$refs.dialog.open()
   }
 
   async confirm () {
-    if (!this.contactInfoValue){
+    if (!this.contactInfoValue) {
       ToastUtil.error('联系方式不能为空')
     }
     try {
-      await AlertUtil.confirm('是否确认将联系方式设置为' + this.contactInfoValue)
+      let msg = '是否确认将联系方式设置为' + this.contactInfoValue
+      if (this.openContactInfo) {
+        msg += '，并设置为他人可付费获取方式'
+      } else {
+        msg += '，并设置为他人不可获取'
+      }
+      await AlertUtil.confirm(msg)
       this.$refs.dialog.close()
-      const res = await SocialuniUserExpandAPI.editUserContactInfoAPI(this.contactInfoValue)
+      const res = await SocialuniUserExpandAPI.editUserContactInfoAPI(this.contactInfoValue, this.openContactInfo)
       socialUserModule.setUser(res.data)
     } finally {
 

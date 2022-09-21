@@ -8,7 +8,10 @@ export default class SocialuniUserExpandAPI {
     return request.post<CenterUserDetailRO>('socialuni/userExpand/editUserSchool', qo)
   }
 
-  static editUserContactInfoAPI (contactInfo: string) {
-    return request.post<CenterUserDetailRO>('socialuni/userExpand/editUserContactInfo', { contactInfo })
+  static editUserContactInfoAPI (contactInfo: string, openContactInfo: boolean) {
+    return request.post<CenterUserDetailRO>('socialuni/userExpand/editUserContactInfo', {
+      contactInfo,
+      openContactInfo
+    })
   }
 }

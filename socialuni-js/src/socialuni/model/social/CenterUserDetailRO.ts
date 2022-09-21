@@ -6,8 +6,10 @@ export default class CenterUserDetailRO {
   avatar: string = ''
   gender: string = null
   schoolName: string = null
+  socialCoin: number = null
   //联系方式
   contactInfo: string = null
+  openContactInfo: boolean = null
   age: number = null
   identityAuth: boolean = false
   city = ''

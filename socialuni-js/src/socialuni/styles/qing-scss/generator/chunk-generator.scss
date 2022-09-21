@@ -1,7 +1,7 @@
 .chunk {
   background: $color-white;
   border: $border-base;
-  color: $color-main;
+  color: $color-content;
 }
 
 @each $key, $color in $colors-bg {
