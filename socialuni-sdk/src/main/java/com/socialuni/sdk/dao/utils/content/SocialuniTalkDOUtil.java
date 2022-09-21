@@ -10,6 +10,7 @@ import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.Objects;
 
 @Component
@@ -29,6 +30,7 @@ public class SocialuniTalkDOUtil {
     }
 
     public static SocialuniTalkDO save(SocialuniTalkDO talkDO) {
+        talkDO.setUpdateTime(new Date());
         return socialuniTalkDORedis.save(talkDO);
     }
 
