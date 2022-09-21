@@ -2,7 +2,7 @@ package com.socialuni.sdk.dao.repository;
 
 
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,10 +16,10 @@ public interface UserRepository extends JpaRepository<SocialuniUserDO, Integer> 
     @Query(value = "select u.id from SocialuniUserDO u")
     List<Integer> findAllUserIds();
 
-    @Cacheable(cacheNames = RedisKeysConst.userById, key = "#id")
+    @Cacheable(cacheNames = CommonRedisKey.userById, key = "#id")
     SocialuniUserDO findOneByUnionId(Integer id);
 
-    @CachePut(cacheNames = RedisKeysConst.userById, key = "#user.unionId")
+    @CachePut(cacheNames = CommonRedisKey.userById, key = "#user.unionId")
     SocialuniUserDO save(SocialuniUserDO user);
 
 

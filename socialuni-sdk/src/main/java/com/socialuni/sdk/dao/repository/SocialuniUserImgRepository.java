@@ -2,7 +2,6 @@ package com.socialuni.sdk.dao.repository;
 
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

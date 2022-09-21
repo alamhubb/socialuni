@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.redis;
 
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
 import com.socialuni.sdk.dao.repository.user.SocialUserPhoneRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
@@ -19,7 +19,7 @@ public class SocialUserPhoneRedis {
         return socialUserPhoneRepository.findByPhoneNumAndDevId(phoneNum, DevAccountUtils.getDevIdNotNull());
     }
 
-    @Cacheable(cacheNames = RedisKeysConst.findUserPhoneByUserId, key = "#userId")
+    @Cacheable(cacheNames = CommonRedisKey.findUserPhoneByUserId, key = "#userId")
     public SocialUserPhoneDO findUserPhoneByUserId(Integer userId) {
 //        return socialUserPhoneRepository.findByUserIdAndStatus(userId, CommonStatus.enable);
         return socialUserPhoneRepository.findByUserId(userId);

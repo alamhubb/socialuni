@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.repository;
 
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import com.socialuni.sdk.dao.DO.FollowDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
@@ -15,11 +15,11 @@ public interface FollowRepository extends JpaRepository<FollowDO, Integer> {
     //关注后用户缓存修改，一人+粉丝，一人+关注
     @Caching(evict = {
             //新增一条数据肯定所有数据清空，数据的显示数据变了
-            @CacheEvict(cacheNames = RedisKeysConst.userById, key = "#follow.userId"),
+            @CacheEvict(cacheNames = CommonRedisKey.userById, key = "#follow.userId"),
             //关注变化关注的人要变
-            @CacheEvict(cacheNames = RedisKeysConst.queryUserFollowUserIds, key = "#follow.userId"),
-            @CacheEvict(cacheNames = RedisKeysConst.userById, key = "#follow.beUserId"),
-            @CacheEvict(cacheNames = RedisKeysConst.queryUserAndBeUserFollow, key = "#follow.userId+'-'+#follow.beUserId")
+            @CacheEvict(cacheNames = CommonRedisKey.queryUserFollowUserIds, key = "#follow.userId"),
+            @CacheEvict(cacheNames = CommonRedisKey.userById, key = "#follow.beUserId"),
+            @CacheEvict(cacheNames = CommonRedisKey.queryUserAndBeUserFollow, key = "#follow.userId+'-'+#follow.beUserId")
     })
     FollowDO save(FollowDO follow);
 

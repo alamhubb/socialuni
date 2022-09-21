@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.redis;
 
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import com.socialuni.sdk.dao.DO.user.SocialUserFansDetailDO;
 import com.socialuni.sdk.dao.repository.user.SocialUserFansDetailRepository;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,14 +16,14 @@ public class UserFansDetailRedis {
     @Resource
     SocialUserFansDetailRepository socialUserFansDetailRepository;
 
-    @Cacheable(cacheNames = RedisKeysConst.findUserFansDetailByUserId, unless = "#result == null")
+    @Cacheable(cacheNames = CommonRedisKey.findUserFansDetailByUserId, unless = "#result == null")
     public SocialUserFansDetailDO findUserFansDetailByUserId(Integer userId) {
         return socialUserFansDetailRepository.findByUserId(userId);
     }
 
     @Caching(
-            evict = {@CacheEvict(cacheNames = RedisKeysConst.userById, key = "#socialUserFansDetailDO.userId")},
-            put = {@CachePut(cacheNames = RedisKeysConst.findUserFansDetailByUserId, key = "#socialUserFansDetailDO.userId")}
+            evict = {@CacheEvict(cacheNames = CommonRedisKey.userById, key = "#socialUserFansDetailDO.userId")},
+            put = {@CachePut(cacheNames = CommonRedisKey.findUserFansDetailByUserId, key = "#socialUserFansDetailDO.userId")}
     )
     public SocialUserFansDetailDO save(SocialUserFansDetailDO socialUserFansDetailDO) {
         return socialUserFansDetailRepository.save(socialUserFansDetailDO);

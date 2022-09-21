@@ -4,7 +4,7 @@ package com.socialuni.sdk.dao.redis.redisKey;
  * redisTemplate封装
  *
  */
-public class RedisKeysConst {
+public class TalkRedisKey {
     //系统
     public static final String springKey = "::";
 

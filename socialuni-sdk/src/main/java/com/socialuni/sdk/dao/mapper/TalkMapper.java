@@ -1,17 +1,15 @@
 package com.socialuni.sdk.dao.mapper;
 
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Mapper
 public interface TalkMapper {
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent")
     List<Integer> queryTalkIdsByAndUser(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
@@ -20,7 +18,7 @@ public interface TalkMapper {
             @Param("disableUnderageContent") Boolean disableUnderageContent
     );
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTalkCondition, key = "#status+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId+'-'+#disableUnderageContent+'-'+#disableContentHasContactInfo+'-'+#disableContentHasQrCode")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTalkCondition, key = "#status+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId+'-'+#disableUnderageContent+'-'+#disableContentHasContactInfo+'-'+#disableContentHasQrCode")
     List<Integer> queryTalkIdsByTalkCondition(
             @Param("status") String status,
             @Param("adCode") String adCode,
@@ -32,15 +30,15 @@ public interface TalkMapper {
             @Param("disableContentHasQrCode") Boolean disableContentHasQrCode);
 
     //mybatis 一个参数时自定义属性名不生效 所以使用list
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAndTag, key = "#tagIds")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndTag, key = "#tagIds")
     List<Integer> queryTalkIdsByAndTag(@Param("tagIds") List<Integer> tagIds);
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAndCircle, key = "#circleId")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndCircle, key = "#circleId")
     List<Integer> queryTalkIdsByAndCircle(@Param("circleId") Integer circleId);
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByAndUserExpand)
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUserExpand)
     List<Integer> queryTalkIdsByAndUserExpand();
 
-    List<Integer> queryMineTalkIdsByCom(@Param("userId") Integer userId, @Param("statusList") List<String> statusList);
+//    List<Integer> queryMineTalkIdsByCom(@Param("userId") Integer userId, @Param("statusList") List<String> statusList);
 
 
     /*List<Integer> queryTalkIdsByCom(
