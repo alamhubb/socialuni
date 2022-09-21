@@ -141,24 +141,34 @@
               </view>
             </view>
             <view v-else class="row-col-center">
-              <button class="ml-xs q-tag-warn bg-click"
+              <button class="ml-xs q-tag bg-click"
                       @click="toPhonePage">绑定手机号
               </button>
             </view>
           </div>
         </view>
 
-        <view v-if="isMine||pageUser.schoolName" class="row-col-center mb">
+        <view v-if="isMine||pageUser.schoolName" class="row-col-center mb-smm">
           <q-icon class="text-gray mr-xs" icon="mdi-school"/>
           学校名称：
           <div v-if="pageUser.schoolName" @click="openSetSchoolDialog">
             {{ pageUser.schoolName }}
           </div>
-          <div v-else class="q-tag-green q-box-df" @click="openSetSchoolDialog">设置大学名称</div>
+          <div v-else class="q-tag q-box-df" @click="openSetSchoolDialog">设置大学名称</div>
+        </view>
+
+        <view v-if="isMine||pageUser.contactInfo" class="row-col-center mb-sm">
+          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+          联系方式：
+          <div v-if="pageUser.contactInfo" @click="openSetContactInfo">
+            {{ pageUser.contactInfo }}
+          </div>
+          <div v-else class="q-tag q-box-df" @click="openSetContactInfo">设置联系方式</div>
         </view>
 
         <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
 
+        <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
 
         <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
         <!--        看他的性别等级-->
@@ -348,10 +358,12 @@ import DomFile from '@/socialuni/model/DomFile'
 import TencentCosAPI from '@/api/TencentCosAPI'
 import SocialuniUserAPI from '@/socialuni/api/socialuni/SocialuniUserAPI'
 import ImgAddQO from '@/socialuni/model/user/ImgAddQO'
+import UserContactInfoEditDialog from '@/pages/user/UserContactInfoEditDialog.vue'
 
 
 @Component({
   components: {
+    UserContactInfoEditDialog,
     UserInfoImg,
     QButton,
     UserSchoolEditDialog,
@@ -370,6 +382,7 @@ export default class UserInfo extends Vue {
   $refs!: {
     reportDialog: any;
     schoolEditDialog: UserSchoolEditDialog;
+    contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
   @socialUserStore.State('user') mineUser: CenterUserDetailRO
@@ -608,6 +621,12 @@ export default class UserInfo extends Vue {
   openSetSchoolDialog () {
     if (this.isMine) {
       this.$refs.schoolEditDialog.open()
+    }
+  }
+
+  openSetContactInfo () {
+    if (this.isMine) {
+      this.$refs.contactInfoEditDialog.open()
     }
   }
 
