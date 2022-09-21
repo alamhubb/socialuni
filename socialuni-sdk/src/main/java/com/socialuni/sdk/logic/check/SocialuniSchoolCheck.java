@@ -27,7 +27,7 @@ public class SocialuniSchoolCheck {
         if (tagTypeDO == null) {
             throw new SocialParamsException("未找到大学圈子分类");
         }
-        List<SocialuniCircleDO> circleDOS = socialCircleRedis.getCirclesByTagTypeId(tagTypeDO.getId());
+        List<SocialuniCircleDO> circleDOS = socialCircleRedis.getCirclesByCircleTypeId(tagTypeDO.getId());
 
         if (circleDOS.stream().noneMatch(item -> item.getName().equals(schoolName))) {
             throw new SocialParamsException("不存在的大学名称，请添加大学名称");

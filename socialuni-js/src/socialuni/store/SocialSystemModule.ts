@@ -119,10 +119,6 @@ export default class SocialSystemModule extends VuexModule {
       this.system = UniSystemType.android
     }
 
-    console.log(model)
-    console.log(this.isPc)
-    console.log(this.device)
-
     this.screenHeight = systemInfo.screenHeight
     this.windowHeight = systemInfo.windowHeight
     this.statusBarHeight = systemInfo.statusBarHeight

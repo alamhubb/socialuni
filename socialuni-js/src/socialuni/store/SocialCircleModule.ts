@@ -4,6 +4,7 @@ import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import CircleTypeRO from '@/socialuni/model/community/circle/CircleTypeRO'
 import TagStorageUtil from '@/socialuni/constant/TagStorageUtil'
 import SocialCircleStorageUtil from '@/socialuni/constant/SocialCircleStorageUtil'
+import TagAPI from '@/socialuni/api/socialuni/TagAPI'
 
 @Module({generateMutationSetters: true})
 export default class SocialCircleModule extends VuexModule {
@@ -63,18 +64,20 @@ export default class SocialCircleModule extends VuexModule {
 
 
   @Action
-  /*getHotCircleTypesAction () {
+  getHotCircleTypesAction () {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
-    return CircleAPI.queryHotCircleTypesAPI().then((res: any) => {
-      this.tagTypes = res.data
+    return SocialuniCircleAPI.queryHotCircleTypesAPI().then((res: any) => {
+      this.circleTypes = res.data
     })
-  }*/
+  }
 
   @Action
   getCircleTypesAction() {
-    // 查询前20条，未读优先，如果没有未读，就是按时间排序
-    return SocialuniCircleAPI.queryCircleTypesAPI().then((res) => {
-      this.circleTypes = res.data
-    })
+    if (!this.circleTypes[1] || !this.circleTypes[1].circles || !this.circleTypes[1].circles.length) {
+      // 查询前20条，未读优先，如果没有未读，就是按时间排序
+      return SocialuniCircleAPI.queryCircleTypesAPI().then((res) => {
+        this.circleTypes = res.data
+      })
+    }
   }
 }

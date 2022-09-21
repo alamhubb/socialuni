@@ -25,7 +25,7 @@
     </view>
     <view class="cu-bar bg-white">
       <view class="action ma-0 flex-sub">
-        <view class="action ma-0 flex-sub" @click="closePopup">取消</view>
+        <view class="action ma-0 flex-sub mr" @click="closePopup">取消</view>
         <view class="action ma-0 flex-sub text-green solid-left" :disabled="tagName" @click="addTagClick">
           创建
         </view>

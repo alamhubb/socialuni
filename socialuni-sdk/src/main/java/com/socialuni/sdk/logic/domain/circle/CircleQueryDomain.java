@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.domain.circle;
 
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
@@ -19,7 +20,7 @@ public class CircleQueryDomain {
     @Resource
     SocialuniTagTypeRepository tagTypeRepository;
     @Resource
-    SocialCircleRepository socialCircleRepository;
+    SocialuniCircleRedis SocialuniCircleRedis;
 
     public List<SocialCircleRO> queryCirclesByCircleType(SocialuniCircleQueryByTypeQO socialuniCircleQueryByTypeQO) {
         String circleTypeName = socialuniCircleQueryByTypeQO.getCircleTypeName();
@@ -27,8 +28,7 @@ public class CircleQueryDomain {
         if (tagTypeDO == null) {
             return new ArrayList<>();
         }
-        List<SocialuniCircleDO> list = socialCircleRepository.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeDO.getId(), CommonStatus.enable);
-
+        List<SocialuniCircleDO> list = SocialuniCircleRedis.getCirclesByCircleTypeId(tagTypeDO.getId());
         return SocialCircleROFactory.circleDOToROS(list);
     }
 

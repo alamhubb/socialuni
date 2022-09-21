@@ -24,10 +24,7 @@ public class SocialuniCircleController implements SocialuniCircleAPI {
 
     @Resource
     SocialuniCircleService centerCircleService;
-    @Resource
-    CircleQueryDomain circleQueryDomain;
-    @Resource
-    SocialCircleRepository socialCircleRepository;
+
 
     @Override
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
@@ -45,9 +42,13 @@ public class SocialuniCircleController implements SocialuniCircleAPI {
     }
 
     @Override
+    public ResultRO<List<CircleTypeRO>> queryHotCircleTypes() {
+        return centerCircleService.queryHotCircleTypes();
+    }
+
+    @Override
     public ResultRO<List<SocialCircleRO>> queryCirclesByCircleType(SocialuniCircleQueryByTypeQO socialuniCircleQueryByTypeQO) {
-        List<SocialCircleRO> list = circleQueryDomain.queryCirclesByCircleType(socialuniCircleQueryByTypeQO);
-        return ResultRO.success(list);
+        return centerCircleService.queryCirclesByCircleType(socialuniCircleQueryByTypeQO);
     }
 
 }

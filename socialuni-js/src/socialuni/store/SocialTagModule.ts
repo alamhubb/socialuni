@@ -59,9 +59,6 @@ export default class SocialTagModule extends VuexModule {
     // 查询前20条，未读优先，如果没有未读，就是按时间排序
     return TagAPI.queryHotTagTypesAPI().then((res: any) => {
       this.tagTypes = res.data
-      setTimeout(() => {
-        this.getTagTypesAction()
-      }, 2000)
     })
   }
 
