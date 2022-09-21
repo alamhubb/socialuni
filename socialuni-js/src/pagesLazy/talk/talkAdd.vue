@@ -424,6 +424,7 @@ export default class TalkAddView extends Vue {
   async publishTalk () {
     try {
       await SocialuniTalkAPI.addTalkAPI(this.talkContent, this.showImgFiles, this.district, this.visibleTypeValue, this.visibleGenderValue, this.circleName, this.selectTagNames)
+      //如果当前tab为圈子，则更新圈子
       if (socialTalkModule.curTabIsCircle) {
         //设置当前圈子，暂时不联动外面，等以后内容多了再联动外面
         socialTalkModule.setCircleNameUpdateCurTabIndex(this.circleName)
