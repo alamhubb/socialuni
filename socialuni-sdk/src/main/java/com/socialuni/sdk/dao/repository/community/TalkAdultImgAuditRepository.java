@@ -8,4 +8,5 @@ import java.util.List;
 public interface TalkAdultImgAuditRepository extends JpaRepository<SocialuniTalkHasUnderageImgAuditDO, Integer> {
 
     List<SocialuniTalkHasUnderageImgAuditDO> findTop20ByStatusOrderByIdAsc(String status);
+    SocialuniTalkHasUnderageImgAuditDO findOneById(Integer id);
 }

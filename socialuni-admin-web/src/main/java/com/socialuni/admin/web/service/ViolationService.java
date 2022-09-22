@@ -1,5 +1,6 @@
 package com.socialuni.admin.web.service;
 
+import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.constant.ViolateLevel;
 import com.socialuni.sdk.constant.ViolateType;
@@ -78,7 +79,7 @@ public class ViolationService {
         userRepository.save(violationUser);
 
         //更改report违规类型
-        reportDO.setAuditType(ViolateType.noViolation);
+        reportDO.setAuditType(AdminAuditResultType.noViolation);
         reportDO.setAuditNote(auditNote);
         //审核状态变更
         reportDO.setStatus(ReportStatus.enable);
@@ -103,7 +104,7 @@ public class ViolationService {
 
 
         //不是轻微违规，则将所有待审核内容改为违规
-        if (!ViolateType.slightViolation.equals(violateType)) {
+        if (!AdminAuditResultType.slightViolation.equals(violateType)) {
             //查询用户所有为待审核和预审核的内容，改为违规
             List<ReportDO> reportDOS = reportStore.queryUserOtherWaitAuditContent(violationUser.getUnionId());
             for (ReportDO linkReport : reportDOS) {
@@ -117,7 +118,7 @@ public class ViolationService {
                 //内容违规则修改内容状态
                 SocialuniContentDOUtil.save(linkModelDO);
                 //修改举报内容
-                linkReport.setAuditType(ViolateType.otherIllegalLinkage);
+                linkReport.setAuditType(AdminAuditResultType.otherIllegalLinkage);
                 linkReport.setStatus(ReportStatus.violation);
                 linkReport.setAuditNote("关联其他举报内容违规id：" + reportDO.getId());
                 linkReport.setUpdateTime(curDate);
@@ -158,10 +159,10 @@ public class ViolationService {
     public void userViolationHandler(SocialuniUserDO violationUser, String vioReason, Date curDate, String violateType) {
         String vioLevel;
         //轻微
-        if (ViolateType.slightViolation.equals(violateType)) {
+        if (AdminAuditResultType.slightViolation.equals(violateType)) {
             vioLevel = ViolateLevel.slight;
             //一般违规
-        } else if (ViolateType.generalViolationList.contains(violateType)) {
+        } else if (AdminAuditResultType.generalViolationList.contains(violateType)) {
             vioLevel = ViolateLevel.general;
             //严重违规
         } else {

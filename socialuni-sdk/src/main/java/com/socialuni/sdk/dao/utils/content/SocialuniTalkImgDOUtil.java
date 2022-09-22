@@ -1,15 +1,19 @@
 package com.socialuni.sdk.dao.utils.content;
 
 import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.mapper.TalkImgMapper;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
+import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -46,8 +50,21 @@ public class SocialuniTalkImgDOUtil {
         return list;
     }
 
+    public static SocialuniTalkImgDO saveTalkImgDO(SocialuniTalkImgDO talkImgDO){
+        return talkImgRepository.save(talkImgDO);
+    }
+
     public static List<SocialuniTalkImgDO> getTalkImgsTop3(Integer talkId) {
-        List<Integer> integers = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
+        List<SocialuniTalkImgDO> talkImgDOS = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
+        for (SocialuniTalkImgDO talkImgDO : talkImgDOS) {
+            if (ObjectUtils.isEmpty(talkImgDO.getUnionId())) {
+                Integer unionId = SocialuniUnionIdUtil.createTalkImgUnionId();
+                talkImgDO.setUnionId(unionId);
+                SocialuniTalkImgDOUtil.saveTalkImgDO(talkImgDO);
+            }
+        }
+        List<Integer> integers = talkImgDOS.stream().map(SocialUnionContentBaseDO::getUnionId).collect(Collectors.toList());
+
         return SocialuniTalkImgDOUtil.getTalkImgs(integers);
     }
 }

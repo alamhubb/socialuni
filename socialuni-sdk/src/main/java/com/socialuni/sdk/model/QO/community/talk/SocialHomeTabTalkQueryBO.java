@@ -25,8 +25,9 @@ public class SocialHomeTabTalkQueryBO {
     //    private Integer pageNum;
     private Integer maxAge;
     private Date queryTime;
-
+    //动态发表人性别，只能为null，男，女
     private String talkUserGender;
+    //动态的可见性别
     private String talkVisibleGender;
     private Integer devId;
     //查询圈子内容，需要设置circleid

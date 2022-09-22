@@ -10,6 +10,8 @@ export default class ReportVO {
   public checked = false
   public user: User
   public status: string
+  //审核内容类型，举报，成年图片
+  public auditContentType: string
   public types: string[]
   public reportContentType: string
   public childReports: ReportDetail[]

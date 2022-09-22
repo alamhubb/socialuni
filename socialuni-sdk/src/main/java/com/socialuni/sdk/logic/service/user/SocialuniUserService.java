@@ -14,7 +14,7 @@ import com.socialuni.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
-import com.socialuni.sdk.model.QO.user.SocialUserEditQO;
+import com.socialuni.sdk.model.QO.user.edit.SocialUserEditQO;
 import com.socialuni.sdk.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.sdk.model.QO.user.SocialuniUserImgDeleteQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;

@@ -1,8 +1,12 @@
 package com.socialuni.admin.web.model;
 
 
+import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
+import com.socialuni.sdk.constant.socialuni.SocialuniAuditContentType;
+import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.sdk.dao.DO.ReportDO;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
@@ -19,7 +23,7 @@ import java.util.List;
 
 @Data
 @Component
-public class ReportVO {
+public class ReportRO {
     private Integer id;
 
 // 第一版本只考虑talk
@@ -41,19 +45,21 @@ public class ReportVO {
     private Boolean hasKeyword;
     private String checkText;
     private String auditNote;
+    //审核内容类型，举报，成年图片
+    private String auditContentType;
     private List<KeywordsTriggerDetailDO> triggerKeywords;
 
-    public ReportVO() {
+    public ReportRO() {
     }
 
     private static KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
 
     @Resource
     public void setKeywordsTriggerDetailRepository(KeywordsTriggerDetailRepository keywordsTriggerDetailRepository) {
-        ReportVO.keywordsTriggerDetailRepository = keywordsTriggerDetailRepository;
+        ReportRO.keywordsTriggerDetailRepository = keywordsTriggerDetailRepository;
     }
 
-    public ReportVO(ReportDO reportDO) {
+    public ReportRO(ReportDO reportDO) {
         this.id = reportDO.getId();
         this.talk = ReportContentROFactory.getReportContentVO(reportDO.getContentType(), reportDO.getContentId());
 //        this.reportContentType = reportContentType;
@@ -63,18 +69,34 @@ public class ReportVO {
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
-        this.violateType = ViolateType.noViolation;
+        this.violateType = AdminAuditResultType.noViolation;
         this.triggerKeywords = new ArrayList<>();
+        this.auditContentType = SocialuniAuditContentType.report;
         if (reportDO.getId() != null) {
             this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(reportDO.getId());
         }
     }
 
-    public ReportVO(SocialUnionContentBaseDO modelDO) {
+    public ReportRO(SocialuniTalkHasUnderageImgAuditDO imgAuditDO) {
+        this.id = imgAuditDO.getId();
+        this.talk = ReportContentROFactory.getReportContentVO(SocialuniContentType.talk, imgAuditDO.getTalkId());
+//        this.reportContentType = reportContentType;
+
+//        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(imgAuditDO.getUserId()));
+//        this.updateTime = new Date();
+//        this.status = reportDO.getStatus();
+        this.checked = true;
+        this.violateType = AdminAuditResultType.adult;
+        this.auditContentType = SocialuniAuditContentType.underageImg;
+    }
+
+    public ReportRO(SocialUnionContentBaseDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getContentType(), modelDO.getUnionId());
         this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();
-        this.violateType = modelDO.getDeleteReason();
+        this.violateType = modelDO.getViolateType();
+        this.auditContentType = SocialuniAuditContentType.report;
 //        this.checked = true;
 //        this.violateType = ViolateType.noViolation;
     }

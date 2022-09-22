@@ -58,7 +58,7 @@
         <!--        <view class="color-sub text-sm h20 row-col-end" v-if="talk.user.identityAuth || talk.globalTop ||isMine">-->
         <view class="color-sub text-sm h20 row-col-end line-h1">
           {{ talk.updateTime| formatTime }}
-          <view v-if="talk.globalTop" class="ml-5 sm cu-tag round bg-red light">
+          <view v-if="talk.globalTop" class="ml-sm q-tag-theme q-box-nn">
             官方
           </view>
           <!--              自己的帖子，或者系统管理员可以删除帖子-->
@@ -71,7 +71,7 @@
       </view>
       <!--                不为自己且未关注-->
       <view v-if="talkTabType!==followType&&!isMine&&!isUserDetail" class="col-center">
-        <div v-if="!talk.hasFollowed" class="color-content chunk q-box-nm bd-radius" @click.stop="addFollow">关注</div>
+        <div v-if="!talk.hasFollowed" class="color-content chunk q-box-mn bd-radius" @click.stop="addFollow">关注</div>
         <div v-else class="color-content" @click.stop="addFollow">已关注</div>
       </view>
     </view>
@@ -83,7 +83,7 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import FollowAddVO from '../../socialuni/model/FollowAddVO'
 import PagePath from '../../socialuni/constant/PagePath'
-import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
+import SocialuniTalkAPI from '../../socialuni/api/socialuni/SocialuniTalkAPI'
 import UserUtil from '../../socialuni/utils/UserUtil'
 import JsonUtils from '../../socialuni/utils/ObjectUtil'
 import FollowAPI from '../../socialuni/api/socialuni/FollowAPI'
@@ -148,7 +148,7 @@ export default class TalkItemHead extends Vue {
   confirmDeleteTalk () {
     AlertUtil.confirm('是否确定删除此条动态，此操作无法恢复').then(() => {
       this.$emit('deleteTalk', this.talk.id)
-      TalkAPI.deleteTalkAPI(this.talk.id).then(() => {
+      SocialuniTalkAPI.deleteTalkAPI(this.talk.id).then(() => {
         ToastUtil.toast('删除成功')
       })
     })

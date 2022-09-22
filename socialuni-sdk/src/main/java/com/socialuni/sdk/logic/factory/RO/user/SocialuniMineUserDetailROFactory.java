@@ -53,6 +53,7 @@ public class SocialuniMineUserDetailROFactory {
             //为自己返回生日，方便修改，和手机号
             mineUserDetailRO.setBirthday(mineUser.getBirthday());
             if (socialUserPhoneDO != null) {
+                //只有自己的开发者才显示手机号
                 if (DevAccountUtils.getDevIdNotNull().equals(socialUserPhoneDO.getDevId())){
                     String realPhoneNum = socialUserPhoneDO.getPhoneNum();
                     if (StringUtils.isNotEmpty(realPhoneNum)) {

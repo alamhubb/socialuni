@@ -1,5 +1,6 @@
 package com.socialuni.admin.web.model.RO;
 
+import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
@@ -47,7 +48,7 @@ public class TencentCosAuditRecordRO {
         this.score = recordDO.getScore();
         this.result = recordDO.getResult();
         this.url = recordDO.getUrl();
-        this.violateType = ViolateType.noViolation;
+        this.violateType = AdminAuditResultType.noViolation;
         if (recordDO.getContentType().equals(SocialuniContentType.talk)) {
             this.talk = ReportContentROFactory.getReportContentVO(SocialuniContentType.talk, recordDO.getImgParentContentId());
         }

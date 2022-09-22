@@ -23,7 +23,7 @@
             </view>
 
             <view class="row-col-center" v-if="isMine">
-              <q-button @click="toEditUserInfo" class="chunk-theme_light bd-round">
+              <q-button @click="toEditUserInfo" theme light round>
                 <q-icon icon="edit-pen" size="16" class="mr-xs q-box-xs"/>
                 编辑资料
               </q-button>
@@ -60,10 +60,10 @@
                           私信
                           &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
                         </button>-->
-            <button v-if="followStatus==='关注'" class="color-content chunk q-box-nm bd-radius"
-                    @click.stop="addFollow">
+            <q-button v-if="followStatus==='关注'"
+                    @click="addFollow">
               {{ followStatus }}
-            </button>
+            </q-button>
             <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
             <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
           </view>
@@ -141,24 +141,43 @@
               </view>
             </view>
             <view v-else class="row-col-center">
-              <button class="ml-xs q-tag-warn bg-click"
+              <button class="ml-xs q-tag bg-click"
                       @click="toPhonePage">绑定手机号
               </button>
             </view>
           </div>
         </view>
 
-        <view v-if="isMine||pageUser.schoolName" class="row-col-center mb">
+        <view v-if="isMine||pageUser.schoolName" class="row-col-center mb-smm">
           <q-icon class="text-gray mr-xs" icon="mdi-school"/>
           学校名称：
           <div v-if="pageUser.schoolName" @click="openSetSchoolDialog">
             {{ pageUser.schoolName }}
           </div>
-          <div v-else class="q-tag-green q-box-df" @click="openSetSchoolDialog">设置大学名称</div>
+          <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>
+
+<!--        <div v-if="isMine" class="row-col-center mb-smm">
+          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+          联系方式：
+          <div v-if="pageUser.contactInfo" @click="openSetContactInfo" class="row-col-center ">
+            <div class="q-tag">{{ pageUser.contactInfo }}
+              <div class="ml-xs">({{ pageUser.openContactInfo ? '他人可获取' : '他人不可获取' }})</div>
+            </div>
+          </div>
+          <div v-else class="row-col-center">
+            <div class="q-tag" @click="openSetContactInfo">设置联系方式</div>
+          </div>
+        </div>
+        <div v-else-if="pageUser.openContactInfo" class="row-col-center mb-smm">
+          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+          联系方式：
+          <div class="q-tag">{{ pageUser.contactInfo }}(点击获取联系方式)</div>
+        </div>-->
 
         <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
 
+        <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
 
         <!--        你看一个人的时候想看他的什么，看他的背景图，看他的关注动态。看他的图片。-->
         <!--        看他的性别等级-->
@@ -315,8 +334,8 @@
 </template>
 
 <script lang="ts">
-import {Component, PropSync, Vue, Watch} from 'vue-property-decorator'
-import TalkAPI from '../../socialuni/api/socialuni/TalkAPI'
+import { Component, PropSync, Vue, Watch } from 'vue-property-decorator'
+import SocialuniTalkAPI from '../../socialuni/api/socialuni/SocialuniTalkAPI'
 import TalkItem from '../talk/talkItem/TalkItem.vue'
 import UserUtil from '../../socialuni/utils/UserUtil'
 import TalkItemContent from '../talk/talkItem/TalkItemContent.vue'
@@ -329,7 +348,13 @@ import PageUtil from '../../socialuni/utils/PageUtil'
 import TalkOperate from '../talk/talkOperate.vue'
 import TalkVO from '../../socialuni/model/talk/TalkVO'
 import MsgUtil from '../../socialuni/utils/MsgUtil'
-import {socialAppStore, socialSystemStore, socialUserModule, socialUserStore} from '../../socialuni/store'
+import {
+  socialAppStore,
+  socialSystemModule,
+  socialSystemStore,
+  socialUserModule,
+  socialUserStore
+} from '../../socialuni/store'
 import QRowItem from '../../qing-ui/components/QRowItem/QRowItem.vue'
 import AlertUtil from '../../socialuni/utils/AlertUtil'
 import ToastUtil from '../../socialuni/utils/ToastUtil'
@@ -348,10 +373,12 @@ import DomFile from '@/socialuni/model/DomFile'
 import TencentCosAPI from '@/api/TencentCosAPI'
 import SocialuniUserAPI from '@/socialuni/api/socialuni/SocialuniUserAPI'
 import ImgAddQO from '@/socialuni/model/user/ImgAddQO'
+import UserContactInfoEditDialog from '@/pages/user/UserContactInfoEditDialog.vue'
 
 
 @Component({
   components: {
+    UserContactInfoEditDialog,
     UserInfoImg,
     QButton,
     UserSchoolEditDialog,
@@ -370,6 +397,7 @@ export default class UserInfo extends Vue {
   $refs!: {
     reportDialog: any;
     schoolEditDialog: UserSchoolEditDialog;
+    contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
   @socialUserStore.State('user') mineUser: CenterUserDetailRO
@@ -383,7 +411,7 @@ export default class UserInfo extends Vue {
 
   showUserContactBtnDisabled = false
 
-  toMessagePage() {
+  toMessagePage () {
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
     //mock chat
@@ -428,39 +456,39 @@ export default class UserInfo extends Vue {
     }
   }*/
 
-  async toPhonePage() {
+  async toPhonePage () {
     await PageUtil.toPhonePage()
   }
 
-  toIdentityAuth() {
+  toIdentityAuth () {
     MsgUtil.identityAuthHint()
   }
 
-  openVip() {
+  openVip () {
     PageUtil.toVipPage()
   }
 
-  get isMine(): boolean {
+  get isMine (): boolean {
     // 两个都有值，且两个都相等，才为自己
     return this.pageUser && this.mineUser && this.pageUser.id === this.mineUser.id
   }
 
-  get talkIds() {
+  get talkIds () {
     if (this.talks.length) {
       return this.talks.map(item => item.id)
     }
     return []
   }
 
-  copyText(textCopy: string) {
+  copyText (textCopy: string) {
     UniUtil.textCopy(textCopy)
   }
 
-  deleteTalk(talkId: string) {
+  deleteTalk (talkId: string) {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
-  moreAction() {
+  moreAction () {
     if (this.isMine) {
       const menuList: string [] = ['上传头像', '退出登录']
       UniUtil.actionSheet(menuList).then((index: number) => {
@@ -473,7 +501,7 @@ export default class UserInfo extends Vue {
     }
   }
 
-  toEditUserInfo() {
+  toEditUserInfo () {
     PageUtil.toEditMineInfo()
   }
 
@@ -485,39 +513,39 @@ export default class UserInfo extends Vue {
     deep: true,
     immediate: true
   })
-  watchUserChange(newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
+  watchUserChange (newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {
       this.queryMineTalks()
     }
   }
 
-  queryMineTalks() {
+  queryMineTalks () {
     if (this.pageUser) {
       this.followStatus = FollowStatus.getFollowStatus(this.pageUser)
       this.hasFollowed = this.pageUser.hasFollowed
-      TalkAPI.queryUserTalksAPI(this.pageUser.id, this.talkIds).then((res: any) => {
+      SocialuniTalkAPI.queryUserTalksAPI(this.pageUser.id, this.talkIds).then((res: any) => {
         this.talks = res.data
       })
     }
   }
 
 
-  getGenderIcon(user: CenterUserDetailRO) {
+  getGenderIcon (user: CenterUserDetailRO) {
     return UserUtil.getGenderIcon(user)
   }
 
-  getGenderBgColor(user: CenterUserDetailRO) {
+  getGenderBgColor (user: CenterUserDetailRO) {
     return UserUtil.getGenderBgColor(user)
   }
 
-  toFollowVue() {
+  toFollowVue () {
     if (this.isMine) {
       RouterUtil.navigateTo(PagePath.userFollow)
     }
   }
 
-  toLoveValuePage() {
+  toLoveValuePage () {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
     } else {
@@ -525,15 +553,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  hintJusticeInfo() {
+  hintJusticeInfo () {
     ToastUtil.toastLong('正义值，正确举报会增加正义值')
   }
 
-  hintBindTwice() {
+  hintBindTwice () {
     AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
-  addFollow() {
+  addFollow () {
     if (this.mineUser) {
       if (!this.followBtnDisabled) {
         this.followBtnDisabled = true
@@ -564,15 +592,15 @@ export default class UserInfo extends Vue {
     }
   }
 
-  getFollowStatusColor(followStatus: string) {
+  getFollowStatusColor (followStatus: string) {
     return UserUtil.getFollowStatusColor(followStatus)
   }
 
-  toFaceValuePage() {
+  toFaceValuePage () {
     PageUtil.toFaceValuePage()
   }
 
-  refreshMine() {
+  refreshMine () {
     AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -580,11 +608,11 @@ export default class UserInfo extends Vue {
     })
   }
 
-  loginOut() {
+  loginOut () {
     socialUserModule.loginOut()
   }
 
-  async uploadUserAvatarImg() {
+  async uploadUserAvatarImg () {
     try {
       const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
@@ -601,15 +629,58 @@ export default class UserInfo extends Vue {
   }
 
   //前往贝壳页面
-  toUserShell() {
+  toUserShell () {
     PageUtil.toShellPage()
   }
 
-  openSetSchoolDialog() {
+  openSetSchoolDialog () {
     if (this.isMine) {
       this.$refs.schoolEditDialog.open()
     }
   }
+
+  openSetContactInfo () {
+    if (this.isMine) {
+      this.$refs.contactInfoEditDialog.open()
+    }
+  }
+
+  /*getUserContactInfo(){
+    if (!this.showUserContactBtnDisabled) {
+      this.showUserContactBtnDisabled = true
+      const userShell = this.mineUser.socialCoin
+      if (userShell >= 10) {
+        AlertUtil.confirm('是否消耗10个贝壳查看用户：' + this.pageUser.nickname + ' 的联系方式').then(() => {
+          UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
+            this.userProp.contactAccount = res.data
+            this.userProp.showUserContact = true
+            this.mineUser.shell = userShell - 10
+          })
+        }).finally(() => {
+          this.showUserContactBtnDisabled = false
+        })
+      } else {
+        AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
+          const provider = socialSystemModule.isApp ? ProviderType.wx : systemModule.provider
+          PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
+            UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
+              this.userProp.contactAccount = res.data
+              this.userProp.showUserContact = true
+            }).catch((e) => {
+              UniUtil.error(e)
+            })
+          }).catch(() => {
+            MsgUtil.notPay()
+          })
+        }).finally(() => {
+          this.showUserContactBtnDisabled = false
+        })
+      }
+    } else {
+      UniUtil.toast('获取中，请稍等')
+    }
+  }*/
+
 
   /*switchOpenContact (openContact) {
     let actionMsg

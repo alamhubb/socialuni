@@ -11,6 +11,7 @@ import com.socialuni.sdk.dao.redis.FollowRedis;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
@@ -24,6 +25,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -79,7 +81,6 @@ public class TalkQueryStore {
         if (GenderType.all.equals(talkUserGender)) {
             talkUserGender = null;
         }
-        String talkVisibleGender = queryBO.getTalkVisibleGender();
 
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
         String mineUserGender = null;
@@ -89,35 +90,40 @@ public class TalkQueryStore {
 
         SocialuniAppConfigBO appConfig = SocialuniAppConfig.getAppConfig();
 
+        //为什么要用程序过滤，为了多缓存内容
         //查询所有talkId
         //需要连接用户表查询，后面不需要重复筛选，因为已经基础过滤出来了这些值，后面与合并逻辑，所以不需要在过滤
-        List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, queryBO.getAdCode(),
-                talkVisibleGender, mineUserGender, null, queryBO.getQueryTime(),
+        List<Integer> userTalkUnionIds = talkMapper.queryTalkIdsByAndUser(talkUserGender, queryBO.getMinAge(), queryBO.getMaxAge(), ContentStatus.enable, appConfig.getDisableUnderageContent());
+        List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(
+                ContentStatus.enable, queryBO.getAdCode(),
+                queryBO.getTalkVisibleGender(), mineUserGender, null,
                 appConfig.getDisableUnderageContent(),
                 appConfig.getDisableContentHasContactInfo(),
                 appConfig.getDisableContentHasQrCode());
+        //取交集
 
+        userTalkUnionIds = ListConvertUtil.intersection(userTalkUnionIds, talkUnionIds);
+        //可以多次查询同一个表
 
         List<Integer> tagIds = queryBO.getTagIds();
         //没选择tag的情况，
         if (!CollectionUtils.isEmpty(tagIds)) {
             List<Integer> tagTalkUnionIds = talkMapper.queryTalkIdsByAndTag(tagIds);
             //取交集
-            userTalkUnionIds.retainAll(tagTalkUnionIds);
+            userTalkUnionIds = ListConvertUtil.intersection(userTalkUnionIds, tagTalkUnionIds);
         }
         Integer circleId = queryBO.getCircleId();
         if (circleId != null) {
             List<Integer> queryTalkUnionIds = talkMapper.queryTalkIdsByAndCircle(circleId);
             //取交集
-            userTalkUnionIds.retainAll(queryTalkUnionIds);
+            userTalkUnionIds = ListConvertUtil.intersection(userTalkUnionIds, queryTalkUnionIds);
         }
-
         Boolean userHasSchool = queryBO.getUserHasSchoolNam();
         //看有没有设置onlyschooname,有的话连用户扩展表查询
         if (userHasSchool != null && userHasSchool) {
             List<Integer> queryTalkUnionIds = talkMapper.queryTalkIdsByAndUserExpand();
             //取交集
-            userTalkUnionIds.retainAll(queryTalkUnionIds);
+            userTalkUnionIds = ListConvertUtil.intersection(userTalkUnionIds, queryTalkUnionIds);
         }
         PageRequest pageRequest = PageRequest.of(0, 10);
 
@@ -125,12 +131,15 @@ public class TalkQueryStore {
             int page = queryBO.getTalkIds().size() / 10;
             pageRequest = PageRequest.of(page, 10);
         }
-
         Integer mineUserId = SocialuniUserUtil.getMineUserIdAllowNull();
         if (mineUserId != null) {
             List<Integer> queryTalkUnionIds = talkRedis.queryMineTalkIds(mineUserId, pageRequest);
             //取交集
             userTalkUnionIds.addAll(queryTalkUnionIds);
+        }
+
+        if (userTalkUnionIds.size() > 900) {
+            userTalkUnionIds = userTalkUnionIds.subList(0, 900);
         }
 
         userTalkUnionIds = talkRepository.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), pageRequest);

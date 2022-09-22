@@ -33,6 +33,7 @@ public class ReportContentROFactory {
         if (reportContentType.equals(SocialuniContentType.talk)) {
             SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
             reportContentVO.setId(contentId);
+//            reportContentVO.setViolateType(talkDO.getViolateType());
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());
             reportContentVO.setUserId(talkDO.getUserId());
@@ -54,6 +55,7 @@ public class ReportContentROFactory {
             SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(contentId);
             reportContentVO.setId(commentDO.getUnionId());
             reportContentVO.setContent(commentDO.getContent());
+//            reportContentVO.setViolateType(commentDO.getViolateType());
             reportContentVO.setReportNum(commentDO.getReportNum());
             reportContentVO.setUserId(commentDO.getUserId());
         } else if (reportContentType.equals(SocialuniContentType.userImg)) {

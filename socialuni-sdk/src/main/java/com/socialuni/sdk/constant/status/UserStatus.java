@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class UserStatus extends CommonStatus {
     //审核中
-    public static final String audit = ConstStatus.audit;
+    public static final String audit = ConstStatus.auditing;
     //违规
     public static final String violation = ConstStatus.violation;
 //    public static final String waitOpen = CommonStatus.waitOpen;

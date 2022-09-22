@@ -1,10 +1,22 @@
 <template>
   <q-popup ref="circleChooseDialog" bottom hide-modal hide-confirm>
     <template #headerLeft>
-      <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
+      <q-input class="w100p ml-sm bd-round" v-model="circleSearchText"></q-input>
     </template>
     <div class="h80vh">
-      <q-sidebar v-if="circleTypes.length" :dataList="showCircleTypes" class="flex-1 flex-row overflow-hidden"
+      <scroll-view class="h100p" scroll-y v-if="circleSearchText">
+        <view v-for="tag in showCircles" :key="tag.id" @click="change(tag)"
+              class="article-row row-between solid-bottom">
+          <text>
+            #{{ tag.name }}
+          </text>
+          <view v-if="tag.count" class="row-col-center">
+            <q-icon addClass="color-red" icon="mdi-fire"></q-icon>
+            {{ tag.count }}
+          </view>
+        </view>
+      </scroll-view>
+      <q-sidebar v-if="circleTypes.length" :dataList="circleTypes" class="flex-1 flex-row overflow-hidden"
                  :right-scroll="false">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
@@ -37,17 +49,19 @@
 </template>
 
 <script lang="ts">
-import {Component, Emit, Vue} from 'vue-property-decorator'
+import { Component, Emit, Vue } from 'vue-property-decorator'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
-import {socialCircleModule} from '@/socialuni/store'
+import { socialCircleModule } from '@/socialuni/store'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
+import QIcon from '@/qing-ui/components/QLocation/QIcon.vue'
 
 
 @Component({
   components: {
+    QIcon,
     QInput,
     QSidebar,
     QPopup
@@ -58,43 +72,39 @@ export default class SocialCirclePicker extends Vue {
     circleChooseDialog: QPopup
   }
 
-  get circleTypes() {
+  get circleTypes () {
     return socialCircleModule.circleTypes
+  }
+
+  get showCircles () {
+    if (this.circleTypes.length) {
+      //去除热门，要不然会存在重复
+      return this.circleTypes.slice(1, this.circleTypes.length - 1)
+        .flatMap(item => {
+          if (item && item.circles) {
+            return item.circles.filter(tag => tag.name.includes(this.circleSearchText))
+          }
+          return []
+        })
+    }
+    return []
   }
 
   circleSearchText = ''
 
-  get showCircleTypes() {
-    if (this.circleSearchText) {
-      const showCircleTypes = this.circleTypes.reduce((all, item) => {
-        const data = item.circles.filter(circle => circle.name.includes(this.circleSearchText))
-        if (data.length) {
-          const itemCopy = ObjectUtil.deepClone(item)
-          itemCopy.circles = data
-          all.push(itemCopy)
-        }
-        return all
-      }, [])
-      return showCircleTypes
-    } else {
-      return this.circleTypes
-    }
-  }
 
-  openDialog() {
+  openDialog () {
     this.circleSearchText = ''
-    if (!this.circleTypes.length) {
-      socialCircleModule.getCircleTypesAction()
-    }
+    socialCircleModule.getCircleTypesAction()
     this.$refs.circleChooseDialog.open()
   }
 
-  closeDialog() {
+  closeDialog () {
     this.$refs.circleChooseDialog.close()
   }
 
   @Emit()
-  change(circle: SocialCircleRO) {
+  change (circle: SocialCircleRO) {
     this.closeDialog()
     return circle
   }

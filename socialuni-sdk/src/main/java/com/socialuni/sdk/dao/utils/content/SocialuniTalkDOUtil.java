@@ -10,16 +10,28 @@ import com.socialuni.social.web.sdk.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.Objects;
 
 @Component
 public class SocialuniTalkDOUtil {
 
     private static TalkRepository talkRepository;
+    private static SocialuniTalkDORedis socialuniTalkDORedis;
+
+    @Resource
+    public void setSocialuniTalkDORediss(SocialuniTalkDORedis socialuniTalkDORediss) {
+        SocialuniTalkDOUtil.socialuniTalkDORedis = socialuniTalkDORediss;
+    }
 
     @Resource
     public void setTalkRepository(TalkRepository talkRepository) {
         SocialuniTalkDOUtil.talkRepository = talkRepository;
+    }
+
+    public static SocialuniTalkDO save(SocialuniTalkDO talkDO) {
+        talkDO.setUpdateTime(new Date());
+        return socialuniTalkDORedis.save(talkDO);
     }
 
     public static SocialuniTalkDO getTalkNotNull(Integer talkUnionId) {

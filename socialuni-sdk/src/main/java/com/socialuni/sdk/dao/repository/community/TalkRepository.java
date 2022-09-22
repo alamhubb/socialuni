@@ -2,7 +2,7 @@ package com.socialuni.sdk.dao.repository.community;
 
 
 import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> {
-    @Cacheable(cacheNames = RedisKeysConst.talkById, key = "#talkUnionId")
+    @Cacheable(cacheNames = CommonRedisKey.talkById, key = "#talkUnionId")
     SocialuniTalkDO findOneByUnionId(Integer talkUnionId);
 
     //清池使用的
@@ -37,12 +37,6 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("status") List<String> status,
             Pageable pageable);
 
-    @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
-    List<Integer> queryTalkIdsByUserOrderByUpdateTime(
-            @Param("userId") Integer userId,
-            @Param("status") List<String> status,
-            Pageable pageable);
-
     //查询自己关注的用户列表，包含自己的,类似朋友圈
     @Query(value = "SELECT t.unionId from SocialuniTalkDO t where ((t.userId =:userId and t.status in (:onlyUserSeeStatus)) or (t.userId in (:userIds) and t.status =:status)) order by t.createTime desc ")
     List<Integer> queryTalkIdsByUserFollow(
@@ -55,7 +49,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
     //查询某性别的talkids
     //只有为all才走前面，其他的都走后面逻辑
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender")
     @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND ((:talkVisibleGender = 'all' and tg.visible_gender = 'all') or (:mineUserGender is null or tg.visible_gender = :mineUserGender))")
     List<Integer> queryTalkIdsByTagVisibleGender(
             @Param("talkVisibleGender") String talkVisibleGender,
@@ -63,7 +57,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
     //查询某性别和包含tags下的talkids
     //只有为all才走前面，其他的都走后面逻辑
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByTagIdsAndTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByTagIdsAndTagVisibleGender, key = "#talkVisibleGender+'-'+#mineUserGender+'-'+#tagIds")
     @Query(nativeQuery = true, value = "SELECT DISTINCT ttg.talk_id as talk_id FROM tag tg,talk_tag ttg WHERE ttg.tag_id = tg.id AND ((:talkVisibleGender = 'all' and tg.visible_gender = 'all') or (:mineUserGender is null or tg.visible_gender = :mineUserGender)) and tg.id in (:tagIds)")
     List<Integer> queryTalkIdsByTagIdsAndTagVisibleGender(
             @Param("tagIds") List<Integer> tagIds);
@@ -105,7 +99,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
             @Param("devId") Integer devId);*/
 
 
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
     @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t,user u " +
             "where t.global_top = 0 " +
             "and t.user_id = u.id " +
@@ -195,7 +189,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
 
     //上个版本的代码用来备份
-    @Cacheable(cacheNames = RedisKeysConst.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
+    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByGenderAndAgeAndAdCodeAndGender, key = "#talkUserGender+'-'+#minAge+'-'+#maxAge+'-'+#adCode+'-'+#talkVisibleGender+'-'+#mineUserGender+'-'+#devId")
     @Query(nativeQuery = true, value = "SELECT t.unionId FROM talk t,user u " +
             "where t.global_top = 0 " +
             "and t.user_id = u.id " +
@@ -289,6 +283,14 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
 
     //查询关键词触发次数时使用
     Page<SocialuniTalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
+
+
+    @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")
+    List<Integer> queryTalkIdsByUserOrderByUpdateTime(
+            @Param("userId") Integer userId,
+            @Param("status") List<String> status,
+            Pageable pageable);
+
 /*
 
     //供后台统计使用**************************************************************************************

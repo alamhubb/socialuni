@@ -41,13 +41,13 @@
     </msg-input>
 
 
-    <socia-tag-picker ref="tagPicker" @change="changeTag"></socia-tag-picker>
+    <social-tag-picker ref="tagPicker" @change="changeTag"></social-tag-picker>
     <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
   </view>
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
 import PagePath from '../../socialuni/constant/PagePath'
 import TagVO from '../../socialuni/model/community/tag/TagVO'
@@ -81,14 +81,13 @@ import MsgInput from '@/components/MsgInput.vue'
 import TabsTalk from '@/pages/talk/tabsTalk.vue'
 import TalkSwipers from '@/pages/talk/talkSwipers.vue'
 import TagSearch from '@/pages/talk/TagSearch.vue'
-import SociaTagPicker from '@/components/SocialTagPicker.vue'
 import SocialTagPicker from '@/components/SocialTagPicker.vue'
 
 // todo 后台可控制是否显示轮播图
 
 @Component({
   components: {
-    SociaTagPicker,
+    SocialTagPicker,
     QCityPicker,
     QTabs,
     QSlider,
@@ -124,7 +123,7 @@ export default class TalkView extends Vue {
   // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
   scrollEnable = false
 
-  get talkTabsTop() {
+  get talkTabsTop () {
     if (socialConfigModule.appMoreConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
       return socialConfigModule.appMoreConfig.swiperHeight + 10
     }
@@ -132,27 +131,27 @@ export default class TalkView extends Vue {
   }
 
   // life
-  mounted() {
+  mounted () {
     this.pageMounted()
   }
 
-  onHide() {
+  onHide () {
     this.$refs.tabsTalk.tabsTalkOnHide()
   }
 
-  pageMounted() {
+  pageMounted () {
     UniUtil.showShareMenu()
     // 这里是不是有问题应该选择异性
     // 指的是用户选择的筛选性别
     this.initQuery()
-    this.socialTalkScroll({scrollTop: 0})
+    this.socialTalkScroll({ scrollTop: 0 })
   }
 
-  onPageScroll(e) {
+  onPageScroll (e) {
     this.socialTalkScroll(e)
   }
 
-  socialTalkScroll(e) {
+  socialTalkScroll (e) {
     // 只有开启了轮播图，才需要控制下方滚动
     if (socialConfigModule.appMoreConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
       // +5点余量以防万一
@@ -170,18 +169,18 @@ export default class TalkView extends Vue {
   }
 
   @Watch('homeSwipers')
-  homeSwipersWatch() {
-    this.socialTalkScroll({scrollTop: 0})
+  homeSwipersWatch () {
+    this.socialTalkScroll({ scrollTop: 0 })
   }
 
   // 必须这么写否则不生效
   @Watch('unreadNotifies')
-  unreadNotifiesWatch() {
+  unreadNotifiesWatch () {
     this.unreadNotifiesNum = this.unreadNotifies.length
   }
 
   // 去除页面初始化的，初始化查询
-  initQuery() {
+  initQuery () {
     // this.$refs.tabsTalk.initQuery()
     this.$nextTick(() => {
       //首次打开talk页面，获取用户位置用来查询
@@ -191,44 +190,47 @@ export default class TalkView extends Vue {
     })
   }
 
-  openTagPicker() {
+  startPullDown () {
+    this.$refs.tabsTalk.startPullDown()
+  }
+
+  openTagPicker () {
     this.$refs.tagPicker.open()
   }
 
 
   @Watch('selectTagName')
-  selectTagNameWatch() {
-    this.initQuery()
+  selectTagNameWatch () {
+    //已经watch了，所以修改tag无需重新设置查询
+    this.startPullDown()
   }
 
   // tag
-  changeTag(tag: TagVO) {
+  changeTag (tag: TagVO) {
     socialTagModule.setSelectTagName(tag.name)
-    this.initQuery()
   }
 
-  deleteTag() {
+  deleteTag () {
     socialTagModule.setSelectTagName(null)
-    this.initQuery()
   }
 
-  toNotifyVue() {
+  toNotifyVue () {
     socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
     RouterUtil.navigateTo(PagePath.notify)
   }
 
   // 点击加号去新增talk
-  toTalkAdd() {
+  toTalkAdd () {
     PageUtil.toTalkAddPage()
   }
 
-  openCityPicker() {
+  openCityPicker () {
     this.$refs.cityPicker.open()
   }
 
-  cityChange(district: DistrictVO) {
+  cityChange (district: DistrictVO) {
     socialLocationModule.setLocation(district)
-    this.$refs.tabsTalk.autoChooseUseLocationQueryTalks(true)
+    this.startPullDown()
   }
 }
 </script>

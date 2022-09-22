@@ -4,7 +4,7 @@ package com.socialuni.sdk.dao.redis.redisKey;
  * redisTemplate封装
  *
  */
-public class RedisKeysConst {
+public class TalkRedisKey {
     //系统
     public static final String springKey = "::";
 
@@ -18,6 +18,15 @@ public class RedisKeysConst {
     public static final String queryMineTalkIdsByCom = "queryMineTalkIdsByCom";
     public static final String queryUserTalkIds = "queryUserTalkIds";
     public static final String queryUserFollowsTalkIds = "queryUserFollowsTalkIds";
+
+
+    public static final String queryTalkIdsByAndUser = "queryTalkIdsByAndUser";
+    public static final String queryTalkIdsByTalkCondition = "queryTalkIdsByTalkCondition";
+    public static final String queryTalkIdsByAndTag = "queryTalkIdsByAndTag";
+    public static final String queryTalkIdsByAndCircle = "queryTalkIdsByAndCircle";
+    public static final String queryTalkIdsByAndUserExpand = "queryTalkIdsByAndUserExpand";
+
+
 
     public static final String queryTalkIdsByTab = "queryTalkIdsByTab";
     public static final String queryTalkIdsByTagVisibleGender = "queryTalkIdsByTagVisibleGender";

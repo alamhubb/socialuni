@@ -1,6 +1,6 @@
 <template>
-  <div class="row-col-center bd bd-round h30 px-sm">
-    <input :value="value" class="flex-1 px-xs font-df" @input="inputEvent"/>
+  <div class="row-col-center bd bd-radius h30 px-sm">
+    <input :value="value" class="flex-1 px-xs font-df" @input="inputEvent" :placeholder="placeholder"/>
     <q-icon v-show="(!hideClear)&&value&&value.length" icon="close" class="color-sub pd-xs" size="12"
             @click="clear"></q-icon>
   </div>
@@ -17,6 +17,7 @@ export default class QInput extends Vue {
   @Model('input') readonly value: string
 
   @Prop({ default: false }) readonly hideClear: boolean
+  @Prop({ default: '' }) readonly placeholder: string
 
   inputEvent ({ detail }) {
     this.input(detail.value)

@@ -123,7 +123,7 @@ export default class QcMineDetail extends Vue {
   // 登录
   disabledLoginBtn = false
 
-  created() {
+  onLoad () {
     UniUtil.showShareMenu()
   }
 

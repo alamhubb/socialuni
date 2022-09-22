@@ -48,13 +48,14 @@ import java.util.List;
 @Tag(name = "社区模块/动态模块")
 @FeignClient(name = "talk", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniTalkAPI {
+    @GetMapping("queryStickTalks")
+    @Operation(summary = "查询置顶动态列表，无需参数")
+    ResultRO<List<SocialuniTalkRO>> queryStickTalks();
+
     @GetMapping("queryTalks")
     @Operation(summary = "查询动态列表，无需参数")
     ResultRO<List<SocialuniTalkRO>> queryTalks();
 
-    @GetMapping("queryStickTalks")
-    @Operation(summary = "查询制定动态列表，无需参数")
-    ResultRO<List<SocialuniTalkRO>> queryStickTalks();
 
     @PostMapping("queryTalks")
     @Operation(summary = "查询动态列表")

@@ -40,7 +40,6 @@ export default class TalkVueUtil {
 
   static getTalkTabs(): TalkTabVO [] {
     const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
-    console.log(homeTypeTalks)
     return homeTypeTalks || TalkVueUtil.TalkTabsDefault
   }
 
