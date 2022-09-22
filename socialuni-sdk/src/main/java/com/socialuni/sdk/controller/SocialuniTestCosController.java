@@ -20,11 +20,12 @@ import java.util.List;
 @RequestMapping("test")
 public class SocialuniTestCosController {
     @Resource
-    SocialuniUserInfoDOUtil<SocialuniTalkDO> socialuniTalkDOSocialuniUserInfoDOUtil;
+    SocialuniUserInfoDOUtil socialuniTalkDOSocialuniUserInfoDOUtil;
 
     @GetMapping("test1")
     public ResultRO testCos(String imgKey) {
-        List<SocialuniTalkDO> list = socialuniTalkDOSocialuniUserInfoDOUtil.findAll();
-        return ResultRO.success(list);
+//        List<SocialuniTalkDO> list = socialuniTalkDOSocialuniUserInfoDOUtil.findAll();
+//        return ResultRO.success(list);
+        return null;
     }
 }
