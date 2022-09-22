@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class SocialuniContentIdRO {
     private String id;
 
+    public SocialuniContentIdRO(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,84 +1,38 @@
 package com.socialuni.sdk.dao.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.ClassUtil;
-import com.qcloud.cos.model.ciModel.auditing.UserInfo;
+import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
-import com.socialuni.sdk.model.RO.UserOAuthRO;
-import com.socialuni.sdk.model.RO.user.SocialuniContentIdRO;
-import com.socialuni.sdk.utils.ObjectUtil;
-import com.socialuni.social.web.sdk.utils.JsonUtil;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
+import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import javax.persistence.Table;
 
-@Component
-@Slf4j
 public class SocialuniUserInfoDOUtil {
-    public static void main(String[] args) throws JsonProcessingException {
-        TypeTest<UserOAuthRO> typeTest1 = new TypeTest<UserOAuthRO>() {
-        };
-        typeTest1.testT();
-        // 带花括号是可以拿到的。不带的话拿不到
-//        BaseDaoImpl<UserOAuthRO> baseDao = new BaseDaoImpl<>();
+    public static <T extends SocialUnionContentBaseDO> T save(T t) throws InstantiationException, IllegalAccessException {
+        Class<T> tClass = (Class<T>) t.getClass();
 
+        Table tableAnnotation = tClass.getAnnotation(Table.class);
+        if (tableAnnotation == null) {
+            throw new SocialParamsException("实体类缺少@Table注解");
+        }
+        String tableName = tableAnnotation.name();
+        if (StringUtils.isEmpty(tableName)) {
+            throw new SocialParamsException("table表名不能为空");
+        }
 
-        /*UserOAuthRO userOAuthRO = SocialuniUserInfoDOUtil.createObj();
+        System.out.println(tableAnnotation.name());
+//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(tableName);
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        BaseDao<UserOAuthRO> baseDao = new BaseDao<>();*/
+        //遍历这个t，生成sql
 
-//        System.out.println(baseDao.);
+//        entityManager.createQuery("insert into (" + t.getContent() + ") tableName");
+        return null;
     }
 
-    public static <T> T createObj() throws JsonProcessingException {
-//        TypeTest<T> typeTest1=new TypeTest<T>(){};
-        // 带花括号是可以拿到的。不带的话拿不到
-//        typeTest1.testT();
-        /*GenericClass<T> genericsClass = new GenericClass<>();
 
-        System.out.println(genericsClass.getClass());
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 
-        ParameterizedType genericType = ((ParameterizedType) genericsClass.getClass().getGenericSuperclass());
-        Type[] arguments = genericType.getActualTypeArguments();
-        for (Type type : arguments) {
-            System.out.println(type);
-        }
-//        return name;
-        Type mySuperClass = genericsClass.getClass().getGenericInterfaces()[0];
-        //多加了一层instanceof的判断
-        if (mySuperClass instanceof ParameterizedType) {
-            Type type = ((ParameterizedType) mySuperClass).getActualTypeArguments()[0];
-            while (type instanceof ParameterizedType) {
-                type = ((ParameterizedType) type).getRawType();
-            }
-            String className = type.toString();
-            if (className.startsWith("class ")) {
-                className = className.substring(6);
-            } else if (className.startsWith("interface ")) {
-                className = className.substring(10);
-            }
-            System.out.println(className);
-        }*/
-
-        /*ParameterizedType genericType = ((ParameterizedType) genericsClass.getClass().getGenericSuperclass());
-        Type[] arguments = genericType.getActualTypeArguments();
-        for (Type type : arguments) {
-            System.out.println(type);
-        }*/
-
-        return null;
+        SocialuniTalkDO socialuniTalkDO = SocialuniUserInfoDOUtil.save(new SocialuniTalkDO());
     }
 }
