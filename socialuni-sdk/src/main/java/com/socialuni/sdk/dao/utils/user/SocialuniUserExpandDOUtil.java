@@ -31,6 +31,7 @@ public class SocialuniUserExpandDOUtil {
         if (socialuniUserExpandDO == null) {
             socialuniUserExpandDO = new SocialuniUserExpandDO();
             socialuniUserExpandDO.setUserId(userId);
+            socialuniUserExpandDO.setOpenContactInfo(false);
         }
         return socialuniUserExpandDO;
     }
