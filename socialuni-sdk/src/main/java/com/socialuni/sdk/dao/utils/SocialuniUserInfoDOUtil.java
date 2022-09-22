@@ -5,6 +5,9 @@ import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.social.web.sdk.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 
 public class SocialuniUserInfoDOUtil {
@@ -21,8 +24,8 @@ public class SocialuniUserInfoDOUtil {
         }
 
         System.out.println(tableAnnotation.name());
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(tableName);
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(tableName);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         //遍历这个t，生成sql
 
