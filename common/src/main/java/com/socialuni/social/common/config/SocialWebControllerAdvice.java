@@ -124,7 +124,13 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
-        WebControllerExceptionEvent webControllerExceptionEvent = WebControllerExceptionEvent.builder().errorMsg(errorMsg).errorCode(errorCode).errorType(errorType).innerMsg(innerMsg).innerMsgDetail(innerMsgDetail).build();
+        WebControllerExceptionEvent webControllerExceptionEvent =new WebControllerExceptionEvent();
+        webControllerExceptionEvent.setErrorMsg(errorMsg);
+        webControllerExceptionEvent.setErrorCode(errorCode);
+        webControllerExceptionEvent.setErrorType(errorType);
+        webControllerExceptionEvent.setInnerMsg(innerMsg);
+        webControllerExceptionEvent.setInnerMsgDetail(innerMsgDetail);
+        // 发布事件解耦。
         this.applicationEventPublisher.publishEvent(webControllerExceptionEvent);
    }
 

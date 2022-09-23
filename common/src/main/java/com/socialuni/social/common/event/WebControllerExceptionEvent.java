@@ -12,10 +12,9 @@ import org.springframework.context.ApplicationEvent;
  * @since 1.0
  */
 @Data
-@Builder
 public class WebControllerExceptionEvent extends ApplicationEvent {
     String errorMsg; Integer errorCode; String errorType; String innerMsg; String innerMsgDetail;
-    public WebControllerExceptionEvent(Object source) {
-        super(source);
+    public WebControllerExceptionEvent() {
+        super(null);
     }
 }
