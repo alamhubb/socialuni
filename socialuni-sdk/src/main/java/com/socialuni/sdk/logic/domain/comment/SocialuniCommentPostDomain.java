@@ -1,6 +1,7 @@
 package com.socialuni.sdk.logic.domain.comment;
 
 import com.socialuni.sdk.constant.SocialuniConst;
+import com.socialuni.sdk.constant.UserType;
 import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
@@ -54,11 +55,14 @@ public class SocialuniCommentPostDomain {
 
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkId);
         List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
-        //开发环境不校验
-        if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
-            //校验用户
-            SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
-            //校验内容是否违规
+
+        //系统管理员不校验相关内容
+        if (!UserType.system.equals(mineUser.getType())) {
+            //不为开发环境，则校验内容
+            if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
+                //校验用户
+                SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
+            }
             SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(addQO.getContent());
         }
 
