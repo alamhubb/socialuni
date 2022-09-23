@@ -1,6 +1,7 @@
 package com.socialuni.sdk.dao.DO.user;
 
 import com.socialuni.sdk.dao.DO.SocialContentBaseDO;
+import com.socialuni.sdk.dao.DO.base.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,7 @@ import java.io.Serializable;
         })
 @Data
 @NoArgsConstructor
-public class SocialuniUserSocialCoinDO extends SocialContentBaseDO implements Serializable {
-    private Integer userId;
+public class SocialuniUserSocialCoinDO extends SocialuniUserInfoBaseDO {
     @Column(nullable = false)
     private Integer socialCoin;
 }
