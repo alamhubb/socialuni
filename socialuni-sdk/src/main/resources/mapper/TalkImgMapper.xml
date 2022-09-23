@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.socialuni.sdk.dao.mapper.TalkImgMapper">
+<mapper namespace="com.socialuni.social.sdk.dao.mapper.TalkImgMapper">
     <!--          不为null代表禁用-->
     <select id="queryTalkImgIdsTop3ByTalkIdOrderByIdAsc" resultType="java.lang.Integer">
         SELECT t.union_id

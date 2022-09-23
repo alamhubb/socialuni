@@ -2,19 +2,19 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.sdk.config.SocialTokenUtil;
-import com.socialuni.sdk.logic.entity.DevAccountEntity;
+import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.sdk.dao.DO.dev.DevTokenDO;
-import com.socialuni.sdk.model.QO.dev.DevAccountQueryQO;
-import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.sdk.dao.repository.dev.DevTokenRepository;
+import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.dao.DO.dev.DevTokenDO;
+import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
+import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
+import com.socialuni.social.sdk.dao.repository.dev.DevTokenRepository;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.sdk.utils.PhoneNumUtil;
+import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.sdk.utils.PhoneNumUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

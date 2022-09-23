@@ -1,8 +1,8 @@
 package com.socialuni.admin.web.config;
 
-import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.sdk.utils.RedisUtil;
+import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.common.constant.ErrorCode;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;

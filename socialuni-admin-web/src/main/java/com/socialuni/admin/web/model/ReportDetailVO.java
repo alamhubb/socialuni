@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.model;
 
-import com.socialuni.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
 import lombok.Data;
 
 @Data

@@ -1,19 +1,18 @@
 package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.sdk.dao.DO.tag.TagDO;
-import com.socialuni.sdk.dao.store.SocialTagRedis;
-import com.socialuni.sdk.dao.utils.content.SocialuniCommentDOUtil;
-import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
-import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
-import com.socialuni.sdk.logic.factory.SocialTalkImgROFactory;
-import com.socialuni.sdk.logic.factory.community.SocialTagROFactory;
-import com.socialuni.sdk.model.RO.community.tag.TagRO;
+import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.sdk.dao.DO.tag.TagDO;
+import com.socialuni.social.sdk.dao.store.SocialTagRedis;
+import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
+import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
+import com.socialuni.social.sdk.logic.factory.SocialTalkImgROFactory;
+import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
+import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

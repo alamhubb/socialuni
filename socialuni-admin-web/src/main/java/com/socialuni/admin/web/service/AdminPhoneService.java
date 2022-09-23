@@ -3,13 +3,13 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.config.AppStaticData;
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
-import com.socialuni.sdk.dao.DO.dev.DevAuthCodeDO;
-import com.socialuni.sdk.utils.TencentSmsServe;
+import com.socialuni.social.sdk.dao.DO.dev.DevAuthCodeDO;
+import com.socialuni.social.sdk.utils.TencentSmsServe;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.sdk.constant.socialuni.StatusConst;
+import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
-import com.socialuni.sdk.utils.PhoneNumUtil;
+import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.social.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.common.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

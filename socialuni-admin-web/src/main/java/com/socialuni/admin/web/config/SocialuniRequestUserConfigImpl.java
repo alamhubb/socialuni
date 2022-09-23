@@ -2,8 +2,8 @@ package com.socialuni.admin.web.config;
 
 
 import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
-import com.socialuni.sdk.config.SocialRequestUserConfigDefaultImpl;
-import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.config.SocialRequestUserConfigDefaultImpl;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import org.springframework.stereotype.Component;
 
 @Component

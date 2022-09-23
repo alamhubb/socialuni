@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.factory;
 
-import com.socialuni.sdk.dao.DO.TencentCosAuditRecordDO;
+import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.RO.TencentCosAuditRecordRO;
 
 public class TencentCosAuditRecordROFactory {

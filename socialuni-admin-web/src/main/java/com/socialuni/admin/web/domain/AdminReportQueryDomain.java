@@ -2,15 +2,15 @@ package com.socialuni.admin.web.domain;
 
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.ViolationService;
-import com.socialuni.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.sdk.dao.DO.ReportDO;
-import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.sdk.dao.repository.*;
-import com.socialuni.sdk.dao.repository.community.TalkAdultImgAuditRepository;
-import com.socialuni.sdk.logic.service.KeywordsService;
-import com.socialuni.sdk.utils.DevAccountUtils;
+import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.sdk.dao.DO.ReportDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
+import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.dao.repository.*;
+import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
+import com.socialuni.social.sdk.logic.service.KeywordsService;
+import com.socialuni.social.sdk.utils.DevAccountUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,10 +1,10 @@
 package com.socialuni.admin.web.model.RO;
 
 import com.socialuni.admin.web.model.ReportUserVO;
-import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
-import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
+import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.sdk.config.SocialuniSystemConst;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
