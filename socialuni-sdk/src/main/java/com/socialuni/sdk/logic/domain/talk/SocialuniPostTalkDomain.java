@@ -107,8 +107,8 @@ public class SocialuniPostTalkDomain {
             if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
                 //校验用户
                 SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
-                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(talkVOContent);
             }
+            SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(talkVOContent);
         }
 
         for (SocialuniImgAddQO talkVOImg : talkVOImgs) {
