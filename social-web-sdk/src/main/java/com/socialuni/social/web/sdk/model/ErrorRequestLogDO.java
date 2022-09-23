@@ -1,6 +1,6 @@
 package com.socialuni.social.web.sdk.model;
 
-import com.socialuni.social.web.sdk.constant.ErrorPlatformType;
+import com.socialuni.social.common.constant.ErrorPlatformType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

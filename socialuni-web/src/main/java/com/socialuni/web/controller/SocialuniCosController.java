@@ -2,7 +2,7 @@ package com.socialuni.web.controller;
 
 import com.socialuni.sdk.logic.service.SocialuniCosService;
 import com.socialuni.sdk.model.RO.app.SocialCosAuthRO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

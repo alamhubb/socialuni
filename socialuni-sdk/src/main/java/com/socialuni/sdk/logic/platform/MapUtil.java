@@ -2,7 +2,7 @@ package com.socialuni.sdk.logic.platform;
 
 import com.socialuni.sdk.model.QO.location.LocationQueryRO;
 import com.socialuni.sdk.model.RectangleVO;
-import com.socialuni.social.web.sdk.utils.IpUtil;
+import com.socialuni.social.common.utils.IpUtil;
 
 public class MapUtil {
     public static RectangleVO getRectangle() {

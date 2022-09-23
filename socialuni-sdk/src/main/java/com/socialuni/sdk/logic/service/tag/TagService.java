@@ -10,7 +10,7 @@ import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.sdk.utils.SocialTagStore;
 import com.socialuni.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.sdk.constant.socialuni.GenderType;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

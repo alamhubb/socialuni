@@ -4,7 +4,7 @@ import com.socialuni.sdk.dao.DO.SocialuniUnionIdDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

@@ -4,7 +4,7 @@ import com.socialuni.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.sdk.dao.utils.SocialTokenDOUtil;
 import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
+import com.socialuni.social.common.utils.RequestUtil;
 
 
 public class SocialRequestUserConfigDefaultImpl implements SocialRequestUserConfig {

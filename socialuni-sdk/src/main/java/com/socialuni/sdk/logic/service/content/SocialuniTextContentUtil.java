@@ -12,7 +12,7 @@ import com.socialuni.sdk.utils.QQUtil;
 import com.socialuni.sdk.utils.SocialuniImgContentUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.sdk.utils.content.TextContentUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

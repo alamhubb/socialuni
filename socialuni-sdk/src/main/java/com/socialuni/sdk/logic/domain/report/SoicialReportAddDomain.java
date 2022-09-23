@@ -14,9 +14,9 @@ import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.sdk.utils.DateUtils;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

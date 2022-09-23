@@ -14,7 +14,7 @@ import com.socialuni.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import org.springframework.stereotype.Service;
 

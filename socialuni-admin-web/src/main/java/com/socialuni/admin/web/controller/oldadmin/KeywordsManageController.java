@@ -3,10 +3,10 @@ package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.dao.DO.keywords.KeywordsDO;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.sdk.constant.status.ConstBoolean;
 import com.socialuni.sdk.dao.mapper.TalkMapper;
 import com.socialuni.sdk.dao.repository.KeywordsRepository;

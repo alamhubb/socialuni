@@ -10,7 +10,7 @@ import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.dao.DO.user.SocialUserAccountDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

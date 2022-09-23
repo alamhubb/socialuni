@@ -12,8 +12,8 @@ import com.socialuni.sdk.dao.repository.user.SocialUserViolationRepository;
 import com.socialuni.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.sdk.dao.utils.SocialTokenDOUtil;
 import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
-import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
-import com.socialuni.social.web.sdk.exception.SocialNullUserException;
+import com.socialuni.social.common.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.exception.exception.SocialNullUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

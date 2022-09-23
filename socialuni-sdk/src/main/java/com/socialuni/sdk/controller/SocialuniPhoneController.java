@@ -5,7 +5,7 @@ import com.socialuni.sdk.logic.service.phone.SocialuniPhoneService;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

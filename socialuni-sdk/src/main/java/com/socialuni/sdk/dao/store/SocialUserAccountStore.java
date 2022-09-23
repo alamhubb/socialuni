@@ -2,7 +2,7 @@ package com.socialuni.sdk.dao.store;
 
 import com.socialuni.sdk.model.UniUnionIdRO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.dao.DO.user.SocialUserAccountDO;

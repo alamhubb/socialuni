@@ -13,7 +13,7 @@ import com.socialuni.sdk.model.RectangleVO;
 import com.socialuni.sdk.logic.platform.MapUtil;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.UniAPIUtils;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

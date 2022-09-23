@@ -15,7 +15,7 @@ import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

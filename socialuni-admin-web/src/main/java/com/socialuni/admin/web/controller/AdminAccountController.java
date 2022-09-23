@@ -8,7 +8,7 @@ import com.socialuni.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.sdk.dao.repository.dev.DevAccountProviderRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.dao.repository.community.TagRepository;
 import com.socialuni.sdk.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;

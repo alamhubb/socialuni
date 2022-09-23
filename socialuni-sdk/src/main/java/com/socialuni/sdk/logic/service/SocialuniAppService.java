@@ -2,7 +2,6 @@ package com.socialuni.sdk.logic.service;
 
 
 import com.socialuni.sdk.config.SocialuniAppConfig;
-import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.sdk.dao.DO.HomeSwiperDO;
@@ -11,7 +10,7 @@ import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.sdk.dao.repository.HomeSwiperRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import org.springframework.stereotype.Service;
 

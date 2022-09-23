@@ -18,6 +18,10 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.socialuni</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
         <!--        支持get请求-->
         <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient -->
         <dependency>

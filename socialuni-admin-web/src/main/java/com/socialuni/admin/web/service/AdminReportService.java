@@ -24,8 +24,8 @@ import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.sdk.logic.factory.ReportFactory;
 import com.socialuni.sdk.logic.service.KeywordsService;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

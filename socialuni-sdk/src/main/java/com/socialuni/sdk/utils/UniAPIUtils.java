@@ -6,7 +6,7 @@ import com.socialuni.sdk.model.QO.ContentAddQO;
 import com.socialuni.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.sdk.dao.repository.dev.DevAccountRepository;
 import com.socialuni.sdk.model.RO.user.SocialuniContentIdRO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.SocialFeignHeaderName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

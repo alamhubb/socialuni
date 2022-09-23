@@ -3,7 +3,7 @@ package com.socialuni.web.controller;
 import com.socialuni.sdk.feignAPI.community.SocialuniNotifyAPI;
 import com.socialuni.sdk.logic.service.SocialuniNotifyService;
 import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

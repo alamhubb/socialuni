@@ -9,8 +9,8 @@ import com.socialuni.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

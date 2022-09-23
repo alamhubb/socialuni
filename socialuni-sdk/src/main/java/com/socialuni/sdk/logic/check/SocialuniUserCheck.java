@@ -1,23 +1,14 @@
 package com.socialuni.sdk.logic.check;
 
 import com.socialuni.sdk.constant.ErrorMsg;
-import com.socialuni.sdk.constant.SocialuniConst;
 import com.socialuni.sdk.constant.status.UserStatus;
-import com.socialuni.sdk.dao.DO.circle.SocialuniCircleDO;
-import com.socialuni.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.sdk.dao.DO.user.SocialUserPhoneDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.sdk.dao.repository.community.SocialuniTagTypeRepository;
-import com.socialuni.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.social.web.sdk.exception.SocialNotLoginException;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import org.apache.commons.lang3.StringUtils;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class SocialuniUserCheck {

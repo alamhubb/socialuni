@@ -4,7 +4,7 @@ import com.socialuni.sdk.config.SocialuniSystemConst;
 import com.socialuni.sdk.feignAPI.community.SocialuniHugAPI;
 import com.socialuni.sdk.logic.service.SocialuniHugService;
 import com.socialuni.sdk.model.QO.SocialuniHugAddQO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

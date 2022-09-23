@@ -1,7 +1,7 @@
 package com.socialuni.sdk.controller;
 
 import com.socialuni.sdk.utils.SocialuniImgContentUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,7 @@
 package com.socialuni.sdk.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.web.sdk.utils.JsonUtil;
+import com.socialuni.social.common.utils.JsonUtil;
 import org.springframework.web.socket.TextMessage;
 
 public class WebsocketUtil {

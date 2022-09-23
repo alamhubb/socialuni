@@ -1,7 +1,7 @@
 package com.socialuni.sdk.config;
 
 import com.socialuni.sdk.constant.DevEnvType;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

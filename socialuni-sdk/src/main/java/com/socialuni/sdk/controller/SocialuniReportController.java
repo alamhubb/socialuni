@@ -4,7 +4,7 @@ import com.socialuni.sdk.constant.ViolateType;
 import com.socialuni.sdk.feignAPI.community.SocialuniReportAPI;
 import com.socialuni.sdk.logic.service.report.SocialuniReportService;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

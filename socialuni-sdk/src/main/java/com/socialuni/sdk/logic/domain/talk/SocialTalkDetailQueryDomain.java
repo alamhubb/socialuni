@@ -8,7 +8,7 @@ import com.socialuni.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.sdk.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Service;
 
 @Service

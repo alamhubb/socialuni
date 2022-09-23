@@ -1,7 +1,7 @@
 package com.socialuni.sdk.config;
 
 import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
+import com.socialuni.social.common.utils.RequestUtil;
 import com.socialuni.sdk.utils.UUIDUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -3,7 +3,7 @@ package com.socialuni.sdk.utils;
 import com.socialuni.sdk.constant.platform.UniappProviderType;
 import com.socialuni.sdk.model.UniUnionIdRO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.web.sdk.exception.UniSdkException;
+import com.socialuni.social.common.exception.exception.UniSdkException;
 
 public class UniProviderUtil {
     public static UniUnionIdRO getUnionIdRO(SocialProviderLoginQO unionIdData) {

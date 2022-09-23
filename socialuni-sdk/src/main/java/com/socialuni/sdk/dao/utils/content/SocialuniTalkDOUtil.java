@@ -5,8 +5,8 @@ import com.socialuni.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
-import com.socialuni.social.web.sdk.exception.SocialSystemException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

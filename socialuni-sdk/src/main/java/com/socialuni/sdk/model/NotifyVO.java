@@ -10,7 +10,7 @@ import com.socialuni.sdk.dao.DO.message.MessageDO;
 import com.socialuni.sdk.dao.DO.message.MessageReceiveDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.message.chat.ChatRO;
-import com.socialuni.social.web.sdk.utils.JsonUtil;
+import com.socialuni.social.common.utils.JsonUtil;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;
 

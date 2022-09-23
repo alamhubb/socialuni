@@ -7,9 +7,7 @@ import com.socialuni.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.sdk.model.RO.app.HomeTabRO;
 import com.socialuni.sdk.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.social.web.sdk.model.ResultRO;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
