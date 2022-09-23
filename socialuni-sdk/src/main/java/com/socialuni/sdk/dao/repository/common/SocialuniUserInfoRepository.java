@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 @NoRepositoryBean
-public interface SocialuniUserInfoRepository<T> extends JpaRepository<T, Integer> {
+public interface SocialuniUserInfoRepository<T extends SocialuniUserInfoBaseDO> extends JpaRepository<T, Integer> {
    /* SocialuniUserInfoBaseDO findByUserId(Integer userId);
 
     @Caching(
