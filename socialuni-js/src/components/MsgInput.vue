@@ -46,9 +46,12 @@ import ToastUtil from '../socialuni/utils/ToastUtil'
 export default class MsgInput extends Vue {
   content = ''
   @socialTalkStore.State('currentContent') currentContent: string
-  @socialTalkStore.State('inputContentFocus') inputContentFocus: boolean
   @socialUserStore.State('user') user: CenterUserDetailRO
   inputContentFocusInput = false
+
+  get inputContentFocus(){
+    return socialTalkModule.inputContentFocus
+  }
 
   @Watch('inputContentFocus')
   inputContentFocusWatch () {
