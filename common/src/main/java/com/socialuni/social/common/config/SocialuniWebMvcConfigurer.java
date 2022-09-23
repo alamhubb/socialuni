@@ -10,12 +10,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
+
 @Configuration
 public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Autowired(required = false)
-    @Qualifier("defaultAuthInterceptor")
-    private HandlerInterceptor socialRequestUserConfig;
+    @Resource
+    private HandlerInterceptor socialuniWebInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -42,6 +43,6 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(socialRequestUserConfig).addPathPatterns("/**");
+        registry.addInterceptor(socialuniWebInterceptor).addPathPatterns("/**");
     }
 }
