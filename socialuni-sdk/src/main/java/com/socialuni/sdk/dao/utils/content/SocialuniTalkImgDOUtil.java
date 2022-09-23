@@ -5,7 +5,7 @@ import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.mapper.TalkImgMapper;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;

@@ -5,7 +5,7 @@ import com.socialuni.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniCommentRO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

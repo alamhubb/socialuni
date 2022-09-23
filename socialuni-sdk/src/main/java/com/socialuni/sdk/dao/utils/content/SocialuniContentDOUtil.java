@@ -16,8 +16,8 @@ import com.socialuni.sdk.dao.repository.SocialuniUserImgRepository;
 import com.socialuni.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -7,7 +7,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.model.QO.community.SocialFollowAddQO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

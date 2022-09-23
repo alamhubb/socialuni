@@ -24,6 +24,7 @@
         <module>socialuni-web</module>
         <module>socialuni-admin-web</module>
         <module>socialuni-embed-demo</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -39,6 +40,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.socialuni</groupId>
+                <artifactId>common</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.socialuni</groupId>
                 <artifactId>socialuni-web</artifactId>

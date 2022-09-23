@@ -8,7 +8,7 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

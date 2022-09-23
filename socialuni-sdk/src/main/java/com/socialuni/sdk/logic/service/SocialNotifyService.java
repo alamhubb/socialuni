@@ -4,7 +4,7 @@ import com.socialuni.sdk.logic.domain.notify.SocialQueryNotifyDomain;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
 import com.socialuni.sdk.model.RO.app.SocialUnreadNotifyVO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

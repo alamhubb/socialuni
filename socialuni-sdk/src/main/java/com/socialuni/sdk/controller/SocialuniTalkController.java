@@ -7,7 +7,7 @@ import com.socialuni.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniTalkIdQO;
 import com.socialuni.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

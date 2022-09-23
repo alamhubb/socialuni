@@ -6,7 +6,7 @@ import com.socialuni.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.sdk.dao.repository.CommentRepository;
 import com.socialuni.sdk.utils.DevAccountUtils;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
-import com.socialuni.social.web.sdk.exception.SocialSystemException;
+import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -5,7 +5,7 @@ import com.socialuni.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.sdk.dao.redis.FollowRedis;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.dao.DO.FollowDO;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 

@@ -20,7 +20,7 @@ import com.socialuni.sdk.logic.factory.ReportFactory;
 import com.socialuni.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

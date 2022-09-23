@@ -17,7 +17,7 @@ import com.socialuni.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.sdk.model.RO.user.SocialuniContentUserRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.web.sdk.model.ResultRO;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.sdk.constant.socialuni.GenderType;
 import com.socialuni.sdk.config.SocialTokenUtil;
 import org.apache.commons.lang3.StringUtils;

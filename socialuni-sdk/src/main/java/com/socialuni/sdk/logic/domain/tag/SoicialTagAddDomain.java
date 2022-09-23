@@ -9,7 +9,7 @@ import com.socialuni.sdk.logic.manage.SocialTagManage;
 import com.socialuni.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

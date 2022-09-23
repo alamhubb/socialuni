@@ -12,9 +12,9 @@ import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.utils.UniProviderUtil;
-import com.socialuni.social.web.sdk.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.web.sdk.utils.JsonUtil;
+import com.socialuni.social.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,15 +1,13 @@
 package com.socialuni.social.web.sdk.config;
 
 
-import com.socialuni.social.web.sdk.constant.ErrorType;
+import com.socialuni.social.common.constant.ErrorType;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.web.sdk.utils.IpUtil;
+import com.socialuni.social.common.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
-import com.socialuni.social.web.sdk.utils.RequestUtil;
+import com.socialuni.social.common.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;

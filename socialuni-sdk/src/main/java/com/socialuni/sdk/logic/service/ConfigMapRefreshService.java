@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.sdk.config.SocialuniAppConfig;
 import com.socialuni.sdk.constant.AppConfigConst;
 import com.socialuni.sdk.dao.repository.AppConfigRepository;
-import com.socialuni.social.web.sdk.utils.JsonUtil;
+import com.socialuni.social.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

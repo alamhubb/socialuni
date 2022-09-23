@@ -7,7 +7,7 @@ import com.socialuni.sdk.constant.platform.PlatformType;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.sdk.dao.store.SocialUserAccountStore;
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

@@ -1,24 +1,31 @@
 package com.socialuni.social.web.sdk.config;
 
-import com.socialuni.social.web.sdk.model.ResultRO;
-import com.socialuni.social.web.sdk.constant.ErrorCode;
-import com.socialuni.social.web.sdk.constant.ErrorType;
-import com.socialuni.social.web.sdk.constant.ErrorMsg;
+import com.socialuni.social.common.config.SocialWebControllerAdvice;
+import com.socialuni.social.common.event.WebControllerExceptionEvent;
+import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.constant.ErrorCode;
+import com.socialuni.social.common.constant.ErrorType;
+import com.socialuni.social.common.constant.ErrorMsg;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
+import com.socialuni.social.common.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
+import com.socialuni.social.common.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
 
 @Aspect
-@Component
+@Configuration
 @Slf4j
 public class SocialWebLogAspect {
     /**
@@ -63,5 +70,55 @@ public class SocialWebLogAspect {
         }
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         return result;
+    }
+
+    /**
+     * @see SocialWebControllerAdvice#saveOperateLogDO(String, Integer, String, String, String)
+     * @see WebControllerExceptionEvent
+     * @param event
+     */
+    @EventListener(classes = {WebControllerExceptionEvent.class})
+    public void listen(WebControllerExceptionEvent event) {
+//        System.out.println("注解事件触发：" + event.getClass().getName());
+
+        String errorMsg = event.getErrorMsg();
+        Integer errorCode = event.getErrorCode();
+        String errorType = event.getErrorType();
+        String innerMsg = event.getInnerMsg();
+        String innerMsgDetail = event.getInnerMsgDetail();
+
+        RequestLogDO requestLogDO = RequestLogUtil.get();
+        if (requestLogDO == null) {
+            HttpServletRequest request = RequestUtil.getRequest();
+            Date startTime = new Date();
+            String uri = request.getRequestURI();
+            String userIp = IpUtil.getIpAddr(request);
+            requestLogDO = new RequestLogDO();
+            requestLogDO.setIp(userIp);
+            requestLogDO.setCreateTime(startTime);
+            requestLogDO.setSuccess(true);
+            requestLogDO.setErrorType(ErrorType.success);
+            requestLogDO.setRequestMethod(request.getMethod());
+            requestLogDO.setSystemInfo(RequestUtil.getSystem());
+            requestLogDO.setProvider(RequestUtil.getProvider());
+            requestLogDO.setPlatform(RequestUtil.getPlatform());
+            requestLogDO.setUri(uri);
+        }
+        Date endDate = new Date();
+        long spendTime = endDate.getTime() - requestLogDO.getCreateTime().getTime();
+        requestLogDO.setSuccess(false);
+        requestLogDO.setErrorCode(errorCode);
+        requestLogDO.setErrorMsg(errorMsg);
+        requestLogDO.setErrorType(errorType);
+        requestLogDO.setInnerMsg(innerMsg);
+        requestLogDO.setInnerMsgDetail(innerMsgDetail);
+        requestLogDO.setEndTime(endDate);
+        requestLogDO.setSpendTime(spendTime);
+
+        RequestLogUtil.saveAsyncAndRemove(requestLogDO);
+        ErrorLogUtil.saveAsync(requestLogDO);
+
+        log.info("[{}：{}],[{}({})][spendTimes:{}]", requestLogDO.getId(), requestLogDO.getErrorMsg(), requestLogDO.getRequestMethod(), requestLogDO.getUri(), spendTime);
+
     }
 }

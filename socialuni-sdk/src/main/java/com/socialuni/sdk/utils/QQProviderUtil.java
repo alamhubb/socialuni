@@ -5,7 +5,7 @@ import com.socialuni.sdk.constant.platform.QQUrl;
 import com.socialuni.sdk.model.UniUnionIdRO;
 import com.socialuni.sdk.utils.common.RestUtil;
 import com.socialuni.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.web.sdk.exception.UniSdkException;
+import com.socialuni.social.common.exception.exception.UniSdkException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

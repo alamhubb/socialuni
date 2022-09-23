@@ -1,6 +1,6 @@
 package com.socialuni.sdk.constant.socialuni;
 
-import com.socialuni.social.web.sdk.exception.SocialParamsException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 
 import java.util.Arrays;
 import java.util.List;
