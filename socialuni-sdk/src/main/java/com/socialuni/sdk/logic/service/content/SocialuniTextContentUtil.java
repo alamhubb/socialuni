@@ -10,6 +10,7 @@ import com.socialuni.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.utils.QQUtil;
 import com.socialuni.sdk.utils.SocialuniImgContentUtil;
+import com.socialuni.sdk.utils.WxUtil;
 import com.socialuni.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.sdk.utils.content.TextContentUtil;
 import com.socialuni.social.web.sdk.exception.SocialBusinessException;
@@ -68,10 +69,10 @@ public class SocialuniTextContentUtil {
             //校验是否包含违禁词
             illegalWordService.checkHasIllegals(content);
             //只用微信校验一下基本的
-            /*HttpResult wxResult = WxUtil.checkTextWxSec(content);
+            HttpResult wxResult = WxUtil.checkTextWxSec(content);
             if (wxResult.hasError()) {
                 throw new SocialBusinessException(ErrorMsg.CHECK_VIOLATION_ERR_MSG);
-            }*/
+            }
             //qq要求必须接入，只用qq校验一下基本的
             HttpResult qqResult = QQUtil.checkContentQQSec(content);
             if (qqResult.hasError()) {

@@ -4,6 +4,7 @@ import com.socialuni.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.sdk.model.QO.user.*;
 import com.socialuni.sdk.logic.service.user.SocialuniUserService;
+import com.socialuni.sdk.model.QO.user.edit.SocialUserEditQO;
 import com.socialuni.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.sdk.model.RO.user.SocialuniUserImgRO;

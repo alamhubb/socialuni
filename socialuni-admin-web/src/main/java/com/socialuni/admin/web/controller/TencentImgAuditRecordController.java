@@ -1,5 +1,6 @@
 package com.socialuni.admin.web.controller;
 
+import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.model.QO.ImgAuditQO;
 import com.socialuni.admin.web.model.RO.TencentCosAuditRecordRO;
 import com.socialuni.admin.web.service.ViolationService;
@@ -80,7 +81,7 @@ public class TencentImgAuditRecordController {
     public void reportAudit(ImgAuditQO auditQO) {
         TencentCosAuditRecordDO tencentCosAuditRecordDO = tencentCosAuditRecordRepository.getOne(auditQO.getId());
         tencentCosAuditRecordDO.setStatus(CommonStatus.delete);
-        if (!ViolateType.noViolation.equals(auditQO.getViolateType())) {
+        if (!AdminAuditResultType.noViolation.equals(auditQO.getViolateType())) {
             SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(tencentCosAuditRecordDO.getImgParentContentId());
             violationService.modelContentViolation(talkDO, auditQO.getViolateType());
         }

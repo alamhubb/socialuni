@@ -1,6 +1,8 @@
 package com.socialuni.admin.web.controller;
 
-import com.socialuni.admin.web.model.ReportVO;
+import com.socialuni.admin.web.constant.AdminAuditResultType;
+import com.socialuni.admin.web.domain.AdminReportQueryDomain;
+import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.AdminUserService;
 import com.socialuni.sdk.constant.ViolateType;
@@ -54,6 +56,11 @@ public class ReportController {
     private KeywordsRepository keywordsRepository;
     @Resource
     private KeywordsService keywordsService;
+    @Resource
+    private AdminReportQueryDomain adminReportQueryDomain;
+
+    //被举报的内容和待审核的成年照片一起审核
+    //待审核的成年照片，打个标识？ is成年照片审核。
 
 
 /*
@@ -68,40 +75,23 @@ public class ReportController {
 
     @RequestMapping("queryReportTypes")
     public ResultRO<List<String>> queryReportTypes() {
-        return new ResultRO<>(ViolateType.adminFrontShowReportTypes);
+        return new ResultRO<>(AdminAuditResultType.adminFrontHasUnderageShowReportTypes);
     }
 
     @PostMapping("queryReports")
-    public ResultRO<List<ReportVO>> queryReports() {
-        //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
-        List<ReportDO> reportDOS;
-        //清池可以查询所有，否则只能查询自己的
-        if (DevAccountUtils.isCenter()) {
-            reportDOS = reportRepository.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
-        } else {
-            reportDOS = reportRepository.findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(ReportStatus.auditStatus, user.getId());
-        }
-        List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
+    public ResultRO<List<ReportRO>> queryReports() {
+        List<ReportRO> reportVOS = adminReportQueryDomain.queryWaitAuditReports();
         return new ResultRO<>(reportVOS);
     }
 
+
     @PostMapping("reportAuditList")
-    public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ReportVO> auditVOS) {
-        ResultRO<String> resultRO = new ResultRO<>();
-        for (ReportVO auditVO : auditVOS) {
-            //首先校验 reportid是否存在
-            ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
-            if (methodResult != null) {
-                return methodResult;
-            }
-        }
-        resultRO.setData("审核成功");
-        return resultRO;
+    public ResultRO<String> reportAuditList(@RequestBody @NotNull List<ReportRO> auditVOS) {
+        return adminReportService.auditReportList(auditVOS);
     }
 
     @PostMapping("reportAudit")
-    public ResultRO<String> reportAudit(@RequestBody @Valid @NotNull ReportVO auditVO) {
+    public ResultRO<String> reportAudit(@RequestBody @Valid @NotNull ReportRO auditVO) {
         //首先校验 reportid是否存在
         ResultRO<String> resultRO = new ResultRO<>();
         ResultRO<String> methodResult = adminReportService.getStringResultVO(auditVO);
@@ -111,7 +101,7 @@ public class ReportController {
     }
 
     @PostMapping("queryUserReports")
-    public ResultRO<List<ReportVO>> queryReports(Integer userId) {
+    public ResultRO<List<ReportRO>> queryReports(Integer userId) {
         //展示用户的前多少条动态，评论，
 
         /*SocialuniUserDO user = new SocialuniUserDO();
@@ -119,7 +109,7 @@ public class ReportController {
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
 //        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserAndStatusOrderByUpdateTimeDesc(user, CommonStatus.violation);
         List<ReportDO> reportDOS = new ArrayList<>();
-        List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
+        List<ReportRO> reportVOS = reportDOS.stream().map(ReportRO::new).collect(Collectors.toList());
 //        List<SocialTalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
 //        return new ResultVO<>(list.stream().map(ReportTalkVO::new).collect(Collectors.toList()));
         return new ResultRO<>(reportVOS);
@@ -138,20 +128,20 @@ public class ReportController {
 
 
     @PostMapping("queryUserContentsByPhoneNum")
-    public ResultRO<List<ReportVO>> queryUserContentsByPhoneNum(String phoneNum) {
+    public ResultRO<List<ReportRO>> queryUserContentsByPhoneNum(String phoneNum) {
         SocialuniUserDO user = adminUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
         List<ReportDO> reportDOS = reportRepository.findTop10ByContentUserIdOrderByCreateTimeDesc(user.getUnionId());
-        List<ReportVO> reportVOS = reportDOS.stream().map(ReportVO::new).collect(Collectors.toList());
+        List<ReportRO> reportVOS = reportDOS.stream().map(ReportRO::new).collect(Collectors.toList());
 
         //查询用户10条动态
         List<SocialuniTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());
-        List<ReportVO> talkReportVOS = talkDOS.stream().map(ReportVO::new).collect(Collectors.toList());
+        List<ReportRO> talkReportVOS = talkDOS.stream().map(ReportRO::new).collect(Collectors.toList());
 
         //查询用户10条评论
         List<SocialuniCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getUnionId());
-        List<ReportVO> commentReportVOS = commentDOS.stream().map(ReportVO::new).collect(Collectors.toList());
+        List<ReportRO> commentReportVOS = commentDOS.stream().map(ReportRO::new).collect(Collectors.toList());
 
         reportVOS.addAll(talkReportVOS);
         reportVOS.addAll(commentReportVOS);

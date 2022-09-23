@@ -40,7 +40,7 @@ public class SoicialReportAddDomain {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
-        if (!ViolateType.violateTypes.contains(reportType)) {
+        if (!ViolateType.frontShowReportTypes.contains(reportType)) {
             throw new SocialParamsException("错误的举报类型");
         }
         String reportContentType = reportAddVO.getReportContentType();

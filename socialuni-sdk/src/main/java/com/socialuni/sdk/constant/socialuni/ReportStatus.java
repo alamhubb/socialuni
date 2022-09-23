@@ -11,7 +11,7 @@ public class ReportStatus extends CommonStatus {
     public static final String preAudit = ConstStatus.preAudit;
 
     //待审核
-    public static final String audit = ConstStatus.audit;
+    public static final String audit = ConstStatus.auditing;
 
     //违规
     public static final String violation = ConstStatus.violation;
@@ -19,7 +19,7 @@ public class ReportStatus extends CommonStatus {
     //不违规
 //    public static final String enable = ConstStatus.noViolation;
 
-    public static final List<String> auditStatus = Arrays.asList(ConstStatus.preAudit, ConstStatus.audit);
+    public static final List<String> auditStatus = Arrays.asList(ConstStatus.preAudit, ConstStatus.auditing);
 }
 
 

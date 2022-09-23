@@ -1,6 +1,6 @@
 package com.socialuni.sdk.dao.redis;
 
-import com.socialuni.sdk.dao.redis.redisKey.RedisKeysConst;
+import com.socialuni.sdk.dao.redis.redisKey.CommonRedisKey;
 import com.socialuni.sdk.constant.socialuni.CommonStatus;
 import com.socialuni.sdk.dao.DO.FollowDO;
 import com.socialuni.sdk.dao.repository.FollowRepository;
@@ -19,12 +19,12 @@ public class FollowRedis {
     @Resource
     FollowRepository followRepository;
 
-    @Cacheable(cacheNames = RedisKeysConst.queryUserFollowUserIds, key = "#userId")
+    @Cacheable(cacheNames = CommonRedisKey.queryUserFollowUserIds, key = "#userId")
     public List<Integer> queryUserFollowUserIds(Integer userId) {
         return followRepository.queryUserFollowUserIds(userId, CommonStatus.enable);
     }
 
-    @Cacheable(cacheNames = RedisKeysConst.queryUserAndBeUserFollow, key = "#userId+'-'+#beUserId")
+    @Cacheable(cacheNames = CommonRedisKey.queryUserAndBeUserFollow, key = "#userId+'-'+#beUserId")
     public FollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId) {
         return followRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
     }

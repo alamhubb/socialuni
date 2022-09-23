@@ -1,7 +1,7 @@
 <template>
   <q-popup ref="circleChooseDialog" bottom hide-modal hide-confirm>
     <template #headerLeft>
-      <q-input class="w100p ml-sm" v-model="circleSearchText"></q-input>
+      <q-input class="w100p ml-sm bd-round" v-model="circleSearchText"></q-input>
     </template>
     <div class="h80vh">
       <scroll-view class="h100p" scroll-y v-if="circleSearchText">

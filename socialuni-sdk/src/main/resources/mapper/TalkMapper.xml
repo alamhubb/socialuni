@@ -29,7 +29,7 @@
         order by t.update_time desc
     </select>
 
-    <select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">
+    <!--<select id="queryMineTalkIdsByCom" resultType="java.lang.Integer">
         SELECT t.union_id FROM s_talk t WHERE t.user_id=#{userId}
         and t.status in
         <foreach item="item" index="index" collection="statusList"
@@ -37,7 +37,7 @@
             #{item}
         </foreach>
         order by t.update_time desc
-    </select>
+    </select>-->
 
     <select id="queryTalkIdsByAndUser" resultType="java.lang.Integer">
         SELECT t.union_id

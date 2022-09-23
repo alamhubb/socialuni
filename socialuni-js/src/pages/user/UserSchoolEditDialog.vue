@@ -40,6 +40,7 @@ import {socialUserModule} from "@/socialuni/store";
 import QSelect from "@/qing-ui/components/QSelect/QSelect.vue";
 import AlertUtil from "@/socialuni/utils/AlertUtil";
 import SocialuniUserExpandAPI from "@/socialuni/api/socialuni/SocialuniUserExpandAPI";
+import ToastUtil from '@/socialuni/utils/ToastUtil'
 
 @Component({
   components: {QSelect, QIcon, QPopup, QSearch}
@@ -82,6 +83,9 @@ export default class UserSchoolEditDialog extends Vue {
   }
 
   async confirm() {
+    if (!this.schoolNameValue){
+      ToastUtil.error('学校名称不能为空')
+    }
     try {
       await AlertUtil.confirm('是否确认将学校名称设置为' + this.schoolNameValue + '确认后不可变更')
       this.$refs.schoolDialog.close()

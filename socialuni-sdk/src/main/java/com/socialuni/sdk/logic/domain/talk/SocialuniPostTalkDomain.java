@@ -16,8 +16,7 @@ import com.socialuni.sdk.dao.DO.tag.TagDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.sdk.dao.repository.community.*;
 import com.socialuni.sdk.dao.utils.SocialuniCircleDOUtil;
-import com.socialuni.sdk.dao.utils.SocialuniUserExpandDOUtil;
-import com.socialuni.sdk.dao.utils.content.SocialuniContentDOUtil;
+import com.socialuni.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
@@ -108,8 +107,8 @@ public class SocialuniPostTalkDomain {
             if (!tagNames.contains(SocialuniConst.devEnvTagName)) {
                 //校验用户
                 SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
-                SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(talkVOContent);
             }
+            SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(talkVOContent);
         }
 
         for (SocialuniImgAddQO talkVOImg : talkVOImgs) {

@@ -3,7 +3,9 @@ package com.socialuni.sdk.dao.repository;
 import com.socialuni.sdk.dao.DO.user.SocialUnionContentBaseDO;
 import com.socialuni.sdk.dao.DO.user.SocialuniUserImgDO;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -21,8 +23,13 @@ public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserI
     @Query(nativeQuery = true, value = "select t.union_id from s_user_img t where t.user_id =:userId and t.status in (:status) order by t.create_time desc limit 50")
     List<Integer> findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
 
-    //需要注意不能使用 @cachePut 上面是数组
-    @CacheEvict(cacheNames = "getUserImgByUnionId", key = "#userImgDO.unionId")
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "getUserImgUnionIdsByUserIdTop6", key = "#userImgDO.userId"),
+                    @CacheEvict(cacheNames = "getUserImgUnionIdsByUserIdTop50", key = "#userImgDO.userId")
+            },
+            put = {@CachePut(cacheNames = "getUserImgByUnionId", key = "#userImgDO.unionId")}
+    )
     SocialuniUserImgDO save(SocialuniUserImgDO userImgDO);
 
     SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);

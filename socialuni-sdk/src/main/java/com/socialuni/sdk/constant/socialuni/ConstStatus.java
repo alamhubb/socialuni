@@ -21,7 +21,7 @@ public class ConstStatus {
     public static final String preAudit = "预审核";
 
     //待审核
-    public static final String audit = "审核中";
+    public static final String auditing = "审核中";
 
     //违规
     public static final String violation = "违规";

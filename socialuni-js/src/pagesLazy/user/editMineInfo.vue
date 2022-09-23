@@ -1,6 +1,6 @@
 <template>
-  <view v-if="user" class="flex-col">
-    <view class="pt-0 bg-white solid-bottom flex-auto overflow-auto">
+  <view v-if="user" class="h100p">
+    <view class="pt-0 bg-white solid-bottom mt-10vh">
       <view>
         <view class="cu-form-group">
           <view class="title">
@@ -90,9 +90,10 @@
         -->
       </view>
     </view>
-    <view class="cu-bar btn-group bg-white flex-none pt-5 pb-sm">
+    <view class="cu-bar btn-group bg-white flex-none pt-5 pb-sm py-lg">
       <!--      <button class="cu-btn bd-gray radius bg-white" @click="closeUserEditPop">取消</button>-->
-      <button class="cu-btn bg-green radius" @click="saveUser" :disabled="btnDisabled">保存</button>
+      <q-button info light md @click="goBack" :disabled="btnDisabled">返回</q-button>
+      <q-button success md @click="saveUser" :disabled="btnDisabled">保存</q-button>
     </view>
   </view>
 </template>
@@ -110,9 +111,12 @@ import EnumStrVO from '../../socialuni/constant/EnumStrVO'
 import GenderType from '../../socialuni/constant/GenderType'
 import UserEditVO from '../../socialuni/model/user/UserEditVO'
 import BirthAgeUtil from '@/socialuni/utils/BirthAgeUtil'
-
-@Component
-export default class UserEdit extends Vue {
+import QButton from '@/qing-ui/components/QButton/QButton.vue'
+import RouterUtil from '@/socialuni/utils/RouterUtil'
+@Component({
+  components: { QButton }
+})
+export default class UserEditView extends Vue {
   @socialUserStore.State('user') user: CenterUserDetailRO
   nickname = ''
   gender = GenderType.girl
@@ -239,6 +243,10 @@ export default class UserEdit extends Vue {
 
   genderChange ({ target }) {
     this.gender = target.value
+  }
+
+  goBack(){
+    RouterUtil.goBackOrMine()
   }
 }
 </script>
