@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableSocialuni
-@SpringBootApplication(scanBasePackages = {"com.socialuni.web","com.socialuni"})
+@SpringBootApplication(scanBasePackages = {"com.socialuni.social"})
 //@EnableCaching
 public class SocialuniWebApplication {
     public static void main(String[] args) {
