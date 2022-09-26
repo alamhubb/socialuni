@@ -89,6 +89,25 @@ public class TalkQueryStore {
 
         SocialuniAppConfigBO appConfig = SocialuniAppConfig.getAppConfig();
 
+
+        //是否禁止未成年人内容
+        Boolean disableUnderageContent = null;
+        if (appConfig.getDisableUnderageContent()) {
+            disableUnderageContent = true;
+        }
+
+        //是否禁止内容中包含联系方式
+        Boolean disableContentHasContactInfo = null;
+        if (appConfig.getDisableContentHasContactInfo()) {
+            disableContentHasContactInfo = true;
+        }
+
+        //是否禁止内容中包含二维码
+        Boolean disableContentHasQrCode = null;
+        if (appConfig.getDisableContentHasQrCode()) {
+            disableContentHasQrCode = true;
+        }
+
         //为什么要用程序过滤，为了多缓存内容
         //查询所有talkId
         //需要连接用户表查询，后面不需要重复筛选，因为已经基础过滤出来了这些值，后面与合并逻辑，所以不需要在过滤
@@ -96,9 +115,9 @@ public class TalkQueryStore {
         List<Integer> talkUnionIds = talkMapper.queryTalkIdsByTalkCondition(
                 ContentStatus.enable, queryBO.getAdCode(),
                 queryBO.getTalkVisibleGender(), mineUserGender, null,
-                appConfig.getDisableUnderageContent(),
-                appConfig.getDisableContentHasContactInfo(),
-                appConfig.getDisableContentHasQrCode());
+                disableUnderageContent,
+                disableContentHasContactInfo,
+                disableContentHasQrCode);
         //取交集
 
         userTalkUnionIds = ListConvertUtil.intersection(userTalkUnionIds, talkUnionIds);
