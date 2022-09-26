@@ -10,26 +10,26 @@
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.socialuni</groupId>
+    <groupId>com.socialuni.social</groupId>
     <artifactId>socialuni-parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>pom</packaging>
 
     <name>socialuni-parent</name>
     <description>qingchi_back project for Spring Boot</description>
 
     <modules>
-        <module>social-web-sdk</module>
+        <module>socialuni-common</module>
+        <module>socialuni-web-sdk</module>
         <module>socialuni-sdk</module>
         <module>socialuni-web</module>
         <module>socialuni-admin-web</module>
         <module>socialuni-embed-demo</module>
-        <module>common</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
-        <socialuni.version>0.2.0</socialuni.version>
+        <socialuni.version>0.3.0</socialuni.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
@@ -41,27 +41,27 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>common</artifactId>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-common</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>socialuni-web</artifactId>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-web-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.socialuni</groupId>
+                <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.socialuni</groupId>
-                <artifactId>social-web-sdk</artifactId>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.socialuni</groupId>
+                <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-embed-demo</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>

@@ -5,7 +5,7 @@
 
     <artifactId>socialuni-web</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 
     <name>socialuni-web</name>
     <description>qingchi_back project for Spring Boot</description>
@@ -26,9 +26,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.socialuni</groupId>
+            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-sdk</artifactId>
-            <version>0.2.0</version>
+            <version>0.3.0</version>
         </dependency>
 
         <dependency>

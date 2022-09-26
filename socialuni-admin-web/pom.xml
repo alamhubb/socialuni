@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>socialuni-admin-web</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>socialuni-admin-web</name>
     <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
@@ -19,9 +19,9 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.socialuni</groupId>
+            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-sdk</artifactId>
-            <version>0.2.0</version>
+            <version>0.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
