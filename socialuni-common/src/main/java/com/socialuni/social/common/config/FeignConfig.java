@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.config;
+package com.socialuni.social.common.config;
 
 import feign.Feign;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

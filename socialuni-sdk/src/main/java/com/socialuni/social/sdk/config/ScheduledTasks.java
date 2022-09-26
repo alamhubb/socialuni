@@ -26,7 +26,12 @@ public class ScheduledTasks {
     @Resource
     private UserRepository userRepository;
 
+    /**
+     * @deprecated <a href="https://cloud.tencent.com/developer/article/1582434">Spring Boot 的 application.properties 中相关的配置说明</a>
+     * @return
+     */
     @Bean
+    @Deprecated
     public ThreadPoolTaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
         taskScheduler.setPoolSize(10);
