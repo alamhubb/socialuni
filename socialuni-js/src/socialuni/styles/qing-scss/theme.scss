@@ -53,11 +53,6 @@ $color-bg-base: $color-white !default;
 $color-theme: #5B21B6 !default;
 $color-theme-bg: #FDF2F8 !default;
 $color-theme-light: #e4bad4 !default;
-//主题亮色
-$color-theme2: #A2D2FF !default;
-//背景色
-$color-theme3: $color-bg-default !default;
-$color-theme4: $color-white !default;
 
 $colors-theme: (
         girl:$color-girl,
@@ -136,10 +131,6 @@ $colors-custom-bg: (
         theme: $color-theme,
         theme-bg: $color-theme-bg,
         theme-light: $color-theme-light,
-        theme2: $color-theme2,
-        theme3: $color-theme3,
-        theme4: $color-theme4,
-  //theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,
         menu-hover: $color-bg-menu-hover,
