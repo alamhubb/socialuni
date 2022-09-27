@@ -20,7 +20,16 @@ public class SocialuniCommonRepository {
         t = simpleJpaRepository.save(t);
         return t;
     }
-
+    @Transactional
+    public <T>  void  delete(T t) {
+        SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(t);
+        simpleJpaRepository.delete(t);
+    }
+    @Transactional
+    public <T> void deleteById(Integer id,Class<T> tClass) {
+        SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(tClass);
+        simpleJpaRepository.deleteById(id);
+    }
     public <T> T findById(Integer id, Class<T> tClass) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(tClass);
         T t = (T) simpleJpaRepository.findById(id);
