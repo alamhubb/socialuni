@@ -31,6 +31,11 @@ public abstract class SocialuniRepositoryFacade {
         return getRepository().findByExample(example);
     }
 
+    public static <T> T find(T example) {
+        return getRepository().findByExample(example).get();
+    }
+
+
     private static SocialuniCommonRepository getRepository() {
         return repository;
     }
