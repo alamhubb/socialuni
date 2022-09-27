@@ -44,13 +44,16 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse serverHttpResponse) {
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
+        // 兼容没有返回体的。
         if (response.getStatus() == 200 && result instanceof ResultRO) {
             Integer resCode = ((ResultRO<?>) result).getCode();
             if (resCode > 0) {
                 response.setStatus(resCode);
             }
+            return result;
+        }else{
+            return ResultRO.success(result);
         }
-        return result;
     }
 
     @Override
