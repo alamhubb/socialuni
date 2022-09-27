@@ -16,25 +16,24 @@ public abstract class SocialuniRepositoryFacade {
     }
 
 
-
     public static <T> T findById(Integer id, Class<T> tClass) {
         return getRepository().findById(id, tClass);
     }
 
     /**
-     * @see SocialuniCommonRepository#findByExample(Object)
      * @param example
      * @param <T>
      * @return
+     * @see SocialuniCommonRepository#findByExample(Object)
      */
     public static <T> Optional<T> findByExample(T example) {
         return getRepository().findByExample(example);
     }
 
     public static <T> T find(T example) {
-        return getRepository().findByExample(example).get();
+        Optional<T> optionalT = getRepository().findByExample(example);
+        return optionalT.orElse(null);
     }
-
 
     private static SocialuniCommonRepository getRepository() {
         return repository;
