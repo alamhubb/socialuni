@@ -1,5 +1,5 @@
 <template>
-  <view class="flex-col h100p">
+  <view class="flex-col h100p bg-theme-bg">
     <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
     <view class="flex-col h100vh">
       <q-navbar class="flex-none">

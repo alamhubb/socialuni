@@ -37,7 +37,7 @@
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-            <div class="px-sm pb-60 bg-theme3"
+            <div class="px-sm pb-60"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
               <talk-swipers v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
 
@@ -76,6 +76,7 @@
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
+                           class="bg-theme-light"
                            :talk-tab-type="curTalkTabObj.type"
                            @delete-talk="deleteTalk"
                 />
