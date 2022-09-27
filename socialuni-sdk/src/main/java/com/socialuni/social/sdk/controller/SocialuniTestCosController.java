@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserSocialCoinDO;
-import com.socialuni.social.sdk.dao.utils.common.SocialuniCommonDOUtil;
+import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
 import com.socialuni.social.common.model.ResultRO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SocialuniTestCosController {
     @GetMapping("test1")
     public ResultRO testCos() {
-        SocialuniUserSocialCoinDO socialuniUserSocialCoinDO = SocialuniCommonDOUtil.findByUserId(1, SocialuniUserSocialCoinDO.class);
+        SocialuniUserSocialCoinDO example = new SocialuniUserSocialCoinDO();
+        example.setUserId(1);
+        SocialuniUserSocialCoinDO socialuniUserSocialCoinDO = SocialuniRepositoryFacade.findByExample(example).get();
         return new ResultRO<>(socialuniUserSocialCoinDO);
     }
 }
