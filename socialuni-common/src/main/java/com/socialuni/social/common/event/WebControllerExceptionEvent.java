@@ -15,6 +15,6 @@ import org.springframework.context.ApplicationEvent;
 public class WebControllerExceptionEvent extends ApplicationEvent {
     String errorMsg; Integer errorCode; String errorType; String innerMsg; String innerMsgDetail;
     public WebControllerExceptionEvent() {
-        super(null);
+        super("");
     }
 }
