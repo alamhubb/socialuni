@@ -76,7 +76,6 @@
 
               <view v-for="(talk,index) in talkTabs[swiperIndex].talks" :key="talk.id">
                 <talk-item :talk="talk"
-                           class="bg-theme-light"
                            :talk-tab-type="curTalkTabObj.type"
                            @delete-talk="deleteTalk"
                 />
@@ -194,7 +193,7 @@ export default class TabsTalk extends Vue {
   @socialLocationStore.Getter('location') location: DistrictVO
 
   // 轮播图
-  configShowSwipers () {
+  get configShowSwipers () {
     return socialConfigModule.appMoreConfig.showSwipers
   }
 

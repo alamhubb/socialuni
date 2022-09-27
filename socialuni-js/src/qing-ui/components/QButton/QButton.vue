@@ -230,7 +230,7 @@ export default class QButton extends Vue {
   get buttonClass () {
     let buttonClass = `${this.btnDisabled ? 'bg-disabled' : 'bg-click'} `
     if (this.text) {
-      buttonClass += `bd-none bg-white color-${this.curTheme}`
+      buttonClass += `bd-none bg-theme-light color-${this.curTheme}`
     } else {
       buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize} text-${this.curSize}`
       if (this.round) {
