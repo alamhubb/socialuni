@@ -13,7 +13,6 @@
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
-
     <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh">
       <swiper :current="currentTabIndex"
               :style="{
@@ -32,12 +31,12 @@
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
 
-          <scroll-view class="h100p" :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+          <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden " style="width: calc(100% - 20px)" :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
                        :scroll-top="talkTabs[swiperIndex].scrollTop"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
-            <div class="px-sm pb-60"
+            <div class="pb-60"
                  v-if="talkTabs[swiperIndex].talks.length || talkTabs[swiperIndex].name !== followTabName">
               <talk-swipers v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
 
