@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.utils;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.socialuni.social.sdk.config.redis.Status;
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -77,7 +77,7 @@ public class RedisUtil {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-                redisTemplate.delete(CollectionUtils.arrayToList(key));
+                redisTemplate.delete(CollectionUtil.toList(key));
             }
         }
     }
