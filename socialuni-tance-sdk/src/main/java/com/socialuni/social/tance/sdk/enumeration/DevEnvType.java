@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant;
+package com.socialuni.social.tance.sdk.enumeration;
 
 public class DevEnvType {
     public static final String prod = "prod";

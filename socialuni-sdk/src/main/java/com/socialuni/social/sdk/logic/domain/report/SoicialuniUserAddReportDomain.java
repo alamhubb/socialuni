@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.UserType;

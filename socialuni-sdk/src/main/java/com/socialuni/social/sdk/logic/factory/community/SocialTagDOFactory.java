@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.logic.factory.community;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.common.utils;
 
 import java.util.UUID;
 

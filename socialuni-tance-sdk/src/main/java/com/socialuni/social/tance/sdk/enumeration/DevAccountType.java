@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.socialuni;
+package com.socialuni.social.tance.sdk.enumeration;
 
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 

@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.dao.store;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;

@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountDO;
 import com.socialuni.social.sdk.logic.entity.SocialuniDevAccountEntity;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;

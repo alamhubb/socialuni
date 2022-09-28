@@ -1,8 +1,8 @@
-package com.socialuni.social.sdk.dao.DO.dev;
+package com.socialuni.social.tance.entity;
 
 import com.socialuni.social.common.repository.CommonContentBaseDO;
-import com.socialuni.social.sdk.constant.socialuni.DevAccountType;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,7 +11,8 @@ import java.io.Serializable;
 /**
  * 开发者账户
  */
-@Data@Entity
+@Data
+@Entity
 @Table(name = "s_dev_account",
         indexes = {
                 @Index(columnList = "realName"),

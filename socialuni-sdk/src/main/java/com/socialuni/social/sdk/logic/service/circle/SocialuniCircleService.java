@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.circle;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
@@ -12,10 +12,10 @@ import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
 import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

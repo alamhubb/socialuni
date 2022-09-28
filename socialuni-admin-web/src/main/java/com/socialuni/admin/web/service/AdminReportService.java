@@ -2,7 +2,7 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.model.ReportRO;
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.socialuni.ReportStatus;

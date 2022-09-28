@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.dao.repository.user.SocialUserViolationRepositor
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.dao.utils.SocialTokenDOUtil;
 import com.socialuni.social.sdk.dao.DO.user.*;
-import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
+import com.socialuni.social.tance.config.SocialRequestUserConfig;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialNullUserException;
 import lombok.extern.slf4j.Slf4j;

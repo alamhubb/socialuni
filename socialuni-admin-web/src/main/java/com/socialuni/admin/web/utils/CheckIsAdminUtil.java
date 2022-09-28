@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.utils;
 
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 
 public class CheckIsAdminUtil {

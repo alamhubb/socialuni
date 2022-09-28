@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.logic.platform.MapUtil;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
 import org.springframework.stereotype.Component;
 

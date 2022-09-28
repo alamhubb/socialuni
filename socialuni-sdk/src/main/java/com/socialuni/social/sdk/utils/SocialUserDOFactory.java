@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.ObjectUtils;

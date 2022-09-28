@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserPhoneRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;

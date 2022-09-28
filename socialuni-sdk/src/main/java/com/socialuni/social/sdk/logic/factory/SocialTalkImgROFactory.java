@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkImgRO;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.user;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;

@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

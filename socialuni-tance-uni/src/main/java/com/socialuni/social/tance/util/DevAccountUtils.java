@@ -1,17 +1,16 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.tance.util;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
-import com.socialuni.social.sdk.constant.socialuni.SocialFeignHeaderName;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountProviderDO;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountProviderRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevTokenRepository;
+import com.socialuni.social.tance.repository.DevAccountProviderRepository;
+import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.repository.DevTokenRepository;
 import com.socialuni.social.common.utils.RequestUtil;
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

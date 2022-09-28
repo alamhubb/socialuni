@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.entity;
 
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;

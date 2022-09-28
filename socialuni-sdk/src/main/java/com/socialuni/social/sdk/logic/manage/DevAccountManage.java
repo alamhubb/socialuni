@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.manage;
 
 
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountProviderRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.tance.repository.DevAccountProviderRepository;
+import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountProviderDO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.OAuthUserInfoQO;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.circle;
 
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.repository.CommonContentBaseDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import lombok.Data;

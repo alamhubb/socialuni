@@ -2,14 +2,14 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.tance.controller.SocialuniDevAccountAPI;
+import com.socialuni.social.tance.util.SocialTokenUtil;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevTokenDO;
-import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevTokenRepository;
+import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.entity.DevTokenDO;
+import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.repository.DevTokenRepository;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
@@ -33,7 +33,7 @@ public class AdminLoginService {
 
     //秘钥登录
     @Transactional
-    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountQueryQO devAccountQueryQO) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(SocialuniDevAccountAPI.DevAccountQueryQO devAccountQueryQO) {
         DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devAccountQueryQO.getSecretKey());
         if (devAccountDO == null) {
             throw new SocialBusinessException("秘钥错误");

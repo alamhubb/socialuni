@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.socialuni.social.common.utils.UUIDUtil;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.logic.platform.PushMsgErrCode;
 import com.socialuni.social.sdk.logic.platform.WxErrCode;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.entity;
 
 
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountDO;
 import com.socialuni.social.sdk.logic.manage.ThirdUserAuthManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserManage;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;

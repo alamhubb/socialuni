@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import com.socialuni.social.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.social.sdk.utils.SocialTagStore;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

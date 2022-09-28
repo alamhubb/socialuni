@@ -2,14 +2,15 @@ package com.socialuni.social.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.sdk.constant.AppData;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.entity.DevAccountDO;
 import com.socialuni.social.sdk.dao.redis.DistrictRedis;
-import com.socialuni.social.sdk.dao.repository.dev.DevSocialuniIdRepository;
+import com.socialuni.social.tance.repository.DevSocialuniIdRepository;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

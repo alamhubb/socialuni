@@ -6,11 +6,11 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountDO;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

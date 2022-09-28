@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.logic.manage;
 
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.tance.util.SocialTokenUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

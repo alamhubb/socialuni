@@ -1,9 +1,9 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.entity.DevAccountProviderDO;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 

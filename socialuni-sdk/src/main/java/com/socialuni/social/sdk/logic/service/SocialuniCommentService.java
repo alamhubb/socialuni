@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.comment.SocialuniCommentDeleteDomain;
 import com.socialuni.social.sdk.logic.domain.comment.SocialuniCommentPostDomain;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCommentAPI;

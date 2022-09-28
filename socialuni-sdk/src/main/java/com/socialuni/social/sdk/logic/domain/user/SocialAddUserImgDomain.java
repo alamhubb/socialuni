@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
 import com.socialuni.social.sdk.dao.repository.SocialuniUserImgRepository;

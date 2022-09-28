@@ -2,6 +2,7 @@ package com.socialuni.social.web.sdk.config;
 
 
 import com.socialuni.social.common.constant.ErrorType;
+import com.socialuni.social.tance.config.SocialRequestUserConfig;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.common.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

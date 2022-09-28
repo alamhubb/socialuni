@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;

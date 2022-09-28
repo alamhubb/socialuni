@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.utils.TencentSmsServe;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;

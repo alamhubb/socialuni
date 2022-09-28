@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.store;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.social.sdk.dao.DO.tag.SocialuniTagTypeDO;
 import com.socialuni.social.sdk.dao.repository.community.SocialuniTagTypeRepository;
