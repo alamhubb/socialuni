@@ -1,6 +1,8 @@
 package com.socialuni.social.sdk.config;
 
 
+import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
+import com.socialuni.social.tance.repository.TanceBaseRepository;
 import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableFeignClients("com.socialuni.social")
 @ComponentScan("com.socialuni.social")
 @EnableJpaRepositories("com.socialuni.social")
+//@EnableJpaRepositories(value = "com.socialuni.social",repositoryBaseClass  = PublishDataTanceBaseRepository.class)
 @EntityScan("com.socialuni.social")
 @EnableTransactionManagement
 @EnableAsync

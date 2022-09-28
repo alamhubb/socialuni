@@ -26,6 +26,7 @@ import java.util.List;
  * @date 2022/9/27 14:46
  * @since 1.0
  */
+// 起不来，用ThreadLocal
 @Scope("request")
 @Repository
 @Data

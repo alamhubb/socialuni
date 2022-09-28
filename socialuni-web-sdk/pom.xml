@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-common</artifactId>
+            <artifactId>socialuni-tance-uni</artifactId>
         </dependency>
         <!--        支持get请求-->
         <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient -->
