@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.dao.store;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagTypeROFactory;
 import com.socialuni.social.sdk.utils.SocialTagStore;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.socialuni.GenderType;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;

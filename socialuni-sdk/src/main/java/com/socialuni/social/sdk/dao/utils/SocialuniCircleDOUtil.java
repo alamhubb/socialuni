@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.social.common.exception.exception.SocialParamsException;

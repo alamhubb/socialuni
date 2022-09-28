@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.GenderTypeVO;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.constant.config.SocialuniAppType;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.socialuni.GenderType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;

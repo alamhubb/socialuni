@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.redis;
 
 import com.socialuni.social.sdk.dao.redis.redisKey.CommonRedisKey;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.FollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import org.springframework.cache.annotation.Cacheable;

@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.follow;
 import com.socialuni.social.sdk.logic.manage.FollowManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.FollowDO;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.scheduling.annotation.Async;

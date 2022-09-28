@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.openService;
 
 import com.socialuni.social.sdk.config.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;

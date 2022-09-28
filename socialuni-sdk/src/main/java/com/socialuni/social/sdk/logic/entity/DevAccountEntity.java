@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.DevAccountType;
 import com.socialuni.social.sdk.constant.socialuni.GenderType;
 import com.socialuni.social.sdk.utils.UUIDUtil;

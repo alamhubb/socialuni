@@ -1,8 +1,10 @@
 package com.socialuni.social.tance.config;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.component.SocialuniPublishDataComponent;
 import com.socialuni.social.common.model.PublishDataModel;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -22,14 +24,13 @@ import java.util.List;
 @Component
 @Slf4j
 public class PublishDataTransactionalEventListener {
-    @Resource
-    private SocialuniPublishDataComponent publishDataRepository;
     /**
      * 之后再事务提交之后也就是成功执行，才去同步到开发者服务器中。
      */
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void publishDataToDev(){
-        List<PublishDataModel> publishDataModelList = publishDataRepository.getPublishDataModelList();
+    public void publishDataToDev(ApplicationEvent applicationEvent){
+        SocialuniPublishDataComponent publishDataComponent = SpringUtil.getBean(SocialuniPublishDataComponent.class);
+        List<PublishDataModel> publishDataModelList = publishDataComponent.getPublishDataModelList();
         String tance_id = null;
         // 循环调用插入到开发者的接口中去。 放心顺序也是一样保持一致的。
 //        for (PublishDataModel publishDataModel : publishDataModelList) {

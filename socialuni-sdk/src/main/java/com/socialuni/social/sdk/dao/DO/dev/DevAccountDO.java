@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.dev;
 
-import com.socialuni.social.sdk.dao.DO.base.CommonContentBaseDO;
+import com.socialuni.social.common.repository.CommonContentBaseDO;
 import com.socialuni.social.sdk.constant.socialuni.DevAccountType;
 import com.socialuni.social.sdk.constant.socialuni.GenderType;
 import lombok.Data;
