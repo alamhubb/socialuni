@@ -70,7 +70,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
 
     public static void systemPreCheckReport(SocialUnionContentBaseDO socialuniContentBO) {
         CompletableFuture.runAsync(() -> {
-            String content = socialuniContentBO.getContentType();
+            String content = socialuniContentBO.getContent();
             //不为空才校验内容
             if (StringUtils.isEmpty(content)) {
                 return;
