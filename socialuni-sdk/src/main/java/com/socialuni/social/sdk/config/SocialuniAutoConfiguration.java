@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.config;
 
 
+import com.socialuni.social.common.repository.DelegateExtendBaseRepository;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import com.socialuni.social.tance.repository.TanceBaseRepository;
 import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;
@@ -17,8 +18,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableFeignClients("com.socialuni.social")
 @ComponentScan("com.socialuni.social")
-@EnableJpaRepositories("com.socialuni.social")
-//@EnableJpaRepositories(value = "com.socialuni.social",repositoryBaseClass  = PublishDataTanceBaseRepository.class)
+//@EnableJpaRepositories("com.socialuni.social")
+@EnableJpaRepositories(value = "com.socialuni.social",repositoryBaseClass  = DelegateExtendBaseRepository.class)
 @EntityScan("com.socialuni.social")
 @EnableTransactionManagement
 @EnableAsync

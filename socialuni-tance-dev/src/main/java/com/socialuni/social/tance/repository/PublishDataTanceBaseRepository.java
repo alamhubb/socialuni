@@ -14,7 +14,10 @@ import javax.persistence.EntityManager;
  * @module tance.uni
  * @date 2022/9/28 15:07
  * @since 1.0
+ * @deprecated 相同的名字，不能和sdk解耦。所以采用委托模式去做实现。
+ * @see ExtendBaseFactory
  */
+@Deprecated
 public class PublishDataTanceBaseRepository<T, ID >
         extends ExtendBaseRepository<T, ID> {
     public PublishDataTanceBaseRepository(JpaEntityInformation entityInformation, EntityManager entityManager) {
