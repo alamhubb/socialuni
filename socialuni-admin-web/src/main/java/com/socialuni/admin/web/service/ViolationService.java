@@ -159,11 +159,11 @@ public class ViolationService {
         //轻微
         if (AdminAuditResultType.slightViolation.equals(violateType)) {
             vioLevel = ViolateLevel.slight;
-            //一般违规
         } else if (AdminAuditResultType.generalViolationList.contains(violateType)) {
+            //一般违规
             vioLevel = ViolateLevel.general;
-            //严重违规
         } else {
+            //严重违规
             vioLevel = ViolateLevel.severely;
         }
 
