@@ -22,6 +22,7 @@ public class RequestUtil {
     public static HttpServletRequest getRequest() {
 //        return RequestLogUtil.getRequest();
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if(requestAttributes == null) return null;
         ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) requestAttributes);
         return servletRequestAttributes.getRequest();
     }

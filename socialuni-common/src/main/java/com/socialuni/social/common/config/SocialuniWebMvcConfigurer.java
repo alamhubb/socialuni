@@ -17,6 +17,9 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
     private HandlerInterceptor socialuniWebInterceptor;
+    @Autowired(required = false)
+    @Qualifier("tanceHandlerInterceptor")
+    private HandlerInterceptor tanceHandlerInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -44,5 +47,16 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
         registry.addInterceptor(socialuniWebInterceptor).addPathPatterns("/**");
+        /**
+         * 拦截器按照顺序执行
+         *addPathPatterns 用于添加拦截规则
+         *excludePathPatterns 用于排除拦截
+         */
+        if(tanceHandlerInterceptor != null){
+            registry.addInterceptor(tanceHandlerInterceptor)
+//                    .excludePathPatterns("/public/**")
+                    .addPathPatterns("/**")
+                    ;
+        }
     }
 }

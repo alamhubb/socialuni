@@ -2,9 +2,15 @@ package com.socialuni.social.tance.repository;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.component.SocialuniPublishDataComponent;
+import com.socialuni.social.common.utils.RequestUtil;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.persistence.EntityManager;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.http.HttpServletRequest;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -42,10 +48,22 @@ public class PublishDataTanceBaseRepository <T, ID >
      * @see SocialuniPublishDataComponent
      * @param consumer
      */
-    protected void acceptPublishDataComponent(Consumer<SocialuniPublishDataComponent> consumer){
-        SocialuniPublishDataComponent publishDataComponent = SpringUtil.getBean(SocialuniPublishDataComponent.class);
+    public static void acceptPublishDataComponent(Consumer<SocialuniPublishDataComponent> consumer){
+        HttpServletRequest request = RequestUtil.getRequest();
+        if(request == null) return;
+        Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);
+        if(attribute == null) return;
+        SocialuniPublishDataComponent publishDataComponent = (SocialuniPublishDataComponent) attribute;
         if(publishDataComponent != null) {
             consumer.accept(publishDataComponent);
+        }
+    }
+
+    public void publishDataInitialized(HttpServletRequest request) {
+        if(request == null) return;
+        Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);
+        if(attribute == null) {
+            request.setAttribute(SocialuniPublishDataComponent.UUID_NAME,new SocialuniPublishDataComponent());
         }
     }
 }

@@ -27,11 +27,12 @@ import java.util.List;
  * @since 1.0
  */
 // 起不来，用ThreadLocal
-@Scope("request")
-@Repository
+//@Scope("request")
+//@Repository
 @Data
 @Slf4j
 public class SocialuniPublishDataComponent {
+    public static final String UUID_NAME = "$$$Socialuni$$$SocialuniPublishDataComponent$$$";
     private final List<PublishDataModel> publishDataModelList = new ArrayList<>();
 
     private boolean isSimple = true;
