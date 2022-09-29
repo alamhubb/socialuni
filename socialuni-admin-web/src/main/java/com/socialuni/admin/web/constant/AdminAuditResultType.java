@@ -20,7 +20,7 @@ public class AdminAuditResultType extends ViolateType {
     public final static String underage = "未成年";
 
     public final static List<String> underageShowReportTypes = Arrays.asList(underage, adult);
-    public final static List<String> adminFrontHasUnderageShowReportTypes = Arrays.asList(underage, adult, pornInfo, sexy, slightViolation, unfriendly, badAd, lawbreaking, other, noViolation);
+    public final static List<String> adminFrontHasUnderageShowReportTypes = Arrays.asList(adult, underage, pornInfo, sexy, slightViolation, unfriendly, badAd, lawbreaking, other, noViolation);
 
     //轻微违规
     public final static List<String> slightViolationList = Collections.singletonList(slightViolation);
