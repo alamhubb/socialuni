@@ -2,6 +2,7 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.model.ReportRO;
+import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.tance.config.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
@@ -101,29 +102,13 @@ public class AdminReportService {
         //成年未成年的，则直接更改审核记录表，和修改动态的属性
 
         String auditType = auditVO.getViolateType();
-
-        if (AdminAuditResultType.underageShowReportTypes.contains(auditType)) {
-            SocialuniTalkHasUnderageImgAuditDO socialuniTalkHasUnderageImgAuditDO = talkAdultImgAuditRepository.findOneById(auditVO.getId());
-            //确认举报是否存在，只能处理未处理状态的。
-            //判断是否违规
-            if (socialuniTalkHasUnderageImgAuditDO == null) {
-                throw new SocialParamsException("不存在的图片审核内容");
-            }
-            socialuniTalkHasUnderageImgAuditDO.setStatus(ContentStatus.enable);
-            talkAdultImgAuditRepository.save(socialuniTalkHasUnderageImgAuditDO);
-
-            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialuniTalkHasUnderageImgAuditDO.getTalkId());
-            if (AdminAuditResultType.adult.equals(auditType)) {
-                talkDO.setPeopleImgIsAdult(true);
-                SocialuniTalkDOUtil.save(talkDO);
-            }
-            return null;
-        }
-        ReportDO reportDO;
         //图片类型的也支持直接审核
         String auditContentType = auditVO.getAuditContentType();
+
+        Integer contentId = auditVO.getId();
+        //如果仅仅是图片审核，则必然要修改图片审核的状态
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
-            SocialuniTalkHasUnderageImgAuditDO socialuniTalkHasUnderageImgAuditDO = talkAdultImgAuditRepository.findOneById(auditVO.getId());
+            SocialuniTalkHasUnderageImgAuditDO socialuniTalkHasUnderageImgAuditDO = talkAdultImgAuditRepository.findOneById(contentId);
             //确认举报是否存在，只能处理未处理状态的。
             //判断是否违规
             if (socialuniTalkHasUnderageImgAuditDO == null) {
@@ -131,8 +116,28 @@ public class AdminReportService {
             }
             socialuniTalkHasUnderageImgAuditDO.setStatus(ContentStatus.enable);
             talkAdultImgAuditRepository.save(socialuniTalkHasUnderageImgAuditDO);
-            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialuniTalkHasUnderageImgAuditDO.getTalkId());
-            SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(socialuniTalkHasUnderageImgAuditDO.getTalkId());
+            contentId = socialuniTalkHasUnderageImgAuditDO.getTalkId();
+
+            //仅审核为未成年和成年 ，则只更改图片审核状态和动态状态，就返回了，
+            if (AdminAuditResultType.underageShowReportTypes.contains(auditType)) {
+                SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialuniTalkHasUnderageImgAuditDO.getTalkId());
+                //如果为成年，则修改动态状态
+                if (AdminAuditResultType.adult.equals(auditType)) {
+                    talkDO.setPeopleImgIsAdult(true);
+                    SocialuniTalkDOUtil.save(talkDO);
+                }
+                return null;
+            }
+        }
+        ReportDO reportDO;
+        String violateType = auditVO.getViolateType();
+        if (AdminAuditResultType.adult.equals(violateType)){
+            throw new SocialParamsException("成年类型不能审核为违规");
+        }
+        //图片类型的也支持直接审核, 图片审核类型的需要模拟一个report
+        if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
+            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
+            SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentId);
             reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
             reportDO.setReportNum(reportDO.getReportNum() + 1);
             reportDO.setUpdateTime(new Date());
@@ -161,7 +166,7 @@ public class AdminReportService {
             //校验原因
             String auditNote = auditVO.getAuditNote();
             //不为不违规才为违规
-            boolean violation = !AdminAuditResultType.noViolation.equals(auditVO.getViolateType());
+            boolean violation = !AdminAuditResultType.noViolation.equals(violateType);
             if (StringUtils.isEmpty(auditNote) && !violation) {
                 auditNote = "不违规";
 //                    return new ResultVO<>("审核不违规，必须填写原因");
@@ -169,7 +174,6 @@ public class AdminReportService {
             SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
             //如果是违规
             if (violation) {
-                String violateType = auditVO.getViolateType();
                 if (StringUtils.isEmpty(violateType)) {
                     return new ResultRO<>("审核违规，必须选择违规类型");
                 }

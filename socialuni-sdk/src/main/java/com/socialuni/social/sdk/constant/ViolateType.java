@@ -31,10 +31,5 @@ public class ViolateType {
     public final static String swindle = "欺骗诈骗";
 
 
-
-
-
     public final static List<String> frontShowReportTypes = Arrays.asList(pornInfo, sexy, unfriendly, badAd, lawbreaking, other);
-
-
 }
