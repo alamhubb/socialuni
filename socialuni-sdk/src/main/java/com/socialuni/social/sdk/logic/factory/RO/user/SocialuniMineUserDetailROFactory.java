@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,7 @@ public class SocialuniMineUserDetailROFactory {
             mineUserDetailRO.setBirthday(mineUser.getBirthday());
             if (socialUserPhoneDO != null) {
                 //只有自己的开发者才显示手机号
-                if (DevAccountUtils.getDevIdNotNull().equals(socialUserPhoneDO.getDevId())){
+                if (DevAccountFacade.getDevIdNotNull().equals(socialUserPhoneDO.getDevId())){
                     String realPhoneNum = socialUserPhoneDO.getPhoneNum();
                     if (StringUtils.isNotEmpty(realPhoneNum)) {
                         realPhoneNum = realPhoneNum.substring(0, 3) + "*****" + realPhoneNum.substring(8);

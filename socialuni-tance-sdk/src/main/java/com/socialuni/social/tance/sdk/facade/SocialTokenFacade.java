@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.util;
+package com.socialuni.social.tance.sdk.facade;
 
 import com.socialuni.social.common.utils.UUIDUtil;
 import com.socialuni.social.common.utils.RequestUtil;
@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Slf4j
-public class SocialTokenUtil {
+public class SocialTokenFacade {
     //key 这样可以保证每次请求生成的token一致，方便测试
     private static String tokenSecretKey;
 
     @Value("${socialuni.user.token-secret-key:tokenSecretKey}")
     public void setTokenKey(String tokenKey) {
-        SocialTokenUtil.tokenSecretKey = tokenKey;
+        SocialTokenFacade.tokenSecretKey = tokenKey;
     }
 
     public final static String socialuniTokenName = "socialuniToken";
@@ -30,12 +30,12 @@ public class SocialTokenUtil {
 
     @Resource
     public void setSocialRequestToken(SocialRequestUserConfig socialRequestToken) {
-        SocialTokenUtil.socialRequestToken = socialRequestToken;
+        SocialTokenFacade.socialRequestToken = socialRequestToken;
     }
 
     public static void main(String[] args) {
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NTc3NjRkNmU1ZDE0Yjk4ODMwNDBiZjVjYzY0MjdkMF9lM2E3ZDJlMzFiMDM0M2Q2YjUxMzEwZWZhZmIzNGI5YSJ9.Ccnu2c1NGH2VMFFQcTnCxLNvrJVBljKfd0BDOjQS9J4";
-        if (SocialTokenUtil.isSuccess(token)) {
+        if (SocialTokenFacade.isSuccess(token)) {
             try {
                 String tokenSubject = Jwts.parser().setSigningKey("da838b62ed0e412bb560254ebdc356c1").parseClaimsJws(token).getBody().getSubject();
                 System.out.println(tokenSubject.split("_")[0]);
@@ -58,7 +58,7 @@ public class SocialTokenUtil {
     public static String getSocialuniToken() {
         HttpServletRequest request = RequestUtil.getRequest();
         String token = (String) request.getAttribute(socialuniTokenName);
-        if (SocialTokenUtil.isSuccess(token)) {
+        if (SocialTokenFacade.isSuccess(token)) {
             return token;
         }
         return null;
@@ -70,7 +70,7 @@ public class SocialTokenUtil {
     }
 
     public static String generateTokenByUserId(Integer userId) {
-        return SocialTokenUtil.generateTokenByUserKey(userId.toString());
+        return SocialTokenFacade.generateTokenByUserKey(userId.toString());
     }
 
     public static String generateTokenByUserKey(String userKey) {
@@ -84,9 +84,9 @@ public class SocialTokenUtil {
 
     //使用websocket时无法获取request必须传入token
     public static String getUserKeyByToken(String token) {
-        if (SocialTokenUtil.isSuccess(token)) {
+        if (SocialTokenFacade.isSuccess(token)) {
             try {
-                String tokenSubject = Jwts.parser().setSigningKey(SocialTokenUtil.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
+                String tokenSubject = Jwts.parser().setSigningKey(SocialTokenFacade.tokenSecretKey).parseClaimsJws(token).getBody().getSubject();
                 return tokenSubject.split("_")[0];
             } catch (Exception e) {
                 log.error("解析token异常");
@@ -99,13 +99,13 @@ public class SocialTokenUtil {
     }
 
     public static String getUserKeyByToken() {
-        String token = SocialTokenUtil.getToken();
-        return SocialTokenUtil.getUserKeyByToken(token);
+        String token = SocialTokenFacade.getToken();
+        return SocialTokenFacade.getUserKeyByToken(token);
     }
 
     //判断是否有效token
     public static boolean isSuccess(String token) {
-        return !SocialTokenUtil.isError(token);
+        return !SocialTokenFacade.isError(token);
     }
 
     public static Boolean isError(String token) {

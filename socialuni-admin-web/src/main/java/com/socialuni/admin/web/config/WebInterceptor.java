@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.common.constant.ErrorCode;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
@@ -37,7 +37,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
-        DevAccountModel user = DevAccountUtils.getAdminDevAccountAllowNull();
+        DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
         if (user != null) {
             requestLogDO.setUserId(user.getId());
         }

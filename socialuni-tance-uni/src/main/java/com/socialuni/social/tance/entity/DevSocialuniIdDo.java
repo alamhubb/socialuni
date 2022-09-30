@@ -1,9 +1,14 @@
 package com.socialuni.social.tance.entity;
 
 import com.socialuni.social.common.repository.CommonBaseDO;
+import com.socialuni.social.tance.sdk.model.DevSocialuniIdModel;
+import com.socialuni.social.tance.sdk.model.DevTokenModler;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 /**
@@ -18,7 +23,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = {"socialuniId"})
         }
 )
-public class DevSocialuniIdDO extends CommonBaseDO implements Serializable {
+public class DevSocialuniIdDo extends DevSocialuniIdModel implements Serializable {
     //联盟id，唯一标识，不得小于32位，全网唯一
     @Column(nullable = false)
     private String socialuniId;

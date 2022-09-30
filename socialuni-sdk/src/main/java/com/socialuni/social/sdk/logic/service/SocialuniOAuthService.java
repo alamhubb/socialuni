@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserAuthRepository;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.enumeration.CommonStatus;
@@ -34,7 +34,7 @@ public class SocialuniOAuthService {
 
     public ResultRO<OAuthGetUserPhoneNumRO> getUserPhoneNum() {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
-        Integer devId = DevAccountUtils.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNotNull();
         ThirdUserAuthDO thirdUserAuthDO = thirdUserAuthRepository.findByDevIdAndUserIdAndAuthTypeAndStatus(devId, mineUser.getUnionId(), AuthType.phone, CommonStatus.enable);
         if (thirdUserAuthDO == null) {
             return new ResultRO<>();

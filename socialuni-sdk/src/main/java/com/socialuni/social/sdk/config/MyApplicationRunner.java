@@ -5,12 +5,12 @@ import com.socialuni.social.sdk.constant.AppData;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.redis.DistrictRedis;
-import com.socialuni.social.tance.repository.DevSocialuniIdRepository;
+import com.socialuni.social.tance.sdk.api.DevSocialuniIdApi;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class MyApplicationRunner implements ApplicationRunner {
     DevAccountEntity devAccountEntity;
 
     @Resource
-    DevSocialuniIdRepository devSocialuniIdRepository;
+    DevSocialuniIdApi devSocialuniIdApi;
 
     @Autowired(required = false)
     private SocialuniAppConfig socialuniAppConfig;
@@ -57,7 +57,7 @@ public class MyApplicationRunner implements ApplicationRunner {
         }
 //        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
-        DevAccountModel devAccountModel = DevAccountUtils.getDevAccount(1);
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccount(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
@@ -75,7 +75,7 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         //创建中心
         if (SocialuniSystemConst.serverIsChild()) {
-            DevAccountModel centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
+            DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 devAccountEntity.createDevAccount(null, SocialuniSystemConst.getCenterSocialuniId());
             }

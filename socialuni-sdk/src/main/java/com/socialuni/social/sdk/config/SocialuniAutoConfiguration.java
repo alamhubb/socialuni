@@ -2,8 +2,6 @@ package com.socialuni.social.sdk.config;
 
 
 import com.socialuni.social.common.repository.DelegateExtendBaseRepository;
-import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
-import com.socialuni.social.tance.repository.TanceBaseRepository;
 import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

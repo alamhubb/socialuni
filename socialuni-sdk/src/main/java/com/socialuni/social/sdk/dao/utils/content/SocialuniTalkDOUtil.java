@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.dao.utils.content;
 import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
@@ -48,7 +48,7 @@ public class SocialuniTalkDOUtil {
         SocialuniTalkDO talkDO = talkRepository.findOneByUnionId(unionId);
         if (talkDO == null) {
             //只有开发者相等才进入， 用户写入的数据，不该出现不存在的情况
-            if (Objects.equals(DevAccountUtils.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
+            if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
                 throw new SocialSystemException("动态丢失了，请联系客服");
             }
         }

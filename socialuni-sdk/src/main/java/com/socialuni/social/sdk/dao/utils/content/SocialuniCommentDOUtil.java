@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class SocialuniCommentDOUtil {
         SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
         SocialuniCommentDO commentDO = commentRepository.findOneByUnionId(unionId);
         if (commentDO == null) {
-            if (Objects.equals(DevAccountUtils.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
+            if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
                 throw new SocialSystemException("评论丢失了，请联系客服");
             }
         }

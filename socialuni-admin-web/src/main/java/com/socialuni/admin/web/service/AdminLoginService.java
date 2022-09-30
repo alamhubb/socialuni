@@ -3,12 +3,12 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
-import com.socialuni.social.tance.util.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.tance.entity.DevTokenDO;
-import com.socialuni.social.tance.repository.DevTokenRepository;
+import com.socialuni.social.tance.sdk.model.DevTokenModler;
+import com.socialuni.social.tance.sdk.api.DevTokenApi;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
@@ -28,7 +28,7 @@ public class AdminLoginService {
     @Resource
     DevAccountEntity devAccountEntity;
     @Resource
-    DevTokenRepository devTokenRepository;
+    DevTokenApi devTokenApi;
 
     //秘钥登录
     @Transactional
@@ -75,8 +75,8 @@ public class AdminLoginService {
 //        String platform = loginVO.getPlatform();
         String devSecretKey = devAccountModel.getSecretKey();
         //生成userToken
-        String userToken = SocialTokenUtil.generateTokenByUserKey(devSecretKey);
-        userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountModel.getId())).getTokenCode();
+        String userToken = SocialTokenFacade.generateTokenByUserKey(devSecretKey);
+        userToken = devTokenApi.save(new DevTokenModler(userToken, devAccountModel.getId())).getTokenCode();
 
         DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
         if (isNewAccount) {

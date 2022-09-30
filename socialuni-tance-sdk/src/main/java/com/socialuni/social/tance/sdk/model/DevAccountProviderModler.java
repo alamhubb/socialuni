@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.entity;
+package com.socialuni.social.tance.sdk.model;
 
 import com.socialuni.social.common.repository.CommonContentBaseDO;
 import lombok.Data;
@@ -8,32 +8,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Entity
-@Table(name = "s_dev_account_provider",
-        indexes = {
-                @Index(columnList = "status"),
-                @Index(columnList = "devId"),
-                @Index(columnList = "appId"),
-                @Index(columnList = "platform"),
-                @Index(columnList = "mpType")
-        },
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"appId", "platform", "mpType"})
-        })
 @NoArgsConstructor
-public class DevAccountProviderDO extends CommonContentBaseDO implements Serializable {
-    @Column(nullable = false)
+public class DevAccountProviderModler extends CommonContentBaseDO implements Serializable {
     private Integer devId;
-    @Column(nullable = false)
     private String appId;
-    @Column(nullable = false)
     private String appName;
 
     //目前只支持小程序，未来支持app，记录app
-    @Column(nullable = false, columnDefinition = "varchar(20) default ''")
     private String platform;
 
-    @Column(nullable = false, columnDefinition = "varchar(20) default ''")
     private String mpType;
 
     //内容类型，id，关联商户，关联用户id
@@ -46,7 +29,7 @@ public class DevAccountProviderDO extends CommonContentBaseDO implements Seriali
     @Column(nullable = false, columnDefinition = "varchar(255) default ''")
     private String threeTalkPath;*/
 
-    public DevAccountProviderDO(Integer devId, String platform, String mpType) {
+    public DevAccountProviderModler(Integer devId, String platform, String mpType) {
         this.devId = devId;
         this.platform = platform;
         this.mpType = mpType;

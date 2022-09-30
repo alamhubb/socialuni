@@ -6,8 +6,8 @@ import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
 import com.socialuni.social.common.utils.RequestUtil;
-import com.socialuni.social.tance.util.SocialTokenUtil;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class SocialuniTokenUtil {
     }
 
     public static ThirdUserTokenDO getThirdUserTokenDO() {
-        String token = SocialTokenUtil.getToken();
+        String token = SocialTokenFacade.getToken();
         return SocialuniTokenUtil.getThirdUserTokenDO(token);
     }
 
@@ -40,7 +40,7 @@ public class SocialuniTokenUtil {
     public static Integer getDataDevId() {
         HttpServletRequest request = RequestUtil.getRequest();
         String dataSocialuniId = request.getHeader(SocialFeignHeaderName.dataOriginalSocialuniId);
-        if (SocialTokenUtil.isSuccess(dataSocialuniId)) {
+        if (SocialTokenFacade.isSuccess(dataSocialuniId)) {
             Integer userId = Integer.parseInt(dataSocialuniId);
             return userId;
         }
@@ -50,13 +50,13 @@ public class SocialuniTokenUtil {
 
     public static ThirdUserTokenDO getThirdUserTokenDO(String token) {
         //解析token
-        String userThirdId = SocialTokenUtil.getUserKeyByToken(token);
+        String userThirdId = SocialTokenFacade.getUserKeyByToken(token);
         if (StringUtils.isEmpty(userThirdId)) {
             return null;
         }
         //解析token
         ThirdUserTokenDO tokenDO = thirdUserTokenRepository.findFirstByToken(token);
-        Integer devId = DevAccountUtils.getDevIdNotNull();
+        Integer devId = DevAccountFacade.getDevIdNotNull();
 
         if (tokenDO == null) {
             throw new SocialNotLoginException();

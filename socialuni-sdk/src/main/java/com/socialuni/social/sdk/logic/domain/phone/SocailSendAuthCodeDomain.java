@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.utils.TencentSmsServe;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
@@ -118,7 +118,7 @@ public class SocailSendAuthCodeDomain {
         this.sendAuthCodeCheck(phoneNum, mineUser, userIp);
 
 
-        AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountUtils.getDevIdNotNull());
+        AuthenticationDO authenticationDO = new AuthenticationDO(SocialuniUserUtil.getMineUserIdAllowNull(mineUser), phoneNum, null, userIp, DevAccountFacade.getDevIdNotNull());
         authenticationDO.setStatus(StatusConst.fail);
         authRepository.save(authenticationDO);
 

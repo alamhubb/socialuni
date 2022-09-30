@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import com.socialuni.social.common.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -62,7 +62,7 @@ public class FeignInterceptor implements RequestInterceptor {
             if (mineUser != null) {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
-                Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
+                Integer centerDevId = DevAccountFacade.getCenterDevIdNotNull();
                 UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserUnionId);
 
 //                SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getUserSocialAccount(mineUser.getId());

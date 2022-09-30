@@ -10,7 +10,7 @@ import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,9 +54,9 @@ public class AdminReportQueryDomain {
         //被举报的内容和待审核的成年照片一起审核
         //待审核的成年照片，打个标识？ is成年照片审核。
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
-        DevAccountModel user = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel user = DevAccountFacade.getAdminDevAccountNotNull();
         List<ReportDO> reportDOS;
-        if (DevAccountUtils.isCenter()) {
+        if (DevAccountFacade.isCenter()) {
             reportDOS = reportRepository.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
         } else {
             //用户自己删除了也没用，只要触发举报都会审核。

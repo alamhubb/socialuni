@@ -19,7 +19,7 @@ import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.tance.util.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,7 +55,7 @@ public class TestController {
         }
         UserDO userDO = testUserRepository.save(new UserDO(name));
 
-        TokenDO tokenDO = new TokenDO(userDO.getId(), SocialTokenUtil.generateTokenByUserId(userDO.getId()));
+        TokenDO tokenDO = new TokenDO(userDO.getId(), SocialTokenFacade.generateTokenByUserId(userDO.getId()));
 
         tokenDO = testTokenRepository.save(tokenDO);
 

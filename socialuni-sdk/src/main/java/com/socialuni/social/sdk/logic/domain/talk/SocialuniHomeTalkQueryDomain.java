@@ -23,7 +23,7 @@ import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -55,7 +55,7 @@ public class SocialuniHomeTalkQueryDomain {
     private SocialuniUserExpandRepository socialuniUserExpandRepository;
 
     public List<SocialuniTalkRO> queryStickTalks() {
-        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountUtils.getDevIdNotNull(), SocialuniConst.initNum);
+        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
         return socialTalkROs;
@@ -107,7 +107,7 @@ public class SocialuniHomeTalkQueryDomain {
         //主要是校验appgender,只允许同性别用户使用，不同性别则要保证同性别
         if (SocialuniAppType.genderTypeList.contains(SocialuniAppConfig.getAppConfig().getAppGender())) {
             if (mineUser != null) {
-                String appGender = DevAccountUtils.getAppGenderType();
+                String appGender = DevAccountFacade.getAppGenderType();
                 String mineUserGender = mineUser.getGender();
                 //app性别为女生，且用户不为女生提示错误
                 if (appGender.equals(GenderType.girl) && !mineUserGender.equals(GenderType.girl)) {
@@ -184,7 +184,7 @@ public class SocialuniHomeTalkQueryDomain {
         }
         socialHomeTabTalkQueryBO.setMaxAge(maxAge);
         socialHomeTabTalkQueryBO.setQueryTime(queryQO.getQueryTime());
-        socialHomeTabTalkQueryBO.setDevId(DevAccountUtils.getDevIdNotNull());
+        socialHomeTabTalkQueryBO.setDevId(DevAccountFacade.getDevIdNotNull());
 
         String adCode = queryQO.getAdCode();
         //如果首页，不筛选地理位置

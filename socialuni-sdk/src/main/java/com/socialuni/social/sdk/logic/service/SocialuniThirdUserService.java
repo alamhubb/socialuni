@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -39,7 +39,7 @@ public class SocialuniThirdUserService {
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
-        Integer dataDevId = DevAccountUtils.getDevIdNotNull();
+        Integer dataDevId = DevAccountFacade.getDevIdNotNull();
         if (dataDevId == 1) {
             throw new SocialParamsException("开发者信息错误");
         }

@@ -6,10 +6,10 @@ import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
-import com.socialuni.social.tance.repository.DevAccountProviderRepository;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.tance.entity.DevAccountProviderDO;
+import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
@@ -36,7 +36,7 @@ public class AdminAccountService {
     @Resource
     private DevAccountApi devAccountApi;
     @Resource
-    private DevAccountProviderRepository devAccountProviderRepository;
+    private DevAccountProviderApi devAccountProviderApi;
     @Resource
     private TagRepository tagRepository;
     @Resource
@@ -44,7 +44,7 @@ public class AdminAccountService {
 
     @Transactional
     public ResultRO<DevAccountRO> updateDevAccount(DevAccountUpdateQO devAccountQO) {
-        DevAccountModel devAccountModel = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
 
 
         Integer devId = devAccountModel.getId();
@@ -76,7 +76,7 @@ public class AdminAccountService {
             throw new SocialParamsException("请至少填写一个小程序信息");
         }
 
-        List<DevAccountProviderDO> createDevProviders = new ArrayList<>();
+        List<DevAccountProviderModler> createDevProviders = new ArrayList<>();
 
         //微信渠道有一个不为空
         if (StringUtils.isNotEmpty(wxMpAppId) || StringUtils.isNotEmpty(wxMpAppName)) {
@@ -89,29 +89,29 @@ public class AdminAccountService {
             //只有新旧内容不一致
             //两个都不为空
             //根据绑定小程序查找，是否已被使用
-            DevAccountProviderDO wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByAppIdAndMpType(wxMpAppId, SocialuniSupportProviderType.wx);
+            DevAccountProviderModler wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByAppIdAndMpType(wxMpAppId, SocialuniSupportProviderType.wx);
             //已存在
-            if (wxDevAccountProviderDO != null) {
+            if (wxDevAccountProviderModler != null) {
                 //是否与当前开发者id一致，不一致报错，已被使用
-                if (!wxDevAccountProviderDO.getDevId().equals(devId)) {
+                if (!wxDevAccountProviderModler.getDevId().equals(devId)) {
                     throw new SocialParamsException("小程序已被其他开发者绑定，请联系客服处理");
                 }
             }
             //查找开发者是否已绑定
-            wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.wx);
+            wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.wx);
             //只有为空，或者appId新旧不一致，或者appname新旧不一致，才更新
-            if (wxDevAccountProviderDO == null
-                    || !wxMpAppId.equals(wxDevAccountProviderDO.getAppId())
-                    || !wxMpAppName.equals(wxDevAccountProviderDO.getAppName())) {
+            if (wxDevAccountProviderModler == null
+                    || !wxMpAppId.equals(wxDevAccountProviderModler.getAppId())
+                    || !wxMpAppName.equals(wxDevAccountProviderModler.getAppName())) {
                 //未绑定创建
-                if (wxDevAccountProviderDO == null) {
-                    wxDevAccountProviderDO = new DevAccountProviderDO(devId, PlatformType.mp, MpType.wx);
+                if (wxDevAccountProviderModler == null) {
+                    wxDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpType.wx);
                 }
                 //已绑定更新
-                wxDevAccountProviderDO.setAppId(wxMpAppId);
-                wxDevAccountProviderDO.setAppName(wxMpAppName);
-                wxDevAccountProviderDO = devAccountProviderRepository.save(wxDevAccountProviderDO);
-                createDevProviders.add(wxDevAccountProviderDO);
+                wxDevAccountProviderModler.setAppId(wxMpAppId);
+                wxDevAccountProviderModler.setAppName(wxMpAppName);
+                wxDevAccountProviderModler = devAccountProviderApi.save(wxDevAccountProviderModler);
+                createDevProviders.add(wxDevAccountProviderModler);
             }
         }
 
@@ -125,31 +125,31 @@ public class AdminAccountService {
             }
             //两个都不为空
             //根据绑定小程序查找，是否已被使用
-            DevAccountProviderDO qqDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByAppIdAndMpType(qqMpAppId, SocialuniSupportProviderType.qq);
+            DevAccountProviderModler qqDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByAppIdAndMpType(qqMpAppId, SocialuniSupportProviderType.qq);
             //已存在
-            if (qqDevAccountProviderDO != null) {
+            if (qqDevAccountProviderModler != null) {
                 //是否与当前开发者id一致，不一致报错，已被使用
-                if (!qqDevAccountProviderDO.getDevId().equals(devId)) {
+                if (!qqDevAccountProviderModler.getDevId().equals(devId)) {
                     throw new SocialParamsException("小程序已被其他开发者绑定，请联系客服处理");
                 }
             }
             //查找开发者是否已绑定
-            qqDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.qq);
+            qqDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.qq);
 
 
             //只有为空，或者appId新旧不一致，或者appname新旧不一致，才更新
-            if (qqDevAccountProviderDO == null
-                    || !qqMpAppId.equals(qqDevAccountProviderDO.getAppId())
-                    || !qqMpAppName.equals(qqDevAccountProviderDO.getAppName())) {
+            if (qqDevAccountProviderModler == null
+                    || !qqMpAppId.equals(qqDevAccountProviderModler.getAppId())
+                    || !qqMpAppName.equals(qqDevAccountProviderModler.getAppName())) {
                 //未绑定创建
-                if (qqDevAccountProviderDO == null) {
-                    qqDevAccountProviderDO = new DevAccountProviderDO(devId, PlatformType.mp, MpType.qq);
+                if (qqDevAccountProviderModler == null) {
+                    qqDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpType.qq);
                 }
                 //已绑定更新
-                qqDevAccountProviderDO.setAppId(qqMpAppId);
-                qqDevAccountProviderDO.setAppName(qqMpAppName);
-                qqDevAccountProviderDO = devAccountProviderRepository.save(qqDevAccountProviderDO);
-                createDevProviders.add(qqDevAccountProviderDO);
+                qqDevAccountProviderModler.setAppId(qqMpAppId);
+                qqDevAccountProviderModler.setAppName(qqMpAppName);
+                qqDevAccountProviderModler = devAccountProviderApi.save(qqDevAccountProviderModler);
+                createDevProviders.add(qqDevAccountProviderModler);
             }
         }
 

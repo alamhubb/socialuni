@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.tance.util.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.utils.IntegerUtils;
@@ -27,7 +27,7 @@ public class SocialTokenDOUtil {
     }
 
     public static SocialTokenDO getCommonTokenDOAllowNull() {
-        String token = SocialTokenUtil.getToken();
+        String token = SocialTokenFacade.getToken();
         if (StringUtils.isEmpty(token)) {
             return null;
         }
@@ -43,7 +43,7 @@ public class SocialTokenDOUtil {
 
 
     public static SocialTokenDO getCommonTokenDONotNull(String token) {
-        String userKey = SocialTokenUtil.getUserKeyByToken(token);
+        String userKey = SocialTokenFacade.getUserKeyByToken(token);
         if (userKey == null) {
             throw new SocialNotLoginException();
         }

@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.tance.util.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -55,7 +55,7 @@ public class SocialuniUnionIdUtil {
 
     //自身创建
     private static Integer createUnionIdByContentType(String contentType) {
-        SocialuniUnionIdDO uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, UUIDUtil.getUUID(), DevAccountUtils.getDevIdNotNull());
+        SocialuniUnionIdDO uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, UUIDUtil.getUUID(), DevAccountFacade.getDevIdNotNull());
         uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
         //有的话更新
         return uniContentUnionIdDO.getId();
@@ -93,7 +93,7 @@ public class SocialuniUnionIdUtil {
         SocialuniUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(uuid);
         //没有写入
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, uuid, DevAccountUtils.getCenterDevIdNotNull());
+            uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
             uniContentUnionIdRepository.save(uniContentUnionIdDO);
             //有的话更新
         }
