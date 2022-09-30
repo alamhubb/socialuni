@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.entity;
 
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserPhoneDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
@@ -18,8 +18,8 @@ public class SocialuniDevAccountEntity {
     @Resource
     private SocialUserPhoneEntity socialUserPhoneEntity;
 
-    public SocialuniUserDO getOrCreateDevAccountUserDO(DevAccountDO devAccountDO) {
-        String phoneNum = devAccountDO.getPhoneNum();
+    public SocialuniUserDO getOrCreateDevAccountUserDO(DevAccountModel devAccountModel) {
+        String phoneNum = devAccountModel.getPhoneNum();
 
         SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
 

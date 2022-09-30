@@ -2,7 +2,6 @@ package com.socialuni.social.web.sdk.config;
 
 
 import com.socialuni.social.common.repository.DelegateExtendBaseRepository;
-import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;

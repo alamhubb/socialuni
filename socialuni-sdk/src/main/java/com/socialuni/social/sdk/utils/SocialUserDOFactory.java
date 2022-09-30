@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.UserType;

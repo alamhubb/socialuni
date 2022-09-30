@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;

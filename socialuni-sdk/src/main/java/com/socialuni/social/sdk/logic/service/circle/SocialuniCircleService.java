@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.circle;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;

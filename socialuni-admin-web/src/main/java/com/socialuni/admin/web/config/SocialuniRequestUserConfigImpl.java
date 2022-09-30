@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
 
-import com.socialuni.social.tance.config.SocialRequestUserConfig;
+import com.socialuni.social.tance.sdk.api.SocialRequestUserConfig;
 import com.socialuni.social.sdk.config.SocialRequestUserConfigDefaultImpl;
 import com.socialuni.social.tance.util.DevAccountUtils;
 import org.springframework.stereotype.Component;

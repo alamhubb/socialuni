@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.logic.service.report;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.report.SoicialReportAddDomain;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniReportAPI;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
-import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.common.model.ResultRO;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class SocialuniReportService {
     @Resource
     SocialuniUnionIdRepository uniContentUnionIdRepository;
     @Resource
-    DevAccountRepository devAccountRepository;
+    DevAccountApi devAccountApi;
 
     public ResultRO<String> addReport(SocialuniReportAddQO centerReportAddQO) {
         //如果应用，则调用中心

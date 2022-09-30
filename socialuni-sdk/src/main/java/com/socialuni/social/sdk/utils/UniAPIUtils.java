@@ -1,14 +1,15 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.model.QO.ContentAddQO;
 import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
-import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentIdRO;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -25,11 +26,11 @@ public class UniAPIUtils {
     static SocialuniUserAPI socialuniUserAPI;
     static SocialuniUnionIdRepository uniContentUnionIdRepository;
 
-    static DevAccountRepository devAccountRepository;
+    static DevAccountApi devAccountApi;
 
-    @Resource
-    public void setDevAccountRepository(DevAccountRepository devAccountRepository) {
-        UniAPIUtils.devAccountRepository = devAccountRepository;
+    @Autowired
+    public void setDevAccountRepository(DevAccountApi devAccountApi) {
+        UniAPIUtils.devAccountApi = devAccountApi;
     }
 
     @Resource

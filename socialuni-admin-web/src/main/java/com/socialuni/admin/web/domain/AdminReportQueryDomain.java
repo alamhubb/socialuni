@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
@@ -54,7 +54,7 @@ public class AdminReportQueryDomain {
         //被举报的内容和待审核的成年照片一起审核
         //待审核的成年照片，打个标识？ is成年照片审核。
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel user = DevAccountUtils.getAdminDevAccountNotNull();
         List<ReportDO> reportDOS;
         if (DevAccountUtils.isCenter()) {
             reportDOS = reportRepository.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);

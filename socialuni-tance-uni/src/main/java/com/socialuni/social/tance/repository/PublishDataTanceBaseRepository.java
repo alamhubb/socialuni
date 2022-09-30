@@ -59,7 +59,7 @@ public class PublishDataTanceBaseRepository <T, ID >
         }
     }
 
-    public void publishDataInitialized(HttpServletRequest request) {
+    public static void publishDataInitialized(HttpServletRequest request) {
         if(request == null) return;
         Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);
         if(attribute == null) {

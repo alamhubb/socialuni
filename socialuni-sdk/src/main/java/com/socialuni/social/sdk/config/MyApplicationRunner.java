@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.sdk.constant.AppData;
-import com.socialuni.social.tance.config.SocialuniSystemConst;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.redis.DistrictRedis;
 import com.socialuni.social.tance.repository.DevSocialuniIdRepository;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
@@ -57,10 +57,10 @@ public class MyApplicationRunner implements ApplicationRunner {
         }
 //        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccount(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
-        if (devAccountDO == null) {
+        if (devAccountModel == null) {
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
                 devAccountEntity.createDevAccount(null);
             } else {
@@ -75,7 +75,7 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         //创建中心
         if (SocialuniSystemConst.serverIsChild()) {
-            DevAccountDO centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
+            DevAccountModel centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
                 devAccountEntity.createDevAccount(null, SocialuniSystemConst.getCenterSocialuniId());
             }

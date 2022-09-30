@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.logic.entity.SocialuniDevAccountEntity;
 import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.sdk.constant.AuthType;
@@ -42,9 +42,9 @@ public class SocialuniMockService {
     private ResultRO<SocialLoginRO<SocialOAuthUserRO>> mockOAuthUserInfo(String authType) {
 //        DevAccountProviderDO devAccountProviderDO = DevAccountUtils.getDevAccountProviderDO(mpType);
 //        OAuthUserInfoQO authVO = new OAuthUserInfoQO(devAccountProviderDO.getAppId(), devAccountProviderDO.getMpType());
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        SocialuniUserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
-        return centerOAuthService.oAuthUserInfo(devAccountDO, userDO, authType);
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
+        SocialuniUserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountModel);
+        return centerOAuthService.oAuthUserInfo(devAccountModel, userDO, authType);
     }
 
 }

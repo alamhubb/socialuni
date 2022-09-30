@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.tag.SoicialTagAddDomain;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTagAPI;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;

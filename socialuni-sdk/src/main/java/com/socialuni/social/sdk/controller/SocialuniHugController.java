@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniHugAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniHugService;
 import com.socialuni.social.sdk.model.QO.SocialuniHugAddQO;

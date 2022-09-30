@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;

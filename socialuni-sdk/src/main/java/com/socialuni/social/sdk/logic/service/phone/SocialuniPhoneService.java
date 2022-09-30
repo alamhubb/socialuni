@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
@@ -38,12 +38,12 @@ public class SocialuniPhoneService {
 
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
         SocialuniUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
         //中心授权
-        SocialLoginRO<SocialuniMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountDO);
+        SocialLoginRO<SocialuniMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountModel);
         return ResultRO.success(centerLoginRO);
     }
 

@@ -2,7 +2,7 @@ package com.socialuni.social.tance.util;
 
 import com.socialuni.social.common.utils.UUIDUtil;
 import com.socialuni.social.common.utils.RequestUtil;
-import com.socialuni.social.tance.config.SocialRequestUserConfig;
+import com.socialuni.social.tance.sdk.api.SocialRequestUserConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;

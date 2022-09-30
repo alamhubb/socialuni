@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.logic.manage;
 
 
 import com.socialuni.social.tance.repository.DevAccountProviderRepository;
-import com.socialuni.social.tance.repository.DevAccountRepository;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.entity.DevAccountProviderDO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.OAuthUserInfoQO;
@@ -16,16 +16,16 @@ public class DevAccountManage {
     @Resource
     DevAccountProviderRepository devAccountProviderRepository;
     @Resource
-    DevAccountRepository devAccountRepository;
+    DevAccountApi devAccountApi;
 
-    public DevAccountDO checkApplyAuthQO(OAuthUserInfoQO authVO) {
+    public DevAccountModel checkApplyAuthQO(OAuthUserInfoQO authVO) {
         DevAccountProviderDO devAccountProviderDO = devAccountProviderRepository.findOneByAppIdAndMpType(authVO.getAppId(), authVO.getMpType());
 //        Optional<DevAccountProviderDO> devAccountProviderDOOptional = devAccountProviderRepository.findFirstByAppIdAndMpTypeAndStatus(authVO.getAppId(), authVO.getMpType(), CommonStatus.enable);
         if (devAccountProviderDO == null) {
             throw new SocialBusinessException("应用未注册社交联盟开发者");
         }
         //开发者账号正确
-        DevAccountDO threeDevDO = devAccountRepository.findOneById(devAccountProviderDO.getDevId());
+        DevAccountModel threeDevDO = devAccountApi.findOneById(devAccountProviderDO.getDevId());
         //还能知道密钥是否被盗用
         //校验密钥是否正确
         /*String threeSecretKey = authVO.getThreeSecretKey();

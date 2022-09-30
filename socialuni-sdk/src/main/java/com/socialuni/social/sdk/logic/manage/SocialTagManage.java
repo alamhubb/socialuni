@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.manage;
 
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagDOFactory;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import org.springframework.stereotype.Component;

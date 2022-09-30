@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniFollowAPI;
 import com.socialuni.social.sdk.logic.domain.follow.SocialuniFollowUserDomain;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;

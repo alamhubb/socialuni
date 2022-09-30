@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.config;
+package com.socialuni.social.tance.sdk.api;
 
 public interface SocialRequestUserConfig {
     String getToken();

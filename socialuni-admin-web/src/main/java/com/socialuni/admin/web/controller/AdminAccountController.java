@@ -2,11 +2,11 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.service.AdminAccountService;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.tance.repository.DevAccountProviderRepository;
-import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.util.DevAccountUtils;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
@@ -26,7 +26,7 @@ public class AdminAccountController {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountApi devAccountApi;
     @Resource
     private DevAccountProviderRepository devAccountProviderRepository;
     @Resource
@@ -36,7 +36,7 @@ public class AdminAccountController {
 
     @PostMapping("getUser")
     public ResultRO<DevAccountRO> getUser() {
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel user = DevAccountUtils.getAdminDevAccountNotNull();
         DevAccountRO devAccountRO = new DevAccountRO(user);
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);
@@ -44,7 +44,7 @@ public class AdminAccountController {
 
     @PostMapping("resetSecretKey")
     public ResultRO<String> resetSecretKey() {
-        DevAccountDO devAccount = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel devAccount = DevAccountUtils.getAdminDevAccountNotNull();
         String secretKey = UUIDUtil.getUUID();
         devAccount.setSecretKey(secretKey);
 

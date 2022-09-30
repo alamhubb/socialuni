@@ -5,10 +5,10 @@ import com.socialuni.admin.web.controller.DevAccountUpdateQO;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.repository.DevAccountProviderRepository;
-import com.socialuni.social.tance.repository.DevAccountRepository;
 import com.socialuni.social.tance.util.DevAccountUtils;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.entity.DevAccountProviderDO;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
@@ -34,7 +34,7 @@ public class AdminAccountService {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountApi devAccountApi;
     @Resource
     private DevAccountProviderRepository devAccountProviderRepository;
     @Resource
@@ -44,10 +44,10 @@ public class AdminAccountService {
 
     @Transactional
     public ResultRO<DevAccountRO> updateDevAccount(DevAccountUpdateQO devAccountQO) {
-        DevAccountDO devAccountDO = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountUtils.getAdminDevAccountNotNull();
 
 
-        Integer devId = devAccountDO.getId();
+        Integer devId = devAccountModel.getId();
 
         String devType = devAccountQO.getType();
         DevAccountType.checkSupportType(devType);
@@ -59,15 +59,15 @@ public class AdminAccountService {
         String qqMpAppId = devAccountQO.getQqMpAppId();
         String qqMpAppName = devAccountQO.getQqMpAppName();
 
-        DevAccountDO nameCheckDevAccount = devAccountRepository.findOneByAppName(appName);
+        DevAccountModel nameCheckDevAccount = devAccountApi.findOneByAppName(appName);
         //名称已被注册，不为空，还不为当前账户
-        if (nameCheckDevAccount != null && !nameCheckDevAccount.getId().equals(devAccountDO.getId())) {
+        if (nameCheckDevAccount != null && !nameCheckDevAccount.getId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
         //如果创建过，则一定有，所以下面可以直接使用
         TagDO checkNameTag = tagRepository.findFirstByName(appName);
         //tag名称已被注册，不为空，还不为当前用户
-        if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountDO.getId())) {
+        if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
 
@@ -156,25 +156,25 @@ public class AdminAccountService {
         //        devAccountDO.setType(devType); 先不支持修改
 //        devAccountDO.setRealName(devAccountQO.getRealName());
         //更新开发者信息
-        devAccountDO.setUpdateTime(new Date());
+        devAccountModel.setUpdateTime(new Date());
 
         boolean isCreateDevAccount = false;
         //如果app名称是空，则代表首次设置，则生成tag名称
         //如果新旧不一样，则肯定要同步，就是要区分是更新，还是新建的问题
         //如果名称不一致，则代表修改了app名称
-        if (!appName.equals(devAccountDO.getAppName())) {
+        if (!appName.equals(devAccountModel.getAppName())) {
             //如果之前为空，则代表初始化
-            if (StringUtils.isEmpty(devAccountDO.getAppName())) {
+            if (StringUtils.isEmpty(devAccountModel.getAppName())) {
                 isCreateDevAccount = true;
                 //不能拿到外层，因为有判断
-                devAccountDO.setAppName(appName);
+                devAccountModel.setAppName(appName);
                 //初始化时生成uuid
-                devAccountDO.setSecretKey(UUIDUtil.getUUID());
+                devAccountModel.setSecretKey(UUIDUtil.getUUID());
                 //初始化时需要让开发环境同步增加tag
                 //设置对应的开发者app名称
-                socialTagManage.createDevAccountTagDO(devAccountDO.getId(), appName);
+                socialTagManage.createDevAccountTagDO(devAccountModel.getId(), appName);
             } else {
-                devAccountDO.setAppName(appName);
+                devAccountModel.setAppName(appName);
                 //改名，更新tag名称
                 checkNameTag.setName(appName);
                 tagRepository.save(checkNameTag);
@@ -182,15 +182,15 @@ public class AdminAccountService {
         }
 
         //新建和修改，数量必然大于0，代表需要向开发环境同步
-        SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountDO, createDevProviders);
+        SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountModel, createDevProviders);
         //调用api的时候，要区分出来是更新还是新增，尽早区分
 //        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
 
-        devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
-        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+        devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
         //如果为创建，首次则返回秘钥
         if (isCreateDevAccount) {
-            devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+            devAccountRO.setSecretKey(devAccountModel.getSecretKey());
         }
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);

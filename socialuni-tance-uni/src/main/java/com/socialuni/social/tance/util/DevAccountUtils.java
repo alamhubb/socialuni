@@ -1,17 +1,18 @@
 package com.socialuni.social.tance.util;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.entity.DevAccountProviderDO;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.tance.repository.DevAccountProviderRepository;
-import com.socialuni.social.tance.repository.DevAccountRepository;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.repository.DevTokenRepository;
 import com.socialuni.social.common.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -23,7 +24,7 @@ public class DevAccountUtils {
 //    public static final String devAccountKey = "devAccount";
 //    public static final String appGenderTypeKey = "appGenderType";
 
-    private static DevAccountRepository devAccountRepository;
+    private static DevAccountApi devAccountApi;
     private static DevAccountProviderRepository devAccountProviderRepository;
     private static DevTokenRepository devTokenRepository;
 
@@ -32,9 +33,9 @@ public class DevAccountUtils {
         DevAccountUtils.devTokenRepository = devTokenRepository;
     }
 
-    @Resource
-    public void setDevAccountRepository(DevAccountRepository devAccountRepository) {
-        DevAccountUtils.devAccountRepository = devAccountRepository;
+    @Autowired
+    public void setDevAccountRepository(DevAccountApi devAccountApi) {
+        DevAccountUtils.devAccountApi = devAccountApi;
     }
 
     @Resource
@@ -43,28 +44,28 @@ public class DevAccountUtils {
     }
 
     public static String getDevSocialSecretKey() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        return devAccountDO.getSecretKey();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
+        return devAccountModel.getSecretKey();
     }
 
 
     public static String getAppSocialuniId() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        return devAccountDO.getSocialuniId();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
+        return devAccountModel.getSocialuniId();
     }
 
 
     public static String getAppGenderType() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
-        if (devAccountDO != null) {
-            return devAccountDO.getAppGenderType();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountAllowNull();
+        if (devAccountModel != null) {
+            return devAccountModel.getAppGenderType();
         }
         return GenderType.all;
     }
 
     public static Long getDevNum() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        return devAccountDO.getDevNum();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
+        return devAccountModel.getDevNum();
     }
 
     /*public static Integer getDevIdAllowNull() {
@@ -76,13 +77,13 @@ public class DevAccountUtils {
     }*/
 
     public static Integer getDevIdNotNull() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        return devAccountDO.getId();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
+        return devAccountModel.getId();
     }
 
     public static boolean isCenter() {
-        DevAccountDO devAccountDO = DevAccountUtils.getAdminDevAccountNotNull();
-        return devAccountDO.getId() == 1;
+        DevAccountModel devAccountModel = DevAccountUtils.getAdminDevAccountNotNull();
+        return devAccountModel.getId() == 1;
     }
 
 
@@ -104,7 +105,7 @@ public class DevAccountUtils {
         if (StringUtils.isEmpty(socialuniId)) {
             return null;
         }
-        DevAccountDO centerDevAccount = DevAccountUtils.getDevAccountBySocialuniId(socialuniId);
+        DevAccountModel centerDevAccount = DevAccountUtils.getDevAccountBySocialuniId(socialuniId);
         if (centerDevAccount == null) {
             throw new SocialParamsException("不存在的联盟开发者ID");
         }
@@ -123,7 +124,7 @@ public class DevAccountUtils {
         return devAccountProviderDO;
     }
 
-    public static DevAccountDO getDevAccountAllowNull() {
+    public static DevAccountModel getDevAccountAllowNull() {
         //先从req中获取
         String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialuniSecretKey);
         if (StringUtils.isEmpty(secretKey)) {
@@ -136,21 +137,21 @@ public class DevAccountUtils {
             ResultRO<DevAccountDO> resultRO = socialuniDevAccountAPI.queryDevAccount(new DevAccountQueryQO(secretKey));
             devAccountDO = resultRO.getData();
         }*/
-        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(secretKey);
-        if (devAccountDO == null) {
+        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(secretKey);
+        if (devAccountModel == null) {
             throw new SocialParamsException("开发者信息错误");
         }
-        return devAccountDO;
+        return devAccountModel;
     }
 
-    public static DevAccountDO getDevAccountNotNull() {
+    public static DevAccountModel getDevAccountNotNull() {
         //先从req中获取
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountAllowNull();
-        if (devAccountDO == null) {
-            devAccountDO = DevAccountUtils.getDevAccount(1);
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountAllowNull();
+        if (devAccountModel == null) {
+            devAccountModel = DevAccountUtils.getDevAccount(1);
 //            throw new SocialBusinessException("开发者信息为空");
         }
-        return devAccountDO;
+        return devAccountModel;
     }
 
 
@@ -170,34 +171,34 @@ public class DevAccountUtils {
     }
 
     public static boolean pushServer() {
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        Integer devId = devAccountDO.getId();
+        DevAccountModel devAccountModel = DevAccountUtils.getDevAccountNotNull();
+        Integer devId = devAccountModel.getId();
         return devId == 1;
     }
 
-    public static DevAccountDO getAdminDevAccountNotNull() {
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
+    public static DevAccountModel getAdminDevAccountNotNull() {
+        DevAccountModel user = DevAccountUtils.getAdminDevAccountAllowNull();
         if (user == null) {
             throw new SocialNotLoginException();
         }
         return user;
     }
 
-    public static DevAccountDO getAdminDevAccountAllowNull() {
+    public static DevAccountModel getAdminDevAccountAllowNull() {
         String token = SocialTokenUtil.getToken();
         return DevAccountUtils.getDevAccountByToken(token);
     }
 
     public static Integer getAdminDevAccountIdAllowNull() {
-        DevAccountDO devAccountDO = getAdminDevAccountAllowNull();
-        if (devAccountDO == null) {
+        DevAccountModel devAccountModel = getAdminDevAccountAllowNull();
+        if (devAccountModel == null) {
             return null;
         }
-        return devAccountDO.getId();
+        return devAccountModel.getId();
     }
 
     //得到用户信息
-    private static DevAccountDO getDevAccountByToken(String token) {
+    private static DevAccountModel getDevAccountByToken(String token) {
         //开发和生产逻辑不一样，开发从生产拿数据，生产直接从库里拿数据
         /*if (SocialAppEnv.getContainsProdEnv()) {
             //校验解析token
@@ -239,23 +240,23 @@ public class DevAccountUtils {
         if (StringUtils.isEmpty(devSecretKey)) {
             return null;
         }
-        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devSecretKey);
-        if (devAccountDO == null) {
+        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devSecretKey);
+        if (devAccountModel == null) {
             throw new SocialParamsException("token被破解");
         }
         //todo 这里需要校验有效期吧
-        String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(devAccountDO.getId());
+        String tokenCode = devTokenRepository.findFirstTokenCodeByUserId(devAccountModel.getId());
         if (!token.equals(tokenCode)) {
             return null;
         }
-        return devAccountDO;
+        return devAccountModel;
     }
 
-    public static DevAccountDO getDevAccount(Integer devId) {
-        return devAccountRepository.findOneById(devId);
+    public static DevAccountModel getDevAccount(Integer devId) {
+        return devAccountApi.findOneById(devId);
     }
 
-    public static DevAccountDO getDevAccountBySocialuniId(String socialuniId) {
-        return devAccountRepository.findOneBySocialuniId(socialuniId);
+    public static DevAccountModel getDevAccountBySocialuniId(String socialuniId) {
+        return devAccountApi.findOneBySocialuniId(socialuniId);
     }
 }

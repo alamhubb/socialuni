@@ -43,6 +43,10 @@ public class SocialWebLogAspect {
     @Around("requestLog()")
     public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
         RequestLogDO requestLogDO = RequestLogUtil.get();
+        // 解决异步报错。切面记录日志的问题。
+        if(requestLogDO == null){
+            return joinPoint.proceed();
+        }
         String params = Arrays.toString(joinPoint.getArgs());
         requestLogDO.setParams(params);
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;

@@ -2,13 +2,12 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.social.tance.controller.SocialuniDevAccountAPI;
+import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.util.SocialTokenUtil;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.social.tance.entity.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.entity.DevTokenDO;
-import com.socialuni.social.tance.repository.DevAccountRepository;
 import com.socialuni.social.tance.repository.DevTokenRepository;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
@@ -25,7 +24,7 @@ public class AdminLoginService {
     @Resource
     DevAuthCodeManage devAuthCodeManage;
     @Resource
-    DevAccountRepository devAccountRepository;
+    DevAccountApi devAccountApi;
     @Resource
     DevAccountEntity devAccountEntity;
     @Resource
@@ -33,14 +32,14 @@ public class AdminLoginService {
 
     //秘钥登录
     @Transactional
-    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(SocialuniDevAccountAPI.DevAccountQueryQO devAccountQueryQO) {
-        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devAccountQueryQO.getSecretKey());
-        if (devAccountDO == null) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountApi.DevAccountQueryQO devAccountQueryQO) {
+        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
+        if (devAccountModel == null) {
             throw new SocialBusinessException("秘钥错误");
         }
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        return getSocialLoginROResultRO(devAccountDO, false);
+        return getSocialLoginROResultRO(devAccountModel, false);
     }
 
 
@@ -61,27 +60,27 @@ public class AdminLoginService {
         devAuthCodeManage.checkAuthCode(phoneNum, authCode);
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
-        DevAccountDO devAccountDO = devAccountRepository.findOneByPhoneNumOrderByIdAsc(phoneNum);
+        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
-        if (devAccountDO == null) {
-            devAccountDO = devAccountEntity.createDevAccount(phoneNum);
-            return getSocialLoginROResultRO(devAccountDO, true);
+        if (devAccountModel == null) {
+            devAccountModel = devAccountEntity.createDevAccount(phoneNum);
+            return getSocialLoginROResultRO(devAccountModel, true);
         }
-        return getSocialLoginROResultRO(devAccountDO, false);
+        return getSocialLoginROResultRO(devAccountModel, false);
 
     }
 
-    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountDO devAccountDO, boolean isNewAccount) {
+    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountModel devAccountModel, boolean isNewAccount) {
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        String devSecretKey = devAccountDO.getSecretKey();
+        String devSecretKey = devAccountModel.getSecretKey();
         //生成userToken
         String userToken = SocialTokenUtil.generateTokenByUserKey(devSecretKey);
-        userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountDO.getId())).getTokenCode();
+        userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountModel.getId())).getTokenCode();
 
-        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
         if (isNewAccount) {
-            devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+            devAccountRO.setSecretKey(devAccountModel.getSecretKey());
         }
 //        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
 

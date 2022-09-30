@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
-import com.socialuni.social.tance.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
