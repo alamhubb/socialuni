@@ -1,7 +1,11 @@
 package com.socialuni.social.tance.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.socialuni.social.tance.entity.DevAccountDo;
+import com.socialuni.social.tance.repository.DevAccountRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,50 +21,53 @@ import java.util.Optional;
 @RequestMapping("devAccount")
 @RestController("devAccountApi") //
 public class SocialuniDevAccountController  implements DevAccountApi {
+    @Autowired
+    private DevAccountRepository devAccountRepository;
 
     @Override
     public DevAccountModel findOneById(Integer id) {
-        return null;
+        return devAccountRepository.findOneById(id);
     }
 
     @Override
     public DevAccountModel findOneBySecretKey(String secretKey) {
-        return null;
+        return devAccountRepository.findOneBySecretKey(secretKey);
     }
 
     @Override
     public DevAccountModel findOneBySocialuniId(String socialuniId) {
-        return null;
+        return devAccountRepository.findOneBySocialuniId(socialuniId);
     }
 
     @Override
     public DevAccountModel findOneByAppName(String appName) {
-        return null;
+        return devAccountRepository.findOneByAppName(appName);
     }
 
     @Override
     public DevAccountModel findOneByDevNum(Long devNum) {
-        return null;
+        return devAccountRepository.findOneByDevNum(devNum);
     }
 
     @Override
-    public Optional<DevAccountModel> findFirstByOrderByIdDesc() {
-        return Optional.empty();
+    public Optional<DevAccountDo> findFirstByOrderByIdDesc() {
+        return devAccountRepository.findFirstByOrderByIdDesc();
     }
 
     @Override
     public DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum) {
-        return null;
+        return devAccountRepository.findOneByPhoneNumOrderByIdAsc(phoneNum);
     }
 
     @Override
-    public List<DevAccountModel> findAll() {
-        return null;
+    public List<DevAccountDo> findAll() {
+        return devAccountRepository.findAll();
     }
 
     @Override
     public DevAccountModel save(DevAccountModel devAccountModel) {
-        return null;
+        DevAccountModel save = devAccountRepository.save( toDevAccountDo(devAccountModel) );
+        return save;
     }
 
     @Override
@@ -72,4 +79,10 @@ public class SocialuniDevAccountController  implements DevAccountApi {
     public DevAccountModel queryDevAccountProvider(DevAccountQueryQO devAccountQueryQO) {
         return null;
     }
+
+    public DevAccountDo toDevAccountDo(DevAccountModel devAccountModel){
+        DevAccountDo devAccountDo = BeanUtil.copyProperties(devAccountModel, DevAccountDo.class);
+        return devAccountDo;
+    }
+
 }

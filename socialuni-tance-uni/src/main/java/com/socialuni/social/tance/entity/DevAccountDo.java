@@ -3,6 +3,7 @@ package com.socialuni.social.tance.entity;
 import com.socialuni.social.common.repository.CommonContentBaseDO;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = {"socialuniId"}),
         }
 )
-public class DevAccountDo extends CommonContentBaseDO implements Serializable {
+public class DevAccountDo extends DevAccountModel implements Serializable {
     //密钥
     @Column(nullable = false)
     private String secretKey;

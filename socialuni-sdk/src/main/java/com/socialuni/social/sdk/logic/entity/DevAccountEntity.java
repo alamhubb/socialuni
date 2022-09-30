@@ -34,7 +34,7 @@ public class DevAccountEntity {
 
     //创建开发者账号
     public DevAccountModel createDevAccount(String phoneNum, String socialuniId) {
-        Optional<DevAccountModel> devAccountDOOptional = devAccountApi.findFirstByOrderByIdDesc();
+        Optional<? extends DevAccountModel> devAccountDOOptional = devAccountApi.findFirstByOrderByIdDesc();
         Long lastDevId;
         if (devAccountDOOptional.isPresent()) {
             lastDevId = devAccountDOOptional.get().getDevNum();
