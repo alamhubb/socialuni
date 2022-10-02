@@ -30,7 +30,6 @@ public class RequestLogUtil {
     }
 
     public static void saveAsyncAndRemove(RequestLogDO requestLogDO) {
-        log.info("发了移除：" + requestLogDO.getUri());
         requestLogStore.saveAsync(requestLogDO);
         RequestLogUtil.remove();
     }
@@ -57,7 +56,6 @@ public class RequestLogUtil {
     }
 
     public static void set(RequestLogDO requestLogDO) {
-        log.info("设置了内容:" + requestLogDO.getUri());
         requestLog.set(requestLogDO);
     }
 
@@ -68,7 +66,6 @@ public class RequestLogUtil {
     }*/
 
     public static RequestLogDO get() {
-        log.info("获取内容:" + requestLog.get());
         return requestLog.get();
     }
 
