@@ -8,6 +8,7 @@ import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevTokenModler;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since 1.0.0
  */
+@Component("devAccountApi")
 public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer>, DevAccountApi {
     @Override
     default DevAccountModel savePut(DevAccountModel devAccountModel){
