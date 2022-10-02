@@ -11,7 +11,7 @@ public interface DevTokenApi {
 
     DevTokenModler findFirstByTokenCode(String token);
 
-    DevTokenModler save(DevTokenModler devAccountModel);
+    DevTokenModler savePut(DevTokenModler devAccountModel);
 }
 
 

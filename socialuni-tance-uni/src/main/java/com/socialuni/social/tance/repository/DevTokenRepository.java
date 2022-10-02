@@ -20,9 +20,12 @@ import org.springframework.stereotype.Component;
 public interface DevTokenRepository extends JpaRepository<DevTokenDo, Integer> , DevTokenApi {
     @Query(nativeQuery = true, value = "select t.token_code from s_dev_token t where t.dev_id =:devId order by id desc limit 1")
     String findFirstTokenCodeByUserId(@Param("devId") Integer devId);
+
     //
-    default DevTokenModler save(DevTokenModler devAccountModel){
-        DevTokenModler devAccountDo = BeanUtil.copyProperties(devAccountModel, DevTokenModler.class);
+    @Override
+    default DevTokenModler savePut(DevTokenModler devAccountModel){
+        DevTokenDo devAccountDo = BeanUtil.copyProperties(devAccountModel, DevTokenDo.class);
         return this.save(devAccountDo);
     }
+
 }

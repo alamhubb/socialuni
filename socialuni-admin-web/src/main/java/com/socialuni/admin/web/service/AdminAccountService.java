@@ -5,6 +5,7 @@ import com.socialuni.admin.web.controller.DevAccountUpdateQO;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
+import com.socialuni.social.tance.repository.DevSocialuniIdRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -41,7 +42,7 @@ public class AdminAccountService {
     private TagRepository tagRepository;
     @Resource
     private SocialTagManage socialTagManage;
-
+    DevSocialuniIdRepository devSocialuniIdRepository;
     @Transactional
     public ResultRO<DevAccountRO> updateDevAccount(DevAccountUpdateQO devAccountQO) {
         DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
