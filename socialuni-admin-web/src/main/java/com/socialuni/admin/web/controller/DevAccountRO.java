@@ -41,7 +41,9 @@ public class DevAccountRO {
         this.realName = devAccountModel.getRealName();
 
         String phoneNum = devAccountModel.getPhoneNum();
-        this.phoneNum = phoneNum.substring(0, 3) + "*****" + phoneNum.substring(8);
+        if (StringUtils.isNotEmpty(phoneNum)) {
+            this.phoneNum = phoneNum.substring(0, 3) + "*****" + phoneNum.substring(8);
+        }
 
         if (StringUtils.isNotEmpty(devAccountModel.getSecretKey())) {
             this.secretKey = devAccountModel.getSecretKey().substring(0, 5) + "*****************";

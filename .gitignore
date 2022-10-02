@@ -20,6 +20,7 @@ application-qingchi.yml
 application-schooldev.yml
 application-qkypc.yml
 application-localpre.yml
+application-demoroot.yml
 *.log
 /socialuni-center-web/src/main/resources/application-localpre.yml
 

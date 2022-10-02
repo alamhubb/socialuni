@@ -135,16 +135,21 @@ public class AdminReportService {
         }
         //图片类型的也支持直接审核, 图片审核类型的需要模拟一个report
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
-            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
-            SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentId);
-            reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
+            Optional<ReportDO> reportDOOptional = reportRepository.findById(contentId);
+            if (!reportDOOptional.isPresent()){
+                SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
+                SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentId);
+                reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
+            }else {
+                reportDO = reportDOOptional.get();
+            }
             reportDO.setReportNum(reportDO.getReportNum() + 1);
             reportDO.setUpdateTime(new Date());
             //保存数据
             reportDO = reportRepository.save(reportDO);
         } else {
             //其他类型
-            Optional<ReportDO> reportDOOptional = reportRepository.findById(auditVO.getId());
+            Optional<ReportDO> reportDOOptional = reportRepository.findById(contentId);
             //确认举报是否存在，只能处理未处理状态的。
 
             //判断是否违规

@@ -30,6 +30,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse res, Object o) {
+        log.info("进入拦截111111器：" + request.getRequestURI());
         super.preHandle(request, res, o);
         String requestMethod = request.getMethod();
 
@@ -37,6 +38,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
+        log.info("进入拦2222222截器：" + request.getRequestURI());
         DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
         if (user != null) {
             requestLogDO.setUserId(user.getId());
