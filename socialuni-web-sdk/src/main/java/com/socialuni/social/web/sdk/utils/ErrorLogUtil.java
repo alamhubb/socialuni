@@ -39,7 +39,6 @@ public class ErrorLogUtil {
 
     //后端直接生成的
     public static void error(String errorMsg) {
-        log.info("获取requestlo15555555555");
         RequestLogDO requestLogDO = RequestLogUtil.get();
         ErrorRequestLogDO errorRequestLogDO= new ErrorRequestLogDO(requestLogDO);
 
