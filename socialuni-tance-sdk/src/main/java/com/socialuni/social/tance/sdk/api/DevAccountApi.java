@@ -40,7 +40,7 @@ public interface DevAccountApi {
 
     List<?  extends DevAccountModel  > findAll();
 
-    DevAccountModel save(DevAccountModel devAccountModel);
+    DevAccountModel savePut(DevAccountModel devAccountModel);
 
     //同步创建生产环境的开发者账号
     DevAccountModel queryDevAccount(DevAccountQueryQO devAccountQueryQO);

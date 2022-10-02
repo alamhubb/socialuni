@@ -21,6 +21,6 @@ public class DevAccountRedis {
             }
     )
     public DevAccountModel saveDevAccount(DevAccountModel devAccount) {
-        return devAccountApi.save(devAccount);
+        return devAccountApi.savePut(devAccount);
     }
 }

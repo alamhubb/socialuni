@@ -19,8 +19,8 @@ import java.util.Optional;
  * 前端初始化内容
  */
 @RequestMapping("devAccount")
-@RestController("devAccountApi") //
-public class SocialuniDevAccountController  implements DevAccountApi {
+//@RestController("devAccountApi") //
+public abstract class SocialuniDevAccountController  implements DevAccountApi {
     @Autowired
     private DevAccountRepository devAccountRepository;
 
@@ -64,11 +64,11 @@ public class SocialuniDevAccountController  implements DevAccountApi {
         return devAccountRepository.findAll();
     }
 
-    @Override
+    /*@Override
     public DevAccountModel save(DevAccountModel devAccountModel) {
         DevAccountModel save = devAccountRepository.save( toDevAccountDo(devAccountModel) );
         return save;
-    }
+    }*/
 
     @Override
     public DevAccountModel queryDevAccount(DevAccountQueryQO devAccountQueryQO) {
