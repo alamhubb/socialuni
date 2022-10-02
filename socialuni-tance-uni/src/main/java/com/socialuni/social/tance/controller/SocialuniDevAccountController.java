@@ -6,6 +6,7 @@ import com.socialuni.social.tance.repository.DevAccountRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,8 @@ import java.util.Optional;
  * 前端初始化内容
  */
 @RequestMapping("devAccount")
-//@RestController("devAccountApi") //
-public abstract class SocialuniDevAccountController  implements DevAccountApi {
+@Component("devAccountApi") //
+public class SocialuniDevAccountController  implements DevAccountApi {
     @Autowired
     private DevAccountRepository devAccountRepository;
 
@@ -62,6 +63,11 @@ public abstract class SocialuniDevAccountController  implements DevAccountApi {
     @Override
     public List<DevAccountDo> findAll() {
         return devAccountRepository.findAll();
+    }
+
+    @Override
+    public DevAccountModel savePut(DevAccountModel devAccountModel) {
+        return devAccountRepository.savePut(devAccountModel);
     }
 
     /*@Override

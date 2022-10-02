@@ -18,9 +18,8 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since 1.0.0
  */
-@Component("devAccountApi")
-public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer>, DevAccountApi {
-    @Override
+public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer> {
+
     default DevAccountModel savePut(DevAccountModel devAccountModel){
         DevAccountDo devAccountDo = BeanUtil.copyProperties(devAccountModel, DevAccountDo.class);
         return this.save(devAccountDo);
