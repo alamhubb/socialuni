@@ -3,6 +3,7 @@ package com.socialuni.social.web.sdk.utils;
 
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.store.RequestLogStore;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
+@Slf4j
 public class RequestLogUtil {
     private static RequestLogStore requestLogStore;
 
@@ -28,6 +30,7 @@ public class RequestLogUtil {
     }
 
     public static void saveAsyncAndRemove(RequestLogDO requestLogDO) {
+        log.info("触发了移除：" + requestLogDO.getUri());
         requestLogStore.saveAsync(requestLogDO);
         RequestLogUtil.remove();
     }
@@ -54,6 +57,7 @@ public class RequestLogUtil {
     }
 
     public static void set(RequestLogDO requestLogDO) {
+        log.info("设置了内容:" + requestLogDO.getUri());
         requestLog.set(requestLogDO);
     }
 
@@ -64,6 +68,7 @@ public class RequestLogUtil {
     }*/
 
     public static RequestLogDO get() {
+        log.info("获取内容:" + requestLog.get());
         return requestLog.get();
     }
 

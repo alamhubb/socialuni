@@ -68,6 +68,7 @@ public class SocialTokenDOUtil {
 
             if (!userKey.equals(uid)) {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);
+                log.info("获取requestlo1g11222222");
                 RequestLogDO requestLogDO = RequestLogUtil.get();
                 if (requestLogDO != null) {
                     requestLogDO.setUserId(doUserId);

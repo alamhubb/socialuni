@@ -42,6 +42,7 @@ public class SocialWebLogAspect {
      */
     @Around("requestLog()")
     public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
+        log.info("获取requestlo15555555555");
         RequestLogDO requestLogDO = RequestLogUtil.get();
         // 解决异步报错。切面记录日志的问题。
         if(requestLogDO == null){
@@ -72,6 +73,7 @@ public class SocialWebLogAspect {
                 ErrorLogUtil.saveAsync(requestLogDO);
             }
         }
+        log.info("触发了移除1111");
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         return result;
     }
@@ -91,6 +93,7 @@ public class SocialWebLogAspect {
         String innerMsg = event.getInnerMsg();
         String innerMsgDetail = event.getInnerMsgDetail();
 
+        log.info("获取requestlo1g11888888888");
         RequestLogDO requestLogDO = RequestLogUtil.get();
         if (requestLogDO == null) {
             HttpServletRequest request = RequestUtil.getRequest();
@@ -119,6 +122,7 @@ public class SocialWebLogAspect {
         requestLogDO.setEndTime(endDate);
         requestLogDO.setSpendTime(spendTime);
 
+        log.info("触发了移除22222");
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         ErrorLogUtil.saveAsync(requestLogDO);
 

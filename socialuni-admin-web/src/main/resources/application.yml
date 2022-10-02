@@ -1,8 +1,10 @@
 spring:
   profiles:
 #    active: local
+    active: dev
 #    active: localprod
-    active: prod
+#    active: prod
+#    active: demo
 #    active: qkylocal
   jpa:
     database: MYSQL
