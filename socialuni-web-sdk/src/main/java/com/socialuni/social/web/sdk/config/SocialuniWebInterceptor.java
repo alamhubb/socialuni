@@ -33,7 +33,6 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
             return true;
         }
         //保存下当前的request，防止异步无法处理request问题
-        log.info("进入拦截33333333器：" + request.getRequestURI());
         RequestLogUtil.setRequest(request);
         Date startTime = new Date();
         String uri = request.getRequestURI();
@@ -49,7 +48,6 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         requestLogDO.setProvider(RequestUtil.getProvider());
         requestLogDO.setPlatform(RequestUtil.getPlatform());
         requestLogDO.setUri(uri);
-        log.info("进入拦截34444443器：" + request.getRequestURI());
         RequestLogUtil.set(requestLogDO);
 
         requestLogDO.setUserId(socialRequestUserConfig.getUserId());

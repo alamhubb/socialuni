@@ -30,7 +30,7 @@ public class RequestLogUtil {
     }
 
     public static void saveAsyncAndRemove(RequestLogDO requestLogDO) {
-        log.info("触发了移除：" + requestLogDO.getUri());
+        log.info("发了移除：" + requestLogDO.getUri());
         requestLogStore.saveAsync(requestLogDO);
         RequestLogUtil.remove();
     }

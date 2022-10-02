@@ -42,7 +42,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object result, MethodParameter methodParameter,
                                   MediaType mediaType, Class clas, ServerHttpRequest serverHttpRequest,
                                   ServerHttpResponse serverHttpResponse) {
-        log.info("触发了发送1111111111t");
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
         // 兼容没有返回体的。
@@ -72,7 +71,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
-        log.info("触发了发送122222t");
         ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
         String errorStr = exception.toString();
         if (StringUtils.isEmpty(errorStr)) {
@@ -90,7 +88,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(value = FeignException.class)
     public ResultRO<Void> feignExceptionHandler(FeignException feignException) {
-        log.info("触发了发送1233333333");
         Optional<ByteBuffer> responseOpt = feignException.responseBody();
         feignException.printStackTrace();
         if (responseOpt.isPresent()) {
@@ -114,7 +111,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResultRO<Void> BindExceptionHandler(MethodArgumentNotValidException exception) {
-        log.info("触发了发送15555555553");
         String msg = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         ResultRO<Void> resultRO = new ResultRO<>(ErrorCode.PARAMS_ERROR, msg);
         this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, msg, exception.getMessage());
@@ -124,7 +120,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(value = SocialException.class)
     public ResultRO<Void> socialExceptionHandler(SocialException exception) {
-        log.info("触发了发送166666663");
         this.saveOperateLogDO(exception.getErrorMsg(), exception.getErrorCode(), exception.getErrorType(), exception.getInnerMsg(), null);
         exception.printStackTrace();
         ResultRO<Void> resultRO = new ResultRO<>(exception.getErrorCode(), exception.getErrorMsg());
@@ -132,7 +127,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private void saveOperateLogDO(String errorMsg, Integer errorCode, String errorType, String innerMsg, String innerMsgDetail) {
-        log.info("触发了发送event");
         WebControllerExceptionEvent webControllerExceptionEvent =new WebControllerExceptionEvent();
         webControllerExceptionEvent.setErrorMsg(errorMsg);
         webControllerExceptionEvent.setErrorCode(errorCode);
@@ -146,7 +140,6 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ResultRO<Void> notFound404ExceptionHandler(NoHandlerFoundException exception) {
-        log.info("触发了发送666666666666t");
         ResultRO<Void> resultRO = new ResultRO<>(404, "不存在的资源");
         this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, resultRO.getErrorMsg(), exception.getMessage());
         return resultRO;

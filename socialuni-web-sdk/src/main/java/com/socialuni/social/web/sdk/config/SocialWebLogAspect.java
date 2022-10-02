@@ -73,7 +73,6 @@ public class SocialWebLogAspect {
                 ErrorLogUtil.saveAsync(requestLogDO);
             }
         }
-        log.info("触发了移除1111");
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         return result;
     }
@@ -122,7 +121,6 @@ public class SocialWebLogAspect {
         requestLogDO.setEndTime(endDate);
         requestLogDO.setSpendTime(spendTime);
 
-        log.info("触发了移除22222");
         RequestLogUtil.saveAsyncAndRemove(requestLogDO);
         ErrorLogUtil.saveAsync(requestLogDO);
 
