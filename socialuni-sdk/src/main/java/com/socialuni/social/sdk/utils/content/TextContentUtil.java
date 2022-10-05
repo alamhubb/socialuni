@@ -54,8 +54,8 @@ public class TextContentUtil {
 
     // 清除所有空白字符
     private static String clearAllEmptyChart(String content) {
-        if (content == null) {
-            throw new RuntimeException("要清除空白字符的字符串不能为null");
+        if (StringUtils.isEmpty(content)) {
+            return content;
         }
         content = content.trim().replaceAll("\\s*", "");
 

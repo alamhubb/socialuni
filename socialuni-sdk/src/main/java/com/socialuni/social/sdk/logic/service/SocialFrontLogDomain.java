@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SocialFrontLogDomain {
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
-        log.info("获取requestlo1444444");
         RequestLogDO requestLogDO = RequestLogUtil.get();
         ErrorRequestLogDO front = new ErrorRequestLogDO(requestLogDO);
 

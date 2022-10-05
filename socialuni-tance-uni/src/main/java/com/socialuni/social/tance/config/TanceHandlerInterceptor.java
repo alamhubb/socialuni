@@ -1,9 +1,9 @@
 package com.socialuni.social.tance.config;
 
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
+import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
         name = {"api.tance.enable"},
         matchIfMissing = true
 )
-public class TanceHandlerInterceptor implements HandlerInterceptor {
+public class TanceHandlerInterceptor extends SocialuniWebInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 初始化。
         PublishDataTanceBaseRepository.publishDataInitialized(request);
         //
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+        return super.preHandle(request, response, handler);
     }
 }
