@@ -22,12 +22,6 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-tance-sdk</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-tance-uni</artifactId>
-            <scope>runtime</scope>
-            <!-- 编译时候不被依赖。只在运行时加入 -->
-        </dependency>
         <!--        支持get请求-->
         <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient -->
         <dependency>
