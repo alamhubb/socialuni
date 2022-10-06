@@ -18,10 +18,6 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-web-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-tance-sdk</artifactId>
         </dependency>
     </dependencies>
