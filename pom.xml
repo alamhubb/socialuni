@@ -28,6 +28,8 @@
         <module>socialuni-tance-uni</module>
         <module>socialuni-tance-sdk</module>
         <module>socialuni-tance-dev</module>
+        <module>socialuni-user-sdk</module>
+        <module>socialuni-user-dev</module>
     </modules>
 
     <properties>
@@ -43,6 +45,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-user-dev</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-user-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-tance-sdk</artifactId>
