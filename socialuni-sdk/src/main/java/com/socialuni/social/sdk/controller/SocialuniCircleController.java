@@ -1,12 +1,13 @@
 package com.socialuni.social.sdk.controller;
 
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
+import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
-import com.socialuni.social.common.model.ResultRO;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("socialuni/circle")
 public class SocialuniCircleController implements SocialuniCircleAPI {
 
     @Resource

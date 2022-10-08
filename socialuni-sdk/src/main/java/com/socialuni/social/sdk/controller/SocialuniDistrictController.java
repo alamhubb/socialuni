@@ -1,10 +1,11 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.sdk.feignAPI.openData.SocialuniDistrictAPI;
-import com.socialuni.social.sdk.constant.AppData;
-import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
 import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.sdk.constant.AppData;
+import com.socialuni.social.sdk.feignAPI.openData.SocialuniDistrictAPI;
+import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("socialuni/district")
 public class SocialuniDistrictController implements SocialuniDistrictAPI {
     @Resource
     SocialuniDistrictAPI socialuniDistrictAPI;

@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.feignAPI.SocialuniAppAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniAppService;
@@ -7,7 +8,7 @@ import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.social.sdk.model.RO.app.HomeTabRO;
 import com.socialuni.social.sdk.model.RO.app.SocialAppLaunchDataRO;
-import com.socialuni.social.common.model.ResultRO;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * 前端初始化内容
  */
 @RestController
+@RequestMapping("socialuni/app")
 public class SocialuniAppController implements SocialuniAppAPI {
     @Resource
     SocialuniAppService centerAppService;

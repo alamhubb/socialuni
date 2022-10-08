@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -22,32 +20,16 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired(required = false)
     @Qualifier("tanceHandlerInterceptor")
     private HandlerInterceptor tanceHandlerInterceptor;
-    @Bean
-    public CorsFilter corsFilter() {
-        //1. 添加 CORS配置信息
-        CorsConfiguration config = new CorsConfiguration();
-        //放行哪些原始域
-        config.addAllowedOriginPattern("*");
-        //是否发送 Cookie
-        config.setAllowCredentials(true);
-        //放行哪些请求方式
-        config.addAllowedMethod("*");
-        //放行哪些原始请求头部信息
-        config.addAllowedHeader("*");
-        //暴露哪些头部信息
-//        config.addExposedHeader("*");
-        //2. 添加映射路径
-        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        corsConfigurationSource.registerCorsConfiguration("/**",config);
-        //3. 返回新的CorsFilter
-        return new CorsFilter(corsConfigurationSource);
-    }
-/*    @Override
+
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         //设置允许跨域的路径
         registry.addMapping("/**")
                 //设置允许跨域请求的域名
-                .allowedOrigins("*")
+//                .allowedOrigins("*")
+                // 改成下面这个。
+                // When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+                .allowedOriginPatterns("*")
                 //是否允许证书 不再默认开启
                 .allowCredentials(true)
                 //设置允许的方法
@@ -57,7 +39,7 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
 //                .exposedHeaders(HttpHeaders.SET_COOKIE, "haha")
                 //跨域允许时间
                 .maxAge(3600);
-    }*/
+    }
 
     @Bean
     public RestTemplate restTemplate() {
