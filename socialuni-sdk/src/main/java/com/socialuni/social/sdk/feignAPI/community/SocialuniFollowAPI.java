@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("socialuni/follow")
+//@RequestMapping("socialuni/follow")
 @FeignClient(name = "follow", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @Tag(name = "社区模块/关注模块")
 public interface SocialuniFollowAPI {

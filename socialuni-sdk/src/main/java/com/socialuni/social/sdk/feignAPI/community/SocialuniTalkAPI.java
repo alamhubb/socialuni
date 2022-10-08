@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("socialuni/talk")
+//@RequestMapping("socialuni/talk")
 @OpenAPIDefinition(
         info = @Info(
                 title = "社交联盟接口",

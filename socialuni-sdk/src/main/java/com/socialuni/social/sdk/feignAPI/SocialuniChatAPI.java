@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2018-11-18 20:45
  */
 
-@RequestMapping("socialuni/chat")
+//@RequestMapping("socialuni/chat")
 @FeignClient(name = "chat", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @Tag(name = "消息模块/会话模块",description = "暂未支持")
 public interface SocialuniChatAPI {

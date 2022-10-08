@@ -37,7 +37,7 @@
         <socialuni.version>0.3.0</socialuni.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
         <lombok.version>1.18.20</lombok.version>

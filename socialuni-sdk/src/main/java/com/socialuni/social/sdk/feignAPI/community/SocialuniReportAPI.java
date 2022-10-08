@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("socialuni/report")
+//@RequestMapping("socialuni/report")
 @FeignClient(name = "report", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @Tag(name = "社区模块/举报模块")
 public interface SocialuniReportAPI {

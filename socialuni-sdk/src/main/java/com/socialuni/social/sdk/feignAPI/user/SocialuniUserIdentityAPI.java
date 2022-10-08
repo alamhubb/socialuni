@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 
-@RequestMapping("socialuni/userIdentity")
+//@RequestMapping("socialuni/userIdentity")
 @Tag(name = "用户模块/用户认证模块")
 @FeignClient(name = "userIdentity", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniUserIdentityAPI {

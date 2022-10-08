@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping("socialuni/userExpand")
+//@RequestMapping("socialuni/userExpand")
 @Tag(name = "用户模块/用户扩展信息模块")
 @FeignClient(name = "userExpand", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniUserExpandAPI {

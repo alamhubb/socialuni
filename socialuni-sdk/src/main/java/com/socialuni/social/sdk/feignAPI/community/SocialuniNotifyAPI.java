@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RequestMapping("socialuni/notify")
+//@RequestMapping("socialuni/notify")
 @FeignClient(name = "notify", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @Tag(name = "社区模块/通知模块")
 public interface SocialuniNotifyAPI {

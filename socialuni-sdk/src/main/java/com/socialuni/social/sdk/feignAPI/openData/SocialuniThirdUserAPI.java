@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 
-@RequestMapping("socialuni/thirdUser")
+//@RequestMapping("socialuni/thirdUser")
 @FeignClient(name = "thirdUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @Tag(name = "开放数据/开放用户数据")
 public interface SocialuniThirdUserAPI {

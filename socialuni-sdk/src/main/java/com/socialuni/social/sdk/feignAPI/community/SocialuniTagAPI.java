@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("socialuni/tag")
+//@RequestMapping("socialuni/tag")
 @Tag(name = "社区模块/话题模块")
 @FeignClient(name = "tag", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 public interface SocialuniTagAPI {
