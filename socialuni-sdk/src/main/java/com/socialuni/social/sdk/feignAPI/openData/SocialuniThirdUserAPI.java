@@ -1,22 +1,21 @@
 package com.socialuni.social.sdk.feignAPI.openData;
 
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.common.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 
 //@RequestMapping("socialuni/thirdUser")
-@FeignClient(name = "thirdUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "thirdUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/thirdUser")
 @Tag(name = "开放数据/开放用户数据")
 public interface SocialuniThirdUserAPI {
     @PostMapping("registryUser")

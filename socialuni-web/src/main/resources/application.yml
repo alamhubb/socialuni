@@ -4,9 +4,6 @@ spring:
     active: dev
 #    active: prod
 #    active: schooldev
-  datasource:
-    initialization-mode: never
-    data: classpath:dataInit/data.sql
   jpa:
     database: MYSQL
     show-sql: false
@@ -18,13 +15,18 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: true
   #不要为我们工程中的资源文件建立映射
-  resources:
-    add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
   main:
     allow-bean-definition-overriding: true
     allow-circular-references : true
+  sql:
+    init:
+      mode: never
+      data-locations: classpath:dataInit/data.sql
+  web:
+    resources:
+      add-mappings: false
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

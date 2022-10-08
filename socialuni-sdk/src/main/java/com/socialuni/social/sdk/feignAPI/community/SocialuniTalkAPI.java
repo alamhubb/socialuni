@@ -46,7 +46,7 @@ import java.util.List;
         }
 )
 @Tag(name = "社区模块/动态模块")
-@FeignClient(name = "talk", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "talk", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/talk")
 public interface SocialuniTalkAPI {
     @GetMapping("queryStickTalks")
     @Operation(summary = "查询置顶动态列表，无需参数")

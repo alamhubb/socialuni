@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 //@RequestMapping("socialuni/userExpand")
 @Tag(name = "用户模块/用户扩展信息模块")
-@FeignClient(name = "userExpand", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "userExpand", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/userExpand")
 public interface SocialuniUserExpandAPI {
     @PostMapping("editUserSchool")
     @Operation(summary = "编辑用户学校名称")

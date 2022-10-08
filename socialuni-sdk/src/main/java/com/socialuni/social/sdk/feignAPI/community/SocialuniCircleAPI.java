@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 //@RequestMapping("socialuni/circle")
-@FeignClient(name = "circle", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "circle", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/circle")
 @Tag(name = "社区模块/圈子模块")
 public interface SocialuniCircleAPI {
     @PostMapping("createCircle")

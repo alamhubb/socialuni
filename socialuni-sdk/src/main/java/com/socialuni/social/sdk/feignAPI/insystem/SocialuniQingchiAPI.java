@@ -25,7 +25,7 @@ import javax.validation.Valid;
  *//*
 
 @RequestMapping("socialuni/qingchi")
-@FeignClient(name = "qingchi", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "qingchi", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/circle")
 public interface SocialuniQingchiAPI {
     @PostMapping("providerLogin")
     ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> providerLogin(@RequestBody @Valid SocialProviderLoginQO loginData);
