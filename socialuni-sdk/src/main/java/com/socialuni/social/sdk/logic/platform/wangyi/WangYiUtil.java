@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.platform.wangyi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.social.sdk.constant.WyCheckConst;
 import com.socialuni.social.sdk.dao.DO.AntispamDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.AntispamRepository;
 import com.socialuni.social.common.utils.UUIDUtil;
 import org.apache.commons.codec.digest.DigestUtils;

@@ -1,6 +1,6 @@
-package com.socialuni.social.sdk.dao.repository.user;
+package com.socialuni.social.user.sdk.api;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserSocialCoinDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserSocialCoinDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

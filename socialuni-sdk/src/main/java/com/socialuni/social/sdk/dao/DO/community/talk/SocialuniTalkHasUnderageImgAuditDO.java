@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO.community.talk;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.SocialContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

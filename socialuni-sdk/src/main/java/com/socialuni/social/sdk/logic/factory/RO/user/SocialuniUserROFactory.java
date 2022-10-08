@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
 

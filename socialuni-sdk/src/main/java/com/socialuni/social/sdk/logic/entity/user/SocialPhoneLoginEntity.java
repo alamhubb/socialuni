@@ -4,8 +4,8 @@ import com.socialuni.social.sdk.logic.manage.phone.AuthenticationManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import org.springframework.stereotype.Service;
 

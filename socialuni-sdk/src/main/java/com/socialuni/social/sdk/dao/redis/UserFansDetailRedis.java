@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.redis;
 
-import com.socialuni.social.sdk.dao.redis.redisKey.CommonRedisKey;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserFansDetailDO;
-import com.socialuni.social.sdk.dao.repository.user.SocialUserFansDetailRepository;
+import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.user.sdk.api.SocialUserFansDetailRepository;
+import com.socialuni.social.user.sdk.model.SocialUserFansDetailDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

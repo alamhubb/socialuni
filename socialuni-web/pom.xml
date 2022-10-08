@@ -27,7 +27,6 @@
         <dependency>
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-sdk</artifactId>
-            <version>0.3.0</version>
         </dependency>
 
         <dependency>

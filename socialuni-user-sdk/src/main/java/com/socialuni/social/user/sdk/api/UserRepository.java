@@ -1,8 +1,8 @@
-package com.socialuni.social.sdk.dao.repository;
+package com.socialuni.social.user.sdk.api;
 
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.redis.redisKey.CommonRedisKey;
+import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;

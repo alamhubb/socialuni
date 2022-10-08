@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

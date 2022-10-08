@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.dao.redis;
 
-import com.socialuni.social.sdk.dao.redis.redisKey.CommonRedisKey;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.sdk.dao.repository.user.SocialUserPhoneRepository;
+import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.user.sdk.api.SocialUserPhoneRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneDO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 

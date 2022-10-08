@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.utils.UUIDUtil;
 import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
 import com.socialuni.social.common.exception.exception.SocialParamsException;

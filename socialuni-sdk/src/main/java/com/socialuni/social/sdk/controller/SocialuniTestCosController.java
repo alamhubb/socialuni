@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserSocialCoinDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserSocialCoinDO;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.facade.SocialuniUserRepositoryFacede;
 import org.springframework.web.bind.annotation.GetMapping;

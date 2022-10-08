@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.user;
+package com.socialuni.social.user.sdk.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

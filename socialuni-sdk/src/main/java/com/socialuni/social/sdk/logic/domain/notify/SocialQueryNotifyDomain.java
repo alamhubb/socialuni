@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.notify;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.logic.factory.SocialUnreadNotifyVOFactory;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import org.springframework.stereotype.Component;

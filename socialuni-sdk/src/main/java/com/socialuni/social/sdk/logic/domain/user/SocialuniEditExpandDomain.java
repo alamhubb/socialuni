@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserExpandDO;
-import com.socialuni.social.sdk.dao.repository.user.SocialuniUserExpandRepository;
-import com.socialuni.social.sdk.dao.repository.UserRepository;
+import com.socialuni.social.user.sdk.model.SocialuniUserExpandDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserExpandRepository;
+import com.socialuni.social.user.sdk.api.UserRepository;
 import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.social.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;

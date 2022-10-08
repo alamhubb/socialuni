@@ -4,7 +4,7 @@ package com.socialuni.social.sdk.logic.service.phone;
 import com.socialuni.social.sdk.logic.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;

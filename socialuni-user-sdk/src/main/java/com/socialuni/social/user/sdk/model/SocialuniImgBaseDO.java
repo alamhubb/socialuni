@@ -1,6 +1,6 @@
-package com.socialuni.social.sdk.dao.DO.community.talk;
+package com.socialuni.social.user.sdk.model;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.Column;

@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.talk;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;

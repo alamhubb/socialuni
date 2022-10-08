@@ -4,8 +4,8 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROF
 import com.socialuni.social.sdk.logic.manage.phone.AuthenticationManage;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

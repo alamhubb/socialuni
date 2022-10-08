@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.DO.circle;
 
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.repository.CommonContentBaseDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
