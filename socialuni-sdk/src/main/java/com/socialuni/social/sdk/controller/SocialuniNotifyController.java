@@ -1,4 +1,4 @@
-package com.socialuni.social.controller;
+package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniNotifyAPI;
