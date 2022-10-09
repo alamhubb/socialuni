@@ -11,7 +11,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
@@ -138,7 +138,7 @@ public class AdminReportService {
             Optional<ReportDO> reportDOOptional = reportRepository.findById(contentId);
             if (!reportDOOptional.isPresent()){
                 SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
-                SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+                SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
                 reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
             }else {
                 reportDO = reportDOOptional.get();

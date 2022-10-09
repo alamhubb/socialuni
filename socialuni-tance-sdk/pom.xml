@@ -18,7 +18,8 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-common</artifactId>
+            <artifactId>socialuni-common-sdk</artifactId>
         </dependency>
+
     </dependencies>
 </project>

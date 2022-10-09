@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
@@ -46,7 +46,7 @@ public class SoicialuniUserAddReportDomain {
 
         Integer contentId = modelDO.getUnionId();
 
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
         // 设置model
 
         ReportDO reportDO = reportRepository.findOneByContentId(contentId);

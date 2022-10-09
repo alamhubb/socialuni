@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -31,7 +31,7 @@ public class SocialuniCommentDOUtil {
     }
 
     public static SocialuniCommentDO getAllowNull(Integer unionId) {
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
         SocialuniCommentDO commentDO = commentRepository.findOneByUnionId(unionId);
         if (commentDO == null) {
             if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {

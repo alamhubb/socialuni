@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
@@ -51,7 +51,7 @@ public class UniUserRegistryDomain {
             throw new SocialParamsException("用户唯一标识不能为空");
         }
 
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionByUuidAllowNull(userUid);
+        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionByUuidAllowNull(userUid);
         //新注册
         if (uniContentUnionIdDO == null) {
             //为空，则只注册

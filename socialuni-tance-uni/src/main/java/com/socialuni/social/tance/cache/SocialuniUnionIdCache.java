@@ -1,8 +1,8 @@
-package com.socialuni.social.tance.sdk.cache;
+package com.socialuni.social.tance.cache;
 
 import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
-import com.socialuni.social.tance.sdk.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.tance.repository.SocialuniUnionIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  */
 @Component
 @Slf4j
-public class SocialuniUnionIdCache {
+public class SocialuniUnionIdCache implements com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi {
     private static SocialuniUnionIdRepository uniContentUnionIdRepository;
 
     @Resource
@@ -28,21 +28,24 @@ public class SocialuniUnionIdCache {
     }
 
     //新增一个清空所有，把当前的缓存
+    @Override
     @Caching(
             evict = {@CacheEvict(cacheNames = "getUnionIdByUuId")},
             put = {@CachePut(cacheNames = {"getUnionIdById"}, key = "#uniContentUnionIdDO.id")}
     )
-    public SocialuniUnionIdDO save(SocialuniUnionIdDO uniContentUnionIdDO) {
+    public SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO) {
         return SocialuniRepositoryFacade.save(uniContentUnionIdDO);
     }
 
+    @Override
     @Cacheable(cacheNames = "getUnionIdById", key = "#unionId")
-    public SocialuniUnionIdDO findById(Integer unionId) {
-        return SocialuniRepositoryFacade.findById(unionId, SocialuniUnionIdDO.class);
+    public SocialuniUnionIdModler findById(Integer unionId) {
+        return SocialuniRepositoryFacade.findById(unionId, SocialuniUnionIdModler.class);
     }
 
+    @Override
     @Cacheable(cacheNames = "getUnionIdByUuId", key = "#uuid")
-    public SocialuniUnionIdDO findByUuId(String uuid) {
+    public SocialuniUnionIdModler findByUuId(String uuid) {
         return uniContentUnionIdRepository.findByUuid(uuid);
     }
 }

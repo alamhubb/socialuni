@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
@@ -94,12 +94,12 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             log.info("contentId:{}", contentId);
             log.info("jieshu1124");
             //获取唯一标识
-            SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+            SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
             log.info("jieshu1");
             ReportDO reportDO = reportRepository.findOneByContentId(contentId);
             //如果不存在则创建
             if (reportDO == null) {
-                reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, socialuniContentBO, socialuniUnionIdDO);
+                reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, socialuniContentBO, socialuniUnionIdModler);
             }
             reportDO.setReportNum(reportDO.getReportNum() + 1);
             reportDO.setUpdateTime(new Date());

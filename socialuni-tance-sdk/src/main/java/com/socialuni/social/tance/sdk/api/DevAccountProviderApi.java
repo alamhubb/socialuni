@@ -3,7 +3,6 @@ package com.socialuni.social.tance.sdk.api;
 
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

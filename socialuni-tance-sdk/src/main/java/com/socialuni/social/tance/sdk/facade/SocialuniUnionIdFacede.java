@@ -3,9 +3,9 @@ package com.socialuni.social.tance.sdk.facade;
 import cn.hutool.core.util.ObjectUtil;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.utils.UUIDUtil;
-import com.socialuni.social.tance.sdk.cache.SocialuniUnionIdCache;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -23,11 +23,11 @@ import java.util.regex.Pattern;
 @Component
 @Slf4j
 public class SocialuniUnionIdFacede {
-    private static SocialuniUnionIdCache socialuniUnionIdCache;
+    private static SocialuniUnionIdApi socialuniUnionIdApi;
 
     @Resource
-    public void setSocialuniUnionIdCache(SocialuniUnionIdCache socialuniUnionIdCache) {
-        SocialuniUnionIdFacede.socialuniUnionIdCache = socialuniUnionIdCache;
+    public void setSocialuniUnionIdCache(SocialuniUnionIdApi socialuniUnionIdApi) {
+        SocialuniUnionIdFacede.socialuniUnionIdApi = socialuniUnionIdApi;
     }
 
     //根据空的创建， 本系统写入数据时，需要先创建，然后写入内容表unionId，然后再根据返回内容更新uid
@@ -53,18 +53,18 @@ public class SocialuniUnionIdFacede {
 
     //自身创建
     private static Integer createUnionIdByContentType(String contentType) {
-        SocialuniUnionIdDO uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, UUIDUtil.getUUID(), DevAccountFacade.getDevIdNotNull());
-        uniContentUnionIdDO = socialuniUnionIdCache.save(uniContentUnionIdDO);
+        SocialuniUnionIdModler uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, UUIDUtil.getUUID(), DevAccountFacade.getDevIdNotNull());
+        uniContentUnionIdDO = socialuniUnionIdApi.save(uniContentUnionIdDO);
         //有的话更新
         return uniContentUnionIdDO.getId();
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
     public static void updateUuidByUnionIdNotNull(Integer unionId, String uuid) {
-        SocialuniUnionIdDO uniContentUnionIdDO = getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdModler uniContentUnionIdDO = getUnionDOByUnionIdNotNull(unionId);
         //没有写入
         uniContentUnionIdDO.setUuid(uuid);
-        socialuniUnionIdCache.save(uniContentUnionIdDO);
+        socialuniUnionIdApi.save(uniContentUnionIdDO);
     }
 
     //social层，根据unionId获取uid，不可为空
@@ -73,12 +73,12 @@ public class SocialuniUnionIdFacede {
     }
 
     //空的创建的，然后更新，只有往中心推送后，可调用这里更新
-    public static SocialuniUnionIdDO getUnionDOByUnionIdNotNull(Integer unionId) {
+    public static SocialuniUnionIdModler getUnionDOByUnionIdNotNull(Integer unionId) {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
         log.info(String.valueOf(unionId));
-        SocialuniUnionIdDO uniContentUnionIdDO = socialuniUnionIdCache.findById(unionId);
+        SocialuniUnionIdModler uniContentUnionIdDO = socialuniUnionIdApi.findById(unionId);
         log.info(String.valueOf(uniContentUnionIdDO));
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
@@ -90,11 +90,11 @@ public class SocialuniUnionIdFacede {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识3");
         }
-        SocialuniUnionIdDO uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
+        SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         //没有写入
         if (uniContentUnionIdDO == null) {
-            uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
-            socialuniUnionIdCache.save(uniContentUnionIdDO);
+            uniContentUnionIdDO = new SocialuniUnionIdModler(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
+            socialuniUnionIdApi.save(uniContentUnionIdDO);
             //有的话更新
         }
         return uuid;
@@ -108,8 +108,8 @@ public class SocialuniUnionIdFacede {
     }
 
     //根据uid获取真实id,获取不可为空, 为前台传入的数据，防止错误，不可为空
-    public static SocialuniUnionIdDO getUnionByUuidNotNull(String uuid) {
-        SocialuniUnionIdDO uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
+    public static SocialuniUnionIdModler getUnionByUuidNotNull(String uuid) {
+        SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("错误的内容标识2");
         }
@@ -117,11 +117,11 @@ public class SocialuniUnionIdFacede {
     }
 
     //外部使用可能查询不存在的
-    public static SocialuniUnionIdDO getUnionByUuidAllowNull(String uuid) {
+    public static SocialuniUnionIdModler getUnionByUuidAllowNull(String uuid) {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识1");
         }
-        return socialuniUnionIdCache.findByUuId(uuid);
+        return socialuniUnionIdApi.findByUuId(uuid);
     }
 
 

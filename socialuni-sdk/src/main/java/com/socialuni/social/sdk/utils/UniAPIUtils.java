@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.model.QO.ContentAddQO;
-import com.socialuni.social.tance.sdk.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentIdRO;
 import com.socialuni.social.common.model.ResultRO;
@@ -25,7 +25,7 @@ import java.util.function.Function;
 @Slf4j
 public class UniAPIUtils {
     static SocialuniUserAPI socialuniUserAPI;
-    static SocialuniUnionIdRepository uniContentUnionIdRepository;
+    static SocialuniUnionIdApi uniContentUnionIdRepository;
 
     static DevAccountApi devAccountApi;
 
@@ -35,7 +35,7 @@ public class UniAPIUtils {
     }
 
     @Resource
-    public void setUniContentUnionIdRepository(SocialuniUnionIdRepository uniContentUnionIdRepository) {
+    public void setUniContentUnionIdRepository(SocialuniUnionIdApi uniContentUnionIdRepository) {
         UniAPIUtils.uniContentUnionIdRepository = uniContentUnionIdRepository;
     }
 

@@ -1,13 +1,9 @@
 package com.socialuni.social.tance.sdk.api;
 
-import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;

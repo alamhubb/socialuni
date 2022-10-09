@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.utils.content;
 
 
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.base.BaseModelParentDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
@@ -81,8 +81,8 @@ public class SocialuniContentDOUtil<T> {
     }
 
     public static SocialUnionContentBaseDO getContentDOByContentId(Integer contentId) {
-        SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
-        String contentType = socialuniUnionIdDO.getContentType();
+        SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+        String contentType = socialuniUnionIdModler.getContentType();
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {
             throw new SocialParamsException("错误的内容类型");
         }

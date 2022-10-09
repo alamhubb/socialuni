@@ -1,7 +1,6 @@
 package com.socialuni.social.tance.sdk.api;
 
 import com.socialuni.social.tance.sdk.model.DevSocialuniIdModel;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 
 /**
