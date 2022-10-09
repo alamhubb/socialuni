@@ -4,7 +4,6 @@ import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
@@ -16,13 +15,13 @@ import com.socialuni.social.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +44,6 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    @Transactional
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 

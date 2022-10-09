@@ -34,9 +34,6 @@ public class SocialuniCommonRepository {
     }
     public <T> T findById(Integer id, Class<T> tClass) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(tClass);
-        log.info(String.valueOf(id));
-        log.info(String.valueOf(tClass));
-        log.info(simpleJpaRepository.toString());
         T t = simpleJpaRepository.findById(id).orElse(null);
         return t;
     }

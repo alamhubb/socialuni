@@ -77,9 +77,7 @@ public class SocialuniUnionIdFacede {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        log.info(String.valueOf(unionId)+"1111111111");
         SocialuniUnionIdDO uniContentUnionIdDO = socialuniUnionIdCache.findById(unionId);
-        log.info(String.valueOf(uniContentUnionIdDO)+"2222222222");
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
         }
