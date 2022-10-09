@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.report;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.sdk.utils.DateUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -84,8 +84,8 @@ public class SoicialReportAddDomain {
         //理论上来说这些状态应该都是不能被举报的，因为看不见，所以这个逻辑现在也没啥问题，没了不违规状态了
         //查询动态状态是否为正常
 
-        String contentUuId = SocialuniUnionIdUtil.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
-        Integer contentUnionId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(contentUuId);
+        String contentUuId = SocialuniUnionIdFacede.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
+        Integer contentUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(contentUuId);
 
         SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);
 

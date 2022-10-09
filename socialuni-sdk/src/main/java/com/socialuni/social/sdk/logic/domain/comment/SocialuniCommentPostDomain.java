@@ -16,7 +16,7 @@ import com.socialuni.social.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,8 +39,6 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialPostCommentEntity socialPostCommentEntity;
     @Resource
-    private SoicialuniSystemPreCheckReportDomainDOUtil soicialuniReportDomain;
-    @Resource
     private CommentRepository commentRepository;
     @Resource
     private TalkRepository talkRepository;
@@ -51,7 +49,7 @@ public class SocialuniCommentPostDomain {
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer talkId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
+        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkId);
         List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
@@ -78,7 +76,7 @@ public class SocialuniCommentPostDomain {
         SocialuniCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
 
         // 校验是否触发关键词
-        soicialuniReportDomain.systemPreCheckReport(commentDO);
+        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(commentDO);
 
         //如果不为待审核，才发送通知
         //注释通知相关功能

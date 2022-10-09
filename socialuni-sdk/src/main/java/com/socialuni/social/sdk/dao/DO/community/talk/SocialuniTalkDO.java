@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.community.talk;
 
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
 import lombok.Data;

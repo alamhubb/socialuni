@@ -4,9 +4,10 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.ObjectUtils;
@@ -39,7 +40,7 @@ public class SocialUserDOFactory {
     }
 
     public static SocialuniUserDO newUserByPhoneLogin() {
-        Integer userUnionId = SocialuniUnionIdUtil.createUserUnionId();
+        Integer userUnionId = SocialuniUnionIdFacede.createUserUnionId();
         SocialuniUserDO user = new SocialuniUserDO();
         user.setUserId(userUnionId);
         user.setUnionId(userUnionId);

@@ -5,6 +5,7 @@ import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.api.UserRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.user.sdk.api.SocialUserViolationRepository;
@@ -80,7 +81,7 @@ public class SocialuniUserUtil {
 
     public static String getMineUserUuidIdNotNull() {
         Integer mineUserId = getMineUserIdNotNull();
-        return SocialuniUnionIdUtil.getUuidByUnionIdNotNull(mineUserId);
+        return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);
     }
 
     public static SocialuniUserDO getMineUserNotNull() {
@@ -206,7 +207,7 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDO getUserByUuid(String uid) {
-        Integer id = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(uid);
+        Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }
 

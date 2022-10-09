@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.model.RO.match;
 
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
@@ -50,7 +50,7 @@ public class MatchUserVO {
 
     public MatchUserVO(SocialuniUserDO user, SocialuniUserDO sessionUser) {
         if (user != null) {
-            this.id = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(user.getUnionId());
+            this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(user.getUnionId());
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
             this.gender = user.getGender();
 //            this.location = user.getLocation();

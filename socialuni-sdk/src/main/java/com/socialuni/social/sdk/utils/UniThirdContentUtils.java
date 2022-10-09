@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.repository.SocialuniUnionIdRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

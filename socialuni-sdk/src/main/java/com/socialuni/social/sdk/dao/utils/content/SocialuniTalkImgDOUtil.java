@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.mapper.TalkImgMapper;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -58,7 +58,7 @@ public class SocialuniTalkImgDOUtil {
         List<SocialuniTalkImgDO> talkImgDOS = talkImgRepository.findUnionIdTop3ByTalkIdOrderByIdAsc(talkId);
         for (SocialuniTalkImgDO talkImgDO : talkImgDOS) {
             if (ObjectUtils.isEmpty(talkImgDO.getUnionId())) {
-                Integer unionId = SocialuniUnionIdUtil.createTalkImgUnionId();
+                Integer unionId = SocialuniUnionIdFacede.createTalkImgUnionId();
                 talkImgDO.setUnionId(unionId);
                 SocialuniTalkImgDOUtil.saveTalkImgDO(talkImgDO);
             }

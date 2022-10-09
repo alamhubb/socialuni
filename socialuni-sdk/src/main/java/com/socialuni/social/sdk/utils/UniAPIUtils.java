@@ -3,11 +3,12 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.model.QO.ContentAddQO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.repository.SocialuniUnionIdRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentIdRO;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -62,14 +63,14 @@ public class UniAPIUtils {
         }};
         //执行本系统逻辑
         //根据本系统uid获取unionId
-        Integer unionId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(uniContentIdRO.getId());
+        Integer unionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uniContentIdRO.getId());
 
         //mark 多库同步版本
         ResultRO<RO> resultRO = callApi.apply(contentAddQO);
         uniContentIdRO = (SocialuniContentIdRO) resultRO.getData();
 
         //根据unionId更新为中心返回的uid
-        SocialuniUnionIdUtil.updateUuidByUnionIdNotNull(unionId, uniContentIdRO.getId());
+        SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(unionId, uniContentIdRO.getId());
 
         return resultRO;
 

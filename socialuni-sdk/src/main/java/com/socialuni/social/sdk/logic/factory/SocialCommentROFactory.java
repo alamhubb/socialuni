@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.factory.RO.comment.SocialuniReplyCommentRO
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.utils.SystemUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class SocialCommentROFactory {
     public static SocialuniCommentRO newTalkCommentRO(SocialuniUserDO mineUser, SocialuniCommentDO comment, boolean showAll) {
         SocialuniCommentRO socialCommentRO = new SocialuniCommentRO();
 
-        String uid = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(comment.getUnionId());
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(comment.getUnionId());
 
         socialCommentRO.setId(uid);
         socialCommentRO.setNo(comment.getNo());

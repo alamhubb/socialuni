@@ -1,12 +1,11 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.tance.sdk.facade;
 
-import com.socialuni.social.common.utils.UUIDUtil;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import cn.hutool.core.util.ObjectUtil;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.common.utils.UUIDUtil;
+import com.socialuni.social.tance.sdk.cache.SocialuniUnionIdCache;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -23,14 +22,13 @@ import java.util.regex.Pattern;
  */
 @Component
 @Slf4j
-public class SocialuniUnionIdUtil {
-    private static SocialuniUnionIdRepository uniContentUnionIdRepository;
+public class SocialuniUnionIdFacede {
+    private static SocialuniUnionIdCache socialuniUnionIdCache;
 
     @Resource
-    public void setUniContentUnionIdRepository(SocialuniUnionIdRepository uniContentUnionIdRepository) {
-        SocialuniUnionIdUtil.uniContentUnionIdRepository = uniContentUnionIdRepository;
+    public void setSocialuniUnionIdCache(SocialuniUnionIdCache socialuniUnionIdCache) {
+        SocialuniUnionIdFacede.socialuniUnionIdCache = socialuniUnionIdCache;
     }
-
 
     //根据空的创建， 本系统写入数据时，需要先创建，然后写入内容表unionId，然后再根据返回内容更新uid
     public static Integer createUserUnionId() {
@@ -56,7 +54,7 @@ public class SocialuniUnionIdUtil {
     //自身创建
     private static Integer createUnionIdByContentType(String contentType) {
         SocialuniUnionIdDO uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, UUIDUtil.getUUID(), DevAccountFacade.getDevIdNotNull());
-        uniContentUnionIdDO = uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        uniContentUnionIdDO = socialuniUnionIdCache.save(uniContentUnionIdDO);
         //有的话更新
         return uniContentUnionIdDO.getId();
     }
@@ -66,7 +64,7 @@ public class SocialuniUnionIdUtil {
         SocialuniUnionIdDO uniContentUnionIdDO = getUnionDOByUnionIdNotNull(unionId);
         //没有写入
         uniContentUnionIdDO.setUuid(uuid);
-        uniContentUnionIdRepository.save(uniContentUnionIdDO);
+        socialuniUnionIdCache.save(uniContentUnionIdDO);
     }
 
     //social层，根据unionId获取uid，不可为空
@@ -79,7 +77,9 @@ public class SocialuniUnionIdUtil {
         if (unionId == null) {
             throw new SocialParamsException("无效的内容标识4");
         }
-        SocialuniUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findOneById(unionId);
+        log.info(String.valueOf(unionId));
+        SocialuniUnionIdDO uniContentUnionIdDO = socialuniUnionIdCache.findById(unionId);
+        log.info(String.valueOf(uniContentUnionIdDO));
         if (uniContentUnionIdDO == null) {
             throw new SocialParamsException("无效的内容标识5");
         }
@@ -90,11 +90,11 @@ public class SocialuniUnionIdUtil {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识3");
         }
-        SocialuniUnionIdDO uniContentUnionIdDO = uniContentUnionIdRepository.findByUuid(uuid);
+        SocialuniUnionIdDO uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         //没有写入
         if (uniContentUnionIdDO == null) {
             uniContentUnionIdDO = new SocialuniUnionIdDO(contentType, uuid, DevAccountFacade.getCenterDevIdNotNull());
-            uniContentUnionIdRepository.save(uniContentUnionIdDO);
+            socialuniUnionIdCache.save(uniContentUnionIdDO);
             //有的话更新
         }
         return uuid;
@@ -121,12 +121,11 @@ public class SocialuniUnionIdUtil {
         if (StringUtils.isEmpty(uuid)) {
             throw new SocialParamsException("无效的内容标识1");
         }
-        return uniContentUnionIdRepository.findByUuid(uuid);
+        return socialuniUnionIdCache.findByUuId(uuid);
     }
 
 
     public static List<Integer> getContentIdsByTalkUnionIds(List<String> contentUnionIds) {
-        SocialuniUserDO user = SocialuniUserUtil.getMineUserAllowNull();
         return getContentIdsByUnionIds(contentUnionIds, SocialuniContentType.talk);
     }
 
@@ -151,7 +150,7 @@ public class SocialuniUnionIdUtil {
         if (ObjectUtil.isNotEmpty(contentUnionIds)) {
             for (String uuid : contentUnionIds) {
 //                log.info("查询单个id：" + System.currentTimeMillis());
-                Integer id = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(uuid);
+                Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uuid);
                 ids.add(id);
             }
         }

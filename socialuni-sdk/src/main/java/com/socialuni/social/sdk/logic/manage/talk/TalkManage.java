@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class TalkManage {
      * @return
      */
     public void updateTalkByAddComment(String talkUuid) {
-        Integer talkId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(talkUuid);
+        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkUuid);
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         if (talk == null) {
             return;

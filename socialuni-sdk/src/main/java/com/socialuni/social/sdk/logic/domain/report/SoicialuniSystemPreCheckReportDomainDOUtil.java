@@ -5,10 +5,10 @@ import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
@@ -21,7 +21,8 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -36,6 +37,7 @@ import java.util.concurrent.CompletableFuture;
  * @date 2020-03-19 20:05
  */
 @Service
+@Slf4j
 public class SoicialuniSystemPreCheckReportDomainDOUtil {
     private static ReportRepository reportRepository;
     private static ReportDetailRepository reportDetailRepository;
@@ -70,11 +72,13 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
 
     public static void systemPreCheckReport(SocialUnionContentBaseDO socialuniContentBO) {
         CompletableFuture.runAsync(() -> {
+            log.info("jieshu111");
             String content = socialuniContentBO.getContent();
             //不为空才校验内容
             if (StringUtils.isEmpty(content)) {
                 return;
             }
+            log.info("jieshu112");
             //网易三方审查
 //            AntispamDO antispamDO = WangYiUtil.checkWYContentSecPost(modelDO);
             //校验有没有触发系统的敏感词
@@ -84,11 +88,14 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             if (CollectionUtils.isEmpty(keywordsTriggers)) {
                 return;
             }
+            log.info("jieshu1123");
             Integer contentId = socialuniContentBO.getUnionId();
 
+            log.info("contentId:{}", contentId);
+            log.info("jieshu1124");
             //获取唯一标识
-            SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentId);
-
+            SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+            log.info("jieshu1");
             ReportDO reportDO = reportRepository.findOneByContentId(contentId);
             //如果不存在则创建
             if (reportDO == null) {
@@ -97,7 +104,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             reportDO.setReportNum(reportDO.getReportNum() + 1);
             reportDO.setUpdateTime(new Date());
             reportDO = reportRepository.save(reportDO);
-
+            log.info("jieshu2");
             //得到系统的
             //如果触发了关键词
             /*    if (antispamDO.hasViolate()) {
@@ -115,7 +122,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             ReportDetailDO reportDetailDO = new ReportDetailDO("系统自动审查", ViolateType.pornInfo, reportDO, content, SocialuniSystemConst.getSystemUserId());
 
             reportDetailRepository.save(reportDetailDO);
-
+            log.info("jieshu3");
 
             Integer reportId = reportDO.getId();
 
@@ -125,7 +132,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             });
             //保存触发记录
             keywordsTriggerDetailRepository.saveAll(keywordsTriggers);
-
+            log.info("jieshu4");
             SocialUnionContentBaseDO socialUnionContentBaseDO = SocialuniContentDOUtil.getContentDOByContentId(contentId);
 
             socialUnionContentBaseDO.setStatus(ContentStatus.preAudit);
@@ -149,6 +156,10 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             userDO.setUpdateTime(new Date());
             baseModelService.save(socialUnionContentBaseDO);*/
             }
+            log.info("jieshu5");
+        }).exceptionally(e -> {
+            log.info(String.valueOf(e));
+            return null;
         });
     }
 }

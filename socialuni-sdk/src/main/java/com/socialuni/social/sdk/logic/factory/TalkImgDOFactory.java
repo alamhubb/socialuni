@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.Data;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TalkImgDOFactory {
     public static SocialuniTalkImgDO newTalkImgDO(SocialuniImgAddQO talkImgVO) {
         SocialuniTalkImgDO socialTalkImgDO = new SocialuniTalkImgDO();
-        Integer talkImgUnionId = SocialuniUnionIdUtil.createTalkImgUnionId();
+        Integer talkImgUnionId = SocialuniUnionIdFacede.createTalkImgUnionId();
         socialTalkImgDO.setUnionId(talkImgUnionId);
 
         socialTalkImgDO.setSrc(talkImgVO.getSrc());

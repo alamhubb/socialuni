@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.model.ResultRO;
@@ -103,12 +103,12 @@ public class FeignInterceptor implements RequestInterceptor {
                     SocialLoginRO<SocialuniMineUserDetailRO> loginRO = resultRO.getData();
                     SocialuniMineUserDetailRO centerMineUserDetailRO = loginRO.getUser();
 
-                    SocialuniUnionIdUtil.updateUuidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
+                    SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
                     uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);
                     uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
                 }
 
-                String mineUserUid = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(mineUserUnionId);
+                String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserUnionId);
 
                 requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
             }
