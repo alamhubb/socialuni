@@ -1,6 +1,6 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.user.sdk.entity;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "s_user",
@@ -28,7 +27,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialuniUserDO extends SocialUnionContentBaseDO implements Serializable {
+public class SocialuniUserDo extends SocialuniUserModel {
     private String nickname;
     private String avatar;
     private String gender;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.tag;
 
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
@@ -25,7 +25,7 @@ public class SoicialTagAddDomain {
     @Resource
     private SocialTagManage socialTagManage;
 
-    public TagRO addTag(SocialuniUserDO mineUser, TagAddQO tagAddVO) {
+    public TagRO addTag(SocialuniUserModel mineUser, TagAddQO tagAddVO) {
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         /*if (SocialAppEnv.getIsDevProdEnv()) {

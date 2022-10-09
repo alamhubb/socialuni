@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.user.sdk.api.SocialuniUserExpandRepository;
+import com.socialuni.social.user.sdk.api.SocialuniUserExpandApi;
 import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
@@ -27,7 +27,7 @@ import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -52,7 +52,7 @@ public class SocialuniHomeTalkQueryDomain {
     @Resource
     private TalkQueryStore talkQueryStore;
     @Resource
-    private SocialuniUserExpandRepository socialuniUserExpandRepository;
+    private SocialuniUserExpandApi socialuniUserExpandApi;
 
     public List<SocialuniTalkRO> queryStickTalks() {
         List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
@@ -72,7 +72,7 @@ public class SocialuniHomeTalkQueryDomain {
         }*/
 
         //获取当前用户
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         //校验gender类型,生成BO，包含业务逻辑
         SocialHomeTabTalkQueryBO queryBO = this.checkAndGetHomeTalkQueryBO(queryQO, mineUser);
@@ -99,7 +99,7 @@ public class SocialuniHomeTalkQueryDomain {
     SocialuniTalkQueryGenerateQueryBOByTabDomain socialuniTalkQueryGenerateQueryBOByTabDomain;
 
 
-    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
+    public SocialHomeTabTalkQueryBO checkAndGetHomeTalkQueryBO(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserModel mineUser) {
         //主要逻辑区分就是这里，
         //通用逻辑
         //普通类型的逻辑

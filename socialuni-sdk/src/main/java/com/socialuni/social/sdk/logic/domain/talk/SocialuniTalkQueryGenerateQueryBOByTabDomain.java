@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 @Component
 @Slf4j
 public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
-    public SocialHomeTabTalkQueryBO generateQueryBOByTab(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDO mineUser) {
+    public SocialHomeTabTalkQueryBO generateQueryBOByTab(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserModel mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
 
         //如果后台配置了，则以后台为主，如果后台为null则看前台传值，
@@ -56,7 +56,7 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
         return socialHomeTabTalkQueryBO;
     }
 
-    public void generateQueryBOByNotHomeCityOthers(SocialuniUserDO mineUser, SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO) {
+    public void generateQueryBOByNotHomeCityOthers(SocialuniUserModel mineUser, SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO) {
         String homeTabName = socialHomeTabTalkQueryBO.getHomeTabName();
         if (homeTabName.equals(SocialuniAppConfig.getAppConfig().getSelfSchoolTabName())) {
             homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());

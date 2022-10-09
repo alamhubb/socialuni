@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.follow;
 
 
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -39,7 +39,7 @@ public class SocialuniFollowUserDomain {
     }
 
     public Map<String, List<SocialuniUserFollowDetailRO>> queryUserFollows() {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
         Map<String, List<SocialuniUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
 
         return map;

@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.dao.repository.dev.ThirdUserAuthRepository;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindUserSocialuniAccountDomain;
-import com.socialuni.social.user.sdk.api.UserRepository;
+import com.socialuni.social.user.sdk.api.UserApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class TestUnionIdService {
     @Resource
-    UserRepository userRepository;
+    UserApi userApi;
     @Resource
     ThirdUserRepository thirdUserRepository;
     @Resource

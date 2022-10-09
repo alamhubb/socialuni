@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.domain.talk;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialTalkDeleteQO;
@@ -25,7 +25,7 @@ public class SocialTalkDeleteDomain {
     @Resource
     private SocialuniTalkDORedis talkRedis;
 
-    public void deleteTalk(SocialuniUserDO mineUser, SocialTalkDeleteQO talkDeleteQO) {
+    public void deleteTalk(SocialuniUserModel mineUser, SocialTalkDeleteQO talkDeleteQO) {
 
         /**
          * 删除动态操作，

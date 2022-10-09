@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.manage.talk;
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.logic.factory.TalkDOFactory;
@@ -26,7 +26,7 @@ public class SocialTalkCreateManage {
     @Resource
     TalkAdultImgAuditRepository talkAdultImgAuditRepository;
 
-    public SocialuniTalkDO createTalkDO(SocialuniUserDO user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
+    public SocialuniTalkDO createTalkDO(SocialuniUserModel user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
         SocialuniTalkDO talkDO = TalkDOFactory.newTalkDO(user, socialTalkPostQO, district);
 
         //img相关放在外面，因为有 注入，省事而已

@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.platform.qq.QQConst;
@@ -23,7 +23,7 @@ import java.util.HashMap;
  */
 public class CommentPushUtils {
     //动态评论通知
-    public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialuniUserDO requestUser) {
+    public static PushMsgDTO getCommentPushDTO(String platform, NotifyDO notify, SocialuniUserModel requestUser) {
         SocialuniCommentDO comment = SocialuniCommentDOUtil.getNotCommentNull(notify.getCommentId());
         SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(comment.getTalkId());
         SocialuniCommentDO replyComment;

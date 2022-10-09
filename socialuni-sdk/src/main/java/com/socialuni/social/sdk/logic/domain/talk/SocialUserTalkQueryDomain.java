@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
@@ -21,7 +21,7 @@ public class SocialUserTalkQueryDomain {
     @Resource
     TalkQueryStore talkQueryStore;
 
-    public List<SocialuniTalkRO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDO mineUser) {
+    public List<SocialuniTalkRO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserModel mineUser) {
         //获取自己的user
         List<SocialuniTalkDO> talks = talkQueryStore.queryUserTalks(queryQO, mineUser);
 

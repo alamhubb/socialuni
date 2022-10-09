@@ -2,13 +2,13 @@ package com.socialuni.social.sdk.utils;
 
 
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 
 import java.text.MessageFormat;
 import java.util.Date;
 
 public class ErrorMsgUtil {
-    public static String getErrorCode605ContactServiceValue(SocialuniUserDO userDO) {
+    public static String getErrorCode605ContactServiceValue(SocialuniUserModel userDO) {
 //        UserDetailDO userDetailDO = SocialuniUserUtil.getUserDetail(userDO);
 //        Date violationEndTime = userDetailDO.getViolationEndTime();
 //        return ErrorMsgUtil.getErrorCode605ContactServiceValue(violationEndTime);

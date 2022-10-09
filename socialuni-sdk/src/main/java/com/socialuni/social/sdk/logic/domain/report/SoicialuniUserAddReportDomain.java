@@ -11,10 +11,10 @@ import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.sdk.dao.repository.ReportRepository;
-import com.socialuni.social.user.sdk.api.UserRepository;
+import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
@@ -38,7 +38,7 @@ public class SoicialuniUserAddReportDomain {
     @Resource
     private ReportDetailRepository reportDetailRepository;
     @Resource
-    private UserRepository userRepository;
+    private UserApi userApi;
 
     @Transactional
     public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, SocialUnionContentBaseDO modelDO) {
@@ -72,7 +72,7 @@ public class SoicialuniUserAddReportDomain {
 
 
         //用户举报其他用户的逻辑
-        SocialuniUserDO receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserId);
+        SocialuniUserModel receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserId);
 
 
         Integer modelReportNum = modelDO.getReportNum() + 1;
@@ -95,7 +95,7 @@ public class SoicialuniUserAddReportDomain {
         //todo 存到userDetail表
 //        receiveUser.setReportNum(receiveUser.getReportNum() + 1);
 //       非用户自身操作不更改时间 receiveUser.setUpdateTime(new Date());
-        userRepository.save(receiveUser);
+        userApi.save(receiveUser);
 
         //有关
         //必须要单独保存，涉及到缓存

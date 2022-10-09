@@ -8,7 +8,7 @@ import com.socialuni.admin.web.service.AdminUserService;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
@@ -125,7 +125,7 @@ public class ReportController {
 
     @PostMapping("queryUserContentsByPhoneNum")
     public ResultRO<List<ReportRO>> queryUserContentsByPhoneNum(String phoneNum) {
-        SocialuniUserDO user = adminUserService.getUserByPhoneNum(phoneNum);
+        SocialuniUserModel user = adminUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
         List<ReportDO> reportDOS = reportRepository.findTop10ByContentUserIdOrderByCreateTimeDesc(user.getUnionId());

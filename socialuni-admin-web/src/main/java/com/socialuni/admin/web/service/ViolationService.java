@@ -8,10 +8,10 @@ import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgRepository;
-import com.socialuni.social.user.sdk.api.UserRepository;
-import com.socialuni.social.user.sdk.model.SocialUserViolationDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.UserApi;
+import com.socialuni.social.user.sdk.model.SocialUserViolationModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.store.ReportStore;
@@ -34,7 +34,7 @@ public class ViolationService {
     @Resource
     private CommentRepository commentRepository;
     @Resource
-    private SocialuniUserImgRepository userImgRepository;
+    private SocialuniUserImgApi userImgRepository;
     @Resource
     private MessageRepository messageRepository;
     @Resource
@@ -44,7 +44,7 @@ public class ViolationService {
     @Resource
     private ReportService reportService;
     @Resource
-    private UserRepository userRepository;
+    private UserApi userApi;
     @Resource
     private KeywordsService keywordsService;
     @Resource
@@ -68,7 +68,7 @@ public class ViolationService {
         SocialuniContentDOUtil.save(modelDO);
 
         //user改为正常
-        SocialuniUserDO violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
+        SocialuniUserModel violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
         String userStatus = violationUser.getStatus();
         //存在用户发表其他内容，被封的情况
         if (ReportStatus.auditStatus.contains(userStatus)) {
@@ -76,7 +76,7 @@ public class ViolationService {
         } else {
             log.info("用户状态已经被更改：{}", userStatus);
         }
-        userRepository.save(violationUser);
+        userApi.save(violationUser);
 
         //更改report违规类型
         reportDO.setAuditType(AdminAuditResultType.noViolation);
@@ -92,7 +92,7 @@ public class ViolationService {
 
     public void violateService(SocialUnionContentBaseDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
         Date curDate = new Date();
-        SocialuniUserDO violationUser = modelContentViolation(modelDO, violateType);
+        SocialuniUserModel violationUser = modelContentViolation(modelDO, violateType);
 
         //修改举报内容
         reportDO.setAuditType(violateType);
@@ -132,7 +132,7 @@ public class ViolationService {
         reportService.reportPass(reportDO, true);
     }
 
-    public SocialuniUserDO modelContentViolation(SocialUnionContentBaseDO modelDO, String violateType) {
+    public SocialuniUserModel modelContentViolation(SocialUnionContentBaseDO modelDO, String violateType) {
         Date curDate = new Date();
         //修改内容，需要修改状态、删除原因、更新时间
         modelDO.setStatus(ContentStatus.violation);
@@ -144,19 +144,19 @@ public class ViolationService {
         //处理举报
         //封禁用户
         //如果已经是违规，不需要改为删除
-        SocialuniUserDO violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
+        SocialuniUserModel violationUser = SocialuniUserUtil.getUserNotNull(modelDO.getUserId());
         String vioReason = modelDO.getDeleteReason() + ",";
         //不为官方系统用户才可封禁
         if (!UserType.system.equals(violationUser.getType())) {
             userViolationHandler(violationUser, vioReason, curDate, violateType);
-            userRepository.save(violationUser);
+            userApi.save(violationUser);
             log.info("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getUnionId() + "用户状态改为：" + violationUser.getStatus());
         }
         return violationUser;
     }
 
     //更改user状态
-    public void userViolationHandler(SocialuniUserDO violationUser, String vioReason, Date curDate, String violateType) {
+    public void userViolationHandler(SocialuniUserModel violationUser, String vioReason, Date curDate, String violateType) {
         String vioLevel;
         //轻微
         if (AdminAuditResultType.slightViolation.equals(violateType)) {
@@ -170,13 +170,13 @@ public class ViolationService {
         }
 
         int violationDay = 0;
-        SocialUserViolationDO socialUserViolationDO = socialUserViolationEntity.getOrCreateViolationDO(violationUser.getUnionId());
+        SocialUserViolationModel socialUserViolationModel = socialUserViolationEntity.getOrCreateViolationDO(violationUser.getUnionId());
         //轻微违规只删除内容
         if (ViolateLevel.slight.equals(vioLevel)) {
             vioReason += "删除违规内容";
         } else {
             //区分轻微、一般违规，和严重违规，一般和严重才增加次数
-            Integer vioCount = socialUserViolationDO.getViolationCount();
+            Integer vioCount = socialUserViolationModel.getViolationCount();
             //一般违规
             if (ViolateLevel.general.equals(vioLevel)) {
                 //第一次不封禁,轻微违规
@@ -206,10 +206,10 @@ public class ViolationService {
                     violationDay = 90;
                 }
             }
-            socialUserViolationDO.setViolationCount(vioCount + 1);
+            socialUserViolationModel.setViolationCount(vioCount + 1);
         }
         //所有违规通用
-        socialUserViolationDO.setViolationReason(vioReason);
+        socialUserViolationModel.setViolationReason(vioReason);
         violationUser.setUpdateTime(curDate);
 
         //用户状态不为已封禁，才修改用户状态
@@ -220,10 +220,10 @@ public class ViolationService {
                 violationUser.setStatus(UserStatus.violation);
                 //封禁日期不叠加，按最后得算
                 //封禁截止日期
-                socialUserViolationDO.setViolationStartTime(new Date());
+                socialUserViolationModel.setViolationStartTime(new Date());
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE, violationDay);
-                socialUserViolationDO.setViolationEndTime(calendar.getTime());
+                socialUserViolationModel.setViolationEndTime(calendar.getTime());
             } else {
                 violationUser.setStatus(UserStatus.enable);
             }

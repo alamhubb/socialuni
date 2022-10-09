@@ -1,10 +1,9 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.user.sdk.entity;
 
-import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity
@@ -27,7 +26,7 @@ import java.io.Serializable;
         }
 )
 @Data
-public class SocialuniUserImgDO extends SocialuniImgBaseDO implements SocialuniTextCheckDO, Serializable {
+public class SocialuniUserImgDo extends SocialuniUserImgModel {
     //发表商户
     @Column(nullable = false)
     private Boolean hasPeopleImg;
@@ -42,7 +41,7 @@ public class SocialuniUserImgDO extends SocialuniImgBaseDO implements SocialuniT
     private Boolean hasQrCode;
 
     //do 只有一个构造
-    public SocialuniUserImgDO() {
+    public SocialuniUserImgDo() {
         this.hasPeopleImg = false;
         this.peopleImgIsAdult = false;
         this.hasUnderageContent = false;

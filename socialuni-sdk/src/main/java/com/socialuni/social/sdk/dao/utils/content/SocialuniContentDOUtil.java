@@ -6,13 +6,13 @@ import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.base.BaseModelParentDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.MessageRepository;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniContentDOUtil<T> {
     private static MessageRepository messageRepository;
-    private static SocialuniUserImgRepository userImgRepository;
+    private static SocialuniUserImgApi userImgRepository;
     private static CommentRepository commentRepository;
     private static SocialuniTalkDORedis talkRedis;
     private static TalkImgRepository talkImgRepository;
@@ -36,7 +36,7 @@ public class SocialuniContentDOUtil<T> {
     }
 
     @Resource
-    public void setUserImgRepository(SocialuniUserImgRepository userImgRepository) {
+    public void setUserImgRepository(SocialuniUserImgApi userImgRepository) {
         SocialuniContentDOUtil.userImgRepository = userImgRepository;
     }
 
@@ -69,11 +69,11 @@ public class SocialuniContentDOUtil<T> {
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
             return messageRepository.save(messageDO);
-        } else if (model instanceof SocialuniUserImgDO) {
-            SocialuniUserImgDO userImgDO = (SocialuniUserImgDO) model;
+        } else if (model instanceof SocialuniUserImgModel) {
+            SocialuniUserImgModel userImgDO = (SocialuniUserImgModel) model;
             return userImgRepository.save(userImgDO);
-        } else if (model instanceof SocialuniTalkImgDO) {
-            SocialuniTalkImgDO talkImgDO = (SocialuniTalkImgDO) model;
+        } else if (model instanceof SocialuniTalkImgModel) {
+            SocialuniTalkImgModel talkImgDO = (SocialuniTalkImgModel) model;
             return talkImgRepository.save(talkImgDO);
         } else {
             throw new SocialBusinessException("错误的内容类型");
@@ -113,8 +113,8 @@ public class SocialuniContentDOUtil<T> {
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = SocialuniContentDOUtil.getModelByClass(model);
             baseModelParentDO.setMessageId(messageDO.getUnionId());
-        } else if (model instanceof SocialuniUserImgDO) {
-            SocialuniUserImgDO userImgDO = SocialuniContentDOUtil.getModelByClass(model);
+        } else if (model instanceof SocialuniUserImgModel) {
+            SocialuniUserImgModel userImgDO = SocialuniContentDOUtil.getModelByClass(model);
             baseModelParentDO.setUserImgId(userImgDO.getUnionId());
         } else {
             throw new SocialBusinessException("错误的内容类型");

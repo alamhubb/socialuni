@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
-import com.socialuni.social.user.sdk.api.UserRepository;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;
@@ -18,9 +18,9 @@ import java.util.Date;
 @Component
 public class SocialEditUserDomain {
     @Resource
-    UserRepository userRepository;
+    UserApi userApi;
 
-    public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDO mineUser) {
+    public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserModel mineUser) {
         //昵称
         String nickname = socialUserEditQO.getNickname();
         if (StringUtils.isEmpty(nickname)) {
@@ -70,7 +70,7 @@ public class SocialEditUserDomain {
         }
         mineUser.setUpdateTime(new Date());
 
-        mineUser = userRepository.save(mineUser);
+        mineUser = userApi.save(mineUser);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         return socialMineUserDetailRO;

@@ -1,15 +1,14 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.user.sdk.entity;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialuniImgBaseModel;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 
 @MappedSuperclass
 @Data
-public class SocialuniImgBaseDO extends SocialUnionContentBaseDO implements Serializable {
+public class SocialuniImgBaseDo extends SocialuniImgBaseModel {
     @Column(nullable = false, updatable = false)
     private String src;
 

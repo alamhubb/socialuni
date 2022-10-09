@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.comment;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentDeleteQO;
@@ -34,7 +34,7 @@ public class SocialuniCommentDeleteDomain {
      * 如果是自己删的自己的动态，则不需要填写原因，默认原因是用户自己删除
      */
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
 

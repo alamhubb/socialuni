@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialProviderLoginEntity;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
@@ -61,7 +61,7 @@ public class SocialuniLoginService {
     }
 
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
 
         SocialuniMineUserDetailRO centerMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

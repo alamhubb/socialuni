@@ -3,8 +3,8 @@ package com.socialuni.social.sdk.model.BO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.Data;
@@ -43,7 +43,7 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public UserImgBO(SocialuniUserImgDO img, SocialuniUserDO user) {
+    public UserImgBO(SocialuniUserImgModel img, SocialuniUserModel user) {
         this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(img.getUnionId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
@@ -52,9 +52,9 @@ public class UserImgBO {
         this.reportNum = img.getReportNum();
     }
 
-    public SocialuniUserImgDO toUserImgDO(SocialuniUserDO user, String imgUrl) {
+    public SocialuniUserImgModel toUserImgDO(SocialuniUserModel user, String imgUrl) {
         //这里需要记录，变更历史，通过照片有效无效记录，
-        SocialuniUserImgDO userImgDO = new SocialuniUserImgDO();
+        SocialuniUserImgModel userImgDO = new SocialuniUserImgModel();
         userImgDO.setSrc(imgUrl + this.getSrc());
         userImgDO.setAspectRatio(this.getAspectRatio());
         userImgDO.setQuality(this.getQuality());
@@ -95,7 +95,7 @@ public class UserImgBO {
         return imgVO;
     }
 
-    public static List<UserImgVO> userImgDOToVOS(List<SocialuniUserImgDO> imgDOs, SocialuniUserDO user) {
+    public static List<UserImgVO> userImgDOToVOS(List<SocialuniUserImgModel> imgDOs, SocialuniUserModel user) {
         return imgDOs.stream().map(item -> new UserImgBO(item, user).toVO()).collect(Collectors.toList());
     }
 }

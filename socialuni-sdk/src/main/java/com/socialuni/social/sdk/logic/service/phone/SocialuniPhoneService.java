@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
@@ -41,20 +41,20 @@ public class SocialuniPhoneService {
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
         //todo 这接口有问题，应该拆开，手机号登陆不应该和三方登陆在一起
         //根据user获取返回结果
-        SocialuniUserDO mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+        SocialuniUserModel mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
         //中心授权
         SocialLoginRO<SocialuniMineUserDetailRO> centerLoginRO = authThirdUserDomain.thirdUserAuthLogin(mineUser, AuthType.phone, devAccountModel);
         return ResultRO.success(centerLoginRO);
     }
 
     public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //校验逻辑应该拿到 domain里，因为限制了只有清池可以访问，所以不再限制ip
         return socailSendAuthCodeDomain.sendAuthCode(authCodeQO, mineUser);
     }
 
     public ResultRO<SocialuniMineUserDetailRO> bindPhoneNum(SocialPhoneNumQO socialPhoneNumQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialBindPhoneNumDomain.bindPhoneNum(socialPhoneNumQO, mineUser);
 
@@ -62,7 +62,7 @@ public class SocialuniPhoneService {
     }
 
     public ResultRO<SocialuniMineUserDetailRO> bindWxPhoneNum(SocialBindWxPhoneNumQO socialBindWxPhoneNumQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
         //微信绑定手机号方法
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialBindWxPhoneNumDomain.bindWxPhoneNum(socialBindWxPhoneNumQO, mineUser);
 

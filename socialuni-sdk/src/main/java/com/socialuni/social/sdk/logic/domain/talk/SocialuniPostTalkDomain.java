@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkTagDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.sdk.dao.repository.community.*;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
@@ -29,7 +29,7 @@ import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -83,7 +83,7 @@ public class SocialuniPostTalkDomain {
     }*/
 
 
-    public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialuniTalkPostQO talkVO) {
+    public TalkAddValidateRO paramsValidate(SocialuniUserModel mineUser, SocialuniTalkPostQO talkVO) {
         List<String> tagNames = talkVO.getTagNames();
         String talkVOContent = talkVO.getContent();
 
@@ -153,7 +153,7 @@ public class SocialuniPostTalkDomain {
         return talkAddValidateRO;
     }
 
-    public SocialuniTalkDO saveEntity(SocialuniUserDO userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialuniCircleDO socialCircleDO) {
+    public SocialuniTalkDO saveEntity(SocialuniUserModel userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialuniCircleDO socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {
@@ -181,8 +181,8 @@ public class SocialuniPostTalkDomain {
         talkTagRepository.saveAll(list);
 
         //不能为异步因为会存在查不出来图片的问题
-        List<SocialuniTalkImgDO> imgDOS = TalkImgDOFactory.newTalkImgDOS(socialTalkPostQO.getImgs());
-        for (SocialuniTalkImgDO talkImgDO : imgDOS) {
+        List<SocialuniTalkImgModel> imgDOS = TalkImgDOFactory.newTalkImgDOS(socialTalkPostQO.getImgs());
+        for (SocialuniTalkImgModel talkImgDO : imgDOS) {
             talkImgDO.setTalkId(talkDO.getUnionId());
             talkImgDO.setUserId(talkDO.getUserId());
         }

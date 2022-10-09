@@ -20,5 +20,9 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-user-sdk</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-common</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service;
 
 
 import com.socialuni.social.sdk.logic.domain.hug.SocialAddHugDomain;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -18,7 +18,7 @@ public class SocialuniHugService {
     private SocialAddHugDomain socialAddHugDomain;
 
     public ResultRO<Void> addHug(SocialuniHugAddQO centerHugAddQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(centerHugAddQO.getTalkId());
 

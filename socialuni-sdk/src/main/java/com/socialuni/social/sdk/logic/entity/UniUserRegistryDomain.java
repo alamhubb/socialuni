@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
@@ -42,7 +42,7 @@ public class UniUserRegistryDomain {
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
     public SocialLoginRO<SocialuniMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
-        SocialuniUserDO mineUser = null;
+        SocialuniUserModel mineUser = null;
         //如果已经注册过
         String phoneNum = loginQO.getPhoneNum();
 

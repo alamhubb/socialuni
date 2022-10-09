@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
@@ -148,7 +148,7 @@ public class SocialuniTextContentUtil {
         return matcher.find();
     }
 
-    public static void validateImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDO mineUser) {
+    public static void validateImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserModel mineUser) {
         String imgTextContent = SocialuniImgContentUtil.getImgTextContent(socialUserImgAddQO.getSrc());
         socialUserImgAddQO.setContent(imgTextContent);
         boolean hasQrCode = SocialuniImgContentUtil.hasQrCodeByCloudAPI(socialUserImgAddQO.getSrc());

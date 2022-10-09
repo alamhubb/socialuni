@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.redis;
 
 import com.socialuni.social.common.constant.CommonRedisKey;
-import com.socialuni.social.user.sdk.api.SocialUserFansDetailRepository;
-import com.socialuni.social.user.sdk.model.SocialUserFansDetailDO;
+import com.socialuni.social.user.sdk.api.SocialUserFansDetailApi;
+import com.socialuni.social.user.sdk.model.SocialUserFansDetailModel;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,18 +14,18 @@ import javax.annotation.Resource;
 @Component
 public class UserFansDetailRedis {
     @Resource
-    SocialUserFansDetailRepository socialUserFansDetailRepository;
+    SocialUserFansDetailApi socialUserFansDetailApi;
 
     @Cacheable(cacheNames = CommonRedisKey.findUserFansDetailByUserId, unless = "#result == null")
-    public SocialUserFansDetailDO findUserFansDetailByUserId(Integer userId) {
-        return socialUserFansDetailRepository.findByUserId(userId);
+    public SocialUserFansDetailModel findUserFansDetailByUserId(Integer userId) {
+        return socialUserFansDetailApi.findByUserId(userId);
     }
 
     @Caching(
-            evict = {@CacheEvict(cacheNames = CommonRedisKey.userById, key = "#socialUserFansDetailDO.userId")},
-            put = {@CachePut(cacheNames = CommonRedisKey.findUserFansDetailByUserId, key = "#socialUserFansDetailDO.userId")}
+            evict = {@CacheEvict(cacheNames = CommonRedisKey.userById, key = "#socialUserFansDetailModel.userId")},
+            put = {@CachePut(cacheNames = CommonRedisKey.findUserFansDetailByUserId, key = "#socialUserFansDetailModel.userId")}
     )
-    public SocialUserFansDetailDO save(SocialUserFansDetailDO socialUserFansDetailDO) {
-        return socialUserFansDetailRepository.save(socialUserFansDetailDO);
+    public SocialUserFansDetailModel save(SocialUserFansDetailModel socialUserFansDetailModel) {
+        return socialUserFansDetailApi.save(socialUserFansDetailModel);
     }
 }

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.DO.circle;
 
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.repository.CommonContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -64,7 +64,7 @@ public class SocialuniCircleDO extends CommonContentBaseDO implements Serializab
     private Boolean showFront;
     private Integer devId;
 
-    public SocialuniCircleDO(String name, String description, Integer devId, SocialuniUserDO createUser) {
+    public SocialuniCircleDO(String name, String description, Integer devId, SocialuniUserModel createUser) {
         this.name = name;
         this.description = description;
         this.applyUserId = 1;

@@ -15,7 +15,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import com.socialuni.social.common.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -56,7 +56,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         //还是要加一个联盟账户渠道
 
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         if (!postUrl.contains("thirdUser/registryUser")) {
             if (mineUser != null) {

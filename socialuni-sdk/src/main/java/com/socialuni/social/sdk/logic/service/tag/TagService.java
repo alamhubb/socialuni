@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.sdk.dao.DO.tag.SocialuniTagTypeDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.community.TagRepository;
 import com.socialuni.social.sdk.dao.repository.community.SocialuniTagTypeRepository;
 import com.socialuni.social.sdk.utils.SocialTagStore;
@@ -38,7 +38,7 @@ public class TagService {
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    public List<TagDO> checkAndUpdateTagCount(SocialuniUserDO user, List<Integer> tagIds, String talkOperateType) {
+    public List<TagDO> checkAndUpdateTagCount(SocialuniUserModel user, List<Integer> tagIds, String talkOperateType) {
         List<TagDO> tagDOList = new ArrayList<>();
 
 //        Integer devId = DevAccountUtils.getDevId();

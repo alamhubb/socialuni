@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
@@ -37,7 +37,7 @@ public class SoicialReportAddDomain {
     private SoicialuniUserAddReportDomain soicialuniReportDomain;
 
     public ResultRO<String> addReport(SocialuniReportAddQO reportAddVO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.frontShowReportTypes.contains(reportType)) {
@@ -91,7 +91,7 @@ public class SoicialReportAddDomain {
 
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialuniUserDO receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
+        SocialuniUserModel receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
 
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {

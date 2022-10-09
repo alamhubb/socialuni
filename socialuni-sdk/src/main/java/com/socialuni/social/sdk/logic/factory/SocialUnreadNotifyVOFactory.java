@@ -4,8 +4,8 @@ import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
@@ -44,7 +44,7 @@ public class SocialUnreadNotifyVOFactory {
         SocialUnreadNotifyVOFactory.talkRepository = talkRepository;
     }
 
-    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialuniUserDO user) {
+    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialuniUserModel user) {
         SocialUnreadNotifyVO notifyVO = new SocialUnreadNotifyVO();
         if (user != null) {
             notifyVO.setNickname(user.getNickname());
@@ -56,7 +56,7 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
-        SocialuniUserDO notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
+        SocialuniUserModel notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();
@@ -71,7 +71,7 @@ public class SocialUnreadNotifyVOFactory {
 
         switch (notifyDO.getType()) {
             case NotifyType.talk_comment:
-                List<SocialuniTalkImgDO> socialTalkImgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talk.getUnionId());
+                List<SocialuniTalkImgModel> socialTalkImgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talk.getUnionId());
 //                List<TalkImgDO> talkImgDOS = talk.getImgs();
                 if (socialTalkImgDOS.size() > 0) {
                     notifyVO.setReplyImg(socialTalkImgDOS.get(0).getSrc());

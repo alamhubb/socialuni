@@ -4,9 +4,6 @@ import com.socialuni.social.common.repository.CommonBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,20 +12,8 @@ import java.util.Date;
  * 自己表示字段，其他表示关联的表内字段
  */
 @Data
-@Entity
-@Table(name = "s_user_violation",
-        //查询条件索引
-       /* indexes = {
-                //关联需要键索引，索引列不能为空
-                @Index(columnList = "userId"),
-        },*/
-        uniqueConstraints = {
-                //每个渠道都是唯一的
-                @UniqueConstraint(columnNames = "userId"),
-        }
-)
 @NoArgsConstructor
-public class SocialUserViolationDO extends CommonBaseDO implements Serializable {
+public class SocialUserViolationModel extends CommonBaseDO implements Serializable {
         /**
          * 被违规的次数，默认0
          */
@@ -48,7 +33,7 @@ public class SocialUserViolationDO extends CommonBaseDO implements Serializable 
          */
         private Date violationEndTime;
 
-        public SocialUserViolationDO(Integer userId) {
+        public SocialUserViolationModel(Integer userId) {
                 this.userId = userId;
                 this.violationCount = 0;
         }

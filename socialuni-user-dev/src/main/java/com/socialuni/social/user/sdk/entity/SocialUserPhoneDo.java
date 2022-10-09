@@ -1,11 +1,10 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.user.sdk.entity;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity
@@ -24,7 +23,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialUserPhoneDO extends CommonContentBaseDO implements Serializable {
+public class SocialUserPhoneDo extends SocialUserPhoneModel {
     @Column(nullable = false, updatable = false)
     private Integer userId;
     @Column(nullable = false)
@@ -33,7 +32,7 @@ public class SocialUserPhoneDO extends CommonContentBaseDO implements Serializab
     @Column(nullable = false)
     private Integer devId;
 
-    public SocialUserPhoneDO(Integer userId, String phoneCountryCode, String phoneNum, Integer devId) {
+    public SocialUserPhoneDo(Integer userId, String phoneCountryCode, String phoneNum, Integer devId) {
         this.userId = userId;
         this.phoneCountryCode = phoneCountryCode;
         this.phoneNum = phoneNum;

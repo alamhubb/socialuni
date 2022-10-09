@@ -17,7 +17,7 @@ import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +45,7 @@ public class SocialuniCommentPostDomain {
     private SocialTagRedis socialTagRedis;
 
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 

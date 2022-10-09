@@ -1,12 +1,11 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.user.sdk.entity;
 
 
-import com.socialuni.social.common.dao.DO.SocialContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserExpandModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 //用户扩展类
 @Entity
@@ -23,7 +22,7 @@ import java.io.Serializable;
         })
 @Data
 @NoArgsConstructor
-public class SocialuniUserExpandDO extends SocialContentBaseDO implements Serializable {
+public class SocialuniUserExpandDo extends SocialuniUserExpandModel {
     private Integer userId;
     private String schoolName;
     private String contactInfo;

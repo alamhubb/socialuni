@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.entity.chat;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
 import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.constant.socialuni.ChatType;
 import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class ChatEntity {
     private ChatUserRepository chatUserRepository;
 
     //创建群聊
-    public void createGroupChat(SocialuniUserDO groupOwner, List<SocialuniUserDO> groupers) {
+    public void createGroupChat(SocialuniUserModel groupOwner, List<SocialuniUserModel> groupers) {
         ChatDO chat = new ChatDO(ChatType.group);
 
         //生成chat
@@ -31,7 +31,7 @@ public class ChatEntity {
 
         List<ChatUserDO> chatUserDOS = new ArrayList<>();
         chatUserDOS.add(groupOwnerChatUser);
-        for (SocialuniUserDO grouper : groupers) {
+        for (SocialuniUserModel grouper : groupers) {
             ChatUserDO grouperChatUser = new ChatUserDO(chat, grouper.getUnionId());
             chatUserDOS.add(grouperChatUser);
         }

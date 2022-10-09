@@ -6,7 +6,7 @@ import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.VisibleType;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.social.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
@@ -61,7 +61,7 @@ public class TestController {
 
         TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
-        SocialuniUserDO socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
+        SocialuniUserModel socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
         SocialuniContentUserRO socialContentUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
 
         Map<String, Object> map = new HashMap<>();
@@ -72,7 +72,7 @@ public class TestController {
 
     @GetMapping("getMineUser")
     public ResultRO<SocialuniUserRO> getMineUser() {
-        SocialuniUserDO socialUserDO = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel socialUserDO = SocialuniUserUtil.getMineUserNotNull();
         SocialuniContentUserRO socialUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);
     }

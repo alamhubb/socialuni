@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +33,7 @@ public class SocialuniTalkPostDomain {
     TalkRepository talkRepository;
 
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         String content = talkPostQO.getContent();
 

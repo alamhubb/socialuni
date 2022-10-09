@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.common.utils.IpUtil;
 import lombok.Data;
 
@@ -32,19 +32,19 @@ public class UserLogDO {
     public UserLogDO() {
     }
 
-    public UserLogDO(String content, SocialuniUserDO user) {
+    public UserLogDO(String content, SocialuniUserModel user) {
         this.userId = user != null ? user.getUnionId() : null;
         this.content = content;
         this.createTime = new Date();
         this.ip = IpUtil.getIpAddr();
     }
 
-    public UserLogDO(String content, SocialuniUserDO user, String phoneNum) {
+    public UserLogDO(String content, SocialuniUserModel user, String phoneNum) {
         this(content, user);
         this.phoneNum = phoneNum;
     }
 
-    public UserLogDO(String content, SocialuniUserDO user, String phoneNum, String authCode) {
+    public UserLogDO(String content, SocialuniUserModel user, String phoneNum, String authCode) {
         this(content, user, phoneNum);
         this.authCode = authCode;
     }

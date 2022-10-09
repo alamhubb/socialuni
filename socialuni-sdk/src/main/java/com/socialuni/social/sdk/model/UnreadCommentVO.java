@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.model;
 
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
@@ -51,7 +51,7 @@ public class UnreadCommentVO {
     }
 
     public UnreadCommentVO(SocialuniCommentDO commentDO) {
-        SocialuniUserDO sessionUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel sessionUser = SocialuniUserUtil.getMineUserAllowNull();
 //        Integer devId = DevAccountUtils.getDevId();
 //
 //        this.id = UnionIdDbUtil.createCommentUid(socialCommentDO.getId(),  sessionUser);

@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
@@ -45,7 +45,7 @@ public class TalkQueryStore {
         return this.queryTalksByIds(ids);
     }
 
-    public List<SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDO mineUser) {
+    public List<SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserModel mineUser) {
         List<Integer> talkIds = queryQO.getTalkIds();
         Integer userId = queryQO.getUserId();
 
@@ -81,7 +81,7 @@ public class TalkQueryStore {
             talkUserGender = null;
         }
 
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
         String mineUserGender = null;
         if (mineUser != null) {
             mineUserGender = mineUser.getGender();

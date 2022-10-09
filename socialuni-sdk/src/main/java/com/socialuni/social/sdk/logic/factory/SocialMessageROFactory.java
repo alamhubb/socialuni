@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.message.message.SocialMessageRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
@@ -26,7 +26,7 @@ public class SocialMessageROFactory {
     public static SocialMessageRO getMessageRO(MessageDO messageDO, Integer lookMessageUserId) {
         SocialMessageRO messageRO = new SocialMessageRO();
 
-        SocialuniUserDO userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
+        SocialuniUserModel userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
         SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO);
         boolean isMine = messageDO.getUserId().equals(lookMessageUserId);
 
@@ -43,7 +43,7 @@ public class SocialMessageROFactory {
     }
 
     //websocket推新消息时设置为未读
-    public SocialMessageRO getMessageRO(MessageDO messageDO, boolean readFlag, SocialuniUserDO user) {
+    public SocialMessageRO getMessageRO(MessageDO messageDO, boolean readFlag, SocialuniUserModel user) {
         SocialMessageRO socialMessageRO = SocialMessageROFactory.getMessageRO(messageDO, user.getUnionId());
         socialMessageRO.setIsRead(false);
         return socialMessageRO;

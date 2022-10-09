@@ -10,8 +10,8 @@ import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
-import com.socialuni.social.user.sdk.api.UserRepository;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.api.UserApi;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.model.NotifyVO;
@@ -48,7 +48,7 @@ public class NotifyDomain {
     @Resource
     private NotifyRepository notifyRepository;
 
-    public List<NotifyDO> saveCreateCommentNotifies(SocialuniCommentDO commentDO, SocialuniTalkDO talkDO, SocialuniCommentDO parentCommentDO, SocialuniCommentDO replyCommentDO, SocialuniUserDO requestUser) {
+    public List<NotifyDO> saveCreateCommentNotifies(SocialuniCommentDO commentDO, SocialuniTalkDO talkDO, SocialuniCommentDO parentCommentDO, SocialuniCommentDO replyCommentDO, SocialuniUserModel requestUser) {
         List<NotifyDO> notifies = new ArrayList<>();
         Integer talkUserId = talkDO.getUserId();
         Integer commentId = commentDO.getUnionId();
@@ -129,16 +129,16 @@ public class NotifyDomain {
     @Resource
     private ChatRepository chatRepository;
     @Resource
-    private UserRepository userRepository;
+    private UserApi userApi;
 
-    public void sendNotifies(List<NotifyDO> notifies, SocialuniUserDO requestUser) {
+    public void sendNotifies(List<NotifyDO> notifies, SocialuniUserModel requestUser) {
         for (NotifyDO notify : notifies) {
             sendNotify(notify, requestUser);
         }
     }
 
     //发送通知
-    public void sendNotify(NotifyDO notify, SocialuniUserDO requestUser) throws SocialException {
+    public void sendNotify(NotifyDO notify, SocialuniUserModel requestUser) throws SocialException {
         //评论动态
 //        UserDO receiveUser = userRepository.findById(receiveUserId).get();
         Integer receiveUserId = notify.getReceiveUserId();

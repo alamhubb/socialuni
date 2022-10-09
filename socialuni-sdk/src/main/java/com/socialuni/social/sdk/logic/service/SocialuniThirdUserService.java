@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.logic.entity.UniUserRegistryDomain;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
@@ -50,7 +50,7 @@ public class SocialuniThirdUserService {
 
 
     public ResultRO<SocialuniMineUserDetailRO> queryThirdUser() {
-        SocialuniUserDO mineUserDO = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUserDO = SocialuniUserUtil.getMineUserAllowNull();
         if (mineUserDO == null) {
             return ResultRO.success();
         }

@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
@@ -33,7 +33,7 @@ public class SocialuniCircleService {
     @Resource
     CircleQueryDomain circleQueryDomain;
 
-    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserDO user) {
+    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserModel user) {
         SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user);
         circleDO = socialCircleRepository.save(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));

@@ -8,14 +8,14 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class SocialUserDOFactory {
-    public static SocialuniUserDO newUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        SocialuniUserDO user = newUserByPhoneLogin();
+    public static SocialuniUserModel newUserByProviderLogin(SocialProviderLoginQO loginQO) {
+        SocialuniUserModel user = newUserByPhoneLogin();
 
         if (StringUtils.isNotEmpty(loginQO.getNickName())) {
             user.setNickname(loginQO.getNickName());
@@ -39,9 +39,9 @@ public class SocialUserDOFactory {
         return user;
     }
 
-    public static SocialuniUserDO newUserByPhoneLogin() {
+    public static SocialuniUserModel newUserByPhoneLogin() {
         Integer userUnionId = SocialuniUnionIdFacede.createUserUnionId();
-        SocialuniUserDO user = new SocialuniUserDO();
+        SocialuniUserModel user = new SocialuniUserModel();
         user.setUserId(userUnionId);
         user.setUnionId(userUnionId);
         user.setNickname("未命名");

@@ -6,9 +6,9 @@ import com.socialuni.social.sdk.dao.DO.HugDO;
 import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
@@ -115,25 +115,25 @@ public class SocialTalkROFactory {
 
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, Integer talkId) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, Integer talkId) {
         SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialuniTalkRO getTalkRO(SocialuniTalkDO talkDO, SocialuniUserDO mineUser) {
+    public static SocialuniTalkRO getTalkRO(SocialuniTalkDO talkDO, SocialuniUserModel mineUser) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialuniTalkRO getTalkDetailPageTalkRO(SocialuniUserDO mineUser, SocialuniTalkDO talkDO, Boolean showAllComment) {
+    public static SocialuniTalkRO getTalkDetailPageTalkRO(SocialuniUserModel mineUser, SocialuniTalkDO talkDO, Boolean showAllComment) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, SocialuniTalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserDO mineUser, List<SocialuniTalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
+    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserModel mineUser, List<SocialuniTalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -147,7 +147,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDO mineUser, SocialuniTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialuniTalkRO socialTalkRO = new SocialuniTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
@@ -157,7 +157,7 @@ public class SocialTalkROFactory {
         String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talkId);
 
         socialTalkRO.setId(uid);
-        SocialuniUserDO talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());
+        SocialuniUserModel talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());
         SocialuniContentUserRO socialTalkUserRO = SocialuniContentUserROFactory.newContentUserRO(talkUser, mineUser);
 //        socialTalkUserRO.setId(UnionIdDbUtil.createUserUid(socialTalkUserRO.getId(), user));
 
@@ -167,7 +167,7 @@ public class SocialTalkROFactory {
 
 
         //70毫秒，可缓存
-        List<SocialuniTalkImgDO> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talkDO.getUnionId());
+        List<SocialuniTalkImgModel> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talkDO.getUnionId());
 //        List<TalkImgDO> imgDOS = talkDO.getImgs();
         if (imgDOS != null && imgDOS.size() > 0) {
             socialTalkRO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));

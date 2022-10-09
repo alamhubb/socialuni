@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
-import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserImgROFactory {
-    public static SocialuniUserImgRO DOtoRO(SocialuniUserImgDO userImg) {
+    public static SocialuniUserImgRO DOtoRO(SocialuniUserImgModel userImg) {
         SocialuniUserImgRO imgVO = new SocialuniUserImgRO();
         String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userImg.getUnionId());
         imgVO.setId(uid);
@@ -19,7 +19,7 @@ public class UserImgROFactory {
         return imgVO;
     }
 
-    public static List<SocialuniUserImgRO> userImgDOToVOS(List<SocialuniUserImgDO> imgDOs) {
+    public static List<SocialuniUserImgRO> userImgDOToVOS(List<SocialuniUserImgModel> imgDOs) {
         return imgDOs.stream().map(UserImgROFactory::DOtoRO).collect(Collectors.toList());
     }
 }

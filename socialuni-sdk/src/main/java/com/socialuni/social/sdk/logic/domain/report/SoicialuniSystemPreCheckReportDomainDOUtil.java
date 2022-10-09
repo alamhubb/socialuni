@@ -10,13 +10,13 @@ import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
 import com.socialuni.social.sdk.dao.repository.ReportRepository;
-import com.socialuni.social.user.sdk.api.UserRepository;
+import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
@@ -43,7 +43,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
     private static ReportDetailRepository reportDetailRepository;
     private static KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
     private static KeywordsTriggerService keywordsTriggerService;
-    private static UserRepository userRepository;
+    private static UserApi userApi;
 
     @Resource
     public void setReportRepository(ReportRepository reportRepository) {
@@ -66,8 +66,8 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
     }
 
     @Resource
-    public void setUserRepository(UserRepository userRepository) {
-        SoicialuniSystemPreCheckReportDomainDOUtil.userRepository = userRepository;
+    public void setUserRepository(UserApi userApi) {
+        SoicialuniSystemPreCheckReportDomainDOUtil.userApi = userApi;
     }
 
     public static void systemPreCheckReport(SocialUnionContentBaseDO socialuniContentBO) {
@@ -132,7 +132,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             SocialuniContentDOUtil.save(socialUnionContentBaseDO);
             if (socialuniContentBO.getContentType().equals(SocialuniContentType.talkImg)) {
                 //同步更新talk状态
-                SocialuniTalkImgDO socialTalkImgDO = (SocialuniTalkImgDO) socialUnionContentBaseDO;
+                SocialuniTalkImgModel socialTalkImgDO = (SocialuniTalkImgModel) socialUnionContentBaseDO;
                 Integer talkId = socialTalkImgDO.getTalkId();
                 SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
                 talkDO.setStatus(ContentStatus.preAudit);

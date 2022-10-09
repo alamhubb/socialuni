@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.ReportRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.platform.qq.QQConst;
@@ -39,7 +39,7 @@ public class ViolationPushUtils {
 
         SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
 
-        SocialuniUserDO vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
+        SocialuniUserModel vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

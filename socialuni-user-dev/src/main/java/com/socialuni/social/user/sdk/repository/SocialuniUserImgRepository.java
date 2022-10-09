@@ -1,7 +1,9 @@
-package com.socialuni.social.user.sdk.api;
+package com.socialuni.social.user.sdk.repository;
 
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,9 +13,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserImgDO, Integer> {
+public interface SocialuniUserImgRepository extends SocialuniUserImgApi, JpaRepository<SocialuniUserImgDo, Integer> {
     @Cacheable(cacheNames = "getUserImgByUnionId", key = "#unionId")
-    SocialuniUserImgDO findOneByUnionId(Integer unionId);
+    SocialuniUserImgModel findOneByUnionId(Integer unionId);
 
     @Cacheable(cacheNames = "getUserImgUnionIdsByUserIdTop6", key = "#userId")
     @Query(nativeQuery = true, value = "select t.union_id from s_user_img t where t.user_id =:userId and t.status in (:status) order by t.create_time desc limit 6")
@@ -30,17 +32,17 @@ public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserI
             },
             put = {@CachePut(cacheNames = "getUserImgByUnionId", key = "#userImgDO.unionId")}
     )
-    SocialuniUserImgDO save(SocialuniUserImgDO userImgDO);
+    SocialuniUserImgModel save(SocialuniUserImgModel userImgDO);
 
     SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
 
-    List<SocialuniUserImgDO> findAllByUnionIdIsNull();
+    List<SocialuniUserImgModel> findAllByUnionIdIsNull();
 
-    SocialuniUserImgDO getUserImgByUserIdAndSrc(Integer userId, String src);
+    SocialuniUserImgModel getUserImgByUserIdAndSrc(Integer userId, String src);
 
-    SocialuniUserImgDO getUserImgByUserIdAndUnionId(Integer userId, Integer unionId);
+    SocialuniUserImgModel getUserImgByUserIdAndUnionId(Integer userId, Integer unionId);
 
     //获取talkImg
-    SocialuniUserImgDO findFirstBySrc(String imgUlr);
+    SocialuniUserImgModel findFirstBySrc(String imgUlr);
 }
 

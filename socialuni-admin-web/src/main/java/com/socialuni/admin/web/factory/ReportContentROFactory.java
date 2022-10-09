@@ -4,7 +4,7 @@ import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
@@ -47,7 +47,7 @@ public class ReportContentROFactory {
             reportContentVO.setTags(tagROES);
             reportContentVO.setStatus(talkDO.getStatus());
 
-            List<SocialuniTalkImgDO> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
+            List<SocialuniTalkImgModel> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(SocialuniContentType.comment)) {

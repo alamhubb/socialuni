@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialTalkIdQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -21,7 +21,7 @@ public class SocialuniTalkDetailDomain {
     SocialTalkDetailQueryDomain socialTalkDetailQueryDomain;
 
     public SocialuniTalkRO queryTalkDetail(String talkId) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         Integer talkIdInt = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkId);
 

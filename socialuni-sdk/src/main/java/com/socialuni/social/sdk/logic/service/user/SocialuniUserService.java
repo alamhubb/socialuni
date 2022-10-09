@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.service.user;
 
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.model.SocialuniUserDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
@@ -61,8 +61,8 @@ public class SocialuniUserService {
             return socialuniUserAPI.queryUserDetail(userId);
         } else {
             SocialuniUserDetailRO userDetailRO;
-            SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
-            SocialuniUserDO detailUserDO = SocialuniUserUtil.getUserByUuid(userId);
+            SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+            SocialuniUserModel detailUserDO = SocialuniUserUtil.getUserByUuid(userId);
             if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
                 userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
             } else {
@@ -74,7 +74,7 @@ public class SocialuniUserService {
 
 
     public ResultRO<SocialuniMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
 
         if (SocialuniSystemConst.serverIsChild()) {
@@ -85,7 +85,7 @@ public class SocialuniUserService {
     }
 
     public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialuniImgAddQO socialUserImgAddQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserImg(socialUserImgAddQO, mineUser);
 
@@ -97,7 +97,7 @@ public class SocialuniUserService {
     }
 
     public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = socialAddUserImgDomain.addUserAvatarImg(socialUserImgAddQO, mineUser);
@@ -111,7 +111,7 @@ public class SocialuniUserService {
 
 
     public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         Integer userImgId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(centerUserImgDeleteQO.getUserImgId());
 
@@ -127,7 +127,7 @@ public class SocialuniUserService {
             return socialuniUserAPI.getUserImgList(userId);
         } else {
             Integer userUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(userId);
-            List<SocialuniUserImgDO> imgs50 = SocialuniUserImgDOUtil.getUserImgsTop50(userUnionId);
+            List<SocialuniUserImgModel> imgs50 = SocialuniUserImgDOUtil.getUserImgsTop50(userUnionId);
 
             List<SocialuniUserImgRO> imgs50Ro = UserImgROFactory.userImgDOToVOS(imgs50);
 
