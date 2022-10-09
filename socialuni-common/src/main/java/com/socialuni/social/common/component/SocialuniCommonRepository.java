@@ -1,5 +1,6 @@
 package com.socialuni.social.common.component;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
+@Slf4j
 public class SocialuniCommonRepository {
     @Resource
     private EntityManager entityManager;
@@ -32,7 +34,10 @@ public class SocialuniCommonRepository {
     }
     public <T> T findById(Integer id, Class<T> tClass) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(tClass);
-        T t = (T) simpleJpaRepository.findById(id);
+        log.info(String.valueOf(id));
+        log.info(String.valueOf(tClass));
+        log.info(simpleJpaRepository.toString());
+        T t = simpleJpaRepository.findById(id).orElse(null);
         return t;
     }
 
