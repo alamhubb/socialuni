@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
@@ -44,7 +44,7 @@ public class SocialuniTalkDOUtil {
 
     //逻辑没问题，第一行是校验
     public static SocialuniTalkDO getAllowNull(Integer unionId) {
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
         SocialuniTalkDO talkDO = talkRepository.findOneByUnionId(unionId);
         if (talkDO == null) {
             //只有开发者相等才进入， 用户写入的数据，不该出现不存在的情况

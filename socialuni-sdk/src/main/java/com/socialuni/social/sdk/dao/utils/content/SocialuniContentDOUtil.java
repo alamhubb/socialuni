@@ -1,20 +1,20 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
 import com.socialuni.social.sdk.dao.DO.base.BaseModelParentDO;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.MessageRepository;
-import com.socialuni.social.sdk.dao.repository.SocialuniUserImgRepository;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -81,7 +81,7 @@ public class SocialuniContentDOUtil<T> {
     }
 
     public static SocialUnionContentBaseDO getContentDOByContentId(Integer contentId) {
-        SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentId);
+        SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
         String contentType = socialuniUnionIdDO.getContentType();
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {
             throw new SocialParamsException("错误的内容类型");

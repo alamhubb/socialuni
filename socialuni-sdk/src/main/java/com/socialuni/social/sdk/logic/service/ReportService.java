@@ -6,7 +6,8 @@ import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.dao.DO.JusticeValueOrderDO;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
 import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.api.UserRepository;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.ReportDetailUtils;

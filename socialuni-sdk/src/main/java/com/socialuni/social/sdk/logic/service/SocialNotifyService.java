@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.sdk.logic.domain.notify.SocialQueryNotifyDomain;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.common.model.ResultRO;

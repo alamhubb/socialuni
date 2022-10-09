@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.redis.redisKey;
+package com.socialuni.social.common.constant;
 
 /**
  * redisTemplate封装

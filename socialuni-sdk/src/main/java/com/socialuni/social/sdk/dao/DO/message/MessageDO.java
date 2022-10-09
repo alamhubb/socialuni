@@ -4,8 +4,8 @@ package com.socialuni.social.sdk.dao.DO.message;
 import com.socialuni.social.sdk.constant.socialuni.MessageContentType;
 import com.socialuni.social.sdk.constant.socialuni.MessageReadStatus;
 import com.socialuni.social.sdk.constant.socialuni.MessageType;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

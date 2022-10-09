@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.domain.hug;
 
 import com.socialuni.social.sdk.dao.DO.HugDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;

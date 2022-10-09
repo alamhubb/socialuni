@@ -19,8 +19,8 @@ import java.util.List;
  * @date 2018-11-18 20:45
  */
 
-@RequestMapping("socialuni/circle")
-@FeignClient(name = "circle", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+//@RequestMapping("socialuni/circle")
+@FeignClient(name = "circle", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/circle")
 @Tag(name = "社区模块/圈子模块")
 public interface SocialuniCircleAPI {
     @PostMapping("createCircle")

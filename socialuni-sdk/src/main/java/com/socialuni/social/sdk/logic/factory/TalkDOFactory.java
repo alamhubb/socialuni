@@ -2,20 +2,20 @@ package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.logic.platform.MapUtil;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TalkDOFactory {
     public static SocialuniTalkDO newTalkDO(SocialuniUserDO user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
         SocialuniTalkDO talkDO = new SocialuniTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
-        Integer talkUnionId = SocialuniUnionIdUtil.createTalkUnionId();
+        Integer talkUnionId = SocialuniUnionIdFacede.createTalkUnionId();
 
         talkDO.setUnionId(talkUnionId);
 

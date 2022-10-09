@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUserImgRepository;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgRepository;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 

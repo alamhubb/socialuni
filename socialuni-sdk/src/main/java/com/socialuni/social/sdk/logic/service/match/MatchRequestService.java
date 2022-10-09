@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.constant.socialuni.ChatType;
 import com.socialuni.social.sdk.constant.socialuni.MatchType;
 import com.socialuni.social.sdk.constant.socialuni.MessageType;

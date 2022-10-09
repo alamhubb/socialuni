@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service;
 
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.socialuni.social.sdk.constant.CustomWordsRuleType;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.BlackKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.CustomKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.WhiteKeywordsRepository;

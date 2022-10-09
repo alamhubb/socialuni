@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
@@ -25,7 +25,7 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentUserRO;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -154,7 +154,7 @@ public class SocialTalkROFactory {
 //        Integer talkId = UnionIdDbUtil.createTalkUid(talkDO.getId(), user);
         Integer talkId = talkDO.getUnionId();
 
-        String uid = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(talkId);
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talkId);
 
         socialTalkRO.setId(uid);
         SocialuniUserDO talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());

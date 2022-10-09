@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.manage.phone;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.dao.repository.user.SocialUserPhoneRepository;
+import com.socialuni.social.user.sdk.api.SocialUserPhoneRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;

@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.message.message.SocialMessageRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;

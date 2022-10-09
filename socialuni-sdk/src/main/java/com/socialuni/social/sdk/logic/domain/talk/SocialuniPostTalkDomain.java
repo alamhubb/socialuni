@@ -1,11 +1,12 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
+import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.common.enumeration.CommonStatus;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
 import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
@@ -13,33 +14,28 @@ import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkTagDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.sdk.dao.repository.community.*;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
-import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
+import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
-import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.logic.factory.TalkImgDOFactory;
 import com.socialuni.social.sdk.logic.manage.talk.SocialTalkCreateManage;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.logic.service.tag.TagService;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.TalkAddValidateRO;
 import com.socialuni.social.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.dao.repository.community.*;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +63,7 @@ public class SocialuniPostTalkDomain {
     TalkImgRepository talkImgRepository;
 
 
-    @Transactional
+    /*@Transactional
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验内容
@@ -84,7 +80,7 @@ public class SocialuniPostTalkDomain {
 
         SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
         return socialTalkRO;
-    }
+    }*/
 
 
     public TalkAddValidateRO paramsValidate(SocialuniUserDO mineUser, SocialuniTalkPostQO talkVO) {

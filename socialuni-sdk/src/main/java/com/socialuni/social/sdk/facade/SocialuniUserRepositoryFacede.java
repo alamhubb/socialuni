@@ -1,8 +1,7 @@
 package com.socialuni.social.sdk.facade;
 
 import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.sdk.dao.DO.base.SocialuniUserInfoBaseDO;
-import org.springframework.data.domain.Example;
+import com.socialuni.social.user.sdk.model.SocialuniUserInfoBaseDO;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -2,13 +2,13 @@ package com.socialuni.social.sdk.logic.factory.user.img;
 
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.social.sdk.utils.SocialuniImgContentUtil;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ public class UserImgDOFactory {
         //这里需要记录，变更历史，通过照片有效无效记录，
         SocialuniUserImgDO userImgDO = new SocialuniUserImgDO();
 
-        Integer userImgUnionId = SocialuniUnionIdUtil.createUserImgUnionId();
+        Integer userImgUnionId = SocialuniUnionIdFacede.createUserImgUnionId();
         userImgDO.setUnionId(userImgUnionId);
 
         userImgDO.setSrc(socialUserImgAddQO.getSrc());

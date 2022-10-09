@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.base;
+package com.socialuni.social.user.sdk.api;
 
 //为什么弄这么个类，因为有些contentDO是没有这些属性的，比如talkImg和user
 public interface SocialuniTextCheckDO {

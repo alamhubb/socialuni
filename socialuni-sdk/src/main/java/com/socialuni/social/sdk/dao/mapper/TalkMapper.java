@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.mapper;
 
-import com.socialuni.social.sdk.dao.redis.redisKey.CommonRedisKey;
+import com.socialuni.social.common.constant.CommonRedisKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.query.Param;

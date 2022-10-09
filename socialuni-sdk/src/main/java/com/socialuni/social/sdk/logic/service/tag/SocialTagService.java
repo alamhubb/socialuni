@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.service.tag;
 
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.logic.domain.tag.SoicialTagAddDomain;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;

@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.social.sdk.logic.manage.DevAccountManage;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserAuthDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.OAuthUserInfoQO;
 import com.socialuni.social.sdk.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;

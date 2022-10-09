@@ -1,17 +1,21 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.sdk.utils.DateUtils;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.sdk.constant.UserType;
+import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.sdk.dao.repository.community.TagRepository;
+import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
+import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
+import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
+import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
+import com.socialuni.social.sdk.model.TalkAddValidateRO;
+import com.socialuni.social.sdk.utils.DateUtils;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -78,8 +82,18 @@ public class SocialuniTalkPostDomain {
         tagNames.add(devTagDO.getName());
         talkPostQO.setTagNames(tagNames);*/
 
+        //校验内容
+        TalkAddValidateRO talkAddValidateRO = socialTalkPostDomain.paramsValidate(mineUser, talkPostQO);
 
-        SocialuniTalkRO socialTalkRO = socialTalkPostDomain.postTalk(talkPostQO);
+        //校验内容是否违规
+//        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
+        //获取应用对应的话题
+
+        SocialuniTalkDO talkDO = socialTalkPostDomain.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
+
+        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(talkDO);
+
+        SocialuniTalkRO socialTalkRO = SocialTalkROFactory.getTalkRO(talkDO, mineUser);
 
         return socialTalkRO;
     }

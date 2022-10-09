@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.model.EO;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialUserFansDetailDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialUserFansDetailDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

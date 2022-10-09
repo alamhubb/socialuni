@@ -7,6 +7,7 @@ import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 @Service
 public class SocialPostCommentEntity {
@@ -16,6 +17,8 @@ public class SocialPostCommentEntity {
     @Resource
     private TalkManage talkManage;
 
+
+    @Transactional
     public SocialuniCommentDO saveComment(SocialuniCommentPostQO addVO, Integer mineUserId) {
         //创建和保存comment到db
         SocialuniCommentDO commentDO = commentStore.saveAddComment(addVO, mineUserId);

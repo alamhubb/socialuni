@@ -3,11 +3,11 @@ package com.socialuni.social.sdk.logic.domain.comment;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentDeleteQO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.model.ResultRO;
@@ -36,7 +36,7 @@ public class SocialuniCommentDeleteDomain {
     public ResultRO<Void> deleteComment(SocialuniCommentDeleteQO commentDeleteQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer commentId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
+        Integer commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
 
         Optional<SocialuniCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {

@@ -1,6 +1,5 @@
-package com.socialuni.social.sdk.dao.DO.user;
+package com.socialuni.social.common.dao.DO;
 
-import com.socialuni.social.sdk.dao.DO.SocialContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

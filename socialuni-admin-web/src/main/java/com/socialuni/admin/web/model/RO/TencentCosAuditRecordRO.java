@@ -4,8 +4,8 @@ import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
 

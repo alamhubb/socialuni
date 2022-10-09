@@ -4,7 +4,6 @@ import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
@@ -16,13 +15,13 @@ import com.socialuni.social.sdk.logic.factory.SocialCommentROFactory;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,19 +38,16 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialPostCommentEntity socialPostCommentEntity;
     @Resource
-    private SoicialuniSystemPreCheckReportDomainDOUtil soicialuniReportDomain;
-    @Resource
     private CommentRepository commentRepository;
     @Resource
     private TalkRepository talkRepository;
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    @Transactional
     public SocialuniCommentRO postComment(SocialuniCommentPostQO addQO) {
         SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
 
-        Integer talkId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(addQO.getTalkId());
+        Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
         List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkId);
         List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
@@ -78,7 +74,7 @@ public class SocialuniCommentPostDomain {
         SocialuniCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
 
         // 校验是否触发关键词
-        soicialuniReportDomain.systemPreCheckReport(commentDO);
+        SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(commentDO);
 
         //如果不为待审核，才发送通知
         //注释通知相关功能

@@ -2,11 +2,11 @@ package com.socialuni.social.sdk.model.BO;
 
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +44,7 @@ public class UserImgBO {
     }
 
     public UserImgBO(SocialuniUserImgDO img, SocialuniUserDO user) {
-        this.id = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(img.getUnionId());
+        this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(img.getUnionId());
         this.src = img.getSrc();
         this.aspectRatio = img.getAspectRatio();
         this.setWidth((double) 360);

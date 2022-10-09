@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO.community.comment;
 
-import com.socialuni.social.sdk.dao.DO.base.SocialuniTextCheckDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
 import lombok.Data;
 
 import javax.persistence.*;

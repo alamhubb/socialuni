@@ -1,5 +1,6 @@
-package com.socialuni.social.sdk.dao.DO;
+package com.socialuni.social.common.dao.DO;
 
+import com.socialuni.social.common.dao.DO.SocialCommonBaseDO;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import lombok.Data;
 

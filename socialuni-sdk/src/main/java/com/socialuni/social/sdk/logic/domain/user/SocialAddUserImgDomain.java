@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUserImgRepository;
-import com.socialuni.social.sdk.dao.repository.UserRepository;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgRepository;
+import com.socialuni.social.user.sdk.api.UserRepository;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.user.img.UserImgDOFactory;

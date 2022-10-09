@@ -3,8 +3,8 @@ package com.socialuni.social.sdk.logic.factory;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
 import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

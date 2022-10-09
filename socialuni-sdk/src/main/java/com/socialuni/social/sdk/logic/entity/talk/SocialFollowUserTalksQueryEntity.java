@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.entity.talk;
 
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import lombok.extern.slf4j.Slf4j;

@@ -5,15 +5,19 @@ import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
-import com.socialuni.social.sdk.dao.repository.UserRepository;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.api.UserRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
-import com.socialuni.social.sdk.dao.repository.user.SocialUserViolationRepository;
+import com.socialuni.social.user.sdk.api.SocialUserViolationRepository;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.dao.utils.SocialTokenDOUtil;
 import com.socialuni.social.sdk.dao.DO.user.*;
 import com.socialuni.social.tance.sdk.api.SocialRequestUserConfig;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialNullUserException;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneDO;
+import com.socialuni.social.user.sdk.model.SocialUserViolationDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -77,7 +81,7 @@ public class SocialuniUserUtil {
 
     public static String getMineUserUuidIdNotNull() {
         Integer mineUserId = getMineUserIdNotNull();
-        return SocialuniUnionIdUtil.getUuidByUnionIdNotNull(mineUserId);
+        return SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserId);
     }
 
     public static SocialuniUserDO getMineUserNotNull() {
@@ -203,7 +207,7 @@ public class SocialuniUserUtil {
     }
 
     public static SocialuniUserDO getUserByUuid(String uid) {
-        Integer id = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(uid);
+        Integer id = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(uid);
         return SocialuniUserUtil.getUserNotNull(id);
     }
 

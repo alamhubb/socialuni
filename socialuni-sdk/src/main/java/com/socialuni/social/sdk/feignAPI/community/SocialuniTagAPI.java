@@ -1,23 +1,22 @@
 package com.socialuni.social.sdk.feignAPI.community;
 
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagTypeRO;
-import com.socialuni.social.common.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("socialuni/tag")
+//@RequestMapping("socialuni/tag")
 @Tag(name = "社区模块/话题模块")
-@FeignClient(name = "tag", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "tag", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/tag")
 public interface SocialuniTagAPI {
     @PostMapping("addTag")
     @Operation(summary = "添加话题")

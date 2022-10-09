@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
 import com.socialuni.social.sdk.utils.SocialUniProviderUtil;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Service;

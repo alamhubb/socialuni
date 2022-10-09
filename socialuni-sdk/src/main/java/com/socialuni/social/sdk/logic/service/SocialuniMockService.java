@@ -4,7 +4,7 @@ import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.logic.entity.SocialuniDevAccountEntity;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserDO;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;

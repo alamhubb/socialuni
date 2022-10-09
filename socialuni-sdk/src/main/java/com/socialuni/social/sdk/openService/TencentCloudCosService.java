@@ -2,11 +2,11 @@ package com.socialuni.social.sdk.openService;
 
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.enumeration.CommonStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUserImgRepository;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;

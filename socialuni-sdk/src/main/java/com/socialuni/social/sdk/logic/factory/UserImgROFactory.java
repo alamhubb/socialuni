@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgDO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class UserImgROFactory {
     public static SocialuniUserImgRO DOtoRO(SocialuniUserImgDO userImg) {
         SocialuniUserImgRO imgVO = new SocialuniUserImgRO();
-        String uid = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(userImg.getUnionId());
+        String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userImg.getUnionId());
         imgVO.setId(uid);
         imgVO.setSrc(SocialuniSystemConst.getStaticResourceUrl() + userImg.getSrc());
         imgVO.setAspectRatio(userImg.getAspectRatio());

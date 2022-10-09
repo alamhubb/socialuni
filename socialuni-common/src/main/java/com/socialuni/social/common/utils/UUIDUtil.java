@@ -1,10 +1,18 @@
 package com.socialuni.social.common.utils;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class UUIDUtil {
     public static void main(String[] args) {
         System.out.println(getUUID());
+
+        CompletableFuture.runAsync(() -> {
+           throw new RuntimeException("haha");
+        }).exceptionally(t -> {
+            System.out.println("执行失败！"+t.getMessage());
+            throw new RuntimeException("haha1");
+        });
     }
     /**
      * 生成token

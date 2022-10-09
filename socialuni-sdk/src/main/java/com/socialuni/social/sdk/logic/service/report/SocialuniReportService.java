@@ -4,7 +4,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.report.SoicialReportAddDomain;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniReportAPI;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
-import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.repository.SocialuniUnionIdRepository;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.common.model.ResultRO;
