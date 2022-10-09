@@ -1,8 +1,9 @@
 package com.socialuni.social.tance.cache;
 
-import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import cn.hutool.core.bean.BeanUtil;
+import com.socialuni.social.tance.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -34,13 +35,13 @@ public class SocialuniUnionIdCache implements com.socialuni.social.tance.sdk.api
             put = {@CachePut(cacheNames = {"getUnionIdById"}, key = "#uniContentUnionIdDO.id")}
     )
     public SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO) {
-        return SocialuniRepositoryFacade.save(uniContentUnionIdDO);
+        return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO,SocialuniUnionIdDo.class));
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdById", key = "#unionId")
     public SocialuniUnionIdModler findById(Integer unionId) {
-        return SocialuniRepositoryFacade.findById(unionId, SocialuniUnionIdModler.class);
+        return uniContentUnionIdRepository.findById(unionId).orElse(null);
     }
 
     @Override
