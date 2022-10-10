@@ -4,13 +4,13 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
-import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
+import com.socialuni.social.community.sdk.api.SocialCircleApi;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class SocialuniCircleService {
     @Resource
-    private SocialCircleRepository socialCircleRepository;
+    private SocialCircleApi socialCircleApi;
     @Resource
     private SocialuniCircleRedis socialCircleRedis;
 
@@ -34,15 +34,15 @@ public class SocialuniCircleService {
     CircleQueryDomain circleQueryDomain;
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserModel user) {
-        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user);
-        circleDO = socialCircleRepository.save(circleDO);
+        SocialuniCircleModel circleDO = new SocialuniCircleModel(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user);
+        circleDO = socialCircleApi.save(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
     }
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
-        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), SocialuniUserUtil.getMineUserNotNull());
-        circleDO = socialCircleRepository.save(circleDO);
+        SocialuniCircleModel circleDO = new SocialuniCircleModel(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), SocialuniUserUtil.getMineUserNotNull());
+        circleDO = socialCircleApi.save(circleDO);
 
         ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
 

@@ -1,7 +1,8 @@
-package com.socialuni.social.sdk.dao.repository.community;
+package com.socialuni.social.community.dev.repository;
 
 
-import com.socialuni.social.sdk.dao.DO.tag.SocialuniTagTypeDO;
+import com.socialuni.social.community.dev.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -17,13 +18,13 @@ public interface SocialuniTagTypeRepository extends JpaRepository<SocialuniTagTy
                     @CachePut(cacheNames = "tagTypeById", key = "#tagTypeDO.id"),
             }
     )
-    SocialuniTagTypeDO save(SocialuniTagTypeDO tagTypeDO);
+    SocialuniTagTypeModel save(SocialuniTagTypeModel tagTypeDO);
 
     @Cacheable(cacheNames = "tagTypeByName", key = "#name")
-    SocialuniTagTypeDO findFirstByName(String name);
+    SocialuniTagTypeModel findFirstByName(String name);
 
     @Cacheable(cacheNames = "tagTypeById", key = "#id")
     Optional<SocialuniTagTypeDO> findById(Integer id);
 
-    List<SocialuniTagTypeDO> findByStatusOrderByOrderLevelDescTalkCountDesc(String status);
+    List<?  extends SocialuniTagTypeModel> findByStatusOrderByOrderLevelDescTalkCountDesc(String status);
 }

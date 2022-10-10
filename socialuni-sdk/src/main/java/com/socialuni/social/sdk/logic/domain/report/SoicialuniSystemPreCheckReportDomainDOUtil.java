@@ -9,7 +9,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.report.sdk.model.ReportDetailModel;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
@@ -134,7 +134,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
                 //同步更新talk状态
                 SocialuniTalkImgModel socialTalkImgDO = (SocialuniTalkImgModel) socialUnionContentBaseDO;
                 Integer talkId = socialTalkImgDO.getTalkId();
-                SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
+                SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
                 talkDO.setStatus(ContentStatus.preAudit);
                 talkDO.setUpdateTime(new Date());
                 SocialuniContentDOUtil.save(socialUnionContentBaseDO);

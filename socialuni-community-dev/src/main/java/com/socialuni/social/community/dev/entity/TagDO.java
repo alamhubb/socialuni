@@ -1,10 +1,10 @@
-package com.socialuni.social.sdk.dao.DO.tag;
+package com.socialuni.social.community.dev.entity;
 
+import com.socialuni.social.community.sdk.model.TagModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -25,7 +25,7 @@ import java.util.Date;
 )
 @Data
 @NoArgsConstructor
-public class TagDO implements Serializable {
+public class TagDO extends TagModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

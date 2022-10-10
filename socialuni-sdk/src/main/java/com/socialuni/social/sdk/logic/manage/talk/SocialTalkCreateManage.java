@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.manage.talk;
 
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
@@ -26,8 +26,8 @@ public class SocialTalkCreateManage {
     @Resource
     TalkAdultImgAuditRepository talkAdultImgAuditRepository;
 
-    public SocialuniTalkDO createTalkDO(SocialuniUserModel user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
-        SocialuniTalkDO talkDO = TalkDOFactory.newTalkDO(user, socialTalkPostQO, district);
+    public SocialuniTalkModel createTalkDO(SocialuniUserModel user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
+        SocialuniTalkModel talkDO = TalkDOFactory.newTalkDO(user, socialTalkPostQO, district);
 
         //img相关放在外面，因为有 注入，省事而已
         List<SocialuniImgAddQO> imgs = socialTalkPostQO.getImgs();

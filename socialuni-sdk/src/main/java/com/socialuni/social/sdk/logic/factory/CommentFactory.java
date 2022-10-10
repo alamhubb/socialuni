@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.repository.CommentRepository;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.api.CommentApi;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Component
 public class CommentFactory {
     @Resource
-    private CommentRepository commentRepository;
+    private CommentApi commentApi;
 
     /***
      *
@@ -23,7 +23,7 @@ public class CommentFactory {
      * @param requestUserId
      * @return
      */
-    public SocialuniCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
+    public SocialuniCommentModel createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
@@ -36,13 +36,13 @@ public class CommentFactory {
             }
         }
         //创建 do一步,获取序号
-        SocialuniCommentDO commentNoDO = commentRepository.findFirstByTalkIdOrderByIdDesc(talkId);
+        SocialuniCommentModel commentNoDO = commentApi.findFirstByTalkIdOrderByIdDesc(talkId);
         Integer commentNo = 0;
         if (commentNoDO != null) {
             commentNo = commentNoDO.getNo();
         }
         //构建DO，comment基础内容
-        SocialuniCommentDO comment = new SocialuniCommentDO();
+        SocialuniCommentModel comment = new SocialuniCommentModel();
         comment.setNo(++commentNo);
         comment.setContent(addQO.getContent());
         comment.setStatus(ContentStatus.enable);

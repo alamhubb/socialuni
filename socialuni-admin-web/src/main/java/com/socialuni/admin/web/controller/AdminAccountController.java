@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
+import com.socialuni.social.community.sdk.api.TagApi;
 import com.socialuni.social.common.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +30,7 @@ public class AdminAccountController {
     @Resource
     private DevAccountProviderApi devAccountProviderApi;
     @Resource
-    private TagRepository tagRepository;
+    private TagApi tagApi;
     @Resource
     private AdminAccountService adminAccountService;
 

@@ -33,6 +33,8 @@
         <module>socialuni-common-sdk</module>
         <module>socialuni-report-sdk</module>
         <module>socialuni-report-dev</module>
+        <module>socialuni-community-sdk</module>
+        <module>socialuni-community-dev</module>
     </modules>
 
     <properties>
@@ -51,6 +53,16 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-common-sdk</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-community-dev</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-community-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

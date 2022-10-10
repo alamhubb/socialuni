@@ -3,17 +3,20 @@ package com.socialuni.social.sdk.logic.domain.talk;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.community.sdk.api.SocialCircleApi;
+import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkOperateType;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
-import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkTagDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.dao.repository.community.*;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
@@ -43,18 +46,18 @@ import java.util.List;
 @Component
 public class SocialuniPostTalkDomain {
     @Resource
-    TalkRepository talkRepository;
+    TalkApi talkApi;
     @Resource
     TagService tagService;
 
     @Resource
-    TagRepository tagRepository;
+    TagApi tagApi;
     @Resource
     SocialuniTalkDORedis talkRedis;
     @Resource
     TalkTagRepository talkTagRepository;
     @Resource
-    SocialCircleRepository socialCircleRepository;
+    SocialCircleApi socialCircleApi;
     @Resource
     SocialTalkCreateManage socialTalkCreateManage;
     @Resource
@@ -132,49 +135,49 @@ public class SocialuniPostTalkDomain {
             tagIds = new ArrayList<>();
         }
         for (String tagName : tagNames) {
-            TagDO tagDO = tagRepository.findFirstByName(tagName);
-            if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
+            TagModel tagModel = tagApi.findFirstByName(tagName);
+            if (tagModel == null || !tagModel.getStatus().equals(CommonStatus.enable)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }
-            tagIds.add(tagDO.getId());
+            tagIds.add(tagModel.getId());
         }
         talkVO.setTagIds(tagIds);
 
-        List<TagDO> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd);
+        List<TagModel> list = tagService.checkAndUpdateTagCount(mineUser, tagIds, TalkOperateType.talkAdd);
 
         String circleName = talkVO.getCircleName();
-        SocialuniCircleDO socialCircleDO = null;
+        SocialuniCircleModel socialCircleDO = null;
         if (StringUtils.isNotEmpty(circleName)) {
             socialCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(talkVO.getCircleName());
             socialCircleDO.setCount(socialCircleDO.getCount() + 1);
-            socialCircleDO = socialCircleRepository.save(socialCircleDO);
+            socialCircleDO = socialCircleApi.save(socialCircleDO);
         }
         TalkAddValidateRO talkAddValidateRO = new TalkAddValidateRO(districtDO, list, socialCircleDO);
         return talkAddValidateRO;
     }
 
-    public SocialuniTalkDO saveEntity(SocialuniUserModel userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagDO> tags, SocialuniCircleDO socialCircleDO) {
+    public SocialuniTalkModel saveEntity(SocialuniUserModel userDO, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district, List<TagModel> tags, SocialuniCircleModel socialCircleDO) {
         String talkVisibleGender = socialTalkPostQO.getVisibleGender();
         //不为全部，添加默认标签
         if (!talkVisibleGender.equals(GenderType.all)) {
             //添加默认标签，解决查询没tag查询不出来的问题
             if (talkVisibleGender.equals(GenderType.girl)) {
                 //这里一定有值，没值就是创建开发者的时候没创建tag，修复逻辑
-                TagDO genderTag = tagRepository.findFirstByName(GenderType.girlTagName);
+                TagModel genderTag = tagApi.findFirstByName(GenderType.girlTagName);
                 tags.add(genderTag);
             } else if (talkVisibleGender.equals(GenderType.boy)) {
                 //这里一定有值，没值就是创建开发者的时候没创建tag，修复逻辑
-                TagDO genderTag = tagRepository.findFirstByName(GenderType.boyTagName);
+                TagModel genderTag = tagApi.findFirstByName(GenderType.boyTagName);
                 tags.add(genderTag);
             }
             //还差男生的没写
         }
-        SocialuniTalkDO talkDO = socialTalkCreateManage.createTalkDO(userDO, socialTalkPostQO, district);
+        SocialuniTalkModel talkDO = socialTalkCreateManage.createTalkDO(userDO, socialTalkPostQO, district);
 
         List<SocialTalkTagDO> list = new ArrayList<>();
-        for (TagDO tagDO : tags) {
+        for (TagModel tagModel : tags) {
             SocialTalkTagDO socialTalkTagDO = new SocialTalkTagDO();
-            socialTalkTagDO.setTagId(tagDO.getId());
+            socialTalkTagDO.setTagId(tagModel.getId());
             socialTalkTagDO.setTalkId(talkDO.getUnionId());
             list.add(socialTalkTagDO);
         }

@@ -2,6 +2,7 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.controller.DevAccountUpdateQO;
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
@@ -12,13 +13,12 @@ import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
+import com.socialuni.social.community.sdk.api.TagApi;
 import com.socialuni.social.common.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class AdminAccountService {
     @Resource
     private DevAccountProviderApi devAccountProviderApi;
     @Resource
-    private TagRepository tagRepository;
+    private TagApi tagApi;
     @Resource
     private SocialTagManage socialTagManage;
     @Transactional
@@ -64,7 +64,7 @@ public class AdminAccountService {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
         //如果创建过，则一定有，所以下面可以直接使用
-        TagDO checkNameTag = tagRepository.findFirstByName(appName);
+        TagModel checkNameTag = tagApi.findFirstByName(appName);
         //tag名称已被注册，不为空，还不为当前用户
         if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
@@ -176,7 +176,7 @@ public class AdminAccountService {
                 devAccountModel.setAppName(appName);
                 //改名，更新tag名称
                 checkNameTag.setName(appName);
-                tagRepository.save(checkNameTag);
+                tagApi.save(checkNameTag);
             }
         }
 

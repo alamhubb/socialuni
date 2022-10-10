@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.report.sdk.model.ReportDetailModel;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
@@ -121,7 +121,7 @@ public class AdminReportService {
 
             //仅审核为未成年和成年 ，则只更改图片审核状态和动态状态，就返回了，
             if (AdminAuditResultType.underageShowReportTypes.contains(auditType)) {
-                SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialuniTalkHasUnderageImgAuditDO.getTalkId());
+                SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialuniTalkHasUnderageImgAuditDO.getTalkId());
                 //如果为成年，则修改动态状态
                 if (AdminAuditResultType.adult.equals(auditType)) {
                     talkDO.setPeopleImgIsAdult(true);
@@ -139,7 +139,7 @@ public class AdminReportService {
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
             Optional<?  extends ReportModel> reportDOOptional = reportApi.findById(contentId);
             if (!reportDOOptional.isPresent()){
-                SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
+                SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
                 SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
                 reportModel = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
             }else {

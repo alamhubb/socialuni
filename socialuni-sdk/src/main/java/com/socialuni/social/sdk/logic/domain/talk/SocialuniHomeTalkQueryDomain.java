@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.GenderTypeVO;
@@ -9,12 +10,11 @@ import com.socialuni.social.sdk.constant.config.SocialuniAppType;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.api.SocialuniUserExpandApi;
-import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.api.SocialCircleApi;
+import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
@@ -42,20 +42,20 @@ public class SocialuniHomeTalkQueryDomain {
     @Resource
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
     @Resource
-    private SocialCircleRepository socialCircleRepository;
+    private SocialCircleApi socialCircleApi;
     @Resource
     private SocialTagRedis socialTagRedis;
     @Resource
-    TagRepository tagRepository;
+    TagApi tagApi;
     @Resource
-    private TalkRepository talkRepository;
+    private TalkApi talkApi;
     @Resource
     private TalkQueryStore talkQueryStore;
     @Resource
     private SocialuniUserExpandApi socialuniUserExpandApi;
 
     public List<SocialuniTalkRO> queryStickTalks() {
-        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
+        List<?  extends SocialuniTalkModel>  list = talkApi.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
         return socialTalkROs;
@@ -82,7 +82,7 @@ public class SocialuniHomeTalkQueryDomain {
         String homeTabName = queryBO.getHomeTabName();
 
         //得到数据库talk
-        List<SocialuniTalkDO> talkDOS;
+        List<?  extends SocialuniTalkModel>  talkDOS;
         if (homeTabName.equals(TalkTabType.follow_name)) {
             //查询关注的用户
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
@@ -130,11 +130,11 @@ public class SocialuniHomeTalkQueryDomain {
             tagNames = new ArrayList<>();
         }
         for (String tagName : tagNames) {
-            TagDO tagDO = tagRepository.findFirstByName(tagName);
-            if (tagDO == null || !tagDO.getStatus().equals(CommonStatus.enable)) {
+            TagModel tagModel = tagApi.findFirstByName(tagName);
+            if (tagModel == null || !tagModel.getStatus().equals(CommonStatus.enable)) {
                 throw new SocialBusinessException("选择了无效的话题");
             }
-            tagIds.add(tagDO.getId());
+            tagIds.add(tagModel.getId());
         }
         if (tagIds.size() > 3) {
 //            return new ResultRO<>("最多同时筛选3个话题");

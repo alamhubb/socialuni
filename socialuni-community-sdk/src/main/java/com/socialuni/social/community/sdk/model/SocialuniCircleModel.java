@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.dao.DO.circle;
+package com.socialuni.social.community.sdk.model;
 
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.repository.CommonContentBaseDO;
@@ -14,21 +14,9 @@ import java.io.Serializable;
  * @date 2019-11-07 15:20
  */
 //                @Index(columnList = "showFront"),
-@Entity
-@Table(name = "s_circle",
-        indexes = {
-                @Index(columnList = "status"),
-                @Index(columnList = "showFront"),
-                @Index(columnList = "count"),
-                @Index(columnList = "visibleGender"),
-        },
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"name"})
-        }
-)
 @Data
 @NoArgsConstructor
-public class SocialuniCircleDO extends CommonContentBaseDO implements Serializable {
+public class SocialuniCircleModel extends CommonContentBaseDO implements Serializable {
     private Integer tagTypeId;
 
     private String name;
@@ -38,10 +26,8 @@ public class SocialuniCircleDO extends CommonContentBaseDO implements Serializab
     private String avatar;
 
     //访问+发帖次数
-    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer count;
     //本标签共有多少帖子
-    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer talkCount;
 
     /**
@@ -64,7 +50,7 @@ public class SocialuniCircleDO extends CommonContentBaseDO implements Serializab
     private Boolean showFront;
     private Integer devId;
 
-    public SocialuniCircleDO(String name, String description, Integer devId, SocialuniUserModel createUser) {
+    public SocialuniCircleModel(String name, String description, Integer devId, SocialuniUserModel createUser) {
         this.name = name;
         this.description = description;
         this.applyUserId = 1;

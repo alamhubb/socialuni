@@ -41,5 +41,7 @@ dev 实现模块也就2包:  repository(仓库,继承api和jpa) 、 entity(实�
 
 5. 修改sdk的文件名和把里面依赖spring等的内容去掉和排除依赖。
 6. 修改dev实现包中的内容。改成继承形式。
+- 先改entity。
+- 再改repository。
 
 

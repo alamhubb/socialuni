@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.logic.domain.comment;
 
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.sdk.dao.repository.CommentRepository;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.domain.notify.NotifyDomain;
@@ -38,9 +38,9 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialPostCommentEntity socialPostCommentEntity;
     @Resource
-    private CommentRepository commentRepository;
+    private CommentApi commentApi;
     @Resource
-    private TalkRepository talkRepository;
+    private TalkApi talkApi;
     @Resource
     private SocialTagRedis socialTagRedis;
 
@@ -49,8 +49,8 @@ public class SocialuniCommentPostDomain {
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
-        List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkId);
-        List<String> tagNames = tagDOS.stream().map(TagDO::getName).collect(Collectors.toList());
+        List<?  extends TagModel> tagModels = socialTagRedis.getTagsByTalkId(talkId);
+        List<String> tagNames = tagModels.stream().map(TagModel::getName).collect(Collectors.toList());
 
         //系统管理员不校验相关内容
         if (!UserType.system.equals(mineUser.getType())) {
@@ -71,7 +71,7 @@ public class SocialuniCommentPostDomain {
         //校验时候，访问了数据库，存储了talk、parent、reply这些值，方便以后使用，传输使用
         //保存comment，内部关联保存了talk、parentComment、replyComment
 
-        SocialuniCommentDO commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
+        SocialuniCommentModel commentDO = socialPostCommentEntity.saveComment(addQO, mineUser.getUnionId());
 
         // 校验是否触发关键词
         SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(commentDO);

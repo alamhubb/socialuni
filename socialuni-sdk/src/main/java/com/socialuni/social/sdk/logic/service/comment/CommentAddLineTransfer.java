@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.service.comment;
 
 
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,15 +16,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentAddLineTransfer {
 
-    private SocialuniCommentDO commentDO;
+    private SocialuniCommentModel commentDO;
 
-    private SocialuniTalkDO talk;
+    private SocialuniTalkModel talk;
 
-    private SocialuniCommentDO parentComment;
+    private SocialuniCommentModel parentComment;
 
-    private SocialuniCommentDO replyComment;
+    private SocialuniCommentModel replyComment;
 
-    public CommentAddLineTransfer(SocialuniTalkDO talk, SocialuniCommentDO parentComment, SocialuniCommentDO replyComment) {
+    public CommentAddLineTransfer(SocialuniTalkModel talk, SocialuniCommentModel parentComment, SocialuniCommentModel replyComment) {
         this.talk = talk;
         this.parentComment = parentComment;
         this.replyComment = replyComment;

@@ -1,6 +1,7 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
+import com.socialuni.social.community.sdk.api.CommentApi;
 import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateLevel;
@@ -14,7 +15,7 @@ import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.model.SocialUserViolationModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.*;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.dao.store.ReportStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserViolationEntity;
@@ -33,13 +34,13 @@ import java.util.List;
 @Slf4j
 public class ViolationService {
     @Resource
-    private CommentRepository commentRepository;
+    private CommentApi commentApi;
     @Resource
     private SocialuniUserImgApi userImgRepository;
     @Resource
     private MessageRepository messageRepository;
     @Resource
-    private TalkRepository talkRepository;
+    private TalkApi talkApi;
     @Resource
     private ReportApi reportApi;
     @Resource

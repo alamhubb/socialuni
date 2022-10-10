@@ -1,15 +1,15 @@
 package com.socialuni.admin.web.utils;
 
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 
 import java.util.*;
 
 public class VioKeywordsUtil {
 
-    public static void gatherKeywords(List<SocialuniTalkDO> talkDOS) {
+    public static void gatherKeywords(List<?  extends SocialuniTalkModel>  talkDOS) {
         Map<String, Integer> keyMap = new HashMap<>();
-        for (SocialuniTalkDO talkDO : talkDOS) {
+        for (SocialuniTalkModel talkDO : talkDOS) {
             String text = talkDO.getContent();
             int textLength = text.length();
             for (int i = 0; i < textLength; i++) {

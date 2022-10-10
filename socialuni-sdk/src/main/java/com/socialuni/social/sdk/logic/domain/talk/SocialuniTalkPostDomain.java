@@ -4,9 +4,9 @@ import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
@@ -28,9 +28,9 @@ public class SocialuniTalkPostDomain {
     @Resource
     SocialuniPostTalkDomain socialTalkPostDomain;
     @Resource
-    TagRepository tagRepository;
+    TagApi tagApi;
     @Resource
-    TalkRepository talkRepository;
+    TalkApi talkApi;
 
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
@@ -47,13 +47,13 @@ public class SocialuniTalkPostDomain {
             Date curDate = new Date();
             Date oneMinuteBefore = new Date(curDate.getTime() - DateTimeType.minute);
             //1分钟内不能发超过1条
-            Integer minuteCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), oneMinuteBefore, curDate);
+            Integer minuteCount = talkApi.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), oneMinuteBefore, curDate);
             if (minuteCount > 0) {
                 log.info("1分钟最多发布1条动态，请稍后再试:+" + content);
                 throw new SocialBusinessException("1分钟最多发布1条动态，请稍后再试");
             }
             Date tenMinuteBefore = new Date(curDate.getTime() - 10L * DateTimeType.minute);
-            Integer tenMinuteBeforeCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), tenMinuteBefore, curDate);
+            Integer tenMinuteBeforeCount = talkApi.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), tenMinuteBefore, curDate);
             if (tenMinuteBeforeCount > 2) {
                 log.info("10分钟最多发布3条动态，请稍后再试:+" + content);
                 throw new SocialBusinessException("10分钟最多发布3条动态，请稍后再试");
@@ -63,7 +63,7 @@ public class SocialuniTalkPostDomain {
             Date zero = DateUtils.getTodayZeroDate();
             //10分钟内不能发超过5条
             //1天内不能发超过10条
-            Integer oneDayBeforeCount = talkRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), zero, curDate);
+            Integer oneDayBeforeCount = talkApi.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), zero, curDate);
             if (oneDayBeforeCount > 9) {
                 log.info("1天最多发布10条动态，请稍后再试:+" + content);
                 throw new SocialBusinessException("1天最多发布10条动态，请稍后再试");
@@ -89,7 +89,7 @@ public class SocialuniTalkPostDomain {
 //        modelContentCheck.checkUserAndContent(addVO.getContent(), requestUser);
         //获取应用对应的话题
 
-        SocialuniTalkDO talkDO = socialTalkPostDomain.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
+        SocialuniTalkModel talkDO = socialTalkPostDomain.saveEntity(mineUser, talkPostQO, talkAddValidateRO.getDistrict(), talkAddValidateRO.getTags(), talkAddValidateRO.getCircle());
 
         SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(talkDO);
 

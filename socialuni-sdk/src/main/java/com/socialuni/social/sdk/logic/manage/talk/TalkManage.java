@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.manage.talk;
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -20,7 +20,7 @@ public class TalkManage {
     public final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private TalkRepository talkRepository;
+    private TalkApi talkApi;
     @Resource
     private SocialuniTalkDORedis talkRedis;
     @Resource
@@ -34,7 +34,7 @@ public class TalkManage {
      */
     public void updateTalkByAddComment(String talkUuid) {
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkUuid);
-        SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(talkId);
+        SocialuniTalkModel talk = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         if (talk == null) {
             return;
         }

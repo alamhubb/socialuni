@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.domain.talk;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
@@ -61,7 +61,7 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
         if (homeTabName.equals(SocialuniAppConfig.getAppConfig().getSelfSchoolTabName())) {
             homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
         }
-        SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(homeTabName);
-        socialHomeTabTalkQueryBO.setCircleId(socialuniCircleDO.getId());
+        SocialuniCircleModel socialuniCircleModel = SocialuniCircleDOUtil.getCircleEnableNotNull(homeTabName);
+        socialHomeTabTalkQueryBO.setCircleId(socialuniCircleModel.getId());
     }
 }

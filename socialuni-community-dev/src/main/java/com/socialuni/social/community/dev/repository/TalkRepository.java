@@ -1,8 +1,9 @@
-package com.socialuni.social.sdk.dao.repository.community;
+package com.socialuni.social.community.dev.repository;
 
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.community.dev.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> {
     @Cacheable(cacheNames = CommonRedisKey.talkById, key = "#talkUnionId")
-    SocialuniTalkDO findOneByUnionId(Integer talkUnionId);
+    SocialuniTalkModel findOneByUnionId(Integer talkUnionId);
 
     //清池使用的
 
@@ -28,7 +29,7 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
      */
     //缓存
     @Cacheable(cacheNames = "stickTalks", key = "{#devId}")
-    List<SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
+    List<?  extends SocialuniTalkModel>  findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     //查询自己talk和他人详情talk
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.createTime desc")
@@ -279,10 +280,10 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
     //查询user指定时间内发帖数量的，限制发帖数量的
     Integer countByUserIdAndCreateTimeBetween(Integer userId, Date startDate, Date endDate);
 
-    List<SocialuniTalkDO> findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
+    List<?  extends SocialuniTalkModel>  findTop2000ByStatusAndViolateTypeOrderByIdDesc(String status, String violateType);
 
     //查询关键词触发次数时使用
-    Page<SocialuniTalkDO> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
+    Page<?  extends SocialuniTalkModel> findByStatusNotInOrderByIdDesc(Pageable pageable, List<String> status);
 
 
     @Query(value = "SELECT t.unionId FROM SocialuniTalkDO t where t.status in (:status) and t.userId=:userId order by t.updateTime desc")

@@ -1,17 +1,17 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.dao.CommentDao;
-import com.socialuni.social.sdk.dao.DO.HugDO;
-import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.model.HugModel;
+import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
-import com.socialuni.social.sdk.dao.repository.CommentRepository;
-import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
+import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.SocialCircleApi;
 import com.socialuni.social.sdk.dao.repository.community.SocialTalkCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -44,11 +44,11 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class SocialTalkROFactory {
-    private static CommentRepository commentRepository;
+    private static CommentApi commentApi;
     private static SocialTagRedis socialTagRedis;
     private static CommentDao commentDao;
     private static HugRedis hugRedis;
-    private static SocialCircleRepository socialCircleRepository;
+    private static SocialCircleApi socialCircleApi;
     private static SocialTalkCircleRepository socialTalkCircleRepository;
 
     @Resource
@@ -62,8 +62,8 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setCommentRepository(CommentRepository commentRepository) {
-        SocialTalkROFactory.commentRepository = commentRepository;
+    public void setCommentApi(CommentApi commentApi) {
+        SocialTalkROFactory.commentApi = commentApi;
     }
 
     @Resource
@@ -72,8 +72,8 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setSocialCircleRepository(SocialCircleRepository socialCircleRepository) {
-        SocialTalkROFactory.socialCircleRepository = socialCircleRepository;
+    public void setSocialCircleApi(SocialCircleApi socialCircleApi) {
+        SocialTalkROFactory.socialCircleApi = socialCircleApi;
     }
 
     @Resource
@@ -116,24 +116,24 @@ public class SocialTalkROFactory {
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
     public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, Integer talkId) {
-        SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
+        SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialuniTalkRO getTalkRO(SocialuniTalkDO talkDO, SocialuniUserModel mineUser) {
+    public static SocialuniTalkRO getTalkRO(SocialuniTalkModel talkDO, SocialuniUserModel mineUser) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialuniTalkRO getTalkDetailPageTalkRO(SocialuniUserModel mineUser, SocialuniTalkDO talkDO, Boolean showAllComment) {
+    public static SocialuniTalkRO getTalkDetailPageTalkRO(SocialuniUserModel mineUser, SocialuniTalkModel talkDO, Boolean showAllComment) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkModel talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserModel mineUser, List<SocialuniTalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
+    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserModel mineUser, List<?  extends SocialuniTalkModel>  talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -147,7 +147,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkModel talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialuniTalkRO socialTalkRO = new SocialuniTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
@@ -183,7 +183,7 @@ public class SocialTalkROFactory {
 
         SocialTalkCircleDO socialTalkCircleDO = socialTalkCircleRepository.findFirstByTalkId(talkId);
         if (socialTalkCircleDO != null) {
-            SocialuniCircleDO socialCircleDO = socialCircleRepository.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
+            SocialuniCircleModel socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
             if (socialCircleDO != null) {
                 circles.add(socialCircleDO.getName());
             }
@@ -191,8 +191,8 @@ public class SocialTalkROFactory {
         socialTalkRO.setCircles(circles);
 
         //10 毫秒
-        List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
-        List<SocialTalkTagRO> tagROs = tagDOS.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
+        List<?  extends TagModel> tagModels = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
+        List<SocialTalkTagRO> tagROs = tagModels.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
 //        socialTalkRO.setContentType(talkDO.getContentType());
         socialTalkRO.setTags(tagROs);
@@ -252,8 +252,8 @@ public class SocialTalkROFactory {
         //40毫秒
         if (mineUser != null) {
             //20毫秒
-            HugDO hugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
-            if (hugDO != null) {
+            HugModel hugModel = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
+            if (hugModel != null) {
                 socialTalkRO.setHasHugged(true);
             }
         }

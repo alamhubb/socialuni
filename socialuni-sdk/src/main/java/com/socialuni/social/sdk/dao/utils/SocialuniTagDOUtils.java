@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
+import com.socialuni.social.community.sdk.model.TagModel;
+import com.socialuni.social.community.sdk.api.TagApi;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -9,14 +9,14 @@ import java.util.List;
 
 @Component
 public class SocialuniTagDOUtils {
-    private static TagRepository tagRepository;
+    private static TagApi tagApi;
 
     @Resource
-    public void setTagRepository(TagRepository tagRepository) {
-        SocialuniTagDOUtils.tagRepository = tagRepository;
+    public void setTagRepository(TagApi tagApi) {
+        SocialuniTagDOUtils.tagApi = tagApi;
     }
 
-    public static List<TagDO> save(List<TagDO> tagDOS) {
-        return tagRepository.saveAll(tagDOS);
+    public static List<?  extends TagModel> save(List<?  extends TagModel> tagModels) {
+        return tagApi.saveAll(tagModels);
     }
 }

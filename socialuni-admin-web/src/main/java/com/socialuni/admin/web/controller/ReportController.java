@@ -6,15 +6,15 @@ import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.AdminUserService;
 import com.socialuni.social.report.sdk.model.ReportModel;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.dao.repository.CommentRepository;
+import com.socialuni.social.community.sdk.api.CommentApi;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
@@ -47,7 +47,7 @@ public class ReportController {
 //    private NotifyService notifyService;
 
     @Resource
-    private TalkRepository talkRepository;
+    private TalkApi talkApi;
     @Resource
     private KeywordsRepository keywordsRepository;
     @Resource
@@ -118,7 +118,7 @@ public class ReportController {
     @Resource
     TalkQueryStore talkQueryStore;
     @Resource
-    CommentRepository commentRepository;
+    CommentApi commentApi;
     @Resource
     AdminUserService adminUserService;
 
@@ -132,11 +132,11 @@ public class ReportController {
         List<ReportRO> reportVOS = reportModels.stream().map(ReportRO::new).collect(Collectors.toList());
 
         //查询用户10条动态
-        List<SocialuniTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());
+        List<?  extends SocialuniTalkModel>  talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());
         List<ReportRO> talkReportVOS = talkDOS.stream().map(ReportRO::new).collect(Collectors.toList());
 
         //查询用户10条评论
-        List<SocialuniCommentDO> commentDOS = commentRepository.findTop10ByUserIdOrderByUpdateTimeDesc(user.getUnionId());
+        List<?  extends SocialuniCommentModel> commentDOS = commentApi.findTop10ByUserIdOrderByUpdateTimeDesc(user.getUnionId());
         List<ReportRO> commentReportVOS = commentDOS.stream().map(ReportRO::new).collect(Collectors.toList());
 
         reportVOS.addAll(talkReportVOS);

@@ -1,13 +1,10 @@
-package com.socialuni.social.sdk.dao.DO.community.talk;
+package com.socialuni.social.community.dev.entity;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "s_talk",
@@ -30,7 +27,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialuniTalkDO extends SocialUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {
+public class SocialuniTalkDO extends SocialuniTalkModel {
     @Column(nullable = false)
     Integer devId;
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
@@ -94,7 +91,7 @@ public class SocialuniTalkDO extends SocialUnionContentBaseDO implements Socialu
 
     //do 只有一个构造
     public SocialuniTalkDO(Integer userId, String content) {
-        super(userId, SocialuniContentType.talk, content);
+        super(userId, content);
         this.commentNum = 0;
         this.hugNum = 0;
         this.globalTop = 0;

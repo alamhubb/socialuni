@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.api.DevAccountApi;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
+import com.socialuni.social.community.sdk.api.TagApi;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
@@ -26,7 +26,7 @@ public class DevAccountEntity {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private TagRepository tagRepository;
+    private TagApi tagApi;
 
     public DevAccountModel createDevAccount(String phoneNum) {
         return this.createDevAccount(phoneNum, UUIDUtil.getUUID());

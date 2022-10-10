@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.domain.comment;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.sdk.dao.repository.CommentRepository;
+import com.socialuni.social.community.sdk.api.CommentApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -26,7 +26,7 @@ import java.util.Optional;
 @Slf4j
 public class SocialuniCommentDeleteDomain {
     @Resource
-    private CommentRepository commentRepository;
+    private CommentApi commentApi;
 
     /**
      * 删除动态操作，
@@ -38,12 +38,12 @@ public class SocialuniCommentDeleteDomain {
 
         Integer commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(commentDeleteQO.getCommentId());
 
-        Optional<SocialuniCommentDO> optionalCommentDO = commentRepository.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
+        Optional<?  extends SocialuniCommentModel> optionalCommentDO = commentApi.findOneByUnionIdAndStatusIn(commentId, ContentStatus.selfCanSeeContentStatus);
         if (!optionalCommentDO.isPresent()) {
             throw new SocialParamsException("评论已经删除");
         }
-        SocialuniCommentDO commentDO = optionalCommentDO.get();
-        SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
+        SocialuniCommentModel commentDO = optionalCommentDO.get();
+        SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
         //是否是自己删除自己的动态
         if (commentDO.getUserId().equals(mineUser.getUnionId())) {
             commentDO.setStatus(ContentStatus.delete);
@@ -55,7 +55,7 @@ public class SocialuniCommentDeleteDomain {
             throw new SocialParamsException("无法删除不属于自己的评论");
         }
         commentDO.setUpdateTime(new Date());
-        commentRepository.save(commentDO);
+        commentApi.save(commentDO);
         return new ResultRO<>();
     }
 }
