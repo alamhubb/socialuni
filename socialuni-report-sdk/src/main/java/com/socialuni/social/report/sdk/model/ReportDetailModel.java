@@ -1,22 +1,18 @@
-package com.socialuni.social.sdk.dao.DO;
+package com.socialuni.social.report.sdk.model;
 
 
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 举报信息
  */
-@Entity
 @Data
-@Table(name = "s_report_detail")
-public class ReportDetailDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReportDetailModel implements Serializable {
+
     private Integer id;
 
     private Integer userId;
@@ -46,16 +42,16 @@ public class ReportDetailDO implements Serializable {
      */
     private String status;
 
-    public ReportDetailDO() {
+    public ReportDetailModel() {
     }
 
     //    todo 这里有个坑 content 改为了 cause
-    public ReportDetailDO(String reportCause, String reportType, ReportDO reportDO, String content, Integer requestUserId) {
+    public ReportDetailModel(String reportCause, String reportType, ReportModel reportModel, String content, Integer requestUserId) {
         this.reportCause = reportCause;
 
-        this.contentId = reportDO.getContentId();
+        this.contentId = reportModel.getContentId();
         this.content = content;
-        this.reportId = reportDO.getId();
+        this.reportId = reportModel.getId();
         this.reportType = reportType;
         this.userId = requestUserId;
 

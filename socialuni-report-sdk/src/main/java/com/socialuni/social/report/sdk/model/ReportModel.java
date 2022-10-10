@@ -1,33 +1,20 @@
-package com.socialuni.social.sdk.dao.DO;
+package com.socialuni.social.report.sdk.model;
 
 
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 举报信息
  */
-@Entity
-@Table(name = "s_report",
-        indexes = {
-                @Index(columnList = "devId")
-        },
-        uniqueConstraints = {
-//一个内容只能生成一条举报记录，多次举报生成举报详情
-                @UniqueConstraint(columnNames = {"contentId"}),
-        }
-)
 @Data
-public class ReportDO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReportModel implements Serializable {
+
     private Integer id;
 
     //不能删掉，后台管理根据这个区分用户可以审核的内容范围
-    @Column(nullable = false)
     Integer devId;
 
     //被举报的用户
@@ -47,7 +34,6 @@ public class ReportDO implements Serializable {
 
         //加入一列作为外键
         private Integer talkId;*/
-    @Column(nullable = false)
     private Integer contentId;
 
     //可以级联保存
@@ -79,7 +65,6 @@ public class ReportDO implements Serializable {
 
 
     //是否对举报结果进行了检查
-    @Column(columnDefinition = "bit default false")
     private Boolean hasReview;
 
     /**
@@ -117,10 +102,9 @@ public class ReportDO implements Serializable {
     private String reportSourceType;
     private Integer antispamId;
     //    private Integer devId;
-    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer reportNum;
 
-    public ReportDO() {
+    public ReportModel() {
         reportNum = 0;
     }
 }

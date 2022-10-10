@@ -6,16 +6,16 @@ import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.model.ReportDetailModel;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.api.ReportDetailApi;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -39,20 +39,20 @@ import java.util.concurrent.CompletableFuture;
 @Service
 @Slf4j
 public class SoicialuniSystemPreCheckReportDomainDOUtil {
-    private static ReportRepository reportRepository;
-    private static ReportDetailRepository reportDetailRepository;
+    private static ReportApi reportApi;
+    private static ReportDetailApi reportDetailApi;
     private static KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
     private static KeywordsTriggerService keywordsTriggerService;
     private static UserApi userApi;
 
     @Resource
-    public void setReportRepository(ReportRepository reportRepository) {
-        SoicialuniSystemPreCheckReportDomainDOUtil.reportRepository = reportRepository;
+    public void setReportRepository(ReportApi reportApi) {
+        SoicialuniSystemPreCheckReportDomainDOUtil.reportApi = reportApi;
     }
 
     @Resource
-    public void setReportDetailRepository(ReportDetailRepository reportDetailRepository) {
-        SoicialuniSystemPreCheckReportDomainDOUtil.reportDetailRepository = reportDetailRepository;
+    public void setReportDetailRepository(ReportDetailApi reportDetailApi) {
+        SoicialuniSystemPreCheckReportDomainDOUtil.reportDetailApi = reportDetailApi;
     }
 
     @Resource
@@ -90,14 +90,14 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
 
             //获取唯一标识
             SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
-            ReportDO reportDO = reportRepository.findOneByContentId(contentId);
+            ReportModel reportModel = reportApi.findOneByContentId(contentId);
             //如果不存在则创建
-            if (reportDO == null) {
-                reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, socialuniContentBO, socialuniUnionIdModler);
+            if (reportModel == null) {
+                reportModel = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, socialuniContentBO, socialuniUnionIdModler);
             }
-            reportDO.setReportNum(reportDO.getReportNum() + 1);
-            reportDO.setUpdateTime(new Date());
-            reportDO = reportRepository.save(reportDO);
+            reportModel.setReportNum(reportModel.getReportNum() + 1);
+            reportModel.setUpdateTime(new Date());
+            reportModel = reportApi.save(reportModel);
             //得到系统的
             //如果触发了关键词
             /*    if (antispamDO.hasViolate()) {
@@ -112,11 +112,11 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             //保存数据
 
             //生成举报详情
-            ReportDetailDO reportDetailDO = new ReportDetailDO("系统自动审查", ViolateType.pornInfo, reportDO, content, SocialuniSystemConst.getSystemUserId());
+            ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, SocialuniSystemConst.getSystemUserId());
 
-            reportDetailRepository.save(reportDetailDO);
+            reportDetailApi.save(reportDetailModel);
 
-            Integer reportId = reportDO.getId();
+            Integer reportId = reportModel.getId();
 
             //为触发记录关联 report
             keywordsTriggers.forEach(keywordsTriggerDetailDO -> {

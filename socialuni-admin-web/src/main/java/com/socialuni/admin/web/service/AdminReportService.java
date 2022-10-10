@@ -2,15 +2,17 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.model.ReportRO;
+import com.socialuni.social.report.sdk.api.ReportDetailApi;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.model.ReportDetailModel;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
@@ -39,7 +41,7 @@ import java.util.Optional;
 @Service
 public class AdminReportService {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
     private ViolationService violationService;
     @Resource
@@ -49,7 +51,7 @@ public class AdminReportService {
     //    @Resource
 //    private NotifyService notifyService;
     @Resource
-    private ReportDetailRepository reportDetailRepository;
+    private ReportDetailApi reportDetailApi;
     @Resource
     private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
     @Resource
@@ -128,42 +130,42 @@ public class AdminReportService {
                 return null;
             }
         }
-        ReportDO reportDO;
+        ReportModel reportModel;
         String violateType = auditVO.getViolateType();
         if (AdminAuditResultType.adult.equals(violateType)){
             throw new SocialParamsException("成年类型不能审核为违规");
         }
         //图片类型的也支持直接审核, 图片审核类型的需要模拟一个report
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
-            Optional<ReportDO> reportDOOptional = reportRepository.findById(contentId);
+            Optional<?  extends ReportModel> reportDOOptional = reportApi.findById(contentId);
             if (!reportDOOptional.isPresent()){
                 SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
                 SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
-                reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
+                reportModel = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
             }else {
-                reportDO = reportDOOptional.get();
+                reportModel = reportDOOptional.get();
             }
-            reportDO.setReportNum(reportDO.getReportNum() + 1);
-            reportDO.setUpdateTime(new Date());
+            reportModel.setReportNum(reportModel.getReportNum() + 1);
+            reportModel.setUpdateTime(new Date());
             //保存数据
-            reportDO = reportRepository.save(reportDO);
+            reportModel = reportApi.save(reportModel);
         } else {
             //其他类型
-            Optional<ReportDO> reportDOOptional = reportRepository.findById(contentId);
+            Optional<?  extends ReportModel> reportDOOptional = reportApi.findById(contentId);
             //确认举报是否存在，只能处理未处理状态的。
 
             //判断是否违规
             if (!reportDOOptional.isPresent()) {
                 throw new SocialParamsException("不存在的举报内容");
             }
-            reportDO = reportDOOptional.get();
+            reportModel = reportDOOptional.get();
         }
         Integer systemUserId = SocialuniSystemConst.getSystemUserId();
         List<NotifyDO> notifyDOS = new ArrayList<>();
         //为待审核才继续处理
-        if (ReportStatus.auditStatus.contains(reportDO.getStatus())) {
+        if (ReportStatus.auditStatus.contains(reportModel.getStatus())) {
             //校验违规类型
-            if (!SocialuniContentType.reportContentTypeTypes.contains(reportDO.getContentType())) {
+            if (!SocialuniContentType.reportContentTypeTypes.contains(reportModel.getContentType())) {
                 return new ResultRO<>("错误的违规内容类型");
             }
 
@@ -175,7 +177,7 @@ public class AdminReportService {
                 auditNote = "不违规";
 //                    return new ResultVO<>("审核不违规，必须填写原因");
             }
-            SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
+            SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
             //如果是违规
             if (violation) {
                 if (StringUtils.isEmpty(violateType)) {
@@ -184,30 +186,30 @@ public class AdminReportService {
                 if (!AdminAuditResultType.adminFrontHasUnderageShowReportTypes.contains(violateType)) {
                     return new ResultRO<>("错误的违规类型");
                 }
-                violationService.violateService(modelDO, violateType, auditNote, reportDO);
+                violationService.violateService(modelDO, violateType, auditNote, reportModel);
                 //给用户发送被封通知,推送消息
 //                    NotifyDO notifyDO = notifyRepository.save(new NotifyDO(systemUser.getId(), modelDO.getUserId(), reportDO.getId(), NotifyType.violation));
 //                    notifyDOS.add(notifyDO);
             } else {
-                violationService.noViolateService(modelDO, auditNote, reportDO);
+                violationService.noViolateService(modelDO, auditNote, reportModel);
             }
 
             //不为系统审查才给举报用户发消息
-            if (ReportSourceType.userReport.equals(reportDO.getReportSourceType())) {
+            if (ReportSourceType.userReport.equals(reportModel.getReportSourceType())) {
 
-                List<ReportDetailDO> reportDetailDOS = reportDetailRepository.findAllByReportId(reportDO.getId());
+                List<?  extends ReportDetailModel> reportDetailModels = reportDetailApi.findAllByReportId(reportModel.getId());
 
-                for (ReportDetailDO reportDetailDO : reportDetailDOS) {
+                for (ReportDetailModel reportDetailModel : reportDetailModels) {
 //                        NotifyDO notifyDO = new NotifyDO(systemUser.getId(), reportDetailDO.getUserId(), reportDO.getId(), NotifyType.report_result);
 //                        notifyDOS.add(notifyDO);
                 }
             }
 
             //添加是否触发了关键词，触发了关键词就修改关键词次数重新计算违规率
-            List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerDetailRepository.findAllByReportId(reportDO.getId());
+            List<KeywordsTriggerDetailDO> keywordsTriggers = keywordsTriggerDetailRepository.findAllByReportId(reportModel.getId());
             for (KeywordsTriggerDetailDO keywordsTrigger : keywordsTriggers) {
                 //审核结果状态
-                String auditResult = reportDO.getStatus();
+                String auditResult = reportModel.getStatus();
 
                 keywordsTrigger.setAuditResult(auditResult);
                 keywordsTrigger.setUpdateTime(new Date());

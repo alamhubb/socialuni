@@ -3,10 +3,10 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
+import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.platform.qq.QQConst;
 import com.socialuni.social.sdk.logic.platform.weixin.WxConst;
@@ -26,18 +26,18 @@ import java.util.HashMap;
  */
 @Component
 public class ViolationPushUtils {
-    private static ReportRepository reportRepository;
+    private static ReportApi reportApi;
 
     @Resource
-    public void setReportRepository(ReportRepository reportRepository) {
-        ViolationPushUtils.reportRepository = reportRepository;
+    public void setReportRepository(ReportApi reportApi) {
+        ViolationPushUtils.reportApi = reportApi;
     }
 
     //动态评论通知
     public static PushMsgDTO getViolationPushDTO(String platform, NotifyDO notify) {
-        ReportDO reportDO = reportRepository.findById(notify.getReportId()).get();
+        ReportModel reportModel = reportApi.findById(notify.getReportId()).get();
 
-        SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
+        SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
 
         SocialuniUserModel vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 
@@ -48,7 +48,7 @@ public class ViolationPushUtils {
         //违规内容
         pushNotifyVO.setBeContent(new PushValue(StringUtils.substring(baseModelDO.getContent(), 0, 20)));
         //违规内容类型
-        pushNotifyVO.setBeContentType(new PushValue(reportDO.getContentType()));
+        pushNotifyVO.setBeContentType(new PushValue(reportModel.getContentType()));
         //违规用户
         pushNotifyVO.setBeNickname(new PushValue(vioUser.getNickname()));
 

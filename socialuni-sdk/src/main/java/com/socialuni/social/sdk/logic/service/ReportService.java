@@ -1,18 +1,20 @@
 package com.socialuni.social.sdk.logic.service;
 
+import com.socialuni.social.report.sdk.api.ReportDetailApi;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.dao.DO.JusticeValueOrderDO;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.model.ReportDetailModel;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.ReportDetailUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.sdk.dao.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +29,12 @@ import java.util.List;
 @Service
 public class ReportService {
     @Resource
-    private ReportDetailRepository reportDetailRepository;
+    private ReportDetailApi reportDetailApi;
     @Resource
     private JusticeValueOrderRepository justiceValueOrderRepository;
 
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
 
     @Resource
     private UserApi userApi;
@@ -64,16 +66,16 @@ public class ReportService {
      *
      * @param
      */
-    public void reportPass(ReportDO reportDO, boolean isViolation) {
-        if (ReportSourceType.userReport.equals(reportDO.getReportSourceType())) {
+    public void reportPass(ReportModel reportModel, boolean isViolation) {
+        if (ReportSourceType.userReport.equals(reportModel.getReportSourceType())) {
 
             Date curDate = new Date();
             //审核通过不再接受举报，前台点击举报时，提示已官方审核通过
-            List<ReportDetailDO> reportDetailDOS = ReportDetailUtils.getAll(reportDO.getId());
+            List<?  extends ReportDetailModel> reportDetailModels = ReportDetailUtils.getAll(reportModel.getId());
 
             //变更detail
-            for (ReportDetailDO reportDetailDO : reportDetailDOS) {
-                SocialuniUserModel detailUser = SocialuniUserUtil.getUserNotNull(reportDetailDO.getUserId());
+            for (ReportDetailModel reportDetailModel : reportDetailModels) {
+                SocialuniUserModel detailUser = SocialuniUserUtil.getUserNotNull(reportDetailModel.getUserId());
 
                 //相同部分
                 JusticeValueOrderDO justiceValueOrderDO = new JusticeValueOrderDO();
@@ -82,9 +84,9 @@ public class ReportService {
                 if (isViolation) {
                     Date todayZero = DateUtils.getTodayZeroDate();
                     //查看用户待审核的举报数量
-                    Integer reportSuccessCount = reportDetailRepository.countByUserIdAndStatusNotAndCreateTimeBetween(detailUser.getUnionId(), ReportStatus.audit, todayZero, curDate);
+                    Integer reportSuccessCount = reportDetailApi.countByUserIdAndStatusNotAndCreateTimeBetween(detailUser.getUnionId(), ReportStatus.audit, todayZero, curDate);
                     //todo  缺少发送通知功能，等我精神好了在写
-                    reportDetailDO.setStatus(ReportStatus.violation);
+                    reportDetailModel.setStatus(ReportStatus.violation);
                     if (reportSuccessCount > 9) {
                         //todo 发送通知
                     } else {
@@ -103,14 +105,14 @@ public class ReportService {
                     }
                 } else {
                     //如果今天已经成功举报了10个以上，则不再发放奖励
-                    reportDetailDO.setStatus(ReportStatus.enable);
+                    reportDetailModel.setStatus(ReportStatus.enable);
                     //错误的举报，user减分
                     justiceValueOrderDO.setJusticeValue(-AppConfigConst.reportErrorValue);
 //                    detailUser.setJusticeValue(detailUser.getJusticeValue() - AppConfigConst.reportErrorValue);
                 }
                 justiceValueOrderDO.setCreateTime(curDate);
                 justiceValueOrderDO.setUserId(detailUser.getUnionId());
-                justiceValueOrderDO.setReportDetailId(reportDetailDO.getId());
+                justiceValueOrderDO.setReportDetailId(reportDetailModel.getId());
 
                 justiceValueOrderRepository.save(justiceValueOrderDO);
 

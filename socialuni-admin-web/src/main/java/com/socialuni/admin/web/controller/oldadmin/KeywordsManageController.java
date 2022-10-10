@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +32,7 @@ import java.util.Optional;
 @RequestMapping("keywords")
 public class KeywordsManageController {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
     private ViolationService violationService;
     @Resource

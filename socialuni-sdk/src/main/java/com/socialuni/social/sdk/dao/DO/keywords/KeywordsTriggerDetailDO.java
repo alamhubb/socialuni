@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO.keywords;
 
 
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import lombok.Data;
 
 import javax.persistence.*;

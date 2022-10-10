@@ -4,8 +4,9 @@ import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
@@ -40,7 +41,7 @@ import java.util.Optional;
 @RequestMapping("keywords")
 public class KeywordsQueryController {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
     private ViolationService violationService;
     @Resource

@@ -5,7 +5,7 @@ import com.socialuni.admin.web.domain.AdminReportQueryDomain;
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.AdminUserService;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
+import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 @RequestMapping("report")
 public class ReportController {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     //    @Resource
 //    private ViolationService violationService;
     @Resource
@@ -104,8 +104,8 @@ public class ReportController {
         user.setId(userId);*/
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
 //        List<ReportDO> reportDOS = reportRepository.findTop10ByReceiveUserAndStatusOrderByUpdateTimeDesc(user, CommonStatus.violation);
-        List<ReportDO> reportDOS = new ArrayList<>();
-        List<ReportRO> reportVOS = reportDOS.stream().map(ReportRO::new).collect(Collectors.toList());
+        List<?  extends ReportModel> reportModels = new ArrayList<>();
+        List<ReportRO> reportVOS = reportModels.stream().map(ReportRO::new).collect(Collectors.toList());
 //        List<SocialTalkDO> list = talkRepository.findTop10ByStatusOrderByReportNum(CommonStatus.enable);
 //        return new ResultVO<>(list.stream().map(ReportTalkVO::new).collect(Collectors.toList()));
         return new ResultRO<>(reportVOS);
@@ -128,8 +128,8 @@ public class ReportController {
         SocialuniUserModel user = adminUserService.getUserByPhoneNum(phoneNum);
 
         //查询用户10条被举报的内容
-        List<ReportDO> reportDOS = reportRepository.findTop10ByContentUserIdOrderByCreateTimeDesc(user.getUnionId());
-        List<ReportRO> reportVOS = reportDOS.stream().map(ReportRO::new).collect(Collectors.toList());
+        List<?  extends ReportModel> reportModels = reportApi.findTop10ByContentUserIdOrderByCreateTimeDesc(user.getUnionId());
+        List<ReportRO> reportVOS = reportModels.stream().map(ReportRO::new).collect(Collectors.toList());
 
         //查询用户10条动态
         List<SocialuniTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUser(new ArrayList<>(), user.getUnionId());

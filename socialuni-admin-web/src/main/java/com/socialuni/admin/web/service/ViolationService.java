@@ -1,12 +1,13 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateLevel;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
+import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
 import com.socialuni.social.user.sdk.api.UserApi;
@@ -40,7 +41,7 @@ public class ViolationService {
     @Resource
     private TalkRepository talkRepository;
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
     private ReportService reportService;
     @Resource
@@ -52,7 +53,7 @@ public class ViolationService {
     @Resource
     private SocialUserViolationEntity socialUserViolationEntity;
 
-    public void noViolateService(SocialUnionContentBaseDO modelDO, String auditNote, ReportDO reportDO) {
+    public void noViolateService(SocialUnionContentBaseDO modelDO, String auditNote, ReportModel reportModel) {
         Date curDate = new Date();
         //审核通过不再接受举报，前台点击举报时，提示已官方审核通过
         //talk状态变更
@@ -79,35 +80,35 @@ public class ViolationService {
         userApi.save(violationUser);
 
         //更改report违规类型
-        reportDO.setAuditType(AdminAuditResultType.noViolation);
-        reportDO.setAuditNote(auditNote);
+        reportModel.setAuditType(AdminAuditResultType.noViolation);
+        reportModel.setAuditNote(auditNote);
         //审核状态变更
-        reportDO.setStatus(ReportStatus.enable);
-        reportDO.setUpdateTime(curDate);
-        reportDO.setValid(false);
-        reportRepository.save(reportDO);
+        reportModel.setStatus(ReportStatus.enable);
+        reportModel.setUpdateTime(curDate);
+        reportModel.setValid(false);
+        reportApi.save(reportModel);
         //发放奖励和修改举报详情内容
-        reportService.reportPass(reportDO, false);
+        reportService.reportPass(reportModel, false);
     }
 
-    public void violateService(SocialUnionContentBaseDO modelDO, String violateType, String auditNote, ReportDO reportDO) {
+    public void violateService(SocialUnionContentBaseDO modelDO, String violateType, String auditNote, ReportModel reportModel) {
         Date curDate = new Date();
         SocialuniUserModel violationUser = modelContentViolation(modelDO, violateType);
 
         //修改举报内容
-        reportDO.setAuditType(violateType);
-        reportDO.setStatus(ReportStatus.violation);
-        reportDO.setAuditNote(auditNote);
-        reportDO.setUpdateTime(curDate);
-        reportDO.setValid(true);
-        reportRepository.save(reportDO);
+        reportModel.setAuditType(violateType);
+        reportModel.setStatus(ReportStatus.violation);
+        reportModel.setAuditNote(auditNote);
+        reportModel.setUpdateTime(curDate);
+        reportModel.setValid(true);
+        reportApi.save(reportModel);
 
 
         //不是轻微违规，则将所有待审核内容改为违规
         if (!AdminAuditResultType.slightViolation.equals(violateType)) {
             //查询用户所有为待审核和预审核的内容，改为违规
-            List<ReportDO> reportDOS = reportStore.queryUserOtherWaitAuditContent(violationUser.getUnionId());
-            for (ReportDO linkReport : reportDOS) {
+            List<?  extends ReportModel> reportModels = reportStore.queryUserOtherWaitAuditContent(violationUser.getUnionId());
+            for (ReportModel linkReport : reportModels) {
                 //修改关联内容的状态，为违规
                 SocialUnionContentBaseDO linkModelDO = SocialuniContentDOUtil.getContentDOByContentId(linkReport.getContentId());
                 //修改内容，需要修改状态、删除原因、更新时间
@@ -120,16 +121,16 @@ public class ViolationService {
                 //修改举报内容
                 linkReport.setAuditType(AdminAuditResultType.otherIllegalLinkage);
                 linkReport.setStatus(ReportStatus.violation);
-                linkReport.setAuditNote("关联其他举报内容违规id：" + reportDO.getId());
+                linkReport.setAuditNote("关联其他举报内容违规id：" + reportModel.getId());
                 linkReport.setUpdateTime(curDate);
                 linkReport.setValid(true);
             }
-            reportRepository.saveAll(reportDOS);
+            reportApi.saveAll(reportModels);
         }
 
         //如果有举报记录
         //发放奖励和修改举报详情内容
-        reportService.reportPass(reportDO, true);
+        reportService.reportPass(reportModel, true);
     }
 
     public SocialuniUserModel modelContentViolation(SocialUnionContentBaseDO modelDO, String violateType) {

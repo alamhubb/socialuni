@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.store;
 
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class ReportStore {
     @Resource
-    ReportRepository reportRepository;
+    ReportApi reportApi;
 
-    public List<ReportDO> queryUserOtherWaitAuditContent(Integer userId) {
-        return reportRepository.findByContentUserIdAndStatusIn(userId, ReportStatus.auditStatus);
+    public List<?  extends ReportModel> queryUserOtherWaitAuditContent(Integer userId) {
+        return reportApi.findByContentUserIdAndStatusIn(userId, ReportStatus.auditStatus);
     }
 }

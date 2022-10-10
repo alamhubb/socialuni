@@ -6,8 +6,8 @@ import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.api.ReportDetailApi;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
@@ -30,9 +30,9 @@ import java.util.Date;
 @Service
 public class SoicialReportAddDomain {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
-    private ReportDetailRepository reportDetailRepository;
+    private ReportDetailApi reportDetailApi;
     @Resource
     private SoicialuniUserAddReportDomain soicialuniReportDomain;
 
@@ -69,7 +69,7 @@ public class SoicialReportAddDomain {
                 return new ResultRO<>("您涉嫌胡乱举报，被禁止使用举报功能");
                 //小于-10一天只能举报两次
             }*/
-            Integer reportCount = reportDetailRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), todayZero, curDate);
+            Integer reportCount = reportDetailApi.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), todayZero, curDate);
            /* if (userJusticeValue < AppConfigConst.limitReportValue) {
                 if (reportCount >= AppConfigConst.lowLimitReportCount) {
                     return new ResultRO<>("因您的正义值低于：" + AppConfigConst.limitReportValue + "，所以您每天只能举报：" + AppConfigConst.lowLimitReportCount + "次");
