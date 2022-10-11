@@ -36,16 +36,8 @@ import java.util.stream.Collectors;
 public class NotifyDomain {
 
     @Resource
-    private EntityManager entityManager;
-
-    @Resource
     private CommentApi commentApi;
 
-    @Resource
-    private TalkApi talkApi;
-
-    @Resource
-    private NotifyDomain notifyDomain;
     @Resource
     private NotifyRepository notifyRepository;
 
