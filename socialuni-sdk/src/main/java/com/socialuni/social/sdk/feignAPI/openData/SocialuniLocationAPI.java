@@ -17,7 +17,7 @@ import javax.validation.Valid;
  */
 
 //@RequestMapping("location")
-@FeignClient(name = "location", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "location")
+@FeignClient(name = "location", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/location")
 @Tag(name = "开放数据/腾讯云内容")
 public interface SocialuniLocationAPI {
     @PostMapping("queryLocation")

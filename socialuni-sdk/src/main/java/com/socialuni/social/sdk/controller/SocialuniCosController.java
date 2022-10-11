@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@RequestMapping("cos")
+@RequestMapping("socialuni/cos")
 @RestController
 public class SocialuniCosController implements SocialuniCosAPI {
     @Resource

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-@RequestMapping("location")
+@RequestMapping("socialuni/location")
 @RestController
 public class SocialuniLocationController implements SocialuniLocationAPI {
     @Resource

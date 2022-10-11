@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 //@RequestMapping("cos")
-@FeignClient(name = "cos", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "cos")
+@FeignClient(name = "cos", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/cos")
 @Tag(name = "开放数据/腾讯云内容")
 public interface SocialuniCosAPI {
     @PostMapping("getCosAuth")
