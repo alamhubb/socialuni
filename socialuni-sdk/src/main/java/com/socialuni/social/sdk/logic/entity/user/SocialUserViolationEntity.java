@@ -15,7 +15,7 @@ public class SocialUserViolationEntity {
     public SocialUserViolationModel getOrCreateViolationDO(Integer userId) {
         SocialUserViolationModel socialUserViolationModel = SocialuniUserUtil.getUserViolationDO(userId);
         if (socialUserViolationModel == null) {
-            socialUserViolationModel = socialUserViolationApi.save(new SocialUserViolationModel(userId));
+            socialUserViolationModel = socialUserViolationApi.savePut(new SocialUserViolationModel(userId));
         }
         return socialUserViolationModel;
     }

@@ -1,6 +1,7 @@
 package com.socialuni.social.tance.repository;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.entity.DevAccountProviderDo;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
@@ -21,7 +22,9 @@ public interface DevAccountProviderRepository extends JpaRepository<DevAccountPr
                     @CachePut(cacheNames ="getDevAccountProviderByDevIdAndMpType", key = "#devAccountProviderModler.mpType+'-'+#devAccountProviderModler.devId"),
             }
     )
-    DevAccountProviderModler save(DevAccountProviderModler devAccountProviderModler);
+    default DevAccountProviderModler savePut(DevAccountProviderModler devAccountProviderModler){
+        return this.save(BeanUtil.toBean(devAccountProviderModler,DevAccountProviderDo.class));
+    }
 
     List<DevAccountProviderModler> findAllByDevId(Integer devId);
 

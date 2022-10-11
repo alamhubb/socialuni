@@ -148,7 +148,7 @@ public class AdminReportService {
             reportModel.setReportNum(reportModel.getReportNum() + 1);
             reportModel.setUpdateTime(new Date());
             //保存数据
-            reportModel = reportApi.save(reportModel);
+            reportModel = reportApi.savePut(reportModel);
         } else {
             //其他类型
             Optional<?  extends ReportModel> reportDOOptional = reportApi.findById(contentId);

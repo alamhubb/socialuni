@@ -70,7 +70,7 @@ public class SocialEditUserDomain {
         }
         mineUser.setUpdateTime(new Date());
 
-        mineUser = userApi.save(mineUser);
+        mineUser = userApi.savePut(mineUser);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         return socialMineUserDetailRO;

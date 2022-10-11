@@ -29,7 +29,7 @@ public class SocialAddUserImgDomain {
 
         SocialuniUserImgModel userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);
 
-        userImgDO = userImgRepository.save(userImgDO);
+        userImgDO = userImgRepository.savePut(userImgDO);
 
         SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(userImgDO);
 
@@ -44,7 +44,7 @@ public class SocialAddUserImgDomain {
 
         mineUser.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + socialUserImgAddQO.getSrc() + "!avatar");
 
-        userApi.save(mineUser);
+        userApi.savePut(mineUser);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

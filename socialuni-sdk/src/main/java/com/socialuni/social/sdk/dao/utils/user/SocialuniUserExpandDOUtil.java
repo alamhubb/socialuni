@@ -44,7 +44,7 @@ public class SocialuniUserExpandDOUtil {
     }
 
     public static SocialuniUserExpandModel saveUserExpandDO(SocialuniUserExpandModel socialuniUserExpandModel) {
-        return socialuniUserExpandApi.save(socialuniUserExpandModel);
+        return socialuniUserExpandApi.savePut(socialuniUserExpandModel);
     }
 
 

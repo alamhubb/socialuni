@@ -26,7 +26,9 @@ public interface TagRepository extends TagApi,JpaRepository<TagDO, Integer> {
         }
         return list;
     }
-
+    default TagModel savePut(TagModel tagModel){
+        return this.save(BeanUtil.toBean(tagModel,TagDO.class));
+    }
     @Caching(
             put = {
                     @CachePut(cacheNames = TagRedisKey.tagByName, key = "#tagModel.name"),

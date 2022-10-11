@@ -22,7 +22,7 @@ public interface ReportDetailApi{
 
     List<?  extends ReportDetailModel> findAllByReportId(Integer reportId);
 
-    ReportDetailModel save(ReportDetailModel reportDetailModel);
+    ReportDetailModel savePut(ReportDetailModel reportDetailModel);
 
     List<?  extends ReportDetailModel> savePutAll(List<ReportDetailModel> reportDetailModels);
 }

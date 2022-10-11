@@ -26,7 +26,7 @@ public class CommentStore {
         );
 
         //保存为预审核状态，关键词校验通过，改为正常
-        commentDO = commentApi.save(commentDO);
+        commentDO = commentApi.savePut(commentDO);
         return commentDO;
     }
 
@@ -67,10 +67,10 @@ public class CommentStore {
                 //测试所有自己评论自己，刚才处空指针了
                 replyComment.setUpdateTime(curDate);
                 //更新后保存到数据库
-                commentApi.save(replyComment);
+                commentApi.savePut(replyComment);
             }
         }
         //更新后保存到数据库
-        commentApi.save(parentComment);
+        commentApi.savePut(parentComment);
     }
 }

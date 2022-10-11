@@ -7,5 +7,5 @@ public interface HugApi  {
 
     HugModel findByTalkIdAndUserId(Integer talkId, Integer userId);
 
-    HugModel save(HugModel hugModel);
+    HugModel savePut(HugModel hugModel);
 }

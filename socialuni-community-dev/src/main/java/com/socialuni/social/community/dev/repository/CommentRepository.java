@@ -1,5 +1,6 @@
 package com.socialuni.social.community.dev.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.community.dev.entity.SocialuniCommentDO;
@@ -41,7 +42,9 @@ public interface CommentRepository extends CommentApi, JpaRepository<SocialuniCo
             @CacheEvict(cacheNames = "commentComments3", key = "#comment.parentCommentId", condition = "#comment.parentCommentId!=null"),
             @CacheEvict(cacheNames = "commentComments50", key = "#comment.parentCommentId", condition = "#comment.parentCommentId!=null")
     })
-    SocialuniCommentModel save(SocialuniCommentModel comment);
+    default SocialuniCommentModel savePut(SocialuniCommentModel comment){
+        return this.save(BeanUtil.toBean(comment,SocialuniCommentDO.class));
+    }
 
     //    展示评论
     @Cacheable(cacheNames = "talkComments5", key = "{#talkId}")

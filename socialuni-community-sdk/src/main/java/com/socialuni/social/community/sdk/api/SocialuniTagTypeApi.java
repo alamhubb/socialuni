@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface SocialuniTagTypeApi  {
 
-    SocialuniTagTypeModel save(SocialuniTagTypeModel tagTypeDO);
+    SocialuniTagTypeModel savePut(SocialuniTagTypeModel tagTypeDO);
 
     SocialuniTagTypeModel findFirstByName(String name);
 

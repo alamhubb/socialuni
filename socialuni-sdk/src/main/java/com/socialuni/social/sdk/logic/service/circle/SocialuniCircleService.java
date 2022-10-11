@@ -35,14 +35,14 @@ public class SocialuniCircleService {
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserModel user) {
         SocialuniCircleModel circleDO = new SocialuniCircleModel(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user);
-        circleDO = socialCircleApi.save(circleDO);
+        circleDO = socialCircleApi.savePut(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
     }
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
         SocialuniCircleModel circleDO = new SocialuniCircleModel(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), SocialuniUserUtil.getMineUserNotNull());
-        circleDO = socialCircleApi.save(circleDO);
+        circleDO = socialCircleApi.savePut(circleDO);
 
         ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
 

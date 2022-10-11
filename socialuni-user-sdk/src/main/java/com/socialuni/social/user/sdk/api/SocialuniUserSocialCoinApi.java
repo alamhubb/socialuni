@@ -4,7 +4,7 @@ import com.socialuni.social.user.sdk.model.SocialuniUserSocialCoinModel;
 
 public interface SocialuniUserSocialCoinApi  {
     SocialuniUserSocialCoinModel findByUserId(Integer userId);
-    SocialuniUserSocialCoinModel save(SocialuniUserSocialCoinModel socialuniUserExpandDO);
+    SocialuniUserSocialCoinModel savePut(SocialuniUserSocialCoinModel socialuniUserExpandDO);
 
 }
 

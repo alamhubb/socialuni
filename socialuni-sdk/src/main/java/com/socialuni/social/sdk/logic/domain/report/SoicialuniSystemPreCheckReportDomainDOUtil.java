@@ -97,7 +97,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             }
             reportModel.setReportNum(reportModel.getReportNum() + 1);
             reportModel.setUpdateTime(new Date());
-            reportModel = reportApi.save(reportModel);
+            reportModel = reportApi.savePut(reportModel);
             //得到系统的
             //如果触发了关键词
             /*    if (antispamDO.hasViolate()) {
@@ -114,7 +114,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             //生成举报详情
             ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, SocialuniSystemConst.getSystemUserId());
 
-            reportDetailApi.save(reportDetailModel);
+            reportDetailApi.savePut(reportDetailModel);
 
             Integer reportId = reportModel.getId();
 

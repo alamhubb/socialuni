@@ -33,7 +33,7 @@ public class SocialuniUserSocialCoinDOUtil {
     }
 
     public static SocialuniUserSocialCoinModel save(SocialuniUserSocialCoinModel socialuniUserExpandDO) {
-        return socialuniUserSocialCoinApi.save(socialuniUserExpandDO);
+        return socialuniUserSocialCoinApi.savePut(socialuniUserExpandDO);
     }
 
     public static SocialuniUserSocialCoinModel getOrCreate(Integer userId) {

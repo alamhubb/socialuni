@@ -6,6 +6,6 @@ import com.socialuni.social.user.sdk.model.SocialUserViolationModel;
 public interface SocialUserViolationApi {
     SocialUserViolationModel findOneByUserId(Integer userId);
 
-    SocialUserViolationModel save(SocialUserViolationModel socialUserViolationModel);
+    SocialUserViolationModel savePut(SocialUserViolationModel socialUserViolationModel);
 }
 

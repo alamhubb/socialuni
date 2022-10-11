@@ -70,7 +70,7 @@ public class ScheduledTasks {
         for (SocialuniUserModel user : users) {
             user.setUpdateTime(curDate);
             user.setStatus(UserStatus.enable);
-            userApi.save(user);
+            userApi.savePut(user);
         }
         log.info("今日时间{}，解封用户数量：{}", curDate, users.size());
     }

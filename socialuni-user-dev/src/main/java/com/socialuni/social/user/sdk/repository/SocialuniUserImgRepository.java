@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
@@ -32,7 +33,9 @@ public interface SocialuniUserImgRepository extends SocialuniUserImgApi, JpaRepo
             },
             put = {@CachePut(cacheNames = "getUserImgByUnionId", key = "#userImgDO.unionId")}
     )
-    SocialuniUserImgModel save(SocialuniUserImgModel userImgDO);
+    default SocialuniUserImgModel savePut(SocialuniUserImgModel userImgDO){
+        return this.save(BeanUtil.toBean(userImgDO,SocialuniUserImgDo.class));
+    }
 
     SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
 

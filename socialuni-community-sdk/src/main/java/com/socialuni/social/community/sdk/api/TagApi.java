@@ -9,7 +9,7 @@ import java.util.List;
 public interface TagApi  {
     TagModel findByIdAndStatus(Integer tagId, String status);
 
-    TagModel save(TagModel tagModel);
+    TagModel savePut(TagModel tagModel);
 
     TagModel findFirstByName(String name);
 

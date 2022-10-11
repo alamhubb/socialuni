@@ -1,6 +1,7 @@
 package com.socialuni.social.community.dev.repository;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.community.dev.entity.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
@@ -19,7 +20,9 @@ public interface SocialuniTagTypeRepository extends SocialuniTagTypeApi, JpaRepo
                     @CachePut(cacheNames = "tagTypeById", key = "#tagTypeDO.id"),
             }
     )
-    SocialuniTagTypeModel save(SocialuniTagTypeModel tagTypeDO);
+    default SocialuniTagTypeModel savePut(SocialuniTagTypeModel tagTypeDO){
+        return this.save(BeanUtil.toBean(tagTypeDO,SocialuniTagTypeDO.class));
+    }
 
     @Cacheable(cacheNames = "tagTypeByName", key = "#name")
     SocialuniTagTypeModel findFirstByName(String name);

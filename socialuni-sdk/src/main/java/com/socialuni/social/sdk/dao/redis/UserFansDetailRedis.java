@@ -26,6 +26,6 @@ public class UserFansDetailRedis {
             put = {@CachePut(cacheNames = CommonRedisKey.findUserFansDetailByUserId, key = "#socialUserFansDetailModel.userId")}
     )
     public SocialUserFansDetailModel save(SocialUserFansDetailModel socialUserFansDetailModel) {
-        return socialUserFansDetailApi.save(socialUserFansDetailModel);
+        return socialUserFansDetailApi.savePut(socialUserFansDetailModel);
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface DevAccountProviderApi {
 
 
-    DevAccountProviderModler save(DevAccountProviderModler devAccountProviderModler);
+    DevAccountProviderModler savePut(DevAccountProviderModler devAccountProviderModler);
 
     List<DevAccountProviderModler> findAllByDevId(Integer devId);
 

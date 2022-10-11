@@ -15,13 +15,13 @@ public class SocialUserManage {
 
     public SocialuniUserModel createUserByProviderLogin(SocialProviderLoginQO loginQO) {
         SocialuniUserModel user = SocialUserDOFactory.newUserByProviderLogin(loginQO);
-        user = userApi.save(user);
+        user = userApi.savePut(user);
         return user;
     }
 
     public SocialuniUserModel createUserByPhoneLogin() {
         SocialuniUserModel user = SocialUserDOFactory.newUserByPhoneLogin();
-        user = userApi.save(user);
+        user = userApi.savePut(user);
         return user;
     }
 }

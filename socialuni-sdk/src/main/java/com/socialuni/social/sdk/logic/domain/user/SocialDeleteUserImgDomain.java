@@ -23,7 +23,7 @@ public class SocialDeleteUserImgDomain {
         SocialuniUserImgModel userImg = userImgRepository.getUserImgByUserIdAndUnionId(mineUser.getUnionId(), img.getUserImgId());
         userImg.setStatus(ContentStatus.delete);
         userImg.setUpdateTime(new Date());
-        userImgRepository.save(userImg);
+        userImgRepository.savePut(userImg);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

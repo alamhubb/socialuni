@@ -78,7 +78,7 @@ public class TagService {
                                 }
                                 //不存在为空的情况
                                 tagTypeDO.setTalkCount(tagTypeDO.getTalkCount() + 1);
-                                tagTypeRepository.save(tagTypeDO);
+                                tagTypeRepository.savePut(tagTypeDO);
                             }
                             tagModel.setTalkCount(tagModel.getTalkCount() + 1);
 
@@ -86,9 +86,9 @@ public class TagService {
                             Optional<?  extends SocialuniTagTypeModel> optionalTagTypeDO = tagTypeRepository.findById(tagModel.getTagTypeId());
                             SocialuniTagTypeModel tagTypeDO = optionalTagTypeDO.get();
                             tagTypeDO.setTalkCount(tagTypeDO.getTalkCount() + 1);
-                            tagTypeRepository.save(tagTypeDO);
+                            tagTypeRepository.savePut(tagTypeDO);
                         }
-                        tagModel = tagApi.save(tagModel);
+                        tagModel = tagApi.savePut(tagModel);
                         tagModelList.add(tagModel);
 
                         //暂时不再在后台记录用户最近使用的标签

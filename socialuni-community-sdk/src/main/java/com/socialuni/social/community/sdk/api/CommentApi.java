@@ -21,7 +21,7 @@ public interface CommentApi   {
     SocialuniCommentModel findOneByUnionId(Integer id);
 
 
-    SocialuniCommentModel save(SocialuniCommentModel comment);
+    SocialuniCommentModel savePut(SocialuniCommentModel comment);
 
     //    展示评论
     List<?  extends SocialuniCommentModel> findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(Integer talkId, List<String> status);

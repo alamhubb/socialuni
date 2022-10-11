@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.api.SocialUserPhoneApi;
 import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
@@ -23,5 +24,7 @@ public interface SocialUserPhoneRepository extends SocialUserPhoneApi,JpaReposit
             evict = {@CacheEvict(cacheNames = CommonRedisKey.userById, key = "#phoneDO.userId")},
             put = {@CachePut(cacheNames = CommonRedisKey.findUserPhoneByUserId, key = "#phoneDO.userId")}
     )
-    SocialUserPhoneModel save(SocialUserPhoneModel phoneDO);
+    default SocialUserPhoneModel savePut(SocialUserPhoneModel phoneDO){
+        return this.save(BeanUtil.toBean(phoneDO,SocialUserPhoneDo.class));
+    }
 }

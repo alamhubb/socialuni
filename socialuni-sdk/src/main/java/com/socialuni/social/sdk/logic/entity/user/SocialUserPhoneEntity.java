@@ -41,7 +41,7 @@ public class SocialUserPhoneEntity {
         socialUserPhoneManage.createUserPhoneNum(mineUser.getUnionId(), phoneCountryCode, phoneNum);
 
         mineUser.setUpdateTime(new Date());
-        mineUser = userApi.save(mineUser);
+        mineUser = userApi.savePut(mineUser);
         return mineUser;
     }
 }

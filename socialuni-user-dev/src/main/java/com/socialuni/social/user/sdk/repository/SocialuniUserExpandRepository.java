@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.user.sdk.api.SocialuniUserExpandApi;
 import com.socialuni.social.user.sdk.entity.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.model.SocialuniUserExpandModel;
@@ -15,7 +16,9 @@ public interface SocialuniUserExpandRepository extends SocialuniUserExpandApi,Jp
     @Caching(
             put = {@CachePut(cacheNames = "userExpandByUserId", key = "#socialuniUserExpandModel.userId")}
     )
-    SocialuniUserExpandModel save(SocialuniUserExpandModel socialuniUserExpandModel);
+    default SocialuniUserExpandModel savePut(SocialuniUserExpandModel socialuniUserExpandModel){
+        return this.save(BeanUtil.toBean(socialuniUserExpandModel,SocialuniUserExpandDo.class));
+    }
 
 }
 

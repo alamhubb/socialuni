@@ -56,12 +56,12 @@ public class SoicialuniUserAddReportDomain {
         reportModel.setReportNum(reportModel.getReportNum() + 1);
         reportModel.setUpdateTime(new Date());
         //保存数据
-        reportModel = reportApi.save(reportModel);
+        reportModel = reportApi.savePut(reportModel);
 
         //生成举报详情
         ReportDetailModel reportDetailModel = new ReportDetailModel(socialReportAddQO.getContent(), socialReportAddQO.getReportType(), reportModel, modelDO.getContent(), SocialuniSystemConst.getSystemUserId());
 
-        reportDetailApi.save(reportDetailModel);
+        reportDetailApi.savePut(reportDetailModel);
 
         ResultRO<String> resultRO = new ResultRO<>();
         resultRO.setData(ErrorMsg.reportSubmit);
@@ -95,7 +95,7 @@ public class SoicialuniUserAddReportDomain {
         //todo 存到userDetail表
 //        receiveUser.setReportNum(receiveUser.getReportNum() + 1);
 //       非用户自身操作不更改时间 receiveUser.setUpdateTime(new Date());
-        userApi.save(receiveUser);
+        userApi.savePut(receiveUser);
 
         //有关
         //必须要单独保存，涉及到缓存

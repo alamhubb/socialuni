@@ -47,7 +47,7 @@ public interface ReportApi  {
     //查询用户其他为审核中的状态
     List<?  extends ReportModel> findByContentUserIdAndStatusIn(Integer userId, List<String> status);
 
-    ReportModel save(ReportModel reportModel);
+    ReportModel savePut(ReportModel reportModel);
 
     Optional<?  extends ReportModel> findById(Integer reportId);
 

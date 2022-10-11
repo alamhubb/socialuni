@@ -1,5 +1,6 @@
 package com.socialuni.social.report.dev.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.report.dev.entity.ReportDO;
 import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.report.sdk.model.ReportModel;
@@ -15,9 +16,12 @@ import java.util.List;
  */
 public interface ReportRepository extends ReportApi,JpaRepository<ReportDO, Integer> {
     ReportDO findOneByContentId(Integer contentId);
+    default ReportModel savePut(ReportModel reportModel){
+        return this.save(BeanUtil.toBean(reportModel,ReportDO.class));
+    }
     default List<?  extends ReportModel> savePutAll(List<?  extends ReportModel> reportModels){
         for (ReportModel reportModel : reportModels) {
-            this.save(reportModel);
+            this.savePut(reportModel);
         }
         return reportModels;
     }

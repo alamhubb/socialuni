@@ -1,5 +1,6 @@
 package com.socialuni.social.community.dev.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.community.dev.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.api.SocialCircleApi;
 import com.socialuni.social.community.sdk.enumeration.CircleRedisKey;
@@ -19,7 +20,9 @@ public interface SocialCircleRepository extends SocialCircleApi,JpaRepository<So
                     @CachePut(cacheNames = CircleRedisKey.tagByName, key = "#tagDO.name"),
             }
     )
-    SocialuniCircleModel save(SocialuniCircleModel tagDO);
+    default SocialuniCircleModel savePut(SocialuniCircleModel tagDO){
+        return this.save(BeanUtil.toBean(tagDO,SocialuniCircleDO.class));
+    }
 
     //查询热门前10tag
     List<?  extends SocialuniCircleModel> findByStatusOrderByCountDesc(String status, Pageable pageable);

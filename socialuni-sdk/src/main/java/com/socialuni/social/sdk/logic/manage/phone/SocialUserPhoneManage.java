@@ -65,7 +65,7 @@ public class SocialUserPhoneManage {
     //创建手机号信息
     public SocialUserPhoneModel createUserPhoneNum(Integer mineUserId, String phoneCountryCode, String phoneNum) {
         SocialUserPhoneModel socialUserPhoneModel = new SocialUserPhoneModel(mineUserId, phoneCountryCode, phoneNum, DevAccountFacade.getDevIdNotNull());
-        socialUserPhoneModel = socialUserPhoneApi.save(socialUserPhoneModel);
+        socialUserPhoneModel = socialUserPhoneApi.savePut(socialUserPhoneModel);
         return socialUserPhoneModel;
     }
 }

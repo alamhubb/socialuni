@@ -16,7 +16,7 @@ public class SocialTagManage {
 
     public TagModel createTagDO(TagAddQO tagAddQO, Integer mineUserId) {
         TagModel tagModel = SocialTagDOFactory.toTagDO(tagAddQO.getTagName(), tagAddQO.getDescription(), mineUserId);
-        tagModel = tagApi.save(tagModel);
+        tagModel = tagApi.savePut(tagModel);
         return tagModel;
     }
 
@@ -27,7 +27,7 @@ public class SocialTagManage {
         tagModel.setDevId(devId);
         tagModel.setShowFront(false);
 
-        tagModel = tagApi.save(tagModel);
+        tagModel = tagApi.savePut(tagModel);
         return tagModel;
     }
 }

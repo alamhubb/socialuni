@@ -20,7 +20,7 @@ public class HugRedis {
             put = {@CachePut(cacheNames = CommonRedisKey.findHugByTalkIdAndUserId, key = "#hugModel.userId+'-'+#hugModel.talkId")}
     )
     public HugModel save(HugModel hugModel) {
-        return hugApi.save(hugModel);
+        return hugApi.savePut(hugModel);
     }
 
     @Cacheable(cacheNames = CommonRedisKey.findHugByTalkIdAndUserId, key = "#userId+'-'+#talkId")

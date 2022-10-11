@@ -12,5 +12,5 @@ public interface SocialUserPhoneApi {
     SocialUserPhoneModel findByUserIdAndStatus(Integer userId, String status);
 
     //关注后用户缓存修改，一人+粉丝，一人+关注
-    SocialUserPhoneModel save(SocialUserPhoneModel phoneDO);
+    SocialUserPhoneModel savePut(SocialUserPhoneModel phoneDO);
 }

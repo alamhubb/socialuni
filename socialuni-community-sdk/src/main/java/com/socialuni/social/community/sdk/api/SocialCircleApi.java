@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SocialCircleApi{
 
-    SocialuniCircleModel save(SocialuniCircleModel tagDO);
+    SocialuniCircleModel savePut(SocialuniCircleModel tagDO);
 
     //查询热门前10tag
     List<?  extends SocialuniCircleModel> findByStatusOrderByCountDesc(String status, Pageable pageable);

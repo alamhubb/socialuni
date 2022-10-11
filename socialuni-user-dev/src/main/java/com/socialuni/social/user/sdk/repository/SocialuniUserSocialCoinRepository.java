@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.user.sdk.api.SocialuniUserSocialCoinApi;
 import com.socialuni.social.user.sdk.entity.SocialuniUserSocialCoinDo;
 import com.socialuni.social.user.sdk.model.SocialuniUserSocialCoinModel;
@@ -15,7 +16,9 @@ public interface SocialuniUserSocialCoinRepository extends SocialuniUserSocialCo
     @Caching(
             put = {@CachePut(cacheNames = "userSocialCoinByUserId", key = "#socialuniUserExpandDO.userId")}
     )
-    SocialuniUserSocialCoinModel save(SocialuniUserSocialCoinModel socialuniUserExpandDO);
+    default SocialuniUserSocialCoinModel savePut(SocialuniUserSocialCoinModel socialuniUserExpandDO){
+        return this.save(BeanUtil.toBean(socialuniUserExpandDO,SocialuniUserSocialCoinDo.class));
+    }
 
 }
 

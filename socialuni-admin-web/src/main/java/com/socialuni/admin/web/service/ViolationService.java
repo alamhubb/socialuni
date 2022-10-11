@@ -78,7 +78,7 @@ public class ViolationService {
         } else {
             log.info("用户状态已经被更改：{}", userStatus);
         }
-        userApi.save(violationUser);
+        userApi.savePut(violationUser);
 
         //更改report违规类型
         reportModel.setAuditType(AdminAuditResultType.noViolation);
@@ -87,7 +87,7 @@ public class ViolationService {
         reportModel.setStatus(ReportStatus.enable);
         reportModel.setUpdateTime(curDate);
         reportModel.setValid(false);
-        reportApi.save(reportModel);
+        reportApi.savePut(reportModel);
         //发放奖励和修改举报详情内容
         reportService.reportPass(reportModel, false);
     }
@@ -102,7 +102,7 @@ public class ViolationService {
         reportModel.setAuditNote(auditNote);
         reportModel.setUpdateTime(curDate);
         reportModel.setValid(true);
-        reportApi.save(reportModel);
+        reportApi.savePut(reportModel);
 
 
         //不是轻微违规，则将所有待审核内容改为违规
@@ -151,7 +151,7 @@ public class ViolationService {
         //不为官方系统用户才可封禁
         if (!UserType.system.equals(violationUser.getType())) {
             userViolationHandler(violationUser, vioReason, curDate, violateType);
-            userApi.save(violationUser);
+            userApi.savePut(violationUser);
             log.info("用户昵称和id为：" + violationUser.getNickname() + ":" + violationUser.getUnionId() + "用户状态改为：" + violationUser.getStatus());
         }
         return violationUser;

@@ -32,7 +32,7 @@ public class UserController {
         }
         user.setStatus(UserStatus.enable);
         user.setUpdateTime(new Date());
-        userApi.save(user);
+        userApi.savePut(user);
         return ResultRO.success();
     }
 }

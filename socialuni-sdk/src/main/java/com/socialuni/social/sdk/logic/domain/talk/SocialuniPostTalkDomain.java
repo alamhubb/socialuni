@@ -150,7 +150,7 @@ public class SocialuniPostTalkDomain {
         if (StringUtils.isNotEmpty(circleName)) {
             socialCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(talkVO.getCircleName());
             socialCircleDO.setCount(socialCircleDO.getCount() + 1);
-            socialCircleDO = socialCircleApi.save(socialCircleDO);
+            socialCircleDO = socialCircleApi.savePut(socialCircleDO);
         }
         TalkAddValidateRO talkAddValidateRO = new TalkAddValidateRO(districtDO, list, socialCircleDO);
         return talkAddValidateRO;

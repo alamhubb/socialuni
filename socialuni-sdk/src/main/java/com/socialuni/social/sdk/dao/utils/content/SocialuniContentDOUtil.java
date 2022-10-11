@@ -65,13 +65,13 @@ public class SocialuniContentDOUtil<T> {
             return talkRedis.save(talkDO);
         } else if (model instanceof SocialuniCommentModel) {
             SocialuniCommentModel commentDO = (SocialuniCommentModel) model;
-            return commentApi.save(commentDO);
+            return commentApi.savePut(commentDO);
         } else if (model instanceof MessageDO) {
             MessageDO messageDO = (MessageDO) model;
             return messageRepository.save(messageDO);
         } else if (model instanceof SocialuniUserImgModel) {
             SocialuniUserImgModel userImgDO = (SocialuniUserImgModel) model;
-            return userImgRepository.save(userImgDO);
+            return userImgRepository.savePut(userImgDO);
         } else if (model instanceof SocialuniTalkImgModel) {
             SocialuniTalkImgModel talkImgDO = (SocialuniTalkImgModel) model;
             return talkImgRepository.save(talkImgDO);

@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.repository;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
@@ -22,7 +23,9 @@ public interface UserRepository extends UserApi,JpaRepository<SocialuniUserDo, I
     SocialuniUserModel findOneByUnionId(Integer id);
 
     @CachePut(cacheNames = CommonRedisKey.userById, key = "#user.unionId")
-    SocialuniUserModel save(SocialuniUserModel user);
+    default SocialuniUserModel savePut(SocialuniUserModel user){
+        return this.save(BeanUtil.toBean(user,SocialuniUserDo.class));
+    }
 
 
     @Query(value = "select u from SocialuniUserDo u,SocialUserViolationDo su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")

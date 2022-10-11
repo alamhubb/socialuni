@@ -11,7 +11,7 @@ public interface UserApi  {
 
     SocialuniUserModel findOneByUnionId(Integer id);
 
-    SocialuniUserModel save(SocialuniUserModel user);
+    SocialuniUserModel savePut(SocialuniUserModel user);
 
 
     List<SocialuniUserModel> findCanUnfreezeViolationUser(String userStatus, Date curDate);

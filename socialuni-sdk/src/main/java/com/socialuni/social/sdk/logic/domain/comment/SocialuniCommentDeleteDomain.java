@@ -55,7 +55,7 @@ public class SocialuniCommentDeleteDomain {
             throw new SocialParamsException("无法删除不属于自己的评论");
         }
         commentDO.setUpdateTime(new Date());
-        commentApi.save(commentDO);
+        commentApi.savePut(commentDO);
         return new ResultRO<>();
     }
 }

@@ -12,7 +12,7 @@ public interface SocialuniUserImgApi {
 
     List<Integer> findUnionIdTop50ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);
 
-    SocialuniUserImgModel save(SocialuniUserImgModel userImgDO);
+    SocialuniUserImgModel savePut(SocialuniUserImgModel userImgDO);
 
     SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
 

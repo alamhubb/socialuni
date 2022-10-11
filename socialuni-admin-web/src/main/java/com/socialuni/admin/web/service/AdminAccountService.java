@@ -109,7 +109,7 @@ public class AdminAccountService {
                 //已绑定更新
                 wxDevAccountProviderModler.setAppId(wxMpAppId);
                 wxDevAccountProviderModler.setAppName(wxMpAppName);
-                wxDevAccountProviderModler = devAccountProviderApi.save(wxDevAccountProviderModler);
+                wxDevAccountProviderModler = devAccountProviderApi.savePut(wxDevAccountProviderModler);
                 createDevProviders.add(wxDevAccountProviderModler);
             }
         }
@@ -147,7 +147,7 @@ public class AdminAccountService {
                 //已绑定更新
                 qqDevAccountProviderModler.setAppId(qqMpAppId);
                 qqDevAccountProviderModler.setAppName(qqMpAppName);
-                qqDevAccountProviderModler = devAccountProviderApi.save(qqDevAccountProviderModler);
+                qqDevAccountProviderModler = devAccountProviderApi.savePut(qqDevAccountProviderModler);
                 createDevProviders.add(qqDevAccountProviderModler);
             }
         }
@@ -176,7 +176,7 @@ public class AdminAccountService {
                 devAccountModel.setAppName(appName);
                 //改名，更新tag名称
                 checkNameTag.setName(appName);
-                tagApi.save(checkNameTag);
+                tagApi.savePut(checkNameTag);
             }
         }
 
