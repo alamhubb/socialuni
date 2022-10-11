@@ -2,8 +2,8 @@ spring:
   profiles:
 #    active: local
 #    active: dev
-#    active: localprod
-    active: prod
+    active: localprod
+#    active: prod
 #    active: demo
 #    active: qkylocal
   jpa:
@@ -17,12 +17,14 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
         format_sql: true
   #不要为我们工程中的资源文件建立映射
-  resources:
-    add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
   main:
     allow-bean-definition-overriding: true
+    allow-circular-references: true
+  web:
+    resources:
+      add-mappings: false
 logging:
   file:
     name: admin.log

@@ -132,18 +132,16 @@ public class AdminReportService {
         }
         ReportModel reportModel;
         String violateType = auditVO.getViolateType();
-        if (AdminAuditResultType.adult.equals(violateType)){
+        if (AdminAuditResultType.adult.equals(violateType)) {
             throw new SocialParamsException("成年类型不能审核为违规");
         }
         //图片类型的也支持直接审核, 图片审核类型的需要模拟一个report
         if (SocialuniAuditContentType.underageImg.equals(auditContentType)) {
-            Optional<?  extends ReportModel> reportDOOptional = reportApi.findById(contentId);
-            if (!reportDOOptional.isPresent()){
+            reportModel = reportApi.findOneByContentId(contentId);
+            if (reportModel == null) {
                 SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
                 SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
                 reportModel = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, talkDO, uniContentUnionIdDO);
-            }else {
-                reportModel = reportDOOptional.get();
             }
             reportModel.setReportNum(reportModel.getReportNum() + 1);
             reportModel.setUpdateTime(new Date());
@@ -151,7 +149,7 @@ public class AdminReportService {
             reportModel = reportApi.savePut(reportModel);
         } else {
             //其他类型
-            Optional<?  extends ReportModel> reportDOOptional = reportApi.findById(contentId);
+            Optional<? extends ReportModel> reportDOOptional = reportApi.findById(contentId);
             //确认举报是否存在，只能处理未处理状态的。
 
             //判断是否违规
@@ -197,7 +195,7 @@ public class AdminReportService {
             //不为系统审查才给举报用户发消息
             if (ReportSourceType.userReport.equals(reportModel.getReportSourceType())) {
 
-                List<?  extends ReportDetailModel> reportDetailModels = reportDetailApi.findAllByReportId(reportModel.getId());
+                List<? extends ReportDetailModel> reportDetailModels = reportDetailApi.findAllByReportId(reportModel.getId());
 
                 for (ReportDetailModel reportDetailModel : reportDetailModels) {
 //                        NotifyDO notifyDO = new NotifyDO(systemUser.getId(), reportDetailDO.getUserId(), reportDO.getId(), NotifyType.report_result);

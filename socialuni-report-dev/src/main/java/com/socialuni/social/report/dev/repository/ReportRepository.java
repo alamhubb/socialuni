@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2019-09-27 23:21
  */
 public interface ReportRepository extends ReportApi,JpaRepository<ReportDO, Integer> {
-    ReportDO findOneByContentId(Integer contentId);
+    ReportModel findOneByContentId(Integer contentId);
     default ReportModel savePut(ReportModel reportModel){
         return this.save(BeanUtil.toBean(reportModel,ReportDO.class));
     }
