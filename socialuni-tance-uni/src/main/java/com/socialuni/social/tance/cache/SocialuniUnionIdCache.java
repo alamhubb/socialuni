@@ -31,11 +31,13 @@ public class SocialuniUnionIdCache implements com.socialuni.social.tance.sdk.api
     //新增一个清空所有，把当前的缓存
     @Override
     @Caching(
-            evict = {@CacheEvict(cacheNames = "getUnionIdByUuId")},
-            put = {@CachePut(cacheNames = {"getUnionIdById"}, key = "#uniContentUnionIdDO.id")}
+            evict = {
+                    @CacheEvict(cacheNames = "getUnionIdByUuId", key = "#uniContentUnionIdDO.uuid"),
+            },
+            put = {@CachePut(cacheNames = {"getUnionIdById"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
     public SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO) {
-        return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO,SocialuniUnionIdDo.class));
+        return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, SocialuniUnionIdDo.class));
     }
 
     @Override
