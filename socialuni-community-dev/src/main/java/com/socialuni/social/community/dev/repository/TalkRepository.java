@@ -1,6 +1,7 @@
 package com.socialuni.social.community.dev.repository;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.constant.CommonRedisKey;
 import com.socialuni.social.community.dev.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.api.TalkApi;
@@ -18,7 +19,9 @@ import java.util.List;
 public interface TalkRepository extends TalkApi,JpaRepository<SocialuniTalkDO, Integer> {
     @Cacheable(cacheNames = CommonRedisKey.talkById, key = "#talkUnionId")
     SocialuniTalkModel findOneByUnionId(Integer talkUnionId);
-
+    default  SocialuniTalkModel savePut(SocialuniTalkModel talkDO){
+        return this.save(BeanUtil.toBean(talkDO,SocialuniTalkDO.class));
+    }
     //清池使用的
 
     /**

@@ -194,7 +194,7 @@ public interface TalkApi  {
        List<String> status,
             Pageable pageable);
 
-    SocialuniTalkModel save(SocialuniTalkModel talkDO);
+    SocialuniTalkModel savePut(SocialuniTalkModel talkDO);
 
 /*
 

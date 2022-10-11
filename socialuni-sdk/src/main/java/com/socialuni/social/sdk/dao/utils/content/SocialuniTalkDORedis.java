@@ -50,7 +50,7 @@ public class SocialuniTalkDORedis {
         redisKeys.addAll(redisUtil.keys(RedisKeysUtil.getRedisKeys(CommonRedisKey.queryUserFollowsTalkIds, "*-" + talkDO.getUserId() + "-*")));
         //清除缓存
         redisUtil.del(redisKeys);
-        return talkApi.save(talkDO);
+        return talkApi.savePut(talkDO);
     }
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
