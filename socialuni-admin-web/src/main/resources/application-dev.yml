@@ -22,7 +22,7 @@ socialuni:
         secret-id: ""
         secret-key: ""
         region: ""
-        bucket-name: ""
+        bucket: ""
       sms:
         app-id: 1
         app-key: ""
