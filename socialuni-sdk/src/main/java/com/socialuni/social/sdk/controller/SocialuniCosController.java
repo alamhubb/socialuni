@@ -1,5 +1,6 @@
-package com.socialuni.social.controller;
+package com.socialuni.social.sdk.controller;
 
+import com.socialuni.social.sdk.feignAPI.openData.SocialuniCosAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniCosService;
 import com.socialuni.social.sdk.model.RO.app.SocialCosAuthRO;
 import com.socialuni.social.common.model.ResultRO;
@@ -9,14 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@RequestMapping("cos")
-
+@RequestMapping("socialuni/cos")
 @RestController
-public class SocialuniCosController {
+public class SocialuniCosController implements SocialuniCosAPI {
     @Resource
     SocialuniCosService centerCosService;
 
-    @PostMapping("getCosAuth")
     public ResultRO<SocialCosAuthRO> getCosAuth() {
         return centerCosService.getCosAuth();
     }
