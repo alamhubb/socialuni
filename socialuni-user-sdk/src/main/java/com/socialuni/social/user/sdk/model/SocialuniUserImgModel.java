@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 
 @Data
+@MappedSuperclass
 public class SocialuniUserImgModel extends SocialuniImgBaseModel implements SocialuniTextCheckDO, Serializable {
     //发表商户
     private Boolean hasPeopleImg;

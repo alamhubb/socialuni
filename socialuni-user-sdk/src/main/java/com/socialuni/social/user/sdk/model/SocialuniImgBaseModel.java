@@ -4,9 +4,11 @@ import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @Data
+@MappedSuperclass
 public class SocialuniImgBaseModel extends SocialUnionContentBaseDO implements Serializable {
     private String src;
 

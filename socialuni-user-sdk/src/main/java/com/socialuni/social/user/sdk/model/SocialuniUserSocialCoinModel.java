@@ -8,6 +8,7 @@ import javax.persistence.*;
 //用户扩展类
 @Data
 @NoArgsConstructor
+@MappedSuperclass
 public class SocialuniUserSocialCoinModel extends SocialuniUserInfoBaseModel {
     private Integer socialCoin;
 }
