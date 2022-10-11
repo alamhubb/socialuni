@@ -2,7 +2,8 @@ spring:
   profiles:
 #    active: local
 #    active: dev
-    active: prod
+    active: demo
+#    active: prod
   jpa:
     database: MYSQL
     show-sql: false
