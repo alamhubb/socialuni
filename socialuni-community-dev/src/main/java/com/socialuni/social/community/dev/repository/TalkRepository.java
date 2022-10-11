@@ -3,6 +3,7 @@ package com.socialuni.social.community.dev.repository;
 
 import com.socialuni.social.common.constant.CommonRedisKey;
 import com.socialuni.social.community.dev.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Date;
 import java.util.List;
 
-public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> {
+public interface TalkRepository extends TalkApi,JpaRepository<SocialuniTalkDO, Integer> {
     @Cacheable(cacheNames = CommonRedisKey.talkById, key = "#talkUnionId")
     SocialuniTalkModel findOneByUnionId(Integer talkUnionId);
 

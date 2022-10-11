@@ -36,6 +36,6 @@ public interface TagApi  {
 
     List<?  extends TagModel> findAllByStatusAndVisibleGenderOrderByCountDesc(String status, String gender);
 
-    List<?  extends TagModel> saveAll(List<?  extends TagModel> tagModels);
+    List<TagModel> savePutAll(List<TagModel> tagModels);
 
 }

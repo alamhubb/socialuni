@@ -1,6 +1,7 @@
 package com.socialuni.social.community.dev.repository;
 
 import com.socialuni.social.community.dev.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.api.SocialCircleApi;
 import com.socialuni.social.community.sdk.enumeration.CircleRedisKey;
 import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import org.springframework.cache.annotation.CachePut;
@@ -12,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 
-public interface SocialCircleRepository extends JpaRepository<SocialuniCircleDO, Integer> {
+public interface SocialCircleRepository extends SocialCircleApi,JpaRepository<SocialuniCircleDO, Integer> {
     @Caching(
             put = {
                     @CachePut(cacheNames = CircleRedisKey.tagByName, key = "#tagDO.name"),

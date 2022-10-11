@@ -126,7 +126,7 @@ public class ViolationService {
                 linkReport.setUpdateTime(curDate);
                 linkReport.setValid(true);
             }
-            reportApi.saveAll(reportModels);
+            reportApi.savePutAll(reportModels);
         }
 
         //如果有举报记录

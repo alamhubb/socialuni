@@ -16,7 +16,7 @@ public class SocialuniTagDOUtils {
         SocialuniTagDOUtils.tagApi = tagApi;
     }
 
-    public static List<?  extends TagModel> save(List<?  extends TagModel> tagModels) {
-        return tagApi.saveAll(tagModels);
+    public static List<TagModel> save(List<TagModel> tagModels) {
+        return tagApi.savePutAll(tagModels);
     }
 }

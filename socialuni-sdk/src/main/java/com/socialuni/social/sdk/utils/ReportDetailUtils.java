@@ -21,7 +21,7 @@ public class ReportDetailUtils {
     }
 
     public static List<?  extends ReportDetailModel> saveAll(List<ReportDetailModel> reportDetailModels) {
-        return reportDetailApi.saveAll(reportDetailModels);
+        return reportDetailApi.savePutAll(reportDetailModels);
     }
 
     public static Integer count(Integer reportId) {

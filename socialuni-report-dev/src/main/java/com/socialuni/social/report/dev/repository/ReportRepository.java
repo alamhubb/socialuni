@@ -2,6 +2,7 @@ package com.socialuni.social.report.dev.repository;
 
 import com.socialuni.social.report.dev.entity.ReportDO;
 import com.socialuni.social.report.sdk.api.ReportApi;
+import com.socialuni.social.report.sdk.model.ReportModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,12 @@ import java.util.List;
  */
 public interface ReportRepository extends ReportApi,JpaRepository<ReportDO, Integer> {
     ReportDO findOneByContentId(Integer contentId);
-
+    default List<?  extends ReportModel> savePutAll(List<?  extends ReportModel> reportModels){
+        for (ReportModel reportModel : reportModels) {
+            this.save(reportModel);
+        }
+        return reportModels;
+    }
 //    Optional<ReportDO> findFirstOneByTalkId(Integer talkId);
 
 //    Optional<ReportDO> findFirstOneByCommentId(Integer commentId);

@@ -24,5 +24,5 @@ public interface ReportDetailApi{
 
     ReportDetailModel save(ReportDetailModel reportDetailModel);
 
-    List<?  extends ReportDetailModel> saveAll(List<ReportDetailModel> reportDetailModels);
+    List<?  extends ReportDetailModel> savePutAll(List<ReportDetailModel> reportDetailModels);
 }

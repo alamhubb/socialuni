@@ -51,6 +51,6 @@ public interface ReportApi  {
 
     Optional<?  extends ReportModel> findById(Integer reportId);
 
-    List<?  extends ReportModel > saveAll(List<?  extends ReportModel> reportModels);
+    List<?  extends ReportModel > savePutAll(List<?  extends ReportModel> reportModels);
 
 }
