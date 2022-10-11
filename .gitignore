@@ -12,6 +12,7 @@ node_modules
 application-qkylocal.yml
 application-local.yml
 #忽略生产文件
+application-dev.yml
 application-prod.yml
 application-devprod.yml
 application-localdevprod.yml

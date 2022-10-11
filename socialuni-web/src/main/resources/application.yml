@@ -1,9 +1,8 @@
 spring:
   profiles:
 #    active: dev
-    active: dev
+    active: demo
 #    active: prod
-#    active: schooldev
   jpa:
     database: MYSQL
     show-sql: false
