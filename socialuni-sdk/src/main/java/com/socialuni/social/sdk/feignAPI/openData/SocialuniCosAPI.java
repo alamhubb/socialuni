@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2018-11-18 20:45
  */
 
-//@RequestMapping("socialuni/district")
+//@RequestMapping("cos")
 @FeignClient(name = "cos", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "cos")
 @Tag(name = "开放数据/腾讯云内容")
 public interface SocialuniCosAPI {

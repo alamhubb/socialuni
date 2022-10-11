@@ -1,5 +1,6 @@
-package com.socialuni.social.controller;
+package com.socialuni.social.sdk.controller;
 
+import com.socialuni.social.sdk.feignAPI.openData.SocialuniLocationAPI;
 import com.socialuni.social.sdk.model.QO.location.LocationQueryQO;
 import com.socialuni.social.sdk.model.QO.location.LocationQueryRO;
 import com.socialuni.social.sdk.logic.platform.QQMapAPI;
@@ -15,9 +16,7 @@ import javax.validation.Valid;
 
 @RequestMapping("location")
 @RestController
-public class SocialuniLocationController  {
-
-    @PostMapping("queryLocation")
+public class SocialuniLocationController implements SocialuniLocationAPI {
     public ResultRO<LocationQueryRO> queryLocation(@RequestBody @Valid LocationQueryQO queryQO) {
         LocationQueryRO locationQueryRO;
         //经纬度查询
