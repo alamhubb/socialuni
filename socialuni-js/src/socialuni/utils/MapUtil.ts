@@ -20,7 +20,7 @@ export default class MapUtil {
               reject()
             })
           } else {
-            request.post<QQMapResult>('location/queryLocation', new LocationQueryQO(res.latitude, res.longitude)).then((res: ResultRO<QQMapResult>) => {
+            request.post<QQMapResult>('socialuni/location/queryLocation', new LocationQueryQO(res.latitude, res.longitude)).then((res: ResultRO<QQMapResult>) => {
               resolve(res.data)
             }).catch(() => {
               reject()
@@ -48,7 +48,7 @@ export default class MapUtil {
         })
       } else {
         //其他平台需借用后台
-        request.post<QQMapResult>('location/queryLocation').then((res: ResultRO<QQMapResult>) => {
+        request.post<QQMapResult>('socialuni/location/queryLocation').then((res: ResultRO<QQMapResult>) => {
           resolve(res.data)
         }).catch(() => {
           reject()
