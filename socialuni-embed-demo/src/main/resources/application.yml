@@ -1,7 +1,6 @@
 spring:
   profiles:
 #    active: local
-#    active: dev
     active: demo
 #    active: prod
   jpa:
