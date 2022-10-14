@@ -1,5 +1,6 @@
 package com.socialuni.social.common.enumeration;
 
+import com.socialuni.social.common.model.PublishDataModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.annotation.AliasFor;
 
@@ -37,8 +38,18 @@ public @interface PublishDataCacheable {
     @AliasFor(annotation = Cacheable.class)
     boolean sync() default false;
 
-
+    /**
+     * 对应modelClass的操作
+     * @see PublishDataModel
+     * @return
+     */
     Class[] modelClass() default {};
+
+    /**
+     * 有时类名是运行是才有的，编译时没有。
+     * @see #modelClass()
+     * @return
+     */
     String[] modelClassName() default {};
 
 }
