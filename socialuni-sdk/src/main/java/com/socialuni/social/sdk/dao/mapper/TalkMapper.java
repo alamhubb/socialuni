@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.dao.mapper;
 
 import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.common.enumeration.PublishDataCacheable;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,9 @@ import java.util.List;
 
 @Mapper
 public interface TalkMapper {
-    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent")
+
+//    @Cacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent")
+    @PublishDataCacheable(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, key = "#talkUserGender+'-'+#status+'-'+#minAge+'-'+#maxAge+'-'+#disableUnderageContent" , modelClassName = {"com.socialuni.social.community.dev.entity.SocialuniTalkDO"})
     List<Integer> queryTalkIdsByAndUser(
             @Param("talkUserGender") String talkUserGender,
             @Param("minAge") Integer minAge,
