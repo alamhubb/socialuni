@@ -3,12 +3,10 @@ package com.socialuni.social.sdk.logic.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.social.sdk.dao.repository.AppConfigRepository;
 import com.socialuni.social.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +17,8 @@ import java.util.List;
 @Service
 @Slf4j
 public class ConfigMapRefreshService {
-    @Resource
-    private AppConfigRepository appConfigRepository;
+//    @Resource
+//    private AppConfigRepository appConfigRepository;
 
     public void refreshConfigMap() throws JsonProcessingException {
         /*List<AppConfigDO> appConfigDOS = appConfigRepository.findAllByStatusOrderByCreateTimeDesc(CommonStatus.enable);
