@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigApi {
+    public static final String DEFAULT_DEV_KEY = "uni-key";
     List<AppConfigDO> findAllByStatusOrderByCreateTimeDesc(String status);
     @Override
     default   String getString(String devKey,String key){
         Optional<AppConfigDO> appConfig = this.findById(new AppConfigPk(devKey, key));
-        AppConfigDO appConfigDO = appConfig.orElseThrow(() -> new NullPointerException(String.format("devKey=[%s], key=[%s]没有对应的内容",devKey, key)));
+        // 没有就找默认的联盟的key。 还没有就报错啦。
+        AppConfigDO appConfigDO = appConfig.orElseGet(()->this.findById(new AppConfigPk(DEFAULT_DEV_KEY, key)).orElseThrow(() -> new NullPointerException(String.format("devKey=[%s], key=[%s]没有对应的默认内容",devKey, key))));
         return appConfigDO.getValue();
     }
 }
