@@ -2,18 +2,17 @@ package com.socialuni.social.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.sdk.constant.AppData;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.redis.DistrictRedis;
-import com.socialuni.social.tance.sdk.api.DevSocialuniIdApi;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
+import com.socialuni.social.tance.sdk.api.DevSocialuniIdApi;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Async;
@@ -41,20 +40,12 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     DevSocialuniIdApi devSocialuniIdApi;
 
-    @Autowired(required = false)
-    private SocialuniAppConfig socialuniAppConfig;
 
     @Override
     @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         //如果为null，则为default类型
         //初始化默认值
-        if (socialuniAppConfig != null) {
-            String appType = (String) socialuniAppConfig.getClass().getField("appType").get(null);
-            SocialuniAppConfigBO socialuniAppConfigBO = (SocialuniAppConfigBO) socialuniAppConfig.getClass().getField("appConfig").get(null);
-            SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = (SocialuniAppMoreConfigBO) socialuniAppConfig.getClass().getField("appMoreConfig").get(null);
-            SocialuniAppConfig.resetSocialuniAppConfig(appType, socialuniAppConfigBO, socialuniAppMoreConfigBO);
-        }
 //        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccount(1);

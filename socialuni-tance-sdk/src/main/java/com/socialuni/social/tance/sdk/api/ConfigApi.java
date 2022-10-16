@@ -3,6 +3,7 @@ package com.socialuni.social.tance.sdk.api;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author wulinghui
@@ -62,5 +63,16 @@ public interface ConfigApi {
     default List<String> getListString(String devKey, String key){
         String[]  listString = this.getArrayString(devKey, key);
         return Arrays.asList(listString);
+    }
+
+    /**
+     * 获得模型
+     * @param devKey
+     * @param key
+     * @return
+     *  @see #getListString(String, String)
+     */
+    default List<Integer> getListInteger(String devKey, String key){
+        return this.getListString(devKey,key).stream().map(Integer::parseInt).collect(Collectors.toList());
     }
 }
