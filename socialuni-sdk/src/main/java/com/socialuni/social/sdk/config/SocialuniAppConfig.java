@@ -2,11 +2,8 @@ package com.socialuni.social.sdk.config;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
 
 @Component
 public class SocialuniAppConfig {
