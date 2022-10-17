@@ -27,8 +27,7 @@ public class AppConfigDO implements Serializable {
      * key值
      */
     @Id
-    private String key;
+    private String configKey;
     private String value;
-    private String desc;
     private int status;
 }

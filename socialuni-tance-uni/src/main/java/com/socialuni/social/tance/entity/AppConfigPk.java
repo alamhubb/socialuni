@@ -22,5 +22,5 @@ public class AppConfigPk  implements Serializable {
     /**
      * key值
      */
-    private String key;
+    private String configKey;
 }
