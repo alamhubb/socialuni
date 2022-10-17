@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.controller;
 
-import com.socialuni.social.tance.entity.AppConfigDO;
-import com.socialuni.social.tance.entity.AppConfigPk;
+import com.socialuni.social.tance.sdk.model.AppConfigDO;
+import com.socialuni.social.tance.sdk.model.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

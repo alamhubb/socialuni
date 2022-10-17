@@ -21,6 +21,12 @@ export const menuRoutes = [
     meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring', isOpen: true }
   },
   {
+    path: '/configManage',
+    name: RouterName.configManage,
+    component: () => import('@/views/configManage/configManage.vue'),
+    meta: { title: RouterName.configManage, icon: 'strengthMonitoring' }
+  },
+  {
     path: '/keywordManage',
     name: RouterName.keywordsManage,
     component: () => import('@/views/keywordManage/keywordManage.vue'),

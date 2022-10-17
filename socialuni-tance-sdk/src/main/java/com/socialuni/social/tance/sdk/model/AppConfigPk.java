@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.entity;
+package com.socialuni.social.tance.sdk.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

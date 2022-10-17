@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.repository;
 
-import com.socialuni.social.tance.entity.AppConfigDO;
-import com.socialuni.social.tance.entity.AppConfigPk;
+import com.socialuni.social.tance.sdk.model.AppConfigDO;
+import com.socialuni.social.tance.sdk.model.AppConfigPk;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigApi {
     public static final String DEFAULT_DEV_KEY = "uni-key";
 
-//    List<AppConfigDO> findAllByStatusOrderByCreateTimeDesc(String status);
+    List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc(Integer devId, Integer status);
 
     @Override
     default String getString(Integer devId, String key) {
