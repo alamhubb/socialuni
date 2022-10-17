@@ -65,7 +65,6 @@ public class SocialuniAppConfig {
         socialuniAppMoreConfigBO.setShowSwipers(configApi.getBoolean(devId, "showSwipers"));
         socialuniAppMoreConfigBO.setTalkShowAdInterval(configApi.getInteger(devId, "talkShowAdInterval"));
         socialuniAppMoreConfigBO.setTalkShowAdCount(configApi.getInteger(devId, "talkShowAdCount"));
-        socialuniAppMoreConfigBO.setTalkShowAdIndexList(configApi.getListInteger(devId, "talkShowAdIndexList"));
         socialuniAppMoreConfigBO.setAuthCodeCount(configApi.getInteger(devId, "authCodeCount"));
         socialuniAppMoreConfigBO.setAuthCodeIpCount(configApi.getInteger(devId, "authCodeIpCount"));
         socialuniAppMoreConfigBO.setAuthCodePhoneCount(configApi.getInteger(devId, "authCodePhoneCount"));

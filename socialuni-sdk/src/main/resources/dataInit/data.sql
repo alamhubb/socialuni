@@ -6610,7 +6610,6 @@ INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'showSwipers', 'true', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdInterval', '8', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdCount', '10', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdIndexList', 'false', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeCount', '30', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeIpCount', '200', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodePhoneCount', '30', '', 1);
