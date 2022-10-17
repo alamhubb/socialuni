@@ -3,13 +3,14 @@
     <div class="row-col-center mb">
       <el-button @click="addConfig">新增</el-button>
     </div>
-    <div v-for="config in configs" class="row-col-center mb-sm">
+    <div v-for="(config,index) in configs" class="row-col-center mb-sm">
       <div class="w30p mr">
         <el-input v-model="config.configKey"></el-input>
       </div>
-      <div class="w60p">
+      <div class="w60p mr-sm">
         <el-input v-model="config.value"></el-input>
       </div>
+      <el-button @click="configs.splice(index,1)">删除</el-button>
     </div>
   </div>
 </template>
