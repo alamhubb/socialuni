@@ -19,7 +19,7 @@ public interface ConfigApi {
      * @param key
      * @return
      */
-    String getString(String devKey,String key);
+    String getString(Integer devId,String key);
     /**
      * 获得模型
      * @param devKey
@@ -27,8 +27,8 @@ public interface ConfigApi {
      * @return
      * @see #getString(String, String)
      */
-    default Boolean getBoolean(String devKey,String key){
-        return  Boolean.parseBoolean(this.getString(devKey,key));
+    default Boolean getBoolean(Integer devId,String key){
+        return  Boolean.parseBoolean(this.getString(devId,key));
     }
     /**
      * 获得模型
@@ -37,8 +37,8 @@ public interface ConfigApi {
      * @return
      * @see #getString(String, String)
      */
-    default Integer getInteger(String devKey,String key){
-        return  Integer.valueOf(this.getString(devKey,key));
+    default Integer getInteger(Integer devId,String key){
+        return  Integer.valueOf(this.getString(devId,key));
     }
 
     /**
@@ -48,8 +48,8 @@ public interface ConfigApi {
      * @return
      *  @see #getString(String, String)
      */
-    default String[] getArrayString(String devKey,String key){
-        java.lang.String string = this.getString(devKey, key);
+    default String[] getArrayString(Integer devId,String key){
+        java.lang.String string = this.getString(devId, key);
         return string.split(",");
     }
 
@@ -60,8 +60,8 @@ public interface ConfigApi {
      * @return
      *  @see #getArrayString(String, String)
      */
-    default List<String> getListString(String devKey, String key){
-        String[]  listString = this.getArrayString(devKey, key);
+    default List<String> getListString(Integer devId, String key){
+        String[]  listString = this.getArrayString(devId, key);
         return Arrays.asList(listString);
     }
 
@@ -72,7 +72,7 @@ public interface ConfigApi {
      * @return
      *  @see #getListString(String, String)
      */
-    default List<Integer> getListInteger(String devKey, String key){
-        return this.getListString(devKey,key).stream().map(Integer::parseInt).collect(Collectors.toList());
+    default List<Integer> getListInteger(Integer devId, String key){
+        return this.getListString(devId,key).stream().map(Integer::parseInt).collect(Collectors.toList());
     }
 }

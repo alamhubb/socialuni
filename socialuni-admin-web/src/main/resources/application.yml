@@ -1,11 +1,15 @@
 spring:
   profiles:
 #    active: local
-#    active: dev
 #    active: localprod
 #    active: prod
-    active: demo
+    active: dev
+#    active: demo
 #    active: qkylocal
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:dataInit/data.sql
   jpa:
     database: MYSQL
     #    show-sql: true

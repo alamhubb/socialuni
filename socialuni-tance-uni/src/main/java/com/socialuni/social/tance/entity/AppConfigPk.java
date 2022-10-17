@@ -18,7 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppConfigPk  implements Serializable {
-    private String devKey;
+    private Integer devId;
     /**
      * key值
      */

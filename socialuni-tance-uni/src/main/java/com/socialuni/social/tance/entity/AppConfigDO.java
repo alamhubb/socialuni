@@ -22,7 +22,7 @@ import java.io.Serializable;
 @IdClass(value = AppConfigPk.class)
 public class AppConfigDO implements Serializable {
     @Id
-    private String devKey;
+    private Integer devId;
     /**
      * key值
      */

@@ -44,7 +44,7 @@ CREATE TABLE `s_district` (
 
 /*Data for the table `s_district` */
 
-insert  into `s_district`(`id`,`ad_code`,`ad_name`,`city_code`,`city_name`,`count`,`district_code`,`district_name`,`parent_ad_code`,`province_code`,`province_name`,`status`,`talk_count`) values 
+insert  into `s_district`(`id`,`ad_code`,`ad_name`,`city_code`,`city_name`,`count`,`district_code`,`district_name`,`parent_ad_code`,`province_code`,`province_name`,`status`,`talk_count`) values
 
 (1,'100000','中国','1','',5400689,'1','',NULL,'100000','中国','正常',125278),
 
@@ -6568,52 +6568,3 @@ insert  into `s_district`(`id`,`ad_code`,`ad_name`,`city_code`,`city_name`,`coun
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
-
-
-create table s_app_config
-(
-    devKey varchar(100) not null,
-    `key`  varchar(100) not null,
-    value  varchar(300) null,
-    `desc` varchar(300) null,
-    status int          null,
-    primary key (devKey, `key`)
-)  comment '全局配置表';
-
-
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'appGender', 'false', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'disableUnderageContent', 'all', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'disableContentHasQrCode', 'false', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'disableContentHasContactInfo', 'false', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'mustSetSchoolCanPost', 'false', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'followTabName', '关注', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'homeTabName', '首页', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'cityTabName', '同城', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'tabNames', '关注,首页,同城', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'serviceWeChat', '', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'vipPrice', '1000', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'swiperHeight', '130', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'homeUrl', 'https://www.socialuni.cn/', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'suggestUrl', 'https://www.socialuni.cn/qingchi/suggest', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'contactUsUrl', 'https://www.socialuni.cn/qingchi/contact', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'userAgreementUrl', 'https://www.socialuni.cn/qingchi/agreement', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'userPrivacyUrl', 'https://www.socialuni.cn/qingchi/privacy', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'childProtectUrl', 'https://www.socialuni.cn/qingchi/childProtect', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'rewardedAdLimit', '3', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'contactExpenseShell', '9999', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'contactUserReceiveShell', '50', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'errorMsgContactService', '有任何疑问请联系客服', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'errorMsg601UnLogin', '未登录，请进行登录，是否前往登录', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'errorMsg604SystemError', '系统异常，有任何疑问请联系客服', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'authCodeInterval', '120', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'reportCountHide', '1', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'showSwipers', 'true', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'talkShowAdInterval', '8', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'talkShowAdCount', '10', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'talkShowAdIndexList', 'false', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'authCodeCount', '30', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'authCodeIpCount', '200', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'authCodePhoneCount', '30', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'authCodeValidMinute', '30', '', 1);
-INSERT INTO s_app_config (devKey, `key`, value, `desc`, status) VALUES ('uni-key', 'highLimitReportCount', '20', '', 1);
