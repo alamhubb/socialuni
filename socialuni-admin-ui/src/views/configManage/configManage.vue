@@ -2,6 +2,7 @@
   <div class="h100p flex-col">
     <div class="row-col-center mb">
       <el-button @click="addConfig">新增</el-button>
+      <el-button @click="saveConfigs">保存</el-button>
     </div>
     <div v-for="(config,index) in configs" class="row-col-center mb-sm">
       <div class="w30p mr">
@@ -35,6 +36,10 @@ export default class ConfigManageView extends Vue {
 
   addConfig() {
     this.configs.unshift(new ConfigVO())
+  }
+
+  saveConfigs(){
+    //this.configs保存到后台
   }
 }
 </script>
