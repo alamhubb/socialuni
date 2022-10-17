@@ -2,11 +2,9 @@ package com.socialuni.social.tance.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author qinkaiyuan
@@ -30,4 +28,6 @@ public class AppConfigDO implements Serializable {
     private String configKey;
     private String value;
     private int status;
+    @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
+    private Date createTime;
 }
