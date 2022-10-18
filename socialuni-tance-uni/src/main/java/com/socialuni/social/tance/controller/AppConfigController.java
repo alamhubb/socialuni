@@ -6,10 +6,7 @@ import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,17 +25,23 @@ public class AppConfigController {
     private AppConfigRepository appConfigRepository;
 
     @PostMapping("save")
-    public AppConfigDO save(AppConfigDO appConfigDO) {
-        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigDO.getDevId()))
-            throw new SocialParamsException("联盟默认数据不可修改");
+    public AppConfigDO save(@RequestBody AppConfigDO appConfigDO) {
+        Integer devId = DevAccountFacade.getDevIdNotNull();
+        appConfigDO.setDevId(devId);
+//        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigDO.getDevId()))
+//            throw new SocialParamsException("联盟默认数据不可修改");
+
+
         return appConfigRepository.save(appConfigDO);
     }
 
     @PostMapping("deleteById")
-    public void deleteById(AppConfigPk appConfigPk) {
-        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigPk.getDevId()))
-            throw new SocialParamsException("联盟默认数据不可删除");
-        //
+    public void deleteById(@RequestBody AppConfigPk appConfigPk) {
+        Integer devId = DevAccountFacade.getDevIdNotNull();
+        appConfigPk.setDevId(devId);
+//        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigPk.getDevId()))
+//            throw new SocialParamsException("联盟默认数据不可删除");
+
         appConfigRepository.deleteById(appConfigPk);
     }
 
