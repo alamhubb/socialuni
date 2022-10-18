@@ -1,9 +1,10 @@
 package com.socialuni.social.tance.controller;
 
-import com.socialuni.social.tance.repository.AppConfigRepository;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import cn.hutool.core.collection.CollectionUtil;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
+import com.socialuni.social.tance.repository.AppConfigRepository;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,16 @@ public class AppConfigController {
      */
     @GetMapping("getAllConfigs")
     public List<AppConfigDO> getAllConfigs() {
-        return appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNotNull(), 1);
+        int status = 1;
+        // 默认的内容。
+        List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
+        // 自己定义的
+        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNotNull(), status);
+        //
+        CollectionUtil.addAll(defaultList, devList);
+        // 去重
+        List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
+
+        return distinct;
     }
 }
