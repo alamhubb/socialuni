@@ -1,6 +1,7 @@
 package com.socialuni.social.tance.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
@@ -28,11 +29,16 @@ public class AppConfigController {
 
     @PostMapping("save")
     public AppConfigDO save(AppConfigDO appConfigDO) {
+        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigDO.getDevId()))
+            throw new SocialParamsException("联盟默认数据不可修改");
         return appConfigRepository.save(appConfigDO);
     }
 
     @PostMapping("deleteById")
     public void deleteById(AppConfigPk appConfigPk) {
+        if(AppConfigRepository.DEFAULT_DEV_KEY.equals(appConfigPk.getDevId()))
+            throw new SocialParamsException("联盟默认数据不可删除");
+        //
         appConfigRepository.deleteById(appConfigPk);
     }
 

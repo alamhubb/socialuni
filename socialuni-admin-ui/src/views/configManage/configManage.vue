@@ -1,8 +1,6 @@
 <template>
   <div class="h100p flex-col">
     <div class="row-col-center mb">
-      <el-button @click="addConfig">新增</el-button>
-      <el-button @click="saveConfigs">保存</el-button>
     </div>
     <div v-for="(config,index) in configs" class="row-col-center mb-sm">
       <div class="w30p mr">
@@ -11,7 +9,8 @@
       <div class="w60p mr-sm">
         <el-input v-model="config.value"></el-input>
       </div>
-      <el-button @click="configs.splice(index,1)">删除</el-button>
+      <el-button @click="delConfigs(config)">设为默认值</el-button>
+      <el-button @click="saveConfigs(config)">保存</el-button>
     </div>
   </div>
 </template>
@@ -20,6 +19,7 @@
 import {Component, Vue} from 'vue-property-decorator'
 import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
+import ReportVO from '@/model/report/ReportVO'
 
 @Component
 export default class ConfigManageView extends Vue {
@@ -33,13 +33,12 @@ export default class ConfigManageView extends Vue {
     const res = await request.get('config/getAllConfigs')
     this.configs = res.data
   }
-
-  addConfig() {
-    this.configs.unshift(new ConfigVO())
+  delConfigs(row:ConfigVO) {
+    request.post('config/deleteById', row);
   }
-
-  saveConfigs(){
+  saveConfigs(row:ConfigVO){
     //this.configs保存到后台
+    request.post('config/save', row);
   }
 }
 </script>
