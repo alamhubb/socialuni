@@ -2,7 +2,6 @@ package com.socialuni.social.sdk.config;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.stereotype.Component;
 
@@ -67,6 +66,7 @@ public class SocialuniAppConfig {
         socialuniAppMoreConfigBO.setTalkShowAdCount(configApi.getInteger(devId, "talkShowAdCount"));
         socialuniAppMoreConfigBO.setAuthCodeCount(configApi.getInteger(devId, "authCodeCount"));
         socialuniAppMoreConfigBO.setAuthCodeIpCount(configApi.getInteger(devId, "authCodeIpCount"));
+        socialuniAppMoreConfigBO.setTalkShowAdIndexList(configApi.getListInteger(devId, "talkShowAdIndexList"));
         socialuniAppMoreConfigBO.setAuthCodePhoneCount(configApi.getInteger(devId, "authCodePhoneCount"));
         socialuniAppMoreConfigBO.setAuthCodeValidMinute(configApi.getInteger(devId, "authCodeValidMinute"));
         socialuniAppMoreConfigBO.setHighLimitReportCount(configApi.getInteger(devId, "highLimitReportCount"));

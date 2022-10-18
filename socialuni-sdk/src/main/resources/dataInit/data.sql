@@ -6615,3 +6615,4 @@ INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodePhoneCount', '30', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeValidMinute', '30', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'highLimitReportCount', '20', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdIndexList', '', '', 1);

@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.repository;
 
-import com.socialuni.social.tance.sdk.model.AppConfigDO;
-import com.socialuni.social.tance.sdk.model.AppConfigPk;
+import com.socialuni.social.tance.entity.AppConfigDO;
+import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
 import org.springframework.data.jpa.repository.JpaRepository;
 
