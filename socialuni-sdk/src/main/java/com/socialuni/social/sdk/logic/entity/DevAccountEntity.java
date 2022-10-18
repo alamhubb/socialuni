@@ -35,15 +35,15 @@ public class DevAccountEntity {
     //创建开发者账号
     public DevAccountModel createDevAccount(String phoneNum, String socialuniId) {
         Optional<? extends DevAccountModel> devAccountDOOptional = devAccountApi.findFirstByOrderByIdDesc();
-        Long lastDevId;
-        if (devAccountDOOptional.isPresent()) {
-            lastDevId = devAccountDOOptional.get().getDevNum();
-        } else {
-            lastDevId = AdminAppConfigConst.qingChiDevNum;
-        }
-
         //加30以内随机数
-        Long curDevNum = lastDevId + new Double((Math.random() * 20)).longValue();
+        Long curDevNum;
+        if (devAccountDOOptional.isPresent()) {
+            Long lastDevId = devAccountDOOptional.get().getDevNum();
+            curDevNum = lastDevId + new Double((Math.random() * 20)).longValue();
+        } else {
+            curDevNum = AdminAppConfigConst.qingChiDevNum;
+        }
+        //加30以内随机数
         DevAccountModel devAccountModel = new DevAccountModel();
         Date curDate = new Date();
         String secretKey = UUIDUtil.getUUID();
