@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigApi {
-    public static final Integer DEFAULT_DEV_KEY = 1;
+    public static final Integer DEFAULT_DEV_KEY = 0;
 
     List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc(Integer devId, Integer status);
 

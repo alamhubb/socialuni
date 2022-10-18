@@ -1,6 +1,6 @@
 /*
 SQLyog  v12.2.6 (64 bit)
-MySQL - 8.0.22-txsql : Database - school_dev
+MySQL - 5.7.18-cynos-log : Database - socialuni_dev
 *********************************************************************
 */
 
@@ -18,28 +18,28 @@ MySQL - 8.0.22-txsql : Database - school_dev
 DROP TABLE IF EXISTS `s_district`;
 
 CREATE TABLE `s_district` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ad_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ad_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `count` int DEFAULT NULL,
-  `district_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `district_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parent_ad_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `province_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `province_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `talk_count` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK1318bf93w9uwawlntgh8k73xp` (`ad_code`),
-  KEY `IDX240g0m8t0eg4ji0ilnwsf0edc` (`count`),
-  KEY `IDX1uiufdimmrghupi2e53dr5914` (`talk_count`),
-  KEY `IDXqcwswg2e85dp0oxi9dbm0uakd` (`status`),
-  KEY `IDX2awwgh4mg8ujpg20fu977avp3` (`province_code`),
-  KEY `IDXkyi3hr3e67i4dpm35fv3vsm8c` (`city_code`),
-  KEY `IDX8u5bw77x77vakt0cwgaoxkg9k` (`district_code`),
-  KEY `IDXkoi7jjwm6qv0xvu6bh81ub1a3` (`parent_ad_code`)
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`ad_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`ad_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`city_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`city_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`count` int(11) DEFAULT NULL,
+`district_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`district_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`parent_ad_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`province_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`province_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`talk_count` int(11) DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `UKntmcv2rxrlxjec1eprvih7rnf` (`ad_code`),
+KEY `IDXaxpf7rmdqlmlflehf4nmjg5hs` (`count`),
+KEY `IDXlwsfvurm01eolghtfo2twvhf8` (`talk_count`),
+KEY `IDXfm45wpdyr5uj7gbmp0k4i7qj2` (`status`),
+KEY `IDXmkjjv73cg30sx9117wda502ai` (`province_code`),
+KEY `IDX54qlmhae05yymndu57voqhsw6` (`city_code`),
+KEY `IDXapcqvl4gjbjdaau7p4mwtceln` (`district_code`),
+KEY `IDXwe1gkjhvjxkxkcg3mbv8gvqk` (`parent_ad_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `s_district` */
@@ -6581,38 +6581,37 @@ CREATE TABLE `s_app_config` (
 PRIMARY KEY (`config_key`,`dev_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci comment '全局配置表';
 
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'appGender', 'false', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'disableUnderageContent', 'all', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'disableContentHasQrCode', 'false', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'disableContentHasContactInfo', 'false', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'mustSetSchoolCanPost', 'false', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'followTabName', '关注', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'homeTabName', '首页', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'cityTabName', '同城', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'tabNames', '关注,首页,同城', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'serviceWeChat', '', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'vipPrice', '1000', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'swiperHeight', '130', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'homeUrl', 'https://www.socialuni.cn/', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'suggestUrl', 'https://www.socialuni.cn/qingchi/suggest', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'contactUsUrl', 'https://www.socialuni.cn/qingchi/contact', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'userAgreementUrl', 'https://www.socialuni.cn/qingchi/agreement', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'userPrivacyUrl', 'https://www.socialuni.cn/qingchi/privacy', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'childProtectUrl', 'https://www.socialuni.cn/qingchi/childProtect', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'rewardedAdLimit', '3', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'contactExpenseShell', '9999', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'contactUserReceiveShell', '50', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'errorMsgContactService', '有任何疑问请联系客服', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'errorMsg601UnLogin', '未登录，请进行登录，是否前往登录', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'errorMsg604SystemError', '系统异常，有任何疑问请联系客服', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeInterval', '120', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'reportCountHide', '1', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'showSwipers', 'true', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdInterval', '8', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdCount', '10', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeCount', '30', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeIpCount', '200', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodePhoneCount', '30', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'authCodeValidMinute', '30', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'highLimitReportCount', '20', '', 1);
-INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (1, 'talkShowAdIndexList', '', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'appGender', 'false', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'disableUnderageContent', 'all', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'disableContentHasQrCode', 'false', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'disableContentHasContactInfo', 'false', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'mustSetSchoolCanPost', 'false', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'followTabName', '关注', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'homeTabName', '首页', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'cityTabName', '同城', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'tabNames', '关注,首页,同城', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'serviceWeChat', '', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'vipPrice', '1000', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'swiperHeight', '130', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'homeUrl', 'https://www.socialuni.cn/', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'suggestUrl', 'https://www.socialuni.cn/qingchi/suggest', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'contactUsUrl', 'https://www.socialuni.cn/qingchi/contact', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'userAgreementUrl', 'https://www.socialuni.cn/qingchi/agreement', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'userPrivacyUrl', 'https://www.socialuni.cn/qingchi/privacy', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'childProtectUrl', 'https://www.socialuni.cn/qingchi/childProtect', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'rewardedAdLimit', '3', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'contactExpenseShell', '9999', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'contactUserReceiveShell', '50', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'errorMsgContactService', '有任何疑问请联系客服', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'errorMsg601UnLogin', '未登录，请进行登录，是否前往登录', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'errorMsg604SystemError', '系统异常，有任何疑问请联系客服', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'authCodeInterval', '120', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'reportCountHide', '1', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'showSwipers', 'true', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'talkShowAdInterval', '8', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'talkShowAdCount', '10', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'authCodeCount', '30', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'authCodeIpCount', '200', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'authCodePhoneCount', '30', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'authCodeValidMinute', '30', '', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'highLimitReportCount', '20', '', 1);
