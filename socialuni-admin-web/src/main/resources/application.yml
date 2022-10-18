@@ -6,9 +6,19 @@ spring:
     active: dev
 #    active: demo
 #    active: qkylocal
+  flyway:
+    # 设置不clean表，这里会处理clean()方法，从而删库. https://zhuanlan.zhihu.com/p/51170727
+    cleanOnValidationError: false
+    # 避免0.0.9和1.0.0的sql不执行。
+    baselineVersion : 0
+    # 不合并sql,按照给出的sql执行。
+    baselineOnMigrate : true
+    # 不替换变量
+    placeholderReplacement : false
+    enabled: false
   sql:
     init:
-      mode: always
+      mode: never
       data-locations: classpath:dataInit/data.sql
   jpa:
     database: MYSQL
