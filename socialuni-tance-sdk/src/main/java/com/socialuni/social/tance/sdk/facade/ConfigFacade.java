@@ -4,9 +4,8 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * @author wulinghui
@@ -18,7 +17,7 @@ import javax.annotation.Resource;
 @Component
 public class ConfigFacade {
     private static  ConfigApi configApi;
-    @Resource
+    @Autowired
     public static void setConfigApi(ConfigApi configApi) {
         ConfigFacade.configApi = configApi;
     }
