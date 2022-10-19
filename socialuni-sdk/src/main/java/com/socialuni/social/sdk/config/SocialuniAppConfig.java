@@ -22,18 +22,18 @@ public class SocialuniAppConfig {
 //        String devId = SocialuniSystemConst.getAppSocialuniId();
         Integer devId = DevAccountFacade.getDevIdNotNull();
         SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
-        appConfig.setAppGender(configApi.getString(devId, "appGender"));
+        appConfig.setAppGender(configApi.getString( "appGender"));
         //
-        appConfig.setDisableUnderageContent(configApi.getBoolean(devId, "disableUnderageContent"));
-        appConfig.setDisableContentHasQrCode(configApi.getBoolean(devId, "disableContentHasQrCode"));
-        appConfig.setDisableContentHasContactInfo(configApi.getBoolean(devId, "disableContentHasContactInfo"));
-        appConfig.setMustSetSchoolCanPost(configApi.getBoolean(devId, "mustSetSchoolCanPost"));
+        appConfig.setDisableUnderageContent(configApi.getBoolean( "disableUnderageContent"));
+        appConfig.setDisableContentHasQrCode(configApi.getBoolean( "disableContentHasQrCode"));
+        appConfig.setDisableContentHasContactInfo(configApi.getBoolean( "disableContentHasContactInfo"));
+        appConfig.setMustSetSchoolCanPost(configApi.getBoolean( "mustSetSchoolCanPost"));
         //
-        appConfig.setFollowTabName(configApi.getString(devId, "followTabName"));
-        appConfig.setHomeTabName(configApi.getString(devId, "homeTabName"));
-        appConfig.setCityTabName(configApi.getString(devId, "cityTabName"));
+        appConfig.setFollowTabName(configApi.getString( "followTabName"));
+        appConfig.setHomeTabName(configApi.getString( "homeTabName"));
+        appConfig.setCityTabName(configApi.getString( "cityTabName"));
         //
-        appConfig.setTabNames(configApi.getListString(devId, "tabNames"));
+        appConfig.setTabNames(configApi.getListString( "tabNames"));
         return appConfig;
     }
 
@@ -42,34 +42,34 @@ public class SocialuniAppConfig {
      */
     public static SocialuniAppMoreConfigBO getAppMoreConfig() {
         ConfigApi configApi = SpringUtil.getBean(ConfigApi.class);
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+
         SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = new SocialuniAppMoreConfigBO();
-        socialuniAppMoreConfigBO.setServiceWeChat(configApi.getString(devId, "serviceWeChat"));
-        socialuniAppMoreConfigBO.setVipPrice(configApi.getInteger(devId, "vipPrice"));
-        socialuniAppMoreConfigBO.setSwiperHeight(configApi.getInteger(devId, "swiperHeight"));
-        socialuniAppMoreConfigBO.setHomeUrl(configApi.getString(devId, "homeUrl"));
-        socialuniAppMoreConfigBO.setSuggestUrl(configApi.getString(devId, "suggestUrl"));
-        socialuniAppMoreConfigBO.setContactUsUrl(configApi.getString(devId, "contactUsUrl"));
-        socialuniAppMoreConfigBO.setUserAgreementUrl(configApi.getString(devId, "userAgreementUrl"));
-        socialuniAppMoreConfigBO.setUserPrivacyUrl(configApi.getString(devId, "userPrivacyUrl"));
-        socialuniAppMoreConfigBO.setChildProtectUrl(configApi.getString(devId, "childProtectUrl"));
-        socialuniAppMoreConfigBO.setRewardedAdLimit(configApi.getInteger(devId, "rewardedAdLimit"));
-        socialuniAppMoreConfigBO.setContactExpenseShell(configApi.getInteger(devId, "contactExpenseShell"));
-        socialuniAppMoreConfigBO.setContactUserReceiveShell(configApi.getInteger(devId, "contactUserReceiveShell"));
-        socialuniAppMoreConfigBO.setErrorMsgContactService(configApi.getString(devId, "errorMsgContactService"));
-        socialuniAppMoreConfigBO.setErrorMsg601UnLogin(configApi.getString(devId, "errorMsg601UnLogin"));
-        socialuniAppMoreConfigBO.setErrorMsg604SystemError(configApi.getString(devId, "errorMsg604SystemError"));
-        socialuniAppMoreConfigBO.setAuthCodeInterval(configApi.getInteger(devId, "authCodeInterval"));
-        socialuniAppMoreConfigBO.setReportCountHide(configApi.getInteger(devId, "reportCountHide"));
-        socialuniAppMoreConfigBO.setShowSwipers(configApi.getBoolean(devId, "showSwipers"));
-        socialuniAppMoreConfigBO.setTalkShowAdInterval(configApi.getInteger(devId, "talkShowAdInterval"));
-        socialuniAppMoreConfigBO.setTalkShowAdCount(configApi.getInteger(devId, "talkShowAdCount"));
-        socialuniAppMoreConfigBO.setAuthCodeCount(configApi.getInteger(devId, "authCodeCount"));
-        socialuniAppMoreConfigBO.setAuthCodeIpCount(configApi.getInteger(devId, "authCodeIpCount"));
-        socialuniAppMoreConfigBO.setTalkShowAdIndexList(configApi.getListInteger(devId, "talkShowAdIndexList"));
-        socialuniAppMoreConfigBO.setAuthCodePhoneCount(configApi.getInteger(devId, "authCodePhoneCount"));
-        socialuniAppMoreConfigBO.setAuthCodeValidMinute(configApi.getInteger(devId, "authCodeValidMinute"));
-        socialuniAppMoreConfigBO.setHighLimitReportCount(configApi.getInteger(devId, "highLimitReportCount"));
+        socialuniAppMoreConfigBO.setServiceWeChat(configApi.getString( "serviceWeChat"));
+        socialuniAppMoreConfigBO.setVipPrice(configApi.getInteger( "vipPrice"));
+        socialuniAppMoreConfigBO.setSwiperHeight(configApi.getInteger( "swiperHeight"));
+        socialuniAppMoreConfigBO.setHomeUrl(configApi.getString( "homeUrl"));
+        socialuniAppMoreConfigBO.setSuggestUrl(configApi.getString( "suggestUrl"));
+        socialuniAppMoreConfigBO.setContactUsUrl(configApi.getString( "contactUsUrl"));
+        socialuniAppMoreConfigBO.setUserAgreementUrl(configApi.getString( "userAgreementUrl"));
+        socialuniAppMoreConfigBO.setUserPrivacyUrl(configApi.getString( "userPrivacyUrl"));
+        socialuniAppMoreConfigBO.setChildProtectUrl(configApi.getString( "childProtectUrl"));
+        socialuniAppMoreConfigBO.setRewardedAdLimit(configApi.getInteger( "rewardedAdLimit"));
+        socialuniAppMoreConfigBO.setContactExpenseShell(configApi.getInteger( "contactExpenseShell"));
+        socialuniAppMoreConfigBO.setContactUserReceiveShell(configApi.getInteger( "contactUserReceiveShell"));
+        socialuniAppMoreConfigBO.setErrorMsgContactService(configApi.getString( "errorMsgContactService"));
+        socialuniAppMoreConfigBO.setErrorMsg601UnLogin(configApi.getString( "errorMsg601UnLogin"));
+        socialuniAppMoreConfigBO.setErrorMsg604SystemError(configApi.getString( "errorMsg604SystemError"));
+        socialuniAppMoreConfigBO.setAuthCodeInterval(configApi.getInteger( "authCodeInterval"));
+        socialuniAppMoreConfigBO.setReportCountHide(configApi.getInteger( "reportCountHide"));
+        socialuniAppMoreConfigBO.setShowSwipers(configApi.getBoolean( "showSwipers"));
+        socialuniAppMoreConfigBO.setTalkShowAdInterval(configApi.getInteger( "talkShowAdInterval"));
+        socialuniAppMoreConfigBO.setTalkShowAdCount(configApi.getInteger( "talkShowAdCount"));
+        socialuniAppMoreConfigBO.setAuthCodeCount(configApi.getInteger( "authCodeCount"));
+        socialuniAppMoreConfigBO.setAuthCodeIpCount(configApi.getInteger( "authCodeIpCount"));
+        socialuniAppMoreConfigBO.setTalkShowAdIndexList(configApi.getListInteger( "talkShowAdIndexList"));
+        socialuniAppMoreConfigBO.setAuthCodePhoneCount(configApi.getInteger( "authCodePhoneCount"));
+        socialuniAppMoreConfigBO.setAuthCodeValidMinute(configApi.getInteger( "authCodeValidMinute"));
+        socialuniAppMoreConfigBO.setHighLimitReportCount(configApi.getInteger( "highLimitReportCount"));
         return socialuniAppMoreConfigBO;
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ConfigService implements ConfigApi {
 
     @Override
-    public String getString(Integer devId, String key) {
+    public String getString( String key) {
         // 不支持devKey的。就只配置自己的配置内容。
         return SpringUtil.getProperty("socialuni."+key);
     }

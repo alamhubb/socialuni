@@ -22,7 +22,7 @@ public class ErrorMsg {
 
     public static final String errorCode605ContactServiceValue = "账号被封禁，{0}天内解封，" + CONTACT_SERVICE;
     public static final String errorCode604SystemKey = "604系统异常提示";
-    public static final String errorCode604SystemMsg = "系统出错，请联系客服微信或qq:491369310";
+//    public static final String errorCode604SystemMsg = "系统出错，请联系客服微信或qq:491369310";
     public static final String successMsg = "请求成功";
     public static final String failedMsg = "请求失败";
 

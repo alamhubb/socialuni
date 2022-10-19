@@ -14,78 +14,78 @@ import java.util.stream.Collectors;
  */
 public interface ConfigApi {
     // 该方法属于特有的方法提供。
-//    List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc(Integer devId, Integer status);
+//    List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc( Integer status);
 
     /**
      * 获得模型
      *
-     * @param devId
+     *
      * @param key
      * @return
      */
-    String getString(Integer devId, String key);
+    String getString( String key);
 
     /**
      * 获得模型
      *
-     * @param devId
+     * 
      * @param key
      * @return
-     * @see #getString(Integer, String)
+     * @see #getString( String)
      */
-    default Boolean getBoolean(Integer devId, String key) {
-        return Boolean.parseBoolean(this.getString(devId, key));
+    default Boolean getBoolean( String key) {
+        return Boolean.parseBoolean(this.getString( key));
     }
 
     /**
      * 获得模型
      *
-     * @param devId
+     * 
      * @param key
      * @return
-     * @see #getString(Integer, String)
+     * @see #getString( String)
      */
-    default Integer getInteger(Integer devId, String key) {
-        return Integer.valueOf(this.getString(devId, key));
+    default Integer getInteger( String key) {
+        return Integer.valueOf(this.getString( key));
     }
 
     /**
      * 获得模型
      *
-     * @param devId
+     * 
      * @param key
      * @return
-     * @see #getString(Integer, String)
+     * @see #getString( String)
      */
-    default String[] getArrayString(Integer devId, String key) {
-        java.lang.String string = this.getString(devId, key);
+    default String[] getArrayString( String key) {
+        java.lang.String string = this.getString( key);
         return string.split(",");
     }
 
     /**
      * 获得模型
      *
-     * @param devId
+     * 
      * @param key
      * @return
-     * @see #getArrayString(Integer, String)
+     * @see #getArrayString( String)
      */
-    default List<String> getListString(Integer devId, String key) {
-        String[] listString = this.getArrayString(devId, key);
+    default List<String> getListString( String key) {
+        String[] listString = this.getArrayString( key);
         return Arrays.asList(listString);
     }
 
     /**
      * 获得模型
      *
-     * @param devId
+     * 
      * @param key
      * @return
-     * @see #getListString(Integer, String)
+     * @see #getListString( String)
      */
-    default List<Integer> getListInteger(Integer devId, String key) {
+    default List<Integer> getListInteger( String key) {
         try {
-            return this.getListString(devId, key).stream().map(Integer::parseInt).collect(Collectors.toList());
+            return this.getListString( key).stream().map(Integer::parseInt).collect(Collectors.toList());
         } catch (Exception exception) {
             return null; // 报java.lang.NumberFormatException错就是null的默认值。
         }
