@@ -18,6 +18,7 @@ public class ErrorMsg {
         HttpServletRequest request = RequestUtil.getRequest();
         if(request != null){
             Map<String, Object> allConfigsOfMap = (Map<String, Object>) request.getAttribute(SocialSystemConst.CONFIGS_REQUEST_NAME);
+            if(allConfigsOfMap == null) return  null;
             Object cacheObj = allConfigsOfMap.get(SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
             return String.valueOf(cacheObj);
         }
