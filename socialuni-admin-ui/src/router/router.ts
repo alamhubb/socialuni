@@ -24,7 +24,7 @@ export const menuRoutes = [
     path: '/configManage',
     name: RouterName.configManage,
     component: () => import('@/views/configManage/configManage.vue'),
-    meta: { title: RouterName.configManage, icon: 'strengthMonitoring' }
+    meta: { title: RouterName.configManage, icon: 'strengthMonitoring', isOpen: true }
   },
   {
     path: '/keywordManage',
