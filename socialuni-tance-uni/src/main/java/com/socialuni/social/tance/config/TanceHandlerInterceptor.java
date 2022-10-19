@@ -1,12 +1,15 @@
 package com.socialuni.social.tance.config;
 
+import com.socialuni.social.tance.controller.AppConfigController;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @author wulinghui
@@ -21,11 +24,16 @@ import javax.servlet.http.HttpServletResponse;
         matchIfMissing = true
 )
 public class TanceHandlerInterceptor implements HandlerInterceptor {
-
+    public static final String CONFIGS_REQUEST_NAME = "$$allConfigsOfMap$$";
+    @Resource
+    AppConfigController appConfigController;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 初始化。
         PublishDataTanceBaseRepository.publishDataInitialized(request);
+        // 设置配置属性。
+        Map<String, Object> allConfigsOfMap = appConfigController.getAllConfigsOfMap();
+        request.setAttribute(CONFIGS_REQUEST_NAME,allConfigsOfMap);
         //
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

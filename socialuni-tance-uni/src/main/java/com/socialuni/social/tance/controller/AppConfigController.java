@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.utils.MapUtil;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wulinghui
@@ -61,5 +62,22 @@ public class AppConfigController {
         List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
 
         return distinct;
+    }
+    /**
+     * 获得所有列表属于map形式
+     */
+    @GetMapping("getAllConfigsOfMap")
+    public Map<String,Object> getAllConfigsOfMap() {
+        int status = 1;
+        // 默认的内容。
+        List<AppConfigDO> defaultList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(AppConfigRepository.DEFAULT_DEV_KEY, status);
+        // 自己定义的
+        List<AppConfigDO> devList = appConfigRepository.findAllByDevIdAndStatusOrderByCreateTimeDesc(DevAccountFacade.getDevIdNotNull(), status);
+        //
+        CollectionUtil.addAll(defaultList, devList);
+        // 去重
+        List<AppConfigDO> distinct = CollectionUtil.distinct(defaultList, AppConfigDO::getConfigKey, true);
+        //
+        return  MapUtil.pivot(distinct,"configKey","value");
     }
 }
