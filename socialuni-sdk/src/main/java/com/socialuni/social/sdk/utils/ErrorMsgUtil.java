@@ -1,7 +1,9 @@
 package com.socialuni.social.sdk.utils;
 
 
+import com.socialuni.social.common.constant.SocialSystemConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 
 import java.text.MessageFormat;
@@ -17,6 +19,6 @@ public class ErrorMsgUtil {
 
     public static String getErrorCode605ContactServiceValue(Date date) {
         Integer manyDay = DateUtils.HowManyDaysFromNow(date);
-        return MessageFormat.format(ErrorMsg.errorCode605ContactServiceValue, manyDay);
+        return MessageFormat.format(ErrorMsg.errorCode605ContactServiceValue, manyDay) + ConfigFacade.getFormat(ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
     }
 }

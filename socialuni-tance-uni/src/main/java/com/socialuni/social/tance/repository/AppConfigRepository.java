@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.repository;
 
+import com.socialuni.social.common.constant.SocialSystemConst;
 import com.socialuni.social.common.utils.RequestUtil;
-import com.socialuni.social.tance.config.TanceHandlerInterceptor;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
@@ -22,10 +22,12 @@ public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfi
     default String getString( String key) {
         // 先从缓存里面找。没有再找下面的逻辑。
         HttpServletRequest request = RequestUtil.getRequest();
-        Map<String, Object> allConfigsOfMap = (Map<String, Object>) request.getAttribute(TanceHandlerInterceptor.CONFIGS_REQUEST_NAME);
-        Object cacheObj = allConfigsOfMap.get(key);
-        if(cacheObj != null){
-            return String.valueOf(cacheObj);
+        if(request != null){
+            Map<String, Object> allConfigsOfMap = (Map<String, Object>) request.getAttribute(SocialSystemConst.CONFIGS_REQUEST_NAME);
+            Object cacheObj = allConfigsOfMap.get(key);
+            if(cacheObj != null){
+                return String.valueOf(cacheObj);
+            }
         }
         Integer devId = DevAccountFacade.getDevIdNotNull();
         Optional<AppConfigDO> appConfig = this.findById(new AppConfigPk(devId, key));

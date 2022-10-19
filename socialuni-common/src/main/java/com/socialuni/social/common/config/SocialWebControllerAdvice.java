@@ -71,7 +71,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
-        ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
+        ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.getSystemErrorMsg());
         String errorStr = exception.toString();
         if (StringUtils.isEmpty(errorStr)) {
             try {
@@ -103,7 +103,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 errorStr = "解析异常出错";
                 e.printStackTrace();
             }
-            ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
+            ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.getSystemErrorMsg());
             this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, feignException.toString(), errorStr);
             return resultRO;
         }

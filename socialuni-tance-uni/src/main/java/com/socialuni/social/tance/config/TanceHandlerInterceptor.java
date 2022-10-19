@@ -1,5 +1,6 @@
 package com.socialuni.social.tance.config;
 
+import com.socialuni.social.common.constant.SocialSystemConst;
 import com.socialuni.social.tance.controller.AppConfigController;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,7 +25,7 @@ import java.util.Map;
         matchIfMissing = true
 )
 public class TanceHandlerInterceptor implements HandlerInterceptor {
-    public static final String CONFIGS_REQUEST_NAME = "$$allConfigsOfMap$$";
+
     @Resource
     AppConfigController appConfigController;
     @Override
@@ -33,7 +34,7 @@ public class TanceHandlerInterceptor implements HandlerInterceptor {
         PublishDataTanceBaseRepository.publishDataInitialized(request);
         // 设置配置属性。
         Map<String, Object> allConfigsOfMap = appConfigController.getAllConfigsOfMap();
-        request.setAttribute(CONFIGS_REQUEST_NAME,allConfigsOfMap);
+        request.setAttribute(SocialSystemConst.CONFIGS_REQUEST_NAME,allConfigsOfMap);
         //
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

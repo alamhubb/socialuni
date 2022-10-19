@@ -1,24 +1,26 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
-import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.utils.TencentSmsServe;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.common.constant.SocialSystemConst;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.utils.IpUtil;
+import com.socialuni.social.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.AuthenticationRepository;
+import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
+import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.sdk.utils.TencentSmsServe;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.facade.ConfigFacade;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.api.UserApi;
-import com.socialuni.social.common.utils.IpUtil;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -89,7 +91,7 @@ public class SocailSendAuthCodeDomain {
                 if (userCount >= userLimitCount) {
 //                UserLogStoreUtils.save(new UserLogDO("用户获取达到获取验证码次数上限", user, phoneNum));
 //                return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
-                    throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
+                    ConfigFacade.throwBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
                 }
             }
 //        Integer ipCount = authRepository.countByIp(userIp);
@@ -101,7 +103,7 @@ public class SocailSendAuthCodeDomain {
                 UserLogStoreUtils.save(new UserLogDO("用户IP获取达到获取验证码次数上限", user, phoneNum));
             }
             return new ResultRO<>("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);*/
-                throw new SocialBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE);
+                ConfigFacade.throwBusinessException("获取验证码次数已达到上线，" + ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
             }
         }
     }

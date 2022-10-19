@@ -1,24 +1,26 @@
 package com.socialuni.social.sdk.logic.service.user;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.constant.SocialSystemConst;
+import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.exception.exception.SocialSystemException;
+import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.constant.ErrorMsg;
+import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
+import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
+import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
+import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialEditUserDomain;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
+import com.socialuni.social.sdk.logic.platform.tencent.TencentCloudAPI;
 import com.socialuni.social.sdk.model.QO.user.SocialUserIdentityAuthQO;
 import com.socialuni.social.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
-import com.socialuni.social.sdk.logic.platform.tencent.TencentCloudAPI;
-import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
-import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
-import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialSystemException;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.tencentcloudapi.ocr.v20181119.models.IDCardOCRRequest;
@@ -49,7 +51,7 @@ public class SocialuniUserIdentityService {
     public ResultRO<SocialUserIdentityAuthPreCheckRO> userIdentityAuthPreCheck(SocialUserIdentityAuthQO socialUseIdentityAuthQO) {
         Integer resScore = TencentCloudAPI.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUseIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
-            throw new SocialBusinessException("预校验失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
+            ConfigFacade.throwBusinessException("预校验失败，请重试，" + ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
         }
         SocialUserIdentityAuthPreCheckRO checkRO = new SocialUserIdentityAuthPreCheckRO();
         checkRO.setAuthScore(resScore);
@@ -75,11 +77,11 @@ public class SocialuniUserIdentityService {
             throw new RuntimeException(e);
         }
         if (StringUtils.isEmpty(resp.getBirth())) {
-            throw new SocialBusinessException("请上传真实的身份信息，" + ErrorMsg.CONTACT_SERVICE);
+            ConfigFacade.throwBusinessException("请上传真实的身份信息，" + ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
         }
         Integer resScore = TencentCloudAPI.imgAuthGetScore(SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getIdImgUrl(), SocialuniSystemConst.getStaticResourceUrl() + socialUserIdentityAuthQO.getSelfieImgUrl());
         if (resScore == 0) {
-            throw new SocialBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE);
+            ConfigFacade.throwBusinessException("认证失败，请重试，" + ErrorMsg.CONTACT_SERVICE, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
         }
         Integer userId = SocialuniUserUtil.getMineUserIdNotNull();
         SocialUserIdentityAuthImgDO socialUserIdentityImgDO = new SocialUserIdentityAuthImgDO();

@@ -8,6 +8,6 @@ import com.socialuni.social.common.exception.base.SocialErrorException;
 public class SocialSystemException extends SocialErrorException {
     public SocialSystemException(String innerMsg) {
         //系统异常返回前端，消息内部记录
-        super(ErrorMsg.systemErrorMsg, ErrorCode.SYSTEM_ERROR, innerMsg);
+        super(ErrorMsg.getSystemErrorMsg(), ErrorCode.SYSTEM_ERROR, innerMsg);
     }
 }

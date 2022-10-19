@@ -4,6 +4,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.tance.sdk.api.ConfigApi;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  * @date 2022/10/19 10:37
  * @since 1.0
  */
+@Component
 public class ConfigFacade {
     private static  ConfigApi configApi;
     @Resource
@@ -26,10 +28,23 @@ public class ConfigFacade {
      * 通常使用：throwBusinessException("this is {0} for {1}", "qq", "homeUrl") =》 this is 配置中的qq for 配置中的homeUrl<br>
      * @param pattern
      * @param keys
-     * @see StrUtil#indexedFormat
+     * @see #getFormat
      * @see SocialBusinessException
      */
-    public void throwBusinessException(CharSequence pattern, String... keys){
+    public static void throwBusinessException(CharSequence pattern, String... keys) throws SocialBusinessException{
+        String format = getFormat(pattern, keys);
+        throw new SocialBusinessException(format);
+    }
+
+    /**
+     * 从配置中格式化字符串内容.
+     * 通常使用：throwBusinessException("this is {0} for {1}", "qq", "homeUrl") =》 this is 配置中的qq for 配置中的homeUrl<br>
+     * @param pattern
+     * @param keys
+     * @return
+     * @see StrUtil#indexedFormat
+     */
+    public static String getFormat(CharSequence pattern, String... keys) {
         Object objects [] = null;
         if(ArrayUtil.isNotEmpty(keys)){
             objects = new Object[keys.length];
@@ -39,6 +54,6 @@ public class ConfigFacade {
 
         }
         String format = StrUtil.indexedFormat(pattern, objects);
-        throw new SocialBusinessException(format);
+        return format;
     }
 }

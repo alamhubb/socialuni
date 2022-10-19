@@ -17,10 +17,11 @@ public class ErrorMsg {
     public static final String serviceName = "清池app客服";
     public static final String service = "有疑问请联系客服";
     public static final String illegalWordMsg = "为营造干净的交友环境，禁止发布包含疑似违规的相关内容，您发布的内容中包含疑似违规的敏感词集合：<{0}>，请求改后重试，" + ErrorMsg.service;;
-    public static final String service_qq_account = "客服qq：491369310";
+//    public static final String service_qq_account = "客服qq：491369310";
+    public static final String service_qq_account = "客服qq：{0}";
     public static final String CONTACT_SERVICE = "有疑问请联系" + ErrorMsg.service_qq_account;
 
-    public static final String errorCode605ContactServiceValue = "账号被封禁，{0}天内解封，" + CONTACT_SERVICE;
+    public static final String errorCode605ContactServiceValue = "账号被封禁，{0}天内解封，" ;
     public static final String errorCode604SystemKey = "604系统异常提示";
 //    public static final String errorCode604SystemMsg = "系统出错，请联系客服微信或qq:491369310";
     public static final String successMsg = "请求成功";
