@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.community.dev.entity.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,7 +27,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface CommentRepository extends CommentApi, JpaRepository<SocialuniCommentDO, Integer> {
+public interface CommentRepository extends CommentInterface, JpaRepository<SocialuniCommentDO, Integer> {
     SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
 
     SocialuniCommentModel findOneByUnionId(Integer id);

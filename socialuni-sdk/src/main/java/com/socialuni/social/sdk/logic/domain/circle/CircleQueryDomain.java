@@ -5,7 +5,7 @@ import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class CircleQueryDomain {
     @Resource
-    SocialuniTagTypeApi tagTypeRepository;
+    SocialuniTagTypeInterface tagTypeRepository;
     @Resource
     com.socialuni.social.sdk.dao.store.SocialuniCircleRedis SocialuniCircleRedis;
 

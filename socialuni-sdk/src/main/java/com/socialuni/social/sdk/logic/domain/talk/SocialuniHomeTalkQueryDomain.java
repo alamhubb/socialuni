@@ -11,10 +11,10 @@ import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.user.sdk.api.SocialuniUserExpandApi;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
-import com.socialuni.social.community.sdk.api.TagApi;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserExpandInterface;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;
@@ -42,17 +42,17 @@ public class SocialuniHomeTalkQueryDomain {
     @Resource
     private SocialFollowUserTalksQueryEntity socialFollowUserTalksQueryEntity;
     @Resource
-    private SocialCircleApi socialCircleApi;
+    private SocialCircleInterface socialCircleApi;
     @Resource
     private SocialTagRedis socialTagRedis;
     @Resource
-    TagApi tagApi;
+    TagInterface tagApi;
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private TalkQueryStore talkQueryStore;
     @Resource
-    private SocialuniUserExpandApi socialuniUserExpandApi;
+    private SocialuniUserExpandInterface socialuniUserExpandApi;
 
     public List<SocialuniTalkRO> queryStickTalks() {
         List<?  extends SocialuniTalkModel>  list = talkApi.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);

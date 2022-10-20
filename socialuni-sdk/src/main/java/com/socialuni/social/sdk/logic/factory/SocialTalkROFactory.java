@@ -10,8 +10,8 @@ import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
-import com.socialuni.social.community.sdk.api.CommentApi;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.sdk.dao.repository.community.SocialTalkCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -44,11 +44,11 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class SocialTalkROFactory {
-    private static CommentApi commentApi;
+    private static CommentInterface commentApi;
     private static SocialTagRedis socialTagRedis;
     private static CommentDao commentDao;
     private static HugRedis hugRedis;
-    private static SocialCircleApi socialCircleApi;
+    private static SocialCircleInterface socialCircleApi;
     private static SocialTalkCircleRepository socialTalkCircleRepository;
 
     @Resource
@@ -62,7 +62,7 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setCommentApi(CommentApi commentApi) {
+    public void setCommentApi(CommentInterface commentApi) {
         SocialTalkROFactory.commentApi = commentApi;
     }
 
@@ -72,7 +72,7 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setSocialCircleApi(SocialCircleApi socialCircleApi) {
+    public void setSocialCircleApi(SocialCircleInterface socialCircleApi) {
         SocialTalkROFactory.socialCircleApi = socialCircleApi;
     }
 

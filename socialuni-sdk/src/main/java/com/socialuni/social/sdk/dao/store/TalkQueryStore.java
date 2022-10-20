@@ -8,7 +8,7 @@ import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
@@ -30,7 +30,7 @@ import java.util.List;
 @Slf4j
 public class TalkQueryStore {
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private SocialuniTalkDORedis talkRedis;
     @Resource

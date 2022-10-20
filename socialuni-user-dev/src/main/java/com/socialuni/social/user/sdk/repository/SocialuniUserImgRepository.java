@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SocialuniUserImgRepository extends SocialuniUserImgApi, JpaRepository<SocialuniUserImgDo, Integer> {
+public interface SocialuniUserImgRepository extends SocialuniUserImgInterface, JpaRepository<SocialuniUserImgDo, Integer> {
     @Cacheable(cacheNames = "getUserImgByUnionId", key = "#unionId")
     SocialuniUserImgModel findOneByUnionId(Integer unionId);
 

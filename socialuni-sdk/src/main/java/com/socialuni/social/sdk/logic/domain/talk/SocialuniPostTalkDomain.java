@@ -3,9 +3,9 @@ package com.socialuni.social.sdk.logic.domain.talk;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
-import com.socialuni.social.community.sdk.api.TagApi;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkOperateType;
@@ -46,18 +46,18 @@ import java.util.List;
 @Component
 public class SocialuniPostTalkDomain {
     @Resource
-    TalkApi talkApi;
+    TalkInterface talkApi;
     @Resource
     TagService tagService;
 
     @Resource
-    TagApi tagApi;
+    TagInterface tagApi;
     @Resource
     SocialuniTalkDORedis talkRedis;
     @Resource
     TalkTagRepository talkTagRepository;
     @Resource
-    SocialCircleApi socialCircleApi;
+    SocialCircleInterface socialCircleApi;
     @Resource
     SocialTalkCreateManage socialTalkCreateManage;
     @Resource

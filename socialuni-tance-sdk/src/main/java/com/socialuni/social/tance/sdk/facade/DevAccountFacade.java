@@ -1,14 +1,14 @@
 package com.socialuni.social.tance.sdk.facade;
 
-import com.socialuni.social.tance.sdk.api.DevTokenApi;
+import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.common.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import org.apache.commons.lang3.StringUtils;
@@ -24,22 +24,22 @@ public class DevAccountFacade {
 //    public static final String devAccountKey = "devAccount";
 //    public static final String appGenderTypeKey = "appGenderType";
 
-    private static DevAccountApi devAccountApi;
-    private static DevAccountProviderApi devAccountProviderApi;
-    private static DevTokenApi devTokenApi;
+    private static DevAccountInterface devAccountApi;
+    private static DevAccountProviderInterface devAccountProviderApi;
+    private static DevTokenInterface devTokenApi;
 
     @Resource
-    public void setDevTokenRepository(DevTokenApi devTokenApi) {
+    public void setDevTokenRepository(DevTokenInterface devTokenApi) {
         DevAccountFacade.devTokenApi = devTokenApi;
     }
 
     @Autowired
-    public void setDevAccountRepository(DevAccountApi devAccountApi) {
+    public void setDevAccountRepository(DevAccountInterface devAccountApi) {
         DevAccountFacade.devAccountApi = devAccountApi;
     }
 
     @Resource
-    public void setDevAccountProviderRepository(DevAccountProviderApi devAccountProviderApi) {
+    public void setDevAccountProviderRepository(DevAccountProviderInterface devAccountProviderApi) {
         DevAccountFacade.devAccountProviderApi = devAccountProviderApi;
     }
 

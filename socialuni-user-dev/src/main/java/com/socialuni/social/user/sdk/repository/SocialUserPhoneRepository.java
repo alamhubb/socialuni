@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.constant.CommonRedisKey;
-import com.socialuni.social.user.sdk.api.SocialUserPhoneApi;
+import com.socialuni.social.user.sdk.api.SocialUserPhoneInterface;
 import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import org.springframework.cache.annotation.CacheEvict;
@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SocialUserPhoneRepository extends SocialUserPhoneApi,JpaRepository<SocialUserPhoneDo, Integer> {
+public interface SocialUserPhoneRepository extends SocialUserPhoneInterface,JpaRepository<SocialUserPhoneDo, Integer> {
     SocialUserPhoneModel findByPhoneNumAndStatus(String phoneNum, String status);
 
     SocialUserPhoneModel findByPhoneNumAndDevId(String phoneNum, Integer devId);

@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since 1.0.0
  */
-public interface DevAccountApi {
+public interface DevAccountInterface {
 //    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
     DevAccountModel findOneById(Integer id);
 

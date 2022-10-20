@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
-import com.socialuni.social.user.sdk.api.SocialuniUserSocialCoinApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserSocialCoinInterface;
 import com.socialuni.social.user.sdk.model.SocialuniUserSocialCoinModel;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,10 +11,10 @@ import javax.annotation.Resource;
 @Component
 @Slf4j
 public class SocialuniUserSocialCoinDOUtil {
-    static SocialuniUserSocialCoinApi socialuniUserSocialCoinApi;
+    static SocialuniUserSocialCoinInterface socialuniUserSocialCoinApi;
 
     @Resource
-    public void setSocialuniUserSocialCoinRepository(SocialuniUserSocialCoinApi socialuniUserSocialCoinApi) {
+    public void setSocialuniUserSocialCoinRepository(SocialuniUserSocialCoinInterface socialuniUserSocialCoinApi) {
         SocialuniUserSocialCoinDOUtil.socialuniUserSocialCoinApi = socialuniUserSocialCoinApi;
     }
 

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.store;
 
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.logic.factory.CommentFactory;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
@@ -14,7 +14,7 @@ import java.util.Date;
 @Component
 public class CommentStore {
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
     @Resource
     private CommentFactory commentFactory;
 

@@ -4,7 +4,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.user.img.UserImgDOFactory;
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class SocialAddUserImgDomain {
     @Resource
-    SocialuniUserImgApi userImgRepository;
+    SocialuniUserImgInterface userImgRepository;
     @Resource
     UserApi userApi;
 

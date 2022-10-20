@@ -4,7 +4,7 @@ import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.enumeration.CommonStatus;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
@@ -16,7 +16,7 @@ import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.repository.*;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
@@ -53,9 +53,9 @@ public class KeywordsQueryController {
     private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
 
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
     @Resource
     private MessageRepository messageRepository;
     @Resource

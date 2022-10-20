@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.utils;
 
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +10,10 @@ import javax.annotation.Resource;
 
 @Component
 public class SocialuniCircleDOUtil {
-    private static SocialCircleApi socialCircleApi;
+    private static SocialCircleInterface socialCircleApi;
 
     @Resource
-    public void setSocialCircleRepository(SocialCircleApi socialCircleApi) {
+    public void setSocialCircleRepository(SocialCircleInterface socialCircleApi) {
         SocialuniCircleDOUtil.socialCircleApi = socialCircleApi;
     }
 

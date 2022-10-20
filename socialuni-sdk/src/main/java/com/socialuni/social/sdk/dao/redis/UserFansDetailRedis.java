@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.redis;
 
 import com.socialuni.social.common.constant.CommonRedisKey;
-import com.socialuni.social.user.sdk.api.SocialUserFansDetailApi;
+import com.socialuni.social.user.sdk.api.SocialUserFansDetailInterface;
 import com.socialuni.social.user.sdk.model.SocialUserFansDetailModel;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 @Component
 public class UserFansDetailRedis {
     @Resource
-    SocialUserFansDetailApi socialUserFansDetailApi;
+    SocialUserFansDetailInterface socialUserFansDetailApi;
 
     @Cacheable(cacheNames = CommonRedisKey.findUserFansDetailByUserId, unless = "#result == null")
     public SocialUserFansDetailModel findUserFansDetailByUserId(Integer userId) {

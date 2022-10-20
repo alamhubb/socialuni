@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.redis;
 
 import com.socialuni.social.common.constant.CommonRedisKey;
 import com.socialuni.social.community.sdk.model.HugModel;
-import com.socialuni.social.community.sdk.api.HugApi;
+import com.socialuni.social.community.sdk.api.HugInterface;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 @Component
 public class HugRedis {
     @Resource
-    HugApi hugApi;
+    HugInterface hugApi;
 
     //关注后用户缓存修改，一人+粉丝，一人+关注
     @Caching(

@@ -4,7 +4,7 @@ import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagDOFactory;
-import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 @Component
 public class SocialTagManage {
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
 
     public TagModel createTagDO(TagAddQO tagAddQO, Integer mineUserId) {
         TagModel tagModel = SocialTagDOFactory.toTagDO(tagAddQO.getTagName(), tagAddQO.getDescription(), mineUserId);

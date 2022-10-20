@@ -3,7 +3,7 @@ package com.socialuni.social.tance.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.entity.DevAccountProviderDo;
-import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DevAccountProviderRepository extends JpaRepository<DevAccountProviderDo, Integer>, DevAccountProviderApi {
+public interface DevAccountProviderRepository extends JpaRepository<DevAccountProviderDo, Integer>, DevAccountProviderInterface {
 
     //    @Cacheable(cacheNames = "getDevAccountByAppIdAndProvider")
 //    Optional<DevAccountProviderDO> findFirstByAppId(String appId);

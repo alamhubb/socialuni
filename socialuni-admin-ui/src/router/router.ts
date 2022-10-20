@@ -27,6 +27,12 @@ export const menuRoutes = [
     meta: { title: RouterName.configManage, icon: 'strengthMonitoring', isOpen: true }
   },
   {
+    path: '/homeSwiperManage',
+    name: RouterName.homeSwiperManage,
+    component: () => import('@/views/homeSwiperManage/homeSwiperManage.vue'),
+    meta: { title: RouterName.homeSwiperManage, icon: 'strengthMonitoring', isOpen: true }
+  },
+  {
     path: '/keywordManage',
     name: RouterName.keywordsManage,
     component: () => import('@/views/keywordManage/keywordManage.vue'),

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.domain.tag;
 
 import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 @Service
 public class SoicialTagAddDomain {
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
     @Resource
     private SocialTagManage socialTagManage;
 

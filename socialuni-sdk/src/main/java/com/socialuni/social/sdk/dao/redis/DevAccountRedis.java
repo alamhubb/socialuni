@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.redis;
 
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 @Component
 public class DevAccountRedis {
     @Resource
-    private DevAccountApi devAccountApi;
+    private DevAccountInterface devAccountApi;
 
     @Caching(
             put = {

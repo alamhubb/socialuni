@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
-import com.socialuni.social.tance.sdk.api.DevSocialuniIdApi;
+import com.socialuni.social.tance.sdk.api.DevSocialuniIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
@@ -38,7 +38,7 @@ public class MyApplicationRunner implements ApplicationRunner {
     DevAccountEntity devAccountEntity;
 
     @Resource
-    DevSocialuniIdApi devSocialuniIdApi;
+    DevSocialuniIdInterface devSocialuniIdApi;
 
 
     @Override

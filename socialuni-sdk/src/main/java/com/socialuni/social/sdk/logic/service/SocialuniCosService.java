@@ -1,8 +1,6 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
 import com.socialuni.social.sdk.feignAPI.openData.SocialuniCosAPI;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.logic.platform.tencent.TencentCloudAPI;

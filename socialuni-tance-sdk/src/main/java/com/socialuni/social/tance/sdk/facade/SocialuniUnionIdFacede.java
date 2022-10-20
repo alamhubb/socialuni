@@ -3,7 +3,7 @@ package com.socialuni.social.tance.sdk.facade;
 import cn.hutool.core.util.ObjectUtil;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.utils.UUIDUtil;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +23,10 @@ import java.util.regex.Pattern;
 @Component
 @Slf4j
 public class SocialuniUnionIdFacede {
-    private static SocialuniUnionIdApi socialuniUnionIdApi;
+    private static SocialuniUnionIdInterface socialuniUnionIdApi;
 
     @Resource
-    public void setSocialuniUnionIdCache(SocialuniUnionIdApi socialuniUnionIdApi) {
+    public void setSocialuniUnionIdCache(SocialuniUnionIdInterface socialuniUnionIdApi) {
         SocialuniUnionIdFacede.socialuniUnionIdApi = socialuniUnionIdApi;
     }
 

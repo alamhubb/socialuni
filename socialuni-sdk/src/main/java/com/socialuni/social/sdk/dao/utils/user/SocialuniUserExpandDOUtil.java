@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
 import com.socialuni.social.user.sdk.model.SocialuniUserExpandModel;
-import com.socialuni.social.user.sdk.api.SocialuniUserExpandApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserExpandInterface;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -13,10 +13,10 @@ import javax.annotation.Resource;
 @Slf4j
 public class SocialuniUserExpandDOUtil {
 
-    static SocialuniUserExpandApi socialuniUserExpandApi;
+    static SocialuniUserExpandInterface socialuniUserExpandApi;
 
     @Resource
-    public void setSocialuniUserExpandRepository(SocialuniUserExpandApi socialuniUserExpandApi) {
+    public void setSocialuniUserExpandRepository(SocialuniUserExpandInterface socialuniUserExpandApi) {
         SocialuniUserExpandDOUtil.socialuniUserExpandApi = socialuniUserExpandApi;
     }
 

@@ -6,7 +6,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class TencentCloudCosService {
     @Resource
     TencentCosAuditRecordRepository tencentCosAuditRecordRepository;
     @Resource
-    SocialuniUserImgApi userImgRepository;
+    SocialuniUserImgInterface userImgRepository;
     @Resource
     TalkImgRepository talkImgRepository;
 

@@ -4,7 +4,7 @@ import com.socialuni.social.common.constant.SocialSystemConst;
 import com.socialuni.social.common.utils.RequestUtil;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
-import com.socialuni.social.tance.sdk.api.ConfigApi;
+import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigApi {
+public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigInterface {
     public static final Integer DEFAULT_DEV_KEY = 0;
 
     List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc(Integer devId, Integer status);

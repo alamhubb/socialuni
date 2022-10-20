@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.api;
 
 import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 
-public interface SocialUserPhoneApi {
+public interface SocialUserPhoneInterface {
     SocialUserPhoneModel findByPhoneNumAndStatus(String phoneNum, String status);
 
     SocialUserPhoneModel findByPhoneNumAndDevId(String phoneNum, Integer devId);

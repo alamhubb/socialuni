@@ -6,7 +6,7 @@ import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 
 import java.util.List;
 
-public interface DevAccountProviderApi {
+public interface DevAccountProviderInterface {
 
 
     DevAccountProviderModler savePut(DevAccountProviderModler devAccountProviderModler);

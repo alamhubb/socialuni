@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.logic.domain.user;
 
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.model.SocialuniUserExpandModel;
-import com.socialuni.social.user.sdk.api.SocialuniUserExpandApi;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserExpandInterface;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniSchoolCheck;
@@ -26,15 +26,15 @@ public class SocialuniEditExpandDomain {
     UserApi userApi;
 
     @Resource
-    SocialCircleApi socialCircleApi;
+    SocialCircleInterface socialCircleApi;
     @Resource
-    SocialuniTagTypeApi tagTypeRepository;
+    SocialuniTagTypeInterface tagTypeRepository;
     @Resource
     SocialuniCircleRedis socialCircleRedis;
     @Resource
     SocialuniSchoolCheck socialuniSchoolCheck;
     @Resource
-    SocialuniUserExpandApi socialuniUserExpandApi;
+    SocialuniUserExpandInterface socialuniUserExpandApi;
 
     public SocialuniMineUserDetailRO editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
         String schoolName = socialMineUserDetailQO.getSchoolName();

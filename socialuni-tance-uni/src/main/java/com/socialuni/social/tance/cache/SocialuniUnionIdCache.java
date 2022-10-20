@@ -3,6 +3,7 @@ package com.socialuni.social.tance.cache;
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.entity.SocialuniUnionIdDo;
 import com.socialuni.social.tance.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -20,7 +21,7 @@ import javax.annotation.Resource;
  */
 @Component
 @Slf4j
-public class SocialuniUnionIdCache implements com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi {
+public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     private static SocialuniUnionIdRepository uniContentUnionIdRepository;
 
     @Resource

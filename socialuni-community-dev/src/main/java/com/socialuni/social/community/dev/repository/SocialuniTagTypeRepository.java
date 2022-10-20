@@ -3,7 +3,7 @@ package com.socialuni.social.community.dev.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.community.dev.entity.SocialuniTagTypeDO;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface SocialuniTagTypeRepository extends SocialuniTagTypeApi, JpaRepository<SocialuniTagTypeDO, Integer> {
+public interface SocialuniTagTypeRepository extends SocialuniTagTypeInterface, JpaRepository<SocialuniTagTypeDO, Integer> {
     @Caching(
             put = {
                     @CachePut(cacheNames = "tagTypeByName", key = "#tagTypeDO.name"),

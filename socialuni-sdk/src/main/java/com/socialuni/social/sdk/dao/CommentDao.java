@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 public class CommentDao {
     @Resource
-    CommentApi commentApi;
+    CommentInterface commentApi;
 
     public List<?  extends SocialuniCommentModel> queryTalkComments(Integer talkId) {
         return commentApi.findTop5ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);

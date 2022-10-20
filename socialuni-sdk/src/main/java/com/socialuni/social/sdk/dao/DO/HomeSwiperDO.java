@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
+import com.socialuni.social.sdk.model.model.SocialuniHomeSwiperModel;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.Date;
  * 全局配置表
  */
 @Table(name = "s_home_swiper")
-public class HomeSwiperDO  {
+public class HomeSwiperDO extends SocialuniHomeSwiperModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

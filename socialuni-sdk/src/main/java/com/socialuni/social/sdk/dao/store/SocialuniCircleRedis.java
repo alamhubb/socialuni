@@ -4,12 +4,12 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.logic.factory.community.SociaCircleTypeROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -21,9 +21,9 @@ import java.util.List;
 @Component
 public class SocialuniCircleRedis {
     @Resource
-    private SocialuniTagTypeApi tagTypeRepository;
+    private SocialuniTagTypeInterface tagTypeRepository;
     @Resource
-    private SocialCircleApi socialCircleApi;
+    private SocialCircleInterface socialCircleApi;
 
     /**
      * 查询热门下包含子节点，和所有省份不包含子节点

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * @date 2022/10/15 22:47
  * @since 1.0
  */
-public interface ConfigApi {
+public interface ConfigInterface {
     // 该方法属于特有的方法提供。
 //    List<AppConfigDO> findAllByDevIdAndStatusOrderByCreateTimeDesc( Integer status);
 

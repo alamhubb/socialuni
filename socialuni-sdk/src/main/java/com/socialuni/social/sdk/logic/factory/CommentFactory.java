@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Component
 public class CommentFactory {
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
 
     /***
      *

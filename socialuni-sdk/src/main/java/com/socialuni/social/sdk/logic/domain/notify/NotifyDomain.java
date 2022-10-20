@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.notify;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
@@ -13,7 +13,6 @@ import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.TalkApi;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
@@ -27,7 +26,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,7 +34,7 @@ import java.util.stream.Collectors;
 public class NotifyDomain {
 
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
 
     @Resource
     private NotifyRepository notifyRepository;

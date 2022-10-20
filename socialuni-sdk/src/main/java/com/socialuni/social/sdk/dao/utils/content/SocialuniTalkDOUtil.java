@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.utils.content;
 
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Component
 public class SocialuniTalkDOUtil {
 
-    private static TalkApi talkApi;
+    private static TalkInterface talkApi;
     private static SocialuniTalkDORedis socialuniTalkDORedis;
 
     @Resource
@@ -25,7 +25,7 @@ public class SocialuniTalkDOUtil {
     }
 
     @Resource
-    public void setTalkRepository(TalkApi talkApi) {
+    public void setTalkRepository(TalkInterface talkApi) {
         SocialuniTalkDOUtil.talkApi = talkApi;
     }
 

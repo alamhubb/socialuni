@@ -4,7 +4,7 @@ import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.user.sdk.api.SocialUserPhoneApi;
+import com.socialuni.social.user.sdk.api.SocialUserPhoneInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @Component
 public class SocialUserPhoneManage {
     @Resource
-    SocialUserPhoneApi socialUserPhoneApi;
+    SocialUserPhoneInterface socialUserPhoneApi;
     @Resource
     SocialUserPhoneRedis socialUserPhoneRedis;
 

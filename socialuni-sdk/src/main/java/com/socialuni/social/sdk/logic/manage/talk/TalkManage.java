@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.manage.talk;
 
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -20,7 +20,7 @@ public class TalkManage {
     public final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private SocialuniTalkDORedis talkRedis;
     @Resource

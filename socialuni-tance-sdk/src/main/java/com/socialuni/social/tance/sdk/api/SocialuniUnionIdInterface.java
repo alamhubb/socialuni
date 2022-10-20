@@ -9,7 +9,7 @@ import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
  * @date 2022/10/9 15:51
  * @since 1.0
  */
-public interface SocialuniUnionIdApi {
+public interface SocialuniUnionIdInterface {
 
     SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO);
 

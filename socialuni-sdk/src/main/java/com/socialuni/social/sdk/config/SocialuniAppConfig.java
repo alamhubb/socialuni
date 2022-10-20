@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.config;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.socialuni.social.tance.sdk.api.ConfigApi;
+import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class SocialuniAppConfig {
      * @return
      */
     public static SocialuniAppConfigBO getAppConfig() {
-        ConfigApi configApi = SpringUtil.getBean(ConfigApi.class);
+        ConfigInterface configApi = SpringUtil.getBean(ConfigInterface.class);
 //        String devId = SocialuniSystemConst.getAppSocialuniId();
         Integer devId = DevAccountFacade.getDevIdNotNull();
         SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
@@ -41,7 +41,7 @@ public class SocialuniAppConfig {
      * @return
      */
     public static SocialuniAppMoreConfigBO getAppMoreConfig() {
-        ConfigApi configApi = SpringUtil.getBean(ConfigApi.class);
+        ConfigInterface configApi = SpringUtil.getBean(ConfigInterface.class);
 
         SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = new SocialuniAppMoreConfigBO();
         socialuniAppMoreConfigBO.setServiceWeChat(configApi.getString( "serviceWeChat"));

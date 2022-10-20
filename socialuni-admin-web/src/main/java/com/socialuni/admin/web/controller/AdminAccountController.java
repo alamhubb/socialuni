@@ -2,14 +2,14 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.service.AdminAccountService;
-import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.common.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,11 +26,11 @@ public class AdminAccountController {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private DevAccountApi devAccountApi;
+    private DevAccountInterface devAccountApi;
     @Resource
-    private DevAccountProviderApi devAccountProviderApi;
+    private DevAccountProviderInterface devAccountProviderApi;
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
     @Resource
     private AdminAccountService adminAccountService;
 

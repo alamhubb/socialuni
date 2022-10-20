@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.community.sdk.api.SocialCircleApi;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class SocialuniCircleService {
     @Resource
-    private SocialCircleApi socialCircleApi;
+    private SocialCircleInterface socialCircleApi;
     @Resource
     private SocialuniCircleRedis socialCircleRedis;
 

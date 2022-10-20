@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROF
 import com.socialuni.social.sdk.model.QO.user.SocialUserImgDeleteQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.Date;
 @Slf4j
 public class SocialDeleteUserImgDomain {
     @Resource
-    SocialuniUserImgApi userImgRepository;
+    SocialuniUserImgInterface userImgRepository;
 
     public SocialuniMineUserDetailRO deleteUserImg(SocialUserImgDeleteQO img, SocialuniUserModel mineUser) {
         SocialuniUserImgModel userImg = userImgRepository.getUserImgByUserIdAndUnionId(mineUser.getUnionId(), img.getUserImgId());

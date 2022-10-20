@@ -3,12 +3,11 @@ package com.socialuni.social.tance.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.entity.DevAccountDo;
 import com.socialuni.social.tance.repository.DevAccountRepository;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +20,7 @@ import java.util.Optional;
  */
 @RequestMapping("devAccount")
 @Component("devAccountApi") //
-public class SocialuniDevAccountController  implements DevAccountApi {
+public class SocialuniDevAccountController  implements DevAccountInterface {
     @Autowired
     private DevAccountRepository devAccountRepository;
 

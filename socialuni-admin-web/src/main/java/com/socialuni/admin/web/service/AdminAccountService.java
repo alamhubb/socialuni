@@ -6,8 +6,8 @@ import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
-import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
@@ -18,7 +18,7 @@ import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
-import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.common.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -34,11 +34,11 @@ public class AdminAccountService {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private DevAccountApi devAccountApi;
+    private DevAccountInterface devAccountApi;
     @Resource
-    private DevAccountProviderApi devAccountProviderApi;
+    private DevAccountProviderInterface devAccountProviderApi;
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
     @Resource
     private SocialTagManage socialTagManage;
     @Transactional

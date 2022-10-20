@@ -5,7 +5,7 @@ import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 
 import java.util.List;
 
-public interface SocialuniUserImgApi {
+public interface SocialuniUserImgInterface {
     SocialuniUserImgModel findOneByUnionId(Integer unionId);
 
     List<Integer> findUnionIdTop6ByUserIdAndStatusInOrderByCreateTimeDesc(Integer userId, List<String> status);

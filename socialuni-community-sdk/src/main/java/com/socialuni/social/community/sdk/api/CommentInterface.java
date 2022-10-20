@@ -15,7 +15,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since TODO[起始版本号]
  */
-public interface CommentApi   {
+public interface CommentInterface {
     SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
 
     SocialuniCommentModel findOneByUnionId(Integer id);

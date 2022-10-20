@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @Component
 public class SocialuniUserImgDOUtil {
-    private static SocialuniUserImgApi userImgRepository;
+    private static SocialuniUserImgInterface userImgRepository;
 
     @Resource
-    public void setUserImgRepository(SocialuniUserImgApi userImgRepository) {
+    public void setUserImgRepository(SocialuniUserImgInterface userImgRepository) {
         SocialuniUserImgDOUtil.userImgRepository = userImgRepository;
     }
 

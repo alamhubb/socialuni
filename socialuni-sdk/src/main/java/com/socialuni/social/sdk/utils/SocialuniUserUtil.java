@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.api.SocialUserViolationApi;
+import com.socialuni.social.user.sdk.api.SocialUserViolationInterface;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
@@ -31,7 +31,7 @@ public class SocialuniUserUtil {
     private static SocialUserIdentityAuthRepository socialUserIdentityAuthRepository;
     private static SocialUserPhoneRedis socialUserPhoneRedis;
     private static SocialUserAccountRepository socialUserAccountRepository;
-    private static SocialUserViolationApi socialUserViolationApi;
+    private static SocialUserViolationInterface socialUserViolationApi;
 
     private static SocialRequestUserConfig socialRequestUserConfig;
 
@@ -61,7 +61,7 @@ public class SocialuniUserUtil {
     }
 
     @Resource
-    public void setSocialUserViolationRepository(SocialUserViolationApi socialUserViolationApi) {
+    public void setSocialUserViolationRepository(SocialUserViolationInterface socialUserViolationApi) {
         SocialuniUserUtil.socialUserViolationApi = socialUserViolationApi;
     }
 

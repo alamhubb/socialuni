@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.check;
 
 import com.socialuni.social.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class SocialuniSchoolCheck {
     @Resource
-    SocialuniTagTypeApi socialuniTagTypeApi;
+    SocialuniTagTypeInterface socialuniTagTypeApi;
     @Resource
     SocialuniCircleRedis socialCircleRedis;
 

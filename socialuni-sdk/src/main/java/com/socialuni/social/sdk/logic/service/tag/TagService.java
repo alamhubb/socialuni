@@ -5,8 +5,8 @@ import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.TagApi;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.utils.SocialTagStore;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
@@ -29,11 +29,11 @@ public class TagService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
     @Resource
     private SocialTagStore tagQueryRepository;
     @Resource
-    private SocialuniTagTypeApi tagTypeRepository;
+    private SocialuniTagTypeInterface tagTypeRepository;
 
     @Resource
     private SocialTagRedis socialTagRedis;

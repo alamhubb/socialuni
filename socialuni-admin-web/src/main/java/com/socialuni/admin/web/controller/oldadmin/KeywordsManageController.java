@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +43,7 @@ public class KeywordsManageController {
     private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
 
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private TalkQueryStore talkQueryStore;
     @Resource

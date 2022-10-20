@@ -4,8 +4,8 @@ import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.domain.notify.NotifyDomain;
@@ -38,9 +38,9 @@ public class SocialuniCommentPostDomain {
     @Resource
     private SocialPostCommentEntity socialPostCommentEntity;
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private SocialTagRedis socialTagRedis;
 

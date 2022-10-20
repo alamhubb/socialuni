@@ -9,9 +9,9 @@ import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.user.sdk.api.SocialuniUserImgApi;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.repository.MessageRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -25,8 +25,8 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniContentDOUtil<T> {
     private static MessageRepository messageRepository;
-    private static SocialuniUserImgApi userImgRepository;
-    private static CommentApi commentApi;
+    private static SocialuniUserImgInterface userImgRepository;
+    private static CommentInterface commentApi;
     private static SocialuniTalkDORedis talkRedis;
     private static TalkImgRepository talkImgRepository;
 
@@ -36,12 +36,12 @@ public class SocialuniContentDOUtil<T> {
     }
 
     @Resource
-    public void setUserImgRepository(SocialuniUserImgApi userImgRepository) {
+    public void setUserImgRepository(SocialuniUserImgInterface userImgRepository) {
         SocialuniContentDOUtil.userImgRepository = userImgRepository;
     }
 
     @Resource
-    public void setCommentRepository(CommentApi commentApi) {
+    public void setCommentRepository(CommentInterface commentApi) {
         SocialuniContentDOUtil.commentApi = commentApi;
     }
 

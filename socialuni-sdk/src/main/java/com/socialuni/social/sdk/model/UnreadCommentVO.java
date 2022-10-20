@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.model;
 
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class UnreadCommentVO {
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
     //如果这个评论 有parent，就代表已经是一个子评论，就不用把他设置为parent而是用它的parentId，他是否有parent
 
     private String id;

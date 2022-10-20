@@ -6,9 +6,9 @@ import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
@@ -25,9 +25,9 @@ import java.util.List;
  */
 @Component
 public class SocialUnreadNotifyVOFactory {
-    private static CommentApi commentApi;
+    private static CommentInterface commentApi;
     private static TalkImgRepository talkImgRepository;
-    private static TalkApi talkApi;
+    private static TalkInterface talkApi;
 
     @Resource
     public void setTalkImgRepository(TalkImgRepository talkImgRepository) {
@@ -35,12 +35,12 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     @Resource
-    public void setCommentRepository(CommentApi commentApi) {
+    public void setCommentRepository(CommentInterface commentApi) {
         SocialUnreadNotifyVOFactory.commentApi = commentApi;
     }
 
     @Resource
-    public void setTalkRepository(TalkApi talkApi) {
+    public void setTalkRepository(TalkInterface talkApi) {
         SocialUnreadNotifyVOFactory.talkApi = talkApi;
     }
 

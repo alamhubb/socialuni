@@ -5,7 +5,7 @@ import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.RedisKeysUtil;
 import com.socialuni.social.common.constant.CommonRedisKey;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -22,7 +22,7 @@ public class SocialuniTalkDORedis {
     @Resource
     RedisUtil redisUtil;
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private TalkMapper talkMapper;
 

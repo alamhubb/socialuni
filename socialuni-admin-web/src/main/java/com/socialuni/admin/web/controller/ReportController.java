@@ -10,11 +10,11 @@ import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
@@ -47,7 +47,7 @@ public class ReportController {
 //    private NotifyService notifyService;
 
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private KeywordsRepository keywordsRepository;
     @Resource
@@ -118,7 +118,7 @@ public class ReportController {
     @Resource
     TalkQueryStore talkQueryStore;
     @Resource
-    CommentApi commentApi;
+    CommentInterface commentApi;
     @Resource
     AdminUserService adminUserService;
 

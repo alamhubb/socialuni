@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.service.user;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
@@ -41,7 +41,7 @@ public class SocialuniUserService {
     @Resource
     UniUserRegistryDomain socialuniUserRegistryDomain;
     @Resource
-    SocialuniUnionIdApi uniContentUnionIdRepository;
+    SocialuniUnionIdInterface uniContentUnionIdRepository;
     @Resource
     SocialuniUserAPI socialuniUserAPI;
 

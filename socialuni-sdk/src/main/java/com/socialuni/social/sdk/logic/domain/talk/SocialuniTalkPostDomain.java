@@ -5,8 +5,8 @@ import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.community.sdk.api.TagApi;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
@@ -28,9 +28,9 @@ public class SocialuniTalkPostDomain {
     @Resource
     SocialuniPostTalkDomain socialTalkPostDomain;
     @Resource
-    TagApi tagApi;
+    TagInterface tagApi;
     @Resource
-    TalkApi talkApi;
+    TalkInterface talkApi;
 
     public SocialuniTalkRO postTalk(SocialuniTalkPostQO talkPostQO) {
         SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();

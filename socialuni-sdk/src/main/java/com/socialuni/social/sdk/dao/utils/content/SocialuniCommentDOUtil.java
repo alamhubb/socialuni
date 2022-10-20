@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.dao.utils.content;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
@@ -15,10 +15,10 @@ import java.util.Objects;
 
 @Component
 public class SocialuniCommentDOUtil {
-    private static CommentApi commentApi;
+    private static CommentInterface commentApi;
 
     @Resource
-    public void setCommentRepository(CommentApi commentApi) {
+    public void setCommentRepository(CommentInterface commentApi) {
         SocialuniCommentDOUtil.commentApi = commentApi;
     }
 

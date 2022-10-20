@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Date;
 import java.util.List;
 
-public interface TalkApi  {
+public interface TalkInterface {
     SocialuniTalkModel findOneByUnionId(Integer talkUnionId);
 
     //清池使用的

@@ -2,7 +2,7 @@ package com.socialuni.social.community.dev.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.community.dev.entity.TagDO;
-import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.community.sdk.enumeration.TagRedisKey;
 import com.socialuni.social.community.sdk.model.TagModel;
 import org.springframework.cache.annotation.CachePut;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public interface TagRepository extends TagApi,JpaRepository<TagDO, Integer> {
+public interface TagRepository extends TagInterface,JpaRepository<TagDO, Integer> {
     TagDO findByIdAndStatus(Integer tagId, String status);
     default  List<TagModel> savePutAll(List<TagModel> tagModels){
         List<TagModel> list = new ArrayList<>();

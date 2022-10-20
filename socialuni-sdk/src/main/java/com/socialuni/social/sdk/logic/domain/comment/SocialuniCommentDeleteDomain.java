@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentDeleteQO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -26,7 +26,7 @@ import java.util.Optional;
 @Slf4j
 public class SocialuniCommentDeleteDomain {
     @Resource
-    private CommentApi commentApi;
+    private CommentInterface commentApi;
 
     /**
      * 删除动态操作，

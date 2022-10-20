@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.manage;
 
 
-import com.socialuni.social.tance.sdk.api.DevAccountProviderApi;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
@@ -14,9 +14,9 @@ import javax.annotation.Resource;
 @Service
 public class DevAccountManage {
     @Resource
-    DevAccountProviderApi devAccountProviderApi;
+    DevAccountProviderInterface devAccountProviderApi;
     @Resource
-    DevAccountApi devAccountApi;
+    DevAccountInterface devAccountApi;
 
     public DevAccountModel checkApplyAuthQO(OAuthUserInfoQO authVO) {
         DevAccountProviderModler devAccountProviderModler = devAccountProviderApi.findOneByAppIdAndMpType(authVO.getAppId(), authVO.getMpType());

@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.service;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.socialuni.social.tance.sdk.api.ConfigApi;
+import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @since 1.0
  */
 @Component
-public class ConfigService implements ConfigApi {
+public class ConfigService implements ConfigInterface {
 
     @Override
     public String getString( String key) {

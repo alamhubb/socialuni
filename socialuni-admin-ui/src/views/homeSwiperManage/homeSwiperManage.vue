@@ -20,11 +20,10 @@ import {Component, Vue} from 'vue-property-decorator'
 import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
 import ReportVO from '@/model/report/ReportVO'
-import SocialuniHomeAdminSwiperRO from "@/model/config/SocialuniHomeAdminSwiperRO";
 
 @Component
-export default class ConfigManageView extends Vue {
-  homeSwipers: SocialuniHomeAdminSwiperRO[] = []
+export default class HomeSwiperManageView extends Vue {
+  configs: ConfigVO[] = []
 
   created() {
     this.queryConfigs()

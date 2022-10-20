@@ -11,8 +11,8 @@ import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagTypeRO;
 import com.socialuni.social.community.sdk.enumeration.TagRedisKey;
-import com.socialuni.social.community.sdk.api.TagApi;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -24,9 +24,9 @@ import java.util.List;
 @Component
 public class SocialTagRedis {
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
     @Resource
-    private SocialuniTagTypeApi tagTypeRepository;
+    private SocialuniTagTypeInterface tagTypeRepository;
     @Resource
     private SocialTagStore socialTagStore;
 

@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.sdk.constant.AdminAppConfigConst;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.community.sdk.api.TagApi;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
@@ -22,11 +22,11 @@ import java.util.Optional;
 @Service
 public class DevAccountEntity {
     @Resource
-    private DevAccountApi devAccountApi;
+    private DevAccountInterface devAccountApi;
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private TagApi tagApi;
+    private TagInterface tagApi;
 
     public DevAccountModel createDevAccount(String phoneNum) {
         return this.createDevAccount(phoneNum, UUIDUtil.getUUID());

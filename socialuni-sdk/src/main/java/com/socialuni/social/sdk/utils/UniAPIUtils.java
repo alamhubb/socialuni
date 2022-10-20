@@ -3,8 +3,8 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.model.QO.ContentAddQO;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdApi;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentIdRO;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
@@ -25,17 +25,17 @@ import java.util.function.Function;
 @Slf4j
 public class UniAPIUtils {
     static SocialuniUserAPI socialuniUserAPI;
-    static SocialuniUnionIdApi uniContentUnionIdRepository;
+    static SocialuniUnionIdInterface uniContentUnionIdRepository;
 
-    static DevAccountApi devAccountApi;
+    static DevAccountInterface devAccountApi;
 
     @Autowired
-    public void setDevAccountRepository(DevAccountApi devAccountApi) {
+    public void setDevAccountRepository(DevAccountInterface devAccountApi) {
         UniAPIUtils.devAccountApi = devAccountApi;
     }
 
     @Resource
-    public void setUniContentUnionIdRepository(SocialuniUnionIdApi uniContentUnionIdRepository) {
+    public void setUniContentUnionIdRepository(SocialuniUnionIdInterface uniContentUnionIdRepository) {
         UniAPIUtils.uniContentUnionIdRepository = uniContentUnionIdRepository;
     }
 

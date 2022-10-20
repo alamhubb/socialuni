@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.entity.talk;
 
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.TalkApi;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 public class SocialFollowUserTalksQueryEntity {
     @Resource
-    private TalkApi talkApi;
+    private TalkInterface talkApi;
     @Resource
     private TalkQueryStore talkQueryStore;
 

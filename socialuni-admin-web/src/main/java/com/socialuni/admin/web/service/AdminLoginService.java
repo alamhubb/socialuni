@@ -2,13 +2,13 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevTokenModler;
-import com.socialuni.social.tance.sdk.api.DevTokenApi;
+import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
@@ -24,15 +24,15 @@ public class AdminLoginService {
     @Resource
     DevAuthCodeManage devAuthCodeManage;
     @Resource
-    DevAccountApi devAccountApi;
+    DevAccountInterface devAccountApi;
     @Resource
     DevAccountEntity devAccountEntity;
     @Resource
-    DevTokenApi devTokenApi;
+    DevTokenInterface devTokenApi;
 
     //秘钥登录
     @Transactional
-    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountApi.DevAccountQueryQO devAccountQueryQO) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
         DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
         if (devAccountModel == null) {
             throw new SocialBusinessException("秘钥错误");

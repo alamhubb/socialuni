@@ -4,7 +4,7 @@ import com.socialuni.admin.web.service.AdminLoginService;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.tance.sdk.api.DevAccountApi;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +29,7 @@ public class AdminLoginController {
 
     //秘钥登录
     @PostMapping("secretKeyLogin")
-    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(@RequestBody @Valid DevAccountApi.DevAccountQueryQO devAccountQueryQO) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(@RequestBody @Valid DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
         return adminLoginService.secretKeyLogin(devAccountQueryQO);
     }
 }

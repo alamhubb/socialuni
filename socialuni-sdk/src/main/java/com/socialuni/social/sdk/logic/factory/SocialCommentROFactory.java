@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.CommentApi;
+import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.logic.factory.RO.comment.SocialuniReplyCommentROFactory;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class SocialCommentROFactory {
-    private static CommentApi commentApi;
+    private static CommentInterface commentApi;
     private static CommentDao commentDao;
 
     @Resource
@@ -33,7 +33,7 @@ public class SocialCommentROFactory {
     }
 
     @Resource
-    public void setCommentRepository(CommentApi commentApi) {
+    public void setCommentRepository(CommentInterface commentApi) {
         SocialCommentROFactory.commentApi = commentApi;
     }
 
