@@ -2,6 +2,7 @@ package com.socialuni.social.tance.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.entity.DevAccountDo;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,7 @@ import java.util.Optional;
  * @author qinkaiyuan
  * @since 1.0.0
  */
-public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer> {
+public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer> , DevAccountInterface {
 
     default DevAccountModel savePut(DevAccountModel devAccountModel){
         DevAccountDo devAccountDo = BeanUtil.copyProperties(devAccountModel, DevAccountDo.class);

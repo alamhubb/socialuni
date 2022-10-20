@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("config")
-public class AppConfigController {
+public class SocialuniAdminAppConfigController {
     @Resource
     private AppConfigRepository appConfigRepository;
 

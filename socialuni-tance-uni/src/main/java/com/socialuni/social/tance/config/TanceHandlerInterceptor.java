@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.config;
 
 import com.socialuni.social.common.constant.SocialSystemConst;
-import com.socialuni.social.tance.controller.AppConfigController;
+import com.socialuni.social.tance.controller.SocialuniAdminAppConfigController;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ import java.util.Map;
 public class TanceHandlerInterceptor implements HandlerInterceptor {
 
     @Resource
-    AppConfigController appConfigController;
+    SocialuniAdminAppConfigController appConfigController;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 初始化。

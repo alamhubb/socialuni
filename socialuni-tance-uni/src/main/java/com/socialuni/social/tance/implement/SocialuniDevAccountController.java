@@ -1,4 +1,5 @@
-package com.socialuni.social.tance.controller;
+/*
+package com.socialuni.social.tance.implement;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.tance.entity.DevAccountDo;
@@ -13,11 +14,13 @@ import java.util.List;
 import java.util.Optional;
 
 
+*/
 /**
  * @author qinkaiyuan
  * @date 2021-07-28 11:09
  * 前端初始化内容
- */
+ *//*
+
 @RequestMapping("devAccount")
 @Component("devAccountApi") //
 public class SocialuniDevAccountController  implements DevAccountInterface {
@@ -69,11 +72,13 @@ public class SocialuniDevAccountController  implements DevAccountInterface {
         return devAccountRepository.savePut(devAccountModel);
     }
 
-    /*@Override
+    */
+/*@Override
     public DevAccountModel save(DevAccountModel devAccountModel) {
         DevAccountModel save = devAccountRepository.save( toDevAccountDo(devAccountModel) );
         return save;
-    }*/
+    }*//*
+
 
     @Override
     public DevAccountModel queryDevAccount(DevAccountQueryQO devAccountQueryQO) {
@@ -91,3 +96,4 @@ public class SocialuniDevAccountController  implements DevAccountInterface {
     }
 
 }
+*/
