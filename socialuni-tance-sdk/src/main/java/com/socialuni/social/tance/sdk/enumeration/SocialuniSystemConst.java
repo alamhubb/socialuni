@@ -1,6 +1,7 @@
 package com.socialuni.social.tance.sdk.enumeration;
 
 import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialuniSystemConst {
     private static String userDefaultAvatar;
-    private static Integer systemUserId;
+//    private static Integer systemUserId;
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
     private static String socialuniServerUrl;
@@ -32,10 +33,10 @@ public class SocialuniSystemConst {
         SocialuniSystemConst.staticResourceUrl = staticResourceUrl;
     }
 
-    @Value("${socialuni.app.system-user-id}")
-    public void setSystemUserId(Integer systemUserId) {
-        SocialuniSystemConst.systemUserId = systemUserId;
-    }
+//    @Value("${socialuni.app.system-user-id}")
+//    public void setSystemUserId(Integer systemUserId) {
+//        SocialuniSystemConst.systemUserId = systemUserId;
+//    }
 
 
     @Value("${socialuni.secret-key:#{null}}")
@@ -62,8 +63,12 @@ public class SocialuniSystemConst {
         return userDefaultAvatar;
     }
 
+    /**
+     * 获得系统用户id
+     * @return
+     */
     public static Integer getSystemUserId() {
-        return systemUserId;
+        return ConfigFacade.getConfigApi().getInteger("system-user-id");
     }
 
     public static String getStaticResourceUrl() {

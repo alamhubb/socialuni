@@ -17,6 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConfigFacade {
     private static  ConfigApi configApi;
+
+    public static ConfigApi getConfigApi() {
+        return configApi;
+    }
+
     @Autowired
     public static void setConfigApi(ConfigApi configApi) {
         ConfigFacade.configApi = configApi;

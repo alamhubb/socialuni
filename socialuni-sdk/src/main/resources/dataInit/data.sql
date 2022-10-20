@@ -6616,3 +6616,4 @@ INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'authCodeValidMinute', '30', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'highLimitReportCount', '20', '', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'qq_account', '491369310', '客服qq/微信', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'system-user-id', '1', '系统用户id', 1);
