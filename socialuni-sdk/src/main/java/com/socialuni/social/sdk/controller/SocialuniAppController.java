@@ -8,6 +8,7 @@ import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.social.sdk.model.RO.app.HomeTabRO;
 import com.socialuni.social.sdk.model.RO.app.SocialAppLaunchDataRO;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +41,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
         return ResultRO.success(list);
     }
 
-    public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
+    public ResultRO<Void> sendErrorLog(@RequestBody FrontErrorLogVO frontErrorLogVO) {
         return centerAppService.sendErrorLog(frontErrorLogVO);
     }
 }

@@ -77,9 +77,9 @@ spring:
   redis:
     database: 0
     # Redis服务器地址
-    host: "127.0.0.1"
+    host: "139.199.31.200"
     # Redis服务器连接端口
-    port: 6379
+    port: 16379
     # 连接超时时间（毫秒）
     timeout: 30s
     jedis:
