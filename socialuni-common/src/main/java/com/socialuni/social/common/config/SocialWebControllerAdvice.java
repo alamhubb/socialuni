@@ -1,5 +1,6 @@
 package com.socialuni.social.common.config;
 
+import cn.hutool.core.util.ClassUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.constant.ErrorCode;
@@ -44,6 +45,8 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse serverHttpResponse) {
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
+        Class<Object> aClass = ClassUtil.getClass(result);
+        String aPackage = ClassUtil.getPackage(aClass);
         // 兼容没有返回体的。
         if (response.getStatus() == 200 && result instanceof ResultRO) {
             Integer resCode = ((ResultRO<?>) result).getCode();
@@ -51,8 +54,10 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 response.setStatus(resCode);
             }
             return result;
-        }else{
+        }else if(aPackage.startsWith("com.socialuni")){
             return ResultRO.success(result);
+        }else{
+            return result;
         }
     }
 
