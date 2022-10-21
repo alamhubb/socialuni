@@ -26,7 +26,7 @@
               </y-form-input>
               <el-form-item label="是否启用" class="flex-1 ml-sm">
                 <div class="w100p row-between-center">
-                  <el-switch class="w100p" v-model="swiper.enable" active-text="启用" inactive-text="关闭"></el-switch>
+                  <el-switch class="w100p mt-xs" v-model="swiper.enable" active-text="启用" inactive-text="关闭"></el-switch>
                   <!--                  <el-button type="danger" @click="deleteData(index)">关闭</el-button>-->
                 </div>
               </el-form-item>
