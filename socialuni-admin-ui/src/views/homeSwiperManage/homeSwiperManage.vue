@@ -27,7 +27,7 @@
               <el-form-item label="是否启用" class="flex-1 ml-sm">
                 <div class="w100p row-between-center">
                   <el-switch class="w100p" v-model="swiper.enable"></el-switch>
-                  <el-button type="danger" @click="deleteData(index)">删除</el-button>
+<!--                  <el-button type="danger" @click="deleteData(index)">关闭</el-button>-->
                 </div>
               </el-form-item>
             </div>
@@ -98,7 +98,7 @@ export default class HomeSwiperManageView extends Vue {
   }
 
   deleteData(index) {
-    this.homeSwipers.splice(index, 1)
+    this.homeSwipers[index].enable = false
   }
 }
 </script>
