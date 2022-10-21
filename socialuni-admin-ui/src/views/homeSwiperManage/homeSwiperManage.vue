@@ -65,6 +65,7 @@ import YTableInput from '@/components/YComponent/YTableInput/YTableInput.vue'
 import YTable from '@/components/YComponent/YTable/YTable.vue'
 import YFormInput from '@/components/YComponent/YFormInput/YFormInput.vue'
 import YFormSelect from '@/components/YComponent/YFormSelect/YFormSelect.vue'
+import ToastUtil from '@/utils/ToastUtil'
 
 @Component({
   components: { YFormSelect, YFormInput, YTable, YTableInput }
@@ -82,6 +83,7 @@ export default class HomeSwiperManageView extends Vue {
 
   async queryData() {
     const res = await request.get('socialuni/admin/homeSwiper/queryhomeSwipers')
+    ToastUtil.success('查询成功')
     this.homeSwipers = res.data
     if (!this.homeSwipers.length) {
       this.homeSwipers = [new SocialuniHomeAdminSwiperRO()]
