@@ -83,7 +83,6 @@ export default class HomeSwiperManageView extends Vue {
 
   async queryData() {
     const res = await request.get('socialuni/admin/homeSwiper/queryhomeSwipers')
-    ToastUtil.success('查询成功')
     this.homeSwipers = res.data
     if (!this.homeSwipers.length) {
       this.homeSwipers = [new SocialuniHomeAdminSwiperRO()]
@@ -93,6 +92,7 @@ export default class HomeSwiperManageView extends Vue {
   saveData() {
     //this.configs保存到后台
     request.post('socialuni/admin/homeSwiper/updateHomeSwipers', this.homeSwipers).then(res => {
+      ToastUtil.success('更新成功')
       this.queryData()
     })
   }
