@@ -15,16 +15,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import {Component, Vue} from 'vue-property-decorator'
 import request from "@/plugins/request";
 import ConfigVO from "@/model/config/ConfigVO";
 import ReportVO from '@/model/report/ReportVO'
-import SocialuniHomeAdminSwiperRO from "@/model/config/SocialuniHomeAdminSwiperRO";
 
 @Component
 export default class ConfigManageView extends Vue {
-  homeSwipers: SocialuniHomeAdminSwiperRO[] = []
+  configs: ConfigVO[] = []
 
   created() {
     this.queryConfigs()
@@ -33,17 +32,18 @@ export default class ConfigManageView extends Vue {
   async queryConfigs() {
     const res = await request.get('config/getAllConfigs')
     this.configs = res.data;
+    console.log(this.configs)
   }
   delConfigs(row:ConfigVO) {
     request.post('config/deleteById', row).then(res => {
-        this.queryConfigs();
+      this.queryConfigs();
     });
 
   }
   saveConfigs(row:ConfigVO){
     //this.configs保存到后台
     request.post('config/save', row).then(res => {
-        this.queryConfigs();
+      this.queryConfigs();
     });
   }
 }

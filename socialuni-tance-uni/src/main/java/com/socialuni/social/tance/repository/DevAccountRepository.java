@@ -22,25 +22,25 @@ public interface DevAccountRepository extends JpaRepository<DevAccountDo, Intege
         return this.save(devAccountDo);
     }
     @Cacheable(cacheNames = "getDevAccountById", key = "#id")
-    DevAccountDo findOneById(Integer id);
+    DevAccountModel findOneById(Integer id);
 
     //直接携带秘钥访问
     @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
-    DevAccountDo findOneBySecretKey(String secretKey);
+    DevAccountModel findOneBySecretKey(String secretKey);
 
 
     @Cacheable(cacheNames = "getDevAccountBySocialuniId", key = "#socialuniId")
-    DevAccountDo findOneBySocialuniId(String socialuniId);
+    DevAccountModel findOneBySocialuniId(String socialuniId);
 
-    DevAccountDo findOneByAppName(String appName);
+    DevAccountModel findOneByAppName(String appName);
 
-    DevAccountDo findOneByDevNum(Long devNum);
+    DevAccountModel findOneByDevNum(Long devNum);
 
     //获取最新的开发者账户，用来id相加，不缓存，低频，创建时才是用
-    Optional<DevAccountDo> findFirstByOrderByIdDesc();
+    Optional<DevAccountModel> findFirstByOrderByIdDesc();
 
     //不需要缓存，低频, admin登录使用
-    DevAccountDo findOneByPhoneNumOrderByIdAsc(String phoneNum);
+    DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum);
 
     List<DevAccountDo> findAll();
 }
