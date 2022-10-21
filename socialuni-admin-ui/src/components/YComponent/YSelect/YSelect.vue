@@ -1,11 +1,17 @@
 <template>
-  <el-select ref="select" :value="model" :placeholder="hint" v-bind="$attrs" @change="change" filterable>
+  <el-select
+    ref="select"
+    :value="model"
+    :placeholder="hint"
+    v-bind="$attrs"
+    @change="change"
+    filterable>
     <!--    不能||item,因为存在null的情况会直接把对象赋值给value-->
     <el-option
-        v-for="item in optionsGet"
-        :key="item[value]!==undefined?item[value]:item"
-        :label="optionLabel(item)"
-        :value="item[value]!==undefined?item[value]:item"
+      v-for="item in optionsGet"
+      :key="item[value]!==undefined?item[value]:item"
+      :label="optionLabel(item)"
+      :value="item[value]!==undefined?item[value]:item"
     />
   </el-select>
 </template>

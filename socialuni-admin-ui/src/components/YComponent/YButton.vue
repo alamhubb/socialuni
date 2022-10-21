@@ -2,20 +2,23 @@
   <el-button
     v-bind="$attrs"
     @click="clickHandler"
-    :disabled="btnDisabled"
-    :loading="!btnEnable && showLoading && btnDisabled">
+    :disabled="disabled || !btnEnable"
+    :loading="(!btnEnable && useLoading) || showLoading">
     <slot></slot>
   </el-button>
 </template>
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
-import CommonUtil from '@/utils/CommonUtil'
+import CommonUtil from '@/components/YComponent/utils/CommonUtil'
 
+//想要的效果，外部可以主动disable
+//可以主动loading
 @Component
 export default class YButton extends Vue {
   @Prop({ default: false, type: Boolean }) disabled: boolean
-  @Prop({ default: true, type: Boolean }) showLoading: boolean
+  @Prop({ default: true, type: Boolean }) useLoading: boolean
+  @Prop({ default: false, type: Boolean }) showLoading: boolean
   @Prop({
     default: null,
     type: Function
@@ -34,15 +37,12 @@ export default class YButton extends Vue {
 
   btnEnable = true
 
-  get btnDisabled() {
-    return this.disabled || !this.btnEnable
-  }
-
   get clickHandler() {
     return CommonUtil.debounce(this.btnClick, this.noDebounce ? 0 : Number(this.debounceTime))
   }
 
   async btnClick() {
+    console.log(this.noDebounce)
     if (this.btnEnable) {
       this.btnEnable = false
       this.clickEmit()

@@ -7,6 +7,7 @@ import UserStatus from '@/constant/UserStatus'
 import DataTypeStrEnum from '@/constant/enum/DataTypeStrEnum'
 import DataTableColumnTypeEnum from '@/components/dataTable/DataTableColumnTypeEnum'
 import SocialuniAuditContentType from '@/constant/SocialuniAuditContentType'
+import SkipType from '@/constant/SkipType'
 
 export default class GlobalConst {
   static readonly OperationType: typeof OperationType = OperationType
@@ -18,4 +19,5 @@ export default class GlobalConst {
   static readonly DataTypeStrEnum: typeof DataTypeStrEnum = DataTypeStrEnum
   static readonly DataTableColumnTypeEnum: typeof DataTableColumnTypeEnum = DataTableColumnTypeEnum
   static readonly SocialuniAuditContentType: typeof SocialuniAuditContentType = SocialuniAuditContentType
+  static readonly SkipType: typeof SkipType = SkipType
 }

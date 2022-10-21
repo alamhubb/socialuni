@@ -3,8 +3,8 @@ spring:
 #    active: local
 #    active: localprod
 #    active: prod
-    active: dev
-#    active: demo
+#    active: dev
+    active: demo
 #    active: qkylocal
   flyway:
     # 设置不clean表，这里会处理clean()方法，从而删库. https://zhuanlan.zhihu.com/p/51170727

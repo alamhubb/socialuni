@@ -54,10 +54,15 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 response.setStatus(resCode);
             }
             return result;
-        }else if(aPackage.startsWith("com.socialuni")){
+        }
+        //是否需要考虑 返回map，list的情况？
+        /*else if(aPackage.startsWith("com.socialuni")){
             return ResultRO.success(result);
         }else{
             return result;
+        }*/
+        else{
+            return ResultRO.success(result);
         }
     }
 

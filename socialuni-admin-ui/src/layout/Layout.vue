@@ -1,12 +1,12 @@
 <template>
   <!--  <div :class="classObj" class="app-wrapper">-->
   <div class="h100p flex-col">
-    <nav-bar />
+    <nav-bar/>
     <div class="flex-row flex-1 overflow-hidden">
-      <nav-menu class="w200 flex-none" />
-      <div class="flex-1 overflow-auto pd">
+      <nav-menu class="w150 flex-none"/>
+      <div class="flex-1 overflow-auto pd-sm bg-default">
         <transition name="fade-transform" mode="out-in">
-          <router-view :key="$route.path" class="h100p" />
+          <router-view :key="$route.path" class="h100p bg-white bd-radius"/>
         </transition>
       </div>
     </div>

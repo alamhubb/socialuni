@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SocialuniHomeSwiperAPI {
 
-   List<SocialuniHomeSwiperModel> queryHomeSwipersByDevIdOrderByStatusDescUpdateTimeDescTopLevelDesc(Integer devId);
+//   List<SocialuniHomeSwiperModel> queryHomeSwipersByDevIdOrderByStatusDescUpdateTimeDescTopLevelDesc(Integer devId);
 
 }

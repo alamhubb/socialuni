@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+
 html {
   height: 100vh;
   width: 100vw;
@@ -9,8 +16,8 @@ html {
   //background-color: #FAFAFA;
 }
 
+
 body {
-  margin: 0;
   height: 100%;
   width: 100%;
 }
