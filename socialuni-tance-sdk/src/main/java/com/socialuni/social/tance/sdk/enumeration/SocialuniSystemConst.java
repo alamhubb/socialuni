@@ -13,11 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class SocialuniSystemConst {
     private static String userDefaultAvatar;
-//    private static Integer systemUserId;
+    //    private static Integer systemUserId;
     private static String staticResourceUrl;
     private static String socialuniDevSecretKey;
     private static String socialuniServerUrl;
     private static String appSocialuniId;
+    private static String systemUserPhoneNum;
     private static String centerSocialuniId;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
@@ -59,12 +60,26 @@ public class SocialuniSystemConst {
         SocialuniSystemConst.appSocialuniId = appSocialuniId;
     }
 
+    @Value("${socialuni.system-user-phone-num:99999888666}")
+    public void setSystemUserPhoneNum(String systemUserPhoneNum) {
+        SocialuniSystemConst.systemUserPhoneNum = systemUserPhoneNum;
+    }
+
+    public static String getSystemUserPhoneNum() {
+        if (StringUtils.isEmpty(systemUserPhoneNum) || appSocialuniId.length() != 11) {
+            //默认手机号
+            return "99999888666";
+        }
+        return systemUserPhoneNum;
+    }
+
     public static String getUserDefaultAvatar() {
         return userDefaultAvatar;
     }
 
     /**
      * 获得系统用户id
+     *
      * @return
      */
     public static Integer getSystemUserId() {
@@ -136,7 +151,6 @@ public class SocialuniSystemConst {
     public static Boolean getIsProdEnv() {
         return activeEnv.equals(DevEnvType.prod);
     }
-
 
 
 }

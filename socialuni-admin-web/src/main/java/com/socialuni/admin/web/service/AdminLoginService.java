@@ -2,6 +2,9 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
+import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
+import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
@@ -14,6 +17,8 @@ import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,7 +34,10 @@ public class AdminLoginService {
     DevAccountEntity devAccountEntity;
     @Resource
     DevTokenInterface devTokenApi;
-
+    @Resource
+    SocialUserPhoneEntity socialUserPhoneEntity;
+    @Resource
+    SocialUserPhoneManage socialUserPhoneManage;
     //秘钥登录
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
@@ -62,12 +70,17 @@ public class AdminLoginService {
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
         DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
+        //同时创建c段账号
+        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+        if (socialUserPhoneModel == null) {
+            socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+        }
+
         if (devAccountModel == null) {
             devAccountModel = devAccountEntity.createDevAccount(phoneNum);
             return getSocialLoginROResultRO(devAccountModel, true);
         }
         return getSocialLoginROResultRO(devAccountModel, false);
-
     }
 
     private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountModel devAccountModel, boolean isNewAccount) {

@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Data
 public class DevAccountModel extends CommonContentBaseDO implements Serializable {
     //密钥
+    private Integer userId;
     private String secretKey;
     private Long devNum;
     //个人身份证，企业税号

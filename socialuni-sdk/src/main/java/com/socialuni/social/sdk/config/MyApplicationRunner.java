@@ -53,9 +53,9 @@ public class MyApplicationRunner implements ApplicationRunner {
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountEntity.createDevAccount(null);
+                devAccountEntity.createDevAccount(SocialuniSystemConst.getSystemUserPhoneNum());
             } else {
-                devAccountEntity.createDevAccount(null, SocialuniSystemConst.getAppSocialuniId());
+                devAccountEntity.createDevAccount(SocialuniSystemConst.getSystemUserPhoneNum(), SocialuniSystemConst.getAppSocialuniId());
             }
 
             /*DevSocialuniIdDO devSocialuniIdDO = new DevSocialuniIdDO();
@@ -68,7 +68,8 @@ public class MyApplicationRunner implements ApplicationRunner {
         if (SocialuniSystemConst.serverIsChild()) {
             DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
-                devAccountEntity.createDevAccount(null, SocialuniSystemConst.getCenterSocialuniId());
+                //手机号格式字符串瞎写就行，没有其他地方使用
+                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId());
             }
         }
 
