@@ -3,18 +3,19 @@ package com.socialuni.social.sdk.config;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.feignAPI.openData.SocialuniThirdUserAPI;
 import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.SocialFeignHeaderName;
+import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
 import com.socialuni.social.common.utils.RequestUtil;
 import feign.RequestInterceptor;
@@ -55,13 +56,13 @@ public class FeignInterceptor implements RequestInterceptor {
 
         //还是要加一个联盟账户渠道
 
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         if (!postUrl.contains("thirdUser/registryUser")) {
             if (mineUser != null) {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
-                Integer centerDevId = DevAccountUtils.getCenterDevIdNotNull();
+                Integer centerDevId = DevAccountFacade.getCenterDevIdNotNull();
                 UniOutRegisterUserDO uniOutRegisterUserDO = uniOutRegisterUserRepository.findByDevIdAndUserId(centerDevId, mineUserUnionId);
 
 //                SocialUserAccountDO socialUserAccountDO = SocialUserAccountUtil.getUserSocialAccount(mineUser.getId());
@@ -102,12 +103,12 @@ public class FeignInterceptor implements RequestInterceptor {
                     SocialLoginRO<SocialuniMineUserDetailRO> loginRO = resultRO.getData();
                     SocialuniMineUserDetailRO centerMineUserDetailRO = loginRO.getUser();
 
-                    SocialuniUnionIdUtil.updateUuidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
+                    SocialuniUnionIdFacede.updateUuidByUnionIdNotNull(mineUserUnionId, centerMineUserDetailRO.getId());
                     uniOutRegisterUserDO = new UniOutRegisterUserDO(centerDevId, mineUserUnionId);
                     uniOutRegisterUserRepository.save(uniOutRegisterUserDO);
                 }
 
-                String mineUserUid = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(mineUserUnionId);
+                String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUserUnionId);
 
                 requestTemplate.header(SocialuniWebConfig.getTokenName(), mineUserUid);
             }

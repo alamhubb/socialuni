@@ -3,12 +3,12 @@ package com.socialuni.social.sdk.dao.store;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
@@ -30,7 +30,7 @@ import java.util.List;
 @Slf4j
 public class TalkQueryStore {
     @Resource
-    private TalkRepository talkRepository;
+    private TalkInterface talkApi;
     @Resource
     private SocialuniTalkDORedis talkRedis;
     @Resource
@@ -38,21 +38,21 @@ public class TalkQueryStore {
     @Resource
     private TalkMapper talkMapper;
 
-    public List<SocialuniTalkDO> queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
+    public List<?  extends SocialuniTalkModel>  queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
         List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserFollowsTalkIds(userId, beUserIds, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
-    public List<SocialuniTalkDO> queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserDO mineUser) {
+    public List<?  extends SocialuniTalkModel>  queryUserTalks(SocialUserTalkQueryQO queryQO, SocialuniUserModel mineUser) {
         List<Integer> talkIds = queryQO.getTalkIds();
         Integer userId = queryQO.getUserId();
 
         if (ObjectUtils.isEmpty(talkIds)) {
             talkIds = Collections.singletonList(0);
         }
-        List<SocialuniTalkDO> talks;
+        List<?  extends SocialuniTalkModel>  talks;
         if (mineUser != null && mineUser.getUnionId().equals(userId)) {
             talks = this.queryTalksTop10ByMine(talkIds, userId);
         } else {
@@ -61,27 +61,27 @@ public class TalkQueryStore {
         return talks;
     }
 
-    public List<SocialuniTalkDO> queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
+    public List<?  extends SocialuniTalkModel>  queryTalksTop10ByUser(List<Integer> talkIds, Integer userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryUserTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
     //查看自己的动态，能查看到预审查状态的
-    public List<SocialuniTalkDO> queryTalksTop10ByMine(List<Integer> talkIds, Integer userId) {
+    public List<?  extends SocialuniTalkModel>  queryTalksTop10ByMine(List<Integer> talkIds, Integer userId) {
         int page = talkIds.size() / 10;
         List<Integer> ids = talkRedis.queryMineTalkIds(userId, PageRequest.of(page, 10));
         return this.queryTalksByIds(ids);
     }
 
-    public List<SocialuniTalkDO> queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(SocialHomeTabTalkQueryBO queryBO) {
+    public List<?  extends SocialuniTalkModel>  queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(SocialHomeTabTalkQueryBO queryBO) {
         String talkUserGender = queryBO.getTalkUserGender();
         //sql需要，为all改为null
         if (GenderType.all.equals(talkUserGender)) {
             talkUserGender = null;
         }
 
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
         String mineUserGender = null;
         if (mineUser != null) {
             mineUserGender = mineUser.getGender();
@@ -160,7 +160,7 @@ public class TalkQueryStore {
             userTalkUnionIds = userTalkUnionIds.subList(0, 900);
         }
 
-        userTalkUnionIds = talkRepository.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), pageRequest);
+        userTalkUnionIds = talkApi.queryTalkIdsByIds(userTalkUnionIds, queryBO.getQueryTime(), pageRequest);
         /*if (userTalkUnionIds.size() > 10) {
             userTalkUnionIds = userTalkUnionIds.subList(0, 10);
         }*/
@@ -168,12 +168,12 @@ public class TalkQueryStore {
     }
 
     //根据id列表从缓存中读取talk列表
-    public List<SocialuniTalkDO> queryTalksByIds(List<Integer> ids) {
-        List<SocialuniTalkDO> talkDOS = new ArrayList<>();
+    public List<?  extends SocialuniTalkModel>  queryTalksByIds(List<Integer> ids) {
+        List<SocialuniTalkModel> talkDOS = new ArrayList<>();
         for (Integer id : ids) {
 //            SocialTalkRO talkEO = TalkROFactory.newTalkRO(id);
 //            talkDOS.add(talkEO);
-            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(id);
+            SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(id);
             talkDOS.add(talkDO);
         }
         return talkDOS;

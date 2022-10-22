@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.model.RO.talk;
 
-import com.socialuni.social.sdk.dao.DO.SocialCommonBaseDO;
+import com.socialuni.social.common.dao.DO.SocialCommonBaseDO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
 import lombok.Data;
 

@@ -1,14 +1,16 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.sdk.constant.AdminAppConfigConst;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.social.sdk.constant.socialuni.DevAccountType;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
-import com.socialuni.social.sdk.utils.UUIDUtil;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.common.utils.UUIDUtil;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,44 +24,50 @@ import java.util.Optional;
 @Service
 public class DevAccountEntity {
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountInterface devAccountApi;
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private TagRepository tagRepository;
+    private TagInterface tagApi;
+    @Resource
+    SocialUserPhoneManage socialUserPhoneManage;
 
-    public DevAccountDO createDevAccount(String phoneNum) {
+    public DevAccountModel createDevAccount(String phoneNum) {
         return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
     }
 
     //创建开发者账号
-    public DevAccountDO createDevAccount(String phoneNum, String socialuniId) {
-        Optional<DevAccountDO> devAccountDOOptional = devAccountRepository.findFirstByOrderByIdDesc();
-        Long lastDevId;
+    public DevAccountModel createDevAccount(String phoneNum, String socialuniId) {
+        Optional<? extends DevAccountModel> devAccountDOOptional = devAccountApi.findFirstByOrderByIdDesc();
+        //加30以内随机数
+        Long curDevNum;
         if (devAccountDOOptional.isPresent()) {
-            lastDevId = devAccountDOOptional.get().getDevNum();
+            Long lastDevId = devAccountDOOptional.get().getDevNum();
+            curDevNum = lastDevId + new Double((Math.random() * 20)).longValue();
         } else {
-            lastDevId = AdminAppConfigConst.qingChiDevNum;
+            curDevNum = AdminAppConfigConst.qingChiDevNum;
         }
+        //同时创建c段账号
+        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
 
         //加30以内随机数
-        Long curDevNum = lastDevId + new Double((Math.random() * 20)).longValue();
-        DevAccountDO devAccountDO = new DevAccountDO();
+        DevAccountModel devAccountModel = new DevAccountModel();
         Date curDate = new Date();
         String secretKey = UUIDUtil.getUUID();
-        devAccountDO.setSecretKey(secretKey);
-        devAccountDO.setPhoneNum(phoneNum);
-        devAccountDO.setIdentityNum(null);
+        devAccountModel.setSecretKey(secretKey);
+        devAccountModel.setUserId(socialUserPhoneModel.getUserId());
+        devAccountModel.setPhoneNum(phoneNum);
+        devAccountModel.setIdentityNum(null);
 //        devAccountDO.setSecretKey(UUIDUtil.getUUID());
-        devAccountDO.setAppGenderType(GenderType.all);
-        devAccountDO.setDevNum(curDevNum);
-        devAccountDO.setType(DevAccountType.personal);
-        devAccountDO.setStatus(CommonStatus.enable);
-        devAccountDO.setCreateTime(curDate);
-        devAccountDO.setCallApiCount(0);
-        devAccountDO.setUpdateTime(curDate);
-        devAccountDO.setSocialuniId(socialuniId);
-        devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
+        devAccountModel.setAppGenderType(GenderType.all);
+        devAccountModel.setDevNum(curDevNum);
+        devAccountModel.setType(DevAccountType.personal);
+        devAccountModel.setStatus(CommonStatus.enable);
+        devAccountModel.setCreateTime(curDate);
+        devAccountModel.setCallApiCount(0);
+        devAccountModel.setUpdateTime(curDate);
+        devAccountModel.setSocialuniId(socialuniId);
+        devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
 
         //创建话题，还要创建用户
        /* TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());
@@ -67,6 +75,6 @@ public class DevAccountEntity {
         tagDO.setTagTypeId(32);
         tagDO.setDevId(devAccountDO.getId());
         tagDO = tagRepository.save(tagDO);*/
-        return devAccountDO;
+        return devAccountModel;
     }
 }

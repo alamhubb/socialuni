@@ -1,11 +1,11 @@
 package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -30,7 +30,7 @@ public class ReportContentROFactory {
     public static ReportContentVO getReportContentVO(String reportContentType, Integer contentId) {
         ReportContentVO reportContentVO = new ReportContentVO();
         if (reportContentType.equals(SocialuniContentType.talk)) {
-            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
+            SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
             reportContentVO.setId(contentId);
 //            reportContentVO.setViolateType(talkDO.getViolateType());
             reportContentVO.setContent(talkDO.getContent());
@@ -42,16 +42,16 @@ public class ReportContentROFactory {
 //            CommentUtils.getAll(talkDO.getId()).stream().filter((SocialCommentDO commentDO) -> commentDO.getUserId().equals(userId)).map(talk::new).collect(Collectors.toList());
 //            reportContentVO.setComments(talkDO.getUserId());
 
-            List<TagDO> tagDOS = socialTagRedis.getTagsByTalkId(contentId);
-            List<TagRO> tagROES = SocialTagROFactory.tagDOToROS(tagDOS);
+            List<?  extends TagModel> tagModels = socialTagRedis.getTagsByTalkId(contentId);
+            List<TagRO> tagROES = SocialTagROFactory.tagDOToROS(tagModels);
             reportContentVO.setTags(tagROES);
             reportContentVO.setStatus(talkDO.getStatus());
 
-            List<SocialuniTalkImgDO> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
+            List<SocialuniTalkImgModel> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
 
             reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         } else if (reportContentType.equals(SocialuniContentType.comment)) {
-            SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(contentId);
+            SocialuniCommentModel commentDO = SocialuniCommentDOUtil.getNotCommentNull(contentId);
             reportContentVO.setId(commentDO.getUnionId());
             reportContentVO.setContent(commentDO.getContent());
 //            reportContentVO.setViolateType(commentDO.getViolateType());

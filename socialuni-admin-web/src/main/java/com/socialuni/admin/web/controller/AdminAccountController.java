@@ -2,15 +2,15 @@ package com.socialuni.admin.web.controller;
 
 
 import com.socialuni.admin.web.service.AdminAccountService;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountProviderRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
-import com.socialuni.social.sdk.utils.UUIDUtil;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.common.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,17 +26,17 @@ public class AdminAccountController {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountInterface devAccountApi;
     @Resource
-    private DevAccountProviderRepository devAccountProviderRepository;
+    private DevAccountProviderInterface devAccountProviderApi;
     @Resource
-    private TagRepository tagRepository;
+    private TagInterface tagApi;
     @Resource
     private AdminAccountService adminAccountService;
 
     @PostMapping("getUser")
     public ResultRO<DevAccountRO> getUser() {
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel user = DevAccountFacade.getAdminDevAccountNotNull();
         DevAccountRO devAccountRO = new DevAccountRO(user);
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);
@@ -44,7 +44,7 @@ public class AdminAccountController {
 
     @PostMapping("resetSecretKey")
     public ResultRO<String> resetSecretKey() {
-        DevAccountDO devAccount = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel devAccount = DevAccountFacade.getAdminDevAccountNotNull();
         String secretKey = UUIDUtil.getUUID();
         devAccount.setSecretKey(secretKey);
 

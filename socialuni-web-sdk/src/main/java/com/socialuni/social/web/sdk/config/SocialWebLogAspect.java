@@ -1,16 +1,16 @@
 package com.socialuni.social.web.sdk.config;
 
 import com.socialuni.social.common.config.SocialWebControllerAdvice;
+import com.socialuni.social.common.constant.ErrorCode;
+import com.socialuni.social.common.constant.ErrorMsg;
+import com.socialuni.social.common.constant.ErrorType;
 import com.socialuni.social.common.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.common.constant.ErrorCode;
-import com.socialuni.social.common.constant.ErrorType;
-import com.socialuni.social.common.constant.ErrorMsg;
+import com.socialuni.social.common.utils.IpUtil;
+import com.socialuni.social.common.utils.RequestUtil;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
-import com.socialuni.social.common.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
-import com.socialuni.social.common.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,7 +18,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -43,6 +42,10 @@ public class SocialWebLogAspect {
     @Around("requestLog()")
     public Object requestLogHandle(ProceedingJoinPoint joinPoint) throws Throwable {
         RequestLogDO requestLogDO = RequestLogUtil.get();
+        // 解决异步报错。切面记录日志的问题。
+        if(requestLogDO == null){
+            return joinPoint.proceed();
+        }
         String params = Arrays.toString(joinPoint.getArgs());
         requestLogDO.setParams(params);
 
@@ -61,9 +64,9 @@ public class SocialWebLogAspect {
             } else {
                 requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
                 requestLogDO.setErrorType(ErrorType.error);
-                requestLogDO.setErrorMsg(ErrorMsg.systemErrorMsg);
+                requestLogDO.setErrorMsg(ErrorMsg.getSystemErrorMsg());
                 requestLogDO.setSuccess(false);
-                requestLogDO.setInnerMsg(ErrorMsg.systemErrorMsg);
+                requestLogDO.setInnerMsg(ErrorMsg.getSystemErrorMsg());
                 requestLogDO.setInnerMsgDetail(result.toString());
                 ErrorLogUtil.saveAsync(requestLogDO);
             }

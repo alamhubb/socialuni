@@ -9,12 +9,12 @@ import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialProviderLoginEntity;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -40,7 +40,7 @@ public class SocialuniLoginService {
     @Resource
     ThirdUserTokenManage thirdUserTokenManage;
     @Resource
-    SocialuniUnionIdRepository uniContentUnionIdRepository;
+    SocialuniUnionIdInterface uniContentUnionIdRepository;
     @Resource
     SocialLoginService socialLoginService;
     @Resource
@@ -61,7 +61,7 @@ public class SocialuniLoginService {
     }
 
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
 
         SocialuniMineUserDetailRO centerMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

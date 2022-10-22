@@ -3,10 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.9.RELEASE</version>
+        <groupId>com.socialuni.social</groupId>
+        <artifactId>socialuni-parent</artifactId>
+        <version>0.3.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
+
 
     <artifactId>socialuni-admin-web</artifactId>
     <version>0.3.0</version>
@@ -22,6 +24,16 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-sdk</artifactId>
             <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-tance-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-tance-uni</artifactId>
+            <scope>runtime</scope>
+            <!-- 编译时候不被依赖。只在运行时加入 -->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -40,8 +40,9 @@ public class AppConfigConst {
         put(AppConfigConst.highLimitReportCountKey, 20);
         put(AppConfigConst.reportCountHideKey, 1);
         put(AppConfigConst.systemError601UnLoginErrorKey, "未登录，是否跳转至登录页");
-        put(AppConfigConst.systemError604SystemErrorKey, "有任何疑问请联系客服微信：491369310");
-        put(AppConfigConst.systemError605UserViolationErrorKey, "账号违规，被封禁，有任何疑问，联系客服微博：清池恋爱交友app，微信或qq:491369310");
+        // 下面2个都没有用到。
+//        put(AppConfigConst.systemError604SystemErrorKey, "有任何疑问请联系客服微信：491369310");
+//        put(AppConfigConst.systemError605UserViolationErrorKey, "账号违规，被封禁，有任何疑问，联系客服微博：清池恋爱交友app，微信或qq:491369310");
     }};
 
 

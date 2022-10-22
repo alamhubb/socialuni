@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.entity.talk;
 
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,16 +19,16 @@ import java.util.List;
 @Slf4j
 public class SocialFollowUserTalksQueryEntity {
     @Resource
-    private TalkRepository talkRepository;
+    private TalkInterface talkApi;
     @Resource
     private TalkQueryStore talkQueryStore;
 
     //查询用户关注的动态列表
-    public List<SocialuniTalkDO> queryUserFollowTalks(List<Integer> talkIds, SocialuniUserDO mineUser) {
+    public List<?  extends SocialuniTalkModel>  queryUserFollowTalks(List<Integer> talkIds, SocialuniUserModel mineUser) {
         if (mineUser == null) {
             return new ArrayList<>();
         }
-        List<SocialuniTalkDO> talkDOS = talkQueryStore.queryTalksTop10ByUserFollow(talkIds, mineUser.getUnionId());
+        List<?  extends SocialuniTalkModel>  talkDOS = talkQueryStore.queryTalksTop10ByUserFollow(talkIds, mineUser.getUnionId());
         return talkDOS;
     }
 }

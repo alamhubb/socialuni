@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.utils.IntegerUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.exception.exception.SocialUserTokenExpireException;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
@@ -27,7 +27,7 @@ public class SocialTokenDOUtil {
     }
 
     public static SocialTokenDO getCommonTokenDOAllowNull() {
-        String token = SocialTokenUtil.getToken();
+        String token = SocialTokenFacade.getToken();
         if (StringUtils.isEmpty(token)) {
             return null;
         }
@@ -43,7 +43,7 @@ public class SocialTokenDOUtil {
 
 
     public static SocialTokenDO getCommonTokenDONotNull(String token) {
-        String userKey = SocialTokenUtil.getUserKeyByToken(token);
+        String userKey = SocialTokenFacade.getUserKeyByToken(token);
         if (userKey == null) {
             throw new SocialNotLoginException();
         }
@@ -64,7 +64,7 @@ public class SocialTokenDOUtil {
                 throw new SocialNotLoginException();
             }
         } else {
-            String uid = SocialuniUnionIdUtil.getUuidByUnionIdNotNull(doUserId);
+            String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(doUserId);
 
             if (!userKey.equals(uid)) {
                 log.error("绕过验证，错误的userId:{},{}", uid, userKey);

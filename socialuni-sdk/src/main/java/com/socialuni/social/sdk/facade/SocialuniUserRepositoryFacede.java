@@ -1,8 +1,7 @@
 package com.socialuni.social.sdk.facade;
 
 import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.sdk.dao.DO.base.SocialuniUserInfoBaseDO;
-import org.springframework.data.domain.Example;
+import com.socialuni.social.user.sdk.model.SocialuniUserInfoBaseModel;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -21,7 +20,7 @@ public abstract class SocialuniUserRepositoryFacede extends SocialuniRepositoryF
      * @param <T>
      * @return
      */
-    public static <T extends SocialuniUserInfoBaseDO> T findByUserId(Integer userId, Class<T> tClass) {
+    public static <T extends SocialuniUserInfoBaseModel> T findByUserId(Integer userId, Class<T> tClass) {
         T userInfo = null;
         try {
             userInfo = tClass.getDeclaredConstructor().newInstance();

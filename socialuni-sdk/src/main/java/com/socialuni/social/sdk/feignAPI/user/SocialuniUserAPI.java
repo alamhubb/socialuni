@@ -16,9 +16,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 
-@RequestMapping("socialuni/user")
+//@RequestMapping("socialuni/user")
 @Tag(name = "用户模块/用户信息模块")
-@FeignClient(name = "user", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "user", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/user")
 public interface SocialuniUserAPI {
     @GetMapping("getMineUser")
     @Operation(summary = "获取用户个人详情")

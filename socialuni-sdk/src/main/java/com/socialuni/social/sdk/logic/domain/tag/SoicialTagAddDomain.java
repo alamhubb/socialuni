@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.tag;
 
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
+import com.socialuni.social.community.sdk.model.TagModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
@@ -21,11 +21,11 @@ import javax.annotation.Resource;
 @Service
 public class SoicialTagAddDomain {
     @Resource
-    private TagRepository tagRepository;
+    private TagInterface tagApi;
     @Resource
     private SocialTagManage socialTagManage;
 
-    public TagRO addTag(SocialuniUserDO mineUser, TagAddQO tagAddVO) {
+    public TagRO addTag(SocialuniUserModel mineUser, TagAddQO tagAddVO) {
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         /*if (SocialAppEnv.getIsDevProdEnv()) {
@@ -38,15 +38,15 @@ public class SoicialTagAddDomain {
         SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(tagName);
         //校验内容是否违规
 
-        TagDO dbTag = tagRepository.findFirstByName(tagName);
+        TagModel dbTag = tagApi.findFirstByName(tagName);
         //toDO 这里有坑，就是没有查询标签状态，如果标签已经禁用，这里也可以直接用了
         if (dbTag != null) {
             throw new SocialBusinessException("标签已经存在，请直接使用");
         }
         String description = tagAddVO.getDescription();
         SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(description);
-        TagDO tagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
-        TagRO tagRO = SocialTagROFactory.getTagRO(tagDO);
+        TagModel tagModel = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
+        TagRO tagRO = SocialTagROFactory.getTagRO(tagModel);
         return tagRO;
     }
 

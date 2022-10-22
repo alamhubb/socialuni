@@ -3,16 +3,16 @@ package com.socialuni.social.sdk.logic.domain.report;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
-import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.report.sdk.api.ReportDetailApi;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.sdk.utils.DateUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -30,14 +30,14 @@ import java.util.Date;
 @Service
 public class SoicialReportAddDomain {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
-    private ReportDetailRepository reportDetailRepository;
+    private ReportDetailApi reportDetailApi;
     @Resource
     private SoicialuniUserAddReportDomain soicialuniReportDomain;
 
     public ResultRO<String> addReport(SocialuniReportAddQO reportAddVO) {
-        SocialuniUserDO mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.frontShowReportTypes.contains(reportType)) {
@@ -69,7 +69,7 @@ public class SoicialReportAddDomain {
                 return new ResultRO<>("您涉嫌胡乱举报，被禁止使用举报功能");
                 //小于-10一天只能举报两次
             }*/
-            Integer reportCount = reportDetailRepository.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), todayZero, curDate);
+            Integer reportCount = reportDetailApi.countByUserIdAndCreateTimeBetween(mineUser.getUnionId(), todayZero, curDate);
            /* if (userJusticeValue < AppConfigConst.limitReportValue) {
                 if (reportCount >= AppConfigConst.lowLimitReportCount) {
                     return new ResultRO<>("因您的正义值低于：" + AppConfigConst.limitReportValue + "，所以您每天只能举报：" + AppConfigConst.lowLimitReportCount + "次");
@@ -84,14 +84,14 @@ public class SoicialReportAddDomain {
         //理论上来说这些状态应该都是不能被举报的，因为看不见，所以这个逻辑现在也没啥问题，没了不违规状态了
         //查询动态状态是否为正常
 
-        String contentUuId = SocialuniUnionIdUtil.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
-        Integer contentUnionId = SocialuniUnionIdUtil.getUnionIdByUuidNotNull(contentUuId);
+        String contentUuId = SocialuniUnionIdFacede.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
+        Integer contentUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(contentUuId);
 
         SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);
 
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialuniUserDO receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
+        SocialuniUserModel receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
 
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {

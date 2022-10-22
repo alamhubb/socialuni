@@ -63,7 +63,7 @@ public class TencentCloudAPI {
         TencentCloudAPI.region = region;
     }
 
-    @Value("${socialuni.cloud.tencent.cos.bucket-name}")
+    @Value("${socialuni.cloud.tencent.cos.bucket}")
     public void setBucketName(String bucketName) {
         TencentCloudAPI.bucketName = bucketName;
     }

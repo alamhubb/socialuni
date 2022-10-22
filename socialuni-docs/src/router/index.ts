@@ -4,7 +4,6 @@ import Layout from "@/layout/Layout.vue";
 import HomeView from '@/views/home/HomeView.vue'
 import QingchiHomeView from '@/views/qingchi/QingchiHomeView.vue'
 import Introduction from '@/views/guide/introduction.md'
-import MoreUsage from '@/views/guide/moreUsage/moreUsage.md'
 import DemoView from '@/views/demo/DemoView.vue'
 import RouterConst from "@/router/RouterConst";
 

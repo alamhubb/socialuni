@@ -45,7 +45,7 @@ socialuni:
         secret-id: ""
         secret-key: ""
         region: ""
-        bucket-name: ""
+        bucket: ""
       # 发送手机验证码相关腾讯云配置， 不使用保持默认即可
       sms:
         app-id: 1

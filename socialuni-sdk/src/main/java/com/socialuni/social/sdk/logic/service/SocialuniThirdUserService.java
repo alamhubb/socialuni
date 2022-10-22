@@ -6,12 +6,12 @@ import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.logic.entity.UniUserRegistryDomain;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUnionIdRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
@@ -33,13 +33,13 @@ public class SocialuniThirdUserService {
     @Resource
     UniUserRegistryDomain socialuniUserRegistryDomain;
     @Resource
-    SocialuniUnionIdRepository uniContentUnionIdRepository;
+    SocialuniUnionIdInterface uniContentUnionIdRepository;
     @Resource
     TokenManage tokenManage;
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己
-        Integer dataDevId = DevAccountUtils.getDevIdNotNull();
+        Integer dataDevId = DevAccountFacade.getDevIdNotNull();
         if (dataDevId == 1) {
             throw new SocialParamsException("开发者信息错误");
         }
@@ -50,7 +50,7 @@ public class SocialuniThirdUserService {
 
 
     public ResultRO<SocialuniMineUserDetailRO> queryThirdUser() {
-        SocialuniUserDO mineUserDO = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserModel mineUserDO = SocialuniUserUtil.getMineUserAllowNull();
         if (mineUserDO == null) {
             return ResultRO.success();
         }

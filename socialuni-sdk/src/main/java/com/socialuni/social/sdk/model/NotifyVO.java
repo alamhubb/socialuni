@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.social.common.utils.JsonUtil;
 import lombok.Data;
@@ -31,13 +31,13 @@ public class NotifyVO {
     public NotifyVO() {
     }
 
-    public NotifyVO(SocialuniUserDO user) {
+    public NotifyVO(SocialuniUserModel user) {
         //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
         this.user = new NotifyUserVO(user, null);
         this.type = NotifyType.comment;
     }
 
-    public NotifyVO(NotifyDO notify, SocialuniUserDO user, MessageReceiveDO messageReceive, ChatUserDO chatUser, ChatDO chatDO) {
+    public NotifyVO(NotifyDO notify, SocialuniUserModel user, MessageReceiveDO messageReceive, ChatUserDO chatUser, ChatDO chatDO) {
         this(user);
         this.chat = SocialChatROFactory.getChatRO(chatDO, chatUser, messageReceive);
         this.receiveUserId = notify.getReceiveUserId();
@@ -45,7 +45,7 @@ public class NotifyVO {
         //此处没有给content赋值是因为推送，不需要显示，推送后点击未读列表查询就行
     }
 
-    public NotifyVO(ChatDO chat, SocialuniUserDO user, MessageDO message) {
+    public NotifyVO(ChatDO chat, SocialuniUserModel user, MessageDO message) {
         this(user);
         this.chat = SocialChatROFactory.getChatRO(chat, message);
         this.type = NotifyType.message;

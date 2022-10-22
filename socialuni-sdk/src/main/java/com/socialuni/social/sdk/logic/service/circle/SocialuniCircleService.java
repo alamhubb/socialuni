@@ -1,21 +1,21 @@
 package com.socialuni.social.sdk.logic.service.circle;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
-import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class SocialuniCircleService {
     @Resource
-    private SocialCircleRepository socialCircleRepository;
+    private SocialCircleInterface socialCircleApi;
     @Resource
     private SocialuniCircleRedis socialCircleRedis;
 
@@ -33,16 +33,16 @@ public class SocialuniCircleService {
     @Resource
     CircleQueryDomain circleQueryDomain;
 
-    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserDO user) {
-        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), user);
-        circleDO = socialCircleRepository.save(circleDO);
+    public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserModel user) {
+        SocialuniCircleModel circleDO = new SocialuniCircleModel(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user);
+        circleDO = socialCircleApi.savePut(circleDO);
         return new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
     }
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
 
-        SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountUtils.getDevIdNotNull(), SocialuniUserUtil.getMineUserNotNull());
-        circleDO = socialCircleRepository.save(circleDO);
+        SocialuniCircleModel circleDO = new SocialuniCircleModel(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), SocialuniUserUtil.getMineUserNotNull());
+        circleDO = socialCircleApi.savePut(circleDO);
 
         ResultRO<SocialCircleRO> resultRO = new ResultRO<>(SocialCircleROFactory.getCircleRO(circleDO));
 

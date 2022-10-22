@@ -1,9 +1,9 @@
 package com.socialuni.admin.web.controller;
 
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,29 +33,31 @@ public class DevAccountRO {
     private String qqMpAppId;
 
 
-    public DevAccountRO(DevAccountDO devAccountDO) {
-        this.devNum = devAccountDO.getDevNum();
+    public DevAccountRO(DevAccountModel devAccountModel) {
+        this.devNum = devAccountModel.getDevNum();
 
-        this.type = devAccountDO.getType();
-        this.appName = devAccountDO.getAppName();
-        this.realName = devAccountDO.getRealName();
+        this.type = devAccountModel.getType();
+        this.appName = devAccountModel.getAppName();
+        this.realName = devAccountModel.getRealName();
 
-        String phoneNum = devAccountDO.getPhoneNum();
-        this.phoneNum = phoneNum.substring(0, 3) + "*****" + phoneNum.substring(8);
+        String phoneNum = devAccountModel.getPhoneNum();
+        if (StringUtils.isNotEmpty(phoneNum)) {
+            this.phoneNum = phoneNum.substring(0, 3) + "*****" + phoneNum.substring(8);
+        }
 
-        if (StringUtils.isNotEmpty(devAccountDO.getSecretKey())) {
-            this.secretKey = devAccountDO.getSecretKey().substring(0, 5) + "*****************";
+        if (StringUtils.isNotEmpty(devAccountModel.getSecretKey())) {
+            this.secretKey = devAccountModel.getSecretKey().substring(0, 5) + "*****************";
         }
 
         for (String supportProviderType : SocialuniSupportProviderType.supportProviderTypes) {
-            DevAccountProviderDO wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByDevAndMpType(devAccountDO.getId(), supportProviderType);
-            if (wxDevAccountProviderDO != null) {
+            DevAccountProviderModler wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devAccountModel.getId(), supportProviderType);
+            if (wxDevAccountProviderModler != null) {
                 if (SocialuniSupportProviderType.wx.equals(supportProviderType)) {
-                    this.wxMpAppId = wxDevAccountProviderDO.getAppId();
-                    this.wxMpAppName = wxDevAccountProviderDO.getAppName();
+                    this.wxMpAppId = wxDevAccountProviderModler.getAppId();
+                    this.wxMpAppName = wxDevAccountProviderModler.getAppName();
                 } else if (SocialuniSupportProviderType.qq.equals(supportProviderType)) {
-                    this.qqMpAppId = wxDevAccountProviderDO.getAppId();
-                    this.qqMpAppName = wxDevAccountProviderDO.getAppName();
+                    this.qqMpAppId = wxDevAccountProviderModler.getAppId();
+                    this.qqMpAppName = wxDevAccountProviderModler.getAppName();
                 }
             }
         }

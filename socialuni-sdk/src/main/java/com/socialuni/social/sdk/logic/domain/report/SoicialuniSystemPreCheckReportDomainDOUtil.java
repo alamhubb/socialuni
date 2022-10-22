@@ -1,27 +1,28 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.ReportDetailDO;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.model.ReportDetailModel;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.social.sdk.dao.repository.ReportDetailRepository;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
-import com.socialuni.social.sdk.dao.repository.UserRepository;
+import com.socialuni.social.report.sdk.api.ReportDetailApi;
+import com.socialuni.social.report.sdk.api.ReportApi;
+import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -36,21 +37,22 @@ import java.util.concurrent.CompletableFuture;
  * @date 2020-03-19 20:05
  */
 @Service
+@Slf4j
 public class SoicialuniSystemPreCheckReportDomainDOUtil {
-    private static ReportRepository reportRepository;
-    private static ReportDetailRepository reportDetailRepository;
+    private static ReportApi reportApi;
+    private static ReportDetailApi reportDetailApi;
     private static KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
     private static KeywordsTriggerService keywordsTriggerService;
-    private static UserRepository userRepository;
+    private static UserApi userApi;
 
     @Resource
-    public void setReportRepository(ReportRepository reportRepository) {
-        SoicialuniSystemPreCheckReportDomainDOUtil.reportRepository = reportRepository;
+    public void setReportRepository(ReportApi reportApi) {
+        SoicialuniSystemPreCheckReportDomainDOUtil.reportApi = reportApi;
     }
 
     @Resource
-    public void setReportDetailRepository(ReportDetailRepository reportDetailRepository) {
-        SoicialuniSystemPreCheckReportDomainDOUtil.reportDetailRepository = reportDetailRepository;
+    public void setReportDetailRepository(ReportDetailApi reportDetailApi) {
+        SoicialuniSystemPreCheckReportDomainDOUtil.reportDetailApi = reportDetailApi;
     }
 
     @Resource
@@ -64,13 +66,13 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
     }
 
     @Resource
-    public void setUserRepository(UserRepository userRepository) {
-        SoicialuniSystemPreCheckReportDomainDOUtil.userRepository = userRepository;
+    public void setUserRepository(UserApi userApi) {
+        SoicialuniSystemPreCheckReportDomainDOUtil.userApi = userApi;
     }
 
     public static void systemPreCheckReport(SocialUnionContentBaseDO socialuniContentBO) {
         CompletableFuture.runAsync(() -> {
-            String content = socialuniContentBO.getContentType();
+            String content = socialuniContentBO.getContent();
             //不为空才校验内容
             if (StringUtils.isEmpty(content)) {
                 return;
@@ -87,17 +89,15 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             Integer contentId = socialuniContentBO.getUnionId();
 
             //获取唯一标识
-            SocialuniUnionIdDO socialuniUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(contentId);
-
-            ReportDO reportDO = reportRepository.findOneByContentId(contentId);
+            SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
+            ReportModel reportModel = reportApi.findOneByContentId(contentId);
             //如果不存在则创建
-            if (reportDO == null) {
-                reportDO = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, socialuniContentBO, socialuniUnionIdDO);
+            if (reportModel == null) {
+                reportModel = ReportFactory.createReportDO(ReportSourceType.systemAutoCheck, socialuniContentBO, socialuniUnionIdModler);
             }
-            reportDO.setReportNum(reportDO.getReportNum() + 1);
-            reportDO.setUpdateTime(new Date());
-            reportDO = reportRepository.save(reportDO);
-
+            reportModel.setReportNum(reportModel.getReportNum() + 1);
+            reportModel.setUpdateTime(new Date());
+            reportModel = reportApi.savePut(reportModel);
             //得到系统的
             //如果触发了关键词
             /*    if (antispamDO.hasViolate()) {
@@ -112,12 +112,11 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             //保存数据
 
             //生成举报详情
-            ReportDetailDO reportDetailDO = new ReportDetailDO("系统自动审查", ViolateType.pornInfo, reportDO, content, SocialuniSystemConst.getSystemUserId());
+            ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, SocialuniSystemConst.getSystemUserId());
 
-            reportDetailRepository.save(reportDetailDO);
+            reportDetailApi.savePut(reportDetailModel);
 
-
-            Integer reportId = reportDO.getId();
+            Integer reportId = reportModel.getId();
 
             //为触发记录关联 report
             keywordsTriggers.forEach(keywordsTriggerDetailDO -> {
@@ -125,7 +124,6 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             });
             //保存触发记录
             keywordsTriggerDetailRepository.saveAll(keywordsTriggers);
-
             SocialUnionContentBaseDO socialUnionContentBaseDO = SocialuniContentDOUtil.getContentDOByContentId(contentId);
 
             socialUnionContentBaseDO.setStatus(ContentStatus.preAudit);
@@ -134,9 +132,9 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             SocialuniContentDOUtil.save(socialUnionContentBaseDO);
             if (socialuniContentBO.getContentType().equals(SocialuniContentType.talkImg)) {
                 //同步更新talk状态
-                SocialuniTalkImgDO socialTalkImgDO = (SocialuniTalkImgDO) socialUnionContentBaseDO;
+                SocialuniTalkImgModel socialTalkImgDO = (SocialuniTalkImgModel) socialUnionContentBaseDO;
                 Integer talkId = socialTalkImgDO.getTalkId();
-                SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
+                SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
                 talkDO.setStatus(ContentStatus.preAudit);
                 talkDO.setUpdateTime(new Date());
                 SocialuniContentDOUtil.save(socialUnionContentBaseDO);
@@ -149,6 +147,9 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             userDO.setUpdateTime(new Date());
             baseModelService.save(socialUnionContentBaseDO);*/
             }
+        }).exceptionally(e -> {
+            log.error(String.valueOf(e));
+            return null;
         });
     }
 }

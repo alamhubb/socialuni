@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.social.sdk.dao.DO.circle.SocialuniCircleDO;
-import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
+import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
@@ -10,15 +10,15 @@ import javax.annotation.Resource;
 
 @Component
 public class SocialuniCircleDOUtil {
-    private static SocialCircleRepository socialCircleRepository;
+    private static SocialCircleInterface socialCircleApi;
 
     @Resource
-    public void setSocialCircleRepository(SocialCircleRepository socialCircleRepository) {
-        SocialuniCircleDOUtil.socialCircleRepository = socialCircleRepository;
+    public void setSocialCircleRepository(SocialCircleInterface socialCircleApi) {
+        SocialuniCircleDOUtil.socialCircleApi = socialCircleApi;
     }
 
-    public static SocialuniCircleDO getCircleEnableNotNull(String circleName) {
-        SocialuniCircleDO circleDO = socialCircleRepository.findFirstByNameAndStatus(circleName, CommonStatus.enable);
+    public static SocialuniCircleModel getCircleEnableNotNull(String circleName) {
+        SocialuniCircleModel circleDO = socialCircleApi.findFirstByNameAndStatus(circleName, CommonStatus.enable);
         if (circleDO == null) {
             throw new SocialParamsException("使用了不存在的圈子");
         }

@@ -2,6 +2,7 @@ package com.socialuni.social.web.sdk.config;
 
 
 import com.socialuni.social.common.constant.ErrorType;
+import com.socialuni.social.tance.sdk.api.SocialRequestUserConfig;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.common.utils.IpUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
@@ -54,7 +55,6 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
 //        requestLogDO.setErrorType(ErrorType.success);
 //        requestLogDO.setErrorMsg(ErrorMsg.successMsg);
 //        requestLogDO.setInnerMsg(ErrorMsg.successMsg);
-
 
         requestLogDO = RequestLogUtil.save(requestLogDO);
         return true;

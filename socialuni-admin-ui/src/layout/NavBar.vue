@@ -1,6 +1,6 @@
 <template>
   <div
-    class="row-between box-shadow px"
+    class="row-between shadow-bottom index-sm px"
   >
     <div class="flex-none row-col-center mr-40 bg-click" @click="toHome">
       <img src="@/assets/img/logo.jpg" class="h40" alt="logo">

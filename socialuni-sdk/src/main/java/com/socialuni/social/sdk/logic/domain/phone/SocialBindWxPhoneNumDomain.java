@@ -8,13 +8,13 @@ import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.logic.platform.WxDecode;
 import com.socialuni.social.sdk.logic.platform.WxPhoneNumRO;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.utils.UniProviderUtil;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.common.utils.JsonUtil;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class SocialBindWxPhoneNumDomain {
     private SocialUserAccountManage socialUserAccountManage;
 
     //微信绑定手机号方法
-    public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDO mineUser) {
+    public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserModel mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
         socialProviderLoginQO.setProvider(UniappProviderType.wx);

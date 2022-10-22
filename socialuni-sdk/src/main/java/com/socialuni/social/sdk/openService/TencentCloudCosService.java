@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.openService;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserImgDO;
-import com.socialuni.social.sdk.dao.repository.SocialuniUserImgRepository;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
+import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class TencentCloudCosService {
     @Resource
     TencentCosAuditRecordRepository tencentCosAuditRecordRepository;
     @Resource
-    SocialuniUserImgRepository userImgRepository;
+    SocialuniUserImgInterface userImgRepository;
     @Resource
     TalkImgRepository talkImgRepository;
 
@@ -54,7 +54,7 @@ public class TencentCloudCosService {
         recordDO.setImgKey(imgKey);
 
         if (contentType.equals(SocialuniContentType.talk)) {
-            SocialuniTalkImgDO talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
+            SocialuniTalkImgModel talkImgDO = talkImgRepository.findFirstBySrc(imgKey);
             if (talkImgDO != null) {
                 recordDO.setImgContentId(talkImgDO.getUnionId());
                 recordDO.setImgParentContentId(talkImgDO.getTalkId());
@@ -64,7 +64,7 @@ public class TencentCloudCosService {
                 return;
             }
         } else {
-            SocialuniUserImgDO userImgDO = userImgRepository.findFirstBySrc(imgKey);
+            SocialuniUserImgModel userImgDO = userImgRepository.findFirstBySrc(imgKey);
             if (userImgDO != null) {
                 recordDO.setImgContentId(userImgDO.getUnionId());
                 recordDO.setImgParentContentId(userImgDO.getUserId());

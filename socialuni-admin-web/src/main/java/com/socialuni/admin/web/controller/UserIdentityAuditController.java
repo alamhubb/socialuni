@@ -6,7 +6,7 @@ import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
@@ -41,7 +41,7 @@ public class UserIdentityAuditController {
         for (SocialUserIdentityAuthDO socialUserIdentityAuthDO : list) {
             SocialUserIdentityAuthImgDO socialUserIdentityAuthImgDO = socialUserIdentityAuthImgRepository.findFirstById(socialUserIdentityAuthDO.getUserIdentityImgId());
 
-            SocialuniUserDO userDO = SocialuniUserUtil.getUserNotNull(socialUserIdentityAuthDO.getUserId());
+            SocialuniUserModel userDO = SocialuniUserUtil.getUserNotNull(socialUserIdentityAuthDO.getUserId());
 
             UserIdentityAuditRO userIdentityAuditRO = new UserIdentityAuditRO(socialUserIdentityAuthDO, socialUserIdentityAuthImgDO, userDO);
             list1.add(userIdentityAuditRO);

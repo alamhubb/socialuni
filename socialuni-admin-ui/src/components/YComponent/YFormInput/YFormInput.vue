@@ -1,7 +1,8 @@
 <template>
-  <el-form-item :label="label" :label-width="labelWidth" :prop="prop">
+  <el-form-item :label="label" :label-width="labelWidth" :prop="prop" :required="required">
+    <!--    为什么会有等于0的判断，因为否则null也会转为'null'-->
     <el-input
-      :value="model||value"
+      :value="((model===0?String(model):model) || value)"
       :readonly="readonly"
       size="small"
       @click.native.stop
@@ -31,6 +32,7 @@ export default class YFormInput extends Vue {
   @Prop() readonly label: string
   @Prop() readonly value: string
   @Prop() readonly prop: string
+  @Prop({ default: false, type: Boolean }) readonly required: boolean
   @Prop() readonly labelWidth: string
 
   @Prop() readonly options: []

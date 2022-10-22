@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.hug;
 
-import com.socialuni.social.sdk.dao.DO.HugDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.community.sdk.model.HugModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -21,11 +21,11 @@ public class SocialAddHugDomain {
     @Resource
     private HugRedis hugRedis;
 
-    public ResultRO<Void> addHug(SocialuniUserDO mineUser, SocialHugAddQO socialHugAddQO) {
+    public ResultRO<Void> addHug(SocialuniUserModel mineUser, SocialHugAddQO socialHugAddQO) {
         if (socialHugAddQO.getTalkId() != null) {
-            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialHugAddQO.getTalkId());
-            HugDO hugDO = new HugDO(mineUser.getUnionId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());
-            hugRedis.save(hugDO);
+            SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(socialHugAddQO.getTalkId());
+            HugModel hugModel = new HugModel(mineUser.getUnionId(), socialHugAddQO.getTalkId(), socialHugAddQO.getCommentId());
+            hugRedis.save(hugModel);
             Integer hugNum = talkDO.getHugNum();
             if (hugNum == null) {
                 talkDO.setHugNum(1);

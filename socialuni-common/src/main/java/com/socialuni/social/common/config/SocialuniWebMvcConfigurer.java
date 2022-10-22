@@ -17,13 +17,19 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
 
     @Resource
     private HandlerInterceptor socialuniWebInterceptor;
+    @Autowired(required = false)
+    @Qualifier("tanceHandlerInterceptor")
+    private HandlerInterceptor tanceHandlerInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //设置允许跨域的路径
         registry.addMapping("/**")
                 //设置允许跨域请求的域名
-                .allowedOrigins("*")
+//                .allowedOrigins("*")
+                // 改成下面这个。
+                // When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+                .allowedOriginPatterns("*")
                 //是否允许证书 不再默认开启
                 .allowCredentials(true)
                 //设置允许的方法
@@ -44,5 +50,16 @@ public class SocialuniWebMvcConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
         registry.addInterceptor(socialuniWebInterceptor).addPathPatterns("/**");
+        /**
+         * 拦截器按照顺序执行
+         *addPathPatterns 用于添加拦截规则
+         *excludePathPatterns 用于排除拦截
+         */
+        if(tanceHandlerInterceptor != null){
+            registry.addInterceptor(tanceHandlerInterceptor)
+//                    .excludePathPatterns("/public/**")
+                    .addPathPatterns("/**")
+                    ;
+        }
     }
 }

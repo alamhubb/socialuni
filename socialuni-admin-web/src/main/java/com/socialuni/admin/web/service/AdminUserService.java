@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.service;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialUserPhoneDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
@@ -17,13 +17,13 @@ public class AdminUserService {
     @Resource
     ThirdUserRepository thirdUserRepository;
 
-    public SocialuniUserDO getUserByPhoneNum(String phoneNum) {
+    public SocialuniUserModel getUserByPhoneNum(String phoneNum) {
         //根据phoneNum获取用户
-        SocialUserPhoneDO socialUserPhoneDO = socialUserPhoneRedis.findByPhoneNum(phoneNum);
-        if (socialUserPhoneDO == null) {
+        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+        if (socialUserPhoneModel == null) {
             throw new SocialParamsException("用户不存在或开发者无权限");
         }
-        SocialuniUserDO user = SocialuniUserUtil.getUserNotNull(socialUserPhoneDO.getUserId());
+        SocialuniUserModel user = SocialuniUserUtil.getUserNotNull(socialUserPhoneModel.getUserId());
         return user;
     }
 }

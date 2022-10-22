@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
-import com.socialuni.social.sdk.config.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTalkAPI;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.logic.platform.MapUtil;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.logic.domain.talk.*;
@@ -63,7 +63,7 @@ public class SocialuniTalkService {
         }
         queryQO.setMinAge(SocialuniSystemConst.homeTalkQueryMinAge);
         queryQO.setMaxAge(SocialuniSystemConst.homeTalkQueryMaxAge);
-        queryQO.setGender(DevAccountUtils.getAppGenderType());
+        queryQO.setGender(DevAccountFacade.getAppGenderType());
         return this.queryTalks(queryQO);
     }
 

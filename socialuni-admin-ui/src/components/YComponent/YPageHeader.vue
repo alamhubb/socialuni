@@ -1,5 +1,5 @@
 <template>
-  <div class="row-between-center px py-smm bb-grey">
+  <div class="row-between-center px py-smm bb-divider">
     <div>
       <slot name="left">
         <slot name="title">

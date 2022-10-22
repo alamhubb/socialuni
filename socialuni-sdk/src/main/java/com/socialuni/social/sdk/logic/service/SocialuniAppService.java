@@ -9,9 +9,9 @@ import com.socialuni.social.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,7 +40,7 @@ public class SocialuniAppService {
 
     public ResultRO<List<HomeSwiperVO>> queryHomeSwipers() {
         //homeSwipers
-        List<HomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(CommonStatus.enable, DevAccountUtils.getDevIdNotNull());
+        List<HomeSwiperDO> homeSwiperDOS = homeSwiperRepository.findAllByStatusAndDevIdOrderByTopLevelAscIdDesc(CommonStatus.enable, DevAccountFacade.getDevIdNotNull());
         List<HomeSwiperVO> homeSwiperVOS = SocialHomeSwiperROFactory.toVOS(homeSwiperDOS);
         return new ResultRO<>(homeSwiperVOS);
     }

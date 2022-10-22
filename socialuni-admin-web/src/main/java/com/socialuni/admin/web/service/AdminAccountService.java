@@ -2,24 +2,24 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.controller.DevAccountUpdateQO;
+import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountProviderRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountProviderDO;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.DevAccountType;
-import com.socialuni.social.sdk.dao.DO.tag.TagDO;
+import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
-import com.socialuni.social.sdk.dao.repository.community.TagRepository;
-import com.socialuni.social.sdk.utils.UUIDUtil;
+import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.common.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -34,20 +34,19 @@ public class AdminAccountService {
     @Resource
     private DevAccountRedis devAccountRedis;
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountInterface devAccountApi;
     @Resource
-    private DevAccountProviderRepository devAccountProviderRepository;
+    private DevAccountProviderInterface devAccountProviderApi;
     @Resource
-    private TagRepository tagRepository;
+    private TagInterface tagApi;
     @Resource
     private SocialTagManage socialTagManage;
-
     @Transactional
     public ResultRO<DevAccountRO> updateDevAccount(DevAccountUpdateQO devAccountQO) {
-        DevAccountDO devAccountDO = DevAccountUtils.getAdminDevAccountNotNull();
+        DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
 
 
-        Integer devId = devAccountDO.getId();
+        Integer devId = devAccountModel.getId();
 
         String devType = devAccountQO.getType();
         DevAccountType.checkSupportType(devType);
@@ -59,15 +58,15 @@ public class AdminAccountService {
         String qqMpAppId = devAccountQO.getQqMpAppId();
         String qqMpAppName = devAccountQO.getQqMpAppName();
 
-        DevAccountDO nameCheckDevAccount = devAccountRepository.findOneByAppName(appName);
+        DevAccountModel nameCheckDevAccount = devAccountApi.findOneByAppName(appName);
         //名称已被注册，不为空，还不为当前账户
-        if (nameCheckDevAccount != null && !nameCheckDevAccount.getId().equals(devAccountDO.getId())) {
+        if (nameCheckDevAccount != null && !nameCheckDevAccount.getId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
         //如果创建过，则一定有，所以下面可以直接使用
-        TagDO checkNameTag = tagRepository.findFirstByName(appName);
+        TagModel checkNameTag = tagApi.findFirstByName(appName);
         //tag名称已被注册，不为空，还不为当前用户
-        if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountDO.getId())) {
+        if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
 
@@ -76,7 +75,7 @@ public class AdminAccountService {
             throw new SocialParamsException("请至少填写一个小程序信息");
         }
 
-        List<DevAccountProviderDO> createDevProviders = new ArrayList<>();
+        List<DevAccountProviderModler> createDevProviders = new ArrayList<>();
 
         //微信渠道有一个不为空
         if (StringUtils.isNotEmpty(wxMpAppId) || StringUtils.isNotEmpty(wxMpAppName)) {
@@ -89,29 +88,29 @@ public class AdminAccountService {
             //只有新旧内容不一致
             //两个都不为空
             //根据绑定小程序查找，是否已被使用
-            DevAccountProviderDO wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByAppIdAndMpType(wxMpAppId, SocialuniSupportProviderType.wx);
+            DevAccountProviderModler wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByAppIdAndMpType(wxMpAppId, SocialuniSupportProviderType.wx);
             //已存在
-            if (wxDevAccountProviderDO != null) {
+            if (wxDevAccountProviderModler != null) {
                 //是否与当前开发者id一致，不一致报错，已被使用
-                if (!wxDevAccountProviderDO.getDevId().equals(devId)) {
+                if (!wxDevAccountProviderModler.getDevId().equals(devId)) {
                     throw new SocialParamsException("小程序已被其他开发者绑定，请联系客服处理");
                 }
             }
             //查找开发者是否已绑定
-            wxDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.wx);
+            wxDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.wx);
             //只有为空，或者appId新旧不一致，或者appname新旧不一致，才更新
-            if (wxDevAccountProviderDO == null
-                    || !wxMpAppId.equals(wxDevAccountProviderDO.getAppId())
-                    || !wxMpAppName.equals(wxDevAccountProviderDO.getAppName())) {
+            if (wxDevAccountProviderModler == null
+                    || !wxMpAppId.equals(wxDevAccountProviderModler.getAppId())
+                    || !wxMpAppName.equals(wxDevAccountProviderModler.getAppName())) {
                 //未绑定创建
-                if (wxDevAccountProviderDO == null) {
-                    wxDevAccountProviderDO = new DevAccountProviderDO(devId, PlatformType.mp, MpType.wx);
+                if (wxDevAccountProviderModler == null) {
+                    wxDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpType.wx);
                 }
                 //已绑定更新
-                wxDevAccountProviderDO.setAppId(wxMpAppId);
-                wxDevAccountProviderDO.setAppName(wxMpAppName);
-                wxDevAccountProviderDO = devAccountProviderRepository.save(wxDevAccountProviderDO);
-                createDevProviders.add(wxDevAccountProviderDO);
+                wxDevAccountProviderModler.setAppId(wxMpAppId);
+                wxDevAccountProviderModler.setAppName(wxMpAppName);
+                wxDevAccountProviderModler = devAccountProviderApi.savePut(wxDevAccountProviderModler);
+                createDevProviders.add(wxDevAccountProviderModler);
             }
         }
 
@@ -125,72 +124,72 @@ public class AdminAccountService {
             }
             //两个都不为空
             //根据绑定小程序查找，是否已被使用
-            DevAccountProviderDO qqDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByAppIdAndMpType(qqMpAppId, SocialuniSupportProviderType.qq);
+            DevAccountProviderModler qqDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByAppIdAndMpType(qqMpAppId, SocialuniSupportProviderType.qq);
             //已存在
-            if (qqDevAccountProviderDO != null) {
+            if (qqDevAccountProviderModler != null) {
                 //是否与当前开发者id一致，不一致报错，已被使用
-                if (!qqDevAccountProviderDO.getDevId().equals(devId)) {
+                if (!qqDevAccountProviderModler.getDevId().equals(devId)) {
                     throw new SocialParamsException("小程序已被其他开发者绑定，请联系客服处理");
                 }
             }
             //查找开发者是否已绑定
-            qqDevAccountProviderDO = DevAccountUtils.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.qq);
+            qqDevAccountProviderModler = DevAccountFacade.getDevAccountProviderDOByDevAndMpType(devId, SocialuniSupportProviderType.qq);
 
 
             //只有为空，或者appId新旧不一致，或者appname新旧不一致，才更新
-            if (qqDevAccountProviderDO == null
-                    || !qqMpAppId.equals(qqDevAccountProviderDO.getAppId())
-                    || !qqMpAppName.equals(qqDevAccountProviderDO.getAppName())) {
+            if (qqDevAccountProviderModler == null
+                    || !qqMpAppId.equals(qqDevAccountProviderModler.getAppId())
+                    || !qqMpAppName.equals(qqDevAccountProviderModler.getAppName())) {
                 //未绑定创建
-                if (qqDevAccountProviderDO == null) {
-                    qqDevAccountProviderDO = new DevAccountProviderDO(devId, PlatformType.mp, MpType.qq);
+                if (qqDevAccountProviderModler == null) {
+                    qqDevAccountProviderModler = new DevAccountProviderModler(devId, PlatformType.mp, MpType.qq);
                 }
                 //已绑定更新
-                qqDevAccountProviderDO.setAppId(qqMpAppId);
-                qqDevAccountProviderDO.setAppName(qqMpAppName);
-                qqDevAccountProviderDO = devAccountProviderRepository.save(qqDevAccountProviderDO);
-                createDevProviders.add(qqDevAccountProviderDO);
+                qqDevAccountProviderModler.setAppId(qqMpAppId);
+                qqDevAccountProviderModler.setAppName(qqMpAppName);
+                qqDevAccountProviderModler = devAccountProviderApi.savePut(qqDevAccountProviderModler);
+                createDevProviders.add(qqDevAccountProviderModler);
             }
         }
 
         //        devAccountDO.setType(devType); 先不支持修改
 //        devAccountDO.setRealName(devAccountQO.getRealName());
         //更新开发者信息
-        devAccountDO.setUpdateTime(new Date());
+        devAccountModel.setUpdateTime(new Date());
 
         boolean isCreateDevAccount = false;
         //如果app名称是空，则代表首次设置，则生成tag名称
         //如果新旧不一样，则肯定要同步，就是要区分是更新，还是新建的问题
         //如果名称不一致，则代表修改了app名称
-        if (!appName.equals(devAccountDO.getAppName())) {
+        if (!appName.equals(devAccountModel.getAppName())) {
             //如果之前为空，则代表初始化
-            if (StringUtils.isEmpty(devAccountDO.getAppName())) {
+            if (StringUtils.isEmpty(devAccountModel.getAppName())) {
                 isCreateDevAccount = true;
                 //不能拿到外层，因为有判断
-                devAccountDO.setAppName(appName);
+                devAccountModel.setAppName(appName);
                 //初始化时生成uuid
-                devAccountDO.setSecretKey(UUIDUtil.getUUID());
+                devAccountModel.setSecretKey(UUIDUtil.getUUID());
                 //初始化时需要让开发环境同步增加tag
                 //设置对应的开发者app名称
-                socialTagManage.createDevAccountTagDO(devAccountDO.getId(), appName);
+                socialTagManage.createDevAccountTagDO(devAccountModel.getId(), appName);
             } else {
-                devAccountDO.setAppName(appName);
+                devAccountModel.setAppName(appName);
                 //改名，更新tag名称
                 checkNameTag.setName(appName);
-                tagRepository.save(checkNameTag);
+                tagApi.savePut(checkNameTag);
             }
         }
 
         //新建和修改，数量必然大于0，代表需要向开发环境同步
-        SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountDO, createDevProviders);
+        SyncProdDevAccountQO syncProdDevAccountQO = new SyncProdDevAccountQO(devAccountModel, createDevProviders);
         //调用api的时候，要区分出来是更新还是新增，尽早区分
 //        socialuniAdminAPI.syncProdDevAccount(syncProdDevAccountQO);
 
-        devAccountDO = devAccountRedis.saveDevAccount(devAccountDO);
-        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+        devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
         //如果为创建，首次则返回秘钥
         if (isCreateDevAccount) {
-            devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+            devAccountRO.setSecretKey(devAccountModel.getSecretKey());
         }
         //则更新用户手机号
         return new ResultRO<>(devAccountRO);

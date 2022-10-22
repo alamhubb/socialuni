@@ -6,7 +6,7 @@ import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.VisibleType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.social.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
@@ -18,8 +18,8 @@ import com.socialuni.social.sdk.model.RO.user.SocialuniContentUserRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.sdk.constant.socialuni.GenderType;
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,13 +55,13 @@ public class TestController {
         }
         UserDO userDO = testUserRepository.save(new UserDO(name));
 
-        TokenDO tokenDO = new TokenDO(userDO.getId(), SocialTokenUtil.generateTokenByUserId(userDO.getId()));
+        TokenDO tokenDO = new TokenDO(userDO.getId(), SocialTokenFacade.generateTokenByUserId(userDO.getId()));
 
         tokenDO = testTokenRepository.save(tokenDO);
 
         TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
-        SocialuniUserDO socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
+        SocialuniUserModel socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
         SocialuniContentUserRO socialContentUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
 
         Map<String, Object> map = new HashMap<>();
@@ -72,7 +72,7 @@ public class TestController {
 
     @GetMapping("getMineUser")
     public ResultRO<SocialuniUserRO> getMineUser() {
-        SocialuniUserDO socialUserDO = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserModel socialUserDO = SocialuniUserUtil.getMineUserNotNull();
         SocialuniContentUserRO socialUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);
     }

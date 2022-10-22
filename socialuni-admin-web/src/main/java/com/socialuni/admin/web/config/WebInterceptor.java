@@ -1,7 +1,7 @@
 package com.socialuni.admin.web.config;
 
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import com.socialuni.social.common.constant.ErrorCode;
 import com.socialuni.social.common.exception.exception.SocialNotLoginException;
@@ -9,6 +9,7 @@ import com.socialuni.social.web.sdk.config.SocialuniWebInterceptor;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Primary
 @Component
 @Slf4j
 public class WebInterceptor extends SocialuniWebInterceptor {
@@ -35,7 +37,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
             return true;
         }
         RequestLogDO requestLogDO = RequestLogUtil.get();
-        DevAccountDO user = DevAccountUtils.getAdminDevAccountAllowNull();
+        DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
         if (user != null) {
             requestLogDO.setUserId(user.getId());
         }

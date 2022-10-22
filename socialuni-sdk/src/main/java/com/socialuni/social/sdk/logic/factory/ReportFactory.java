@@ -1,62 +1,62 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.sdk.constant.ReportSourceType;
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
 public class ReportFactory {
-    public static ReportDO createReportDO(
+    public static ReportModel createReportDO(
             String reportSourceType,
             SocialUnionContentBaseDO socialuniContentBO,
-            SocialuniUnionIdDO socialuniUnionIdDO
+            SocialuniUnionIdModler socialuniUnionIdModler
     ) {
-        return ReportFactory.createReportDO(socialuniContentBO.getContentType(), socialuniContentBO.getUnionId(), socialuniContentBO.getContent(), socialuniContentBO.getUserId(), reportSourceType, socialuniUnionIdDO);
+        return ReportFactory.createReportDO(socialuniContentBO.getContentType(), socialuniContentBO.getUnionId(), socialuniContentBO.getContent(), socialuniContentBO.getUserId(), reportSourceType, socialuniUnionIdModler);
     }
 
 
-    private static ReportDO createReportDO(
+    private static ReportModel createReportDO(
             String contentType,
             Integer contentId,
             String content,
             Integer contentUserId,
             String reportSourceType,
-            SocialuniUnionIdDO socialuniUnionIdDO
+            SocialuniUnionIdModler socialuniUnionIdModler
     ) {
         // 设置model
-        ReportDO reportDO = new ReportDO();
+        ReportModel reportModel = new ReportModel();
 
 //        reportDO.setCause(cause);
-        reportDO.setReportContent(content);
+        reportModel.setReportContent(content);
         //设置被举报用户
-        reportDO.setContentUserId(contentUserId);
+        reportModel.setContentUserId(contentUserId);
         if (ReportSourceType.userReport.equals(reportSourceType)) {
-            reportDO.setStatus(ReportStatus.audit);
+            reportModel.setStatus(ReportStatus.audit);
         } else {
-            reportDO.setStatus(ReportStatus.preAudit);
+            reportModel.setStatus(ReportStatus.preAudit);
         }
         //第一次被举报设置默认值
-        reportDO.setSupportRatio(100);
-        reportDO.setSupportRatio(0);
-        reportDO.setHasReview(false);
+        reportModel.setSupportRatio(100);
+        reportModel.setSupportRatio(0);
+        reportModel.setHasReview(false);
         Date curDate = new Date();
-        reportDO.setCreateTime(curDate);
-        reportDO.setUpdateTime(curDate);
+        reportModel.setCreateTime(curDate);
+        reportModel.setUpdateTime(curDate);
 //        reportDO.setDevId(DevAccountUtils.getDevIdNotNull());
         //内容来源
-        reportDO.setContentType(contentType);
+        reportModel.setContentType(contentType);
         //举报来源
-        reportDO.setReportSourceType(reportSourceType);
+        reportModel.setReportSourceType(reportSourceType);
 
-        reportDO.setContentId(contentId);
+        reportModel.setContentId(contentId);
         //用来记录有哪些内容的审核权限，所以是内容归属的开发者
-        reportDO.setDevId(socialuniUnionIdDO.getFromDevId());
-        return reportDO;
+        reportModel.setDevId(socialuniUnionIdModler.getFromDevId());
+        return reportModel;
     }
 
     /*public ReportDO createReportDO(

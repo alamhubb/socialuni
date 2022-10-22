@@ -1,5 +1,6 @@
 package com.socialuni.social.common.config;
 
+import cn.hutool.core.util.ClassUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.constant.ErrorCode;
@@ -44,6 +45,8 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse serverHttpResponse) {
         ServletServerHttpResponse sshrp = (ServletServerHttpResponse) serverHttpResponse;
         HttpServletResponse response = sshrp.getServletResponse();
+        Class<Object> aClass = ClassUtil.getClass(result);
+        String aPackage = ClassUtil.getPackage(aClass);
         // 兼容没有返回体的。
         if (response.getStatus() == 200 && result instanceof ResultRO) {
             Integer resCode = ((ResultRO<?>) result).getCode();
@@ -51,7 +54,14 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 response.setStatus(resCode);
             }
             return result;
+        }
+        //是否需要考虑 返回map，list的情况？
+        /*else if(aPackage.startsWith("com.socialuni")){
+            return ResultRO.success(result);
         }else{
+            return result;
+        }*/
+        else{
             return ResultRO.success(result);
         }
     }
@@ -71,7 +81,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
-        ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
+        ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.getSystemErrorMsg());
         String errorStr = exception.toString();
         if (StringUtils.isEmpty(errorStr)) {
             try {
@@ -103,7 +113,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 errorStr = "解析异常出错";
                 e.printStackTrace();
             }
-            ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.systemErrorMsg);
+            ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.getSystemErrorMsg());
             this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, feignException.toString(), errorStr);
             return resultRO;
         }

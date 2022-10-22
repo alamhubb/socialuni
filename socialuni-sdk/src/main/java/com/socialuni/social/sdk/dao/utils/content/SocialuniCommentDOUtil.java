@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.repository.CommentRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
@@ -15,26 +15,26 @@ import java.util.Objects;
 
 @Component
 public class SocialuniCommentDOUtil {
-    private static CommentRepository commentRepository;
+    private static CommentInterface commentApi;
 
     @Resource
-    public void setCommentRepository(CommentRepository commentRepository) {
-        SocialuniCommentDOUtil.commentRepository = commentRepository;
+    public void setCommentRepository(CommentInterface commentApi) {
+        SocialuniCommentDOUtil.commentApi = commentApi;
     }
 
-    public static SocialuniCommentDO getNotCommentNull(Integer unionId) {
-        SocialuniCommentDO commentDO = getAllowNull(unionId);
+    public static SocialuniCommentModel getNotCommentNull(Integer unionId) {
+        SocialuniCommentModel commentDO = getAllowNull(unionId);
         if (commentDO == null) {
             throw new SocialSystemException("不存在的评论");
         }
         return commentDO;
     }
 
-    public static SocialuniCommentDO getAllowNull(Integer unionId) {
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
-        SocialuniCommentDO commentDO = commentRepository.findOneByUnionId(unionId);
+    public static SocialuniCommentModel getAllowNull(Integer unionId) {
+        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniCommentModel commentDO = commentApi.findOneByUnionId(unionId);
         if (commentDO == null) {
-            if (Objects.equals(DevAccountUtils.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
+            if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
                 throw new SocialSystemException("评论丢失了，请联系客服");
             }
         }
@@ -42,7 +42,7 @@ public class SocialuniCommentDOUtil {
     }
 
 
-    public static List<SocialuniCommentDO> getAll(Integer talkId) {
-        return commentRepository.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
+    public static List<?  extends SocialuniCommentModel> getAll(Integer talkId) {
+        return commentApi.findTop50ByTalkIdAndStatusInAndParentCommentIdIsNullOrderByUpdateTimeDesc(talkId, ContentStatus.selfCanSeeContentStatus);
     }
 }

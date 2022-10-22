@@ -3,6 +3,7 @@ package com.socialuni.social.web.sdk.utils;
 
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.store.RequestLogStore;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
+@Slf4j
 public class RequestLogUtil {
     private static RequestLogStore requestLogStore;
 

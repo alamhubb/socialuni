@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
-import com.socialuni.social.sdk.dao.DO.SocialuniUnionIdDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.community.sdk.api.TalkInterface;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Component
 public class SocialuniTalkDOUtil {
 
-    private static TalkRepository talkRepository;
+    private static TalkInterface talkApi;
     private static SocialuniTalkDORedis socialuniTalkDORedis;
 
     @Resource
@@ -25,17 +25,17 @@ public class SocialuniTalkDOUtil {
     }
 
     @Resource
-    public void setTalkRepository(TalkRepository talkRepository) {
-        SocialuniTalkDOUtil.talkRepository = talkRepository;
+    public void setTalkRepository(TalkInterface talkApi) {
+        SocialuniTalkDOUtil.talkApi = talkApi;
     }
 
-    public static SocialuniTalkDO save(SocialuniTalkDO talkDO) {
+    public static SocialuniTalkModel save(SocialuniTalkModel talkDO) {
         talkDO.setUpdateTime(new Date());
         return socialuniTalkDORedis.save(talkDO);
     }
 
-    public static SocialuniTalkDO getTalkNotNull(Integer talkUnionId) {
-        SocialuniTalkDO talkDO = getAllowNull(talkUnionId);
+    public static SocialuniTalkModel getTalkNotNull(Integer talkUnionId) {
+        SocialuniTalkModel talkDO = getAllowNull(talkUnionId);
         if (talkDO == null) {
             throw new SocialParamsException("不存在的动态内容");
         }
@@ -43,12 +43,12 @@ public class SocialuniTalkDOUtil {
     }
 
     //逻辑没问题，第一行是校验
-    public static SocialuniTalkDO getAllowNull(Integer unionId) {
-        SocialuniUnionIdDO uniContentUnionIdDO = SocialuniUnionIdUtil.getUnionDOByUnionIdNotNull(unionId);
-        SocialuniTalkDO talkDO = talkRepository.findOneByUnionId(unionId);
+    public static SocialuniTalkModel getAllowNull(Integer unionId) {
+        SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(unionId);
+        SocialuniTalkModel talkDO = talkApi.findOneByUnionId(unionId);
         if (talkDO == null) {
             //只有开发者相等才进入， 用户写入的数据，不该出现不存在的情况
-            if (Objects.equals(DevAccountUtils.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
+            if (Objects.equals(DevAccountFacade.getDevIdNotNull(), uniContentUnionIdDO.getFromDevId())) {
                 throw new SocialSystemException("动态丢失了，请联系客服");
             }
         }

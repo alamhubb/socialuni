@@ -4,11 +4,11 @@ package com.socialuni.admin.web.model;
 import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
-import com.socialuni.social.sdk.constant.socialuni.SocialuniContentType;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
@@ -58,21 +58,21 @@ public class ReportRO {
         ReportRO.keywordsTriggerDetailRepository = keywordsTriggerDetailRepository;
     }
 
-    public ReportRO(ReportDO reportDO) {
-        this.id = reportDO.getId();
-        this.talk = ReportContentROFactory.getReportContentVO(reportDO.getContentType(), reportDO.getContentId());
+    public ReportRO(ReportModel reportModel) {
+        this.id = reportModel.getId();
+        this.talk = ReportContentROFactory.getReportContentVO(reportModel.getContentType(), reportModel.getContentId());
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportDO.getContentUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportModel.getContentUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
         this.violateType = AdminAuditResultType.noViolation;
         this.triggerKeywords = new ArrayList<>();
         this.auditContentType = SocialuniAuditContentType.report;
-        if (reportDO.getId() != null) {
-            this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(reportDO.getId());
+        if (reportModel.getId() != null) {
+            this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(reportModel.getId());
         }
     }
 

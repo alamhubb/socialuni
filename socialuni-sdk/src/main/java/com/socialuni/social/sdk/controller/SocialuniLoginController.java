@@ -8,6 +8,7 @@ import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
  * 目前认为用不到这个类,社交联盟不提供登录功能，只提供授权功能
  */
 @RestController
+@RequestMapping("socialuni/login")
 public class SocialuniLoginController implements SocialuniLoginAPI {
     @Resource
     private SocialuniLoginService centerLoginService;

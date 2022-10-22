@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("socialuni/talk")
+//@RequestMapping("socialuni/talk")
 @OpenAPIDefinition(
         info = @Info(
                 title = "社交联盟接口",
@@ -37,16 +37,10 @@ import java.util.List;
                 @Tag(name = "开放数据/开放用户数据"),
                 @Tag(name = "用户模块/用户信息模块"),
                 @Tag(name = "用户模块/用户认证模块"),
-        },
-        servers = {
-                @Server(
-                        description = "社交联盟中心服务器地址",
-                        url = "https://api.socialuni.cn"
-                )
         }
 )
 @Tag(name = "社区模块/动态模块")
-@FeignClient(name = "talk", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "talk", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/talk")
 public interface SocialuniTalkAPI {
     @GetMapping("queryStickTalks")
     @Operation(summary = "查询置顶动态列表，无需参数")

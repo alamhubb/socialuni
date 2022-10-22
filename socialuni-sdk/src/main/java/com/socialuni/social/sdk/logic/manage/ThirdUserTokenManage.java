@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.manage;
 
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserTokenRepository;
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +14,7 @@ public class ThirdUserTokenManage {
 
     public ThirdUserTokenDO create(String thirdUserId, Integer devId, Integer mineUserId) {
         //本系统的，生成userToken，有个清池token对应集美token
-        String appToken = SocialTokenUtil.generateTokenByUserKey(thirdUserId);
+        String appToken = SocialTokenFacade.generateTokenByUserKey(thirdUserId);
         ThirdUserTokenDO thirdToken = new ThirdUserTokenDO(mineUserId, appToken, devId, thirdUserId);
         thirdToken = thirdUserTokenRepository.save(thirdToken);
         return thirdToken;

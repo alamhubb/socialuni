@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.RedisKeysUtil;
-import com.socialuni.social.sdk.dao.redis.redisKey.CommonRedisKey;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -22,13 +22,13 @@ public class SocialuniTalkDORedis {
     @Resource
     RedisUtil redisUtil;
     @Resource
-    private TalkRepository talkRepository;
+    private TalkInterface talkApi;
     @Resource
     private TalkMapper talkMapper;
 
     @Caching(
             evict = {
-                    @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, allEntries = true),
+                    // @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByTalkCondition, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndTag, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndCircle, allEntries = true),
@@ -41,7 +41,7 @@ public class SocialuniTalkDORedis {
             },
             put = {@CachePut(cacheNames = CommonRedisKey.talkById, key = "#talkDO.unionId")}
     )
-    public SocialuniTalkDO save(SocialuniTalkDO talkDO) {
+    public SocialuniTalkModel save(SocialuniTalkModel talkDO) {
         //清空用户的
         Set redisKeys = redisUtil.keys(RedisKeysUtil.getRedisKeys(CommonRedisKey.queryUserTalkIds, talkDO.getUserId() + "*"));
         //清空自己的
@@ -50,18 +50,18 @@ public class SocialuniTalkDORedis {
         redisKeys.addAll(redisUtil.keys(RedisKeysUtil.getRedisKeys(CommonRedisKey.queryUserFollowsTalkIds, "*-" + talkDO.getUserId() + "-*")));
         //清除缓存
         redisUtil.del(redisKeys);
-        return talkRepository.save(talkDO);
+        return talkApi.savePut(talkDO);
     }
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
     public List<Integer> queryUserTalkIds(Integer userId, Pageable pageable) {
-        return talkRepository.queryTalkIdsByUser(userId, ContentStatus.otherCanSeeContentStatus, pageable);
+        return talkApi.queryTalkIdsByUser(userId, ContentStatus.otherCanSeeContentStatus, pageable);
     }
 
     //用户发布动态后需要更新这个缓存
     @Cacheable(cacheNames = CommonRedisKey.queryMineTalkIds, key = "#userId+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
     public List<Integer> queryMineTalkIds(Integer userId, Pageable pageable) {
-        return talkRepository.queryTalkIdsByUser(userId, ContentStatus.selfCanSeeContentStatus, pageable);
+        return talkApi.queryTalkIdsByUser(userId, ContentStatus.selfCanSeeContentStatus, pageable);
     }
 
     //用户发布动态后需要更新这个缓存
@@ -73,7 +73,7 @@ public class SocialuniTalkDORedis {
     //这里有问题，应该清楚所有引用了当前用户的
     @Cacheable(cacheNames = CommonRedisKey.queryUserFollowsTalkIds, key = "#userId+'-'+#userIds+'-'+#pageable.pageNumber+'-'+#pageable.pageSize")
     public List<Integer> queryUserFollowsTalkIds(Integer userId, List<Integer> userIds, Pageable pageable) {
-        return talkRepository.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
+        return talkApi.queryTalkIdsByUserFollow(userId, ContentStatus.selfCanSeeContentStatus, userIds, ContentStatus.enable, pageable);
     }
 
     public List<Integer> filterTalkIds(List<Integer> talkIds, List<Integer> tagTalkIds) {

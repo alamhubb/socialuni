@@ -2,17 +2,17 @@ package com.socialuni.social.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.sdk.constant.AppData;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
 import com.socialuni.social.sdk.dao.redis.DistrictRedis;
-import com.socialuni.social.sdk.dao.repository.dev.DevSocialuniIdRepository;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.api.DevSocialuniIdInterface;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Async;
@@ -38,32 +38,24 @@ public class MyApplicationRunner implements ApplicationRunner {
     DevAccountEntity devAccountEntity;
 
     @Resource
-    DevSocialuniIdRepository devSocialuniIdRepository;
+    DevSocialuniIdInterface devSocialuniIdApi;
 
-    @Autowired(required = false)
-    private SocialuniAppConfig socialuniAppConfig;
 
     @Override
     @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         //如果为null，则为default类型
         //初始化默认值
-        if (socialuniAppConfig != null) {
-            String appType = (String) socialuniAppConfig.getClass().getField("appType").get(null);
-            SocialuniAppConfigBO socialuniAppConfigBO = (SocialuniAppConfigBO) socialuniAppConfig.getClass().getField("appConfig").get(null);
-            SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = (SocialuniAppMoreConfigBO) socialuniAppConfig.getClass().getField("appMoreConfig").get(null);
-            SocialuniAppConfig.resetSocialuniAppConfig(appType, socialuniAppConfigBO, socialuniAppMoreConfigBO);
-        }
 //        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccount(1);
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccount(1);
 
         //如果不存在用户，则创建第一个默认的主系统开发者
-        if (devAccountDO == null) {
+        if (devAccountModel == null) {
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountEntity.createDevAccount(null);
+                devAccountEntity.createDevAccount(SocialuniSystemConst.getSystemUserPhoneNum());
             } else {
-                devAccountEntity.createDevAccount(null, SocialuniSystemConst.getAppSocialuniId());
+                devAccountEntity.createDevAccount(SocialuniSystemConst.getSystemUserPhoneNum(), SocialuniSystemConst.getAppSocialuniId());
             }
 
             /*DevSocialuniIdDO devSocialuniIdDO = new DevSocialuniIdDO();
@@ -74,9 +66,10 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         //创建中心
         if (SocialuniSystemConst.serverIsChild()) {
-            DevAccountDO centerDevDO = DevAccountUtils.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
+            DevAccountModel centerDevDO = DevAccountFacade.getDevAccountBySocialuniId(SocialuniSystemConst.getCenterSocialuniId());
             if (centerDevDO == null) {
-                devAccountEntity.createDevAccount(null, SocialuniSystemConst.getCenterSocialuniId());
+                //手机号格式字符串瞎写就行，没有其他地方使用
+                devAccountEntity.createDevAccount("99999888667", SocialuniSystemConst.getCenterSocialuniId());
             }
         }
 

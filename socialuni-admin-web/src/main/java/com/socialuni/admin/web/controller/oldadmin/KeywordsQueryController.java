@@ -3,18 +3,20 @@ package com.socialuni.admin.web.controller.oldadmin;
 import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.sdk.constant.socialuni.CommonStatus;
+import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.socialuni.ReportStatus;
-import com.socialuni.social.sdk.dao.DO.community.comment.SocialuniCommentDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
+import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.repository.*;
-import com.socialuni.social.sdk.dao.repository.community.TalkRepository;
+import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
@@ -40,7 +42,7 @@ import java.util.Optional;
 @RequestMapping("keywords")
 public class KeywordsQueryController {
     @Resource
-    private ReportRepository reportRepository;
+    private ReportApi reportApi;
     @Resource
     private ViolationService violationService;
     @Resource
@@ -51,9 +53,9 @@ public class KeywordsQueryController {
     private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
 
     @Resource
-    private TalkRepository talkRepository;
+    private TalkInterface talkApi;
     @Resource
-    private CommentRepository commentRepository;
+    private CommentInterface commentApi;
     @Resource
     private MessageRepository messageRepository;
     @Resource
@@ -114,8 +116,8 @@ public class KeywordsQueryController {
         //得到所有触发的
         List<SocialUnionContentBaseDO> baseModelDOS = new ArrayList<>();
         Pageable pageable = PageRequest.of(0, count);
-        Page<SocialuniTalkDO> talkModels = talkRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
-        Page<SocialuniCommentDO> commentDOS = commentRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<?  extends SocialuniTalkModel> talkModels = talkApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<?  extends SocialuniCommentModel> commentDOS = commentApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<MessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
 
         baseModelDOS.addAll(talkModels.getContent());

@@ -62,7 +62,6 @@ public class SocialJpaLogAspect {
             jpaSqlLogDO.setParams(params);
 
             jpaSqlLogDO.setInterfaceMethod(interfaceAndMethodName);
-
             RequestLogDO requestLogDO = RequestLogUtil.get();
             if (requestLogDO != null) {
                 jpaSqlLogDO.setRequestId(requestLogDO.getId());

@@ -2,19 +2,23 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.social.sdk.config.SocialTokenUtil;
+import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
+import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
-import com.socialuni.social.sdk.dao.DO.dev.DevTokenDO;
-import com.socialuni.social.sdk.model.QO.dev.DevAccountQueryQO;
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.dao.repository.dev.DevTokenRepository;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.sdk.model.DevTokenModler;
+import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
+import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,22 +29,25 @@ public class AdminLoginService {
     @Resource
     DevAuthCodeManage devAuthCodeManage;
     @Resource
-    DevAccountRepository devAccountRepository;
+    DevAccountInterface devAccountApi;
     @Resource
     DevAccountEntity devAccountEntity;
     @Resource
-    DevTokenRepository devTokenRepository;
-
+    DevTokenInterface devTokenApi;
+    @Resource
+    SocialUserPhoneEntity socialUserPhoneEntity;
+    @Resource
+    SocialUserPhoneManage socialUserPhoneManage;
     //秘钥登录
     @Transactional
-    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountQueryQO devAccountQueryQO) {
-        DevAccountDO devAccountDO = devAccountRepository.findOneBySecretKey(devAccountQueryQO.getSecretKey());
-        if (devAccountDO == null) {
+    public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
+        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devAccountQueryQO.getSecretKey());
+        if (devAccountModel == null) {
             throw new SocialBusinessException("秘钥错误");
         }
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        return getSocialLoginROResultRO(devAccountDO, false);
+        return getSocialLoginROResultRO(devAccountModel, false);
     }
 
 
@@ -61,27 +68,32 @@ public class AdminLoginService {
         devAuthCodeManage.checkAuthCode(phoneNum, authCode);
 
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
-        DevAccountDO devAccountDO = devAccountRepository.findOneByPhoneNumOrderByIdAsc(phoneNum);
+        DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
-        if (devAccountDO == null) {
-            devAccountDO = devAccountEntity.createDevAccount(phoneNum);
-            return getSocialLoginROResultRO(devAccountDO, true);
+        //同时创建c段账号
+        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+        if (socialUserPhoneModel == null) {
+            socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         }
-        return getSocialLoginROResultRO(devAccountDO, false);
 
+        if (devAccountModel == null) {
+            devAccountModel = devAccountEntity.createDevAccount(phoneNum);
+            return getSocialLoginROResultRO(devAccountModel, true);
+        }
+        return getSocialLoginROResultRO(devAccountModel, false);
     }
 
-    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountDO devAccountDO, boolean isNewAccount) {
+    private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountModel devAccountModel, boolean isNewAccount) {
         //有用户返回，没有创建
 //        String platform = loginVO.getPlatform();
-        String devSecretKey = devAccountDO.getSecretKey();
+        String devSecretKey = devAccountModel.getSecretKey();
         //生成userToken
-        String userToken = SocialTokenUtil.generateTokenByUserKey(devSecretKey);
-        userToken = devTokenRepository.save(new DevTokenDO(userToken, devAccountDO.getId())).getTokenCode();
+        String userToken = SocialTokenFacade.generateTokenByUserKey(devSecretKey);
+        userToken = devTokenApi.savePut(new DevTokenModler(userToken, devAccountModel.getId())).getTokenCode();
 
-        DevAccountRO devAccountRO = new DevAccountRO(devAccountDO);
+        DevAccountRO devAccountRO = new DevAccountRO(devAccountModel);
         if (isNewAccount) {
-            devAccountRO.setSecretKey(devAccountDO.getSecretKey());
+            devAccountRO.setSecretKey(devAccountModel.getSecretKey());
         }
 //        devAccountRO.setSecretKey(devAccountDO.getSecretKey());
 

@@ -3,9 +3,9 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.sdk.dao.DO.ReportDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUnionContentBaseDO;
-import com.socialuni.social.sdk.dao.repository.ReportRepository;
+import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.platform.qq.QQConst;
 import com.socialuni.social.sdk.logic.platform.weixin.WxConst;
@@ -24,27 +24,27 @@ import java.util.HashMap;
  */
 @Component
 public class ReportResultPushUtils {
-    private static ReportRepository reportRepository;
+    private static ReportApi reportApi;
 
     @Resource
-    public void setReportRepository(ReportRepository reportRepository) {
-        ReportResultPushUtils.reportRepository = reportRepository;
+    public void setReportRepository(ReportApi reportApi) {
+        ReportResultPushUtils.reportApi = reportApi;
     }
 
     //动态评论通知
     public static PushMsgDTO getReportResultPushDTO(String provider, NotifyDO notify) {
-        ReportDO reportDO = reportRepository.findById(notify.getReportId()).get();
-        SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportDO.getContentId());
+        ReportModel reportModel = reportApi.findById(notify.getReportId()).get();
+        SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
 
         //举报原因
-        String reportCause = reportDO.getAuditType();
-        if (StringUtils.isNotEmpty(reportDO.getAuditNote())) {
-            reportCause = reportCause + "，" + reportDO.getAuditNote();
+        String reportCause = reportModel.getAuditType();
+        if (StringUtils.isNotEmpty(reportModel.getAuditNote())) {
+            reportCause = reportCause + "，" + reportModel.getAuditNote();
         }
 
         String reportResult = ErrorMsg.report_fail_result;
         String reportRemark = ErrorMsg.report_fail_remark;
-        if (reportDO.getValid()) {
+        if (reportModel.getValid()) {
             reportResult = ErrorMsg.report_success_result;
             reportRemark = ErrorMsg.report_success_remark;
         }
@@ -55,7 +55,7 @@ public class ReportResultPushUtils {
         notifyVO.setBeNickname(new PushValue(SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId()).getNickname()));
         notifyVO.setCause(new PushValue(reportCause));
         notifyVO.setResult(new PushValue(reportResult));
-        notifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(reportDO.getUpdateTime())));
+        notifyVO.setDate(new PushValue(DateUtils.simpleTimeFormat.format(reportModel.getUpdateTime())));
         notifyVO.setRemark(new PushValue(StringUtils.substring(reportRemark, 0, 20)));
 
         HashMap<String, Object> data = new HashMap<>();

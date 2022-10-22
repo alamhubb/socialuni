@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserExpandDO;
-import com.socialuni.social.sdk.dao.repository.user.SocialuniUserExpandRepository;
-import com.socialuni.social.sdk.dao.repository.UserRepository;
-import com.socialuni.social.sdk.dao.repository.community.SocialCircleRepository;
-import com.socialuni.social.sdk.dao.repository.community.SocialuniTagTypeRepository;
+import com.socialuni.social.user.sdk.api.UserApi;
+import com.socialuni.social.user.sdk.model.SocialuniUserExpandModel;
+import com.socialuni.social.user.sdk.api.SocialuniUserExpandInterface;
+import com.socialuni.social.community.sdk.api.SocialCircleInterface;
+import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniSchoolCheck;
@@ -23,18 +23,18 @@ import javax.annotation.Resource;
 @Component
 public class SocialuniEditExpandDomain {
     @Resource
-    UserRepository userRepository;
+    UserApi userApi;
 
     @Resource
-    SocialCircleRepository socialCircleRepository;
+    SocialCircleInterface socialCircleApi;
     @Resource
-    SocialuniTagTypeRepository tagTypeRepository;
+    SocialuniTagTypeInterface tagTypeRepository;
     @Resource
     SocialuniCircleRedis socialCircleRedis;
     @Resource
     SocialuniSchoolCheck socialuniSchoolCheck;
     @Resource
-    SocialuniUserExpandRepository socialuniUserExpandRepository;
+    SocialuniUserExpandInterface socialuniUserExpandApi;
 
     public SocialuniMineUserDetailRO editUserSchoolName(SocialUserSchoolNameEditQO socialMineUserDetailQO) {
         String schoolName = socialMineUserDetailQO.getSchoolName();
@@ -43,11 +43,11 @@ public class SocialuniEditExpandDomain {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
+        SocialuniUserExpandModel socialuniUserExpandModel = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
 
-        socialuniUserExpandDO.setSchoolName(schoolName);
+        socialuniUserExpandModel.setSchoolName(schoolName);
 
-        SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandDO);
+        SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandModel);
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
 
@@ -68,12 +68,12 @@ public class SocialuniEditExpandDomain {
 
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
-        SocialuniUserExpandDO socialuniUserExpandDO = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
+        SocialuniUserExpandModel socialuniUserExpandModel = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
 
-        socialuniUserExpandDO.setContactInfo(contactInfo);
-        socialuniUserExpandDO.setOpenContactInfo(socialMineUserDetailQO.getOpenContactInfo());
+        socialuniUserExpandModel.setContactInfo(contactInfo);
+        socialuniUserExpandModel.setOpenContactInfo(socialMineUserDetailQO.getOpenContactInfo());
 
-        SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandDO);
+        SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandModel);
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
 

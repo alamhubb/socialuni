@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.sdk.dao.DO.base.CommonBaseDO;
+import com.socialuni.social.common.repository.CommonBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

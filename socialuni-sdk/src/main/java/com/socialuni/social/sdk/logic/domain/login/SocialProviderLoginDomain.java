@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROF
 import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.sdk.logic.entity.user.SocialProviderLoginEntity;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
@@ -23,7 +23,7 @@ public class SocialProviderLoginDomain {
     @Transactional
     public SocialLoginRO<SocialuniMineUserDetailRO> providerLogin(SocialProviderLoginQO loginQO) {
         //创建或返回
-        SocialuniUserDO mineUser = socialProviderLoginEntity.providerLogin(loginQO);
+        SocialuniUserModel mineUser = socialProviderLoginEntity.providerLogin(loginQO);
 
         SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

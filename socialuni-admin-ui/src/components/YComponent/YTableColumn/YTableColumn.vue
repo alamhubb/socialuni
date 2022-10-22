@@ -2,17 +2,16 @@
   <el-table-column
     :label="label||prop"
     :prop="prop"
-    :type="$const.DataTableColumnTypeEnum.values.includes(type)?'':type"
-    show-overflow-tooltip
+    :type="DataTableColumnTypeEnum.values.includes(type)?'':type"
     v-bind="$attrs"
-    align="left"
+    :align="align"
   >
     <template slot="header">
       <slot name="header"></slot>
     </template>
-    <template #default="{row,$index}" v-if="!$const.DataTableColumnTypeEnum.elTableTypes.includes(type)">
+    <template #default="{row,$index}" v-if="!DataTableColumnTypeEnum.elTableTypes.includes(type)">
       <slot name="default" :row="row" :$index="$index">
-        <template v-if="$const.DataTableColumnTypeEnum.values.includes(type)">
+        <template v-if="DataTableColumnTypeEnum.values.includes(type)">
           <!--<el-checkbox
             v-if="type === ColumnType.check || column.type === ColumnType.check"
             v-model="row.checked"
@@ -22,7 +21,7 @@
           <!--      :label="optionLabel|| (column.option?column.option.label:null)"-->
           <!--      因为内不支持不输入label默认使用value-->
           <y-select
-            v-if="type === $const.DataTableColumnTypeEnum.select"
+            v-if="type === DataTableColumnTypeEnum.select"
             v-model="row[prop]"
             :disabled="readonly"
             :options="options"
@@ -33,7 +32,7 @@
           />
           <!--      ? option.label : optionValue-->
           <el-input
-            v-else-if="type === $const.DataTableColumnTypeEnum.input"
+            v-else-if="type === DataTableColumnTypeEnum.input"
             v-model="row[prop]"
             :readonly="readonly"
             size="small"
@@ -41,14 +40,14 @@
             @click.native.stop
             v-on="$listeners"
           />
-          <template v-else-if="type===$const.DataTableColumnTypeEnum.label">
+          <template v-else-if="type===DataTableColumnTypeEnum.label">
             <!--        这里逻辑太重了，最好优化-->
             <slot name="default" :row="row">
               <el-tooltip
-v-if="tipProp && row[tipProp] && showMsg(row)"
-effect="dark"
-                          :content="row[tipProp] || propFun ? propFun(row[prop], row) : row[prop]"
-                          placement="top-start">
+                v-if="tipProp && row[tipProp] && showMsg(row)"
+                effect="dark"
+                :content="row[tipProp] || (propFun ? propFun(row[prop], row) : row[prop])"
+                placement="top-start">
                 <div>
                   <span :class="labelClass">{{ propFun ? propFun(row[prop], row) : row[prop] }}</span>
                   <i class="el-icon-question ml-xs"></i>
@@ -60,12 +59,12 @@ effect="dark"
           </template>
 
           <el-button
-v-else-if="type===$const.DataTableColumnTypeEnum.delete"
-@click="deleteEvent($index)"
-size="small"
-                     :disabled="deleteDisabled"
-                     type="danger"
-plain>
+            v-else-if="type===DataTableColumnTypeEnum.delete"
+            @click="deleteEvent($index)"
+            size="small"
+            :disabled="deleteDisabled"
+            type="danger"
+            plain>
             {{
               deleteTitle
             }}
@@ -79,6 +78,7 @@ plain>
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
 import YSelect from '@/components/YComponent/YSelect/YSelect.vue'
+import DataTableColumnTypeEnum from './DataTableColumnTypeEnum'
 
 /**
  * @author 秦开远
@@ -94,6 +94,7 @@ export default class YTableColumn extends Vue {
   // @Prop({ default: false, type: Boolean }) readonly disabled: boolean
 
   @Prop() readonly prop: string
+  @Prop({ default: 'left' }) readonly align: string
   @Prop() readonly tipProp: string
   @Prop() readonly propFun: Function
   @Prop() readonly label: string
@@ -106,6 +107,9 @@ export default class YTableColumn extends Vue {
   @Prop() readonly optionValue: string
   @Prop({ default: '删除' }) readonly deleteTitle: string
   @Prop({ default: false, type: Boolean }) readonly deleteDisabled: boolean
+
+  DataTableColumnTypeEnum: typeof DataTableColumnTypeEnum = DataTableColumnTypeEnum
+
   @Prop({
     default(row: any) {
       return true

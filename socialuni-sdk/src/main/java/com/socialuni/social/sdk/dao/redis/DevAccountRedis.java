@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.redis;
 
-import com.socialuni.social.sdk.dao.repository.dev.DevAccountRepository;
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 @Component
 public class DevAccountRedis {
     @Resource
-    private DevAccountRepository devAccountRepository;
+    private DevAccountInterface devAccountApi;
 
     @Caching(
             put = {
@@ -20,7 +20,7 @@ public class DevAccountRedis {
                     @CachePut(cacheNames = "getDevAccountBySocialuniId", key = "#devAccount.socialuniId")
             }
     )
-    public DevAccountDO saveDevAccount(DevAccountDO devAccount) {
-        return devAccountRepository.save(devAccount);
+    public DevAccountModel saveDevAccount(DevAccountModel devAccount) {
+        return devAccountApi.savePut(devAccount);
     }
 }

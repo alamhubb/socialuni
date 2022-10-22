@@ -12,6 +12,7 @@ node_modules
 application-qkylocal.yml
 application-local.yml
 #忽略生产文件
+application-dev.yml
 application-prod.yml
 application-devprod.yml
 application-localdevprod.yml
@@ -20,6 +21,7 @@ application-qingchi.yml
 application-schooldev.yml
 application-qkypc.yml
 application-localpre.yml
+application-demoroot.yml
 *.log
 /socialuni-center-web/src/main/resources/application-localpre.yml
 

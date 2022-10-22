@@ -274,7 +274,7 @@ import request from '@/plugins/request'
 import UserAPI from '@/api/UserAPI'
 
 @Component
-export default class PreAuditPage extends Vue {
+export default class ContentAuditView extends Vue {
   reports: ReportVO[] = []
   imgUrl: string = process.env.VUE_APP_COS_URL
   violateType: typeof ViolateType = ViolateType
@@ -352,7 +352,7 @@ export default class PreAuditPage extends Vue {
   }
 
   get reportTypesFilter() {
-    return this.reportTypes.slice(2, this.reportTypes.length)
+    return this.reportTypes.slice(1, this.reportTypes.length)
   }
 
   get reportTypesUnderage() {

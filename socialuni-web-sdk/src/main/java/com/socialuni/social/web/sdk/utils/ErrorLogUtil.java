@@ -6,12 +6,14 @@ import com.socialuni.social.common.constant.ErrorType;
 import com.socialuni.social.web.sdk.model.ErrorRequestLogDO;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.store.ErrorRequestLogStore;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class ErrorLogUtil {
     private static ErrorRequestLogStore errorRequestLogStore;
 

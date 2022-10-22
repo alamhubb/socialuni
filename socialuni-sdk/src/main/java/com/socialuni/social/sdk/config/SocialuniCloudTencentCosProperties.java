@@ -8,6 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SocialuniCloudTencentCosProperties {
     private String secretId;
     private String secretKey;
-    private String bucketName;
+    private String bucket;
     private String region;
 }

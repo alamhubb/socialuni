@@ -11,6 +11,7 @@ public class SocialuniProperties {
     private String centralServerUrl;
     private String centralSocialuniId;
     private String socialuniId;
+    private String systemUserPhoneNum;
     //默认交友，可选校园
     private String socialType;
 

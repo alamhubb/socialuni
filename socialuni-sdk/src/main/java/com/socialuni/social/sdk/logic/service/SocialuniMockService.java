@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.sdk.dao.DO.dev.DevAccountDO;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.logic.entity.SocialuniDevAccountEntity;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.constant.AuthType;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
@@ -42,9 +42,9 @@ public class SocialuniMockService {
     private ResultRO<SocialLoginRO<SocialOAuthUserRO>> mockOAuthUserInfo(String authType) {
 //        DevAccountProviderDO devAccountProviderDO = DevAccountUtils.getDevAccountProviderDO(mpType);
 //        OAuthUserInfoQO authVO = new OAuthUserInfoQO(devAccountProviderDO.getAppId(), devAccountProviderDO.getMpType());
-        DevAccountDO devAccountDO = DevAccountUtils.getDevAccountNotNull();
-        SocialuniUserDO userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountDO);
-        return centerOAuthService.oAuthUserInfo(devAccountDO, userDO, authType);
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        SocialuniUserModel userDO = centerDevAccountEntity.getOrCreateDevAccountUserDO(devAccountModel);
+        return centerOAuthService.oAuthUserInfo(devAccountModel, userDO, authType);
     }
 
 }

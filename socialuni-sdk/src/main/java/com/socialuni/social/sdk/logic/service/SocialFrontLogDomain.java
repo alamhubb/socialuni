@@ -8,12 +8,13 @@ import com.socialuni.social.web.sdk.model.ErrorRequestLogDO;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class SocialFrontLogDomain {
     public ResultRO<Void> sendErrorLog(FrontErrorLogVO frontErrorLogVO) {
-
         RequestLogDO requestLogDO = RequestLogUtil.get();
         ErrorRequestLogDO front = new ErrorRequestLogDO(requestLogDO);
 

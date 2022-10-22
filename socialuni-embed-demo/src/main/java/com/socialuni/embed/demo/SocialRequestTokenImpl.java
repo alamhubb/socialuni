@@ -2,7 +2,7 @@ package com.socialuni.embed.demo;
 
 import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.service.TestUserService;
-import com.socialuni.social.web.sdk.config.SocialRequestUserConfig;
+import com.socialuni.social.tance.sdk.api.SocialRequestUserConfig;
 import com.socialuni.social.sdk.config.SocialRequestUserConfigDefaultImpl;
 import com.socialuni.social.common.utils.RequestUtil;
 import org.apache.commons.lang3.StringUtils;

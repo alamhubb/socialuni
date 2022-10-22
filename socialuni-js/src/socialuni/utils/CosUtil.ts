@@ -10,12 +10,12 @@ import COS from 'cos-js-sdk-v5'
 import CosAuthRO from '../model/cos/CosAuthRO'
 import DomFile from '../model/DomFile'
 import TencentCosAPI from '@/api/TencentCosAPI'
-import CosAPI from '@/socialuni/api/CosAPI'
+import SocialuniCosAPI from '@/socialuni/api/socialuni/SocialuniCosAPI'
 
 export default class CosUtil {
   //向cos上传图片
   static async getCosAuthRO() {
-    const authRes = await CosAPI.getCosAuthorizationAPI()
+    const authRes = await SocialuniCosAPI.getCosAuthorizationAPI()
     const cosAuthRO = authRes.data
     cosAuthRO.cos = CosUtil.getAuthorizationCos(cosAuthRO)
     return cosAuthRO

@@ -1,21 +1,21 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialuniUserDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.platform.MapUtil;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.utils.DevAccountUtils;
-import com.socialuni.social.sdk.utils.SocialuniUnionIdUtil;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TalkDOFactory {
-    public static SocialuniTalkDO newTalkDO(SocialuniUserDO user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
-        SocialuniTalkDO talkDO = new SocialuniTalkDO(user.getUnionId(), socialTalkPostQO.getContent());
-        Integer talkUnionId = SocialuniUnionIdUtil.createTalkUnionId();
+    public static SocialuniTalkModel newTalkDO(SocialuniUserModel user, SocialuniTalkPostQO socialTalkPostQO, DistrictDO district) {
+        SocialuniTalkModel talkDO = new SocialuniTalkModel(user.getUnionId(), socialTalkPostQO.getContent());
+        Integer talkUnionId = SocialuniUnionIdFacede.createTalkUnionId();
 
         talkDO.setUnionId(talkUnionId);
 
@@ -40,7 +40,7 @@ public class TalkDOFactory {
         //使用talk本身存储,position 和 district
         talkDO.setAdCode(district.getAdCode());
         //不要删掉，根据devId查询了动态
-        talkDO.setDevId(DevAccountUtils.getDevIdNotNull());
+        talkDO.setDevId(DevAccountFacade.getDevIdNotNull());
         talkDO.setAdName(district.getAdName());
         talkDO.setProvinceName(district.getProvinceName());
         talkDO.setCityName(district.getCityName());
