@@ -2,12 +2,29 @@ package com.socialuni.admin.web.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjUtil;
+import com.socialuni.admin.web.factory.ReportContentROFactory;
+import com.socialuni.admin.web.factory.SocialuniAdminStickTalkROFactory;
+import com.socialuni.admin.web.model.ReportContentVO;
+import com.socialuni.admin.web.model.ReportUserVO;
 import com.socialuni.admin.web.model.SocialuniAdminHomeSwiperRO;
+import com.socialuni.admin.web.model.SocialuniAdminStickTalkRO;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.community.sdk.api.TalkInterface;
+import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.HomeSwiperDO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
+import com.socialuni.social.sdk.dao.store.TalkQueryStore;
+import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
+import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
+import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
+import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
+import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
+import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.model.SocialuniHomeSwiperModel;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,33 +38,36 @@ import java.util.stream.Collectors;
 public class SocialuniAdminStickTalkManageController {
     @Resource
     HomeSwiperRepository homeSwiperRepository;
+    @Resource
+    TalkInterface talkInterface;
+    @Resource
+    TalkQueryStore talkQueryStore;
 
-    @GetMapping("querySystemManageTalks")
-    public List<SocialuniAdminHomeSwiperRO> querySystemManageTalks() {
-        //三方应用传的可以直接传用户id作为token
-        Integer devId = DevAccountFacade.getDevIdNotNull();
+    @GetMapping("querySystemUserTalks")
+    public List<SocialuniAdminStickTalkRO> querySystemManageTalks() {
+        Integer userId = DevAccountFacade.getDevUserId();
 
-        List<SocialuniHomeSwiperModel> homeSwiperModels = homeSwiperRepository.queryHomeSwipersByDevIdOrderByStatusDescUpdateTimeDescTopLevelDesc(devId);
+        List<Integer> talkIds = talkInterface.findTop10ByUserIdOrderByGlobalTopDescIdDesc(userId);
 
-        List<SocialuniAdminHomeSwiperRO> results = homeSwiperModels.stream().map(SocialuniAdminHomeSwiperRO::new).collect(Collectors.toList());
-        return results;
+        List<SocialuniAdminStickTalkRO> talkROS = talkIds.stream().map(item -> {
+            SocialuniAdminStickTalkRO talkvo = SocialuniAdminStickTalkROFactory.getTalkRO(item);
+            ReportUserVO userVO = new ReportUserVO(SocialuniUserUtil.getUserNotNull(talkvo.getUserId()));
+            talkvo.setUser(userVO);
+            return talkvo;
+        }).collect(Collectors.toList());
+
+        return talkROS;
     }
 
-    @PostMapping("updateHomeSwipers")
-    public List<SocialuniAdminHomeSwiperRO> updateHomeSwipers(@RequestBody List<SocialuniAdminHomeSwiperRO> homeSwiperROS) {
-        List<SocialuniHomeSwiperModel> socialuniHomeSwiperModels = new ArrayList<>();
-        for (SocialuniAdminHomeSwiperRO homeSwiperRO : homeSwiperROS) {
-            if (ObjUtil.isEmpty(homeSwiperRO.getId())) {
-                socialuniHomeSwiperModels.add(homeSwiperRepository.save(BeanUtil.toBean(homeSwiperRO.toModel(), HomeSwiperDO.class)));
-            } else {
-                Integer devId = DevAccountFacade.getDevIdNotNull();
-                SocialuniHomeSwiperModel socialuniHomeSwiperModelDb = homeSwiperRepository.findByIdAndDevId(homeSwiperRO.getId(), devId)
-                        .orElseThrow(() -> new SocialParamsException("不存在的轮播图配置"));
-                socialuniHomeSwiperModels.add(homeSwiperRepository.save(BeanUtil.toBean(homeSwiperRO.toModel(socialuniHomeSwiperModelDb), HomeSwiperDO.class)));
+    @PostMapping("updateStickTalks")
+    public List<SocialuniAdminStickTalkRO> updateHomeSwipers(@RequestBody List<SocialuniAdminStickTalkRO> homeSwiperROS) {
+        for (SocialuniAdminStickTalkRO homeSwiperRO : homeSwiperROS) {
+            SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(homeSwiperRO.getId());
+            if (!talkDO.getGlobalTop().equals(homeSwiperRO.getGlobalTop())){
+                talkDO.setGlobalTop(homeSwiperRO.getGlobalTop());
+                SocialuniTalkDOUtil.save(talkDO);
             }
         }
-
-        List<SocialuniAdminHomeSwiperRO> results = socialuniHomeSwiperModels.stream().map(SocialuniAdminHomeSwiperRO::new).collect(Collectors.toList());
-        return results;
+        return homeSwiperROS;
     }
 }

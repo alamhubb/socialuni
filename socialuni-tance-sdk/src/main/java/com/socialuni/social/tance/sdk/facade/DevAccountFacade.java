@@ -86,6 +86,11 @@ public class DevAccountFacade {
         return devAccountModel.getPhoneNum();
     }
 
+    public static Integer getDevUserId() {
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        return devAccountModel.getUserId();
+    }
+
     public static boolean isCenter() {
         DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
         return devAccountModel.getId() == 1;

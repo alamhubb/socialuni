@@ -168,7 +168,7 @@ public class TalkQueryStore {
     }
 
     //根据id列表从缓存中读取talk列表
-    public List<?  extends SocialuniTalkModel>  queryTalksByIds(List<Integer> ids) {
+    public List<SocialuniTalkModel>  queryTalksByIds(List<Integer> ids) {
         List<SocialuniTalkModel> talkDOS = new ArrayList<>();
         for (Integer id : ids) {
 //            SocialTalkRO talkEO = TalkROFactory.newTalkRO(id);

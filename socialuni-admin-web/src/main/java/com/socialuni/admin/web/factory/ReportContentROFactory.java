@@ -36,6 +36,7 @@ public class ReportContentROFactory {
             reportContentVO.setContent(talkDO.getContent());
             reportContentVO.setReportNum(talkDO.getReportNum());
             reportContentVO.setUserId(talkDO.getUserId());
+            reportContentVO.setCreateTime(talkDO.getCreateTime());
 
 //            SocialCommentROFactory.getTalkCommentROs()
 //

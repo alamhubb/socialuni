@@ -27,6 +27,7 @@ import java.io.Serializable;
         }
 )
 public class DevAccountDo extends DevAccountModel implements Serializable {
+    private Integer userId;
     //密钥
     @Column(nullable = false)
     private String secretKey;

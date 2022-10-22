@@ -6,6 +6,7 @@ export default class RouterName {
   public static readonly keywordsManage: string = '关键词管理'
   public static readonly configManage: string = '配置项管理'
   public static readonly homeSwiperManage: string = '轮播图管理'
+  public static readonly stickTalkManage: string = '置顶管理'
   public static readonly imgAuditHistory: string = '图片审核历史'
   public static readonly userIdentityAudit: string = '实名认证审核'
   public static readonly neutralWordManage: string = '中性词管理'
