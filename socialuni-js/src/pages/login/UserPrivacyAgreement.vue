@@ -1,7 +1,7 @@
 <template>
   <!--        隐私提示-->
   <div>
-    <view v-if="!user" class="row-center row-grid u-type-info">
+    <view v-if="!user" class="row-center row-wrap u-type-info">
       <text class="mb-nm">
         登录即代表同意
       </text>
