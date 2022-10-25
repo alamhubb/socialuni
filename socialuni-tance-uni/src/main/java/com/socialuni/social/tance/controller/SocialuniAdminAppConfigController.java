@@ -6,6 +6,7 @@ import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,13 +20,14 @@ import java.util.Map;
  * @date 2022/10/16 19:55
  * @since 1.0
  */
-@RestController
+@Controller
 @RequestMapping("config")
 public class SocialuniAdminAppConfigController {
     @Resource
     private AppConfigRepository appConfigRepository;
 
     @PostMapping("save")
+    @ResponseBody
     public AppConfigDO save(@RequestBody AppConfigDO appConfigDO) {
         Integer devId = DevAccountFacade.getDevIdNotNull();
         appConfigDO.setDevId(devId);
@@ -37,6 +39,7 @@ public class SocialuniAdminAppConfigController {
     }
 
     @PostMapping("deleteById")
+    @ResponseBody
     public void deleteById(@RequestBody AppConfigPk appConfigPk) {
         Integer devId = DevAccountFacade.getDevIdNotNull();
         appConfigPk.setDevId(devId);
@@ -50,6 +53,7 @@ public class SocialuniAdminAppConfigController {
      * 获得所有列表
      */
     @GetMapping("getAllConfigs")
+    @ResponseBody
     public List<AppConfigDO> getAllConfigs() {
         int status = 1;
         // 默认的内容。
@@ -67,6 +71,7 @@ public class SocialuniAdminAppConfigController {
      * 获得所有列表属于map形式
      */
     @GetMapping("getAllConfigsOfMap")
+    @ResponseBody
     public Map<String,Object> getAllConfigsOfMap() {
         int status = 1;
         // 默认的内容。
