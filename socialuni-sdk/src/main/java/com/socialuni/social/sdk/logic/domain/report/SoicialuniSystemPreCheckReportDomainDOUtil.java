@@ -21,7 +21,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

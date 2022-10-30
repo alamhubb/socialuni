@@ -3,9 +3,9 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.service.AdminAccountService;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
-import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.model.ResultRO;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 @RequestMapping("user")
 public class AdminAccountController {
     @Resource
-    private DevAccountRedis devAccountRedis;
+    private DevAccountRedisInterface devAccountRedis;
     @Resource
     private DevAccountInterface devAccountApi;
     @Resource

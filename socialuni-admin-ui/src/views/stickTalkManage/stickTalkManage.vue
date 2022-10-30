@@ -60,6 +60,7 @@ export default class StickTalkManageView extends Vue {
   }
 
   async queryData() {
+    // const res = await request.get('socialuni/admin/stickTalk/updateAllDevPhoneNumUser')
     const res = await request.get('socialuni/admin/stickTalk/querySystemUserTalks')
     this.tableData = res.data
   }

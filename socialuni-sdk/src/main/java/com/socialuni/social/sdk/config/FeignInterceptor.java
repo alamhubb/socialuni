@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.common.model.ResultRO;

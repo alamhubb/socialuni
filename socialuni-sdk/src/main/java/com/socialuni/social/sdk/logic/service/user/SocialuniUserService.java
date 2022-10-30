@@ -20,7 +20,7 @@ import com.socialuni.social.sdk.model.QO.user.SocialuniUserImgDeleteQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.model.ResultRO;
 import lombok.extern.slf4j.Slf4j;

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.factory.RO.user;
 
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 
 public class SocialuniUserROFactory {
 

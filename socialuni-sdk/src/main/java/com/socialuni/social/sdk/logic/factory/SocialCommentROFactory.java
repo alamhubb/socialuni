@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.factory.RO.comment.SocialuniReplyCommentRO
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.utils.SystemUtil;
 import lombok.extern.slf4j.Slf4j;

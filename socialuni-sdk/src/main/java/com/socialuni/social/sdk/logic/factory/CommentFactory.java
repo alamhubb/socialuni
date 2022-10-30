@@ -6,7 +6,7 @@ import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

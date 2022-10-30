@@ -8,7 +8,7 @@ import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.social.sdk.utils.SocialuniImgContentUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 
 import java.util.Date;
 

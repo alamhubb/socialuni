@@ -1,6 +1,7 @@
 package com.socialuni.social.common.utils;
 
 import com.socialuni.social.common.constant.SocialWebHeaderName;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
@@ -34,7 +35,29 @@ public class RequestUtil {
     }
 
     public static String getParameter(String key) {
-        String value = getRequest().getParameter(key);
+        HttpServletRequest request = getRequest();
+        if (request == null) {
+            return null;
+        }
+        String value = request.getParameter(key);
+        if (headerIsEmpty(value)) {
+            return null;
+        }
+        return value;
+    }
+
+    public static void setAttribute(String key, String value) {
+        if (!headerIsEmpty(value)) {
+            getRequest().setAttribute(key, value);
+        }
+    }
+
+    public static String getAttribute(String key) {
+        HttpServletRequest request = getRequest();
+        if (request == null) {
+            return null;
+        }
+        String value = (String) request.getAttribute(key);
         if (headerIsEmpty(value)) {
             return null;
         }
@@ -62,6 +85,10 @@ public class RequestUtil {
             return value;
         }
         value = getParameter(key);
+        if (!headerIsEmpty(value)) {
+            return value;
+        }
+        value = getAttribute(key);
         if (!headerIsEmpty(value)) {
             return value;
         }

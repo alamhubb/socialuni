@@ -4,13 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.sdk.constant.AppData;
 import com.socialuni.social.sdk.dao.redis.DistrictRedis;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
+import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.service.ConfigMapRefreshService;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.api.DevSocialuniIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -39,7 +42,10 @@ public class MyApplicationRunner implements ApplicationRunner {
 
     @Resource
     DevSocialuniIdInterface devSocialuniIdApi;
-
+    @Resource
+    SocialUserPhoneEntity socialUserPhoneEntity;
+    @Resource
+    private DevAccountRedisInterface devAccountRedisInterface;
 
     @Override
     @Async
@@ -52,11 +58,17 @@ public class MyApplicationRunner implements ApplicationRunner {
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
+            String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
-                devAccountEntity.createDevAccount(SocialuniSystemConst.getSystemUserPhoneNum());
+                devAccountModel = devAccountEntity.createDevAccount(phoneNum);
             } else {
-                devAccountEntity.createDevAccount(SocialuniSystemConst.getSystemUserPhoneNum(), SocialuniSystemConst.getAppSocialuniId());
+                devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId());
             }
+            // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
+            // 所以直接注册c端用户
+            SocialuniUserModel socialuniUserModel = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+            devAccountModel.setUserId(socialuniUserModel.getUserId());
+            devAccountRedisInterface.saveDevAccount(devAccountModel);
 
             /*DevSocialuniIdDO devSocialuniIdDO = new DevSocialuniIdDO();
             //设置第一个的socialuniId

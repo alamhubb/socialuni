@@ -5,7 +5,7 @@ import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

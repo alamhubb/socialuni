@@ -20,6 +20,7 @@ import java.io.Serializable;
         },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
+                @UniqueConstraint(columnNames = {"userId"}),
                 @UniqueConstraint(columnNames = {"secretKey"}),
                 @UniqueConstraint(columnNames = {"devNum"}),
                 @UniqueConstraint(columnNames = {"phoneNum"}),

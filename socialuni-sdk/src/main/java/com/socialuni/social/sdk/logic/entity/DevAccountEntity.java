@@ -1,16 +1,17 @@
 package com.socialuni.social.sdk.logic.entity;
 
 import com.socialuni.social.sdk.constant.AdminAppConfigConst;
+import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
+import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.utils.UUIDUtil;
-import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,11 +27,15 @@ public class DevAccountEntity {
     @Resource
     private DevAccountInterface devAccountApi;
     @Resource
-    private DevAccountRedis devAccountRedis;
+    private DevAccountRedisInterface devAccountRedis;
     @Resource
     private TagInterface tagApi;
     @Resource
     SocialUserPhoneManage socialUserPhoneManage;
+    @Resource
+    SocialUserPhoneRedis socialUserPhoneRedis;
+    @Resource
+    SocialUserPhoneEntity socialUserPhoneEntity;
 
     public DevAccountModel createDevAccount(String phoneNum) {
         return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
@@ -47,15 +52,11 @@ public class DevAccountEntity {
         } else {
             curDevNum = AdminAppConfigConst.qingChiDevNum;
         }
-        //同时创建c段账号
-        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
-
         //加30以内随机数
         DevAccountModel devAccountModel = new DevAccountModel();
         Date curDate = new Date();
         String secretKey = UUIDUtil.getUUID();
         devAccountModel.setSecretKey(secretKey);
-        devAccountModel.setUserId(socialUserPhoneModel.getUserId());
         devAccountModel.setPhoneNum(phoneNum);
         devAccountModel.setIdentityNum(null);
 //        devAccountDO.setSecretKey(UUIDUtil.getUUID());
