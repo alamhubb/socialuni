@@ -64,7 +64,7 @@ public class SocialuniAdminStickTalkManageController {
     }
 
 
-    @GetMapping("updateAllDevPhoneNumUser")
+    /*@GetMapping("updateAllDevPhoneNumUser")
     public ResultRO<Void> updateAllDevPhoneNumUser() {
         List<DevAccountModel> devAccountModels = (List<DevAccountModel>) devAccountInterface.findAll();
 
@@ -92,7 +92,7 @@ public class SocialuniAdminStickTalkManageController {
             devAccountModel = devAccountRedisInterface.saveDevAccount(devAccountModel);
         }
         return null;
-    }
+    }*/
 
     @PostMapping("updateStickTalks")
     public List<SocialuniAdminStickTalkRO> updateHomeSwipers(@RequestBody List<SocialuniAdminStickTalkRO> homeSwiperROS) {
