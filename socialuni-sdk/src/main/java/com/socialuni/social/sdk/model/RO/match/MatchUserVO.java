@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.model.RO.match;
 
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.sdk.model.RO.UserImgVO;

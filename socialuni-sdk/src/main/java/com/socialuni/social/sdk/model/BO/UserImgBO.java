@@ -6,7 +6,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

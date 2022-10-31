@@ -21,6 +21,12 @@ export const menuRoutes = [
     meta: { title: RouterName.contentAudit, icon: 'strengthMonitoring', isOpen: true }
   },
   {
+    path: '/keywordManage',
+    name: RouterName.keywordsManage,
+    component: () => import('@/views/keywordManage/keywordManage.vue'),
+    meta: { title: RouterName.keywordsManage, icon: 'strengthMonitoring' }
+  },
+  {
     path: '/configManage',
     name: RouterName.configManage,
     component: () => import('@/views/configManage/configManage.vue'),
@@ -33,10 +39,10 @@ export const menuRoutes = [
     meta: { title: RouterName.homeSwiperManage, icon: 'strengthMonitoring', isOpen: true }
   },
   {
-    path: '/keywordManage',
-    name: RouterName.keywordsManage,
-    component: () => import('@/views/keywordManage/keywordManage.vue'),
-    meta: { title: RouterName.keywordsManage, icon: 'strengthMonitoring' }
+    path: '/stickTalkManage',
+    name: RouterName.stickTalkManage,
+    component: () => import('@/views/stickTalkManage/stickTalkManage.vue'),
+    meta: { title: RouterName.stickTalkManage, icon: 'strengthMonitoring', isOpen: true }
   },
   {
     path: '/imgAuditHistory',

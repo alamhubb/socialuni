@@ -23,6 +23,7 @@ public interface TalkInterface {
     //缓存
     List<?  extends SocialuniTalkModel>  findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
+    List<Integer> findTop10ByUserIdOrderByGlobalTopDescIdDesc(Integer userId);
     //查询自己talk和他人详情talk
     List<Integer> queryTalkIdsByUser(
             Integer userId,

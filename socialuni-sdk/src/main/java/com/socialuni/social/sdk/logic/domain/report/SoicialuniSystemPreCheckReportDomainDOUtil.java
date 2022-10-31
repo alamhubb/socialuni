@@ -8,6 +8,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.report.sdk.model.ReportDetailModel;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
@@ -21,7 +22,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -112,7 +113,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             //保存数据
 
             //生成举报详情
-            ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, SocialuniSystemConst.getSystemUserId());
+            ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, DevAccountFacade.getDevUserId());
 
             reportDetailApi.savePut(reportDetailModel);
 

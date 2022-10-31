@@ -1,6 +1,7 @@
-package com.socialuni.social.sdk.dao.redis;
+package com.socialuni.social.tance.cache;
 
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class DevAccountRedis {
+public class DevAccountRedis implements DevAccountRedisInterface {
     @Resource
     private DevAccountInterface devAccountApi;
 

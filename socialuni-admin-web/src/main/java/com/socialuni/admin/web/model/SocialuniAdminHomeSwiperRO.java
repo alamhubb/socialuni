@@ -1,17 +1,10 @@
 package com.socialuni.admin.web.model;
 
 import com.socialuni.social.common.enumeration.CommonStatus;
-import com.socialuni.social.sdk.dao.store.CommentStore;
 import com.socialuni.social.sdk.model.model.SocialuniHomeSwiperModel;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor

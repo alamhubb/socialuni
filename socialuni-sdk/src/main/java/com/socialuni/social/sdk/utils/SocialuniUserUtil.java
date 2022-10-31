@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.api.SocialUserViolationInterface;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;

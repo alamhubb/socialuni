@@ -9,10 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class ReportContentVO {
+public class SocialuniAdminStickTalkRO {
     private Integer id;
     private Integer userId;
     private String content;
+    private Integer globalTop;
     private ReportUserVO user;
 //    private String violateType;
 

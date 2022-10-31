@@ -14,14 +14,14 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public interface DevAccountInterface {
-//    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
+    //    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
     DevAccountModel findOneById(Integer id);
 
     //直接携带秘钥访问
 //    @Cacheable(cacheNames = "getDevAccountBySecretKey", key = "#secretKey")
     DevAccountModel findOneBySecretKey(String secretKey);
 
-//    @Cacheable(cacheNames = "getDevAccountBySocialuniId", key = "#socialuniId")
+    //    @Cacheable(cacheNames = "getDevAccountBySocialuniId", key = "#socialuniId")
     DevAccountModel findOneBySocialuniId(String socialuniId);
 
     DevAccountModel findOneByAppName(String appName);
@@ -29,12 +29,12 @@ public interface DevAccountInterface {
     DevAccountModel findOneByDevNum(Long devNum);
 
     //获取最新的开发者账户，用来id相加，不缓存，低频，创建时才是用
-    Optional<?  extends DevAccountModel> findFirstByOrderByIdDesc();
+    Optional<? extends DevAccountModel> findFirstByOrderByIdDesc();
 
     //不需要缓存，低频, admin登录使用
     DevAccountModel findOneByPhoneNumOrderByIdAsc(String phoneNum);
 
-    List<?  extends DevAccountModel  > findAll();
+    List<? extends DevAccountModel> findAll();
 
     DevAccountModel savePut(DevAccountModel devAccountModel);
 

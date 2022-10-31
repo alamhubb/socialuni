@@ -1,5 +1,6 @@
 package com.socialuni.social.tance.sdk.facade;
 
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
@@ -25,8 +26,25 @@ public class DevAccountFacade {
 //    public static final String appGenderTypeKey = "appGenderType";
 
     private static DevAccountInterface devAccountApi;
+    private static DevAccountRedisInterface devAccountRedisInterface;
     private static DevAccountProviderInterface devAccountProviderApi;
     private static DevTokenInterface devTokenApi;
+/*    private static SocialUserPhoneRedis socialUserPhoneRedis;
+    private static SocialUserPhoneEntity socialUserPhoneEntity;*/
+    @Resource
+    public void setDevAccountRedisInterface(DevAccountRedisInterface devAccountRedisInterface) {
+        DevAccountFacade.devAccountRedisInterface = devAccountRedisInterface;
+    }
+
+/*    @Resource
+    public void setSocialUserPhoneRedis(SocialUserPhoneRedis socialUserPhoneRedis) {
+        DevAccountFacade.socialUserPhoneRedis = socialUserPhoneRedis;
+    }
+
+    @Resource
+    public void setSocialUserPhoneEntity(SocialUserPhoneEntity socialUserPhoneEntity) {
+        DevAccountFacade.socialUserPhoneEntity = socialUserPhoneEntity;
+    }*/
 
     @Resource
     public void setDevTokenRepository(DevTokenInterface devTokenApi) {
@@ -86,6 +104,11 @@ public class DevAccountFacade {
         return devAccountModel.getPhoneNum();
     }
 
+    public static Integer getDevUserId() {
+        DevAccountModel devAccountModel = DevAccountFacade.getDevAccountNotNull();
+        return devAccountModel.getUserId();
+    }
+
     public static boolean isCenter() {
         DevAccountModel devAccountModel = DevAccountFacade.getAdminDevAccountNotNull();
         return devAccountModel.getId() == 1;
@@ -131,7 +154,7 @@ public class DevAccountFacade {
 
     public static DevAccountModel getDevAccountAllowNull() {
         //先从req中获取
-        String secretKey = RequestUtil.getHeader(SocialFeignHeaderName.socialuniSecretKey);
+        String secretKey = RequestUtil.getRequestValue(SocialFeignHeaderName.socialuniSecretKey);
         if (StringUtils.isEmpty(secretKey)) {
             return null;
         }

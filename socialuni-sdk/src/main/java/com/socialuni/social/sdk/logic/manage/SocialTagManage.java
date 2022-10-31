@@ -5,6 +5,7 @@ import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagDOFactory;
 import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ public class SocialTagManage {
     }
 
     public TagModel createDevAccountTagDO(Integer devId, String appName) {
-        TagModel tagModel = SocialTagDOFactory.toTagDO(appName, "开发者对应的话题", SocialuniSystemConst.getSystemUserId());
+        TagModel tagModel = SocialTagDOFactory.toTagDO(appName, "开发者对应的话题", DevAccountFacade.getDevUserId());
 
         tagModel.setTagTypeId(32);
         tagModel.setDevId(devId);

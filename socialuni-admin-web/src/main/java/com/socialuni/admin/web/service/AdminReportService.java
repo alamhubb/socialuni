@@ -25,7 +25,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
-import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.common.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
@@ -158,7 +158,7 @@ public class AdminReportService {
             }
             reportModel = reportDOOptional.get();
         }
-        Integer systemUserId = SocialuniSystemConst.getSystemUserId();
+//        Integer systemUserId = SocialuniSystemConst.getSystemUserId();
         List<NotifyDO> notifyDOS = new ArrayList<>();
         //为待审核才继续处理
         if (ReportStatus.auditStatus.contains(reportModel.getStatus())) {

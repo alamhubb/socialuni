@@ -20,6 +20,7 @@ import java.io.Serializable;
         },
         uniqueConstraints = {
                 //一个人只能关注另一个人一次
+                @UniqueConstraint(columnNames = {"userId"}),
                 @UniqueConstraint(columnNames = {"secretKey"}),
                 @UniqueConstraint(columnNames = {"devNum"}),
                 @UniqueConstraint(columnNames = {"phoneNum"}),
@@ -27,6 +28,7 @@ import java.io.Serializable;
         }
 )
 public class DevAccountDo extends DevAccountModel implements Serializable {
+    private Integer userId;
     //密钥
     @Column(nullable = false)
     private String secretKey;

@@ -5,9 +5,9 @@ import com.socialuni.admin.web.controller.DevAccountUpdateQO;
 import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
-import com.socialuni.social.sdk.dao.redis.DevAccountRedis;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
@@ -32,7 +32,7 @@ import java.util.List;
 @Service
 public class AdminAccountService {
     @Resource
-    private DevAccountRedis devAccountRedis;
+    private DevAccountRedisInterface devAccountRedis;
     @Resource
     private DevAccountInterface devAccountApi;
     @Resource

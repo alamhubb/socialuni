@@ -2,10 +2,11 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
+import com.socialuni.social.common.utils.RequestUtil;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
@@ -17,7 +18,6 @@ import com.socialuni.social.common.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
-import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class AdminLoginService {
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
     @Resource
-    SocialUserPhoneManage socialUserPhoneManage;
+    private DevAccountRedisInterface devAccountRedis;
     //秘钥登录
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
@@ -70,17 +70,22 @@ public class AdminLoginService {
         //如果手机号已经存在账户，则直接使用，正序获取第一个用户
         DevAccountModel devAccountModel = devAccountApi.findOneByPhoneNumOrderByIdAsc(phoneNum);
 
-        //同时创建c段账号
-        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
-        if (socialUserPhoneModel == null) {
-            socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
-        }
-
+        Boolean flag = false;
+        //判断开发者账户是否拥有c端用户
         if (devAccountModel == null) {
             devAccountModel = devAccountEntity.createDevAccount(phoneNum);
-            return getSocialLoginROResultRO(devAccountModel, true);
+            flag = true;
         }
-        return getSocialLoginROResultRO(devAccountModel, false);
+        RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getSecretKey());
+
+        // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
+        // 所以直接注册c端用户
+        SocialuniUserModel socialuniUserModel = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+        devAccountModel.setUserId(socialuniUserModel.getUserId());
+
+        devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
+
+        return getSocialLoginROResultRO(devAccountModel, flag);
     }
 
     private ResultRO<SocialLoginRO<DevAccountRO>> getSocialLoginROResultRO(DevAccountModel devAccountModel, boolean isNewAccount) {
