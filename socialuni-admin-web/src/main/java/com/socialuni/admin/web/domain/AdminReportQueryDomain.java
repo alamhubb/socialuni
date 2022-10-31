@@ -57,7 +57,7 @@ public class AdminReportQueryDomain {
         //待审核的成年照片，打个标识？ is成年照片审核。
         //查询所有被举报的用户的，talk，并且按照举报次数和更新时间排序，并且talk状态为enable的
         DevAccountModel user = DevAccountFacade.getAdminDevAccountNotNull();
-        List<?  extends ReportModel> reportModels;
+        List<? extends ReportModel> reportModels;
         if (DevAccountFacade.isCenter()) {
             reportModels = reportApi.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
         } else {
@@ -66,7 +66,7 @@ public class AdminReportQueryDomain {
         }
         List<ReportRO> reportVOS = reportModels.stream().map(ReportRO::new).collect(Collectors.toList());
 
-        List<SocialuniTalkHasUnderageImgAuditDO> list = talkAdultImgAuditRepository.findTop20ByStatusOrderByIdAsc(ContentStatus.preAudit);
+        List<SocialuniTalkHasUnderageImgAuditDO> list = talkAdultImgAuditRepository.findTop20ByStatusAndDevIdOrderByIdAsc(ContentStatus.preAudit, DevAccountFacade.getDevIdNotNull());
 
         List<ReportRO> reportVOS1 = list.stream().map(ReportRO::new).collect(Collectors.toList());
 

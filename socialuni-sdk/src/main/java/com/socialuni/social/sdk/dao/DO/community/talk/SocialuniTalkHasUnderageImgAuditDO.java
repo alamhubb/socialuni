@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.dao.DO.community.talk;
 
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.common.dao.DO.SocialContentBaseDO;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +25,9 @@ import java.io.Serializable;
 public class SocialuniTalkHasUnderageImgAuditDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer talkId;
+
+    @Column(nullable = false)
+    private Integer devId;
     @Column(nullable = false)
     private Integer userId;
 
@@ -31,5 +35,6 @@ public class SocialuniTalkHasUnderageImgAuditDO extends SocialContentBaseDO impl
         this.setStatus(ContentStatus.preAudit);
         this.talkId = talkId;
         this.userId = userId;
+        this.devId = DevAccountFacade.getDevIdNotNull();
     }
 }

@@ -28,7 +28,7 @@ public class SocialuniTalkDORedis {
 
     @Caching(
             evict = {
-                    // @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, allEntries = true),
+                    @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndUser, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByTalkCondition, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndTag, allEntries = true),
                     @CacheEvict(cacheNames = CommonRedisKey.queryTalkIdsByAndCircle, allEntries = true),
