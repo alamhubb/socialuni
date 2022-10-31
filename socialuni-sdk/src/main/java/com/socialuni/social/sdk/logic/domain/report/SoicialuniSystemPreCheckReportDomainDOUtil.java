@@ -8,6 +8,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.report.sdk.model.ReportDetailModel;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
@@ -112,7 +113,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             //保存数据
 
             //生成举报详情
-            ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, SocialuniSystemConst.getSystemUserId());
+            ReportDetailModel reportDetailModel = new ReportDetailModel("系统自动审查", ViolateType.pornInfo, reportModel, content, DevAccountFacade.getDevUserId());
 
             reportDetailApi.savePut(reportDetailModel);
 

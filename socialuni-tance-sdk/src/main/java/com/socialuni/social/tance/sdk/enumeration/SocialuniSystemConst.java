@@ -82,9 +82,6 @@ public class SocialuniSystemConst {
      *
      * @return
      */
-    public static Integer getSystemUserId() {
-        return ConfigFacade.getConfigApi().getInteger("system-user-id");
-    }
 
     public static String getStaticResourceUrl() {
         //为空则异常

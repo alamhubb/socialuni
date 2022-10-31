@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.report.sdk.model.ReportDetailModel;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
@@ -59,7 +60,7 @@ public class SoicialuniUserAddReportDomain {
         reportModel = reportApi.savePut(reportModel);
 
         //生成举报详情
-        ReportDetailModel reportDetailModel = new ReportDetailModel(socialReportAddQO.getContent(), socialReportAddQO.getReportType(), reportModel, modelDO.getContent(), SocialuniSystemConst.getSystemUserId());
+        ReportDetailModel reportDetailModel = new ReportDetailModel(socialReportAddQO.getContent(), socialReportAddQO.getReportType(), reportModel, modelDO.getContent(), DevAccountFacade.getDevUserId());
 
         reportDetailApi.savePut(reportDetailModel);
 

@@ -158,7 +158,7 @@ public class AdminReportService {
             }
             reportModel = reportDOOptional.get();
         }
-        Integer systemUserId = SocialuniSystemConst.getSystemUserId();
+//        Integer systemUserId = SocialuniSystemConst.getSystemUserId();
         List<NotifyDO> notifyDOS = new ArrayList<>();
         //为待审核才继续处理
         if (ReportStatus.auditStatus.contains(reportModel.getStatus())) {
