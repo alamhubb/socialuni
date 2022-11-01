@@ -50,9 +50,13 @@ $color-bg-base: $color-white !default;
 //$color-theme-base-light: $color-bg-default !default;
 //主题色
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
-$color-theme: #5B21B6 !default;
-$color-theme-bg: #e4bad4 !default;
-$color-theme-light: #FDF2F8 !default;
+$color-theme: #3f93ee !default;
+$color-theme-bg: $color-border-default !default;
+$color-theme-light: $color-white !default;
+
+//$color-theme: #5B21B6 !default;
+//$color-theme-bg: #e4bad4 !default;
+//$color-theme-light: #FDF2F8 !default;
 
 $colors-theme: (
         girl:$color-girl,
