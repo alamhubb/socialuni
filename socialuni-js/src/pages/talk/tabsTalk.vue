@@ -31,7 +31,7 @@
           <!--          首页展示区分不同类型，
                     圈子类型、关注类型、首页类型、同城类型-->
 
-          <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden " style="width: calc(100% - 20px)" :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+          <scroll-view class="h100p bt-radius-10 mx-sm overflow-hidden " style="width: calc(100% - 20px)" :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
                        :scroll-top="talkTabs[swiperIndex].scrollTop"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
