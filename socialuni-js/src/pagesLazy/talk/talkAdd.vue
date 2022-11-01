@@ -61,12 +61,12 @@
         </div>
       </view>
       <view class="px-sm pt-sm">
-        <view v-if="!selectTags.length" class="row-grid pb-10">
+        <view v-if="!selectTags.length" class="row-wrap pb-10">
           <view class="q-tag bd-round bg-pink-plain">
             <text @click="openTagSearchVue(false)">#添加话题</text>
           </view>
         </view>
-        <view v-else class="row-grid">
+        <view v-else class="row-wrap">
           <view v-for="tag in selectTags" :key="tag.id" class="pb-10 px-mn">
             <view class="q-tag bd-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>

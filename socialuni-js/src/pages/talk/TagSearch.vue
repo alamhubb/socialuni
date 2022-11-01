@@ -34,7 +34,7 @@
           <text class="cuIcon-title text-green"></text>
           <text class="text-md font-bold">历史话题</text>
         </div>
-        <div class="row-grid">
+        <div class="row-wrap">
           <template v-if="historyTags.length">
             <view v-for="tag in historyTags"
                   class="ml-xs mt-sm q-tag-theme lg round"

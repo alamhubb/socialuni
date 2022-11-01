@@ -1,5 +1,5 @@
 <template>
-  <view class="px-sm pb-sm" v-if="showSwipers">
+  <view class="px-mn pb-sm" v-if="showSwipers">
     <!--  <view class="bg-primary px-smm pt-xs">-->
     <swiper :indicator-dots="true" :autoplay="true" circular :interval="2500" :style="{'height':swiperHeight+'px'}">
       <swiper-item class="bd-radius" v-for="(item,index) in homeSwipers" @click="skipWebView(index)">

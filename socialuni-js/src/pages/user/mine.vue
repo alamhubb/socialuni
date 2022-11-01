@@ -63,7 +63,7 @@
             </view>
           </q-row-item>
           <div class="flex-row">
-            <view class="w100p row-grid">
+            <view class="w100p row-wrap">
               <navigator :url="userAgreementUrl" class="color-blue">
                 《用户协议》
               </navigator>
