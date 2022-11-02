@@ -28,7 +28,7 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
   } else {
     config.header.token = null
   }
-  config.header.socialuniSecretKey = 'f12be0da13bf4cf9b672c5e7957c71f2'
+  // config.header.socialuniSecretKey = 'f12be0da13bf4cf9b672c5e7957c71f2'
   config.header.provider = socialSystemModule.mpPlatform
   config.header.platform = socialSystemModule.platform
   config.header.system = socialSystemModule.system
