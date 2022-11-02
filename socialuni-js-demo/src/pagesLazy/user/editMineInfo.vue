@@ -246,7 +246,6 @@ export default class UserEditView extends Vue {
   }
 
   genderChange({detail}) {
-    console.log(detail)
     this.gender = detail.value
   }
 
