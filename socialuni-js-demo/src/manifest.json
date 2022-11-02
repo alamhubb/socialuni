@@ -229,7 +229,7 @@
   },
   /*全局关闭 uni统计*/
   "uniStatistics": {
-    "enable": false
+    "enable": true
   }
 }
 //prompt取值为template时有效，用于配置模板提示框上显示的内容

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div @click="openCityPicker" class="row-col-center">
+    <div @click="openCityPicker" class="row-col-center use-click">
       <q-icon icon="map-fill" size="14" class="mb-nm"/>
       <div v-if="value" class="q-tag-warn bd-round row-col-center">
         <template v-if="value.adCode">
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Prop, Vue} from 'vue-property-decorator'
+import {Emit, Model, Options, Prop, Vue} from 'vue-property-decorator'
 import QCityPicker from "../QCityPicker/QCityPicker.vue";
 import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
@@ -39,10 +39,10 @@ export default class QCityInfo extends Vue {
     cityPicker: QCityPicker
   }
 
-  @Prop() value: DistrictVO
+  @Model('modelValue') value: DistrictVO
 
   @Prop({
-    default: false
+    default: false, type: Boolean
   }) picker: boolean
 
   openCityPicker() {
@@ -51,7 +51,7 @@ export default class QCityInfo extends Vue {
     }
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input(value: DistrictVO) {
     return value
   }

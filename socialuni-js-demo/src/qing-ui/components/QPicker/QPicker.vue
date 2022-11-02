@@ -38,10 +38,10 @@
 </template>
 <script lang="ts">
 import CommonUtil from 'socialuni-sdk/src/utils/CommonUtil'
-import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
+import {Emit, Model, Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QRowItem from '../QRowItem/QRowItem.vue'
-import SelectorQuery = UniApp.SelectorQuery
-import NodesRef = UniApp.NodesRef
+import SelectorQuery = UniApp.SelectorQuery;
+import NodesRef = UniApp.NodesRef;
 
 /*
 显示出来已经选了的城市，给她画上钩
@@ -184,9 +184,6 @@ export default class QPicker extends Vue {
 
   @Emit('update:modelValue')
   input() {
-    console.log(this.checkedThree)
-    console.log(this.checkedTwo)
-    console.log(this.checkedOne)
     if (this.checkedThree || this.checkedThree === 0) {
       return this.threeLevelData[this.checkedThree]
     } else if (this.checkedTwo || this.checkedTwo === 0) {
