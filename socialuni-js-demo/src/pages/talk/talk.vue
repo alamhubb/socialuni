@@ -208,8 +208,6 @@ export default class TalkView extends Vue {
 
   // 点击加号去新增talk
   toTalkAdd() {
-
-    throw new Error('test')
     PageUtil.toTalkAddPage()
   }
 

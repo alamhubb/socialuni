@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Vue, Watch} from 'vue-property-decorator'
+import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 import {
   socialCircleModule,
   socialLocationModule,
@@ -208,8 +208,8 @@ export default class SocialTalkFilterDialog extends Vue {
     return GenderType.talkQueryEnums
   }
 
-  genderChange({target}) {
-    this.genderTypeValue = target.value
+  genderChange({detail}) {
+    this.genderTypeValue = detail.value
   }
 
   format() {

@@ -195,8 +195,8 @@ export default class TalkOperate extends Vue {
     }
   }
 
-  reportTypeChange({target}) {
-    this.reportType = target.value
+  reportTypeChange({detail}) {
+    this.reportType = detail.value
   }
 
   initData() {

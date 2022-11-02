@@ -9,12 +9,6 @@ export function createApp() {
     const app = createSSRApp(App);
     app.use(pinia)
     app.use(Socialuni)
-    app.config.errorHandler = (error, instance, info) => {
-        console.log(123123)
-        console.log(error)
-        console.log(instance)
-        console.log(info)
-    }
     return {
         app,
     };
