@@ -172,6 +172,7 @@ export default class TalkView extends Vue {
       //首次打开talk页面，获取用户位置用来查询
       // locationModule.appLunchInitDistrict().then(() => {
       this.$refs.tabsTalk.initQuery()
+      throw new Error('test')
       // })
     })
   }
@@ -207,6 +208,8 @@ export default class TalkView extends Vue {
 
   // 点击加号去新增talk
   toTalkAdd() {
+
+    throw new Error('test')
     PageUtil.toTalkAddPage()
   }
 

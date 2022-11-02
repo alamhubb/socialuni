@@ -1,17 +1,20 @@
-import {
-    createSSRApp
-} from "vue";
+import {createSSRApp} from "vue";
 import App from "./App.vue";
 import {createPinia} from "pinia";
 import Socialuni from "socialuni-sdk/index.ts"
 
 const pinia = createPinia()
 
-
 export function createApp() {
     const app = createSSRApp(App);
     app.use(pinia)
     app.use(Socialuni)
+    app.config.errorHandler = (error, instance, info) => {
+        console.log(123123)
+        console.log(error)
+        console.log(instance)
+        console.log(info)
+    }
     return {
         app,
     };

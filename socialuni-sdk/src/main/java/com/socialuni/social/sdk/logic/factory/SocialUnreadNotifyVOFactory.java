@@ -5,6 +5,7 @@ import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
@@ -63,8 +64,10 @@ public class SocialUnreadNotifyVOFactory {
         SocialuniCommentModel commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
         SocialuniTalkModel talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
 
+        String talkUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talk.getUnionId());
+
         //赋值
-        notifyVO.setTalkId(talk.getUnionId().toString());
+        notifyVO.setTalkId(talkUid);
         notifyVO.setContent(commentDO.getContent());
         notifyVO.setCreateTime(commentDO.getCreateTime());
         notifyVO.setHasRead(notifyDO.getHasRead());

@@ -15,6 +15,11 @@ export default class PageUtil {
         PageUtil.toTalkPage()
     }
 
+    static toTalkDetail(talkId: string) {
+        RouterUtil.navigateTo(PagePath.talkDetail, {talkId})
+    }
+
+
     static toUserDetail(userId: string) {
         RouterUtil.navigateTo(PagePath.userDetail, {userId})
     }

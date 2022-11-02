@@ -66,7 +66,8 @@
     "vue-class-component": "^8.0.0-rc.1",
     "vue-i18n": "^9.2.2",
     "vue-property-decorator": "^10.0.0-rc.3",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "@fullhuman/postcss-purgecss": "^3.0.0"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.17",

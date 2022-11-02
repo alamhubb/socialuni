@@ -183,7 +183,7 @@ export default class TalkItemComment extends Vue {
 
   toTalkDetailVue() {
     if (RouterUtil.getCurrentPageURI() !== PagePath.talkDetail) {
-      RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + this.talk.id)
+      PageUtil.toTalkDetail(this.talk.id)
     }
   }
 

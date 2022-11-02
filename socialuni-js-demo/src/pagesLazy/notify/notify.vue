@@ -1,6 +1,6 @@
 <template>
   <view>
-<!--    <view class="card" v-for="(notify,index) in notifies" :key="index">
+    <view class="card" v-for="(notify,index) in notifies" :key="index">
       <view class="card-title row-between" @click="toTalkDetailVue(notify.talkId)">
         <view class="flex-row flex-1">
           <image class="card-title-avatar flex-none" mode="aspectFill"
@@ -12,7 +12,8 @@
                 VIP
               </view>
             </view>
-            <view v-text="notify.content">
+            <view>
+              {{ notify.content }}
             </view>
             <view class="mt-5px text-gray">
               {{ formatTime(notify.createTime) }}
@@ -31,18 +32,16 @@
           </text>
         </view>
       </view>
-    </view>-->
+    </view>
   </view>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import UnreadNotifyVO from 'socialuni-api/src/model/notify/UnreadNotifyVO'
-import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
-import PagePath from 'socialuni-constant/constant/PagePath'
 import ImgUtil from 'socialuni-sdk/src/utils/ImgUtil'
 import {socialNotifyModule} from "socialuni-sdk/src/store/store";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 
 /**
@@ -52,7 +51,7 @@ import DateUtil from "socialuni-sdk/src/utils/DateUtil";
  */
 @Options({})
 export default class NotifyPage extends Vue {
-  /*get notifies() {
+  get notifies() {
     return socialNotifyModule.notifies
   }
 
@@ -60,12 +59,13 @@ export default class NotifyPage extends Vue {
     return DateUtil.formatTime(dateStr)
   }
 
-  toTalkDetailVue(talkId: number) {
-    RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)
+  toTalkDetailVue(talkId: string) {
+    PageUtil.toTalkDetail(talkId)
+
   }
 
   getTalkSmallImgUrl(userId: string, src: string) {
     return ImgUtil.getTalkSmallImgUrl(userId, src)
-  }*/
+  }
 }
 </script>

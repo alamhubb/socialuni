@@ -12,6 +12,7 @@ import lombok.Data;
 public class FrontErrorLogVO {
     //出错的url
     private String uri;
+    private String frontPage;
 
     //出错的业务备注
     private String detail;

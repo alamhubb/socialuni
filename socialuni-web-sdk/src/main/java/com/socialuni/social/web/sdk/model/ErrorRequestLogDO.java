@@ -41,6 +41,7 @@ public class ErrorRequestLogDO {
     private Integer userId;
     private String ip;
     private String uri;
+    private String frontPage;
     private Long spendTime;
     private String requestMethod;
     private Boolean success;

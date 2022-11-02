@@ -18,6 +18,7 @@ public class SocialFrontLogDomain {
         RequestLogDO requestLogDO = RequestLogUtil.get();
         ErrorRequestLogDO front = new ErrorRequestLogDO(requestLogDO);
 
+        front.setFrontPage(frontErrorLogVO.getFrontPage());
         front.setInnerMsg(frontErrorLogVO.getDetail());
         front.setUri(frontErrorLogVO.getUri());
         front.setParams(frontErrorLogVO.getParams());
