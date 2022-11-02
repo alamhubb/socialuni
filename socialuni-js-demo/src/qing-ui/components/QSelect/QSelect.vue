@@ -7,15 +7,17 @@
       </div>
       <q-icon v-if="pickerItemLabel!==null" class="mr-sm row-all-center flex-none color-tip"
               icon="mdi-close-circle"
-              size="16" @click.native.stop="clearValue"></q-icon>
+              size="16" @click.stop="clearValue"></q-icon>
       <q-icon class="mr-sm row-all-center flex-none color-tip" icon="mdi-chevron-down"
               size="24"></q-icon>
     </div>
   </picker>
 </template>
 <script lang="ts">
-import {Options, Emit, Model, Prop, Vue} from 'vue-property-decorator'
-import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
+import {Emit, Model, Options, Prop, Vue} from 'vue-property-decorator'
+import QIcon from '@/qing-ui/components/QIcon/QIcon.vue' /*
+显示出来已经选了的城市，给她画上钩
+* */
 
 /*
 显示出来已经选了的城市，给她画上钩

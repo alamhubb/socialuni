@@ -15,7 +15,7 @@
             <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
               <q-icon size="14" icon="level"/>
             </div>
-            <!--              <q-icon class="color-blue" size="18" icon="level" @click.native.stop="toIdentityAuth"/>-->
+            <!--              <q-icon class="color-blue" size="18" icon="level" @click.stop="toIdentityAuth"/>-->
           </template>
 
           <!--          <view v-if="!talk.globalTop" class="ml-5 cu-tag sm radius text-sm row-col-center"

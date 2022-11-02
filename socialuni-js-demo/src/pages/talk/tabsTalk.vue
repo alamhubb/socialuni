@@ -107,7 +107,7 @@
               <!-- 下拉刷新组件 -->
               <view class="mt-xs">
                 <uni-load-more :status="talkTabs[swiperIndex].loadMore"
-                               @click.native="clickOnreachBottom"
+                               @click="clickOnreachBottom"
                                :contentText="loadMoreText"></uni-load-more>
               </view>
             </div>
@@ -148,20 +148,20 @@ import QPullRefresh from "../../qing-ui/components/QPullRefresh/QPullRefresh.vue
 import TalkItem from "./talkItem/TalkItem.vue";
 import {
   socialConfigModule,
-  socialLocationModule, socialTagModule,
+  socialLocationModule,
+  socialSystemModule,
+  socialTagModule,
   socialTalkModule,
   socialUserModule
 } from "socialuni-sdk/src/store/store";
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
 import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
 
 
 // todo 后台可控制是否显示轮播图

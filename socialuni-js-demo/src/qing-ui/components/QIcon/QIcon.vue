@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Emit, Prop, Vue} from 'vue-property-decorator'
+import {Emit, Options, Prop, Vue} from 'vue-property-decorator'
 
 @Options({})
 export default class QIcon extends Vue {
@@ -52,7 +52,7 @@ export default class QIcon extends Vue {
 
   @Emit()
   click() {
-    return ''
+    return
   }
 }
 </script>

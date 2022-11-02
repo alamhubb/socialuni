@@ -5,7 +5,7 @@
   </view>
 </template>
 <script lang="ts">
-import {Options, Vue, Emit} from 'vue-property-decorator'
+import {Emit, Options, Vue} from 'vue-property-decorator'
 
 //和row-line区别，这个有上下pd那个没有
 /*
@@ -15,7 +15,7 @@ import {Options, Vue, Emit} from 'vue-property-decorator'
 export default class QRowItem extends Vue {
   @Emit()
   click() {
-    return ''
+    return
   }
 }
 </script>

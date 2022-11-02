@@ -8,7 +8,7 @@
           {{ location.adName }}
           <q-icon icon="mdi-chevron-right"></q-icon>
         </div>
-        <q-search class="flex-1 mr-sm" @click.native="openTagPicker">
+        <q-search class="flex-1 mr-sm" @click="openTagPicker">
           <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
           <view v-if="selectTagName" class="row-col-center flex-1" @click.stop="">
             <view class="q-tag round bg-green-plain light row-all-center">
@@ -63,7 +63,8 @@ import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
 import {
-  socialAppModule, socialConfigModule,
+  socialAppModule,
+  socialConfigModule,
   socialLocationModule,
   socialNotifyModule,
   socialTagModule,
@@ -75,7 +76,7 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
-import {onHide} from "@dcloudio/uni-app";
+import {onHide} from "@dcloudio/uni-app"; // todo 后台可控制是否显示轮播图
 
 // todo 后台可控制是否显示轮播图
 

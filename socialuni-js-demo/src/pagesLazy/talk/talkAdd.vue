@@ -71,7 +71,7 @@
             <view class="q-tag bd-round bg-pink-plain">
               <text @click="openTagSearchVue(false)">#{{ tag.name }}</text>
               <q-icon v-if="tag.id" class="ml-5" icon="close-circle-fill" size="16"
-                      @click.native.stop="deleteTag(tag)"/>
+                      @click.stop="deleteTag(tag)"/>
             </view>
           </view>
         </view>
@@ -134,7 +134,6 @@ import JsonUtils from 'socialuni-sdk/src/utils/ObjectUtil'
 import TagVO from 'socialuni-api/src/model/community/tag/TagVO'
 import CosUtil from 'socialuni-sdk/src/utils/CosUtil'
 import PlatformUtils from 'socialuni-sdk/src/utils/PlatformUtils'
-import CenterUserDetailRO from 'socialuni-api/src/model/social/CenterUserDetailRO'
 import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
 import CityPicker from '../../components/QCityPicker/QCityPicker.vue'
 import TalkAddTagSearch from '../../components/SocialTagAdd/TalkAddTagSearch.vue'
@@ -154,7 +153,6 @@ import PagePath from 'socialuni-constant/constant/PagePath'
 import SocialTagAdd from '../../components/SocialTagAdd/SocialTagAdd.vue'
 import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
 import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
-import TagTypeVO from 'socialuni-api/src/model/community/tag/TagTypeVO'
 import QInput from '@/qing-ui/components/QInput/QInput.vue'
 import SocialCirclePicker from '@/components/SocialCirclePicker.vue'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
@@ -163,7 +161,8 @@ import SocialCircleRO from 'socialuni-api/src/model/community/circle/SocialCircl
 import {
   socialCircleModule,
   socialLocationModule,
-  socialTagModule, socialTalkModule,
+  socialTagModule,
+  socialTalkModule,
   socialUserModule
 } from "socialuni-sdk/src/store/store";
 import {onUnload} from "@dcloudio/uni-app";

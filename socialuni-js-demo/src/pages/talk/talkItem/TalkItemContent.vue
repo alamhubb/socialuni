@@ -16,7 +16,7 @@
                @click.stop="previewImage(index)"
         ></image>
         <!--        <div class="bd-round size18 position-absolute mr-nn mt-nn right-0 row-all-center">
-                  <q-icon @click.native.stop="toIdentityAuth"
+                  <q-icon @click.stop="toIdentityAuth"
                           class="color-success"
                           size="16" icon="level"/>
                 </div>-->

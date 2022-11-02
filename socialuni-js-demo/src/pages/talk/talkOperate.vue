@@ -3,11 +3,11 @@
     <q-popup :value="commentVisible" @input="commentActionClose">
       <view class="uni-tip w180">
         <uni-list class="w100">
-          <uni-list-item :show-arrow="true" title="复制" @click.native="copyText"/>
+          <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
           <uni-list-item v-if="user&&comment&&(user.id === comment.user.id||user.id ===talk.user.id)"
-                         :show-arrow="true" title="删除" @click.native="userDeleteComment"/>
+                         :show-arrow="true" title="删除" @click="userDeleteComment"/>
           <uni-list-item v-if="user" :show-arrow="true" title="举报"
-                         @click.native="openReportDialog"/>
+                         @click="openReportDialog"/>
         </uni-list>
       </view>
     </q-popup>
