@@ -1,13 +1,14 @@
-<script setup lang="ts">
-import {onError, onLaunch} from "@dcloudio/uni-app";
+<script>
+import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 
-onLaunch(() => {
-  console.log('App Launch')
-})
-
-onError(() => {
-  console.log('Arrr')
-})
+export default {
+  onLaunch() {
+    console.log('App Launch')
+  },
+  onError(e) {
+    SocialuniAppAPI.sendErrorLogAPI('front page error', e.message)
+  },
+}
 </script>
 
 <style lang="scss">
