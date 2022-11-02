@@ -1,0 +1,221 @@
+<template>
+  <view class="flex-col h100p bg-theme-bg">
+    <!--    不能使用100%，h5，不包含tabbar，尺寸计算不正确，所以需要使用h100vh-->
+    <view class="flex-col h100vh">
+      <q-navbar class="flex-none">
+        <div class="row-col-center ml-xs mr-sm font-bold bg-click" @click="openCityPicker">
+          <q-icon size="14" icon="map-fill"></q-icon>
+          {{ location.adName }}
+          <q-icon icon="mdi-chevron-right"></q-icon>
+        </div>
+        <q-search class="flex-1 mr-sm" @click.native="openTagPicker">
+          <q-icon class="mx-5 text-gray" size="16" icon="search"></q-icon>
+          <view v-if="selectTagName" class="row-col-center flex-1" @click.stop="">
+            <view class="q-tag round bg-green-plain light row-all-center">
+              {{ selectTagName }}
+            </view>
+            <q-icon class="mr-sm text-gray row-all-center" icon="close" @click="deleteTag"></q-icon>
+          </view>
+          <div v-else class="cursor-text flex-1">选择话题</div>
+        </q-search>
+        <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
+                  <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
+                </view>-->
+        <view v-if="user" class="position-relative mr-sm">
+          <q-icon icon="bell-fill" @click="toNotifyVue" size="28"></q-icon>
+          <!--          <u-badge :count="unreadNotifiesNum" size="mini"
+                             :offset="[0, 0]" @click="toNotifyVue"></u-badge>-->
+        </view>
+        <view>
+          <q-icon icon="plus-circle" size="28" @click="toTalkAdd"></q-icon>
+        </view>
+      </q-navbar>
+
+      <!--  #ifdef APP-PLUS -->
+      <!-- <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
+      <!--  #endif -->
+
+      <tabs-talk class="flex-1" ref="tabsTalk"></tabs-talk>
+    </view>
+    <msg-input>
+    </msg-input>
+
+
+    <social-tag-picker ref="tagPicker" @change="changeTag"></social-tag-picker>
+    <q-city-picker ref="cityPicker" :value="location" @input="cityChange"></q-city-picker>
+  </view>
+</template>
+
+<script lang="ts">
+import {Options, Vue, Watch} from 'vue-property-decorator'
+
+import QButton from '../../qing-ui/components/QButton/QButton.vue'
+import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
+import QSearch from '../../qing-ui/components/QSearch/QSearch.vue'
+import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
+import QPopup from '../../qing-ui/components/QPopup/QPopup.vue'
+import QSlider from '../../qing-ui/components/QSlider/QSlider.vue'
+import SocialTagPicker from "../../components/SocialTagPicker.vue";
+import QCityPicker from "../../components/QCityPicker/QCityPicker.vue";
+import QTabs from "../../qing-ui/components/QTabs/QTabs.vue";
+import MsgInput from "../../components/MsgInput.vue";
+import TagSearch from "./TagSearch.vue";
+import TabsTalk from "./tabsTalk.vue";
+import TalkSwipers from "./talkSwipers.vue";
+import {
+  socialAppModule, socialConfigModule,
+  socialLocationModule,
+  socialNotifyModule,
+  socialTagModule,
+  socialUserModule
+} from "socialuni-sdk/src/store/store";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import PagePath from "socialuni-constant/constant/PagePath";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import TagVO from "socialuni-api/src/model/community/tag/TagVO";
+import DistrictVO from "socialuni-api/src/model/DistrictVO";
+import {onHide} from "@dcloudio/uni-app";
+
+// todo 后台可控制是否显示轮播图
+
+@Options({
+  components: {
+    SocialTagPicker,
+    QCityPicker,
+    QTabs,
+    QSlider,
+    QPopup,
+    QIcon,
+    QSearch,
+    QNavbar,
+    MsgInput,
+    QButton,
+    TagSearch,
+    TabsTalk,
+    TalkSwipers
+  }
+})
+export default class TalkView extends Vue {
+  public $refs!: {
+    tabsTalk: TabsTalk;
+    cityPicker: QCityPicker
+    tagPicker: SocialTagPicker
+  }
+
+  get tags() {
+    return socialTagModule.tags
+  }
+
+  get user() {
+    return socialUserModule.user
+  }
+
+  get unreadNotifies() {
+    return socialNotifyModule.unreadNotifies
+  }
+
+  // 轮播图
+  get homeSwipers() {
+    return socialAppModule.homeSwipers
+  }
+
+  get selectTagName() {
+    return socialTagModule.selectTagName
+  }
+
+  get location() {
+    return socialLocationModule.location
+  }
+
+  current = 0
+  unreadNotifiesNum = 0
+
+  // 滚动超过轮播图隐藏轮播图，scroll-view开启滚动
+
+  get talkTabsTop() {
+    if (socialConfigModule.appMoreConfig.showSwipers && this.homeSwipers && this.homeSwipers.length) {
+      return socialConfigModule.appMoreConfig.swiperHeight + 10
+    }
+    return 0
+  }
+
+  created() {
+    onHide(() => {
+      this.$refs.tabsTalk.tabsTalkOnHide()
+    })
+  }
+
+  // life
+  mounted() {
+    this.pageMounted()
+  }
+
+  pageMounted() {
+    UniUtil.showShareMenu()
+    // 这里是不是有问题应该选择异性
+    // 指的是用户选择的筛选性别
+    this.initQuery()
+  }
+
+  // 必须这么写否则不生效
+  @Watch('unreadNotifies')
+  unreadNotifiesWatch() {
+    this.unreadNotifiesNum = this.unreadNotifies.length
+  }
+
+  // 去除页面初始化的，初始化查询
+  initQuery() {
+    // this.$refs.tabsTalk.initQuery()
+    this.$nextTick(() => {
+      //首次打开talk页面，获取用户位置用来查询
+      // locationModule.appLunchInitDistrict().then(() => {
+      this.$refs.tabsTalk.initQuery()
+      // })
+    })
+  }
+
+  startPullDown() {
+    this.$refs.tabsTalk.startPullDown()
+  }
+
+  openTagPicker() {
+    this.$refs.tagPicker.open()
+  }
+
+
+  @Watch('selectTagName')
+  selectTagNameWatch() {
+    //已经watch了，所以修改tag无需重新设置查询
+    this.startPullDown()
+  }
+
+  // tag
+  changeTag(tag: TagVO) {
+    socialTagModule.setSelectTagName(tag.name)
+  }
+
+  deleteTag() {
+    socialTagModule.setSelectTagName(null)
+  }
+
+  toNotifyVue() {
+    socialNotifyModule.queryUnreadNotifiesAndUpdateHasReadAction()
+    RouterUtil.navigateTo(PagePath.notify)
+  }
+
+  // 点击加号去新增talk
+  toTalkAdd() {
+    PageUtil.toTalkAddPage()
+  }
+
+  openCityPicker() {
+    this.$refs.cityPicker.open()
+  }
+
+  cityChange(district: DistrictVO) {
+    socialLocationModule.setLocation(district)
+    this.startPullDown()
+  }
+}
+</script>
