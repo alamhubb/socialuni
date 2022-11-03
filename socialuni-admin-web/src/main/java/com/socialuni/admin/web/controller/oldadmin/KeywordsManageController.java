@@ -1,20 +1,13 @@
 package com.socialuni.admin.web.controller.oldadmin;
 
 
-import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.common.sdk.enumeration.CommonStatus;
-import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;
-import com.socialuni.social.sdk.dao.mapper.TalkMapper;
+import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
-import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
-import com.socialuni.social.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.community.sdk.api.TalkInterface;
-import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,23 +25,7 @@ import java.util.Optional;
 @RequestMapping("keywords")
 public class KeywordsManageController {
     @Resource
-    private ReportApi reportApi;
-    @Resource
-    private ViolationService violationService;
-    @Resource
-    private NotifyRepository notifyRepository;
-    @Resource
     private KeywordsRepository keywordsRepository;
-    @Resource
-    private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
-
-    @Resource
-    private TalkInterface talkApi;
-    @Resource
-    private TalkQueryStore talkQueryStore;
-    @Resource
-    private TalkMapper talkMapper;
-
 
     @PostMapping("addKeywords")
     public ResultRO<KeywordsDO> addKeywords(@Valid @NotNull String content, String cause) {

@@ -1,5 +1,6 @@
 package com.socialuni.admin.web.model;
 
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.Data;
 
 

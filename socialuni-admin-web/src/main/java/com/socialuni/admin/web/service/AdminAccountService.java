@@ -2,24 +2,24 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.controller.DevAccountUpdateQO;
-import com.socialuni.social.community.sdk.model.TagDO;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.sdk.utils.UUIDUtil;
+import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.constant.MpType;
+import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
+import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
+import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
-import com.socialuni.social.common.sdk.model.ResultRO;
-import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.constant.MpType;
-import com.socialuni.social.sdk.constant.platform.PlatformType;
-import com.socialuni.social.sdk.logic.manage.SocialTagManage;
-import com.socialuni.social.community.sdk.api.TagInterface;
-import com.socialuni.social.common.sdk.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +38,7 @@ public class AdminAccountService {
     @Resource
     private DevAccountProviderInterface devAccountProviderApi;
     @Resource
-    private TagInterface tagApi;
+    private TagRepository tagApi;
     @Resource
     private SocialTagManage socialTagManage;
     @Transactional

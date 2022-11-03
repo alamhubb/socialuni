@@ -3,16 +3,10 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.admin.web.factory.SocialuniAdminStickTalkROFactory;
 import com.socialuni.admin.web.model.ReportUserVO;
 import com.socialuni.admin.web.model.SocialuniAdminStickTalkRO;
-import com.socialuni.social.community.sdk.api.TalkInterface;
-import com.socialuni.social.community.sdk.model.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
-import com.socialuni.social.sdk.dao.store.TalkQueryStore;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.sdk.api.DevAccountInterface;
-import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,19 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping("socialuni/admin/stickTalk")
 public class SocialuniAdminStickTalkManageController {
     @Resource
-    HomeSwiperRepository homeSwiperRepository;
-    @Resource
-    TalkInterface talkInterface;
-    @Resource
-    TalkQueryStore talkQueryStore;
-    @Resource
-    private SocialUserPhoneRedis socialUserPhoneRedis;
-    @Resource
-    private SocialUserPhoneEntity socialUserPhoneEntity;
-    @Resource
-    private DevAccountInterface devAccountInterface;
-    @Resource
-    private DevAccountRedisInterface devAccountRedisInterface;
+    TalkRepository talkInterface;
 
     @GetMapping("querySystemUserTalks")
     public List<SocialuniAdminStickTalkRO> querySystemManageTalks() {

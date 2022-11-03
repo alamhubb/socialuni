@@ -3,14 +3,14 @@ package com.socialuni.admin.web.model;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.report.sdk.model.ReportDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

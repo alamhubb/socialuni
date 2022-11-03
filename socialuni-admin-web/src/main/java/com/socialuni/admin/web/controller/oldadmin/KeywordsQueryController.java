@@ -1,26 +1,24 @@
 package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.model.KeywordsDetailVO;
-import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.enumeration.CommonStatus;
-import com.socialuni.social.community.sdk.api.CommentInterface;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.repository.CommentRepository;
+import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.community.sdk.model.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.model.SocialuniTalkDO;
+import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.sdk.dao.mapper.TalkMapper;
-import com.socialuni.social.sdk.dao.repository.*;
-import com.socialuni.social.community.sdk.api.TalkInterface;
+import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
+import com.socialuni.social.sdk.dao.repository.MessageRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,26 +39,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("keywords")
 public class KeywordsQueryController {
-    @Resource
-    private ReportApi reportApi;
-    @Resource
-    private ViolationService violationService;
-    @Resource
-    private NotifyRepository notifyRepository;
+
     @Resource
     private KeywordsRepository keywordsRepository;
     @Resource
-    private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
-
+    private TalkRepository talkApi;
     @Resource
-    private TalkInterface talkApi;
-    @Resource
-    private CommentInterface commentApi;
+    private CommentRepository commentApi;
     @Resource
     private MessageRepository messageRepository;
-    @Resource
-    private TalkMapper talkMapper;
-
     @Resource
     private KeywordsService keywordsService;
 

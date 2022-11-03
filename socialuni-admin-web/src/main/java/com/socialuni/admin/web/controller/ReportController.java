@@ -5,19 +5,19 @@ import com.socialuni.admin.web.domain.AdminReportQueryDomain;
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.AdminReportService;
 import com.socialuni.admin.web.service.AdminUserService;
-import com.socialuni.social.report.sdk.model.ReportDO;
-import com.socialuni.social.community.sdk.model.SocialuniCommentDO;
-import com.socialuni.social.community.sdk.model.SocialuniTalkDO;
+import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.repository.CommentRepository;
+import com.socialuni.social.report.sdk.entity.ReportDO;
+import com.socialuni.social.report.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,22 +35,9 @@ import java.util.stream.Collectors;
 @RequestMapping("report")
 public class ReportController {
     @Resource
-    private ReportApi reportApi;
-    //    @Resource
-//    private ViolationService violationService;
-    @Resource
-    private NotifyRepository notifyRepository;
+    private ReportRepository reportApi;
     @Resource
     private AdminReportService adminReportService;
-//    @Resource
-//    private NotifyService notifyService;
-
-    @Resource
-    private TalkInterface talkApi;
-    @Resource
-    private KeywordsRepository keywordsRepository;
-    @Resource
-    private KeywordsService keywordsService;
     @Resource
     private AdminReportQueryDomain adminReportQueryDomain;
 
@@ -117,7 +104,7 @@ public class ReportController {
     @Resource
     TalkQueryStore talkQueryStore;
     @Resource
-    CommentInterface commentApi;
+    CommentRepository commentApi;
     @Resource
     AdminUserService adminUserService;
 

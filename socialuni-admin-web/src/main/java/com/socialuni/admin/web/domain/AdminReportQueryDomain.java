@@ -2,17 +2,19 @@ package com.socialuni.admin.web.domain;
 
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.ViolationService;
-import com.socialuni.social.report.sdk.api.ReportDetailApi;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.report.sdk.model.ReportDO;
+import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
+import com.socialuni.social.report.sdk.repository.ReportRepository;
+import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.sdk.dao.repository.*;
+import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
+import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,21 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class AdminReportQueryDomain {
     @Resource
-    private ReportApi reportApi;
-    @Resource
-    private ViolationService violationService;
-    @Resource
-    private NotifyRepository notifyRepository;
-    @Resource
-    private KeywordsService keywordsService;
-    //    @Resource
-//    private NotifyService notifyService;
-    @Resource
-    private ReportDetailApi reportDetailApi;
-    @Resource
-    private KeywordsTriggerDetailRepository keywordsTriggerDetailRepository;
-    @Resource
-    private KeywordsRepository keywordsRepository;
+    private ReportRepository reportApi;
     @Resource
     private TalkAdultImgAuditRepository talkAdultImgAuditRepository;
 
