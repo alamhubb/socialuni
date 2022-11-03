@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.feignAPI.user;
 
+import com.socialuni.social.sdk.model.QO.user.SocialuniUserIdQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
@@ -21,4 +22,12 @@ public interface SocialuniUserExpandAPI {
     @PostMapping("editUserContactInfo")
     @Operation(summary = "编辑用户联系方式")
     ResultRO<SocialuniMineUserDetailRO> editUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
+
+    @PostMapping("switchOpenUserContactInfo")
+    @Operation(summary = "用户切换他人是否可获取联系方式功能")
+    ResultRO<SocialuniMineUserDetailRO> switchOpenUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
+
+    @PostMapping("getUserContactInfo")
+    @Operation(summary = "获取用户联系方式")
+    ResultRO<SocialuniMineUserDetailRO> getUserContactInfo(@RequestBody SocialuniUserIdQO socialuniMineUserDetailRO);
 }

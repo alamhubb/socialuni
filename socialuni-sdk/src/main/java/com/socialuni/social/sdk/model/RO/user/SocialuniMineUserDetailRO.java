@@ -12,6 +12,16 @@ import lombok.NoArgsConstructor;
 public class SocialuniMineUserDetailRO extends SocialuniUserDetailRO {
     private String phoneNum;
     private String birthday;
+    private Integer socialCoin;
+    private Boolean openContactInfo;
+
+    public SocialuniMineUserDetailRO(SocialuniMineUserDetailRO userRO) {
+        super(userRO);
+        this.phoneNum = userRO.getPhoneNum();
+        this.birthday = userRO.getBirthday();
+        this.socialCoin = userRO.getSocialCoin();
+        this.openContactInfo = userRO.getOpenContactInfo();
+    }
 
     public SocialuniMineUserDetailRO(SocialuniUserDetailRO userRO) {
         super(userRO);

@@ -19,12 +19,12 @@
     <description>qingchi_back project for Spring Boot</description>
 
     <modules>
-        <module>socialuni-common</module>
-        <module>socialuni-web-sdk</module>
-        <module>socialuni-sdk</module>
-        <module>socialuni-web</module>
+        <module>socialuni-demo-web</module>
         <module>socialuni-admin-web</module>
-        <module>socialuni-embed-demo</module>
+        <module>socialuni-official-web</module>
+        <module>socialuni-sdk</module>
+        <module>socialuni-web-sdk</module>
+        <module>socialuni-common</module>
         <module>socialuni-tance-uni</module>
         <module>socialuni-tance-sdk</module>
         <module>socialuni-tance-dev</module>
@@ -112,12 +112,12 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-web</artifactId>
+                <artifactId>socialuni-demo-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-embed-demo</artifactId>
+                <artifactId>socialuni-official-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->

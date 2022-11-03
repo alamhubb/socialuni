@@ -37,10 +37,7 @@ public class SocialuniUserDetailROFactory {
                 contactInfo = contactInfo.charAt(0) + "*****";
             }
             userDetailVO.setContactInfo(contactInfo);
-            userDetailVO.setOpenContactInfo(socialuniUserExpandModel.getOpenContactInfo());
         }
-        SocialuniUserSocialCoinModel socialuniUserSocialCoinModel = SocialuniUserSocialCoinDOUtil.getOrCreate(userUnionId);
-        userDetailVO.setSocialCoin(socialuniUserSocialCoinModel.getSocialCoin());
         //用户图片
         List<SocialuniUserImgModel> imgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(userDO.getUnionId());
         List<SocialuniUserImgRO> imgVOS = UserImgROFactory.userImgDOToVOS(imgDOS);

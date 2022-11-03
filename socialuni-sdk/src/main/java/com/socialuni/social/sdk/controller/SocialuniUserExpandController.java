@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.controller;
 import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserExpandAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserExpandService;
+import com.socialuni.social.sdk.model.QO.user.SocialuniUserIdQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
@@ -25,5 +26,15 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
     @Override
     public ResultRO<SocialuniMineUserDetailRO> editUserContactInfo(SocialUserContactInfoEditQO socialMineUserDetailQO) {
         return socialuniUserExpandService.editUserContactInfo(socialMineUserDetailQO);
+    }
+
+    @Override
+    public ResultRO<SocialuniMineUserDetailRO> switchOpenUserContactInfo(SocialUserContactInfoEditQO socialuniMineUserDetailRO) {
+        return null;
+    }
+
+    @Override
+    public ResultRO<SocialuniMineUserDetailRO> getUserContactInfo(SocialuniUserIdQO socialuniMineUserDetailRO) {
+        return null;
     }
 }

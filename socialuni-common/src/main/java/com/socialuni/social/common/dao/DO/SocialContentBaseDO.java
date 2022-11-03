@@ -3,6 +3,7 @@ package com.socialuni.social.common.dao.DO;
 import com.socialuni.social.common.dao.DO.SocialCommonBaseDO;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Index;
@@ -20,14 +21,16 @@ import java.util.Date;
         @Index(columnList = "status"),
 })
 @Data
-public class SocialContentBaseDO extends SocialCommonBaseDO implements Serializable {
+@NoArgsConstructor
+public class SocialContentBaseDO extends SocialUnionUserInfoBaseDO implements Serializable {
     @Column(nullable = false)
     private String status;
 
     @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")
     private Date updateTime;
 
-    public SocialContentBaseDO() {
+    public SocialContentBaseDO(Integer userId) {
+        super(userId);
         this.updateTime = super.getCreateTime();
         this.status = CommonStatus.enable;
     }

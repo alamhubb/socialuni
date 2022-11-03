@@ -1,6 +1,7 @@
 package com.socialuni.social.common.dao.DO;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  */
 @MappedSuperclass
 @Data
+@NoArgsConstructor
 public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer userId;
@@ -34,23 +36,19 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
      */
     private String deleteReason;
 
-    public SocialUnionContentBaseDO() {
-        this.reportNum = 0;
-    }
-
     public SocialUnionContentBaseDO(Integer userId, String contentType, String content) {
+        super(userId);
         this.reportNum = 0;
-        this.userId = userId;
         this.contentType = contentType;
         this.content = content;
     }
 
-    public SocialUnionContentBaseDO(SocialUnionContentBaseDO socialUnionContentBaseDO, String content) {
+    /*public SocialUnionContentBaseDO(SocialUnionContentBaseDO socialUnionContentBaseDO, String content) {
         this.userId = socialUnionContentBaseDO.getUserId();
         this.unionId = socialUnionContentBaseDO.getUnionId();
         this.contentType = socialUnionContentBaseDO.getContentType();
         this.content = content;
         this.reportNum = socialUnionContentBaseDO.getReportNum();
         this.setStatus(socialUnionContentBaseDO.getStatus());
-    }
+    }*/
 }
