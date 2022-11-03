@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.utils.GenderUtil;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.entity.user;
 
+import com.socialuni.social.sdk.dao.DO.UserLogDO;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
@@ -13,6 +14,7 @@ import java.util.Date;
 
 @Component
 public class SocialUserPhoneEntity {
+
     @Resource
     private SocialUserPhoneManage socialUserPhoneManage;
     @Resource

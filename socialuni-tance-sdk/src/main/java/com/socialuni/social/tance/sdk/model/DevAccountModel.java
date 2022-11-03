@@ -1,6 +1,5 @@
 package com.socialuni.social.tance.sdk.model;
 
-import com.socialuni.social.user.sdk.model.SocialuniContentBaseModel;
 import lombok.Data;
 
 import java.io.Serializable;

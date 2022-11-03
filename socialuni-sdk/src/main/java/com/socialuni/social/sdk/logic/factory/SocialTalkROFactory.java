@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.community.sdk.model.HugModel;

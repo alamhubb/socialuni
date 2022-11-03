@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.circle;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ import java.io.Serializable;
 })
 @Data
 @NoArgsConstructor
-public class SocialCircleCampaignRecordDO extends CommonContentBaseDO implements Serializable {
+public class SocialCircleCampaignRecordDO extends SocialuniContentBaseDO implements Serializable {
     Integer circleId;
     Integer userId;
     //第几期

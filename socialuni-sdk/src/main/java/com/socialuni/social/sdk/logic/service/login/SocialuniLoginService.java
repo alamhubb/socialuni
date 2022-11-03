@@ -16,8 +16,8 @@ import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

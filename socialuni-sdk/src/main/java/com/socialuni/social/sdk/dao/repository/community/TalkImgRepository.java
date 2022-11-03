@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository.community;
 
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -30,7 +30,7 @@ public interface TalkImgRepository extends JpaRepository<SocialuniTalkImgModel, 
     @Cacheable(cacheNames = "getTalkImgByUnionId", key = "#unionId")
     SocialuniTalkImgModel findOneByUnionId(Integer unionId);
 
-    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
+    SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
 
     //获取talkImg
     SocialuniTalkImgModel findFirstBySrc(String imgUlr);

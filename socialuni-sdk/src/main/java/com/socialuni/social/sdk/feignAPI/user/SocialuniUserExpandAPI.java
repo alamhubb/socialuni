@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.model.QO.user.SocialuniUserIdQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

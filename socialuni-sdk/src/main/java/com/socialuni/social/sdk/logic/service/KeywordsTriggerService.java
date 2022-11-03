@@ -2,12 +2,12 @@ package com.socialuni.social.sdk.logic.service;
 
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.socialuni.social.sdk.constant.CustomWordsRuleType;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.BlackKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.CustomKeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.WhiteKeywordsRepository;
 import com.socialuni.social.sdk.utils.content.TextContentUtil;
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.keywords.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -126,7 +126,7 @@ public class KeywordsTriggerService {
 */
 
     public List<KeywordsTriggerDetailDO> checkContentTriggerKeywords(
-            SocialUnionContentBaseDO contentBO,
+            SocialuniUnionContentBaseDO contentBO,
             List<KeywordsDO> keywordDOs,
             boolean isTest
     ) {

@@ -3,7 +3,7 @@ package com.socialuni.admin.web.service;
 import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import org.springframework.stereotype.Service;

@@ -6,7 +6,7 @@ import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.common.exception.exception.SocialSystemException;
+import com.socialuni.social.common.sdk.exception.exception.SocialSystemException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

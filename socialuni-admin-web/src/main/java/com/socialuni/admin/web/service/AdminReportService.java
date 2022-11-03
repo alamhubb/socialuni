@@ -4,7 +4,6 @@ import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.social.report.sdk.api.ReportDetailApi;
 import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
@@ -18,7 +17,7 @@ import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
@@ -26,8 +25,8 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -175,7 +174,7 @@ public class AdminReportService {
                 auditNote = "不违规";
 //                    return new ResultVO<>("审核不违规，必须填写原因");
             }
-            SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
+            SocialuniUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
             //如果是违规
             if (violation) {
                 if (StringUtils.isEmpty(violateType)) {

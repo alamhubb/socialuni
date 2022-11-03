@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.Date;
 )
 @Data
 @NoArgsConstructor
-public class SocialTokenDO extends CommonContentBaseDO implements Serializable {
+public class SocialTokenDO extends SocialuniContentBaseDO implements Serializable {
         @Column(nullable = false, updatable = false)
         private Integer userId;
         @Column(nullable = false, updatable = false)

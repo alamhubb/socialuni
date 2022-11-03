@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.dao.redis;
 
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.logic.factory.SocialDistrictROFactory;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
-import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.DistrictDO;
 import com.socialuni.social.sdk.dao.repository.DistrictRepository;
 import org.apache.commons.lang3.StringUtils;

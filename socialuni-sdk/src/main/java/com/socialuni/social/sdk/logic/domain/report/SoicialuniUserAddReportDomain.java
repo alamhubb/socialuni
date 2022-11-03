@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.UserType;
@@ -11,7 +10,7 @@ import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.report.sdk.model.ReportDetailModel;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.report.sdk.api.ReportDetailApi;
 import com.socialuni.social.report.sdk.api.ReportApi;
@@ -21,7 +20,7 @@ import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,7 +41,7 @@ public class SoicialuniUserAddReportDomain {
     private UserApi userApi;
 
     @Transactional
-    public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, SocialUnionContentBaseDO modelDO) {
+    public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, SocialuniUnionContentBaseDO modelDO) {
         //这里之后才能校验
 
         Integer contentId = modelDO.getUnionId();

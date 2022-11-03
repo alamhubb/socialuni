@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
-import com.socialuni.social.common.constant.SocialSystemConst;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.constant.SocialSystemConst;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.common.sdk.utils.IpUtil;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ErrorMsg;

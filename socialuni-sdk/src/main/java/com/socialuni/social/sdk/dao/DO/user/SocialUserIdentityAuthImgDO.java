@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import javax.persistence.Table;
         //关联需要键索引，索引列不能为空
         @Index(columnList = "userId"),
 })
-public class SocialUserIdentityAuthImgDO extends CommonContentBaseDO {
+public class SocialUserIdentityAuthImgDO extends SocialuniContentBaseDO {
     private Integer userId;
     private String userIdImgSrc;
     private String userSelfieImgSrc;

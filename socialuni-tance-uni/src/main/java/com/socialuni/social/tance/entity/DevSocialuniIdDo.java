@@ -1,8 +1,6 @@
 package com.socialuni.social.tance.entity;
 
-import com.socialuni.social.common.repository.CommonBaseDO;
 import com.socialuni.social.tance.sdk.model.DevSocialuniIdModel;
-import com.socialuni.social.tance.sdk.model.DevTokenModler;
 import lombok.Data;
 
 import javax.persistence.Column;

@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.factory.RO.user;
 import com.socialuni.social.user.sdk.model.SocialUserFansDetailModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;
-import com.socialuni.social.common.exception.exception.SocialSystemException;
+import com.socialuni.social.common.sdk.exception.exception.SocialSystemException;
 import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.social.sdk.dao.redis.UserFansDetailRedis;
 import org.springframework.stereotype.Component;

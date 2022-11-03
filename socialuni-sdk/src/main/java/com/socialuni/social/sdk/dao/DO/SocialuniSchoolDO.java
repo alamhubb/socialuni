@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.common.repository.CommonBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialuniSchoolDO extends CommonBaseDO implements Serializable {
+public class SocialuniSchoolDO extends SocialuniBaseDO implements Serializable {
     private String name;
     //所在城市名称
     private String cityName;

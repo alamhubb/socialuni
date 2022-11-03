@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.common.enumeration.CommonStatus;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.community.sdk.api.TalkInterface;

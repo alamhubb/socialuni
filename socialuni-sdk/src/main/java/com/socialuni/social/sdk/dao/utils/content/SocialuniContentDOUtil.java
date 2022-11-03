@@ -8,16 +8,16 @@ import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.dao.repository.MessageRepository;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -55,7 +55,7 @@ public class SocialuniContentDOUtil<T> {
         SocialuniContentDOUtil.talkImgRepository = talkImgRepository;
     }
 
-    public static SocialUnionContentBaseDO save(SocialUnionContentBaseDO model) {
+    public static SocialuniUnionContentBaseDO save(SocialuniUnionContentBaseDO model) {
         String contentType = model.getContentType();
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {
             throw new SocialParamsException("错误的内容类型");
@@ -80,13 +80,13 @@ public class SocialuniContentDOUtil<T> {
         }
     }
 
-    public static SocialUnionContentBaseDO getContentDOByContentId(Integer contentId) {
+    public static SocialuniUnionContentBaseDO getContentDOByContentId(Integer contentId) {
         SocialuniUnionIdModler socialuniUnionIdModler = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
         String contentType = socialuniUnionIdModler.getContentType();
         if (!SocialuniContentType.unionIdSupportTypes.contains(contentType)) {
             throw new SocialParamsException("错误的内容类型");
         }
-        SocialUnionContentBaseDO contentBaseDO;
+        SocialuniUnionContentBaseDO contentBaseDO;
         if (contentType.equals(SocialuniContentType.user)) {
             contentBaseDO = SocialuniUserUtil.getUserNotNull(contentId);
         } else if (contentType.equals(SocialuniContentType.userImg)) {
@@ -103,7 +103,7 @@ public class SocialuniContentDOUtil<T> {
         return contentBaseDO;
     }
 
-    public static <T extends BaseModelParentDO> void setBaseModel(T baseModelParentDO, SocialUnionContentBaseDO model) {
+    public static <T extends BaseModelParentDO> void setBaseModel(T baseModelParentDO, SocialuniUnionContentBaseDO model) {
         if (model instanceof SocialuniTalkModel) {
             SocialuniTalkModel talkDO = SocialuniContentDOUtil.getModelByClass(model);
             baseModelParentDO.setTalkId(talkDO.getUnionId());
@@ -141,11 +141,11 @@ public class SocialuniContentDOUtil<T> {
         return reportDO;
     }*/
 
-    public static <T> T getModelByClass(SocialUnionContentBaseDO model) {
+    public static <T> T getModelByClass(SocialuniUnionContentBaseDO model) {
         return (T) model;
     }
 
-    public static <T> T getModelByClass(SocialUnionContentBaseDO model, Class<T> childClass) {
+    public static <T> T getModelByClass(SocialuniUnionContentBaseDO model, Class<T> childClass) {
         return (T) model;
     }
 }

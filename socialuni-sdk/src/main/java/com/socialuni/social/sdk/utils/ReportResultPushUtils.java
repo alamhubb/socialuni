@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.report.sdk.model.ReportModel;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.platform.qq.QQConst;
@@ -34,7 +34,7 @@ public class ReportResultPushUtils {
     //动态评论通知
     public static PushMsgDTO getReportResultPushDTO(String provider, NotifyDO notify) {
         ReportModel reportModel = reportApi.findById(notify.getReportId()).get();
-        SocialUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
+        SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
 
         //举报原因
         String reportCause = reportModel.getAuditType();

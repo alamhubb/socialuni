@@ -1,4 +1,4 @@
-package com.socialuni.social.common.repository;
+package com.socialuni.social.common.sdk.entity;
 
 import lombok.Data;
 
@@ -6,18 +6,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@MappedSuperclass
 @Data
-public class CommonBaseDO implements Serializable {
+@MappedSuperclass
+public class SocialuniBaseDO implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     private Date createTime;
 
-    public CommonBaseDO() {
+    public SocialuniBaseDO() {
         Date curDate = new Date();
         this.createTime = curDate;
     }

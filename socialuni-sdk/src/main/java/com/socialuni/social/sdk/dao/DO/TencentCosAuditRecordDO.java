@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "s_tencent_cos_audit_record")
 @Data
-public class TencentCosAuditRecordDO extends CommonContentBaseDO {
+public class TencentCosAuditRecordDO extends SocialuniContentBaseDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)

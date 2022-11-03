@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.notify;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.social.common.sdk.exception.base.SocialException;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
@@ -16,8 +17,7 @@ import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.model.NotifyVO;
 import com.socialuni.social.sdk.model.PushMsgDTO;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.common.exception.base.SocialException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.common.utils.JsonUtil;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.sdk.utils.*;

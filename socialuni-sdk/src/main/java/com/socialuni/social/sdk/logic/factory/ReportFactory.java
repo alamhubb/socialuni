@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.Date;
 public class ReportFactory {
     public static ReportModel createReportDO(
             String reportSourceType,
-            SocialUnionContentBaseDO socialuniContentBO,
+            SocialuniUnionContentBaseDO socialuniContentBO,
             SocialuniUnionIdModler socialuniUnionIdModler
     ) {
         return ReportFactory.createReportDO(socialuniContentBO.getContentType(), socialuniContentBO.getUnionId(), socialuniContentBO.getContent(), socialuniContentBO.getUserId(), reportSourceType, socialuniUnionIdModler);

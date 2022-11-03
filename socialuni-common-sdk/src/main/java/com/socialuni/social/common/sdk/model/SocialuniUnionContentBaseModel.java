@@ -1,5 +1,6 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.common.sdk.model;
 
+import com.socialuni.social.common.sdk.model.SocialuniContentBaseModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

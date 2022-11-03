@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.feignAPI;
 
 
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatReadVO;
 import com.socialuni.social.sdk.model.RO.message.chat.ChatRemoveVO;

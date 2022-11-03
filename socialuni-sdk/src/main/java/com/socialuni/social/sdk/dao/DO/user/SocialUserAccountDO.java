@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = {"provider", "h5OpenId"}),
         }
 )
-public class SocialUserAccountDO extends CommonContentBaseDO implements Serializable {
+public class SocialUserAccountDO extends SocialuniContentBaseDO implements Serializable {
         @Column(nullable = false, updatable = false)
         private Integer userId;
         //使用哪个平台注册的

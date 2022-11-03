@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.utils.user;
 
 import com.socialuni.social.user.sdk.model.SocialuniUserExpandModel;
 import com.socialuni.social.user.sdk.api.SocialuniUserExpandInterface;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

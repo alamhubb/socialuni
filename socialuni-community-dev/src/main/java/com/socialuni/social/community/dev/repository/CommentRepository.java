@@ -1,7 +1,6 @@
 package com.socialuni.social.community.dev.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.community.dev.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.api.CommentInterface;
@@ -28,7 +27,7 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface CommentRepository extends CommentInterface, JpaRepository<SocialuniCommentDO, Integer> {
-    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
+    SocialuniCommentModel findOneByUnionIdAndStatus(Integer id, String status);
 
     SocialuniCommentModel findOneByUnionId(Integer id);
 

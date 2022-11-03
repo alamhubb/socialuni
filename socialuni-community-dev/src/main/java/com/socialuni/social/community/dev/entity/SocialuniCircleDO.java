@@ -1,6 +1,5 @@
 package com.socialuni.social.community.dev.entity;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
 import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
@@ -8,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * @author qinkaiyuan

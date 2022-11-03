@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

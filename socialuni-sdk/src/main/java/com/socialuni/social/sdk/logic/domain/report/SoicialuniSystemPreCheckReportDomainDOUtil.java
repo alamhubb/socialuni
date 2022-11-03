@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
@@ -13,7 +12,7 @@ import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.report.sdk.api.ReportDetailApi;
 import com.socialuni.social.report.sdk.api.ReportApi;
@@ -71,7 +70,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
         SoicialuniSystemPreCheckReportDomainDOUtil.userApi = userApi;
     }
 
-    public static void systemPreCheckReport(SocialUnionContentBaseDO socialuniContentBO) {
+    public static void systemPreCheckReport(SocialuniUnionContentBaseDO socialuniContentBO) {
         CompletableFuture.runAsync(() -> {
             String content = socialuniContentBO.getContent();
             //不为空才校验内容
@@ -125,7 +124,7 @@ public class SoicialuniSystemPreCheckReportDomainDOUtil {
             });
             //保存触发记录
             keywordsTriggerDetailRepository.saveAll(keywordsTriggers);
-            SocialUnionContentBaseDO socialUnionContentBaseDO = SocialuniContentDOUtil.getContentDOByContentId(contentId);
+            SocialuniUnionContentBaseDO socialUnionContentBaseDO = SocialuniContentDOUtil.getContentDOByContentId(contentId);
 
             socialUnionContentBaseDO.setStatus(ContentStatus.preAudit);
             socialUnionContentBaseDO.setUpdateTime(new Date());

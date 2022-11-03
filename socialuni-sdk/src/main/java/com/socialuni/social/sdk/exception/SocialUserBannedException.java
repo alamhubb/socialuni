@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.exception;
 
+import com.socialuni.social.common.sdk.exception.base.SocialInfoException;
 import com.socialuni.social.sdk.utils.ErrorMsgUtil;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.common.constant.ErrorCode;
-import com.socialuni.social.common.exception.base.SocialInfoException;
+import com.socialuni.social.common.sdk.constant.ErrorCode;
 
 public class SocialUserBannedException extends SocialInfoException {
     //用户被封禁

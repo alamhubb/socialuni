@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.community.sdk.model.SocialuniTalkModel;

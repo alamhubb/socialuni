@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.platform;
 
 import com.socialuni.social.sdk.utils.StringUtil;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 

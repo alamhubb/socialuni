@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.dao.utils.content;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

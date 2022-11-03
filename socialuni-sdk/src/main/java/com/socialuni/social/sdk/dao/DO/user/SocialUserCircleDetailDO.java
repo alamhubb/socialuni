@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +15,7 @@ import java.io.Serializable;
 )
 @Data
 @NoArgsConstructor
-public class SocialUserCircleDetailDO extends CommonContentBaseDO implements Serializable {
+public class SocialUserCircleDetailDO extends SocialuniContentBaseDO implements Serializable {
     //在talk里面展示的放在user里？
     //必有
     @Id

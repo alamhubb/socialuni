@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller.oldadmin;
 import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.service.ViolationService;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
@@ -13,14 +13,14 @@ import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.repository.*;
 import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -114,7 +114,7 @@ public class KeywordsQueryController {
         //通用逻辑
         KeywordsDO keywordsDO = new KeywordsDO(content, "");
         //得到所有触发的
-        List<SocialUnionContentBaseDO> baseModelDOS = new ArrayList<>();
+        List<SocialuniUnionContentBaseDO> baseModelDOS = new ArrayList<>();
         Pageable pageable = PageRequest.of(0, count);
         Page<?  extends SocialuniTalkModel> talkModels = talkApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<?  extends SocialuniCommentModel> commentDOS = commentApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
@@ -131,7 +131,7 @@ public class KeywordsQueryController {
         //进行校验的关键词列表
         List<KeywordsDO> keywordsDOS = Collections.singletonList(keywordsDO);
         //遍历talk
-        for (SocialUnionContentBaseDO modelDO : baseModelDOS) {
+        for (SocialuniUnionContentBaseDO modelDO : baseModelDOS) {
             String auditResult = modelDO.getStatus();
             // 根据10w条去触发这个keywords
             //然后得到keywordsTriggers

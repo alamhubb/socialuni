@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.socialuni.MessageContentType;
 import com.socialuni.social.sdk.constant.socialuni.MessageReadStatus;
 import com.socialuni.social.sdk.constant.socialuni.MessageType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = "unionId"),
         }
 )
-public class MessageDO extends SocialUnionContentBaseDO implements Serializable {
+public class MessageDO extends SocialuniUnionContentBaseDO implements Serializable {
     private Integer chatId;
     //官方，普通
     private String type;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.redis;
 
-import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.common.sdk.constant.CommonRedisKey;
 import com.socialuni.social.community.sdk.model.HugModel;
 import com.socialuni.social.community.sdk.api.HugInterface;
 import org.springframework.cache.annotation.CachePut;

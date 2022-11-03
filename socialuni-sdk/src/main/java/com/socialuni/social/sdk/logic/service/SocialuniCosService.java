@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.logic.platform.tencent.TencentCloudAPI;
 import com.socialuni.social.sdk.model.RO.app.SocialCosAuthRO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

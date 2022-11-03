@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.entity;
 
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
@@ -8,7 +9,6 @@ import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.community.sdk.api.TagInterface;
-import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.sdk.utils.UUIDUtil;

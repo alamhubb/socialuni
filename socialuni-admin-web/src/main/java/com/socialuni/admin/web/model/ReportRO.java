@@ -8,7 +8,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.report.sdk.model.ReportModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import lombok.Data;
@@ -90,7 +90,7 @@ public class ReportRO {
         this.auditContentType = SocialuniAuditContentType.underageImg;
     }
 
-    public ReportRO(SocialUnionContentBaseDO modelDO) {
+    public ReportRO(SocialuniUnionContentBaseDO modelDO) {
         this.talk = ReportContentROFactory.getReportContentVO(modelDO.getContentType(), modelDO.getUnionId());
         this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(modelDO.getUserId()));
         this.triggerKeywords = new ArrayList<>();

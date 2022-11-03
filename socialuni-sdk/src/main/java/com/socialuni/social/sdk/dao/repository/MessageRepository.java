@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository;
 
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +17,7 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface MessageRepository extends JpaRepository<MessageDO, Integer> {
-    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
+    SocialuniUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
 
     List<MessageDO> findTop30ByChatIdAndStatusAndIdNotInOrderByIdDesc(Integer chatId, String msgStatus, List<Integer> ids);
 

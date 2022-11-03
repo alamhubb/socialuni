@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;

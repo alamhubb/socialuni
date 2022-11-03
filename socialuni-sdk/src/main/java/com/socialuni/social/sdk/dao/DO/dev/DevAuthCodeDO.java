@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.dev;
 
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import lombok.Data;
 
 import javax.persistence.*;

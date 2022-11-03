@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.model.QO.SocialuniHugAddQO;
 import com.socialuni.social.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO.community.talk;
 
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.common.dao.DO.SocialContentBaseDO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 //为什么单独做一个表，因为用talk的记录不知道哪条审核过哪条没审核过
-public class SocialuniTalkHasUnderageImgAuditDO extends SocialContentBaseDO implements Serializable {
+public class SocialuniTalkHasUnderageImgAuditDO extends SocialuniUnionContentBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer talkId;
 

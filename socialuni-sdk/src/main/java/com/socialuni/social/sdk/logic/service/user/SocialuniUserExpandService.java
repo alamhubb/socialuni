@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.service.user;
 import com.socialuni.social.sdk.logic.domain.user.SocialuniEditExpandDomain;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

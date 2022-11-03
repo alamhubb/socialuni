@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.chat;
 
-import com.socialuni.social.common.dao.DO.SocialCommonBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ import java.io.Serializable;
 )
 @Entity
 @NoArgsConstructor
-public class SocialuniPayOrderDO extends SocialCommonBaseDO implements Serializable {
+public class SocialuniPayOrderDO extends SocialuniBaseDO implements Serializable {
     @Column(nullable = false)
     private Integer userId;
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.circle;
 
-import com.socialuni.social.common.repository.CommonBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ import java.io.Serializable;
 })
 @Data
 @NoArgsConstructor
-public class SocialCircleCampaignVoteRecordDO extends CommonBaseDO implements Serializable {
+public class SocialCircleCampaignVoteRecordDO extends SocialuniBaseDO implements Serializable {
     Integer circleId;
     Integer userId;
     Integer circleCampaignId;

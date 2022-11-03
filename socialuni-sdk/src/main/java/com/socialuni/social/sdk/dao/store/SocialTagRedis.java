@@ -4,7 +4,7 @@ import com.socialuni.social.community.sdk.model.TagModel;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagTypeROFactory;
 import com.socialuni.social.sdk.utils.SocialTagStore;
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;

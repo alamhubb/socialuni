@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.feignAPI;
 
 
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.social.sdk.model.RO.app.HomeTabRO;

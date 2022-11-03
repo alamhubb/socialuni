@@ -1,12 +1,10 @@
 package com.socialuni.social.tance.entity;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
 @Entity

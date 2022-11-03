@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.dev;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import lombok.Data;
 
@@ -22,7 +22,7 @@ import java.util.Date;
         }
 )
 @Data
-public class ThirdUserTokenDO extends CommonContentBaseDO {
+public class ThirdUserTokenDO extends SocialuniContentBaseDO {
     @Column(nullable = false, updatable = false)
     private Integer devId;
     private String thirdUserId;

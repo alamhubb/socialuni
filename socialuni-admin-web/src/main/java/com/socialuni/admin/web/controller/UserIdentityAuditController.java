@@ -2,7 +2,7 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.RO.UserIdentityAuditRO;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 @MappedSuperclass
 @Data
 @NoArgsConstructor
-public class UniContentBaseDO extends CommonContentBaseDO implements Serializable {
+public class UniContentBaseDO extends SocialuniContentBaseDO implements Serializable {
     private String contentType;
 
     public UniContentBaseDO(String contentType) {

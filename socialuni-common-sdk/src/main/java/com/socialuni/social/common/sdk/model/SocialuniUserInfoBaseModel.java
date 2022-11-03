@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.model;
+package com.socialuni.social.common.sdk.model;
 
 import com.socialuni.social.common.sdk.model.SocialuniCommonBaseModel;
 import lombok.Data;

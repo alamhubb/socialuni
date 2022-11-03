@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.report.sdk.api.ReportDetailApi;
 import com.socialuni.social.report.sdk.api.ReportApi;
@@ -14,9 +14,9 @@ import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -87,7 +87,7 @@ public class SoicialReportAddDomain {
         String contentUuId = SocialuniUnionIdFacede.createUnionIdByUuid(reportContentType, reportAddVO.getContentId());
         Integer contentUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(contentUuId);
 
-        SocialUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);
+        SocialuniUnionContentBaseDO modelDO = SocialuniContentDOUtil.getContentDOByContentId(contentUnionId);
 
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验

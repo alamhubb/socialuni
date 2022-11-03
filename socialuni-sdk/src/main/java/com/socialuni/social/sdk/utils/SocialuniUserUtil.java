@@ -13,8 +13,8 @@ import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityA
 import com.socialuni.social.sdk.dao.utils.SocialTokenDOUtil;
 import com.socialuni.social.sdk.dao.DO.user.*;
 import com.socialuni.social.user.sdk.api.SocialRequestUserConfig;
-import com.socialuni.social.common.exception.exception.SocialNotLoginException;
-import com.socialuni.social.common.exception.exception.SocialNullUserException;
+import com.socialuni.social.common.sdk.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.sdk.exception.exception.SocialNullUserException;
 import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
 import com.socialuni.social.user.sdk.model.SocialUserViolationModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;

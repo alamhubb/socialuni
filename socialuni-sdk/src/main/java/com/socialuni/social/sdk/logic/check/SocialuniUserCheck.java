@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.check;
 
-import com.socialuni.social.common.constant.SocialSystemConst;
-import com.socialuni.social.common.exception.exception.SocialNotLoginException;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.constant.SocialSystemConst;
+import com.socialuni.social.common.sdk.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;

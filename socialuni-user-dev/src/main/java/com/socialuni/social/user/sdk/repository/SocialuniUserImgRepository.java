@@ -1,7 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.user.sdk.entity.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
@@ -37,7 +36,7 @@ public interface SocialuniUserImgRepository extends SocialuniUserImgInterface, J
         return this.save(BeanUtil.toBean(userImgDO,SocialuniUserImgDo.class));
     }
 
-    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
+    SocialuniUserImgModel findOneByUnionIdAndStatus(Integer unionId, String status);
 
     List<SocialuniUserImgModel> findAllByUnionIdIsNull();
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -25,7 +25,7 @@ import java.io.Serializable;
                 @UniqueConstraint(columnNames = "userId"),
         }
 )
-public class SocialUserIdentityAuthDO extends CommonContentBaseDO implements Serializable {
+public class SocialUserIdentityAuthDO extends SocialuniContentBaseDO implements Serializable {
     private Integer userId;
     private Integer userIdentityImgId;
     private Integer age;

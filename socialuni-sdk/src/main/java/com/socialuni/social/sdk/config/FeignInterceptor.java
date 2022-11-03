@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.config;
 
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.feignAPI.openData.SocialuniThirdUserAPI;
 import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
@@ -12,7 +13,6 @@ import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.common.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;

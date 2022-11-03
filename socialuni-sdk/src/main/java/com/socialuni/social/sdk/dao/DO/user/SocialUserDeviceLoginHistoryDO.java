@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.user;
 
-import com.socialuni.social.common.repository.CommonBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Table(name = "s_user_device_login_history")
 @Data
 @NoArgsConstructor
-public class SocialUserDeviceLoginHistoryDO extends CommonBaseDO implements Serializable {
+public class SocialUserDeviceLoginHistoryDO extends SocialuniBaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)

@@ -6,7 +6,7 @@ import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagTypeRO;
 import org.springframework.stereotype.Service;

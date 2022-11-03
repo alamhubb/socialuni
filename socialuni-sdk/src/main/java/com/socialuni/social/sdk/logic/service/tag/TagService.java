@@ -10,7 +10,7 @@ import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.utils.SocialTagStore;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.report.sdk.model.ReportModel;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.model.SocialUserViolationModel;
@@ -54,7 +54,7 @@ public class ViolationService {
     @Resource
     private SocialUserViolationEntity socialUserViolationEntity;
 
-    public void noViolateService(SocialUnionContentBaseDO modelDO, String auditNote, ReportModel reportModel) {
+    public void noViolateService(SocialuniUnionContentBaseDO modelDO, String auditNote, ReportModel reportModel) {
         Date curDate = new Date();
         //审核通过不再接受举报，前台点击举报时，提示已官方审核通过
         //talk状态变更
@@ -92,7 +92,7 @@ public class ViolationService {
         reportService.reportPass(reportModel, false);
     }
 
-    public void violateService(SocialUnionContentBaseDO modelDO, String violateType, String auditNote, ReportModel reportModel) {
+    public void violateService(SocialuniUnionContentBaseDO modelDO, String violateType, String auditNote, ReportModel reportModel) {
         Date curDate = new Date();
         SocialuniUserModel violationUser = modelContentViolation(modelDO, violateType);
 
@@ -111,7 +111,7 @@ public class ViolationService {
             List<?  extends ReportModel> reportModels = reportStore.queryUserOtherWaitAuditContent(violationUser.getUnionId());
             for (ReportModel linkReport : reportModels) {
                 //修改关联内容的状态，为违规
-                SocialUnionContentBaseDO linkModelDO = SocialuniContentDOUtil.getContentDOByContentId(linkReport.getContentId());
+                SocialuniUnionContentBaseDO linkModelDO = SocialuniContentDOUtil.getContentDOByContentId(linkReport.getContentId());
                 //修改内容，需要修改状态、删除原因、更新时间
                 linkModelDO.setStatus(ContentStatus.violation);
                 //如果封禁的话，要改一下删除原因，删除原因，违规原因
@@ -134,7 +134,7 @@ public class ViolationService {
         reportService.reportPass(reportModel, true);
     }
 
-    public SocialuniUserModel modelContentViolation(SocialUnionContentBaseDO modelDO, String violateType) {
+    public SocialuniUserModel modelContentViolation(SocialuniUnionContentBaseDO modelDO, String violateType) {
         Date curDate = new Date();
         //修改内容，需要修改状态、删除原因、更新时间
         modelDO.setStatus(ContentStatus.violation);

@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.entity;
+package com.socialuni.social.common.sdk.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +10,10 @@ import java.io.Serializable;
  * @author qinkaiyuan 查询结果可以没有set和空构造，前台传值可以没有get
  * @date 2019-08-13 23:34
  */
-@MappedSuperclass
 @Data
+@MappedSuperclass
 @NoArgsConstructor
-public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Serializable {
-    @Column(nullable = false)
-    private Integer userId;
+public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false)
     private String contentType;
     @Column(nullable = false)
@@ -36,7 +34,7 @@ public class SocialUnionContentBaseDO extends SocialContentBaseDO implements Ser
      */
     private String deleteReason;
 
-    public SocialUnionContentBaseDO(Integer userId, String contentType, String content) {
+    public SocialuniUnionContentBaseDO(Integer userId, String contentType, String content) {
         super(userId);
         this.reportNum = 0;
         this.contentType = contentType;

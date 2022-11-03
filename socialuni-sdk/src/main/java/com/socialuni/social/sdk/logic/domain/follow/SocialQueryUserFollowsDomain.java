@@ -5,7 +5,7 @@ import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserFollowDetailROFactory;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.FollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import org.springframework.stereotype.Component;

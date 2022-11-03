@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.logic.platform.WxDecode;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.common.exception.exception.UniSdkException;
+import com.socialuni.social.common.sdk.exception.exception.UniSdkException;
 import com.socialuni.social.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

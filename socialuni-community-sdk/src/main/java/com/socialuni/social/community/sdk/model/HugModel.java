@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.model;
 
-import com.socialuni.social.user.sdk.model.SocialuniContentBaseModel;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class HugModel extends SocialuniContentBaseModel implements Serializable {
+public class HugModel extends SocialuniContentBaseDO implements Serializable {
     /**
      * 哪个评论的
      */

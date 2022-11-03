@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.circle;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +18,7 @@ import java.util.Date;
 @Table(name = "s_circle_period", indexes = {@Index(columnList = "circleId"), @Index(columnList = "period")})
 @Data
 @NoArgsConstructor
-public class SocialCirclePeriodDO extends CommonContentBaseDO implements Serializable {
+public class SocialCirclePeriodDO extends SocialuniContentBaseDO implements Serializable {
     //第几期
     Integer circleId;
     Integer period;

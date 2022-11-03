@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.exception;
 
-import com.socialuni.social.common.constant.ErrorCode;
-import com.socialuni.social.common.exception.base.SocialWarnException;
+import com.socialuni.social.common.sdk.constant.ErrorCode;
+import com.socialuni.social.common.sdk.exception.base.SocialWarnException;
 
 public class SocialNullDevAccountException extends SocialWarnException {
     //用户未登录访问了需要登录的接口

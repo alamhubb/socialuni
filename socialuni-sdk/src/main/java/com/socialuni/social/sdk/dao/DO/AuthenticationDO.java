@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.common.repository.CommonContentBaseDO;
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import lombok.Data;
 
@@ -23,7 +23,7 @@ import java.util.Date;
         }
 )
 @Data
-public class AuthenticationDO extends CommonContentBaseDO implements Serializable {
+public class AuthenticationDO extends SocialuniContentBaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
