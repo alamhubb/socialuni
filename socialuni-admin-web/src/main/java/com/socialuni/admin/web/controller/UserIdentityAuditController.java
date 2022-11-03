@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthImgRepository;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
