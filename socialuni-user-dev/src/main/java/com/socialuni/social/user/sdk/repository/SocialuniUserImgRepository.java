@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
+import com.socialuni.social.user.sdk.entity.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniUserImgInterface;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;

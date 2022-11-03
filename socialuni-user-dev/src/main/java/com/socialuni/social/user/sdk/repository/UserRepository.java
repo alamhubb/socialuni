@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.repository;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.constant.CommonRedisKey;
+import com.socialuni.social.common.sdk.constant.CommonRedisKey;
 import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;

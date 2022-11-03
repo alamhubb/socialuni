@@ -19,6 +19,10 @@
         <springdoc.version>1.6.6</springdoc.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-common-sdk</artifactId>
+        </dependency>
         <!--springdoc 官方Starter-->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -79,10 +83,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
+
 
         <!--    引入flywaydb做数据库版本管理    -->
         <dependency>

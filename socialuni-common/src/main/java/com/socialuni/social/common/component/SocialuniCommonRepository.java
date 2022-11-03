@@ -1,5 +1,6 @@
 package com.socialuni.social.common.component;
 
+import com.socialuni.social.common.sdk.component.SocialuniCommonRepositoryInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 @Slf4j
-public class SocialuniCommonRepository {
+public class SocialuniCommonRepository implements SocialuniCommonRepositoryInterface {
     @Resource
     private EntityManager entityManager;
 

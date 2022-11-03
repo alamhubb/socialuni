@@ -1,9 +1,8 @@
 package com.socialuni.social.sdk.feignAPI.openData;
 
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.location.LocationQueryQO;
 import com.socialuni.social.sdk.model.QO.location.LocationQueryRO;
-import com.socialuni.social.sdk.model.RO.app.SocialCosAuthRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

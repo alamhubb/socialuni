@@ -2,7 +2,7 @@ package com.socialuni.social.tance.sdk.facade;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import com.socialuni.social.common.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

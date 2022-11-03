@@ -4,7 +4,6 @@ import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Data

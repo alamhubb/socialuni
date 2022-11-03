@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjUtil;
 import com.socialuni.admin.web.model.SocialuniAdminHomeSwiperRO;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.DO.HomeSwiperDO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
 import com.socialuni.social.sdk.model.model.SocialuniHomeSwiperModel;

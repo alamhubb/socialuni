@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniNotifyAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniNotifyService;
 import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.facade;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.socialuni.social.common.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.common.utils.UUIDUtil;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;

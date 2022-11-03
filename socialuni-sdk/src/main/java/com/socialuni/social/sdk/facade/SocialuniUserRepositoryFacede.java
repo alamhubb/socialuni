@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.facade;
 
-import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
+import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
 import com.socialuni.social.user.sdk.model.SocialuniUserInfoBaseModel;
 
 import java.lang.reflect.InvocationTargetException;

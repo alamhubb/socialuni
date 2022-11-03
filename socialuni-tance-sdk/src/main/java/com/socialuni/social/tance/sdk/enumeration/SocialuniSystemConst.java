@@ -1,7 +1,6 @@
 package com.socialuni.social.tance.sdk.enumeration;
 
-import com.socialuni.social.common.exception.exception.SocialParamsException;
-import com.socialuni.social.tance.sdk.facade.ConfigFacade;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

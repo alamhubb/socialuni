@@ -1,18 +1,12 @@
 package com.socialuni.social.common.component;
 
 import cn.hutool.core.util.ClassUtil;
-import com.socialuni.social.common.enumeration.PublishDataType;
-import com.socialuni.social.common.facade.SocialuniRepositoryFacade;
-import com.socialuni.social.common.model.PublishDataModel;
-import lombok.Builder;
+import com.socialuni.social.common.sdk.enumeration.PublishDataType;
+import com.socialuni.social.common.sdk.model.PublishDataModel;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 

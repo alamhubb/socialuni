@@ -8,7 +8,7 @@ import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.common.model.ResultRO;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.common.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -3,7 +3,6 @@ package com.socialuni.social.user.sdk.model;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 

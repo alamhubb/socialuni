@@ -32,18 +32,17 @@ export default class ConfigManageView extends Vue {
   async queryConfigs() {
     const res = await request.get('config/getAllConfigs')
     this.configs = res.data;
-    console.log(this.configs)
   }
   delConfigs(row:ConfigVO) {
     request.post('config/deleteById', row).then(res => {
-      this.queryConfigs();
+        this.queryConfigs();   
     });
-
+	
   }
   saveConfigs(row:ConfigVO){
     //this.configs保存到后台
     request.post('config/save', row).then(res => {
-      this.queryConfigs();
+        this.queryConfigs();   
     });
   }
 }

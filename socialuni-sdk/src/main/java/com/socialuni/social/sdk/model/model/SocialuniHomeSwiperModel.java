@@ -1,13 +1,7 @@
 package com.socialuni.social.sdk.model.model;
 
-import com.socialuni.social.common.model.CommonContentBaseModel;
+import com.socialuni.social.common.sdk.model.CommonContentBaseModel;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
 
 @Data
 public class SocialuniHomeSwiperModel extends CommonContentBaseModel {

@@ -1,7 +1,6 @@
 package com.socialuni.social.common.utils;
 
-import com.socialuni.social.common.constant.SocialWebHeaderName;
-import lombok.Value;
+import com.socialuni.social.common.sdk.constant.SocialWebHeaderName;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;

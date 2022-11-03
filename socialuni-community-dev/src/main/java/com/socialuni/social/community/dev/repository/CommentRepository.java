@@ -2,7 +2,7 @@ package com.socialuni.social.community.dev.repository;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
-import com.socialuni.social.common.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.enumeration.CommonStatus;
 import com.socialuni.social.community.dev.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
