@@ -38,7 +38,7 @@ public class SocialTokenDO extends SocialuniContentBaseDO implements Serializabl
         private Date expiredTime;
 
         public SocialTokenDO(Integer userId, String token) {
-                this.userId = userId;
+                super(userId);
                 this.token = token;
                 this.expiredTime = new Date(new Date().getTime() + DateTimeType.quarter);
         }
