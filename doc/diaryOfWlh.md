@@ -46,7 +46,7 @@ dev 实现模块也就2包:  repository(仓库,继承api和jpa) 、 entity(实�
 
 - 遇到保存save的方法需要做方法重名。加默认实现。 否则方法重载生成代理类会报Model实体jpa找不到错。
 ```
-    default TagModel savePut(TagModel tagModel){
-        return this.save(BeanUtil.toBean(tagModel,TagDO.class));
+    default TagDO savePut(TagDO TagDO){
+        return this.save(BeanUtil.toBean(TagDO,TagDO.class));
     }
 ```

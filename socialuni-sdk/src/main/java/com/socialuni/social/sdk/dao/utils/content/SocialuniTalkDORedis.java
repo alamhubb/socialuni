@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
+import com.socialuni.social.common.sdk.constant.CommonRedisKey;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.RedisKeysUtil;
-import com.socialuni.social.common.sdk.constant.CommonRedisKey;
-import com.socialuni.social.community.sdk.api.TalkInterface;
 import com.socialuni.social.sdk.utils.RedisUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -22,7 +22,7 @@ public class SocialuniTalkDORedis {
     @Resource
     RedisUtil redisUtil;
     @Resource
-    private TalkInterface talkApi;
+    private TalkRepository talkApi;
     @Resource
     private TalkMapper talkMapper;
 
@@ -41,7 +41,7 @@ public class SocialuniTalkDORedis {
             },
             put = {@CachePut(cacheNames = CommonRedisKey.talkById, key = "#talkDO.unionId")}
     )
-    public SocialuniTalkModel save(SocialuniTalkModel talkDO) {
+    public SocialuniTalkDO save(SocialuniTalkDO talkDO) {
         //清空用户的
         Set redisKeys = redisUtil.keys(RedisKeysUtil.getRedisKeys(CommonRedisKey.queryUserTalkIds, talkDO.getUserId() + "*"));
         //清空自己的

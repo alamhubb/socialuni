@@ -2,11 +2,11 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.AdminUserService;
-import com.socialuni.social.common.sdk.model.ResultRO;
-import com.socialuni.social.user.sdk.api.UserApi;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.UserStatus;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.repository.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +22,11 @@ public class UserController {
     @Resource
     AdminUserService adminUserService;
     @Resource
-    UserApi userApi;
+    UserRepository userApi;
 
     @PostMapping("removeUserBanByPhoneNum")
     public ResultRO<List<ReportRO>> removeUserBanByPhoneNum(String phoneNum) {
-        SocialuniUserModel user = adminUserService.getUserByPhoneNum(phoneNum);
+        SocialuniUserDo user = adminUserService.getUserByPhoneNum(phoneNum);
         if (!user.getStatus().equals(UserStatus.violation)) {
             throw new SocialBusinessException("用户未被封禁");
         }

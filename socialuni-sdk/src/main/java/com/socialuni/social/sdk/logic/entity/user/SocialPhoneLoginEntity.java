@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.logic.entity.user;
 
+import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.logic.manage.phone.AuthenticationManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.SocialUserPhoneModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,7 +28,7 @@ public class SocialPhoneLoginEntity {
     //1.通过联盟应用输入手机号，登录调用
     //2.不接入联盟，自己应用手机号登录
     @Transactional
-    public SocialuniUserModel phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
+    public SocialuniUserDo phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         //所有平台，手机号登陆方式代码一致
         //登录的时候如果没有手机号，则手机号注册成功，自动注册一个user，用户名待填，自动生成一个昵称，密码待填，头像待上传
         //如果已经登录过，则返回那个已经注册的user，根据手机号获取user，返回登录成功
@@ -39,11 +39,11 @@ public class SocialPhoneLoginEntity {
         //校验验证码，传null用户记录日志
         authenticationManage.checkAuthCode(phoneNum, authCode);
 
-        SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
+        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneManage.checkLoginPhoneNum(phoneNum);
 
-        SocialuniUserModel mineUser;
-        if (socialUserPhoneModel != null) {
-            mineUser = SocialuniUserUtil.getUserNotNull(socialUserPhoneModel.getUserId());
+        SocialuniUserDo mineUser;
+        if (SocialUserPhoneDo != null) {
+            mineUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
         } else {
             mineUser = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
         }

@@ -18,7 +18,6 @@ import com.socialuni.social.common.sdk.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -80,8 +79,8 @@ public class AdminLoginService {
 
         // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
         // 所以直接注册c端用户
-        SocialuniUserModel socialuniUserModel = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
-        devAccountModel.setUserId(socialuniUserModel.getUserId());
+        SocialuniUserDo SocialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+        devAccountModel.setUserId(SocialuniUserDo.getUserId());
 
         devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
 

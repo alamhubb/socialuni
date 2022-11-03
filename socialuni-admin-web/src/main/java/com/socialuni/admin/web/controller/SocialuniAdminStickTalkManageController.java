@@ -4,7 +4,7 @@ import com.socialuni.admin.web.factory.SocialuniAdminStickTalkROFactory;
 import com.socialuni.admin.web.model.ReportUserVO;
 import com.socialuni.admin.web.model.SocialuniAdminStickTalkRO;
 import com.socialuni.social.community.sdk.api.TalkInterface;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.community.sdk.model.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
@@ -66,16 +66,16 @@ public class SocialuniAdminStickTalkManageController {
                 RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getSecretKey());
                 String phoneNum = devAccountModel.getPhoneNum();
                 //获取c端用户
-                SocialUserPhoneModel socialUserPhoneModel = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+                SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
                 //如果c端用户不为空，则设置userId
-                if (socialUserPhoneModel != null) {
-                    devAccountModel.setUserId(socialUserPhoneModel.getUserId());
+                if (SocialUserPhoneDo != null) {
+                    devAccountModel.setUserId(SocialUserPhoneDo.getUserId());
                 } else {
                     //如果c端为空则创建
                     // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
                     // 所以直接注册c端用户
-                    SocialuniUserModel socialuniUserModel = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
-                    devAccountModel.setUserId(socialuniUserModel.getUserId());
+                    SocialuniUserDo SocialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+                    devAccountModel.setUserId(SocialuniUserDo.getUserId());
                 }
             }
             if (StringUtils.isEmpty(devAccountModel.getSocialuniId())) {
@@ -89,7 +89,7 @@ public class SocialuniAdminStickTalkManageController {
     @PostMapping("updateStickTalks")
     public List<SocialuniAdminStickTalkRO> updateHomeSwipers(@RequestBody List<SocialuniAdminStickTalkRO> homeSwiperROS) {
         for (SocialuniAdminStickTalkRO homeSwiperRO : homeSwiperROS) {
-            SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(homeSwiperRO.getId());
+            SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(homeSwiperRO.getId());
             if (!talkDO.getGlobalTop().equals(homeSwiperRO.getGlobalTop())) {
                 talkDO.setGlobalTop(homeSwiperRO.getGlobalTop());
                 SocialuniTalkDOUtil.save(talkDO);

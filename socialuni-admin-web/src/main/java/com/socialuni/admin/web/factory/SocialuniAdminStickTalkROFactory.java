@@ -2,10 +2,10 @@ package com.socialuni.admin.web.factory;
 
 import com.socialuni.admin.web.model.ReportContentVO;
 import com.socialuni.admin.web.model.SocialuniAdminStickTalkRO;
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.community.sdk.model.TagModel;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
+import com.socialuni.social.community.sdk.model.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.model.TagDO;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
@@ -24,7 +24,7 @@ public class SocialuniAdminStickTalkROFactory {
 
     public static SocialuniAdminStickTalkRO getTalkRO(Integer contentId) {
         SocialuniAdminStickTalkRO reportContentVO = new SocialuniAdminStickTalkRO();
-        SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
+        SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(contentId);
         reportContentVO.setId(contentId);
 //            reportContentVO.setViolateType(talkDO.getViolateType());
         reportContentVO.setContent(talkDO.getContent());
@@ -40,7 +40,7 @@ public class SocialuniAdminStickTalkROFactory {
 
         reportContentVO.setStatus(talkDO.getStatus());
 
-        List<SocialuniTalkImgModel> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
+        List<SocialuniTalkImgDO> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(contentId);
         reportContentVO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
         return reportContentVO;
     }

@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.sdk.constant.SocialSystemConst;
 import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.entity.ReportDO;
+import com.socialuni.social.report.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
@@ -14,7 +14,7 @@ import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -28,20 +28,20 @@ import java.util.HashMap;
  */
 @Component
 public class ViolationPushUtils {
-    private static ReportApi reportApi;
+    private static ReportRepository reportApi;
 
     @Resource
-    public void setReportRepository(ReportApi reportApi) {
+    public void setReportRepository(ReportRepository reportApi) {
         ViolationPushUtils.reportApi = reportApi;
     }
 
     //动态评论通知
     public static PushMsgDTO getViolationPushDTO(String platform, NotifyDO notify) {
-        ReportModel reportModel = reportApi.findById(notify.getReportId()).get();
+        ReportDO ReportDO = reportApi.findById(notify.getReportId()).get();
 
-        SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(reportModel.getContentId());
+        SocialuniUnionContentBaseDO baseModelDO = SocialuniContentDOUtil.getContentDOByContentId(ReportDO.getContentId());
 
-        SocialuniUserModel vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
+        SocialuniUserDo vioUser = SocialuniUserUtil.getUserNotNull(baseModelDO.getUserId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据
@@ -50,7 +50,7 @@ public class ViolationPushUtils {
         //违规内容
         pushNotifyVO.setBeContent(new PushValue(StringUtils.substring(baseModelDO.getContent(), 0, 20)));
         //违规内容类型
-        pushNotifyVO.setBeContentType(new PushValue(reportModel.getContentType()));
+        pushNotifyVO.setBeContentType(new PushValue(ReportDO.getContentType()));
         //违规用户
         pushNotifyVO.setBeNickname(new PushValue(vioUser.getNickname()));
 

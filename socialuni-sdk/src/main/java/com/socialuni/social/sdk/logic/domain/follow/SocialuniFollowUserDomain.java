@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.logic.domain.follow;
 
 
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -39,7 +39,7 @@ public class SocialuniFollowUserDomain {
     }
 
     public Map<String, List<SocialuniUserFollowDetailRO>> queryUserFollows() {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         Map<String, List<SocialuniUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
 
         return map;

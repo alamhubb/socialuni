@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.community.sdk.model.TagModel;
+import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +13,11 @@ public class SocialTagStore {
     @Resource
     SocialTagRedis socialTagRedis;
 
-    public List<?  extends TagModel> findTagsByIds(List<Integer> ids) {
-        List<TagModel> tagModels = new ArrayList<>();
+    public List<?  extends TagDO> findTagsByIds(List<Integer> ids) {
+        List<TagDO> TagDOs = new ArrayList<>();
         for (Integer id : ids) {
-            tagModels.add(socialTagRedis.findTagById(id));
+            TagDOs.add(socialTagRedis.findTagById(id));
         }
-        return tagModels;
+        return TagDOs;
     }
 }

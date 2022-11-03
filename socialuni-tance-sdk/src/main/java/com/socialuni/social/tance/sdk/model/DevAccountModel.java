@@ -1,5 +1,6 @@
 package com.socialuni.social.tance.sdk.model;
 
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.io.Serializable;
  * 开发者账户
  */
 @Data
-public class DevAccountModel extends SocialuniContentBaseModel implements Serializable {
+public class DevAccountModel extends SocialuniContentBaseDO implements Serializable {
     //密钥
     private Integer userId;
     private String secretKey;

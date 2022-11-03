@@ -8,8 +8,8 @@ import com.socialuni.social.community.sdk.api.CommentInterface;
 import com.socialuni.social.report.sdk.api.ReportApi;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
+import com.socialuni.social.community.sdk.model.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
@@ -116,8 +116,8 @@ public class KeywordsQueryController {
         //得到所有触发的
         List<SocialuniUnionContentBaseDO> baseModelDOS = new ArrayList<>();
         Pageable pageable = PageRequest.of(0, count);
-        Page<?  extends SocialuniTalkModel> talkModels = talkApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
-        Page<?  extends SocialuniCommentModel> commentDOS = commentApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<?  extends SocialuniTalkDO> talkModels = talkApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
+        Page<?  extends SocialuniCommentDO> commentDOS = commentApi.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
         Page<MessageDO> messageDOS = messageRepository.findByStatusNotInOrderByIdDesc(pageable, ContentStatus.auditStatus);
 
         baseModelDOS.addAll(talkModels.getContent());

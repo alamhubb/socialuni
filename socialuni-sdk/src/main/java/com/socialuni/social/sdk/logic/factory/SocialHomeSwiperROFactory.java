@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.sdk.dao.DO.HomeSwiperDO;
+import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;
 import com.socialuni.social.sdk.model.RO.app.HomeSwiperVO;
 
 import java.util.List;
 
 public class SocialHomeSwiperROFactory {
-    public static HomeSwiperVO toVO(HomeSwiperDO homeSwiperDO) {
+    public static HomeSwiperVO toVO(SocialuniHomeSwiperDO homeSwiperDO) {
         HomeSwiperVO homeSwiperVO = new HomeSwiperVO();
         homeSwiperVO.setName(homeSwiperDO.getName());
         homeSwiperVO.setSkipUrl(homeSwiperDO.getSkipUrl());
@@ -18,7 +18,7 @@ public class SocialHomeSwiperROFactory {
         return homeSwiperVO;
     }
 
-    public static List<HomeSwiperVO> toVOS(List<HomeSwiperDO> dos) {
+    public static List<HomeSwiperVO> toVOS(List<SocialuniHomeSwiperDO> dos) {
         return ListConvertUtil.toList(SocialHomeSwiperROFactory::toVO, dos);
     }
 }

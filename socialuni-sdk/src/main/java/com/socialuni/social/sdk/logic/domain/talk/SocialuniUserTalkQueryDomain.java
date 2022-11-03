@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,7 +25,7 @@ public class SocialuniUserTalkQueryDomain {
         Integer userId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(queryQO.getUserId());
 
         //获取自己的user
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         List<Integer> talkIds = SocialuniUnionIdFacede.getContentIdsByTalkUnionIds(queryQO.getTalkIds());
 

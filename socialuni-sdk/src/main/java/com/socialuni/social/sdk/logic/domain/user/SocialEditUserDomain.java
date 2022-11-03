@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.user.sdk.api.UserApi;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.utils.GenderUtil;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +18,9 @@ import java.util.Date;
 @Component
 public class SocialEditUserDomain {
     @Resource
-    UserApi userApi;
+    UserRepository userApi;
 
-    public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserModel mineUser) {
+    public SocialuniMineUserDetailRO editUser(SocialUserEditQO socialUserEditQO, SocialuniUserDo mineUser) {
         //昵称
         String nickname = socialUserEditQO.getNickname();
         if (StringUtils.isEmpty(nickname)) {

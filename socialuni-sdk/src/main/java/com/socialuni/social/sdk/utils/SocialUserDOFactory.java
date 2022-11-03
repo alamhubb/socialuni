@@ -1,21 +1,21 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
+import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class SocialUserDOFactory {
-    public static SocialuniUserModel newUserByProviderLogin(SocialProviderLoginQO loginQO) {
-        SocialuniUserModel user = newUserByPhoneLogin();
+    public static SocialuniUserDo newUserByProviderLogin(SocialProviderLoginQO loginQO) {
+        SocialuniUserDo user = newUserByPhoneLogin();
 
         if (StringUtils.isNotEmpty(loginQO.getNickName())) {
             user.setNickname(loginQO.getNickName());
@@ -39,9 +39,9 @@ public class SocialUserDOFactory {
         return user;
     }
 
-    public static SocialuniUserModel newUserByPhoneLogin() {
+    public static SocialuniUserDo newUserByPhoneLogin() {
         Integer userUnionId = SocialuniUnionIdFacede.createUserUnionId();
-        SocialuniUserModel user = new SocialuniUserModel();
+        SocialuniUserDo user = new SocialuniUserDo();
         user.setUserId(userUnionId);
         user.setUnionId(userUnionId);
         user.setNickname("未命名");

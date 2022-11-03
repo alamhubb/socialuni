@@ -1,15 +1,15 @@
 package com.socialuni.social.sdk.logic.domain.tag;
 
-import com.socialuni.social.community.sdk.model.TagModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.TagInterface;
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,11 +21,11 @@ import javax.annotation.Resource;
 @Service
 public class SoicialTagAddDomain {
     @Resource
-    private TagInterface tagApi;
+    private TagRepository tagApi;
     @Resource
     private SocialTagManage socialTagManage;
 
-    public TagRO addTag(SocialuniUserModel mineUser, TagAddQO tagAddVO) {
+    public TagRO addTag(SocialuniUserDo mineUser, TagAddQO tagAddVO) {
         //校验用户
         SocialuniUserCheck.checkUserBindPhoneNumAndStatusNoEnable(mineUser);
         /*if (SocialAppEnv.getIsDevProdEnv()) {
@@ -38,15 +38,15 @@ public class SoicialTagAddDomain {
         SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(tagName);
         //校验内容是否违规
 
-        TagModel dbTag = tagApi.findFirstByName(tagName);
+        TagDO dbTag = tagApi.findFirstByName(tagName);
         //toDO 这里有坑，就是没有查询标签状态，如果标签已经禁用，这里也可以直接用了
         if (dbTag != null) {
             throw new SocialBusinessException("标签已经存在，请直接使用");
         }
         String description = tagAddVO.getDescription();
         SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(description);
-        TagModel tagModel = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
-        TagRO tagRO = SocialTagROFactory.getTagRO(tagModel);
+        TagDO TagDO = socialTagManage.createTagDO(tagAddVO, mineUser.getUnionId());
+        TagRO tagRO = SocialTagROFactory.getTagRO(TagDO);
         return tagRO;
     }
 

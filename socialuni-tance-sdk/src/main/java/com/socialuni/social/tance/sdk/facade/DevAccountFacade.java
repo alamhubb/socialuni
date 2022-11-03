@@ -1,6 +1,8 @@
 package com.socialuni.social.tance.sdk.facade;
 
 import com.socialuni.social.common.sdk.utils.RequestUtil;
+import com.socialuni.social.tance.sdk.api.DevAccountInterface;
+import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
@@ -9,9 +11,8 @@ import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.sdk.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
-import com.socialuni.social.tance.sdk.api.DevAccountProviderInterface;
-import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

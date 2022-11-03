@@ -1,21 +1,21 @@
 package com.socialuni.social.sdk.logic.factory;
 
 import com.socialuni.social.common.sdk.enumeration.CommonStatus;
-import com.socialuni.social.community.sdk.model.TagModel;
+import com.socialuni.social.community.sdk.entity.HugDO;
+import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
+import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.repository.CommentRepository;
+import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
 import com.socialuni.social.sdk.dao.CommentDao;
-import com.socialuni.social.community.sdk.model.HugModel;
-import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.redis.HugRedis;
-import com.socialuni.social.community.sdk.api.CommentInterface;
-import com.socialuni.social.community.sdk.api.SocialCircleInterface;
 import com.socialuni.social.sdk.dao.repository.community.SocialTalkCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.social.sdk.logic.platform.MapUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
@@ -25,8 +25,8 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentUserRO;
 import com.socialuni.social.sdk.model.RectangleVO;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -44,11 +44,11 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class SocialTalkROFactory {
-    private static CommentInterface commentApi;
+    private static CommentRepository commentApi;
     private static SocialTagRedis socialTagRedis;
     private static CommentDao commentDao;
     private static HugRedis hugRedis;
-    private static SocialCircleInterface socialCircleApi;
+    private static SocialCircleRepository socialCircleApi;
     private static SocialTalkCircleRepository socialTalkCircleRepository;
 
     @Resource
@@ -62,7 +62,7 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setCommentApi(CommentInterface commentApi) {
+    public void setCommentApi(CommentRepository commentApi) {
         SocialTalkROFactory.commentApi = commentApi;
     }
 
@@ -72,7 +72,7 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setSocialCircleApi(SocialCircleInterface socialCircleApi) {
+    public void setSocialCircleApi(SocialCircleRepository socialCircleApi) {
         SocialTalkROFactory.socialCircleApi = socialCircleApi;
     }
 
@@ -115,25 +115,25 @@ public class SocialTalkROFactory {
 
     //需要user因为，user需要外部传入，区分center和social
     //用户详情
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, Integer talkId) {
-        SocialuniTalkModel talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDo mineUser, Integer talkId) {
+        SocialuniTalkDO talkDO = SocialuniTalkDOUtil.getTalkNotNull(talkId);
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialuniTalkRO getTalkRO(SocialuniTalkModel talkDO, SocialuniUserModel mineUser) {
+    public static SocialuniTalkRO getTalkRO(SocialuniTalkDO talkDO, SocialuniUserDo mineUser) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, null);
     }
 
-    public static SocialuniTalkRO getTalkDetailPageTalkRO(SocialuniUserModel mineUser, SocialuniTalkModel talkDO, Boolean showAllComment) {
+    public static SocialuniTalkRO getTalkDetailPageTalkRO(SocialuniUserDo mineUser, SocialuniTalkDO talkDO, Boolean showAllComment) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, showAllComment, null);
     }
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkModel talkDO, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDo mineUser, SocialuniTalkDO talkDO, SocialHomeTabTalkQueryBO queryVO) {
         return SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, false, queryVO);
     }
 
 
-    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserModel mineUser, List<?  extends SocialuniTalkModel>  talkDOS, SocialHomeTabTalkQueryBO queryVO) {
+    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserDo mineUser, List<?  extends SocialuniTalkDO>  talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -147,7 +147,7 @@ public class SocialTalkROFactory {
      * @param showAllComment 如果是详情页则需要展示所有comment
      */
 
-    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserModel mineUser, SocialuniTalkModel talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
+    public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDo mineUser, SocialuniTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialuniTalkRO socialTalkRO = new SocialuniTalkRO();
 
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
@@ -157,7 +157,7 @@ public class SocialTalkROFactory {
         String uid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talkId);
 
         socialTalkRO.setId(uid);
-        SocialuniUserModel talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());
+        SocialuniUserDo talkUser = SocialuniUserUtil.getUserNotNull(talkDO.getUserId());
         SocialuniContentUserRO socialTalkUserRO = SocialuniContentUserROFactory.newContentUserRO(talkUser, mineUser);
 //        socialTalkUserRO.setId(UnionIdDbUtil.createUserUid(socialTalkUserRO.getId(), user));
 
@@ -167,7 +167,7 @@ public class SocialTalkROFactory {
 
 
         //70毫秒，可缓存
-        List<SocialuniTalkImgModel> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talkDO.getUnionId());
+        List<SocialuniTalkImgDO> imgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talkDO.getUnionId());
 //        List<TalkImgDO> imgDOS = talkDO.getImgs();
         if (imgDOS != null && imgDOS.size() > 0) {
             socialTalkRO.setImgs(SocialTalkImgROFactory.newTalkImgROS(imgDOS));
@@ -183,7 +183,7 @@ public class SocialTalkROFactory {
 
         SocialTalkCircleDO socialTalkCircleDO = socialTalkCircleRepository.findFirstByTalkId(talkId);
         if (socialTalkCircleDO != null) {
-            SocialuniCircleModel socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
+            SocialuniCircleDO socialCircleDO = socialCircleApi.findFirstByIdAndStatus(socialTalkCircleDO.getCircleId(), CommonStatus.enable);
             if (socialCircleDO != null) {
                 circles.add(socialCircleDO.getName());
             }
@@ -191,8 +191,8 @@ public class SocialTalkROFactory {
         socialTalkRO.setCircles(circles);
 
         //10 毫秒
-        List<?  extends TagModel> tagModels = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
-        List<SocialTalkTagRO> tagROs = tagModels.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
+        List<?  extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
+        List<SocialTalkTagRO> tagROs = TagDOs.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
 //        socialTalkRO.setContentType(talkDO.getContentType());
         socialTalkRO.setTags(tagROs);
@@ -252,8 +252,8 @@ public class SocialTalkROFactory {
         //40毫秒
         if (mineUser != null) {
             //20毫秒
-            HugModel hugModel = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
-            if (hugModel != null) {
+            HugDO HugDO = hugRedis.findHugByTalkIdAndUserId(talkDO.getUnionId(), mineUser.getUnionId());
+            if (HugDO != null) {
                 socialTalkRO.setHasHugged(true);
             }
         }

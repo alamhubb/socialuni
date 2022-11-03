@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.entity.user;
 
-import com.socialuni.social.user.sdk.api.SocialUserViolationInterface;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.SocialUserViolationModel;
+import com.socialuni.social.user.sdk.entity.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.repository.SocialUserViolationRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -10,13 +10,13 @@ import javax.annotation.Resource;
 @Component
 public class SocialUserViolationEntity {
     @Resource
-    private SocialUserViolationInterface socialUserViolationApi;
+    private SocialUserViolationRepository socialUserViolationApi;
 
-    public SocialUserViolationModel getOrCreateViolationDO(Integer userId) {
-        SocialUserViolationModel socialUserViolationModel = SocialuniUserUtil.getUserViolationDO(userId);
-        if (socialUserViolationModel == null) {
-            socialUserViolationModel = socialUserViolationApi.savePut(new SocialUserViolationModel(userId));
+    public SocialUserViolationDo getOrCreateViolationDO(Integer userId) {
+        SocialUserViolationDo SocialUserViolationDo = SocialuniUserUtil.getUserViolationDO(userId);
+        if (SocialUserViolationDo == null) {
+            SocialUserViolationDo = socialUserViolationApi.savePut(new SocialUserViolationDo(userId));
         }
-        return socialUserViolationModel;
+        return SocialUserViolationDo;
     }
 }

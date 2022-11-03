@@ -1,23 +1,23 @@
 package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.feignAPI.openData.SocialuniThirdUserAPI;
 import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.feignAPI.openData.SocialuniThirdUserAPI;
+import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
-import com.socialuni.social.common.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +56,7 @@ public class FeignInterceptor implements RequestInterceptor {
 
         //还是要加一个联盟账户渠道
 
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
         if (!postUrl.contains("thirdUser/registryUser")) {
             if (mineUser != null) {

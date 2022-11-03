@@ -1,15 +1,15 @@
 package com.socialuni.social.sdk.dao.store;
 
+import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
+import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
-import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
 import com.socialuni.social.sdk.logic.factory.community.SociaCircleTypeROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
-import com.socialuni.social.community.sdk.api.SocialCircleInterface;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -21,9 +21,9 @@ import java.util.List;
 @Component
 public class SocialuniCircleRedis {
     @Resource
-    private SocialuniTagTypeInterface tagTypeRepository;
+    private SocialuniTagTypeRepository tagTypeRepository;
     @Resource
-    private SocialCircleInterface socialCircleApi;
+    private SocialCircleRepository socialCircleApi;
 
     /**
      * 查询热门下包含子节点，和所有省份不包含子节点
@@ -32,7 +32,7 @@ public class SocialuniCircleRedis {
      */
     @Cacheable(cacheNames = "circlesHot", key = "#appGenderType")
     public List<SocialCircleRO> getHotCirclesRedis(String appGenderType) {
-        List<?  extends SocialuniCircleModel> circles = socialCircleApi.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
+        List<?  extends SocialuniCircleDO> circles = socialCircleApi.findByStatusOrderByCountDesc(ContentStatus.enable, PageRequest.of(0, 10));
 
         List<SocialCircleRO> circleROS = SocialCircleROFactory.circleDOToROS(circles);
         return circleROS;
@@ -45,7 +45,7 @@ public class SocialuniCircleRedis {
         initCircleTypes.add(getHotCircleType(appGenderType));
 
         //转成vo
-        List<?  extends SocialuniTagTypeModel> tagTypes = getCircleTypes();
+        List<?  extends SocialuniTagTypeDO> tagTypes = getCircleTypes();
         initCircleTypes.addAll(SociaCircleTypeROFactory.tagDOToROS(tagTypes));
         return initCircleTypes;
     }
@@ -56,7 +56,7 @@ public class SocialuniCircleRedis {
         //插入一个热门类别，根据性别获取一个
         initCircleTypes.add(getHotCircleType(appGenderType));
         //查询全部，但是不查询子节点
-        List<?  extends SocialuniTagTypeModel> tagTypes = getCircleTypes();
+        List<?  extends SocialuniTagTypeDO> tagTypes = getCircleTypes();
         initCircleTypes.addAll(circleTypesSetCircles(tagTypes, appGenderType));
         return initCircleTypes;
     }
@@ -73,22 +73,22 @@ public class SocialuniCircleRedis {
     }
 
 
-    private List<?  extends SocialuniTagTypeModel> getCircleTypes() {
+    private List<?  extends SocialuniTagTypeDO> getCircleTypes() {
         //查询出来所有启用的类型的tagTypes，按talk数量排序
         return tagTypeRepository.findByStatusOrderByOrderLevelDescTalkCountDesc(ContentStatus.enable);
     }
 
     //给tagtype设置它的子标签
-    private List<CircleTypeRO> circleTypesSetCircles(List<?  extends SocialuniTagTypeModel> DOs, String appGenderType) {
+    private List<CircleTypeRO> circleTypesSetCircles(List<?  extends SocialuniTagTypeDO> DOs, String appGenderType) {
         List<CircleTypeRO> tagTypeROS = new ArrayList<>();
-        for (SocialuniTagTypeModel tagTypeDO : DOs) {
+        for (SocialuniTagTypeDO tagTypeDO : DOs) {
             //如果为女生，且app为男生，则不查询
             if (tagTypeDO.getName().equals(GenderType.girlTagTypeName)) {
                 //如果tagType和appgender性别相反，什么也不做
                 if (!appGenderType.equals(GenderType.boy)) {
                     //获取所有女生话题
                     CircleTypeRO tagTypeRO = SociaCircleTypeROFactory.getCircleTypeRO(tagTypeDO);
-                    List<?  extends SocialuniCircleModel> tagDOS = socialCircleApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
+                    List<?  extends SocialuniCircleDO> tagDOS = socialCircleApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.girl);
                     tagTypeRO.setCircles(SocialCircleROFactory.circleDOToROS(tagDOS));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -98,7 +98,7 @@ public class SocialuniCircleRedis {
                 if (!appGenderType.equals(GenderType.girl)) {
                     //获取所有男生话题
                     CircleTypeRO tagTypeRO = SociaCircleTypeROFactory.getCircleTypeRO(tagTypeDO);
-                    List<?  extends SocialuniCircleModel> tagDOS = socialCircleApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
+                    List<?  extends SocialuniCircleDO> tagDOS = socialCircleApi.findByStatusAndVisibleGenderOrderByCountDesc(ContentStatus.enable, GenderType.boy);
                     tagTypeRO.setCircles(SocialCircleROFactory.circleDOToROS(tagDOS));
                     tagTypeROS.add(tagTypeRO);
                 }
@@ -112,14 +112,14 @@ public class SocialuniCircleRedis {
     }
 
     //根据typeid获取所有
-    public List<?  extends SocialuniCircleModel> getCirclesByCircleTypeId(Integer tagTypeId) {
+    public List<?  extends SocialuniCircleDO> getCirclesByCircleTypeId(Integer tagTypeId) {
         // 从数据库中获取tag列表
         return socialCircleApi.findByTagTypeIdAndStatusOrderByCountDesc(tagTypeId, ContentStatus.enable);
     }
 
     //根据typeid获取所有
-    public List<SocialCircleRO> getCirclesByCircleTypeDOAndGender(SocialuniTagTypeModel tagTypeDO, String appGenderType) {
-        List<?  extends SocialuniCircleModel> tagDOS;
+    public List<SocialCircleRO> getCirclesByCircleTypeDOAndGender(SocialuniTagTypeDO tagTypeDO, String appGenderType) {
+        List<?  extends SocialuniCircleDO> tagDOS;
         if (appGenderType.equals(GenderType.all)) {
             tagDOS = getCirclesByCircleTypeId(tagTypeDO.getId());
         } else {

@@ -1,10 +1,9 @@
 package com.socialuni.social.sdk.logic.service.content;
 
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.logic.service.comment.IllegalWordService;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
@@ -13,7 +12,8 @@ import com.socialuni.social.sdk.utils.SocialuniImgContentUtil;
 import com.socialuni.social.sdk.utils.WxUtil;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.sdk.utils.content.TextContentUtil;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -148,7 +148,7 @@ public class SocialuniTextContentUtil {
         return matcher.find();
     }
 
-    public static void validateImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserModel mineUser) {
+    public static void validateImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
         String imgTextContent = SocialuniImgContentUtil.getImgTextContent(socialUserImgAddQO.getSrc());
         socialUserImgAddQO.setContent(imgTextContent);
         boolean hasQrCode = SocialuniImgContentUtil.hasQrCodeByCloudAPI(socialUserImgAddQO.getSrc());

@@ -1,20 +1,20 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
+import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.sdk.utils.JsonUtil;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
+import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialUserAccountManage;
-import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.logic.platform.WxDecode;
 import com.socialuni.social.sdk.logic.platform.WxPhoneNumRO;
-import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
+import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.utils.UniProviderUtil;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.common.utils.JsonUtil;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class SocialBindWxPhoneNumDomain {
     private SocialUserAccountManage socialUserAccountManage;
 
     //微信绑定手机号方法
-    public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserModel mineUser) {
+    public SocialuniMineUserDetailRO bindWxPhoneNum(@Valid SocialBindWxPhoneNumQO bindPhoneQO, SocialuniUserDo mineUser) {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
         socialProviderLoginQO.setProvider(UniappProviderType.wx);

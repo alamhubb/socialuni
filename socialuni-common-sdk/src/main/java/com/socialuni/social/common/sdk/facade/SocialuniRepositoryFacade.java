@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.facade;
 
 import cn.hutool.extra.spring.SpringUtil;
-import com.socialuni.social.common.sdk.component.SocialuniCommonRepositoryInterface;
+import com.socialuni.social.common.sdk.component.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -9,7 +9,7 @@ import java.util.Optional;
 @Slf4j
 public abstract class SocialuniRepositoryFacade {
 
-    private final static SocialuniCommonRepositoryInterface repository = SpringUtil.getBean(SocialuniCommonRepositoryInterface.class);
+    private final static SocialuniCommonRepository repository = SpringUtil.getBean(SocialuniCommonRepository.class);
 
 
     public static <T> T save(T t) {
@@ -36,7 +36,7 @@ public abstract class SocialuniRepositoryFacade {
         return optionalT.orElse(null);
     }
 
-    private static SocialuniCommonRepositoryInterface getRepository() {
+    private static SocialuniCommonRepository getRepository() {
         return repository;
     }
 }

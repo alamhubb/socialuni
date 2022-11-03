@@ -1,13 +1,13 @@
 package com.socialuni.social.sdk.logic.service;
 
 
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.logic.domain.follow.SocialQueryUserFollowsDomain;
 import com.socialuni.social.sdk.logic.domain.follow.SocialUserFollowDomain;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.sdk.model.QO.community.SocialFollowAddQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.model.QO.community.SocialFollowAddQO;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,7 +36,7 @@ public class SocialFollowService {
     }
 
     public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         Map<String, List<SocialuniUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
         return new ResultRO<>(map);
     }

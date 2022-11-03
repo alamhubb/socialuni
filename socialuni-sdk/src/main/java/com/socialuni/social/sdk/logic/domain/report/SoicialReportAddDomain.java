@@ -1,22 +1,21 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
-import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.constant.ViolateType;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.report.sdk.api.ReportDetailApi;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
-import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.social.sdk.utils.DateUtils;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
+import com.socialuni.social.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.sdk.constant.UserType;
+import com.socialuni.social.sdk.constant.ViolateType;
+import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
+import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
+import com.socialuni.social.sdk.utils.DateUtils;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +29,12 @@ import java.util.Date;
 @Service
 public class SoicialReportAddDomain {
     @Resource
-    private ReportApi reportApi;
-    @Resource
-    private ReportDetailApi reportDetailApi;
+    private ReportDetailRepository reportDetailApi;
     @Resource
     private SoicialuniUserAddReportDomain soicialuniReportDomain;
 
     public ResultRO<String> addReport(SocialuniReportAddQO reportAddVO) {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         //校验举报类型
         String reportType = reportAddVO.getReportType();
         if (!ViolateType.frontShowReportTypes.contains(reportType)) {
@@ -91,7 +88,7 @@ public class SoicialReportAddDomain {
 
         Integer receiveUserUnionId = modelDO.getUserId();
         //这里之后才能校验
-        SocialuniUserModel receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
+        SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserUnionId);
 
         //举报人不为系统管理员才校验
         if (!mineUser.getType().equals(UserType.system)) {

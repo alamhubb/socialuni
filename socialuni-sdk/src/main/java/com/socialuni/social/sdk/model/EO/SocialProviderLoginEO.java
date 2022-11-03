@@ -1,19 +1,19 @@
 package com.socialuni.social.sdk.model.EO;
 
-import com.socialuni.social.user.sdk.model.SocialUserFansDetailModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialUserFansDetailDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class SocialProviderLoginEO {
-    SocialuniUserModel mineUser;
+    SocialuniUserDo mineUser;
     //创建或返回
-    SocialUserFansDetailModel socialUserFansDetailModel;
+    com.socialuni.social.user.sdk.entity.SocialUserFansDetailDo SocialUserFansDetailDo;
 
-    public SocialProviderLoginEO(SocialuniUserModel mineUser, SocialUserFansDetailModel socialUserFansDetailModel) {
+    public SocialProviderLoginEO(SocialuniUserDo mineUser, SocialUserFansDetailDo SocialUserFansDetailDo) {
         this.mineUser = mineUser;
-        this.socialUserFansDetailModel = socialUserFansDetailModel;
+        this.SocialUserFansDetailDo = SocialUserFansDetailDo;
     }
 }

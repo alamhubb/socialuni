@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.logic.check;
 
-import com.socialuni.social.sdk.constant.SocialuniConst;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
-import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
-import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
-import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
 import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
+import com.socialuni.social.sdk.constant.SocialuniConst;
+import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class SocialuniSchoolCheck {
     @Resource
-    SocialuniTagTypeInterface socialuniTagTypeApi;
+    SocialuniTagTypeRepository socialuniTagTypeApi;
     @Resource
     SocialuniCircleRedis socialCircleRedis;
 
@@ -23,11 +23,11 @@ public class SocialuniSchoolCheck {
         if (StringUtils.isEmpty(schoolName)) {
             throw new SocialParamsException("学校名称不能为空");
         }
-        SocialuniTagTypeModel tagTypeDO = socialuniTagTypeApi.findFirstByName(SocialuniConst.schoolCircleTypeName);
+        SocialuniTagTypeDO tagTypeDO = socialuniTagTypeApi.findFirstByName(SocialuniConst.schoolCircleTypeName);
         if (tagTypeDO == null) {
             throw new SocialParamsException("未找到大学圈子分类");
         }
-        List<?  extends SocialuniCircleModel> circleDOS = socialCircleRedis.getCirclesByCircleTypeId(tagTypeDO.getId());
+        List<?  extends SocialuniCircleDO> circleDOS = socialCircleRedis.getCirclesByCircleTypeId(tagTypeDO.getId());
 
         if (circleDOS.stream().noneMatch(item -> item.getName().equals(schoolName))) {
             throw new SocialParamsException("不存在的大学名称，请添加大学名称");

@@ -1,8 +1,6 @@
 package com.socialuni.social.tance.repository;
 
-import cn.hutool.extra.spring.SpringUtil;
-import com.socialuni.social.common.component.SocialuniPublishDataComponent;
-import com.socialuni.social.common.repository.ExtendBaseRepository;
+import com.socialuni.social.common.sdk.repository.ExtendBaseRepository;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 
 import javax.persistence.EntityManager;

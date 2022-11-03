@@ -1,6 +1,6 @@
 package com.socialuni.social.web.sdk.config;
 
-import com.socialuni.social.common.event.WebControllerExceptionEvent;
+import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.sdk.constant.ErrorCode;
 import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.common.sdk.constant.ErrorType;

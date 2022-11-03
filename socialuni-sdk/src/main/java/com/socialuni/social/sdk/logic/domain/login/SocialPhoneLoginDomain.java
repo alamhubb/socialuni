@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.domain.login;
 
+import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.social.sdk.dao.store.SocialUserDeviceLoginHistoryStore;
+import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.sdk.dao.store.SocialUserDeviceLoginHistoryStore;
-import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,7 +25,7 @@ public class SocialPhoneLoginDomain {
 
     @Transactional
     public SocialLoginRO<SocialuniMineUserDetailRO> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
-        SocialuniUserModel mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
+        SocialuniUserDo mineUser = socialPhoneLoginEntity.phoneLogin(socialPhoneNumQO);
 
         SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

@@ -1,24 +1,24 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
-import com.socialuni.social.sdk.logic.manage.FollowManage;
-import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.LoadMoreType;
-import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
-import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
-import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
-import com.socialuni.social.sdk.model.RO.message.message.SocialMessageRO;
-import com.socialuni.social.sdk.dao.repository.ChatRepository;
-import com.socialuni.social.sdk.dao.repository.MessageReceiveRepository;
-import com.socialuni.social.sdk.dao.repository.MessageRepository;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.socialuni.ChatStatus;
 import com.socialuni.social.sdk.constant.socialuni.ChatType;
 import com.socialuni.social.sdk.constant.socialuni.ChatUserStatus;
 import com.socialuni.social.sdk.constant.socialuni.MessageStatus;
+import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
+import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
+import com.socialuni.social.sdk.dao.DO.message.MessageDO;
+import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
+import com.socialuni.social.sdk.dao.repository.ChatRepository;
+import com.socialuni.social.sdk.dao.repository.MessageReceiveRepository;
+import com.socialuni.social.sdk.dao.repository.MessageRepository;
+import com.socialuni.social.sdk.logic.manage.FollowManage;
+import com.socialuni.social.sdk.model.RO.message.chat.ChatRO;
+import com.socialuni.social.sdk.model.RO.message.message.SocialMessageRO;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -133,7 +133,7 @@ public class SocialChatROFactory {
         //根据类型区分不同nick和ava
         //如果群聊则直接使用
         if (!ChatType.systemChats.contains(chatRO.getType())) {
-            SocialuniUserModel receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getReceiveUserId());
+            SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(chatUserDO.getReceiveUserId());
 
             chatRO.setNickname(receiveUser.getNickname());
             chatRO.setNickname(receiveUser.getAvatar());

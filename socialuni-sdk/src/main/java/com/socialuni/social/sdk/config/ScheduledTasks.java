@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class ScheduledTasks {
     private ViolationKeywordsService violationKeywordsService;
 
     @Resource
-    private UserApi userApi;
+    private UserRepository userApi;
 
     /**
      * @deprecated <a href="https://cloud.tencent.com/developer/article/1582434">Spring Boot 的 application.properties 中相关的配置说明</a>
@@ -66,8 +66,8 @@ public class ScheduledTasks {
     @Scheduled(fixedRate = 600000)
     public void updateUserStatus() {
         Date curDate = new Date();
-        List<SocialuniUserModel> users = userApi.findCanUnfreezeViolationUser(UserStatus.violation, curDate);
-        for (SocialuniUserModel user : users) {
+        List<SocialuniUserDo> users = userApi.findCanUnfreezeViolationUser(UserStatus.violation, curDate);
+        for (SocialuniUserDo user : users) {
             user.setUpdateTime(curDate);
             user.setStatus(UserStatus.enable);
             userApi.savePut(user);

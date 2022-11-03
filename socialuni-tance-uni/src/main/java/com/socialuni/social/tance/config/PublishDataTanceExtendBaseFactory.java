@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.config;
 
-import com.socialuni.social.common.repository.DelegateExtendBaseFactory;
-import com.socialuni.social.common.repository.ExtendBaseRepository;
+import com.socialuni.social.common.sdk.repository.DelegateExtendBaseFactory;
+import com.socialuni.social.common.sdk.repository.ExtendBaseRepository;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Component;

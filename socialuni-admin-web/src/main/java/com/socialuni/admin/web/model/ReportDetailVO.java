@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.model;
 
-import com.socialuni.social.report.sdk.model.ReportDetailModel;
+import com.socialuni.social.report.sdk.model.ReportDetailDO;
 import lombok.Data;
 
 @Data
@@ -14,8 +14,8 @@ public class ReportDetailVO {
     public ReportDetailVO() {
     }
 
-    public ReportDetailVO(ReportDetailModel reportDetailModel) {
-        this.content = reportDetailModel.getContent();
-        this.reportType = reportDetailModel.getReportType();
+    public ReportDetailVO(ReportDetailDO ReportDetailDO) {
+        this.content = ReportDetailDO.getContent();
+        this.reportType = ReportDetailDO.getReportType();
     }
 }

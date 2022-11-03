@@ -1,12 +1,11 @@
 package com.socialuni.social.sdk.utils;
 
 
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.logic.platform.qq.QQConst;
@@ -14,6 +13,7 @@ import com.socialuni.social.sdk.logic.platform.weixin.WxConst;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -24,9 +24,9 @@ import java.util.HashMap;
  */
 public class TalkCommentPushUtils {
     //动态评论通知
-    public static PushMsgDTO getTalkPushDTO(String provider, NotifyDO notify, SocialuniUserModel requestUser) {
-        SocialuniCommentModel comment = SocialuniCommentDOUtil.getNotCommentNull(notify.getCommentId());
-        SocialuniTalkModel talk = SocialuniTalkDOUtil.getTalkNotNull(comment.getTalkId());
+    public static PushMsgDTO getTalkPushDTO(String provider, NotifyDO notify, SocialuniUserDo requestUser) {
+        SocialuniCommentDO comment = SocialuniCommentDOUtil.getNotCommentNull(notify.getCommentId());
+        SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(comment.getTalkId());
 
         PushNotifyVO pushNotifyVO = new PushNotifyVO();
         //构建基础数据

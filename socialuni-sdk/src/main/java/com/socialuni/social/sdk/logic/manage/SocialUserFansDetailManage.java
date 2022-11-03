@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.manage;
 
-import com.socialuni.social.user.sdk.model.SocialUserFansDetailModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.redis.UserFansDetailRedis;
+import com.socialuni.social.user.sdk.entity.SocialUserFansDetailDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -13,45 +13,45 @@ public class SocialUserFansDetailManage {
     @Resource
     private UserFansDetailRedis userFansDetailRedis;
 
-    public SocialUserFansDetailModel getOrCreateUserFollowDetail(SocialuniUserModel mineUser) {
-        SocialUserFansDetailModel socialUserFansDetailModel = userFansDetailRedis.findUserFansDetailByUserId(mineUser.getUnionId());
-        if (socialUserFansDetailModel == null) {
-            socialUserFansDetailModel = new SocialUserFansDetailModel(mineUser);
-            socialUserFansDetailModel = userFansDetailRedis.save(socialUserFansDetailModel);
+    public SocialUserFansDetailDo getOrCreateUserFollowDetail(SocialuniUserDo mineUser) {
+        SocialUserFansDetailDo SocialUserFansDetailDo = userFansDetailRedis.findUserFansDetailByUserId(mineUser.getUnionId());
+        if (SocialUserFansDetailDo == null) {
+            SocialUserFansDetailDo = new SocialUserFansDetailDo(mineUser);
+            SocialUserFansDetailDo = userFansDetailRedis.save(SocialUserFansDetailDo);
         }
-        return socialUserFansDetailModel;
+        return SocialUserFansDetailDo;
     }
 
-    public SocialUserFansDetailModel createUserDetailFollow(SocialuniUserModel mineUser) {
-        SocialUserFansDetailModel socialUserFansDetailModel = new SocialUserFansDetailModel(mineUser);
-        socialUserFansDetailModel = userFansDetailRedis.save(socialUserFansDetailModel);
-        return socialUserFansDetailModel;
+    public SocialUserFansDetailDo createUserDetailFollow(SocialuniUserDo mineUser) {
+        SocialUserFansDetailDo SocialUserFansDetailDo = new SocialUserFansDetailDo(mineUser);
+        SocialUserFansDetailDo = userFansDetailRedis.save(SocialUserFansDetailDo);
+        return SocialUserFansDetailDo;
     }
 
     @Async
     public void mineFollowNumAdd(Integer mineUserId) {
-        SocialUserFansDetailModel mineUserFollow = userFansDetailRedis.findUserFansDetailByUserId(mineUserId);
+        SocialUserFansDetailDo mineUserFollow = userFansDetailRedis.findUserFansDetailByUserId(mineUserId);
         mineUserFollow.setFollowNum(mineUserFollow.getFollowNum() + 1);
         userFansDetailRedis.save(mineUserFollow);
     }
 
     @Async
     public void beUserFansNumAdd(Integer userId) {
-        SocialUserFansDetailModel userFollow = userFansDetailRedis.findUserFansDetailByUserId(userId);
+        SocialUserFansDetailDo userFollow = userFansDetailRedis.findUserFansDetailByUserId(userId);
         userFollow.setFansNum(userFollow.getFansNum() + 1);
         userFansDetailRedis.save(userFollow);
     }
 
     @Async
     public void mineFollowNumSub(Integer mineUserId) {
-        SocialUserFansDetailModel mineUserFollow = userFansDetailRedis.findUserFansDetailByUserId(mineUserId);
+        SocialUserFansDetailDo mineUserFollow = userFansDetailRedis.findUserFansDetailByUserId(mineUserId);
         mineUserFollow.setFollowNum(mineUserFollow.getFollowNum() - 1);
         userFansDetailRedis.save(mineUserFollow);
     }
 
     @Async
     public void beUserFansNumSub(Integer userId) {
-        SocialUserFansDetailModel userFollow = userFansDetailRedis.findUserFansDetailByUserId(userId);
+        SocialUserFansDetailDo userFollow = userFansDetailRedis.findUserFansDetailByUserId(userId);
         userFollow.setFansNum(userFollow.getFansNum() - 1);
         userFansDetailRedis.save(userFollow);
     }

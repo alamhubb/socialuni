@@ -1,21 +1,20 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.report.sdk.api.ReportDetailApi;
-import com.socialuni.social.report.sdk.api.ReportApi;
+import com.socialuni.social.report.sdk.entity.ReportDO;
+import com.socialuni.social.report.sdk.entity.ReportDetailDO;
+import com.socialuni.social.report.sdk.enumeration.ReportStatus;
+import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
 import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.ReportSourceType;
-import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.dao.DO.JusticeValueOrderDO;
-import com.socialuni.social.report.sdk.model.ReportModel;
-import com.socialuni.social.report.sdk.model.ReportDetailModel;
-import com.socialuni.social.user.sdk.api.UserApi;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-
+import com.socialuni.social.sdk.dao.repository.JusticeValueOrderRepository;
+import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
+import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.sdk.utils.ReportDetailUtils;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.report.sdk.enumeration.ReportStatus;
-import com.socialuni.social.sdk.dao.repository.*;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,15 +28,9 @@ import java.util.List;
 @Service
 public class ReportService {
     @Resource
-    private ReportDetailApi reportDetailApi;
+    private ReportDetailRepository reportDetailApi;
     @Resource
     private JusticeValueOrderRepository justiceValueOrderRepository;
-
-    @Resource
-    private ReportApi reportApi;
-
-    @Resource
-    private UserApi userApi;
 
     @Resource
     private KeywordsRepository keywordsRepository;
@@ -66,16 +59,16 @@ public class ReportService {
      *
      * @param
      */
-    public void reportPass(ReportModel reportModel, boolean isViolation) {
-        if (ReportSourceType.userReport.equals(reportModel.getReportSourceType())) {
+    public void reportPass(ReportDO ReportDO, boolean isViolation) {
+        if (ReportSourceType.userReport.equals(ReportDO.getReportSourceType())) {
 
             Date curDate = new Date();
             //审核通过不再接受举报，前台点击举报时，提示已官方审核通过
-            List<?  extends ReportDetailModel> reportDetailModels = ReportDetailUtils.getAll(reportModel.getId());
+            List<?  extends ReportDetailDO> ReportDetailDOs = ReportDetailUtils.getAll(ReportDO.getId());
 
             //变更detail
-            for (ReportDetailModel reportDetailModel : reportDetailModels) {
-                SocialuniUserModel detailUser = SocialuniUserUtil.getUserNotNull(reportDetailModel.getUserId());
+            for (ReportDetailDO ReportDetailDO : ReportDetailDOs) {
+                SocialuniUserDo detailUser = SocialuniUserUtil.getUserNotNull(ReportDetailDO.getUserId());
 
                 //相同部分
                 JusticeValueOrderDO justiceValueOrderDO = new JusticeValueOrderDO();
@@ -86,7 +79,7 @@ public class ReportService {
                     //查看用户待审核的举报数量
                     Integer reportSuccessCount = reportDetailApi.countByUserIdAndStatusNotAndCreateTimeBetween(detailUser.getUnionId(), ReportStatus.audit, todayZero, curDate);
                     //todo  缺少发送通知功能，等我精神好了在写
-                    reportDetailModel.setStatus(ReportStatus.violation);
+                    ReportDetailDO.setStatus(ReportStatus.violation);
                     if (reportSuccessCount > 9) {
                         //todo 发送通知
                     } else {
@@ -105,14 +98,14 @@ public class ReportService {
                     }
                 } else {
                     //如果今天已经成功举报了10个以上，则不再发放奖励
-                    reportDetailModel.setStatus(ReportStatus.enable);
+                    ReportDetailDO.setStatus(ReportStatus.enable);
                     //错误的举报，user减分
                     justiceValueOrderDO.setJusticeValue(-AppConfigConst.reportErrorValue);
 //                    detailUser.setJusticeValue(detailUser.getJusticeValue() - AppConfigConst.reportErrorValue);
                 }
                 justiceValueOrderDO.setCreateTime(curDate);
                 justiceValueOrderDO.setUserId(detailUser.getUnionId());
-                justiceValueOrderDO.setReportDetailId(reportDetailModel.getId());
+                justiceValueOrderDO.setReportDetailId(ReportDetailDO.getId());
 
                 justiceValueOrderRepository.save(justiceValueOrderDO);
 

@@ -13,7 +13,7 @@ import com.qcloud.cos.region.Region;
 import com.socialuni.social.sdk.model.RO.app.SocialCosAuthRO;
 import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.exception.exception.SocialSystemException;
-import com.socialuni.social.common.utils.JsonUtil;
+import com.socialuni.social.common.sdk.utils.JsonUtil;
 import com.tencent.cloud.CosStsClient;
 import com.tencentcloudapi.cms.v20190321.CmsClient;
 import com.tencentcloudapi.cms.v20190321.models.*;

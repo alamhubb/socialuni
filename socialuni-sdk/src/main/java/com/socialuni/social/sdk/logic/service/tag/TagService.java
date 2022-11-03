@@ -1,16 +1,16 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
-import com.socialuni.social.sdk.constant.TalkOperateType;
-import com.socialuni.social.sdk.dao.store.SocialTagRedis;
-import com.socialuni.social.community.sdk.model.TagModel;
-import com.socialuni.social.community.sdk.model.SocialuniTagTypeModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.TagInterface;
-import com.socialuni.social.community.sdk.api.SocialuniTagTypeInterface;
-import com.socialuni.social.sdk.utils.SocialTagStore;
-import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
+import com.socialuni.social.community.sdk.entity.TagDO;
+import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
+import com.socialuni.social.community.sdk.repository.TagRepository;
+import com.socialuni.social.sdk.constant.TalkOperateType;
+import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
+import com.socialuni.social.sdk.dao.store.SocialTagRedis;
+import com.socialuni.social.sdk.utils.SocialTagStore;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,17 +29,17 @@ public class TagService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private TagInterface tagApi;
+    private TagRepository tagApi;
     @Resource
     private SocialTagStore tagQueryRepository;
     @Resource
-    private SocialuniTagTypeInterface tagTypeRepository;
+    private SocialuniTagTypeRepository tagTypeRepository;
 
     @Resource
     private SocialTagRedis socialTagRedis;
 
-    public List<TagModel> checkAndUpdateTagCount(SocialuniUserModel user, List<Integer> tagIds, String talkOperateType) {
-        List<TagModel> tagModelList = new ArrayList<>();
+    public List<TagDO> checkAndUpdateTagCount(SocialuniUserDo user, List<Integer> tagIds, String talkOperateType) {
+        List<TagDO> TagDOList = new ArrayList<>();
 
 //        Integer devId = DevAccountUtils.getDevId();
 
@@ -57,20 +57,20 @@ public class TagService {
             for (Integer tagId : tagIdsSet) {
                 if (!ObjectUtils.isEmpty(tagId) && tagId != 0) {
                     //查询启用的话题
-                    TagModel tagModel = socialTagRedis.findTagById(tagId);
+                    TagDO TagDO = socialTagRedis.findTagById(tagId);
                     //如果话题存在且可用
-                    if (tagModel != null) {
-                        if (!ContentStatus.enable.equals(tagModel.getStatus())) {
+                    if (TagDO != null) {
+                        if (!ContentStatus.enable.equals(TagDO.getStatus())) {
                             throw new SocialParamsException("引用了不可使用的话题");
                         }
 
                         //次数加1
-                        tagModel.setCount(tagModel.getCount() + 1);
+                        TagDO.setCount(TagDO.getCount() + 1);
                         if (TalkOperateType.talkAdd.equals(talkOperateType)) {
-                            String tagVisibleGender = tagModel.getVisibleGender();
+                            String tagVisibleGender = TagDO.getVisibleGender();
                             //如果为单性话题
                             if (!tagVisibleGender.equals(GenderType.all)) {
-                                SocialuniTagTypeModel tagTypeDO = null;
+                                SocialuniTagTypeDO tagTypeDO = null;
                                 if (tagVisibleGender.equals(GenderType.girl)) {
                                     tagTypeDO = tagTypeRepository.findFirstByName(GenderType.girlTagTypeName);
                                 } else if (tagVisibleGender.equals(GenderType.boy)) {
@@ -80,16 +80,16 @@ public class TagService {
                                 tagTypeDO.setTalkCount(tagTypeDO.getTalkCount() + 1);
                                 tagTypeRepository.savePut(tagTypeDO);
                             }
-                            tagModel.setTalkCount(tagModel.getTalkCount() + 1);
+                            TagDO.setTalkCount(TagDO.getTalkCount() + 1);
 
-                            logger.info("tagTypeId:{}", tagModel.getTagTypeId());
-                            Optional<?  extends SocialuniTagTypeModel> optionalTagTypeDO = tagTypeRepository.findById(tagModel.getTagTypeId());
-                            SocialuniTagTypeModel tagTypeDO = optionalTagTypeDO.get();
+                            logger.info("tagTypeId:{}", TagDO.getTagTypeId());
+                            Optional<?  extends SocialuniTagTypeDO> optionalTagTypeDO = tagTypeRepository.findById(TagDO.getTagTypeId());
+                            SocialuniTagTypeDO tagTypeDO = optionalTagTypeDO.get();
                             tagTypeDO.setTalkCount(tagTypeDO.getTalkCount() + 1);
                             tagTypeRepository.savePut(tagTypeDO);
                         }
-                        tagModel = tagApi.savePut(tagModel);
-                        tagModelList.add(tagModel);
+                        TagDO = tagApi.savePut(TagDO);
+                        TagDOList.add(TagDO);
 
                         //暂时不再在后台记录用户最近使用的标签
                     /*if (user != null) {
@@ -125,6 +125,6 @@ public class TagService {
                 }
             }
         }
-        return tagModelList;
+        return TagDOList;
     }
 }

@@ -13,7 +13,7 @@ import com.socialuni.social.tance.sdk.api.DevSocialuniIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -66,8 +66,8 @@ public class MyApplicationRunner implements ApplicationRunner {
             }
             // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
             // 所以直接注册c端用户
-            SocialuniUserModel socialuniUserModel = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
-            devAccountModel.setUserId(socialuniUserModel.getUserId());
+            SocialuniUserDo SocialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+            devAccountModel.setUserId(SocialuniUserDo.getUserId());
             devAccountRedisInterface.saveDevAccount(devAccountModel);
 
             /*DevSocialuniIdDO devSocialuniIdDO = new DevSocialuniIdDO();

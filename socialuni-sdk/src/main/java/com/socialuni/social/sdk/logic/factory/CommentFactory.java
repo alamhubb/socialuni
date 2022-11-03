@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.logic.factory;
 
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Component
 public class CommentFactory {
     @Resource
-    private CommentInterface commentApi;
+    private CommentRepository commentApi;
 
     /***
      *
@@ -23,7 +23,7 @@ public class CommentFactory {
      * @param requestUserId
      * @return
      */
-    public SocialuniCommentModel createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
+    public SocialuniCommentDO createCommentDO(SocialuniCommentPostQO addQO, Integer requestUserId) {
 
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addQO.getTalkId());
 
@@ -36,13 +36,13 @@ public class CommentFactory {
             }
         }
         //创建 do一步,获取序号
-        SocialuniCommentModel commentNoDO = commentApi.findFirstByTalkIdOrderByIdDesc(talkId);
+        SocialuniCommentDO commentNoDO = commentApi.findFirstByTalkIdOrderByIdDesc(talkId);
         Integer commentNo = 0;
         if (commentNoDO != null) {
             commentNo = commentNoDO.getNo();
         }
         //构建DO，comment基础内容
-        SocialuniCommentModel comment = new SocialuniCommentModel();
+        SocialuniCommentDO comment = new SocialuniCommentDO();
         comment.setNo(++commentNo);
         comment.setContent(addQO.getContent());
         comment.setStatus(ContentStatus.enable);

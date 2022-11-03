@@ -1,23 +1,19 @@
 package com.socialuni.social.sdk.logic.factory;
 
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.constant.NotifyType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.model.SocialuniTalkModel;
-import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgModel;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.CommentInterface;
-import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
-import com.socialuni.social.community.sdk.api.TalkInterface;
+import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,26 +22,8 @@ import java.util.List;
  */
 @Component
 public class SocialUnreadNotifyVOFactory {
-    private static CommentInterface commentApi;
-    private static TalkImgRepository talkImgRepository;
-    private static TalkInterface talkApi;
 
-    @Resource
-    public void setTalkImgRepository(TalkImgRepository talkImgRepository) {
-        SocialUnreadNotifyVOFactory.talkImgRepository = talkImgRepository;
-    }
-
-    @Resource
-    public void setCommentRepository(CommentInterface commentApi) {
-        SocialUnreadNotifyVOFactory.commentApi = commentApi;
-    }
-
-    @Resource
-    public void setTalkRepository(TalkInterface talkApi) {
-        SocialUnreadNotifyVOFactory.talkApi = talkApi;
-    }
-
-    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialuniUserModel user) {
+    public static SocialUnreadNotifyVO newUnreadNotifyVO(SocialuniUserDo user) {
         SocialUnreadNotifyVO notifyVO = new SocialUnreadNotifyVO();
         if (user != null) {
             notifyVO.setNickname(user.getNickname());
@@ -57,12 +35,12 @@ public class SocialUnreadNotifyVOFactory {
     }
 
     public static SocialUnreadNotifyVO newUnreadNotifyVO(NotifyDO notifyDO) {
-        SocialuniUserModel notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
+        SocialuniUserDo notifyUser = SocialuniUserUtil.getUserNotNull(notifyDO.getUserId());
         SocialUnreadNotifyVO notifyVO = SocialUnreadNotifyVOFactory.newUnreadNotifyVO(notifyUser);
 
         Integer commentId = notifyDO.getCommentId();
-        SocialuniCommentModel commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
-        SocialuniTalkModel talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
+        SocialuniCommentDO commentDO = SocialuniCommentDOUtil.getNotCommentNull(commentId);
+        SocialuniTalkDO talk = SocialuniTalkDOUtil.getTalkNotNull(commentDO.getTalkId());
 
         String talkUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(talk.getUnionId());
 
@@ -74,7 +52,7 @@ public class SocialUnreadNotifyVOFactory {
 
         switch (notifyDO.getType()) {
             case NotifyType.talk_comment:
-                List<SocialuniTalkImgModel> socialTalkImgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talk.getUnionId());
+                List<SocialuniTalkImgDO> socialTalkImgDOS = SocialuniTalkImgDOUtil.getTalkImgsTop3(talk.getUnionId());
 //                List<TalkImgDO> talkImgDOS = talk.getImgs();
                 if (socialTalkImgDOS.size() > 0) {
                     notifyVO.setReplyImg(socialTalkImgDOS.get(0).getSrc());
@@ -83,11 +61,11 @@ public class SocialUnreadNotifyVOFactory {
                 }
                 break;
             case NotifyType.comment_comment:
-                SocialuniCommentModel optionalCommentDO1 = SocialuniCommentDOUtil.getNotCommentNull(commentDO.getParentCommentId());
+                SocialuniCommentDO optionalCommentDO1 = SocialuniCommentDOUtil.getNotCommentNull(commentDO.getParentCommentId());
                 notifyVO.setReplyContent(optionalCommentDO1.getContent());
                 break;
             case NotifyType.reply_comment:
-                SocialuniCommentModel optionalCommentDO2 = SocialuniCommentDOUtil.getNotCommentNull(commentDO.getReplyCommentId());
+                SocialuniCommentDO optionalCommentDO2 = SocialuniCommentDOUtil.getNotCommentNull(commentDO.getReplyCommentId());
                 notifyVO.setReplyContent(optionalCommentDO2.getContent());
                 break;
         }

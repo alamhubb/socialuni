@@ -10,7 +10,6 @@ import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.AuthenticationRepository;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
@@ -19,8 +18,7 @@ import com.socialuni.social.sdk.utils.TencentSmsServe;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.api.UserApi;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -38,14 +36,10 @@ public class SocailSendAuthCodeDomain {
     @Resource
     private AuthenticationRepository authRepository;
     @Resource
-    private UserApi userApi;
-    @Resource
-    private SocialUserPhoneRedis socialUserPhoneRedis;
-    @Resource
     SocialUserPhoneManage socialUserPhoneManage;
 
     //发送验证码
-    private void sendAuthCodeCheck(String phoneNum, SocialuniUserModel mineUser, String userIp) {
+    private void sendAuthCodeCheck(String phoneNum, SocialuniUserDo mineUser, String userIp) {
 
         //h5登录也需要防止
         if (StringUtils.isEmpty(userIp)) {
@@ -108,7 +102,7 @@ public class SocailSendAuthCodeDomain {
         }
     }
 
-    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, SocialuniUserModel mineUser) {
+    public ResultRO<Void> sendAuthCode(SocialSendAuthCodeQO authCodeQO, SocialuniUserDo mineUser) {
         //要防的是同1个ip无线刷验证码
         //发送验证码时要记录ip，记录用户id，记录请求内容
         //限制手机号，同1手机号做多2条，

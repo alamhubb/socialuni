@@ -2,7 +2,7 @@ package com.socialuni.admin.web.service;
 
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.controller.DevAccountUpdateQO;
-import com.socialuni.social.community.sdk.model.TagModel;
+import com.socialuni.social.community.sdk.model.TagDO;
 import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
@@ -64,7 +64,7 @@ public class AdminAccountService {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");
         }
         //如果创建过，则一定有，所以下面可以直接使用
-        TagModel checkNameTag = tagApi.findFirstByName(appName);
+        TagDO checkNameTag = tagApi.findFirstByName(appName);
         //tag名称已被注册，不为空，还不为当前用户
         if (checkNameTag != null && !checkNameTag.getDevId().equals(devAccountModel.getId())) {
             throw new SocialBusinessException("开发者名称已被注册，请改名后重试");

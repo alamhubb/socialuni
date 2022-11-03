@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.model.RO.match;
 
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
-import com.socialuni.social.sdk.model.RO.UserImgVO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.sdk.model.RO.UserImgVO;
 import com.socialuni.social.sdk.model.RO.app.SocialDistrictRO;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,7 +48,7 @@ public class MatchUserVO {
     public MatchUserVO() {
     }
 
-    public MatchUserVO(SocialuniUserModel user, SocialuniUserModel sessionUser) {
+    public MatchUserVO(SocialuniUserDo user, SocialuniUserDo sessionUser) {
         if (user != null) {
             this.id = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(user.getUnionId());
             this.nickname = StringUtils.substring(user.getNickname(), 0, 6);
@@ -60,7 +60,7 @@ public class MatchUserVO {
             //满分10W /1千，得到百分之颜值分
 //            this.faceRatio = (int) Math.ceil((double) user.getFaceRatio() / MatchConstants.FACE_RATIO_BASE_MULTIPLE);
 //            this.likeCount = user.getLikeCount();
-            List<SocialuniUserImgModel> userImgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(user.getUnionId());
+            List<SocialuniUserImgDo> userImgDOS = SocialuniUserImgDOUtil.getUserImgsTop6(user.getUnionId());
 //            this.imgs = UserImgBO.userImgDOToVOS(userImgDOS, sessionUser);
 //            this.onlineFlag = user.getOnlineFlag();
 //            this.lastOnlineTime = user.getLastOnlineTime();
@@ -69,7 +69,7 @@ public class MatchUserVO {
         }
     }
 
-    public static List<MatchUserVO> userDOToVOS(List<SocialuniUserModel> userDOs, SocialuniUserModel user) {
+    public static List<MatchUserVO> userDOToVOS(List<SocialuniUserDo> userDOs, SocialuniUserDo user) {
         return userDOs.stream().map(item -> new MatchUserVO(item, user)).collect(Collectors.toList());
     }
 

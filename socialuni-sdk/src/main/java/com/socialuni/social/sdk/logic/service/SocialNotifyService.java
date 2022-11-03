@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.sdk.logic.domain.notify.SocialQueryNotifyDomain;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
 import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.sdk.logic.domain.notify.SocialQueryNotifyDomain;
+import com.socialuni.social.sdk.model.RO.app.SocialUnreadNotifyVO;
+import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,19 +16,19 @@ public class SocialNotifyService {
     private SocialQueryNotifyDomain socialQueryNotifyDomain;
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryNotifies() {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifies() {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifies(mineUser);
         return new ResultRO<>(list);
     }
 
     public ResultRO<List<SocialUnreadNotifyVO>> queryUnreadNotifiesAndUpdateHasRead() {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         List<SocialUnreadNotifyVO> list = socialQueryNotifyDomain.queryUnreadNotifiesAndUpdateHasRead(mineUser);
         return new ResultRO<>(list);
     }

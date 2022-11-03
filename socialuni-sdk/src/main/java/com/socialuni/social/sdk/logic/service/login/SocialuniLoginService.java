@@ -1,23 +1,23 @@
 package com.socialuni.social.sdk.logic.service.login;
 
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.social.sdk.logic.domain.login.SocialProviderLoginDomain;
 import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialProviderLoginEntity;
+import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.model.ResultRO;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +61,7 @@ public class SocialuniLoginService {
     }
 
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> socialuniPhoneLogin(SocialProviderLoginQO loginData) {
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull(loginData.getCode());
 
         SocialuniMineUserDetailRO centerMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

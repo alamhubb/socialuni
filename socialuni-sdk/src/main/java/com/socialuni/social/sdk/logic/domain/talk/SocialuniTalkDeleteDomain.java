@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialTalkDeleteQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniTalkIdQO;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class SocialuniTalkDeleteDomain {
     public void deleteTalk(SocialuniTalkIdQO talkIdQO) {
         Integer talkId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(talkIdQO.getTalkId());
 
-        SocialuniUserModel mineUser = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
         SocialTalkDeleteQO socialTalkDeleteQO = new SocialTalkDeleteQO(talkId);
 

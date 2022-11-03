@@ -5,7 +5,7 @@ import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.report.sdk.model.ReportModel;
+import com.socialuni.social.report.sdk.model.ReportDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
@@ -58,21 +58,21 @@ public class ReportRO {
         ReportRO.keywordsTriggerDetailRepository = keywordsTriggerDetailRepository;
     }
 
-    public ReportRO(ReportModel reportModel) {
-        this.id = reportModel.getId();
-        this.talk = ReportContentROFactory.getReportContentVO(reportModel.getContentType(), reportModel.getContentId());
+    public ReportRO(ReportDO ReportDO) {
+        this.id = ReportDO.getId();
+        this.talk = ReportContentROFactory.getReportContentVO(ReportDO.getContentType(), ReportDO.getContentId());
 //        this.reportContentType = reportContentType;
 
 //        this.childReports = reportDO.getChildReports().stream().map(ReportDetailVO::new).collect(Collectors.toList());
-        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(reportModel.getContentUserId()));
+        this.user = new ReportUserVO(SocialuniUserUtil.getUserNotNull(ReportDO.getContentUserId()));
 //        this.updateTime = new Date();
 //        this.status = reportDO.getStatus();
         this.checked = true;
         this.violateType = AdminAuditResultType.noViolation;
         this.triggerKeywords = new ArrayList<>();
         this.auditContentType = SocialuniAuditContentType.report;
-        if (reportModel.getId() != null) {
-            this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(reportModel.getId());
+        if (ReportDO.getId() != null) {
+            this.triggerKeywords = keywordsTriggerDetailRepository.findAllByReportId(ReportDO.getId());
         }
     }
 

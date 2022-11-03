@@ -24,17 +24,13 @@
         <module>socialuni-official-web</module>
         <module>socialuni-sdk</module>
         <module>socialuni-web-sdk</module>
-        <module>socialuni-common</module>
         <module>socialuni-tance-uni</module>
         <module>socialuni-tance-sdk</module>
         <module>socialuni-tance-dev</module>
         <module>socialuni-user-sdk</module>
-        <module>socialuni-user-dev</module>
         <module>socialuni-common-sdk</module>
         <module>socialuni-report-sdk</module>
-        <module>socialuni-report-dev</module>
         <module>socialuni-community-sdk</module>
-        <module>socialuni-community-dev</module>
     </modules>
 
     <properties>
@@ -57,27 +53,12 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-community-dev</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-community-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-report-dev</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-report-sdk</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-user-dev</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
@@ -93,11 +74,6 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-tance-uni</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-common</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>

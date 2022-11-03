@@ -1,22 +1,22 @@
 package com.socialuni.social.sdk.logic.entity;
 
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
+import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
+import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +42,7 @@ public class UniUserRegistryDomain {
     //根据渠道登录信息获取user，支持social比commonUserDomain
     //这个单独出来是因为区分了基础provider和社交，这个单独增加了对社交渠道的支持
     public SocialLoginRO<SocialuniMineUserDetailRO> registryUser(SocialProviderLoginQO loginQO) {
-        SocialuniUserModel mineUser = null;
+        SocialuniUserDo mineUser = null;
         //如果已经注册过
         String phoneNum = loginQO.getPhoneNum();
 

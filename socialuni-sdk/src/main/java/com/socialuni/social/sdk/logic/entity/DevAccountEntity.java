@@ -8,7 +8,6 @@ import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.sdk.utils.UUIDUtil;
@@ -28,14 +27,6 @@ public class DevAccountEntity {
     private DevAccountInterface devAccountApi;
     @Resource
     private DevAccountRedisInterface devAccountRedis;
-    @Resource
-    private TagInterface tagApi;
-    @Resource
-    SocialUserPhoneManage socialUserPhoneManage;
-    @Resource
-    SocialUserPhoneRedis socialUserPhoneRedis;
-    @Resource
-    SocialUserPhoneEntity socialUserPhoneEntity;
 
     public DevAccountModel createDevAccount(String phoneNum) {
         return this.createDevAccount(phoneNum, UUIDUtil.getUUID());

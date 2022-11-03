@@ -4,9 +4,9 @@ import com.socialuni.embed.demo.model.TokenDO;
 import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
+import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.VisibleType;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
 import com.socialuni.social.sdk.logic.service.SocialuniCommentService;
 import com.socialuni.social.sdk.logic.service.talk.SocialuniTalkService;
@@ -17,8 +17,8 @@ import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniContentUserRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +61,7 @@ public class TestController {
 
         TokenSocialuniTokenDO socialuniTokenDO = testUserService.getSocialuniToken(tokenDO.getToken());
 
-        SocialuniUserModel socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
+        SocialuniUserDo socialUserDO = SocialuniUserUtil.getUserByToken(socialuniTokenDO.getSocialuniToken());
         SocialuniContentUserRO socialContentUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
 
         Map<String, Object> map = new HashMap<>();
@@ -72,7 +72,7 @@ public class TestController {
 
     @GetMapping("getMineUser")
     public ResultRO<SocialuniUserRO> getMineUser() {
-        SocialuniUserModel socialUserDO = SocialuniUserUtil.getMineUserNotNull();
+        SocialuniUserDo socialUserDO = SocialuniUserUtil.getMineUserNotNull();
         SocialuniContentUserRO socialUserRO = SocialuniContentUserROFactory.newContentUserRO(socialUserDO, socialUserDO);
         return ResultRO.success(socialUserRO);
     }

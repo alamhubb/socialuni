@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.dao.store;
 
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.CommentFactory;
 import com.socialuni.social.sdk.model.QO.comment.SocialuniCommentPostQO;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -14,13 +14,13 @@ import java.util.Date;
 @Component
 public class CommentStore {
     @Resource
-    private CommentInterface commentApi;
+    private CommentRepository commentApi;
     @Resource
     private CommentFactory commentFactory;
 
     //保存新增的comment
-    public SocialuniCommentModel saveAddComment(SocialuniCommentPostQO addQO, Integer mineUserId) {
-        SocialuniCommentModel commentDO = commentFactory.createCommentDO(
+    public SocialuniCommentDO saveAddComment(SocialuniCommentPostQO addQO, Integer mineUserId) {
+        SocialuniCommentDO commentDO = commentFactory.createCommentDO(
                 addQO,
                 mineUserId
         );
@@ -44,7 +44,7 @@ public class CommentStore {
         Integer commentId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getCommentId());
 
 
-        SocialuniCommentModel parentComment = SocialuniCommentDOUtil.getAllowNull(commentId);
+        SocialuniCommentDO parentComment = SocialuniCommentDOUtil.getAllowNull(commentId);
         if (parentComment == null) {
             return;
         }
@@ -62,7 +62,7 @@ public class CommentStore {
         if (addVO.getCommentId() != null) {
             Integer replyId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(addVO.getReplyCommentId());
 
-            SocialuniCommentModel replyComment = SocialuniCommentDOUtil.getAllowNull(replyId);
+            SocialuniCommentDO replyComment = SocialuniCommentDOUtil.getAllowNull(replyId);
             if (replyComment != null) {
                 //测试所有自己评论自己，刚才处空指针了
                 replyComment.setUpdateTime(curDate);

@@ -1,26 +1,26 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
+import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.report.sdk.entity.ReportDO;
+import com.socialuni.social.report.sdk.entity.ReportDetailDO;
+import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
+import com.socialuni.social.report.sdk.repository.ReportRepository;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.ReportSourceType;
 import com.socialuni.social.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.report.sdk.model.ReportModel;
-import com.socialuni.social.report.sdk.model.ReportDetailModel;
-import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.report.sdk.api.ReportDetailApi;
-import com.socialuni.social.report.sdk.api.ReportApi;
-import com.socialuni.social.user.sdk.api.UserApi;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
+import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,11 +34,11 @@ import java.util.Date;
 @Service
 public class SoicialuniUserAddReportDomain {
     @Resource
-    private ReportApi reportApi;
+    private ReportRepository reportApi;
     @Resource
-    private ReportDetailApi reportDetailApi;
+    private ReportDetailRepository reportDetailApi;
     @Resource
-    private UserApi userApi;
+    private UserRepository userApi;
 
     @Transactional
     public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, SocialuniUnionContentBaseDO modelDO) {
@@ -49,19 +49,19 @@ public class SoicialuniUserAddReportDomain {
         SocialuniUnionIdModler uniContentUnionIdDO = SocialuniUnionIdFacede.getUnionDOByUnionIdNotNull(contentId);
         // 设置model
 
-        ReportModel reportModel = reportApi.findOneByContentId(contentId);
-        if (reportModel == null) {
-            reportModel = ReportFactory.createReportDO(ReportSourceType.userReport, modelDO, uniContentUnionIdDO);
+        ReportDO ReportDO = reportApi.findOneByContentId(contentId);
+        if (ReportDO == null) {
+            ReportDO = ReportFactory.createReportDO(ReportSourceType.userReport, modelDO, uniContentUnionIdDO);
         }
-        reportModel.setReportNum(reportModel.getReportNum() + 1);
-        reportModel.setUpdateTime(new Date());
+        ReportDO.setReportNum(ReportDO.getReportNum() + 1);
+        ReportDO.setUpdateTime(new Date());
         //保存数据
-        reportModel = reportApi.savePut(reportModel);
+        ReportDO = reportApi.savePut(ReportDO);
 
         //生成举报详情
-        ReportDetailModel reportDetailModel = new ReportDetailModel(socialReportAddQO.getContent(), socialReportAddQO.getReportType(), reportModel, modelDO.getContent(), DevAccountFacade.getDevUserId());
+        ReportDetailDO ReportDetailDO = new ReportDetailDO(socialReportAddQO.getContent(), socialReportAddQO.getReportType(), ReportDO, modelDO.getContent(), DevAccountFacade.getDevUserId());
 
-        reportDetailApi.savePut(reportDetailModel);
+        reportDetailApi.savePut(ReportDetailDO);
 
         ResultRO<String> resultRO = new ResultRO<>();
         resultRO.setData(ErrorMsg.reportSubmit);
@@ -72,7 +72,7 @@ public class SoicialuniUserAddReportDomain {
 
 
         //用户举报其他用户的逻辑
-        SocialuniUserModel receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserId);
+        SocialuniUserDo receiveUser = SocialuniUserUtil.getUserNotNull(receiveUserId);
 
 
         Integer modelReportNum = modelDO.getReportNum() + 1;

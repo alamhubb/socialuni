@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.model;
 
-import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.community.sdk.api.CommentInterface;
+import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
+import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class UnreadCommentVO {
     @Resource
-    private CommentInterface commentApi;
+    private CommentRepository commentApi;
     //如果这个评论 有parent，就代表已经是一个子评论，就不用把他设置为parent而是用它的parentId，他是否有parent
 
     private String id;
@@ -50,8 +50,8 @@ public class UnreadCommentVO {
     public UnreadCommentVO() {
     }
 
-    public UnreadCommentVO(SocialuniCommentModel commentDO) {
-        SocialuniUserModel sessionUser = SocialuniUserUtil.getMineUserAllowNull();
+    public UnreadCommentVO(SocialuniCommentDO commentDO) {
+        SocialuniUserDo sessionUser = SocialuniUserUtil.getMineUserAllowNull();
 //        Integer devId = DevAccountUtils.getDevId();
 //
 //        this.id = UnionIdDbUtil.createCommentUid(socialCommentDO.getId(),  sessionUser);
@@ -66,7 +66,7 @@ public class UnreadCommentVO {
         }
     }
 
-    public static List<UnreadCommentVO> commentDOToVOS(List<?  extends SocialuniCommentModel> commentDOS) {
+    public static List<UnreadCommentVO> commentDOToVOS(List<?  extends SocialuniCommentDO> commentDOS) {
         return commentDOS.stream().map(UnreadCommentVO::new).collect(Collectors.toList());
     }
 }

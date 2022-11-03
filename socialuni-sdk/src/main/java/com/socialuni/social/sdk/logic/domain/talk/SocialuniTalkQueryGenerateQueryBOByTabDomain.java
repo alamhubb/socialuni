@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
+import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.social.community.sdk.model.SocialuniCircleModel;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 @Component
 @Slf4j
 public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
-    public SocialHomeTabTalkQueryBO generateQueryBOByTab(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserModel mineUser) {
+    public SocialHomeTabTalkQueryBO generateQueryBOByTab(SocialuniHomeTabTalkQueryQO queryQO, SocialuniUserDo mineUser) {
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = new SocialHomeTabTalkQueryBO();
 
         //如果后台配置了，则以后台为主，如果后台为null则看前台传值，
@@ -56,12 +56,12 @@ public class SocialuniTalkQueryGenerateQueryBOByTabDomain {
         return socialHomeTabTalkQueryBO;
     }
 
-    public void generateQueryBOByNotHomeCityOthers(SocialuniUserModel mineUser, SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO) {
+    public void generateQueryBOByNotHomeCityOthers(SocialuniUserDo mineUser, SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO) {
         String homeTabName = socialHomeTabTalkQueryBO.getHomeTabName();
         if (homeTabName.equals(SocialuniAppConfig.getAppConfig().getSelfSchoolTabName())) {
             homeTabName = SocialuniUserExpandDOUtil.getUserSchoolNameNotNull(mineUser.getUnionId());
         }
-        SocialuniCircleModel socialuniCircleModel = SocialuniCircleDOUtil.getCircleEnableNotNull(homeTabName);
-        socialHomeTabTalkQueryBO.setCircleId(socialuniCircleModel.getId());
+        SocialuniCircleDO SocialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(homeTabName);
+        socialHomeTabTalkQueryBO.setCircleId(SocialuniCircleDO.getId());
     }
 }

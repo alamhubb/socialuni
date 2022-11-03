@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.sdk.model;
 
-import com.socialuni.social.common.sdk.model.SocialuniContentBaseModel;
+import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class DevAccountProviderModler extends SocialuniContentBaseModel implements Serializable {
+public class DevAccountProviderModler extends SocialuniContentBaseDO implements Serializable {
     private Integer devId;
     private String appId;
     private String appName;

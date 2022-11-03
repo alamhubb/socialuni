@@ -1,17 +1,17 @@
 package com.socialuni.social.sdk.logic.service.match;
 
+import com.socialuni.social.sdk.constant.socialuni.ChatType;
+import com.socialuni.social.sdk.constant.socialuni.MatchType;
+import com.socialuni.social.sdk.constant.socialuni.MessageType;
 import com.socialuni.social.sdk.dao.DO.chat.ChatDO;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.user.sdk.model.SocialuniUserModel;
-import com.socialuni.social.sdk.constant.socialuni.ChatType;
-import com.socialuni.social.sdk.constant.socialuni.MatchType;
-import com.socialuni.social.sdk.constant.socialuni.MessageType;
 import com.socialuni.social.sdk.dao.repository.ChatRepository;
 import com.socialuni.social.sdk.dao.repository.ChatUserRepository;
 import com.socialuni.social.sdk.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.sdk.dao.repository.MessageRepository;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,7 +38,7 @@ public class MatchRequestService {
     private EntityManager entityManager;
 
     @Transactional
-    public void sendMatchSuccessMsgToUser(SocialuniUserModel user, SocialuniUserModel receiveUser) {
+    public void sendMatchSuccessMsgToUser(SocialuniUserDo user, SocialuniUserDo receiveUser) {
         //匹配成功
         //chat_user中为3个人。
         //一个系统用户
