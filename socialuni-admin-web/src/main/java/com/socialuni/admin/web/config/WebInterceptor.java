@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.config;
 
-import com.socialuni.social.common.utils.RequestUtil;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;

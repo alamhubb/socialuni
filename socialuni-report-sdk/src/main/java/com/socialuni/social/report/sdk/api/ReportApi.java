@@ -1,8 +1,6 @@
 package com.socialuni.social.report.sdk.api;
 
 import com.socialuni.social.report.sdk.model.ReportModel;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,11 +36,11 @@ public interface ReportApi  {
 
 //    Page<ReportDO> findByStatusAndAuditTypeAndReceiveUserStatusNotOrderByIdDesc(Pageable pageable, String status, String auditType, String userStatus);
 
-    Page<?  extends ReportModel> findByStatusAndAuditTypeAndHasReviewFalseOrderByIdDesc(Pageable pageable, String status, String auditType);
-
-    Page<?  extends ReportModel> findByStatusNotInAndHasReviewFalseOrderByIdDesc(Pageable pageable, List<String> status);
-
-    Page<?  extends ReportModel> findByStatusOrderByIdDesc(Pageable pageable, String status);
+//    Page<?  extends ReportModel> findByStatusAndAuditTypeAndHasReviewFalseOrderByIdDesc(Pageable pageable, String status, String auditType);
+//
+//    Page<?  extends ReportModel> findByStatusNotInAndHasReviewFalseOrderByIdDesc(Pageable pageable, List<String> status);
+//
+//    Page<?  extends ReportModel> findByStatusOrderByIdDesc(Pageable pageable, String status);
 
     //查询用户其他为审核中的状态
     List<?  extends ReportModel> findByContentUserIdAndStatusIn(Integer userId, List<String> status);

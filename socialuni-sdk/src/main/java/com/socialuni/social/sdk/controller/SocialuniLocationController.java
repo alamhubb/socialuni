@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.model.QO.location.LocationQueryQO;
 import com.socialuni.social.sdk.model.QO.location.LocationQueryRO;
 import com.socialuni.social.sdk.logic.platform.QQMapAPI;
 import com.socialuni.social.common.sdk.model.ResultRO;
-import com.socialuni.social.common.utils.IpUtil;
+import com.socialuni.social.common.sdk.utils.IpUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;

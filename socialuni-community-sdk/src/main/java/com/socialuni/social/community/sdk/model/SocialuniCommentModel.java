@@ -1,13 +1,13 @@
 package com.socialuni.social.community.sdk.model;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
+import com.socialuni.social.user.sdk.model.SocialuniContentBaseModel;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
-public class SocialuniCommentModel extends SocialUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {
+public class SocialuniCommentModel extends SocialuniContentBaseModel implements SocialuniTextCheckDO, Serializable {
     private Integer no;
 
     /**

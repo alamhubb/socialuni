@@ -1,6 +1,5 @@
 package com.socialuni.social.user.sdk.api;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.user.sdk.model.SocialuniUserImgModel;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface SocialuniUserImgInterface {
 
     SocialuniUserImgModel savePut(SocialuniUserImgModel userImgDO);
 
-    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer unionId, String status);
+    SocialuniUserImgModel findOneByUnionIdAndStatus(Integer unionId, String status);
 
     List<SocialuniUserImgModel> findAllByUnionIdIsNull();
 

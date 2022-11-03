@@ -3,12 +3,10 @@ package com.socialuni.social.user.sdk.model;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 
 @Data
-@MappedSuperclass
 public class SocialuniUserImgModel extends SocialuniImgBaseModel implements SocialuniTextCheckDO, Serializable {
     //发表商户
     private Boolean hasPeopleImg;

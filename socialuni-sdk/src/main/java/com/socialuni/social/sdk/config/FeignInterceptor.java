@@ -17,7 +17,7 @@ import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;
-import com.socialuni.social.common.utils.RequestUtil;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;

@@ -1,14 +1,14 @@
-package com.socialuni.social.tance.sdk.facade;
+package com.socialuni.social.user.sdk.facade;
 
-import com.socialuni.social.common.utils.UUIDUtil;
-import com.socialuni.social.common.utils.RequestUtil;
-import com.socialuni.social.tance.sdk.api.SocialRequestUserConfig;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
+import com.socialuni.social.common.sdk.utils.UUIDUtil;
+import com.socialuni.social.user.sdk.api.SocialRequestUserConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,19 +31,6 @@ public class SocialTokenFacade {
     @Resource
     public void setSocialRequestToken(SocialRequestUserConfig socialRequestToken) {
         SocialTokenFacade.socialRequestToken = socialRequestToken;
-    }
-
-    public static void main(String[] args) {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NTc3NjRkNmU1ZDE0Yjk4ODMwNDBiZjVjYzY0MjdkMF9lM2E3ZDJlMzFiMDM0M2Q2YjUxMzEwZWZhZmIzNGI5YSJ9.Ccnu2c1NGH2VMFFQcTnCxLNvrJVBljKfd0BDOjQS9J4";
-        if (SocialTokenFacade.isSuccess(token)) {
-            try {
-                String tokenSubject = Jwts.parser().setSigningKey("da838b62ed0e412bb560254ebdc356c1").parseClaimsJws(token).getBody().getSubject();
-                System.out.println(tokenSubject.split("_")[0]);
-            } catch (Exception e) {
-                log.error("生成token异常");
-                //必须这么写，不能返回异常，返回异常会记录，会记录用户，会走这里，会循环报错
-            }
-        }
     }
 
     public static String getToken() {

@@ -1,8 +1,8 @@
 package com.socialuni.social.community.sdk.model;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
+import com.socialuni.social.user.sdk.model.SocialuniUnionContentBaseModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class SocialuniTalkModel extends SocialUnionContentBaseDO implements SocialuniTextCheckDO, Serializable {
+public class SocialuniTalkModel extends SocialuniUnionContentBaseModel implements SocialuniTextCheckDO, Serializable {
     Integer devId;
     //为什么不存thirdUserId，因为根据userId+devId可以确认thirdUserId
     /**

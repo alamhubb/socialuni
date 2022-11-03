@@ -9,7 +9,6 @@ import java.util.Optional;
 @Slf4j
 public abstract class SocialuniRepositoryFacade {
 
-
     private final static SocialuniCommonRepositoryInterface repository = SpringUtil.getBean(SocialuniCommonRepositoryInterface.class);
 
 
@@ -26,7 +25,7 @@ public abstract class SocialuniRepositoryFacade {
      * @param example
      * @param <T>
      * @return
-     * @see SocialuniCommonRepository#findByExample(Object)
+     * @see SocialuniCommonRepositoryInterface#findByExample(Object)
      */
     public static <T> Optional<T> findByExample(T example) {
         return getRepository().findByExample(example);
@@ -37,7 +36,7 @@ public abstract class SocialuniRepositoryFacade {
         return optionalT.orElse(null);
     }
 
-    private static SocialuniCommonRepository getRepository() {
+    private static SocialuniCommonRepositoryInterface getRepository() {
         return repository;
     }
 }

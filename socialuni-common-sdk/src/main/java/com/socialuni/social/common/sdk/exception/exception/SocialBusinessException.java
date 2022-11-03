@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.exception.exception;
 
 
-import com.socialuni.social.common.constant.ErrorCode;
+import com.socialuni.social.common.sdk.constant.ErrorCode;
 import com.socialuni.social.common.sdk.exception.base.SocialInfoException;
 
 public class SocialBusinessException extends SocialInfoException {

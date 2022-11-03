@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
+import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.social.sdk.dao.repository.CommonTokenRepository;
 import com.socialuni.social.sdk.utils.IntegerUtils;

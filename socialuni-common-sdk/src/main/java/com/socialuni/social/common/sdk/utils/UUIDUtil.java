@@ -1,4 +1,4 @@
-package com.socialuni.social.common.utils;
+package com.socialuni.social.common.sdk.utils;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;

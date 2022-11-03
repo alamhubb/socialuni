@@ -11,7 +11,7 @@ import com.socialuni.social.community.sdk.api.TagInterface;
 import com.socialuni.social.common.enumeration.CommonStatus;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.utils.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

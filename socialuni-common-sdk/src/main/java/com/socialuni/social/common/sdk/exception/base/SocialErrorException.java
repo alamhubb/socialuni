@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.exception.base;
 
 
-import com.socialuni.social.common.constant.ErrorType;
+import com.socialuni.social.common.sdk.constant.ErrorType;
 
 //最严重的级别错误，必须解决，或者找出原因
 public abstract class SocialErrorException extends SocialException {

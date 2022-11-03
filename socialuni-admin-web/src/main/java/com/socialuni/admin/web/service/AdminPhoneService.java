@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.common.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
-import com.socialuni.social.common.utils.IpUtil;
+import com.socialuni.social.common.sdk.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

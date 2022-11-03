@@ -1,8 +1,8 @@
-package com.socialuni.social.common.utils;
+package com.socialuni.social.common.sdk.utils;
 
 import com.socialuni.social.common.sdk.constant.SocialWebHeaderName;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -10,6 +10,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * 当前线程的request工具类，从request中获取内容

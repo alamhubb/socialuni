@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.repository;
 
 import com.socialuni.social.common.sdk.constant.SocialSystemConst;
-import com.socialuni.social.common.utils.RequestUtil;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;

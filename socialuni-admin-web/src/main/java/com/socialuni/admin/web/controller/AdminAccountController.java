@@ -10,7 +10,7 @@ import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.community.sdk.api.TagInterface;
-import com.socialuni.social.common.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

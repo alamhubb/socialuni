@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.exception.exception;
 
+import com.socialuni.social.common.sdk.constant.ErrorCode;
 import com.socialuni.social.common.sdk.exception.base.SocialWarnException;
-import com.socialuni.social.common.constant.ErrorCode;
 
 public class SocialUserTokenExpireException extends SocialWarnException {
     //用户未登录访问了需要登录的接口

@@ -1,6 +1,5 @@
 package com.socialuni.social.user.sdk.model;
 
-import com.socialuni.social.common.repository.CommonBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-public class SocialUserViolationModel extends CommonBaseDO implements Serializable {
+public class SocialUserViolationModel extends SocialuniContentBaseModel implements Serializable {
         /**
          * 被违规的次数，默认0
          */

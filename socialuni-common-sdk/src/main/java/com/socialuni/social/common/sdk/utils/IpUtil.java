@@ -1,6 +1,6 @@
-package com.socialuni.social.common.utils;
+package com.socialuni.social.common.sdk.utils;
 
-import com.socialuni.social.common.constant.SocialWebHeaderName;
+import com.socialuni.social.common.sdk.constant.SocialWebHeaderName;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 

@@ -2,12 +2,12 @@ package com.socialuni.social.web.sdk.config;
 
 import com.socialuni.social.common.config.SocialWebControllerAdvice;
 import com.socialuni.social.common.constant.ErrorCode;
-import com.socialuni.social.common.constant.ErrorMsg;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.common.constant.ErrorType;
 import com.socialuni.social.common.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.model.ResultRO;
-import com.socialuni.social.common.utils.IpUtil;
-import com.socialuni.social.common.utils.RequestUtil;
+import com.socialuni.social.common.sdk.utils.IpUtil;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import com.socialuni.social.web.sdk.utils.RequestLogUtil;

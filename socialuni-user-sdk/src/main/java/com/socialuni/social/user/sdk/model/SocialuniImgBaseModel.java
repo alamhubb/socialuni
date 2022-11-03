@@ -1,14 +1,11 @@
 package com.socialuni.social.user.sdk.model;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import lombok.Data;
 
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @Data
-@MappedSuperclass
-public class SocialuniImgBaseModel extends SocialUnionContentBaseDO implements Serializable {
+public class SocialuniImgBaseModel extends SocialuniUnionContentBaseModel implements Serializable {
     private String src;
 
     private Double aspectRatio;

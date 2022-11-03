@@ -2,12 +2,12 @@ package com.socialuni.admin.web.service;
 
 
 import com.socialuni.admin.web.controller.DevAccountRO;
-import com.socialuni.social.common.utils.RequestUtil;
+import com.socialuni.social.common.sdk.utils.RequestUtil;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
-import com.socialuni.social.tance.sdk.facade.SocialTokenFacade;
+import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;

@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.exception.exception;
 
-import com.socialuni.social.common.constant.ErrorCode;
-import com.socialuni.social.common.constant.ErrorMsg;
+import com.socialuni.social.common.sdk.constant.ErrorCode;
+import com.socialuni.social.common.sdk.constant.ErrorMsg;
 import com.socialuni.social.common.sdk.exception.base.SocialErrorException;
 
 //正常逻辑不会出现，想不到什么情况会出现，就是系统异常, 必须要解决，解决不了就是被攻击的问题。

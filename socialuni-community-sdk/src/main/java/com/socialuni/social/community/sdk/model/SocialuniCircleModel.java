@@ -1,12 +1,11 @@
 package com.socialuni.social.community.sdk.model;
 
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.repository.CommonContentBaseDO;
+import com.socialuni.social.user.sdk.model.SocialuniContentBaseModel;
 import com.socialuni.social.user.sdk.model.SocialuniUserModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -16,7 +15,7 @@ import java.io.Serializable;
 //                @Index(columnList = "showFront"),
 @Data
 @NoArgsConstructor
-public class SocialuniCircleModel extends CommonContentBaseDO implements Serializable {
+public class SocialuniCircleModel extends SocialuniContentBaseModel implements Serializable {
     private Integer tagTypeId;
 
     private String name;

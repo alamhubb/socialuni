@@ -2,7 +2,7 @@ package com.socialuni.social.community.sdk.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
+
 import java.util.Date;
 
 /**

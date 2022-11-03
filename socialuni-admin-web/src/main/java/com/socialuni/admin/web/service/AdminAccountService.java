@@ -19,7 +19,7 @@ import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.community.sdk.api.TagInterface;
-import com.socialuni.social.common.utils.UUIDUtil;
+import com.socialuni.social.common.sdk.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

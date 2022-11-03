@@ -1,6 +1,5 @@
 package com.socialuni.social.community.sdk.api;
 
-import com.socialuni.social.common.dao.DO.SocialUnionContentBaseDO;
 import com.socialuni.social.community.sdk.model.SocialuniCommentModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,7 @@ import java.util.Optional;
  * @since TODO[起始版本号]
  */
 public interface CommentInterface {
-    SocialUnionContentBaseDO findOneByUnionIdAndStatus(Integer id, String status);
+    SocialuniCommentModel findOneByUnionIdAndStatus(Integer id, String status);
 
     SocialuniCommentModel findOneByUnionId(Integer id);
 
