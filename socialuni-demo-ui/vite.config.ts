@@ -19,7 +19,7 @@ export default defineConfig({
         postcss: {
             plugins: [purgecss({
                 // require('@fullhuman/postcss-purgecss')({
-                content: ['./public/**/*.html', './src/**/*.vue'],
+                content: ['./public/**/*.html', './src/**/*.vue', './src/**/*.scss'],
                 defaultExtractor(content) {
                     const contentWithoutStyleBlocks = content.replace(
                         /<style[^]+?<\/style>/gi,
