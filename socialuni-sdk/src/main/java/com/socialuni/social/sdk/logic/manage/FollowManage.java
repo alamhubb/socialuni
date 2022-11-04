@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.manage;
 
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.FollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.community.sdk.entity.HugDO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;

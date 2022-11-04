@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.constant.config;
 import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.config.SocialuniAppMoreConfigBO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

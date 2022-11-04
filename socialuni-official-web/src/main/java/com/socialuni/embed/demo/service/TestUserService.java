@@ -6,7 +6,7 @@ import com.socialuni.embed.demo.controller.TestUserRepository;
 import com.socialuni.embed.demo.model.TokenDO;
 import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.model.UserDO;
-import com.socialuni.social.common.sdk.exception.exception.SocialNotLoginException;
+import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserEntity;
 import com.socialuni.social.sdk.logic.manage.TokenManage;

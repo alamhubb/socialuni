@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;

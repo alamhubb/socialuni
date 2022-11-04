@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.community.talk;
 
-import com.socialuni.social.common.sdk.entity.SocialuniImgBaseDo;
+import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import lombok.Data;
 
 import javax.persistence.*;

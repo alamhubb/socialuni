@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.social.common.sdk.utils.UUIDUtil;
+import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.logic.platform.PushMsgErrCode;
 import com.socialuni.social.sdk.logic.platform.WxErrCode;
@@ -13,8 +13,8 @@ import com.socialuni.social.sdk.logic.platform.weixin.token.WxTokenResult;
 import com.socialuni.social.sdk.utils.common.RestUtil;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;

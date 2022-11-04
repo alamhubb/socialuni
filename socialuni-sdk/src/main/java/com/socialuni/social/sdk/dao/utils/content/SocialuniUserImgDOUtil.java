@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserImgRepository;

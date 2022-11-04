@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
-import com.socialuni.social.common.sdk.constant.CommonRedisKey;
+import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;

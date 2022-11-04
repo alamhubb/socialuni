@@ -1,7 +1,7 @@
 package com.socialuni.social.common.sdk.model;
 
 
-import com.socialuni.social.common.sdk.enumeration.PublishDataType;
+import com.socialuni.social.common.api.enumeration.PublishDataType;
 import lombok.Data;
 import org.springframework.web.bind.annotation.RequestMethod;
 

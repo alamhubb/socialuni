@@ -1,6 +1,6 @@
 package com.socialuni.social.user.sdk.entity;
 
-import com.socialuni.social.common.sdk.entity.SocialuniImgBaseDo;
+import com.socialuni.social.common.api.entity.SocialuniImgBaseDo;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
 import lombok.Data;
 

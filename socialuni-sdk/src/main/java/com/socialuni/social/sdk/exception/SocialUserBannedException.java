@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.exception;
 
-import com.socialuni.social.common.sdk.constant.ErrorCode;
-import com.socialuni.social.common.sdk.exception.base.SocialInfoException;
+import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.exception.base.SocialInfoException;
 import com.socialuni.social.sdk.utils.ErrorMsgUtil;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 

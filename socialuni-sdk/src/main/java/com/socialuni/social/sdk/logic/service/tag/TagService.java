@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;

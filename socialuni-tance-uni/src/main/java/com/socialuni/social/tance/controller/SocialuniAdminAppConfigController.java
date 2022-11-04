@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.socialuni.social.common.sdk.utils.MapUtil;
+import com.socialuni.social.common.api.utils.MapUtil;
 import com.socialuni.social.tance.entity.AppConfigDO;
 import com.socialuni.social.tance.entity.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;

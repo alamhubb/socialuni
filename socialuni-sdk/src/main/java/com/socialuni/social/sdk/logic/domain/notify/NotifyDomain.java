@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.logic.domain.notify;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.common.sdk.exception.base.SocialException;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.utils.JsonUtil;
+import com.socialuni.social.common.api.exception.base.SocialException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;

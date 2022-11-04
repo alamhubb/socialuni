@@ -21,6 +21,10 @@
     <dependencies>
         <!--springdoc 官方Starter-->
         <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-common-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${springdoc.version}</version>

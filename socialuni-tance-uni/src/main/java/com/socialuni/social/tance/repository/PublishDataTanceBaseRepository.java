@@ -1,7 +1,7 @@
 package com.socialuni.social.tance.repository;
 
 import com.socialuni.social.common.sdk.component.SocialuniPublishDataComponent;
-import com.socialuni.social.common.sdk.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 
 import javax.persistence.EntityManager;

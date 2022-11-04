@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.service.AdminAccountService;
 import com.socialuni.social.common.sdk.model.ResultRO;
-import com.socialuni.social.common.sdk.utils.UUIDUtil;
+import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;

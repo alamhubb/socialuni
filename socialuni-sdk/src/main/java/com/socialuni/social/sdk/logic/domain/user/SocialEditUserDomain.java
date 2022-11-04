@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.social.common.sdk.utils.UUIDUtil;
+import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
@@ -14,8 +14,8 @@ import com.socialuni.social.sdk.utils.common.RestUtil;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;

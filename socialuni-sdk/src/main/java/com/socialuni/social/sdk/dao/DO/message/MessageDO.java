@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.socialuni.MessageContentType;
 import com.socialuni.social.sdk.constant.socialuni.MessageReadStatus;
 import com.socialuni.social.sdk.constant.socialuni.MessageType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

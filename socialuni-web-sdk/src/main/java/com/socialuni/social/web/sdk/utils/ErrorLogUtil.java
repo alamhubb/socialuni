@@ -1,8 +1,8 @@
 package com.socialuni.social.web.sdk.utils;
 
 
-import com.socialuni.social.common.sdk.constant.ErrorCode;
-import com.socialuni.social.common.sdk.constant.ErrorType;
+import com.socialuni.social.common.api.constant.ErrorCode;
+import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.web.sdk.model.ErrorRequestLogDO;
 import com.socialuni.social.web.sdk.model.RequestLogDO;
 import com.socialuni.social.web.sdk.store.ErrorRequestLogStore;

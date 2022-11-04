@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository;
 
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.utils.IntegerUtils;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.dao.repository.AuthenticationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

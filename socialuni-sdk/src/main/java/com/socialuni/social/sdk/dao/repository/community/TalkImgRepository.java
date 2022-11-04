@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository.community;
 
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

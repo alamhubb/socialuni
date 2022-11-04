@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
 import lombok.Data;
 

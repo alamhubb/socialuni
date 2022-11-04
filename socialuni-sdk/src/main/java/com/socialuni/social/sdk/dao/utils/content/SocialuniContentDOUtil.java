@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.dao.utils.content;
 
 
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;

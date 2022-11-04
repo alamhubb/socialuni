@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO.chat;
 
-import com.socialuni.social.common.sdk.entity.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

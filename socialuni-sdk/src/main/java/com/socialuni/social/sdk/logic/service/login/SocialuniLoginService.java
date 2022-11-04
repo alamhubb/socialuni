@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service.login;
 
 import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.logic.domain.login.SocialPhoneLoginDomain;

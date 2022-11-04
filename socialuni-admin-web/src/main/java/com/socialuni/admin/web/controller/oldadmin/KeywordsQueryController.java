@@ -2,9 +2,9 @@ package com.socialuni.admin.web.controller.oldadmin;
 
 import com.socialuni.admin.web.model.KeywordsDetailVO;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;

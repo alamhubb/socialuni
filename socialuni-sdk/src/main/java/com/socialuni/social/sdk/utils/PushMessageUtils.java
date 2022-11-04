@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.platform.weixin.HttpResult;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.notify.PushMessageDO;
 import com.socialuni.social.sdk.dao.repository.PushMessageRepository;
-import com.socialuni.social.common.sdk.utils.JsonUtil;
+import com.socialuni.social.common.api.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository;
 
 import com.socialuni.social.sdk.dao.DO.MatchRequestDO;
-import com.socialuni.social.common.sdk.constant.CommonRedisKey;
+import com.socialuni.social.common.api.constant.CommonRedisKey;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.jpa.repository.JpaRepository;
 

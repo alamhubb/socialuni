@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.facade;
 
-import com.socialuni.social.common.sdk.utils.RequestUtil;
-import com.socialuni.social.common.sdk.utils.UUIDUtil;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.user.sdk.api.SocialRequestUserConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

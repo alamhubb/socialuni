@@ -2,7 +2,7 @@ package com.socialuni.admin.web.controller;
 
 import com.socialuni.admin.web.model.ReportRO;
 import com.socialuni.admin.web.service.AdminUserService;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.store;
 
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.enumeration.TagRedisKey;

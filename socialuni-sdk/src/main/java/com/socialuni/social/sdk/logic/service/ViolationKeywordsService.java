@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service;
 
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.sdk.dao.DO.keywords.IllegalWordDO;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;

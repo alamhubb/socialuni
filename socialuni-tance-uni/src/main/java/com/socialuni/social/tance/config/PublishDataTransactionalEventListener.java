@@ -2,7 +2,7 @@ package com.socialuni.social.tance.config;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ClassUtil;
-import com.socialuni.social.common.sdk.enumeration.PublishDataCacheable;
+import com.socialuni.social.common.api.enumeration.PublishDataCacheable;
 import com.socialuni.social.common.sdk.model.PublishDataModel;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import lombok.extern.slf4j.Slf4j;

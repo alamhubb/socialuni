@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.utils.JsonUtil;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;

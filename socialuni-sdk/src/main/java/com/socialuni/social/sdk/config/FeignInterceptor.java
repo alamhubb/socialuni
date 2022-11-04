@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.common.sdk.model.ResultRO;
-import com.socialuni.social.common.sdk.utils.RequestUtil;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.dao.DO.UniOutRegisterUserDO;
 import com.socialuni.social.sdk.dao.repository.UniOutRegisterUserRepository;

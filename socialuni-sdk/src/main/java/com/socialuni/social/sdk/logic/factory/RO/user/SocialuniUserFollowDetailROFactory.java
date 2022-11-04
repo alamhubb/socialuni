@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.sdk.dao.redis.UserFansDetailRedis;
 import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;

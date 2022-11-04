@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.config.AppConfigStatic;
 import com.socialuni.social.sdk.dao.DO.keywords.IllegalWordDO;
 import com.socialuni.social.sdk.utils.content.TextContentUtil;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.dao.repository.IllegalWordRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.entity;
 
-import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 
 import javax.persistence.*;

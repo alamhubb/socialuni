@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.entity;
 
 
-import com.socialuni.social.common.sdk.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.service;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;

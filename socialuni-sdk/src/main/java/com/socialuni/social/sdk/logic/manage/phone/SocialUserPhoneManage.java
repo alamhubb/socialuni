@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.manage.phone;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.constant.status.UserStatus;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;

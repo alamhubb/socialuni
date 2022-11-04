@@ -1,6 +1,6 @@
 package com.socialuni.social.tance.config;
 
-import com.socialuni.social.common.sdk.constant.SocialSystemConst;
+import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.tance.controller.SocialuniAdminAppConfigController;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

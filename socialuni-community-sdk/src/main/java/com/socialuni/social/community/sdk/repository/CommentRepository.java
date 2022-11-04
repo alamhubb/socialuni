@@ -1,7 +1,7 @@
 package com.socialuni.social.community.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.common.sdk.enumeration.CommonStatus;
+import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

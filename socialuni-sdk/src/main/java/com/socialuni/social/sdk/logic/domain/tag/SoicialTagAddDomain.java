@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.tag;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;

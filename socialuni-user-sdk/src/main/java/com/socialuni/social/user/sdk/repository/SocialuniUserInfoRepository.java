@@ -1,7 +1,6 @@
 package com.socialuni.social.user.sdk.repository;
 
-import com.socialuni.social.common.sdk.entity.SocialuniUserInfoBaseDO;
-import com.socialuni.social.user.sdk.api.repository.SocialuniUserInfoRepositoryInterface;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.DO;
 
-import com.socialuni.social.common.sdk.utils.IpUtil;
+import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.Data;
 

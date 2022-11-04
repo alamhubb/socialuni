@@ -3,7 +3,7 @@ package com.socialuni.admin.web.model;
 
 import com.socialuni.admin.web.constant.AdminAuditResultType;
 import com.socialuni.admin.web.factory.ReportContentROFactory;
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;

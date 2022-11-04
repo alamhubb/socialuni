@@ -1,6 +1,6 @@
 package com.socialuni.social.community.sdk.entity;
 
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.user.sdk.api.SocialuniTextCheckDO;
 import lombok.Data;
 

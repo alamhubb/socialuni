@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-tance-sdk</artifactId>
+            <artifactId>socialuni-tance-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>

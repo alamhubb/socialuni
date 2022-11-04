@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.user;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniSchoolCheck;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;

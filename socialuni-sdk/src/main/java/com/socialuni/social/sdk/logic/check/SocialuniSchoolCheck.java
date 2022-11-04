@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.check;
 
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;

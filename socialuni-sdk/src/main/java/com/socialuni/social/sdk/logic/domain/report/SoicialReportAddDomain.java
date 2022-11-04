@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.logic.domain.report;
 
-import com.socialuni.social.common.sdk.entity.SocialuniUnionContentBaseDO;
-import com.socialuni.social.common.sdk.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
