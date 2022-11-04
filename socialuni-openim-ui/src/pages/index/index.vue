@@ -1,7 +1,7 @@
 <template>
   <view class="index">
     <view class="statusBar"></view>
-    <u-sticky customNavHeight="0" bgColor="#fff">
+<!--    <u-sticky customNavHeight="0" bgColor="#fff">
       <view class="userInfo">
         <view class="userInfo-left">
           <Avatar :src="userInfo.faceURL" :name="userInfo.nickname"/>
@@ -35,9 +35,9 @@
             @click="routerGo('./search')"
         />
       </view>
-    </u-sticky>
+    </u-sticky>-->
     <view class="container">
-      <uni-list :border="false" class="list">
+<!--      <uni-list :border="false" class="list">
         <uni-swipe-action>
           <uni-swipe-action-item
               v-for="item in messageList"
@@ -52,7 +52,7 @@
             </uni-list-item>
           </uni-swipe-action-item>
         </uni-swipe-action>
-      </uni-list>
+      </uni-list>-->
     </view>
     <view v-show="addPop.show" class="addContent" @click="addPop.show = false">
       <view class="addContent-pop" :style="addPop.style">

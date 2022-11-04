@@ -44,6 +44,7 @@
     "@dcloudio/uni-mp-toutiao": "3.0.0-alpha-3050320220729001",
     "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3050320220729001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3050320220729001",
+    "@dcloudio/uni-ui": "^1.4.23",
     "@rollup/plugin-commonjs": "^23.0.2",
     "pinia": "^2.0.10",
     "pinia-class-component": "^0.9.4",
