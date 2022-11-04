@@ -12,6 +12,7 @@ import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
+import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -213,11 +214,9 @@ public class DevAccountFacade {
         return user;
     }
 
-    //todo 有问题
     public static DevAccountModel getAdminDevAccountAllowNull() {
-//        String token = SocialTokenFacade.getToken();
-//        return DevAccountFacade.getDevAccountByToken(token);
-        return null;
+        String token = SocialTokenFacade.getToken();
+        return DevAccountFacade.getDevAccountByToken(token);
     }
 
     public static Integer getAdminDevAccountIdAllowNull() {
@@ -266,22 +265,21 @@ public class DevAccountFacade {
             }
             return devAccountDO;
         }*/
-        //校验解析token toto有问题
-//        String devSecretKey = SocialTokenFacade.getUserKeyByToken(token);
-//        if (StringUtils.isEmpty(devSecretKey)) {
-//            return null;
-//        }
-//        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devSecretKey);
-//        if (devAccountModel == null) {
-//            throw new SocialParamsException("token被破解");
-//        }
-//        todo 这里需要校验有效期吧
-//        String tokenCode = devTokenApi.findFirstTokenCodeByUserId(devAccountModel.getId());
-//        if (!token.equals(tokenCode)) {
-//            return null;
-//        }
-//        return devAccountModel;
-        return null;
+        //校验解析token
+        String devSecretKey = SocialTokenFacade.getUserKeyByToken(token);
+        if (StringUtils.isEmpty(devSecretKey)) {
+            return null;
+        }
+        DevAccountModel devAccountModel = devAccountApi.findOneBySecretKey(devSecretKey);
+        if (devAccountModel == null) {
+            throw new SocialParamsException("token被破解");
+        }
+        //todo 这里需要校验有效期吧
+        String tokenCode = devTokenApi.findFirstTokenCodeByUserId(devAccountModel.getId());
+        if (!token.equals(tokenCode)) {
+            return null;
+        }
+        return devAccountModel;
     }
 
     public static DevAccountModel getDevAccount(Integer devId) {

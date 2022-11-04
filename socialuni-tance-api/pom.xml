@@ -20,5 +20,16 @@
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-common-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-user-sdk</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-jpa</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 </project>
