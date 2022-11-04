@@ -92,42 +92,79 @@
   </view>
 </template>
 
-<script>
+<script lang="ts">
+import {Options, Vue, Watch} from 'vue-property-decorator'
+
+
 import MessageCard from "@/components/MessageCard.vue";
 import Avatar from "@/components/Avatar.vue";
-export default {
-  components: { MessageCard, Avatar },
-  data() {
-    return {
-      searchContent: "",
-      actionOptions: [
-        {
-          text: "置顶",
-          style: {
-            backgroundColor: "#1B72EC",
-          },
-        },
-        {
-          text: "取消置顶",
-          style: {
-            backgroundColor: "#ccc",
-          },
-        },
-        {
-          text: "移除",
-          style: {
-            backgroundColor: "#FFAB41",
-          },
-        },
-      ],
-      addPop: { show: false, style: {} },
-      isPending: false,
-      isRefresh: false,
-      initTimer: null,
-      firstInitData: { isFirstInit: true, list: [], pageNo: 1, pageSize: 10 },
-      total: 0,
-    };
-  },
+import {openImUserModule} from "@/store/store";
+
+
+@Options({
+  components: {MessageCard, Avatar}
+})
+export default class TalkView extends Vue {
+  searchContent = ""
+  actionOptions = [
+    {
+      text: "置顶",
+      style: {
+        backgroundColor: "#1B72EC",
+      },
+    },
+    {
+      text: "取消置顶",
+      style: {
+        backgroundColor: "#ccc",
+      },
+    },
+    {
+      text: "移除",
+      style: {
+        backgroundColor: "#FFAB41",
+      },
+    },
+  ]
+  addPop = {show: false, style: {}}
+  isPending = false
+  isRefresh = false
+  initTimer = null
+  firstInitData = {isFirstInit: true, list: [], pageNo: 1, pageSize: 10}
+  total = 0
+
+  get userID(){
+    return openImUserModule.userID
+  }
+
+  get userInfo(){
+    return openImUserModule.userInfo
+  }
+
+  get operationID(){
+    return openImUserModule.operationID
+  }
+  get loginStatus(){
+    return openImUserModule.loginStatus
+  }
+  get token(){
+    return openImUserModule.token
+  }
+
+  get systemInfo(){
+    return openImUserModule.systemInfo
+  }
+
+  /*get messageList(){
+    return openImUserModule.messageList
+  }
+  get newMessageTimes(){
+    return openImUserModule.newMessageTimes
+  }
+  get indexMessageTimes(){
+    return openImUserModule.indexMessageTimes
+  }*/
+
   onLoad() {
     // #ifdef APP-PLUS
     this.$store.commit("message/set_messageList", []);
@@ -135,100 +172,106 @@ export default {
       this.init2();
     }
     // #endif
-  },
-  methods: {
-    init2() {
+  }
+
+  init2() {
+    this.isRefresh = true;
+    this.init();
+  }
+
+  init() {
+    if (this.isPending) {
       this.isRefresh = true;
-      this.init();
-    },
-    init() {
-      if (this.isPending) {
-        this.isRefresh = true;
-      } else if (this.isRefresh) {
-        this.isRefresh = false;
-        this.getAllConversationList();
-        this.getTotalUnreadMsgCount();
-      }
-      // if (this.initTimer) {
-      //   clearTimeout(this.initTimer);
-      // }
-      // this.initTimer = setTimeout(() => {
-      //   if (this.isPending) {
-      //     this.isRefresh = true;
-      //   } else if (this.isRefresh) {
-      //     this.isRefresh = false;
-      //     this.getAllConversationList();
-      //     this.getTotalUnreadMsgCount();
-      //   }
-      // }, 1000);
-    },
-    getAllConversationList() {
-      this.isPending = true;
-      this.$im.getAllConversationList(this.operationID, (res) => {
-        if (res.errCode !== 0) {
-          this.$toast(res.errMsg);
-          this.isPending = false;
-          this.init();
-        } else {
-          const data = JSON.parse(res.data);
-          // console.log(JSON.parse(res.data));
-          this.checkFirstInit(data);
-          // if (this.isIos) {
-          //   this.checkFirstInit2(data);
-          // } else {
-          //   this.checkFirstInit(data);
-          // }
-        }
-      });
-    },
-    getTotalUnreadMsgCount() {
-      this.$im.getTotalUnreadMsgCount(this.operationID, (res) => {
-        if (res.errCode !== 0) {
-          this.$toast(res.errMsg);
-        } else {
-          this.total = res.data;
-          this.setTabBarBadge();
-        }
-      });
-    },
-    checkFirstInit2(list) {
-      this.$store.commit("message/set_messageList", list);
-      setTimeout(() => {
+    } else if (this.isRefresh) {
+      this.isRefresh = false;
+      this.getAllConversationList();
+      this.getTotalUnreadMsgCount();
+    }
+    // if (this.initTimer) {
+    //   clearTimeout(this.initTimer);
+    // }
+    // this.initTimer = setTimeout(() => {
+    //   if (this.isPending) {
+    //     this.isRefresh = true;
+    //   } else if (this.isRefresh) {
+    //     this.isRefresh = false;
+    //     this.getAllConversationList();
+    //     this.getTotalUnreadMsgCount();
+    //   }
+    // }, 1000);
+  }
+
+  getAllConversationList() {
+    this.isPending = true;
+    this.$im.getAllConversationList(this.operationID, (res) => {
+      if (res.errCode !== 0) {
+        this.$toast(res.errMsg);
         this.isPending = false;
         this.init();
-      }, 200);
-    },
-    checkFirstInit(list) {
-      if (this.firstInitData.isFirstInit) {
-        const length = list.length;
-        const num = this.firstInitData.pageNo * this.firstInitData.pageSize;
-        this.$store.commit("message/set_messageList", list.slice(0, num));
-        if (num < length) {
-          setTimeout(() => {
-            this.firstInitData.pageNo++;
-            this.checkFirstInit(list);
-          }, 200);
-        } else {
-          this.firstInitData.isFirstInit = false;
-          setTimeout(() => {
-            this.isPending = false;
-            this.init();
-          }, 200);
-        }
       } else {
-        this.$store.commit("message/set_messageList", list);
+        const data = JSON.parse(res.data);
+        // console.log(JSON.parse(res.data));
+        this.checkFirstInit(data);
+        // if (this.isIos) {
+        //   this.checkFirstInit2(data);
+        // } else {
+        //   this.checkFirstInit(data);
+        // }
+      }
+    });
+  }
+
+  getTotalUnreadMsgCount() {
+    this.$im.getTotalUnreadMsgCount(this.operationID, (res) => {
+      if (res.errCode !== 0) {
+        this.$toast(res.errMsg);
+      } else {
+        this.total = res.data;
+        this.setTabBarBadge();
+      }
+    });
+  }
+
+  checkFirstInit2(list) {
+    this.$store.commit("message/set_messageList", list);
+    setTimeout(() => {
+      this.isPending = false;
+      this.init();
+    }, 200);
+  }
+
+  checkFirstInit(list) {
+    if (this.firstInitData.isFirstInit) {
+      const length = list.length;
+      const num = this.firstInitData.pageNo * this.firstInitData.pageSize;
+      this.$store.commit("message/set_messageList", list.slice(0, num));
+      if (num < length) {
+        setTimeout(() => {
+          this.firstInitData.pageNo++;
+          this.checkFirstInit(list);
+        }, 200);
+      } else {
+        this.firstInitData.isFirstInit = false;
         setTimeout(() => {
           this.isPending = false;
           this.init();
         }, 200);
       }
-    },
-    showAdd() {
-      const query = uni.createSelectorQuery().in(this);
-      query
+    } else {
+      this.$store.commit("message/set_messageList", list);
+      setTimeout(() => {
+        this.isPending = false;
+        this.init();
+      }, 200);
+    }
+  }
+
+  showAdd() {
+    const query = uni.createSelectorQuery().in(this);
+    query
         .select("#addPic")
         .boundingClientRect((data) => {
-          const { height, left, top } = data;
+          const {height, left, top} = data;
           this.addPop.style = {
             "margin-top": top + height + "px",
             "margin-left": left - 130 + "px",
@@ -236,31 +279,35 @@ export default {
           this.addPop.show = true;
         })
         .exec();
-    },
-    scanCode() {
-      scan("0", this.$im);
-    },
-    routerGo(url) {
-      if (url) {
-        uni.navigateTo({
-          url,
-        });
-      }
-    },
-    filterActionOptions(item) {
-      const { isPinned } = item;
-      const list = [...this.actionOptions];
-      if (isPinned) {
-        list.splice(0, 1);
-      } else {
-        list.splice(1, 1);
-      }
-      return list;
-    },
-    swipeActionClick({ index }, item) {
-      const { conversationID, isPinned } = item;
-      if (index === 0) {
-        this.$im.pinConversation(
+  }
+
+  scanCode() {
+    scan("0", this.$im);
+  }
+
+  routerGo(url) {
+    if (url) {
+      uni.navigateTo({
+        url,
+      });
+    }
+  }
+
+  filterActionOptions(item) {
+    const {isPinned} = item;
+    const list = [...this.actionOptions];
+    if (isPinned) {
+      list.splice(0, 1);
+    } else {
+      list.splice(1, 1);
+    }
+    return list;
+  }
+
+  swipeActionClick({index}, item) {
+    const {conversationID, isPinned} = item;
+    if (index === 0) {
+      this.$im.pinConversation(
           this.operationID,
           conversationID,
           !isPinned,
@@ -269,114 +316,116 @@ export default {
               this.init2();
             }
           }
-        );
-      } else if (index === 1) {
-        this.$im.deleteConversation(this.operationID, conversationID, (res) => {
-          if (res.errCode === 0) {
-            this.init2();
-          }
-        });
-      }
-    },
-    setTabBarBadge() {
-      if (this.total > 0) {
-        const text = this.total > 99 ? "99" : this.total;
-        uni.setTabBarBadge({
-          index: 0,
-          text,
-        });
-      } else {
-        uni.removeTabBarBadge({ index: 0 });
-      }
-    },
-  },
-  computed: {
-    ...mapGetters([
-      "userInfo",
-      "messageList",
-      "operationID",
-      "newMessageTimes",
-      "indexMessageTimes",
-      "loginStatus",
-      "userID",
-      "token",
-      "systemInfo",
-    ]),
-    hasLastLoginData() {
-      return this.userID && this.token ? true : false;
-    },
-    isIos() {
-      return this.systemInfo.platform === "ios";
-    },
-  },
-  watch: {
-    newMessageTimes() {
+      );
+    } else if (index === 1) {
+      this.$im.deleteConversation(this.operationID, conversationID, (res) => {
+        if (res.errCode === 0) {
+          this.init2();
+        }
+      });
+    }
+  }
+
+  setTabBarBadge() {
+    if (this.total > 0) {
+      const text = this.total > 99 ? "99" : this.total;
+      uni.setTabBarBadge({
+        index: 0,
+        text,
+      });
+    } else {
+      uni.removeTabBarBadge({index: 0});
+    }
+  }
+
+  hasLastLoginData() {
+    return this.userID && this.token ? true : false;
+  }
+
+  isIos() {
+    return this.systemInfo.platform === "ios";
+  }
+
+  @Watch('newMessageTimes')
+  newMessageTimesWatch() {
+    this.init2();
+  }
+
+  @Watch('indexMessageTimes')
+  indexMessageTimesWatch() {
+    this.init2();
+  }
+
+  @Watch('loginStatus')
+  loginStatusWatch(v) {
+    if (v) {
       this.init2();
-    },
-    indexMessageTimes() {
-      this.init2();
-    },
-    loginStatus(v) {
-      if (v) {
-        this.init2();
-      }
-    },
-  },
-};
+    }
+  }
+}
+
 </script>
 <style lang="scss" scoped>
-$pdLeft: 44rpx;
+$pdLeft: 44 rpx;
 .index {
   min-height: 100vh;
+
   .userInfo {
     padding: $pdLeft;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     &-left {
       flex-shrink: 0;
-      width: 96rpx;
-      height: 96rpx;
+      width: 96 rpx;
+      height: 96 rpx;
     }
+
     &-center {
       flex: 1;
-      padding: 0 22rpx;
+      padding: 0 22 rpx;
       color: #333;
       display: flex;
       flex-direction: column;
       justify-content: center;
       width: 100%;
       overflow: hidden;
+
       .company {
-        font-size: 24rpx;
-        margin-bottom: 4rpx;
+        font-size: 24 rpx;
+        margin-bottom: 4 rpx;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         display: block;
       }
+
       .name {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
+
         .nickname {
-          font-size: 36rpx;
-          margin-right: 24rpx;
+          font-size: 36 rpx;
+          margin-right: 24 rpx;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+
         .loginStatus {
-          font-size: 24rpx;
-          padding-left: 20rpx;
+          font-size: 24 rpx;
+          padding-left: 20 rpx;
           position: relative;
           white-space: nowrap;
-          margin-top: 8rpx;
+          margin-top: 8 rpx;
+
           &::before {
             content: "";
             background-color: #10cc64;
-            width: 12rpx;
-            height: 12rpx;
+            width: 12 rpx;
+            height: 12 rpx;
             border-radius: 50%;
             position: absolute;
             left: 0;
@@ -386,37 +435,46 @@ $pdLeft: 44rpx;
         }
       }
     }
+
     &-right {
       display: flex;
       align-items: center;
+
       .image {
-        width: 46rpx;
-        height: 46rpx;
+        width: 46 rpx;
+        height: 46 rpx;
+
         &:nth-of-type(1) {
-          margin-right: 32rpx;
+          margin-right: 32 rpx;
         }
       }
     }
   }
+
   .search {
-    padding: 16rpx $pdLeft 8rpx;
+    padding: 16 rpx $pdLeft 8 rpx;
   }
+
   .container {
-    margin-top: 32rpx;
+    margin-top: 32 rpx;
+
     .list {
       &-item {
         ::v-deep .uni-list-item__container {
           padding: 0;
         }
+
         ::v-deep .uni-list--border {
           display: none;
         }
+
         .MessageCard {
           width: 100%;
         }
       }
     }
   }
+
   .addContent {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -425,25 +483,30 @@ $pdLeft: 44rpx;
     top: 0;
     left: 0;
     z-index: 999;
+
     &-pop {
       background-color: #fff;
       width: 130px;
-      border-radius: 12rpx;
+      border-radius: 12 rpx;
+
       &-item {
         display: flex;
         align-items: center;
-        padding: 18rpx 0;
-        border-bottom: 2rpx solid #f0f0f0;
+        padding: 18 rpx 0;
+        border-bottom: 2 rpx solid #f0f0f0;
+
         .image {
           margin-left: 12px;
           margin-right: 16px;
           width: 24px;
           height: 24px;
         }
+
         .text {
           font-size: 14px;
           color: #333333;
         }
+
         &:last-of-type {
           border-bottom: none;
         }

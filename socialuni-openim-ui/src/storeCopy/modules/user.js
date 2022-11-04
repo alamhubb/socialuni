@@ -69,7 +69,36 @@ const mutations = {
   },
 };
 const actions = {
-
+  login({ commit }, userInfo) {
+    return new Promise((resolve, reject) => {
+      app_login(userInfo)
+        .then((res) => {
+          if (res.errCode === 0) {
+            commit("set_token", res.data.token);
+            commit("set_userID", res.data.userID);
+            resolve();
+          } else {
+            reject({ message: res.errMsg });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error);
+        });
+    });
+  },
+  logOut({ commit, rootGetters }, im) {
+    commit("set_token");
+    commit("set_userID");
+    commit("set_loginStatus");
+    if (rootGetters.operationID && im) {
+      im.logout(rootGetters.operationID, () => {});
+    }
+    // uni.clearStorage();
+    uni.redirectTo({
+      url: "/pages/login/index",
+    });
+  },
 };
 export default {
   namespaced: true,
