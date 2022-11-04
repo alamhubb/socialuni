@@ -1,8 +1,9 @@
 package com.socialuni.social.sdk.logic.service.login;
 
-import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
+import com.socialuni.social.im.model.ImUserModel;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.logic.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.social.sdk.logic.domain.login.SocialProviderLoginDomain;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 @Slf4j
@@ -75,7 +77,9 @@ public class SocialuniLoginService {
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
         // 发布事件通过其他的第三方用户信息同步。
-        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
+        SocialuniMineUserDetailRO user = socialLoginRO.getUser();
+;
+        EventPublisherFacade.publishEvent("userLogin", user);
         return ResultRO.success(socialLoginRO);
     }
 
