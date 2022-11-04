@@ -10,7 +10,13 @@ import org.springframework.context.ApplicationEvent;
  * @since 1.0
  */
 public class SpringDDDEvent extends ApplicationEvent {
-    public SpringDDDEvent(Object source) {
+    final String topicName;
+    public SpringDDDEvent(String topicName,Object source) {
         super(source);
+        this.topicName = topicName;
+    }
+
+    public String getTopicName() {
+        return topicName;
     }
 }

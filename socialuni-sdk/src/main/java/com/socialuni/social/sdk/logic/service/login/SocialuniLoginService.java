@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.service.login;
 
+import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.common.sdk.exception.exception.SocialParamsException;
 import com.socialuni.social.common.sdk.model.ResultRO;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
@@ -56,7 +57,8 @@ public class SocialuniLoginService {
             throw new SocialParamsException(UniappProviderType.notSupportTypeErrorMsg);
         }
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
-
+        // 发布事件通过其他的第三方用户信息同步。
+        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
         return ResultRO.success(socialLoginRO);
     }
 
@@ -72,6 +74,8 @@ public class SocialuniLoginService {
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
+        // 发布事件通过其他的第三方用户信息同步。
+        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
         return ResultRO.success(socialLoginRO);
     }
 

@@ -32,7 +32,7 @@ package com.socialuni.social.common.sdk.event.ddd;
  * @author Juergen Hoeller
  */
 public interface EventConsum {
-	boolean canConsum(Object event);
+	boolean canConsum(String topicName, Object event);
 	/**
 	 * Handle an application event.
 	 * @param event the event to respond to

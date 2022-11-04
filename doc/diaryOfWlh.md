@@ -3,7 +3,23 @@
 
 
 
+# 领域事件问题.
+## 背景
+需要openIm（也有用户模块）整合。 在当前项目的用户注册/登录时需要调用openIm同步过去。
+[APP与OpenIM的关系](https://doc.rentsoft.cn/#/framework/relationship?id=open-im用户登录)
+## 领域事件的引入.
+- 为了扩展和异步性。也应该引入事件。
 
+
+# API和 controller 层的界线和使用 
+## 背景
+老哥强迫症，把一些多余的服务也放到了API层。 进而引用了对应的DO和jpa又依赖啦。
+## 部分功能不同领域不同表现
+例如: 获得租户领域的配置 {@code ConfigAPI}
+基于数据库实现，可以有增删改。但是基于配置文件的是没有的。  这时的增删改不能抽象到API层。 只能再uni模块的 controller 中实现。和对应的前端进行联调。
+
+## 规范
+不能抽象到API层的放到自己实现层中的controller做特殊功能处理。
 
 
 # 以数据库表为领域,最小化拆分。
@@ -50,3 +66,4 @@ dev 实现模块也就2包:  repository(仓库,继承api和jpa) 、 entity(实�
         return this.save(BeanUtil.toBean(TagDO,TagDO.class));
     }
 ```
+

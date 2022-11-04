@@ -52,6 +52,6 @@ public interface EventPublisher {
 	 * @since 4.2
 	 * @see PayloadApplicationEvent
 	 */
-	void publishEvent(Object event);
+	void publishEvent(String topicName,Object event);
 
 }
