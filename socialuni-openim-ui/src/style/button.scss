@@ -1,0 +1,7 @@
+.u-button--primary {
+  &.u-button--disabled {
+    color: #898989 !important;
+    background-color: #eaeaea !important;
+    border-color: #eaeaea !important;
+  }
+}
