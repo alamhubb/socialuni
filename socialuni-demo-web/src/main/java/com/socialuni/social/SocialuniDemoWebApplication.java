@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = {"com.socialuni.social"})
 @EnableSpringUtil
 //@EnableCaching
-public class SocialuniWebApplication {
+public class SocialuniDemoWebApplication {
     public static void main(String[] args) {
 
-        SpringApplication.run(SocialuniWebApplication.class, args);
+        SpringApplication.run(SocialuniDemoWebApplication.class, args);
     }
 }
