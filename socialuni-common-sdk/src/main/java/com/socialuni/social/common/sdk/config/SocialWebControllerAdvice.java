@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.common.api.constant.ErrorMsg;
 import com.socialuni.social.common.api.exception.base.SocialException;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.JsonUtil;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;

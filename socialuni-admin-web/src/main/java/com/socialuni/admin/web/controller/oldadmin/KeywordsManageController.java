@@ -4,7 +4,7 @@ package com.socialuni.admin.web.controller.oldadmin;
 import com.socialuni.admin.web.utils.CheckIsAdminUtil;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;

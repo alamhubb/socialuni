@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.feignAPI.community.SocialuniFollowAPI;
 import com.socialuni.social.sdk.logic.domain.follow.SocialuniFollowUserDomain;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

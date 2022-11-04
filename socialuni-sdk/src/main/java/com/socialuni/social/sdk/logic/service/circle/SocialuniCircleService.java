@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.circle;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;

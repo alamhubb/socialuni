@@ -2,7 +2,7 @@ package com.socialuni.social.common.sdk.component;
 
 import cn.hutool.core.util.ClassUtil;
 import com.socialuni.social.common.api.enumeration.PublishDataType;
-import com.socialuni.social.common.sdk.model.PublishDataModel;
+import com.socialuni.social.common.api.model.PublishDataModel;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMethod;

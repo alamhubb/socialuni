@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service.phone;
 
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.logic.domain.phone.SocailSendAuthCodeDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindPhoneNumDomain;
 import com.socialuni.social.sdk.logic.domain.phone.SocialBindWxPhoneNumDomain;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.domain.follow;
 
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserFollowDetailRO;

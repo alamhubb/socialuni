@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTagAPI;
 import com.socialuni.social.sdk.logic.service.tag.SocialuniTagService;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;

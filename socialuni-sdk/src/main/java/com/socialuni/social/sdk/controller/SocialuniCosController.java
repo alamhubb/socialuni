@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.controller;
 import com.socialuni.social.sdk.feignAPI.openData.SocialuniCosAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniCosService;
 import com.socialuni.social.sdk.model.RO.app.SocialCosAuthRO;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

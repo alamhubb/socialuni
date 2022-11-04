@@ -4,7 +4,7 @@ import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.controller.DevAccountUpdateQO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;

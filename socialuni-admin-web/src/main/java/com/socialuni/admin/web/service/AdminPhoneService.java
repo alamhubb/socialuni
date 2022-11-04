@@ -5,7 +5,7 @@ import com.socialuni.admin.web.config.AppStaticData;
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
 import com.socialuni.social.sdk.dao.DO.dev.DevAuthCodeDO;
 import com.socialuni.social.sdk.utils.TencentSmsServe;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;

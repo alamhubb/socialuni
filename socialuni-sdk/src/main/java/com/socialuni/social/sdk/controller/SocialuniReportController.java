@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.controller;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniReportAPI;
 import com.socialuni.social.sdk.logic.service.report.SocialuniReportService;

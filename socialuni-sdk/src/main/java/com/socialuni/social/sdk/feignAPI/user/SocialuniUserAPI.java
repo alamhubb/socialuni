@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.user.SocialuniUserImgDeleteQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

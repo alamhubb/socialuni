@@ -1,4 +1,4 @@
-package com.socialuni.social.common.sdk.model;
+package com.socialuni.social.common.api.model;
 
 
 import com.socialuni.social.common.api.enumeration.PublishDataType;

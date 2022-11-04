@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.model.RectangleVO;
 import com.socialuni.social.sdk.logic.platform.MapUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.logic.domain.talk.*;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.hug;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.entity.HugDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.redis.HugRedis;

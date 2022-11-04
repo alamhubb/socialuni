@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
 import org.springframework.stereotype.Service;
 

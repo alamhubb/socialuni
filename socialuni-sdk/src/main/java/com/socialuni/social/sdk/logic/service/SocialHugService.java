@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.logic.domain.hug.SocialAddHugDomain;
 import com.socialuni.social.sdk.model.QO.community.SocialHugAddQO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;

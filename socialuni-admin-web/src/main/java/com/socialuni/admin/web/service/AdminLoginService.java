@@ -4,7 +4,7 @@ package com.socialuni.admin.web.service;
 import com.socialuni.admin.web.controller.DevAccountRO;
 import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;

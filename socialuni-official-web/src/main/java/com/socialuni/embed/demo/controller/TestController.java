@@ -4,7 +4,7 @@ import com.socialuni.embed.demo.model.TokenDO;
 import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.embed.demo.service.TestUserService;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.VisibleType;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;

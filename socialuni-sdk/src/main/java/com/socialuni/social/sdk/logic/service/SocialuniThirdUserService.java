@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialEditUserDomain;

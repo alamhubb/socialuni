@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.service.tag;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTagAPI;
 import com.socialuni.social.sdk.logic.domain.tag.SoicialTagAddDomain;

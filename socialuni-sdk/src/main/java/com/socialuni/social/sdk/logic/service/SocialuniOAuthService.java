@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.AuthType;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserAuthDO;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserAuthRepository;

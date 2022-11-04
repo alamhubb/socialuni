@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.feignAPI.openData;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.RO.app.SocialCosAuthRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

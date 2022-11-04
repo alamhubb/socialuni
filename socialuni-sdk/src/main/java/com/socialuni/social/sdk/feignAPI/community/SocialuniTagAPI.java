@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.feignAPI.community;
 
-import com.socialuni.social.common.sdk.model.ResultRO;
+import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagTypeRO;
