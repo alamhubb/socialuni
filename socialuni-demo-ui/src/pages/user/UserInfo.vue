@@ -157,23 +157,23 @@
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>
 
-        <!--        <div v-if="isMine" class="row-col-center mb-smm">
-                  <q-icon class="text-gray mr-xs" icon="mdi-school"/>
-                  联系方式：
-                  <div v-if="pageUser.contactInfo" @click="openSetContactInfo" class="row-col-center ">
-                    <div class="q-tag">{{ pageUser.contactInfo }}
-                      <div class="ml-xs">({{ pageUser.openContactInfo ? '他人可获取' : '他人不可获取' }})</div>
-                    </div>
-                  </div>
-                  <div v-else class="row-col-center">
-                    <div class="q-tag" @click="openSetContactInfo">设置联系方式</div>
-                  </div>
-                </div>
-                <div v-else-if="pageUser.openContactInfo" class="row-col-center mb-smm">
-                  <q-icon class="text-gray mr-xs" icon="mdi-school"/>
-                  联系方式：
-                  <div class="q-tag">{{ pageUser.contactInfo }}(点击获取联系方式)</div>
-                </div>-->
+        <div v-if="isMine" class="row-col-center mb-smm">
+          <q-icon class="text-gray mr-xs" icon="account-fill"/>
+          联系方式：
+          <div v-if="user.contactInfo" @click="openSetContactInfo" class="row-col-center ">
+            <div class="q-tag">{{ user.contactInfo }}
+              <div class="ml-xs">({{ user.openContactInfo ? '他人可获取' : '他人不可获取' }})</div>
+            </div>
+          </div>
+          <div v-else class="row-col-center">
+            <div class="q-tag" @click="openSetContactInfo">设置联系方式</div>
+          </div>
+        </div>
+        <div v-else-if="user.openContactInfo" class="row-col-center mb-smm">
+          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+          联系方式：
+          <div class="q-tag">{{ user.contactInfo }}(点击获取联系方式)</div>
+        </div>
 
         <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
 

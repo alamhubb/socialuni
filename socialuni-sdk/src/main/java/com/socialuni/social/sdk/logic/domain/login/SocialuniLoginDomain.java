@@ -48,7 +48,7 @@ public class SocialuniLoginDomain {
     public SocialLoginRO<SocialuniMineUserDetailRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser) {
         SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
-        SocialUserAccountDO openImAccount = socialBindUserOpenImAccountDomain.bindUserOpenImAccount(mineUser.getUserId(), userDetailRO.getId());
+        SocialUserAccountDO openImAccount = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser.getUserId(), userDetailRO.getId());
 
         userDetailRO.setImToken(openImAccount.getSessionKey());
 

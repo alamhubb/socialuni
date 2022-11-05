@@ -19,7 +19,7 @@ public class SocialBindUserOpenImAccountDomain {
     SocialuniOpenImUserFeign socialuniOpenImUserFeign;
 
     @Transactional
-    public SocialUserAccountDO bindUserOpenImAccount(Integer mineUserId, String userUid) {
+    public SocialUserAccountDO bindOrUpdateUserOpenImAccount(Integer mineUserId, String userUid) {
         String token = socialuniOpenImUserFeign.getToken(userUid);
 
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
@@ -30,6 +30,6 @@ public class SocialBindUserOpenImAccountDomain {
         loginQO.setUnionId(userUid);
         loginQO.setOpenId(userUid);
 
-        return socialBindUserProviderAccountEntity.bindProviderAccount(mineUserId, loginQO);
+        return socialBindUserProviderAccountEntity.bindOrUpdateProviderAccount(mineUserId, loginQO);
     }
 }

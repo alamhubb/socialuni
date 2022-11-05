@@ -12,13 +12,13 @@
         他人是否可获取您的联系方式：
       </div>
       <div class="row-col-center mt">
-        <!--        <u-switch v-model="openContactInfo"></u-switch>-->
-        <div class="ml-sm" @click="openContactInfo=!openContactInfo">
+        <s-switch v-model="openContactInfo">
           {{ openContactInfo ? '他人可获取' : '他人不可获取' }}
-        </div>
+        </s-switch>
       </div>
       <div class="mt">打开开关，他人可通过付费1元的方式获取您的联系方式</div>
-      <div class="mt-xs">未来会给您提供50%收益分成（目前不支持）</div>
+      <div class="mt-sm">提示：打开付费获取联系方式功能交友效果更佳哦</div>
+<!--      <div class="mt-xs">未来会给您提供50%收益分成（目前不支持）</div>-->
     </div>
   </q-popup>
 </template>
@@ -27,6 +27,7 @@
 import {Options, Vue} from 'vue-property-decorator'
 import QInput from "../../qing-ui/components/QInput/QInput.vue";
 import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
+import SSwitch from "socialuni-ui/src/component/SSwitch.vue";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
@@ -34,6 +35,7 @@ import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUse
 
 @Options({
   components: {
+    SSwitch,
     QInput,
     QPopup
   }

@@ -14,7 +14,7 @@ import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
   components: {QIcon}
 })
 export default class QInput extends Vue {
-  @Model('input') readonly value: string
+  @Model('modelValue') readonly value: string
 
   @Prop({default: false, type: Boolean}) readonly hideClear: boolean
   @Prop({default: ''}) readonly placeholder: string
@@ -23,7 +23,7 @@ export default class QInput extends Vue {
     this.input(detail.value)
   }
 
-  @Emit()
+  @Emit('update:modelValue')
   input(value) {
     return value
   }

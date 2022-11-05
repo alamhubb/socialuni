@@ -3,7 +3,6 @@ package com.socialuni.social.sdk.logic.factory.RO.user;
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.im.model.SocialuniImUserModel;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
@@ -14,7 +13,10 @@ import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.entity.*;
+import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserExpandDo;
+import com.socialuni.social.user.sdk.entity.SocialuniUserSocialCoinDo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -67,14 +69,13 @@ public class SocialuniMineUserDetailROFactory {
         mineUserDetailRO.setSocialCoin(SocialuniUserSocialCoinDo.getSocialCoin());
 
         mineUserDetailRO.setOpenContactInfo(SocialuniUserExpandDo.getOpenContactInfo());
-//        boolean isMine = mineUserDetailRO.getIsMine();
 
         //设置openIm的key
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
+        /*SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
         if (socialUserAccountDO == null) {
             socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUserId, socialUserDetailRO.getId());
         }
-        mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());
+        mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());*/
 
         //user详情信息
 //        if (isMine) {
