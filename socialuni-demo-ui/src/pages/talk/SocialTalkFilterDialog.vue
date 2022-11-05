@@ -132,7 +132,7 @@ export default class SocialTalkFilterDialog extends Vue {
   }
 
   get user() {
-    return socialUserModule.getUser()
+    return socialUserModule.user
   }
 
   get tagTypes() {

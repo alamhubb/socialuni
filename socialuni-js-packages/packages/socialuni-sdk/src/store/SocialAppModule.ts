@@ -23,13 +23,17 @@ export default class SocialAppModule extends Pinia {
 
     //app启动的方法
 
+
+
     async appLunchAction() {
         //校验更新
         PlatformUtils.checkUpdate()
-
         try {
             //无论如何都要获取当前用户信息
-            await UserService.getMineUserInitDataAction()
+            if (socialUserModule.hasToken) {
+                await socialUserModule.getMineUserAction()
+                UserService.getAppLunchDataByHasUser()
+            }
             // WebsocketUtil.websocketConnect(false)
             socialTalkModule.getTalkTabs()
             socialTagModule.getHotTagsAction()
@@ -40,12 +44,6 @@ export default class SocialAppModule extends Pinia {
             socialAppModule.getReportTypesAction()
             socialAppModule.getAppConfigAction()
             socialAppModule.getHomeSwipersAction()
-            // socialChatModule.getChatsAction()
-            //如果有token获取
-            if (socialUserModule.hasToken) {
-                //查询通知列表
-                socialNotifyModule.queryNotifiesAction()
-            }
         } finally {
 
         }

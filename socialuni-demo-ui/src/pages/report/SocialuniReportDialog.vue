@@ -48,7 +48,7 @@ export default class SocialuniReportDialog extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.getUser()
+    return socialUserModule.user
   }
 
   reportType: string = ReportType.pornInfo

@@ -11,7 +11,7 @@ export default class WebsocketUtil {
     let token: string
 
     if (socialUserModule.hasToken) {
-      token = socialUserModule.getToken()
+      token = socialUserModule.token
     } else {
       token = CommonUtil.getUUID()
     }

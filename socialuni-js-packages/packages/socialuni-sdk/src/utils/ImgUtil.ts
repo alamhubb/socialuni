@@ -40,7 +40,7 @@ export default class ImgUtil {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
         header: {
-          token: socialUserModule.getToken()
+          token: socialUserModule.token
         },
         filePath: uploadImg,
         name: 'file',

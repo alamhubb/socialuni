@@ -69,7 +69,7 @@ export default class UserInfoImg extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.getUser()
+    return socialUserModule.user
   }
 
   @Prop() user: CenterUserDetailRO

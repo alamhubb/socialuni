@@ -84,7 +84,7 @@ export default class TalkAddTagSearch extends Vue {
     showSearch = false
 
     get user() {
-        return socialUserModule.getUser()
+        return socialUserModule.user
     }
 
     // 全部tag,因为需要与外部联动，所以使用外部传进来的tags

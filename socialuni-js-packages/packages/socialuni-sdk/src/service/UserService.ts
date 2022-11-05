@@ -1,14 +1,20 @@
 import WebsocketUtil from '../utils/WebsocketUtil'
-import SocialuniTokenUtil from '../utils/SocialuniTokenUtil'
-import {socialUserModule} from "../store/store";
+import {socialNotifyModule, socialUserModule} from "../store/store";
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import openIm from "../plugins/openIm/openIm";
 
 export default class UserService {
     //清空用户信息的组合操作
-    static clearUserInfoCom() {
-        socialUserModule.removeUser()
+    static userLogout() {
+        socialUserModule.removeUserAndToken()
+        socialNotifyModule.clearNotifies()
         WebsocketUtil.websocketClose()
+    }
+
+    static getAppLunchDataByHasUser(){
+        socialNotifyModule.queryNotifiesAction()
+        openIm.init()
     }
 
     //获取通知列表
@@ -19,16 +25,10 @@ export default class UserService {
     static getMineUserInitDataActionByToken(loginRO: SocialLoginRO<CenterUserDetailRO>) {
         socialUserModule.setUserAndToken(loginRO)
         //登录之后重连websocket
-        WebsocketUtil.websocketClose()
-        // socialNotifyModule.queryNotifiesAction()
+        // WebsocketUtil.websocketClose()
+        UserService.getAppLunchDataByHasUser()
         // socialChatModule.getChatsAction()
         // appModule.getImgPathAction()
         return loginRO.user
-    }
-
-    static async getMineUserInitDataAction() {
-        if (socialUserModule.hasToken) {
-            await socialUserModule.getMineUserAction()
-        }
     }
 }

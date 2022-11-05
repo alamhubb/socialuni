@@ -196,7 +196,7 @@ export default class TalkAddView extends Vue {
   }
 
   get user() {
-    return socialUserModule.getUser()
+    return socialUserModule.user
   }
 
   get tagTypes() {

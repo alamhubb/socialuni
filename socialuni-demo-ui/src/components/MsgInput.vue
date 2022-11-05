@@ -50,7 +50,7 @@ export default class MsgInput extends Vue {
   }
 
   get user() {
-    return socialUserModule.getUser()
+    return socialUserModule.user
   }
 
   inputContentFocusInput = false

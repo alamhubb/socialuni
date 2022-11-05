@@ -49,9 +49,9 @@ export default class UserContactInfoEditDialog extends Vue {
   open() {
     this.contactInfoValue = null
     this.openContactInfo = true
-    if (socialUserModule.getUser().contactInfo) {
-      this.contactInfoValue = socialUserModule.getUser().contactInfo
-      this.openContactInfo = socialUserModule.getUser().openContactInfo
+    if (socialUserModule.user.contactInfo) {
+      this.contactInfoValue = socialUserModule.user.contactInfo
+      this.openContactInfo = socialUserModule.user.openContactInfo
     }
     this.$refs.dialog.open()
   }

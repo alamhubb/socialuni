@@ -6,7 +6,11 @@ import NotifyAPI from "socialuni-api/src/api/socialuni/NotifyAPI";
 
 @Store
 export default class SocialNotifyModule extends Pinia {
-    notifies: UnreadNotifyVO [] = []
+    private notifies: UnreadNotifyVO [] = []
+
+    clearNotifies() {
+        this.notifies = []
+    }
 
     get unreadNotifies(): UnreadNotifyVO [] {
         return this.notifies.filter(item => !item.hasRead)

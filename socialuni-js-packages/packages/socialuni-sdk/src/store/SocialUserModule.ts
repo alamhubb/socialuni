@@ -13,19 +13,19 @@ import {socialUserModule} from "./store";
 
 @Store
 export default class SocialUserModule extends Pinia {
-    private user: CenterUserDetailRO = SocialuniUserStorageUtil.get() || null
-    private token: string = SocialuniTokenUtil.get() || null
+    private userInfo: CenterUserDetailRO = SocialuniUserStorageUtil.get() || null
+    private userToken: string = SocialuniTokenUtil.get() || null
 
-    getUser() {
-        return this.user
+    get user() {
+        return this.userInfo
     }
 
     get hasToken(): boolean {
-        return !!this.token
+        return !!this.userToken
     }
 
-    getToken() {
-        return this.token
+    get token() {
+        return this.userToken
     }
 
     setUserAndToken(loginRO: SocialLoginRO<CenterUserDetailRO>) {
@@ -39,7 +39,7 @@ export default class SocialUserModule extends Pinia {
     }
 
     setToken(token: string) {
-        this.token = token
+        this.userToken = token
         SocialuniTokenUtil.set(token)
     }
 
@@ -51,12 +51,12 @@ export default class SocialUserModule extends Pinia {
         return this.user && this.user.phoneNum
     }
 
-    removeUser() {
+    removeUserAndToken() {
         this.setUserAndToken(null)
     }
 
     setUser(user: CenterUserDetailRO) {
-        this.user = user
+        this.userInfo = user
         SocialuniUserStorageUtil.set(user)
     }
 
@@ -73,7 +73,7 @@ export default class SocialUserModule extends Pinia {
 
     loginOut() {
         return AlertUtil.confirm('是否退出登录').then(() => {
-            UserService.clearUserInfoCom()
+            UserService.userLogout()
             ToastUtil.toast('用户退出')
         })
     }
@@ -81,7 +81,7 @@ export default class SocialUserModule extends Pinia {
     destroyAccount() {
         return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             SocialuniUserAPI.destroyAccountAPI().then(() => {
-                UserService.clearUserInfoCom()
+                UserService.userLogout()
                 ToastUtil.toast('注销成功')
             })
         })
