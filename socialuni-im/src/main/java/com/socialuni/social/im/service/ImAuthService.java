@@ -38,4 +38,13 @@ public class ImAuthService {
         return imHttpComponent.parseResponse(post,ImTokenModel.class);
     }
 
+    /**
+     * 获得token
+     * @param userID
+     * @see #userToken(String)
+     * @return
+     */
+    public String getToken(String userID){
+        return this.userToken(userID).getToken();
+    }
 }

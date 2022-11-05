@@ -1,7 +1,7 @@
 package com.socialuni.social.im.service;
 
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.http.HttpUtil;
+import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.socialuni.social.im.model.ImInterface;
@@ -25,13 +25,15 @@ public class ImHttpComponent {
     @Value("${socialuni.openIm.secret:tuoyun}")
     private String secret;
 
-
     public String post(String uri, ImInterface obj){
-        return this.post( uri ,new JSONObject(obj));
+        return this.post( uri ,new JSONObject(obj),null);
     }
-    public String post(String uri, JSONObject jsonObject){
+    public String post(String uri, ImInterface obj,String token){
+        return this.post( uri ,new JSONObject(obj),token);
+    }
+    public String post(String uri, JSONObject jsonObject,String token){
         fillRequestBody(jsonObject);
-        return HttpUtil.post(getRequestUrl(uri),jsonObject.toString());
+        return HttpRequest.post(uri).timeout(10000).body(jsonObject.toString()).header("token",token).execute().body();
     }
     /**
      * 解析Response的响应体的内容。
