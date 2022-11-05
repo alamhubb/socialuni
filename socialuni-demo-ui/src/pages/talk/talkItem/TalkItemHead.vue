@@ -113,7 +113,7 @@ export default class TalkItemHead extends Vue {
   talk: TalkVO = null
 
   get user() {
-    return socialUserModule.user
+    return socialUserModule.getUser()
   }
 
   followBtnDisabled = false

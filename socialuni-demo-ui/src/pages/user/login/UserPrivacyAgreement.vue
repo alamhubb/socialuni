@@ -26,7 +26,7 @@ import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 @Options({})
 export default class UserPrivacyAgreement extends Vue {
   get user() {
-    return socialUserModule.user
+    return socialUserModule.getUser()
   }
 
   get userAgreementUrl(): string {

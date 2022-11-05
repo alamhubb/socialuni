@@ -119,7 +119,7 @@ import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 })
 export default class UserEditView extends Vue {
   get user() {
-    return socialUserModule.user
+    return socialUserModule.getUser()
   }
 
   nickname = ''

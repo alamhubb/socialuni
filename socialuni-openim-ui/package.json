@@ -52,7 +52,8 @@
     "vue": "^3.2.37",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-i18n": "^9.1.9",
-    "vue-property-decorator": "^10.0.0-rc.3"
+    "vue-property-decorator": "^10.0.0-rc.3",
+    "open-im-sdk": "^2.0.3"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",

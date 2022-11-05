@@ -3,7 +3,7 @@ import OpenImUserAPI from "@/api/OpenImUserAPI";
 
 @Store
 export default class OpenImUserModule extends Pinia {
-    platform = ""
+    platform: number = null
     operationID = ""
     userID = "3493949860"
     token = ""
@@ -24,11 +24,11 @@ export default class OpenImUserModule extends Pinia {
         screenWidth: 375,
     }
     loginStatus = false
- //是否登录
+    //是否登录
     loginUserInfo = null
 
     connectStatus = 1
- //服务器连接状态:0,:失败;1:成功;2:连接中
+    //服务器连接状态:0,:失败;1:成功;2:连接中
     apiConfig = {
         addr: "121.37.25.71", //服务器地址
         // api_addr: "http://43.128.5.63:10002", //api域名地址
@@ -41,39 +41,47 @@ export default class OpenImUserModule extends Pinia {
         object_storage: "minio", //选择存储
     }
 
-    set_systemInfo(state, systemInfo) {
-        console.log(systemInfo);
-        state.systemInfo = systemInfo;
-    }
-    set_platform(state, platform) {
-        state.platform = platform;
-    }
-    set_operationID(state, operationID) {
-        state.operationID = operationID;
-    }
-    set_userID(state, userID = "") {
-        state.userID = userID;
-    }
-    set_token(state, token = "") {
-        state.token = token;
-    }
-    set_userInfo(state, userInfo) {
-        state.userInfo = userInfo;
-    }
-    set_loginUserInfo(state, loginUserInfo = null) {
-        state.loginUserInfo = loginUserInfo;
-    }
-    set_loginStatus(state, loginStatus = false) {
-        state.loginStatus = loginStatus;
-    }
-    set_connectStatus(state, connectStatus = 0) {
-        state.connectStatus = connectStatus;
-    }
-    set_apiConfig(state, config) {
-        state.apiConfig = config;
+    set_systemInfo(systemInfo) {
+        this.systemInfo = systemInfo;
     }
 
-    login({ commit }, userInfo) {
+    set_platform(platform) {
+        this.platform = platform;
+    }
+
+    set_operationID(operationID) {
+        this.operationID = operationID;
+    }
+
+    set_userID(userID = "") {
+        this.userID = userID;
+    }
+
+    set_token(token = "") {
+        this.token = token;
+    }
+
+    set_userInfo(userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    set_loginUserInfo(loginUserInfo = null) {
+        this.loginUserInfo = loginUserInfo;
+    }
+
+    set_loginStatus(loginStatus = false) {
+        this.loginStatus = loginStatus;
+    }
+
+    set_connectStatus(connectStatus = 0) {
+        this.connectStatus = connectStatus;
+    }
+
+    set_apiConfig(config) {
+        this.apiConfig = config;
+    }
+
+    login({commit}, userInfo) {
         return new Promise((resolve, reject) => {
             OpenImUserAPI.app_login(userInfo)
                 .then((res) => {
@@ -82,7 +90,7 @@ export default class OpenImUserModule extends Pinia {
                         commit("set_userID", res.data.userID);
                         resolve();
                     } else {
-                        reject({ message: res.errMsg });
+                        reject({message: res.errMsg});
                     }
                 })
                 .catch((error) => {
@@ -91,12 +99,14 @@ export default class OpenImUserModule extends Pinia {
                 });
         });
     }
-    logOut({ commit, rootGetters }, im) {
+
+    logOut({commit, rootGetters}, im) {
         commit("set_token");
         commit("set_userID");
         commit("set_loginStatus");
         if (rootGetters.operationID && im) {
-            im.logout(rootGetters.operationID, () => {});
+            im.logout(rootGetters.operationID, () => {
+            });
         }
         // uni.clearStorage();
         uni.redirectTo({

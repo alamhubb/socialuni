@@ -1,5 +1,6 @@
-import TokenUtil from './TokenUtil'
+import SocialuniTokenUtil from './SocialuniTokenUtil'
 import CommonUtil from './CommonUtil'
+import {socialUserModule} from "../store/store";
 
 export default class WebsocketUtil {
   //失败重连时间
@@ -9,8 +10,8 @@ export default class WebsocketUtil {
   static websocketConnect (reload: boolean) {
     let token: string
 
-    if (TokenUtil.hasToken()) {
-      token = TokenUtil.get()
+    if (socialUserModule.hasToken) {
+      token = socialUserModule.getToken()
     } else {
       token = CommonUtil.getUUID()
     }

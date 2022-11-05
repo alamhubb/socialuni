@@ -8,9 +8,9 @@ import {
     socialLocationModule,
     socialNotifyModule,
     socialTagModule,
-    socialTalkModule
+    socialTalkModule, socialUserModule
 } from "./store";
-import TokenUtil from "../utils/TokenUtil";
+import SocialuniTokenUtil from "../utils/SocialuniTokenUtil";
 import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import AppInitDataRO from "socialuni-api/src/model/common/AppInitDataRO";
@@ -42,7 +42,7 @@ export default class SocialAppModule extends Pinia {
             socialAppModule.getHomeSwipersAction()
             // socialChatModule.getChatsAction()
             //如果有token获取
-            if (TokenUtil.hasToken()) {
+            if (socialUserModule.hasToken) {
                 //查询通知列表
                 socialNotifyModule.queryNotifiesAction()
             }

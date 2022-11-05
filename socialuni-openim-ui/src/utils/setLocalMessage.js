@@ -1,4 +1,4 @@
-import store from "@/store";
+import store from "@/plugins/openIm/store";
 export function set_messageToLocal(messageItem, im) {
   // console.log(messageItem);
   // const sessionType = messageItem.sessionType;

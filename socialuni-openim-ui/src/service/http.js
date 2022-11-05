@@ -1,4 +1,4 @@
-import store from "@/store";
+import store from "@/plugins/openIm/store";
 function request(method, url, data) {
   return new Promise((resolve, reject) => {
     const apiConfig = store.getters.apiConfig;

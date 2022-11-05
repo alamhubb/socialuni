@@ -1,6 +1,6 @@
 import { toast } from "@/common/toast";
 import { commonConfig } from "@/index";
-import store from "@/store";
+import store from "@/plugins/openIm/store";
 // const isDev = process.env.NODE_ENV === "development";
 const im = uni.requireNativePlugin("Tuoyun-OpenIMSDK");
 const event = uni.requireNativePlugin("globalEvent");
