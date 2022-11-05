@@ -72,7 +72,7 @@ public class SocialuniMineUserDetailROFactory {
         //设置openIm的key
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
         if (socialUserAccountDO == null) {
-            socialUserAccountDO = socialBindUserOpenImAccountDomain.bindUserOpenImAccount(mineUserId, socialUserDetailRO.getId());
+            socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUserId, socialUserDetailRO.getId());
         }
         mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());
 

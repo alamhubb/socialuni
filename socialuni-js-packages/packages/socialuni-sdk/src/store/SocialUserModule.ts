@@ -28,6 +28,13 @@ export default class SocialUserModule extends Pinia {
         return this.userToken
     }
 
+    get imToken() {
+        if (this.user) {
+            return this.user.imToken
+        }
+        return null
+    }
+
     setUserAndToken(loginRO: SocialLoginRO<CenterUserDetailRO>) {
         if (loginRO) {
             this.setUser(loginRO.user)

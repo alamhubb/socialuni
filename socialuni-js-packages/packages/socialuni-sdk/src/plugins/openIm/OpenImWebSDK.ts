@@ -10,7 +10,7 @@ export default class OpenImWebSDK implements OpenImAPI {
     init() {
         const config: InitConfig = {
             userID: socialUserModule.userId,
-            token: socialUserModule.token,
+            token: socialUserModule.imToken,
             url: import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL,
             platformID: OpenImPlatformType.web
         };
