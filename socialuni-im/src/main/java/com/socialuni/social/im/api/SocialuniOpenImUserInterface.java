@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("socialuni/im/user")
 @FeignClient(name = "socialuniImUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @Tag(name = "消息模块/消息用户模块", description = "暂未支持")
-public interface SocialuniOpenImgUserInterface {
+public interface SocialuniOpenImUserInterface {
 
     @Async
     @PostMapping("userLogin")
     void userLogin(@RequestBody SocialuniImUserModel imUserModel);
+
+    @PostMapping("getToken")
+    String getToken(String userId);
 }

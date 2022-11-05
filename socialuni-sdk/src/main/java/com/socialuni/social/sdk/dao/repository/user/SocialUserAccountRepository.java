@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.repository.user;
 
 
-import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserAccountRepository extends JpaRepository<SocialUserAccountDO, Integer> {
@@ -15,8 +15,6 @@ public interface SocialUserAccountRepository extends JpaRepository<SocialUserAcc
     //根据渠道和用户id查询用户账户信息
     SocialUserAccountDO findByProviderAndUserId(String provider, Integer userId);
 
-
-    SocialUserAccountDO findByUserId(Integer userId);
     SocialUserAccountDO findByUserIdOrderByUpdateTimeDesc(Integer userId);
 
 

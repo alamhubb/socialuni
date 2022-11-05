@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.constant;
 
 
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.constant.socialuni.OpenDataQueryType;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.config;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.social.user.sdk.entity.SocialTokenDO;
 import com.socialuni.social.sdk.dao.utils.SocialTokenDOUtil;
 import com.socialuni.social.user.sdk.api.SocialRequestUserConfig;
 import com.socialuni.social.web.sdk.config.SocialuniWebConfig;

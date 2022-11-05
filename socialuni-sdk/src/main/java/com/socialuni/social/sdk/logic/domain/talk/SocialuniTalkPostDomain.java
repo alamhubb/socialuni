@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.sdk.constant.UserType;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;

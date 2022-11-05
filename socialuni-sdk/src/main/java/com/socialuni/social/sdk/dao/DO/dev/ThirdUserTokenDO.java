@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.DO.dev;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
 
 import javax.persistence.*;

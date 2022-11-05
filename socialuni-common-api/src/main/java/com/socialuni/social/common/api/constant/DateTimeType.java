@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant.socialuni;
+package com.socialuni.social.common.api.constant;
 
 /**
  * @author qinkaiyuan

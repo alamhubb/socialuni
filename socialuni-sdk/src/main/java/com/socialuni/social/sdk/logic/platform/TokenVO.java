@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.platform;
 
-import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.social.user.sdk.entity.SocialTokenDO;
 import lombok.Data;
 
 /**

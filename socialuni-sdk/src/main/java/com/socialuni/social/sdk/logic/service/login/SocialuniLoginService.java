@@ -2,22 +2,15 @@ package com.socialuni.social.sdk.logic.service.login;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.im.contrller.SocialuniOpenImgUserFeign;
+import com.socialuni.social.im.contrller.SocialuniOpenImUserFeign;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
-import com.socialuni.social.sdk.logic.domain.login.SocialPhoneLoginDomain;
-import com.socialuni.social.sdk.logic.domain.login.SocialProviderLoginDomain;
-import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
-import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
-import com.socialuni.social.sdk.logic.entity.user.SocialProviderLoginEntity;
+import com.socialuni.social.sdk.logic.domain.login.SocialuniLoginDomain;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
-import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,25 +22,9 @@ import javax.transaction.Transactional;
 @Slf4j
 public class SocialuniLoginService {
     @Resource
-    private AuthThirdUserDomain authThirdUserDomain;
+    SocialuniLoginDomain socialPhoneLoginDomain;
     @Resource
-    private SocialProviderLoginDomain socialProviderLoginDomain;
-    @Resource
-    private SocialProviderLoginEntity socialProviderLoginEntity;
-    @Resource
-    private SocialPhoneLoginEntity socialPhoneLoginEntity;
-    @Resource
-    TokenManage tokenManage;
-    @Resource
-    ThirdUserTokenManage thirdUserTokenManage;
-    @Resource
-    SocialuniUnionIdInterface uniContentUnionIdRepository;
-    @Resource
-    SocialLoginService socialLoginService;
-    @Resource
-    SocialPhoneLoginDomain socialPhoneLoginDomain;
-    @Resource
-    SocialuniOpenImgUserFeign socialuniOpenImgUserFeign;
+    SocialuniOpenImUserFeign socialuniOpenImgUserFeign;
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
@@ -57,7 +34,7 @@ public class SocialuniLoginService {
         if (!UniappProviderType.values.contains(loginQO.getProvider())) {
             throw new SocialParamsException(UniappProviderType.notSupportTypeErrorMsg);
         }
-        SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
+        SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.providerLogin(loginQO);
         // 发布事件通过其他的第三方用户信息同步。
 //        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
 

@@ -4,6 +4,7 @@ import com.socialuni.social.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.utils.SocialUniProviderUtil;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -13,8 +14,8 @@ public class SocialBindUserProviderAccountEntity {
     @Resource
     SocialUserAccountManage socialUserAccountManage;
 
-    public void bindProviderAccount(Integer mineUserId, SocialProviderLoginQO loginQO) {
+    public SocialUserAccountDO bindProviderAccount(Integer mineUserId, SocialProviderLoginQO loginQO) {
         UniUnionIdRO uniUnionIdRO = SocialUniProviderUtil.getUnionIdRO(loginQO);
-        socialUserAccountManage.checkOrCreate(mineUserId, loginQO, uniUnionIdRO);
+        return socialUserAccountManage.checkOrCreateOrUpdate(mineUserId, loginQO, uniUnionIdRO);
     }
 }

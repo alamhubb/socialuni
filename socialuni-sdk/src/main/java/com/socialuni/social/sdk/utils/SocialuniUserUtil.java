@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.exception.exception.SocialNotLoginExcepti
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.sdk.dao.DO.user.SocialTokenDO;
+import com.socialuni.social.user.sdk.entity.SocialTokenDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;

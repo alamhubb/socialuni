@@ -12,6 +12,7 @@ import java.util.List;
 public class SocialuniAccountProviderType extends UniappProviderType {
     //渠道
     public static final String socialuni = "socialuni";
+    public static final String openIm = "openIm";
 
     public static final List<String> values = Arrays.asList(SocialuniAccountProviderType.qq, SocialuniAccountProviderType.wx, SocialuniAccountProviderType.socialuni);
 }

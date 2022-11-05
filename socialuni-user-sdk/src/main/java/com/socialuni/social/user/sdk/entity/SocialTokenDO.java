@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.dao.DO.user;
+package com.socialuni.social.user.sdk.entity;
 
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

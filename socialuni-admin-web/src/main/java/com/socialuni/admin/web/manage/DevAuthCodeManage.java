@@ -2,7 +2,7 @@ package com.socialuni.admin.web.manage;
 
 import com.socialuni.admin.web.repository.DevAuthCodeRepository;
 import com.socialuni.social.sdk.dao.DO.dev.DevAuthCodeDO;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.utils.IntegerUtils;
 import lombok.extern.slf4j.Slf4j;
