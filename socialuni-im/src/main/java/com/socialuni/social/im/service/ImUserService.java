@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * <a href='https://doc.rentsoft.cn:8000/swagger/index.html#/鉴权认证'>鉴权服务接口</a>
+ * <a href='https://doc.rentsoft.cn:8000/swagger/index.html#/用户相关'>用户相关</a>
  * @author wulinghui
  * @version 1.0
  * @module Socialuni
