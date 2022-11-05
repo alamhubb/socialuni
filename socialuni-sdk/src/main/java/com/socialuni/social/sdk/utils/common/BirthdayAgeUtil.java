@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.utils.common;
 
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
@@ -14,6 +15,14 @@ import java.util.Date;
 public class BirthdayAgeUtil {
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat birthdayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static Date getBirthDayByBirthString(String birthDayStr) {
+        try {
+            return BirthdayAgeUtil.birthdayDateFormat.parse(birthDayStr);
+        } catch (ParseException e) {
+            throw new SocialParamsException("用户生日格式错误");
+        }
+    }
 
     //根据出生日期，获取年龄
     public static int getAgeByBirth(String birthDayStr) {

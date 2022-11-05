@@ -2,7 +2,7 @@ package com.socialuni.social.im.event;
 
 import cn.hutool.http.HttpUtil;
 import com.socialuni.social.common.sdk.event.ddd.AbstractJsonEventConsum;
-import com.socialuni.social.im.model.ImUserModel;
+import com.socialuni.social.im.model.SocialuniImUserModel;
 import com.socialuni.social.im.service.ImAuthService;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.GenericConversionService;
@@ -29,7 +29,7 @@ public class UserEventConsum extends AbstractJsonEventConsum {
     @Override
     public void consumEvent(Map<String, Object> map) {
         // 注册到Im
-        ImUserModel imUserModel = new ImUserModel();
+        SocialuniImUserModel imUserModel = new SocialuniImUserModel();
         imUserModel.setUserID( conversionService.convert(map.get("id"),String.class) );
         imUserModel.setNickname(conversionService.convert(map.get("nickname"),String.class) );
         imUserModel.setFaceURL( conversionService.convert(map.get("avatar"),String.class));

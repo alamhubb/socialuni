@@ -1,4 +1,4 @@
-package com.socialuni.social.controller;
+package com.socialuni.social.demo.controller;
 
 
 import com.socialuni.social.sdk.logic.service.SocialuniOAuthService;

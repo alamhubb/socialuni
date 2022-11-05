@@ -12,9 +12,9 @@ import java.util.Date;
  * @since 1.0
  */
 @Data
-public class ImUserModel implements ImInterface {
-   Date birth;  // 用户生日
-   Date createTime; // 创建时间
+public class SocialuniImUserModel implements ImInterface {
+    Date birth;  // 用户生日
+    Date createTime; // 创建时间
     String email;  // 用户邮箱地址
     String ex;     // 用户信息扩展字段对象Json字符串
     /**
@@ -22,17 +22,17 @@ public class ImUserModel implements ImInterface {
      */
     String faceURL;  //'
     // 用户性别 0:未知 1:女 2:男
-    int  gender;
+    Integer gender;
     /**
      * 用户昵称
      */
-    String  nickname ;
+    String nickname;
     /**
      * 用户手机号
      */
-    String  phoneNumber;
+    String phoneNumber;
     /**
-     *  用户id
+     * 用户id
      */
     String userID;
 }

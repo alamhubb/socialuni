@@ -2,8 +2,7 @@ package com.socialuni.social.sdk.logic.service.login;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
-import com.socialuni.social.im.model.ImUserModel;
+import com.socialuni.social.im.contrller.SocialuniOpenImgUserFeign;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.logic.domain.login.SocialPhoneLoginDomain;
 import com.socialuni.social.sdk.logic.domain.login.SocialProviderLoginDomain;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import java.util.Date;
 
 @Service
 @Slf4j
@@ -48,7 +46,8 @@ public class SocialuniLoginService {
     SocialLoginService socialLoginService;
     @Resource
     SocialPhoneLoginDomain socialPhoneLoginDomain;
-
+    @Resource
+    SocialuniOpenImgUserFeign socialuniOpenImgUserFeign;
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
@@ -60,7 +59,10 @@ public class SocialuniLoginService {
         }
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialProviderLoginDomain.providerLogin(loginQO);
         // 发布事件通过其他的第三方用户信息同步。
-        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
+//        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
+
+        socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(socialLoginRO.getUser()));
+
         return ResultRO.success(socialLoginRO);
     }
 
@@ -78,8 +80,11 @@ public class SocialuniLoginService {
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
         // 发布事件通过其他的第三方用户信息同步。
         SocialuniMineUserDetailRO user = socialLoginRO.getUser();
-;
-        EventPublisherFacade.publishEvent("userLogin", user);
+
+//        EventPublisherFacade.publishEvent("userLogin", user);
+        socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user));
+
+//        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);
     }
 

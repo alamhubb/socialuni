@@ -1,4 +1,4 @@
-package com.socialuni.social.controller;
+package com.socialuni.social.demo.controller;
 
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.common.api.model.ResultRO;

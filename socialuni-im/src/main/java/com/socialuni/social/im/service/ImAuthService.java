@@ -1,7 +1,7 @@
 package com.socialuni.social.im.service;
 
 import com.socialuni.social.im.model.ImTokenModel;
-import com.socialuni.social.im.model.ImUserModel;
+import com.socialuni.social.im.model.SocialuniImUserModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,7 +23,7 @@ public class ImAuthService {
      * 用户注册
      * @param userModel
      */
-    public void userRegister(ImUserModel userModel){
+    public void userRegister(SocialuniImUserModel userModel){
         imHttpComponent.post("/auth/user_register",userModel);
     }
     /**
@@ -32,7 +32,7 @@ public class ImAuthService {
      * @param userID
      */
     public ImTokenModel userToken(String userID){
-        ImUserModel userModel = new ImUserModel();
+        SocialuniImUserModel userModel = new SocialuniImUserModel();
         userModel.setUserID(userID);
         String post = imHttpComponent.post("/auth/user_token", userModel);
         return imHttpComponent.parseResponse(post,ImTokenModel.class);

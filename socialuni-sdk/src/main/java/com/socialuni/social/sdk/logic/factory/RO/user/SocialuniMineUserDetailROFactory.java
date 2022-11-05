@@ -1,11 +1,14 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
+import com.socialuni.social.im.model.SocialuniImUserModel;
+import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
@@ -15,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Component
 public class SocialuniMineUserDetailROFactory {
@@ -78,5 +82,20 @@ public class SocialuniMineUserDetailROFactory {
         }
 //        }
         return mineUserDetailRO;
+    }
+
+
+    public static SocialuniImUserModel toImUserModel(SocialuniMineUserDetailRO user) {
+        SocialuniImUserModel imUser = new SocialuniImUserModel();
+        // 注册到Im
+        SocialuniImUserModel imUserModel = new SocialuniImUserModel();
+        imUserModel.setUserID(user.getId());
+        imUserModel.setNickname(user.getNickname());
+        imUserModel.setFaceURL(user.getAvatar());
+        imUserModel.setGender(GenderTypeNumEnum.getValueByName(user.getGender()));
+        imUserModel.setPhoneNumber(user.getPhoneNum());
+        imUserModel.setBirth(BirthdayAgeUtil.getBirthDayByBirthString(user.getBirthday()));
+        imUserModel.setCreateTime(new Date());
+        return imUser;
     }
 }

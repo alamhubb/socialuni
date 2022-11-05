@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev
+#    active: demo
+#    active: prod
+  jpa:
+    database: MYSQL
+    show-sql: false
+#    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+        format_sql: true
+  #不要为我们工程中的资源文件建立映射
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references : true
+  flyway:
+    # 设置不clean表，这里会处理clean()方法，从而删库. https://zhuanlan.zhihu.com/p/51170727
+    cleanOnValidationError: false
+    # 避免0.0.9和1.0.0的sql不执行。
+    baselineVersion: 0
+    # 不合并sql,按照给出的sql执行。
+    baselineOnMigrate: true
+    # 不替换变量
+    placeholderReplacement: false
+    enabled: false
+  sql:
+    init:
+      mode: never
+      data-locations: classpath:dataInit/data.sql
+  web:
+    resources:
+      add-mappings: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:mapper/*.xml
+logging:
+  file:
+    name: socialuni.log
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping : trace
+
+

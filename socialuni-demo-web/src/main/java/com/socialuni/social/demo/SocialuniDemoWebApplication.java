@@ -1,4 +1,4 @@
-package com.socialuni.social;
+package com.socialuni.social.demo;
 
 import cn.hutool.extra.spring.EnableSpringUtil;
 import com.socialuni.social.sdk.config.EnableSocialuni;
