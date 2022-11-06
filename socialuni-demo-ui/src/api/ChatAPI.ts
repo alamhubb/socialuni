@@ -1,7 +1,7 @@
 import request from "socialuni-api/src/request/request";
 import ChatReadVO from "socialuni-api/src/model/chat/ChatReadVO";
 import ChatRemoveVO from "socialuni-api/src/model/chat/ChatRemoveVO";
-import ChatVO from "socialuni-api/src/model/chat/ChatVO";
+import SocialuniChatRO from "socialuni-api/src/model/chat/SocialuniChatRO";
 
 export default class ChatAPI {
     /*static getChatAPI (user: UserVO) {
@@ -29,6 +29,6 @@ export default class ChatAPI {
     }
 
     static openChatAPI(chatId: number, needPayOpen = false, content) {
-        return request.post<ChatVO>('chat/openChat', {id: chatId, needPayOpen, content})
+        return request.post<SocialuniChatRO>('chat/openChat', {id: chatId, needPayOpen, content})
   }
 }

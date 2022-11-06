@@ -71,7 +71,7 @@
 <script lang="ts">
 import ChatType from 'socialuni-constant/constant/ChatType'
 import CommonStatus from 'socialuni-constant/constant/CommonStatus'
-import ChatVO from 'socialuni-api/src/model/chat/ChatVO'
+import SocialuniChatRO from 'socialuni-api/src/model/chat/SocialuniChatRO'
 import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
@@ -83,9 +83,10 @@ import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 
 
 @Options({})
-export default class ChatPage extends Vue {
+export default class ChatView extends Vue {
 
   get chats() {
+    console.log(socialChatModule.chats.length)
     return socialChatModule.chats
   }
 
@@ -160,7 +161,7 @@ export default class ChatPage extends Vue {
     })
   }
 
-  get showChats(): ChatVO[] {
+  get showChats(): SocialuniChatRO[] {
     if (this.chats && this.chats.length) {
       //a和b比较，返回结果1，则倒序，后者在前面
       return this.chats.sort((chat, chatAfter) => {
@@ -221,7 +222,7 @@ export default class ChatPage extends Vue {
     }
   }*/
 
-  toMessagePage(chat: ChatVO) {
+  toMessagePage(chat: SocialuniChatRO) {
     //需要先清除，再跳转页面
     socialChatModule.setChatIdToMessagePage(chat.id)
   }

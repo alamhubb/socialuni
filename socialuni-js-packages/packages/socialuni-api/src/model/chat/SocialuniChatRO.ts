@@ -1,9 +1,10 @@
 import MessageVO from '../message/MessageVO'
+import {OpenImChatRO} from "./OpenImChatRO";
 
-export default class ChatVO {
-  public id: number = null
+export default class SocialuniChatRO {
+  public id: string = null
   public nickname: string = null
-  public type: string = null
+  public type: number = null
   public status: string = null
   public messages: MessageVO[] = []
   public avatar: string = null
@@ -17,24 +18,26 @@ export default class ChatVO {
   public receiveUserId: string = null
   public loadMore: string = null
 
-  /* constructor (chat?: ChatVO) {
-    if (chat) {
-      this.id = chat.id
-      this.nickname = chat.nickname
-      this.type = chat.type
-      this.status = chat.status
-      this.messages = chat.messages
-      this.avatar = chat.avatar
-      this.topLevel = chat.topLevel
-      this.topFlag = chat.topFlag
-      this.unreadNum = chat.unreadNum
-      this.updateTime = chat.updateTime
-      this.lastContent = chat.lastContent
-      this.vipFlag = chat.vipFlag
-      this.receiveUserId = chat.receiveUserId
-      this.loadMore = chat.loadMore
+
+
+
+   constructor (openImChat?: OpenImChatRO) {
+    if (openImChat) {
+      this.id = openImChat.conversationID
+      this.nickname = openImChat.showName
+      this.type = openImChat.conversationType
+      // this.messages = chat.messages
+      this.avatar = openImChat.faceURL
+      // this.topLevel = chat.topLevel
+      this.topFlag = openImChat.isPinned
+      this.unreadNum = openImChat.unreadCount
+      this.updateTime = openImChat.latestMsgSendTime
+      // this.lastContent = openImChat.lastContent
+      // this.vipFlag = chat.vipFlag
+      this.receiveUserId = openImChat.userID
+      // this.loadMore = chat.loadMore
     }
-  }*/
+  }
 /*
   static creatChat (user: UserVO): ChatVO {
     constant chat = new ChatVO()

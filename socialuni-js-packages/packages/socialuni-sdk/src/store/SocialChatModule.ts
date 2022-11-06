@@ -1,5 +1,4 @@
 import {Pinia, Store} from "pinia-class-component"
-import ChatVO from "socialuni-api/src/model/chat/ChatVO";
 import PageUtil from "../utils/PageUtil";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import {socialChatModule, socialUserModule} from "./store";
@@ -10,16 +9,39 @@ import PlatformUtils from "../utils/PlatformUtils";
 import MessageAPI from "socialuni-api/src/api/MessageAPI";
 import ChatType from "socialuni-constant/constant/ChatType";
 import CommonUtil from "../utils/CommonUtil";
+import openIm, {openImLogin} from "../plugins/openIm/openIm";
+import JsonUtil from "../utils/JsonUtil";
+import {OpenImChatRO} from "socialuni-api/src/model/chat/OpenImChatRO";
+import SocialuniChatRO from "socialuni-api/src/model/chat/SocialuniChatRO";
 
 @Store
 export default class SocialChatModule extends Pinia {
     chatId: number = null
-    chats: ChatVO[] = []
+    chats: SocialuniChatRO[] = []
     scrollTop: number = 0
     chatsUnreadNumTotal = 0
 
+    async queryAppLunchChats() {
+        console.log(123)
+        await openImLogin()
+
+        const options = {
+            offset: 0,
+            count: 20
+        }
+        openIm.getConversationListSplit(options).then(({data}) => {
+            console.log(data)
+            const chats: OpenImChatRO[] = JsonUtil.parse(data)
+            this.chats = chats.map(item => new SocialuniChatRO(item))
+        })
+    }
+
+    async queryChats() {
+
+    }
+
     //仅负责，排序展示，在chatVue界面实现了
-    /*get chats (): ChatVO[] {
+    /*get chats (): SocialuniChatRO[] {
       //a和b比较，返回结果1，则倒序，后者在前面
       return this.queryChats.sort((chat, chatAfter) => {
         //如果置顶优先级比较高，则排前面
@@ -45,7 +67,7 @@ export default class SocialChatModule extends Pinia {
 
 
     //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
-    get chat(): ChatVO {
+    get chat(): SocialuniChatRO {
         return this.chats[this.chatIndex]
         // return this.chats[0this.chatIndex.]
     }
@@ -79,7 +101,7 @@ export default class SocialChatModule extends Pinia {
     }
 
 
-    userDetailToMessagePage(chat: ChatVO) {
+    userDetailToMessagePage(chat: SocialuniChatRO) {
         //第一步，先看列表中是否已有与此用户的聊天列表
         const findChat = this.chats.find(item => item.id === chat.id)
         //如果已有,则直接跳转过去
@@ -95,7 +117,7 @@ export default class SocialChatModule extends Pinia {
             this.setChatId(chat.id)
             //后台创建真实chat
             ChatAPI.getChatAPI(user).then(res => {
-              constant resultChat: ChatVO = res.data
+              constant resultChat: SocialuniChatRO = res.data
               //修改mock chatId
               chat.id = resultChat.id
               //修改当前chat的id
@@ -119,7 +141,7 @@ export default class SocialChatModule extends Pinia {
     }
 
     //来消息后，替换已有chat
-    pushMsgReplaceChat(chatIndex, chat: ChatVO) {
+    pushMsgReplaceChat(chatIndex, chat: SocialuniChatRO) {
         const oldChat = this.chats[chatIndex]
         const messages: MessageVO[] = oldChat.messages
         //将新消息放到当前msg中
@@ -131,7 +153,7 @@ export default class SocialChatModule extends Pinia {
     }
 
 
-    replaceChat(chatIndex, chat: ChatVO) {
+    replaceChat(chatIndex, chat: SocialuniChatRO) {
         this.chats.splice(chatIndex, 1, chat)
     }
 
@@ -194,7 +216,7 @@ export default class SocialChatModule extends Pinia {
     //一，在展示当前chat，2没在，但是列表中有，3列表中没有
     //如果是正在聊的，需要改为，已读，先不做已读未读
 
-    pushChatAndMessagesAction(newChat: ChatVO) {
+    pushChatAndMessagesAction(newChat: SocialuniChatRO) {
         // console.log('出发了pushchat')
         // 如果正在这个chat聊天
         if (RouterUtil.getCurrentPageURI() === PagePath.message && this.chatId === newChat.id) {
@@ -261,7 +283,7 @@ export default class SocialChatModule extends Pinia {
 
     // 前台和后台都将chat和msg改为已读,更新chat的时间
 
-    readChatAction(chat: ChatVO) {
+    readChatAction(chat: SocialuniChatRO) {
         //目前不根据点击时间更新，只根据消息时间更新
         // chat.updateTime = new Date().getTime()
         // 不为自己的 且未读的
@@ -292,7 +314,7 @@ export default class SocialChatModule extends Pinia {
         })*/
     }
 
-    setChats(chats: ChatVO[]) {
+    setChats(chats: SocialuniChatRO[]) {
         this.chats = chats
         this.computedChatsUnreadNumTotalAction()
     }
@@ -316,7 +338,7 @@ export default class SocialChatModule extends Pinia {
   }*/
 /*
 
-  pushChatAction (newChat: ChatVO) {
+  pushChatAction (newChat: SocialuniChatRO) {
     this.chats.unshift(newChat)
   }*/
 

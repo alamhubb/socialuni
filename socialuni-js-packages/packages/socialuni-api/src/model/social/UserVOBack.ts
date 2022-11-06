@@ -1,6 +1,6 @@
 import DistrictVO from '../DistrictVO'
 import ImgFileVO from '../ImgFileVO'
-import ChatVO from '../chat/ChatVO'
+import SocialuniChatRO from '../chat/SocialuniChatRO'
 
 export default class UserVOBack {
   id: string = null
@@ -62,5 +62,5 @@ export default class UserVOBack {
   //是否允许发送消息
   allowSendMsg: boolean = null
   // showBuyMsg: boolean = null
-  chat: ChatVO = null
+  chat: SocialuniChatRO = null
 }
