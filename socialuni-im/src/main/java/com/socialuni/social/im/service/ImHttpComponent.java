@@ -33,7 +33,7 @@ public class ImHttpComponent {
     }
     public String post(String uri, JSONObject jsonObject,String token){
         fillRequestBody(jsonObject);
-        return HttpRequest.post(uri).timeout(10000).body(jsonObject.toString()).header("token",token).execute().body();
+        return HttpRequest.post(getRequestUrl(uri)).timeout(10000).body(jsonObject.toString()).header("token",token).execute().body();
     }
     /**
      * 解析Response的响应体的内容。
