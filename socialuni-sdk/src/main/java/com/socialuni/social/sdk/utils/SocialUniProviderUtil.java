@@ -9,6 +9,8 @@ public class SocialUniProviderUtil {
         String provider = unionIdData.getProvider();
         if (SocialuniAccountProviderType.socialuni.equals(provider)) {
             return SocialProviderUtil.getSocialUnionIdRO(unionIdData);
+        } else if (SocialuniAccountProviderType.openIm.equals(provider)) {
+            return SocialProviderUtil.getOpenImUnionIdRO(unionIdData);
         }
         return UniProviderUtil.getUnionIdRO(unionIdData);
     }

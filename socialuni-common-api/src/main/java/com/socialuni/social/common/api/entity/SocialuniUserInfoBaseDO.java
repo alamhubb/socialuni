@@ -15,7 +15,7 @@ import java.io.Serializable;
 @MappedSuperclass
 @NoArgsConstructor
 public class SocialuniUserInfoBaseDO extends SocialuniBaseDO implements Serializable {
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private Integer userId;
 
     public SocialuniUserInfoBaseDO(Integer userId) {

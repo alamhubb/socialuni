@@ -1,7 +1,8 @@
 import JsonUtils from './ObjectUtil'
-import TokenUtil from './TokenUtil'
+import SocialuniTokenUtil from './SocialuniTokenUtil'
 import CommonUtil from './CommonUtil'
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
+import {socialUserModule} from "../store/store";
 
 export default class ImgUtil {
   // static readonly imgUrl: string = process.env.VUE_APP_BASE + 'img/'
@@ -13,7 +14,7 @@ export default class ImgUtil {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
         header: {
-          token: TokenUtil.get()
+          token: socialUserModule.token
         },
         filePath: uploadImg,
         name: 'file',
@@ -39,7 +40,7 @@ export default class ImgUtil {
       uni.uploadFile({
         url: ImgUtil.uploadImgUrl,
         header: {
-          token: TokenUtil.get()
+          token: socialUserModule.token
         },
         filePath: uploadImg,
         name: 'file',

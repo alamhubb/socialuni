@@ -1,5 +1,5 @@
 import { toast } from "@/common/toast";
-import store from "@/store";
+import store from "@/plugins/openIm/store";
 export function scan(sessionType = "0", im) {
   //0、两种都搜索，1、单聊，2、群聊
   // #ifdef APP-PLUS

@@ -6,6 +6,8 @@ export default class CenterUserDetailRO {
   avatar: string = ''
   gender: string = null
   schoolName: string = null
+  //im模块的token
+  imToken: string = null
   socialCoin: number = null
   //联系方式
   contactInfo: string = null

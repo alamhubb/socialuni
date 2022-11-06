@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.manage;
 
 import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
@@ -21,19 +21,22 @@ public class SocialUserAccountManage {
     @Resource
     SocialUserAccountStore socialUserAccountStore;
 
-    public void updateSessionKey(String provider, String sessionKey, Integer mineUserId) {
+    public SocialUserAccountDO updateSessionKey(Integer mineUserId, String provider, String sessionKey) {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(provider, mineUserId);
         //更新数据库的key
         socialUserAccountDO.setUpdateTime(new Date());
         //再次更新下sessionkey
         socialUserAccountDO.setSessionKey(sessionKey);
         socialUserAccountDO = socialUserAccountRepository.save(socialUserAccountDO);
+        return socialUserAccountDO;
     }
 
-    public void checkOrCreate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
+    public SocialUserAccountDO checkOrCreateOrUpdate(Integer userId, SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountStore.getAccountByUnionId(loginQO, uniUnionIdRO);
         if (socialUserAccountDO == null) {
-            this.create(userId, loginQO, uniUnionIdRO);
+            return this.create(userId, loginQO, uniUnionIdRO);
+        } else {
+            return this.updateSessionKey(userId, loginQO.getProvider(), uniUnionIdRO.getSession_key());
         }
     }
 

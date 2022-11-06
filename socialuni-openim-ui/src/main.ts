@@ -4,12 +4,12 @@ import {createPinia} from "pinia";
 import './app.scss'
 
 const pinia = createPinia()
-
-console.log(111111)
+import openIm from "@/plugins/openIm/openIm";
 
 export function createApp() {
   const app = createSSRApp(App);
   app.use(pinia)
+  app.use(openIm)
   return {
     app,
   };

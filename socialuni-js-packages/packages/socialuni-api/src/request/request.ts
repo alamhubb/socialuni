@@ -1,5 +1,5 @@
 import HttpRequest, {requestConfig} from "./httpRequest";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import TokenUtil from "socialuni-sdk/src/utils/TokenUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni-sdk/src/service/UserService";
@@ -23,7 +23,7 @@ request.setConfig(config => { /* 设置全局配置 */
     return config
 })
 request.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
-    const token = TokenUtil.get()
+    const token = socialUserModule.token
     if (token) {
         config.header.token = token
         //下次尝试把这里删除
@@ -72,13 +72,13 @@ request.interceptor.response(
                     case ErrorConst.not_logged:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.clearUserInfoCom()
+                        UserService.userLogout()
                         MsgUtil.unLoginMessage()
                         break
                     case ErrorConst.banned:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.clearUserInfoCom()
+                        UserService.userLogout()
                         AlertUtil.hint(errorMsg)
                         break
                     case ErrorConst.custom:

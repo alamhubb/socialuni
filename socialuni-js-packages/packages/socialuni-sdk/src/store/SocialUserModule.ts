@@ -1,7 +1,7 @@
-import UserStorageUtil from '../utils/UserStorageUtil'
+import SocialuniUserStorageUtil from '../utils/SocialuniUserStorageUtil'
 import AlertUtil from '../utils/AlertUtil'
 import ToastUtil from '../utils/ToastUtil'
-import TokenUtil from '../utils/TokenUtil'
+import SocialuniTokenUtil from '../utils/SocialuniTokenUtil'
 
 //用来存储当前用户的一些信息
 import {Pinia, Store} from "pinia-class-component"
@@ -13,7 +13,42 @@ import {socialUserModule} from "./store";
 
 @Store
 export default class SocialUserModule extends Pinia {
-    user: CenterUserDetailRO = UserStorageUtil.get() || null
+    private userInfo: CenterUserDetailRO = SocialuniUserStorageUtil.get() || null
+    private userToken: string = SocialuniTokenUtil.get() || null
+
+    get user() {
+        return this.userInfo
+    }
+
+    get hasToken(): boolean {
+        return !!this.userToken
+    }
+
+    get token() {
+        return this.userToken
+    }
+
+    get imToken() {
+        if (this.user) {
+            return this.user.imToken
+        }
+        return null
+    }
+
+    setUserAndToken(loginRO: SocialLoginRO<CenterUserDetailRO>) {
+        if (loginRO) {
+            this.setUser(loginRO.user)
+            this.setToken(loginRO.token)
+        } else {
+            this.setToken(null)
+            this.setUser(null)
+        }
+    }
+
+    setToken(token: string) {
+        this.userToken = token
+        SocialuniTokenUtil.set(token)
+    }
 
     isMine(user: CenterUserDetailRO) {
         return user && this.user && user.id === this.user.id
@@ -23,14 +58,13 @@ export default class SocialUserModule extends Pinia {
         return this.user && this.user.phoneNum
     }
 
-    removeUser() {
-        this.user = null
-        UserStorageUtil.remove()
+    removeUserAndToken() {
+        this.setUserAndToken(null)
     }
 
     setUser(user: CenterUserDetailRO) {
-        this.user = user
-        UserStorageUtil.set(user)
+        this.userInfo = user
+        SocialuniUserStorageUtil.set(user)
     }
 
     get hasUser(): boolean {
@@ -46,21 +80,15 @@ export default class SocialUserModule extends Pinia {
 
     loginOut() {
         return AlertUtil.confirm('是否退出登录').then(() => {
-            UserService.clearUserInfoCom()
+            UserService.userLogout()
             ToastUtil.toast('用户退出')
         })
     }
 
-    loginAfterSetUserAndToken(loginRO: SocialLoginRO<CenterUserDetailRO>) {
-        TokenUtil.set(loginRO.token)
-        this.setUser(loginRO.user)
-    }
-
-
     destroyAccount() {
         return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
             SocialuniUserAPI.destroyAccountAPI().then(() => {
-                UserService.clearUserInfoCom()
+                UserService.userLogout()
                 ToastUtil.toast('注销成功')
             })
         })

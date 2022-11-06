@@ -20,7 +20,7 @@ public class SocialProviderLoginQO {
 
     //为什么这里存用户名什么的，因为app时，微信情况下，直接有unionId，就不再去请求了
     //app平台兑换openid unionid使用,目测 accessToken无用了
-    private String accessToken;
+//    private String accessToken;
     //小程序平台兑换openid unionid使用
     private String code;
 

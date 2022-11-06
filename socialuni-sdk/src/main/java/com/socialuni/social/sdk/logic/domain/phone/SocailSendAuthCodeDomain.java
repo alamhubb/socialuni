@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.sdk.dao.repository.AuthenticationRepository;

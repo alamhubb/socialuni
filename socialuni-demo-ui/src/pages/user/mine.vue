@@ -117,7 +117,6 @@ import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 })
 export default class QcMineDetail extends Vue {
   get mineUser() {
-    console.log(socialUserModule.user)
     return socialUserModule.user
   }
 

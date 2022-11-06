@@ -12,12 +12,15 @@ import lombok.NoArgsConstructor;
 public class SocialuniMineUserDetailRO extends SocialuniUserDetailRO {
     private String phoneNum;
     private String birthday;
+    //im一般使用三方服务，需要单独的token
+    private String imToken;
     private Integer socialCoin;
     private Boolean openContactInfo;
 
     public SocialuniMineUserDetailRO(SocialuniMineUserDetailRO userRO) {
         super(userRO);
         this.phoneNum = userRO.getPhoneNum();
+        this.imToken = userRO.getImToken();
         this.birthday = userRO.getBirthday();
         this.socialCoin = userRO.getSocialCoin();
         this.openContactInfo = userRO.getOpenContactInfo();

@@ -37,7 +37,7 @@
       </view>
     </u-sticky>-->
     <view class="container">
-<!--      <uni-list :border="false" class="list">
+      <uni-list :border="false" class="list">
         <uni-swipe-action>
           <uni-swipe-action-item
               v-for="item in messageList"
@@ -52,7 +52,7 @@
             </uni-list-item>
           </uni-swipe-action-item>
         </uni-swipe-action>
-      </uni-list>-->
+      </uni-list>
     </view>
     <view v-show="addPop.show" class="addContent" @click="addPop.show = false">
       <view class="addContent-pop" :style="addPop.style">
@@ -98,13 +98,13 @@ import {Options, Vue, Watch} from 'vue-property-decorator'
 
 import MessageCard from "@/components/MessageCard.vue";
 import Avatar from "@/components/Avatar.vue";
-import {openImUserModule} from "@/store/store";
+import {openImUserModule} from "@/plugins/openIm/store/store";
 
 
 @Options({
   components: {MessageCard, Avatar}
 })
-export default class TalkView extends Vue {
+export default class IndexView extends Vue {
   searchContent = ""
   actionOptions = [
     {

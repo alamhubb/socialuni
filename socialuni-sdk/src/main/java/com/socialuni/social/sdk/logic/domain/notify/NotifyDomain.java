@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.DO.chat.ChatUserDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import com.socialuni.social.sdk.dao.repository.MessageReceiveRepository;
 import com.socialuni.social.sdk.dao.repository.NotifyRepository;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;

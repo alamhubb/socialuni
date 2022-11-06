@@ -1,4 +1,4 @@
-import store from "@/store";
+import store from "@/plugins/openIm/store";
 import { post } from "../http";
 export function app_login(data) {
   const d = {

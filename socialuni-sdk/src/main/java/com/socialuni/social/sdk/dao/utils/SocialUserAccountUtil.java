@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.dao.utils;
 
 import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.sdk.dao.DO.user.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;

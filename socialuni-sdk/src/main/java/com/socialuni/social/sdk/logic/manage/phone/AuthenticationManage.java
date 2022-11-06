@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.manage.phone;
 
 import com.socialuni.social.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.utils.IntegerUtils;
-import com.socialuni.social.sdk.constant.socialuni.DateTimeType;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.sdk.dao.repository.AuthenticationRepository;

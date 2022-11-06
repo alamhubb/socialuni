@@ -1,5 +1,5 @@
 import request from "@/plugins/request/request";
-import {openImUserModule} from "@/store/store";
+import {openImUserModule} from "@/plugins/openIm/store/store";
 
 export default class OpenImUserAPI {
     static app_login(data) {
