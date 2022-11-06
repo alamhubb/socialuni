@@ -1,6 +1,6 @@
 import MessageAddVO from "socialuni-api/src/model/message/MessageAddVO";
 import request from "socialuni-api/src/request/request";
-import openIm from "socialuni-sdk/src/plugins/openIm/openIm";
+import openIm from "../../openIm/openIm";
 
 export default class SocialuniMsg {
     static async sendMsgAPI<T>(chatId: string, content: string) {

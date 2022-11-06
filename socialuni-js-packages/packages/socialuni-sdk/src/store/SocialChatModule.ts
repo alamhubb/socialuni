@@ -13,6 +13,7 @@ import openIm, {openImLogin} from "../plugins/openIm/openIm";
 import JsonUtil from "../utils/JsonUtil";
 import SocialuniChatRO from "socialuni-api/src/model/chat/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
+import SocialuniMsg from "../plugins/socialuni-im/src/SocialuniMsg";
 
 @Store
 export default class SocialChatModule extends Pinia {
@@ -273,8 +274,7 @@ export default class SocialChatModule extends Pinia {
         // 不能监控变化滚动，有时候是往前面插入
 
 
-
-        MessageAPI.sendMsgAPI<MessageVO>(this.chat.id, msg.content).then((res) => {
+        SocialuniMsg.sendMsgAPI<MessageVO>(this.chat.id, msg.content).then((res) => {
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
             this.messages.splice(index, 1, res.data)
