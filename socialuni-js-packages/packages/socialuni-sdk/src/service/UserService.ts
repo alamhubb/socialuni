@@ -2,7 +2,7 @@ import WebsocketUtil from '../utils/WebsocketUtil'
 import {socialNotifyModule, socialUserModule} from "../store/store";
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import openIm from "../plugins/openIm/openIm";
+import {initOpenIm} from "../plugins/openIm/openIm";
 
 export default class UserService {
     //清空用户信息的组合操作
@@ -12,9 +12,9 @@ export default class UserService {
         WebsocketUtil.websocketClose()
     }
 
-    static getAppLunchDataByHasUser(){
+    static getAppLunchDataByHasUser() {
         socialNotifyModule.queryNotifiesAction()
-        openIm.init()
+        initOpenIm()
     }
 
     //获取通知列表

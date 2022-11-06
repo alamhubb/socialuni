@@ -3,6 +3,7 @@ import {InitConfig} from "open-im-sdk/types";
 import {OpenImAPI} from "./OpenImAPI";
 import {socialUserModule} from "../../store/store";
 import OpenImPlatformType from "./OpenImPlatformType";
+import openIm from "./openIm";
 
 const openIM = new OpenIMSDK();
 
@@ -14,7 +15,6 @@ export default class OpenImWebSDK implements OpenImAPI {
             url: import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL,
             platformID: OpenImPlatformType.web
         };
-        console.log(config)
         openIM
             .login(config)
             .then((res) => {
