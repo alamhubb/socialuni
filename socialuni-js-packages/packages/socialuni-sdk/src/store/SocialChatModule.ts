@@ -271,6 +271,9 @@ export default class SocialChatModule extends Pinia {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
+
+
+
         MessageAPI.sendMsgAPI<MessageVO>(this.chat.id, msg.content).then((res) => {
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime

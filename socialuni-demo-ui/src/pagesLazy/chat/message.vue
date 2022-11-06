@@ -1,5 +1,5 @@
 <template>
-  <view class="pb-100rpx h100r bg-default">
+  <view class="pb-100 h100r bg-default">
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-auto card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
@@ -16,7 +16,7 @@
                  :scroll-top="scrollTop"
     >
       <!--    <view class="cu-chat">-->
-      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100r h100r col-row-center">
+      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100r col-row-center">
         <view class="uni-tip  mt-80px">
           <view class="uni-tip-content text-bold">
             <template v-if="chat.needPayOpen">
@@ -41,7 +41,7 @@
           </view>-->
         </view>
       </view>
-      <view v-else class="w100r row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
+      <view v-else class="w100p row-center" :class="showMsgHint?'pt-70px':'pt-10px'">
         <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
           会话已开启
         </view>
@@ -56,13 +56,13 @@
           </view>
         </block>
         <block v-else-if="msg.isMine">
-          <view class="flex-col w100r">
-            <view class="mr-30rpx h44rpx row-end-center">
+          <view class="flex-col w100p">
+            <view class="mr-30px h44px row-end-center">
               <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
-              <image v-if="msg.user.vipFlag" class="ml-6rpx mr-6rpx size30rpx mt-n10rpx"
+              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                      src="/static/img/crown.png"
                      @click="toVipVue"></image>
             </view>
@@ -85,13 +85,13 @@
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
-          <view class="flex-col w100r">
-            <view class="ml-40rpx h44rpx row-col-center">
+          <view class="flex-col w100p">
+            <view class="ml-40 h44 row-col-center">
               <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
-              <image v-if="msg.user.vipFlag" class="ml-6rpx size30rpx mt-n10rpx"
+              <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
                      src="/static/img/crown.png"
                      @click="toVipVue"></image>
             </view>

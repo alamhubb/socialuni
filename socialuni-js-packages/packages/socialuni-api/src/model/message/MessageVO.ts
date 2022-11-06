@@ -28,7 +28,7 @@ export default class MessageVO {
             this.readStatus = CommonStatus.sending
             this.isMine = this.user.isMine
             this.isRead = msg.isRead
-            this.createTime = new Date().getTime()
+            this.createTime = msg.createTime
             this.type = MessageType.simple
             this.contentType = MessageContentType.text
         } else {

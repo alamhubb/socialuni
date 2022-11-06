@@ -56,7 +56,7 @@
         {
           "path": "chat/message",
           "style": {
-            "navigationStyle": "custom"
+            "navigationBarTitleText": "消息"
           }
         },
         {
