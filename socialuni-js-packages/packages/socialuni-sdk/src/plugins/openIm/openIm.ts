@@ -22,21 +22,19 @@ export function initOpenIm() {
     };
     openIm
         .login(config)
-        .then((res) => {
+        .then(async (res) => {
             console.log("login suc...");
-            setTimeout(async () => {
-                const textStr = "hello open im";
-                console.log('发送消息')
-                const {data} = await openIm.createTextMessage(textStr);
-                const params = {
-                    recvID: "f400ccbf06b642a4abf9c589876566ec",
-                    groupID: "",
-                    message: data,
-                };
-                openIm.sendMessage(params).then(res=>{
-                    console.log('发送消息成功')
-                });
-            }, 3000)
+            const textStr = "hello open im";
+            console.log('发送消息')
+            const {data} = await openIm.createTextMessage(textStr);
+            const params = {
+                recvID: "f400ccbf06b642a4abf9c589876566ec",
+                groupID: "",
+                message: data,
+            };
+            openIm.sendMessage(params).then(res => {
+                console.log('发送消息成功')
+            });
         })
         .catch((err) => {
             console.log("login failed...");
