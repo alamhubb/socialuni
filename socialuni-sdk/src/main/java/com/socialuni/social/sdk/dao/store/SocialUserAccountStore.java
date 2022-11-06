@@ -1,10 +1,11 @@
 package com.socialuni.social.sdk.dao.store;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.sdk.constant.platform.PlatformType;
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class SocialUserAccountStore {
     public SocialUserAccountDO getAccountByUnionId(SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         String provider = loginQO.getProvider();
         String unionId = uniUnionIdRO.getUnionid();
-        String platform = loginQO.getPlatform();
+        String platform = RequestUtil.getPlatform();
         SocialUserAccountDO socialUserAccountDO = null;
         //unionId不为null才查询
         if (StringUtils.isNotEmpty(unionId)) {

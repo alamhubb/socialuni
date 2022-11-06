@@ -27,7 +27,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

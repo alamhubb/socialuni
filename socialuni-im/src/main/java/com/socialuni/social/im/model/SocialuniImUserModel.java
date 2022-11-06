@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 public class SocialuniImUserModel implements ImInterface {
-    Date birth;  // 用户生日
+    Integer birth;  // 用户生日
     Date createTime; // 创建时间
     String email;  // 用户邮箱地址
     String ex;     // 用户信息扩展字段对象Json字符串

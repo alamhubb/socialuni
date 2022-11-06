@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 /**
  * <a href='https://doc.rentsoft.cn:8000/swagger/index.html#/鉴权认证'>鉴权服务接口</a>
+ *
  * @author wulinghui
  * @version 1.0
  * @module Socialuni
@@ -21,30 +22,37 @@ public class ImAuthService {
 
     /**
      * 用户注册
+     *
      * @param userModel
      */
-    public void userRegister(SocialuniImUserModel userModel){
-        imHttpComponent.post("/auth/user_register",userModel);
+    public String userRegister(SocialuniImUserModel userModel) {
+        String post = imHttpComponent.post("/auth/user_register", userModel);
+        ImTokenModel tokenModel = imHttpComponent.parseResponse(post, ImTokenModel.class);
+        String token = tokenModel.getToken();
+        return token;
     }
+
     /**
      * 获取用户的token
      * (免密的用户登录)
+     *
      * @param userID
      */
-    public ImTokenModel userToken(String userID){
+    public ImTokenModel userToken(String userID) {
         SocialuniImUserModel userModel = new SocialuniImUserModel();
         userModel.setUserID(userID);
         String post = imHttpComponent.post("/auth/user_token", userModel);
-        return imHttpComponent.parseResponse(post,ImTokenModel.class);
+        return imHttpComponent.parseResponse(post, ImTokenModel.class);
     }
 
     /**
      * 获得token
+     *
      * @param userID
-     * @see #userToken(String)
      * @return
+     * @see #userToken(String)
      */
-    public String getToken(String userID){
+    public String getToken(String userID) {
         return this.userToken(userID).getToken();
     }
 }

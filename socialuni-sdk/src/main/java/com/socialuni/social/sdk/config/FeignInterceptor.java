@@ -81,8 +81,8 @@ public class FeignInterceptor implements RequestInterceptor {
                     socialProviderLoginQO.setBirthday(mineUser.getBirthday());
                     socialProviderLoginQO.setCity(mineUser.getCity());
                     socialProviderLoginQO.setProvider(RequestUtil.getProvider());
-                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
-                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
+//                    socialProviderLoginQO.setPlatform(RequestUtil.getPlatform());
+//                    socialProviderLoginQO.setSystem(RequestUtil.getSystem());
                     socialProviderLoginQO.setUnionId(mineUserUnionId.toString());
                     if (SocialuniSystemConst.serverIsChild()) {
                         socialProviderLoginQO.setPhoneNum(phoneNum);

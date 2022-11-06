@@ -18,7 +18,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 import lombok.extern.slf4j.Slf4j;

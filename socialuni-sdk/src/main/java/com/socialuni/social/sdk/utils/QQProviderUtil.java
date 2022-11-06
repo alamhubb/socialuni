@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.platform.PlatformType;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.sdk.constant.platform.QQUrl;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.utils.common.RestUtil;
@@ -28,7 +29,7 @@ public class QQProviderUtil {
     }
 
     public static UniUnionIdRO getQQUnionIdRO(SocialProviderLoginQO unionIdData) {
-        String platform = unionIdData.getPlatform();
+        String platform = RequestUtil.getPlatform();
         String code = unionIdData.getCode();
 
         String url = QQProviderUtil.getUnionIdUrl(platform, code);

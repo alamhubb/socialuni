@@ -1,5 +1,6 @@
 package com.socialuni.social.user.sdk.entity;
 
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,4 +36,8 @@ public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     private Integer age;
     private String city;
     private String type;
+
+    public SocialuniUserDo(Integer userId) {
+        super(userId, SocialuniContentType.user, null);
+    }
 }

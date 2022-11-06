@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.logic.entity.user.SocialBindUserProviderAccountEntity;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import org.springframework.scheduling.annotation.Async;
@@ -33,7 +32,7 @@ public class SocialBindUserSocialuniAccountDomain {
     public void bindOrUpdateUserSocialAccount(Integer mineUserId, String token, String userUid) {
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniAccountProviderType.socialuni);
-        loginQO.setPlatform(PlatformType.mp);
+//        loginQO.setPlatform(PlatformType.mp);
         loginQO.setCode(token);
 
         loginQO.setUnionId(userUid);

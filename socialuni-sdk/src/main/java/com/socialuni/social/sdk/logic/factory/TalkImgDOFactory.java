@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;

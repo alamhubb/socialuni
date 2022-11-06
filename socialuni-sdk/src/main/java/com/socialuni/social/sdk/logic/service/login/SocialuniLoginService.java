@@ -23,8 +23,6 @@ import javax.transaction.Transactional;
 public class SocialuniLoginService {
     @Resource
     SocialuniLoginDomain socialPhoneLoginDomain;
-    @Resource
-    SocialuniOpenImUserFeign socialuniOpenImgUserFeign;
 
     //提供给借用社交联盟实现微信qq渠道登录的开发者， 不需要支持社交联盟登录，社交联盟登录是前台跳转登录返回信息，不走后台
     @Transactional
@@ -35,11 +33,6 @@ public class SocialuniLoginService {
             throw new SocialParamsException(UniappProviderType.notSupportTypeErrorMsg);
         }
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.providerLogin(loginQO);
-        // 发布事件通过其他的第三方用户信息同步。
-//        EventPublisherFacade.publishEvent("userLogin",socialLoginRO.getUser());
-
-        socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(socialLoginRO.getUser()));
-
         return ResultRO.success(socialLoginRO);
     }
 
@@ -55,12 +48,6 @@ public class SocialuniLoginService {
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> phoneLogin(SocialPhoneNumQO socialPhoneNumQO) {
         SocialLoginRO<SocialuniMineUserDetailRO> socialLoginRO = socialPhoneLoginDomain.phoneLogin(socialPhoneNumQO);
-        // 发布事件通过其他的第三方用户信息同步。
-        SocialuniMineUserDetailRO user = socialLoginRO.getUser();
-
-//        EventPublisherFacade.publishEvent("userLogin", user);
-        socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user));
-
 //        CompletableFuture.supplyAsync(() -> socialuniOpenImgUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(user)));
         return ResultRO.success(socialLoginRO);
     }

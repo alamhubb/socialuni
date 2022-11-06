@@ -10,7 +10,7 @@ import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageIm
 import com.socialuni.social.sdk.dao.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

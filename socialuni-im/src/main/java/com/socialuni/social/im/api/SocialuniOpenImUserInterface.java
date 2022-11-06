@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Tag(name = "消息模块/消息用户模块", description = "暂未支持")
 public interface SocialuniOpenImUserInterface {
 
-    @Async
     @PostMapping("userLogin")
-    void userLogin(@RequestBody SocialuniImUserModel imUserModel);
+    String userLogin(@RequestBody SocialuniImUserModel imUserModel);
 
     @PostMapping("getToken")
-    String getToken(String userId);
+    String getAndRefreshToken(String userId);
 }

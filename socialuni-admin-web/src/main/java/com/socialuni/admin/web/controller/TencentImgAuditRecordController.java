@@ -16,7 +16,7 @@ import com.socialuni.social.sdk.model.QO.SocialIntQO;
 import com.socialuni.social.sdk.openService.ImgThumbnailType;
 import com.socialuni.social.sdk.openService.TencentCosAuditRecordRepository;
 import com.socialuni.social.sdk.openService.TencentCosAuditStatus;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

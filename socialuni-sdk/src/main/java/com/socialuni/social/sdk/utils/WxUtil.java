@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.social.common.api.utils.UUIDUtil;
-import com.socialuni.social.sdk.constant.platform.PlatformType;
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.model.PushMsgDTO;
 import com.socialuni.social.sdk.logic.platform.WxErrCode;

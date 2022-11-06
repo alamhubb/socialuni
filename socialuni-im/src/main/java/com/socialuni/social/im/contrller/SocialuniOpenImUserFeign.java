@@ -13,14 +13,15 @@ public class SocialuniOpenImUserFeign implements SocialuniOpenImUserInterface {
     private ImAuthService imAuthService;
 
     @Override
-    public void userLogin(SocialuniImUserModel imUserModel) {
-        imAuthService.userRegister(imUserModel);
+    public String userLogin(SocialuniImUserModel imUserModel) {
+        String token = imAuthService.userRegister(imUserModel);
+        return token;
 //        throw new SocialParamsException("测试报错功能");
 //        return null;
     }
 
     @Override
-    public String getToken(String userId) {
+    public String getAndRefreshToken(String userId) {
         return imAuthService.getToken(userId);
     }
 }

@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.constant.AppConfigConst;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.RO.UserImgVO;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import lombok.Data;

@@ -14,6 +14,7 @@ export default class OpenImWebSDK implements OpenImAPI {
             url: import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL,
             platformID: OpenImPlatformType.web
         };
+        console.log(config)
         openIM
             .login(config)
             .then((res) => {

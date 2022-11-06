@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
-import com.socialuni.social.tance.sdk.enumeration.SocialuniContentType;
+import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserImgRepository;

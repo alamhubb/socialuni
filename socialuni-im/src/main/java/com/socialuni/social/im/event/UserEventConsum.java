@@ -35,7 +35,7 @@ public class UserEventConsum extends AbstractJsonEventConsum {
         imUserModel.setFaceURL( conversionService.convert(map.get("avatar"),String.class));
         imUserModel.setGender( conversionService.convert(map.get("gender"),int.class));
         imUserModel.setPhoneNumber(conversionService.convert(map.get("phoneNum"),String.class) );
-        imUserModel.setBirth(conversionService.convert(map.get("birthday"),Date.class));
+        imUserModel.setBirth(conversionService.convert(map.get("birthday"),Integer.class));
         imUserModel.setCreateTime(new Date());
         imAuthService.userRegister(imUserModel);
     }

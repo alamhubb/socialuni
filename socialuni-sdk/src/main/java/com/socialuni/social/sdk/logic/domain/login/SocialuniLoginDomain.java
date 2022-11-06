@@ -1,6 +1,5 @@
 package com.socialuni.social.sdk.logic.domain.login;
 
-import com.socialuni.social.sdk.logic.domain.user.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialProviderLoginEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
@@ -10,7 +9,6 @@ import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.entity.SocialTokenDO;
-import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +21,6 @@ public class SocialuniLoginDomain {
     TokenManage tokenManage;
     @Resource
     SocialPhoneLoginEntity socialPhoneLoginEntity;
-
-    @Resource
-    SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain;
 
     @Resource
     SocialProviderLoginEntity socialProviderLoginEntity;
@@ -46,11 +41,7 @@ public class SocialuniLoginDomain {
     }
 
     public SocialLoginRO<SocialuniMineUserDetailRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser) {
-        SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
-
-        SocialUserAccountDO openImAccount = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser.getUserId(), userDetailRO.getId());
-
-        userDetailRO.setImToken(openImAccount.getSessionKey());
+        SocialuniMineUserDetailRO userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser, true);
 
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 

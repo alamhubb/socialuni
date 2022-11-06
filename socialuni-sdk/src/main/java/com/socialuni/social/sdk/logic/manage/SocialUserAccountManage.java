@@ -1,9 +1,10 @@
 package com.socialuni.social.sdk.logic.manage;
 
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.constant.platform.PlatformType;
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
 import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
@@ -45,7 +46,7 @@ public class SocialUserAccountManage {
         SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
         socialUserAccountDO.setUserId(userId);
 //        socialUserAccountDO.setDevId(loginQO.getDevId());
-        socialUserAccountDO.setPlatform(loginQO.getPlatform());
+        socialUserAccountDO.setPlatform(RequestUtil.getPlatform());
         socialUserAccountDO.setProvider(loginQO.getProvider());
 
         socialUserAccountDO.setNickname(loginQO.getNickName());
@@ -56,15 +57,15 @@ public class SocialUserAccountManage {
         if (StringUtils.isEmpty(openId)) {
             throw new SocialParamsException("openId为空");
         }
-        if (PlatformType.mp.equals(loginQO.getPlatform())) {
+        if (PlatformType.mp.equals(RequestUtil.getPlatform())) {
             //相同都为unionid
             socialUserAccountDO.setMpOpenId(openId);
-        } else if (PlatformType.app.equals(loginQO.getPlatform())) {
+        } else if (PlatformType.app.equals(RequestUtil.getPlatform())) {
             socialUserAccountDO.setAppOpenId(openId);
-        } else if (PlatformType.h5.equals(loginQO.getPlatform())) {
+        } else if (PlatformType.h5.equals(RequestUtil.getPlatform())) {
             socialUserAccountDO.setH5OpenId(openId);
         } else {
-            throw new SocialParamsException("不支持的渠道类型：" + loginQO.getPlatform());
+            throw new SocialParamsException("不支持的渠道类型：" + RequestUtil.getPlatform());
         }
         if (!StringUtils.isEmpty(uniUnionIdRO.getUnionid())) {
             socialUserAccountDO.setUnionId(uniUnionIdRO.getUnionid());

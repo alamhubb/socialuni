@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.platform.PlatformType;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.common.api.constant.PlatformType;
 import com.socialuni.social.sdk.constant.platform.WxUrl;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.logic.platform.WxDecode;
@@ -37,7 +38,7 @@ public class WxProviderUtil {
     }
 
     public static UniUnionIdRO getWxUnionIdRO(SocialProviderLoginQO unionIdData) {
-        String platform = unionIdData.getPlatform();
+        String platform = RequestUtil.getPlatform();
         String code = unionIdData.getCode();
 
         if (PlatformType.mp.equals(platform)) {

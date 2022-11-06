@@ -94,7 +94,7 @@ export default class HttpRequest {
     }
 
     static posUrl(url: string): boolean { /* 判断url是否为绝对路径 */
-        return /(WebAPI|https):\/\/([\w.]+\/?)\S*/.test(url)
+        return /(WebAPI|https|http):\/\/([\w.]+\/?)\S*/.test(url)
     }
 
     interceptor: interceptor = {

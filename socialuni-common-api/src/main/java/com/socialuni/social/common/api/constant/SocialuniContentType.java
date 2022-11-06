@@ -1,4 +1,4 @@
-package com.socialuni.social.tance.sdk.enumeration;
+package com.socialuni.social.common.api.constant;
 
 import java.util.Arrays;
 import java.util.List;

@@ -2,7 +2,6 @@ package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.sdk.constant.platform.PlatformType;
 import com.socialuni.social.sdk.constant.platform.UniappProviderType;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
@@ -34,7 +33,7 @@ public class SocialBindWxPhoneNumDomain {
         //校验各个参数
         SocialProviderLoginQO socialProviderLoginQO = new SocialProviderLoginQO();
         socialProviderLoginQO.setProvider(UniappProviderType.wx);
-        socialProviderLoginQO.setPlatform(PlatformType.mp);
+//        socialProviderLoginQO.setPlatform(PlatformType.mp);
         socialProviderLoginQO.setCode(bindPhoneQO.getCode());
 
         UniUnionIdRO loginResult = UniProviderUtil.getUnionIdRO(socialProviderLoginQO);

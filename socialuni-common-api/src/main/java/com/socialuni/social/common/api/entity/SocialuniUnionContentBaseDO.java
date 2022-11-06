@@ -1,9 +1,9 @@
 package com.socialuni.social.common.api.entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 @Data
 @MappedSuperclass
-@NoArgsConstructor
 public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implements Serializable {
     @Column(nullable = false)
     private String contentType;
@@ -33,6 +32,10 @@ public class SocialuniUnionContentBaseDO extends SocialuniContentBaseDO implemen
      * 删除原因
      */
     private String deleteReason;
+
+    public SocialuniUnionContentBaseDO() {
+        this.reportNum = 0;
+    }
 
     public SocialuniUnionContentBaseDO(Integer userId, String contentType, String content) {
         super(userId);

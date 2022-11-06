@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.socialuni.social.im.contrller.SocialuniOpenImUserFeign;
 import com.socialuni.social.im.model.SocialuniImUserModel;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
@@ -26,6 +27,7 @@ public class SocialuniMineUserDetailROFactory {
     public static SocialUserPhoneRedis socialUserPhoneRedis;
     public final static SocialUserAccountRepository socialUserAccountRepository = SpringUtil.getBean(SocialUserAccountRepository.class);
     public final static SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain = SpringUtil.getBean(SocialBindUserOpenImAccountDomain.class);
+    public final static SocialuniOpenImUserFeign socialuniOpenImUserFeign = SpringUtil.getBean(SocialuniOpenImUserFeign.class);
 
     @Resource
     public void setSocialUserPhoneStore(SocialUserPhoneRedis socialUserPhoneRedis) {
@@ -44,14 +46,18 @@ public class SocialuniMineUserDetailROFactory {
     }
 
     public static SocialuniMineUserDetailRO getMineUserDetail(SocialuniUserDo mineUser) {
+        return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser, false);
+    }
+
+    public static SocialuniMineUserDetailRO getMineUserDetail(SocialuniUserDo mineUser, Boolean isLogin) {
         //用户关注粉丝数
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findUserPhoneByUserId(mineUser.getUnionId());
 
-        return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser, SocialUserPhoneDo);
+        return SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser, SocialUserPhoneDo, isLogin);
     }
 
 
-    public static SocialuniMineUserDetailRO getMineUserDetail(SocialuniUserDo mineUser, SocialUserPhoneDo SocialUserPhoneDo) {
+    public static SocialuniMineUserDetailRO getMineUserDetail(SocialuniUserDo mineUser, SocialUserPhoneDo SocialUserPhoneDo, Boolean isLogin) {
         //user基础信息
         SocialuniUserDetailRO socialUserDetailRO = SocialuniUserDetailROFactory.getUserDetailRO(mineUser, mineUser);
 
@@ -68,17 +74,10 @@ public class SocialuniMineUserDetailROFactory {
 
         mineUserDetailRO.setOpenContactInfo(SocialuniUserExpandDo.getOpenContactInfo());
 
-        //设置openIm的key
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
-        if (socialUserAccountDO == null) {
-            socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUserId, socialUserDetailRO.getId());
-        }
-        mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());
-
-        //user详情信息
-//        if (isMine) {
         //为自己返回生日，方便修改，和手机号
         mineUserDetailRO.setBirthday(mineUser.getBirthday());
+
+        //user详情信息
         if (SocialUserPhoneDo != null) {
             //只有自己的开发者才显示手机号
             if (DevAccountFacade.getDevIdNotNull().equals(SocialUserPhoneDo.getDevId())) {
@@ -89,13 +88,24 @@ public class SocialuniMineUserDetailROFactory {
                 }
             }
         }
-//        }
+
+        //设置openIm的key
+        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
+        if (socialUserAccountDO == null) {
+            String imToken = socialuniOpenImUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(mineUserDetailRO));
+            socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialUserDetailRO.getId(), imToken);
+        } else  if (isLogin) {
+            //如果为登录，则刷新token
+            String token = socialuniOpenImUserFeign.getAndRefreshToken(socialUserDetailRO.getId());
+            socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialUserDetailRO.getId(), token);
+        }
+        mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());
+
         return mineUserDetailRO;
     }
 
 
     public static SocialuniImUserModel toImUserModel(SocialuniMineUserDetailRO user) {
-        SocialuniImUserModel imUser = new SocialuniImUserModel();
         // 注册到Im
         SocialuniImUserModel imUserModel = new SocialuniImUserModel();
         imUserModel.setUserID(user.getId());
@@ -103,8 +113,8 @@ public class SocialuniMineUserDetailROFactory {
         imUserModel.setFaceURL(user.getAvatar());
         imUserModel.setGender(GenderTypeNumEnum.getValueByName(user.getGender()));
         imUserModel.setPhoneNumber(user.getPhoneNum());
-        imUserModel.setBirth(BirthdayAgeUtil.getBirthDayByBirthString(user.getBirthday()));
+        imUserModel.setBirth((int) (BirthdayAgeUtil.getBirthDayByBirthString(user.getBirthday()).getTime() / 1000));
         imUserModel.setCreateTime(new Date());
-        return imUser;
+        return imUserModel;
     }
 }
