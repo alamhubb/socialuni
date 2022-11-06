@@ -10,7 +10,7 @@ export default class PagePath {
   static readonly notify: string = '/pagesLazy/notify/notify'
   static readonly identityAuth: string = '/pagesLazy/user/identityAuth'
   static readonly faceValueInfo: string = '/pages/match/faceValueInfo'
-  static readonly message: string = '/pages/chat/message'
+  static readonly message: string = '/pagesLazy/chat/message'
 
   static readonly userDetail: string = '/pagesLazy/user/userDetail'
   static readonly editMineInfo: string = '/pagesLazy/user/editMineInfo'

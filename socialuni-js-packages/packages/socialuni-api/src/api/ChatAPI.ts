@@ -28,7 +28,7 @@ export default class ChatAPI {
         return request.post('chat/closeChat', chat)
     }
 
-    static openChatAPI(chatId: number, needPayOpen = false, content) {
+    static openChatAPI(chatId: string, needPayOpen = false, content) {
         return request.post<SocialuniChatRO>('chat/openChat', {id: chatId, needPayOpen, content})
     }
 }

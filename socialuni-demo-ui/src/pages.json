@@ -54,6 +54,12 @@
           }
         },
         {
+          "path": "chat/message",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
           "path": "user/userDetail",
           "style": {
             "navigationBarTitleText": "用户详情"

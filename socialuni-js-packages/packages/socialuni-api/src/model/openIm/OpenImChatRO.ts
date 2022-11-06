@@ -1,3 +1,5 @@
+import {OpenImMsgRO} from "./OpenImMsgRO";
+
 export interface OpenImChatRO {
     /// 会话ID
     conversationID: string
@@ -27,8 +29,7 @@ export interface OpenImChatRO {
     groupAtType: number
 
 /// 会话最新消息内容
-    Message?
-    latestMsg
+    latestMsg: string
 
 /// 最新消息发送时间
     latestMsgSendTime: number

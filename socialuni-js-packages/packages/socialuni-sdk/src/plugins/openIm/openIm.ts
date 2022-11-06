@@ -20,8 +20,10 @@ export function openImLogin() {
         url: import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL,
         platformID: OpenImPlatformType.web
     };
-    return openIm.login(config)
-
+    console.log(config)
+    return openIm.login(config).then(()=>{
+        console.log('登录成功')
+    })
 }
 
 

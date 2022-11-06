@@ -1,7 +1,7 @@
 import request from "socialuni-api/src/request/request";
 import ChatReadVO from "socialuni-api/src/model/chat/ChatReadVO";
 import ChatRemoveVO from "socialuni-api/src/model/chat/ChatRemoveVO";
-import SocialuniChatRO from "socialuni-api/src/model/chat/SocialuniChatRO";
+import SocialuniChatRO from "../socialuni-js-packages/packages/socialuni-api/src/model/chat/SocialuniChatRO";
 
 export default class ChatAPI {
     /*static getChatAPI (user: UserVO) {

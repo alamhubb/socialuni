@@ -1,8 +1,8 @@
 export default class MessageQueryVO {
-  public chatId: number
-  public msgIds: number []
+  public chatId: string
+  public msgIds: string []
 
-  constructor (chatId: number, msgIds: number[]) {
+  constructor (chatId: string, msgIds: string[]) {
     this.chatId = chatId
     this.msgIds = msgIds
   }

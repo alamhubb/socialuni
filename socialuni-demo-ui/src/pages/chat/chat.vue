@@ -71,7 +71,6 @@
 <script lang="ts">
 import ChatType from 'socialuni-constant/constant/ChatType'
 import CommonStatus from 'socialuni-constant/constant/CommonStatus'
-import SocialuniChatRO from 'socialuni-api/src/model/chat/SocialuniChatRO'
 import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
@@ -80,6 +79,7 @@ import ChatAPI from 'socialuni-api/src/api/ChatAPI'
 import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
 import {socialChatModule} from 'socialuni-sdk/src/store/store'
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import SocialuniChatRO from "../socialuni-js-packages/packages/socialuni-api/src/model/chat/SocialuniChatRO";
 
 
 @Options({})

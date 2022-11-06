@@ -11,12 +11,12 @@ import ChatType from "socialuni-constant/constant/ChatType";
 import CommonUtil from "../utils/CommonUtil";
 import openIm, {openImLogin} from "../plugins/openIm/openIm";
 import JsonUtil from "../utils/JsonUtil";
-import {OpenImChatRO} from "socialuni-api/src/model/chat/OpenImChatRO";
 import SocialuniChatRO from "socialuni-api/src/model/chat/SocialuniChatRO";
+import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
 
 @Store
 export default class SocialChatModule extends Pinia {
-    chatId: number = null
+    chatId: string = null
     chats: SocialuniChatRO[] = []
     scrollTop: number = 0
     chatsUnreadNumTotal = 0
@@ -25,12 +25,14 @@ export default class SocialChatModule extends Pinia {
         console.log(123)
         await openImLogin()
 
+        console.log('登录成功')
         const options = {
             offset: 0,
             count: 20
         }
+        console.log(options)
         openIm.getConversationListSplit(options).then(({data}) => {
-            console.log(data)
+            console.log(11111)
             const chats: OpenImChatRO[] = JsonUtil.parse(data)
             this.chats = chats.map(item => new SocialuniChatRO(item))
         })
@@ -89,14 +91,14 @@ export default class SocialChatModule extends Pinia {
     //列表中进入，需要调用后台，更新时间。
 
     //从列表中进入
-    setChatIdToMessagePage(chatId: number) {
+    setChatIdToMessagePage(chatId: string) {
         this.setChatId(chatId)
-        this.readChatAction(this.chat)
+        // this.readChatAction(this.chat)
         PageUtil.toMessagePage()
         this.scrollToMessagePageBottom()
     }
 
-    setChatId(chatId: number) {
+    setChatId(chatId: string) {
         this.chatId = chatId
     }
 

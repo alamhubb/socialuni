@@ -8,9 +8,6 @@ const Socialuni = {
     install(vue, options?: SocialuniConfig) {
         socialuniSdkConfig = new SocialuniConfig(options)
         initSocialuniStore()
-        socialSystemModule.initSystemInfo()
-        //如果有跳转信息
-        socialAppModule.appLunchAction()
         UniUtil.showShareMenu()
     }
 }
