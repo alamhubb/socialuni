@@ -9,7 +9,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import MsgInput from "../../components/MsgInput.vue";
 import UserInfo from "../../pages/user/UserInfo.vue";

@@ -1,5 +1,4 @@
 import SocialuniConfig from "./src/SocialuniConfig";
-import {initSocialuniStore, socialAppModule, socialSystemModule} from "./src/store/store";
 import UniUtil from "./src/utils/UniUtil";
 
 let socialuniSdkConfig = null

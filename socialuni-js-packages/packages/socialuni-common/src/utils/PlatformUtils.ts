@@ -1,5 +1,5 @@
 import QQUtils from './QQUtils'
-import {socialPlatformModule, socialUserModule} from "../store/store";
+import {socialPlatformModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import MsgUtil from "./MsgUtil";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";

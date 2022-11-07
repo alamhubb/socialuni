@@ -160,8 +160,8 @@ import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import CommonUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
-import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
+import StorageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/StorageUtil";
+import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
 
 
 // todo 后台可控制是否显示轮播图

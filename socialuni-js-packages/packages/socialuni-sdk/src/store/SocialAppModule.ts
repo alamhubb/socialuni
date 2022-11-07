@@ -1,16 +1,17 @@
 import {Pinia, Store} from "pinia-class-component"
 import HomeSwiperVO from "socialuni-api/src/model/HomeSwiperVO";
-import PlatformUtils from "../utils/PlatformUtils";
+import {socialUserModule} from "socialuni-user/src/store/store";
+import {socialChatModule} from "socialuni-im/src/store/store";
+import PlatformUtils from "../../../socialuni-common/src/utils/PlatformUtils";
 import UserService from "../service/UserService";
 import {
     socialAppModule,
     socialCircleModule, socialConfigModule,
     socialLocationModule,
-    socialNotifyModule,
     socialTagModule,
-    socialTalkModule, socialUserModule
+    socialTalkModule
 } from "./store";
-import SocialuniTokenUtil from "../utils/SocialuniTokenUtil";
+import SocialuniTokenUtil from "../../../socialuni-common/src/utils/SocialuniTokenUtil";
 import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import AppInitDataRO from "socialuni-api/src/model/common/AppInitDataRO";
@@ -24,14 +25,13 @@ export default class SocialAppModule extends Pinia {
     //app启动的方法
 
 
-
     async appLunchAction() {
         //校验更新
         PlatformUtils.checkUpdate()
         try {
             //无论如何都要获取当前用户信息
             if (socialUserModule.hasToken) {
-                await socialUserModule.getMineUserAction()
+                await socialChatModule.initSocialuniChatModule()
                 UserService.getAppLunchDataByHasUser()
             }
             // WebsocketUtil.websocketConnect(false)

@@ -2,7 +2,7 @@ import {Pinia, Store} from "pinia-class-component"
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import TagTypeVO from "socialuni-api/src/model/community/tag/TagTypeVO";
 import TagAPI from "socialuni-api/src/api/socialuni/TagAPI";
-import TagStorageUtil from "../utils/TagStorageUtil";
+import TagStorageUtil from "../../../socialuni-common/src/utils/TagStorageUtil";
 
 @Store
 export default class SocialTagModule extends Pinia {

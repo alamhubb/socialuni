@@ -1,17 +1,17 @@
 import {Pinia, Store} from "pinia-class-component"
-import TalkFilterUtil from "../utils/TalkFilterUtil";
-import TalkVueUtil from "../utils/TalkVueUtil";
+import TalkFilterUtil from "../../../socialuni-common/src/utils/TalkFilterUtil";
+import TalkVueUtil from "../../../socialuni-common/src/utils/TalkVueUtil";
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import CommentVO from "socialuni-api/src/model/comment/CommentVO";
 import CommentAddVO from "socialuni-api/src/model/comment/CommentAddVO";
 import {socialCircleModule, socialUserModule} from "./store";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import MsgUtil from "../utils/MsgUtil";
+import MsgUtil from "../../../socialuni-common/src/utils/MsgUtil";
 import CommonUtil from "../../../socialuni-use/src/utils/CommonUtil";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
-import StorageUtil from "../utils/StorageUtil";
+import StorageUtil from "../../../socialuni-use/src/utils/StorageUtil";
 
 @Store
 export default class SocialTalkModule extends Pinia {

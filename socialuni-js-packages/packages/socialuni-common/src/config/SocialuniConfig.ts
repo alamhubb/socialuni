@@ -1,12 +1,12 @@
-import {SocialMpConfig} from "socialuni-api/src/model/SocialMpConfig";
-import GenderType from "socialuni-constant/constant/GenderType";
-
 export default class SocialuniConfig {
-    static socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
-    static socialuniImUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_URL || SocialuniConfig.socialuniUrl) + '/'
+    readonly static socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
+    readonly static socialuniImUrl = (import.meta.env.VITE_APP_SOCIALUNI_IM_URL || SocialuniConfig.socialuniUrl) + '/'
+
+    private useIm = true
+    static useIm = true
 
     //app的性别类型，全部性别，还是仅女生可用
-    static readonly appGenderType = GenderType.all
+    /*static readonly appGenderType = GenderType.all
     static readonly authApp = true
     // static readonly socialuniHttpBaseUrl = 'https://api.qingchiapp.com'
     // static readonly devSocialuniHttpBaseUrl = 'https://devapi.qingchiapp.com'
@@ -20,13 +20,14 @@ export default class SocialuniConfig {
     //无后台项目，借用社交联盟实现渠道登录时使用
     qq?: SocialMpConfig = null
     store?: any = null
-
+*/
     constructor(socialConfig?: SocialuniConfig) {
         if (socialConfig) {
-            this.secretKey = socialConfig.secretKey || null
-            this.weixin = socialConfig.weixin || null
-            this.qq = socialConfig.qq || null
-            this.store = socialConfig.store || null
+            SocialuniConfig.useIm = ObjectUtil.isNullOrUndefined(socialConfig.useIm) ? true : socialConfig.useIm
+            // this.secretKey = socialConfig.secretKey || null
+            // this.weixin = socialConfig.weixin || null
+            // this.qq = socialConfig.qq || null
+            // this.store = socialConfig.store || null
         }
     }
 }

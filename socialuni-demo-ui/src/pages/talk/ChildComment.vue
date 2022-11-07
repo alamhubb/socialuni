@@ -42,7 +42,7 @@ import CommentVO from "socialuni-api/src/model/comment/CommentVO";
 import ObjectUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ObjectUtil";
 import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
 import {socialTalkModule} from "socialuni-sdk/src/store/store";
 
 @Options({

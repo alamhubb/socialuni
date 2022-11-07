@@ -1,9 +1,9 @@
-import SocialChatModule from "./SocialChatModule";
+import SocialUserModule from "./SocialUserModule";
 
-export let socialChatModule: SocialChatModule
+export let socialUserModule: SocialUserModule
 
-export function initSocialuniChatStore() {
-    socialChatModule = new SocialChatModule()
+export function initSocialuniUserStore() {
+    socialUserModule = new SocialUserModule()
 }
 
 

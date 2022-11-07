@@ -1,4 +1,4 @@
-import StorageUtil from './StorageUtil'
+import StorageUtil from '../../../socialuni-use/src/utils/StorageUtil'
 import GenderType from "socialuni-constant/constant/GenderType";
 
 export default class TalkFilterUtil {

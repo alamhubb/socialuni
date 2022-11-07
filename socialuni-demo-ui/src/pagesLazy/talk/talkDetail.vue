@@ -51,10 +51,10 @@ import TalkItem from '@/pages/talk/talkItem/TalkItem.vue'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import TalkVO from 'socialuni-api/src/model/talk/TalkVO'
 import RouterUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil'
-import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
+import PageUtil from '../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil'
 import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
-import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
+import UniUtil from '../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil'
 import {socialConfigModule} from 'socialuni-sdk/src/store/store'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 

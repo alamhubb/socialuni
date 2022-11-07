@@ -169,7 +169,8 @@
           @touchstart="inputBlur">
     </view>-->
 
-    <socialuni-report-dialog  ref="reportDialog" :report-info="message" :report-info-type="reportContentType"></socialuni-report-dialog>
+    <socialuni-report-dialog ref="reportDialog" :report-info="message"
+                             :report-info-type="reportContentType"></socialuni-report-dialog>
   </view>
 </template>
 
@@ -183,18 +184,18 @@ import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MessageType from "socialuni-constant/constant/mesaage/MessageType";
 import Constants from "socialuni-constant/constant/Constant";
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
+import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import UserType from "socialuni-constant/constant/UserType";
 import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import MessageAPI from "@/api/MessageAPI";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
-import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
+import PlatformUtils from "../socialuni-js-packages/packages/socialuni-common/src/utils/PlatformUtils";
 import PayType from "socialuni-constant/constant/PayType";
 import CommonUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil";
 import MpPlatformType from "socialuni-constant/constant/MpPlatformType";

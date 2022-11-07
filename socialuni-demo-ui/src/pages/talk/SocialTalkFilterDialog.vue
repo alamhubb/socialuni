@@ -94,7 +94,7 @@ import {
   socialTalkModule,
   socialUserModule
 } from "socialuni-sdk/src/store/store";
-import TalkFilterUtil from "socialuni-sdk/src/utils/TalkFilterUtil";
+import TalkFilterUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/TalkFilterUtil";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";

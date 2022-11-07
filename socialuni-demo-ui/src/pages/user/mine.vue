@@ -100,7 +100,7 @@ import UserInfo from "./UserInfo.vue";
 import Login from "./login/login.vue";
 import MsgInput from "../../components/MsgInput.vue";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 

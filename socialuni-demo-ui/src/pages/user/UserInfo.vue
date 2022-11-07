@@ -157,23 +157,23 @@
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>
 
-<!--        <div v-if="isMine" class="row-col-center mb-smm">
-          <q-icon class="text-gray mr-xs" icon="account-fill"/>
-          联系方式：
-          <div v-if="user.contactInfo" @click="openSetContactInfo" class="row-col-center ">
-            <div class="q-tag">{{ user.contactInfo }}
-              <div class="ml-xs">({{ user.openContactInfo ? '他人可获取' : '他人不可获取' }})</div>
-            </div>
-          </div>
-          <div v-else class="row-col-center">
-            <div class="q-tag" @click="openSetContactInfo">设置联系方式</div>
-          </div>
-        </div>
-        <div v-else-if="user.openContactInfo" class="row-col-center mb-smm">
-          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
-          联系方式：
-          <div class="q-tag">{{ user.contactInfo }}(点击获取联系方式)</div>
-        </div>-->
+        <!--        <div v-if="isMine" class="row-col-center mb-smm">
+                  <q-icon class="text-gray mr-xs" icon="account-fill"/>
+                  联系方式：
+                  <div v-if="user.contactInfo" @click="openSetContactInfo" class="row-col-center ">
+                    <div class="q-tag">{{ user.contactInfo }}
+                      <div class="ml-xs">({{ user.openContactInfo ? '他人可获取' : '他人不可获取' }})</div>
+                    </div>
+                  </div>
+                  <div v-else class="row-col-center">
+                    <div class="q-tag" @click="openSetContactInfo">设置联系方式</div>
+                  </div>
+                </div>
+                <div v-else-if="user.openContactInfo" class="row-col-center mb-smm">
+                  <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+                  联系方式：
+                  <div class="q-tag">{{ user.contactInfo }}(点击获取联系方式)</div>
+                </div>-->
 
         <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
 
@@ -355,10 +355,10 @@ import {Options, Prop, Vue, Watch} from "vue-property-decorator";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import UserUtil from "socialuni-sdk/src/utils/UserUtil";
+import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
+import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
+import UserUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UserUtil";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import PagePath from "socialuni-constant/constant/PagePath";
 import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
@@ -367,7 +367,7 @@ import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import DomFile from "socialuni-api/src/model/DomFile";
-import CosUtil from "socialuni-sdk/src/utils/CosUtil";
+import CosUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/CosUtil";
 import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";

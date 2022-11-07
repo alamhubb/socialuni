@@ -1,29 +1,51 @@
 import {Pinia, Store} from "pinia-class-component"
-import PageUtil from "../utils/PageUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import ChatAPI from "socialuni-api/src/api/ChatAPI";
-import RouterUtil from "../utils/RouterUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import PlatformUtils from "../utils/PlatformUtils";
-import MessageAPI from "socialuni-api/src/api/MessageAPI";
+import PlatformUtils from "socialuni-common/src/utils/PlatformUtils";
 import ChatType from "socialuni-constant/constant/ChatType";
-import CommonUtil from "../utils/CommonUtil";
-import openIm, {openImLogin} from "../plugins/openIm/openIm";
-import JsonUtil from "../utils/JsonUtil";
+import CommonUtil from "socialuni-use/src/utils/CommonUtil";
+import {openImLogin} from "../plugins/openIm/openIm";
+import JsonUtil from "socialuni-use/src/utils/JsonUtil";
 import SocialuniChatRO from "socialuni-api/src/model/chat/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
+import {socialUserModule} from "socialuni-user/src/store/store";
+import SocialuniUserRO from "socialuni-user/src/model/SocialuniUserRO";
 import SocialuniMsg from "../plugins/socialuni-im/src/SocialuniMsg";
-import {socialUserModule} from "socialuni-sdk/src/store/store";
+
+import {OpenIMSDK} from "open-im-sdk";
+import {InitConfig} from "open-im-sdk/types";
+import OpenImPlatformType from "./OpenImPlatformType";
+import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig"
+
+const openIm = new OpenIMSDK();
+
 
 @Store
 export default class SocialChatModule extends Pinia {
+    imToken = ''
+
     chatId: string = null
     chats: SocialuniChatRO[] = []
+
     scrollTop: number = 0
     chatsUnreadNumTotal = 0
 
-    async initSocialuniChatModule(){
-            socialUserModule.
+    async initSocialuniChatModule(mineUser?: SocialuniUserRO) {
+        await socialUserModule.initSocialuniUserModule(mineUser)
+        //获取imToken
+        const config: InitConfig = {
+            userID: socialUserModule.userId,
+            token: socialUserModule.imToken,
+            url: SocialuniConfig.socialuniImUrl,
+            platformID: OpenImPlatformType.web
+        };
+        console.log(config)
+        return openIm.login(config).then(() => {
+            console.log('登录成功')
+        })
     }
 
     async queryAppLunchChats() {

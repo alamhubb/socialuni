@@ -1,14 +1,9 @@
-import SocialuniConfig from "./src/SocialuniConfig";
-import {initSocialuniStore, socialAppModule, socialSystemModule} from "./src/store/store";
-import UniUtil from "./src/utils/UniUtil";
-
-let socialuniSdkConfig = null
+import {initSocialuniStore} from "./src/store/store";
 
 const Socialuni = {
-    install(vue, options?: SocialuniConfig) {
-        socialuniSdkConfig = new SocialuniConfig(options)
+    install() {
         initSocialuniStore()
-        UniUtil.showShareMenu()
+        // UniUtil.showShareMenu()
     }
 }
 export default Socialuni

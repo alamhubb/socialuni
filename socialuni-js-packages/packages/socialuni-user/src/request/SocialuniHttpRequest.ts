@@ -13,7 +13,7 @@ import {socialConfigModule, socialSystemModule, socialUserModule} from "socialun
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni-sdk/src/service/UserService";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import MsgUtil from "socialuni-common/src/utils/MsgUtil";
 
 interface header { // header 接口
     'Content-Type'?: string;
@@ -87,7 +87,7 @@ interface requestConfig { // 请求之前参数配置项 (public)
     responseType: string;
 }
 
-export default class HttpRequest {
+export default class SocialuniHttpRequest {
     config: config = {
         baseUrl: '',
         header: {
@@ -104,8 +104,6 @@ export default class HttpRequest {
 
     interceptor: interceptor = {
         request: (f: requestCb) => {
-
-
             if (f) {
                 this.requestBeforeFun = f
             }

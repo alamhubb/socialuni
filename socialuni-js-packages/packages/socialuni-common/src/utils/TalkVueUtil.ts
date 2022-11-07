@@ -1,4 +1,4 @@
-import StorageUtil from './StorageUtil'
+import StorageUtil from '../../../socialuni-use/src/utils/StorageUtil'
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 

@@ -8,7 +8,14 @@
   },
   "devDependencies": {
     "socialuni-api": "1.0.0",
-    "socialuni-common": "1.0.0"
+    "vue": "^3.2.41",
+    "socialuni-common": "1.0.0",
+    "socialuni-use": "1.0.0",
+    "socialuni-user": "1.0.0",
+    "pinia": "^2.0.22",
+    "pinia-class-component": "^0.9.4",
+    "vue-class-component": "^8.0.0-rc.1",
+    "vue-property-decorator": "^10.0.0-rc.3"
   },
   "keywords": [],
   "author": "",

@@ -105,16 +105,4 @@ public class SocialuniMineUserDetailROFactory {
     }
 
 
-    public static SocialuniImUserModel toImUserModel(SocialuniMineUserDetailRO user) {
-        // 注册到Im
-        SocialuniImUserModel imUserModel = new SocialuniImUserModel();
-        imUserModel.setUserID(user.getId());
-        imUserModel.setNickname(user.getNickname());
-        imUserModel.setFaceURL(user.getAvatar());
-        imUserModel.setGender(GenderTypeNumEnum.getValueByName(user.getGender()));
-        imUserModel.setPhoneNumber(user.getPhoneNum());
-        imUserModel.setBirth((int) (BirthdayAgeUtil.getBirthDayByBirthString(user.getBirthday()).getTime() / 1000));
-        imUserModel.setCreateTime(new Date());
-        return imUserModel;
-    }
 }

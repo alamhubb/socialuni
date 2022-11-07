@@ -37,9 +37,9 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 import {socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
-import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
+import PlatformUtils from "../socialuni-js-packages/packages/socialuni-common/src/utils/PlatformUtils";
 import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
 
 @Options({})
 export default class MsgInput extends Vue {

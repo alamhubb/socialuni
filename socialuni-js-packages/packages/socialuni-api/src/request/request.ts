@@ -3,7 +3,7 @@ import {socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/stor
 import TokenUtil from "socialuni-sdk/src/utils/TokenUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni-sdk/src/service/UserService";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import MsgUtil from "socialuni-common/src/utils/MsgUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";

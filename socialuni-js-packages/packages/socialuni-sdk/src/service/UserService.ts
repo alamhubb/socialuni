@@ -1,4 +1,4 @@
-import WebsocketUtil from '../utils/WebsocketUtil'
+import WebsocketUtil from '../../../socialuni-common/src/utils/WebsocketUtil'
 import {socialChatModule, socialNotifyModule, socialUserModule} from "../store/store";
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";

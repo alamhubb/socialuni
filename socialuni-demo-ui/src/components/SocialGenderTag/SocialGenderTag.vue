@@ -18,7 +18,7 @@
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import UserUtil from "socialuni-sdk/src/utils/UserUtil";
+import UserUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UserUtil";
 import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
 
 @Options({

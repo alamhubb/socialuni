@@ -1,4 +1,4 @@
-import {socialUserModule} from "../store/store";
+import {socialUserModule} from "socialuni-sdk/src/store/store";
 import MsgUtil from "./MsgUtil";
 
 export default class CheckUtil {

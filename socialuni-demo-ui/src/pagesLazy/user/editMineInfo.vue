@@ -110,7 +110,7 @@ import GenderType from 'socialuni-constant/constant/GenderType'
 import UserEditVO from 'socialuni-api/src/model/user/UserEditVO'
 import BirthAgeUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/BirthAgeUtil'
 import {socialUserModule} from 'socialuni-sdk/src/store/store'
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
 import QButton from "../../qing-ui/components/QButton/QButton.vue";
 import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
 

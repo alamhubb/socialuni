@@ -25,11 +25,11 @@ import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
-import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
+import ImgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/ImgUtil";
 import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
 import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 

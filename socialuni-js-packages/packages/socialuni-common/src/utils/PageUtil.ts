@@ -3,7 +3,7 @@ import AlertUtil from '../../../socialuni-use/src/utils/AlertUtil'
 import RouterUtil from '../../../socialuni-use/src/utils/RouterUtil'
 import PagePath from "socialuni-constant/constant/PagePath";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
-import {socialConfigModule, socialUserModule} from "../store/store";
+import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import SocialuniAuthQO from "socialuni-api/src/model/openData/SocialuniAuthQO";
 import SkipType from "socialuni-constant/constant/SkipType";

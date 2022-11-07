@@ -1,7 +1,7 @@
 import AlertUtil from '../../../socialuni-use/src/utils/AlertUtil'
 import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
 import PageUtil from './PageUtil'
-import {socialConfigModule, socialUserModule} from "../store/store";
+import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UniUtil from "./UniUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
