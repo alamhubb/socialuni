@@ -157,7 +157,7 @@ import {
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
+import CommonUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
 import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";

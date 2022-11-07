@@ -81,15 +81,15 @@
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil";
+import ObjectUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ObjectUtil";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
@@ -97,7 +97,7 @@ import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailR
 import UserUtil from "socialuni-sdk/src/utils/UserUtil";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import QIcon from "../../../qing-ui/components/QIcon/QIcon.vue";
-import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
 
 @Options({
   components: {

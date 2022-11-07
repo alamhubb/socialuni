@@ -44,7 +44,7 @@ import QPicker from "../../qing-ui/components/QPicker/QPicker.vue";
 import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import LocationUtil from "socialuni-sdk/src/utils/LocationUtil";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
 
 @Options({

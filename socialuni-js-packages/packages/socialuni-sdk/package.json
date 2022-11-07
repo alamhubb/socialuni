@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "socialuni-api": "1.0.0",
+    "socialuni-use": "1.0.0",
     "socialuni-constant": "1.0.0",
     "uuid": "^7.0.3",
     "cos-wx-sdk-v5": "^0.7.11",

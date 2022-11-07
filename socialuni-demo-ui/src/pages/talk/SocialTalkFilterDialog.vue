@@ -99,7 +99,7 @@ import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import GenderType from "socialuni-constant/constant/GenderType";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import SocialTagPicker from "../../components/SocialTagPicker.vue";
 import SocialCirclePicker from "../../components/SocialCirclePicker.vue";
 import TagSearch from "./TagSearch.vue";

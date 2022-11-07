@@ -71,7 +71,7 @@ import {
   socialUserModule
 } from "socialuni-sdk/src/store/store";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";

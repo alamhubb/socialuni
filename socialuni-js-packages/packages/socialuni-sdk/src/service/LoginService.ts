@@ -1,6 +1,6 @@
 import UserService from './UserService'
 import UniUserUtil from '../utils/UniUserUtil'
-import ToastUtil from '../utils/ToastUtil'
+import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import Constants from "socialuni-constant/constant/Constant";
 import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";

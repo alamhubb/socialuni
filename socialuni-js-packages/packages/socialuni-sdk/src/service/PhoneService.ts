@@ -1,4 +1,4 @@
-import ToastUtil from '../utils/ToastUtil'
+import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
 import UniLoginUtil from '../utils/UniLoginUtil'
 import PhoneAPI from "socialuni-api/src/api/socialuni/PhoneAPI";
 import {socialUserModule} from "../store/store";

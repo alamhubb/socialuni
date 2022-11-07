@@ -1,6 +1,6 @@
 import StorageUtil from './StorageUtil'
 import MapUtil from './MapUtil'
-import AppAuthUtil from './AppAuthUtil'
+import AppAuthUtil from '../../../socialuni-use/src/utils/AppAuthUtil'
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import {socialLocationModule} from "../store/store";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";

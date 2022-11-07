@@ -1,6 +1,6 @@
 import SocialuniUserStorageUtil from '../utils/SocialuniUserStorageUtil'
-import AlertUtil from '../utils/AlertUtil'
-import ToastUtil from '../utils/ToastUtil'
+import AlertUtil from '../../../socialuni-use/src/utils/AlertUtil'
+import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
 import SocialuniTokenUtil from '../utils/SocialuniTokenUtil'
 
 //用来存储当前用户的一些信息

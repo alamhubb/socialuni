@@ -2,6 +2,10 @@ import {SocialMpConfig} from "socialuni-api/src/model/SocialMpConfig";
 import GenderType from "socialuni-constant/constant/GenderType";
 
 export default class SocialuniConfig {
+    private static readonly socialuniDefaultUrl = 'https://api.socialuni.cn'
+
+    static socialuniImUrl= import.meta.env.VITE_APP_SOCIALUNI_IM_URL || import.meta.env.VITE_APP_SOCIALUNI_URL || SocialuniConfig.socialuniDefaultUrl
+
     //app的性别类型，全部性别，还是仅女生可用
     static readonly appGenderType = GenderType.all
     static readonly authApp = true

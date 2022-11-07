@@ -128,7 +128,7 @@ import {socialUserModule} from "socialuni-sdk/src/store/store";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import LoginService from "socialuni-sdk/src/service/LoginService";
 import PhoneService from "socialuni-sdk/src/service/PhoneService";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";

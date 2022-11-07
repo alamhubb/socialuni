@@ -1,4 +1,4 @@
-import CommonUtil from './CommonUtil'
+import CommonUtil from '../../../socialuni-use/src/utils/CommonUtil'
 
 export default class ScrollUtil {
   static pageBottom = 3000000

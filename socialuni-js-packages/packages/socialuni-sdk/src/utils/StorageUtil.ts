@@ -3,7 +3,7 @@
  * @Date 2021-03-05 20:09
  * @Version 1.0
  */
-import ObjectUtil from './ObjectUtil'
+import ObjectUtil from '../../../socialuni-use/src/utils/ObjectUtil'
 
 export default class StorageUtil {
   static setObj (key: string, value: any) {

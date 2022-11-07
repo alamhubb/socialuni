@@ -29,8 +29,8 @@ import QInput from "../../qing-ui/components/QInput/QInput.vue";
 import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
 import SSwitch from "socialuni-ui/src/component/SSwitch.vue";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
 
 @Options({

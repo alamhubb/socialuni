@@ -1,7 +1,7 @@
 <script>
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import request from "socialuni-api/src/request/request";
-import UUIDUtil from "socialuni-sdk/src/utils/UUIDUtil";
+import UUIDUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/UUIDUtil";
 import {socialAppModule, socialSystemModule} from "socialuni-sdk/src/store/store";
 
 export default {

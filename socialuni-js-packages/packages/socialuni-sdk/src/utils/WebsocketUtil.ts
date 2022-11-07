@@ -1,5 +1,5 @@
 import SocialuniTokenUtil from './SocialuniTokenUtil'
-import CommonUtil from './CommonUtil'
+import CommonUtil from '../../../socialuni-use/src/utils/CommonUtil'
 import {socialUserModule} from "../store/store";
 
 export default class WebsocketUtil {

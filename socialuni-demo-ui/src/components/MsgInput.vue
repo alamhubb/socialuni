@@ -38,7 +38,7 @@
 import {Options, Vue, Watch} from 'vue-property-decorator'
 import {socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 
 @Options({})

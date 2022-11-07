@@ -5,10 +5,10 @@ import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
 import Constants from "socialuni-constant/constant/Constant";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import ToastUtil from "./ToastUtil";
+import ToastUtil from "../../../socialuni-use/src/utils/ToastUtil";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import WxUtils from "./WxUtils";
-import MPUtil from "./MPUtil";
+import MPUtil from "../../../socialuni-use/src/utils/MPUtil";
 import APPUtil from "./APPUtil";
 
 

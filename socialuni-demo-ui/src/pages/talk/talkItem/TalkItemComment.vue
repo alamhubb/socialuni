@@ -82,15 +82,15 @@ import QButton from "../../../qing-ui/components/QButton/QButton.vue";
 import ChildComment from "../ChildComment.vue";
 import {socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil";
+import ObjectUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import CommentVO from "socialuni-api/src/model/comment/CommentVO";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import HugAddVO from "socialuni-api/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 

@@ -37,7 +37,7 @@
   </view>
 </template>
 <script lang="ts">
-import CommonUtil from 'socialuni-sdk/src/utils/CommonUtil'
+import CommonUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil'
 import {Emit, Model, Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QRowItem from '../QRowItem/QRowItem.vue'
 import SelectorQuery = UniApp.SelectorQuery;

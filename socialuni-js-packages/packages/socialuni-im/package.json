@@ -1,0 +1,16 @@
+{
+  "name": "socialuni-im",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "socialuni-common": "1.0.0",
+    "socialuni-user": "1.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

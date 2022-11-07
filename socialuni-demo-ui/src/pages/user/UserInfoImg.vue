@@ -55,7 +55,7 @@ import DomFile from "socialuni-api/src/model/DomFile";
 import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";

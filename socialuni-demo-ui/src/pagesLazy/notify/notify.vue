@@ -40,7 +40,7 @@
 import {Options, Vue} from 'vue-property-decorator'
 import ImgUtil from 'socialuni-sdk/src/utils/ImgUtil'
 import {socialNotifyModule} from "socialuni-sdk/src/store/store";
-import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 

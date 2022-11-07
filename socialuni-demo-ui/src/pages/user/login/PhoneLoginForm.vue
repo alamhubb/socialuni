@@ -70,8 +70,8 @@ import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
 import QIcon from "../../../qing-ui/components/QIcon/QIcon.vue";
 import {socialConfigModule} from "socialuni-sdk/src/store/store";
-import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import CommonUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil";
+import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import PhoneAPI from "socialuni-api/src/api/socialuni/PhoneAPI";
 
 @Options({

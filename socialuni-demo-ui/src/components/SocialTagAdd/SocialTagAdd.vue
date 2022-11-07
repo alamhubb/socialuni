@@ -39,7 +39,7 @@ import {Options, Vue} from 'vue-property-decorator'
 import TagVO from 'socialuni-api/src/model/community/tag/TagVO'
 import TagAPI from 'socialuni-api/src/api/socialuni/TagAPI'
 import ErrorConst from 'socialuni-constant/constant/ErrorConst'
-import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
+import AlertUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil'
 import ResultRO from 'socialuni-api/src/model/social/ResultRO'
 
 @Options({})

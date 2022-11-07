@@ -1,6 +1,6 @@
-import JsonUtils from './ObjectUtil'
+import JsonUtils from '../../../socialuni-use/src/utils/ObjectUtil'
 import SocialuniTokenUtil from './SocialuniTokenUtil'
-import CommonUtil from './CommonUtil'
+import CommonUtil from '../../../socialuni-use/src/utils/CommonUtil'
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import {socialUserModule} from "../store/store";
 

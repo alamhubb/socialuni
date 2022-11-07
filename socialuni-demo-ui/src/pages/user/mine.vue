@@ -102,7 +102,7 @@ import MsgInput from "../../components/MsgInput.vue";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 
 @Options({
   components: {

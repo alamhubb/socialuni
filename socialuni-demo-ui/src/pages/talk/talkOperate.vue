@@ -56,7 +56,7 @@ import {socialAppModule, socialConfigModule, socialTalkModule} from "socialuni-s
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
 import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";

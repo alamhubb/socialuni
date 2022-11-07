@@ -1,5 +1,5 @@
-import AlertUtil from './AlertUtil'
-import ToastUtil from './ToastUtil'
+import AlertUtil from '../../../socialuni-use/src/utils/AlertUtil'
+import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
 import PageUtil from './PageUtil'
 import {socialConfigModule, socialUserModule} from "../store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";

@@ -1,5 +1,3 @@
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
-
 export default class RouterUtil {
     /**
      * 保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
@@ -38,9 +36,9 @@ export default class RouterUtil {
      * @param pagePath
      */
     static switchTab(pagePath: string): void {
-        if (socialSystemModule.isApp) {
-            uni.showTabBar()
-        }
+        // if (socialSystemModule.isApp) {
+        uni.showTabBar()
+        // }
         uni.switchTab({url: pagePath})
     }
 

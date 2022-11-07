@@ -20,7 +20,7 @@ import {Options, Vue} from 'vue-property-decorator'
 import {socialAppModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import SkipType from "socialuni-constant/constant/SkipType";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 

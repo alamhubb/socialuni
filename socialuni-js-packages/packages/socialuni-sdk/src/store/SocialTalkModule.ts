@@ -8,7 +8,7 @@ import CommentAddVO from "socialuni-api/src/model/comment/CommentAddVO";
 import {socialCircleModule, socialUserModule} from "./store";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import MsgUtil from "../utils/MsgUtil";
-import CommonUtil from "../utils/CommonUtil";
+import CommonUtil from "../../../socialuni-use/src/utils/CommonUtil";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
 import StorageUtil from "../utils/StorageUtil";
