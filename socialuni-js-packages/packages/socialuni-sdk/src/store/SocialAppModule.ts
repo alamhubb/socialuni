@@ -3,7 +3,7 @@ import HomeSwiperVO from "socialuni-api/src/model/HomeSwiperVO";
 import {socialUserModule} from "socialuni-user/src/store/store";
 import {socialChatModule} from "socialuni-im/src/store/store";
 import PlatformUtils from "../../../socialuni-common/src/utils/PlatformUtils";
-import UserService from "../service/UserService";
+import UserService from "../../../socialuni-user/src/service/UserService";
 import {
     socialAppModule,
     socialCircleModule, socialConfigModule,

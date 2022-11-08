@@ -1,9 +1,9 @@
 import WebsocketUtil from '../../../socialuni-common/src/utils/WebsocketUtil'
-import { socialNotifyModule} from "../store/store";
-import {socialUserModule} from "socialuni-user/src/store/store";
-import {socialChatModule} from "socialuni-im/src/store/store";
+import {socialNotifyModule} from "socialuni-sdk/src/store/store";
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import {socialUserModule} from "../store/store";
+import {socialChatModule} from "socialuni-im/src/store/store";
 
 export default class UserService {
     //清空用户信息的组合操作

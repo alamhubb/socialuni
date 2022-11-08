@@ -31,8 +31,9 @@ export default class SocialChatModule extends Pinia {
   scrollTop: number = 0
   chatsUnreadNumTotal = 0
 
-  async initSocialuniChatModule(mineUser?: SocialuniUserRO) {
-    await socialUserModule.initSocialuniUserModule(mineUser)
+
+  async initSocialuniChatModule() {
+    await socialUserModule.initSocialuniUserModule()
     //获取imToken
     const config: InitConfig = {
       userID: socialUserModule.userId,

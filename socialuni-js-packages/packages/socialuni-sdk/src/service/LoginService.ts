@@ -1,4 +1,4 @@
-import UserService from './UserService'
+import UserService from '../../../socialuni-user/src/service/UserService'
 import UniUserUtil from '../../../socialuni-common/src/utils/UniUserUtil'
 import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
 import {socialSystemModule} from "socialuni-sdk/src/store/store";

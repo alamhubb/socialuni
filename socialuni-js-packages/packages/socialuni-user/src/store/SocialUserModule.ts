@@ -10,6 +10,9 @@ import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig";
 import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import SocialuniImUserAPI from "../api/SocialuniImUserAPI";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import UserService from "../service/UserService";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -29,26 +32,22 @@ export default class SocialUserModule extends Pinia {
     registerUser(user: SocialuniUserRO) {
     }
 
+
+    //登录成功后，设置用户，设置im
+    //刷新用户的场景，手动刷新和登录后刷新用户的信息和imtoken？
     //传入user，就行了。
-    async initSocialuniUserModule(mineUser?: SocialuniUserRO) {
-        console.log(this.userId)
+    async initSocialuniUserModule() {
         //判断是否已登录已有token,userId
         if (this.hasToken) {
+            console.log(2222)
             const {data}: { data: SocialuniUserRO } = await SocialuniUserAPI.getMineUserInfoAPI();
             console.log(data)
             //考虑清空缓存的情况
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置
             this.setUser(data)
-        } else if (mineUser) {
-            //调用登录或者注册接口，得到token和user
-            //SocialLoginRO<CenterUserDetailRO>
-            this.setUserAndToken({} as any)
-            if (SocialuniConfig.useIm) {
-                //获取im的token，存到哪里呢
-                const {data} = await SocialuniImUserAPI.getImUserTokenAPI()
-                this.setImToken(data)
-            }
+            const res = await SocialuniImUserAPI.getImUserTokenAPI()
+            this.setImToken(res.data)
         }
     }
 
@@ -89,6 +88,10 @@ export default class SocialUserModule extends Pinia {
         SocialuniImUserTokenUtil.set(token)
     }
 
+    private removeImToken() {
+        this.setImToken(null)
+    }
+
     private setToken(token: string) {
         this.userToken = token
         SocialuniTokenUtil.set(token)
@@ -104,6 +107,7 @@ export default class SocialUserModule extends Pinia {
 
     removeUserAndToken() {
         this.setUserAndToken(null)
+        this.removeImToken()
     }
 
     setUser(user: SocialuniUserRO) {
@@ -125,6 +129,7 @@ export default class SocialUserModule extends Pinia {
     loginOut() {
         return AlertUtil.confirm('是否退出登录').then(() => {
             UserService.userLogout()
+            socialUserModule.removeUserAndToken()
             ToastUtil.toast('用户退出')
         })
     }

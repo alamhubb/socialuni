@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "socialuni-api": "1.0.0",
+    "socialuni-im": "1.0.0",
     "vue": "^3.2.41",
     "socialuni-common": "1.0.0",
     "socialuni-use": "1.0.0",
