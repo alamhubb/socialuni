@@ -46,7 +46,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import MsgInput from '@/components/MsgInput.vue'
+import MsgInput from 'socialuni-ui/src/components/MsgInput.vue'
 import TalkItem from '@/pages/talk/talkItem/TalkItem.vue'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import TalkVO from 'socialuni-api/src/model/talk/TalkVO'

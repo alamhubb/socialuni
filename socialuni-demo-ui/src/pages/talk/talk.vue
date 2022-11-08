@@ -55,10 +55,10 @@ import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
 import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
 import QSlider from 'socialuni-ui/src/components/QSlider/QSlider.vue'
-import SocialTagPicker from "../../components/SocialTagPicker.vue";
-import QCityPicker from "../../components/QCityPicker/QCityPicker.vue";
+import SocialTagPicker from "socialuni-ui/src/components/SocialTagPicker.vue";
+import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
 import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
-import MsgInput from "../../components/MsgInput.vue";
+import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";

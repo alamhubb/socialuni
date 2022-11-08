@@ -100,15 +100,15 @@ import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import SocialTagPicker from "../../components/SocialTagPicker.vue";
-import SocialCirclePicker from "../../components/SocialCirclePicker.vue";
+import SocialTagPicker from "socialuni-ui/src/components/SocialTagPicker.vue";
+import SocialCirclePicker from "socialuni-ui/src/components/SocialCirclePicker.vue";
 import TagSearch from "./TagSearch.vue";
 import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import QCityPicker from "../../components/QCityPicker/QCityPicker.vue";
-import QCityInfo from "../../components/QCityInfo/QCityInfo.vue";
+import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
+import QCityInfo from "socialuni-ui/src/components/QCityInfo/QCityInfo.vue";
 
 
 @Options({

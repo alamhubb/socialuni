@@ -15,7 +15,7 @@ import QSidebar from 'socialuni-ui/src/components/QSidebar/QSidebar.vue'
 import QRowItem from 'socialuni-ui/src/components/QRowItem/QRowItem.vue'
 import QTabs from 'socialuni-ui/src/components/QTabs/QTabs.vue'
 import QTab from 'socialuni-ui/src/components/QTab/QTab.vue'
-import CircleSearch from '@/components/SocialCirclePicker.vue'
+import CircleSearch from 'socialuni-ui/src/components/SocialCirclePicker.vue'
 
 
 @Options({

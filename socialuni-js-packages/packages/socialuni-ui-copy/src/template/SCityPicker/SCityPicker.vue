@@ -42,9 +42,9 @@ import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import DistrictVO from "socialuni-api/model/DistrictVO";
 import LocationUtil from "socialuni-common/src/utils/LocationUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import SPicker from "../../components/SPicker/SPicker.vue";
-import SIcon from "../../components/SIcon/SIcon.vue";
-import SPopup from "../../components/SPopup/SPopup.vue";
+import SPicker from "socialuni-ui/src/components/SPicker/SPicker.vue";
+import SIcon from "socialuni-ui/src/components/SIcon/SIcon.vue";
+import SPopup from "socialuni-ui/src/components/SPopup/SPopup.vue";
 
 
 const cityDialog = ref(null)
