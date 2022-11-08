@@ -72,7 +72,7 @@
 import {Options, Emit, Prop, Vue, Watch} from 'vue-property-decorator'
 import TagVO from 'socialuni-api/src/model/community/tag/TagVO'
 import CenterUserDetailRO from 'socialuni-api/src/model/social/CenterUserDetailRO'
-import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
+import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 import {socialUserModule} from 'socialuni-user/src/store/store';
 

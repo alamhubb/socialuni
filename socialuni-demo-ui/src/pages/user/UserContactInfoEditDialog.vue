@@ -25,8 +25,8 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QInput from "../../qing-ui/components/QInput/QInput.vue";
-import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
+import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import SSwitch from "socialuni-ui/src/component/SSwitch.vue";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";

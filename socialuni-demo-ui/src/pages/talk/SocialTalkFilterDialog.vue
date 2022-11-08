@@ -103,10 +103,10 @@ import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import SocialTagPicker from "../../components/SocialTagPicker.vue";
 import SocialCirclePicker from "../../components/SocialCirclePicker.vue";
 import TagSearch from "./TagSearch.vue";
-import QInput from "../../qing-ui/components/QInput/QInput.vue";
-import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
-import QSlider from "../../qing-ui/components/QSlider/QSlider.vue";
-import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
+import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QCityPicker from "../../components/QCityPicker/QCityPicker.vue";
 import QCityInfo from "../../components/QCityInfo/QCityInfo.vue";
 

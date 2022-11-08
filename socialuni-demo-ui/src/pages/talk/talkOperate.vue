@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import {socialAppModule, socialConfigModule, socialTalkModule} from "socialuni-sdk/src/store/store";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";

@@ -96,7 +96,7 @@ import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UserUtil from "socialuni-common/src/utils/UserUtil";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
-import QIcon from "../../../qing-ui/components/QIcon/QIcon.vue";
+import QIcon from "../socialuni-ui/src/components/QIcon/QIcon.vue";
 import DateUtil from "socialuni-use/src/utils/DateUtil";
 
 @Options({

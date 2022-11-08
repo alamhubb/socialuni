@@ -91,10 +91,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
-import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
-import QNavbar from "../../qing-ui/components/QNavbar/QNavbar.vue";
-import QRowItem from "../../qing-ui/components/QRowItem/QRowItem.vue";
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
+import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
 import UserInfo from "./UserInfo.vue";
 import Login from "./login/login.vue";
 import MsgInput from "../../components/MsgInput.vue";
@@ -124,7 +124,7 @@ export default class QcMineDetail extends Vue {
   showMoreList = false
   // 登录
   disabledLoginBtn = false
-  
+
   created(){
     onLoad((params) => {
       UniUtil.showShareMenu()

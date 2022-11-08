@@ -49,15 +49,15 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 
-import QButton from '../../qing-ui/components/QButton/QButton.vue'
-import QNavbar from '../../qing-ui/components/QNavbar/QNavbar.vue'
-import QSearch from '../../qing-ui/components/QSearch/QSearch.vue'
-import QIcon from '../../qing-ui/components/QIcon/QIcon.vue'
-import QPopup from '../../qing-ui/components/QPopup/QPopup.vue'
-import QSlider from '../../qing-ui/components/QSlider/QSlider.vue'
+import QButton from 'socialuni-ui/src/components/QButton/QButton.vue'
+import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
+import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
+import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
+import QSlider from 'socialuni-ui/src/components/QSlider/QSlider.vue'
 import SocialTagPicker from "../../components/SocialTagPicker.vue";
 import QCityPicker from "../../components/QCityPicker/QCityPicker.vue";
-import QTabs from "../../qing-ui/components/QTabs/QTabs.vue";
+import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
 import MsgInput from "../../components/MsgInput.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";

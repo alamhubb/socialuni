@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import {Emit, Options, Vue} from 'vue-property-decorator'
-import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import {socialAppModule, } from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import ReportType from "socialuni-constant/constant/ReportType";

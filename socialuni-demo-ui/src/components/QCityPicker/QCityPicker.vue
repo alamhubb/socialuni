@@ -39,13 +39,13 @@
 
 <script lang="ts">
 import {Options, Emit, Model, Vue, Prop} from 'vue-property-decorator'
-import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
-import QPicker from "../../qing-ui/components/QPicker/QPicker.vue";
+import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+import QPicker from "socialuni-ui/src/components/QPicker/QPicker.vue";
 import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import LocationUtil from "socialuni-common/src/utils/LocationUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 
 @Options({
   components: {
