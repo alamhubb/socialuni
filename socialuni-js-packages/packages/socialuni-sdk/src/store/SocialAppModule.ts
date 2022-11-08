@@ -26,14 +26,18 @@ export default class SocialAppModule extends Pinia {
 
 
     async appLunchAction() {
+        console.log(1111)
         //校验更新
         PlatformUtils.checkUpdate()
         try {
+            console.log(1111)
             //无论如何都要获取当前用户信息
             if (socialUserModule.hasToken) {
+                console.log(1111)
                 await socialChatModule.initSocialuniChatModule()
                 UserService.getAppLunchDataByHasUser()
             }
+            console.log(1111)
             // WebsocketUtil.websocketConnect(false)
             socialTalkModule.getTalkTabs()
             socialTagModule.getHotTagsAction()

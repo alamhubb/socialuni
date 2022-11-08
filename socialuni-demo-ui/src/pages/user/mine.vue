@@ -6,7 +6,6 @@
             </view>-->
       <user-info :user="mineUser"></user-info>
 
-
       <q-popup v-model="showMoreList" bottom>
         <view class="w65vw flex-col py-xl mt-xl h100r">
           <div class="flex-row">
@@ -99,10 +98,10 @@ import QRowItem from "../../qing-ui/components/QRowItem/QRowItem.vue";
 import UserInfo from "./UserInfo.vue";
 import Login from "./login/login.vue";
 import MsgInput from "../../components/MsgInput.vue";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
-import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
+import {socialUserModule} from 'socialuni-user/src/store/store';
+import UniUtil from "socialuni-common/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
-import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 
 @Options({
   components: {

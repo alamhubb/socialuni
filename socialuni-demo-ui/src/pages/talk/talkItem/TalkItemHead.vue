@@ -81,23 +81,23 @@
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import ObjectUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ObjectUtil";
-import {socialUserModule} from "socialuni-sdk/src/store/store";
+import ObjectUtil from "socialuni-use/src/utils/ObjectUtil";
+import {socialUserModule} from 'socialuni-user/src/store/store';
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
-import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
-import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
-import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
+import MsgUtil from "socialuni-common/src/utils/MsgUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import UserUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UserUtil";
+import UserUtil from "socialuni-common/src/utils/UserUtil";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import QIcon from "../../../qing-ui/components/QIcon/QIcon.vue";
-import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
+import DateUtil from "socialuni-use/src/utils/DateUtil";
 
 @Options({
   components: {

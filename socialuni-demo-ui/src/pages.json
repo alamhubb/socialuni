@@ -7,6 +7,12 @@
   },
   "pages": [
     {
+      "path": "pages/user/mine",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/chat/chat",
       "style": {
         "navigationStyle": "custom"
@@ -14,12 +20,6 @@
     },
     {
       "path": "pages/talk/talk",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/user/mine",
       "style": {
         "navigationStyle": "custom"
       }

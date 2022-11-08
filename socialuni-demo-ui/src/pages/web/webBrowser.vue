@@ -29,7 +29,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import PagePath from 'socialuni-constant/constant/PagePath'
-import RouterUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil'
+import RouterUtil from 'socialuni-use/src/utils/RouterUtil'
 import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {onLoad, onReady} from "@dcloudio/uni-app";

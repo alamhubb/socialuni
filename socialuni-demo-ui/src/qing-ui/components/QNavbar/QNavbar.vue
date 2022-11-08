@@ -26,7 +26,7 @@ import {Options, Prop, Vue} from 'vue-property-decorator'
 import GetMenuButtonBoundingClientRectRes = UniApp.GetMenuButtonBoundingClientRectRes;
 import QIcon from "../QIcon/QIcon.vue";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
 // #ifdef MP

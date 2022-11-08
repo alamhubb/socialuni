@@ -89,16 +89,16 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import QIcon from "../../../qing-ui/components/QIcon/QIcon.vue";
 import {socialTagModule, socialTalkModule} from "socialuni-sdk/src/store/store";
-import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
-import ImgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/ImgUtil";
-import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
-import NumUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/NumUtil";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import ImgUtil from "socialuni-common/src/utils/ImgUtil";
+import MsgUtil from "socialuni-common/src/utils/MsgUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
+import NumUtil from "socialuni-use/src/utils/NumUtil";
 
 @Options({
   components: {QIcon}

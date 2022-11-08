@@ -110,22 +110,23 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialUserModule} from 'socialuni-user/src/store/store';
 import DomFile from 'socialuni-api/src/model/DomFile';
 import SocialUserIdentityAuthPreCheckRO from "socialuni-api/src/model/RO/user/SocialUserIdentityAuthPreCheckRO";
 import TencentCosIdInfoRO from "socialuni-api/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
 import QButton from "@/qing-ui/components/QButton/QButton.vue";
 import QIcon from "@/qing-ui/components/QIcon/QIcon.vue";
-import CosUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/CosUtil";
-import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
-import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
+import CosUtil from "socialuni-common/src/utils/CosUtil";
+import UniUtil from "socialuni-common/src/utils/UniUtil";
+import MsgUtil from "socialuni-common/src/utils/MsgUtil";
 import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
-import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import SocialUserIdentityAPI from "socialuni-api/src/api/socialuni/SocialUserIdentityAPI";
 import SocialUserIdentityAuthQO from "socialuni-api/src/model/QO/user/SocialUserIdentityAuthQO";
-import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
-import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 @Options({
   components: {

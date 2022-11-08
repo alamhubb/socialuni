@@ -27,7 +27,7 @@ import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import NodesRef = UniApp.NodesRef
 import SelectorQuery = UniApp.SelectorQuery
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
-import CommonUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil";
+import CommonUtil from "socialuni-use/src/utils/CommonUtil";
 
 @Options({})
 export default class QTabs extends Vue {

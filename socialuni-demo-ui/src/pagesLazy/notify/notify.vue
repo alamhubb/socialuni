@@ -38,10 +38,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import ImgUtil from '../socialuni-js-packages/packages/socialuni-common/src/utils/ImgUtil'
+import ImgUtil from 'socialuni-common/src/utils/ImgUtil'
 import {socialNotifyModule} from "socialuni-sdk/src/store/store";
-import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import DateUtil from "socialuni-use/src/utils/DateUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 
 /**

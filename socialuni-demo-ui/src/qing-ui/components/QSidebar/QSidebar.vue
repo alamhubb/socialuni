@@ -27,7 +27,7 @@
   </view>
 </template>
 <script lang="ts">
-import CommonUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil';
+import CommonUtil from 'socialuni-use/src/utils/CommonUtil';
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import SelectorQuery = UniApp.SelectorQuery;
 import NodesRef = UniApp.NodesRef;

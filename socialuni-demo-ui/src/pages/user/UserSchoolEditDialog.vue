@@ -36,10 +36,10 @@ import QPopup from "../../qing-ui/components/QPopup/QPopup.vue";
 import QSearch from "../../qing-ui/components/QSearch/QSearch.vue";
 import QSelect from "../../qing-ui/components/QSelect/QSelect.vue";
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
-import {socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialUserModule} from 'socialuni-user/src/store/store';
 import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
-import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
-import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
 
 @Options({

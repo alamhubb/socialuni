@@ -59,6 +59,8 @@
     "socialuni-scss": "../socialuni-js-packages/packages/socialuni-scss",
     "socialuni-ui": "../socialuni-js-packages/packages/socialuni-ui",
     "socialuni-user": "../socialuni-js-packages/packages/socialuni-user",
+    "socialuni-use": "../socialuni-js-packages/packages/socialuni-use",
+    "socialuni-common": "../socialuni-js-packages/packages/socialuni-common",
     "socialuni-constant": "../socialuni-js-packages/packages/socialuni-constant",
     "socialuni-sdk": "../socialuni-js-packages/packages/socialuni-sdk",
     "socialuni-im": "../socialuni-js-packages/packages/socialuni-im",

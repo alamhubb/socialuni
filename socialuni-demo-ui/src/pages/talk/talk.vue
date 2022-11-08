@@ -70,10 +70,10 @@ import {
   socialTagModule,
   socialUserModule
 } from "socialuni-sdk/src/store/store";
-import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
-import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
+import UniUtil from "socialuni-common/src/utils/UniUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import {onHide} from "@dcloudio/uni-app"; // todo 后台可控制是否显示轮播图

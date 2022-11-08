@@ -90,7 +90,7 @@ public class SocialuniMineUserDetailROFactory {
         }
 
         //设置openIm的key
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
+        /*SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUserId);
         if (socialUserAccountDO == null) {
             String imToken = socialuniOpenImUserFeign.userLogin(SocialuniMineUserDetailROFactory.toImUserModel(mineUserDetailRO));
             socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialUserDetailRO.getId(), imToken);
@@ -99,7 +99,7 @@ public class SocialuniMineUserDetailROFactory {
             String token = socialuniOpenImUserFeign.getAndRefreshToken(socialUserDetailRO.getId());
             socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialUserDetailRO.getId(), token);
         }
-        mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());
+        mineUserDetailRO.setImToken(socialUserAccountDO.getSessionKey());*/
 
         return mineUserDetailRO;
     }

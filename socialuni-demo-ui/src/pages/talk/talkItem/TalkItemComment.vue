@@ -80,19 +80,20 @@ import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
 import QIcon from "../../../qing-ui/components/QIcon/QIcon.vue";
 import QButton from "../../../qing-ui/components/QButton/QButton.vue";
 import ChildComment from "../ChildComment.vue";
-import {socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialTalkModule } from "socialuni-sdk/src/store/store";
+import {socialUserModule} from 'socialuni-user/src/store/store';
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import ObjectUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ObjectUtil";
+import ObjectUtil from "socialuni-use/src/utils/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
-import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
+import MsgUtil from "socialuni-common/src/utils/MsgUtil";
+import UniUtil from "socialuni-common/src/utils/UniUtil";
 import CommentVO from "socialuni-api/src/model/comment/CommentVO";
-import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import HugAddVO from "socialuni-api/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import RouterUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/RouterUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 @Options({
   components: {

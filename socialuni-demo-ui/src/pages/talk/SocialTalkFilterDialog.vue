@@ -94,12 +94,12 @@ import {
   socialTalkModule,
   socialUserModule
 } from "socialuni-sdk/src/store/store";
-import TalkFilterUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/TalkFilterUtil";
+import TalkFilterUtil from "socialuni-common/src/utils/TalkFilterUtil";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import GenderType from "socialuni-constant/constant/GenderType";
-import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import SocialTagPicker from "../../components/SocialTagPicker.vue";
 import SocialCirclePicker from "../../components/SocialCirclePicker.vue";
 import TagSearch from "./TagSearch.vue";

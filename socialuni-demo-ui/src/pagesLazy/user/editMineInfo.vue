@@ -102,17 +102,17 @@
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
 import SocialuniUserAPI from 'socialuni-api/src/api/socialuni/SocialuniUserAPI'
-import JsonUtils from '../socialuni-js-packages/packages/socialuni-use/src/utils/ObjectUtil'
-import AlertUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil'
-import ToastUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil'
+import JsonUtils from 'socialuni-use/src/utils/ObjectUtil'
+import AlertUtil from 'socialuni-use/src/utils/AlertUtil'
+import ToastUtil from 'socialuni-use/src/utils/ToastUtil'
 import EnumStrVO from 'socialuni-constant/constant/EnumStrVO'
 import GenderType from 'socialuni-constant/constant/GenderType'
 import UserEditVO from 'socialuni-api/src/model/user/UserEditVO'
-import BirthAgeUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/BirthAgeUtil'
+import BirthAgeUtil from 'socialuni-use/src/utils/BirthAgeUtil'
 import {socialUserModule} from 'socialuni-sdk/src/store/store'
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 import QButton from "../../qing-ui/components/QButton/QButton.vue";
-import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
+import DateUtil from "socialuni-use/src/utils/DateUtil";
 
 @Options({
   components: {QButton}
