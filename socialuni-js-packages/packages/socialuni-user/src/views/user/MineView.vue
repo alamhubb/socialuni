@@ -96,7 +96,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
 import UserInfo from "./UserInfo.vue";
-import Login from "./login/login.vue";
+import Login from "../login/login/login.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import UniUtil from "socialuni-common/src/utils/UniUtil";

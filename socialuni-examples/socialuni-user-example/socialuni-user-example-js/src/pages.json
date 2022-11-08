@@ -13,7 +13,7 @@
       }
     },
     {
-      "path": "pages/phone/phone",
+      "path": "pages/login/login",
       "style": {
         "navigationStyle": "custom"
       }

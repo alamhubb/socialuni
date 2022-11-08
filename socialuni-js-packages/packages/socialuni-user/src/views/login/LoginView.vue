@@ -124,11 +124,11 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialUserModule} from 'socialuni-user/src/store/store';
+import {socialUserModule} from 'packages/socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import LoginService from "socialuni-sdk/src/service/LoginService";
 import PhoneService from "socialuni-sdk/src/service/PhoneService";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import AlertUtil from "packages/socialuni-use/src/utils/AlertUtil";
 import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
