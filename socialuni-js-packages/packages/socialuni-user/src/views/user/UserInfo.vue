@@ -300,35 +300,35 @@
 
     <user-info-img :user="user"></user-info-img>
 
-    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-    <!--  #ifdef MP-WEIXIN -->
+<!--    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
+    &lt;!&ndash;  #ifdef MP-WEIXIN &ndash;&gt;
     <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
         ad-theme="white"></ad>
-    <!--  #endif -->
-    <!--qq平台显示的广告-->
-    <!--  #ifdef MP-QQ -->
+    &lt;!&ndash;  #endif &ndash;&gt;
+    &lt;!&ndash;qq平台显示的广告&ndash;&gt;
+    &lt;!&ndash;  #ifdef MP-QQ &ndash;&gt;
     <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
         type="feeds" ad-height="160"></ad>
-    <!--  #endif -->
-    <!--  #ifdef APP-PLUS -->
+    &lt;!&ndash;  #endif &ndash;&gt;
+    &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
     <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>
-    <!--  #endif -->
+    &lt;!&ndash;  #endif &ndash;&gt;
 
     <div class="px-smm mb-xs">动态</div>
     <view v-for="talk in talks" :key="talk.id" class="px-sm">
       <talk-item :talk="talk" @deleteTalk="deleteTalk"></talk-item>
     </view>
 
-    <!--wx平台显示的广告-->
-    <!--  #ifdef MP-WEIXIN -->
+    &lt;!&ndash;wx平台显示的广告&ndash;&gt;
+    &lt;!&ndash;  #ifdef MP-WEIXIN &ndash;&gt;
     <ad class="bg-white mt-10 w100vw" unit-id="adunit-ffa7bc1c73c7d46a"></ad>
-    <!--  #endif -->
-    <!--qq平台显示的广告-->
-    <!--  #ifdef MP-QQ -->
+    &lt;!&ndash;  #endif &ndash;&gt;
+    &lt;!&ndash;qq平台显示的广告&ndash;&gt;
+    &lt;!&ndash;  #ifdef MP-QQ &ndash;&gt;
     <ad class="bg-white mt-10 w100vw" unit-id="b10fe0e7c39b9ca9e7ce19660f6d0761" test-banner-type="one"></ad>
-    <!--  #endif -->
-    <!--  #ifdef APP-PLUS -->
-    <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>
+    &lt;!&ndash;  #endif &ndash;&gt;
+    &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
+    <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
     <!--  #endif -->
   </view>
 </template>
@@ -346,9 +346,6 @@ import QPcModel from "socialuni-ui/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
-import TalkOperate from "../talk/talkOperate.vue";
-import TalkItem from "../talk/talkItem/TalkItem.vue";
-import TalkItemContent from "../talk/talkItem/TalkItemContent.vue";
 import {socialAppModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
@@ -385,9 +382,6 @@ import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
     SocialGenderTag,
     QIcon,
     QRowItem,
-    TalkOperate,
-    TalkItem,
-    TalkItemContent
   }
 })
 export default class UserInfo extends Vue {
