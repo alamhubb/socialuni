@@ -85,7 +85,7 @@
       </msg-input>
     </view>
     <!--      title="欢迎登录清池app"-->
-    <login v-else class="h100p"></login>
+    <login-view v-else class="h100p"></login-view>
   </view>
 </template>
 
@@ -96,7 +96,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
 import UserInfo from "./UserInfo.vue";
-import Login from "../login/login/login.vue";
+import LoginView from "../login/LoginView";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import UniUtil from "socialuni-common/src/utils/UniUtil";
@@ -106,7 +106,7 @@ import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 
 @Options({
   components: {
-    Login,
+    LoginView,
     QPopup,
     QIcon,
     QNavbar,

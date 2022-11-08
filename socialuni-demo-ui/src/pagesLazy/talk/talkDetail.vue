@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QIcon from '@/qing-ui/components/QIcon/QIcon.vue'
+import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
 import MsgInput from '@/components/MsgInput.vue'
 import TalkItem from '@/pages/talk/talkItem/TalkItem.vue'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
@@ -53,7 +53,7 @@ import TalkVO from 'socialuni-api/src/model/talk/TalkVO'
 import RouterUtil from 'socialuni-use/src/utils/RouterUtil'
 import PageUtil from 'socialuni-common/src/utils/PageUtil'
 import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
-import QNavbar from '@/qing-ui/components/QNavbar/QNavbar.vue'
+import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
 import UniUtil from 'socialuni-common/src/utils/UniUtil'
 import {socialConfigModule} from 'socialuni-sdk/src/store/store'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";

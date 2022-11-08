@@ -50,13 +50,13 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator'
-import QPopup from '@/qing-ui/components/QPopup/QPopup.vue'
-import QSidebar from '@/qing-ui/components/QSidebar/QSidebar.vue'
-import QInput from '@/qing-ui/components/QInput/QInput.vue'
+import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
+import QSidebar from 'socialuni-ui/src/components/QSidebar/QSidebar.vue'
+import QInput from 'socialuni-ui/src/components/QInput/QInput.vue'
 import { socialCircleModule } from '@/socialuni/store'
 import SocialCircleRO from '@/socialuni/model/community/circle/SocialCircleRO'
 import ObjectUtil from '@/socialuni/utils/ObjectUtil'
-import QIcon from '@/qing-ui/components/QLocation/QIcon.vue'
+import QIcon from 'socialuni-ui/src/components/QLocation/QIcon.vue'
 
 
 @Component({

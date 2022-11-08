@@ -1,7 +1,7 @@
 {
-  "name": "清池",
+  "name": "vue",
   "appid": "__UNI__9863127",
-  "description": "干净的00后恋爱交友app",
+  "description": "vue",
   "versionName": "1.8.0",
   "versionCode": 180,
   "transformPx": false,
@@ -218,7 +218,7 @@
   },
   // 高速公路行驶持续后台定位
   "h5": {
-    "title": "清池恋爱交友app - 00后干净的恋爱交友社区",
+    "title": "vue",
     "router": {
       "mode": "history"
     },

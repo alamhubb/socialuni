@@ -43,7 +43,7 @@
 
 <script lang="ts">
 
-import QIcon from "../../qing-ui/components/QIcon/QIcon.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import SocialuniReportDialog from "../report/SocialuniReportDialog.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import {socialUserModule} from 'socialuni-user/src/store/store';
