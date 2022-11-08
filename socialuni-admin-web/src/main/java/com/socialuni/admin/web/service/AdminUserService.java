@@ -1,11 +1,11 @@
 package com.socialuni.admin.web.service;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserRepository;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

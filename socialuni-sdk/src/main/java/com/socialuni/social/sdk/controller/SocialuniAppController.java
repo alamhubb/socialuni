@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.feignAPI.SocialuniAppAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniAppService;
 import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;

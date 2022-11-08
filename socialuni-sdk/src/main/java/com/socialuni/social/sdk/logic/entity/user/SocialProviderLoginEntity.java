@@ -5,12 +5,12 @@ import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
 import com.socialuni.social.sdk.logic.manage.SocialUserAccountManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserManage;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.utils.SocialUniProviderUtil;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

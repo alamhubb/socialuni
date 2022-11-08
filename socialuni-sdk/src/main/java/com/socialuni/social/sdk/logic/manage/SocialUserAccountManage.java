@@ -2,11 +2,11 @@ package com.socialuni.social.sdk.logic.manage;
 
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.user.sdk.entity.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
 import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.common.api.constant.PlatformType;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.store.SocialUserAccountStore;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;

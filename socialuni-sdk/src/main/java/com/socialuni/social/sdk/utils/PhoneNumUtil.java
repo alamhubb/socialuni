@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.utils.IntegerUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**

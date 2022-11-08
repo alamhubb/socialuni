@@ -3,17 +3,17 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.sdk.constant.AppConfigConst;
-import com.socialuni.social.sdk.constant.platform.UniappProviderType;
-import com.socialuni.social.sdk.dao.DO.NotifyDO;
+import com.socialuni.social.user.sdk.config.AppConfigConst;
+import com.socialuni.social.user.sdk.constant.UniappProviderType;
+import com.socialuni.social.user.sdk.model.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.sdk.logic.platform.qq.QQConst;
-import com.socialuni.social.sdk.logic.platform.weixin.WxConst;
-import com.socialuni.social.sdk.model.PushMsgDTO;
+import com.socialuni.social.user.sdk.platform.qq.QQConst;
+import com.socialuni.social.user.sdk.platform.weixin.WxConst;
+import com.socialuni.social.user.sdk.platform.PushMsgDTO;
 import com.socialuni.social.sdk.model.PushNotifyVO;
 import com.socialuni.social.sdk.model.PushValue;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

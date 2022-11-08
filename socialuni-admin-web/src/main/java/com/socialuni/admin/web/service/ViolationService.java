@@ -5,18 +5,18 @@ import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.enumeration.ReportStatus;
 import com.socialuni.social.report.sdk.repository.ReportRepository;
-import com.socialuni.social.sdk.constant.UserType;
+import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateLevel;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.status.UserStatus;
+import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
 import com.socialuni.social.sdk.dao.store.ReportStore;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserViolationEntity;
 import com.socialuni.social.sdk.logic.service.ReportService;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.entity.SocialUserViolationDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
-import com.socialuni.social.user.sdk.repository.UserRepository;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class ViolationService {
     @Resource
     private ReportService reportService;
     @Resource
-    private UserRepository userApi;
+    private SocialuniUserRepository userApi;
     @Resource
     private ReportStore reportStore;
     @Resource
@@ -59,7 +59,7 @@ public class ViolationService {
         String userStatus = violationUser.getStatus();
         //存在用户发表其他内容，被封的情况
         if (ReportStatus.auditStatus.contains(userStatus)) {
-            violationUser.setStatus(UserStatus.enable);
+            violationUser.setStatus(SocialuniUserStatus.enable);
         } else {
             log.info("用户状态已经被更改：{}", userStatus);
         }
@@ -200,11 +200,11 @@ public class ViolationService {
         violationUser.setUpdateTime(curDate);
 
         //用户状态不为已封禁，才修改用户状态
-        if (!violationUser.getStatus().equals(UserStatus.violation)) {
+        if (!violationUser.getStatus().equals(SocialuniUserStatus.violation)) {
             //如果封禁天数大于0，则封禁
             if (violationDay > 0) {
                 //封禁
-                violationUser.setStatus(UserStatus.violation);
+                violationUser.setStatus(SocialuniUserStatus.violation);
                 //封禁日期不叠加，按最后得算
                 //封禁截止日期
                 SocialUserViolationDo.setViolationStartTime(new Date());
@@ -212,7 +212,7 @@ public class ViolationService {
                 calendar.add(Calendar.DATE, violationDay);
                 SocialUserViolationDo.setViolationEndTime(calendar.getTime());
             } else {
-                violationUser.setStatus(UserStatus.enable);
+                violationUser.setStatus(SocialuniUserStatus.enable);
             }
         }
         //不删除之前的内容

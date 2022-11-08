@@ -2,11 +2,11 @@ package com.socialuni.social.sdk.logic.factory.RO.comment;
 
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniReplyCommentRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserRO;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 @Component

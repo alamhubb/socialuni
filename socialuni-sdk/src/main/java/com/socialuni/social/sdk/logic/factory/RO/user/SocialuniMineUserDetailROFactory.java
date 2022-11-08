@@ -2,25 +2,23 @@ package com.socialuni.social.sdk.logic.factory.RO.user;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.im.contrller.SocialuniOpenImUserFeign;
-import com.socialuni.social.im.model.SocialuniImUserModel;
-import com.socialuni.social.sdk.constant.GenderTypeNumEnum;
-import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
-import com.socialuni.social.sdk.dao.repository.user.SocialUserAccountRepository;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.sdk.logic.domain.user.SocialBindUserOpenImAccountDomain;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.sdk.utils.common.BirthdayAgeUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.entity.*;
+import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserSocialCoinDo;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserDetailRO;
+import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @Component
 public class SocialuniMineUserDetailROFactory {

@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.repository;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.user.sdk.entity.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SocialUserViolationRepository extends JpaRepository<SocialUserViolationDo, Integer> {

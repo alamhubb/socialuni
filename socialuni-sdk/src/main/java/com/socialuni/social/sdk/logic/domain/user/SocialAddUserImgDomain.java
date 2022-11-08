@@ -3,14 +3,14 @@ package com.socialuni.social.sdk.logic.domain.user;
 import com.socialuni.social.sdk.logic.domain.report.SoicialuniSystemPreCheckReportDomainDOUtil;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.user.img.UserImgDOFactory;
-import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
-import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
+import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserImgRepository;
-import com.socialuni.social.user.sdk.repository.UserRepository;
+import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +21,6 @@ import javax.annotation.Resource;
 public class SocialAddUserImgDomain {
     @Resource
     SocialuniUserImgRepository userImgRepository;
-    @Resource
-    UserRepository userApi;
 
     public SocialuniMineUserDetailRO addUserImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
@@ -32,19 +30,6 @@ public class SocialAddUserImgDomain {
         userImgDO = userImgRepository.savePut(userImgDO);
 
         SoicialuniSystemPreCheckReportDomainDOUtil.systemPreCheckReport(userImgDO);
-
-        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
-
-        return socialMineUserDetailRO;
-    }
-
-    public SocialuniMineUserDetailRO addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
-
-        SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
-
-        mineUser.setAvatar(SocialuniSystemConst.getStaticResourceUrl() + socialUserImgAddQO.getSrc() + "!avatar");
-
-        userApi.savePut(mineUser);
 
         SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 

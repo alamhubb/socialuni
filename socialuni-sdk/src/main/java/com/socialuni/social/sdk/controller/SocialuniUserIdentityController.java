@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.controller;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserIdentityAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserIdentityService;
-import com.socialuni.social.sdk.model.QO.user.SocialUserIdentityAuthQO;
+import com.socialuni.social.user.sdk.model.QO.SocialUserIdentityAuthQO;
 import com.socialuni.social.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

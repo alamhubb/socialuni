@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.sdk.constant.platform.UniappProviderType;
+import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.exception.exception.UniSdkException;
 
 public class UniProviderUtil {

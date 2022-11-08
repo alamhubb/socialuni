@@ -3,12 +3,12 @@ package com.socialuni.social.sdk.logic.check;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.constant.ErrorMsg;
-import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
-import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,7 +26,7 @@ public class SocialuniUserCheck {
             throw new SocialParamsException(ErrorMsg.bindPhoneNumCan);
         }
         //如果用户状态不为可用
-        if (!UserStatus.enable.equals(mineUser.getStatus())) {
+        if (!SocialuniUserStatus.enable.equals(mineUser.getStatus())) {
 //            throw new SocialBusinessException(ErrorMsg.userMaybeViolation);
             ConfigFacade.throwBusinessException(ErrorMsg.userMaybeViolation, SocialSystemConst.CONFIGS_KEY_QQ_ACCOUNT);
         }

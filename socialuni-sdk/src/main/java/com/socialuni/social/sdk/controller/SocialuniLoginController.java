@@ -2,9 +2,9 @@ package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.sdk.feignAPI.user.SocialuniLoginAPI;
 import com.socialuni.social.sdk.logic.service.login.SocialuniLoginService;
-import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import org.springframework.web.bind.annotation.RequestBody;

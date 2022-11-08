@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 
 import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 
 public class SocialProviderUtil {
     public static UniUnionIdRO getSocialUnionIdRO(SocialProviderLoginQO loginQO) {

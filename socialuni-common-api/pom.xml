@@ -20,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
         <!--        不依赖这个SocialuniRepositoryFacade的SpringUtil.getBean会报错-->
         <dependency>
             <groupId>org.apache.commons</groupId>

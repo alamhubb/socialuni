@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.model.RO;
 
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserRO;
 import lombok.Data;
 
 @Data

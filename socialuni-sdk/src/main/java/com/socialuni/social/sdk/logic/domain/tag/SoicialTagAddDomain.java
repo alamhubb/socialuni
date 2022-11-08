@@ -6,10 +6,10 @@ import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
 import com.socialuni.social.sdk.logic.factory.community.SocialTagROFactory;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
-import com.socialuni.social.sdk.logic.service.content.SocialuniTextContentUtil;
+import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.tag.TagAddQO;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

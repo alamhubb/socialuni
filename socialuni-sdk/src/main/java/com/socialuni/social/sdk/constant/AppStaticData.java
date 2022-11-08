@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.constant;
 
 
-import com.socialuni.social.sdk.dao.DO.keywords.IllegalWordDO;
-import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
+import com.socialuni.social.user.sdk.model.DO.IllegalWordDO;
+import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

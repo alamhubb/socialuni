@@ -1,5 +1,7 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.common.api.utils.IntegerUtils;
+
 /**
  * @author qinkaiyuan
  * @date 2019-02-17 13:48

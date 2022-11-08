@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.domain.phone;
 
 import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.sdk.logic.entity.user.SocialBindUserProviderAccountEntity;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 

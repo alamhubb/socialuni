@@ -4,7 +4,7 @@ import com.socialuni.admin.web.repository.DevAuthCodeRepository;
 import com.socialuni.social.sdk.dao.DO.dev.DevAuthCodeDO;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.sdk.utils.IntegerUtils;
+import com.socialuni.social.common.api.utils.IntegerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

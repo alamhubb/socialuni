@@ -1,11 +1,11 @@
 package com.socialuni.social.sdk.logic.entity;
 
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

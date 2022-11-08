@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.service;
 
 import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.sdk.constant.config.AppConfigStatic;
-import com.socialuni.social.sdk.dao.DO.keywords.IllegalWordDO;
-import com.socialuni.social.sdk.dao.DO.keywords.KeywordsDO;
-import com.socialuni.social.sdk.dao.repository.IllegalWordRepository;
+import com.socialuni.social.user.sdk.config.AppConfigStatic;
+import com.socialuni.social.user.sdk.model.DO.IllegalWordDO;
+import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
+import com.socialuni.social.user.sdk.repository.IllegalWordRepository;
 import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.constant;
 
-import com.socialuni.social.sdk.constant.platform.UniappProviderType;
+import com.socialuni.social.user.sdk.constant.UniappProviderType;
 
 import java.util.Arrays;
 import java.util.List;

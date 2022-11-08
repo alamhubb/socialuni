@@ -6,21 +6,21 @@ import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.entity.ReportDetailDO;
 import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
 import com.socialuni.social.report.sdk.repository.ReportRepository;
-import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.sdk.constant.ErrorMsg;
+import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.user.sdk.constant.ErrorMsg;
 import com.socialuni.social.sdk.constant.ReportSourceType;
-import com.socialuni.social.sdk.constant.UserType;
+import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
-import com.socialuni.social.sdk.constant.status.UserStatus;
+import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
 import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
-import com.socialuni.social.user.sdk.repository.UserRepository;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,7 +38,7 @@ public class SoicialuniUserAddReportDomain {
     @Resource
     private ReportDetailRepository reportDetailApi;
     @Resource
-    private UserRepository userApi;
+    private SocialuniUserRepository userApi;
 
     @Transactional
     public ResultRO<String> userReportContent(SocialuniReportAddQO socialReportAddQO, SocialuniUnionContentBaseDO modelDO) {
@@ -85,8 +85,8 @@ public class SoicialuniUserAddReportDomain {
             //如果被举报的用户是官方，则不修改官方的用户状态、只存在于官方自己举报自己时，也不能修改自己的用户状态
             if (!receiveUser.getType().equals(UserType.system)) {
                 //只有用户为正常时，才改为待审核，如果用户已被封禁则不改变状态
-                if (receiveUser.getStatus().equals(UserStatus.enable)) {
-                    receiveUser.setStatus(UserStatus.audit);
+                if (receiveUser.getStatus().equals(SocialuniUserStatus.enable)) {
+                    receiveUser.setStatus(SocialuniUserStatus.audit);
                 }
             }
             //记录用户的被举报此数

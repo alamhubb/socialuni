@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.entity.user;
 
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.entity.SocialUserViolationDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.model.DO.SocialUserViolationDo;
 import com.socialuni.social.user.sdk.repository.SocialUserViolationRepository;
 import org.springframework.stereotype.Component;
 

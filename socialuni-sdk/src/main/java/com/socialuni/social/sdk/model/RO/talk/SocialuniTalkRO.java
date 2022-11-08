@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.model.RO.talk;
 
-import com.socialuni.social.sdk.model.RO.user.SocialuniContentIdRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniContentUserRO;
+import com.socialuni.social.common.api.model.SocialuniContentIdRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniContentUserRO;
 import lombok.Data;
 
 import java.util.Date;

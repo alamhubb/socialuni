@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkImgRepository;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserImgRepository;
 import com.socialuni.social.web.sdk.utils.ErrorLogUtil;
 import lombok.extern.slf4j.Slf4j;

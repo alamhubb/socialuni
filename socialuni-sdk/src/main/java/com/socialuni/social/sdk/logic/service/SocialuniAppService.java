@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 
-import com.socialuni.social.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;

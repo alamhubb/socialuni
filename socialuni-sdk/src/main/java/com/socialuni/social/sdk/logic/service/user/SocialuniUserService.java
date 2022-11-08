@@ -1,28 +1,28 @@
 package com.socialuni.social.sdk.logic.service.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
 import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
-import com.socialuni.social.sdk.logic.domain.user.SocialEditUserDomain;
 import com.socialuni.social.sdk.logic.entity.UniUserRegistryDomain;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
-import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
-import com.socialuni.social.sdk.model.QO.user.SocialUserImgDeleteQO;
-import com.socialuni.social.sdk.model.QO.user.SocialuniUserImgDeleteQO;
-import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
+import com.socialuni.social.user.sdk.model.QO.SocialUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserDetailRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserImgRO;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +75,9 @@ public class SocialuniUserService {
 
     public ResultRO<SocialuniMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-        SocialuniMineUserDetailRO socialMineUserDetailRO = socialEditUserDomain.editUser(socialUserEditQO, mineUser);
+        socialEditUserDomain.editUser(socialUserEditQO, mineUser);
+
+        SocialuniMineUserDetailRO socialMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
 
         if (SocialuniSystemConst.serverIsChild()) {
             return socialuniUserAPI.editUser(socialUserEditQO);

@@ -1,9 +1,9 @@
 package com.socialuni.social.sdk.feignAPI.user;
 
-import com.socialuni.social.sdk.model.QO.user.SocialuniUserIdQO;
-import com.socialuni.social.sdk.model.QO.user.edit.SocialUserContactInfoEditQO;
-import com.socialuni.social.sdk.model.QO.user.edit.SocialUserSchoolNameEditQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
+import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
+import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

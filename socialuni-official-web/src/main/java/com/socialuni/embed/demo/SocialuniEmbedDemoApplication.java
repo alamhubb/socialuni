@@ -1,6 +1,6 @@
 package com.socialuni.embed.demo;
 
-import com.socialuni.social.sdk.config.EnableSocialuni;
+import com.socialuni.social.user.sdk.config.EnableSocialuni;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

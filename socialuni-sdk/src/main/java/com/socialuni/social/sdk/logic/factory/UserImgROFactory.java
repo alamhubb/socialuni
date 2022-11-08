@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
-import com.socialuni.social.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserImgRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
-import com.socialuni.social.user.sdk.entity.SocialuniUserImgDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 
 import java.util.List;
 import java.util.stream.Collectors;

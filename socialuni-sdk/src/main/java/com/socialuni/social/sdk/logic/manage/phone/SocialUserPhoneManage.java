@@ -2,13 +2,13 @@ package com.socialuni.social.sdk.logic.manage.phone;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.sdk.constant.status.UserStatus;
-import com.socialuni.social.sdk.dao.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
+import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
-import com.socialuni.social.sdk.utils.SocialuniUserUtil;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.entity.SocialUserPhoneDo;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.repository.SocialUserPhoneRepository;
 import org.springframework.stereotype.Component;
 
@@ -55,7 +55,7 @@ public class SocialUserPhoneManage {
         if (SocialUserPhoneDo != null) {
             SocialuniUserDo phoneUser = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
             //如果手机号违规，则返回手机号不可用
-            if (phoneUser.getStatus().equals(UserStatus.violation)) {
+            if (phoneUser.getStatus().equals(SocialuniUserStatus.violation)) {
                 throw new SocialBusinessException("手机号不可用");
             }
         }

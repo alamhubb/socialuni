@@ -8,7 +8,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.sdk.logic.entity.DevAccountEntity;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
-import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
@@ -17,7 +17,7 @@ import com.socialuni.social.tance.sdk.api.DevTokenInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevTokenModler;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.feignAPI.user;
 
-import com.socialuni.social.sdk.model.QO.SocialuniImgAddQO;
-import com.socialuni.social.sdk.model.QO.user.edit.SocialUserEditQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniUserImgRO;
+import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserDetailRO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniUserImgRO;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.model.QO.user.SocialuniUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

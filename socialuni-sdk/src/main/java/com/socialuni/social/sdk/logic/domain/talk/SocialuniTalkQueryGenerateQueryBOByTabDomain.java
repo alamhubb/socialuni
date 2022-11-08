@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.user.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

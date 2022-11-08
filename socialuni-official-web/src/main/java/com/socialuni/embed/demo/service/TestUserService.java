@@ -7,11 +7,11 @@ import com.socialuni.embed.demo.model.TokenDO;
 import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.model.UserDO;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
-import com.socialuni.social.user.sdk.entity.SocialTokenDO;
+import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.sdk.logic.entity.user.SocialUserEntity;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
-import com.socialuni.social.sdk.model.QO.user.SocialProviderLoginQO;
-import com.socialuni.social.user.sdk.entity.SocialuniUserDo;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

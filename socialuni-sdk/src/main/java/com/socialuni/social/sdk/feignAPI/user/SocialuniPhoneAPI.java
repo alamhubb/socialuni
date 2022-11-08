@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.feignAPI.user;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
-import com.socialuni.social.sdk.model.QO.user.SocialPhoneNumQO;
-import com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
