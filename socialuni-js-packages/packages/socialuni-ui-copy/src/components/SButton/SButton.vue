@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { Options, Emit, Prop, Vue } from 'vue-property-decorator'
-import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
+import CommonUtil from "socialuni-common/src/utils/CommonUtil";
 
 @Options({})
 export default class SButton extends Vue {

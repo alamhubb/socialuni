@@ -23,11 +23,11 @@
     <view class="cu-list menu-avatar pb-50px">
       <view v-for="chat in showChats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
-        <image class="cu-avatar radius lg" :src="chat.avatar"/>
+        <image class="cu-avatar radius lg" :src="chat.avatar" />
         <view class="content h45px col-between">
           <view>
             <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
-              chat.nickname
+                chat.nickname
               }}
             </view>
             <view v-if="systemChats.indexOf(chat.type)>-1"
@@ -71,22 +71,15 @@
 <script lang="ts">
 import ChatType from 'socialuni-constant/constant/ChatType'
 import CommonStatus from 'socialuni-constant/constant/CommonStatus'
-import {Options, Vue} from 'vue-property-decorator'
+import { Options, Vue } from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
-import UniUtil from '../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil'
-import AlertUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil'
 import ChatAPI from 'socialuni-api/src/api/ChatAPI'
-import ToastUtil from '../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil'
-import {socialChatModule} from 'socialuni-sdk/src/store/store'
-import DateUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/DateUtil";
-import SocialuniChatRO from "../socialuni-js-packages/packages/socialuni-api/src/model/chat/SocialuniChatRO";
-
+import { socialChatModule } from "socialuni-im/src/store/store"
 
 @Options({})
 export default class ChatView extends Vue {
 
   get chats() {
-    console.log(socialChatModule.chats.length)
     return socialChatModule.chats
   }
 

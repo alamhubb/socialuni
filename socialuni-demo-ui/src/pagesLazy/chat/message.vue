@@ -179,27 +179,22 @@
 import {Options, Vue} from "vue-property-decorator";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import {socialChatModule, socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MessageType from "socialuni-constant/constant/mesaage/MessageType";
 import Constants from "socialuni-constant/constant/Constant";
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
-import MsgUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/MsgUtil";
-import UniUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/UniUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";
-import ToastUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/ToastUtil";
 import UserType from "socialuni-constant/constant/UserType";
-import AlertUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/AlertUtil";
 import MessageAPI from "@/api/MessageAPI";
-import PageUtil from "../socialuni-js-packages/packages/socialuni-common/src/utils/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
-import PlatformUtils from "../socialuni-js-packages/packages/socialuni-common/src/utils/PlatformUtils";
 import PayType from "socialuni-constant/constant/PayType";
-import CommonUtil from "../socialuni-js-packages/packages/socialuni-use/src/utils/CommonUtil";
 import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
 import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
+import {socialUserModule} from "socialuni-user/src/store/store";
+import {socialChatModule} from "socialuni-im/src/store/store";
 
 @Options({components: {SocialuniReportDialog}})
 export default class MessageView extends Vue {

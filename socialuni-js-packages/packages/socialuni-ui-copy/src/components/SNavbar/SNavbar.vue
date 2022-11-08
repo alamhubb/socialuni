@@ -23,10 +23,10 @@
 
 <script setup lang="ts">
 import {computed} from "vue";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import SIcon from "../SIcon/SIcon.vue";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 const statusBarHeight = socialSystemModule.statusBarHeight
 const navBarHeight = socialSystemModule.navBarHeight

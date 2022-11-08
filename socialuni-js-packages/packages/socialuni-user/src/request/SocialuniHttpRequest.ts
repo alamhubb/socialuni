@@ -9,8 +9,10 @@
  */
 import RequestOptions = UniApp.RequestOptions
 import ResultRO from "../model/social/ResultRO";
-import {socialConfigModule, socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/store";
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import {socialConfigModule, socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialUserModule} from "socialuni-user/src/store/store";
+import {socialChatModule} from "socialuni-im/src/store/store";
+import UniUtil from "socialuni-common/src/utils/UniUtil";
 import ErrorConst from "socialuni-constant/constant/ErrorConst";
 import UserService from "socialuni-sdk/src/service/UserService";
 import MsgUtil from "socialuni-common/src/utils/MsgUtil";

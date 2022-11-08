@@ -1,6 +1,6 @@
 import DistrictVO from '../DistrictVO'
 import ImgFileVO from '../ImgFileVO'
-import SocialuniChatRO from '../chat/SocialuniChatRO'
+import SocialuniChatRO from '../../../../socialuni-im/src/model/SocialuniChatRO'
 
 export default class UserVOBack {
   id: string = null

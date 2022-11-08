@@ -6,7 +6,6 @@ import SocialConfigModule from "./SocialConfigModule";
 import SocialTagModule from "./SocialTagModule";
 import SocialNotifyModule from "./SocialNotifyModule";
 import SocialPlatformModule from "./SocialPlatformModule";
-import SocialChatModule from "./SocialChatModule";
 import SocialSystemModule from "./SocialSystemModule";
 
 

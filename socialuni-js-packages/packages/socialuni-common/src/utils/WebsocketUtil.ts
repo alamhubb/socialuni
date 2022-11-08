@@ -1,6 +1,4 @@
-import SocialuniTokenUtil from './SocialuniTokenUtil'
 import CommonUtil from '../../../socialuni-use/src/utils/CommonUtil'
-import {socialUserModule} from "socialuni-sdk/src/store/store";
 
 export default class WebsocketUtil {
     //失败重连时间
@@ -10,11 +8,11 @@ export default class WebsocketUtil {
     static websocketConnect(reload: boolean) {
         let token: string
 
-        if (socialUserModule.hasToken) {
+        /*if (socialUserModule.hasToken) {
             token = socialUserModule.token
         } else {
             token = CommonUtil.getUUID()
-        }
+        }*/
         /*uni.connectSocket({
           //因为app不支持header中传参
           // url: AppConfig.websocketUrl + 'imserver/' + token,

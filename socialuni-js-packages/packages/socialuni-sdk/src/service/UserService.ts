@@ -1,5 +1,7 @@
 import WebsocketUtil from '../../../socialuni-common/src/utils/WebsocketUtil'
-import {socialChatModule, socialNotifyModule, socialUserModule} from "../store/store";
+import { socialNotifyModule} from "../store/store";
+import {socialUserModule} from "socialuni-user/src/store/store";
+import {socialChatModule} from "socialuni-im/src/store/store";
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 
@@ -13,7 +15,7 @@ export default class UserService {
 
     static getAppLunchDataByHasUser() {
         socialNotifyModule.queryNotifiesAction()
-        socialChatModule.queryAppLunchChats()
+        socialChatModule.initSocialuniChatModule()
     }
 
     //获取通知列表
