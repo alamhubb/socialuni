@@ -1,9 +1,9 @@
-package com.socialuni.social.tance.repository;
+package com.socialuni.social.uni.sdk.repository;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.socialuni.social.tance.entity.DevAccountDo;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.uni.sdk.model.DevAccountDo;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.constant;
+package com.socialuni.social.tance.sdk.constant;
 
 
 import lombok.extern.slf4j.Slf4j;

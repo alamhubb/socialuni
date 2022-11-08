@@ -1,12 +1,11 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.uni.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.sdk.api.DevSocialuniIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.uni.sdk.logic.entity.DevAccountEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -27,14 +26,10 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Resource
     private ConfigMapRefreshService configMapRefreshService;
     @Resource
-    private ViolationKeywordsService violationKeywordsService;
-    @Resource
     DistrictRedis districtRedis;
     @Resource
     DevAccountEntity devAccountEntity;
 
-    @Resource
-    DevSocialuniIdInterface devSocialuniIdApi;
     @Resource
     SocialUserPhoneEntity socialUserPhoneEntity;
     @Resource

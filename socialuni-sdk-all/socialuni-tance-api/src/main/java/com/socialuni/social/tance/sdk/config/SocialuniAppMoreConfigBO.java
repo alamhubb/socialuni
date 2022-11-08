@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.tance.sdk.config;
 
 import lombok.Data;
 

@@ -21,6 +21,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-common-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialuni.social</groupId>
+            <artifactId>socialuni-tance-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>

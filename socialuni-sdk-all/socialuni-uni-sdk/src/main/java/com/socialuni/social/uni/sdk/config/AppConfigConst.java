@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.uni.sdk.config;
 
 
 import com.socialuni.social.common.api.constant.DateTimeType;

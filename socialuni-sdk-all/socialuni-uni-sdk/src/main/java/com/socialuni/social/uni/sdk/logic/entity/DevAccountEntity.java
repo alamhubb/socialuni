@@ -1,13 +1,13 @@
-package com.socialuni.social.sdk.logic.entity;
+package com.socialuni.social.uni.sdk.logic.entity;
 
 import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.sdk.constant.AdminAppConfigConst;
+import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
-import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
-import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

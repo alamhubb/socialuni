@@ -1,9 +1,8 @@
-package com.socialuni.social.sdk.logic.service;
+package com.socialuni.social.uni.sdk.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.user.sdk.config.AppConfigConst;
 import com.socialuni.social.common.api.utils.JsonUtil;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
