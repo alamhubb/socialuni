@@ -75,6 +75,11 @@ import { Options, Vue } from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import ChatAPI from 'socialuni-api/src/api/ChatAPI'
 import { socialChatModule } from "socialuni-im/src/store/store"
+import DateUtil from "socialuni-use/src/utils/DateUtil";
+import UniUtil from "socialuni-common/src/utils/UniUtil";
+import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import {onLoad} from "@dcloudio/uni-app";
 
 @Options({})
 export default class ChatView extends Vue {
@@ -100,9 +105,11 @@ export default class ChatView extends Vue {
     return DateUtil.formatTime(dateStr)
   }
 
-  onLoad() {
-    UniUtil.showShareMenu()
-    //需要先清除，再跳转页面
+  created(){
+    onLoad((params) => {
+      console.log(123)
+      UniUtil.showShareMenu()
+    })
   }
 
   onPullDownRefresh() {

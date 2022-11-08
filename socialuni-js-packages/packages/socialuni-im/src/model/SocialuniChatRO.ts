@@ -1,6 +1,7 @@
 import MessageVO from 'socialuni-api/src/model/message/MessageVO'
 import { OpenImChatRO } from "socialuni-api/src/model/openIm/OpenImChatRO"
 import { OpenImMsgRO } from "socialuni-api/src/model/openIm/OpenImMsgRO"
+import JsonUtil from 'socialuni-use/src/utils/JsonUtil'
 
 export default class SocialuniChatRO {
   public id: string = null
@@ -8,7 +9,6 @@ export default class SocialuniChatRO {
   public type: number = null
   public status: string = null
   public messages: MessageVO[] = []
-  public avatar: string = null
   public avatar: string = null
   public unreadNum: number = null
   public updateTime: number = null
@@ -36,7 +36,7 @@ export default class SocialuniChatRO {
       // this.lastContent = openImChat.lastContent
       // this.vipFlag = chat.vipFlag
       this.receiveUserId = openImChat.userID
-      // this.lastMsg = JsonUtil.parse(openImChat.latestMsg)
+      this.lastMsg = JsonUtil.parse(openImChat.latestMsg)
       this.lastContent = this.lastMsg.content
 
 

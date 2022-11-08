@@ -6,7 +6,6 @@ import {socialUserModule} from "./store";
 import SocialuniUserRO from "../model/SocialuniUserRO";
 import SocialuniUserAPI from "../api/SocialuniUserAPI";
 import SocialuniTokenUtil from "socialuni-common/src/utils/SocialuniTokenUtil";
-import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig";
 import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import SocialuniImUserAPI from "../api/SocialuniImUserAPI";

@@ -102,6 +102,7 @@ import {socialUserModule} from 'socialuni-user/src/store/store';
 import UniUtil from "socialuni-common/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 
 @Options({
   components: {
@@ -123,17 +124,17 @@ export default class QcMineDetail extends Vue {
   showMoreList = false
   // 登录
   disabledLoginBtn = false
-
-  onLoad() {
-    UniUtil.showShareMenu()
-  }
-
-  onShow() {
-    this.showMsgInput = true
-  }
-
-  onHide() {
-    this.showMsgInput = false
+  
+  created(){
+    onLoad((params) => {
+      UniUtil.showShareMenu()
+    })
+    onShow(() => {
+      this.showMsgInput = true
+    })
+    onHide(() => {
+      this.showMsgInput = false
+    })
   }
 
   destroyAccount() {

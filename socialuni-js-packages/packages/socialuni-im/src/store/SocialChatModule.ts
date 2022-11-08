@@ -42,27 +42,18 @@ export default class SocialChatModule extends Pinia {
       platformID: OpenImPlatformType.web
     }
     console.log(config)
-    return openIm.login(config).then(() => {
-      console.log('登录成功')
-    })
-  }
-
-  async queryAppLunchChats() {
-    console.log(123)
-    // await openImLogin()
-
-    console.log('登录成功')
+    await openIm.login(config)
     const options = {
       offset: 0,
       count: 20
     }
-    console.log(options)
     openIm.getConversationListSplit(options).then(({ data }) => {
       console.log(11111)
       const chats: OpenImChatRO[] = JsonUtil.parse(data)
       this.chats = chats.map(item => new SocialuniChatRO(item))
     })
   }
+
 
   async queryChats() {
 
