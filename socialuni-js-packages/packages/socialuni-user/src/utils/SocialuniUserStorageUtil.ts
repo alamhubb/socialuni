@@ -1,12 +1,11 @@
 import StorageUtil from '../../../socialuni-use/src/utils/StorageUtil'
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import SocialSystemInfo from "socialuni-constant/constant/SocialSystemInfo";
+import SocialuniUserRO from "../model/SocialuniUserRO";
 
 export default class SocialuniUserStorageUtil {
     // 开发生产区分user，避免混淆，不区分的话会冲突
     private static readonly user_key: string = 'user_key'
 
-    static set(user: CenterUserDetailRO) {
+    static set(user: SocialuniUserRO) {
         if (user) {
             StorageUtil.setObj(this.user_key, user)
         } else {
@@ -14,7 +13,7 @@ export default class SocialuniUserStorageUtil {
         }
     }
 
-    static get(): CenterUserDetailRO {
+    static get(): SocialuniUserRO {
         // 开发环境方便测试
         return StorageUtil.getObj(this.user_key)
     }

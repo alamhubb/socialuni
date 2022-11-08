@@ -37,7 +37,7 @@ export default class SocialChatModule extends Pinia {
     const config: InitConfig = {
       userID: socialUserModule.userId,
       token: socialUserModule.imToken,
-      url: SocialuniConfig.socialuniImUrl,
+      url: SocialuniConfig.openImJsImUrl,
       platformID: OpenImPlatformType.web
     }
     console.log(config)

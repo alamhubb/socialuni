@@ -1,7 +1,7 @@
-import socialuniUserRequest from "../request/socialuniUserRequest";
+import request from "socialuni-api/src/request/request";
 
 export default class SocialuniImUserAPI {
     static getImUserTokenAPI() {
-        return socialuniUserRequest.get<string>('socialuni/imUser/getImUserToken')
+        return request.get<string>('socialuni/imUser/getImUserToken')
     }
 }

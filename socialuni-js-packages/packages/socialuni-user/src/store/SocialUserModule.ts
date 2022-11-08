@@ -7,13 +7,13 @@ import SocialuniUserRO from "../model/SocialuniUserRO";
 import SocialuniUserAPI from "../api/SocialuniUserAPI";
 import SocialuniTokenUtil from "socialuni-common/src/utils/SocialuniTokenUtil";
 import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig";
-import SocialuniUserStorageUtil from "socialuni-common/src/utils/SocialuniUserStorageUtil";
+import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import SocialuniImUserAPI from "../api/SocialuniImUserAPI";
 
 @Store
 export default class SocialUserModule extends Pinia {
-    private userInfo: SocialuniUserRO = null
+    private userInfo: SocialuniUserRO = SocialuniUserStorageUtil.get() || null
     private userToken: string = SocialuniTokenUtil.get() || null
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
 
@@ -31,9 +31,11 @@ export default class SocialUserModule extends Pinia {
 
     //传入user，就行了。
     async initSocialuniUserModule(mineUser?: SocialuniUserRO) {
+        console.log(this.userId)
         //判断是否已登录已有token,userId
-        if (this.userId) {
+        if (this.hasToken) {
             const {data}: { data: SocialuniUserRO } = await SocialuniUserAPI.getMineUserInfoAPI();
+            console.log(data)
             //考虑清空缓存的情况
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置

@@ -34,7 +34,6 @@ export default class SocialAppModule extends Pinia {
             //无论如何都要获取当前用户信息
             if (socialUserModule.hasToken) {
                 console.log(1111)
-                await socialChatModule.initSocialuniChatModule()
                 UserService.getAppLunchDataByHasUser()
             }
             console.log(1111)
