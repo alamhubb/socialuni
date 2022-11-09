@@ -20,7 +20,7 @@
 
     <modules>
         <module>socialuni-demo-web</module>
-<!--        <module>socialuni-official/socialuni-official-web</module>-->
+        <module>socialuni-official/socialuni-official-web</module>
         <module>socialuni-admin/socialuni-admin-web</module>
         <module>socialuni-common-api</module>
         <module>socialuni-sdk</module>

@@ -68,7 +68,7 @@
     "tinycolor2": "^1.4.2",
     "uuid": "^7.0.3",
     "vite-plugin-require-transform": "^1.0.4",
-    "vue": "^3.2.41",
+    "vue": "3.2.41",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-property-decorator": "^10.0.0-rc.3",
     "vue-i18n": "^9.2.2",

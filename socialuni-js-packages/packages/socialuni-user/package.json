@@ -10,7 +10,7 @@
     "@dcloudio/uni-app": "3.0.0-alpha-3060820221027002",
     "socialuni-api": "1.0.0",
     "socialuni-im": "1.0.0",
-    "vue": "^3.2.41",
+    "vue": "3.2.41",
     "socialuni-common": "1.0.0",
     "socialuni-use": "1.0.0",
     "socialuni-user": "1.0.0",
