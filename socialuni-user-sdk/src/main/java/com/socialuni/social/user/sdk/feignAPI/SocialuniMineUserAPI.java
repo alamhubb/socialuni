@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@RequestMapping("socialuni/mineUser")
 @Tag(name = "用户模块/用户自身信息模块")
-@FeignClient(name = "mineUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
+@FeignClient(name = "mineUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/mineUser")
 public interface SocialuniMineUserAPI {
     @GetMapping("getMineUser")
     @Operation(summary = "获取用户个人详情")

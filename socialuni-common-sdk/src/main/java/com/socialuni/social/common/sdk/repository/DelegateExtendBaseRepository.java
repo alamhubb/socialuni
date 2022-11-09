@@ -26,7 +26,6 @@ import java.util.function.Function;
  * @date 2022/9/1 9:55
  * @since 1.0
  */
-@Primary
 public class DelegateExtendBaseRepository<T, ID >
         extends ExtendBaseRepository<T, ID > {
     protected final EntityManager entityManager;
