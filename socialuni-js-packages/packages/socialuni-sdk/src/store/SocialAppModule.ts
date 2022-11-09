@@ -2,8 +2,8 @@ import {Pinia, Store} from "pinia-class-component"
 import HomeSwiperVO from "socialuni-api/src/model/HomeSwiperVO";
 import {socialUserModule} from "socialuni-user/src/store/store";
 import {socialChatModule} from "socialuni-im/src/store/store";
-import PlatformUtils from "../../../socialuni-common/src/utils/PlatformUtils";
-import UserService from "../../../socialuni-user/src/service/UserService";
+import PlatformUtils from "socialuni-common/src/utils/PlatformUtils";
+import UserService from "socialuni-user/src/service/UserService";
 import {
     socialAppModule,
     socialCircleModule, socialConfigModule,
@@ -11,7 +11,7 @@ import {
     socialTagModule,
     socialTalkModule
 } from "./store";
-import SocialuniTokenUtil from "../../../socialuni-common/src/utils/SocialuniTokenUtil";
+import SocialuniTokenUtil from "socialuni-common/src/utils/SocialuniTokenUtil";
 import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import AppInitDataRO from "socialuni-api/src/model/common/AppInitDataRO";

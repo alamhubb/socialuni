@@ -7,10 +7,10 @@ import com.socialuni.social.sdk.logic.domain.user.SocialDeleteUserImgDomain;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.sdk.logic.entity.UniUserRegistryDomain;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
-import com.socialuni.social.sdk.logic.manage.TokenManage;
+import com.socialuni.social.user.sdk.manage.SocialuniTokenManage;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
@@ -35,7 +35,7 @@ public class SocialuniThirdUserService {
     @Resource
     SocialuniUnionIdInterface uniContentUnionIdRepository;
     @Resource
-    TokenManage tokenManage;
+    SocialuniTokenManage tokenManage;
     @Transactional
     public ResultRO<SocialLoginRO<SocialuniMineUserDetailRO>> registryUser(SocialProviderLoginQO loginQO) {
         //注册只向三方开发，所以不能为自己

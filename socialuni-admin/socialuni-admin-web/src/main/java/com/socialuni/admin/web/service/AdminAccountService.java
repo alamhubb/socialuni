@@ -10,7 +10,7 @@ import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.sdk.constant.MpType;
 import com.socialuni.social.common.api.constant.PlatformType;
-import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
+import com.socialuni.social.user.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.sdk.logic.manage.SocialTagManage;
 import com.socialuni.social.sdk.model.QO.dev.SyncProdDevAccountQO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;

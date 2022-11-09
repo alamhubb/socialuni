@@ -1,4 +1,4 @@
-import LocationUtil from '../../../socialuni-common/src/utils/LocationUtil'
+import LocationUtil from 'socialuni-common/src/utils/LocationUtil'
 
 import {Pinia, Store} from "pinia-class-component"
 import DistrictAPI from "socialuni-api/src/api/socialuni/DistrictAPI";

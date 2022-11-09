@@ -1,4 +1,4 @@
-import StorageUtil from '../../../socialuni-use/src/utils/StorageUtil'
+import StorageUtil from 'socialuni-use/src/utils/StorageUtil'
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import Constants from "socialuni-constant/constant/Constant";
 

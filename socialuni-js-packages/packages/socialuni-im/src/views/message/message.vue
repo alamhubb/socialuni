@@ -179,7 +179,7 @@
 import {Options, Vue} from "vue-property-decorator";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MessageType from "socialuni-constant/constant/mesaage/MessageType";
 import Constants from "socialuni-constant/constant/Constant";

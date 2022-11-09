@@ -1,7 +1,7 @@
 import UniLoginUtil from './UniLoginUtil'
 import GetUserInfoRes = UniApp.GetUserInfoRes
 import UniProviderLoginQO from "socialuni-api/src/model/UniProviderLoginQO";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 
 export default class UniUserUtil {
     public static async getUniProviderLoginQO(provider: string): Promise<UniProviderLoginQO> {

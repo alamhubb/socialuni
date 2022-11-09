@@ -4,7 +4,7 @@ package com.socialuni.social.demo.controller;
 import com.socialuni.social.sdk.logic.service.SocialuniMockService;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

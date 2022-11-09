@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.logic.entity.AuthThirdUserEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.manage.ThirdUserTokenManage;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;

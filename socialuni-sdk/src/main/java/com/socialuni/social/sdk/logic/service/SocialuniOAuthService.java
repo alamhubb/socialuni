@@ -12,7 +12,7 @@ import com.socialuni.social.user.sdk.model.QO.OAuthUserInfoQO;
 import com.socialuni.social.sdk.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;

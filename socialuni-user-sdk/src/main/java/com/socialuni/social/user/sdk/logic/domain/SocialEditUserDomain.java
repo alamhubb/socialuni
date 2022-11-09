@@ -74,7 +74,7 @@ public class SocialEditUserDomain {
 
         mineUser = userApi.savePut(mineUser);
 
-        SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(mineUser);
+        SocialuniUserRO socialuniUserRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
         return socialuniUserRO;
     }
 
@@ -87,7 +87,7 @@ public class SocialEditUserDomain {
 
         userApi.savePut(mineUser);
 
-        SocialuniUserRO socialMineUserDetailRO = SocialuniUserROFactory.getUserRO(mineUser);
+        SocialuniUserRO socialMineUserDetailRO = SocialuniUserROFactory.getUserRO(mineUser, mineUser);
 
         return socialMineUserDetailRO;
     }

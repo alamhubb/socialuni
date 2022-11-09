@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
-import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
+import com.socialuni.social.user.sdk.model.QO.phone.SocialSendAuthCodeQO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

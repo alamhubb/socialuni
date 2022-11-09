@@ -1,4 +1,4 @@
-import AlertUtil from '../../../socialuni-use/src/utils/AlertUtil'
+import AlertUtil from 'socialuni-use/src/utils/AlertUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UniUtil from "./UniUtil";
 import {socialConfigModule} from "socialuni-sdk/src/store/store";

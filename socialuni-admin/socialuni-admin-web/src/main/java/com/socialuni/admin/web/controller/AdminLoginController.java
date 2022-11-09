@@ -3,7 +3,7 @@ package com.socialuni.admin.web.controller;
 import com.socialuni.admin.web.service.AdminLoginService;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

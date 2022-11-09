@@ -1,5 +1,5 @@
-import AlertUtil from '../../../socialuni-use/src/utils/AlertUtil'
-import ToastUtil from '../../../socialuni-use/src/utils/ToastUtil'
+import AlertUtil from 'socialuni-use/src/utils/AlertUtil'
+import ToastUtil from 'socialuni-use/src/utils/ToastUtil'
 import PageUtil from './PageUtil'
 import {socialUserModule} from "socialuni-user/src/store/store";
 import {socialChatModule} from "socialuni-im/src/store/store";
@@ -7,7 +7,7 @@ import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UniUtil from "./UniUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 
 export default class MsgUtil {
     static unBindPhoneNum() {

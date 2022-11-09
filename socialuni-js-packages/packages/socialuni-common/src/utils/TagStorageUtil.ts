@@ -1,4 +1,4 @@
-import StorageUtil from "../../../socialuni-use/src/utils/StorageUtil";
+import StorageUtil from "socialuni-use/src/utils/StorageUtil";
 import {socialTagModule} from "socialuni-sdk/src/store/store";
 
 export default class TagStorageUtil {

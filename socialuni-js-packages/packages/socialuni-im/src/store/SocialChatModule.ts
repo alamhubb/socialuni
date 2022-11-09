@@ -14,7 +14,7 @@ import SocialuniUserRO from "socialuni-user/src/model/SocialuniUserRO"
 
 import { OpenIMSDK } from "open-im-sdk"
 import { InitConfig } from "open-im-sdk/types"
-import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig"
+import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import { socialChatModule } from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from '../model/SocialuniChatRO'

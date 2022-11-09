@@ -1,7 +1,7 @@
 import UniUtil from './UniUtil'
 import AppConfig from "socialuni-constant/constant/AppConfig";
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 import PlatformType from "socialuni-constant/constant/PlatformType";
 
 export default class WxUtils {

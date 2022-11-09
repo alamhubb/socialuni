@@ -25,7 +25,7 @@
 import {computed} from "vue";
 import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import SIcon from "../SIcon/SIcon.vue";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 const statusBarHeight = socialSystemModule.statusBarHeight

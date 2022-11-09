@@ -6,10 +6,8 @@ import SocialConfigModule from "./SocialConfigModule";
 import SocialTagModule from "./SocialTagModule";
 import SocialNotifyModule from "./SocialNotifyModule";
 import SocialPlatformModule from "./SocialPlatformModule";
-import SocialSystemModule from "./SocialSystemModule";
 
 
-export let socialSystemModule: SocialSystemModule
 export let socialLocationModule: SocialLocationModule
 export let socialAppModule: SocialAppModule
 export let socialCircleModule: SocialCircleModule
@@ -22,7 +20,6 @@ export let socialPlatformModule: SocialPlatformModule
 
 // export let socialOAuthModule: SocialOAuthModule
 export function initSocialuniStore() {
-    socialSystemModule = new SocialSystemModule()
     socialLocationModule = new SocialLocationModule()
     socialAppModule = new SocialAppModule()
     socialConfigModule = new SocialConfigModule()

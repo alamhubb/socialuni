@@ -1,4 +1,4 @@
-import StorageUtil from '../../../socialuni-use/src/utils/StorageUtil'
+import StorageUtil from 'socialuni-use/src/utils/StorageUtil'
 import SocialuniUserRO from "../model/SocialuniUserRO";
 
 export default class SocialuniUserStorageUtil {

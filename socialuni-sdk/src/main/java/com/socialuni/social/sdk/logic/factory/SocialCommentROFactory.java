@@ -40,7 +40,7 @@ public class SocialCommentROFactory {
         socialCommentRO.setNo(comment.getNo());
 
         SocialuniUserDo commentUser = SocialuniUserUtil.getUserNotNull(comment.getUserId());
-        SocialuniUserRO commentUserRO = SocialuniUserROFactory.getUserRO(commentUser);
+        SocialuniUserRO commentUserRO = SocialuniUserROFactory.getUserRO(commentUser, mineUser);
         socialCommentRO.setUser(commentUserRO);
 
         socialCommentRO.setContent(comment.getContent());
@@ -63,7 +63,7 @@ public class SocialCommentROFactory {
     public static List<SocialuniCommentRO> getTalkCommentROs(SocialuniUserDo mineUser, Integer talkId, Boolean showAllComment) {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
-        List<?  extends SocialuniCommentDO> commentDOS;
+        List<? extends SocialuniCommentDO> commentDOS;
         if (showAllComment) {
             commentDOS = commentDao.queryTalkDetailComments(talkId);
         } else {
@@ -77,7 +77,7 @@ public class SocialCommentROFactory {
     public static List<SocialuniCommentRO> getCommentChildCommentROs(SocialuniUserDo mineUser, Integer commentId, Boolean showAllComment) {
         //10毫秒
         log.debug("开始查询comment" + new Date().getTime() / 1000);
-        List<?  extends SocialuniCommentDO> commentDOS;
+        List<? extends SocialuniCommentDO> commentDOS;
         if (showAllComment) {
             commentDOS = commentDao.queryCommentDetailChildComments(commentId);
         } else {
@@ -89,7 +89,7 @@ public class SocialCommentROFactory {
     }
 
 
-    private static List<SocialuniCommentRO> newTalkCommentVOs(SocialuniUserDo mineUser, List<?  extends SocialuniCommentDO> commentDOS, boolean showAll) {
+    private static List<SocialuniCommentRO> newTalkCommentVOs(SocialuniUserDo mineUser, List<? extends SocialuniCommentDO> commentDOS, boolean showAll) {
         return commentDOS.stream()
                 //过滤掉非自己的预审核状态的评论
                 .filter(talkCommentDO -> {

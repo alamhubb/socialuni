@@ -1,4 +1,4 @@
-import CommonUtil from '../../../socialuni-use/src/utils/CommonUtil'
+import CommonUtil from 'socialuni-use/src/utils/CommonUtil'
 
 export default class WebsocketUtil {
     //失败重连时间

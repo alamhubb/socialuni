@@ -351,7 +351,7 @@ import TalkItem from "../talk/talkItem/TalkItem.vue";
 import TalkItemContent from "../talk/talkItem/TalkItemContent.vue";
 import {socialAppModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";

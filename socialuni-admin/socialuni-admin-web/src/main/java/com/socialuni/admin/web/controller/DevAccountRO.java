@@ -1,6 +1,6 @@
 package com.socialuni.admin.web.controller;
 
-import com.socialuni.social.sdk.constant.platform.SocialuniSupportProviderType;
+import com.socialuni.social.user.sdk.constant.platform.SocialuniSupportProviderType;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
 import com.socialuni.social.tance.sdk.model.DevAccountProviderModler;

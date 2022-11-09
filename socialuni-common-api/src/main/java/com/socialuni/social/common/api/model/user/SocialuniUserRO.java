@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SocialuniUserRO extends SocialuniContentIdRO {
     private String nickname;
+    //是否为当前用户
+    private Boolean isMine;
     private String avatar;
     private String gender;
 
@@ -21,6 +23,7 @@ public class SocialuniUserRO extends SocialuniContentIdRO {
 
     public SocialuniUserRO(SocialuniUserRO userRO) {
         super(userRO);
+        this.isMine = userRO.getIsMine();
         this.age = userRO.getAge();
         this.city = userRO.getCity();
         this.nickname = userRO.getNickname();

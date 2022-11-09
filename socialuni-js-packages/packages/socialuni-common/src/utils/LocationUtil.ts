@@ -1,9 +1,9 @@
-import StorageUtil from '../../../socialuni-use/src/utils/StorageUtil'
+import StorageUtil from 'socialuni-use/src/utils/StorageUtil'
 import MapUtil from './MapUtil'
-import AppAuthUtil from '../../../socialuni-use/src/utils/AppAuthUtil'
+import AppAuthUtil from 'socialuni-use/src/utils/AppAuthUtil'
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import {socialLocationModule} from "socialuni-sdk/src/store/store";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule} from "socialuni-user/src/store/store";
 import {QQMapResult} from "socialuni-api/src/model/location/QQMapResult";
 
 const chinaAdCode = '100000'

@@ -1,3 +1,4 @@
+/*
 import { socialSystemModule } from '../../store'
 import DistrictVO from '../DistrictVO'
 import TalkFilterUtil from '../../utils/TalkFilterUtil'
@@ -27,3 +28,4 @@ export default class AppInitQueryVO {
     this.platform = socialSystemModule.platform
   }
 }
+*/

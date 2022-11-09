@@ -111,7 +111,7 @@ import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
     QIcon,
     QNavbar,
     QRowItem,
-    UserInfo,
+    // UserInfo,
     MsgInput
   }
 })

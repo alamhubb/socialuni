@@ -4,7 +4,6 @@ import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailR
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import {socialUserModule} from "./store";
 import SocialuniUserRO from "../model/SocialuniUserRO";
-import SocialuniUserAPI from "../api/SocialuniUserAPI";
 import SocialuniTokenUtil from "socialuni-common/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
@@ -12,6 +11,7 @@ import SocialuniImUserAPI from "../api/SocialuniImUserAPI";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import UserService from "../service/UserService";
+import SocialuniMineUserAPI from "../api/SocialuniMineUserAPI";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -39,7 +39,7 @@ export default class SocialUserModule extends Pinia {
         //判断是否已登录已有token,userId
         if (this.hasToken) {
             console.log(2222)
-            const {data}: { data: SocialuniUserRO } = await SocialuniUserAPI.getMineUserInfoAPI();
+            const {data}: { data: SocialuniUserRO } = await SocialuniMineUserAPI.getMineUserInfoAPI();
             console.log(data)
             //考虑清空缓存的情况
             //从后台根据api获取用户信息， 并且更新user。
@@ -135,10 +135,10 @@ export default class SocialUserModule extends Pinia {
 
     destroyAccount() {
         return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
-            SocialuniUserAPI.destroyAccountAPI().then(() => {
+            /*SocialuniUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
                 ToastUtil.toast('注销成功')
-            })
+            })*/
         })
     }
 
@@ -147,7 +147,7 @@ export default class SocialUserModule extends Pinia {
      */
 
     getMineUserAction() {
-        return SocialuniUserAPI.getMineUserInfoAPI().then((res: any) => {
+        return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
             socialUserModule.setUser(res.data)
         })
     }

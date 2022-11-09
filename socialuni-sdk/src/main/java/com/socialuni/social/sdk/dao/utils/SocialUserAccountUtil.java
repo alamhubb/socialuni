@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.dao.utils;
 
-import com.socialuni.social.sdk.constant.SocialuniAccountProviderType;
+import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
 import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

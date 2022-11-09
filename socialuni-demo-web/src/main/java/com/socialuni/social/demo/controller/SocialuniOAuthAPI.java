@@ -3,7 +3,7 @@ package com.socialuni.social.demo.controller;
 import com.socialuni.social.user.sdk.model.QO.OAuthUserInfoQO;
 import com.socialuni.social.sdk.model.RO.OAuthGetUserPhoneNumRO;
 import com.socialuni.social.sdk.model.RO.SocialOAuthUserRO;
-import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

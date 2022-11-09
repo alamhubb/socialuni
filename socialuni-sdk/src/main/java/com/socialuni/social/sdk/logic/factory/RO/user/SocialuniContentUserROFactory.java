@@ -28,7 +28,7 @@ public class SocialuniContentUserROFactory {
     }
 
     public static SocialuniContentUserRO newContentUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
-        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserROFactory.getUserRO(user));
+        SocialuniContentUserRO userRO = new SocialuniContentUserRO(SocialuniUserROFactory.getUserRO(user, mineUser));
 
         userRO.setHasFollowed(false);
         userRO.setHasBeFollowed(false);

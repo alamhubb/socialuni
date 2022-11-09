@@ -28,7 +28,7 @@ public class SocialMessageROFactory {
         SocialMessageRO messageRO = new SocialMessageRO();
 
         SocialuniUserDo userDO = SocialuniUserUtil.getUserNotNull(messageDO.getUserId());
-        SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO);
+        SocialuniUserRO messageUser = SocialuniUserROFactory.getUserRO(userDO, SocialuniUserUtil.getMineUserNotNull());
         boolean isMine = messageDO.getUserId().equals(lookMessageUserId);
 
         messageRO.setId(messageDO.getUnionId());

@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.constant.socialuni;
 
 import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.sdk.constant.StatusConst;
 
 import java.util.Arrays;
 import java.util.List;
