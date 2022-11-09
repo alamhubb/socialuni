@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.factory;
 
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.constant.NotifyType;

@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.repository;
 
 import cn.hutool.extra.spring.SpringUtil;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import java.util.function.Function;
  * @date 2022/9/1 9:55
  * @since 1.0
  */
+@Primary
 public class DelegateExtendBaseRepository<T, ID >
         extends ExtendBaseRepository<T, ID > {
     protected final EntityManager entityManager;

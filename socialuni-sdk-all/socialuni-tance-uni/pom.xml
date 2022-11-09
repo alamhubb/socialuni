@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-uni-sdk</artifactId>
+            <artifactId>socialuni-tance-dev</artifactId>
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>

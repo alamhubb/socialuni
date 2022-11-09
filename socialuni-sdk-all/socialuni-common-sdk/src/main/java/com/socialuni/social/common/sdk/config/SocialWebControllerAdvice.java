@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.ErrorType;
-import com.socialuni.social.common.api.constant.ErrorMsg;
+import com.socialuni.social.common.api.constant.RequestErrorMsg;
 import com.socialuni.social.common.api.exception.base.SocialException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.JsonUtil;
@@ -81,7 +81,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @ExceptionHandler(value = Exception.class)
     public ResultRO<Void> systemExceptionHandler(Exception exception) {
-        ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.getSystemErrorMsg());
+        ResultRO<Void> resultRO = new ResultRO<>(500, RequestErrorMsg.getSystemErrorMsg());
         String errorStr = exception.toString();
         if (StringUtils.isEmpty(errorStr)) {
             try {
@@ -113,7 +113,7 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
                 errorStr = "解析异常出错";
                 e.printStackTrace();
             }
-            ResultRO<Void> resultRO = new ResultRO<>(500, ErrorMsg.getSystemErrorMsg());
+            ResultRO<Void> resultRO = new ResultRO<>(500, RequestErrorMsg.getSystemErrorMsg());
             this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, feignException.toString(), errorStr);
             return resultRO;
         }

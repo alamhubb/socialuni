@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.logic.factory;
 
 
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.constant.socialuni.MessageStatus;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageReceiveDO;

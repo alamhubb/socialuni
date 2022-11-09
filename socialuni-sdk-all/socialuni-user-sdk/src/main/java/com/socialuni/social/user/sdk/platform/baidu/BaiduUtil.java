@@ -2,7 +2,7 @@ package com.socialuni.social.user.sdk.platform.baidu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialuni.social.user.sdk.platform.TokenDTO;
-import com.socialuni.social.sdk.utils.common.RestUtil;
+import com.socialuni.social.user.sdk.utils.common.RestUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

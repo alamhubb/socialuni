@@ -2,7 +2,7 @@ package com.socialuni.social.web.sdk.config;
 
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.api.constant.ErrorCode;
-import com.socialuni.social.common.api.constant.ErrorMsg;
+import com.socialuni.social.common.api.constant.RequestErrorMsg;
 import com.socialuni.social.common.api.constant.ErrorType;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
@@ -63,9 +63,9 @@ public class SocialWebLogAspect {
             } else {
                 requestLogDO.setErrorCode(ErrorCode.SYSTEM_ERROR);
                 requestLogDO.setErrorType(ErrorType.error);
-                requestLogDO.setErrorMsg(ErrorMsg.getSystemErrorMsg());
+                requestLogDO.setErrorMsg(RequestErrorMsg.getSystemErrorMsg());
                 requestLogDO.setSuccess(false);
-                requestLogDO.setInnerMsg(ErrorMsg.getSystemErrorMsg());
+                requestLogDO.setInnerMsg(RequestErrorMsg.getSystemErrorMsg());
                 requestLogDO.setInnerMsgDetail(result.toString());
                 ErrorLogUtil.saveAsync(requestLogDO);
             }

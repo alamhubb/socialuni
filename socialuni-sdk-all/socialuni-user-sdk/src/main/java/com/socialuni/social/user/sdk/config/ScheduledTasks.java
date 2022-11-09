@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.config;
 
 import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
-import com.socialuni.social.sdk.logic.service.ViolationKeywordsService;
+import com.socialuni.social.user.sdk.logic.ViolationKeywordsService;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import lombok.extern.slf4j.Slf4j;

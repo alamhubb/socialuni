@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.factory.community;
 
 import com.socialuni.social.community.sdk.entity.TagDO;
-import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.model.RO.community.tag.TagRO;
 import org.apache.commons.lang3.StringUtils;
 

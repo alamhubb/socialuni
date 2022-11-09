@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.exception.exception.SocialParamsException
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
-import com.socialuni.social.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

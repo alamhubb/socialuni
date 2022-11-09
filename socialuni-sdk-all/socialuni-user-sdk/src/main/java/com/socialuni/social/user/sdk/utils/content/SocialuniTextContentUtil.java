@@ -1,8 +1,8 @@
 package com.socialuni.social.user.sdk.utils.content;
 
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.user.sdk.model.weixin.HttpResult;
 import com.socialuni.social.user.sdk.logic.service.IllegalWordService;

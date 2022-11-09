@@ -6,7 +6,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.platform.MapUtil;
 import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.sdk.model.RectangleVO;
+import com.socialuni.social.user.sdk.model.RO.RectangleVO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;

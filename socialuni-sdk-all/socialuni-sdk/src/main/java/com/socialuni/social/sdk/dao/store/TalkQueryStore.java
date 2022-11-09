@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

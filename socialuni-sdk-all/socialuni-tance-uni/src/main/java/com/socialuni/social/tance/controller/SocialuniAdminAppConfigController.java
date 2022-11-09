@@ -2,8 +2,8 @@ package com.socialuni.social.tance.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.socialuni.social.common.api.utils.MapUtil;
-import com.socialuni.social.tance.entity.AppConfigDO;
-import com.socialuni.social.tance.entity.AppConfigPk;
+import com.socialuni.social.tance.model.DO.AppConfigDO;
+import com.socialuni.social.tance.model.DO.AppConfigPk;
 import com.socialuni.social.tance.repository.AppConfigRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import org.springframework.stereotype.Controller;

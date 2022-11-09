@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.factory;
 
 
 import com.socialuni.social.sdk.constant.LoadMoreType;
-import com.socialuni.social.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.socialuni.ChatStatus;
 import com.socialuni.social.sdk.constant.socialuni.ChatType;
 import com.socialuni.social.sdk.constant.socialuni.ChatUserStatus;

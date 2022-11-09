@@ -20,16 +20,15 @@
 
     <modules>
         <module>socialuni-demo-web</module>
-        <module>socialuni-official/socialuni-official-web</module>
+<!--        <module>socialuni-official/socialuni-official-web</module>-->
         <module>socialuni-admin/socialuni-admin-web</module>
         <module>socialuni-sdk-all/socialuni-common-api</module>
-        <module>socialuni-sdk-all/socialuni-uni-sdk</module>
         <module>socialuni-sdk-all/socialuni-sdk</module>
         <module>socialuni-sdk-all/socialuni-web-sdk</module>
         <module>socialuni-sdk-all/socialuni-common-sdk</module>
         <module>socialuni-sdk-all/socialuni-tance-uni</module>
-        <module>socialuni-sdk-all/socialuni-tance-api</module>
         <module>socialuni-sdk-all/socialuni-tance-dev</module>
+        <module>socialuni-sdk-all/socialuni-tance-api</module>
         <module>socialuni-sdk-all/socialuni-user-sdk</module>
         <module>socialuni-sdk-all/socialuni-report-sdk</module>
         <module>socialuni-sdk-all/socialuni-community-sdk</module>
@@ -52,11 +51,6 @@
             <dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-im</artifactId>
-                <version>${socialuni.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-uni-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
@@ -91,6 +85,11 @@
             </dependency>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
+                <artifactId>socialuni-tance-dev</artifactId>
+                <version>${socialuni.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-tance-uni</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
@@ -109,11 +108,11 @@
                 <artifactId>socialuni-demo-web</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
-            <dependency>
+            <!--<dependency>
                 <groupId>com.socialuni.social</groupId>
                 <artifactId>socialuni-official-web</artifactId>
                 <version>${socialuni.version}</version>
-            </dependency>
+            </dependency>-->
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
             <dependency>
                 <groupId>org.apache.commons</groupId>

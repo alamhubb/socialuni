@@ -15,7 +15,7 @@ import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
 import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
 import com.socialuni.social.sdk.dao.DO.message.MessageDO;
-import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
+import com.socialuni.social.user.sdk.repository.KeywordsRepository;
 import com.socialuni.social.sdk.dao.repository.MessageRepository;
 import com.socialuni.social.sdk.logic.service.KeywordsService;
 import com.socialuni.social.sdk.logic.service.KeywordsTriggerService;

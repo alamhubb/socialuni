@@ -1,7 +1,7 @@
 package com.socialuni.social.user.sdk.logic.service;
 
 
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.user.sdk.config.AppConfigStatic;
 import com.socialuni.social.user.sdk.model.DO.IllegalWordDO;
 import com.socialuni.social.user.sdk.utils.TextContentUtil;

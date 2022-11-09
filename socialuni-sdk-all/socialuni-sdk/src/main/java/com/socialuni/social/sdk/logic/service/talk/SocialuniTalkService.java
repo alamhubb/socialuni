@@ -8,7 +8,7 @@ import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniTalkIdQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.sdk.model.RectangleVO;
+import com.socialuni.social.user.sdk.model.RO.RectangleVO;
 import com.socialuni.social.user.sdk.platform.MapUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.UniAPIUtils;

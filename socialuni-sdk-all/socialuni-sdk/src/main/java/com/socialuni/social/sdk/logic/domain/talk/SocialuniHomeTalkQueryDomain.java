@@ -11,7 +11,7 @@ import com.socialuni.social.community.sdk.repository.TalkRepository;
 import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.GenderTypeVO;
-import com.socialuni.social.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.constant.config.SocialuniAppType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;

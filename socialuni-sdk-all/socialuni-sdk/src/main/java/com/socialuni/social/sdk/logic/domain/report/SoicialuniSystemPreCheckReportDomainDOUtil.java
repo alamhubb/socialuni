@@ -12,7 +12,7 @@ import com.socialuni.social.user.sdk.config.AppConfigStatic;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
 import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.user.sdk.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;

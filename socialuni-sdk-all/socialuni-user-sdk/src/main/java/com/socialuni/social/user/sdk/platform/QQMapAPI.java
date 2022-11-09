@@ -1,10 +1,10 @@
 package com.socialuni.social.user.sdk.platform;
 
-import com.socialuni.social.sdk.model.QO.location.LocationQueryQO;
-import com.socialuni.social.sdk.model.QO.location.LocationQueryRO;
-import com.socialuni.social.sdk.model.QQMapGeocoderRO;
-import com.socialuni.social.sdk.model.QQMapGeocoderResultRO;
-import com.socialuni.social.sdk.utils.common.RestUtil;
+import com.socialuni.social.user.sdk.model.QO.LocationQueryQO;
+import com.socialuni.social.user.sdk.model.RO.LocationQueryRO;
+import com.socialuni.social.user.sdk.model.RO.QQMapGeocoderRO;
+import com.socialuni.social.user.sdk.model.RO.QQMapGeocoderResultRO;
+import com.socialuni.social.user.sdk.utils.common.RestUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

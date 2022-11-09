@@ -7,7 +7,7 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.constant.status.ConstBoolean;
 import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsDO;
-import com.socialuni.social.sdk.dao.repository.KeywordsRepository;
+import com.socialuni.social.user.sdk.repository.KeywordsRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

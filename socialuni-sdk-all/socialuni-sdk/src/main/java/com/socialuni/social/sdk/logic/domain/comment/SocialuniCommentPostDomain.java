@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.domain.comment;
 
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.TagDO;
-import com.socialuni.social.sdk.constant.SocialuniConst;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.sdk.dao.store.SocialTagRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
