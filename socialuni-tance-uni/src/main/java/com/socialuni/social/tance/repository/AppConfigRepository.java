@@ -6,6 +6,7 @@ import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.model.DO.AppConfigPk;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Primary
 public interface AppConfigRepository extends JpaRepository<AppConfigDO, AppConfigPk>, ConfigInterface {
     public static final Integer DEFAULT_DEV_KEY = 0;
 
