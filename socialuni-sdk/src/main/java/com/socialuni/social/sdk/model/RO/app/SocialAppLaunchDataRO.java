@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.model.RO.app;
 
-import com.socialuni.social.user.sdk.config.SocialuniAppConfigBO;
-import com.socialuni.social.user.sdk.config.SocialuniAppMoreConfigBO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
 import lombok.Data;
 
 import java.util.List;

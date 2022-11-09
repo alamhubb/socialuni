@@ -2,8 +2,8 @@ package com.socialuni.social.sdk.dao.store;
 
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.mapper.TalkMapper;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;

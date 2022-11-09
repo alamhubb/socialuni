@@ -23,7 +23,7 @@ import com.socialuni.social.sdk.model.RO.talk.SocialTalkDistrictRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialTalkTagRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniContentUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.user.sdk.model.RO.RectangleVO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;

@@ -39,7 +39,6 @@
         <dependency>
             <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-im</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>

@@ -12,7 +12,7 @@ import com.socialuni.social.sdk.logic.manage.SocialUserManage;
 import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.sdk.logic.manage.phone.SocialUserPhoneManage;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;

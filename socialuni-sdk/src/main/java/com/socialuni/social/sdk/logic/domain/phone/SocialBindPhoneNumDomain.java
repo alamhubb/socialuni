@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.logic.entity.user.SocialUserPhoneEntity;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.manage.phone.AuthenticationManage;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 

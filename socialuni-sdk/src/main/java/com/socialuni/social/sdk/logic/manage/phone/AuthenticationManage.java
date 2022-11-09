@@ -1,6 +1,6 @@
 package com.socialuni.social.sdk.logic.manage.phone;
 
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.utils.IntegerUtils;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;

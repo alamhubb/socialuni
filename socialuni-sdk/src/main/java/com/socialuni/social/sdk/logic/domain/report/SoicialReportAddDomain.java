@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.report.sdk.repository.ReportDetailRepository;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;

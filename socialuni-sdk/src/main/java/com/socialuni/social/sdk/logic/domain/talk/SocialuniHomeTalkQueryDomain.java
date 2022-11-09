@@ -8,7 +8,7 @@ import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.GenderTypeVO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;

@@ -1,7 +1,7 @@
 package com.socialuni.social.sdk.logic.manage.talk;
 
+import com.socialuni.social.community.sdk.entity.DistrictDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.sdk.dao.DO.DistrictDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.sdk.dao.repository.community.TalkAdultImgAuditRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDORedis;

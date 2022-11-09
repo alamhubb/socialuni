@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.utils;
 import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.report.sdk.repository.ReportRepository;
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.user.sdk.model.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;

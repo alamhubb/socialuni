@@ -1,12 +1,13 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.sdk.dao.DO.dev.ThirdUserTokenDO;
 import com.socialuni.social.sdk.dao.repository.dev.ThirdUserTokenRepository;
 import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
+
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -10,7 +10,7 @@ import com.socialuni.social.user.sdk.platform.WxDecode;
 import com.socialuni.social.user.sdk.platform.WxPhoneNumRO;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.UniUnionIdRO;
 import com.socialuni.social.sdk.utils.UniProviderUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;

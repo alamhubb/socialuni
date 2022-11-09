@@ -7,7 +7,7 @@ import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.RO.comment.SocialuniReplyCommentROFactory;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.sdk.utils.SystemUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;

@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.model;
 
 //import com.socialuni.sdk.utils.UnionIdDbUtil;
 
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.Data;
 

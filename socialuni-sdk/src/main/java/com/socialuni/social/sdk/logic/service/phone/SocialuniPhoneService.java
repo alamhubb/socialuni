@@ -9,7 +9,7 @@ import com.socialuni.social.sdk.logic.domain.thirdUser.AuthThirdUserDomain;
 import com.socialuni.social.sdk.logic.entity.user.SocialPhoneLoginEntity;
 import com.socialuni.social.sdk.model.QO.SocialBindWxPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.sdk.model.RO.user.phone.SocialSendAuthCodeQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;

@@ -5,8 +5,8 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.IpUtil;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.sdk.constant.socialuni.StatusConst;
 import com.socialuni.social.sdk.dao.DO.AuthenticationDO;

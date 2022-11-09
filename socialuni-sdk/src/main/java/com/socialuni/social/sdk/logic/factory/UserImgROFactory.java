@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.logic.factory;
 
 
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserImgRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 

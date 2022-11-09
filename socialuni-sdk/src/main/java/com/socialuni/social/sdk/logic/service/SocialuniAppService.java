@@ -1,7 +1,6 @@
 package com.socialuni.social.sdk.logic.service;
 
 
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;
@@ -9,6 +8,7 @@ import com.socialuni.social.sdk.model.RO.app.HomeSwiperVO;
 import com.socialuni.social.sdk.model.QO.FrontErrorLogVO;
 import com.socialuni.social.sdk.model.RO.app.SocialAppLaunchDataRO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.enumeration.CommonStatus;

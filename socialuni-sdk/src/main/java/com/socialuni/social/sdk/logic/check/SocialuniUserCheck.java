@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.logic.check;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;

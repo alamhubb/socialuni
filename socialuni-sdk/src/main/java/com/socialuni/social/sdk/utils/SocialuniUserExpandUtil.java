@@ -1,12 +1,12 @@
 package com.socialuni.social.sdk.utils;
 
+import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.api.SocialRequestUserConfig;
 import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;

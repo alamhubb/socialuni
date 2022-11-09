@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.feignAPI.community;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserFollowDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

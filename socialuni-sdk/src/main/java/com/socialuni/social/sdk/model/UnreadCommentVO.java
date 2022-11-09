@@ -4,7 +4,7 @@ import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.Data;

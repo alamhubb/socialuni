@@ -7,7 +7,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROF
 import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import org.apache.commons.lang3.StringUtils;

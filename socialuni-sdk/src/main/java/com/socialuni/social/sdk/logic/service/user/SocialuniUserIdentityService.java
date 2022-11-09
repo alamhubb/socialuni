@@ -4,7 +4,7 @@ import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthImgDO;

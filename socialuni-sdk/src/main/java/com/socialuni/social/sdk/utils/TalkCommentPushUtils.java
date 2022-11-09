@@ -3,7 +3,7 @@ package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.community.sdk.entity.SocialuniCommentDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
-import com.socialuni.social.user.sdk.config.AppConfigConst;
+import com.socialuni.social.tance.config.AppConfigConst;
 import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.user.sdk.model.DO.NotifyDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniCommentDOUtil;

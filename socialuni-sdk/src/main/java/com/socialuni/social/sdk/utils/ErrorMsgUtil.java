@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.utils;
 
 
 import com.socialuni.social.common.api.constant.SocialSystemConst;
-import com.socialuni.social.user.sdk.constant.ErrorMsg;
+import com.socialuni.social.tance.config.ErrorMsg;
 import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 

@@ -1,10 +1,10 @@
 package com.socialuni.social.sdk.logic.manage;
 
+import com.socialuni.social.common.api.utils.SocialTokenFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.user.sdk.repository.SocialuniCommonTokenRepository;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.common.api.constant.DateTimeType;
-import com.socialuni.social.user.sdk.facade.SocialTokenFacade;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

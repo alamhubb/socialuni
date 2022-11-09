@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.service.user.SocialuniUserExpandService;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

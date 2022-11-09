@@ -6,7 +6,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROF
 import com.socialuni.social.sdk.logic.manage.TokenManage;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.sdk.model.RO.user.login.SocialLoginRO;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;

@@ -9,7 +9,6 @@ import com.socialuni.social.sdk.dao.repository.WhiteKeywordsRepository;
 import com.socialuni.social.user.sdk.model.DO.keywords.*;
 import com.socialuni.social.user.sdk.utils.TextContentUtil;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.sdk.dao.DO.keywords.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

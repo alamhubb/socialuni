@@ -1,14 +1,14 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserService;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniMineUserDetailRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserDetailRO;
-import com.socialuni.social.user.sdk.model.RO.SocialuniUserImgRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
