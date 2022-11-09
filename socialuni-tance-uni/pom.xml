@@ -22,10 +22,6 @@
         </dependency>
         <dependency>
             <groupId>com.socialuni.social</groupId>
-            <artifactId>socialuni-tance-uni</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.socialuni.social</groupId>
             <artifactId>socialuni-common-sdk</artifactId>
         </dependency>
         <dependency>
