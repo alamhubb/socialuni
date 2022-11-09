@@ -1,23 +1,25 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.constant.PlatformType;
+import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
+import com.socialuni.social.common.api.exception.exception.SocialSystemException;
+import com.socialuni.social.common.api.utils.UUIDUtil;
+import com.socialuni.social.tance.sdk.facade.ConfigFacade;
 import com.socialuni.social.user.sdk.constant.UniappProviderType;
+import com.socialuni.social.user.sdk.model.DO.NotifyDO;
+import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
+import com.socialuni.social.user.sdk.model.weixin.HttpResult;
 import com.socialuni.social.user.sdk.platform.PushMsgDTO;
 import com.socialuni.social.user.sdk.platform.WxErrCode;
 import com.socialuni.social.user.sdk.platform.qq.QQPayResult;
-import com.socialuni.social.user.sdk.model.weixin.HttpResult;
 import com.socialuni.social.user.sdk.platform.weixin.WxConst;
 import com.socialuni.social.user.sdk.platform.weixin.token.WxTokenResult;
-import com.socialuni.social.user.sdk.utils.common.RestUtil;
-import com.socialuni.social.common.api.constant.DateTimeType;
-import com.socialuni.social.user.sdk.model.DO.NotifyDO;
-import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
-import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
-import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
+import com.socialuni.social.user.sdk.utils.common.RestUtil;
 import com.thoughtworks.xstream.XStream;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -44,6 +46,7 @@ import java.util.*;
  */
 @Component
 @Slf4j
+@Data
 public class WxUtil {
     private static ObjectMapper objectMapper;
     private static SocialUserAccountRepository socialUserAccountRepository;
@@ -107,7 +110,7 @@ public class WxUtil {
 
 
     public static String refreshAccessToken() {
-        String appIDAndAppSecret = "appid=" + wx_mp_id + "&secret=" + wx_mp_secret;
+        String appIDAndAppSecret = "appid=" + getWx_mp_id() + "&secret=" + getWx_mp_secret();
         String url = WxConst.wxTokenUrl + appIDAndAppSecret;
         Date curDate = new Date();
         log.info("从微信获取认证信息:{}", url);
@@ -131,7 +134,7 @@ public class WxUtil {
      * @param content
      */
     public static HttpResult checkTextWxSec(String content) {
-        if (StringUtils.isEmpty(wx_mp_secret) || StringUtils.isEmpty(content)) {
+        if (StringUtils.isEmpty(getWx_mp_secret()) || StringUtils.isEmpty(content)) {
             return new HttpResult();
         }
         HttpResult result = checkContentWxSecPost(content);
@@ -215,14 +218,14 @@ public class WxUtil {
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(UniappProviderType.wx, userId);
 
         String trade_type = WxConst.mp_pay_trade_type;
-        String appId = wx_mp_id;
+        String appId = getWx_mp_id();
 
         Map<String, String> map = new HashMap<>();
 
         //不为小程序改为app
         if (!PlatformType.mp.equals(platform)) {
             trade_type = WxConst.app_pay_trade_type;
-            appId = wx_app_id;
+            appId = getWx_app_id();
         }
         map.put("appid", appId);
         //指定微信
@@ -233,7 +236,7 @@ public class WxUtil {
         }
         String bodystr = "qingchiapp";
         map.put("body", bodystr);
-        map.put("mch_id", wx_merchant_id);
+        map.put("mch_id", getWx_merchant_id());
         String nonce_strstr = UUIDUtil.getUUID();
         map.put("nonce_str", nonce_strstr);
         map.put("notify_url", WxConst.wx_pay_result_notify_url);
@@ -254,7 +257,7 @@ public class WxUtil {
             openIdXml = "<openid>" + openId + "</openid>";
         }
         String body = "<body>" + bodystr + "</body>";
-        String mch_id = "<mch_id>" + wx_merchant_id + "</mch_id>";
+        String mch_id = "<mch_id>" + getWx_merchant_id() + "</mch_id>";
         String nonce_str = "<nonce_str>" + nonce_strstr + "</nonce_str>";
 
         String sign = getSignToken(map);
@@ -307,13 +310,13 @@ public class WxUtil {
     public static String getFrontPaySign(String platform, String prepayid, String packageStr, String nonceStr, String timeStamp) {
         Map<String, String> map = new HashMap<>();
         if (PlatformType.mp.equals(platform)) {
-            map.put("appId", wx_mp_id);
+            map.put("appId", getWx_mp_id());
             map.put("signType", "MD5");
             map.put("timeStamp", timeStamp);
             map.put("nonceStr", nonceStr);
         } else {
-            map.put("appid", wx_app_id);
-            map.put("partnerid", wx_merchant_id);
+            map.put("appid", getWx_app_id());
+            map.put("partnerid", getWx_merchant_id());
             map.put("prepayid", prepayid);
             map.put("noncestr", nonceStr);
             map.put("timestamp", timeStamp);
@@ -342,9 +345,55 @@ public class WxUtil {
             }
         }
         //key为密钥
-        String result = sb.toString() + "key=" + wx_merchant_key;
+        String result = sb.toString() + "key=" + getWx_merchant_key();
         //进行MD5加密
         result = DigestUtils.md5Hex(result).toUpperCase();
         return result;
+    }
+
+
+    public static String getWx_mp_id() {
+        String wx_mp_id = ConfigFacade.getConfigApi().getString("wx_mp_id");
+        if(StringUtils.isBlank(wx_mp_id)){
+            return WxUtil.wx_mp_id;
+        }else{
+            return wx_mp_id;
+        }
+    }
+
+    public static String getWx_app_id() {
+        String wx_app_id = ConfigFacade.getConfigApi().getString("wx_app_id");
+        if(StringUtils.isBlank(wx_app_id)){
+            return WxUtil.wx_app_id;
+        }else{
+            return wx_app_id;
+        }
+    }
+
+    public static String getWx_mp_secret() {
+        String wx_mp_secret = ConfigFacade.getConfigApi().getString("wx_mp_secret");
+        if(StringUtils.isBlank(wx_mp_secret)){
+            return WxUtil.wx_mp_secret;
+        }else{
+            return wx_mp_secret;
+        }
+    }
+
+    public static String getWx_merchant_id() {
+        String wx_merchant_id = ConfigFacade.getConfigApi().getString("wx_merchant_id");
+        if(StringUtils.isBlank(wx_merchant_id)){
+            return WxUtil.wx_merchant_id;
+        }else{
+            return wx_merchant_id;
+        }
+    }
+
+    public static String getWx_merchant_key() {
+        String wx_merchant_key = ConfigFacade.getConfigApi().getString("wx_merchant_key");
+        if(StringUtils.isBlank(wx_merchant_key)){
+            return WxUtil.wx_merchant_key;
+        }else{
+            return wx_merchant_key;
+        }
     }
 }

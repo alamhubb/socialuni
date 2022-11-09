@@ -1,17 +1,17 @@
 package com.socialuni.social.sdk.utils;
 
-import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.constant.PlatformType;
-import com.socialuni.social.sdk.constant.platform.WxUrl;
-import com.socialuni.social.sdk.model.UniUnionIdRO;
-import com.socialuni.social.user.sdk.platform.WxDecode;
-import com.socialuni.social.user.sdk.utils.common.RestUtil;
-import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.common.api.exception.exception.UniSdkException;
 import com.socialuni.social.common.api.utils.JsonUtil;
+import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.sdk.constant.platform.WxUrl;
+import com.socialuni.social.sdk.model.UniUnionIdRO;
+import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
+import com.socialuni.social.user.sdk.platform.WxDecode;
+import com.socialuni.social.user.sdk.utils.WxUtil;
+import com.socialuni.social.user.sdk.utils.common.RestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -24,18 +24,7 @@ import java.util.Objects;
 @Component
 @Slf4j
 public class WxProviderUtil {
-    private static String wxMpId;
-    private static String wxMpSecret;
 
-    @Value("${socialuni.provider.wx.wx-mp-id}")
-    public void setWxMpId(String wxMpId) {
-        WxProviderUtil.wxMpId = wxMpId;
-    }
-
-    @Value("${socialuni.provider.wx.wx-mp-secret}")
-    public void setWxMpSecret(String wxMpSecret) {
-        WxProviderUtil.wxMpSecret = wxMpSecret;
-    }
 
     public static UniUnionIdRO getWxUnionIdRO(SocialProviderLoginQO unionIdData) {
         String platform = RequestUtil.getPlatform();
@@ -50,7 +39,7 @@ public class WxProviderUtil {
             if (StringUtils.isEmpty(wxMpSecret)) {
                 wxMpSecret = WxProviderUtil.wxMpSecret;
             }*/
-            String url = WxProviderUtil.getUnionIdUrl(platform, code, wxMpId, wxMpSecret);
+            String url = WxProviderUtil.getUnionIdUrl(platform, code, WxUtil.getWx_mp_id(), WxUtil.getWx_mp_secret());
             ResponseEntity<UniUnionIdRO> responseEntity = RestUtil.getXmlRestTemplate().getForEntity(url, UniUnionIdRO.class);
             UniUnionIdRO uniUnionIdRO = Objects.requireNonNull(responseEntity.getBody());
             // 微信需要单独解析
@@ -99,4 +88,7 @@ public class WxProviderUtil {
         }
         return uniUnionIdRO;
     }
+
+
+
 }
