@@ -8,7 +8,7 @@ import com.socialuni.social.report.sdk.entity.ReportDO;
 import com.socialuni.social.sdk.constant.socialuni.SocialuniAuditContentType;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkHasUnderageImgAuditDO;
 import com.socialuni.social.user.sdk.model.DO.keywords.KeywordsTriggerDetailDO;
-import com.socialuni.social.sdk.dao.repository.KeywordsTriggerDetailRepository;
+import com.socialuni.social.user.sdk.repository.KeywordsTriggerDetailRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
 import lombok.Data;

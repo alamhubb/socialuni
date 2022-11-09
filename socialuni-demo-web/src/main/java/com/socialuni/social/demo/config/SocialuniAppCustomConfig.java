@@ -1,9 +1,9 @@
 package com.socialuni.social.demo.config;
 
-import com.socialuni.social.user.sdk.config.SocialuniAppConfig;
-import com.socialuni.social.user.sdk.config.SocialuniAppConfigBO;
-import com.socialuni.social.user.sdk.config.SocialuniAppMoreConfigBO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.sdk.constant.config.SocialuniAppType;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
 import org.springframework.stereotype.Component;
 
 @Component

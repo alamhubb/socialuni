@@ -10,7 +10,7 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.sdk.dao.DO.TencentCosAuditRecordDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
-import com.socialuni.social.sdk.logic.factory.ListConvertUtil;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.model.QO.SocialIntIdQO;
 import com.socialuni.social.sdk.model.QO.SocialIntQO;
 import com.socialuni.social.sdk.openService.ImgThumbnailType;
