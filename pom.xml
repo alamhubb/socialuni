@@ -22,17 +22,17 @@
         <module>socialuni-demo-web</module>
 <!--        <module>socialuni-official/socialuni-official-web</module>-->
         <module>socialuni-admin/socialuni-admin-web</module>
-        <module>socialuni-sdk-all/socialuni-common-api</module>
-        <module>socialuni-sdk-all/socialuni-sdk</module>
-        <module>socialuni-sdk-all/socialuni-web-sdk</module>
-        <module>socialuni-sdk-all/socialuni-common-sdk</module>
-        <module>socialuni-sdk-all/socialuni-tance-uni</module>
-        <module>socialuni-sdk-all/socialuni-tance-dev</module>
-        <module>socialuni-sdk-all/socialuni-tance-api</module>
-        <module>socialuni-sdk-all/socialuni-user-sdk</module>
-        <module>socialuni-sdk-all/socialuni-report-sdk</module>
-        <module>socialuni-sdk-all/socialuni-community-sdk</module>
-        <module>socialuni-sdk-all/socialuni-im</module>
+        <module>socialuni-common-api</module>
+        <module>socialuni-sdk</module>
+        <module>socialuni-web-sdk</module>
+        <module>socialuni-common-sdk</module>
+        <module>socialuni-tance-uni</module>
+        <module>socialuni-tance-dev</module>
+        <module>socialuni-tance-api</module>
+        <module>socialuni-user-sdk</module>
+        <module>socialuni-report-sdk</module>
+        <module>socialuni-community-sdk</module>
+        <module>socialuni-im</module>
     </modules>
 
     <properties>
