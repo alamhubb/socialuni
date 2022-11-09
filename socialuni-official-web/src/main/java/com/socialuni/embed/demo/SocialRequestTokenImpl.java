@@ -2,9 +2,9 @@ package com.socialuni.embed.demo;
 
 import com.socialuni.embed.demo.model.TokenSocialuniTokenDO;
 import com.socialuni.embed.demo.service.TestUserService;
-import com.socialuni.social.user.sdk.api.SocialRequestUserConfig;
-import com.socialuni.social.user.sdk.config.SocialRequestUserConfigDefaultImpl;
+import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.user.sdk.config.SocialRequestUserConfigDefaultImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

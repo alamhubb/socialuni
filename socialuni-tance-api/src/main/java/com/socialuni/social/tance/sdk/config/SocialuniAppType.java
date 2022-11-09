@@ -1,7 +1,5 @@
-package com.socialuni.social.sdk.constant.config;
+package com.socialuni.social.tance.sdk.config;
 
-import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
-import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import org.apache.commons.lang3.StringUtils;

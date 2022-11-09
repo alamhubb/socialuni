@@ -1,5 +1,4 @@
 import HttpRequest, {requestConfig} from "./httpRequest"
-import {socialConfigModule} from "socialuni-sdk/src/store/store"
 import {socialSystemModule} from "socialuni-user/src/store/store"
 import {socialUserModule} from "socialuni-user/src/store/store"
 import ErrorConst from "socialuni-constant/constant/ErrorConst"
@@ -101,8 +100,8 @@ request.interceptor.response(
                                     resultRO[element.name] = element.elements[0].text
                                 }
                             }
-                            const msg: string = socialConfigModule.appMoreConfig.errorMsg604SystemError
-                            AlertUtil.hint(resultRO.Message + '，请重试，' + msg)
+                            // const msg: string = socialConfigModule.appMoreConfig.errorMsg604SystemError
+                            AlertUtil.hint(resultRO.Message + '，请重试，' + '请联系客服')
                             // 返回接口返回的错误信息
                             return result
                         } finally {

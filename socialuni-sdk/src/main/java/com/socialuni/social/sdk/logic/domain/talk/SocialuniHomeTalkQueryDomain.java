@@ -13,7 +13,7 @@ import com.socialuni.social.sdk.constant.GenderTypeQueryVO;
 import com.socialuni.social.sdk.constant.GenderTypeVO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
-import com.socialuni.social.sdk.constant.config.SocialuniAppType;
+import com.socialuni.social.tance.sdk.config.SocialuniAppType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.sdk.logic.entity.talk.SocialFollowUserTalksQueryEntity;

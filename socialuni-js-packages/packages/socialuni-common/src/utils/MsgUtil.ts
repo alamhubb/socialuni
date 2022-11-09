@@ -2,8 +2,7 @@ import AlertUtil from 'socialuni-use/src/utils/AlertUtil'
 import ToastUtil from 'socialuni-use/src/utils/ToastUtil'
 import PageUtil from './PageUtil'
 import {socialUserModule} from "socialuni-user/src/store/store";
-import {socialChatModule} from "socialuni-im/src/store/store";
-import {socialConfigModule} from "socialuni-sdk/src/store/store";
+// import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UniUtil from "./UniUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
@@ -24,14 +23,14 @@ export default class MsgUtil {
     }
 
     static unLoginMessage() {
-        if (!socialUserModule.user) {
+        /*if (!socialUserModule.user) {
             AlertUtil.info(socialConfigModule.appMoreConfig.errorMsg601UnLogin)
                 .then(() => {
                     // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
                     PageUtil.toMinePage()
                 })
             throw new Error('未登录')
-        }
+        }*/
     }
 
     static showUploadLoading() {
@@ -39,7 +38,7 @@ export default class MsgUtil {
     }
 
     static systemErrorMsg() {
-        AlertUtil.hint(socialConfigModule.appMoreConfig.errorMsg604SystemError)
+        // AlertUtil.hint(socialConfigModule.appMoreConfig.errorMsg604SystemError)
     }
 
     static unUploadImg() {
@@ -56,7 +55,7 @@ export default class MsgUtil {
 
     static identityAuthHint() {
         this.unLoginMessage()
-        let msg
+        /*let msg
         if (socialUserModule.user.identityAuth) {
             msg = '您已完成成年认证'
         } else {
@@ -64,7 +63,7 @@ export default class MsgUtil {
         }
         AlertUtil.confirm(msg + '，是否继续前往成年认证页面', '前往').then(() => {
             PageUtil.toIdentityAuthPage()
-        })
+        })*/
     }
 
     static iosDisablePay() {

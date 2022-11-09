@@ -16,7 +16,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import {socialSystemModule} from "socialuni-user/src/store/store";
-import {socialConfigModule} from "socialuni-sdk/src/store/store";
+// import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import UniUtil from "socialuni-common/src/utils/UniUtil";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
@@ -30,7 +30,7 @@ export default class LoginFooterAppInfo extends Vue {
   }
 
   get serviceWeChat() {
-    return socialConfigModule.appMoreConfig.serviceWeChat
+    // return socialConfigModule.appMoreConfig.serviceWeChat
   }
 
   get homeUrl(): string {
