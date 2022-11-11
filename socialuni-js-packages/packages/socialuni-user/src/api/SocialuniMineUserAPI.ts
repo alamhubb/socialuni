@@ -1,16 +1,11 @@
 import SocialuniUserRO from "../model/SocialuniUserRO";
-import UserEditVO from 'socialuni-api/src/model/user/UserEditVO'
-import ImgAddQO from 'socialuni-api/src/model/user/ImgAddQO'
-import CenterUserDetailRO from 'socialuni-api/src/model/social/CenterUserDetailRO'
-import ImgFileVO from 'socialuni-api/src/model/ImgFileVO'
-import UserPayResultVO from 'socialuni-api/src/model/user/UserPayResultVO'
-import UserPayVO from 'socialuni-api/src/model/user/UserPayVO'
-import UserQueryVO from 'socialuni-api/src/model/user/UserQueryVO'
+import UserEditVO from "socialuni-user/src/model/user/UserEditVO"
+import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO"
 import request from "socialuni-common/src/request/request";
-import SocialSendAuthCodeQO from "socialuni-api/src/model/phone/SocialSendAuthCodeQO";
-import UniProviderLoginQO from "socialuni-api/src/model/UniProviderLoginQO";
-import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
-import SocialPhoneNumLoginQO from "socialuni-api/src/model/phone/SocialPhoneNumLoginQO";
+import SocialSendAuthCodeQO from "socialuni-user/src/model/phone/SocialSendAuthCodeQO";
+import UniProviderLoginQO from "socialuni-user/src/model/login/UniProviderLoginQO";
+import SocialLoginRO from "socialuni-user/src/model/social/SocialLoginRO";
+import SocialPhoneNumLoginQO from "socialuni-user/src/model/phone/SocialPhoneNumLoginQO";
 
 export default class SocialuniMineUserAPI {
     static getMineUserInfoAPI() {

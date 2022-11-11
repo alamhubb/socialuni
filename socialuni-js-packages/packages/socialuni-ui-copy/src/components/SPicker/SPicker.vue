@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import SelectorQuery = UniApp.SelectorQuery
 import NodesRef = UniApp.NodesRef
-import CommonUtil from "socialuni-common/src/utils/CommonUtil";
+import CommonUtil from "socialuni-user/src/utils/CommonUtil";
 import {computed, defineProps, nextTick, onMounted, ref, watch} from "vue";
 import emit from "socialuni-use/src/use/useEmit";
 

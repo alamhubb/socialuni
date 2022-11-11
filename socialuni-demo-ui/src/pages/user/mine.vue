@@ -99,7 +99,7 @@ import UserInfo from "./UserInfo.vue";
 import Login from "./login/login.vue";
 import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
 import {socialUserModule} from 'socialuni-user/src/store/store';
-import UniUtil from "socialuni-common/src/utils/UniUtil";
+import UniUtil from "socialuni-user/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";

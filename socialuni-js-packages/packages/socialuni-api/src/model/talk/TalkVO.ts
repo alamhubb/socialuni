@@ -2,7 +2,7 @@ import CenterUserDetailRO from '../social/CenterUserDetailRO'
 import CommentVO from '../comment/CommentVO'
 import DistrictVO from '../DistrictVO'
 import TagVO from '../community/tag/TagVO'
-import ImgFileVO from '../ImgFileVO'
+import ImgFileVO from '../../../../socialuni-user/src/model/ImgFileVO'
 
 export default class TalkVO {
   public id: string = null

@@ -58,10 +58,10 @@ import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
-import PlatformUtils from "socialuni-common/src/utils/PlatformUtils";
+import PlatformUtils from "socialuni-user/src/utils/PlatformUtils";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import UniUtil from "socialuni-common/src/utils/UniUtil";
-import MsgUtil from "socialuni-common/src/utils/MsgUtil";
+import UniUtil from "socialuni-user/src/utils/UniUtil";
+import MsgUtil from "socialuni-user/src/utils/MsgUtil";
 
 
 // todo 后台可控制是否显示轮播图

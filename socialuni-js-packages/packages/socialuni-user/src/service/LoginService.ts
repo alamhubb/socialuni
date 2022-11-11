@@ -1,10 +1,10 @@
 import UserService from 'socialuni-user/src/service/UserService'
-import UniUserUtil from 'socialuni-common/src/utils/UniUserUtil'
+import UniUserUtil from 'socialuni-user/src/utils/UniUserUtil'
 import ToastUtil from 'socialuni-use/src/utils/ToastUtil'
 import {socialSystemModule} from "socialuni-user/src/store/store";
 import Constants from "socialuni-constant/constant/Constant";
-import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
-import SocialPhoneNumLoginQO from "socialuni-api/src/model/phone/SocialPhoneNumLoginQO";
+import LoginAPI from "socialuni-user/src/api/socialuni/LoginAPI";
+import SocialPhoneNumLoginQO from "socialuni-user/src/model/phone/SocialPhoneNumLoginQO";
 import SocialuniMineUserAPI from "../api/SocialuniMineUserAPI";
 
 export default class LoginService {

@@ -1,5 +1,5 @@
 import SocialuniConfig from "./src/SocialuniConfig";
-import UniUtil from "./src/utils/UniUtil";
+import UniUtil from "../socialuni-user/src/utils/UniUtil";
 
 let socialuniSdkConfig = null
 

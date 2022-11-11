@@ -43,7 +43,7 @@ import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QPicker from "socialuni-ui/src/components/QPicker/QPicker.vue";
 import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
-import LocationUtil from "socialuni-common/src/utils/LocationUtil";
+import LocationUtil from "socialuni-user/src/utils/LocationUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 

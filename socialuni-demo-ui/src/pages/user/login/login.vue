@@ -126,8 +126,8 @@
 import {Options, Vue} from 'vue-property-decorator'
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-user/src/store/store";
-import LoginService from "../socialuni-js-packages/packages/socialuni-user/src/service/LoginService";
-import PhoneService from "../socialuni-js-packages/packages/socialuni-user/src/service/PhoneService";
+import LoginService from "../socialuni-js-packages/socialuni-user/src/service/LoginService";
+import PhoneService from "../socialuni-js-packages/socialuni-user/src/service/PhoneService";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";

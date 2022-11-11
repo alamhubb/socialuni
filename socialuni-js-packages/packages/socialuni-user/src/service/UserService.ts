@@ -1,6 +1,6 @@
-import WebsocketUtil from 'socialuni-common/src/utils/WebsocketUtil'
-import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import WebsocketUtil from 'socialuni-user/src/utils/WebsocketUtil'
+import SocialLoginRO from "socialuni-user/src/model/social/SocialLoginRO";
+import CenterUserDetailRO from "socialuni-user/src/model/social/CenterUserDetailRO";
 import {socialUserModule} from "../store/store";
 
 export default class UserService {

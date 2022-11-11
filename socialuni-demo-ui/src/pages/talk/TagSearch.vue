@@ -99,7 +99,7 @@ import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
 import QSidebar from 'socialuni-ui/src/components/QSidebar/QSidebar.vue'
 import {socialTagModule} from "socialuni-sdk/src/store/store";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
-import TagUtil from "socialuni-common/src/utils/TagUtil";
+import TagUtil from "socialuni-user/src/utils/TagUtil";
 
 
 @Options({

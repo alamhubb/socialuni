@@ -1,10 +1,10 @@
 //用来存储当前用户的一些信息
 import {Pinia, Store} from "pinia-class-component"
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
+import CenterUserDetailRO from "socialuni-user/src/model/social/CenterUserDetailRO";
+import SocialLoginRO from "socialuni-user/src/model/social/SocialLoginRO";
 import {socialUserModule} from "./store";
 import SocialuniUserRO from "../model/SocialuniUserRO";
-import SocialuniTokenUtil from "socialuni-common/src/utils/SocialuniTokenUtil";
+import SocialuniTokenUtil from "socialuni-user/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import SocialuniImUserAPI from "../api/SocialuniImUserAPI";

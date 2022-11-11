@@ -1,6 +1,6 @@
 import DistrictVO from '../DistrictVO'
 import ImgAddQO from '../user/ImgAddQO'
-import LocationUtil from "socialuni-common/src/utils/LocationUtil";
+import LocationUtil from "socialuni-user/src/utils/LocationUtil";
 
 export default class TalkAddVO {
     public content: string

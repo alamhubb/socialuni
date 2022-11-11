@@ -3,11 +3,11 @@ import {socialSystemModule} from "socialuni-user/src/store/store"
 import {socialUserModule} from "socialuni-user/src/store/store"
 import ErrorConst from "socialuni-constant/constant/ErrorConst"
 import UserService from "socialuni-user/src/service/UserService"
-import MsgUtil from "socialuni-common/src/utils/MsgUtil"
-import UniUtil from "socialuni-common/src/utils/UniUtil"
+import MsgUtil from "socialuni-user/src/utils/MsgUtil"
+import UniUtil from "socialuni-user/src/utils/UniUtil"
 import AlertUtil from "socialuni-use/src/utils/AlertUtil"
 import ObjectUtil from "socialuni-use/src/utils/ObjectUtil"
-import XmlUtil from "../utils/XmlUtil"
+import XmlUtil from "../../../socialuni-user/src/utils/XmlUtil"
 import SocialuniConfig from "../config/SocialuniConfig";
 import XmlResultRO from "../model/XmlResultRO";
 import SocialuniAppAPI from "../api/SocialuniAppAPI";

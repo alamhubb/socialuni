@@ -5,7 +5,7 @@ import MessageContentType from "socialuni-constant/constant/mesaage/MessageConte
 import {OpenImMsgRO} from "../openIm/OpenImMsgRO";
 import SocialuniUserAPI from "../../api/socialuni/SocialuniUserAPI";
 import SocialuniContentUserRO from "../social/SocialuniContentUserRO";
-import UUIDUtil from "socialuni-common/src/utils/UUIDUtil";
+import UUIDUtil from "socialuni-use/src/utils/UUIDUtil";
 
 export default class MessageVO {
     public id: string

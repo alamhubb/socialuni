@@ -10,7 +10,7 @@ import COS from 'cos-js-sdk-v5'
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import TencentCosIdInfoRO from "socialuni-common/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
 import request from "../request/request";
-import UniUtil from "../utils/UniUtil";
+import UniUtil from "../../../socialuni-user/src/utils/UniUtil";
 import CosAuthRO from "../model/cos/CosAuthRO";
 import CosUploadResult from "../model/cos/CosUploadResult";
 import DomFile from "../model/DomFile";

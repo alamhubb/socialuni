@@ -1,4 +1,4 @@
-import ImgFileVO from '../../../../socialuni-user/src/model/ImgFileVO'
+import ImgFileVO from '../ImgFileVO'
 import SocialuniContentUserRO from "./SocialuniContentUserRO";
 
 export default class CenterUserDetailRO extends SocialuniContentUserRO {

@@ -95,9 +95,9 @@ import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import {socialTagModule, socialTalkModule} from "socialuni-sdk/src/store/store";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import ImgUtil from "socialuni-common/src/utils/ImgUtil";
-import MsgUtil from "socialuni-common/src/utils/MsgUtil";
-import PageUtil from "socialuni-common/src/utils/PageUtil";
+import ImgUtil from "socialuni-user/src/utils/ImgUtil";
+import MsgUtil from "socialuni-user/src/utils/MsgUtil";
+import PageUtil from "socialuni-user/src/utils/PageUtil";
 import NumUtil from "socialuni-use/src/utils/NumUtil";
 
 @Options({

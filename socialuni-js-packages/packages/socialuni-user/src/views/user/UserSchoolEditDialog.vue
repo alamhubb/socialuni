@@ -35,12 +35,12 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
 import QSelect from "socialuni-ui/src/components/QSelect/QSelect.vue";
-import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
+import SocialCircleRO from "socialuni-user/src/model/community/circle/SocialCircleRO";
 import {socialUserModule} from 'socialuni-user/src/store/store';
-import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
+import SocialuniCircleAPI from "socialuni-user/src/api/socialuni/SocialuniCircleAPI";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
+import SocialuniUserExpandAPI from "socialuni-user/src/api/socialuni/SocialuniUserExpandAPI";
 
 @Options({
   components: {QSelect, QIcon, QPopup, QSearch}

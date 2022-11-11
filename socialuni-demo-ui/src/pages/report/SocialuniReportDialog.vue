@@ -33,7 +33,7 @@ import {socialUserModule} from 'socialuni-user/src/store/store';
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import CheckUtil from "socialuni-common/src/utils/CheckUtil";
+import CheckUtil from "socialuni-user/src/utils/CheckUtil";
 import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
 
 @Options({

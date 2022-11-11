@@ -31,7 +31,7 @@ import SSwitch from "socialuni-ui/src/component/SSwitch.vue";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
+import SocialuniUserExpandAPI from "socialuni-user/src/api/socialuni/SocialuniUserExpandAPI";
 
 @Options({
   components: {

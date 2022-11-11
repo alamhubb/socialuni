@@ -4,7 +4,6 @@ import HomeSwiperVO from "../../model/HomeSwiperVO";
 import TalkTabVO from "../../model/talk/TalkTabVO";
 import AppUpdateResultVO from "../../model/app/AppUpdateResultVO";
 import AppUpdateVO from "../../model/app/AppUpdateVO";
-import FrontErrorLogVO from "../../model/app/FrontErrorLogVO";
 import ObjectUtil from "socialuni-use/src/utils/ObjectUtil";
 
 export default class SocialuniAppAPI {

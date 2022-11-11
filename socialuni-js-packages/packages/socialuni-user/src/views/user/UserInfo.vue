@@ -315,27 +315,27 @@ import {socialConfigModule} from "socialuni-user/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-user/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import CenterUserDetailRO from "socialuni-user/src/model/social/CenterUserDetailRO";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
-import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import PageUtil from "socialuni-common/src/utils/PageUtil";
-import MsgUtil from "socialuni-common/src/utils/MsgUtil";
-import UniUtil from "socialuni-common/src/utils/UniUtil";
-import UserUtil from "socialuni-common/src/utils/UserUtil";
+import TalkVO from "socialuni-user/src/model/talk/TalkVO";
+import PageUtil from "socialuni-user/src/utils/PageUtil";
+import MsgUtil from "socialuni-user/src/utils/MsgUtil";
+import UniUtil from "socialuni-user/src/utils/UniUtil";
+import UserUtil from "socialuni-user/src/utils/UserUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import DomFile from "socialuni-api/src/model/DomFile";
-import CosUtil from "socialuni-common/src/utils/CosUtil";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
+import DomFile from "socialuni-user/src/model/DomFile";
+import CosUtil from "socialuni-user/src/utils/CosUtil";
+import SocialuniMineUserAPI from "socialuni-user/src/api/SocialuniMineUserAPI";
+import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
 import TencentCosAPI from "socialuni-common/src/api/TencentCosAPI";
 
 @Options({
   components: {
     QButton,
-    UserSchoolEditDialog,
+    // UserSchoolEditDialog,
     QSearch,
     QPopup,
     QPcModel,
@@ -349,8 +349,8 @@ export default class UserInfo extends Vue {
 
   $refs!: {
     reportDialog: any;
-    schoolEditDialog: UserSchoolEditDialog;
-    contactInfoEditDialog: UserContactInfoEditDialog;
+    // schoolEditDialog: UserSchoolEditDialog;
+    // contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
   get mineUser() {
@@ -580,7 +580,7 @@ export default class UserInfo extends Vue {
       UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)

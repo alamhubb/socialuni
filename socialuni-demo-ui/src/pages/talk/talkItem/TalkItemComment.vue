@@ -85,15 +85,15 @@ import {socialUserModule} from 'socialuni-user/src/store/store';
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import ObjectUtil from "socialuni-use/src/utils/ObjectUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import MsgUtil from "socialuni-common/src/utils/MsgUtil";
-import UniUtil from "socialuni-common/src/utils/UniUtil";
+import MsgUtil from "socialuni-user/src/utils/MsgUtil";
+import UniUtil from "socialuni-user/src/utils/UniUtil";
 import CommentVO from "socialuni-api/src/model/comment/CommentVO";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import HugAddVO from "socialuni-api/src/model/HugAddVO";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import PageUtil from "socialuni-common/src/utils/PageUtil";
+import PageUtil from "socialuni-user/src/utils/PageUtil";
 
 @Options({
   components: {

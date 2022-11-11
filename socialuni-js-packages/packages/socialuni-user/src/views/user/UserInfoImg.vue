@@ -47,18 +47,18 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import SocialuniReportDialog from "../report/SocialuniReportDialog.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import {socialUserModule} from 'socialuni-user/src/store/store';
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import ImgUtil from "socialuni-common/src/utils/ImgUtil";
-import CosUtil from "socialuni-common/src/utils/CosUtil";
-import UniUtil from "socialuni-common/src/utils/UniUtil";
-import DomFile from "socialuni-api/src/model/DomFile";
-import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
+import CenterUserDetailRO from "socialuni-user/src/model/social/CenterUserDetailRO";
+import ImgUtil from "socialuni-user/src/utils/ImgUtil";
+import CosUtil from "socialuni-user/src/utils/CosUtil";
+import UniUtil from "socialuni-user/src/utils/UniUtil";
+import DomFile from "socialuni-user/src/model/DomFile";
+import TencentCosAPI from "socialuni-user/src/api/socialuni/TencentCosAPI";
+import SocialuniUserAPI from "socialuni-user/src/api/socialuni/SocialuniUserAPI";
+import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
+import ImgFileVO from "socialuni-user/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import PageUtil from "socialuni-common/src/utils/PageUtil";
+import PageUtil from "socialuni-user/src/utils/PageUtil";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}

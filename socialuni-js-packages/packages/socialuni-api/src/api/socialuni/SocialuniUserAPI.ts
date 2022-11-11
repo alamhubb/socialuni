@@ -1,5 +1,5 @@
 import UserQueryVO from '../../model/user/UserQueryVO'
-import ImgFileVO from '../../model/ImgFileVO'
+import ImgFileVO from '../../../../socialuni-user/src/model/ImgFileVO'
 import UserPayVO from '../../model/user/UserPayVO'
 import UserPayResultVO from '../../model/user/UserPayResultVO'
 import UserEditVO from '../../model/user/UserEditVO'

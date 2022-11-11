@@ -40,7 +40,7 @@
 import {computed, defineProps, ref} from "vue";
 import {socialLocationModule} from "socialuni-sdk/src/store/store";
 import DistrictVO from "socialuni-api/model/DistrictVO";
-import LocationUtil from "socialuni-common/src/utils/LocationUtil";
+import LocationUtil from "socialuni-user/src/utils/LocationUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import SPicker from "socialuni-ui/src/components/SPicker/SPicker.vue";
 import SIcon from "socialuni-ui/src/components/SIcon/SIcon.vue";

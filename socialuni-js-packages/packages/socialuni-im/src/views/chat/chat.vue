@@ -76,7 +76,7 @@ import Constants from 'socialuni-constant/constant/Constant'
 import ChatAPI from 'socialuni-api/src/api/ChatAPI'
 import { socialChatModule } from "socialuni-im/src/store/store"
 import DateUtil from "socialuni-use/src/utils/DateUtil";
-import UniUtil from "socialuni-common/src/utils/UniUtil";
+import UniUtil from "socialuni-user/src/utils/UniUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import {onLoad} from "@dcloudio/uni-app";

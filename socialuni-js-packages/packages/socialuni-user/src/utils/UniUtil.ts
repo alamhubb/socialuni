@@ -12,7 +12,7 @@ import ToastUtil from 'socialuni-use/src/utils/ToastUtil'
 import UUIDUtil from 'socialuni-use/src/utils/UUIDUtil'
 import ImgUtil from './ImgUtil'
 import {socialSystemModule} from "socialuni-user/src/store/store";
-import DomFile from "socialuni-api/src/model/DomFile";
+import DomFile from "socialuni-common/src/model/DomFile";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 
 export default class UniUtil {
