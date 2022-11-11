@@ -112,7 +112,7 @@ import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
     QNavbar,
     QRowItem,
     // UserInfo,
-    MsgInput
+    // MsgInput
   }
 })
 export default class MineView extends Vue {
