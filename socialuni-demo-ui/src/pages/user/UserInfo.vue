@@ -337,7 +337,6 @@
 
 
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import UserInfoImg from "./UserInfoImg.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
@@ -346,10 +345,6 @@ import QPcModel from "socialuni-ui/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
-import TalkOperate from "../talk/talkOperate.vue";
-import TalkItem from "../talk/talkItem/TalkItem.vue";
-import TalkItemContent from "../talk/talkItem/TalkItemContent.vue";
-import {socialAppModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-user/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
@@ -375,19 +370,19 @@ import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 
 @Options({
   components: {
-    UserContactInfoEditDialog,
-    UserInfoImg,
+    // UserContactInfoEditDialog,
+    // UserInfoImg,
+    // UserSchoolEditDialog,
     QButton,
-    UserSchoolEditDialog,
     QSearch,
     QPopup,
     QPcModel,
     SocialGenderTag,
     QIcon,
     QRowItem,
-    TalkOperate,
-    TalkItem,
-    TalkItemContent
+    // TalkOperate,
+    // TalkItem,
+    // TalkItemContent
   }
 })
 export default class UserInfo extends Vue {

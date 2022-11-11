@@ -1,5 +1,5 @@
 import MessageAddVO from "socialuni-api/src/model/message/MessageAddVO";
-import request from "socialuni-api/src/request/request";
+import request from "socialuni-common/src/request/request";
 import openIm from "socialuni-sdk/src/plugins/openIm/openIm";
 
 export default class SocialuniMsg {

@@ -1,5 +1,3 @@
-import ElementXmlVO from "../../../../base/ElementXmlVO";
-import XmlUtil from "../../../../../utils/XmlUtil";
 
 export default class TencentCosIdInfoRO {
     public Address: string = null

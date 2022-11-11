@@ -9,7 +9,7 @@ import CommentDeleteVO from '../../model/comment/CommentDeleteVO'
 import TalkVO from '../../model/talk/TalkVO'
 import DomFile from '../../model/DomFile'
 import ImgAddQO from '../../model/user/ImgAddQO'
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 
 export default class SocialuniTalkAPI {
     static queryStickTalksAPI() {

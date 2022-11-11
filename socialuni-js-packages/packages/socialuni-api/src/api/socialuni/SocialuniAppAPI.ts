@@ -1,5 +1,5 @@
 import AppInitDataRO from "../../model/common/AppInitDataRO";
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 import HomeSwiperVO from "../../model/HomeSwiperVO";
 import TalkTabVO from "../../model/talk/TalkTabVO";
 import AppUpdateResultVO from "../../model/app/AppUpdateResultVO";

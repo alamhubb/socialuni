@@ -1,5 +1,5 @@
 import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'
-import request from '../request/request'
+import request from 'socialuni-common/src/request'
 import OAuthUserInfoQO from '@/socialuni/model/dev/OAuthUserInfoQO'
 
 export default class DevAccountAPI {

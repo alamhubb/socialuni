@@ -61,7 +61,6 @@
     "socialuni-user": "../../../socialuni-js-packages/packages/socialuni-user",
     "socialuni-common": "../../../socialuni-js-packages/packages/socialuni-common",
     "socialuni-ui": "../../../socialuni-js-packages/packages/socialuni-ui",
-    "socialuni-api": "../../../socialuni-js-packages/packages/socialuni-api",
     "socialuni-scss": "../../../socialuni-js-packages/packages/socialuni-scss",
     "vue": "^3.2.41",
     "vue-class-component": "^8.0.0-rc.1",

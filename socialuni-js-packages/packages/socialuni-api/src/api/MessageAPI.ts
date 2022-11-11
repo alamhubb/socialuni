@@ -1,4 +1,4 @@
-import request from '../request/request'
+import request from 'socialuni-common/src/request'
 import MessageAddVO from '../model/message/MessageAddVO'
 import MessageQueryVO from '../model/message/MessageQueryVO'
 import MsgDelete from '../model/message/MsgDeleteVO'

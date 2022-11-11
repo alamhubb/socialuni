@@ -1,3 +1,4 @@
+<!--
 <template>
   <div>
     <div class="px-sm">
@@ -13,7 +14,7 @@
       <div class="bg-white py-sm px-xs bd-radius-10 elevation-4 mb-sm">
         <div v-if="imgUrls.length" class="flex-row">
           <div v-for="(img,index) in imgUrls.slice(0,4)" :key="img" class="row-all-center w25p flex-none px-xs">
-            <!--          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"-->
+            &lt;!&ndash;          src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"&ndash;&gt;
             <image v-if="index!==3" class="w100p h75 bd-radius" @longpress="imgLongPress(index)"
                    mode="aspectFill"
                    :data-src="img"
@@ -44,7 +45,6 @@
 <script lang="ts">
 
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import SocialuniReportDialog from "../report/SocialuniReportDialog.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
@@ -61,11 +61,10 @@ import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-common/src/utils/PageUtil";
 
 @Options({
-  components: {QIcon, SocialuniReportDialog}
+  components: {QIcon}
 })
 export default class UserInfoImg extends Vue {
   $refs!: {
-    reportDialog: SocialuniReportDialog;
   }
 
   get mineUser() {
@@ -154,3 +153,4 @@ export default class UserInfoImg extends Vue {
   }
 }
 </script>
+-->

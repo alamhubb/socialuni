@@ -5,7 +5,7 @@ import UserPayResultVO from '../../model/user/UserPayResultVO'
 import UserEditVO from '../../model/user/UserEditVO'
 import ImgAddQO from '../../model/user/ImgAddQO'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 
 export default class SocialuniUserAPI {
   static getMineUserInfoAPI() {

@@ -2,7 +2,7 @@ import UniProviderLoginQO from '../../model/UniProviderLoginQO'
 import SocialLoginRO from '../../model/social/SocialLoginRO'
 import SocialPhoneNumLoginQO from '../../model/phone/SocialPhoneNumLoginQO'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 
 
 export default class LoginAPI {

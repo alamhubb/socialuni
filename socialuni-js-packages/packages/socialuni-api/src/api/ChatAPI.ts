@@ -1,4 +1,4 @@
-import request from '../request/request'
+import request from 'socialuni-common/src/request'
 import ChatReadVO from '../model/chat/ChatReadVO'
 import ChatRemoveVO from '../model/chat/ChatRemoveVO'
 import SocialuniChatRO from 'socialuni-im/src/model/SocialuniChatRO'

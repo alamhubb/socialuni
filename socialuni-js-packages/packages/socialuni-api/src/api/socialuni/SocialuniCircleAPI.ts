@@ -1,4 +1,4 @@
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 import CircleCreateQO from "../../model/community/circle/CircleCreateQO";
 import SocialCircleRO from "../../model/community/circle/SocialCircleRO";
 import ToastUtil from "socialuni-use/src/utils/ObjectUtil";

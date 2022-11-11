@@ -6,11 +6,11 @@ import UserService from "socialuni-user/src/service/UserService"
 import MsgUtil from "socialuni-common/src/utils/MsgUtil"
 import UniUtil from "socialuni-common/src/utils/UniUtil"
 import AlertUtil from "socialuni-use/src/utils/AlertUtil"
-import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI"
-import XmlResultRO from "../model/base/XmlResultRO"
 import ObjectUtil from "socialuni-use/src/utils/ObjectUtil"
 import XmlUtil from "../utils/XmlUtil"
 import SocialuniConfig from "../config/SocialuniConfig";
+import XmlResultRO from "../model/XmlResultRO";
+import SocialuniAppAPI from "../api/SocialuniAppAPI";
 
 const request: HttpRequest = new HttpRequest()
 

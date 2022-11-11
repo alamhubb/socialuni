@@ -299,43 +299,10 @@
     </view>
 
     <user-info-img :user="user"></user-info-img>
-
-<!--    <talk-operate @deleteTalk="deleteTalk"></talk-operate>
-    &lt;!&ndash;  #ifdef MP-WEIXIN &ndash;&gt;
-    <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
-        ad-theme="white"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-    &lt;!&ndash;qq平台显示的广告&ndash;&gt;
-    &lt;!&ndash;  #ifdef MP-QQ &ndash;&gt;
-    <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
-        type="feeds" ad-height="160"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-    &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
-    <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-
-    <div class="px-smm mb-xs">动态</div>
-    <view v-for="talk in talks" :key="talk.id" class="px-sm">
-      <talk-item :talk="talk" @deleteTalk="deleteTalk"></talk-item>
-    </view>
-
-    &lt;!&ndash;wx平台显示的广告&ndash;&gt;
-    &lt;!&ndash;  #ifdef MP-WEIXIN &ndash;&gt;
-    <ad class="bg-white mt-10 w100vw" unit-id="adunit-ffa7bc1c73c7d46a"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-    &lt;!&ndash;qq平台显示的广告&ndash;&gt;
-    &lt;!&ndash;  #ifdef MP-QQ &ndash;&gt;
-    <ad class="bg-white mt-10 w100vw" unit-id="b10fe0e7c39b9ca9e7ce19660f6d0761" test-banner-type="one"></ad>
-    &lt;!&ndash;  #endif &ndash;&gt;
-    &lt;!&ndash;  #ifdef APP-PLUS &ndash;&gt;
-    <ad class="bg-white mt-10 w100vw" adpid="1890536227"></ad>-->
-    <!--  #endif -->
   </view>
 </template>
 
 <script lang="ts">
-import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import UserInfoImg from "./UserInfoImg.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
@@ -355,13 +322,10 @@ import PageUtil from "socialuni-common/src/utils/PageUtil";
 import MsgUtil from "socialuni-common/src/utils/MsgUtil";
 import UniUtil from "socialuni-common/src/utils/UniUtil";
 import UserUtil from "socialuni-common/src/utils/UserUtil";
-import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import PagePath from "socialuni-constant/constant/PagePath";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
-import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-common/src/utils/CosUtil";
 import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
@@ -370,8 +334,6 @@ import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 
 @Options({
   components: {
-    UserContactInfoEditDialog,
-    UserInfoImg,
     QButton,
     UserSchoolEditDialog,
     QSearch,

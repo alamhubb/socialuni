@@ -12,7 +12,7 @@ import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import UserService from "../service/UserService";
 import SocialuniMineUserAPI from "../api/SocialuniMineUserAPI";
-import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig";
+import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig";
 
 @Store
 export default class SocialUserModule extends Pinia {

@@ -6,7 +6,7 @@ import ImgFileVO from 'socialuni-api/src/model/ImgFileVO'
 import UserPayResultVO from 'socialuni-api/src/model/user/UserPayResultVO'
 import UserPayVO from 'socialuni-api/src/model/user/UserPayVO'
 import UserQueryVO from 'socialuni-api/src/model/user/UserQueryVO'
-import request from "socialuni-api/src/request/request";
+import request from "socialuni-common/src/request/request";
 import SocialSendAuthCodeQO from "socialuni-api/src/model/phone/SocialSendAuthCodeQO";
 import UniProviderLoginQO from "socialuni-api/src/model/UniProviderLoginQO";
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";

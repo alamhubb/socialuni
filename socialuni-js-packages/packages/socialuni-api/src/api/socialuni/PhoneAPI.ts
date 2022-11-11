@@ -3,7 +3,7 @@ import SocialPhoneNumLoginQO from '../../model/phone/SocialPhoneNumLoginQO'
 import RefreshWxSessionKeyQO from '../../model/phone/RefreshWxSessionKeyQO'
 import BindWxPhoneNumQO from '../../model/phone/BindWxPhoneNumQO'
 import SocialSendAuthCodeQO from '../../model/phone/SocialSendAuthCodeQO'
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 import UniProviderLoginQO from "../../model/UniProviderLoginQO";
 
 export default class PhoneAPI {

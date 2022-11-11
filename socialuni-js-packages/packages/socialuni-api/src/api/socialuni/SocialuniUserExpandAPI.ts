@@ -1,6 +1,6 @@
 import SocialUserSchoolNameEditQO from "../../model/QO/user/SocialUserSchoolNameEditQO";
 import CenterUserDetailRO from "../../model/social/CenterUserDetailRO";
-import request from "../../request/request";
+import request from "socialuni-common/src/request/request";
 
 
 export default class SocialuniUserExpandAPI {
