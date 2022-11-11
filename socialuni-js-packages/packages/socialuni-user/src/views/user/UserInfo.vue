@@ -334,8 +334,6 @@
 </template>
 
 <script lang="ts">
-
-
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 import UserInfoImg from "./UserInfoImg.vue";
 import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
@@ -346,7 +344,7 @@ import QPcModel from "socialuni-ui/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
-import {socialAppModule, socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialConfigModule} from "socialuni-user/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-user/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";

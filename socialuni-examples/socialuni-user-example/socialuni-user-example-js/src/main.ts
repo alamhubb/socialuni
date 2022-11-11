@@ -9,7 +9,7 @@ const pinia = createPinia()
 export function createApp() {
     const app = createSSRApp(App);
     app.use(pinia)
-    app.use(SocialuniUser)
+    app.use(SocialuniUser,{useIm: false})
     return {
         app,
     };

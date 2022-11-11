@@ -3,7 +3,7 @@ import AlertUtil from 'socialuni-use/src/utils/AlertUtil'
 import RouterUtil from 'socialuni-use/src/utils/RouterUtil'
 import PagePath from "socialuni-constant/constant/PagePath";
 import {socialSystemModule} from "socialuni-user/src/store/store";
-import {socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialConfigModule} from "socialuni-user/src/store/store";
 import {socialUserModule} from "socialuni-user/src/store/store";
 import {socialChatModule} from "socialuni-im/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";

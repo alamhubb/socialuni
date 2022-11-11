@@ -77,8 +77,8 @@
 
 <script lang="ts">
 import {Options, Prop, Vue, Watch} from 'vue-property-decorator'
-import QIcon from "../socialuni-ui/src/components/QIcon/QIcon.vue";
-import QButton from "../socialuni-ui/src/components/QButton/QButton.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
 import ChildComment from "../ChildComment.vue";
 import {socialTalkModule } from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';

@@ -4,7 +4,7 @@ export default class SocialuniConfig {
     readonly static socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
     readonly static openImJsImUrl = (import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL || SocialuniConfig.socialuniUrl) + '/'
 
-    private useIm = true
+    readonly useIm = true
     static useIm = true
 
     //app的性别类型，全部性别，还是仅女生可用

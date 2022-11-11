@@ -133,8 +133,8 @@ import PhoneNumFormData from "./PhoneNumFormData";
 import UserPrivacyAgreement from "./UserPrivacyAgreement.vue";
 import PhoneLoginForm from "./PhoneLoginForm.vue";
 import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
-import QButton from "../socialuni-ui/src/components/QButton/QButton.vue";
-import QIcon from "../socialuni-ui/src/components/QIcon/QIcon.vue";
+import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
+import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 
 @Options({
   components: {

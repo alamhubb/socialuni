@@ -110,7 +110,7 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import {socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialConfigModule} from "socialuni-user/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import DomFile from 'socialuni-api/src/model/DomFile';
 import SocialUserIdentityAuthPreCheckRO from "socialuni-api/src/model/RO/user/SocialUserIdentityAuthPreCheckRO";
