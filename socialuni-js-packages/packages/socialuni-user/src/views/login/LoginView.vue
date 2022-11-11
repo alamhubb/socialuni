@@ -210,10 +210,13 @@ export default class LoginView extends Vue {
   //平台登录
   //登录，授权，绑定手机号各大平台登录结果，后者授权手机号结果
   async providerLogin(result) {
+    console.log(123123)
     if (this.openTypeBtnEnable) {
       try {
         this.openTypeBtnEnable = false
+        this.openTypeBtnEnable = false
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
+        console.log(45646)
         await LoginService.providerLogin(socialSystemModule.mpPlatform, result)
         this.loginAfterHint('登录成功')
       } finally {
