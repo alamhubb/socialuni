@@ -364,7 +364,7 @@ import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-common/src/utils/CosUtil";
-import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
+import TencentCosAPI from "../socialuni-js-packages/packages/socialuni-common/src/api/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 

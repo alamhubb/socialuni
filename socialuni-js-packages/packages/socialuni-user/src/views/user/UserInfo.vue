@@ -328,9 +328,9 @@ import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-common/src/utils/CosUtil";
-import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
+import TencentCosAPI from "socialuni-common/src/api/TencentCosAPI";
 
 @Options({
   components: {

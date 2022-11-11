@@ -7,14 +7,13 @@ import COS from 'cos-wx-sdk-v5'
 //@ts-ignore
 import COS from 'cos-js-sdk-v5'
 // #endif
-import UniUtil from "socialuni-common/src/utils/UniUtil";
 import AppMsg from "socialuni-constant/constant/AppMsg";
-import CosAuthRO from "../../model/cos/CosAuthRO";
-import TencentCosIdInfoRO from "../../model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
-import DomFile from "../../model/DomFile";
-import CosUploadResult from "../../model/cos/CosUploadResult";
-import request from "socialuni-common/src/request/request";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import TencentCosIdInfoRO from "socialuni-common/src/model/RO/tencent/cos/idImgInfo/TencentCosIdInfoRO";
+import request from "../request/request";
+import UniUtil from "../utils/UniUtil";
+import CosAuthRO from "../model/cos/CosAuthRO";
+import CosUploadResult from "../model/cos/CosUploadResult";
+import DomFile from "../model/DomFile";
 
 export default class TencentCosAPI {
     static async getImgTagAPI(imgUrl, imgKey, cosAuthRO: CosAuthRO) {
