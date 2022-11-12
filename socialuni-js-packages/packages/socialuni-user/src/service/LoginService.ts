@@ -15,6 +15,7 @@ export default class LoginService {
         console.log(3333)
         console.log(11111111)
         console.log(22222222)
+        console.log(22222222)
         console.log(provider)
         if (socialSystemModule.isMpQQ) {
             if (result.detail.errMsg !== Constants.loginSuccess) {
@@ -24,7 +25,7 @@ export default class LoginService {
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
         const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
 
-        const {data} = await LoginAPI.providerLoginAPI(loginQO)
+        const {data} = await SocialuniMineUserAPI.providerLoginAPI(loginQO)
 
         UserService.getMineUserInitDataActionByToken(data)
     }

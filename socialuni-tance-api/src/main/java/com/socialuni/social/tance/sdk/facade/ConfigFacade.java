@@ -23,7 +23,7 @@ public class ConfigFacade {
     }
 
     @Autowired
-    public static void setConfigApi(ConfigInterface configApi) {
+    public void setConfigApi(ConfigInterface configApi) {
         ConfigFacade.configApi = configApi;
     }
 

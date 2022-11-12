@@ -20,6 +20,7 @@ export default class UniUserUtil {
                     provider: provider,
                     desc: 'getUserInfo',
                     success(userInfo) {
+                        console.log(userInfo)
                         resolve(userInfo)
                     },
                     fail(e) {

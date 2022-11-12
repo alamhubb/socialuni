@@ -18,12 +18,6 @@ export default class MinePage extends Vue {
 
   hha(){
     console.log(456456)
-    console.log(222)
-    console.log(44444)
-    console.log(6666)
-    console.log(6666)
-    console.log(6666)
-    console.log(777)
   }
 }
 </script>
