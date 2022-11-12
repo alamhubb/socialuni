@@ -1,9 +1,8 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
-import com.socialuni.social.common.api.exception.exception.SocialSystemException;
-import com.socialuni.social.sdk.dao.redis.UserFansDetailRedis;
-import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
@@ -13,18 +12,16 @@ import java.util.List;
 
 @Component
 public class SocialuniUserFollowDetailROFactory {
-    static UserFansDetailRedis userFansDetailRedis;
+    static SocialUserFansDetailManage socialUserFansDetailManage;
 
     @Resource
-    public void setUserFansDetailRedis(UserFansDetailRedis userFansDetailRedis) {
-        SocialuniUserFollowDetailROFactory.userFansDetailRedis = userFansDetailRedis;
+    public void setSocialUserFansDetailManage(SocialUserFansDetailManage socialUserFansDetailManage) {
+        SocialuniUserFollowDetailROFactory.socialUserFansDetailManage = socialUserFansDetailManage;
     }
 
     public static SocialuniUserFollowDetailRO newSocialFollowUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
-        SocialUserFansDetailDo SocialUserFansDetailDo = userFansDetailRedis.findUserFansDetailByUserId(user.getUnionId());
-        if (SocialUserFansDetailDo == null) {
-            throw new SocialSystemException("用户粉丝详情未创建");
-        }
+        SocialUserFansDetailDo SocialUserFansDetailDo = socialUserFansDetailManage.getOrCreateUserFollowDetail(user);
+
         return SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(user, mineUser, SocialUserFansDetailDo);
     }
 
