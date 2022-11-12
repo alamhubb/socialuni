@@ -18,6 +18,8 @@ export default class IndexPage extends Vue {
   haha(){
     console.log(123)
     console.log(333)
+    console.log(4444)
+    console.log(5555)
   }
 }
 </script>
