@@ -33,7 +33,7 @@ public class SocialuniMineUserDetailROFactory {
     }
 
     public static SocialuniMineUserDetailRO getMineUserDetail() {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
+        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialuniMineUserDetailRO mineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
         return mineUserDetailRO;
     }

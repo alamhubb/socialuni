@@ -109,7 +109,7 @@ public class SocialuniUnionIdFacede {
     public static SocialuniUnionIdModler getUnionByUuidNotNull(String uuid) {
         SocialuniUnionIdModler uniContentUnionIdDO = getUnionByUuidAllowNull(uuid);
         if (uniContentUnionIdDO == null) {
-            throw new SocialParamsException("错误的内容标识2");
+            throw new SocialParamsException("错误的内容标识2：" + uuid);
         }
         return uniContentUnionIdDO;
     }
