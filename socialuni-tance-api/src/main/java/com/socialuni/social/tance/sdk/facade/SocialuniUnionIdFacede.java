@@ -117,7 +117,7 @@ public class SocialuniUnionIdFacede {
     //外部使用可能查询不存在的
     public static SocialuniUnionIdModler getUnionByUuidAllowNull(String uuid) {
         if (StringUtils.isEmpty(uuid)) {
-            throw new SocialParamsException("无效的内容标识1");
+            throw new SocialParamsException("无效的内容标识1:" + uuid);
         }
         return socialuniUnionIdApi.findByUuId(uuid);
     }

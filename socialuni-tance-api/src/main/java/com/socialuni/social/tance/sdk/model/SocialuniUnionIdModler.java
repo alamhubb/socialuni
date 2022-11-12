@@ -21,8 +21,8 @@ public class SocialuniUnionIdModler extends SocialuniBaseDO implements Serializa
     //三方的用户，来注册的时候，好好想想各种情况， 应该都会有dataunionid
     public SocialuniUnionIdModler(String contentType, String uuid, Integer fromDevId) {
         //这俩字段应该用不到，只是方便统计有用，也不是读出来的数据有用，评论时需要根据这个通知到对方，
-        this.uuid = uuid;
         this.contentType = contentType;
+        this.uuid = uuid;
 //        this.belongDevId = belongDevId;
         this.fromDevId = fromDevId;
     }
