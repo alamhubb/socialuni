@@ -1,6 +1,5 @@
 <template>
   <view class="h100p">
-    <div @click="hha">123</div>
     <mine-view class="h100p"></mine-view>
   </view>
 </template>
@@ -15,10 +14,5 @@ import MineView from "socialuni-user/src/views/user/MineView";
   }
 })
 export default class MinePage extends Vue {
-
-  hha(){
-    console.log(456456)
-    console.log(222)
-  }
 }
 </script>

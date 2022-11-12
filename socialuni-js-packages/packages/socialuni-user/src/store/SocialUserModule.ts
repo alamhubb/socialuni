@@ -2,7 +2,7 @@
 import {Pinia, Store} from "pinia-class-component"
 import CenterUserDetailRO from "socialuni-user/src/model/social/CenterUserDetailRO";
 import SocialLoginRO from "socialuni-user/src/model/social/SocialLoginRO";
-import {socialUserModule} from "./store";
+import {socialSystemModule, socialUserModule} from "./store";
 import SocialuniUserRO from "../model/SocialuniUserRO";
 import SocialuniTokenUtil from "socialuni-user/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
@@ -37,6 +37,7 @@ export default class SocialUserModule extends Pinia {
     //刷新用户的场景，手动刷新和登录后刷新用户的信息和imtoken？
     //传入user，就行了。
     async initSocialuniUserModule() {
+        socialSystemModule.initSystemInfo()
         //判断是否已登录已有token,userId
         if (this.hasToken) {
             console.log(2222)

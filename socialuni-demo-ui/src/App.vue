@@ -5,7 +5,7 @@ import {socialAppModule, socialSystemModule} from "socialuni-sdk/src/store/store
 export default {
   onLaunch() {
     console.log('App Launch')
-    socialSystemModule.initSystemInfo()
+    // socialSystemModule.initSystemInfo()
     //如果有跳转信息
     socialAppModule.appLunchAction()
   },
