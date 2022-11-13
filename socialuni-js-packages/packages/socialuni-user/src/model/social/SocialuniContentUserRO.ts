@@ -1,4 +1,3 @@
-import { OpenImMsgRO } from "../openIm/OpenImMsgRO"
 import { socialUserModule } from "socialuni-user/src/store/store"
 
 export default class SocialuniContentUserRO {
@@ -7,11 +6,4 @@ export default class SocialuniContentUserRO {
   id: string
   nickname: string
   avatar: string
-
-  constructor(msg: OpenImMsgRO) {
-    this.id = msg.sendID
-    this.isMine = msg.sendID === socialUserModule.userId
-    this.nickname = msg.senderNickname
-    this.avatar = msg.senderFaceUrl
-  }
 }

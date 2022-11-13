@@ -1,71 +1,6 @@
 <template>
   <view class="bg-default h100p">
-    123
-    <!--<q-bar>
-        <view>
-            <q-icon icon="mdi-volume-high"></q-icon>
-            系统通知
-        </view>
-        <view>
-            <q-icon icon="arrow-right"></q-icon>
-        </view>
-    </q-bar>-->
-    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
-      <view class="flex-auto card-text-row">
-        长按聊天框可解除匹配
-      </view>
-      <view class="flex-none mr-10px">
-        <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
-      </view>
-    </view>
-    <!--    <view v-show="false">
-          {{ chatsUnreadNumTotal }}
-        </view>-->
-    <view class="cu-list menu-avatar pb-50px">
-      <view v-for="chat in showChats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
-            @longpress="showBottomMenuClick(chat.id)">
-        <image class="cu-avatar radius lg" :src="chat.avatar" />
-        <view class="content h45px col-between">
-          <view>
-            <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
-                chat.nickname
-              }}
-            </view>
-            <view v-if="systemChats.indexOf(chat.type)>-1"
-                  class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
-            </view>
-            <view v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
-            </view>
-          </view>
-          <view>
-            <view class="text-gray text-sm flex">
-              <view class="text-cut text-sm">
-                <template v-if="chat.status === waitOpenStatus">
-                  会话待开启
-                </template>
-                <template v-else-if="chat.status === closeStatus">
-                  会话已关闭
-                </template>
-                <template v-else-if="chat.messages.length">
-                  {{ chat.messages[chat.messages.length - 1].content }}
-                </template>
-                <template v-else>
-                  会话已开启
-                </template>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="action h45px col-between">
-          <view class="text-grey text-xs">{{ formatTime(chat.updateTime) }}</view>
-          <view>
-            <view v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
-              {{ chat.unreadNum }}
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
+    <chat-view></chat-view>
   </view>
 </template>
 
@@ -80,10 +15,17 @@ import DateUtil from "socialuni-use/src/utils/DateUtil";
 import UniUtil from "socialuni-user/src/utils/UniUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import ChatView from "socialuni-im/src/views/chat/ChatView.vue";
+import MessageView from "socialuni-im/src/views/message/MessageView.vue";
 import {onLoad} from "@dcloudio/uni-app";
 
-@Options({})
-export default class ChatView extends Vue {
+@Options({
+  components:{
+    ChatView,
+    MessageView
+  }
+})
+export default class ChatPage extends Vue {
 
   get chats() {
     return socialChatModule.chats

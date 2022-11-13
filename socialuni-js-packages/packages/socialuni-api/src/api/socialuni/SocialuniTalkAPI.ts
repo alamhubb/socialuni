@@ -2,14 +2,14 @@ import TalkAddVO from '../../model/talk/TalkAddVO'
 import CommentAddVO from '../../model/comment/CommentAddVO'
 import HugAddVO from '../../model/HugAddVO'
 import TalkQueryVO from '../../model/talk/TalkQueryVO'
-import UserTalkQueryVO from '../../model/user/UserTalkQueryVO'
 import DistrictVO from '../../model/DistrictVO'
 import TalkDeleteVO from '../../model/talk/TalkDeleteVO'
 import CommentDeleteVO from '../../model/comment/CommentDeleteVO'
 import TalkVO from '../../model/talk/TalkVO'
-import DomFile from '../../model/DomFile'
-import ImgAddQO from '../../model/user/ImgAddQO'
 import request from "socialuni-common/src/request/request";
+import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
+import DomFile from "socialuni-common/src/model/DomFile";
+import UserTalkQueryVO from "socialuni-user/src/model/user/UserTalkQueryVO";
 
 export default class SocialuniTalkAPI {
     static queryStickTalksAPI() {

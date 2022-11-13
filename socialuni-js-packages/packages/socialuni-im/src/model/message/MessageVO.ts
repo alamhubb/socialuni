@@ -1,15 +1,14 @@
-import CenterUserDetailRO from 'socialuni-api/src/model/social/CenterUserDetailRO'
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
 import MessageType from "socialuni-constant/constant/MessageType";
 import MessageContentType from "socialuni-constant/constant/mesaage/MessageContentType";
-import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import SocialuniContentUserRO from "socialuni-api/src/model/social/SocialuniContentUserRO";
-import UUIDUtil from "packages/socialuni-use/src/utils/UUIDUtil";
+import UUIDUtil from "socialuni-use/src/utils/UUIDUtil";
+import {OpenImMsgRO} from "../openIm/OpenImMsgRO";
+import {socialUserModule} from "socialuni-user/src/store/store";
+import SocialuniUserRO from "socialuni-user/src/model/user/SocialuniUserRO";
 
 export default class MessageVO {
     public id: string
-    public user: SocialuniContentUserRO
+    public user: SocialuniUserRO
     public readNum: number
     public content: string
     public createTime: number
@@ -19,10 +18,10 @@ export default class MessageVO {
     public isMine: boolean
     public isRead: boolean
 
-    constructor(user: CenterUserDetailRO, content: string, msg: OpenImMsgRO = null) {
+    constructor(user: SocialuniUserRO, content: string, msg: OpenImMsgRO = null) {
         if (msg) {
             this.id = msg.clientMsgID
-            this.user = new SocialuniContentUserRO(msg)
+            this.user = this.getUserRO(msg)
             this.readNum = 0
             this.content = msg.content
             this.readStatus = CommonStatus.sending
@@ -43,5 +42,15 @@ export default class MessageVO {
             this.type = MessageType.simple
             this.contentType = MessageContentType.text
         }
+    }
+
+
+    getUserRO(msg: OpenImMsgRO) {
+        const user = new SocialuniUserRO()
+        user.id = msg.sendID
+        user.isMine = msg.sendID === socialUserModule.userId
+        user.nickname = msg.senderNickname
+        user.avatar = msg.senderFaceUrl
+        return user
     }
 }

@@ -7,7 +7,6 @@ import PlatformUtils from "socialuni-user/src/utils/PlatformUtils"
 import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-use/src/utils/CommonUtil"
 import JsonUtil from "socialuni-use/src/utils/JsonUtil"
-import { OpenImChatRO } from "socialuni-api/src/model/openIm/OpenImChatRO"
 import { socialUserModule } from "socialuni-user/src/store/store"
 import { SocialuniChatModuleInterface } from "socialuni-user/src/interface/SocialuniChatModuleInterface"
 
@@ -18,6 +17,7 @@ import { socialChatModule } from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from '../model/SocialuniChatRO'
 import MessageVO from "../model/message/MessageVO";
+import {OpenImChatRO} from "../model/openIm/OpenImChatRO";
 
 const openIm = new OpenIMSDK()
 

@@ -57,7 +57,7 @@ import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
+import ReportAPI from "socialuni-user/src/api/ReportAPI";
 import PlatformUtils from "socialuni-user/src/utils/PlatformUtils";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import UniUtil from "socialuni-user/src/utils/UniUtil";

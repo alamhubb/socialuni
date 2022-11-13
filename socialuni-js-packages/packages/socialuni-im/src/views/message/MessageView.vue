@@ -45,7 +45,7 @@
         <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
           会话已开启
         </view>
-        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>
+<!--        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>-->
       </view>
 
       <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
@@ -133,7 +133,7 @@
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>
 
-    <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
+<!--    <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
       <view class="uni-tip">
         <view class="uni-tip-title">删除原因</view>
         <view class="uni-textarea bd-1 bd-radius">
@@ -163,7 +163,7 @@
                          @click="openReportDialog"/>
         </uni-list>
       </view>
-    </uni-popup>
+    </uni-popup>-->
 
     <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
           @touchstart="inputBlur">
@@ -175,9 +175,7 @@
 </template>
 
 <script lang="ts">
-
 import {Options, Vue} from "vue-property-decorator";
-import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import {socialSystemModule} from "socialuni-user/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
@@ -186,15 +184,17 @@ import Constants from "socialuni-constant/constant/Constant";
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import UserType from "socialuni-constant/constant/UserType";
-import MessageAPI from "@/api/MessageAPI";
+// import MessageAPI from "@/api/MessageAPI";
 import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
 import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
-import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
+import SocialuniReportDialog from "socialuni-user/src/components/report/SocialuniReportDialog.vue";
 import {socialUserModule} from "socialuni-user/src/store/store";
 import {socialChatModule} from "socialuni-im/src/store/store";
+import MsgUtil from "socialuni-user/src/utils/MsgUtil";
+import MessageVO from "../../model/message/MessageVO";
 
 @Options({components: {SocialuniReportDialog}})
 export default class MessageView extends Vue {
@@ -216,7 +216,7 @@ export default class MessageView extends Vue {
     return socialChatModule.scrollTop
   }
 
-  get user() {
+  get mineUser() {
     return socialUserModule.user
   }
 
@@ -319,7 +319,7 @@ export default class MessageView extends Vue {
     const msgContent = this.msgContent || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
     if (msgContent) {
       // 点击发送后立即push
-      if (this.user && this.user.phoneNum) {
+      if (this.mineUser && this.mineUser.phoneNum) {
         //启用状态可以直接发送
         if (this.chat.status === CommonStatus.enable) {
           this.sendMsg(msgContent)
@@ -337,13 +337,13 @@ export default class MessageView extends Vue {
   }
 
   sendMsg(content) {
-    const msg: MessageVO = new MessageVO(this.user, content)
+    const msg: MessageVO = new MessageVO(this.mineUser, content)
     this.msgContent = ''
     socialChatModule.pushMessageAction(msg)
   }
 
   confirmDeleteTalk(msg: MessageVO) {
-    if (this.user.type === UserType.systemUser) {
+    if (this.mineUser.type === UserType.systemUser) {
       this.deleteMsgAction(this.curMsg)
     } else {
       AlertUtil.confirm('是否确定删除此条消息，此操作无法恢复').then(() => {
@@ -488,7 +488,7 @@ export default class MessageView extends Vue {
       try {
         //需要付费
         if (this.chat.needPayOpen) {
-          const userShell = this.user.shell
+          const userShell = this.mineUser.shell
           //不需要充值提示
           if (userShell >= 10) {
             await this.openChatAndPrompt('会话未开启，是否消耗10个贝壳开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)

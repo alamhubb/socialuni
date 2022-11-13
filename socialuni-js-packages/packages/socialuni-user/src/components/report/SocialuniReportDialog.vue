@@ -31,10 +31,10 @@ import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import {socialAppModule, } from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-user/src/store/store';
 import ReportType from "socialuni-constant/constant/ReportType";
-import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
+import ReportAddVO from "socialuni-user/src/model/report/ReportAddVO";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import CheckUtil from "socialuni-user/src/utils/CheckUtil";
-import ReportAPI from "socialuni-api/src/api/socialuni/ReportAPI";
+import ReportAPI from "socialuni-user/src/api/ReportAPI";
 
 @Options({
   components: {QPopup}
