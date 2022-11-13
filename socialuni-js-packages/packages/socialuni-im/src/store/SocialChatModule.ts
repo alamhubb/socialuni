@@ -10,7 +10,7 @@ import CommonUtil from "socialuni-use/src/utils/CommonUtil"
 import JsonUtil from "socialuni-use/src/utils/JsonUtil"
 import { OpenImChatRO } from "socialuni-api/src/model/openIm/OpenImChatRO"
 import { socialUserModule } from "socialuni-user/src/store/store"
-import SocialuniUserRO from "socialuni-user/src/model/SocialuniUserRO"
+import SocialuniUserRO from "packages/socialuni-user/src/model/user/SocialuniUserRO"
 
 import { OpenIMSDK } from "open-im-sdk"
 import { InitConfig } from "open-im-sdk/types"

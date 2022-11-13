@@ -1,5 +1,5 @@
 export default class SocialuniUserRO {
-    userId: string
+    id: string
     nickname?: string
     avatar?: string
     age?: number
@@ -7,7 +7,7 @@ export default class SocialuniUserRO {
     birth?: string
 
     constructor(user: SocialuniUserRO) {
-        this.userId = user.userId
+        this.id = user.id
         this.nickname = user.nickname;
         this.avatar = user.avatar;
         this.gender = user.gender;

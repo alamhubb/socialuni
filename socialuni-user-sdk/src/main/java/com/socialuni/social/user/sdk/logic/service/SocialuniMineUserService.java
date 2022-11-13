@@ -1,14 +1,14 @@
 package com.socialuni.social.user.sdk.logic.service;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.user.sdk.feignAPI.SocialuniMineUserAPI;
 import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
-import com.socialuni.social.common.api.model.user.SocialuniUserRO;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class SocialuniMineUserService {
             ResultRO<SocialuniUserRO> resultRO = socialuniMineUserAPI.getMineUser();
             mineUserDetailRO = new SocialuniUserRO(resultRO.getData());
         } else {
-            mineUserDetailRO = SocialuniUserROFactory.getMineUser();
+            mineUserDetailRO = SocialuniMineUserROFactory.getMineUser();
         }
         return new ResultRO<>(mineUserDetailRO);
     }

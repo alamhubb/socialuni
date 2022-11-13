@@ -1,4 +1,4 @@
-import SocialuniUserRO from "../model/SocialuniUserRO";
+import SocialuniUserRO from "../model/user/SocialuniUserRO";
 import UserEditVO from "socialuni-user/src/model/user/UserEditVO"
 import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO"
 import request from "socialuni-common/src/request/request";

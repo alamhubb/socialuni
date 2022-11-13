@@ -9,7 +9,7 @@ import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
-import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.model.factory.SocialuniMineUserROFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,7 +41,7 @@ public class SocialuniLoginDomain {
     }
 
     public SocialLoginRO<SocialuniUserRO> getSocialLoginROByMineUser(SocialuniUserDo mineUser) {
-        SocialuniUserRO userDetailRO = SocialuniUserROFactory.getMineUser(mineUser);
+        SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
 
