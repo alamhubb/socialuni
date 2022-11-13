@@ -10,6 +10,7 @@
     "socialuni-common": "1.0.0",
     "socialuni-use": "1.0.0",
     "socialuni-user": "1.0.0",
+    "open-im-sdk": "^2.0.3",
     "vue": "3.2.41",
     "pinia": "^2.0.22",
     "pinia-class-component": "^0.9.4",

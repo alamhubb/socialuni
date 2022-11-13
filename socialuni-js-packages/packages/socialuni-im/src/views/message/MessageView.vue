@@ -45,7 +45,7 @@
         <view v-if="chat.loadMore === noMore || messages.length===0" class="py-xs px bg-white bd-radius mt-sm">
           会话已开启
         </view>
-<!--        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>-->
+        <!--        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>-->
       </view>
 
       <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
@@ -133,37 +133,37 @@
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>
 
-<!--    <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
-      <view class="uni-tip">
-        <view class="uni-tip-title">删除原因</view>
-        <view class="uni-textarea bd-1 bd-radius">
-          <textarea placeholder="*必填，删除原因" v-model="deleteReason"
-                    :show-confirm-bar="false"
-          />
-        </view>
-        <view class="uni-common-mt">
-          是否封禁:
-          <switch class="ml-5px" @change="banChange"/>
-        </view>
-        <view class="uni-tip-group-button">
-          <button class="uni-tip-button w40r" type="default" @click="closeDeleteDialog" :plain="true">取消
-          </button>
-          <button class="uni-tip-button w40r" type="primary" @click="confirmDeleteTalk"
-                  :disabled="!deleteReason">确定
-          </button>
-        </view>
-      </view>
-    </uni-popup>
+    <!--    <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
+          <view class="uni-tip">
+            <view class="uni-tip-title">删除原因</view>
+            <view class="uni-textarea bd-1 bd-radius">
+              <textarea placeholder="*必填，删除原因" v-model="deleteReason"
+                        :show-confirm-bar="false"
+              />
+            </view>
+            <view class="uni-common-mt">
+              是否封禁:
+              <switch class="ml-5px" @change="banChange"/>
+            </view>
+            <view class="uni-tip-group-button">
+              <button class="uni-tip-button w40r" type="default" @click="closeDeleteDialog" :plain="true">取消
+              </button>
+              <button class="uni-tip-button w40r" type="primary" @click="confirmDeleteTalk"
+                      :disabled="!deleteReason">确定
+              </button>
+            </view>
+          </view>
+        </uni-popup>
 
-    <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
-      <view class="uni-tip w180px">
-        <uni-list class="w100px">
-          <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
-          <uni-list-item v-if="user&&message&&!message.isMine" :show-arrow="true" title="举报"
-                         @click="openReportDialog"/>
-        </uni-list>
-      </view>
-    </uni-popup>-->
+        <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
+          <view class="uni-tip w180px">
+            <uni-list class="w100px">
+              <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
+              <uni-list-item v-if="user&&message&&!message.isMine" :show-arrow="true" title="举报"
+                             @click="openReportDialog"/>
+            </uni-list>
+          </view>
+        </uni-popup>-->
 
     <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
           @touchstart="inputBlur">
@@ -305,11 +305,23 @@ export default class MessageView extends Vue {
     this.showEmoji = false */
   }
 
-  sendMsgClick() {
+  async sendMsgClick() {
+    const {data} = await socialChatModule.openIm.createTextMessage(this.msgContent);
+    const params = {
+      recvID: this.chat.receiveUserId,
+      groupID: "",
+      message: data,
+    };
+    socialChatModule.openIm.sendMessage(params).then(res => {
+      console.log('发送消息成功')
+      socialChatModule.refreshMessages()
+    });
+
+
     // 微信支持 hold-keyboard
     // app和h5支持 @touchend.prevent
     // 只有qq需要特殊处理
-    // #ifdef MP-QQ
+    /*// #ifdef MP-QQ
     this.inputFocus = false
     // 严格测试150毫秒时间比较合适，不卡顿，且不出bug
     CommonUtil.delayTime(150).then(() => {
@@ -323,17 +335,17 @@ export default class MessageView extends Vue {
         //启用状态可以直接发送
         if (this.chat.status === CommonStatus.enable) {
           this.sendMsg(msgContent)
-        } /*else {
+        } /!*else {
           this.openChatPromise(msgContent).finally(() => {
             this.isOpeningChatDisableBtn = false
           })
-        }*/
+        }*!/
       } else {
         MsgUtil.unBindPhoneNum()
       }
     } else {
       ToastUtil.toast('不能发送空白内容')
-    }
+    }*/
   }
 
   sendMsg(content) {

@@ -1,7 +1,8 @@
-import MessageVO from 'socialuni-api/src/model/message/MessageVO'
-import { OpenImChatRO } from "socialuni-api/src/model/openIm/OpenImChatRO"
-import { OpenImMsgRO } from "socialuni-api/src/model/openIm/OpenImMsgRO"
 import JsonUtil from 'socialuni-use/src/utils/JsonUtil'
+import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
+import MessageVO from "./message/MessageVO";
+import {OpenImChatRO} from "./openIm/OpenImChatRO";
+import {socialChatModule} from "../store/store";
 
 export default class SocialuniChatRO {
   public id: string = null
@@ -48,13 +49,13 @@ export default class SocialuniChatRO {
         userID: "",
       }
       console.log(options)
-      /*openIm.getHistoryMessageList(options).then(({data}) => {
-          const msgs: OpenImMsgRO[] = JsonUtil.parse(data)
-          this.messages = msgs.map(item => new MessageVO(null, null, item))
+      socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
+        const msgs: OpenImMsgRO[] = JsonUtil.parse(data)
+        this.messages = msgs.map(item => new MessageVO(null, null, item))
       }).catch(err => {
       }).finally(() => {
-          console.log(456)
-      })*/
+        console.log(456)
+      })
 
       // this.loadMore = chat.loadMore
     }

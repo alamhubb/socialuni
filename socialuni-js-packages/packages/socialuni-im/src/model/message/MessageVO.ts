@@ -24,7 +24,7 @@ export default class MessageVO {
             this.user = this.getUserRO(msg)
             this.readNum = 0
             this.content = msg.content
-            this.readStatus = CommonStatus.sending
+            this.readStatus = CommonStatus.enable
             this.isMine = this.user.isMine
             this.isRead = msg.isRead
             this.createTime = msg.createTime
