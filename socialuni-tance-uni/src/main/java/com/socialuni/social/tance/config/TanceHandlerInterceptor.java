@@ -1,11 +1,15 @@
 package com.socialuni.social.tance.config;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.api.constant.SocialSystemConst;
 import com.socialuni.social.tance.controller.SocialuniAdminAppConfigController;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.transaction.support.TransactionSynchronizationUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +32,9 @@ public class TanceHandlerInterceptor implements HandlerInterceptor {
 
     @Resource
     SocialuniAdminAppConfigController appConfigController;
+    @Resource
+    PublishDataTransactionalEventListener publishDataTransactionalEventListener;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 初始化。
@@ -38,4 +45,11 @@ public class TanceHandlerInterceptor implements HandlerInterceptor {
         //
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        // 没有异常才去同步。  有异常也不会进postHandle。
+            publishDataTransactionalEventListener.publishDataToDev();
+    }
+
 }

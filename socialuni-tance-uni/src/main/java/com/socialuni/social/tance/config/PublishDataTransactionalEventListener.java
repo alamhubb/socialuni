@@ -15,6 +15,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
+import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.util.ReflectionUtils;
 
 import javax.annotation.Resource;
@@ -43,8 +44,7 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
     /**
      * 之后再事务提交之后也就是成功执行，才去同步到开发者服务器中。
      */
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void publishDataToDev(ApplicationEvent applicationEvent) {
+    public void publishDataToDev() {
         // 循环调用插入到开发者的接口中去。 放心顺序也是一样保持一致的。
 //        for (PublishDataModel publishDataModel : publishDataModelList) {
 //
@@ -56,7 +56,8 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
 
             // 同步redis缓存。
             for (PublishDataModel publishDataModel : publishDataModelList) {
-                Set<String> cacheKeySet = getNamesByClass(publishDataModel.getData().getClass());
+                Object data = publishDataModel.getData();
+                Set<String> cacheKeySet = getNamesByClass(data.getClass());
                 // 获得所有的key内容。
                 if (cacheKeySet != null) {
                     for (String cacheName : cacheKeySet) {
@@ -112,9 +113,11 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
         HashSet<String> newName = CollectionUtil.set(false, name);
         for (Class model : models) {
             Set<String> strings = CLASS_SET_MAP.get(model);
-            if (strings != null) {
+            if (strings == null) {
                 strings = newName;
                 CLASS_SET_MAP.put(model, strings);
+            }else{
+                //
                 if (!strings.addAll(newName)) {
                     throw new RuntimeException(errMsg + "放入的cacheNames重复,请核查代码");
                 }
@@ -130,7 +133,7 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
      */
     public static Set<String> getNamesByClass(Class cla) {
         Set<String> strings = CLASS_SET_MAP.get(cla);
-        return new HashSet<>(strings);
+        return strings;
     }
 }
 
