@@ -4,8 +4,8 @@ export default class SocialuniConfig {
     readonly static socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
     readonly static openImJsImUrl = (import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL || SocialuniConfig.socialuniUrl) + '/'
 
-    readonly useIm = true
-    static useIm = true
+    // readonly useIm = true
+    // static useIm = true
 
     //app的性别类型，全部性别，还是仅女生可用
     /*static readonly appGenderType = GenderType.all
@@ -25,7 +25,7 @@ export default class SocialuniConfig {
 */
     constructor(socialConfig?: SocialuniConfig) {
         if (socialConfig) {
-            SocialuniConfig.useIm = ObjectUtil.isNullOrUndefined(socialConfig.useIm) ? true : socialConfig.useIm
+            // SocialuniConfig.useIm = ObjectUtil.isNullOrUndefined(socialConfig.useIm) ? true : socialConfig.useIm
             // this.secretKey = socialConfig.secretKey || null
             // this.weixin = socialConfig.weixin || null
             // this.qq = socialConfig.qq || null

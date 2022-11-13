@@ -1,9 +1,7 @@
 //用来存储当前用户的一些信息
 import {Pinia, Store} from "pinia-class-component"
-import CenterUserDetailRO from "socialuni-user/src/model/social/CenterUserDetailRO";
 import SocialLoginRO from "socialuni-user/src/model/social/SocialLoginRO";
 import {socialSystemModule, socialUserModule} from "./store";
-import SocialuniUserRO from "../model/user/SocialuniUserRO";
 import SocialuniTokenUtil from "socialuni-user/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-user/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
@@ -14,6 +12,7 @@ import UserService from "../service/UserService";
 import SocialuniMineUserAPI from "../api/SocialuniMineUserAPI";
 import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig";
 import SocialuniMineUserRO from "../model/user/SocialuniMineUserRO";
+import {SocialuniChatModuleInterface} from "@/interface/SocialuniChatModuleInterface";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -48,11 +47,18 @@ export default class SocialUserModule extends Pinia {
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置
             this.setUser(data)
-            if (SocialuniConfig.useIm) {
-                const res = await SocialuniImUserAPI.getImUserTokenAPI()
-                this.setImToken(res.data)
-            }
+            await this.loginAfter()
         }
+    }
+
+    async loginAfter() {
+        console.log(123)
+        await import('socialuni-im/src/store/store').then(async (chatModule: { socialChatModule: SocialuniChatModuleInterface }) => {
+            const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
+            this.setImToken(imRes.data)
+            console.log(chatModule)
+            chatModule.socialChatModule.initSocialuniChatModule()
+        })
     }
 
     //对外开放的只有一个的登录接口

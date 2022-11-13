@@ -82,7 +82,7 @@ import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import {onLoad} from "@dcloudio/uni-app";
 
 @Options({})
-export default class SocialuniImView extends Vue {
+export default class ChatView extends Vue {
 
   get chats() {
     return socialChatModule.chats

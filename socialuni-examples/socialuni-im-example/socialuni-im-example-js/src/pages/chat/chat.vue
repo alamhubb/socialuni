@@ -1,5 +1,6 @@
 <template>
   <view class="bg-default h100p">
+    123
     <!--<q-bar>
         <view>
             <q-icon icon="mdi-volume-high"></q-icon>
@@ -82,7 +83,7 @@ import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import {onLoad} from "@dcloudio/uni-app";
 
 @Options({})
-export default class SocialuniImView extends Vue {
+export default class ChatView extends Vue {
 
   get chats() {
     return socialChatModule.chats

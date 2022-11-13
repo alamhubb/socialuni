@@ -1,7 +1,6 @@
 import { Pinia, Store } from "pinia-class-component"
 import PageUtil from "socialuni-user/src/utils/PageUtil"
-import MessageVO from "socialuni-api/src/model/message/MessageVO"
-import ChatAPI from "socialuni-api/src/api/ChatAPI"
+import ChatAPI from "socialuni-im/src/api/ChatAPI"
 import RouterUtil from "socialuni-use/src/utils/RouterUtil"
 import PagePath from "socialuni-constant/constant/PagePath"
 import PlatformUtils from "socialuni-user/src/utils/PlatformUtils"
@@ -10,7 +9,7 @@ import CommonUtil from "socialuni-use/src/utils/CommonUtil"
 import JsonUtil from "socialuni-use/src/utils/JsonUtil"
 import { OpenImChatRO } from "socialuni-api/src/model/openIm/OpenImChatRO"
 import { socialUserModule } from "socialuni-user/src/store/store"
-import SocialuniUserRO from "packages/socialuni-user/src/model/user/SocialuniUserRO"
+import { SocialuniChatModuleInterface } from "socialuni-user/src/interface/SocialuniChatModuleInterface"
 
 import { OpenIMSDK } from "open-im-sdk"
 import { InitConfig } from "open-im-sdk/types"
@@ -18,11 +17,12 @@ import SocialuniConfig from "socialuni-common/src/config/SocialuniConfig"
 import { socialChatModule } from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from '../model/SocialuniChatRO'
+import MessageVO from "../model/message/MessageVO";
 
 const openIm = new OpenIMSDK()
 
 @Store
-export default class SocialChatModule extends Pinia {
+export default class SocialChatModule extends Pinia implements SocialuniChatModuleInterface{
   imToken = ''
 
   chatId: string = null
@@ -33,7 +33,6 @@ export default class SocialChatModule extends Pinia {
 
 
   async initSocialuniChatModule() {
-    await socialUserModule.initSocialuniUserModule()
     //获取imToken
     const config: InitConfig = {
       userID: socialUserModule.userId,
