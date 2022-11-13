@@ -25,6 +25,19 @@
       }
     }
   ],
+  "subPackages": [
+    {
+      "root": "pagesLazy",
+      "pages": [
+        {
+          "path": "chat/message",
+          "style": {
+            "navigationBarTitleText": "消息"
+          }
+        }
+      ]
+    }
+  ],
   "tabBar": {
     "color": "#9E9E9E",
     "selectedColor": "#2196F3",
