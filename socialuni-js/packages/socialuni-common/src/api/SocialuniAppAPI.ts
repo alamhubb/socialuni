@@ -1,6 +1,6 @@
 import ObjectUtil from "socialuni-use/src/utils/ObjectUtil";
 import request from "socialuni-common/src/request/request";
-import FrontErrorLogVO from "../model/FrontErrorLogVO";
+import FrontErrorLogVO from "socialuni-user/src/model/FrontErrorLogVO";
 
 export default class SocialuniAppAPI {
   static sendErrorLogAPI(uri: string, detail: string, params?: any, errorMsg?: any) {

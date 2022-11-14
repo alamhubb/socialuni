@@ -11,7 +11,7 @@ import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.check.SocialuniUserCheck;
-import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
+import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.common.api.constant.SocialuniContentType;

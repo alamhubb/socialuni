@@ -1,10 +1,8 @@
-package com.socialuni.social.sdk.feignAPI;
+package com.socialuni.social.user.sdk.feignAPI;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
-import com.socialuni.social.community.sdk.model.HomeSwiperVO;
-import com.socialuni.social.community.sdk.model.HomeTabRO;
 import com.socialuni.social.user.sdk.model.SocialAppLaunchDataRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -19,18 +17,12 @@ import java.util.List;
  */
 
 //@RequestMapping("socialuni/app")
-@FeignClient(name = "app", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/app")
+@FeignClient(name = "socialuniApp", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/socialuniApp")
 @Tag(name = "应用模块/启动模块", description = "暂未支持")
-public interface SocialuniAppAPI {
+public interface SocialuniAppNewAPI {
 
     @PostMapping("getAppLaunchData")
     ResultRO<SocialAppLaunchDataRO> getAppLaunchData();
-
-    @PostMapping("queryHomeSwipers")
-    ResultRO<List<HomeSwiperVO>> queryHomeSwipers();
-
-    @PostMapping("queryHomeTabs")
-    ResultRO<List<HomeTabRO>> queryHomeTabs();
 
     @PostMapping("sendErrorLog")
     ResultRO<Void> sendErrorLog(@RequestBody FrontErrorLogVO frontErrorLogVO);

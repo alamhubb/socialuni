@@ -15,7 +15,7 @@ import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniContentDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.ReportFactory;
-import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
+import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;

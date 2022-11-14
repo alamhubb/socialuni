@@ -1,6 +1,6 @@
 <script>
-import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import {socialAppModule} from "socialuni-sdk/src/store/store";
+import SocialuniAppNewAPI from "socialuni-user/src/api/SocialuniAppNewAPI";
 
 export default {
   onLaunch() {
@@ -10,7 +10,7 @@ export default {
     socialAppModule.appLunchAction()
   },
   onError(e) {
-    SocialuniAppAPI.sendErrorLogAPI('front page error', e.message)
+    // SocialuniAppNewAPI.sendErrorLogAPI('front page error', e.message)
   },
 }
 </script>

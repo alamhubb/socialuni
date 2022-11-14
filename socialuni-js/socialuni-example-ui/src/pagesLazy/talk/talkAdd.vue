@@ -166,6 +166,7 @@ import {
   socialUserModule
 } from "socialuni-sdk/src/store/store";
 import {onUnload} from "@dcloudio/uni-app";
+import SocialuniAppNewAPI from "socialuni-user/src/api/SocialuniAppNewAPI";
 
 @Options({
   components: {
@@ -501,7 +502,7 @@ export default class TalkAddView extends Vue {
     if (this.cosAuthRO) {
       this.uploadImgList()
     } else {
-      SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      SocialuniAppNewAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }

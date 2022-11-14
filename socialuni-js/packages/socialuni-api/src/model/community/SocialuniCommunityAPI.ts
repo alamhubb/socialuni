@@ -1,9 +1,9 @@
 import request from "socialuni-common/src/request/request";
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
-import AppUpdateResultVO from "../app/AppUpdateResultVO";
-import AppUpdateVO from "../app/AppUpdateVO";
+import AppUpdateResultVO from "../../../../socialuni-user/src/model/app/AppUpdateResultVO";
+import AppUpdateVO from "../../../../socialuni-user/src/model/app/AppUpdateVO";
 import HomeSwiperVO from "../HomeSwiperVO";
-import AppInitDataRO from "../common/AppInitDataRO";
+import AppInitDataRO from "socialuni-user/src/model/AppInitDataRO";
 
 export default class SocialuniCommunityAPI {
   static getAppConfigAPI() {

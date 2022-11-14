@@ -1,5 +1,5 @@
-import SocialuniAppConfigRO from "../config/SocialuniAppConfigRO";
-import SocialuniAppMoreConfigRO from "../config/SocialuniAppMoreConfigRO";
+import SocialuniAppConfigRO from "./SocialuniAppConfigRO";
+import SocialuniAppMoreConfigRO from "./SocialuniAppMoreConfigRO";
 
 export default class AppInitDataRO {
     imgPath: string = ''

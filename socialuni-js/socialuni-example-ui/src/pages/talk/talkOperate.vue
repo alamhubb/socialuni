@@ -52,9 +52,8 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import {socialAppModule, socialConfigModule, socialTalkModule} from "socialuni-sdk/src/store/store";
+import {socialAppModule,  socialTalkModule} from "socialuni-sdk/src/store/store";
 import ReportType from "socialuni-constant/constant/ReportType";
-import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import ReportAPI from "socialuni-user/src/api/ReportAPI";
@@ -62,6 +61,8 @@ import PlatformUtils from "socialuni-user/src/utils/PlatformUtils";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import UniUtil from "socialuni-user/src/utils/UniUtil";
 import MsgUtil from "socialuni-user/src/utils/MsgUtil";
+import {socialConfigModule, socialUserModule} from "socialuni-user/src/store/store";
+import ReportAddVO from "socialuni-user/src/model/report/ReportAddVO";
 
 
 // todo 后台可控制是否显示轮播图
@@ -77,11 +78,11 @@ export default class TalkOperate extends Vue {
   }
 
   get reportTypes() {
-    return socialAppModule.reportTypes
+    return socialConfigModule.reportTypes
   }
 
   get user() {
-    return socialAppModule.reportTypes
+    return socialUserModule.user
   }
 
   get commentVisible() {

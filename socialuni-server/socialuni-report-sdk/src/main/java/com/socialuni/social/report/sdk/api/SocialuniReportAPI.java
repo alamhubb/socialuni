@@ -1,7 +1,7 @@
-package com.socialuni.social.sdk.feignAPI.community;
+package com.socialuni.social.report.sdk.api;
 
 import com.socialuni.social.common.api.model.ResultRO;
-import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
+import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;

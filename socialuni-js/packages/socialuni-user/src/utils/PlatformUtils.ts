@@ -3,7 +3,6 @@ import { socialPlatformModule } from "socialuni-sdk/src/store/store"
 import { socialSystemModule } from "socialuni-user/src/store/store"
 import { socialUserModule } from "socialuni-user/src/store/store"
 import MsgUtil from "./MsgUtil"
-import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO"
 import Constants from "socialuni-constant/constant/Constant"
 import AppMsg from "socialuni-constant/constant/AppMsg"
 import ToastUtil from "socialuni-use/src/utils/ToastUtil"
@@ -11,6 +10,8 @@ import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI"
 import WxUtils from "./WxUtils"
 import MPUtil from "socialuni-use/src/utils/MPUtil"
 import APPUtil from "./APPUtil"
+import SocialuniAppNewAPI from "../api/SocialuniAppNewAPI";
+import UserPayResultVO from "../model/user/UserPayResultVO";
 
 
 // 统一处理各平台的订阅
@@ -98,7 +99,7 @@ export default class PlatformUtils {
           ToastUtil.toast(AppMsg.payCancelMsg)
           throw err
         } else {
-          SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)
+          SocialuniAppNewAPI.sendErrorLogAPI(null, '支付失败', res, err)
           MsgUtil.payFailMsg()
           throw err
         }

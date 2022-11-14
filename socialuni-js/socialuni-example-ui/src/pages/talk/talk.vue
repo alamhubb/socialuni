@@ -64,11 +64,9 @@ import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
 import {
   socialAppModule,
-  socialConfigModule,
   socialLocationModule,
   socialNotifyModule,
   socialTagModule,
-  socialUserModule
 } from "socialuni-sdk/src/store/store";
 import UniUtil from "socialuni-user/src/utils/UniUtil";
 import RouterUtil from "socialuni-use/src/utils/RouterUtil";
@@ -76,7 +74,8 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-user/src/utils/PageUtil";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
-import {onHide} from "@dcloudio/uni-app"; // todo 后台可控制是否显示轮播图
+import {onHide} from "@dcloudio/uni-app";
+import {socialConfigModule, socialUserModule} from "socialuni-user/src/store/store"; // todo 后台可控制是否显示轮播图
 
 // todo 后台可控制是否显示轮播图
 

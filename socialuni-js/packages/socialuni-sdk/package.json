@@ -9,6 +9,7 @@
   "dependencies": {
     "socialuni-api": "1.0.0",
     "socialuni-use": "1.0.0",
+    "socialuni-user": "1.0.0",
     "socialuni-constant": "1.0.0",
     "socialuni-common": "1.0.0",
     "uuid": "^7.0.3",

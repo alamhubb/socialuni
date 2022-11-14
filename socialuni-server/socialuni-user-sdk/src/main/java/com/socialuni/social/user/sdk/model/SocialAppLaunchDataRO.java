@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.model.RO.app;
+package com.socialuni.social.user.sdk.model;
 
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;

@@ -2,11 +2,11 @@ package com.socialuni.social.sdk.logic.service.report;
 
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.logic.domain.report.SoicialReportAddDomain;
-import com.socialuni.social.sdk.feignAPI.community.SocialuniReportAPI;
+import com.socialuni.social.report.sdk.api.SocialuniReportAPI;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
-import com.socialuni.social.sdk.model.QO.SocialuniReportAddQO;
+import com.socialuni.social.report.sdk.model.SocialuniReportAddQO;
 import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
