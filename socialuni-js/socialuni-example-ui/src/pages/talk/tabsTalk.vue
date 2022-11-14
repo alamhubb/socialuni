@@ -147,12 +147,9 @@ import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
 import QPullRefresh from "socialuni-ui/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkItem from "./talkItem/TalkItem.vue";
 import {
-  socialConfigModule,
   socialLocationModule,
-  socialSystemModule,
   socialTagModule,
   socialTalkModule,
-  socialUserModule
 } from "socialuni-sdk/src/store/store";
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
@@ -162,6 +159,7 @@ import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
 import StorageUtil from "socialuni-use/src/utils/StorageUtil";
 import PageUtil from "socialuni-user/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
+import { socialConfigModule, socialSystemModule, socialUserModule } from 'socialuni-user/src/store/store'
 
 // todo 后台可控制是否显示轮播图
 @Options({

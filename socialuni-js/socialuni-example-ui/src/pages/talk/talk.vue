@@ -97,7 +97,7 @@ import {socialConfigModule, socialUserModule} from "socialuni-user/src/store/sto
   }
 })
 export default class TalkView extends Vue {
-  public $refs!: {
+ public $refs!: {
     tabsTalk: TabsTalk;
     cityPicker: QCityPicker
     tagPicker: SocialTagPicker

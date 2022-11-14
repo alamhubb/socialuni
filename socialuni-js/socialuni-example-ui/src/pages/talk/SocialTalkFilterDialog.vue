@@ -92,7 +92,6 @@ import {
   socialLocationModule,
   socialTagModule,
   socialTalkModule,
-  socialUserModule
 } from "socialuni-sdk/src/store/store";
 import TalkFilterUtil from "socialuni-user/src/utils/TalkFilterUtil";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
@@ -109,6 +108,7 @@ import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
 import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
 import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
 import QCityInfo from "socialuni-ui/src/components/QCityInfo/QCityInfo.vue";
+import { socialUserModule } from 'socialuni-user/src/store/store';
 
 
 @Options({
