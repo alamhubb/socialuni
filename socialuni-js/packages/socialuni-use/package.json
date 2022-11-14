@@ -1,0 +1,15 @@
+{
+  "name": "socialuni-use",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "uuid": "^7.0.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

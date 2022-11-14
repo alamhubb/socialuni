@@ -1,0 +1,14 @@
+{
+  "name": "socialuni-scss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "axios.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "sass": "^1.55.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

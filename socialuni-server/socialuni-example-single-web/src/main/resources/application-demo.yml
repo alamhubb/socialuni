@@ -63,12 +63,12 @@ spring:
     hikari:
       read-only: false
       #等待连接池分配连接的最大时长（毫秒）
-      connection-timeout: 600000
+      connection-timeout: 10000
       #一个连接idle状态的最大时长（毫秒），超时则被释放
-      idle-timeout: 600000
+      idle-timeout: 60000
       #一个连接的生命时长（毫秒），超时而且没被使用则被释放
-      max-lifetime: 1800000
-      login-timeout: 600
+      max-lifetime: 60000
+      login-timeout: 5
       #连接池中允许的最大连接数。缺省值：10；推荐的公式：((CPU内核数量 * 2) + 硬盘数量)
       maximum-pool-size: 600
       minimum-idle: 30

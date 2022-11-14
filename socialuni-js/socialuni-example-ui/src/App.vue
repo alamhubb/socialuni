@@ -1,6 +1,6 @@
 <script>
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
-import {socialAppModule, socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialAppModule} from "socialuni-sdk/src/store/store";
 
 export default {
   onLaunch() {

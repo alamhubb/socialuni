@@ -160,7 +160,6 @@ import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import CommonUtil from "socialuni-use/src/utils/CommonUtil";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
-import StorageUtil from "socialuni-user/src/utils/StorageUtil";
 import PageUtil from "socialuni-user/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
 
 
