@@ -345,10 +345,9 @@ import QPcModel from "socialuni-ui/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
-import {socialUserModule} from 'socialuni-user/src/store/store';
+import {socialConfigModule, socialUserModule} from 'socialuni-user/src/store/store';
 import {socialSystemModule} from "socialuni-user/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import PageUtil from "socialuni-user/src/utils/PageUtil";
@@ -367,6 +366,7 @@ import CosUtil from "socialuni-user/src/utils/CosUtil";
 import TencentCosAPI from "socialuni-common/src/api/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
+import SocialuniUserRO from "socialuni-user/src/model/user/SocialuniUserRO";
 
 @Options({
   components: {
@@ -386,7 +386,7 @@ import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
   }
 })
 export default class UserInfo extends Vue {
-  @Prop() user: CenterUserDetailRO
+  @Prop() user: SocialuniUserRO
 
   $refs!: {
     reportDialog: any;
