@@ -34,7 +34,7 @@ export async function initSocialuniStore() {
     await socialUserModule.initSocialuniUserModule()
     if (socialUserModule.user) {
         const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
-        this.setImToken(imRes.data)
+        socialUserModule.setImToken(imRes.data)
         socialChatModule.initSocialuniChatModule()
     }
     socialAppModule.getHomeSwipersAction()

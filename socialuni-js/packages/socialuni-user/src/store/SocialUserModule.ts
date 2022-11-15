@@ -81,7 +81,7 @@ export default class SocialUserModule extends Pinia {
         }
     }
 
-    private setImToken(token: string) {
+    setImToken(token: string) {
         this.userImToken = token
         SocialuniImUserTokenUtil.set(token)
     }
