@@ -1,8 +1,8 @@
 import {initSocialuniStore} from "./src/store/store";
 
 const Socialuni = {
-    install() {
-        initSocialuniStore()
+    async install() {
+       await initSocialuniStore()
         // UniUtil.showShareMenu()
     }
 }

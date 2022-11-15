@@ -1,9 +1,10 @@
 <script>
 import {socialUserModule} from "socialuni-user/src/store/store";
+import {socialAppModule} from "socialuni-sdk/src/store/store";
 
 export default {
   onLaunch() {
-    socialUserModule.initSocialuniUserModule()
+    socialAppModule.appLunchAction()
   },
   onError(e) {
     // SocialuniAppAPI.sendErrorLogAPI('front page error', e.message)

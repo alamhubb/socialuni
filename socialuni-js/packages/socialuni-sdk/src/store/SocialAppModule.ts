@@ -17,13 +17,7 @@ export default class SocialAppModule extends Pinia {
         PlatformUtils.checkUpdate()
         try {
             // WebsocketUtil.websocketConnect(false)
-            socialTalkModule.getTalkTabs()
-            socialTagModule.getHotTagsAction()
-            socialTagModule.getHotTagTypesAction()
-            socialCircleModule.getHotCirclesAction()
-            socialCircleModule.getHotCircleTypesAction()
-            socialLocationModule.getHotDistrictsAction()
-            socialAppModule.getHomeSwipersAction()
+
         } finally {
 
         }

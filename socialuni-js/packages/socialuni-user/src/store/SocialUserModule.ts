@@ -37,7 +37,6 @@ export default class SocialUserModule extends Pinia {
     //刷新用户的场景，手动刷新和登录后刷新用户的信息和imtoken？
     //传入user，就行了。
     async initSocialuniUserModule() {
-        socialSystemModule.initSystemInfo()
         //判断是否已登录已有token,userId
         if (this.hasToken) {
             console.log(2222)
@@ -47,18 +46,7 @@ export default class SocialUserModule extends Pinia {
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置
             this.setUser(data)
-            await this.loginAfter()
         }
-    }
-
-    async loginAfter() {
-        console.log(123)
-        await import('socialuni-im/src/store/store').then(async (chatModule: { socialChatModule: SocialuniChatModuleInterface }) => {
-            const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
-            this.setImToken(imRes.data)
-            console.log(chatModule)
-            chatModule.socialChatModule.initSocialuniChatModule()
-        })
     }
 
     //对外开放的只有一个的登录接口
