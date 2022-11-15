@@ -1,12 +1,19 @@
 package com.socialuni.social.tance.config;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.enumeration.PublishDataCacheable;
 import com.socialuni.social.common.api.model.PublishDataModel;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
+import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -36,7 +43,8 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
 
     @Resource
     private CacheManager cacheManager;
-
+    @Autowired
+    private ConfigInterface configApi;
     /**
      * 之后再事务提交之后也就是成功执行，才去同步到开发者服务器中。
      */
@@ -48,8 +56,12 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
 
         PublishDataTanceBaseRepository.acceptPublishDataComponent((consumer) -> {
             List<PublishDataModel> publishDataModelList = consumer.getPublishDataModelList();
+            // 同步数据到开发者接口中。
             log.debug("插入到开发者的接口中={}", publishDataModelList);
-
+            String devPublishDataApiUrl = configApi.getString("devPublishDataApiUrl");
+            if(StrUtil.isNotBlank(devPublishDataApiUrl)){
+                HttpUtil.post(devPublishDataApiUrl, JSONUtil.toJsonStr(publishDataModelList));
+            }
             // 同步redis缓存。
             for (PublishDataModel publishDataModel : publishDataModelList) {
                 Object data = publishDataModel.getData();
@@ -131,5 +143,7 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
         Set<String> strings = CLASS_SET_MAP.get(cla);
         return strings;
     }
+
+
 }
 
