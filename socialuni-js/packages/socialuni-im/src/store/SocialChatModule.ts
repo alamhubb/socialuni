@@ -19,8 +19,6 @@ import SocialuniChatRO from '../model/SocialuniChatRO'
 import MessageVO from "../model/message/MessageVO";
 import {OpenImChatRO} from "../model/openIm/OpenImChatRO";
 
-
-
 @Store
 export default class SocialChatModule extends Pinia implements SocialuniChatModuleInterface {
     openIm = new OpenIMSDK()

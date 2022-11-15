@@ -120,7 +120,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import CosUtil from "socialuni-user/src/utils/CosUtil";
 import UniUtil from "socialuni-user/src/utils/UniUtil";
 import MsgUtil from "socialuni-user/src/utils/MsgUtil";
-import TencentCosAPI from "../socialuni-js-packages/packages/socialuni-common/src/api/TencentCosAPI";
+import TencentCosAPI from "socialuni-common/src/api/TencentCosAPI";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
 import SocialUserIdentityAPI from "socialuni-api/src/api/socialuni/SocialUserIdentityAPI";
 import SocialUserIdentityAuthQO from "socialuni-api/src/model/QO/user/SocialUserIdentityAuthQO";
