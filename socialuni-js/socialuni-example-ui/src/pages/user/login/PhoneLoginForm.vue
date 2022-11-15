@@ -72,7 +72,7 @@ import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
 import {socialConfigModule} from "socialuni-user/src/store/store";
 import CommonUtil from "socialuni-use/src/utils/CommonUtil";
 import ToastUtil from "socialuni-use/src/utils/ToastUtil";
-import PhoneAPI from "socialuni-api/src/api/socialuni/PhoneAPI";
+import PhoneAPI from "socialuni-user/src/api/socialuni/PhoneAPI";
 
 @Options({
   components: {QIcon}

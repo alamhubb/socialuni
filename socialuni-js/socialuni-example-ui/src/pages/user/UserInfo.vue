@@ -362,11 +362,11 @@ import RouterUtil from "socialuni-use/src/utils/RouterUtil";
 import AlertUtil from "socialuni-use/src/utils/AlertUtil";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
-import DomFile from "socialuni-api/src/model/DomFile";
+import DomFile from "socialuni-common/src/model/DomFile";
 import CosUtil from "socialuni-user/src/utils/CosUtil";
 import TencentCosAPI from "socialuni-common/src/api/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
+import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
 
 @Options({
   components: {
