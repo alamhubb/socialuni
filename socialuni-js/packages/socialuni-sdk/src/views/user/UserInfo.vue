@@ -315,9 +315,9 @@ import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
-import CenterUserDetailRO from "socialuni-sdk/src/model/social/CenterUserDetailRO";
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
-import TalkVO from "socialuni-sdk/src/model/talk/TalkVO";
+import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
@@ -326,10 +326,10 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
-import DomFile from "socialuni-sdk/src/model/DomFile";
+import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import SocialuniMineUserAPI from "socialuni-api/src/api/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-sdk/src/model/user/ImgAddQO";
+import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 
 @Options({

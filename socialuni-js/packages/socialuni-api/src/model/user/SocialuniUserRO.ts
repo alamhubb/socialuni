@@ -1,4 +1,4 @@
-import {socialUserModule} from "../../store/store";
+import {socialUserModule} from "socialuni-sdk/src/store/store";
 
 export default class SocialuniUserRO {
     id: string

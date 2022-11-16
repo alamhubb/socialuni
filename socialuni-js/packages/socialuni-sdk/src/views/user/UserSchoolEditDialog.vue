@@ -35,7 +35,7 @@ import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
 import QSearch from "socialuni-view/src/components/QSearch/QSearch.vue";
 import QSelect from "socialuni-view/src/components/QSelect/QSelect.vue";
-import SocialCircleRO from "socialuni-sdk/src/model/community/circle/SocialCircleRO";
+import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";

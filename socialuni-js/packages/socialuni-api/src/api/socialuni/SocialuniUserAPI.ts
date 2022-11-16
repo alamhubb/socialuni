@@ -1,11 +1,11 @@
-import ImgFileVO from '../../../../socialuni-sdk/src/model/ImgFileVO'
+import ImgFileVO from '../../../../socialuni-api/src/model/ImgFileVO'
 import request from "socialuni-api/src/request/request";
-import UserEditVO from "socialuni-sdk/src/model/user/UserEditVO";
-import ImgAddQO from "socialuni-sdk/src/model/user/ImgAddQO";
-import CenterUserDetailRO from "socialuni-sdk/src/model/social/CenterUserDetailRO";
-import UserQueryVO from "socialuni-sdk/src/model/user/UserQueryVO";
-import UserPayResultVO from "socialuni-sdk/src/model/user/UserPayResultVO";
-import UserPayVO from "socialuni-sdk/src/model/user/UserPayVO";
+import UserEditVO from "socialuni-api/src/model/user/UserEditVO";
+import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import UserQueryVO from "socialuni-api/src/model/user/UserQueryVO";
+import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
+import UserPayVO from "socialuni-api/src/model/user/UserPayVO";
 
 export default class SocialuniUserAPI {
   static getMineUserInfoAPI() {

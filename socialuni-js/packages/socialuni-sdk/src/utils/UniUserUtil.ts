@@ -1,6 +1,6 @@
 import UniLoginUtil from './UniLoginUtil'
 import GetUserInfoRes = UniApp.GetUserInfoRes
-import UniProviderLoginQO from "socialuni-sdk/src/model/login/UniProviderLoginQO";
+import UniProviderLoginQO from "socialuni-api/src/model/login/UniProviderLoginQO";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 
 export default class UniUserUtil {

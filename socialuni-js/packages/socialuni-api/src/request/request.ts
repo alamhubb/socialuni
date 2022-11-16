@@ -10,7 +10,7 @@ import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil"
 import XmlUtil from "../../../socialuni-sdk/src/utils/XmlUtil"
 import SocialuniConfig from "../config/SocialuniConfig";
 import XmlResultRO from "../model/XmlResultRO";
-import SocialuniAppAPI from "../api/SocialuniAppAPI";
+import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";
 
 const request: HttpRequest = new HttpRequest()
 

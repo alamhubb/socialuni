@@ -15,9 +15,9 @@ import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
-import SocialuniChatRO from '../model/SocialuniChatRO'
-import MessageVO from "../model/message/MessageVO";
-import {OpenImChatRO} from "../model/openIm/OpenImChatRO";
+import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
+import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
+import MessageVO from "socialuni-api/src/model/message/MessageVO";
 
 @Store
 export default class SocialChatModule extends Pinia implements SocialuniChatModuleInterface {

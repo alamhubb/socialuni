@@ -1,10 +1,10 @@
 import {Pinia, Store} from "pinia-class-component"
-import SocialuniAppConfigRO from "../model/config/SocialuniAppConfigRO";
-import SocialuniAppMoreConfigRO from "../model/config/SocialuniAppMoreConfigRO";
 import {socialConfigModule} from "./store";
-import AppInitDataRO from "../model/config/AppInitDataRO";
 import SocialuniAppNewAPI from "socialuni-api/src/api/SocialuniAppNewAPI";
 import ReportAPI from "socialuni-api/src/api/ReportAPI";
+import SocialuniAppConfigRO from "socialuni-api/src/model/config/SocialuniAppConfigRO";
+import AppInitDataRO from "socialuni-api/src/model/config/AppInitDataRO";
+import SocialuniAppMoreConfigRO from "socialuni-api/src/model/config/SocialuniAppMoreConfigRO";
 
 @Store
 export default class SocialConfigModule extends Pinia {

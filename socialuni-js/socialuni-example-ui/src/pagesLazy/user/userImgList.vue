@@ -24,7 +24,7 @@ import UserSchoolEditDialog from "@/pages/user/UserSchoolEditDialog.vue";
 import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import ImgFileVO from "socialuni-sdk/src/model/ImgFileVO";
+import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
 import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";

@@ -365,8 +365,8 @@ import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import ImgAddQO from "socialuni-sdk/src/model/user/ImgAddQO";
-import SocialuniUserRO from "socialuni-sdk/src/model/user/SocialuniUserRO";
+import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
+import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
 
 @Options({
   components: {

@@ -1,6 +1,6 @@
 //用来存储当前用户的一些信息
 import {Pinia, Store} from "pinia-class-component"
-import SocialLoginRO from "socialuni-sdk/src/model/social/SocialLoginRO";
+import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import {socialSystemModule, socialUserModule} from "./store";
 import SocialuniTokenUtil from "socialuni-sdk/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-sdk/src/utils/SocialuniUserStorageUtil";

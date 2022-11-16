@@ -2,7 +2,7 @@ import JsonUtil from 'socialuni-sdk/src/utils/JsonUtil'
 import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
 import MessageVO from "./message/MessageVO";
 import {OpenImChatRO} from "./openIm/OpenImChatRO";
-import {socialChatModule} from "../store/store";
+import {socialChatModule} from "socialuni-sdk/src/store/store";
 
 export default class SocialuniChatRO {
   public id: string = null
