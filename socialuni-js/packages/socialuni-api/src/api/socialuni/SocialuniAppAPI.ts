@@ -10,11 +10,11 @@ export default class SocialuniAppAPI {
   }
 
   static queryHomeSwipersAPI() {
-    return request.post<HomeSwiperVO[]>('socialuni/communityApp/queryHomeSwipers')
+    return request.post<HomeSwiperVO[]>('socialuni/app/queryHomeSwipers')
   }
 
   static queryHomeTabsAPI() {
-    return request.post<TalkTabVO[]>('socialuni/communityApp/queryHomeTabs')
+    return request.post<TalkTabVO[]>('socialuni/app/queryHomeTabs')
   }
 
   static sendErrorLogAPI(uri: string, detail: string, params?: any, errorMsg?: any) {

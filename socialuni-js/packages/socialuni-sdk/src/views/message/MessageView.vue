@@ -318,6 +318,8 @@ export default class MessageView extends Vue {
     });
 
 
+
+
     // 微信支持 hold-keyboard
     // app和h5支持 @touchend.prevent
     // 只有qq需要特殊处理

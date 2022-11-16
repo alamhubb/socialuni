@@ -1,7 +1,7 @@
 import ImgFileVO from '../ImgFileVO'
-import SocialuniContentUserRO from "./SocialuniContentUserRO";
+import SocialuniUserRO from "../user/SocialuniUserRO";
 
-export default class CenterUserDetailRO extends SocialuniContentUserRO {
+export default class CenterUserDetailRO extends SocialuniUserRO {
     id: string = null
     nickname: string = ''
     avatar: string = ''

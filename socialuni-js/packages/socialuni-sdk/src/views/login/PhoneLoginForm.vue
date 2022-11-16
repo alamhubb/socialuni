@@ -72,8 +72,8 @@ import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import PhoneAPI from "socialuni-api/src/api/socialuni/PhoneAPI";
-import SocialuniMineUserAPI from "../../api/SocialuniMineUserAPI";
 
 @Options({
   components: {QIcon}
@@ -175,7 +175,7 @@ export default class PhoneLoginForm extends Vue {
       this.countDown++
     }, 1000)
     // 如果怕太频繁，就显示相同手机号每天只能发送几次，一小时内只能5次
-    SocialuniMineUserAPI.sendAuthCodeAPI(this.value.phoneNum).then(() => {
+    PhoneAPI.sendAuthCodeAPI(this.value.phoneNum).then(() => {
       // 提示验证码发送成功
       ToastUtil.toast('验证码发送成功')
     })

@@ -6,8 +6,10 @@ export default class SocialuniUserRO {
     nickname?: string
     avatar?: string
     age?: number
-    gender?: number
+    gender?: string
     birth?: string
+    city: string = null
+    type: string = null
 
     constructor(user?: SocialuniUserRO) {
         if (user) {
@@ -17,6 +19,7 @@ export default class SocialuniUserRO {
             this.gender = user.gender;
             this.age = user.age;
             this.birth = user.birth;
+            this.city = user.city;
             this.isMine = user.id === socialUserModule.userId
         }
     }

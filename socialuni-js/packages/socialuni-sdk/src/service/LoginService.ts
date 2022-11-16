@@ -4,7 +4,8 @@ import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialPhoneNumLoginQO from "socialuni-api/src/model/phone/SocialPhoneNumLoginQO";
-import SocialuniMineUserAPI from "socialuni-api/src/api/SocialuniMineUserAPI";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
 
 export default class LoginService {
     /**
@@ -24,7 +25,7 @@ export default class LoginService {
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
         const loginQO = await UniUserUtil.getUniProviderLoginQO(provider)
 
-        const {data} = await SocialuniMineUserAPI.providerLoginAPI(loginQO)
+        const {data} = await LoginAPI.providerLoginAPI(loginQO)
 
         UserService.getMineUserInitDataActionByToken(data)
     }
@@ -32,7 +33,7 @@ export default class LoginService {
     static async phoneLogin(phoneNum: string, authCode: string) {
         const phoneBindQO = new SocialPhoneNumLoginQO(phoneNum, authCode)
 
-        const {data} = await SocialuniMineUserAPI.phoneLoginAPI(phoneBindQO)
+        const {data} = await LoginAPI.phoneLoginAPI(phoneBindQO)
 
         UserService.getMineUserInitDataActionByToken(data)
     }

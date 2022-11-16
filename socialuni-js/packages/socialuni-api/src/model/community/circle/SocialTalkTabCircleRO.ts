@@ -1,7 +1,7 @@
-import SocialUserBaseRO from "../../social/SocialUserBaseRO";
+import SocialuniUserRO from "../../user/SocialuniUserRO";
 
 export default class SocialTalkTabCircleRO {
     public name: string = null
     public description: string = null
-    public circleMasterUser: SocialUserBaseRO = null
+    public circleMasterUser: SocialuniUserRO = null
 }

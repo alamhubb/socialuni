@@ -6,18 +6,24 @@ import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailR
 import UserQueryVO from "socialuni-api/src/model/user/UserQueryVO";
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
 import UserPayVO from "socialuni-api/src/model/user/UserPayVO";
+import SocialuniUserRO from "../../model/user/SocialuniUserRO";
+import SocialSendAuthCodeQO from "../../model/phone/SocialSendAuthCodeQO";
+import UniProviderLoginQO from "../../model/login/UniProviderLoginQO";
+import SocialLoginRO from "../../model/social/SocialLoginRO";
+import SocialuniMineUserRO from "../../model/user/SocialuniMineUserRO";
+import SocialPhoneNumLoginQO from "../../model/phone/SocialPhoneNumLoginQO";
 
 export default class SocialuniUserAPI {
   static getMineUserInfoAPI() {
-    return request.get('socialuni/user/getMineUser')
+    return request.get<SocialuniMineUserRO>('socialuni/user/getMineUser')
   }
 
   static queryUserDetailAPI(userId: string) {
-    return request.get('socialuni/user/queryUserDetail/' + userId)
+    return request.get<SocialuniUserRO>('socialuni/user/queryUserDetail/' + userId)
   }
 
   static editUserAPI(user: UserEditVO) {
-    return request.post('socialuni/user/editUser', user)
+    return request.post<SocialuniMineUserRO>('socialuni/user/editUser', user)
   }
 
   static addUserImgAPI(userImg: ImgAddQO) {
