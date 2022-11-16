@@ -4,7 +4,7 @@ import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import Constants from "socialuni-constant/constant/Constant";
 import SocialPhoneNumLoginQO from "socialuni-api/src/model/phone/SocialPhoneNumLoginQO";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
 
 export default class LoginService {

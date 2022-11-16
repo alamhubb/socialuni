@@ -9,7 +9,7 @@ import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import UserService from "../service/UserService";
 import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -37,7 +37,7 @@ export default class SocialUserModule extends Pinia {
         //判断是否已登录已有token,userId
         if (this.hasToken) {
             console.log(2222)
-            const {data}: { data: SocialuniMineUserRO } = await SocialuniUserAPI.getMineUserInfoAPI();
+            const {data}: { data: SocialuniMineUserRO } = await SocialuniMineUserAPI.getMineUserInfoAPI();
             console.log(data)
             //考虑清空缓存的情况
             //从后台根据api获取用户信息， 并且更新user。
@@ -131,7 +131,7 @@ export default class SocialUserModule extends Pinia {
 
     destroyAccount() {
         return AlertUtil.confirm('是否注销账号，7天内不再登录，账号将彻底清空无法使用').then(() => {
-            /*SocialuniUserAPI.destroyAccountAPI().then(() => {
+            /*SocialuniMineUserAPI.destroyAccountAPI().then(() => {
                 UserService.userLogout()
                 ToastUtil.toast('注销成功')
             })*/
@@ -143,7 +143,7 @@ export default class SocialUserModule extends Pinia {
      */
 
     getMineUserAction() {
-        return SocialuniUserAPI.getMineUserInfoAPI().then((res: any) => {
+        return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
             socialUserModule.setUser(res.data)
         })
     }

@@ -53,7 +53,7 @@ import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DomFile from "socialuni-api/src/model/DomFile";
 import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
@@ -94,7 +94,7 @@ export default class UserInfoImg extends Vue {
       UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)
@@ -129,7 +129,7 @@ export default class UserInfoImg extends Vue {
   deleteImg(imgIndex) {
     AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
-      SocialuniUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
+      SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
         socialUserModule.setUser(res.data)
       })
     })

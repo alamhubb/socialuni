@@ -101,7 +101,7 @@
 
 <script lang="ts">
 import {Emit, Options, Vue, Watch} from 'vue-property-decorator'
-import SocialuniUserAPI from 'socialuni-api/src/api/socialuni/SocialuniUserAPI'
+import SocialuniMineUserAPI from 'socialuni-api/src/api/socialuni/SocialuniMineUserAPI'
 import JsonUtils from 'socialuni-sdk/src/utils/ObjectUtil'
 import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
 import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
@@ -228,7 +228,7 @@ export default class UserEditView extends Vue {
       userCopy.wxAccount = this.wxAccount
       userCopy.qqAccount = this.qqAccount
       userCopy.wbAccount = this.wbAccount
-      SocialuniUserAPI.editUserAPI(userCopy).then((res: any) => {
+      SocialuniMineUserAPI.editUserAPI(userCopy).then((res: any) => {
         socialUserModule.setUser(res.data)
         ToastUtil.toast('已修改')
         this.closeUserEditPop()

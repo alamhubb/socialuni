@@ -28,10 +28,11 @@ import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
 import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 
 @Options({
   components: {SocialuniReportDialog}
@@ -103,7 +104,7 @@ export default class UserImgList extends Vue {
   deleteImg(imgIndex) {
     AlertUtil.warning('请确认是否删除照片？').then(() => {
       const imgs: ImgFileVO[] = this.frontDeleteImg(imgIndex)
-      SocialuniUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
+      SocialuniMineUserAPI.deleteUserImgNewAPI(imgs[0]).then((res: any) => {
         socialUserModule.setUser(res.data)
       })
     })

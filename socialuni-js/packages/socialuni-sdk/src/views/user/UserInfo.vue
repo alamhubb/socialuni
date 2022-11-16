@@ -329,7 +329,7 @@ import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 
 @Options({
   components: {
@@ -579,7 +579,7 @@ export default class UserInfo extends Vue {
       UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)

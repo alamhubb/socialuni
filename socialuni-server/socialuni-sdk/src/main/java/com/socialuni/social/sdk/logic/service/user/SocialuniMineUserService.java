@@ -31,7 +31,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class SocialuniUserService {
+public class SocialuniMineUserService {
     @Resource
     SocialEditUserDomain socialEditUserDomain;
     @Resource
