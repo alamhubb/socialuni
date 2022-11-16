@@ -304,7 +304,6 @@
 
 <script lang="ts">
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
-import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import QSearch from "socialuni-view/src/components/QSearch/QSearch.vue";
 import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
 import QPcModel from "socialuni-view/src/components/QPcModel/QPcModel.vue";
@@ -328,9 +327,9 @@ import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import DomFile from "socialuni-api/src/model/DomFile";
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
-import SocialuniMineUserAPI from "socialuni-api/src/api/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 
 @Options({
   components: {
@@ -580,7 +579,7 @@ export default class UserInfo extends Vue {
       UniUtil.showLoading('上传中')
       const imgFile: DomFile = imgFiles[0]
       imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
+      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
       socialUserModule.setUser(res[1].data)
     } catch (e) {
       console.error(e)

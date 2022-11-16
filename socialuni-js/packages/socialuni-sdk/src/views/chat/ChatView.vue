@@ -1,6 +1,5 @@
 <template>
   <view class="bg-default h100p">
-    123
     <!--<q-bar>
         <view>
             <q-icon icon="mdi-volume-high"></q-icon>
@@ -81,7 +80,7 @@ import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onLoad} from "@dcloudio/uni-app";
-import SocialuniChatRO from "../../model/SocialuniChatRO";
+import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 
 @Options({})
 export default class ChatView extends Vue {

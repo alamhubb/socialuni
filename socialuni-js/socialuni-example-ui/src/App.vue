@@ -10,7 +10,7 @@ export default {
     socialAppModule.appLunchAction()
   },
   onError(e) {
-    SocialuniAppAPI.sendErrorLogAPI('front page error', e.message)
+    // SocialuniAppAPI.sendErrorLogAPI('front page error', e.message)
   },
 }
 </script>

@@ -190,11 +190,18 @@ import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
 import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
-import SocialuniReportDialog from "socialuni-sdk/src/components/report/SocialuniReportDialog.vue";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import MessageVO from "../../model/message/MessageVO";
+import PageUtil from "../../utils/PageUtil";
+import AlertUtil from "../../utils/AlertUtil";
+import ToastUtil from "../../utils/ToastUtil";
+import PlatformUtils from "../../utils/PlatformUtils";
+import UniUtil from "../../utils/UniUtil";
+import MessageVO from "socialuni-api/src/model/message/MessageVO";
+import MessageAPI from "socialuni-api/src/api/MessageAPI";
+import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
+
 
 @Options({components: {SocialuniReportDialog}})
 export default class MessageView extends Vue {
@@ -318,8 +325,6 @@ export default class MessageView extends Vue {
     });
 
 
-
-
     // 微信支持 hold-keyboard
     // app和h5支持 @touchend.prevent
     // 只有qq需要特殊处理
@@ -337,7 +342,7 @@ export default class MessageView extends Vue {
         //启用状态可以直接发送
         if (this.chat.status === CommonStatus.enable) {
           this.sendMsg(msgContent)
-        } /!*else {
+        } /*else {
           this.openChatPromise(msgContent).finally(() => {
             this.isOpeningChatDisableBtn = false
           })
