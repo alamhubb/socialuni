@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.feignAPI.user;
 
+import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
@@ -28,7 +29,6 @@ public interface SocialuniUserAPI {
     @Operation(summary = "获取他人用户详情")
     ResultRO<SocialuniUserDetailRO> queryUserDetail(@PathVariable("userId") String userId);
 
-
     @PostMapping("editUser")
     @Operation(summary = "编辑用户")
     ResultRO<SocialuniMineUserDetailRO> editUser(@RequestBody @Valid SocialUserEditQO socialUserEditQO);
@@ -48,4 +48,8 @@ public interface SocialuniUserAPI {
     @GetMapping("getUserImgList/{userId}")
     @Operation(summary = "获取用户图片列表")
     ResultRO<List<SocialuniUserImgRO>> getUserImgList(@PathVariable("userId") String userId);
+
+    @GetMapping("queryRecentlyUsers")
+    @Operation(summary = "获取用户图片列表")
+    ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers();
 }

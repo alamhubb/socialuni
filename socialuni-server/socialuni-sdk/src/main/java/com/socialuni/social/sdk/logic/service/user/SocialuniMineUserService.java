@@ -56,22 +56,6 @@ public class SocialuniMineUserService {
         return new ResultRO<>(mineUserDetailRO);
     }
 
-    public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
-        if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniUserAPI.queryUserDetail(userId);
-        } else {
-            SocialuniUserDetailRO userDetailRO;
-            SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
-            SocialuniUserDo detailUserDO = SocialuniUserUtil.getUserByUuid(userId);
-            if (mineUser != null && detailUserDO.getUnionId().equals(mineUser.getUnionId())) {
-                userDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUser);
-            } else {
-                userDetailRO = SocialuniUserDetailROFactory.getUserDetailRO(detailUserDO, mineUser);
-            }
-            return new ResultRO<>(userDetailRO);
-        }
-    }
-
 
     public ResultRO<SocialuniMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
@@ -122,18 +106,5 @@ public class SocialuniMineUserService {
             return socialuniUserAPI.deleteUserImg(centerUserImgDeleteQO);
         }
         return ResultRO.success(socialMineUserDetailRO);
-    }
-
-    public ResultRO<List<SocialuniUserImgRO>> getUserImgList(String userId) {
-        if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniUserAPI.getUserImgList(userId);
-        } else {
-            Integer userUnionId = SocialuniUnionIdFacede.getUnionIdByUuidNotNull(userId);
-            List<SocialuniUserImgDo> imgs50 = SocialuniUserImgDOUtil.getUserImgsTop50(userUnionId);
-
-            List<SocialuniUserImgRO> imgs50Ro = UserImgROFactory.userImgDOToVOS(imgs50);
-
-            return new ResultRO<>(imgs50Ro);
-        }
     }
 }
