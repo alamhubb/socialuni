@@ -179,7 +179,7 @@
 import {Options, Vue} from "vue-property-decorator";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import {socialSystemModule} from "socialuni-user/src/store/store";
+import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import MessageType from "socialuni-constant/constant/mesaage/MessageType";
 import Constants from "socialuni-constant/constant/Constant";
@@ -193,8 +193,8 @@ import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
 import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
 import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
-import {socialUserModule} from "socialuni-user/src/store/store";
-import {socialChatModule} from "socialuni-im/src/store/store";
+import {socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialChatModule} from "socialuni-sdk/src/store/store";
 
 @Options({components: {SocialuniReportDialog}})
 export default class MessageView extends Vue {

@@ -91,17 +91,17 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-ui/src/components/QNavbar/QNavbar.vue";
-import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
+import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
+import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
+import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
 import UserInfo from "./UserInfo.vue";
 import Login from "./login/login.vue";
-import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
-import {socialUserModule} from 'socialuni-user/src/store/store';
-import UniUtil from "socialuni-user/src/utils/UniUtil";
+import MsgInput from "socialuni-view/src/components/MsgInput.vue";
+import {socialUserModule} from 'socialuni-sdk/src/store/store';
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
-import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 
 @Options({

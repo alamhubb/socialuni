@@ -9,9 +9,9 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
+import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import UserInfo from "../../pages/user/UserInfo.vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 

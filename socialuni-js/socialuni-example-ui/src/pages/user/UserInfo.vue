@@ -337,36 +337,36 @@
 
 
 import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
-import QButton from "socialuni-ui/src/components/QButton/QButton.vue";
+import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
-import QSearch from "socialuni-ui/src/components/QSearch/QSearch.vue";
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import QPcModel from "socialuni-ui/src/components/QPcModel/QPcModel.vue";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import SocialGenderTag from "socialuni-ui/src/components/SocialGenderTag/SocialGenderTag.vue";
-import QRowItem from "socialuni-ui/src/components/QRowItem/QRowItem.vue";
-import {socialConfigModule, socialUserModule} from 'socialuni-user/src/store/store';
-import {socialSystemModule} from "socialuni-user/src/store/store";
+import QSearch from "socialuni-view/src/components/QSearch/QSearch.vue";
+import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
+import QPcModel from "socialuni-view/src/components/QPcModel/QPcModel.vue";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
+import SocialGenderTag from "socialuni-view/src/components/SocialGenderTag/SocialGenderTag.vue";
+import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
+import {socialConfigModule, socialUserModule} from 'socialuni-sdk/src/store/store';
+import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import PageUtil from "socialuni-user/src/utils/PageUtil";
-import MsgUtil from "socialuni-user/src/utils/MsgUtil";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
-import UserUtil from "socialuni-user/src/utils/UserUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import UserUtil from "socialuni-sdk/src/utils/UserUtil";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import PagePath from "socialuni-constant/constant/PagePath";
-import ToastUtil from "socialuni-use/src/utils/ToastUtil";
-import RouterUtil from "socialuni-use/src/utils/RouterUtil";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
-import DomFile from "socialuni-common/src/model/DomFile";
-import CosUtil from "socialuni-user/src/utils/CosUtil";
-import TencentCosAPI from "socialuni-common/src/api/TencentCosAPI";
+import DomFile from "socialuni-api/src/model/DomFile";
+import CosUtil from "socialuni-sdk/src/utils/CosUtil";
+import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import ImgAddQO from "socialuni-user/src/model/user/ImgAddQO";
-import SocialuniUserRO from "socialuni-user/src/model/user/SocialuniUserRO";
+import ImgAddQO from "socialuni-sdk/src/model/user/ImgAddQO";
+import SocialuniUserRO from "socialuni-sdk/src/model/user/SocialuniUserRO";
 
 @Options({
   components: {

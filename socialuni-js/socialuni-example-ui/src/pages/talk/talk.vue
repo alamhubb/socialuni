@@ -49,16 +49,16 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 
-import QButton from 'socialuni-ui/src/components/QButton/QButton.vue'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import QSearch from 'socialuni-ui/src/components/QSearch/QSearch.vue'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
-import QSlider from 'socialuni-ui/src/components/QSlider/QSlider.vue'
-import SocialTagPicker from "socialuni-ui/src/components/SocialTagPicker.vue";
-import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
-import QTabs from "socialuni-ui/src/components/QTabs/QTabs.vue";
-import MsgInput from "socialuni-ui/src/components/MsgInput.vue";
+import QButton from 'socialuni-view/src/components/QButton/QButton.vue'
+import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
+import QSearch from 'socialuni-view/src/components/QSearch/QSearch.vue'
+import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
+import QPopup from 'socialuni-view/src/components/QPopup/QPopup.vue'
+import QSlider from 'socialuni-view/src/components/QSlider/QSlider.vue'
+import SocialTagPicker from "socialuni-view/src/components/SocialTagPicker.vue";
+import QCityPicker from "socialuni-view/src/components/QCityPicker/QCityPicker.vue";
+import QTabs from "socialuni-view/src/components/QTabs/QTabs.vue";
+import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
@@ -68,14 +68,14 @@ import {
   socialNotifyModule,
   socialTagModule,
 } from "socialuni-sdk/src/store/store";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
-import RouterUtil from "socialuni-use/src/utils/RouterUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import PageUtil from "socialuni-user/src/utils/PageUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import {onHide} from "@dcloudio/uni-app";
-import {socialConfigModule, socialUserModule} from "socialuni-user/src/store/store"; // todo 后台可控制是否显示轮播图
+import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store"; // todo 后台可控制是否显示轮播图
 
 // todo 后台可控制是否显示轮播图
 

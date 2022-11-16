@@ -68,11 +68,11 @@
 <script lang="ts">
 import {Options, Emit, Model, Prop, Vue, Watch} from 'vue-property-decorator'
 import PhoneNumFormData from "./PhoneNumFormData";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import {socialConfigModule} from "socialuni-user/src/store/store";
-import CommonUtil from "socialuni-use/src/utils/CommonUtil";
-import ToastUtil from "socialuni-use/src/utils/ToastUtil";
-import PhoneAPI from "socialuni-user/src/api/socialuni/PhoneAPI";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
+import {socialConfigModule} from "socialuni-sdk/src/store/store";
+import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import PhoneAPI from "socialuni-api/src/api/socialuni/PhoneAPI";
 
 @Options({
   components: {QIcon}

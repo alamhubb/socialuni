@@ -44,21 +44,21 @@
 
 <script lang="ts">
 
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
-import {socialUserModule} from 'socialuni-user/src/store/store';
+import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import ImgUtil from "socialuni-user/src/utils/ImgUtil";
-import CosUtil from "socialuni-user/src/utils/CosUtil";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
+import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
+import CosUtil from "socialuni-sdk/src/utils/CosUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DomFile from "socialuni-api/src/model/DomFile";
 import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import PageUtil from "socialuni-user/src/utils/PageUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 @Options({
   components: {QIcon}

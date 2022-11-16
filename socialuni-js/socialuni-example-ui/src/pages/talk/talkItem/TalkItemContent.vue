@@ -89,16 +89,16 @@
 
 <script lang="ts">
 import {Options, Prop, Vue} from 'vue-property-decorator'
-import RouterUtil from "socialuni-use/src/utils/RouterUtil";
+import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import {socialTagModule, socialTalkModule} from "socialuni-sdk/src/store/store";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import ImgUtil from "socialuni-user/src/utils/ImgUtil";
-import MsgUtil from "socialuni-user/src/utils/MsgUtil";
-import PageUtil from "socialuni-user/src/utils/PageUtil";
-import NumUtil from "socialuni-use/src/utils/NumUtil";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import NumUtil from "socialuni-sdk/src/utils/NumUtil";
 
 @Options({
   components: {QIcon}

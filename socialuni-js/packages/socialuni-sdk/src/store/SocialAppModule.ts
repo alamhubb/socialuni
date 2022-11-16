@@ -1,6 +1,6 @@
 import {Pinia, Store} from "pinia-class-component"
 import HomeSwiperVO from "socialuni-api/src/model/HomeSwiperVO";
-import PlatformUtils from "socialuni-user/src/utils/PlatformUtils";
+import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import {socialAppModule, socialCircleModule, socialLocationModule, socialTagModule, socialTalkModule} from "./store";
 

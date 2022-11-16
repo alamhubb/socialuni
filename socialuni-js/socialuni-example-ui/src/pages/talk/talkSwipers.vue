@@ -19,9 +19,9 @@
 import {Options, Vue} from 'vue-property-decorator'
 import {socialAppModule} from "socialuni-sdk/src/store/store";
 import SkipType from "socialuni-constant/constant/SkipType";
-import {socialConfigModule, socialSystemModule} from "socialuni-user/src/store/store";
-import RouterUtil from "socialuni-use/src/utils/RouterUtil";
-import PageUtil from "socialuni-user/src/utils/PageUtil";
+import {socialConfigModule, socialSystemModule} from "socialuni-sdk/src/store/store";
+import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 
 // todo 后台可控制是否显示轮播图

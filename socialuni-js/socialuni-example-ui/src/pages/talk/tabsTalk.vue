@@ -140,11 +140,11 @@ import {Options, Vue, Watch} from 'vue-property-decorator'
 import TalkSwipers from './talkSwipers.vue'
 
 import TalkOperate from './talkOperate.vue'
-import QTab from 'socialuni-ui/src/components/QTab/QTab.vue'
-import QTabs from 'socialuni-ui/src/components/QTabs/QTabs.vue'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
+import QTab from 'socialuni-view/src/components/QTab/QTab.vue'
+import QTabs from 'socialuni-view/src/components/QTabs/QTabs.vue'
+import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
-import QPullRefresh from "socialuni-ui/src/components/QPullRefresh/QPullRefresh.vue";
+import QPullRefresh from "socialuni-view/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkItem from "./talkItem/TalkItem.vue";
 import {
   socialLocationModule,
@@ -154,12 +154,12 @@ import {
 import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import CommonUtil from "socialuni-use/src/utils/CommonUtil";
+import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
-import StorageUtil from "socialuni-use/src/utils/StorageUtil";
-import PageUtil from "socialuni-user/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
-import { socialConfigModule, socialSystemModule, socialUserModule } from 'socialuni-user/src/store/store'
+import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
+import { socialConfigModule, socialSystemModule, socialUserModule } from 'socialuni-sdk/src/store/store'
 
 // todo 后台可控制是否显示轮播图
 @Options({

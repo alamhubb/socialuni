@@ -51,18 +51,18 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
+import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
 import {socialAppModule,  socialTalkModule} from "socialuni-sdk/src/store/store";
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import ReportAPI from "socialuni-user/src/api/ReportAPI";
-import PlatformUtils from "socialuni-user/src/utils/PlatformUtils";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import ReportAPI from "socialuni-api/src/api/ReportAPI";
+import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
-import MsgUtil from "socialuni-user/src/utils/MsgUtil";
-import {socialConfigModule, socialUserModule} from "socialuni-user/src/store/store";
-import ReportAddVO from "socialuni-user/src/model/report/ReportAddVO";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import ReportAddVO from "socialuni-sdk/src/model/report/ReportAddVO";
 
 
 // todo 后台可控制是否显示轮播图

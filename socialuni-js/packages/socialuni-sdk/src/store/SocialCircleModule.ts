@@ -2,8 +2,8 @@ import {Pinia, Store} from "pinia-class-component"
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import CircleTypeRO from "socialuni-api/src/model/community/circle/CircleTypeRO";
 import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
-import TagStorageUtil from "socialuni-user/src/utils/TagStorageUtil";
-import SocialCircleStorageUtil from "socialuni-user/src/utils/SocialCircleStorageUtil";
+import TagStorageUtil from "socialuni-sdk/src/utils/TagStorageUtil";
+import SocialCircleStorageUtil from "socialuni-sdk/src/utils/SocialCircleStorageUtil";
 
 @Store
 export default class SocialCircleModule extends Pinia {

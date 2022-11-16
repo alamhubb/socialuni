@@ -73,12 +73,12 @@ import ChatType from 'socialuni-constant/constant/ChatType'
 import CommonStatus from 'socialuni-constant/constant/CommonStatus'
 import { Options, Vue } from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
-import ChatAPI from 'socialuni-im/src/api/ChatAPI'
-import { socialChatModule } from "socialuni-im/src/store/store"
-import DateUtil from "socialuni-use/src/utils/DateUtil";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import ChatAPI from 'socialuni-api/src/api/ChatAPI'
+import { socialChatModule } from "socialuni-sdk/src/store/store"
+import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onLoad} from "@dcloudio/uni-app";
 
 @Options({})

@@ -1,3 +1,4 @@
+import SocialChatModule from "./SocialChatModule";
 import SocialLocationModule from "./SocialLocationModule";
 import SocialAppModule from "./SocialAppModule";
 import SocialCircleModule from "./SocialCircleModule";
@@ -5,10 +6,15 @@ import SocialTalkModule from "./SocialTalkModule";
 import SocialTagModule from "./SocialTagModule";
 import SocialNotifyModule from "./SocialNotifyModule";
 import SocialPlatformModule from "./SocialPlatformModule";
-import {initSocialuniUserStore, socialSystemModule, socialUserModule} from "socialuni-user/src/store/store";
-import SocialuniImUserAPI from "socialuni-user/src/api/SocialuniImUserAPI";
-import {initSocialuniChatStore, socialChatModule} from "socialuni-im/src/store/store";
+import SocialSystemModule from "./SocialSystemModule";
+import SocialUserModule from "./SocialUserModule";
+import SocialConfigModule from "./SocialConfigModule";
+import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI";
 
+export let socialSystemModule: SocialSystemModule
+export let socialUserModule: SocialUserModule
+export let socialConfigModule: SocialConfigModule
+export let socialChatModule: SocialChatModule
 export let socialAppModule: SocialAppModule
 export let socialLocationModule: SocialLocationModule
 export let socialCircleModule: SocialCircleModule
@@ -20,8 +26,10 @@ export let socialPlatformModule: SocialPlatformModule
 
 // export let socialOAuthModule: SocialOAuthModule
 export async function initSocialuniStore() {
-    initSocialuniUserStore()
-    initSocialuniChatStore()
+    socialSystemModule = new SocialSystemModule()
+    socialUserModule = new SocialUserModule()
+    socialConfigModule = new SocialConfigModule()
+    socialChatModule = new SocialChatModule()
     socialAppModule = new SocialAppModule()
     socialLocationModule = new SocialLocationModule()
     socialTalkModule = new SocialTalkModule()

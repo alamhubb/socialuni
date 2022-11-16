@@ -93,22 +93,22 @@ import {
   socialTagModule,
   socialTalkModule,
 } from "socialuni-sdk/src/store/store";
-import TalkFilterUtil from "socialuni-user/src/utils/TalkFilterUtil";
+import TalkFilterUtil from "socialuni-sdk/src/utils/TalkFilterUtil";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import GenderType from "socialuni-constant/constant/GenderType";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
-import SocialTagPicker from "socialuni-ui/src/components/SocialTagPicker.vue";
-import SocialCirclePicker from "socialuni-ui/src/components/SocialCirclePicker.vue";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import SocialTagPicker from "socialuni-view/src/components/SocialTagPicker.vue";
+import SocialCirclePicker from "socialuni-view/src/components/SocialCirclePicker.vue";
 import TagSearch from "./TagSearch.vue";
-import QInput from "socialuni-ui/src/components/QInput/QInput.vue";
-import QIcon from "socialuni-ui/src/components/QIcon/QIcon.vue";
-import QSlider from "socialuni-ui/src/components/QSlider/QSlider.vue";
-import QPopup from "socialuni-ui/src/components/QPopup/QPopup.vue";
-import QCityPicker from "socialuni-ui/src/components/QCityPicker/QCityPicker.vue";
-import QCityInfo from "socialuni-ui/src/components/QCityInfo/QCityInfo.vue";
-import { socialUserModule } from 'socialuni-user/src/store/store';
+import QInput from "socialuni-view/src/components/QInput/QInput.vue";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
+import QSlider from "socialuni-view/src/components/QSlider/QSlider.vue";
+import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
+import QCityPicker from "socialuni-view/src/components/QCityPicker/QCityPicker.vue";
+import QCityInfo from "socialuni-view/src/components/QCityInfo/QCityInfo.vue";
+import { socialUserModule } from 'socialuni-sdk/src/store/store';
 
 
 @Options({

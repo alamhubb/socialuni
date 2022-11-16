@@ -1,4 +1,4 @@
-import request from "socialuni-common/src/request/request";
+import request from "socialuni-api/src/request/request";
 import MessageAddVO from "socialuni-api/src/model/message/MessageAddVO";
 import MessageQueryVO from "socialuni-api/src/model/message/MessageQueryVO";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";

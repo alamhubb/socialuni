@@ -11,7 +11,7 @@
     "cos-wx-sdk-v5": "^0.7.11",
     "xml-js": "^1.6.11",
     "stream-browserify": "^3.0.0",
-    "socialuni-common": "^1.0.0"
+    "socialuni-constant": "^1.0.0"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",

@@ -1,4 +1,4 @@
-import request from 'socialuni-common/src/request'
+import request from 'socialuni-api/src/request'
 import MatchQueryVO from '../model/match/MatchQueryVO'
 
 export default class MatchAPI {

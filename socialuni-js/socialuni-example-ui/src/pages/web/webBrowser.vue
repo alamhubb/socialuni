@@ -29,9 +29,9 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 import PagePath from 'socialuni-constant/constant/PagePath'
-import RouterUtil from 'socialuni-use/src/utils/RouterUtil'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import {socialSystemModule} from "socialuni-user/src/store/store";
+import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
+import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
+import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {onLoad, onReady} from "@dcloudio/uni-app";
 
 @Options({

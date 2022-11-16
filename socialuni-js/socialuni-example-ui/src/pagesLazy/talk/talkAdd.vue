@@ -128,35 +128,35 @@
 <script lang="ts">
 import {Options, Vue, Watch} from 'vue-property-decorator'
 import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
-import UniUtil from 'socialuni-user/src/utils/UniUtil'
+import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
 import DistrictVO from 'socialuni-api/src/model/DistrictVO'
-import JsonUtils from 'socialuni-use/src/utils/ObjectUtil'
+import JsonUtils from 'socialuni-sdk/src/utils/ObjectUtil'
 import TagVO from 'socialuni-api/src/model/community/tag/TagVO'
-import CosUtil from 'socialuni-user/src/utils/CosUtil'
-import PlatformUtils from 'socialuni-user/src/utils/PlatformUtils'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import CityPicker from 'socialuni-ui/src/components/QCityPicker/QCityPicker.vue'
-import TalkAddTagSearch from 'socialuni-ui/src/components/SocialTagAdd/TalkAddTagSearch.vue'
-import AlertUtil from 'socialuni-use/src/utils/AlertUtil'
-import LocationUtil from 'socialuni-user/src/utils/LocationUtil'
+import CosUtil from 'socialuni-sdk/src/utils/CosUtil'
+import PlatformUtils from 'socialuni-sdk/src/utils/PlatformUtils'
+import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
+import CityPicker from 'socialuni-view/src/components/QCityPicker/QCityPicker.vue'
+import TalkAddTagSearch from 'socialuni-view/src/components/SocialTagAdd/TalkAddTagSearch.vue'
+import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
+import LocationUtil from 'socialuni-sdk/src/utils/LocationUtil'
 import VisibleType from 'socialuni-constant/constant/VisibleType'
 import EnumStrVO from 'socialuni-constant/constant/EnumStrVO'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import QButton from 'socialuni-ui/src/components/QButton/QButton.vue'
-import PageUtil from 'socialuni-user/src/utils/PageUtil'
+import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
+import QButton from 'socialuni-view/src/components/QButton/QButton.vue'
+import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
 import GenderType from 'socialuni-constant/constant/GenderType'
 import DomFile from 'socialuni-api/src/model/DomFile'
 import CosAuthRO from 'socialuni-api/src/model/cos/CosAuthRO'
 import SocialuniAppAPI from 'socialuni-api/src/api/socialuni/SocialuniAppAPI'
-import RouterUtil from 'socialuni-use/src/utils/RouterUtil'
+import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
 import PagePath from 'socialuni-constant/constant/PagePath'
-import SocialTagAdd from 'socialuni-ui/src/components/SocialTagAdd/SocialTagAdd.vue'
-import QPopup from 'socialuni-ui/src/components/QPopup/QPopup.vue'
-import QSidebar from 'socialuni-ui/src/components/QSidebar/QSidebar.vue'
-import QInput from 'socialuni-ui/src/components/QInput/QInput.vue'
-import SocialCirclePicker from 'socialuni-ui/src/components/SocialCirclePicker.vue'
+import SocialTagAdd from 'socialuni-view/src/components/SocialTagAdd/SocialTagAdd.vue'
+import QPopup from 'socialuni-view/src/components/QPopup/QPopup.vue'
+import QSidebar from 'socialuni-view/src/components/QSidebar/QSidebar.vue'
+import QInput from 'socialuni-view/src/components/QInput/QInput.vue'
+import SocialCirclePicker from 'socialuni-view/src/components/SocialCirclePicker.vue'
 import AppMsg from 'socialuni-constant/constant/AppMsg'
-import QCityInfo from 'socialuni-ui/src/components/QCityInfo/QCityInfo.vue'
+import QCityInfo from 'socialuni-view/src/components/QCityInfo/QCityInfo.vue'
 import SocialCircleRO from 'socialuni-api/src/model/community/circle/SocialCircleRO'
 import {
   socialCircleModule,
@@ -166,7 +166,7 @@ import {
   socialUserModule
 } from "socialuni-sdk/src/store/store";
 import {onUnload} from "@dcloudio/uni-app";
-import SocialuniAppNewAPI from "socialuni-user/src/api/SocialuniAppNewAPI";
+import SocialuniAppNewAPI from "socialuni-api/src/api/SocialuniAppNewAPI";
 
 @Options({
   components: {

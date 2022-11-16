@@ -22,15 +22,15 @@
 import {Options, Vue} from 'vue-property-decorator'
 import UserSchoolEditDialog from "@/pages/user/UserSchoolEditDialog.vue";
 import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
-import {socialUserModule} from 'socialuni-user/src/store/store';
+import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import ImgFileVO from "socialuni-user/src/model/ImgFileVO";
-import ImgUtil from "socialuni-user/src/utils/ImgUtil";
-import ToastUtil from "socialuni-use/src/utils/ToastUtil";
+import ImgFileVO from "socialuni-sdk/src/model/ImgFileVO";
+import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import HintMsg from "socialuni-constant/constant/HintMsg";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import UniUtil from "socialuni-user/src/utils/UniUtil";
-import AlertUtil from "socialuni-use/src/utils/AlertUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 
 @Options({

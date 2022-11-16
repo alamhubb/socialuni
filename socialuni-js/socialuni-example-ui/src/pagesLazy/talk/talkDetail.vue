@@ -45,16 +45,16 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import QIcon from 'socialuni-ui/src/components/QIcon/QIcon.vue'
-import MsgInput from 'socialuni-ui/src/components/MsgInput.vue'
+import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
+import MsgInput from 'socialuni-view/src/components/MsgInput.vue'
 import TalkItem from '@/pages/talk/talkItem/TalkItem.vue'
 import TalkOperate from '@/pages/talk/talkOperate.vue'
 import TalkVO from 'socialuni-api/src/model/talk/TalkVO'
-import RouterUtil from 'socialuni-use/src/utils/RouterUtil'
-import PageUtil from 'socialuni-user/src/utils/PageUtil'
+import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
+import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
 import SocialuniTalkAPI from 'socialuni-api/src/api/socialuni/SocialuniTalkAPI'
-import QNavbar from 'socialuni-ui/src/components/QNavbar/QNavbar.vue'
-import UniUtil from 'socialuni-user/src/utils/UniUtil'
+import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
+import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
 import {socialConfigModule} from 'socialuni-sdk/src/store/store'
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 
