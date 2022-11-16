@@ -28,13 +28,14 @@
 <script lang="ts">
 import {Emit, Options, Vue} from 'vue-property-decorator'
 import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
-import {socialAppModule, } from "socialuni-sdk/src/store/store";
+import {socialAppModule, socialConfigModule,} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import ReportType from "socialuni-constant/constant/ReportType";
 import ReportAddVO from "socialuni-api/src/model/report/ReportAddVO";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import CheckUtil from "socialuni-sdk/src/utils/CheckUtil";
 import ReportAPI from "socialuni-api/src/api/ReportAPI";
+import SocialConfigModule from "socialuni-sdk/src/store/SocialConfigModule";
 
 @Options({
   components: {QPopup}
@@ -45,7 +46,7 @@ export default class SocialuniReportDialog extends Vue {
   }
 
   get reportTypes() {
-    return socialAppModule.reportTypes
+    return socialConfigModule.reportTypes
   }
 
   get mineUser() {

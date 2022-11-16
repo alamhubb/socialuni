@@ -38,6 +38,8 @@ export async function initSocialuniStore() {
     socialNotifyModule = new SocialNotifyModule()
     socialPlatformModule = new SocialPlatformModule()
     socialSystemModule.initSystemInfo()
+    socialConfigModule.getAppConfigAction()
+    socialConfigModule.getReportTypesAction()
     console.log(socialUserModule)
     await socialUserModule.initSocialuniUserModule()
     if (socialUserModule.user) {

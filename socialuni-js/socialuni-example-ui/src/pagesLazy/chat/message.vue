@@ -192,12 +192,11 @@ import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
 import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
-import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
 
 @Options({components: {SocialuniReportDialog}})
-export default class MessageView extends Vue {
+export default class MessagePage extends Vue {
   public $refs!: {
     reportDialog: SocialuniReportDialog;
     messageMoreHandleDialog: any;

@@ -1,10 +1,10 @@
 import {Pinia, Store} from "pinia-class-component"
 import {socialConfigModule} from "./store";
-import SocialuniAppNewAPI from "socialuni-api/src/api/SocialuniAppNewAPI";
 import ReportAPI from "socialuni-api/src/api/ReportAPI";
 import SocialuniAppConfigRO from "socialuni-api/src/model/config/SocialuniAppConfigRO";
 import AppInitDataRO from "socialuni-api/src/model/config/AppInitDataRO";
 import SocialuniAppMoreConfigRO from "socialuni-api/src/model/config/SocialuniAppMoreConfigRO";
+import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 
 @Store
 export default class SocialConfigModule extends Pinia {
@@ -14,7 +14,7 @@ export default class SocialConfigModule extends Pinia {
     reportTypes: string[] = []
 
     getAppConfigAction() {
-        SocialuniAppNewAPI.getAppConfigAPI().then(res => {
+        SocialuniAppAPI.getAppConfigAPI().then(res => {
             const appInitData: AppInitDataRO = res.data
             socialConfigModule.appConfig = appInitData.appConfig
             socialConfigModule.appMoreConfig = appInitData.appMoreConfig
