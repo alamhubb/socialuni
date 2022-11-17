@@ -1,4 +1,5 @@
 import SocialChatModule from "./SocialChatModule";
+import SocialChatFriendModule from "./SocialChatFriendModule";
 import SocialLocationModule from "./SocialLocationModule";
 import SocialAppModule from "./SocialAppModule";
 import SocialCircleModule from "./SocialCircleModule";
@@ -15,6 +16,7 @@ export let socialSystemModule: SocialSystemModule
 export let socialUserModule: SocialUserModule
 export let socialConfigModule: SocialConfigModule
 export let socialChatModule: SocialChatModule
+export let socialChatFriendModule: SocialChatFriendModule
 export let socialAppModule: SocialAppModule
 export let socialLocationModule: SocialLocationModule
 export let socialCircleModule: SocialCircleModule
@@ -30,6 +32,7 @@ export async function initSocialuniStore() {
     socialUserModule = new SocialUserModule()
     socialConfigModule = new SocialConfigModule()
     socialChatModule = new SocialChatModule()
+    socialChatFriendModule = new SocialChatFriendModule()
     socialAppModule = new SocialAppModule()
     socialLocationModule = new SocialLocationModule()
     socialTalkModule = new SocialTalkModule()

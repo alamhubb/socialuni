@@ -15,7 +15,9 @@ export default class SocialChatFriendModule  {
             reqMsg:reqMsg
         };
         socialChatModule.openIm.addFriend(options).then(({ data })=>{
+            console.error(data);
         }).catch(err=>{
+            console.error(err);
         })
     }
 

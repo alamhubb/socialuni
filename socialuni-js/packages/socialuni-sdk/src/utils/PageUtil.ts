@@ -65,9 +65,11 @@ export default class PageUtil {
             }
         }
     }
-
     static toLoveValuePage() {
         RouterUtil.navigateTo(PagePath.loveValue)
+    }
+    static toChatFriend() {
+        RouterUtil.navigateTo('/pages/chat/friend')
     }
 
     static toMinePage() {
