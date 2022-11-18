@@ -80,22 +80,6 @@
               <text class="text-sm text-gray">添加黑名单</text>
             </view>
           </view>
-
-          <view v-if="!isMine" class="flex-row">
-            <!--                不为自己且未关注-->
-            <!--            不为ios，或者不为付费，则显示-->
-            <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
-                                @click="toMessagePage">
-                          私信
-                          &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
-                        </button>-->
-            <q-button v-if="followStatus==='关注'"
-                      @click="addFollow">
-              {{ followStatus }}
-            </q-button>
-            <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
-            <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
-          </view>
         </view>
 
         <div class="flex-row pl-xs">
