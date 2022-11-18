@@ -310,7 +310,7 @@ import QPcModel from "socialuni-view/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-view/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
-import {socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialChatModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
@@ -370,6 +370,10 @@ export default class UserInfo extends Vue {
   talks: TalkVO[] = []
 
   showUserContactBtnDisabled = false
+
+  created(){
+    // socialChatModule.openIm.getFirends(this.user.id)
+  }
 
   toMessagePage() {
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条

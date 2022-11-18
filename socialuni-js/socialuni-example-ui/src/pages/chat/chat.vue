@@ -20,7 +20,14 @@
 
     <div>
       <div v-for="item in users">
-        {{ item.nickname }}
+        <div class="flex-row px mb bd-radius bg-white">
+          <div>
+            <img class="size50" :src="item.avatar">
+          </div>
+          <div>
+            {{ item.nickname }}
+          </div>
+        </div>
       </div>
     </div>
     <!--    <view v-show="false">
