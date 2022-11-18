@@ -31,12 +31,11 @@
             <view v-else class="row-col-center">
               <!--                不为自己且未关注-->
               <!--            不为ios，或者不为付费，则显示-->
-              <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
-                                  @click="toMessagePage">
-                            私信
-                            &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
-                          </button>-->
-              <q-button v-if="followStatus==='关注'"
+<!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
+              <q-button @click="toMessagePage">
+                <q-icon icon="mdi-chat-outline" size="14" class="mr-xs"></q-icon>私信
+              </q-button>
+              <q-button v-if="followStatus==='关注'" class="ml-sm"
                         @click="addFollow">
                 {{ followStatus }}
               </q-button>
@@ -61,7 +60,7 @@
             </view>
           </view>
 
-          <view v-if="user.beFollow" class="row-col-center">
+          <view v-if="!user.hasBeFollowed && user.beFollow" class="row-col-center">
             <view class="bg-default text-sm px-xs text-gray">
               对方关注了您
             </view>
@@ -76,7 +75,7 @@
             <view v-else class="px-lg line-height-1" @click.stop="addFriend">
               <text class="text-sm text-gray">添加好友</text>
             </view>
-            <view  class="px-lg line-height-1" @click.stop="addBlack">
+            <view class="px-lg line-height-1" @click.stop="addBlack">
               <text class="text-sm text-gray">添加黑名单</text>
             </view>
           </view>
@@ -323,7 +322,7 @@ import QPcModel from "socialuni-view/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-view/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
-import {socialChatFriendModule,socialChatModule, socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialChatFriendModule, socialChatModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
@@ -381,19 +380,21 @@ export default class UserInfo extends Vue {
   }
 
   followBtnDisabled = false
-  hasFollowed = false
-  followStatus: string = FollowStatus.follow
   talks: TalkVO[] = []
   hasFriend = false;
   showUserContactBtnDisabled = false
 
-  created(){
+  get followStatus() {
+    return FollowStatus.getFollowStatus(this.user)
+  }
+
+  created() {
     // socialChatModule.openIm.getFirends(this.user.id)
     // 检查是否为好友
-    socialChatModule.openIm.checkFriend([this.user.id]).then(({ data })=>{
+    socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
       console.log(data);
       this.hasFriend = data as boolean;
-    }).catch(err=>{
+    }).catch(err => {
 
     })
   }
@@ -509,8 +510,6 @@ export default class UserInfo extends Vue {
 
   queryMineTalks() {
     if (this.user) {
-      this.followStatus = FollowStatus.getFollowStatus(this.user)
-      this.hasFollowed = this.user.hasFollowed
       SocialuniTalkAPI.queryUserTalksAPI(this.user.id, this.talkIds).then((res: any) => {
         this.talks = res.data
       })
@@ -548,30 +547,31 @@ export default class UserInfo extends Vue {
     AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
   }
 
-  addFollow() {
+  async addFollow() {
     if (this.mineUser) {
       if (!this.followBtnDisabled) {
         this.followBtnDisabled = true
         const followAdd: FollowAddVO = new FollowAddVO(this.user.id)
         // 如果已经关注
-        if (this.followStatus === FollowStatus.follow) {
-          this.hasFollowed = true
-          if (this.user.hasBeFollowed) {
-            // 进行关注操作
-            this.followStatus = FollowStatus.eachFollow
-          } else {
-            this.followStatus = FollowStatus.followed
+        if (this.user.hasFollowed) {
+          this.user.hasFollowed = false
+          try {
+            // 进行取消关注操作
+            await FollowAPI.cancelFollowAPI(followAdd)
+          } catch (e) {
+            this.user.hasFollowed = true
+          } finally {
+            this.followBtnDisabled = false
           }
-          FollowAPI.addFollowAPI(followAdd).finally(() => {
-            this.followBtnDisabled = false
-          })
         } else {
-          this.hasFollowed = false
-          this.followStatus = FollowStatus.follow
-          // 进行取消关注操作
-          FollowAPI.cancelFollowAPI(followAdd).finally(() => {
+          this.user.hasFollowed = true
+          try {
+            await FollowAPI.addFollowAPI(followAdd)
+          } catch (e) {
+            this.user.hasFollowed = false
+          } finally {
             this.followBtnDisabled = false
-          })
+          }
         }
       }
     } else {
@@ -692,23 +692,24 @@ export default class UserInfo extends Vue {
    * 添加好友申请。
    */
   addFriend() {
-    socialChatFriendModule.addFriend(this.user.id,"请求加好友");
+    socialChatFriendModule.addFriend(this.user.id, "请求加好友");
   }
+
   /**
    * 从好友列表中删除用户。
    */
-  deleteFriend(){
-    socialChatModule.openIm.deleteFriend(this.user.id).then(({ data })=>{
-    }).catch(err=>{
+  deleteFriend() {
+    socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
+    }).catch(err => {
     })
   }
 
   /**
    * 将用户添加到黑名单。
    */
-  addBlack(){
-    socialChatModule.openIm.addBlack(this.user.id).then(({ data })=>{
-    }).catch(err=>{
+  addBlack() {
+    socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
+    }).catch(err => {
     })
   }
 }
