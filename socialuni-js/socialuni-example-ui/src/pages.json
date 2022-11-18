@@ -119,6 +119,12 @@
         "text": "消息"
       },
       {
+        "pagePath": "pages/chat/friend",
+        "iconPath": "static/img/question_answer-gray-36dp.png",
+        "selectedIconPath": "static/img/question_answer-blue-36dp.png",
+        "text": "朋友"
+      },
+      {
         "pagePath": "pages/user/mine",
         "iconPath": "static/img/account_box-gray-36dp.png",
         "selectedIconPath": "static/img/account_box-blue-36dp.png",
