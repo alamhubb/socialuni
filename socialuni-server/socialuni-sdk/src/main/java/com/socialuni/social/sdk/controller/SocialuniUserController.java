@@ -62,6 +62,6 @@ public class SocialuniUserController implements SocialuniUserAPI {
 
     @Override
     public ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers() {
-        return null;
+        return socialuniUserService.queryRecentlyUsers();
     }
 }

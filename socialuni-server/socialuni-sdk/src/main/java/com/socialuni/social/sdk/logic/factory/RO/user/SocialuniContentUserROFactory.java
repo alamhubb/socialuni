@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
+import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.sdk.constant.socialuni.UserIdentityAuthStatus;
 import com.socialuni.social.sdk.dao.DO.user.SocialUserIdentityAuthDO;
 import com.socialuni.social.sdk.dao.repository.user.identity.SocialUserIdentityAuthRepository;
@@ -10,6 +11,8 @@ import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class SocialuniContentUserROFactory {
@@ -57,4 +60,7 @@ public class SocialuniContentUserROFactory {
         return userRO;
     }
 
+    public static List<SocialuniContentUserRO> toList(List<SocialuniUserDo> socialuniUserDos, SocialuniUserDo mineUser) {
+        return socialuniUserDos.stream().map(item -> SocialuniContentUserROFactory.newContentUserRO(item, mineUser)).collect(Collectors.toList());
+    }
 }

@@ -29,6 +29,8 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
     @Query(value = "select u from SocialuniUserDo u,SocialUserViolationDo su where u.status = :userStatus and u.id = su.userId and su.violationEndTime < :curDate")
     List<SocialuniUserDo> findCanUnfreezeViolationUser(@Param("userStatus") String userStatus, @Param("curDate") Date curDate);
 
+    List<SocialuniUserDo> findTop10ByStatusOrderByIdDesc(@Param("userStatus") String userStatus);
+
     /*@Modifying
     @Transactional
     @Query(value = "update UserDO u set u.seeCount = u.seeCount+1 where u in (:users)")

@@ -1,7 +1,7 @@
 import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
 import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
 import PageUtil from './PageUtil'
-import {socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store";
 // import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UniUtil from "./UniUtil";
@@ -23,14 +23,14 @@ export default class MsgUtil {
     }
 
     static unLoginMessage() {
-        /*if (!socialUserModule.user) {
+        if (!socialUserModule.user) {
             AlertUtil.info(socialConfigModule.appMoreConfig.errorMsg601UnLogin)
                 .then(() => {
                     // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个
                     PageUtil.toMinePage()
                 })
             throw new Error('未登录')
-        }*/
+        }
     }
 
     static showUploadLoading() {

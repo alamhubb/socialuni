@@ -50,6 +50,6 @@ public interface SocialuniUserAPI {
     ResultRO<List<SocialuniUserImgRO>> getUserImgList(@PathVariable("userId") String userId);
 
     @GetMapping("queryRecentlyUsers")
-    @Operation(summary = "获取用户图片列表")
+    @Operation(summary = "获取最近在线用户")
     ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers();
 }
