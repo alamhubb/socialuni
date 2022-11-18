@@ -43,6 +43,33 @@
               </text>
               <text class="text-sm text-gray">关注</text>
             </view>
+            <view class="px-lg line-height-1" @click.stop="toFollowVue">
+              <text class="text-lg font-bold text-black row-center">
+                {{ user.fansNum }}
+              </text>
+              <text class="text-sm text-gray">被关注</text>
+            </view>
+          </view>
+
+          <view v-if="!isMine" class="flex-row">
+            <!--                不为自己且未关注-->
+            <!--            不为ios，或者不为付费，则显示-->
+            <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
+                                @click="toMessagePage">
+                          私信
+                          &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
+                        </button>-->
+            <q-button v-if="followStatus==='关注'"
+                      @click="addFollow">
+              {{ followStatus }}
+            </q-button>
+            <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
+            <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
+          </view>
+        </view>
+
+        <view class="row-between-center py-xs pr-xs">
+          <view class="flex-row flex-auto" :class="{'row-around':isMine}">
             <view v-if="hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
               <text class="text-sm text-gray">解除好友</text>
             </view>
@@ -51,12 +78,6 @@
             </view>
             <view  class="px-lg line-height-1" @click.stop="addBlack">
               <text class="text-sm text-gray">添加黑名单</text>
-            </view>
-            <view class="px-lg line-height-1" @click.stop="toFollowVue">
-              <text class="text-lg font-bold text-black row-center">
-                {{ user.fansNum }}
-              </text>
-              <text class="text-sm text-gray">被关注</text>
             </view>
           </view>
 
@@ -449,7 +470,7 @@ export default class UserInfo extends Vue {
 
   get isMine(): boolean {
     // 两个都有值，且两个都相等，才为自己
-    return this.user && this.mineUser && this.user.id === this.mineUser.id
+    return this.user.isMine
   }
 
   get talkIds() {
