@@ -211,6 +211,8 @@ export default class MessageView extends Vue {
     deleteReasonDialog: any;
   }
 
+
+
   get messages() {
     return socialChatModule.messages
   }

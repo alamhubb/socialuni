@@ -8,6 +8,8 @@ import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil"
 import JsonUtil from "socialuni-sdk/src/utils/JsonUtil"
 import {socialUserModule} from "socialuni-sdk/src/store/store"
+import {SocialuniChatModuleInterface} from "socialuni-sdk/src/interface/SocialuniChatModuleInterface"
+
 import {OpenIMSDK} from "open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
@@ -16,15 +18,14 @@ import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
-import OpenImSessionType from "../plugins/openIm/constant/OpenImSessionType";
 
 @Store
-export default class SocialChatModule extends Pinia {
+export default class SocialMessageModule extends Pinia {
     openIm = new OpenIMSDK()
 
     imToken = ''
 
-    // chatId: string = null
+    chatId: string = null
     chats: SocialuniChatRO[] = []
 
     scrollTop: number = 0
@@ -43,7 +44,7 @@ export default class SocialChatModule extends Pinia {
         this.refreshMessages()
     }
 
-    refreshMessages() {
+    refreshMessages(){
         const options = {
             offset: 0,
             count: 20
@@ -90,21 +91,9 @@ export default class SocialChatModule extends Pinia {
 
     //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
     get chat(): SocialuniChatRO {
-        //不再使用index，存在陌生人情况
         return this.chats[this.chatIndex]
-
         // return this.chats[0this.chatIndex.]
     }
-
-    setCurChatByUserId(userId: string) {
-        this.openIm.getOneConversation({
-            sessionType: OpenImSessionType.Single,
-            sourceID: userId
-        }).then(res => {
-            console.log(res)
-        })
-    }
-
 
     get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)

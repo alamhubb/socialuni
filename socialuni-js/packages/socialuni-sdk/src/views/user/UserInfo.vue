@@ -400,6 +400,7 @@ export default class UserInfo extends Vue {
   }
 
   toMessagePage() {
+    socialChatModule.setCurChatByUserId(this.user.id)
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
     //mock chat
