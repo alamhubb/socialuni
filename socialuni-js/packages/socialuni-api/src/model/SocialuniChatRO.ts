@@ -37,7 +37,7 @@ export default class SocialuniChatRO {
       // this.lastContent = openImChat.lastContent
       // this.vipFlag = chat.vipFlag
       this.receiveUserId = openImChat.userID
-      this.lastMsg = JsonUtil.parse(openImChat.latestMsg)
+      this.lastMsg = JsonUtil.toParse(openImChat.latestMsg)
       this.lastContent = this.lastMsg.content
 
 
@@ -50,7 +50,7 @@ export default class SocialuniChatRO {
       }
       console.log(options)
       socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
-        const msgs: OpenImMsgRO[] = JsonUtil.parse(data)
+        const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
         this.messages = msgs.map(item => new MessageVO(null, null, item))
       }).catch(err => {
       }).finally(() => {

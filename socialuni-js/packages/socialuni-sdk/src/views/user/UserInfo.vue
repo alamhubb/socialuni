@@ -397,6 +397,10 @@ export default class UserInfo extends Vue {
     }).catch(err => {
 
     })
+
+    if (!this.user.isMine){
+      socialChatModule.setCurChatByUserId(this.user.id)
+    }
   }
 
   toMessagePage() {

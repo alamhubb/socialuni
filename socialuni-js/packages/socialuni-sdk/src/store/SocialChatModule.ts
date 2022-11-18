@@ -50,7 +50,7 @@ export default class SocialChatModule extends Pinia {
         }
         this.openIm.getConversationListSplit(options).then(({data}) => {
             console.log(11111)
-            const chats: OpenImChatRO[] = JsonUtil.parse(data)
+            const chats: OpenImChatRO[] = JsonUtil.toParse(data)
             this.chats = chats.map(item => new SocialuniChatRO(item))
             console.log(chats)
             console.log(this.chats)
@@ -89,20 +89,30 @@ export default class SocialChatModule extends Pinia {
 
 
     //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
-    get chat(): SocialuniChatRO {
+    /*get chat(): SocialuniChatRO {
         //不再使用index，存在陌生人情况
         return this.chats[this.chatIndex]
 
         // return this.chats[0this.chatIndex.]
-    }
+    }*/
 
+    chat: SocialuniChatRO = null
+
+    //为避免异步加载性能问题，进入用户详情页面就设置chat信息
     setCurChatByUserId(userId: string) {
         this.openIm.getOneConversation({
             sessionType: OpenImSessionType.Single,
             sourceID: userId
         }).then(res => {
-            console.log(res)
+            const data = res.data
+            const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
+            this.chat = new SocialuniChatRO(openImChatRO)
         })
+    }
+
+    toMessagePageFromUserDetail() {
+        PageUtil.toMessagePage()
+        socialChatModule.scrollToMessagePageBottom()
     }
 
 

@@ -4,7 +4,7 @@ export default class JsonUtil {
     return JSON.stringify(object)
   }
 
-  static parse (objJson: string): any {
+  static toParse (objJson: string): any {
     return JSON.parse(objJson)
   }
 

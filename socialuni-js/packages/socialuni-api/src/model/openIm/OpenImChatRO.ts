@@ -1,5 +1,3 @@
-import {OpenImMsgRO} from "./OpenImMsgRO";
-
 export interface OpenImChatRO {
     /// 会话ID
     conversationID: string

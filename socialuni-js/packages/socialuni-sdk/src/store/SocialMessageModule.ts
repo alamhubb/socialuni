@@ -51,7 +51,7 @@ export default class SocialMessageModule extends Pinia {
         }
         this.openIm.getConversationListSplit(options).then(({data}) => {
             console.log(11111)
-            const chats: OpenImChatRO[] = JsonUtil.parse(data)
+            const chats: OpenImChatRO[] = JsonUtil.toParse(data)
             this.chats = chats.map(item => new SocialuniChatRO(item))
             console.log(chats)
             console.log(this.chats)
