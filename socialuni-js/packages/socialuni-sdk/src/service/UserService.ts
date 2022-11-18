@@ -1,8 +1,9 @@
 import WebsocketUtil from 'socialuni-sdk/src/utils/WebsocketUtil'
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import {socialUserModule} from "../store/store";
+import {socialChatModule, socialUserModule} from "../store/store";
 import SocialuniMineUserRO from "../model/user/SocialuniMineUserRO";
+import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI";
 
 export default class UserService {
     //清空用户信息的组合操作
@@ -12,7 +13,12 @@ export default class UserService {
         WebsocketUtil.websocketClose()
     }
 
-    static getAppLunchDataByHasUser() {
+    static async getAppLunchDataByHasUser() {
+        if (socialUserModule.token && !socialUserModule.imToken) {
+            const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
+            socialUserModule.setImToken(imRes.data)
+            socialChatModule.initSocialuniChatModule()
+        }
         /*socialNotifyModule.queryNotifiesAction()
         */
         // socialChatModule.initSocialuniChatModule()

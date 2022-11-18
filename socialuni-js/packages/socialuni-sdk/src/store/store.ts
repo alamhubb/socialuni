@@ -11,6 +11,7 @@ import SocialSystemModule from "./SocialSystemModule";
 import SocialUserModule from "./SocialUserModule";
 import SocialConfigModule from "./SocialConfigModule";
 import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI";
+import UserService from "../service/UserService";
 
 export let socialSystemModule: SocialSystemModule
 export let socialUserModule: SocialUserModule
@@ -44,11 +45,9 @@ export async function initSocialuniStore() {
     socialConfigModule.getAppConfigAction()
     socialConfigModule.getReportTypesAction()
     console.log(socialUserModule)
-    await socialUserModule.initSocialuniUserModule()
-    if (socialUserModule.user) {
-        const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
-        socialUserModule.setImToken(imRes.data)
-        socialChatModule.initSocialuniChatModule()
+    if (socialUserModule.token) {
+        await socialUserModule.initSocialuniUserModule()
+        UserService.getAppLunchDataByHasUser()
     }
     socialAppModule.getHomeSwipersAction()
     socialLocationModule.getHotDistrictsAction()
