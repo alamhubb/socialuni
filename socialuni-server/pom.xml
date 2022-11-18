@@ -52,7 +52,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-im</artifactId>
+                <artifactId>socialuni-im-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
