@@ -10,8 +10,8 @@
               :src="user.avatar"
               @click="moreAction"
           />
-          <view class="flex-auto row-between">
-            <view class="flex-col flex-auto">
+          <view class="flex-1 row-between">
+            <view class="flex-col flex-1">
               <view class="text-md" :class="{'color-red':user.vipFlag}">
                 {{ user.nickname }}
               </view>
@@ -28,15 +28,25 @@
                 编辑资料
               </q-button>
             </view>
-            <view v-else-if="user.beFollow" class="row-col-center">
-              <view class="bg-default text-sm px-xs text-gray">
-                对方关注了您
-              </view>
+            <view v-if="!isMine" class="flex-row">
+              <!--                不为自己且未关注-->
+              <!--            不为ios，或者不为付费，则显示-->
+              <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
+                                  @click="toMessagePage">
+                            私信
+                            &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
+                          </button>-->
+              <q-button v-if="followStatus==='关注'"
+                        @click="addFollow">
+                {{ followStatus }}
+              </q-button>
+              <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
+              <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
             </view>
           </view>
         </view>
         <view class="row-between-center py-xs pr-xs">
-          <view class="flex-row flex-auto" :class="{'row-around':isMine}">
+          <view class="flex-row flex-1" :class="{'row-around':isMine}">
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
               <text class="text-lg font-bold text-black row-center">
                 {{ user.followNum }}
@@ -51,25 +61,15 @@
             </view>
           </view>
 
-          <view v-if="!isMine" class="flex-row">
-            <!--                不为自己且未关注-->
-            <!--            不为ios，或者不为付费，则显示-->
-            <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
-                                @click="toMessagePage">
-                          私信
-                          &lt;!&ndash; <text v-if="userProp.chat.needPayOpen" class="ml-2">(10B)</text>&ndash;&gt;
-                        </button>-->
-            <q-button v-if="followStatus==='关注'"
-                      @click="addFollow">
-              {{ followStatus }}
-            </q-button>
-            <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
-            <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
+          <view v-if="user.beFollow" class="row-col-center">
+            <view class="bg-default text-sm px-xs text-gray">
+              对方关注了您
+            </view>
           </view>
         </view>
 
         <view class="row-between-center py-xs pr-xs">
-          <view class="flex-row flex-auto" :class="{'row-around':isMine}">
+          <view class="flex-row flex-1" :class="{'row-around':isMine}">
             <view v-if="hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
               <text class="text-sm text-gray">解除好友</text>
             </view>
@@ -200,7 +200,7 @@
                   <q-icon class="text-gray mr-xs" icon="mdi-alpha-v-circle"/>
                   照片认证：
                   &lt;!&ndash; 为自己且未绑定&ndash;&gt;
-                  <view class="row-between-center flex-auto" v-if="userProp.isMine && !userProp.isSelfAuth">
+                  <view class="row-between-center flex-1" v-if="userProp.isMine && !userProp.isSelfAuth">
                     未认证
                     <button class="mr-xs cu-btn sm bd-none text-sm bd-box-radius bg-orange"
                             @click="toIdentityAuth">认证
@@ -300,7 +300,7 @@
                      src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/static/uploadimgmini.png"
               ></image>
               <view v-if="showUploadImgHint && imgUrls.length" class="row-col-center bg-orange">
-                <view class="flex-auto flex-row px">
+                <view class="flex-1 flex-row px">
                   单击图片预览，长按图片进行操作
                 </view>
                 <view class="flex-none mr-10">

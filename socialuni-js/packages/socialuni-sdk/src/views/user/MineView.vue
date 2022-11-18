@@ -14,48 +14,48 @@
             </view>
           </div>
           <!--<q-row-item>
-            <navigator :url="messageSettingUrl" class="row-col-center flex-auto">
-              <view class="row-col-center flex-auto">
+            <navigator :url="messageSettingUrl" class="row-col-center flex-1">
+              <view class="row-col-center flex-1">
                 消息设置
               </view>
               <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>-->
           <q-row-item>
-            <navigator :url="suggestUrl" class="row-col-center flex-auto">
-              <view class="row-col-center flex-auto">
+            <navigator :url="suggestUrl" class="row-col-center flex-1">
+              <view class="row-col-center flex-1">
                 意见反馈
               </view>
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
-            <navigator :url="contactUsUrl" class="row-col-center flex-auto">
-              <view class="row-col-center flex-auto">
+            <navigator :url="contactUsUrl" class="row-col-center flex-1">
+              <view class="row-col-center flex-1">
                 联系我们
               </view>
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
-            <navigator :url="homeUrl" class="row-col-center flex-auto">
-              <view class="row-col-center flex-auto">
+            <navigator :url="homeUrl" class="row-col-center flex-1">
+              <view class="row-col-center flex-1">
                 关于我们
               </view>
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>
           <q-row-item>
-            <view class="row-col-center flex-auto" @click="destroyAccount">
-              <view class="row-col-center flex-auto">
+            <view class="row-col-center flex-1" @click="destroyAccount">
+              <view class="row-col-center flex-1">
                 注销账号
               </view>
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
             </view>
           </q-row-item>
           <q-row-item>
-            <view class="row-col-center flex-auto" @click="logout">
-              <view class="row-col-center flex-auto">
+            <view class="row-col-center flex-1" @click="logout">
+              <view class="row-col-center flex-1">
                 退出登录
               </view>
               <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
@@ -74,7 +74,7 @@
               </navigator>
             </view>
           </div>
-          <div class="flex-row flex-auto col-end">
+          <div class="flex-row flex-1 col-end">
             <view class="row-center font-bold pb-xl text-lg w100r">
               <!--              <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>-->
             </view>

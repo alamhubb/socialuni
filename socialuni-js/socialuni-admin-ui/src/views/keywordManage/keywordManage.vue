@@ -29,7 +29,7 @@
     <!--    不违规记录-->
     <keywords-detail-table
       v-if="keywords.length"
-      class="flex-auto"
+      class="flex-1"
       :keywords="keywords"
     />
     <keywords-detail-table

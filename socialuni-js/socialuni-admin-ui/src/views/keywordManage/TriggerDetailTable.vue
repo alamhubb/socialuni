@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col">
     <el-table
-      class="flex-auto w100r"
+      class="flex-1 w100r"
       height="100"
       :data="triggerDetails"
       border

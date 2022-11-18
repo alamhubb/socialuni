@@ -107,7 +107,7 @@
           <el-col cols="1">审核状态</el-col>
         </el-row>
       </div>
-      <div class="flex-auto overflow-auto">
+      <div class="flex-1 overflow-auto">
         <el-row v-for="report in reports">
           <el-col cols="2">
             <el-row>

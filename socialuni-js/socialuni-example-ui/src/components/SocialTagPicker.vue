@@ -20,7 +20,7 @@
                  :right-scroll="false">
         <template #leftRow="{item,index,current}">
           <view class="q-sidebar-item" :class="{'q-sidebar-item-active':index === current}">
-            <view class="row-all-center flex-auto">
+            <view class="row-all-center flex-1">
               <text class="uni-ellipsis">{{ item.name }}</text>
             </view>
           </view>

@@ -23,7 +23,7 @@
       </div>
     </div>
     <el-table
-      class="flex-auto"
+      class="flex-1"
       height="100"
       :data="keywords"
       style="width: 100%"
@@ -145,7 +145,7 @@
 
     <div v-if="bottomTableDataList.length" class="flex-none flex-col h65vh">
       <el-table
-        class="flex-auto"
+        class="flex-1"
         height="100"
         :data="bottomTableDataList"
         style="width: 100%"

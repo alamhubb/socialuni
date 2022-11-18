@@ -19,7 +19,7 @@
     </div>
 
     <!--      <iframe class="h50r w50r" src="https://www.baidu.com"></iframe>-->
-    <div class="flex-auto overflow-auto">
+    <div class="flex-1 overflow-auto">
       <div v-for="talk in talks">
         {{ talk.content }}
       </div>

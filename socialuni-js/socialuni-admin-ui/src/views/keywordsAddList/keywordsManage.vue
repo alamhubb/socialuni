@@ -8,7 +8,7 @@
     </div>
 
     <keywords-detail-table
-      class="flex-auto"
+      class="flex-1"
       :keywords="tempKeywords"
       :is-temp="true"
       @query="queryKeyword"

@@ -17,7 +17,7 @@
         trim
         v-model="content"
         :adjust-position="true"
-        class="solid-bottom flex-auto"
+        class="solid-bottom flex-1"
         confirm-type="send"
         :focus="inputContentFocus"
         maxlength="300"

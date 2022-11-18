@@ -6,7 +6,7 @@
           <div class="flex-row">
             <img class="size90 flex-none"
                  src="https://cdxapp-1257733245.file.myqcloud.com/qingchi/home/full.jpg!thumbnail">
-            <div class="ml-3 col-around flex-auto">
+            <div class="ml-3 col-around flex-1">
               <div class="flex-row">
                 <div class="font-bold font-22">
                   清池app

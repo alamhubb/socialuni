@@ -15,7 +15,7 @@
 
     <el-table
       height="100"
-      class="flex-auto mt-10px"
+      class="flex-1 mt-10px"
       :data="userIdCards"
       border
       style="width: 100%"

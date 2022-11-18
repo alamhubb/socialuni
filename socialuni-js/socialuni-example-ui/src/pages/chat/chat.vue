@@ -10,7 +10,7 @@
       </view>
     </q-bar>
     <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
-      <view class="flex-auto card-text-row">
+      <view class="flex-1 card-text-row">
         长按聊天框可解除匹配
       </view>
       <view class="flex-none mr-10px">

@@ -5,7 +5,7 @@
         <view class="flex-row flex-1">
           <image class="card-title-avatar flex-none" mode="aspectFill"
                  :src="notify.avatar"></image>
-          <view class="flex-auto">
+          <view class="flex-1">
             <view :class="notify.vipFlag?'color-red':'color-blue'" class="row-col-center py-mn">
               <text>{{ notify.nickname }}</text>
               <view v-if="notify.vipFlag" class="ml-5px cu-tag bg-red radius sm text-sm font-bold">

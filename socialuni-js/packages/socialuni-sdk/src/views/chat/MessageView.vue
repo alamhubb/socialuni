@@ -1,7 +1,7 @@
 <template>
   <view class="pb-100 h100r bg-default">
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
-      <view class="flex-auto card-text-row">
+      <view class="flex-1 card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
       </view>
       <view class="flex-none mr-10px">

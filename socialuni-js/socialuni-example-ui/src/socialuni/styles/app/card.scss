@@ -20,7 +20,7 @@
 
 .card-title-content {
   @extend .flex-col;
-  @extend .flex-auto;
+  @extend .flex-1;
 }
 
 .card-text {

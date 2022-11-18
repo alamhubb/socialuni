@@ -3,7 +3,7 @@
     <msg-input v-if="showMsgInput">
     </msg-input>
     <q-navbar>
-      <view class="flex-row w100vw px flex-auto">
+      <view class="flex-row w100vw px flex-1">
         <view class="col-center bg-click color-default flex-none" @click="goBack">
           <q-icon icon="arrow-left"></q-icon>
         </view>

@@ -10,7 +10,7 @@
           padding="0"
         />
         <el-row class="px-3">
-          <div v-for="i in dates" class="flex-auto">
+          <div v-for="i in dates" class="flex-1">
             {{ i }}/
           </div>
         </el-row>

@@ -5,7 +5,7 @@
         mode="aspectFill"
         :src="talk.user.avatar"
     />
-    <view class="row-between flex-auto">
+    <view class="row-between flex-1">
       <view class="col-center">
         <view class="h20 row-col-center">
           <text class="text-df font-bold">{{ talk.user.nickname }}</text>

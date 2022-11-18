@@ -31,7 +31,7 @@
           </div>
         </div>-->
 
-    <div v-if="talk" class="flex-auto overflow-scroll">
+    <div v-if="talk" class="flex-1 overflow-scroll">
       {{ talk.content }}
       <div
         v-for="img in talk.imgs"
@@ -48,7 +48,7 @@
         {{ comment.content }}
       </div>
     </div>
-    <div v-else-if="userReports.length" class="flex-auto overflow-scroll">
+    <div v-else-if="userReports.length" class="flex-1 overflow-scroll">
       <div v-for="report in userReports">
         {{ report.talk.id }} --- {{ report.talk.content }}
         <div
@@ -69,7 +69,7 @@
 
     <el-table
       v-else
-      class="flex-auto"
+      class="flex-1"
       height="100"
       :data="reports"
       style="width: 100%"

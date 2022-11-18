@@ -46,7 +46,7 @@
     </div>
     <!--    <el-card></el-card>-->
 
-    <div v-if="talk" class="flex-auto overflow-scroll">
+    <div v-if="talk" class="flex-1 overflow-scroll">
       {{ talk.content }}
       <div
           v-for="img in talk.imgs"
@@ -66,7 +66,7 @@
 
     <el-table
         v-else
-        class="flex-auto"
+        class="flex-1"
         height="100"
         :data="tableData"
         border

@@ -2,7 +2,7 @@
   <view>
     <!--  #ifdef MP -->
     <q-navbar show-back>
-      <view class="row-between-center w100p flex-auto">
+      <view class="row-between-center w100p flex-1">
         <view class="ml-xl font-bold text-md">
           {{ title }}
         </view>
@@ -11,7 +11,7 @@
     <!--  #endif -->
     <!--  #ifndef MP -->
     <q-navbar show-back>
-      <view class="row-between-center w100p flex-auto">
+      <view class="row-between-center w100p flex-1">
         <view class="ml-xl font-bold text-md">
           {{ title }}
         </view>
