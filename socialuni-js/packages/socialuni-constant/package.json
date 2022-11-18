@@ -1,0 +1,15 @@
+{
+  "name": "socialuni-constant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "axios.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "^3.0.13",
+    "typescript": "^4.7.4"
+  },
+  "author": "",
+  "license": "ISC"
+}

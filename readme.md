@@ -119,7 +119,7 @@ npm run serve
 
 社交联盟代码模板分为前后端两个模块，本示例仅展示独立项目使用方式，如需要嵌入已有系统，请参考演示系统
 * [演示系统地址](https://socialuni.cn/demo)
-* [演示系统后端代码](https://gitee.com/socialuni/socialuni/tree/master/socialuni-embed-demo)
+* [演示系统后端代码](https://gitee.com/socialuni/socialuni/tree/master/socialuni-official-web)
 * [演示系统前端代码](https://gitee.com/socialuni/socialuni/blob/master/socialuni-docs/src/views/demo/DemoView.vue)
 
 ## 前排寻求对社交和im感兴趣的小伙伴一同合作开发
