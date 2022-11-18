@@ -15,7 +15,6 @@
         <view class="cu-form-group" v-if="appGenderType === GenderTypeAll">
           <view class="title">性别</view>
           <view>
-            {{ gender }}
             <radio-group @change="genderChange" class="flex-1">
               <label v-for="report in genders" :key="report.value">
                 <radio :value="report.value" :checked="report.value===gender"></radio>
