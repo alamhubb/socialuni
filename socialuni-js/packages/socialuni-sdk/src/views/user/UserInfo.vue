@@ -28,7 +28,7 @@
                 编辑资料
               </q-button>
             </view>
-            <view v-if="!isMine" class="flex-row">
+            <view v-else class="row-col-center">
               <!--                不为自己且未关注-->
               <!--            不为ios，或者不为付费，则显示-->
               <!--            <button v-if="!isIos||!userProp.chat.needPayOpen" class="cu-btn round bd-gray bg-white mr-sm"
@@ -343,6 +343,9 @@ import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
+import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
+import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
+import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 
 @Options({
   components: {
