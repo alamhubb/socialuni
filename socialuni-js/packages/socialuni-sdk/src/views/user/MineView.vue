@@ -1,6 +1,6 @@
 <template>
   <view class="bg-default h100p flex-col">
-    <view v-if="mineUser">
+    <view v-if="mineUser" class="h100p">
       <!--      <view class="mr">
               <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
             </view>-->
