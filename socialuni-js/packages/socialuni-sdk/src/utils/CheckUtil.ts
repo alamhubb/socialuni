@@ -3,7 +3,7 @@ import MsgUtil from "./MsgUtil";
 
 export default class CheckUtil {
     static unLoginCheck() {
-        if (!socialUserModule.user) {
+        if (!socialUserModule.mineUser) {
             MsgUtil.unLoginMessage()
             Error('未登录')
         }

@@ -49,7 +49,7 @@ export default class SocialUserModule extends Pinia {
     //对外开放的只有一个的登录接口
 
 
-    get user() {
+    get mineUser() {
         return this.userInfo
     }
 
@@ -93,11 +93,11 @@ export default class SocialUserModule extends Pinia {
     }
 
     isMine(user: SocialuniMineUserRO) {
-        return user && this.user && user.id === this.user.id
+        return user && this.mineUser && user.id === this.mineUser.id
     }
 
     get hasPhoneNum() {
-        return this.user && this.user.phoneNum
+        return this.mineUser && this.mineUser.phoneNum
     }
 
     removeUserAndToken() {
@@ -111,12 +111,12 @@ export default class SocialUserModule extends Pinia {
     }
 
     get hasUser(): boolean {
-        return !!this.user
+        return !!this.mineUser
     }
 
     get userId() {
-        if (this.user) {
-            return this.user.id
+        if (this.mineUser) {
+            return this.mineUser.id
         }
         return null
     }

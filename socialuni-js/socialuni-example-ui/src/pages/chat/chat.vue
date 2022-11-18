@@ -127,7 +127,7 @@ export default class ChatView extends Vue {
       console.log(123)
       UniUtil.showShareMenu()
     })
-    if (socialUserModule.user) {
+    if (socialUserModule.mineUser) {
       SocialuniUserAPI.queryRecentlyUsersAPI().then(res => {
         this.users = res.data
       })

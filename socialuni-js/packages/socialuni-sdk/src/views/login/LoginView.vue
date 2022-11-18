@@ -147,7 +147,7 @@ import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 })
 export default class LoginView extends Vue {
   get user() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   get hasPhoneNum() {

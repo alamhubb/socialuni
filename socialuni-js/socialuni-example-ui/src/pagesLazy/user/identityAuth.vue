@@ -136,7 +136,7 @@ import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 })
 export default class IdentityAuthView extends Vue {
   get user() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   imgFile: DomFile = null

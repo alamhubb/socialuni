@@ -58,7 +58,7 @@ export default class PageUtil {
             // 由于相关规范，iOS功能暂不可用
             MsgUtil.iosDisablePay()
         } else {
-            if (socialUserModule.user) {
+            if (socialUserModule.mineUser) {
                 RouterUtil.navigateTo(PagePath.userShell)
             } else {
                 MsgUtil.unLoginMessage()
@@ -77,7 +77,7 @@ export default class PageUtil {
     }
 
     static toTalkAddPage() {
-        const user: CenterUserDetailRO = socialUserModule.user
+        const user: CenterUserDetailRO = socialUserModule.mineUser
         if (!user || !user.phoneNum) {
             MsgUtil.unBindPhoneNum()
             //没设置校园，且应用类型要求必须设置

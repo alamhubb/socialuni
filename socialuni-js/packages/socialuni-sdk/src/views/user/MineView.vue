@@ -123,7 +123,7 @@ export default class MineView extends Vue {
 
 
   get mineUser() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   showMsgInput = false

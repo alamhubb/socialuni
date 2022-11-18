@@ -77,7 +77,7 @@ export default class PlatformUtils {
 
   //所有只能直接调用这个
   static async pay(provider: string, payType: string, amount?: number) {
-    if (!socialUserModule.user) {
+    if (!socialUserModule.mineUser) {
       return MsgUtil.unLoginMessage()
     } else if (socialSystemModule.isIos) {
       MsgUtil.iosDisablePay()

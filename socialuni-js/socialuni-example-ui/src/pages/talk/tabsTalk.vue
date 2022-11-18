@@ -266,7 +266,7 @@ export default class TabsTalk extends Vue {
 
 
   get user() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   tabsHeight = 0

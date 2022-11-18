@@ -10,7 +10,7 @@ import {socialSystemModule} from "socialuni-sdk/src/store/store";
 
 export default class MsgUtil {
     static unBindPhoneNum() {
-        const user: CenterUserDetailRO = socialUserModule.user
+        const user: CenterUserDetailRO = socialUserModule.mineUser
         if (!user) {
             MsgUtil.unLoginMessage()
         } else {
@@ -23,7 +23,7 @@ export default class MsgUtil {
     }
 
     static unLoginMessage() {
-        if (!socialUserModule.user) {
+        if (!socialUserModule.mineUser) {
             AlertUtil.info(socialConfigModule.appMoreConfig.errorMsg601UnLogin)
                 .then(() => {
                     // 没token才执行登录,有token证明已经登录，如果有错误应该清空token在执行这个

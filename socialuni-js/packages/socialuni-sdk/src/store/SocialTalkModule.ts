@@ -40,7 +40,7 @@ export default class SocialTalkModule extends Pinia {
     // 使输入框失去焦点，隐藏
     const commentAdd: CommentAddVO = new CommentAddVO(content, this.talk.id)
     const tempComment: CommentVO = commentAdd.toComment()
-    tempComment.user = socialUserModule.user
+    tempComment.user = socialUserModule.mineUser
     if (this.comment) {
       commentAdd.commentId = this.comment.id
       if (this.replyComment) {
@@ -72,7 +72,7 @@ export default class SocialTalkModule extends Pinia {
 
 
   setTalk(talk) {
-    const user = socialUserModule.user
+    const user = socialUserModule.mineUser
     if (user && user.phoneNum) {
       this.talk = talk
       this.comment = null
@@ -89,7 +89,7 @@ export default class SocialTalkModule extends Pinia {
                talk,
                comment
              }) {
-    if (socialUserModule.user) {
+    if (socialUserModule.mineUser) {
       this.talk = talk
       this.comment = comment
       this.replyComment = null
@@ -106,7 +106,7 @@ export default class SocialTalkModule extends Pinia {
                     comment,
                     replyComment
                   }) {
-    if (socialUserModule.user) {
+    if (socialUserModule.mineUser) {
       this.talk = talk
       this.comment = comment
       this.replyComment = replyComment

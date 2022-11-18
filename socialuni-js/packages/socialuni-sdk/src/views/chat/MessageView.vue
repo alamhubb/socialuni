@@ -224,7 +224,7 @@ export default class MessageView extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   screenHeight: number = socialSystemModule.screenHeight

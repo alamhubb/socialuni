@@ -104,7 +104,7 @@ import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 })
 export default class TalkItemComment extends Vue {
   get user() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   // 因为无法直接修改，所以需要克隆一下

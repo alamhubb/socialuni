@@ -108,7 +108,7 @@ export default class TalkView extends Vue {
   }
 
   get user() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   get unreadNotifies() {

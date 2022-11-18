@@ -44,7 +44,7 @@ export default class UserImgList extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   pageUser: CenterUserDetailRO = null

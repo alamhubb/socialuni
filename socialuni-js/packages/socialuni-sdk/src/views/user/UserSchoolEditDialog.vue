@@ -58,8 +58,8 @@ export default class UserSchoolEditDialog extends Vue {
   schools: SocialCircleRO[] = []
 
   open() {
-    if (socialUserModule.user.schoolName) {
-      this.schoolNameValue = socialUserModule.user.schoolName
+    if (socialUserModule.mineUser.schoolName) {
+      this.schoolNameValue = socialUserModule.mineUser.schoolName
       this.filterSchoolNameText = this.schoolNameValue
     }
     this.querySchoolCircles()

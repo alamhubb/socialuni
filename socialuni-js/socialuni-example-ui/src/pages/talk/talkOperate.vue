@@ -82,7 +82,7 @@ export default class TalkOperate extends Vue {
   }
 
   get user() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   get commentVisible() {

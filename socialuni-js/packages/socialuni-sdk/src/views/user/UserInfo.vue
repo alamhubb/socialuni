@@ -361,7 +361,7 @@ export default class UserInfo extends Vue {
   }
 
   get mineUser() {
-    return socialUserModule.user
+    return socialUserModule.mineUser
   }
 
   get appConfig() {
