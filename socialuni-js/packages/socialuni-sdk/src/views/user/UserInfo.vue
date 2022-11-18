@@ -345,6 +345,7 @@ import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineU
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
+import {AddFriendParams} from "open-im-sdk";
 
 @Options({
   components: {
@@ -391,12 +392,8 @@ export default class UserInfo extends Vue {
   created() {
     // socialChatModule.openIm.getFirends(this.user.id)
     // 检查是否为好友
-    socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
-      console.log(data);
-      this.hasFriend = data as boolean;
-    }).catch(err => {
-
-    })
+    console.log("=====================");
+    this.checkFriend();
 
     if (!this.user.isMine){
       socialChatModule.setCurChatByUserId(this.user.id)
@@ -693,11 +690,37 @@ export default class UserInfo extends Vue {
       })
     })
   }*/
+  checkFriend(){
+    console.log('=========checkFriend==========')
+    socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
+      data = JSON.parse(data);
+      for (let i = 0; i < data; i++) {
+        let datum = data[i];
+        if (datum.userID == this.user.id) {
+          this.hasFriend = datum.result as boolean;
+          console.log('checkFriend',data,this.hasFriend);
+        }
+      }
+
+    }).catch(err => {
+      console.log('checkFriend--err',err);
+    })
+  }
   /**
    * 添加好友申请。
    */
   addFriend() {
-    socialChatFriendModule.addFriend(this.user.id, "请求加好友");
+    // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
+    const options:AddFriendParams = {
+      toUserID: this.user.id,
+      reqMsg: "请求加好友"
+    };
+    socialChatModule.openIm.addFriend(options).then(({ data })=>{
+      console.error('addFriend',data);
+      this.checkFriend();
+    }).catch(err=>{
+      console.error(err);
+    })
   }
 
   /**
@@ -705,6 +728,8 @@ export default class UserInfo extends Vue {
    */
   deleteFriend() {
     socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
+      console.log('deleteFriend',data);
+      this.checkFriend();
     }).catch(err => {
     })
   }
@@ -714,6 +739,7 @@ export default class UserInfo extends Vue {
    */
   addBlack() {
     socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
+      this.checkFriend();
     }).catch(err => {
     })
   }
