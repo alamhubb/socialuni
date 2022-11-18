@@ -11,9 +11,9 @@ import {Options, Vue} from 'vue-property-decorator'
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import MsgInput from "socialuni-view/src/components/MsgInput.vue";
-import UserInfo from "../../pages/user/UserInfo.vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import UserInfo from "socialuni-sdk/src/views/user/UserInfo.vue";
 
 @Options({
   components: {MsgInput, UserInfo}

@@ -12,8 +12,8 @@ page {
   font-family: Helvetica Neue, Helvetica, sans-serif;
   color: #303133;
   font-size: 14px;
-  //不能有这个，要不然h5无法滚动
-  //overflow-x: hidden;
+  //不写这个h5tab会有横向滚动条，不能有这个，要不然h5无法滚动
+  overflow-x: hidden;
   button {
     line-height: 1.5;
   }
