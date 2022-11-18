@@ -43,7 +43,15 @@
               </text>
               <text class="text-sm text-gray">关注</text>
             </view>
-
+            <view v-if="hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
+              <text class="text-sm text-gray">解除好友</text>
+            </view>
+            <view v-else class="px-lg line-height-1" @click.stop="addFriend">
+              <text class="text-sm text-gray">添加好友</text>
+            </view>
+            <view  class="px-lg line-height-1" @click.stop="addBlack">
+              <text class="text-sm text-gray">添加黑名单</text>
+            </view>
             <view class="px-lg line-height-1" @click.stop="toFollowVue">
               <text class="text-lg font-bold text-black row-center">
                 {{ user.fansNum }}
@@ -310,7 +318,7 @@ import QPcModel from "socialuni-view/src/components/QPcModel/QPcModel.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import SocialGenderTag from "socialuni-view/src/components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
-import {socialChatModule, socialConfigModule} from "socialuni-sdk/src/store/store";
+import {socialChatFriendModule,socialChatModule, socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {Options, Prop, Vue, Watch} from "vue-property-decorator";
@@ -368,11 +376,18 @@ export default class UserInfo extends Vue {
   hasFollowed = false
   followStatus: string = FollowStatus.follow
   talks: TalkVO[] = []
-
+  hasFriend = false;
   showUserContactBtnDisabled = false
 
   created(){
     // socialChatModule.openIm.getFirends(this.user.id)
+    // 检查是否为好友
+    socialChatModule.openIm.checkFriend([this.user.id]).then(({ data })=>{
+      console.log(data);
+      this.hasFriend = data as boolean;
+    }).catch(err=>{
+
+    })
   }
 
   toMessagePage() {
@@ -665,5 +680,28 @@ export default class UserInfo extends Vue {
       })
     })
   }*/
+  /**
+   * 添加好友申请。
+   */
+  addFriend() {
+    socialChatFriendModule.addFriend(this.user.id,"请求加好友");
+  }
+  /**
+   * 从好友列表中删除用户。
+   */
+  deleteFriend(){
+    socialChatModule.openIm.deleteFriend(this.user.id).then(({ data })=>{
+    }).catch(err=>{
+    })
+  }
+
+  /**
+   * 将用户添加到黑名单。
+   */
+  addBlack(){
+    socialChatModule.openIm.addBlack(this.user.id).then(({ data })=>{
+    }).catch(err=>{
+    })
+  }
 }
 </script>
