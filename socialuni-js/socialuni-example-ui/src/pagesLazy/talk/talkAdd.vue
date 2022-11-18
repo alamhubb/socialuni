@@ -147,7 +147,6 @@ import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
 import GenderType from 'socialuni-constant/constant/GenderType'
 import DomFile from 'socialuni-api/src/model/DomFile'
 import CosAuthRO from 'socialuni-api/src/model/cos/CosAuthRO'
-import SocialuniAppAPI from 'socialuni-api/src/api/socialuni/SocialuniAppAPI'
 import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
 import PagePath from 'socialuni-constant/constant/PagePath'
 import SocialTagAdd from 'socialuni-view/src/components/SocialTagAdd/SocialTagAdd.vue'
@@ -166,7 +165,7 @@ import {
   socialUserModule
 } from "socialuni-sdk/src/store/store";
 import {onUnload} from "@dcloudio/uni-app";
-import SocialuniAppNewAPI from "socialuni-api/src/api/SocialuniAppNewAPI";
+import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 
 @Options({
   components: {
@@ -502,7 +501,7 @@ export default class TalkAddView extends Vue {
     if (this.cosAuthRO) {
       this.uploadImgList()
     } else {
-      SocialuniAppNewAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }

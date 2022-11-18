@@ -21,8 +21,6 @@
     <modules>
         <module>socialuni-admin-web</module>
         <module>socialuni-example-single-web</module>
-        <module>socialuni-im-example-web</module>
-        <module>socialuni-user-example-web</module>
         <module>socialuni-example-web</module>
         <module>socialuni-official-web</module>
         <module>socialuni-admin-web</module>
@@ -54,7 +52,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.socialuni.social</groupId>
-                <artifactId>socialuni-im</artifactId>
+                <artifactId>socialuni-im-sdk</artifactId>
                 <version>${socialuni.version}</version>
             </dependency>
             <dependency>
