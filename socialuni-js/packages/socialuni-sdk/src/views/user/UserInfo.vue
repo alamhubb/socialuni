@@ -393,7 +393,9 @@ export default class UserInfo extends Vue {
     // socialChatModule.openIm.getFirends(this.user.id)
     // 检查是否为好友
     console.log("=====================");
-    this.checkFriend();
+    if (!this.user.isMine){
+      this.checkFriend();
+    }
 
     if (!this.user.isMine){
       socialChatModule.setCurChatByUserId(this.user.id)
@@ -401,7 +403,8 @@ export default class UserInfo extends Vue {
   }
 
   toMessagePage() {
-    socialChatModule.setCurChatByUserId(this.user.id)
+    socialChatModule.toMessagePageFromUserDetail()
+    // socialChatModule.setCurChatByUserId(this.user.id)
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
     //mock chat
@@ -691,20 +694,23 @@ export default class UserInfo extends Vue {
     })
   }*/
   checkFriend(){
+    socialChatModule.refreshMessages()
     console.log('=========checkFriend==========')
-    socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
-      data = JSON.parse(data);
-      for (let i = 0; i < data; i++) {
-        let datum = data[i];
-        if (datum.userID == this.user.id) {
-          this.hasFriend = datum.result as boolean;
-          console.log('checkFriend',data,this.hasFriend);
+    if (!this.user.isMine){
+      socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
+        data = JSON.parse(data);
+        for (let i = 0; i < data; i++) {
+          let datum = data[i];
+          if (datum.userID == this.user.id) {
+            this.hasFriend = datum.result as boolean;
+            console.log('checkFriend',data,this.hasFriend);
+          }
         }
-      }
 
-    }).catch(err => {
-      console.log('checkFriend--err',err);
-    })
+      }).catch(err => {
+        console.log('checkFriend--err',err);
+      })
+    }
   }
   /**
    * 添加好友申请。
