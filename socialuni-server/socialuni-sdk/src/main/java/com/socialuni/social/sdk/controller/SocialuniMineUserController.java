@@ -19,30 +19,30 @@ import java.util.List;
 @RequestMapping("socialuni/mineUser")
 public class SocialuniMineUserController implements SocialuniMineUserAPI {
     @Resource
-    private SocialuniMineUserService socialuniUserService;
+    private SocialuniMineUserService socialuniMineUserService;
 
     @Override
     public ResultRO<SocialuniMineUserDetailRO> getMineUser() {
-        return socialuniUserService.getMineUser();
+        return socialuniMineUserService.getMineUser();
     }
 
     @Override
     public ResultRO<SocialuniMineUserDetailRO> editUser(SocialUserEditQO socialUserEditQO) {
-        return socialuniUserService.editUser(socialUserEditQO);
+        return socialuniMineUserService.editUser(socialUserEditQO);
     }
 
     @Override
     public ResultRO<SocialuniMineUserDetailRO> addUserImg(SocialuniImgAddQO socialUserImgAddQO) {
-        return socialuniUserService.addUserImg(socialUserImgAddQO);
+        return socialuniMineUserService.addUserImg(socialUserImgAddQO);
     }
 
     @Override
     public ResultRO<SocialuniMineUserDetailRO> addUserAvatarImg(SocialuniImgAddQO socialUserImgAddQO) {
-        return socialuniUserService.addUserAvatarImg(socialUserImgAddQO);
+        return socialuniMineUserService.addUserAvatarImg(socialUserImgAddQO);
     }
 
     @Override
     public ResultRO<SocialuniMineUserDetailRO> deleteUserImg(SocialuniUserImgDeleteQO centerUserImgDeleteQO) {
-        return socialuniUserService.deleteUserImg(centerUserImgDeleteQO);
+        return socialuniMineUserService.deleteUserImg(centerUserImgDeleteQO);
     }
 }
