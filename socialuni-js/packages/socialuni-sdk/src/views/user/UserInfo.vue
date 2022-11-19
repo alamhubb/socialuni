@@ -69,7 +69,7 @@
 
         <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-1" :class="{'row-around':isMine}">
-            <view v-if="hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
+            <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
               <text class="text-sm text-gray">解除好友</text>
             </view>
             <view v-else class="px-lg line-height-1" @click.stop="addFriend">
@@ -382,24 +382,10 @@ export default class UserInfo extends Vue {
 
   followBtnDisabled = false
   talks: TalkVO[] = []
-  hasFriend = false;
   showUserContactBtnDisabled = false
 
   get followStatus() {
     return FollowStatus.getFollowStatus(this.user)
-  }
-
-  created() {
-    // socialChatModule.openIm.getFirends(this.user.id)
-    // 检查是否为好友
-    console.log("=====================");
-    if (!this.user.isMine){
-      this.checkFriend();
-    }
-
-    if (!this.user.isMine){
-      socialChatModule.setCurChatByUserId(this.user.id)
-    }
   }
 
   toMessagePage() {
@@ -693,29 +679,6 @@ export default class UserInfo extends Vue {
       })
     })
   }*/
-  checkFriend(){
-    socialChatModule.refreshMessages()
-    if (!this.user.isMine){
-      // console.log('=========checkFriend==========')
-      socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
-        // console.log('checkFriend',data,this.hasFriend,typeof data);
-        // 他是string需要手动转化一下。
-        data = JSON.parse(data);
-        // console.log('checkFriend222222222222222222',data,this.hasFriend,typeof data);
-        for (let i = 0; i < data.length; i++) {
-          let datum = data[i];
-          // console.log('==============datum===============',datum,this.user.id,datum.userID );
-          if (datum.userID == this.user.id) {
-            this.hasFriend = datum.result != 0;
-            // console.log('checkFriend',data,this.hasFriend);
-          }
-        }
-
-      }).catch(err => {
-        console.log('checkFriend--err',err);
-      })
-    }
-  }
   /**
    * 添加好友申请。
    */
@@ -740,7 +703,7 @@ export default class UserInfo extends Vue {
   deleteFriend() {
     socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
       console.log('deleteFriend',data);
-      this.checkFriend();
+      socialChatModule.checkFriend(this.user);
     }).catch(err => {
     })
   }
@@ -750,7 +713,7 @@ export default class UserInfo extends Vue {
    */
   addBlack() {
     socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
-      this.checkFriend();
+      socialChatModule.checkFriend(this.user);
     }).catch(err => {
     })
   }

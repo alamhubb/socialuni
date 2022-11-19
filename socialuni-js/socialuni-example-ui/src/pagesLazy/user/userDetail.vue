@@ -14,6 +14,7 @@ import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import UserInfo from "socialuni-sdk/src/views/user/UserInfo.vue";
+import {socialChatModule} from "socialuni-sdk/src/store/store";
 
 @Options({
   components: {MsgInput, UserInfo}
@@ -39,6 +40,10 @@ export default class UserDetail extends Vue {
       // 这里有问题，有时候直接进入页面没有userId
       SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
         this.user = res.data
+        if (!this.user.isMine){
+          socialChatModule.checkFriend(this.user);
+          socialChatModule.setCurChatByUserId(this.user.id)
+        }
       })
     })
   }
