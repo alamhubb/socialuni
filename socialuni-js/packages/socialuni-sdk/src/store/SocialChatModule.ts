@@ -17,6 +17,7 @@ import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import OpenImSessionType from "../plugins/openIm/constant/OpenImSessionType";
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 
 @Store
 export default class SocialChatModule extends Pinia {
@@ -55,6 +56,30 @@ export default class SocialChatModule extends Pinia {
             console.log(chats)
             console.log(this.chats)
         })
+    }
+
+    checkFriend(user: CenterUserDetailRO) {
+        socialChatModule.refreshMessages()
+        if (!user.isMine) {
+            // console.log('=========checkFriend==========')
+            socialChatModule.openIm.checkFriend([user.id]).then(({data}) => {
+                // console.log('checkFriend',data,this.hasFriend,typeof data);
+                // 他是string需要手动转化一下。
+                data = JSON.parse(data);
+                // console.log('checkFriend222222222222222222',data,this.hasFriend,typeof data);
+                for (let i = 0; i < data.length; i++) {
+                    let datum = data[i];
+                    // console.log('==============datum===============',datum,user.id,datum.userID );
+                    if (datum.userID == user.id) {
+                        user.hasFriend = datum.result != 0;
+                        // console.log('checkFriend',data,this.hasFriend);
+                    }
+                }
+
+            }).catch(err => {
+                console.log('checkFriend--err', err);
+            })
+        }
     }
 
 

@@ -69,7 +69,7 @@
 
         <view class="row-between-center py-xs pr-xs">
           <view class="flex-row flex-1" :class="{'row-around':isMine}">
-            <view v-if="hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
+            <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
               <text class="text-sm text-gray">解除好友</text>
             </view>
             <view v-else class="px-lg line-height-1" @click.stop="addFriend">
@@ -752,7 +752,7 @@ export default class UserInfo extends Vue {
   deleteFriend() {
     socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
       console.log('deleteFriend',data);
-      this.checkFriend();
+      socialChatModule.checkFriend(this.user);
     }).catch(err => {
     })
   }
@@ -762,7 +762,7 @@ export default class UserInfo extends Vue {
    */
   addBlack() {
     socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
-      this.checkFriend();
+      socialChatModule.checkFriend(this.user);
     }).catch(err => {
     })
   }
