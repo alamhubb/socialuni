@@ -695,15 +695,19 @@ export default class UserInfo extends Vue {
   }*/
   checkFriend(){
     socialChatModule.refreshMessages()
-    console.log('=========checkFriend==========')
     if (!this.user.isMine){
+      // console.log('=========checkFriend==========')
       socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
+        // console.log('checkFriend',data,this.hasFriend,typeof data);
+        // 他是string需要手动转化一下。
         data = JSON.parse(data);
-        for (let i = 0; i < data; i++) {
+        // console.log('checkFriend222222222222222222',data,this.hasFriend,typeof data);
+        for (let i = 0; i < data.length; i++) {
           let datum = data[i];
+          // console.log('==============datum===============',datum,this.user.id,datum.userID );
           if (datum.userID == this.user.id) {
-            this.hasFriend = datum.result as boolean;
-            console.log('checkFriend',data,this.hasFriend);
+            this.hasFriend = datum.result != 0;
+            // console.log('checkFriend',data,this.hasFriend);
           }
         }
 
@@ -722,8 +726,9 @@ export default class UserInfo extends Vue {
       reqMsg: "请求加好友"
     };
     socialChatModule.openIm.addFriend(options).then(({ data })=>{
-      console.error('addFriend',data);
-      this.checkFriend();
+      console.error('addFriend susueces',data);
+      // 需要同意才会现实的。所以这里再查也是浪费。
+      // this.checkFriend();
     }).catch(err=>{
       console.error(err);
     })
