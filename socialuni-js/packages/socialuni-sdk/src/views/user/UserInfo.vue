@@ -81,6 +81,13 @@
           </view>
         </view>
         <view class="row-col-center" v-if="isMine">
+          <div class="font-xs">我发出的好友请求列表::::</div>
+
+          <div v-for="(sendFriendApplication,index) in sendFriendApplicationList" >
+            <div class="font-xs">{{sendFriendApplication.fromNickname}}</div>
+          </div>
+        </view>
+        <view class="row-col-center" v-if="isMine">
           <div class="font-xs">好友请求列表::::</div>
 
           <div v-for="(recvFriendApplication,index) in recvFriendApplicationList" >
@@ -90,6 +97,21 @@
             <div class="font-xs" > 当前状态为: {{ friendRuestResult(recvFriendApplication.handleResult) }}</div>
           </div>
         </view>
+        <view class="row-col-center" v-if="isMine">
+          <div class="font-xs">黑名单列表::::</div>
+          <div v-for="(black,index) in blackList" >
+            <div class="font-xs">{{black.nickname}}</div>
+            <div class="font-xs" @click.stop="removeBlack(black)">从黑名单移除</div>
+          </div>
+        </view>
+        <view class="row-col-center" v-if="isMine">
+          <div class="font-xs">已添加的好友列表::::</div>
+          <div v-for="(friend,index) in friendList" >
+            <div class="font-xs" v-if="friend.friendInfo"> 没拉黑的好友: {{friend.friendInfo.nickname}}</div>
+            <div class="font-xs" v-if="friend.blackInfo"> 被拉黑的好友: {{friend.blackInfo.nickname}}</div>
+          </div>
+        </view>
+
         <div class="flex-row pl-xs">
           <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
             <q-icon class="color-success mr-mn" size="14" icon="level"/>
@@ -391,7 +413,10 @@ export default class UserInfo extends Vue {
 
   followBtnDisabled = false
   talks: TalkVO[] = []
+  sendFriendApplicationList: Object[] = []
   recvFriendApplicationList: Object[] = []
+  blackList: Object[] = []
+  friendList: Object[] = []
   hasFriend = false;
   showUserContactBtnDisabled = false
 
@@ -406,7 +431,10 @@ export default class UserInfo extends Vue {
     if (!this.user.isMine){
       this.checkFriend();
     }else{
+      this.getSendFriendApplicationList();
       this.getRecvFriendApplicationList();
+      this.getBlacklist();
+      this.getFriendList();
     }
 
     if (!this.user.isMine){
@@ -728,6 +756,17 @@ export default class UserInfo extends Vue {
       })
     }
   }
+
+  /**
+   * 获取好友列表。
+   */
+  getFriendList(){
+    socialChatModule.openIm.getFriendList().then(({ data })=>{
+      this.friendList = JSON.parse(data);
+      console.log('friendList',data,this.friendList);
+    }).catch(err=>{
+    })
+  }
   /**
    * 添加好友申请。
    */
@@ -758,6 +797,16 @@ export default class UserInfo extends Vue {
   }
 
   /**
+   * 获取黑名单列表
+   */
+  getBlacklist(){
+    socialChatModule.openIm.getBlackList().then(({ data })=>{
+      this.blackList = JSON.parse(data);
+      console.log('getBlackList',data,this.blackList);
+    }).catch(err=>{
+    })
+  }
+  /**
    * 将用户添加到黑名单。
    */
   addBlack() {
@@ -765,6 +814,28 @@ export default class UserInfo extends Vue {
       socialChatModule.checkFriend(this.user);
     }).catch(err => {
     })
+  }
+  /**
+   * 将用户添加到黑名单。
+   */
+  removeBlack(black) {
+    socialChatModule.openIm.removeBlack(black.userID).then(({data}) => {
+      socialChatModule.checkFriend(this.user);
+      this.getBlacklist();
+    }).catch(err => {
+    })
+  }
+
+  /**
+   * 获取发出的好友请求列表
+   */
+  getSendFriendApplicationList(){
+    socialChatModule.openIm.getSendFriendApplicationList().then(({ data })=>{
+      this.sendFriendApplicationList = JSON.parse(data);
+      console.log('getSendFriendApplicationList',data,this.sendFriendApplicationList);
+    }).catch(err=>{
+    })
+
   }
   /**
    * 获取收到的好友请求列表
