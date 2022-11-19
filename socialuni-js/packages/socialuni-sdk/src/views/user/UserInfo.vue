@@ -80,7 +80,16 @@
             </view>
           </view>
         </view>
+        <view class="row-col-center" v-if="isMine">
+          <div class="font-xs">好友请求列表::::</div>
 
+          <div v-for="(recvFriendApplication,index) in recvFriendApplicationList" >
+            <div class="font-xs">{{recvFriendApplication.fromNickname}}</div>
+            <div class="font-xs" @click.stop="acceptFriendApplication(recvFriendApplication)">同意</div>
+            <div class="font-xs" @click.stop="refuseFriendApplication(recvFriendApplication)">拒绝</div>
+            <div class="font-xs" > 当前状态为: {{ friendRuestResult(recvFriendApplication.handleResult) }}</div>
+          </div>
+        </view>
         <div class="flex-row pl-xs">
           <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
             <q-icon class="color-success mr-mn" size="14" icon="level"/>
@@ -345,7 +354,7 @@ import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineU
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
-import {AddFriendParams} from "open-im-sdk";
+import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
 
 @Options({
   components: {
@@ -382,6 +391,7 @@ export default class UserInfo extends Vue {
 
   followBtnDisabled = false
   talks: TalkVO[] = []
+  recvFriendApplicationList: Object[] = []
   hasFriend = false;
   showUserContactBtnDisabled = false
 
@@ -392,9 +402,11 @@ export default class UserInfo extends Vue {
   created() {
     // socialChatModule.openIm.getFirends(this.user.id)
     // 检查是否为好友
-    console.log("=====================");
+    console.log("===================== userId", this.user.id);
     if (!this.user.isMine){
       this.checkFriend();
+    }else{
+      this.getRecvFriendApplicationList();
     }
 
     if (!this.user.isMine){
@@ -753,6 +765,59 @@ export default class UserInfo extends Vue {
       this.checkFriend();
     }).catch(err => {
     })
+  }
+  /**
+   * 获取收到的好友请求列表
+   */
+  getRecvFriendApplicationList(){
+    socialChatModule.openIm.getRecvFriendApplicationList().then(({ data })=>{
+      this.recvFriendApplicationList = JSON.parse(data);
+      console.log('getRecvFriendApplicationList',data,this.recvFriendApplicationList);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 接受好友请求。
+   * @param item
+   */
+  acceptFriendApplication(item){
+    const options:AccessFriendParams = {
+      toUserID:item.fromUserID,
+      handleMsg:"接受您的好友请求"
+    }
+    socialChatModule.openIm.acceptFriendApplication(options).then(({ data })=>{
+      console.log('acceptFriendApplication',data);
+      // 刷新请求列表
+      this.getRecvFriendApplicationList();
+    }).catch(err=>{
+    })
+  }
+
+  /**
+   * 拒绝好友请求。
+   * @param item
+   */
+  refuseFriendApplication(item){
+    const options:AccessFriendParams = {
+      toUserID:item.fromUserID,
+      handleMsg:"拒绝您的好友请求"
+    }
+    socialChatModule.openIm.refuseFriendApplication(options).then(({ data })=>{
+      console.log('refuseFriendApplication',data);
+      // 刷新请求列表
+      this.getRecvFriendApplicationList();
+    }).catch(err=>{
+    })
+  }
+  friendRuestResult(status:number){
+    switch (status){
+      case 0:
+        return "未处理中";
+      case 1:
+        return "已同意";
+      case -1:
+        return "已拒绝";
+    }
   }
 }
 </script>
