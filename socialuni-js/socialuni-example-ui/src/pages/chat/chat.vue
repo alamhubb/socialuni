@@ -1,14 +1,14 @@
 <template>
   <view class="bg-default h100p">
-    <q-bar>
+    <q-navbar>
+      <view>
+        <q-icon icon="arrow-left"></q-icon>
+      </view>
       <view @click="toAddFriend">
         <q-icon icon="mdi-volume-high"></q-icon>
         系统通知
       </view>
-      <view>
-        <q-icon icon="arrow-right"></q-icon>
-      </view>
-    </q-bar>
+    </q-navbar>
     <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按聊天框可解除匹配
@@ -18,18 +18,18 @@
       </view>
     </view>
 
-    <div>
-      <div v-for="item in users">
-        <div class="flex-row px mb bd-radius bg-white">
-          <div>
-            <img class="size50" :src="item.avatar">
+    <!--    <div>
+          <div v-for="item in users">
+            <div class="flex-row px mb bd-radius bg-white">
+              <div>
+                <img class="size50" :src="item.avatar">
+              </div>
+              <div>
+                {{ item.nickname }}
+              </div>
+            </div>
           </div>
-          <div>
-            {{ item.nickname }}
-          </div>
-        </div>
-      </div>
-    </div>
+        </div>-->
     <!--    <view v-show="false">
           {{ chatsUnreadNumTotal }}
         </view>-->
@@ -96,8 +96,12 @@ import {onLoad} from "@dcloudio/uni-app";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserContentRO";
+import QNavbar from "@/qing-ui/components/QNavbar/QNavbar.vue";
+import QIcon from "@/qing-ui/components/QIcon/QIcon.vue";
 
-@Options({})
+@Options({
+  components: {QIcon, QNavbar}
+})
 export default class ChatView extends Vue {
   users: SocialUserContentRO[] = []
 
@@ -127,11 +131,11 @@ export default class ChatView extends Vue {
       console.log(123)
       UniUtil.showShareMenu()
     })
-    if (socialUserModule.mineUser) {
+    /*if (socialUserModule.mineUser) {
       SocialuniUserAPI.queryRecentlyUsersAPI().then(res => {
         this.users = res.data
       })
-    }
+    }*/
   }
 
   onPullDownRefresh() {
