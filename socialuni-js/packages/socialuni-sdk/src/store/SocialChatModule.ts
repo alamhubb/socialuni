@@ -18,6 +18,7 @@ import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import OpenImSessionType from "../plugins/openIm/constant/OpenImSessionType";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import SocialuniMsg from "../SocialuniMsg";
 
 @Store
 export default class SocialChatModule extends Pinia {
@@ -131,8 +132,16 @@ export default class SocialChatModule extends Pinia {
         }).then(res => {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
-            this.chat = new SocialuniChatRO(openImChatRO)
+            this.setChat(openImChatRO)
         })
+    }
+
+    setChat(openImChat: OpenImChatRO) {
+        console.log(this.chat)
+        console.log(11111)
+        this.chat = new SocialuniChatRO(openImChat)
+        console.log(2222)
+        console.log(this.chat)
     }
 
     toMessagePageFromUserDetail() {
@@ -327,7 +336,7 @@ export default class SocialChatModule extends Pinia {
 
     //在聊天界面的时候，自己发送msg 本地添加msg
 
-    pushMessageAction(msg: MessageVO) {
+    async pushMessageAction(msg: MessageVO) {
         this.messages.push(msg)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
@@ -339,8 +348,7 @@ export default class SocialChatModule extends Pinia {
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
 
-
-        SocialuniMsg.sendMsgAPI<MessageVO>(this.chat.id, msg.content).then((res) => {
+        SocialuniMsg.sendMsgAPI<MessageVO>(this.chat, msg.content).then((res) => {
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
             this.messages.splice(index, 1, res.data)
@@ -348,6 +356,8 @@ export default class SocialChatModule extends Pinia {
             // 这里应该变为发送失败
             this.messages.splice(index, 1)
         })
+        // socialChatModule.refreshMessages()
+
         PlatformUtils.requestSubscribeChat()
     }
 

@@ -23,7 +23,6 @@ export default class SocialuniChatRO {
     public loadMore: string = null
 
     constructor(openImChat?: OpenImChatRO) {
-        console.log(openImChat)
         if (openImChat) {
             this.id = openImChat.conversationID
             this.nickname = openImChat.showName
@@ -37,9 +36,6 @@ export default class SocialuniChatRO {
             // this.lastContent = openImChat.lastContent
             // this.vipFlag = chat.vipFlag
             this.receiveUserId = openImChat.userID
-            console.log(11111)
-            console.log(openImChat.latestMsg)
-            console.log(222)
             if (openImChat.latestMsg) {
                 this.lastMsg = JsonUtil.toParse(openImChat.latestMsg)
                 this.lastContent = this.lastMsg.content
@@ -51,13 +47,9 @@ export default class SocialuniChatRO {
                 groupID: "",
                 userID: "",
             }
-            console.log(options)
             socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
                 const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
                 this.messages = msgs.map(item => new MessageVO(null, null, item))
-            }).catch(err => {
-            }).finally(() => {
-                console.log(456)
             })
 
             // this.loadMore = chat.loadMore

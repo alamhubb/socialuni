@@ -1,8 +1,10 @@
 <template>
   <view class="pb-100 h100r bg-default">
+
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
+        ---{{chat}}----
       </view>
       <view class="flex-none mr-10px">
         <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
@@ -201,6 +203,7 @@ import UniUtil from "../../utils/UniUtil";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import MessageAPI from "socialuni-api/src/api/MessageAPI";
 import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
+import CommonUtil from "../../utils/CommonUtil";
 
 
 @Options({components: {SocialuniReportDialog}})
@@ -211,6 +214,11 @@ export default class MessageView extends Vue {
     deleteReasonDialog: any;
   }
 
+  init(params: { userId: string }) {
+    if (params.userId) {
+      socialChatModule.setCurChatByUserId(params.userId)
+    }
+  }
 
 
   get messages() {
@@ -315,22 +323,10 @@ export default class MessageView extends Vue {
   }
 
   async sendMsgClick() {
-    const {data} = await socialChatModule.openIm.createTextMessage(this.msgContent);
-    const params = {
-      recvID: this.chat.receiveUserId,
-      groupID: "",
-      message: data,
-    };
-    socialChatModule.openIm.sendMessage(params).then(res => {
-      console.log('发送消息成功')
-      socialChatModule.refreshMessages()
-    });
-
-
     // 微信支持 hold-keyboard
     // app和h5支持 @touchend.prevent
     // 只有qq需要特殊处理
-    /*// #ifdef MP-QQ
+    // #ifdef MP-QQ
     this.inputFocus = false
     // 严格测试150毫秒时间比较合适，不卡顿，且不出bug
     CommonUtil.delayTime(150).then(() => {
@@ -338,30 +334,32 @@ export default class MessageView extends Vue {
     })
     // #endif
     const msgContent = this.msgContent || (this.chat.needPayOpen ? HintMsg.payOpenDefaultMsg : '')
+    console.log(this.msgContent)
     if (msgContent) {
       // 点击发送后立即push
       if (this.mineUser && this.mineUser.phoneNum) {
+        console.log(this.chat)
         //启用状态可以直接发送
-        if (this.chat.status === CommonStatus.enable) {
-          this.sendMsg(msgContent)
-        } /*else {
+        const msg: MessageVO = new MessageVO(this.mineUser, msgContent)
+        this.msgContent = ''
+        socialChatModule.pushMessageAction(msg)
+        /*if (this.chat.status === CommonStatus.enable) {
+
+
+        } */
+        /*else {
           this.openChatPromise(msgContent).finally(() => {
             this.isOpeningChatDisableBtn = false
           })
-        }*!/
+        }*/
       } else {
         MsgUtil.unBindPhoneNum()
       }
     } else {
       ToastUtil.toast('不能发送空白内容')
-    }*/
+    }
   }
 
-  sendMsg(content) {
-    const msg: MessageVO = new MessageVO(this.mineUser, content)
-    this.msgContent = ''
-    socialChatModule.pushMessageAction(msg)
-  }
 
   confirmDeleteTalk(msg: MessageVO) {
     if (this.mineUser.type === UserType.systemUser) {

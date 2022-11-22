@@ -436,10 +436,6 @@ export default class UserInfo extends Vue {
       this.getBlacklist();
       this.getFriendList();
     }
-
-    if (!this.user.isMine){
-      socialChatModule.setCurChatByUserId(this.user.id)
-    }
   }
 
   toMessagePage() {
