@@ -6,7 +6,7 @@
         <groupId>com.socialuni.social</groupId>
         <artifactId>socialuni-parent</artifactId>
         <version>0.3.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
 
