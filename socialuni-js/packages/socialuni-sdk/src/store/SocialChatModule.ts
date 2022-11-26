@@ -20,11 +20,17 @@ import OpenImSessionType from "../plugins/openIm/constant/OpenImSessionType";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import SocialuniMsg from "../SocialuniMsg";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
+import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
 
 @Store
 export default class SocialChatModule extends Pinia {
     openIm = new OpenIMSDK()
+    openImIsLogin = false
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
+
+    setOpenImLoginSuccess() {
+        this.openImIsLogin = true
+    }
 
     get imToken() {
         return this.userImToken
@@ -38,10 +44,7 @@ export default class SocialChatModule extends Pinia {
 
     async initSocialuniChatModule() {
         console.log(44444)
-        try {
-            const res = await this.openIm.getLoginStatus()
-            console.log(res)
-        } catch (e) {
+        if (!this.openImIsLogin) {
             //获取imToken
             const config: InitConfig = {
                 userID: socialUserModule.userId,
@@ -51,6 +54,7 @@ export default class SocialChatModule extends Pinia {
             }
             console.log(config)
             await this.openIm.login(config)
+            this.setOpenImLoginSuccess()
             this.refreshMessages()
         }
     }
@@ -62,6 +66,9 @@ export default class SocialChatModule extends Pinia {
 
     removeImToken() {
         this.setImToken(null)
+        this.openIm.logout().then(_ => {
+            this.openImIsLogin = false
+        })
     }
 
 
@@ -150,9 +157,6 @@ export default class SocialChatModule extends Pinia {
 
     //为避免异步加载性能问题，进入用户详情页面就设置chat信息
     async setCurChatByUserId(userId: string) {
-        console.log(1111)
-        console.log(userId)
-        console.log(666)
         await this.initSocialuniChatModule()
         this.openIm.getOneConversation({
             sessionType: OpenImSessionType.Single,
@@ -166,10 +170,26 @@ export default class SocialChatModule extends Pinia {
 
     setChat(openImChat: OpenImChatRO) {
         console.log(this.chat)
-        console.log(11111)
+        console.log(555555)
         this.chat = new SocialuniChatRO(openImChat)
-        console.log(2222)
+
+        const options = {
+            conversationID: this.chat.id,
+            startClientMsgID: "",
+            count: 10,
+            groupID: "",
+            userID: "",
+        }
+        console.log(this.messages.length)
+        socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
+            const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
+            this.chat.messages = msgs.map(item => new MessageVO(null, null, item))
+            console.log(this.messages.length)
+        })
+        console.log(666666)
         console.log(this.chat)
+        console.log(this.chat.messages)
+        console.log(this.chat.messages.length)
     }
 
     toMessagePageFromUserDetail(userId: string) {
@@ -178,15 +198,15 @@ export default class SocialChatModule extends Pinia {
     }
 
 
-    get chatIndex(): number {
+    /*get chatIndex(): number {
         return this.chats.findIndex(item => item.id === this.chatId)
-    }
+    }*/
 
     get messages(): MessageVO[] {
-        if (this.chat.messages.length) {
-            // JsonUtils.log(this.chat)
+        if (this.chat) {
+            return this.chat.messages
         }
-        return this.chat.messages
+        return []
     }
 
     //从列表中进入，从个人详情页进入
@@ -202,9 +222,9 @@ export default class SocialChatModule extends Pinia {
         this.scrollToMessagePageBottom()
     }
 
-    setChatId(chatId: string) {
+    /*setChatId(chatId: string) {
         this.chatId = chatId
-    }
+    }*/
 
 
     userDetailToMessagePage(chat: SocialuniChatRO) {
@@ -238,7 +258,7 @@ export default class SocialChatModule extends Pinia {
     openChatAction(content) {
         const needPayOpen = this.chat.needPayOpen
         return ChatAPI.openChatAPI(this.chat.id, this.chat.needPayOpen, content).then((res) => {
-            socialChatModule.replaceChat(this.chatIndex, res.data)
+            // socialChatModule.replaceChat(this.chatIndex, res.data)
             socialChatModule.scrollToMessagePageBottom()
             if (needPayOpen) {
                 // userModule.user.shell -= 10
@@ -331,7 +351,7 @@ export default class SocialChatModule extends Pinia {
             // 前台将消息改为已读,修改时间使用后台的就行
             this.readChatAction(newChat)
             //将新消息放到当前msg中并替换
-            this.pushMsgReplaceChat(this.chatIndex, newChat)
+            // this.pushMsgReplaceChat(this.chatIndex, newChat)
             this.scrollToMessagePageBottom()
             // 后台改为已读
             // 向后台发送消息，将收到的消息改为已读

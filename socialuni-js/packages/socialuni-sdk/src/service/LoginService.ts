@@ -12,11 +12,6 @@ export default class LoginService {
      * 渠道登录的同一方法
      */
     static async providerLogin(provider: string, result: any) {
-        console.log(3333)
-        console.log(11111111)
-        console.log(22222222)
-        console.log(22222222)
-        console.log(provider)
         if (socialSystemModule.isMpQQ) {
             if (result.detail.errMsg !== Constants.loginSuccess) {
                 return ToastUtil.toast('您取消了登录')

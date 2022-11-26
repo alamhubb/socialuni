@@ -128,7 +128,6 @@ export default class ChatView extends Vue {
 
   created() {
     onLoad((params) => {
-      console.log(123)
       UniUtil.showShareMenu()
     })
     /*if (socialUserModule.mineUser) {
@@ -249,7 +248,6 @@ export default class ChatView extends Vue {
   }*/
 
   toMessagePage(chat: SocialuniChatRO) {
-    console.log(chat)
     //需要先清除，再跳转页面
     socialChatModule.setChatIdToMessagePage(chat.receiveUserId)
   }

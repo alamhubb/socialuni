@@ -64,10 +64,8 @@ request.interceptor.response(
         }
         UniUtil.hideLoading()
         const result = error.data
-        console.log(result)
         if (error.statusCode && result) {
             const errorMsg = result.errorMsg
-            console.log(errorMsg)
             if (errorMsg) {
                 switch (error.statusCode) {
                     case ErrorConst.not_logged:

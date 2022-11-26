@@ -40,18 +40,6 @@ export default class SocialuniChatRO {
                 this.lastMsg = JsonUtil.toParse(openImChat.latestMsg)
                 this.lastContent = this.lastMsg.content
             }
-            const options = {
-                conversationID: this.id,
-                startClientMsgID: "",
-                count: 10,
-                groupID: "",
-                userID: "",
-            }
-            socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
-                const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
-                this.messages = msgs.map(item => new MessageVO(null, null, item))
-            })
-
             // this.loadMore = chat.loadMore
         }
     }

@@ -20,6 +20,7 @@ export default class MessagePage extends Vue {
 
   created() {
     onLoad((params) => {
+      //不这么写refs是空
       onMounted(()=>{
         console.log(3333333)
         //979c23c05df54beb9c0062170882f452

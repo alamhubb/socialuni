@@ -1,12 +1,12 @@
 <template>
-  <view class="pb-100 h100r bg-default">
+  <view v-if="chat" class="pb-100 h100r bg-default">
 
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
-        ---{{chat}}----
       </view>
       <view class="flex-none mr-10px">
+        <q-button @click="consoleMessage">123</q-button>
         <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
       </view>
     </view>
@@ -215,8 +215,6 @@ export default class MessageView extends Vue {
   }
 
   init(params: { userId: string }) {
-    console.log(777777)
-    console.log(params.userId)
     if (params.userId) {
       socialChatModule.setCurChatByUserId(params.userId)
     }
@@ -224,6 +222,8 @@ export default class MessageView extends Vue {
 
 
   get messages() {
+    console.log(111111111111)
+    console.log(socialChatModule.messages)
     return socialChatModule.messages
   }
 
@@ -277,6 +277,12 @@ export default class MessageView extends Vue {
       this.chat.loadMore = LoadMoreType.loading
       this.queryMessages()
     }
+  }
+
+  consoleMessage(){
+    console.log(this.chat)
+    console.log(this.chat.messages)
+    console.log(this.chat.messages.length)
   }
 
   closeShowMsgHint() {
