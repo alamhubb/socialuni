@@ -19,12 +19,16 @@ import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import OpenImSessionType from "../plugins/openIm/constant/OpenImSessionType";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import SocialuniMsg from "../SocialuniMsg";
+import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 
 @Store
 export default class SocialChatModule extends Pinia {
     openIm = new OpenIMSDK()
+    private userImToken: string = SocialuniImUserTokenUtil.get() || null
 
-    imToken = ''
+    get imToken() {
+        return this.userImToken
+    }
 
     // chatId: string = null
     chats: SocialuniChatRO[] = []
@@ -33,16 +37,36 @@ export default class SocialChatModule extends Pinia {
     chatsUnreadNumTotal = 0
 
     async initSocialuniChatModule() {
-        //获取imToken
-        const config: InitConfig = {
-            userID: socialUserModule.userId,
-            token: socialUserModule.imToken,
-            url: SocialuniConfig.openImJsImUrl,
-            platformID: OpenImPlatformType.web
+        console.log(44444)
+        try {
+            const res = await this.openIm.getLoginStatus()
+            console.log(res)
+        } catch (e) {
+            //获取imToken
+            const config: InitConfig = {
+                userID: socialUserModule.userId,
+                token: socialChatModule.imToken,
+                url: SocialuniConfig.openImJsImUrl,
+                platformID: OpenImPlatformType.web
+            }
+            console.log(config)
+            await this.openIm.login(config)
+            this.refreshMessages()
         }
-        console.log(config)
-        await this.openIm.login(config)
-        this.refreshMessages()
+    }
+
+    setImToken(token: string) {
+        this.userImToken = token
+        SocialuniImUserTokenUtil.set(token)
+    }
+
+    removeImToken() {
+        this.setImToken(null)
+    }
+
+
+    loginOpenImg() {
+
     }
 
     refreshMessages() {
@@ -125,7 +149,11 @@ export default class SocialChatModule extends Pinia {
     chat: SocialuniChatRO = null
 
     //为避免异步加载性能问题，进入用户详情页面就设置chat信息
-    setCurChatByUserId(userId: string) {
+    async setCurChatByUserId(userId: string) {
+        console.log(1111)
+        console.log(userId)
+        console.log(666)
+        await this.initSocialuniChatModule()
         this.openIm.getOneConversation({
             sessionType: OpenImSessionType.Single,
             sourceID: userId
@@ -144,8 +172,8 @@ export default class SocialChatModule extends Pinia {
         console.log(this.chat)
     }
 
-    toMessagePageFromUserDetail() {
-        PageUtil.toMessagePage()
+    toMessagePageFromUserDetail(userId: string) {
+        PageUtil.toMessagePage(userId)
         socialChatModule.scrollToMessagePageBottom()
     }
 
@@ -167,10 +195,10 @@ export default class SocialChatModule extends Pinia {
     //列表中进入，需要调用后台，更新时间。
 
     //从列表中进入
-    setChatIdToMessagePage(chatId: string) {
-        this.setChatId(chatId)
+    setChatIdToMessagePage(userId: string) {
+        // this.setChatId(chatId)
         // this.readChatAction(this.chat)
-        PageUtil.toMessagePage()
+        PageUtil.toMessagePage(userId)
         this.scrollToMessagePageBottom()
     }
 

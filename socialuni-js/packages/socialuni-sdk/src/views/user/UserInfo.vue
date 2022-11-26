@@ -377,6 +377,7 @@ import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
+import UserService from "../../service/UserService";
 
 @Options({
   components: {
@@ -637,7 +638,7 @@ export default class UserInfo extends Vue {
   }
 
   loginOut() {
-    socialUserModule.loginOut()
+    UserService.loginOut()
   }
 
   async uploadUserAvatarImg() {

@@ -15,11 +15,6 @@ import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineU
 export default class SocialUserModule extends Pinia {
     private userInfo: SocialuniMineUserRO = SocialuniUserStorageUtil.get() || null
     private userToken: string = SocialuniTokenUtil.get() || null
-    private userImToken: string = SocialuniImUserTokenUtil.get() || null
-
-    get imToken() {
-        return this.userImToken
-    }
 
     //查询用户信息
     getUserInfo(user: SocialuniMineUserRO) {
@@ -61,13 +56,6 @@ export default class SocialUserModule extends Pinia {
         return this.userToken
     }
 
-    /*get imToken() {
-        if (this.user) {
-            return this.user.imToken
-        }
-        return null
-    }*/
-
     setUserAndToken(loginRO: SocialLoginRO<SocialuniMineUserRO>) {
         if (loginRO) {
             this.setUser(loginRO.user)
@@ -76,15 +64,6 @@ export default class SocialUserModule extends Pinia {
             this.setToken(null)
             this.setUser(null)
         }
-    }
-
-    setImToken(token: string) {
-        this.userImToken = token
-        SocialuniImUserTokenUtil.set(token)
-    }
-
-    private removeImToken() {
-        this.setImToken(null)
     }
 
     private setToken(token: string) {
@@ -102,7 +81,6 @@ export default class SocialUserModule extends Pinia {
 
     removeUserAndToken() {
         this.setUserAndToken(null)
-        this.removeImToken()
     }
 
     setUser(user: SocialuniMineUserRO) {
@@ -119,14 +97,6 @@ export default class SocialUserModule extends Pinia {
             return this.mineUser.id
         }
         return null
-    }
-
-    loginOut() {
-        return AlertUtil.confirm('是否退出登录').then(() => {
-            UserService.userLogout()
-            socialUserModule.removeUserAndToken()
-            ToastUtil.toast('用户退出')
-        })
     }
 
     destroyAccount() {

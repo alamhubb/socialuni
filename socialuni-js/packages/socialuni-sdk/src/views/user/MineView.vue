@@ -103,6 +103,7 @@ import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import UserService from "../../service/UserService";
 
 @Options({
   components: {
@@ -152,7 +153,7 @@ export default class MineView extends Vue {
 
   logout() {
     this.hideMoreList()
-    socialUserModule.loginOut().catch(() => {
+    UserService.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }

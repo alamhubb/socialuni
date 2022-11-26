@@ -1,14 +1,14 @@
 <template>
   <view class="bg-default h100p">
-    <!--<q-bar>
-        <view>
-            <q-icon icon="mdi-volume-high"></q-icon>
-            系统通知
-        </view>
-        <view>
-            <q-icon icon="arrow-right"></q-icon>
-        </view>
-    </q-bar>-->
+    <q-navbar>
+      <view>
+        <q-icon icon="arrow-left"></q-icon>
+      </view>
+      <view @click="toAddFriend">
+        <q-icon icon="mdi-volume-high"></q-icon>
+        系统通知
+      </view>
+    </q-navbar>
     <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按聊天框可解除匹配
@@ -17,13 +17,26 @@
         <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
       </view>
     </view>
+
+    <!--    <div>
+          <div v-for="item in users">
+            <div class="flex-row px mb bd-radius bg-white">
+              <div>
+                <img class="size50" :src="item.avatar">
+              </div>
+              <div>
+                {{ item.nickname }}
+              </div>
+            </div>
+          </div>
+        </div>-->
     <!--    <view v-show="false">
           {{ chatsUnreadNumTotal }}
         </view>-->
     <view class="cu-list menu-avatar pb-50px">
       <view v-for="chat in showChats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
-        <image class="cu-avatar radius lg" :src="chat.avatar" />
+        <image class="cu-avatar radius lg" :src="chat.avatar"/>
         <view class="content h45px col-between">
           <view>
             <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
@@ -71,19 +84,26 @@
 <script lang="ts">
 import ChatType from 'socialuni-constant/constant/ChatType'
 import CommonStatus from 'socialuni-constant/constant/CommonStatus'
-import { Options, Vue } from 'vue-property-decorator'
+import {Options, Vue} from 'vue-property-decorator'
 import Constants from 'socialuni-constant/constant/Constant'
 import ChatAPI from 'socialuni-api/src/api/ChatAPI'
-import { socialChatModule } from "socialuni-sdk/src/store/store"
+import {socialChatModule, socialUserModule} from "socialuni-sdk/src/store/store"
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onLoad} from "@dcloudio/uni-app";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserContentRO";
+import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
+import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 
-@Options({})
+@Options({
+  components: {QIcon, QNavbar}
+})
 export default class ChatView extends Vue {
+  users: SocialUserContentRO[] = []
 
   get chats() {
     return socialChatModule.chats
@@ -106,11 +126,16 @@ export default class ChatView extends Vue {
     return DateUtil.formatTime(dateStr)
   }
 
-  created(){
+  created() {
     onLoad((params) => {
       console.log(123)
       UniUtil.showShareMenu()
     })
+    /*if (socialUserModule.mineUser) {
+      SocialuniUserAPI.queryRecentlyUsersAPI().then(res => {
+        this.users = res.data
+      })
+    }*/
   }
 
   onPullDownRefresh() {
@@ -224,8 +249,13 @@ export default class ChatView extends Vue {
   }*/
 
   toMessagePage(chat: SocialuniChatRO) {
+    console.log(chat)
     //需要先清除，再跳转页面
-    socialChatModule.setChatIdToMessagePage(chat.id)
+    socialChatModule.setChatIdToMessagePage(chat.receiveUserId)
+  }
+
+  toAddFriend() {
+    PageUtil.toChatFriend();
   }
 }
 </script>

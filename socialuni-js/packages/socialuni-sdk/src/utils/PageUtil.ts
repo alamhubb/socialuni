@@ -65,9 +65,11 @@ export default class PageUtil {
             }
         }
     }
+
     static toLoveValuePage() {
         RouterUtil.navigateTo(PagePath.loveValue)
     }
+
     static toChatFriend() {
         RouterUtil.navigateTo('/pages/chat/friend')
     }
@@ -109,8 +111,8 @@ export default class PageUtil {
         // RouterUtil.navigateTo(PagePath.userMatch)
     }
 
-    static toMessagePage() {
-        RouterUtil.navigateTo(PagePath.message)
+    static toMessagePage(userId: string) {
+        RouterUtil.navigateTo(PagePath.message, {userId})
     }
 
     static toFaceValuePage() {

@@ -1,22 +1,15 @@
-import WebsocketUtil from 'socialuni-sdk/src/utils/WebsocketUtil'
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import {socialChatModule, socialUserModule} from "../store/store";
-import SocialuniMineUserRO from "../model/user/SocialuniMineUserRO";
-import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI";
+import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI"
+import AlertUtil from "../utils/AlertUtil";
+import ToastUtil from "../utils/ToastUtil";
+import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
 
 export default class UserService {
-    //清空用户信息的组合操作
-    static userLogout() {
-        socialUserModule.removeUserAndToken()
-        // socialNotifyModule.clearNotifies()
-        WebsocketUtil.websocketClose()
-    }
-
     static async getAppLunchDataByHasUser() {
-        if (socialUserModule.token && !socialUserModule.imToken) {
+        if (socialUserModule.token && !socialChatModule.imToken) {
             const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
-            socialUserModule.setImToken(imRes.data)
+            socialChatModule.setImToken(imRes.data)
         }
         socialChatModule.initSocialuniChatModule()
         /*socialNotifyModule.queryNotifiesAction()
@@ -37,5 +30,20 @@ export default class UserService {
         // socialChatModule.getChatsAction()
         // appModule.getImgPathAction()
         return loginRO.user
+    }
+
+    static loginOut() {
+        return AlertUtil.confirm('是否退出登录').then(() => {
+            UserService.clearUserInfo()
+            ToastUtil.toast('用户退出')
+        })
+    }
+
+    //清空用户信息的组合操作
+    static clearUserInfo() {
+        socialUserModule.removeUserAndToken()
+        socialChatModule.removeImToken()
+        // socialNotifyModule.clearNotifies()
+        // WebsocketUtil.websocketClose()
     }
 }

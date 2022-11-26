@@ -215,6 +215,8 @@ export default class MessageView extends Vue {
   }
 
   init(params: { userId: string }) {
+    console.log(777777)
+    console.log(params.userId)
     if (params.userId) {
       socialChatModule.setCurChatByUserId(params.userId)
     }

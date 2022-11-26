@@ -1,3 +1,4 @@
+/*
 import {Pinia, Store} from "pinia-class-component"
 import PageUtil from "socialuni-sdk/src/utils/PageUtil"
 import ChatAPI from "socialuni-api/src/api/ChatAPI"
@@ -64,7 +65,7 @@ export default class SocialMessageModule extends Pinia {
     }
 
     //仅负责，排序展示，在chatVue界面实现了
-    /*get chats (): SocialuniChatRO[] {
+    /!*get chats (): SocialuniChatRO[] {
       //a和b比较，返回结果1，则倒序，后者在前面
       return this.queryChats.sort((chat, chatAfter) => {
         //如果置顶优先级比较高，则排前面
@@ -86,7 +87,7 @@ export default class SocialMessageModule extends Pinia {
           }
         }
       })
-    }*/
+    }*!/
 
 
     //因为存在排序，所以index并不是更新了update就是第一个，不总是为0，并不总是第一个,
@@ -112,12 +113,12 @@ export default class SocialMessageModule extends Pinia {
     //列表中进入，需要调用后台，更新时间。
 
     //从列表中进入
-    setChatIdToMessagePage(chatId: string) {
+ /!*   setChatIdToMessagePage(userId: string) {
         this.setChatId(chatId)
         // this.readChatAction(this.chat)
         PageUtil.toMessagePage()
         this.scrollToMessagePageBottom()
-    }
+    }*!/
 
     setChatId(chatId: string) {
         this.chatId = chatId
@@ -136,7 +137,7 @@ export default class SocialMessageModule extends Pinia {
             //如果本地没有则更新时间为最新，同步后台逻辑
             chat.updateTime = new Date().getTime()
             this.chats.unshift(chat)
-            /*//修改当前chat的id
+            /!*!//修改当前chat的id
             this.setChatId(chat.id)
             //后台创建真实chat
             ChatAPI.getChatAPI(user).then(res => {
@@ -147,7 +148,7 @@ export default class SocialMessageModule extends Pinia {
               this.setChatId(resultChat.id)
               //替换当前chat
               this.replaceChat(resultChat)
-            })*/
+            })*!/
         }
         this.setChatIdToMessagePage(chat.id)
     }
@@ -181,7 +182,7 @@ export default class SocialMessageModule extends Pinia {
     }
 
 
-    /*get chatsUnreadNumTotal () {
+    /!*get chatsUnreadNumTotal () {
       // 应该在这里计算是否显示红点
       constant chatUnreadNum = this.queryChats.reduce((total, chat) => {
         total = total + chat.unreadNum
@@ -198,14 +199,14 @@ export default class SocialMessageModule extends Pinia {
         })
       }
       return chatUnreadNum
-    }*/
+    }*!/
 
     // 四个地方使用，初始查询，推送消息，阅读清空消息，删除消息
     //为什么不使用get呢,get不行微信小程序有兼容问题
 
     computedChatsUnreadNumTotalAction() {
         // 应该在这里计算是否显示红点
-        /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
+        /!*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total
         }, 0)
@@ -220,7 +221,7 @@ export default class SocialMessageModule extends Pinia {
           uni.hideTabBarRedDot({
             index: 2
           })
-        }*/
+        }*!/
     }
 
 
@@ -262,12 +263,12 @@ export default class SocialMessageModule extends Pinia {
                 this.chats.unshift(newChat)
             }
             //不需要吧，后台chat应该计算好当前未读数量
-            /*// 如果已登录
+            /!*!// 如果已登录
             if (UserStore.hasUser() && chat.type !== ChatType.system_group) {
               chat.unreadNum = newChat.unreadNum
             } else {
               chat.unreadNum = chat.unreadNum + 1
-            }*/
+            }*!/
 
             // 不是正在这个chat聊天，但是chats列表中包含这个chat
             // 如果列表中已经包含次chat
@@ -334,9 +335,9 @@ export default class SocialMessageModule extends Pinia {
     //获取chats
 
     getChatsAction() {
-        /*return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
+        /!*return ChatAPI.getChatsAPI().then((res: ResultRO<ChatVO[]>) => {
           this.setChats(res.data)
-        })*/
+        })*!/
     }
 
     setChats(chats: SocialuniChatRO[]) {
@@ -357,13 +358,14 @@ export default class SocialMessageModule extends Pinia {
     }
 }
 
-/*
+/!*
   pushMessagesAction (msgs: MessageVO[]) {
 
-  }*/
-/*
+  }*!/
+/!*
 
   pushChatAction (newChat: SocialuniChatRO) {
     this.chats.unshift(newChat)
-  }*/
+  }*!/
 
+*/

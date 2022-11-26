@@ -10,6 +10,7 @@ import {Options, Vue} from 'vue-property-decorator'
 import MessageView from 'socialuni-sdk/src/views/chat/MessageView.vue'
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import {onLoad} from '@dcloudio/uni-app';
+import {onMounted} from "vue";
 
 @Options({components: {MessageView}})
 export default class MessagePage extends Vue {
@@ -19,16 +20,15 @@ export default class MessagePage extends Vue {
 
   created() {
     onLoad((params) => {
-      console.log(3333333)
-      //979c23c05df54beb9c0062170882f452
-      console.log(params)
-      this.$refs.message.init(params)
+      onMounted(()=>{
+        console.log(3333333)
+        //979c23c05df54beb9c0062170882f452
+        console.log(params)
+        console.log(this.$refs)
+        console.log(this.$refs.message)
+        this.$refs.message.init({userId: params.userId})
+      })
     })
-  }
-
-  onLoad(params) {
-    console.log(3333333)
-    console.log(params)
   }
 }
 </script>

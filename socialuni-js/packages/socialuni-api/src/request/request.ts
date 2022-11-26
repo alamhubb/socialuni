@@ -73,13 +73,13 @@ request.interceptor.response(
                     case ErrorConst.not_logged:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.userLogout()
+                        UserService.clearUserInfo()
                         MsgUtil.unLoginMessage()
                         break
                     case ErrorConst.banned:
                         // 理论上不需要，因为token不会失效，也不会错误
                         // 已知可能，切换环境导致token不同
-                        UserService.userLogout()
+                        UserService.clearUserInfo()
                         AlertUtil.hint(errorMsg)
                         break
                     case ErrorConst.custom:
