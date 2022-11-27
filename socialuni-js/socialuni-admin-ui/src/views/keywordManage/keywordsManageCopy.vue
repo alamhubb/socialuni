@@ -1,5 +1,5 @@
 <template>
-  <div class="h100r flex-col">
+  <div class="h100p flex-col">
     <div class="flex-none row-all-center pa">
       关键词：
       <div class="w200">

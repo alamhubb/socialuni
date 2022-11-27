@@ -56,14 +56,33 @@ export default class SocialChatModule extends Pinia {
             await this.openIm.login(config)
             this.setOpenImLoginSuccess()
             this.refreshMessages()
-
-
+            this.initOpenImListeners()
         }
     }
 
     initOpenImListeners() {
         this.openIm.on(CbEvents.ONNEWCONVERSATION, (data) => {
+            console.log(99999999)
             console.log(data)
+        })
+        this.openIm.on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
+            console.log(99999999)
+            console.log(data)
+        })
+        this.openIm.on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
+            console.log(99999999)
+            console.log(data)
+        })
+        this.openIm.on(CbEvents.ONRECVNEWMESSAGE, (res) => {
+            console.log(99999999)
+            console.log(res.data)
+            console.log(JsonUtil.toParse(res.data))
+            this.refreshMessages()
+
+        })
+        this.openIm.on(CbEvents.ONRECVNEWMESSAGES, (data) => {
+            console.log(data)
+            console.log(99999999)
         })
     }
 
@@ -93,6 +112,10 @@ export default class SocialChatModule extends Pinia {
             console.log(11111)
             const chats: OpenImChatRO[] = JsonUtil.toParse(data)
             this.chats = chats.map(item => new SocialuniChatRO(item))
+            if (this.chat) {
+                const chat = this.chats.find(item => item.id === this.chat.id)
+                this.setChat(chat)
+            }
             console.log(chats)
             console.log(this.chats)
         })
@@ -172,19 +195,18 @@ export default class SocialChatModule extends Pinia {
         }).then(res => {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
-            this.setChat(openImChatRO)
+            this.setChat(new SocialuniChatRO(openImChatRO))
         })
     }
 
-    setChat(openImChat: OpenImChatRO) {
+    setChat(openImChat: SocialuniChatRO) {
         console.log(this.chat)
         console.log(555555)
-        this.chat = new SocialuniChatRO(openImChat)
-
+        this.chat = openImChat
         const options = {
             conversationID: this.chat.id,
             startClientMsgID: "",
-            count: 10,
+            count: 100,
             groupID: "",
             userID: "",
         }
@@ -192,6 +214,7 @@ export default class SocialChatModule extends Pinia {
         socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
             const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
             this.chat.messages = msgs.map(item => new MessageVO(null, null, item))
+            socialChatModule.scrollToMessagePageBottom()
             console.log(this.messages.length)
         })
         console.log(666666)
@@ -338,7 +361,7 @@ export default class SocialChatModule extends Pinia {
 
     scrollToMessagePageBottom() {
         CommonUtil.delayTime(100).then(() => {
-            this.scrollTop = this.messages.length * 500
+            this.scrollTop = this.messages.length * 5000
             // this.scrollTop = -1000
         })
         // ScrollUtil.scrollTo(this.messages.length * 500)
@@ -419,7 +442,7 @@ export default class SocialChatModule extends Pinia {
         // return request.post <T>('message/sendMsg', msgAdd)
         socialChatModule.openIm.sendMessage(params).then((res) => {
             console.log(res.data)
-            console.log( JsonUtil.toParse(res.data))
+            console.log(JsonUtil.toParse(res.data))
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
             this.messages.splice(index, 1, new MessageVO(null, null, res.data))

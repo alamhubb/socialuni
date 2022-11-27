@@ -1,24 +1,24 @@
 <template>
-  <view v-if="chat" class="pb-100 h100r bg-default">
+  <view v-if="chat" class="pb-100 h100p bg-default">
 
     <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
       </view>
       <view class="flex-none mr-10px">
-        <q-button @click="consoleMessage">123</q-button>
+        <q-button @click="consoleMessage">{{scrollTop}}</q-button>
         <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
       </view>
     </view>
 
-    <scroll-view scroll-y="true" class="cu-chat h100r"
+    <scroll-view scroll-y="true" class="cu-chat h100p"
                  @scrolltoupper="upper"
                  :upper-threshold="upperThreshold"
                  :show-scrollbar="true"
                  :scroll-top="scrollTop"
     >
       <!--    <view class="cu-chat">-->
-      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100r col-row-center">
+      <view v-if="chat.status === waitOpenStatus||chat.status === closeStatus" class="w100p h100p col-row-center">
         <view class="uni-tip  mt-80px">
           <view class="uni-tip-content text-bold">
             <template v-if="chat.needPayOpen">

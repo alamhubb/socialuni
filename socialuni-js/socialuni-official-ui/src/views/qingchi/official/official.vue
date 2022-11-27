@@ -1,5 +1,5 @@
 <template>
-  <v-container class="h100r">
+  <v-container class="h100p">
     <h1 align="center">用户意见征求</h1>
     <div class="markdown-body mt-2 col-row-center">
       <div class="font-weight-bold text-h6 row-center">
