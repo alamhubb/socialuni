@@ -8,9 +8,11 @@
         <template v-slot:list>
 
           <uni-list>
-            <uni-list-item title="通讯录"></uni-list-item>
-            <uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/chat/friend" @click="onClick($event,1)" ></uni-list-item>
-            <uni-list-item title="reLaunch 方式跳转页面" link="reLaunch" to="/pages/vue/index/index" @click="onClick($event,1)" ></uni-list-item>
+            <uni-list-item title="聊天功能:"></uni-list-item>
+            <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"  ></uni-list-item>
+            <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"  ></uni-list-item>
+            <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"  ></uni-list-item>
+            <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"  ></uni-list-item>
           </uni-list>
 
         </template>
@@ -20,7 +22,7 @@
         <view class="w65vw flex-col py-xl mt-xl h100r">
           <div class="flex-row">
             <view class="row-center mt-xl font-bold text-lg w100r">
-              清池 app1321
+              清池 app
             </view>
           </div>
           <!--<q-row-item>

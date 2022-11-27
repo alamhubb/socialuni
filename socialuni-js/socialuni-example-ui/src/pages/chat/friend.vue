@@ -2,62 +2,45 @@
   <view class="bg-default h100p">
 <!--    <input class="uni-input" focus placeholder="自动获得焦点" @confirm="addFriend"/>-->
 
-
-    <view class="row-between-center py-xs pr-xs">
-      <view class="flex-row flex-1" >
-        <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
-          <text class="text-sm text-gray">解除好友</text>
-        </view>
-        <view v-else class="px-lg line-height-1" @click.stop="addFriend">
-          <text class="text-sm text-gray">添加好友</text>
-        </view>
-        <view class="px-lg line-height-1" @click.stop="addBlack">
-          <text class="text-sm text-gray">添加黑名单</text>
-        </view>
-      </view>
-    </view>
-
-
-
-    <uni-list>
-      <uni-list-item title="我发出的好友请求列表::::"></uni-list-item>
-      <uni-list-chat v-for="(sendFriendApplication,index) in sendFriendApplicationList" :title="sendFriendApplication.fromNickname"   :avatar="sendFriendApplication.fromFaceURL" :note="sendFriendApplication.reqMsg" :time="sendFriendApplication.createTime" badge-positon="left" badge-text="dot">
+    <uni-list v-if="type === 'sendFriendApplication'">
+      <uni-title type="h1" align="center" title="我发出的好友请求列表"></uni-title>
+      <uni-list-chat v-for="(sendFriendApplication,index) in sendFriendApplicationList" :title="sendFriendApplication.fromNickname"   :avatar="sendFriendApplication.fromFaceURL" :note="sendFriendApplication.reqMsg">
         <view class="chat-custom-right">
           <text class="chat-custom-text">{{ formatTime(sendFriendApplication.createTime) }}</text>
 
           <!-- 需要使用 uni-icons 请自行引入 -->
           <!--          <uni-icons type="star-filled" color="#999" size="18"></uni-icons>-->
         </view>
-        <view class="chat-custom-right">
-          <uni-tag type="primary" text="同意"></uni-tag>
-          <uni-tag type="success" text="拒绝"></uni-tag>
+        <view class="chat-custom-right" >
+          {{ friendRuestResult(sendFriendApplication.handleResult) }}
         </view>
       </uni-list-chat>
     </uni-list>
 
 
 
-    <uni-list>
-      <uni-list-item title="好友请求列表::::"></uni-list-item>
+    <uni-list v-if="type === 'recvFriendApplication'">
+      <uni-title type="h1" align="center" title="好友请求列表"></uni-title>
       <uni-list-chat v-for="(recvFriendApplication,index) in recvFriendApplicationList" :title="recvFriendApplication.fromNickname"   :avatar="recvFriendApplication.fromFaceURL" :note="recvFriendApplication.reqMsg">
         <view class="chat-custom-right">
           <text class="chat-custom-text">{{ formatTime(recvFriendApplication.createTime) }}</text>
-          <div class="font-xs" > 当前状态为: {{ friendRuestResult(recvFriendApplication.handleResult) }}</div>
         </view>
-        <view class="chat-custom-right">
-          <text class="chat-custom-text" @click.stop="acceptFriendApplication(recvFriendApplication)" >同意</text>
-          <text class="chat-custom-text" @click.stop="refuseFriendApplication(recvFriendApplication)">拒绝</text>
+        <view class="chat-custom-right" v-if="recvFriendApplication.handleResult === 0">
+          <uni-tag type="primary" text="同意" @click="acceptFriendApplication(recvFriendApplication)"></uni-tag>
+          <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(recvFriendApplication)"></uni-tag>
+        </view>
+        <view class="chat-custom-right" v-else>
+          {{ friendRuestResult(recvFriendApplication.handleResult) }}
         </view>
       </uni-list-chat>
     </uni-list>
 
-    <uni-list>
-      <uni-list-item title="黑名单列表::::"></uni-list-item>
+    <uni-list v-if="type === 'black'">
+      <uni-title type="h1" align="center" title="黑名单列表"></uni-title>
       <uni-list-chat v-for="(black,index) in blackList" :title="black.nickname"   :avatar="black.fromFaceURL" :note="black.reqMsg">
-        <view class="chat-custom-right">
+<!--        <view class="chat-custom-right">
           <text class="chat-custom-text">{{  formatTime(black.createTime)   }}</text>
-          <div class="font-xs" > 当前状态为: {{ friendRuestResult(black.handleResult) }}</div>
-        </view>
+        </view>-->
         <view class="chat-custom-right">
           <text class="chat-custom-text" @click.stop="removeBlack(black)" >从黑名单移除</text>
         </view>
@@ -65,17 +48,24 @@
     </uni-list>
 
 
-    <uni-list>
-      <uni-list-item title="已添加的好友列表::::"></uni-list-item>
-      <uni-list-chat v-for="(friend,index) in friendList" :title="friend.friendInfo?.nickname || friend.blackInfo?.nickname"   :avatar="friend.fromFaceURL" :note="friend.reqMsg">
-        <view class="chat-custom-right">
-          <text class="chat-custom-text">{{ formatTime(friend.friendInfo?.createTime)  }}</text>
-          <div class="font-xs" > 当前状态为: {{ friendRuestResult(friend.handleResult) }}</div>
-        </view>
-        <view class="chat-custom-right">
-          <text class="chat-custom-text" @click.stop="removeBlack(friend)" >从黑名单移除</text>
-        </view>
-      </uni-list-chat>
+    <uni-list v-if="type === 'friend'">
+      <uni-title type="h1" align="center" title="已添加的好友列表"></uni-title>
+      <view v-for="(friend,index) in friendList">
+        <uni-list-chat  v-if="friend.friendInfo && !friend.blackInfo" :title="friend.friendInfo.nickname"   :avatar="friend.friendInfo.fromFaceURL" >
+          <view class="chat-custom-right">
+            <text class="chat-custom-text">{{ formatTime(friend.friendInfo.createTime)  }}</text>
+          </view>
+          <view class="chat-custom-right">
+            <uni-tag type="warning" text="添加到黑名单" @click="addBlack(friend.friendInfo)"></uni-tag>
+            <uni-tag type="error" text="删除好友" @click="deleteFriend(friend.friendInfo)"></uni-tag>
+          </view>
+        </uni-list-chat>
+        <uni-list-chat  v-if="friend.blackInfo" :title="friend.blackInfo.nickname"   :avatar="friend.blackInfo.fromFaceURL" >
+          <view class="chat-custom-right">
+            <text class="chat-custom-text" @click.stop="removeBlack(friend.blackInfo)" >从黑名单移除</text>
+          </view>
+        </uni-list-chat>
+      </view>
     </uni-list>
 
 
@@ -104,9 +94,9 @@ export default class ChatFriendPage extends Vue {
   blackList: Object[] = []
   friendList: Object[] = []
   hasFriend = false;
-
-  formatTime(dateStr) {
-    return DateUtil.parseTime(dateStr*1000)
+  type = "";
+  formatTime(dateStr : number) {
+    return DateUtil.parseTime(dateStr * 1000)
   }
   // addFriend(e) {
   //   console.error('=================',e);
@@ -114,14 +104,29 @@ export default class ChatFriendPage extends Vue {
   // }
   created() {
     onLoad((params) => {
-      this.getSendFriendApplicationList();
-      this.getRecvFriendApplicationList();
-      this.getBlacklist();
-      this.getFriendList();
+      this.type = params.type;
+      this.refresh();
     })
-
     // 检查是否为好友
-
+  }
+  refresh(){
+    this.getData(this.type);
+  }
+  getData(type : string){
+    switch (type){
+      case "sendFriendApplication":
+          this.getSendFriendApplicationList();
+          break;
+      case "recvFriendApplication":
+        this.getRecvFriendApplicationList();
+        break;
+      case "black":
+        this.getBlacklist();
+        break;
+      case "friend":
+        this.getFriendList();
+        break;
+    }
   }
   /**
    * 获取好友列表。
@@ -154,9 +159,10 @@ export default class ChatFriendPage extends Vue {
   /**
    * 从好友列表中删除用户。
    */
-  deleteFriend() {
-    socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
+  deleteFriend(user) {
+    socialChatModule.openIm.deleteFriend(user.userID).then(({data}) => {
       console.log('deleteFriend',data);
+      this.refresh();
       // socialChatModule.checkFriend(this.user);
     }).catch(err => {
     })
@@ -175,9 +181,10 @@ export default class ChatFriendPage extends Vue {
   /**
    * 将用户添加到黑名单。
    */
-  addBlack() {
-    socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
-      socialChatModule.checkFriend(this.user);
+  addBlack(black) {
+    socialChatModule.openIm.addBlack(black.userID).then(({data}) => {
+      console.log('addBlack',data);
+      this.refresh();
     }).catch(err => {
     })
   }
@@ -186,8 +193,7 @@ export default class ChatFriendPage extends Vue {
    */
   removeBlack(black) {
     socialChatModule.openIm.removeBlack(black.userID).then(({data}) => {
-      socialChatModule.checkFriend(this.user);
-      this.getBlacklist();
+      this.refresh();
     }).catch(err => {
     })
   }
@@ -225,7 +231,7 @@ export default class ChatFriendPage extends Vue {
     socialChatModule.openIm.acceptFriendApplication(options).then(({ data })=>{
       console.log('acceptFriendApplication',data);
       // 刷新请求列表
-      this.getRecvFriendApplicationList();
+      this.refresh();
     }).catch(err=>{
     })
   }
@@ -242,7 +248,7 @@ export default class ChatFriendPage extends Vue {
     socialChatModule.openIm.refuseFriendApplication(options).then(({ data })=>{
       console.log('refuseFriendApplication',data);
       // 刷新请求列表
-      this.getRecvFriendApplicationList();
+      this.refresh();
     }).catch(err=>{
     })
   }

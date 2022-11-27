@@ -80,37 +80,7 @@
             </view>
           </view>
         </view>
-        <view class="row-col-center" v-if="isMine">
-          <div class="font-xs">我发出的好友请求列表::::</div>
 
-          <div v-for="(sendFriendApplication,index) in sendFriendApplicationList" >
-            <div class="font-xs">{{sendFriendApplication.fromNickname}}</div>
-          </div>
-        </view>
-        <view class="row-col-center" v-if="isMine">
-          <div class="font-xs">好友请求列表::::</div>
-
-          <div v-for="(recvFriendApplication,index) in recvFriendApplicationList" >
-            <div class="font-xs">{{recvFriendApplication.fromNickname}}</div>
-            <div class="font-xs" @click.stop="acceptFriendApplication(recvFriendApplication)">同意</div>
-            <div class="font-xs" @click.stop="refuseFriendApplication(recvFriendApplication)">拒绝</div>
-            <div class="font-xs" > 当前状态为: {{ friendRuestResult(recvFriendApplication.handleResult) }}</div>
-          </div>
-        </view>
-        <view class="row-col-center" v-if="isMine">
-          <div class="font-xs">黑名单列表::::</div>
-          <div v-for="(black,index) in blackList" >
-            <div class="font-xs">{{black.nickname}}</div>
-            <div class="font-xs" @click.stop="removeBlack(black)">从黑名单移除</div>
-          </div>
-        </view>
-        <view class="row-col-center" v-if="isMine">
-          <div class="font-xs">已添加的好友列表::::</div>
-          <div v-for="(friend,index) in friendList" >
-            <div class="font-xs" v-if="friend.friendInfo"> 没拉黑的好友: {{friend.friendInfo.nickname}}</div>
-            <div class="font-xs" v-if="friend.blackInfo"> 被拉黑的好友: {{friend.blackInfo.nickname}}</div>
-          </div>
-        </view>
 
         <div class="flex-row pl-xs">
           <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">

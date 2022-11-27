@@ -1,6 +1,22 @@
 <template>
   <view class="bg-default">
-    <user-info :user.sync="user"></user-info>
+    <user-info :user.sync="user">
+      <template v-slot:list>
+        <view class="row-between-center py-xs pr-xs" >
+          <view class="flex-row flex-1" :class="{'row-around':isMine}">
+            <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
+              <text class="text-sm text-gray">解除好友</text>
+            </view>
+            <view v-else class="px-lg line-height-1" @click.stop="addFriend">
+              <text class="text-sm text-gray">添加好友</text>
+            </view>
+            <view class="px-lg line-height-1" @click.stop="addBlack">
+              <text class="text-sm text-gray">添加黑名单</text>
+            </view>
+          </view>
+        </view>
+      </template>
+    </user-info>
     <msg-input v-if="showMsgInput">
     </msg-input>
   </view>
