@@ -86,6 +86,7 @@ import {socialChatFriendModule, socialChatModule} from "socialuni-sdk/src/store/
 import {onLoad} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
 
 @Options({components: {}})
 export default class ChatFriendPage extends Vue {
@@ -138,24 +139,6 @@ export default class ChatFriendPage extends Vue {
     }).catch(err=>{
     })
   }
-  /**
-   * 添加好友申请。
-   */
-  addFriend() {
-    // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
-    const options:AddFriendParams = {
-      toUserID: this.user.id,
-      reqMsg: "请求加好友"
-    };
-    socialChatModule.openIm.addFriend(options).then(({ data })=>{
-      console.error('addFriend susueces',data);
-      // 需要同意才会现实的。所以这里再查也是浪费。
-      // this.checkFriend();
-    }).catch(err=>{
-      console.error(err);
-    })
-  }
-
   /**
    * 从好友列表中删除用户。
    */
