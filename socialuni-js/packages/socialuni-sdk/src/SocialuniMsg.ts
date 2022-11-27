@@ -9,6 +9,7 @@ export default class SocialuniMsg {
             groupID: "",
             message: data,
         };
+        console.log(params)
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
         // return request.post <T>('message/sendMsg', msgAdd)
         return socialChatModule.openIm.sendMessage(params)

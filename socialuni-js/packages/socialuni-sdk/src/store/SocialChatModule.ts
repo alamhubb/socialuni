@@ -8,7 +8,7 @@ import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil"
 import JsonUtil from "socialuni-sdk/src/utils/JsonUtil"
 import {socialUserModule} from "socialuni-sdk/src/store/store"
-import {OpenIMSDK} from "open-im-sdk"
+import {CbEvents, OpenIMSDK} from "open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
@@ -56,7 +56,15 @@ export default class SocialChatModule extends Pinia {
             await this.openIm.login(config)
             this.setOpenImLoginSuccess()
             this.refreshMessages()
+
+
         }
+    }
+
+    initOpenImListeners() {
+        this.openIm.on(CbEvents.ONNEWCONVERSATION, (data) => {
+            console.log(data)
+        })
     }
 
     setImToken(token: string) {
@@ -190,6 +198,7 @@ export default class SocialChatModule extends Pinia {
         console.log(this.chat)
         console.log(this.chat.messages)
         console.log(this.chat.messages.length)
+
     }
 
     toMessagePageFromUserDetail(userId: string) {
@@ -385,7 +394,9 @@ export default class SocialChatModule extends Pinia {
     //在聊天界面的时候，自己发送msg 本地添加msg
 
     async pushMessageAction(msg: MessageVO) {
+        console.log(this.messages.length)
         this.messages.push(msg)
+        console.log(this.messages.length)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
         this.scrollToMessagePageBottom()
@@ -395,14 +406,29 @@ export default class SocialChatModule extends Pinia {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
+        console.log('fasonle')
 
-        SocialuniMsg.sendMsgAPI<MessageVO>(this.chat, msg.content).then((res) => {
+        const {data} = await socialChatModule.openIm.createTextMessage(msg.content);
+        const params = {
+            recvID: this.chat.receiveUserId,
+            groupID: "",
+            message: data,
+        };
+        console.log(params)
+        // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
+        // return request.post <T>('message/sendMsg', msgAdd)
+        socialChatModule.openIm.sendMessage(params).then((res) => {
+            console.log(res.data)
+            console.log( JsonUtil.toParse(res.data))
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
-            this.messages.splice(index, 1, res.data)
-        }).catch(() => {
+            this.messages.splice(index, 1, new MessageVO(null, null, res.data))
+        }).catch((e) => {
+            console.log(e)
             // 这里应该变为发送失败
             this.messages.splice(index, 1)
+        }).finally(() => {
+            console.log(666)
         })
         // socialChatModule.refreshMessages()
 
