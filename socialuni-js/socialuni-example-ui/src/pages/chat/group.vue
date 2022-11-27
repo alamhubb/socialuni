@@ -25,6 +25,7 @@ import {socialChatFriendModule, socialChatModule} from "socialuni-sdk/src/store/
 import {onLoad} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import {CreateGroupParams, GroupInitInfo, Member} from "open-im-sdk";
 
 @Options({components: {}})
 export default class ChatGroupPage extends Vue {
@@ -58,7 +59,7 @@ export default class ChatGroupPage extends Vue {
       faceURL: "",
       ex: ""
     }
-    const memberList:member[] = [
+    const memberList:Member[] = [
       {
         userID:"",
         roleLevel:1
