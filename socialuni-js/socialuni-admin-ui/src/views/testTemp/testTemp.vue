@@ -1,5 +1,5 @@
 <template>
-  <div class="w100r h100r flex-col">
+  <div class="w100r h100p flex-col">
     <div class="w1000">
       <el-input v-model="content" type="textarea" rows="6" />
     </div>

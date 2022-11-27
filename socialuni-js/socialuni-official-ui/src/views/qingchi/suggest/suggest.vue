@@ -1,5 +1,5 @@
 <template>
-    <v-container class="h100r">
+    <v-container class="h100p">
         <div class="markdown-body">
             <q-markdown :text="markdown"></q-markdown>
         </div>

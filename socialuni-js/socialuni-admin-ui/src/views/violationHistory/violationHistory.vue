@@ -21,7 +21,7 @@
     </el-table>
   </div>
   <!--<el-container fluid class="h100vh">
-    <div class="h100r flex-col">
+    <div class="h100p flex-col">
       <div class="flex-none">
         <el-row>
           <el-col cols="2">图片</el-col>

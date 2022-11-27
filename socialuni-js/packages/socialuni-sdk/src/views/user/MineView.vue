@@ -7,7 +7,7 @@
       <user-info :user="mineUser"></user-info>
 
       <q-popup v-model="showMoreList" bottom>
-        <view class="w65vw flex-col py-xl mt-xl h100r">
+        <view class="w65vw flex-col py-xl mt-xl h100p">
           <div class="flex-row">
             <view class="row-center mt-xl font-bold text-lg w100r">
               清池 app

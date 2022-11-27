@@ -1,5 +1,5 @@
 <template>
-  <div class="h100r flex-col">
+  <div class="h100p flex-col">
     <div class="flex-none row-center">
       <el-button class="w80r h100" type="primary" @click="reportPassList">审核全部</el-button>
     </div>

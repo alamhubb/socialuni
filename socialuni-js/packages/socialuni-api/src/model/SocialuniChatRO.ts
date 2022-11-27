@@ -3,6 +3,8 @@ import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
 import MessageVO from "./message/MessageVO";
 import {OpenImChatRO} from "./openIm/OpenImChatRO";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
+import SocialuniUserAPI from "../api/socialuni/SocialuniUserAPI";
+import SocialuniUserRO from "./user/SocialuniUserRO";
 
 export default class SocialuniChatRO {
     public id: string = null
@@ -24,11 +26,14 @@ export default class SocialuniChatRO {
 
     constructor(openImChat?: OpenImChatRO) {
         if (openImChat) {
+            SocialuniUserAPI.queryUserDetailAPI(openImChat.userID).then(res=>{
+                const userRO: SocialuniUserRO = res.data
+                this.nickname = userRO.nickname
+                this.avatar = userRO.avatar
+            })
             this.id = openImChat.conversationID
-            this.nickname = openImChat.showName
             this.type = openImChat.conversationType
             // this.messages = chat.messages
-            this.avatar = openImChat.faceURL
             // this.topLevel = chat.topLevel
             this.topFlag = openImChat.isPinned
             this.unreadNum = openImChat.unreadCount
