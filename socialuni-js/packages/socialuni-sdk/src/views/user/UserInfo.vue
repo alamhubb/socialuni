@@ -67,20 +67,6 @@
           </view>
         </view>
 
-        <view class="row-between-center py-xs pr-xs">
-          <view class="flex-row flex-1" :class="{'row-around':isMine}">
-            <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
-              <text class="text-sm text-gray">解除好友</text>
-            </view>
-            <view v-else class="px-lg line-height-1" @click.stop="addFriend">
-              <text class="text-sm text-gray">添加好友</text>
-            </view>
-            <view class="px-lg line-height-1" @click.stop="addBlack">
-              <text class="text-sm text-gray">添加黑名单</text>
-            </view>
-          </view>
-        </view>
-
 
         <div class="flex-row pl-xs">
           <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
@@ -390,26 +376,12 @@ export default class UserInfo extends Vue {
   recvFriendApplicationList: Object[] = []
   blackList: Object[] = []
   friendList: Object[] = []
-  hasFriend = false;
   showUserContactBtnDisabled = false
 
   get followStatus() {
     return FollowStatus.getFollowStatus(this.user)
   }
 
-  created() {
-    // socialChatModule.openIm.getFirends(this.user.id)
-    // 检查是否为好友
-    console.log("===================== userId", this.user.id);
-    if (!this.user.isMine){
-      this.checkFriend();
-    }else{
-      this.getSendFriendApplicationList();
-      this.getRecvFriendApplicationList();
-      this.getBlacklist();
-      this.getFriendList();
-    }
-  }
 
   toMessagePage() {
     socialChatModule.toMessagePageFromUserDetail()
@@ -702,162 +674,5 @@ export default class UserInfo extends Vue {
       })
     })
   }*/
-  checkFriend(){
-    socialChatModule.refreshMessages()
-    if (!this.user.isMine){
-      // console.log('=========checkFriend==========')
-      socialChatModule.openIm.checkFriend([this.user.id]).then(({data}) => {
-        // console.log('checkFriend',data,this.hasFriend,typeof data);
-        // 他是string需要手动转化一下。
-        data = JSON.parse(data);
-        // console.log('checkFriend222222222222222222',data,this.hasFriend,typeof data);
-        for (let i = 0; i < data.length; i++) {
-          let datum = data[i];
-          // console.log('==============datum===============',datum,this.user.id,datum.userID );
-          if (datum.userID == this.user.id) {
-            this.hasFriend = datum.result != 0;
-            // console.log('checkFriend',data,this.hasFriend);
-          }
-        }
-
-      }).catch(err => {
-        console.log('checkFriend--err',err);
-      })
-    }
-  }
-
-  /**
-   * 获取好友列表。
-   */
-  getFriendList(){
-    socialChatModule.openIm.getFriendList().then(({ data })=>{
-      this.friendList = JSON.parse(data);
-      console.log('friendList',data,this.friendList);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 添加好友申请。
-   */
-  addFriend() {
-    // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
-    const options:AddFriendParams = {
-      toUserID: this.user.id,
-      reqMsg: "请求加好友"
-    };
-    socialChatModule.openIm.addFriend(options).then(({ data })=>{
-      console.error('addFriend susueces',data);
-      // 需要同意才会现实的。所以这里再查也是浪费。
-      // this.checkFriend();
-    }).catch(err=>{
-      console.error(err);
-    })
-  }
-
-  /**
-   * 从好友列表中删除用户。
-   */
-  deleteFriend() {
-    socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
-      console.log('deleteFriend',data);
-      socialChatModule.checkFriend(this.user);
-    }).catch(err => {
-    })
-  }
-
-  /**
-   * 获取黑名单列表
-   */
-  getBlacklist(){
-    socialChatModule.openIm.getBlackList().then(({ data })=>{
-      this.blackList = JSON.parse(data);
-      console.log('getBlackList',data,this.blackList);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 将用户添加到黑名单。
-   */
-  addBlack() {
-    socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
-      socialChatModule.checkFriend(this.user);
-    }).catch(err => {
-    })
-  }
-  /**
-   * 将用户添加到黑名单。
-   */
-  removeBlack(black) {
-    socialChatModule.openIm.removeBlack(black.userID).then(({data}) => {
-      socialChatModule.checkFriend(this.user);
-      this.getBlacklist();
-    }).catch(err => {
-    })
-  }
-
-  /**
-   * 获取发出的好友请求列表
-   */
-  getSendFriendApplicationList(){
-    socialChatModule.openIm.getSendFriendApplicationList().then(({ data })=>{
-      this.sendFriendApplicationList = JSON.parse(data);
-      console.log('getSendFriendApplicationList',data,this.sendFriendApplicationList);
-    }).catch(err=>{
-    })
-
-  }
-  /**
-   * 获取收到的好友请求列表
-   */
-  getRecvFriendApplicationList(){
-    socialChatModule.openIm.getRecvFriendApplicationList().then(({ data })=>{
-      this.recvFriendApplicationList = JSON.parse(data);
-      console.log('getRecvFriendApplicationList',data,this.recvFriendApplicationList);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 接受好友请求。
-   * @param item
-   */
-  acceptFriendApplication(item){
-    const options:AccessFriendParams = {
-      toUserID:item.fromUserID,
-      handleMsg:"接受您的好友请求"
-    }
-    socialChatModule.openIm.acceptFriendApplication(options).then(({ data })=>{
-      console.log('acceptFriendApplication',data);
-      // 刷新请求列表
-      this.getRecvFriendApplicationList();
-    }).catch(err=>{
-    })
-  }
-
-  /**
-   * 拒绝好友请求。
-   * @param item
-   */
-  refuseFriendApplication(item){
-    const options:AccessFriendParams = {
-      toUserID:item.fromUserID,
-      handleMsg:"拒绝您的好友请求"
-    }
-    socialChatModule.openIm.refuseFriendApplication(options).then(({ data })=>{
-      console.log('refuseFriendApplication',data);
-      // 刷新请求列表
-      this.getRecvFriendApplicationList();
-    }).catch(err=>{
-    })
-  }
-  friendRuestResult(status:number){
-    switch (status){
-      case 0:
-        return "未处理中";
-      case 1:
-        return "已同意";
-      case -1:
-        return "已拒绝";
-    }
-  }
 }
 </script>

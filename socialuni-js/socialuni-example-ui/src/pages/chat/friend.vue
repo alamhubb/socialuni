@@ -4,7 +4,7 @@
 
     <uni-list v-if="type === 'sendFriendApplication'">
       <uni-title type="h1" align="center" title="我发出的好友请求列表"></uni-title>
-      <uni-list-chat v-for="(sendFriendApplication,index) in sendFriendApplicationList" :title="sendFriendApplication.fromNickname"   :avatar="sendFriendApplication.fromFaceURL" :note="sendFriendApplication.reqMsg">
+      <uni-list-chat v-for="(sendFriendApplication,index) in sendFriendApplicationList" :title="sendFriendApplication.toNickname"   :avatar="sendFriendApplication.toFaceURL" :note="sendFriendApplication.reqMsg">
         <view class="chat-custom-right">
           <text class="chat-custom-text">{{ formatTime(sendFriendApplication.createTime) }}</text>
 
