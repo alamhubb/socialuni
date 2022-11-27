@@ -200,6 +200,8 @@
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>
 
+        <slot name="list"></slot>
+
         <!--        <div v-if="isMine" class="row-col-center mb-smm">
                   <q-icon class="text-gray mr-xs" icon="account-fill"/>
                   联系方式：
