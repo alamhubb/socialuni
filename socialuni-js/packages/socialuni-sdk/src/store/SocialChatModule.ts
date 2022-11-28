@@ -21,6 +21,8 @@ import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailR
 import SocialuniMsg from "../SocialuniMsg";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
+import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 
 @Store
 export default class SocialChatModule extends Pinia {
@@ -95,6 +97,7 @@ export default class SocialChatModule extends Pinia {
         this.setImToken(null)
         this.openIm.logout().then(_ => {
             this.openImIsLogin = false
+
         })
     }
 
@@ -195,7 +198,13 @@ export default class SocialChatModule extends Pinia {
         }).then(res => {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
-            this.setChat(new SocialuniChatRO(openImChatRO))
+            const chat = new SocialuniChatRO(openImChatRO)
+            SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+                const userRO: SocialuniUserRO = res.data
+                chat.nickname = userRO.nickname
+                chat.avatar = userRO.avatar
+                this.setChat(chat)
+            })
         })
     }
 
@@ -211,9 +220,15 @@ export default class SocialChatModule extends Pinia {
             userID: "",
         }
         console.log(this.messages.length)
+
+        const user = new SocialuniUserRO()
+        user.id = this.chat.receiveUserId
+        user.avatar = this.chat.avatar
+        user.nickname = this.chat.nickname
+        user.isMine = false
         socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
             const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
-            this.chat.messages = msgs.map(item => new MessageVO(null, null, item))
+            this.chat.messages = msgs.map(item => new MessageVO(user, null, item))
             socialChatModule.scrollToMessagePageBottom()
             console.log(this.messages.length)
         })

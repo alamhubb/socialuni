@@ -5,6 +5,7 @@ import UUIDUtil from "socialuni-sdk/src/utils/UUIDUtil";
 import {OpenImMsgRO} from "../openIm/OpenImMsgRO";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import SocialuniUserRO from "../user/SocialuniUserRO";
+import SocialuniUserAPI from "../../api/socialuni/SocialuniUserAPI";
 
 export default class MessageVO {
     public id: string
@@ -20,12 +21,16 @@ export default class MessageVO {
 
     constructor(user: SocialuniUserRO, content: string, msg: OpenImMsgRO = null) {
         if (msg) {
+            if (msg.sendID === user.id) {
+                this.user = user
+            } else {
+                this.user = socialUserModule.mineUser
+            }
+            this.isMine = this.user.isMine
             this.id = msg.clientMsgID
-            this.user = this.getUserRO(msg)
             this.readNum = 0
             this.content = msg.content
             this.readStatus = CommonStatus.enable
-            this.isMine = this.user.isMine
             this.isRead = msg.isRead
             this.createTime = msg.createTime
             this.type = MessageType.simple

@@ -1,5 +1,15 @@
 <template>
   <view class="bg-default h100p">
+    <div class="row-wrap">
+      <div class="size100 bg-green mr mb"></div>
+      <div class="size100 bg-green mr mb"></div>
+      <div class="size100 bg-green mr mb"></div>
+      <div class="size100 bg-green mr mb"></div>
+      <div class="size100 bg-green mr mb"></div>
+      <div class="size100 bg-green mr mb"></div>
+      <div class="size100 bg-green mr mb"></div>
+    </div>
+
     <uni-tag type="primary" text="创建群聊" @click="createGroup"></uni-tag>
     <uni-list >
       <uni-title type="h1" align="center" title="查询已加入的群列表"></uni-title>
@@ -41,6 +51,7 @@ export default class ChatGroupPage extends Vue {
    * 创建群聊
    */
   createGroup(){
+    console.log(123)
     const groupBaseInfo:GroupInitInfo = {
       groupType:0,
       groupName: "", // 群名称
@@ -63,6 +74,7 @@ export default class ChatGroupPage extends Vue {
       groupBaseInfo,
       memberList
     }
+    console.log(options)
     socialChatModule.openIm.createGroup(options).then(({ data })=>{
       console.log('createGroup',data);
     }).catch(err=>{

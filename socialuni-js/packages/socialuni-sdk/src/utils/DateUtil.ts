@@ -75,7 +75,7 @@ export default class DateUtil {
         const d = new Date(time)
         const now = Date.now()
         const diff = (now - d.getTime()) / 1000
-        if (diff < 30) {
+        if (diff < 1) {
             return '刚刚'
         } else if (diff < 3600) {
             // less 1 hour

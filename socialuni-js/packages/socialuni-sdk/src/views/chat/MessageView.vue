@@ -52,21 +52,22 @@
 
       <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
             :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
-        <block v-if="msg.type === systemMsgType">
+        <template v-if="msg.type === systemMsgType">
           <view class="cu-info round">
             {{ msg.content }}
           </view>
-        </block>
-        <block v-else-if="msg.isMine">
+        </template>
+        <template v-else-if="msg.isMine">
           <view class="flex-col w100p">
             <view class="mr-30px h44px row-end-center">
-              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+              {{ msg.user.nickname }}
+<!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
               <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
                      src="/static/img/crown.png"
-                     @click="toVipVue"></image>
+                     @click="toVipVue"></image>-->
             </view>
             <view class="row-end">
               <view class="main">
@@ -80,22 +81,23 @@
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
-          <view class="date">{{ msg.createTime | formatTime }}</view>
-        </block>
-        <block v-else>
+          <view class="date">{{ formatTime(msg.createTime) }}</view>
+        </template>
+        <template v-else>
           <image class="cu-avatar radius"
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
           <view class="flex-col w100p">
             <view class="ml-40 h44 row-col-center">
-              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+              {{ msg.user.nickname }}
+<!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                     @click="toUserDetailVue(msg.user.id)">
                 {{ msg.user.nickname }}
               </text>
               <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
                      src="/static/img/crown.png"
-                     @click="toVipVue"></image>
+                     @click="toVipVue"></image>-->
             </view>
             <view class="main">
               <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
@@ -103,8 +105,8 @@
               </view>
             </view>
           </view>
-          <view class="date">{{ msg.createTime | formatTime }}</view>
-        </block>
+          <view class="date">{{  formatTime(msg.createTime) }}</view>
+        </template>
       </view>
       <!--    </view>-->
     </scroll-view>
@@ -204,6 +206,7 @@ import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import MessageAPI from "socialuni-api/src/api/MessageAPI";
 import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
 import CommonUtil from "../../utils/CommonUtil";
+import DateUtil from "../../utils/DateUtil";
 
 
 @Options({components: {SocialuniReportDialog}})
@@ -292,6 +295,10 @@ export default class MessageView extends Vue {
 
   banChange({detail}) {
     this.violation = detail.value
+  }
+
+  formatTime(time){
+    return DateUtil.formatTime(time)
   }
 
   /* showEmojiClick () {

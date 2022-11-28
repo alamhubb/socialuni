@@ -37,22 +37,22 @@
       <view v-for="chat in showChats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
         <image class="cu-avatar radius lg" :src="chat.avatar"/>
-        <view class="content h45px col-between">
+        <view class="content h45 col-between">
           <view>
             <view class="text-cut text-df text-black" :class="{'color-red':chat.vipFlag}">{{
                 chat.nickname
               }}
             </view>
-            <view v-if="systemChats.indexOf(chat.type)>-1"
+<!--            <view v-if="systemChats.indexOf(chat.type)>-1"
                   class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
             </view>
             <view v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
-            </view>
+            </view>-->
           </view>
           <view>
-            <view class="text-gray text-sm flex">
+            <view class="color-content text-sm flex">
               <view class="text-cut text-sm">
-                <template v-if="chat.status === waitOpenStatus">
+<!--                <template v-if="chat.status === waitOpenStatus">
                   会话待开启
                 </template>
                 <template v-else-if="chat.status === closeStatus">
@@ -63,7 +63,8 @@
                 </template>
                 <template v-else>
                   会话已开启
-                </template>
+                </template>-->
+                {{chat.lastContent}}
               </view>
             </view>
           </view>

@@ -26,11 +26,6 @@ export default class SocialuniChatRO {
 
     constructor(openImChat?: OpenImChatRO) {
         if (openImChat) {
-            SocialuniUserAPI.queryUserDetailAPI(openImChat.userID).then(res=>{
-                const userRO: SocialuniUserRO = res.data
-                this.nickname = userRO.nickname
-                this.avatar = userRO.avatar
-            })
             this.id = openImChat.conversationID
             this.type = openImChat.conversationType
             // this.messages = chat.messages

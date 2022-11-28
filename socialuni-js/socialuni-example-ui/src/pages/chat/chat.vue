@@ -11,5 +11,8 @@ import ChatView from 'socialuni-sdk/src/views/chat/ChatView.vue'
   components: {ChatView}
 })
 export default class ChatPage extends Vue {
+  fadsf(){
+    const fasdf:GroupInitInfo
+  }
 }
 </script>
