@@ -2,19 +2,11 @@
   <view class="bg-default h100p">
     <uni-tag type="primary" text="创建群聊" @click="createGroup"></uni-tag>
     <uni-list >
-      <uni-title type="h1" align="center" title="我发出的好友请求列表"></uni-title>
-      <uni-list-chat v-for="(joinedGroup,index) in joinedGroupList" :title="joinedGroup.groupName"   :avatar="joinedGroup.faceURL" :note="joinedGroup.introduction">
-        <view class="chat-custom-right">
-          <text class="chat-custom-text">{{ formatTime(joinedGroup.createTime) }}</text>
-          <!-- 需要使用 uni-icons 请自行引入 -->
-          <!--          <uni-icons type="star-filled" color="#999" size="18"></uni-icons>-->
-        </view>
-        <view class="chat-custom-right" >
-          {{ friendRuestResult(joinedGroup.status) }}
-        </view>
-      </uni-list-chat>
+      <uni-title type="h1" align="center" title="查询已加入的群列表"></uni-title>
+      <uni-list-item v-for="(joinedGroup,index) in joinedGroupList" :title="joinedGroup.groupName" :note="joinedGroup.introduction"
+                     :thumb="joinedGroup.faceURL"
+                     thumb-size="lg" :rightText="formatTime(joinedGroup.createTime)" link :to="'/pages/chat/groupMember?id='+joinedGroup.groupID"/>
     </uni-list>
-
   </view>
 </template>
 

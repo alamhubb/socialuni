@@ -27,6 +27,11 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },{
+      "path": "pages/chat/groupMember",
+      "style": {
+        "navigationStyle": "custom"
+      }
     },
     {
       "path": "pages/user/mine",
