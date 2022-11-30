@@ -1,14 +1,5 @@
 <template>
   <view class="bg-default h100p">
-    <div class="row-wrap">
-      <div class="size100 bg-green mr mb"></div>
-      <div class="size100 bg-green mr mb"></div>
-      <div class="size100 bg-green mr mb"></div>
-      <div class="size100 bg-green mr mb"></div>
-      <div class="size100 bg-green mr mb"></div>
-      <div class="size100 bg-green mr mb"></div>
-      <div class="size100 bg-green mr mb"></div>
-    </div>
 
     <uni-tag type="primary" text="创建群聊" @click="createGroup"></uni-tag>
     <uni-list >

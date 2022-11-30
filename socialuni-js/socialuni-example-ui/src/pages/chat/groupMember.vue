@@ -1,14 +1,10 @@
 <template>
-  <view class="bg-default h100p">
-    <uni-tag type="primary" text="创建群聊"></uni-tag>
-    <uni-list >
-      <uni-title type="h1" align="center" title="群成员列表"></uni-title>
+  <view class="bg-default h100p center">
 
-    </uni-list>
-    <uni-grid :column="6" :show-border="false" :square="false" @change="change">
+    <uni-grid class="grid" :column="5" :show-border="false" :square="false" @change="change">
       <uni-grid-item v-for="(groupMember ,index) in groupMemberList" :index="index" :key="index">
         <view class="grid-item-box">
-          <image class="image" :src="groupMember.faceURL" mode="aspectFill" />
+          <image class="size100" :src="groupMember.faceURL" mode="aspectFill" />
           <text class="text">{{groupMember.nickname}}</text>
           <view v-if="groupMember.badge" class="grid-dot">
             <uni-badge :text="groupMember.badge" :type="groupMember.type" />
@@ -16,6 +12,22 @@
         </view>
       </uni-grid-item>
     </uni-grid>
+
+    <uni-list class="center-list" >
+      <uni-list-item title="退出群" link rightText="item.rightText"
+                     :clickable="true"  @click="ucenterListClick(item)" :show-extra-icon="true"
+                     :extraIcon="{type:'gear',color:'#999'}">
+      </uni-list-item>
+    </uni-list>
+
+<!--
+    <uni-list class="center-list" v-for="(sublist , index) in ucenterList" :key="index">
+      <uni-list-item v-for="(item,i) in sublist" :title="item.title" link :rightText="item.rightText" :key="i"
+                     :clickable="true" :to="item.to" @click="ucenterListClick(item)" :show-extra-icon="true"
+                     :extraIcon="{type:item.icon,color:'#999'}">
+      </uni-list-item>
+    </uni-list>
+-->
 
   </view>
 </template>
@@ -40,6 +52,19 @@ import {GroupMemberItem, GroupRole} from "open-im-sdk/types";
 export default class ChatGroupMemberPage extends Vue {
   groupMemberList: GroupMemberItem[] = []
   groupID = "";
+  ucenterList=  [
+    [],
+    [{
+      "title": '退出群，解散群，开启群禁言，设置进群验证规则，清空群聊消息记录，删除本地跟服务器的群聊天记录  // 会话',
+      "to": '/pages/ucenter/userinfo/userinfo',
+      "icon": "gear"
+    }/* , {
+						"title": this.$t('mine.settings'),
+						"to": '/pages/ucenter/settings/settings',
+						"icon": "gear"
+					} */],
+    []
+  ]
   formatTime(dateStr : number) {
     return DateUtil.parseTime(dateStr * 1000)
   }
@@ -215,3 +240,117 @@ export default class ChatGroupMemberPage extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+/* #ifndef APP-NVUE */
+view {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+page {
+  background-color: #f8f8f8;
+}
+/* #endif*/
+
+.center {
+  flex: 1;
+  flex-direction: column;
+  background-color: #f8f8f8;
+}
+
+.userInfo {
+  padding: 20rpx;
+  padding-top: 50px;
+  background-image: url(../../static/uni-center/headers.png);
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-img {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 150rpx;
+}
+
+.logo-title {
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.uer-name {
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 38rpx;
+  color: #FFFFFF;
+}
+
+.center-list {
+  margin-bottom: 30rpx;
+  background-color: #f9f9f9;
+}
+
+.center-list-cell {
+  width: 750rpx;
+  background-color: #007AFF;
+  height: 40rpx;
+}
+
+.grid {
+  background-color: #FFFFFF;
+  margin-bottom: 6px;
+}
+
+.uni-grid .text {
+  font-size: 16px;
+  height: 25px;
+  line-height: 25px;
+  color: #817f82;
+}
+
+.uni-grid .item ::v-deep .uni-grid-item__box {
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*修改边线粗细示例*/
+/* #ifndef APP-NVUE */
+.center-list ::v-deep .uni-list--border:after {
+  -webkit-transform: scaleY(0.2);
+  transform: scaleY(0.2);
+  margin-left: 80rpx;
+}
+
+.center-list ::v-deep .uni-list--border-top,
+.center-list ::v-deep .uni-list--border-bottom {
+  display: none;
+}
+
+/* #endif */
+.item-footer {
+  flex-direction: row;
+  align-items: center;
+}
+
+.item-footer-text {
+  color: #999;
+  font-size: 24rpx;
+  padding-right: 10rpx;
+}
+
+.item-footer-badge {
+  width: 20rpx;
+  height: 20rpx;
+  /* #ifndef APP-NVUE */
+  border-radius: 50%;
+  /* #endif */
+  /* #ifdef APP-NVUE */
+  border-radius: 10rpx;
+  /* #endif */
+  background-color: #DD524D;
+}
+</style>
