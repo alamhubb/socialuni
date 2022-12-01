@@ -114,13 +114,21 @@ export default class SocialChatModule extends Pinia {
         this.openIm.getConversationListSplit(options).then(({data}) => {
             console.log(11111)
             const chats: OpenImChatRO[] = JsonUtil.toParse(data)
-            this.chats = chats.map(item => new SocialuniChatRO(item))
-            if (this.chat) {
-                const chat = this.chats.find(item => item.id === this.chat.id)
-                this.setChat(chat)
-            }
-            console.log(chats)
-            console.log(this.chats)
+            const newChats = chats.map(item => {
+                const chat = new SocialuniChatRO(item)
+                SocialuniUserAPI.queryUserDetailAPI(chat.receiveUserId).then(res => {
+                    const userRO: SocialuniUserRO = res.data
+                    chat.nickname = userRO.nickname
+                    console.log(chat.nickname)
+                    chat.avatar = userRO.avatar
+                    // this.setChat(chat)
+                    if (this.chat && chat.id === this.chat.id) {
+                        this.setChat(chat)
+                    }
+                })
+                return chat
+            })
+            this.setChats(newChats)
         })
     }
 
@@ -509,7 +517,9 @@ export default class SocialChatModule extends Pinia {
 
     setChats(chats: SocialuniChatRO[]) {
         this.chats = chats
-        this.computedChatsUnreadNumTotalAction()
+        console.log(85555)
+        console.log(chats)
+        // this.computedChatsUnreadNumTotalAction()
     }
 
 

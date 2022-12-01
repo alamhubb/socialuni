@@ -34,7 +34,9 @@
           {{ chatsUnreadNumTotal }}
         </view>-->
     <view class="cu-list menu-avatar pb-50px">
-      <view v-for="chat in showChats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
+      <div @click="consoleChats">123</div>
+<!--      {{ chats }}-->
+      <view v-for="chat in chats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
         <image class="cu-avatar radius lg" :src="chat.avatar"/>
         <view class="content h45 col-between">
@@ -43,28 +45,28 @@
                 chat.nickname
               }}
             </view>
-<!--            <view v-if="systemChats.indexOf(chat.type)>-1"
-                  class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
-            </view>
-            <view v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
-            </view>-->
+            <!--            <view v-if="systemChats.indexOf(chat.type)>-1"
+                              class="cu-tag round bg-blue sm text-sm col-center text-bold">官方
+                        </view>
+                        <view v-else-if="chat.vipFlag" class="cu-tag round bg-red sm text-sm col-center text-bold">VIP
+                        </view>-->
           </view>
           <view>
             <view class="color-content text-sm flex">
               <view class="text-cut text-sm">
-<!--                <template v-if="chat.status === waitOpenStatus">
-                  会话待开启
-                </template>
-                <template v-else-if="chat.status === closeStatus">
-                  会话已关闭
-                </template>
-                <template v-else-if="chat.messages.length">
-                  {{ chat.messages[chat.messages.length - 1].content }}
-                </template>
-                <template v-else>
-                  会话已开启
-                </template>-->
-                {{chat.lastContent}}
+                <!--                <template v-if="chat.status === waitOpenStatus">
+                                  会话待开启
+                                </template>
+                                <template v-else-if="chat.status === closeStatus">
+                                  会话已关闭
+                                </template>
+                                <template v-else-if="chat.messages.length">
+                                  {{ chat.messages[chat.messages.length - 1].content }}
+                                </template>
+                                <template v-else>
+                                  会话已开启
+                                </template>-->
+                {{ chat.lastContent }}
               </view>
             </view>
           </view>
@@ -107,6 +109,7 @@ export default class ChatView extends Vue {
   users: SocialUserContentRO[] = []
 
   get chats() {
+    console.log(socialChatModule.chats)
     return socialChatModule.chats
   }
 
@@ -247,6 +250,11 @@ export default class ChatView extends Vue {
       return []
     }
   }*/
+
+  consoleChats() {
+    console.log(this.chats)
+    this.chats[0].nickname = 'haha1'
+  }
 
   toMessagePage(chat: SocialuniChatRO) {
     //需要先清除，再跳转页面
