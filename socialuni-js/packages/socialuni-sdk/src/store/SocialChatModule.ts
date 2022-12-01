@@ -460,7 +460,7 @@ export default class SocialChatModule extends Pinia {
             console.log(JsonUtil.toParse(res.data))
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
-            this.messages.splice(index, 1, new MessageVO(null, null, res.data))
+            this.messages.splice(index, 1, new MessageVO(socialUserModule.mineUser, null, JsonUtil.toParse(res.data)))
         }).catch((e) => {
             console.log(e)
             // 这里应该变为发送失败

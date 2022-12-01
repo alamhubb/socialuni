@@ -26,6 +26,7 @@ export default class MessageVO {
             } else {
                 this.user = socialUserModule.mineUser
             }
+            console.log(msg)
             this.isMine = this.user.isMine
             this.id = msg.clientMsgID
             this.readNum = 0
