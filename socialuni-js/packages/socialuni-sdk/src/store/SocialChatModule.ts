@@ -212,9 +212,8 @@ export default class SocialChatModule extends Pinia {
     setChat(openImChat: SocialuniChatRO) {
         console.log(this.chat)
         console.log(555555)
-        this.chat = openImChat
         const options = {
-            conversationID: this.chat.id,
+            conversationID: openImChat.id,
             startClientMsgID: "",
             count: 100,
             groupID: "",
@@ -223,15 +222,15 @@ export default class SocialChatModule extends Pinia {
         console.log(this.messages.length)
 
         const user = new SocialuniUserRO()
-        user.id = this.chat.receiveUserId
-        user.avatar = this.chat.avatar
-        user.nickname = this.chat.nickname
+        user.id = openImChat.receiveUserId
+        user.avatar = openImChat.avatar
+        user.nickname = openImChat.nickname
         user.isMine = false
         socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
             const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
-            this.chat.messages = msgs.map(item => new MessageVO(user, null, item))
+            openImChat.messages = msgs.map(item => new MessageVO(user, null, item))
+            this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
-            console.log(this.messages.length)
         })
         console.log(666666)
         console.log(this.chat)
