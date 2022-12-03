@@ -34,7 +34,6 @@
           {{ chatsUnreadNumTotal }}
         </view>-->
     <view class="cu-list menu-avatar pb-50px">
-      <div @click="consoleChats">123</div>
 <!--      {{ chats }}-->
       <view v-for="chat in chats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
@@ -134,6 +133,11 @@ export default class ChatView extends Vue {
     onLoad((params) => {
       UniUtil.showShareMenu()
     })
+
+    /*setInterval(()=>{
+      this.$forceUpdate()
+      console.log(123)
+    },100)*/
     /*if (socialUserModule.mineUser) {
       SocialuniUserAPI.queryRecentlyUsersAPI().then(res => {
         this.users = res.data
@@ -250,11 +254,6 @@ export default class ChatView extends Vue {
       return []
     }
   }*/
-
-  consoleChats() {
-    console.log(this.chats)
-    this.chats[0].nickname = 'haha1'
-  }
 
   toMessagePage(chat: SocialuniChatRO) {
     //需要先清除，再跳转页面

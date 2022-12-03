@@ -28,6 +28,8 @@ export default class SocialuniChatRO {
         if (openImChat) {
             this.id = openImChat.conversationID
             this.type = openImChat.conversationType
+            this.nickname = openImChat.showName
+            this.avatar = openImChat.faceURL
             // this.messages = chat.messages
             // this.topLevel = chat.topLevel
             this.topFlag = openImChat.isPinned

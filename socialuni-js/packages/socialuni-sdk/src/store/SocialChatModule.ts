@@ -57,7 +57,7 @@ export default class SocialChatModule extends Pinia {
             console.log(config)
             await this.openIm.login(config)
             this.setOpenImLoginSuccess()
-            this.refreshMessages()
+            this.refreshChats()
             this.initOpenImListeners()
         }
     }
@@ -79,7 +79,7 @@ export default class SocialChatModule extends Pinia {
             console.log(99999999)
             console.log(res.data)
             console.log(JsonUtil.toParse(res.data))
-            this.refreshMessages()
+            this.refreshChats()
 
         })
         this.openIm.on(CbEvents.ONRECVNEWMESSAGES, (data) => {
@@ -106,7 +106,7 @@ export default class SocialChatModule extends Pinia {
 
     }
 
-    refreshMessages() {
+    refreshChats() {
         const options = {
             offset: 0,
             count: 20
@@ -116,16 +116,9 @@ export default class SocialChatModule extends Pinia {
             const chats: OpenImChatRO[] = JsonUtil.toParse(data)
             const newChats = chats.map(item => {
                 const chat = new SocialuniChatRO(item)
-                SocialuniUserAPI.queryUserDetailAPI(chat.receiveUserId).then(res => {
-                    const userRO: SocialuniUserRO = res.data
-                    chat.nickname = userRO.nickname
-                    console.log(chat.nickname)
-                    chat.avatar = userRO.avatar
-                    // this.setChat(chat)
-                    if (this.chat && chat.id === this.chat.id) {
-                        this.setChat(chat)
-                    }
-                })
+                if (this.chat && chat.id === this.chat.id) {
+                    this.setChat(chat)
+                }
                 return chat
             })
             this.setChats(newChats)
@@ -133,7 +126,7 @@ export default class SocialChatModule extends Pinia {
     }
 
     checkFriend(user: CenterUserDetailRO) {
-        socialChatModule.refreshMessages()
+        socialChatModule.refreshChats()
         if (!user.isMine) {
             // console.log('=========checkFriend==========')
             socialChatModule.openIm.checkFriend([user.id]).then(({data}) => {
@@ -207,12 +200,12 @@ export default class SocialChatModule extends Pinia {
             const data = res.data
             const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
             const chat = new SocialuniChatRO(openImChatRO)
-            SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+            /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
                 const userRO: SocialuniUserRO = res.data
                 chat.nickname = userRO.nickname
                 chat.avatar = userRO.avatar
-                this.setChat(chat)
-            })
+            })*/
+            this.setChat(chat)
         })
     }
 
