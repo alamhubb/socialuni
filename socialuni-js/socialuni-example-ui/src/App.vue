@@ -7,7 +7,6 @@ export default {
     console.log('App Launch')
     // socialSystemModule.initSystemInfo()
     //如果有跳转信息
-    console.log(8888)
     await socialAppModule.appLunchAction()
   },
   onError(e) {

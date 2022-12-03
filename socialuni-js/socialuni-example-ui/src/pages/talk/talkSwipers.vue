@@ -44,9 +44,6 @@ export default class TalkSwipers extends Vue {
     //区分跳转类型，跳转web，local，小程序，app
     //特殊处理小程序无法跳转app
     const homeSwiper = this.homeSwipers[current]
-    console.log(current)
-    console.log(this.homeSwipers)
-    console.log(homeSwiper)
     //需要跳转
     if (homeSwiper.skip) {
       if (homeSwiper.skipType === SkipType.app) {

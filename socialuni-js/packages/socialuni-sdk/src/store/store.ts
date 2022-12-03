@@ -29,7 +29,6 @@ export let socialPlatformModule: SocialPlatformModule
 
 // export let socialOAuthModule: SocialOAuthModule
 export async function initSocialuniStore() {
-    console.log(99999)
     socialSystemModule = new SocialSystemModule()
     socialUserModule = new SocialUserModule()
     socialConfigModule = new SocialConfigModule()

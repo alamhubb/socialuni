@@ -42,7 +42,6 @@ export default class ChatGroupPage extends Vue {
    * 创建群聊
    */
   createGroup(){
-    console.log(123)
     const groupBaseInfo:GroupInitInfo = {
       groupType:0,
       groupName: "", // 群名称

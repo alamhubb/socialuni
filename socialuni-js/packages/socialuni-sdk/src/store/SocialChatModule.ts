@@ -45,7 +45,6 @@ export default class SocialChatModule extends Pinia {
     chatsUnreadNumTotal = 0
 
     async initSocialuniChatModule() {
-        console.log(44444)
         if (!this.openImIsLogin) {
             //获取imToken
             const config: InitConfig = {
@@ -54,7 +53,6 @@ export default class SocialChatModule extends Pinia {
                 url: SocialuniConfig.openImJsImUrl,
                 platformID: OpenImPlatformType.web
             }
-            console.log(config)
             await this.openIm.login(config)
             this.setOpenImLoginSuccess()
             this.refreshChats()
@@ -64,21 +62,16 @@ export default class SocialChatModule extends Pinia {
 
     initOpenImListeners() {
         this.openIm.on(CbEvents.ONNEWCONVERSATION, (data) => {
-            console.log(99999999)
             console.log(data)
         })
         this.openIm.on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
-            console.log(99999999)
             console.log(data)
         })
         this.openIm.on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
-            console.log(99999999)
             console.log(data)
         })
         this.openIm.on(CbEvents.ONRECVNEWMESSAGE, (res) => {
-            console.log(99999999)
             console.log(res.data)
-            console.log(JsonUtil.toParse(res.data))
             this.refreshChats()
 
         })
@@ -112,7 +105,6 @@ export default class SocialChatModule extends Pinia {
             count: 20
         }
         this.openIm.getConversationListSplit(options).then(({data}) => {
-            console.log(11111)
             const chats: OpenImChatRO[] = JsonUtil.toParse(data)
             const newChats = chats.map(item => {
                 const chat = new SocialuniChatRO(item)
@@ -210,8 +202,6 @@ export default class SocialChatModule extends Pinia {
     }
 
     setChat(openImChat: SocialuniChatRO) {
-        console.log(this.chat)
-        console.log(555555)
         const options = {
             conversationID: openImChat.id,
             startClientMsgID: "",
@@ -219,8 +209,6 @@ export default class SocialChatModule extends Pinia {
             groupID: "",
             userID: "",
         }
-        console.log(this.messages.length)
-
         const user = new SocialuniUserRO()
         user.id = openImChat.receiveUserId
         user.avatar = openImChat.avatar
@@ -232,11 +220,6 @@ export default class SocialChatModule extends Pinia {
             this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
         })
-        console.log(666666)
-        console.log(this.chat)
-        console.log(this.chat.messages)
-        console.log(this.chat.messages.length)
-
     }
 
     toMessagePageFromUserDetail(userId: string) {
@@ -432,9 +415,7 @@ export default class SocialChatModule extends Pinia {
     //在聊天界面的时候，自己发送msg 本地添加msg
 
     async pushMessageAction(msg: MessageVO) {
-        console.log(this.messages.length)
         this.messages.push(msg)
-        console.log(this.messages.length)
         // JsonUtils.log(this.messages)
         // console.log(JSON.stringify(msg))
         this.scrollToMessagePageBottom()
@@ -444,20 +425,15 @@ export default class SocialChatModule extends Pinia {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        console.log('fasonle')
-
         const {data} = await socialChatModule.openIm.createTextMessage(msg.content);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: "",
             message: data,
         };
-        console.log(params)
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
         // return request.post <T>('message/sendMsg', msgAdd)
         socialChatModule.openIm.sendMessage(params).then((res) => {
-            console.log(res.data)
-            console.log(JsonUtil.toParse(res.data))
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
             this.messages.splice(index, 1, new MessageVO(socialUserModule.mineUser, null, JsonUtil.toParse(res.data)))
@@ -509,8 +485,6 @@ export default class SocialChatModule extends Pinia {
 
     setChats(chats: SocialuniChatRO[]) {
         this.chats = chats
-        console.log(85555)
-        console.log(chats)
         // this.computedChatsUnreadNumTotalAction()
     }
 
