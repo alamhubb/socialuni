@@ -197,16 +197,16 @@ import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
-import PageUtil from "../../utils/PageUtil";
-import AlertUtil from "../../utils/AlertUtil";
-import ToastUtil from "../../utils/ToastUtil";
-import PlatformUtils from "../../utils/PlatformUtils";
-import UniUtil from "../../utils/UniUtil";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import MessageAPI from "socialuni-api/src/api/MessageAPI";
 import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
-import CommonUtil from "../../utils/CommonUtil";
-import DateUtil from "../../utils/DateUtil";
+import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
+import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 
 
 @Options({components: {SocialuniReportDialog}})

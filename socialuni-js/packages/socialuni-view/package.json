@@ -16,7 +16,8 @@
     "vue-class-component": "^8.0.0-rc.1",
     "vue-property-decorator": "^10.0.0-rc.3",
     "@dcloudio/types": "^3.0.17",
-    "@dcloudio/uni-app": "3.0.0-alpha-3060820221027002"
+    "@dcloudio/uni-app": "3.0.0-alpha-3060820221027002",
+    "@dcloudio/uni-ui": "^1.4.23"
   },
   "keywords": [],
   "author": "",
