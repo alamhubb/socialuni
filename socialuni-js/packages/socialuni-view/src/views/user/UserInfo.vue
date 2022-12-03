@@ -369,9 +369,13 @@ import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
 import UserService from "socialuni-sdk/src/service/UserService";
 import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
+import TalkOperate from "../talk/talkOperate.vue";
+import TalkItem from "../talk/talkItem/TalkItem.vue";
 
 @Options({
   components: {
+    TalkItem,
+    TalkOperate,
     QButton,
     UserSchoolEditDialog,
     QSearch,
