@@ -1,13 +1,13 @@
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 
 export default class SocialuniUserRO {
-    id: string
-    isMine?: boolean
-    nickname?: string
-    avatar?: string
-    age?: number
-    gender?: string
-    birth?: string
+    id: string = null
+    isMine?: boolean = false
+    nickname?: string = null
+    avatar?: string = null
+    age?: number = null
+    gender?: string = null
+    birth?: string = null
     city: string = null
     type: string = null
 
