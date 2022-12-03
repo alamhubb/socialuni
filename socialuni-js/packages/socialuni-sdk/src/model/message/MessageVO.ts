@@ -1,11 +1,12 @@
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
-import MessageType from "socialuni-constant/constant/MessageType";
 import MessageContentType from "socialuni-constant/constant/mesaage/MessageContentType";
-import UUIDUtil from "socialuni-sdk/src/utils/UUIDUtil";
-import {OpenImMsgRO} from "../openIm/OpenImMsgRO";
-import {socialUserModule} from "socialuni-sdk/src/store/store";
-import SocialuniUserRO from "../user/SocialuniUserRO";
-import SocialuniUserAPI from "../../api/socialuni/SocialuniUserAPI";
+import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
+import JsonUtil from "../../utils/JsonUtil";
+import {socialUserModule} from "../../store/store";
+import UUIDUtil from "../../utils/UUIDUtil";
+import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
+import {MessageType} from "../../plugins/openIm/OpenImMessageType";
+import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 
 export default class MessageVO {
     public id: string
@@ -19,33 +20,45 @@ export default class MessageVO {
     public isMine: boolean
     public isRead: boolean
 
-    constructor(user: SocialuniUserRO, content: string, msg: OpenImMsgRO = null) {
+    constructor(content: string, msg: OpenImMsgRO = null) {
         if (msg) {
-            if (msg.sendID === user.id) {
-                this.user = user
-            } else {
-                this.user = socialUserModule.mineUser
+            if (msg.contentType === MessageType.TEXTMESSAGE) {
+                console.log(7777)
+                console.log(msg.content)
+                this.content = msg.content
+            } else if (msg.contentType === MessageType.GROUPCREATED) {
+                const contentObj = JsonUtil.toParse(msg.content)
+                console.log(contentObj)
             }
-            console.log(msg)
+
+            if (socialUserModule.mineUser && msg.sendID === socialUserModule.mineUser.id) {
+                this.user = socialUserModule.mineUser
+            } else {
+                const user = new SocialuniUserRO()
+                user.id = msg.sendID
+                user.avatar = msg.senderFaceUrl
+                user.nickname = msg.senderNickname
+                user.isMine = false
+                this.user = user
+            }
             this.isMine = this.user.isMine
-            this.id = msg.clientMsgID
+            this.id = msg.serverMsgID
             this.readNum = 0
-            this.content = msg.content
             this.readStatus = CommonStatus.enable
             this.isRead = msg.isRead
             this.createTime = msg.createTime
-            this.type = MessageType.simple
+            this.type = SocialuniMessageType.simple
             this.contentType = MessageContentType.text
         } else {
             this.id = UUIDUtil.getUUID()
-            this.user = user
+            this.user = socialUserModule.mineUser
             this.readNum = 0
             this.content = content
             this.readStatus = CommonStatus.sending
             this.isMine = true
             this.isRead = true
             this.createTime = new Date().getTime()
-            this.type = MessageType.simple
+            this.type = SocialuniMessageType.simple
             this.contentType = MessageContentType.text
         }
     }

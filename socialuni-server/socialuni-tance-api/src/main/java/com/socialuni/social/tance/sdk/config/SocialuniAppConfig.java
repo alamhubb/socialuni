@@ -3,6 +3,7 @@ package com.socialuni.social.tance.sdk.config;
 import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,6 +35,12 @@ public class SocialuniAppConfig {
         appConfig.setCityTabName(configApi.getString( "cityTabName"));
         //
         appConfig.setTabNames(configApi.getListString( "tabNames"));
+
+        Integer devUserId = DevAccountFacade.getDevUserId();
+
+        String userUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(devUserId);
+
+        appConfig.setSystemUserId(userUid);
         return appConfig;
     }
 

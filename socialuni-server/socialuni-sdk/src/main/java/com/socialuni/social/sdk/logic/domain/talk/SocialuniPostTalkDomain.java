@@ -7,7 +7,7 @@ import com.socialuni.social.community.sdk.entity.DistrictDO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.entity.TagDO;
-import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
+import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.community.sdk.repository.TagRepository;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
@@ -56,7 +56,7 @@ public class SocialuniPostTalkDomain {
     @Resource
     TalkTagRepository talkTagRepository;
     @Resource
-    SocialCircleRepository socialCircleApi;
+    SocialuniCircleRepository socialCircleApi;
     @Resource
     SocialTalkCreateManage socialTalkCreateManage;
     @Resource

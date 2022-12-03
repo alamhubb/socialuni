@@ -42,21 +42,17 @@
               <talk-swipers v-if="talkTabs[swiperIndex].name === homeTabName && configShowSwipers"></talk-swipers>
 
 
-              <!--              <div class="card mb-sm elevation-4 px-sm">
-                              &lt;!&ndash;                创建自己的圈子&ndash;&gt;
-                              <div class="row-between-center">
-                                <div>{{ talkTabs[swiperIndex].name }}圈</div>
-                                <div v-if="talkTabs[swiperIndex].circle">
-                                  圈主：客服
-                                  &lt;!&ndash;                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主&ndash;&gt;
-                                </div>
-                                <div v-else>
-                                  圈主：申请
-                                  &lt;!&ndash;                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主&ndash;&gt;
-                                </div>
-                              </div>
-                              <div>处对象圈子介绍</div>
-                            </div>-->
+              <div class="card mb-sm elevation-4 px-sm" v-if="talkTabs[swiperIndex].circle">
+                <!--                创建自己的圈子-->
+                <div class="row-between-center">
+                  <div>{{ talkTabs[swiperIndex].name }}圈</div>
+                  <!--                    圈主：客服-->
+                  <div class="q-tag use-click" @click="joinCircleGroupChat(talkTabs[swiperIndex].circle)">进入群聊
+                  </div>
+                  <!--                  显示圈主，如果没有圈主，则显示，此圈没有圈主，申请成为圈主-->
+                </div>
+                <!--                <div>处对象圈子介绍</div>-->
+              </div>
 
               <!--              <div v-else-if="talkTabs[swiperIndex].type === 'circle'" class="card mb-sm elevation-4 px">
                               <div class="row-between-center mb-sm">
@@ -147,11 +143,12 @@ import SocialTalkFilterDialog from "./SocialTalkFilterDialog.vue";
 import QPullRefresh from "socialuni-view/src/components/QPullRefresh/QPullRefresh.vue";
 import TalkItem from "./talkItem/TalkItem.vue";
 import {
+  socialChatModule,
   socialLocationModule,
   socialTagModule,
   socialTalkModule,
 } from "socialuni-sdk/src/store/store";
-import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
+import TalkTabVO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniTalkAPI from "socialuni-api/src/api/socialuni/SocialuniTalkAPI";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
@@ -159,7 +156,9 @@ import TalkVO from "socialuni-api/src/model/talk/TalkVO";
 import Constants from "socialuni-constant/constant/Constant";
 import StorageUtil from "socialuni-sdk/src/utils/StorageUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil"; // todo 后台可控制是否显示轮播图
-import { socialConfigModule, socialSystemModule, socialUserModule } from 'socialuni-sdk/src/store/store'
+import {socialConfigModule, socialSystemModule, socialUserModule} from 'socialuni-sdk/src/store/store'
+import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
+import SocialuniTalkTabCircleRO from "socialuni-api/src/model/community/circle/SocialuniTalkTabCircleRO";
 
 // todo 后台可控制是否显示轮播图
 @Options({
@@ -546,6 +545,10 @@ export default class TabsTalk extends Vue {
 
   toLoginVue() {
     PageUtil.toMinePage()
+  }
+
+  joinCircleGroupChat(circle: SocialuniTalkTabCircleRO) {
+    socialChatModule.joinCircleGroupChat(circle)
   }
 }
 </script>

@@ -12,10 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 
-public interface SocialCircleRepository extends JpaRepository<SocialuniCircleDO, Integer> {
+public interface SocialuniCircleRepository extends JpaRepository<SocialuniCircleDO, Integer> {
     @Caching(
             put = {
-                    @CachePut(cacheNames = CircleRedisKey.tagByName, key = "#tagDO.name"),
+                    @CachePut(cacheNames = CircleRedisKey.circleByName, key = "#tagDO.name"),
             }
     )
     default SocialuniCircleDO savePut(SocialuniCircleDO tagDO){

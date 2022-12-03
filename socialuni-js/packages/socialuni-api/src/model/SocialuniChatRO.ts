@@ -1,6 +1,6 @@
 import JsonUtil from 'socialuni-sdk/src/utils/JsonUtil'
 import {OpenImMsgRO} from "./openIm/OpenImMsgRO";
-import MessageVO from "./message/MessageVO";
+import MessageVO from "socialuni-sdk/src/model/message/MessageVO";
 import {OpenImChatRO} from "./openIm/OpenImChatRO";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
 import SocialuniUserAPI from "../api/socialuni/SocialuniUserAPI";
@@ -9,6 +9,7 @@ import SocialuniUserRO from "./user/SocialuniUserRO";
 export default class SocialuniChatRO {
     public id: string = null
     public nickname: string = null
+    public groupId: string = null
     public type: number = null
     public status: string = null
     public messages: MessageVO[] = []
@@ -29,6 +30,7 @@ export default class SocialuniChatRO {
             this.id = openImChat.conversationID
             this.type = openImChat.conversationType
             this.nickname = openImChat.showName
+            this.groupId = openImChat.groupID
             this.avatar = openImChat.faceURL
             // this.messages = chat.messages
             // this.topLevel = chat.topLevel

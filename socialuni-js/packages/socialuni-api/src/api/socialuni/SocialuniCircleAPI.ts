@@ -1,9 +1,10 @@
 import request from "socialuni-api/src/request/request";
 import CircleCreateQO from "../../model/community/circle/CircleCreateQO";
 import SocialCircleRO from "../../model/community/circle/SocialCircleRO";
-import ToastUtil from "socialuni-sdk/src/utils/ObjectUtil";
 import CircleTypeRO from "../../model/community/circle/CircleTypeRO";
 import SocialuniCircleQueryByTypeQO from "../../model/QO/circle/SocialuniCircleQueryByTypeQO";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import CircleCreateChatQO from "../../model/community/circle/CircleCreateChatQO";
 
 
 export default class SocialuniCircleAPI {
@@ -12,6 +13,10 @@ export default class SocialuniCircleAPI {
       ToastUtil.toast('创建成功')
       return res
     })
+  }
+
+  static createCircleChatAPI(createQO: CircleCreateChatQO) {
+    return request.post<string>('socialuni/circle/createCircleChat', createQO)
   }
 
   static queryHotCirclesAPI() {

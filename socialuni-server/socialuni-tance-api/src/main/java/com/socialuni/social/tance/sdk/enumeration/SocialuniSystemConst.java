@@ -59,7 +59,7 @@ public class SocialuniSystemConst {
         SocialuniSystemConst.appSocialuniId = appSocialuniId;
     }
 
-    @Value("${socialuni.system-user-phone-num:99999888666}")
+    @Value("${socialuni.system-user-phone-num:11111111111}")
     public void setSystemUserPhoneNum(String systemUserPhoneNum) {
         SocialuniSystemConst.systemUserPhoneNum = systemUserPhoneNum;
     }

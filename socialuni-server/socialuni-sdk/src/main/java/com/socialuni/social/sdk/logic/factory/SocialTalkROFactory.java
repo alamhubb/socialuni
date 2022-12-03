@@ -6,7 +6,7 @@ import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.entity.TagDO;
 import com.socialuni.social.community.sdk.repository.CommentRepository;
-import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
+import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.sdk.dao.CommentDao;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialTalkCircleDO;
 import com.socialuni.social.sdk.dao.DO.community.talk.SocialuniTalkImgDO;
@@ -48,7 +48,7 @@ public class SocialTalkROFactory {
     private static SocialTagRedis socialTagRedis;
     private static CommentDao commentDao;
     private static HugRedis hugRedis;
-    private static SocialCircleRepository socialCircleApi;
+    private static SocialuniCircleRepository socialCircleApi;
     private static SocialTalkCircleRepository socialTalkCircleRepository;
 
     @Resource
@@ -72,7 +72,7 @@ public class SocialTalkROFactory {
     }
 
     @Resource
-    public void setSocialCircleApi(SocialCircleRepository socialCircleApi) {
+    public void setSocialCircleApi(SocialuniCircleRepository socialCircleApi) {
         SocialTalkROFactory.socialCircleApi = socialCircleApi;
     }
 

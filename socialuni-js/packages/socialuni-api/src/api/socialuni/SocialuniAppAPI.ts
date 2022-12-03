@@ -1,6 +1,6 @@
 import request from "socialuni-api/src/request/request";
 import HomeSwiperVO from "../../model/HomeSwiperVO";
-import TalkTabVO from "../../model/talk/TalkTabVO";
+import SocialuniTalkTabRO from "../../model/talk/SocialuniTalkTabRO";
 import FrontErrorLogVO from "socialuni-api/src/model/FrontErrorLogVO";
 import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil";
 import AppUpdateResultVO from "../../model/app/AppUpdateResultVO";
@@ -26,7 +26,7 @@ export default class SocialuniAppAPI {
   }
 
   static queryHomeTabsAPI() {
-    return request.post<TalkTabVO[]>('socialuni/app/queryHomeTabs')
+    return request.post<SocialuniTalkTabRO[]>('socialuni/app/queryHomeTabs')
   }
 
   static sendErrorLogAPI(uri: string, detail: string, params?: any, errorMsg?: any) {

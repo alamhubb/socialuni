@@ -1,16 +1,20 @@
 package com.socialuni.social.sdk.logic.service.circle;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.community.sdk.entity.SocialuniCircleChatDO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
-import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
+import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
+import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
+import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
@@ -24,7 +28,7 @@ import java.util.List;
 @Service
 public class SocialuniCircleService {
     @Resource
-    private SocialCircleRepository socialCircleApi;
+    private SocialuniCircleRepository socialCircleApi;
     @Resource
     private SocialuniCircleRedis socialCircleRedis;
 
@@ -32,6 +36,9 @@ public class SocialuniCircleService {
     SocialuniCircleAPI socialuniCircleAPI;
     @Resource
     CircleQueryDomain circleQueryDomain;
+
+    @Resource
+    SocialuniCircleChatRepository socialuniCircleChatRepository;
 
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO, SocialuniUserDo user) {
         SocialuniCircleDO circleDO = new SocialuniCircleDO(circleCreateQO.getCircleName(), circleCreateQO.getCircleDesc(), DevAccountFacade.getDevIdNotNull(), user.getUserId());
@@ -51,6 +58,23 @@ public class SocialuniCircleService {
             resultRO = socialuniCircleAPI.createCircle(circleCreateQO);
         }
         return resultRO;
+    }
+
+    //创建圈子群聊
+    public ResultRO<String> createCircleChat(CircleChatCreateQO circleCreateQO) {
+        Integer devId = DevAccountFacade.getDevIdNotNull();
+
+        SocialuniCircleChatDO socialuniCircleChatDO = new SocialuniCircleChatDO();
+        socialuniCircleChatDO.setCircleName(circleCreateQO.getCircleName());
+        socialuniCircleChatDO.setGroupChatId(circleCreateQO.getGroupChatId());
+        socialuniCircleChatDO.setDevId(SocialuniConst.centerDevId);
+
+        SocialuniCircleChatDO socialuniCircleChatDO1 = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(socialuniCircleChatDO.getDevId(), socialuniCircleChatDO.getCircleName());
+        if (socialuniCircleChatDO1 == null) {
+            socialuniCircleChatDO1 = socialuniCircleChatRepository.save(socialuniCircleChatDO);
+        }
+
+        return ResultRO.success(socialuniCircleChatDO1.getGroupChatId());
     }
 
 

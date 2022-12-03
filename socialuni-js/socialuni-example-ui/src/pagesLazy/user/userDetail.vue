@@ -59,7 +59,7 @@ export default class UserDetail extends Vue {
         this.user = res.data
         if (!this.user.isMine){
           socialChatModule.checkFriend(this.user);
-          socialChatModule.setCurChatByUserId(this.user.id)
+          // socialChatModule.setCurChatByUserId(this.user.id)
           this.checkFriend();
         }
       });

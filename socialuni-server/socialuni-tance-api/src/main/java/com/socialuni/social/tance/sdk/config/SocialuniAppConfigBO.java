@@ -11,6 +11,7 @@ public class SocialuniAppConfigBO {
     private String homeTabName;
     private String cityTabName;
     private String selfSchoolTabName;
+    private String systemUserId;
     private List<String> tabNames;
 
     //是否禁止未成年人内容

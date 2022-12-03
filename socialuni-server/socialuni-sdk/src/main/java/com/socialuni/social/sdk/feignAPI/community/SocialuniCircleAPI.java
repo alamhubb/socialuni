@@ -2,9 +2,10 @@ package com.socialuni.social.sdk.feignAPI.community;
 
 
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
+import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +27,10 @@ public interface SocialuniCircleAPI {
     @PostMapping("createCircle")
     @Operation(summary = "创建圈子")
     ResultRO<SocialCircleRO> createCircle(@RequestBody @Valid CircleCreateQO circleCreateQO);
+
+    @PostMapping("createCircleChat")
+    @Operation(summary = "创建圈子群聊")
+    ResultRO<String> createCircleChat(@RequestBody @Valid CircleChatCreateQO circleChatCreateQO);
 
     @GetMapping("queryHotCircles")
     @Operation(summary = "查询热门圈子")

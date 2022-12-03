@@ -1,4 +1,4 @@
-export default class MessageType {
+export default class SocialuniMessageType {
     // 官方
     static readonly system: string = '官方'
     // 普通

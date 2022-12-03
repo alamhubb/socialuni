@@ -1,10 +1,10 @@
 import TalkVO from './TalkVO'
-import SocialTalkTabCircleRO from "../community/circle/SocialTalkTabCircleRO";
+import SocialuniTalkTabCircleRO from "../community/circle/SocialuniTalkTabCircleRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 
-export default class TalkTabVO {
+export default class SocialuniTalkTabRO {
   name: string = null
-  circle: SocialTalkTabCircleRO = null
+  circle: SocialuniTalkTabCircleRO = null
   //有用的，需要根据此判断进入添加talk也面是否自定带入
   type: string = null
   talks: TalkVO[] = []
@@ -14,7 +14,6 @@ export default class TalkTabVO {
   scrollTop: number = -1
   loadMore: string = LoadMoreType.more
   queryTime: Date = new Date()
-
 
   constructor(name: string = null, type: string = null) {
     this.name = name

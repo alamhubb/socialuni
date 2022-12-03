@@ -7,26 +7,39 @@ import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils"
 import ChatType from "socialuni-constant/constant/ChatType"
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil"
 import JsonUtil from "socialuni-sdk/src/utils/JsonUtil"
-import {socialUserModule} from "socialuni-sdk/src/store/store"
-import {CbEvents, OpenIMSDK} from "open-im-sdk"
+import {socialConfigModule, socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store"
+import {
+    CbEvents,
+    CreateGroupParams,
+    GroupInitInfo,
+    JoinGroupParams,
+    Member,
+    OpenIMSDK, SearchGroupParams,
+    SetGroupVerificationParams
+} from "open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
 import OpenImPlatformType from '../plugins/openIm/OpenImPlatformType'
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
 import {OpenImChatRO} from "socialuni-api/src/model/openIm/OpenImChatRO";
-import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import OpenImSessionType from "../plugins/openIm/constant/OpenImSessionType";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
-import SocialuniMsg from "../SocialuniMsg";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
 import {OpenImMsgRO} from "socialuni-api/src/model/openIm/OpenImMsgRO";
-import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
-import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniTalkTabCircleRO from "socialuni-api/src/model/community/circle/SocialuniTalkTabCircleRO";
+import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
+import CircleCreateChatQO from "socialuni-api/src/model/community/circle/CircleCreateChatQO";
+import UniUtil from "../utils/UniUtil";
+import MessageVO from "../model/message/MessageVO";
+import {GroupJoinSource} from "../plugins/openIm/OpenImMessageType";
+
+
+const openIM = new OpenIMSDK()
 
 @Store
 export default class SocialChatModule extends Pinia {
-    openIm = new OpenIMSDK()
+    openIm = openIM
     openImIsLogin = false
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
 
@@ -201,6 +214,27 @@ export default class SocialChatModule extends Pinia {
         })
     }
 
+    //为避免异步加载性能问题，进入用户详情页面就设置chat信息
+    async setCurChatByGroupId(groupId: string) {
+        await this.initSocialuniChatModule()
+        this.openIm.getOneConversation({
+            sessionType: OpenImSessionType.Group,
+            sourceID: groupId
+        }).then(res => {
+            const data = res.data
+            const openImChatRO: OpenImChatRO = JsonUtil.toParse(data)
+            console.log(openImChatRO)
+            const chat = new SocialuniChatRO(openImChatRO)
+            /*SocialuniUserAPI.queryUserDetailAPI(openImChatRO.userID).then(res => {
+                const userRO: SocialuniUserRO = res.data
+                chat.nickname = userRO.nickname
+                chat.avatar = userRO.avatar
+            })*/
+            this.setChat(chat)
+        })
+    }
+
+
     setChat(openImChat: SocialuniChatRO) {
         const options = {
             conversationID: openImChat.id,
@@ -209,21 +243,28 @@ export default class SocialChatModule extends Pinia {
             groupID: "",
             userID: "",
         }
-        const user = new SocialuniUserRO()
-        user.id = openImChat.receiveUserId
-        user.avatar = openImChat.avatar
-        user.nickname = openImChat.nickname
-        user.isMine = false
+        // const user = new SocialuniUserRO()
+        // user.id = openImChat.receiveUserId
+        // user.avatar = openImChat.avatar
+        // user.nickname = openImChat.nickname
+        // user.isMine = false
+        console.log(666666)
         socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
             const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
-            openImChat.messages = msgs.map(item => new MessageVO(user, null, item))
+            console.log(msgs)
+            openImChat.messages = msgs.map(item => new MessageVO(null, item))
             this.chat = openImChat
             socialChatModule.scrollToMessagePageBottom()
         })
     }
 
     toMessagePageFromUserDetail(userId: string) {
-        PageUtil.toMessagePage(userId)
+        PageUtil.toMessagePageByUserId(userId)
+        socialChatModule.scrollToMessagePageBottom()
+    }
+
+    toMessagePageFromGroupChat(groupId: string) {
+        PageUtil.toMessagePageByGroupId(groupId)
         socialChatModule.scrollToMessagePageBottom()
     }
 
@@ -248,7 +289,7 @@ export default class SocialChatModule extends Pinia {
     setChatIdToMessagePage(userId: string) {
         // this.setChatId(chatId)
         // this.readChatAction(this.chat)
-        PageUtil.toMessagePage(userId)
+        PageUtil.toMessagePageByUserId(userId)
         this.scrollToMessagePageBottom()
     }
 
@@ -428,7 +469,7 @@ export default class SocialChatModule extends Pinia {
         const {data} = await socialChatModule.openIm.createTextMessage(msg.content);
         const params = {
             recvID: this.chat.receiveUserId,
-            groupID: "",
+            groupID: this.chat.groupId,
             message: data,
         };
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
@@ -436,7 +477,7 @@ export default class SocialChatModule extends Pinia {
         socialChatModule.openIm.sendMessage(params).then((res) => {
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
-            this.messages.splice(index, 1, new MessageVO(socialUserModule.mineUser, null, JsonUtil.toParse(res.data)))
+            this.messages.splice(index, 1, new MessageVO(null, JsonUtil.toParse(res.data)))
         }).catch((e) => {
             console.log(e)
             // 这里应该变为发送失败
@@ -498,6 +539,74 @@ export default class SocialChatModule extends Pinia {
 
     deleteChatAction(chatId: number) {
         this.chats.splice(this.chats.findIndex(chat => chat.id === chatId), 1)
+    }
+
+    async joinCircleGroupChat(circle: SocialuniTalkTabCircleRO) {
+        //如果已经创建群聊
+        if (circle.groupChatId) {
+            UniUtil.showLoading('加载中')
+            const optionsSearch: SearchGroupParams = {
+                keywordList: [circle.groupChatId],
+                isSearchGroupID: true,
+                isSearchGroupName: false
+            }
+            try {
+                const res = await openIM.searchGroups(optionsSearch)
+                const resData: any[] = JsonUtil.toParse(res.data)
+                if (!resData.length) {
+                    const options: JoinGroupParams = {
+                        groupID: circle.groupChatId,
+                        reqMsg: "",
+                        joinSource: GroupJoinSource.Search
+                    }
+                    await this.openIm.joinGroup(options)
+                }
+            } finally {
+                UniUtil.hideLoading()
+            }
+            socialChatModule.toMessagePageFromGroupChat(circle.groupChatId)
+        } else {
+            UniUtil.showLoading('加载中')
+            console.log(circle)
+            //未创建则创建，并且更新话题的群聊id
+            const groupBaseInfo: GroupInitInfo = {
+                groupType: 0,
+                groupName: circle.name, // 群名称
+                introduction: "", // 群介绍
+                notification: "",  // 群公告
+                faceURL: circle.avatar,  //
+                ex: ""   // 扩展字段
+            }
+            /**
+             * 经过测试: 会自动添加群主。 roleLevel: 默认为2 。
+             * 还有下面这个是邀请成员的 level为1 。  类似于微信的拉群聊。不需要同意就直接能拉进群聊。
+             */
+            const memberList: Member[] = [
+                {
+                    userID: socialConfigModule.appConfig.systemUserId,
+                    roleLevel: 1
+                }
+            ];
+            const options: CreateGroupParams = {
+                groupBaseInfo,
+                memberList
+            }
+            console.log(options)
+            try {
+                const res = await socialChatModule.openIm.createGroup(options)
+                const resData: { groupID: string } = JsonUtil.toParse(res.data)
+                const cRes = await SocialuniCircleAPI.createCircleChatAPI(new CircleCreateChatQO(circle.name, resData.groupID))
+                socialTalkModule.curTab.circle.groupChatId = cRes.data
+                const optionsVerification: SetGroupVerificationParams = {
+                    groupID: circle.groupChatId,
+                    verification: 2,
+                }
+                this.openIm.setGroupVerification(optionsVerification)
+                socialChatModule.toMessagePageFromGroupChat(cRes.data)
+            } finally {
+                UniUtil.hideLoading()
+            }
+        }
     }
 }
 

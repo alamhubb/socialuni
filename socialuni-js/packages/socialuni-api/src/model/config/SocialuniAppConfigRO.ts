@@ -4,6 +4,7 @@ export default class SocialuniAppConfigRO {
   homeTabName: string = null
   cityTabName: string = null
   selfSchoolTabName: string = null
+  systemUserId: string = null
   tabNames: string[] = null
 
 

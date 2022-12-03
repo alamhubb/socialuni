@@ -4,7 +4,7 @@ package com.socialuni.social.sdk.feignAPI;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
 import com.socialuni.social.community.sdk.model.HomeSwiperVO;
-import com.socialuni.social.community.sdk.model.HomeTabRO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkTabRO;
 import com.socialuni.social.user.sdk.model.SocialAppLaunchDataRO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -30,7 +30,7 @@ public interface SocialuniAppAPI {
     ResultRO<List<HomeSwiperVO>> queryHomeSwipers();
 
     @PostMapping("queryHomeTabs")
-    ResultRO<List<HomeTabRO>> queryHomeTabs();
+    ResultRO<List<SocialuniTalkTabRO>> queryHomeTabs();
 
     @PostMapping("sendErrorLog")
     ResultRO<Void> sendErrorLog(@RequestBody FrontErrorLogVO frontErrorLogVO);

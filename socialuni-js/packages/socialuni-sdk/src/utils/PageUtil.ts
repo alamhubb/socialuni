@@ -111,8 +111,12 @@ export default class PageUtil {
         // RouterUtil.navigateTo(PagePath.userMatch)
     }
 
-    static toMessagePage(userId: string) {
+    static toMessagePageByUserId(userId: string) {
         RouterUtil.navigateTo(PagePath.message, {userId})
+    }
+
+    static toMessagePageByGroupId(groupId: string) {
+        RouterUtil.navigateTo(PagePath.message, {groupId})
     }
 
     static toFaceValuePage() {

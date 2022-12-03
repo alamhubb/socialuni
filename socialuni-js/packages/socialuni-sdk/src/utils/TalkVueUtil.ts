@@ -1,18 +1,18 @@
 import StorageUtil from 'socialuni-sdk/src/utils/StorageUtil'
-import TalkTabVO from "socialuni-api/src/model/talk/TalkTabVO";
 import TalkTabType from "socialuni-constant/constant/TalkTabType";
+import SocialuniTalkTabRO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 
-const talkTabFollowDefault = new TalkTabVO()
+const talkTabFollowDefault = new SocialuniTalkTabRO()
 talkTabFollowDefault.name = TalkTabType.follow_name
 talkTabFollowDefault.appDefaultTab = true
 // talkTabFollowDefault.type = TalkTabType.follow_type
 
-const talkTabHomeDefault = new TalkTabVO()
+const talkTabHomeDefault = new SocialuniTalkTabRO()
 talkTabHomeDefault.name = TalkTabType.home_name
 talkTabHomeDefault.appDefaultTab = true
 // talkTabHomeDefault.type = TalkTabType.home_type
 
-const talkTabCityDefault = new TalkTabVO()
+const talkTabCityDefault = new SocialuniTalkTabRO()
 talkTabCityDefault.name = TalkTabType.city_name
 talkTabCityDefault.appDefaultTab = true
 // talkTabCityDefault.type = TalkTabType.city_type
@@ -27,7 +27,7 @@ const TalkTabsDefaultNames = defaultTabs.map(item => item.name)
 
 export default class TalkVueUtil {
   static readonly TalkTabsKey: string = 'talkTabs'
-  static readonly TalkTabsDefault: TalkTabVO [] = defaultTabs
+  static readonly TalkTabsDefault: SocialuniTalkTabRO [] = defaultTabs
   static readonly TalkTabsDefaultNames: string [] = TalkTabsDefaultNames
 
 
@@ -38,8 +38,8 @@ export default class TalkVueUtil {
   static readonly talkTabTypeDefault: string = TalkTabType.home_type
 
 
-  static getTalkTabs(): TalkTabVO [] {
-    const homeTypeTalks: TalkTabVO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
+  static getTalkTabs(): SocialuniTalkTabRO [] {
+    const homeTypeTalks: SocialuniTalkTabRO [] = StorageUtil.getObj(TalkVueUtil.TalkTabsKey)
     return homeTypeTalks || TalkVueUtil.TalkTabsDefault
   }
 

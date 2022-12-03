@@ -6,7 +6,7 @@
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
       </view>
       <view class="flex-none mr-10px">
-        <q-button @click="consoleMessage">{{scrollTop}}</q-button>
+        <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
         <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
       </view>
     </view>
@@ -61,13 +61,13 @@
           <view class="flex-col w100p">
             <view class="mr-30px h44px row-end-center">
               {{ msg.user.nickname }}
-<!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                    @click="toUserDetailVue(msg.user.id)">
-                {{ msg.user.nickname }}
-              </text>
-              <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
-                     src="/static/img/crown.png"
-                     @click="toVipVue"></image>-->
+              <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                  @click="toUserDetailVue(msg.user.id)">
+                              {{ msg.user.nickname }}
+                            </text>
+                            <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                   src="/static/img/crown.png"
+                                   @click="toVipVue"></image>-->
             </view>
             <view class="row-end">
               <view class="main">
@@ -91,13 +91,13 @@
           <view class="flex-col w100p">
             <view class="ml-40 h44 row-col-center">
               {{ msg.user.nickname }}
-<!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                    @click="toUserDetailVue(msg.user.id)">
-                {{ msg.user.nickname }}
-              </text>
-              <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
-                     src="/static/img/crown.png"
-                     @click="toVipVue"></image>-->
+              <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                  @click="toUserDetailVue(msg.user.id)">
+                              {{ msg.user.nickname }}
+                            </text>
+                            <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
+                                   src="/static/img/crown.png"
+                                   @click="toVipVue"></image>-->
             </view>
             <view class="main">
               <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
@@ -105,7 +105,7 @@
               </view>
             </view>
           </view>
-          <view class="date">{{  formatTime(msg.createTime) }}</view>
+          <view class="date">{{ formatTime(msg.createTime) }}</view>
         </template>
       </view>
       <!--    </view>-->
@@ -183,7 +183,6 @@ import {Options, Vue} from "vue-property-decorator";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
-import MessageType from "socialuni-constant/constant/mesaage/MessageType";
 import Constants from "socialuni-constant/constant/Constant";
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
 import HintMsg from "socialuni-constant/constant/HintMsg";
@@ -202,11 +201,13 @@ import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import MessageVO from "socialuni-api/src/model/message/MessageVO";
 import MessageAPI from "socialuni-api/src/api/MessageAPI";
 import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import MessageViewParams from "./MessageViewParams";
+import MessageVO from "socialuni-sdk/src/model/message/MessageVO";
+import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 
 
 @Options({components: {SocialuniReportDialog}})
@@ -217,9 +218,11 @@ export default class MessageView extends Vue {
     deleteReasonDialog: any;
   }
 
-  init(params: { userId: string }) {
+  init(params: MessageViewParams) {
     if (params.userId) {
       socialChatModule.setCurChatByUserId(params.userId)
+    } else if (params.groupId) {
+      socialChatModule.setCurChatByGroupId(params.groupId)
     }
   }
 
@@ -258,7 +261,7 @@ export default class MessageView extends Vue {
   emojiModelHeight = 300
   message: MessageVO = null
   reportContentType: string = ReportContentType.message
-  systemMsgType: string = MessageType.system
+  systemMsgType: string = SocialuniMessageType.system
   showMsgHint: boolean = uni.getStorageSync(Constants.showMsgHintKey) !== 'false'
   readonly waitOpenStatus: string = CommonStatus.waitOpen
   readonly closeStatus: string = CommonStatus.close
@@ -282,7 +285,7 @@ export default class MessageView extends Vue {
     }
   }
 
-  consoleMessage(){
+  consoleMessage() {
     console.log(this.chat)
     console.log(this.chat.messages)
     console.log(this.chat.messages.length)
@@ -297,7 +300,7 @@ export default class MessageView extends Vue {
     this.violation = detail.value
   }
 
-  formatTime(time){
+  formatTime(time) {
     return DateUtil.formatTime(time)
   }
 
@@ -355,7 +358,7 @@ export default class MessageView extends Vue {
       if (this.mineUser && this.mineUser.phoneNum) {
         console.log(this.chat)
         //启用状态可以直接发送
-        const msg: MessageVO = new MessageVO(this.mineUser, msgContent)
+        const msg: MessageVO = new MessageVO(msgContent)
         this.msgContent = ''
         socialChatModule.pushMessageAction(msg)
         /*if (this.chat.status === CommonStatus.enable) {

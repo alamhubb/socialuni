@@ -7,12 +7,12 @@ import lombok.Data;
  * @date 2020-05-23 17:21
  */
 @Data
-public class HomeTabRO {
+public class SocialuniTalkTabRO {
     private String name;
-//    private HomeTabCircleRO circle;
+    private SocialuniTalkTabCircleRO circle;
 
 
-    public HomeTabRO(String name) {
+    public SocialuniTalkTabRO(String name) {
         this.name = name;
     }
 }

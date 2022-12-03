@@ -2,13 +2,13 @@ package com.socialuni.social.sdk.dao.store;
 
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTagTypeDO;
-import com.socialuni.social.community.sdk.repository.SocialCircleRepository;
+import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniTagTypeRepository;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.logic.factory.community.SociaCircleTypeROFactory;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
+import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +23,7 @@ public class SocialuniCircleRedis {
     @Resource
     private SocialuniTagTypeRepository tagTypeRepository;
     @Resource
-    private SocialCircleRepository socialCircleApi;
+    private SocialuniCircleRepository socialCircleApi;
 
     /**
      * 查询热门下包含子节点，和所有省份不包含子节点

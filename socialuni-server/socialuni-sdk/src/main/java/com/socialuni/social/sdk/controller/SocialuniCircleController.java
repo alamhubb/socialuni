@@ -4,9 +4,10 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
+import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
-import com.socialuni.social.sdk.model.RO.community.circle.SocialCircleRO;
+import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,11 @@ public class SocialuniCircleController implements SocialuniCircleAPI {
     @Override
     public ResultRO<SocialCircleRO> createCircle(CircleCreateQO circleCreateQO) {
         return centerCircleService.createCircle(circleCreateQO);
+    }
+
+    @Override
+    public ResultRO<String> createCircleChat(CircleChatCreateQO circleChatCreateQO) {
+        return centerCircleService.createCircleChat(circleChatCreateQO);
     }
 
     @Override

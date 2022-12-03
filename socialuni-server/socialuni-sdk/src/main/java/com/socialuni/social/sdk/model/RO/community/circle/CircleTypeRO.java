@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.model.RO.community.circle;
 
+import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import lombok.Data;
 
 import java.util.List;
