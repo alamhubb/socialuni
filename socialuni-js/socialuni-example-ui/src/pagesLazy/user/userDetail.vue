@@ -29,7 +29,7 @@ import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
-import UserInfo from "socialuni-sdk/src/views/user/UserInfo.vue";
+import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
 
 @Options({

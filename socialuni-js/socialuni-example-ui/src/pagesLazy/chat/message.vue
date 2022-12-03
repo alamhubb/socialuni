@@ -7,7 +7,7 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
 
-import MessageView from 'socialuni-sdk/src/views/chat/MessageView.vue'
+import MessageView from 'socialuni-view/src/views/chat/MessageView.vue'
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import {onLoad} from '@dcloudio/uni-app';
 import {onMounted} from "vue";

@@ -115,7 +115,7 @@ import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import LoginView from "@/pages/user/login/login.vue";
-import UserInfo from "socialuni-sdk/src/views/user/UserInfo.vue";
+import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
 
 @Options({
   components: {
