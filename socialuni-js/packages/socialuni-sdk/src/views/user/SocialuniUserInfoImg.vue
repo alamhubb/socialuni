@@ -42,9 +42,8 @@
 </template>
 
 <script lang="ts">
-
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
-import SocialuniReportDialog from "../report/SocialuniReportDialog.vue";
+import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog.vue";
 import {Options, Prop, Vue} from "vue-property-decorator";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
@@ -52,18 +51,18 @@ import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
 import CosUtil from "socialuni-sdk/src/utils/CosUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DomFile from "socialuni-api/src/model/DomFile";
-import TencentCosAPI from "socialuni-api/src/api/socialuni/TencentCosAPI";
 import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ImgFileVO from "socialuni-api/src/model/ImgFileVO";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
 
 @Options({
   components: {QIcon, SocialuniReportDialog}
 })
-export default class UserInfoImg extends Vue {
+export default class SocialuniUserInfoImg extends Vue {
   $refs!: {
     reportDialog: SocialuniReportDialog;
   }

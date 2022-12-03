@@ -299,7 +299,7 @@
 
     </view>
 
-    <user-info-img :user="user"></user-info-img>
+    <socialuni-user-info-img :user="user"></socialuni-user-info-img>
   </view>
 </template>
 
@@ -336,17 +336,20 @@ import FollowAddVO from "socialuni-api/src/model/FollowAddVO";
 import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
 import UserService from "../../service/UserService";
+import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
+import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 
 @Options({
   components: {
     QButton,
-    // UserSchoolEditDialog,
+    UserSchoolEditDialog,
     QSearch,
     QPopup,
     QPcModel,
     SocialGenderTag,
     QIcon,
     QRowItem,
+    SocialuniUserInfoImg
   }
 })
 export default class UserInfo extends Vue {
@@ -354,7 +357,7 @@ export default class UserInfo extends Vue {
 
   $refs!: {
     reportDialog: any;
-    // schoolEditDialog: UserSchoolEditDialog;
+    schoolEditDialog: UserSchoolEditDialog;
     // contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
