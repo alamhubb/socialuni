@@ -14,10 +14,18 @@
     </uni-grid>
 
     <uni-list class="center-list" >
-      <uni-list-item title="退出群" link rightText="item.rightText"
-                     :clickable="true"  @click="ucenterListClick(item)" :show-extra-icon="true"
-                     :extraIcon="{type:'gear',color:'#999'}">
-      </uni-list-item>
+      <uni-list-item title="退出群" link :clickable="true"  @click="quitGroup"></uni-list-item>
+      <uni-list-item title="解散群" link :clickable="true"  @click="dismissGroup"></uni-list-item>
+      <uni-list-item title="开启群禁言，所有普通群成员禁止发言" link :clickable="true"  @click="changeGroupMute(true)"></uni-list-item>
+      <uni-list-item title="关闭群禁言" link :clickable="true"  @click="changeGroupMute(false)"></uni-list-item>
+      <uni-list-item title="设置进群验证规则:邀请需要验证" link :clickable="true"  @click="setGroupVerification(0)"></uni-list-item>
+      <uni-list-item title="设置进群验证规则:都需要验证" link :clickable="true"  @click="setGroupVerification(1)"></uni-list-item>
+      <uni-list-item title="设置进群验证规则:都不需要验证" link :clickable="true"  @click="setGroupVerification(2)"></uni-list-item>
+      <uni-list-item title="标记群聊会话已读" link :clickable="true"  @click="markGroupMessageHasRead"></uni-list-item>
+      <uni-list-item title="清空本地群聊消息记录" link :clickable="true"  @click="clearGroupHistoryMessage"></uni-list-item>
+      <uni-list-item title="删除本地跟服务器的群聊天记录" link :clickable="true"  @click="clearGroupHistoryMessageFromLocalAndSvr"></uni-list-item>
+      <!--   退出群，解散群，开启群禁言，设置进群验证规则，清空群聊消息记录   -->
+
     </uni-list>
 
 <!--
@@ -39,14 +47,14 @@ import {onLoad} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import {
-  ChangeGroupMemberMuteParams,
+  ChangeGroupMemberMuteParams, ChangeGroupMuteParams,
   CreateGroupParams,
   GetGroupMemberByTimeParams, GetGroupMemberParams,
   GroupInitInfo, InviteGroupParams,
   Member, MemberNameParams, SetGroupRoleParams,
   SetGroupVerificationParams, TransferGroupParams
 } from "open-im-sdk";
-import {GroupMemberItem, GroupRole} from "open-im-sdk/types";
+import {GroupMemberItem, GroupRole, GroupVerificationType} from "open-im-sdk/types";
 
 @Options({components: {}})
 export default class ChatGroupMemberPage extends Vue {
@@ -77,6 +85,77 @@ export default class ChatGroupMemberPage extends Vue {
     // 检查是否为好友
   }
 
+  /**
+   * 置零群聊会话未读数
+   */
+  markGroupMessageHasRead(){
+    socialChatModule.openIm.markGroupMessageHasRead(this.groupID).then(({ data })=>{
+      console.log('markGroupMessageHasRead',data);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 删除本地跟服务器的群聊天记录
+   */
+  clearGroupHistoryMessageFromLocalAndSvr(){
+    socialChatModule.openIm.clearGroupHistoryMessageFromLocalAndSvr(this.groupID).then(({ data })=>{
+      console.log('clearGroupHistoryMessageFromLocalAndSvr',data);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 从本地删除指定群聊会话中所有消息
+   */
+  clearGroupHistoryMessage(){
+    socialChatModule.openIm.clearGroupHistoryMessage(this.groupID).then(({ data })=>{
+      console.log('clearGroupHistoryMessage',data);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 设置进群验证规则
+   */
+  setGroupVerification(verification: GroupVerificationType){
+    const options:SetGroupVerificationParams = {
+      groupID: this.groupID ,
+      verification
+    }
+    socialChatModule.openIm.setGroupVerification(options).then(({ data })=>{
+      console.log('setGroupVerification',data);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 开启群禁言，所有普通群成员禁止发言
+   */
+  changeGroupMute(isMute : boolean){
+    const options:ChangeGroupMuteParams = {
+      groupID: this.groupID ,
+      isMute
+    }
+    socialChatModule.openIm.changeGroupMute(options).then(({ data })=>{
+      console.log('changeGroupMute',data);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 解散群聊
+   */
+  dismissGroup(){
+    socialChatModule.openIm.dismissGroup(this.groupID).then(({ data })=>{
+      console.log('dismissGroup',data);
+    }).catch(err=>{
+    })
+  }
+  /**
+   * 退出群聊
+   */
+  quitGroup(){
+    socialChatModule.openIm.quitGroup(this.groupID).then(({ data })=>{
+      console.log('quitGroup',data);
+    }).catch(err=>{
+    })
+  }
   /**
    * 获取群成员列表。
    */
