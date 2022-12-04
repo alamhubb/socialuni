@@ -296,15 +296,14 @@
                 </view>
               </view>
             </view>-->
-
     </view>
 
-    <socialuni-user-info-img :user="user"></socialuni-user-info-img>
+    <socialuni-user-info-img :user="user" v-if="user.isMine || user.imgs.length"></socialuni-user-info-img>
 
     <q-popup ref="applyUserFriendDialog" title="申请添加好友" @confirm="addFriend">
       <div class="pd">
         <div>
-          申请原因:
+          添加好友后才可发起会话，申请原因:
         </div>
         <div class="mt-sm mb">
           <q-input v-model="applyUserFriendContent"></q-input>
@@ -440,7 +439,6 @@ export default class UserInfo extends Vue {
 
   async toMessagePage() {
     if (!this.user.hasFriend) {
-      await AlertUtil.confirm('添加好友后才可发起会话，是否申请添加对方为好友')
       this.applyUserFriendContent = null
       this.$refs.applyUserFriendDialog.open()
     } else {

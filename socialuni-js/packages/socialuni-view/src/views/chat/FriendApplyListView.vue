@@ -100,8 +100,12 @@ export default class ChatFriendPage extends Vue {
   recvFriendApplicationList: Object[] = []
   blackList: Object[] = []
   friendList: Object[] = []
-  hasFriend = false;
   type = "";
+
+  applyRecordList() {
+
+  }
+
 
   formatTime(dateStr: number) {
     return DateUtil.parseTime(dateStr * 1000)
@@ -112,10 +116,7 @@ export default class ChatFriendPage extends Vue {
   //   socialChatFriendModule.addFriend(e.detail.value,"请求加好友");
   // }
   created() {
-    onLoad((params) => {
-      this.type = params.type;
-      this.refresh();
-    })
+    this.refresh();
     // 检查是否为好友
   }
 
