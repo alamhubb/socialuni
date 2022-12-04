@@ -75,6 +75,12 @@
           }
         },
         {
+          "path": "chat/friendApplyList",
+          "style": {
+            "navigationBarTitleText": "好友申请"
+          }
+        },
+        {
           "path": "user/userDetail",
           "style": {
             "navigationBarTitleText": "用户详情"

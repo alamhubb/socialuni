@@ -31,7 +31,7 @@
             <view v-else class="row-col-center">
               <!--                不为自己且未关注-->
               <!--            不为ios，或者不为付费，则显示-->
-<!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
+              <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
               <q-button @click="toMessagePage">
                 <q-icon icon="mdi-chat-outline" size="14"></q-icon>
               </q-button>
@@ -301,6 +301,17 @@
 
     <socialuni-user-info-img :user="user"></socialuni-user-info-img>
 
+    <q-popup ref="applyUserFriendDialog" title="申请添加好友" @confirm="addFriend">
+      <div class="pd">
+        <div>
+          申请原因:
+        </div>
+        <div class="mt-sm mb">
+          <q-input v-model="applyUserFriendContent"></q-input>
+        </div>
+      </div>
+    </q-popup>
+
     <talk-operate @deleteTalk="deleteTalk"></talk-operate>
     <!--  #ifdef MP-WEIXIN -->
     <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
@@ -371,9 +382,13 @@ import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import TalkOperate from "../talk/talkOperate.vue";
 import TalkItem from "../talk/talkItem/TalkItem.vue";
+import MessageViewParams from "../chat/MessageViewParams";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import QInput from "../../components/QInput/QInput.vue";
 
 @Options({
   components: {
+    QInput,
     TalkItem,
     TalkOperate,
     QButton,
@@ -390,9 +405,12 @@ import TalkItem from "../talk/talkItem/TalkItem.vue";
 export default class UserInfo extends Vue {
   @Prop() user: CenterUserDetailRO
 
+  applyUserFriendContent: string = null
+
   $refs!: {
     reportDialog: any;
     schoolEditDialog: UserSchoolEditDialog;
+    applyUserFriendDialog: QPopup;
     // contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
@@ -420,9 +438,14 @@ export default class UserInfo extends Vue {
     return FollowStatus.getFollowStatus(this.user)
   }
 
-
-  toMessagePage() {
-    socialChatModule.toMessagePageFromUserDetail(this.user.id)
+  async toMessagePage() {
+    if (!this.user.hasFriend) {
+      await AlertUtil.confirm('添加好友后才可发起会话，是否申请添加对方为好友')
+      this.applyUserFriendContent = null
+      this.$refs.applyUserFriendDialog.open()
+    } else {
+      socialChatModule.toMessagePageFromUserDetail(this.user.id)
+    }
     // socialChatModule.setCurChatByUserId(this.user.id)
     //除了是否关注，还有是否已经发起过对话，chatuservo里面要保存还能再发几条
     //判断是否已经支付过了。3条，然后对方每次回复你都可以发三条，然后就需要再次支付，开启了支付
@@ -430,6 +453,20 @@ export default class UserInfo extends Vue {
     // chatModule.userDetailToMessagePage(this.userProp.chat)
     //如果有chat读取，如果没有创建读取
     // chatModule.setChatAction(chat)
+  }
+
+
+  /**
+   * 添加好友申请。
+   */
+ async addFriend() {
+    // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
+    const options: AddFriendParams = {
+      toUserID: this.user.id,
+      reqMsg: this.applyUserFriendContent
+    };
+    await socialChatModule.openIm.addFriend(options)
+    ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 
   /*shellPayForUserContact () {
