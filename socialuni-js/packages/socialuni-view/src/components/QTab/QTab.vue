@@ -1,5 +1,5 @@
 <template>
-  <view class="q-tab">
+  <view class="h30 font-md">
     <slot></slot>
   </view>
 </template>

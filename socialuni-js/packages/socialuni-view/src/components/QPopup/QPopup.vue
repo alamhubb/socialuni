@@ -94,3 +94,11 @@ export default class QPopup extends Vue {
   //下的话col-end 中的话 row-all-center
 }
 </script>
+<style lang="scss">
+//model index 以100开始
+//因为h5端navbar和tabbar为998
+.q-popup {
+  transition: all 0.3s linear;
+  box-shadow: 0 8px 10px -5px rgb(0 0 0 / 20%), 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%);
+}
+</style>

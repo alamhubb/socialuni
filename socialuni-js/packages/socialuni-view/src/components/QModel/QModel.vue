@@ -1,5 +1,5 @@
 <template>
-  <view class="q-model"
+  <view class="q-model modal-index bg-modal row-all-center position-fixed"
         @touchmove.stop.prevent
         @click="click"
   >
@@ -20,3 +20,13 @@ export default class QModel extends Vue {
   }
 }
 </script>
+<style lang="scss">
+//model index 以100开始
+//因为h5端navbar和tabbar为998
+.q-model {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+</style>

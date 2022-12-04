@@ -265,3 +265,36 @@ export default class QPicker extends Vue {
   }
 }
 </script>
+<style lang="scss">
+.q-picker-box {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.q-picker-item {
+  height: 55px;
+  background: #f6f6f6;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #444;
+  font-weight: 400;
+  line-height: 1;
+}
+.q-picker-item-active {
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+  background: #fff;
+}
+
+.q-picker-item-active::before {
+  content: "";
+  border-left: 4px solid #2979ff;
+  height: 16px;
+  left: 0;
+}
+</style>

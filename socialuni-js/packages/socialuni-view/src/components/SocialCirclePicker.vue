@@ -78,8 +78,7 @@ export default class SocialCirclePicker extends Vue {
   get showCircles() {
     if (this.circleTypes.length) {
       //去除热门，要不然会存在重复
-      return this.circleTypes.slice(1, this.circleTypes.length - 1)
-          .flatMap(item => {
+      return this.circleTypes.slice(1, this.circleTypes.length - 1).flatMap(item => {
             if (item && item.circles) {
               return item.circles.filter(tag => tag.name.includes(this.circleSearchText))
             }
