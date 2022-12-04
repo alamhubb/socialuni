@@ -7,14 +7,6 @@
       <user-info :user="mineUser">
         <template v-slot:list>
 
-          <uni-list>
-            <uni-list-item title="聊天功能:"></uni-list-item>
-            <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"  ></uni-list-item>
-            <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"  ></uni-list-item>
-            <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"  ></uni-list-item>
-            <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"  ></uni-list-item>
-            <uni-list-item title="群聊" link to="/pages/chat/group?type=friend"  ></uni-list-item>
-          </uni-list>
 
         </template>
       </user-info>

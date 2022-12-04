@@ -1,0 +1,77 @@
+<template>
+  <view class="bg-default">
+    <user-info :user.sync="user">
+      <template v-slot:list>
+        <view class="row-between-center py-xs pr-xs">
+          <view class="flex-row flex-1" :class="{'row-around':isMine}">
+            <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
+              <text class="text-sm text-gray">解除好友</text>
+            </view>
+            <view v-else class="px-lg line-height-1" @click.stop="addFriend">
+              <text class="text-sm text-gray">添加好友</text>
+            </view>
+            <view class="px-lg line-height-1" @click.stop="addBlack">
+              <text class="text-sm text-gray">添加黑名单</text>
+            </view>
+          </view>
+        </view>
+      </template>
+    </user-info>
+  </view>
+</template>
+
+<script lang="ts">
+import {Options, Vue} from 'vue-property-decorator'
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import MsgInput from "socialuni-view/src/components/MsgInput.vue";
+import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
+import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
+import {socialChatModule} from "socialuni-sdk/src/store/store";
+import {AddFriendParams} from "open-im-sdk";
+import {onMounted} from "vue";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+
+@Options({
+  components: {MsgInput, UserInfo}
+})
+export default class UserDetail extends Vue {
+  user: CenterUserDetailRO = null
+
+  init(params: { userId: string }) {
+    console.log(789)
+    const userId = params.userId
+    // 这里有问题，有时候直接进入页面没有userId
+    SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
+      this.user = res.data
+      console.log(this.user)
+      if (!this.user.isMine) {
+        socialChatModule.checkFriend(this.user);
+        // socialChatModule.setCurChatByUserId(this.user.id)
+      }
+    })
+  }
+
+
+  /**
+   * 从好友列表中删除用户。
+   */
+  deleteFriend() {
+    socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
+      console.log('deleteFriend', data);
+      socialChatModule.checkFriend(this.user);
+    }).catch(err => {
+    })
+  }
+
+  /**
+   * 将用户添加到黑名单。
+   */
+  addBlack() {
+    socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
+      socialChatModule.checkFriend(this.user);
+    }).catch(err => {
+    })
+  }
+}
+</script>

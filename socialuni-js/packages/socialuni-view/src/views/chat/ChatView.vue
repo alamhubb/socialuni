@@ -1,22 +1,34 @@
 <template>
   <view class="bg-default h100p">
-    <q-navbar>
-      <view>
-        <q-icon icon="arrow-left"></q-icon>
-      </view>
-      <view @click="toAddFriend">
-        <q-icon icon="mdi-volume-high"></q-icon>
-        系统通知
-      </view>
+    <q-navbar title="消息">
+      <div class="row-end-center flex-1">
+        <view>
+          <q-icon icon="search"></q-icon>
+        </view>
+        <view @click="toAddFriend">
+          <q-icon icon="plus-circle"></q-icon>
+        </view>
+      </div>
     </q-navbar>
-    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
+<!--    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按聊天框可解除匹配
       </view>
       <view class="flex-none mr-10px">
         <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
       </view>
-    </view>
+    </view>-->
+
+    <div>
+      <uni-list>
+        <uni-list-item title="好友申请" link  to="/pagesLazy/chat/friendApplyList"></uni-list-item>
+<!--        <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"></uni-list-item>
+        <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"></uni-list-item>
+        <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"></uni-list-item>
+        <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"></uni-list-item>
+        <uni-list-item title="群聊" link to="/pages/chat/group?type=friend"></uni-list-item>-->
+      </uni-list>
+    </div>
 
     <!--    <div>
           <div v-for="item in users">
@@ -34,7 +46,7 @@
           {{ chatsUnreadNumTotal }}
         </view>-->
     <view class="cu-list menu-avatar pb-50px">
-<!--      {{ chats }}-->
+      <!--      {{ chats }}-->
       <view v-for="chat in chats" :key="chat.id" class="cu-item" @click="toMessagePage(chat)"
             @longpress="showBottomMenuClick(chat.id)">
         <image class="cu-avatar radius lg" :src="chat.avatar"/>

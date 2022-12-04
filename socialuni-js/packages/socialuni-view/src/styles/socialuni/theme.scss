@@ -56,6 +56,7 @@ $color-bg-base: $color-white !default;
 
 $color-theme: #3f93ee !default;
 $color-theme-bg: #f7f7f7 !default;
+$color-theme-navbar-bg: #f7f7f7 !default;
 $color-theme-light: $color-white !default;
 
 $colors-theme: (
@@ -141,6 +142,7 @@ $colors-custom-bg: (
         filter-active: $color-bg-filter-active,
         table-header: $color-bg-table-header,
         table-header-hover: $color-bg-table-header-hover,
+        navbar: $color-theme-navbar-bg,
 );
 
 $colors-bg: map-merge($colors-base, $colors-custom-bg);

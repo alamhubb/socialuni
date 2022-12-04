@@ -1,6 +1,6 @@
 <template>
   <view class="w100p">
-    <view class="w100p position-fixed nav-index" :class="customClass">
+    <view class="w100p position-fixed nav-index bg-navbar" :class="customClass">
       <!--            此处为状态栏-->
       <view class="w100p" :style="{ height: statusBarHeight + 'px' }"></view>
       <!--            此处为导航栏-->
@@ -11,6 +11,9 @@
           </slot>
         </div>
         <q-icon v-if="showHome" icon="home" class="color-th mr" @click="goHome"></q-icon>
+        <div v-if="title" class="font-bold font-md">
+          {{ title }}
+        </div>
         <slot></slot>
       </view>
     </view>
@@ -53,6 +56,11 @@ export default class QNavBar extends Vue {
     type: Boolean,
     default: true
   }) stance: boolean
+
+  @Prop({
+    type: String,
+    default: ''
+  }) title: string
 
   get statusBarHeight() {
     return socialSystemModule.statusBarHeight
