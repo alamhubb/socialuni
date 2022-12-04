@@ -26,6 +26,12 @@ public class ExtendBaseRepository<T, ID >
         // Keep the EntityManager around to used from the newly introduced methods.
         this.entityManager = entityManager;
         this.entityInformation = entityInformation;
+
+    }
+
+    @Override
+    public boolean isNew(T entity) {
+        return entityInformation.isNew(entity);
     }
 
     @Transactional

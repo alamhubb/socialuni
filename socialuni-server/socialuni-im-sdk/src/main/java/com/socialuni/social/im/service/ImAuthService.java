@@ -22,7 +22,6 @@ public class ImAuthService {
 
     /**
      * 用户注册
-     *
      * @param userModel
      */
     public String userRegister(SocialuniImUserModel userModel) {
@@ -31,7 +30,15 @@ public class ImAuthService {
         String token = tokenModel.getToken();
         return token;
     }
-
+    /**
+     * 修改用户信息
+     * @param userModel
+     *
+     */
+    public String update_user_info(SocialuniImUserModel userModel) {
+        String response = imHttpComponent.post("/user/update_user_info", userModel);
+        return response;
+    }
     /**
      * 获取用户的token
      * (免密的用户登录)

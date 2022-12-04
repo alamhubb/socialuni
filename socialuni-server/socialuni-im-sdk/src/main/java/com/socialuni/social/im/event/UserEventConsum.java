@@ -1,12 +1,20 @@
 package com.socialuni.social.im.event;
 
 import cn.hutool.http.HttpUtil;
+import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
+import com.socialuni.social.common.api.enumeration.PublishDataType;
+import com.socialuni.social.common.api.model.PublishDataModel;
 import com.socialuni.social.common.sdk.event.ddd.AbstractJsonEventConsum;
+import com.socialuni.social.common.sdk.event.ddd.AbstractPublishDataModelConsum;
 import com.socialuni.social.im.model.SocialuniImUserModel;
 import com.socialuni.social.im.service.ImAuthService;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
+import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -20,13 +28,13 @@ import java.util.Map;
  * @since 1.0
  */
 @Component
-public class UserEventConsum extends AbstractJsonEventConsum {
+public class UserEventConsum extends AbstractPublishDataModelConsum {
     public static final String openImIp = "82.157.32.169";
     @Resource
     private ImAuthService imAuthService;
     @Resource
     private ConversionService conversionService;
-    @Override
+//    @Override
     public void consumEvent(Map<String, Object> map) {
         // 注册到Im
         SocialuniImUserModel imUserModel = new SocialuniImUserModel();
@@ -41,8 +49,35 @@ public class UserEventConsum extends AbstractJsonEventConsum {
     }
 
     @Override
-    public String getMatchClassName() {
-        return "com.socialuni.social.sdk.model.RO.user.SocialuniMineUserDetailRO";
+    public void consumEvent(PublishDataModel publishDataModel) {
+        PublishDataType type = publishDataModel.getType();
+        RequestMethod method = publishDataModel.getMethod();
+        Object data = publishDataModel.getData();
+        SocialuniImUserModel userModel = new SocialuniImUserModel();
+        if(data instanceof SocialuniUserDo){
+            SocialuniUserDo userDo = (SocialuniUserDo) data;
+            userModel.setBirth(Integer.valueOf(userDo.getBirthday()));
+            userModel.setNickname(userDo.getNickname());
+            userModel.setFaceURL(userDo.getAvatar());
+            String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDo.getUserId());
+            userModel.setUserID(mineUserUid);
+            userModel.setGender(GenderTypeNumEnum.getEnumByName(userDo.getGender()).getValue() );
+            // 邮箱
+
+            // 手机号
+        }
+
+        if(RequestMethod.POST.equals(method)){
+            // 增加就不操作啦。 ， 之前的代码用了异步http调用去实现啦。
+        }else if(RequestMethod.PUT.equals(method)){
+            imAuthService.update_user_info(userModel);
+        }
+    }
+
+    @Override
+    public boolean canConsum(PublishDataModel publishDataModel) {
+        Object data = publishDataModel.getData();
+        return data instanceof SocialuniUserInfoBaseDO;
     }
 
     public static void main(String[] args) {
@@ -77,4 +112,6 @@ public class UserEventConsum extends AbstractJsonEventConsum {
 
 
     }
+
+
 }

@@ -33,7 +33,15 @@ public class PublishDataTanceBaseRepository <T, ID >
     @Override
     public <S extends T> S save(S entity) {
         S save = super.save(entity);
-        acceptPublishDataComponent( (consumer) -> consumer.save(save));
+        SocialuniPublishDataComponent socialuniPublishDataComponentByRequestAttribute = getSocialuniPublishDataComponentByRequestAttribute();
+        if(socialuniPublishDataComponentByRequestAttribute != null){
+            // 代表新增还是修改
+            if (this.isNew(entity)) {
+                socialuniPublishDataComponentByRequestAttribute.update(entity);
+            }else{
+                socialuniPublishDataComponentByRequestAttribute.insert(entity);
+            }
+        }
         return save;
     }
 
@@ -43,16 +51,31 @@ public class PublishDataTanceBaseRepository <T, ID >
      * @param consumer
      */
     public static void acceptPublishDataComponent(Consumer<SocialuniPublishDataComponent> consumer){
-        HttpServletRequest request = RequestUtil.getRequest();
-        if(request == null) return;
-        Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);
-        if(attribute == null) return;
-        SocialuniPublishDataComponent publishDataComponent = (SocialuniPublishDataComponent) attribute;
-        if(publishDataComponent != null) {
+        SocialuniPublishDataComponent publishDataComponent =
+                getSocialuniPublishDataComponentByRequestAttribute();
+        // 执行
+        if(publishDataComponent != null && consumer != null) {
             consumer.accept(publishDataComponent);
         }
     }
 
+    /**
+     * 从RequestAttribute中获得{@code SocialuniPublishDataComponent}
+     * @return
+     */
+    public static SocialuniPublishDataComponent getSocialuniPublishDataComponentByRequestAttribute(){
+        SocialuniPublishDataComponent publishDataComponent = null;
+        HttpServletRequest request = RequestUtil.getRequest();
+        if(request == null) return publishDataComponent;
+        Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);
+        if(attribute == null) return publishDataComponent;
+        publishDataComponent = (SocialuniPublishDataComponent) attribute;
+        return publishDataComponent;
+    }
+    /**
+     * 初始化{@code SocialuniPublishDataComponent} 放入到request的Attribute中。
+     * @param request
+     */
     public static void publishDataInitialized(HttpServletRequest request) {
         if(request == null) return;
         Object attribute = request.getAttribute(SocialuniPublishDataComponent.UUID_NAME);

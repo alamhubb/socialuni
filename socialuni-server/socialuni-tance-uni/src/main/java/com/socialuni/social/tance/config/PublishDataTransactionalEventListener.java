@@ -9,6 +9,7 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.socialuni.social.common.api.enumeration.PublishDataCacheable;
 import com.socialuni.social.common.api.model.PublishDataModel;
+import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.tance.repository.PublishDataTanceBaseRepository;
 import com.socialuni.social.tance.sdk.api.ConfigInterface;
 import lombok.extern.slf4j.Slf4j;
@@ -49,14 +50,10 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
      * 之后再事务提交之后也就是成功执行，才去同步到开发者服务器中。
      */
     public void publishDataToDev() {
-        // 循环调用插入到开发者的接口中去。 放心顺序也是一样保持一致的。
-//        for (PublishDataModel publishDataModel : publishDataModelList) {
-//
-//        }
-
         PublishDataTanceBaseRepository.acceptPublishDataComponent((consumer) -> {
             List<PublishDataModel> publishDataModelList = consumer.getPublishDataModelList();
             // 同步数据到开发者接口中。
+            // 循环调用插入到开发者的接口中去。 放心顺序也是一样保持一致的。
             log.debug("插入到开发者的接口中={}", publishDataModelList);
             String devPublishDataApiUrl = configApi.getString("devPublishDataApiUrl");
             if(StrUtil.isNotBlank(devPublishDataApiUrl)){
@@ -75,6 +72,8 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
                     }
                 }
             }
+            // 发送事件用于解耦。
+            publishDataModelList.forEach(EventPublisherFacade::publishEvent);
         });
     }
 

@@ -25,4 +25,5 @@ public interface ExtendRepository<T, ID> extends PagingAndSortingRepository<T, I
      */
     boolean incr(ID id,String columnName,Long count);
 
+    boolean isNew(T entity);
 }

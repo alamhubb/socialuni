@@ -41,7 +41,15 @@ public class SocialuniPublishDataComponent {
      * @param t
      * @return
      */
-    public void save(Object t) {
+    public void insert(Object t) {
+        publishDataOfRDMS(t,RequestMethod.POST);
+    }
+    /**
+     * 保存: 新增或者更新。
+     * @param t
+     * @return
+     */
+    public void update(Object t) {
         publishDataOfRDMS(t,RequestMethod.PUT);
     }
     /**
@@ -90,5 +98,4 @@ public class SocialuniPublishDataComponent {
         publishDataModel.setMethod(method);
         return publishDataModel;
     }
-
 }
