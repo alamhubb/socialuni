@@ -1,22 +1,18 @@
 <template>
   <view class="bg-default">
+    <q-navbar show-back title="用户详情">
+      <div class="row-end-center flex-1">
+        <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
+      </div>
+    </q-navbar>
     <user-info :user.sync="user">
-      <template v-slot:list>
-        <view class="row-between-center py-xs pr-xs">
-          <view class="flex-row flex-1" :class="{'row-around':isMine}">
-            <view v-if="user.hasFriend" class="px-lg line-height-1" @click.stop="deleteFriend">
-              <text class="text-sm text-gray">解除好友</text>
-            </view>
-            <view v-else class="px-lg line-height-1" @click.stop="addFriend">
-              <text class="text-sm text-gray">添加好友</text>
-            </view>
-            <view class="px-lg line-height-1" @click.stop="addBlack">
-              <text class="text-sm text-gray">添加黑名单</text>
-            </view>
-          </view>
-        </view>
-      </template>
     </user-info>
+
+    <q-popup ref="moreActionMenu" bottom>
+      <uni-list class="pb-xl mt-sm">
+        <uni-list-item title="解除好友" link @click="deleteFriend"></uni-list-item>
+      </uni-list>
+    </q-popup>
   </view>
 </template>
 
@@ -31,12 +27,25 @@ import {socialChatModule} from "socialuni-sdk/src/store/store";
 import {AddFriendParams} from "open-im-sdk";
 import {onMounted} from "vue";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import QNavbar from "../../components/QNavbar/QNavbar.vue";
+import QIcon from "../../components/QIcon/QIcon.vue";
+import QPopup from "../../components/QPopup/QPopup.vue";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 
 @Options({
-  components: {MsgInput, UserInfo}
+  components: {QPopup, QIcon, QNavbar, MsgInput, UserInfo}
 })
-export default class UserDetail extends Vue {
+export default class UserDetailView extends Vue {
+  $refs: {
+    moreActionMenu: QPopup
+  }
+
   user: CenterUserDetailRO = null
+
+  openMoreMenu() {
+    this.$refs.moreActionMenu.open()
+  }
 
   init(params: { userId: string }) {
     console.log(789)
@@ -57,10 +66,13 @@ export default class UserDetail extends Vue {
    * 从好友列表中删除用户。
    */
   deleteFriend() {
-    socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
-      console.log('deleteFriend', data);
-      socialChatModule.checkFriend(this.user);
-    }).catch(err => {
+    AlertUtil.confirm('是否确认解除好友关系').then(res => {
+      socialChatModule.openIm.deleteFriend(this.user.id).then(({data}) => {
+        console.log('deleteFriend', data);
+        ToastUtil.toast('成功解除好友关系')
+        socialChatModule.checkFriend(this.user);
+      }).catch(err => {
+      })
     })
   }
 
