@@ -1,7 +1,7 @@
 <template>
   <view v-if="chat" class="pb-100 h100p bg-default">
 
-    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
+<!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
       <view class="flex-1 card-text-row">
         长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
       </view>
@@ -9,7 +9,7 @@
         <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
         <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
       </view>
-    </view>
+    </view>-->
 
     <scroll-view scroll-y="true" class="cu-chat h100p"
                  @scrolltoupper="upper"
@@ -77,19 +77,19 @@
               </view>
             </view>
           </view>
-          <image class="cu-avatar radius"
+          <image class="cu-avatar bd-radius"
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
           <view class="date">{{ formatTime(msg.createTime) }}</view>
         </template>
         <template v-else>
-          <image class="cu-avatar radius"
+          <image class="cu-avatar bd-radius"
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
           <view class="flex-col w100p">
-            <view class="ml-40 h44 row-col-center">
+            <view class="ml-20 h44 row-col-center">
               {{ msg.user.nickname }}
               <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                   @click="toUserDetailVue(msg.user.id)">
@@ -132,7 +132,7 @@
         <!--<view class="action" @click="showEmojiClick">
             <text class="cuIcon-emojifill text-grey"></text>
         </view>-->
-        <button class="cu-btn bg-green shadow" @touchend.prevent="sendMsgClick">发送</button>
+        <button class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送</button>
       </view>
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>

@@ -16,7 +16,7 @@ export default class SocialuniChatRO {
     public avatar: string = null
     public unreadNum: number = null
     public updateTime: number = null
-    public lastMsg: OpenImMsgRO = null
+    public lastMsg: MessageVO = null
     public topLevel: number = null
     public topFlag: boolean = null
     public lastContent: string = null
@@ -41,7 +41,8 @@ export default class SocialuniChatRO {
             // this.vipFlag = chat.vipFlag
             this.receiveUserId = openImChat.userID
             if (openImChat.latestMsg) {
-                this.lastMsg = JsonUtil.toParse(openImChat.latestMsg)
+                const openImMsg: OpenImMsgRO = JsonUtil.toParse(openImChat.latestMsg)
+                this.lastMsg = new MessageVO(null, openImMsg)
                 this.lastContent = this.lastMsg.content
             }
             // this.loadMore = chat.loadMore
