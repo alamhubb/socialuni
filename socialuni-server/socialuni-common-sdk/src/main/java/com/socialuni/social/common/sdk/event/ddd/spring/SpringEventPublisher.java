@@ -20,7 +20,7 @@ import java.util.List;
  * @since 1.0
  */
 @Component
-@ConditionalOnMissingBean(EventPublisher.class)
+//@ConditionalOnMissingBean(EventPublisher.class)
 @ConditionalOnProperty(prefix = "socialuni.common.ddd.event", name = "enabled", matchIfMissing = true)
 public class SpringEventPublisher implements EventPublisher {
     @Autowired

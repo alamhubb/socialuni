@@ -37,9 +37,9 @@ public class PublishDataTanceBaseRepository <T, ID >
         if(socialuniPublishDataComponentByRequestAttribute != null){
             // 代表新增还是修改
             if (this.isNew(entity)) {
-                socialuniPublishDataComponentByRequestAttribute.update(entity);
-            }else{
                 socialuniPublishDataComponentByRequestAttribute.insert(entity);
+            }else{
+                socialuniPublishDataComponentByRequestAttribute.update(entity);
             }
         }
         return save;

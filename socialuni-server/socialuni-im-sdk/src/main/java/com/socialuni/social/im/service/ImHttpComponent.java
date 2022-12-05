@@ -1,6 +1,7 @@
 package com.socialuni.social.im.service;
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -49,17 +50,22 @@ public class ImHttpComponent {
         Map<String, String> heads = new HashMap<>();
 // 使用json发送请求，下面的是必须的
         heads.put(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-
+        if(StrUtil.isNotBlank(token)){
+            heads.put("token", token);
+        }
 
         String url = getRequestUrl(uri);
 
-        HttpRequest httpRequest = HttpRequest.post(url)
+        HttpRequest httpRequest = HttpRequest.post(url).headerMap(heads,true)
                 .timeout(10000)
                 .body(jsonObject.toString());
-        log.info("请求详情：{}", httpRequest);
+        log.info("openIm请求详情：{}", httpRequest);
 
-        return httpRequest.execute()
+        String body = httpRequest.execute()
                 .body();
+
+        log.info("openIm请求返回：{}", body);
+        return body;
 
     }
 

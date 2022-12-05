@@ -1,5 +1,6 @@
 package com.socialuni.social.im.event;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import com.socialuni.social.common.api.enumeration.PublishDataType;
@@ -50,13 +51,12 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
 
     @Override
     public void consumEvent(PublishDataModel publishDataModel) {
-        PublishDataType type = publishDataModel.getType();
         RequestMethod method = publishDataModel.getMethod();
         Object data = publishDataModel.getData();
         SocialuniImUserModel userModel = new SocialuniImUserModel();
         if(data instanceof SocialuniUserDo){
             SocialuniUserDo userDo = (SocialuniUserDo) data;
-            userModel.setBirth(Integer.valueOf(userDo.getBirthday()));
+            userModel.setBirth(Long.valueOf(DateUtil.parse(userDo.getBirthday() ,"yyyy-mm-ss").getTime()/1000).intValue());
             userModel.setNickname(userDo.getNickname());
             userModel.setFaceURL(userDo.getAvatar());
             String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDo.getUserId());
@@ -65,13 +65,19 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
             // 邮箱
 
             // 手机号
+
+
+
+            // 同步im。
+            if(RequestMethod.POST.equals(method)){
+                // 增加就不操作啦。 ， 之前的代码用了异步http调用去实现啦。
+//                imAuthService.userRegister(userModel);
+            }else if(RequestMethod.PUT.equals(method)){
+                imAuthService.update_user_info(userModel);
+            }
         }
 
-        if(RequestMethod.POST.equals(method)){
-            // 增加就不操作啦。 ， 之前的代码用了异步http调用去实现啦。
-        }else if(RequestMethod.PUT.equals(method)){
-            imAuthService.update_user_info(userModel);
-        }
+
     }
 
     @Override
@@ -81,6 +87,8 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
     }
 
     public static void main(String[] args) {
+        System.out.println(DateUtil.parse("2022-01-01", "yyyy-mm-ss").getTimezoneOffset());
+
         GenericConversionService genericConversionService = new GenericConversionService();
         Integer convert = genericConversionService.convert("1", Integer.class);
         System.out.println(convert);
