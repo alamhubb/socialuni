@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpResponse;
@@ -67,9 +68,9 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public boolean supports(MethodParameter methodParameter, Class c) {
-        //不拦截
-        return true;
+    public boolean supports(MethodParameter returnType, Class converterType) {
+        // 兼容原生的springmvc，自定义处理内容。 如处理流和下载，和支付回调要求的数据格式。
+        return !returnType.getParameterType().isAssignableFrom(ResponseEntity.class);
     }
 
 
