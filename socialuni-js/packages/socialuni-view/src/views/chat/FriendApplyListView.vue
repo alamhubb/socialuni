@@ -1,78 +1,71 @@
 <template>
   <view class="bg-default h100p">
     <!--    <input class="uni-input" focus placeholder="自动获得焦点" @confirm="addFriend"/>-->
-
     <uni-list>
-      <uni-title type="h1" align="center" title="我发出的好友请求列表"></uni-title>
-      <uni-list-chat v-for="(sendFriendApplication,index) in sendFriendApplicationList"
-                     :title="sendFriendApplication.toNickname" :avatar="sendFriendApplication.toFaceURL"
-                     :note="sendFriendApplication.reqMsg">
-        <view class="chat-custom-right">
-          <text class="chat-custom-text">{{ formatTime(sendFriendApplication.createTime) }}</text>
+      <uni-list-chat v-for="(applyData,index) in dataList"
+                     :title="applyData.toNickname" :avatar="applyData.toFaceURL"
+                     :note="applyData.reqMsg">
 
-          <!-- 需要使用 uni-icons 请自行引入 -->
-          <!--          <uni-icons type="star-filled" color="#999" size="18"></uni-icons>-->
-        </view>
-        <view class="chat-custom-right">
-          {{ friendRuestResult(sendFriendApplication.handleResult) }}
-        </view>
-      </uni-list-chat>
-    </uni-list>
-
-
-    <uni-list>
-      <uni-title type="h1" align="center" title="好友请求列表"></uni-title>
-      <uni-list-chat v-for="(recvFriendApplication,index) in recvFriendApplicationList"
-                     :title="recvFriendApplication.fromNickname" :avatar="recvFriendApplication.fromFaceURL"
-                     :note="recvFriendApplication.reqMsg">
-        <view class="chat-custom-right">
-          <text class="chat-custom-text">{{ formatTime(recvFriendApplication.createTime) }}</text>
-        </view>
-        <view class="chat-custom-right" v-if="recvFriendApplication.handleResult === 0">
-          <uni-tag type="primary" text="同意" @click="acceptFriendApplication(recvFriendApplication)"></uni-tag>
-          <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(recvFriendApplication)"></uni-tag>
-        </view>
-        <view class="chat-custom-right" v-else>
-          {{ friendRuestResult(recvFriendApplication.handleResult) }}
-        </view>
-      </uni-list-chat>
-    </uni-list>
-
-    <uni-list v-if="type === 'black'">
-      <uni-title type="h1" align="center" title="黑名单列表"></uni-title>
-      <uni-list-chat v-for="(black,index) in blackList" :title="black.nickname" :avatar="black.fromFaceURL"
-                     :note="black.reqMsg">
-        <!--        <view class="chat-custom-right">
-                  <text class="chat-custom-text">{{  formatTime(black.createTime)   }}</text>
-                </view>-->
-        <view class="chat-custom-right">
-          <text class="chat-custom-text" @click.stop="removeBlack(black)">从黑名单移除</text>
-        </view>
-      </uni-list-chat>
-    </uni-list>
-
-
-    <uni-list>
-      <uni-title type="h1" align="center" title="已添加的好友列表"></uni-title>
-      <view v-for="(friend,index) in friendList">
-        <uni-list-chat v-if="friend.friendInfo && !friend.blackInfo" :title="friend.friendInfo.nickname"
-                       :avatar="friend.friendInfo.fromFaceURL">
+        <template v-if="applyData.type === FriendApplyType.sendFriendApply">
           <view class="chat-custom-right">
-            <text class="chat-custom-text">{{ formatTime(friend.friendInfo.createTime) }}</text>
+            <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
+
+            <!-- 需要使用 uni-icons 请自行引入 -->
+            <!--          <uni-icons type="star-filled" color="#999" size="18"></uni-icons>-->
           </view>
           <view class="chat-custom-right">
-            <uni-tag type="warning" text="添加到黑名单" @click="addBlack(friend.friendInfo)"></uni-tag>
-            <uni-tag type="error" text="删除好友" @click="deleteFriend(friend.friendInfo)"></uni-tag>
+            {{ friendRuestResult(applyData.handleResult) }}
           </view>
-        </uni-list-chat>
-        <uni-list-chat v-if="friend.blackInfo" :title="friend.blackInfo.nickname"
-                       :avatar="friend.blackInfo.fromFaceURL">
+        </template>
+        <template v-else>
           <view class="chat-custom-right">
-            <text class="chat-custom-text" @click.stop="removeBlack(friend.blackInfo)">从黑名单移除</text>
+            <text class="chat-custom-text">{{ formatTime(applyData.createTime) }}</text>
           </view>
-        </uni-list-chat>
-      </view>
+          <view class="chat-custom-right" v-if="applyData.handleResult === 0">
+            <uni-tag type="primary" class="mr-sm" text="同意" @click="acceptFriendApplication(applyData)"></uni-tag>
+            <uni-tag type="success" text="拒绝" @click="refuseFriendApplication(applyData)"></uni-tag>
+          </view>
+          <view class="chat-custom-right" v-else>
+            {{ friendRuestResult(applyData.handleResult) }}
+          </view>
+        </template>
+      </uni-list-chat>
     </uni-list>
+    <!--    <uni-list v-if="type === 'black'">
+          <uni-title type="h1" align="center" title="黑名单列表"></uni-title>
+          <uni-list-chat v-for="(black,index) in blackList" :title="black.nickname" :avatar="black.fromFaceURL"
+                         :note="black.reqMsg">
+            &lt;!&ndash;        <view class="chat-custom-right">
+                      <text class="chat-custom-text">{{  formatTime(black.createTime)   }}</text>
+                    </view>&ndash;&gt;
+            <view class="chat-custom-right">
+              <text class="chat-custom-text" @click.stop="removeBlack(black)">从黑名单移除</text>
+            </view>
+          </uni-list-chat>
+        </uni-list>
+
+
+        <uni-list>
+          <uni-title type="h1" align="center" title="已添加的好友列表"></uni-title>
+          <view v-for="(friend,index) in friendList">
+            <uni-list-chat v-if="friend.friendInfo && !friend.blackInfo" :title="friend.friendInfo.nickname"
+                           :avatar="friend.friendInfo.fromFaceURL">
+              <view class="chat-custom-right">
+                <text class="chat-custom-text">{{ formatTime(friend.friendInfo.createTime) }}</text>
+              </view>
+              <view class="chat-custom-right">
+                <uni-tag type="warning" text="添加到黑名单" @click="addBlack(friend.friendInfo)"></uni-tag>
+                <uni-tag type="error" text="删除好友" @click="deleteFriend(friend.friendInfo)"></uni-tag>
+              </view>
+            </uni-list-chat>
+            <uni-list-chat v-if="friend.blackInfo" :title="friend.blackInfo.nickname"
+                           :avatar="friend.blackInfo.fromFaceURL">
+              <view class="chat-custom-right">
+                <text class="chat-custom-text" @click.stop="removeBlack(friend.blackInfo)">从黑名单移除</text>
+              </view>
+            </uni-list-chat>
+          </view>
+        </uni-list>-->
 
 
     <!--    <view class="row-col-center" >
@@ -93,11 +86,15 @@ import {onLoad} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
+import QTabs from "../../components/QTabs/QTabs.vue";
+import OpenImFriendApplyRO from "socialuni-sdk/src/model/friend/OpenImFriendApplyRO";
+import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 
-@Options({components: {}})
+@Options({components: {QTabs}})
 export default class ChatFriendPage extends Vue {
-  sendFriendApplicationList: Object[] = []
-  recvFriendApplicationList: Object[] = []
+  sendFriendApplicationList: OpenImFriendApplyRO[] = []
+  FriendApplyType = FriendApplyType
+  recvFriendApplicationList: OpenImFriendApplyRO[] = []
   blackList: Object[] = []
   friendList: Object[] = []
   type = "";
@@ -105,7 +102,6 @@ export default class ChatFriendPage extends Vue {
   applyRecordList() {
 
   }
-
 
   formatTime(dateStr: number) {
     return DateUtil.parseTime(dateStr * 1000)
@@ -115,19 +111,29 @@ export default class ChatFriendPage extends Vue {
   //   console.error('=================',e);
   //   socialChatFriendModule.addFriend(e.detail.value,"请求加好友");
   // }
-  created() {
+  mounted() {
     this.refresh();
+    /*setTimeout(() => {
+      this.refresh();
+    }, 1000)*/
     // 检查是否为好友
   }
 
+  get dataList() {
+    let dataList = [...this.sendFriendApplicationList, ...this.recvFriendApplicationList]
+    dataList = dataList.sort((a, b) => a.createTime - b.createTime)
+    return dataList
+  }
+
   refresh() {
-    this.getData(this.type);
+    this.getSendFriendApplicationList();
+    this.getRecvFriendApplicationList();
   }
 
   getData(type: string) {
     this.getSendFriendApplicationList();
     this.getRecvFriendApplicationList();
-    this.getFriendList();
+    /*this.getFriendList();
     switch (type) {
       case "sendFriendApplication":
         this.getSendFriendApplicationList();
@@ -141,7 +147,7 @@ export default class ChatFriendPage extends Vue {
       case "friend":
         this.getFriendList();
         break;
-    }
+    }*/
   }
 
   /**
@@ -204,9 +210,14 @@ export default class ChatFriendPage extends Vue {
    */
   getSendFriendApplicationList() {
     socialChatModule.openIm.getSendFriendApplicationList().then(({data}) => {
-      this.sendFriendApplicationList = JSON.parse(data);
-      console.log('getSendFriendApplicationList', data, this.sendFriendApplicationList);
-    }).catch(err => {
+      const list = JSON.parse(data);
+      const newList = []
+      for (const datum of list) {
+        const item = new OpenImFriendApplyRO(datum)
+        item.type = FriendApplyType.sendFriendApply
+        newList.push(item)
+      }
+      this.sendFriendApplicationList = newList
     })
 
   }
@@ -216,9 +227,14 @@ export default class ChatFriendPage extends Vue {
    */
   getRecvFriendApplicationList() {
     socialChatModule.openIm.getRecvFriendApplicationList().then(({data}) => {
-      this.recvFriendApplicationList = JSON.parse(data);
-      console.log('getRecvFriendApplicationList', data, this.recvFriendApplicationList);
-    }).catch(err => {
+      const list = JSON.parse(data);
+      const newList = []
+      for (const datum of list) {
+        const item = new OpenImFriendApplyRO(datum)
+        item.type = FriendApplyType.recvFriendApply
+        newList.push(item)
+      }
+      this.recvFriendApplicationList = newList
     })
   }
 

@@ -1,32 +1,36 @@
 <template>
   <view class="bg-default h100p">
     <q-navbar title="消息">
-      <div class="row-end-center flex-1">
-        <view>
-          <q-icon icon="search"></q-icon>
-        </view>
-        <view @click="toAddFriend">
-          <q-icon icon="plus-circle"></q-icon>
-        </view>
+      <div class="row-end-center flex-1 pl">
+        <q-search class="w100p mx-sm bg-white">
+          <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
+          <input class="flex-1" v-model="searchContent" :adjust-position="false" type="text"/>
+          <q-icon v-if="searchContent" class="mr text-gray row-all-center" icon="close" size="16"
+                  @click="clearSearchContent"
+          ></q-icon>
+        </q-search>
+        <!--        <view @click="toAddFriend">
+                  <q-icon icon="plus-circle"></q-icon>
+                </view>-->
       </div>
     </q-navbar>
-<!--    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
-      <view class="flex-1 card-text-row">
-        长按聊天框可解除匹配
-      </view>
-      <view class="flex-none mr-10px">
-        <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
-      </view>
-    </view>-->
+    <!--    <view v-if="showChatHint&& showChats && showChats.length" class="row-col-center bg-orange">
+          <view class="flex-1 card-text-row">
+            长按聊天框可解除匹配
+          </view>
+          <view class="flex-none mr-10px">
+            <q-icon icon="close-circle-fill" size="18" @click="closeUploadImgHint"></q-icon>
+          </view>
+        </view>-->
 
     <div>
       <uni-list>
-        <uni-list-item title="好友申请" link  to="/pagesLazy/chat/friendApplyList"></uni-list-item>
-<!--        <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"></uni-list-item>
-        <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"></uni-list-item>
-        <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"></uni-list-item>
-        <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"></uni-list-item>
-        <uni-list-item title="群聊" link to="/pages/chat/group?type=friend"></uni-list-item>-->
+        <uni-list-item title="好友申请" link to="/pagesLazy/chat/friendApplyList"></uni-list-item>
+        <!--        <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"></uni-list-item>
+                <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"></uni-list-item>
+                <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"></uni-list-item>
+                <uni-list-item title="通讯录" link to="/pages/chat/friend?type=friend"></uni-list-item>
+                <uni-list-item title="群聊" link to="/pages/chat/group?type=friend"></uni-list-item>-->
       </uni-list>
     </div>
 
@@ -85,9 +89,9 @@
         <view class="action h45px col-between">
           <view class="text-grey text-xs">{{ formatTime(chat.updateTime) }}</view>
           <view>
-            <view v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
+<!--            <view v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
               {{ chat.unreadNum }}
-            </view>
+            </view>-->
           </view>
         </view>
       </view>
@@ -112,16 +116,21 @@ import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserConten
 import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import SocialuniChatRO from "socialuni-api/src/model/SocialuniChatRO";
+import QInput from "../../components/QInput/QInput.vue";
+import QSearch from "../../components/QSearch/QSearch.vue";
 
 @Options({
-  components: {QIcon, QNavbar}
+  components: {QSearch, QInput, QIcon, QNavbar}
 })
 export default class ChatView extends Vue {
   users: SocialUserContentRO[] = []
 
+  searchContent = null
+
   get chats() {
     console.log(socialChatModule.chats)
-    return socialChatModule.chats
+    const chats = socialChatModule.chats
+    return chats.filter(item => !this.searchContent || item.nickname.includes(this.searchContent))
   }
 
   // @chatStore.Getter('chatsUnreadNumTotal') readonly chatsUnreadNumTotal: number
@@ -274,6 +283,10 @@ export default class ChatView extends Vue {
 
   toAddFriend() {
     PageUtil.toChatFriend();
+  }
+
+  clearSearchContent() {
+    this.searchContent = ''
   }
 }
 </script>

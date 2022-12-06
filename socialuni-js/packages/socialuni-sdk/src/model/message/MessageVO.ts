@@ -22,14 +22,25 @@ export default class MessageVO {
 
     constructor(content: string, msg: OpenImMsgRO = null) {
         if (msg) {
+            console.log(msg.contentType)
             if (msg.contentType === MessageType.TEXTMESSAGE) {
-                console.log(7777)
-                console.log(msg.content)
                 this.content = msg.content
             } else if (msg.contentType === MessageType.GROUPCREATED) {
-                const contentObj = JsonUtil.toParse(msg.content)
-                console.log(contentObj)
+                /*const contentObj: { jsonDetail: string } = JsonUtil.toParse(msg.content)
+                const jsonObj = JsonUtil.toParse(contentObj.jsonDetail)
+                console.log(123)
+                console.log(jsonObj)*/
+                this.content = '群聊创建成功'
+            } else if (msg.contentType === MessageType.FRIENDADDED) {
+                /*const contentObj: { jsonDetail: string } = JsonUtil.toParse(msg.content)
+                const jsonObj = JsonUtil.toParse(contentObj.jsonDetail)
+                console.log(123)
+                console.log(jsonObj)*/
+                this.content = '好友添加成功'
+            } else if (msg.contentType === MessageType.FRIENDDELETED) {
+                this.content = '好友已删除'
             }
+
 
             if (socialUserModule.mineUser && msg.sendID === socialUserModule.mineUser.id) {
                 this.user = socialUserModule.mineUser
