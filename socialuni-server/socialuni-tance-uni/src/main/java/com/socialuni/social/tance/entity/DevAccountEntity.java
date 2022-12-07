@@ -41,13 +41,13 @@ public class DevAccountEntity {
             curDevNum = AdminAppConfigConst.qingChiDevNum;
         }
         //加30以内随机数
-        DevAccountModel devAccountModel = new DevAccountModel();
+        DevAccountDo devAccountModel = new DevAccountDo();
         Date curDate = new Date();
         String secretKey = UUIDUtil.getUUID();
         devAccountModel.setSecretKey(secretKey);
         devAccountModel.setPhoneNum(phoneNum);
         devAccountModel.setIdentityNum(null);
-//        devAccountDO.setSecretKey(UUIDUtil.getUUID());
+        devAccountModel.setSecretKey(UUIDUtil.getUUID());
         devAccountModel.setAppGenderType(GenderType.all);
         devAccountModel.setDevNum(curDevNum);
         devAccountModel.setType(DevAccountType.personal);
@@ -56,7 +56,7 @@ public class DevAccountEntity {
         devAccountModel.setCallApiCount(0);
         devAccountModel.setUpdateTime(curDate);
         devAccountModel.setSocialuniId(socialuniId);
-        devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
+        devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);
 
         //创建话题，还要创建用户
        /* TagDO tagDO = SocialTagDOFactory.toTagDO(curDevNum.toString(), "开发者对应的话题", SocialAppConfig.getSystemUserId());

@@ -22,6 +22,6 @@ public class DevAccountRedis implements DevAccountRedisInterface {
             }
     )
     public DevAccountModel saveDevAccount(DevAccountModel devAccount) {
-        return devAccountApi.savePut(devAccount);
+        return devAccountApi.save(devAccount);
     }
 }

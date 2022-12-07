@@ -16,11 +16,7 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public interface DevAccountRepository extends JpaRepository<DevAccountDo, Integer>, DevAccountInterface {
-
-    default DevAccountModel savePut(DevAccountModel devAccountModel){
-        DevAccountDo devAccountDo = BeanUtil.copyProperties(devAccountModel, DevAccountDo.class);
-        return this.save(devAccountDo);
-    }
+    DevAccountDo save(DevAccountDo devAccountDo);
     @Cacheable(cacheNames = "getDevAccountById", key = "#id")
     DevAccountModel findOneById(Integer id);
 

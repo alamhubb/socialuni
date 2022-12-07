@@ -14,6 +14,8 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public interface DevAccountInterface {
+//    DevAccountModel savePut(DevAccountModel devAccountModel);
+    DevAccountModel save(DevAccountModel devAccountModel);
     //    @Cacheable(cacheNames = "getDevAccountById", key = "#id")
     DevAccountModel findOneById(Integer id);
 
@@ -36,7 +38,6 @@ public interface DevAccountInterface {
 
     List<? extends DevAccountModel> findAll();
 
-    DevAccountModel savePut(DevAccountModel devAccountModel);
 
     //同步创建生产环境的开发者账号
 //    DevAccountModel queryDevAccount(DevAccountQueryQO devAccountQueryQO);
