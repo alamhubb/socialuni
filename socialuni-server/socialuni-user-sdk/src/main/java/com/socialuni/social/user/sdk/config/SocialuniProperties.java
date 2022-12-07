@@ -10,6 +10,7 @@ public class SocialuniProperties {
     private String secretKey;
     private String centralServerUrl;
     private String openImServerUrl;
+    private String openImSecret;
     private String centralSocialuniId;
     private String socialuniId;
     private String systemUserPhoneNum;

@@ -29,11 +29,11 @@ import java.util.Map;
 @Component
 @Slf4j
 public class ImHttpComponent {
-    @Value("${socialuni.openIm.ip:http://82.157.32.169:10002}")
+    @Value("${socialuni.open-im-server-url:https://im.socialuni.cn}")
     private String openImUrl;
     /* @Value("${socialuni.openIm.platform:1}")
      private int platform = 1;*/
-    @Value("${socialuni.openIm.secret:tuoyun}")
+    @Value("${socialuni.im-secret:tuoyun}")
     private String secret;
 
     public String post(String uri, ImInterface obj) {

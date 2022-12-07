@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, Integer> {
-    @Query(value = "select u.id from SocialuniUserDo u")
+    @Query(value = "select u.userId from SocialuniUserDo u")
     List<Integer> findAllUserIds();
 
     @Cacheable(cacheNames = CommonRedisKey.userById, key = "#id")

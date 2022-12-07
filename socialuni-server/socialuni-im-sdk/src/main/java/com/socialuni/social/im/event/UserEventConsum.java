@@ -12,6 +12,7 @@ import com.socialuni.social.im.service.ImAuthService;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
 
-/**用于同步user信息到im系统里面去。
+/**
+ * 用于同步user信息到im系统里面去。
+ *
  * @author wulinghui
  * @version 1.0
  * @module Socialuni
@@ -30,21 +33,28 @@ import java.util.Map;
  */
 @Component
 public class UserEventConsum extends AbstractPublishDataModelConsum {
-    public static final String openImIp = "82.157.32.169";
+    private static String openImUrl;
+
+    @Value("${socialuni.open-im-server-url:https://im.socialuni.cn}")
+    public void setOpenImUrl(String openImUrl) {
+        UserEventConsum.openImUrl = openImUrl;
+    }
+
     @Resource
     private ImAuthService imAuthService;
     @Resource
     private ConversionService conversionService;
-//    @Override
+
+    //    @Override
     public void consumEvent(Map<String, Object> map) {
         // 注册到Im
         SocialuniImUserModel imUserModel = new SocialuniImUserModel();
-        imUserModel.setUserID( conversionService.convert(map.get("id"),String.class) );
-        imUserModel.setNickname(conversionService.convert(map.get("nickname"),String.class) );
-        imUserModel.setFaceURL( conversionService.convert(map.get("avatar"),String.class));
-        imUserModel.setGender( conversionService.convert(map.get("gender"),int.class));
-        imUserModel.setPhoneNumber(conversionService.convert(map.get("phoneNum"),String.class) );
-        imUserModel.setBirth(conversionService.convert(map.get("birthday"),Integer.class));
+        imUserModel.setUserID(conversionService.convert(map.get("id"), String.class));
+        imUserModel.setNickname(conversionService.convert(map.get("nickname"), String.class));
+        imUserModel.setFaceURL(conversionService.convert(map.get("avatar"), String.class));
+        imUserModel.setGender(conversionService.convert(map.get("gender"), int.class));
+        imUserModel.setPhoneNumber(conversionService.convert(map.get("phoneNum"), String.class));
+        imUserModel.setBirth(conversionService.convert(map.get("birthday"), Integer.class));
         imUserModel.setCreateTime(new Date());
         imAuthService.userRegister(imUserModel);
     }
@@ -54,25 +64,24 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
         RequestMethod method = publishDataModel.getMethod();
         Object data = publishDataModel.getData();
         SocialuniImUserModel userModel = new SocialuniImUserModel();
-        if(data instanceof SocialuniUserDo){
+        if (data instanceof SocialuniUserDo) {
             SocialuniUserDo userDo = (SocialuniUserDo) data;
-            userModel.setBirth(Long.valueOf(DateUtil.parse(userDo.getBirthday() ,"yyyy-mm-ss").getTime()/1000).intValue());
+            userModel.setBirth(Long.valueOf(DateUtil.parse(userDo.getBirthday(), "yyyy-mm-ss").getTime() / 1000).intValue());
             userModel.setNickname(userDo.getNickname());
             userModel.setFaceURL(userDo.getAvatar());
             String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(userDo.getUserId());
             userModel.setUserID(mineUserUid);
-            userModel.setGender(GenderTypeNumEnum.getEnumByName(userDo.getGender()).getValue() );
+            userModel.setGender(GenderTypeNumEnum.getEnumByName(userDo.getGender()).getValue());
             // 邮箱
 
             // 手机号
 
 
-
             // 同步im。
-            if(RequestMethod.POST.equals(method)){
+            if (RequestMethod.POST.equals(method)) {
                 // 增加就不操作啦。 ， 之前的代码用了异步http调用去实现啦。
 //                imAuthService.userRegister(userModel);
-            }else if(RequestMethod.PUT.equals(method)){
+            } else if (RequestMethod.PUT.equals(method)) {
                 imAuthService.update_user_info(userModel);
             }
         }
@@ -93,7 +102,7 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
         Integer convert = genericConversionService.convert("1", Integer.class);
         System.out.println(convert);
 
-        String post = HttpUtil.post(openImIp + ":10002/auth/user_register", "{\n" +
+        String post = HttpUtil.post(openImUrl + "/auth/user_register", "{\n" +
                 "  \"birth\": 0,\n" +
                 "  \"email\": \"string\",\n" +
                 "  \"ex\": \"string\",\n" +
@@ -109,15 +118,13 @@ public class UserEventConsum extends AbstractPublishDataModelConsum {
         System.out.println(post);
 
 
-        post = HttpUtil.post(openImIp + ":10002/auth/user_token", "{\n" +
+        post = HttpUtil.post(openImUrl + "/auth/user_token", "{\n" +
                 "  \"operationID\": \"string\",\n" +
                 "  \"platform\": 8,\n" +
                 "  \"secret\": \"tuoyun\",\n" +
                 "  \"userID\": \"string\"\n" +
                 "}");
         System.out.println(post);
-
-
 
     }
 

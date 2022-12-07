@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
 @RequestMapping("socialuni/imUser")
 @Tag(name = "聊天模块/用户信息模块")
 @FeignClient(name = "imUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/imUser")
 public interface SocialuniImUserAPI {
-    @GetMapping("getImUserToken")
+    @GetMapping("getUserImToken")
     @Operation(summary = "获取用户Im模块的token")
-    ResultRO<String> getImUserToken();
-
+    ResultRO<String> getUserImToken();
 }
