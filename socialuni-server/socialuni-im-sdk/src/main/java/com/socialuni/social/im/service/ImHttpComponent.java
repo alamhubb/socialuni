@@ -33,7 +33,7 @@ public class ImHttpComponent {
     private String openImUrl;
     /* @Value("${socialuni.openIm.platform:1}")
      private int platform = 1;*/
-    @Value("${socialuni.im-secret:tuoyun}")
+    @Value("${socialuni.open-im-secret:tuoyun}")
     private String secret;
 
     public String post(String uri, ImInterface obj) {

@@ -104,7 +104,7 @@ public class RequestUtil {
     }
 
     public static String getPlatform() {
-        return RequestUtil.getHeader(SocialWebHeaderName.platformHeaderName);
+        return RequestUtil.getRequestValue(SocialWebHeaderName.platformHeaderName);
     }
 
     /*public static String getDataOriginalSocialuniId() {

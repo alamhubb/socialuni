@@ -1,5 +1,7 @@
 package com.socialuni.social.im.logic.domain;
 
+import com.socialuni.social.common.api.constant.PlatformType;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.constant.SocialuniAccountProviderType;
 import com.socialuni.social.user.sdk.logic.entity.SocialBindUserProviderAccountEntity;
@@ -21,7 +23,7 @@ public class SocialBindUserOpenImAccountDomain {
 
         SocialProviderLoginQO loginQO = new SocialProviderLoginQO();
         loginQO.setProvider(SocialuniAccountProviderType.openIm);
-//        loginQO.setPlatform(RequestUtil.getPlatform());
+        loginQO.setPlatform(PlatformType.h5);
         loginQO.setCode(token);
 
         loginQO.setUnionId(userUid);

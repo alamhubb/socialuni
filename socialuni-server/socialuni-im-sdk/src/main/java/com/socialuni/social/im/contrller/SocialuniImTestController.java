@@ -1,6 +1,9 @@
 package com.socialuni.social.im.contrller;
 
+import com.socialuni.social.common.api.constant.PlatformType;
+import com.socialuni.social.common.api.constant.SocialWebHeaderName;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.im.api.SocialuniImUserAPI;
 import com.socialuni.social.im.feign.SocialuniOpenImUserFeign;
 import com.socialuni.social.im.logic.domain.SocialBindUserOpenImAccountDomain;
@@ -24,6 +27,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 /**
  * @author qinkaiyuan
@@ -53,14 +57,19 @@ public class SocialuniImTestController {
         List<Integer> userIds = socialuniUserRepository.findAllUserIds();
         Integer count = 50000;
 
+        RequestUtil.setAttribute(SocialWebHeaderName.platformHeaderName, PlatformType.h5);
         List<Integer> newIds = userIds.subList(startIndex, startIndex + count);
         for (int i = 0; i < newIds.size() - 1; i++) {
             Integer newId = newIds.get(i);
-            if (i % 1000 == 0) {
+            if (i % 100 == 0) {
+                log.info("index:{}", i);
                 log.info(String.valueOf(System.currentTimeMillis()));
             }
             SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(newId);
-            CompletableFuture.supplyAsync(() -> this.getUserImToken(mineUser));
+            CompletableFuture.supplyAsync(() -> this.getUserImToken(mineUser)).exceptionally(e -> {
+                log.info(e.getMessage());
+                return null;
+            });
         }
 
 //        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
@@ -77,7 +86,7 @@ public class SocialuniImTestController {
             //存在脏数据，所以特殊处理
             imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
         } catch (RuntimeException e) {
-            e.printStackTrace();
+            log.info("正常逻辑未注册");
         }
 
         //设置openIm的key

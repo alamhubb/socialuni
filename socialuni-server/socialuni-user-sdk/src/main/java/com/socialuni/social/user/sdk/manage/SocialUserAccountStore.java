@@ -23,7 +23,10 @@ public class SocialUserAccountStore {
     public SocialUserAccountDO getAccountByUnionId(SocialProviderLoginQO loginQO, UniUnionIdRO uniUnionIdRO) {
         String provider = loginQO.getProvider();
         String unionId = uniUnionIdRO.getUnionid();
-        String platform = RequestUtil.getPlatform();
+        String platform = loginQO.getPlatform();
+        if (platform == null) {
+            platform = RequestUtil.getPlatform();
+        }
         SocialUserAccountDO socialUserAccountDO = null;
         //unionId不为null才查询
         if (StringUtils.isNotEmpty(unionId)) {

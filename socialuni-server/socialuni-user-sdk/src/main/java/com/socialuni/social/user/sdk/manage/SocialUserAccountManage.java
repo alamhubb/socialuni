@@ -8,6 +8,7 @@ import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
 import com.socialuni.social.user.sdk.model.QO.SocialProviderLoginQO;
 import com.socialuni.social.user.sdk.model.RO.UniUnionIdRO;
 import com.socialuni.social.user.sdk.repository.SocialUserAccountRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class SocialUserAccountManage {
     @Resource
     SocialUserAccountRepository socialUserAccountRepository;
@@ -45,7 +47,12 @@ public class SocialUserAccountManage {
         SocialUserAccountDO socialUserAccountDO = new SocialUserAccountDO();
         socialUserAccountDO.setUserId(userId);
 //        socialUserAccountDO.setDevId(loginQO.getDevId());
-        socialUserAccountDO.setPlatform(RequestUtil.getPlatform());
+        String platform = loginQO.getPlatform();
+        if (platform == null) {
+            platform = RequestUtil.getPlatform();
+        }
+
+        socialUserAccountDO.setPlatform(platform);
         socialUserAccountDO.setProvider(loginQO.getProvider());
 
         socialUserAccountDO.setNickname(loginQO.getNickName());
@@ -53,18 +60,21 @@ public class SocialUserAccountManage {
         socialUserAccountDO.setGender(GenderTypeNumEnum.getNameByValue(loginQO.getGender()));
 
         String openId = uniUnionIdRO.getOpenid();
+
+
+
         if (StringUtils.isEmpty(openId)) {
             throw new SocialParamsException("openId为空");
         }
-        if (PlatformType.mp.equals(RequestUtil.getPlatform())) {
+        if (PlatformType.mp.equals(platform)) {
             //相同都为unionid
             socialUserAccountDO.setMpOpenId(openId);
-        } else if (PlatformType.app.equals(RequestUtil.getPlatform())) {
+        } else if (PlatformType.app.equals(platform)) {
             socialUserAccountDO.setAppOpenId(openId);
-        } else if (PlatformType.h5.equals(RequestUtil.getPlatform())) {
+        } else if (PlatformType.h5.equals(platform)) {
             socialUserAccountDO.setH5OpenId(openId);
         } else {
-            throw new SocialParamsException("不支持的渠道类型：" + RequestUtil.getPlatform());
+            throw new SocialParamsException("不支持的渠道类型：" + platform);
         }
         if (!StringUtils.isEmpty(uniUnionIdRO.getUnionid())) {
             socialUserAccountDO.setUnionId(uniUnionIdRO.getUnionid());
