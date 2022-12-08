@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -37,19 +38,24 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
             },
             put = {@CachePut(cacheNames = {"getUnionIdById"}, key = "#uniContentUnionIdDO.id", condition = "#uniContentUnionIdDO.id != null")}
     )
-    public SocialuniUnionIdModler save(SocialuniUnionIdModler uniContentUnionIdDO) {
+    public SocialuniUnionIdDo save(SocialuniUnionIdModler uniContentUnionIdDO) {
         return uniContentUnionIdRepository.save(BeanUtil.copyProperties(uniContentUnionIdDO, SocialuniUnionIdDo.class));
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdById", key = "#unionId")
-    public SocialuniUnionIdModler findById(Integer unionId) {
+    public SocialuniUnionIdDo findById(Integer unionId) {
         return uniContentUnionIdRepository.findById(unionId).orElse(null);
     }
 
     @Override
     @Cacheable(cacheNames = "getUnionIdByUuId", key = "#uuid")
-    public SocialuniUnionIdModler findByUuId(String uuid) {
+    public SocialuniUnionIdDo findByUuId(String uuid) {
         return uniContentUnionIdRepository.findByUuid(uuid);
+    }
+
+    @Override
+    public List<String> findUuidAllByContentType(String contentTyp){
+        return uniContentUnionIdRepository.findAllUuidByContentType(contentTyp);
     }
 }

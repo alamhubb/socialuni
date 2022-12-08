@@ -2,6 +2,8 @@ package com.socialuni.social.tance.sdk.api;
 
 import com.socialuni.social.tance.sdk.model.SocialuniUnionIdModler;
 
+import java.util.List;
+
 /**
  * @author wulinghui
  * @version 1.0
@@ -16,4 +18,6 @@ public interface SocialuniUnionIdInterface {
     SocialuniUnionIdModler findById(Integer unionId);
 
     SocialuniUnionIdModler findByUuId(String uuid);
+
+    List<String> findUuidAllByContentType(String contentTyp);
 }

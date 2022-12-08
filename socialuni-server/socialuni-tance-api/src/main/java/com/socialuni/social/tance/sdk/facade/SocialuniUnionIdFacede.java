@@ -167,6 +167,10 @@ public class SocialuniUnionIdFacede {
         return pattern.matcher(str).matches();
     }
 
+    public static List<String> findUuidAllByContentType(String contentTyp){
+        return socialuniUnionIdApi.findUuidAllByContentType(contentTyp);
+    }
+
 
     //根据uid获取真实id
     /*public static Integer getResultByUnionId(String contentType, String unionId) {

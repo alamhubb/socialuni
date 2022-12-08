@@ -42,6 +42,10 @@ public class SocialuniImController implements SocialuniImUserAPI {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
 
+        return this.getUserImToken(mineUser);
+    }
+
+    private ResultRO<String> getUserImToken(SocialuniUserDo mineUser) {
         SocialuniImUserModel socialuniImUserModel = toImUserModel(mineUser);
 
         String imToken = null;
@@ -49,7 +53,7 @@ public class SocialuniImController implements SocialuniImUserAPI {
             //存在脏数据，所以特殊处理
             imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
         } catch (RuntimeException e) {
-            e.printStackTrace();
+            log.info("正常逻辑未注册");
         }
 
         //设置openIm的key
@@ -60,8 +64,15 @@ public class SocialuniImController implements SocialuniImUserAPI {
                 imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
             }
         } else {
-            //如果为登录，则刷新token
-            imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
+            try {
+                //如果为登录，则刷新token
+                imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
+            } catch (RuntimeException e) {
+                imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
+                ResultRO<String> resultRO = this.getUserImToken(mineUser);
+                imToken = resultRO.getData();
+            }
+
         }
         socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);
         return ResultRO.success(socialUserAccountDO.getSessionKey());
