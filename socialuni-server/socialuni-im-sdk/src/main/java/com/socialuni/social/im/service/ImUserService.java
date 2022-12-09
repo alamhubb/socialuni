@@ -46,7 +46,7 @@ public class ImUserService {
         imHttpComponent.post("/auth/user_token", userModel,token);
     }
 
-    public ResultRO<String> getUserImToken(SocialuniUserDo mineUser) {
+    public ResultRO<String> getImUserToken(SocialuniUserDo mineUser) {
         SocialuniImUserModel socialuniImUserModel = toImUserModel(mineUser);
 
         String imToken = null;
@@ -70,7 +70,7 @@ public class ImUserService {
                 imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
             } catch (RuntimeException e) {
                 imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
-                ResultRO<String> resultRO = this.getUserImToken(mineUser);
+                ResultRO<String> resultRO = this.getImUserToken(mineUser);
                 imToken = resultRO.getData();
             }
 
