@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.logic.service;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.logic.domain.SocialuniLoginDomain;
 import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;

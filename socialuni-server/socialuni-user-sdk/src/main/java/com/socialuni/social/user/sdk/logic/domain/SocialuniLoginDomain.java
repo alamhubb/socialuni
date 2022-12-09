@@ -1,6 +1,7 @@
 package com.socialuni.social.user.sdk.logic.domain;
 
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
+import com.socialuni.social.common.sdk.event.ddd.EventPublisherFacade;
 import com.socialuni.social.user.sdk.logic.entity.SocialPhoneLoginEntity;
 import com.socialuni.social.user.sdk.logic.entity.SocialProviderLoginEntity;
 import com.socialuni.social.user.sdk.manage.SocialuniTokenManage;
@@ -25,6 +26,7 @@ public class SocialuniLoginDomain {
     @Resource
     SocialProviderLoginEntity socialProviderLoginEntity;
 
+
     @Transactional
     public SocialLoginRO<SocialuniUserRO> providerLogin(SocialProviderLoginQO loginQO) {
         //创建或返回
@@ -44,6 +46,8 @@ public class SocialuniLoginDomain {
         SocialuniUserRO userDetailRO = SocialuniMineUserROFactory.getMineUser(mineUser);
 
         SocialTokenDO socialUserTokenDO = tokenManage.create(mineUser.getUnionId());
+
+        EventPublisherFacade.publishEvent("userLogin", mineUser);
 
         return new SocialLoginRO<>(socialUserTokenDO.getToken(), userDetailRO);
     }
