@@ -4,11 +4,12 @@ import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI"
 import AlertUtil from "../utils/AlertUtil";
 import ToastUtil from "../utils/ToastUtil";
 import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
+import SocialuniUserImAPI from "socialuni-api/src/api/SocialuniImUserAPI";
 
 export default class UserService {
     static async getAppLunchDataByHasUser() {
         if (socialUserModule.token && !socialChatModule.imToken) {
-            const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
+            const imRes = await SocialuniUserImAPI.getUserImTokenAPI()
             socialChatModule.setImToken(imRes.data)
         }
         socialChatModule.initSocialuniChatModule()
