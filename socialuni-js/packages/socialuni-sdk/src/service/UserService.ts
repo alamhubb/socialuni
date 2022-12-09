@@ -9,7 +9,7 @@ import SocialuniUserImAPI from "socialuni-api/src/api/SocialuniImUserAPI";
 export default class UserService {
     static async getAppLunchDataByHasUser() {
         if (socialUserModule.token && !socialChatModule.imToken) {
-            const imRes = await SocialuniUserImAPI.getUserImTokenAPI()
+            const imRes = await SocialuniImUserAPI.getImUserTokenAPI()
             socialChatModule.setImToken(imRes.data)
         }
         socialChatModule.initSocialuniChatModule()
