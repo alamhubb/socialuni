@@ -32,11 +32,12 @@ public class PublishDataTanceBaseRepository <T, ID >
 
     @Override
     public <S extends T> S save(S entity) {
+        boolean isNew = this.isNew(entity);
         S save = super.save(entity);
         SocialuniPublishDataComponent socialuniPublishDataComponentByRequestAttribute = getSocialuniPublishDataComponentByRequestAttribute();
         if(socialuniPublishDataComponentByRequestAttribute != null){
             // 代表新增还是修改
-            if (this.isNew(entity)) {
+            if (isNew) {
                 socialuniPublishDataComponentByRequestAttribute.insert(entity);
             }else{
                 socialuniPublishDataComponentByRequestAttribute.update(entity);

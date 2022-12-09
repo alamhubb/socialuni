@@ -2,6 +2,7 @@ package com.socialuni.social.im.service;
 
 import com.socialuni.social.im.model.ImTokenModel;
 import com.socialuni.social.im.model.SocialuniImUserModel;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ public class ImAuthService {
 
     /**
      * 用户注册
+     *
      * @param userModel
      */
     public String userRegister(SocialuniImUserModel userModel) {
@@ -30,17 +32,24 @@ public class ImAuthService {
         String token = tokenModel.getToken();
         return token;
     }
+
+    @Async
+    public void userRegisterAsync(SocialuniImUserModel userModel) {
+        this.userRegister(userModel);
+    }
+
     /**
      * 修改用户信息
-     * @param userModel
      *
+     * @param userModel
      */
     public String update_user_info(SocialuniImUserModel userModel) {
         String userID = userModel.getUserID();
         String token = this.getToken(userID);
-        String response = imHttpComponent.post("/user/update_user_info", userModel,token);
+        String response = imHttpComponent.post("/user/update_user_info", userModel, token);
         return response;
     }
+
     /**
      * 获取用户的token
      * (免密的用户登录)
