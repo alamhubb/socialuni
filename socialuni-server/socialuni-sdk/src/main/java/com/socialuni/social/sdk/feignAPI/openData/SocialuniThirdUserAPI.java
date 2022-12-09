@@ -10,11 +10,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 
 //@RequestMapping("socialuni/thirdUser")
+//@FeignClient(name = "thirdUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}")
 @FeignClient(name = "thirdUser", url = "${socialuni.central-server-url:https://api.socialuni.cn}", path = "socialuni/thirdUser")
 @Tag(name = "开放数据/开放用户数据")
 public interface SocialuniThirdUserAPI {

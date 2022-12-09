@@ -1,4 +1,4 @@
-@import "src/styles/qing-scss/color/index";
+@import "color/color";
 
 //基础色
 $color-white: #fff;
@@ -41,7 +41,7 @@ $color-info: $color-content;
 
 //默认背景
 $color-bg-default: #f7f7f7 !default;
-$color-border-default: #e6e6e6 !default;
+$color-border-default: #dedede !default;
 //主题色
 $color-bg-base: $color-white !default;
 //主题色
@@ -50,12 +50,14 @@ $color-bg-base: $color-white !default;
 //$color-theme-base-light: $color-bg-default !default;
 //主题色
 //主题下字体颜色，主题背景色下，字体颜色也不一定一样，主题颜色对应的字体色
-$color-theme: #3383f6 !default;
-//主题亮色
-$color-theme2: #A2D2FF !default;
-//背景色
-$color-theme3: $color-bg-default !default;
-$color-theme4: $color-white !default;
+//$color-theme: #5B21B6 !default;
+//$color-theme-bg: #e4bad4 !default;
+//$color-theme-light: #FDF2F8 !default;
+
+$color-theme: #3f93ee !default;
+$color-theme-bg: #f7f7f7 !default;
+$color-theme-navbar-bg: #f7f7f7 !default;
+$color-theme-light: $color-white !default;
 
 $colors-theme: (
         girl:$color-girl,
@@ -75,8 +77,7 @@ $mergeMap2: map-merge($mergeMap1, $colors-green);
 $mergeMap3: map-merge($mergeMap2, $colors-grey);
 $mergeMap4: map-merge($mergeMap3, $colors-orange);
 $mergeMap5: map-merge($mergeMap4, $colors-purple);
-$mergeMap6: map-merge($mergeMap5, $colors-indigo);
-$colors-base: map-merge($mergeMap6, $colors-red);
+$colors-base: map-merge($mergeMap5, $colors-red);
 
 //背景
 //头部菜单
@@ -133,16 +134,15 @@ $colors-custom-bg: (
         default: $color-bg-default,
         base: $color-bg-base,
         theme: $color-theme,
-        theme2: $color-theme2,
-        theme3: $color-theme3,
-        theme4: $color-theme4,
-  //theme-light: $color-theme-light,
+        theme-bg: $color-theme-bg,
+        theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,
         header-menu-hover: $color-bg-header-menu-hover,
         menu-hover: $color-bg-menu-hover,
         filter-active: $color-bg-filter-active,
         table-header: $color-bg-table-header,
         table-header-hover: $color-bg-table-header-hover,
+        navbar: $color-theme-navbar-bg,
 );
 
 $colors-bg: map-merge($colors-base, $colors-custom-bg);

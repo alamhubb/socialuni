@@ -50,7 +50,10 @@ public class FeignInterceptor implements RequestInterceptor {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        if (!postUrl.contains("thirdUser/registryUser")) {
+        System.out.println(postUrl);
+        System.out.println(mineUser != null);
+
+        if (!postUrl.contains("/registryUser")) {
             if (mineUser != null) {
                 Integer mineUserUnionId = mineUser.getUnionId();
                 //主要是记录有没有的
