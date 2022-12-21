@@ -5,6 +5,8 @@ import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
@@ -32,12 +34,24 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
 //        log.info("系统配置表数据：{},{}", JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppConfig()), JsonUtil.objectMapper.writeValueAsString(SocialuniAppConfig.getAppMoreConfig()));
 
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccount(1);
+        DevAccountModel defaultAccount = DevAccountFacade.getDevAccount(0);
+
+
+
+
+        log.info("是否存在了默认的：{}", defaultAccount.getId());
+
+        log.info("执行启动命令");
 
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
             String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
+
+            //copy一个default的值
+
             if (StringUtils.isEmpty(SocialuniSystemConst.getAppSocialuniId())) {
                 devAccountModel = devAccountEntity.createDevAccount(phoneNum);
+
             } else {
                 devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId());
             }

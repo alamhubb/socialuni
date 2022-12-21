@@ -1,15 +1,28 @@
 package com.socialuni.social.tance.sdk.model;
 
+import com.socialuni.social.common.api.entity.SocialuniBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniContentBaseDO;
+import com.socialuni.social.common.api.enumeration.ConstStatus;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 开发者账户
  */
 @Data
-public class DevAccountModel extends SocialuniContentBaseDO implements Serializable {
+public class DevAccountModel extends SocialuniBaseDO implements Serializable {
+    @Column(nullable = false)
+    private String status;
+
+    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")
+    private Date updateTime;
+
     //密钥
     private Integer userId;
     private String secretKey;
@@ -34,4 +47,9 @@ public class DevAccountModel extends SocialuniContentBaseDO implements Serializa
 
     //api调用次数
     private Integer callApiCount;
+
+    public DevAccountModel() {
+        this.status = ConstStatus.enable;
+        this.updateTime = this.getCreateTime();
+    }
 }

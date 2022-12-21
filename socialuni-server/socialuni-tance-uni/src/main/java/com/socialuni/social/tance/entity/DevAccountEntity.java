@@ -1,13 +1,20 @@
 package com.socialuni.social.tance.entity;
 
 import com.socialuni.social.common.api.enumeration.CommonStatus;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
 import com.socialuni.social.tance.sdk.constant.AdminAppConfigConst;
 import com.socialuni.social.tance.sdk.enumeration.DevAccountType;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
+import com.socialuni.social.tance.sdk.enumeration.SocialFeignHeaderName;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
+import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +31,11 @@ public class DevAccountEntity {
     private DevAccountInterface devAccountApi;
     @Resource
     private DevAccountRedisInterface devAccountRedis;
+    @Resource
+    private SocialUserPhoneRedis socialUserPhoneRedis;
+
+    @Resource
+    SocialUserPhoneEntity socialUserPhoneEntity;
 
     public DevAccountModel createDevAccount(String phoneNum) {
         return this.createDevAccount(phoneNum, UUIDUtil.getUUID());
@@ -56,6 +68,19 @@ public class DevAccountEntity {
         devAccountModel.setCallApiCount(0);
         devAccountModel.setUpdateTime(curDate);
         devAccountModel.setSocialuniId(socialuniId);
+        devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);
+        RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getSecretKey());
+
+        SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
+        //如果没注册账号，则直接注册
+        SocialuniUserDo socialuniUserDo;
+        if (SocialUserPhoneDo == null) {
+            //如果没注册账号，则直接注册
+            socialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+        } else {
+            socialuniUserDo = SocialuniUserUtil.getUserNotNull(SocialUserPhoneDo.getUserId());
+        }
+        devAccountModel.setUserId(socialuniUserDo.getUserId());
         devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);
 
         //创建话题，还要创建用户

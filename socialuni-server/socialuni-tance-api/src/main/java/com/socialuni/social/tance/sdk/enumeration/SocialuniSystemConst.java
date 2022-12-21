@@ -65,10 +65,6 @@ public class SocialuniSystemConst {
     }
 
     public static String getSystemUserPhoneNum() {
-        if (StringUtils.isEmpty(systemUserPhoneNum) || appSocialuniId.length() != 11) {
-            //默认手机号
-            return "99999888666";
-        }
         return systemUserPhoneNum;
     }
 
