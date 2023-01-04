@@ -1,5 +1,5 @@
 import FollowAddVO from '../../model/FollowAddVO'
-import request from "socialuni-api/src/request/request";
+import request from '../../request/request';
 
 export default class FollowAPI {
   static addFollowAPI(followAdd: FollowAddVO) {

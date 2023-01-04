@@ -1,15 +1,14 @@
 <template>
-  <login class="h100p"></login>
+  <login-view class="h100p"></login-view>
 </template>
 
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import Login from "@/pages/user/login/login.vue";
-
+import LoginView from "socialuni-view/src/views/login/LoginView.vue";
 @Options({
   components: {
-    Login
+    LoginView
   }
 })
 export default class PhonePage extends Vue {

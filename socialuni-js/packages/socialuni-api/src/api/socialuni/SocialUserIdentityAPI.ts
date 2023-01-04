@@ -1,4 +1,4 @@
-import request from 'socialuni-api/src/request'
+import request from '../../request/request'
 import SocialUserIdentityAuthPreCheckRO from "../../model/RO/user/SocialUserIdentityAuthPreCheckRO";
 import SocialUserIdentityAuthQO from "../../model/QO/user/SocialUserIdentityAuthQO";
 

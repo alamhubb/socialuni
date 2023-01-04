@@ -1,5 +1,5 @@
 import ImgFileVO from '../../../../socialuni-api/src/model/ImgFileVO'
-import request from "socialuni-api/src/request/request";
+import request from '../../request/request';
 import UserEditVO from "socialuni-api/src/model/user/UserEditVO";
 import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";

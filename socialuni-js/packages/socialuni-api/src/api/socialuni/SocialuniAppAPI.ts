@@ -1,4 +1,4 @@
-import request from "socialuni-api/src/request/request";
+import request from '../../request/request';
 import HomeSwiperVO from "../../model/HomeSwiperVO";
 import SocialuniTalkTabRO from "../../model/talk/SocialuniTalkTabRO";
 import FrontErrorLogVO from "socialuni-api/src/model/FrontErrorLogVO";

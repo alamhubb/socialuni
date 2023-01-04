@@ -20,8 +20,8 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-property-decorator'
-import UserSchoolEditDialog from "@/pages/user/UserSchoolEditDialog.vue";
-import SocialuniReportDialog from "@/pages/report/SocialuniReportDialog.vue";
+import UserSchoolEditDialog from "socialuni-view/src/views/user/UserSchoolEditDialog";
+import SocialuniReportDialog from "socialuni-view/src/components/SocialuniReportDialog";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import ImgFileVO from "socialuni-api/src/model/ImgFileVO";

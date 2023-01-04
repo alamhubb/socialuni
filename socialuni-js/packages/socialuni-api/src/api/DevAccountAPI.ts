@@ -1,6 +1,6 @@
-import DevAccountRO from '@/socialuni/model/dev/DevAccountRO'
-import request from 'socialuni-api/src/request'
-import OAuthUserInfoQO from '@/socialuni/model/dev/OAuthUserInfoQO'
+import DevAccountRO from '../model/dev/DevAccountRO'
+import request from '../request/request';
+import OAuthUserInfoQO from '../model/dev/OAuthUserInfoQO'
 
 export default class DevAccountAPI {
     static queryDevAccountAPI(appId: string, provider: string) {

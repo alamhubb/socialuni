@@ -1,4 +1,4 @@
-import request from "socialuni-api/src/request/request";
+import request from '../../request/request';
 import SocialuniUserRO from "../../model/user/SocialuniUserRO";
 import ImgFileVO from "../../model/ImgFileVO";
 import SocialUserContentRO from "../../model/social/SocialUserContentRO";

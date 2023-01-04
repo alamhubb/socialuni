@@ -1,5 +1,5 @@
-import request from 'socialuni-api/src/request'
-import UniProviderLoginQO from '../model/UniProviderLoginQO'
+import request from '../request/request';
+import UniProviderLoginQO from '../../src/model/login/UniProviderLoginQO'
 
 
 export default class AccountAPI {

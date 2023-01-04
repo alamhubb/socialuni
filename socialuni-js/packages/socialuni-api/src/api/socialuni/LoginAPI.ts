@@ -1,7 +1,7 @@
 import SocialLoginRO from '../../model/social/SocialLoginRO'
 import SocialPhoneNumLoginQO from '../../model/phone/SocialPhoneNumLoginQO'
 import CenterUserDetailRO from '../../model/social/CenterUserDetailRO'
-import request from "socialuni-api/src/request/request";
+import request from '../../request/request';
 import UniProviderLoginQO from "../../model/login/UniProviderLoginQO";
 
 
