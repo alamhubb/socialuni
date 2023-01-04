@@ -61,9 +61,9 @@ public class WxUtil {
         WxUtil.socialUserAccountRepository = socialUserAccountRepository;
     }
 
-    private static String wx_mp_id;
-    private static String wx_app_id;
-    private static String wx_mp_secret;
+    public static String wx_mp_id;
+    public static String wx_app_id;
+    public static String wx_mp_secret;
 
     @Value("${socialuni.provider.wx.wx-app-id}")
     public void setWx_app_id(String wx_app_id) {

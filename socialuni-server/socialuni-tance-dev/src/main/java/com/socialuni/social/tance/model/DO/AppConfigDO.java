@@ -30,4 +30,8 @@ public class AppConfigDO implements Serializable {
     private int status;
     @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     private Date createTime;
+
+    public AppConfigDO() {
+        this.status = 1;
+    }
 }

@@ -63,12 +63,12 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             AppConfigDO wxIdConfig = new AppConfigDO();
             wxIdConfig.setDevId(devAccountModel.getId());
             wxIdConfig.setConfigKey(AppConfigDOKeyConst.wx_mp_id);
-            wxIdConfig.setValue(WxUtil.getWx_mp_id());
+            wxIdConfig.setValue(WxUtil.wx_mp_id);
 
             AppConfigDO wxSecretConfig = new AppConfigDO();
             wxSecretConfig.setDevId(devAccountModel.getId());
             wxSecretConfig.setConfigKey(AppConfigDOKeyConst.wx_mp_secret);
-            wxSecretConfig.setValue(WxUtil.getWx_mp_secret());
+            wxSecretConfig.setValue(WxUtil.wx_mp_secret);
 
             List<AppConfigDO> list = new ArrayList<>();
             list.add(wxIdConfig);

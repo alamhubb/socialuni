@@ -69,7 +69,6 @@ public class DevAccountEntity {
         devAccountModel.setUpdateTime(curDate);
         devAccountModel.setSocialuniId(socialuniId);
         devAccountModel = (DevAccountDo) devAccountRedis.saveDevAccount(devAccountModel);
-        RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, devAccountModel.getSecretKey());
 
         SocialUserPhoneDo SocialUserPhoneDo = socialUserPhoneRedis.findByPhoneNum(phoneNum);
         //如果没注册账号，则直接注册
