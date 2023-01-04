@@ -27,7 +27,7 @@ public class SocialuniApplicationBaseRunner implements ApplicationRunner {
     @Override
     @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
-        configMapRefreshService.refreshConfigMap();
+//        configMapRefreshService.refreshConfigMap();
         //获取省，不包含子节点
     }
 }
