@@ -6622,6 +6622,7 @@ INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'wx_mp_secret', '', '微信小程序秘钥', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'wx_merchant_id', '', '微信商户id', 1);
 INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'wx_merchant_key', '', '微信商户秘钥', 1);
+INSERT INTO s_app_config (dev_id, config_key, value, `desc`, status) VALUES (0, 'devPublishDataApiUrl', '', '开发者服务器url', 1);
 
 
 /*!40101 SET NAMES utf8 */;
