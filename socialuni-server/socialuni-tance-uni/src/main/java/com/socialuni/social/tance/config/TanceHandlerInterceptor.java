@@ -46,6 +46,7 @@ public class TanceHandlerInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         // 没有异常才去同步。  有异常也不会进postHandle。
+        //中心 还是 应用，
             publishDataTransactionalEventListener.publishDataToDev();
     }
 
