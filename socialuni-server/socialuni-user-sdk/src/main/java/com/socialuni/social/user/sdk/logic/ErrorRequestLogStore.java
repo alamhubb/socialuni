@@ -1,7 +1,7 @@
-package com.socialuni.social.web.sdk.store;
+package com.socialuni.social.user.sdk.logic;
 
-import com.socialuni.social.web.sdk.model.ErrorRequestLogDO;
-import com.socialuni.social.web.sdk.repository.ErrorRequestLogRepository;
+import com.socialuni.social.user.sdk.model.DO.ErrorRequestLogDO;
+import com.socialuni.social.user.sdk.repository.ErrorRequestLogRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 

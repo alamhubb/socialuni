@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import org.springframework.beans.factory.annotation.Configurable;

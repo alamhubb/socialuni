@@ -1,7 +1,7 @@
-package com.socialuni.social.web.sdk.repository;
+package com.socialuni.social.user.sdk.repository;
 
 
-import com.socialuni.social.web.sdk.model.RequestLogDO;
+import com.socialuni.social.user.sdk.model.DO.RequestLogDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RequestLogRepository extends JpaRepository<RequestLogDO, Long> {

@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.sdk.config;
 
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.user.sdk.utils.SocialTokenDOUtil;

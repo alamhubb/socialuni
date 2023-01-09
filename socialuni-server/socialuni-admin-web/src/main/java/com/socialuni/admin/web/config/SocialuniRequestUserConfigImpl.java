@@ -3,7 +3,7 @@ package com.socialuni.admin.web.config;
 
 import com.socialuni.social.common.api.config.SocialRequestUserConfig;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
-import com.socialuni.social.user.sdk.config.SocialRequestUserConfigDefaultImpl;
+import com.socialuni.social.sdk.config.SocialRequestUserConfigDefaultImpl;
 import org.springframework.stereotype.Component;
 
 @Component

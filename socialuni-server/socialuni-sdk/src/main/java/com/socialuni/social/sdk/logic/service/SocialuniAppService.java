@@ -5,7 +5,7 @@ import com.socialuni.social.sdk.constant.ViolateType;
 import com.socialuni.social.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.sdk.dao.DO.SocialuniHomeSwiperDO;
 import com.socialuni.social.community.sdk.model.HomeSwiperVO;
-import com.socialuni.social.user.sdk.logic.SocialFrontLogDomain;
+import com.socialuni.social.sdk.logic.domain.log.SocialFrontLogDomain;
 import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
 import com.socialuni.social.user.sdk.model.SocialAppLaunchDataRO;
 import com.socialuni.social.sdk.dao.repository.HomeSwiperRepository;

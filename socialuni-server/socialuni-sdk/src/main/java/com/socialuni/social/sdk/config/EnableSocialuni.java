@@ -1,4 +1,4 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.sdk.config;
 
 import org.springframework.context.annotation.Import;
 

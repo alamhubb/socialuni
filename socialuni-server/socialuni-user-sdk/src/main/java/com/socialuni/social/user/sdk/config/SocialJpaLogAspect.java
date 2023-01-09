@@ -2,8 +2,8 @@ package com.socialuni.social.user.sdk.config;
 
 import com.socialuni.social.user.sdk.model.DO.JpaSqlLogDO;
 import com.socialuni.social.user.sdk.utils.JpaSqlLogDOUtil;
-import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.web.sdk.utils.RequestLogUtil;
+import com.socialuni.social.user.sdk.model.DO.RequestLogDO;
+import com.socialuni.social.user.sdk.utils.RequestLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

@@ -1,11 +1,11 @@
-package com.socialuni.social.web.sdk.utils;
+package com.socialuni.social.user.sdk.utils;
 
 
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.ErrorType;
-import com.socialuni.social.web.sdk.model.ErrorRequestLogDO;
-import com.socialuni.social.web.sdk.model.RequestLogDO;
-import com.socialuni.social.web.sdk.store.ErrorRequestLogStore;
+import com.socialuni.social.user.sdk.logic.ErrorRequestLogStore;
+import com.socialuni.social.user.sdk.model.DO.ErrorRequestLogDO;
+import com.socialuni.social.user.sdk.model.DO.RequestLogDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

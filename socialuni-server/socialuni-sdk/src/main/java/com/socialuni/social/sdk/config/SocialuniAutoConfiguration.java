@@ -1,7 +1,8 @@
-package com.socialuni.social.user.sdk.config;
+package com.socialuni.social.sdk.config;
 
 
 import com.socialuni.social.common.sdk.repository.DelegateExtendBaseRepository;
+import com.socialuni.social.user.sdk.config.*;
 import com.socialuni.social.web.sdk.config.EnableSocialWebSDK;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
