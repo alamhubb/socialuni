@@ -13,6 +13,7 @@ import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI"
 import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import StorageUtil from "socialuni-sdk/src/utils/StorageUtil"
 import SocialuniTalkTabRO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
+import TalkTabVO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 
 @Store
 export default class SocialTalkModule extends Pinia {
@@ -39,7 +40,7 @@ export default class SocialTalkModule extends Pinia {
         // 使输入框失去焦点，隐藏
         const commentAdd: CommentAddVO = new CommentAddVO(content, this.talk.id)
         const tempComment: CommentVO = commentAdd.toComment()
-        tempComment.user = socialUserModule.mineUser
+        tempComment.user = socialUserModule.mineUser as any
         if (this.comment) {
             commentAdd.commentId = this.comment.id
             if (this.replyComment) {
