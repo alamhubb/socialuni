@@ -18,10 +18,7 @@
         "navigationStyle": "custom"
       }
     },{
-      "path": "pages/chat/friend",
-      "style": {
-        "navigationStyle": "custom"
-      }
+      "path": "pages/chat/friend"
     },{
       "path": "pages/chat/group",
       "style": {

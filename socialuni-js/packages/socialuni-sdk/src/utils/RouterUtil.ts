@@ -5,13 +5,14 @@ export default class RouterUtil {
      * @param params
      */
     static navigateTo(pagePath: string, params?: object): void {
-        if (params) {
+        //微信小程序不支持URLSearchParams
+        /*if (params) {
             const paramObj = new URLSearchParams()
             for (const key in params) {
                 paramObj.append(key, params[key])
             }
             pagePath = pagePath + '?' + paramObj.toString()
-        }
+        }*/
         uni.navigateTo({url: pagePath})
     }
 

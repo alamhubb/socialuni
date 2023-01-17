@@ -5,7 +5,6 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import {socialConfigModule} from "socialuni-sdk/src/store/store";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
-import {socialChatModule} from "packages/socialuni-sdk/src/store/store";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import SocialuniAuthQO from "socialuni-api/src/model/openData/SocialuniAuthQO";
 import SkipType from "socialuni-constant/constant/SkipType";
@@ -18,12 +17,13 @@ export default class PageUtil {
     }
 
     static toTalkDetail(talkId: string) {
-        RouterUtil.navigateTo(PagePath.talkDetail, {talkId})
+        RouterUtil.navigateTo(PagePath.talkDetail + '?talkId=' + talkId)
     }
 
 
     static toUserDetail(userId: string) {
-        RouterUtil.navigateTo(PagePath.userDetail, {userId})
+        console.log(userId)
+        RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
     }
 
     static toEditMineInfo() {
@@ -31,7 +31,7 @@ export default class PageUtil {
     }
 
     static toUserImgList(userId: string) {
-        RouterUtil.navigateTo(PagePath.userImgList, {userId})
+        RouterUtil.navigateTo(PagePath.userImgList + '?userId=' + userId)
     }
 
     static toOAuthPage() {
@@ -79,7 +79,7 @@ export default class PageUtil {
     }
 
     static toTalkAddPage() {
-        const user: CenterUserDetailRO = socialUserModule.mineUser
+        const user: CenterUserDetailRO = socialUserModule.mineUser as any
         if (!user || !user.phoneNum) {
             MsgUtil.unBindPhoneNum()
             //没设置校园，且应用类型要求必须设置
@@ -112,11 +112,11 @@ export default class PageUtil {
     }
 
     static toMessagePageByUserId(userId: string) {
-        RouterUtil.navigateTo(PagePath.message, {userId})
+        RouterUtil.navigateTo(PagePath.message + '?userId=' + userId)
     }
 
     static toMessagePageByGroupId(groupId: string) {
-        RouterUtil.navigateTo(PagePath.message, {groupId})
+        RouterUtil.navigateTo(PagePath.message + '?groupId=' + groupId)
     }
 
     static toFaceValuePage() {
