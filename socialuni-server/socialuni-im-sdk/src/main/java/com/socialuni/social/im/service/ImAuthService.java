@@ -28,7 +28,13 @@ public class ImAuthService {
      */
     public String userRegister(SocialuniImUserModel userModel) {
         String post = imHttpComponent.post("/auth/user_register", userModel);
-        ImTokenModel tokenModel = imHttpComponent.parseResponse(post, ImTokenModel.class);
+        ImTokenModel tokenModel = null;
+        try {
+            tokenModel = imHttpComponent.parseResponse(post, ImTokenModel.class);
+        } catch (Exception exception) {
+            // 重复注册的bug。  这里接直接再去尝试直接获得token.
+            tokenModel = this.userToken(userModel);
+        }
         String token = tokenModel.getToken();
         return token;
     }
@@ -62,7 +68,16 @@ public class ImAuthService {
         String post = imHttpComponent.post("/auth/user_token", userModel);
         return imHttpComponent.parseResponse(post, ImTokenModel.class);
     }
-
+    /**
+     * 获取用户的token
+     * (免密的用户登录)
+     *
+     * @param userModel
+     */
+    public ImTokenModel userToken(SocialuniImUserModel userModel) {
+        String post = imHttpComponent.post("/auth/user_token", userModel);
+        return imHttpComponent.parseResponse(post, ImTokenModel.class);
+    }
     /**
      * 获得token
      *
