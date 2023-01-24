@@ -35,7 +35,7 @@ import java.util.Map;
 public class UserEventConsum extends AbstractPublishDataModelConsum {
     private static String openImUrl;
 
-    @Value("${socialuni.open-im-server-url:https://im.socialuni.cn}")
+    @Value("${socialuni.open-im-server-url:https://im.socialuni.cn:50002}")
     public void setOpenImUrl(String openImUrl) {
         UserEventConsum.openImUrl = openImUrl;
     }

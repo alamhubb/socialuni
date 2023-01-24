@@ -29,7 +29,7 @@ import java.util.Map;
 @Component
 @Slf4j
 public class ImHttpComponent {
-    @Value("${socialuni.open-im-server-url:https://im.socialuni.cn}")
+    @Value("${socialuni.open-im-server-url:https://im.socialuni.cn:50002}")
     private String openImUrl;
     /* @Value("${socialuni.openIm.platform:1}")
      private int platform = 1;*/
