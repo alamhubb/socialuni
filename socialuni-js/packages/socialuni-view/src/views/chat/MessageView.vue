@@ -137,7 +137,7 @@
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>
 
-    <!--    <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
+        <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
           <view class="uni-tip">
             <view class="uni-tip-title">删除原因</view>
             <view class="uni-textarea bd-1 bd-radius">
@@ -162,12 +162,14 @@
         <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
           <view class="uni-tip w180px">
             <uni-list class="w100px">
-              <uni-list-item :show-arrow="true" title="复制" @click="copyText"/>
-              <uni-list-item v-if="user&&message&&!message.isMine" :show-arrow="true" title="举报"
+              <uni-list-item :show-arrow="true" title="复制" clickable @click="copyText"/>
+              <uni-list-item v-if="message&&message.isMine" :show-arrow="true" title="撤回消息"
+                             clickable  @click="revokeMessage"/>
+              <uni-list-item v-if="message&&!message.isMine" :show-arrow="true" title="举报"
                              @click="openReportDialog"/>
             </uni-list>
           </view>
-        </uni-popup>-->
+        </uni-popup>
 
     <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
           @touchstart="inputBlur">
@@ -498,6 +500,18 @@ export default class MessageView extends Vue {
     this.initChooseCommentData()
   }
 
+  /**
+   * 撤回某条消息
+   */
+  revokeMessage(){
+    socialChatModule.openIm.revokeMessage(JSON.stringify(this.message.originalMsg)).then(({data}) => {
+      console.log('revokeMessage', data);
+    }).catch(err => {
+      console.log('revokeMessage---err', err);
+    })
+    this.closeMessageMoreDialog()
+    this.initChooseCommentData()
+  }
   closeMessageMoreDialog() {
     this.$refs.messageMoreHandleDialog.close()
   }

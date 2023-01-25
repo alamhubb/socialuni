@@ -82,6 +82,8 @@ export default class SocialChatModule extends Pinia {
         })
         this.openIm.on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
             console.log('ONCONVERSATIONCHANGED',data)
+            // 撤回消息回显。
+            this.refreshChats();
         })
         this.openIm.on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
             console.log('ONTOTALUNREADMESSAGECOUNTCHANGED',data)

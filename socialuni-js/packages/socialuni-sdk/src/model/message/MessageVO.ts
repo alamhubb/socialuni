@@ -19,10 +19,12 @@ export default class MessageVO {
     public contentType: string
     public isMine: boolean
     public isRead: boolean
-
+    // 撤回消息需要原始的结构体。
+    public originalMsg: OpenImMsgRO
     constructor(content: string, msg: OpenImMsgRO = null) {
+        this.originalMsg = msg;
         if (msg) {
-            console.log(msg.contentType)
+            console.log('MessageVO-----constructor',msg.contentType)
             if (msg.contentType === MessageType.TEXTMESSAGE) {
                 this.content = msg.content
             } else if (msg.contentType === MessageType.GROUPCREATED) {
@@ -39,6 +41,8 @@ export default class MessageVO {
                 this.content = '好友添加成功'
             } else if (msg.contentType === MessageType.FRIENDDELETED) {
                 this.content = '好友已删除'
+            } else if (msg.contentType === MessageType.REVOKEMESSAGE) {
+                this.content = '消息已被撤回'
             }
 
 
