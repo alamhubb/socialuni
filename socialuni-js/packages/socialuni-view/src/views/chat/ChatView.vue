@@ -110,7 +110,7 @@ import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import {onLoad} from "@dcloudio/uni-app";
+import {onLoad, onShow} from "@dcloudio/uni-app";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserContentRO";
 import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
@@ -156,7 +156,9 @@ export default class ChatView extends Vue {
     onLoad((params) => {
       UniUtil.showShareMenu()
     })
-
+    onShow(()=>{
+      socialChatModule.initTotalUnreadMsgCount();
+    });
     /*setInterval(()=>{
       this.$forceUpdate()
       console.log(123)
