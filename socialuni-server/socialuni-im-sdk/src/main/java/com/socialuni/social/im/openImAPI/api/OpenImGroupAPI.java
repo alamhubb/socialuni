@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 
 @Tag(name = "openIm模块/群组模块")
-@FeignClient(name = "imGroup", url = "${socialuni.open-im-server-url:https://im.socialuni.cn}", path = "group")
+@FeignClient(name = "imGroup", url = "${socialuni.open-im-server-url:https://im.socialuni.cn:50002}", path = "group")
 public interface OpenImGroupAPI {
     @PostMapping("join_group")
     @Operation(summary = "用于加入群组")
