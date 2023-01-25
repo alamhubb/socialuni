@@ -33,6 +33,8 @@ import CircleCreateChatQO from "socialuni-api/src/model/community/circle/CircleC
 import UniUtil from "../utils/UniUtil";
 import MessageVO from "../model/message/MessageVO";
 import {GroupJoinSource} from "../plugins/openIm/OpenImMessageType";
+import OpenImFriendApplyRO from "../model/friend/OpenImFriendApplyRO";
+import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
 
 
 const openIM = new OpenIMSDK()
@@ -42,7 +44,7 @@ export default class SocialChatModule extends Pinia {
     openIm = openIM
     openImIsLogin = false
     private userImToken: string = SocialuniImUserTokenUtil.get() || null
-
+    recvFriendApplicationList: OpenImFriendApplyRO[] = []
     setOpenImLoginSuccess() {
         this.openImIsLogin = true
     }
@@ -70,27 +72,31 @@ export default class SocialChatModule extends Pinia {
             this.setOpenImLoginSuccess()
             this.refreshChats()
             this.initOpenImListeners()
+            this.refreshRecvFriendApplicationList();
         }
     }
 
     initOpenImListeners() {
         this.openIm.on(CbEvents.ONNEWCONVERSATION, (data) => {
-            console.log(data)
+            console.log('ONNEWCONVERSATION',data)
         })
         this.openIm.on(CbEvents.ONCONVERSATIONCHANGED, (data) => {
-            console.log(data)
+            console.log('ONCONVERSATIONCHANGED',data)
         })
         this.openIm.on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
-            console.log(data)
+            console.log('ONTOTALUNREADMESSAGECOUNTCHANGED',data)
         })
-        this.openIm.on(CbEvents.ONRECVNEWMESSAGE, (res) => {
-            console.log(res.data)
+        this.openIm.on(CbEvents.ONRECVNEWMESSAGE, (data) => {
+            console.log('ONRECVNEWMESSAGE',data)
             this.refreshChats()
-
         })
         this.openIm.on(CbEvents.ONRECVNEWMESSAGES, (data) => {
-            console.log(data)
-            console.log(99999999)
+            console.log('ONRECVNEWMESSAGES',data)
+        })
+        // 收到新邀请时
+        this.openIm.on(CbEvents.ONFRIENDAPPLICATIONADDED, (data) => {
+            console.log('收到新邀请时ONFRIENDAPPLICATIONADDED',data)
+            this.refreshRecvFriendApplicationList();
         })
     }
 
@@ -156,6 +162,30 @@ export default class SocialChatModule extends Pinia {
 
     async queryChats() {
 
+    }
+
+    /**
+     * 获取收到的好友请求列表
+     * @param handleResult -1 拒绝   0 未处理   1 同意
+     */
+    getRecvFriendApplicationList(handleResult:number) {
+        return this.recvFriendApplicationList.filter(item => item.handleResult == handleResult);
+    }
+    /**
+     * 获取收到的好友请求列表
+     */
+    refreshRecvFriendApplicationList() {
+        this.openIm.getRecvFriendApplicationList().then(({data}) => {
+            const list = JSON.parse(data);
+            const newList = []
+            for (const datum of list) {
+                console.log('datum===',datum);
+                const item = new OpenImFriendApplyRO(datum)
+                item.type = FriendApplyType.recvFriendApply
+                newList.push(item)
+            }
+            this.recvFriendApplicationList = newList
+        })
     }
 
     //仅负责，排序展示，在chatVue界面实现了

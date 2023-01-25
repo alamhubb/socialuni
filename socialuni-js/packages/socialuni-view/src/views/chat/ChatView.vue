@@ -25,7 +25,7 @@
 
     <div>
       <uni-list>
-        <uni-list-item title="好友申请" link to="/pagesLazy/chat/friendApplyList"></uni-list-item>
+        <uni-list-item title="好友申请" link to="/pagesLazy/chat/friendApplyList" :show-badge="recvFriendApplication != 0" :badge-text="recvFriendApplication"></uni-list-item>
         <!--        <uni-list-item title="发出的好友" link to="/pages/chat/friend?type=sendFriendApplication"></uni-list-item>
                 <uni-list-item title="新朋友" link to="/pages/chat/friend?type=recvFriendApplication"></uni-list-item>
                 <uni-list-item title="黑名单" link to="/pages/chat/friend?type=black"></uni-list-item>
@@ -132,7 +132,9 @@ export default class ChatView extends Vue {
     const chats = socialChatModule.chats
     return chats.filter(item => !this.searchContent || item.nickname.includes(this.searchContent))
   }
-
+  get recvFriendApplication() {
+    return socialChatModule.getRecvFriendApplicationList(0).length;
+  }
   // @chatStore.Getter('chatsUnreadNumTotal') readonly chatsUnreadNumTotal: number
 
   readonly systemChats: string[] = ChatType.systemChats
