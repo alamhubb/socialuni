@@ -73,6 +73,7 @@ export default class SocialChatModule extends Pinia {
             this.refreshChats()
             this.initOpenImListeners()
             this.refreshRecvFriendApplicationList();
+            this.initTotalUnreadMsgCount();
         }
     }
 
@@ -84,13 +85,15 @@ export default class SocialChatModule extends Pinia {
             console.log('ONCONVERSATIONCHANGED',data)
             // 撤回消息回显。
             this.refreshChats();
+            // this.showTabBarRedDot();
         })
         this.openIm.on(CbEvents.ONTOTALUNREADMESSAGECOUNTCHANGED, (data) => {
             console.log('ONTOTALUNREADMESSAGECOUNTCHANGED',data)
         })
         this.openIm.on(CbEvents.ONRECVNEWMESSAGE, (data) => {
             console.log('ONRECVNEWMESSAGE',data)
-            this.refreshChats()
+            this.refreshChats();
+            this.showTabBarRedDot();
         })
         this.openIm.on(CbEvents.ONRECVNEWMESSAGES, (data) => {
             console.log('ONRECVNEWMESSAGES',data)
@@ -99,9 +102,18 @@ export default class SocialChatModule extends Pinia {
         this.openIm.on(CbEvents.ONFRIENDAPPLICATIONADDED, (data) => {
             console.log('收到新邀请时ONFRIENDAPPLICATIONADDED',data)
             this.refreshRecvFriendApplicationList();
+            // this.showTabBarRedDot();
         })
     }
 
+    /**
+     * 设置 底部导航栏红点
+     */
+    showTabBarRedDot(){
+        uni.showTabBarRedDot({
+            index: 1
+        })
+    }
     setImToken(token: string) {
         this.userImToken = token
         SocialuniImUserTokenUtil.set(token)
@@ -120,6 +132,20 @@ export default class SocialChatModule extends Pinia {
 
     }
 
+    /**
+     * 初始化消息总未读数。
+     */
+    initTotalUnreadMsgCount(){
+        // 获取消息总未读。
+        this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
+            if( data > 0){
+                this.showTabBarRedDot();
+            }else{
+                uni.hideTabBarRedDot({index: 1})
+            }
+        }).catch(err=>{
+        })
+    }
     refreshChats() {
         const options = {
             offset: 0,
@@ -250,6 +276,7 @@ export default class SocialChatModule extends Pinia {
         }
         socialChatModule.openIm.markC2CMessageAsRead(options).then(({data}) => {
             console.log('markC2CMessageAsRead', data);
+            this.initTotalUnreadMsgCount();
         }).catch(err => {
         })
     }
@@ -279,6 +306,7 @@ export default class SocialChatModule extends Pinia {
         }
         openIM.markGroupMessageAsRead(options).then(({ data })=>{
             console.log('markGroupMessageAsRead', data);
+            this.initTotalUnreadMsgCount();
         }).catch(err=>{
         })
     }
