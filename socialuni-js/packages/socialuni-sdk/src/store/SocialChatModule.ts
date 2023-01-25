@@ -11,8 +11,8 @@ import {socialConfigModule, socialTalkModule, socialUserModule} from "socialuni-
 import {
     CbEvents,
     CreateGroupParams,
-    GroupInitInfo,
-    JoinGroupParams,
+    GroupInitInfo, GroupMsgReadParams,
+    JoinGroupParams, MarkC2CParams,
     Member,
     OpenIMSDK, SearchGroupParams,
     SetGroupVerificationParams
@@ -211,6 +211,15 @@ export default class SocialChatModule extends Pinia {
             })*/
             this.setChat(chat)
         })
+        // 设置实时消息已读回执
+        const options:MarkC2CParams = {
+            userID:userId,
+            msgIDList:[]
+        }
+        socialChatModule.openIm.markC2CMessageAsRead(options).then(({data}) => {
+            console.log('markC2CMessageAsRead', data);
+        }).catch(err => {
+        })
     }
 
     //为避免异步加载性能问题，进入用户详情页面就设置chat信息
@@ -230,6 +239,15 @@ export default class SocialChatModule extends Pinia {
                 chat.avatar = userRO.avatar
             })*/
             this.setChat(chat)
+        })
+        // 设置实时消息已读回执
+        const options:GroupMsgReadParams = {
+            groupID: groupId,
+            msgIDList:[]
+        }
+        openIM.markGroupMessageAsRead(options).then(({ data })=>{
+            console.log('markGroupMessageAsRead', data);
+        }).catch(err=>{
         })
     }
 

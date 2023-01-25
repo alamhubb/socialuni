@@ -89,9 +89,9 @@
         <view class="action h45px col-between">
           <view class="text-grey text-xs">{{ formatTime(chat.updateTime) }}</view>
           <view>
-<!--            <view v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
+            <view v-show="chat.unreadNum>0" class="cu-tag round bg-red sm">
               {{ chat.unreadNum }}
-            </view>-->
+            </view>
           </view>
         </view>
       </view>
