@@ -14,8 +14,8 @@ import {
     GroupInitInfo, GroupMsgReadParams,
     JoinGroupParams, MarkC2CParams,
     Member,
-    OpenIMSDK, SearchGroupParams,
-    SetGroupVerificationParams
+    OpenIMSDK, PinCveParams, SearchGroupParams,
+    SetGroupVerificationParams, setPrvParams
 } from "open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
@@ -178,7 +178,24 @@ export default class SocialChatModule extends Pinia {
     async queryChats() {
 
     }
-
+    pinConversation(conversationID : string , isPinned  : boolean = true) {
+        const options:PinCveParams = {
+            conversationID,
+            isPinned
+        }
+        this.openIm.pinConversation(options).then(({ data })=>{
+        }).catch(err=>{
+        })
+    }
+    setOneConversationPrivateChat(conversationID : string , isPrivate  : boolean = true) {
+        const options:setPrvParams  = {
+            conversationID,
+            isPrivate
+        }
+        this.openIm.setOneConversationPrivateChat(options).then(({ data })=>{
+        }).catch(err=>{
+        })
+    }
     /**
      * 获取收到的好友请求列表
      * @param handleResult -1 拒绝   0 未处理   1 同意

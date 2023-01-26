@@ -138,7 +138,7 @@ export default class ChatView extends Vue {
   // @chatStore.Getter('chatsUnreadNumTotal') readonly chatsUnreadNumTotal: number
 
   readonly systemChats: string[] = ChatType.systemChats
-  chatId = 0
+  chatId = null;
   readonly waitOpenStatus: string = CommonStatus.waitOpen
   readonly closeStatus: string = CommonStatus.close
   showChatHint: boolean = uni.getStorageSync(Constants.showChatHintKey) !== 'false'
@@ -187,34 +187,37 @@ export default class ChatView extends Vue {
 
   showBottomMenuClick(chatId: number) {
     this.chatId = chatId
-    UniUtil.actionSheet(['关闭会话', '列表中删除']).then((index: number) => {
+    console.log('chatId===',chatId);
+    UniUtil.actionSheet(['置顶', '删除','开启阅后即焚']).then((index: number) => {
       if (index === 0) {
-        this.closeChat()
+        this.pinConversation()
       } else if (index === 1) {
         this.frontDeleteChat()
+      } else if (index === 2) {
+        this.setOneConversationPrivateChat()
       }
     }).catch(() => {
       this.chatId = null
     })
   }
 
-  closeChat() {
-    AlertUtil.confirm('是否确定关闭会话，对方将无法再给您发送消息').then(() => {
-      ChatAPI.closeChatAPI(this.chatId).then(() => {
-        socialChatModule.deleteChatAction(this.chatId)
-        ToastUtil.toast('已关闭')
-      }).finally(() => {
-        this.chatId = null
-      })
+  pinConversation() {
+    socialChatModule.pinConversation(this.chatId);
+  }
+  setOneConversationPrivateChat(){
+    let toUserId =  '5c8d2cb04a774a7f8a4817996e380f29';
+    let fromUserID =  '768091f75a8c46688baa3c1137161c5f';
+
+    socialChatModule.openIm.clearC2CHistoryMessageFromLocalAndSvr(fromUserID).then(({ data })=>{
+      console.log(  '  clearC2CHistoryMessageFromLocalAndSvr  ',toUserId,data);
+    }).catch(err=>{
     })
   }
-
   frontDeleteChat() {
     AlertUtil.confirm('是否确定从列表中删除会话，可从私信处再次找回').then(() => {
-      ChatAPI.frontDeleteChatAPI(this.chatId).then(() => {
-        socialChatModule.deleteChatAction(this.chatId)
-      }).finally(() => {
-        this.chatId = null
+      socialChatModule.openIm.deleteConversationFromLocalAndSvr(this.chatId).then(({ data })=>{
+        socialChatModule.deleteChatAction(this.chatId);
+      }).catch(err=>{
       })
     })
   }
