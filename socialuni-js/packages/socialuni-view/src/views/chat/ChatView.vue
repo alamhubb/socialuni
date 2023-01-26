@@ -157,7 +157,7 @@ export default class ChatView extends Vue {
       UniUtil.showShareMenu()
     })
     onShow(()=>{
-      socialChatModule.initTotalUnreadMsgCount();
+      socialChatModule.computedChatsUnreadNumTotalAction();
     });
     /*setInterval(()=>{
       this.$forceUpdate()

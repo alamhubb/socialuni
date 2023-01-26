@@ -73,7 +73,7 @@ export default class SocialChatModule extends Pinia {
             this.refreshChats()
             this.initOpenImListeners()
             this.refreshRecvFriendApplicationList();
-            this.initTotalUnreadMsgCount();
+            this.computedChatsUnreadNumTotalAction();
         }
     }
 
@@ -110,7 +110,7 @@ export default class SocialChatModule extends Pinia {
      * 设置 底部导航栏红点
      */
     showTabBarRedDot(){
-        uni.showTabBarRedDot({
+        uni.showTabBarRedDot( {
             index: 1
         })
     }
@@ -132,20 +132,7 @@ export default class SocialChatModule extends Pinia {
 
     }
 
-    /**
-     * 初始化消息总未读数。
-     */
-    initTotalUnreadMsgCount(){
-        // 获取消息总未读。
-        this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
-            if( data > 0){
-                this.showTabBarRedDot();
-            }else{
-                uni.hideTabBarRedDot({index: 1})
-            }
-        }).catch(err=>{
-        })
-    }
+
     refreshChats() {
         const options = {
             offset: 0,
@@ -276,7 +263,6 @@ export default class SocialChatModule extends Pinia {
         }
         socialChatModule.openIm.markC2CMessageAsRead(options).then(({data}) => {
             console.log('markC2CMessageAsRead', data);
-            this.initTotalUnreadMsgCount();
         }).catch(err => {
         })
     }
@@ -306,7 +292,6 @@ export default class SocialChatModule extends Pinia {
         }
         openIM.markGroupMessageAsRead(options).then(({ data })=>{
             console.log('markGroupMessageAsRead', data);
-            this.initTotalUnreadMsgCount();
         }).catch(err=>{
         })
     }
@@ -453,9 +438,22 @@ export default class SocialChatModule extends Pinia {
 
     // 四个地方使用，初始查询，推送消息，阅读清空消息，删除消息
     //为什么不使用get呢,get不行微信小程序有兼容问题
-
+    /**
+     * 初始化消息总未读数。
+     */
     computedChatsUnreadNumTotalAction() {
         // 应该在这里计算是否显示红点
+        // 获取消息总未读。
+        this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
+            if( data > 0){
+                this.showTabBarRedDot();
+            }else{
+                uni.hideTabBarRedDot( {
+                    index: 1
+                })
+            }
+        }).catch(err=>{
+        })
         /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total

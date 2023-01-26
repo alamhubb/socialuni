@@ -101,7 +101,7 @@ import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
 import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
 import MsgInput from "socialuni-view/src/components/MsgInput.vue";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
+import {socialChatModule, socialUserModule} from 'socialuni-sdk/src/store/store';
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
@@ -137,6 +137,7 @@ export default class MinePage extends Vue {
     })
     onShow(() => {
       this.showMsgInput = true
+      socialChatModule.computedChatsUnreadNumTotalAction();
     })
     onHide(() => {
       this.showMsgInput = false

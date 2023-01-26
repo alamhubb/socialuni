@@ -63,7 +63,7 @@ import TagSearch from "./TagSearch.vue";
 import TabsTalk from "./tabsTalk.vue";
 import TalkSwipers from "./talkSwipers.vue";
 import {
-  socialAppModule,
+  socialAppModule, socialChatModule,
   socialLocationModule,
   socialNotifyModule,
   socialTagModule,
@@ -74,7 +74,7 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import TagVO from "socialuni-api/src/model/community/tag/TagVO";
 import DistrictVO from "socialuni-api/src/model/DistrictVO";
-import {onHide} from "@dcloudio/uni-app";
+import {onHide, onShow} from "@dcloudio/uni-app";
 import {socialConfigModule, socialUserModule} from "socialuni-sdk/src/store/store"; // todo 后台可控制是否显示轮播图
 
 // todo 后台可控制是否显示轮播图
@@ -144,6 +144,9 @@ export default class TalkView extends Vue {
     onHide(() => {
       this.$refs.tabsTalk.tabsTalkOnHide()
     })
+    onShow(()=>{
+      socialChatModule.computedChatsUnreadNumTotalAction();
+    });
   }
 
   // life
