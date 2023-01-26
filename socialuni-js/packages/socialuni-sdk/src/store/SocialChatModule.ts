@@ -199,7 +199,9 @@ export default class SocialChatModule extends Pinia {
                 item.type = FriendApplyType.recvFriendApply
                 newList.push(item)
             }
-            this.recvFriendApplicationList = newList
+            this.recvFriendApplicationList = newList;
+            // 计算小红点
+            this.computedChatsUnreadNumTotalAction();
         })
     }
 
@@ -440,12 +442,15 @@ export default class SocialChatModule extends Pinia {
     //为什么不使用get呢,get不行微信小程序有兼容问题
     /**
      * 初始化消息总未读数。
+     * 应该在这里计算是否显示红点
      */
     computedChatsUnreadNumTotalAction() {
-        // 应该在这里计算是否显示红点
         // 获取消息总未读。
         this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
-            if( data > 0){
+            // 获得好友申请
+            let recvFriendApplicationLength = this.getRecvFriendApplicationList(0).length;
+            console.log('---recvFriendApplicationLength------',recvFriendApplicationLength);
+            if( recvFriendApplicationLength + data > 0){
                 this.showTabBarRedDot();
             }else{
                 uni.hideTabBarRedDot( {
