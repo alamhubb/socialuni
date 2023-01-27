@@ -159,6 +159,9 @@ import PageUtil from "socialuni-sdk/src/utils/PageUtil"; // todo 后台可控制
 import {socialConfigModule, socialSystemModule, socialUserModule} from 'socialuni-sdk/src/store/store'
 import SocialCircleRO from "socialuni-api/src/model/community/circle/SocialCircleRO";
 import SocialuniTalkTabCircleRO from "socialuni-api/src/model/community/circle/SocialuniTalkTabCircleRO";
+import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
+import HugAddVO from "socialuni-api/src/model/HugAddVO";
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 
 // todo 后台可控制是否显示轮播图
 @Options({
@@ -548,7 +551,12 @@ export default class TabsTalk extends Vue {
   }
 
   joinCircleGroupChat(circle: SocialuniTalkTabCircleRO) {
-    socialChatModule.joinCircleGroupChat(circle)
+    // 登录才可以点赞
+    if (this.user) {
+      socialChatModule.joinCircleGroupChat(circle)
+    } else {
+      MsgUtil.unLoginMessage()
+    }
   }
 }
 </script>
