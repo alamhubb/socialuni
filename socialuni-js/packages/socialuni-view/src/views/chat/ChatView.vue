@@ -285,7 +285,11 @@ export default class ChatView extends Vue {
 
   toMessagePage(chat: SocialuniChatRO) {
     //需要先清除，再跳转页面
-    socialChatModule.setChatIdToMessagePage(chat.receiveUserId)
+    if(chat.receiveUserId){
+      socialChatModule.setChatIdToMessagePage(chat.receiveUserId)
+    }else{
+      socialChatModule.toMessagePageFromGroupChat(chat.groupId)
+    }
   }
 
   toAddFriend() {
