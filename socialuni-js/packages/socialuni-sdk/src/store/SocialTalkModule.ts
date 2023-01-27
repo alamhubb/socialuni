@@ -149,6 +149,7 @@ export default class SocialTalkModule extends Pinia {
         this.updateCircleByTabIndex()
     }
 
+    //入参为后台返回的tabs数据
     updateTalkTabs(talkTabs: SocialuniTalkTabRO []) {
         //兼容旧版本，还未设置这个属性
         for (const talkTab of this.talkTabs) {
@@ -157,8 +158,11 @@ export default class SocialTalkModule extends Pinia {
             }
         }
         const newTabs = []
+        //遍历后端返回的tabs数据
         for (const talkTab of talkTabs) {
+            //如果前端缓存的tabs数据，包含与后台返回一致的
             const oldTab = this.talkTabs.find(item => item.name === talkTab.name)
+            //则将旧tabs加入到新tabs中，并设置为系统默认tab，并且将后台返回的circle覆盖
             if (oldTab) {
                 newTabs.push(oldTab)
                 //后台返回的则为默认
@@ -167,6 +171,7 @@ export default class SocialTalkModule extends Pinia {
                     oldTab.circle = talkTab.circle
                 }
             } else {
+                //如果不存在则直接使用后台返回的tab作为新tab
                 const newTab = new SocialuniTalkTabRO(talkTab.name)
                 //后台返回的则为默认
                 newTab.appDefaultTab = true
