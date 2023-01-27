@@ -43,8 +43,9 @@ export default class MessageVO {
                 this.content = '好友已删除'
             } else if (msg.contentType === MessageType.REVOKEMESSAGE) {
                 this.content = '消息已被撤回'
+            } else if (msg.contentType === MessageType.MEMBERENTER) {
+                this.content = 'hello,我是刚入群的新人'
             }
-
 
             if (socialUserModule.mineUser && msg.sendID === socialUserModule.mineUser.id) {
                 this.user = socialUserModule.mineUser
