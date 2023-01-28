@@ -39,7 +39,7 @@ public class OpenImCallbackController {
     public ResponseEntity<String> callback(@RequestBody(required = false) String jsonStr) throws IOException {
         JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
         String callbackCommand = jsonObject.getStr("callbackCommand");
-        String className = "com.socialuni.social.im.contrller.PaymentNotifyController." + StrUtil.upperFirst(callbackCommand) + "Request";
+        String className = OpenImCallbackController.class.getName() + "$" + StrUtil.upperFirst(callbackCommand) + "Request";
         Class<Object> loadClass = ClassUtil.loadClass( className, false);
         Object toBean = jsonObject.toBean(loadClass);
         CallbackSuperResponse callbackSuperResponse = null;
@@ -53,6 +53,11 @@ public class OpenImCallbackController {
         // 返回结果值。
         String okBody = JSONUtil.toJsonStr(callbackSuperResponse);
         return new ResponseEntity<>(okBody == null ? StrUtil.EMPTY_JSON : okBody, headers, HttpStatus.OK);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(CallbackBaseRequest.class.getName());
+        System.out.println(ClassUtil.loadClass("com.socialuni.social.im.contrller.OpenImCallbackController$CallbackBaseRequest"));
     }
     ///////////////////////////////////////////
     ///////              抽象的实体
