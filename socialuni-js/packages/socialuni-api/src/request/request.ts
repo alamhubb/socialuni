@@ -29,7 +29,10 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
     } else {
         config.header.token = null
     }
-    // config.header.socialuniSecretKey = socialConfig.secretKey
+    // 如果配置了开发环境，就可以展示具体的报错内容。
+    config.header['X-NODE-ENV'] = process?.env?.NODE_ENV
+    //
+    config.header.socialuniSecretKey = "f12be0da13bf4cf9b672c5e7957c71f2"
     config.header.provider = socialSystemModule.mpPlatform
     config.header.platform = socialSystemModule.platform
     config.header.system = socialSystemModule.system

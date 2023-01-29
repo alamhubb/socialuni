@@ -2,6 +2,7 @@ package com.socialuni.social.common.sdk.config;
 
 import cn.hutool.core.util.ClassUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.social.common.api.utils.RequestUtil;
 import com.socialuni.social.common.sdk.event.WebControllerExceptionEvent;
 import com.socialuni.social.common.api.constant.ErrorCode;
 import com.socialuni.social.common.api.constant.ErrorType;
@@ -81,8 +82,8 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
      * @return
      */
     @ExceptionHandler(value = Exception.class)
-    public ResultRO<Void> systemExceptionHandler(Exception exception) {
-        ResultRO<Void> resultRO = new ResultRO<>(500, RequestErrorMsg.getSystemErrorMsg());
+    public ResultRO<String> systemExceptionHandler(Exception exception) {
+        ResultRO<String> resultRO = new ResultRO<>(500, RequestErrorMsg.getSystemErrorMsg());
         String errorStr = exception.toString();
         if (StringUtils.isEmpty(errorStr)) {
             try {
@@ -94,6 +95,11 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         }
         this.saveOperateLogDO(resultRO.getErrorMsg(), resultRO.getCode(), ErrorType.error, exception.toString(), errorStr);
         exception.printStackTrace();
+        // 如果配置了开发环境，就可以展示具体的报错内容。
+        //TODO 安全性:这里最好还是放到token里面去做的比较好。
+        if ("development".equals(RequestUtil.getHeader("X-NODE-ENV"))) {
+            resultRO.setData(errorStr);
+        }
         return resultRO;
     }
 
