@@ -169,6 +169,10 @@ public class OpenImCallbackController {
         /** 接收者ID */
         String recvID;
     }
+    @Data
+    public class CallbackMsgModifyCommandRequest extends CallbackSuperRequest{}
+
+
     /**
      * 发群聊之前回调为callbackBeforeSendGroupMsgCommand
      */
