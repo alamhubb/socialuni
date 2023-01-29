@@ -12,6 +12,8 @@ import com.socialuni.social.common.api.exception.exception.SocialBusinessExcepti
 import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,6 +37,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/callback/openIm")
 public class OpenImCallbackController {
+    public static final Logger logger = LoggerFactory.getLogger(OpenImCallbackController.class);
     @PostMapping
     public ResponseEntity<String> callback(@RequestBody(required = false) String jsonStr) throws IOException {
         JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
@@ -132,8 +135,10 @@ public class OpenImCallbackController {
                 SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(this.content);
             } catch (SocialBusinessException e) {
                 handler.setActionCode(1);
-                handler.setErrCode(0);
-                handler.setErrMsg(e.getErrorMsg());
+                handler.setErrCode(10); // 文档写的有问题。
+                String errorMsg = e.getErrorMsg();
+                handler.setErrMsg(errorMsg);
+                logger.info("本次发送消息=[{}],有敏感词被过滤=[{}]",this.content,errorMsg);
             }
             return handler;
         }
