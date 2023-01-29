@@ -10,7 +10,7 @@ import JsonUtil from "socialuni-sdk/src/utils/JsonUtil"
 import {socialConfigModule, socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store"
 import {
     CbEvents,
-    CreateGroupParams,
+    CreateGroupParams, CustomMsgParams,
     GroupInitInfo, GroupMsgReadParams,
     JoinGroupParams, MarkC2CParams,
     Member,
@@ -550,6 +550,17 @@ export default class SocialChatModule extends Pinia {
         this.computedChatsUnreadNumTotalAction()
     }
 
+    async pushCustomMessage(data :string,extension :string,description :string){
+        const options:CustomMsgParams = {
+            data,
+            extension,
+            description
+        }
+        const msg: MessageVO =  MessageVO.create("createCustomMessage", options);
+        msg.content = description;
+        await socialChatModule.pushMessageAction(msg)
+    }
+
     //在聊天界面的时候，自己发送msg 本地添加msg
 
     async pushMessageAction(msg: MessageVO) {
@@ -563,12 +574,13 @@ export default class SocialChatModule extends Pinia {
         // this.chat.lastContent = msg.content
         // 滚屏到最后面
         // 不能监控变化滚动，有时候是往前面插入
-        const {data} = await socialChatModule.openIm.createTextMessage(msg.content);
+        const {data} = await socialChatModule.openIm[msg.action](msg.contentData);
         const params = {
             recvID: this.chat.receiveUserId,
             groupID: this.chat.groupId,
             message: data,
         };
+        console.log('-------params-------',params);
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
         // return request.post <T>('message/sendMsg', msgAdd)
         socialChatModule.openIm.sendMessage(params).then((res) => {

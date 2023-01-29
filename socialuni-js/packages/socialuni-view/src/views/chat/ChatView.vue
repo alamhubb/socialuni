@@ -188,12 +188,12 @@ export default class ChatView extends Vue {
   showBottomMenuClick(chatId: number) {
     this.chatId = chatId
     console.log('chatId===',chatId);
-    UniUtil.actionSheet(['置顶', '删除','开启阅后即焚']).then((index: number) => {
+    UniUtil.actionSheet(['置顶', '删除']).then((index: number) => {
       if (index === 0) {
         this.pinConversation()
       } else if (index === 1) {
         this.frontDeleteChat()
-      } else if (index === 2) {
+      } else if (index === 2) {  // '开启阅后即焚'
         this.setOneConversationPrivateChat()
       }
     }).catch(() => {
@@ -204,6 +204,10 @@ export default class ChatView extends Vue {
   pinConversation() {
     socialChatModule.pinConversation(this.chatId);
   }
+
+  /**
+   * '开启阅后即焚'
+   */
   setOneConversationPrivateChat(){
     let toUserId =  '5c8d2cb04a774a7f8a4817996e380f29';
     let fromUserID =  '768091f75a8c46688baa3c1137161c5f';

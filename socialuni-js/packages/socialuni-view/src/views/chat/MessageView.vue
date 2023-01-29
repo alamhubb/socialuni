@@ -227,6 +227,7 @@ export default class MessageView extends Vue {
   init(params: MessageViewParams) {
     if (params.userId) {
       socialChatModule.setCurChatByUserId(params.userId)
+      this.userId = params.userId;
     } else if (params.groupId) {
       socialChatModule.setCurChatByGroupId(params.groupId)
     }
@@ -272,7 +273,7 @@ export default class MessageView extends Vue {
   readonly waitOpenStatus: string = CommonStatus.waitOpen
   readonly closeStatus: string = CommonStatus.close
   upperThreshold = 300
-
+  userId: string = null
   onUnload() {
     socialChatModule.scrollTop = 0
   }
@@ -347,8 +348,24 @@ export default class MessageView extends Vue {
   }
 
   openPhoto(){
+    const itemList : string[] = [];
+    if(this.userId){
+       itemList.push('删除对方聊天记录');
+    }
+
     //调用相册api，可选择拍照和引用相册
-    console.log(123)
+    UniUtil.actionSheet(itemList).then((index: number) => {
+      switch (itemList[index]){
+          case '删除对方聊天记录':
+            socialChatModule.pushCustomMessage(socialUserModule.userId,"{}","发送删除对方聊天记录");
+            break;
+          default :
+            break;
+      }
+
+    }).catch(() => {
+
+    })
   }
 
   async sendMsgClick() {
