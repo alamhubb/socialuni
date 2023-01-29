@@ -1,15 +1,15 @@
 <template>
   <view v-if="chat" class="pb-100 h100p bg-default">
 
-<!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
-      <view class="flex-1 card-text-row">
-        长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
-      </view>
-      <view class="flex-none mr-10px">
-        <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
-        <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
-      </view>
-    </view>-->
+    <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
+          <view class="flex-1 card-text-row">
+            长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
+          </view>
+          <view class="flex-none mr-10px">
+            <q-button @click="consoleMessage">{{ scrollTop }}</q-button>
+            <q-icon icon="close-circle-fill" size="36" @click="closeShowMsgHint"></q-icon>
+          </view>
+        </view>-->
 
     <scroll-view scroll-y="true" class="cu-chat h100p"
                  @scrolltoupper="upper"
@@ -132,44 +132,47 @@
         <!--<view class="action" @click="showEmojiClick">
             <text class="cuIcon-emojifill text-grey"></text>
         </view>-->
-        <button class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送</button>
+        <button v-if="msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送</button>
+        <view v-else class="ml-sm">
+          <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
+        </view>
       </view>
       <!--      <view v-show="showEmoji" class="w100vw bg-blue" :style="{height:keyboardHeight+'px'}"></view>-->
     </view>
 
-        <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
-          <view class="uni-tip">
-            <view class="uni-tip-title">删除原因</view>
-            <view class="uni-textarea bd-1 bd-radius">
+    <uni-popup ref="deleteReasonDialog" :show="false" :custom="true" :mask-click="false">
+      <view class="uni-tip">
+        <view class="uni-tip-title">删除原因</view>
+        <view class="uni-textarea bd-1 bd-radius">
               <textarea placeholder="*必填，删除原因" v-model="deleteReason"
                         :show-confirm-bar="false"
               />
-            </view>
-            <view class="uni-common-mt">
-              是否封禁:
-              <switch class="ml-5px" @change="banChange"/>
-            </view>
-            <view class="uni-tip-group-button">
-              <button class="uni-tip-button w40r" type="default" @click="closeDeleteDialog" :plain="true">取消
-              </button>
-              <button class="uni-tip-button w40r" type="primary" @click="confirmDeleteTalk"
-                      :disabled="!deleteReason">确定
-              </button>
-            </view>
-          </view>
-        </uni-popup>
+        </view>
+        <view class="uni-common-mt">
+          是否封禁:
+          <switch class="ml-5px" @change="banChange"/>
+        </view>
+        <view class="uni-tip-group-button">
+          <button class="uni-tip-button w40r" type="default" @click="closeDeleteDialog" :plain="true">取消
+          </button>
+          <button class="uni-tip-button w40r" type="primary" @click="confirmDeleteTalk"
+                  :disabled="!deleteReason">确定
+          </button>
+        </view>
+      </view>
+    </uni-popup>
 
-        <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
-          <view class="uni-tip w180px">
-            <uni-list class="w100px">
-              <uni-list-item :show-arrow="true" title="复制" clickable @click="copyText"/>
-              <uni-list-item v-if="message&&message.isMine" :show-arrow="true" title="撤回消息"
-                             clickable  @click="revokeMessage"/>
-              <uni-list-item v-if="message&&!message.isMine" :show-arrow="true" title="举报"
-                             @click="openReportDialog"/>
-            </uni-list>
-          </view>
-        </uni-popup>
+    <uni-popup ref="messageMoreHandleDialog" :custom="true" :mask-click="true">
+      <view class="uni-tip w180px">
+        <uni-list class="w100px">
+          <uni-list-item :show-arrow="true" title="复制" clickable @click="copyText"/>
+          <uni-list-item v-if="message&&message.isMine" :show-arrow="true" title="撤回消息"
+                         clickable @click="revokeMessage"/>
+          <uni-list-item v-if="message&&!message.isMine" :show-arrow="true" title="举报"
+                         @click="openReportDialog"/>
+        </uni-list>
+      </view>
+    </uni-popup>
 
     <!--<view v-show="showEmoji" class="emoji-model" :style="{height:emojiModelHeight+'px'}"
           @touchstart="inputBlur">
@@ -210,9 +213,10 @@ import DateUtil from "socialuni-sdk/src/utils/DateUtil";
 import MessageViewParams from "./MessageViewParams";
 import MessageVO from "socialuni-sdk/src/model/message/MessageVO";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
+import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 
 
-@Options({components: {SocialuniReportDialog}})
+@Options({components: {SocialuniReportDialog, QIcon}})
 export default class MessageView extends Vue {
   public $refs!: {
     reportDialog: SocialuniReportDialog;
@@ -340,6 +344,11 @@ export default class MessageView extends Vue {
     // #endif
     /*
     this.showEmoji = false */
+  }
+
+  openPhoto(){
+    //调用相册api，可选择拍照和引用相册
+    console.log(123)
   }
 
   async sendMsgClick() {
@@ -503,7 +512,7 @@ export default class MessageView extends Vue {
   /**
    * 撤回某条消息
    */
-  revokeMessage(){
+  revokeMessage() {
     socialChatModule.openIm.revokeMessage(JSON.stringify(this.message.originalMsg)).then(({data}) => {
       console.log('revokeMessage', data);
     }).catch(err => {
@@ -512,6 +521,7 @@ export default class MessageView extends Vue {
     this.closeMessageMoreDialog()
     this.initChooseCommentData()
   }
+
   closeMessageMoreDialog() {
     this.$refs.messageMoreHandleDialog.close()
   }
