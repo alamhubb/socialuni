@@ -98,8 +98,8 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         // 如果配置了开发环境，就可以展示具体的报错内容。
         //TODO 安全性:这里最好还是放到token里面去做的比较好。
         if ("development".equals(RequestUtil.getHeader("X-NODE-ENV"))) {
-            resultRO.setData(errorStr);
         }
+        resultRO.setData(errorStr);
         return resultRO;
     }
 
