@@ -12,7 +12,7 @@
     "uuid": "^7.0.3",
     "cos-wx-sdk-v5": "^0.7.11",
     "stream-browserify": "^3.0.0",
-    "open-im-sdk": "^2.0.3"
+    "open-im-sdk": "^2.3.0-beta.2"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",
