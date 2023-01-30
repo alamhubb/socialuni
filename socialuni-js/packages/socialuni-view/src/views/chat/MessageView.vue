@@ -215,6 +215,11 @@ import MessageViewParams from "./MessageViewParams";
 import MessageVO from "socialuni-sdk/src/model/message/MessageVO";
 import SocialuniMessageType from "socialuni-constant/constant/mesaage/SocialuniMessageType";
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
+import CosUtil from "socialuni-sdk/src/utils/CosUtil";
+import DomFile from "socialuni-api/src/model/DomFile";
+import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
+import AppMsg from "socialuni-constant/constant/AppMsg";
+import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
 
 
 @Options({components: {SocialuniReportDialog, QIcon}})
@@ -349,7 +354,8 @@ export default class MessageView extends Vue {
   }
 
   openPhoto(){
-    const itemList : string[] = [];
+    const that = this;
+    const itemList : string[] = ['图片'];
     if(this.userId){
        itemList.push('删除对方聊天记录');
     }
@@ -357,16 +363,43 @@ export default class MessageView extends Vue {
     //调用相册api，可选择拍照和引用相册
     UniUtil.actionSheet(itemList).then((index: number) => {
       switch (itemList[index]){
+          case '图片':
+            that.chooseImage();
+            break;
           case '删除对方聊天记录':
             socialChatModule.pushCustomMessage(socialUserModule.userId,"{}","发送删除对方聊天记录");
             break;
           default :
             break;
       }
-
     }).catch(() => {
 
     })
+  }
+
+
+  /**
+   * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
+   */
+  async chooseImage() {
+    //获取cos认证信息
+    const cosAuthRO : CosAuthRO = await CosUtil.getCosAuthRO()
+    const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
+    //  this.showImgFiles.push(...imgFiles)
+    if (cosAuthRO) {
+      imgFiles.forEach(item => {
+        //只有不包含，才赋值src，有值代表已经赋值过了
+        if (item.src.indexOf('https') < 0) {
+          item.src = cosAuthRO.uploadImgPath + 'talk/' + item.src
+        }
+      })
+      console.log('-----------imgFiles-----------',imgFiles,cosAuthRO);
+      CosUtil.postImgList(imgFiles, cosAuthRO)
+      console.log('-----------222222222222222222-----------',imgFiles,cosAuthRO);
+    } else {
+      SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      AlertUtil.error(AppMsg.uploadFailMsg)
+    }
   }
 
   async sendMsgClick() {
