@@ -17,6 +17,7 @@ export default class MessageVO {
     public action: string  // 触发创建的api
     public createTime: number
     public readStatus: string
+    public status: number // 发送的状态。
     public type: string
     public contentType: number
     public isMine: boolean
@@ -87,6 +88,7 @@ export default class MessageVO {
             this.id = msg.serverMsgID
             this.readNum = 0
             this.readStatus = CommonStatus.enable
+            this.status   = msg.status;
             this.isRead = msg.isRead
             this.createTime = msg.createTime
             this.type = SocialuniMessageType.simple
@@ -98,6 +100,7 @@ export default class MessageVO {
             this.content = content
             this.contentData = content;
             this.readStatus = CommonStatus.sending
+            this.status = 1;
             this.isMine = true
             this.isRead = true
             this.createTime = new Date().getTime()

@@ -72,7 +72,8 @@
             <view class="row-end">
               <view class="main">
                 <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                  <text>{{ msg.content }}</text>
+                  <text v-if="msg.status !== 3">{{ msg.content }}</text>
+                  <text v-else-if="msg.status === 3"> 触发敏感词,发送失败 </text>
                 </view>
               </view>
             </view>
@@ -101,7 +102,7 @@
             </view>
             <view class="main">
               <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                <text>{{ msg.content }}</text>
+                <text>{{ msg.content }} </text>
               </view>
             </view>
           </view>
