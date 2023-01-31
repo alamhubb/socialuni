@@ -5,4 +5,8 @@ export default class CosAPI {
     static getCosAuthorizationAPI() {
         return request.post<CosAuthRO>('socialuni/cos/getCosAuth')
     }
+
+    static getCosPathAPI() {
+        return request.post<string>('socialuni/cos/getCosPath')
+    }
 }

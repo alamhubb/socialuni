@@ -41,7 +41,9 @@ public class OpenImCallbackController {
     @PostMapping
     public ResponseEntity<String> callback(@RequestBody(required = false) String jsonStr) throws IOException {
         JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
+        //获取私聊单聊指令名称
         String callbackCommand = jsonObject.getStr("callbackCommand");
+        //根据指令名称找类
         String className = OpenImCallbackController.class.getName() + "$" + StrUtil.upperFirst(callbackCommand) + "Request";
         Class<Object> loadClass = ClassUtil.loadClass( className, false);
         Object toBean = jsonObject.toBean(loadClass);

@@ -73,7 +73,7 @@
               <view class="main">
                 <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
                   <text v-if="msg.status !== 3">{{ msg.content }}</text>
-                  <text v-else-if="msg.status === 3"> 触发敏感词,发送失败 </text>
+                  <text v-else-if="msg.status === 3"> 触发敏感词,发送失败</text>
                 </view>
               </view>
             </view>
@@ -102,7 +102,7 @@
             </view>
             <view class="main">
               <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                <text>{{ msg.content }} </text>
+                <text>{{ msg.content }}</text>
               </view>
             </view>
           </view>
@@ -133,7 +133,8 @@
         <!--<view class="action" @click="showEmojiClick">
             <text class="cuIcon-emojifill text-grey"></text>
         </view>-->
-        <button v-if="msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送</button>
+        <button v-if="msgContent" class="cu-btn bg-green shadow color-white" @touchend.prevent="sendMsgClick">发送
+        </button>
         <view v-else class="ml-sm">
           <q-icon icon="plus-circle" size="28" @click="openPhoto"></q-icon>
         </view>
@@ -187,7 +188,7 @@
 <script lang="ts">
 import {Options, Vue} from "vue-property-decorator";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
-import {socialSystemModule} from "socialuni-sdk/src/store/store";
+import {socialAppModule, socialSystemModule} from "socialuni-sdk/src/store/store";
 import ReportContentType from "socialuni-constant/constant/ReportContentType";
 import Constants from "socialuni-constant/constant/Constant";
 import CommonStatus from "socialuni-constant/constant/CommonStatus";
@@ -220,6 +221,7 @@ import DomFile from "socialuni-api/src/model/DomFile";
 import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
+import CosAPI from "socialuni-api/src/api/CosAPI";
 
 
 @Options({components: {SocialuniReportDialog, QIcon}})
@@ -228,6 +230,12 @@ export default class MessageView extends Vue {
     reportDialog: SocialuniReportDialog;
     messageMoreHandleDialog: any;
     deleteReasonDialog: any;
+  }
+
+  created() {
+    console.log(123123)
+    console.log(socialAppModule.cosHttpPath)
+    console.log(456456)
   }
 
   init(params: MessageViewParams) {
@@ -280,6 +288,7 @@ export default class MessageView extends Vue {
   readonly closeStatus: string = CommonStatus.close
   upperThreshold = 300
   userId: string = null
+
   onUnload() {
     socialChatModule.scrollTop = 0
   }
@@ -353,24 +362,24 @@ export default class MessageView extends Vue {
     this.showEmoji = false */
   }
 
-  openPhoto(){
+  openPhoto() {
     const that = this;
-    const itemList : string[] = ['图片'];
-    if(this.userId){
-       itemList.push('删除对方聊天记录');
+    const itemList: string[] = ['图片'];
+    if (this.userId) {
+      itemList.push('删除对方聊天记录');
     }
 
     //调用相册api，可选择拍照和引用相册
     UniUtil.actionSheet(itemList).then((index: number) => {
-      switch (itemList[index]){
-          case '图片':
-            that.chooseImage();
-            break;
-          case '删除对方聊天记录':
-            socialChatModule.pushCustomMessage(socialUserModule.userId,"{}","发送删除对方聊天记录");
-            break;
-          default :
-            break;
+      switch (itemList[index]) {
+        case '图片':
+          that.chooseImage();
+          break;
+        case '删除对方聊天记录':
+          socialChatModule.pushCustomMessage(socialUserModule.userId, "{}", "发送删除对方聊天记录");
+          break;
+        default :
+          break;
       }
     }).catch(() => {
 
@@ -383,7 +392,7 @@ export default class MessageView extends Vue {
    */
   async chooseImage() {
     //获取cos认证信息
-    const cosAuthRO : CosAuthRO = await CosUtil.getCosAuthRO()
+    const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO()
     const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
     //  this.showImgFiles.push(...imgFiles)
     if (cosAuthRO) {
@@ -393,9 +402,9 @@ export default class MessageView extends Vue {
           item.src = cosAuthRO.uploadImgPath + 'talk/' + item.src
         }
       })
-      console.log('-----------imgFiles-----------',imgFiles,cosAuthRO);
+      console.log('-----------imgFiles-----------', imgFiles, cosAuthRO);
       CosUtil.postImgList(imgFiles, cosAuthRO)
-      console.log('-----------222222222222222222-----------',imgFiles,cosAuthRO);
+      console.log('-----------222222222222222222-----------', imgFiles, cosAuthRO);
     } else {
       SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       AlertUtil.error(AppMsg.uploadFailMsg)

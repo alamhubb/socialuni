@@ -12,6 +12,7 @@ import SocialUserModule from "./SocialUserModule";
 import SocialConfigModule from "./SocialConfigModule";
 import SocialuniImUserAPI from "socialuni-api/src/api/SocialuniImUserAPI";
 import UserService from "../service/UserService";
+import CosAPI from "socialuni-api/src/api/CosAPI";
 
 export let socialSystemModule: SocialSystemModule
 export let socialUserModule: SocialUserModule
@@ -49,6 +50,9 @@ export async function initSocialuniStore() {
         await socialUserModule.initSocialuniUserModule()
         UserService.getAppLunchDataByHasUser()
     }
+    CosAPI.getCosPathAPI().then(res => {
+        socialAppModule.cosHttpPath = res.data
+    })
     socialAppModule.getHomeSwipersAction()
     socialLocationModule.getHotDistrictsAction()
     socialTalkModule.getTalkTabs()
