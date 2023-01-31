@@ -2,6 +2,7 @@ export default class DomFile {
   //自己拼出来的
   // public src: string
   public src: string
+  public url: string // 访问的url路径
   public fileName: string
   public needAuth: boolean = false
 

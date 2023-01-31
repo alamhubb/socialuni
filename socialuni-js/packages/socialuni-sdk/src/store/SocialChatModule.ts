@@ -11,10 +11,10 @@ import {socialConfigModule, socialTalkModule, socialUserModule} from "socialuni-
 import {
     CbEvents,
     CreateGroupParams, CustomMsgParams,
-    GroupInitInfo, GroupMsgReadParams,
+    GroupInitInfo, GroupMsgReadParams, ImageMsgParams,
     JoinGroupParams, MarkC2CParams,
     Member,
-    OpenIMSDK, PinCveParams, SearchGroupParams,
+    OpenIMSDK, PicBaseInfo, PinCveParams, SearchGroupParams,
     SetGroupVerificationParams, setPrvParams
 } from "open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
@@ -35,6 +35,7 @@ import MessageVO from "../model/message/MessageVO";
 import {GroupJoinSource} from "../plugins/openIm/OpenImMessageType";
 import OpenImFriendApplyRO from "../model/friend/OpenImFriendApplyRO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
+import UUIDUtil from "../utils/UUIDUtil";
 
 
 const openIM = new OpenIMSDK()
@@ -550,6 +551,37 @@ export default class SocialChatModule extends Pinia {
         this.computedChatsUnreadNumTotalAction()
     }
 
+    /**
+     * 发送图片消息。
+     * @param data
+     * @param extension
+     * @param description
+     */
+    async pushImageMessage( url : string ){
+        const baseInfo:PicBaseInfo = {
+            uuid: UUIDUtil.getUUID(),
+            type:"png",
+            size:12465,
+            width:1080,
+            height:720,
+            url: url
+        }
+        const options:ImageMsgParams = {
+            sourcePicture:baseInfo,
+            bigPicture:baseInfo,
+            snapshotPicture:baseInfo,
+        }
+        const msg: MessageVO =  MessageVO.create("createImageMessage", options);
+        msg.content = '图片';
+        await socialChatModule.pushMessageAction(msg)
+    }
+
+    /**
+     * 发送自定义消息。
+     * @param data
+     * @param extension
+     * @param description
+     */
     async pushCustomMessage(data :string,extension :string,description :string){
         const options:CustomMsgParams = {
             data,
@@ -581,9 +613,24 @@ export default class SocialChatModule extends Pinia {
             message: data,
         };
         console.log('-------params-------',params);
+
         // const msgAdd: MessageAddVO = new MessageAddVO(chatId, content)
         // return request.post <T>('message/sendMsg', msgAdd)
-        socialChatModule.openIm.sendMessage(params).then((res) => {
+        //
+        let actionMethod : Function = null;
+        switch (msg.action){
+            case 'createImageMessage':
+            case 'createSoundMessage':
+            case 'createVideoMessage':
+            case 'createFileMessage':
+                actionMethod = socialChatModule.openIm.sendMessageNotOss;
+                break;
+            default:
+                actionMethod = socialChatModule.openIm.sendMessage;
+                break;
+        }
+        // 执行方法。
+        actionMethod(params).then((res) => {
             // 后台返回后再替换
             this.chat.updateTime = res.data.createTime
             this.messages.splice(index, 1, new MessageVO(null, JsonUtil.toParse(res.data)))

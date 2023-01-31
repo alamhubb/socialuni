@@ -72,9 +72,13 @@ export default class MessageVO {
                     console.log(  '  clearC2CHistoryMessageFromLocalAndSvr  ');
                 }).catch(err=>{
                 })
+            } else if (msg.contentType === MessageType.PICTUREMESSAGE) {
+                // 描述用于展示给用户。
+                this.content = '收到一张图片';
+                this.contentData = JSON.parse(msg.content);
             }
 
-            if (socialUserModule.mineUser && msg.sendID === socialUserModule.mineUser.id) {
+            if ( msg.sendID === socialUserModule?.mineUser?.id) {
                 this.user = socialUserModule.mineUser
             } else {
                 const user = new SocialuniUserRO()

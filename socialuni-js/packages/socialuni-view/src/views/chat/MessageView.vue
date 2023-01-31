@@ -72,8 +72,11 @@
             <view class="row-end">
               <view class="main">
                 <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                  <text v-if="msg.status !== 3">{{ msg.content }}</text>
-                  <text v-else-if="msg.status === 3"> 触发敏感词,发送失败</text>
+                  <text v-if="msg.status === 3"> 发送失败</text>
+
+                  <img v-if="msg.contentType === 102" class="bd-round size50" :src="msg.contentData.sourcePicture.url"/>
+                  <text v-else-if="msg.contentType !== 3"> {{ msg.content }} </text>
+
                 </view>
               </view>
             </view>
@@ -102,7 +105,10 @@
             </view>
             <view class="main">
               <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                <text>{{ msg.content }}</text>
+                <text v-if="msg.status === 3"> 发送失败</text>
+
+                <img v-if="msg.contentType === 102" class="bd-round size50" :src="msg.contentData.sourcePicture.url"/>
+                <text v-else-if="msg.contentType !== 3"> {{ msg.content }} </text>
               </view>
             </view>
           </view>
@@ -232,11 +238,6 @@ export default class MessageView extends Vue {
     deleteReasonDialog: any;
   }
 
-  created() {
-    console.log(123123)
-    console.log(socialAppModule.cosHttpPath)
-    console.log(456456)
-  }
 
   init(params: MessageViewParams) {
     if (params.userId) {
@@ -399,12 +400,17 @@ export default class MessageView extends Vue {
       imgFiles.forEach(item => {
         //只有不包含，才赋值src，有值代表已经赋值过了
         if (item.src.indexOf('https') < 0) {
-          item.src = cosAuthRO.uploadImgPath + 'talk/' + item.src
+          item.src = cosAuthRO.uploadImgPath + 'im/img/' + item.src
+          item.url = socialAppModule.cosHttpPath + item.src;
         }
       })
-      console.log('-----------imgFiles-----------', imgFiles, cosAuthRO);
-      CosUtil.postImgList(imgFiles, cosAuthRO)
-      console.log('-----------222222222222222222-----------', imgFiles, cosAuthRO);
+      console.log('-----------imgFiles--------',imgFiles);
+      // 上传
+      await CosUtil.postImgList(imgFiles, cosAuthRO)
+      // 发送图片
+      imgFiles.forEach(item => {
+        socialChatModule.pushImageMessage(item.url);
+      });
     } else {
       SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
       AlertUtil.error(AppMsg.uploadFailMsg)
