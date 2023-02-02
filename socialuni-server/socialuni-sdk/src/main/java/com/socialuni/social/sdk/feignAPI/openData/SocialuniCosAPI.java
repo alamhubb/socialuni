@@ -17,4 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface SocialuniCosAPI {
     @PostMapping("getCosAuth")
     ResultRO<SocialCosAuthRO> getCosAuth();
+
+    @PostMapping("getCosPath")
+    ResultRO<String> getCosPath();
 }
