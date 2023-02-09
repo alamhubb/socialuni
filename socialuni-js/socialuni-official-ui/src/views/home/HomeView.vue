@@ -44,7 +44,7 @@
 
     <div class="flex-none text-tip body-2 flex-col mt">
       <div class="row-center row-wrap">
-        <div class="text-black">@2019-2022 社交联盟</div>
+        <div class="text-black">@2019-2023 社交联盟</div>
         <div class="mx-xs">|</div>
         <div>清池科技滦州市有限公司</div>
         <div class="mx-xs">|</div>
