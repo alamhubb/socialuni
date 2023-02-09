@@ -1,7 +1,8 @@
 # 社交联盟相关配置
 socialuni:
   # 根据此值判断您是否接入社交联盟，不接入不填写即可，开发者秘钥，接入联盟后，调用联盟接口需要携带此秘钥，从社交联盟开发者管理后台注册申请秘钥  admin.socialuni.cn, 不接入联盟可不填写
-  #  secret-key: "d9a53b2892a540689b4ef608bdca3d2e"
+  secret-key: "d9a53b2892a540689b4ef608bdca3d2e"
+  central-server-url: "https://api.socialuni.cn"
   # 开发者id，uuid生成，全网唯一，联盟用来标识开发者数据唯一性，由联盟提供
   #  socialuni-id: "d15502ebc20f4f21bf2b375f2b3ac312"
   app:
