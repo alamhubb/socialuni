@@ -365,7 +365,7 @@ export default class MessageView extends Vue {
 
   openPhoto() {
     const that = this;
-    const itemList: string[] = ['图片'];
+    const itemList: string[] = ['图片','视频'];
     if (this.userId) {
       itemList.push('删除对方聊天记录');
     }
@@ -375,6 +375,9 @@ export default class MessageView extends Vue {
       switch (itemList[index]) {
         case '图片':
           that.chooseImage();
+          break;
+        case '视频':
+          that.chooseVideo();
           break;
         case '删除对方聊天记录':
           socialChatModule.pushCustomMessage(socialUserModule.userId, "{}", "发送删除对方聊天记录");
@@ -387,7 +390,16 @@ export default class MessageView extends Vue {
     })
   }
 
-
+  async chooseVideo(){
+    //获取cos认证信息
+    await UniUtil.chooseVideo();
+    // uni.chooseVideo({
+    //   sourceType: ['camera', 'album'],
+    //   success: function (res) {
+    //     self.src = res.tempFilePath;
+    //   }
+    // });
+  }
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */

@@ -14,6 +14,9 @@ import ImgUtil from './ImgUtil'
 import {socialSystemModule} from "socialuni-sdk/src/store/store";
 import DomFile from "socialuni-api/src/model/DomFile";
 import AppMsg from "socialuni-constant/constant/AppMsg";
+import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
+import CosUtil from "./CosUtil";
+import CosUploadResult from "socialuni-api/src/model/cos/CosUploadResult";
 
 export default class UniUtil {
     public static textCopy(copyText: string, hint?: string) {
@@ -155,7 +158,32 @@ export default class UniUtil {
             }
         })
     }
+    //选择视频
+    public  static async chooseVideo(maxDuration = 60) {
 
+        const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO();
+        uni.chooseVideo({
+            sourceType: ['album'],
+            // sizeType: ['compressed'],
+            maxDuration: maxDuration,
+            success(res) {
+                cosAuthRO.cos.putObject({
+                    Bucket: cosAuthRO.bucket,
+                    Region: cosAuthRO.region,
+                    Key: '/user/e18b70bcda094139ab6b3b13e485f099/im/img/97ae43ea22a64f099501ccd03ea2c4c8.mp4',
+                    Body: res.tempFile,
+                    // {"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0|imageMogr2/gravity/center/crop/100x100"},
+                }, (err, data: CosUploadResult) => {
+                    console.log('----chooseVideo-------',err,data);
+                })
+            },
+            fail(err) {
+                console.log(err);
+            }
+        })
+
+
+    }
     //选择图片
     public static chooseImage(count = 1) {
         return new Promise<DomFile[]>((resolve, reject) => {
