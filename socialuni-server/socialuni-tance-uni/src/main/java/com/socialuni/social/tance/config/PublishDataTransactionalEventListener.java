@@ -46,6 +46,7 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
     private CacheManager cacheManager;
     @Autowired
     private ConfigInterface configApi;
+
     /**
      * 之后再事务提交之后也就是成功执行，才去同步到开发者服务器中。
      */
@@ -55,8 +56,13 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
             // 同步数据到开发者接口中。
             // 循环调用插入到开发者的接口中去。 放心顺序也是一样保持一致的。
             log.debug("插入到开发者的接口中={}", publishDataModelList);
-            String devPublishDataApiUrl = configApi.getString("devPublishDataApiUrl");
-            if(StrUtil.isNotBlank(devPublishDataApiUrl)){
+            String devPublishDataApiUrl = null;
+            try {
+                devPublishDataApiUrl = configApi.getString("devPublishDataApiUrl");
+            } catch (Exception e) {
+                log.info(e.getMessage());
+            }
+            if (StrUtil.isNotBlank(devPublishDataApiUrl)) {
                 HttpUtil.post(devPublishDataApiUrl, JSONUtil.toJsonStr(publishDataModelList));
             }
             // 同步redis缓存。
@@ -123,7 +129,7 @@ public class PublishDataTransactionalEventListener implements BeanPostProcessor 
             if (strings == null) {
                 strings = newName;
                 CLASS_SET_MAP.put(model, strings);
-            }else{
+            } else {
                 //
                 if (!strings.addAll(newName)) {
                     throw new RuntimeException(errMsg + "放入的cacheNames重复,请核查代码");
