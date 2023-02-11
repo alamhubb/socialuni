@@ -11,7 +11,7 @@
           </view>
         </view>-->
 
-    <scroll-view scroll-y="true" class="cu-chat h100p"
+    <scroll-view scroll-y="true" class="flex-col h100p"
                  @scrolltoupper="upper"
                  :upper-threshold="upperThreshold"
                  :show-scrollbar="true"
@@ -50,16 +50,16 @@
         <!--        <uni-load-more v-else :status="chat.loadMore"></uni-load-more>-->
       </view>
 
-      <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
-            :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
-        <template v-if="msg.type === systemMsgType">
+      <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
+        <div v-if="msg.type === systemMsgType">
           <view class="cu-info round">
             {{ msg.content }}
           </view>
-        </template>
-        <template v-else-if="msg.isMine">
-          <view class="flex-col w100p">
-            <view class="mr-30px h44px row-end-center">
+        </div>
+        <div v-else-if="msg.isMine" class="flex-row pd-sm">
+          <div class="w130 flex-none"></div>
+          <div class="flex-1 flex-col mr overflow-hidden">
+            <view class="h44px row-end-center mb-xs">
               {{ msg.user.nickname }}
               <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
                                   @click="toUserDetailVue(msg.user.id)">
@@ -69,55 +69,77 @@
                                    src="/static/img/crown.png"
                                    @click="toVipVue"></image>-->
             </view>
-            <view class="row-end">
-              <view class="main">
-                <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                  <text v-if="msg.status === 3"> 发送失败</text>
+            <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
+              <text v-if="msg.status === 3"> 发送失败</text>
+              <!--        <div class="bd-round size18 position-absolute mr-nn mt-nn right-0 row-all-center">
+                        <q-icon @click.stop="toIdentityAuth"
+                                class="color-success"
+                                size="16" icon="level"/>
+                      </div>-->
+              <image v-if="msg.contentType === 102" mode="aspectFill"
+                     class="bd-radius bd"
+                     :style="{'max-width':'200px'}"
+                     :src="msg.contentData.sourcePicture.url"
+                     :show-menu-by-longpress="true"
+                     @click.stop="previewImage(msg.contentData.sourcePicture.url)"
+              ></image>
+              <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
+                     enable-danmu danmu-btn controls></video>
+              <div class="pd-xs bg-white bd-radius" v-else-if="msg.contentType !== 3"> {{ msg.content }}</div>
+            </view>
+            <div class="row-end-center mt-xs">
+              <view class="date">{{ formatTime(msg.createTime) }}</view>
+            </div>
+          </div>
+          <image class="size50 bd-radius flex-none"
+                 :src="msg.user.avatar"
+                 @click="toUserDetailVue(msg.user.id)"
+          />
+        </div>
+      </div>
 
-                  <img v-if="msg.contentType === 102" class="bd-round size50" :src="msg.contentData.sourcePicture.url"/>
-                  <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl" enable-danmu danmu-btn controls></video>
-                  <text v-else-if="msg.contentType !== 3"> {{ msg.content }} </text>
 
+      <!--      <view v-for="msg in messages" :id="'m'+msg.id" :key="msg.id"
+                  :class="[msg.type === systemMsgType?'row-center':'cu-item',msg.isMine?'self':'']">
+              <template v-if="msg.type === systemMsgType">
+                <view class="cu-info round">
+                  {{ msg.content }}
                 </view>
-              </view>
-            </view>
-          </view>
-          <image class="cu-avatar bd-radius"
-                 :src="msg.user.avatar"
-                 @click="toUserDetailVue(msg.user.id)"
-          />
-          <view class="date">{{ formatTime(msg.createTime) }}</view>
-        </template>
-        <template v-else>
-          <image class="cu-avatar bd-radius"
-                 :src="msg.user.avatar"
-                 @click="toUserDetailVue(msg.user.id)"
-          />
-          <view class="flex-col w100p">
-            <view class="ml-20 h44 row-col-center">
-              {{ msg.user.nickname }}
-              <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
-                                  @click="toUserDetailVue(msg.user.id)">
-                              {{ msg.user.nickname }}
-                            </text>
-                            <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
-                                   src="/static/img/crown.png"
-                                   @click="toVipVue"></image>-->
-            </view>
-            <view class="main">
-              <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
-                <text v-if="msg.status === 3"> 发送失败</text>
+              </template>
+              <template v-else-if="msg.isMine">
 
-                <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
-                <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl" enable-danmu danmu-btn controls></video>
-                <text v-else-if="msg.contentType !== 3"> {{ msg.content }} </text>
+              </template>
+              <template v-else>
+                <image class="cu-avatar bd-radius"
+                       :src="msg.user.avatar"
+                       @click="toUserDetailVue(msg.user.id)"
+                />
+                <view class="flex-col w100p">
+                  <view class="ml-20 h44 row-col-center">
+                    {{ msg.user.nickname }}
+                    &lt;!&ndash;              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                        @click="toUserDetailVue(msg.user.id)">
+                                    {{ msg.user.nickname }}
+                                  </text>
+                                  <image v-if="msg.user.vipFlag" class="ml-6 size30 mt-10"
+                                         src="/static/img/crown.png"
+                                         @click="toVipVue"></image>&ndash;&gt;
+                  </view>
+                  <view class="main">
+                    <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
+                      <text v-if="msg.status === 3"> 发送失败</text>
 
-              </view>
-            </view>
-          </view>
-          <view class="date">{{ formatTime(msg.createTime) }}</view>
-        </template>
-      </view>
+                      <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
+                      <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
+                             enable-danmu danmu-btn controls></video>
+                      <text v-else-if="msg.contentType !== 3"> {{ msg.content }}</text>
+
+                    </view>
+                  </view>
+                </view>
+                <view class="date">{{ formatTime(msg.createTime) }}</view>
+              </template>
+            </view>-->
       <!--    </view>-->
     </scroll-view>
 
@@ -368,7 +390,7 @@ export default class MessageView extends Vue {
 
   openPhoto() {
     const that = this;
-    const itemList: string[] = ['图片','视频'];
+    const itemList: string[] = ['图片', '视频'];
     if (this.userId) {
       itemList.push('删除对方聊天记录');
     }
@@ -393,7 +415,7 @@ export default class MessageView extends Vue {
     })
   }
 
-  async chooseVideo(){
+  async chooseVideo() {
     //获取cos认证信息
     const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO()
     //获取cos认证信息
@@ -415,6 +437,7 @@ export default class MessageView extends Vue {
       AlertUtil.error(AppMsg.uploadFailMsg)
     }
   }
+
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，
    */
@@ -431,7 +454,7 @@ export default class MessageView extends Vue {
           item.url = socialAppModule.cosHttpPath + item.src;
         }
       })
-      console.log('-----------imgFiles--------',imgFiles);
+      console.log('-----------imgFiles--------', imgFiles);
       // 上传
       await CosUtil.postImgList(imgFiles, cosAuthRO)
       // 发送图片
@@ -697,6 +720,13 @@ export default class MessageView extends Vue {
 
   goBack() {
     PageUtil.goBack()
+  }
+
+  previewImage(url) {
+    uni.previewImage({
+      current: 0,
+      urls: [url]
+    })
   }
 }
 </script>
