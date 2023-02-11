@@ -91,11 +91,11 @@ export default class TencentCosAPI {
 
     static async uploadFileAPI(imgFile: DomFile, cosAuthRO: CosAuthRO) {
         return new Promise<CosUploadResult>(async (resolve, reject) => {
-            const headers = {
+            const headers = {};
+            if(imgFile.fileType === 'image'){
                 // "fileid": "bba022e9313849acafeb34fd5d5a65f5avatar.jpg"
                 // 通过 imageMogr2 接口使用图片缩放功能：指定图片宽度为 200，宽度等比压缩
-                'Pic-Operations':
-                    `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`,
+                headers['Pic-Operations'] = `{"is_pic_info": 1, "rules":[{"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0"},{"fileid": "${imgFile.fileName}!normal", "rule": "imageMogr2/thumbnail/800x/interlace/1"},{"fileid": "${imgFile.fileName}!thumbnail", "rule": "imageMogr2/thumbnail/300x/interlace/0"}]}`;
             }
             const uploadImgFile = await UniUtil.getFile(imgFile) as any
             cosAuthRO.cos.putObject({
@@ -109,6 +109,7 @@ export default class TencentCosAPI {
                 if (!err) {
                     resolve(data)
                 } else {
+                    console.log('---cosAuthRO.cos.putObject----',err);
                     AlertUtil.error(AppMsg.uploadFailMsg)
                     reject(err)
                 }

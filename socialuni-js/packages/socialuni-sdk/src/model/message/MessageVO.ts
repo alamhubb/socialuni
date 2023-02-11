@@ -76,6 +76,10 @@ export default class MessageVO {
                 // 描述用于展示给用户。
                 this.content = '收到一张图片';
                 this.contentData = JSON.parse(msg.content);
+            } else if (msg.contentType === MessageType.VIDEOMESSAGE) {
+                // 描述用于展示给用户。
+                this.content = '收到一个视频';
+                this.contentData = JSON.parse(msg.content);
             }
 
             if ( msg.sendID === socialUserModule?.mineUser?.id) {

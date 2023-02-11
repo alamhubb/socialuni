@@ -15,7 +15,7 @@ import {
     JoinGroupParams, MarkC2CParams,
     Member,
     OpenIMSDK, PicBaseInfo, PinCveParams, SearchGroupParams,
-    SetGroupVerificationParams, setPrvParams
+    SetGroupVerificationParams, setPrvParams, VideoMsgParams
 } from "open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
@@ -550,7 +550,31 @@ export default class SocialChatModule extends Pinia {
         //计算未读数量
         this.computedChatsUnreadNumTotalAction()
     }
-
+    /**
+     * 发送视频消息。
+     * @param data
+     * @param extension
+     * @param description
+     */
+    async pushVideoMessage( url : string ){
+        const options:VideoMsgParams = {
+            videoPath: "",
+            duration: 60,
+            videoType: "mp4",
+            snapshotPath: "",
+            videoUUID:UUIDUtil.getUUID(),
+            videoUrl:url,
+            videoSize:1234,
+            snapshotUUID:UUIDUtil.getUUID(),
+            snapshotSize:123,
+            snapshotUrl:"",
+            snapshotWidth:124,
+            snapshotHeight:125
+        };
+        const msg: MessageVO =  MessageVO.create("createVideoMessage", options);
+        msg.content = '视频';
+        await socialChatModule.pushMessageAction(msg)
+    }
     /**
      * 发送图片消息。
      * @param data

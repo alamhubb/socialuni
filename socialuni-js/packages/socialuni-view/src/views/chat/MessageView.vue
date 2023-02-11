@@ -75,6 +75,7 @@
                   <text v-if="msg.status === 3"> 发送失败</text>
 
                   <img v-if="msg.contentType === 102" class="bd-round size50" :src="msg.contentData.sourcePicture.url"/>
+                  <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl" enable-danmu danmu-btn controls></video>
                   <text v-else-if="msg.contentType !== 3"> {{ msg.content }} </text>
 
                 </view>
@@ -107,8 +108,10 @@
               <view class="content bg-white" @longpress="openMessageMoreHandleDialog(msg)">
                 <text v-if="msg.status === 3"> 发送失败</text>
 
-                <img v-if="msg.contentType === 102" class="bd-round size50" :src="msg.contentData.sourcePicture.url"/>
+                <img v-if="msg.contentType === 102" class="bd-round size100" :src="msg.contentData.sourcePicture.url"/>
+                <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl" enable-danmu danmu-btn controls></video>
                 <text v-else-if="msg.contentType !== 3"> {{ msg.content }} </text>
+
               </view>
             </view>
           </view>
@@ -392,13 +395,25 @@ export default class MessageView extends Vue {
 
   async chooseVideo(){
     //获取cos认证信息
-    await UniUtil.chooseVideo();
-    // uni.chooseVideo({
-    //   sourceType: ['camera', 'album'],
-    //   success: function (res) {
-    //     self.src = res.tempFilePath;
-    //   }
-    // });
+    const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO()
+    //获取cos认证信息
+    const imgFiles: DomFile[] = await UniUtil.chooseVideo();
+
+    if (cosAuthRO) {
+      imgFiles.forEach(item => {
+        item.src = cosAuthRO.uploadImgPath + 'im/video/' + item.fileName
+        item.url = socialAppModule.cosHttpPath + item.src;
+      })
+      // 上传
+      await CosUtil.postImgList(imgFiles, cosAuthRO)
+      // 发送图片
+      imgFiles.forEach(item => {
+        socialChatModule.pushVideoMessage(item.url);
+      });
+    } else {
+      SocialuniAppAPI.sendErrorLogAPI(null, '用户发表动态失败，未获取上传图片所需要的认证信息')
+      AlertUtil.error(AppMsg.uploadFailMsg)
+    }
   }
   /**
    * 图片前台压缩，往后台传一个压缩后的可看清的图，然后后台弄出来一个压缩图，

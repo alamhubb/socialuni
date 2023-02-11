@@ -5,7 +5,10 @@ export default class DomFile {
   public url: string // 访问的url路径
   public fileName: string
   public needAuth: boolean = false
-
+  /**
+   * 文件类型: 用于做特殊处理。
+   */
+  public fileType: string = 'image'
   //小程序只有path和size
   path: string
   size: number

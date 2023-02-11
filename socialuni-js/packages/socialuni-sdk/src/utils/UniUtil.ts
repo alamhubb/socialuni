@@ -160,28 +160,24 @@ export default class UniUtil {
     }
     //选择视频
     public  static async chooseVideo(maxDuration = 60) {
-
-        const cosAuthRO: CosAuthRO = await CosUtil.getCosAuthRO();
-        uni.chooseVideo({
-            sourceType: ['album'],
-            // sizeType: ['compressed'],
-            maxDuration: maxDuration,
-            success(res) {
-                cosAuthRO.cos.putObject({
-                    Bucket: cosAuthRO.bucket,
-                    Region: cosAuthRO.region,
-                    Key: '/user/e18b70bcda094139ab6b3b13e485f099/im/img/97ae43ea22a64f099501ccd03ea2c4c8.mp4',
-                    Body: res.tempFile,
-                    // {"fileid": "${imgFile.fileName}!avatar", "rule": "imageMogr2/thumbnail/100x/interlace/0|imageMogr2/gravity/center/crop/100x100"},
-                }, (err, data: CosUploadResult) => {
-                    console.log('----chooseVideo-------',err,data);
-                })
-            },
-            fail(err) {
-                console.log(err);
-            }
+        return new Promise<DomFile[]>((resolve, reject) => {
+            uni.chooseVideo({
+                sourceType: ['album'],
+                // sizeType: ['compressed'],
+                maxDuration: maxDuration,
+                success(res) {
+                    const imgFiles : DomFile[]= [];
+                    const imgFile : DomFile = res.tempFile as any;
+                    // imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
+                    imgFile.fileName = imgFile?.name
+                    imgFiles.push(imgFile);
+                    resolve(imgFiles)
+                },
+                fail(err) {
+                    reject(err)
+                }
+            })
         })
-
 
     }
     //选择图片
