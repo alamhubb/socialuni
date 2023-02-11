@@ -135,7 +135,7 @@ public class OpenImCallbackController {
             CallbackSuperResponse handler = super.handler();
             try {
                 // 只有文本才监测。
-                if(this.contentType == 100){
+                if(this.contentType == 101){
                     SocialuniTextContentUtil.checkTextHasUnderageAndContactAndViolateWords(this.content);
                 }
             } catch (SocialBusinessException e) {
