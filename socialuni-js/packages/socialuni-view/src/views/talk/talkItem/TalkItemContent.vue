@@ -99,6 +99,7 @@ import ImgUtil from "socialuni-sdk/src/utils/ImgUtil";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import NumUtil from "socialuni-sdk/src/utils/NumUtil";
+import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 
 @Options({
   components: {QIcon}
@@ -118,7 +119,14 @@ export default class TalkItemContent extends Vue {
 
   chooseCircle(circleName) {
     AlertUtil.confirm(`是否进入${circleName}圈`).then(() => {
-      socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
+      if (RouterUtil.getCurrentPageURI() === PagePath.talk) {
+        socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
+      } else {
+        CommonUtil.delayTime(100).then(() => {
+          socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
+        })
+        PageUtil.toTalkPage()
+      }
     })
   }
 
