@@ -1,5 +1,5 @@
 <template>
-  <view v-if="chat" class="pb-100 h100p bg-default">
+  <view v-if="chat" class="pb-50 h100p bg-default">
 
     <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
           <view class="flex-1 card-text-row">
@@ -70,22 +70,7 @@
                                    @click="toVipVue"></image>-->
             </view>
             <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
-              <text v-if="msg.status === 3"> 发送失败</text>
-              <!--        <div class="bd-round size18 position-absolute mr-nn mt-nn right-0 row-all-center">
-                        <q-icon @click.stop="toIdentityAuth"
-                                class="color-success"
-                                size="16" icon="level"/>
-                      </div>-->
-              <image v-if="msg.contentType === 102" mode="aspectFill"
-                     class="bd-radius bd"
-                     :style="{'max-width':'200px'}"
-                     :src="msg.contentData.sourcePicture.url"
-                     :show-menu-by-longpress="true"
-                     @click.stop="previewImage(msg.contentData.sourcePicture.url)"
-              ></image>
-              <video v-else-if="msg.contentType === 104" class="bd-round size50" :src="msg.contentData.videoUrl"
-                     enable-danmu danmu-btn controls></video>
-              <div class="pd-xs bg-white bd-radius" v-else-if="msg.contentType !== 3"> {{ msg.content }}</div>
+              <message-item-content :msg="msg"></message-item-content>
             </view>
             <div class="row-end-center mt-xs">
               <view class="date">{{ formatTime(msg.createTime) }}</view>
@@ -95,6 +80,31 @@
                  :src="msg.user.avatar"
                  @click="toUserDetailVue(msg.user.id)"
           />
+        </div>
+        <div v-else class="flex-row pd-sm">
+          <image class="size50 bd-radius flex-none"
+                 :src="msg.user.avatar"
+                 @click="toUserDetailVue(msg.user.id)"
+          />
+          <div class="flex-1 flex-col mr overflow-hidden">
+            <view class="h44px row-col-center mb-xs">
+              {{ msg.user.nickname }}
+              <!--              <text class="text-sm" :class="[msg.user.vipFlag?'text-red':'text-gray']"
+                                  @click="toUserDetailVue(msg.user.id)">
+                              {{ msg.user.nickname }}
+                            </text>
+                            <image v-if="msg.user.vipFlag" class="ml-6 mr-6 size30 mt-n10"
+                                   src="/static/img/crown.png"
+                                   @click="toVipVue"></image>-->
+            </view>
+            <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
+              <message-item-content :msg="msg"></message-item-content>
+            </view>
+            <div class="row-col-center mt-xs">
+              <view class="date">{{ formatTime(msg.createTime) }}</view>
+            </div>
+          </div>
+          <div class="w130 flex-none"></div>
         </div>
       </div>
 
@@ -253,9 +263,10 @@ import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
 import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
 import CosAPI from "socialuni-api/src/api/CosAPI";
+import MessageItemContent from "./MessageItemContent.vue";
 
 
-@Options({components: {SocialuniReportDialog, QIcon}})
+@Options({components: {MessageItemContent, SocialuniReportDialog, QIcon}})
 export default class MessageView extends Vue {
   public $refs!: {
     reportDialog: SocialuniReportDialog;
@@ -720,13 +731,6 @@ export default class MessageView extends Vue {
 
   goBack() {
     PageUtil.goBack()
-  }
-
-  previewImage(url) {
-    uni.previewImage({
-      current: 0,
-      urls: [url]
-    })
   }
 }
 </script>
