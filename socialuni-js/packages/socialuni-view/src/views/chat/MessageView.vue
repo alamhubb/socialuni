@@ -74,7 +74,7 @@
               <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="50" class="mb-nm"/>
               <message-item-content :msg="msg"></message-item-content>
             </view>
-            <div class="row-end-center mt-xs">
+            <div class="col-all-center mt-xs">
               <view class="date">{{ formatTime(msg.createTime) }}</view>
             </div>
           </div>
@@ -100,14 +100,13 @@
                                    @click="toVipVue"></image>-->
             </view>
 
-            <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
+            <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
               <message-item-content :msg="msg"></message-item-content>
             </view>
-            <div class="row-col-center mt-xs">
+            <div class="col-all-center mt-xs">
               <view class="date">{{ formatTime(msg.createTime) }}</view>
             </div>
           </div>
-          <div class="w130 flex-none"></div>
         </div>
       </div>
 
@@ -665,6 +664,7 @@ export default class MessageView extends Vue {
 
   openReportDialog() {
     this.closeMessageMoreDialog()
+    AlertUtil.error('暂不支持,开发中');
     this.$refs.reportDialog.openReport()
   }
 
