@@ -118,6 +118,9 @@ export default class PageUtil {
     static toMessagePageByGroupId(groupId: string) {
         RouterUtil.navigateTo(PagePath.message + '?groupId=' + groupId)
     }
+    static toIMGroupMember(groupId: string) {
+        RouterUtil.navigateTo("/pages/chat/groupMember?id="+groupId);
+    }
 
     static toFaceValuePage() {
         AlertUtil.confirm('是否查看颜值分介绍').then(() => {
