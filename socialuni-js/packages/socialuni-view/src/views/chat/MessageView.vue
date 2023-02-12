@@ -71,7 +71,7 @@
             </view>
 
             <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
-              <q-icon v-if="msg.status === 3" icon="map-fill" size="50" class="mb-nm"/>
+              <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="50" class="mb-nm"/>
               <message-item-content :msg="msg"></message-item-content>
             </view>
             <div class="row-end-center mt-xs">
