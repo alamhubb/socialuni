@@ -58,7 +58,6 @@
 
         </div>
         <div v-else-if="msg.isMine" class="flex-row pd-sm">
-          <div class="w130 flex-none"></div>
           <div class="flex-1 flex-col mr overflow-hidden">
             <view class="h44px row-end-center mb-xs">
               {{ msg.user.nickname }}
@@ -70,7 +69,9 @@
                                    src="/static/img/crown.png"
                                    @click="toVipVue"></image>-->
             </view>
-            <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
+
+            <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+              <q-icon v-if="msg.status === 3" icon="map-fill" size="50" class="mb-nm"/>
               <message-item-content :msg="msg"></message-item-content>
             </view>
             <div class="row-end-center mt-xs">
@@ -98,6 +99,7 @@
                                    src="/static/img/crown.png"
                                    @click="toVipVue"></image>-->
             </view>
+
             <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
               <message-item-content :msg="msg"></message-item-content>
             </view>
