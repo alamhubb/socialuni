@@ -14,7 +14,7 @@
         @blur="inputContentBlur"
     />
     <!--<u-field
-        trim
+        trimqing
         v-model="content"
         :adjust-position="true"
         class="solid-bottom flex-1"

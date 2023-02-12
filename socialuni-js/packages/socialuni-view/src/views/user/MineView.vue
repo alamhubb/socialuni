@@ -113,7 +113,7 @@ import UserService from "../../service/UserService";
     QNavbar,
     QRowItem,
     UserInfo,
-    // MsgInput
+    MsgInput
   }
 })
 export default class MineView extends Vue {

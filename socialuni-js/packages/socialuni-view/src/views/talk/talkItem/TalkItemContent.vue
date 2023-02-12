@@ -122,7 +122,7 @@ export default class TalkItemContent extends Vue {
       if (RouterUtil.getCurrentPageURI() === PagePath.talk) {
         socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
       } else {
-        CommonUtil.delayTime(100).then(() => {
+        CommonUtil.delayTime(500).then(() => {
           socialTalkModule.setCircleNameUpdateCurTabIndex(circleName)
         })
         PageUtil.toTalkPage()
