@@ -6,10 +6,13 @@ import com.socialuni.admin.web.manage.DevAuthCodeManage;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.RequestUtil;
+import com.socialuni.social.sdk.facade.SocialuniUserRepositoryFacede;
+import com.socialuni.social.user.sdk.constant.UserType;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.user.sdk.model.QO.SocialPhoneNumQO;
 import com.socialuni.social.user.sdk.model.RO.login.SocialLoginRO;
+import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.PhoneNumUtil;
 import com.socialuni.social.tance.sdk.api.DevAccountInterface;
 import com.socialuni.social.tance.sdk.api.DevAccountRedisInterface;
@@ -38,6 +41,8 @@ public class AdminLoginService {
     SocialUserPhoneEntity socialUserPhoneEntity;
     @Resource
     private DevAccountRedisInterface devAccountRedis;
+    @Resource
+    SocialuniUserRepository socialuniUserRepository;
     //秘钥登录
     @Transactional
     public ResultRO<SocialLoginRO<DevAccountRO>> secretKeyLogin(DevAccountInterface.DevAccountQueryQO devAccountQueryQO) {
@@ -80,8 +85,11 @@ public class AdminLoginService {
 
         // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
         // 所以直接注册c端用户
-        SocialuniUserDo SocialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
-        devAccountModel.setUserId(SocialuniUserDo.getUserId());
+        SocialuniUserDo socialuniUserDo = socialUserPhoneEntity.createUserPhoneEntity(phoneNum);
+        socialuniUserDo.setType(UserType.system);
+        socialuniUserRepository.savePut(socialuniUserDo);
+
+        devAccountModel.setUserId(socialuniUserDo.getUserId());
 
         devAccountModel = devAccountRedis.saveDevAccount(devAccountModel);
 
