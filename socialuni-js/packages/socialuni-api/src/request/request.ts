@@ -22,7 +22,7 @@ request.setConfig(config => { /* 设置全局配置 */
     return config
 })
 request.interceptor.request((config: requestConfig) => { /* 请求之前拦截器 */
-    const token = socialUserModule.token
+    const token = socialUserModule?.token
     if (token) {
         config.header.token = token
         //下次尝试把这里删除
