@@ -162,7 +162,7 @@ export default class UniUtil {
     public  static async chooseVideo(maxDuration = 60) {
         return new Promise<DomFile[]>((resolve, reject) => {
             uni.chooseVideo({
-                sourceType: ['album'],
+                // sourceType: ['album'],
                 // sizeType: ['compressed'],
                 maxDuration: maxDuration,
                 success(res) {
@@ -184,7 +184,7 @@ export default class UniUtil {
     public static chooseImage(count = 1) {
         return new Promise<DomFile[]>((resolve, reject) => {
             uni.chooseImage({
-                sourceType: ['album'],
+                // sourceType: ['album'],
                 sizeType: ['original'],
                 // sizeType: ['compressed'],
                 count: count,

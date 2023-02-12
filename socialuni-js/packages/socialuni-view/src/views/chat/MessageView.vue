@@ -1,6 +1,10 @@
 <template>
   <view v-if="chat" class="pb-50 h100p bg-default">
-
+    <q-navbar show-back :title="title">
+      <div class="row-end-center flex-1">
+        <q-icon icon="list-dot" size="20" @click="openMoreMenu"></q-icon>
+      </div>
+    </q-navbar>
     <!--    <view v-if="showMsgHint" class="fixed-105 row-col-center bg-orange">
           <view class="flex-1 card-text-row">
             长按消息可进行举报，欢迎大家积极举报不良内容获取正义值
@@ -52,12 +56,12 @@
 
       <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
         <div v-if="msg.type === systemMsgType">
-          <view class="cu-info round">
-            {{ msg.content }}
+          <view class="cu-info round row-all-center">
+            {{ formatTime(msg.createTime) }} , {{ msg.content }}
           </view>
+
         </div>
         <div v-else-if="msg.isMine" class="flex-row pd-sm">
-          <div class="w130 flex-none"></div>
           <div class="flex-1 flex-col mr overflow-hidden">
             <view class="h44px row-end-center mb-xs">
               {{ msg.user.nickname }}
@@ -69,10 +73,12 @@
                                    src="/static/img/crown.png"
                                    @click="toVipVue"></image>-->
             </view>
-            <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
+
+            <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
+              <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="50" class="mb-nm"/>
               <message-item-content :msg="msg"></message-item-content>
             </view>
-            <div class="row-end-center mt-xs">
+            <div class="col-all-center mt-xs">
               <view class="date">{{ formatTime(msg.createTime) }}</view>
             </div>
           </div>
@@ -97,14 +103,14 @@
                                    src="/static/img/crown.png"
                                    @click="toVipVue"></image>-->
             </view>
-            <view class="row-end" @longpress="openMessageMoreHandleDialog(msg)">
+
+            <view class="row-start" @longpress="openMessageMoreHandleDialog(msg)">
               <message-item-content :msg="msg"></message-item-content>
             </view>
-            <div class="row-col-center mt-xs">
+            <div class="col-all-center mt-xs">
               <view class="date">{{ formatTime(msg.createTime) }}</view>
             </div>
           </div>
-          <div class="w130 flex-none"></div>
         </div>
       </div>
 
@@ -212,7 +218,7 @@
           <uni-list-item v-if="message&&message.isMine" :show-arrow="true" title="撤回消息"
                          clickable @click="revokeMessage"/>
           <uni-list-item v-if="message&&!message.isMine" :show-arrow="true" title="举报"
-                         @click="openReportDialog"/>
+                         clickable @click="openReportDialog"/>
         </uni-list>
       </view>
     </uni-popup>
@@ -264,9 +270,10 @@ import AppMsg from "socialuni-constant/constant/AppMsg";
 import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
 import CosAPI from "socialuni-api/src/api/CosAPI";
 import MessageItemContent from "./MessageItemContent.vue";
+import QNavbar from "../../components/QNavbar/QNavbar.vue";
 
 
-@Options({components: {MessageItemContent, SocialuniReportDialog, QIcon}})
+@Options({components: {MessageItemContent, SocialuniReportDialog, QIcon,QNavbar}})
 export default class MessageView extends Vue {
   public $refs!: {
     reportDialog: SocialuniReportDialog;
@@ -281,6 +288,7 @@ export default class MessageView extends Vue {
       this.userId = params.userId;
     } else if (params.groupId) {
       socialChatModule.setCurChatByGroupId(params.groupId)
+      this.groupId = params.groupId;
     }
   }
 
@@ -325,6 +333,8 @@ export default class MessageView extends Vue {
   readonly closeStatus: string = CommonStatus.close
   upperThreshold = 300
   userId: string = null
+  groupId: string = null
+  title: string = '聊天'
 
   onUnload() {
     socialChatModule.scrollTop = 0
@@ -401,7 +411,7 @@ export default class MessageView extends Vue {
 
   openPhoto() {
     const that = this;
-    const itemList: string[] = ['图片', '视频'];
+    const itemList: string[] = ['图片', '视频', '录音'];
     if (this.userId) {
       itemList.push('删除对方聊天记录');
     }
@@ -414,6 +424,9 @@ export default class MessageView extends Vue {
           break;
         case '视频':
           that.chooseVideo();
+          break;
+        case '录音':
+          AlertUtil.error('暂不支持,开发中');
           break;
         case '删除对方聊天记录':
           socialChatModule.pushCustomMessage(socialUserModule.userId, "{}", "发送删除对方聊天记录");
@@ -550,7 +563,15 @@ export default class MessageView extends Vue {
   toUserDetailVue(userId: string) {
     PageUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
   }
+  openMoreMenu(){
+    AlertUtil.error('暂不支持,开发中');
+    if(this.groupId){
+      PageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
+    }else{
 
+    }
+
+  }
   toVipVue() {
     PageUtil.toVipPage()
   }
@@ -658,8 +679,11 @@ export default class MessageView extends Vue {
   }
 
   openReportDialog() {
+
     this.closeMessageMoreDialog()
-    this.$refs.reportDialog.openReport()
+    AlertUtil.error('暂不支持,开发中');
+    console.log('-----举报--openReportDialog-------')
+    // this.$refs.reportDialog.openReport()
   }
 
   //正在开启Chat

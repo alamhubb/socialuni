@@ -38,6 +38,7 @@ export default class MessageVO {
     }
     constructor(content: string, msg: OpenImMsgRO = null) {
         this.originalMsg = msg;
+        this.type = SocialuniMessageType.simple
         if (msg) {
             console.log(msg,'MessageVO-----constructor',msg.contentType)
             this.contentData = msg.content;
@@ -55,12 +56,16 @@ export default class MessageVO {
                 console.log(123)
                 console.log(jsonObj)*/
                 this.content = '好友添加成功'
+                this.type = SocialuniMessageType.system;
             } else if (msg.contentType === MessageType.FRIENDDELETED) {
-                this.content = '好友已删除'
+                this.content = '好友已删除';
+                this.type = SocialuniMessageType.system;
             } else if (msg.contentType === MessageType.REVOKEMESSAGE) {
-                this.content = '消息已被撤回'
+                this.content = '消息已被撤回';
+                this.type = SocialuniMessageType.system;
             } else if (msg.contentType === MessageType.MEMBERENTER) {
-                this.content = 'hello,我是刚入群的新人'
+                this.content = '有新人入群'
+                this.type = SocialuniMessageType.system;
             } else if (msg.contentType === MessageType.CUSTOMMESSAGE) {
 
                 let customMessage = JSON.parse(msg.content);
@@ -99,7 +104,6 @@ export default class MessageVO {
             this.status   = msg.status;
             this.isRead = msg.isRead
             this.createTime = msg.createTime
-            this.type = SocialuniMessageType.simple
             this.contentType = msg.contentType//MessageContentType.text
         } else {
             this.id = UUIDUtil.getUUID()
@@ -112,7 +116,7 @@ export default class MessageVO {
             this.isMine = true
             this.isRead = true
             this.createTime = new Date().getTime()
-            this.type = SocialuniMessageType.simple
+
             this.contentType = MessageType.TEXTMESSAGE //MessageContentType.text
             this.action = 'createTextMessage'
         }
