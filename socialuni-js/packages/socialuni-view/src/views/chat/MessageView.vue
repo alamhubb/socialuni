@@ -52,9 +52,10 @@
 
       <div v-for="msg in messages" :id="'m'+msg.id" :key="msg.id">
         <div v-if="msg.type === systemMsgType">
-          <view class="cu-info round">
-            {{ msg.content }}
+          <view class="cu-info round row-all-center">
+            {{ formatTime(msg.createTime) }} , {{ msg.content }}
           </view>
+
         </div>
         <div v-else-if="msg.isMine" class="flex-row pd-sm">
           <div class="w130 flex-none"></div>
@@ -401,7 +402,7 @@ export default class MessageView extends Vue {
 
   openPhoto() {
     const that = this;
-    const itemList: string[] = ['图片', '视频'];
+    const itemList: string[] = ['图片', '视频', '录音'];
     if (this.userId) {
       itemList.push('删除对方聊天记录');
     }
@@ -414,6 +415,9 @@ export default class MessageView extends Vue {
           break;
         case '视频':
           that.chooseVideo();
+          break;
+        case '录音':
+          AlertUtil.error('暂不支持,开发中');
           break;
         case '删除对方聊天记录':
           socialChatModule.pushCustomMessage(socialUserModule.userId, "{}", "发送删除对方聊天记录");
