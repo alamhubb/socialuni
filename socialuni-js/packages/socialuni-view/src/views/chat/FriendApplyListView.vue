@@ -121,7 +121,8 @@ export default class ChatFriendPage extends Vue {
 
   get dataList() {
     let dataList = [...this.sendFriendApplicationList, ...this.recvFriendApplicationList]
-    dataList = dataList.sort((a, b) => a.createTime - b.createTime)
+    // 逆序排序。
+    dataList = dataList.sort((a, b) => b.createTime - a.createTime)
     return dataList
   }
 

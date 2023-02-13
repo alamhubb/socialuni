@@ -1,43 +1,5 @@
 <template>
-  <view class="bg-default h100p center">
-
-    <uni-grid class="grid" :column="5" :show-border="false" :square="false" @change="change">
-      <uni-grid-item v-for="(groupMember ,index) in groupMemberList" :index="index" :key="index">
-        <view class="grid-item-box">
-          <image class="size100" :src="groupMember.faceURL" mode="aspectFill" />
-          <text class="text">{{groupMember.nickname}}</text>
-          <view v-if="groupMember.badge" class="grid-dot">
-            <uni-badge :text="groupMember.badge" :type="groupMember.type" />
-          </view>
-        </view>
-      </uni-grid-item>
-    </uni-grid>
-
-    <uni-list class="center-list" >
-      <uni-list-item title="退出群" link :clickable="true"  @click="quitGroup"></uni-list-item>
-      <uni-list-item title="解散群" link :clickable="true"  @click="dismissGroup"></uni-list-item>
-      <uni-list-item title="开启群禁言，所有普通群成员禁止发言" link :clickable="true"  @click="changeGroupMute(true)"></uni-list-item>
-      <uni-list-item title="关闭群禁言" link :clickable="true"  @click="changeGroupMute(false)"></uni-list-item>
-      <uni-list-item title="设置进群验证规则:邀请需要验证" link :clickable="true"  @click="setGroupVerification(0)"></uni-list-item>
-      <uni-list-item title="设置进群验证规则:都需要验证" link :clickable="true"  @click="setGroupVerification(1)"></uni-list-item>
-      <uni-list-item title="设置进群验证规则:都不需要验证" link :clickable="true"  @click="setGroupVerification(2)"></uni-list-item>
-      <uni-list-item title="标记群聊会话已读" link :clickable="true"  @click="markGroupMessageHasRead"></uni-list-item>
-      <uni-list-item title="清空本地群聊消息记录" link :clickable="true"  @click="clearGroupHistoryMessage"></uni-list-item>
-      <uni-list-item title="删除本地跟服务器的群聊天记录" link :clickable="true"  @click="clearGroupHistoryMessageFromLocalAndSvr"></uni-list-item>
-      <!--   退出群，解散群，开启群禁言，设置进群验证规则，清空群聊消息记录   -->
-
-    </uni-list>
-
-<!--
-    <uni-list class="center-list" v-for="(sublist , index) in ucenterList" :key="index">
-      <uni-list-item v-for="(item,i) in sublist" :title="item.title" link :rightText="item.rightText" :key="i"
-                     :clickable="true" :to="item.to" @click="ucenterListClick(item)" :show-extra-icon="true"
-                     :extraIcon="{type:item.icon,color:'#999'}">
-      </uni-list-item>
-    </uni-list>
--->
-
-  </view>
+  <group-member-view ref="groupMemberView"></group-member-view>
 </template>
 
 <script lang="ts">
@@ -54,269 +16,26 @@ import {
   Member, MemberNameParams, SetGroupRoleParams,
   SetGroupVerificationParams, TransferGroupParams
 } from "open-im-sdk";
-import {GroupMemberItem, GroupRole, GroupVerificationType} from "open-im-sdk/types";
 
-@Options({components: {}})
+
+import GroupMemberView from 'socialuni-view/src/views/chat/GroupMemberView.vue'
+import {GroupMemberItem, GroupRole, GroupVerificationType} from "open-im-sdk/types";
+import {onMounted} from "vue";
+
+@Options({components: {GroupMemberView}})
 export default class ChatGroupMemberPage extends Vue {
-  groupMemberList: GroupMemberItem[] = []
-  groupID = "";
-  ucenterList=  [
-    [],
-    [{
-      "title": '退出群，解散群，开启群禁言，设置进群验证规则，清空群聊消息记录，删除本地跟服务器的群聊天记录  // 会话',
-      "to": '/pages/ucenter/userinfo/userinfo',
-      "icon": "gear"
-    }/* , {
-						"title": this.$t('mine.settings'),
-						"to": '/pages/ucenter/settings/settings',
-						"icon": "gear"
-					} */],
-    []
-  ]
-  formatTime(dateStr : number) {
-    return DateUtil.parseTime(dateStr * 1000)
-  }
+
   created() {
     onLoad((params) => {
-      this.groupID = params.id;
-      console.log('this.groupID',this.groupID);
-      this.getGroupMemberList();
+      //不这么写refs是空
+      onMounted(() => {
+        this.$refs.groupMemberView.init(params.id as string);
+      })
+
     })
     // 检查是否为好友
   }
 
-  /**
-   * 置零群聊会话未读数
-   */
-  markGroupMessageHasRead(){
-    socialChatModule.openIm.markGroupMessageHasRead(this.groupID).then(({ data })=>{
-      console.log('markGroupMessageHasRead',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 删除本地跟服务器的群聊天记录
-   */
-  clearGroupHistoryMessageFromLocalAndSvr(){
-    socialChatModule.openIm.clearGroupHistoryMessageFromLocalAndSvr(this.groupID).then(({ data })=>{
-      console.log('clearGroupHistoryMessageFromLocalAndSvr',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 从本地删除指定群聊会话中所有消息
-   */
-  clearGroupHistoryMessage(){
-    socialChatModule.openIm.clearGroupHistoryMessage(this.groupID).then(({ data })=>{
-      console.log('clearGroupHistoryMessage',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 设置进群验证规则
-   */
-  setGroupVerification(verification: GroupVerificationType){
-    const options:SetGroupVerificationParams = {
-      groupID: this.groupID ,
-      verification
-    }
-    socialChatModule.openIm.setGroupVerification(options).then(({ data })=>{
-      console.log('setGroupVerification',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 开启群禁言，所有普通群成员禁止发言
-   */
-  changeGroupMute(isMute : boolean){
-    const options:ChangeGroupMuteParams = {
-      groupID: this.groupID ,
-      isMute
-    }
-    socialChatModule.openIm.changeGroupMute(options).then(({ data })=>{
-      console.log('changeGroupMute',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 解散群聊
-   */
-  dismissGroup(){
-    socialChatModule.openIm.dismissGroup(this.groupID).then(({ data })=>{
-      console.log('dismissGroup',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 退出群聊
-   */
-  quitGroup(){
-    socialChatModule.openIm.quitGroup(this.groupID).then(({ data })=>{
-      console.log('quitGroup',data);
-    }).catch(err=>{
-    })
-  }
-  /**
-   * 获取群成员列表。
-   */
-  getGroupMemberList(){
-    const options:GetGroupMemberParams = {
-      groupID:this.groupID,
-      filter:0,
-      offset:0,
-      count:20
-    }
-    socialChatModule.openIm.getGroupMemberList(options).then(({ data })=>{
-      this.groupMemberList = JSON.parse(data);
-      console.log('getGroupMemberListByJoinTime',data,this.groupMemberList);
-    }).catch(err=>{
-    })
-  }
-  change(e){
-    const that = this;
-    //
-    let {
-      index
-    } = e.detail
-
-    uni.showToast({
-      title: `点击第${index+1}个宫格`,
-      icon: 'none'
-    })
-    let groupMember = this.groupMemberList[index];
-    //
-    console.log(groupMember);
-    let itemList = ['禁言1天', '踢出群聊', '转让为群主','设置昵称'];
-    // 放入群主.
-    if(groupMember.roleLevel !== 2 ){
-      itemList.push('转让为群主');
-    }
-    // 判断是否是管理员还是普通成员
-    if(groupMember.roleLevel !== 2){
-      itemList.push(  groupMember.roleLevel === 1 ?  '设为管理员' : '设为普通成员');
-    }
-    //
-    uni.showActionSheet({
-      itemList,
-      success: function (res) {
-        console.log('选中了第' + (res.tapIndex + 1) + '个按钮',res,itemList[res.tapIndex]);
-        switch (itemList[res.tapIndex]) {
-          case '禁言1天':
-            that.changeGroupMemberMute(groupMember);
-            break;
-          case '踢出群聊':
-            that.kickGroupMember(groupMember);
-            break;
-          case '转让为群主':
-            that.transferGroupOwner(groupMember);
-            break;
-          case '设置昵称':
-            uni.showModal({
-              title: '昵称',
-              editable : true,
-              placeholderText : '请输入昵称',
-              content: groupMember.nickname,
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('用户点击确定',res);
-                  that.setGroupMemberNickname(groupMember,res.content);
-                } else if (res.cancel) {
-                  console.log('用户点击取消');
-                }
-              }
-            });
-            break;
-          case '设为普通成员':
-            that.setGroupMemberRoleLevel(groupMember,1);
-          case '设为管理员':
-            that.setGroupMemberRoleLevel(groupMember,3);
-            break;
-        }
-      },
-      fail: function (res) {
-        console.log(res.errMsg);
-      }
-    });
-  }
-
-  /**
-   * 修改针对某个群员的禁言状态
-   */
-  changeGroupMemberMute(groupMember : GroupMemberItem){
-    const options:ChangeGroupMemberMuteParams = {
-      groupID:this.groupID,
-      userID:groupMember.userID,
-      mutedSeconds: 60 * 60 * 24   // 禁言时长，为0时即解除禁言
-    }
-    socialChatModule.openIm.changeGroupMemberMute(options).then(({ data })=>{
-      console.log('changeGroupMemberMute',data);
-    }).catch(err=>{
-    })
-  }
-
-  /**
-   * 踢出群聊
-   * 移除群成员
-   */
-  kickGroupMember(groupMember : GroupMemberItem){
-    const options:InviteGroupParams = {
-      groupID: this.groupID,
-      reason:"",
-      userIDList:[groupMember.userID]
-    }
-    socialChatModule.openIm.kickGroupMember(options).then(({ data })=>{
-      console.log('kickGroupMember',data);
-    }).catch(err=>{
-    })
-  }
-
-  /**
-   * 转让群主。
-   * @param groupMember
-   */
-  transferGroupOwner(groupMember : GroupMemberItem){
-    const options:TransferGroupParams = {
-      groupID: this.groupID,
-      newOwnerUserID:groupMember.userID
-    }
-    socialChatModule.openIm.transferGroupOwner(options).then(({ data })=>{
-      console.log('transferGroupOwner',data);
-    }).catch(err=>{
-    })
-  }
-
-  /**
-   * 修改某个群员在群内的昵称。
-   * @param groupMember
-   */
-  setGroupMemberNickname(groupMember : GroupMemberItem , GroupMemberNickname : string){
-    const options:MemberNameParams = {
-      groupID:this.groupID,
-      userID:groupMember.userID,
-      GroupMemberNickname
-    }
-    socialChatModule.openIm.setGroupMemberNickname(options).then(({ data })=>{
-      console.log('setGroupMemberNickname',data);
-    }).catch(err=>{
-    })
-  }
-
-  /**
-   * 修改群成员权限（角色）。
-   * @param groupMember
-   * @param roleLevel 群成员角色类型 1:普通成员 2:群主 3:管理员
-   */
-  setGroupMemberRoleLevel(groupMember : GroupMemberItem,roleLevel : GroupRole){
-    const options:SetGroupRoleParams = {
-      groupID:this.groupID,
-      userID:groupMember.userID,
-      roleLevel
-    }
-    socialChatModule.openIm.setGroupMemberRoleLevel(options).then(({ data })=>{
-      console.log('setGroupMemberRoleLevel',data);
-    }).catch(err=>{
-    })
-  }
 }
 </script>
 
