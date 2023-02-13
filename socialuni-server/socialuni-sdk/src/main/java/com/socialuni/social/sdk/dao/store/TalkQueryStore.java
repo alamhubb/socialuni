@@ -1,7 +1,10 @@
 package com.socialuni.social.sdk.dao.store;
 
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
+import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
@@ -12,6 +15,7 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialUserTalkQueryQO;
+import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -37,6 +41,15 @@ public class TalkQueryStore {
     FollowRedis followRedis;
     @Resource
     private TalkMapper talkMapper;
+
+    @Resource
+    private TalkRepository talkRepository;
+
+    public List<SocialuniTalkDO> queryStickTalks() {
+        List<SocialuniTalkDO> list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
+        //转换为rolist
+        return list;
+    }
 
     public List<?  extends SocialuniTalkDO>  queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
         List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
@@ -80,6 +93,7 @@ public class TalkQueryStore {
         if (GenderType.all.equals(talkUserGender)) {
             talkUserGender = null;
         }
+
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
         String mineUserGender = null;

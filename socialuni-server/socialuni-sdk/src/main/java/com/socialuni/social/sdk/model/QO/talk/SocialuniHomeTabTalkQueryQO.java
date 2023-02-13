@@ -26,6 +26,8 @@ public class SocialuniHomeTabTalkQueryQO {
     private String homeTabType;
     private String circleName;
     private List<String> talkIds;
+    //是否首次加载
+    private Boolean firstLoad;
 
     //首页tab名称
     private String homeTabName;

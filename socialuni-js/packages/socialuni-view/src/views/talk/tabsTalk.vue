@@ -368,7 +368,7 @@ export default class TabsTalk extends Vue {
           })
         }
       }
-      return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames).then((res: any) => {
+      return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames, firstLoad).then((res: any) => {
         // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
         if (talkTabObj.loadMore === LoadMoreType.loading) {
           if (res.data) {

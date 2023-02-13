@@ -33,7 +33,11 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
      */
     //缓存
     @Cacheable(cacheNames = "stickTalks", key = "{#devId}")
-    List<? extends SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
+    List<SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
+
+    @Cacheable(cacheNames = "stickTalkIdsByDevId", key = "{#devId}")
+    @Query(nativeQuery = true, value = "SELECT s.union_id from s_talk s where s.status = :status and s.dev_id =:devId and s.global_top > :globalTop order by t.global_top desc,t.id desc limit 2)")
+    List<Integer> findTopTalkId2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
     @Query(nativeQuery = true, value = "SELECT t.union_id FROM s_talk t where t.user_id = :userId and t.status = '正常' order by t.global_top desc,t.id desc limit 10")
     List<Integer> findTop10ByUserIdOrderByGlobalTopDescIdDesc(Integer userId);

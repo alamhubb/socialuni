@@ -27,6 +27,7 @@ import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -41,16 +42,10 @@ public class SocialuniHomeTalkQueryDomain {
     @Resource
     TagRepository tagApi;
     @Resource
-    private TalkRepository talkApi;
+    private TalkRepository talkRepository;
     @Resource
     private TalkQueryStore talkQueryStore;
 
-    public List<SocialuniTalkRO> queryStickTalks() {
-        List<?  extends SocialuniTalkDO>  list = talkApi.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum);
-        //转换为rolist
-        List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
-        return socialTalkROs;
-    }
 
     //查询非关注tab的动态列表
     public List<SocialuniTalkRO> queryHomeTabTalks(SocialuniHomeTabTalkQueryQO queryQO) {
@@ -73,13 +68,22 @@ public class SocialuniHomeTalkQueryDomain {
         String homeTabName = queryBO.getHomeTabName();
 
         //得到数据库talk
-        List<?  extends SocialuniTalkDO>  talkDOS;
+        List<? extends SocialuniTalkDO> talkDOS;
+
+//        SocialuniAppConfig.getAppConfig().getFollowTabName()
         if (homeTabName.equals(TalkTabType.follow_name)) {
             //查询关注的用户
             talkDOS = socialFollowUserTalksQueryEntity.queryUserFollowTalks(new ArrayList<>(), mineUser);
         } else {
             //支持你修改bo
             talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO);
+            if (queryBO.getFirstLoad()) {
+                List<SocialuniTalkDO> queryStickTalks = talkQueryStore.queryStickTalks();
+                queryStickTalks.addAll(talkDOS);
+                if (queryStickTalks.size() > 10) {
+                    talkDOS = queryStickTalks.subList(0, 10);
+                }
+            }
         }
         //转换为rolist
         List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(mineUser, talkDOS, queryBO);
@@ -111,6 +115,8 @@ public class SocialuniHomeTalkQueryDomain {
 
         //校园社区
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.generateQueryBOByTab(queryQO, mineUser);
+        socialHomeTabTalkQueryBO.setFirstLoad(queryQO.getFirstLoad());
+
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
 

@@ -22,6 +22,7 @@ public class SocialHomeTabTalkQueryBO {
     private Double lat;
 
     private Integer minAge;
+    private Boolean firstLoad;
     //    private Integer pageNum;
     private Integer maxAge;
     private Date queryTime;

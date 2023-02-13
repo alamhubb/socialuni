@@ -8,10 +8,12 @@ export default class TalkQueryVO {
     adCode: string
     lon: number
     lat: number
+    firstLoad: boolean
     queryTime: Date
     tagNames: string[]
 
-    constructor(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[]) {
+    constructor(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[], firstLoad: boolean) {
+        this.firstLoad = firstLoad
         this.homeTabName = homeTabName
         const district = socialLocationModule.location
         //查询使用当前的

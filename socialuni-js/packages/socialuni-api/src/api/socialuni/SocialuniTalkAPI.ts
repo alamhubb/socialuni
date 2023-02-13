@@ -25,8 +25,8 @@ export default class SocialuniTalkAPI {
         return request.get<TalkVO[]>('socialuni/talk/queryTalks')
     }
 
-    static queryTalksAPI(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[]) {
-        return request.post<TalkVO>('socialuni/talk/queryTalks', new TalkQueryVO(homeTabName, gender, minAge, maxAge, queryTime, tagNames))
+    static queryTalksAPI(homeTabName: string, gender: string, minAge: number, maxAge: number, queryTime: Date, tagNames: string[], firstLoad: boolean) {
+        return request.post<TalkVO>('socialuni/talk/queryTalks', new TalkQueryVO(homeTabName, gender, minAge, maxAge, queryTime, tagNames, firstLoad))
     }
 
     static queryUserTalksAPI(userId: string, talkIds: string[]) {
