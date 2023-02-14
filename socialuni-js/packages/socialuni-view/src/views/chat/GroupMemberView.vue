@@ -15,16 +15,23 @@
           </view>
         </view>
       </uni-grid-item>
-    </uni-grid>
 
+
+    </uni-grid>
+    <view  v-show="moreGroupMember" class="row-end-center uni-loadmore" @click="getGroupMemberList">
+      查看更多用户
+    </view>
+<!--    <uni-load-more :status="moreGroupMember"-->
+<!--                   @click="getGroupMemberList"-->
+<!--                   :contentText="loadMoreText"></uni-load-more>-->
     <uni-list class="center-list" >
       <uni-list-item title="退出群" link :clickable="true"  @click="quitGroup"></uni-list-item>
-      <uni-list-item title="解散群" link :clickable="true"  @click="dismissGroup"></uni-list-item>
-      <uni-list-item title="开启群禁言，所有普通群成员禁止发言" link :clickable="true"  @click="changeGroupMute(true)"></uni-list-item>
-      <uni-list-item title="关闭群禁言" link :clickable="true"  @click="changeGroupMute(false)"></uni-list-item>
-      <uni-list-item title="设置进群验证规则:邀请需要验证" link :clickable="true"  @click="setGroupVerification(0)"></uni-list-item>
-      <uni-list-item title="设置进群验证规则:都需要验证" link :clickable="true"  @click="setGroupVerification(1)"></uni-list-item>
-      <uni-list-item title="设置进群验证规则:都不需要验证" link :clickable="true"  @click="setGroupVerification(2)"></uni-list-item>
+      <uni-list-item v-if="meRoleLevel == 2" title="解散群" link :clickable="true"  @click="dismissGroup"></uni-list-item>
+      <uni-list-item v-if="meRoleLevel > 2" title="开启群禁言，所有普通群成员禁止发言" link :clickable="true"  @click="changeGroupMute(true)"></uni-list-item>
+      <uni-list-item v-if="meRoleLevel > 2" title="关闭群禁言" link :clickable="true"  @click="changeGroupMute(false)"></uni-list-item>
+      <uni-list-item v-if="meRoleLevel > 2" title="设置进群验证规则:邀请需要验证" link :clickable="true"  @click="setGroupVerification(0)"></uni-list-item>
+      <uni-list-item v-if="meRoleLevel > 2" title="设置进群验证规则:都需要验证" link :clickable="true"  @click="setGroupVerification(1)"></uni-list-item>
+      <uni-list-item v-if="meRoleLevel > 2" title="设置进群验证规则:都不需要验证" link :clickable="true"  @click="setGroupVerification(2)"></uni-list-item>
       <uni-list-item title="标记群聊会话已读" link :clickable="true"  @click="markGroupMessageHasRead"></uni-list-item>
       <uni-list-item title="清空本地群聊消息记录" link :clickable="true"  @click="clearGroupHistoryMessage"></uni-list-item>
       <uni-list-item title="删除本地跟服务器的群聊天记录" link :clickable="true"  @click="clearGroupHistoryMessageFromLocalAndSvr"></uni-list-item>
@@ -61,11 +68,22 @@ import {
 import {GroupMemberItem, GroupRole, GroupVerificationType} from "open-im-sdk/types";
 import QNavbar from "../../components/QNavbar/QNavbar.vue";
 import MessageViewParams from "./MessageViewParams";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
-@Options({components: {QNavbar}}) 
+@Options({components: {QNavbar}})
 export default class GroupMemberView extends Vue {
   groupMemberList: GroupMemberItem[] = []
+  moreGroupMember = true;
+  offset = 0;
   groupID = "";
+  groupInfo = {
+    roleLevel : 0
+  };
+  loadMoreText = {
+    contentdown: '点击显示更多',
+    contentrefresh: '正在加载...',
+    contentnomore: '没有更多数据了,点击刷新'
+  }
   ucenterList=  [
     [],
     [{
@@ -79,6 +97,15 @@ export default class GroupMemberView extends Vue {
 					} */],
     []
   ]
+
+  /**
+   * 当前的权限：
+   * 群成员角色类型 1:普通成员 2:群主 3:管理员
+   */
+  get meRoleLevel() {
+    return this.groupInfo.roleLevel;
+  }
+
   formatTime(dateStr : number) {
     return DateUtil.parseTime(dateStr * 1000)
   }
@@ -87,6 +114,8 @@ export default class GroupMemberView extends Vue {
     this.groupID = groupID;
     console.log('this.groupID',this.groupID);
     this.getGroupMemberList();
+    // 设置菜单权限。
+    this.getGroupMembersInfo();
   }
   /**
    * 置零群聊会话未读数
@@ -163,18 +192,43 @@ export default class GroupMemberView extends Vue {
    * 获取群成员列表。
    */
   getGroupMemberList(){
+    const count = 20;
     const options:GetGroupMemberParams = {
       groupID:this.groupID,
       filter:0,
-      offset:0,
-      count:20
+      offset:this.offset,
+      count
     }
     socialChatModule.openIm.getGroupMemberList(options).then(({ data })=>{
-      this.groupMemberList = JSON.parse(data);
-      console.log('getGroupMemberListByJoinTime',data,this.groupMemberList);
+      let parse = JSON.parse(data);
+      this.groupMemberList.push(...parse);
+      //
+      this.offset += count;
+      // 设置不展示更多。
+      if(parse.length != count){
+        this.moreGroupMember = false;
+      }
+      console.log('getGroupMemberListByJoinTime',data,this.groupMemberList,this.offset);
+    }).catch(err=>{
+    })
+
+
+  }
+
+  getGroupMembersInfo(){
+    const options:Omit<InviteGroupParams, "reason"> = {
+      groupID:this.groupID,
+      userIDList:[socialUserModule.userId]
+    }
+    //
+    socialChatModule.openIm.getGroupMembersInfo(options).then(({ data })=>{
+      const arr = JSON.parse(data);
+      this.groupInfo = arr[0];
+      console.log('----getGroupMembersInfo-----',JSON.parse(data),this.groupInfo);
     }).catch(err=>{
     })
   }
+
   change(e){
     const that = this;
     //
@@ -182,28 +236,41 @@ export default class GroupMemberView extends Vue {
       index
     } = e.detail
 
-    uni.showToast({
-      title: `点击第${index+1}个宫格`,
-      icon: 'none'
-    })
-    let groupMember = this.groupMemberList[index];
-    //
-    console.log(groupMember);
-    let itemList = ['禁言1天', '踢出群聊', '转让为群主','设置昵称'];
-    // 放入群主.
-    if(groupMember.roleLevel !== 2 ){
-      itemList.push('转让为群主');
+
+    const groupMember =  this.groupMemberList[index];
+    let itemList = ['查看信息',];
+    // 不是选中的自己
+    if(groupMember.userID != this.groupInfo.userID){
+      // 有管理权限
+      if(this.meRoleLevel > 1){
+        itemList.push(...['禁言1天', '踢出群聊','设置昵称']);
+      }
+      // 群主特殊处理
+      if(this.meRoleLevel == 2){
+        // 放入群主.
+        if(groupMember.roleLevel !== 2 ){
+          itemList.push('转让为群主');
+        }
+        // 判断是否是管理员还是普通成员
+        if(groupMember.roleLevel !== 2){
+          itemList.push(  groupMember.roleLevel === 1 ?  '设为管理员' : '设为普通成员');
+        }
+      }
+
     }
-    // 判断是否是管理员还是普通成员
-    if(groupMember.roleLevel !== 2){
-      itemList.push(  groupMember.roleLevel === 1 ?  '设为管理员' : '设为普通成员');
-    }
+
+
+
+
     //
     uni.showActionSheet({
       itemList,
       success: function (res) {
         console.log('选中了第' + (res.tapIndex + 1) + '个按钮',res,itemList[res.tapIndex]);
         switch (itemList[res.tapIndex]) {
+          case '查看信息':
+            PageUtil.toUserDetail( groupMember.userID);
+            break;
           case '禁言1天':
             that.changeGroupMemberMute(groupMember);
             break;
