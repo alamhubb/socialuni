@@ -78,7 +78,7 @@ public class SocialuniHomeTalkQueryDomain {
             //支持你修改bo
             talkDOS = talkQueryStore.queryTalksTop10ByGenderAgeAndLikeAdCodeAndTagIds(queryBO);
             if (queryBO.getFirstLoad()) {
-                List<SocialuniTalkDO> queryStickTalks = talkQueryStore.queryStickTalks();
+                List<SocialuniTalkDO> queryStickTalks = talkQueryStore.queryStickTalks(homeTabName);
                 queryStickTalks.addAll(talkDOS);
                 if (queryStickTalks.size() > 10) {
                     talkDOS = queryStickTalks.subList(0, 10);

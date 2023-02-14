@@ -17,6 +17,7 @@ import com.socialuni.social.sdk.logic.domain.talk.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,11 +40,17 @@ public class SocialuniTalkService {
     @Resource
     SocialuniHomeTalkQueryDomain socialHomeTalkQueryDomain;
 
+    /**
+     * @see com.socialuni.social.sdk.logic.domain.talk.SocialuniHomeTalkQueryDomain#queryHomeTabTalks(com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO)
+     * @deprecated
+     * @return
+     */
+    @Deprecated
     public ResultRO<List<SocialuniTalkRO>> queryStickTalks() {
         /*if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTalkAPI.queryStickTalks();
         }*/
-        List<SocialuniTalkRO> list = socialHomeTalkQueryDomain.queryStickTalks();
+        List<SocialuniTalkRO> list = new ArrayList<>(); //socialHomeTalkQueryDomain.queryStickTalks();
         return ResultRO.success(list);
     }
 

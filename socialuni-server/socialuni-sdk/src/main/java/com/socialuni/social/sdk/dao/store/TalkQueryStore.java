@@ -1,8 +1,11 @@
 package com.socialuni.social.sdk.dao.store;
 
+import cn.hutool.core.util.StrUtil;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.community.sdk.repository.TalkRepository;
+import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.logic.factory.SocialTalkROFactory;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.tance.sdk.config.SocialuniAppConfig;
@@ -50,7 +53,21 @@ public class TalkQueryStore {
         //转换为rolist
         return list;
     }
+    public List<SocialuniTalkDO> queryStickTalks(String homeTabName) {
+        List<SocialuniTalkDO> list = null;
+        if(StrUtil.isBlank(homeTabName)){
+            //如果为空。
+            list = this.queryStickTalks();
+        }else{
+            // 如果有内容就连表查询。
+            SocialuniCircleDO circleEnableNotNull = SocialuniCircleDOUtil.getCircleEnableNotNull(homeTabName);
+            //
+            list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum,circleEnableNotNull.getId());
 
+        }
+        //转换为rolist
+        return list;
+    }
     public List<?  extends SocialuniTalkDO>  queryTalksTop10ByUserFollow(List<Integer> talkIds, Integer userId) {
         List<Integer> beUserIds = followRedis.queryUserFollowUserIds(userId);
         int page = talkIds.size() / 10;
