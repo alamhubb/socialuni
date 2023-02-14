@@ -82,19 +82,25 @@ export default class UserDetailView extends Vue {
    * 将用户添加到黑名单。
    */
   addBlack() {
-    socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
-      socialChatModule.checkFriend(this.user);
-    }).catch(err => {
+    AlertUtil.confirm('是否确认添加到黑名单').then(res => {
+      socialChatModule.openIm.addBlack(this.user.id).then(({data}) => {
+        socialChatModule.checkFriend(this.user);
+      }).catch(err => {
+      })
     })
+
   }
   /**
    * 将用户从黑名单移除。
    */
   removeBlack() {
-    socialChatModule.openIm.removeBlack(this.user.id).then(({data}) => {
-      socialChatModule.checkFriend(this.user);
-    }).catch(err => {
+    AlertUtil.confirm('是否确认从黑名单移除').then(res => {
+      socialChatModule.openIm.removeBlack(this.user.id).then(({data}) => {
+        socialChatModule.checkFriend(this.user);
+      }).catch(err => {
+      })
     })
+
   }
 }
 </script>
