@@ -22,10 +22,10 @@ export default defineConfig({
     },
     css:{
         postcss:{
-            /*plugins:[
+            plugins:[
                 IN_PRODUCTION && require('@fullhuman/postcss-purgecss')({
                     // require('@fullhuman/postcss-purgecss')({
-                    content: ['./public/!**!/!*.html','./node_modules/socialuni-view/!**!/!*.scss','./node_modules/@dcloudio/!**!/!*.scss','./node_modules/@dcloudio/!**!/!*.vue','./node_modules/socialuni-view/!**!/!*.vue', './src/!**!/!*.vue'],
+                    content: ['./public/**/*.html','./node_modules/socialuni-view/**/*.scss','./node_modules/@dcloudio/**/*.scss','./node_modules/@dcloudio/**/*.vue','./node_modules/socialuni-view/**/*.vue', './src/**/*.vue'],
                     defaultExtractor (content) {
                         const contentWithoutStyleBlocks = content.replace(
                             /<style[^]+?<\/style>/gi,
@@ -41,16 +41,16 @@ export default defineConfig({
                         /-(leave|enter|appear)(|-(to|from|active))$/,
                         /^(?!(|.*?:)cursor-move).+-move$/,
                         /^router-link(|-exact)-active$/,
-                        /data-v-.*!/,
-                        /uicon-.*!/,
-                        /q-.*!/,
-                        /u-.*!/,
-                        /uni-.*!/,
-                        /mdi-.*!/,
+                        /data-v-.*/,
+                        /uicon-.*/,
+                        /q-.*/,
+                        /u-.*/,
+                        /uni-.*/,
+                        /mdi-.*/,
                         /page/
                     ]
                 })
-            ]*/
+            ]
         }
     },
     resolve: {
