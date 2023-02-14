@@ -568,7 +568,7 @@ export default class MessageView extends Vue {
     if(this.groupId){
       PageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
     }else{
-      AlertUtil.error('暂不支持,开发中');
+      PageUtil.toUserDetail(this.userId);
     }
 
   }
