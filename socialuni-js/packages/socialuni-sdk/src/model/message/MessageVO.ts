@@ -40,7 +40,6 @@ export default class MessageVO {
         this.originalMsg = msg;
         this.type = SocialuniMessageType.simple
         if (msg) {
-            console.log(msg,'MessageVO-----constructor',msg.contentType)
             this.contentData = msg.content;
             if (msg.contentType === MessageType.TEXTMESSAGE) {
                 this.content = msg.content

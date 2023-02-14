@@ -284,6 +284,10 @@ export default class MessageView extends Vue {
 
 
   init(params: MessageViewParams) {
+    //  不存在前台缓存的问题,防止页面数据没有被及时刷新。 缓存之前页面的数据。
+    //  issue: I6EZ82
+    socialChatModule.chat = null;
+    //
     if (params.userId) {
       socialChatModule.setCurChatByUserId(params.userId)
       this.userId = params.userId;
