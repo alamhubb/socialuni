@@ -80,8 +80,9 @@ public class SocialuniHomeTalkQueryDomain {
             if (queryBO.getFirstLoad()) {
                 List<SocialuniTalkDO> queryStickTalks = talkQueryStore.queryStickTalks(homeTabName);
                 queryStickTalks.addAll(talkDOS);
-                if (queryStickTalks.size() > 10) {
-                    talkDOS = queryStickTalks.subList(0, 10);
+                talkDOS = queryStickTalks;
+                if (talkDOS.size() > 10) {
+                    talkDOS = talkDOS.subList(0, 10);
                 }
             }
         }

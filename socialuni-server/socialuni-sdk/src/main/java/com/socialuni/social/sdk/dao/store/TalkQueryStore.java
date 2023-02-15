@@ -55,15 +55,15 @@ public class TalkQueryStore {
     }
     public List<SocialuniTalkDO> queryStickTalks(String homeTabName) {
         List<SocialuniTalkDO> list = null;
-        if(StrUtil.isBlank(homeTabName)){
+
+        // 如果有内容就连表查询。
+        SocialuniCircleDO circleEnableNotNull = SocialuniCircleDOUtil.getCircleEnableAllowNull(homeTabName);
+        if(StrUtil.isBlank(homeTabName) || ObjectUtils.isEmpty(circleEnableNotNull)){
             //如果为空。
             list = this.queryStickTalks();
         }else{
             // 如果有内容就连表查询。
-            SocialuniCircleDO circleEnableNotNull = SocialuniCircleDOUtil.getCircleEnableNotNull(homeTabName);
-            //
             list = talkRepository.findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(ContentStatus.enable, DevAccountFacade.getDevIdNotNull(), SocialuniConst.initNum,circleEnableNotNull.getId());
-
         }
         //转换为rolist
         return list;

@@ -47,11 +47,11 @@ public interface TalkRepository extends JpaRepository<SocialuniTalkDO, Integer> 
      * @see #findTop2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc
      * @return
      */
-    @Cacheable(cacheNames = "stickTalks", key = "{#devId}" + "-" + "{#circleId}")
-    @Query(nativeQuery = true, value = "select * from s_talk st where id in ( select talk_id from s_talk_circle where circle_id = :circleId ) and status = :status and dev_id = :devId and global_top > :globalTop order by  global_top desc")
+    @Cacheable(cacheNames = "stickTalks", key = "#devId+'-'+#circleId")
+    @Query(nativeQuery = true, value = "select * from s_talk st where st.union_id in ( select talk_id from s_talk_circle where circle_id = :circleId ) and status = :status and dev_id = :devId and global_top > :globalTop order by  global_top desc limit 2")
     List<SocialuniTalkDO> findTop2ByStatusAndDevIdAndGlobalTopGreaterThanAndCircleIdOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop,Integer circleId);
 
-    @Cacheable(cacheNames = "stickTalkIdsByDevId", key = "{#devId}")
+    @Cacheable(cacheNames = "stickTalkIdsByDevId", key = "#devId")
     @Query(nativeQuery = true, value = "SELECT s.union_id from s_talk s where s.status = :status and s.dev_id =:devId and s.global_top > :globalTop order by t.global_top desc,t.id desc limit 2)")
     List<Integer> findTopTalkId2ByStatusAndDevIdAndGlobalTopGreaterThanOrderByGlobalTopDesc(String status, Integer devId, Integer globalTop);
 
