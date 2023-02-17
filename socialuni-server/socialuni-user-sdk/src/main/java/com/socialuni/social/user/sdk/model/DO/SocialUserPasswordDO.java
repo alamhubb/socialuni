@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "s_user_phone",
+@Table(name = "s_user_password",
         //查询条件索引
         indexes = {
                 //关联需要键索引，索引列不能为空
