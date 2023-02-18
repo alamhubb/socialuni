@@ -1,10 +1,14 @@
 package com.socialuni.social.user.sdk.utils;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,16 +16,15 @@ import java.util.Date;
  * @author qinkaiyuan
  * @date 2019-02-24 22:12
  */
+@Slf4j
 public class BirthdayAgeUtil {
+
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat birthdayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public static Date getBirthDayByBirthString(String birthDayStr) {
-        try {
-            return BirthdayAgeUtil.birthdayDateFormat.parse(birthDayStr);
-        } catch (ParseException e) {
-            throw new SocialParamsException("用户生日格式错误");
-        }
+        LocalDate localDate = LocalDate.parse(birthDayStr, DateTimeFormatter.ISO_LOCAL_DATE);
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
     //根据出生日期，获取年龄

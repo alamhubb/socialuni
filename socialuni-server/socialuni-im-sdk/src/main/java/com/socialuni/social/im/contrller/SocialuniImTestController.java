@@ -1,14 +1,9 @@
 package com.socialuni.social.im.contrller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.socialuni.social.common.api.constant.PlatformType;
-import com.socialuni.social.common.api.constant.SocialWebHeaderName;
 import com.socialuni.social.common.api.constant.SocialuniContentType;
-import com.socialuni.social.common.api.entity.SocialuniUnionContentBaseDO;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.utils.JsonUtil;
-import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.im.api.SocialuniImUserAPI;
 import com.socialuni.social.im.feign.SocialuniOpenImUserFeign;
 import com.socialuni.social.im.logic.domain.SocialBindUserOpenImAccountDomain;
 import com.socialuni.social.im.model.SocialuniImUserModel;
@@ -32,7 +27,6 @@ import javax.annotation.Resource;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 
 /**
  * @author qinkaiyuan
@@ -56,61 +50,60 @@ public class SocialuniImTestController {
 
 
     @GetMapping("getUserImTokenAll")
-    public ResultRO<String> getUserImToken(Integer startIndex) throws JsonProcessingException {
+    public ResultRO<String> getUserImToken(Integer index) throws JsonProcessingException {
 
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
 
-        List<String> imNotHasIds = new ArrayList<>();
-        List<Integer> userIds = socialuniUserRepository.findAllUserIds();
+//        List<String> imNotHasIds = new ArrayList<>();
+//        List<Integer> userIds = socialuniUserRepository.findAllUserIds();
+        log.info(String.valueOf(System.currentTimeMillis() / 1000));
         //获取所有的uuid
         List<String> uuids = SocialuniUnionIdFacede.findUuidAllByContentType(SocialuniContentType.user);
 
         log.info("uuids:{}", uuids.size());
 
-        String json = readJsonFile("data/imIds.json");
-        List<String> imIds = (List<String>) JsonUtil.objectMapper.readValue(json, List.class);
+        List<String> subIds = uuids.subList(index, index + 50000);
 
+//        String json = readJsonFile("data/imIds.json");
+//        List<String> imIds = (List<String>) JsonUtil.objectMapper.readValue(json, List.class);
+        log.info(String.valueOf(System.currentTimeMillis() / 1000));
         //获取一个imidMap
-        Map<String, String> imIdsMap = new HashMap<>();
+        /*Map<String, String> imIdsMap = new HashMap<>();
         for (String uuid : imIds) {
             imIdsMap.put(uuid, uuid);
         }
 
-        log.info("imIds:{}", imIds.size());
+        log.info("imIds:{}", imIds.size());*/
 
         //遍历uuid
-        for (String uuid : uuids) {
+        /*for (String uuid : uuids) {
             //如果im里面不包含则加入一个数组中
             if (!imIdsMap.containsKey(uuid)) {
                 imNotHasIds.add(uuid);
             }
-        }
+        }*/
 
         //获取缺少的uuid数量
-        log.info("缺少的uuid数量：{}", imNotHasIds.size());
+//        log.info("缺少的uuid数量：{}", imNotHasIds.size());
 
         Integer i = 0;
         //遍历未注册的id
-        for (String imNotHasId : imNotHasIds) {
-            if (i % 1000 == 0) {
-                log.info(String.valueOf(System.currentTimeMillis() / 1000));
-            }
-            SocialuniUserDo mineUser = SocialuniUserUtil.getUserByUuid(imNotHasId);
-
-            mineUser.setNickname("名称被重置");
-
-            mineUser = socialuniUserRepository.savePut(mineUser);
-
-            this.getUserImToken(mineUser);
-            /*CompletableFuture.supplyAsync(() -> {
-
+        for (String imNotHasId : subIds) {
+            Integer finalI = i;
+            CompletableFuture.supplyAsync(() -> {
+                SocialuniUserDo mineUser = SocialuniUserUtil.getUserByUuid(imNotHasId);
+//            mineUser.setNickname("名称被重置");
+//            mineUser = socialuniUserRepository.savePut(mineUser);
+                this.getUserImToken(mineUser);
+                if (finalI % 1000 == 0) {
+                    log.info("当前索引位置：{}", index + finalI);
+                }
                 return null;
             }).exceptionally(e -> {
                 e.printStackTrace();
                 log.info(e.getMessage());
                 return null;
-            });*/
-
+            });
             i++;
         }
 

@@ -59,12 +59,12 @@ public class ImHttpComponent {
         HttpRequest httpRequest = HttpRequest.post(url).headerMap(heads,true)
                 .timeout(10000)
                 .body(jsonObject.toString());
-        log.info("openIm请求详情：{}", httpRequest);
+//        log.info("openIm请求详情：{}", httpRequest);
 
         String body = httpRequest.execute()
                 .body();
 
-        log.info("openIm请求返回：{}", body);
+//        log.info("openIm请求返回：{}", body);
         return body;
 
     }
