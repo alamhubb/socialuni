@@ -55,14 +55,14 @@ public class SocialuniImTestController {
     SocialuniUserRepository socialuniUserRepository;
 
 
-//    @GetMapping("getUserImToken")
+    @GetMapping("getUserImTokenAll")
     public ResultRO<String> getUserImToken(Integer startIndex) throws JsonProcessingException {
 
-        log.info(String.valueOf(System.currentTimeMillis()));
+        log.info(String.valueOf(System.currentTimeMillis() / 1000));
 
         List<String> imNotHasIds = new ArrayList<>();
         List<Integer> userIds = socialuniUserRepository.findAllUserIds();
-
+        //获取所有的uuid
         List<String> uuids = SocialuniUnionIdFacede.findUuidAllByContentType(SocialuniContentType.user);
 
         log.info("uuids:{}", uuids.size());
@@ -70,6 +70,7 @@ public class SocialuniImTestController {
         String json = readJsonFile("data/imIds.json");
         List<String> imIds = (List<String>) JsonUtil.objectMapper.readValue(json, List.class);
 
+        //获取一个imidMap
         Map<String, String> imIdsMap = new HashMap<>();
         for (String uuid : imIds) {
             imIdsMap.put(uuid, uuid);
@@ -77,15 +78,23 @@ public class SocialuniImTestController {
 
         log.info("imIds:{}", imIds.size());
 
+        //遍历uuid
         for (String uuid : uuids) {
+            //如果im里面不包含则加入一个数组中
             if (!imIdsMap.containsKey(uuid)) {
                 imNotHasIds.add(uuid);
             }
         }
 
+        //获取缺少的uuid数量
         log.info("缺少的uuid数量：{}", imNotHasIds.size());
 
+        Integer i = 0;
+        //遍历未注册的id
         for (String imNotHasId : imNotHasIds) {
+            if (i % 1000 == 0) {
+                log.info(String.valueOf(System.currentTimeMillis() / 1000));
+            }
             SocialuniUserDo mineUser = SocialuniUserUtil.getUserByUuid(imNotHasId);
 
             mineUser.setNickname("名称被重置");
@@ -101,6 +110,8 @@ public class SocialuniImTestController {
                 log.info(e.getMessage());
                 return null;
             });*/
+
+            i++;
         }
 
         /*Integer count = 50000;
