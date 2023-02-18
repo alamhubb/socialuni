@@ -30,5 +30,6 @@ public class SocialUserPasswordDO extends SocialuniContentBaseDO {
     private Integer devId;
     @Column(nullable = false)
     private String account;
+    @Column(nullable = false)
     private String password;
 }
