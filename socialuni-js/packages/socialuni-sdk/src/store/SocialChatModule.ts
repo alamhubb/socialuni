@@ -464,7 +464,7 @@ export default class SocialChatModule extends Pinia {
      */
     computedChatsUnreadNumTotalAction() {
         // 获取消息总未读。
-        this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
+        /*this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
             // 获得好友申请
             let recvFriendApplicationLength = this.getRecvFriendApplicationList(0).length;
             console.log('---recvFriendApplicationLength------',recvFriendApplicationLength);
@@ -476,7 +476,7 @@ export default class SocialChatModule extends Pinia {
                 })
             }
         }).catch(err=>{
-        })
+        })*/
         /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total
@@ -678,15 +678,15 @@ export default class SocialChatModule extends Pinia {
         // chat.updateTime = new Date().getTime()
         // 不为自己的 且未读的
         const messages: MessageVO[] = chat.messages.filter(item => !item.isMine && !item.isRead)
-        const msgIds: number[] = messages.map(msg => msg.id)
+        const msgIds: string[] = messages.map(msg => msg.id)
         // if (messages.length > 0) {
         // msgIds =
         //如果登录了，才调用后台
         // 如果登录了
         //目前 官方群聊没记录已读状态，读取也不管用
-        if (socialUserModule.hasUser && chat.type !== ChatType.system_group) {
-            ChatAPI.readChatAPI(chat.id, msgIds)
-        }
+        // if (socialUserModule.hasUser && chat.type !== ChatType.system_group) {
+        //     ChatAPI.readChatAPI(chat.id, msgIds)
+        // }
         for (const message of messages) {
             message.isRead = true
         }
@@ -711,13 +711,12 @@ export default class SocialChatModule extends Pinia {
 
 
     //前台删除，需要增加后台删除逻辑
-
-    deleteMsgAction(msgId: number) {
+    deleteMsgAction(msgId: string) {
         this.messages.splice(this.messages.findIndex(msg => msg.id === msgId), 1)
     }
 
 
-    deleteChatAction(chatId: number) {
+    deleteChatAction(chatId: string) {
         this.chats.splice(this.chats.findIndex(chat => chat.id === chatId), 1)
     }
 

@@ -13,7 +13,7 @@ export default class ChatAPI {
         return request.post('chat/queryChats')
     }
 
-    static readChatAPI(chatId: number, messageIds: number[]) {
+    static readChatAPI(chatId: string, messageIds: string[]) {
         const chatRead: ChatReadVO = new ChatReadVO(chatId, messageIds)
         return request.post('chat/readChat', chatRead)
     }

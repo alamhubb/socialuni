@@ -1,8 +1,8 @@
 export default class ChatReadVO {
-    public chatId: number
-    public messageIds: number[]
+    public chatId: string
+    public messageIds: string[]
 
-    constructor (chatId: number, messageIds: number[]) {
+    constructor (chatId: string, messageIds: string[]) {
       this.chatId = chatId
       this.messageIds = messageIds
     }
