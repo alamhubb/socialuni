@@ -14,9 +14,13 @@ import TalkTabType from "socialuni-constant/constant/TalkTabType"
 import StorageUtil from "socialuni-sdk/src/utils/StorageUtil"
 import SocialuniTalkTabRO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 import TalkTabVO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
+import {Vue} from "vue-class-component";
 
 @Store
 export default class SocialTalkModule extends Pinia {
+    //方便操作页面动作
+    talkVue:Vue = null
+
     // filter内容
     userMinAge: number = TalkFilterUtil.getMinAgeFilter()
     userMaxAge: number = TalkFilterUtil.getMaxAgeFilter()
@@ -225,7 +229,8 @@ export default class SocialTalkModule extends Pinia {
                     //从当前位置删除
                     this.talkTabs.splice(circleTabIndex, 1)
                 }
-                circleTab.firstLoad = false
+                //注释此行，如果存在此行则存在不查询的问题
+                // circleTab.firstLoad = false
             } else {
                 circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
             }
