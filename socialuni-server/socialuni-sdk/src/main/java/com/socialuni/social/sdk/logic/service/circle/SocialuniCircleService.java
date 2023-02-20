@@ -4,15 +4,19 @@ import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleChatDO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleRepository;
+import com.socialuni.social.sdk.constant.socialuni.TalkTabType;
 import com.socialuni.social.sdk.dao.store.SocialuniCircleRedis;
+import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.logic.domain.circle.CircleQueryDomain;
 import com.socialuni.social.sdk.logic.factory.community.SocialCircleROFactory;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.social.sdk.model.QO.community.circle.CircleTalkTabInfoQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
@@ -75,6 +79,18 @@ public class SocialuniCircleService {
         }
 
         return ResultRO.success(socialuniCircleChatDO1.getGroupChatId());
+    }
+
+
+    public ResultRO<SocialuniTalkTabCircleRO> queryCircleTalkTabInfo(CircleTalkTabInfoQO circleTalkTabInfoQO) {
+        String tabName = circleTalkTabInfoQO.getCircleName();
+        SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableNotNull(tabName);
+            SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);
+            SocialuniCircleChatDO socialuniCircleChatDO = socialuniCircleChatRepository.findFirstByDevIdAndCircleName(SocialuniConst.centerDevId, tabName);
+            if (socialuniCircleChatDO != null) {
+                homeTabCircleRO.setGroupChatId(socialuniCircleChatDO.getGroupChatId());
+            }
+        return ResultRO.success(homeTabCircleRO);
     }
 
 

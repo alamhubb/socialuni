@@ -15,11 +15,13 @@ import StorageUtil from "socialuni-sdk/src/utils/StorageUtil"
 import SocialuniTalkTabRO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 import TalkTabVO from "socialuni-api/src/model/talk/SocialuniTalkTabRO";
 import {Vue} from "vue-class-component";
+import SocialuniCircleAPI from "socialuni-api/src/api/socialuni/SocialuniCircleAPI";
+import CircleCreateChatQO from "socialuni-api/src/model/community/circle/CircleCreateChatQO";
 
 @Store
 export default class SocialTalkModule extends Pinia {
     //方便操作页面动作
-    talkVue:Vue = null
+    talkVue: Vue = null
 
     // filter内容
     userMinAge: number = TalkFilterUtil.getMinAgeFilter()
@@ -194,6 +196,11 @@ export default class SocialTalkModule extends Pinia {
         const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
         if (curTab.type === TalkTabType.circle_type) {
             socialCircleModule.setCircleName(curTab.name)
+            if (!curTab.circle) {
+                SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(curTab.name, null)).then(res => {
+                    curTab.circle = res.data
+                })
+            }
         } else {
             socialCircleModule.setCircleName(null)
         }/*
@@ -216,21 +223,21 @@ export default class SocialTalkModule extends Pinia {
     //tab选中当前的圈子
     setCircleNameUpdateCurTabIndex(circleName: string) {
         if (circleName) {
-            if (this.curTab.name === circleName){
+            if (this.curTab.name === circleName) {
                 return
             }
             const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
-            let circleTab:SocialuniTalkTabRO
+            let circleTab: SocialuniTalkTabRO
             if (circleTabIndex > -1) {
                 circleTab = this.talkTabs[circleTabIndex]
-                if (circleTab.appDefaultTab){
+                if (circleTab.appDefaultTab) {
                     return this.setCurTabIndexUpdateCircle(circleTabIndex)
-                }else {
+                } else {
                     //从当前位置删除
                     this.talkTabs.splice(circleTabIndex, 1)
+                    //注释此行，如果存在此行则存在不查询的问题
+                    circleTab.firstLoad = false
                 }
-                //注释此行，如果存在此行则存在不查询的问题
-                // circleTab.firstLoad = false
             } else {
                 circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
             }

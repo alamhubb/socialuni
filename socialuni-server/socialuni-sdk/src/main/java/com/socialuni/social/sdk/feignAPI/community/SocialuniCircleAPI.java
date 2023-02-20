@@ -1,9 +1,11 @@
 package com.socialuni.social.sdk.feignAPI.community;
 
 
+import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.social.sdk.model.QO.community.circle.CircleTalkTabInfoQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import com.socialuni.social.common.api.model.ResultRO;
@@ -31,6 +33,10 @@ public interface SocialuniCircleAPI {
     @PostMapping("createCircleChat")
     @Operation(summary = "创建圈子群聊")
     ResultRO<String> createCircleChat(@RequestBody @Valid CircleChatCreateQO circleChatCreateQO);
+
+    @PostMapping("queryCircleTalkTabInfo")
+    @Operation(summary = "查询圈子动态的信息")
+    ResultRO<SocialuniTalkTabCircleRO> queryCircleTalkTabInfo(@RequestBody @Valid CircleTalkTabInfoQO circleTalkTabInfoQO);
 
     @GetMapping("queryHotCircles")
     @Operation(summary = "查询热门圈子")

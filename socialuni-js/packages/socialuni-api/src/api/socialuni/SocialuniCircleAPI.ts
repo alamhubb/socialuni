@@ -5,6 +5,7 @@ import CircleTypeRO from "../../model/community/circle/CircleTypeRO";
 import SocialuniCircleQueryByTypeQO from "../../model/QO/circle/SocialuniCircleQueryByTypeQO";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import CircleCreateChatQO from "../../model/community/circle/CircleCreateChatQO";
+import SocialuniTalkTabCircleRO from "../../model/community/circle/SocialuniTalkTabCircleRO";
 
 
 export default class SocialuniCircleAPI {
@@ -17,6 +18,10 @@ export default class SocialuniCircleAPI {
 
   static createCircleChatAPI(createQO: CircleCreateChatQO) {
     return request.post<string>('socialuni/circle/createCircleChat', createQO)
+  }
+
+  static queryCircleTalkTabInfoAPI(createQO: CircleCreateChatQO) {
+    return request.post<SocialuniTalkTabCircleRO>('socialuni/circle/queryCircleTalkTabInfo', createQO)
   }
 
   static queryHotCirclesAPI() {

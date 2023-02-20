@@ -259,6 +259,8 @@ export default class TabsTalk extends Vue {
     const storeTalkTabs: TalkTabVO[] = []
     this.talkTabs.forEach(item => {
       const storeTalkTab: TalkTabVO = new TalkTabVO(item.name, item.type)
+      storeTalkTab.firstLoad = item.firstLoad
+      storeTalkTab.scrollTop = item.scrollTop
       storeTalkTab.talks = item.talks.slice(0, this.talkCacheNum)
       storeTalkTabs.push(storeTalkTab)
     })
@@ -519,6 +521,7 @@ export default class TabsTalk extends Vue {
     if (socialTalkModule.inputContentFocus) {
       socialTalkModule.inputContentBlur()
     }
+    this.curTalkTabObj.scrollTop = detail.scrollTop
     //只有app端处理滚动隐藏显示tabbar逻辑，小程序平台一卡一卡的
     if (!socialSystemModule.isMp) {
       //记录当前位置

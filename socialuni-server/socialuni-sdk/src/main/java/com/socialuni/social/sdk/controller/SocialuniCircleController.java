@@ -1,11 +1,13 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniCircleAPI;
 import com.socialuni.social.sdk.logic.service.circle.SocialuniCircleService;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCircleQueryByTypeQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleChatCreateQO;
 import com.socialuni.social.sdk.model.QO.community.circle.CircleCreateQO;
+import com.socialuni.social.sdk.model.QO.community.circle.CircleTalkTabInfoQO;
 import com.socialuni.social.sdk.model.RO.community.circle.CircleTypeRO;
 import com.socialuni.social.community.sdk.model.SocialCircleRO;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,11 @@ public class SocialuniCircleController implements SocialuniCircleAPI {
     @Override
     public ResultRO<String> createCircleChat(CircleChatCreateQO circleChatCreateQO) {
         return centerCircleService.createCircleChat(circleChatCreateQO);
+    }
+
+    @Override
+    public ResultRO<SocialuniTalkTabCircleRO> queryCircleTalkTabInfo(CircleTalkTabInfoQO circleTalkTabInfoQO) {
+        return centerCircleService.queryCircleTalkTabInfo(circleTalkTabInfoQO);
     }
 
     @Override
