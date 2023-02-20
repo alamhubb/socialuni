@@ -67,17 +67,17 @@
           </view>
         </view>
 
-
-        <div class="flex-row pl-xs">
-          <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
-            <q-icon class="color-success mr-mn" size="14" icon="level"/>
-            <div class="font-xs">成年</div>
-          </div>
-          <div v-else class="q-tag q-box-nn" @click.stop="toIdentityAuth">
-            <q-icon class="color-sub mr-mn" size="14" icon="level"/>
-            <div class="font-xs">成年</div>
-          </div>
-        </div>
+        <!--因微信平台不允许认证功能平台问题暂时注释成年认证相关功能-->
+        <!--        <div class="flex-row pl-xs">
+                  <div v-if="user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+                    <q-icon class="color-success mr-mn" size="14" icon="level"/>
+                    <div class="font-xs">成年</div>
+                  </div>
+                  <div v-else class="q-tag q-box-nn" @click.stop="toIdentityAuth">
+                    <q-icon class="color-sub mr-mn" size="14" icon="level"/>
+                    <div class="font-xs">成年</div>
+                  </div>
+                </div>-->
         <!--        <view class="ml-5 cu-capsule radius" @click="hintJusticeInfo">
                   <view class='cu-tag bg-green'>
                     <q-icon size="18" icon="mdi-sword-cross"/>
@@ -457,7 +457,7 @@ export default class UserInfo extends Vue {
   /**
    * 添加好友申请。
    */
- async addFriend() {
+  async addFriend() {
     // socialChatFriendModule.addFriend(this.user.id, "请求加好友");
     const options: AddFriendParams = {
       toUserID: this.user.id,

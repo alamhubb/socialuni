@@ -4,6 +4,11 @@ export default class SocialuniConfig {
     readonly static socialuniUrl = (import.meta.env.VITE_APP_SOCIALUNI_URL || 'https://api.socialuni.cn') + '/'
     readonly static openImJsImUrl = (import.meta.env.VITE_APP_OPEN_IM_JS_IM_URL || SocialuniConfig.socialuniUrl)
 
+    static get socialuniSecretKey() {
+        const key = import.meta.env.VITE_APP_SOCIALUNI_SECRET
+        return key || null
+    }
+
     // readonly useIm = true
     // static useIm = true
 
