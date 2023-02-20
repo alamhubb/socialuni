@@ -353,23 +353,25 @@ export default class TabsTalk extends Vue {
       // 执行正在加载动画
       this.curTalkTabObj.loadMore = LoadMoreType.loading
 
-      const resDataTalks = []
+
       // if (firstLoad) {
       // 默认地理位置是北京，以后可以根据ip获取当前城市
       // 话题的话显示最热门的话题，且只查询包含话题的动态
+
+      //如果首页刷新时，查询置顶动态
+      /*if (talkTabObj.name === socialConfigModule.appConfig.homeTabName) {
+        //查询置顶冬天
+        SocialuniTalkAPI.queryStickTalksAPI().then(res => {
+          const stickTalks = res.data
+          if (stickTalks.length) {
+            resDataTalks.unshift(...stickTalks)
+          }
+        })
+      }*/
       if (firstLoad) {
         talkTabObj.firstLoad = false
-        //如果首页刷新时，查询置顶动态
-        if (talkTabObj.name === socialConfigModule.appConfig.homeTabName) {
-          //查询置顶冬天
-          SocialuniTalkAPI.queryStickTalksAPI().then(res => {
-            const stickTalks = res.data
-            if (stickTalks.length) {
-              resDataTalks.unshift(...stickTalks)
-            }
-          })
-        }
       }
+      const resDataTalks = []
       return SocialuniTalkAPI.queryTalksAPI(talkTabObj.name, socialTalkModule.userGender, socialTalkModule.userMinAge, socialTalkModule.userMaxAge, talkTabObj.queryTime, socialTagModule.selectTagNames, firstLoad).then((res: any) => {
         // 如果不是上拉加载，则是下拉刷新，则停止下拉刷新动画
         if (talkTabObj.loadMore === LoadMoreType.loading) {
