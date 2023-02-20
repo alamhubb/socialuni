@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.service.talk;
 
+import com.socialuni.social.sdk.dao.store.TalkQueryStore;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.constant.TalkTabType;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniTalkAPI;
@@ -36,21 +37,23 @@ public class SocialuniTalkService {
     SocialuniTalkAPI socialuniTalkAPI;
     @Resource
     SocialuniPostTalkDomain socialTalkPostDomain;
+    @Resource
+    TalkQueryStore talkQueryStore;
 
     @Resource
     SocialuniHomeTalkQueryDomain socialHomeTalkQueryDomain;
 
     /**
+     * @return
      * @see com.socialuni.social.sdk.logic.domain.talk.SocialuniHomeTalkQueryDomain#queryHomeTabTalks(com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO)
      * @deprecated
-     * @return
      */
     @Deprecated
     public ResultRO<List<SocialuniTalkRO>> queryStickTalks() {
-        /*if (SocialuniSystemConst.serverIsChild()) {
+        if (SocialuniSystemConst.serverIsChild()) {
             return socialuniTalkAPI.queryStickTalks();
-        }*/
-        List<SocialuniTalkRO> list = new ArrayList<>(); //socialHomeTalkQueryDomain.queryStickTalks();
+        }
+        List<SocialuniTalkRO> list = socialHomeTalkQueryDomain.queryStickTalks();
         return ResultRO.success(list);
     }
 

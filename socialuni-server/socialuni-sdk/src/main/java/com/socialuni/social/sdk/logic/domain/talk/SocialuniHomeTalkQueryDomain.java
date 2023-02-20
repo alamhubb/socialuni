@@ -1,5 +1,6 @@
 package com.socialuni.social.sdk.logic.domain.talk;
 
+import cn.hutool.core.util.BooleanUtil;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialBusinessException;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
@@ -45,6 +46,13 @@ public class SocialuniHomeTalkQueryDomain {
     private TalkRepository talkRepository;
     @Resource
     private TalkQueryStore talkQueryStore;
+
+    public List<SocialuniTalkRO> queryStickTalks() {
+        List<?  extends SocialuniTalkDO>  list = talkQueryStore.queryStickTalks();
+        //转换为rolist
+        List<SocialuniTalkRO> socialTalkROs = SocialTalkROFactory.newHomeTalkROs(SocialuniUserUtil.getMineUserAllowNull(), list, null);
+        return socialTalkROs;
+    }
 
 
     //查询非关注tab的动态列表
@@ -117,6 +125,10 @@ public class SocialuniHomeTalkQueryDomain {
         //校园社区
         SocialHomeTabTalkQueryBO socialHomeTabTalkQueryBO = socialuniTalkQueryGenerateQueryBOByTabDomain.generateQueryBOByTab(queryQO, mineUser);
         socialHomeTabTalkQueryBO.setFirstLoad(queryQO.getFirstLoad());
+        //不为true，则设置为false
+        if (!BooleanUtil.isTrue(socialHomeTabTalkQueryBO.getFirstLoad())){
+            socialHomeTabTalkQueryBO.setFirstLoad(false);
+        }
 
         //校验talk可见类型是否与appgender类型一致，还有与usergender类型一致
 //        GenderUtil.checkAppAndVisibleGender(appGender, postUserGender, talkVisibleGender, mineUser);
