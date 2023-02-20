@@ -171,6 +171,10 @@ public class SocialuniUnionIdFacede {
         return socialuniUnionIdApi.findUuidAllByContentType(contentTyp);
     }
 
+    public static List<Integer> findAllIdsByContentType(String contentTyp){
+        return socialuniUnionIdApi.findAllIdsByContentType(contentTyp);
+    }
+
 
     //根据uid获取真实id
     /*public static Integer getResultByUnionId(String contentType, String unionId) {

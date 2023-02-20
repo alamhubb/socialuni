@@ -15,5 +15,8 @@ public interface SocialuniUnionIdRepository extends JpaRepository<SocialuniUnion
 
     @Query(value = "select uuid from SocialuniUnionIdDo where contentType=:contentType")
     List<String> findAllUuidByContentType(String contentType);
+
+    @Query(value = "select id from SocialuniUnionIdDo where contentType=:contentType")
+    List<Integer> findAllIdsByContentType(String contentType);
 }
 

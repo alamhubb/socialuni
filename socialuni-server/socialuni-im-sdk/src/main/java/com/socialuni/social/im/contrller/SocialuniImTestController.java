@@ -54,49 +54,70 @@ public class SocialuniImTestController {
 
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
 
-//        List<String> imNotHasIds = new ArrayList<>();
+
 //        List<Integer> userIds = socialuniUserRepository.findAllUserIds();
-        log.info(String.valueOf(System.currentTimeMillis() / 1000));
         //获取所有的uuid
-        List<String> uuids = SocialuniUnionIdFacede.findUuidAllByContentType(SocialuniContentType.user);
+        List<Integer> allUserIds = SocialuniUnionIdFacede.findAllIdsByContentType(SocialuniContentType.user);
+        log.info(String.valueOf(System.currentTimeMillis() / 1000));
 
-        log.info("uuids:{}", uuids.size());
 
-        List<String> subIds = uuids.subList(index, index + 50000);
+        log.info("uuids:{}", allUserIds.size());
+
+//        List<String> subIds = uuids.subList(index, index + 50000);
 
 //        String json = readJsonFile("data/imIds.json");
 //        List<String> imIds = (List<String>) JsonUtil.objectMapper.readValue(json, List.class);
+        List<Integer> imUserIds = socialUserAccountRepository.findAllUserIdsAllByProvider(SocialuniAccountProviderType.openIm);
         log.info(String.valueOf(System.currentTimeMillis() / 1000));
         //获取一个imidMap
-        /*Map<String, String> imIdsMap = new HashMap<>();
-        for (String uuid : imIds) {
+        Map<Integer, Integer> imIdsMap = new HashMap<>();
+        for (Integer uuid : imUserIds) {
             imIdsMap.put(uuid, uuid);
         }
+        log.info(String.valueOf(System.currentTimeMillis() / 1000));
+        log.info("imIds:{}", imUserIds.size());
 
-        log.info("imIds:{}", imIds.size());*/
-
+        List<Integer> imNotHasIds = new ArrayList<>();
         //遍历uuid
-        /*for (String uuid : uuids) {
+        for (Integer uuid : allUserIds) {
             //如果im里面不包含则加入一个数组中
             if (!imIdsMap.containsKey(uuid)) {
                 imNotHasIds.add(uuid);
             }
-        }*/
+        }
+        log.info(String.valueOf(System.currentTimeMillis() / 1000));
+        log.info("imNotHasIds:{}", imNotHasIds.size());
 
         //获取缺少的uuid数量
 //        log.info("缺少的uuid数量：{}", imNotHasIds.size());
 
         Integer i = 0;
         //遍历未注册的id
-        for (String imNotHasId : subIds) {
+        for (Integer imNotHasId : imNotHasIds) {
             Integer finalI = i;
             CompletableFuture.supplyAsync(() -> {
-                SocialuniUserDo mineUser = SocialuniUserUtil.getUserByUuid(imNotHasId);
-//            mineUser.setNickname("名称被重置");
+                SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(imNotHasId);
+                //数据库存在编码问题，统一名称消除编码问题
+//                mineUser.setNickname("名称被重置");
+
+                // 注册到Im
+                SocialuniImUserModel imUserModel = new SocialuniImUserModel();
+
+                String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
+
+                imUserModel.setUserID(mineUserUid);
+                imUserModel.setNickname("名称被重置");
+                imUserModel.setFaceURL(mineUser.getAvatar());
+                imUserModel.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
+//        imUserModel.setPhoneNumber(mineUser.getPhoneNum());
+                imUserModel.setBirth(946656000);
+                imUserModel.setCreateTime(new Date());
+
 //            mineUser = socialuniUserRepository.savePut(mineUser);
-                this.getUserImToken(mineUser);
+                this.getUserImToken(mineUser, imUserModel);
                 if (finalI % 1000 == 0) {
-                    log.info("当前索引位置：{}", index + finalI);
+                    log.info("当前索引位置：{}", finalI);
+                    log.info(String.valueOf(System.currentTimeMillis() / 1000));
                 }
                 return null;
             }).exceptionally(e -> {
@@ -136,19 +157,18 @@ public class SocialuniImTestController {
 
     }
 
-    private ResultRO<String> getUserImToken(SocialuniUserDo mineUser) {
-        SocialuniImUserModel socialuniImUserModel = toImUserModel(mineUser);
+    private ResultRO<String> getUserImToken(SocialuniUserDo mineUser, SocialuniImUserModel socialuniImUserModel) {
 
         String imToken = null;
         try {
             //存在脏数据，所以特殊处理
             imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
         } catch (RuntimeException e) {
-            log.info("正常逻辑未注册");
+//            log.info("正常逻辑未注册");
         }
 
         //设置openIm的key
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUser.getUserId());
+        /*SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUser.getUserId());
 
         if (socialUserAccountDO == null) {
             if (StringUtils.isEmpty(imToken)) {
@@ -164,8 +184,19 @@ public class SocialuniImTestController {
                 imToken = resultRO.getData();
             }
 
+        }*/
+        try {
+            //如果为登录，则刷新token
+            imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+//            log.info("用户的生日：{}", mineUser.getBirthday());
+//            log.info("用户的生日：{}", BirthdayAgeUtil.getBirthDayByBirthString(mineUser.getBirthday()));
+            imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
+//            ResultRO<String> resultRO = this.getUserImToken(mineUser);
+//            imToken = resultRO.getData();
         }
-        socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);
+        SocialUserAccountDO socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);
         return ResultRO.success(socialUserAccountDO.getSessionKey());
     }
 

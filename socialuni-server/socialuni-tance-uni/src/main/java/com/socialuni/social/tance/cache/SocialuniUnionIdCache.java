@@ -58,4 +58,9 @@ public class SocialuniUnionIdCache implements SocialuniUnionIdInterface {
     public List<String> findUuidAllByContentType(String contentTyp){
         return uniContentUnionIdRepository.findAllUuidByContentType(contentTyp);
     }
+
+    @Override
+    public List<Integer> findAllIdsByContentType(String contentTyp) {
+        return uniContentUnionIdRepository.findAllIdsByContentType(contentTyp);
+    }
 }

@@ -52,6 +52,9 @@ public class SocialEditUserDomain {
             int age = BirthdayAgeUtil.getAgeByBirth(birthday);
             if (age < 18) {
                 throw new SocialBusinessException("年龄不能小于18岁");
+            } else if (age > 50) {
+                //临时解决方案，初始时间1970 如果小于1970注册im系统会存在问题
+                throw new SocialBusinessException("年龄不能大于50岁");
             }
             mineUser.setAge(BirthdayAgeUtil.getAgeByBirth(birthday));
         }

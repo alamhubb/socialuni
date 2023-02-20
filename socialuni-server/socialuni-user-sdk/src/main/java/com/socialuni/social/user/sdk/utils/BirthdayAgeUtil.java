@@ -19,6 +19,10 @@ import java.util.Date;
 @Slf4j
 public class BirthdayAgeUtil {
 
+    public static void main(String[] args) {
+        System.out.println(String.valueOf(BirthdayAgeUtil.getBirthDayByBirthString("2000-01-01").getTime()/1000));
+    }
+
     public static final SimpleDateFormat birthdayYearFormat = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat birthdayDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

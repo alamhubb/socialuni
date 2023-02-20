@@ -1,7 +1,10 @@
 package com.socialuni.social.im.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.socialuni.social.common.api.utils.JsonUtil;
 import com.socialuni.social.im.model.ImTokenModel;
 import com.socialuni.social.im.model.SocialuniImUserModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ import javax.annotation.Resource;
  * @since 1.0
  */
 @Service
+@Slf4j
 public class ImAuthService {
     @Resource
     private ImHttpComponent imHttpComponent;
@@ -32,6 +36,13 @@ public class ImAuthService {
         try {
             tokenModel = imHttpComponent.parseResponse(post, ImTokenModel.class);
         } catch (Exception exception) {
+            exception.printStackTrace();
+            log.info("用户生日：{}", userModel.getBirth());
+            try {
+                log.info(JsonUtil.objectMapper.writeValueAsString(userModel));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
             // 重复注册的bug。  这里接直接再去尝试直接获得token.
             tokenModel = this.userToken(userModel);
         }
@@ -68,6 +79,7 @@ public class ImAuthService {
         String post = imHttpComponent.post("/auth/user_token", userModel);
         return imHttpComponent.parseResponse(post, ImTokenModel.class);
     }
+
     /**
      * 获取用户的token
      * (免密的用户登录)
@@ -78,6 +90,7 @@ public class ImAuthService {
         String post = imHttpComponent.post("/auth/user_token", userModel);
         return imHttpComponent.parseResponse(post, ImTokenModel.class);
     }
+
     /**
      * 获得token
      *

@@ -20,4 +20,5 @@ public interface SocialuniUnionIdInterface {
     SocialuniUnionIdModler findByUuId(String uuid);
 
     List<String> findUuidAllByContentType(String contentTyp);
+    List<Integer> findAllIdsByContentType(String contentTyp);
 }

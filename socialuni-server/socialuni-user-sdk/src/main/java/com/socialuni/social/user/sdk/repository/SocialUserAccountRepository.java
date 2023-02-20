@@ -3,6 +3,9 @@ package com.socialuni.social.user.sdk.repository;
 
 import com.socialuni.social.user.sdk.model.DO.SocialUserAccountDO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface SocialUserAccountRepository extends JpaRepository<SocialUserAccountDO, Integer> {
 
@@ -16,6 +19,9 @@ public interface SocialUserAccountRepository extends JpaRepository<SocialUserAcc
     SocialUserAccountDO findByProviderAndUserId(String provider, Integer userId);
 
     SocialUserAccountDO findByUserIdOrderByUpdateTimeDesc(Integer userId);
+
+    @Query("select s.userId from SocialUserAccountDO s where s.provider = :provider")
+    List<Integer> findAllUserIdsAllByProvider(String provider);
 
 
 //    @CachePut(cacheNames = RedisKeysConst.userById, key = "#account.userId")
