@@ -196,11 +196,9 @@ export default class SocialTalkModule extends Pinia {
         const curTab = this.talkTabs.find((item, index) => index === this.currentTabIndex)
         if (curTab.type === TalkTabType.circle_type) {
             socialCircleModule.setCircleName(curTab.name)
-            if (!curTab.circle) {
-                SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(curTab.name, null)).then(res => {
-                    curTab.circle = res.data
-                })
-            }
+            SocialuniCircleAPI.queryCircleTalkTabInfoAPI(new CircleCreateChatQO(curTab.name, null)).then(res => {
+                curTab.circle = res.data
+            })
         } else {
             socialCircleModule.setCircleName(null)
         }/*
