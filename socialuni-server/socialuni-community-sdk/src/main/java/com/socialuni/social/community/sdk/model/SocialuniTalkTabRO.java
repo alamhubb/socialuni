@@ -10,6 +10,7 @@ import lombok.Data;
 public class SocialuniTalkTabRO {
     private String name;
     private SocialuniTalkTabCircleRO circle;
+    private String type;
 
 
     public SocialuniTalkTabRO(String name) {

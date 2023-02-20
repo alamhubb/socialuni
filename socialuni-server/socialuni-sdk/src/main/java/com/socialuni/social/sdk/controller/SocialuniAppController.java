@@ -6,6 +6,7 @@ import com.socialuni.social.community.sdk.entity.SocialuniCircleChatDO;
 import com.socialuni.social.community.sdk.entity.SocialuniCircleDO;
 import com.socialuni.social.community.sdk.model.SocialuniTalkTabCircleRO;
 import com.socialuni.social.community.sdk.repository.SocialuniCircleChatRepository;
+import com.socialuni.social.sdk.constant.socialuni.TalkTabType;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.feignAPI.SocialuniAppAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniAppService;
@@ -60,6 +61,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
                         homeTabCircleRO.setGroupChatId(socialuniCircleChatDO.getGroupChatId());
                     }
                     tabRO.setCircle(homeTabCircleRO);
+                    tabRO.setType(TalkTabType.circle);
                 }
             }
             list.add(tabRO);

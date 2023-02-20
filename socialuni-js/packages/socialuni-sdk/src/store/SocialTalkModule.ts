@@ -169,10 +169,11 @@ export default class SocialTalkModule extends Pinia {
                 oldTab.appDefaultTab = true
                 if (talkTab.circle) {
                     oldTab.circle = talkTab.circle
+                    oldTab.type = talkTab.type
                 }
             } else {
                 //如果不存在则直接使用后台返回的tab作为新tab
-                const newTab = new SocialuniTalkTabRO(talkTab.name)
+                const newTab = new SocialuniTalkTabRO(talkTab.name, talkTab.type)
                 //后台返回的则为默认
                 newTab.appDefaultTab = true
                 newTab.circle = talkTab.circle
@@ -211,17 +212,23 @@ export default class SocialTalkModule extends Pinia {
     //tab选中当前的圈子
     setCircleNameUpdateCurTabIndex(circleName: string) {
         if (circleName) {
+            if (this.curTab.name === circleName){
+                return
+            }
             const circleTabIndex = this.talkTabs.findIndex(item => (item.type === TalkTabType.circle_type) && item.name === circleName)
-            let circleTab
+            let circleTab:SocialuniTalkTabRO
             if (circleTabIndex > -1) {
                 circleTab = this.talkTabs[circleTabIndex]
-                //从当前位置删除
-                this.talkTabs.splice(circleTabIndex, 1)
+                if (circleTab.appDefaultTab){
+                    return this.setCurTabIndexUpdateCircle(circleTabIndex)
+                }else {
+                    //从当前位置删除
+                    this.talkTabs.splice(circleTabIndex, 1)
+                }
+                circleTab.firstLoad = false
             } else {
                 circleTab = new TalkTabVO(circleName, TalkTabType.circle_type)
             }
-            circleTab.firstLoad = false
-
             const appTas = this.talkTabs.filter(item => item.appDefaultTab)
 
             //添加到第四个位置
