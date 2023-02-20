@@ -523,7 +523,7 @@ export default class TabsTalk extends Vue {
     if (socialTalkModule.inputContentFocus) {
       socialTalkModule.inputContentBlur()
     }
-    this.curTalkTabObj.scrollTop = detail.scrollTop
+    this.talkTabScroll(detail.scrollTop)
     //只有app端处理滚动隐藏显示tabbar逻辑，小程序平台一卡一卡的
     if (!socialSystemModule.isMp) {
       //记录当前位置
@@ -531,6 +531,10 @@ export default class TabsTalk extends Vue {
       this.throttleScroll()
     }
   }
+
+  talkTabScroll = CommonUtil.debounce((scrollTop) => {
+    this.curTalkTabObj.scrollTop = scrollTop
+  }, 1000)
 
   throttleScroll = CommonUtil.throttle(() => {
     //如果向下滚动超过50隐藏
