@@ -49,7 +49,7 @@ public class SocialuniImTestController {
     SocialuniUserRepository socialuniUserRepository;
 
 
-    @GetMapping("getUserImTokenAll")
+//    @GetMapping("getUserImTokenAll")
     public ResultRO<String> getUserImToken(Integer index) throws JsonProcessingException {
 
         log.info(String.valueOf(System.currentTimeMillis() / 1000));

@@ -73,7 +73,6 @@ public class ImUserService {
                 ResultRO<String> resultRO = this.getImUserToken(mineUser);
                 imToken = resultRO.getData();
             }
-
         }
         socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);
         return ResultRO.success(socialUserAccountDO.getSessionKey());
@@ -87,7 +86,8 @@ public class ImUserService {
         String mineUserUid = SocialuniUnionIdFacede.getUuidByUnionIdNotNull(mineUser.getUserId());
 
         imUserModel.setUserID(mineUserUid);
-        imUserModel.setNickname(mineUser.getNickname());
+        //因为openIm不支持表情昵称
+        imUserModel.setNickname("名称已重置");
         imUserModel.setFaceURL(mineUser.getAvatar());
         imUserModel.setGender(GenderTypeNumEnum.getValueByName(mineUser.getGender()));
 //        imUserModel.setPhoneNumber(mineUser.getPhoneNum());
