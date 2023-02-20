@@ -12,9 +12,9 @@
           <!--          <text class="text-md" :class="{'color-red':talk.user.vipFlag}">{{ talk.user.nickname }}</text>-->
           <template v-if="!talk.globalTop">
             <social-gender-tag class="ml-xs" :user="talk.user"></social-gender-tag>
-            <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
+<!--            <div v-if="talk.user.identityAuth" class="q-tag-success q-box-nn" @click.stop="toIdentityAuth">
               <q-icon size="14" icon="level"/>
-            </div>
+            </div>-->
             <!--              <q-icon class="color-blue" size="18" icon="level" @click.stop="toIdentityAuth"/>-->
           </template>
 
