@@ -10,6 +10,7 @@ import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import UserService from "../service/UserService";
 import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
 import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
+import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -38,6 +39,9 @@ export default class SocialUserModule extends Pinia {
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置
             this.setUser(data)
+            //
+            const tokenRo = await LoginAPI.refreshToken();
+            // this.setToken(null);
         }
     }
 

@@ -18,4 +18,12 @@ export default class LoginAPI {
   static phoneLoginAPI (loginData: SocialPhoneNumLoginQO) {
     return request.post<SocialLoginRO<CenterUserDetailRO>>('socialuni/login/phoneLogin', loginData)
   }
+
+  /**
+   * 刷新token
+   * @param loginData
+   */
+  static refreshToken () {
+    return request.post<SocialLoginRO<CenterUserDetailRO>>('socialuni/login/phoneLogin', {});
+  }
 }
