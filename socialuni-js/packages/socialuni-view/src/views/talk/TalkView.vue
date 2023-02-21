@@ -16,7 +16,7 @@
             </view>
             <q-icon class="mr-sm text-gray row-all-center" icon="close" @click="deleteTag"></q-icon>
           </view>
-          <div v-else class="cursor-text flex-1">选择话题</div>
+          <div v-else class="cursor-text flex-1" @click="openTagPicker">选择话题</div>
         </q-search>
         <!--        <view class="mr-sm" :class="{'text-theme':useFilters}">
                   <q-icon icon="mdi-filter-variant" size="28" @click="showFilterModel"></q-icon>
