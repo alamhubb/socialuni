@@ -36,13 +36,6 @@ public class ImAuthService {
         try {
             tokenModel = imHttpComponent.parseResponse(post, ImTokenModel.class);
         } catch (Exception exception) {
-            exception.printStackTrace();
-            log.info("用户生日：{}", userModel.getBirth());
-            try {
-                log.info(JsonUtil.objectMapper.writeValueAsString(userModel));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
             // 重复注册的bug。  这里接直接再去尝试直接获得token.
             tokenModel = this.userToken(userModel);
         }

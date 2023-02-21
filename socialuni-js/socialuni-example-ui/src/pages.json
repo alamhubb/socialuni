@@ -96,12 +96,6 @@
           }
         },
         {
-          "path": "user/identityAuth",
-          "style": {
-            "navigationBarTitleText": "成年认证"
-          }
-        },
-        {
           "path": "notify/notify",
           "style": {
             "navigationBarTitleText": "通知列表"

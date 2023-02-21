@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="bg-white text-md w100p" v-if="user">
     <div v-if="user.identityAuth" class="h400 row-all-center">
@@ -90,7 +91,7 @@
       <view class="flex-row mt-20px px">
         <q-button class="flex-1" primary :disabled="authBtnDisabled" @click="idAuthPreCheck">预校验</q-button>
         <q-button class="flex-1 ml" success :disabled="authBtnDisabled" @click="identityAuth">认证</q-button>
-        <!--      <q-button success @click="identityAuth" :disabled="!imgFile || authBtnDisabled">认证</q-button>-->
+        &lt;!&ndash;      <q-button success @click="identityAuth" :disabled="!imgFile || authBtnDisabled">认证</q-button>&ndash;&gt;
       </view>
 
 
@@ -267,3 +268,4 @@ export default class IdentityAuthView extends Vue {
   }
 }
 </script>
+-->
