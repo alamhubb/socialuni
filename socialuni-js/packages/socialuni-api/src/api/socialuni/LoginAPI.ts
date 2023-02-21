@@ -24,6 +24,6 @@ export default class LoginAPI {
    * @param loginData
    */
   static refreshToken () {
-    return request.post<SocialLoginRO<CenterUserDetailRO>>('socialuni/login/phoneLogin', {});
+    return request.post<SocialLoginRO<CenterUserDetailRO>>('socialuni/login/refreshToken', {});
   }
 }
