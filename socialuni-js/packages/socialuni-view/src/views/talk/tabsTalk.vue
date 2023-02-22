@@ -455,20 +455,22 @@ export default class TabsTalk extends Vue {
   // talkSwipe
   async talkSwiperChange(e) {
     const current = e.detail.current
-    const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
-    // 存入store
-    // 切换时截取其他的只保留后20条
-    this.talkTabs.forEach((item, index) => {
-      if (index !== current) {
-        //截取20
-        item.talks = item.talks.slice(-20)
-        item.loadMore = LoadMoreType.more
+    if (current){
+      const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
+      // 存入store
+      // 切换时截取其他的只保留后20条
+      this.talkTabs.forEach((item, index) => {
+        if (index !== current) {
+          //截取20
+          item.talks = item.talks.slice(-20)
+          item.loadMore = LoadMoreType.more
+        }
+      })
+      //如果首次加载，则需要查询
+      if (curTab.firstLoad) {
+        this.startPullDown()
+        this.tabsTalkOnHide()
       }
-    })
-    //如果首次加载，则需要查询
-    if (curTab.firstLoad) {
-      this.startPullDown()
-      this.tabsTalkOnHide()
     }
   }
 
