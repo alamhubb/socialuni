@@ -50,6 +50,8 @@ public class SocialuniEditExpandDomain {
             throw new SocialParamsException("错误的联系方式格式，请确认后重新输入");
         }
 
+        //前端设置，是否开启联系方式，点击开启或者不开启，然后向后台传递参数，所以不需要后台做逻辑，是否开启
+
         Integer mineUserId = SocialuniUserUtil.getMineUserIdNotNull();
 
         SocialuniUserExpandDo SocialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
