@@ -39,9 +39,12 @@ export default class SocialUserModule extends Pinia {
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置
             this.setUser(data)
-            //
-            const tokenRo = await LoginAPI.refreshToken();
-            // this.setToken(null);
+            //刷新token
+            const tokenRo =  await LoginAPI.refreshToken();
+            // 有才设置新的token.
+            if(tokenRo?.data?.token){
+                this.setToken(tokenRo?.data?.token);
+            }
         }
     }
 
