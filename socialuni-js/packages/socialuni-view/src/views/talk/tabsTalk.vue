@@ -455,6 +455,7 @@ export default class TabsTalk extends Vue {
   // talkSwipe
   async talkSwiperChange(e) {
     const current = e.detail.current
+    //首次加载可能为空
     if (current){
       const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
       // 存入store

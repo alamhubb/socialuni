@@ -117,7 +117,7 @@ import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
     QNavbar,
     QRowItem,
     UserInfo,
-    // MsgInput
+    MsgInput
   }
 })
 export default class MinePage extends Vue {

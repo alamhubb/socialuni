@@ -128,6 +128,7 @@ export default class SocialTalkModule extends Pinia {
         MsgUtil.cantPopupPromptToast()
         // 需要有延迟，要不然无法成功切换
         CommonUtil.delayTime(200).then(() => {
+            console.log('设置为展示输入框')
             this.inputContentFocus = true
         })
     }

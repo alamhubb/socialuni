@@ -2,6 +2,8 @@
   <view v-if="inputContentFocus"
         class="cu-bar input fixed-footer elevation-4 flex-row"
   >
+<!--    <span>-&#45;&#45;{{inputContentFocus}}-&#45;&#45;
+    </span>-->
     <input
         v-model.trim="content"
         :adjust-position="true"
