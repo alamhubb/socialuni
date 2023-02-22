@@ -33,7 +33,7 @@
               <!--            不为ios，或者不为付费，则显示-->
               <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
               <q-button @click="toMessagePage" class="mr-sm">
-                <q-icon icon="mdi-chat-outline" size="14"></q-icon>
+                <q-icon icon="mdi-chat-outline" size="14"></q-icon>私信
               </q-button>
               <q-button v-if="followStatus==='关注'"
                         @click="addFollow">
