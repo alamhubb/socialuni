@@ -2,6 +2,7 @@ import SocialuniUserRO from "./SocialuniUserRO";
 
 export default class SocialuniMineUserRO extends SocialuniUserRO {
     phoneNum: string
+    schoolName: string
 
     constructor(mineUser?: SocialuniMineUserRO) {
         if (mineUser) {

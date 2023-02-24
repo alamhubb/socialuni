@@ -3,7 +3,7 @@
     <div class="h80vh pd flex-col">
       <q-search class="mx-sm bg-default flex-none">
         <q-icon class="mx-xs text-gray" icon="search" size="16"></q-icon>
-        <input v-model.trim="filterSchoolNameText" :adjust-position="false" type="text" focus
+        <input v-model.trim="filterSchoolNameText" :adjust-position="false" type="text"
                placeholder="输入话题中文名称进行筛选" confirm-type="search"/>
         <q-icon v-if="filterSchoolNameText" class="mr text-gray row-all-center" icon="close" size="16"
                 @click="clearSchoolNameValue"
