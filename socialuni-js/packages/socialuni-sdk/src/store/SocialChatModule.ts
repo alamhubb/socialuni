@@ -16,7 +16,7 @@ import {
     Member,
     OpenIMSDK, PicBaseInfo, PinCveParams, SearchGroupParams,
     SetGroupVerificationParams, setPrvParams, VideoMsgParams
-} from "open-im-sdk"
+} from "socialuni-sdk/src/plugins/open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
@@ -69,7 +69,13 @@ export default class SocialChatModule extends Pinia {
                 url: SocialuniConfig.openImJsImUrl,
                 platformID: OpenImPlatformType.web
             }
-            await this.openIm.login(config)
+            console.log(666777)
+            console.log(config)
+            console.log(socialChatModule.imToken)
+            console.log(11111111)
+            const res = await this.openIm.login(config)
+            console.log(res)
+            console.log(22222222)
             this.setOpenImLoginSuccess()
             this.refreshChats()
             this.initOpenImListeners()

@@ -20,6 +20,7 @@ import java.util.Date;
 
 /**
  * <a href='https://doc.rentsoft.cn:8000/swagger/index.html#/用户相关'>用户相关</a>
+ *
  * @author wulinghui
  * @version 1.0
  * @module Socialuni
@@ -37,41 +38,32 @@ public class ImUserService {
     SocialBindUserOpenImAccountDomain socialBindUserOpenImAccountDomain;
     @Resource
     SocialuniOpenImUserFeign socialuniOpenImUserFeign;
-   /**
+
+    /**
      * 修改用户信息 gender nickname faceURL等
+     *
      * @param userModel
      * @param token
      */
-    public void updateUserInfo(SocialuniImUserModel userModel,String token){
-        imHttpComponent.post("/auth/user_token", userModel,token);
+    public void updateUserInfo(SocialuniImUserModel userModel, String token) {
+        imHttpComponent.post("/auth/user_token", userModel, token);
     }
 
     public ResultRO<String> getImUserToken(SocialuniUserDo mineUser) {
         SocialuniImUserModel socialuniImUserModel = toImUserModel(mineUser);
 
         String imToken = null;
-        try {
-            //存在脏数据，所以特殊处理
-            imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
-        } catch (RuntimeException e) {
-            log.info("正常逻辑未注册");
-        }
-
         //设置openIm的key
         SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(SocialuniAccountProviderType.openIm, mineUser.getUserId());
 
         if (socialUserAccountDO == null) {
-            if (StringUtils.isEmpty(imToken)) {
-                imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
-            }
+            imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
         } else {
             try {
                 //如果为登录，则刷新token
                 imToken = socialuniOpenImUserFeign.getAndRefreshToken(socialuniImUserModel.getUserID());
             } catch (RuntimeException e) {
                 imToken = socialuniOpenImUserFeign.userLogin(socialuniImUserModel);
-                ResultRO<String> resultRO = this.getImUserToken(mineUser);
-                imToken = resultRO.getData();
             }
         }
         socialUserAccountDO = socialBindUserOpenImAccountDomain.bindOrUpdateUserOpenImAccount(mineUser, socialuniImUserModel.getUserID(), imToken);

@@ -121,6 +121,8 @@ export default class TalkView extends Vue {
   }
 
   get selectTagName() {
+   console.log(3333)
+   console.log(socialTagModule)
     return socialTagModule.selectTagName
   }
 

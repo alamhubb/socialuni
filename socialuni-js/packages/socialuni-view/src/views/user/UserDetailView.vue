@@ -26,7 +26,7 @@ import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
-import {AddFriendParams} from "open-im-sdk";
+import {AddFriendParams} from "socialuni-sdk/src/plugins/open-im-sdk";
 import {onMounted} from "vue";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import QNavbar from "../../components/QNavbar/QNavbar.vue";

@@ -64,8 +64,8 @@ import {
   GroupInitInfo, InviteGroupParams,
   Member, MemberNameParams, SetGroupRoleParams,
   SetGroupVerificationParams, TransferGroupParams
-} from "open-im-sdk";
-import {GroupMemberItem, GroupRole, GroupVerificationType} from "open-im-sdk/types";
+} from "socialuni-sdk/src/plugins/open-im-sdk";
+import {GroupMemberItem, GroupRole, GroupVerificationType} from "socialuni-sdk/src/plugins/open-im-sdk";
 import QNavbar from "../../components/QNavbar/QNavbar.vue";
 import MessageViewParams from "./MessageViewParams";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";

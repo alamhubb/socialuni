@@ -227,6 +227,8 @@ export default class TabsTalk extends Vue {
   }
 
   get talkTabs() {
+    console.log(444)
+    console.log(socialTalkModule)
     return socialTalkModule.talkTabs
   }
 

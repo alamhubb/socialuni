@@ -11,7 +11,7 @@ import JsonUtil from "socialuni-sdk/src/utils/JsonUtil"
 import {socialUserModule} from "socialuni-sdk/src/store/store"
 import {SocialuniChatModuleInterface} from "socialuni-sdk/src/interface/SocialuniChatModuleInterface"
 
-import {OpenIMSDK} from "open-im-sdk"
+import {OpenIMSDK} from "socialuni-sdk/src/plugins/open-im-sdk"
 import {InitConfig} from "open-im-sdk/types"
 import SocialuniConfig from "socialuni-api/src/config/SocialuniConfig"
 import {socialChatModule} from './store'
