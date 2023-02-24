@@ -32,9 +32,7 @@ export default class SocialUserModule extends Pinia {
     async initSocialuniUserModule() {
         //判断是否已登录已有token,userId
         if (this.hasToken) {
-            console.log(2222)
             const {data}: { data: SocialuniMineUserRO } = await SocialuniMineUserAPI.getMineUserInfoAPI();
-            console.log(data)
             //考虑清空缓存的情况
             //从后台根据api获取用户信息， 并且更新user。
             //并且设置

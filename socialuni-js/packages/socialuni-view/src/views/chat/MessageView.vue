@@ -299,8 +299,6 @@ export default class MessageView extends Vue {
 
 
   get messages() {
-    console.log(111111111111)
-    console.log(socialChatModule.messages)
     return socialChatModule.messages
   }
 

@@ -14,7 +14,6 @@ export default class SocialAppModule extends Pinia {
     //app启动的方法
 
     async appLunchAction() {
-        console.log(1111)
         //校验更新
         PlatformUtils.checkUpdate()
         try {

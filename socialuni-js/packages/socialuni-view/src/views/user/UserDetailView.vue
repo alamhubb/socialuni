@@ -50,12 +50,10 @@ export default class UserDetailView extends Vue {
   }
 
   init(params: { userId: string }) {
-    console.log(789)
     const userId = params.userId
     // 这里有问题，有时候直接进入页面没有userId
     SocialuniUserAPI.queryUserDetailAPI(userId).then((res: any) => {
       this.user = res.data
-      console.log(this.user)
       if (!this.user.isMine) {
         socialChatModule.checkFriend(this.user);
         // socialChatModule.setCurChatByUserId(this.user.id)

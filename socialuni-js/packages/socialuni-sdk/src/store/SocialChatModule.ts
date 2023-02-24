@@ -69,13 +69,7 @@ export default class SocialChatModule extends Pinia {
                 url: SocialuniConfig.openImJsImUrl,
                 platformID: OpenImPlatformType.web
             }
-            console.log(666777)
-            console.log(config)
-            console.log(socialChatModule.imToken)
-            console.log(11111111)
             const res = await this.openIm.login(config)
-            console.log(res)
-            console.log(22222222)
             this.setOpenImLoginSuccess()
             this.refreshChats()
             this.initOpenImListeners()
@@ -336,7 +330,6 @@ export default class SocialChatModule extends Pinia {
         // user.avatar = openImChat.avatar
         // user.nickname = openImChat.nickname
         // user.isMine = false
-        console.log(666666)
         socialChatModule.openIm.getHistoryMessageList(options).then(({data}) => {
             const msgs: OpenImMsgRO[] = JsonUtil.toParse(data)
             console.log(msgs)

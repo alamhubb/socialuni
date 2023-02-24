@@ -79,7 +79,6 @@ export default class SocialLocationModule extends Pinia {
 
 
     getDistrictsAction() {
-        console.log(123123)
         // 查询所有城市
         DistrictAPI.queryDistrictsAPI().then((res: any) => {
             this.districts = res.data

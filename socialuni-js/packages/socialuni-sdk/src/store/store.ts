@@ -45,7 +45,6 @@ export async function initSocialuniStore() {
     socialSystemModule.initSystemInfo()
     socialConfigModule.getAppConfigAction()
     socialConfigModule.getReportTypesAction()
-    console.log(socialUserModule)
     if (socialUserModule.token) {
         await socialUserModule.initSocialuniUserModule()
         UserService.getAppLunchDataByHasUser()

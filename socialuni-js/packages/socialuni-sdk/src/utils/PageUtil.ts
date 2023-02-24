@@ -22,7 +22,6 @@ export default class PageUtil {
 
 
     static toUserDetail(userId: string) {
-        console.log(userId)
         RouterUtil.navigateTo(PagePath.userDetail + '?userId=' + userId)
     }
 

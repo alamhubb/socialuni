@@ -5,7 +5,6 @@ import UniPlatformType from "socialuni-constant/constant/uni/UniPlatformType";
 export default class UniLoginUtil {
   public static async getLoginCode (provider?: string): Promise<string> {
     const loginRes = await UniLoginUtil.login(provider)
-    console.log(socialSystemModule.platform)
     if (UniPlatformType.mp === socialSystemModule.platform) {
       //小程序平台获取code
       return loginRes.code
