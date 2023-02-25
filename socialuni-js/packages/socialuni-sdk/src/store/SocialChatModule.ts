@@ -463,7 +463,7 @@ export default class SocialChatModule extends Pinia {
      */
     computedChatsUnreadNumTotalAction() {
         // 获取消息总未读。
-        /*this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
+        this.openIm.getTotalUnreadMsgCount().then(({ data })=>{
             // 获得好友申请
             let recvFriendApplicationLength = this.getRecvFriendApplicationList(0).length;
             console.log('---recvFriendApplicationLength------',recvFriendApplicationLength);
@@ -475,7 +475,7 @@ export default class SocialChatModule extends Pinia {
                 })
             }
         }).catch(err=>{
-        })*/
+        })
         /*this.chatsUnreadNumTotal = this.chats.reduce((total, chat) => {
           total = total + chat.unreadNum
           return total
