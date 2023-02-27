@@ -135,6 +135,7 @@ import PhoneLoginForm from "./PhoneLoginForm.vue";
 import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
+import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 
 @Options({
   components: {
@@ -197,6 +198,7 @@ export default class LoginView extends Vue {
      } else {
        RouterUtil.goBackOrHome()
      }*/
+    PageUtil.goBackOrHome()
   }
 
   switchShowPhoneNum() {
