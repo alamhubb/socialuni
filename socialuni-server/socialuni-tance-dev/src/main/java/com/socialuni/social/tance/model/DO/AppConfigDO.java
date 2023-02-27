@@ -27,6 +27,7 @@ public class AppConfigDO implements Serializable {
     @Id
     private String configKey;
     private String value;
+    private String label;
     private int status;
     @Column(nullable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     private Date createTime;

@@ -1,10 +1,13 @@
 package com.socialuni.social.tance.sdk.config;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Slf4j
 public class SocialuniAppMoreConfigBO {
     //客服微信
     private String serviceWeChat;
@@ -49,7 +52,7 @@ public class SocialuniAppMoreConfigBO {
     //动态页广告展示次数
     private Integer talkShowAdCount = 10;
     //广告展示，自动计算根据上述内容
-    private List<Integer> talkShowAdIndexList;
+    private List<Integer> talkShowAdIndexList = this.computedTalkShowAdIndexList();
     //用户可以获取几次验证码
     private Integer authCodeCount = 30;
     //用户IP可以获取几次验证码
@@ -60,4 +63,39 @@ public class SocialuniAppMoreConfigBO {
     private Integer authCodeValidMinute = 30;
     //限制每天高质量举报次数
     private Integer highLimitReportCount = 20;
+
+    private String qq_account = "491369310";
+    private String wx_mp_id = "";
+    private String wx_app_id = "";
+    private String wx_mp_secret = "";
+    private String wx_merchant_id = "";
+    private String wx_merchant_key = "";
+    private String devPublishDataApiUrl = "";
+
+    private List<Integer> computedTalkShowAdIndexList() {
+        Integer talkAdInterval = this.getTalkShowAdInterval();
+        Integer talkShowAdCount = this.getTalkShowAdCount();
+        if (talkAdInterval < 6) {
+            log.warn("广告展示频率不能低于6");
+        } else if (talkAdInterval > 30) {
+            log.warn("广告展示频率不建议大于30，没有意义");
+        }
+        List<Integer> showAdList = new ArrayList<>();
+        //7, 15, 27, 43, 63, 87, 111, 135, 159, 183
+        //8 12 16 20 24 24 24 24 24
+        //设置广告间隔
+        showAdList.add(talkAdInterval - 1);
+        for (int i = 0; i < talkShowAdCount - 1; i++) {
+            //每次*2 7 15
+            int a = talkAdInterval * (i + 2) - 1;
+            if (i < 4) {
+                //4 ,+一半的次数，叠加
+                a = a + (((i + 1) * i) / 2) * talkAdInterval / 2;
+            } else {
+                a = a + (4 * (i - 1) - 2) * talkAdInterval / 2;
+            }
+            showAdList.add(a);
+        }
+        return showAdList;
+    }
 }

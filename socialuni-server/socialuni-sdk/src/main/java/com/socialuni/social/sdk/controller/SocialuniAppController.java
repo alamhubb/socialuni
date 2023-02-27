@@ -10,7 +10,6 @@ import com.socialuni.social.sdk.constant.socialuni.TalkTabType;
 import com.socialuni.social.sdk.dao.utils.SocialuniCircleDOUtil;
 import com.socialuni.social.sdk.feignAPI.SocialuniAppAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniAppService;
-import com.socialuni.social.tance.sdk.config.SocialuniAppType;
 import com.socialuni.social.user.sdk.model.FrontErrorLogVO;
 import com.socialuni.social.community.sdk.model.HomeSwiperVO;
 import com.socialuni.social.community.sdk.model.SocialuniTalkTabRO;
@@ -52,7 +51,7 @@ public class SocialuniAppController implements SocialuniAppAPI {
         for (String tabName : tabNames) {
             SocialuniTalkTabRO tabRO = new SocialuniTalkTabRO(tabName);
             //不为内置tab才为圈子
-            if (!SocialuniAppType.getDefaultTypeAppConfig().getTabNames().contains(tabName)){
+            if (!SocialuniAppConfig.innerDefaultTabNames.contains(tabName)){
                 SocialuniCircleDO socialuniCircleDO = SocialuniCircleDOUtil.getCircleEnableAllowNull(tabName);
                 if (socialuniCircleDO != null) {
                     SocialuniTalkTabCircleRO homeTabCircleRO = new SocialuniTalkTabCircleRO(socialuniCircleDO);

@@ -1,5 +1,7 @@
 package com.socialuni.social.tance.sdk.enumeration;
 
+import com.socialuni.social.tance.sdk.config.SocialuniAppType;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -31,4 +33,6 @@ public class GenderType {
     }};
 
     public static final List<String> onlyGenders = Arrays.asList(onlyBoy, onlyGirl);
+
+    public static final List<String> genderTypeList = Arrays.asList(GenderType.boy, GenderType.girl);
 }

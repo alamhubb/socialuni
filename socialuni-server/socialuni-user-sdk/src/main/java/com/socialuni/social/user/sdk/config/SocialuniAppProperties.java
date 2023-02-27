@@ -7,6 +7,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "socialuni.app")
 public class SocialuniAppProperties {
     private String staticResourceUrl;
+
+
+
+
+    /*private String staticResourceUrl;
     private Integer systemUserId;
 
     //核心圈子，不写默认为app绑定的圈子
@@ -15,5 +20,7 @@ public class SocialuniAppProperties {
     private String subCircles;
 
     //首页黑名单的tags
-    private String blackTags;
+    private String blackTags;*/
+
+
 }

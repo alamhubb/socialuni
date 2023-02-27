@@ -17,7 +17,6 @@ public class SocialuniSystemConst {
     private static String socialuniDevSecretKey;
     private static String socialuniServerUrl;
     private static String appSocialuniId;
-    private static String systemUserPhoneNum;
     private static String centerSocialuniId;
     public static final Integer homeTalkQueryMinAge = -500;
     public static final Integer homeTalkQueryMaxAge = 500;
@@ -57,15 +56,6 @@ public class SocialuniSystemConst {
     @Value("${socialuni.socialuni-id:#{null}}")
     public void setAppSocialuniId(String appSocialuniId) {
         SocialuniSystemConst.appSocialuniId = appSocialuniId;
-    }
-
-    @Value("${socialuni.system-user-phone-num:11111111111}")
-    public void setSystemUserPhoneNum(String systemUserPhoneNum) {
-        SocialuniSystemConst.systemUserPhoneNum = systemUserPhoneNum;
-    }
-
-    public static String getSystemUserPhoneNum() {
-        return systemUserPhoneNum;
     }
 
     public static String getUserDefaultAvatar() {

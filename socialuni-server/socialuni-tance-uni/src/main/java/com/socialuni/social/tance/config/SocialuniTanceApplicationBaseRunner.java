@@ -4,11 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.socialuni.social.tance.entity.DevAccountEntity;
 import com.socialuni.social.tance.model.DO.AppConfigDO;
 import com.socialuni.social.tance.repository.AppConfigRepository;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfigBO;
+import com.socialuni.social.tance.sdk.config.SocialuniAppConfigInterface;
+import com.socialuni.social.tance.sdk.config.SocialuniAppMoreConfigBO;
+import com.socialuni.social.tance.sdk.enumeration.GenderType;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
+import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.tance.sdk.model.DevAccountModel;
+import com.socialuni.social.user.sdk.constant.GenderTypeNumEnum;
 import com.socialuni.social.user.sdk.logic.entity.SocialUserPhoneEntity;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.utils.WxUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +26,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author qinkaiyuan
@@ -33,6 +42,11 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
     @Resource
     AppConfigRepository appConfigRepository;
 
+    //devId从0开始，可修改默认0的配置，开发者从1开始，0为默认值使用的
+    @Resource
+    SocialuniAppConfigInterface socialuniAppConfigInterface;
+
+
     @Override
     @Async
     public void run(ApplicationArguments args) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
@@ -42,14 +56,24 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
 
         //配置文件里配置的是1的默认的，修改以后，就不再使用了，就判断有没有1，没有的时候创建的时候从配置文件里面拿
 
+        CompletableFuture.supplyAsync(() -> {
+            this.resetDefaultAppConfigs();
+            return null;
+        }).exceptionally(e -> {
+            e.printStackTrace();
+            log.info(e.getMessage());
+            return null;
+        });
+
+        SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
+
+        //每次启动，都用系统默认值，替换insert中的值
 
         DevAccountModel devAccountModel = DevAccountFacade.getDevAccount(1);
 
-        log.info("执行启动命令");
-
         //如果不存在用户，则创建第一个默认的主系统开发者
         if (devAccountModel == null) {
-            String phoneNum = SocialuniSystemConst.getSystemUserPhoneNum();
+            String phoneNum = socialuniAppConfigBO.getSystemUserPhoneNum();
 
             //copy一个default的值
 
@@ -59,22 +83,6 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             } else {
                 devAccountModel = devAccountEntity.createDevAccount(phoneNum, SocialuniSystemConst.getAppSocialuniId());
             }
-
-            AppConfigDO wxIdConfig = new AppConfigDO();
-            wxIdConfig.setDevId(devAccountModel.getId());
-            wxIdConfig.setConfigKey(AppConfigDOKeyConst.wx_mp_id);
-            wxIdConfig.setValue(WxUtil.wx_mp_id);
-
-            AppConfigDO wxSecretConfig = new AppConfigDO();
-            wxSecretConfig.setDevId(devAccountModel.getId());
-            wxSecretConfig.setConfigKey(AppConfigDOKeyConst.wx_mp_secret);
-            wxSecretConfig.setValue(WxUtil.wx_mp_secret);
-
-            List<AppConfigDO> list = new ArrayList<>();
-            list.add(wxIdConfig);
-            list.add(wxSecretConfig);
-
-            appConfigRepository.saveAll(list);
 
 
             // 注册admin的时候，肯定是没有c端用户的，你开发者都没有怎么可能有他下面的用户呢
@@ -97,5 +105,109 @@ public class SocialuniTanceApplicationBaseRunner implements ApplicationRunner {
             }
         }
         //获取省，不包含子节点
+    }
+
+    private void resetDefaultAppConfigs() {
+        List<AppConfigDO> list = new ArrayList<>();
+
+        SocialuniAppConfigBO socialuniAppConfigBO = socialuniAppConfigInterface.getAppConfig();
+        SocialuniAppMoreConfigBO socialuniAppMoreConfigBO = socialuniAppConfigInterface.getAppMoreConfig();
+
+        for (String configKey : AppConfigDOKeyConst.configKeys) {
+            AppConfigDO configDO1 = new AppConfigDO();
+            configDO1.setDevId(0);
+            configDO1.setConfigKey(configKey);
+
+            if (configKey.equals(AppConfigDOKeyConst.appGender)) {
+                configDO1.setValue(socialuniAppConfigBO.getAppGender());
+            } else if (configKey.equals(AppConfigDOKeyConst.systemUserPhoneNum)) {
+                configDO1.setValue(socialuniAppConfigBO.getSystemUserPhoneNum());
+            } else if (configKey.equals(AppConfigDOKeyConst.followTabName)) {
+                configDO1.setValue(socialuniAppConfigBO.getFollowTabName());
+            } else if (configKey.equals(AppConfigDOKeyConst.homeTabName)) {
+                configDO1.setValue(socialuniAppConfigBO.getHomeTabName());
+            } else if (configKey.equals(AppConfigDOKeyConst.cityTabName)) {
+                configDO1.setValue(socialuniAppConfigBO.getCityTabName());
+            } else if (configKey.equals(AppConfigDOKeyConst.tabNames)) {
+                configDO1.setValue(StringUtils.join(socialuniAppConfigBO.getTabNames(), ","));
+            } else if (configKey.equals(AppConfigDOKeyConst.disableUnderageContent)) {
+                configDO1.setValue(socialuniAppConfigBO.getDisableUnderageContent().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasQrCode)) {
+                configDO1.setValue(socialuniAppConfigBO.getDisableContentHasQrCode().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.disableContentHasContactInfo)) {
+                configDO1.setValue(socialuniAppConfigBO.getDisableContentHasContactInfo().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.mustSetSchoolCanPost)) {
+                configDO1.setValue(socialuniAppConfigBO.getMustSetSchoolCanPost().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.serviceWeChat)) {
+                //moreConfig
+                configDO1.setValue(socialuniAppMoreConfigBO.getServiceWeChat());
+            } else if (configKey.equals(AppConfigDOKeyConst.vipPrice)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getVipPrice().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.swiperHeight)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getSwiperHeight().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.homeUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getHomeUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.suggestUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getSuggestUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.contactUsUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getContactUsUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.userAgreementUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getUserAgreementUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.userPrivacyUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getUserPrivacyUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.childProtectUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getChildProtectUrl());
+            } else if (configKey.equals(AppConfigDOKeyConst.rewardedAdLimit)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getRewardedAdLimit().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.contactExpenseShell)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getContactExpenseShell().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.contactUserReceiveShell)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getContactUserReceiveShell().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.errorMsgContactService)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getErrorMsgContactService());
+            } else if (configKey.equals(AppConfigDOKeyConst.errorMsg601UnLogin)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getErrorMsg601UnLogin());
+            } else if (configKey.equals(AppConfigDOKeyConst.errorMsg604SystemError)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getErrorMsg604SystemError());
+            } else if (configKey.equals(AppConfigDOKeyConst.authCodeInterval)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeInterval().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.reportCountHide)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getReportCountHide().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.showSwipers)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getShowSwipers().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.talkShowAdInterval)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getTalkShowAdInterval().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.talkShowAdCount)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getTalkShowAdCount().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.authCodeCount)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeCount().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.authCodeIpCount)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeIpCount().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.talkShowAdIndexList)) {
+                configDO1.setValue(StringUtils.join(socialuniAppMoreConfigBO.getTalkShowAdIndexList(), ","));
+            } else if (configKey.equals(AppConfigDOKeyConst.authCodePhoneCount)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodePhoneCount().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.authCodeValidMinute)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getAuthCodeValidMinute().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.highLimitReportCount)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getHighLimitReportCount().toString());
+            } else if (configKey.equals(AppConfigDOKeyConst.qq_account)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getQq_account());
+            } else if (configKey.equals(AppConfigDOKeyConst.wx_mp_id)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getWx_mp_id());
+            } else if (configKey.equals(AppConfigDOKeyConst.wx_app_id)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getWx_app_id());
+            } else if (configKey.equals(AppConfigDOKeyConst.wx_mp_secret)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getWx_mp_secret());
+            } else if (configKey.equals(AppConfigDOKeyConst.wx_merchant_id)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getWx_merchant_id());
+            } else if (configKey.equals(AppConfigDOKeyConst.wx_merchant_key)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getWx_merchant_key());
+            } else if (configKey.equals(AppConfigDOKeyConst.devPublishDataApiUrl)) {
+                configDO1.setValue(socialuniAppMoreConfigBO.getDevPublishDataApiUrl());
+            }
+            list.add(configDO1);
+        }
+        appConfigRepository.saveAll(list);
     }
 }

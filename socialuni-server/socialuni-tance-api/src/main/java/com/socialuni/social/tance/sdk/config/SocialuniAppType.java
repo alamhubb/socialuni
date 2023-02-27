@@ -8,21 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SocialuniAppType {
-    public static String school = "大学";
-    public static String boy = "男孩";
-    public static String girl = "女孩";
     public static String defaultType = "默认";
 
-    public static List<String> genderTypeList = Arrays.asList(SocialuniAppType.boy, SocialuniAppType.girl);
+//    public static List<String> genderTypeList = Arrays.asList(SocialuniAppType.boy, SocialuniAppType.girl);
 
-    public static SocialuniAppConfigBO getAppConfigByAppType(String appType) {
-        if (StringUtils.isEmpty(appType) || (appType.equals(SocialuniAppType.defaultType))) {
-            return SocialuniAppType.getDefaultTypeAppConfig();
-        } else if (appType.equals(SocialuniAppType.school)) {
-            return SocialuniAppType.getSchoolTypeAppConfig();
-        }
-        throw new SocialParamsException("不支持的应用类型");
-    }
 
     public static SocialuniAppConfigBO getDefaultTypeAppConfig() {
         SocialuniAppConfigBO appConfig = new SocialuniAppConfigBO();
