@@ -4,6 +4,7 @@ import com.socialuni.social.common.api.model.SocialuniContentIdRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 
@@ -63,4 +64,6 @@ public class SocialuniTalkRO extends SocialuniContentIdRO {
     //是否本开发者自身的内容
     private Boolean threeContent;
     private String visibleGender;
+    // 状态
+    private String status;
 }

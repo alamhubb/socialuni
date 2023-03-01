@@ -149,7 +149,7 @@ public class SocialTalkROFactory {
 
     public static SocialuniTalkRO newHomeTalkRO(SocialuniUserDo mineUser, SocialuniTalkDO talkDO, Boolean showAllComment, SocialHomeTabTalkQueryBO queryVO) {
         SocialuniTalkRO socialTalkRO = new SocialuniTalkRO();
-
+        socialTalkRO.setStatus(talkDO.getStatus());
         log.debug("开始每次换砖" + new Date().getTime() / 1000);
 //        Integer talkId = UnionIdDbUtil.createTalkUid(talkDO.getId(), user);
         Integer talkId = talkDO.getUnionId();
