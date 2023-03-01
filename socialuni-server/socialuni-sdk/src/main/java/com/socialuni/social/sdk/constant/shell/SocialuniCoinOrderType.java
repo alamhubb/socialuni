@@ -6,7 +6,7 @@ package com.socialuni.social.sdk.constant.shell;
  * @author qinkaiyuan
  * @date 2018-09-16 10:58
  */
-public class ShellOrderType {
+public class SocialuniCoinOrderType {
     //充值
     public static final String recharge = "充值";
     //consume

@@ -3,15 +3,16 @@ package com.socialuni.social.sdk.feignAPI.business;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.model.SocialCircleRO;
+import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCoinOrdersQueryQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -25,7 +26,11 @@ import java.util.List;
 public interface SocialuniCoinAPI {
     @PostMapping("queryCoinOrders")
     @Operation(summary = "查询用户的金币历史")
-    ResultRO<List<SocialCircleRO>> queryCirclesByCircleType(@RequestBody @Valid SocialuniCoinOrdersQueryQO socialuniCoinOrdersQueryQO);
+    ResultRO<List<SocialCircleRO>> queryCoinOrders(@RequestBody @Valid @NotNull SocialuniCoinOrdersQueryQO socialuniCoinOrdersQueryQO);
 
+
+    @PostMapping("payCoin")
+    @Operation(summary = "充值金币")
+    ResultRO<Void> payCoin(@RequestBody @Valid @NotNull SocialuniPayCoinQO socialuniRechargeCoinQO);
 }
 

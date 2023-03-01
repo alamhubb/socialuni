@@ -9,7 +9,7 @@ import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserSocialCoinDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
@@ -66,9 +66,9 @@ public class SocialuniMineUserDetailROFactory {
 
         SocialuniUserExpandDo SocialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
 
-        SocialuniUserSocialCoinDo SocialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
+        SocialuniUserCoinDo SocialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
 
-        mineUserDetailRO.setSocialCoin(SocialuniUserSocialCoinDo.getSocialCoin());
+        mineUserDetailRO.setSocialCoin(SocialuniUserSocialCoinDo.getCoin());
 
         mineUserDetailRO.setOpenContactInfo(SocialuniUserExpandDo.getOpenContactInfo());
 

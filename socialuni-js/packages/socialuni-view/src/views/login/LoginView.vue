@@ -217,7 +217,7 @@ export default class LoginView extends Vue {
         this.openTypeBtnEnable = false
         this.openTypeBtnEnable = false
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-        await LoginService.providerLogin(socialSystemModule.mpPlatform, result)
+        await LoginService.providerLogin(socialSystemModule.provider, result)
         this.loginAfterHint('登录成功')
       } finally {
         this.goToOAuthPage()

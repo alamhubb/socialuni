@@ -1,8 +1,8 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserSocialCoinDo;
-import com.socialuni.social.user.sdk.repository.SocialuniUserSocialCoinRepository;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.repository.SocialuniUserCoinRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -11,37 +11,37 @@ import javax.annotation.Resource;
 @Component
 @Slf4j
 public class SocialuniUserSocialCoinDOUtil {
-    static SocialuniUserSocialCoinRepository socialuniUserSocialCoinApi;
+    static SocialuniUserCoinRepository socialuniUserSocialCoinApi;
 
     @Resource
-    public void setSocialuniUserSocialCoinRepository(SocialuniUserSocialCoinRepository socialuniUserSocialCoinApi) {
+    public void setSocialuniUserSocialCoinRepository(SocialuniUserCoinRepository socialuniUserSocialCoinApi) {
         SocialuniUserSocialCoinDOUtil.socialuniUserSocialCoinApi = socialuniUserSocialCoinApi;
     }
 
 
-    public static SocialuniUserSocialCoinDo getAllowNull(Integer userId) {
-        SocialuniUserSocialCoinDo socialuniUserExpandDO = socialuniUserSocialCoinApi.findByUserId(userId);
+    public static SocialuniUserCoinDo getAllowNull(Integer userId) {
+        SocialuniUserCoinDo socialuniUserExpandDO = socialuniUserSocialCoinApi.findByUserId(userId);
         return socialuniUserExpandDO;
     }
 
-    public static SocialuniUserSocialCoinDo getNotNull(Integer userId) {
-        SocialuniUserSocialCoinDo socialuniUserExpandDO = getAllowNull(userId);
+    public static SocialuniUserCoinDo getNotNull(Integer userId) {
+        SocialuniUserCoinDo socialuniUserExpandDO = getAllowNull(userId);
         if (socialuniUserExpandDO == null) {
             throw new SocialParamsException("请设置校园名称");
         }
         return socialuniUserExpandDO;
     }
 
-    public static SocialuniUserSocialCoinDo save(SocialuniUserSocialCoinDo socialuniUserExpandDO) {
+    public static SocialuniUserCoinDo save(SocialuniUserCoinDo socialuniUserExpandDO) {
         return socialuniUserSocialCoinApi.savePut(socialuniUserExpandDO);
     }
 
-    public static SocialuniUserSocialCoinDo getOrCreate(Integer userId) {
-        SocialuniUserSocialCoinDo socialuniUserExpandDO = getAllowNull(userId);
+    public static SocialuniUserCoinDo getOrCreate(Integer userId) {
+        SocialuniUserCoinDo socialuniUserExpandDO = getAllowNull(userId);
         if (socialuniUserExpandDO == null) {
-            socialuniUserExpandDO = new SocialuniUserSocialCoinDo();
+            socialuniUserExpandDO = new SocialuniUserCoinDo();
             socialuniUserExpandDO.setUserId(userId);
-            socialuniUserExpandDO.setSocialCoin(0);
+            socialuniUserExpandDO.setCoin(0);
             socialuniUserExpandDO = save(socialuniUserExpandDO);
         }
         return socialuniUserExpandDO;

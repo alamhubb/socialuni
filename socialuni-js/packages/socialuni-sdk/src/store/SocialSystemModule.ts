@@ -37,7 +37,7 @@ export default class SocialSystemModule extends Pinia {
     //h5，小程序，app
     platform = ''
     // 小程序类型
-    mpPlatform = ''
+    provider = ''
 
 
     // 条件编译属性
@@ -76,11 +76,11 @@ export default class SocialSystemModule extends Pinia {
         this.platform = SocialuniPlatformType.mp
         // #ifdef MP-WEIXIN
         this.isMpWx = true
-        this.mpPlatform = SocialuniMpPlatformType.wx
+        this.provider = SocialuniMpPlatformType.wx
         // #endif
         // #ifdef MP-QQ
         this.isMpQQ = true
-        this.mpPlatform = SocialuniMpPlatformType.qq
+        this.provider = SocialuniMpPlatformType.qq
         // #endif
         // #endif
 

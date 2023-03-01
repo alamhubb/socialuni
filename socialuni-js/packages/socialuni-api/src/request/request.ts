@@ -35,7 +35,7 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
     if (SocialuniConfig.socialuniSecretKey){
         config.header.socialuniSecretKey = SocialuniConfig.socialuniSecretKey
     }
-    config.header.provider = socialSystemModule.mpPlatform
+    config.header.provider = socialSystemModule.provider
     config.header.platform = socialSystemModule.platform
     config.header.system = socialSystemModule.system
 

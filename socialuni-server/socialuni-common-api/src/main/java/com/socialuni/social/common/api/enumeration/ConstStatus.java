@@ -26,6 +26,7 @@ public class ConstStatus {
     //违规
     public static final String violation = "违规";
     public static final String success = "成功";
+    public static final String fail = "失败";
     public static final String waitPay = "待支付";
     //不违规
 //    public static final String noViolation = "不违规";
