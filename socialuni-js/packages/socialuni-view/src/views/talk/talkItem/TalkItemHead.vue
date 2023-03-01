@@ -67,6 +67,10 @@
                 @click.stop="confirmDeleteTalk">
             删除
           </text>
+          <text v-if="talk.status != '正常'"
+                class="ml-5 color-red bg-click row-col-end line-h1">
+            {{ talk.status }}
+          </text>
         </view>
       </view>
       <!--                不为自己且未关注-->

@@ -34,5 +34,6 @@ export default class TalkVO {
   public threeId: string = null
   public threeTalkPath: string = null
   public visibleGender: string = null
+  public status: string = null
   // 以后支持修改了，可以修改，但是要支持查看历史版本，显示，修改过，查看历史版本
 }
