@@ -85,7 +85,7 @@ import {socialChatFriendModule, socialChatModule} from "socialuni-sdk/src/store/
 import {onLoad} from "@dcloudio/uni-app";
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
-import {AccessFriendParams, AddFriendParams} from "socialuni-sdk/src/plugins/open-im-sdk";
+import {AccessFriendParams, AddFriendParams} from "open-im-sdk";
 import QTabs from "../../components/QTabs/QTabs.vue";
 import OpenImFriendApplyRO from "socialuni-sdk/src/model/friend/OpenImFriendApplyRO";
 import FriendApplyType from "socialuni-constant/constant/FriendApplyType";
