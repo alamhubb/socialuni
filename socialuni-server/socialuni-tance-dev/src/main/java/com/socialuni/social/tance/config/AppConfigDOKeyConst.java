@@ -37,6 +37,8 @@ public class AppConfigDOKeyConst {
     public static final String rewardedAdLimit = "rewardedAdLimit";
     public static final String contactExpenseShell = "contactExpenseShell";
     public static final String contactUserReceiveShell = "contactUserReceiveShell";
+    //系统抽成比例
+    public static final String sysServiceReceiveRatio = "sysServiceReceiveRatio";
     public static final String errorMsgContactService = "errorMsgContactService";
     public static final String errorMsg601UnLogin = "errorMsg601UnLogin";
     public static final String errorMsg604SystemError = "errorMsg604SystemError";
@@ -84,6 +86,7 @@ public class AppConfigDOKeyConst {
             rewardedAdLimit,
             contactExpenseShell,
             contactUserReceiveShell,
+            sysServiceReceiveRatio,
             errorMsgContactService,
             errorMsg601UnLogin,
             errorMsg604SystemError,

@@ -1,5 +1,6 @@
-package com.socialuni.social.sdk.dao.DO.chat;
+package com.socialuni.social.sdk.dao.DO.bussiness;
 
+import com.socialuni.social.common.api.entity.SocialuniUserContactBaseDO;
 import com.socialuni.social.common.api.entity.SocialuniUserInfoBaseDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,9 @@ import java.io.Serializable;
 )
 @Entity
 @NoArgsConstructor
-public class SocialuniGetUserContactRecordDO extends SocialuniUserInfoBaseDO implements Serializable {
-    @Column(nullable = false)
-    private Integer beUserId;
+public class SocialuniGetUserContactRecordDO extends SocialuniUserContactBaseDO implements Serializable {
 
     public SocialuniGetUserContactRecordDO(Integer userId, Integer beUserId) {
-        super(userId);
-        this.beUserId = beUserId;
+        super(userId, beUserId);
     }
 }

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
  * @date 2019-08-13 23:34
  */
 @Data
-public class SocialuniCircleQueryByTypeQO {
+public class SocialuniCoinOrdersQueryQO {
     @NotBlank(message = "入参为空异常")
-    private String circleTypeName;
+    private String coinOrderType;
 }
