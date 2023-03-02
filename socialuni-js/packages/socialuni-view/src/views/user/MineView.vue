@@ -4,7 +4,12 @@
       <!--      <view class="mr">
               <q-icon icon="setting" size="26" @click="showMoreListAction"></q-icon>
             </view>-->
-      <user-info :user="mineUser"></user-info>
+      <user-info :user="mineUser">
+        <template v-slot:list>
+
+
+        </template>
+      </user-info>
 
       <q-popup v-model="showMoreList" bottom>
         <view class="w65vw flex-col py-xl mt-xl h100p">
@@ -95,15 +100,15 @@ import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
 import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
-import UserInfo from "./UserInfo.vue";
-import LoginView from "../login/LoginView";
 import MsgInput from "socialuni-view/src/components/MsgInput.vue";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
+import {socialChatModule, socialUserModule} from 'socialuni-sdk/src/store/store';
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import UserService from "../../service/UserService";
+import LoginView from "socialuni-view/src/views/login/LoginView.vue";
+import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
+import UserService from "socialuni-sdk/src/service/UserService";
 
 @Options({
   components: {
@@ -116,17 +121,12 @@ import UserService from "../../service/UserService";
     MsgInput
   }
 })
-export default class MineView extends Vue {
-  @Prop({
-    type: Boolean,
-    default: true
-  }) providerLogin: boolean
-
+export default class MinePage extends Vue {
 
   get mineUser() {
     return socialUserModule.mineUser
   }
-
+  providerLogin = true
   showMsgInput = false
   showMoreList = false
   // 登录
@@ -138,6 +138,7 @@ export default class MineView extends Vue {
     })
     onShow(() => {
       this.showMsgInput = true
+      socialChatModule.computedChatsUnreadNumTotalAction();
     })
     onHide(() => {
       this.showMsgInput = false
