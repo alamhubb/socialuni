@@ -4,7 +4,7 @@
     background-color: $color;
   }
   .bg-#{''+$key+''}-gradual {
-    background-image: linear-gradient(180deg, mix($color-white, $color, 85%), $color-bg-default);
+    background-image: linear-gradient(180deg, mix($color-white, $color, 85%), mix($color-white, $color, 90%) 50%, $color-bg-default);
   }
   .bg-#{''+$key+''}_light {
     //深色主题，字体白色，其他主题色
