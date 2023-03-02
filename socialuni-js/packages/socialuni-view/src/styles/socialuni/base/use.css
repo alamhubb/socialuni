@@ -6,10 +6,6 @@
     opacity: 0.8;
 }
 
-.use-click:focus {
-    opacity: 0.8;
-}
-
 .use-click:active {
     opacity: 0.6;
 }

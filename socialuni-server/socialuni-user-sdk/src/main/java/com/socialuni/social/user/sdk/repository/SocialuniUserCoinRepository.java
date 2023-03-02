@@ -15,7 +15,7 @@ public interface SocialuniUserCoinRepository extends JpaRepository<SocialuniUser
             put = {@CachePut(cacheNames = "userSocialCoinByUserId", key = "#socialuniUserExpandDO.userId")}
     )
     default SocialuniUserCoinDo savePut(SocialuniUserCoinDo socialuniUserExpandDO){
-        return this.save(BeanUtil.toBean(socialuniUserExpandDO, SocialuniUserCoinDo.class));
+        return this.save(socialuniUserExpandDO);
     }
 
 }
