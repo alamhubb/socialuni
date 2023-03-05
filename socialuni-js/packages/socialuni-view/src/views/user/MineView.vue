@@ -60,7 +60,7 @@
         <!--      <div class="h200">123</div>-->
       </div>
 
-      <div class="bg-white px-xs bd-radius-10 elevation-4 mx-sm">
+      <div class="bg-white px-sm bd-radius-10 elevation-4 mx-sm">
         <view class="row-col-center my">
           <q-icon icon="map-fill" class="color-sub mr-mn" size="12" />
           地区：{{ mineUser.city || '' }}
@@ -92,6 +92,14 @@
           </div>
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>
+      </div>
+
+      <div class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm">
+        <div class="row-col-center">
+          <q-icon custom-prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
+          <div class="ml-xs">我的贝壳</div>
+        </div>
+        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
       </div>
 
       <socialuni-user-info-img class="mt-sm" :user="mineUser"></socialuni-user-info-img>
@@ -154,6 +162,8 @@
           </view>
         </view>
       </q-popup>
+
+      <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
       <msg-input>
       </msg-input>
     </view>
@@ -222,6 +232,7 @@ import MsgUtil from 'socialuni-sdk/src/utils/MsgUtil'
 export default class MineView extends Vue {
   $refs: {
     moreActionList: QPopup
+    schoolEditDialog: UserSchoolEditDialog
   }
 
   get mineUser () {
@@ -373,6 +384,9 @@ export default class MineView extends Vue {
     PageUtil.toFaceValuePage()
   }
 
+  async toPhonePage () {
+    await PageUtil.toPhonePage()
+  }
 
   toLoveValuePage () {
     if (this.mineUser) {
@@ -380,6 +394,10 @@ export default class MineView extends Vue {
     } else {
       MsgUtil.unLoginMessage()
     }
+  }
+
+  openSetSchoolDialog () {
+    this.$refs.schoolEditDialog.open()
   }
 
 }

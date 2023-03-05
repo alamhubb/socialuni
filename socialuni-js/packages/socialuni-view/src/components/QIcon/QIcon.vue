@@ -1,5 +1,5 @@
 <template>
-  <text class="bg-click" :class="[
+  <text class="use-click" :class="[
       prefixClass?prefixClass:'u-iconfont',
       prefixClass?icon:'uicon-' + icon,
       addClass
@@ -9,19 +9,23 @@
 </template>
 
 <script lang="ts">
-import {Emit, Options, Prop, Vue} from 'vue-property-decorator'
+import { Emit, Options, Prop, Vue } from 'vue-property-decorator'
 
 @Options({})
 export default class QIcon extends Vue {
-  @Prop({type: [String, Number]}) readonly size: string | number
+  @Prop({ type: [String, Number] }) readonly size: string | number
   @Prop({
     type: String,
     default: ''
   }) readonly icon: string
-  @Prop({type: String}) readonly color: string
-  @Prop({type: String}) readonly addClass: string
+  @Prop({ type: String }) readonly color: string
+  @Prop({ type: String }) readonly addClass: string
+  @Prop({
+    type: String,
+    default: ''
+  }) readonly customPrefix: string
 
-  get iconSize() {
+  get iconSize () {
     if (this.size) {
       return this.size
     } else {
@@ -33,7 +37,7 @@ export default class QIcon extends Vue {
     }
   }
 
-  get isMdi() {
+  get isMdi () {
     const prefixs: string[] = this.icon.split('-')
     if (prefixs.length > 1) {
       if (prefixs[0] === 'mdi') {
@@ -43,15 +47,16 @@ export default class QIcon extends Vue {
     return false
   }
 
-  get prefixClass() {
+  get prefixClass () {
     if (this.isMdi) {
       return 'mdi'
     }
-    return ''
+    console.log(this.customPrefix)
+    return this.customPrefix
   }
 
   @Emit()
-  click() {
+  click () {
     return
   }
 }
