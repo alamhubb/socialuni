@@ -4,15 +4,15 @@
       <div class="bg-theme-gradual pd-smm">
         <div class="row-end-center">
           <uni-icons type="compose" size="24" class="use-click" @click="toEditUserInfo"></uni-icons>
-          <q-icon class="ml" icon="setting" size="20"></q-icon>
+          <q-icon class="ml" icon="setting" size="20" @click="showMoreListAction"></q-icon>
         </div>
         <view class="row-col-center mt">
           <image
-              class="size65 bd-round bd-3 bd-white mr-sm"
-              mode="aspectFill"
-              :src="mineUser.avatar"
-              @click="seeAvatarDetail"
-              @longpress="moreAction"
+            class="size65 bd-round bd-3 bd-white mr-sm"
+            mode="aspectFill"
+            :src="mineUser.avatar"
+            @click="seeAvatarDetail"
+            @longpress="moreAction"
           />
           <view class="flex-1 row-between">
             <view class="flex-col flex-1">
@@ -50,12 +50,6 @@
               <text class="text-sm text-gray">被关注</text>
             </view>
           </view>
-
-          <view v-if="!mineUser.hasBeFollowed && mineUser.beFollow" class="row-col-center">
-            <view class="bg-default text-sm px-xs text-gray">
-              对方关注了您
-            </view>
-          </view>
         </view>
 
         <!--      <view class="mr">
@@ -68,13 +62,13 @@
 
       <div class="bg-white px-xs bd-radius-10 elevation-4 mx-sm">
         <view class="row-col-center my">
-          <q-icon icon="map-fill" class="color-sub mr-mn" size="12"/>
+          <q-icon icon="map-fill" class="color-sub mr-mn" size="12" />
           地区：{{ mineUser.city || '' }}
         </view>
 
         <view class="mb">
           <div class="row-col-center">
-            <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12"/>
+            <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12" />
             手机号：
             <view v-if="mineUser.phoneNum" class="row-col-center">
               {{ mineUser.phoneNum }}
@@ -91,7 +85,7 @@
         </view>
 
         <view class="row-col-center mb-smm">
-          <q-icon class="color-sub mr-xs" icon="mdi-school" size="12"/>
+          <q-icon class="color-sub mr-xs" icon="mdi-school" size="12" />
           学校名称：
           <div v-if="mineUser.schoolName" @click="openSetSchoolDialog">
             {{ mineUser.schoolName }}
@@ -104,13 +98,11 @@
 
       <!--    动态-->
 
-      <q-popup v-model="showMoreList" bottom>
-        <view class="w65vw flex-col py-xl mt-xl h100p">
-          <div class="flex-row">
-            <view class="row-center mt-xl font-bold text-lg w100r">
-              清池 app
-            </view>
-          </div>
+      <q-popup ref="moreActionList" bottom>
+        <view class="flex-col h100p pb-50">
+          <view class="row-all-center font-bold text-lg py-sm">
+            清池 app
+          </view>
           <!--<q-row-item>
             <navigator :url="messageSettingUrl" class="row-col-center flex-1">
               <view class="row-col-center flex-1">
@@ -119,64 +111,47 @@
               <q-icon icon="arrow-right" class="font-md margin-right-sm"></q-icon>
             </navigator>
           </q-row-item>-->
-          <q-row-item>
-            <navigator :url="suggestUrl" class="row-col-center flex-1">
-              <view class="row-col-center flex-1">
-                意见反馈
-              </view>
-              <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          <navigator :url="suggestUrl" class="q-box-between bb bg-click">
+            <view class="row-col-center flex-1">
+              意见反馈
+            </view>
+            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          </navigator>
+          <navigator :url="contactUsUrl" class="q-box-between bb bg-click">
+            <view class="row-col-center flex-1">
+              联系我们
+            </view>
+            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          </navigator>
+          <navigator :url="homeUrl" class="q-box-between bb bg-click">
+            <view class="row-col-center flex-1">
+              关于我们
+            </view>
+            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          </navigator>
+          <q-row-item @click="destroyAccount">
+            <view class="row-col-center flex-1">
+              注销账号
+            </view>
+            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          </q-row-item>
+          <q-row-item @click="logout">
+            <view class="row-col-center flex-1">
+              退出登录
+            </view>
+            <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+          </q-row-item>
+          <view class="px-smm py-sm w100p row-wrap">
+            <navigator :url="userAgreementUrl" class="color-blue">
+              《用户协议》
             </navigator>
-          </q-row-item>
-          <q-row-item>
-            <navigator :url="contactUsUrl" class="row-col-center flex-1">
-              <view class="row-col-center flex-1">
-                联系我们
-              </view>
-              <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+            <navigator :url="userPrivacyUrl" class="color-blue">
+              《隐私政策》
             </navigator>
-          </q-row-item>
-          <q-row-item>
-            <navigator :url="homeUrl" class="row-col-center flex-1">
-              <view class="row-col-center flex-1">
-                关于我们
-              </view>
-              <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+            <navigator :url="childProtectUrl" class="color-blue">
+              《儿童个人信息保护规则及监护人须知》
             </navigator>
-          </q-row-item>
-          <q-row-item>
-            <view class="row-col-center flex-1" @click="destroyAccount">
-              <view class="row-col-center flex-1">
-                注销账号
-              </view>
-              <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-            </view>
-          </q-row-item>
-          <q-row-item>
-            <view class="row-col-center flex-1" @click="logout">
-              <view class="row-col-center flex-1">
-                退出登录
-              </view>
-              <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
-            </view>
-          </q-row-item>
-          <div class="flex-row">
-            <view class="w100p row-wrap">
-              <navigator :url="userAgreementUrl" class="color-blue">
-                《用户协议》
-              </navigator>
-              <navigator :url="userPrivacyUrl" class="color-blue">
-                《隐私政策》
-              </navigator>
-              <navigator :url="childProtectUrl" class="color-blue">
-                《儿童个人信息保护规则及监护人须知》
-              </navigator>
-            </view>
-          </div>
-          <div class="flex-row flex-1 col-end">
-            <view class="row-center font-bold pb-xl text-lg w100r">
-              <!--              <u-button size="medium" class="w30vw" @click="showMoreList=false">关闭</u-button>-->
-            </view>
-          </div>
+          </view>
         </view>
       </q-popup>
       <msg-input>
@@ -189,40 +164,40 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, Vue} from 'vue-property-decorator'
-import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
-import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
-import QNavbar from "socialuni-view/src/components/QNavbar/QNavbar.vue";
-import QRowItem from "socialuni-view/src/components/QRowItem/QRowItem.vue";
-import MsgInput from "socialuni-view/src/components/MsgInput.vue";
-import {socialChatModule, socialUserModule} from 'socialuni-sdk/src/store/store';
-import UniUtil from "socialuni-sdk/src/utils/UniUtil";
-import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
-import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
-import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
-import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
-import LoginView from "socialuni-view/src/views/login/LoginView.vue";
-import UserInfo from "socialuni-view/src/views/user/UserInfo.vue";
-import UserService from "socialuni-sdk/src/service/UserService";
-import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
-import PageUtil from "socialuni-sdk/src/utils/PageUtil";
-import CosUtil from "socialuni-sdk/src/utils/CosUtil";
-import DomFile from "socialuni-api/src/model/DomFile";
-import TencentCosAPI from "socialuni-api/src/api/TencentCosAPI";
-import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
-import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
-import QInput from "../../components/QInput/QInput.vue";
-import TalkItem from "../talk/talkItem/TalkItem.vue";
-import TalkOperate from "../talk/talkOperate.vue";
-import QButton from "../../components/QButton/QButton.vue";
-import UserSchoolEditDialog from "./UserSchoolEditDialog.vue";
-import QSearch from "../../components/QSearch/QSearch.vue";
-import QPcModel from "../../components/QPcModel/QPcModel.vue";
-import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
-import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
-import PagePath from "socialuni-constant/constant/PagePath";
-import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
-import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
+import { Options, Prop, Vue } from 'vue-property-decorator'
+import QPopup from 'socialuni-view/src/components/QPopup/QPopup.vue'
+import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
+import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
+import QRowItem from 'socialuni-view/src/components/QRowItem/QRowItem.vue'
+import MsgInput from 'socialuni-view/src/components/MsgInput.vue'
+import { socialChatModule, socialUserModule } from 'socialuni-sdk/src/store/store'
+import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
+import SkipUrlConst from 'socialuni-constant/constant/SkipUrlConst'
+import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'
+import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
+import { onHide, onLoad, onShow } from '@dcloudio/uni-app'
+import LoginView from 'socialuni-view/src/views/login/LoginView.vue'
+import UserInfo from 'socialuni-view/src/views/user/UserInfo.vue'
+import UserService from 'socialuni-sdk/src/service/UserService'
+import SocialuniUserInfoImg from './SocialuniUserInfoImg.vue'
+import PageUtil from 'socialuni-sdk/src/utils/PageUtil'
+import CosUtil from 'socialuni-sdk/src/utils/CosUtil'
+import DomFile from 'socialuni-api/src/model/DomFile'
+import TencentCosAPI from 'socialuni-api/src/api/TencentCosAPI'
+import SocialuniMineUserAPI from 'socialuni-api/src/api/socialuni/SocialuniMineUserAPI'
+import ImgAddQO from 'socialuni-api/src/model/user/ImgAddQO'
+import QInput from '../../components/QInput/QInput.vue'
+import TalkItem from '../talk/talkItem/TalkItem.vue'
+import TalkOperate from '../talk/talkOperate.vue'
+import QButton from '../../components/QButton/QButton.vue'
+import UserSchoolEditDialog from './UserSchoolEditDialog.vue'
+import QSearch from '../../components/QSearch/QSearch.vue'
+import QPcModel from '../../components/QPcModel/QPcModel.vue'
+import SocialGenderTag from '../../components/SocialGenderTag/SocialGenderTag.vue'
+import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
+import PagePath from 'socialuni-constant/constant/PagePath'
+import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
+import MsgUtil from 'socialuni-sdk/src/utils/MsgUtil'
 
 @Options({
   components: {
@@ -245,8 +220,11 @@ import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
   }
 })
 export default class MineView extends Vue {
+  $refs: {
+    moreActionList: QPopup
+  }
 
-  get mineUser() {
+  get mineUser () {
     return socialUserModule.mineUser
   }
 
@@ -257,71 +235,71 @@ export default class MineView extends Vue {
   // 登录
   disabledLoginBtn = false
 
-  created() {
+  created () {
     onLoad((params) => {
       UniUtil.showShareMenu()
     })
     onShow(() => {
       this.showMsgInput = true
-      socialChatModule.computedChatsUnreadNumTotalAction();
+      socialChatModule.computedChatsUnreadNumTotalAction()
     })
     onHide(() => {
       this.showMsgInput = false
     })
   }
 
-  destroyAccount() {
+  destroyAccount () {
     this.hideMoreList()
     socialUserModule.destroyAccount().catch(() => {
       this.showMoreListAction()
     })
   }
 
-  logout() {
+  logout () {
     this.hideMoreList()
     UserService.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }
 
-  showMoreListAction() {
-    this.showMoreList = true
+  showMoreListAction () {
+    this.$refs.moreActionList.open()
   }
 
-  hideMoreList() {
-    this.showMoreList = false
+  hideMoreList () {
+    this.$refs.moreActionList.close()
   }
 
-  onPullDownRefresh() {
+  onPullDownRefresh () {
     this.initQuery()
   }
 
-  get homeUrl(): string {
+  get homeUrl (): string {
     return SkipUrlConst.homeUrl()
   }
 
-  get suggestUrl(): string {
+  get suggestUrl (): string {
     return SkipUrlConst.suggestUrl()
   }
 
-  get contactUsUrl(): string {
+  get contactUsUrl (): string {
     return SkipUrlConst.contactUsUrl()
   }
 
-  get userAgreementUrl(): string {
+  get userAgreementUrl (): string {
     return SkipUrlConst.userAgreementUrl()
   }
 
-  get userPrivacyUrl(): string {
+  get userPrivacyUrl (): string {
     return SkipUrlConst.userPrivacyUrl()
   }
 
-  get childProtectUrl(): string {
+  get childProtectUrl (): string {
     return SkipUrlConst.childProtectUrl()
   }
 
   // 初始查询，会清空已有talk
-  initQuery() {
+  initQuery () {
     if (this.mineUser) {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -331,18 +309,18 @@ export default class MineView extends Vue {
     }
   }
 
-  stopPullDownRefresh() {
+  stopPullDownRefresh () {
     uni.stopPullDownRefresh()
   }
 
-  seeAvatarDetail() {
+  seeAvatarDetail () {
     uni.previewImage({
       current: 0,
       urls: [this.mineUser.avatar]
     })
   }
 
-  moreAction() {
+  moreAction () {
     const menuList: string [] = ['上传头像']
     UniUtil.actionSheet(menuList).then((index: number) => {
       if (index === 0) {
@@ -351,11 +329,11 @@ export default class MineView extends Vue {
     })
   }
 
-  loginOut() {
+  loginOut () {
     UserService.loginOut()
   }
 
-  async uploadUserAvatarImg() {
+  async uploadUserAvatarImg () {
     try {
       const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
@@ -371,19 +349,19 @@ export default class MineView extends Vue {
     }
   }
 
-  toFollowVue(followType: string) {
+  toFollowVue (followType: string) {
     PageUtil.toUserFollowPage(followType)
   }
 
-  toEditUserInfo() {
+  toEditUserInfo () {
     PageUtil.toEditMineInfo()
   }
 
-  toMineUserDetailPage() {
+  toMineUserDetailPage () {
     PageUtil.toUserDetail(this.mineUser.id)
   }
 
-  refreshMine() {
+  refreshMine () {
     AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -391,12 +369,12 @@ export default class MineView extends Vue {
     })
   }
 
-  toFaceValuePage() {
+  toFaceValuePage () {
     PageUtil.toFaceValuePage()
   }
 
 
-  toLoveValuePage() {
+  toLoveValuePage () {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
     } else {
