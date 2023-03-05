@@ -60,7 +60,6 @@
     "socialuni-constant": "../packages/socialuni-constant",
     "socialuni-sdk": "../packages/socialuni-sdk",
     "socialuni-view": "../packages/socialuni-view",
-    "stream-browserify": "^3.0.0",
     "tinycolor2": "^1.4.2",
     "uuid": "^7.0.3",
     "vite-plugin-require-transform": "^1.0.4",
