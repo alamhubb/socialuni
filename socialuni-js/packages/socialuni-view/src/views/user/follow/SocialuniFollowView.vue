@@ -60,6 +60,7 @@ import {socialTalkModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-view/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFollowTag.vue";
+import SocialuniPageQueryQO from "socialuni-api/src/model/common/SocialuniPageQueryQO";
 
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
@@ -67,9 +68,11 @@ import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFol
 export default class FollowView extends Vue {
   tabs = SocialuniFollowType.allFollowTypes
 
-  tabsFollowData = [[], []]
+  tabsFollowData: SocialuniPageQueryQO[] = [new SocialuniPageQueryQO(), new SocialuniPageQueryQO()]
 
   currentTabIndex = 0
+
+  curDate = null
 
   created() {
     onLoad((params: { followType: string }) => {
@@ -81,7 +84,7 @@ export default class FollowView extends Vue {
         }
       }
       onPullDownRefresh(() => {
-        console.log('查询')
+        this.curDate = new Date()
         this.queryUserFollows()
       })
       this.$nextTick(() => {
@@ -95,9 +98,11 @@ export default class FollowView extends Vue {
     FollowAPI.queryUserFollowsAPI().then((res: any) => {
       const followUsers = res.data.follows
       const fansUsers = res.data.fans
+
+
       this.tabsFollowData = [followUsers, fansUsers]
     }).catch(() => {
-      this.tabsFollowData = [[], []]
+      this.tabsFollowData = [new SocialuniPageQueryQO(), new SocialuniPageQueryQO()]
     }).finally(() => {
       uni.stopPullDownRefresh()
     })
