@@ -14,7 +14,7 @@
                 class="size65 bd-radius-xs mr-sm bd"
                 mode="aspectFill"
                 :src="user.avatar"
-                @click="moreAction"
+                @click="seeAvatarDetail"
             />
             <view class="flex-1 row-between h65 py-xs">
               <view class="flex-col flex-1">
@@ -50,21 +50,20 @@
             </view>
           </view>
 
-          <view v-if="user.city" class="row-col-center my">
-            <q-icon class="text-gray mr-xs" icon="map-fill"/>
-            {{ user.city || '' }}
-          </view>
-
-          <view v-if="user.schoolName" class="row-col-center mb-smm">
-            <q-icon class="text-gray mr-xs" icon="mdi-school"/>
-            {{ user.schoolName }}
-          </view>
+          <div class="flex-row my-sm">
+            <view v-if="user.city" class="row-col-center q-tag">
+              <q-icon icon="map-fill" class="color-purple mr-mn" size="12"/>
+              {{ user.city || '' }}
+            </view>
+            <view v-if="user.schoolName" class="row-col-center q-tag">
+              <q-icon class="color-blue_light mr-xs" icon="mdi-school" size="12"/>
+              {{ user.schoolName }}
+            </view>
+          </div>
 
           <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
 
           <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
-
-
         </view>
       </view>
 
@@ -253,10 +252,6 @@ export default class UserDetailView extends Vue {
     // contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
-  get mineUser() {
-    return socialUserModule.mineUser
-  }
-
   get appConfig() {
     return socialConfigModule.appConfig
   }
@@ -265,13 +260,7 @@ export default class UserDetailView extends Vue {
     return socialSystemModule.isIos
   }
 
-  followBtnDisabled = false
   talks: TalkVO[] = []
-  sendFriendApplicationList: Object[] = []
-  recvFriendApplicationList: Object[] = []
-  blackList: Object[] = []
-  friendList: Object[] = []
-  showUserContactBtnDisabled = false
 
   get followStatus() {
     return FollowStatus.getFollowStatus(this.user)
@@ -307,54 +296,6 @@ export default class UserDetailView extends Vue {
     ToastUtil.toastLong('添加好友申请发送成功，请耐心等待对方回复')
   }
 
-  /*shellPayForUserContact () {
-    if (!this.showUserContactBtnDisabled) {
-      this.showUserContactBtnDisabled = true
-      constant userShell = this.mineUser.shell
-      if (userShell >= 10) {
-        Alert.confirm('是否消耗10个贝壳查看用户：' + this.userProp.nickname + ' 的联系方式').then(() => {
-          UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
-            this.userProp.contactAccount = res.data
-            this.userProp.showUserContact = true
-            this.mineUser.shell = userShell - 10
-          })
-        }).finally(() => {
-          this.showUserContactBtnDisabled = false
-        })
-      } else {
-        Alert.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
-          constant provider = systemModule.isApp ? ProviderType.wx : systemModule.mpPlatform
-          PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
-            UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
-              this.userProp.contactAccount = res.data
-              this.userProp.showUserContact = true
-            }).catch((e) => {
-              Alert.error(e)
-            })
-          }).catch(() => {
-            MsgUtil.notPay()
-          })
-        }).finally(() => {
-          this.showUserContactBtnDisabled = false
-        })
-      }
-    } else {
-      Toast.toast('获取中，请稍等')
-    }
-  }*/
-
-  async toPhonePage() {
-    await PageUtil.toPhonePage()
-  }
-
-  toIdentityAuth() {
-    MsgUtil.identityAuthHint()
-  }
-
-  openVip() {
-    PageUtil.toVipPage()
-  }
-
   get isMine(): boolean {
     // 两个都有值，且两个都相等，才为自己
     return this.user.isMine
@@ -375,23 +316,6 @@ export default class UserDetailView extends Vue {
     this.talks.splice(this.talks.findIndex(talk => talk.id === talkId), 1)
   }
 
-  moreAction() {
-    if (this.isMine) {
-      const menuList: string [] = ['上传头像', '退出登录']
-      UniUtil.actionSheet(menuList).then((index: number) => {
-        if (index === 0) {
-          this.uploadUserAvatarImg()
-        } else if (index === 1) {
-          this.loginOut()
-        }
-      })
-    }
-  }
-
-  /*mounted () {
-    this.openEditDialog()
-  }*/
-
   @Watch('user', {
     deep: true,
     immediate: true
@@ -399,11 +323,11 @@ export default class UserDetailView extends Vue {
   watchUserChange(newUser: CenterUserDetailRO, oldUser: CenterUserDetailRO) {
     // 如果以前是null才查询
     if (!oldUser) {
-      this.queryMineTalks()
+      this.queryUserTalks()
     }
   }
 
-  queryMineTalks() {
+  queryUserTalks() {
     if (this.user) {
       SocialuniTalkAPI.queryUserTalksAPI(this.user.id, this.talkIds).then((res: any) => {
         this.talks = res.data
@@ -411,148 +335,17 @@ export default class UserDetailView extends Vue {
     }
   }
 
-
-  getGenderIcon(user: CenterUserDetailRO) {
-    return UserUtil.getGenderIcon(user)
-  }
-
-  getGenderBgColor(user: CenterUserDetailRO) {
-    return UserUtil.getGenderBgColor(user)
-  }
-
-
-  toLoveValuePage() {
-    if (this.mineUser) {
-      PageUtil.toLoveValuePage()
-    } else {
-      MsgUtil.unLoginMessage()
-    }
-  }
-
-  hintJusticeInfo() {
-    ToastUtil.toastLong('正义值，正确举报会增加正义值')
-  }
-
-  hintBindTwice() {
-    AlertUtil.hint('因本软件系统升级导致老用户绑定手机号需要操作两次，给您带来不便，我们在此致以歉意，望您能够谅解，我们会努力做的更好，谢谢您的支持')
-  }
-
-  async addFollow() {
-    if (this.mineUser) {
-      if (!this.followBtnDisabled) {
-        this.followBtnDisabled = true
-        const followAdd: FollowAddVO = new FollowAddVO(this.user.id)
-        // 如果已经关注
-        if (this.user.hasFollowed) {
-          this.user.hasFollowed = false
-          try {
-            // 进行取消关注操作
-            await FollowAPI.cancelFollowAPI(followAdd)
-          } catch (e) {
-            this.user.hasFollowed = true
-          } finally {
-            this.followBtnDisabled = false
-          }
-        } else {
-          this.user.hasFollowed = true
-          try {
-            await FollowAPI.addFollowAPI(followAdd)
-          } catch (e) {
-            this.user.hasFollowed = false
-          } finally {
-            this.followBtnDisabled = false
-          }
-        }
-      }
-    } else {
-      MsgUtil.unLoginMessage()
-    }
-  }
-
-  getFollowStatusColor(followStatus: string) {
-    return UserUtil.getFollowStatusColor(followStatus)
-  }
-
-  toFaceValuePage() {
-    PageUtil.toFaceValuePage()
-  }
-
-  refreshMine() {
-    AlertUtil.confirm('是否刷新用户信息').then(() => {
-      socialUserModule.getMineUserAction().then(() => {
-        ToastUtil.toast('刷新成功')
-      })
+  seeAvatarDetail() {
+    uni.previewImage({
+      current: 0,
+      urls: [this.user.avatar]
     })
   }
-
-
-  //前往贝壳页面
-  toUserShell() {
-    PageUtil.toShellPage()
-  }
-
 
   openSetContactInfo() {
     if (this.isMine) {
       this.$refs.contactInfoEditDialog.open()
     }
   }
-
-  /*getUserContactInfo(){
-    if (!this.showUserContactBtnDisabled) {
-      this.showUserContactBtnDisabled = true
-      const userShell = this.mineUser.socialCoin
-      if (userShell >= 10) {
-        AlertUtil.confirm('是否消耗10个贝壳查看用户：' + this.pageUser.nickname + ' 的联系方式').then(() => {
-          UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
-            this.userProp.contactAccount = res.data
-            this.userProp.showUserContact = true
-            this.mineUser.shell = userShell - 10
-          })
-        }).finally(() => {
-          this.showUserContactBtnDisabled = false
-        })
-      } else {
-        AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
-          const provider = socialSystemModule.isApp ? ProviderType.wx : systemModule.provider
-          PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
-            UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
-              this.userProp.contactAccount = res.data
-              this.userProp.showUserContact = true
-            }).catch((e) => {
-              UniUtil.error(e)
-            })
-          }).catch(() => {
-            MsgUtil.notPay()
-          })
-        }).finally(() => {
-          this.showUserContactBtnDisabled = false
-        })
-      }
-    } else {
-      UniUtil.toast('获取中，请稍等')
-    }
-  }*/
-
-
-  /*switchOpenContact (openContact) {
-    let actionMsg
-    let hintMsg
-    //修改后状态
-    if (openContact) {
-      actionMsg = '是否确定展示联系方式'
-      hintMsg = '展示成功'
-    } else {
-      actionMsg = '是否确定隐藏联系方式'
-      hintMsg = '隐藏成功'
-    }
-    Alert.confirm(actionMsg).then(() => {
-      UserAPI.switchUserContactAPI(openContact).then(() => {
-        Toast.toast(hintMsg)
-      }).catch(() => {
-        this.mineUser.openContact = !openContact
-      })
-    })
-  }*/
 }
 </script>

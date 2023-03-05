@@ -221,6 +221,8 @@ import QPcModel from "../../components/QPcModel/QPcModel.vue";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
 import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
+import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
+import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
 
 @Options({
   components: {
@@ -380,5 +382,27 @@ export default class MineView extends Vue {
   toMineUserDetailPage() {
     PageUtil.toUserDetail(this.mineUser.id)
   }
+
+  refreshMine() {
+    AlertUtil.confirm('是否刷新用户信息').then(() => {
+      socialUserModule.getMineUserAction().then(() => {
+        ToastUtil.toast('刷新成功')
+      })
+    })
+  }
+
+  toFaceValuePage() {
+    PageUtil.toFaceValuePage()
+  }
+
+
+  toLoveValuePage() {
+    if (this.mineUser) {
+      PageUtil.toLoveValuePage()
+    } else {
+      MsgUtil.unLoginMessage()
+    }
+  }
+
 }
 </script>
