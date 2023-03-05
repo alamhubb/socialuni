@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row-col-center">
     <div v-if="user.gender==='girl'" class="q-tag-girl bd-round bd-none q-box-nn text-xs">
       <div class="font-xs">{{ user.age }}</div>
       <q-icon class="ml-nn" add-class="mdi-rotate-45"

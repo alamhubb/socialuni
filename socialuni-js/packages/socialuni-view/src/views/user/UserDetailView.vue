@@ -21,7 +21,7 @@
                 <view class="text-md font-bold" :class="{'color-red':user.vipFlag}">
                   {{ user.nickname }}
                 </view>
-                <view class="flex-row mt-sm">
+                <view class="row-col-center mt-sm">
                   <social-gender-tag :user="user"></social-gender-tag>
                   <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                   <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
@@ -35,7 +35,7 @@
                   </view>
                 </view>
                 <!--              不为自己才展示-->
-                <view class="flex-row mt-sm">
+                <view class="row-col-center mt-sm">
                   <!--                不为自己且未关注-->
                   <!--            不为ios，或者不为付费，则显示-->
                   <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->

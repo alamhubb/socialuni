@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!user.isMine">
+  <div v-if="!user.isMine" class="row-col-center mr-xs">
     <view v-if="FollowStatus.eachFollow === userFollowStatus" class="color-content" @click.stop="addFollow">
       {{ userFollowStatus }}
     </view>
