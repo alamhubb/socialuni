@@ -3,8 +3,10 @@
     <div class="px-sm">
       <div class="mx-mn mb-xs row-between-center">
         <div>相册
-          <span v-if="isMine" class="ml-xs color-sub font-12">(长按图片可删除)</span>
-          <span v-else class="ml-xs color-sub font-12">(长按图片可举报)</span>
+          <template v-if="imgUrls.length">
+            <span v-if="isMine" class="ml-xs color-sub font-12">(长按图片可删除)</span>
+            <span v-else class="ml-xs color-sub font-12">(长按图片可举报)</span>
+          </template>
         </div>
         <div v-if="isMine">
           <q-icon icon="plus" class="color-sub" @click="uploadUserImg"></q-icon>
