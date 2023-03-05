@@ -24,7 +24,7 @@ public class SocialuniFollowController implements SocialuniFollowAPI {
         ResultRO<List<SocialuniUserFollowDetailRO>> resultRO = centerFollowService.queryUserFollows(socialuniPageQueryQO);
         return resultRO;
     }
-
+                                                                                                                                                        
     @Override
     public ResultRO<Void> addFollow(SocialuniFollowAddQO addVO) {
         return centerFollowService.addFollow(addVO);

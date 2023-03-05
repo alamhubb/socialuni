@@ -1,7 +1,7 @@
 <template>
-  <view class="h100p flex-col">
+  <view class="h100p flex-col bg-white">
     <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"
-            class="flex-none bd-radius flex-1 mr-sm">
+            class="flex-none bd-radius flex-1 mr-sm mt-sm">
       <template #default="{tab,index,value}">
         <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>
       </template>
@@ -17,7 +17,7 @@
             <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                  @click="toUserDetailVue(user)">
               <image
-                  class="card-title-avatar"
+                  class="card-title-avatar bd"
                   mode="aspectFill"
                   :src="user.avatar"
               />
@@ -76,12 +76,10 @@ export default class FollowView extends Vue {
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI), new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI)]
 
     onPullDownRefresh(async () => {
-      console.log(123)
       await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(this.tabs[this.currentTabIndex])
       uni.stopPullDownRefresh()
     })
     onReachBottom(() => {
-      console.log(456)
       this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
     })
 

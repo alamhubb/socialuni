@@ -10,7 +10,6 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO> {
     }
 
     async initQuery(queryData) {
-        console.log('zhicinu98')
         this.queryQO = new SocialuniPageQueryQO()
         this.queryQO.queryData = queryData
         try {
