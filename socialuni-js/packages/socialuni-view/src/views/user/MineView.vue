@@ -94,7 +94,7 @@
         </view>
       </div>
 
-      <div class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm">
+      <div class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm" @click="toCoinPage">
         <div class="row-col-center">
           <q-icon custom-prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
           <div class="ml-xs">我的贝壳</div>
@@ -398,6 +398,10 @@ export default class MineView extends Vue {
 
   openSetSchoolDialog () {
     this.$refs.schoolEditDialog.open()
+  }
+
+  toCoinPage(){
+    PageUtil.toCoinPage()
   }
 
 }

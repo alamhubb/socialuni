@@ -580,8 +580,6 @@ export default class UserInfo extends Vue {
     return UserUtil.getGenderBgColor(user)
   }
 
-
-
   toLoveValuePage() {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
@@ -649,7 +647,7 @@ export default class UserInfo extends Vue {
 
   //前往贝壳页面
   toUserShell() {
-    PageUtil.toShellPage()
+    PageUtil.toCoinPage()
   }
 
   openSetSchoolDialog() {

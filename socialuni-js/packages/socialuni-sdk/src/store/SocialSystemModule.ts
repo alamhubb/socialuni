@@ -10,6 +10,10 @@ import SocialuniSystemType from "socialuni-constant/constant/SocialuniSystemType
 @Store
 export default class SocialSystemModule extends Pinia {
     //设备，pc，手机，ipad
+    //@ts-ignore
+    isDev = process.env.NODE_ENV === 'development'
+    //@ts-ignore
+    isProd = process.env.NODE_ENV !== 'development'
     device = null
     isPc = false
     isMobile = false

@@ -19,7 +19,7 @@ export default class PagePath {
   static readonly userContactInfo: string = '/pages/user/contactInfo'
   // 不明白这个页面干嘛的 static readonly messageSetting: string = '/pages/user/messageSetting'
   //贝壳充值界面
-  static readonly userShell: string = '/pages/user/shell'
+  static readonly coin: string = '/pagesLazy/user/coin'
   static readonly userFollow: string = '/pagesLazy/user/follow'
   static readonly loveValue: string = '/pages/user/loveValue'
 

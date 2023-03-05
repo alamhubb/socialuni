@@ -5,7 +5,6 @@ export default class CenterUserDetailRO extends SocialUserContentRO {
     schoolName: string = null
     //im模块的token
     imToken: string = null
-    socialCoin: number = null
     //联系方式
     contactInfo: string = null
     openContactInfo: boolean = null

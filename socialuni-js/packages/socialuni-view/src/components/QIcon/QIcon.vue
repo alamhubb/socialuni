@@ -51,7 +51,6 @@ export default class QIcon extends Vue {
     if (this.isMdi) {
       return 'mdi'
     }
-    console.log(this.customPrefix)
     return this.customPrefix
   }
 

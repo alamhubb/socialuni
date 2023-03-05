@@ -56,13 +56,13 @@ export default class PageUtil {
         }*/
     }
 
-    static toShellPage() {
-        if (socialSystemModule.isIos) {
+    static toCoinPage() {
+        if (socialSystemModule.isProd && socialSystemModule.isIos) {
             // 由于相关规范，iOS功能暂不可用
             MsgUtil.iosDisablePay()
         } else {
             if (socialUserModule.mineUser) {
-                RouterUtil.navigateTo(PagePath.userShell)
+                RouterUtil.navigateTo(PagePath.coin)
             } else {
                 MsgUtil.unLoginMessage()
             }
