@@ -1,5 +1,5 @@
 export default class SocialuniPageQueryQO {
-  firstLoad = false
+  firstLoad = true
   queryTime = new Date()
   listData = []
   queryData = null

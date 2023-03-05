@@ -105,7 +105,8 @@
           "path": "user/follow",
           "style": {
             "navigationBarTitleText": "关注列表",
-            "enablePullDownRefresh": true
+            "enablePullDownRefresh": true,
+            "onReachBottomDistance": 100
           }
         }
       ]

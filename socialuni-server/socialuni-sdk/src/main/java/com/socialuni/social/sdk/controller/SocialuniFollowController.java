@@ -20,8 +20,9 @@ public class SocialuniFollowController implements SocialuniFollowAPI {
     SocialuniFollowService centerFollowService;
 
     @Override
-    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
-        return centerFollowService.queryUserFollows(socialuniPageQueryQO);
+    public ResultRO<List<SocialuniUserFollowDetailRO>> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
+        ResultRO<List<SocialuniUserFollowDetailRO>> resultRO = centerFollowService.queryUserFollows(socialuniPageQueryQO);
+        return resultRO;
     }
 
     @Override

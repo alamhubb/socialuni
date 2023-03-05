@@ -8,13 +8,13 @@
     </q-tabs>
     <div class="flex-1 overflow-hidden">
       <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
-        <swiper-item v-for="(item, swiperIndex) in tabsFollowData" :key="swiperIndex">
-          <div v-if="!tabsFollowData[swiperIndex].length" class="row-all-center h100 color-content">
+        <swiper-item v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
+          <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
             <div v-if="swiperIndex===0">您还没有关注任何人</div>
             <div v-else>您还没有粉丝</div>
           </div>
           <template v-else>
-            <div class="flex-row px-smm py-sm bb" v-for="user in tabsFollowData[swiperIndex]" :key="user.id"
+            <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                  @click="toUserDetailVue">
               <image
                   class="card-title-avatar"
@@ -55,26 +55,35 @@ import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import {onLoad, onPullDownRefresh, onShow} from "@dcloudio/uni-app";
+import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
 import {socialTalkModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-view/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryQO from "socialuni-api/src/model/common/SocialuniPageQueryQO";
+import SocialuniPageQueryUtil from "socialuni-api/src/model/common/SocialuniPageQueryUtil";
 
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
 })
 export default class FollowView extends Vue {
   tabs = SocialuniFollowType.allFollowTypes
-
-  tabsFollowData: SocialuniPageQueryQO[] = [new SocialuniPageQueryQO(), new SocialuniPageQueryQO()]
-
+  tabsPageQueryUtil: SocialuniPageQueryUtil[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
   currentTabIndex = 0
 
-  curDate = null
-
   created() {
+    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI), new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI)]
+
+    onPullDownRefresh(async () => {
+      console.log(123)
+      await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(this.tabs[this.currentTabIndex])
+      uni.stopPullDownRefresh()
+    })
+    onReachBottom(() => {
+      console.log(456)
+      this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
+    })
+
     onLoad((params: { followType: string }) => {
       if (params) {
         if (params.followType === SocialuniFollowType.fans) {
@@ -83,28 +92,10 @@ export default class FollowView extends Vue {
           this.currentTabIndex = 0
         }
       }
-      onPullDownRefresh(() => {
-        this.curDate = new Date()
-        this.queryUserFollows()
-      })
+
       this.$nextTick(() => {
         uni.startPullDownRefresh()
       })
-    })
-
-  }
-
-  queryUserFollows() {
-    FollowAPI.queryUserFollowsAPI().then((res: any) => {
-      const followUsers = res.data.follows
-      const fansUsers = res.data.fans
-
-
-      this.tabsFollowData = [followUsers, fansUsers]
-    }).catch(() => {
-      this.tabsFollowData = [new SocialuniPageQueryQO(), new SocialuniPageQueryQO()]
-    }).finally(() => {
-      uni.stopPullDownRefresh()
     })
   }
 
