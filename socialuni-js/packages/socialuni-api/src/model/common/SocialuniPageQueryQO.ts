@@ -1,11 +1,8 @@
-export default class SocialuniPageQueryQO {
-  firstLoad = true
-  queryTime = new Date()
-  listData = []
-  queryData = null
+import SocialuniContentRO from "../social/SocialuniContentRO";
 
-  static queryByPageAPI (api: Function, queryQO: SocialuniPageQueryQO, queryData: any) {
-    queryQO.queryData = queryData
-    return api(queryQO)
-  }
+export default class SocialuniPageQueryQO<T extends SocialuniContentRO> {
+    firstLoad = true
+    queryTime = new Date()
+    listData: T[] = []
+    queryData = null
 }

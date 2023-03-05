@@ -1,6 +1,7 @@
 import FollowAddVO from '../../model/FollowAddVO'
 import request from '../../request/request';
 import SocialuniPageQueryQO from "../../model/common/SocialuniPageQueryQO";
+import SocialUserContentRO from "../../model/social/SocialUserContentRO";
 
 export default class FollowAPI {
     static addFollowAPI(followAdd: FollowAddVO) {
@@ -11,7 +12,7 @@ export default class FollowAPI {
         return request.post('socialuni/follow/cancelFollow', followAdd)
     }
 
-    static queryUserFollowsAPI(queryQO: SocialuniPageQueryQO) {
+    static queryUserFollowsAPI(queryQO: SocialuniPageQueryQO<SocialUserContentRO>) {
         return request.post('socialuni/follow/queryUserFollows', queryQO)
     }
 }

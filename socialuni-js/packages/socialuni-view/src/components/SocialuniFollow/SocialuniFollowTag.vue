@@ -42,6 +42,7 @@ export default class SocialuniFollowTag extends Vue {
         try {
           // 进行取消关注操作
           await FollowAPI.cancelFollowAPI(followAdd)
+          this.$emit('change', this.user)
         } catch (e) {
           this.user.hasFollowed = true
         } finally {
@@ -51,6 +52,8 @@ export default class SocialuniFollowTag extends Vue {
         this.user.hasFollowed = true
         try {
           await FollowAPI.addFollowAPI(followAdd)
+
+          this.$emit('change', this.user)
         } catch (e) {
           this.user.hasFollowed = false
         } finally {

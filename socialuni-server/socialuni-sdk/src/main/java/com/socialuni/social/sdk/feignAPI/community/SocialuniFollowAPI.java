@@ -20,7 +20,7 @@ import java.util.Map;
 @Tag(name = "社区模块/关注模块")
 public interface SocialuniFollowAPI {
 
-    @GetMapping("queryUserFollows")
+    @PostMapping("queryUserFollows")
     @Operation(summary = "查询用户关注列表")
     ResultRO<List<SocialuniUserFollowDetailRO>> queryUserFollows(@RequestBody @Valid SocialuniPageQueryQO<String> socialuniPageQueryQO);
 

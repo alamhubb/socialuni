@@ -36,7 +36,7 @@
                   </view>
                 </view>
                 <view class="col-center">
-                  <socialuni-follow-tag :user="user"></socialuni-follow-tag>
+                  <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>
                 </view>
               </view>
             </div>
@@ -62,13 +62,14 @@ import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFollowTag.vue";
 import SocialuniPageQueryQO from "socialuni-api/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api/src/model/common/SocialuniPageQueryUtil";
+import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
 
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
 })
 export default class FollowView extends Vue {
   tabs = SocialuniFollowType.allFollowTypes
-  tabsPageQueryUtil: SocialuniPageQueryUtil[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
+  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialUserContentRO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
   currentTabIndex = 0
 
   created() {
@@ -117,6 +118,17 @@ export default class FollowView extends Vue {
   // talkSwipe
   async talkSwiperChange(e) {
     this.currentTabIndex = e.detail.current
+  }
+
+  userFollowChange(user: SocialUserContentRO) {
+    for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
+      for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
+        if (listDatum.id === user.id) {
+          console.log(user.hasFollowed)
+          listDatum.hasFollowed = user.hasFollowed
+        }
+      }
+    }
   }
 }
 </script>

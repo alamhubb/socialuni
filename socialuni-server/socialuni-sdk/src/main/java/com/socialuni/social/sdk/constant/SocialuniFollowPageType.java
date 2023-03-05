@@ -6,5 +6,5 @@ package com.socialuni.social.sdk.constant;
  */
 public class SocialuniFollowPageType {
     public static final String follow = "关注";
-    public static final String fans = " 粉丝";
+    public static final String fans = "粉丝";
 }

@@ -11,6 +11,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserFollowDetailR
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,19 +19,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class SocialQueryUserFollowsDomain {
     @Resource
     private FollowRepository followRepository;
 
     public List<SocialuniUserFollowDetailRO> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
-        if (SocialuniFollowPageType.follow.equals(socialuniPageQueryQO.getQueryData())) {
+        String followPageType = socialuniPageQueryQO.getQueryData();
+
+        log.info("fensi:{}", followPageType);
+        log.info("SocialuniFollowPageType:{}", SocialuniFollowPageType.fans);
+        log.info("fensi:{}", followPageType.equals(SocialuniFollowPageType.fans));
+        if (SocialuniFollowPageType.follow.equals(followPageType)) {
 //查询他的关注
             List<FollowDO> followDOS = followRepository.findTop30ByUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(mineUser.getUnionId(), CommonStatus.enable, socialuniPageQueryQO.getQueryTime());
             List<SocialuniUserDo> userDOS = followDOS.stream().map(followDO -> SocialuniUserUtil.getUserNotNull(followDO.getBeUserId())).collect(Collectors.toList());
             List<SocialuniUserFollowDetailRO> followUserVOS = SocialuniUserFollowDetailROFactory.getUsers(userDOS, mineUser);
             return followUserVOS;
-        } else if (SocialuniFollowPageType.fans.equals(socialuniPageQueryQO.getQueryData())) {
+        } else if (SocialuniFollowPageType.fans.equals(followPageType)) {
 //查询他的粉丝
             List<FollowDO> fans = followRepository.findTop30ByBeUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(mineUser.getUnionId(), CommonStatus.enable, socialuniPageQueryQO.getQueryTime());
             List<SocialuniUserDo> fansUserDOS = fans.stream().map(followDO -> SocialuniUserUtil.getUserNotNull(followDO.getUserId())).collect(Collectors.toList());

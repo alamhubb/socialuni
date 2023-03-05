@@ -1,7 +1,8 @@
 import SocialuniPageQueryQO from './SocialuniPageQueryQO'
+import SocialuniContentRO from "../social/SocialuniContentRO";
 
-export default class SocialuniPageQueryUtil {
-    queryQO = new SocialuniPageQueryQO()
+export default class SocialuniPageQueryUtil<T extends SocialuniContentRO> {
+    queryQO: SocialuniPageQueryQO<T> = new SocialuniPageQueryQO<T>()
     api = null
 
     constructor(api: Function = null) {

@@ -1,6 +1,7 @@
 import {socialUserModule} from "socialuni-sdk/src/store/store";
+import SocialUserContentRO from "../social/SocialuniContentRO";
 
-export default class SocialuniUserRO {
+export default class SocialuniUserRO extends SocialUserContentRO{
     id: string = null
     isMine?: boolean = false
     nickname?: string = null
@@ -12,6 +13,7 @@ export default class SocialuniUserRO {
     type: string = null
 
     constructor(user?: SocialuniUserRO) {
+        super(user)
         if (user) {
             this.id = user.id
             this.nickname = user.nickname;
