@@ -7,9 +7,7 @@ import MsgUtil from "socialuni-sdk/src/utils/MsgUtil"
 import UniUtil from "socialuni-sdk/src/utils/UniUtil"
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil"
 import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil"
-import XmlUtil from "../../../socialuni-sdk/src/utils/XmlUtil"
 import SocialuniConfig from "../config/SocialuniConfig";
-import XmlResultRO from "../model/XmlResultRO";
 import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";
 
 const request: HttpRequest = new HttpRequest()
@@ -93,26 +91,6 @@ request.interceptor.response(
                         break
                 }
             } else {
-                if (typeof result === 'string') {
-                    //之前存在返回xml的情况
-                    if (result.startsWith('<?xml')) {
-                        try {
-                            const errorXml = XmlUtil.parseXml(result)
-                            const resultXml = errorXml.elements[0]
-                            const resultRO: XmlResultRO = {} as XmlResultRO
-                            for (const element of resultXml.elements) {
-                                if (element.elements) {
-                                    resultRO[element.name] = element.elements[0].text
-                                }
-                            }
-                            // const msg: string = socialConfigModule.appMoreConfig.errorMsg604SystemError
-                            AlertUtil.hint(resultRO.Message + '，请重试，' + '请联系客服')
-                            // 返回接口返回的错误信息
-                            return result
-                        } finally {
-                        }
-                    }
-                }
                 MsgUtil.systemErrorMsg()
                 SocialuniAppAPI.sendErrorLogAPI(error.config.url, result)
             }
