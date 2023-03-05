@@ -1,7 +1,8 @@
 <template>
   <scroll-view :scroll-x="true" class="tabUuid overflow-hidden" :class="[uuid]" :scroll-left="leftBoxScrollLeft">
     <div class="row-nowrap position-relative">
-      <div class="barUuid row-all-center" :class="[uuid,isBar?'fixed-index flex-1':'flex-none']"
+      <div class="barUuid row-all-center"
+           :class="[uuid,isBar?'fixed-index':'',(isBar||isFull)?'flex-1':'flex-none']"
            v-for="(tab,index) in tabs" @click="input(index)" :key="tab.name">
         <div class="lineUuid row-all-center" :class="[uuid,index===value?activeClass:unActiveClass]">
           <slot v-bind:tab="tab" v-bind:index="index" v-bind:value="value">
@@ -35,7 +36,7 @@ export default class QTabs extends Vue {
   @Prop({
     default: 'line',
     type: String
-  }) type: 'line' | 'bar'
+  }) type: 'line' | 'bar' | 'full'
 
   get isBar() {
     return this.type === 'bar'
@@ -46,6 +47,9 @@ export default class QTabs extends Vue {
 
   get isLine() {
     return this.type === 'line'
+  }
+  get isFull() {
+    return this.type === 'full'
   }
 
   //唯一id值

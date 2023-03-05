@@ -37,13 +37,13 @@
 
         <view class="row-between-center mt py-xs pr-xs">
           <view class="flex-row flex-1 row-around">
-            <view class="px-lg line-height-1" @click.stop="toFollowVue">
+            <view class="px-lg line-height-1" @click.stop="toFollowVue(SocialuniFollowType.follow)">
               <text class="text-lg font-bold text-black row-center">
                 {{ mineUser.followNum }}
               </text>
               <text class="text-sm text-gray">关注</text>
             </view>
-            <view class="px-lg line-height-1" @click.stop="toFollowVue">
+            <view class="px-lg line-height-1" @click.stop="toFollowVue(SocialuniFollowType.fans)">
               <text class="text-lg font-bold text-black row-center">
                 {{ mineUser.fansNum }}
               </text>
@@ -198,6 +198,7 @@ import MsgInput from "socialuni-view/src/components/MsgInput.vue";
 import {socialChatModule, socialUserModule} from 'socialuni-sdk/src/store/store';
 import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
+import SocialuniFollowType from "socialuni-constant/constant/user/SocialuniFollowType";
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import {onHide, onLoad, onShow} from "@dcloudio/uni-app";
 import LoginView from "socialuni-view/src/views/login/LoginView.vue";
@@ -247,6 +248,7 @@ export default class MineView extends Vue {
     return socialUserModule.mineUser
   }
 
+  SocialuniFollowType = SocialuniFollowType
   providerLogin = true
   showMsgInput = false
   showMoreList = false
@@ -367,8 +369,8 @@ export default class MineView extends Vue {
     }
   }
 
-  toFollowVue() {
-    RouterUtil.navigateTo(PagePath.userFollow)
+  toFollowVue(followType: string) {
+    PageUtil.toUserFollowPage(followType)
   }
 
   toEditUserInfo() {

@@ -1,6 +1,6 @@
 <template>
   <view class="h100p flex-col">
-    <q-tabs :tabs="tabs" :value="currentTabIndex" type="line" @input="tabsChange"
+    <q-tabs :tabs="tabs" :value="currentTabIndex" type="full" @input="tabsChange"
             class="flex-none bd-radius flex-1 mr-sm">
       <template #default="{tab,index,value}">
         <view class="h30 px-xs row-all-center font-md" :class="{'font-md':value===index}">{{ tab }}</view>
@@ -55,7 +55,7 @@ import FollowAPI from "socialuni-api/src/api/socialuni/FollowAPI";
 import SocialGenderTag from "../../../components/SocialGenderTag/SocialGenderTag.vue";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
-import {onPullDownRefresh} from "@dcloudio/uni-app";
+import {onLoad, onPullDownRefresh, onShow} from "@dcloudio/uni-app";
 import {socialTalkModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-view/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
@@ -65,56 +65,51 @@ import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFol
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
 })
 export default class FollowView extends Vue {
-  followPageType: string = SocialuniFollowType.follow
-  SocialuniFollowType = SocialuniFollowType
-  followUsers: SocialUserContentRO[] = []
-  fansUsers: SocialUserContentRO[] = []
-
   tabs = SocialuniFollowType.allFollowTypes
 
   tabsFollowData = [[], []]
 
-  currentTabIndex = 1
+  currentTabIndex = 0
 
   created() {
-    onPullDownRefresh(() => {
-      console.log('查询')
-      this.queryUserFollows()
+    onLoad((params: { followType: string }) => {
+      if (params) {
+        if (params.followType === SocialuniFollowType.fans) {
+          this.currentTabIndex = 1
+        } else {
+          this.currentTabIndex = 0
+        }
+      }
+      onPullDownRefresh(() => {
+        console.log('查询')
+        this.queryUserFollows()
+      })
+      this.$nextTick(() => {
+        uni.startPullDownRefresh()
+      })
     })
-    uni.startPullDownRefresh()
+
   }
 
   queryUserFollows() {
-    this.tabsFollowData = [[], []]
     FollowAPI.queryUserFollowsAPI().then((res: any) => {
-      this.followUsers = res.data.follows
-      this.fansUsers = res.data.fans
-      this.tabsFollowData = [this.followUsers, this.fansUsers]
+      const followUsers = res.data.follows
+      const fansUsers = res.data.fans
+      this.tabsFollowData = [followUsers, fansUsers]
+    }).catch(() => {
+      this.tabsFollowData = [[], []]
     }).finally(() => {
       uni.stopPullDownRefresh()
     })
-  }
-
-  get showUsers(): SocialUserContentRO[] {
-    if (this.followPageType === SocialuniFollowType.fans) {
-      return this.fansUsers
-    } else {
-      return this.followUsers
-    }
-  }
-
-  @Emit()
-  change(user: SocialUserContentRO) {
-    return user
   }
 
   openVip() {
     PageUtil.toVipPage()
   }
 
-  toUserDetailVue() {
+  toUserDetailVue(user: SocialUserContentRO) {
     if (PageUtil.getCurrentPageURI() !== PagePath.userDetail) {
-      PageUtil.navigateTo(PagePath.userDetail + '?userId=' + this.user.id)
+      PageUtil.navigateTo(PagePath.userDetail + '?userId=' + user.id)
     }
   }
 
@@ -125,7 +120,7 @@ export default class FollowView extends Vue {
 
   // talkSwipe
   async talkSwiperChange(e) {
-    const currentTabIndex = e.detail.current
+    this.currentTabIndex = e.detail.current
   }
 }
 </script>

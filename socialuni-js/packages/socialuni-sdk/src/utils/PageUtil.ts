@@ -29,6 +29,10 @@ export default class PageUtil {
         RouterUtil.navigateTo(PagePath.editMineInfo)
     }
 
+    static toUserFollowPage(followType: string) {
+        RouterUtil.navigateTo(PagePath.userFollow + '?followType=' + followType)
+    }
+
     static toUserImgList(userId: string) {
         RouterUtil.navigateTo(PagePath.userImgList + '?userId=' + userId)
     }
@@ -117,8 +121,9 @@ export default class PageUtil {
     static toMessagePageByGroupId(groupId: string) {
         RouterUtil.navigateTo(PagePath.message + '?groupId=' + groupId)
     }
+
     static toIMGroupMember(groupId: string) {
-        RouterUtil.navigateTo("/pages/chat/groupMember?id="+groupId);
+        RouterUtil.navigateTo("/pages/chat/groupMember?id=" + groupId);
     }
 
     static toFaceValuePage() {
