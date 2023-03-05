@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.logic.service;
 
 
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniFollowAPI;
 import com.socialuni.social.sdk.logic.domain.follow.SocialuniFollowUserDomain;
@@ -41,12 +42,12 @@ public class SocialuniFollowService {
         return new ResultRO<>();
     }
 
-    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
+    public ResultRO<List<SocialuniUserFollowDetailRO>> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
         //如果应用，则调用中心
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniFollowAPI.queryUserFollows();
+            return socialuniFollowAPI.queryUserFollows(socialuniPageQueryQO);
         }
-        Map<String, List<SocialuniUserFollowDetailRO>> map = centerFollowUserDomain.queryUserFollows();
+        List<SocialuniUserFollowDetailRO> map = centerFollowUserDomain.queryUserFollows(socialuniPageQueryQO);
         return new ResultRO<>(map);
     }
 }

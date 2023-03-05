@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,10 +33,10 @@ public interface FollowRepository extends JpaRepository<FollowDO, Integer> {
     FollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId);
 
     //查询他的关注
-    List<FollowDO> findTop30ByUserIdAndStatusOrderByUpdateTimeDesc(Integer userId, String status);
+    List<FollowDO> findTop30ByUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer userId, String status, Date updateTime);
 
     //查询他的粉丝
-    List<FollowDO> findTop30ByBeUserIdAndStatusOrderByUpdateTimeDesc(Integer beUserId, String status);
+    List<FollowDO> findTop30ByBeUserIdAndStatusAndUpdateTimeLessThanOrderByUpdateTimeDesc(Integer beUserId, String status, Date updateTime);
 
     //查询他的粉丝
     List<FollowDO> findAllByBeUserIdAndStatus(Integer userId, String status);

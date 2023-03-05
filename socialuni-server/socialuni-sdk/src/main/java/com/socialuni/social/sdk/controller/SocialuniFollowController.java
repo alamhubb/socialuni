@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniFollowAPI;
 import com.socialuni.social.sdk.logic.service.SocialuniFollowService;
@@ -19,8 +20,8 @@ public class SocialuniFollowController implements SocialuniFollowAPI {
     SocialuniFollowService centerFollowService;
 
     @Override
-    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
-        return centerFollowService.queryUserFollows();
+    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
+        return centerFollowService.queryUserFollows(socialuniPageQueryQO);
     }
 
     @Override

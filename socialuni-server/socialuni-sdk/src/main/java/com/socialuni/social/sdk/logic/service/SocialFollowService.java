@@ -35,9 +35,8 @@ public class SocialFollowService {
         return new ResultRO<>();
     }
 
-    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
-        Map<String, List<SocialuniUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows(mineUser);
-        return new ResultRO<>(map);
-    }
+//    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
+//        Map<String, List<SocialuniUserFollowDetailRO>> map = socialQueryUserFollowsDomain.queryUserFollows();
+//        return new ResultRO<>(map);
+//    }
 }
