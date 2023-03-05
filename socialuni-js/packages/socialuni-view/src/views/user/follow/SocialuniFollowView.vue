@@ -15,7 +15,7 @@
           </div>
           <template v-else>
             <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
-                 @click="toUserDetailVue">
+                 @click="toUserDetailVue(user)">
               <image
                   class="card-title-avatar"
                   mode="aspectFill"
@@ -93,7 +93,6 @@ export default class FollowView extends Vue {
           this.currentTabIndex = 0
         }
       }
-
       this.$nextTick(() => {
         uni.startPullDownRefresh()
       })
@@ -105,9 +104,7 @@ export default class FollowView extends Vue {
   }
 
   toUserDetailVue(user: SocialUserContentRO) {
-    if (PageUtil.getCurrentPageURI() !== PagePath.userDetail) {
-      PageUtil.navigateTo(PagePath.userDetail + '?userId=' + user.id)
-    }
+    PageUtil.toUserDetail(user.id)
   }
 
   // tabs通知swiper切换
@@ -120,6 +117,7 @@ export default class FollowView extends Vue {
     this.currentTabIndex = e.detail.current
   }
 
+  //同步更新粉丝和关注列表状态
   userFollowChange(user: SocialUserContentRO) {
     for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
       for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {

@@ -160,7 +160,7 @@ export default class PageUtil {
      * @param pagePath
      * @param params
      */
-    static navigateTo(pagePath: string, params?: object): void {
+    /*static navigateTo(pagePath: string, params?: object): void {
         console.log(pagePath)
         if (params) {
             const paramObj = new URLSearchParams()
@@ -170,7 +170,7 @@ export default class PageUtil {
             pagePath = pagePath + '?' + paramObj.toString()
         }
         uni.navigateTo({url: pagePath})
-    }
+    }*/
 
     static navigateToAll(type: string, skipUrl: string, pageTitle: string) {
         if (type === SkipType.mp) {

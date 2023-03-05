@@ -11,45 +11,42 @@
         <view class="pd-sm bg-white bt-radius-10">
           <view class="row-col-center py-sm">
             <image
-                class="size65 bd-radius-xs mr-sm"
+                class="size65 bd-radius-xs mr-sm bd"
                 mode="aspectFill"
                 :src="user.avatar"
                 @click="moreAction"
             />
-            <view class="flex-1 row-between">
+            <view class="flex-1 row-between h65 py-xs">
               <view class="flex-col flex-1">
-                <view class="text-md" :class="{'color-red':user.vipFlag}">
+                <view class="text-md font-bold" :class="{'color-red':user.vipFlag}">
                   {{ user.nickname }}
                 </view>
-                <view class="flex-row">
-                  <social-gender-tag class="mt-sm" :user="user"></social-gender-tag>
+                <view class="flex-row mt-sm">
+                  <social-gender-tag :user="user"></social-gender-tag>
                   <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                   <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
                 </view>
               </view>
 
-              <!--              不为自己才展示-->
-              <view class="row-col-center">
-                <!--                不为自己且未关注-->
-                <!--            不为ios，或者不为付费，则显示-->
-                <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
-                <q-button @click="toMessagePage" class="mr-sm">
-                  <q-icon icon="mdi-chat-outline" size="14"></q-icon>
-                  私信
-                </q-button>
-                <q-button v-if="!isMine" @click="addFollow">
-                  {{ followStatus }}
-                </q-button>
-                <view v-else class="color-content" @click.stop="addFollow">{{ followStatus }}</view>
-                <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
-              </view>
-            </view>
-          </view>
-          <view class="row-between-center py-xs pr-xs">
-            <view v-if="user.hasBeFollowed" class="row-col-center">
-              <view class="bg-default text-sm px-xs text-gray">
-                对方关注了您
-              </view>
+              <div class="flex-col flex-none">
+                <view class="row-end-center pr-xs">
+                  <view v-if="user.hasBeFollowed && !user.hasFollowed" class="row-col-center bg-default text-sm px-xs text-gray">
+                    对方关注了您
+                  </view>
+                </view>
+                <!--              不为自己才展示-->
+                <view class="flex-row mt-sm">
+                  <!--                不为自己且未关注-->
+                  <!--            不为ios，或者不为付费，则显示-->
+                  <!--              <q-button v-if="!isIos||!user.chat.needPayOpen" @click="toMessagePage">-->
+                  <q-button @click="toMessagePage" class="mr-sm">
+                    <q-icon icon="mdi-chat-outline" size="14"></q-icon>
+                    私信
+                  </q-button>
+                  <socialuni-follow-tag :user="user"></socialuni-follow-tag>
+                  <!--              <button v-else class="cu-btn round bd-gray bg-white" @click.stop="addFollow">已关注</button>-->
+                </view>
+              </div>
             </view>
           </view>
 
@@ -165,9 +162,11 @@ import QPcModel from "../../components/QPcModel/QPcModel.vue";
 import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vue";
 import QRowItem from "../../components/QRowItem/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
+import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
 
 @Options({
   components: {
+    SocialuniFollowTag,
     QPopup, QIcon, QNavbar, MsgInput, UserInfo,
     QInput,
     TalkItem,
