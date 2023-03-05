@@ -109,7 +109,6 @@ $color-border-table: $color-border-default;
 //常规按钮灰色边线
 $color-border-button: #C0C6CC;
 
-
 //基础颜色直接循环拼就行
 $colors-custom-font: (
   //主题色，可自定义，默认和白色一样
@@ -151,6 +150,7 @@ $colors-bg: map-merge($colors-base, $colors-custom-bg);
 
 $colors-custom-border: (
         theme: $color-border-default,
+        sub: $color-theme-sub,
         gray1: $color-border-gray1,
         gray2: $color-border-gray2,
         form: $color-border-form,

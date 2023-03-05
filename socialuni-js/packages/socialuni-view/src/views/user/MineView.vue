@@ -68,13 +68,13 @@
 
       <div class="bg-white px-xs bd-radius-10 elevation-4 mx-sm">
         <view class="row-col-center my">
-          <q-icon class="text-gray mr-xs" icon="map-fill"/>
+          <q-icon icon="map-fill" class="color-sub mr-mn" size="12"/>
           地区：{{ mineUser.city || '' }}
         </view>
 
         <view class="mb">
           <div class="row-col-center">
-            <q-icon class="text-gray mr-xs" icon="mdi-cellphone-android"/>
+            <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12"/>
             手机号：
             <view v-if="mineUser.phoneNum" class="row-col-center">
               {{ mineUser.phoneNum }}
@@ -91,7 +91,7 @@
         </view>
 
         <view class="row-col-center mb-smm">
-          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+          <q-icon class="color-sub mr-xs" icon="mdi-school" size="12"/>
           学校名称：
           <div v-if="mineUser.schoolName" @click="openSetSchoolDialog">
             {{ mineUser.schoolName }}
