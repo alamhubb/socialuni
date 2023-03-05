@@ -99,7 +99,7 @@
           <q-icon custom-prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
           <div class="ml-xs">我的贝壳</div>
         </div>
-        <q-icon icon="arrow-right" class="text-md margin-right-sm"></q-icon>
+        <q-icon icon="arrow-right" class="text-md margin-right-sm color-sub"></q-icon>
       </div>
 
       <socialuni-user-info-img class="mt-sm" :user="mineUser"></socialuni-user-info-img>
