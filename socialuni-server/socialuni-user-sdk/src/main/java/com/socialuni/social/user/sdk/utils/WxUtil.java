@@ -215,7 +215,7 @@ public class WxUtil {
 
     //发起支付
     public static String postPayUrl(String platform, String deviceIp, String orderNo, String total_feeStr, Integer userId) throws IOException {
-        SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(UniappProviderType.wx, userId);
+
 
         String trade_type = WxConst.mp_pay_trade_type;
         String appId = getWx_mp_id();
@@ -223,15 +223,17 @@ public class WxUtil {
         Map<String, String> map = new HashMap<>();
 
         //不为小程序改为app
-        if (!PlatformType.mp.equals(platform)) {
+        if (PlatformType.app.equals(platform)) {
             trade_type = WxConst.app_pay_trade_type;
             appId = getWx_app_id();
         }
         map.put("appid", appId);
-        //指定微信
-        String openId = socialUserAccountDO.getMpOpenId();
+        String openId = null;
         //只有为小程序才有这行
         if (PlatformType.mp.equals(platform)) {
+            SocialUserAccountDO socialUserAccountDO = socialUserAccountRepository.findByProviderAndUserId(UniappProviderType.wx, userId);
+            //指定微信
+            openId = socialUserAccountDO.getMpOpenId();
             map.put("openid", openId);
         }
         String bodystr = "qingchiapp";
@@ -354,45 +356,46 @@ public class WxUtil {
 
     public static String getWx_mp_id() {
         String wx_mp_id = ConfigFacade.getConfigApi().getString("wx_mp_id");
-        if(StringUtils.isBlank(wx_mp_id)){
+        if (StringUtils.isBlank(wx_mp_id)) {
             return WxUtil.wx_mp_id;
-        }else{
+        } else {
             return wx_mp_id;
         }
     }
 
     public static String getWx_app_id() {
         String wx_app_id = ConfigFacade.getConfigApi().getString("wx_app_id");
-        if(StringUtils.isBlank(wx_app_id)){
+        if (StringUtils.isBlank(wx_app_id)) {
             return WxUtil.wx_app_id;
-        }else{
+        } else {
             return wx_app_id;
         }
     }
 
     public static String getWx_mp_secret() {
         String wx_mp_secret = ConfigFacade.getConfigApi().getString("wx_mp_secret");
-        if(StringUtils.isBlank(wx_mp_secret)){
+        if (StringUtils.isBlank(wx_mp_secret)) {
             return WxUtil.wx_mp_secret;
-        }else{
+        } else {
             return wx_mp_secret;
         }
     }
 
     public static String getWx_merchant_id() {
         String wx_merchant_id = ConfigFacade.getConfigApi().getString("wx_merchant_id");
-        if(StringUtils.isBlank(wx_merchant_id)){
+        if (StringUtils.isBlank(wx_merchant_id)) {
+            log.info("微信商户号："+ WxUtil.wx_merchant_id);
             return WxUtil.wx_merchant_id;
-        }else{
+        } else {
             return wx_merchant_id;
         }
     }
 
     public static String getWx_merchant_key() {
         String wx_merchant_key = ConfigFacade.getConfigApi().getString("wx_merchant_key");
-        if(StringUtils.isBlank(wx_merchant_key)){
+        if (StringUtils.isBlank(wx_merchant_key)) {
             return WxUtil.wx_merchant_key;
-        }else{
+        } else {
             return wx_merchant_key;
         }
     }

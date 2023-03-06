@@ -5,7 +5,7 @@ import ImgAddQO from "socialuni-api/src/model/user/ImgAddQO";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 import UserQueryVO from "socialuni-api/src/model/user/UserQueryVO";
 import UserPayResultVO from "socialuni-api/src/model/user/UserPayResultVO";
-import UserPayVO from "socialuni-api/src/model/user/UserPayVO";
+import SocialuniPayCoinQO from "socialuni-api/src/model/user/SocialuniPayCoinQO";
 import SocialuniUserRO from "../../model/user/SocialuniUserRO";
 import SocialuniMineUserRO from "../../model/user/SocialuniMineUserRO";
 
@@ -52,8 +52,8 @@ export default class SocialuniMineUserAPI {
     return request.post<string>('socialuni/mineUser/switchUserContact?openContact=' + openContact)
   }
 
-  static userPayAPI(provider: string, payType: string, amount?: number) {
-    const userPayVO = new UserPayVO(provider, payType, amount)
+  static userPayAPI(provider: string, amount: number) {
+    const userPayVO = new SocialuniPayCoinQO(provider, amount)
     return request.post<UserPayResultVO>('socialuni/mineUser/pay', userPayVO)
   }
 

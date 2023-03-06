@@ -10,11 +10,11 @@ import com.socialuni.social.common.api.utils.UUIDUtil;
 import com.socialuni.social.common.sdk.facade.SocialuniRepositoryFacade;
 import com.socialuni.social.sdk.constant.business.SocialuniAllowPayCoinAmountType;
 import com.socialuni.social.sdk.constant.business.SocialuniPayStatus;
-import com.socialuni.social.sdk.constant.business.SocialuniPayType;
+import com.socialuni.social.sdk.constant.business.SocialuniPayProviderType;
 import com.socialuni.social.sdk.constant.socialuni.ContentStatus;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniPayCoinOrderDO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
-import com.socialuni.social.sdk.model.QO.business.UserPayResultVO;
+import com.socialuni.social.sdk.model.QO.business.SocialuniCoinPayRO;
 import com.socialuni.social.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.constant.UniappProviderType;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -32,14 +32,14 @@ import java.util.Date;
 @Slf4j
 public class SocialuniPayCoinDomain {
     //充值金币
-    public UserPayResultVO payCoin(SocialuniPayCoinQO socialuniRechargeCoinQO) {
+    public SocialuniCoinPayRO payCoin(SocialuniPayCoinQO socialuniRechargeCoinQO) {
         SocialuniUserDo user = SocialuniUserUtil.getMineUserNotNull();
         if (ContentStatus.violation.equals(user.getStatus())) {
             log.warn("系统异常，用户被封禁，应该无法进入此页面");
             throw new SocialSystemException("用户已被封禁，无法进行支付");
         }
         try {
-            String payType = socialuniRechargeCoinQO.getPayType();
+            String payType = socialuniRechargeCoinQO.getProvider();
             Integer payAmount = socialuniRechargeCoinQO.getAmount();
             if (!SocialuniAllowPayCoinAmountType.amountList.contains(payAmount)) {
                 throw new SocialSystemException("错误的充值金额");
@@ -70,11 +70,11 @@ public class SocialuniPayCoinDomain {
             String packageStr;
             String total_feeStr = payAmount.toString();
 
-            UserPayResultVO userPayResultVO = new UserPayResultVO();
+            SocialuniCoinPayRO userPayResultVO = new SocialuniCoinPayRO();
 
             String platform = rechargeOrder.getPlatform();
-            if (SocialuniPayType.wx.equals(payType)) {
-                prepay_id = WxUtil.postPayUrl(platform, userIp, orderNo, total_feeStr, user.getId());
+            if (SocialuniPayProviderType.wx.equals(payType)) {
+                prepay_id = WxUtil.postPayUrl(platform, userIp, orderNo, total_feeStr, user.getUserId());
                 String nonceStr = UUIDUtil.getUUID();
                 String dateStr = Long.toString(new Date().getTime() / DateTimeType.second);
                 if (PlatformType.mp.equals(platform)) {

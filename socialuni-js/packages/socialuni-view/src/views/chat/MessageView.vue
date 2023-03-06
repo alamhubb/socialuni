@@ -75,7 +75,7 @@
             </view>
 
             <view class="row-end-center" @longpress="openMessageMoreHandleDialog(msg)">
-              <q-icon v-if="msg.status === 3"  icon="mdi-alert-circle" size="25" class="mb-nm"/>
+              <q-icon v-if="msg.status === 3" icon="mdi-alert-circle" size="25" class="mb-nm"/>
               <message-item-content :msg="msg"></message-item-content>
             </view>
 
@@ -247,7 +247,6 @@ import PagePath from "socialuni-constant/constant/PagePath";
 import SelectorQuery = UniNamespace.SelectorQuery;
 import NodesRef = UniNamespace.NodesRef;
 import PayType from "socialuni-constant/constant/PayType";
-import MpPlatformType from "socialuni-constant/constant/MpPlatformType";
 import {socialUserModule} from "socialuni-sdk/src/store/store";
 import {socialChatModule} from "socialuni-sdk/src/store/store";
 import MsgUtil from "socialuni-sdk/src/utils/MsgUtil";
@@ -272,9 +271,10 @@ import CosAuthRO from "socialuni-api/src/model/cos/CosAuthRO";
 import CosAPI from "socialuni-api/src/api/CosAPI";
 import MessageItemContent from "./MessageItemContent.vue";
 import QNavbar from "../../components/QNavbar/QNavbar.vue";
+import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
 
 
-@Options({components: {MessageItemContent, SocialuniReportDialog, QIcon,QNavbar}})
+@Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
 export default class MessageView extends Vue {
   public $refs!: {
     reportDialog: SocialuniReportDialog;
@@ -564,16 +564,18 @@ export default class MessageView extends Vue {
   }
 
   toUserDetailVue(userId: string) {
-    PageUtil.toUserDetail( userId)
+    PageUtil.toUserDetail(userId)
   }
-  openMoreMenu(){
-    if(this.groupId){
+
+  openMoreMenu() {
+    if (this.groupId) {
       PageUtil.toIMGroupMember(this.groupId); // 权限问题，内容有问题。
-    }else{
+    } else {
       PageUtil.toUserDetail(this.userId);
     }
 
   }
+
   toVipVue() {
     PageUtil.toVipPage()
   }
@@ -709,7 +711,7 @@ export default class MessageView extends Vue {
             //需要充值提示
           } else {
             await AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
-            const provider = socialSystemModule.isApp ? MpPlatformType.wx : socialSystemModule.provider
+            const provider = socialSystemModule.isMp ? socialSystemModule.provider : SocialuniProviderType.wx
             try {
               await PlatformUtils.pay(provider, PayType.shell, 1)
             } catch (e) {

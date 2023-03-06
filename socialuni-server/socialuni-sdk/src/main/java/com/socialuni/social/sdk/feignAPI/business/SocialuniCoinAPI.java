@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.feignAPI.business;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.community.sdk.model.SocialCircleRO;
+import com.socialuni.social.sdk.model.QO.business.SocialuniCoinPayRO;
 import com.socialuni.social.sdk.model.QO.business.SocialuniPayCoinQO;
 import com.socialuni.social.sdk.model.QO.circle.SocialuniCoinOrdersQueryQO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,6 +32,6 @@ public interface SocialuniCoinAPI {
 
     @PostMapping("payCoin")
     @Operation(summary = "充值金币")
-    ResultRO<Void> payCoin(@RequestBody @Valid @NotNull SocialuniPayCoinQO socialuniRechargeCoinQO);
+    ResultRO<SocialuniCoinPayRO> payCoin(@RequestBody @Valid @NotNull SocialuniPayCoinQO socialuniRechargeCoinQO);
 }
 

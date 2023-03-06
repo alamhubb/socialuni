@@ -10,6 +10,10 @@ import WxUtils from "./WxUtils"
 import MPUtil from "socialuni-sdk/src/utils/MPUtil"
 import APPUtil from "./APPUtil"
 import UserPayResultVO from "../model/user/UserPayResultVO";
+import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
+import SocialuniCoinAPI from "socialuni-api/src/api/socialuni/SocialuniCoinAPI";
+import SocialuniAppAPI from "socialuni-api/src/api/socialuni/SocialuniAppAPI";
+import PageUtil from "./PageUtil";
 
 
 // 统一处理各平台的订阅
@@ -65,29 +69,33 @@ export default class PlatformUtils {
   }
 
   // 统一处理各平台的支付
-  static userPay(provider: string, payType: string, amount?: number) {
-    MsgUtil.notPay()
-    /*return PlatformUtils.pay(provider, payType, amount).then(() => {
-      UserStore.getMineUserAction().then(() => {
+  static userPay(provider: string, amount?: number) {
+    return PlatformUtils.pay(provider, amount).then(() => {
+     /* UserStore.getMineUserAction().then(() => {
         AlertUtil.hint(HintMsg.paySuccessMsg)
         RouterUtil.reLaunch(PagePath.userMine)
-      })
-    })*/
+      })*/
+    })
   }
 
   //所有只能直接调用这个
-  static async pay(provider: string, payType: string, amount?: number) {
+  static async pay(provider: string, amount?: number) {
+    PlatformUtils.checkPay()
+    return SocialuniCoinAPI.payCoinAPI(provider, amount).then((res) => {
+      return PlatformUtils.cashPay(res.data)
+    })
+  }
+
+  //所有只能直接调用这个
+  static async checkPay() {
     if (!socialUserModule.mineUser) {
       return MsgUtil.unLoginMessage()
-    } else if (socialSystemModule.isIos) {
+    } else if (socialSystemModule.isIos && socialSystemModule.isProd) {
       MsgUtil.iosDisablePay()
-      throw ''
+      throw '禁止支付功能'
     }
-    throw ''
-    /*return UserAPI.userPayAPI(provider, payType, amount).then((res) => {
-      return PlatformUtils.cashPay(res.data)
-    })*/
   }
+
 
   private static async cashPay(res: UserPayResultVO): Promise<any> {
     return PlatformUtils.requestPayment(res)
@@ -97,7 +105,7 @@ export default class PlatformUtils {
           ToastUtil.toast(AppMsg.payCancelMsg)
           throw err
         } else {
-          SocialuniAppNewAPI.sendErrorLogAPI(null, '支付失败', res, err)
+          SocialuniAppAPI.sendErrorLogAPI(null, '支付失败', res, err)
           MsgUtil.payFailMsg()
           throw err
         }

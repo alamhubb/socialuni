@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
-public class UserPayResultVO {
+public class SocialuniCoinPayRO {
     private String prepayid;
     @JsonProperty("package")
     private String package_alias;

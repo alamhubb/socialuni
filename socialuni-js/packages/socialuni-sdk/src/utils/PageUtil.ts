@@ -9,6 +9,7 @@ import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailR
 import SocialuniAuthQO from "socialuni-api/src/model/openData/SocialuniAuthQO";
 import SkipType from "socialuni-constant/constant/SkipType";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
+import PlatformUtils from "./PlatformUtils";
 
 
 export default class PageUtil {
@@ -70,15 +71,11 @@ export default class PageUtil {
     }
 
     static toCoinRecordPage(pageType: string) {
-        if (socialSystemModule.isProd && socialSystemModule.isIos) {
-            // 由于相关规范，iOS功能暂不可用
-            MsgUtil.iosDisablePay()
+        PlatformUtils.checkPay()
+        if (socialUserModule.mineUser) {
+            RouterUtil.navigateTo(PagePath.coinRecord + '?pageType=' + pageType)
         } else {
-            if (socialUserModule.mineUser) {
-                RouterUtil.navigateTo(PagePath.coinRecord + '?pageType=' + pageType)
-            } else {
-                MsgUtil.unLoginMessage()
-            }
+            MsgUtil.unLoginMessage()
         }
     }
 

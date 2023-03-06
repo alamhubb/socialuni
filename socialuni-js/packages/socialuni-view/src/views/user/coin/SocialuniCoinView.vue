@@ -19,11 +19,13 @@
         </text>
 
         <div class="flex-row mt">
-          <div v-for="value in payValues" class="flex-1 mx-xs q-box-md" :class="[value===checkedPayValue?'chunk-theme':'chunk-theme_light color-content']" @click="checkPayValue(value)">
+          <div v-for="value in payValues" class="flex-1 mx-xs q-box-md"
+               :class="[value===checkedPayValue?'chunk-theme':'chunk-theme_light color-content']"
+               @click="checkPayValue(value)">
             <div class="row-all-center">
               {{ value }}元
             </div>
-            <div  class="row-all-center font-12 mt-xs">
+            <div class="row-all-center font-12 mt-xs">
               {{ value * 100 }}贝壳
             </div>
           </div>
@@ -45,7 +47,7 @@
 import {Vue, Options} from 'vue-property-decorator'
 import QRowItem from '@/components/div-item/div-item.vue'
 import {onLoad} from "@dcloudio/uni-app";
-import {socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import ShellOrderVO from "socialuni-api/src/model/ShellOrderVO";
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
@@ -53,6 +55,9 @@ import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import QTabs from "../../../components/QTabs/QTabs.vue";
 import SocialuniCoinPageType from "socialuni-constant/constant/user/SocialuniCoinPageType";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
+import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
+import PayType from "socialuni-constant/constant/PayType";
 
 @Options({
   components: {QTabs, QIcon, QButton}
@@ -69,52 +74,28 @@ export default class SocialuniCoinView extends Vue {
     return socialUserModule.mineUser
   }
 
-  currentAmount = Number(this.payValues[0].value)
-
   shellOrders: ShellOrderVO[] = []
 
-  switchAmount(index) {
-    this.currentAmount = Number(this.payValues[index].value)
-  }
 
   created() {
     onLoad(() => {
-      UserAPI.queryShellAPI().then(res => {
+      /*UserAPI.queryShellAPI().then(res => {
         this.shellOrders = res.data
-      })
+      })*/
     })
-  }
-
-
-  toShellInfo() {
-    PageUtil.navigateTo(SkipUrlConst.shellInfoUrl())
   }
 
   userPay() {
     //如果是app则默认微信支付，否则就是当前环境,app 微信，其他微信mp微信，qqmp，qq
-    const provider = systemModule.isApp ? ProviderType.wx : systemModule.provider
-    PlatformUtils.userPay(provider, PayType.shell, this.currentAmount)
-  }
-
-  // tabs通知swiper切换
-  tabsChange(index) {
-    this.currentTabIndex = index
-    if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
-      uni.startPullDownRefresh()
-      this.initQuery()
-    }
-  }
-
-  // talkSwipe
-  talkSwiperChange(e) {
-    this.tabsChange(e.detail.current)
+    const provider = socialSystemModule.isMp ? socialSystemModule.provider : SocialuniProviderType.wx
+    PlatformUtils.userPay(provider, this.checkedPayValue)
   }
 
   toCoinRecordPage(pageType: string) {
     PageUtil.toCoinRecordPage(pageType)
   }
 
-  checkPayValue(payValue){
+  checkPayValue(payValue) {
     this.checkedPayValue = payValue
   }
 }

@@ -29,16 +29,16 @@ public class ShellOrderService {
         Integer userGiveShell = expense - sysTakeShell;
 
         //保存可观察
-        SocialuniGetUserContactRecordDO userContactDO = new SocialuniGetUserContactRecordDO(user.getId(), beUser.getId());
+        SocialuniGetUserContactRecordDO userContactDO = new SocialuniGetUserContactRecordDO(user.getUserId(), beUser.getUserId());
         userContactDO = SocialuniRepositoryFacade.save(userContactDO);
 
         //赠送用户
-        SocialuniCoinOrderDO shellOrderDO = new SocialuniCoinOrderDO(user.getId(), -expense, SocialuniCoinOrderType.expense, userContactDO.getId());
+        SocialuniCoinOrderDO shellOrderDO = new SocialuniCoinOrderDO(user.getUserId(), -expense, SocialuniCoinOrderType.expense, userContactDO.getId());
         //保存
         shellOrderDO = SocialuniRepositoryFacade.save(shellOrderDO);
 
         //关联
-        SocialuniCoinOrderDO shellOrderGiveDO = new SocialuniCoinOrderDO(beUser.getId(), userGiveShell, SocialuniCoinOrderType.income, userContactDO.getId());
+        SocialuniCoinOrderDO shellOrderGiveDO = new SocialuniCoinOrderDO(beUser.getUserId(), userGiveShell, SocialuniCoinOrderType.income, userContactDO.getId());
         //保存关联
         shellOrderGiveDO = SocialuniRepositoryFacade.save(shellOrderGiveDO);
 

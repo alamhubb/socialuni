@@ -1,4 +1,4 @@
-export default class MpPlatformType {
+export default class SocialuniProviderType {
   static readonly wx: wx = 'weixin'
   static readonly qq: qq = 'qq'
 }

@@ -37,6 +37,12 @@ public class SocialuniUserDo extends SocialuniUnionContentBaseDO {
     private String city;
     private String type;
 
+    //获取userId的正确方式为getUserId，这个id不正确
+    @Deprecated
+    public Integer getId() {
+        return super.getId();
+    }
+
     public SocialuniUserDo(Integer userId) {
         super(userId, SocialuniContentType.user, null);
     }
