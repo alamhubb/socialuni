@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-property-decorator'
-import SocialuniCoinView from 'socialuni-view/src/views/user/SocialuniCoinView.vue'
+import SocialuniCoinView from 'socialuni-view/src/views/user/coin/SocialuniCoinView.vue'
 
 @Options({
   components: {

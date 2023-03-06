@@ -69,6 +69,19 @@ export default class PageUtil {
         }
     }
 
+    static toCoinRecordPage(pageType: string) {
+        if (socialSystemModule.isProd && socialSystemModule.isIos) {
+            // 由于相关规范，iOS功能暂不可用
+            MsgUtil.iosDisablePay()
+        } else {
+            if (socialUserModule.mineUser) {
+                RouterUtil.navigateTo(PagePath.coinRecord + '?pageType=' + pageType)
+            } else {
+                MsgUtil.unLoginMessage()
+            }
+        }
+    }
+
     static toLoveValuePage() {
         RouterUtil.navigateTo(PagePath.loveValue)
     }
@@ -160,6 +173,7 @@ export default class PageUtil {
      * @param pagePath
      * @param params
      */
+
     /*static navigateTo(pagePath: string, params?: object): void {
         console.log(pagePath)
         if (params) {

@@ -20,6 +20,7 @@ export default class PagePath {
   // 不明白这个页面干嘛的 static readonly messageSetting: string = '/pages/user/messageSetting'
   //贝壳充值界面
   static readonly coin: string = '/pagesLazy/user/coin'
+  static readonly coinRecord: string = '/pagesLazy/user/coinRecord'
   static readonly userFollow: string = '/pagesLazy/user/follow'
   static readonly loveValue: string = '/pages/user/loveValue'
 

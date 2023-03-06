@@ -115,6 +115,13 @@
             "navigationBarTitleText": "贝壳充值",
             "enablePullDownRefresh": true
           }
+        },
+        {
+          "path": "user/coinRecord",
+          "style": {
+            "navigationBarTitleText": "贝壳记录",
+            "enablePullDownRefresh": true
+          }
         }
       ]
     }
