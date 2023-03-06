@@ -76,8 +76,7 @@ export default class FollowView extends Vue {
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI), new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI)]
 
     onPullDownRefresh(async () => {
-      await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(this.tabs[this.currentTabIndex])
-      uni.stopPullDownRefresh()
+      await this.initQuery()
     })
     onReachBottom(() => {
       this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
@@ -97,6 +96,11 @@ export default class FollowView extends Vue {
     })
   }
 
+  async initQuery() {
+    await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(this.tabs[this.currentTabIndex])
+    uni.stopPullDownRefresh()
+  }
+
   openVip() {
     PageUtil.toVipPage()
   }
@@ -106,13 +110,17 @@ export default class FollowView extends Vue {
   }
 
   // tabs通知swiper切换
-  async tabsChange(index) {
+  tabsChange(index) {
     this.currentTabIndex = index
+    if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
+      uni.startPullDownRefresh()
+      this.initQuery()
+    }
   }
 
   // talkSwipe
-  async talkSwiperChange(e) {
-    this.currentTabIndex = e.detail.current
+  talkSwiperChange(e) {
+    this.tabsChange(e.detail.current)
   }
 
   //同步更新粉丝和关注列表状态
