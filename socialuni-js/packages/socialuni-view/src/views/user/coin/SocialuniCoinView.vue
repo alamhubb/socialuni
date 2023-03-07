@@ -36,7 +36,7 @@
         </div>
 
         <div class="mt">
-          <q-button class="w100p font-bold" @click="userPay" md>充值</q-button>
+          <q-button class="w100p font-bold" @click="userPay" md theme>充值</q-button>
         </div>
       </div>
     </div>

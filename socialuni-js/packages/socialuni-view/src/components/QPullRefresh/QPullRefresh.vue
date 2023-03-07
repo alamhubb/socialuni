@@ -1,5 +1,6 @@
 <template>
   <view
+      class="h100p"
       :style="{
 				transform: 'translateY('+ pageDeviation +'px)',
 				transition: pageTransition + 's',

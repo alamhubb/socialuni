@@ -19,6 +19,6 @@ import javax.persistence.UniqueConstraint;
 @Data
 @NoArgsConstructor
 public class SocialuniUserCoinDo extends SocialuniContentBaseDO {
-//    @Column(nullable = false),这段代码导致线上系统报错
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer coin;
 }
