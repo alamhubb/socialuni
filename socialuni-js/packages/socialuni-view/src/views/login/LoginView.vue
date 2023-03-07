@@ -81,7 +81,7 @@
               <q-button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="bindPhoneNum"
                         add-class="bg-gradual-phone"
               >
-                <q-icon custom-prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
+                <q-icon prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
                 绑定手机号
               </q-button>
               <!--                <button v-else-if="isMpWx" :disabled="!openTypeBtnEnable"

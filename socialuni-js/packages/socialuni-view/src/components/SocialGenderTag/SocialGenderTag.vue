@@ -1,12 +1,12 @@
 <template>
   <div class="row-col-center">
-    <div v-if="user.gender==='girl'" class="q-tag-girl bd-round bd-none q-box-nn text-xs">
+    <div v-if="user.gender==='girl'" class="q-tag-girl-bd bd-round q-box-nn">
       <div class="font-xs">{{ user.age }}</div>
       <q-icon class="ml-nn" add-class="mdi-rotate-45"
               size="12"
               :icon="getGenderIcon(user)"/>
     </div>
-    <div v-else class="q-tag-boy bd-round bd-none q-box-nn">
+    <div v-else class="q-tag-boy-bd bd-round q-box-nn">
       <div class="font-xs">{{ user.age }}</div>
       <q-icon class="ml-nn"
               size="12"

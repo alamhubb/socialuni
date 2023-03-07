@@ -8,11 +8,11 @@
         </div>
         <view class="row-col-center mt">
           <image
-            class="size65 bd-round bd-3 bd-white mr-sm"
-            mode="aspectFill"
-            :src="mineUser.avatar"
-            @click="seeAvatarDetail"
-            @longpress="moreAction"
+              class="size65 bd-round bd-3 bd-white mr-sm"
+              mode="aspectFill"
+              :src="mineUser.avatar"
+              @click="seeAvatarDetail"
+              @longpress="moreAction"
           />
           <view class="flex-1 row-between">
             <view class="flex-col flex-1">
@@ -37,13 +37,15 @@
 
         <view class="row-between-center mt py-xs pr-xs">
           <view class="flex-row flex-1 row-around">
-            <view class="px-lg line-height-1 col-all-center use-click" @click.stop="toFollowVue(SocialuniFollowType.follow)">
+            <view class="px-lg line-height-1 col-all-center use-click"
+                  @click.stop="toFollowVue(SocialuniFollowType.follow)">
               <text class="text-lg font-bold color-main row-center">
                 {{ mineUser.followNum }}
               </text>
               <text class="font-12 color-content mt-xs">关注</text>
             </view>
-            <view class="px-lg line-height-1 col-all-center use-click" @click.stop="toFollowVue(SocialuniFollowType.fans)">
+            <view class="px-lg line-height-1 col-all-center use-click"
+                  @click.stop="toFollowVue(SocialuniFollowType.fans)">
               <text class="text-lg font-bold color-main row-center">
                 {{ mineUser.fansNum }}
               </text>
@@ -62,13 +64,13 @@
 
       <div class="bg-white px-sm bd-radius-10 elevation-4 mx-sm">
         <view class="row-col-center my">
-          <q-icon icon="map-fill" class="color-sub mr-mn" size="12" />
+          <q-icon icon="map-fill" class="color-sub mr-mn" size="12"/>
           地区：{{ mineUser.city || '' }}
         </view>
 
         <view class="mb">
           <div class="row-col-center">
-            <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12" />
+            <q-icon class="color-sub mr-xs" icon="mdi-cellphone-android" size="12"/>
             手机号：
             <view v-if="mineUser.phoneNum" class="row-col-center">
               {{ mineUser.phoneNum }}
@@ -85,18 +87,43 @@
         </view>
 
         <view class="row-col-center mb-smm">
-          <q-icon class="color-sub mr-xs" icon="mdi-school" size="12" />
+          <q-icon class="color-sub mr-xs" icon="mdi-school" size="12"/>
           学校名称：
           <div v-if="mineUser.schoolName" @click="openSetSchoolDialog">
             {{ mineUser.schoolName }}
           </div>
           <div v-else class="q-tag" @click="openSetSchoolDialog">设置大学名称</div>
         </view>
+
+        <!--        <view class="row-col-center mb-smm">
+                  <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
+                  联系方式：
+                  <div v-if="mineUser.contactInfo" @click="openSetSchoolDialog">
+                    {{ mineUser.contactInfo }}
+                  </div>
+                  <div v-else class="q-tag" @click="openSetSchoolDialog">设置联系方式</div>
+                </view>-->
+
+        <div class="row-col-center mb-smm">
+          <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
+          联系方式：
+          <div v-if="mineUser.contactInfo" class="q-tag row-col-center" @click="openSetContactInfo">
+            {{ mineUser.contactInfo }}
+            <div class="ml-xs">({{ mineUser.openContactInfo ? '他人可获取' : '他人不可获取' }})</div>
+          </div>
+          <div v-else class="row-col-center q-tag" @click="openSetContactInfo">设置联系方式</div>
+        </div>
+<!--        <div v-if="mineUser.openContactInfo" class="row-col-center mb-smm">
+          <q-icon class="text-gray mr-xs" icon="mdi-school"/>
+          联系方式：
+          <div class="q-tag">{{ mineUser.contactInfo }}(点击获取联系方式)</div>
+        </div>-->
       </div>
 
-      <div class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm" @click="toCoinPage">
+      <div class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
+           @click="toCoinPage">
         <div class="row-col-center">
-          <q-icon custom-prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
+          <q-icon prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
           <div class="ml-xs">我的贝壳</div>
         </div>
         <q-icon icon="arrow-right" class="text-md margin-right-sm color-sub"></q-icon>
@@ -164,6 +191,7 @@
       </q-popup>
 
       <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
+      <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
       <msg-input>
       </msg-input>
     </view>
@@ -174,18 +202,18 @@
 </template>
 
 <script lang="ts">
-import { Options, Prop, Vue } from 'vue-property-decorator'
+import {Options, Prop, Vue} from 'vue-property-decorator'
 import QPopup from 'socialuni-view/src/components/QPopup/QPopup.vue'
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
 import QRowItem from 'socialuni-view/src/components/QRowItem/QRowItem.vue'
 import MsgInput from 'socialuni-view/src/components/MsgInput.vue'
-import { socialChatModule, socialUserModule } from 'socialuni-sdk/src/store/store'
+import {socialChatModule, socialUserModule} from 'socialuni-sdk/src/store/store'
 import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
 import SkipUrlConst from 'socialuni-constant/constant/SkipUrlConst'
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'
 import ToastUtil from 'socialuni-sdk/src/utils/ToastUtil'
-import { onHide, onLoad, onShow } from '@dcloudio/uni-app'
+import {onHide, onLoad, onShow} from '@dcloudio/uni-app'
 import LoginView from 'socialuni-view/src/views/login/LoginView.vue'
 import UserInfo from 'socialuni-view/src/views/user/UserInfo.vue'
 import UserService from 'socialuni-sdk/src/service/UserService'
@@ -208,9 +236,11 @@ import RouterUtil from 'socialuni-sdk/src/utils/RouterUtil'
 import PagePath from 'socialuni-constant/constant/PagePath'
 import AlertUtil from 'socialuni-sdk/src/utils/AlertUtil'
 import MsgUtil from 'socialuni-sdk/src/utils/MsgUtil'
+import UserContactInfoEditDialog from "./UserContactInfoEditDialog.vue";
 
 @Options({
   components: {
+    UserContactInfoEditDialog,
     LoginView,
     QPopup,
     QIcon,
@@ -233,9 +263,10 @@ export default class MineView extends Vue {
   $refs: {
     moreActionList: QPopup
     schoolEditDialog: UserSchoolEditDialog
+    contactInfoEditDialog: UserContactInfoEditDialog;
   }
 
-  get mineUser () {
+  get mineUser() {
     return socialUserModule.mineUser
   }
 
@@ -246,7 +277,7 @@ export default class MineView extends Vue {
   // 登录
   disabledLoginBtn = false
 
-  created () {
+  created() {
     onLoad((params) => {
       UniUtil.showShareMenu()
     })
@@ -259,58 +290,58 @@ export default class MineView extends Vue {
     })
   }
 
-  destroyAccount () {
+  destroyAccount() {
     this.hideMoreList()
     socialUserModule.destroyAccount().catch(() => {
       this.showMoreListAction()
     })
   }
 
-  logout () {
+  logout() {
     this.hideMoreList()
     UserService.loginOut().catch(() => {
       this.showMoreListAction()
     })
   }
 
-  showMoreListAction () {
+  showMoreListAction() {
     this.$refs.moreActionList.open()
   }
 
-  hideMoreList () {
+  hideMoreList() {
     this.$refs.moreActionList.close()
   }
 
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     this.initQuery()
   }
 
-  get homeUrl (): string {
+  get homeUrl(): string {
     return SkipUrlConst.homeUrl()
   }
 
-  get suggestUrl (): string {
+  get suggestUrl(): string {
     return SkipUrlConst.suggestUrl()
   }
 
-  get contactUsUrl (): string {
+  get contactUsUrl(): string {
     return SkipUrlConst.contactUsUrl()
   }
 
-  get userAgreementUrl (): string {
+  get userAgreementUrl(): string {
     return SkipUrlConst.userAgreementUrl()
   }
 
-  get userPrivacyUrl (): string {
+  get userPrivacyUrl(): string {
     return SkipUrlConst.userPrivacyUrl()
   }
 
-  get childProtectUrl (): string {
+  get childProtectUrl(): string {
     return SkipUrlConst.childProtectUrl()
   }
 
   // 初始查询，会清空已有talk
-  initQuery () {
+  initQuery() {
     if (this.mineUser) {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -320,18 +351,18 @@ export default class MineView extends Vue {
     }
   }
 
-  stopPullDownRefresh () {
+  stopPullDownRefresh() {
     uni.stopPullDownRefresh()
   }
 
-  seeAvatarDetail () {
+  seeAvatarDetail() {
     uni.previewImage({
       current: 0,
       urls: [this.mineUser.avatar]
     })
   }
 
-  moreAction () {
+  moreAction() {
     const menuList: string [] = ['上传头像']
     UniUtil.actionSheet(menuList).then((index: number) => {
       if (index === 0) {
@@ -340,11 +371,11 @@ export default class MineView extends Vue {
     })
   }
 
-  loginOut () {
+  loginOut() {
     UserService.loginOut()
   }
 
-  async uploadUserAvatarImg () {
+  async uploadUserAvatarImg() {
     try {
       const cosAuthRO = await CosUtil.getCosAuthRO()
       const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
@@ -360,19 +391,19 @@ export default class MineView extends Vue {
     }
   }
 
-  toFollowVue (followType: string) {
+  toFollowVue(followType: string) {
     PageUtil.toUserFollowPage(followType)
   }
 
-  toEditUserInfo () {
+  toEditUserInfo() {
     PageUtil.toEditMineInfo()
   }
 
-  toMineUserDetailPage () {
+  toMineUserDetailPage() {
     PageUtil.toUserDetail(this.mineUser.id)
   }
 
-  refreshMine () {
+  refreshMine() {
     AlertUtil.confirm('是否刷新用户信息').then(() => {
       socialUserModule.getMineUserAction().then(() => {
         ToastUtil.toast('刷新成功')
@@ -380,15 +411,15 @@ export default class MineView extends Vue {
     })
   }
 
-  toFaceValuePage () {
+  toFaceValuePage() {
     PageUtil.toFaceValuePage()
   }
 
-  async toPhonePage () {
+  async toPhonePage() {
     await PageUtil.toPhonePage()
   }
 
-  toLoveValuePage () {
+  toLoveValuePage() {
     if (this.mineUser) {
       PageUtil.toLoveValuePage()
     } else {
@@ -396,13 +427,16 @@ export default class MineView extends Vue {
     }
   }
 
-  openSetSchoolDialog () {
+  openSetSchoolDialog() {
     this.$refs.schoolEditDialog.open()
   }
 
-  toCoinPage(){
+  toCoinPage() {
     PageUtil.toCoinPage()
   }
 
+  openSetContactInfo() {
+    this.$refs.contactInfoEditDialog.open()
+  }
 }
 </script>

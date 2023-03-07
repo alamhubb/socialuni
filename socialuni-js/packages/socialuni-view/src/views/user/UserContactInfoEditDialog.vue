@@ -27,7 +27,7 @@
 import {Options, Vue} from 'vue-property-decorator'
 import QInput from "socialuni-view/src/components/QInput/QInput.vue";
 import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
-import SSwitch from "socialuni-view/src/component/SSwitch.vue";
+import SSwitch from "socialuni-view/src/components/SSwitch.vue";
 import {socialUserModule} from 'socialuni-sdk/src/store/store';
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";

@@ -23,7 +23,7 @@ export default class QIcon extends Vue {
   @Prop({
     type: String,
     default: ''
-  }) readonly customPrefix: string
+  }) readonly prefix: string
 
   get iconSize () {
     if (this.size) {
@@ -51,7 +51,7 @@ export default class QIcon extends Vue {
     if (this.isMdi) {
       return 'mdi'
     }
-    return this.customPrefix
+    return this.prefix
   }
 
   @Emit()
