@@ -34,8 +34,6 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO> {
     }
 
     async nextPageQuery(queryData) {
-        console.log(456)
-        console.log(this.queryQO.loadMore)
         if (this.queryQO.loadMore === LoadMoreType.loading){
             return
         }

@@ -107,7 +107,7 @@ export default class SocialuniFollowView extends Vue {
         }
       }
       this.$nextTick(() => {
-        uni.startPullDownRefresh(null)
+        uni.startPullDownRefresh({})
       })
     })
   }
@@ -129,7 +129,7 @@ export default class SocialuniFollowView extends Vue {
   tabsChange(index) {
     this.currentTabIndex = index
     if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
-      uni.startPullDownRefresh(null)
+      uni.startPullDownRefresh({})
       this.initQuery()
     }
   }
