@@ -8,39 +8,48 @@
     </q-tabs>
     <div class="flex-1 overflow-hidden">
       <swiper class="h100p" :current="currentTabIndex" @change="talkSwiperChange">
-        <swiper-item v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
-          <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
-            <div v-if="swiperIndex===0">您还没有关注任何人</div>
-            <div v-else>您还没有粉丝</div>
-          </div>
-          <template v-else>
-            <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
-                 @click="toUserDetailVue(user)">
-              <image
-                  class="card-title-avatar bd"
-                  mode="aspectFill"
-                  :src="user.avatar"
-              />
-              <view class="flex-1 row-between">
-                <view class="col-between py-xs">
-                  <view class="row-col-center">
-                    <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
-                    <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
-                          @click.stop="openVip">
-                      VIP
-                    </view>
-                    <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
-                  </view>
-                  <view class="color-content mt-xs">
-                    粉丝：{{ user.fansNum }}
-                  </view>
-                </view>
-                <view class="col-center">
-                  <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>
-                </view>
-              </view>
+        <swiper-item class="h100p" v-for="(item, swiperIndex) in tabsPageQueryUtil" :key="swiperIndex">
+          <scroll-view class="h100p overflow-hidden"
+                       :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
+                       :lower-threshold="400">
+            <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
+              <div v-if="swiperIndex===0">您还没有关注任何人</div>
+              <div v-else>您还没有粉丝</div>
             </div>
-          </template>
+            <template v-else>
+              <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
+                   @click="toUserDetailVue(user)">
+                <image
+                    class="card-title-avatar bd"
+                    mode="aspectFill"
+                    :src="user.avatar"
+                />
+                <view class="flex-1 row-between">
+                  <view class="col-between py-xs">
+                    <view class="row-col-center">
+                      <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
+                      <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
+                            @click.stop="openVip">
+                        VIP
+                      </view>
+                      <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
+                    </view>
+                    <view class="color-content mt-xs">
+                      粉丝：{{ user.fansNum }}
+                    </view>
+                  </view>
+                  <view class="col-center">
+                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>
+                  </view>
+                </view>
+              </div>
+              <view class="mt-xs">
+                <uni-load-more :status="item.queryQO.loadMore"
+                               @click="clickOnreachBottom"
+                               :contentText="loadMoreText"></uni-load-more>
+              </view>
+            </template>
+          </scroll-view>
         </swiper-item>
       </swiper>
     </div>
@@ -63,14 +72,21 @@ import SocialuniFollowTag from "../../../components/SocialuniFollow/SocialuniFol
 import SocialuniPageQueryQO from "socialuni-api/src/model/common/SocialuniPageQueryQO";
 import SocialuniPageQueryUtil from "socialuni-api/src/model/common/SocialuniPageQueryUtil";
 import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
+import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
 })
-export default class FollowView extends Vue {
+export default class SocialuniFollowView extends Vue {
   tabs = SocialuniFollowType.allFollowTypes
   tabsPageQueryUtil: SocialuniPageQueryUtil<SocialUserContentRO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
   currentTabIndex = 0
+
+  loadMoreText = {
+    contentdown: '点击显示更多',
+    contentrefresh: '正在加载...',
+    contentnomore: '没有更多数据了,点击刷新'
+  }
 
   created() {
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI), new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI)]
@@ -79,7 +95,7 @@ export default class FollowView extends Vue {
       await this.initQuery()
     })
     onReachBottom(() => {
-      this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
+      this.autoChooseUseLocationQueryTalks()
     })
 
     onLoad((params: { followType: string }) => {
@@ -91,7 +107,7 @@ export default class FollowView extends Vue {
         }
       }
       this.$nextTick(() => {
-        uni.startPullDownRefresh()
+        uni.startPullDownRefresh(null)
       })
     })
   }
@@ -113,7 +129,7 @@ export default class FollowView extends Vue {
   tabsChange(index) {
     this.currentTabIndex = index
     if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
-      uni.startPullDownRefresh()
+      uni.startPullDownRefresh(null)
       this.initQuery()
     }
   }
@@ -123,16 +139,45 @@ export default class FollowView extends Vue {
     this.tabsChange(e.detail.current)
   }
 
+  autoChooseUseLocationQueryTalksHandler() {
+    this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
+  }
+
+  autoChooseUseLocationQueryTalks = CommonUtil.debounce(() => {
+    this.autoChooseUseLocationQueryTalksHandler()
+  }, 500)
+
+
+  get curTalkTabObj() {
+    return this.tabsPageQueryUtil[this.currentTabIndex].queryQO
+  }
+
   //同步更新粉丝和关注列表状态
   userFollowChange(user: SocialUserContentRO) {
     for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
       for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
         if (listDatum.id === user.id) {
-          console.log(user.hasFollowed)
           listDatum.hasFollowed = user.hasFollowed
         }
       }
     }
   }
+
+  //点击不需要更新查询时间，查不出来就查不出来，万一是自己手动暂停了查询呢，而且如果重设时间会导致数据重复问题
+  async clickOnreachBottom() {
+    //停止查询方法
+    const talkTab = this.curTalkTabObj
+    if (talkTab) {
+      //如果正在查询，则停止查询，没办法省略因为修改和使用的是一个变量
+      if (talkTab.loadMore === LoadMoreType.loading) {
+        talkTab.loadMore = LoadMoreType.more
+      } else {
+        talkTab.loadMore = LoadMoreType.more
+        //如果正在查询，则更改状态为加载更多,点击暂停加载。
+        await this.autoChooseUseLocationQueryTalks()
+      }
+    }
+  }
+
 }
 </script>

@@ -4,7 +4,7 @@ import com.socialuni.social.sdk.logic.manage.FollowManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.sdk.dao.redis.FollowRedis;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.sdk.dao.DO.FollowDO;
+import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class SocialUserFollowDomain {
     public void privateAddFlowAsync(Integer mineUserId, Integer beUserId) {
         socialUserFansDetailManage.mineFollowNumAdd(mineUserId);
         socialUserFansDetailManage.beUserFansNumAdd(beUserId);
-        FollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
+        SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
         //未关注过
         if (followDO == null) {
             followManage.createFollow(mineUserId, beUserId);
@@ -61,7 +61,7 @@ public class SocialUserFollowDomain {
     public void privateCancelFollowAsync(Integer mineUserId, Integer beUserId) {
         socialUserFansDetailManage.mineFollowNumSub(mineUserId);
         socialUserFansDetailManage.beUserFansNumSub(beUserId);
-        FollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
+        SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
         followManage.updateFollow(followDO, CommonStatus.delete);
     }
 }

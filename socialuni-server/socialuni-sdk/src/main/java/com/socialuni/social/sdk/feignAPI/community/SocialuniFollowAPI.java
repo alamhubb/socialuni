@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.feignAPI.community;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +23,7 @@ public interface SocialuniFollowAPI {
 
     @PostMapping("queryUserFollows")
     @Operation(summary = "查询用户关注列表")
-    ResultRO<List<SocialuniUserFollowDetailRO>> queryUserFollows(@RequestBody @Valid SocialuniPageQueryQO<String> socialuniPageQueryQO);
+    ResultRO<List<SocialuniUserFollowDetailListRO>> queryUserFollows(@RequestBody @Valid SocialuniPageQueryQO<String> socialuniPageQueryQO);
 
     @PostMapping("addFollow")
     @Operation(summary = "关注用户")

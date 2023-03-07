@@ -1,10 +1,13 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -38,5 +41,25 @@ public class SocialuniUserFollowDetailROFactory {
 
     public static List<SocialuniUserFollowDetailRO> getUsers(List<SocialuniUserDo> users, SocialuniUserDo mineUser) {
         return ListConvertUtil.toList(SocialuniUserFollowDetailROFactory::newSocialFollowUserRO, users, mineUser);
+    }
+
+    public static List<SocialuniUserFollowDetailListRO> getFollowUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
+        return ListConvertUtil.toList((followDO, user) -> {
+            SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getBeUserId());
+            SocialuniUserFollowDetailRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, user);
+            SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
+            socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());
+            return socialuniUserFollowDetailListRO;
+        }, users, mineUser);
+    }
+
+    public static List<SocialuniUserFollowDetailListRO> getFansUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
+        return ListConvertUtil.toList((followDO, user) -> {
+            SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getUserId());
+            SocialuniUserFollowDetailRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, user);
+            SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
+            socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());
+            return socialuniUserFollowDetailListRO;
+        }, users, mineUser);
     }
 }

@@ -3,6 +3,7 @@ package com.socialuni.social.sdk.logic.domain.follow;
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
@@ -39,8 +40,8 @@ public class SocialuniFollowUserDomain {
         return new ResultRO<>();
     }
 
-    public List<SocialuniUserFollowDetailRO> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
-        List<SocialuniUserFollowDetailRO> map = socialQueryUserFollowsDomain.queryUserFollows(socialuniPageQueryQO);
+    public List<SocialuniUserFollowDetailListRO> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
+        List<SocialuniUserFollowDetailListRO> map = socialQueryUserFollowsDomain.queryUserFollows(socialuniPageQueryQO);
 
         return map;
     }

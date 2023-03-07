@@ -19,7 +19,7 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = {"userId", "beUserId"}),
         }
 )
-public class FollowDO extends SocialuniContentBaseDO {
+public class SocialuniFollowDO extends SocialuniContentBaseDO {
     /**
      * 主用户
      */

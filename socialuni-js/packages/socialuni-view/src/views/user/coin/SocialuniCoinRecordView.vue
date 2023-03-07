@@ -93,7 +93,7 @@ import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
 })
-export default class FollowView extends Vue {
+export default class SocialuniCoinRecordView extends Vue {
   tabs = ['收入', '消费', '充值']
   currentTabIndex = 0
 
@@ -118,7 +118,7 @@ export default class FollowView extends Vue {
         }
       }
       this.$nextTick(() => {
-        uni.startPullDownRefresh()
+        uni.startPullDownRefresh(null)
       })
     })
   }
@@ -140,7 +140,7 @@ export default class FollowView extends Vue {
   tabsChange(index) {
     this.currentTabIndex = index
     if (this.tabsPageQueryUtil[this.currentTabIndex].queryQO.firstLoad) {
-      uni.startPullDownRefresh()
+      uni.startPullDownRefresh(null)
       this.initQuery()
     }
   }
@@ -155,7 +155,6 @@ export default class FollowView extends Vue {
     for (const socialuniPageQueryUtil of this.tabsPageQueryUtil) {
       for (const listDatum of socialuniPageQueryUtil.queryQO.listData) {
         if (listDatum.id === user.id) {
-          console.log(user.hasFollowed)
           listDatum.hasFollowed = user.hasFollowed
         }
       }
