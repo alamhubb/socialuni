@@ -56,7 +56,7 @@
               {{ user.city || '' }}
             </view>
             <view v-if="user.schoolName" class="row-col-center q-tag">
-              <q-icon class="color-blue_light mr-xs" icon="mdi-school" size="12"/>
+              <q-icon class="color-blue mr-xs" icon="mdi-school" size="12"/>
               {{ user.schoolName }}
             </view>
           </div>
