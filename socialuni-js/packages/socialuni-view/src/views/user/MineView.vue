@@ -37,17 +37,17 @@
 
         <view class="row-between-center mt py-xs pr-xs">
           <view class="flex-row flex-1 row-around">
-            <view class="px-lg line-height-1" @click.stop="toFollowVue(SocialuniFollowType.follow)">
-              <text class="text-lg font-bold text-black row-center">
+            <view class="px-lg line-height-1 col-all-center use-click" @click.stop="toFollowVue(SocialuniFollowType.follow)">
+              <text class="text-lg font-bold color-main row-center">
                 {{ mineUser.followNum }}
               </text>
-              <text class="text-sm text-gray">关注</text>
+              <text class="font-12 color-content mt-xs">关注</text>
             </view>
-            <view class="px-lg line-height-1" @click.stop="toFollowVue(SocialuniFollowType.fans)">
-              <text class="text-lg font-bold text-black row-center">
+            <view class="px-lg line-height-1 col-all-center use-click" @click.stop="toFollowVue(SocialuniFollowType.fans)">
+              <text class="text-lg font-bold color-main row-center">
                 {{ mineUser.fansNum }}
               </text>
-              <text class="text-sm text-gray">被关注</text>
+              <text class="font-12 color-content mt-xs">被关注</text>
             </view>
           </view>
         </view>
