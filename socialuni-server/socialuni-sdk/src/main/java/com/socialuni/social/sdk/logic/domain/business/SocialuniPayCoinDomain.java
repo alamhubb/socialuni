@@ -40,12 +40,12 @@ public class SocialuniPayCoinDomain {
         }
         try {
             String payType = socialuniRechargeCoinQO.getProvider();
-            Integer payAmount = socialuniRechargeCoinQO.getAmount();
-            if (!SocialuniAllowPayCoinAmountType.amountList.contains(payAmount)) {
+            Integer amount = socialuniRechargeCoinQO.getAmount();
+            if (!SocialuniAllowPayCoinAmountType.amountList.contains(amount)) {
                 throw new SocialSystemException("错误的充值金额");
             }
             //前台为元，后台为金币分
-            Integer amount = payAmount * 100;
+            Integer payAmount = amount * 100;
             String userIp = IpUtil.getIpAddr();
 
             SocialuniPayCoinOrderDO rechargeOrder = new SocialuniPayCoinOrderDO();
@@ -56,8 +56,8 @@ public class SocialuniPayCoinDomain {
             rechargeOrder.setUserId(user.getUserId());
             rechargeOrder.setStatus(SocialuniPayStatus.waitPay);
             rechargeOrder.setPayType(payType);
-            rechargeOrder.setAmount(amount);
-            rechargeOrder.setCoinNum(amount);
+            rechargeOrder.setAmount(payAmount);
+            rechargeOrder.setCoinNum(payAmount);
             rechargeOrder = SocialuniRepositoryFacade.save(rechargeOrder);
 
             //'QISRand20200713005600548'+orderId

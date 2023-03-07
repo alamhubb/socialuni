@@ -27,7 +27,7 @@ public class SocialuniUserSocialCoinDOUtil {
     public static SocialuniUserCoinDo getNotNull(Integer userId) {
         SocialuniUserCoinDo socialuniUserExpandDO = getAllowNull(userId);
         if (socialuniUserExpandDO == null) {
-            throw new SocialParamsException("请设置校园名称");
+            throw new SocialParamsException("未给用户创建金币表数据");
         }
         return socialuniUserExpandDO;
     }
