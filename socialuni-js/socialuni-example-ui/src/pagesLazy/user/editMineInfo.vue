@@ -112,6 +112,7 @@ import {socialUserModule} from 'socialuni-sdk/src/store/store'
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
 
 @Options({
   components: {QButton}
@@ -163,7 +164,7 @@ export default class UserEditView extends Vue {
 
   @Emit('close')
   closeUserEditPop() {
-    PageUtil.goBackOrMine()
+    // PageUtil.goBackOrMine()
   }
 
   clearNickname() {
@@ -215,10 +216,9 @@ export default class UserEditView extends Vue {
         return AlertUtil.hint('年龄不能小于18岁')
       }
     }
-
     this.btnDisabled = true
     AlertUtil.confirm('是否确定修改个人信息').then(() => {
-      const userCopy: UserEditVO = JsonUtils.deepClone(this.user)
+      const userCopy: UserEditVO = JsonUtils.deepClone(this.user) as any
       userCopy.nickname = this.nickname
       userCopy.gender = this.gender
       userCopy.birthday = this.birthday
@@ -227,12 +227,14 @@ export default class UserEditView extends Vue {
       userCopy.wxAccount = this.wxAccount
       userCopy.qqAccount = this.qqAccount
       userCopy.wbAccount = this.wbAccount
+      UniUtil.showLoading('保存中')
       SocialuniMineUserAPI.editUserAPI(userCopy).then((res: any) => {
         socialUserModule.setUser(res.data)
         ToastUtil.toast('已修改')
         this.closeUserEditPop()
       }).finally(() => {
         this.btnDisabled = false
+        UniUtil.hideLoading()
       })
     }).catch(() => {
       this.closeUserEditPop()
