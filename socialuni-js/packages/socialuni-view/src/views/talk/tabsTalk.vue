@@ -13,11 +13,8 @@
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
-    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh">
-      <swiper :current="currentTabIndex"
-              :style="{
-              'height':'calc(100vh - '+talksListHeightSub+'px)',
-            }"
+    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+      <swiper :current="currentTabIndex" class="h100p"
               @change="talkSwiperChange">
         <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
           <!--
@@ -285,7 +282,7 @@ export default class TabsTalk extends Vue {
     this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight + 52
     // #endif
     // #ifndef H5
-    this.talksListHeightSub = socialSystemModule.statusBarHeight + socialSystemModule.navBarHeight + this.tabsHeight
+    this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight + socialSystemModule.statusBarHeight
     // #endif
     console.log(this.talksListHeightSub)
   }
@@ -456,7 +453,7 @@ export default class TabsTalk extends Vue {
   async talkSwiperChange(e) {
     const current = e.detail.current
     //首次加载可能为空
-    if (current){
+    if (current) {
       const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
       // 存入store
       // 切换时截取其他的只保留后20条

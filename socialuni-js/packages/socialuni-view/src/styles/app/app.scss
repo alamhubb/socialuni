@@ -14,6 +14,7 @@ page {
   font-size: 14px;
   //不写这个h5tab会有横向滚动条，不能有这个，要不然h5无法滚动
   overflow-x: hidden;
+
   button {
     line-height: 1.5;
   }
@@ -143,4 +144,12 @@ input[type=number]::-webkit-outer-spin-button {
   height: 0 !important;
   -webkit-appearance: none;
   background: transparent;
+}
+
+.uni-app--showleftwindow + .uni-tabbar-bottom {
+  display: none;
+}
+
+.uni-app--showleftwindow uni-page-wrapper {
+  height: 100%;
 }
