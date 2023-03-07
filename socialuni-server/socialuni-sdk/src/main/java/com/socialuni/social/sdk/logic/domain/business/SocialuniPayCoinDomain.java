@@ -53,10 +53,11 @@ public class SocialuniPayCoinDomain {
             rechargeOrder.setPlatform(RequestUtil.getPlatform());
             rechargeOrder.setSystem(RequestUtil.getSystem());
             rechargeOrder.setProvider(RequestUtil.getProvider());
-            rechargeOrder.setUserId(user.getId());
+            rechargeOrder.setUserId(user.getUserId());
             rechargeOrder.setStatus(SocialuniPayStatus.waitPay);
             rechargeOrder.setPayType(payType);
             rechargeOrder.setAmount(amount);
+            rechargeOrder.setCoinNum(amount);
             rechargeOrder = SocialuniRepositoryFacade.save(rechargeOrder);
 
             //'QISRand20200713005600548'+orderId

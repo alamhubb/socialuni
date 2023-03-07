@@ -209,7 +209,7 @@ export default class QButton extends Vue {
   }) noDebounce: boolean
 //颜色, 要支持用户自定义色值，theme
   @Prop({
-    default: 'theme',
+    default: '',
     type: String
   }) color: string
 
