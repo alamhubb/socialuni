@@ -1,7 +1,7 @@
 import NumberUtil from "socialuni-sdk/src/utils/NumberUtil";
 
 export default class PhoneNumFormData {
-  phoneNum: string = '18888888888'
+  phoneNum: string = ''
   authCode: string = null
 
   static phoneNumberError(phoneNum) {

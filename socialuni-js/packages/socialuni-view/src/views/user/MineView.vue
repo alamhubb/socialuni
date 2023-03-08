@@ -20,7 +20,7 @@
                 {{ mineUser.nickname }}
               </view>
               <view class="flex-row">
-                <social-gender-tag class="mt-sm" :user="mineUser"></social-gender-tag>
+                <social-gender-tag class="mt-sm" :user="mineUser" border></social-gender-tag>
                 <!--                <view v-if="userProp.vipFlag" class="cu-tag bg-red radius" @click="openVip">VIP</view>
                                 <view v-else class="cu-tag bg-grey radius" @click="openVip">VIP</view>-->
               </view>

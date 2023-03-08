@@ -11,6 +11,11 @@
   border-color: mix($color-white, $color-main, 60%);
 }
 
+.q-tag-bd {
+  @extend .q-tag;
+  @extend .bd;
+}
+
 @each $key, $color in $colors-base {
   .q-tag-#{''+$key+''} {
     padding: $box-mn;
