@@ -1,12 +1,16 @@
 <template>
-  <div>123</div>
+  <top-window-view></top-window-view>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-property-decorator'
-import SocialuniCoinView from 'socialuni-view/src/views/user/coin/SocialuniCoinView.vue'
+import TopWindowView from 'socialuni-view/src/views/window/TopWindowView.vue'
 
-@Options({})
+@Options({
+  components: {
+    TopWindowView
+  }
+})
 export default class TopWindow extends Vue {
 }
 </script>

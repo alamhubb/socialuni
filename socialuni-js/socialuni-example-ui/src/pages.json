@@ -5,18 +5,6 @@
       "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
     }
   },
-  "leftWindow": {
-    "path": "windows/leftWindow.vue",
-    "style": {
-      "width": "350px"
-    }
-  },
-  "topWindow": {
-    "path": "windows/topWindow.vue",
-    "style": {
-      "height": "60px"
-    }
-  },
   "pages": [
     {
       "path": "pages/talk/talk",
@@ -167,13 +155,28 @@
       }
     ]
   },
+  "leftWindow": {
+    "path": "windows/leftWindow.vue",
+    "style": {
+      "width": "300px"
+    }
+  },/*
+  "topWindow": {
+    "path": "windows/topWindow.vue",
+    "style": {
+      "height": "60px"
+    }
+  },*/
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "清池app",
+    "navigationBarTitleText": "社区",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "app-plus": {
       "softinputNavBar": "none"
+    },
+    "h5": {
+      "maxWidth": 800
     }
   },
   "navigateToMiniProgramAppIdList": [

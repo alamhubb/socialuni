@@ -1,6 +1,6 @@
 <template>
   <view class="flex-col h100p bg-theme-bg">
-    <talk-view class="h100p"></talk-view>
+<!--    <talk-view class="h100p"></talk-view>-->
   </view>
 </template>
 
