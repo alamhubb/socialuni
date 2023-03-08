@@ -29,6 +29,7 @@ if (IN_PRODUCTION) {
                 /^router-link(|-exact)-active$/,
                 /data-v-.*/,
                 /uicon-.*/,
+                /uniui-.*/,
                 /q-.*/,
                 /u-.*/,
                 /uni-.*/,

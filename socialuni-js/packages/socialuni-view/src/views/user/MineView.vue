@@ -120,7 +120,7 @@
         </div>-->
       </div>
 
-      <div class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
+      <div v-if="!isIos" class="row-between-center use-click bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm"
            @click="toCoinPage">
         <div class="row-col-center">
           <q-icon prefix="uni-icons" icon="uniui-wallet-filled" class="color-orange"></q-icon>
@@ -208,7 +208,7 @@ import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import QNavbar from 'socialuni-view/src/components/QNavbar/QNavbar.vue'
 import QRowItem from 'socialuni-view/src/components/QRowItem/QRowItem.vue'
 import MsgInput from 'socialuni-view/src/components/MsgInput.vue'
-import {socialChatModule, socialUserModule} from 'socialuni-sdk/src/store/store'
+import {socialChatModule, socialSystemModule, socialUserModule} from 'socialuni-sdk/src/store/store'
 import UniUtil from 'socialuni-sdk/src/utils/UniUtil'
 import SkipUrlConst from 'socialuni-constant/constant/SkipUrlConst'
 import SocialuniFollowType from 'socialuni-constant/constant/user/SocialuniFollowType'
@@ -268,6 +268,10 @@ export default class MineView extends Vue {
 
   get mineUser() {
     return socialUserModule.mineUser
+  }
+
+  get isIos(){
+    return socialSystemModule.isIos
   }
 
   SocialuniFollowType = SocialuniFollowType
