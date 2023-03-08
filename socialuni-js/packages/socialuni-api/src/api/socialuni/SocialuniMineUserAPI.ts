@@ -34,7 +34,6 @@ export default class SocialuniMineUserAPI {
     return request.post('socialuni/mineUser/deleteImg', userImg)
   }
 
-
   static deleteUserImgNewAPI(userImg: ImgFileVO) {
     return request.post('socialuni/mineUser/deleteUserImg', {userImgId: userImg.id})
   }
@@ -45,11 +44,6 @@ export default class SocialuniMineUserAPI {
 
   static switchUserContactAPI(openContact: boolean) {
     return request.post<string>('socialuni/mineUser/switchUserContact?openContact=' + openContact)
-  }
-
-  static userPayAPI(provider: string, amount: number) {
-    const userPayVO = new SocialuniPayCoinQO(provider, amount)
-    return request.post<UserPayResultVO>('socialuni/mineUser/pay', userPayVO)
   }
 
   static destroyAccountAPI() {

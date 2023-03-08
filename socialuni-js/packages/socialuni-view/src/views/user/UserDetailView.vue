@@ -71,15 +71,15 @@
           <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
           联系方式：
           <!--          如果开启了，则代表获取过，无需再次获取，点击为复制-->
-          <div v-if="user.openContactInfo" class="use-click row-col-center" @click="copyContactInfo">
-            <q-button light>{{ user.contactInfo }}
+          <div v-if="user.openContactInfo" class="use-click row-col-center">
+            <q-button light @click="copyContactInfo">{{ user.contactInfo }}
               <div class="color-content ml-xs font-12">
                 ( 点击复制 )
               </div>
             </q-button>
           </div>
-          <div v-else class="use-click row-col-center" @click="getOpenContactInfo">
-            <q-button light>{{ user.contactInfo }}
+          <div v-else class="use-click row-col-center">
+            <q-button light @click="getOpenContactInfo" :disabled="showUserContactBtnDisabled">{{ user.contactInfo }}
               <div class="color-content ml-xs font-12">
                 (点击获取)
               </div>
@@ -183,6 +183,7 @@ import SocialGenderTag from "../../components/SocialGenderTag/SocialGenderTag.vu
 import QRowItem from "../../components/QRowItem/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
+import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
 
 @Options({
   components: {
@@ -206,6 +207,7 @@ export default class UserDetailView extends Vue {
   }
 
   user: CenterUserDetailRO = null
+  showUserContactBtnDisabled: boolean = false
 
   openMoreMenu() {
     this.$refs.moreActionMenu.open()
@@ -371,44 +373,29 @@ export default class UserDetailView extends Vue {
     return socialUserModule.mineUser;
   }
 
-  getOpenContactInfo() {
-    console.log('huoqu')
+  async getOpenContactInfo() {
     //打开获取对方联系方式功能，支付贝壳
-    // if (!this.showUserContactBtnDisabled) {
-    //   this.showUserContactBtnDisabled = true
+    this.showUserContactBtnDisabled = true
     const userShell = this.mineUser.socialCoin
-    console.log(userShell)
-    if (userShell >= 100) {
-      AlertUtil.confirm('是否消耗100个贝壳查看用户：' + this.user.nickname + ' 的联系方式').then(() => {
-        SocialuniUserAPI.getUserContactInfoAPI(this.user.id).then((res) => {
-          this.user.contactInfo = res.data
-          this.user.openContactInfo = true
-          this.mineUser.socialCoin = userShell - 10
-        })
-      }).finally(() => {
-        // this.showUserContactBtnDisabled = false
-      })
-    } else {
-      /*Alert.confirm('您没有贝壳了，是否直接使用现金支付').then(() => {
-        constant provider = systemModule.isApp ? ProviderType.wx : systemModule.mpPlatform
-        PlatformUtils.pay(provider, PayType.shell, 1).then(() => {
-          UserAPI.getUserContactAPI(this.userProp.id).then((res) => {
-            this.userProp.contactAccount = res.data
-            this.userProp.showUserContact = true
-          }).catch((e) => {
-            Alert.error(e)
-          })
-        }).catch(() => {
-          MsgUtil.notPay()
-        })
-      }).finally(() => {
-        this.showUserContactBtnDisabled = false
-      })*/
+    const getUserInfoNeedCoin = socialConfigModule.appMoreConfig.contactExpenseShell
+    try {
+      if (userShell >= getUserInfoNeedCoin) {
+        await AlertUtil.confirm('是否消耗100个贝壳查看用户：' + this.user.nickname + ' 的联系方式')
+        const res = await SocialuniUserAPI.getUserContactInfoAPI(this.user.id)
+        this.user.contactInfo = res.data
+        this.user.openContactInfo = true
+        this.mineUser.socialCoin = userShell - getUserInfoNeedCoin
+      } else {
+        await AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
+        await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
+        this.mineUser.socialCoin = userShell + getUserInfoNeedCoin
+        //递归调用自己
+        await this.getOpenContactInfo()
+      }
+    } finally {
+      this.showUserContactBtnDisabled = false
     }
-  }/* else {
-      Toast.toast('获取中，请稍等')
-    }*/
-  // }
+  }
 
 }
 </script>

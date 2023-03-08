@@ -87,8 +87,8 @@ export default class SocialuniCoinView extends Vue {
 
   userPay() {
     //如果是app则默认微信支付，否则就是当前环境,app 微信，其他微信mp微信，qqmp，qq
-    const provider = socialSystemModule.isMp ? socialSystemModule.provider : SocialuniProviderType.wx
-    PlatformUtils.userPay(provider, this.checkedPayValue)
+    // const provider = socialSystemModule.isMp ? socialSystemModule.provider : SocialuniProviderType.wx
+    PlatformUtils.payCoin(this.checkedPayValue)
   }
 
   toCoinRecordPage(pageType: string) {

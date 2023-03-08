@@ -1,8 +1,9 @@
 <template>
+  <!--  click增加stop是因为禁止点击问题，父元素上没有加禁止点击，应该使用button的click-->
   <button
       class="row-all-center line-h1"
       :class="[buttonClass,addClass]"
-      @click="clickHandler"
+      @click.stop="clickHandler"
       :disabled="btnDisabled"
       :loading="loading"
       :form-type="formType"

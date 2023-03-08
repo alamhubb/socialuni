@@ -713,7 +713,7 @@ export default class MessageView extends Vue {
             await AlertUtil.confirm('会话未开启，您没有贝壳了，是否直接使用现金支付开启开启与 ' + this.chat.nickname + ' 的对话，并给对方发送消息：' + content, content)
             const provider = socialSystemModule.isMp ? socialSystemModule.provider : SocialuniProviderType.wx
             try {
-              await PlatformUtils.pay(provider, PayType.shell, 1)
+              await PlatformUtils.payCoin(provider, PayType.shell, 1)
             } catch (e) {
               MsgUtil.notPay()
             }
