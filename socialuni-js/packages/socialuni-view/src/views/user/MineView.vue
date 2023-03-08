@@ -1,7 +1,7 @@
 <template>
   <view class="h100p">
     <view v-if="mineUser" class="bg-default h100p flex-col">
-      <div class="bg-theme-gradual pd-smm">
+      <div class="bg-theme-gradual px-smm pb-smm pt-60">
         <div class="row-end-center">
           <uni-icons type="compose" size="24" class="use-click" @click="toEditUserInfo"></uni-icons>
           <q-icon class="ml" icon="setting" size="20" @click="showMoreListAction"></q-icon>
