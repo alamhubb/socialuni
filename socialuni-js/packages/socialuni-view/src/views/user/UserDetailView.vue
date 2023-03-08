@@ -28,11 +28,13 @@
                 </view>
               </view>
 
-              <div class="flex-col flex-none">
-                <view class="row-end-center pr-xs">
+              <div class="col-center flex-none">
+                <view class="row-end-center mr-xss">
                   <view v-if="user.hasBeFollowed && !user.hasFollowed"
-                        class="row-col-center bg-default text-sm px-xs text-gray">
-                    对方关注了您
+                        class="px-5 py-1 bg-default">
+                    <div class="color-content font-12">
+                      对方关注了您
+                    </div>
                   </view>
                 </view>
                 <!--              不为自己才展示-->
