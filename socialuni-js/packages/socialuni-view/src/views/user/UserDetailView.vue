@@ -63,8 +63,28 @@
               {{ user.schoolName }}
             </view>
           </div>
+
+          <view class="row-between-center mt py-xs pr-xs">
+            <view class="flex-row flex-1 row-around">
+              <view class="px-lg line-height-1 col-all-center use-click">
+                <text class="text-lg font-bold color-main row-center">
+                  {{ user.followNum }}
+                </text>
+                <text class="font-12 color-content mt-xs">关注</text>
+              </view>
+              <view class="px-lg line-height-1 col-all-center use-click">
+                <text class="text-lg font-bold color-main row-center">
+                  {{ user.fansNum }}
+                </text>
+                <text class="font-12 color-content mt-xs">被关注</text>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
+
+
+
       <div v-if="user.contactInfo"
            class="row-between-center bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm mb-sm">
         <div class="row-col-center">
