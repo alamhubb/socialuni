@@ -63,9 +63,11 @@ public class SocialWebControllerAdvice implements ResponseBodyAdvice<Object> {
         }else{
             return result;
         }*/
-        else{
+        /*else{
             return ResultRO.success(result);
-        }
+        }*/
+        //callback接口不能返回resultRO所以需要返回自定义内容
+        return result;
     }
 
     @Override
