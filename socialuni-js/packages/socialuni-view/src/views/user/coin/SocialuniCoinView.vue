@@ -5,14 +5,13 @@
       <div class="font-bold font-28 mt"> {{ user.socialCoin }}</div>
     </div>
 
-    <div class="bg-white bt-radius-30 flex-1 py-smm px-smm">
-      <div class="flex-row">
+    <div class="bg-white bt-radius-30 flex-1 pb-smm px-smm">
+<!--      <div class="flex-row">
         <div v-for="type in coinPageTypes"
              class="flex-1 row-all-center chunk-theme_light q-box color-content mx-xs use-click"
              @click="toCoinRecordPage(type)">{{ type }}记录
         </div>
-      </div>
-
+      </div>-->
       <div class="bt mt pt">
         <text class="row-all-center font-lg font-bold">
           充值
@@ -47,7 +46,7 @@
 import {Vue, Options} from 'vue-property-decorator'
 import QRowItem from '@/components/div-item/div-item.vue'
 import {onLoad} from "@dcloudio/uni-app";
-import {socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/store";
+import {socialConfigModule, socialSystemModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import ShellOrderVO from "socialuni-api/src/model/ShellOrderVO";
 import QIcon from 'socialuni-view/src/components/QIcon/QIcon.vue'
 import EnumVO from "socialuni-constant/constant/EnumVO";
@@ -75,7 +74,6 @@ export default class SocialuniCoinView extends Vue {
   }
 
   shellOrders: ShellOrderVO[] = []
-
 
   created() {
     onLoad(() => {

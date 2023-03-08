@@ -16,7 +16,7 @@
           {{ openContactInfo ? '他人可获取' : '他人不可获取' }}
         </s-switch>
       </div>
-      <div class="mt">打开开关，他人可通过使用100贝壳的方式获取您的联系方式</div>
+      <div class="mt">打开开关，他人可通过使用{{getContactExpenseCoin}}贝壳的方式获取您的联系方式</div>
       <div class="mt-sm">提示：允许使用贝壳获取联系方式功能交友效果更佳哦</div>
 <!--      <div class="mt-xs">未来会给您提供50%收益分成（目前不支持）</div>-->
     </div>
@@ -28,7 +28,7 @@ import {Options, Vue} from 'vue-property-decorator'
 import QInput from "socialuni-view/src/components/QInput/QInput.vue";
 import QPopup from "socialuni-view/src/components/QPopup/QPopup.vue";
 import SSwitch from "socialuni-view/src/components/SSwitch.vue";
-import {socialUserModule} from 'socialuni-sdk/src/store/store';
+import {socialConfigModule, socialUserModule} from 'socialuni-sdk/src/store/store';
 import ToastUtil from "socialuni-sdk/src/utils/ToastUtil";
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil";
 import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
@@ -56,6 +56,10 @@ export default class UserContactInfoEditDialog extends Vue {
       this.openContactInfo = socialUserModule.mineUser.openContactInfo
     }
     this.$refs.dialog.open()
+  }
+
+  get getContactExpenseCoin(){
+    return socialConfigModule.appMoreConfig.contactExpenseShell
   }
 
   async confirm() {
