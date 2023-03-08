@@ -294,11 +294,9 @@ export default class TabsTalk extends Vue {
 
   //供父组件使用，不可删除
   initQuery() {
+    //首次打开talk页面，获取用户位置用来查询
     if (this.curTalkTabObj.firstLoad) {
-      //首次打开talk页面，获取用户位置用来查询
-      socialLocationModule.appLunchInitDistrict().then(() => {
-        this.startPullDown()
-      })
+      this.startPullDown()
     }
   }
 

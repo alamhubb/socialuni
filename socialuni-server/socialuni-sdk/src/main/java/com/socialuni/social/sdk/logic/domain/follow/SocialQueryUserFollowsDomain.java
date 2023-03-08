@@ -5,7 +5,7 @@ import com.socialuni.social.common.api.enumeration.CommonStatus;
 import com.socialuni.social.common.api.exception.exception.SocialSystemException;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
-import com.socialuni.social.sdk.constant.SocialuniFollowPageType;
+import com.socialuni.social.sdk.constant.user.SocialuniFollowPageType;
 import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserFollowDetailROFactory;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j

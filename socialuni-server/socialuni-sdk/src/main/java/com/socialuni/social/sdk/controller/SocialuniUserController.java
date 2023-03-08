@@ -12,6 +12,7 @@ import com.socialuni.social.sdk.logic.service.user.SocialuniUserService;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,6 +66,11 @@ public class SocialuniUserController implements SocialuniUserAPI {
     @Override
     public ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers() {
         return socialuniUserService.queryRecentlyUsers();
+    }
+
+    @Override
+    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO) {
+        return null;
     }
 
     @Override

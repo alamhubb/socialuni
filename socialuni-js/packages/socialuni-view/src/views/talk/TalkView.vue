@@ -151,13 +151,7 @@ export default class TalkView extends Vue {
 
   // life
   mounted() {
-    this.pageMounted()
-  }
-
-  pageMounted() {
     UniUtil.showShareMenu()
-    // 这里是不是有问题应该选择异性
-    // 指的是用户选择的筛选性别
     this.initQuery()
   }
 
@@ -173,9 +167,10 @@ export default class TalkView extends Vue {
     this.$nextTick(() => {
       //首次打开talk页面，获取用户位置用来查询
       // locationModule.appLunchInitDistrict().then(() => {
-      this.$refs.tabsTalk.initQuery()
-      // throw new Error('test')
-      // })
+      //首次打开talk页面，获取用户位置用来查询
+      socialLocationModule.appLunchInitDistrict().then(() => {
+        this.$refs.tabsTalk.initQuery()
+      })
     })
   }
 

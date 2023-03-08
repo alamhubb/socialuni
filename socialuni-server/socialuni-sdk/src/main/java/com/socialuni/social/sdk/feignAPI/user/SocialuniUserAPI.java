@@ -9,6 +9,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -53,6 +54,10 @@ public interface SocialuniUserAPI {
     @GetMapping("queryRecentlyUsers")
     @Operation(summary = "获取最近在线用户")
     ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers();
+
+    @PostMapping("queryExtendFriendUsers")
+    @Operation(summary = "获取扩列用户列表")
+    ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(@RequestBody @Valid SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO);
 
     @GetMapping("getUserContactInfo/{userId}")
     @Operation(summary = "获取用户的联系方式")

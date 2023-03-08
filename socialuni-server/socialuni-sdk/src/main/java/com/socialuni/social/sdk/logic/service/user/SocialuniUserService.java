@@ -1,8 +1,11 @@
 package com.socialuni.social.sdk.logic.service.user;
 
+import com.socialuni.social.common.api.constant.DateTimeType;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.user.*;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
@@ -24,13 +27,17 @@ import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.repository.SocialuniUserExtendFriendLogRepository;
+import com.socialuni.social.user.sdk.repository.SocialuniUserHugRepository;
 import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -83,13 +90,59 @@ public class SocialuniUserService {
         }
     }
 
-    //查询最近在线的用户
     public ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers() {
         List<SocialuniUserDo> userDos = socialuniUserRepository.findTop10ByStatusOrderByIdDesc(SocialuniUserStatus.enable);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         List<SocialuniContentUserRO> userROS = SocialuniContentUserROFactory.toList(userDos, mineUser);
         return ResultRO.success(userROS);
+    }
+
+    @Resource
+    SocialuniUserHugRepository socialuniUserHugRepository;
+    @Resource
+    SocialuniUserExtendFriendLogRepository socialuniUserExtendFriendLogRepository;
+
+    //查询最近在线的用户
+    public ResultRO<List<SocialuniContentUserRO>> queryExtendFriendUsers(SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO) {
+        String pageType = socialuniUserExtendFriendQueryQO.getPageType();
+        if (!SocialuniUserExtendFriendsPageType.allTypes.contains(pageType)) {
+            throw new SocialParamsException("错误的扩列页面类型");
+        }
+
+        //赞个人主页。本周内获得赞最多的吗，就先上线一个最近的。
+        if (pageType.equals(SocialuniUserExtendFriendsPageType.hot)) {
+            //查询本周内上线的用户
+            Date curDate = new Date();
+            long lastWeekTime = curDate.getTime() - DateTimeType.week;
+            Date lastWeekDate = new Date(lastWeekTime);
+            //周id列表
+            List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate);
+            //热门id列表
+            List<Integer> hugHotUserIds = socialuniUserHugRepository.findUserIdsOrderByHugNum();
+
+
+            //然后把他们的赞排序
+        } else if (pageType.equals(SocialuniUserExtendFriendsPageType.recently)) {
+
+        } else if (pageType.equals(SocialuniUserExtendFriendsPageType.city)) {
+
+        }
+        throw new SocialParamsException("错误的扩列页面类型");
+
+        //查询热门的
+
+
+        //查询最近的
+
+        //查询同城的
+
+
+//        List<SocialuniUserDo> userDos = socialuniUserRepository.findTop10ByStatusOrderByIdDesc(SocialuniUserStatus.enable);
+//
+//        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
+//        List<SocialuniContentUserRO> userROS = SocialuniContentUserROFactory.toList(userDos, mineUser);
+//        return ResultRO.success(userROS);
     }
 
     //查询最近在线的用户
