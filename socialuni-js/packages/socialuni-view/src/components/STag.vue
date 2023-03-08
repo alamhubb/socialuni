@@ -17,6 +17,7 @@ import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 })
 export default class SocialuniTag extends Vue {
   @Prop({default: false, type: Boolean}) border: boolean
+  @Prop({default: false, type: Boolean}) round: boolean
   @Prop({default: '', type: Boolean}) type: string
   @Prop({default: 'mn', type: String}) size: string
 
@@ -30,6 +31,9 @@ export default class SocialuniTag extends Vue {
     }
     if (this.size) {
       className += (' box-' + this.size)
+    }
+    if (this.round) {
+      className += (' bd-round')
     }
     return className
   }

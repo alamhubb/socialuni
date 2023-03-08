@@ -12,7 +12,8 @@
              @click="toCoinRecordPage(type)">{{ type }}记录
         </div>
       </div>-->
-      <div class="bt mt pt">
+<!--      <div class="bt mt pt">-->
+      <div class="mt pt">
         <text class="row-all-center font-lg font-bold">
           充值
         </text>
