@@ -15,15 +15,15 @@ public class SocialuniUserDetailRO extends SocialuniUserFollowDetailRO {
     private List<SocialuniUserImgRO> imgs;
     private String schoolName;
     private String contactInfo;
-    //是否已经拥有查看用户联系方式的权限
-    private String canSeeContactInfo;
+    //为他人详情是，则意义为是否已经拥有查看用户联系方式的权限
+    private Boolean openContactInfo;
 
     public SocialuniUserDetailRO(SocialuniUserDetailRO userRO) {
         super(userRO);
         this.imgs = userRO.getImgs();
         this.schoolName = userRO.getSchoolName();
         this.contactInfo = userRO.getContactInfo();
-        this.canSeeContactInfo = userRO.getCanSeeContactInfo();
+        this.openContactInfo = userRO.getOpenContactInfo();
     }
 
     public SocialuniUserDetailRO(SocialuniUserFollowDetailRO centerUserFollowDetailRO) {

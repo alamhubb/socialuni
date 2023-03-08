@@ -30,7 +30,8 @@
 
               <div class="flex-col flex-none">
                 <view class="row-end-center pr-xs">
-                  <view v-if="user.hasBeFollowed && !user.hasFollowed" class="row-col-center bg-default text-sm px-xs text-gray">
+                  <view v-if="user.hasBeFollowed && !user.hasFollowed"
+                        class="row-col-center bg-default text-sm px-xs text-gray">
                     对方关注了您
                   </view>
                 </view>
@@ -60,12 +61,27 @@
               {{ user.schoolName }}
             </view>
           </div>
-
-          <user-school-edit-dialog ref="schoolEditDialog"></user-school-edit-dialog>
-
-          <user-contact-info-edit-dialog ref="contactInfoEditDialog"></user-contact-info-edit-dialog>
         </view>
       </view>
+      <div v-if="user.contactInfo"
+           class="row-between-center bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm mb-sm">
+        <div class="row-col-center">
+          <q-icon class="color-sub mr-xs" prefix="uni-icons" icon="uniui-chat" size="14"/>
+          联系方式：
+          <!--          如果开启了，则代表获取过，无需再次获取，点击为复制-->
+          <div v-if="user.openContactInfo" class="use-click row-col-center" @click="copyContactInfo">
+            <div class="q-tag row-col-center">{{ user.contactInfo }}<div class="ml-xs font-12">
+              ( 点击复制 )
+            </div></div>
+
+          </div>
+          <div v-else class="use-click row-col-center" @click="getOpenContactInfo">
+            <div class="q-tag row-col-center">{{ user.contactInfo }}<div class="ml-xs font-12">
+              (点击获取)
+            </div></div>
+          </div>
+        </div>
+      </div>
 
       <socialuni-user-info-img :user="user" v-if="user.imgs.length"></socialuni-user-info-img>
 
@@ -342,10 +358,13 @@ export default class UserDetailView extends Vue {
     })
   }
 
-  openSetContactInfo() {
-    if (this.isMine) {
-      this.$refs.contactInfoEditDialog.open()
-    }
+  copyContactInfo() {
+    UniUtil.textCopy(this.user.contactInfo)
   }
+
+  getOpenContactInfo() {
+    //打开获取对方联系方式功能，支付贝壳
+  }
+
 }
 </script>

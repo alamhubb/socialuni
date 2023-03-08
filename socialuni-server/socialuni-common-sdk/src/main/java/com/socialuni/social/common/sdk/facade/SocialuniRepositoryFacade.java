@@ -27,14 +27,14 @@ public abstract class SocialuniRepositoryFacade {
      * @return
      * @see SocialuniCommonRepositoryInterface#findByExample(Object)
      */
-    public static <T> Optional<T> findByExample(T example) {
+    public static <T> T findByExample(T example) {
         return getRepository().findByExample(example);
     }
 
-    public static <T> T find(T example) {
+    /*public static <T> T find(T example) {
         Optional<T> optionalT = getRepository().findByExample(example);
         return optionalT.orElse(null);
-    }
+    }*/
 
     private static SocialuniCommonRepository getRepository() {
         return repository;

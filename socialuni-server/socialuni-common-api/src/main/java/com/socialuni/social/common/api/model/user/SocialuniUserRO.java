@@ -16,9 +16,7 @@ public class SocialuniUserRO extends SocialuniContentIdRO {
     private Boolean isMine;
     private String avatar;
     private String gender;
-
     private String type;
-
     //必须为string，返回给app后是uuid无法变为int
     private Integer age;
     private String city;

@@ -15,14 +15,12 @@ public class SocialuniContentUserRO extends SocialuniUserRO {
     private Boolean hasFollowed;
     //是否被对方关注
     private Boolean hasBeFollowed;
-    private Boolean isMine;
     private Boolean identityAuth;
 
     public SocialuniContentUserRO(SocialuniContentUserRO centerContentUserRO) {
         super(centerContentUserRO);
         this.hasFollowed = centerContentUserRO.getHasFollowed();
         this.hasBeFollowed = centerContentUserRO.getHasBeFollowed();
-        this.isMine = centerContentUserRO.getIsMine();
         this.identityAuth = centerContentUserRO.getIdentityAuth();
     }
 

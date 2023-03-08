@@ -24,6 +24,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class SocialuniGetUserContactRecordDO extends SocialuniUserContactBaseDO implements Serializable {
 
+    @Column(nullable = false)
+    String contactInfo;
+
     public SocialuniGetUserContactRecordDO(Integer userId, Integer beUserId) {
         super(userId, beUserId);
     }

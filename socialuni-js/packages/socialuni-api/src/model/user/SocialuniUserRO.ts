@@ -8,7 +8,6 @@ export default class SocialuniUserRO extends SocialUserContentRO{
     avatar?: string = null
     age?: number = null
     gender?: string = null
-    birth?: string = null
     city: string = null
     type: string = null
 
@@ -20,9 +19,8 @@ export default class SocialuniUserRO extends SocialUserContentRO{
             this.avatar = user.avatar;
             this.gender = user.gender;
             this.age = user.age;
-            this.birth = user.birth;
             this.city = user.city;
-            this.isMine = user.id === socialUserModule.userId
+            this.isMine = user.isMine
         }
     }
 }

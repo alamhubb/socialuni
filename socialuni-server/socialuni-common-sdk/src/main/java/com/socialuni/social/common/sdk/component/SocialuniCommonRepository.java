@@ -1,6 +1,7 @@
 package com.socialuni.social.common.sdk.component;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
@@ -38,10 +39,11 @@ public class SocialuniCommonRepository {
         return t;
     }
 
-    public <T> Optional<T> findByExample(T exampleObj) {
+    @Cacheable(cacheNames = "commonRepostoryFindByExample")
+    public <T> T findByExample(T exampleObj) {
         SimpleJpaRepository<T, Integer> simpleJpaRepository = getSimpleJpaRepository(exampleObj);
         Example<T> example = Example.of(exampleObj);
-        return simpleJpaRepository.findOne(example);
+        return simpleJpaRepository.findOne(example).orElse(null);
     }
     
     /**

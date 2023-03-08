@@ -19,7 +19,7 @@ import CosUtil from "./CosUtil";
 import CosUploadResult from "socialuni-api/src/model/cos/CosUploadResult";
 
 export default class UniUtil {
-    public static textCopy(copyText: string, hint?: string) {
+    public static textCopy(copyText: string, hint: string = '已复制') {
         return new Promise((resolve, reject) => {
             uni.setClipboardData({
                 data: copyText,
@@ -158,16 +158,17 @@ export default class UniUtil {
             }
         })
     }
+
     //选择视频
-    public  static async chooseVideo(maxDuration = 60) {
+    public static async chooseVideo(maxDuration = 60) {
         return new Promise<DomFile[]>((resolve, reject) => {
             uni.chooseVideo({
                 // sourceType: ['album'],
                 // sizeType: ['compressed'],
                 maxDuration: maxDuration,
                 success(res) {
-                    const imgFiles : DomFile[]= [];
-                    const imgFile : DomFile = res.tempFile as any;
+                    const imgFiles: DomFile[] = [];
+                    const imgFile: DomFile = res.tempFile as any;
                     // imgFile.src = UUIDUtil.getUUID() + ImgUtil.getFileSuffixName(fileName)
                     imgFile.fileName = imgFile?.name
                     imgFiles.push(imgFile);
@@ -180,6 +181,7 @@ export default class UniUtil {
         })
 
     }
+
     //选择图片
     public static chooseImage(count = 1) {
         return new Promise<DomFile[]>((resolve, reject) => {
