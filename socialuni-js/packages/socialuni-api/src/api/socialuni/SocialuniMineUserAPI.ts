@@ -43,11 +43,6 @@ export default class SocialuniMineUserAPI {
     return request.post('socialuni/mineUser/updateAvatar?avatar=' + avatar)
   }
 
-  static getUserContactAPI(userId: string) {
-    const user = new UserQueryVO(userId)
-    return request.post<string>('socialuni/mineUser/getUserContact', user)
-  }
-
   static switchUserContactAPI(openContact: boolean) {
     return request.post<string>('socialuni/mineUser/switchUserContact?openContact=' + openContact)
   }

@@ -20,16 +20,16 @@ public class SocialuniUserSocialCoinDOUtil {
 
 
     public static SocialuniUserCoinDo getAllowNull(Integer userId) {
-        SocialuniUserCoinDo socialuniUserExpandDO = socialuniUserSocialCoinApi.findByUserId(userId);
-        return socialuniUserExpandDO;
+        SocialuniUserCoinDo socialuniUserCoinDo = socialuniUserSocialCoinApi.findByUserId(userId);
+        return socialuniUserCoinDo;
     }
 
     public static SocialuniUserCoinDo getNotNull(Integer userId) {
-        SocialuniUserCoinDo socialuniUserExpandDO = getAllowNull(userId);
-        if (socialuniUserExpandDO == null) {
+        SocialuniUserCoinDo socialuniUserCoinDo = getAllowNull(userId);
+        if (socialuniUserCoinDo == null) {
             throw new SocialParamsException("未给用户创建金币表数据");
         }
-        return socialuniUserExpandDO;
+        return socialuniUserCoinDo;
     }
 
     public static SocialuniUserCoinDo save(SocialuniUserCoinDo socialuniUserExpandDO) {
@@ -37,13 +37,13 @@ public class SocialuniUserSocialCoinDOUtil {
     }
 
     public static SocialuniUserCoinDo getOrCreate(Integer userId) {
-        SocialuniUserCoinDo socialuniUserExpandDO = getAllowNull(userId);
-        if (socialuniUserExpandDO == null) {
-            socialuniUserExpandDO = new SocialuniUserCoinDo();
-            socialuniUserExpandDO.setUserId(userId);
-            socialuniUserExpandDO.setCoin(0);
-            socialuniUserExpandDO = save(socialuniUserExpandDO);
+        SocialuniUserCoinDo socialuniUserCoinDo = getAllowNull(userId);
+        if (socialuniUserCoinDo == null) {
+            socialuniUserCoinDo = new SocialuniUserCoinDo();
+            socialuniUserCoinDo.setUserId(userId);
+            socialuniUserCoinDo.setCoin(0);
+            socialuniUserCoinDo = save(socialuniUserCoinDo);
         }
-        return socialuniUserExpandDO;
+        return socialuniUserCoinDo;
     }
 }

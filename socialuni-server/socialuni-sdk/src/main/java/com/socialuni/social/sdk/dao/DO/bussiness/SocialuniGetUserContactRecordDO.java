@@ -27,7 +27,8 @@ public class SocialuniGetUserContactRecordDO extends SocialuniUserContactBaseDO 
     @Column(nullable = false)
     String contactInfo;
 
-    public SocialuniGetUserContactRecordDO(Integer userId, Integer beUserId) {
+    public SocialuniGetUserContactRecordDO(Integer userId, Integer beUserId, String contactInfo) {
         super(userId, beUserId);
+        this.contactInfo = contactInfo;
     }
 }

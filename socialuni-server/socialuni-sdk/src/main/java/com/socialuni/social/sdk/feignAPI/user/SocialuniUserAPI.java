@@ -7,6 +7,7 @@ import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -52,4 +53,8 @@ public interface SocialuniUserAPI {
     @GetMapping("queryRecentlyUsers")
     @Operation(summary = "获取最近在线用户")
     ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers();
+
+    @GetMapping("getUserContactInfo/{userId}")
+    @Operation(summary = "获取用户的联系方式")
+    ResultRO<String> getUserContactInfo(@PathVariable("userId") String userId);
 }

@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserExpandRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,14 @@ public class SocialuniUserExpandDOUtil {
 
     public static SocialuniUserExpandDo getAllowNull(Integer userId) {
         SocialuniUserExpandDo SocialuniUserExpandDo = socialuniUserExpandApi.findByUserId(userId);
+        return SocialuniUserExpandDo;
+    }
+
+    public static SocialuniUserExpandDo getNotNull(Integer userId) {
+        SocialuniUserExpandDo SocialuniUserExpandDo = getAllowNull(userId);
+        if (SocialuniUserExpandDo == null) {
+            throw new SocialParamsException("未给用户扩展表数据");
+        }
         return SocialuniUserExpandDo;
     }
 

@@ -39,6 +39,7 @@ public class SocialuniUserDetailROFactory {
         //他获取过你的联系方式
 
         //界面需要显示，未展示和展示，已填写
+        //每笔充值消费，都记录下消费后当前数量
 
         if (mineUser != null) {
             String contactInfo = socialuniUserExpandDo.getContactInfo();
