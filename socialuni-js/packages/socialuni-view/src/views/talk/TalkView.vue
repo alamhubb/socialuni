@@ -187,7 +187,6 @@ export default class TalkView extends Vue {
     this.$refs.tagPicker.open()
   }
 
-
   @Watch('selectTagName')
   selectTagNameWatch() {
     //已经watch了，所以修改tag无需重新设置查询
