@@ -16,8 +16,7 @@ export default class SocialuniUserAPI {
     return request.get<SocialUserContentRO[]>('socialuni/user/queryRecentlyUsers')
   }
 
-  static getUserContactAPI(userId: string) {
-    const user = new UserQueryVO(userId)
-    return request.post<string>('socialuni/user/getUserContact', user)
+  static getUserContactInfoAPI(userId: string) {
+    return request.get<string>('socialuni/user/getUserContactInfo/'+userId)
   }
 }

@@ -112,7 +112,7 @@ public class SocialuniCallbackController {
         userCoinDo.setCoin(userCoinDo.getCoin() + plusShell);
 
         //创建金币订单
-        SocialuniCoinOrderDO socialuniCoinOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByRechargeSuccess(userCoinDo.getUserId(), plusShell, rechargeOrderDO.getId());
+        SocialuniCoinOrderDO socialuniCoinOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByRechargeSuccess(userCoinDo, plusShell, rechargeOrderDO.getId());
         //保存coin订单
         SocialuniRepositoryFacade.save(socialuniCoinOrderDO);
         //更新用户的coin数量

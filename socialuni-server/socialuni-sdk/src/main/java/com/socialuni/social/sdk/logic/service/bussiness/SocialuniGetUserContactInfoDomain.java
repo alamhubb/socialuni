@@ -9,6 +9,7 @@ import com.socialuni.social.sdk.constant.shell.ExpenseType;
 import com.socialuni.social.sdk.constant.shell.SocialuniCoinOrderType;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO;
+import com.socialuni.social.sdk.dao.factory.SocialuniCoinOrderFactory;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserSocialCoinDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
@@ -30,7 +31,10 @@ import java.util.Optional;
 public class SocialuniGetUserContactInfoDomain {
     @Transactional
     public String getUserContactInfo(String beUserId) {
-
+        //获取对方联系方式
+        //然后确认对方是否拥有联系方式。
+        //首先需要确认，对方是否开启获取联系方式
+        //如果都有则可以获取。然后就是付费逻辑了
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         SocialuniUserDo beUser = SocialuniUserUtil.getUserByUuid(beUserId);
 
@@ -72,8 +76,15 @@ public class SocialuniGetUserContactInfoDomain {
         SocialuniGetUserContactRecordDO userContactDO = new SocialuniGetUserContactRecordDO(mineUser.getUserId(), beUser.getUserId(), socialuniUserExpandDo.getContactInfo());
         userContactDO = SocialuniRepositoryFacade.save(userContactDO);
 
+        //保存用户
+        //用户消耗
+        socialuniUserCoinDo.setCoin(mineUserCoin - expanseCoinNum);
+        //保存用户消耗
+        socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.save(socialuniUserCoinDo);
+
+        //创建金币订单
+        SocialuniCoinOrderDO shellOrderDO = SocialuniCoinOrderFactory.createCoinOrderDOByContactInfoSuccess(socialuniUserCoinDo, -expanseCoinNum, userContactDO.getId());
         //消费
-        SocialuniCoinOrderDO shellOrderDO = new SocialuniCoinOrderDO(mineUser.getUserId(), -expanseCoinNum, SocialuniCoinOrderType.expense, userContactDO.getId());
         //保存
         shellOrderDO = SocialuniRepositoryFacade.save(shellOrderDO);
 
@@ -85,13 +96,8 @@ public class SocialuniGetUserContactInfoDomain {
 
 //        shellOrderDO.setRechargeOrderId(shellOrderGiveDO.getId());
         //保存上一个的关联
-        shellOrderDO = SocialuniRepositoryFacade.save(shellOrderDO);
+//        shellOrderDO = SocialuniRepositoryFacade.save(shellOrderDO);
 
-        //保存用户
-        //用户消耗
-        socialuniUserCoinDo.setCoin(mineUserCoin - expanseCoinNum);
-        //保存用户消耗
-        socialuniUserCoinDo = SocialuniUserSocialCoinDOUtil.save(socialuniUserCoinDo);
 
 //        SocialuniUserCoinDo beUserCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(beUser.getUserId());
 

@@ -2,7 +2,7 @@
   <button
       class="row-all-center line-h1"
       :class="[buttonClass,addClass]"
-      @click.stop="clickHandler"
+      @click="clickHandler"
       :disabled="btnDisabled"
       :loading="loading"
       :form-type="formType"

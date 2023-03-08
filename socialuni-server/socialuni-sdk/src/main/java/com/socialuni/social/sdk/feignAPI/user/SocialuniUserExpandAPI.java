@@ -26,8 +26,4 @@ public interface SocialuniUserExpandAPI {
     @PostMapping("switchOpenUserContactInfo")
     @Operation(summary = "用户切换他人是否可获取联系方式功能")
     ResultRO<SocialuniMineUserDetailRO> switchOpenUserContactInfo(@RequestBody SocialUserContactInfoEditQO socialuniMineUserDetailRO);
-
-    @PostMapping("getUserContactInfo")
-    @Operation(summary = "获取用户联系方式")
-    ResultRO<SocialuniMineUserDetailRO> getUserContactInfo(@RequestBody SocialuniUserIdQO socialuniMineUserDetailRO);
 }

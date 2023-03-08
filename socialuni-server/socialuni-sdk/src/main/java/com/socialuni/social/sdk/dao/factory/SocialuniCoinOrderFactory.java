@@ -2,13 +2,21 @@ package com.socialuni.social.sdk.dao.factory;
 
 import com.socialuni.social.sdk.constant.shell.SocialuniCoinOrderType;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniCoinOrderDO;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 
 public class SocialuniCoinOrderFactory {
 
     //充值成功创建订单
-    public static SocialuniCoinOrderDO createCoinOrderDOByRechargeSuccess(Integer userId, Integer coin, Integer rechargeOrderId) {
-        SocialuniCoinOrderDO socialuniCoinOrderDO = new SocialuniCoinOrderDO(userId, coin, SocialuniCoinOrderType.recharge);
+    public static SocialuniCoinOrderDO createCoinOrderDOByRechargeSuccess(SocialuniUserCoinDo socialuniUserCoinDo, Integer rechargeNum, Integer rechargeOrderId) {
+        SocialuniCoinOrderDO socialuniCoinOrderDO = new SocialuniCoinOrderDO(socialuniUserCoinDo.getUserId(), rechargeNum, SocialuniCoinOrderType.recharge, socialuniUserCoinDo.getCoin());
         socialuniCoinOrderDO.setRechargeOrderId(rechargeOrderId);
+        return socialuniCoinOrderDO;
+    }
+
+    public static SocialuniCoinOrderDO createCoinOrderDOByContactInfoSuccess(SocialuniUserCoinDo socialuniUserCoinDo, Integer expanseNum, Integer userContactId) {
+        SocialuniCoinOrderDO socialuniCoinOrderDO = new SocialuniCoinOrderDO(socialuniUserCoinDo.getUserId(), expanseNum, SocialuniCoinOrderType.expense, socialuniUserCoinDo.getCoin());
+        socialuniCoinOrderDO.setUserContactId(userContactId);
         return socialuniCoinOrderDO;
     }
 }
