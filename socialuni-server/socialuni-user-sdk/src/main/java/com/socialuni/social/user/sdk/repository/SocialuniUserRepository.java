@@ -31,6 +31,9 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
 
     List<SocialuniUserDo> findTop10ByStatusOrderByIdDesc(@Param("userStatus") String userStatus);
 
+    @Query("select s.userId from SocialuniUserDo s where s.status = :status order by s.updateTime desc")
+    List<Integer> findUserIdsByStatusOrderByUpdateTimeDesc(String status);
+
     /*@Modifying
     @Transactional
     @Query(value = "update UserDO u set u.seeCount = u.seeCount+1 where u in (:users)")

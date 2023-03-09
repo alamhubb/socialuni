@@ -18,6 +18,16 @@ public class ListConvertUtil {
     }
 
     //list转换，TO类List转为RO类List,支持额外传入一个参数
+    public static <Type> List<Type> intersection(List<Type>... listA) {
+        if (listA.length < 1) {
+            return new ArrayList<>();
+        } else if (listA.length < 2) {
+            return listA[0];
+        }
+    }
+
+
+    //list转换，TO类List转为RO类List,支持额外传入一个参数
     public static <Type> List<Type> intersection(List<Type> listA, List<Type> listB) {
         Map<Type, Boolean> mapA = new LinkedHashMap<>();
         Map<Type, Boolean> mapB = new LinkedHashMap<>();
@@ -35,6 +45,6 @@ public class ListConvertUtil {
                 res.add(keyA);
             }
         }
-        return  res;
+        return res;
     }
 }

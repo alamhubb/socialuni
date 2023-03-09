@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
@@ -69,7 +70,7 @@ public class SocialuniUserController implements SocialuniUserAPI {
     }
 
     @Override
-    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO) {
+    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO>  socialuniPageQueryQO) {
         return null;
     }
 

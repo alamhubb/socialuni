@@ -3,8 +3,10 @@ package com.socialuni.social.sdk.logic.service.user;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.*;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
@@ -29,6 +31,7 @@ import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.repository.SocialuniUserExpandRepository;
 import com.socialuni.social.user.sdk.repository.SocialuniUserExtendFriendLogRepository;
 import com.socialuni.social.user.sdk.repository.SocialuniUserHugRepository;
 import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
@@ -59,6 +62,8 @@ public class SocialuniUserService {
     SocialuniUserRepository socialuniUserRepository;
     @Resource
     SocialuniGetUserContactInfoDomain socialuniGetUserContactInfoDomain;
+    @Resource
+    SocialuniUserExpandRepository socialuniUserExpandRepository;
 
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
@@ -102,9 +107,16 @@ public class SocialuniUserService {
     SocialuniUserHugRepository socialuniUserHugRepository;
     @Resource
     SocialuniUserExtendFriendLogRepository socialuniUserExtendFriendLogRepository;
+    @Resource
+    SocialuniUserHugRepository socialuniUserHugRepository;
 
     //查询最近在线的用户
-    public ResultRO<List<SocialuniContentUserRO>> queryExtendFriendUsers(SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO) {
+    public ResultRO<List<SocialuniContentUserRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO) {
+        SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO = socialuniPageQueryQO.getQueryData();
+
+
+        Date queryTime = socialuniPageQueryQO.getQueryTime();
+
         String pageType = socialuniUserExtendFriendQueryQO.getPageType();
         if (!SocialuniUserExtendFriendsPageType.allTypes.contains(pageType)) {
             throw new SocialParamsException("错误的扩列页面类型");
@@ -116,10 +128,20 @@ public class SocialuniUserService {
             Date curDate = new Date();
             long lastWeekTime = curDate.getTime() - DateTimeType.week;
             Date lastWeekDate = new Date(lastWeekTime);
-            //周id列表
-            List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate);
             //热门id列表
             List<Integer> hugHotUserIds = socialuniUserHugRepository.findUserIdsOrderByHugNum();
+            //周id列表
+            List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate, queryTime);
+            //查询打开了联系方式的用户
+            List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByUpdateTimeDesc();
+//查询用户状态不为封禁的
+
+
+            //查询设置了联系方式的用户，并且打开了允许别人获取联系方式
+
+            List<Integer> queryIds = ListConvertUtil.intersection(hugHotUserIds, weekUserIds);
+
+            List<Integer> userIds = socialuniUserRepository.findUserIdsByStatusOrderByUpdateTimeDesc(SocialuniUserStatus.enable);
 
 
             //然后把他们的赞排序
