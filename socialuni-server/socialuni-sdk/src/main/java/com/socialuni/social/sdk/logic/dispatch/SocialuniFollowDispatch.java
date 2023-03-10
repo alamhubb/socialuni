@@ -1,22 +1,21 @@
-package com.socialuni.social.sdk.logic.domain.follow;
+package com.socialuni.social.sdk.logic.dispatch;
 
 
 import com.socialuni.social.common.api.model.ResultRO;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
+import com.socialuni.social.sdk.logic.domain.user.follow.SocialQueryUserFollowsDomain;
+import com.socialuni.social.sdk.logic.domain.user.follow.SocialUserFollowDomain;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
-import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @Component
-public class SocialuniFollowUserDomain {
+public class SocialuniFollowDispatch {
     @Resource
     private SocialQueryUserFollowsDomain socialQueryUserFollowsDomain;
     @Resource

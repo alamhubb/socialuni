@@ -271,7 +271,7 @@ import TalkAPI from '@/api/TalkAPI'
 import { Message } from 'element-ui'
 import ViolateType from '@/constant/ViolateType'
 import request from '@/plugins/request'
-import UserAPI from '@/api/UserAPI'
+import AdminUserAPI from '@/api/AdminUserAPI'
 
 @Component
 export default class ContentAuditView extends Vue {
@@ -339,7 +339,7 @@ export default class ContentAuditView extends Vue {
 
   removeUserBanByPhoneNum() {
     if (this.phoneNum) {
-      UserAPI.removeUserBanByPhoneNumAPI(this.phoneNum)
+      AdminUserAPI.removeUserBanByPhoneNumAPI(this.phoneNum)
     }
   }
 

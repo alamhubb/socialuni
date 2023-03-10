@@ -18,12 +18,17 @@ public class ListConvertUtil {
     }
 
     //list转换，TO类List转为RO类List,支持额外传入一个参数
-    public static <Type> List<Type> intersection(List<Type>... listA) {
+    public static <Type> List<Type> intersectionMany(List<Type>... listA) {
         if (listA.length < 1) {
             return new ArrayList<>();
         } else if (listA.length < 2) {
             return listA[0];
         }
+        List<Type> resultList = listA[0];
+        for (int i = 1; i < listA.length; i++) {
+            resultList = ListConvertUtil.intersection(resultList, listA[i]);
+        }
+        return resultList;
     }
 
 

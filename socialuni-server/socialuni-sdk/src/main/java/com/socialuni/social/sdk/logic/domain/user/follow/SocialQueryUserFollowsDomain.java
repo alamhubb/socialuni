@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.logic.domain.follow;
+package com.socialuni.social.sdk.logic.domain.user.follow;
 
 
 import com.socialuni.social.common.api.enumeration.CommonStatus;

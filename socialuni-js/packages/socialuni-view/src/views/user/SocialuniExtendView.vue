@@ -75,12 +75,15 @@ import SocialuniUserRO from "socialuni-api/src/model/user/SocialuniUserRO";
 import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 import SocialUserFollowDetailRO from "socialuni-api/src/model/social/SocialUserFollowDetailRO";
 import SocialuniUserExtendFriendsType from "socialuni-constant/constant/user/SocialuniUserExtendFriendsType";
+import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
+import SocialuniUserExtendFriendQueryQO from "socialuni-api/src/model/user/SocialuniUserExtendFriendQueryQO";
+
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
 })
 export default class SocialuniFollowView extends Vue {
   tabs = SocialuniUserExtendFriendsType.allTypes
-  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialUserFollowDetailRO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
+  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialUserFollowDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
   currentTabIndex = 0
 
   loadMoreText = {
@@ -90,7 +93,7 @@ export default class SocialuniFollowView extends Vue {
   }
 
   created() {
-    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI), new SocialuniPageQueryUtil(FollowAPI.queryUserFollowsAPI)]
+    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserAPI.queryExtendFriendUsersAPI)]
 
     onPullDownRefresh(async () => {
       await this.initQuery()
@@ -114,7 +117,9 @@ export default class SocialuniFollowView extends Vue {
   }
 
   async initQuery() {
-    await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(this.tabs[this.currentTabIndex])
+    const queryData = new SocialuniUserExtendFriendQueryQO(this.tabs[this.currentTabIndex]);
+    console.log(queryData)
+    await this.tabsPageQueryUtil[this.currentTabIndex].initQuery(queryData)
     uni.stopPullDownRefresh()
   }
 

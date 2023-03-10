@@ -2,7 +2,7 @@ import request from '@/plugins/request'
 import DevAccountRO from '@/model/base/DevAccountRO'
 import ToastUtil from '@/utils/ToastUtil'
 
-export default class UserAPI {
+export default class AdminUserAPI {
     static getUserAPI() {
         return request.post('user/getUser')
     }

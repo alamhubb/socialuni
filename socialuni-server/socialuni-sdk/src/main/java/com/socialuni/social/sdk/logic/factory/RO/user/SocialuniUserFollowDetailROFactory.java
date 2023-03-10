@@ -54,12 +54,12 @@ public class SocialuniUserFollowDetailROFactory {
     }
 
     public static List<SocialuniUserFollowDetailListRO> getFansUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
-        return ListConvertUtil.toList((followDO, user) -> {
+        return ListConvertUtil.toList((followDO) -> {
             SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getUserId());
-            SocialuniUserFollowDetailRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, user);
+            SocialuniUserFollowDetailRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, mineUser);
             SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
             socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());
             return socialuniUserFollowDetailListRO;
-        }, users, mineUser);
+        }, users);
     }
 }

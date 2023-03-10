@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.logic.domain.follow;
+package com.socialuni.social.sdk.logic.domain.user.follow;
 
 import com.socialuni.social.sdk.logic.manage.FollowManage;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
@@ -21,6 +21,7 @@ public class SocialUserFollowDomain {
     @Resource
     FollowManage followManage;
 
+    @Async
     public void addFlow(@NotNull Integer mineUserId, @NotNull Integer beUserId) {
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己关注自己哦");
@@ -29,11 +30,6 @@ public class SocialUserFollowDomain {
         if (hasFollow) {
             throw new SocialParamsException("已经关注过此用户了");
         }
-        privateAddFlowAsync(mineUserId, beUserId);
-    }
-
-    @Async
-    public void privateAddFlowAsync(Integer mineUserId, Integer beUserId) {
         socialUserFansDetailManage.mineFollowNumAdd(mineUserId);
         socialUserFansDetailManage.beUserFansNumAdd(beUserId);
         SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);
@@ -46,6 +42,7 @@ public class SocialUserFollowDomain {
         }
     }
 
+    @Async
     public void cancelFollow(@NotNull Integer mineUserId, @NotNull Integer beUserId) {
         if (beUserId.equals(mineUserId)) {
             throw new SocialParamsException("不能自己取消关注自己哦");
@@ -54,11 +51,6 @@ public class SocialUserFollowDomain {
         if (!hasFollow) {
             throw new SocialParamsException("并没有关注此用户");
         }
-        privateCancelFollowAsync(mineUserId, beUserId);
-    }
-
-    @Async
-    public void privateCancelFollowAsync(Integer mineUserId, Integer beUserId) {
         socialUserFansDetailManage.mineFollowNumSub(mineUserId);
         socialUserFansDetailManage.beUserFansNumSub(beUserId);
         SocialuniFollowDO followDO = followRedis.findFirstByUserIdAndBeUserId(mineUserId, beUserId);

@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -186,6 +188,15 @@ public class SocialuniUserUtil {
             throw new SocialNullUserException();
         }
         return socialUserDO;
+    }
+
+    public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
+        List<SocialuniUserDo> userDos = new ArrayList<>();
+        for (Integer id : ids) {
+            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(id);
+            userDos.add(socialuniUserDo);
+        }
+        return userDos;
     }
 
     public static SocialuniUserDo getUserByUuid(String uid) {

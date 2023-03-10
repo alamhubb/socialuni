@@ -12,8 +12,8 @@ public class SocialuniUserExtendFriendsPageType {
     public static final String recently = "最近在线";
     public static final String city = "同城";
     public static final List<String> allTypes = Arrays.asList(
-            SocialuniUserExtendFriendsPageType.city,
             SocialuniUserExtendFriendsPageType.recently,
-            SocialuniUserExtendFriendsPageType.hot
+            SocialuniUserExtendFriendsPageType.hot,
+            SocialuniUserExtendFriendsPageType.city
     );
 }

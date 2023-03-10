@@ -1,9 +1,11 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
+import com.socialuni.social.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
@@ -79,5 +81,9 @@ public class SocialuniUserDetailROFactory {
         userDetailVO.setImgs(imgVOS);
 
         return userDetailVO;
+    }
+
+    public static List<SocialuniUserDetailRO> getUserDetailList(List<SocialuniUserDo> userDOs, SocialuniUserDo mineUser) {
+        return ListConvertUtil.toList(SocialuniUserDetailROFactory::getUserDetailRO, userDOs,mineUser);
     }
 }
