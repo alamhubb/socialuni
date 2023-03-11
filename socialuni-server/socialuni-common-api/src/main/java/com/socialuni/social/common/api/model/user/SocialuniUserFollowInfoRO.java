@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniUserFollowDetailRO extends SocialuniContentUserRO {
+public class SocialuniUserFollowInfoRO extends SocialuniContentUserRO {
     private Integer fansNum;
     // 保护用户隐私，仅为自己才可查看
     private Integer followNum;
 
-    public SocialuniUserFollowDetailRO(SocialuniUserFollowDetailRO userRO) {
+    public SocialuniUserFollowInfoRO(SocialuniUserFollowInfoRO userRO) {
         super(userRO);
         this.fansNum = userRO.getFansNum();
         this.followNum = userRO.getFollowNum();
     }
 
-    public SocialuniUserFollowDetailRO(SocialuniContentUserRO centerContentUserRO) {
+    public SocialuniUserFollowInfoRO(SocialuniContentUserRO centerContentUserRO) {
         super(centerContentUserRO);
     }
 }

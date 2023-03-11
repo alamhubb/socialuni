@@ -78,6 +78,8 @@ import SocialuniUserExtendFriendsType from "socialuni-constant/constant/user/Soc
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import SocialuniUserExtendFriendQueryQO from "socialuni-api/src/model/user/SocialuniUserExtendFriendQueryQO";
 import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
+import request from "socialuni-api/src/request/request";
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
@@ -94,6 +96,15 @@ export default class SocialuniFollowView extends Vue {
   }
 
   created() {
+    request.post<CenterUserDetailRO[]>('socialuni/keyQuery/query', {
+      queryData: {
+        userId: "d077ece6a78b43a09f0ab09d6008face",
+      },
+      jsonKey: {
+        userId: 'user.id'
+      },
+    })
+
     this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI)]
 
     onPullDownRefresh(async () => {

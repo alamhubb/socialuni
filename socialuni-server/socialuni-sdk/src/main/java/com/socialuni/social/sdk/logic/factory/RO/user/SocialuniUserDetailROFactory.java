@@ -5,10 +5,9 @@ import com.socialuni.social.sdk.dao.DO.bussiness.SocialuniGetUserContactRecordDO
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
 import com.socialuni.social.sdk.facade.SocialuniUserContactRepositoryFacede;
-import com.socialuni.social.sdk.logic.factory.SocialHomeSwiperROFactory;
 import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
-import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserImgRO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
@@ -22,7 +21,7 @@ import java.util.List;
 public class SocialuniUserDetailROFactory {
     public static SocialuniUserDetailRO getUserDetailRO(SocialuniUserDo userDO, SocialuniUserDo mineUser) {
         //user基础信息
-        SocialuniUserFollowDetailRO socialUserDetailFollowRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDO, mineUser);
+        SocialuniUserFollowInfoRO socialUserDetailFollowRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDO, mineUser);
 
         //user基础信息
         SocialuniUserDetailRO userDetailVO = new SocialuniUserDetailRO(socialUserDetailFollowRO);

@@ -143,7 +143,7 @@ export default class LocationUtil {
             district.adName = res.district
             district.lon = res.location.lng
             district.lat = res.location.lat
-            district.isLocation = true
+            district.position = true
             //更新用户经纬度
             socialLocationModule.updateLocationLonAndLat(district.lon, district.lat)
             //如果未开启定位的话开启定位
@@ -169,7 +169,7 @@ export default class LocationUtil {
             district.adName = res.city
             district.lon = res.location.lng
             district.lat = res.location.lat
-            district.isLocation = true
+            district.position = true
             return district
         })
     }

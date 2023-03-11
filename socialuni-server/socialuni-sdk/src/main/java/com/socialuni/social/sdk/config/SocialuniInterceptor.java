@@ -22,9 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
-@Component
 @Slf4j
-@Primary
 public class SocialuniInterceptor extends SocialuniWebInterceptor {
     @Resource
     SocialRequestUserConfig socialRequestUserConfig;

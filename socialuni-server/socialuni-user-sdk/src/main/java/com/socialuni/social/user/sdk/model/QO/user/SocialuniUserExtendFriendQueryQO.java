@@ -10,7 +10,4 @@ import javax.validation.constraints.NotNull;
 public class SocialuniUserExtendFriendQueryQO {
     @NotBlank
     String pageType;
-    String adCode;
-    String lon;
-    String lat;
 }

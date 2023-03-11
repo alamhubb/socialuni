@@ -2,7 +2,7 @@ package com.socialuni.social.common.api.utils;
 
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -80,11 +80,11 @@ public class RequestUtil {
     }
 
     public static String getRequestValue(String key) {
-        String value = getHeader(key);
+        String value = getParameter(key);
         if (!headerIsEmpty(value)) {
             return value;
         }
-        value = getParameter(key);
+        value = getHeader(key);
         if (!headerIsEmpty(value)) {
             return value;
         }
@@ -101,19 +101,6 @@ public class RequestUtil {
 
     public static String getProvider() {
         return RequestUtil.getHeader(SocialWebHeaderName.providerHeaderName);
-    }
-
-    public static String getUserLat() {
-        return RequestUtil.getHeader(SocialWebHeaderName.city_lat);
-    }
-
-
-    public static String getUserLon() {
-        return RequestUtil.getHeader(SocialWebHeaderName.city_lon);
-    }
-
-    public static String getUserAdCode() {
-        return RequestUtil.getHeader(SocialWebHeaderName.city_adCode);
     }
 
     public static String getPlatform() {

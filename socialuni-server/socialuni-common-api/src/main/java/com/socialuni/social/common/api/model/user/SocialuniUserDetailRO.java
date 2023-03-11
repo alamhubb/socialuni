@@ -12,9 +12,12 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniUserDetailRO extends SocialuniUserFollowDetailRO {
+public class SocialuniUserDetailRO extends SocialuniUserFollowInfoRO {
     private List<SocialuniUserImgRO> imgs;
     private String schoolName;
+    private Integer hugNum;
+    //每天可以点赞，今天是否赞过
+    private Boolean hasHugged;
     private Date lastOnlineTime;
     private String contactInfo;
     //为他人详情是，则意义为是否已经拥有查看用户联系方式的权限
@@ -28,7 +31,7 @@ public class SocialuniUserDetailRO extends SocialuniUserFollowDetailRO {
         this.openContactInfo = userRO.getOpenContactInfo();
     }
 
-    public SocialuniUserDetailRO(SocialuniUserFollowDetailRO centerUserFollowDetailRO) {
+    public SocialuniUserDetailRO(SocialuniUserFollowInfoRO centerUserFollowDetailRO) {
         super(centerUserFollowDetailRO);
     }
 }

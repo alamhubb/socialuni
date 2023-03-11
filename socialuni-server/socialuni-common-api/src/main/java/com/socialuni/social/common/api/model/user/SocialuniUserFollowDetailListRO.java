@@ -11,10 +11,10 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniUserFollowDetailListRO extends SocialuniUserFollowDetailRO {
+public class SocialuniUserFollowDetailListRO extends SocialuniUserFollowInfoRO {
     private Date updateTime;
 
-    public SocialuniUserFollowDetailListRO(SocialuniUserFollowDetailRO socialuniUserFollowDetailRO) {
+    public SocialuniUserFollowDetailListRO(SocialuniUserFollowInfoRO socialuniUserFollowDetailRO) {
         super(socialuniUserFollowDetailRO);
     }
 }

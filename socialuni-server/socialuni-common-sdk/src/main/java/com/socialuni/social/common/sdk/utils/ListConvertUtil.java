@@ -52,4 +52,8 @@ public class ListConvertUtil {
         }
         return res;
     }
+
+    public static List<String> objectListToStringList(List<Object> listA) {
+        return listA.stream().map(String::valueOf).collect(Collectors.toList());
+    }
 }

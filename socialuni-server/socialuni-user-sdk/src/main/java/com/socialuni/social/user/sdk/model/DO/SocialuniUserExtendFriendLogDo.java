@@ -12,10 +12,6 @@ import javax.persistence.*;
         indexes = {
                 @Index(columnList = "adCode"),
                 @Index(columnList = "updateTime"),
-        },
-        uniqueConstraints = {
-                //每个渠道都是唯一的
-                @UniqueConstraint(columnNames = "userId"),
         })
 @Data
 @NoArgsConstructor
