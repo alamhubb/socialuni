@@ -18,12 +18,4 @@ export default class SocialuniUserAPI {
     static queryRecentlyUsersAPI() {
         return request.get<CenterUserDetailRO[]>('socialuni/user/queryRecentlyUsers')
     }
-
-    static queryExtendFriendUsersAPI(queryQO: SocialuniUserExtendFriendQueryQO) {
-        return request.post<CenterUserDetailRO[]>('socialuni/user/queryExtendFriendUsers', queryQO)
-    }
-
-    static getUserContactInfoAPI(userId: string) {
-        return request.get<string>('socialuni/user/getUserContactInfo/' + userId)
-    }
 }

@@ -20,16 +20,14 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class SocialuniUserExtendFriendLogDo extends SocialuniContentBaseDO {
-        @Column(nullable = false)
-        private Double lon;
-        /*
-         * 纬度 Latitude 简写Lat
-         */
-        @Column(nullable = false)
-        private Double lat;
+    @Column(nullable = false)
+    private String lon;
+    /*
+     * 纬度 Latitude 简写Lat
+     */
+    @Column(nullable = false)
+    private String lat;
 
-        @Column(nullable = false)
-        private String adCode;
-        @Column(nullable = false)
-        private String adName;
+    @Column(nullable = false)
+    private String adCode;
 }

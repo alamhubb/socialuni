@@ -2,19 +2,29 @@ import SocialuniPageQueryQO from './SocialuniPageQueryQO'
 import SocialuniContentRO from "../social/SocialuniContentRO";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 
-export default class SocialuniPageQueryUtil<T extends SocialuniContentRO> {
-    queryQO: SocialuniPageQueryQO<T> = new SocialuniPageQueryQO<T>()
+export default class SocialuniPageQueryUtil<T extends SocialuniContentRO, Q> {
+    queryQO: SocialuniPageQueryQO<T, Q> = new SocialuniPageQueryQO()
     api = null
 
-    constructor(api: Function = null) {
+    constructor(api: Function = null, queryData?: Q) {
         this.api = api
+        if (queryData) {
+            this.queryQO.queryData = queryData
+        }
     }
 
-    async initQuery(queryData) {
+    async initQuery(queryData?: Q) {
+        let lastQueryData = this.queryQO.queryData
         this.queryQO = new SocialuniPageQueryQO()
-        this.queryQO.queryData = queryData
+        if (queryData) {
+            lastQueryData = queryData
+        }
+        if (lastQueryData) {
+            this.queryQO.queryData = lastQueryData
+        }
         this.queryQO.loadMore = LoadMoreType.loading
         try {
+            console.log(this.queryQO)
             const res = await this.api(this.queryQO)
             this.queryQO.firstLoad = false
             this.queryQO.listData = res.data
@@ -33,11 +43,13 @@ export default class SocialuniPageQueryUtil<T extends SocialuniContentRO> {
         }
     }
 
-    async nextPageQuery(queryData) {
-        if (this.queryQO.loadMore === LoadMoreType.loading){
+    async nextPageQuery(queryData?:Q) {
+        if (this.queryQO.loadMore === LoadMoreType.loading) {
             return
         }
-        this.queryQO.queryData = queryData
+        if (queryData) {
+            this.queryQO.queryData = queryData
+        }
         this.queryQO.loadMore = LoadMoreType.loading
         try {
             const res = await this.api(this.queryQO)

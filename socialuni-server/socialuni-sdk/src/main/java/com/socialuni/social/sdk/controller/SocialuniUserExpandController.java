@@ -1,16 +1,20 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserExpandAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserExpandService;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("socialuni/userExpand")
@@ -36,5 +40,15 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
 
 
         return null;
+    }
+
+    @Override
+    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO>  socialuniPageQueryQO) {
+        return socialuniUserExpandService.queryExtendFriendUsers(socialuniPageQueryQO);
+    }
+
+    @Override
+    public ResultRO<String> getUserContactInfo(String userId) {
+        return socialuniUserExpandService.getUserContactInfo(userId);
     }
 }

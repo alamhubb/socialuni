@@ -51,6 +51,7 @@ public class SocialuniWebInterceptor implements HandlerInterceptor {
         RequestLogUtil.set(requestLogDO);
 
         requestLogDO.setUserId(socialRequestUserConfig.getUserId());
+
 //        requestLogDO.setErrorCode(ResultRO.successCode);
 //        requestLogDO.setErrorType(ErrorType.success);
 //        requestLogDO.setErrorMsg(ErrorMsg.successMsg);

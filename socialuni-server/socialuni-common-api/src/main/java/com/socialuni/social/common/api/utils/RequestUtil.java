@@ -103,6 +103,19 @@ public class RequestUtil {
         return RequestUtil.getHeader(SocialWebHeaderName.providerHeaderName);
     }
 
+    public static String getUserLat() {
+        return RequestUtil.getHeader(SocialWebHeaderName.city_lat);
+    }
+
+
+    public static String getUserLon() {
+        return RequestUtil.getHeader(SocialWebHeaderName.city_lon);
+    }
+
+    public static String getUserAdCode() {
+        return RequestUtil.getHeader(SocialWebHeaderName.city_adCode);
+    }
+
     public static String getPlatform() {
         return RequestUtil.getRequestValue(SocialWebHeaderName.platformHeaderName);
     }

@@ -31,8 +31,7 @@ public class SocialuniUserDetailROFactory {
 
         SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(userUnionId);
         userDetailVO.setSchoolName(socialuniUserExpandDo.getSchoolName());
-
-
+        userDetailVO.setLastOnlineTime(socialuniUserExpandDo.getLastOnlineTime());
         //联系方式需要认证
         //每次设置联系方式
         // 联系方式需要审核，联系方式单独开一张表
@@ -84,6 +83,6 @@ public class SocialuniUserDetailROFactory {
     }
 
     public static List<SocialuniUserDetailRO> getUserDetailList(List<SocialuniUserDo> userDOs, SocialuniUserDo mineUser) {
-        return ListConvertUtil.toList(SocialuniUserDetailROFactory::getUserDetailRO, userDOs,mineUser);
+        return ListConvertUtil.toList(SocialuniUserDetailROFactory::getUserDetailRO, userDOs, mineUser);
     }
 }

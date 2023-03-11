@@ -48,23 +48,11 @@ import java.util.*;
 @Slf4j
 public class SocialuniUserService {
     @Resource
-    SocialEditUserDomain socialEditUserDomain;
-    @Resource
-    SocialAddUserImgDomain socialAddUserImgDomain;
-    @Resource
-    SocialDeleteUserImgDomain socialDeleteUserImgDomain;
-    @Resource
-    UniUserRegistryDomain socialuniUserRegistryDomain;
-    @Resource
-    SocialuniUnionIdInterface uniContentUnionIdRepository;
-    @Resource
     SocialuniUserAPI socialuniUserAPI;
     @Resource
     SocialuniUserRepository socialuniUserRepository;
     @Resource
     SocialuniGetUserContactInfoDomain socialuniGetUserContactInfoDomain;
-    @Resource
-    SocialuniUserExpandRepository socialuniUserExpandRepository;
 
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
@@ -102,57 +90,6 @@ public class SocialuniUserService {
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         List<SocialuniContentUserRO> userROS = SocialuniContentUserROFactory.toList(userDos, mineUser);
         return ResultRO.success(userROS);
-    }
-
-    @Resource
-    SocialuniUserHugRepository socialuniUserHugRepository;
-    @Resource
-    SocialuniUserExtendFriendLogRepository socialuniUserExtendFriendLogRepository;
-
-    //查询最近在线的用户
-    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO) {
-        SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO = socialuniPageQueryQO.getQueryData();
-
-
-        Date queryTime = socialuniPageQueryQO.getQueryTime();
-
-        String pageType = socialuniUserExtendFriendQueryQO.getPageType();
-        if (!SocialuniUserExtendFriendsPageType.allTypes.contains(pageType)) {
-            throw new SocialParamsException("错误的扩列页面类型");
-        }
-        List<Integer> pageTypeUserIds = null;
-        //赞个人主页。本周内获得赞最多的吗，就先上线一个最近的。
-        if (pageType.equals(SocialuniUserExtendFriendsPageType.hot)) {
-            //热门id列表, 然后把他们的赞排序
-            List<Integer> hugHotUserIds = socialuniUserHugRepository.findUserIdsOrderByHugNum();
-            pageTypeUserIds = hugHotUserIds;
-        } else if (pageType.equals(SocialuniUserExtendFriendsPageType.city)) {
-
-        }
-        //查询本周内上线的用户
-        Date curDate = new Date();
-        long lastWeekTime = curDate.getTime() - DateTimeType.week;
-        Date lastWeekDate = new Date(lastWeekTime);
-        //周id列表
-        List<Integer> weekUserIds = socialuniUserExtendFriendLogRepository.findUserIdByUpdateTimeLessThan(lastWeekDate, queryTime);
-        //查询打开了联系方式的用户
-        List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByUpdateTimeDesc();
-        //查询用户状态不为封禁的
-        List<Integer> userIds = socialuniUserRepository.findUserIdsByStatusOrderByUpdateTimeDesc(SocialuniUserStatus.enable);
-        List<Integer> queryIds;
-        if (pageTypeUserIds == null) {
-            queryIds = ListConvertUtil.intersectionMany(weekUserIds, openContactIds, userIds);
-        } else {
-            queryIds = ListConvertUtil.intersectionMany(pageTypeUserIds, weekUserIds, openContactIds, userIds);
-        }
-        List<Integer> pageQueryIds = CollUtil.sub(queryIds,0,10);
-        List<SocialuniUserDo> userDos = SocialuniUserUtil.getUsers(pageQueryIds);
-
-        SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
-
-        List<SocialuniUserDetailRO> socialuniUserDetailROS = SocialuniUserDetailROFactory.getUserDetailList(userDos, mineUser);
-
-        return ResultRO.success(socialuniUserDetailROS);
     }
 
     //查询最近在线的用户

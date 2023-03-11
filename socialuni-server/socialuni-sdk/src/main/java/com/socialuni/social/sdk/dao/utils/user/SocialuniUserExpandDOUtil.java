@@ -40,6 +40,7 @@ public class SocialuniUserExpandDOUtil {
             SocialuniUserExpandDo = new SocialuniUserExpandDo();
             SocialuniUserExpandDo.setUserId(userId);
             SocialuniUserExpandDo.setOpenContactInfo(false);
+            SocialuniUserExpandDo.setLastOnlineTime(SocialuniUserExpandDo.getCreateTime());
         }
         return SocialuniUserExpandDo;
     }
@@ -55,7 +56,4 @@ public class SocialuniUserExpandDOUtil {
     public static SocialuniUserExpandDo saveUserExpandDO(SocialuniUserExpandDo SocialuniUserExpandDo) {
         return socialuniUserExpandApi.savePut(SocialuniUserExpandDo);
     }
-
-
-
 }

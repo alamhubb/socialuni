@@ -70,11 +70,6 @@ public class SocialuniUserController implements SocialuniUserAPI {
     }
 
     @Override
-    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO>  socialuniPageQueryQO) {
-        return socialuniUserService.queryExtendFriendUsers(socialuniPageQueryQO);
-    }
-
-    @Override
     public ResultRO<String> getUserContactInfo(String userId) {
         return socialuniUserService.getUserContactInfo(userId);
     }

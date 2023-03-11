@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 //用户扩展类
 @Entity
@@ -26,6 +27,7 @@ public class SocialuniUserExpandDo extends SocialuniContentBaseDO {
     private Integer userId;
     private String schoolName;
     private String contactInfo;
+    private Date lastOnlineTime;
 
     //开启了可获取联系方式
     @Column(nullable = false)

@@ -2,6 +2,7 @@ import SocialUserSchoolNameEditQO from "../../model/QO/user/SocialUserSchoolName
 import CenterUserDetailRO from "../../model/social/CenterUserDetailRO";
 import request from '../../request/request';
 import SocialuniMineUserRO from "../../model/user/SocialuniMineUserRO";
+import SocialuniUserExtendFriendQueryQO from "../../model/user/SocialuniUserExtendFriendQueryQO";
 
 
 export default class SocialuniUserExpandAPI {
@@ -15,5 +16,13 @@ export default class SocialuniUserExpandAPI {
       contactInfo,
       openContactInfo
     })
+  }
+
+  static queryExtendFriendUsersAPI(queryQO: SocialuniUserExtendFriendQueryQO) {
+    return request.post<CenterUserDetailRO[]>('socialuni/userExpand/queryExtendFriendUsers', queryQO)
+  }
+
+  static getUserContactInfoAPI(userId: string) {
+    return request.get<string>('socialuni/userExpand/getUserContactInfo/' + userId)
   }
 }

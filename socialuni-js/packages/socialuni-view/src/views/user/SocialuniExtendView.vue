@@ -77,6 +77,7 @@ import SocialUserFollowDetailRO from "socialuni-api/src/model/social/SocialUserF
 import SocialuniUserExtendFriendsType from "socialuni-constant/constant/user/SocialuniUserExtendFriendsType";
 import SocialuniUserAPI from "socialuni-api/src/api/socialuni/SocialuniUserAPI";
 import SocialuniUserExtendFriendQueryQO from "socialuni-api/src/model/user/SocialuniUserExtendFriendQueryQO";
+import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
 
 @Options({
   components: {SocialuniFollowTag, SocialGenderTag, QTabs}
@@ -93,7 +94,7 @@ export default class SocialuniFollowView extends Vue {
   }
 
   created() {
-    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserAPI.queryExtendFriendUsersAPI)]
+    this.tabsPageQueryUtil = [new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI), new SocialuniPageQueryUtil(SocialuniUserExpandAPI.queryExtendFriendUsersAPI)]
 
     onPullDownRefresh(async () => {
       await this.initQuery()
@@ -146,7 +147,7 @@ export default class SocialuniFollowView extends Vue {
   }
 
   autoChooseUseLocationQueryTalksHandler() {
-    this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery(this.tabs[this.currentTabIndex])
+    this.tabsPageQueryUtil[this.currentTabIndex].nextPageQuery()
   }
 
   autoChooseUseLocationQueryTalks = CommonUtil.debounce(() => {

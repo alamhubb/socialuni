@@ -204,6 +204,7 @@ import QRowItem from "../../components/QRowItem/QRowItem.vue";
 import SocialuniUserInfoImg from "./SocialuniUserInfoImg.vue";
 import SocialuniFollowTag from "../../components/SocialuniFollow/SocialuniFollowTag.vue";
 import PlatformUtils from "socialuni-sdk/src/utils/PlatformUtils";
+import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
 
 @Options({
   components: {
@@ -401,7 +402,7 @@ export default class UserDetailView extends Vue {
     try {
       if (userShell >= getUserInfoNeedCoin) {
         await AlertUtil.confirm('是否消耗100个贝壳查看用户：' + this.user.nickname + ' 的联系方式')
-        const res = await SocialuniUserAPI.getUserContactInfoAPI(this.user.id)
+        const res = await SocialuniUserExpandAPI.getUserContactInfoAPI(this.user.id)
         this.user.contactInfo = res.data
         this.user.openContactInfo = true
         this.mineUser.socialCoin = userShell - getUserInfoNeedCoin

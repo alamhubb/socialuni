@@ -56,10 +56,6 @@ public interface SocialuniUserAPI {
     @Operation(summary = "获取最近在线用户")
     ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers();
 
-    @PostMapping("queryExtendFriendUsers")
-    @Operation(summary = "获取扩列用户列表")
-    ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(@RequestBody @Valid SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO);
-
     @GetMapping("getUserContactInfo/{userId}")
     @Operation(summary = "获取用户的联系方式")
     ResultRO<String> getUserContactInfo(@PathVariable("userId") String userId);
