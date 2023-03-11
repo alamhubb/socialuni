@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class KeyQueryQO<T> {
     T queryData;
-    Object jsonKey;
+    Object keyJson;
 }

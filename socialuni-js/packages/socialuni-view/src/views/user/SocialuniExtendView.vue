@@ -100,7 +100,7 @@ export default class SocialuniFollowView extends Vue {
       queryData: {
         userId: "d077ece6a78b43a09f0ab09d6008face",
       },
-      jsonKey: {
+      keyJson: {
         userId: 'user.id'
       },
     })
