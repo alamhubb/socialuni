@@ -43,10 +43,6 @@ public class SocialuniInterceptor extends SocialuniWebInterceptor {
         CompletableFuture.supplyAsync(() -> {
             SocialuniUserExpandDOUtil.saveUserExpandDO(socialuniUserExpandDo);
             return null;
-        }).exceptionally(e -> {
-            e.printStackTrace();
-            log.info(e.getMessage());
-            return null;
         });
         return true;
     }

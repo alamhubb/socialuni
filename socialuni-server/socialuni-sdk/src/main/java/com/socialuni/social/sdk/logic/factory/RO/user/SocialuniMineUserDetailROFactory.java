@@ -64,13 +64,13 @@ public class SocialuniMineUserDetailROFactory {
 
         Integer mineUserId = mineUser.getUnionId();
 
-        SocialuniUserExpandDo SocialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
+        SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
 
         SocialuniUserCoinDo SocialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
 
         mineUserDetailRO.setSocialCoin(SocialuniUserSocialCoinDo.getCoin());
 
-        mineUserDetailRO.setOpenContactInfo(SocialuniUserExpandDo.getOpenContactInfo());
+        mineUserDetailRO.setOpenContactInfo(socialuniUserExpandDo.getOpenContactInfo());
 
         //为自己返回生日，方便修改，和手机号
         mineUserDetailRO.setBirthday(mineUser.getBirthday());

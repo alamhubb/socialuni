@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Component
 @Slf4j
@@ -35,14 +36,14 @@ public class SocialuniUserExpandDOUtil {
     }
 
     public static SocialuniUserExpandDo getOrCreate(Integer userId) {
-        SocialuniUserExpandDo SocialuniUserExpandDo = getAllowNull(userId);
-        if (SocialuniUserExpandDo == null) {
-            SocialuniUserExpandDo = new SocialuniUserExpandDo();
-            SocialuniUserExpandDo.setUserId(userId);
-            SocialuniUserExpandDo.setOpenContactInfo(false);
-            SocialuniUserExpandDo.setLastOnlineTime(SocialuniUserExpandDo.getCreateTime());
+        SocialuniUserExpandDo socialuniUserExpandDo = getAllowNull(userId);
+        if (socialuniUserExpandDo == null) {
+            socialuniUserExpandDo = new SocialuniUserExpandDo();
+            socialuniUserExpandDo.setUserId(userId);
+            socialuniUserExpandDo.setOpenContactInfo(false);
+            socialuniUserExpandDo.setLastOnlineTime(new Date());
         }
-        return SocialuniUserExpandDo;
+        return socialuniUserExpandDo;
     }
 
     public static String getUserSchoolNameNotNull(Integer userId) {
