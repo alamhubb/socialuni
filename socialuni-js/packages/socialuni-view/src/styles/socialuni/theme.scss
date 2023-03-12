@@ -55,6 +55,7 @@ $color-bg-base: $color-white !default;
 //$color-theme-light: #FDF2F8 !default;
 
 $color-theme: #3f93ee !default;
+$color-theme-sub: #A2D2FF !default;
 $color-theme-bg: #f7f7f7 !default;
 $color-theme-navbar-bg: #f7f7f7 !default;
 $color-theme-light: $color-white !default;
@@ -108,7 +109,6 @@ $color-border-table: $color-border-default;
 //常规按钮灰色边线
 $color-border-button: #C0C6CC;
 
-
 //基础颜色直接循环拼就行
 $colors-custom-font: (
   //主题色，可自定义，默认和白色一样
@@ -134,6 +134,7 @@ $colors-custom-bg: (
         default: $color-bg-default,
         base: $color-bg-base,
         theme: $color-theme,
+        sub: $color-theme-sub,
         theme-bg: $color-theme-bg,
         theme-light: $color-theme-light,
         header-menu: $color-bg-header-menu,

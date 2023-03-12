@@ -13,11 +13,8 @@
         <q-icon icon="list-dot" size="20" @click="openTalkFilterDialog"></q-icon>
       </div>
     </div>
-    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh">
-      <swiper :current="currentTabIndex"
-              :style="{
-              'height':'calc(100vh - '+talksListHeightSub+'px)',
-            }"
+    <q-pull-refresh ref="pullRefresh" @refresh="manualPulldownRefresh" class="h100p">
+      <swiper :current="currentTabIndex" class="h100p"
               @change="talkSwiperChange">
         <swiper-item v-for="(item, swiperIndex) in talkTabs" :key="swiperIndex">
           <!--
@@ -33,7 +30,7 @@
 
           <scroll-view class="h100p bd-radius-10 mx-sm overflow-hidden " style="width: calc(100% - 20px)"
                        :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
-                       :scroll-top="talkTabs[swiperIndex].scrollTop"
+                       :scroll-top="talkTabs[swiperIndex].pageScrollTop"
                        :lower-threshold="800"
                        @scroll="talksScrollEvent">
             <!--          不放上面是因为，头部距离问题，这样会无缝隙，那样padding会在上面，始终空白-->
@@ -234,7 +231,7 @@ export default class TabsTalk extends Vue {
   // 页面初始化模块
   // homeTypeObjs: HomeTypeTalkVO [] = []
 
-  readonly talkCacheNum: number = 4
+  readonly talkCacheNum: number = 30
 
   // 生命周期
   created() {
@@ -261,7 +258,8 @@ export default class TabsTalk extends Vue {
       const storeTalkTab: TalkTabVO = new TalkTabVO(item.name, item.type)
       storeTalkTab.firstLoad = item.firstLoad
       storeTalkTab.scrollTop = item.scrollTop
-      storeTalkTab.talks = item.talks.slice(0, this.talkCacheNum)
+      storeTalkTab.pageScrollTop = item.scrollTop
+      storeTalkTab.talks = item.talks.slice(-this.talkCacheNum)
       storeTalkTabs.push(storeTalkTab)
     })
     //缓存记录本次推出时的默认值
@@ -285,7 +283,7 @@ export default class TabsTalk extends Vue {
     this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight + 52
     // #endif
     // #ifndef H5
-    this.talksListHeightSub = socialSystemModule.statusBarHeight + socialSystemModule.navBarHeight + this.tabsHeight
+    this.talksListHeightSub = socialSystemModule.navBarHeight + this.tabsHeight + socialSystemModule.statusBarHeight
     // #endif
     console.log(this.talksListHeightSub)
   }
@@ -297,26 +295,28 @@ export default class TabsTalk extends Vue {
   //供父组件使用，不可删除
   initQuery() {
     //首次打开talk页面，获取用户位置用来查询
-    socialLocationModule.appLunchInitDistrict().then(() => {
-      this.manualPulldownRefresh()
-    })
+    if (this.curTalkTabObj.firstLoad) {
+      this.startPullDown()
+    }
   }
 
   //js触发下拉刷新效果
   startPullDown() {
+    console.log('chufae')
     this.tabScrollToTop()
     this.$refs.pullRefresh.startPulldownRefresh()
   }
 
   tabScrollToTop() {
-    this.curTalkTabObj.scrollTop = 0
+    this.curTalkTabObj.pageScrollTop = 0
     this.$nextTick(() => {
-      this.curTalkTabObj.scrollTop = -1
+      this.curTalkTabObj.pageScrollTop = -1
     })
   }
 
   //用户手动执行下拉刷星
   private manualPulldownRefresh() {
+    console.log('chufale手动更新')
     this.tabScrollToTop()
     this.curTalkTabObj.queryTime = new Date()
     this.curTalkTabObj.firstLoad = true
@@ -456,7 +456,7 @@ export default class TabsTalk extends Vue {
   async talkSwiperChange(e) {
     const current = e.detail.current
     //首次加载可能为空
-    if (current){
+    if (current) {
       const curTab = socialTalkModule.setCurTabIndexUpdateCircle(current)
       // 存入store
       // 切换时截取其他的只保留后20条
@@ -467,10 +467,12 @@ export default class TabsTalk extends Vue {
           item.loadMore = LoadMoreType.more
         }
       })
+      console.log(curTab.firstLoad)
       //如果首次加载，则需要查询
       if (curTab.firstLoad) {
         this.startPullDown()
-        this.tabsTalkOnHide()
+        //不理解为什么首次加载要缓存
+        // this.tabsTalkOnHide()
       }
     }
   }
@@ -535,9 +537,10 @@ export default class TabsTalk extends Vue {
     }
   }
 
+  //为了每次保存后重新加载可以记录上次的位置
   talkTabScroll = CommonUtil.debounce((scrollTop) => {
     this.curTalkTabObj.scrollTop = scrollTop
-  }, 1000)
+  }, 100)
 
   throttleScroll = CommonUtil.throttle(() => {
     //如果向下滚动超过50隐藏

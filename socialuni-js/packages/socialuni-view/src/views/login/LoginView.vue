@@ -81,7 +81,7 @@
               <q-button v-if="showPhoneView" :disabled="loginButtonDisabled" @click="bindPhoneNum"
                         add-class="bg-gradual-phone"
               >
-                <q-icon custom-prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
+                <q-icon prefix="mdi" color="white" icon="cellphone-android" size="21" class="mr-xs"></q-icon>
                 绑定手机号
               </q-button>
               <!--                <button v-else-if="isMpWx" :disabled="!openTypeBtnEnable"
@@ -136,6 +136,7 @@ import LoginFooterAppInfo from "./LoginFooterAppInfo.vue";
 import QButton from "socialuni-view/src/components/QButton/QButton.vue";
 import QIcon from "socialuni-view/src/components/QIcon/QIcon.vue";
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
+import RouterUtil from "socialuni-sdk/src/utils/RouterUtil";
 
 @Options({
   components: {
@@ -217,7 +218,7 @@ export default class LoginView extends Vue {
         this.openTypeBtnEnable = false
         this.openTypeBtnEnable = false
         //一行代码就可以获取登录所需要的信息, 还可以配合后台使用，一键登录，记住用户
-        await LoginService.providerLogin(socialSystemModule.mpPlatform, result)
+        await LoginService.providerLogin(socialSystemModule.provider, result)
         this.loginAfterHint('登录成功')
       } finally {
         this.goToOAuthPage()
@@ -287,6 +288,10 @@ export default class LoginView extends Vue {
       msg += '，如遇无法弹出输入框，请重启应用'
     }
     AlertUtil.hint(msg).finally(() => {
+      //有手机号才直接返回，没手机号继续提示绑定手机号
+      if (this.hasPhoneNum) {
+        PageUtil.goBackOrMine()
+      }
       /*if (socialOAuthModule.isThreeAuth) {
         if (this.hasPhoneNum) {
           PageUtil.toOAuthPage()
@@ -294,10 +299,7 @@ export default class LoginView extends Vue {
           PageUtil.toPhonePage()
         }
       } else {
-        //有手机号才直接返回，没手机号继续提示绑定手机号
-        if (this.hasPhoneNum) {
-          RouterUtil.goBackOrMine()
-        }
+
       }*/
     })
   }

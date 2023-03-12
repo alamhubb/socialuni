@@ -16,7 +16,7 @@ import com.socialuni.social.user.sdk.logic.domain.SocialEditUserDomain;
 import com.socialuni.social.user.sdk.platform.tencent.TencentCloudAPI;
 import com.socialuni.social.user.sdk.model.QO.SocialUserIdentityAuthQO;
 import com.socialuni.social.sdk.model.RO.user.SocialUserIdentityAuthPreCheckRO;
-import com.socialuni.social.sdk.utils.DateUtils;
+import com.socialuni.social.common.sdk.utils.DateUtils;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.utils.BirthdayAgeUtil;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;

@@ -44,7 +44,7 @@ public class AdminReportQueryDomain {
             ReportDOs = reportApi.findTop20ByStatusInOrderByCreateTimeAsc(ReportStatus.auditStatus);
         } else {
             //用户自己删除了也没用，只要触发举报都会审核。
-            ReportDOs = reportApi.findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(ReportStatus.auditStatus, user.getId());
+            ReportDOs = reportApi.findTop20ByStatusInAndDevIdOrderByCreateTimeAsc(ReportStatus.auditStatus, user.getUserId());
         }
         List<ReportRO> reportVOS = ReportDOs.stream().map(ReportRO::new).collect(Collectors.toList());
 

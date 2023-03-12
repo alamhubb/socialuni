@@ -1,16 +1,21 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserExpandAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserExpandService;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("socialuni/userExpand")
@@ -39,12 +44,12 @@ public class SocialuniUserExpandController implements SocialuniUserExpandAPI {
     }
 
     @Override
-    public ResultRO<SocialuniMineUserDetailRO> getUserContactInfo(SocialuniUserIdQO socialuniUserIdQO) {
-        //获取对方联系方式
-        //然后确认对方是否拥有联系方式。
-        //首先需要确认，对方是否开启获取联系方式
-        //如果都有则可以获取。然后就是付费逻辑了
+    public ResultRO<List<SocialuniUserExtendDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO>  socialuniPageQueryQO) {
+        return socialuniUserExpandService.queryExtendFriendUsers(socialuniPageQueryQO);
+    }
 
-        return null;
+    @Override
+    public ResultRO<String> getUserContactInfo(String userId) {
+        return socialuniUserExpandService.getUserContactInfo(userId);
     }
 }

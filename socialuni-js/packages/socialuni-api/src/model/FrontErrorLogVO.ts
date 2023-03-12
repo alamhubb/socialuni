@@ -20,7 +20,7 @@ export default class FrontErrorLogVO {
         this.frontPage = RouterUtil.getCurrentPageURI()
         this.platform = socialSystemModule.platform
         if (this.platform === PlatformType.mp) {
-            this.provider = socialSystemModule.mpPlatform
+            this.provider = socialSystemModule.provider
         } else {
             this.appVersion = socialSystemModule.appVersion
         }

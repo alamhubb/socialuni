@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
 import com.socialuni.social.user.sdk.repository.SocialuniUserExpandRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Component
 @Slf4j
@@ -25,14 +27,23 @@ public class SocialuniUserExpandDOUtil {
         return SocialuniUserExpandDo;
     }
 
-    public static SocialuniUserExpandDo getOrCreate(Integer userId) {
+    public static SocialuniUserExpandDo getNotNull(Integer userId) {
         SocialuniUserExpandDo SocialuniUserExpandDo = getAllowNull(userId);
         if (SocialuniUserExpandDo == null) {
-            SocialuniUserExpandDo = new SocialuniUserExpandDo();
-            SocialuniUserExpandDo.setUserId(userId);
-            SocialuniUserExpandDo.setOpenContactInfo(false);
+            throw new SocialParamsException("未给用户扩展表数据");
         }
         return SocialuniUserExpandDo;
+    }
+
+    public static SocialuniUserExpandDo getOrCreate(Integer userId) {
+        SocialuniUserExpandDo socialuniUserExpandDo = getAllowNull(userId);
+        if (socialuniUserExpandDo == null) {
+            socialuniUserExpandDo = new SocialuniUserExpandDo();
+            socialuniUserExpandDo.setUserId(userId);
+            socialuniUserExpandDo.setOpenContactInfo(false);
+            socialuniUserExpandDo.setLastOnlineTime(new Date());
+        }
+        return socialuniUserExpandDo;
     }
 
     public static String getUserSchoolNameNotNull(Integer userId) {
@@ -46,7 +57,4 @@ public class SocialuniUserExpandDOUtil {
     public static SocialuniUserExpandDo saveUserExpandDO(SocialuniUserExpandDo SocialuniUserExpandDo) {
         return socialuniUserExpandApi.savePut(SocialuniUserExpandDo);
     }
-
-
-
 }

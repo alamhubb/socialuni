@@ -31,10 +31,12 @@ public class SocialuniAppMoreConfigBO {
     private Integer rewardedAdLimit = 3;
     //动态缓存数量
 //    private Integer talkCacheNum = 4;
-    //获取联系方式消耗多少贝壳
-    private Integer contactExpenseShell = 9999;
+    //获取联系方式消耗多少贝壳, 100金币，1块钱
+    private Integer contactExpenseShell = 100;
     //用户获得贝壳百分比
     private Integer contactUserReceiveShell = 50;
+    //系统抽成比例，百分比
+    private Integer sysServiceReceiveRatio = 20;
     //系统异常错误消息
     private String errorMsgContactService = "有任何疑问请联系客服";
     private String errorMsg601UnLogin = "未登录，请进行登录，是否前往登录";

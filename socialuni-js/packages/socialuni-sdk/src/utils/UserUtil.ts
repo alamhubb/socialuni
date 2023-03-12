@@ -1,9 +1,9 @@
-import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import SocialUserContentRO from "socialuni-api/src/model/social/SocialUserContentRO";
 import GenderType from "socialuni-constant/constant/GenderType";
 import FollowStatus from "socialuni-constant/constant/FollowStatus";
 
 export default class UserUtil {
-  static getGenderIcon (user: CenterUserDetailRO): string {
+  static getGenderIcon (user: SocialUserContentRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlIcon
     } else {
@@ -11,7 +11,7 @@ export default class UserUtil {
     }
   }
 
-  static getGenderCuIcon (user: CenterUserDetailRO): string {
+  static getGenderCuIcon (user: SocialUserContentRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlCuIcon
     } else {
@@ -19,7 +19,7 @@ export default class UserUtil {
     }
   }
 
-  static getGenderColor (user: CenterUserDetailRO): string {
+  static getGenderColor (user: SocialUserContentRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlColor
     } else {
@@ -27,7 +27,7 @@ export default class UserUtil {
     }
   }
 
-  static getGenderBgColor (user: CenterUserDetailRO): string {
+  static getGenderBgColor (user: SocialUserContentRO): string {
     if (user && user.gender === GenderType.girl) {
       return GenderType.girlBgColor
     } else {
@@ -54,7 +54,7 @@ export default class UserUtil {
     }
   }
 
-  /*static getOnlineColor (user: CenterUserDetailRO): string {
+  /*static getOnlineColor (user: SocialUserContentRO): string {
     if (user.onlineFlag) {
       return Constants.onlineColor
     } else if (user.lastOnlineTime) {

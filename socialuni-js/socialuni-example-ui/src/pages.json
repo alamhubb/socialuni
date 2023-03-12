@@ -13,6 +13,13 @@
       }
     },
     {
+      "path": "pages/user/extend",
+      "style": {
+        "navigationBarTitleText": "扩列",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
       "path": "pages/chat/chat",
       "style": {
         "navigationStyle": "custom"
@@ -100,6 +107,28 @@
           "style": {
             "navigationBarTitleText": "通知列表"
           }
+        },
+        {
+          "path": "user/follow",
+          "style": {
+            "navigationBarTitleText": "关注列表",
+            "enablePullDownRefresh": true,
+            "onReachBottomDistance": 100
+          }
+        },
+        {
+          "path": "user/coin",
+          "style": {
+            "navigationBarTitleText": "贝壳充值",
+            "enablePullDownRefresh": true
+          }
+        },
+        {
+          "path": "user/coinRecord",
+          "style": {
+            "navigationBarTitleText": "贝壳记录",
+            "enablePullDownRefresh": true
+          }
         }
       ]
     }
@@ -113,6 +142,12 @@
     "iconWidth": "30px",
     "height": "52px",
     "list": [
+      {
+        "pagePath": "pages/user/extend",
+        "iconPath": "static/img/favorite-gray-36dp.png",
+        "selectedIconPath": "static/img/favorite-blue-36dp.png",
+        "text": "扩列"
+      },
       {
         "pagePath": "pages/talk/talk",
         "iconPath": "static/img/deck-gray-36dp.png",
@@ -133,13 +168,28 @@
       }
     ]
   },
+  "leftWindow": {
+    "path": "windows/leftWindow.vue",
+    "style": {
+      "width": "300px"
+    }
+  },/*
+  "topWindow": {
+    "path": "windows/topWindow.vue",
+    "style": {
+      "height": "60px"
+    }
+  },*/
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "清池app",
+    "navigationBarTitleText": "社区",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "app-plus": {
       "softinputNavBar": "none"
+    },
+    "h5": {
+      "maxWidth": 800
     }
   },
   "navigateToMiniProgramAppIdList": [

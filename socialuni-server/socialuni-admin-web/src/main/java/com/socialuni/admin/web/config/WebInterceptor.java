@@ -42,7 +42,7 @@ public class WebInterceptor extends SocialuniWebInterceptor {
         DevAccountModel user = DevAccountFacade.getAdminDevAccountAllowNull();
         if (user != null) {
             RequestUtil.setAttribute(SocialFeignHeaderName.socialuniSecretKey, user.getSecretKey());
-            requestLogDO.setUserId(user.getId());
+            requestLogDO.setUserId(user.getUserId());
         }
         RequestLogUtil.saveAsync(requestLogDO);
         String ipKey = requestLogDO.getIp();

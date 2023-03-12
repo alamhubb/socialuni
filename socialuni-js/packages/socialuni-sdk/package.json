@@ -12,7 +12,8 @@
     "uuid": "^7.0.3",
     "cos-wx-sdk-v5": "^0.7.11",
     "open-im-sdk": "^2.3.0-beta.2",
-    "stream-browserify": "^3.0.0"
+    "@dcloudio/types": "^3.0.17",
+    "@dcloudio/uni-app": "3.0.0-3070320230222002"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.0.13",

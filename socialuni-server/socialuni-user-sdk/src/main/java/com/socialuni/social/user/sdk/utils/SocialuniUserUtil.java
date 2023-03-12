@@ -3,6 +3,7 @@ package com.socialuni.social.user.sdk.utils;
 import com.socialuni.social.common.api.exception.exception.SocialNotLoginException;
 import com.socialuni.social.common.api.exception.exception.SocialNullUserException;
 import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
+import com.socialuni.social.user.sdk.exception.SocialUserBannedException;
 import com.socialuni.social.user.sdk.model.DO.SocialTokenDO;
 import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -16,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -89,42 +92,15 @@ public class SocialuniUserUtil {
         }
         //返回user
         SocialuniUserDo mineUser = SocialuniUserUtil.getUserNotNull(userId);
+        if (mineUser.getStatus().equals(SocialuniUserStatus.violation)) {
+            throw new SocialUserBannedException();
+        }
         return mineUser;
     }
 
     public static Integer getMineUserIdAllowNull() {
         //解析token
         return socialRequestUserConfig.getUserId();
-    }
-
-    public static Integer getMineUserIdInterceptor() {
-        SocialuniUserDo user = SocialuniUserUtil.getMineUserInterceptor();
-        if (user == null) {
-            return null;
-        }
-        //返回user
-        return user.getUnionId();
-    }
-
-    public static String getMineUserIdStrInterceptor() {
-        SocialuniUserDo user = SocialuniUserUtil.getMineUserInterceptor();
-        if (user == null) {
-            return null;
-        }
-        //返回user
-        return user.getUnionId().toString();
-    }
-
-    public static SocialuniUserDo getMineUserInterceptor() {
-        SocialuniUserDo user = SocialuniUserUtil.getMineUserAllowNull();
-        if (user == null) {
-            return null;
-        }
-        if (user.getStatus().equals(SocialuniUserStatus.violation)) {
-            return null;
-        }
-        //返回user
-        return user;
     }
 
     //必须有，websocket无法从request中获取token只能传入
@@ -186,6 +162,15 @@ public class SocialuniUserUtil {
             throw new SocialNullUserException();
         }
         return socialUserDO;
+    }
+
+    public static List<SocialuniUserDo> getUsers(List<Integer> ids) {
+        List<SocialuniUserDo> userDos = new ArrayList<>();
+        for (Integer id : ids) {
+            SocialuniUserDo socialuniUserDo = SocialuniUserUtil.getUserNotNull(id);
+            userDos.add(socialuniUserDo);
+        }
+        return userDos;
     }
 
     public static SocialuniUserDo getUserByUuid(String uid) {

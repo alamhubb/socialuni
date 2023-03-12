@@ -1,5 +1,5 @@
 import HttpRequest, {requestConfig} from "./httpRequest"
-import {socialSystemModule} from "socialuni-sdk/src/store/store"
+import {socialLocationModule, socialSystemModule} from "socialuni-sdk/src/store/store"
 import {socialUserModule} from "socialuni-sdk/src/store/store"
 import ErrorConst from "socialuni-constant/constant/ErrorConst"
 import UserService from "socialuni-sdk/src/service/UserService"
@@ -7,10 +7,9 @@ import MsgUtil from "socialuni-sdk/src/utils/MsgUtil"
 import UniUtil from "socialuni-sdk/src/utils/UniUtil"
 import AlertUtil from "socialuni-sdk/src/utils/AlertUtil"
 import ObjectUtil from "socialuni-sdk/src/utils/ObjectUtil"
-import XmlUtil from "../../../socialuni-sdk/src/utils/XmlUtil"
 import SocialuniConfig from "../config/SocialuniConfig";
-import XmlResultRO from "../model/XmlResultRO";
 import SocialuniAppAPI from "../api/socialuni/SocialuniAppAPI";
+import SocialuniRequestHeaderName from "socialuni-constant/constant/SocialuniRequestHeaderName";
 
 const request: HttpRequest = new HttpRequest()
 
@@ -32,12 +31,17 @@ request.interceptor.request((config: requestConfig) => { /* 请求之前拦截�
     // 如果配置了开发环境，就可以展示具体的报错内容。
     config.header['X-NODE-ENV'] = process.env.NODE_ENV
     //
-    if (SocialuniConfig.socialuniSecretKey){
+    if (SocialuniConfig.socialuniSecretKey) {
         config.header.socialuniSecretKey = SocialuniConfig.socialuniSecretKey
     }
-    config.header.provider = socialSystemModule.mpPlatform
-    config.header.platform = socialSystemModule.platform
-    config.header.system = socialSystemModule.system
+    config.header[SocialuniRequestHeaderName.system] = socialSystemModule.system
+    config.header[SocialuniRequestHeaderName.platform] = socialSystemModule.platform
+    config.header[SocialuniRequestHeaderName.provider] = socialSystemModule.provider
+    if (socialLocationModule.location && socialLocationModule.location.position) {
+        config.header[SocialuniRequestHeaderName.socialuniCityAdCode] = socialLocationModule.location.adCode
+        config.header[SocialuniRequestHeaderName.socialuniCityLon] = socialLocationModule.location.lon
+        config.header[SocialuniRequestHeaderName.socialuniCityLat] = socialLocationModule.location.lat
+    }
 
     /* else {
       //如果未登录，只允许查询talk，其他全部提示要登录
@@ -93,26 +97,6 @@ request.interceptor.response(
                         break
                 }
             } else {
-                if (typeof result === 'string') {
-                    //之前存在返回xml的情况
-                    if (result.startsWith('<?xml')) {
-                        try {
-                            const errorXml = XmlUtil.parseXml(result)
-                            const resultXml = errorXml.elements[0]
-                            const resultRO: XmlResultRO = {} as XmlResultRO
-                            for (const element of resultXml.elements) {
-                                if (element.elements) {
-                                    resultRO[element.name] = element.elements[0].text
-                                }
-                            }
-                            // const msg: string = socialConfigModule.appMoreConfig.errorMsg604SystemError
-                            AlertUtil.hint(resultRO.Message + '，请重试，' + '请联系客服')
-                            // 返回接口返回的错误信息
-                            return result
-                        } finally {
-                        }
-                    }
-                }
                 MsgUtil.systemErrorMsg()
                 SocialuniAppAPI.sendErrorLogAPI(error.config.url, result)
             }

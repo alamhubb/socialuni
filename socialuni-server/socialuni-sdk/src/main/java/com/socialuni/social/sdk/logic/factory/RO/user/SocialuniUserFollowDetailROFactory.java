@@ -1,10 +1,13 @@
 package com.socialuni.social.sdk.logic.factory.RO.user;
 
-import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.sdk.logic.manage.SocialUserFansDetailManage;
 import com.socialuni.social.user.sdk.model.DO.SocialUserFansDetailDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
+import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -19,14 +22,14 @@ public class SocialuniUserFollowDetailROFactory {
         SocialuniUserFollowDetailROFactory.socialUserFansDetailManage = socialUserFansDetailManage;
     }
 
-    public static SocialuniUserFollowDetailRO newSocialFollowUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
+    public static SocialuniUserFollowInfoRO newSocialFollowUserRO(SocialuniUserDo user, SocialuniUserDo mineUser) {
         SocialUserFansDetailDo SocialUserFansDetailDo = socialUserFansDetailManage.getOrCreateUserFollowDetail(user);
 
         return SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(user, mineUser, SocialUserFansDetailDo);
     }
 
-    public static SocialuniUserFollowDetailRO newSocialFollowUserRO(SocialuniUserDo user, SocialuniUserDo mineUser, SocialUserFansDetailDo SocialUserFansDetailDo) {
-        SocialuniUserFollowDetailRO userRO = new SocialuniUserFollowDetailRO(SocialuniContentUserROFactory.newContentUserRO(user, mineUser));
+    public static SocialuniUserFollowInfoRO newSocialFollowUserRO(SocialuniUserDo user, SocialuniUserDo mineUser, SocialUserFansDetailDo SocialUserFansDetailDo) {
+        SocialuniUserFollowInfoRO userRO = new SocialuniUserFollowInfoRO(SocialuniContentUserROFactory.newContentUserRO(user, mineUser));
         //用户关注粉丝数
         userRO.setFansNum(SocialUserFansDetailDo.getFansNum());
 //        if (mineUser != null && userRO.getIsMine()) {
@@ -36,7 +39,27 @@ public class SocialuniUserFollowDetailROFactory {
         return userRO;
     }
 
-    public static List<SocialuniUserFollowDetailRO> getUsers(List<SocialuniUserDo> users, SocialuniUserDo mineUser) {
+    public static List<SocialuniUserFollowInfoRO> getUsers(List<SocialuniUserDo> users, SocialuniUserDo mineUser) {
         return ListConvertUtil.toList(SocialuniUserFollowDetailROFactory::newSocialFollowUserRO, users, mineUser);
+    }
+
+    public static List<SocialuniUserFollowDetailListRO> getFollowUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
+        return ListConvertUtil.toList((followDO, user) -> {
+            SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getBeUserId());
+            SocialuniUserFollowInfoRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, user);
+            SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
+            socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());
+            return socialuniUserFollowDetailListRO;
+        }, users, mineUser);
+    }
+
+    public static List<SocialuniUserFollowDetailListRO> getFansUserLists(List<SocialuniFollowDO> users, SocialuniUserDo mineUser) {
+        return ListConvertUtil.toList((followDO) -> {
+            SocialuniUserDo userDo = SocialuniUserUtil.getUserNotNull(followDO.getUserId());
+            SocialuniUserFollowInfoRO socialuniUserFollowDetailRO = SocialuniUserFollowDetailROFactory.newSocialFollowUserRO(userDo, mineUser);
+            SocialuniUserFollowDetailListRO socialuniUserFollowDetailListRO = new SocialuniUserFollowDetailListRO(socialuniUserFollowDetailRO);
+            socialuniUserFollowDetailListRO.setUpdateTime(followDO.getUpdateTime());
+            return socialuniUserFollowDetailListRO;
+        }, users);
     }
 }

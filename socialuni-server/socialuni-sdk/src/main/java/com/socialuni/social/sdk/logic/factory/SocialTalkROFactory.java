@@ -17,14 +17,14 @@ import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkDOUtil;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniTalkImgDOUtil;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFactory;
-import com.socialuni.social.user.sdk.platform.MapUtil;
+import com.socialuni.social.sdk.utils.PositionUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialHomeTabTalkQueryBO;
 import com.socialuni.social.sdk.model.RO.talk.SocialTalkDistrictRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialTalkTagRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniCommentRO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
-import com.socialuni.social.user.sdk.model.RO.RectangleVO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import lombok.Data;
@@ -133,7 +133,7 @@ public class SocialTalkROFactory {
     }
 
 
-    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserDo mineUser, List<?  extends SocialuniTalkDO>  talkDOS, SocialHomeTabTalkQueryBO queryVO) {
+    public static List<SocialuniTalkRO> newHomeTalkROs(SocialuniUserDo mineUser, List<? extends SocialuniTalkDO> talkDOS, SocialHomeTabTalkQueryBO queryVO) {
         return talkDOS.stream().map(talkDO -> SocialTalkROFactory.newHomeTalkRO(mineUser, talkDO, queryVO)).collect(Collectors.toList());
     }
 
@@ -191,7 +191,7 @@ public class SocialTalkROFactory {
         socialTalkRO.setCircles(circles);
 
         //10 毫秒
-        List<?  extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
+        List<? extends TagDO> TagDOs = socialTagRedis.getTagsByTalkId(talkDO.getUnionId());
         List<SocialTalkTagRO> tagROs = TagDOs.stream().map(tagDO -> new SocialTalkTagRO(tagDO.getId(), tagDO.getName())).collect(Collectors.toList());
         //50毫秒
 //        socialTalkRO.setContentType(talkDO.getContentType());
@@ -270,7 +270,7 @@ public class SocialTalkROFactory {
         //耗时60毫秒
 
         if (queryVO == null) {
-            RectangleVO rectangleVO = MapUtil.getRectangle();
+            SocialuniRectangleRO rectangleVO = PositionUtil.getRectangle();
             queryVO = new SocialHomeTabTalkQueryBO();
             if (rectangleVO != null) {
                 queryVO.setLat(rectangleVO.getLat());
@@ -278,28 +278,15 @@ public class SocialTalkROFactory {
             }
         }
 
-        Double lon = queryVO.getLon();
-        Double lat = queryVO.getLat();
-        if (lon != null && lat != null) {
-            Double dbLon = talkDO.getLon();
-            Double dbLat = talkDO.getLat();
-            //如果talk有记录经纬度
-            if (dbLon != null) {
-                //经纬度换约等于大概换算成千米，任何地点经度都大致相等
-                Double talkLon = dbLon * 111;
-                Double talkLat = dbLat * (Math.cos(Math.toRadians(dbLat)) * 111);
-                //任何地点经度都大致相等,为111公里
-                Double queryLon = lon * 111;
-                //计算当前纬度，1纬度等于多少公里
-                Double queryLat = lat * (Math.cos(Math.toRadians(lat)) * 111);
-                //两个经纬度求差
-                double lonDiffAbs = Math.abs(talkLon - queryLon);
-                double latDiffAbs = Math.abs(talkLat - queryLat);
-                //经纬度差勾股求距离
-                Double distance = Math.sqrt(Math.pow(lonDiffAbs, 2) + Math.pow(latDiffAbs, 2));
-                socialTalkRO.setDistance(distance);
-            }
-        }
+        Double dbLon = talkDO.getLon();
+        Double dbLat = talkDO.getLat();
+
+        SocialuniRectangleRO queryRO = new SocialuniRectangleRO(queryVO.getLon(), queryVO.getLat());
+        SocialuniRectangleRO dataRO = new SocialuniRectangleRO(dbLon, dbLat);
+
+        Double distance = PositionUtil.getDistance(queryRO, dataRO);
+        socialTalkRO.setDistance(distance);
+
         log.debug("一次转换完成" + new Date().getTime() / 1000);
         return socialTalkRO;
     }

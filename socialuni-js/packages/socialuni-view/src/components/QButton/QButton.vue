@@ -1,4 +1,5 @@
 <template>
+  <!--  click增加stop是因为禁止点击问题，父元素上没有加禁止点击，应该使用button的click-->
   <button
       class="row-all-center line-h1"
       :class="[buttonClass,addClass]"
@@ -34,8 +35,7 @@ import CommonUtil from "socialuni-sdk/src/utils/CommonUtil";
 
 @Options({})
 export default class QButton extends Vue {
-  //颜色, 要支持用户自定义色值，theme
-  @Prop() color: string
+
   @Prop() addClass: string
   @Prop({
     default: false,
@@ -208,6 +208,11 @@ export default class QButton extends Vue {
     default: false,
     type: Boolean
   }) noDebounce: boolean
+//颜色, 要支持用户自定义色值，theme
+  @Prop({
+    default: '',
+    type: String
+  }) color: string
 
   get curTheme() {
     if (this.theme) return 'theme'
@@ -216,7 +221,7 @@ export default class QButton extends Vue {
     if (this.warn) return 'warn'
     if (this.success) return 'success'
     if (this.info) return 'info'
-    return ''
+    return this.color
   }
 
   get curSize() {
@@ -229,11 +234,11 @@ export default class QButton extends Vue {
   }
 
   get buttonClass() {
-    let buttonClass = `${this.btnDisabled ? 'bg-disabled' : 'bg-click'} `
+    let buttonClass = `${this.btnDisabled ? 'bg-disabled' : 'use-click'} `
     if (this.text) {
       buttonClass += `bd-none bg-theme-light color-${this.curTheme}`
     } else {
-      buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize} text-${this.curSize}`
+      buttonClass += `chunk${this.curTheme ? ('-' + this.curTheme) : ''}${this.light ? ('_light') : ''}${this.plain ? ('_plain') : ''} q-box-${this.curSize} font-${this.curSize}`
       if (this.round) {
         buttonClass += ' bd-round'
       }

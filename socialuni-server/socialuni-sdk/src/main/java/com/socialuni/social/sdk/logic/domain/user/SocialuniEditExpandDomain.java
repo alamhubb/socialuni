@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.logic.domain.user;
 
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExpandDOUtil;
+import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.sdk.logic.check.SocialuniSchoolCheck;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
@@ -60,6 +61,9 @@ public class SocialuniEditExpandDomain {
         SocialuniUserExpandDo.setOpenContactInfo(socialMineUserDetailQO.getOpenContactInfo());
 
         SocialuniUserExpandDOUtil.saveUserExpandDO(SocialuniUserExpandDo);
+
+        //生成用户扩列记录
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
 
         SocialuniMineUserDetailRO socialuniMineUserDetailRO = SocialuniMineUserDetailROFactory.getMineUserDetail(mineUserId);
 

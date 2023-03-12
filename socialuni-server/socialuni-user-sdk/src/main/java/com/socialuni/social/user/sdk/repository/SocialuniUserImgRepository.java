@@ -31,7 +31,7 @@ public interface SocialuniUserImgRepository extends JpaRepository<SocialuniUserI
             put = {@CachePut(cacheNames = "getUserImgByUnionId", key = "#userImgDO.unionId")}
     )
     default SocialuniUserImgDo savePut(SocialuniUserImgDo userImgDO){
-        return this.save(BeanUtil.toBean(userImgDO,SocialuniUserImgDo.class));
+        return this.save(userImgDO);
     }
 
     SocialuniUserImgDo findOneByUnionIdAndStatus(Integer unionId, String status);

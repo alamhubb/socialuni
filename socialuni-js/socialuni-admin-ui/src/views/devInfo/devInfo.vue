@@ -94,7 +94,7 @@ import DevAccountType from '@/constant/DevAccountType'
 import { OperationType } from '@/constant/OperationType'
 import ToastUtil from '@/utils/ToastUtil'
 import AlertUtil from '@/utils/AlertUtil'
-import UserAPI from '@/api/UserAPI'
+import AdminUserAPI from '@/api/AdminUserAPI'
 import { ElForm } from 'element-ui/types/form'
 import { userModule } from '@/store'
 
@@ -147,7 +147,7 @@ export default class DevInfoPage extends Vue {
 
   getSecretKey() {
     AlertUtil.confirm('是否确认重置开发者秘钥？').then(() => {
-      UserAPI.resetSecretKeyAPI().then(res => {
+      AdminUserAPI.resetSecretKeyAPI().then(res => {
         this.user.secretKey = res.data
       })
       // 调用后台
@@ -162,7 +162,7 @@ export default class DevInfoPage extends Vue {
   async updateUser() {
     await this.$refs.devForm.validate()
     AlertUtil.confirm('是否确定要修改开发者信息').then(() => {
-      UserAPI.updateDevAccountAPI(this.user).then(res => {
+      AdminUserAPI.updateDevAccountAPI(this.user).then(res => {
         userModule.user = res.data
       })
     })

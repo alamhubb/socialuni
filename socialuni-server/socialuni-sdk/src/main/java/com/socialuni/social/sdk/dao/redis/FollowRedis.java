@@ -2,7 +2,7 @@ package com.socialuni.social.sdk.dao.redis;
 
 import com.socialuni.social.common.api.constant.CommonRedisKey;
 import com.socialuni.social.common.api.enumeration.CommonStatus;
-import com.socialuni.social.sdk.dao.DO.FollowDO;
+import com.socialuni.social.sdk.dao.DO.SocialuniFollowDO;
 import com.socialuni.social.sdk.dao.repository.FollowRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class FollowRedis {
     }
 
     @Cacheable(cacheNames = CommonRedisKey.queryUserAndBeUserFollow, key = "#userId+'-'+#beUserId")
-    public FollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId) {
+    public SocialuniFollowDO findFirstByUserIdAndBeUserId(Integer userId, Integer beUserId) {
         return followRepository.findFirstByUserIdAndBeUserId(userId, beUserId);
     }
 

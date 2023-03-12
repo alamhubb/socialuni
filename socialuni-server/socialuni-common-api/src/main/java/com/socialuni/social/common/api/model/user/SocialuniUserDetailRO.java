@@ -3,6 +3,7 @@ package com.socialuni.social.common.api.model.user;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,22 +12,27 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-public class SocialuniUserDetailRO extends SocialuniUserFollowDetailRO {
+public class SocialuniUserDetailRO extends SocialuniUserFollowInfoRO {
     private List<SocialuniUserImgRO> imgs;
     private String schoolName;
+    private Integer hugNum;
+    //每天可以点赞，今天是否赞过
+    private Boolean hasHugged;
+    private Date lastOnlineTime;
     private String contactInfo;
-    //是否已经拥有查看用户联系方式的权限
-    private String canSeeContactInfo;
+    //为他人详情是，则意义为是否已经拥有查看用户联系方式的权限
+    private Boolean openContactInfo;
 
     public SocialuniUserDetailRO(SocialuniUserDetailRO userRO) {
         super(userRO);
         this.imgs = userRO.getImgs();
         this.schoolName = userRO.getSchoolName();
         this.contactInfo = userRO.getContactInfo();
-        this.canSeeContactInfo = userRO.getCanSeeContactInfo();
+        this.openContactInfo = userRO.getOpenContactInfo();
+        this.lastOnlineTime = userRO.getLastOnlineTime();
     }
 
-    public SocialuniUserDetailRO(SocialuniUserFollowDetailRO centerUserFollowDetailRO) {
+    public SocialuniUserDetailRO(SocialuniUserFollowInfoRO centerUserFollowDetailRO) {
         super(centerUserFollowDetailRO);
     }
 }

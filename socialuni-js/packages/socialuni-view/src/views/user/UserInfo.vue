@@ -548,10 +548,6 @@ export default class UserInfo extends Vue {
     }
   }
 
-  toEditUserInfo() {
-    PageUtil.toEditMineInfo()
-  }
-
   /*mounted () {
     this.openEditDialog()
   }*/
@@ -582,12 +578,6 @@ export default class UserInfo extends Vue {
 
   getGenderBgColor(user: CenterUserDetailRO) {
     return UserUtil.getGenderBgColor(user)
-  }
-
-  toFollowVue() {
-    if (this.isMine) {
-      RouterUtil.navigateTo(PagePath.userFollow)
-    }
   }
 
   toLoveValuePage() {
@@ -654,29 +644,10 @@ export default class UserInfo extends Vue {
     })
   }
 
-  loginOut() {
-    UserService.loginOut()
-  }
-
-  async uploadUserAvatarImg() {
-    try {
-      const cosAuthRO = await CosUtil.getCosAuthRO()
-      const imgFiles: DomFile[] = await UniUtil.chooseImage(1)
-      UniUtil.showLoading('上传中')
-      const imgFile: DomFile = imgFiles[0]
-      imgFile.src = cosAuthRO.uploadImgPath + 'img/' + imgFile.src
-      const res = await Promise.all([TencentCosAPI.uploadFileAPI(imgFile, cosAuthRO), SocialuniMineUserAPI.addUserAvatarImgAPI(new ImgAddQO(imgFile))])
-      socialUserModule.setUser(res[1].data)
-    } catch (e) {
-      console.error(e)
-    } finally {
-      UniUtil.hideLoading()
-    }
-  }
 
   //前往贝壳页面
   toUserShell() {
-    PageUtil.toShellPage()
+    PageUtil.toCoinPage()
   }
 
   openSetSchoolDialog() {

@@ -9,6 +9,8 @@ import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailR
 import SocialuniAuthQO from "socialuni-api/src/model/openData/SocialuniAuthQO";
 import SkipType from "socialuni-constant/constant/SkipType";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
+import PlatformUtils from "./PlatformUtils";
+import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
 
 
 export default class PageUtil {
@@ -27,6 +29,10 @@ export default class PageUtil {
 
     static toEditMineInfo() {
         RouterUtil.navigateTo(PagePath.editMineInfo)
+    }
+
+    static toUserFollowPage(followType: string) {
+        RouterUtil.navigateTo(PagePath.userFollow + '?followType=' + followType)
     }
 
     static toUserImgList(userId: string) {
@@ -52,16 +58,25 @@ export default class PageUtil {
         }*/
     }
 
-    static toShellPage() {
-        if (socialSystemModule.isIos) {
+    static toCoinPage() {
+        if (socialSystemModule.isProd && socialSystemModule.isIos) {
             // 由于相关规范，iOS功能暂不可用
             MsgUtil.iosDisablePay()
         } else {
             if (socialUserModule.mineUser) {
-                RouterUtil.navigateTo(PagePath.userShell)
+                RouterUtil.navigateTo(PagePath.coin)
             } else {
                 MsgUtil.unLoginMessage()
             }
+        }
+    }
+
+    static toCoinRecordPage(pageType: string) {
+        PlatformUtils.checkPay()
+        if (socialUserModule.mineUser) {
+            RouterUtil.navigateTo(PagePath.coinRecord + '?pageType=' + pageType)
+        } else {
+            MsgUtil.unLoginMessage()
         }
     }
 
@@ -70,7 +85,11 @@ export default class PageUtil {
     }
 
     static toChatFriend() {
-        RouterUtil.navigateTo('/pages/chat/friend')
+        RouterUtil.navigateTo(PagePath.friend)
+    }
+
+    static toFriendApply() {
+        RouterUtil.navigateTo(PagePath.friendApply)
     }
 
     static toMinePage() {
@@ -78,7 +97,7 @@ export default class PageUtil {
     }
 
     static toTalkAddPage() {
-        const user: CenterUserDetailRO = socialUserModule.mineUser as any
+        const user: SocialuniMineUserRO = socialUserModule.mineUser as any
         if (!user || !user.phoneNum) {
             MsgUtil.unBindPhoneNum()
             //没设置校园，且应用类型要求必须设置
@@ -117,8 +136,9 @@ export default class PageUtil {
     static toMessagePageByGroupId(groupId: string) {
         RouterUtil.navigateTo(PagePath.message + '?groupId=' + groupId)
     }
+
     static toIMGroupMember(groupId: string) {
-        RouterUtil.navigateTo("/pages/chat/groupMember?id="+groupId);
+        RouterUtil.navigateTo("/pages/chat/groupMember?id=" + groupId);
     }
 
     static toFaceValuePage() {
@@ -155,7 +175,8 @@ export default class PageUtil {
      * @param pagePath
      * @param params
      */
-    static navigateTo(pagePath: string, params?: object): void {
+
+    /*static navigateTo(pagePath: string, params?: object): void {
         console.log(pagePath)
         if (params) {
             const paramObj = new URLSearchParams()
@@ -165,7 +186,7 @@ export default class PageUtil {
             pagePath = pagePath + '?' + paramObj.toString()
         }
         uni.navigateTo({url: pagePath})
-    }
+    }*/
 
     static navigateToAll(type: string, skipUrl: string, pageTitle: string) {
         if (type === SkipType.mp) {

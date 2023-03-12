@@ -9,7 +9,7 @@ import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialUserPhoneDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserExpandDo;
-import com.socialuni.social.user.sdk.model.DO.SocialuniUserSocialCoinDo;
+import com.socialuni.social.user.sdk.model.DO.SocialuniUserCoinDo;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.user.sdk.redis.SocialUserPhoneRedis;
@@ -64,13 +64,13 @@ public class SocialuniMineUserDetailROFactory {
 
         Integer mineUserId = mineUser.getUnionId();
 
-        SocialuniUserExpandDo SocialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
+        SocialuniUserExpandDo socialuniUserExpandDo = SocialuniUserExpandDOUtil.getOrCreate(mineUserId);
 
-        SocialuniUserSocialCoinDo SocialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
+        SocialuniUserCoinDo SocialuniUserSocialCoinDo = SocialuniUserSocialCoinDOUtil.getOrCreate(mineUserId);
 
-        mineUserDetailRO.setSocialCoin(SocialuniUserSocialCoinDo.getSocialCoin());
+        mineUserDetailRO.setSocialCoin(SocialuniUserSocialCoinDo.getCoin());
 
-        mineUserDetailRO.setOpenContactInfo(SocialuniUserExpandDo.getOpenContactInfo());
+        mineUserDetailRO.setOpenContactInfo(socialuniUserExpandDo.getOpenContactInfo());
 
         //为自己返回生日，方便修改，和手机号
         mineUserDetailRO.setBirthday(mineUser.getBirthday());

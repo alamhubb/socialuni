@@ -6,6 +6,7 @@ package com.socialuni.social.common.api.constant;
  */
 public class CommonRedisKey {
     public static final String userById = "userById";
+    public static final String findUserIdsByStatus = "findUserIdsByStatus";
     public static final String tokenByToken = "tokenByToken";
     //系统
     public static final String shell = "shell";

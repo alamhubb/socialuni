@@ -14,7 +14,7 @@
         当前选择：
       </view>
       <view v-if="cityValue" class="row-col-center">
-        <q-icon v-if="cityValue.isLocation" class="mr-mn" icon="map-fill" size="16"/>
+        <q-icon v-if="cityValue.position" class="mr-mn" icon="map-fill" size="16"/>
         <view class="font-bold" v-if="cityValue.provinceName">
           {{ cityValue.provinceName }}
         </view>

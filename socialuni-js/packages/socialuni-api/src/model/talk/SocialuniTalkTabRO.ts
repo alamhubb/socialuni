@@ -12,6 +12,7 @@ export default class SocialuniTalkTabRO {
   //用来区分是否为app内置tab，读取缓存过滤使用
   appDefaultTab: boolean = false
   scrollTop: number = -1
+  pageScrollTop: number = -1
   loadMore: string = LoadMoreType.more
   queryTime: Date = new Date()
 

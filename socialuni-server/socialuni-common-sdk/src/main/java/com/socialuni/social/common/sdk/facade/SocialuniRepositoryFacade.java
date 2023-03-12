@@ -4,6 +4,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.sdk.component.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Slf4j
@@ -27,16 +28,20 @@ public abstract class SocialuniRepositoryFacade {
      * @return
      * @see SocialuniCommonRepositoryInterface#findByExample(Object)
      */
-    public static <T> Optional<T> findByExample(T example) {
+    public static <T> T findByExample(T example) {
         return getRepository().findByExample(example);
     }
 
-    public static <T> T find(T example) {
+    /*public static <T> T find(T example) {
         Optional<T> optionalT = getRepository().findByExample(example);
         return optionalT.orElse(null);
-    }
+    }*/
 
     private static SocialuniCommonRepository getRepository() {
         return repository;
+    }
+
+    public static EntityManager getEntityManager() {
+        return repository.getEntityManager();
     }
 }

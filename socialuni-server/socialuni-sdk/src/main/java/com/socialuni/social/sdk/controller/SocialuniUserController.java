@@ -1,6 +1,7 @@
 package com.socialuni.social.sdk.controller;
 
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniContentUserRO;
 import com.socialuni.social.common.api.model.user.SocialuniMineUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
@@ -9,8 +10,11 @@ import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.service.user.SocialuniMineUserService;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
 import com.socialuni.social.sdk.logic.service.user.SocialuniUserService;
+import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,5 +67,10 @@ public class SocialuniUserController implements SocialuniUserAPI {
     @Override
     public ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers() {
         return socialuniUserService.queryRecentlyUsers();
+    }
+
+    @Override
+    public ResultRO<String> getUserContactInfo(String userId) {
+        return socialuniUserService.getUserContactInfo(userId);
     }
 }

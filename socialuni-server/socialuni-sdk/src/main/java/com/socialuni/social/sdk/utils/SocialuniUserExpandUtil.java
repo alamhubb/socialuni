@@ -107,35 +107,7 @@ public class SocialuniUserExpandUtil {
         return socialRequestUserConfig.getUserId();
     }
 
-    public static Integer getMineUserIdInterceptor() {
-        SocialuniUserDo user = SocialuniUserExpandUtil.getMineUserInterceptor();
-        if (user == null) {
-            return null;
-        }
-        //返回user
-        return user.getUnionId();
-    }
 
-    public static String getMineUserIdStrInterceptor() {
-        SocialuniUserDo user = SocialuniUserExpandUtil.getMineUserInterceptor();
-        if (user == null) {
-            return null;
-        }
-        //返回user
-        return user.getUnionId().toString();
-    }
-
-    public static SocialuniUserDo getMineUserInterceptor() {
-        SocialuniUserDo user = SocialuniUserExpandUtil.getMineUserAllowNull();
-        if (user == null) {
-            return null;
-        }
-        if (user.getStatus().equals(SocialuniUserStatus.violation)) {
-            return null;
-        }
-        //返回user
-        return user;
-    }
 
     //必须有，websocket无法从request中获取token只能传入
     public static SocialuniUserDo getUserByToken(String token) {

@@ -26,6 +26,8 @@ public class SocialAddUserImgDomain {
     SocialuniUserImgRepository userImgRepository;
 
     public SocialuniMineUserDetailRO addUserImg(SocialuniImgAddQO socialUserImgAddQO, SocialuniUserDo mineUser) {
+
+
         SocialuniTextContentUtil.validateImg(socialUserImgAddQO, mineUser);
 
         SocialuniUserImgDo userImgDO = UserImgDOFactory.toUserImgDO(socialUserImgAddQO, mineUser);

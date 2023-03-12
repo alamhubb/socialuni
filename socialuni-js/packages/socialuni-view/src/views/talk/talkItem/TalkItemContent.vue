@@ -39,7 +39,8 @@
               class="q-tag mr-sm mt-xss">
           <!--          <q-icon icon="moments" class="color-purple mr-mn" size="12"></q-icon>-->
           <q-icon icon="mdi-send" class="color-purple mr-mn mdi-rotate-315" size="12"></q-icon>
-          <text class="pt-nn">{{ circleName }}圈</text>
+          <text class="pt-nn">{{ circleName }}</text>
+<!--          圈-->
         </view>
       </div>
 

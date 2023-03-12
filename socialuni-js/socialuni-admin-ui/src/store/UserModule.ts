@@ -7,7 +7,7 @@ import AppConst from '@/constant/AppConst'
 import SocialPhoneNumQO from '@/model/base/SocialPhoneNumQO'
 import ToastUtil from '@/utils/ToastUtil'
 import TokenUtil from '@/utils/TokenUtil'
-import UserAPI from '@/api/UserAPI'
+import AdminUserAPI from '@/api/AdminUserAPI'
 import DevAccountRO from '@/model/base/DevAccountRO'
 
 @Module({ generateMutationSetters: true })
@@ -47,7 +47,7 @@ export default class UserModule extends VuexModule {
   getUserAction() {
     const token = TokenUtil.get()
     if (token) {
-      return UserAPI.getUserAPI().then((res: any) => {
+      return AdminUserAPI.getUserAPI().then((res: any) => {
         this.setUser(res.data)
         return res.data
       })

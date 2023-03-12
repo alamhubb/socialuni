@@ -1,22 +1,22 @@
 package com.socialuni.social.sdk.logic.service;
 
 
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
+import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailListRO;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.sdk.feignAPI.community.SocialuniFollowAPI;
-import com.socialuni.social.sdk.logic.domain.follow.SocialuniFollowUserDomain;
+import com.socialuni.social.sdk.logic.dispatch.SocialuniFollowDispatch;
 import com.socialuni.social.sdk.model.QO.follow.SocialuniFollowAddQO;
-import com.socialuni.social.common.api.model.user.SocialuniUserFollowDetailRO;
 import com.socialuni.social.common.api.model.ResultRO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class SocialuniFollowService {
     @Resource
-    private SocialuniFollowUserDomain centerFollowUserDomain;
+    private SocialuniFollowDispatch centerFollowUserDomain;
 
     @Resource
     SocialuniFollowAPI socialuniFollowAPI;
@@ -41,12 +41,12 @@ public class SocialuniFollowService {
         return new ResultRO<>();
     }
 
-    public ResultRO<Map<String, List<SocialuniUserFollowDetailRO>>> queryUserFollows() {
+    public ResultRO<List<SocialuniUserFollowDetailListRO>> queryUserFollows(SocialuniPageQueryQO<String> socialuniPageQueryQO) {
         //如果应用，则调用中心
         if (SocialuniSystemConst.serverIsChild()) {
-            return socialuniFollowAPI.queryUserFollows();
+            return socialuniFollowAPI.queryUserFollows(socialuniPageQueryQO);
         }
-        Map<String, List<SocialuniUserFollowDetailRO>> map = centerFollowUserDomain.queryUserFollows();
+        List<SocialuniUserFollowDetailListRO> map = centerFollowUserDomain.queryUserFollows(socialuniPageQueryQO);
         return new ResultRO<>(map);
     }
 }

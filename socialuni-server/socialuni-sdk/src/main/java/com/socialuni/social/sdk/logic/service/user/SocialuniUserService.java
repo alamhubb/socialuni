@@ -1,8 +1,15 @@
 package com.socialuni.social.sdk.logic.service.user;
 
+import cn.hutool.Hutool;
+import cn.hutool.core.collection.CollUtil;
+import com.socialuni.social.common.api.constant.DateTimeType;
+import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.ResultRO;
+import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.*;
 import com.socialuni.social.common.sdk.model.SocialuniImgAddQO;
+import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
 import com.socialuni.social.sdk.dao.utils.content.SocialuniUserImgDOUtil;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialAddUserImgDomain;
@@ -12,6 +19,7 @@ import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniContentUserROFact
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniMineUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.UserImgROFactory;
+import com.socialuni.social.sdk.logic.service.bussiness.SocialuniGetUserContactInfoDomain;
 import com.socialuni.social.tance.sdk.api.SocialuniUnionIdInterface;
 import com.socialuni.social.tance.sdk.enumeration.SocialuniSystemConst;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
@@ -21,33 +29,30 @@ import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserImgDo;
 import com.socialuni.social.user.sdk.model.QO.SocialUserEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserImgDeleteQO;
+import com.socialuni.social.user.sdk.model.QO.user.SocialuniUserExtendFriendQueryQO;
 import com.socialuni.social.user.sdk.model.factory.SocialuniUserROFactory;
+import com.socialuni.social.user.sdk.repository.SocialuniUserExpandRepository;
+import com.socialuni.social.user.sdk.repository.SocialuniUserExtendFriendLogRepository;
+import com.socialuni.social.user.sdk.repository.SocialuniUserHugRepository;
 import com.socialuni.social.user.sdk.repository.SocialuniUserRepository;
 import com.socialuni.social.user.sdk.utils.SocialuniUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
 public class SocialuniUserService {
     @Resource
-    SocialEditUserDomain socialEditUserDomain;
-    @Resource
-    SocialAddUserImgDomain socialAddUserImgDomain;
-    @Resource
-    SocialDeleteUserImgDomain socialDeleteUserImgDomain;
-    @Resource
-    UniUserRegistryDomain socialuniUserRegistryDomain;
-    @Resource
-    SocialuniUnionIdInterface uniContentUnionIdRepository;
-    @Resource
     SocialuniUserAPI socialuniUserAPI;
     @Resource
     SocialuniUserRepository socialuniUserRepository;
+    @Resource
+    SocialuniGetUserContactInfoDomain socialuniGetUserContactInfoDomain;
 
 
     public ResultRO<SocialuniUserDetailRO> queryUserDetail(String userId) {
@@ -79,12 +84,17 @@ public class SocialuniUserService {
         }
     }
 
-    //查询最近在线的用户
     public ResultRO<List<SocialuniContentUserRO>> queryRecentlyUsers() {
         List<SocialuniUserDo> userDos = socialuniUserRepository.findTop10ByStatusOrderByIdDesc(SocialuniUserStatus.enable);
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserNotNull();
         List<SocialuniContentUserRO> userROS = SocialuniContentUserROFactory.toList(userDos, mineUser);
         return ResultRO.success(userROS);
+    }
+
+    //查询最近在线的用户
+    public ResultRO<String> getUserContactInfo(String userId) {
+        String userContactInfo = socialuniGetUserContactInfoDomain.getUserContactInfo(userId);
+        return ResultRO.success(userContactInfo);
     }
 }

@@ -227,6 +227,7 @@ export default class ChatFriendPage extends Vue {
    * 获取收到的好友请求列表
    */
   getRecvFriendApplicationList() {
+    socialChatModule.refreshRecvFriendApplicationList()
     this.recvFriendApplicationList = socialChatModule.recvFriendApplicationList;
   }
 
