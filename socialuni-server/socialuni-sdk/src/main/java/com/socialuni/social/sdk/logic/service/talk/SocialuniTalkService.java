@@ -9,8 +9,8 @@ import com.socialuni.social.sdk.model.QO.talk.SocialuniHomeTabTalkQueryQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniTalkIdQO;
 import com.socialuni.social.sdk.model.QO.talk.SocialuniUserTalkQueryQO;
 import com.socialuni.social.sdk.model.RO.talk.SocialuniTalkRO;
-import com.socialuni.social.user.sdk.model.RO.RectangleVO;
-import com.socialuni.social.user.sdk.platform.MapUtil;
+import com.socialuni.social.user.sdk.model.RO.SocialuniRectangleRO;
+import com.socialuni.social.sdk.utils.PositionUtil;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.sdk.utils.UniAPIUtils;
 import com.socialuni.social.common.api.model.ResultRO;
@@ -18,7 +18,6 @@ import com.socialuni.social.sdk.logic.domain.talk.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,7 +65,7 @@ public class SocialuniTalkService {
         //获取当前用户
         queryQO.setHomeTabName(TalkTabType.home_name);
         //如果经纬度为空
-        RectangleVO rectangleVO = MapUtil.getRectangle();
+        SocialuniRectangleRO rectangleVO = PositionUtil.getRectangle();
         if (rectangleVO != null) {
             queryQO.setLon(rectangleVO.getLon());
             queryQO.setLat(rectangleVO.getLat());

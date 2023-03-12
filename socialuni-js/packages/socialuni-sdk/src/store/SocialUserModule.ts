@@ -1,7 +1,7 @@
 //用来存储当前用户的一些信息
 import {Pinia, Store} from "pinia-class-component"
 import SocialLoginRO from "socialuni-api/src/model/social/SocialLoginRO";
-import {socialSystemModule, socialUserModule} from "./store";
+import {socialConfigModule, socialSystemModule, socialUserModule} from "./store";
 import SocialuniTokenUtil from "socialuni-sdk/src/utils/SocialuniTokenUtil";
 import SocialuniUserStorageUtil from "socialuni-sdk/src/utils/SocialuniUserStorageUtil";
 import SocialuniImUserTokenUtil from "../utils/SocialuniImUserTokenUtil";
@@ -11,6 +11,9 @@ import UserService from "../service/UserService";
 import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
 import SocialuniMineUserAPI from "socialuni-api/src/api/socialuni/SocialuniMineUserAPI";
 import LoginAPI from "socialuni-api/src/api/socialuni/LoginAPI";
+import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
+import PlatformUtils from "../utils/PlatformUtils";
+import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
 
 @Store
 export default class SocialUserModule extends Pinia {
@@ -38,9 +41,9 @@ export default class SocialUserModule extends Pinia {
             //并且设置
             this.setUser(data)
             //刷新token
-            const tokenRo =  await LoginAPI.refreshToken();
+            const tokenRo = await LoginAPI.refreshToken();
             // 有才设置新的token.
-            if(tokenRo?.data?.token){
+            if (tokenRo?.data?.token) {
                 this.setToken(tokenRo?.data?.token);
             }
         }
@@ -121,5 +124,26 @@ export default class SocialUserModule extends Pinia {
         return SocialuniMineUserAPI.getMineUserInfoAPI().then((res: any) => {
             socialUserModule.setUser(res.data)
         })
+    }
+
+    async getOpenContactInfo(user: CenterUserDetailRO) {
+        if (user.openContactInfo){
+            ToastUtil.error("已成功获取，无需再次获取")
+        }
+        const userShell = this.mineUser.socialCoin
+        const getUserInfoNeedCoin = socialConfigModule.appMoreConfig.contactExpenseShell
+        if (userShell >= getUserInfoNeedCoin) {
+            await AlertUtil.confirm('是否消耗100个贝壳查看用户：' + user.nickname + ' 的联系方式')
+            const res = await SocialuniUserExpandAPI.getUserContactInfoAPI(user.id)
+            user.contactInfo = res.data
+            user.openContactInfo = true
+            this.mineUser.socialCoin = userShell - getUserInfoNeedCoin
+        } else {
+            await AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
+            await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
+            this.mineUser.socialCoin = userShell + getUserInfoNeedCoin
+            //递归调用自己
+            await this.getOpenContactInfo(user)
+        }
     }
 }

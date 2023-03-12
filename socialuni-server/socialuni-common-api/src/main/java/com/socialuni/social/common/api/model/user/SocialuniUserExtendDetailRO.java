@@ -25,15 +25,15 @@ public class SocialuniUserExtendDetailRO extends SocialuniUserDetailRO {
      */
     private Double distance;
 
-   /* public SocialuniUserExtendDetailRO(SocialuniUserExtendDetailRO userRO) {
+    public SocialuniUserExtendDetailRO(SocialuniUserExtendDetailRO userRO) {
         super(userRO);
-        this.imgs = userRO.getImgs();
-        this.schoolName = userRO.getSchoolName();
-        this.contactInfo = userRO.getContactInfo();
-        this.openContactInfo = userRO.getOpenContactInfo();
+        this.provinceName = userRO.getProvinceName();
+        this.cityName = userRO.getCityName();
+        this.districtName = userRO.getDistrictName();
+        this.distance = userRO.getDistance();
     }
 
     public SocialuniUserExtendDetailRO(SocialuniUserDetailRO socialuniUserDetailRO) {
         super(socialuniUserDetailRO);
-    }*/
+    }
 }

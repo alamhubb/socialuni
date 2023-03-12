@@ -4,6 +4,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.socialuni.social.common.sdk.component.SocialuniCommonRepository;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Slf4j
@@ -38,5 +39,9 @@ public abstract class SocialuniRepositoryFacade {
 
     private static SocialuniCommonRepository getRepository() {
         return repository;
+    }
+
+    public static EntityManager getEntityManager() {
+        return repository.getEntityManager();
     }
 }

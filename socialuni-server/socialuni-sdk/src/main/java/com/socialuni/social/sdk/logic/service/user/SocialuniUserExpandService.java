@@ -5,12 +5,14 @@ import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExtendFriendLogDOUtil;
 import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialuniEditExpandDomain;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
+import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.sdk.logic.service.bussiness.SocialuniGetUserContactInfoDomain;
 import com.socialuni.social.user.sdk.constant.SocialuniUserStatus;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -62,7 +64,7 @@ public class SocialuniUserExpandService {
     }
 
     //查询最近在线的用户
-    public ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO) {
+    public ResultRO<List<SocialuniUserExtendDetailRO>> queryExtendFriendUsers(SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO) {
         SocialuniUserExtendFriendQueryQO socialuniUserExtendFriendQueryQO = socialuniPageQueryQO.getQueryData();
 
         Date queryTime = socialuniPageQueryQO.getQueryTime();
@@ -71,6 +73,10 @@ public class SocialuniUserExpandService {
         if (!SocialuniUserExtendFriendsPageType.allTypes.contains(pageType)) {
             throw new SocialParamsException("错误的扩列页面类型");
         }
+
+        //查询的时候更新用户的扩列信息
+        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+
         List<Integer> pageTypeUserIds = null;
         //赞个人主页。本周内获得赞最多的吗，就先上线一个最近的。
         if (pageType.equals(SocialuniUserExtendFriendsPageType.hot)) {
@@ -101,10 +107,7 @@ public class SocialuniUserExpandService {
 
         SocialuniUserDo mineUser = SocialuniUserUtil.getMineUserAllowNull();
 
-        List<SocialuniUserDetailRO> socialuniUserDetailROS = SocialuniUserDetailROFactory.getUserDetailList(userDos, mineUser);
-
-        //查询的时候更新用户的扩列信息
-        SocialuniUserExtendFriendLogDOUtil.createUserExtendFriendLog();
+        List<SocialuniUserExtendDetailRO> socialuniUserDetailROS = SocialuniUserExtendDetailROFactory.getUserExtendDetailList(userDos, mineUser);
 
         return ResultRO.success(socialuniUserDetailROS);
     }

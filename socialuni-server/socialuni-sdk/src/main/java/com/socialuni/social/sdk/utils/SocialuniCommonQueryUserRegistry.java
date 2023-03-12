@@ -6,6 +6,7 @@ import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserFollowInfoRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserRO;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
+import com.socialuni.social.sdk.constant.SocialuniCommonQueryKey;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.social.sdk.model.QO.SocialuniKeyQueryQO;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;

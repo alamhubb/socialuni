@@ -42,13 +42,20 @@ public class SocialuniUserExtendFriendLogDOUtil {
         socialuniUserExtendFriendLogDo.setLon(lon);
         socialuniUserExtendFriendLogDo.setAdCode(adCode);
 
-        CompletableFuture.supplyAsync(() -> {
+        SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
+
+        /*CompletableFuture.supplyAsync(() -> {
             SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
             return null;
         }).exceptionally(e -> {
             e.printStackTrace();
             log.info(e.getMessage());
             return null;
-        });
+        });*/
     }
+
+    public static void findFirstUserExtendLogDOByIdDesc() {
+
+    }
+
 }

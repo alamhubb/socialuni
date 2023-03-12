@@ -1,10 +1,8 @@
 package com.socialuni.social.sdk.utils;
 
 import com.socialuni.social.common.api.constant.SocialWebHeaderName;
-import com.socialuni.social.common.api.utils.IpUtil;
 import com.socialuni.social.common.api.utils.RequestUtil;
-import com.socialuni.social.user.sdk.model.RO.LocationQueryRO;
-import com.socialuni.social.user.sdk.platform.QQMapAPI;
+import com.socialuni.social.user.sdk.model.RO.SocialuniRectangleRO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,11 +17,11 @@ public class SocialuniRequestUtil {
     }
 
     private static void resetReqeustPositonByIp() {
-        LocationQueryRO locationQueryRO = QQMapAPI.getIpLocation(IpUtil.getIpAddr());
-        if (locationQueryRO != null && locationQueryRO.getLocation() != null) {
-            RequestUtil.setAttribute(SocialWebHeaderName.socialuniCityLat, locationQueryRO.getLocation().getLat().toString());
-            RequestUtil.setAttribute(SocialWebHeaderName.socialuniCityLon, locationQueryRO.getLocation().getLng().toString());
-            RequestUtil.setAttribute(SocialWebHeaderName.socialuniCityAdCode, locationQueryRO.getAdcode());
+        SocialuniRectangleRO rectangleVO = PositionUtil.getRectangle();
+        if (rectangleVO != null) {
+            RequestUtil.setAttribute(SocialWebHeaderName.socialuniCityLat, rectangleVO.getLat().toString());
+            RequestUtil.setAttribute(SocialWebHeaderName.socialuniCityLon, rectangleVO.getLon().toString());
+            RequestUtil.setAttribute(SocialWebHeaderName.socialuniCityAdCode, rectangleVO.getAdCode());
         }
     }
 

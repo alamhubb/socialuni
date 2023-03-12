@@ -29,6 +29,7 @@ public class SocialuniUserDetailRO extends SocialuniUserFollowInfoRO {
         this.schoolName = userRO.getSchoolName();
         this.contactInfo = userRO.getContactInfo();
         this.openContactInfo = userRO.getOpenContactInfo();
+        this.lastOnlineTime = userRO.getLastOnlineTime();
     }
 
     public SocialuniUserDetailRO(SocialuniUserFollowInfoRO centerUserFollowDetailRO) {

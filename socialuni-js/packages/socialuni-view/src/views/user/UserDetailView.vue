@@ -84,7 +84,6 @@
       </view>
 
 
-
       <div v-if="user.contactInfo"
            class="row-between-center bg-white px-sm py-sm bd-radius-10 elevation-4 mx-sm mt-smm mb-sm">
         <div class="row-col-center">
@@ -123,16 +122,16 @@
 
       <talk-operate @deleteTalk="deleteTalk"></talk-operate>
       <!--  #ifdef MP-WEIXIN -->
-<!--      <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
-          ad-theme="white"></ad>-->
+      <!--      <ad v-if="talks.length>1" class="bg-white mb-5 w100vw" unit-id="adunit-65c8911d279d228f" ad-type="video"
+                ad-theme="white"></ad>-->
       <!--  #endif -->
       <!--qq平台显示的广告-->
       <!--  #ifdef MP-QQ -->
-<!--      <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
-          type="feeds" ad-height="160"></ad>-->
+      <!--      <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" unit-id="72d8cb09a1bae9fa30d9e03e7cb8a25d"
+                type="feeds" ad-height="160"></ad>-->
       <!--  #endif -->
       <!--  #ifdef APP-PLUS -->
-<!--      <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>-->
+      <!--      <ad v-if="talks.length>0" class="bg-white mb-5 w100vw" adpid="1890536227"></ad>-->
       <!--  #endif -->
 
       <div class="px-smm mb-xs">动态</div>
@@ -397,22 +396,8 @@ export default class UserDetailView extends Vue {
   async getOpenContactInfo() {
     //打开获取对方联系方式功能，支付贝壳
     this.showUserContactBtnDisabled = true
-    const userShell = this.mineUser.socialCoin
-    const getUserInfoNeedCoin = socialConfigModule.appMoreConfig.contactExpenseShell
     try {
-      if (userShell >= getUserInfoNeedCoin) {
-        await AlertUtil.confirm('是否消耗100个贝壳查看用户：' + this.user.nickname + ' 的联系方式')
-        const res = await SocialuniUserExpandAPI.getUserContactInfoAPI(this.user.id)
-        this.user.contactInfo = res.data
-        this.user.openContactInfo = true
-        this.mineUser.socialCoin = userShell - getUserInfoNeedCoin
-      } else {
-        await AlertUtil.confirm('您没有贝壳了，是否直接使用现金支付')
-        await PlatformUtils.payCoin(getUserInfoNeedCoin / 100)
-        this.mineUser.socialCoin = userShell + getUserInfoNeedCoin
-        //递归调用自己
-        await this.getOpenContactInfo()
-      }
+      await socialUserModule.getOpenContactInfo(this.user)
     } finally {
       this.showUserContactBtnDisabled = false
     }

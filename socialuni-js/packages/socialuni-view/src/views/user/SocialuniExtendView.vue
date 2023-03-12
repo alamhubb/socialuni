@@ -13,10 +13,14 @@
                        :scroll-y="true" @scrolltolower="autoChooseUseLocationQueryTalks"
                        :lower-threshold="400">
             <div v-if="!item.queryQO.listData.length" class="row-all-center h100 color-content">
-              <div v-if="swiperIndex===0">您还没有关注任何人</div>
-              <div v-else>您还没有粉丝</div>
+              <div>暂无数据</div>
             </div>
             <template v-else>
+              <div v-if="mineUser && swiperIndex === 0" class="px-sm">
+                <div class="row-all-center color-main mt-sm chunk-default pd-xs">
+                  {{mineUser.openContactInfo?'下拉刷新将您的排名前置':'开启联系方式您的信息将在此处展示'}}
+                </div>
+              </div>
               <div class="flex-row px-smm py-sm bb" v-for="user in item.queryQO.listData" :key="user.id"
                    @click="toUserDetailVue(user)">
                 <image
@@ -25,7 +29,7 @@
                     :src="user.avatar"
                 />
                 <view class="flex-1 row-between">
-                  <view class="col-between py-xs">
+                  <view class="flex-col py-xs">
                     <view class="row-col-center">
                       <text :class="{'text-red':user.vipFlag}">{{ user.nickname }}</text>
                       <view v-if="user.vipFlag" class="ml-5px cu-tag bg-orange radius sm"
@@ -34,12 +38,43 @@
                       </view>
                       <social-gender-tag class="ml-xs" :user="user"></social-gender-tag>
                     </view>
-                    <view class="color-content mt-xs">
-                      粉丝：{{ user.fansNum }}
+                    <view class="row-col-center mt-xss font-12 color-content">
+                      {{ formatTime(user.lastOnlineTime) }}
+                      <div class="px-xs row-col-center">|</div>
+                      <!--        有市区的名称就不显示省的名称-->
+                      <text v-if="!user.cityName || !user.districtName">{{ user.provinceName }}</text>
+                      <text v-if="user.cityName">
+                        <text v-if="!user.districtName">-</text>
+                        {{ user.cityName }}
+                      </text>
+                      <text v-if="user.districtName">-{{ user.districtName }}</text>
+
+                      <view class="row-col-center" v-if="user.distance|| user.distance===0">
+                        <div class="px-xs row-col-center">|</div>
+                        <text v-if="user.distance<0.5">{{ 0.5 }}公里</text>
+                        <text v-else-if="user.distance<1">{{ 1 }}公里</text>
+                        <text v-else-if="user.distance<5">{{ 5 }}公里</text>
+                        <text v-else>{{ numFixed1(user.distance) }}公里</text>
+                      </view>
                     </view>
                   </view>
                   <view class="col-center">
-                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>
+
+                    <div v-if="user.openContactInfo" class="use-click row-col-center">
+                      <q-button light @click="copyContactInfo">
+                        <div class="color-content ml-xs font-12">
+                          已获取( 点击复制 )
+                        </div>
+                      </q-button>
+                    </div>
+                    <div v-else class="use-click row-col-center">
+                      <q-button text @click="getOpenContactInfo(user)" :disabled="showUserContactBtnDisabled">
+                        <q-icon prefix="uni-icons" icon="uniui-personadd" size="22"></q-icon>
+                      </q-button>
+
+                    </div>
+
+                    <!--                    <socialuni-follow-tag :user="user" @change="userFollowChange"></socialuni-follow-tag>-->
                   </view>
                 </view>
               </div>
@@ -66,7 +101,7 @@ import SocialuniFollowTag from "socialuni-view/src/components/SocialuniFollow/So
 import PageUtil from "socialuni-sdk/src/utils/PageUtil";
 import PagePath from "socialuni-constant/constant/PagePath";
 import {onLoad, onPullDownRefresh, onReachBottom, onShow} from "@dcloudio/uni-app";
-import {socialTalkModule} from "socialuni-sdk/src/store/store";
+import {socialTalkModule, socialUserModule} from "socialuni-sdk/src/store/store";
 import QTabs from "socialuni-view/src/components/QTabs/QTabs.vue";
 import LoadMoreType from "socialuni-constant/constant/LoadMoreType";
 import SocialuniPageQueryQO from "socialuni-api/src/model/common/SocialuniPageQueryQO";
@@ -80,13 +115,19 @@ import SocialuniUserExtendFriendQueryQO from "socialuni-api/src/model/user/Socia
 import SocialuniUserExpandAPI from "socialuni-api/src/api/socialuni/SocialuniUserExpandAPI";
 import request from "socialuni-api/src/request/request";
 import CenterUserDetailRO from "socialuni-api/src/model/social/CenterUserDetailRO";
+import QIcon from "../../components/QIcon/QIcon.vue";
+import QButton from "../../components/QButton/QButton.vue";
+import UniUtil from "socialuni-sdk/src/utils/UniUtil";
+import NumUtil from "socialuni-sdk/src/utils/NumUtil";
+import DateUtil from "socialuni-sdk/src/utils/DateUtil";
+import SocialuniUserExtendDetailRO from "socialuni-api/src/model/social/SocialuniUserExtendDetailRO";
 
 @Options({
-  components: {SocialuniFollowTag, SocialGenderTag, QTabs}
+  components: {QButton, QIcon, SocialuniFollowTag, SocialGenderTag, QTabs}
 })
 export default class SocialuniFollowView extends Vue {
   tabs = SocialuniUserExtendFriendsType.allTypes
-  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialUserFollowDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
+  tabsPageQueryUtil: SocialuniPageQueryUtil<SocialuniUserExtendDetailRO, SocialuniUserExtendFriendQueryQO>[] = [new SocialuniPageQueryUtil(), new SocialuniPageQueryUtil()]
   currentTabIndex = 0
 
   loadMoreText = {
@@ -94,6 +135,7 @@ export default class SocialuniFollowView extends Vue {
     contentrefresh: '正在加载...',
     contentnomore: '没有更多数据了,点击刷新'
   }
+  showUserContactBtnDisabled: boolean = false
 
   created() {
     request.post<CenterUserDetailRO[]>('socialuni/keyQuery/query', {
@@ -195,6 +237,32 @@ export default class SocialuniFollowView extends Vue {
         await this.autoChooseUseLocationQueryTalks()
       }
     }
+  }
+
+  async getOpenContactInfo(user: CenterUserDetailRO) {
+    //打开获取对方联系方式功能，支付贝壳
+    this.showUserContactBtnDisabled = true
+    try {
+      await socialUserModule.getOpenContactInfo(user)
+    } finally {
+      this.showUserContactBtnDisabled = false
+    }
+  }
+
+  copyContactInfo(user: CenterUserDetailRO) {
+    UniUtil.textCopy(user.contactInfo)
+  }
+
+  get mineUser() {
+    return socialUserModule.mineUser
+  }
+
+  numFixed1(num) {
+    return NumUtil.numFixed1(num)
+  }
+
+  formatTime(dateStr) {
+    return DateUtil.formatTime(dateStr)
   }
 
 }

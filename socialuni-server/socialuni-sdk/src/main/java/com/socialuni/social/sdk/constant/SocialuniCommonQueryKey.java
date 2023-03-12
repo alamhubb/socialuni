@@ -1,4 +1,4 @@
-package com.socialuni.social.sdk.utils;
+package com.socialuni.social.sdk.constant;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

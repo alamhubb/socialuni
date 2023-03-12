@@ -2,6 +2,7 @@ package com.socialuni.social.sdk.feignAPI.user;
 
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
 import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
+import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.user.sdk.model.QO.SocialuniUserIdQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserContactInfoEditQO;
 import com.socialuni.social.user.sdk.model.QO.SocialUserSchoolNameEditQO;
@@ -35,7 +36,7 @@ public interface SocialuniUserExpandAPI {
 
     @PostMapping("queryExtendFriendUsers")
     @Operation(summary = "获取扩列用户列表")
-    ResultRO<List<SocialuniUserDetailRO>> queryExtendFriendUsers(@RequestBody @Valid SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO);
+    ResultRO<List<SocialuniUserExtendDetailRO>> queryExtendFriendUsers(@RequestBody @Valid SocialuniPageQueryQO<SocialuniUserExtendFriendQueryQO> socialuniPageQueryQO);
 
     @GetMapping("getUserContactInfo/{userId}")
     @Operation(summary = "获取用户的联系方式")

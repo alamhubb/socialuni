@@ -3,10 +3,10 @@ package com.socialuni.social.sdk.logic.factory;
 import com.socialuni.social.community.sdk.entity.DistrictDO;
 import com.socialuni.social.community.sdk.entity.SocialuniTalkDO;
 import com.socialuni.social.tance.sdk.facade.SocialuniUnionIdFacede;
-import com.socialuni.social.user.sdk.platform.MapUtil;
+import com.socialuni.social.sdk.utils.PositionUtil;
 import com.socialuni.social.user.sdk.utils.content.SocialuniTextContentUtil;
 import com.socialuni.social.sdk.model.QO.community.talk.SocialuniTalkPostQO;
-import com.socialuni.social.user.sdk.model.RO.RectangleVO;
+import com.socialuni.social.user.sdk.model.RO.SocialuniRectangleRO;
 import com.socialuni.social.tance.sdk.facade.DevAccountFacade;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class TalkDOFactory {
         //如果经纬度为空
         if (socialTalkPostQO.getLon() == null || socialTalkPostQO.getLat() == null) {
             //如果经纬度为空
-            RectangleVO rectangleVO = MapUtil.getRectangle();
+            SocialuniRectangleRO rectangleVO = PositionUtil.getRectangle();
             if (rectangleVO != null) {
                 socialTalkPostQO.setLon(rectangleVO.getLon());
                 socialTalkPostQO.setLat(rectangleVO.getLat());
