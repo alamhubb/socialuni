@@ -272,6 +272,8 @@ import CosAPI from "socialuni-api/src/api/CosAPI";
 import MessageItemContent from "./MessageItemContent.vue";
 import QNavbar from "../../components/QNavbar/QNavbar.vue";
 import SocialuniProviderType from "socialuni-constant/constant/SocialuniProviderType";
+import {onLoad} from "@dcloudio/uni-app";
+import {onMounted} from "vue";
 
 
 @Options({components: {MessageItemContent, SocialuniReportDialog, QIcon, QNavbar}})
@@ -280,6 +282,16 @@ export default class MessageView extends Vue {
     reportDialog: SocialuniReportDialog;
     messageMoreHandleDialog: any;
     deleteReasonDialog: any;
+  }
+
+  created(){
+    //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
+    onLoad((params: MessageViewParams) => {
+      //不这么写refs是空
+      onMounted(() => {
+        this.init(params)
+      })
+    })
   }
 
 

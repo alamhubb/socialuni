@@ -112,7 +112,7 @@ export default class SocialChatModule extends Pinia {
      */
     showTabBarRedDot(){
         uni.showTabBarRedDot( {
-            index: 1
+            index: 2
         })
     }
     setImToken(token: string) {
@@ -283,6 +283,8 @@ export default class SocialChatModule extends Pinia {
         }
         socialChatModule.openIm.markC2CMessageAsRead(options).then(({data}) => {
             console.log('markC2CMessageAsRead', data);
+            this.computedChatsUnreadNumTotalAction()
+
         }).catch(err => {
         })
     }
@@ -312,6 +314,7 @@ export default class SocialChatModule extends Pinia {
         }
         openIM.markGroupMessageAsRead(options).then(({ data })=>{
             console.log('markGroupMessageAsRead', data);
+            this.computedChatsUnreadNumTotalAction()
         }).catch(err=>{
         })
     }
@@ -471,7 +474,7 @@ export default class SocialChatModule extends Pinia {
                 this.showTabBarRedDot();
             }else{
                 uni.hideTabBarRedDot( {
-                    index: 1
+                    index: 2
                 })
             }
         }).catch(err=>{

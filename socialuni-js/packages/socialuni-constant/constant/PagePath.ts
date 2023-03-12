@@ -26,4 +26,7 @@ export default class PagePath {
 
   static readonly webBrowser: string = '/pages/web/webBrowser'
   static readonly share: string = '/pages/share/share'
+
+  static readonly friend: string = '/pages/chat/friend'
+  static readonly friendApply: string = '/pagesLazy/chat/friendApplyList'
 }

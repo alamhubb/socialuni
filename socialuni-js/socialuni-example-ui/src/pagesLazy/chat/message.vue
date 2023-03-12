@@ -20,13 +20,7 @@ export default class MessagePage extends Vue {
   }
 
   created() {
-    //TODO 同一会话时，这里要改成onRead，不然需要刷新页面才会触发已读的标志。
-    onLoad((params: MessageViewParams) => {
-      //不这么写refs是空
-      onMounted(() => {
-        this.$refs.message.init(params)
-      })
-    })
+
   }
 }
 </script>

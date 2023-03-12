@@ -1,5 +1,8 @@
 package com.socialuni.social.sdk.dao.utils.user;
 
+import com.socialuni.social.common.sdk.constant.SocialuniConst;
+import com.socialuni.social.community.sdk.entity.DistrictDO;
+import com.socialuni.social.community.sdk.utils.DistrictStoreUtils;
 import com.socialuni.social.user.sdk.facede.SocialuniUserRepositoryFacede;
 import com.socialuni.social.sdk.utils.SocialuniRequestUtil;
 import com.socialuni.social.user.sdk.model.DO.SocialuniUserDo;
@@ -38,7 +41,14 @@ public class SocialuniUserExtendFriendLogDOUtil {
 
         socialuniUserExtendFriendLogDo.setLat(lat);
         socialuniUserExtendFriendLogDo.setLon(lon);
-        socialuniUserExtendFriendLogDo.setAdCode(adCode);
+
+        DistrictDO districtDO = DistrictStoreUtils.findFirstOneByAdCode(adCode);
+        if (districtDO == null) {
+            socialuniUserExtendFriendLogDo.setAdCode(SocialuniConst.chinaDistrictCode);
+        } else {
+            socialuniUserExtendFriendLogDo.setAdCode(adCode);
+        }
+
 
         SocialuniUserRepositoryFacede.save(socialuniUserExtendFriendLogDo);
 

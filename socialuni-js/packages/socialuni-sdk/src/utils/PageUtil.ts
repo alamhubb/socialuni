@@ -10,6 +10,7 @@ import SocialuniAuthQO from "socialuni-api/src/model/openData/SocialuniAuthQO";
 import SkipType from "socialuni-constant/constant/SkipType";
 import SkipUrlConst from "socialuni-constant/constant/SkipUrlConst";
 import PlatformUtils from "./PlatformUtils";
+import SocialuniMineUserRO from "socialuni-api/src/model/user/SocialuniMineUserRO";
 
 
 export default class PageUtil {
@@ -84,7 +85,11 @@ export default class PageUtil {
     }
 
     static toChatFriend() {
-        RouterUtil.navigateTo('/pages/chat/friend')
+        RouterUtil.navigateTo(PagePath.friend)
+    }
+
+    static toFriendApply() {
+        RouterUtil.navigateTo(PagePath.friendApply)
     }
 
     static toMinePage() {
@@ -92,7 +97,7 @@ export default class PageUtil {
     }
 
     static toTalkAddPage() {
-        const user: CenterUserDetailRO = socialUserModule.mineUser as any
+        const user: SocialuniMineUserRO = socialUserModule.mineUser as any
         if (!user || !user.phoneNum) {
             MsgUtil.unBindPhoneNum()
             //没设置校园，且应用类型要求必须设置
