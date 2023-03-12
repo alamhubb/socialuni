@@ -23,7 +23,7 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
     SocialuniUserDo findOneByUnionId(Integer id);
 
     @Caching(
-            evict = {@CacheEvict(cacheNames = CommonRedisKey.findUserIdsByStatusOrderByUpdateTimeDesc, allEntries = true)},
+            evict = {@CacheEvict(cacheNames = CommonRedisKey.findUserIdsByStatus, allEntries = true)},
             put = {@CachePut(cacheNames = CommonRedisKey.userById,  key = "#user.unionId")}
     )
     default SocialuniUserDo savePut(SocialuniUserDo user){
@@ -35,9 +35,9 @@ public interface SocialuniUserRepository extends JpaRepository<SocialuniUserDo, 
 
     List<SocialuniUserDo> findTop10ByStatusOrderByIdDesc(@Param("userStatus") String userStatus);
 
-    @Cacheable(cacheNames = CommonRedisKey.findUserIdsByStatusOrderByUpdateTimeDesc)
-    @Query("select s.userId from SocialuniUserDo s where s.status = :status order by s.updateTime desc")
-    List<Integer> findUserIdsByStatusOrderByUpdateTimeDesc(String status);
+    @Cacheable(cacheNames = CommonRedisKey.findUserIdsByStatus)
+    @Query("select s.userId from SocialuniUserDo s where s.status = :status")
+    List<Integer> findUserIdsByStatus(String status);
 
     /*@Modifying
     @Transactional

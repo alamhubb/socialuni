@@ -4,15 +4,12 @@ import cn.hutool.core.collection.CollUtil;
 import com.socialuni.social.common.api.constant.DateTimeType;
 import com.socialuni.social.common.api.exception.exception.SocialParamsException;
 import com.socialuni.social.common.api.model.SocialuniPageQueryQO;
-import com.socialuni.social.common.api.model.user.SocialuniUserDetailRO;
 import com.socialuni.social.common.api.model.user.SocialuniUserExtendDetailRO;
 import com.socialuni.social.common.sdk.constant.SocialuniConst;
 import com.socialuni.social.common.sdk.utils.ListConvertUtil;
 import com.socialuni.social.sdk.constant.user.SocialuniUserExtendFriendsPageType;
 import com.socialuni.social.sdk.dao.utils.user.SocialuniUserExtendFriendLogDOUtil;
-import com.socialuni.social.sdk.feignAPI.user.SocialuniUserAPI;
 import com.socialuni.social.sdk.logic.domain.user.SocialuniEditExpandDomain;
-import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserDetailROFactory;
 import com.socialuni.social.sdk.logic.factory.RO.user.SocialuniUserExtendDetailROFactory;
 import com.socialuni.social.sdk.logic.service.bussiness.SocialuniGetUserContactInfoDomain;
 import com.socialuni.social.sdk.utils.SocialuniRequestUtil;
@@ -117,7 +114,7 @@ public class SocialuniUserExpandService {
         //查询打开了联系方式的用户
         List<Integer> openContactIds = socialuniUserExpandRepository.findUserIdsByOpenContactInfoOrderByUpdateTimeDesc();
         //查询用户状态不为封禁的
-        List<Integer> userIds = socialuniUserRepository.findUserIdsByStatusOrderByUpdateTimeDesc(SocialuniUserStatus.enable);
+        List<Integer> userIds = socialuniUserRepository.findUserIdsByStatus(SocialuniUserStatus.enable);
         List<Integer> queryIds;
         if (pageTypeUserIds == null) {
             queryIds = ListConvertUtil.intersectionMany(weekUserIds, openContactIds, userIds);
